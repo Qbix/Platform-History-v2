@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "কে আমাকে আমন্ত্রণ জানিয়েছে",
         "AreYouAgree": "তুমি কি রাজি?",
         "Yes": "হ্যাঁ",
-        "No": "না"
+        "No": "না",
+        "DoYouAgree": "তুমি কি একমত?"
     },
     "interests": {
-        "Filter": "তুমি কি উপভোগ কর?",
+        "Filter": "তোমার আগ্রহগুলো কি কি?",
         "CanAdd": "আপনি যা খুজছেন তা যদি আপনি এখনও খুঁজে পান না তবে আপনি নীচের একটি নতুন আগ্রহ যুক্ত করতে পারেন:",
         "TrySynonyms": "এটা দেখতে পাচ্ছেন না? কিছু প্রতিশব্দ চেষ্টা করুন।",
         "AddUnderCategory": "বিভাগের অধীনে যোগ করুন ...",
@@ -192,7 +193,8 @@
             "youStoppedLive": "আপনি কাস্টম আরটিএমপিতে এই কল সম্প্রচার বন্ধ করেছেন",
             "sbStartedLiveStreaming": "{{userName}} লাইভ শুরু হয়েছে",
             "sbStoppedLiveStreaming": "{{userName}} লাইভ শেষ হয়েছে",
-            "liveStopped": "এন্ডপয়েন্টে ভিডিও পাঠানোর সময় ত্রুটি ঘটেছে"
+            "liveStopped": "এন্ডপয়েন্টে ভিডিও পাঠানোর সময় ত্রুটি ঘটেছে",
+            "forceDisconnectingImmediately": "আপনি একটি হোস্ট দ্বারা সংযোগ বিচ্ছিন্ন করা হয়েছে"
         },
         "settingsPopup": {
             "webCamera": "ওয়েব ক্যামেরা",
@@ -224,7 +226,9 @@
             "stop": "থামুন",
             "streamingSettings": "সেটিংস",
             "streamToRTMP": "কাস্টম RTMP এ স্ট্রিম করুন",
-            "dialogTitle": "ভিডিও সেটিংস"
+            "dialogTitle": "ভিডিও সেটিংস",
+            "startBroadcasting": "সম্প্রচার শুরু করুন",
+            "broadcastingInProgress": "সম্প্রচার চলছে"
         },
         "participantsPopup": {
             "disconnect": "বিযুক্ত করা",

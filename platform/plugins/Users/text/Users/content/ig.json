@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "banye",
-        "LogOut": "abanye"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Setị {{1}} dị ka isi m {{2}}",
-        "ChoosePassPhrase": "Họrọ <strong>ahịrịokwu ahịrị<\/strong> iji abanye na. <br> Okwu ahịrịokwu dị mfe nke gụnyere okwu ole na ole ị ga-echeta ngwa ngwa.",
-        "ChoosePassPhraseSeeSuggestions": "Họrọ <strong>ahịrịokwu dị mma<\/strong> iji kpuchie akaụntụ gị. Lee aro maka ụfọdụ echiche.",
-        "LogOutAndTryAgain": "Gbanye ma gbalịa ọzọ",
-        "IfYouFeel": "Ọ bụrụ na ị chere na ọ dị njọ, i nwere ike",
-        "SetIdentifierButtonTitle": "malite"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Malite"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Malite",
-        "Authorize": "Kwenye",
-        "TermsLabel": "Agụrụ m ma kwenye <br> na {{link}}",
-        "TermsTitle": "Usoro",
-        "mustAgree": "Buru ụzọ kwenye n’okwu ndị a."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ana m anabata {{link}}",
-        "TermsTitle": "Usoro"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Nkwekọrịta",
-        "prompt": "Ịchọrọ ime ka ịmara ọkwa? Ị ga-enweta mmelite ozugbo banyere ihe ị na-eche banyere.",
-        "yes": "Ee",
-        "no": "Ee e",
-        "WelcomePleaseVerifyEmail": "Nabata! Biko nyochaa adreesị email gị.",
-        "WelcomeVerifyEmail": "Nabata! Chọpụta adreesị email gị.",
-        "ForgetPass": "Hey, ị chefuola paspọsọ gị?",
-        "PassphraseSaved": "Echekwarala ahịrịokwu gị.",
-        "IdentifierActivated": "Emegola {{type}} ya.",
-        "CompletedActivation": "I mezue okike onye oru.",
-        "CompletedActivationLogIn": "I mezue okike onye oru. Gbalịa banye ugbu a."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Họrọ kọntaktị",
-            "CreateAccount": "+ Kpọtụrụ m",
-            "CreateAccountNotFound": "Achọpụtaghị Q.Users.Cordova.UI.create adịghị",
-            "SearchByName": "Choo aha",
-            "EmptyContacts": "Ahụbeghị ndị kọntaktị ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Họrọ nchọta nke {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Biko họrọ akara ngosi.",
-        "inviteUser": "Onye na-enyocha Onye ọrụ",
-        "selectRole": "Họrọ Ọrụ",
-        "inviteRole": "Ziga {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Asụsụ a na-ejighị n&#39;aka họrọ",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Nnọọ",
-        "directions": "Mepụta akaụntụ, ma ọ bụ banye.",
-        "directionsNoRegister": "Banye ma ọ bụrụ na ị nwere akaụntụ.",
-        "goButton": "Gaa",
-        "passphrase": "Tinye ahịrịokwu gị:",
-        "loginButton": "Bido",
-        "registerButton": "Bido",
-        "resendButton": "Ziga Ozi Mgbalite",
-        "forgot": "Chefuru ya?",
-        "resendConfirm": "You chọrọ izipu ozi iji degharịa passphrase gị?",
-        "resendSuccess": "Lelee maka ozi iji tọghaa passphrase gị",
-        "resendClose": "Mechie",
-        "noPassphrase": "Tupu ịbanye, ịkwesịrị ịtọlite ahịrịokwu okwu site na ịpị njikọ dị na ozi nkwalite gị.",
-        "notVerified": "Must ga-ezitere onwe gị ozi nkwalite iji wee banye.",
-        "emailExists": "You nwara ịdebanye aha na email a tupu ị mee? Ọ bụrụ otu a, lelee igbe mbata gị iji mee ka akaụntụ gị rụọ ọrụ. <a href='#resend' class='Q_button Users_activation_resend'>Pịa ka ịzigharịa ozi ahụ<\/a>",
-        "mobileExists": "Try nwara ịdebanye aha na nọmba ekwentị a na mbụ? Ọ bụrụ otu a, lelee SMS gị iji rụọ ọrụ akaụntụ gị. <a href='#resend' class='Q_button Users_activation_resend'>Pịa ka ịzigharịa ozi ahụ<\/a>",
-        "usingOther": "ma obu ike",
-        "prompt": "Họrọ aha njirimara:",
-        "newUser": "ma ọ bụ mepụta akaụntụ ọhụrụ",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "mkpanaka gị # ma ọ bụ email",
-            "mobile": "tinye igwe mkpanaka gi",
-            "email": "tinye adreesị ozi-e gị",
-            "username": "aha njirimara"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Nabata Usoro ọrụ?",
-        "facebookNoEmail": "Akaụntụ email gị na-efu na adreesị ozi-e enyochaghị. Nanị banye n&#39;ụzọ amaala.",
-        "picTooltip": "Nwere ike ịgbanwe foto a ma emechaa",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Banye na {{host}} n&#39;oge {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Na -atụgharị na obere akpa",
-                "content": "Ozugbo ị mechiri mkparịta ụka a, a ga -akpọga gị n&#39;akpa gị. Mgbe ị banyere, laghachi na ibe a."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Tinye uzo iji banye",
-        "sendMessage": "Ziga Ozi Mgbalite",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "tinye mobile gị ma ọ bụ email",
-            "mobile": "tinye akara ekwentị gị",
-            "email": "tinye adreesị ozi-e gị",
-            "username": "aha njirimara"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Akaụntụ",
-        "areUsing": "Na-eji {{platform}} dika",
-        "noLongerUsing": "Are nweghị njikọ ọzọ na {{platform}} dị ka",
-        "doAuth": "Banye akaụntụ a",
-        "doSwitch": "Sapeta na akaụntụ a"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Nwe",
-        "Admin": "Ijikwa",
-        "Member": "Onye otu",
-        "Guest": "Onye ọbịa",
-        "Host": "Onye ọbịa"
-    },
-    "analytics": {
-        "Title": "Nchịkọta",
-        "Daily": "Kwa ụbọchị",
-        "Weekly": "Kwa izu",
-        "Monthly": "Kwa ọnwa",
-        "Application": "Ngwa",
-        "Pages": "Ibe akwụkwọ",
-        "Services": "Ọrụ",
-        "Faq": "Ajụjụ",
-        "WeekDays": "Ụbọchị Izu"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

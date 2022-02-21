@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Aṣiṣe {{status}} nigba ìbéèrè",
-        "canceled": "Bere fagile",
-        "500": "Asa",
-        "404": "A ko ri: {{url}}",
-        "501": "Bere fun idilọwọ"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Igbin naa pari. Tun oju-iwe naa pada ki o tun gbiyanju lẹẹkansi.",
-        "otherDomain": "Agbegbe agbelebu-ašẹ-ašẹ si ilẹ ajeji ni {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "tẹ ni kia kia",
-        "click": "tẹ",
-        "yes": "bẹẹni",
-        "no": "rara",
-        "Tap": "Tẹ ni kia kia",
-        "Click": "Tẹ",
-        "Yes": "Bẹẹni",
-        "No": "Rara"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
         "1": "January",
-        "2": "Kínní",
-        "3": "Oṣù",
-        "4": "Kẹrin",
-        "5": "Ṣe",
-        "6": "Okudu",
-        "7": "Keje",
-        "8": "Oṣù Kẹjọ",
-        "9": "Oṣu Kẹsan",
-        "10": "Oṣu Kẹwa",
-        "11": "Kọkànlá Oṣù",
-        "12": "Oṣù Kejìlá"
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Jowo gba wiwọle si gbohungbohun rẹ",
-        "record": "Gba silẹ",
-        "recording": "Gbigbasilẹ",
-        "remains": "maa wa",
-        "maximum": "o pọju",
-        "playing": "Ti n ṣiṣẹ",
-        "recorded": "Ti gba silẹ",
-        "clip": "agekuru",
-        "orupload": "Tabi gberanṣẹ",
-        "usethis": "Lo Eleyi",
-        "discard": "Ṣabọ",
-        "encoding": "Iyipada"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Itaniji"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Jẹrisi",
-        "ok": "Bẹẹni",
-        "cancel": "Rara"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Gbigbe",
-        "ok": "Lọ"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Faili kika faili",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Kí l&#39;ó wù ẹ láti ṣe?",
-            "photo": "Ya fọto titun",
-            "library": "Yan lati inu iwe-ikawe"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Jọwọ yan aworan ti o tobi.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Ṣatunṣe iwọn ati ipo",
-            "touchscreen": "Lo awọn ika rẹ lati sun-un ati fa",
-            "notTouchscreen": "Lo asin &amp; kẹkẹ rẹ lati sun-un ati fa"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "ni alẹ Ana",
-        "lastEvening": "kẹhin Eve",
-        "yesterday": "lana",
-        "thisMorning": "owurọ yi",
-        "today": "loni",
-        "tonight": "alẹ́ alẹ́",
-        "tomorrowMorning": "tom owurọ",
-        "tomorrow": "ọla",
-        "hoursAgo": "{{h}} awọn wakati sẹhin",
-        "hourAgo": "{{h}} wakati kan sẹyin",
-        "minuteAgo": "{{m}} iṣẹju sẹyin",
-        "minutesAgo": "{{m}} awọn iṣẹju sẹyin",
-        "secondAgo": "{{s}} sẹhin sẹyin",
-        "secondsAgo": "{{s}} awọn aaya sẹyin",
-        "fewSecondsAgo": "-aaya sẹyin",
-        "rightNow": "ni bayi",
-        "inSecond": "ni {{s}} keji",
-        "inSeconds": "ni awọn iṣẹju-aaya {{s}}",
-        "inMinute": "ni iṣẹju {{m}}",
-        "inMinutes": "ni awọn iṣẹju {{m}}",
-        "inHour": "ni wakati {{h}}",
-        "inHours": "ninu awọn wakati {{h}}",
-        "inUnderMinute": "ni labẹ iṣẹju 1"
-    },
-    "video": {
-        "clip": "agekuru",
-        "errorNoSource": "Ko si orisun fidio",
-        "SkipAfter": "Rekọja lẹhin",
-        "Skip": "Foo"
-    },
-    "pdf": {
-        "clip": "agekuru",
-        "errorNoSource": "Ko si orisun pdf"
-    },
-    "clip": {
-        "SetClipStart": "Ṣeto Bẹrẹ Agekuru",
-        "ClipStart": "Bẹrẹ Agekuru",
-        "SetClipEnd": "Ṣeto Agekuru Ipari",
-        "ClipEnd": "Agekuru Ipari",
-        "StartMoreEnd": "Ipo ibẹrẹ ko le ju ipo ipari lọ",
-        "EndLessStart": "Ipo ipari ko le dinku ju ipo ibẹrẹ lọ",
-        "WhichInvalid": "Ariyanjiyan &#39;eyiti&#39; ko wulo"
-    },
-    "tabs": {
-        "more": "siwaju sii",
-        "Menu": "Akojọ aṣyn"
-    },
-    "durations": {
-        "second": "keji",
-        "seconds": "aaya",
-        "minute": "iseju",
-        "minutes": "iṣẹju",
-        "hour": "wakati",
-        "day": "ọjọ",
-        "days": "ọjọ",
-        "week": "ọsẹ",
-        "weeks": "ọsẹ",
-        "month": "osù",
-        "months": "osu",
-        "year": "odun",
-        "years": "ọdun",
-        "decade": "ọdun mẹwa",
-        "decades": "ewadun",
-        "century": "orundun",
-        "centuries": "sehin"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

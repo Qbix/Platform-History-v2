@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Prihlásiť sa",
-        "LogOut": "odhlásiť sa"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Nastaviť {{1}} ako môj primárny {{2}}",
-        "ChoosePassPhrase": "Vyberte prihlasovaciu <strong>frázu,<\/strong> do ktorej sa chcete prihlásiť. <br> Jednoduchá fráza pozostávajúca z niekoľkých slov, ktoré si ľahko spomeniete.",
-        "ChoosePassPhraseSeeSuggestions": "Vyberte si dobrú <strong>frázu<\/strong> na ochranu svojho účtu. Pozrite si návrhy na niektoré nápady.",
-        "LogOutAndTryAgain": "Odhláste sa a skúste znova",
-        "IfYouFeel": "Ak máte pocit, že sa niečo pokazilo, môžete",
-        "SetIdentifierButtonTitle": "začať odznova"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Začať"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Začať",
-        "Authorize": "Povoliť",
-        "TermsLabel": "Čítal som a súhlasím <br> do {{link}}",
-        "TermsTitle": "podmienky",
-        "mustAgree": "Najprv musíte súhlasiť s podmienkami."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Súhlasím s {{link}}",
-        "TermsTitle": "podmienky"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "dovolenia",
-        "prompt": "Chcete povoliť upozornenia? Dostanete aktuálne informácie o veciach, na ktorých vám záleží.",
-        "yes": "Áno",
-        "no": "žiadny",
-        "WelcomePleaseVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
-        "WelcomeVerifyEmail": "Vitajte! Overte svoju e-mailovú adresu.",
-        "ForgetPass": "Hej, zabudli ste na svoju prístupovú frázu?",
-        "PassphraseSaved": "Vaša prístupová fráza bola uložená.",
-        "IdentifierActivated": "Váš {{type}} bol aktivovaný.",
-        "CompletedActivation": "Dokončili ste aktiváciu používateľa.",
-        "CompletedActivationLogIn": "Dokončili ste aktiváciu používateľa. Skúste sa prihlásiť teraz."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Vyberte menovku.",
-        "inviteUser": "Pozvať používateľa",
-        "selectRole": "Vyberte možnosť Úloha",
-        "inviteRole": "Pozvať {{role}}"
-    },
-    "invalidLanguageSelected": "Vybrali ste neplatný jazyk",
     "contacts": {
         "dialog": {
-            "title": "Vyberte kontakt",
-            "SearchByName": "Vyhľadávanie podľa mena",
-            "CreateAccount": "+ Nový kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.vytvorené nenájdené",
-            "EmptyContacts": "Kontakty sa nenašli ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Vyberte kontakt používateľa {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "vitajte",
-        "directions": "Vytvorte si účet alebo sa prihláste.",
-        "directionsNoRegister": "Prihláste sa, ak máte účet.",
-        "goButton": "ísť",
-        "passphrase": "Zadajte svoju prístupovú frázu:",
-        "loginButton": "Začať",
-        "registerButton": "Začať",
-        "resendButton": "Poslať aktivačnú správu",
-        "forgot": "Zabudol som?",
-        "resendConfirm": "Chcete poslať správu s cieľom obnoviť prístupovú frázu?",
-        "resendSuccess": "Vyhľadajte správu, aby ste obnovili prístupovú frázu",
-        "resendClose": "Zavrieť",
-        "noPassphrase": "Pred prihlásením musíte nastaviť prístupovú frázu kliknutím na odkaz v aktivačnej správe.",
-        "notVerified": "Aby ste sa mohli prihlásiť, musíte si poslať aktivačnú správu.",
-        "emailExists": "Skúsili ste sa predtým zaregistrovať v tomto e-maile? Ak áno, aktivujte svoj účet v doručenej pošte. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
-        "mobileExists": "Skúsili ste sa predtým zaregistrovať v tomto mobilnom čísle? Ak je to tak, skontrolujte svoju SMS a aktivujte svoj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím správu znova odošlete<\/a>",
-        "usingOther": "alebo môžeš",
-        "prompt": "Zvoľ si používateľské meno:",
-        "newUser": "alebo si vytvorte nový účet nižšie",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "váš mobilný telefón alebo e-mail",
-            "mobile": "zadajte svoj mobilný telefón #",
-            "email": "Vložte svoju e-mailovú adresu",
-            "username": "užívateľské meno"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Prijímate zmluvné podmienky?",
-        "facebookNoEmail": "Vo vašom facebookovom účte chýba potvrdená e-mailová adresa. Jednoducho sa prihláste natívnym spôsobom.",
-        "picTooltip": "Tento obrázok môžete neskôr zmeniť",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Prihlásiť sa do služby {{host}} v čase {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Prebieha presmerovanie do Peňaženky",
-                "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Pridajte spôsob prihlásenia",
-        "sendMessage": "Poslať aktivačnú správu",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "zadajte svoj mobilný telefón alebo e-mail",
-            "mobile": "Zadajte svoje telefonné číslo",
-            "email": "Vložte svoju e-mailovú adresu",
-            "username": "užívateľské meno"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Účet",
-        "areUsing": "Používate {{platform}} ako",
-        "noLongerUsing": "Už nie ste pripojení k {{platform}} ako",
-        "doAuth": "Prihláste sa pomocou tohto účtu",
-        "doSwitch": "Prepnite na tento účet"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "vlastník",
-        "Admin": "admin",
-        "Member": "člen",
-        "Guest": "Hosť",
-        "Host": "Hostiteľ"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Denne",
-        "Weekly": "Týždenne",
-        "Monthly": "Mesačne",
-        "Application": "Aplikácia",
-        "Pages": "Stránky",
-        "Services": "Služby",
-        "Faq": "Časté otázky",
-        "WeekDays": "Dni v týždni"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

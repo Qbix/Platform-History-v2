@@ -229,9 +229,10 @@
                 });*/
 
 			},
+			/*refresh method is used when room is switched to add event listeners to the new instance of WebRTCLib*/
 			refresh: function() {
 				var tool = this;
-                this.WebRTCLib = this.state.webRTClibraryInstance;
+                tool.WebRTCLib = this.state.webRTClibraryInstance;
 
 				tool.updateControlBar();
 
@@ -261,25 +262,37 @@
 			 * @method bindRTCEvents
 			 */
 			bindRTCEvents: function() {
+				console.log('bindRTCEvents');
 				var tool = this;
 
 				function setRealName(participant, callback) {
 					var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
-
 					if (userId != null) {
-						var firstName;
+
+                        var firstName;
 						var lastName;
 						var fullName = '';
-						Q.Streams.get(userId, 'Streams/user/firstName', function () {
-							firstName = this.fields.content;
+						Q.Streams.get(userId, 'Streams/user/firstName', function (err, stream) {
+
+                            if(!stream || stream.fields == null) {
+                                if (callback != null) callback({firstName: 'n/a', lastName: 'n/a'});
+                                return;
+                            }
+
+							firstName = stream.fields.content;
                             if (firstName != null) {
                                 fullName += firstName;
                             }
 
 							try{
-                                Q.Streams.get(userId, 'Streams/user/lastName', function (stream) {
-                                    if(!stream) return;
-                                    lastName = this.fields.content;
+                                Q.Streams.get(userId, 'Streams/user/lastName', function (err, stream) {
+
+                                    if(!stream || ! stream.fields) {
+                                        if (callback != null) callback({firstName: firstName, lastName: ''});
+                                        return;
+                                    }
+
+                                    lastName = stream.fields.content;
 
                                     if (lastName != null) {
                                         fullName += ' ' + lastName;
@@ -307,9 +320,11 @@
 
 				});
 				tool.WebRTCLib.event.on('participantConnected', function (participant) {
-					if(participant.sid == 'recording') return;
+                    console.log('controls:participantConnected ')
+
+                    if(participant.sid == 'recording') return;
 					setRealName(participant, function(name){
-						tool.participantsPopup().addItem(participant);
+                        tool.participantsPopup().addItem(participant);
 					});
 
 					var participants = tool.WebRTCLib.roomParticipants();
@@ -408,7 +423,7 @@
 					tool.participantsPopup().showLiveIndicator(e.participant, e.platform.content);
 				});
 				tool.WebRTCLib.event.on('liveStreamingEnded', function (e) {
-
+					console.log('event: liveStreamingEnded', e);
                     if (document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
                         Q.Dialogs.pop();
                     }
@@ -425,6 +440,8 @@
                     } else {
                         if (e.participant.isLocal) {
                             tool.cameraBtn.classList.remove('isRecording');
+                            console.log('event: liveStreamingEnded: remove class');
+
                             tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedLive", tool.textes));
                         } else {
                             tool.usersBtn.classList.remove('isRecording');
@@ -434,6 +451,11 @@
 					}
 
 					tool.participantsPopup().hideLiveIndicator(e.participant, e.platform);
+                    tool.event().dispatch('liveStreamingEnded');
+				});
+				tool.WebRTCLib.event.on('liveStreamingStopped', function (e) {
+					console.log('event: liveStreamingStopped', e);
+                    tool.event().dispatch('liveStreamingStopped');
 				});
 
 				tool.WebRTCLib.event.on('liveStreamingStopped', function () {
@@ -522,7 +544,72 @@
                 });
 
 			},
+			event: function() {
+				var tool = this;
 
+                if(tool.events == null) tool.events = {};
+
+                var CustomEvent = function (eventName) {
+
+                    this.eventName = eventName;
+                    this.callbacks = [];
+
+                    this.registerCallback = function(callback) {
+                        this.callbacks.push(callback);
+                    }
+
+                    this.unregisterCallback = function(callback) {
+                        const index = this.callbacks.indexOf(callback);
+                        if (index > -1) {
+                            this.callbacks.splice(index, 1);
+                        }
+                    }
+
+                    this.fire = function(data) {
+                        const callbacks = this.callbacks.slice(0);
+                        callbacks.forEach((callback) => {
+                            callback(data);
+                        });
+                    }
+                }
+
+                var dispatch = function(eventName, data) {
+                    const event = tool.events[eventName];
+                    if (event) {
+                        event.fire(data);
+                    }
+                }
+
+                var on = function(eventName, callback) {
+                    let event = tool.events[eventName];
+                    if (!event) {
+                        event = new CustomEvent(eventName);
+                        tool.events[eventName] = event;
+                    }
+                    event.registerCallback(callback);
+                }
+
+                var off = function(eventName, callback) {
+                    const event = tool.events[eventName];
+                    if (event && event.callbacks.indexOf(callback) > -1) {
+                        event.unregisterCallback(callback);
+                        if (event.callbacks.length === 0) {
+                            delete tool.events[eventName];
+                        }
+                    }
+                }
+
+                var destroy = function () {
+                    tool.events = {};
+                }
+
+                return {
+                    dispatch:dispatch,
+                    on:on,
+                    off:off,
+                    destroy:destroy
+                }
+			},
 			showIosPermissionsInstructions: function(kind) {
 					var instructionsPermissionDialog = document.createElement('DIV');
 					instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
@@ -2301,12 +2388,20 @@
                                 if(tool.settingsPopup != null) tool.settingsPopup.hide();
                             })
 
-                            tool.WebRTCLib.event.on('liveStreamingEnded', function () {
+							console.log('tool.event', tool.event);
+							tool.event().on('liveStreamingEnded', function () {
+                                onStop();
+                            });
+							tool.event().on('liveStreamingStopped', function () {
+                                onStop();
+                            });
+                            /*tool.WebRTCLib.event.on('liveStreamingEnded', function () {
+                            	console.log('EVENT: liveStreamingEnded');
                                 onStop();
                             });
                             tool.WebRTCLib.event.on('liveStreamingStopped', function () {
                                 onStop();
-                            });
+                            });*/
 
                             return rtmpStreaming;
                         }
@@ -3375,10 +3470,14 @@
 				}
 
 				function hideLiveIndicator(participant, platform) {
-					for(let i in tool.participantsList) {
+                    console.log('hideLiveIndicator');
+
+                    for(let i in tool.participantsList) {
 						let item = tool.participantsList[i];
 						if(participant != item.participant) continue;
-						item.hideLiveIcon(platform);
+                        console.log('hideLiveIndicator: hide', participant);
+
+                        item.hideLiveIcon(platform);
 						break;
 					}
 				}
@@ -3397,6 +3496,7 @@
 				 * @method addItem
 				 */
 				function addItem(roomParticipant) {
+					console.log('controls: addItem');
 					var isLocal = roomParticipant == localParticipant;
 					var participantItem = document.createElement('LI');
 					var tracksControlBtns = document.createElement('DIV');
@@ -3454,7 +3554,7 @@
 					var audioVisualization = document.createElement('DIV')
 					audioVisualization.className = 'Streams_webrtc_popup-visualization';
 
-					tool.WebRTCLib.mediaManager.audioVisualization().build({
+					tool.WebRTCLib.mediaManager.audioVisualization.build({
 						name:'participantsPopup',
 						participant: roomParticipant,
 						element:audioVisualization,
@@ -3474,6 +3574,7 @@
 					participantItem.appendChild(participantIdentity);
 
 					tool.participantListEl.appendChild(participantItem);
+                    console.log('controls: addItem: tool.participantListEl', tool.participantListEl);
 
 					var listItem = new ListItem();
 					listItem.participant = roomParticipant;

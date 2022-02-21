@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.5",
+				"version": "1.0.6",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -16,12 +16,14 @@
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
-			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"]
+			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
+			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"]
 		},
 		"routes@start": {
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
-			"Assets/services": { "module": "Assets", "action": "services" }
+			"Assets/services": { "module": "Assets", "action": "services" },
+			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
@@ -49,8 +51,8 @@
 				"maxStretch": 2
 			},
 			"NFT/icon": {
-				"sizes": ["300x420", "500x700", "700x980"],
-				"defaultSize": "300x420",
+				"sizes": ["300x","500x","700x","x"],
+				"defaultSize": "x",
 				"defaultCacheBust": 1000,
 				"maxStretch": 2
 			}
@@ -124,7 +126,17 @@
 		}
 	},
 	"Assets": {
-		"web3": {
+		"Web3": {
+			"NFT": {
+				"factory": {
+					"contract": {
+						"address": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
+					}
+				},
+				"attributes": {
+					"display_type": ["string", "number", "date", "list"]
+				}
+			},
 			"currencies": [
 				{
 					"symbol": "BNB",
@@ -187,11 +199,17 @@
 		"credits": {
 			"amounts": {
 				"Users/insertUser": 20,
-				"Users/inviteUser": 10,
 				"createCommunity": 20
 			},
 			"granted": {
-				"acceptedInvite": 10
+				"acceptedInvite": 10,
+				"invitedUserEntered": {
+					"Streams/user/firstName": 1,
+					"Streams/user/lastName": 1,
+					"Streams/user/icon": 10,
+					"Places/user/location": 10,
+					"Streams/greeting/": 10
+				}
 			},
 			"exchange": {
 				"credits": 1,

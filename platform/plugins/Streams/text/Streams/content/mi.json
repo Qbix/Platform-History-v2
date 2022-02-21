@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Tuhinga Hou"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Nga tangata i karangatia",
-        "Streams\/invitedMe": "Ko wai i kii mai ki ahau",
-        "AreYouAgree": "Kei te whakaae koe?",
-        "Yes": "Ae",
-        "No": "No."
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "He aha koe e koa ana?",
-        "CanAdd": "Mena kaore e taea e koe te rapu i nga mea e rapu ana koe, ka taea e koe te whakauru i tetahi kaupapa hou kei raro nei:",
-        "TrySynonyms": "Kaua e kite? Nganahia etahi kupu whakarite.",
-        "AddUnderCategory": "Tāpiri i raro i te kāwai ...",
-        "Other": "Ētahi atu",
-        "Unlisted": "Whakaritenga"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Kua tohua te karere mo te arotake a te kaiwhakahaere. Patohia ano ki te rehu.",
-        "noOneSaid": "Kaore he korero a tetahi",
-        "closeChatButton": "Katia te korerorero",
-        "closeChatConfirmTitle": "Katia tenei whakawhitinga kōrero?",
-        "closeChatConfirm": "Kei te hiahia koe kia kati i tenei korerorero?",
-        "closeChatConfirmYes": "Ae",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
         "closeChatConfirmNo": "No",
-        "earlierComments": "Tuhinga o mua",
-        "Subscribed": "Nga Korongo Korero",
-        "Unsubscribed": "Tikina nga Panui",
-        "notAllowedToJoinCall": "Kaore he whakaaetanga kia uru atu ki tenei korerorero.",
-        "startedConversation": "haamata tetahi korero",
-        "RealTimeCall": "Karanga Real Time",
-        "SearchByName": "Rapua te ingoa",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "Kei te toro atu te {{displayName}} ki te whaikorero",
-            "Join": "{{displayName}} i hono atu ki te whaikorero",
-            "Leave": "{{displayName}} mahue ake nga korerorero",
-            "RelatedTo": "{{displayName}} i tiimata te {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Karere {{& message.fields.type}} ki {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} i mea:",
-        "Streams\/changed": "Nga huringa i {{stream.fields.title}}",
-        "Streams\/invite": "I tohua koe ki {{& stream.fields.title}}",
-        "Streams\/announcement": "Whakaara i roto i {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} te whakawhiti awa",
-        "Streams\/chat\/edit": "Korerohia te karere karere",
-        "Streams\/chat\/remove": "Kua wehea te karere poroporoaki",
-        "Streams\/closed": "Kua katia te {{stream.fields.title}}",
-        "Streams\/task\/progress": "Ko te ahunga whakamua i {{stream.fields.title}}",
-        "Streams\/task\/complete": "Kua oti te mahi: {{stream.fields.title}}",
-        "Streams\/task\/error": "Hapa i te wā: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Karere Taumai",
-        "Streams\/relatedTo\/Streams\/call": "Kua Toro Panui Hou i {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} i {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ka tapiritia ki te {{toTitle}} hei {{relationDisplayType}}",
-        "Streams\/mention": "Na {{&call 'avatar.displayName'}} koe i korero i to korero",
-        "Streams\/call": "{{displayName}} i tiimata i te waa-pono",
-        "ManageEmailSubscriptions": "whakahaere koutou ohaurunga imeera",
-        "IfUnsubscribe": "Ki te hiahia koe ki te tuku toha"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} i karangatia koe ki {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Kōwhiria mai i ō Hoapā",
-            "chooseAgainFromContacts": "Kōwhirihia mai i Hoapā",
-            "inviteSelectedContacts": "Karangatia Ngā Hoapā kua Tīpakohia",
-            "selectFromContacts": "Tīpako Mai i Ngā Hoapā",
-            "photo": "Tangohia he whakaahua",
-            "photoInstruction": "Mena kei mua i te aroaro o te tangata nana i tirotiro i to QR code, tangohia he whakaahua",
-            "to": "Ki: {{Stream Title}}",
-            "go": "Haere",
-            "title": "Fakaafe&#39;i",
-            "placeholder": "Tau nama me te wāhitau īmēra",
-            "orInvite": "Raneihia nga iwi ma te whakamahi:",
-            "QR": "{{ClickOrTap}} ki te whakaputa QR code",
-            "QRtitle": "Matahia tenei QR waehere",
-            "QRscanned": "I tirotirohia e ratou!",
-            "byEmail": "Īmēra",
-            "byText": "Kuputuhi",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} mena kua tohua te tohu",
-            "copyLink": "{{ClickOrTap}} hei kape i te hono panui",
-            "userChooserPlaceholder": "Rapua ingoa"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Tena, tirohia tenei",
-            "PleaseVisitLink": "Tena koa ki te hononga e whai ake nei:",
-            "InvitingYou": "Kei te karanga ahau ki a koe [{999}}",
-            "HasInvitedYou": "Kua karangatia koe e {{displayName}} ki {{title}}",
-            "HasMentionedYou": "{{displayName}} kua kii i a koe i &quot;{{title}}&quot;",
-            "YOUAREINVITED": "HEI PUROA!",
-            "AcceptInvite": "Whakaaehia he Pae"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Kua tohaina koe ki {{title}}. Tena koa {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Kua karangatia koe. {{ClickOrTap}} konei hei whakaae me te whakauru mai."
-        },
-        "command": "Ani",
-        "youCanNowPaste": "Ka taea e koe te whakapiri i tenei hono ki tetahi waahi hei karanga i te iwi"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",
-            "confirm": "Ka tukuna mai nga tono mai i to maatau nama, kaore i mohiohia e ou hoa. E hiahia ana koe ki te whai ake i tetahi tuhinga tere kia mohio ai koe kua tae mai te tono mai ia koe, me te tono ia ratou ki te patene i te hononga.",
-            "check": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Titiro koa ki a koutou sms ka kiria te hononga!",
-            "CheckYourMobile": "Tena tirohia te SMS me te whai i nga tohutohu!"
-        },
-        "email": {
-            "alert": "Ka tukuna mai nga tono mai i to rohe, kaore ano i mohio o hoa. Whakamahia he korero tere kia mohio ai ratou kua tae mai te awhina mai ia koe, me te tono ia ratou ki te patene i te hononga.",
-            "confirm": "Ka tukuna mai nga tono mai i to rohe, kaore ano i mohio o hoa. E hiahia ana koe ki te whai ake i tetahi tuhinga tere kia mohio ai koe kua tae mai te tono mai ia koe, me te tono ia ratou ki te patene i te hononga.",
-            "subject": "I whiwhi koe i tetahi urunga?",
-            "body": "Na, kua tonoa e ahau he tono ki a koe ki te taupānga {{app}}. Tena koa tirohia to īmēra me te pāwhiri i te hono i reira!",
-            "CheckYourEmail": "Tena tirohia to imeera me te whai i nga tohutohu!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Whakahohea te Waeaoro",
-            "cameraTitle": "Whakahohea te Kāmera",
-            "cameraAndMicrophoneTitle": "Whakahohea te Kāmera me te Waeaoro",
-            "dialogTitle": "Tūhono",
-            "microphoneBtn": "Whakahohea te Microphone",
-            "cameraBtn": "Whakahohe kāmera",
-            "cameraAndMicrophoneBtn": "Whakahohea te Kamera me te Microphone"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Tohutohu",
-            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Hei whakamahi maatau whai i enei mahi:",
-            "point1": "Haere ki te &quot;Tautuhinga&quot; -&gt; &quot;Ararau&quot; -&gt; &quot;Whakauru me te Haumaru&quot; -&gt; &quot;Tautuhinga Pae&quot; -&gt; &quot;Whakaahua&quot; me &quot;Tautuhinga Pae&quot; -&gt; &quot;Maikuku&quot;",
-            "point2": "Tangohia te {{hostname}} mai i te raarangi &quot;Poraka&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Tohutohu",
-            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Tena koa taara i tenei whaarangi ka whakaahei te uru ki {{kind}}"
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Tohutohu",
-            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Hei whakamahi maatau whai i enei mahi:",
-            "point1": "Haere ki to Tautuhinga Android",
-            "point2": "Whakatūwhera &quot;Apps &amp; whakamōhiotanga&quot;",
-            "point3": "Rapua te &quot;{{communityName}}&quot; ka whakatuwhera ake",
-            "point4": "Tap i runga i Whakaaetanga",
-            "point5": "Whakahoheia {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Tohutohu",
-            "permissionDenied": "Te whakaaetanga mo te {{kind}} i whakahe. Hei whakamahi maatau whai i enei mahi:",
-            "point1": "Haere ki to Tautuhinga iOS",
-            "point2": "Whakatūwhera &quot;Tūmataitinga&quot;",
-            "point3": "Rapua te {{kind}} ka whakatuwhera",
-            "point4": "Rapua &quot;{{communityName}}&quot; ka whakahohe"
-        },
-        "notices": {
-            "youJoinedRoom": "I uru koe ki roto i te ruma",
-            "joining": "Te whakahoahoa: {{userName}}",
-            "sbLeftRoom": "{{userName}} mahue ake i te ruma",
-            "youLeftRoom": "I wehe koe i te ruma",
-            "codeCopied": "I wehe koe i te ruma",
-            "sbBeganFbLive": "I tiimata mai te {{userName}} i te panui i tenei Facebook",
-            "sbStoppedFbLive": "{{userName}} i mutu te tuku i te panui i te Facebook",
-            "youBeganFbLive": "I timata koe i te tuku i tenei karanga i Facebook",
-            "youStoppedFbLive": "Ka mutu koe ki te tuku i te karanga i tenei Facebook",
-            "linkCopiedToCb": "Hangaia te hono ki te papaa",
-            "codeCopiedToCb": "Te waehere i hainatia ki te papaahi",
-            "userHasNoVideo": "Kaore he ataata",
-            "openInBrowserAlert": "Whakatuwherahia te hono ki te pūtirotiro Safari kia uru atu ki nga huihuinga.",
-            "youBeganVideoRecording": "I timata koe i te tuhi i tenei hui",
-            "youStoppedVideoRecording": "Ka mutu koe ki te tuhi i tenei hui",
-            "switchingRoom": "Ruma whakawhiti ...",
-            "forceDisconnecting": "Ka motuhia atu koe i roto i te 5 hēkona",
-            "youStartedLive": "I tiimata koe ki te tuku i tenei piiraa ki te RTMP ritenga",
-            "youStoppedLive": "I mutu to whakatairanga i tenei piiraa ki te RTMP ritenga",
-            "sbStartedLiveStreaming": "I tiimata ora te {{userName}}",
-            "sbStoppedLiveStreaming": "{{userName}} mutu ora",
-            "liveStopped": "I hapa te tuku ataata ki te pito mutunga"
-        },
-        "settingsPopup": {
-            "webCamera": "Kāmera Tukutuku",
-            "screenSharing": "Te Tiri Mata",
-            "shareAnotherScreen": "Te korero i tetahi atu mata",
-            "turnOffCameras": "Tahuri nga kāmera katoa",
-            "startFBLive": "Tīmata Facebook Livestream",
-            "stopFBLive": "Aukati i te Whanui Live",
-            "fbLiveTitle": "Taitara Ora",
-            "fbLiveDescription": "Whakaahuatanga Ora",
-            "fbOnlyMeLiveAccess": "Ko au anake",
-            "fbFriendsAccess": "E hoa",
-            "fbPublicAccess": "Panui",
-            "fbStartLive": "Haere Haere",
-            "fbStopLive": "Kati Ora",
-            "fbEmbedCode": "Whakauru",
-            "copy": "Kake",
-            "turnOffVideo": "Whakaweto tiri i te kāmera \/ mata",
-            "turnOffScreenSharing": "Tahuri te tiritiri mata",
-            "cameraIsTurnedOff": "Kua whakaweto te kamera",
-            "startRecording": "Tīmata Whakaahuri",
-            "stopRecording": "Aukati Te Whakaaturanga",
-            "recordingInProgress": "Kei te haere tonu te rekoata ...",
-            "publishOnTimeline": "Whakaputa i te tohu tohu waa",
-            "publishToGroup": "Panui ki te roopu",
-            "turnOffAudioInput": "Whakakorea te hopuoro",
-            "micIsTurnedOff": "Kua whakaweto te hopuoro",
-            "start": "Timata",
-            "stop": "Kati",
-            "streamingSettings": "Tautuhinga",
-            "streamToRTMP": "Rere ki te RTMP ritenga"
-        },
-        "participantsPopup": {
-            "disconnect": "Whakapore",
-            "floatingScreens": "Papa Mata",
-            "tiledScreens": "Kiriata Matapihi",
-            "loudestExceptMe": "Te Rawa Whakahauhau Maaku",
-            "maximizeLoudest": "Whakanuia Te Riri",
-            "staticMaximized": "Whakapiki",
-            "manual": "Pukapuka",
-            "fullScreen": "Mata Kaha",
-            "turnOffCamera": "Hunaia te ataata",
-            "turnOffAudio": "Whakarongo",
-            "turnOffScreenSharing": "Huna te tiritiri mata",
-            "turnOnCamera": "Whakaatuhia te ataata",
-            "turnOnAudio": "Whakarekehia te oro",
-            "turnOnScreenSharing": "Whakaatuhia te tohatoha mata"
-        },
-        "notAllowedToJoinCall": "Kaore koe e whakaae kia uru atu ki tenei awa.",
-        "streamTitle": "{{1}} karanga ora",
-        "preview": {
-            "preamble": "Hui:",
-            "Meeting": "Hui",
-            "MeetingEnded": "Kua mutu te hui"
-        },
-        "preparing": {
-            "micIsOff": "Kua kore a Mic",
-            "micIsOn": "Kei runga a Mic",
-            "cameraIsOff": "Kua whakaweto te Kamera",
-            "cameraIsOn": "Kei te kei te kāmera",
-            "screenSharingIsOn": "Kei te whakaatuhia te Matapihi Matapihi",
-            "screenSharingIsOff": "Tiri mata",
-            "joinNow": "Hono ki te Waea"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "i tukuna he karere <em>{{message.fields.type}}<\/em> ki {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "i korero mo",
-            "in": "i roto",
-            "body": "i roto i {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "kua tukuna iatu ki",
-                "byAvatar": "e {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "he hou {{instructions.fromDisplayType}}",
-                "byAvatar": "tapiritia e {{avatar.displayName}}"
-            },
-            "startedCallIn": "ka tiimata he waea i roto i"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Ua taponohia",
-            "description": "Pouakauru mo nga tono akiaki"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Rauemi",
-            "description": "rere mo te whakahaere i te uru ki tetahi rauemi me te tuku korero mo nga whakahoutanga"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "mo te whiwhi whakahoutanga mo te ahunga whakamua i runga i tetahi mahi",
-            "displayType": "Mahi"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "waahanga mo nga mahi",
-            "displayType": "Nga Mahi"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "he wheako noa mo nga mema o te hapori",
-            "displayType": "He wheako noa mo nga mema o tetahi hapori"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "nga mihi me pehea e taea ai e te kaiwhakamahi te whakauru i a raatau ano",
-            "displayType": "Nunui"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Tau",
-            "description": "tau pāngarau"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Rangi",
-            "description": "rā"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Kakano",
-            "description": "Tuhinga o mua"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Kakano",
-            "description": "Tuhinga o mua"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Kakano",
-            "description": "Tuhinga o mua"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Wāhitau Emailmera",
-            "description": "wāhitau īmēra"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Tau Waea",
-            "description": "tau waea"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "hono ki te tukutuku"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Whakaahua",
-            "description": "atahanga ahua",
-            "newItem": "Taapirihia te Atahanga"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Taiwhanga Whakaahua",
-            "description": "Tuhinga o mua"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "he album e hono atu ai nga momo pāpāho"
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Kōnae",
-            "description": "tukuake",
-            "newItem": "Taapirihia te Kōnae"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Ataata Ororongo",
-            "description": "topenga oro",
-            "newItem": "Taapirihia he Ororongo"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Ataata Ataata",
-            "description": "topenga ataata",
-            "newItem": "Taapirihia te Ataata"
-        },
-        "Streams\/live": {
-            "displayType": "Whanui",
-            "description": "ataata ororongo ranei"
-        },
-        "Streams\/category": {
-            "displayType": "Kāwai",
-            "description": "he waahanga e pa ana ki etahi atu awa"
-        },
-        "Streams\/participating": {
-            "displayType": "Whai Wahanga whakauru",
-            "description": "e hono ana \/ e hono ana nga awa ki tenei ka uru ana te kaiwhakamahi ki te rau"
-        },
-        "Streams\/interest": {
-            "displayType": "Kawenga",
-            "description": "e tohu ana i nga hiahia o te kaiwhakamahi ki tetahi kaupapa"
-        },
-        "Streams\/incoming": {
-            "displayType": "Whakauru",
-            "description": "haerenga mo nga karere i tukuna e etahi atu kaiwhakamahi"
-        },
-        "Streams\/chat": {
-            "displayType": "Whakawhiti",
-            "description": "he korerorero i waenga i nga kaiwhakamahi, me te hitori"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Karangatia-Katoa Waea",
-            "description": "he waea ataata \/ oro korero tūturu"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "Tuhinga PDF",
-            "description": "Tuhinga PDF",
-            "newItem": "Taapirihia te PDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Patai",
-            "description": "awa pātai"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Whakautu",
-            "description": "rerenga whakautu"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Karanga",
-            "description": "waahanga mo nga Rawa \/ webrtc",
-            "MaxRelationsExceeded": "Kua roa te waea Max"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Taitara",
-        "Subscribed": "Ohauru",
-        "Participants": "Nga kaiuru",
-        "AreYouSureRemoveIdentifier": "Kei te mohio koe ki te tango i tenei kaituhi?",
-        "AreYouSureUnsubscribeIdentifier": "Kei te tino waitohu koe i tenei kaituhi? Ka whakaweto i nga panui ki tenei kaituhi.",
-        "AreYouSureUnsubscribeDevice": "Kua tino mohio koe ki te tuku i tenei taputapu? Ka whakaweto i nga panui ki tenei taputapu.",
-        "Identifiers": "Ngā Kaiwhakaputa",
-        "Devices": "Pūrere",
-        "Streams": "Ngātenga",
-        "AreYouSureRemoveParticipant": "Kei te pirangi koe ki te tango i tenei kaiwhakauru?",
-        "RemoveParticipant": "Tangohia te kaiuru"
-    },
     "menu": {
-        "placeholder": "taitara whaarangi",
-        "ModTab": "Whakakēemi te nama",
-        "Save": "Whakaora",
-        "Delete": "Muputu",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "He mea huna tenei korero kei a koe."
-    },
     "audio": {
-        "record": "Tuhia",
-        "reset": "Tautuhi Anō",
-        "edit": "Whakatika",
-        "title": "taitara",
-        "description": "whakaahuatanga",
-        "upload": "Tukuatu",
-        "link": "Hono",
-        "setUrl": "Tautuhia te URL",
-        "save": "Penapena",
-        "setClip": "Tapahia te Topenga",
-        "invalidURL": "URL muhu",
-        "invalidFile": "Kōnae Muhu",
-        "errorNoSource": "Kaore he puna oro",
-        "uploadLimit": "Te rahi o te konae: {{size}}",
-        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Tautuhi Anō",
-        "edit": "Whakatika",
-        "title": "taitara",
-        "description": "whakaahuatanga",
-        "upload": "Tukuatu",
-        "link": "Hono",
-        "setUrl": "Tautuhia te URL",
-        "save": "Penapena",
-        "setClip": "Tapahia te Topenga",
-        "invalidURL": "URL muhu",
-        "invalidFile": "Kōnae Muhu",
-        "errorNoSource": "Kaore he punaata ataata",
-        "uploadLimit": "Te rahi o te konae: {{size}}",
-        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Tautuhi Anō",
-        "edit": "Whakatika",
-        "title": "taitara",
-        "description": "whakaahuatanga",
-        "upload": "Tukuatu",
-        "link": "Hono",
-        "setUrl": "Tautuhia te URL",
-        "save": "Penapena",
-        "setClip": "Tapahia te Topenga",
-        "invalidURL": "URL muhu",
-        "invalidFile": "Kōnae Muhu",
-        "errorNoSource": "Kaore he puna PDF",
-        "uploadLimit": "Te rahi o te konae: {{size}}",
-        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Tautuhi Anō",
-        "edit": "Whakatika",
-        "title": "taitara",
-        "description": "whakaahuatanga",
-        "upload": "Tukuatu",
-        "link": "Hono",
-        "setUrl": "Tautuhia te URL",
-        "save": "Penapena",
-        "setClip": "Tapahia te Topenga",
-        "invalidURL": "URL muhu",
-        "invalidFile": "Kōnae Muhu",
-        "errorNoSource": "Kaore he puna ahua",
-        "uploadLimit": "Te rahi o te konae: {{size}}",
-        "errorFileSize": "Aroha mai, engari he nui rawa te konae.<br> Ko te rahi o te konae ko {{size}}",
-        "uploadedImage": "Whakaahua i tukuna",
-        "imageTitle": "Taitara whakaahua"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Nga Patai",
-        "Answers": "Nga Whakautu",
-        "AnswerQuestion": "Whakautu Pātai",
-        "SetYourAnswer": "Tena koa whakautua te patai",
-        "NewQuestion": "Patai Hou",
-        "NewAnswer": "Whakautu Hou",
-        "AnswerDetails": "Whakaaturanga Taipitopito",
-        "answerOption": "Kōwhiringa",
-        "answerOptionExclusive": "Motuhake",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "whakautu koreutu ...",
-        "SaveQuestion": "Penapena Patai",
-        "SaveAnswer": "Whakautu Whakautu",
-        "AddAnotherAnswer": "Taapirihia tetahi atu whakautu",
-        "ErrorAnswers": "Tena koa taapiri kia kotahi te whakautu",
-        "AlreadyAnswered": "Kua whakautu kē",
-        "TitlePlaceholder": "Patohia to patai",
-        "ContentPlaceholder": "Tuhia etahi atu korero ki konei hei awhina i nga tangata ki te whakautu",
-        "ErrorTitle": "He patai e hiahiatia ana",
-        "Placeholder": "Puriwāhi"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Wheako Hou",
-        "DefineTitle": "Tautuhia koa he taitara",
-        "Create": "Hangaia"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Karanga",
-        "MaxCalls": "Karanga a Max",
-        "Update": "Whakahou",
-        "NoCallsYet": "Kaore ano kia waea",
-        "CallReasonTitle": "He aha te karanga a tenei?",
-        "WaitingRoom": "Ruma Tatari"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Di dema daxwaza çewtiyê {{status}} de",
-        "canceled": "Daxwaza betalkirinê",
-        "500": "Çewtiyek servera hundur",
-        "404": "Nehat dîtin: {{url}}",
-        "501": "Serdanek asteng kirin"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Session dest pê kir. Rûpelê nû bike û dîsa biceribîne.",
-        "otherDomain": "Daxuyaniya cross-domain ji bo daveroka biyanî ya li derve {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "dîk",
-        "click": "bitikîne",
-        "yes": "Erê",
-        "no": "na",
-        "Tap": "Dîk",
-        "Click": "Bitikîne",
-        "Yes": "Erê",
-        "No": "Na"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Rêbendan",
-        "2": "Reşemî",
-        "3": "Adar",
-        "4": "Avrêl",
-        "5": "Gulan",
-        "6": "Pûşper",
-        "7": "Tîrmeh",
-        "8": "Tebax",
-        "9": "Îlon",
-        "10": "Cotmeh",
-        "11": "Mijdar",
-        "12": "Berfanbar"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Ji kerema xwe veguhestina mîkrofonê xwe bide dest",
-        "record": "Rekor",
-        "recording": "Girtinî",
-        "remains": "jibermayî",
-        "maximum": "zêdetir",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
         "playing": "Playing",
-        "recorded": "Tomar kirin",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "Or Upload",
-        "usethis": "Vê bikar bînin",
-        "discard": "Bistînin",
+        "discard": "Discard",
         "encoding": "Encoding"
-    },
-    "alert": {
-        "title": "Hişyar"
-    },
-    "confirm": {
-        "title": "Tesdîqkirin",
-        "ok": "Erê",
-        "cancel": "Na"
-    },
-    "prompt": {
-        "title": "Derhal",
-        "ok": "Çûyin"
-    },
-    "imagepicker": {
-        "errorReadingFile": "Çewtiya pelê xwendin",
-        "cameraCommands": {
-            "prompt": "Tu dixwazî çi bikî?",
-            "photo": "Wêne nû nû bike",
-            "library": "Ji pirtûkxaneyê hilbijêre"
-        },
-        "tooSmall": "Ji kerema xwe wêneyê mezintir hilbijêre.",
-        "cropping": {
-            "title": "Pîv û pozê biguhînin",
-            "touchscreen": "Tulên xwe bikar bînin ku zoom û vekin",
-            "notTouchscreen": "Ji bo zoom û vekişîna xwe ya çepê û bişkoka xwe bikar bînin"
-        }
-    },
-    "timestamp": {
-        "lastNight": "şevê dî",
-        "lastEvening": "şeva borî",
-        "yesterday": "do",
-        "thisMorning": "vê sibehê",
-        "today": "îro",
-        "tonight": "îro êvarî",
-        "tomorrowMorning": "tom sibê",
-        "tomorrow": "sibê",
-        "hoursAgo": "} {999}} saetên berî",
-        "hourAgo": "99} 999}} saet berî",
-        "minuteAgo": "99 99 999}} minute ago",
-        "minutesAgo": "99 {999}} minutes ago",
-        "secondAgo": "99 999}} berê berê",
-        "secondsAgo": "99 {999}} seconds ago",
-        "fewSecondsAgo": "seconds berê",
-        "rightNow": "a niha",
-        "inSecond": "di {999}} duyemîn de",
-        "inSeconds": "in {999}} seconds",
-        "inMinute": "di. 999} deqîqê de",
-        "inMinutes": "di. 999}} deqîqeyan de",
-        "inHour": "di demjimêra} 999} de ye",
-        "inHours": "di demjimêra 99 999}} de",
-        "inUnderMinute": "di nav 1 hûrdeman de"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Çavkaniya vîdyoyê tune",
-        "SkipAfter": "Li dû xwe bavêjin",
-        "Skip": "Hilperkîn"
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Çavkaniya pdf tune"
+        "errorNoSource": "No pdf source"
     },
     "clip": {
-        "SetClipStart": "Destpêka Klîbê saz bikin",
+        "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",
-        "SetClipEnd": "Dawiya Klîpê saz bikin",
+        "SetClipEnd": "Set Clip End",
         "ClipEnd": "Clip End",
-        "StartMoreEnd": "Helwesta destpêkî ji pozîsyona dawiyê zêdetir nabe",
-        "EndLessStart": "Helwesta dawîn nikare ji pozîsyona destpêkê kêmtir be",
-        "WhichInvalid": "Argumenta &#39;kîjan&#39; nederbasdar e"
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
-        "more": "zêde",
-        "Menu": "Qerta xûrekê"
+        "more": "more",
+        "Menu": "Menu"
     },
-    "durations": {
-        "second": "duyem",
-        "seconds": "çirke",
-        "minute": "deqqe",
-        "minutes": "deqîqe",
-        "hour": "saetan",
-        "day": "roj",
-        "days": "rojan",
-        "week": "hefte",
-        "weeks": "hefte",
-        "month": "meh",
-        "months": "meh",
-        "year": "sal",
-        "years": "salan",
-        "decade": "dehsal",
-        "decades": "dehsalan",
-        "century": "sedsal",
-        "centuries": "sedsalan"
+    "imagepicker": {
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
+        "cameraCommands": {
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
+        },
+        "tooSmall": "Please choose a larger image.",
+        "cropping": {
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+        }
+    },
+    "timestamp": {
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

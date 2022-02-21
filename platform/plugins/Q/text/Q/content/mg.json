@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Hadisoana {{status}} nandritra ny fangatahana",
+        "error": "Error {{status}} during request",
         "canceled": "Request canceled",
-        "500": "Olana amin&#39;ny servera anatiny",
-        "404": "Tsy hita: {{url}}",
-        "501": "Request not interrupted"
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Nivoaka ny fotoam-pitsarana. Hamafiso ilay pejy ary andramo indray.",
-        "otherDomain": "Zavatra tsy ampy \/ fanononana tsy ampy amin&#39;ny teny alemaina"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "paompy",
-        "click": "Click",
-        "yes": "Eny",
-        "no": "tsy misy",
-        "Tap": "paompy",
-        "Click": "Tsindrio",
-        "Yes": "Eny",
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
         "No": "No"
     },
     "months": {
-        "1": "Janoary",
-        "2": "Febroary",
+        "1": "January",
+        "2": "February",
         "3": "March",
-        "4": "Aprily",
-        "5": "Mey",
-        "6": "Jona",
-        "7": "Jolay",
-        "8": "Aogositra",
-        "9": "Septambra",
-        "10": "Oktobra",
-        "11": "Novambra",
-        "12": "Desambra"
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Azafady azafady azafady amin&#39;ny mikrôfao",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
         "record": "Record",
-        "recording": "peo",
-        "remains": "sisa tavela",
-        "maximum": "faratampony",
-        "playing": "milalao",
-        "recorded": "voarakitra",
-        "clip": "Clip",
-        "orupload": "Or Upload",
-        "usethis": "Ampiasao ity",
-        "discard": "hanary",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
         "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
-        "title": "Hamarino",
-        "ok": "Eny",
+        "title": "Confirm",
+        "ok": "Yes",
         "cancel": "No"
     },
     "prompt": {
-        "title": "avy hatrany",
-        "ok": "Mandehana"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Hadisoana namaky ny rakitra",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Inona no tianao atao?",
-            "photo": "Haka sary vaovao",
-            "library": "Misafidiana avy amin&#39;ny tranomboky"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Alefaso azafady sary lehibe kokoa.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Amboary ny habe sy ny toerana",
-            "touchscreen": "Ampiasao ny rantsan-tànanao mba hampitomboana sy hamindrana",
-            "notTouchscreen": "Ampiasao ny totozy sy ny kodiaranao mba hampitomboana sy hisintonana"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "omaly alina",
-        "lastEvening": "alina farany",
-        "yesterday": "omaly",
-        "thisMorning": "io maraina io",
-        "today": "amin&#39;izao fotoana izao",
-        "tonight": "anio alina",
-        "tomorrowMorning": "tom maraina",
-        "tomorrow": "rahampitso",
-        "hoursAgo": "{{h}} ora lasa izay",
-        "hourAgo": "{{h}} ora lasa izay",
-        "minuteAgo": "{{m}} minitra lasa izay",
-        "minutesAgo": "{{m}} minitra lasa izay",
-        "secondAgo": "{{s}} faharoa lasa izay",
-        "secondsAgo": "{{s}} segondra lasa izay",
-        "fewSecondsAgo": "segondra lasa izay",
-        "rightNow": "izao dia izao",
-        "inSecond": "amin&#39;ny faharoa {{s}} faharoa",
-        "inSeconds": "tao anatin&#39;ny {{s}} segondra",
-        "inMinute": "ao anatin&#39;ny {{m}} minitra",
-        "inMinutes": "ao anatin&#39;ny {{m}} minitra",
-        "inHour": "amin&#39;ny {{h}} ora",
-        "inHours": "amin&#39;ny {{h}} ora",
-        "inUnderMinute": "ao anatin&#39;ny 1 minitra"
-    },
-    "video": {
-        "clip": "Clip",
-        "errorNoSource": "Tsy misy loharano video",
-        "SkipAfter": "Skip rehefa afaka",
-        "Skip": "Mifohaza"
-    },
-    "pdf": {
-        "clip": "Clip",
-        "errorNoSource": "Tsy misy loharanom-baovao pdf"
-    },
-    "clip": {
-        "SetClipStart": "Mametraha Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Mametraha Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Ny toerana fanombohana dia tsy tokony mihoatra ny toerana farany",
-        "EndLessStart": "Ny toerana farany dia tsy tokony ho ambany noho ny toerana fanombohana",
-        "WhichInvalid": "Argument &#39;izay&#39; tsy mety"
-    },
-    "tabs": {
-        "more": "Bebe kokoa",
-        "Menu": "sakafo"
-    },
-    "durations": {
-        "second": "FAHAROA",
-        "seconds": "segondra",
-        "minute": "minitra",
-        "minutes": "minitra",
-        "hour": "ORA",
-        "day": "andro",
-        "days": "andro",
-        "week": "herinandro",
-        "weeks": "HERINANDRON&#39;NY",
-        "month": "VOLANA",
-        "months": "VOLANA",
-        "year": "TAOM-",
-        "years": "taona",
-        "decade": "folo taona",
-        "decades": "am-polo taona",
-        "century": "taonjato",
-        "centuries": "taonjato maro"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

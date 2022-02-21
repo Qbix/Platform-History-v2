@@ -987,6 +987,16 @@ Elp.addClass = function (className) {
 };
 
 /**
+ * Check if element instance od HTML.Element and exists in DOM.
+ * @method exists
+ * @chainable
+ * @return {Boolean}
+ */
+Elp.exists = function () {
+	return (this instanceof Element) && this.offsetParent;
+};
+
+/**
  * Adds or removes an element according to whether a condition is truthy
  * @method setClass
  * @chainable
@@ -2463,7 +2473,8 @@ Q.openUrl = function (url, name = "_blank") {
 	if (browsertab) {
 		browsertab.openUrl(url);
 	} else {
-		window.open(url, name).focus();
+		var win = window.open(url, name);
+		win && win.focus();
 	}
 };
 
@@ -7381,8 +7392,8 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * It uses script tags and JSONP callbacks for remote domains, and prefers XHR for the local domain.
  * @static
  * @method request
- * @param {Object} fields
- *  Optional object of fields to pass
+ * @param {Object} [fields]
+ *  Optional object of fields to pass, syntactic sugar for adding fields to GET requests
  * @param {String} url
  *  The URL you pass will normally be automatically extended through Q.ajaxExtend
  * @param {String|Array} slotNames
@@ -7396,6 +7407,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  *  A hash of options, including options that would be passed to Q.url(), but also these:
  * @param {String} [options.method="GET"] the HTTP method to use. If not "GET" and options.form is set, adds to url &Q.method= that value to the querystring, and uses POST method.
  * @param {Object} [options.fields] optional fields to pass with any method other than "get"
+ * @param {Object} [options.formdata] if set, instead of fields, submits the formdata (including multipart form-data such as files, etc.) 
  * @param {HTMLElement} [options.form] if specified, then the request is made by submitting this form, temporarily extending it with any fields passed in options.fields, and possibly overriding its method with whatever is passed to options.method .
  * @param {String} [options.resultFunction="result"] The path to the function to handle inside the
  *  contentWindow of the resulting iframe, e.g. "Foo.result". 
@@ -7578,14 +7590,16 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.extend(xmlhttp, o.xhr);
 				sync = sync || xmlhttp.sync;
 			}
-			var content = Q.queryString(o.fields);
+			var content = o.formdata ? o.formdata : Q.queryString(o.fields);
 			request.xmlhttp = xmlhttp;
 			if (verb === 'GET') {
 				xmlhttp.open('GET', url + (content ? '&' + content : ''), !sync);
 				xmlhttp.send();
 			} else {
 				xmlhttp.open(verb, url, !sync);
-				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				if (!o.formdata) {
+					xmlhttp.setRequestHeader("Content-Type", 'application/x-www-form-urlencoded');
+				}
 				//xmlhttp.setRequestHeader("Content-length", content.length);
 				//xmlhttp.setRequestHeader("Connection", "close");
 				xmlhttp.send(content);
@@ -8956,6 +8970,7 @@ var _latestLoadUrlObjects = {};
  * @param {boolean} [options.ignoreLoadingErrors=false] If true, ignores any errors in loading scripts.
  * @param {boolean} [options.ignoreHash=false] if true, does not navigate to the hash part of the URL in browsers that can support it
  * @param {Object} [options.fields] additional fields to pass via the querystring
+ * @param {Object} [options.formdata] if set, instead of fields, submits the formdata (including multipart form-data such as files, etc.) 
  * @param {Boolean|String} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {Number|boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {boolean} [options.quiet=false] if true, allows visual indications that the request is going to take place.
@@ -8964,6 +8979,7 @@ var _latestLoadUrlObjects = {};
  * @param {Object} [options.retainSlots] an object of {slotName: whetherToRetain} pairs, retained slots aren't requested
  * @param {boolean} [options.slotContainer] optional function taking (slotName, response) and returning the element, if any, to fill for that slot
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace. Overrides "data-q-retain" attributes but not retainSlots option.
+ * @param {Object} [options.dontRestoreScrollPosition] set dontRestoreScroll[url] = true to skip fillSlots restoring scroll position for that url, or just set dontRestoreScroll[''] = true to skip all urls
  * @param {String} [options.key='Q'] If a response to the request initiated by this call to Q.loadUrl is preceded by another call to Q.loadUrl with the same key, then the response handler is not run for that response (since a newer one is pending or arrived).
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. Receives function as argument - the function might be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
@@ -11973,7 +11989,7 @@ Q.Pointer = {
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
-	 * @param {Boolean} [option.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
 	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
@@ -11993,13 +12009,12 @@ Q.Pointer = {
 	 * @return {HTMLElement} img1 - Hint image element
 	 */
 	hint: function (targets, options) {
-		options = options || {};
+		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		var img, img1, i, l;
 		var qphi = Q.Pointer.hint.imgs;
 		var imageEvent = options.imageEvent || new Q.Event();
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
-		var o = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		if (!options.dontRemove && !options.waitForEvents) {
 			for (i=0, l=qphi.length; i<l; ++i) {
 				img = qphi[i];
@@ -12010,10 +12025,10 @@ Q.Pointer = {
 			qphi = Q.Pointer.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
-		img1.setAttribute('src', Q.url(o.src));
+		img1.setAttribute('src', Q.url(options.src));
 		img1.style.position = 'absolute';
-		img1.style.width = o.width;
-		img1.style.height = o.height;
+		img1.style.width = options.width;
+		img1.style.height = options.height;
 		img1.style.left = 0;
 		img1.style.top = 0;
 		img1.style.display = 'block';
@@ -12023,8 +12038,8 @@ Q.Pointer = {
 			img1.addClass(options.classes);
 		}
 		img1.style.opacity = 0;
-		img1.hide = o.hide;
-		img1.dontStopBeforeShown = o.dontStopBeforeShown;
+		img1.hide = options.hide;
+		img1.dontStopBeforeShown = options.dontStopBeforeShown;
 		qphi.push(img1);
 		img1.style.visibility = 'hidden';
 		document.body.appendChild(img1);
@@ -12042,6 +12057,9 @@ Q.Pointer = {
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
+						if (!targets[i].exists()) {
+							continue;
+						}
 						var img2 = img1.cloneNode(false);
 						img2.hide = img1.hide;
 						img2.dontStopBeforeShown = img1.dontStopBeforeShown;
@@ -12053,6 +12071,9 @@ Q.Pointer = {
 					}
 				} else {
 					img1.target = targets;
+					if (!targets.exists()) {
+						img1.remove();
+					}
 				}
 				Q.each(imgs, function (i, img) {
 					if (typeof img.target === 'string') {
@@ -12077,9 +12098,9 @@ Q.Pointer = {
 						point = target;
 					}
 					img.style.display = 'block';
-					img.style.left = point.x - img.offsetWidth * o.hotspot.x + 'px';
-					img.style.top = point.y - img.offsetHeight * o.hotspot.y + 'px';
-					img.style.zIndex = o.zIndex;
+					img.style.left = point.x - img.offsetWidth * options.hotspot.x + 'px';
+					img.style.top = point.y - img.offsetHeight * options.hotspot.y + 'px';
+					img.style.zIndex = options.zIndex;
 					var width = parseInt(img.style.width);
 					var height = parseInt(img.style.height);
 					Q.Animation.play(function (x, y) {
@@ -12089,23 +12110,23 @@ Q.Pointer = {
 						if (!options.styles || !options.styles.opacity) {
 							img.style.opacity = y;
 						}
-						if (o.show.initialScale !== 1) {
-							var z = 1 + (o.show.initialScale - 1) * (1 - y);
+						if (options.show.initialScale !== 1) {
+							var z = 1 + (options.show.initialScale - 1) * (1 - y);
 							var w = width * z;
 							var h = height * z;
 							img.style.width = w + 'px';
 							img.style.height = h + 'px';
-							img.style.left = point.x - w * o.hotspot.x + 'px';
-							img.style.top = point.y - h * o.hotspot.y + 'px';
+							img.style.left = point.x - w * options.hotspot.x + 'px';
+							img.style.top = point.y - h * options.hotspot.y + 'px';
 						}
-					}, o.show.duration, o.show.ease);
+					}, options.show.duration, options.show.ease);
 					if (options.hide && options.hide.after) {
 						setTimeout(function () {
 							_stopHint(img);
 						}, options.hide.after);
 					}
 				});
-			}, o.show.delay);
+			}, options.show.delay);
 		}));
 		if (!Q.Pointer.hint.addedListeners) {
 			Q.Pointer.stopHintsIgnore = true;
@@ -12435,8 +12456,7 @@ function _stopHint(img, container) {
 		Q.instanceOf(container, Element)
 		&& !container.contains(img.target)
 	);
-	if ((img.timeout !== false && img.dontStopBeforeShown)
-	|| outside) {
+	if ((img.timeout !== false && img.dontStopBeforeShown) || outside) {
 		return img;
 	}
 	if (img.audio) {
@@ -14126,7 +14146,10 @@ Q.loadUrl.fillSlots = function _Q_loadUrl_fillSlots (res, url, options) {
 		} else if (elem = o.slotContainer(name, res)) { 
 			try {
 				Q.replace(elem, res.slots[name], options);
-				if (pos = Q.getObject(['Q', 'scroll', url], elem)) {
+				if (!o.dontRestoreScrollPosition['']
+				&& !o.dontRestoreScrollPosition[url]
+				&& (pos = Q.getObject(['Q', 'scroll', url], elem))
+				) {
 					elem.scrollLeft = pos.left;
 					elem.scrollTop = pos.top;
 				} else {
@@ -14155,6 +14178,7 @@ Q.loadUrl.options = {
 	onLoad: new Q.Event(),
 	onActivate: new Q.Event(),
 	slotNames: [],
+	dontRestoreScrollPosition: {},
 	slotContainer: function (slotName) {
 		return document.getElementById(slotName+"_slot");
 	},

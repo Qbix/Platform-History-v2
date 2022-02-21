@@ -785,6 +785,8 @@ abstract class Db
 	 *  Defaults to '/[^A-Za-z0-9]+/'. A regexp characters that are not acceptable.
 	 *  You can also change this default using the config Db/normalize/characters
 	 * @param {integer} $numChars=233
+	 * @return {string} Returns null if $text was null, otherwise returns the normalized text
+	 * @throws {null} if $text is null
 	 */
 	static function normalize(
 		$text,
@@ -792,6 +794,9 @@ abstract class Db
 		$characters = null,
 		$numChars = 233)
 	{
+		if (!isset($text)) {
+			return null;
+		}
 		if (!isset($characters)) {
 			$characters = '/[^A-Za-z0-9]+/';
 			if (class_exists('Q_Config')) {

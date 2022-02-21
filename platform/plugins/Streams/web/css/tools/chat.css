@@ -133,6 +133,9 @@
 	line-height: 40px;
 	text-align: center;
 }
+.Streams_chat_addons .Q_listing {
+	overflow: hidden;
+}
 .Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon,
 .Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon.Q_selected {
 	overflow: hidden;

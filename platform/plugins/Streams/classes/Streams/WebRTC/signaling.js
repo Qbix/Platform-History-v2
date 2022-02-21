@@ -100,18 +100,40 @@ module.exports = function(socket,io) {
         if(_debug) console.log('DISCONNECT', nspName + '#' + socket.client.id, socket.userPlatformId, 'Streams/webrtc/' + roomId);
         io.of('/webrtc').in(roomId).clients(function (error, clients) {
             if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
+
+            var streamName = 'Streams/webrtc/' + roomId;
             if(clients.length > 0) {
+                if(_debug) console.log('DISCONNECT: clients.length > 0');
+
+                Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
+                    if(_debug) console.log('DISCONNECT: fetchOne');
+
+                    if(err || !stream) {
+                        return;
+                    }
+
+                    stream.leave({userId:socket.userPlatformId}, function () {
+                        if(_debug) console.log('DISCONNECT: LEAVE STREAM');
+                    });
+
+                });
                 return;
             }
 
-            var streamName = 'Streams/webrtc/' + roomId;
             Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
                 if(err || !stream) {
                     return;
                 }
+
                 stream.setAttribute('endTime', +Date.now());
                 stream.save();
+
+                stream.leave({userId:socket.userPlatformId}, function () {
+                    if(_debug) console.log('DISCONNECT: LEAVE STREAM');
+                });
                 if ([false, "false"].includes(stream.getAttribute('resumeClosed')) && (stream.getAttribute('closeManually') == null || [false, "false"].includes(stream.getAttribute('closeManually')))) {
+                    if(_debug) console.log('DISCONNECT: Q.plugins.Streams.fetchOne: CLOSE');
+
                     Q.plugins.Streams.close(socket.userPlatformId, roomPublisherId, streamName);
                 }
             });

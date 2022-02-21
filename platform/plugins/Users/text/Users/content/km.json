@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "ចូល",
-        "LogOut": "ចាកចេញ"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "កំណត់ {{1}} ជាបឋមរបស់ខ្ញុំ {{2}}",
-        "ChoosePassPhrase": "ជ្រើសរើស <strong>ឃ្លាសម្ងាត់<\/strong> ដើម្បីចូលជាមួយ។ <br> ឃ្លាសាមញ្ញដែលមានពាក្យពីរបីដែលអ្នកនឹងចងចាំយ៉ាងងាយស្រួល។",
-        "ChoosePassPhraseSeeSuggestions": "ជ្រើសរើស <strong>ឃ្លាសម្ងាត់<\/strong> ល្អដើម្បីការពារគណនីរបស់អ្នក។ មើលសំណើសម្រាប់គំនិតមួយចំនួន។",
-        "LogOutAndTryAgain": "ចេញហើយព្យាយាមម្តងទៀត",
-        "IfYouFeel": "ប្រសិនបើអ្នកមានអារម្មណ៍ថាមានអ្វីមួយមិនប្រក្រតីអ្នកអាចធ្វើបាន",
-        "SetIdentifierButtonTitle": "សារ​ឡើងវិញ"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "ចាប់ផ្ដើម"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "ចាប់ផ្ដើម",
-        "Authorize": "អនុញ្ញាត",
-        "TermsLabel": "ខ្ញុំបានអាននិងយល់ព្រម <br> ទៅ {{link}}",
-        "TermsTitle": "លក្ខខណ្ឌ",
-        "mustAgree": "ដំបូងអ្នកត្រូវតែយល់ព្រមនឹងលក្ខខណ្ឌ។"
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "ខ្ញុំទទួលយក {{link}}",
-        "TermsTitle": "លក្ខខណ្ឌ"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "ការអនុញ្ញាត",
-        "prompt": "តើអ្នកចង់បើកការជូនដំណឹងទេ? អ្នកនឹងទទួលបានព័ត៌មានថ្មីៗអំពីអ្វីដែលអ្នកយកចិត្តទុកដាក់។",
-        "yes": "បាទ",
-        "no": "ទេ",
-        "WelcomePleaseVerifyEmail": "ស្វាគមន៍! សូមផ្ទៀងផ្ទាត់អាសយដ្ឋានអ៊ីមែលរបស់អ្នក។",
-        "WelcomeVerifyEmail": "ស្វាគមន៍! ផ្ទៀងផ្ទាត់អាសយដ្ឋានអ៊ីមែលរបស់អ្នក។",
-        "ForgetPass": "ហេតើអ្នកភ្លេចឃ្លាសម្ងាត់របស់អ្នកទេ?",
-        "PassphraseSaved": "ឃ្លាឆ្លងកាត់របស់អ្នកត្រូវបានរក្សាទុក។",
-        "IdentifierActivated": "{{type}} របស់អ្នកត្រូវបានធ្វើឱ្យសកម្ម។",
-        "CompletedActivation": "អ្នកបានបញ្ចប់សកម្មភាពអ្នកប្រើប្រាស់។",
-        "CompletedActivationLogIn": "អ្នកបានបញ្ចប់សកម្មភាពអ្នកប្រើប្រាស់។ ព្យាយាមចូលឥឡូវនេះ។"
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "ជ្រើសរើសទំនាក់ទំនង",
-            "CreateAccount": "+ ទំនាក់ទំនងថ្មី",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create រកមិនឃើញ",
-            "SearchByName": "ស្វែងរកតាមឈ្មោះ",
-            "EmptyContacts": "រកមិនឃើញទំនាក់ទំនង ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "ជ្រើសរើសទំនាក់ទំនងរបស់ {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "សូមជ្រើសស្លាក។",
-        "inviteUser": "អញ្ជើញអ្នកប្រើ",
-        "selectRole": "ជ្រើសរើសតួនាទី",
-        "inviteRole": "អញ្ជើញ {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "បានជ្រើសរើសភាសាមិនត្រឹមត្រូវ",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "សូមស្វាគមន៍",
-        "directions": "បង្កើតគណនីឬចូល។",
-        "directionsNoRegister": "ចូលប្រសិនបើអ្នកមានគណនី។",
-        "goButton": "ទៅ",
-        "passphrase": "បញ្ចូលឃ្លាឆ្លងកាត់របស់អ្នក៖",
-        "loginButton": "ចាប់ផ្តើម",
-        "registerButton": "ចាប់ផ្តើម",
-        "resendButton": "ផ្ញើសារធ្វើឱ្យសកម្ម",
-        "forgot": "ភ្លេចទេ?",
-        "resendConfirm": "តើអ្នកចង់ផ្ញើសារដើម្បីកំណត់ឃ្លាសម្ងាត់របស់អ្នកឡើងវិញទេ?",
-        "resendSuccess": "ពិនិត្យមើលសារដើម្បីកំណត់ឃ្លាសម្ងាត់របស់អ្នកឡើងវិញ",
-        "resendClose": "បិទ",
-        "noPassphrase": "មុនពេលអ្នកអាចចូលបានអ្នកត្រូវកំណត់ឃ្លាឆ្លងកាត់ដោយចុចលើតំណភ្ជាប់នៅក្នុងសារសកម្មរបស់អ្នក។",
-        "notVerified": "អ្នកត្រូវតែផ្ញើសារធ្វើឱ្យសកម្មដោយខ្លួនឯងដើម្បីចូល។",
-        "emailExists": "តើអ្នកបានព្យាយាមចុះឈ្មោះជាមួយអ៊ីមែលនេះពីមុនទេ? បើដូច្នេះមែនសូមពិនិត្យប្រអប់ទទួលរបស់អ្នកដើម្បីធ្វើ ឲ្យ គណនីរបស់អ្នកសកម្ម។ <a href='#resend' class='Q_button Users_activation_resend'>ចុចដើម្បីផ្ញើសារឡើងវិញ<\/a>",
-        "mobileExists": "តើអ្នកបានព្យាយាមចុះឈ្មោះជាមួយលេខទូរស័ព្ទនេះពីមុនទេ? បើដូច្នេះមែនសូមពិនិត្យសាររបស់អ្នកដើម្បីធ្វើឱ្យគណនីរបស់អ្នកសកម្ម។ <a href='#resend' class='Q_button Users_activation_resend'>ចុចដើម្បីផ្ញើសារឡើងវិញ<\/a>",
-        "usingOther": "ឬអ្នកអាចធ្វើបាន",
-        "prompt": "ជ្រើសឈ្មោះអ្នកប្រើ៖",
-        "newUser": "ឬបង្កើតគណនីថ្មី",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "អ៊ីមែលឬទូរស័ព្ទចល័តរបស់អ្នក",
-            "mobile": "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក #",
-            "email": "សូម​ប​ញ្ជូ​ល​អាសយដ្ឋាន​អ៊ី​ម៊ែ​ល​របស់​អ្នក",
-            "username": "ឈ្មោះ​អ្នកប្រើប្រាស់"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "ទទួលយកល័ក្ខខ័ណ្ឌនៃសេវាកម្មមែនទេ?",
-        "facebookNoEmail": "គណនីហ្វេសប៊ុករបស់អ្នកបាត់អាសយដ្ឋានអ៊ីមែលដែលបានបញ្ជាក់។ ចូលតាមរបៀបដើម។",
-        "picTooltip": "អ្នកអាចប្តូររូបភាពនេះនៅពេលក្រោយ",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "ចូលទៅ {{host}} នៅពេល {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "បញ្ជូនបន្តទៅកាបូប",
-                "content": "នៅពេលអ្នកបិទប្រអប់នេះអ្នកនឹងត្រូវយកទៅកាបូបរបស់អ្នក។ បន្ទាប់ពីអ្នកចូលហើយត្រលប់ទៅទំព័រនេះវិញ។"
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "បន្ថែមវិធីដើម្បីចូល",
-        "sendMessage": "ផ្ញើសារធ្វើឱ្យសកម្ម",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "បញ្ចូល # ឬអ៊ីមែលតាមទូរស័ព្ទរបស់អ្នក",
-            "mobile": "បញ្ចូលលេខទូរស័ព្ទរបស់អ្នក",
-            "email": "សូម​ប​ញ្ជូ​ល​អាសយដ្ឋាន​អ៊ី​ម៊ែ​ល​របស់​អ្នក",
-            "username": "ឈ្មោះ​អ្នកប្រើប្រាស់"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{៩៩៩}} គណនី",
-        "areUsing": "អ្នកកំពុងប្រើ {{platform}} ជា",
-        "noLongerUsing": "អ្នកមិនត្រូវបានភ្ជាប់ទៅ {{platform}} ទៀតទេ",
-        "doAuth": "ចូលជាមួយគណនីនេះ",
-        "doSwitch": "ប្តូរទៅគណនីនេះ"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "ម្ចាស់",
-        "Admin": "រដ្ឋបាល",
-        "Member": "សមាជិក",
-        "Guest": "ភ្ញៀវ",
-        "Host": "ម្ចាស់ផ្ទះ"
-    },
-    "analytics": {
-        "Title": "វិភាគ",
-        "Daily": "ប្រចាំថ្ងៃ",
-        "Weekly": "ប្រចាំសប្តាហ៍",
-        "Monthly": "ប្រចាំខែ",
-        "Application": "ការដាក់ពាក្យ",
-        "Pages": "ទំព័រ",
-        "Services": "សេវាកម្ម",
-        "Faq": "សំណួរគេសួរញឹកញាប់",
-        "WeekDays": "ថ្ងៃនៃសប្តាហ៍"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

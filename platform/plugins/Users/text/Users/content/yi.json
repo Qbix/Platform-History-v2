@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "צייכן אריין",
-        "LogOut": "קלאָץ אויס"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "שטעלן {{1}} ווי מיין ערשטיק {{2}}",
-        "ChoosePassPhrase": "קלייַבן אַ <strong>פאָרן פראַזע<\/strong> צו קלאָץ אין מיט. <br> א פּשוט פראַזע קאַנסיסטינג פון אַ ביסל ווערטער אַז איר וועט לייכט געדענקען.",
-        "ChoosePassPhraseSeeSuggestions": "קלייַבן אַ גוט <strong>פּאַסן פראַזע<\/strong> צו באַשיצן דיין חשבון. זען די פֿירלייגן פֿאַר עטלעכע געדאנקען.",
-        "LogOutAndTryAgain": "קלאָץ אויס און פּרובירן ווידער",
-        "IfYouFeel": "אויב איר פילן עפּעס איז פאַלש, איר קענען",
-        "SetIdentifierButtonTitle": "אָנהייב איבער"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "הייב אהן"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "הייב אהן",
+        "GetStarted": "Get Started",
         "Authorize": "Authorize",
-        "TermsLabel": "איך האָבן לייענען און שטימען <br> צו די {{link}}",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
         "TermsTitle": "Terms",
-        "mustAgree": "ערשטער איר מוזן שטימען צו די טערמינען."
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "איך אָננעמען די {{link}}",
+        "TermsLabel": "I accept the {{link}}",
         "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "דערלויבעניש",
-        "prompt": "ווילן צו געבן נאָוטאַפאַקיישאַנז? איר וועט באַקומען פאַקטיש-צייַט דערהייַנטיקונגען וועגן זאכן איר זאָרג וועגן.",
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
         "yes": "Yes",
-        "no": "ניין",
-        "WelcomePleaseVerifyEmail": "באַגריסונג! ביטע באַשטעטיקן דיין בליצפּאָסט אַדרעס.",
-        "WelcomeVerifyEmail": "באַגריסונג! באַשטעטיקן דיין בליצפּאָסט אַדרעס.",
-        "ForgetPass": "היי, האָט איר פאַרגעסן דיין פּאַסספראַס?",
-        "PassphraseSaved": "דיין פאספראזע איז געראטעוועט געווארן",
-        "IdentifierActivated": "דיין {{type}} איז אַקטיווייטיד.",
-        "CompletedActivation": "איר האָט געענדיקט באַניצער אַקטאַוויישאַן.",
-        "CompletedActivationLogIn": "איר האָט געענדיקט באַניצער אַקטאַוויישאַן. פּרוּווט לאָגינג אין איצט."
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "קלייַבן קאָנטאַקט",
-            "CreateAccount": "+ ניו קאָנטאַקט",
-            "CreateAccountNotFound": "Q.Uersers.Cordova.UI.create ניט געפֿונען",
-            "SearchByName": "זוכן דורך נאָמען",
-            "EmptyContacts": "קאנטאקטן זענען נישט געפונען ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "אויסקלייַבן קאָנטאַקט פון {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "ביטע אויסקלייַבן פירמע.",
-        "inviteUser": "Invite User",
-        "selectRole": "סעלעקט ראָלע",
-        "inviteRole": "לאַדן {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "אומלעגאַלע שפּראַך אויסגעקליבן",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "באַגריסונג",
-        "directions": "שאַפֿן אַ חשבון, אָדער קלאָץ אין.",
-        "directionsNoRegister": "קלאָץ אין אויב איר האָט אַ חשבון.",
-        "goButton": "גיי",
-        "passphrase": "אַרייַן דיין פאָרן פראַזע:",
-        "loginButton": "הייב אהן",
-        "registerButton": "הייב אהן",
-        "resendButton": "שיקן אַקטיוואַטיאָן אָנזאָג",
-        "forgot": "פארגעסן עס?",
-        "resendConfirm": "צי איר ווילן צו שיקן אַ אָנזאָג צו באַשטעטיק דיין פּאַסספראַסע?",
-        "resendSuccess": "קוק פֿאַר אַ אָנזאָג צו באַשטעטיק דיין פּאַסספראַסע",
-        "resendClose": "נאָענט",
-        "noPassphrase": "איידער איר קענען קלאָץ אין, איר מוזן שטעלן אַ פראַזע דורך געבן אַ קליק דעם לינק אין דיין אַקטאַוויישאַן אָנזאָג.",
-        "notVerified": "איר מוזן שיקן זיך אַ אַקטאַוויישאַן אָנזאָג צו קלאָץ אין.",
-        "emailExists": "האָבן איר געפרוווט צו פאַרשרייַבן מיט דעם E- בריוו פריער? אויב אַזוי, טשעק דיין ינבאָקס צו אַקטאַווייט דיין אקאונט. <a href='#resend' class='Q_button Users_activation_resend'>גיט צו שיקט דעם אָנזאָג ווידער<\/a>",
-        "mobileExists": "האָבן איר געפרוווט צו פאַרשרייַבן מיט דעם רירעוודיק נומער פריער? אויב אַזוי, טשעק דיין SMS צו אַקטאַווייט דיין אקאונט. <a href='#resend' class='Q_button Users_activation_resend'>גיט צו שיקט דעם אָנזאָג ווידער<\/a>",
-        "usingOther": "אָדער איר קענען",
-        "prompt": "קלויב אויס א באנוצער נאמען:",
-        "newUser": "אָדער שאַפֿן אַ נייַע אַקאַונט",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "דיין רירעוודיק # אָדער E- בריוו",
-            "mobile": "אַרייַן דיין רירעוודיק #",
-            "email": "לייג אריין דיין אימעל אדרעס",
-            "username": "נאמען"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "אָננעמען די תּנאָים פון סערוויס?",
-        "facebookNoEmail": "אין דיין פאַסעבאָאָק חשבון פעלנדיק אַ באשטעטיקט E- בריוו אַדרעס. סימפּלי קלאָץ אין די געבוירן וועג.",
-        "picTooltip": "איר קענט טוישן דעם בילד שפּעטער",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "קלאָץ אין צו {{host}} אין צייט {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "רידערעקטינג צו וואַללעט",
-                "content": "אַמאָל איר פאַרמאַכן דעם דיאַלאָג, איר וועט זיין גענומען צו דיין בייַטל. נאָך איר צייכן אין, צוריקקומען צו דעם בלאַט."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "לייג אַ וועג צו קלאָץ אין",
-        "sendMessage": "שיקן אַקטיוואַטיאָן אָנזאָג",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "אַרייַן דיין רירעוודיק # אָדער E- בריוו",
-            "mobile": "אַרייַן דיין רירעוודיק נומער",
-            "email": "לייג אריין דיין אימעל אדרעס",
-            "username": "נאמען"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} אקאונט",
-        "areUsing": "איר נוצן {{platform}} ווי",
-        "noLongerUsing": "איר זענט ניט מער פארבונדן צו {{platform}} ווי",
-        "doAuth": "קלאָץ אין מיט דעם חשבון",
-        "doSwitch": "באַשטימען צו דעם חשבון"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "באַזיצער",
-        "Admin": "אַדמיניסטראַטאָר",
-        "Member": "מיטגליד",
-        "Guest": "גאַסט",
-        "Host": "באַלעבאָס"
-    },
-    "analytics": {
-        "Title": "אַנאַליטיקס",
-        "Daily": "טעגלעך",
-        "Weekly": "וואכנבלאט",
-        "Monthly": "כוידעשלעך",
-        "Application": "אַפּפּליקאַטיאָן",
-        "Pages": "בלעטער",
-        "Services": "באַדינונגען",
-        "Faq": "FAQ",
-        "WeekDays": "וואָך טעג"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

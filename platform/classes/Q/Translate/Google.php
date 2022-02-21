@@ -14,6 +14,7 @@ class   Q_Translate_Google {
 		$locale = count($parts) > 1 ? $parts[1] : null;
 		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
+			var_dump($toLang);
 			if (($toLang === $fromLang) && $this->parent->options['out']) {
 				$res = $in;
 			}
@@ -32,8 +33,10 @@ class   Q_Translate_Google {
 					continue;
 				}
 			}
-			foreach ($localeNames as $localeName) {
-				$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+			if (isset($this->parent->options['locales'])) {
+				foreach ($localeNames as $localeName) {
+					$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+				}
 			}
 		}
 	}

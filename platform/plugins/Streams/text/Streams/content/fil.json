@@ -7,10 +7,11 @@
         "Streams\/invitedMe": "Sino ang nag-imbita sa akin",
         "AreYouAgree": "Sumasang-ayon ka ba?",
         "Yes": "Oo",
-        "No": "Hindi"
+        "No": "Hindi",
+        "DoYouAgree": "Sumasang-ayon ka ba?"
     },
     "interests": {
-        "Filter": "Ano ang iyong kinaliligayahan?",
+        "Filter": "Ano ang iyong mga interes?",
         "CanAdd": "Kung hindi mo pa rin mahanap ang iyong hinahanap, maaari kang magdagdag ng bagong interes sa ibaba:",
         "TrySynonyms": "Hindi mo ba nakikita ito? Subukan ang ilang mga kasingkahulugan.",
         "AddUnderCategory": "Idagdag sa ilalim ng kategorya ...",
@@ -189,7 +190,8 @@
             "youStoppedLive": "Itinigil mo ang pagbo-broadcast ng tawag na ito sa custom na RTMP",
             "sbStartedLiveStreaming": "{{userName}} nagsimula nang live",
             "sbStoppedLiveStreaming": "{{userName}} ay natapos nang live",
-            "liveStopped": "Nagkaroon ng error habang nagpapadala ng video sa endpoint"
+            "liveStopped": "Nagkaroon ng error habang nagpapadala ng video sa endpoint",
+            "forceDisconnectingImmediately": "Nadiskonekta ka ng isang host"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -221,7 +223,9 @@
             "start": "Magsimula",
             "stop": "Tumigil ka",
             "streamingSettings": "Mga setting",
-            "streamToRTMP": "Stream sa custom na RTMP"
+            "streamToRTMP": "Stream sa custom na RTMP",
+            "startBroadcasting": "Simulan ang pagsasahimpapawid",
+            "broadcastingInProgress": "Ang pagsasahimpapawid ay isinasagawa"
         },
         "participantsPopup": {
             "disconnect": "Idiskonekta",

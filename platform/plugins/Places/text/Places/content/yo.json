@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "laarin {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "mita",
-        "meters": "mita",
+        "meter": "meter",
+        "meters": "meters",
         "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "maili",
-        "miles": "maili",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "ẹsẹ",
-        "feet": "ẹsẹ",
+        "foot": "foot",
+        "feet": "feet",
         "inches": "inches"
     },
     "location": {
-        "interested": "Mo nifẹ si awọn nkan ti n ṣẹlẹ laarin {{select}} ti",
-        "update": "Ṣe imudojuiwọn Ipo mi",
-        "set": "Ṣeto Ipo mi",
-        "prompt": "{{ClickOrTap}} nibi lati<br> ṣeto rẹ<br> ipo",
-        "myCurrentLocation": "Ipo mi lọwọlọwọ",
-        "enterAddress": "Tẹ adirẹsi sii",
-        "enterPostcode": "Jọwọ tẹ koodu ifiweranṣẹ \/ koodu iwọle rẹ sii",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Fi Ipo sii",
-            "title": "Ipo Tuntun",
-            "nameYourLocation": "Lorukọ ipo rẹ"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Ṣe fipamọ ipo yii bi?",
-            "message": "Ṣe o gbero lati tun lo ipo yii ni ọjọ iwaju?",
-            "ok": "Bẹẹni",
-            "cancel": "Rara"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Lorukọ ipo yii",
-            "placeholder": "Ile, Iṣẹ abbl.",
-            "ok": "Fipamọ"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Yan Ibi"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Eyikeyi agbegbe inu ipo yii?",
-        "newArea": "Agbegbe tuntun",
-        "promptTitle": "Tẹ orukọ sii fun agbegbe naa:",
-        "absent": "Jọwọ ṣeto agbegbe",
-        "error": "Aṣiṣe",
-        "exist": "Agbegbe ti wa tẹlẹ",
-        "addNewArea": "Fi agbegbe titun kun",
-        "add": "Fikun -un"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "akojọpọ awọn ipo",
-            "displayType": "Awọn ipo"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Ṣe aṣoju ile kan, ibi isere, ọkọ oju omi, itura, abbl.",
-            "displayType": "Ipo"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Ṣe aṣoju agbegbe laarin ipo kan, gẹgẹ bi yara tabi suite",
-            "displayType": "Agbegbe"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Ṣe aṣoju ilẹ ni ile kan tabi ọkọ oju omi",
-            "displayType": "Ilẹ -ilẹ"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Ṣe aṣoju iwe ni ile kan tabi ọkọ oju omi",
-            "displayType": "Ọwọn"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Ẹka fun awọn nkan laarin ijinna kan ti geohash kan",
-            "displayType": "Nitosi awọn aaye"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Ẹka fun awọn nkan laarin ijinna kan ti geohash, ibaamu iwulo kan",
-            "displayType": "Awọn ibi anfani"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

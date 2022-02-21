@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Anyar Item"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Wong sing diundang",
-        "Streams\/invitedMe": "Sapa sing ngajak aku",
-        "AreYouAgree": "Apa sampeyan setuju?",
-        "Yes": "Nggih",
-        "No": "Ora"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Apa sampeyan seneng?",
-        "CanAdd": "Yen sampeyan isih ora bisa nemokake apa sing dikarepake, sampeyan bisa nambah kapentingan anyar ing ngisor iki:",
-        "TrySynonyms": "Ora weruh? Coba sawetara sinonim.",
-        "AddUnderCategory": "Tambah miturut kategori ...",
-        "Other": "Liyane",
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
         "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Pesen dikirim kanggo review admin. Tunyuk maneh kanggo mbukak.",
-        "noOneSaid": "Ora ana sing ngomong apa-apa",
-        "closeChatButton": "Nutup chatting",
-        "closeChatConfirmTitle": "Tutup chatting iki?",
-        "closeChatConfirm": "Apa sampeyan yakin arep nutup chatting iki?",
-        "closeChatConfirmYes": "Ya",
-        "closeChatConfirmNo": "Ora Ana",
-        "earlierComments": "komentar sadurungé",
-        "Subscribed": "Kabar Bisu",
-        "Unsubscribed": "Entuk Kabar",
-        "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo melu ing obrolan iki.",
-        "startedConversation": "miwiti pacelathon",
-        "RealTimeCall": "Telpon Real Time",
-        "SearchByName": "Telusuri miturut jeneng",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} ngunjungi obrolan",
-            "Join": "{{displayName}} gabung ing obrolan",
-            "Leave": "{{displayName}} ninggalake obrolan",
-            "RelatedTo": "{{displayName}} miwiti {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Pesen {{& message.fields.type}} kanggo {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ngandika:",
-        "Streams\/changed": "Owah-owahan ing {{stream.fields.title}}",
-        "Streams\/invite": "Sampeyan diundang menyang {{& stream.fields.title}}",
-        "Streams\/announcement": "Woro-woro ing {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ngowahi akses stream",
-        "Streams\/chat\/edit": "Pesen ngobrol disunting",
-        "Streams\/chat\/remove": "Pesen chatting dibusak",
-        "Streams\/closed": "{{stream.fields.title}} wis ditutup",
-        "Streams\/task\/progress": "Perkembangan digawe ing {{stream.fields.title}}",
-        "Streams\/task\/complete": "Tugas rampung: {{stream.fields.title}}",
-        "Streams\/task\/error": "Kesalahan sajrone: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mlebu pesen",
-        "Streams\/relatedTo\/Streams\/call": "Telpon Anyar Diwiwiti ing {{toTitle}}",
-        "Streams\/relatedTo\/*": "{{relationDisplayType}} ing {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ditambahake ing {{toTitle}} minangka {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} sampeyan nyebutake komentar",
-        "Streams\/call": "{{displayName}} miwiti panggilan nyata-wektu",
-        "ManageEmailSubscriptions": "ngatur langgananku email",
-        "IfUnsubscribe": "Yen sampeyan pengin nggawe langganan"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} ngundang sampeyan menyang {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Pilih saka Kontak",
-            "chooseAgainFromContacts": "Pilih Maneh saka Kontak",
-            "inviteSelectedContacts": "Ngundang Kontak sing Dipilih",
-            "selectFromContacts": "Pilih Saka Kontak",
-            "photo": "Njupuk foto",
-            "photoInstruction": "Yen wong sing maca kode QR sampeyan ana ing ngarepe sampeyan, njupuk potret saka wong-wong mau",
-            "to": "Kanggo: {{Stream Title}}",
-            "go": "Tindak",
-            "title": "Ngundang",
-            "placeholder": "Nomer seluler utawa alamat email",
-            "orInvite": "Utawa ngajak wong nganggo:",
-            "QR": "{{ClickOrTap}} kanggo ngasilake kode QR",
-            "QRtitle": "Pindai kode QR iki",
-            "QRscanned": "Padha nyawang!",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
             "byEmail": "Email",
-            "byText": "Teks",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} yen kode wis dipindai",
-            "copyLink": "{{ClickOrTap}} kanggo nyalin link ngajak",
-            "userChooserPlaceholder": "Telusuri miturut jeneng"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Eh, cek iki metu",
-            "PleaseVisitLink": "Delengen pranala iki:",
-            "InvitingYou": "Aku ngajak sampeyan menyang {{title}}",
-            "HasInvitedYou": "{{displayName}} wis ngundang sampeyan menyang {{title}}",
-            "HasMentionedYou": "{{displayName}} wis nyebutake sampeyan ing &quot;{{title}}&quot;",
-            "YOUAREINVITED": "Sampeyan wis ING!",
-            "AcceptInvite": "Ditampa Ngundang"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Sampeyan wis diundang menyang {{title}}. Monggo tutul {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Sampeyan wis diundang. {{ClickOrTap}} ing kene kanggo nampa lan gabung."
-        },
-        "command": "Ngundang",
-        "youCanNowPaste": "Sampeyan saiki bisa nempelake link iki ing endi wae kanggo ngundang wong"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Ngajak dikirim saka nomer kita, sing durung kenal kanca-kanca. Tindakake karo teks cepet supaya dheweke ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
-            "confirm": "Ngajak dikirim saka nomer kita, sing durung kenal kanca-kanca. Apa sampeyan pengin ngetutake kanthi cepet supaya bisa ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
-            "check": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa sms lan klik link!",
-            "CheckYourMobile": "Mangga priksa SMS lan tindakake pandhuan!"
-        },
-        "email": {
-            "alert": "Ngundang dikirim saka domain kita, sing durung kenal kanca-kanca. Tindakake karo teks cepet supaya dheweke ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
-            "confirm": "Ngundang dikirim saka domain kita, sing durung kenal kanca-kanca. Apa sampeyan pengin ngetutake kanthi cepet supaya bisa ngerti undhangan saka sampeyan, nyuwun supaya bisa ngeklik link kasebut.",
-            "subject": "Apa sampeyan njaluk undangan?",
-            "body": "Eh, aku mung ngirim sampeyan ngajak menyang app {{app}}. Mangga dipriksa email lan klik link kasebut!",
-            "CheckYourEmail": "Mangga priksa email sampeyan lan tindakake pandhuan!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Ngaktifake Mikropon",
-            "cameraTitle": "Ngaktifake kamera",
-            "cameraAndMicrophoneTitle": "Ngaktifake Kamera lan Mikropon",
-            "dialogTitle": "Nyambung",
-            "microphoneBtn": "Aktifake Mikropon",
-            "cameraBtn": "Aktifake Kamera",
-            "cameraAndMicrophoneBtn": "Aktifake Kamera lan Mikropon"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Pandhuan",
-            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Kanggo nggunakake, tututi langkah-langkah iki:",
-            "point1": "Menyang &quot;Setelan&quot; -&gt; &quot;Lanjut&quot; -&gt; &quot;Kebijakan lan keamanan&quot; -&gt; &quot;Setelan Situs&quot; -&gt; &quot;Kamera&quot; utawa &quot;Setelan Situs&quot; -&gt; &quot;Mikropon&quot;",
-            "point2": "Mbusak {{hostname}} saka dhaptar &quot;Blok&quot;"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Pandhuan",
-            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Monggo ulang kaca iki lan konfirmasi akses menyang {{kind}} kanggo konperensi."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Pandhuan",
-            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Kanggo nggunakake, tututi langkah-langkah iki:",
-            "point1": "Menyang Setelan Android",
-            "point2": "Bukak &quot;Aplikasi &amp; kabar&quot;",
-            "point3": "Temokake &quot;{{communityName}}&quot; lan mbukak",
-            "point4": "Tutul Ijin",
-            "point5": "Ngaktifake {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Pandhuan",
-            "permissionDenied": "Ijin kanggo ditolak {{kind}}. Kanggo nggunakake, tututi langkah-langkah iki:",
-            "point1": "Pindhah menyang setelan iOS sampeyan",
-            "point2": "Bukak &quot;Kebijakan&quot;",
-            "point3": "Temokake {{kind}} lan mbukak",
-            "point4": "Temokake &quot;{{communityName}}&quot; lan aktifake"
-        },
-        "notices": {
-            "youJoinedRoom": "Sampeyan melu kamar",
-            "joining": "Gabung: {{userName}}",
-            "sbLeftRoom": "{{userName}} metu saka kamar",
-            "youLeftRoom": "Sampeyan metu saka ruangan",
-            "codeCopied": "Sampeyan metu saka ruangan",
-            "sbBeganFbLive": "{{userName}} wiwit nyebarake telpon iki ing Facebook",
-            "sbStoppedFbLive": "{{userName}} mandheg nyebarake siaran ing Facebook iki",
-            "youBeganFbLive": "Sampeyan miwiti nyebarake telpon iki ing Facebook",
-            "youStoppedFbLive": "Sampeyan mandheg nyebarake telpon iki ing Facebook",
-            "linkCopiedToCb": "Link disalin menyang clipboard",
-            "codeCopiedToCb": "Kode sing disalin menyang clipboard",
-            "userHasNoVideo": "Peserta ora duwe video",
-            "openInBrowserAlert": "Bukak link ing browser Safari kanggo melu konferensi kasebut.",
-            "youBeganVideoRecording": "Sampeyan miwiti ngrekam konferensi iki",
-            "youStoppedVideoRecording": "Sampeyan mandheg ngrekam konferensi iki",
-            "switchingRoom": "Ngalih kamar ...",
-            "forceDisconnecting": "Sampeyan bakal pedhot sajrone 5 detik",
-            "youStartedLive": "Sampeyan wiwit nyiarake panggilan iki kanggo RTMP khusus",
-            "youStoppedLive": "Sampeyan mandheg nyiarake panggilan iki menyang RTMP khusus",
-            "sbStartedLiveStreaming": "{{userName}} diwiwiti langsung",
-            "sbStoppedLiveStreaming": "{{userName}} rampung urip",
-            "liveStopped": "Ana kesalahan nalika ngirim video menyang endpoint"
-        },
-        "settingsPopup": {
-            "webCamera": "Kamera Web",
-            "screenSharing": "Nuduhake layar",
-            "shareAnotherScreen": "Nuduhake layar liyane",
-            "turnOffCameras": "Pateni kabeh kamera",
-            "startFBLive": "Miwiti Facebook Livestream",
-            "stopFBLive": "Mungkasi Facebook Livestream",
-            "fbLiveTitle": "Judul Urip",
-            "fbLiveDescription": "Katrangan Langsung",
-            "fbOnlyMeLiveAccess": "Mung kula",
-            "fbFriendsAccess": "Kanca",
-            "fbPublicAccess": "Publik",
-            "fbStartLive": "Go Urip",
-            "fbStopLive": "Pungkasan Urip",
-            "fbEmbedCode": "Embed",
-            "copy": "Nyalin",
-            "turnOffVideo": "Pateni enggo bareng kamera \/ layar",
-            "turnOffScreenSharing": "Pateni enggo bareng layar",
-            "cameraIsTurnedOff": "Kamera dipateni",
-            "startRecording": "Miwiti Rekam",
-            "stopRecording": "Mungkasi Rekam",
-            "recordingInProgress": "Ngrekam saiki",
-            "publishOnTimeline": "Nerbitake garis wektu",
-            "publishToGroup": "Publish menyang klompok",
-            "turnOffAudioInput": "Bisu mikropon",
-            "micIsTurnedOff": "Mikropon dipateni",
-            "start": "Miwiti",
-            "stop": "Mandheg",
-            "streamingSettings": "Setelan",
-            "streamToRTMP": "Stream menyang RTMP khusus"
-        },
-        "participantsPopup": {
-            "disconnect": "Pedhot",
-            "floatingScreens": "Ngambang Ngambang",
-            "tiledScreens": "Gambar Jubin",
-            "loudestExceptMe": "Paling Ora Kajaba Aku",
-            "maximizeLoudest": "Ngoptimalake Loudest",
-            "staticMaximized": "Statis Maksimal",
-            "manual": "Manual",
-            "fullScreen": "Layar Lengkap",
-            "turnOffCamera": "Singidaken video",
-            "turnOffAudio": "Audio bisu",
-            "turnOffScreenSharing": "Singidaken enggo bareng layar",
-            "turnOnCamera": "Tampilake video",
-            "turnOnAudio": "Audio sing ora umum",
-            "turnOnScreenSharing": "Tampilake nuduhake layar"
-        },
-        "notAllowedToJoinCall": "Sampeyan ora duwe idin kanggo gabung stream iki.",
-        "streamTitle": "{{1}} telpon langsung",
-        "preview": {
-            "preamble": "Rapat:",
-            "Meeting": "Rapat",
-            "MeetingEnded": "Rapat rampung"
-        },
-        "preparing": {
-            "micIsOff": "Mic ora aktif",
-            "micIsOn": "Mic urip",
-            "cameraIsOff": "Kamera dipateni",
-            "cameraIsOn": "Kamera urip",
-            "screenSharingIsOn": "Screensharing aktif",
-            "screenSharingIsOff": "Layar bareng",
-            "joinNow": "Melu Telpon"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "dikirim <em>{{message.fields.type}}<\/em> pesen menyang {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "komentar ing",
-            "in": "ing",
-            "body": "ing {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "wis dikirim menyang",
-                "byAvatar": "dening {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "nduwe {{instructions.fromDisplayType}} anyar",
-                "byAvatar": "ditambahake dening {{avatar.displayName}}"
-            },
-            "startedCallIn": "miwiti telpon mlebu"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Diundang",
-            "description": "Kothak mlebu kanggo undhangan"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Sumber",
-            "description": "stream kanggo ngatur akses menyang sumber daya lan ngirim pesen babagan nganyari"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "amarga nampa nganyari babagan kemajuan ing tugas tartamtu",
-            "displayType": "Tugas"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "kategori kanggo tugas",
-            "displayType": "Tugas"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "pengalaman umum kanggo anggota komunitas",
-            "displayType": "Pengalaman umum kanggo anggota komunitas"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "salam karo pangguna bisa ngenalake awake dhewe",
-            "displayType": "Salam"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Nomer",
-            "description": "nomer matematika"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Tanggal",
-            "description": "tanggal"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Teks",
-            "description": "awak teks"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Teks",
-            "description": "teks cilik"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Teks",
-            "description": "teks teks medium"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Alamat email",
-            "description": "alamat email"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Nomer Telpon",
-            "description": "nomer telpon"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link ing web"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Gambar",
-            "description": "gambar visual",
-            "newItem": "Tambah Gambar"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Galeri Gambar",
-            "description": "galeri gambar"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "album sing wis digandhengake macem-macem media"
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "file sing diunggah",
-            "newItem": "Tambah File"
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Klip Audio",
-            "description": "klip audio",
-            "newItem": "Tambah Audio"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Klip Video",
-            "description": "klip video",
-            "newItem": "Tambah Video"
-        },
-        "Streams\/live": {
-            "displayType": "Urip",
-            "description": "audio utawa video langsung"
-        },
-        "Streams\/category": {
-            "displayType": "Babagan",
-            "description": "kategori sing bisa uga ana aliran liyane"
-        },
-        "Streams\/participating": {
-            "displayType": "Indeks Peserta",
-            "description": "aliran kasebut ana gandhengane \/ ora ana gandhengane karo pangguna nalika pangguna gabung \/ ninggalake"
-        },
-        "Streams\/interest": {
-            "displayType": "Kepincut",
-            "description": "nggantosi minat pangguna ing topik tartamtu"
-        },
-        "Streams\/incoming": {
-            "displayType": "Mlebu",
-            "description": "tujuan kanggo pesen sing dikirim dening pangguna liyane"
-        },
-        "Streams\/chat": {
-            "displayType": "Obrolan",
-            "description": "obrolan ing antarane pangguna, kanthi sejarah"
-        },
-        "Streams\/webrtc": {
-            "displayType": "Telpon Real-Time",
-            "description": "telpon video \/ audio nyata"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/pdf": {
-            "displayType": "Dokumen PDF",
-            "description": "Dokumen PDF",
-            "newItem": "Tambah PDF"
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
+        },
+        "Streams\/live": {
+            "displayType": "Livestream",
+            "description": "live audio or video"
+        },
+        "Streams\/category": {
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
+        },
+        "Streams\/participating": {
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+        },
+        "Streams\/interest": {
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
+        },
+        "Streams\/incoming": {
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
+        },
+        "Streams\/chat": {
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
+        },
+        "Streams\/webrtc": {
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Pitakon",
-            "description": "stream pitakonan"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Wangsulan",
-            "description": "stream wangsulan"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Telpon",
-            "description": "kategori kanggo Streaming \/ webrtc",
-            "MaxRelationsExceeded": "Telpon maksimal ngluwihi"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Judhul",
-        "Subscribed": "Langganan",
-        "Participants": "Peserta",
-        "AreYouSureRemoveIdentifier": "Apa sampeyan yakin ngilangi pengenal iki?",
-        "AreYouSureUnsubscribeIdentifier": "Apa sampeyan yakin nyipta identifikasi iki? Bakal mateni kabar kanggo pengenal iki.",
-        "AreYouSureUnsubscribeDevice": "Apa sampeyan yakin nggunakake langganan piranti iki? Bakal mateni kabar menyang piranti iki.",
-        "Identifiers": "Pengenal",
-        "Devices": "Piranti",
-        "Streams": "Aliran",
-        "AreYouSureRemoveParticipant": "Apa sampeyan pengin mbusak peserta iki?",
-        "RemoveParticipant": "Mbusak peserta"
-    },
     "menu": {
-        "placeholder": "judhul kaca",
-        "ModTab": "Ngowahi Item",
-        "Save": "Ngirit",
-        "Delete": "Mbusak",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Konten iki didhelikake saka sampeyan."
-    },
     "audio": {
-        "record": "Cathetan",
+        "record": "Record",
         "reset": "Reset",
-        "edit": "Sunting",
-        "title": "judhul",
-        "description": "katrangan",
-        "upload": "Unggah",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
         "link": "Link",
-        "setUrl": "Setel URL",
-        "save": "Ngirit",
-        "setClip": "Klip Potong",
-        "invalidURL": "URL ora valid",
-        "invalidFile": "File ora valid",
-        "errorNoSource": "Ora ono sumber audio",
-        "uploadLimit": "Ukuran file maksimal: {{size}}",
-        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
         "reset": "Reset",
-        "edit": "Sunting",
-        "title": "judhul",
-        "description": "katrangan",
-        "upload": "Unggah",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
         "link": "Link",
-        "setUrl": "Setel URL",
-        "save": "Ngirit",
-        "setClip": "Klip Potong",
-        "invalidURL": "URL ora valid",
-        "invalidFile": "File ora valid",
-        "errorNoSource": "Ora ana sumber video",
-        "uploadLimit": "Ukuran file maksimal: {{size}}",
-        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
         "reset": "Reset",
-        "edit": "Sunting",
-        "title": "judhul",
-        "description": "katrangan",
-        "upload": "Unggah",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
         "link": "Link",
-        "setUrl": "Setel URL",
-        "save": "Ngirit",
-        "setClip": "Klip Potong",
-        "invalidURL": "URL ora valid",
-        "invalidFile": "File ora valid",
-        "errorNoSource": "Ora ana sumber pdf",
-        "uploadLimit": "Ukuran file maksimal: {{size}}",
-        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}"
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
         "reset": "Reset",
-        "edit": "Sunting",
-        "title": "judhul",
-        "description": "katrangan",
-        "upload": "Unggah",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
         "link": "Link",
-        "setUrl": "Setel URL",
-        "save": "Ngirit",
-        "setClip": "Klip Potong",
-        "invalidURL": "URL ora valid",
-        "invalidFile": "File ora valid",
-        "errorNoSource": "Ora ana sumber gambar",
-        "uploadLimit": "Ukuran file maksimal: {{size}}",
-        "errorFileSize": "Nuwun sewu, nanging file dadi gedhe banget.<br> Ukuran file maksimal yaiku {{size}}",
-        "uploadedImage": "Gambar sing diunggah",
-        "imageTitle": "Judhul gambar"
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Pitakon",
-        "Answers": "Wangsulan",
-        "AnswerQuestion": "Wangsulan Pitakon",
-        "SetYourAnswer": "Tulung jawaben pitakonane",
-        "NewQuestion": "Pitakon Anyar",
-        "NewAnswer": "Wangsulan Anyar",
-        "AnswerDetails": "Rincian Wangsulan",
-        "answerOption": "Pilihan",
-        "answerOptionExclusive": "Eksklusif",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "wangsulan gratis ...",
-        "SaveQuestion": "Simpen Pitakon",
-        "SaveAnswer": "Simpen Wangsulan",
-        "AddAnotherAnswer": "Tambah wangsulan liyane",
-        "ErrorAnswers": "Tulung tambahake malah siji wangsulan",
-        "AlreadyAnswered": "Wis mangsuli",
-        "TitlePlaceholder": "Ketik pitakonan sampeyan",
-        "ContentPlaceholder": "Sijine informasi tambahan ing kene kanggo mbantu wong mangsuli",
-        "ErrorTitle": "Pitakon dibutuhake",
-        "Placeholder": "Papan panggonan"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Pengalaman Anyar",
-        "DefineTitle": "Temtokake judhul",
-        "Create": "Gawe"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Telpon",
-        "MaxCalls": "Telpon maksimal",
-        "Update": "Nganyari",
-        "NoCallsYet": "Durung ono telpon",
-        "CallReasonTitle": "Apa sing diarani telpon iki?",
-        "WaitingRoom": "Ruang Ngenteni"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

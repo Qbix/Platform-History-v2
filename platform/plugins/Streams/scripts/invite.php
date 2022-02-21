@@ -3,10 +3,9 @@ $FROM_APP = defined('RUNNING_FROM_APP'); //Are we running from app or framework?
 
 #Arguments
 $argv = $_SERVER['argv'];
-$count = count($argv);
 
 #Usage strings
-$usage = "Usage: php {$argv[0]} " . ($FROM_APP ? '' : '<app_root> '). 'identifier [communityId [labels]]';
+$usage = "Usage: php {$argv[0]} [options] " . ($FROM_APP ? '' : '<app_root> '). 'identifier [communityId [labels]]';
 
 if(!$FROM_APP) {
 	$usage.=PHP_EOL.PHP_EOL.'<app_root> must be a path to the application root directory';
@@ -45,18 +44,24 @@ $usage
 
 EOT;
 
-#Is it a call for help?
+// Is it a call for help?
 if (isset($argv[1]) and in_array($argv[1], array('--help', '/?', '-h', '-?', '/h')))
 	die($help);
 
-#Check primary arguments count: 2 if running /app/scripts/Q/invite.php, 3 if running /framework/scripts/invite.php
-if ($count < ($FROM_APP ? 2 : 3))
+// get all CLI options
+$longopts = array("always-send");
+$options = getopt('', $longopts, $restIndex);
+$restArgs = array_slice($argv, $restIndex);
+
+// Check primary arguments count: 2 if running /app/scripts/Q/invite.php, 3 if running /framework/scripts/invite.php
+$count = count($restArgs);
+if ($count < ($FROM_APP ? 1 : 2))
 	die($usage);
 
-#Read primary arguments
-$LOCAL_DIR = $FROM_APP ? APP_DIR : $argv[1];
+// Read primary arguments
+$LOCAL_DIR = $FROM_APP ? APP_DIR : $restArgs[0];
 
-#Check paths
+// Check paths
 if (!file_exists($Q_filename = Q_DIR . DIRECTORY_SEPARATOR . 'scripts' . DIRECTORY_SEPARATOR .  'Q.inc.php')) #Q Platform
 	die("[ERROR] $Q_filename not found" . PHP_EOL);
 
@@ -74,18 +79,21 @@ try {
 	die('[ERROR] ' . $e->getMessage() . PHP_EOL . $e->getTraceAsString() . PHP_EOL);
 }
 
-// get all CLI options
-$longopts = array("always-send");
-$options = getopt('', $longopts);
-
-$identifier = $FROM_APP ? $argv[1] : $argv[2];
-$communityId = Q::ifset($argv, $FROM_APP ? 2 : 3, Users::communityId());
-$labels = array_slice($argv, $FROM_APP ? 3 : 4);
+$identifier = $FROM_APP ? $restArgs[0] : $restArgs[1];
+$communityId = Q::ifset($restArgs, $FROM_APP ? 1 : 2, Users::communityId());
+$labels = array_slice($restArgs, $FROM_APP ? 2 : 3);
 $addLabel = empty($labels) ? "Users/admins" : $labels;
 $asUserId = $communityId;
 $skipAccess = true;
 $appUrl = Q_Uri::url('Communities/onboarding?communityId='.urlencode($communityId));
-$alwaysSend = Q::ifset($options, "always-send", true);
+$alwaysSend = isset($options['always-send']);
 
-Streams::invite($communityId, 'Streams/experience/main', @compact('identifier'), @compact('addLabel', 'asUserId', 'skipAccess', 'appUrl', 'alwaysSend'));
-echo "Successfully invited $identifier\n";
+$ret = Streams::invite($communityId, 'Streams/experience/main', @compact('identifier'), @compact('addLabel', 'asUserId', 'skipAccess', 'appUrl', 'alwaysSend'));
+$count1 = count($ret['userIds']);
+echo "Processed $count1 users" . PHP_EOL;
+if ($count2 = count($ret['alreadyParticipating'])) {
+	echo "$count2 were already participating" . PHP_EOL;
+}
+if ($alwaysSend) {
+	echo "Sent invites to them anyway!" . PHP_EOL;
+}

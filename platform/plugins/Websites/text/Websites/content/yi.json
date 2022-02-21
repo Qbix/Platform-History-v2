@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "לינק צו מעלדן",
-                "startDate": "אנהייב דאטום",
-                "startTime": "אָנהייב צייט",
-                "endDate": "סוף טאָג",
-                "endTime": "סוף צייט",
-                "budget": "בודזשעט"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "פילטער לויט אינטערעס",
-                "FilterInterests": "אָנהייב טייפּינג אַן אינטערעס ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "אינטערעס",
-            "Location": "אָרט"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "גיין",
-            "PasteLinkHere": "הטטפּס: \/\/ ...",
-            "BrowseTheWeb": "בלעטער",
-            "WriteToStartConversation": "שרייב דיין געדאנקען צו אָנהייבן דעם שמועס",
-            "StartConversation": "אָנהייב קאָנווערסאַטיאָן",
-            "GotoConversation": "גיין צו קאָנווערסאַטיאָן",
-            "reset": "באַשטעטיק",
-            "edit": "רעדאַגירן",
-            "link": "לינק",
-            "setUrl": "באַשטעטיק URL",
-            "save": "היט",
-            "setClip": "קאַט אָוט קליפּ",
-            "invalidURL": "אונגילטיג URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "די טעקע איז צו גרויס פֿאַר קאַטשינג. מאקס טעקע גרייס {{size}}",
-        "InvalidPDF": "טעקע איז נישט אַ גילטיק פּדף",
-        "StartTypingTitleOrKeywords": "אָנהייב טייפּינג טיטל אָדער טערמינען ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "א HTML דאָקומענט וואָס פאַרשידן יוזערז קענען זען און רעדאַגירן",
-            "displayType": "אַרטיקל"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "א רוק אין אַ פּרעזענטירונג, קענען אַרייַננעמען HTML, אַודיאָ עטק.",
-            "displayType": "רוק"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "א פּרעזענטירונג קאַנסיסטינג פון פאַרשידן סליידז",
-            "displayType": "פּרעזענטירונג"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "אַ גאַנצע אַפּאַראַט אויף אַ וועבזייטל",
-            "displayType": "גאַנצע אַפּאַראַט"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "א וועג צו גרופּינג גאַנצע וניץ אונטער אַ נאָמען",
-            "displayType": "גאַנצע פּלייסמאַנט"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "אינהאַלט פֿאַר אַ אַדווערטייזמאַנט",
-            "displayType": "גאַנצע שעפעריש"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "א גאַנצע קאמפאניע",
-            "displayType": "גאַנצע קאמפאניע"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "רעפּראַזענץ אַ וועבזייטל וועמענס מעטאַדאַטאַ איז סקרייפּט",
-            "displayType": "וועב בלאַט"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

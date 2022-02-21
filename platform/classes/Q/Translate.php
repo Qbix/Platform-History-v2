@@ -80,21 +80,20 @@ class Q_Translate
 
 	public function getLocales()
 	{
-		$tree = new Q_Tree();
 		$appLocalConfig = APP_LOCAL_DIR . DS . 'locales.json';
 		$appConfig = APP_CONFIG_DIR . DS . 'locales.json';
 		$platformConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
 		$config = null;
 		if (!empty($this->options['locales'])) {
-			$config = $tree->load($this->options['locales']);
+			$tree = Q_Tree::createAndLoad($this->options['locales']);
 		} else if (file_exists($appLocalConfig)) {
-			$config = $tree->load($appLocalConfig);
+			$tree = Q_Tree::createAndLoad($appLocalConfig);
 		} elseif (file_exists($appConfig)) {
-			$config = $tree->load($appConfig);
+			$tree = Q_Tree::createAndLoad($appConfig);
 		} elseif (file_exists($platformConfig)) {
-			$config = $tree->load($platformConfig);
+			$tree = Q_Tree::createAndLoad($platformConfig);
 		}
-		if (!$config) {
+		if (!$tree) {
 			throw new Exception('Empty locales.json');
 		}
 		return $tree->getAll();

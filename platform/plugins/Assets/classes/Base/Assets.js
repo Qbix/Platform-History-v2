@@ -33,7 +33,8 @@ Base.tableClasses = [
 	"Assets_Credits",
 	"Assets_Customer",
 	"Assets_Earned",
-	"Assets_Leader"
+	"Assets_Leader",
+	"Assets_NftAttributes"
 ];
 
 /**
@@ -103,3 +104,10 @@ Base.Earned = Q.require('Assets/Earned');
  * @type Assets.Leader
  */
 Base.Leader = Q.require('Assets/Leader');
+
+/**
+ * Link to Assets.NftAttributes model
+ * @property NftAttributes
+ * @type Assets.NftAttributes
+ */
+Base.NftAttributes = Q.require('Assets/NftAttributes');

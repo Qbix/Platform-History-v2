@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "galaan",
-        "LogOut": "ka bax"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "U samee {999}} aniga ahaan asalkiisa {1000}",
-        "ChoosePassPhrase": "Dooro <strong>weedho gudbin<\/strong> si aad u gasho. <br> Erey fudud oo ka kooban dhowr eray oo aad si fudud u xasuusan kartid.",
-        "ChoosePassPhraseSeeSuggestions": "Dooro <strong>weedho<\/strong> saxan oo wanaagsan si aad u ilaaliso xisaabtaada. Fiiri talooyinka fikradaha qaarkood.",
-        "LogOutAndTryAgain": "Isku day oo isku day mar labaad",
-        "IfYouFeel": "Haddii aad dareento wax qalad ah, waad awoodi kartaa",
-        "SetIdentifierButtonTitle": "bilaabi"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Raadso Bilaab"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Raadso Bilaab",
-        "Authorize": "Oggolow",
-        "TermsLabel": "Waxaan aqriyay oo aan ogolaaday <br> ilaa {999}}",
-        "TermsTitle": "Shuruudaha",
-        "mustAgree": "Marka hore waa inaad ogolaato shuruudaha."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Waan aqbalayaa {999}}",
-        "TermsTitle": "Shuruudaha"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Ogolaashaha",
-        "prompt": "Ma rabtaa inaad ogeysiiso ogeysiisyada? Waxaad heli doontaa warar dhab ah oo ku saabsan waxyaabaha aad ka daryeesho.",
-        "yes": "Haa",
-        "no": "Maya",
-        "WelcomePleaseVerifyEmail": "Soo dhawow! Fadlan xaqiiji cinwaanka emailkaaga.",
-        "WelcomeVerifyEmail": "Soo dhawow! Hubi cinwaankaaga emailkaaga.",
-        "ForgetPass": "Hey, miyaad illowday marinkaaga?",
-        "PassphraseSaved": "Oraahdaada gudbinta waa la keydiyay.",
-        "IdentifierActivated": "{{type}} waa la shaqeeyey.",
-        "CompletedActivation": "Waad dhammaystirtay dhaqdhaqaaqa isticmaale.",
-        "CompletedActivationLogIn": "Waad dhammaystirtay dhaqdhaqaaqa isticmaale. Isku day inaad gasho hadda."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Dooro xiriirka",
-            "CreateAccount": "+ Xiriir Cusub",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create lama helin",
-            "SearchByName": "Magac raadso",
-            "EmptyContacts": "Xiriirrada lama helin ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Xulo xiriirinta {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Fadlan dooro calaamad.",
-        "inviteUser": "Ku marti isticmaal User",
-        "selectRole": "Xulo Dooro",
-        "inviteRole": "Casuumaad {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Luqad aan sax ahayn ee la doortay",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Soo dhowow",
-        "directions": "Abuur koonto, ama gasho.",
-        "directionsNoRegister": "Gal haddii aad leedahay koonto.",
-        "goButton": "Tag",
-        "passphrase": "Gali weedha gudbintaada:",
-        "loginButton": "Bilow",
-        "registerButton": "Bilow",
-        "resendButton": "U dir Fariinta Waxqabadka",
-        "forgot": "Ma ilowday?",
-        "resendConfirm": "Ma waxaad dooneysaa inaad dirto farriin aad ku dejiso passphrase-kaaga?",
-        "resendSuccess": "Hubi farriin si aad u dejiso lambarkaaga",
-        "resendClose": "Xidh",
-        "noPassphrase": "Kahor intaadan galin, waa inaad dejiso weedh gudbinta adoo gujinaya xiriirinta farriinta dhaqdhaqaaqaaga.",
-        "notVerified": "Waa inaad adigu naftaada u dirtaa farriin dhaqdhaqaaq si aad u gasho.",
-        "emailExists": "Ma isku dayday inaad iska diiwaangeliso emaylkan kahor? Hadday sidaas tahay, hubi inbox-kaaga si aad u socodsiiso koontadaada. <a href='#resend' class='Q_button Users_activation_resend'>Guji si aad dib ugu dirto farriinta<\/a>",
-        "mobileExists": "Ma isku dayday inaad iska diiwaangeliso nambarkan moobiilka kahor? Hadday sidaas tahay, hubi SMS-kaaga si aad ugu hawl gasho koontadaada. <a href='#resend' class='Q_button Users_activation_resend'>Guji si aad dib ugu dirto farriinta<\/a>",
-        "usingOther": "ama waad awoodaa",
-        "prompt": "Xulo magac isticmaale:",
-        "newUser": "ama abuuro koonto cusub",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "mobilkaaga # ama emaylka",
-            "mobile": "gali mobilkaaga #",
-            "email": "geli cinwaanka emaylkaaga",
-            "username": "username"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Oggolow shuruudaha adeegga?",
-        "facebookNoEmail": "Koontadaada facebook ayaa ka maqan cinwaan email ah oo la xaqiijiyay. Si fudud u gal habka asalka ah.",
-        "picTooltip": "Waad beddeli kartaa sawirkan goor dambe",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Gal {{host}} wakhtiga {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Dib ugu noqoshada Wallet",
-                "content": "Markaad xirto wada hadalkan, waxaa lagu geyn doonaa boorsadaada. Kadib markaad saxiixdo, ku noqo boggan."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Kudar hab lagu galo",
-        "sendMessage": "U dir Fariinta Waxqabadka",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "Gali mobilkaaga # ama emaylka",
-            "mobile": "geli lambarkaaga moobiilka",
-            "email": "geli cinwaanka emaylkaaga",
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
             "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Koonto",
-        "areUsing": "Waxaad u isticmaaleysaa {{platform}} sida",
-        "noLongerUsing": "Mar dambe kuma xirnid {{platform}} sida",
-        "doAuth": "Kusoo gal akoonkan",
-        "doSwitch": "U beddelo koontadaas"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Milkiilaha",
-        "Admin": "Maamulka",
-        "Member": "Xubin",
-        "Guest": "Marti",
-        "Host": "Marti -geliyaha"
-    },
-    "analytics": {
-        "Title": "Falanqaynta",
-        "Daily": "Maalin kasta",
-        "Weekly": "Toddobaadle",
-        "Monthly": "Bil walba",
-        "Application": "Codsiga",
-        "Pages": "Bogagga",
-        "Services": "Adeegyada",
-        "Faq": "Su&#39;aal",
-        "WeekDays": "Maalmaha Toddobaadka"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

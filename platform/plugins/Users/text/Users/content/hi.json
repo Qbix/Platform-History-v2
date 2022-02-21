@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "लॉग इन करें",
-        "LogOut": "लोग आउट"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "मेरे प्राथमिक {{2}} के रूप में {{1}} सेट करें",
-        "ChoosePassPhrase": "में लॉग इन करने के लिए एक <strong>पास वाक्यांश<\/strong> चुनें। <br> एक सरल वाक्यांश जिसमें कुछ शब्द शामिल हैं जो आपको आसानी से याद होंगे।",
-        "ChoosePassPhraseSeeSuggestions": "अपने खाते की सुरक्षा के लिए एक अच्छा <strong>पास वाक्यांश<\/strong> चुनें। कुछ विचारों के लिए सुझाव देखें।",
-        "LogOutAndTryAgain": "लॉग आउट करें और पुन: प्रयास करें",
-        "IfYouFeel": "अगर आपको लगता है कि कुछ गलत हुआ है, तो आप कर सकते हैं",
-        "SetIdentifierButtonTitle": "प्रारंभ करें"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "शुरू हो जाओ"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "शुरू हो जाओ",
-        "Authorize": "अधिकृत करें",
-        "TermsLabel": "मैंने पढ़ा है और इस बात से सहमत है <br> {{link}} तक",
-        "TermsTitle": "शर्तें",
-        "mustAgree": "पहले आपको शर्तों से सहमत होना होगा।"
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "मैं {{link}} स्वीकार करता हूं",
-        "TermsTitle": "शर्तें"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "अनुमति",
-        "prompt": "क्या आप सूचनाएं सक्षम करना चाहते हैं? आपको उन चीजों के बारे में वास्तविक समय के अपडेट प्राप्त होंगे जिनकी आपको परवाह है।",
-        "yes": "हाँ",
-        "no": "नहीं",
-        "WelcomePleaseVerifyEmail": "स्वागत हे! अपना ईमेल एड्रेस सुनिश्चित करें।",
-        "WelcomeVerifyEmail": "स्वागत हे! अपने ईमेल पते की पुष्टि करें।",
-        "ForgetPass": "अरे, क्या आप अपना पासफ़्रेज़ भूल गए?",
-        "PassphraseSaved": "आपका पास वाक्यांश सहेज लिया गया है।",
-        "IdentifierActivated": "आपका {{type}} सक्रिय हो गया है।",
-        "CompletedActivation": "आपने उपयोगकर्ता सक्रियण पूरा कर लिया है।",
-        "CompletedActivationLogIn": "आपने उपयोगकर्ता सक्रियण पूरा कर लिया है। अब लॉग इन करने का प्रयास करें।"
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "कृपया लेबल का चयन करें।",
-        "inviteUser": "उपयोगकर्ता को आमंत्रित करें",
-        "selectRole": "भूमिका का चयन करें",
-        "inviteRole": "{{role}} आमंत्रित करें"
-    },
-    "invalidLanguageSelected": "अमान्य भाषा चयनित",
     "contacts": {
         "dialog": {
-            "title": "संपर्क चुनें",
-            "SearchByName": "नाम से खोजें",
-            "CreateAccount": "+ नया संपर्क",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create नहीं मिला",
-            "EmptyContacts": "संपर्क नहीं मिले ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "{{displayName}} के संपर्क का चयन करें"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "स्वागत हे",
-        "directions": "एक खाता बनाएं या लॉग - इन करें।",
-        "directionsNoRegister": "अगर आपका खाता है तो लॉग इन करें।",
-        "goButton": "चले जाओ",
-        "passphrase": "अपना पास वाक्यांश दर्ज करें:",
-        "loginButton": "शुरू हो जाओ",
-        "registerButton": "शुरू हो जाओ",
-        "resendButton": "सक्रियण संदेश भेजें",
-        "forgot": "यह भूल गया?",
-        "resendConfirm": "क्या आप अपना पासफ़्रेज़ रीसेट करने के लिए कोई संदेश भेजना चाहते हैं?",
-        "resendSuccess": "अपने पासफ़्रेज़ को रीसेट करने के लिए एक संदेश देखें",
-        "resendClose": "बंद करे",
-        "noPassphrase": "लॉग इन करने से पहले, आपको अपने सक्रियण संदेश में लिंक पर क्लिक करके पास वाक्यांश सेट करना होगा।",
-        "notVerified": "लॉग इन करने के लिए आपको अपने आप को एक सक्रियण संदेश भेजना होगा।",
-        "emailExists": "क्या आपने पहले इस ईमेल के साथ पंजीकरण करने का प्रयास किया था? यदि हां, तो अपने खाते को सक्रिय करने के लिए अपने इनबॉक्स की जांच करें। <a href='#resend' class='Q_button Users_activation_resend'>संदेश को पुनः भेजने के लिए क्लिक करें<\/a>",
-        "mobileExists": "क्या आपने पहले इस मोबाइल नंबर के साथ पंजीकरण करने का प्रयास किया था? यदि हां, तो अपने खाते को सक्रिय करने के लिए अपने एसएमएस की जांच करें। <a href='#resend' class='Q_button Users_activation_resend'>संदेश को पुनः भेजने के लिए क्लिक करें<\/a>",
-        "usingOther": "या आप कर सकते हो",
-        "prompt": "एक उपयोगकर्ता नाम चुनें:",
-        "newUser": "या नीचे एक नया खाता बनाएँ",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "आपका मोबाइल # या ईमेल",
-            "mobile": "अपना मोबाइल दर्ज करें #",
-            "email": "अपना ईमेल पता दर्ज करें",
-            "username": "उपयोगकर्ता नाम"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "सेवा की शर्तें स्वीकार करें?",
-        "facebookNoEmail": "आपका फ़ेसबुक अकाउंट एक पक्का ईमेल एड्रेस गुम है। बस मूल तरीके से लॉग इन करें।",
-        "picTooltip": "आप इस तस्वीर को बाद में बदल सकते हैं",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "{{host}} समय पर लॉग इन करें {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "वॉलेट पर रीडायरेक्ट करना",
-                "content": "एक बार जब आप इस डायलॉग को बंद कर देते हैं, तो आपको अपने वॉलेट में ले जाया जाएगा। साइन इन करने के बाद, इस पेज पर वापस आएं।"
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "लॉग इन करने का एक तरीका जोड़ें",
-        "sendMessage": "सक्रियण संदेश भेजें",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "अपना मोबाइल # या ईमेल दर्ज करें",
-            "mobile": "अपना मोबाइल नंबर दर्ज करें",
-            "email": "अपना ईमेल पता दर्ज करें",
-            "username": "उपयोगकर्ता नाम"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} खाता",
-        "areUsing": "आप {{platform}} का उपयोग कर रहे हैं",
-        "noLongerUsing": "आप अब {{platform}} से कनेक्ट नहीं हैं",
-        "doAuth": "इस खाते से लॉग इन करें",
-        "doSwitch": "इस खाते पर स्विच करें"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "मालिक",
-        "Admin": "व्यवस्थापक",
-        "Member": "सदस्य",
-        "Guest": "अतिथि",
-        "Host": "मेज़बान"
-    },
-    "analytics": {
-        "Title": "एनालिटिक्स",
-        "Daily": "दैनिक",
-        "Weekly": "साप्ताहिक",
-        "Monthly": "महीने के",
-        "Application": "आवेदन",
-        "Pages": "पृष्ठों",
-        "Services": "सेवाएं",
-        "Faq": "सामान्य प्रश्न",
-        "WeekDays": "सप्ताह के दिन"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

@@ -7,7 +7,8 @@
         "Streams\/invitedMe": "Chi mi ha invitatu",
         "AreYouAgree": "Site d’accunsentu?",
         "Yes": "Iè",
-        "No": "Innò"
+        "No": "Innò",
+        "DoYouAgree": "d&#39;accordu ?"
     },
     "interests": {
         "Filter": "Cosa ti piace?",
@@ -84,7 +85,8 @@
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} se u codice hè statu scannatu",
             "copyLink": "{{ClickOrTap}} per copià u ligame d&#39;invitu",
-            "userChooserPlaceholder": "Ricerca per nome"
+            "userChooserPlaceholder": "Ricerca per nome",
+            "shareOrCopyLink": "{{ClickOrTap}} per sparte o cupià u ligame d&#39;invitu"
         },
         "email": {
             "subject": "Hey, fighjate questu",
@@ -178,7 +180,8 @@
             "youStoppedLive": "Avete smessu di trasmette sta chjamata à RTMP persunalizata",
             "sbStartedLiveStreaming": "{{userName}} hà principiatu in diretta",
             "sbStoppedLiveStreaming": "{{userName}} finita in diretta",
-            "liveStopped": "Errore durante l&#39;inviu di u video à l&#39;endpoint"
+            "liveStopped": "Errore durante l&#39;inviu di u video à l&#39;endpoint",
+            "forceDisconnectingImmediately": "Avete statu scollegatu da un host"
         },
         "settingsPopup": {
             "webCamera": "Camera Web",
@@ -209,7 +212,10 @@
             "start": "Principià",
             "stop": "Piantà",
             "streamingSettings": "Impostazioni",
-            "streamToRTMP": "Stream à RTMP persunalizatu"
+            "streamToRTMP": "Stream à RTMP persunalizatu",
+            "dialogTitle": "Settings Video",
+            "startBroadcasting": "Cumincià a trasmissione",
+            "broadcastingInProgress": "A trasmissione hè in corso"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
@@ -225,7 +231,8 @@
             "turnOffScreenSharing": "Oculta a spartera di a pantalla",
             "turnOnCamera": "Mostra video",
             "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Mostra u sparte di u screnu"
+            "turnOnScreenSharing": "Mostra u sparte di u screnu",
+            "dialogTitle": "Impostazioni di i participanti"
         },
         "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à questu flussu.",
         "streamTitle": "{{1}} chiamata in diretta",
@@ -242,6 +249,14 @@
             "screenSharingIsOn": "Screensharing hè attivatu",
             "screenSharingIsOff": "Schernu di sparte",
             "joinNow": "Unisciti à a Chjama"
+        },
+        "audioSettings": {
+            "dialogTitle": "Settings Audio",
+            "speakers": "I parlanti",
+            "microphone": "Micrufonu"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
         }
     },
     "messages": {

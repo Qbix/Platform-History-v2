@@ -44,8 +44,15 @@ Q.Tool.define('Q/form', function(options) {
 	onSuccess: new Q.Event(),
 	slotsToRequest: 'form',
 	contentElements: {},
-	loader: function (url, method, params, slots, callback) {
-		Q.request(url+"?"+params, slots, callback, {method: method});
+	loader: function (url, method, form, slots, callback) {
+		if (method.toUpperCase() === 'GET') {
+			Q.request(params, url, slots, callback);
+		} else {
+			Q.request(url, slots, callback, {
+				method: method,
+				formdata: new FormData(form)
+			});
+		}
 	}
 },
 
@@ -137,7 +144,7 @@ Q.Tool.define('Q/form', function(options) {
 				tool.state.ignoreCache = false;
 				tool.state.loader.forget(action, method, $form.serialize(), tool.state.slotsToRequest);
 			}
-			tool.state.loader(action, method, $form.serialize(), tool.state.slotsToRequest, onResponse);
+			tool.state.loader(action, method, $form[0], tool.state.slotsToRequest, onResponse);
 		});
 		$('input', $form).add('select', $form).on('input', function () {
 			if ($form.state('Q/validator')) {

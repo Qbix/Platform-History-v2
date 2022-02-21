@@ -7,7 +7,8 @@
         "Streams\/invitedMe": "Ով է ինձ հրավիրել",
         "AreYouAgree": "Համաձա՞յն եք:",
         "Yes": "Այո",
-        "No": "Ոչ"
+        "No": "Ոչ",
+        "DoYouAgree": "Համաձայն ես?"
     },
     "interests": {
         "Filter": "Ինչ եք վայելում:",
@@ -84,7 +85,8 @@
             "byTwitter": "Twitter- ը",
             "scannedQR": "99 99 999}} եթե կոդը սկանավորվել է",
             "copyLink": "Invite 99 999} հրավեր հղումը պատճենելու համար",
-            "userChooserPlaceholder": "Որոնել անունով"
+            "userChooserPlaceholder": "Որոնել անունով",
+            "shareOrCopyLink": "{{ClickOrTap}} հրավերի հղումը համօգտագործելու կամ պատճենելու համար"
         },
         "email": {
             "subject": "Hey, ստուգեք սա",
@@ -178,7 +180,8 @@
             "youStoppedLive": "Դուք դադարեցրեցիք այս զանգի հեռարձակումը սովորական RTMP- ով",
             "sbStartedLiveStreaming": "{{userName}} - ը սկսվեց ուղիղ եթերում",
             "sbStoppedLiveStreaming": "{{userName}} -ն ավարտվեց ուղիղ եթերում",
-            "liveStopped": "Սխալ առաջացավ տեսանյութը վերջնակետին ուղարկելիս"
+            "liveStopped": "Սխալ առաջացավ տեսանյութը վերջնակետին ուղարկելիս",
+            "forceDisconnectingImmediately": "Ձեզ անջատել է տանտերը"
         },
         "settingsPopup": {
             "webCamera": "Վեբ ֆոտոխցիկ",
@@ -209,7 +212,10 @@
             "start": "Սկսել",
             "stop": "Դադարեցրեք",
             "streamingSettings": "Կարգավորումներ",
-            "streamToRTMP": "Հոսք դեպի սովորական RTMP"
+            "streamToRTMP": "Հոսք դեպի սովորական RTMP",
+            "dialogTitle": "Տեսանյութի կարգավորումներ",
+            "startBroadcasting": "Սկսեք հեռարձակումը",
+            "broadcastingInProgress": "Հեռարձակումն ընթացքի մեջ է"
         },
         "participantsPopup": {
             "disconnect": "Անջատեք",
@@ -225,7 +231,8 @@
             "turnOffScreenSharing": "Թաքցնել էկրանի համօգտագործումը",
             "turnOnCamera": "Showուցադրել տեսանյութը",
             "turnOnAudio": "Լսեք ձայնագրությունը",
-            "turnOnScreenSharing": "Showուցադրել էկրանի համօգտագործումը"
+            "turnOnScreenSharing": "Showուցադրել էկրանի համօգտագործումը",
+            "dialogTitle": "Մասնակիցների կարգավորումներ"
         },
         "notAllowedToJoinCall": "Դուք այս հոսքին միանալու թույլտվություն չունեք:",
         "streamTitle": "99 99 999}} կենդանի զանգ",
@@ -242,6 +249,14 @@
             "screenSharingIsOn": "Էկրանների փոխանակումը միացված է",
             "screenSharingIsOff": "Կիսել էկրանը",
             "joinNow": "Միացեք Callանգին"
+        },
+        "audioSettings": {
+            "dialogTitle": "Աուդիո կարգավորումներ",
+            "speakers": "Բարձրախոսներ",
+            "microphone": "Միկրոֆոն"
+        },
+        "streamingSettings": {
+            "title": "Հոսքային կարգավորումներ"
         }
     },
     "messages": {

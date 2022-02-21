@@ -60,7 +60,9 @@ function Users_contact_response_contacts($params = array())
 			$opt['contactUserId'] = $contactUserIds;
 		}
 		foreach ($userIds as $i => $userId) {
-			$contacts = array_merge($contacts, Users_Contact::fetch($userId, $labels, $opt));
+			$contacts = array_merge($contacts, Users_Contact::fetch(
+				$userId, $labels, $opt
+			));
 		}
 	}
 	return Q_Response::setSlot('contacts', Db::exportArray($contacts));

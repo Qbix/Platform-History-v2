@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Pieprasījuma laikā radās kļūda {{status}}",
-        "canceled": "Pieprasījums ir atcelts",
-        "500": "Iekšējā servera kļūda",
-        "404": "Nav atrasts: {{url}}",
-        "501": "Pieprasījums tika pārtraukts"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesija ir beigusies. Atjauniniet lapu un mēģiniet vēlreiz.",
-        "otherDomain": "Bloķēts pārrobežu domēnu pieprasījums ārvalstu domēnam {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "krāns",
-        "click": "klikšķis",
-        "yes": "Jā",
-        "no": "Nē",
-        "Tap": "Krāns",
-        "Click": "Klikšķis",
-        "Yes": "Jā",
-        "No": "Nē"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Janvāris",
-        "2": "Februārī",
-        "3": "Marts",
-        "4": "Aprīlis",
-        "5": "Maijs",
-        "6": "jūnijs",
-        "7": "Jūlijs",
-        "8": "augusts",
-        "9": "Septembris",
-        "10": "Oktobris",
-        "11": "Novembris",
-        "12": "Decembrī"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Lūdzu, ļaujiet piekļūt savam mikrofonam",
-        "record": "Ieraksts",
-        "recording": "Ierakstīšana",
-        "remains": "paliek",
-        "maximum": "maksimāli",
-        "playing": "Atskaņošana",
-        "recorded": "Ierakstīts",
-        "clip": "klipu",
-        "orupload": "Vai augšupielādēt",
-        "usethis": "Lieto šo",
-        "discard": "Izmest",
-        "encoding": "Kodēšana"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Brīdinājums"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Apstiprināt",
-        "ok": "Jā",
-        "cancel": "Nē"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Pieprasīt",
-        "ok": "Iet"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Lasot failu, radās kļūda",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Ko tu gribētu darīt?",
-            "photo": "Uzņemiet jaunu fotoattēlu",
-            "library": "Izvēlieties no bibliotēkas"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Lūdzu, izvēlieties lielāku attēlu.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Pielāgojiet izmēru un pozīciju",
-            "touchscreen": "Izmantojiet pirkstus, lai tuvinātu un velciet",
-            "notTouchscreen": "Izmantojiet peli un riteni, lai tuvinātu un velciet"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "pagājušo nakti",
-        "lastEvening": "pēdējā priekšvakarā",
-        "yesterday": "vakar",
-        "thisMorning": "šorīt",
-        "today": "šodien",
-        "tonight": "šovakar",
-        "tomorrowMorning": "tom rītā",
-        "tomorrow": "rīt",
-        "hoursAgo": "Pirms {{h}} stundām",
-        "hourAgo": "Pirms {{h}} stundas",
-        "minuteAgo": "Pirms {{m}} minūtes",
-        "minutesAgo": "Pirms {{m}} minūtēm",
-        "secondAgo": "Pirms {{s}}",
-        "secondsAgo": "Pirms {{s}} sekundēm",
-        "fewSecondsAgo": "pirms dažām sekundēm",
-        "rightNow": "tieši tagad",
-        "inSecond": "pēc {{s}} sekundes",
-        "inSeconds": "pēc {{s}} sekundēm",
-        "inMinute": "pēc {{m}} minūtes",
-        "inMinutes": "pēc {{m}} minūtēm",
-        "inHour": "pēc {{h}} stundas",
-        "inHours": "pēc {{h}} stundām",
-        "inUnderMinute": "pēc 1 minūtes"
-    },
-    "tabs": {
-        "more": "vairāk",
-        "Menu": "Izvēlne"
-    },
-    "video": {
-        "clip": "klips",
-        "errorNoSource": "Nav video avota",
-        "SkipAfter": "Pāriet pēc",
-        "Skip": "Izlaist"
-    },
-    "pdf": {
-        "clip": "klips",
-        "errorNoSource": "Nav pdf avota"
-    },
-    "clip": {
-        "SetClipStart": "Iestatiet Clip Start",
-        "ClipStart": "Sākt klipu",
-        "SetClipEnd": "Iestatīt klipa beigas",
-        "ClipEnd": "Klipa beigas",
-        "StartMoreEnd": "Sākuma stāvoklis nedrīkst būt lielāks par beigu stāvokli",
-        "EndLessStart": "Beigu stāvoklis nedrīkst būt mazāks par sākuma stāvokli",
-        "WhichInvalid": "Arguments “kas” nav derīgs"
-    },
-    "durations": {
-        "second": "otrais",
-        "seconds": "sekundes",
-        "minute": "minūti",
-        "minutes": "minūtes",
-        "hour": "stundas",
-        "day": "diena",
-        "days": "dienas",
-        "week": "nedēļā",
-        "weeks": "nedēļas",
-        "month": "mēnesī",
-        "months": "mēnešus",
-        "year": "gadā",
-        "years": "gadiem",
-        "decade": "desmitgade",
-        "decades": "gadu desmitiem",
-        "century": "gadsimtā",
-        "centuries": "gadsimtiem"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

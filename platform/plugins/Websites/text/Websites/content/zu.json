@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Xhumanisa nokukhuthaza",
-                "startDate": "Usuku okuqalwa ngalo",
-                "startTime": "Isikhathi sokuqala",
-                "endDate": "Usuku Lokuphela",
-                "endTime": "Isikhathi Sokuphela",
-                "budget": "Isabelomali"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Hlunga ngentshisekelo",
-                "FilterInterests": "Qala ukuthayipha intshisekelo ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Inzalo",
-            "Location": "Indawo"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Hambani",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Dlulisa amehlo",
-            "WriteToStartConversation": "Bhala imicabango yakho ukuqala ingxoxo",
-            "StartConversation": "Qala Ingxoxo",
-            "GotoConversation": "Iya Engxoxweni",
-            "reset": "Setha kabusha",
-            "edit": "Hlela",
-            "link": "Xhumanisa",
-            "setUrl": "Setha i-URL",
-            "save": "Gcina",
-            "setClip": "Sika isiqeshana",
-            "invalidURL": "I-URL engavumelekile"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Ifayela likhulu kakhulu kunqolobane. Usayizi wefayela omkhulu {{size}}",
-        "InvalidPDF": "Ifayela akuyona i-PDF evumelekile",
-        "StartTypingTitleOrKeywords": "Qala ukuthayipha isihloko noma amagama angukhiye ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Idokhumenti ye-HTML abasebenzisi abahlukahlukene abangayibuka futhi bahlele",
-            "displayType": "Isigaba"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Isilayidi kusethulo, singafaka i-HTML, umsindo njll.",
-            "displayType": "Slayida"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Isethulo esinezilayidi ezahlukahlukene",
-            "displayType": "Isethulo"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Iyunithi yokukhangisa kuwebhusayithi",
-            "displayType": "Iyunithi yezikhangiso"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Indlela yokuqoqa amayunithi wokukhangisa ngaphansi kwegama",
-            "displayType": "Ukubekwa kwezikhangiso"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Okuqukethwe kwesikhangiso",
-            "displayType": "Ukudala kwezikhangiso"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Umkhankaso wokukhangisa",
-            "displayType": "Umkhankaso wokukhangisa"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Imelela iwebhusayithi imethadatha yayo esuliwe",
-            "displayType": "Iwebhusayithi"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

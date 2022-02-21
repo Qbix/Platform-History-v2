@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Eraro {{status}} dum peto",
-        "canceled": "Peto nuligita",
-        "500": "Interna servila eraro",
-        "404": "Ne trovita: {{url}}",
-        "501": "Peto interrompita"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesio eksvalidiĝis. Refreŝigi la paĝon kaj provu denove.",
-        "otherDomain": "Blokita interdomena peto al fremda domajno ĉe {999}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "frapeti",
-        "click": "alklaku",
-        "yes": "jes",
-        "no": "ne",
-        "Tap": "Frapu",
-        "Click": "Alklaku",
-        "Yes": "Jes",
-        "No": "Ne"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Januaro",
-        "2": "Februaro",
-        "3": "Marto",
-        "4": "Aprilo",
-        "5": "Majo",
-        "6": "junio",
-        "7": "Julio",
-        "8": "Aŭgusto",
-        "9": "Septembro",
-        "10": "Oktobro",
-        "11": "Novembro",
-        "12": "Decembro"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Bonvolu permesi aliron al via mikrofono",
-        "record": "Rekordo",
-        "recording": "Registrado",
-        "remains": "restas",
-        "maximum": "maksimumo",
-        "playing": "Ludanta",
-        "recorded": "Registrita",
-        "clip": "klipo",
-        "orupload": "Aŭ Alŝuti",
-        "usethis": "Uzu Ĉi",
-        "discard": "Forĵeti",
-        "encoding": "Kodado"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Atentu"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Konfirmu",
-        "ok": "Jes",
-        "cancel": "Ne"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Rapida",
-        "ok": "Iru"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Eraro dum legado de dosiero",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Kion vi volus fari?",
-            "photo": "Prenu novan foton",
-            "library": "Elektu el biblioteko"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Bonvolu elekti pli grandan bildon.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Alĝustigu grandecon kaj pozicion",
-            "touchscreen": "Uzu viajn fingrojn por zomi kaj treni",
-            "notTouchscreen": "Uzu vian muson por movi kaj treni"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "hieraŭ vespere",
-        "lastEvening": "lasta vespero",
-        "yesterday": "hieraŭ",
-        "thisMorning": "ĉi matene",
-        "today": "hodiaŭ",
-        "tonight": "ĉi-vespere",
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
         "tomorrowMorning": "tom morn",
-        "tomorrow": "morgaŭ",
-        "hoursAgo": "{{h}} antaŭ horoj",
-        "hourAgo": "{{h}} antaŭ horo",
-        "minuteAgo": "{{m}} antaŭ minuto",
-        "minutesAgo": "{{m}} antaŭ minutoj",
-        "secondAgo": "{{s}} antaŭ du",
-        "secondsAgo": "{{s}} antaŭ sekundoj",
-        "fewSecondsAgo": "sekundoj antaŭ",
-        "rightNow": "nun",
-        "inSecond": "en {{s}} dua",
-        "inSeconds": "en {{s}} sekundoj",
-        "inMinute": "en {{m}} minuto",
-        "inMinutes": "en {{m}} minutoj",
-        "inHour": "en {{h}} horo",
-        "inHours": "en {{h}} horoj",
-        "inUnderMinute": "en malpli ol 1 minuto"
-    },
-    "video": {
-        "clip": "klipo",
-        "errorNoSource": "Neniu videofonto",
-        "SkipAfter": "Preterpasu",
-        "Skip": "Saltu"
-    },
-    "pdf": {
-        "clip": "klipo",
-        "errorNoSource": "Neniu pdf-fonto"
-    },
-    "clip": {
-        "SetClipStart": "Agordi Klipan Komencon",
-        "ClipStart": "Klipa Komenco",
-        "SetClipEnd": "Agordi Klipfinon",
-        "ClipEnd": "Klipa Fino",
-        "StartMoreEnd": "Komenca pozicio ne povas esti pli ol fina pozicio",
-        "EndLessStart": "Fina pozicio ne povas esti malpli ol komenca pozicio",
-        "WhichInvalid": "Argumento &#39;kiu&#39; malvalida"
-    },
-    "tabs": {
-        "more": "pli",
-        "Menu": "Menuo"
-    },
-    "durations": {
-        "second": "dua",
-        "seconds": "sekundoj",
-        "minute": "minuto",
-        "minutes": "minutoj",
-        "hour": "horoj",
-        "day": "tago",
-        "days": "tagojn",
-        "week": "semajno",
-        "weeks": "semajnoj",
-        "month": "monato",
-        "months": "monatoj",
-        "year": "jaro",
-        "years": "jaroj",
-        "decade": "jardeko",
-        "decades": "jardekojn",
-        "century": "jarcento",
-        "centuries": "jarcentoj"
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

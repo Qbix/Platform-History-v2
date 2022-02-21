@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link don ingantawa",
-                "startDate": "Fara Kwanan wata",
-                "startTime": "Fara Lokaci",
-                "endDate": "Kwanan Ƙarshe",
-                "endTime": "Ƙarshen Lokaci",
-                "budget": "Kasafi"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Tace Da Sha&#39;awa",
-                "FilterInterests": "Fara buga sha&#39;awa ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Sha&#39;awa",
-            "Location": "Wuri"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Tafi",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Yi bincike",
-            "WriteToStartConversation": "Rubuta tunanin ku don fara tattaunawar",
-            "StartConversation": "Fara Tattaunawa",
-            "GotoConversation": "Je zuwa Tattaunawa",
-            "reset": "Sake saitin",
-            "edit": "Shirya",
-            "link": "Haɗi",
-            "setUrl": "Saita URL",
-            "save": "Ajiye",
-            "setClip": "Yanke Clip",
-            "invalidURL": "URL mara inganci"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Fayil ya yi yawa don caching. Mafi girman fayil {{size}}",
-        "InvalidPDF": "Fayil ba ingantacciyar PDF ba ce",
-        "StartTypingTitleOrKeywords": "Fara buga take ko mahimman kalmomi ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Takaddun HTML wanda masu amfani daban -daban za su iya dubawa da gyara",
-            "displayType": "Mataki na ashirin da"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Nunin faifai a cikin gabatarwa, na iya haɗawa da HTML, sauti da sauransu.",
-            "displayType": "Zama"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Gabatarwa ta ƙunshi nunin faifai daban -daban",
-            "displayType": "Gabatarwa"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Ƙungiyar talla a gidan yanar gizo",
-            "displayType": "Rukunin talla"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Hanya ta haɗa rukunin talla a ƙarƙashin suna",
-            "displayType": "Sanya talla"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Abun ciki don talla",
-            "displayType": "Talla talla"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Yakin talla",
-            "displayType": "Talla talla"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Yana wakiltar gidan yanar gizon da aka goge metadata",
-            "displayType": "shashen yanar gizo"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

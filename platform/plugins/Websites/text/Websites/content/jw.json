@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link kanggo promosi",
-                "startDate": "Tanggal Mulai",
-                "startTime": "Wektu Wiwitan",
-                "endDate": "Tanggal Akhir",
-                "endTime": "Wektu Pungkasan",
-                "budget": "Anggaran"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Saring Miturut Kapentingan",
-                "FilterInterests": "Mulai ngetik minat ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Minat",
-            "Location": "Lokasi"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Ayo",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Telusuri",
-            "WriteToStartConversation": "Tulis pikirane kanggo miwiti obrolan",
-            "StartConversation": "Miwiti Obrolan",
-            "GotoConversation": "Bukak Obrolan",
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
             "reset": "Reset",
-            "edit": "Sunting",
+            "edit": "Edit",
             "link": "Link",
-            "setUrl": "Setel URL",
-            "save": "Ngirit",
-            "setClip": "Klip Potong",
-            "invalidURL": "URL ora valid"
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "File gedhe banget kanggo cache. Ukuran file maksimal {{size}}",
-        "InvalidPDF": "File dudu PDF sing bener",
-        "StartTypingTitleOrKeywords": "Miwiti ngetik judhul utawa tembung kunci ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokumen HTML sing bisa dideleng lan diowahi dening macem-macem pangguna",
-            "displayType": "Artikel"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Slide ing presentasi, bisa kalebu HTML, audio lsp.",
-            "displayType": "Geser"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Presentasi sing kalebu macem-macem slide",
-            "displayType": "Presentasi"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Unit iklan ing situs web",
-            "displayType": "Unit iklan"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Cara nglumpukake unit iklan kanthi jeneng",
-            "displayType": "Panggenan pariwara"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Konten kanggo pariwara",
-            "displayType": "Iklan kreatif"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Kampanye pariwara",
-            "displayType": "Kampanye advert"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Makili situs web sing metadata di-scrape",
-            "displayType": "Kaca web"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

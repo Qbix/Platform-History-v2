@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Сұрау кезінде {{status}} қате пайда болды",
-        "canceled": "Сұраным жойылды",
-        "500": "Ішкі қате",
-        "404": "Табылмады: {{url}}",
-        "501": "Сұрау үзілді"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Сеанс аяқталды. Бетті жаңартып, әрекетті қайталаңыз.",
-        "otherDomain": "{{baseUrl}} бетінде шетел доменіне доменаралық домендік сұрау жасалды"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "түртіңіз",
-        "click": "нұқыңыз",
-        "yes": "иә",
-        "no": "жоқ",
-        "Tap": "Түртіңіз",
-        "Click": "Басыңыз",
-        "Yes": "Иә",
-        "No": "Жоқ"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Қаңтар",
-        "2": "Ақпан",
-        "3": "Наурыз",
-        "4": "Сәуір",
-        "5": "Мамыр",
-        "6": "Маусым",
-        "7": "Шілде",
-        "8": "Тамыз",
-        "9": "Қыркүйек",
-        "10": "Қазан",
-        "11": "Қараша",
-        "12": "Желтоқсан"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Микрофоныңызға кіруге рұқсат беріңіз",
-        "record": "Жазба",
-        "recording": "Жазба",
-        "remains": "қалады",
-        "maximum": "максимум",
-        "playing": "Ойнату",
-        "recorded": "Жазылған",
-        "clip": "клип",
-        "orupload": "Немесе жүктеп салыңыз",
-        "usethis": "Мұны қолданыңыз",
-        "discard": "Жою",
-        "encoding": "Кодтау"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Ескерту"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Растау",
-        "ok": "Иә",
-        "cancel": "Жоқ"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Кеңес",
-        "ok": "Барыңыз"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Файлды оқу қатесі",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Сіз не істегіңіз келеді?",
-            "photo": "Жаңа фотосуретті түсіріңіз",
-            "library": "Кітапханадан таңдаңыз"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Үлкенірек кескінді таңдаңыз.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Өлшемі мен орнын реттеңіз",
-            "touchscreen": "Ұлғайту және сүйреу үшін саусақтарыңызды пайдаланыңыз",
-            "notTouchscreen": "Ұлғайту және сүйреу үшін тінтуір мен дөңгелекті пайдаланыңыз"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "өткен түнде",
-        "lastEvening": "өткен кеш",
-        "yesterday": "кеше",
-        "thisMorning": "бұл таң",
-        "today": "бүгін",
-        "tonight": "бүгін кешке",
-        "tomorrowMorning": "Том таң",
-        "tomorrow": "ертең",
-        "hoursAgo": "{{h}} сағат бұрын",
-        "hourAgo": "{{h}} сағат бұрын",
-        "minuteAgo": "{{m}} минут бұрын",
-        "minutesAgo": "{{m}} минут бұрын",
-        "secondAgo": "{{s}} екінші рет",
-        "secondsAgo": "{{s}} секунд бұрын",
-        "fewSecondsAgo": "секунд бұрын",
-        "rightNow": "дәл қазір",
-        "inSecond": "{{s}} секундта",
-        "inSeconds": "{{s}} секундта",
-        "inMinute": "{{m}} минут ішінде",
-        "inMinutes": "{{m}} минут ішінде",
-        "inHour": "{{h}} сағатта",
-        "inHours": "{{h}} сағат ішінде",
-        "inUnderMinute": "1 минут ішінде"
-    },
-    "video": {
-        "clip": "клип",
-        "errorNoSource": "Бейне көзі жоқ",
-        "SkipAfter": "Кейін өткізіп жіберу",
-        "Skip": "Өткізіп жіберу"
-    },
-    "pdf": {
-        "clip": "клип",
-        "errorNoSource": "Pdf көзі жоқ"
-    },
-    "clip": {
-        "SetClipStart": "Клиптің басталуын орнатыңыз",
-        "ClipStart": "Клип Бастау",
-        "SetClipEnd": "Клиптің соңын орнатыңыз",
-        "ClipEnd": "Клиптің соңы",
-        "StartMoreEnd": "Бастапқы позиция соңғы позициядан аспауы керек",
-        "EndLessStart": "Соңғы позиция бастапқы позициядан төмен болмауы керек",
-        "WhichInvalid": "«Қайсы» жарамсыз"
-    },
-    "tabs": {
-        "more": "Көбірек",
-        "Menu": "Мәзір"
-    },
-    "durations": {
-        "second": "екінші",
-        "seconds": "секунд",
-        "minute": "минут",
-        "minutes": "минут",
-        "hour": "сағат",
-        "day": "күн",
-        "days": "күндер",
-        "week": "апта",
-        "weeks": "апта",
-        "month": "ай",
-        "months": "ай",
-        "year": "жыл",
-        "years": "жылдар",
-        "decade": "он жылдық",
-        "decades": "онжылдықтар",
-        "century": "ғасыр",
-        "centuries": "ғасырлар"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Unganisha kuendeleza",
-                "startDate": "Tarehe ya Mwanzo",
-                "startTime": "Anza Muda",
-                "endDate": "Tarehe ya mwisho",
-                "endTime": "Muda wa Mwisho",
-                "budget": "Bajeti"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Futa kwa Nia",
-                "FilterInterests": "Anza kuandika maslahi ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Hamu",
-            "Location": "Eneo"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Nenda",
-            "PasteLinkHere": "Weka kiungo hapa",
-            "BrowseTheWeb": "Vinjari",
-            "WriteToStartConversation": "Andika mawazo yako ili uanze mazungumzo",
-            "StartConversation": "Anza Majadiliano",
-            "GotoConversation": "Nenda kwenye Mazungumzo",
-            "reset": "Weka upya",
-            "edit": "Hariri",
-            "link": "Kiungo",
-            "setUrl": "Weka URL",
-            "save": "Okoa",
-            "setClip": "Kata cha picha ya video",
-            "invalidURL": "URL batili"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Faili ni kubwa mno kwa akiba ya akiba. Ukubwa wa juu wa faili {{size}}",
-        "InvalidPDF": "Faili sio PDF halali",
-        "StartTypingTitleOrKeywords": "Anza kuandika kichwa au maneno ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Hati ya HTML ambayo watumiaji mbalimbali wanaweza kutazama na kuhariri",
-            "displayType": "Kifungu"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Slaidi katika uwasilishaji, inaweza kujumuisha HTML, sauti nk.",
+            "description": "A slide in a presentation, can include HTML, audio etc.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Uwasilishaji unaojumuisha slaidi kadhaa",
-            "displayType": "Uwasilishaji"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Sehemu ya matangazo kwenye wavuti",
-            "displayType": "Kitengo cha matangazo"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Njia ya kuweka vikundi vya matangazo chini ya jina",
-            "displayType": "Kuwekwa kwa matangazo"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Yaliyomo kwa tangazo",
-            "displayType": "Matangazo ya ubunifu"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Kampeni ya matangazo",
-            "displayType": "Kampeni ya matangazo"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Inarudisha tovuti ambayo metadata yake ilichorwa",
-            "displayType": "Ukurasa wa wavuti"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

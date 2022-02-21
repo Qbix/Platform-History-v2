@@ -49,7 +49,12 @@
         "forMessages": {
             "BoughtCredits": "{{amount}} վարկ",
             "BonusCredits": "{{amount}} վարկ"
-        }
+        },
+        "Streams_user_firstname": "{{invitedUserName}} մուտքագրել է անունը",
+        "Streams_user_lastname": "{{invitedUserName}} մուտքագրել է ազգանունը",
+        "Streams_user_icon": "{{invitedUserName}} մուտքագրված պատկերակը",
+        "Places_user_location": "{{invitedUserName}} մուտքագրել է գտնվելու վայրը",
+        "Streams_greeting": "{{invitedUserName}} մուտքագրել է ողջույն"
     },
     "history": {
         "Date": "Ամսաթիվ",
@@ -80,7 +85,12 @@
         "BoughtCredits": "Գնել է {{amount}} վարկ",
         "BonusCredits": "Ստացել է բոնուսային {{amount}} վարկեր",
         "InviteAcceptedBy": "Վաստակել է {{amount}} կրեդիտ",
-        "YouHaveCreditsToStart": "Վաստակել է {{amount}} կրեդիտ"
+        "YouHaveCreditsToStart": "Վաստակել է {{amount}} կրեդիտ",
+        "Streams_user_firstname": "Վաստակել է {{amount}} վարկ",
+        "Streams_user_lastname": "Վաստակել է {{amount}} վարկ",
+        "Streams_user_icon": "Վաստակել է {{amount}} վարկ",
+        "Places_user_location": "Վաստակել է {{amount}} վարկ",
+        "Streams_greeting": "Վաստակել է {{amount}} վարկ"
     },
     "subscriptions": {
         "infoTitle": "Սահմանեք վճարման տեղեկատվություն",
@@ -163,5 +173,93 @@
         "RequiredPayment": "Պահանջվող վճարում",
         "AreYouSureDelete": "Վստա՞հ եք, որ ցանկանում եք ջնջել այս ծառայությունը:",
         "AmountServicesRelated": "Այս ծառայության հետ կապված {{amount}} մատչելիություն կա: Նրանք նույնպես կհեռացվեն:"
+    },
+    "NFT": {
+        "Title": "Տեղեկություններ {{title}} NFT-ի մասին",
+        "Description": "Մանրամասն տեղեկություններ NFT-ի մասին",
+        "FixedBid": "Գնիր հիմա",
+        "CurrentBid": "Ընթացիկ հայտ",
+        "StartingIn": "Սկսած",
+        "EndingIn": "Ավարտվում է",
+        "CreateNFT": "Ստեղծեք NFT",
+        "TitlePlaceholder": "Ձեր NFT-ին վերնագիր տվեք",
+        "DescriptionPlaceholder": "Տվեք ձեր NFT-ի նկարագրությունը",
+        "CreateYourNFT": "Ստեղծեք ձեր NFT-ը",
+        "Royalties": "Ռոյալթիներ",
+        "RoyaltyPlaceholder": "Ընտրովի: Փոխանցումից առաջ հեղինակին վճարված գումարը:",
+        "ExpirationDate": "Սպառման ամսաթիվ",
+        "StartingDate": "Մեկնարկի ամսաթիվ",
+        "BidsBelowThisAmount": "Այս գումարից ցածր հայտերը չեն թույլատրվի",
+        "MinimumBid": "Նվազագույն հայտ",
+        "Price": "Գին",
+        "Owner": "Սեփականատեր",
+        "SelectCategory": "Ընտրեք կատեգորիա",
+        "Day": "Օր",
+        "Days": "Օրեր",
+        "Hour": "Ժամ",
+        "Hours": "Ժամեր",
+        "Minute": "Րոպե",
+        "Minutes": "Րոպեներ",
+        "Second": "Երկրորդ",
+        "Seconds": "Վայրկյաններ",
+        "SalesCreator": "վաճառքի ծավալը կտրամադրվի ստեղծողին",
+        "Details": "Մանրամասներ",
+        "Bids": "Հայտեր",
+        "History": "Պատմություն",
+        "LoremIpsum": "Lorem Ipsum-ը տպագրության և տպագրական արդյունաբերության կեղծ տեքստ է:",
+        "PutOnSale": "վաճառքի հանել",
+        "PutOffSale": "Վաճառքից հանել",
+        "Transfer": "Փոխանցում",
+        "Update": "Թարմացնել",
+        "UpdateToken": "Թարմացնել նշանը",
+        "CreateToken": "Ստեղծեք նշան",
+        "PlaceBid": "Տեղի հայտ",
+        "SoldOut": "Վաճառվել է",
+        "NftName": "NFT անվանումը",
+        "DescribeYourNFT": "Խնդրում ենք նկարագրել ձեր NFT-ը",
+        "NftPicture": "Նկար՝ NFT-ին ներկայացնելու համար",
+        "NftMovie": "Ֆիլմ, որը ներկայացնում է NFT-ն",
+        "UploadMovie": "Վերբեռնել ֆիլմը",
+        "MovieSource": "Ֆիլմի աղբյուրը",
+        "UploadFile": "Վերբեռնեք ֆայլ",
+        "PutOnMarketplace": "Ներդրեք շուկայում",
+        "InstantPurchase": "Մուտքագրեք գինը՝ օգտատերերին թույլ տալու համար անմիջապես գնել ձեր NFT-ը",
+        "FixedPrice": "Ֆիքսված գին",
+        "TimedAuction": "Ժամկետային աճուրդ",
+        "OpenForBids": "Բաց հայտերի համար",
+        "PriceOnePiece": "Մուտքագրեք մեկ հատի արժեքը",
+        "EnterMinimumBid": "Մուտքագրեք նվազագույն հայտ",
+        "SelectChain": "Ընտրեք շղթա",
+        "WrongChain": "Այս NFT-ը ստեղծվել է «{{chain}}»-ի ներքո: Խնդրում ենք օգտագործել այս շղթան:",
+        "import": {
+            "importNFT": "NFT-ների ներմուծում",
+            "fileNotFound": "Ներողություն, CSV ֆայլը չի գտնվել:",
+            "fileEmpty": "Ներողություն, CSV ֆայլը դատարկ է:",
+            "userIdNotFound": "օգտատերը գոյություն ունի, բայց ID-ն դատարկ է",
+            "errorLine": "տող {{1}}",
+            "fieldNotFound": "Պահանջվող «{{1}}» դաշտը չի գտնվել",
+            "taskStreamInvalid": "առաջադրանքի հոսքն անվավեր է",
+            "instructionsEmpty": "առաջադրանքների հոսքի հրահանգները դատարկ են",
+            "complete": "Ամբողջական",
+            "activateUsers": "ուղարկե՞լ ակտիվացման հաղորդագրություն օգտվողներին:",
+            "importProgress": "Առաջընթաց",
+            "importOptions": "Ընտրանքներ",
+            "sampleCSV": "Ներբեռնեք CSV-ի նմուշը",
+            "fileLabel": "Վերբեռնել աղյուսակը՝",
+            "errorsTitle": "Սխալներ են տեղի ունեցել"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Զտել ըստ NFT հավաքածուների",
+                "ShowNFTCollection": "Ցույց տալ NFT հավաքածուն...",
+                "AllCollections": "Բոլոր Հավաքածուները"
+            },
+            "ByUser": {
+                "AllAuthors": "Բոլոր հեղինակները",
+                "AllUsers": "Բոլորը",
+                "FilterByAuthors": "Զտել ըստ հեղինակների"
+            }
+        },
+        "Back": "Վերադարձ դեպի Հավաքածու"
     }
 }

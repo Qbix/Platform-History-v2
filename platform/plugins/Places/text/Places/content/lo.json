@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "ພາຍໃນ {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "ແມັດ",
-        "meters": "ແມັດ",
-        "kilometer": "ກິໂລແມັດ",
-        "kilometers": "ກິໂລແມັດ",
-        "km": "ກມ",
-        "mile": "ໄມລ",
-        "miles": "ໄມ",
-        "mi": "ໄມ",
-        "foot": "ຕີນ",
-        "feet": "ຕີນ",
-        "inches": "ນິ້ວ"
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "ຂ້ອຍສົນໃຈສິ່ງທີ່ເກີດຂຶ້ນພາຍໃນ {{select}} ຂອງ",
-        "update": "ອັບເດດສະຖານທີ່ຂອງຂ້ອຍ",
-        "set": "ກໍານົດສະຖານທີ່ຂອງຂ້ອຍ",
-        "prompt": "{{ClickOrTap}} ບ່ອນນີ້<br> ກໍານົດຂອງທ່ານ<br> ສະຖານທີ່",
-        "myCurrentLocation": "ສະຖານທີ່ປະຈຸບັນຂອງຂ້ອຍ",
-        "enterAddress": "ໃສ່ທີ່ຢູ່",
-        "enterPostcode": "ກະລຸນາໃສ່ລະຫັດໄປສະນີ \/ ລະຫັດໄປສະນີຂອງເຈົ້າ",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "ເພີ່ມສະຖານທີ່",
-            "title": "ສະຖານທີ່ໃ່",
-            "nameYourLocation": "ຕັ້ງຊື່ສະຖານທີ່ຂອງເຈົ້າ"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "ບັນທຶກສະຖານທີ່ນີ້ບໍ?",
-            "message": "ເຈົ້າວາງແຜນທີ່ຈະໃຊ້ສະຖານທີ່ນີ້ອີກໃນອະນາຄົດບໍ?",
-            "ok": "ແມ່ນແລ້ວ",
-            "cancel": "ບໍ່"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "ຕັ້ງຊື່ສະຖານທີ່ນີ້",
-            "placeholder": "ບ້ານ, ບ່ອນເຮັດວຽກແລະອື່ນ.",
-            "ok": "ບັນທຶກ"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "ເລືອກສະຖານທີ່"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "ພື້ນທີ່ໃດນຶ່ງຢູ່ໃນບ່ອນນີ້?",
-        "newArea": "ພື້ນທີ່ໃຫມ່",
-        "promptTitle": "ໃສ່ຊື່ສໍາລັບພື້ນທີ່:",
-        "absent": "ກະລຸນາ ກຳ ນົດພື້ນທີ່",
-        "error": "ຜິດພາດ",
-        "exist": "ມີພື້ນທີ່ຢູ່ກ່ອນແລ້ວ",
-        "addNewArea": "ເພີ່ມພື້ນທີ່ໃ່",
-        "add": "ຕື່ມ"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "ການເກັບກໍາສະຖານທີ່",
-            "displayType": "ສະຖານທີ່"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "ສະແດງເຖິງອາຄານ, ສະຖານທີ່, ເຮືອ, ສວນສາທາລະນະ, ແລະອື່ນ.",
-            "displayType": "ສະຖານທີ່"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "ເປັນຕົວແທນຂອງພື້ນທີ່ພາຍໃນສະຖານທີ່, ເຊັ່ນ: ຫ້ອງຫຼືຊຸດ",
-            "displayType": "ພື້ນທີ່"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "ເປັນຕົວແທນຂອງພື້ນໃນອາຄານຫຼືເຮືອ",
-            "displayType": "ຊັ້ນ"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "ເປັນຕົວແທນຂອງຖັນຢູ່ໃນອາຄານຫຼືເຮືອ",
-            "displayType": "ຖັນ"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Categoryວດforູ່ ສຳ ລັບສິ່ງຕ່າງ within ທີ່ຢູ່ໃນໄລຍະທີ່ແນ່ນອນຂອງ geohash",
-            "displayType": "ໃກ້ກັບສະຖານທີ່ຕ່າງ"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Categoryວດforູ່ ສຳ ລັບສິ່ງຕ່າງ within ທີ່ຢູ່ໃນໄລຍະທາງສະເພາະຂອງ geohash, ກົງກັບຄວາມສົນໃຈ",
-            "displayType": "ຄວາມສົນໃຈຂອງສະຖານທີ່"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

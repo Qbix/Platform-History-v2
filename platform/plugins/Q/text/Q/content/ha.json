@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Kuskure {{status}} yayin buƙatar",
-        "canceled": "An soke umarnin soke",
-        "500": "Kuskuren na Cikin Saba",
-        "404": "Ba&#39;a samo: {{url}}",
-        "501": "Nemi katsewa"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Zama ya ƙare. Sabunta shafin kuma sake gwadawa.",
-        "otherDomain": "An goge bayanan yankin guiye zuwa yankin waje a {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
-        "click": "danna",
-        "yes": "eh",
-        "no": "babu",
-        "Tap": "Matsa",
-        "Click": "Danna",
-        "Yes": "Ee",
-        "No": "A&#39;a"
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Janairu",
-        "2": "Fabrairu",
-        "3": "Maris",
-        "4": "Afrilu",
-        "5": "Mayu",
-        "6": "Yuni",
-        "7": "Yuli",
-        "8": "Agusta",
-        "9": "Satumba",
-        "10": "Oktoba",
-        "11": "Nuwamba",
-        "12": "Disamba"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Da fatan a bada izinin samun dama ga microphone",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
         "record": "Record",
-        "recording": "Rikodi",
-        "remains": "ya kasance",
-        "maximum": "matsakaicin",
-        "playing": "Kunna",
-        "recorded": "An yi rikodi",
-        "clip": "shirin",
-        "orupload": "Ko Upload",
-        "usethis": "Yi amfani da wannan",
-        "discard": "Zubar da",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
         "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
-        "title": "Tabbatar",
-        "ok": "Ee",
-        "cancel": "A&#39;a"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Gyarawa",
-        "ok": "Ku tafi"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Kuskuren karanta fayil",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Me kake son yi?",
-            "photo": "Ɗauki sabon hoto",
-            "library": "Zaɓi daga ɗakin karatu"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Da fatan a zaɓi babban hoto.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Daidaita girman da matsayi",
-            "touchscreen": "Yi amfani da yatsunsu don zuƙowa da jawo",
-            "notTouchscreen": "Yi amfani da linzamin kwamfuta &amp; motarka don zuƙowa da ja"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "daren jiya",
-        "lastEvening": "daren jiya",
-        "yesterday": "jiya",
-        "thisMorning": "wannan safiya",
-        "today": "yau",
-        "tonight": "daren yau",
-        "tomorrowMorning": "tom safe",
-        "tomorrow": "gobe",
-        "hoursAgo": "{{h}} awanni da suka gabata",
-        "hourAgo": "{{h}} satin da ya gabata",
-        "minuteAgo": "{{m}} minti daya da suka wuce",
-        "minutesAgo": "{{m}} mintuna da suka wuce",
-        "secondAgo": "{{s}} sati na biyu",
-        "secondsAgo": "{{s}} sakan da suka wuce",
-        "fewSecondsAgo": "seconds da suka wuce",
-        "rightNow": "yanzunnan",
-        "inSecond": "a {{s}} na biyu",
-        "inSeconds": "a cikin {{s}} seconds",
-        "inMinute": "a cikin {{m}} minti",
-        "inMinutes": "a cikin {{m}} minti",
-        "inHour": "a cikin {{h}} awa",
-        "inHours": "a cikin {{h}} sa&#39;o&#39;i",
-        "inUnderMinute": "a karkashin 1 minti"
-    },
-    "video": {
-        "clip": "shirin bidiyo",
-        "errorNoSource": "Babu tushen bidiyo",
-        "SkipAfter": "Tsallake bayan",
-        "Skip": "Tsallake"
-    },
-    "pdf": {
-        "clip": "shirin bidiyo",
-        "errorNoSource": "Babu tushen pdf"
-    },
-    "clip": {
-        "SetClipStart": "Saita Fara Clip",
-        "ClipStart": "Fara Clip",
-        "SetClipEnd": "Saita liparshen shirin",
-        "ClipEnd": "Endarshen Yankewa",
-        "StartMoreEnd": "Matsayin farawa ba zai iya wuce matsayin ƙarshe ba",
-        "EndLessStart": "Matsayin ƙarshe ba zai iya zama ƙasa da farkon farawa ba",
-        "WhichInvalid": "Hujja &#39;wacce&#39; bata da inganci"
-    },
-    "tabs": {
-        "more": "Kara",
-        "Menu": "Menu"
-    },
-    "durations": {
-        "second": "na biyu",
-        "seconds": "dakika",
-        "minute": "minti",
-        "minutes": "mintuna",
-        "hour": "awowi",
-        "day": "rana",
-        "days": "kwanaki",
-        "week": "mako",
-        "weeks": "makonni",
-        "month": "wata",
-        "months": "watanni",
-        "year": "shekara",
-        "years": "shekaru",
-        "decade": "shekaru goma",
-        "decades": "shekarun da suka gabata",
-        "century": "karni",
-        "centuries": "ƙarni"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

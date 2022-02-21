@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Rabta għall-promozzjoni",
-                "startDate": "Data tal-bidu",
-                "startTime": "Ħin tal-bidu",
-                "endDate": "Data tat-Tmiem",
-                "endTime": "Ħin tat-Tmiem",
-                "budget": "Baġit"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Iffiltra Skond l-Interess",
-                "FilterInterests": "Ibda ittajpja interess ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Interess",
-            "Location": "Post"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Mur",
-            "PasteLinkHere": "Paste link hawn",
-            "BrowseTheWeb": "Fittex",
-            "WriteToStartConversation": "Ikteb il-ħsibijiet tiegħek biex tibda l-konversazzjoni",
-            "StartConversation": "Ibda l-Konversazzjoni",
-            "GotoConversation": "Mur fil-Konversazzjoni",
-            "reset": "Irrisettja",
-            "edit": "Editja",
-            "link": "Rabta",
-            "setUrl": "Issettja l-URL",
-            "save": "Ħlief",
-            "setClip": "Aqta &#39;Clip",
-            "invalidURL": "URL invalidu"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Fajl kbir wisq għall-cache. Daqs massimu tal-fajl {{size}}",
-        "InvalidPDF": "Il-fajl mhux PDF validu",
-        "StartTypingTitleOrKeywords": "Ibda ttajpja titlu jew kliem ewlieni ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokument HTML li diversi utenti jistgħu jaraw u jeditjaw",
-            "displayType": "Artikolu"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Slide fi preżentazzjoni, tista &#39;tinkludi HTML, awdjo eċċ.",
-            "displayType": "Żerżaq"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Preżentazzjoni li tikkonsisti minn pjastri varji",
-            "displayType": "Preżentazzjoni"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Unità tar-reklamar fuq websajt",
-            "displayType": "Unità tar-riklami"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Mod ta &#39;kif tgħaqqad unitajiet ta&#39; reklamar taħt isem",
-            "displayType": "It-tqegħid tar-riklami"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Kontenut għal reklam",
-            "displayType": "Irreklama kreattiv"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Kampanja tar-reklamar",
-            "displayType": "Kampanja tar-riklami"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Jirrappreżenta websajt li l-metadata tagħha ġiet mibruxa",
-            "displayType": "Paġna tal-Web"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

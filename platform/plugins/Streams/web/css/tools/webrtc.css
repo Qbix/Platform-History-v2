@@ -1010,7 +1010,7 @@
 }
 
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_participant-name-text{
-    width: 100%;
+    width: 100%;;
     /*white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;*/
@@ -1243,8 +1243,19 @@
     z-index: 10;
     font-weight: bold;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text div{
+    display: inline;
+    overflow: hidden;
+    white-space: normal;
+    width: 100%;
+    text-overflow: ellipsis;
+    text-align: center;
+}
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name{
     max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name > *{
     text-overflow: ellipsis;
@@ -1252,6 +1263,7 @@
     overflow: hidden;
     max-width: 100%;
     display: inline-block;
+    color:black;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns{
     display: none;
@@ -1283,6 +1295,9 @@
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-active-screen-sharing .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns button.Streams_webrtc_fullscreen-btn {
     display: block;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-active-screen-sharing.Streams_webrtc_chat-local-screen-sharing video {
+    opacity: 0.6;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-screen-btns button svg{
     height: 100%;

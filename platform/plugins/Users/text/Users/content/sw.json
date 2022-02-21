@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Ingia",
-        "LogOut": "loka nje"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Weka {{1}} kama msingi wangu {{2}}",
-        "ChoosePassPhrase": "Chagua <strong>maneno ya kupitisha<\/strong> kuingia na. <br> Maneno rahisi ambayo yana maneno machache ambayo utakumbuka kwa urahisi.",
-        "ChoosePassPhraseSeeSuggestions": "Chagua <strong>maneno<\/strong> mazuri ya <strong>kupitisha<\/strong> kulinda akaunti yako. Tazama mapendekezo ya mawazo mengine.",
-        "LogOutAndTryAgain": "Ingia na Jaribu tena",
-        "IfYouFeel": "Ikiwa unasikia kitu fulani kikienda vibaya, unaweza",
-        "SetIdentifierButtonTitle": "anza tena"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Fungua"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Fungua",
-        "Authorize": "Thibitisha",
-        "TermsLabel": "Nimesoma na kukubaliana <br> kwa {{link}}",
-        "TermsTitle": "Masharti",
-        "mustAgree": "Kwanza lazima ukubali masharti."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Nakubali {{link}}",
-        "TermsTitle": "Masharti"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Ruhusa",
-        "prompt": "Je! Unataka kuwezesha arifa? Utapokea sasisho za muda halisi kuhusu mambo unayojali.",
-        "yes": "Ndiyo",
-        "no": "Hapana",
-        "WelcomePleaseVerifyEmail": "Karibu! Tafadhali thibitisha anwani yako ya barua pepe.",
-        "WelcomeVerifyEmail": "Karibu! Thibitisha anwani yako ya barua pepe.",
-        "ForgetPass": "Hey, uliisahau usahihi wako?",
-        "PassphraseSaved": "Kifungu chako cha kupita kimehifadhiwa.",
-        "IdentifierActivated": "Yako {{type}} imeamilishwa.",
-        "CompletedActivation": "Umekamilisha uanzishaji wa watumiaji.",
-        "CompletedActivationLogIn": "Umekamilisha uanzishaji wa watumiaji. Jaribu kuingia sasa."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Tafadhali chagua lebo.",
-        "inviteUser": "Paribisha Mtumiaji",
-        "selectRole": "Chagua Jukumu",
-        "inviteRole": "Alika {{role}}"
-    },
-    "invalidLanguageSelected": "Lugha batili iliyochaguliwa",
     "contacts": {
         "dialog": {
-            "title": "Chagua wasiliana",
-            "SearchByName": "Tafuta kwa jina",
-            "CreateAccount": "+ Mawasiliano Mpya",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create haipatikani",
-            "EmptyContacts": "Anwani hazipatikani ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Chagua wasiliana na {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Karibu",
-        "directions": "Unda akaunti, au ingia.",
-        "directionsNoRegister": "Ingia ikiwa una akaunti.",
-        "goButton": "Nenda",
-        "passphrase": "Ingiza kifungu chako cha kupita:",
-        "loginButton": "Anzisha",
-        "registerButton": "Anzisha",
-        "resendButton": "Tuma Ujumbe wa Uanzishaji",
-        "forgot": "Umesahau?",
-        "resendConfirm": "Je! Unataka kutuma ujumbe wa kuweka upya manukuu yako?",
-        "resendSuccess": "Angalia ujumbe ili kuweka tena manukuu yako",
-        "resendClose": "Karibu",
-        "noPassphrase": "Kabla ya kuingia, lazima uweke kifungu cha kupitisha kwa kubonyeza kiunga kwenye ujumbe wako wa uanzishaji.",
-        "notVerified": "Lazima ujitumie wewe mwenyewe ujumbe wa uanzishaji ili uingie.",
-        "emailExists": "Je! Ulijaribu kujiandikisha na barua pepe hii hapo awali? Ikiwa ni hivyo, angalia kikasha chako ili kuamsha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bonyeza kutuma tena ujumbe<\/a>",
-        "mobileExists": "Je! Ulijaribu kujiandikisha na nambari hii ya simu hapo awali? Ikiwa ni hivyo, angalia SMS yako ili kuamsha akaunti yako. <a href='#resend' class='Q_button Users_activation_resend'>Bonyeza kutuma tena ujumbe<\/a>",
-        "usingOther": "au unaweza",
-        "prompt": "Chagua jina la mtumiaji:",
-        "newUser": "au unda akaunti mpya hapa chini",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "# yako ya rununu au barua pepe",
-            "mobile": "ingiza simu yako ya rununu #",
-            "email": "ingiza anwani yako ya barua pepe",
-            "username": "jina la mtumiaji"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Kukubali Masharti ya Huduma?",
-        "facebookNoEmail": "Akaunti yako ya facebook inakosa anwani ya barua pepe iliyothibitishwa. Ingia tu kwa njia ya asili.",
-        "picTooltip": "Unaweza kubadilisha picha hii baadaye",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Ingia katika {{host}} kwa wakati {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Inaelekeza kwenye mkoba",
-                "content": "Mara baada ya kufunga mazungumzo haya, utapelekwa kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Ongeza njia ya kuingia",
-        "sendMessage": "Tuma Ujumbe wa Uanzishaji",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "ingiza simu yako ya rununu # au barua pepe",
-            "mobile": "ingiza nambari yako ya rununu",
-            "email": "ingiza anwani yako ya barua pepe",
-            "username": "jina la mtumiaji"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Akaunti",
-        "areUsing": "Unatumia {{platform}} kama",
-        "noLongerUsing": "Haujaunganishwa tena na {{platform}} kama",
-        "doAuth": "Ingia na akaunti hii",
-        "doSwitch": "Badilisha kwenye akaunti hii"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Mmiliki",
-        "Admin": "Usimamizi",
-        "Member": "Mwanachama",
-        "Guest": "Mgeni",
-        "Host": "Mwenyeji"
-    },
-    "analytics": {
-        "Title": "Takwimu",
-        "Daily": "Kila siku",
-        "Weekly": "Kila wiki",
-        "Monthly": "Kila mwezi",
-        "Application": "Maombi",
-        "Pages": "Kurasa",
-        "Services": "Huduma",
-        "Faq": "Maswali",
-        "WeekDays": "Siku za Wiki"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

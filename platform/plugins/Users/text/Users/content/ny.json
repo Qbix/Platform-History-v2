@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "Lowani muakaunti",
-        "LogOut": "tulukani"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Ikani {{1}} monga wanga {{2}} wamkulu",
-        "ChoosePassPhrase": "Sankhani <strong>mawu okudutsa<\/strong> kuti mulowe nawo. <br> Mawu ophweka omwe ali ndi mau ochepa omwe mungakumbukire mosavuta.",
-        "ChoosePassPhraseSeeSuggestions": "Sankhani wabwino <strong>chikudutsa mawu<\/strong> kuteteza akaunti yanu. Onani malingaliro a malingaliro ena.",
-        "LogOutAndTryAgain": "Lowani ndi kuyesanso",
-        "IfYouFeel": "Ngati mukumva kuti chinachake chalakwika, mukhoza",
-        "SetIdentifierButtonTitle": "yambani"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Yambani"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Yambani",
-        "Authorize": "Vomerezani",
-        "TermsLabel": "Ndawerenga ndikuvomereza <br> ku {{link}}",
-        "TermsTitle": "Maganizo",
-        "mustAgree": "Choyamba muyenera kuvomereza mawuwo."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ndikuvomereza {{link}}",
-        "TermsTitle": "Maganizo"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Chilolezo",
-        "prompt": "Kodi mukufuna kuti zidziwitso zitheke? Mudzalandira zosintha zenizeni zenizeni za zinthu zomwe mumasamala.",
-        "yes": "Inde",
-        "no": "Ayi",
-        "WelcomePleaseVerifyEmail": "Landirani! Chonde onetsetsani imelo yanu.",
-        "WelcomeVerifyEmail": "Landirani! Tsimikizani imelo yanu.",
-        "ForgetPass": "Eya, kodi mwaiwala mawu anu ozembera?",
-        "PassphraseSaved": "Mawu anu odutsa asungidwa.",
-        "IdentifierActivated": "{{type}} yanu idagwira.",
-        "CompletedActivation": "Mwamaliza kuyambitsa ntchito.",
-        "CompletedActivationLogIn": "Mwamaliza kuyambitsa ntchito. Yeserani kulowa."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Sankhani kukhudzana",
-            "CreateAccount": "+ Kuyankhulana Kwatsopano",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create sapezeka",
-            "SearchByName": "Sakani ndi dzina",
-            "EmptyContacts": "Otsatsa sanapezeke ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Sankhani kukhudzana ndi {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Chonde sankhani chizindikiro.",
-        "inviteUser": "Pemphani Wophunzira",
-        "selectRole": "Sankhani Udindo",
-        "inviteRole": "Imbirani {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Chilankhulo chosasankhidwa",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Takulandirani",
-        "directions": "Pangani akaunti, kapena Lowani.",
-        "directionsNoRegister": "Lowani ngati muli ndi akaunti.",
-        "goButton": "Pitani",
-        "passphrase": "Lowetsani mawu anu:",
-        "loginButton": "Yambirani",
-        "registerButton": "Yambirani",
-        "resendButton": "Tumizani Mauthenga Othandizira",
-        "forgot": "Mwayiwala?",
-        "resendConfirm": "Kodi mukufuna kutumiza uthenga kuti ubwezeretse mawu anu obweza?",
-        "resendSuccess": "Yang&#39;anani kuti mukufuna meseji yanu kuti ibwezeretse mawu anu",
-        "resendClose": "Tsekani",
-        "noPassphrase": "Musanalowe mu akaunti yanu, muyenera kukhazikitsa mawu odutsa ndikudina ulalo womwe uli pakompyuta yanu.",
-        "notVerified": "Mukuyenera kuti mudzitumizire nokha uthenga wotsegula kuti mulowe.",
-        "emailExists": "Kodi mudayesako kulembetsa ndi imelo izi m&#39;mbuyomu? Ngati ndi choncho, onetsetsani bokosi lanu kuti mulimitse akaunti yanu. <a href='#resend' class='Q_button Users_activation_resend'>Dinani kuti mutumizenso uthengawo<\/a>",
-        "mobileExists": "Kodi mudayesa kulembetsa kale ndi nambala yam&#39;mbuyomu? Ngati ndi choncho, onani SMS yanu kuti ikwaniritse akaunti yanu. <a href='#resend' class='Q_button Users_activation_resend'>Dinani kuti mutumizenso uthengawo<\/a>",
-        "usingOther": "kapena mutha",
-        "prompt": "Sankhani dzina lolowera:",
-        "newUser": "kapena pangani akaunti yatsopano",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "yanu yam&#39;manja # kapena imelo",
-            "mobile": "lembani foni yanu #",
-            "email": "lembani imelo adilesi yanu",
-            "username": "dzina lolowera"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Landirani Malangizo?",
-        "facebookNoEmail": "Akaunti yanu ya facebook ikusowa imelo yosatsimikizika. Ingolowetsani momwe mwakhalira.",
-        "picTooltip": "Mutha kusintha chithunzichi pambuyo pake",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Lowani mu {{host}} nthawi {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Kulunjika ku Wallet",
-                "content": "Mukatseka bokosili, mudzatengeredwa ku chikwama chanu. Mukasainira, bwererani patsamba lino."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Onjezani njira yolowera",
-        "sendMessage": "Tumizani Mauthenga Othandizira",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "lembani foni yanu # kapena imelo",
-            "mobile": "lowetsani nambala yanu yam&#39;manja",
-            "email": "lembani imelo adilesi yanu",
-            "username": "dzina lolowera"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Akaunti",
-        "areUsing": "Mukugwiritsa ntchito {{999]}",
-        "noLongerUsing": "Simulumikizananso ndi {{platform}}",
-        "doAuth": "Lowani mu akaunti iyi",
-        "doSwitch": "Sinthani ku akaunti iyi"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Mwini wake",
+        "Owner": "Owner",
         "Admin": "Admin",
-        "Member": "Membala",
-        "Guest": "Mlendo",
-        "Host": "Wokonda"
-    },
-    "analytics": {
-        "Title": "Kusanthula",
-        "Daily": "Tsiku lililonse",
-        "Weekly": "Mlungu uliwonse",
-        "Monthly": "Mwezi uliwonse",
-        "Application": "Kugwiritsa ntchito",
-        "Pages": "Masamba",
-        "Services": "Mapulogalamu",
-        "Faq": "FAQ",
-        "WeekDays": "Masiku Amasabata"
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

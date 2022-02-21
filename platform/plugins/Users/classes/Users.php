@@ -408,7 +408,10 @@ abstract class Users extends Base_Users
 		}
 		$xid = $externalFrom->xid;
 		$authenticated = true;
-		$platformApp = "$platform\t$appId";
+		$appIdForAuth = !empty($appInfo['appIdForAuth'])
+			? $appInfo['appIdForAuth']
+			: $appInfo['appId'];
+		$platformApp = $platform . '_' . $appIdForAuth;
 		if ($retrieved) {
 			$user_xid = $user->getXid($platformApp);
 			if (!$user_xid) {
@@ -468,7 +471,7 @@ abstract class Users extends Base_Users
 				$retrieved = true;
 				if ($ui->state === 'future') {
 					$authenticated = 'adopted';
-					$platformApp = "$platform\t$appId";
+					$platformApp = $platform . '_' . $appIdForAuth;
 					$user->setXid($platformApp, $xid);
 					$user->signedUpWith = $platformApp; // should have been "none" before this
 					/**
@@ -519,7 +522,7 @@ abstract class Users extends Base_Users
 					}
 				}
 
-				$platformApp = "$platform\t$appId";
+				$platformApp = $platform . '_' . $appIdForAuth;
 				$user->setXid($platformApp, $xid);
 				/**
 				 * @event Users/insertUser {before}
@@ -539,7 +542,7 @@ abstract class Users extends Base_Users
 				$user->save();
 
 				// Save the identifier in the quick lookup table
-				$platformApp = "$platform\t$appId";
+				$platformApp = $platform . '_' . $appIdForAuth;
 				list($hashed, $ui_type) = self::hashing($xid, $platformApp);
 				$ui = new Users_Identify();
 				$ui->identifier = "$ui_type:$hashed";
@@ -602,10 +605,9 @@ abstract class Users extends Base_Users
 		// session info for the platform app.
 		$accessToken = $externalFrom->accessToken;
 		$sessionExpires = $externalFrom->expires;
-		$key = $platform.'_'.$appId;
-		if (isset($_SESSION['Users']['appUsers'][$key])) {
+		if (isset($_SESSION['Users']['appUsers'][$platformApp])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
-			$pk = $_SESSION['Users']['appUsers'][$key];
+			$pk = $_SESSION['Users']['appUsers'][$platformApp];
 			$ef = Users_ExternalFrom::select()->where($pk)->fetchDbRow();
 			if (empty($ef)) {
 				// somehow this externalFrom disappeared from the database
@@ -675,7 +677,7 @@ abstract class Users extends Base_Users
 			}
 		}
 
-		$_SESSION['Users']['appUsers'][$key] = $externalFrom->getPkValue();
+		$_SESSION['Users']['appUsers'][$platformApp] = $externalFrom->getPkValue();
 
 		Users::$cache['authenticated'] = $authenticated;
 
@@ -1271,7 +1273,7 @@ abstract class Users extends Base_Users
 	 * Returns a user in the database that corresponds to the contact info, if any.
 	 * @method userFromContactInfo
 	 * @static
-	 * @param {string} $type can be "email", "mobile", "$platform\t$appId",
+	 * @param {string} $type can be "email", "mobile", "$platform_$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. If $type is
@@ -1327,7 +1329,7 @@ abstract class Users extends Base_Users
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type can be "email", "mobile", or "$platform\t$appId",
+	 * @param {string|array} $type can be "email", "mobile", or $platform."_".$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 *  It could also be an array of ($type => $value) pairs.
@@ -1338,7 +1340,7 @@ abstract class Users extends Base_Users
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
 	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
-	 * * $platformApp - a string of the form "$platform\t$appId"
+	 * * $platformApp - a string of the form $platform."_".$appId"
 	 *
 	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
 	 *  Could also be 'future' to find identifiers attached to a "future user",
@@ -1349,6 +1351,7 @@ abstract class Users extends Base_Users
 	 */
 	static function identify($type, $value, $state = 'verified', &$normalized=null)
 	{
+		$type = Q_Utils::normalize($type);
 		$identifiers = array();
 		$expected_array = is_array($type);
 		$types = is_array($type) ? $type : array($type => $value);
@@ -1373,7 +1376,7 @@ abstract class Users extends Base_Users
 	 *
 	 * @method futureUser
 	 * @param {string} $type can be "email", "mobile", 
-	 *  a string of the form "$platform\t$appId"
+	 *  a string of the form $platform."_".$appId"
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 * @param {string} $value The value corresponding to the type. The type
@@ -1552,10 +1555,13 @@ abstract class Users extends Base_Users
 				$icoFileService = new Elphin\IcoFileLoader\IcoFileService;
 				$largestImage = $icoFileService->extractIcon($data, 32, 32);
 			} else {
-				$largestImage = imagecreatefromstring($data);
+				$largestImage = @imagecreatefromstring($data);
 			}
-			$sw = imagesx($largestImage);
-			$sh = imagesy($largestImage);
+
+			if ($largestImage) {
+				$sw = imagesx($largestImage);
+				$sh = imagesy($largestImage);
+			}
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
@@ -1598,7 +1604,6 @@ abstract class Users extends Base_Users
 				}
 				if ($sw == $w and $sh == $h) {
 					$image = $largestImage;
-					$success = true;
 				} else {
 					$min = min($sw / $w, $sh / $h);
 					$w2 = $w * $min;
@@ -1607,7 +1612,7 @@ abstract class Users extends Base_Users
 					$sy = round(($sh - $h2) / 2);
 					$image = imagecreatetruecolor($w, $h);
 					imagealphablending($image, false);
-					$success = imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
+					imagecopyresampled($image, $source, 0, 0, $sx, $sy, $w, $h, $w2, $h2);
 				}
 				$info = pathinfo($filename);
 				switch ($info['extension']) {
@@ -1716,13 +1721,16 @@ abstract class Users extends Base_Users
 	 * @method appId
 	 * @static
 	 * @param {string} $platform The platform or platform for the app
-	 * @param {string} $appId Can be either an internal or external app id
+	 * @param {string} [$appId=Q::app()] Can be either an internal or external app id
 	 * @param {boolean} [$throwIfMissing=false] Whether to throw an exception if missing
 	 * @return {array} Returns array($appId, $appInfo) where $appId is internal app id
 	 * @throws Q_Exception_MissingConfig
 	 */
-	static function appInfo($platform, $appId, $throwIfMissing = false)
+	static function appInfo($platform, $appId = null, $throwIfMissing = false)
 	{
+		if ($appId === null) {
+			$appId = Q::app();
+		}
 		$apps = Q_Config::get('Users', 'apps', $platform, array());
 		$id = $appId;
 		if (isset($apps[$id])) {
@@ -1741,6 +1749,12 @@ abstract class Users extends Base_Users
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "Users/apps/$platform/$appId"
 			));
+		}
+		if (!empty($apps['*'])) {
+			// tree-merge over default values
+			$tree = new Q_Tree($apps['*']);
+			$tree->merge($appInfo);
+			$appInfo = $tree->getAll();
 		}
 		return array($id, $appInfo);
 	}
@@ -2072,7 +2086,8 @@ abstract class Users extends Base_Users
 			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
-			$parts = explode("\t", $type);
+			$parts = explode("\t", $parts[0]); // backwards compatibility
+			$parts = explode("_", $type);
 			switch ($parts[0]) {
 				case 'email':
 					if (!Q_Valid::email($identifier, $normalized)) {

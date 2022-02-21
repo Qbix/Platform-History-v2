@@ -38,9 +38,11 @@ function Streams_webrtc_post($params = array())
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($params, 'publisherId', $loggedInUserId);
 	$roomId = Q::ifset($params, 'roomId', null);
+	$callDescription = Q::ifset($params, 'description', null);
 	$resumeClosed = Q::ifset($params, 'resumeClosed', null);
 	$relate = Q::ifset($params, 'relate', null);
 	$content = Q::ifset($params, 'content', null);
+	$onlyPreJoinedParticipantsAllowed = Q::ifset($params, 'onlyParticipantsAllowed', false);
 	$taskStreamName = Q::ifset($params, 'taskStreamName', null);
     $writeLevel = Q::ifset($params, 'writeLevel', 10);
     $closeManually = Q::ifset($params, 'closeManually', null);
@@ -129,11 +131,16 @@ function Streams_webrtc_post($params = array())
 		));
 	}
 
-	if ($publisherId == $loggedInUserId) {
+	if ($publisherId == $loggedInUserId || $response['stream']->testWriteLevel('edit')) {
 		if ($content) {
             $response['stream']->content = $content;
             $response['stream']->changed();
 		}
+
+		if($onlyPreJoinedParticipantsAllowed) {
+            $response['stream']->setAttribute("onlyParticipantsAllowed", true);
+            $response['stream']->changed();
+        }
 	}
 
 	if (!empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
@@ -147,13 +154,27 @@ function Streams_webrtc_post($params = array())
 	}
 
 	if ($resumeClosed !== null) {
-        $response['stream']->setAttribute("resumeClosed", $resumeClosed)->save();
+        $response['stream']->setAttribute("resumeClosed", $resumeClosed);
 	}
 
 	if ($closeManually !== null) {
-        $response['stream']->setAttribute("closeManually", $closeManually)->save();
+        $response['stream']->setAttribute("closeManually", $closeManually);
 	}
-    $response['stream']->join();
+
+	if ($callDescription !== null) {
+        $response['stream']->content = $callDescription;
+	}
+
+	if($response['stream']->getAttribute("onlyParticipantsAllowed") == false || $response['stream']->testWriteLevel('edit')) {
+        $response['stream']->join();
+    } else {
+        $meAsParticipant = $response['stream']->participant();
+        if (!$meAsParticipant || $meAsParticipant->fields['state'] != 'participating') {
+            throw new Exception('Only those who already are participants allowed to join this room');
+        }
+    }
+
+    $response['stream']->save();
 
 	Q_Response::setSlot("room", $response);
 }

@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "{{1}} තුළ"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "මීටරය",
-        "meters": "මීටර්",
-        "kilometer": "කි.මී.",
-        "kilometers": "කි.මී.",
-        "km": "කි.මී.",
-        "mile": "සැතපුම්",
-        "miles": "සැතපුම්",
-        "mi": "සැතපුම්",
-        "foot": "පාදය",
-        "feet": "අඩි",
-        "inches": "අඟල්"
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "මම {{select}} ඇතුළත සිදුවන දේවල් ගැන උනන්දු වෙමි",
-        "update": "මගේ ස්ථානය යාවත්කාලීන කරන්න",
-        "set": "මගේ ස්ථානය සකසන්න",
-        "prompt": "මෙතැනට {{ClickOrTap}}<br> ඔබේ සකසන්න<br> ස්ථානය",
-        "myCurrentLocation": "මගේ වර්තමාන පිහිටීම",
-        "enterAddress": "ලිපිනයක් ඇතුළු කරන්න",
-        "enterPostcode": "කරුණාකර ඔබේ තැපැල් කේතය \/ තැපැල් කේතය ඇතුළත් කරන්න",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "ස්ථානය එකතු කරන්න",
-            "title": "නව ස්ථානය",
-            "nameYourLocation": "ඔබේ ස්ථානය නම් කරන්න"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "මෙම ස්ථානය සුරකින්නද?",
-            "message": "අනාගතයේදී මෙම ස්ථානය නැවත භාවිතා කිරීමට ඔබ අදහස් කරනවාද?",
-            "ok": "ඔව්",
-            "cancel": "නැත"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "මෙම ස්ථානය නම් කරන්න",
-            "placeholder": "නිවස, වැඩ ආදිය.",
-            "ok": "සුරකින්න"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "ස්ථානය තෝරන්න"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "මෙම ස්ථානය තුළ කිසියම් ප්‍රදේශයක් තිබේද?",
-        "newArea": "නව ප්‍රදේශය",
-        "promptTitle": "ප්‍රදේශය සඳහා නමක් ඇතුළත් කරන්න:",
-        "absent": "කරුණාකර ප්‍රදේශය සකසන්න",
-        "error": "දෝෂය",
-        "exist": "ප්‍රදේශය දැනටමත් පවතී",
-        "addNewArea": "නව ප්‍රදේශයක් එකතු කරන්න",
-        "add": "එකතු කරන්න"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "ස්ථාන එකතුවකි",
-            "displayType": "ස්ථාන"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "ගොඩනැගිල්ලක්, ස්ථානයක්, නැවක්, උද්‍යානයක් ආදිය නියෝජනය කරයි.",
-            "displayType": "ස්ථානය"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "කාමරයක් හෝ කට්ටලයක් වැනි ස්ථානයක් තුළ ප්‍රදේශයක් නියෝජනය කරයි",
-            "displayType": "ප්‍රදේශය"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "ගොඩනැගිල්ලක හෝ නැවක ඇති තට්ටුවක් නියෝජනය කරයි",
-            "displayType": "මහල"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "ගොඩනැගිල්ලක හෝ නැවක තීරුවක් නියෝජනය කරයි",
-            "displayType": "තීරුව"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "භූහාෂ් හි නිශ්චිත දුරක් ඇති දේවල් සඳහා ප්‍රවර්ගය",
-            "displayType": "ස්ථාන අසල"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "පොළියකට ගැලපෙන, භූහාෂ් හි නිශ්චිත දුරක් තුළ ඇති දේ සඳහා ප්‍රවර්ගය",
-            "displayType": "උනන්දුවක් දක්වන ස්ථාන"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

@@ -72,7 +72,8 @@
             "title": "Juster størrelse og position",
             "touchscreen": "Brug dine fingre til at zoome og trække",
             "notTouchscreen": "Brug din mus og hjul til at zoome og trække"
-        }
+        },
+        "errorType": "Beklager, men denne filtype understøttes ikke"
     },
     "timestamp": {
         "lastNight": "igåraftes",

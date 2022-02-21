@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "ngaphakathi {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "imitha",
-        "meters": "amamitha",
-        "kilometer": "ikhilomitha",
-        "kilometers": "ama-kiometers",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
         "km": "km",
-        "mile": "imayela",
-        "miles": "amamayela",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "unyawo",
-        "feet": "izinyawo",
-        "inches": "amasentimitha"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Nginentshisekelo ezintweni ezenzeka phakathi kuka- {{select}}",
-        "update": "Buyekeza Indawo Yami",
-        "set": "Setha indawo yami",
-        "prompt": "{{ClickOrTap}} lapha ku<br> setha yakho<br> indawo",
-        "myCurrentLocation": "Indawo yami yamanje",
-        "enterAddress": "Faka ikheli",
-        "enterPostcode": "Sicela ufake ikhodi yeposi \/ ikhodi yakho yeposi",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Faka Indawo",
-            "title": "Indawo Entsha",
-            "nameYourLocation": "Qamba indawo okuyo"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Londoloza le ndawo?",
-            "message": "Ingabe uhlela ukusebenzisa le ndawo futhi ngokuzayo?",
-            "ok": "Yebo",
-            "cancel": "Cha"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Qamba le ndawo",
-            "placeholder": "Ikhaya, Umsebenzi njll.",
-            "ok": "Gcina"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Khetha Indawo"
+            "title": "Choose Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Ingabe kukhona indawo ngaphakathi kwale ndawo?",
-        "newArea": "Indawo entsha",
-        "promptTitle": "Faka igama lendawo:",
-        "absent": "Sicela usethe indawo",
-        "error": "Iphutha",
-        "exist": "Indawo isivele ikhona",
-        "addNewArea": "Faka indawo entsha",
-        "add": "Faka"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "iqoqo lezindawo",
-            "displayType": "Izindawo"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Imele isakhiwo, indawo, umkhumbi, ipaki, njll.",
-            "displayType": "Indawo"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Imelela indawo ngaphakathi kwendawo, njengegumbi noma indawo",
-            "displayType": "Indawo"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Imele iphansi esakhiweni noma emkhunjini",
-            "displayType": "Phansi"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Imelela ikholomu esakhiweni noma emkhunjini",
-            "displayType": "Ikholomu"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Isigaba sezinto ezikubanga elithile le-geohash",
-            "displayType": "Eduze kwezindawo"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Isigaba sezinto ezisebangeni elithile le-geohash, ngokufana nentshisekelo",
-            "displayType": "Izindawo ezithakazelisayo"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

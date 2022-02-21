@@ -1,167 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Барои пардохт пардохт кунед"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: пардохт барои {{call 'user.displayName'}} коркард карда шуд",
-        "ThankYouForYourPayment": "Ташаккур барои пардохти шумо ба {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} ба {{plan.title}} обуна шуд",
-        "YouSubscribedTo": "Шумо ба {{plan.title}} обуна шудаед"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
     "charge": {
-        "Subject": "Шумо пардохти {{displayAmount}} - ро аз {{call 'publisher.displayName'}} аз ҷониби &quot;{{description}}&quot; мегиред",
-        "HasBeenCharged": "Бале, ин танҳо ба шумо хабар додан аст, ки {{1}} аз {{2}} барои {{3}} аз ҷониби {{4}} ситонида шудааст"
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "Ташаккур барои пардохти шумо барои &quot;{{description}}&quot;",
-        "HavePaid": "Ҳей {{1}}, ин танҳо як тасдиқи зуд аст, ки шумо бомуваффақият ба {{2}} ба {{3}} пардохт кардед {{4}}"
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "Маълумот дар бораи фармоиш",
-        "PaymentMethod": "Намуди пардохт",
-        "ContactInfo": "Маълумот барои тамос",
-        "Pay": "Пардохт"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "Даъват аз ҷониби {{invitedUserName}} қабул карда шуд",
-        "YouHaveCreditsToStart": "Шумо барои оғоз кардан {{amount}} кредит доред",
-        "PaymentFor": "Пардохт барои &quot;{{1}}&quot;",
-        "PaymentTo": "Пардохт ба {{1}}",
-        "PaymentToUser": "Пардохт ба {{toUserName}}",
-        "CreatePaidStream": "барои сохтани {{toStreamName}}",
-        "JoinedPaidStream": "барои фармоиш дар &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "барои таъсиси ҷомеаи &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "ҳамчун баргардонидани фармоиш дар &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "{{amount}} кредит харида шуд",
-        "BonusCredits": "Кредити бонус {{amount}}",
-        "BuyAmountCredits": "{{amount}} кредит харед",
-        "WatchClip": "{{amount}} кредит барои тамошои {{fromStreamTitle}} ба даст овард",
-        "MissingCredits": "Қарзҳои гумшуда",
-        "YouMissingCredits": "Барои идома додан ба шумо боз {{amount}} кредит лозим аст.",
-        "BuyCredits": "Кредит харед",
-        "BuyBonus": "Харидани якбора {{amount}} кредит боиси бонуси {{bonus}} кредит мегардад.",
-        "Buy": "Харидан",
-        "PurchaseCredits": "Кредитҳо харед",
-        "Credits": "Қарзҳо",
-        "ErrorInvalidAmount": "Маблағ беэътибор аст",
-        "ErrorInvalidCurrency": "Мутаассифона, мо ҳоло асъори {{currency}} -ро дастгирӣ намекунем",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} кредит",
-            "BonusCredits": "{{amount}} кредит"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Сана",
-        "Amount": "Маблағ",
-        "Description": "Тавсиф",
-        "Client": "Муштарӣ",
-        "To": "ба",
-        "From": "аз",
-        "SeeHistory": "Таърихи пардохтро бинед {{1}}",
-        "HistoryEmpty": "Шумо ҳоло ягон маълумот надоред",
-        "PaymentFor": "{{amount}} кредит фиристода шуд",
-        "PaymentTo": "{{amount}} кредит фиристода шуд",
-        "PaymentToUser": "{{amount}} кредит фиристода шуд",
-        "CreatePaidStream": "Қарзҳои {{amount}} сарфшуда",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "WatchClip": {
-            "+": "{{amount}} кредит ба даст овард",
-            "-": "Қарзҳои {{amount}} сарфшуда"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} кредит ба даст овард",
-            "-": "Қарзҳои {{amount}} сарфшуда"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} кредит гирифтанд",
-            "-": "{{amount}} кредит фиристода шуд"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "Қарзҳои {{amount}} сарфшуда",
-        "BoughtCredits": "{{amount}} кредит харида шуд",
-        "BonusCredits": "Кредити бонусии {{amount}} гирифтанд",
-        "InviteAcceptedBy": "{{amount}} кредит ба даст овард",
-        "YouHaveCreditsToStart": "{{amount}} кредит ба даст овард"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "Маълумотро дар бораи пардохт таъин кунед",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "Обуна шуданро оғоз кунед",
-            "message": "Оё мехоҳед ба {{title}} обуна шавед?",
-            "ok": "Хуб",
-            "cancel": "Бекор кардан"
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "Корти кредитӣ ё дебетӣ",
-        "SubscribePayment": "Пардохти обуна",
-        "ImmediatePayment": "Пардохти фаврӣ"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "Маълумотро дар бораи пардохт таъин кунед",
-        "BuyAmountCredits": "{{amount}} кредит харед",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "Пардохт кунед",
-            "message": "Оё шумо розӣ ҳастед, ки {{symbol}} {{amount}} пардохт кунед?",
-            "ok": "Хуб",
-            "cancel": "Бекор кардан"
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "ok": "OK",
+            "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Қарзҳо",
-            "description": "қарзҳо ва пардохтҳоро пайгирӣ мекунад"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "Нақшаи обуна",
-            "description": "нақшаи обуна"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "Обуна",
-            "description": "обуна"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "Маҳсулот",
-            "description": "маҳсулоте, ки фурӯхта мешавад"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "Хизмат",
-            "description": "хизматрасонӣ пешниҳод карда мешавад"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} кредит ба даст овард"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} кредит харида шуд"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Кредити бонус {{amount}}"
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "Қарзҳои {{amount}} сарфшуда"
+            "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "Ба {{toUserName}} кредити {{amount}} фиристода шуд"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Аз {{fromUserName}} {{amount}} кредит гирифта шуд"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Хидмати нав",
-            "TitlePlaceholder": "Унвони хидмат",
-            "PricePlaceholder": "Нархро муқаррар кунед",
-            "LinkPlaceholder": "истиноди иттилооти иловагиро насб кунед",
-            "DescriptionPlaceholder": "Тавсифи хидмат",
-            "SaveService": "Хидматро захира кунед",
-            "SelectRequiredParticipants": "Иштирокчиёни зарурӣ"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "Идоракунии қолабҳои хидматрасонӣ",
-        "ManageServices": "Хидматҳоро идора кунед",
-        "Free": "Озод",
-        "OptionalContribution": "Саҳми ихтиёрӣ",
-        "RequiredPayment": "Пардохти ҳатмӣ",
-        "AreYouSureDelete": "Шумо мутмаин ҳастед, ки ин хидматро нест кардан мехоҳед?",
-        "AmountServicesRelated": "Дар ин хидмат {{amount}} мавҷуд аст. Онҳо инчунин хориҷ карда мешаванд."
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

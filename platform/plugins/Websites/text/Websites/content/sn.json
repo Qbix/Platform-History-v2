@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Batanidza kusimudzira",
-                "startDate": "Kutanga Zuva",
-                "startTime": "Kutanga Nguva",
-                "endDate": "Zuva Rokuguma",
-                "endTime": "Nguva Yokuguma",
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Sefa Nekufarira",
-                "FilterInterests": "Kutanga kutaipa kufarira ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Kufarira",
-            "Location": "Nzvimbo"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Enda",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Bhurawuza",
-            "WriteToStartConversation": "Nyora zvaunofunga kuti utange hurukuro",
-            "StartConversation": "Tanga Kukurukurirana",
-            "GotoConversation": "Enda kuKukurukurirana",
-            "reset": "Dzorera zvakare",
-            "edit": "Hora",
-            "link": "Batanidza",
-            "setUrl": "Gadza URL",
-            "save": "Sevha",
-            "setClip": "Cheka Kunze Clip",
-            "invalidURL": "URL isiriyo"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Faira rakanyanya kukura zvekuchengetedza. Saizi yakakura saizi {{size}}",
-        "InvalidPDF": "Faira harisi rechokwadi PDF",
-        "StartTypingTitleOrKeywords": "Kutanga kutaipa zita kana mazwi akakosha ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Gwaro reHTML iro vashandisi vakasiyana vanogona kuona nekugadzirisa",
-            "displayType": "Chinyorwa"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Slide mune mharidzo, inogona kusanganisira HTML, odhiyo nezvimwe.",
+            "description": "A slide in a presentation, can include HTML, audio etc.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Mharidzo ine masiraidhi akasiyana siyana",
-            "displayType": "Mharidzo"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Chikamu chekushambadzira pane webhusaiti",
-            "displayType": "Kushambadzira unit"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Nzira yekuunganidza zvikamu zvekushambadzira pasi pezita",
-            "displayType": "Kushambadzira kuiswa"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Zvemukati zveshambadziro",
-            "displayType": "Kushambadzira kwekugadzira"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Mushandirapamwe wekushambadzira",
-            "displayType": "Shambadziro yekushambadzira"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Inomiririra webhusaiti iyo metadata yakabviswa",
-            "displayType": "Peji yewebhu"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

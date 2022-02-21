@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "ຂໍ້ຜິດພາດ {{status}} ໃນລະຫວ່າງການຮ້ອງຂໍ",
-        "canceled": "ການຮ້ອງຂໍຖືກຍົກເລີກ",
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
         "500": "Internal server error",
-        "404": "ບໍ່ພົບ: {{url}}",
+        "404": "Not found: {{url}}",
         "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Session expired. ລີເຟດຫນ້າແລະລອງໃຫມ່ອີກຄັ້ງ.",
-        "otherDomain": "ການຮ້ອງຂໍຂ້າມໂດເມນທີ່ຖືກບລັອກໂດເມນຕ່າງປະເທດຢູ່ {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ແຕະ",
-        "click": "ຄລິກ",
-        "yes": "ແມ່ນແລ້ວ",
-        "no": "ບໍ່ມີ",
-        "Tap": "ແຕະ",
-        "Click": "ກົດປຸ່ມ",
-        "Yes": "ແມ່ນແລ້ວ",
-        "No": "ບໍ່ມີ"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "ມັງກອນ",
-        "2": "ເດືອນກຸມພາ",
-        "3": "ມີນາ",
-        "4": "ເມສາ",
-        "5": "ພຶດສະພາ",
-        "6": "ມິຖຸນາ",
-        "7": "ເດືອນກໍລະກົດ",
-        "8": "ສິງຫາ",
-        "9": "ເດືອນກັນຍາ",
-        "10": "ຕຸລາ",
-        "11": "ເດືອນພະຈິກ",
-        "12": "ເດືອນທັນວາ"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "ກະລຸນາອະນຸຍາດໃຫ້ເຂົ້າເຖິງໄມໂຄໂຟນຂອງທ່ານ",
-        "record": "ບັນທຶກ",
-        "recording": "ການບັນທຶກ",
-        "remains": "ຍັງຄົງຢູ່",
-        "maximum": "ສູງສຸດ",
-        "playing": "ການຫຼິ້ນ",
-        "recorded": "ບັນທຶກໄວ້",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "ຫລືອັບໂຫລດ",
-        "usethis": "ໃຊ້ນີ້",
-        "discard": "ຖິ້ມ",
-        "encoding": "ການເຂົ້າລະຫັດ"
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
-        "title": "ຢືນຢັນ",
-        "ok": "ແມ່ນແລ້ວ",
-        "cancel": "ບໍ່ມີ"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
         "title": "Prompt",
-        "ok": "ໄປ"
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "ຂໍ້ຜິດພາດອ່ານໄຟລ໌",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "ເຈົ້າ​ຢາກ​ເຮັດ​ຫຍັງ?",
-            "photo": "ເອົາຮູບໃຫມ່",
-            "library": "ເລືອກຈາກຫ້ອງສະຫມຸດ"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "ກະລຸນາເລືອກຮູບພາບຂະຫນາດໃຫຍ່.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "ປັບຂະຫນາດແລະຕໍາແຫນ່ງ",
-            "touchscreen": "ໃຊ້ນິ້ວມືຂອງທ່ານເພື່ອຊູມແລະລາກ",
-            "notTouchscreen": "ໃຊ້ເມົາແລະລໍ້ຂອງທ່ານເພື່ອຊູມແລະລາກ"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "ມື້​ຄືນ​ນີ້",
-        "lastEvening": "ສຸດທ້າຍ Eve",
-        "yesterday": "ມື້ວານນີ້",
-        "thisMorning": "ເຊົ້ານີ້",
-        "today": "ມື້​ນີ້",
-        "tonight": "ຄືນນີ້",
-        "tomorrowMorning": "ຕອນເຊົ້າ",
-        "tomorrow": "ມື້ອື່ນ",
-        "hoursAgo": "{{h}} ຊົ່ວໂມງທີ່ຜ່ານມາ",
-        "hourAgo": "{{h}} ຊົ່ວໂມງທີ່ຜ່ານມາ",
-        "minuteAgo": "{{m}} ນາທີທີ່ຜ່ານມາ",
-        "minutesAgo": "{{m}} ນາທີທີ່ແລ້ວ",
-        "secondAgo": "{{s}} ວິນາທີກ່ອນ ໜ້າ ນີ້",
-        "secondsAgo": "{{s}} ວິນາທີກ່ອນ ໜ້າ ນີ້",
-        "fewSecondsAgo": "ວິນາທີກ່ອນ ໜ້າ ນີ້",
-        "rightNow": "ດຽວ​ນີ້",
-        "inSecond": "ໃນ {{s}} ວິນາທີ",
-        "inSeconds": "ໃນ {{s}} ວິນາທີ",
-        "inMinute": "ໃນ {{m}} ນາທີ",
-        "inMinutes": "ໃນ {{m}} ນາທີ",
-        "inHour": "ໃນ {{h}} ຊົ່ວໂມງ",
-        "inHours": "ໃນ {{h}} ຊົ່ວໂມງ",
-        "inUnderMinute": "ພາຍໃຕ້ 1 ນາທີ"
-    },
-    "video": {
-        "clip": "ຄລິບ",
-        "errorNoSource": "ບໍ່ມີແຫຼ່ງວິດີໂອ",
-        "SkipAfter": "ຂ້າມຫຼັງຈາກ",
-        "Skip": "ຂ້າມ"
-    },
-    "pdf": {
-        "clip": "ຄລິບ",
-        "errorNoSource": "ບໍ່ມີແຫຼ່ງ pdf"
-    },
-    "clip": {
-        "SetClipStart": "ຕັ້ງ Clip ເລີ່ມຕົ້ນ",
-        "ClipStart": "ຄລິບເລີ່ມຕົ້ນ",
-        "SetClipEnd": "ຕັ້ງ Clip ຈົບ",
-        "ClipEnd": "Clip ຈົບ",
-        "StartMoreEnd": "ຕຳ ແໜ່ງ ເລີ່ມຕົ້ນບໍ່ສາມາດຫຼາຍກວ່າ ຕຳ ແໜ່ງ ສິ້ນສຸດໄດ້",
-        "EndLessStart": "ຕຳ ແໜ່ງ ສິ້ນສຸດບໍ່ສາມາດ ໜ້ອຍ ກວ່າ ຕຳ ແໜ່ງ ເລີ່ມຕົ້ນໄດ້",
-        "WhichInvalid": "Argument &#39;ເຊິ່ງ&#39; ບໍ່ຖືກຕ້ອງ"
-    },
-    "tabs": {
-        "more": "ຫຼາຍ",
-        "Menu": "ເມນູ"
-    },
-    "durations": {
-        "second": "ຄັ້ງທີສອງ",
-        "seconds": "ວິນາທີ",
-        "minute": "ນາທີ",
-        "minutes": "ນາທີ",
-        "hour": "ຊົ່ວໂມງ",
-        "day": "ມື້",
-        "days": "ມື້",
-        "week": "ອາທິດ",
-        "weeks": "ອາທິດ",
-        "month": "ເດືອນ",
-        "months": "ເດືອນ",
-        "year": "ປີ",
-        "years": "ປີ",
-        "decade": "ທົດສະວັດ",
-        "decades": "ທົດສະວັດ",
-        "century": "ສະຕະວັດ",
-        "centuries": "ສັດຕະວັດແລ້ວ"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

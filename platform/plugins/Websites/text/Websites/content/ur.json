@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "فروغ دینے کے لئے لنک",
-                "startDate": "شروع کرنے کی تاریخ",
-                "startTime": "وقت آغاز",
-                "endDate": "آخری تاریخ",
-                "endTime": "آخر وقت",
-                "budget": "بجٹ"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "دلچسپی سے فلٹر",
-                "FilterInterests": "دلچسپی ٹائپ کرنا شروع کریں ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "دلچسپی",
-            "Location": "مقام"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "جاؤ",
-            "PasteLinkHere": "یہاں ایک لنک چسپاں کریں",
-            "BrowseTheWeb": "براؤز کریں",
-            "WriteToStartConversation": "بات چیت شروع کرنے کے لئے اپنے خیالات لکھیں",
-            "StartConversation": "بات چیت شروع کریں",
-            "GotoConversation": "گفتگو پر جائیں۔",
-            "reset": "ری سیٹ کریں",
-            "edit": "ترمیم",
-            "link": "لنک",
-            "setUrl": "یو آر ایل سیٹ کریں",
-            "save": "محفوظ کریں",
-            "setClip": "کٹ آؤٹ کلپ",
-            "invalidURL": "غلط URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "کیچنگ کیلئے فائل بہت بڑی ہے۔ فائل کا زیادہ سے زیادہ سائز {{999}",
-        "InvalidPDF": "فائل درست پی ڈی ایف نہیں ہے",
-        "StartTypingTitleOrKeywords": "عنوان یا مطلوبہ الفاظ کو ٹائپ کرنا شروع کریں ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "ایک HTML دستاویز جسے مختلف صارفین دیکھ اور ترمیم کرسکتے ہیں۔",
-            "displayType": "آرٹیکل۔"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "پریزنٹیشن کی ایک سلائڈ ، HTML ، آڈیو وغیرہ شامل کرسکتی ہے۔",
-            "displayType": "سلائیڈ"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "مختلف سلائڈز پر مشتمل ایک پریزنٹیشن۔",
-            "displayType": "پیش کش۔"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "کسی ویب سائٹ پر ایک اشتہاری یونٹ۔",
-            "displayType": "ایڈورٹائزنگ یونٹ۔"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "کسی نام کے تحت اشتہاری اکائیوں کو گروپ بنانے کا ایک طریقہ۔",
-            "displayType": "ایڈورٹائزنگ پلیسمنٹ۔"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "اشتہار کے لئے مشمولات۔",
-            "displayType": "تخلیقی اشتہار"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "ایک اشتہاری مہم۔",
-            "displayType": "اشتہاری مہم۔"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "ایک ایسی ویب سائٹ کی نمائندگی کرتا ہے جس کا میٹا ڈیٹا ختم ہو گیا تھا۔",
-            "displayType": "ویب صفحہ"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

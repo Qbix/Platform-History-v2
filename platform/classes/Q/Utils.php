@@ -125,6 +125,44 @@ class Q_Utils
 		}
 		return $result;
 	 }
+
+	/**
+	 * Converts arbitrary-precision decimal number to hex (without '0x')
+	 * @method dec2hex
+	 * @static
+	 * @param {string} $dec
+	 * @param {boolean} [$prefix='0x'] set to false to skip prepending prefix
+	 * @return {string} The hex string, with any potential prefix applied
+	 */
+	static function dec2hex ($dec, $prefix='0x') {
+		$hex = '';
+		do {    
+			$last = bcmod($dec, 16);
+			$hex = dechex($last).$hex;
+			$dec = bcdiv(bcsub($dec, $last), 16);
+		} while($dec>0);
+		return $prefix ? ($prefix . $hex) : $hex;
+	 }
+	 
+	/**
+	 * Converts hex to arbitrary-precision decimal number
+	 * @method hex2dec
+	 * @static
+	 * @param {string} $hex
+	 * @param {string} [$prefix='0x'] the prefix to strip, if it is found
+	 * @return {string} The arbitrary-precision decimal number
+	 */
+	 static function hex2dec($hex, $prefix='0x') {
+		if ($prefix and substr($hex, 0, 2) == $prefix) {
+			$hex = substr($hex, strlen($prefix));
+		}
+		if (strlen($hex) == 1) {
+			return hexdec($hex);
+		}
+		$remain = substr($hex, 0, -1);
+		$last = substr($hex, -1);
+		return bcadd(bcmul(16, self::hex2dec($remain)), hexdec($last));
+	 }
 	
 	/**
 	 * Decodes some data from base64
@@ -371,6 +409,8 @@ class Q_Utils
 	 *  You can also change this default using the config Db/normalize/characters
 	 * @param {integer} [$numChars=200] Defaults to 200, maximum length of normalized string
 	 * @param {boolean} [$keepCaseIntact=false] If true, doesn't convert to lowercase
+	 * @return {string}
+	 * @throws {Q_Exception_RequiredField} if $text is null
 	 */
 	static function normalize(
 		$text,
@@ -379,6 +419,9 @@ class Q_Utils
 		$numChars = 200,
 		$keepCaseIntact = false)
 	{
+		if (!isset($text)) {
+			throw new Q_Exception_RequiredField(array('field' => 'text'));
+		}
 		if (!isset($characters)) {
 			$characters = '/[^\p{L}0-9]+/u';
 			if (class_exists('Q_Config')) {
@@ -910,7 +953,7 @@ class Q_Utils
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent))
-			$user_agent = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/2.0.0.9';
+			$user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (K HTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
 
 		$ip = null;
 		if (is_array($uri)) {

@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Mea fou"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Tagata na ou valaauliaina",
-        "Streams\/invitedMe": "O ai na valaauliaina au",
-        "AreYouAgree": "O e malilie?",
-        "Yes": "ioe",
-        "No": "leai"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "O a mea e te fiafia i ai?",
-        "CanAdd": "Afai e le mafai ona e maua le mea o loʻo e sailia, e mafai ona e faaopoopoina se fiafia fou i lalo:",
-        "TrySynonyms": "Aua le vaai i ai? Taumafai nisi synonyms.",
-        "AddUnderCategory": "Faʻaopoopo i lalo o le vaega ...",
-        "Other": "Isi",
-        "Unlisted": "Faʻamaumauga"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Ua maeʻa le feʻau mo le iloiloga a le suʻega. Toe toe faʻaulu i tua.",
-        "noOneSaid": "E leai se isi na fai mai se mea",
-        "closeChatButton": "Katalata talatalanoa",
-        "closeChatConfirmTitle": "Katia lenei talatalanoaga?",
-        "closeChatConfirm": "E te mautinoa e te manaʻo e tapuni lenei talatalanoaga?",
-        "closeChatConfirmYes": "ioe",
-        "closeChatConfirmNo": "leai",
-        "earlierComments": "faamatalaga muamua",
-        "Subscribed": "Faailoaina Mute",
-        "Unsubscribed": "Maua Faʻamatalaga",
-        "notAllowedToJoinCall": "E leai sau faʻatagaga e auai i lenei talanoaga.",
-        "startedConversation": "amataina se talanoaga",
-        "RealTimeCall": "Taimi Moni Taimi",
-        "SearchByName": "Saili i le igoa",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} o loo asiasi i le talatalanoaga",
-            "Join": "{{displayName}} auai i le talatalanoaga",
-            "Leave": "{{displayName}} tuʻua le talatalanoaga",
-            "RelatedTo": "{{displayName}} amata le {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Savali {{& message.fields.type}} i {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} na fai mai:",
-        "Streams\/changed": "Suiga i {{stream.fields.title}}",
-        "Streams\/invite": "Na valaaulia oe i {{& stream.fields.title}}",
-        "Streams\/announcement": "Faasilasila i {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} suia le avanoa i le laina",
-        "Streams\/chat\/edit": "Faʻataʻitaʻitele le feau tautala",
-        "Streams\/chat\/remove": "Faʻalēaogāina le feʻau faʻaulu",
-        "Streams\/closed": "{{stream.fields.title}} ua tapunia",
-        "Streams\/task\/progress": "Alualu i luma o le alualu i luma {{stream.fields.title}}",
-        "Streams\/task\/complete": "Ua maeʻa galuega: {{stream.fields.title}}",
-        "Streams\/task\/error": "Laʻasaga i le taimi: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Savali o loʻo i totonu",
-        "Streams\/relatedTo\/Streams\/call": "Na amata le New Call i {{toTitle}}",
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
         "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Faʻaopoopo i {{toTitle}} e pei {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} na taʻua oe i se faamatalaga",
-        "Streams\/call": "{{displayName}} amata le telefoni moʻi",
-        "ManageEmailSubscriptions": "pulea lau lisiti imeli",
-        "IfUnsubscribe": "Afai e te manaʻo e faʻaaoga"
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} valaaulia oe i {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Filifili mai lau Fesootaiga",
-            "chooseAgainFromContacts": "Filifili Faalua mai Faʻamatalaga",
-            "inviteSelectedContacts": "Valaaulia Filifilia Filifilia",
-            "selectFromContacts": "Filifili mai Faʻamatalaga",
-            "photo": "Ave se ata",
-            "photoInstruction": "Afai o le tagata na siaki lau QR code o loʻo i ou luma, ave se ata o ia mea",
-            "to": "I: {{Stream Title}}",
-            "go": "Alu",
-            "title": "Valaaulia",
-            "placeholder": "Telefoni poʻo tuatusi imeli",
-            "orInvite": "Pe valaaulia tagata e ala i le faʻaaoga:",
-            "QR": "{{ClickOrTap}} e gaosia QR code",
-            "QRtitle": "Siaki lenei QR code",
-            "QRscanned": "Sa latou suʻeina!",
-            "byEmail": "Imeli",
-            "byText": "Tusitusiga",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} pe afai na siakiina le code",
-            "copyLink": "{{ClickOrTap}} e kopi ai valaaulia valaʻaulia",
-            "userChooserPlaceholder": "Saili i lou igoa"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, siaki le mea lenei",
-            "PleaseVisitLink": "Faamolemole asiasi i le sootaga lenei:",
-            "InvitingYou": "O loʻo ou valaauliaina oe i {{title}}",
-            "HasInvitedYou": "{{displayName}} ua valaauliaina oe i {{title}}",
-            "HasMentionedYou": "{{displayName}} ua taua oe i le &quot;{{title}}&quot;",
-            "YOUAREINVITED": "E TE FAIA!",
-            "AcceptInvite": "Talia le Valaaulia"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Ua valaaulia oe i {{title}}. Faamolemole tap {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Ua valaaulia oe. {{ClickOrTap}} iinei e talia ma auai."
-        },
-        "command": "Valaaulia",
-        "youCanNowPaste": "E mafai nei ona e faapipii lenei sootaga i se mea e valaaulia ai tagata"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
-            "confirm": "O valaaulia e auina mai le numera, lea e leʻi iloa e au uo. Mata e te manaʻo e tulitatao i se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
-            "check": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau sms ma kiliki le sootaga!",
-            "CheckYourMobile": "Faamolemole siaki SMS ma mulimuli i faatonuga!"
-        },
-        "email": {
-            "alert": "O valaaulia e auina atu mai la tatou itu, lea e leʻi iloa e au uo. Suʻe faʻatasi ma se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
-            "confirm": "O valaaulia e auina atu mai la tatou itu, lea e leʻi iloa e au uo. Mata e te manaʻo e tulitatao i se faʻamatalaga vave e taʻu atu ia i latou o le valaaulia na sau mai ia te oe, fai atu ia i latou e kiliki le sootaga.",
-            "subject": "Na e mauaina se valaaulia?",
-            "body": "Hey, faatoa ou auina atu ia te oe se valaaulia i le {{app}} app. Faamolemole siaki lau imeli ma kiliki le sootaga i totonu!",
-            "CheckYourEmail": "Faamolemole siaki lau imeli ma mulimuli i faatonuga!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Faʻaliliu le Microphone",
-            "cameraTitle": "Enable Camera",
-            "cameraAndMicrophoneTitle": "Faʻamaonia le Kamera ma le Masini",
-            "dialogTitle": "Fesoʻotaʻi",
-            "microphoneBtn": "Faʻaliliu le Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Faʻamaonia le Kamera ma le Masini"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Faatonuga",
-            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Le faʻaaogaina faamolemole mulimuli i laasaga nei:",
-            "point1": "Alu i le &quot;Faʻatonu&quot; -&gt; &quot;Faʻalauteleina&quot; -&gt; &quot;Faʻamatalaga o le Nofoaga&quot; -&gt; &quot;Kamera&quot; poʻo le &quot;Faʻamaumauga o le Pae&quot; -&gt; &quot;Telefoni&quot;",
-            "point2": "Aveese {{hostname}} mai le &quot;Block&quot; lisi"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Faatonuga",
-            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Faʻamolemole toe sii mai lenei itulau ma faʻamaonia avanoa i {{kind}} e auai i le fonotaga."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Faatonuga",
-            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Le faʻaaogaina faamolemole mulimuli i laasaga nei:",
-            "point1": "Alu i lau Tautuʻuga Android",
-            "point2": "Tatala &quot;Galuega ma faʻamatalaga&quot;",
-            "point3": "Saili &quot;{{communityName}}&quot; ma tatala",
-            "point4": "Tapuni i Faʻatagaga",
-            "point5": "Enable {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Faatonuga",
-            "permissionDenied": "Faʻatagaina mo le {{kind}} faafitia. Le faʻaaogaina faamolemole mulimuli i laasaga nei:",
-            "point1": "Alu i lau iOS Seti",
-            "point2": "Tatala &quot;Tūmataitino&quot;",
-            "point3": "Saili {{kind}} ma tatala",
-            "point4": "Saili &quot;{{communityName}}&quot; ma mafai ai"
-        },
-        "notices": {
-            "youJoinedRoom": "Na e auai i le potu",
-            "joining": "Auai i: {{userName}}",
-            "sbLeftRoom": "{{userName}} tuua le potu",
-            "youLeftRoom": "Na e tuua le potu",
-            "codeCopied": "Na e tuua le potu",
-            "sbBeganFbLive": "{{userName}} na amata faasalalauina lenei valaau i luga o Facebook",
-            "sbStoppedFbLive": "{{userName}} taofia le faasalalauina o lenei valaau i luga o Facebook",
-            "youBeganFbLive": "Na e amata faasalalauina lenei valaau i le Facebook",
-            "youStoppedFbLive": "Ua e taofia le faasalalauina o lenei valaau i le Facebook",
-            "linkCopiedToCb": "Lisi na kopi i luga o le laupapa",
-            "codeCopiedToCb": "Code na kopiina i luga o le laupapa",
-            "userHasNoVideo": "E leai se vitio e auai",
-            "openInBrowserAlert": "Tatala avanoa i le saogala Safari e auai i le konafesi.",
-            "youBeganVideoRecording": "Oe amata pueina lenei konafesi",
-            "youStoppedVideoRecording": "Ua e le toe pueina lenei konafesi",
-            "switchingRoom": "Fesuiaʻi potu ...",
-            "forceDisconnecting": "Oe o le a vavaeʻese i totonu o le 5 sekone",
-            "youStartedLive": "Na e amata faʻasalalau lenei valaʻau ile aganuu RTMP",
-            "youStoppedLive": "Ua e le toe faʻasalalauina lenei valaʻau ile masani RTMP",
-            "sbStartedLiveStreaming": "{{userName}} amata ola",
-            "sbStoppedLiveStreaming": "{{userName}} faʻaiʻu ola",
-            "liveStopped": "Ua tupu le sese a o lafoina le vitio i le faaiuga"
-        },
-        "settingsPopup": {
-            "webCamera": "Upega Tafaʻilagi",
-            "screenSharing": "Fefaasoaaʻi Mata",
-            "shareAnotherScreen": "Fetufaai se isi lau",
-            "turnOffCameras": "Ave uma taʻavale",
-            "startFBLive": "Amata Facebook Livestream",
-            "stopFBLive": "Taofi Facebook Livestream",
-            "fbLiveTitle": "Live Title",
-            "fbLiveDescription": "Faʻaaliga Ola",
-            "fbOnlyMeLiveAccess": "Naʻo Me",
-            "fbFriendsAccess": "Uo",
-            "fbPublicAccess": "Malo",
-            "fbStartLive": "Alu Ola",
-            "fbStopLive": "Maea Ola",
-            "fbEmbedCode": "Toto",
-            "copy": "Kopi",
-            "turnOffVideo": "Tapē le mea pueata \/ faʻafesoʻotaʻi lau",
-            "turnOffScreenSharing": "Tapē le faʻavasegaina o lau",
-            "cameraIsTurnedOff": "Ua tape le meapueata",
-            "startRecording": "Amata Faamaumauina",
-            "stopRecording": "Taofi le pueina",
-            "recordingInProgress": "O loʻo faagasolo faamaumauga i totonu ...",
-            "publishOnTimeline": "Lomiga i taimi",
-            "publishToGroup": "Lolomi i le kulupu",
-            "turnOffAudioInput": "Faʻaleaoga le leo leo leo",
-            "micIsTurnedOff": "Ua tape le masini faaleoteleleo",
-            "start": "Amata",
-            "stop": "Taofi",
-            "streamingSettings": "Tulaga",
-            "streamToRTMP": "Alu i le custom RTMP"
-        },
-        "participantsPopup": {
-            "disconnect": "Alu ese",
-            "floatingScreens": "Fofo Matagofie",
-            "tiledScreens": "Faʻataʻi Mata",
-            "loudestExceptMe": "Filifili Seʻi vagana Au",
-            "maximizeLoudest": "Faʻateleina le Laiti",
-            "staticMaximized": "Faʻailoga Faʻateleina",
-            "manual": "Tusi lesona",
-            "fullScreen": "Ata Mata",
-            "turnOffCamera": "Nana le vitio",
-            "turnOffAudio": "Le faʻalologo leo",
-            "turnOffScreenSharing": "Nana le fetufaaiga lau",
-            "turnOnCamera": "Faaali vitio",
-            "turnOnAudio": "Faʻailoa mai le leo",
-            "turnOnScreenSharing": "Faʻaali le faʻasoa"
-        },
-        "notAllowedToJoinCall": "E leai sau faʻatagaina e te auai i lenei vaitafe.",
-        "streamTitle": "{{1}} ola valaʻau",
-        "preview": {
-            "preamble": "Fonotaga:",
-            "Meeting": "Fonotaga",
-            "MeetingEnded": "Na uma le fonotaga"
-        },
-        "preparing": {
-            "micIsOff": "Ua alu Mika",
-            "micIsOn": "Ua alu Mika",
-            "cameraIsOff": "Ua tape le meapueata",
-            "cameraIsOn": "Ua ki le meapueata",
-            "screenSharingIsOn": "Ua i luga le suʻega suʻega",
-            "screenSharingIsOff": "Faasoa atu lau",
-            "joinNow": "Auai i le Valaʻau"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "lafo se savali <em>{{message.fields.type}}<\/em> i {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "fai mai",
-            "in": "i",
-            "body": "i {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ua lafoina i",
-                "byAvatar": "e {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ua i ai se {{instructions.fromDisplayType}} fou {",
-                "byAvatar": "faaopoopo e {{avatar.displayName}}"
-            },
-            "startedCallIn": "amata se valaau i"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Valaaulia",
-            "description": "Peta meli mo valaaulia"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Punaoa",
-            "description": "vaitafe mo le puleaina o avanoa i se punaʻoa ma le lafoina o savali e uiga i faʻaleleia"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "mo le mauaina o faʻamatalaga e uiga i le alualu i luma i se galuega faapitoa",
+            "description": "for receiving updates about progress on a certain task",
             "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "vasega mo galuega",
-            "displayType": "Galuega"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "o se masani masani mo tagata o le alaalafaga",
-            "displayType": "Le masani masani mo tagata o le alaalafaga"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "faʻafeiloaʻiga lea e mafai ai e se faʻaaoga ona faʻalauiloaina i latou lava",
-            "displayType": "Faʻafeiloaʻi"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Numera",
-            "description": "numera numera"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Aso",
-            "description": "aso"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Tusitusiga",
-            "description": "tino o tusitusiga"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Tusitusiga",
-            "description": "tamai tino o tusitusiga"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Tusitusiga",
-            "description": "vaega masani o tusitusiga"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Imeli tuatusi",
-            "description": "imeli tuatusi"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Numera telefoni",
-            "description": "numera telefoni"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "fesoʻotaʻi i le upega tafailagi"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Ata",
-            "description": "ata vaaia",
-            "newItem": "Faʻaopopo le Ata"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Faʻafanua Ata",
-            "description": "ata o ata"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Tusi",
-            "description": "se lipine e fesoʻotaʻi faʻatasi ai le aufaasālalau"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "lokaina faila",
-            "newItem": "Faʻaopopo Faila"
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "lipine leo",
-            "newItem": "Faʻaopopo Leo"
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Ata Vitio",
-            "description": "vitio vitio",
-            "newItem": "Faʻaopopo le Vitio"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
-            "displayType": "Faʻaola",
-            "description": "ola leo pe vitio"
+            "displayType": "Livestream",
+            "description": "live audio or video"
         },
         "Streams\/category": {
             "displayType": "Category",
-            "description": "se vaega e mafai ona fesootai i ai isi vaitafe"
+            "description": "a category to which other streams can be related"
         },
         "Streams\/participating": {
-            "displayType": "Faʻamatalaga Auai",
-            "description": "vaitafe e fesoʻotai \/ le fesoʻotaʻi i lenei mea pe a faʻatasi se tagata faʻapipiʻi \/ lau"
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
         "Streams\/interest": {
-            "displayType": "Tului",
-            "description": "e faʻatusa ai le fiafia o se tagata i se autu"
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
         },
         "Streams\/incoming": {
-            "displayType": "O mai",
-            "description": "taunuʻuga mo savali na lafoina e isi tagata faʻaoga"
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
         },
         "Streams\/chat": {
-            "displayType": "Talanoaga",
-            "description": "se talanoaga i le va o tagata faaaoga, ma le talafaasolopito"
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Taimi Moni Taimi",
-            "description": "se taimi moni video \/ leo telefoni"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF pepa",
-            "description": "PDF pepa",
-            "newItem": "Faʻaopopo PDF"
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Fesili",
-            "description": "vaitafe fesili"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Tali",
-            "description": "tali vaitafe"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Valaau",
-            "description": "vaega mo Vaitafe \/ webrtc",
-            "MaxRelationsExceeded": "Ua sili atu Max telefoni"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Ulutala",
-        "Subscribed": "Saini",
-        "Participants": "Tagata auai",
-        "AreYouSureRemoveIdentifier": "E te mautinoa e aveese lenei faʻailoga?",
-        "AreYouSureUnsubscribeIdentifier": "E te mautinoa e vavaeeseina lenei faʻamatalaga? O le a tape ai faʻamatalaga i lenei faʻamatalaga.",
-        "AreYouSureUnsubscribeDevice": "E te mautinoa e vavaeeseina lenei masini? O le a tape ai faʻamatalaga i lenei masini.",
-        "Identifiers": "Faʻamatalaga",
-        "Devices": "Lelei",
-        "Streams": "Vaitafe",
-        "AreYouSureRemoveParticipant": "O e mautinoa e te manaʻo e aveʻese le sui auai lea?",
-        "RemoveParticipant": "Aveese le tagata auai"
-    },
     "menu": {
-        "placeholder": "ituaiga itulau ulutala",
-        "ModTab": "Suia Mea",
-        "Save": "Sefe",
-        "Delete": "Aveese",
-        "Submenu": "Sui"
-    },
-    "errors": {
-        "HiddenFromYou": "O lenei mea e lilo mai ia te oe."
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Faamaumauga",
-        "reset": "Toe setiina",
-        "edit": "Faʻatonutonu",
-        "title": "ulutala",
-        "description": "faʻamatalaga",
-        "upload": "Tuʻu i luga",
-        "link": "Sootaga",
-        "setUrl": "Seti URL",
-        "save": "Sefe",
-        "setClip": "Oti ese le kilipa",
-        "invalidURL": "Le saʻo URL",
-        "invalidFile": "Faila le saʻo",
-        "errorNoSource": "Leai se mea puʻega",
-        "uploadLimit": "Max faila tele: {{size}}",
-        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Toe setiina",
-        "edit": "Faʻatonutonu",
-        "title": "ulutala",
-        "description": "faʻamatalaga",
-        "upload": "Tuʻu i luga",
-        "link": "Sootaga",
-        "setUrl": "Seti URL",
-        "save": "Sefe",
-        "setClip": "Oti ese le kilipa",
-        "invalidURL": "Le saʻo URL",
-        "invalidFile": "Faila le saʻo",
-        "errorNoSource": "Leai se ata vitio",
-        "uploadLimit": "Max faila tele: {{size}}",
-        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Toe setiina",
-        "edit": "Faʻatonutonu",
-        "title": "ulutala",
-        "description": "faʻamatalaga",
-        "upload": "Tuʻu i luga",
-        "link": "Sootaga",
-        "setUrl": "Seti URL",
-        "save": "Sefe",
-        "setClip": "Oti ese le kilipa",
-        "invalidURL": "Le saʻo URL",
-        "invalidFile": "Faila le saʻo",
-        "errorNoSource": "Leai se punavai pdf",
-        "uploadLimit": "Max faila tele: {{size}}",
-        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Toe setiina",
-        "edit": "Faʻatonutonu",
-        "title": "ulutala",
-        "description": "faʻamatalaga",
-        "upload": "Tuʻu i luga",
-        "link": "Sootaga",
-        "setUrl": "Seti URL",
-        "save": "Sefe",
-        "setClip": "Oti ese le kilipa",
-        "invalidURL": "Le saʻo URL",
-        "invalidFile": "Faila le saʻo",
-        "errorNoSource": "Leai se ata e maua",
-        "uploadLimit": "Max faila tele: {{size}}",
-        "errorFileSize": "Faʻamalie atu, ae faila tele tele.<br> O le tele o le faila o le {{size}}",
-        "uploadedImage": "Ata faʻapipiʻi",
-        "imageTitle": "Igoa Igoa"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Fesili",
-        "Answers": "Tali",
-        "AnswerQuestion": "Tali Fesili",
-        "SetYourAnswer": "Faʻamolemole tali le fesili",
-        "NewQuestion": "Fesili Fou",
-        "NewAnswer": "Tali Fou",
-        "AnswerDetails": "Tali Faamatalaga",
-        "answerOption": "Filifiliga",
-        "answerOptionExclusive": "Faʻapitoa",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "tali fua ...",
-        "SaveQuestion": "Sefe le Fesili",
-        "SaveAnswer": "Sefe Tali",
-        "AddAnotherAnswer": "Faʻaopopo se isi tali",
-        "ErrorAnswers": "Faʻamolemole faʻaopopo se tali se tasi",
-        "AlreadyAnswered": "Ua uma ona tali",
-        "TitlePlaceholder": "Ituaiga lau fesili",
-        "ContentPlaceholder": "Tuʻu nisi faʻamatalaga faʻaopopo e fesoasoani i tagata e tali",
-        "ErrorTitle": "Fesili e manaʻomia",
-        "Placeholder": "Pasi"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Aafiaga Fou",
-        "DefineTitle": "Faʻamolemole faʻamalamalama se ulutala",
-        "Create": "Fausia"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Valaau",
-        "MaxCalls": "Ua telefoni Max",
-        "Update": "Faʻafouga",
-        "NoCallsYet": "Leai ni telefoni",
-        "CallReasonTitle": "O le a le uiga o lenei valaau?",
-        "WaitingRoom": "Potu Faʻatali"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

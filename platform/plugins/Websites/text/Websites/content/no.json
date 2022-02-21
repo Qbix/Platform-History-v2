@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link til markedsføring",
-                "startDate": "Startdato",
-                "startTime": "Starttid",
-                "endDate": "Sluttdato",
-                "endTime": "Sluttid",
-                "budget": "Budsjett"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtrer etter renter",
-                "FilterInterests": "Begynn å skrive en interesse ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Renter",
-            "Location": "plassering"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Gå",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Bla gjennom",
-            "WriteToStartConversation": "Skriv tankene dine for å starte samtalen",
-            "StartConversation": "Start samtale",
-            "GotoConversation": "Gå til Samtale",
-            "reset": "Nullstille",
-            "edit": "Redigere",
-            "link": "Lenke",
-            "setUrl": "Angi URL",
-            "save": "Lagre",
-            "setClip": "Klipp ut klipp",
-            "invalidURL": "ugyldig URL"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Filen er for stor til hurtigbufring. Maks filstørrelse {{size}}",
-        "InvalidPDF": "Filen er ikke en gyldig PDF",
-        "StartTypingTitleOrKeywords": "Begynn å skrive tittel eller søkeord ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Et HTML -dokument som ulike brukere kan se og redigere",
-            "displayType": "Artikkel"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Et lysbilde i en presentasjon, kan inneholde HTML, lyd etc.",
-            "displayType": "Lysbilde"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "En presentasjon bestående av forskjellige lysbilder",
-            "displayType": "Presentasjon"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "En reklameenhet på et nettsted",
-            "displayType": "Annonseenhet"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "En måte å gruppere reklameenheter under et navn",
-            "displayType": "Annonseplassering"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Innhold for en annonse",
-            "displayType": "Annonsekreativ"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "En reklamekampanje",
-            "displayType": "Annonsekampanje"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Representerer et nettsted hvis metadata ble skrapt",
-            "displayType": "nettside"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

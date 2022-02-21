@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "жаңы сап"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Адамдар мен чакырды",
-        "Streams\/invitedMe": "Ким мени чакырды",
-        "AreYouAgree": "Сиз макулсузбу?",
-        "Yes": "Ооба",
-        "No": "Жок"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Сен эмне жагат?",
-        "CanAdd": "Эгер дагы эле издеп таппай жатасызбы мүмкүн эмес болсо, анда төмөндө жаңы кызыгуу кошо аласыз:",
-        "TrySynonyms": "Аны көрбөй жатасызбы? кээ бир синоним аракет кыл.",
-        "AddUnderCategory": "категориясы боюнча кошуу ...",
-        "Other": "башка",
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
         "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Билдирүү Администратордун карап чыгуусу үчүн белгиленди. Таптап unflag дагы бир жолу.",
-        "noOneSaid": "Эч ким эч нерсе мындай дейт:",
-        "closeChatButton": "Жабуу чат",
-        "closeChatConfirmTitle": "Бул маек жабуу?",
-        "closeChatConfirm": "Бул маек жабуу келеби?",
-        "closeChatConfirmYes": "Ооба",
-        "closeChatConfirmNo": "Жок",
-        "earlierComments": "мурда талкуулар",
-        "Subscribed": "Үнсүз эскертмелер",
-        "Unsubscribed": "Get Эскертмелер",
-        "notAllowedToJoinCall": "Бул маекти кирүүгө уруксат берилген эмес.",
-        "startedConversation": "сөз баштады",
-        "RealTimeCall": "Айкын убакыт Call",
-        "SearchByName": "аталышы боюнча издөө",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} баарлашууну көрүп жатат",
-            "Join": "Чатка {{displayName}} кошулду",
-            "Leave": "{{displayName}} баарлашуудан чыгып кетти",
-            "RelatedTo": "{{displayName}} {{stream.displayType}} баштаган"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Message {{& message.fields.type}} үчүн {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} мындай деди:",
-        "Streams\/changed": "өзгөртүүлөр {{stream.fields.title}}",
-        "Streams\/invite": "Сиз чакырылган {{& stream.fields.title}}",
-        "Streams\/announcement": "жылы жарыя {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} агым мүмкүнчүлүк өзгөртүлдү",
-        "Streams\/chat\/edit": "Маектин билдирүүсү түзөтүлдү",
-        "Streams\/chat\/remove": "Chat кабар жок",
-        "Streams\/closed": "{{stream.fields.title}} жабылды",
-        "Streams\/task\/progress": "боюнча прогресс {{stream.fields.title}}",
-        "Streams\/task\/complete": "Тапшырма аяктады: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error учурунда: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Кириш сүйлөшүү",
-        "Streams\/relatedTo\/Streams\/call": "башталды жаңы Call {{toTitle}}",
-        "Streams\/relatedTo\/*": "Болумушту {{relationDisplayType}} {{жылы 1000}}",
-        "Streams\/relatedFrom\/*": "кошулду {{toTitle}} {{катары 1000}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} комментарий сага айтылган",
-        "Streams\/call": "{{displayName}} чыныгы убакытта чалууну баштады",
-        "ManageEmailSubscriptions": "электрондук почта жазылууларды башкаруу",
-        "IfUnsubscribe": "Эгер сиз жазылууну каалайм"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} чакырды {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Байланыштар тандоо",
-            "chooseAgainFromContacts": "Байланыш кайра тандоо",
-            "inviteSelectedContacts": "Чакыруу Тандалган Байланыштар",
-            "selectFromContacts": "Тандоо From Байланыштар",
-            "photo": "Сүрөт тартуу",
-            "photoInstruction": "Сиздин QR кодун сканерден адам сенин алдында турган болсо, алардын Сүрөт тартуу",
-            "to": "Үчүн: {{Stream Title}}",
-            "go": "Мурунку",
-            "title": "чакыруу",
-            "placeholder": "Мобилдик номери же электрондук почта дареги",
-            "orInvite": "Же колдонуу менен адамдарды чакырат:",
-            "QR": "{{ClickOrTap}} QR кодун түзүү үчүн",
-            "QRtitle": "Бул QR кодун издөө",
-            "QRscanned": "Алар сканерден!",
-            "byEmail": "E-mail",
-            "byText": "текст",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "коду сканерден болсо {{ClickOrTap}}",
-            "copyLink": "Чакыруу шилтемесин көчүрүү үчүн {{ClickOrTap}}",
-            "userChooserPlaceholder": "Аты боюнча издөө"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Эй, бул текшерип",
-            "PleaseVisitLink": "төмөнкү шилтемени төмөнкү сайттан алууга болот:",
-            "InvitingYou": "Мен сени чакырып жатам {{title}}",
-            "HasInvitedYou": "{{displayName}} {{title}} сизди чакырды",
-            "HasMentionedYou": "{{displayName}} &quot;{{title}}&quot; сени айтылып жатат",
-            "YOUAREINVITED": "Силер чакырып жатат!",
-            "AcceptInvite": "чакыруу кабыл"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "{{title}} Сиз чакырылган. Сураныч, таптап, {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Сиз чакырылган. {{ClickOrTap}} бул жерде кабыл алууга жана кошулуу."
-        },
-        "command": "чакыруу",
-        "youCanNowPaste": "Азыр бул шилтемени адамдарды чакыруу үчүн бир жерге чаптасаңыз болот"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Чакыруу сиздин Досторду тааныган жок, биздин санына чейин берилет. шилтемени чыкылдатып, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен керек.",
-            "confirm": "Чакыруу сиздин Досторду тааныган жок, биздин санына чейин берилет. Эгер шилтемени чыкылдатканда, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен ылайык келет.",
-            "check": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, SMS текшерип, шилтемени чыкылдатып!",
-            "CheckYourMobile": "Сураныч, SMS текшерүү жана көрсөтмөлөрүнө ылайык иш!"
-        },
-        "email": {
-            "alert": "Чакыруу сиздин Досторду тааныган жок, биздин доменде жиберген жатышат. шилтемени чыкылдатып, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен керек.",
-            "confirm": "Чакыруу сиздин Досторду тааныган жок, биздин доменде жиберген жатышат. Эгер шилтемени чыкылдатканда, аларды сурап, аларды чакыруу сага келген билип алсын үчүн тез текст менен ылайык келет.",
-            "subject": "Эгер чакыруу ала беле?",
-            "body": "Салам, мен сиз {{app}} колдонмосун чакыруу жиберди. Сураныч, электрондук почта текшерип, ошол шилтемени чыкылдатып!",
-            "CheckYourEmail": "Сураныч, электрондук жана андан көрсөтмөлөрдү текшерүү!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "иштетүү Наушник",
-            "cameraTitle": "иштетүү Камера",
-            "cameraAndMicrophoneTitle": "Камера жана Наушник иштетүү",
-            "dialogTitle": "туташуу",
-            "microphoneBtn": "иштетүү Наушник",
-            "cameraBtn": "иштетүү Камера",
-            "cameraAndMicrophoneBtn": "Камера жана Наушник иштетүү"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "көрсөтмө",
-            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. Аны колдонуу үчүн төмөнкү кадамдарды суранабыз:",
-            "point1": "&quot;Жөндөөлөргө&quot; Go -&gt; &quot;Advanced&quot; -&gt; &quot;Жашыруун жана коопсуздук&quot; -&gt; &quot;сайты Орнотуулар&quot; -&gt; &quot;Камера&quot; же &quot;Сайт Орнотуулар&quot; -&gt; &quot;колдонуу&quot;",
-            "point2": "Remove {{hostname}} чейин &quot;блок&quot; тизме"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "көрсөтмө",
-            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. {{kind}} жыйынында кошулуп, бул баракча жана ырастоо мүмкүнчүлүгүн Сураныч, кайра."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "көрсөтмө",
-            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. Аны колдонуу үчүн төмөнкү кадамдарды суранабыз:",
-            "point1": "Сиздин Android Жөндөөлөрүнөн Мурунку",
-            "point2": "Open &quot;Apps &amp; эскертмелер&quot;",
-            "point3": "Табуу &quot;{{communityName}}&quot; жана аны көрүү",
-            "point4": "Уруксаттар боюнча таптоо",
-            "point5": "Иштетүү {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "көрсөтмө",
-            "permissionDenied": "Уруксат алуу үчүн {{kind}} четке какты. Аны колдонуу үчүн төмөнкү кадамдарды суранабыз:",
-            "point1": "Сиздин Серик Жөндөөлөр",
-            "point2": "Open &quot;Privacy&quot;",
-            "point3": "Табуу {{kind}}, аны көрүү",
-            "point4": "Табуу &quot;{{communityName}}&quot; жана иштетүү"
-        },
-        "notices": {
-            "youJoinedRoom": "Сиз Бөлмөгө кошулду",
-            "joining": "Биригүү: {{userName}}",
-            "sbLeftRoom": "{{userName}} бөлмөдөн чыгып",
-            "youLeftRoom": "Сиз бөлмөдөн чыгып",
-            "codeCopied": "Сиз бөлмөдөн чыгып",
-            "sbBeganFbLive": "{{userName}} Facebook бул чакырыкты көрсөтүлө баштады",
-            "sbStoppedFbLive": "{{userName}} Facebook бул чакырыкты уктурууну токтотуп салды",
-            "youBeganFbLive": "Сиз Facebook бул чакырыкты көрсөтүлө баштады",
-            "youStoppedFbLive": "Сиз Facebook бул чакырыкты уктурууну токтотуп салды",
-            "linkCopiedToCb": "тактасына көчүрүлдү -га шилтеме берген барактар",
-            "codeCopiedToCb": "Code тактасына көчүрүлдү",
-            "userHasNoVideo": "Катышуучу жок Video элек",
-            "openInBrowserAlert": "жыйынында Safari браузер ачуу кошулуу.",
-            "youBeganVideoRecording": "Бул конференцияны жаза баштадыңыз",
-            "youStoppedVideoRecording": "Бул конференцияны жазууну токтоттуңуз",
-            "switchingRoom": "Комната бөлмөсү ...",
-            "forceDisconnecting": "Сиз 5 секунддун ичинде ажыратыласыз",
-            "youStartedLive": "Сиз бул чалууну салт RTMPге тарата баштадыңыз",
-            "youStoppedLive": "Бул чалууну салт RTMPге берүүнү токтоттуңуз",
-            "sbStartedLiveStreaming": "{{userName}} түз ободо баштады",
-            "sbStoppedLiveStreaming": "{{userName}} түз ободо аяктады",
-            "liveStopped": "Видеону акыркы чекитке жөнөтүүдө ката кетти"
-        },
-        "settingsPopup": {
-            "webCamera": "Желе Камера",
-            "screenSharing": "Экран бөлүшүү",
-            "shareAnotherScreen": "Share башка экранды",
-            "turnOffCameras": "Бардык камералар өчүрүү",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "fbLiveTitle": "Live титул",
-            "fbLiveDescription": "Live Description",
-            "fbOnlyMeLiveAccess": "Мен гана",
-            "fbFriendsAccess": "Достор",
-            "fbPublicAccess": "коомдук",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "Аягы",
-            "fbEmbedCode": "Embed",
-            "copy": "копия",
-            "turnOffVideo": "Камера \/ экран бөлүшүү мүмкүнчүлүгүн өчүрүү",
-            "turnOffScreenSharing": "Экран бөлүшүүнү өчүрүү",
-            "cameraIsTurnedOff": "Камера өчүрүлгөн",
-            "startRecording": "Жазууну баштаңыз",
-            "stopRecording": "Жазууну токтотуу",
-            "recordingInProgress": "Жаздыруу аткарылууда ...",
-            "publishOnTimeline": "Убакыт тилкесинде жарыялаңыз",
-            "publishToGroup": "Топко жарыялоо",
-            "turnOffAudioInput": "Микрофондун үнүн басуу",
-            "micIsTurnedOff": "Микрофон өчүрүлгөн",
-            "start": "Баштоо",
-            "stop": "Токто",
-            "streamingSettings": "Орнотуулар",
-            "streamToRTMP": "Ыңгайлаштырылган RTMPге агым"
-        },
-        "participantsPopup": {
-            "disconnect": "ажыратуу",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Ажайып Screens",
-            "loudestExceptMe": "Дүркүрөгөн кол тышкары Мен",
-            "maximizeLoudest": "Maximize дүркүрөгөн",
-            "staticMaximized": "Статикалык көбүнчө",
-            "manual": "колдонмо",
-            "fullScreen": "Толук экран",
-            "turnOffCamera": "Видеону жашыруу",
-            "turnOffAudio": "Аудионун үнүн басуу",
-            "turnOffScreenSharing": "Экран бөлүшүүнү жашыруу",
-            "turnOnCamera": "Видеону көрсөтүү",
-            "turnOnAudio": "Аудио үнүн чыгар",
-            "turnOnScreenSharing": "Экранда бөлүшүүнү көрсөтүү"
-        },
-        "notAllowedToJoinCall": "Бул агымга кошулууга уруксатыңыз жок.",
-        "streamTitle": "{{1}} жандуу чалуу",
-        "preview": {
-            "preamble": "Жолугушуу:",
-            "Meeting": "Жолугушуу",
-            "MeetingEnded": "Жолугушуу аяктады"
-        },
-        "preparing": {
-            "micIsOff": "Микрофон өчүк",
-            "micIsOn": "Микрофон күйүк",
-            "cameraIsOff": "Камера өчүк",
-            "cameraIsOn": "Камера күйүк",
-            "screenSharingIsOn": "Экран бөлүшүү күйүк",
-            "screenSharingIsOff": "Экранды бөлүшүү",
-            "joinNow": "Чалууга кошулуңуз"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "үчүн <em>{{message.fields.type}}<\/em> билдирүү {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "жорум",
-            "in": "боюнча",
-            "body": "жылы {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "жарыяланды үчүн",
-                "byAvatar": "тарабынан {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ээ болгон жаңы {{instructions.fromDisplayType}}",
-                "byAvatar": "менен кошо {{avatar.displayName}}"
-            },
-            "startedCallIn": "баштаган бир чалуу"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "чакырылган",
-            "description": "Чакырууларды жөнөтүү кутусу"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "каражат",
-            "description": "өзгөрүштөр жөнүндө ресурстарга жеткиликтүүлүктү башкаруу жана жайгаштыруу билдирүүлөрдү үчүн агым"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "бир ишти жүрүшү жөнүндө өзгөрүүлөр алуу үчүн",
-            "displayType": "маселе"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "милдеттерди аткаруу үчүн категория",
-            "displayType": "милдеттери"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "жамааттын мүчөлөрү үчүн жалпы тажрыйба",
-            "displayType": "жамааттын мүчөлөрүнүн жалпы тажрыйба"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "колдонуучунун менен учурашып өздөрүн киргизүү мүмкүн",
-            "displayType": "Салам"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "сан",
-            "description": "математикалык саны"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "дата",
-            "description": "дата"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "текст",
-            "description": "тексттин орган"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "текст",
-            "description": "тексттин кичинекей орган"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "текст",
-            "description": "тексттин орто органы"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Электрондук почта дареги",
-            "description": "электрондук почта дареги"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Тел номери",
-            "description": "Тел номери"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "Желедеги -га шилтеме берген барактар"
+            "description": "link on the web"
         },
         "Streams\/image": {
             "displayType": "Image",
-            "description": "көрүү сүрөтү",
-            "newItem": "Сүрөт кошуу"
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Сүрөт галлереясы",
-            "description": "буркандарды галереясы"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "альбом",
-            "description": "ар кандай маалымат каражаттары кайсы бир альбом байланыштуу"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "жүктөлгөн билэ",
-            "newItem": "Файл кошуу"
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "аудио-клип",
-            "description": "аудио-клип",
-            "newItem": "Аудио кошуу"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Видео клип",
-            "description": "Видео клип",
-            "newItem": "Видео кошуу"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "жандуу үн же көргөзмө"
+            "description": "live audio or video"
         },
         "Streams\/category": {
             "displayType": "Category",
-            "description": "турган категориядагы башка агымдары байланыштуу болушу мүмкүн"
+            "description": "a category to which other streams can be related"
         },
         "Streams\/participating": {
-            "displayType": "катышуу индекси",
-            "description": "агымдары \/ колдонуучу \/ жалбырактары кошулат Бул байланышпаган байланыштуу"
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
         "Streams\/interest": {
-            "displayType": "Пайыздык",
-            "description": "белгилүү бир темага бир колдонуучунун кызыгуусун билдирет"
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
         },
         "Streams\/incoming": {
-            "displayType": "кирген",
-            "description": "билдирүүлөр үчүн, бара турган башка колдонуучулар тарабынан жиберилген"
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
         },
         "Streams\/chat": {
-            "displayType": "сүйлөшүү",
-            "description": "тарых менен керектөөчүлөрдүн ортосундагы маек,"
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
             "displayType": "Real-Time Call",
-            "description": "реалдуу убакыт Video \/ аудио чалуу"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF документ",
-            "description": "PDF документ",
-            "newItem": "PDF кошуу"
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Суроо",
-            "description": "суроо агымы"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Жооп",
-            "description": "жооп агымы"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Чалуулар",
-            "description": "Агымдар\/webrtc үчүн категория",
-            "MaxRelationsExceeded": "Чалуулардын чегинен ашты"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "наам",
-        "Subscribed": "жазылган",
-        "Participants": "Катышуучулар",
-        "AreYouSureRemoveIdentifier": "Бул аныктагычты алып келеби?",
-        "AreYouSureUnsubscribeIdentifier": "Сиз бул аныктагычы жазылууну барбы? Бул таануучу эскертмелерди өчүрүү болот.",
-        "AreYouSureUnsubscribeDevice": "Сиз бул аппаратты жазылууну барбы? Бул түзмөккө билдирүүлөрдү өчүрөт.",
-        "Identifiers": "Identifiers",
-        "Devices": "түзмөктөр",
-        "Streams": "агымдар",
-        "AreYouSureRemoveParticipant": "Чын эле бул катышуучуну алып салгыңыз келеби?",
-        "RemoveParticipant": "Катышуучуну алып салуу"
-    },
     "menu": {
-        "placeholder": "түрү барак аты",
-        "ModTab": "жылып, сап",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
         "Save": "Save",
         "Delete": "Delete",
-        "Submenu": "судан"
-    },
-    "errors": {
-        "HiddenFromYou": "Бул мазмун сизден жашырылган."
+        "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Жазуу",
-        "reset": "Баштапкы абалга келтирүү",
-        "edit": "Түзөтүү",
-        "title": "аталышы",
-        "description": "сүрөттөө",
-        "upload": "Жүктөө",
-        "link": "Шилтеме",
-        "setUrl": "URL коюңуз",
-        "save": "Сактоо",
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
         "setClip": "Cut Out Clip",
-        "invalidURL": "URL жараксыз",
-        "invalidFile": "Жараксыз файл",
-        "errorNoSource": "Аудио булагы жок",
-        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
-        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Баштапкы абалга келтирүү",
-        "edit": "Түзөтүү",
-        "title": "аталышы",
-        "description": "сүрөттөө",
-        "upload": "Жүктөө",
-        "link": "Шилтеме",
-        "setUrl": "URL коюңуз",
-        "save": "Сактоо",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
         "setClip": "Cut Out Clip",
-        "invalidURL": "URL жараксыз",
-        "invalidFile": "Жараксыз файл",
-        "errorNoSource": "Видеонун булагы жок",
-        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
-        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Баштапкы абалга келтирүү",
-        "edit": "Түзөтүү",
-        "title": "аталышы",
-        "description": "сүрөттөө",
-        "upload": "Жүктөө",
-        "link": "Шилтеме",
-        "setUrl": "URL коюңуз",
-        "save": "Сактоо",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
         "setClip": "Cut Out Clip",
-        "invalidURL": "URL жараксыз",
-        "invalidFile": "Жараксыз файл",
-        "errorNoSource": "PDF булагы жок",
-        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
-        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}"
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Баштапкы абалга келтирүү",
-        "edit": "Түзөтүү",
-        "title": "аталышы",
-        "description": "сүрөттөө",
-        "upload": "Жүктөө",
-        "link": "Шилтеме",
-        "setUrl": "URL коюңуз",
-        "save": "Сактоо",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
         "setClip": "Cut Out Clip",
-        "invalidURL": "URL жараксыз",
-        "invalidFile": "Жараксыз файл",
-        "errorNoSource": "Сүрөт булагы жок",
-        "uploadLimit": "Файлдын максималдуу көлөмү: {{size}}",
-        "errorFileSize": "Кечиресиз, бирок файл өтө чоң.<br> Файлдын максималдуу көлөмү - {{size}}",
-        "uploadedImage": "Жүктөлгөн сүрөт",
-        "imageTitle": "Сүрөттүн аталышы"
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Суроолор",
-        "Answers": "Жооптор",
-        "AnswerQuestion": "Суроого жооп бериңиз",
-        "SetYourAnswer": "Сурооңузга жооп бериңиз",
-        "NewQuestion": "Жаңы суроо",
-        "NewAnswer": "Жаңы жооп",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
         "AnswerDetails": "Answer Details",
-        "answerOption": "Вариант",
+        "answerOption": "Option",
         "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "акысыз жооп ...",
-        "SaveQuestion": "Суроону сактоо",
-        "SaveAnswer": "Жоопту сактоо",
-        "AddAnotherAnswer": "Дагы бир жооп кошуңуз",
-        "ErrorAnswers": "Сураныч, бир гана жооп кошуңуз",
-        "AlreadyAnswered": "Буга чейин жооп берген",
-        "TitlePlaceholder": "Сурооңузду териңиз",
-        "ContentPlaceholder": "Адамдар жооп бергенге жардам берүү үчүн кошумча маалыматты ушул жерге коюңуз",
-        "ErrorTitle": "Суроо талап кылынат",
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Жаңы тажрыйба",
-        "DefineTitle": "Сураныч, аталышын аныктаңыз",
-        "Create": "Түзүү"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Чалуулар",
-        "MaxCalls": "Макс чалуулар",
-        "Update": "Жаңыртуу",
-        "NoCallsYet": "Азырынча чалуулар жок",
-        "CallReasonTitle": "Бул эмне жөнүндө чакырык?",
-        "WaitingRoom": "Күтүү бөлмөсү"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

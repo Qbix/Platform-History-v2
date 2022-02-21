@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Ọna asopọ lati ṣe igbega",
-                "startDate": "Ọjọ Ibẹrẹ",
-                "startTime": "Akoko Ibẹrẹ",
-                "endDate": "Ọjọ Ipari",
-                "endTime": "Akoko Ipari",
-                "budget": "Isuna"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Àlẹmọ Nipa Anfani",
-                "FilterInterests": "Bẹrẹ titẹ iwulo kan ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Anfani",
-            "Location": "Ipo"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Lọ",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Kiri",
-            "WriteToStartConversation": "Kọ awọn ero rẹ lati bẹrẹ ibaraẹnisọrọ naa",
-            "StartConversation": "Bẹrẹ Ibaraẹnisọrọ",
-            "GotoConversation": "Lọ si Ibaraẹnisọrọ",
-            "reset": "Tunto",
-            "edit": "Ṣatunkọ",
-            "link": "Ọna asopọ",
-            "setUrl": "Ṣeto URL",
-            "save": "Fipamọ",
-            "setClip": "Ge Agekuru",
-            "invalidURL": "URL tí kò fẹsẹ̀múlẹ̀"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Faili ti tobi ju fun kaṣe. Iwọn faili ti o pọ julọ {{size}}",
-        "InvalidPDF": "Faili kii ṣe PDF to wulo",
-        "StartTypingTitleOrKeywords": "Bẹrẹ titẹ akọle tabi awọn koko -ọrọ ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Iwe HTML kan ti ọpọlọpọ awọn olumulo le wo ati ṣatunkọ",
-            "displayType": "Abala"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Ifaworanhan ninu igbejade, le pẹlu HTML, ohun abbl.",
-            "displayType": "Ifaworanhan"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "A igbejade wa ninu ti awọn orisirisi kikọja",
-            "displayType": "Igbejade"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Ẹka ipolowo lori oju opo wẹẹbu kan",
-            "displayType": "Ẹgbẹ ipolowo"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Ọna ti akojọpọ awọn ẹka ipolowo labẹ orukọ kan",
-            "displayType": "Ipolowo ipolowo"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Akoonu fun ipolowo kan",
-            "displayType": "Ipolowo ẹda"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Ohun ipolongo ipolongo",
-            "displayType": "Ipolowo ipolowo"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Ṣe aṣoju oju opo wẹẹbu kan ti metadata rẹ ti fọ",
-            "displayType": "oju iwe webu"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

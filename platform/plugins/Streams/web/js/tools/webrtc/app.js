@@ -549,385 +549,208 @@ window.WebRTCRoomClient = function app(options){
     }())
 
     app.mediaManager = (function () {
+
         /**
-         * Attaches new tracks to Participant and to his screen. If there is no screen, it creates it. If screen already
-         * has video track while adding new, it replaces old video track with new one.
-         * @method attachTrack
-         * @param {Object} [track] instance of Track (not MediaStreamTrack) that has mediaStreamTrack as its property
-         * @param {Object} [participant.url] instance of Participant
+         * Renders SVG audio visualization (history bars or circular)
          */
-        function attachTrack(track, participant) {
-            log('attachTrack ' + track.kind);
-            try {
-                var err = (new Error);
-                console.log(err.stack);
-            } catch (e) {
+        var audioVisualization = (function () {
+            log('audiovis: audioVisualization');
+            var commonVisualization = null;
 
-            }
-            if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && track.kind == 'video' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
-                log('attachTrack: iosrtc track video');
-                iosrtcLocalPeerConnection.addStream(track.stream);
-                return;
-            } else if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && track.kind == 'audio' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
-                log('attachTrack: iosrtc track audio');
+            /**
+             * 1) Creates audio analyser from users audio track for further audio data gathering. 2) Starts rendering
+             * visualizations based on this audio data
+             * @method createAudioAnalyser
+             * @param {Object} [track] instance of Track (not MediaStreamTrack) that has mediaStreamTrack as its property
+             * @param {Object} [participant] instance of Participant
+             */
+            function createAudioAnalyser(track, participant) {
+                if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) return;
 
-                iosrtcLocalPeerConnection.addStream(track.stream);
+                log('audiovis: createAudioAnalyser', track)
 
+                if(participant.soundMeter.source != null) {
+                    log('audiovis: createAudioAnalyser: source exists')
 
-                return;
-            }
+                    participant.soundMeter.context.resume();
 
-            log('attachTrack: track.screensharing', track.screensharing);
-            app.event.dispatch('beforeTrackAdded', {participant:participant, track: track});
+                    participant.soundMeter.audioTrack = track.mediaStreamTrack;
+                    participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
+                    participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
+                    participant.soundMeter.analyser.fftSize = 1024;
 
-            if(track.kind == 'video') {
-                log('attachTrack: video');
-                var trackEl = createTrackElement(track, participant);
-                track.trackEl = trackEl;
-                track.trackEl.play().then((e) => {
-                    console.log('attachTrack: video play func success')
-                }).catch((e) => {
-                    console.error(e)
-                    console.log('attachTrack: video play func error')
-                });
-                app.event.dispatch('videoTrackIsBeingAdded', {track: track, participant: participant});
-            } else if(track.kind == 'audio') {
-
-                var trackEl = createTrackElement(track, participant);
-                track.trackEl = trackEl;
-                participant.audioEl = trackEl;
-
-                if(!participant.isLocal) {
-                    document.body.appendChild(trackEl);
-                    if(participant.audioIsMuted) {
-                        //track.trackEl.muted = true;
-                    }
+                    participant.soundMeter.source.connect(participant.soundMeter.analyser);
+                    return;
                 }
-
-                createAudioAnalyser(track, participant)
-
-            }
-
-            track.participant = participant;
-
-            var trackExist = participant.tracks.filter(function (t) {
-                return t == track;
-            })[0];
-            if(trackExist == null) participant.tracks.push(track);
-
-            if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && participant.isLocal) {
-                log('attachTrack: iosrtc publish track ');
-
-                if(track.kind =='video'){
-                    if(localParticipant.videoTracks().length > 1) {
-                        log('attachTrack: iosrtc publish track: replace track');
-
-                        app.localMediaControls.replaceTrack(track.mediaStreamTrack);
-                    } else {
-                        log('attachTrack: iosrtc publish track: add track');
-                        app.localMediaControls.enableVideo();
-                    }
-                } else {
-
-                    if(localParticipant.audioTracks().length > 1) {
-                        log('attachTrack: iosrtc publish track: replace track');
-
-                        app.localMediaControls.replaceTrack(track.mediaStreamTrack);
-                    } else {
-                        log('attachTrack: iosrtc publish track: add track');
-                        app.localMediaControls.enableAudio();
-                    }
-                }
-            }
-
-            app.event.dispatch('trackAdded', {participant:participant, track: track});
-
-        }
-
-        function createAudioAnalyser(track, participant) {
-            if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) return;
-
-            log('audiovis: createAudioAnalyser', track)
-
-            if(participant.soundMeter.source != null) {
-                log('audiovis: createAudioAnalyser: source exists')
-
-                /*participant.soundMeter.script.disconnect();
-				participant.soundMeter.source.disconnect();*/
-                participant.soundMeter.context.resume();
 
                 participant.soundMeter.audioTrack = track.mediaStreamTrack;
-                participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
+                participant.soundMeter.context = new window.AudioContext();
+
+
                 participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
                 participant.soundMeter.analyser.fftSize = 1024;
 
-                participant.soundMeter.source.connect(participant.soundMeter.script);
+                participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
                 participant.soundMeter.source.connect(participant.soundMeter.analyser);
-                participant.soundMeter.script.connect(participant.soundMeter.context.destination);
-                participant.soundMeter.analyser.connect(participant.soundMeter.script);
-                return;
-            }
 
-            participant.soundMeter.audioTrack = track.mediaStreamTrack;
-            participant.soundMeter.context = new window.AudioContext();
-            if(participant.soundMeter.context.createScriptProcessor) {
-                participant.soundMeter.script = participant.soundMeter.context.createScriptProcessor(2048, 2, 1);
-            } else if(participant.soundMeter.context.createJavaScriptNode) {
-                participant.soundMeter.script = participant.soundMeter.context.createJavaScriptNode(2048, 2, 1);
-            } else {
-            }
+                function startRender(participant) {
+                    log('audiovis: createAudioAnalyser: startRender');
 
-            participant.soundMeter.analyser = participant.soundMeter.context.createAnalyser();
-            participant.soundMeter.analyser.fftSize = 1024;
-
-            participant.soundMeter.source = participant.soundMeter.context.createMediaStreamSource(track.stream);
-            participant.soundMeter.source.connect(participant.soundMeter.script);
-            participant.soundMeter.source.connect(participant.soundMeter.analyser);
-            //participant.soundMeter.source.connect(participant.soundMeter.context.destination); // connect the source to the destination
-
-            participant.soundMeter.script.connect(participant.soundMeter.context.destination); // chrome needs the analyser to be connected too...
-
-            participant.soundMeter.analyser.connect(participant.soundMeter.script);
-
-
-            participant.soundMeter.instant = 0;
-            participant.soundMeter.slow = 0;
-            participant.soundMeter.clip = 0;
-            participant.soundMeter.rms = 0;
-            participant.soundMeter.slowRms = 0;
-            participant.soundMeter.reset = function() {
-                if(participant.isLocal && participant.soundMeter.isDisabled) return;
-            }
-            participant.soundMeter.start = function() {
-                this.isDisabled = false;
-            }
-            participant.soundMeter.stop = function() {
-                /*for (var key in participant.soundMeter.visualizations) {
-					if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
-						var visualization = participant.soundMeter.visualizations[key];
-						var barsLength = visualization.barsLength;
-						var i;
-						var el;
-						var elems=[].slice.call(visualization.svg.childNodes);
-						for(i = 0; el = elems[i]; i++){
-							el.setAttributeNS(null, 'height', '0%');
-							el.setAttributeNS(null, 'y', 0);
-						}
-					}
-				}*/
-            }
-
-            function buildVisualization(participant) {
-                log('audiovis: createAudioAnalyser: buildVisualization');
-                participant.soundMeter.latestUpdate = performance.now();
-
-                participant.soundMeter.script.onaudioprocess = function(e) {
-                    participant.soundMeter.onaudioprocessEvent = e;
-                    var input = e.inputBuffer.getChannelData(0);
-                    //participant.soundMeter.input = input;
-                    var i;
-                    var sum = 0.0;
-                    var clipcount = 0;
-                    var inputLength = input.length;
-                    for (i = 0; i < inputLength; ++i) {
-                        sum += input[i] * input[i];
-
-                        if (Math.abs(input[i]) > 0.99) {
-                            //console.log('peak', Math.abs(input[i]))
-
-                            clipcount += 1;
+                    function getAverage(freqData) {
+                        var average = 0;
+                        for(let i = 0; i < freqData.length; i++) {
+                            average += freqData[i]
                         }
-
-                    }
-                    let rms1 = Math.sqrt(sum / inputLength);
-                    participant.soundMeter.rms = rms1;
-                    participant.soundMeter.slowRms = (0.5 * participant.soundMeter.slowRms + 0.5 * rms1);
-                    //console.log(participant.soundMeter.slowRms)
-                    /*let len = input.length;
-					let total = i = 0
-					let rms2;
-
-					while ( i < len ) total += Math.abs( input[i++] );
-					rms2 = Math.sqrt( total / len )
-					participant.soundMeter.rms = rms2 * 100;
-
-					if(rms2 * 100 > 100) {
-						//alert('13');
-					}*/
-                    //console.log(rms1, rms2)
-
-
-                    var audioIsDisabled = participant.soundMeter.source.mediaStream && (participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended');
-                    if(!audioIsDisabled) {
-                        participant.soundMeter.instant = Math.sqrt(sum / input.length);
-                        participant.soundMeter.slow = 0.95 * participant.soundMeter.slow + 0.05 * participant.soundMeter.instant;
-                        participant.soundMeter.clip = clipcount / input.length;
-                    } else {
-
-                        participant.soundMeter.instant = 0;
-                        participant.soundMeter.slow = 0;
-                        participant.soundMeter.clip = 0;
+                        average = average / freqData.length;
+                        return average;
                     }
 
-                    var historyLength = participant.soundMeter.history.volumeValues.length;
-                    if(historyLength > 256) participant.soundMeter.history.volumeValues.splice(0, historyLength - 256);
-                    participant.soundMeter.history.volumeValues.push({
-                        time: performance.now(),
-                        value: participant.soundMeter.instant
-                    });
+                    function render(participant) {
+                        participant.soundMeter.visualizationAnimation = requestAnimationFrame(function () {
+                            render(participant)
+                        });
 
-                    /*if(performance.now() - participant.soundMeter.latestUpdate < 500) {
-						return;
-					};*/
+                        var freqData = new Uint8Array(participant.soundMeter.analyser.frequencyBinCount);
+                        participant.soundMeter.analyser.getByteFrequencyData(freqData);
+                        var average = participant.soundMeter.average = getAverage(freqData);
 
 
-                    var latest500ms = participant.soundMeter.history.volumeValues.filter(function (o) {
-                        return performance.now() - o.time < 500;
-                    });
-                    var sum = latest500ms.reduce((a, b) => a + (b['value'] || 0), 0);
-                    var average = (sum / 2);
-                    if(!audioIsDisabled) {
-                        participant.soundMeter.average500s = average;
-                    } else participant.soundMeter.average500s = 0;
-
-
-                    var r = 0;
-                    var g = 128;
-                    var b = r;
-                    //var opacity = 0 + ((1 * participant.soundMeter.instant) * 2);
-                    //var opacity = 0 + (1/100*(participant.soundMeter.instant / average * 100));
-                    var opacity = 0;
-                    if(participant.soundMeter.instant > 0.005) opacity = 1;
-                    //console.log('opacity', opacity)
-                    //document.body.style.background = 'rgb('+r+', '+g+', '+b+')';
-
-                    for (var key in participant.soundMeter.visualizations) {
-                        if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
-                            var visualization = participant.soundMeter.visualizations[key];
-
-                            if(visualization.type == 'circles') {
-                                var circlesLength = visualization.circlesLength;
-                                var i;
-                                for(i = 0; i < circlesLength; i++){
-                                    var circle = visualization.soundCircles[i];
-                                    if(i == circlesLength - 1) {
-                                        circle.volume = participant.soundMeter.instant;
-                                        var radius = !participant.soundMeter.isDisabled && (circle.volume > 0 && average > 0) ? (circle.volume / average * 100) : 0;
-                                        if(radius > 100)
-                                            radius = 100;
-                                        else if(circle.volume < 0.005) radius = 0.1;
-                                        //circle.cy = visualization.radius - (visualization.radius / 100 * radius);
-                                        var radius = (40 * circle.volume);
-                                        circle.radius = 50 + radius;
-                                        circle.opacity = 1 -  (0.025 * radius);
-                                        circle.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
-
-                                        if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
-                                            circle.volume = 0;
-                                            circle.radius = 0;
-                                        }
-
-                                        //console.log('opacity', radius)
-                                        circle.circle.setAttributeNS(null, 'r', circle.radius + '%');
-                                        circle.circle.setAttributeNS(null, 'opacity', circle.opacity);
-                                        //circle.rect.setAttributeNS(null, 'cy', circle.y);
-                                        //bar.rect.setAttributeNS(null, 'fill', bar.fill);
-
-                                    } else {
-                                        var nextCircle = visualization.soundCircles[i + 1];
-                                        circle.volume = nextCircle.volume;
-                                        circle.radius = nextCircle.radius;
-                                        circle.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
-                                        circle.cx = nextCircle.cx;
-                                        circle.cy = nextCircle.cy;
-                                        circle.circle.setAttributeNS(null, 'r', circle.radius + '%');
-                                        circle.circle.setAttributeNS(null, 'opacity', 1 - (0.025 * (circle.radius - 50)));
-
-                                        //bar.rect.setAttributeNS(null, 'fill', bar.fill);
-                                    }
-                                }
-
-                                continue;
-                            }
-
-                            var barsLength = visualization.barsLength;
-                            var i;
-                            for(i = 0; i < barsLength; i++){
-                                var bar = visualization.soundBars[i];
-                                if(i == barsLength - 1) {
-                                    bar.volume = participant.soundMeter.instant;
-                                    var height = !participant.soundMeter.isDisabled && (bar.volume > 0 && average > 0) ? (bar.volume / average * 100) : 0;
-                                    if(height > 100)
-                                        height = 100;
-                                    else if(bar.volume < 0.005) height = 0.1;
-                                    bar.y = visualization.height - (visualization.height / 100 * height);
-                                    bar.height = height;
-                                    bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
-
-                                    if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
-                                        bar.volume = 0;
-                                        bar.height = 0;
-                                    }
-
-                                    bar.rect.setAttributeNS(null, 'height', bar.height + '%');
-                                    bar.rect.setAttributeNS(null, 'y', bar.y);
-                                    //bar.rect.setAttributeNS(null, 'fill', bar.fill);
-
-                                } else {
-                                    var nextBar = visualization.soundBars[i + 1];
-                                    bar.volume = nextBar.volume;
-                                    bar.height = nextBar.height;
-                                    bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
-                                    bar.y = nextBar.y;
-                                    bar.rect.setAttributeNS(null, 'height', bar.height + '%');
-                                    bar.rect.setAttributeNS(null, 'y', bar.y);
-                                    //bar.rect.setAttributeNS(null, 'fill', bar.fill);
-                                }
-                            }
-                        }
-                    }
-
-                    if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
-                        var maxVolume;
                         for (var key in participant.soundMeter.visualizations) {
                             if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
                                 var visualization = participant.soundMeter.visualizations[key];
-                                if(visualization.type == 'border-color') continue;
-                                if(visualization.soundBars != null) {
-                                    maxVolume = Math.max.apply(Math, visualization.soundBars.map(function (o) {
-                                        return o.volume;
-                                    }));
-                                } else if(visualization.soundCircles != null) {
-                                    maxVolume = Math.max.apply(Math, visualization.soundCircles.map(function (o) {
-                                        return o.volume;
-                                    }));
+
+                                if(visualization.type == 'circles') {
+                                    var circlesLength = visualization.circlesLength;
+                                    var i;
+                                    for(i = 0; i < circlesLength; i++){
+                                        var circle = visualization.soundCircles[i];
+                                        if(i == circlesLength - 1) {
+                                            circle.volume = average;
+                                            //circle.cy = visualization.radius - (visualization.radius / 100 * radius);
+                                            var radius = (average / 255) * 100;
+                                            circle.radius = 50 + radius;
+                                            circle.opacity = 1 -  (0.025 * radius);
+                                            circle.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+
+                                            if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
+                                                circle.volume = 0;
+                                                circle.radius = 0;
+                                            }
+
+                                            circle.circle.setAttributeNS(null, 'r', circle.radius + '%');
+                                            circle.circle.setAttributeNS(null, 'opacity', circle.opacity);
+                                            //circle.rect.setAttributeNS(null, 'cy', circle.y);
+                                            //bar.rect.setAttributeNS(null, 'fill', bar.fill);
+
+                                        } else {
+                                            var nextCircle = visualization.soundCircles[i + 1];
+                                            circle.volume = nextCircle.volume;
+                                            circle.radius = nextCircle.radius;
+                                            circle.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+                                            circle.cx = nextCircle.cx;
+                                            circle.cy = nextCircle.cy;
+                                            circle.circle.setAttributeNS(null, 'r', circle.radius + '%');
+                                            circle.circle.setAttributeNS(null, 'opacity', 1 - (0.025 * (circle.radius - 50)));
+
+                                            //bar.rect.setAttributeNS(null, 'fill', bar.fill);
+                                        }
+                                    }
+
+                                    continue;
+                                }
+
+                                var barsLength = visualization.barsLength;
+                                var i;
+                                for(i = 0; i < barsLength; i++){
+                                    var bar = visualization.soundBars[i];
+                                    if(i == barsLength - 1) {
+                                        bar.volume = average;
+                                        var height = !participant.soundMeter.isDisabled && (average > 0) ? ((average / 255) * 100) : 0;
+                                        if(height > 100)
+                                            height = 100;
+                                        else if(average < 0.005) height = 0.1;
+                                        bar.y = visualization.height - (visualization.height / 100 * height);
+                                        bar.height = height;
+                                        bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+
+                                        if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
+                                            bar.volume = 0;
+                                            bar.height = 0;
+                                        }
+
+                                        bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+                                        bar.rect.setAttributeNS(null, 'y', bar.y);
+                                        //bar.rect.setAttributeNS(null, 'fill', bar.fill);
+
+                                    } else {
+                                        var nextBar = visualization.soundBars[i + 1];
+                                        bar.height = nextBar.height;
+                                        bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
+                                        bar.y = nextBar.y;
+                                        bar.rect.setAttributeNS(null, 'height', bar.height + '%');
+                                        bar.rect.setAttributeNS(null, 'y', bar.y);
+                                        //bar.rect.setAttributeNS(null, 'fill', bar.fill);
+                                    }
                                 }
                             }
-                            break;
                         }
 
-                        if(maxVolume <= 0) {
-                            //participant.soundMeter.script.onaudioprocess = null;
-                            log('createAudioAnalyser: resume')
-                            participant.soundMeter.context.suspend();
-                            participant.soundMeter.script.disconnect();
-                            participant.soundMeter.source.disconnect();
+                        if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
+                            var maxVolume;
+                            for (var key in participant.soundMeter.visualizations) {
+                                if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
+                                    var visualization = participant.soundMeter.visualizations[key];
+                                    if(visualization.type == 'border-color') continue;
+                                    if(visualization.soundBars != null) {
+                                        maxVolume = Math.max.apply(Math, visualization.soundBars.map(function (o) {
+                                            return o.volume;
+                                        }));
+                                    } else if(visualization.soundCircles != null) {
+                                        maxVolume = Math.max.apply(Math, visualization.soundCircles.map(function (o) {
+                                            return o.volume;
+                                        }));
+                                    }
+                                }
+                                break;
+                            }
+
+                            if(maxVolume <= 0) {
+                                for (var key in participant.soundMeter.visualizations) {
+                                    if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
+                                        var visualization = participant.soundMeter.visualizations[key];
+
+                                        if(visualization.type == 'border-color') continue;
+                                        if(visualization.soundBars != null) {
+                                            visualization.soundBars.forEach(function (o) {
+                                                o.rect.setAttributeNS(null, 'height', '0%');
+                                            });
+                                        } else if(visualization.soundCircles != null) {
+                                            visualization.soundCircles.forEach(function (o) {
+                                                o.circle.setAttributeNS(null, 'r', '0%');
+                                            });
+                                        }
+                                    }
+                                }
+                                participant.soundMeter.context.suspend();
+                                participant.soundMeter.source.disconnect();
+                            }
                         }
                     }
 
-                    participant.soundMeter.latestUpdate = performance.now();
+                    render(participant);
                 }
+
+                startRender(participant);
 
             }
 
-            buildVisualization(participant);
-
-        }
-
-        var commonVisualization = null;
-        function audioVisualization() {
-            log('audiovis: audioVisualization');
-
+            /**
+             * If this is history bars visualization, this method updates its width dynamically by adding/removing new bars when
+             * parent container's size is changed.
+             * @method updatVisualizationWidth
+             * @param {Object} [participant] instance of Participant
+             * @param {Object} [visualization] object that contains info about visualization (e.g. SVG elements)
+             */
             function updatVisualizationWidth(participant, visualization) {
                 log('audiovis: audioVisualization: updatVisualizationWidth');
                 if((visualization == null || visualization.svg == null) || visualization.type == 'circles' || (visualization.updateSizeOnlyOnce && visualization.updated)) return;
@@ -1016,7 +839,11 @@ window.WebRTCRoomClient = function app(options){
                 }
             }
 
-
+            /**
+             * Builds SVG element for history bars visualization
+             * @method buildBarsVisualization
+             * @param {Object} [visualization] object that contains info about visualization
+             */
             function buildBarsVisualization(visualisation) {
                 if(visualisation.svg && visualisation.svg.parentNode) {
                     visualisation.svg.parentNode.removeChild(visualisation.svg);
@@ -1078,7 +905,11 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.barsLength = visualisation.soundBars.length;
             }
 
-
+            /**
+             * Builds SVG element for circular visualization
+             * @method buildCircularVisualization
+             * @param {Object} [visualization] object that contains info about visualization
+             */
             function buildCircularVisualization(visualisation) {
                 if(visualisation.svg && visualisation.svg.parentNode) {
                     visualisation.svg.parentNode.removeChild(visualisation.svg);
@@ -1137,6 +968,17 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.circlesLength = visualisation.soundCircles.length;
             }
 
+            /**
+             * Builds visualization of specific type (history bars or circular) and with specific key (name)
+             * @method buildVisualization
+             * @param {Object} [options] object that contains info about visualization
+             * @param {String} [options.name] Visualization's name (key)
+             * @param {HTMLElement} [options.element] DOM element where visualization will be rendered
+             * @param {Object} [options.participant] instance of Participant object
+             * @param {String} [options.type] type of visualization (history bars or circular)
+             * @param {String} [options.updateSizeOnlyOnce] by default visualization's width is updated on layout changes
+             *  this option ignores layout changes so current visualization's width will be always static.
+             */
             function buildVisualization(options) {
                 log('audiovis: audioVisualization: buildVisualization', options);
 
@@ -1149,13 +991,11 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.element = element;
                 visualisation.type = options.type;
                 visualisation.updateSizeOnlyOnce = options.updateSizeOnlyOnce != null ? options.updateSizeOnlyOnce : false;
-                visualisation.stopOnMute = options.stopOnMute != null ? options.stopOnMute : false;
-
 
                 visualisation.reset = function () {
                     setTimeout(function () {
                         updatVisualizationWidth(participant, visualisation)
-                    }, 300);
+                    }, 1000);
                 };
                 visualisation.remove = function () {
                     delete options.participant.soundMeter.visualizations[name];
@@ -1171,33 +1011,24 @@ window.WebRTCRoomClient = function app(options){
 
             }
 
+            /**
+             * Builds common SVG visualization based on audio data of all participants
+             * @method buildCommonVisualization
+             * @param {Object} [options] object that contains info about visualization
+             * @param {HTMLElement} [options.element] DOM element where visualization will be rendered
+             * @param {String} [options.type] type of visualization (history bars or circular)
+             */
             function buildCommonVisualization(options) {
                 log('audiovis: buildCommonVisualization: buildVisualization try', commonVisualization);
 
                 if(commonVisualization != null) return;
                 log('audiovis: buildCommonVisualization: buildVisualization', commonVisualization, options);
 
-                var name = options.name;
                 var element = options.element;
 
                 commonVisualization = {};
                 commonVisualization.element = element;
                 commonVisualization.type = options.type;
-                commonVisualization.updateSizeOnlyOnce = options.updateSizeOnlyOnce != null ? options.updateSizeOnlyOnce : false;
-
-
-                /*commonVisualization.reset = function () {
-                    setTimeout(function () {
-                        updatVisualizationWidth(participant, commonVisualization)
-                    }, 300);
-                };
-                commonVisualization.remove = function () {
-                    delete options.participant.soundMeter.visualizations[name];
-                    if(commonVisualization.svg && commonVisualization.svg.parentNode != null) commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
-                };*/
-
-
-
 
                 if(commonVisualization.svg && commonVisualization.svg.parentNode) {
                     commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
@@ -1263,11 +1094,21 @@ window.WebRTCRoomClient = function app(options){
                 renderCommonVisualization();
             }
 
+            /**
+             * Renders common visualization based on avarage audio data of all participants
+             * @method renderCommonVisualization
+             */
             function renderCommonVisualization() {
                 if(!localParticipant.online) return;
-                var freqDataMany = [];
-                var agg = [];
-                //var sum = 0;
+                var sum = 0;
+                function getAverage(freqData) {
+                    var average = 0;
+                    for(let i = 0; i < freqData.length; i++) {
+                        average += freqData[i]
+                    }
+                    average = average / freqData.length;
+                    return average;
+                }
 
                 for(let p in roomParticipants) {
                     let participant = roomParticipants[p];
@@ -1276,34 +1117,25 @@ window.WebRTCRoomClient = function app(options){
                     let freqData = new Uint8Array(bufferLength);
 
                     participant.soundMeter.analyser.getByteFrequencyData(freqData); // populate with data
-                    freqDataMany.push(freqData);
+                    sum += (getAverage(freqData) / 255 * 100);
 
-                    //sum +=  participant.soundMeter.rms;
                 }
 
                 //var average = sum / roomParticipants.length;
 
-                if (freqDataMany.length > 0) {
-                    for (let i = 0; i < freqDataMany[0].length; i++) {
-                        agg.push(0);
-                        freqDataMany.forEach((data) => {
-                            agg[i] += data[i];
-                        });
-                    }
-                }
 
                 var barsLength = commonVisualization.barsLength;
                 var i;
                 for(i = 0; i < barsLength; i++){
                     var bar = commonVisualization.soundBars[i];
                     if(i == barsLength - 1) {
-                        let average = (agg[0] / roomParticipants.length);
-                        var height = (average * 0.4);
+                        let average = (sum / roomParticipants.length);
+                        var height = average;
                         if (height > 100) {
                             height = 100;
                         } else if(average < 0.005) height = 0.1;
-                        bar.y = commonVisualization.height - (commonVisualization.height / 100 * height);
-                        bar.height = height;
+                        bar.height = height ;
+                        bar.y = commonVisualization.height - (commonVisualization.height / 100 * bar.height);
                         bar.fill = '#'+Math.round(0xffffff * Math.random()).toString(16);
 
                         bar.rect.setAttributeNS(null, 'height', bar.height + '%');
@@ -1325,6 +1157,10 @@ window.WebRTCRoomClient = function app(options){
                 commonVisualization.animationFrame = requestAnimationFrame(renderCommonVisualization);
             }
 
+            /**
+             * Stops animating common visualization and removes it from DOM
+             * @method removeCommonVisualization
+             */
             function removeCommonVisualization() {
                 if(commonVisualization && commonVisualization.animationFrame) {
                     cancelAnimationFrame(commonVisualization.animationFrame);
@@ -1333,19 +1169,143 @@ window.WebRTCRoomClient = function app(options){
                     commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
                 }
                 commonVisualization = null;
-
             }
 
+            /**
+             * Updates common visualization's width when its parent container size changed
+             * @method updateCommonVisualizationWidth
+             */
             function updateCommonVisualizationWidth() {
                 updatVisualizationWidth(null, commonVisualization);
             }
 
+            /**
+             * Stops animating all visualizations
+             * @method stopAllVisualizations
+             */
+            function stopAllVisualizations(isRoomSwitch) {
+                removeCommonVisualization();
+                for(var p = roomParticipants.length - 1; p >= 0; p--){
+                    if(roomParticipants[p] == localParticipant) {
+                        if(!isRoomSwitch && roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
+
+                        if(!isRoomSwitch && roomParticipants[p].soundMeter.visualizationAnimation) {
+                            cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                        }
+                    } else {
+                        if(roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
+
+                        if(roomParticipants[p].soundMeter.visualizationAnimation) {
+                            cancelAnimationFrame(roomParticipants[p].soundMeter.visualizationAnimation);
+                        }
+                    }
+
+                }
+            }
+
             return {
+                createAudioAnalyser: createAudioAnalyser,
                 build: buildVisualization,
                 buildCommonVisualization: buildCommonVisualization,
                 removeCommonVisualization: removeCommonVisualization,
-                updateCommonVisualizationWidth: updateCommonVisualizationWidth
+                updateCommonVisualizationWidth: updateCommonVisualizationWidth,
+                stopAllVisualizations: stopAllVisualizations
             }
+        }())
+
+        /**
+         * Attaches new tracks to Participant and to his screen. If there is no screen, it creates it. If screen already
+         * has video track while adding new, it replaces old video track with new one.
+         * @method attachTrack
+         * @param {Object} [track] instance of Track (not MediaStreamTrack) that has mediaStreamTrack as its property
+         * @param {Object} [participant.url] instance of Participant
+         */
+        function attachTrack(track, participant) {
+            log('attachTrack ' + track.kind);
+            try {
+                var err = (new Error);
+                console.log(err.stack);
+            } catch (e) {
+
+            }
+            if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && track.kind == 'video' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
+                log('attachTrack: iosrtc track video');
+                iosrtcLocalPeerConnection.addStream(track.stream);
+                return;
+            } else if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && track.kind == 'audio' && track.stream != null && track.stream.hasOwnProperty('_blobId')) {
+                log('attachTrack: iosrtc track audio');
+
+                iosrtcLocalPeerConnection.addStream(track.stream);
+
+
+                return;
+            }
+
+            log('attachTrack: track.screensharing', track.screensharing);
+            app.event.dispatch('beforeTrackAdded', {participant:participant, track: track});
+
+            if(track.kind == 'video') {
+                log('attachTrack: video');
+                var trackEl = createTrackElement(track, participant);
+                track.trackEl = trackEl;
+                track.trackEl.play().then((e) => {
+                    console.log('attachTrack: video play func success')
+                }).catch((e) => {
+                    console.error(e)
+                    console.log('attachTrack: video play func error')
+                });
+                app.event.dispatch('videoTrackIsBeingAdded', {track: track, participant: participant});
+            } else if(track.kind == 'audio') {
+
+                var trackEl = createTrackElement(track, participant);
+                track.trackEl = trackEl;
+                participant.audioEl = trackEl;
+
+                if(!participant.isLocal) {
+                    document.body.appendChild(trackEl);
+                    if(participant.audioIsMuted) {
+                        //track.trackEl.muted = true;
+                    }
+                }
+
+                audioVisualization.createAudioAnalyser(track, participant)
+
+            }
+
+            track.participant = participant;
+
+            var trackExist = participant.tracks.filter(function (t) {
+                return t == track;
+            })[0];
+            if(trackExist == null) participant.tracks.push(track);
+
+            if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && participant.isLocal) {
+                log('attachTrack: iosrtc publish track ');
+
+                if(track.kind =='video'){
+                    if(localParticipant.videoTracks().length > 1) {
+                        log('attachTrack: iosrtc publish track: replace track');
+
+                        app.localMediaControls.replaceTrack(track.mediaStreamTrack);
+                    } else {
+                        log('attachTrack: iosrtc publish track: add track');
+                        app.localMediaControls.enableVideo();
+                    }
+                } else {
+
+                    if(localParticipant.audioTracks().length > 1) {
+                        log('attachTrack: iosrtc publish track: replace track');
+
+                        app.localMediaControls.replaceTrack(track.mediaStreamTrack);
+                    } else {
+                        log('attachTrack: iosrtc publish track: add track');
+                        app.localMediaControls.enableAudio();
+                    }
+                }
+            }
+
+            app.event.dispatch('trackAdded', {participant:participant, track: track});
+
         }
 
         function supportsVideoType(video, type) {
@@ -1599,21 +1559,20 @@ window.WebRTCRoomClient = function app(options){
             if(participantsToAnalyze.length == 0) return;
 
             var loudestParticipant = participantsToAnalyze.reduce(function(prev, current) {
-                return (prev.soundMeter.slow > current.soundMeter.slow) ? prev : current;
+                return (prev.soundMeter.average > current.soundMeter.average) ? prev : current;
             })
 
             var loudestScreen = loudestParticipant.screens.filter(function (screen) {
                 return (screen.isActive == true && screen.participant.online == true);
             })[0];
 
-            if(loudestScreen != null && callback != null && loudestParticipant.soundMeter.slow > 0.0004) callback(loudestScreen);
+            if(loudestScreen != null && callback != null && loudestParticipant.soundMeter.average > 0.0004) callback(loudestScreen);
 
         }
 
         var canvasComposer = (function (roomInstance) {
 
             var _roomInstance = roomInstance;
-            var _isChangingRoom = false;
             var _canvas = null;
             var _canvasMediStream = null;
             var _mediaRecorder = null;
@@ -3132,10 +3091,6 @@ window.WebRTCRoomClient = function app(options){
                         }
                     }
 
-                    /*if(_isChangingRoom !== false) {
-                        circleLoader.draw();
-                    }*/
-
                     requestAnimationFrame(function(){
                         drawVideosOnCanvas();
                     })
@@ -3823,11 +3778,7 @@ window.WebRTCRoomClient = function app(options){
                     _inputCtx.clip();
                     //_inputCtx.stroke();
 
-                    //var bass = Math.floor(dataArray[1]); //1Hz Frequenz
-                    var rms = data.participant.soundMeter.slowRms * 100;
-                    //console.log(rms, bass)
-                    var radius = ((radius / 100 * rms) + radius);
-
+                    var radius = radius + (radius / 100 * ((data.participant.soundMeter.average / 255) * 100));
                     //_inputCtx.fillStyle = "#505050";
                     _inputCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
                     _inputCtx.beginPath();
@@ -4063,25 +4014,6 @@ window.WebRTCRoomClient = function app(options){
                         roomInstance.event.off('audioMuted', updateCanvas);
                         roomInstance.event.off('audioUnmuted', updateCanvas);
                     });
-                }
-
-                function switchingRoom(value) {
-                    log('switchingRoom', value);
-                    if(value == false && Date.now() - _isChangingRoom < 3000) {
-                        log('switchingRoom setTimeout');
-
-                        setTimeout(function () {
-                            log('switchingRoom setTimeout end');
-                            _isChangingRoom = false;
-                        }, 3000 - (Date.now() - _isChangingRoom))
-                        return;
-                    } else if(value == false) {
-                        log('switchingRoom', value);
-                        _isChangingRoom = false;
-                        return;
-                    }
-                    log('switchingRoom', value);
-                    _isChangingRoom = Date.now();
                 }
 
                 var _layoutTool = {
@@ -4582,7 +4514,6 @@ window.WebRTCRoomClient = function app(options){
                     updateWebRTCCanvasLayout: updateWebRTCCanvasLayout,
                     compositeVideosAndDraw: compositeVideosAndDraw,
                     refreshEventListeners: refreshEventListeners,
-                    switchingRoom: switchingRoom,
                     stop: stopAndRemove,
                     isActive: isActive,
                     addSource: addSource,
@@ -5333,11 +5264,9 @@ window.WebRTCRoomClient = function app(options){
 
         var fbLive = (function (roomInstance) {
             var _roomInstance = roomInstance;
-            var _streamUsingWebRTC = false;
             var _streamingSocket = {};
             var _veryFirstBlobs = [];
             var _blackBlobs = [];
-            var _streamingParticipant;
 
             var _videoStream = {blobs: [], allBlobs: [], size: 0, timer: null}
 
@@ -5462,94 +5391,65 @@ window.WebRTCRoomClient = function app(options){
                 //creteEmptyVideo();
                 connect(rtmpUrls, service, function () {
                     log('startStreaming connected');
-                    if(!_streamUsingWebRTC) {
-                        if(_veryFirstBlobs.length != 0 && _streamingSocket[service] != null) {
-                            //let firstBlobsToProcess = _veryFirstBlobs.splice(0, (_veryFirstBlobs.length - 1));
-                           /* let firstBlobsToProcess = new Blob(_veryFirstBlobs);
-                            _streamingSocket[service].socket.emit('Streams/webrtc/videoData', firstBlobsToProcess, function() {
-                                _streamingSocket[service].firstBlobSent = true;
-                            });*/
 
-                            for(let i in _veryFirstBlobs) {
-                                _streamingSocket[service].socket.emit('Streams/webrtc/videoData', _veryFirstBlobs[i], function() {
-                                });
-                                if(i == _veryFirstBlobs.length - 1) {
-                                    _streamingSocket[service].firstBlobSent = true;
-                                }
-                            }
+                    if(_veryFirstBlobs.length != 0 && _streamingSocket[service] != null) {
+                        //let firstBlobsToProcess = _veryFirstBlobs.splice(0, (_veryFirstBlobs.length - 1));
+                        /* let firstBlobsToProcess = new Blob(_veryFirstBlobs);
+                         _streamingSocket[service].socket.emit('Streams/webrtc/videoData', firstBlobsToProcess, function() {
+                             _streamingSocket[service].firstBlobSent = true;
+                         });*/
 
-                        }
-
-                        canvasComposer.startRecorder(function (blob) {
-                            //onDataAvailablehandler(blob);
-                            //console.log('onDataAvailablehandler', blob.size, blob)
-                            if(_streamingSocket[service] == null) return;
-                            if(_veryFirstBlobs.length < 10) {
-                                _veryFirstBlobs.push(blob);
+                        for(let i in _veryFirstBlobs) {
+                            _streamingSocket[service].socket.emit('Streams/webrtc/videoData', _veryFirstBlobs[i], function() {
+                            });
+                            if(i == _veryFirstBlobs.length - 1) {
                                 _streamingSocket[service].firstBlobSent = true;
                             }
-                            if(_streamingSocket[service].firstBlobSent) {
-                                //console.log('onDataAvailablehandler ', service, _streamingSocket[service].socket.id)
-                                //console.log('onDataAvailablehandler ', blob, blob.timestump)
-
-                                if(!canvasComposer.videoTrackIsMuted()) {
-                                    _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blob);
-                                } else {
-                                    console.log('onDataAvailablehandler vTrack is MUTED')
-
-                                    var blobToSend = new Blob([_veryFirstBlobs[_veryFirstBlobs.length - 1], blob]);
-                                    _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blobToSend);
-                                }
-                            }
-                        });
-
-                        /*var timer = function() {
-                            if(_videoStream.blobs.length != 0) {
-                                let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
-                                var mergedBlob = new Blob(blobsToSend);
-                                if(_streamingSocket[service]) _streamingSocket[service].socket.emit('Streams/webrtc/videoData', mergedBlob);
-                            }
-                            _videoStream.timer = setTimeout(timer, 5000);
                         }
 
-                        _videoStream.timer = setTimeout(timer, 5000);*/
-
-                        _roomInstance.event.dispatch('liveStreamingStarted', {participant:localParticipant, platform:service});
-                        _roomInstance.signalingDispatcher.sendDataTrackMessage("liveStreamingStarted", service);
-
-                    } else {
-                        socket.emit('Streams/webrtc/recording', {url:rtmpUrls});
-                        var getStreamingParticipant = function (streamingParticipant) {
-                            log('startLivestreaming getStreamingParticipant', streamingParticipant)
-                            log('startLivestreaming getStreamingParticipant', streamingParticipant.connection ? streamingParticipant.connection.initiatorId : null, localParticipant.sid)
-                            if(streamingParticipant.sid == 'recording' && streamingParticipant.connection && streamingParticipant.connection.initiatorId == localParticipant.sid) {
-                                log('startLivestreaming getStreamingParticipant streamingParticipant')
-
-                                _streamingParticipant = streamingParticipant;
-                                _roomInstance.event.off('participantConnected', getStreamingParticipant);
-                            }
-                        }
-                        _roomInstance.event.on('participantConnected', getStreamingParticipant);
                     }
+
+                    canvasComposer.startRecorder(function (blob) {
+                        //onDataAvailablehandler(blob);
+                        //console.log('onDataAvailablehandler', blob.size, blob)
+                        if(_streamingSocket[service] == null) return;
+                        if(_veryFirstBlobs.length < 10) {
+                            _veryFirstBlobs.push(blob);
+                            _streamingSocket[service].firstBlobSent = true;
+                        }
+                        if(_streamingSocket[service].firstBlobSent) {
+                            //console.log('onDataAvailablehandler ', service, _streamingSocket[service].socket.id)
+                            //console.log('onDataAvailablehandler ', blob, blob.timestump)
+
+                            if(!canvasComposer.videoTrackIsMuted()) {
+                                _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blob);
+                            } else {
+                                console.log('onDataAvailablehandler vTrack is MUTED')
+
+                                var blobToSend = new Blob([_veryFirstBlobs[_veryFirstBlobs.length - 1], blob]);
+                                _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blobToSend);
+                            }
+                        }
+                    });
+
+                    /*var timer = function() {
+                        if(_videoStream.blobs.length != 0) {
+                            let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
+                            var mergedBlob = new Blob(blobsToSend);
+                            if(_streamingSocket[service]) _streamingSocket[service].socket.emit('Streams/webrtc/videoData', mergedBlob);
+                        }
+                        _videoStream.timer = setTimeout(timer, 5000);
+                    }
+
+                    _videoStream.timer = setTimeout(timer, 5000);*/
+
+                    _roomInstance.event.dispatch('liveStreamingStarted', {participant:localParticipant, platform:service});
+                    _roomInstance.signalingDispatcher.sendDataTrackMessage("liveStreamingStarted", service);
                 });
             }
 
             function switchRoom(roomInstance, roomParticipants) {
-                log('fbLive switchRoom', roomInstance);
-                if(_streamingParticipant == null) return;
-                _roomInstance = roomInstance;
-                //_streamingParticipant.connection.initiatorId = _roomInstance.localParticipant().sid;
 
-                _roomInstance.addParticipant(_streamingParticipant);
-                for(let s in _streamingParticipant.screens) {
-                    _roomInstance.mediaManager.addScreenToCommonList(_streamingParticipant.screens[s]);
-                }
-                log('fbLive switchRoom roomParticipants', roomParticipants.length);
-                log('fbLive switchRoom roomParticipants2', app.roomParticipants(true).length);
-                log('fbLive switchRoom _streamingParticipant', _streamingParticipant);
-
-
-                _roomInstance.event.dispatch('participantConnected', _streamingParticipant);
             }
 
             return {
@@ -5557,7 +5457,7 @@ window.WebRTCRoomClient = function app(options){
                     log('goLiveDialog goLive');
                 },
                 endStreaming: function (service) {
-                    log('endStreaming');
+                    log('endStreaming', service);
 
                     /*clearTimeout(_videoStream.timer);
                     let blobsToSend = _videoStream.blobs.splice(0, (_videoStream.blobs.length - 1));
@@ -5587,7 +5487,8 @@ window.WebRTCRoomClient = function app(options){
                 isStreaming: function (platform) {
                     if(!platform){
                         for(let propName in _streamingSocket) {
-                            if(_streamingSocket[propName] != null && _streamingSocket[propName].connected) {
+                            log('fbLive: isStreaming', propName, _streamingSocket[propName]);
+                            if(_streamingSocket[propName] != null && _streamingSocket[propName].socket.connected) {
                                 return true;
                             }
                         }
@@ -5601,8 +5502,8 @@ window.WebRTCRoomClient = function app(options){
                 videoStream:function () {
                     return _videoStream;
                 },
-                streamingParticipant:function () {
-                    return _streamingParticipant;
+                updateRoomInstance:function (newRoomInstance) {
+                    return _roomInstance = newRoomInstance;
                 }
             }
         }(app))
@@ -5933,135 +5834,6 @@ window.WebRTCRoomClient = function app(options){
                 //app.signalingDispatcher.sendDataTrackMessage("liveStreamingEnded");
             }
 
-            var audioVisualization = (function () {
-                var _canvas = null;
-                var _inputCtx = null;
-                var _size = {width:1280, height: 720, x: 0, y: 0};
-
-                function createCanvas() {
-                    var videoCanvas = document.createElement("CANVAS");
-                    videoCanvas.className = "Streams_webrtc_video-stream-canvas";
-                    videoCanvas.style.position = 'absolute';
-                    videoCanvas.style.top = '0';
-                    //videoCanvas.style.top = '0';
-                    videoCanvas.style.left = '0';
-                    //videoCanvas.style.zIndex = '9999999999999999999';
-                    videoCanvas.style.backgroundColor = '#000000';
-                    videoCanvas.width = _size.width;
-                    videoCanvas.height = _size.height;
-
-                    _inputCtx = videoCanvas.getContext('2d');
-                    _canvas = videoCanvas;
-
-                }
-                createCanvas();
-
-                function start() {
-                    if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
-                    drawVideoOnCanvas();
-                }
-
-                function drawVideoOnCanvas() {
-                    //if(_isActive === false) return;
-                    _inputCtx.clearRect(0, 0, _size.width, _size.height);
-
-                    drawSingleAudioOnCanvas();
-
-                    requestAnimationFrame(function(){
-                        drawVideoOnCanvas();
-                    })
-                }
-
-                function drawSingleAudioOnCanvas() {
-                    //if(data.participant.online == false) return;
-
-                    _inputCtx.fillStyle = options.liveStreaming.audioLayoutBgColor;
-                    _inputCtx.fillRect(_size.x, _size.y, _size.width, _size.height);
-
-
-                    var width, height;
-                    if(localParticipant.avatar != null) {
-
-                        var avatar = localParticipant.avatar.image;
-                        width = avatar.width;
-                        height = avatar.height;
-
-                        var scale = Math.min( (_size.width / 2) / width,  (_size.height / 2) / height);
-                        var scaledWidth = width * scale;
-                        var scaledHeight = height * scale;
-                        // get the top left position of the image
-                        var x = _size.x + (( _size.width / 2) - (width / 2) * scale);
-                        var y;
-
-                        y = _size.y + ((_size.height / 2) - (height / 2) * scale);
-
-
-                        var size = Math.min(scaledHeight, scaledWidth);
-                        var radius =  size / 2;
-
-                        drawSimpleCircleAudioVisualization(x, y, radius, scale, size);
-
-
-                        _inputCtx.save();
-
-
-                        _inputCtx.beginPath();
-                        _inputCtx.arc(x + (size / 2), y + (size / 2), radius, 0, Math.PI * 2 , false); //draw the circle
-                        _inputCtx.clip(); //call the clip method so the next render is clipped in last path
-                        //_inputCtx.strokeStyle = "blue";
-                        //_inputCtx.stroke();
-                        _inputCtx.closePath();
-
-                        _inputCtx.drawImage(avatar,
-                            x, y,
-                            width * scale, height * scale);
-                        _inputCtx.restore();
-
-                    }
-
-                }
-
-                function drawSimpleCircleAudioVisualization(x, y, radius, scale) {
-                    var analyser = localParticipant.soundMeter.analyser;
-                    if(analyser == null) return;
-                    var bufferLength = analyser.frequencyBinCount;
-                    var dataArray = new Uint8Array(bufferLength);
-                    analyser.getByteFrequencyData(dataArray);
-                    //just show bins with a value over the treshold
-                    var threshold = 0;
-                    // clear the current state
-                    //_inputCtx.clearRect(_size.x, _size.y, _size.width, _size.height);
-                    //the max count of bins for the visualization
-                    var maxBinCount = dataArray.length;
-
-
-                    _inputCtx.save();
-                    _inputCtx.beginPath();
-                    _inputCtx.rect(_size.x, _size.y, _size.width, _size.height);
-                    _inputCtx.clip();
-                    //_inputCtx.stroke();
-
-                    //var bass = Math.floor(dataArray[1]); //1Hz Frequenz
-                    var rms = localParticipant.soundMeter.slowRms * 100;
-                    //console.log(rms, bass)
-                    var radius = ((radius / 100 * rms) + radius);
-                    //_inputCtx.fillStyle = "#505050";
-                    _inputCtx.fillStyle = "rgba(255, 255, 255, 0.4)";
-                    _inputCtx.beginPath();
-
-                    _inputCtx.arc(_size.x + (_size.width / 2), _size.y + (_size.height / 2), radius, 0, 2 * Math.PI);
-
-                    _inputCtx.fill();
-                    //var radius =  _size / 2  + (bass * 0.25);
-
-                    _inputCtx.restore();
-                }
-
-                return {
-                    start:start
-                }
-            }())
-
             var audioRecorder = (function () {
                 var _sampleRate = 44100;
                 var _recordingLength = 0;
@@ -6204,8 +5976,6 @@ window.WebRTCRoomClient = function app(options){
                     stop:stopRecording
                 }
             }())
-
-            //window.audioRecorder = audioRecorder;
 
             var mediaDB = (function (objectsStoreName) {
                 // IndexedDB
@@ -6356,588 +6126,9 @@ window.WebRTCRoomClient = function app(options){
             }
 
             return {
-                audioVisualization: audioVisualization,
                 startRecording: startRecording,
                 stopRecording: stopRecording,
                 isActive: isActive
-            }
-        }())
-
-        window.localRecorder = localRecorder;
-
-        var youtubeLiveUploader = (function () {
-            var DRIVE_UPLOAD_URL = 'https://www.googleapis.com/upload/drive/v2/files/';
-            var STATUS_POLLING_INTERVAL_MILLIS = 60 * 1000; // One minute.
-            var _recorder;
-            var _videoStream = {blobs: [], size:0};
-            var _uploaderInterval;
-
-            /**
-             * Helper for implementing retries with backoff. Initial retry
-             * delay is 1 second, increasing by 2x (+jitter) for subsequent retries
-             *
-             * @constructor
-             */
-            var RetryHandler = function() {
-                this.interval = 1000; // Start at one second
-                this.maxInterval = 60 * 1000; // Don't wait longer than a minute
-            };
-
-            /**
-             * Invoke the function after waiting
-             *
-             * @param {function} fn Function to invoke
-             */
-            RetryHandler.prototype.retry = function(fn) {
-                log('RetryHandler: retry');
-                setTimeout(fn, this.interval);
-                this.interval = this.nextInterval_();
-            };
-
-            /**
-             * Reset the counter (e.g. after successful request.)
-             */
-            RetryHandler.prototype.reset = function() {
-                log('RetryHandler: reset');
-                this.interval = 1000;
-            };
-
-            /**
-             * Calculate the next wait time.
-             * @return {number} Next wait interval, in milliseconds
-             *
-             * @private
-             */
-            RetryHandler.prototype.nextInterval_ = function() {
-                log('RetryHandler: nextInterval_');
-
-                var interval = this.interval * 2 + this.getRandomInt_(0, 1000);
-                return Math.min(interval, this.maxInterval);
-            };
-
-            /**
-             * Get a random int in the range of min to max. Used to add jitter to wait times.
-             *
-             * @param {number} min Lower bounds
-             * @param {number} max Upper bounds
-             * @private
-             */
-            RetryHandler.prototype.getRandomInt_ = function(min, max) {
-                return Math.floor(Math.random() * (max - min + 1) + min);
-            };
-
-
-            /**
-             * Helper class for resumable uploads using XHR/CORS. Can upload any Blob-like item, whether
-             * files or in-memory constructs.
-             *
-             * @example
-             * var content = new Blob(["Hello world"], {"type": "text/plain"});
-             * var uploader = new MediaUploader({
- *   file: content,
- *   token: accessToken,
- *   onComplete: function(data) { ... }
- *   onError: function(data) { ... }
- * });
-             * uploader.upload();
-             *
-             * @constructor
-             * @param {object} options Hash of options
-             * @param {string} options.token Access token
-             * @param {blob} options.file Blob-like item to upload
-             * @param {string} [options.fileId] ID of file if replacing
-             * @param {object} [options.params] Additional query parameters
-             * @param {string} [options.contentType] Content-type, if overriding the type of the blob.
-             * @param {object} [options.metadata] File metadata
-             * @param {function} [options.onComplete] Callback for when upload is complete
-             * @param {function} [options.onProgress] Callback for status for the in-progress upload
-             * @param {function} [options.onError] Callback if upload fails
-             */
-            var MediaUploader = function(options) {
-                var noop = function() {};
-                this.file = options.file;
-                this.contentType = options.contentType || this.file.type || 'application/octet-stream';
-                this.metadata = options.metadata || {
-                    'title': this.file.name,
-                    'mimeType': this.contentType
-                };
-                this.token = options.token;
-                this.onComplete = options.onComplete || noop;
-                this.onProgress = options.onProgress || noop;
-                this.onError = options.onError || noop;
-                this.offset = options.offset || 0;
-                this.chunkSize = options.chunkSize || 0;
-                this.totalSize = 0;
-                this.fileSize = 1000000*150;
-                this.retryHandler = new RetryHandler();
-
-                this.url = options.url;
-                if (!this.url) {
-                    var params = options.params || {};
-                    params.uploadType = 'resumable';
-                    this.url = this.buildUrl_(options.fileId, params, options.baseUrl);
-                }
-                this.httpMethod = options.fileId ? 'PUT' : 'POST';
-            };
-
-            /**
-             * Initiate the upload.
-             */
-            MediaUploader.prototype.initUpload = function(callback) {
-                log('MediaUploader: upload');
-
-                var self = this;
-                var xhr = new XMLHttpRequest();
-
-                xhr.open(this.httpMethod, this.url, true);
-                xhr.setRequestHeader('Authorization', 'Bearer ' + this.token);
-                xhr.setRequestHeader('Content-Type', 'application/json');
-                //xhr.setRequestHeader('Content-Length', 262144);
-                //xhr.setRequestHeader('X-Upload-Content-Length', 1000000*150);
-                xhr.setRequestHeader('X-Upload-Content-Type', this.contentType);
-
-                xhr.onload = function(e) {
-                    log('initUpload response', e.target)
-                    if (e.target.status < 400) {
-                        var location = e.target.getResponseHeader('Location');
-                        this.url = location;
-                        if(callback != null) callback(location);
-                    } else {
-                        this.onUploadError_(e);
-                    }
-                }.bind(this);
-                xhr.onerror = this.onUploadError_.bind(this);
-                xhr.send(JSON.stringify(this.metadata));
-            };
-
-            /**
-             * Send the actual file content.
-             *
-             * @private
-             */
-            MediaUploader.prototype.sendChunk = function(blob, lastChunk) {
-                log('MediaUploader: sendChunk');
-                var MediaUploaderInstance = this;
-                var xhr = new XMLHttpRequest();
-
-                this.totalSize = this.totalSize + blob.size;
-
-                var end;
-                if (this.offset || this.chunkSize) {
-                    end = this.offset + blob.size;
-                }
-
-                xhr.open('PUT', this.url, true);
-                xhr.setRequestHeader('Content-Type', this.contentType);
-
-                if(lastChunk) {
-                    MediaUploaderInstance.fileSize = this.totalSize;
-                    end = this.offset + blob.size;
-
-                    xhr.setRequestHeader('Content-Range', 'bytes ' + this.offset + '-' + (end - 1) + '/' + end);
-
-                } else {
-                    xhr.setRequestHeader('Content-Range', 'bytes ' + this.offset + '-' + (end - 1) + '/*');
-                }
-
-
-                xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
-                if (xhr.upload) {
-                    xhr.upload.addEventListener('progress', this.onProgress);
-                }
-                xhr.onload = function(e){
-                    if (e.target.status == 200 || e.target.status == 201) {
-                        MediaUploaderInstance.onComplete(e.target.response);
-                    } else if (e.target.status == 308) {
-                        MediaUploaderInstance.extractRange_(e.target);
-                    }
-                };
-                xhr.onerror = function(e){
-                    if (e.target.status && e.target.status < 500) {
-                        console.error('MediaUploader: sendChunk_: onContentUploadError_: if < 500', e.target.response);
-                    } else {
-                        console.error('MediaUploader: sendChunk_: onContentUploadError_: else', e.target.response);
-                    }
-                }
-                xhr.send(blob);
-            };
-
-            /**
-             * Query for the state of the file for resumption.
-             *
-             * @private
-             */
-            MediaUploader.prototype.resume_ = function() {
-                log('MediaUploader: resume_');
-
-                var xhr = new XMLHttpRequest();
-                xhr.open('PUT', this.url, true);
-                xhr.setRequestHeader('Content-Range', 'bytes */' + this.file.size);
-                xhr.setRequestHeader('X-Upload-Content-Type', this.file.type);
-                if (xhr.upload) {
-                    xhr.upload.addEventListener('progress', this.onProgress);
-                }
-                xhr.onload = this.onContentUploadSuccess_.bind(this);
-                xhr.onerror = this.onContentUploadError_.bind(this);
-                xhr.send();
-            };
-
-            /**
-             * Extract the last saved range if available in the request.
-             *
-             * @param {XMLHttpRequest} xhr Request object
-             */
-            MediaUploader.prototype.extractRange_ = function(xhr) {
-                var range = xhr.getResponseHeader('Range');
-                if (range) {
-                    this.offset = parseInt(range.match(/\d+/g).pop(), 10) + 1;
-                }
-            };
-
-            /**
-             * Handle successful responses for uploads. Depending on the context,
-             * may continue with uploading the next chunk of the file or, if complete,
-             * invokes the caller's callback.
-             *
-             * @private
-             * @param {object} e XHR event
-             */
-            MediaUploader.prototype.onContentUploadSuccess_ = function(e) {
-                log('MediaUploader: onContentUploadSuccess_');
-
-                if (e.target.status == 200 || e.target.status == 201) {
-                    log('MediaUploader: onContentUploadSuccess: 200 || 201');
-                    this.onComplete(e.target.response);
-                } else if (e.target.status == 308) {
-                    log('MediaUploader: onContentUploadSuccess: 308');
-                    this.extractRange_(e.target);
-                    this.retryHandler.reset();
-                    this.sendFile_();
-                }
-            };
-
-            /**
-             * Handles errors for uploads. Either retries or aborts depending
-             * on the error.
-             *
-             * @private
-             * @param {object} e XHR event
-             */
-            MediaUploader.prototype.onContentUploadError_ = function(e) {
-                log('MediaUploader: onContentUploadError_');
-
-                if (e.target.status && e.target.status < 500) {
-                    log('MediaUploader: onContentUploadError_: if < 500');
-
-                    this.onError(e.target.response);
-                } else {
-                    log('MediaUploader: onContentUploadError_: else');
-
-                    this.retryHandler.retry(this.resume_.bind(this));
-                }
-            };
-
-            /**
-             * Handles errors for the initial request.
-             *
-             * @private
-             * @param {object} e XHR event
-             */
-            MediaUploader.prototype.onUploadError_ = function(e) {
-                this.onError(e.target.response); // TODO - Retries for initial upload
-            };
-
-            /**
-             * Construct a query string from a hash/object
-             *
-             * @private
-             * @param {object} [params] Key/value pairs for query string
-             * @return {string} query string
-             */
-            MediaUploader.prototype.buildQuery_ = function(params) {
-                log('MediaUploader: buildQuery_');
-
-                params = params || {};
-                return Object.keys(params).map(function(key) {
-                    return encodeURIComponent(key) + '=' + encodeURIComponent(params[key]);
-                }).join('&');
-            };
-
-            /**
-             * Build the drive upload URL
-             *
-             * @private
-             * @param {string} [id] File ID if replacing
-             * @param {object} [params] Query parameters
-             * @return {string} URL
-             */
-            MediaUploader.prototype.buildUrl_ = function(id, params, baseUrl) {
-                log('MediaUploader: buildUrl_');
-
-                var url = baseUrl || DRIVE_UPLOAD_URL;
-                if (id) {
-                    url += id;
-                }
-                var query = this.buildQuery_(params);
-                if (query) {
-                    url += '?' + query;
-                }
-                return url;
-            };
-
-
-            var UploadVideo = function() {
-
-                this.title = 'test upload';
-                this.description = 'test desc';
-                this.tags = ['youtube-cors-upload'];
-                this.categoryId = 28;
-                this.videoId = '';
-                this.uploadStartTime = 0;
-            };
-
-            UploadVideo.prototype.ready = function(accessToken) {
-                this.accessToken = accessToken;
-                this.gapi = gapi;
-                this.authenticated = true;
-                this.gapi.client.request({
-                    path: '/youtube/v3/channels',
-                    params: {
-                        part: 'snippet',
-                        mine: true
-                    },
-                    callback: function(response) {
-                        if (response.error) {
-                            console.error(response.error.message);
-                        } else {
-                            log('UploadVideo.ready title', response.items[0].snippet.title);
-                            log('UploadVideo.ready thumbnails', response.items[0].snippet.thumbnails.default.url);
-
-
-                        }
-                    }.bind(this)
-                });
-            };
-
-            UploadVideo.prototype.initUpload = function(file, callback) {
-                var uploadVideoInstance = this;
-                var metadata = {
-                    snippet: {
-                        title: this.title,
-                        description: this.description,
-                        tags: this.tags,
-                        categoryId: this.categoryId
-                    },
-                    status: {
-                        privacyStatus: 'public'
-                    }
-                };
-                var uploader = new MediaUploader({
-                    baseUrl: 'https://www.googleapis.com/upload/youtube/v3/videos',
-                    file: file,
-                    token: this.accessToken,
-                    chunkSize:  5000,
-                    metadata: metadata,
-                    params: {
-                        part: Object.keys(metadata).join(',')
-                    },
-                    onError: function(data) {
-                        var message = data;
-                        try {
-                            var errorResponse = JSON.parse(data);
-                            message = errorResponse.error.message;
-                        } finally {
-                            alert(message);
-                        }
-                    }.bind(this),
-                    onProgress: function(data) {
-                        var bytesUploaded = data.loaded;
-                        var totalBytes = parseInt(data.total);
-                        var percentageComplete = parseInt((bytesUploaded * 100) / totalBytes);
-
-                        this.callback(percentageComplete);
-                    }.bind(this),
-                    onComplete: function(data) {
-                        var uploadResponse = JSON.parse(data);
-                        this.videoId = uploadResponse.id;
-                        this.videoURL = 'https://www.youtube.com/watch?v=' + this.videoId;
-                        this.callback('uploaded', this.videoURL);
-
-                        setTimeout(uploadVideoInstance.pollForVideoStatus.bind(this), 2000);
-                    }.bind(this)
-                });
-                // This won't correspond to the *exact* start of the upload, but it should be close enough.
-                this.uploadStartTime = Date.now();
-                uploader.initUpload(callback);
-                this.uploader = uploader;
-            };
-
-            UploadVideo.prototype.pollForVideoStatus = function() {
-                var instace = this;
-                log('UploadVideo.pollForVideoStatus');
-                this.gapi.client.request({
-                    path: '/youtube/v3/videos',
-                    params: {
-                        part: 'status,player',
-                        id: this.videoId
-                    },
-                    callback: function(response) {
-                        if (response.error) {
-                            setTimeout(instace.pollForVideoStatus.bind(this), 2000);
-                        } else {
-                            var uploadStatus = response.items[0].status.uploadStatus;
-                            switch (uploadStatus) {
-                                case 'uploaded':
-                                    this.callback('uploaded', instace.videoURL);
-                                    setTimeout(instace.pollForVideoStatus.bind(this), 2000);
-                                    break;
-                                case 'processed':
-                                    instace.callback('processed', instace.videoURL);
-                                    break;
-                                default:
-                                    instace.callback('failed', instace.videoURL);
-                                    break;
-                            }
-                        }
-                    }.bind(this)
-                });
-            };
-
-            function getRandomString() {
-                if (window.crypto && window.crypto.getRandomValues && navigator.userAgent.indexOf('Safari') === -1) {
-                    var a = window.crypto.getRandomValues(new Uint32Array(3)),
-                        token = '';
-                    for (var i = 0, l = a.length; i < l; i++) {
-                        token += a[i].toString(36);
-                    }
-                    return token;
-                } else {
-                    return (Math.random() * new Date().getTime()).toString(36).replace(/\./g, '');
-                }
-            }
-
-            function getFileName(fileExtension) {
-                var d = new Date();
-                var year = d.getUTCFullYear();
-                var month = d.getUTCMonth();
-                var date = d.getUTCDate();
-                return 'Conference-' + year + month + date + '-' + getRandomString() + '.' + fileExtension;
-            }
-
-            function uploadToYouTube(fileName, firstBlob, callback, initCallback) {
-                var fileExtension = 'mp4';
-                var mediaContainerFormat = 'h264'
-                var mimeType = 'video/webm\;codecs=h264';
-
-
-                var uploadVideo = new UploadVideo();
-                uploadVideo.ready(gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token);
-
-                var blob = new File([firstBlob], getFileName(fileExtension), {
-                    type: mimeType
-                });
-
-                if(!uploadVideo) {
-                    alert('YouTube API are not available.');
-                    return;
-                }
-
-                uploadVideo.title = fileName;
-                uploadVideo.description = fileName;
-                uploadVideo.tags = ['recordrtc'];
-                uploadVideo.categoryId = 28; // via: http://stackoverflow.com/a/35877512/552182
-                uploadVideo.videoId = '';
-                uploadVideo.uploadStartTime = 0;
-
-                uploadVideo.callback = callback;
-                uploadVideo.initUpload(blob, function () {
-                    if(initCallback != null) initCallback(uploadVideo.uploader);
-                });
-            }
-
-            function onDataAvailablehandler(blob) {
-                log('onDataAvailablehandler');
-
-                if(_videoStream.size == 0) {
-                    var fileName = getFileName('mp4');
-
-                    uploadToYouTube(fileName,blob, function (percentageComplete, fileURL) {
-                            if (percentageComplete == 'uploaded') {
-                                log('Uploaded. However YouTube is still processing.', fileURL);
-                                return;
-                            }
-                            if (percentageComplete == 'processed') {
-                                log('Uploaded & Processed. Click to open YouTube video.', fileURL);
-                                return;
-                            }
-                            if (percentageComplete == 'failed') {
-                                log('YouTube failed transcoding the video.', fileURL);
-                                return;
-                            }
-
-                            log(percentageComplete + '% uploaded to YouTube.');
-                        },
-                        function (uploader) {
-                            log('uploadToYouTube: uploading inited')
-                            _uploaderInterval = setInterval(function () {
-                                let blobsLength = _videoStream.blobs.length;
-                                let sumSize = 0;
-
-                                for(let i = 0; i < blobsLength; i++) {
-                                    if(_videoStream.blobs.length == 0) break;
-                                    sumSize = sumSize + _videoStream.blobs[i].size;
-                                    if(sumSize >= 262144 && _videoStream.recordingStopped != true) {
-                                        let blobsToSend = _videoStream.blobs.slice(0, i + 1);
-                                        let blobToSend = new Blob(blobsToSend);
-                                        _videoStream.blobs.splice(0, i);
-                                        log('ondataavailable SEND', sumSize);
-
-                                        let lastChunk = _videoStream.recordingStopped === true ? true : false;
-                                        uploader.sendChunk(blobToSend, lastChunk);
-                                        break;
-                                    } else if(_videoStream.recordingStopped === true) {
-                                        log('ondataavailable SEND LAST CHUNK', sumSize);
-                                        let blobToSend = new Blob(_videoStream.blobs);
-                                        _videoStream.blobs = [];
-
-                                        uploader.sendChunk(blobToSend, true);
-                                        if(_uploaderInterval != null) {
-                                            clearInterval(_uploaderInterval);
-                                            _uploaderInterval = null;
-                                            canvasComposer.removeDataListener(onDataAvailablehandler);
-                                        }
-                                    } else {
-                                        log('ondataavailable BUFFER', sumSize);
-                                    }
-                                }
-                            }, 1000)
-                        });
-                }
-
-                _videoStream.blobs.push(blob);
-
-
-                var size = 0;
-                _videoStream.blobs.forEach(function(b) {
-                    size += b.size;
-                });
-                _videoStream.size = size;
-            }
-
-            function recordAndUpload() {
-                _videoStream.size = 0
-                _videoStream.blobs = [];
-                _videoStream.recordingStopped = false;
-                canvasComposer.startRecorder(onDataAvailablehandler);
-            }
-
-            function stopRecording() {
-                _videoStream.recordingStopped = true;
-            }
-
-            return {
-                recordAndUpload: recordAndUpload,
-                stopRecording: stopRecording
             }
         }())
 
@@ -6947,8 +6138,7 @@ window.WebRTCRoomClient = function app(options){
             audioVisualization: audioVisualization,
             canvasComposer:canvasComposer,
             localRecorder:localRecorder,
-            fbLive:fbLive,
-            youtubeLiveUploader:youtubeLiveUploader,
+            fbLive:fbLive
         }
     }())
 
@@ -7350,10 +6540,17 @@ window.WebRTCRoomClient = function app(options){
 
         function participantDisconnected(participant) {
             log("participantDisconnected: ", participant);
+            log("participantDisconnected: participant.soundMeter.visualizationAnimation", participant.soundMeter.visualizationAnimation);
             log("participantDisconnected: is online - " + participant.online);
             if(participant.online == false) return;
 
             //participant.remove();
+            if(participant.soundMeter.visualizationAnimation) {
+                cancelAnimationFrame(participant.soundMeter.visualizationAnimation);
+            }
+            if(participant.soundMeter.source != null) participant.soundMeter.source.disconnect();
+
+
             participant.online = false;
             if(participant.fbLiveStreamingActive) {
                 app.event.dispatch('liveStreamingEnded', participant);
@@ -7369,7 +6566,7 @@ window.WebRTCRoomClient = function app(options){
 
             if (event.candidate) {
                 if(event.candidate.candidate.indexOf("relay")<0){ // if no relay address is found, assuming it means no TURN server
-                    //return;
+                    return;
                 }
 
                 log('gotIceCandidate: existingParticipant', existingParticipant)
@@ -7845,12 +7042,17 @@ window.WebRTCRoomClient = function app(options){
                                 return;
                             }
 
+
+
                             var localDescription;
                             if(typeof cordova != 'undefined' && _isiOS) {
                                 localDescription = new RTCSessionDescription(offer);
                             } else {
                                 localDescription = offer;
                             }
+
+                            //for testing only
+                            //localDescription.sdp = removeNotRelayCandidates(offer.sdp);
 
                             /*if(_isiOS){
 								localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
@@ -8271,6 +7473,26 @@ window.WebRTCRoomClient = function app(options){
             return sdp;
         }
 
+        //for testing only
+        function removeNotRelayCandidates(sdp) {
+            //console.log('removeNotRelayCandidates sdp', sdp);
+            var sdpLines = (sdp).split("\n");
+            //console.log('removeNotRelayCandidates sdpLines', sdpLines);
+            for (let i = sdpLines.length - 1; i >= 0; i--) {
+                let line = sdpLines[i];
+                if(line.startsWith('a=candidate') && line.indexOf('relay') == -1) {
+                    sdpLines.splice(i, 1);
+                }
+            }
+            //console.log('removeNotRelayCandidates sdpLines2', sdpLines);
+
+            sdp = sdpLines.filter(function(l) {
+                return l != null;
+            }).join('\n')
+
+            return sdp;
+        }
+
         function offerReceived() {
 
             function createPeerConnection(senderParticipant) {
@@ -8657,6 +7879,9 @@ window.WebRTCRoomClient = function app(options){
                         .then(function(answer) {
                             log('offerReceived: answer created ' + answer.sdp);
                             senderParticipant.signalingState.setStage('answerCreated');
+
+                            //for testing only
+                            //answer.sdp = removeNotRelayCandidates(answer.sdp);
 
                             if(_isiOS){
                                 //answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
@@ -10011,7 +9236,7 @@ window.WebRTCRoomClient = function app(options){
         }
 
         function joinRoom(streams, mediaDevicesList) {
-            log('app.mediaManager.fbLive.streamingParticipant().connection: joinRoom');
+            log('initOrConnectWithNodeJs: joinRoom');
             app.signalingDispatcher.socketRoomJoined((streams != null ? streams : []));
             if(mediaDevicesList != null) app.localMediaControls.loadDevicesList(mediaDevicesList);
             app.event.dispatch('joined', localParticipant);
@@ -10275,9 +9500,9 @@ window.WebRTCRoomClient = function app(options){
 
                 if (event.candidate) {
 
-                    if (event.candidate.candidate.indexOf("relay") < 0) {
-                        //return;
-                    }
+                    /*if (event.candidate.candidate.indexOf("relay") < 0) {
+                        return;
+                    }*/
                     var message = {
                         type: "candidate",
                         label: event.candidate.sdpMLineIndex,
@@ -10856,7 +10081,6 @@ window.WebRTCRoomClient = function app(options){
     app.switchTo = function(publisherId, streamName){
         log('app.switchTo')
         return new Promise(function (resolve, reject) {
-            app.mediaManager.canvasComposer.videoComposer.switchingRoom(true);
             var currentStreams = localParticipant.tracks.map(function (track) {
                 return track.stream.clone();
             })
@@ -10867,8 +10091,6 @@ window.WebRTCRoomClient = function app(options){
             initOptions.roomName = streamName;
             initOptions.roomPublisher = publisherId;
             initOptions.streams = [];
-            let streamingParticipant = app.mediaManager.fbLive.streamingParticipant();
-            initOptions.siwtchedFromRoom = {prevParticipantId: localParticipant.id, connection: app.mediaManager.fbLive.streamingParticipant() != null ? app.mediaManager.fbLive.streamingParticipant().connection : null};
             initOptions.startWith = {
                 audio: app.localMediaControls.micIsEnabled(),
                 video: app.localMediaControls.cameraIsEnabled()
@@ -10880,6 +10102,11 @@ window.WebRTCRoomClient = function app(options){
             newConferenceInstance.mediaManager.canvasComposer.videoComposer.refreshEventListeners(newConferenceInstance);
             //newConferenceInstance.mediaManager.canvasComposer.audioComposer.mix();
             newConferenceInstance.mediaManager.fbLive = app.mediaManager.fbLive;
+            newConferenceInstance.mediaManager.fbLive.updateRoomInstance(newConferenceInstance);
+            newConferenceInstance.mediaManager.audioVisualization = app.mediaManager.audioVisualization;
+            newConferenceInstance.mediaManager.localRecorder = app.mediaManager.localRecorder;
+            //newConferenceInstance.mediaManager = app.mediaManager;
+            //newConferenceInstance.mediaManager.canvasComposer.videoComposer.refreshEventListeners(newConferenceInstance);
 
             //newConferenceInstance.init();
             log('app.switchTo 3')
@@ -10891,9 +10118,7 @@ window.WebRTCRoomClient = function app(options){
                 log('app.switchTo: initNegotiationEnded')
 
                 let newParticipantSid = newConferenceInstance.localParticipant().sid;
-                newConferenceInstance.mediaManager.canvasComposer.videoComposer.switchingRoom(false);
                 newConferenceInstance.mediaManager.fbLive.switchRoom(newConferenceInstance, roomParticipants);
-                //switchRoomForFbLive(newConferenceInstance);
                 newConferenceInstance.roomSwitched({prevParticipantId:prevLocalParticipant, prevRoom:prevRoomId});
                 app.disconnect(true);
             });
@@ -10924,17 +10149,11 @@ window.WebRTCRoomClient = function app(options){
             app.mediaManager.fbLive.endStreaming();
         }
         console.log('app.disconnect: getMediaStream', app.mediaManager.canvasComposer.getMediaStream());
-        //if(!switchRoom && app.mediaManager.canvasComposer.getMediaStream() != null) {
-            app.mediaManager.canvasComposer.stopStreamCapture();
-        //}
+        if(!switchRoom) app.mediaManager.canvasComposer.stopStreamCapture();
 
-        app.mediaManager.audioVisualization().removeCommonVisualization();
+        app.mediaManager.audioVisualization.stopAllVisualizations(switchRoom);
 
         for(var p = roomParticipants.length - 1; p >= 0; p--){
-
-            //if(roomParticipants[p] == app.mediaManager.fbLive.streamingParticipant()) continue;
-            if(roomParticipants[p] != localParticipant && roomParticipants[p].soundMeter.script != null) roomParticipants[p].soundMeter.script.disconnect();
-            if(roomParticipants[p] != localParticipant && roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
             if(!roomParticipants[p].isLocal) {
                 if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();
@@ -10951,7 +10170,7 @@ window.WebRTCRoomClient = function app(options){
         if(socket != null) socket.disconnect();
         app.event.dispatch('disconnected');
         app.event.destroy();
-
+        app.state = 'disconnected';
     }
 
 
@@ -10990,10 +10209,6 @@ window.WebRTCRoomClient = function app(options){
         }
 
         var dispatch = function(eventName, data) {
-            if(!doesHandlerExist(eventName)) {
-                return;
-            }
-
             const event = events[eventName];
             if (event) {
                 event.fire(data);
@@ -11019,11 +10234,6 @@ window.WebRTCRoomClient = function app(options){
             }
         }
 
-        var doesHandlerExist = function (eventName) {
-            if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
-            return false;
-        }
-
         var destroy = function () {
             events = {};
         }
@@ -11032,7 +10242,6 @@ window.WebRTCRoomClient = function app(options){
             dispatch:dispatch,
             on:on,
             off:off,
-            doesHandlerExist:doesHandlerExist,
             destroy:destroy
         }
     }

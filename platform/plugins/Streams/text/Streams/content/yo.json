@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Ohun Titun"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Awọn eniyan Mo pe",
-        "Streams\/invitedMe": "Tani o pe mi",
-        "AreYouAgree": "Ṣe o gba?",
-        "Yes": "Bẹẹni",
-        "No": "Rara"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Kini o ni igbadun?",
-        "CanAdd": "Ti o ko ba le wa ohun ti o n wa, o le fi ifẹ tuntun kun ni isalẹ:",
-        "TrySynonyms": "Ṣe ko riran naa? Gbiyanju awọn synonyms kan.",
-        "AddUnderCategory": "Fi ẹka kun labẹ ẹka ...",
-        "Other": "Miiran",
-        "Unlisted": "Olubasọrọ"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "A ti firanṣẹ fun ifiranṣẹ fun atunyẹwo abojuto. Fọwọ ba lẹẹkansi si unflag.",
-        "noOneSaid": "Ko si ọkan ti sọ ohunkohun",
-        "closeChatButton": "Pa iwiregbe",
-        "closeChatConfirmTitle": "Pade iwiregbe yii?",
-        "closeChatConfirm": "Ṣe o da ọ loju pe o fẹ pa iwiregbe yii pari?",
-        "closeChatConfirmYes": "Bẹẹni",
-        "closeChatConfirmNo": "Rara",
-        "earlierComments": "awọn alaye iṣaaju",
-        "Subscribed": "Awọn iwifunni ti o gbo mi",
-        "Unsubscribed": "Gba Iwifunni",
-        "notAllowedToJoinCall": "O ko ni aṣẹ lati darapọ mọ ibaraẹnisọrọ yii.",
-        "startedConversation": "bẹrẹ ibaraẹnisọrọ kan",
-        "RealTimeCall": "Ipe Akoko gidi",
-        "SearchByName": "Wa ni orukọ",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} n bẹ iwiregbe naa",
-            "Join": "{{displayName}} darapọ mọ iwiregbe naa",
-            "Leave": "{{displayName}} fi iwiregbe silẹ",
-            "RelatedTo": "{{displayName}} ti bẹrẹ {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Ifiranṣẹ {{& message.fields.type}} si {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sọ pe:",
-        "Streams\/changed": "Awọn ayipada ni {{stream.fields.title}}",
-        "Streams\/invite": "A pe ọ si {{& stream.fields.title}}",
-        "Streams\/announcement": "Ikede ni {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} iyipada ti o yipada pada",
-        "Streams\/chat\/edit": "Ti satunkọ ifiranṣẹ alaworan",
-        "Streams\/chat\/remove": "Ti yo ifiranṣẹ alafi kuro",
-        "Streams\/closed": "{{stream.fields.title}} ti wa ni pipade",
-        "Streams\/task\/progress": "Ilọsiwaju lọ si {{stream.fields.title}}",
-        "Streams\/task\/complete": "Iṣẹ ti pari: {{stream.fields.title}}",
-        "Streams\/task\/error": "Aṣiṣe nigba: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Ifiranṣẹ ti nwọle",
-        "Streams\/relatedTo\/Streams\/call": "Ipe tuntun ti a bẹrẹ ni {{toTitle}}",
-        "Streams\/relatedTo\/*": "Tuntun {{relationDisplayType}} ni {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Ṣe afikun si {{toTitle}} bi {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mẹnuba ninu rẹ ni asọye",
-        "Streams\/call": "{{displayName}} bẹbẹrẹ ipe gidi",
-        "ManageEmailSubscriptions": "ṣakoso awọn ṣiṣe alabapin imeeli rẹ",
-        "IfUnsubscribe": "Ti o ba fẹ lati yowo kuro"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "{{displayName}} pe o si {{inviteUrl}}",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Yan lati Awọn olubasọrọ rẹ",
-            "chooseAgainFromContacts": "Yan Lẹẹkansi lati Awọn olubasọrọ",
-            "inviteSelectedContacts": "Pe Awọn olubasọrọ ti o yan",
-            "selectFromContacts": "Yan Lati Awọn olubasọrọ",
-            "photo": "Ya fọto kan",
-            "photoInstruction": "Ti ẹni ti o ba ṣayẹwo koodu QR rẹ wa niwaju rẹ, ya fọto kan ti wọn",
-            "to": "Lati: {{Stream Title}}",
-            "go": "Lọ",
-            "title": "Pe",
-            "placeholder": "Nọmba nọmba tabi adirẹsi imeeli",
-            "orInvite": "Tabi pe eniyan ni lilo nipa lilo:",
-            "QR": "{{ClickOrTap}} lati ṣe koodu QR",
-            "QRtitle": "Ṣayẹwo yi QR koodu",
-            "QRscanned": "Wọn ti ṣayẹwo o!",
-            "byEmail": "Imeeli",
-            "byText": "Ọrọ",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "byEmail": "Email",
+            "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} ti koodu naa ba ṣayẹwo",
-            "copyLink": "{{ClickOrTap}} lati daakọ ọna asopọ ifiwepe",
-            "userChooserPlaceholder": "Ṣewadii nipa orukọ"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, ṣayẹwo eyi jade",
-            "PleaseVisitLink": "Jọwọ ṣẹwo si ọna asopọ wọnyi:",
-            "InvitingYou": "Mo n pe ọ si {{title}}",
-            "HasInvitedYou": "{{displayName}} ti pe o si {{title}}",
-            "HasMentionedYou": "{{displayName}} ti mẹnuba rẹ ninu &quot;{{title}}&quot;",
-            "YOUAREINVITED": "O RẸ!",
-            "AcceptInvite": "Gba ifiwepe"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "A ti pe ọ si {{title}}. Jọwọ tẹ {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "O ti pe. {{ClickOrTap}} nibi lati gba ati darapo."
-        },
-        "command": "Ifiwepe",
-        "youCanNowPaste": "O le bayi lẹẹmọ ọna asopọ yii nibikan lati pe eniyan"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",
-            "confirm": "Awọn ipe ni a fi ranṣẹ lati inu nọmba wa, ti awọn ọrẹ rẹ ko iti mọ. Ṣe o fẹ lati tẹle awọn ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, ti o beere fun wọn lati tẹ ọna asopọ naa.",
-            "check": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo awọn SMS rẹ ki o si tẹ ọna asopọ naa!",
-            "CheckYourMobile": "Jọwọ ṣayẹwo SMS ki o tẹle awọn itọsọna!"
-        },
-        "email": {
-            "alert": "Awọn ipe ni a fi ranṣẹ lati ọdọ wa, ti awọn ọrẹ rẹ ko iti mọ. Tẹle pẹlu ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, pe wọn lati tẹ ọna asopọ naa.",
-            "confirm": "Awọn ipe ni a fi ranṣẹ lati ọdọ wa, ti awọn ọrẹ rẹ ko iti mọ. Ṣe o fẹ lati tẹle awọn ọrọ ti o yara lati jẹ ki wọn mọ pe pipe si lati ọdọ rẹ, ti o beere fun wọn lati tẹ ọna asopọ naa.",
-            "subject": "Ṣe o gba ipe kan?",
-            "body": "Hey, Mo kan ranṣẹ si ọ si {{app}} app. Jọwọ ṣayẹwo imeeli rẹ ki o si tẹ ọna asopọ naa wa nibẹ!",
-            "CheckYourEmail": "Jọwọ ṣayẹwo imeeli rẹ ki o tẹle awọn itọnisọna!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Muu gbohungbohun ṣiṣẹ",
-            "cameraTitle": "Mu kamẹra ṣiṣẹ",
-            "cameraAndMicrophoneTitle": "Mu kamẹra ati Gbohungbohun ṣiṣẹ",
-            "dialogTitle": "Sisopọ",
-            "microphoneBtn": "Jeki Gbohungbohun",
-            "cameraBtn": "Mu kamẹra ṣiṣẹ",
-            "cameraAndMicrophoneBtn": "Mu kamẹra ṣiṣẹ ati Gbohungbohun"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Awọn ilana",
-            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Lati lo o jọwọ tẹle awọn igbesẹ wọnyi:",
-            "point1": "Lọ si &quot;Eto&quot; -&gt; &quot;Onitẹsiwaju&quot; -&gt; &quot;Asiri ati aabo&quot; -&gt; &quot;Eto Aye&quot; -&gt; &quot;Kamẹra&quot; tabi &quot;Eto Aaye&quot; -&gt; &quot;Gbohungbohun&quot;",
-            "point2": "Yo {{hostname}} kuro ni atokọ “Dẹkun”"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Awọn ilana",
-            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Jọwọ tun gbe oju-iwe yii mulẹ ki o jẹrisi wiwọle si {{kind}} lati darapọ mọ apejọ naa."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Awọn ilana",
-            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Lati lo o jọwọ tẹle awọn igbesẹ wọnyi:",
-            "point1": "Lọ si Awọn Eto Android rẹ",
-            "point2": "Ṣi &quot;Awọn ohun elo &amp; awọn iwifunni&quot;",
-            "point3": "Wa &quot;{{communityName}}&quot; ati ṣii",
-            "point4": "Tẹ lori Awọn igbanilaaye",
-            "point5": "Mu ṣiṣẹ ṣiṣẹ {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Awọn ilana",
-            "permissionDenied": "Awọn igbanilaaye fun {{kind}} sẹ. Lati lo o jọwọ tẹle awọn igbesẹ wọnyi:",
-            "point1": "Lọ si Eto Eto iOS rẹ",
-            "point2": "Ṣi &quot;Asiri&quot;",
-            "point3": "Wa {{kind}} ki o si ṣi i",
-            "point4": "Wa &quot;{{communityName}}&quot; ki o mu ṣiṣẹ"
-        },
-        "notices": {
-            "youJoinedRoom": "O darapọ mọ yara naa",
-            "joining": "Didapo: {{userName}}",
-            "sbLeftRoom": "{{userName}} kuro ni yara naa",
-            "youLeftRoom": "O kuro ni yara naa",
-            "codeCopied": "O kuro ni yara naa",
-            "sbBeganFbLive": "{{userName}} bẹrẹ sii ṣe ikede ni ipe yii ni Facebook",
-            "sbStoppedFbLive": "{{userName}} dẹkun igbohunsafefe ipe yii ni Facebook",
-            "youBeganFbLive": "O bẹrẹ ikede ni ipe yii ni Facebook",
-            "youStoppedFbLive": "O da igbohunsafefe ipe yii duro ni Facebook",
-            "linkCopiedToCb": "Ọna asopọ dakọ si agekuru",
-            "codeCopiedToCb": "Koodu dakọ si agekuru",
-            "userHasNoVideo": "Olukopa ko ni fidio",
-            "openInBrowserAlert": "Ṣii ọna asopọ ni ẹrọ lilọ-kiri Safari lati darapọ mọ apejọ.",
-            "youBeganVideoRecording": "O bẹrẹ gbigbasilẹ apejọ yii",
-            "youStoppedVideoRecording": "O da gbigbasilẹ apejọ yii duro",
-            "switchingRoom": "Iyipada yara ...",
-            "forceDisconnecting": "Iwọ yoo ge asopọ laarin iṣẹju -aaya 5",
-            "youStartedLive": "O bẹrẹ ikede yii si RTMP aṣa",
-            "youStoppedLive": "O dẹkun ikede yii si RTMP aṣa",
-            "sbStartedLiveStreaming": "{{userName}} bẹrẹ ifiwe",
-            "sbStoppedLiveStreaming": "{{userName}} pari ni ifiwe",
-            "liveStopped": "Aṣiṣe lakoko fifiranṣẹ fidio si ipari ipari ṣẹlẹ"
-        },
-        "settingsPopup": {
-            "webCamera": "Kamẹra wẹẹbu",
-            "screenSharing": "Pinpin Iboju",
-            "shareAnotherScreen": "Pin iboju miiran",
-            "turnOffCameras": "Pa gbogbo awọn kamẹra",
-            "startFBLive": "Bẹrẹ Facebook Livestream",
-            "stopFBLive": "Da Facebook Livestream duro",
-            "fbLiveTitle": "Akọle Live",
-            "fbLiveDescription": "Apejuwe Live",
-            "fbOnlyMeLiveAccess": "Emi nikan soso",
-            "fbFriendsAccess": "Awọn ọrẹ",
-            "fbPublicAccess": "Gbangba",
-            "fbStartLive": "Lọ Live",
-            "fbStopLive": "Ipari Gbe",
-            "fbEmbedCode": "Fi sabe",
-            "copy": "Daakọ",
-            "turnOffVideo": "Paa kamẹra \/ pinpin iboju",
-            "turnOffScreenSharing": "Pa a pinpin iboju",
-            "cameraIsTurnedOff": "Ti pa kamẹra",
-            "startRecording": "Bẹrẹ Gbigbasilẹ",
-            "stopRecording": "Duro Gbigbasilẹ",
-            "recordingInProgress": "Gbigbasilẹ wa ni ilọsiwaju ...",
-            "publishOnTimeline": "Atẹjade lori Ago",
-            "publishToGroup": "Ṣe atẹjade si ẹgbẹ",
-            "turnOffAudioInput": "Dakẹ gbohungbohun",
-            "micIsTurnedOff": "Gbohungbohun wa ni pipa",
-            "start": "Bẹrẹ",
-            "stop": "Duro",
-            "streamingSettings": "Ètò",
-            "streamToRTMP": "San si RTMP aṣa"
-        },
-        "participantsPopup": {
-            "disconnect": "Ge asopọ",
-            "floatingScreens": "Awọn iboju Fifọ loju omi",
-            "tiledScreens": "Awọn iboju ti o nira",
-            "loudestExceptMe": "Ayafi Mofi Gẹẹsi Mi",
-            "maximizeLoudest": "Loudest Lopin",
-            "staticMaximized": "Iwosan Maximized",
-            "manual": "Afowoyi",
-            "fullScreen": "Gbogbo sikirini",
-            "turnOffCamera": "Tọju fidio",
-            "turnOffAudio": "Gbo ohun mi",
-            "turnOffScreenSharing": "Tọju pinpin iboju",
-            "turnOnCamera": "Fi fidio han",
-            "turnOnAudio": "Aṣiṣe ohun ti a ko gbọ",
-            "turnOnScreenSharing": "Fihan pinpin iboju"
-        },
-        "notAllowedToJoinCall": "Iwọ ko ni aṣẹ lati darapọ mọ ṣiṣan yii.",
-        "streamTitle": "{{1}} ipe laaye",
-        "preview": {
-            "preamble": "Ipade:",
-            "Meeting": "Ipade",
-            "MeetingEnded": "Ipade ti pari"
-        },
-        "preparing": {
-            "micIsOff": "Gbohungbohun wa ni pipa",
-            "micIsOn": "Mic ti wa ni titan",
-            "cameraIsOff": "Kamẹra ti wa ni pipa",
-            "cameraIsOn": "Kamẹra ti wa ni titan",
-            "screenSharingIsOn": "Iboju iboju wa ni titan",
-            "screenSharingIsOff": "Pin iboju",
-            "joinNow": "Darapọ mọ Ipe"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "sọ ifiranṣẹ <em>{{message.fields.type}}<\/em> si {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "asọye lori",
-            "in": "ninu",
-            "body": "ninu {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
+            "in": "in",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "ti firanṣẹ si",
-                "byAvatar": "lati {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ni tuntun {{instructions.fromDisplayType}}",
-                "byAvatar": "afikun nipasẹ {{avatar.displayName}}"
-            },
-            "startedCallIn": "bẹrẹ ipe ninu"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Nkepe",
-            "description": "Apo-iwọle fun awọn ifiwepe"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
-            "displayType": "Ohun elo",
-            "description": "san fun ṣiṣakoso wiwọle si orisun kan ati fifiranṣẹ awọn ifiranṣẹ nipa awọn imudojuiwọn"
+            "displayType": "Resource",
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "fun gbigba awọn imudojuiwọn nipa ilọsiwaju lori iṣẹ ṣiṣe kan",
-            "displayType": "Iṣẹ-ṣiṣe"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "ẹka fun awọn iṣẹ-ṣiṣe",
-            "displayType": "Awọn iṣẹ-ṣiṣe"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "iriri ti o wọpọ fun awọn ọmọ ẹgbẹ ti agbegbe kan",
-            "displayType": "Iriri ti o wọpọ fun awọn ọmọ ẹgbẹ ti agbegbe kan"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "ikini pẹlu eyiti olumulo le ṣafihan ara wọn",
-            "displayType": "Ẹ kí"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Nọmba",
-            "description": "nọmba ti iṣiro"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Ọjọ",
-            "description": "ọjọ"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Ọrọ",
-            "description": "ara ti ọrọ"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Ọrọ",
-            "description": "ara kekere ti ọrọ"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Ọrọ",
-            "description": "alabọde ara ti ọrọ"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Adirẹsi imeeli",
-            "description": "adirẹsi imeeli"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Nomba fonu",
-            "description": "nomba fonu"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "ọna asopọ lori oju opo wẹẹbu"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Aworan",
-            "description": "aworan wiwo",
-            "newItem": "Ṣafikun Aworan"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Aworan Aworan",
-            "description": "àwòrán àwọn àwòrán"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Awo-orin",
-            "description": "awo-orin si eyiti ọpọlọpọ awọn media jẹ ti o jọmọ"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Faili",
-            "description": "faili po si",
-            "newItem": "Ṣafikun Faili"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Agekuru Audio",
-            "description": "agekuru ohun",
-            "newItem": "Fi Audio si"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Agekuru fidio",
-            "description": "agekuru fidio",
-            "newItem": "Ṣafikun Fidio"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "ohun afetigbọ tabi fidio"
+            "description": "live audio or video"
         },
         "Streams\/category": {
-            "displayType": "Ẹka",
-            "description": "Ẹya si eyiti awọn ṣiṣan omi miiran le jẹ ibatan"
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
         },
         "Streams\/participating": {
-            "displayType": "Atọka ikopa",
-            "description": "Awọn ṣiṣan ni o ni ibatan \/ ko ni ibatan si eyi nigbati oluṣamulo darapọ \/ fi oju silẹ"
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
         "Streams\/interest": {
-            "displayType": "Ifẹ si",
-            "description": "duro fun iwulo olumulo ninu akọle kan"
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
         },
         "Streams\/incoming": {
-            "displayType": "Ti nwọle",
-            "description": "opin irin-ajo fun awọn ifiranṣẹ ti awọn olumulo miiran ranṣẹ"
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
         },
         "Streams\/chat": {
-            "displayType": "Ọrọ sisọ",
-            "description": "ibaraẹnisọrọ laarin awọn olumulo, pẹlu itan-akọọlẹ"
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Ipe ti Gidi",
-            "description": "akoko gidi fidio \/ ohun ipe"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF iwe aṣẹ",
-            "description": "PDF iwe aṣẹ",
-            "newItem": "Ṣafikun PDF"
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Ibeere",
-            "description": "ṣiṣan ibeere"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Idahun",
-            "description": "san san"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Awọn ipe",
-            "description": "ẹka fun Awọn ṣiṣan\/webrtc",
-            "MaxRelationsExceeded": "Awọn ipe Max ti pọ ju"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Akọle",
-        "Subscribed": "Ṣe alabapin",
-        "Participants": "Olukopa",
-        "AreYouSureRemoveIdentifier": "Ṣe o da ọ loju lati yọ idamọ yii kuro?",
-        "AreYouSureUnsubscribeIdentifier": "Ṣe o da ọ daju pe o yọ aami idanimọ rẹ kuro? O yoo pa awọn iwifunni si idanimọ yii.",
-        "AreYouSureUnsubscribeDevice": "Ṣe o da ọ loju pe iwọ ko sọ ohun elo yii kuro? Yoo pa awọn iwifunni si ẹrọ yii.",
-        "Identifiers": "Awọn idamo",
-        "Devices": "Awọn ẹrọ",
-        "Streams": "Awọn ṣiṣan",
-        "AreYouSureRemoveParticipant": "Ṣe o da ọ loju pe o fẹ yọ alabaṣe yii kuro?",
-        "RemoveParticipant": "Mu alabaṣe kuro"
-    },
     "menu": {
-        "placeholder": "akọle akọle iwe",
-        "ModTab": "Yi ohun kan pada",
-        "Save": "Fipamọ",
-        "Delete": "Paarẹ",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
+        "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Akoonu yii wa ni pamọ fun yin."
-    },
     "audio": {
-        "record": "Igbasilẹ",
-        "reset": "Tunto",
-        "edit": "Ṣatunkọ",
-        "title": "akọle",
-        "description": "apejuwe",
-        "upload": "Po si",
-        "link": "Ọna asopọ",
-        "setUrl": "Ṣeto URL",
-        "save": "Fipamọ",
-        "setClip": "Ge Agekuru",
-        "invalidURL": "URL ti ko fẹsẹmulẹ",
-        "invalidFile": "Faili ti ko fẹ",
-        "errorNoSource": "Ko si orisun ohun",
-        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
-        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+        "record": "Record",
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Tunto",
-        "edit": "Ṣatunkọ",
-        "title": "akọle",
-        "description": "apejuwe",
-        "upload": "Po si",
-        "link": "Ọna asopọ",
-        "setUrl": "Ṣeto URL",
-        "save": "Fipamọ",
-        "setClip": "Ge Agekuru",
-        "invalidURL": "URL ti ko fẹsẹmulẹ",
-        "invalidFile": "Faili ti ko fẹ",
-        "errorNoSource": "Ko si orisun fidio",
-        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
-        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Tunto",
-        "edit": "Ṣatunkọ",
-        "title": "akọle",
-        "description": "apejuwe",
-        "upload": "Po si",
-        "link": "Ọna asopọ",
-        "setUrl": "Ṣeto URL",
-        "save": "Fipamọ",
-        "setClip": "Ge Agekuru",
-        "invalidURL": "URL ti ko fẹsẹmulẹ",
-        "invalidFile": "Faili ti ko fẹ",
-        "errorNoSource": "Ko si orisun pdf",
-        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
-        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Tunto",
-        "edit": "Ṣatunkọ",
-        "title": "akọle",
-        "description": "apejuwe",
-        "upload": "Po si",
-        "link": "Ọna asopọ",
-        "setUrl": "Ṣeto URL",
-        "save": "Fipamọ",
-        "setClip": "Ge Agekuru",
-        "invalidURL": "URL ti ko fẹsẹmulẹ",
-        "invalidFile": "Faili ti ko fẹ",
-        "errorNoSource": "Ko si orisun aworan",
-        "uploadLimit": "Iwọn faili to pọ julọ: {{size}}",
-        "errorFileSize": "Ma binu, ṣugbọn faili tobi ju.<br> Iwọn faili Max jẹ {{size}}",
-        "uploadedImage": "Pipa aworan",
-        "imageTitle": "Akọle aworan"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Awọn ibeere",
-        "Answers": "Awọn idahun",
-        "AnswerQuestion": "Idahun Ibeere",
-        "SetYourAnswer": "Jọwọ dahun ibeere naa",
-        "NewQuestion": "Ibeere tuntun",
-        "NewAnswer": "Idahun Tuntun",
-        "AnswerDetails": "Awọn alaye Idahun",
-        "answerOption": "Aṣayan",
-        "answerOptionExclusive": "Iyasoto",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
+        "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "idahun ọfẹ ...",
-        "SaveQuestion": "Fipamọ Ibeere",
-        "SaveAnswer": "Fipamọ Idahun",
-        "AddAnotherAnswer": "Ṣafikun idahun miiran",
-        "ErrorAnswers": "Jọwọ ṣafikun ani idahun kan",
-        "AlreadyAnswered": "Ti dahun tẹlẹ",
-        "TitlePlaceholder": "Tẹ ibeere rẹ",
-        "ContentPlaceholder": "Fi eyikeyi alaye diẹ sii nibi lati ṣe iranlọwọ fun eniyan lati dahun",
-        "ErrorTitle": "Ibeere nilo",
-        "Placeholder": "Olugbe ibi"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Iriri Tuntun",
-        "DefineTitle": "Jọwọ setumo akọle kan",
-        "Create": "Ṣẹda"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Awọn ipe",
-        "MaxCalls": "Awọn ipe Max",
-        "Update": "Imudojuiwọn",
-        "NoCallsYet": "Ko si awọn ipe sibẹsibẹ",
-        "CallReasonTitle": "Kini ipe yii nipa?",
-        "WaitingRoom": "Iduro yara"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Ceangal gus adhartachadh",
-                "startDate": "Ceann-latha tòiseachaidh",
-                "startTime": "Ùine tòiseachaidh",
-                "endDate": "Ceann-latha crìochnachaidh",
-                "endTime": "Ùine crìochnachaidh",
-                "budget": "Buidseat"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Filter a rèir ùidh",
-                "FilterInterests": "Tòisich a ’taipeadh ùidh ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Ùidh",
-            "Location": "Àite"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Rach",
-            "PasteLinkHere": "https: \/\/ ...",
-            "BrowseTheWeb": "Dèan brobhsadh",
-            "WriteToStartConversation": "Sgrìobh do bheachdan gus tòiseachadh air a ’chòmhradh",
-            "StartConversation": "Tòisich Còmhradh",
-            "GotoConversation": "Rach gu Còmhradh",
-            "reset": "Ath-shuidhich",
-            "edit": "Deasaich",
-            "link": "Ceangal",
-            "setUrl": "Suidhich URL",
-            "save": "Sàbhail",
-            "setClip": "Gearradh a-mach clip",
-            "invalidURL": "URL mì-dhligheach"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Faidhle ro mhòr airson caching. Meud faidhle as àirde {{size}}",
-        "InvalidPDF": "Chan e faidhle dligheach a th ’ann am faidhle",
-        "StartTypingTitleOrKeywords": "Tòisich a ’taipeadh tiotal no prìomh fhaclan ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Sgrìobhainn HTML a dh&#39;fhaodas diofar luchd-cleachdaidh fhaicinn agus a dheasachadh",
-            "displayType": "Artaigil"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Faodaidh sleamhnag ann an taisbeanadh a bhith a ’toirt a-steach HTML, claisneachd msaa.",
-            "displayType": "Sleamhnachadh"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Taisbeanadh anns a bheil grunn shleamhnagan",
-            "displayType": "Taisbeanadh"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Aonad sanasachd air làrach-lìn",
-            "displayType": "Aonad sanasachd"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Dòigh air aonadan sanasachd a chuir còmhla fo ainm",
-            "displayType": "Suidheachadh sanasachd"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Susbaint airson sanas",
-            "displayType": "Dèan sanasachd cruthachail"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Iomairt sanasachd",
-            "displayType": "Iomairt sanasachd"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "A ’riochdachadh làrach-lìn far an deach meata-dàta a sgrìobadh",
-            "displayType": "duilleag-lìn"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

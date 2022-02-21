@@ -175,7 +175,7 @@ class Users_Contact extends Base_Users_Contact
 	}
 
 	/**
-	 * Retrieve contacts belonging to label
+	 * Retrieve array of contacts belonging to label
 	 * @method fetch
 	 * @static
 	 * @param {string} $userId The user whose contacts to fetch
@@ -188,7 +188,7 @@ class Users_Contact extends Base_Users_Contact
 	 * @param {string|array} [$options.contactUserId=null] Optionally filter by contactUserId
 	 * @return {array}
 	 */
-	static function fetch($userId, $label = null, /* string|Db_Range, */ $options = array())
+	static function fetch($userId, $label = null, $options = array())
 	{
 		if (empty($userId)) {
 			throw new Q_Exception_RequiredField(array('field' => 'userId'));
@@ -226,15 +226,15 @@ class Users_Contact extends Base_Users_Contact
 	}
 	
 	/**
-	 * Check if a contact with this label exists
-	 * @method checkLabel
+	 * Check if a contact with this primary key exists, and return it if so
+	 * @method fetchOne
 	 * @static
 	 * @param {string} $userId
 	 * @param {string} $label
 	 * @param {string} $contactId
 	 * @return {Db_Row|false}
 	 */
-	static function checkLabel($userId, $label, $contactId)
+	static function fetchOne($userId, $label, $contactId, $throwIfMissing = false)
 	{
 		if (!$userId or !$contactId) {
 			return null;
@@ -249,7 +249,14 @@ class Users_Contact extends Base_Users_Contact
 		$contact->userId = $userId;
 		$contact->label = $label;
 		$contact->contactUserId = $contactId;
-		return $contact->retrieve();
+		$result = $contact->retrieve();
+		if (!$result and $throwIfMissing) {
+			throw new Q_Exception_MissingRow(array(
+				'table' => 'contact',
+				'criteria' => "userId $userId, label $label, contactId $contactId"
+			));
+		}
+		return $result;
 	}
 
 	/* * * */

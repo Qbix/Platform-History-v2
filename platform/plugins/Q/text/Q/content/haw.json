@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Kuʻia [{999}} i ka manawa noi",
-        "canceled": "Ua hoʻopauʻia ka noi",
-        "500": "Kuhi hewa pūnaewele",
-        "404": "&#39;Aʻole i loaʻa: {{url}}",
-        "501": "Hoʻopilikiaʻia ka noi"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Ua pau ka manawa. Hōhana hou i kaʻaoʻao a e ho&#39;āʻo hou.",
-        "otherDomain": "Ke kākoʻoʻana i kahi&#39;āpana&#39;āina cross-domain i ka&#39;āina&#39;ē ma {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "e pā",
-        "click": "kaomi",
-        "yes": "Ae",
-        "no": "aʻole",
-        "Tap": "Pāpā",
-        "Click": "Kaomi",
-        "Yes": "Ae",
-        "No": "Aʻole"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Ianuali",
-        "2": "Pepeluali",
-        "3": "Malaki",
-        "4": "Apelila",
-        "5": "Mei",
-        "6": "Iune",
-        "7": "Iulai",
-        "8": "Aukake",
-        "9": "Kepakemapa",
-        "10": "Okakopa",
-        "11": "Nowemapa",
-        "12": "Kekemapa"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Eʻoluʻolu eʻae i ka hiki i kāu kani",
-        "record": "Kakau kope",
-        "recording": "Hoʻomanaʻo",
-        "remains": "koe",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
         "maximum": "maximum",
-        "playing": "Pāʻani",
-        "recorded": "Hoʻopukaʻia",
-        "clip": "kiʻi",
-        "orupload": "A iʻole hoʻouka",
-        "usethis": "E hoʻohana i kēia",
-        "discard": "E hoʻolei",
-        "encoding": "Hoʻopā&#39;ālua"
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
-        "title": "E hōʻoia",
-        "ok": "Ae",
-        "cancel": "Aʻole"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Kūkala",
-        "ok": "E hele"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Pākuʻi helu heluhelu",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "He aha kau i makemake ai e hana?",
-            "photo": "E kiʻi i kiʻi hou",
-            "library": "E koho i ka waihona"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Eʻoluʻolu e koho i kahi kiʻi nui aʻe.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Hoʻoholo i ka nui a me ke kūlana",
-            "touchscreen": "E hoʻohana i kou mau manamana lima e kiʻi a huki",
-            "notTouchscreen": "E hoʻohana i kāuʻiole a me ka huila e hoʻoulu a huki"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "i ka pō nei",
-        "lastEvening": "hope hope",
-        "yesterday": "inehinei",
-        "thisMorning": "kēia kakahiaka",
-        "today": "i kēia lā",
-        "tonight": "kēia pō",
-        "tomorrowMorning": "tom kakahiaka",
-        "tomorrow": "āpōpō",
-        "hoursAgo": "{{h}} mau hola i hala",
-        "hourAgo": "{{h}} hora i hala",
-        "minuteAgo": "{{m}} minute i hala",
-        "minutesAgo": "{{m}} mau minuke i hala",
-        "secondAgo": "{{s}} kekona i hala",
-        "secondsAgo": "{{s}} kekona i hala",
-        "fewSecondsAgo": "mau kekona",
-        "rightNow": "i kēia manawa",
-        "inSecond": "i {{s}} kekona",
-        "inSeconds": "i {{s}} kekona",
-        "inMinute": "i {{m}} minute",
-        "inMinutes": "i {{m}} mau minuke",
-        "inHour": "i {{h}} hora",
-        "inHours": "i {{h}} mau hola",
-        "inUnderMinute": "i lalo o 1 mau minuke"
-    },
-    "video": {
-        "clip": "paopao",
-        "errorNoSource": "ʻAʻohe kumu wikiō",
-        "SkipAfter": "E lele ma hope",
-        "Skip": "Skip"
-    },
-    "pdf": {
-        "clip": "paopao",
-        "errorNoSource": "ʻAʻohe kumu Puna"
-    },
-    "clip": {
-        "SetClipStart": "Hoʻonohonoho Clip hoʻomaka",
-        "ClipStart": "Hoʻomaka Clip",
-        "SetClipEnd": "E hoʻopaʻa iā Clip End",
-        "ClipEnd": "Ka Hopena Clip",
-        "StartMoreEnd": "ʻAʻole hiki ke kūlana hoʻomaka ma mua o ke kūlana hopena",
-        "EndLessStart": "ʻAʻole hiki ke emi i ke kūlana hopena ma mua o ke kūlana hoʻomaka",
-        "WhichInvalid": "ʻO ka paio &#39;hewa&#39; ʻole"
-    },
-    "tabs": {
-        "more": "hou aku",
-        "Menu": "Papa Kuhikuhi"
-    },
-    "durations": {
-        "second": "ka lua",
-        "seconds": "kekona",
-        "minute": "minuke",
-        "minutes": "minuke",
-        "hour": "mau hola",
-        "day": "lā",
-        "days": "nā lā",
-        "week": "pule",
-        "weeks": "pule",
-        "month": "mahina",
-        "months": "mahina",
-        "year": "makahiki",
-        "years": "makahiki",
-        "decade": "ʻumi makahiki",
-        "decades": "mau makahiki",
-        "century": "kenekulia",
-        "centuries": "kenekulia"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

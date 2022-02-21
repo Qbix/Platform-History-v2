@@ -1,7 +1,20 @@
 <?php
+
 /**
  * @module Users
  */
+
+/**
+ * Interface that an adapter must support to extend the Users_ExternalFrom class.
+ * @class Users_ExternalFrom_Interface
+ * @static
+ */
+
+interface Users_ExternalTo_Interface
+{
+
+}
+
 /**
  * Class representing 'ExternalTo' rows in the 'Users' database
  * You can create an object of this class either to

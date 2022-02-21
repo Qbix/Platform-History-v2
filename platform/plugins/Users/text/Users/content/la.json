@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "in log",
-        "LogOut": "e log"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "{{Constitue CMXCIX}} sicut M {{primaria}}",
-        "ChoosePassPhrase": "Fusce <strong>dictum faucibus<\/strong> apud stipes. <br> A pauci simplex et constans sententia est et facilius meminisse verba.",
-        "ChoosePassPhraseSeeSuggestions": "Propter <strong>saltum<\/strong> tueri <strong>sententiam<\/strong> eligere bonum. Ecce autem quidam suggestiones pro ideas.",
-        "LogOutAndTryAgain": "Log et de Iterum Conari",
-        "IfYouFeel": "Si vos sentio aliquid abiit iniuriam, vos can",
-        "SetIdentifierButtonTitle": "incipi iterum"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Coepi impetro"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Coepi impetro",
-        "Authorize": "Auctor",
-        "TermsLabel": "Legi et ego assentior <br> {{ad}} CMXCIX",
-        "TermsTitle": "termini",
-        "mustAgree": "Primo oportet ad verba conveniunt."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "{{Accipio de CMXCIX}}",
-        "TermsTitle": "termini"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "permission",
-        "prompt": "Suspendisse ut detur tibi? Quae circa vos vicis updates, youll accipere vera curo.",
-        "yes": "Ita",
-        "no": "nullum",
-        "WelcomePleaseVerifyEmail": "Welcome! Placere cognoscere vestri email oratio.",
-        "WelcomeVerifyEmail": "Welcome! Quin vestri email oratio.",
-        "ForgetPass": "Heus, tu obliviscaris passphrase?",
-        "PassphraseSaved": "Tua saltum phrase quae servatae sunt.",
-        "IdentifierActivated": "{{Tuum CMXCIX}} est activated.",
-        "CompletedActivation": "Tu perficitur user activation.",
-        "CompletedActivationLogIn": "Tu perficitur user activation. Try logging in nunc."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Elige contactu",
-            "CreateAccount": "Contact nova +",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create non inveni",
-            "SearchByName": "Quaere nomen",
-            "EmptyContacts": "Contactus ... non inveni"
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Selecta ex contactu {{CMXCIX}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Placere eligere pittacio adornata sunt.",
-        "inviteUser": "User invitare",
-        "selectRole": "Partes quas selecta",
-        "inviteRole": "{{Invitare CMXCIX}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Aliquam lectus lingua",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "gratissimum",
-        "directions": "Create an account, seu stipes in.",
-        "directionsNoRegister": "Si rationem aperire.",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
         "goButton": "Go",
-        "passphrase": "Nulla faucibus phrasis",
-        "loginButton": "Coepi impetro",
-        "registerButton": "Coepi impetro",
-        "resendButton": "Mitte Nuntius Activation",
-        "forgot": "Et oblitus es?",
-        "resendConfirm": "Nuntiosque mittere passphrase reset vestri vultis?",
-        "resendSuccess": "Reprehendo in vestri passphrase ad reset",
-        "resendClose": "prope",
-        "noPassphrase": "Aperi antequam tu pone tibi pagina istum strepitando activation dictum lectus.",
-        "notVerified": "Mittam nuntium ad te tibi activation aperi.",
-        "emailExists": "Non quaeritur huic inscriptioni subcriptio ante Igitur movere vos reprehendo competition. <a href='#resend' class='Q_button Users_activation_resend'>Click nuntium mittere ad re-<\/a>",
-        "mobileExists": "Ut profiteretur cum quaeritur numerum mobile prius Sic vos reprehendo vestri SMS movere. <a href='#resend' class='Q_button Users_activation_resend'>Click nuntium mittere ad re-<\/a>",
-        "usingOther": "an potes,",
-        "prompt": "Elige nomen usoris:",
-        "newUser": "aut partum a novus ratio",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "# mobili tuo et inscriptio",
-            "mobile": "# intra mobili",
-            "email": "Penetro vestri email oratio",
-            "username": "nomen usoris"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Accipe iussis Terms servitii?",
-        "facebookNoEmail": "Absentis ratio vestri Facebook electronica confirmata. Log tantum modo in patria.",
-        "picTooltip": "Te potest mutare post hanc",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Log in {{host}} tempore {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
                 "title": "Redirecting to Wallet",
-                "content": "Semel hunc alternis claudis, crumenam eris. Post signum in, hanc paginam redi."
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Ita in ut addere log",
-        "sendMessage": "Mitte Nuntius Activation",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "# mobilis seu intra inscriptio",
-            "mobile": "intra numerum mobile",
-            "email": "Penetro vestri email oratio",
-            "username": "nomen usoris"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{CMXCIX Ratio}}",
-        "areUsing": "{{Usus es quam CMXCIX}}",
-        "noLongerUsing": "{{Vos autem non applicatur ad quam CMXCIX}}",
-        "doAuth": "Hac ratione aperire",
-        "doSwitch": "Ob hanc mutes rationem tuam"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "dominus",
-        "Admin": "Maecenas et ipsum",
-        "Member": "socius",
-        "Guest": "hospes",
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
         "Host": "Host"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Cotidiana",
-        "Weekly": "Weekly",
-        "Monthly": "Menstrua",
-        "Application": "Applicationem",
-        "Pages": "Paginae",
-        "Services": "Officia",
-        "Faq": "Faq",
-        "WeekDays": "Hebdomadae diebus"
     }
 }

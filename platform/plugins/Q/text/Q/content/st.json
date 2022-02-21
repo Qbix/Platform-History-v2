@@ -1,29 +1,29 @@
 {
     "request": {
-        "error": "Phoso {{status}} nakong ea kopo",
-        "canceled": "Kopo e hlakotsoe",
-        "500": "Phoso ea Kahare ea Seva",
-        "404": "Ha e fumanoe: {{url}}",
-        "501": "Kopo e sitisitsoe"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Lenaneo le felile. Khutlisa leqephe mme u leke hape.",
-        "otherDomain": "E thibelitsoe cross-domain request ho ea ka ntle domain at {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "tlanya",
-        "click": "tobetsa",
-        "yes": "e",
-        "no": "che",
-        "Tap": "Tlanya",
-        "Click": "Tlanya",
-        "Yes": "E.",
-        "No": "Che"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
         "1": "January",
         "2": "February",
-        "3": "Etela",
+        "3": "March",
         "4": "April",
         "5": "May",
         "6": "June",
@@ -34,111 +34,110 @@
         "11": "November",
         "12": "December"
     },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
+    },
     "audio": {
-        "allowMicrophoneAccess": "Ka kopo lumella ho fihlella microphone",
-        "record": "Rekotoe",
-        "recording": "Ho rekota",
-        "remains": "e sala",
-        "maximum": "boholo",
-        "playing": "Ho bapala",
-        "recorded": "E ngotsoe",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
         "clip": "clip",
-        "orupload": "Kapa Fetella",
-        "usethis": "Sebelisa Sena",
-        "discard": "Lahla",
-        "encoding": "Ho ngodisa"
-    },
-    "alert": {
-        "title": "Tlhokomeliso"
-    },
-    "confirm": {
-        "title": "Tiisa",
-        "ok": "E.",
-        "cancel": "Che"
-    },
-    "prompt": {
-        "title": "Tsoela pele",
-        "ok": "Tsamaea"
-    },
-    "imagepicker": {
-        "errorReadingFile": "Phoso ho bala faele",
-        "cameraCommands": {
-            "prompt": "U ka rata ho etsa eng?",
-            "photo": "Nka foto e ncha",
-            "library": "Khetha ho laebraring"
-        },
-        "tooSmall": "Ka kopo khetha setšoantšo se kholoanyane.",
-        "cropping": {
-            "title": "Fetola boholo le boemo",
-            "touchscreen": "Sebelisa menoana ea hau ho senya le ho hula",
-            "notTouchscreen": "Sebelisa mouse le maqhubu bakeng sa ho atamela le ho hula"
-        }
-    },
-    "timestamp": {
-        "lastNight": "bosiu ba maobane",
-        "lastEvening": "bosiu ba ho qetela",
-        "yesterday": "maobane",
-        "thisMorning": "Hoseng hona",
-        "today": "kajeno",
-        "tonight": "bosiung bona",
-        "tomorrowMorning": "Hoseng hoseng",
-        "tomorrow": "hosane",
-        "hoursAgo": "{{h}} lihora tse fetileng",
-        "hourAgo": "{{h}} hora e fetileng",
-        "minuteAgo": "{{m}} motsotso o fetileng",
-        "minutesAgo": "{{m}} metsotso e fetileng",
-        "secondAgo": "{{s}} motsotsoana o fetileng",
-        "secondsAgo": "{{s}} metsotsoana e fetileng",
-        "fewSecondsAgo": "metsotsoana e fetileng",
-        "rightNow": "hona joale",
-        "inSecond": "ho {{s}} ea bobeli",
-        "inSeconds": "ka metsotsoana e {{s}}",
-        "inMinute": "ka motsotso oa {{m}}",
-        "inMinutes": "ka metsotso e {{m}}",
-        "inHour": "ka hora ea {{h}}",
-        "inHours": "ka lihora tse {{h}}",
-        "inUnderMinute": "ka tlasa motsotso o le mong"
+        "discard": "Discard",
+        "encoding": "Encoding"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Ha ho mohloli oa video",
-        "SkipAfter": "Tlola ka mora",
-        "Skip": "Tlola"
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Ha ho mohloli oa pdf"
+        "errorNoSource": "No pdf source"
     },
     "clip": {
-        "SetClipStart": "Beha Clip Start",
-        "ClipStart": "Qala Clip",
-        "SetClipEnd": "Hlopha Clip End",
-        "ClipEnd": "Qetella",
-        "StartMoreEnd": "Boemo ba ho qala bo ke ke ba feta boemo ba ho fela",
-        "EndLessStart": "Boemo ba ho qetela bo ka se be tlase ho boemo ba qalo",
-        "WhichInvalid": "Khang &#39;e&#39; sa sebetseng"
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
+    },
+    "alert": {
+        "title": "Alert"
+    },
+    "confirm": {
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
+    },
+    "prompt": {
+        "title": "Prompt",
+        "ok": "Go"
     },
     "tabs": {
-        "more": "Hape",
-        "Menu": "Lenaneo"
+        "more": "more",
+        "Menu": "Menu"
     },
-    "durations": {
-        "second": "ea bobeli",
-        "seconds": "metsotswana",
-        "minute": "motsotso",
-        "minutes": "metsotso",
-        "hour": "lihora",
-        "day": "letsatsi",
-        "days": "matsatsi",
-        "week": "beke",
-        "weeks": "libeke",
-        "month": "khoeli",
-        "months": "likhoeli",
-        "year": "selemo",
-        "years": "lilemo",
-        "decade": "lilemo tse leshome",
-        "decades": "mashome a lilemo",
-        "century": "lekholo la lilemo",
-        "centuries": "makholo a lilemo"
+    "imagepicker": {
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
+        "cameraCommands": {
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
+        },
+        "tooSmall": "Please choose a larger image.",
+        "cropping": {
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+        }
+    },
+    "timestamp": {
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

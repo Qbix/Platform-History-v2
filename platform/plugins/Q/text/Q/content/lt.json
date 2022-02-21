@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "Klaida {{status}} užklausos metu",
-        "canceled": "Prašymas atšauktas",
-        "500": "Vidinė serverio klaida",
-        "404": "Nerasta: {{url}}",
-        "501": "Prašymas nutrauktas"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "Sesija baigėsi. Atnaujinkite puslapį ir bandykite dar kartą.",
-        "otherDomain": "Užblokuotas tarp domenų prašymas užsienio domene {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "bakstelėkite",
-        "click": "spustelėkite",
-        "yes": "taip",
-        "no": "ne",
-        "Tap": "Bakstelėkite",
-        "Click": "Spustelėkite",
-        "Yes": "Taip",
-        "No": "Ne"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "Sausio mėn",
-        "2": "Vasario mėn",
-        "3": "Kovas",
-        "4": "Balandis",
-        "5": "Gegužė",
-        "6": "Birželio mėn",
-        "7": "Liepos mėn",
-        "8": "Rugpjūtis",
-        "9": "Rugsėjo mėn",
-        "10": "Spalio mėn",
-        "11": "Lapkričio mėn",
-        "12": "Gruodžio mėn"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "Leiskite prieiti prie mikrofono",
-        "record": "Įrašai",
-        "recording": "Įrašymas",
-        "remains": "lieka",
-        "maximum": "maksimaliai",
-        "playing": "Žaidžia",
-        "recorded": "Įrašyta",
-        "clip": "klipas",
-        "orupload": "Arba įkelti",
-        "usethis": "Naudok tai",
-        "discard": "Išmeskite",
-        "encoding": "Kodavimas"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "Budrus"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "Patvirtinti",
-        "ok": "Taip",
-        "cancel": "Ne"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "Spustelėkite",
-        "ok": "Eik"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Klaida skaitant failą",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "Ką tu norėtum veikti?",
-            "photo": "Paimkite naują nuotrauką",
-            "library": "Pasirinkite iš bibliotekos"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "Pasirinkite didesnį vaizdą.",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "Nustatykite dydį ir padėtį",
-            "touchscreen": "Padidinkite ir vilkite pirštus",
-            "notTouchscreen": "Naudokite pelę ir ratą, kad padidintumėte ir vilkite"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "praeita naktis",
-        "lastEvening": "paskutinis vakaras",
-        "yesterday": "vakar",
-        "thisMorning": "šį rytą",
-        "today": "šiandien",
-        "tonight": "šį vakarą",
-        "tomorrowMorning": "Tomas ryte",
-        "tomorrow": "rytoj",
-        "hoursAgo": "Prieš {{h}} valandas",
-        "hourAgo": "Prieš {{h}} valandą",
-        "minuteAgo": "Prieš {{m}} minutę",
-        "minutesAgo": "Prieš {{m}} minutes",
-        "secondAgo": "Prieš {{s}}",
-        "secondsAgo": "Prieš {{s}} sekundes",
-        "fewSecondsAgo": "prieš kelias sekundes",
-        "rightNow": "dabar",
-        "inSecond": "per {{s}} sekundę",
-        "inSeconds": "per {{s}} sekundes",
-        "inMinute": "per {{m}} minutę",
-        "inMinutes": "per {{m}} minutes",
-        "inHour": "per {{h}} valandą",
-        "inHours": "per {{h}} valandas",
-        "inUnderMinute": "per mažiau nei 1 minutę"
-    },
-    "tabs": {
-        "more": "daugiau",
-        "Menu": "Meniu"
-    },
-    "video": {
-        "clip": "klipas",
-        "errorNoSource": "Nėra vaizdo šaltinio",
-        "SkipAfter": "Praleisti po",
-        "Skip": "Praleisti"
-    },
-    "pdf": {
-        "clip": "klipas",
-        "errorNoSource": "Nėra pdf šaltinio"
-    },
-    "clip": {
-        "SetClipStart": "Nustatykite „Clip Start“",
-        "ClipStart": "„Clip Start“",
-        "SetClipEnd": "Nustatyti „Clip End“",
-        "ClipEnd": "Klipo pabaiga",
-        "StartMoreEnd": "Pradinė padėtis negali būti didesnė už galutinę",
-        "EndLessStart": "Pabaigos padėtis negali būti mažesnė už pradinę padėtį",
-        "WhichInvalid": "Argumentas „kuris“ negalioja"
-    },
-    "durations": {
-        "second": "antra",
-        "seconds": "sekundžių",
-        "minute": "minutė",
-        "minutes": "minučių",
-        "hour": "valandos",
-        "day": "dieną",
-        "days": "dienų",
-        "week": "savaitę",
-        "weeks": "savaičių",
-        "month": "mėnesį",
-        "months": "mėnesių",
-        "year": "metus",
-        "years": "metų",
-        "decade": "dešimtmetis",
-        "decades": "dešimtmečiais",
-        "century": "amžiaus",
-        "centuries": "amžius"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

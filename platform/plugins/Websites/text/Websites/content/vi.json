@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Liên kết để quảng bá",
-                "startDate": "Ngày bắt đầu",
-                "startTime": "Thời gian bắt đầu",
-                "endDate": "Ngày cuối",
-                "endTime": "Thời gian kết thúc",
-                "budget": "Ngân sách"
+                "link": "Link to promote",
+                "startDate": "Start Date",
+                "startTime": "Start Time",
+                "endDate": "End Date",
+                "endTime": "End Time",
+                "budget": "Budget"
             },
             "interests": {
-                "Title": "Lọc theo sở thích",
-                "FilterInterests": "Bắt đầu nhập một sở thích ..."
+                "Title": "Filter By Interest",
+                "FilterInterests": "Start typing an interest..."
             },
-            "Interest": "Quan tâm",
-            "Location": "Vị trí"
+            "Interest": "Interest",
+            "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Đi",
-            "PasteLinkHere": "Dán một liên kết ở đây",
-            "BrowseTheWeb": "Duyệt",
-            "WriteToStartConversation": "Viết suy nghĩ của bạn để bắt đầu cuộc trò chuyện",
-            "StartConversation": "Bắt đầu hội thoại",
-            "GotoConversation": "Đi tới hội thoại",
-            "reset": "Cài lại",
-            "edit": "Biên tập",
-            "link": "Liên kết",
-            "setUrl": "Đặt URL",
-            "save": "Tiết kiệm",
-            "setClip": "Cắt ra Clip",
-            "invalidURL": "URL không hợp lệ"
+            "Go": "Go",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Browse",
+            "WriteToStartConversation": "Write your thoughts to start off the conversation",
+            "StartConversation": "Start Conversation",
+            "GotoConversation": "Go to Conversation",
+            "reset": "Reset",
+            "edit": "Edit",
+            "link": "Link",
+            "setUrl": "Set URL",
+            "save": "Save",
+            "setClip": "Cut Out Clip",
+            "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "Tệp quá lớn để lưu vào bộ nhớ đệm. Kích thước tệp tối đa {{size}}",
-        "InvalidPDF": "Tệp không phải là PDF hợp lệ",
-        "StartTypingTitleOrKeywords": "Bắt đầu nhập tiêu đề hoặc từ khóa ..."
+        "FileTooLarge": "File too large for caching. Max file size {{size}}",
+        "InvalidPDF": "File is not a valid PDF",
+        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Một tài liệu HTML mà nhiều người dùng có thể xem và chỉnh sửa",
-            "displayType": "Bài báo"
+            "description": "An HTML document that various users can view and edit",
+            "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "Một slide trong một bài thuyết trình, có thể bao gồm HTML, âm thanh, v.v.",
-            "displayType": "Trượt"
+            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Một bài thuyết trình bao gồm nhiều slide khác nhau",
-            "displayType": "Trình bày"
+            "description": "A presentation consisting of various slides",
+            "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "Một đơn vị quảng cáo trên một trang web",
-            "displayType": "Đơn vị quảng cáo"
+            "description": "An advertising unit on a website",
+            "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "Một cách nhóm các đơn vị quảng cáo dưới một tên",
-            "displayType": "Vị trí quảng cáo"
+            "description": "A way of grouping advertising units under a name",
+            "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Nội dung cho một quảng cáo",
-            "displayType": "Quảng cáo sáng tạo"
+            "description": "Content for an advertisement",
+            "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "Một chiến dịch quảng cáo",
-            "displayType": "Chiến dịch quảng cáo"
+            "description": "An advertising campaign",
+            "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Đại diện cho một trang web có siêu dữ liệu bị loại bỏ",
-            "displayType": "trang web"
+            "description": "Represents a website whose metadata was scraped",
+            "displayType": "Web page"
         }
     }
 }

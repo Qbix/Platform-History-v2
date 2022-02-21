@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "တောငျးဆိုခကျြစဉ်အတွင်းမှားယွင်းနေသည် {{status}}",
-        "canceled": "တောင်းဆိုမှုအားမဖျက်သိမ်း",
-        "500": "အတွင်းဆာဗာမှားယွင်းမှု",
-        "404": "မတွေ့ရှိ: {{url}}",
-        "501": "တောင်းဆိုမှုပြတ်တောက်"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "session ကုန်ဆုံး။ စာမကျြနှာ refresh ထပ်ကြိုးစားပါ။",
-        "otherDomain": "{{baseUrl}} မှာနိုင်ငံခြားဒိုမိန်းပိတ်ဆို့ Cross-ဒိုမိန်းတောင်းဆိုချက်အရ"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ကိုထိပုတ်ပါ",
-        "click": "ကလစ်",
-        "yes": "ဟုတ်ကဲ့",
-        "no": "အဘယ်သူမျှမ",
-        "Tap": "ကိုထိပုတ်ပါ",
-        "Click": "ကလစ်နှိပ်ပါ",
-        "Yes": "ဟုတ်ကဲ့",
-        "No": "အဘယ်သူမျှမ"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "ဇန္နဝါရီလ",
-        "2": "ဖေဖေါ်ဝါရီလ",
-        "3": "မတ်လ",
-        "4": "ဧပြီလ",
-        "5": "မေ",
-        "6": "ဇွန်လ",
-        "7": "ဇူလိုင်လ",
-        "8": "သြဂုတ်လ",
-        "9": "စက်တင်ဘာလ",
-        "10": "အောက်တိုဘာလ",
-        "11": "နိုဝင်ဘာလ",
-        "12": "ဒီဇင်ဘာလ"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "သင့်ရဲ့မိုက်ခရိုဖုန်းမှဝင်ရောက်ခွင့်ကိုခွင့်ပြုပေးပါ",
-        "record": "စံချိန်",
-        "recording": "အသံသွင်းချက်",
-        "remains": "အကြွင်း",
-        "maximum": "အများဆုံး",
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
         "playing": "Playing",
-        "recorded": "မှတျတမျးတငျထား",
-        "clip": "ကလစ်",
-        "orupload": "သို့မဟုတ်လွှတ်တင်ခြင်း",
-        "usethis": "ဤသည်ကိုသုံးပါ",
-        "discard": "စွန့်ပစ်",
-        "encoding": "encoding"
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "သတိပေး"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "အတည်ပြု",
-        "ok": "ဟုတ်ကဲ့",
-        "cancel": "အဘယ်သူမျှမ"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "လျင်မြန်စွာ",
-        "ok": "Go ကို"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "မှားယွင်းနေသည်စာဖတ်ခြင်းဖိုင်",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "သင်သည်အဘယ်သို့ပြုပါလိုပါသနည်း",
-            "photo": "အသစ်ကဓာတ်ပုံတစ်ပုံကိုယူ",
-            "library": "စာကြည့်တိုက်ကနေကို Select လုပ်ပါ"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "ပိုကြီးတဲ့ပုံရိပ်တစ်ခုကိုရွေးချယ်ပါ။",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "အရွယ်အစားနှင့်အနေအထား Adjust",
-            "touchscreen": "ချဲ့ခြင်းနှင့်ဆွဲရန်သင့်လက်ချောင်းများကိုသုံးပါ",
-            "notTouchscreen": "ချဲ့ခြင်းနှင့်ဆွဲရန်သင့် mouse ကို &amp; ဘီးကိုသုံးပါ"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "မနေ့ည",
-        "lastEvening": "နောက်ဆုံးအကြိမ်",
-        "yesterday": "မနေ့က",
-        "thisMorning": "ဒီမနက်",
-        "today": "ဒီနေ့",
-        "tonight": "ဒီည",
-        "tomorrowMorning": "Tom morn",
-        "tomorrow": "မနက်ဖြန်",
-        "hoursAgo": "{{h}} နာရီအကြာက",
-        "hourAgo": "{{h}} တစ်နာရီအကြာ",
-        "minuteAgo": "{{m}} တစ်မိနစ်အကြာ",
-        "minutesAgo": "{{m}} လွန်ခဲ့သောမိနစ်က",
-        "secondAgo": "{{s}} ဒုတိယအလွန်",
-        "secondsAgo": "{{s}} စက္ကန့်အကြာ",
-        "fewSecondsAgo": "စက္ကန့်ပိုင်းက",
-        "rightNow": "အခုပဲ",
-        "inSecond": "{{s}} ဒုတိယ၌တည်၏",
-        "inSeconds": "{{s}} စက္ကန့်အတွင်း",
-        "inMinute": "{{m}} မိနစ်၌တည်၏",
-        "inMinutes": "{{m}} မိနစ်၌တည်၏",
-        "inHour": "{{h}} နာရီ၌",
-        "inHours": "{{h}} နာရီအတွင်း",
-        "inUnderMinute": "1 မိနစ်အောက်မှာ"
-    },
-    "video": {
-        "clip": "ကလစ်",
-        "errorNoSource": "ဗီဒီယိုရင်းမြစ်မရှိပါ",
-        "SkipAfter": "ပြီးနောက်ကျော်သွားပါ",
-        "Skip": "ကျော်သွား"
-    },
-    "pdf": {
-        "clip": "ကလစ်",
-        "errorNoSource": "pdf အရင်းအမြစ်မရှိပါ"
-    },
-    "clip": {
-        "SetClipStart": "Clip Start ကိုသတ်မှတ်ပါ",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Clip အဆုံးကိုသတ်မှတ်ပါ",
-        "ClipEnd": "Clip အဆုံး",
-        "StartMoreEnd": "အစနေရာသည်အဆုံးသတ်အနေအထားထက်မပိုနိုင်ပါ",
-        "EndLessStart": "အဆုံးသတ်အနေအထားသည်အစနေရာထက်မငယ်နိုင်ပါ",
-        "WhichInvalid": "မမှန်ကန်သောအငြင်းအခုံ"
-    },
-    "tabs": {
-        "more": "နောက်ထပ်",
-        "Menu": "မီနူး"
-    },
-    "durations": {
-        "second": "ဒုတိယ",
-        "seconds": "စက္ကန့်ပိုင်း",
-        "minute": "မိနစ်",
-        "minutes": "မိနစ်များ",
-        "hour": "နာရီ",
-        "day": "နေ့",
-        "days": "ရက်ပေါင်း",
-        "week": "သီတင်းပတ်",
-        "weeks": "ရက်သတ္တပတ်များ",
-        "month": "လ",
-        "months": "လများ",
-        "year": "နှစ်",
-        "years": "နှစ်ပေါင်း",
-        "decade": "ဆယ်စုနှစ်",
-        "decades": "ဆယ်စုနှစ်များ",
-        "century": "ရာစုနှစ်",
-        "centuries": "ရာစုနှစ်များစွာ"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

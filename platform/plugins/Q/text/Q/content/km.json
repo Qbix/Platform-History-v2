@@ -1,144 +1,143 @@
 {
     "request": {
-        "error": "កំហុសក្នុង {{status}} កំឡុងពេលស្នើសុំ",
-        "canceled": "សំណើបានបោះបង់",
-        "500": "កំហុសម៉ាស៊ីនមេខាងក្នុង",
-        "404": "រកមិនឃើញ: {{url}}",
-        "501": "សំណើផ្អាក"
+        "error": "Error {{status}} during request",
+        "canceled": "Request canceled",
+        "500": "Internal server error",
+        "404": "Not found: {{url}}",
+        "501": "Request interrupted"
     },
     "nonce": {
-        "sameDomain": "សម័យកាល​បាន​ផុតកំណត់។ ធ្វើទំព័រស្រស់ឡើងវិញហើយព្យាយាមម្តងទៀត។",
-        "otherDomain": "បានរារាំងការស្នើសុំដែនឆ្លងដែនទៅកាន់ដែនដីបរទេសនៅ {{baseUrl}}"
+        "sameDomain": "Session expired. Refresh the page and try again.",
+        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
     },
     "words": {
-        "tap": "ប៉ះ",
-        "click": "ចុច",
-        "yes": "បាទ",
-        "no": "ទេ",
-        "Tap": "ប៉ះ",
-        "Click": "សូមចុច",
-        "Yes": "បាទ",
-        "No": "ទេ"
+        "tap": "tap",
+        "click": "click",
+        "yes": "yes",
+        "no": "no",
+        "Tap": "Tap",
+        "Click": "Click",
+        "Yes": "Yes",
+        "No": "No"
     },
     "months": {
-        "1": "ខែមករា",
-        "2": "ខែកុម្ភៈ",
-        "3": "ខែមីនា",
-        "4": "មេសា",
-        "5": "ឧសភា",
-        "6": "ខែមិថុនា",
-        "7": "ខែកក្កដា",
-        "8": "ខែសីហា",
-        "9": "កញ្ញា",
-        "10": "តុលា",
-        "11": "ខែវិច្ឆិកា",
-        "12": "ខែធ្នូ"
+        "1": "January",
+        "2": "February",
+        "3": "March",
+        "4": "April",
+        "5": "May",
+        "6": "June",
+        "7": "July",
+        "8": "August",
+        "9": "September",
+        "10": "October",
+        "11": "November",
+        "12": "December"
+    },
+    "durations": {
+        "second": "second",
+        "seconds": "seconds",
+        "minute": "minute",
+        "minutes": "minutes",
+        "hour": "hours",
+        "day": "day",
+        "days": "days",
+        "week": "week",
+        "weeks": "weeks",
+        "month": "month",
+        "months": "months",
+        "year": "year",
+        "years": "years",
+        "decade": "decade",
+        "decades": "decades",
+        "century": "century",
+        "centuries": "centuries"
     },
     "audio": {
-        "allowMicrophoneAccess": "សូមអនុញ្ញាតឱ្យចូលប្រើម៉ៃក្រូហ្វូនរបស់អ្នក",
-        "record": "កត់ត្រា",
-        "recording": "ថត",
-        "remains": "នៅសល់",
-        "maximum": "អតិបរមា",
-        "playing": "ការលេង",
-        "recorded": "បានថត",
-        "clip": "ឃ្លីប",
-        "orupload": "ឬដាក់ចូលប្រព័ន្ធ",
-        "usethis": "ប្រើ​នេះ",
-        "discard": "បោះបង់",
-        "encoding": "ការអ៊ិនកូដ"
+        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "record": "Record",
+        "recording": "Recording",
+        "remains": "remains",
+        "maximum": "maximum",
+        "playing": "Playing",
+        "recorded": "Recorded",
+        "clip": "clip",
+        "discard": "Discard",
+        "encoding": "Encoding"
+    },
+    "video": {
+        "clip": "clip",
+        "errorNoSource": "No video source",
+        "SkipAfter": "Skip after",
+        "Skip": "Skip"
+    },
+    "pdf": {
+        "clip": "clip",
+        "errorNoSource": "No pdf source"
+    },
+    "clip": {
+        "SetClipStart": "Set Clip Start",
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Set Clip End",
+        "ClipEnd": "Clip End",
+        "StartMoreEnd": "Start position can't be more than end position",
+        "EndLessStart": "End position can't be less than start position",
+        "WhichInvalid": "Argument 'which' invalid"
     },
     "alert": {
-        "title": "ជូនដំណឹង"
+        "title": "Alert"
     },
     "confirm": {
-        "title": "បញ្ជាក់",
-        "ok": "បាទ",
-        "cancel": "ទេ"
+        "title": "Confirm",
+        "ok": "Yes",
+        "cancel": "No"
     },
     "prompt": {
-        "title": "ប្រអប់បញ្ចូល",
-        "ok": "ទៅ"
+        "title": "Prompt",
+        "ok": "Go"
+    },
+    "tabs": {
+        "more": "more",
+        "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "មានកំហុសក្នុងការអានឯកសារ",
+        "errorReadingFile": "Error reading file",
+        "errorType": "Sorry, but this file type not supported",
         "cameraCommands": {
-            "prompt": "តើ​អ្នក​ចង់​ធ្វើអ្វី?",
-            "photo": "យករូបថតថ្មី",
-            "library": "ជ្រើសរើសពីបណ្ណាល័យ"
+            "prompt": "What would you like to do?",
+            "photo": "Take new photo",
+            "library": "Select from library"
         },
-        "tooSmall": "សូមជ្រើសរើសរូបភាពធំជាង។",
+        "tooSmall": "Please choose a larger image.",
         "cropping": {
-            "title": "លៃតម្រូវទំហំនិងទីតាំង",
-            "touchscreen": "ប្រើម្រាមដៃរបស់អ្នកដើម្បីពង្រីកនិងអូស",
-            "notTouchscreen": "ប្រើកង់កណ្ដុររបស់អ្នកដើម្បីបង្រួមនិងអូស"
+            "title": "Adjust size and position",
+            "touchscreen": "Use your fingers to zoom and drag",
+            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "យប់មិញ",
-        "lastEvening": "នៅមុនថ្ងៃចុងក្រោយ",
-        "yesterday": "ម្សិលមិញ",
-        "thisMorning": "ព្រឹកនេះ",
-        "today": "ថ្ងៃនេះ",
-        "tonight": "យប់នេះ",
-        "tomorrowMorning": "ព្រឹកថ្ងៃស្អែក",
-        "tomorrow": "ថ្ងៃស្អែក",
-        "hoursAgo": "{{៩៩៩}} ម៉ោងមុន",
-        "hourAgo": "{{៩៩៩}} ម៉ោងមុន",
-        "minuteAgo": "{{៩៩៩}} នាទីមុន",
-        "minutesAgo": "{{៩៩៩}} នាទីមុន",
-        "secondAgo": "{{៩៩៩}} វិនាទីមុន",
-        "secondsAgo": "{{៩៩៩}} វិនាទីមុន",
-        "fewSecondsAgo": "វិនាទីមុន",
-        "rightNow": "ឥឡូវ​នេះ",
-        "inSecond": "ក្នុង {{s}} វិនាទី",
-        "inSeconds": "ក្នុងរយៈពេល {{s}} វិនាទី",
-        "inMinute": "ក្នុង {{m}} នាទី",
-        "inMinutes": "ក្នុង {{m}} នាទី",
-        "inHour": "ក្នុង {{h}} ម៉ោង",
-        "inHours": "ក្នុង {{h}} ម៉ោង",
-        "inUnderMinute": "នៅក្រោម 1 នាទី"
-    },
-    "video": {
-        "clip": "ឈុត",
-        "errorNoSource": "គ្មានប្រភពវីដេអូទេ",
-        "SkipAfter": "រំលងបន្ទាប់",
-        "Skip": "រំលង"
-    },
-    "pdf": {
-        "clip": "ឈុត",
-        "errorNoSource": "គ្មានប្រភព pdf ទេ"
-    },
-    "clip": {
-        "SetClipStart": "កំណត់ឈុតចាប់ផ្តើម",
-        "ClipStart": "ឈុតចាប់ផ្តើម",
-        "SetClipEnd": "កំណត់ឈុតបញ្ចប់",
-        "ClipEnd": "ឈុតបញ្ចប់",
-        "StartMoreEnd": "ទីតាំងចាប់ផ្តើមមិនអាចលើសពីទីតាំងបញ្ចប់ទេ",
-        "EndLessStart": "ទីតាំងបញ្ចប់មិនអាចតិចជាងទីតាំងចាប់ផ្តើមទេ",
-        "WhichInvalid": "អាគុយម៉ង់ &#39;ដែល&#39; មិនត្រឹមត្រូវ"
-    },
-    "tabs": {
-        "more": "ច្រើនទៀត",
-        "Menu": "មឺនុយ"
-    },
-    "durations": {
-        "second": "ទីពីរ",
-        "seconds": "វិនាទី",
-        "minute": "នាទី",
-        "minutes": "នាទី",
-        "hour": "ម៉ោង",
-        "day": "ថ្ងៃ",
-        "days": "ថ្ងៃ",
-        "week": "សប្តាហ៍",
-        "weeks": "សប្តាហ៍",
-        "month": "ខែ",
-        "months": "ខែ",
-        "year": "ឆ្នាំ",
-        "years": "ឆ្នាំ",
-        "decade": "មួយទសវត្សរ៍",
-        "decades": "ជាច្រើនទសវត្ស",
-        "century": "សតវត្សទី",
-        "centuries": "សតវត្ស"
+        "lastNight": "last night",
+        "lastEvening": "last eve",
+        "yesterday": "yesterday",
+        "thisMorning": "this morn",
+        "today": "today",
+        "tonight": "tonight",
+        "tomorrowMorning": "tom morn",
+        "tomorrow": "tomorrow",
+        "hoursAgo": "{{h}} hours ago",
+        "hourAgo": "{{h}} hour ago",
+        "minuteAgo": "{{m}} minute ago",
+        "minutesAgo": "{{m}} minutes ago",
+        "secondAgo": "{{s}} second ago",
+        "secondsAgo": "{{s}} seconds ago",
+        "fewSecondsAgo": "seconds ago",
+        "rightNow": "right now",
+        "inSecond": "in {{s}} second",
+        "inSeconds": "in {{s}} seconds",
+        "inMinute": "in {{m}} minute",
+        "inMinutes": "in {{m}} minutes",
+        "inHour": "in {{h}} hour",
+        "inHours": "in {{h}} hours",
+        "inUnderMinute": "in under 1 minute"
     }
 }

@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "e hoʻokomo",
-        "LogOut": "lele"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "E hoʻonoho i {{1}} i kaʻu mea mua {{2}}",
-        "ChoosePassPhrase": "E koho i ka <strong>hua&#39;ōlelo pāloka<\/strong> e komo ai. <br> ʻO kahi hua&#39;ōlelo maʻalahi i loko o kekahi mau hua&#39;ōlelo āu e hoʻomanaʻo pinepine ai.",
-        "ChoosePassPhraseSeeSuggestions": "E koho i kahi <strong>hua&#39;ōlelo<\/strong> maikaʻi maikaʻi e pale i kāu moʻokāki. E nānā i nā manaʻo no kekahi mau manaʻo.",
-        "LogOutAndTryAgain": "E puka hou ae ho&#39;āʻo hou",
-        "IfYouFeel": "Ināʻoe e manaʻo ua pilikia kekahi mea, hiki iāʻoe",
-        "SetIdentifierButtonTitle": "hoʻomaka i luna"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "E hoʻomaka"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "E hoʻomaka",
-        "Authorize": "Hōʻaia",
-        "TermsLabel": "Ua heluhelu au a uaʻae wau <br> i ka {{link}}",
-        "TermsTitle": "&#39;Ōlelo",
-        "mustAgree": "ʻO ka mua me ʻoe e ʻae i nā ʻōlelo."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "&#39;Apono wau i {{link}}",
-        "TermsTitle": "&#39;Ōlelo"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Palapala Aelike",
-        "prompt": "Makemakeʻoe e hoʻoikaika i nāʻike? E loaʻa iāʻoe nā loli hou e pili ana i nā mea āu e mālama nei.",
-        "yes": "Ae",
-        "no": "Aʻole",
-        "WelcomePleaseVerifyEmail": "Welina! E hōʻoia i kāu leka uila.",
-        "WelcomeVerifyEmail": "Welina! E hōʻoia i kāu leka uila.",
-        "ForgetPass": "ʻAe, ua poina iāʻoe kāu kīpala?",
-        "PassphraseSaved": "Ua mālama ʻia kāu huaʻōlelo ʻōlelo.",
-        "IdentifierActivated": "Ua hana ʻia kāu {{type}} iā.",
-        "CompletedActivation": "Ua hoʻopau ʻoe i ka hana hana.",
-        "CompletedActivationLogIn": "Ua hoʻopau ʻoe i ka hana hana. E ho&#39;āʻo i ke kāohi i kēia manawa."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "E koho i ka pilina",
-            "CreateAccount": "+ Hoʻohui hou",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ʻaʻole i loaʻa",
-            "SearchByName": "Huli ma o ka inoa",
-            "EmptyContacts": "ʻAʻole i loaʻa nā hopena ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "E koho i ka hulina o {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "E koho i kahi lepili.",
-        "inviteUser": "E ho&#39;āʻo i ka mea hoʻohana",
-        "selectRole": "Koho i ka Role",
-        "inviteRole": "Kāhea {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "&#39;Ōlelo maʻamau i kohoʻia",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Welina",
-        "directions": "E hana i kahi moʻokāki, a i ʻole.",
-        "directionsNoRegister": "Kākau i ka loaʻa inā he moʻokāki.",
-        "goButton": "Hele",
-        "passphrase": "E hoʻokomo i kāu huaʻōlelo pili:",
-        "loginButton": "E hoʻomaka",
-        "registerButton": "E hoʻomaka",
-        "resendButton": "Hoʻouna i Kauka Hoʻohālikelike",
-        "forgot": "Poina ia?",
-        "resendConfirm": "Makemake ʻoe e hoʻouna i kahi leka e hoʻihoʻi i kāu passphrase?",
-        "resendSuccess": "E nānā no kahi leka e hoʻihoʻi i kāu leka",
-        "resendClose": "Hoʻopili",
-        "noPassphrase": "Ma mua o hiki iā ʻoe ke kaʻe aku, pono ʻoe e hoʻonohonoho i kahi huaʻōlelo ma o ka kaomi ʻana i ka loulou i kāu leka hoʻāʻo.",
-        "notVerified": "Pono ʻoe e hoʻouna iā ʻoe iho i kahi memele hoʻāla e kau ai.",
-        "emailExists": "Ua hoʻāʻo ʻoe e kākau inoa me kēia leka uila ma mua? Inā pēlā, e nānā i kāu inbox e hoʻolaʻa i kāu moʻokāki. <a href='#resend' class='Q_button Users_activation_resend'>Kaomi e hoʻouna hou i ka leka<\/a>",
-        "mobileExists": "Ua hoʻāʻo ʻoe e kākau inoa me kēia helu kelepona ma mua? Inā pēlā, e nānā i kāu SMS e hoʻolaʻa i kāu moʻokāki. <a href='#resend' class='Q_button Users_activation_resend'>Kaomi e hoʻouna hou i ka leka<\/a>",
-        "usingOther": "a i ʻole",
-        "prompt": "E koho i kahi inoa inoa:",
-        "newUser": "a i ʻole ka hana ʻana i kahi moʻolelo hou",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "kāu pūnaewele # a i ʻole ka leka uila",
-            "mobile": "komo i kāu pūkona #",
-            "email": "komo i kāu leka uila",
-            "username": "inoa inoa"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "E hoʻokae i nā ʻ Termslelo a ke lawelawe?",
-        "facebookNoEmail": "Pau ka leka uila i kāu leka uila i hōʻoia ʻia. Hoʻopili wale i ka hele kumu.",
-        "picTooltip": "Hiki iā ʻoe ke hoʻololi i kēia kiʻi ma hope aku",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "ʻEʻe i loko {{host}} i ka manawa {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Ke kuhikuhi nei iā Wallet",
-                "content": "Ke hoʻopau koke ʻoe i kēia kamaʻilio, lawe ʻia ʻoe i kāu pēke. Ma hope o kou ʻeʻe ʻana, hoʻi i kēia ʻaoʻao."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "E hoʻohui i kahi ala e hoʻopili ai",
-        "sendMessage": "Hoʻouna i Kauka Hoʻohālikelike",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "komo i kāu pūnaewele # a i ʻole nā leka uila",
-            "mobile": "komo i kāu helu kelepona",
-            "email": "komo i kāu leka uila",
-            "username": "inoa inoa"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Waihona",
-        "areUsing": "E hoʻohana ʻoe i ka {{platform}} iā",
-        "noLongerUsing": "ʻAʻole pili ʻoe ma kahi {{platform}} e like me",
-        "doAuth": "Kākau pū me kēia waihona",
-        "doSwitch": "Hoʻololi i kēia moʻokāki"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Ka mea nona",
-        "Admin": "Kauka",
-        "Member": "Lālā",
-        "Guest": "Kāhea",
-        "Host": "Mea Hoʻokipa"
-    },
-    "analytics": {
-        "Title": "Kālailai",
-        "Daily": "I kēlā me kēia lā",
-        "Weekly": "Pule Pule",
-        "Monthly": "Mahina",
-        "Application": "Palapala noi",
-        "Pages": "ʻAoʻao",
-        "Services": "Nā lawelawe",
-        "Faq": "Faq",
-        "WeekDays": "Nā Lā Wiki"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

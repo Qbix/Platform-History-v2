@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "kena",
-        "LogOut": "tsoa ka ntle"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Beha {{1}} e le sa ka sehloohong {{2}}",
-        "ChoosePassPhrase": "Khetha <strong>polelo ea<\/strong> ho <strong>feta<\/strong> ho kena le eona. <br> Mantsoe a bonolo a nang le mantsoe a seng makae ao u tla hopola habonolo.",
-        "ChoosePassPhraseSeeSuggestions": "Khetha <strong>polelo e<\/strong> ntle ea ho <strong>feta<\/strong> ho sireletsa akhaonto ea hau. Bona litlhahiso tsa maikutlo a mang.",
-        "LogOutAndTryAgain": "Phalla &#39;me u Leke hape",
-        "IfYouFeel": "Haeba u utloa hore ho hong ho fositse, u ka khona",
-        "SetIdentifierButtonTitle": "qala holimo"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Qala"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Qala",
-        "Authorize": "Lumella",
-        "TermsLabel": "Ke balile mme kea lumela <br> ho {{link}}",
-        "TermsTitle": "Melao",
-        "mustAgree": "Pele, o tlameha ho lumellana le lipehelo."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ke amohela {{link}}",
-        "TermsTitle": "Melao"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Lumello",
-        "prompt": "Na o batla ho nolofalletsa litlhahisoleseding? U tla fumana lisebelisoa tsa nako ea sebele ka lintho tseo u li hlokomelang.",
-        "yes": "E.",
-        "no": "Che",
-        "WelcomePleaseVerifyEmail": "Amoheloa! Ka kopo netefatsa aterese ea hau ea imeile.",
-        "WelcomeVerifyEmail": "Amoheloa! Netefatsa aterese ea hau ea imeile.",
-        "ForgetPass": "Hey, o kile oa lebala molaetsa oa hau?",
-        "PassphraseSaved": "Polelo ea hau ea ho feta e bolokiloe.",
-        "IdentifierActivated": "{{type}} ea hau e sebelisitsoe ts&#39;ebetso.",
-        "CompletedActivation": "U qetile ts&#39;ebetso ea mosebelisi.",
-        "CompletedActivationLogIn": "U qetile ts&#39;ebetso ea mosebelisi. Leka ho kena hona joale."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Khetha moqoqo",
-            "CreateAccount": "+ Khokahano e ncha",
-            "CreateAccountNotFound": "Q.Esers.Cordova.UI.create ha e fumanoe",
-            "SearchByName": "Batla ka lebitso",
-            "EmptyContacts": "Mabitso ha a fumanehe ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Khetha puisano ea {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Ka kopo khetha lebokose.",
-        "inviteUser": "Mema User",
-        "selectRole": "Khetha Karolo",
-        "inviteRole": "Mema {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Puo e sa nepahaleng e khethiloeng",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Rea u amohela",
-        "directions": "Theha ak&#39;haonte, kapa u kene.",
-        "directionsNoRegister": "Kena haeba u na le ak&#39;haonte.",
-        "goButton": "Eya",
-        "passphrase": "Kenya polelo ea hau ea ho feta:",
-        "loginButton": "Qala",
-        "registerButton": "Qala",
-        "resendButton": "Romella molaetsa o sebetsang",
-        "forgot": "U se tšoaretse?",
-        "resendConfirm": "Na u batla ho romella molaetsa ho etsa poleloana ea hau ea &#39;nete?",
-        "resendSuccess": "Lekola molaetsa hore o hlophisetse polelo ea hau ea mantsoe",
-        "resendClose": "Haufi",
-        "noPassphrase": "Pele o kena, o lokela ho ipehela poleloana ea ho feta ka ho tobetsa sehokelo molaetseng oa hau oa ts&#39;ebetso.",
-        "notVerified": "U tlameha ho it romella molaetsa oa ts&#39;ebetso e le hore u kene.",
-        "emailExists": "Na u kile oa leka ho ingolisa le lengolo-tsoibila lena pele? Haeba ho joalo, hlahloba hore na ke eng e kenyang ak&#39;haonte ea hau. <a href='#resend' class='Q_button Users_activation_resend'>Tobetsa ho romella molaetsa hape<\/a>",
-        "mobileExists": "Na u kile oa leka ho ingolisa le nomoro ee ea mohala pele? Haeba ho joalo, hlahloba molaetsa oa hau oa tšebetsong. <a href='#resend' class='Q_button Users_activation_resend'>Tobetsa ho romella molaetsa hape<\/a>",
-        "usingOther": "kapa o ka khona",
-        "prompt": "Khetha lebitso sa mosebelisi:",
-        "newUser": "kapa theha ak&#39;haonte e ncha",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "# mobile kapa lengolo tsoibila",
-            "mobile": "kenya mohala oa hau #",
-            "email": "kenya aterese ea hau ea lengolo tsoibila",
-            "username": "lebitso la mosebelisi"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Amohela Melao ea Tšebeletso?",
-        "facebookNoEmail": "Ak&#39;haonte ea hau ea facebook e haelloa ke aterese ea lengolo-tsoibila. Kenya feela tsela ea tlhaho.",
-        "picTooltip": "U ka fetola setšoantšo sena hamorao",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Kena ho {{host}} ka nako {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "E lebisitse ho Wallet",
-                "content": "Hang ha u koala lebokose lena, u tla isoa sepacheng sa hau. Kamora hore o kene, khutlela leqepheng lena."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Kenya tsela ea ho kena",
-        "sendMessage": "Romella molaetsa o sebetsang",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "kenya # kapa lengolo tsoibila la hau",
-            "mobile": "kenya nomoro ea hau ea mohala",
-            "email": "kenya aterese ea hau ea lengolo tsoibila",
-            "username": "lebitso la mosebelisi"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Ak&#39;haonte",
-        "areUsing": "U sebelisa {{platform}} joalo ka",
-        "noLongerUsing": "Ha o sa kopantsoe le {{platform}} joalo ka",
-        "doAuth": "Kena ka akhaonto ena",
-        "doSwitch": "Fetolela ak&#39;haonte ena"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Mong",
-        "Admin": "Tsamaiso",
-        "Member": "Setho",
-        "Guest": "Moeti",
-        "Host": "Moamoheli"
-    },
-    "analytics": {
-        "Title": "Ditlhahlobo",
-        "Daily": "Letsatsi le letsatsi",
-        "Weekly": "Beke le beke",
-        "Monthly": "Khoeli le khoeli",
-        "Application": "Kopo",
-        "Pages": "Maqephe",
-        "Services": "Litšebeletso",
-        "Faq": "LBH",
-        "WeekDays": "Matsatsi a Beke"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

@@ -3049,40 +3049,30 @@ Q.log = function _Q_log(message, name, timestamp, callback) {
  */
 Q.url = function _Q_url(what, fields, options) {
 	var what2 = what || '';
-	if (what2.substr(0, 5) === 'data:') {
+	if (what2.startsWith('data:') || what2.startsWith('blob:')) {
 		return what2; // this is a special type of URL
 	}
 	var parts = what2.split('?');
+	var what3;
 	if (fields) {
 		for (var k in fields) {
 			parts[1] = (parts[1] || "").queryField(k, fields[k]);
 		}
 		what2 = parts[0] + (parts[1] ? '?' + parts[1] : '');
 	}
-	if (options && options.cacheBust) {
-		var timeout = Math.floor(Date.now()/options.cacheBust);
-		var parts = what2.split('?');
-		if (parts.length > 1) {
-			parts[1] = parts[1].queryField('Q.cacheBust', timeout);
-			what2 = parts[0] + '?' + parts[1];
-		}
-	}
-	parts = what2.split('?');
+	var baseUrl = (options && options.baseUrl) || Q.Config.get(['Q', 'web', 'appRootUrl']);
+	what3 = Q.interpolateUrl(what2);
+	parts = what3.split('?');
 	if (parts.length > 2) {
-		what2 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
+		what3 = parts.slice(0, 2).join('?') + '&' + parts.slice(2).join('&');
 	}
-	what2 = Q.interpolateUrl(what2);
 	var result = '';
-	var baseUrl = (options && options.baseUrl);
-	if (!baseUrl) {
-		baseUrl = Q.Config.get(['Q', 'web', 'appRootUrl']);
-	}
 	if (!what) {
 		result = baseUrl + (what === '' ? '/' : '');
-	} else if (what2.isUrl()) {
-		result = what2;
+	} else if (what3.isUrl()) {
+		result = what3;
 	} else {
-		result = baseUrl + ((what2.substr(0, 1) == '/') ? '' : '/') + what;
+		result = baseUrl + ((what3.substr(0, 1) === '/') ? '' : '/') + what3;
 	}
 	return result;
 };

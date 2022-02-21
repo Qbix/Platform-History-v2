@@ -1,167 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "To&#39;lash uchun bosing"
+        "button": "Tap to pay"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} uchun to&#39;lov amalga oshirildi",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ga to‘laganingiz uchun tashakkur",
-        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} kanaliga obuna bo&#39;ldi",
-        "YouSubscribedTo": "Siz {{plan.title}} kanaliga obuna bo&#39;lgansiz"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
     },
     "charge": {
-        "Subject": "Siz {{displayAmount}} to&#39;lovini {{call 'publisher.displayName'}} dan &quot;{{description}}&quot; orqali olasiz",
-        "HasBeenCharged": "Bu sizga xabar berish uchun, {{1}} {{3}} uchun {{3}} uchun {{2}} miqdorida to&#39;lovni olgan."
+        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
+        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; uchun to&#39;lovingiz uchun tashakkur",
-        "HavePaid": "Salom, {{1}}, bu {{4}} uchun {{2}} ni {{3}} ga muvaffaqiyatli to&#39;laganingizning tezkor tasdig&#39;i."
+        "Subject": "Thank you for your payment for \"{{description}}\"",
+        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "Buyurtma haqida ma&#39;lumot",
-        "PaymentMethod": "To&#39;lov usuli",
-        "ContactInfo": "Aloqa ma&#39;lumotlari",
-        "Pay": "To&#39;lash"
+        "AboutOrder": "Info about order",
+        "PaymentMethod": "Payment method",
+        "ContactInfo": "Contact info",
+        "Pay": "Pay"
     },
     "credits": {
-        "InviteAcceptedBy": "Taklif {{invitedUserName}} tomonidan qabul qilingan",
-        "YouHaveCreditsToStart": "Sizda {{amount}} kredit bor",
-        "PaymentFor": "&quot;{{1}}&quot; uchun to&#39;lov",
-        "PaymentTo": "To‘lov: {{1}}",
-        "PaymentToUser": "To‘lov: {{toUserName}}",
-        "CreatePaidStream": "yaratish uchun {{toStreamName}}",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; da band qilish uchun",
-        "CreatedCommunity": "&quot;{{communityId}}&quot; hamjamiyatini yaratish uchun",
-        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>&quot;{{toStreamTitle}}<\/a> &quot; da bandlovni qaytarish sifatida",
-        "BoughtCredits": "{{amount}} ta kredit sotib olindi",
-        "BonusCredits": "Bonus {{amount}} kredit",
-        "BuyAmountCredits": "{{amount}} ta kredit sotib oling",
-        "WatchClip": "{{fromStreamTitle}} tomoshasi uchun {{amount}} ta kredit olindi",
-        "MissingCredits": "Kreditlar etishmayapti",
-        "YouMissingCredits": "Davom etish uchun sizga qo&#39;shimcha {{amount}} kredit kerak.",
-        "BuyCredits": "Kredit sotib olish",
-        "BuyBonus": "Birdaniga {{amount}} ta kredit sotib olsangiz, {{bonus}} bonusli bonusga ega bo&#39;lasiz.",
-        "Buy": "Sotib oling",
-        "PurchaseCredits": "Kredit sotib olish",
-        "Credits": "Kreditlar",
-        "ErrorInvalidAmount": "Miqdori yaroqsiz",
-        "ErrorInvalidCurrency": "Afsuski, biz hali ham {{currency}} valyutasini qo&#39;llab -quvvatlamaymiz",
+        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} entered first name",
+        "Streams_user_lastname": "{{invitedUserName}} entered last name",
+        "Streams_user_icon": "{{invitedUserName}} entered icon",
+        "Places_user_location": "{{invitedUserName}} entered location",
+        "Streams_greeting": "{{invitedUserName}} entered greeting",
+        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
+        "PaymentFor": "Payment for \"{{1}}\"",
+        "PaymentTo": "Payment to {{1}}",
+        "PaymentToUser": "Payment to {{toUserName}}",
+        "CreatePaidStream": "for creating {{toStreamName}}",
+        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "CreatedCommunity": "for creating community \"{{communityId}}\"",
+        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Bonus {{amount}} credits",
+        "BuyAmountCredits": "Buy {{amount}} credits",
+        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "MissingCredits": "Missing Credits",
+        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
+        "BuyCredits": "Buy credits",
+        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "Buy": "Buy",
+        "PurchaseCredits": "Purchase Credits",
+        "Credits": "Credits",
+        "ErrorInvalidAmount": "Amount invalid",
+        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredit",
-            "BonusCredits": "{{amount}} kredit"
+            "BoughtCredits": "{{amount}} credits",
+            "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Sana",
-        "Amount": "Miqdori",
-        "Description": "Tavsif",
-        "Client": "Mijoz",
-        "To": "ga",
-        "From": "dan",
-        "SeeHistory": "{{1}} uchun to&#39;lovlar tarixini ko&#39;ring",
-        "HistoryEmpty": "Sizda hozircha hech qanday ma&#39;lumot yo&#39;q",
-        "PaymentFor": "{{amount}} ta kredit yuborildi",
-        "PaymentTo": "{{amount}} ta kredit yuborildi",
-        "PaymentToUser": "{{amount}} ta kredit yuborildi",
-        "CreatePaidStream": "{{amount}} ta kredit sarflandi",
+        "Date": "Date",
+        "Amount": "Amount",
+        "Description": "Description",
+        "Client": "Client",
+        "To": "to",
+        "From": "from",
+        "SeeHistory": "See payment history for {{1}}",
+        "HistoryEmpty": "You have no data yet",
+        "PaymentFor": "Sent {{amount}} credits",
+        "PaymentTo": "Sent {{amount}} credits",
+        "PaymentToUser": "Sent {{amount}} credits",
+        "CreatePaidStream": "Spent {{amount}} credits",
         "WatchClip": {
-            "+": "{{amount}} ta kredit oldi",
-            "-": "{{amount}} ta kredit sarflandi"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} ta kredit oldi",
-            "-": "{{amount}} ta kredit sarflandi"
+            "+": "Earned {{amount}} credits",
+            "-": "Spent {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} ta kredit olindi",
-            "-": "{{amount}} ta kredit yuborildi"
+            "+": "Received {{amount}} credits",
+            "-": "Sent {{amount}} credits"
         },
-        "CreatedCommunity": "{{amount}} ta kredit sarflandi",
-        "BoughtCredits": "{{amount}} ta kredit sotib olindi",
-        "BonusCredits": "{{amount}} bonusli bonusga ega bo&#39;ldingiz",
-        "InviteAcceptedBy": "{{amount}} ta kredit oldi",
-        "YouHaveCreditsToStart": "{{amount}} ta kredit oldi"
+        "CreatedCommunity": "Spent {{amount}} credits",
+        "BoughtCredits": "Bought {{amount}} credits",
+        "BonusCredits": "Got bonus {{amount}} credits",
+        "InviteAcceptedBy": "Earned {{amount}} credits",
+        "Streams_user_firstname": "Earned {{amount}} credits",
+        "Streams_user_lastname": "Earned {{amount}} credits",
+        "Streams_user_icon": "Earned {{amount}} credits",
+        "Places_user_location": "Earned {{amount}} credits",
+        "Streams_greeting": "Earned {{amount}} credits",
+        "YouHaveCreditsToStart": "Earned {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "To&#39;lov ma&#39;lumotlarini o&#39;rnatish",
+        "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "Obunani boshlang",
-            "message": "{{title}} kanaliga obuna bo&#39;lishni xohlaysizmi?",
+            "title": "Start Subscription",
+            "message": "Would you like to subscribe to {{title}}?",
             "ok": "OK",
-            "cancel": "Bekor qilish"
+            "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "Kredit yoki debet karta",
-        "SubscribePayment": "To&#39;lovga obuna bo&#39;lish",
-        "ImmediatePayment": "Darhol to&#39;lov"
+        "CreditOrDebitCard": "Credit or debit card",
+        "SubscribePayment": "Subscribe Payment",
+        "ImmediatePayment": "Immediate Payment"
     },
     "payments": {
-        "infoTitle": "To&#39;lov ma&#39;lumotlarini o&#39;rnatish",
-        "BuyAmountCredits": "{{amount}} ta kredit sotib oling",
+        "infoTitle": "Set Payment Information",
+        "BuyAmountCredits": "Buy {{amount}} credits",
         "confirm": {
-            "title": "To&#39;lovni amalga oshirish",
-            "message": "Siz {{symbol}} {{amount}} to&#39;lashga rozilik bildirasizmi?",
+            "title": "Make a Payment",
+            "message": "Do you agree to pay {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Bekor qilish"
+            "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Kreditlar",
-            "description": "kreditlar va to&#39;lovlarni hisobga oladi"
+            "displayType": "Credits",
+            "description": "keeps track of credits and payments"
         },
         "Assets\/plan": {
-            "displayType": "Obuna bo&#39;lish rejasi",
-            "description": "obuna rejasi"
+            "displayType": "Subsription Plan",
+            "description": "subscription plan"
         },
         "Assets\/subscription": {
-            "displayType": "Obuna",
-            "description": "obuna"
+            "displayType": "Subscription",
+            "description": "subscription"
         },
         "Assets\/product": {
-            "displayType": "Mahsulot",
-            "description": "sotiladigan mahsulot"
+            "displayType": "Product",
+            "description": "product being sold"
         },
         "Assets\/service": {
-            "displayType": "Xizmat",
-            "description": "taklif etilayotgan xizmat"
+            "displayType": "Service",
+            "description": "service being offered"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} ta kredit oldi"
+            "content": "Earned {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} ta kredit sotib olindi"
+            "content": "Bought {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} kredit"
+            "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} ta kredit sarflandi"
+            "content": "Spent {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "{{toUserName}} ga {{amount}} ta kredit yuborildi"
+            "content": "Sent {{amount}} credits to {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "{{fromUserName}} dan {{amount}} ta kredit olindi"
+            "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Yangi xizmat",
-            "TitlePlaceholder": "Xizmat nomi",
-            "PricePlaceholder": "Narxni belgilang",
-            "LinkPlaceholder": "qo&#39;shimcha ma&#39;lumot havolasini o&#39;rnating",
-            "DescriptionPlaceholder": "Xizmat tavsifi",
-            "SaveService": "Xizmatni saqlash",
-            "SelectRequiredParticipants": "Kerakli ishtirokchilar"
+            "Title": "New Service",
+            "TitlePlaceholder": "Service title",
+            "PricePlaceholder": "Set price",
+            "LinkPlaceholder": "set additional info link",
+            "DescriptionPlaceholder": "Service description",
+            "SaveService": "Save Service",
+            "SelectRequiredParticipants": "Required Participants"
         },
-        "ManageServiceTemplates": "Xizmat shablonlarini boshqarish",
-        "ManageServices": "Xizmatlarni boshqarish",
-        "Free": "Ozod",
-        "OptionalContribution": "Majburiy emas",
-        "RequiredPayment": "Majburiy to&#39;lov",
-        "AreYouSureDelete": "Haqiqatan ham bu xizmatni o‘chirib tashlamoqchimisiz?",
-        "AmountServicesRelated": "Bu xizmat bilan bog&#39;liq {{amount}} ta imkoniyat bor. Ular ham olib tashlanadi."
+        "ManageServiceTemplates": "Manage Service Templates",
+        "ManageServices": "Manage Services",
+        "Free": "Free",
+        "OptionalContribution": "Optional contribution",
+        "RequiredPayment": "Required payment",
+        "AreYouSureDelete": "Are you sure you want to delete this service?",
+        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+    },
+    "NFT": {
+        "Title": "Information about {{title}} NFT",
+        "Description": "Detailed information about NFT",
+        "FixedBid": "Buy now",
+        "CurrentBid": "Current bid",
+        "StartingIn": "Starting in",
+        "EndingIn": "Ending in",
+        "CreateNFT": "Create an NFT",
+        "TitlePlaceholder": "Give your NFT a title",
+        "DescriptionPlaceholder": "Give your NFT a description",
+        "CreateYourNFT": "Create your NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
+        "ExpirationDate": "Expiration Date",
+        "StartingDate": "Start Date",
+        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "MinimumBid": "Minimum bid",
+        "Price": "Price",
+        "Owner": "Owner",
+        "SelectCategory": "Select category",
+        "Day": "Day",
+        "Days": "Days",
+        "Hour": "Hour",
+        "Hours": "Hours",
+        "Minute": "Minute",
+        "Minutes": "Minutes",
+        "Second": "Second",
+        "Seconds": "Seconds",
+        "SalesCreator": "of sales will go to creator",
+        "Details": "Details",
+        "Bids": "Bids",
+        "History": "History",
+        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "PutOnSale": "Put on sale",
+        "PutOffSale": "Withdraw from sale",
+        "Transfer": "Transfer",
+        "Update": "Update",
+        "UpdateToken": "Update Token",
+        "CreateToken": "Create Token",
+        "PlaceBid": "Place Bid",
+        "SoldOut": "Sold",
+        "NftName": "NFT name",
+        "DescribeYourNFT": "Please describe your NFT",
+        "NftPicture": "Picture to represent NFT",
+        "NftMovie": "Movie to represent NFT",
+        "UploadMovie": "Upload movie",
+        "MovieSource": "Movie Source",
+        "UploadFile": "Upload a file",
+        "PutOnMarketplace": "Put on marketplace",
+        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
+        "FixedPrice": "Fixed price",
+        "TimedAuction": "Timed auction",
+        "OpenForBids": "Open for bids",
+        "PriceOnePiece": "Enter price for one piece",
+        "EnterMinimumBid": "Enter Minimum bid",
+        "SelectChain": "Select chain",
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "import": {
+            "importNFT": "Importing NFT's",
+            "fileNotFound": "Sorry, CSV file not found.",
+            "fileEmpty": "Sorry, CSV file is empty.",
+            "userIdNotFound": "user exist but id empty",
+            "errorLine": "line {{1}}",
+            "fieldNotFound": "Required field \"{{1}}\" not found",
+            "taskStreamInvalid": "task stream invalid",
+            "instructionsEmpty": "task stream instructions empty",
+            "complete": "Complete",
+            "activateUsers": "send activation message to users?",
+            "importProgress": "Progress",
+            "importOptions": "Options",
+            "sampleCSV": "Download Sample CSV",
+            "fileLabel": "Upload Spreadsheet:",
+            "errorsTitle": "Errors occurred"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter by NFT Collections",
+                "ShowNFTCollection": "Show NFT collection in ...",
+                "AllCollections": "All Collections"
+            },
+            "ByUser": {
+                "AllAuthors": "All Authors",
+                "AllUsers": "Everyone",
+                "FilterByAuthors": "Filter by Authors"
+            }
+        },
+        "Back": "Back to Collection"
     }
 }

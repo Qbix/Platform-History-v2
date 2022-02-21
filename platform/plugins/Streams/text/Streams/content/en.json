@@ -8,12 +8,12 @@
     "labels": {
         "Streams\/invited": "People I invited",
         "Streams\/invitedMe": "Who invited me",
-        "AreYouAgree": "Are you agree?",
+        "DoYouAgree": "Do you agree?",
         "Yes": "Yes",
         "No": "No"
     },
     "interests": {
-        "Filter": "What do you enjoy?",
+        "Filter": "What are your interests?",
         "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
         "TrySynonyms": "Don't see it? Try some synonyms.",
         "AddUnderCategory": "Add under category...",
@@ -527,6 +527,7 @@
         "Update": "Update",
         "NoCallsYet": "No calls yet",
         "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "WaitingRoom": "Waiting Room",
+        "LiveRoom": "Live Room"
     }
 }

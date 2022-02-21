@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "shiga",
-        "LogOut": "shiga waje"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Sa {{1}} a matsayin na farko {{2}}",
-        "ChoosePassPhrase": "Zaɓi <strong>kalmar fassarar<\/strong> don shiga tare da. <br> Fassara mai sauƙi wanda ya ƙunshi wasu kalmomi da za ku iya tunawa da sauƙi.",
-        "ChoosePassPhraseSeeSuggestions": "Zabi mai kyau <strong>izinin magana<\/strong> a kare asusunka. Duba shawarwari don wasu ra&#39;ayoyi.",
-        "LogOutAndTryAgain": "A fita kuma gwada sake",
-        "IfYouFeel": "Idan kun ji wani abu ya ɓace, za ku iya",
-        "SetIdentifierButtonTitle": "farawa"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Fara Fara"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Fara Fara",
-        "Authorize": "Izini",
-        "TermsLabel": "Na karanta kuma in yarda <br> zuwa {{link}}",
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
         "TermsTitle": "Terms",
-        "mustAgree": "Da farko dole ne ku yarda da sharuɗɗan."
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Na yarda da {{link}}",
+        "TermsLabel": "I accept the {{link}}",
         "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Izinin",
-        "prompt": "Shin kuna son taimaka wa sanarwarku? Za ku sami ƙarin ɗaukakawa na ainihi game da abubuwan da kuke damu.",
-        "yes": "Ee",
-        "no": "A&#39;a",
-        "WelcomePleaseVerifyEmail": "Barka da zuwa! Da fatan a tabbatar da adireshin imel naka.",
-        "WelcomeVerifyEmail": "Barka da zuwa! Tabbatar da adireshin imel naka.",
-        "ForgetPass": "Hey, baku manta da fasfonku ba?",
-        "PassphraseSaved": "An ajiye kalmar wucewa.",
-        "IdentifierActivated": "An kunna {{type}}.",
-        "CompletedActivation": "Kun gama kunnawa mai amfani.",
-        "CompletedActivationLogIn": "Kun gama kunnawa mai amfani. Gwada shiga yanzu."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Zaɓi lamba",
-            "CreateAccount": "+ Sabuwar lamba",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ba&#39;a samo shi ba",
-            "SearchByName": "Bincika da suna",
-            "EmptyContacts": "Ba a samo adireshi ba ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Zaɓi lamba na {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Da fatan a zaɓi lakabin.",
-        "inviteUser": "Gayyatar mai amfani",
-        "selectRole": "Zaɓi Matsayi",
-        "inviteRole": "Gayyata {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Harshen mara inganci da aka zaɓa",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Maraba",
-        "directions": "Anirƙiri lissafi, ko shiga ciki.",
-        "directionsNoRegister": "Shiga ciki idan kuna da asusu.",
-        "goButton": "Ku tafi",
-        "passphrase": "Shigar da kalmar wucewa:",
-        "loginButton": "Fara",
-        "registerButton": "Fara",
-        "resendButton": "Aika sakon kunnawa",
-        "forgot": "Manta da shi?",
-        "resendConfirm": "Kuna so ku aika da sako don sake saita kalmar wucewar ku?",
-        "resendSuccess": "Bincika saƙo don sake saita kalmar wucewa",
-        "resendClose": "Rufe",
-        "noPassphrase": "Kafin ka iya shiga, dole ne ka saita jumlar wucewa ta danna hanyar haɗi a cikin sakon kunnawa.",
-        "notVerified": "Dole ne ku aika da kanku saƙo na kunnawa don shiga.",
-        "emailExists": "Shin kun yi kokarin yin rijista da wannan imel din? Idan haka ne, bincika akwatin saƙo mai shiga don kunna asusunka. <a href='#resend' class='Q_button Users_activation_resend'>Danna don sake aika saƙon<\/a>",
-        "mobileExists": "Shin kun yi kokarin yin rijista da wannan lambar wayar a gabani? Idan haka ne, duba SMS don kunna asusunka. <a href='#resend' class='Q_button Users_activation_resend'>Danna don sake aika saƙon<\/a>",
-        "usingOther": "ko zaka iya",
-        "prompt": "Zaba sunan amfani:",
-        "newUser": "ko ƙirƙirar sabon lissafi",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "ta wayar salula # ko email",
-            "mobile": "shigar da wayar hannu #",
-            "email": "shigar da adireshin imel",
-            "username": "sunan mai amfani"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Yarda da Sharuɗɗan sabis?",
-        "facebookNoEmail": "Adireshin facebook naku ya rasa adireshin imel da aka tabbatar. Kawai shiga cikin asalin ƙasar.",
-        "picTooltip": "Kuna iya canza wannan hoto nan gaba",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Shiga cikin {{host}} a lokacin {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Canza hanya zuwa Wallet",
-                "content": "Da zarar kun rufe wannan zancen, za a kai ku zuwa walat ɗin ku. Bayan ka shiga, koma wannan shafin."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Sanya wata hanyar shiga",
-        "sendMessage": "Aika sakon kunnawa",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "shigar da # ta hannu ko kuma imel",
-            "mobile": "shigar da lambar salula",
-            "email": "shigar da adireshin imel",
-            "username": "sunan mai amfani"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "Account {{Platform}}",
-        "areUsing": "Kana amfani da {{platform}} as",
-        "noLongerUsing": "Ba a haɗa ku da {{platform}} kamar",
-        "doAuth": "Shiga ciki tare da wannan asusun",
-        "doSwitch": "Canza shi zuwa wannan asusun"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Mai mallaka",
+        "Owner": "Owner",
         "Admin": "Admin",
-        "Member": "Memba",
-        "Guest": "Bako",
-        "Host": "Mai watsa shiri"
-    },
-    "analytics": {
-        "Title": "Nazari",
-        "Daily": "Kullum",
-        "Weekly": "Mako -mako",
-        "Monthly": "Watanni",
-        "Application": "Aikace -aikace",
-        "Pages": "Shafuka",
-        "Services": "Ayyuka",
-        "Faq": "Tambaya",
-        "WeekDays": "Kwanaki Mako"
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

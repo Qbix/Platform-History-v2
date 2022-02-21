@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "laistigh de {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "méadar",
-        "meters": "méadar",
-        "kilometer": "ciliméadar",
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "míle",
-        "miles": "míle",
+        "mile": "mile",
+        "miles": "miles",
         "mi": "mi",
-        "foot": "chos",
-        "feet": "cosa",
-        "inches": "orlach"
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Tá suim agam i rudaí a tharlaíonn laistigh de {{select}} de",
-        "update": "Nuashonraigh mo shuíomh",
-        "prompt": "{{ClickOrTap}} anseo chuig <br> socraigh do <br> suíomh",
-        "myCurrentLocation": "Mo láthair reatha",
-        "enterAddress": "Cuir isteach seoladh",
-        "enterPostcode": "Cuir isteach do chód poist \/ zipcode le do thoil",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Cuir an Suíomh leis",
-            "title": "Suíomh Nua",
-            "nameYourLocation": "Ainmnigh do shuíomh"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Sábháil an suíomh seo?",
-            "message": "An bhfuil sé ar intinn agat an suíomh seo a úsáid arís sa todhchaí?",
-            "ok": "Is féidir",
-            "cancel": "Níl"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Ainmnigh an suíomh seo",
-            "placeholder": "Baile, Obair etc.",
-            "ok": "Sábháil"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Roghnaigh Suíomh"
-        },
-        "set": "Socraigh Mo Shuíomh"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Aon limistéar laistigh den suíomh seo?",
-        "newArea": "Ceantar nua",
-        "promptTitle": "Cuir isteach ainm don cheantar:",
-        "absent": "Cuir limistéar ar fáil le do thoil",
-        "error": "Earráid",
-        "exist": "Tá an limistéar ann cheana féin",
-        "addNewArea": "Cuir limistéar nua leis",
-        "add": "Cuir leis"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "bailiúchán suíomhanna",
-            "displayType": "Suíomhanna"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Is foirgneamh, ionad, long, páirc, etc.",
-            "displayType": "Suíomh"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Is ionann é agus limistéar laistigh de shuíomh, mar sheomra nó seomra",
-            "displayType": "Achar"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Is ionann é agus urlár in fhoirgneamh nó i long",
-            "displayType": "Urlár"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Is colún é i bhfoirgneamh nó i long",
-            "displayType": "Colún"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Catagóir le haghaidh rudaí laistigh de achar áirithe geohash",
-            "displayType": "In aice le háiteanna"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Catagóir le haghaidh rudaí laistigh de achar áirithe geo-shash, ag teacht le leas",
-            "displayType": "Suíonn sé suim"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

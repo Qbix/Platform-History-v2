@@ -238,13 +238,15 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			// Retain the streams, so they can be refreshed while this tool is active,
 			// triggering the Streams plugin to update the avatar.
 			var names = [
-				'Streams/user/firstName',
-				'Streams/user/lastName',
 				'Streams/user/username',
 				'Streams/user/icon'
 			];
-			if (state.withGender) {
-				names.push('Streams/user/gender');
+			if (!Users.isCommunityId(state.userId)) {
+				names.push('Streams/user/firstName');
+				names.push('Streams/user/lastName');
+				if (state.withGender) {
+					names.push('Streams/user/gender');
+				}
 			}
 			Streams.Stream.retain(state.userId, names, tool);
 		}

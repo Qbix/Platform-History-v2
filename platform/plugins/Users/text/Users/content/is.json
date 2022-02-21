@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "skrá inn",
-        "LogOut": "að skrá þig út"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Setjið {{1}} sem aðal {{2}} minn",
-        "ChoosePassPhrase": "Veldu <strong>lykilorð<\/strong> til að skrá þig inn með. <br> Einföld setning sem samanstendur af nokkrum orðum sem þú munt auðveldlega muna.",
-        "ChoosePassPhraseSeeSuggestions": "Veldu góðan <strong>aðgangsorð<\/strong> til að vernda reikninginn þinn. Sjá tillögur fyrir nokkrar hugmyndir.",
-        "LogOutAndTryAgain": "Skráðu þig út og reyndu aftur",
-        "IfYouFeel": "Ef þér finnst eitthvað fór úrskeiðis geturðu það",
-        "SetIdentifierButtonTitle": "byrja aftur"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Byrja"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Byrja",
-        "Authorize": "Leyfa",
-        "TermsLabel": "Ég hef lesið og sammála <br> til {{link}}",
-        "TermsTitle": "Skilmálar",
-        "mustAgree": "Fyrst verður þú að samþykkja skilmálana."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ég samþykki {{link}}",
-        "TermsTitle": "Skilmálar"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Leyfi",
-        "prompt": "Viltu virkja tilkynningar? Þú færð rauntíma uppfærslur um það sem þér er annt um.",
-        "yes": "Já",
-        "no": "Nr",
-        "WelcomePleaseVerifyEmail": "Velkominn! Vinsamlegast staðfestu netfangið þitt.",
-        "WelcomeVerifyEmail": "Velkominn! Staðfestu netfangið þitt.",
-        "ForgetPass": "Hey, hefur þú gleymt lykilorðinu þínu?",
-        "PassphraseSaved": "Lykilorð þitt hefur verið vistað.",
-        "IdentifierActivated": "{{type}} þín hefur verið virkjuð.",
-        "CompletedActivation": "Þú hefur lokið við að virkja notendur.",
-        "CompletedActivationLogIn": "Þú hefur lokið við að virkja notendur. Prófaðu að skrá þig inn núna."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
-    "usersContacts": {
-        "selectLabel": "Vinsamlegast veldu merkið.",
-        "inviteUser": "Bjóddu notanda",
-        "selectRole": "Veldu hlutverk",
-        "inviteRole": "Bjóddu {{role}}"
-    },
-    "invalidLanguageSelected": "Ógilt tungumál valið",
     "contacts": {
         "dialog": {
-            "title": "Veldu tengilið",
-            "SearchByName": "Leitaðu með nafni",
-            "CreateAccount": "+ Nýr tengiliður",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create fannst ekki",
-            "EmptyContacts": "Tengiliðir fundust ekki ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Veldu tengilið af {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
+    "usersContacts": {
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
+    },
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Velkominn",
-        "directions": "Búðu til reikning, eða skráðu þig inn.",
-        "directionsNoRegister": "Skráðu þig inn ef þú ert með reikning.",
-        "goButton": "Farðu",
-        "passphrase": "Sláðu inn aðgangsorð:",
-        "loginButton": "Byrja",
-        "registerButton": "Byrja",
-        "resendButton": "Senda virkjunarskilaboð",
-        "forgot": "Gleymdirðu því?",
-        "resendConfirm": "Viltu senda skilaboð til að núllstilla aðgangsorð þitt?",
-        "resendSuccess": "Leitaðu að skeytum til að núllstilla aðgangsorð",
-        "resendClose": "Loka",
-        "noPassphrase": "Áður en þú getur skráð þig inn verðurðu að setja framsögn með því að smella á hlekkinn í virkjunarskilaboðunum.",
-        "notVerified": "Þú verður að senda þér virkjunarskilaboð til að skrá þig inn.",
-        "emailExists": "Reyndirðu að skrá þig með þessum tölvupósti áður? Ef svo er skaltu haka við pósthólfið til að virkja reikninginn þinn. <a href='#resend' class='Q_button Users_activation_resend'>Smelltu til að senda skilaboðin aftur<\/a>",
-        "mobileExists": "Reyndirðu að skrá þig með þessu farsímanúmeri áður? Ef svo er skaltu athuga með SMS til að virkja reikninginn þinn. <a href='#resend' class='Q_button Users_activation_resend'>Smelltu til að senda skilaboðin aftur<\/a>",
-        "usingOther": "eða þú getur",
-        "prompt": "Veldu notendanafn:",
-        "newUser": "eða stofnaðu nýjan reikning hér að neðan",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "farsímann þinn eða tölvupóstur",
-            "mobile": "sláðu inn farsímann þinn #",
-            "email": "sláðu inn netfangið þitt",
-            "username": "notandanafn"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Samþykkja þjónustuskilmálana?",
-        "facebookNoEmail": "Það vantar staðfest netfang hjá facebook reikningnum þínum. Einfaldlega skráðu þig inn á innfægan hátt.",
-        "picTooltip": "Þú getur breytt þessari mynd síðar",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Skráðu þig inn á {{host}} á þeim tíma {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Beinir að Veski",
-                "content": "Þegar þú hefur lokað þessum glugga verðurðu fluttur í veskið þitt. Þegar þú hefur skráð þig inn, farðu aftur á þessa síðu."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Bættu við leið til að skrá þig inn",
-        "sendMessage": "Senda virkjunarskilaboð",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "sláðu inn farsímann þinn eða tölvupóst",
-            "mobile": "sláðu inn farsímanúmerið þitt",
-            "email": "sláðu inn netfangið þitt",
-            "username": "notandanafn"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} reikningur",
-        "areUsing": "Þú ert að nota {{platform}} sem",
-        "noLongerUsing": "Þú ert ekki lengur tengdur {{platform}} sem",
-        "doAuth": "Skráðu þig inn með þessum reikningi",
-        "doSwitch": "Skiptu yfir í þennan reikning"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Eigandi",
-        "Admin": "Stjórnandi",
-        "Member": "Meðlimur",
-        "Guest": "Gestur",
-        "Host": "Gestgjafi"
-    },
-    "analytics": {
-        "Title": "Greining",
-        "Daily": "Daglega",
-        "Weekly": "Vikulega",
-        "Monthly": "Mánaðarlega",
-        "Application": "Umsókn",
-        "Pages": "Síður",
-        "Services": "Þjónusta",
-        "Faq": "Algengar spurningar",
-        "WeekDays": "Vikudagar"
+        "Owner": "Owner",
+        "Admin": "Admin",
+        "Member": "Member",
+        "Guest": "Guest",
+        "Host": "Host"
     }
 }

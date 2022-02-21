@@ -62,7 +62,7 @@ EOT;
 
 // get all CLI options
 $opts = array( 'h::', 's::', 'i::', 'o::', 'n::', 'f::', 'g::', 'r:', 'l:', 'p:');
-$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate:', 'locales:', 'plugins', 'plugin:', 'all', 'app');
+$longopts = array('help::', 'source::', 'in::', 'out::', 'null::', 'format::', 'google-format::', 'retranslate::', 'locales::', 'plugins', 'plugin:', 'all', 'app');
 $options = getopt(implode('', $opts), $longopts);
 if (isset($options['help'])) {
 	echo $help;

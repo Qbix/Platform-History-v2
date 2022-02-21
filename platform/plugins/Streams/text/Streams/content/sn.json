@@ -1,523 +1,532 @@
 {
+    "errors": {
+        "HiddenFromYou": "This content is hidden from you."
+    },
     "preview": {
-        "NewItemTitle": "Itsva Item"
+        "NewItemTitle": "New Item"
     },
     "labels": {
-        "Streams\/invited": "Vanhu vandakakokwa",
-        "Streams\/invitedMe": "Ndiani akandidana",
-        "AreYouAgree": "Unobvumirana nazvo here?",
-        "Yes": "Ehe",
-        "No": "Aihwa"
+        "Streams\/invited": "People I invited",
+        "Streams\/invitedMe": "Who invited me",
+        "DoYouAgree": "Do you agree?",
+        "Yes": "Yes",
+        "No": "No"
     },
     "interests": {
-        "Filter": "Unofarira chii?",
-        "CanAdd": "Kana iwe usingakwanisi kuwana zvauri kutsvaga, unogona kuwedzera chido chitsva pasi:",
-        "TrySynonyms": "Usazviona? Edza mamwe maonesheni.",
-        "AddUnderCategory": "Wedzera pasi muchikwata ...",
-        "Other": "Zvimwe",
-        "Unlisted": "Asina kunyorwa"
+        "Filter": "What are your interests?",
+        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
+        "TrySynonyms": "Don't see it? Try some synonyms.",
+        "AddUnderCategory": "Add under category...",
+        "Other": "Other",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Mharidzo yakagadzirirwa kuongororwa admin. Tora zvakare kuti urege kushandura.",
-        "noOneSaid": "Hapana akambotaura chero chinhu",
-        "closeChatButton": "Vhura mharidzo",
-        "closeChatConfirmTitle": "Vhura iyi mhinduro?",
-        "closeChatConfirm": "Unonyatsoziva here kuti unoda kuvhara iyi mharidzo?",
-        "closeChatConfirmYes": "Ehe",
-        "closeChatConfirmNo": "Aihwa",
-        "earlierComments": "pakutanga anotaura",
-        "Subscribed": "Nyarara Ziviso",
-        "Unsubscribed": "Tora Zviziviso",
-        "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha iyi hurukuro.",
-        "startedConversation": "akatanga hurukuro",
-        "RealTimeCall": "Nguva Yekufona Chaizvo",
-        "SearchByName": "Tsvaga nemazita",
+        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
+        "noOneSaid": "No one has said anything",
+        "closeChatButton": "Close chat",
+        "closeChatConfirmTitle": "Close this chat?",
+        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "Subscribed": "Notifications Enabled",
+        "Unsubscribed": "Notifications Muted",
+        "closeChatConfirmYes": "Yes",
+        "closeChatConfirmNo": "No",
+        "earlierComments": "earlier comments",
+        "startedConversation": "started a conversation",
+        "RealTimeCall": "Real Time Call",
+        "SearchByName": "Search by name",
         "Notifications": {
-            "Visit": "{{displayName}} ari kushanyira chat",
-            "Join": "{{displayName}} akajoinha chat",
-            "Leave": "{{displayName}} akasiya chat",
-            "RelatedTo": "{{displayName}} akatanga {{stream.displayType}}"
+            "Visit": "{{displayName}} is visiting the chat",
+            "Join": "{{displayName}} joined the chat",
+            "Leave": "{{displayName}} left the chat",
+            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Mharidzo kune (1000)",
-        "Streams\/chat\/message": "Vakati:",
-        "Streams\/changed": "Kuchinja mu {{stream.fields.title}}",
-        "Streams\/invite": "Iwe wakakokwa kune {{& stream.fields.title}}",
-        "Streams\/announcement": "Chiziviso mu {{& streams.fields.title}}",
-        "Streams\/access": "Akachinja kushandiswa kwemvura",
-        "Streams\/chat\/edit": "Mharidzo yehurukuro yakarongwa",
-        "Streams\/chat\/remove": "Mharidzo yekutaura yakabviswa",
-        "Streams\/closed": "Izvo zvavharwa",
-        "Streams\/task\/progress": "Kufambira mberi kwakaitwa pa {{stream.fields.title}}",
-        "Streams\/task\/complete": "Basa rakapedzwa: {{stream.fields.title}}",
-        "Streams\/task\/error": "Kukanganisa panguva: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "Mharidzo inopinda",
-        "Streams\/relatedTo\/Streams\/call": "New Call Yakatangwa mu {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nyowani {{relationDisplayType}} mu {{1000]}",
-        "Streams\/relatedFrom\/*": "Yakawedzerwa ku {{toTitle}} se {{1000]}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} akakureva iwe mumashoko",
-        "Streams\/call": "{{displayName}} yakatanga kuridza chaiko-nguva",
-        "ManageEmailSubscriptions": "maneja kunyoreswa kwako kweemail",
-        "IfUnsubscribe": "Kana iwe uchida kuzvinyoresa"
+        "ManageEmailSubscriptions": "manage your email subscriptions",
+        "IfUnsubscribe": "If you want to unsubscribe",
+        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/changed": "Changes in {{stream.fields.title}}",
+        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
+        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} has been closed",
+        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Incoming Message",
+        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
+        "Streams\/call": "{{displayName}} started a real-time call"
     },
     "invite": {
-        "messageContent": "Ndakakokwa iwe (1000)",
+        "command": "Invite",
+        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
+        "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
-            "chooseFromContacts": "Sarudza kubva kune Vaunogara",
-            "chooseAgainFromContacts": "Sarudzazve Kubva kune Vatengi",
-            "inviteSelectedContacts": "Kumbira Vatengi Vakasarudza",
-            "selectFromContacts": "Sarudza Kubva Neshamwari",
-            "photo": "Tora mufananidzo",
-            "photoInstruction": "Kana munhu akaongorora QR code yako iri mberi kwako, tora mufananidzo wavo",
-            "to": "Ku: {{Stream Title}}",
-            "go": "Enda",
-            "title": "Kumbira",
-            "placeholder": "Nhamba yefoni kana email",
-            "orInvite": "Kana kukoka vanhu nekushandisa:",
-            "QR": "{}} Kuunza kR code",
-            "QRtitle": "Tora iyi code QR",
-            "QRscanned": "Vakazviona!",
+            "chooseFromContacts": "Choose from your Contacts",
+            "chooseAgainFromContacts": "Choose Again from Contacts",
+            "inviteSelectedContacts": "Invite Selected Contacts",
+            "selectFromContacts": "Select From Contacts",
+            "userChooserPlaceholder": "Search by name",
+            "photo": "Take a photo",
+            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
+            "to": "To: {{Stream Title}}",
+            "go": "Go",
+            "title": "Invite",
+            "placeholder": "Mobile number or email address",
+            "orInvite": "Or invite people by using:",
+            "copyLink": "{{ClickOrTap}} to copy invite link ",
+            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
+            "QR": "{{ClickOrTap}} to generate QR code",
+            "QRtitle": "Scan this QR code",
+            "QRscanned": "They scanned it!",
+            "scannedQR": "{{ClickOrTap}} if the code was scanned",
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} kana iyo kodhi yakaongororwa",
-            "copyLink": "{{ClickOrTap}} kutevedzera kukoka link",
-            "userChooserPlaceholder": "Tsvaga nemazita"
+            "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, chengeta izvi",
-            "PleaseVisitLink": "Ndapota shanyirai link inotevera:",
-            "InvitingYou": "Ndiri kukukoka iwe ku {{title}}",
-            "HasInvitedYou": "Ndakakudanira kuna [1000]",
-            "HasMentionedYou": "{{displayName}} akakuudza iwe mu &quot;{{1000]}&quot;",
-            "YOUAREINVITED": "URI KUKOKWA!",
-            "AcceptInvite": "Gamuchira Kukoka"
+            "subject": "Hey, check this out",
+            "PleaseVisitLink": "Please visit the following link:",
+            "InvitingYou": "I am inviting you to {{title}}",
+            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
+            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
+            "YOUAREINVITED": "YOU ARE INVITED!",
+            "AcceptInvite": "Accept Invite"
         },
         "sms": {
-            "content": "Wakadanwa ku {{title}}. Ndapota tapota {{url}}"
+            "content": "You have been invited to {{title}}. Please tap {{url}}"
         },
         "notice": {
-            "text": "Iwe wakokwa. Ikozvino kugamuchira nekubatana."
-        },
-        "command": "Koka",
-        "youCanNowPaste": "Iwe unogona ikozvino kuisa iyi link kune imwe nzvimbo kukoka vanhu"
-    },
-    "followup": {
-        "mobile": {
-            "alert": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",
-            "confirm": "Kukokwa kunotumirwa kubva kunhamba yedu, iyo shamwari dzako dzisati dzaziva. Ungada here kutevera nemashoko ekukurumidza kuti uvazivise kuti kukokwa kwakabva kwauri, uchivakumbira kuti vanyanise hukama.",
-            "check": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza sms yako uye chenganisa chibatanidza!",
-            "CheckYourMobile": "Ndokumbira utarise SMS uye uteedzere mirayiridzo!"
-        },
-        "email": {
-            "alert": "Kukokwa kunotumirwa kubva kunzvimbo yedu, iyo shamwari dzako dzisati dzaziva. Dzokorora nemagwaro matsva kuitira kuti vazive kukokwa kwakabva kwamuri, vachivakumbira kuti vakanise kubatanidza.",
-            "confirm": "Kukokwa kunotumirwa kubva kunzvimbo yedu, iyo shamwari dzako dzisati dzaziva. Ungada here kutevera nemashoko ekukurumidza kuti uvazivise kuti kukokwa kwakabva kwauri, uchivakumbira kuti vanyanise hukama.",
-            "subject": "Wakawana kukokwa here?",
-            "body": "Hei, ndangokutumira kukoka kune {{app}} app. Ndapota chengetedza email yako uye chengetedza chibatanidzi mukati maro!",
-            "CheckYourEmail": "Ndokumbira utarise email yako uye uteedzere mirayiridzo!"
-        }
-    },
-    "webrtc": {
-        "allow": {
-            "microphoneTitle": "Shandisa Microphone",
-            "cameraTitle": "Svumira Kamera",
-            "cameraAndMicrophoneTitle": "Ita kuti Kamera nemakrofoni vigone",
-            "dialogTitle": "Kubatanidza",
-            "microphoneBtn": "Gonesa Microphone",
-            "cameraBtn": "Gonesa Kamera",
-            "cameraAndMicrophoneBtn": "Gonesa kamera uye Microphone"
-        },
-        "webInstructionsDialog": {
-            "dialogTitle": "Mirayiridzo",
-            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Kuti uishandise ndapota tevera matanho aya:",
-            "point1": "Enda ku &quot;Zvirongwa&quot; -&gt; &quot;Yepamberi&quot; -&gt; &quot;Zvekuvanzika uye chengetedzo&quot; -&gt; &quot;Saiti Zvirongwa&quot; -&gt; &quot;Kamera&quot; kana &quot;Saiti Zvirongwa&quot; -&gt; &quot;Microphone&quot;",
-            "point2": "Bvisa {{hostname}} kubva ku &quot;Vimba&quot; runyorwa"
-        },
-        "webIosInstructionsDialog": {
-            "dialogTitle": "Mirayiridzo",
-            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Ndokumbirawo mutangire zvakare peji rino uye musimbise kusvika kune {{kind}} yekubatana nemusangano."
-        },
-        "androidInstructionsDialog": {
-            "dialogTitle": "Mirayiridzo",
-            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Kuti uishandise ndapota tevera matanho aya:",
-            "point1": "Enda kune yako Android Zvigadziriso",
-            "point2": "Vhura &quot;Mapepa &amp; notices&quot;",
-            "point3": "Tsvaga &quot;{{communityName}} uye uvhure",
-            "point4": "Tinya paMvumo",
-            "point5": "Gonesa {{kind}}"
-        },
-        "iosInstructionsDialog": {
-            "dialogTitle": "Mirayiridzo",
-            "permissionDenied": "Mvumo ye {{kind}} inorambwa. Kuti uishandise ndapota tevera matanho aya:",
-            "point1": "Enda kune yako iOS Zvirongwa",
-            "point2": "Vhura &quot;Kuvanzika&quot;",
-            "point3": "Tsvaga {{kind}} uye uvhure",
-            "point4": "Tsvaga &quot;{{communityName}}&quot; uye gonesa"
-        },
-        "notices": {
-            "youJoinedRoom": "Iwe wakabatana mukamuri",
-            "joining": "Join: {{userName}}",
-            "sbLeftRoom": "{{999]} akabuda mukamuri",
-            "youLeftRoom": "Wakabuda mumba",
-            "codeCopied": "Wakabuda mumba",
-            "sbBeganFbLive": "{{userName}} akatanga kushambadzira iyi call mu Facebook",
-            "sbStoppedFbLive": "{{userName}} yakamira kutepfenyura iyi call mu Facebook",
-            "youBeganFbLive": "Wakatanga kushambadzira iyi call mu Facebook",
-            "youStoppedFbLive": "Wakamira kushambadzira iyi call mu Facebook",
-            "linkCopiedToCb": "Chibatanidza chakapepetwa ku clipboard",
-            "codeCopiedToCb": "Code yakapihwa ku clipboard",
-            "userHasNoVideo": "Mutori wechikamu haana vhidhiyo",
-            "openInBrowserAlert": "Vhura chinongedzo muSafari browser kuti ubatane nemusangano.",
-            "youBeganVideoRecording": "Wakatanga kurekodha musangano uyu",
-            "youStoppedVideoRecording": "Wakarega kunyora musangano uyu",
-            "switchingRoom": "Kuchinja imba ...",
-            "forceDisconnecting": "Unozobviswa mukati memasekonzi mashanu",
-            "youStartedLive": "Iwe wakatanga kutepfenyura kufona uku kune tsika RTMP",
-            "youStoppedLive": "Wakamira kutepfenyura kufona uku kune tsika RTMP",
-            "sbStartedLiveStreaming": "{{userName}} akatanga kurarama",
-            "sbStoppedLiveStreaming": "{{userName}} zvakapera",
-            "liveStopped": "Kukanganisa pakutumira vhidhiyo kumagumo kwakaitika"
-        },
-        "settingsPopup": {
-            "webCamera": "Web Camera",
-            "screenSharing": "Kugovera Screen",
-            "shareAnotherScreen": "Goverana imwe skrini",
-            "turnOffCameras": "Dzima makamera ese",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Mira Facebook Livestream",
-            "fbLiveTitle": "Rarama Chinyorwa",
-            "fbLiveDescription": "Rarama Tsananguro",
-            "fbOnlyMeLiveAccess": "Ini chete",
-            "fbFriendsAccess": "Shamwari",
-            "fbPublicAccess": "Ruzhinji",
-            "fbStartLive": "Enda Kurarama",
-            "fbStopLive": "End Live",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "turnOffVideo": "Dzima kamera \/ kugovera skrini",
-            "turnOffScreenSharing": "Dzima kugovera skrini",
-            "cameraIsTurnedOff": "Kamera yakadzimwa",
-            "startRecording": "Kutanga Kurekodha",
-            "stopRecording": "Regedza Kurekodha",
-            "recordingInProgress": "Rekodha riri kuenderera ...",
-            "publishOnTimeline": "Shambadza pane mutsara wenguva",
-            "publishToGroup": "Dhinda kune boka",
-            "turnOffAudioInput": "Nyarara maikorofoni",
-            "micIsTurnedOff": "Maikorofoni yakadzimwa",
-            "start": "Kutanga",
-            "stop": "Mira",
-            "streamingSettings": "Zvirongwa",
-            "streamToRTMP": "Tenderera kune yakasarudzika RTMP"
-        },
-        "participantsPopup": {
-            "disconnect": "Regedza",
-            "floatingScreens": "Kuyerera Zviso",
-            "tiledScreens": "MaTiles Screen",
-            "loudestExceptMe": "Anodada Kunze Kwangu",
-            "maximizeLoudest": "Kurisa Loudest",
-            "staticMaximized": "Static Maximized",
-            "manual": "Manual",
-            "fullScreen": "Yakazara Screen",
-            "turnOffCamera": "Viga vhidhiyo",
-            "turnOffAudio": "Ridza mhere",
-            "turnOffScreenSharing": "Viga kugoverana skrini",
-            "turnOnCamera": "Ratidza vhidhiyo",
-            "turnOnAudio": "Regedza odhiyo",
-            "turnOnScreenSharing": "Ratidza kugovana skrini"
-        },
-        "notAllowedToJoinCall": "Iwe hauna mvumo yekujoinha rwizi urwu.",
-        "streamTitle": "{{1}} chaiyo yekufona",
-        "preview": {
-            "preamble": "Musangano:",
-            "Meeting": "Musangano",
-            "MeetingEnded": "Musangano wakapera"
-        },
-        "preparing": {
-            "micIsOff": "Mic yakadzimwa",
-            "micIsOn": "Mic iripo",
-            "cameraIsOff": "Kamera yakavharwa",
-            "cameraIsOn": "Kamera yakavhurwa",
-            "screenSharingIsOn": "Screensharing iriko",
-            "screenSharingIsOff": "Goverana skrini",
-            "joinNow": "Joinha Kufona"
+            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
         }
     },
     "messages": {
         "html": {
-            "posted": "yakatumira <em>{{message.fields.type}}<\/em> meseji ku {{stream.fields.title}}"
+            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "yakataura",
+            "commentedOn": "commented on",
+            "startedCallIn": "started a call in",
             "in": "in",
-            "body": "mu {{& url}}: {{1000]}",
+            "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "yakatumirwa kuna",
-                "byAvatar": "na {{avatar.displayName}}"
+                "hasBeenPostedTo": "has been posted to",
+                "byAvatar": "by {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ane chitsva {{instructions.fromDisplayType}}",
-                "byAvatar": "yakawedzerwa ne {{avatar.displayName}}"
-            },
-            "startedCallIn": "akatanga kufona mukati"
+                "hasANew": "has a new {{instructions.fromDisplayType}}",
+                "byAvatar": "added by {{avatar.displayName}}"
+            }
+        }
+    },
+    "followup": {
+        "mobile": {
+            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
+            "CheckYourMobile": "Please check SMS and follow instructions!"
+        },
+        "email": {
+            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
+            "subject": "Did you get an invite?",
+            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
+            "CheckYourEmail": "Please check your email and follow instructions!"
+        }
+    },
+    "participating": {
+        "Title": "Title",
+        "Subscribed": "Subscribed",
+        "Participants": "Participants",
+        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
+        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
+        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
+        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
+        "RemoveParticipant": "Remove participant",
+        "Identifiers": "Identifiers",
+        "Devices": "Devices",
+        "Streams": "Streams"
+    },
+    "webrtc": {
+        "notAllowedToJoinCall": "You don't have permission to join this stream.",
+        "streamTitle": "{{1}} started a live call",
+        "allow": {
+            "dialogTitle": "Connecting",
+            "microphoneBtn": "Enable Microphone",
+            "cameraBtn": "Enable Camera",
+            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+        },
+        "preparing": {
+            "micIsOff": "Mic is off",
+            "micIsOn": "Mic is on",
+            "cameraIsOff": "Camera is off",
+            "cameraIsOn": "Camera is on",
+            "screenSharingIsOn": "Screensharing is on",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Join the Call"
+        },
+        "webInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
+            "point2": "Remove {{hostname}} from \"Block\" list"
+        },
+        "webIosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+        },
+        "androidInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your Android Settings",
+            "point2": "Open \"Apps & notifications\"",
+            "point3": "Find \"{{communityName}}\" and open it",
+            "point4": "Tap on Permissions",
+            "point5": "Enable {{kind}}"
+        },
+        "iosInstructionsDialog": {
+            "dialogTitle": "Instructions",
+            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
+            "point1": "Go to your iOS Settings",
+            "point2": "Open \"Privacy\"",
+            "point3": "Find {{kind}} and open it",
+            "point4": "Find \"{{communityName}}\" and enable"
+        },
+        "notices": {
+            "youJoinedRoom": "You joined the room",
+            "joining": "Joining: {{userName}}",
+            "sbLeftRoom": "{{userName}} left the room",
+            "switchingRoom": "Switching room...",
+            "forceDisconnecting": "You will be disconnected within 5 seconds",
+            "forceDisconnectingImmediately": "You was disconnected by a host",
+            "youLeftRoom": "You left the room",
+            "codeCopied": "You left the room",
+            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
+            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
+            "youBeganFbLive": "You began broadcasting this call in Facebook",
+            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
+            "youStartedLive": "You began broadcasting this call to custom RTMP",
+            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
+            "sbStartedLiveStreaming": "{{userName}} started live",
+            "sbStoppedLiveStreaming": "{{userName}} ended live",
+            "liveStopped": "Error while sending video to endpoint occurred",
+            "youBeganVideoRecording": "You began recording this conference",
+            "youStoppedVideoRecording": "You stopped recording this conference",
+            "linkCopiedToCb": "Link copied to clipboard",
+            "codeCopiedToCb": "Code copied to clipboard",
+            "userHasNoVideo": "Participant has no video",
+            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+        },
+        "settingsPopup": {
+            "dialogTitle": "Video Settings",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Share another screen",
+            "turnOffCameras": "Turn off camera",
+            "turnOffVideo": "Turn off camera\/screen sharing",
+            "turnOffAudioInput": "Mute microphone",
+            "turnOffScreenSharing": "Turn off screen sharing",
+            "cameraIsTurnedOff": "Camera is turned off",
+            "micIsTurnedOff": "Microphone is turned off",
+            "startFBLive": "Start Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "startRecording": "Start Recording",
+            "stopRecording": "Stop Recording",
+            "start": "Start",
+            "stop": "Stop",
+            "recordingInProgress": "Recording is in progress...",
+            "fbLiveTitle": "Title of Livestream",
+            "fbLiveDescription": "Describe your Livestream. What is it about?",
+            "fbOnlyMeLiveAccess": "Only Me",
+            "fbFriendsAccess": "Friends",
+            "fbPublicAccess": "Public",
+            "publishOnTimeline": "Publish on timeline",
+            "publishToGroup": "Publish to group",
+            "fbStartLive": "Go Live",
+            "fbStopLive": "End Livestream",
+            "streamingSettings": "Settings",
+            "fbEmbedCode": "Embed",
+            "copy": "Copy",
+            "streamToRTMP": "Stream to custom RTMP",
+            "startBroadcasting": "Start broadcasting",
+            "broadcastingInProgress": "Broadcasting is in progress"
+        },
+        "audioSettings": {
+            "dialogTitle": "Audio Settings",
+            "speakers": "Speakers",
+            "microphone": "Microphone"
+        },
+        "participantsPopup": {
+            "dialogTitle": "Participant Settings",
+            "disconnect": "Disconnect",
+            "floatingScreens": "Floating Screens",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Loudest Except Me",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
+            "fullScreen": "Full Screen",
+            "manual": "Manual",
+            "turnOffCamera": "Hide video",
+            "turnOffAudio": "Mute audio",
+            "turnOffScreenSharing": "Hide screen sharing",
+            "turnOnCamera": "Show video",
+            "turnOnAudio": "Unmute audio",
+            "turnOnScreenSharing": "Show screen sharing"
+        },
+        "streamingSettings": {
+            "title": "Streaming Settings"
+        },
+        "preview": {
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Akokwa",
-            "description": "Inbox yekukoka"
+            "displayType": "Invited",
+            "description": "Inbox for invitations"
         },
         "Streams\/resource": {
             "displayType": "Resource",
-            "description": "rwizi rwekutarisira kuwana kune chisungo uye kutumira mameseji nezvekugadzirisa"
+            "description": "stream for managing access to a resource and posting messages about updates"
         },
         "Streams\/task": {
-            "description": "yekugamuchira zvigadziriso nezve kufambira mberi pane rimwe basa",
-            "displayType": "Basa"
+            "description": "for receiving updates about progress on a certain task",
+            "displayType": "Task"
         },
         "Streams\/tasks": {
-            "description": "chikamu chemabasa",
-            "displayType": "Mabasa"
+            "description": "category for tasks",
+            "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "chiitiko chakajairwa nenhengo dzenharaunda",
-            "displayType": "Zvakaitika kuvanhu vese venharaunda"
+            "description": "a common experience for members of a community",
+            "displayType": "Common experience for members of a community"
         },
         "Streams\/greeting": {
-            "description": "kukwazisa uko mushandisi anogona kuzvisuma ivo pachavo",
-            "displayType": "Kukwazisa"
+            "description": "greeting with which a user can introduce themselves",
+            "displayType": "Greeting"
         },
         "Streams\/number": {
-            "displayType": "Nhamba",
-            "description": "nhamba yemasvomhu"
+            "displayType": "Number",
+            "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Zuva",
-            "description": "zuva"
+            "displayType": "Date",
+            "description": "date"
         },
         "Streams\/text": {
-            "displayType": "Zvinyorwa",
-            "description": "muviri wezvinyorwa"
+            "displayType": "Text",
+            "description": "body of text"
         },
         "Streams\/text\/small": {
-            "displayType": "Zvinyorwa",
-            "description": "muviri mudiki wezvinyorwa"
+            "displayType": "Text",
+            "description": "small body of text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Zvinyorwa",
-            "description": "muviri wepakati wezvinyorwa"
+            "displayType": "Text",
+            "description": "medium body of text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Chikero chetsamba yemumhepo",
-            "description": "chikero chetsamba yemumhepo"
+            "displayType": "Email Address",
+            "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Nhamba yenhare",
-            "description": "nhamba yenhare"
+            "displayType": "Phone Number",
+            "description": "phone number"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "batani pawebhu"
+            "description": "link on the web"
         },
         "Streams\/image": {
-            "displayType": "Mufananidzo",
-            "description": "mufananidzo unoona",
-            "newItem": "Wedzera Mufananidzo"
+            "displayType": "Image",
+            "description": "visual image",
+            "newItem": "Add Image"
         },
         "Streams\/images": {
-            "displayType": "Image Garari",
-            "description": "gallery yemifananidzo"
+            "displayType": "Image Gallery",
+            "description": "gallery of images"
         },
         "Streams\/album": {
-            "displayType": "Rwiyo",
-            "description": "iyo albhamu kune yakasiyana-siyana mhau inoenderana"
+            "displayType": "Album",
+            "description": "an album to which various media is related"
         },
         "Streams\/file": {
-            "displayType": "Faira",
-            "description": "uploaded faira",
-            "newItem": "Wedzera Faira"
+            "displayType": "File",
+            "description": "uploaded file",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Vadivelu Comedy Audio Clip",
-            "description": "clip yekuteerera",
-            "newItem": "Wedzera Audio"
+            "displayType": "Audio Clip",
+            "description": "audio clip",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Vhidhiyo Dura",
-            "description": "clip yevhidhiyo",
-            "newItem": "Wedzera Vhidhiyo"
+            "displayType": "Video Clip",
+            "description": "video clip",
+            "newItem": "Add Video"
+        },
+        "Streams\/pdf": {
+            "displayType": "PDF document",
+            "description": "PDF document",
+            "newItem": "Add PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "rarama odhiyo kana vhidhiyo"
+            "description": "live audio or video"
         },
         "Streams\/category": {
-            "displayType": "Rudzi",
-            "description": "chikamu chinogona kufambidzana nedzimwe nzizi"
+            "displayType": "Category",
+            "description": "a category to which other streams can be related"
         },
         "Streams\/participating": {
-            "displayType": "Kubatanidzwa Index",
-            "description": "hova dzinoenderana \/ hadziyane neizvi kana mushandisi ajoina \/ mashizha"
+            "displayType": "Participating Index",
+            "description": "streams are related\/unrelated to this when a user joins\/leaves"
         },
         "Streams\/interest": {
-            "displayType": "Kufarira",
-            "description": "inomiririra kufarira kwemushandisi mune imwe nyaya"
+            "displayType": "Interest",
+            "description": "represents a user's interest in a certain topic"
         },
         "Streams\/incoming": {
-            "displayType": "Inouya",
-            "description": "kuenda kwema meseji kunotumirwa nevamwe vashandisi"
+            "displayType": "Incoming",
+            "description": "destination for messages sent by other users"
         },
         "Streams\/chat": {
-            "displayType": "Kukurukurirana",
-            "description": "hurukuro pakati pevashandisi, ine nhoroondo"
+            "displayType": "Conversation",
+            "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Nguva Yekufona",
-            "description": "vhiki chaiyo vhidhiyo \/ kudhindwa kudana"
-        },
-        "Streams\/pdf": {
-            "displayType": "PDF gwaro",
-            "description": "PDF gwaro",
-            "newItem": "Wedzera PDF"
+            "displayType": "Real-Time Call",
+            "description": "a real time video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Mubvunzo",
-            "description": "rwizi rwemibvunzo"
+            "displayType": "Question",
+            "description": "question stream"
         },
         "Streams\/answer": {
-            "displayType": "Pindura",
-            "description": "mhinduro rukova"
+            "displayType": "Answer",
+            "description": "answer stream"
         },
         "Streams\/calls": {
-            "displayType": "Kudanwa",
-            "description": "chikamu cheRukova \/ webrtc",
-            "MaxRelationsExceeded": "Max mafoni akapfuura"
+            "displayType": "Calls",
+            "description": "category for Streams\/webrtc",
+            "MaxRelationsExceeded": "Max calls exceeded"
         }
     },
-    "participating": {
-        "Title": "Musoro",
-        "Subscribed": "Vakanyoreswa",
-        "Participants": "Vatori vechikamu",
-        "AreYouSureRemoveIdentifier": "Une chokwadi chekubvisa chinozivisa?",
-        "AreYouSureUnsubscribeIdentifier": "Une chokwadi chekunyora ichi chinongedzo? Iyo inodzima notices kune ino identifier.",
-        "AreYouSureUnsubscribeDevice": "Une chokwadi chekunyora chishandiso ichi? Iyo inodzima zviziviso zvemudziyo uyu.",
-        "Identifiers": "Identifiers",
-        "Devices": "Zvishandiso",
-        "Streams": "Miromo",
-        "AreYouSureRemoveParticipant": "Une chokwadi here kuti iwe unoda kubvisa uyu mutambi?",
-        "RemoveParticipant": "Bvisa mutambi"
-    },
     "menu": {
-        "placeholder": "Type peji rezita",
-        "ModTab": "Chinja Chinhu",
-        "Save": "Chengetedza",
+        "placeholder": "type page title",
+        "ModTab": "Modify Item",
+        "Save": "Save",
         "Delete": "Delete",
         "Submenu": "Submenu"
     },
-    "errors": {
-        "HiddenFromYou": "Izvi zvirimo zvakavanzika kubva kwauri."
-    },
     "audio": {
         "record": "Record",
-        "reset": "Dzorera zvakare",
-        "edit": "Hora",
-        "title": "zita",
-        "description": "tsananguro",
-        "upload": "Isa",
-        "link": "Batanidza",
-        "setUrl": "Gadza URL",
-        "save": "Sevha",
-        "setClip": "Cheka Kunze Clip",
-        "invalidURL": "URL isiriyo",
-        "invalidFile": "Faira Haisiriyo",
-        "errorNoSource": "Hapana odhiyo sosi",
-        "uploadLimit": "Saizi yakakura saizi: {{size}}",
-        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura faira iri {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No audio source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "video": {
-        "reset": "Dzorera zvakare",
-        "edit": "Hora",
-        "title": "zita",
-        "description": "tsananguro",
-        "upload": "Isa",
-        "link": "Batanidza",
-        "setUrl": "Gadza URL",
-        "save": "Sevha",
-        "setClip": "Cheka Kunze Clip",
-        "invalidURL": "URL isiriyo",
-        "invalidFile": "Faira Haisiriyo",
-        "errorNoSource": "Hapana vhidhiyo sosi",
-        "uploadLimit": "Saizi yefaira",
-        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura faira iri {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No video source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "pdf": {
-        "reset": "Dzorera zvakare",
-        "edit": "Hora",
-        "title": "zita",
-        "description": "tsananguro",
-        "upload": "Isa",
-        "link": "Batanidza",
-        "setUrl": "Gadza URL",
-        "save": "Sevha",
-        "setClip": "Cheka Kunze Clip",
-        "invalidURL": "URL isiriyo",
-        "invalidFile": "Faira Haisiriyo",
-        "errorNoSource": "Kwete pdf sosi",
-        "uploadLimit": "Saizi yakakura saizi: {{size}}",
-        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura faira iri {{size}}"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No pdf source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "image": {
-        "reset": "Dzorera zvakare",
-        "edit": "Hora",
-        "title": "zita",
-        "description": "tsananguro",
-        "upload": "Isa",
-        "link": "Batanidza",
-        "setUrl": "Gadza URL",
-        "save": "Sevha",
-        "setClip": "Cheka Kunze Clip",
-        "invalidURL": "URL isiriyo",
-        "invalidFile": "Faira Haisiriyo",
-        "errorNoSource": "Hapana chinyorwa chinyorwa",
-        "uploadLimit": "Saizi yakakura saizi: {{size}}",
-        "errorFileSize": "Ndine urombo, asi faira rakakura kwazvo.<br> Saizi yakakura iri {{size}}",
-        "uploadedImage": "Mufananidzo wakaiswa",
-        "imageTitle": "Mufananidzo zita"
+        "reset": "Reset",
+        "edit": "Edit",
+        "title": "title",
+        "description": "description",
+        "upload": "Upload",
+        "link": "Link",
+        "setUrl": "Set URL",
+        "save": "Save",
+        "uploadedImage": "Uploaded image",
+        "imageTitle": "Image title",
+        "setClip": "Cut Out Clip",
+        "invalidURL": "Invalid URL",
+        "invalidFile": "Invalid File",
+        "errorNoSource": "No image source",
+        "uploadLimit": "Max file size: {{size}}",
+        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
     },
     "questions": {
-        "Questions": "Mibvunzo",
-        "Answers": "Mhinduro",
-        "AnswerQuestion": "Pindura Mubvunzo",
-        "SetYourAnswer": "Ndapota pindura mubvunzo",
-        "NewQuestion": "Mubvunzo Mutsva",
-        "NewAnswer": "Mhinduro Nyowani",
-        "AnswerDetails": "Pindura Zvidimbu",
-        "answerOption": "Sarudzo",
+        "Questions": "Questions",
+        "Answers": "Answers",
+        "AnswerQuestion": "Answer Question",
+        "SetYourAnswer": "Please answer the question",
+        "NewQuestion": "New Question",
+        "NewAnswer": "New Answer",
+        "AnswerDetails": "Answer Details",
+        "answerOption": "Option",
         "answerOptionExclusive": "Exclusive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "mhinduro yemahara ...",
-        "SaveQuestion": "Sevha Mubvunzo",
-        "SaveAnswer": "Sevha Mhinduro",
-        "AddAnotherAnswer": "Wedzera imwe mhinduro",
-        "ErrorAnswers": "Ndokumbirawo uwedzere kunyange imwe mhinduro",
-        "AlreadyAnswered": "Yatopindurwa",
-        "TitlePlaceholder": "Nyora mubvunzo wako",
-        "ContentPlaceholder": "Isa chero ruzivo rwekuwedzera pano kubatsira vanhu kupindura",
-        "ErrorTitle": "Mubvunzo unodiwa",
-        "Placeholder": "Chinobata"
+        "FreeAnswer": "Write your answer here",
+        "SaveQuestion": "Save Question",
+        "SaveAnswer": "Save Answer",
+        "AddAnotherAnswer": "Add another answer",
+        "ErrorAnswers": "Please add even one answer",
+        "AlreadyAnswered": "Already answered",
+        "TitlePlaceholder": "Type your question",
+        "ContentPlaceholder": "Put any additional information here to help people answer",
+        "ErrorTitle": "Question required",
+        "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Zvakaitika",
-        "DefineTitle": "Ndokumbira utsanangure zita remusoro",
-        "Create": "Gadzira"
+        "NewExperience": "New Experience",
+        "DefineTitle": "Please define a title",
+        "Create": "Create"
     },
     "calls": {
-        "SettingsTitle": "Kudanwa",
-        "MaxCalls": "Max anodana",
-        "Update": "Kwidziridza",
-        "NoCallsYet": "Hapana mafoni parizvino",
-        "CallReasonTitle": "Kufonera uku ndekwei?",
-        "WaitingRoom": "Imba Yekumirira"
+        "SettingsTitle": "Calls",
+        "MaxCalls": "Max calls",
+        "Update": "Update",
+        "NoCallsYet": "No calls yet",
+        "CallReasonTitle": "What is this call about?",
+        "WaitingRoom": "Waiting Room"
     }
 }

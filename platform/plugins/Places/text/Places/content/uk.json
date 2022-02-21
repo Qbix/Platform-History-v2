@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "протягом {{1}}"
+        "Title": "within {{1}}"
     },
     "units": {
-        "meter": "метр",
-        "meters": "метрів",
-        "kilometer": "кілометр",
-        "kilometers": "кіометри",
-        "km": "км",
-        "mile": "миля",
-        "miles": "миль",
-        "mi": "ми",
-        "foot": "ногою",
-        "feet": "ноги",
-        "inches": "дюймів"
+        "meter": "meter",
+        "meters": "meters",
+        "kilometer": "kilometer",
+        "kilometers": "kiometers",
+        "km": "km",
+        "mile": "mile",
+        "miles": "miles",
+        "mi": "mi",
+        "foot": "foot",
+        "feet": "feet",
+        "inches": "inches"
     },
     "location": {
-        "interested": "Мене цікавлять речі, що відбуваються в межах {{select}}",
-        "update": "Оновіть моє місцезнаходження",
-        "prompt": "{{ClickOrTap}} тут <br> встановіть <br> Розташування",
-        "myCurrentLocation": "Моє поточне місцезнаходження",
-        "enterAddress": "Введіть адресу",
-        "enterPostcode": "Введіть свій поштовий індекс \/ поштовий індекс",
+        "interested": "I'm interested in things taking place within {{select}} of",
+        "update": "Update My Location",
+        "set": "Set My Location",
+        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
+        "myCurrentLocation": "My current location",
+        "enterAddress": "Enter an address",
+        "enterPostcode": "Please enter your postcode \/ zipcode",
         "create": {
-            "action": "Додати місце",
-            "title": "Нове місцезнаходження",
-            "nameYourLocation": "Назвіть своє місцезнаходження"
+            "action": "Add Location",
+            "title": "New Location",
+            "nameYourLocation": "Name your location"
         },
         "confirm": {
-            "title": "Зберегти це місце?",
-            "message": "Чи плануєте ви використовувати це місце знову в майбутньому?",
-            "ok": "Так",
-            "cancel": "Ні"
+            "title": "Save this location?",
+            "message": "Do you plan to use this location again in the future?",
+            "ok": "Yes",
+            "cancel": "No"
         },
         "add": {
-            "title": "Назвіть це місце розташування",
-            "placeholder": "Будинок, робота і т.д.",
-            "ok": "Зберегти"
+            "title": "Name this location",
+            "placeholder": "Home, Work etc.",
+            "ok": "Save"
         },
         "dialog": {
-            "title": "Виберіть Розташування"
-        },
-        "set": "Встановити &quot;Моє місцезнаходження&quot;"
+            "title": "Choose Location"
+        }
     },
     "areas": {
-        "filterPlaceholder": "Будь-яка область в цьому місці?",
-        "newArea": "Нова область",
-        "promptTitle": "Введіть назву області:",
-        "absent": "Установіть область",
-        "error": "Помилка",
-        "exist": "Територія вже існує",
-        "addNewArea": "Додати нову область",
-        "add": "Додати"
+        "filterPlaceholder": "Any area inside this location?",
+        "newArea": "New area",
+        "promptTitle": "Enter a name for the area:",
+        "absent": "Please set area",
+        "error": "Error",
+        "exist": "Area already exist",
+        "addNewArea": "Add new area",
+        "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "колекція локацій",
-            "displayType": "Місцеположення"
+            "description": "a collection of locations",
+            "displayType": "Locations"
         },
         "Places\/location": {
-            "description": "Представляє будівлю, місце проведення, корабель, парк тощо.",
-            "displayType": "Розташування"
+            "description": "Represents a building, venue, ship, park, etc.",
+            "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Представляє зону в межах локації, наприклад, кімнату або номер",
-            "displayType": "Площа"
+            "description": "Represents an area within a location, such as a room or suite",
+            "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Уособлює підлогу в будівлі або кораблі",
-            "displayType": "Підлога"
+            "description": "Represents a floor in a building or ship",
+            "displayType": "Floor"
         },
         "Places\/column": {
-            "description": "Представляє стовпчик у будівлі чи кораблі",
-            "displayType": "Стовпчик"
+            "description": "Represents a column in a building or ship",
+            "displayType": "Column"
         },
         "Places\/nearby": {
-            "description": "Категорія речей на певній відстані від геогашу",
-            "displayType": "Поруч місця"
+            "description": "Category for things within a certain distance of a geohash",
+            "displayType": "Near by places"
         },
         "Places\/interest": {
-            "description": "Категорія речей, що знаходяться на певній відстані від геогашу, що відповідає інтересам",
-            "displayType": "Визначні місця"
+            "description": "Category for things within a certain distance of a geohash, matching an interest",
+            "displayType": "Places interest"
         }
     }
 }

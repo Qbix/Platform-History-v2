@@ -4313,7 +4313,7 @@ var _seen = {};
  * @event get.onError
  */
 MTotal.get.onError = new Q.Event();
-MTotal.seen.cache = Q.Cache['document']("Streams.Message.Total.seen", 100);
+MTotal.seen.cache = Q.Cache['local']("Streams.Message.Total.seen", 100);
 
 /**
  * Constructs a participant from fields, which are typically returned from the server.
@@ -5395,7 +5395,7 @@ function _onResultHandler(subject, params, args, shared, original) {
 	if (Streams.isStream(subject)) {
 		subject.retain(key);
 	} else {
-		if (subject.stream) {
+		if (Streams.isStream(subject.stream)) {
 			subject.stream.retain(key);
 		}
 		Q.each(subject.streams, 'retain', [key]);
@@ -5435,7 +5435,7 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 		cache: Q.Cache[where]("Streams.related", 100),
 		throttle: 'Streams.related',
 		prepare: function (subject, params, callback) {
-			if (params[0]) { // some error
+			if (params[0] || !Q.isEmpty(subject.errors)) { // some error
 				return callback(subject, params);
 			}
 			var keys = Object.keys(subject.relatedStreams).concat(['stream']);
@@ -5638,25 +5638,21 @@ Q.onInit.add(function _Streams_onInit() {
 									label = [label];
 								}
 								// convert labels to readable
-								Q.each(Q.getObject("labels", Users), function (labelKey) {
+								Q.each(Users.labels, function (labelKey) {
 									var index = label.indexOf(labelKey);
 									if (index < 0 || !this.title) {
 										return;
 									}
-
 									label[index] = this.title;
 								});
-
 								html += " as " + label.join(', ');
 							}
 
-							html += "<br>" + content.labels.AreYouAgree;
+							html += "<br>" + content.labels.DoYouAgree;
 							Q.confirm(html, function (res) {
-								if (!res) {
-									return;
+								if (res) {
+									Q.handle(inviteUrl);
 								}
-
-								Q.handle(inviteUrl);
 							}, {
 								ok: content.labels.Yes,
 								cancel: content.labels.No

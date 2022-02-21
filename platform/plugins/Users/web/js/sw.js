@@ -18,9 +18,7 @@ self.addEventListener('push', function (event) {
 		data: data
 	}, data);
 
-	if (options.requireInteraction === undefined) {
-		options.requireInteraction = false;
-	}
+	data.requireInteraction = !!data.requireInteraction;
 
 	if (data.collapseId) {
 		options.tag = data.collapseId;

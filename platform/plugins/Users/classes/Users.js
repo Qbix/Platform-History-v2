@@ -195,11 +195,14 @@ Users.pushNotifications = function (userIds, notifications, callback, options, f
  * @method appId
  * @static
  * @param {String} platform The platform or platform for the app
- * @param {String} appId Can be either an internal or external app id
+ * @param {String} [appId=Q.app.name] Can be either an internal or external app id
  * @return {Object} Has keys "appId" and "appInfo"
  */
 Users.appInfo = function (platform, appId)
 {
+	if (!appId) {
+		appId = Q.app.name;
+	}
 	var apps = Q.Config.get(['Users', 'apps', platform], []);
 	var appInfo, id;
 	if (apps[appId]) {

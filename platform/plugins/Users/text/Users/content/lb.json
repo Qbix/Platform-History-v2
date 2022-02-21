@@ -1,132 +1,132 @@
 {
+    "analytics": {
+        "Title": "Analytics",
+        "Daily": "Daily",
+        "Weekly": "Weekly",
+        "Monthly": "Monthly",
+        "Application": "Application",
+        "Pages": "Pages",
+        "Services": "Services",
+        "Faq": "Faq",
+        "WeekDays": "Week Days"
+    },
     "actions": {
-        "LogIn": "aloggen",
-        "LogOut": "ausloggen"
+        "LogIn": "log in",
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} als meng primär {{2}}",
-        "ChoosePassPhrase": "Kuckt eng <strong>Passform<\/strong> ze verbannen mat. <br> Eng einfach Phrase besteet aus e puer Wierder, déi Dir ganz einfach erënnert.",
-        "ChoosePassPhraseSeeSuggestions": "Wielt eng gutt <strong>Passuerdnung<\/strong> fir Äre Kont ze schützen. Kuckt d&#39;Suggestioun fir e puer Ideen.",
-        "LogOutAndTryAgain": "Log Out a Verspriechen",
-        "IfYouFeel": "Wann Dir Iech fillt, wat geschitt ass, kënnt Dir",
-        "SetIdentifierButtonTitle": "nei ufänken"
+        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "LogOutAndTryAgain": "Log Out and Try Again",
+        "IfYouFeel": "If you feel something went wrong, you can ",
+        "SetIdentifierButtonTitle": "start over"
     },
     "session": {
-        "GetStarted": "Ufänken"
+        "GetStarted": "Get Started"
     },
     "authorize": {
-        "GetStarted": "Ufänken",
-        "Authorize": "Autorisatioun",
-        "TermsLabel": "Ech hunn gelies an eens <br> fir de {{link}}",
-        "TermsTitle": "Konditiounen",
-        "mustAgree": "Als éischt musst Dir d&#39;Konditioune averstane sinn."
+        "GetStarted": "Get Started",
+        "Authorize": "Authorize",
+        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "TermsTitle": "Terms",
+        "mustAgree": "First you must agree to the terms."
     },
     "register": {
-        "TermsLabel": "Ech akzeptéieren d&#39;{{link}}",
-        "TermsTitle": "Konditiounen"
+        "TermsLabel": "I accept the {{link}}",
+        "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Erlaabnes",
-        "prompt": "Wëllt Dir Notifikatiounen aktivéieren? Dir kritt Echtzäit Updates u Saachen déi Dir Iech interesséieren.",
-        "yes": "jo",
-        "no": "Nee",
-        "WelcomePleaseVerifyEmail": "Wëllkomm! Gitt weg Är E-Mailadress.",
-        "WelcomeVerifyEmail": "Wëllkomm! Äert E-Mailadress verifizéiert.",
-        "ForgetPass": "Hey, hutt Dir Äert Passphrase vergiess?",
-        "PassphraseSaved": "Äre Passwuert ass gespäichert.",
-        "IdentifierActivated": "Är {{type}} gouf ageschalt.",
-        "CompletedActivation": "Dir hutt d&#39;Benotzeraktivéierung ofgeschloss.",
-        "CompletedActivationLogIn": "Dir hutt d&#39;Benotzeraktivéierung ofgeschloss. Probéiert elo unzemellen."
+        "title": "Permission",
+        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
+        "yes": "Yes",
+        "no": "No",
+        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
+        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
+        "ForgetPass": "Hey, did you forget your passphrase?",
+        "PassphraseSaved": "Your pass phrase has been saved.",
+        "IdentifierActivated": "Your {{type}} has been activated.",
+        "CompletedActivation": "You've completed user activation.",
+        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
     },
     "contacts": {
         "dialog": {
-            "title": "Kontakt wielen",
-            "CreateAccount": "+ Neie Kontakt",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create net fonnt",
-            "SearchByName": "Sich mam Numm",
-            "EmptyContacts": "Kontakter net fonnt ..."
+            "title": "Choose contact",
+            "CreateAccount": "+ New Contact",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
+            "SearchByName": "Search by name",
+            "EmptyContacts": "Contacts not found..."
         },
         "select": {
-            "title": "Wielt Äre Kontakt vun {{displayName}}"
+            "title": "Select contact of {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Wielt we g",
-        "inviteUser": "Invitéiere Benotzer",
-        "selectRole": "Wielt Roll",
-        "inviteRole": "Invitéieren {{role}}"
+        "selectLabel": "Please select label.",
+        "inviteUser": "Invite Users",
+        "selectRole": "Select Role",
+        "inviteRole": "Invite {{role}}"
     },
-    "invalidLanguageSelected": "Ongülteg Sprooch ausgewielt",
+    "invalidLanguageSelected": "Invalid language selected",
     "login": {
-        "title": "Wëllkomm",
-        "directions": "Erstellt e Konto, oder loggt Iech un.",
-        "directionsNoRegister": "Loggt Iech an wann Dir e Kont hutt.",
-        "goButton": "Gitt",
-        "passphrase": "Gitt ärt Passwuert an:",
-        "loginButton": "Ufänken",
-        "registerButton": "Ufänken",
-        "resendButton": "Schéckt Aktivéierungs Noriicht",
-        "forgot": "Hutt Dir et vergiess?",
-        "resendConfirm": "Wëllt Dir e Message schécken fir Är Passwuert zréckzesetzen?",
-        "resendSuccess": "Kuckt fir e Message fir Är Passwuert zréckzesetzen",
-        "resendClose": "Zoumaachen",
-        "noPassphrase": "Ier Dir kënnt aloggen, musst Dir e Passphrase astellen andeems Dir op de Link an Ärer Aktivéierungs Noriicht klickt.",
-        "notVerified": "Dir musst Iech selwer en Aktivéierungsmessage schécken fir Iech unzemellen.",
-        "emailExists": "Hutt Dir probéiert scho mat dëser E-Mail unzemellen? Wa jo, préift Är Inbox fir Äre Kont z&#39;aktivéieren. <a href='#resend' class='Q_button Users_activation_resend'>Klickt fir de Message erëm ze schécken<\/a>",
-        "mobileExists": "Hutt Dir probéiert mat dëser Handysnummer unzemellen? Wann jo, kontrolléiert Är SMS fir Äre Kont z&#39;aktivéieren. <a href='#resend' class='Q_button Users_activation_resend'>Klickt fir de Message erëm ze schécken<\/a>",
-        "usingOther": "oder Dir kënnt",
-        "prompt": "Wielt e Benotzernumm:",
-        "newUser": "oder erstellt en neie Kont",
+        "title": "Welcome",
+        "directions": "Create an account, or log in.",
+        "directionsNoRegister": "Log in if you have an account.",
+        "goButton": "Go",
+        "passphrase": "Enter your pass phrase:",
+        "loginButton": "Get Started",
+        "registerButton": "Get Started",
+        "resendButton": "Send Activation Message",
+        "forgot": "Forgot it?",
+        "resendConfirm": "Do you want to send a message to reset your passphrase?",
+        "resendSuccess": "Check for a message to reset your passphrase",
+        "resendClose": "Close",
+        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
+        "notVerified": "You must send yourself an activation message in order to log in.",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "usingOther": "or you can ",
+        "prompt": "Choose a username:",
+        "newUser": "or create a new account below",
         "placeholders": {
-            "identifier": "Ären Handy # oder E-Mail",
-            "mobile": "Gitt Ären Handy an",
-            "email": "Gitt är E-Mail Adress",
-            "username": "Benotzernumm"
+            "identifier": "your mobile # or email",
+            "mobile": "enter your mobile #",
+            "email": "enter your email address",
+            "username": "use letters and numbers only"
         },
-        "confirmTerms": "Akzeptéieren Dir d&#39;Konditioune vum Service?",
-        "facebookNoEmail": "Äre Facebook Kont fehlt eng bestätegt E-mail Adress. Logt Iech einfach op déi gebierteg Manéier.",
-        "picTooltip": "Dir kënnt dëst Bild méi spéit änneren",
+        "confirmTerms": "Accept the Terms of Service?",
+        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
+        "picTooltip": "You can change this picture later",
         "wallet": {
-            "payload": "Aloggen op {{host}} zu Zäit {{timestamp}}",
+            "payload": "Log into {{host}} at time {{timestamp}}",
             "alert": {
-                "title": "Ëmgeleet op Portemonnaie",
-                "content": "Wann Dir dësen Dialog zoumaacht, gitt Dir an Äre Portemonnaie bruecht. Nodeems Dir Iech ugemellt hutt, gitt zréck op dës Säit."
+                "title": "Redirecting to Wallet",
+                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
             }
         }
     },
     "setIdentifier": {
-        "title": "Füügt e Wee fir ze aloggen",
-        "sendMessage": "Schéckt Aktivéierungs Noriicht",
+        "title": "Add a way to log in",
+        "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "gitt Ären Handy # oder E-Mail un",
-            "mobile": "gitt Är Handysnummer",
-            "email": "Gitt är E-Mail Adress",
-            "username": "Benotzernumm"
+            "identifier": "enter your mobile # or email",
+            "mobile": "enter your mobile number",
+            "email": "enter your email address",
+            "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Kont",
-        "areUsing": "Dir benotzt {{platform}} als",
-        "noLongerUsing": "Dir sidd net méi mat {{platform}} ugeschloss als",
-        "doAuth": "Loggt Iech mat dësem Kont un",
-        "doSwitch": "Schalt op dëse Kont"
+        "title": "{{Platform}} Account",
+        "areUsing": "You are using {{platform}} as",
+        "noLongerUsing": "You are no longer connected to {{platform}} as",
+        "doAuth": "Log in with this account",
+        "doSwitch": "Switch to this account"
     },
     "roles": {
-        "Owner": "Besëtzer",
+        "Owner": "Owner",
         "Admin": "Admin",
         "Member": "Member",
-        "Guest": "Gaascht",
+        "Guest": "Guest",
         "Host": "Host"
-    },
-    "analytics": {
-        "Title": "Analytics",
-        "Daily": "Deeglech",
-        "Weekly": "Wochemaart",
-        "Monthly": "Monatlech",
-        "Application": "Applikatioun",
-        "Pages": "Säiten",
-        "Services": "Servicer",
-        "Faq": "FAQ",
-        "WeekDays": "Woch Deeg"
     }
 }

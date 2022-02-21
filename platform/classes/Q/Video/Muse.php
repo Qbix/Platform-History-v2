@@ -53,6 +53,7 @@ class Q_Video_Muse {
 		}
 
 		$result["videoId"] = $result["svid"];
+		$result["videoUrl"] = Q::ifset($result, "mp4", preg_replace("/\/data$/", "/videos/video.mp4", $result["url"]));
 
 		return $result;
 	}
