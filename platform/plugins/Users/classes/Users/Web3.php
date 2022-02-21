@@ -146,6 +146,223 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		return $data;
 	}
+
+	static $networks = array();
+	static $useCache = null;
+
+	/**
+	 * Get needed environment variables
+	 *
+	 * @method construct
+	 * @param {String} $chainId
+	 * @static
+	 */
+	private static function construct($chainId) {
+		if (self::$useCache === null) {
+			self::$useCache = Q_Config::get("Assets", "web3", "useCache", true);
+		}
+
+		if (self::$networks[$chainId]) {
+			return;
+		}
+
+		$networks = Q_Config::expect("Users", "apps", "web3");
+		foreach ($networks as $n) {
+			if ($n["appId"] == $chainId) {
+				$n["chainId"] = $n["appId"];
+				unset($n["appId"]);
+				self::$networks[$chainId]["network"] = $n;
+				break;
+			}
+		}
+
+		$rpcUrl = self::$networks[$chainId]["network"]["rpcUrl"];
+		self::$networks[$chainId]["web3"] = new Web3($rpcUrl);
+
+		$abiPath = "ABI/".self::$networks[$chainId]["network"]["contracts"]["NFT"]["address"].".json";
+		$filePath = implode(DS, array(APP_WEB_DIR, $abiPath));
+		if (!is_file($filePath)) {
+			$filePath = implode(DS, array(USERS_PLUGIN_WEB_DIR, $abiPath));
+		}
+		if (!is_file($filePath)) {
+			throw new Exception("Users_Web3: abi.json not found");
+		}
+
+		$abi = file_get_contents($filePath);
+		self::$networks[$chainId]["contract"] = new Contract($rpcUrl, $abi);
+	}
+
+	/**
+	 * Get tokens by author
+	 * @method tokensByAuthor
+	 * @static
+	 * @param {String} $address Author wallet address
+	 * @param {String} $chainId
+	 * @return array
+	 */
+	static function tokensByAuthor ($address, $chainId) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		return self::execute($network["contract"], __FUNCTION__, $address);
+	}
+
+	/**
+	 * Get comission info by token
+	 * @method commissionInfo
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $chainId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @param {String} [$contractAddress=null] Custom contract address
+	 * @return array
+	 */
+	static function commissionInfo ($tokenId, $chainId, $updateCache=false) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		$data = self::execute($network["contract"],"getCommission", $tokenId, null, $updateCache);
+		$data["value"] = gmp_intval(Q::ifset($data, "r", "value", null));
+
+		return $data;
+	}
+
+	/**
+	 * Get tokens by owner
+	 * @method tokensByOwner
+	 * @static
+	 * @param {String} $address Owner wallet address
+	 * @param {String} $chainId
+	 * @return array
+	 */
+	static function tokensByOwner ($address, $chainId) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		return self::execute($network["contract"],__FUNCTION__, $address);
+	}
+
+	/**
+	 * Get author of token
+	 * @method authorOf
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $chainId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @param {String} [$contractAddress=null] Custom contract address
+	 * @return array
+	 */
+	static function authorOf ($tokenId, $chainId, $updateCache=false) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+	}
+
+	/**
+	 * Get owner of token
+	 * @method ownerOf
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $chainId network symbol
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @return array
+	 */
+	static function ownerOf ($tokenId, $chainId, $updateCache=false) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+	}
+
+	/**
+	 * Get sale info by token
+	 * @method saleInfo
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $chainId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @return array
+	 */
+	static function saleInfo ($tokenId, $chainId, $updateCache=false) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
+		return $data;
+	}
+
+	/**
+	 * Get currency by chainId and currency token
+	 * @method getCurrencyByChain
+	 * @static
+	 * @param {String} $chainId
+	 * @param {String} $currencyToken currency token
+	 * @return array
+	 */
+	static function getCurrencyByChain ($chainId, $currencyToken) {
+		$currencies = Q_Config::expect("Users", "web3", "currencies");
+		foreach ($currencies as $currency) {
+			if ($currency[$chainId] == $currencyToken) {
+				return $currency;
+			}
+		}
+	}
+
+	/**
+	 * Get available blockchain networks info (contact address, currency, rpcUrl, blockExplorerUrl)
+	 * @method getChains
+	 * @static
+	 * @return array
+	 */
+	static function getChains () {
+		$chains = Q_Config::get("Users", "apps", "web3", array());
+		$currencies = Q_Config::get("Users", "web3", "currencies", array());
+		$chainsClient = array();
+		foreach ($chains as $i => $chain) {
+			// if contract or rpcUrls undefined, skip this chain
+			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
+			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
+			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
+			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", null);
+			$chainId = Q::ifset($chain, "appId", null);
+
+			if (!$contract || !$rpcUrl) {
+				unset($chain[$i]);
+				continue;
+			}
+
+			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
+			$temp = compact("chainId", "contract", "rpcUrl", "blockExplorerUrl");
+
+			foreach ($currencies as $currency) {
+				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
+					$temp["currency"] = $currency;
+					$temp["currency"]["token"] = $currency[$chainId];
+					break;
+				}
+			}
+
+			$temp["default"] = $i == Users::communityId();
+
+			$chainsClient[$chainId] = $temp;
+		}
+
+		return $chainsClient;
+	}
+
+	/**
+	 * Get sale info by token
+	 * @method saleInfo
+	 * @static
+	 * @param {String} $tokenId
+	 * @param {String} $chainId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
+	 * @return array
+	 */
+	static function getSaleInfo ($tokenId, $chainId, $updateCache=false) {
+		self::construct($chainId);
+		$network = self::$networks[$chainId];
+		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
+		return $data;
+	}
+
 	/**
 	 * Get the filename of the ABI file for a contract. 
 	 * Taken from Users/web3/contracts/$contractName/filename config.
