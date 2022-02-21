@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.6",
+				"version": "1.0.7",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]

@@ -28,6 +28,7 @@ abstract class Base_Assets
   5 => 'Assets_Earned',
   6 => 'Assets_Leader',
   7 => 'Assets_NftAttributes',
+  8 => 'Assets_Web3',
 );
 
 	/**
