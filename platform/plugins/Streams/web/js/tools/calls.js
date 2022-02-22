@@ -178,7 +178,7 @@
                 });
 
                 WebRTCClientUI.screenRendering.layoutEvents.on('layoutRendered', function (e) {
-                    console.log('EVENT LAYOUT');
+                    /*console.log('EVENT LAYOUT');
                     let mediaContainer = WebRTCClientUI.roomsMediaContainer();
                     console.log('EVENT LAYOUT 2',mediaContainer);
 
@@ -200,7 +200,7 @@
                         if(!activePreviewTool) return;
                         var previewMediaContainer = activePreviewTool.element.querySelector('.Streams_preview_media_container');
                         previewMediaContainer.appendChild(mediaContainer);
-                    }
+                    }*/
                 })
                 WebRTCClientUI.screenRendering.layoutEvents.on('audioScreenCreated', function (e) {
                     var platformId = e.participant.identity != null ? e.participant.identity.split('\t')[0] : null;

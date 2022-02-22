@@ -151,7 +151,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			});
 		});
 	});
-	tool.mutationObserver.observe(tool.element.parentElement, {childList: true});
+	tool.mutationObserver.observe(tool.element, {childList: true});
 },
 
 {
