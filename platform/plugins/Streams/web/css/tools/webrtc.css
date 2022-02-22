@@ -6,7 +6,7 @@
     height: 100%;
 }
 .Streams_webrtc_room-media {
-    position: fixed;
+    position: relative;
     top: 0;
     left: 0;
     height:100%;
@@ -1431,15 +1431,13 @@
 
 /*desktop main screen and thumbs grid*/
 .Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid {
-    position: fixed;
+    position: relative;
     display: flex;
     justify-content: center;
     flex-direction: column;
     height: 100%;
     width: 100%;
     display: flex;
-    width: 100vw;
-    height: 100vh;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream {
     flex: 1;

@@ -112,15 +112,19 @@
                     preamble = Q.getObject('webtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
                 }
 
+                var tzOffset = new Date().getTimezoneOffset();
+                var updatedTimeTs= new Date(stream.fields.insertedTime).getTime() / 1000;
+                var time = Math.sign(tzOffset) == -1 ? updatedTimeTs + (Math.abs(tzOffset) * 60) : updatedTimeTs - (Math.abs(tzOffset) * 60);
                 var fields = Q.extend({}, state.templates.view.fields, {
                     publisherId: stream.fields.publisherId,
                     streamName: stream.fields.name,
                     alt: 'icon',
                     title: stream.fields.title,
                     content: stream.fields.content,
-                    time: stream.fields.insertedTime,
+                    time:time,
                     duration: duration,
-                    preamble: preamble
+                    preamble: preamble,
+                    text: tool.text
                 });
 
                 console.log('preview: fields', fields, stream);
@@ -384,7 +388,7 @@
                     let byUserId = message.byUserId;
                     if(message.content == 'started') {
                         if (tool.isHost(byUserId) && byUserId != Q.Users.loggedInUserId()) {
-                            titleContainer.innerHTML = 'Currently is interviewed by another host';
+                            titleContainer.innerHTML = tool.text.calls.interviewedByAnotherHost;
                         }
                     } else {
                         if (tool.isHost(byUserId) && byUserId != Q.Users.loggedInUserId()) {
@@ -483,7 +487,7 @@
         + '<img alt="{{alt}}" class="Streams_preview_icon">'
         + '<div class="Streams_preview_contents {{titleClass}}">'
         + '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
-        + '<{{titleTag}} class="Streams_preview_title"><span class="Streams_preview_title_text">{{title}}</span><span class="Streams_preview_titme">{{time}}</span></{{titleTag}}>'
+        + '<{{titleTag}} class="Streams_preview_title"><span class="Streams_preview_title_text">{{title}}</span><span class="Streams_preview_titme">{{&tool "Q/timestamp" time=time}}</span></{{titleTag}}>'
         + '<div class="Streams_preview_content">'
         + '<div class="Streams_preview_about"><div class="Streams_preview_about_avatar">{{&tool "Users/avatar" userId=publisherId}}</div><div class="Streams_chat_bubble"><div class="Streams_chat_tick"></div><div class="Streams_chat_message">{{content}}</div></div></div>'
         + '<div class="Streams_preview_body">'
@@ -491,13 +495,13 @@
         + '<div class="Streams_preview_participants" style="display: none;">{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true showSummary=false}}</div>'
         + '<div class="Streams_preview_call_control">'
         + '<div class="Streams_preview_call_control_call">'
-        + '<div class="Streams_preview_approve_button">Mark Approved</div>'
-        + '<div class="Streams_preview_call_button">Interview</div>'
-        + '<div class="Streams_preview_switch_back_button">End Call</div>'
-        + '<div class="Streams_preview_hold_button">Hold</div>'
+        + '<div class="Streams_preview_approve_button">{{text.calls.markApproved}}</div>'
+        + '<div class="Streams_preview_call_button">{{text.calls.interview}}</div>'
+        + '<div class="Streams_preview_switch_back_button">{{text.calls.endCall}}</div>'
+        + '<div class="Streams_preview_hold_button">{{text.calls.putOnHold}}</div>'
         + '</div>'
         + '<div class="Streams_preview_call_control_allow">'
-        + '<div class="Streams_preview_accept_button">Accept The Call</div>'
+        + '<div class="Streams_preview_accept_button">{{text.calls.bringToLive}}</div>'
         + '</div>'
         + '</div></div></div></div>'
     );

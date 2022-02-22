@@ -528,6 +528,12 @@
         "NoCallsYet": "No calls yet",
         "CallReasonTitle": "What is this call about?",
         "WaitingRoom": "Waiting Room",
-        "LiveRoom": "Live Room"
+        "LiveRoom": "Live Room",
+        "interviewedByAnotherHost": "Currently is interviewed by another host",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Put On Hold",
+        "endCall": "End Call",
+        "interview": "Interview",
+        "markApproved": "Mark Approved"
     }
 }
