@@ -3972,10 +3972,8 @@
 
 		/**
 		 * Used get the currently selected address on current ethereum chain
-		 * @method getContract
+		 * @method getSelectedXid
 		 * @static
-		 * @param {string} contractAddress
-		 * @param {Function} callback receives (err, contract)
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getSelectedXid: function () {
@@ -3988,10 +3986,8 @@
 
 		/**
 		 * Used to get the logged-in user's ID on any chain
-		 * @method getContract
+		 * @method getLoggedInUserXid
 		 * @static
-		 * @param {string} contractAddress
-		 * @param {Function} callback receives (err, contract)
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getLoggedInUserXid: function () {
@@ -4013,7 +4009,7 @@
 		getContract: function(contractAddress, callback) {
 			return new Q.Promise(function (resolve, reject) {
 				if (window.ethereum
-				&& ethereum.chainId == Q.getObject([
+				&& ethereum.chainId === Q.getObject([
 					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
 				])) {
 					_continue(ethereum);
