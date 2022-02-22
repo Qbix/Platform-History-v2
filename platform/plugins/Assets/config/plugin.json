@@ -116,7 +116,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
-					"icon": "{{baseUrl}}/img/empty_white.png"
+					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			}
 		},
@@ -196,6 +196,68 @@
 		"browsertab": {
 			"css": []
 		},
-		"canCheckPaid": ["Users/owners", "Users/admins", "Assets/admins"]
+		"canCheckPaid": ["Users/owners", "Users/admins", "Assets/admins"],
+		"NFT": {
+			"factory": {
+				"contract": {
+					"address": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
+				}
+			},
+			"attributes": {
+				"display_type": ["string", "number", "date", "list"]
+			},
+			"currencies": [
+				{
+					"symbol": "BNB",
+					"name": "Binance Coin",
+					"decimals": 18,
+					"0x4": "0x5eD8BD53B0c3fa3dEaBd345430B1A3a6A4e8BD7C",
+					"0x1": "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
+					"0x61": "0x0000000000000000000000000000000000000000",
+					"0x38": "0x0000000000000000000000000000000000000000",
+					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+				},
+				{
+					"symbol": "USDC",
+					"name": "USD Coin",
+					"decimals": 18,
+					"0x4": "0xbaAeF3b2756F35F933A55EDcCd27338F74F18f9c",
+					"0x1": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
+					"0x38": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
+					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+				},
+				{
+					"symbol": "BUSD",
+					"name": "Binance USD",
+					"decimals": 18,
+					"0x4": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+					"0x1": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+					"0x38": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
+					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49",
+					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+				},
+				{
+					"symbol": "ETH",
+					"name": "Ethereum",
+					"decimals": 18,
+					"0x4": "0x0000000000000000000000000000000000000000",
+					"0x1": "0x0000000000000000000000000000000000000000",
+					"0x38": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
+					"0x61": "0xBa0fc9605D1c71ABFCEa8b93E4CC5619c4a03606",
+					"commissionToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+				},
+				{
+					"symbol": "DAI",
+					"name": "DAI",
+					"decimals": 18,
+					"0x4": "0x73f0415F66dd4F7a20e6e9bB658Ff02bD358D6fD",
+					"0x1": "0x6b175474e89094c44da98b954eedeac495271d0f",
+					"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
+					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA",
+					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+				}
+			]
+		}
 	}
 }
