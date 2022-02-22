@@ -28,4 +28,17 @@ function Assets_before_Q_responseExtras() {
 	if (!empty($_GET['browsertab']) && $_GET['browsertab'] == 'yes') {
 		Q::event('Assets/browsertab/response/content');
 	}
+
+	// blockchain data
+	$currencies = Q_Config::get("Assets", "NFT", "currencies", array());
+	$chainsClient = Assets_NFT_Web3::getChains();
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.chains', $chainsClient);
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.currencies', $currencies);
+	$nf = Q_Config::get('Assets', 'NFT', 'factory', 'contract', 'address', null);
+	if ($nf) {
+		Q_Response::setScriptData('Q.plugins.Assets.NFT.factory.contract.address', $nf);
+	}
+
+	// set Users.Web3.NFT.icon.sizes for imagepicker
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
 }
