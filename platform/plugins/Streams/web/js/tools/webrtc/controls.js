@@ -1343,9 +1343,16 @@
 				document.body.appendChild(dialogCon);
 				document.body.appendChild(bg);
 
-				var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
 
-				dialogue.style.minWidth = tool.settingsPopupEl.firstChild.scrollWidth + 'px';
+                var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
+                var contentHeight = tool.settingsPopupEl.scrollHeight;
+                var windowWidth =  window.innerWidth;
+                var windowHeight =  window.innerHeight;
+
+                var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
+
+                tool.settingsPopupEl.style.maxHeight = maxHeight + 'px';
+                dialogue.style.minWidth = contentWidth + 'px';
 
 				tool.state.dialogIsOpened = true;
 			},
@@ -1398,8 +1405,17 @@
 				document.body.appendChild(bg);
 
 				var contentWidth = tool.audioSettingsPopupEl.firstChild.scrollWidth;
+				var contentHeight = tool.audioSettingsPopupEl.scrollHeight;
+                var windowWidth =  window.innerWidth;
+                var windowHeight =  window.innerHeight;
 
-				dialogue.style.minWidth = tool.audioSettingsPopupEl.firstChild.scrollWidth + 'px';
+                var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
+
+                if(contentHeight > maxHeight) {
+                    tool.audioSettingsPopupEl.style.maxHeight = maxHeight + 'px';
+                }
+				dialogue.style.minWidth = contentWidth + 'px';
+				dialogue.style.marginTop = '-50px';
 
 				tool.state.dialogIsOpened = true;
 			},
@@ -2810,7 +2826,25 @@
                             }
                         }
 
+                        function checkIfSetSinkIdIsSupported() {
+							var mediaElement = document.createElement('VIDEO');
+							if('setSinkId' in mediaElement){
+								return true;
+							}
+                            return false;
+                        }
+
                         function loadAudioOutputList () {
+                        	console.log('loadAudioOutputList');
+                            _audioOutputListEl.innerHTML = '';
+                        	if(!checkIfSetSinkIdIsSupported()) {
+                                var alertNoticeCon = document.createElement('DIV');
+                                alertNoticeCon.className = 'Streams_webrtc_notice_alert';
+                                alertNoticeCon.innerHTML = "Selecting output device is not supported in your browser";
+                            	_audioOutputListEl.appendChild(alertNoticeCon);
+                        		return;
+							}
+
                             var count = 1;
 
                             clearAudioOutputList();
@@ -2876,7 +2910,7 @@
                             outputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.speakers", tool.textes);
 
                             var audioOutputList = document.createElement('DIV');
-                            audioOutputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-input-audio';
+                            audioOutputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-output-audio';
 
                             audioOutputListCon.appendChild(outputListTilte);
                             audioOutputListCon.appendChild(audioOutputList);
@@ -3362,8 +3396,8 @@
 
 							var hasNoVideo = screen.videoTrack == null || (screen.videoTrack != null && screen.videoTrack.videoWidth == 0 && screen.videoTrack.videoHeight == 0);
                             if(hasNoVideo && manually) {
-								tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
-								//if(activeViewMode == 'audio') screen.show();
+                                if(activeViewMode != 'audio') tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.userHasNoVideo", tool.textes));
+								if(activeViewMode == 'audio') screen.show();
 								return;
 							} else if(hasNoVideo && !screen.videoIsChanging) {
 								return;
