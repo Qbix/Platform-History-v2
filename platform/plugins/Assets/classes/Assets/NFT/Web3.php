@@ -149,12 +149,13 @@ class Assets_NFT_Web3 extends Users_Web3
 	 * @static
 	 * @param {String} $address Author wallet address
 	 * @param {String} $chainId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
 	 * @return array
 	 */
-	static function tokensByAuthor ($address, $chainId) {
+	static function tokensByAuthor ($address, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		return self::execute($network["contract"], __FUNCTION__, $address);
+		return self::execute($network["contract"], __FUNCTION__, $address, null, !$updateCache);
 	}
 
 	/**
@@ -164,13 +165,12 @@ class Assets_NFT_Web3 extends Users_Web3
 	 * @param {String} $tokenId
 	 * @param {String} $chainId
 	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
 	static function commissionInfo ($tokenId, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		$data = self::execute($network["contract"],"getCommission", $tokenId, null, $updateCache);
+		$data = self::execute($network["contract"],"getCommission", $tokenId, null, !$updateCache);
 		$data["value"] = gmp_intval(Q::ifset($data, "r", "value", null));
 
 		return $data;
@@ -182,12 +182,13 @@ class Assets_NFT_Web3 extends Users_Web3
 	 * @static
 	 * @param {String} $address Owner wallet address
 	 * @param {String} $chainId
+	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
 	 * @return array
 	 */
-	static function tokensByOwner ($address, $chainId) {
+	static function tokensByOwner ($address, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		return self::execute($network["contract"],__FUNCTION__, $address);
+		return self::execute($network["contract"],__FUNCTION__, $address, null, !$updateCache);
 	}
 
 	/**
@@ -197,13 +198,12 @@ class Assets_NFT_Web3 extends Users_Web3
 	 * @param {String} $tokenId
 	 * @param {String} $chainId
 	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @param {String} [$contractAddress=null] Custom contract address
 	 * @return array
 	 */
 	static function authorOf ($tokenId, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
 	}
 
 	/**
@@ -218,7 +218,7 @@ class Assets_NFT_Web3 extends Users_Web3
 	static function ownerOf ($tokenId, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
 	}
 
 	/**
@@ -233,7 +233,7 @@ class Assets_NFT_Web3 extends Users_Web3
 	static function saleInfo ($tokenId, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
 		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
 		return $data;
 	}
@@ -258,10 +258,11 @@ class Assets_NFT_Web3 extends Users_Web3
 	/**
 	 * Get available blockchain networks info (contact address, currency, rpcUrl, blockExplorerUrl)
 	 * @method getChains
+	 * @param {string} [$needChainId] if defined return only this chain info
 	 * @static
 	 * @return array
 	 */
-	static function getChains () {
+	static function getChains ($needChainId=null) {
 		$chains = Q_Config::get("Users", "apps", "web3", array());
 		$currencies = Q_Config::get("Assets", "NFT", "currencies", array());
 		$chainsClient = array();
@@ -291,6 +292,10 @@ class Assets_NFT_Web3 extends Users_Web3
 
 			$temp["default"] = $i == Users::communityId();
 
+			if ($needChainId && $chainId == $needChainId) {
+				return $temp;
+			}
+
 			$chainsClient[$chainId] = $temp;
 		}
 
@@ -309,7 +314,7 @@ class Assets_NFT_Web3 extends Users_Web3
 	static function getSaleInfo ($tokenId, $chainId, $updateCache=false) {
 		self::construct($chainId);
 		$network = self::$networks[$chainId];
-		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, $updateCache);
+		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
 		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
 		return $data;
 	}

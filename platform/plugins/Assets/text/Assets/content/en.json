@@ -177,7 +177,9 @@
     "NFT": {
         "Title": "Information about {{title}} NFT",
         "Description": "Detailed information about NFT",
+        "PresaleStarts": "Presale Starts Dec 23",
         "FixedBid": "Buy now",
+        "Buy": "Buy",
         "CurrentBid": "Current bid",
         "StartingIn": "Starting in",
         "EndingIn": "Ending in",
@@ -229,15 +231,16 @@
         "OpenForBids": "Open for bids",
         "PriceOnePiece": "Enter price for one piece",
         "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "SelectNetwork": "Select network",
         "import": {
             "importNFT": "Importing NFT's",
+            "importAttributes": "Import NFT attributes",
             "fileNotFound": "Sorry, CSV file not found.",
             "fileEmpty": "Sorry, CSV file is empty.",
             "userIdNotFound": "user exist but id empty",
             "errorLine": "line {{1}}",
             "fieldNotFound": "Required field \"{{1}}\" not found",
+            "displayTypeEmpty": "Display type for \"{{1}}\" not found",
             "taskStreamInvalid": "task stream invalid",
             "instructionsEmpty": "task stream instructions empty",
             "complete": "Complete",
@@ -249,7 +252,7 @@
             "errorsTitle": "Errors occurred"
         },
         "filter": {
-            "ByCategory": {
+            "ByCategory" : {
                 "FilterByNFTCollections": "Filter by NFT Collections",
                 "ShowNFTCollection": "Show NFT collection in ...",
                 "AllCollections": "All Collections"
@@ -259,7 +262,24 @@
                 "AllUsers": "Everyone",
                 "FilterByAuthors": "Filter by Authors"
             }
+
         },
-        "Back": "Back to Collection"
+        "Back": "Back to Collection",
+        "attributes": {
+            "Title": "Manage Attributes",
+            "Attributes": "Attributes",
+            "DisplayTitle": "Display Type",
+            "AddDisplayType": "Add new display type",
+            "NewDisplay": "New Display",
+            "TraitTitle": "Trait Type",
+            "AddTraitTitle": "Add new trait type",
+            "NewTrait": "New Trait Type",
+            "ValueTitle": "Value",
+            "AddValueTitle": "Add new value",
+            "NewValue": "New Value",
+            "NewAttribute": "New Attribute",
+            "UpdateAttributes": "Update Attributes",
+            "SaveAttributes": "Save Attributes"
+        }
     }
 }
