@@ -144,101 +144,6 @@ class Assets_NFT_Web3 extends Users_Web3
 	}
 
 	/**
-	 * Get tokens by author
-	 * @method tokensByAuthor
-	 * @static
-	 * @param {String} $address Author wallet address
-	 * @param {String} $chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function tokensByAuthor ($address, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		return self::execute($network["contract"], __FUNCTION__, $address, null, !$updateCache);
-	}
-
-	/**
-	 * Get comission info by token
-	 * @method commissionInfo
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function commissionInfo ($tokenId, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		$data = self::execute($network["contract"],"getCommission", $tokenId, null, !$updateCache);
-		$data["value"] = gmp_intval(Q::ifset($data, "r", "value", null));
-
-		return $data;
-	}
-
-	/**
-	 * Get tokens by owner
-	 * @method tokensByOwner
-	 * @static
-	 * @param {String} $address Owner wallet address
-	 * @param {String} $chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function tokensByOwner ($address, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		return self::execute($network["contract"],__FUNCTION__, $address, null, !$updateCache);
-	}
-
-	/**
-	 * Get author of token
-	 * @method authorOf
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function authorOf ($tokenId, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
-	}
-
-	/**
-	 * Get owner of token
-	 * @method ownerOf
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $chainId network symbol
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function ownerOf ($tokenId, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		return self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
-	}
-
-	/**
-	 * Get sale info by token
-	 * @method saleInfo
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function saleInfo ($tokenId, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
-		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
-		return $data;
-	}
-
-	/**
 	 * Get currency by chainId and currency token
 	 * @method getCurrencyByChain
 	 * @static
@@ -300,22 +205,5 @@ class Assets_NFT_Web3 extends Users_Web3
 		}
 
 		return $chainsClient;
-	}
-
-	/**
-	 * Get sale info by token
-	 * @method saleInfo
-	 * @static
-	 * @param {String} $tokenId
-	 * @param {String} $chainId
-	 * @param {Boolean} [$updateCache=false] If true request blockchain to update cache
-	 * @return array
-	 */
-	static function getSaleInfo ($tokenId, $chainId, $updateCache=false) {
-		self::construct($chainId);
-		$network = self::$networks[$chainId];
-		$data = self::execute($network["contract"],__FUNCTION__, $tokenId, null, !$updateCache);
-		$data[1] = gmp_intval(Q::ifset($data, 1, "value", null));
-		return $data;
 	}
 };
