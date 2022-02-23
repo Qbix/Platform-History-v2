@@ -1,11 +1,12 @@
 DROP TABLE IF EXISTS {{prefix}}Web3;
 DROP TABLE IF EXISTS {{prefix}}web3;
 CREATE TABLE {{prefix}}web3 (
+  `chainId` varchar(10) NOT NULL,
   `contract` varchar(42) NOT NULL,
   `methodName` varchar(63) NOT NULL DEFAULT '',
   `params` varchar(1023) NOT NULL DEFAULT '',
   `result` text,
   `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedTime` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`contract`,`methodName`,`params`(127))
+  PRIMARY KEY (`chainId`,`methodName`,`params`(127))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT 'Stores cached results from querying EVM-based blockchains';

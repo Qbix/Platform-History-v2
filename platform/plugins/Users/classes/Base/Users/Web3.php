@@ -16,6 +16,7 @@
  *
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
+ * @param {string} [$fields.chainId] defaults to ""
  * @param {string} [$fields.contract] defaults to ""
  * @param {string} [$fields.methodName] defaults to ""
  * @param {string} [$fields.params] defaults to ""
@@ -25,6 +26,12 @@
  */
 abstract class Base_Users_Web3 extends Db_Row
 {
+	/**
+	 * @property $chainId
+	 * @type string
+	 * @default ""
+	 * 
+	 */
 	/**
 	 * @property $contract
 	 * @type string
@@ -72,7 +79,7 @@ abstract class Base_Users_Web3 extends Db_Row
 		$this->setTable(self::table());
 		$this->setPrimaryKey(
 			array (
-			  0 => 'contract',
+			  0 => 'chainId',
 			  1 => 'methodName',
 			  2 => 'params',
 			)
@@ -280,6 +287,61 @@ abstract class Base_Users_Web3 extends Db_Row
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_chainId
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_chainId($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('chainId', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".chainId");
+		if (strlen($value) > 10)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".chainId");
+		return array('chainId', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the chainId field
+	 * @return {integer}
+	 */
+	function maxSize_chainId()
+	{
+
+		return 10;			
+	}
+
+	/**
+	 * Returns schema information for chainId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_chainId()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '10',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_contract
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -327,7 +389,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => 'PRI',
+  2 => '',
   3 => NULL,
 );			
 	}
@@ -605,7 +667,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('contract') as $name) {
+			foreach (array('chainId') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -626,7 +688,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('contract', 'methodName', 'params', 'result', 'insertedTime', 'updatedTime');
+		$field_names = array('chainId', 'contract', 'methodName', 'params', 'result', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

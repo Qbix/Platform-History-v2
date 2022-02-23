@@ -63,7 +63,7 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		$cache = null;
 		if ($caching !== false && $cacheDuration) {
-			$cache = self::getCache($contractAddress, $methodName, $params, $cacheDuration);
+			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 			if ($cache->wasRetrieved()) {
 				return Q::json_decode($cache->result);
 			}
@@ -246,7 +246,8 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * for the given query on the given chain
 	 * @method getCache
 	 * @static
-	 * @param {String} $contract
+	 * @param {String} $chainId
+	 * @param {String} $contract - smart contract address
 	 * @param {String} $methodName
 	 * @param {String} $params params used to call the method
 	 * @param {integer} [$cacheDuration=3600]
@@ -254,6 +255,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @return {Db_Row}
 	 */
 	static function getCache (
+		$chainId,
 		$contract,
 		$methodName, 
 		$params, 
@@ -263,6 +265,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
 		$cached = new Users_Web3(array(
+			'chainId' => $chainId,
 			'contract' => $contract,
 			'methodName' => $methodName,
 			'params' => Q::json_encode($params),

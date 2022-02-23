@@ -21,6 +21,7 @@ var Row = Q.require('Db/Row');
  * @constructor
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
+ * @param {String} [fields.chainId] defaults to ""
  * @param {String} [fields.contract] defaults to ""
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
@@ -34,6 +35,12 @@ function Base (fields) {
 
 Q.mixin(Base, Row);
 
+/**
+ * @property chainId
+ * @type String
+ * @default ""
+ * 
+ */
 /**
  * @property contract
  * @type String
@@ -257,7 +264,7 @@ Base.prototype.table = function () {
  */
 Base.prototype.primaryKey = function () {
 	return [
-		"contract",
+		"chainId",
 		"methodName",
 		"params"
 	];
@@ -280,6 +287,7 @@ Base.prototype.fieldNames = function () {
  */
 Base.fieldNames = function () {
 	return [
+		"chainId",
 		"contract",
 		"methodName",
 		"params",
@@ -287,6 +295,44 @@ Base.fieldNames = function () {
 		"insertedTime",
 		"updatedTime"
 	];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
+ * @method beforeSet_chainId
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_chainId = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".chainId");
+		if (typeof value === "string" && value.length > 10)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".chainId");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the chainId field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_chainId = function () {
+
+		return 10;
+};
+
+	/**
+	 * Returns schema information for chainId column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_chainId = function () {
+
+return [["varchar","10","",false],false,"PRI",null];
 };
 
 /**
@@ -324,7 +370,7 @@ Base.prototype.maxSize_contract = function () {
 	 */
 Base.column_contract = function () {
 
-return [["varchar","42","",false],false,"PRI",null];
+return [["varchar","42","",false],false,"",null];
 };
 
 /**
@@ -499,7 +545,7 @@ return [["timestamp","1023","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['contract'], i;
+	var fields = ['chainId'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
