@@ -80,8 +80,9 @@ abstract class Base_Users_Web3 extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'chainId',
-			  1 => 'methodName',
-			  2 => 'params',
+			  1 => 'contract',
+			  2 => 'methodName',
+			  3 => 'params',
 			)
 		);
 	}
@@ -389,7 +390,7 @@ return array (
     3 => false,
   ),
   1 => false,
-  2 => '',
+  2 => 'PRI',
   3 => NULL,
 );			
 	}
@@ -667,7 +668,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('chainId') as $name) {
+			foreach (array('chainId','contract') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}

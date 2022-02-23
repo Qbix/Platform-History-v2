@@ -265,6 +265,7 @@ Base.prototype.table = function () {
 Base.prototype.primaryKey = function () {
 	return [
 		"chainId",
+		"contract",
 		"methodName",
 		"params"
 	];
@@ -370,7 +371,7 @@ Base.prototype.maxSize_contract = function () {
 	 */
 Base.column_contract = function () {
 
-return [["varchar","42","",false],false,"",null];
+return [["varchar","42","",false],false,"PRI",null];
 };
 
 /**
@@ -545,7 +546,7 @@ return [["timestamp","1023","",false],true,"",null];
  * @throws {Error} If e.g. mandatory field is not set or a bad values are supplied
  */
 Base.prototype.beforeSave = function (value) {
-	var fields = ['chainId'], i;
+	var fields = ['chainId','contract'], i;
 	if (!this._retrieved) {
 		var table = this.table();
 		for (i=0; i<fields.length; i++) {
