@@ -1010,7 +1010,7 @@
 			checkProvider: function (network, callback) {
 				Q.Users.Web3.connect(function (err, provider) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					// check valid network selected
@@ -1112,7 +1112,7 @@
 			getTokenJSON: function (tokenId, network, callback) {
 				Assets.NFT.getTokenURI(tokenId, network, function (err, url, contract) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					Q.req("Assets/NFT", "getRemoteJSON", function (err, data) {
@@ -1138,7 +1138,7 @@
 			getTokenURI: function (tokenId, network, callback) {
 				Assets.NFT.getContract(network, function (err, contract) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					contract.tokenURI(tokenId).then(function (url) {
@@ -1159,7 +1159,7 @@
 			getAuthor: function (tokenId, network, callback) {
 				Assets.NFT.getContract(network, function (err, contract) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					contract.authorOf(tokenId).then(function (address) {
@@ -1180,7 +1180,7 @@
 			getOwner: function (tokenId, network, callback) {
 				Assets.NFT.getContract(network, function (err, contract) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					contract.ownerOf(tokenId).then(function (address) {
@@ -1201,7 +1201,7 @@
 			commissionInfo: function (tokenId, network, callback) {
 				Assets.NFT.getContract(network, function (err, contract) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					contract.getCommission(tokenId).then(function (info) {
@@ -1222,7 +1222,7 @@
 			saleInfo: function (tokenId, network, callback) {
 				Assets.NFT.getContract(network, function (err, contract) {
 					if (err) {
-						Q.handle(callback, null, [err]);
+						return Q.handle(callback, null, [err]);
 					}
 
 					contract.saleInfo(tokenId).then(function (info) {
@@ -1303,15 +1303,15 @@
 
 					Assets.NFT.getContract(network, function (err, contract) {
 						if (err) {
-							return;
+							return console.warn(err);
 						}
 
-						/*contract.estimateGas.buy(tokenId, {value: price.price, from: window.ethereum.selectedAddress}).then(function (gasAmount) {
+						contract.estimateGas.buy(tokenId, {value: price.price, from: window.ethereum.selectedAddress}).then(function (gasAmount) {
 							contract.buy(tokenId, {value: price.price, gasLimit: parseInt(gasAmount._hex, 16)}).then(_waitTransaction);
 						}).catch(function (err) {
 							debugger;
-						});*/
-						contract.buy(tokenId, {value: price.price, gasLimit: 10000000}).then(_waitTransaction);
+						});
+						//contract.buy(tokenId, {value: price.price, gasLimit: 10000000}).then(_waitTransaction);
 					});
 				});
 			},
