@@ -56,7 +56,7 @@
     { // default options here
         chainId: null,
         tokenId: null,
-        useWeb3: false,
+        useWeb3: true,
         onMarketPlace: true,
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
@@ -74,15 +74,28 @@
             var tool = this;
             var state = this.state;
             var $toolElement = $(this.element);
+            var pipeList = ["data", "author", "owner", "commissionInfo", "saleInfo", "userId"];
 
-            var pipe = new Q.pipe(["data", "author", "owner", "commissionInfo", "saleInfo"], function (params, subjects) {
+            var pipe = new Q.pipe(pipeList, function (params, subjects) {
+                // collect errors
+                var errors = [];
+                Q.each(pipeList, function (index, value) {
+                    var err = Q.getObject([value, 0], params);
+                    err && errors.push(err);
+                });
+                if (!Q.isEmpty(errors)) {
+                    return console.warn(errors);
+                }
+
                 var data = params.data[1];
                 var author = params.author[1];
                 var owner = params.owner[1];
                 var commissionInfo = params.commissionInfo[1];
                 var saleInfo = params.saleInfo[1];
+                var userId = params.userId[1];
+                userId = userId || '';
 
-                tool.refresh(data, author, owner, commissionInfo, saleInfo);
+                tool.refresh(data, author, owner, commissionInfo, saleInfo, userId);
                 $toolElement.removeClass("Q_working");
 
                 Users.Web3.onAccountsChanged.set(function () {
@@ -104,6 +117,7 @@
                     var priceDecimal = price ? parseInt(price)/1e18 : null;
                     var isSale = this.saleInfo[2];
 
+                    pipe.fill("userId")(null, this.userId || "");
                     pipe.fill("data")(null, this.data || "");
                     pipe.fill("author")(null, this.author || "");
                     pipe.fill("owner")(null, this.owner || "");
@@ -114,14 +128,33 @@
                         priceDecimal: priceDecimal,
                         currencyToken: currencyToken
                     });
+
                 }]);
+
+                // get smart contract just to set contract events to update preview
+                NFT.getContract(state.network);
             } else {
                 if (state.chainId !== Q.getObject("ethereum.chainId", window)) {
                     return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
                 }
 
                 Q.handle(NFT.getTokenJSON, tool, [state.tokenId, state.network, pipe.fill("data")]);
-                Q.handle(NFT.getAuthor, tool, [state.tokenId, state.network, pipe.fill("author")]);
+                Q.handle(NFT.getAuthor, tool, [state.tokenId, state.network, function (err, author) {
+                    if (err) {
+                        return console.warn(err);
+                    }
+
+                    pipe.fill("author")(arguments);
+                    Q.req("Assets/NFT", "getUserIdByWallet", function (err, response) {
+                        if (err) {
+                            return console.warn(err);
+                        }
+
+                        pipe.fill("userId")(null, response.slots.getUserByWallet);
+                    }, {
+                        fields: { wallet: author }
+                    });
+                }]);
                 Q.handle(NFT.getOwner, tool, [state.tokenId, state.network, pipe.fill("owner")]);
                 Q.handle(NFT.commissionInfo, tool, [state.tokenId, state.network, pipe.fill("commissionInfo")]);
                 Q.handle(NFT.saleInfo, tool, [state.tokenId, state.network, pipe.fill("saleInfo")]);
@@ -135,12 +168,12 @@
          * @param {String} owner
          * @param {object} comissionInfo
          * @param {object} saleInfo
+         * @param {string} userId - id of NFT author user
          */
-        refresh: function (data, author, owner, comissionInfo, saleInfo) {
+        refresh: function (data, author, owner, comissionInfo, saleInfo, userId) {
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
-            var userId = Users.loggedInUserId();
 
             var selectedAddress = (Q.getObject("ethereum.selectedAddress", window) || "").toLowerCase();
             owner = owner || "";
@@ -207,7 +240,7 @@
 
                 $toolElement.activate();
 
-                $(".assets_NFT_avatar", tool.element).tool("Users/avatar", {
+                $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
                     userId: userId,
                     icon: 50,
                     contents: true,
@@ -305,7 +338,7 @@
                 });
 
                 // buy NFT
-                $("button[name=placeBid]", tool.element).on(Q.Pointer.fastclick, function (e) {
+                $("button[name=buy]", tool.element).on(Q.Pointer.fastclick, function (e) {
                     e.stopPropagation();
                     e.preventDefault();
 
@@ -314,17 +347,11 @@
                             return;
                         }
 
-                        NFT.buy(state.tokenId, state.network, currency, function (err, transaction) {});
+                        NFT.buy(state.tokenId, state.network, currency, function (err, transaction) {
+                            state.updateCache = true;
+                            tool.init();
+                        });
                     });
-                });
-
-                // buy NFT
-                $("button[name=buy]", tool.element).on(Q.Pointer.fastclick, function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    Q.alert("Under Construction");
-                    return false;
                 });
 
                 // button only for owner, provide actions Transfer and put on/off sale
@@ -525,7 +552,6 @@
             </li>
             <li class="action-block">
                 <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                <button name="placeBid" class="Q_button">{{NFT.PlaceBid}}</button>
                 <button name="soldOut" class="Q_button">{{NFT.SoldOut}}</button>
                 <button name="update" class="Q_button">{{NFT.Update}}</button>
             </li>
