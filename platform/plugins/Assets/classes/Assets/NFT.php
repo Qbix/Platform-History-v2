@@ -7,7 +7,7 @@
  * Methods for manipulating "Assets/NFT" streams
  * @class Assets_NFT
  */
-class Assets_NFT_Web3 extends Users_Web3
+class Assets_NFT
 {
 	static $categoryStreamName = "Assets/user/NFTs";
 

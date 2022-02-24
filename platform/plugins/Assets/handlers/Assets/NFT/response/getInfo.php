@@ -6,7 +6,7 @@ function Assets_NFT_response_getInfo ($params) {
 	$tokenId = $request["tokenId"];
 	$chainId = $request["chainId"];
 	$caching = !Q::ifset($request, 'updateCache', false);
-	$contractAddress = Assets_NFT_Web3::getChains($chainId)["contract"];
+	$contractAddress = Assets_NFT::getChains($chainId)["contract"];
 
 	$author = Users_Web3::execute($contractAddress, "authorOf", $tokenId, $chainId, $caching);
 	$user = Users_ExternalTo::select()->where(array(

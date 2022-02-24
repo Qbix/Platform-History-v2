@@ -31,7 +31,7 @@ function Assets_before_Q_responseExtras() {
 
 	// blockchain data
 	$currencies = Q_Config::get("Assets", "NFT", "currencies", array());
-	$chainsClient = Assets_NFT_Web3::getChains();
+	$chainsClient = Assets_NFT::getChains();
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.chains', $chainsClient);
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.currencies', $currencies);
 	$nf = Q_Config::get('Assets', 'NFT', 'factory', 'contract', 'address', null);
