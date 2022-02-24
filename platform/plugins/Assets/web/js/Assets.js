@@ -1315,6 +1315,126 @@
 					});
 				});
 			},
+			paymentRequest: function (to, amount, data) {
+				Q.Users.Web3.disconnect();
+				var value = ethers.utils.parseEther(amount);
+				if (Q.getObject('ethereum.selectedAddress')) {
+					_proceed(ethereum.selectedAddress);
+				} else if (window.ethereum && ethereum.request) {
+					ethereum.request({ method: 'eth_requestAccounts' })
+						.then(function (accounts) {
+							_proceed(accounts[0]);
+						});
+				} else {
+					Q.Users.Web3.connect(function (err, provider) {
+						if (provider && provider.accounts) {
+							_proceed(provider.accounts[0]);
+						}
+					});
+				}
+				function _proceed(address) {
+					Q.req('Assets/purchase', function () {
+
+					}, {
+						fields: {
+							status: "INTEREST",
+							data: data,
+							buyer: address,
+							mobile: Q.info.isMobile ? 1 : 0
+						},
+						method: 'post'
+					});
+					if (Q.getObject('ethereum')) {
+						const transactionParameters = {
+							// nonce: '0x00', // ignored by MetaMask
+							// gasPrice: '0x09184e72a000', // customizable by user during MetaMask confirmation.
+							// gas: '0x2710', // customizable by user during MetaMask confirmation.
+							to: to, // Required except during contract publications.
+							from: address, // must match user's active address.
+							value: value._hex, // Only required to send ether to the recipient from the initiating external account.
+							// chainId: chainId || '0x1', // Used to prevent transaction reuse across blockchains. Auto-filled by MetaMask.
+						};
+						// txHash is a hex string
+						// As with any RPC call, it may throw an error
+						const txHash = ethereum.request({
+							method: 'eth_sendTransaction',
+							params: [transactionParameters],
+						}).then(function (txHash) {
+							Q.req('Assets/purchase', function () {
+								Q.alert(
+									`Congrats and Welcome to the Gay Aliens Society!!! You now own a Gay Alien NFT. Your NFT is being minted manually to ensure things go smoothly during this pre-sale process. You will recive your NFT in your attached wallet within 24 hours.. If you have any queestions, hit us up on Discord - Tima Marso`,
+									{
+										title: "Thank you."
+									}
+								);
+							}, {
+								fields: {
+									status: "TRANSACTION",
+									data: data,
+									txHash: txHash,
+									buyer: address
+								},
+								method: 'post'
+							});
+							console.log(txHash);
+						}).catch(function (e) {
+							console.warn(e);
+						});
+					} else if (Q.Users.Web3.provider) {
+						var html = "During the presale, you have a chance to be the first to reserve this Gay Alien body type before the public launch, by sending 0.15 ETH to the TokenSociety vault. At launch, our staff will mint your NFT token, and send it to the same wallet you sent the ETH from. We take care of minting gas fees for all our presale participants.";
+						html += '<br>' + '<button id="Assets_DialogBuyNow" class="Q_button">Buy Now</button>';
+						Q.alert(
+							html,
+							{
+								title: "Manual Fulfillment Details",
+								onActivate: function () {
+									$('#Assets_DialogBuyNow').click(function () {
+										Q.Dialogs.pop();
+									});
+								},
+								onClose: function () {
+									var signer = new ethers.providers.Web3Provider(
+										Q.Users.Web3.provider
+									).getSigner();
+									signer.sendTransaction({
+										to: '0x3459e62Df2DA4c22B0957ce04C1B6520E4FB8f85',
+										value: value,
+										chainId: 1
+									}).then(function (response) {
+										Q.req('Assets/purchase', function () {
+
+										}, {
+											fields: {
+												status: "TRANSACTION",
+												data: data,
+												txHash: response.hash,
+												mobile: 1,
+												buyer: address
+											},
+											method: 'post'
+										});
+										console.log(response.hash);
+									}).catch(function (err) {
+										var web3 = new Web3(Q.Users.Web3.provider);
+										web3.eth.getBalance(
+											Q.Users.Web3.provider.accounts[0]
+										).then(function (balance) {
+											var formatted = web3.utils.fromWei(balance, "ether") + " ETH";
+											Q.alert("You have only " + formatted, {
+												title: "Insuffient Funds"
+											});
+										});
+										Q.alert(
+											Q.firstErrorMessage(err),
+											{title: "Couldn't send " + amount + " of ETH"}
+										);
+									});
+								}
+							}
+						);
+					}
+				}
+			},
 			/**
 			 * Get long string and minimize to fixed length with some chars at the end and dots in the middle
 			 * @method minimizeAddress
@@ -1665,4 +1785,33 @@
 			return false;
 		}, 'Assets');
 	}, 'Assets');
+
+	var _avatarClick = function (e) {
+		var tool = Q.typeOf(this) === "Q.Tool" ? this : Q.Tool.from(this, "Users/avatar");
+		var url = Q.url("profile/" + tool.state.userId);
+		Q.Contextual.hide();
+		if (document.location.href.startsWith(url)) {
+			return;
+		}
+
+		e.stopPropagation();
+		e.preventDefault();
+		Q.handle(url);
+	};
+
+	$("#page")[0].forEachTool("Assets/NFT/preview", function () {
+		// onClick NFT/preview element tool
+		this.state.onInvoke.set(function (tokenId, chainId, author, owner) {
+			if ($("html.Assets_NFT").length) {
+				return;
+			}
+
+			var url = Assets.NFT.chains[chainId].blockExplorerUrl + "/address/" + author;
+			Q.handle(url)
+		}, true);
+
+		// onClick Users/avatar tool
+		this.state.onAvatar.set(_avatarClick);
+	}, "Assets");
+
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);
