@@ -41,4 +41,7 @@ function Assets_before_Q_responseExtras() {
 
 	// set Users.Web3.NFT.icon.sizes for imagepicker
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
+
+	// set Assets.NFT.sales.manual.address
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.sales.manual.address', Q_Config::get("Assets", "NFT", "sales", "manual", "address", null));
 }

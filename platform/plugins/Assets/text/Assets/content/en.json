@@ -178,7 +178,7 @@
         "Title": "Information about {{title}} NFT",
         "Description": "Detailed information about NFT",
         "PresaleStarts": "Presale Starts Dec 23",
-        "FixedBid": "Buy now",
+        "BuyNow": "Buy now",
         "Buy": "Buy",
         "CurrentBid": "Current bid",
         "StartingIn": "Starting in",

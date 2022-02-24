@@ -604,12 +604,14 @@
 }
 
 #page .Assets_NFT_preview_tool button[name=buy],
+#page .Assets_NFT_preview_tool button[name=buyNow],
 #page .Assets_NFT_preview_tool button[name=soldOut],
 #page .Assets_NFT_preview_tool button[name=update] {
     display: none;
 }
 
 #page .Assets_NFT_preview_tool[data-owned=false][data-onSale=true] button[name=buy],
+#page .Assets_NFT_preview_tool[data-owned=false][data-onSale=true] button[name=buyNow],
 #page .Assets_NFT_preview_tool[data-owned=false][data-onSale=false] button[name=soldOut],
 #page .Assets_NFT_preview_tool[data-owned=true] button[name=update] {
     display: inline-block;
@@ -621,6 +623,7 @@
 #page .Assets_NFT_preview_tool.Assets_NFT_signature[data-owned=false][data-onSale=false] button[name=soldOut],
 #page .Assets_NFT_preview_tool[data-owned=true] button[name=soldOut],
 #page .Assets_NFT_preview_tool[data-owned=true] button[name=buy],
+#page .Assets_NFT_preview_tool[data-owned=true] button[name=buyNow],
 #page .Assets_NFT_preview_tool[data-active=false] {
     display: none;
 }
@@ -630,11 +633,18 @@
 .Assets_nft_btn_select1 img:first-child,
 .Assets_NFT_preview_tool .Assets_NFT_startDate,
 .Assets_NFT_preview_tool .Assets_NFT_endDate,
-#page .Assets_NFT_preview_tool.Assets_NFT_notStarted button[name=buy] {
+#page .Assets_NFT_preview_tool.Assets_NFT_notStarted button[name=buy],
+#page .Assets_NFT_preview_tool.Assets_NFT_notStarted button[name=buyNow] {
     display: none;
 }
 #page .Assets_NFT_preview_tool[data-dummy=true][data-onSale=false] .Assets_NFT_price {
     display: inline-block;
+}
+#page button[name=buy],
+#page button[name=placeBid],
+#page button[name=buyNow] {
+    background: #6ead80;
+    box-shadow: none;
 }
 .Q_mobile .video-container img {
     max-width: 100%;

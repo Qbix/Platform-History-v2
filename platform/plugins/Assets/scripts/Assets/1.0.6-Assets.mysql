@@ -1,4 +1,5 @@
-CREATE TABLE IF NOT EXISTS {{prefix}}nft_attributes (
+DROP TABLE IF EXISTS {{prefix}}nft_attributes;
+CREATE TABLE {{prefix}}nft_attributes (
   publisherId varchar(8) NOT NULL,
   display_type varchar(50) NOT NULL,
   trait_type varchar(100) NOT NULL,
@@ -8,3 +9,17 @@ CREATE TABLE IF NOT EXISTS {{prefix}}nft_attributes (
   
   PRIMARY KEY (publisherId, display_type, trait_type, value)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+DROP TABLE IF EXISTS {{prefix}}purchase;
+CREATE TABLE {{prefix}}purchase (
+  id int(11) NOT NULL AUTO_INCREMENT,
+  publisherId varbinary(255) DEFAULT NULL,
+  streamName varbinary(255) DEFAULT NULL,
+  insertedTime datetime DEFAULT NULL,
+  updatedTime datetime DEFAULT NULL,
+  status varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  buyer varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  txHash varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (id),
+  KEY publisherId (publisherId, streamName)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
