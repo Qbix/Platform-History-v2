@@ -26,6 +26,7 @@
         var tool = this;
         var state = tool.state;
         var $toolElement = $(this.element);
+        tool.preview = Q.Tool.from(this.element, "Streams/preview");
 
         if (Q.isEmpty(state.chainId)) {
             return Q.alert("chain id required!");
@@ -240,16 +241,20 @@
 
                 $toolElement.activate();
 
-                $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
-                    userId: userId,
-                    icon: 50,
-                    contents: true,
-                    editable: false
-                }).activate(function () {
-                    $(this.element).on(Q.Pointer.fastclick, function (e) {
-                        Q.handle(state.onAvatar, this, [e]);
+                if (userId) {
+                    $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
+                        userId: userId,
+                        icon: 50,
+                        contents: true,
+                        editable: false
+                    }).activate(function () {
+                        $(this.element).on(Q.Pointer.fastclick, function (e) {
+                            Q.handle(state.onAvatar, this, [e]);
+                        });
                     });
-                });
+                } else {
+                    $(".Assets_NFT_avatar", tool.element).html(NFT.minimizeAddress(author, 20, 3));
+                }
 
                 // apply Streams/preview icon behavior
                 var movie = data.animation_url;
@@ -334,7 +339,7 @@
 
                 // set onInvoke event
                 $toolElement.on(Q.Pointer.fastclick, function () {
-                    Q.handle(state.onInvoke, tool, [state.tokenId, state.chainId]);
+                    Q.handle(state.onInvoke, tool, [state.tokenId, state.chainId, author, owner]);
                 });
 
                 // buy NFT
@@ -352,6 +357,26 @@
                             tool.init();
                         });
                     });
+                });
+
+                // buyNow NFT
+                $("button[name=buyNow]", tool.element).on(Q.Pointer.fastclick, function (e) {
+                    e.stopPropagation();
+                    e.preventDefault();
+
+                    var wallet = Q.getObject("sales.manual.address", NFT);
+                    if (!wallet) {
+                        return Q.alert("sales manual address required!");
+                    }
+
+                    var info = {
+                        publisherId: data.publisherId,
+                        streamName: data.streamName
+                    };
+
+                    NFT.paymentRequest(wallet, saleInfo.priceDecimal.toString(), info);
+
+                    return false;
                 });
 
                 // button only for owner, provide actions Transfer and put on/off sale
@@ -552,6 +577,7 @@
             </li>
             <li class="action-block">
                 <button name="buy" class="Q_button">{{NFT.Buy}}</button>
+                <button name="buyNow" class="Q_button">{{NFT.BuyNow}}</button>
                 <button name="soldOut" class="Q_button">{{NFT.SoldOut}}</button>
                 <button name="update" class="Q_button">{{NFT.Update}}</button>
             </li>
