@@ -5,22 +5,29 @@ function Assets_NFT_response_getInfo ($params) {
 
 	$tokenId = $request["tokenId"];
 	$chainId = $request["chainId"];
-	$caching = !Q::ifset($request, 'updateCache', false);
+	$updateCache = Q::ifset($request, 'updateCache', false);
+	if ($updateCache) {
+		$caching = null;
+		$cacheDuration = 0;
+	} else {
+		$caching = true;
+		$cacheDuration = null;
+	}
 	$contractAddress = Assets_NFT::getChains($chainId)["contract"];
 
-	$author = Users_Web3::execute($contractAddress, "authorOf", $tokenId, $chainId, $caching);
+	$author = Users_Web3::execute($contractAddress, "authorOf", $tokenId, $chainId, $caching, $cacheDuration);
 	$user = Users_ExternalTo::select()->where(array(
 		"xid" => $author
 	))->fetchDbRow();
 	$userId = Q::ifset($user, "userId", null);
 
-	$owner = Users_Web3::execute($contractAddress, "ownerOf", $tokenId, $chainId, $caching);
+	$owner = Users_Web3::execute($contractAddress, "ownerOf", $tokenId, $chainId, $caching, $cacheDuration);
 
-	$saleInfo = Users_Web3::execute($contractAddress, "saleInfo", $tokenId, $chainId, $caching);
+	$saleInfo = Users_Web3::execute($contractAddress, "saleInfo", $tokenId, $chainId, $caching, $cacheDuration);
 
-	$commissionInfo = Users_Web3::execute($contractAddress, "getCommission", $tokenId, $chainId, $caching);
+	$commissionInfo = Users_Web3::execute($contractAddress, "getCommission", $tokenId, $chainId, $caching, $cacheDuration);
 
-	$url = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, $caching);
+	$url = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, $caching, $cacheDuration);
 	$data = Q::event('Assets/NFT/response/getRemoteJSON', compact("url"));
 
 	return compact("author", "owner", "saleInfo", "commissionInfo", "data", "userId");

@@ -61,9 +61,8 @@ class Users_Web3 extends Base_Users_Web3 {
 			$params = array($params);
 		}
 
-		$cache = null;
+		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 		if ($caching !== false && $cacheDuration) {
-			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 			if ($cache->wasRetrieved()) {
 				return Q::json_decode($cache->result);
 			}
