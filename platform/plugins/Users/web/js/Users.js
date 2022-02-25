@@ -3957,7 +3957,7 @@
 		},
 		/**
 		 * Switch provider to a different Web3 chain
-		 * @method setChain
+		 * @method switchChain
 		 * @static
 		 * @param {Object} info
 		 * @param {Function} onSuccess
@@ -3973,7 +3973,7 @@
 				
 				provider.request({
 					method: 'wallet_switchEthereumChain',
-					params: [{ chainId: '0xf00' }],
+					params: [{ chainId: info.chainId }],
 				}).then(_continue)
 				.catch(function (switchError) {
 					// This error code indicates that the chain has not been added to MetaMask.
