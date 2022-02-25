@@ -41,7 +41,6 @@ function Assets_NFT_response_content ($params) {
 		"xid" => $nftInfo["owner"]
 	))->fetchDbRow();
 	$ownerId = Q::ifset($user, "userId", null);
-	$ownerId = null;
 
 	$defaultIconSize = Q_Config::expect("Q", "images", "NFT/icon", "defaultSize");
 	$sizes = Q_Config::expect("Q", "images", "NFT/icon", "sizes");
