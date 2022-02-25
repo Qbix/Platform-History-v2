@@ -153,51 +153,6 @@ class Users_Web3 extends Base_Users_Web3 {
 		return $data;
 	}
 
-	static $networks = array();
-	static $useCache = null;
-
-	/**
-	 * Get needed environment variables
-	 *
-	 * @method construct
-	 * @param {String} $chainId
-	 * @static
-	 */
-	protected static function construct($chainId) {
-		if (self::$useCache === null) {
-			self::$useCache = Q_Config::get("Users", "web3", "useCache", true);
-		}
-
-		if (self::$networks[$chainId]) {
-			return;
-		}
-
-		$networks = Q_Config::expect("Users", "apps", "web3");
-		foreach ($networks as $n) {
-			if ($n["appId"] == $chainId) {
-				$n["chainId"] = $n["appId"];
-				unset($n["appId"]);
-				self::$networks[$chainId]["network"] = $n;
-				break;
-			}
-		}
-
-		$rpcUrl = self::$networks[$chainId]["network"]["rpcUrl"];
-		self::$networks[$chainId]["web3"] = new Web3($rpcUrl);
-
-		$abiPath = "ABI/".self::$networks[$chainId]["network"]["contracts"]["NFT"]["address"].".json";
-		$filePath = implode(DS, array(APP_WEB_DIR, $abiPath));
-		if (!is_file($filePath)) {
-			$filePath = implode(DS, array(USERS_PLUGIN_WEB_DIR, $abiPath));
-		}
-		if (!is_file($filePath)) {
-			throw new Exception("Users_Web3: abi.json not found");
-		}
-
-		$abi = file_get_contents($filePath);
-		self::$networks[$chainId]["contract"] = new Contract($rpcUrl, $abi);
-	}
-
 	/**
 	 * Get the filename of the ABI file for a contract. 
 	 * Taken from Users/web3/contracts/$contractName/filename config.
