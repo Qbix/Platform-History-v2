@@ -23,7 +23,9 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {string} $methodName in the contract
 	 * @param {string|array} [$params=array()] - params sent to contract method
 	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
-	 * @param {boolean} [$caching=true] Set false to ignore cache and request blockchain and update cache.
+	 * @param {boolean|null|callable} [$caching=true] Set false to ignore cache and request blockchain every time.
+	 *  Set to null to cache any truthy result while not caching falsy results.
+	 *  Or set to a callable function, to be passed the data as JSON, and return boolean indicating whether to cache or not.
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
 	 * @return array
 	 */
@@ -59,9 +61,12 @@ class Users_Web3 extends Base_Users_Web3 {
 			$params = array($params);
 		}
 
-		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
-		if ($caching && $cache->wasRetrieved()) {
-			return Q::json_decode($cache->result);
+		$cache = null;
+		if ($caching !== false && $cacheDuration) {
+			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
+			if ($cache->wasRetrieved()) {
+				return Q::json_decode($cache->result);
+			}
 		}
 
 		if (empty($appInfo['rpcUrl'])) {
@@ -133,8 +138,16 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		if ($cache) {
-			$cache->result = Q::json_encode($data);
-			$cache->save(true);
+			if ((
+				is_callable($caching)
+				and call_user_func_array($caching, array($data))
+			) or (
+				($data && $caching !== false)
+				or (!$data && $caching === true)
+			)) {
+				$cache->result = Q::json_encode($data);
+				$cache->save(true);
+			}
 		}
 
 		return $data;
