@@ -3978,7 +3978,7 @@
 				.catch(function (switchError) {
 					// This error code indicates that the chain has not been added to MetaMask.
 					if (switchError.code !== 4902) {
-						return Q.handle(onError, null, [error]);
+						return Q.handle(onError, null, [switchError]);
 					}
 					provider.request({
 						method: 'wallet_addEthereumChain',
