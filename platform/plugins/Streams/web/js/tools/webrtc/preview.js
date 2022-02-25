@@ -12,11 +12,10 @@
      * @param {Q.Event} [options.onRender] called when tool element completely rendered
      */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
-            console.log('center: Streams/webrtc/preview', this);
+            console.log('WebRTC preview');
 
             var tool = this;
             this.state = Q.extend({}, this.state, options);
-            console.log('center: Streams/webrtc/preview2', this.state);
 
             var state = this.state;
             tool.preview = preview;
@@ -34,7 +33,7 @@
                 }
 
                 tool.text = text;
-                preview.state.onRefresh.add(tool.refresh.bind(tool));
+                tool.preview.state.onRefresh.add(tool.refresh.bind(tool));
             });
 
             this.preview.state.beforeClose = function (wasRemoved) {
@@ -45,11 +44,13 @@
                         userId:  tool.stream.fields.publisherId
                     }),
                 }, function () {
-                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                         tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                             resumeClosed: true
                         }).then(function () {
+                            Q.handle(state.onRoomSwitch, tool, ['main']);
                             previewTool.delete();
+                            tool.state.guestWaitingRoom = null;
                         });
                     } else {
                         if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -59,7 +60,8 @@
 
             };
 
-            tool.refresh();
+            console.log('WebRTC preview 2');
+            //tool.refresh();
 
 
         },
@@ -76,7 +78,8 @@
             onWebRTCRoomCreated: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
-            onRender: new Q.Event()
+            onRender: new Q.Event(),
+            onRoomSwitch: new Q.Event()
         },
 
         {
@@ -85,9 +88,11 @@
                 var state = this.state;
                 var $toolElement = $(tool.element);
 
+                console.log('WebRTC preview refresh 1', stream, tool.state);
                 if (!Q.Streams.isStream(stream)) {
                     return;
                 }
+                console.log('WebRTC preview refresh 2');
 
                 stream.observe();
 
@@ -107,27 +112,32 @@
                     preamble = Q.getObject('webtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
                 }
 
+                var tzOffset = new Date().getTimezoneOffset();
+                var updatedTimeTs= new Date(stream.fields.insertedTime).getTime() / 1000;
+                var time = Math.sign(tzOffset) == -1 ? updatedTimeTs + (Math.abs(tzOffset) * 60) : updatedTimeTs - (Math.abs(tzOffset) * 60);
                 var fields = Q.extend({}, state.templates.view.fields, {
                     publisherId: stream.fields.publisherId,
                     streamName: stream.fields.name,
                     alt: 'icon',
                     title: stream.fields.title,
                     content: stream.fields.content,
+                    time:time,
                     duration: duration,
-                    preamble: preamble
+                    preamble: preamble,
+                    text: tool.text
                 });
 
                 console.log('preview: fields', fields, stream);
 
-
-                if(state.mainRoomStream == null) return;
-
-                console.log('preview: renderTool', state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name);
+                console.log('preview: renderTool');
                 Q.Template.render(
                     'Streams/webrtc/preview/view',
                     fields,
                     function (err, html) {
-                        if (err) return;
+                        if (err) {
+                            console.error(err);
+                            return;
+                        }
                         tool.element.innerHTML = html;
                         Q.activate(tool, function () {
                             // load the icon
@@ -150,7 +160,7 @@
                     state.templates.view
                 );
 
-                var titleContainer = tool.element.querySelector('.Streams_preview_title');
+                var titleContainer = tool.element.querySelector('.Streams_preview_title_text');
                 var aboutContainer = tool.element.querySelector('.Streams_preview_about');
                 var previewMediaContainer = tool.element.querySelector('.Streams_preview_media_container');
                 var praticipantsContainer = tool.element.querySelector('.Streams_preview_participants');
@@ -165,17 +175,21 @@
                         acceptButton.style.display = 'none';
                         switchBackButton.style.display = 'none';
                         callButton.style.display = 'none';
+                        holdButton.style.display = 'none';
+                        approveButton.style.display = 'none';
 
                         if(tool.state.mainWebrtcRoom == null || !tool.state.mainWebrtcRoom.isActive()) {
                             if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
                             tool.preview.delete();
 
-                        } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                        } else if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                             tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                                 resumeClosed: true
                             }).then(function () {
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
+                                tool.state.guestWaitingRoom = null;
+                                Q.handle(state.onRoomSwitch, tool, ['main']);
                             });
                         } else {
                             if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -201,6 +215,7 @@
 
                 callButton.addEventListener('click', function () {
 
+                    console.log('callButton', tool.state.mainWebrtcRoom);
                     if(tool.state.mainWebrtcRoom != null && tool.state.mainWebrtcRoom.isActive()) {
                         tool.state.mainWebrtcRoom.switchTo( stream.fields.publisherId, stream.fields.name.split('/').pop(), {
                             resumeClosed: false
@@ -208,6 +223,7 @@
                             tool.state.guestWaitingRoom = tool.state.mainWebrtcRoom;
                             //tool.state.mainWebrtcRoom = null;
 
+                            Q.handle(state.onRoomSwitch, tool, ['waiting']);
                             moveVisualizationToPreview();
                             //praticipantsContainer.style.display = 'none';
                             callButton.style.display = 'none';
@@ -219,6 +235,7 @@
                                 content: 'started',
                             })
                             Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.mainWebrtcRoom]);
+                            Q.handle(state.onRoomSwitch, tool, ['waiting']);
                         });
 
                     } else {
@@ -238,12 +255,15 @@
                                 holdButton.style.display = 'flex';
                                 moveVisualizationToPreview();
                                 Q.handle(state.onWebRTCRoomCreated, tool, [tool.state.waitingtWebRTCRoom]);
+                                Q.handle(state.onRoomSwitch, tool, ['waiting']);
                             },
                             onWebrtcControlsCreated: function() {
                                 Q.handle(state.onWebrtcControlsCreated, tool, [tool.state.waitingtWebRTCRoom]);
                             },
                             onWebRTCRoomEnded: function () {
+                                Q.handle(state.onRoomSwitch, tool, ['none']);
                                 Q.handle(state.onWebRTCRoomEnded, tool, [tool.state.waitingtWebRTCRoom]);
+                                tool.state.guestWaitingRoom = null;
                             }
                         });
                     }
@@ -257,7 +277,7 @@
                             userId: fields.publisherId
                         }),
                     }, function () {
-                        if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                        if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                             tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                                 resumeClosed: true
                             }).then(function () {
@@ -266,6 +286,8 @@
 
                                 tool.preview.delete();
                                 moveVisualizationToMainContainer();
+                                tool.state.guestWaitingRoom = null;
+                                Q.handle(state.onRoomSwitch, tool, ['main']);
                             });
                         } else {
                             acceptButton.style.display = 'none';
@@ -281,7 +303,7 @@
 
 
                 holdButton.addEventListener('click', function () {
-                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive()) {
+                    if (tool.state.mainWebrtcRoom && tool.state.mainWebrtcRoom.isActive() && tool.state.guestWaitingRoom) {
                         tool.state.guestWaitingRoom.switchTo(state.mainRoomStream.fields.publisherId, state.mainRoomStream.fields.name, {
                             resumeClosed: true
                         }).then(function () {
@@ -290,11 +312,13 @@
                             acceptButton.style.display = '';
                             callButton.style.display = '';
 
-                            moveVisualizationToMainContainer();
+                            if(tool.state.guestWaitingRoom.screenRendering.getActiveViewMode() == 'audio') moveVisualizationToMainContainer();
                             tool.stream.post({
                                 type: 'Streams/calls/interviewing',
                                 content: 'ended',
                             })
+                            tool.state.guestWaitingRoom = null;
+                            Q.handle(state.onRoomSwitch, tool, ['main']);
                         });
                     } else {
                         if(tool.state.guestWaitingRoom) tool.state.guestWaitingRoom.stop();
@@ -317,7 +341,7 @@
                             approveButton.innerHTML = 'Approved';
                         } else {
                             tool.state.approved = false;
-                            approveButton.innerHTML = 'Approve';
+                            approveButton.innerHTML = 'Mark Approved';
                         }
 
                         tool.stream.post({
@@ -339,6 +363,8 @@
                 function moveVisualizationToPreview() {
                     console.log('moveVisualizationToPreview');
                     let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
+                    console.log('moveVisualizationToPreview', currentMediaContainer, previewMediaContainer);
+
                     if(currentMediaContainer) {
                         previewMediaContainer.appendChild(currentMediaContainer)
                         previewMediaContainer.style.display = 'block';
@@ -349,6 +375,7 @@
                     console.log('moveVisualizationToMainContainer');
                     let mediaContainerOfMainRoom = tool.state.guestWaitingRoom.options().element;
                     let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
+
                     if(currentMediaContainer && mediaContainerOfMainRoom) {
                         mediaContainerOfMainRoom.appendChild(currentMediaContainer)
                         previewMediaContainer.style.display = 'none';
@@ -361,7 +388,7 @@
                     let byUserId = message.byUserId;
                     if(message.content == 'started') {
                         if (tool.isHost(byUserId) && byUserId != Q.Users.loggedInUserId()) {
-                            titleContainer.innerHTML = 'Currently is interviewed by another host';
+                            titleContainer.innerHTML = tool.text.calls.interviewedByAnotherHost;
                         }
                     } else {
                         if (tool.isHost(byUserId) && byUserId != Q.Users.loggedInUserId()) {
@@ -382,12 +409,6 @@
                     updateTitle();
                 });
 
-                /*tool.stream.onMessage("Streams/approved").set(function (stream, message) {
-                    console.log('PREVIEW stream APPROVED event:', message)
-                    let byUserId = message.byUserId;
-
-                });*/
-
                 tool.stream.onMessage("Streams/changed").set(function (stream, message) {
                     console.log('PREVIEW stream CHANGED event:', message)
                     let byUserId = message.byUserId;
@@ -402,7 +423,7 @@
                             if(!approveButton.classList.contains('Streams_preview_approve_button_approved')) approveButton.classList.add('Streams_preview_approve_button_approved');
 
                         } else {
-                            approveButton.innerHTML = 'Approve';
+                            approveButton.innerHTML = 'Mark Approved';
                             if(approveButton.classList.contains('Streams_preview_approve_button_approved')) approveButton.classList.remove('Streams_preview_approve_button_approved');
                         }
                     }
@@ -466,7 +487,7 @@
         + '<img alt="{{alt}}" class="Streams_preview_icon">'
         + '<div class="Streams_preview_contents {{titleClass}}">'
         + '<{{titleTag}} class="Streams_preview_preamble">{{preamble}} <span class="Streams_webrtc_duration">{{duration}}</span></{{titleTag}}>'
-        + '<{{titleTag}} class="Streams_preview_title">{{title}}</{{titleTag}}>'
+        + '<{{titleTag}} class="Streams_preview_title"><span class="Streams_preview_title_text">{{title}}</span><span class="Streams_preview_titme">{{&tool "Q/timestamp" time=time}}</span></{{titleTag}}>'
         + '<div class="Streams_preview_content">'
         + '<div class="Streams_preview_about"><div class="Streams_preview_about_avatar">{{&tool "Users/avatar" userId=publisherId}}</div><div class="Streams_chat_bubble"><div class="Streams_chat_tick"></div><div class="Streams_chat_message">{{content}}</div></div></div>'
         + '<div class="Streams_preview_body">'
@@ -474,13 +495,13 @@
         + '<div class="Streams_preview_participants" style="display: none;">{{&tool "Streams/participants" "" publisherId=publisherId streamName=streamName maxShow=10 invite=false hideIfNoParticipants=true showSummary=false}}</div>'
         + '<div class="Streams_preview_call_control">'
         + '<div class="Streams_preview_call_control_call">'
-        + '<div class="Streams_preview_approve_button">Approve</div>'
-        + '<div class="Streams_preview_call_button">Interview</div>'
-        + '<div class="Streams_preview_switch_back_button">End Call</div>'
-        + '<div class="Streams_preview_hold_button">Hold</div>'
+        + '<div class="Streams_preview_approve_button">{{text.calls.markApproved}}</div>'
+        + '<div class="Streams_preview_call_button">{{text.calls.interview}}</div>'
+        + '<div class="Streams_preview_switch_back_button">{{text.calls.endCall}}</div>'
+        + '<div class="Streams_preview_hold_button">{{text.calls.putOnHold}}</div>'
         + '</div>'
         + '<div class="Streams_preview_call_control_allow">'
-        + '<div class="Streams_preview_accept_button">Accept The Call</div>'
+        + '<div class="Streams_preview_accept_button">{{text.calls.bringToLive}}</div>'
         + '</div>'
         + '</div></div></div></div>'
     );

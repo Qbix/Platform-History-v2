@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS {{prefix}}nft_attributes (
+  publisherId varchar(8) NOT NULL,
+  display_type varchar(50) NOT NULL,
+  trait_type varchar(100) NOT NULL,
+  value varchar(100) NOT NULL,
+  insertedTime timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updatedTime timestamp NULL DEFAULT NULL,
+  
+  PRIMARY KEY (publisherId, display_type, trait_type, value)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

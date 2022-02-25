@@ -817,6 +817,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var screensRendering = (function () {
             var activeScreen;
             var activeScreenRect;
+            var activeScreensType;
             var viewMode;
             var prevViewMode;
             var roomScreens = [];
@@ -877,6 +878,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 this.audioScreen = {
                     screenEl: null,
                     nameEl: null,
+                    avatarCon: null,
+                    avatarImgCon: null
                 };
                 this.tracks = [];
                 this.streams = [];
@@ -890,15 +893,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         return trackObj.kind == 'video';
                     });
                 }
-                this.hasLiveTracks = function () {
+                this.hasLiveTracks = function (kind) {
                     var hasLiveTracks = false;
                     for(let t in this.tracks) {
                         let track = this.tracks[t];
-                        if(track.mediaStreamTrack.enabled == true && track.mediaStreamTrack.readyState == 'live') {
+                        if(kind && kind != this.tracks[t].kind) continue;
+                        if(track.mediaStreamTrack.muted == false && track.mediaStreamTrack.readyState != 'ended') {
                             hasLiveTracks = true;
                             break;
                         }
                     }
+
                     return hasLiveTracks;
                 }
                 this.audioTracks = function () {
@@ -925,6 +930,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(this.videoScreen.screenEl && this.videoScreen.screenEl.parentNode != null) {
                         this.videoScreen.screenEl.parentNode.removeChild(this.videoScreen.screenEl);
                     }
+                    log('switchToAudioScreen : hasLiveTracks',  this.hasLiveTracks('video'));
+
+                    this.fillAudioScreenWithAvatarOrVideo();
                     this.screenEl.appendChild(this.audioScreen.screenEl);
                 };
                 this.switchToVideoScreen = function () {
@@ -956,8 +964,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(this.audioScreen.screenEl && this.audioScreen.screenEl.parentNode != null) {
                         this.audioScreen.screenEl.parentNode.removeChild(this.audioScreen.screenEl);
                     }
+
+                    if(this.videoTrack) this.videoScreen.videoCon.appendChild(this.videoTrack);
+
                     this.screenEl.appendChild(this.videoScreen.screenEl);
                 };
+                this.fillAudioScreenWithAvatarOrVideo = function () {
+                    if(this.videoTrack && this.hasLiveTracks('video')) {
+                        this.audioScreen.avatarImgCon.innerHTML = '';
+                        this.audioScreen.avatarImgCon.appendChild(this.videoTrack);
+                    } else {
+                        this.audioScreen.avatarImgCon.innerHTML = '';
+                        this.audioScreen.avatarImgCon.appendChild(this.audioScreen.avatarImg);
+                    }
+                }
                 this.hide = function() {
                     log('screen.hide');
                     let screen = this;
@@ -1041,8 +1061,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 name: 'participantScreenAudio',
                                 type: 'circles',
                                 participant: screen.participant,
-                                element: screen.audioScreen.avatarCon,
-                                stopOnMute: true
+                                element: screen.audioScreen.avatarCon
                             });
                         }
                     } else if (screen.activeScreenType == 'video') {
@@ -1050,8 +1069,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             WebRTCconference.mediaManager.audioVisualization.build({
                                 name: 'participantScreenVideo',
                                 participant: screen.participant,
-                                element: screen.videoScreen.soundEl,
-                                stopOnMute: true
+                                element: screen.videoScreen.soundEl
                             });
                         }
                     }
@@ -1307,8 +1325,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreenVideo',
                         participant: screen.participant,
-                        element: participantVoice,
-                        stopOnMute: true
+                        element: participantVoice
                     });
                 }
 
@@ -1376,7 +1393,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(screen.screensharing) audioScreenEl.classList.add('Streams_webrtc_chat-active-screen-sharing');
                 var chatParticipantAvatarCon = screen.audioScreen.avatarCon = document.createElement('DIV');
                 chatParticipantAvatarCon.className = 'Streams_webrtc_chat-participant-avatar-con';
-                var chatParticipantAvatarInner = document.createElement('DIV');
+                var dummyElForEqualGeught = document.createElement('DIV');
+                dummyElForEqualGeught.className = 'Streams_webrtc_chat-participant-avatar-dummy';
+                var chatParticipantAvatarInner = screen.audioScreen.avatarImgCon = document.createElement('DIV');
                 chatParticipantAvatarInner.className = 'Streams_webrtc_chat-participant-avatar';
                 var chatParticipantName = screen.audioScreen.nameEl = document.createElement('DIV');
                 chatParticipantName.className = 'Streams_webrtc_chat-participant-name';
@@ -1390,8 +1409,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         name: 'participantScreenAudio',
                         participant: screen.participant,
                         type: 'circles',
-                        element: screen.audioScreen.avatarCon,
-                        stopOnMute: true
+                        element: screen.audioScreen.avatarCon
                     });
                 }
 
@@ -1410,7 +1428,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         avatarImg.setAttribute('draggable', false);
 
                         chatParticipantAvatarInner.appendChild(avatarImg);
-
+                        screen.audioScreen.avatarImg = avatarImg;
                     }
                 });
 
@@ -1435,13 +1453,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     WebRTCconference.mediaManager.audioVisualization.build({
                         name: 'participantScreen',
                         participant: screen.participant,
-                        element: participantVoice,
-                        stopOnMute: true
+                        element: participantVoice
                     });
                 }*/
 
                 participantNameTextCon.appendChild(participantNameText);
                 chatParticipantName.appendChild(participantNameTextCon);
+                chatParticipantAvatarCon.appendChild(dummyElForEqualGeught);
                 chatParticipantAvatarCon.appendChild(chatParticipantAvatarInner);
                 audioScreenEl.appendChild(chatParticipantAvatarCon);
                 audioScreenEl.appendChild(chatParticipantName);
@@ -1465,9 +1483,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function newTrackAdded(track, participant) {
                 log('newTrackAdded', participant.screens.length, participant.isLocal);
                 if(participant.screens.length >= 1) log('newTrackAdded', participant.screens[0].tracks.length);
-
+                var trackParentScreen;
                 if(track.kind == 'video') {
-                    var trackParentScreen;
                     if(track.parentScreen != null) {
                         trackParentScreen = track.parentScreen;
                     }  else if(participant.screens.length == 1 && participant.screens[0].tracks.length == 0){
@@ -1479,8 +1496,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         trackParentScreen = createRoomScreen(participant);
                     }
 
+                    trackParentScreen.videoTrack = track.trackEl;
                     trackParentScreen.videoScreen.videoCon.appendChild(track.trackEl);
+
+                    if(trackParentScreen.activeScreenType == 'audio') {
+                        trackParentScreen.fillAudioScreenWithAvatarOrVideo();
+                    }
                 }
+
 
             }
 
@@ -2069,6 +2092,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             function switchScreenType(modeToSwitchTo) {
                 log('switchScreenType', modeToSwitchTo, roomScreens.length)
+                //if(modeToSwitchTo == activeScreensType) return;
                 var participants = WebRTCconference.roomParticipants();
                 if(modeToSwitchTo == 'video') {
                     for(let p in participants) {
@@ -2090,6 +2114,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                 }
+
+                //activeScreensType = modeToSwitchTo;
             }
 
             /**
@@ -2570,7 +2596,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var elements = toggleScreensClass('regularScreensGrid');
                 if(!_layoutTool.getLayoutGenerator('regularScreensGrid')) {
                     _layoutTool.setLayoutGenerator('regularScreensGrid', function (container, count) {
-                        return customLayouts.regularScreensGrid(document.body, roomScreens);
+                        return customLayouts.regularScreensGrid(_options.element, roomScreens);
                     });
                 }
 
@@ -2647,7 +2673,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(!_layoutTool.getLayoutGenerator('minimizedScreensGrid')) {
                     _layoutTool.setLayoutGenerator('minimizedScreensGrid', function (container, count) {
-                        return customLayouts.minimizedOrMaximizedScreenGrid(document.body, count, _controls.querySelector('.Streams_webrtc_conference-control'), false);
+                        return customLayouts.minimizedOrMaximizedScreenGrid(_roomsMedia, count, _controls.querySelector('.Streams_webrtc_conference-control'), false);
                     });
                 }
 
@@ -2692,7 +2718,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('renderMaximizedScreensGrid activeScreen')
 
                 if(!_layoutTool.getLayoutGenerator('maximizedScreensGrid')) _layoutTool.setLayoutGenerator('maximizedScreensGrid', function (container, count) {
-                    return customLayouts.minimizedOrMaximizedScreenGrid(document.body, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
+                    return customLayouts.minimizedOrMaximizedScreenGrid(_roomsMedia, count, _controls.querySelector('.Streams_webrtc_conference-control'), true);
                 });
 
                 var elements = toggleScreensClass('maximizedScreensGrid');
@@ -2850,130 +2876,116 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                  * @param {Object} [container] HTML parent element participants' screens.
                  * @return {Array} List of DOMRects that will be passed to Q.layout.
                  */
-                regularScreensGrid: function (container, roomScreens) {
-
+                regularScreensGrid: function (container) {
                     var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
                     var parentWidth = containerRect.width;
                     var parentHeight = containerRect.height;
+                    var defaultRectWidth = containerRect.width < 256 ? containerRect.width : 256;
+                    var defaultRectHeight = containerRect.height < 192 ? containerRect.height : 192;
+                    var maxLongestSide =  Math.min(defaultRectWidth, defaultRectHeight);
+                    var defaultDOMRect = getElementSizeKeepingRatio({
+                        width: defaultRectWidth,
+                        height: defaultRectHeight
+                    }, {width: maxLongestSide, height: maxLongestSide})
                     var centerX = containerRect.width / 2;
                     var centerY = containerRect.height / 2;
                     var rectsRows = [];
                     var currentRow = [];
-
                     var spaceBetween = 10;
-
+                    var prevRect = null;
                     var count = roomScreens.length;
-                    var i, screen;
+
+                    var minX, maxX, maxX, minY, maxY;
+                    var nextAction = null;
+
+                    var i;
                     for (i = 0; i < count; i++) {
                         var screen = roomScreens[i];
-
                         var screenElRect = screen.screenEl.getBoundingClientRect();
                         var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
                         var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
 
+                        //if video element has width and height, rect's proportions will be based on the size of video
                         var newRectSize = null;
                         if(videoWidth != 0 && videoHeight != 0) {
                             newRectSize = getElementSizeKeepingRatio({
                                 width: videoWidth,
                                 height: videoHeight
-                            }, {width: 250, height: 250})
-                        } else if(videoWidth == 0 && videoHeight == 0 && screenElRect.width != 0 && screenElRect.height != 0 ) {
-                            newRectSize = {
-                                width: screen.videoScreen.nameEl.firstChild.scrollWidth + 30 + (screen.videoScreen.nameEl.firstChild.offsetLeft * 2),
-                                height: screen.videoScreen.nameEl.scrollHeight
-                            };
+                            }, {width: maxLongestSide, height: maxLongestSide})
                         } else {
-                            var rect = new DOMRect(centerX, centerY, 0, 0);
-                            currentRow.push(rect);
-
-                            if(i+1 == roomScreens.length){
-                                rectsRows.push(currentRow);
-                                currentRow = [];
-                            }
-                            continue;
+                            //if video's size still = 0x0, rect's proportions will be 4:3
+                            newRectSize = defaultDOMRect;
                         }
-
 
                         if(videoWidth != 0 && videoHeight != 0) newRectSize.height = newRectSize.height + 50;
 
-
-                        var prevRect = currentRow[currentRow.length - 1];
                         var prevRow = rectsRows[rectsRows.length - 1];
 
+                        //new row started - no rects in current row yet
                         if(currentRow.length == 0) {
-
+                            //if it's very first rect. render it strictly in the center
                             if(rectsRows.length == 0) {
                                 var x = centerX - (newRectSize.width / 2);
                                 var y = centerY - (newRectSize.height / 2);
                                 var domRect = new DOMRect(x, y, newRectSize.width, newRectSize.height);
                                 currentRow.push(domRect);
+                                prevRect = domRect;
                             } else {
-                                var minY = Math.min.apply(Math, rectsRows[0].map(function(r) { return r.top; }));
-                                var maxY = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function(r) { return r.top + r.height;}));
-                                var freeRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
+                                let minY = Math.min.apply(Math, rectsRows[0].map(function(r) { return r.top; }));
+                                let maxY = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function(r) { return r.top + r.height;}));
+                                let freeYRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
 
-                                if(freeRoom >= (newRectSize.height + spaceBetween))  {
-                                    var startXPosition = centerX - (newRectSize.width / 2);
+                                if(freeYRoom >= (newRectSize.height + spaceBetween * 2)) {
+                                    //if there is enough room for one more row, make new row AND align ALL rects vertically inside its parent
                                     var topPosition = maxY + spaceBetween;
-                                    var domRect = new DOMRect(centerX - (newRectSize.width / 2), topPosition, newRectSize.width, newRectSize.height);
-
-                                    var newMaxY = domRect.top + domRect.height;
+                                    var newMaxY = topPosition + newRectSize.height;
                                     var newTopPosition = centerY - ((newMaxY - minY) / 2);
+                                    if(newTopPosition <= spaceBetween) {
+                                        newTopPosition = spaceBetween;
+                                    }
                                     var moveAllRectsOn = minY - newTopPosition;
+
                                     for(var x in rectsRows) {
 
                                         var row = rectsRows[x];
                                         var s;
                                         for(s = 0; s < row.length; s++) {
-                                            row[s] = new DOMRect(row[s].left, row[s].top - moveAllRectsOn, row[s].width, row[s].height);
+                                            row[s].y = row[s].top - moveAllRectsOn;
                                         }
                                     }
                                     var domRect = new DOMRect(centerX - (newRectSize.width / 2), topPosition - moveAllRectsOn, newRectSize.width, newRectSize.height);
+                                    prevRect = domRect;
                                     currentRow.push(domRect);
                                 }
-
                             }
                         } else {
-
-                            var minX = Math.min.apply(Math, currentRow.map(function (r) {
+                            let minX = Math.min.apply(Math, currentRow.map(function (r) {
                                 return r.left;
                             }));
-                            var maxX = Math.max.apply(Math, currentRow.map(function (r) {
+                            let maxX = Math.max.apply(Math, currentRow.map(function (r) {
                                 return r.left + r.width;
                             }));
-                            var freeRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
-                            if (freeRoom >= (newRectSize.width + spaceBetween * 2)) {
-                                var xPosition = prevRect.left + (prevRect.width + spaceBetween);
-                                var topPosition;
-                                if (prevRow == null) {
-                                    var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
-                                        return r.top;
-                                    }));
-                                    var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
-                                        return r.top + r.height;
-                                    }));
-                                    topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
-                                } else {
-                                    var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
-                                        return r.top;
-                                    }));
-                                    var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
-                                        return r.top + r.height;
-                                    }));
-                                    topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
-                                }
+
+                            let freeXRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+
+                            //if threre is enough space in current row (horizontally), continue adding new rect to current row
+                            if (freeXRoom >= (newRectSize.width + spaceBetween * 2)) {
+                                var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {return r.top;}));
+                                var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {return r.top + r.height;}));
+                                var topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+
+                                //insert new rect centralized vertically relatively to current row
                                 var domRect = new DOMRect(prevRect.left + (prevRect.width + spaceBetween), topPosition, newRectSize.width, newRectSize.height);
+                                prevRect = domRect;
                                 currentRow.push(domRect);
-                                var minX = Math.min.apply(Math, currentRow.map(function (r) {
-                                    return r.left;
-                                }));
-                                var maxX = Math.max.apply(Math, currentRow.map(function (r) {
-                                    return r.left + r.width;
-                                }));
+
+                                let minX = Math.min.apply(Math, currentRow.map(function (r) {return r.left;}));
+                                let maxX = Math.max.apply(Math, currentRow.map(function (r) {return r.left + r.width;}));
 
                                 var newLeftPosition = centerX - ((maxX - minX) / 2);
                                 var moveAllRectsOn = minX - newLeftPosition;
 
+                                //if current row intersects with previous top row, move current row lower
                                 if (prevRow != null) {
                                     var maxYOfAllPrevRow = Math.max.apply(Math, prevRow.map(function (r) {
                                         return r.top + r.height;
@@ -2982,44 +2994,306 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         return r.top;
                                     }));
                                     if (minYOfAllCurRow <= maxYOfAllPrevRow) {
-                                        var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
-                                            return r.top;
-                                        }));
-                                        var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
-                                            return r.top + r.height;
-                                        }));
+                                        var topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {return r.top;}));
+                                        var bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {return r.top + r.height;}));
 
-                                        var newTop = (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween;
-                                        var x, screen;
+                                        var x;
                                         var rowLength = currentRow.length;
                                         for (x = 0; x < rowLength; x++) {
                                             var topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (currentRow[x].height / 2) + (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween
-                                            currentRow[x] = new DOMRect(currentRow[x].left, topPosition, currentRow[x].width, currentRow[x].height);
+                                            currentRow[x].y = topPosition;
 
                                         }
                                     }
                                 }
 
-
+                                //centralize all rects in current row horizontally
                                 for (var x in currentRow) {
-                                    var newXPosition = currentRow[x].left - moveAllRectsOn;
-                                    currentRow[x] = new DOMRect(newXPosition, currentRow[x].top, currentRow[x].width, currentRow[x].height);
+                                    var newXPosition = currentRow[x].x - moveAllRectsOn;
+                                    currentRow[x].x = newXPosition;
                                 }
-                            } else {
-                                i = i - 1;
-                                rectsRows.push(currentRow);
-                                currentRow = [];
-                                continue;
                             }
                         }
 
 
-                        if(i+1 == roomScreens.length || freeRoom < newRectSize.width){
+                        let allRects = []
+                        let allRows = [...rectsRows, ...[currentRow]];
+                        for(let x in allRows) {
+                            for(let r in allRows[x]) {
+                                allRects.push(allRows[x][r]);
+                            }
+                        }
+
+                        minX = Math.min.apply(Math, currentRow.map(function (r) {return r.left;}));
+                        maxX = Math.max.apply(Math, currentRow.map(function (r) {return r.left + r.width;}));
+                        let freeXRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+                        minY = Math.min.apply(Math, allRects.map(function(r) { return r.top; }));
+                        maxY = Math.max.apply(Math, allRects.map(function(r) { return r.top + r.height;}));
+                        let freeYRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
+
+                        if(i+1 != roomScreens.length && freeXRoom < (newRectSize.width + spaceBetween * 2) && freeYRoom < (newRectSize.height + spaceBetween * 2)){
+                            // if there is no free room horizontally and vertically in parent container, move to next step - adding rects making parent container scrollable
+                            nextAction = 'makeScrollable';
+                            rectsRows.push(currentRow);
+                            currentRow = [];
+                            break;
+                        } else if(i+1 == roomScreens.length || freeXRoom <= (newRectSize.width + spaceBetween * 2)){
+                            // if there is no free room horizontally anymore AND there is free room vertically, insert new row
                             rectsRows.push(currentRow);
                             currentRow = [];
                         }
+                    }
+
+                    var rects = [];
+                    var k, row;
+                    for(k= 0; row = rectsRows[k]; k++) {
+                        rects = rects.concat(row);
+                    }
+                    var minX = Math.min.apply(Math, rects.map(function(r) { return r.left; }));
+                    var maxX = Math.max.apply(Math, rects.map(function(r) { return r.left + r.width;}));
+                    var minY = Math.min.apply(Math, rects.map(function(r) { return r.top; }));
+                    var maxY = Math.max.apply(Math, rects.map(function(r) { return r.top + r.height;}));
+
+                    //if parent container doesn't have space for new rectangles, it will continue adding new rects to this container making it scrollable
+                    if(nextAction == 'makeScrollable') {
+                        //if aspect ratio is more than 2.5, put new rects to the right of container - it will create horizontal scrollbar
+                        if(containerRect.width / containerRect.height >= 2.5) {
+
+                            //align all rects by left side
+                            if(minX > spaceBetween) {
+                                let moveAllRectsOn = minX - spaceBetween;
+                                for (let x in rectsRows) {
+                                    let row = rectsRows[x];
+                                    for (let s in row) {
+                                        row[s].x = row[s].x - moveAllRectsOn;
+                                    }
+                                }
+                            }
+
+                            let currentCol = [];
+                            for (i = i+1; i < count; i++) {
+                                var screen = roomScreens[i];
+
+                                var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
+                                var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+
+                                //if video element has width and height, rect's proportions will be based on the size of video
+                                var newRectSize = null;
+                                if(videoWidth != 0 && videoHeight != 0) {
+                                    newRectSize = getElementSizeKeepingRatio({
+                                        width: videoWidth,
+                                        height: videoHeight
+                                    }, {width: maxLongestSide, height: maxLongestSide})
+                                } else {
+                                    //if video's size still = 0x0, rect's proportions will be 4:3
+                                    newRectSize = defaultDOMRect;
+                                }
+
+                                if(videoWidth != 0 && videoHeight != 0) newRectSize.height = newRectSize.height + 50;
+
+                                //new row started - no rects in current col yet
+                                if(currentCol.length == 0) {
+                                    //create first rectangle in col and align it vertically
+                                    let minY = Math.min.apply(Math, rectsRows[0].map(function(r) { return r.top; }));
+                                    let maxY = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function(r) { return r.top + r.height;}));
+                                    let freeYRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
+
+                                    let minX = Math.min.apply(Math, rectsRows[0].map(function (r) {return r.left;}));
+                                    let maxX = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function (r) {return r.left + r.width;}));
+                                    let freeXRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+
+                                    var domRect = new DOMRect(maxX + spaceBetween, centerY - (newRectSize.height / 2), newRectSize.width, newRectSize.height);
+                                    currentCol.push(domRect);
+                                    prevRect = domRect;
 
 
+                                } else {
+                                    let minY = Math.min.apply(Math, currentCol.map(function (r) {
+                                        return r.top;
+                                    }));
+                                    let maxY = Math.max.apply(Math, currentCol.map(function (r) {
+                                        return r.top + r.height;
+                                    }));
+
+                                    let freeYRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
+
+                                    //if threre is enough space in current col, continue adding new rect to current row
+                                    if (freeYRoom >= (newRectSize.height + spaceBetween * 2)) {
+
+                                        let topOfSmallest = Math.max.apply(Math, currentCol.map(function (r) {
+                                            return r.top;
+                                        }));
+                                        let bottomOfSmallest = Math.min.apply(Math, currentCol.map(function (r) {
+                                            return r.top + r.height;
+                                        }));
+                                        let topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+
+                                        let domRect = new DOMRect(prevRect.left, prevRect.top + (prevRect.height + spaceBetween), newRectSize.width, newRectSize.height);
+                                        prevRect = domRect;
+                                        currentCol.push(domRect);
+
+                                        let minY = Math.min.apply(Math, currentCol.map(function (r) {
+                                            return r.top;
+                                        }));
+                                        let maxY = Math.max.apply(Math, currentCol.map(function (r) {
+                                            return r.top + r.height;
+                                        }));
+
+
+                                        let newTopPosition = centerY - ((maxY - minY) / 2);
+                                        let moveAllRectsOn = minY - newTopPosition;
+
+                                        //centralize all rects in current col
+                                        for (let x in currentCol) {
+                                            let newYPosition = currentCol[x].top - moveAllRectsOn;
+                                            currentCol[x].y = newYPosition;
+                                        }
+                                    } else {
+                                        //if there is no enogh space in current col, create new col and continue
+                                        i = i - 1;
+                                        rectsRows.push(currentCol);
+                                        currentCol = [];
+                                        continue;
+                                    }
+                                }
+
+                                if(i+1 == roomScreens.length){
+                                    rectsRows.push(currentCol);
+                                    currentCol = [];
+                                }
+
+                            }
+                        } else {
+                            //if aspect ratio is less than 2.5, add new rects on the bottom - it will create vertical scrollbar
+
+                            //align all rects to the top of parent container
+                            if(minY > spaceBetween) {
+                                let moveAllRectsOn = minY - spaceBetween;
+                                for (let x in rectsRows) {
+                                    let row = rectsRows[x];
+                                    for (let s in row) {
+                                        row[s].y = row[s].y - moveAllRectsOn;
+                                    }
+                                }
+                            }
+
+                            let currentRow = [];
+                            for (i = i+1; i < count; i++) {
+                                var screen = roomScreens[i];
+
+                                let prevRow = rectsRows[rectsRows.length - 1];
+                                var screenElRect = screen.screenEl.getBoundingClientRect();
+                                var videoWidth = screen.videoTrack != null && screen.videoTrack.videoWidth != 0 ? screen.videoTrack.videoWidth : 0
+                                var videoHeight = (screen.videoTrack != null && screen.videoTrack.videoHeight != 0 ? screen.videoTrack.videoHeight : 0);
+
+                                //if video element has width and height, rect's proportions will be based on the size of video
+                                var newRectSize = null;
+                                if(videoWidth != 0 && videoHeight != 0) {
+
+                                    newRectSize = getElementSizeKeepingRatio({
+                                        width: videoWidth,
+                                        height: videoHeight
+                                    }, {width: maxLongestSide, height: maxLongestSide})
+                                } else {
+                                    //if video's size still = 0x0, rect's proportions will be 4:3
+                                    newRectSize = defaultDOMRect;
+                                }
+
+
+                                if(videoWidth != 0 && videoHeight != 0) newRectSize.height = newRectSize.height + 50;
+
+                                //new row started - no rects in current row yet
+                                if(currentRow.length == 0) {
+                                    //create first rectangle in current row and centralize it
+
+                                    let minY = Math.min.apply(Math, rectsRows[0].map(function(r) { return r.top; }));
+                                    let maxY = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function(r) { return r.top + r.height;}));
+                                    let freeYRoom = (minY - containerRect.top) + ((containerRect.top + containerRect.height) - maxY);
+
+                                    let minX = Math.min.apply(Math, rectsRows[0].map(function (r) {return r.left;}));
+                                    let maxX = Math.max.apply(Math, rectsRows[rectsRows.length - 1].map(function (r) {return r.left + r.width;}));
+                                    let freeXRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+
+                                    var domRect = new DOMRect(centerX - (newRectSize.width / 2), maxY + spaceBetween, newRectSize.width, newRectSize.height);
+                                    currentRow.push(domRect);
+                                    prevRect = domRect;
+                                } else {
+                                    let minX = Math.min.apply(Math, currentRow.map(function (r) {
+                                        return r.left;
+                                    }));
+                                    let maxX = Math.max.apply(Math, currentRow.map(function (r) {
+                                        return r.left + r.width;
+                                    }));
+
+                                    let freeXRoom = (minX - containerRect.left) + ((containerRect.left + containerRect.width) - maxX);
+
+                                    //if threre is enough space in current row (horizontally), continue adding new rect to current row
+                                    if (freeXRoom >= (newRectSize.height + spaceBetween * 2)) {
+
+                                        let topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {
+                                            return r.top;
+                                        }));
+                                        let bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {
+                                            return r.top + r.height;
+                                        }));
+                                        let topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (newRectSize.height / 2)
+
+                                        //insert new rect centralizad vertically relatively to current row
+                                        let domRect = new DOMRect(prevRect.left + (prevRect.width + spaceBetween), topPosition , newRectSize.width, newRectSize.height);
+                                        prevRect = domRect;
+                                        currentRow.push(domRect);
+
+                                        let minX = Math.min.apply(Math, currentRow.map(function (r) {
+                                            return r.left;
+                                        }));
+                                        let maxX = Math.max.apply(Math, currentRow.map(function (r) {
+                                            return r.left + r.width;
+                                        }));
+
+                                        //if current row intersects with previous top row, move current row lower
+                                        if (prevRow != null) {
+                                            let maxYOfAllPrevRow = Math.max.apply(Math, prevRow.map(function (r) {
+                                                return r.top + r.height;
+                                            }));
+                                            let minYOfAllCurRow = Math.min.apply(Math, currentRow.map(function (r) {
+                                                return r.top;
+                                            }));
+                                            if (minYOfAllCurRow <= maxYOfAllPrevRow) {
+                                                let topOfSmallest = Math.max.apply(Math, currentRow.map(function (r) {return r.top;}));
+                                                let bottomOfSmallest = Math.min.apply(Math, currentRow.map(function (r) {return r.top + r.height;}));
+
+                                                let x;
+                                                let rowLength = currentRow.length;
+                                                for (x = 0; x < rowLength; x++) {
+                                                    let topPosition = (topOfSmallest + ((bottomOfSmallest - topOfSmallest) / 2)) - (currentRow[x].height / 2) + (maxYOfAllPrevRow - minYOfAllCurRow) + spaceBetween
+                                                    currentRow[x].y = topPosition;
+
+                                                }
+                                            }
+                                        }
+
+                                        let newLeftPosition = centerX - ((maxX - minX) / 2);
+                                        let moveAllRectsOn = minX - newLeftPosition;
+
+                                        //centralize all rects in current row horizontally
+                                        for (let x in currentRow) {
+                                            currentRow[x].x = currentRow[x].left - moveAllRectsOn;
+                                        }
+                                    } else {
+                                        //if there is no enough space in current row, create new row below
+                                        i = i - 1;
+                                        rectsRows.push(currentRow);
+                                        currentRow = [];
+                                        continue;
+                                    }
+                                }
+
+                                if(i+1 == roomScreens.length){
+                                    rectsRows.push(currentRow);
+                                    currentRow = [];
+                                }
+                            }
+                        }
                     }
 
                     var rects = [];
@@ -5081,6 +5355,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(track.parentScreen == null || track.kind != 'video') return;
 
+                if(track.parentScreen.activeScreenType == 'audio') {
+                    track.parentScreen.fillAudioScreenWithAvatarOrVideo();
+                    return;
+                }
                 if(track.mediaStreamTrack.enabled == false || track.mediaStreamTrack.readyState == 'ended'){
                     removeScreenFromCommonList(track.parentScreen);
                     track.parentScreen.removeTimer = null;
@@ -5120,6 +5398,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function onVideoUnMute(track) {
                 log('mediaStreamTrack unmuted 1', track);
                 if(track.parentScreen == null || track.kind != 'video') return;
+
+                if(track.parentScreen.activeScreenType == 'audio') {
+                    track.parentScreen.fillAudioScreenWithAvatarOrVideo();
+                    return;
+                }
+
                 if(track.parentScreen.removeTimer != null) {
                     clearTimeout(track.parentScreen.removeTimer);
                     track.parentScreen.removeTimer = null;
@@ -6991,7 +7275,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         Q.Tool.setUpElement(
                             _roomsMedia, // or pass an existing element
                             "Q/layouts",
-                            {alternativeContainer: Q.info.isMobile ? null : document.body}
+                            {/*alternativeContainer: Q.info.isMobile ? null : document.body*/}
                         ),
                         {},
                         function () {
@@ -7010,6 +7294,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             var msg = Q.firstErrorMessage(err, response && response.errors);
 
                             if (msg) {
+                                _options.streams.map(function (mediStream) {
+                                    mediStream.getTracks().forEach(function (t) {
+                                        t.stop();
+                                    })
+                                });
+                                connectionState.updateStatus('Disconnected');
+                                setTimeout(function() {
+                                    connectionState.hide();
+                                }, 3000);
                                 return Q.alert(msg);
                             }
                             log('createRoomStream: joined/connected', response.slots.room);
@@ -7050,6 +7343,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 description: _options.description,
                                 resumeClosed: _options.resumeClosed,
                                 closeManually: _options.closeManually,
+                                onlyParticipantsAllowed: _options.onlyParticipantsAllowed,
                                 writeLevel: _options.writeLevel,
                                 relate: _options.relate,
                                 useRelatedTo: _options.useRelatedTo
@@ -7487,6 +7781,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             resumeClosed: options.resumeClosed,
             closeManually: options.closeManually,
             description: options.description,
+            onlyParticipantsAllowed: options.onlyParticipantsAllowed,
             useRelatedTo: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,

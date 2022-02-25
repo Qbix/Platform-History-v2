@@ -550,10 +550,20 @@ window.WebRTCRoomClient = function app(options){
 
     app.mediaManager = (function () {
 
+        /**
+         * Renders SVG audio visualization (history bars or circular)
+         */
         var audioVisualization = (function () {
             log('audiovis: audioVisualization');
             var commonVisualization = null;
 
+            /**
+             * 1) Creates audio analyser from users audio track for further audio data gathering. 2) Starts rendering
+             * visualizations based on this audio data
+             * @method createAudioAnalyser
+             * @param {Object} [track] instance of Track (not MediaStreamTrack) that has mediaStreamTrack as its property
+             * @param {Object} [participant] instance of Participant
+             */
             function createAudioAnalyser(track, participant) {
                 if(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins) return;
 
@@ -734,6 +744,13 @@ window.WebRTCRoomClient = function app(options){
 
             }
 
+            /**
+             * If this is history bars visualization, this method updates its width dynamically by adding/removing new bars when
+             * parent container's size is changed.
+             * @method updatVisualizationWidth
+             * @param {Object} [participant] instance of Participant
+             * @param {Object} [visualization] object that contains info about visualization (e.g. SVG elements)
+             */
             function updatVisualizationWidth(participant, visualization) {
                 log('audiovis: audioVisualization: updatVisualizationWidth');
                 if((visualization == null || visualization.svg == null) || visualization.type == 'circles' || (visualization.updateSizeOnlyOnce && visualization.updated)) return;
@@ -822,6 +839,11 @@ window.WebRTCRoomClient = function app(options){
                 }
             }
 
+            /**
+             * Builds SVG element for history bars visualization
+             * @method buildBarsVisualization
+             * @param {Object} [visualization] object that contains info about visualization
+             */
             function buildBarsVisualization(visualisation) {
                 if(visualisation.svg && visualisation.svg.parentNode) {
                     visualisation.svg.parentNode.removeChild(visualisation.svg);
@@ -883,6 +905,11 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.barsLength = visualisation.soundBars.length;
             }
 
+            /**
+             * Builds SVG element for circular visualization
+             * @method buildCircularVisualization
+             * @param {Object} [visualization] object that contains info about visualization
+             */
             function buildCircularVisualization(visualisation) {
                 if(visualisation.svg && visualisation.svg.parentNode) {
                     visualisation.svg.parentNode.removeChild(visualisation.svg);
@@ -941,6 +968,17 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.circlesLength = visualisation.soundCircles.length;
             }
 
+            /**
+             * Builds visualization of specific type (history bars or circular) and with specific key (name)
+             * @method buildVisualization
+             * @param {Object} [options] object that contains info about visualization
+             * @param {String} [options.name] Visualization's name (key)
+             * @param {HTMLElement} [options.element] DOM element where visualization will be rendered
+             * @param {Object} [options.participant] instance of Participant object
+             * @param {String} [options.type] type of visualization (history bars or circular)
+             * @param {String} [options.updateSizeOnlyOnce] by default visualization's width is updated on layout changes
+             *  this option ignores layout changes so current visualization's width will be always static.
+             */
             function buildVisualization(options) {
                 log('audiovis: audioVisualization: buildVisualization', options);
 
@@ -953,13 +991,11 @@ window.WebRTCRoomClient = function app(options){
                 visualisation.element = element;
                 visualisation.type = options.type;
                 visualisation.updateSizeOnlyOnce = options.updateSizeOnlyOnce != null ? options.updateSizeOnlyOnce : false;
-                visualisation.stopOnMute = options.stopOnMute != null ? options.stopOnMute : false;
-
 
                 visualisation.reset = function () {
                     setTimeout(function () {
                         updatVisualizationWidth(participant, visualisation)
-                    }, 300);
+                    }, 1000);
                 };
                 visualisation.remove = function () {
                     delete options.participant.soundMeter.visualizations[name];
@@ -975,33 +1011,24 @@ window.WebRTCRoomClient = function app(options){
 
             }
 
+            /**
+             * Builds common SVG visualization based on audio data of all participants
+             * @method buildCommonVisualization
+             * @param {Object} [options] object that contains info about visualization
+             * @param {HTMLElement} [options.element] DOM element where visualization will be rendered
+             * @param {String} [options.type] type of visualization (history bars or circular)
+             */
             function buildCommonVisualization(options) {
                 log('audiovis: buildCommonVisualization: buildVisualization try', commonVisualization);
 
                 if(commonVisualization != null) return;
                 log('audiovis: buildCommonVisualization: buildVisualization', commonVisualization, options);
 
-                var name = options.name;
                 var element = options.element;
 
                 commonVisualization = {};
                 commonVisualization.element = element;
                 commonVisualization.type = options.type;
-                commonVisualization.updateSizeOnlyOnce = options.updateSizeOnlyOnce != null ? options.updateSizeOnlyOnce : false;
-
-
-                /*commonVisualization.reset = function () {
-                    setTimeout(function () {
-                        updatVisualizationWidth(participant, commonVisualization)
-                    }, 300);
-                };
-                commonVisualization.remove = function () {
-                    delete options.participant.soundMeter.visualizations[name];
-                    if(commonVisualization.svg && commonVisualization.svg.parentNode != null) commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
-                };*/
-
-
-
 
                 if(commonVisualization.svg && commonVisualization.svg.parentNode) {
                     commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
@@ -1067,6 +1094,10 @@ window.WebRTCRoomClient = function app(options){
                 renderCommonVisualization();
             }
 
+            /**
+             * Renders common visualization based on avarage audio data of all participants
+             * @method renderCommonVisualization
+             */
             function renderCommonVisualization() {
                 if(!localParticipant.online) return;
                 var sum = 0;
@@ -1126,6 +1157,10 @@ window.WebRTCRoomClient = function app(options){
                 commonVisualization.animationFrame = requestAnimationFrame(renderCommonVisualization);
             }
 
+            /**
+             * Stops animating common visualization and removes it from DOM
+             * @method removeCommonVisualization
+             */
             function removeCommonVisualization() {
                 if(commonVisualization && commonVisualization.animationFrame) {
                     cancelAnimationFrame(commonVisualization.animationFrame);
@@ -1134,13 +1169,20 @@ window.WebRTCRoomClient = function app(options){
                     commonVisualization.svg.parentNode.removeChild(commonVisualization.svg);
                 }
                 commonVisualization = null;
-
             }
 
+            /**
+             * Updates common visualization's width when its parent container size changed
+             * @method updateCommonVisualizationWidth
+             */
             function updateCommonVisualizationWidth() {
                 updatVisualizationWidth(null, commonVisualization);
             }
 
+            /**
+             * Stops animating all visualizations
+             * @method stopAllVisualizations
+             */
             function stopAllVisualizations(isRoomSwitch) {
                 removeCommonVisualization();
                 for(var p = roomParticipants.length - 1; p >= 0; p--){
@@ -6524,7 +6566,7 @@ window.WebRTCRoomClient = function app(options){
 
             if (event.candidate) {
                 if(event.candidate.candidate.indexOf("relay")<0){ // if no relay address is found, assuming it means no TURN server
-                    //return;
+                    return;
                 }
 
                 log('gotIceCandidate: existingParticipant', existingParticipant)
@@ -7000,12 +7042,17 @@ window.WebRTCRoomClient = function app(options){
                                 return;
                             }
 
+
+
                             var localDescription;
                             if(typeof cordova != 'undefined' && _isiOS) {
                                 localDescription = new RTCSessionDescription(offer);
                             } else {
                                 localDescription = offer;
                             }
+
+                            //for testing only
+                            //localDescription.sdp = removeNotRelayCandidates(offer.sdp);
 
                             /*if(_isiOS){
 								localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
@@ -7426,6 +7473,26 @@ window.WebRTCRoomClient = function app(options){
             return sdp;
         }
 
+        //for testing only
+        function removeNotRelayCandidates(sdp) {
+            //console.log('removeNotRelayCandidates sdp', sdp);
+            var sdpLines = (sdp).split("\n");
+            //console.log('removeNotRelayCandidates sdpLines', sdpLines);
+            for (let i = sdpLines.length - 1; i >= 0; i--) {
+                let line = sdpLines[i];
+                if(line.startsWith('a=candidate') && line.indexOf('relay') == -1) {
+                    sdpLines.splice(i, 1);
+                }
+            }
+            //console.log('removeNotRelayCandidates sdpLines2', sdpLines);
+
+            sdp = sdpLines.filter(function(l) {
+                return l != null;
+            }).join('\n')
+
+            return sdp;
+        }
+
         function offerReceived() {
 
             function createPeerConnection(senderParticipant) {
@@ -7813,6 +7880,9 @@ window.WebRTCRoomClient = function app(options){
                             log('offerReceived: answer created ' + answer.sdp);
                             senderParticipant.signalingState.setStage('answerCreated');
 
+                            //for testing only
+                            //answer.sdp = removeNotRelayCandidates(answer.sdp);
+
                             if(_isiOS){
                                 //answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
                             }
@@ -8050,10 +8120,11 @@ window.WebRTCRoomClient = function app(options){
 
         function loadDevicesList(mediaDevicesList, reload) {
             log('loadDevicesList');
-
+            videoInputDevices = [];
+            audioInputDevices = [];
+            audioOutputDevices = [];
             if(mediaDevicesList != null && typeof reload == 'undefined') {
-                videoInputDevices = [];
-                audioInputDevices = [];
+
                 var i, device;
                 for (i = 0; device = mediaDevicesList[i]; i++) {
                     log('loadDevicesList: ' + device.kind);
@@ -8399,7 +8470,7 @@ window.WebRTCRoomClient = function app(options){
                         console.warn('Browser does not support output device selection.');
                         break;
                     }
-                    /*audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
+                    audioTracks[t].trackEl.setSinkId(outputDevice.deviceId)
                         .then(() => {
                             console.log(`Success, audio output device attached: ${outputDevice.deviceId}`);
                         })
@@ -8409,7 +8480,7 @@ window.WebRTCRoomClient = function app(options){
                                 errorMessage = `You need to use HTTPS for selecting audio output device: ${error}`;
                             }
                             console.error(errorMessage);
-                        });*/
+                        });
                 }
             }
             currentAudioOutputDevice = outputDevice;
@@ -9430,9 +9501,9 @@ window.WebRTCRoomClient = function app(options){
 
                 if (event.candidate) {
 
-                    if (event.candidate.candidate.indexOf("relay") < 0) {
-                        //return;
-                    }
+                    /*if (event.candidate.candidate.indexOf("relay") < 0) {
+                        return;
+                    }*/
                     var message = {
                         type: "candidate",
                         label: event.candidate.sdpMLineIndex,
