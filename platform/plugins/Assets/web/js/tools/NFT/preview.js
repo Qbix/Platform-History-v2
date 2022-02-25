@@ -100,7 +100,7 @@
                 $toolElement.removeClass("Q_working");
 
                 Users.Web3.onAccountsChanged.set(function () {
-                    tool.refresh(data, author, owner, commissionInfo, saleInfo);
+                    tool.refresh(data, author, owner, commissionInfo, saleInfo, userId);
                 }, tool);
             });
 
@@ -359,26 +359,6 @@
                     });
                 });
 
-                // buyNow NFT
-                $("button[name=buyNow]", tool.element).on(Q.Pointer.fastclick, function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    var wallet = Q.getObject("sales.manual.address", NFT);
-                    if (!wallet) {
-                        return Q.alert("sales manual address required!");
-                    }
-
-                    var info = {
-                        publisherId: data.publisherId,
-                        streamName: data.streamName
-                    };
-
-                    NFT.paymentRequest(wallet, saleInfo.priceDecimal.toString(), info);
-
-                    return false;
-                });
-
                 // button only for owner, provide actions Transfer and put on/off sale
                 $("button[name=update]", tool.element).on(Q.Pointer.fastclick, function (e) {
                     e.stopPropagation();
@@ -394,7 +374,7 @@
                     content += '<button name="transfer" class="Q_button">' + tool.text.NFT.Transfer + '</button>';
 
                     Q.Dialogs.push({
-                        title: "Update NFT",
+                        title: tool.text.NFT.Actions,
                         content: content,
                         className: 'Assets_NFT_update',
                         onActivate: function (dialog) {
@@ -577,9 +557,8 @@
             </li>
             <li class="action-block">
                 <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                <button name="buyNow" class="Q_button">{{NFT.BuyNow}}</button>
                 <button name="soldOut" class="Q_button">{{NFT.SoldOut}}</button>
-                <button name="update" class="Q_button">{{NFT.Update}}</button>
+                <button name="update" class="Q_button">{{NFT.Actions}}</button>
             </li>
         </ul>
     </div>`,
