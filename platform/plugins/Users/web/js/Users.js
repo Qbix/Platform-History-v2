@@ -3921,6 +3921,41 @@
 			});
 		},
 		/**
+		 * Get currently wallet address
+		 * @method execute
+		 * @params {string} methodName
+		 * @params {mixed} params
+		 * @params {string|object} contract
+		 * @params {function} callback
+		 */
+		getWallet: function (callback) {
+			Users.Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+
+				(new Web3(provider)).eth.getAccounts().then(function (accounts) {
+					return Q.handle(callback, null, [null, accounts[0]]);
+				});
+			});
+		},
+		/**
+		 * Get currently chain id
+		 * @method getChainId
+		 * @param {Function} callback
+		 */
+		getChainId: function (callback) {
+			Users.Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+
+				(new Web3(provider)).eth.net.getId().then(function (chainId) {
+					return Q.handle(callback, null, [null, chainId]);
+				});
+			});
+		},
+		/**
 		 * Switch provider to a different Web3 chain
 		 * @method setChain
 		 * @static
