@@ -1686,8 +1686,9 @@
 				return;
 			}
 
-			var url = Assets.NFT.chains[chainId].blockExplorerUrl + "/address/" + author;
-			Q.handle(url)
+			//var url = Assets.NFT.chains[chainId].blockExplorerUrl + "/address/" + author;
+			//Q.handle(url)
+			Q.handle("Q/plugins/Assets/NFT/" + tokenId + "/" + chainId);
 		}, true);
 
 		// onClick Users/avatar tool

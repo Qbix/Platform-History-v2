@@ -222,10 +222,12 @@ img.NFT_fullsize_icon {
 .assetsNFTAttributes tr:first-of-type {
     border-top: none;
 }
+.assets_collection_info td:first-of-type,
 .assetsNFTAttributes td:first-of-type {
     white-space: nowrap;
     padding-right: 10px;
 }
+.assets_collection_info td:last-of-type,
 .assetsNFTAttributes td:last-of-type {
     width: 100%;
 }
