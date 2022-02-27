@@ -1,4 +1,4 @@
-CREATE TABLE {{prefix}}permission (
+CREATE TABLE IF NOT EXISTS {{prefix}}permission (
   `userId` varchar(31) NOT NULL DEFAULT '' COMMENT 'The user id granting the permission',
   `label` varchar(63)  NOT NULL COMMENT 'The label to which permissions are granted',
   `permission` varchar(255) NOT NULL DEFAULT '' COMMENT 'The canonical name of the permission',
