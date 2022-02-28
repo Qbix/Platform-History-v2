@@ -240,4 +240,55 @@ class Users_Web3 extends Base_Users_Web3 {
 		return $cached;
 	}
 
+	/**
+	 * Get wallet address by user id
+	 * @method getWalletById
+	 * @static
+	 * @param {String} [$userId] - If empty, logged in userId used
+	 * @param {Boolean} [$throwIfNotFound=false] - If true, throw exception if wallet addres not found
+	 * @return {String|null}
+	 */
+	static function getWalletById ($userId=null, $throwIfNotFound=false) {
+		$userId = $userId ?: Users::loggedInUser(true)->id;
+		$usersExternalTo = Users_ExternalTo::select()->where(array(
+			"platform" => "web3",
+			"appId" => "all",
+			"userId" => $userId
+		))->fetchDbRow();
+
+		if ($usersExternalTo) {
+			return $usersExternalTo->xid;
+		}
+
+		if ($throwIfNotFound) {
+			throw new Exception("Wallet address not found");
+		}
+
+		return null;
+	}
+	/**
+	 * Get user id by wallet address
+	 * @method getIdByWallet
+	 * @static
+	 * @param {String} $wallet - wallet address
+	 * @param {Boolean} [$throwIfNotFound=false] If true, throw exception if wallet addres not found
+	 * @return {String|null}
+	 */
+	static function getIdByWallet ($wallet, $throwIfNotFound=false) {
+		$usersExternalFrom = Users_ExternalFrom::select()->where(array(
+			"platform" => "web3",
+			"appId" => "all",
+			"xid" => $wallet
+		))->fetchDbRow();
+
+		if ($usersExternalFrom) {
+			return $usersExternalFrom->userId;
+		}
+
+		if ($throwIfNotFound) {
+			throw new Exception("User id not found");
+		}
+
+		return null;
+	}
 };
