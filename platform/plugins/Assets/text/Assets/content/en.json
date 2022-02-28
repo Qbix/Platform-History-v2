@@ -222,6 +222,7 @@
         "CreateToken": "Create Token",
         "PlaceBid": "Place Bid",
         "SoldOut": "Sold",
+        "NotOnSale": "Not On Sale",
         "NftName": "NFT name",
         "DescribeYourNFT": "Please describe your NFT",
         "NftPicture": "Picture to represent NFT",
@@ -237,6 +238,12 @@
         "PriceOnePiece": "Enter price for one piece",
         "EnterMinimumBid": "Enter Minimum bid",
         "SelectNetwork": "Select network",
+        "profile": {
+            "Title": "TokenSociety profile for {{userName}}",
+            "Description": "User details",
+            "aboutPlaceholder": "Edit Bio",
+            "SureLogOut": "Are you sure you want to log out?"
+        },
         "import": {
             "importNFT": "Importing NFT's",
             "importAttributes": "Import NFT attributes",

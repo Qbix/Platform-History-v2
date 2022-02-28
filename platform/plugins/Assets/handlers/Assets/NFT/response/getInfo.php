@@ -30,5 +30,5 @@ function Assets_NFT_response_getInfo ($params) {
 	$url = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, $caching, $cacheDuration);
 	$data = Q::event('Assets/NFT/response/getRemoteJSON', compact("url"));
 
-	return compact("author", "owner", "saleInfo", "commissionInfo", "data", "userId");
+	return compact("author", "owner", "saleInfo", "commissionInfo", "data", "userId", "url");
 }
