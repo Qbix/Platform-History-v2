@@ -1,35 +1,41 @@
 <?php
 function Assets_NFT_response_content ($params) {
-	$loggedInUser = Users::loggedInUser();
-	$request = array_merge($_REQUEST, $params);
 	$uri = Q_Dispatcher::uri();
 	$tokenId = Q::ifset($r, 'tokenId', Q::ifset($uri, 'tokenId', null));
 	$chainId = Q::ifset($r, 'chainId', Q::ifset($uri, 'chainId', null));
+	if (!$chainId) {
+		$chain = Assets_NFT::getDefaultChain();
+		if (!$chain) {
+			throw new Exception("Default chain not found");
+		}
 
+		$chainId = $chain["chainId"];
+	}
+
+	$url = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 	$needle = ".json";
-	$isJson = substr_compare($chainId, $needle, -strlen($needle)) === 0;
+	$isJson = substr_compare($url, $needle, -strlen($needle)) === 0;
 	if ($isJson) {
 		$chainId = str_replace($needle, "", $chainId);
+		$tokenId = str_replace($needle, "", $tokenId);
 	}
 
 	if (empty($tokenId)) {
-		throw new Exception("NFT::view tokenId required!");
+		throw new Exception("tokenId required!");
 	}
 	if (empty($chainId)) {
-		throw new Exception("NFT::view chainId required!");
+		throw new Exception("chainId required!");
 	}
 
-    $communityId = Users::communityId();
     $texts = Q_Text::get('Assets/content');
 
-	$url = implode("/", array(Q_Request::baseUrl(), "NFT", $tokenId, $chainId));
 	$nftInfo = Q::event("Assets/NFT/response/getInfo", compact("tokenId", "chainId"));
 	if ($isJson) {
 		header("Content-type: application/json");
 		echo Q::json_encode(array(
 			"name" => $nftInfo["data"]["name"],
 			"description" => $nftInfo["data"]["description"],
-			"external_url" => $url,
+			"external_url" => $nftInfo["url"],
 			"image" => $nftInfo["data"]["image"],
 			"animation_url" => $nftInfo["data"]["animation_url"],
 			"attributes" => $nftInfo["data"]["attributes"]
