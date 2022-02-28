@@ -207,4 +207,23 @@ class Assets_NFT
 
 		return $chainsClient;
 	}
+
+	/**
+	 * Get default chain
+	 * @method getDefaultChain
+	 * @static
+	 * @return array
+	 */
+	static function getDefaultChain () {
+		$chains = self::getChains();
+		foreach ($chains as $chain) {
+			if (!$chain["default"]) {
+				continue;
+			}
+
+			return $chain;
+		}
+
+		return null;
+	}
 };
