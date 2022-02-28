@@ -57,6 +57,7 @@
     { // default options here
         chainId: null,
         tokenId: null,
+        data: null,
         useWeb3: true,
         onMarketPlace: true,
         onInvoke: new Q.Event(),
@@ -139,7 +140,13 @@
                     return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
                 }
 
-                Q.handle(NFT.getTokenJSON, tool, [state.tokenId, state.network, pipe.fill("data")]);
+                // if data defined, don't request it
+                if (state.data) {
+                    pipe.fill("data")(null, state.data);
+                } else {
+                    Q.handle(NFT.getTokenJSON, tool, [state.tokenId, state.network, pipe.fill("data")]);
+                }
+
                 Q.handle(NFT.getAuthor, tool, [state.tokenId, state.network, function (err, author) {
                     if (err) {
                         return console.warn(err);
@@ -151,7 +158,7 @@
                             return console.warn(err);
                         }
 
-                        pipe.fill("userId")(null, response.slots.getUserByWallet);
+                        pipe.fill("userId")(null, response.slots.getUserIdByWallet);
                     }, {
                         fields: { wallet: author }
                     });
@@ -557,7 +564,7 @@
             </li>
             <li class="action-block">
                 <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                <button name="soldOut" class="Q_button">{{NFT.SoldOut}}</button>
+                <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
                 <button name="update" class="Q_button">{{NFT.Actions}}</button>
             </li>
         </ul>
