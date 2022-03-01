@@ -31,7 +31,7 @@
         if (Q.isEmpty(state.chainId)) {
             return Q.alert("chain id required!");
         }
-        if (Q.isEmpty(state.tokenId)) {
+        if (typeof state.tokenId === 'undefined' || isNaN(parseInt(state.tokenId))) {
             return Q.alert("token id required!");
         }
 
