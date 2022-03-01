@@ -992,10 +992,20 @@
 		},
 
 		NFT: {
+			contractToNativeEvents: {
+				TokenRemovedFromSale: "onTokenRemovedFromSale",
+				TokenPutOnSale: "onTokenAddedToSale",
+				TokenAddedToSale: "onTokenAddedToSale",
+				Transfer: "onTransfer",
+				TransferAuthorship: "onTransferAuthorship",
+				OwnershipTransferred: "onTransferOwnership",
+				TokenCreated: "onTokenCreated"
+			},
 			onTokenRemovedFromSale: new Q.Event(),
 			onTokenAddedToSale: new Q.Event(),
 			onTransfer: new Q.Event(),
 			onTransferAuthorship: new Q.Event(),
+			onTransferOwnership: new Q.Event(),
 			onTokenCreated: new Q.Event(),
 			_onContractUpdated: {},
 			onContractUpdated: Q.Event.factory(this._onContractUpdated, [""]),
@@ -1070,8 +1080,31 @@
 					var provider = new ethers.providers.Web3Provider(window.ethereum);
 					contract = new ethers.Contract(network.contract, ABI, provider.getSigner());
 
-					contract.on("TokenRemovedFromSale", function (tokenId) {
+					// collect events from ABI
+					var eventsExists = ABI.map(function (item) {
+						if (Q.getObject("type", item) === "event") {
+							return item.name;
+						}
+					}).filter(function(item) {
+						return !!item;
+					});
+
+					// set events
+					Q.each(Assets.NFT.contractToNativeEvents, function (contractEvent, nativeEvent) {
+						if (eventsExists.includes(contractEvent)) {
+							contract.on(contractEvent, function () {
+								Q.handle(Assets.NFT[nativeEvent], null, arguments);
+							});
+						} else {
+							console.warn("event " + contractEvent + " not found in contract " + network.contract);
+						}
+					});
+
+					/*contract.on("TokenRemovedFromSale", function (tokenId) {
 						Q.handle(Assets.NFT.onTokenRemovedFromSale, null, [tokenId])
+					});
+					contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
+						Q.handle(Assets.NFT.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
 					});
 					contract.on("TokenAddedToSale", function (tokenId, amount, consumeToken) {
 						Q.handle(Assets.NFT.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
@@ -1084,7 +1117,7 @@
 					});
 					contract.on("TokenCreated", function (addressAuthor, token) {
 						Q.handle(Assets.NFT.onTokenCreated, null, [addressAuthor, token])
-					});
+					});*/
 
 					Assets.NFT.contracts[network.chainId] = contract;
 
