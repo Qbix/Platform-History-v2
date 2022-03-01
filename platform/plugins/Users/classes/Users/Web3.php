@@ -219,7 +219,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contract,
 		$methodName, 
 		$params, 
-		$cacheDuration)
+		$cacheDuration=null)
 	{
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
