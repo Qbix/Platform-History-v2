@@ -226,4 +226,31 @@ class Assets_NFT
 
 		return null;
 	}
+
+	/**
+	 * Get NFT json data
+	 * @method getJson
+	 * @param {String} $chainId
+	 * @param {String} $contract
+	 * @param {String} $tokenURI
+	 * @param {Sreing} [$caching=true] If false, don't use cache, but real request and update cache.
+	 * @param {Integer} [$cacheDuration=31536000] default 1 year
+	 * @static
+	 * @return array
+	 */
+	static function getJson ($chainId, $contract, $tokenURI, $caching=true, $cacheDuration=31536000) {
+		$cache = Users_Web3::getCache($chainId, $contract, "getNFTJsonData", $tokenURI, $cacheDuration);
+		if ($caching && $cache->wasRetrieved()) {
+			return Q::json_decode($cache->result, true);
+		}
+
+		$response = Q_Utils::get($tokenURI, null, array(
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false
+		));
+		$cache->result = $response;
+		$cache->save();
+
+		return Q::json_decode($response, true);
+	}
 };
