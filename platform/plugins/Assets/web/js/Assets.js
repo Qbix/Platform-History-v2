@@ -1143,7 +1143,7 @@
 			 * @params {function} callback
 			 */
 			getTokenJSON: function (tokenId, network, callback) {
-				Assets.NFT.getTokenURI(tokenId, network, function (err, url, contract) {
+				Assets.NFT.getTokenURI(tokenId, network, function (err, tokenURI, contract) {
 					if (err) {
 						return Q.handle(callback, null, [err]);
 					}
@@ -1156,7 +1156,9 @@
 						Q.handle(callback, null, [null, data.slots.getRemoteJSON]);
 					}, {
 						fields:{
-							url: url
+							chainId: network.chainId,
+							contractAddress: network.contract,
+							tokenURI: tokenURI
 						}
 					});
 				});
@@ -1498,7 +1500,6 @@
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
-		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js"
 	});
 	

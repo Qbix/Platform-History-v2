@@ -9,7 +9,7 @@
                         echo Q::tool("Assets/NFT/preview", array(
                              "tokenId" => $tokenId,
                              "chainId"=> $chainId
-                        ));
+                        ), $tokenId."-".$chainId);
                     ?>
                 </div>
                 <div class="assets_nft_col_four">
