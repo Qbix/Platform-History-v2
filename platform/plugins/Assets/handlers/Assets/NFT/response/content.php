@@ -1,8 +1,9 @@
 <?php
 function Assets_NFT_response_content ($params) {
 	$uri = Q_Dispatcher::uri();
-	$tokenId = Q::ifset($r, 'tokenId', Q::ifset($uri, 'tokenId', null));
-	$chainId = Q::ifset($r, 'chainId', Q::ifset($uri, 'chainId', null));
+	$request = array_merge($_REQUEST, $params);
+	$tokenId = Q::ifset($request, 'tokenId', Q::ifset($uri, 'tokenId', null));
+	$chainId = Q::ifset($request, 'chainId', Q::ifset($uri, 'chainId', null));
 	if (!$chainId) {
 		$chain = Assets_NFT::getDefaultChain();
 		if (!$chain) {
@@ -20,7 +21,7 @@ function Assets_NFT_response_content ($params) {
 		$tokenId = str_replace($needle, "", $tokenId);
 	}
 
-	if (empty($tokenId)) {
+	if ($tokenId === null) {
 		throw new Exception("tokenId required!");
 	}
 	if (empty($chainId)) {
