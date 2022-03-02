@@ -78,6 +78,8 @@
             var $toolElement = $(this.element);
             var pipeList = ["data", "author", "owner", "commissionInfo", "saleInfo", "userId"];
 
+            $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
+
             var pipe = new Q.pipe(pipeList, function (params, subjects) {
                 // collect errors
                 var errors = [];
@@ -152,7 +154,7 @@
                         return console.warn(err);
                     }
 
-                    pipe.fill("author")(arguments);
+                    pipe.fill("author")(arguments[0], arguments[1], arguments[2]);
                     Q.req("Assets/NFT", "getUserIdByWallet", function (err, response) {
                         if (err) {
                             return console.warn(err);
@@ -200,7 +202,7 @@
 
             var currencyToken = saleInfo.currencyToken;
             var currency;
-            if (state.tokenId) {
+            if (typeof state.tokenId !== 'undefined' && !isNaN(parseInt(state.tokenId))) {
                 // get currency symbol from currency token and chainId
                 currency = NFT.currencies.filter(function(item) { return item[state.chainId] === currencyToken; });
                 if (Q.isArrayLike(currency)) {
