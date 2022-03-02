@@ -1,5 +1,5 @@
 <?php
-function Assets_NFT_response_getOwnedNFTs ($params) {
+function Assets_NFT_response_owned ($params) {
 	$loggedInUser = Users::loggedInUser();
 	$request = array_merge($_REQUEST, $params);
 	$userId = Q::ifset($request, 'userId', $loggedInUser->id);
