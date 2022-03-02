@@ -82,11 +82,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		);
 
 		if (empty($abi)) {
-			$filename = self::getABIFilename($contractAddress);
-			if (!is_file($filename)) {
-				throw new Q_Exception_MissingFile(compact('filename'));
-			}
-			$abi = file_get_contents($filename);
+			$abi = self::getABIFileContent($contractAddress);
 		}
 		$data = array();
 		$arguments = array($methodName);
@@ -153,19 +149,20 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
-	 * Get the filename of the ABI file for a contract. 
+	 * Get content of the ABI file for a contract.
 	 * Taken from Users/web3/contracts/$contractName/filename config.
 	 * As a fallback tries Users/web3/contracts/$contractName/dir and if found,
 	 * appends "/$contractAddress.json". As a last resort, tries
 	 * Users/web3/contracts/$contractName/url and calls filenameFromUrl().
 	 * You can interpolate "baseUrl" and "contractAddress" variables in the strings.
 	 * 
-	 * @method getABIFilename
+	 * @method getABIFileContent
 	 * @static
 	 * @param {string} $contractAddress The address of the contract. The chain doesn't matter because we assume all contracts with same address have same code on all chains.
+	 * @param {Boolean} [$throwIfNotFound=true] - If true, throw exception if ABI file not found.
 	 * @return {string|null} Tries filename, then $dir/$contractAddress.json, then url from config
 	 */
-	static function getABIFilename ($contractAddress)
+	static function getABIFileContent ($contractAddress, $throwIfNotFound=true)
 	{
 		/**
 		 * @event Users/Web3/getABIFilename {before}
@@ -198,7 +195,17 @@ class Users_Web3 extends Base_Users_Web3 {
 			return Q_Uri::filenameFromUrl($url);
 		}
 
-		return implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
+		$filename = implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
+
+		if (!is_file($filename)) {
+			if ($throwIfNotFound) {
+				throw new Q_Exception_MissingFile(compact('filename'));
+			} else {
+				return null;
+			}
+		}
+
+		return Q::json_decode(file_get_contents($filename), true);
 	}
 
 	/**
@@ -253,7 +260,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$usersExternalTo = Users_ExternalTo::select()->where(array(
 			"platform" => "web3",
 			"appId" => "all",
-			"userId" => $userId
+			"userId" => strtolower($userId)
 		))->fetchDbRow();
 
 		if ($usersExternalTo) {
@@ -266,6 +273,7 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		return null;
 	}
+
 	/**
 	 * Get user id by wallet address
 	 * @method getIdByWallet
@@ -278,7 +286,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$usersExternalFrom = Users_ExternalFrom::select()->where(array(
 			"platform" => "web3",
 			"appId" => "all",
-			"xid" => $wallet
+			"xid" => strtolower($wallet)
 		))->fetchDbRow();
 
 		if ($usersExternalFrom) {
@@ -290,5 +298,31 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		return null;
+	}
+
+	/**
+	 * Get user id by wallet address
+	 * @method existsInABI
+	 * @static
+	 * @param {String} $name - The name of method or event
+	 * @param {string} $contractAddress - The address of the contract.
+	 * @param {string} $type - The type of item. Can be "event" or "function".
+	 * @param {Boolean} [$throwIfNotFound=false] If true, throw exception if wallet addres not found
+	 * @return {String|null}
+	 */
+	static function existsInABI ($name, $contractAddress, $type="function", $throwIfNotFound=false) {
+		$abi = self::getABIFileContent($contractAddress);
+
+		foreach ($abi as $item) {
+			if (Q::ifset($item, "type", null) == $type && Q::ifset($item, "name", null) == $name) {
+				return true;
+			}
+		}
+
+		if ($throwIfNotFound) {
+			throw new Exception(Q::interpolate('{{type}} "{{name}}" not found in contract "{{contractAddress}}"', compact("name", "type", "contractAddress")));
+		}
+
+		return false;
 	}
 };
