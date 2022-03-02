@@ -7,7 +7,10 @@
     margin-bottom: 20px;
     margin-right: 0.8%;
 }
-
+.Assets_NFT_preview_tool > img[src*="loading.gif"] {
+    display: block;
+    margin: 100px auto;
+}
 .Assets_NFT_preview_tool .tile-block {
     position: relative;
     outline: solid 1px #535353;
