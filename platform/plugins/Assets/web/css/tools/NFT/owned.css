@@ -1,0 +1,6 @@
+.Assets_NFT_owned_tool {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    flex-direction: row;
+}
