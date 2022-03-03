@@ -7,8 +7,9 @@
                 <div class="assets_nft_col_eight">
                     <?php
                         echo Q::tool("Assets/NFT/preview", array(
-                             "tokenId" => $tokenId,
-                             "chainId"=> $chainId
+                            "tokenId" => $tokenId,
+                            "chainId"=> $chainId,
+                            "movie" => Q::ifset($nftInfo, "data", "animation_url", null)
                         ), $tokenId."-".$chainId);
                     ?>
                 </div>

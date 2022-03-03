@@ -211,7 +211,7 @@ img.NFT_fullsize_icon {
 }
 
 .assets_nft_col_eight .Assets_NFT_preview_tool .video-container {
-    height: unset;
+    height: 500px;
 }
 
 .assets_nft_col_eight video {
