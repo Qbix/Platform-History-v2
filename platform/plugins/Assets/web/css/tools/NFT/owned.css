@@ -4,3 +4,7 @@
     justify-content: center;
     flex-direction: row;
 }
+.Assets_NFT_owned_tool > img[src*='loading.gif'] {
+    width: 40px;
+    height: 40px;
+}

@@ -47,13 +47,18 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 { // methods go here
 	refresh: function () {
 		var tool = this;
-		var state = tool.state;
 
 		if (tool.infinitescrollApplied) {
 			return;
 		}
 
-		$(tool.element.scrollingParent()).tool('Q/infinitescroll', {
+		var $scrollingParent = $(tool.element.scrollingParent());
+		var isTool = Q.Tool.from($scrollingParent, "Q/infinitescroll");
+		if (isTool) {
+			isTool.state.offset = undefined;
+		}
+
+		$scrollingParent.tool('Q/infinitescroll', {
 			onInvoke: function () {
 				var offset = $(">.Assets_NFT_preview_tool:visible", tool.element).length;
 				var infiniteTool = this;
@@ -71,6 +76,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			}
 		}).activate(function () {
 			tool.infinitescrollApplied = true;
+			$scrollingParent.trigger("scroll");
 		});
 	},
 	/**
@@ -83,7 +89,12 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var tool = this;
 		var state = this.state;
 
+		var $loading = $("<img src='" + Q.url("{{Q}}/img/throbbers/loading.gif") + "' />").appendTo(tool.element);
+
 		Q.req("Assets/NFT", "owned", function (err, response) {
+
+			$loading.remove();
+
 			if (err) {
 				return console.warn(err);
 			}
