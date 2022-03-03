@@ -53,6 +53,9 @@
     line-height: 300px;
     overflow: hidden;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
 }
 .Assets_NFT_preview_tool .NFT_preview_owner {
     display: none;

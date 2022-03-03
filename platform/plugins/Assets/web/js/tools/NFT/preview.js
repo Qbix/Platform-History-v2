@@ -270,16 +270,17 @@
                 var poster = state.poster;
                 var nftMovie = state.movie;
                 var nftSrc = state.src;
+                var $videoContainer = $(".video-container", tool.element);
 
                 if (nftMovie) {
-                    $(".video-container", tool.element).empty().html('<video preload="auto" poster="' + poster + '" controls="" src="' + nftMovie + '"></video>');
-                    $(".assets_nft_col_eight .video-container").on(Q.Pointer.fastclick, function (e) {
+                    $videoContainer.html('<video preload="auto" poster="' + poster + '" controls="" src="' + nftMovie + '"></video>');
+                    $videoContainer.on(Q.Pointer.fastclick, function (e) {
                         e.preventDefault();
                         e.stopPropagation();
                         return false;
                     });
                 } else if (nftSrc) {
-                    $(".video-container", tool.element).empty().html('<img alt="icon" class="NFT_preview_icon" src="' + nftSrc + '">');
+                    $videoContainer.empty().css("background-image", 'url(' + nftSrc + ')');
                 } else if (movie && !data.image) {
                     var qVideo = $("<div>").tool("Q/video", {
                         url: movie,
@@ -290,9 +291,9 @@
                         e.stopPropagation();
                         return false;
                     });
-                    $("img.NFT_preview_icon", tool.element).replaceWith(qVideo);
+                    $videoContainer.html(qVideo);
                 } else {
-                    $("img.NFT_preview_icon", tool.element).prop("src", data.image);
+                    $videoContainer.empty().css("background-image", 'url(' + data.image + ')');
                 }
 
                 // handle with days, hours, minutes visibility
@@ -555,9 +556,7 @@
                 <div class="NFT_preview_owner">{{NFT.Owner}}: <span class="NFT_owner">{{owner}}</span></div>
             </div>
         </div>
-        <div class="video-container">
-            <img class="NFT_preview_icon">
-        </div>
+        <div class="video-container"></div>
         <h2 class="tile-name">{{title}}</h2>
         <ul class="bid-info">
             <li class="Assets_NFT_price">
