@@ -999,7 +999,7 @@
 				Transfer: "onTransfer",
 				TransferAuthorship: "onTransferAuthorship",
 				OwnershipTransferred: "onTransferOwnership",
-				TokenCreated: "onTokenCreated"
+				//TokenCreated: "onTokenCreated" -- for some reason when apply handler to this event, MetaMask throw exeption every 24 seconds: code 32604 'too many requests'
 			},
 			onTokenRemovedFromSale: new Q.Event(),
 			onTokenAddedToSale: new Q.Event(),
