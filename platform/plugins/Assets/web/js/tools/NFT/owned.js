@@ -48,34 +48,32 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	refresh: function () {
 		var tool = this;
 
-		if (tool.infinitescrollApplied) {
+		var _onInvoke = function () {
+			var offset = $(">.Assets_NFT_preview_tool:visible", tool.element).length;
+			var infiniteTool = this;
+
+			// skip duplicated (same offsets) requests
+			if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+				return;
+			}
+
+			infiniteTool.setLoading(true);
+			infiniteTool.state.offset = offset;
+			tool.loadMore(offset, function () {
+				infiniteTool.setLoading(false);
+			});
+		};
+		var $scrollingParent = $(tool.element.scrollingParent());
+		var infiniteTool = Q.Tool.from($scrollingParent, "Q/infinitescroll");
+		if (infiniteTool) {
+			infiniteTool.state.offset = undefined;
+			infiniteTool.state.onInvoke.set(_onInvoke, tool);
+			$scrollingParent.trigger("scroll");
 			return;
 		}
 
-		var $scrollingParent = $(tool.element.scrollingParent());
-		var isTool = Q.Tool.from($scrollingParent, "Q/infinitescroll");
-		if (isTool) {
-			isTool.state.offset = undefined;
-		}
-
-		$scrollingParent.tool('Q/infinitescroll', {
-			onInvoke: function () {
-				var offset = $(">.Assets_NFT_preview_tool:visible", tool.element).length;
-				var infiniteTool = this;
-
-				// skip duplicated (same offsets) requests
-				if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
-					return;
-				}
-
-				infiniteTool.setLoading(true);
-				infiniteTool.state.offset = offset;
-				tool.loadMore(offset, function () {
-					infiniteTool.setLoading(false);
-				});
-			}
-		}).activate(function () {
-			tool.infinitescrollApplied = true;
+		$scrollingParent.tool('Q/infinitescroll').activate(function () {
+			this.state.onInvoke.set(_onInvoke, tool);
 			$scrollingParent.trigger("scroll");
 		});
 	},
