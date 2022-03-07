@@ -62,10 +62,8 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
-		if ($caching !== false && $cacheDuration) {
-			if ($cache->wasRetrieved()) {
-				return Q::json_decode($cache->result);
-			}
+		if ($caching !== false && $cacheDuration && $cache->wasRetrieved()) {
+			return Q::json_decode($cache->result);
 		}
 
 		if (empty($appInfo['rpcUrl'])) {
@@ -231,6 +229,11 @@ class Users_Web3 extends Base_Users_Web3 {
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
+
+		if (!is_array($params)) {
+			$params = array($params);
+		}
+
 		$cached = new Users_Web3(array(
 			'chainId' => $chainId,
 			'contract' => $contract,

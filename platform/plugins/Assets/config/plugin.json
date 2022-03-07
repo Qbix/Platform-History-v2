@@ -208,6 +208,11 @@
 			"attributes": {
 				"display_type": ["string", "number", "date", "list"]
 			},
+			"methods": {
+				"tokensByOwner": {
+					"limit": 100
+				}
+			},
 			"currencies": [
 				{
 					"symbol": "BNB",

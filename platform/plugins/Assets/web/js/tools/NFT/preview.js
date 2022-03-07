@@ -108,7 +108,7 @@
             });
 
             if (state.useWeb3) {
-                Q.handle(Assets.batchFunction(), null, ["NFT", "getInfo", state.tokenId, state.chainId, !!state.updateCache, function (err, data) {
+                Q.handle(Assets.batchFunction(), null, ["NFT", "getInfo", state.tokenId, state.chainId, state.updateCache, function (err, data) {
                     state.updateCache = false;
 
                     var msg = Q.firstErrorMessage(err, data);

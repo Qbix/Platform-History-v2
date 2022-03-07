@@ -8,6 +8,7 @@ function Assets_NFT_response_owned ($params) {
 	$GLOBALS["Assets_NFT_response_owned"]["limit"] = (int)Q::ifset($request, 'limit', 1000);
 	$countNFTs = 0;
 	$GLOBALS["Assets_NFT_response_owned"]["secondsInYear"] = 31104000;
+	$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
 
 	$chains = Assets_NFT::getChains();
 	$wallet = Users_Web3::getWalletById($userId, true);
@@ -44,7 +45,7 @@ function Assets_NFT_response_owned ($params) {
 	foreach ($chains as $chain) {
 		if (Users_Web3::existsInABI("tokensByOwner", $chain["contract"], "function")) {
 			try {
-				$tokens = Users_Web3::execute($chain["contract"], "tokensByOwner", [$wallet, 100], $chain["chainId"]);
+				$tokens = Users_Web3::execute($chain["contract"], "tokensByOwner", [$wallet, $tokensByOwnerLimit], $chain["chainId"]);
 			} catch (Exception $e) {
 				continue;
 			}
