@@ -128,5 +128,8 @@
         "Member": "Member",
         "Guest": "Guest",
         "Host": "Host"
+    },
+    "web3": {
+        "WrongMethod": "Wrong contract method {{methodName}}"
     }
 }

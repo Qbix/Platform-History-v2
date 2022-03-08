@@ -425,6 +425,7 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
+								var web3 = new Web3();
 								var address = accounts[0];
 								const res = provider.request({
 									method: 'personal_sign',
@@ -542,7 +543,6 @@
 		// if the user hasn't changed then user is null here
 		Users.connected[platform] = true;
 		Users.onConnected.handle.call(Users, platform, user, options);
-		Users.onLogin.handle(user);
 		Q.handle(onSuccess, this, [user, options]);
 		Users.authenticate.occurring = false;
 	}
@@ -3881,14 +3881,6 @@
 			web3Modal.resetState();
 			web3Modal.connect().then(function (provider) {
 				Users.Web3.provider = provider;
-
-				// Detect if provider locked
-				provider.on('accountsChanged', function () {
-					if (!this.selectedAddress) {
-						Users.Web3.provider = null;
-					}
-				});
-
 				Q.handle(callback, null, [null, provider]);
 			}).catch(function (ex) {
 				Q.handle(callback, null, [ex]);
@@ -3896,9 +3888,45 @@
 			});
 		},
 		/**
-		 * Get current wallet address
-		 * @method getWallet
-		 * @param {Function} callback
+		 * Execute method on contract
+		 * @method execute
+		 * @params {string} methodName
+		 * @params {mixed} params
+		 * @params {string|object} contract
+		 * @params {function} callback
+		 */
+		execute: function (methodName, params, contract, callback) {
+			if (Q.typeOf(contract) === "string") {
+				return Users.Web3.getContract(contract, function (err, contract) {
+					if (err) {
+						Q.handle(callback, null, [err]);
+					}
+
+					Users.Web3.execute(methodName, params, contract, callback);
+				});
+			}
+
+			if (!contract[methodName]) {
+				return Q.handle(callback, null, ["WrongMethod"]);
+			}
+
+			if (Q.typeOf(params) !== "array") {
+				params = [params];
+			}
+
+			contract[methodName].apply(null, params).then(function (result) {
+				Q.handle(callback, null, [null, result]);
+			}, function (err) {
+				Q.handle(callback, null, [err]);
+			});
+		},
+		/**
+		 * Get currently wallet address
+		 * @method execute
+		 * @params {string} methodName
+		 * @params {mixed} params
+		 * @params {string|object} contract
+		 * @params {function} callback
 		 */
 		getWallet: function (callback) {
 			Users.Web3.connect(function (err, provider) {
@@ -3912,7 +3940,7 @@
 			});
 		},
 		/**
-		 * Get current chain id
+		 * Get currently chain id
 		 * @method getChainId
 		 * @param {Function} callback
 		 */
@@ -3930,6 +3958,7 @@
 		/**
 		 * Switch provider to a different Web3 chain
 		 * @method switchChain
+		 * @static
 		 * @param {Object} info
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
@@ -3971,17 +4000,15 @@
 				});
 
 				function _continue() {
-					onSuccess && provider.once("chainChanged", onSuccess);
+					provider.once("chainChanged", onSuccess);
 				}
 			});
 		},
 
 		/**
 		 * Used get the currently selected address on current ethereum chain
-		 * @method getContract
+		 * @method getSelectedXid
 		 * @static
-		 * @param {string} contractAddress
-		 * @param {Function} callback receives (err, contract)
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getSelectedXid: function () {
@@ -3994,10 +4021,8 @@
 
 		/**
 		 * Used to get the logged-in user's ID on any chain
-		 * @method getContract
+		 * @method getLoggedInUserXid
 		 * @static
-		 * @param {string} contractAddress
-		 * @param {Function} callback receives (err, contract)
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getLoggedInUserXid: function () {
@@ -4019,7 +4044,7 @@
 		getContract: function(contractAddress, callback) {
 			return new Q.Promise(function (resolve, reject) {
 				if (window.ethereum
-				&& ethereum.chainId == Q.getObject([
+				&& ethereum.chainId === Q.getObject([
 					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
 				])) {
 					_continue(ethereum);
