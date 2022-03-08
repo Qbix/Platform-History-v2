@@ -3590,17 +3590,29 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     function getControlsAlign() {
 
-                        if(!document.body.contains(wrapElement)) return defaultSide;
+                        //let intersect = (elementToWrap.top < containerRect.bottom && (elementToWrap.left < containerRect.right || elementToWrap.right > containerRect.left)) ||
+                        //    (elementToWrap.bottom > containerRect.top && (elementToWrap.left < containerRect.right || elementToWrap.right > containerRect.left));
+
+                        let intersectsEnough;
+                        if(intersects(containerRect, elementToWrap)) {
+                            if((elementToWrap.top < containerRect.bottom && elementToWrap.bottom >= containerRect.bottom && containerRect.bottom - elementToWrap.top >= spaceBetween) ||
+                                (elementToWrap.top > containerRect.top && elementToWrap.bottom < containerRect.bottom) ||
+                                (elementToWrap.bottom > containerRect.top && elementToWrap.top <= containerRect.top && elementToWrap.bottom - containerRect.top >= spaceBetween)) {
+                                intersectsEnough = true;
+                            }
+                        }
+
+                        if(!document.body.contains(wrapElement) || !intersectsEnough) return defaultSide;
                         //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
                         var parentHeight = containerRect.height;
 
-                        if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top < parentHeight / 2) {
+                        if(wrapElement.classList.contains('Q_resize_snapped_left') && (elementToWrap.top - containerRect.top) < parentHeight / 2) {
                             return 'topleft';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_left') && elementToWrap.top > parentHeight / 2) {
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_left') && (elementToWrap.top - containerRect.top) >= parentHeight / 2) {
                             return 'bottomleft';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top < parentHeight / 2) {
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && (elementToWrap.top - containerRect.top) < parentHeight / 2) {
                             return 'topright';
-                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && elementToWrap.top > parentHeight / 2) {
+                        } else if(wrapElement.classList.contains('Q_resize_snapped_right') && (elementToWrap.top - containerRect.top) >= parentHeight / 2) {
                             return 'bottomright';
                         } else if(wrapElement.classList.contains('Q_resize_snapped_top')) {
                             return 'top';
@@ -3609,6 +3621,13 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         } else {
                             return 'bottom';
                         }
+                    }
+
+                    function intersects(r1, r2) {
+                        return !(r2.left > r1.right ||
+                            r2.right < r1.left ||
+                            r2.top > r1.bottom ||
+                            r2.bottom < r1.top);
                     }
 
                     function maximizeScreen(){
@@ -3732,20 +3751,27 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         var rectsOnLeftSide, rectsOnRightSide, numOfRowsAlongWrapEl
                         if(wrapElPosition == 'bottom' || wrapElPosition == 'top') {
-                            rectsOnLeftSide = Math.floor(elementToWrap.left / (rectWidth + spaceBetween));
-                            rectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (rectWidth + spaceBetween));
+                            rectsOnLeftSide = Math.floor((elementToWrap.left - containerRect.left) / (rectWidth + spaceBetween));
+                            rectsOnRightSide = Math.floor((containerRect.right - elementToWrap.right) / (rectWidth + spaceBetween));
                             //numOfRowsAlongWrapEl = Math.floor((elementToWrap.top + spaceBetween) / (rectWidth + spaceBetween));
+                            if(rectsOnLeftSide < 0) rectsOnLeftSide = 0;
+                            if(rectsOnRightSide < 0) rectsOnRightSide = 0;
+
                             if (wrapElPosition == 'bottom') {
-                                numOfRowsAlongWrapEl = Math.ceil((parentHeight - elementToWrap.top) / (rectHeight + spaceBetween));
+                                let num = (containerRect.top + containerRect.height - elementToWrap.top) / (rectHeight + spaceBetween);
+                                numOfRowsAlongWrapEl = num > 0 && num < 0.5 ? 1 : Math.ceil(num);
                             } else if (wrapElPosition == 'top') {
-                                numOfRowsAlongWrapEl = Math.ceil((elementToWrap.top + elementToWrap.height) / (rectHeight + spaceBetween));
+                                let num = (elementToWrap.bottom - containerRect.top) / (rectHeight + spaceBetween);
+                                numOfRowsAlongWrapEl = num > 0 && num < 0.5 ? 1 : Math.ceil(num);
                             }
                         } else if(wrapElPosition == 'bottomleft' || wrapElPosition == 'bottomright') {
-                            rectsOnLeftSide = rectsOnRightSide =  Math.floor(rectsPerRow / 2);
-                            numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                            //rectsOnLeftSide = rectsOnRightSide =  Math.floor(rectsPerRow / 2);
+                            //numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                            rectsOnLeftSide = rectsOnRightSide = numOfRowsAlongWrapEl = 0;
                         } else if(wrapElPosition == 'topleft' || wrapElPosition == 'topright') {
-                            rectsOnLeftSide = rectsOnRightSide = Math.floor(rectsPerRow / 2);
-                            numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                            //rectsOnLeftSide = rectsOnRightSide = Math.floor(rectsPerRow / 2);
+                            //numOfRowsAlongWrapEl = Math.floor(parentHeight / (rectHeight + spaceBetween));
+                            rectsOnLeftSide = rectsOnRightSide = numOfRowsAlongWrapEl = 0;
                         } else {
                             rectsOnLeftSide = rectsOnRightSide = numOfRowsAlongWrapEl = 0;
                         }
@@ -3776,9 +3802,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
                         var perRow = gridParams.rectsPerRow;
 
+                        //if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
+                        var totalRectsOnSides = numOfRowsAlongWrapEl == 0 ? 0 : (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
 
-                        if(numOfRowsAlongWrapEl == 0 && (rectsOnLeftSide != 0 || rectsOnRightSide != 0)) numOfRowsAlongWrapEl = 1;
-                        var totalRectsOnSides = (rectsOnLeftSide * numOfRowsAlongWrapEl) + (rectsOnRightSide * numOfRowsAlongWrapEl);
                         if(count < totalRectsOnSides) totalRectsOnSides = count;
 
                         var rects = [];
@@ -3799,7 +3825,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             var createNewRowOnRight = false;
                             var i, x, y, prevRect, latestLeftRect, latestRightRect;
                             for (i = 0; i < totalRectsOnSides; i++) {
+                                console.log('build totalRectsOnSides for')
+
                                 if (side == "right") {
+                                    console.log('build totalRectsOnSides for right')
 
                                     if (latestRightRect) prevRect = latestRightRect
                                     if (rightSideCounter >= 1) {
@@ -3840,7 +3869,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                             x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
                                         } else {
-                                            x = (elementToWrap.left + elementToWrap.width + spaceBetween);
+                                            x = ((elementToWrap.left - containerRect.left) + elementToWrap.width + spaceBetween);
                                         }
 
                                     }
@@ -3848,27 +3877,36 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     rightSideCounter++;
 
                                     if (rightSideCounter == rectsOnRightSide) {
+                                        console.log('build totalRectsOnSides for createNewRowOnRight')
+
                                         createNewRowOnRight = true;
-                                        if (createNewRowOnRight) rightSideCounter = 0;
+                                        rightSideCounter = 0;
                                     }
                                     if (rectsOnLeftSide != 0) {
+                                        console.log('build totalRectsOnSides for right next', rightSideCounter, createNewRowOnRight, (createNewRowOnLeft && createNewRowOnRight), (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight))
+
                                         if (rectsOnLeftSide == rectsOnRightSide) {
                                             side = 'left';
+                                            console.log('build totalRectsOnSides for left next 0')
+
                                         } else if (rectsOnLeftSide != rectsOnRightSide) {
                                             if ((!createNewRowOnLeft && !createNewRowOnRight)
                                                 || (createNewRowOnRight && !createNewRowOnLeft)
-                                                || (createNewRowOnLeft && rightSideCounter == 1 && !createNewRowOnRight)) {
+                                                || (createNewRowOnLeft && createNewRowOnRight && (rectsOnRightSide == 1 || rectsOnLeftSide == 1))) {
                                                 side = 'left';
+                                                console.log('build totalRectsOnSides for left next 1')
+
                                             } else if ((createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight)) {
                                                 side = 'right';
+                                                console.log('build totalRectsOnSides for left next 2')
                                             }
                                         }
-
                                     }
 
                                     var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
                                     currentRowRects.push({side: 'right', rect: rect});
                                 } else if (side == "left") {
+                                    console.log('build totalRectsOnSides for left')
                                     if (latestLeftRect) prevRect = latestLeftRect;
 
                                     if (leftSideCounter >= 1) {
@@ -3908,7 +3946,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         if (align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                             x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
                                         } else {
-                                            x = (elementToWrap.left - (rectWidth + spaceBetween));
+                                            x = ((elementToWrap.left - containerRect.left) - (rectWidth + spaceBetween));
                                         }
                                     }
 
@@ -3925,7 +3963,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         } else if (rectsOnLeftSide != rectsOnRightSide) {
                                             if (createNewRowOnRight && !createNewRowOnLeft) {
                                                 side = 'left';
-                                            } else if ((!createNewRowOnLeft && !createNewRowOnRight) || (createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && !createNewRowOnRight)) {
+                                            } else if ((!createNewRowOnLeft && !createNewRowOnRight) ||
+                                                (createNewRowOnLeft && createNewRowOnRight) ||
+                                                (createNewRowOnLeft && !createNewRowOnRight) ||
+                                                (createNewRowOnLeft && createNewRowOnRight && rectsOnLeftSide == 1)) {
                                                 side = 'right';
                                             }
                                         }
@@ -3982,8 +4023,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             maxX = Math.max.apply(Math, rects.map(function (o) {
                                 return o.rect.x + o.rect.width;
                             }));
-                            if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                            if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+                            if (minX > (elementToWrap.left - containerRect.left)) minX = (elementToWrap.left - containerRect.left) + spaceBetween;
+                            if (maxX < (elementToWrap.left - containerRect.left)) maxX = elementToWrap.right -  containerRect.left;
                             minY = Math.min.apply(Math, rects.map(function (o) {
                                 return o.rect.y;
                             }));
@@ -3996,12 +4037,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             perRow =  Math.ceil(rectsNum);
                         } else if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                             //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-
+                            //let intersect = (elementToWrap.top < containerRect.bottom && (elementToWrap.left < containerRect.right || elementToWrap.right > containerRect.left)) ||
+                            //    (elementToWrap.bottom > containerRect.top && (elementToWrap.left < containerRect.right || elementToWrap.right > containerRect.left));
+                            let intersect = intersects(containerRect, elementToWrap);
                             perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+
                             if(align == 'bottomleft' || align == 'topleft') {
+                                if(intersect) perRow =  Math.floor((parentWidth - (elementToWrap.right - containerRect.left)) / (rectWidth + spaceBetween));
                                 maxX =  parentWidth - spaceBetween;
                             } else if (align == 'bottomright' || align == 'topright') {
-                                maxX = elementToWrap.left - spaceBetween;
+                                if(intersect) perRow =  Math.floor((parentWidth - (containerRect.right - elementToWrap.left)) / (rectWidth + spaceBetween));
+                                maxX = (elementToWrap.left - containerRect.left) - spaceBetween;
                             }
 
                             minY = spaceBetween;
@@ -4078,13 +4124,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         //var containerRect = container == document.body ? new DOMRect(0, 0, window.innerWidth, window.innerHeight) : container.getBoundingClientRect();
 
-
                         var gridParams = getRectsGridParams(align);
                         var rectsOnLeftSide = gridParams.rectsOnLeftSide;
                         var rectsOnRightSide = gridParams.rectsOnRightSide;
                         var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl;
                         var perRow = gridParams.rectsPerRow;
-
 
                         var getRectsRows = function () {
                             var rows = {};
@@ -4097,13 +4141,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                                 if(align == 'bottom' || align == 'top') {
-                                    let isTopFullRow = align == 'top' && rect.top > elementToWrap.bottom
-                                    let isBottomFullRow = align == 'bottom' && rect.bottom < elementToWrap.top
-                                    if(rect.left < elementToWrap.left && !isTopFullRow && !isBottomFullRow) {
+                                    let isTopFullRow = align == 'top' && rect.top >= (elementToWrap.bottom - containerRect.top);
+                                    let isBottomFullRow = align == 'bottom' && rect.bottom <= (elementToWrap.top - containerRect.top);
+
+                                    if(rect.left < (elementToWrap.left - containerRect.left) && !isTopFullRow && !isBottomFullRow) {
                                         if(rows[rect.top + '_l'] == null) rows[rect.top + '_l'] = [];
 
                                         rows[rect.top + '_l'].push({indx: i, top: rect.top, rect:rect, side:'left'});
-                                    } else if (rect.left >= elementToWrap.left && !isTopFullRow && !isBottomFullRow){
+                                    } else if (rect.left >= (elementToWrap.left - containerRect.left) && !isTopFullRow && !isBottomFullRow){
+
                                         if(rows[rect.top + '_r'] == null) rows[rect.top + '_r'] = [];
 
                                         rows[rect.top + '_r'].push({indx: i, top: rect.top, rect:rect, side:'right'});
@@ -4156,29 +4202,30 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 minX = Math.min.apply(Math, currentRects.map(function (o) {return o.x;}));
                                 maxX = Math.max.apply(Math, currentRects.map(function (o) {return o.x + o.width;}));
 
-                                if (minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                                if (maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+                                if (minX > (elementToWrap.left - containerRect.left)) minX = (elementToWrap.left - containerRect.left) + spaceBetween;
+                                if (maxX < (elementToWrap.left - containerRect.left)) maxX = (elementToWrap.left - containerRect.left) + elementToWrap.width;
 
 
                             } else if(align == 'bottomleft' || align == 'topleft') {
                                 //var perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
-                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
+                                //perRow =  Math.floor((parentWidth - elementToWrap.width) / rectWidth);
+                                perRow =  Math.floor((parentWidth - (elementToWrap.right - containerRect.left)) / (rectWidth + spaceBetween));
                                 maxX =  parentWidth - spaceBetween;
-                                minX =  elementToWrap.left + elementToWrap.width + spaceBetween;
+                                minX =  elementToWrap.right - containerRect.left;
                             } else if(align == 'bottomright' || align == 'topright') {
-                                perRow =  Math.floor((parentWidth - elementToWrap.width) / (rectWidth + spaceBetween));
-                                maxX = elementToWrap.left - spaceBetween;
+                                //perRow =  Math.floor((parentWidth - elementToWrap.width) / rectWidth);
+                                perRow =  Math.floor((parentWidth - (elementToWrap.right - containerRect.right)) / (rectWidth + spaceBetween));
+                                maxX = (elementToWrap.left - containerRect.left);
                                 minX = spaceBetween;
                             } else {
-                                perRow =  Math.floor(parentWidth / (rectWidth + spaceBetween));
+                                perRow =  Math.floor(parentWidth / rectWidth);
                                 minX = spaceBetween;
-                                maxX = parentWidth - spaceBetween;
+                                maxX = parentWidth;
                             }
 
                             /*var minX = Math.min.apply(Math, currentRects.map(function(o) { return o.x; }));
                             var maxX = Math.max.apply(Math, currentRects.map(function(o) { return o.x+o.width; }));*/
                             var maxWidth = maxX - minX;
-
 
                             var i, rowsCount = rows.length;
                             for(i = 0; i < rowsCount; i++) {
@@ -4187,7 +4234,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 if(sampleRect.side == 'left') {
 
-                                    var maxRectsOnLeftSide = Math.floor(elementToWrap.left / (sampleRect.rect.width + spaceBetween));
+                                    var maxRectsOnLeftSide = Math.floor((elementToWrap.left - containerRect.left) / (sampleRect.rect.width + spaceBetween));
 
                                     if(row.length != maxRectsOnLeftSide){
                                         var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
@@ -4209,7 +4256,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 } else if (sampleRect.side == 'right') {
 
-                                    var maxRectsOnRightSide = Math.floor((parentWidth - (elementToWrap.left + elementToWrap.width)) / (row[0].rect.width + spaceBetween));
+                                    var maxRectsOnRightSide = Math.floor((containerRect.right - elementToWrap.right) / (row[0].rect.width + spaceBetween));
 
                                     if(row.length != maxRectsOnRightSide){
                                         var rowsMinX = Math.min.apply(Math, row.map(function(o) { return o.rect.x; }));
@@ -4252,6 +4299,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     }
                                 }
 
+
                             }
 
                             if(sortedRows.left.length != sortedRows.right.length) {
@@ -4266,14 +4314,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         var leftRow = sortedRows.left[i];
                                         var sampleRect = leftRow[0];
 
-                                        var rowsMinX = elementToWrap.left + elementToWrap.width + spaceBetween;
-                                        var rowsMaxX = parentWidth - spaceBetween;
-
                                         var r, prevRect;
                                         for(r = 0; r < rectsOnRightSide; r++){
                                             var newRect;
                                             if(r == 0) {
-                                                newRect = new DOMRect(elementToWrap.left + elementToWrap.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
+                                                newRect = new DOMRect((elementToWrap.right - containerRect.left) + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
                                             } else {
                                                 newRect = new DOMRect(prevRect.x + prevRect.width + spaceBetween, sampleRect.rect.y, rectWidth, rectHeight)
                                             }
@@ -4295,14 +4340,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         var rightRow = sortedRows.right[i];
                                         var sampleRect = rightRow[0];
 
-                                        var rowsMinX = spaceBetween;
-                                        var rowsMaxX = elementToWrap.left - spaceBetween;
-
                                         var r, prevRect;
                                         for(r = 0; r < rectsOnLeftSide; r++){
                                             var newRect;
                                             if(r == 0) {
-                                                newRect = new DOMRect(elementToWrap.left - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
+                                                newRect = new DOMRect((elementToWrap.left - containerRect.left) - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
                                             } else {
                                                 newRect = new DOMRect(prevRect.x - sampleRect.rect.width - spaceBetween, sampleRect.rect.y, sampleRect.rect.width, sampleRect.rect.height)
                                             }
@@ -4379,7 +4421,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             var newRects = [];
 
                             var craeteRowsOnControlsSides = function(){
-
                                 var startFrom, side;
                                 var minLeftY, minRightY, maxLeftY, maxRightY;
 
@@ -4448,36 +4489,43 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 }
 
-                                var numOfRowsAlongWrapEl, rectsToTheTopOnLeft, rectsToTheTopOnRight;
+                                var numOfRowsAlongWrapEl = gridParams.numOfRowsAlongWrapEl, rectsToTheTopOnLeft = 0, rectsToTheTopOnRight = 0;
 
                                 if(align == 'bottom' || align == 'bottomleft' || align == 'bottomright') {
-                                    rectsToTheTopOnLeft = Math.ceil((minLeftY - elementToWrap.top  + spaceBetween) / (rectHeight + spaceBetween));
-                                    rectsToTheTopOnRight = Math.ceil((minRightY - elementToWrap.top + spaceBetween) / (rectHeight + spaceBetween));
+                                    if (minLeftY) rectsToTheTopOnLeft = Math.ceil((minLeftY - elementToWrap.top  + spaceBetween) / (rectHeight + spaceBetween));
+                                    if (minRightY) rectsToTheTopOnRight = Math.ceil((minRightY - elementToWrap.top + spaceBetween) / (rectHeight + spaceBetween));
 
-                                    if(minY < elementToWrap.top) {
+                                    /*if(minY < containerRect.bottom - elementToWrap.top) {
                                         numOfRowsAlongWrapEl = 0;
                                         rectsToTheTopOnLeft = 0;
                                         rectsToTheTopOnRight = 0;
-                                    }
+                                    }*/
 
                                 } else if (align == 'top' || align == 'topleft' || align == 'topright') {
-                                    rectsToTheTopOnLeft = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxLeftY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
-                                    rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
 
-                                    if(minY < elementToWrap.top) {
+                                    if(maxLeftY) rectsToTheTopOnLeft = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxLeftY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
+                                    if(maxRightY) rectsToTheTopOnRight = Math.ceil(((elementToWrap.top + elementToWrap.height) - (maxRightY + rectHeight) + spaceBetween) / (rectHeight + spaceBetween));
+
+                                    /*if(minY < elementToWrap.top - containerRect.top) {
+                                        console.log('addAndUpdate createNewRows craeteRowsOnControlsSides if 123');
+
                                         numOfRowsAlongWrapEl = 0;
                                         rectsToTheTopOnLeft = 0;
                                         rectsToTheTopOnRight = 0;
-                                    }
+                                    }*/
                                 }
 
+                                /*var count = numRectsToAdd;
+                                var totalRectsOnLeftSide = gridParams.rectsOnLeftSide * gridParams.numOfRowsAlongWrapEl;
+                                var totalRectsOnRightSide = gridParams.rectsOnRightSide * gridParams.numOfRowsAlongWrapEl;
+                                var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;*/
+
                                 var count = numRectsToAdd;
-                                var totalRectsOnLeftSide = (rectsOnLeftSide != 0 ? (rectsOnLeftSide * rectsToTheTopOnLeft) : 0);
-                                var totalRectsOnRightSide = (rectsOnRightSide != 0 ? (rectsOnRightSide * rectsToTheTopOnRight) : 0);
+                                var totalRectsOnLeftSide = rectsToTheTopOnLeft * numOfRowsAlongWrapEl;
+                                var totalRectsOnRightSide = rectsToTheTopOnRight * numOfRowsAlongWrapEl;
                                 var totalRectsOnSides = totalRectsOnLeftSide + totalRectsOnRightSide;
 
                                 if(count < totalRectsOnSides) totalRectsOnSides = count;
-
 
                                 var rects = [];
                                 var currentRowRects = [];
@@ -4485,7 +4533,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 /*if(maximized) {
                                     count = totalRectsOnSides = count - 1;
                                 }*/
-
 
                                 var leftSideCounter = 0;
                                 var rightSideCounter = 0;
@@ -4535,7 +4582,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'right' ? parentWidth / 2 - rectWidth / 2 : latestLeftRect.left + rectWidth + spaceBetween;
                                             } else {
-                                                x = (elementToWrap.left + elementToWrap.width + spaceBetween);
+                                                x = ((elementToWrap.left - containerRect.left) + elementToWrap.width + spaceBetween);
                                             }
 
                                         }
@@ -4602,7 +4649,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                             if(align == 'bottomleft' || align == 'bottomright' || align == 'topleft' || align == 'topright') {
                                                 x = startFrom == 'left' ? parentWidth / 2 - rectWidth / 2 : latestRightRect.left - rectWidth - spaceBetween;
                                             } else {
-                                                x = (elementToWrap.left - (rectWidth + spaceBetween));
+                                                x = ((elementToWrap.left - containerRect.left) - (rectWidth + spaceBetween));
                                             }
                                         }
 
@@ -4649,7 +4696,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }
 
                             var createFullRows = function(count) {
-
                                 var allRects = currentRects.concat(newRects).concat(availableRects);
                                 var minX, maxX, rectsNum;
                                 if(align == 'top' || align == 'bottom') {
@@ -4657,19 +4703,20 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     var minX = Math.min.apply(Math, allRects.map(function(o) { return o.x; }));
                                     var maxX = Math.max.apply(Math, allRects.map(function(o) { return o.x+o.width; }));
 
-                                    if(minX > elementToWrap.left) minX = elementToWrap.left + spaceBetween;
-                                    if(maxX < elementToWrap.left) maxX = elementToWrap.left + elementToWrap.width;
+                                    if(minX > (elementToWrap.left - containerRect.left)) minX = (elementToWrap.left - containerRect.left) + spaceBetween;
+                                    if(maxX < (elementToWrap.left - containerRect.left)) maxX = (elementToWrap.left - containerRect.left) + elementToWrap.width;
 
                                     rectsNum = Math.ceil((maxX-minX)/(rectWidth + spaceBetween));
                                     rectWidth = ((maxX-minX)-(spaceBetween*(rectsNum-1)))/rectsNum;
 
+
                                 } else if (align == 'bottomleft' || align == 'topleft') {
                                     maxX =  parentWidth - spaceBetween;
-                                    minX =  elementToWrap.left + spaceBetween;
+                                    minX =  (elementToWrap.left - containerRect.left) + spaceBetween;
                                     rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
 
                                 } else if (align == 'bottomright' || align == 'topright') {
-                                    maxX = elementToWrap.left - spaceBetween;
+                                    maxX = (elementToWrap.left - containerRect.left) - spaceBetween;
                                     minX = spaceBetween;
                                     rectsNum = Math.floor((maxX-minX)/(rectWidth + spaceBetween));
                                 } else {
@@ -4746,6 +4793,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 || (rectsOnLeftSide == 0 && rectsOnRightSide == 0)) {
 
                                 newRects = createFullRows(numRectsToAdd);
+
                             } else {
 
                                 newRects = craeteRowsOnControlsSides();
@@ -4763,6 +4811,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         var rows = getRectsRows();
                         var availableRects = getAvailableRects(rows);
+
                         var newRows;
                         if(rectsToAddNum > availableRects.length) {
                             rectsToAddNum = (rectsToAddNum - availableRects.length);
@@ -4937,10 +4986,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         if(nextRow.length != 0) {
                             var isRowFull
                             if(align == 'bottom') {
-                                isRowFull = nextRow[0].top + nextRow[0].height < elementToWrap.top;
+                                isRowFull = nextRow[0].top + nextRow[0].height < (elementToWrap.top - containerRect.top);
 
                             } else if (align == 'top') {
-                                isRowFull = nextRow[0].top > elementToWrap.top;
+                                isRowFull = nextRow[0].top > (elementToWrap.top - containerRect.top);
                             } else {
                                 isRowFull = true;
                             }
@@ -4964,6 +5013,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                     function findClosesHorizontalyRect(rect, rects) {
+
                         var distance = function (x1,y1,x2,y2) {
                             return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
                         }
@@ -4972,10 +5022,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                         var isRowFull
                         if(align == 'bottom') {
-                            isRowFull = rect.top + rect.height < elementToWrap.top;
+                            isRowFull = rect.top + rect.height < (elementToWrap.top - containerRect.top);
 
                         } else if (align == 'top') {
-                            isRowFull = rect.top > elementToWrap.top + elementToWrap.height;
+                            isRowFull = rect.top > (elementToWrap.top - containerRect.top) + elementToWrap.height;
                         } else {
                             isRowFull = true;
                         }
@@ -4990,14 +5040,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             })
                         } else if(rect.left <= elementToWrap.left) {
                             currentRowRect = rects.filter(function (r) {
-                                if (r.top == rect.top && r.left < rect.left && rect.left < elementToWrap.left) {
+                                if (r.top == rect.top && r.left < rect.left && rect.left < (elementToWrap.left - containerRect.left)) {
                                     return true
                                 }
                                 return false;
                             })
                         } else {
                             currentRowRect = rects.filter(function (r) {
-                                if (r.top == rect.top && r.left > rect.left && rect.left > elementToWrap.left) {
+                                if (r.top == rect.top && r.left > rect.left && rect.left > (elementToWrap.left - containerRect.left)) {
                                     return true
                                 }
                                 return false;
@@ -5021,7 +5071,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                     function fillFreeSpaceWithClosestRects(spaceToFill, rects, skipRects) {
-
                         var closest;
                         if(skipRects != null) {
                             closest = findClosest(spaceToFill, rects.filter(function(o, i) {
@@ -5075,7 +5124,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         var resultLayoutRects;
 
                         if(diff.length != 0) {
-
                             for(var s in diff) {
                                 resultLayoutRects = fillFreeSpaceWithClosestRects(diff[s], actualLayoutRects, (activeScreenRect ? [activeScreenRect] : null));
                             }
