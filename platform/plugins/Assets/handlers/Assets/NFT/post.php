@@ -3,6 +3,10 @@ function Assets_NFT_post ($params) {
 	$req = array_merge($_REQUEST, $params);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
+	$adminLabels = Q_Config::get("Assets", "canCheckPaid", null);
+	if (!(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
+		throw new Users_Exception_NotAuthorized();
+	}
 
 	// update NFT attributes
 	if (Q_Request::slotName("attrUpdate")) {
@@ -19,8 +23,8 @@ function Assets_NFT_post ($params) {
 		return;
 	}
 
-	$stream = Assets_NFT::stream($userId);
+	$stream = Assets_NFT::getComposerStream($userId);
 	$fields = Q::take($req, array('title', 'content', 'attributes', 'interests'));
 
-	Assets_NFT::update($stream, $fields);
+	Assets_NFT::updateNFT($stream, $fields);
 }

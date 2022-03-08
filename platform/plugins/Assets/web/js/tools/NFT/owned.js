@@ -47,9 +47,10 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 { // methods go here
 	refresh: function () {
 		var tool = this;
+		var state = this.state;
 
 		var _onInvoke = function () {
-			var offset = $(">.Assets_NFT_preview_tool:visible", tool.element).length;
+			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
 			var infiniteTool = this;
 
 			// skip duplicated (same offsets) requests
@@ -76,6 +77,12 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			this.state.onInvoke.set(_onInvoke, tool);
 			$scrollingParent.trigger("scroll");
 		});
+
+		// add composer
+		$("<div>").prependTo(tool.element).tool("Assets/NFT/preview", {
+			composer: true,
+			userId: state.userId
+		}, state.userId + "-composer").activate();
 	},
 	/**
 	 * Load state.limit NFTs starting from offset

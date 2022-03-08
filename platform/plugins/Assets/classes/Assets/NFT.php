@@ -11,7 +11,7 @@ class Assets_NFT
 {
 	static $categoryStreamName = "Assets/user/NFTs";
 
-    /**
+	/**
 	 * Check if NFT category exists, and create if not
 	 * @method category
 	 * @param {string} [$publisherId=null] If null - logged user id used.
@@ -44,11 +44,11 @@ class Assets_NFT
 	/**
 	 * Get or create new NFT empty stream for composer
 	 * This is for user creating new NFT streams in the interface
-	 * @method getNFTStream
+	 * @method getComposerStream
 	 * @param {string} [$userId=null] If null loggedin user id used
 	 * @return {Streams_Stream}
 	 */
-	static function getNFTStream ($userId = null) {
+	static function getComposerStream ($userId = null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
 		$category = self::category($userId);
 
@@ -173,6 +173,7 @@ class Assets_NFT
 		$chainsClient = array();
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
+			$name = Q::ifset($chain, "name", null);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
@@ -186,7 +187,7 @@ class Assets_NFT
 
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
-			$temp = compact("chainId", "contract", "rpcUrls", "blockExplorerUrl");
+			$temp = compact("name", "chainId", "contract", "rpcUrls", "blockExplorerUrl");
 
 			foreach ($currencies as $currency) {
 				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {

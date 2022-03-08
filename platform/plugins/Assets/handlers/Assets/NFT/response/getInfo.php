@@ -20,7 +20,7 @@ function Assets_NFT_response_getInfo ($params) {
 	$user = Users_ExternalTo::select()->where(array(
 		"xid" => $author
 	))->fetchDbRow();
-	$userId = Q::ifset($user, "userId", null);
+	$authorUserId = Q::ifset($user, "userId", null);
 
 	$cachedOwnerOf = Users_Web3::getCache($chainId, $contractAddress, "ownerOf", $tokenId, $longDuration);
 	$owner = Users_Web3::execute($contractAddress, "ownerOf", $tokenId, $chainId, $caching, $cacheDuration);
@@ -57,5 +57,5 @@ function Assets_NFT_response_getInfo ($params) {
 	$tokenURI = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, $caching, $longDuration);
 	$data = Q::event('Assets/NFT/response/getRemoteJSON', compact("chainId", "contractAddress", "tokenURI"));
 
-	return compact("author", "owner", "saleInfo", "commissionInfo", "data", "userId", "url");
+	return compact("author", "owner", "saleInfo", "commissionInfo", "data", "authorUserId", "url");
 }

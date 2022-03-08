@@ -20,6 +20,7 @@
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"]
 		},
 		"routes@start": {
+			"Q/plugins/Assets/NFT/meta/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
