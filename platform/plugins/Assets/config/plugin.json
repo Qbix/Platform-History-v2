@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.6",
+				"version": "1.0.7",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -20,9 +20,8 @@
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"]
 		},
 		"routes@start": {
-			"Q/plugins/Assets/NFT/meta/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
-			"Q/plugins/Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
-			"Q/plugins/Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },

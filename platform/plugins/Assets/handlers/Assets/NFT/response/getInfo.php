@@ -27,27 +27,7 @@ function Assets_NFT_response_getInfo ($params) {
 	// if owner changed, remove the cache rows related to ownership to update them on new request
 	if ($cachedOwnerOf->wasRetrieved() && $owner != Q::json_decode($cachedOwnerOf->result)) {
 		$cachedOwnerOf = Q::json_decode($cachedOwnerOf->result);
-		$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
-		Users_Web3::getCache($chainId, $contractAddress, "tokensByOwner", array($cachedOwnerOf, $tokensByOwnerLimit), $longDuration)->remove();
-		Users_Web3::getCache($chainId, $contractAddress, "tokensByOwner", array($owner, $tokensByOwnerLimit), $longDuration)->remove();
-
-		$balanceOfOldOwnerRow = Users_Web3::getCache($chainId, $contractAddress, "balanceOf", $cachedOwnerOf, $longDuration);
-		if ($balanceOfOldOwnerRow->wasRetrieved()) {
-			$balanceOfOldOwner = (int)Q::json_decode($balanceOfOldOwnerRow->result);
-			$balanceOfOldOwnerRow->remove();
-			for ($i = 0; $i < $balanceOfOldOwner; $i++) {
-				Users_Web3::getCache($chainId, $contractAddress, "tokenOfOwnerByIndex", array($cachedOwnerOf, $i), $longDuration)->remove();
-			}
-		}
-
-		$balanceOfNewOwnerRow = Users_Web3::getCache($chainId, $contractAddress, "balanceOf", $owner, $longDuration);
-		if ($balanceOfNewOwnerRow->wasRetrieved()) {
-			$balanceOfNewOwner = (int)Q::json_decode($balanceOfNewOwnerRow->result);
-			$balanceOfNewOwnerRow->remove();
-			for ($i = 0; $i < $balanceOfNewOwner; $i++) {
-				Users_Web3::getCache($chainId, $contractAddress, "tokenOfOwnerByIndex", array($owner, $i), $longDuration)->remove();
-			}
-		}
+		Assets_NFT::clearContractCache($chainId, $contractAddress, array($cachedOwnerOf, $owner));
 	}
 
 	$saleInfo = Users_Web3::execute($contractAddress, "saleInfo", $tokenId, $chainId, $caching, $cacheDuration);

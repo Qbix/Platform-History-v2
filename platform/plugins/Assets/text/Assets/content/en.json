@@ -1,4 +1,16 @@
 {
+    "errors": {
+        "Error": "Error",
+        "WalletAbsent": "The wallet not connected.",
+        "Rendering": "There were errors while rendering <span class='url'>{{1}}</span>",
+        "PriceRequired": "Price required!",
+        "TransactionFailed": "Transaction Failed",
+        "NetworkNotSupported": "The selected network is not supported. Supported network: {{supportedNetwork}}",
+        "NeedMatemaskConnected": "Need MetaMask connected to work with application",
+        "UserNotLoggedInMetaMask": "User is not logged in to MetaMask",
+        "CurrencyNotFound": "Currency not found",
+        "WrongNetwork": "This NFT created under \"{{network}}\". Please use this network."
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Tap to pay"
@@ -237,9 +249,9 @@
         "OpenForBids": "Open for bids",
         "PriceOnePiece": "Enter price for one piece",
         "EnterMinimumBid": "Enter Minimum bid",
-        "SelectNetwork": "Select network",
+        "SelectChain": "Select chain",
         "profile": {
-            "Title": "TokenSociety profile for {{userName}}",
+            "Title": "Profile for {{userName}}",
             "Description": "User details",
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Are you sure you want to log out?"

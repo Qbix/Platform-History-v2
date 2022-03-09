@@ -30,6 +30,37 @@ function Assets_NFT_response_content ($params) {
 
     $texts = Q_Text::get('Assets/content');
 
+	// try to get stream
+	$stream = Streams::fetchOne(null, $tokenId, "Assets/NFT/".$chainId);
+	if ($stream) {
+		if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
+			$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
+		} else {
+			foreach (array("original", "x", "2048", "700x", "700x980") as $size) {
+				$image = $stream->iconUrl($size.'.png');
+				if (is_file(Q_Uri::filenameFromUrl($image))) {
+					break;
+				}
+			}
+		}
+		$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
+		if ($isJson) {
+			header("Content-type: application/json");
+			echo Q::json_encode(array(
+				"name" => $stream->title,
+				"description" => $stream->content,
+				"external_url" => $url,
+				"image" => $image,
+				"animation_url" => $stream->getAttribute('animation_url'),
+				"attributes" => $assetsNFTAttributes,
+			), JSON_PRETTY_PRINT);
+			exit;
+		}
+
+		$tokenId = $stream->getAttribute("tokenId");
+		$chainId = $stream->getAttribute("chainId");
+	}
+
 	$nftInfo = Q::event("Assets/NFT/response/getInfo", compact("tokenId", "chainId"));
 	if ($isJson) {
 		header("Content-type: application/json");

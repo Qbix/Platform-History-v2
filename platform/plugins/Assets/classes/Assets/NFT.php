@@ -129,7 +129,7 @@ class Assets_NFT
 
 		// change stream relation
 		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT", $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
@@ -253,5 +253,36 @@ class Assets_NFT
 		$cache->save();
 
 		return Q::json_decode($response, true);
+	}
+
+	/**
+	 * Get NFT json data
+	 * @method getJson
+	 * @param {String} $chainId
+	 * @param {String} $contractAddress
+	 * @param {array} $wallets - array of wallet addresses
+	 * @static
+	 * @return array
+	 */
+	static function clearContractCache ($chainId, $contractAddress, $wallets) {
+		$longDuration = 31104000;
+		$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
+
+		if (!is_array($wallets)) {
+			$wallets = array($wallets);
+		}
+
+		foreach ($wallets as $wallet) {
+			Users_Web3::getCache($chainId, $contractAddress, "tokensByOwner", array($wallet, $tokensByOwnerLimit), $longDuration)->remove();
+
+			$balanceOfOwnerRow = Users_Web3::getCache($chainId, $contractAddress, "balanceOf", $wallet, $longDuration);
+			if ($balanceOfOwnerRow->wasRetrieved()) {
+				$balanceOfOwner = (int)Q::json_decode($balanceOfOwnerRow->result);
+				$balanceOfOwnerRow->remove();
+				for ($i = 0; $i < $balanceOfOwner; $i++) {
+					Users_Web3::getCache($chainId, $contractAddress, "tokenOfOwnerByIndex", array($wallet, $i), $longDuration)->remove();
+				}
+			}
+		}
 	}
 };

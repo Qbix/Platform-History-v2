@@ -359,6 +359,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .Assets_NFT_preview_composer .switch {

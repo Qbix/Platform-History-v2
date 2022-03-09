@@ -49,6 +49,9 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var tool = this;
 		var state = this.state;
 
+		// add composer
+		tool.createComposer();
+
 		var _onInvoke = function () {
 			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
 			var infiniteTool = this;
@@ -77,12 +80,6 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			this.state.onInvoke.set(_onInvoke, tool);
 			$scrollingParent.trigger("scroll");
 		});
-
-		// add composer
-		$("<div>").prependTo(tool.element).tool("Assets/NFT/preview", {
-			composer: true,
-			userId: state.userId
-		}, state.userId + "-composer").activate();
 	},
 	/**
 	 * Load state.limit NFTs starting from offset
@@ -118,6 +115,27 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 				limit: state.limit
 			}
 		});
+	},
+	/**
+	 * Create Assets/NFT/preview in composer mode.
+	 * @method createComposer
+	 */
+	createComposer: function () {
+		var tool = this;
+		var state = this.state;
+
+		// if composer already exists
+		if ($(".Assets_NFT_composer", tool.element).length) {
+			return;
+		}
+
+		$("<div>").prependTo(tool.element).tool("Assets/NFT/preview", {
+			composer: true,
+			userId: state.userId,
+			onCreated: function () {
+				tool.createComposer();
+			}
+		}, state.userId + "-" + Date.now()).activate();
 	}
 });
 

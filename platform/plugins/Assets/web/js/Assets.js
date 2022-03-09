@@ -997,9 +997,9 @@
 				TokenPutOnSale: "onTokenAddedToSale",
 				TokenAddedToSale: "onTokenAddedToSale",
 				Transfer: "onTransfer",
-				TransferAuthorship: "onTransferAuthorship",
-				OwnershipTransferred: "onTransferOwnership",
-				//TokenCreated: "onTokenCreated" -- for some reason when apply handler to this event, MetaMask throw exeption every 24 seconds: code 32604 'too many requests'
+				//TransferAuthorship: "onTransferAuthorship",
+				//OwnershipTransferred: "onTransferOwnership",
+				//TokenCreated: "onTokenCreated" -- for some reason when apply handler to this event, MetaMask throw exception every 24 seconds: code 32604 'too many requests'
 			},
 			onTokenRemovedFromSale: new Q.Event(),
 			onTokenAddedToSale: new Q.Event(),
@@ -1722,7 +1722,7 @@
 
 			//var url = Assets.NFT.chains[chainId].blockExplorerUrl + "/address/" + author;
 			//Q.handle(url)
-			Q.handle(Q.url("Q/plugins/Assets/NFT/" + tokenId + "/" + chainId));
+			Q.handle(Q.url("Assets/NFT/" + tokenId + "/" + chainId));
 		}, true);
 
 		// onClick Users/avatar tool

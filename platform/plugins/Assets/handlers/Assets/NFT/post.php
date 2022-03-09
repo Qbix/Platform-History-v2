@@ -4,7 +4,8 @@ function Assets_NFT_post ($params) {
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
 	$adminLabels = Q_Config::get("Assets", "canCheckPaid", null);
-	if (!(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
+	// if user try to update align profile or is not an admin
+	if ($userId != $loggedInUserId && !(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
@@ -24,7 +25,12 @@ function Assets_NFT_post ($params) {
 	}
 
 	$stream = Assets_NFT::getComposerStream($userId);
-	$fields = Q::take($req, array('title', 'content', 'attributes', 'interests'));
-
+	$fields = Q::take($req, array("title", "content", "attributes"));
 	Assets_NFT::updateNFT($stream, $fields);
+
+	$chainId = $fields["attributes"]["chainId"];
+	$chain = Assets_NFT::getChains($chainId);
+	$wallet = Users_Web3::getWalletById($userId);
+
+	Assets_NFT::clearContractCache($chainId, $chain["contract"], $wallet);
 }
