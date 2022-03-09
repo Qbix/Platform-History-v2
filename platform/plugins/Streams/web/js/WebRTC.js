@@ -973,7 +973,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(this.videoTrack && this.hasLiveTracks('video')) {
                         this.audioScreen.avatarImgCon.innerHTML = '';
                         this.audioScreen.avatarImgCon.appendChild(this.videoTrack);
-                    } else {
+                    } else if (this.audioScreen.avatarImg != null){
                         this.audioScreen.avatarImgCon.innerHTML = '';
                         this.audioScreen.avatarImgCon.appendChild(this.audioScreen.avatarImg);
                     }
