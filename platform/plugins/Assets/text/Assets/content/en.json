@@ -5,11 +5,11 @@
         "Rendering": "There were errors while rendering <span class='url'>{{1}}</span>",
         "PriceRequired": "Price required!",
         "TransactionFailed": "Transaction Failed",
-        "NetworkNotSupported": "The selected network is not supported. Supported network: {{supportedNetwork}}",
+        "ChainNotSupported": "The selected chain is not supported. Supported chain: {{supportedChain}}",
         "NeedMatemaskConnected": "Need MetaMask connected to work with application",
         "UserNotLoggedInMetaMask": "User is not logged in to MetaMask",
         "CurrencyNotFound": "Currency not found",
-        "WrongNetwork": "This NFT created under \"{{network}}\". Please use this network."
+        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain."
     },
     "browsertab": {
         "html": "{{button}}",
