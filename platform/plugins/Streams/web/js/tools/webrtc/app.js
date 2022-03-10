@@ -6564,9 +6564,9 @@ window.WebRTCRoomClient = function app(options){
             log('gotIceCandidate:  event.candidate',  event.candidate)
 
             if (event.candidate) {
-                if(event.candidate.candidate.indexOf("relay")<0){ // if no relay address is found, assuming it means no TURN server
+                /*if(event.candidate.candidate.indexOf("relay")<0){ /for testing only (TURN server)
                     return;
-                }
+                }*/
 
                 log('gotIceCandidate: existingParticipant', existingParticipant)
                 log('gotIceCandidate: candidate: ' + event.candidate.candidate)
@@ -7051,7 +7051,7 @@ window.WebRTCRoomClient = function app(options){
                             }
 
                             //for testing only
-                            localDescription.sdp = removeNotRelayCandidates(offer.sdp);
+                            //localDescription.sdp = removeNotRelayCandidates(offer.sdp);
 
                             /*if(_isiOS){
 								localDescription.sdp = removeInactiveTracksFromSDP(localDescription.sdp);
@@ -7880,7 +7880,7 @@ window.WebRTCRoomClient = function app(options){
                             senderParticipant.signalingState.setStage('answerCreated');
 
                             //for testing only
-                            answer.sdp = removeNotRelayCandidates(answer.sdp);
+                            //answer.sdp = removeNotRelayCandidates(answer.sdp);
 
                             if(_isiOS){
                                 //answer.sdp = removeInactiveTracksFromSDP(answer.sdp);
