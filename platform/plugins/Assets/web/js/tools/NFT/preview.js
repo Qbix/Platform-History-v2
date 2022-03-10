@@ -778,6 +778,7 @@
 
                                     Q.Tool.remove(tool.element, true, false);
                                     tool.element.className = "";
+                                    tool.element.innerHTML = "";
 
                                     $toolElement.tool("Assets/NFT/preview", {
                                         tokenId: tokenId,
