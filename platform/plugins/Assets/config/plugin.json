@@ -263,6 +263,13 @@
 					"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA",
 					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+				},
+				{
+					"symbol": "MATIC",
+					"name": "MATIC",
+					"decimals": 18,
+					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+					"0x89": "0x0000000000000000000000000000000000000000"
 				}
 			]
 		}
