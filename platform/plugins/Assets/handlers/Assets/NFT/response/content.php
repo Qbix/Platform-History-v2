@@ -67,7 +67,7 @@ function Assets_NFT_response_content ($params) {
 		echo Q::json_encode(array(
 			"name" => $nftInfo["data"]["name"],
 			"description" => $nftInfo["data"]["description"],
-			"external_url" => $nftInfo["url"],
+			"external_url" => $nftInfo["tokenURI"],
 			"image" => $nftInfo["data"]["image"],
 			"animation_url" => $nftInfo["data"]["animation_url"],
 			"attributes" => $nftInfo["data"]["attributes"]
