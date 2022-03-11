@@ -188,6 +188,8 @@
     },
     "NFT": {
         "Title": "Title",
+        "CreateSeries": "Create Series",
+        "SeriesInfo": "Series Info",
         "InformationAboutTitle": "Information about {{title}} NFT",
         "Description": "Description",
         "DetailedInformationAboutNFT": "Detailed information about NFT",

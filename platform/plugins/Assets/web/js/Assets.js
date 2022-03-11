@@ -1500,7 +1500,8 @@
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
-		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js"
+		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
+		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js"
 	});
 	
 	Q.onInit.add(function () {
