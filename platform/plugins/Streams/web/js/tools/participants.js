@@ -35,8 +35,7 @@ function _Streams_participants(options) {
 	var tool = this;
 	var state = tool.state;
 	var $toolElement = $(tool.element);
-	console.log('participantstool.state', tool.state.templates.invite.fields, options.templates.invite.fields)
-	
+
 	if (!state.publisherId) {
 		throw new Q.Error("Streams/chat: missing publisherId option");
 	}
