@@ -991,12 +991,12 @@
 			return Q.batcher.factory(this.butchFunctions, Q.info.baseUrl,"/action.php/Assets/batch", "batch", "batch");
 		},
 
-		/**
-		 * For dealing with Web3 wallets and blockchains
-		 * @class Assets.Web3
-		 */
-		Web3: {
-			NFT: {
+		NFT: {
+			/**
+			 * For dealing with NFTs on web3 (EVM-compatible) blockchains
+			 * @class Assets.NFT.Web3
+			 */
+			Web3: {
 				onTokenRemovedFromSale: new Q.Event(),
 				onTokenAddedToSale: new Q.Event(),
 				onTransfer: new Q.Event(),
@@ -1019,12 +1019,12 @@
 
 						// check valid chain selected
 						if (window.ethereum.chainId === chain.chainId) {
-							Assets.Web3.NFT.getContract(chain, callback);
+							Assets.NFT.Web3.getContract(chain, callback);
 						} else { // if no, lead to switch chain
 							Q.Users.Web3.setChain(chain, function () {
 								// after chain switched need update contract
-								Assets.Web3.NFT.contracts[chain.chainId] = null;
-								Assets.Web3.NFT.getContract(chain, callback);
+								Assets.NFT.Web3.contracts[chain.chainId] = null;
+								Assets.NFT.Web3.getContract(chain, callback);
 							}, function (err) {
 								Q.handle(callback, null, [err]);
 							});
@@ -1101,7 +1101,7 @@
 
 					// if chain is a chainId, convert to chain
 					if (Q.typeOf(chain) === "string") {
-						chain = Assets.Web3.NFT.chains[chain];
+						chain = Assets.NFT.Web3.chains[chain];
 					}
 
 					var _subMethod = function (contract) {
@@ -1116,7 +1116,7 @@
 						Q.handle(callback, null, [null, contract]);
 					};
 
-					var contract = Assets.Web3.NFT.contracts[chain.chainId];
+					var contract = Assets.NFT.Web3.contracts[chain.chainId];
 
 					// if contract exists, return one
 					if (contract) {
@@ -1129,21 +1129,21 @@
 						contract = new ethers.Contract(chain.contract, ABI, provider.getSigner());
 
 						contract.on("TokenRemovedFromSale", function (tokenId) {
-							Q.handle(Assets.Web3.NFT.onTokenRemovedFromSale, null, [tokenId])
+							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId])
 						});
 						contract.on("TokenAddedToSale", function (tokenId, amount, consumeToken) {
-							Q.handle(Assets.Web3.NFT.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
+							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
 						});
 						contract.on("Transfer", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.Web3.NFT.onTransfer, null, [oldAddress, newAddress, token])
+							Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token])
 						});
 						contract.on("TransferAuthorship", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.Web3.NFT.onTransferAuthorship, null, [oldAddress, newAddress, token])
+							Q.handle(Assets.NFT.Web3.onTransferAuthorship, null, [oldAddress, newAddress, token])
 						});
 
-						Assets.Web3.NFT.contracts[chain.chainId] = contract;
+						Assets.NFT.Web3.contracts[chain.chainId] = contract;
 
-						Q.handle(Assets.Web3.NFT.onContractUpdated(chain.chainId), null, [contract]);
+						Q.handle(Assets.NFT.Web3.onContractUpdated(chain.chainId), null, [contract]);
 
 						return _subMethod(contract);
 					});
@@ -1156,7 +1156,7 @@
 				 * @params {function} callback
 				 */
 				balanceOf: function (wallet, chain, callback) {
-					Assets.Web3.NFT.getContract(chain, function (err, contract) {
+					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1177,7 +1177,7 @@
 				 * @params {function} callback
 				 */
 				getAuthor: function (tokenId, chain, callback) {
-					Assets.Web3.NFT.getContract(chain, function (err, contract) {
+					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1198,7 +1198,7 @@
 				 * @params {function} callback
 				 */
 				getOwner: function (tokenId, chain, callback) {
-					Assets.Web3.NFT.getContract(chain, function (err, contract) {
+					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1219,7 +1219,7 @@
 				 * @params {function} callback
 				 */
 				commissionInfo: function (tokenId, chain, callback) {
-					Assets.Web3.NFT.getContract(chain, function (err, contract) {
+					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1240,7 +1240,7 @@
 				 * @params {function} callback
 				 */
 				saleInfo: function (tokenId, chain, callback) {
-					Assets.Web3.NFT.getContract(chain, function (err, contract) {
+					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
@@ -1267,7 +1267,7 @@
 				 * @params {function} callback
 				 */
 				transferFrom: function (tokenId, chain, newAddress, callback) {
-					Q.handle(Assets.Web3.NFT.getOwner, this, [tokenId, chain, function (err, owner, contract) {
+					Q.handle(Assets.NFT.Web3.getOwner, this, [tokenId, chain, function (err, owner, contract) {
 						if (err) {
 							return Q.alert(err);
 						}
@@ -1302,7 +1302,7 @@
 						}
 
 						transactionRequest.wait(1).then(function (TransactionReceipt) {
-							if (Assets.Web3.NFT.isSuccessfulTransaction(TransactionReceipt)) {
+							if (Assets.NFT.Web3.isSuccessfulTransaction(TransactionReceipt)) {
 								Q.handle(callback, null, [null, TransactionReceipt]);
 							} else {
 								Q.handle(callback, null, ["transaction failed"]);
@@ -1315,12 +1315,12 @@
 						});
 					};
 
-					Assets.Web3.NFT.saleInfo(tokenId, chain, function (err, price) {
+					Assets.NFT.Web3.saleInfo(tokenId, chain, function (err, price) {
 						if (err) {
 							return console.warn(err);
 						}
 
-						Assets.Web3.NFT.getContract(chain, function (err, contract) {
+						Assets.NFT.Web3.getContract(chain, function (err, contract) {
 							if (err) {
 								return;
 							}
@@ -1367,8 +1367,9 @@
 
 					return false;
 				}
-			},
-			
+			}
+		},
+		Web3: {
 		   	/**
 		   	 * Generates a link for opening a coin
 		   	 * @static

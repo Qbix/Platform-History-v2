@@ -47,14 +47,14 @@ function Assets_before_Q_responseExtras() {
 			}
 		}
 	}
-	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.chains', $chains);
-	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.currencies', $currencies);
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.Web3.chains', $chains);
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.Web3.currencies', $currencies);
 	$nf = Q_Config::get('Assets', 'Web3', 'NFT', 'factory', 'contract', 'address', null);
 	if ($nf) {
-		Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.factory.contract.address', $nf);
+		Q_Response::setScriptData('Q.plugins.Assets.NFT.Web3.factory.contract.address', $nf);
 	}
 
-	// set Assets.Web3.NFT.icon.sizes for imagepicker
-	Q_Response::setScriptData('Q.plugins.Assets.Web3.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
+	// set Assets.NFT.Web3.icon.sizes for imagepicker
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.Web3.icon', Q_Config::expect("Q", "images", "NFT/icon"));
 
 }

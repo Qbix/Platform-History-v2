@@ -1436,7 +1436,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			return $this;
 		}
 		foreach ($options as $key => $value) {
-			if (is_callable(array($this, $key))) {
+			if ($key !== 'options'
+			and is_callable(array($this, $key))) {
 				if (!is_array($value)) {
 					$value = array($value);
 				}

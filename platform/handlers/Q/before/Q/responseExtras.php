@@ -120,6 +120,8 @@ function Q_before_Q_responseExtras()
 	// pass videos data to client
 	$videoConfig = Q_Config::get("Q", "video", array());
 	foreach ($videoConfig as $provider => $data) {
-		Q_Response::setScriptData('Q.video.'.$provider.'.url', $data["url"]);
+		if (!empty($data['url'])) {
+			Q_Response::setScriptData('Q.video.'.$provider.'.url', $data["url"]);
+		}
 	}
 }

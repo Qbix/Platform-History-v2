@@ -34,7 +34,8 @@
 		"log": {
 			"pattern": "{{key}}-{{day}}.log",
 			"removeAfterDays": 10,
-			"maxFileSize": 100000000
+			"maxFileSize": 100000000,
+			"maxLength": 1024
 		},
 		"web": {
 			"ignoreUserAbort": true,

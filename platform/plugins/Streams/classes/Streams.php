@@ -319,6 +319,9 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()]
 	 *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
 	 *  See Db_Query_Mysql::options().
+	 *  @param {boolean|string} [$options.begin] This can be used to begin a transaction,
+	 *   it is passed to Db_Row->retrieve() but only when fetching one stream.
+	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
 	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
@@ -337,6 +340,8 @@ abstract class Streams extends Base_Streams
 	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
 	 *	 pass array('withRelatedFromTotals' => array($streamName => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
+	 *  @param {reference} $results=array()
+	 *   pass an array here, to be filled with intermediate results you might want to use
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -348,7 +353,8 @@ abstract class Streams extends Base_Streams
 		$publisherId,
 		$name,
 		$fields = '*',
-		$options = array())
+		$options = array(),
+		&$results = array())
 	{
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser();
@@ -384,7 +390,7 @@ abstract class Streams extends Base_Streams
 		} else {
 			$namesToFetch = $name;
 		}
-		$criteria = array(
+		$results['criteria'] = $criteria = array(
 			'publisherId' => $publisherId,
 			'name' => $namesToFetch
 		);
@@ -528,6 +534,9 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
 	 *  See Db_Query_Mysql::options().
+	 *  @param {boolean|string} [$options.begin] This can be used to begin a transaction,
+	 *   it is passed to Db_Row->retrieve() but only when fetching one stream.
+	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
 	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
@@ -545,6 +554,8 @@ abstract class Streams extends Base_Streams
 	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
 	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
+	 *  @param {reference} $results=array()
+	 *   pass an array here, to be filled with intermediate results you might want to use
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -557,7 +568,8 @@ abstract class Streams extends Base_Streams
 		$publisherId,
 		$name,
 		$fields = '*',
-		$options = array())
+		$options = array(),
+		&$results = array())
 	{
 		$options['limit'] = 1;
 		$throwIfMissing = false;
@@ -565,7 +577,10 @@ abstract class Streams extends Base_Streams
 			$throwIfMissing = true;
 			$fields = '*';
 		}
-		$streams = Streams::fetch($asUserId, $publisherId, $name, $fields, $options);
+		$streams = Streams::fetch(
+			$asUserId, $publisherId, $name, 
+			$fields, $options, $results
+		);
 		if (empty($streams)) {
 			if ($throwIfMissing) {
 				throw new Q_Exception_MissingRow(array(
@@ -4522,7 +4537,7 @@ abstract class Streams extends Base_Streams
 		} else {
 			$userInviteUrl = $stream->getAttribute('userInviteUrl');
 		}
-		return $userInviteUrl . '?' . http_build_query($fields, null, '&');
+		return $userInviteUrl . '?' . http_build_query($fields, '', '&');
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)

@@ -236,13 +236,13 @@ class Q_Cache
 	 * @protected
 	 * @type array
 	 */
-	protected static $changed = false;
+	protected static $changed = array();
 	/**
 	 * @property $durations
 	 * @protected
 	 * @type array
 	 */
-	protected static $durations = false;
+	protected static $durations = array();
 	/**
 	 * @property $namespace
 	 * @protected

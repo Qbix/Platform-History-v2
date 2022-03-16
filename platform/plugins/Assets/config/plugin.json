@@ -118,6 +118,24 @@
 				"defaults": {
 					"icon": "{{baseUrl}}/img/empty_white.png"
 				}
+			},
+			"Assets/NFT/category": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "Untitled NFT Category",
+					"icon": "Streams/category"
+				}
+			},
+			"Assets/NFT/pointer": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "NFT Pointer",
+					"icon": "Streams/file"
+				}
 			}
 		},
 		"onInsert": {

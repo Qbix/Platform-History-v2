@@ -5,7 +5,7 @@
 
     var Assets = Q.Assets;
     var Web3 = Assets.Web3;
-    var NFT = Web3.NFT;
+    var NFT = NFT.Web3;
 
     /**
      * YUIDoc description goes here
