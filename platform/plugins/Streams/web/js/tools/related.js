@@ -398,7 +398,8 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				tff.name, 
 				tff.type,
 				this.weight,
-				state.previewOptions
+				state.previewOptions,
+				state.specificOptions
 			);
 
 			if (Q.handle(state.beforeRenderPreview, tool, [tff, element]) === false) {
