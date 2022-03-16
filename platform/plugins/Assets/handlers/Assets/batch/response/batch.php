@@ -29,7 +29,7 @@ function Assets_batch_response_batch () {
 
 			foreach ($slots as $slot) {
 				if (
-					($action == "NFT" && $slot == "getLikes")
+					($action == "NFT" && $slot == "countLikes")
 					|| ($action == "NFT" && $slot == "getInterests")
 				) {
 					$params = array(

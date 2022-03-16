@@ -1,5 +1,5 @@
 <?php
-function Assets_NFT_response_getLikes ($params) {
+function Assets_NFT_response_countLikes ($params) {
 	$loggedInUser = Users::loggedInUser();
 	$loggedInUserId = Q::ifset($loggedInUser, 'id', null);
 	$request = array_merge($_REQUEST, $params);
@@ -11,11 +11,11 @@ function Assets_NFT_response_getLikes ($params) {
 
 	$res = false;
 	if ($loggedInUserId) {
-		$res = (boolean)Assets::getLikes($publisherId, $streamName, $loggedInUserId);
+		$res = (boolean)Streams_Stream::countLikes($publisherId, $streamName, $loggedInUserId);
 	}
 
 	return array(
 		"res" => $res,
-		"likes" => Assets::getLikes($publisherId, $streamName)
+		"likes" => Streams_Stream::countLikes($publisherId, $streamName)
 	);
 }

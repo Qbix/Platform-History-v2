@@ -17,13 +17,13 @@ function Assets_NFT_response_setFollowers ($params) {
 		Streams::unsubscribe($loggedInUserId, $publisherId, array($streamName));
 		return array(
 			"res" => false,
-			"followers" => Assets::getFollowers($publisherId, $streamName)
+			"followers" => Streams_Stream::countSubscribers($publisherId, $streamName)
 		);
 	} else {
 		Streams::subscribe($loggedInUserId, $publisherId, array($streamName));
 		return array(
 			"res" => true,
-			"followers" => Assets::getFollowers($publisherId, $streamName)
+			"followers" => Streams_Stream::countSubscribers($publisherId, $streamName)
 		);
 	}
 }

@@ -58,11 +58,11 @@ function Assets_NFT_response_content ($params) {
 	// get likes
 	$res = false;
 	if ($loggedInUserId) {
-		$res = (boolean)Assets::getLikes($publisherId, $stream->name, $loggedInUserId);
+		$res = (boolean)Streams_Stream::countLikes($publisherId, $stream->name, $loggedInUserId);
 	}
 	$likes = array(
 		"res" => $res,
-		"likes" => Assets::getLikes($publisherId, $stream->name)
+		"likes" => Streams_Stream::countLikes($publisherId, $stream->name)
 	);
 
 	$defaultIconSize = Q_Config::expect("Q", "images", "NFT/icon", "defaultSize");

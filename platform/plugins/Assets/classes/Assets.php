@@ -172,66 +172,6 @@ abstract class Assets extends Base_Assets
 		}
 	}
 
-	/**
-	 * Get likes for stream
-	 * @method likesAmount
-	 * @param string $publisherId
-	 * @param string $streamName
-	 * @param string [$userId] If defined search likes related to this user
-	 */
-	static function getLikes ($publisherId, $streamName, $userId = null) {
-		$where = array(
-			"forId" => implode("/", array($publisherId, $streamName)),
-			"value" => 1
-		);
-
-		if ($userId) {
-			$where["userId"] = $userId;
-		}
-
-		return Users_Vote::select("count(*) as res")->where($where)->ignoreCache()->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["res"];
-	}
-
-	/**
-	 * Get subscribers of stream
-	 * @method getFollowers
-	 * @param string $publisherId
-	 * @param string $streamName
-	 * @param string [$userId] If defined return whether subscribed this user
-	 */
-	static function getFollowers ($publisherId, $streamName, $userId = null) {
-		$where = array(
-			"publisherId" => $publisherId,
-			"streamName" => $streamName,
-			"userId !=" => $publisherId,
-			"subscribed" => "yes"
-		);
-
-		if ($userId) {
-			$where["userId"] = $userId;
-		}
-
-		return Streams_Participant::select("count(*) as res")->where($where)->ignoreCache()->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["res"];
-	}
-
-	/**
-	 * Get subscribers of stream
-	 * @method getFollowers
-	 * @param string $publisherId
-	 * @param string $streamName
-	 * @param string [$userId] If defined return whether subscribed this user
-	 */
-	static function getFollowing ($userId, $streamName) {
-		$where = array(
-			"publisherId !=" => $userId,
-			"streamName" => $streamName,
-			"userId" => $userId,
-			"subscribed" => "yes"
-		);
-
-		return Streams_Participant::select("count(*) as res")->where($where)->ignoreCache()->execute()->fetchAll(PDO::FETCH_ASSOC)[0]["res"];
-	}
-
 	const PAYMENT_TO_USER = 'PaymentToUser';
 	const JOINED_PAID_STREAM = 'JoinedPaidStream';
 	const LEFT_PAID_STREAM = 'LeftPaidStream';
