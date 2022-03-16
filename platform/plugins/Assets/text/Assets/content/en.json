@@ -6,7 +6,7 @@
         "PriceRequired": "Price required!",
         "TransactionFailed": "Transaction Failed",
         "ChainNotSupported": "The selected chain is not supported. Supported chain: {{supportedChain}}",
-        "NeedMatemaskConnected": "Need MetaMask connected to work with application",
+        "NeedMetaMaskConnected": "Need MetaMask connected to work with application",
         "UserNotLoggedInMetaMask": "User is not logged in to MetaMask",
         "CurrencyNotFound": "Currency not found",
         "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain."
