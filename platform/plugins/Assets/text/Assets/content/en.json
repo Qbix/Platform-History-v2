@@ -197,6 +197,7 @@
         "OwnerUserNotFound": "Owner of this NFT is not registered in our application.",
         "BuyNow": "Buy now",
         "Buy": "Buy",
+        "Create": "Create",
         "CurrentBid": "Current bid",
         "StartingIn": "Starting in",
         "EndingIn": "Ending in",
@@ -250,8 +251,19 @@
         "TimedAuction": "Timed auction",
         "OpenForBids": "Open for bids",
         "PriceOnePiece": "Enter price for one piece",
+        "EnterPrice": "Enter price",
         "EnterMinimumBid": "Enter Minimum bid",
         "SelectChain": "Select chain",
+        "Currency": "Currency",
+        "series": {
+            "Name": "Name",
+            "Icon": "Icon",
+            "Description": "Description",
+            "Author": "Author",
+            "OnSale": "on sale",
+            "NamePlaceholder": "Enter series name",
+            "DescPlaceholder": "Enter series description"
+        },
         "profile": {
             "Title": "Profile for {{userName}}",
             "Description": "User details",

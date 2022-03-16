@@ -23,7 +23,7 @@
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onCreated] Event occur when series created.
      */
-    Q.Tool.define("Assets/NFT/Series", function(options) {
+    Q.Tool.define("Assets/NFT/series", function(options) {
         var tool = this;
         var state = tool.state;
         var $toolElement = $(this.element);
@@ -396,7 +396,7 @@
                     Q.Dialogs.push({
                         title: tool.text.NFT.Actions,
                         content: content,
-                        className: 'Assets_NFT_update',
+                        className: 'Assets_NFT_series_update',
                         onActivate: function (dialog) {
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
@@ -485,7 +485,7 @@
                     title: tool.text.NFT.CreateSeries,
                     className: "Assets_NFT_series_composer",
                     template: {
-                        name: "Assets/NFT/nftCreate",
+                        name: "Assets/NFT/series/Create",
                         fields: {
                             chains: chains,
                             currencies: NFT.currencies.map(a => a.symbol),
@@ -635,7 +635,7 @@
                                     tool.element.className = "";
                                     tool.element.innerHTML = "";
 
-                                    $toolElement.tool("Assets/NFT/Series", {
+                                    $toolElement.tool("Assets/NFT/series", {
                                         seriesId: seriesId,
                                         chainId: chainId
                                     }).activate();
@@ -676,7 +676,7 @@
                 });
             };
 
-            Q.Template.render('Assets/NFT/Series/composer', {}, function(err, html) {
+            Q.Template.render('Assets/NFT/series/composer', {}, function(err, html) {
                 tool.element.innerHTML = html;
 
                 // get or create composer stream
@@ -810,33 +810,32 @@
         }
     });
 
-    Q.Template.set('Assets/NFT/Series/composer',
+    Q.Template.set('Assets/NFT/series/composer',
         `<div class="Assets_NFT_series_composer"></div>`,
         {text: ['Assets/content']}
     );
 
-    Q.Template.set('Assets/NFT/nftCreate',
-        `<div class="Assets_nft">
-        <form>
+    Q.Template.set('Assets/NFT/series/Create',
+`<form>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftName}}:</label>
-                <input type="text" name="title" class="Assets_nft_form_control" placeholder="{{NFT.TitlePlaceholder}}">
+                <label>{{NFT.series.Name}}:</label>
+                <input type="text" name="title" class="Assets_nft_form_control" placeholder="{{NFT.series.NamePlaceholder}}">
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.Description}}:</label>
-                <input type="text" name="description" class="Assets_nft_form_control" placeholder="{{NFT.DescribeYourNFT}}">
+                <label>{{NFT.series.Description}}:</label>
+                <input type="text" name="description" class="Assets_nft_form_control" placeholder="{{NFT.series.DescPlaceholder}}">
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftPicture}}:</label>
+                <label>{{NFT.series.Icon}}:</label>
                 <div class="Assets_nft_picture">
-                    <img class="NFT_preview_icon">
+                    <img class="NFT_series_icon">
                     <button class="Assets_nft_upload_button">{{NFT.UploadFile}}</button>
                 </div>
             </div>
             <div class="Assets_nft_form_group">
                 <div class="Assets_nft_market">
                     <div>
-                        <label>{{NFT.PutOnMarketplace}} :</label>
+                        <label>{{NFT.series.OnSale}} :</label>
                     </div>
                     <label class="switch">
                         <input type="checkbox" {{#if onMarketPlace}}checked{{/if}} class="Assets_nft_check">
@@ -844,80 +843,25 @@
                     </label>
                 </div>
                 <div class="Assets_nft_form_details" data-active="{{onMarketPlace}}">
-                    <div class="Assets_market_button" style="display: none">
-                        <div class="Assets_nft_clickable active" data-type="fixed">
-                            <img src="{{baseUrl}}/img/price.svg" />
-                            <span>{{NFT.FixedPrice}}</span>
-                        </div>
-                        <div class="Assets_nft_clickable" data-type="time">
-                            <img src="{{baseUrl}}/img/time.svg" />
-                            <span>{{NFT.TimedAuction}}</span>
-                        </div>
-                        <div class="Assets_nft_clickable" data-type="bid">
-                            <img src="{{baseUrl}}/img/bid.svg" />
-                            <span>{{NFT.OpenForBids}}</span>
-                        </div>
+                    <div class="Assets_nft_form_price">
+                        <label>{{NFT.Price}}</label>
+                        <input type="text" name="price" class="Assets_nft_form_control" placeholder="{{NFT.EnterPrice}}">
+                        <select name="currency">
+                            {{#each currencies}}
+                                <option>{{this}}</option>
+                            {{/each}}
+                        </select>
                     </div>
-    
-                    <div class="fixed_details">
-                        <div class="Assets_nft_form_group">
-                            <label>{{NFT.Price}}</label>
-                            <div class="Assets_price">
-                                <input type="text" name="fixedPrice" class="Assets_nft_form_control" placeholder="{{NFT.PriceOnePiece}}">
-                                <select name="currency">
-                                    {{#each currencies}}
-                                        <option>{{this}}</option>
-                                    {{/each}}
-                                </select>
-                                {{currency}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="time_details">
-                        <div class="Assets_nft_form_group">
-                            <label>{{NFT.MinimumBid}}</label>
-                            <div class="Assets_price">
-                                <input type="text" name="minBid" class="Assets_nft_form_control" placeholder="{{NFT.EnterMinimumBid}}">
-                                {{currency}}
-                            </div>
-                            <p>{{NFT.BidsBelowThisAmount}}</p>
-                        </div>
-                        <div class="Assets_nft_form_group">
-                            <div class="Assets_price">
-                                <div>
-                                    <label>{{NFT.StartingDate}}</label>
-                                    <input type="datetime-local" name="startTime">
-                                </div>
-                                <div>
-                                    <label>{{NFT.ExpirationDate}}</label>
-                                    <input type="datetime-local" name="endTime">
-                                </div>
-                            </div>
-                        </div>
+                    <div class="Assets_nft_form_date">
+                        <label>{{NFT.ExpirationDate}}</label>
+                        <input type="datetime-local" name="endTime">
                     </div>
                 </div>
             </div>
-            <div class="Assets_nft_form_group Assets_nft_royalties">
-                <label>{{NFT.Royalties}}:</label>
-                <div class="Assets_royality">
-                    <input type="number" name="royalty" class="Assets_nft_form_control" placeholder="{{NFT.RoyaltyPlaceholder}}">%
-                </div>
-            </div>
-            <div class="Assets_nft_form_group Assets_nft_selectNetwork">
-                <label>{{NFT.SelectChain}}:
-                <select name="chain">
-                {{#each chains}}
-                    <option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{@key}}</option>
-                {{/each}}
-                </select>
-                </label>
-            </div>
-            <button class="Q_button" name="save">{{NFT.CreateYourNFT}}</button>
-        </form>
-    </div>`,
-        {text: ['Assets/content']});
+            <button class="Q_button" name="save">{{NFT.Create}}</button>
+        </form>`, {text: ['Assets/content']});
 
-    Q.Template.set('Assets/NFT/Series/view',
+    Q.Template.set('Assets/NFT/series/view',
         `<div class="tile-block">
         <div class="tile_block_header">
             <ul class="online-c Assets_author">
@@ -929,7 +873,6 @@
         <ul class="bid-info">
             <li class="Assets_NFT_price">
                 <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
-                <span class="Assets_NFT_comingsoon">Coming Soon</span>
             </li>
             <li class="action-block">
                 <button name="buy" class="Q_button">{{NFT.Buy}}</button>
