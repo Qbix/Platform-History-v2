@@ -1234,104 +1234,32 @@ class Users_User extends Base_Users_User
 			return;
 		}
 
-		Streams_RelatedTo::delete()
-			->where(array('toPublisherId' => $userIds))
-			->orWhere(array('fromPublisherId' => $userIds))
-			->execute();
+		$db = self::db();
+		$fieldsRelatedToUserId = array(
+			"userId", "fromUserId", "toUserId", "byUserId", "ofUserId", "grantedByUserId", "invitingUserId",
+			"contactUserId", "publisherId", "fromPublisherId", "toPublisherId");
+		$tables = $db->rawQuery('SHOW TABLES')->fetchAll();
+		foreach ($tables as $table) {
+			$tableName = $table[0];
+			$fields = $db->rawQuery("SHOW COLUMNS FROM ".$tableName)->execute()->fetchAll(PDO::FETCH_ASSOC);
+			$query = "";
+			foreach ($fields as $field) {
+				$fieldName = $field["Field"];
+				if (!in_array($fieldName, $fieldsRelatedToUserId)) {
+					continue;
+				}
 
-		Streams_RelatedFrom::delete()
-			->where(array('toPublisherId' => $userIds))
-			->orWhere(array('fromPublisherId' => $userIds))
-			->execute();
+				if ($query) {
+					$query .= " or ".$fieldName."='".$userIds."'";
+				} else {
+					$query = "delete from ".$tableName." where ".$fieldName."='".$userIds."'";
+				}
+			}
 
-		Streams_Message::delete()
-			->where(array('publisherId' => $userIds))
-			->orWhere(array('byUserId' => $userIds))
-			->execute();
-
-		Streams_Avatar::delete()
-			->where(array('publisherId' => $userIds))
-			->orWhere(array('toUserId' => $userIds))
-			->execute();
-
-		Streams_Participant::delete()
-			->where(array('publisherId' => $userIds))
-			->orWhere(array('userId' => $userIds))
-			->execute();
-
-		Streams_Notification::delete()
-			->where(array('publisherId' => $userIds))
-			->orWhere(array('userId' => $userIds))
-			->execute();
-
-		Streams_Subscription::delete()
-			->where(array('publisherId' => $userIds))
-			->orWhere(array('ofUserId' => $userIds))
-			->execute();
-
-		Streams_SubscriptionRule::delete()
-			->where(array('ofUserId' => $userIds))
-			->orWhere(array('publisherId' => $userIds))
-			->execute();
-
-		Streams_MessageTotal::delete()
-			->where(array('publisherId' => $userIds))
-			->execute();
-
-		Streams_RelatedFromTotal::delete()
-			->where(array('fromPublisherId' => $userIds))
-			->execute();
-
-		Streams_RelatedToTotal::delete()
-			->where(array('toPublisherId' => $userIds))
-			->execute();
-
-		Streams_Access::delete()
-			->where(array('publisherId' => $userIds))
-			->orWhere(array('grantedByUserId' => $userIds))
-			->execute();
-
-		Streams_Stream::delete()
-			->where(array('publisherId' => $userIds))
-			->execute();
-
-		Streams_Invite::delete()
-			->where(array('userId' => $userIds))
-			->orWhere(array('invitingUserId' => $userIds))
-			->execute();
-
-		Users_Vote::delete()
-			->where(array('userId' => $userIds))
-			->execute();
-
-		Users_Session::delete()
-			->where(array('userId' => $userIds))
-			->execute();
-
-		Users_Mobile::delete()
-			->where(array('userId' => $userIds))
-			->execute();
-
-		Users_Email::delete()
-			->where(array('userId' => $userIds))
-			->execute();
-
-		Users_Identify::delete()
-			->where(array('userId' => $userIds))
-			->execute();
-
-		Users_Device::delete()
-			->where(array('userId' => $userIds))
-			->execute();
-
-		Users_Contact::delete()
-			->where(array('userId' => $userIds))
-			->orWhere(array('contactUserId' => $userIds))
-			->execute();
-
-		Users_Label::delete()
-			->where(array('userId' => $userIds))
-			->execute();
+			if ($query) {
+				$db->rawQuery($query)->execute();
+			}
+		}
 
 		Users_User::delete()
 			->where(array('id' => $userIds))

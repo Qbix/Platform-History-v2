@@ -4878,7 +4878,7 @@ abstract class Streams extends Base_Streams
 		if (is_string($streamNames)) {
 			$streamNames = array($streamNames);
 		}
-		
+
 		$params = @compact('publisherId', 'streamNames');
 		
 		/**
@@ -4888,59 +4888,33 @@ abstract class Streams extends Base_Streams
 		 */
 		Q::event("Streams/remove", $params, 'before');
 
-		Streams_RelatedTo::delete()
-			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
-			->orWhere(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
-			->execute();
+		$db = self::db();
+		$fieldsRelatedToStreams = array(
+			array("publisherId", "streamName"),
+			array("toPublisherId", "toStreamName"),
+			array("fromPublisherId", "fromStreamName")
+		);
+		$tables = $db->rawQuery('SHOW TABLES')->fetchAll();
+		foreach ($tables as $table) {
+			$tableName = $table[0];
+			$fields = $db->rawQuery("SHOW COLUMNS FROM ".$tableName)->execute()->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($fieldsRelatedToStreams as $fieldsRelatedToStream) {
+				$matchAmount = 0;
+				foreach ($fields as $field) {
+					$fieldName = $field["Field"];
+					if (!in_array($fieldName, $fieldsRelatedToStream)) {
+						continue;
+					}
 
-		Streams_RelatedFrom::delete()
-			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
-			->orWhere(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
-			->execute();
+					$matchAmount++;
+				}
 
-		Streams_Message::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_MessageTotal::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Participant::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Access::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Subscription::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_SubscriptionRule::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Invite::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Notification::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_RelatedFromTotal::delete()
-			->where(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
-			->execute();
-
-		Streams_RelatedToTotal::delete()
-			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
-			->execute();
-
-		Streams_Task::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
+				if ($matchAmount == count($fieldsRelatedToStream)) {
+					$query = "delete from ".$tableName." where ".$fieldsRelatedToStream[0]."='".$publisherId."' and ".$fieldsRelatedToStream[1]." in ('".implode("','", $streamNames)."')";
+					$db->rawQuery($query)->execute();
+				}
+			}
+		}
 
 		Streams_Stream::delete()
 			->where(array('publisherId' => $publisherId, 'name' => $streamNames))
