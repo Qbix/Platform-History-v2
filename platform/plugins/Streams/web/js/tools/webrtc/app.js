@@ -1574,6 +1574,7 @@ window.WebRTCRoomClient = function app(options){
 
             var _roomInstance = roomInstance;
             var _canvas = null;
+            var _offscreenVideoCanvas = null;
             var _canvasMediStream = null;
             var _mediaRecorder = null;
             var _videoTrackIsMuted = false;
@@ -1617,7 +1618,6 @@ window.WebRTCRoomClient = function app(options){
                 var _size = {width:1280, height: 720};
                 var _webrtcLayoutRect = {width:1280, height: 720, x: 0, y: 0, updateTimeout: null};
                 var _inputCtx = null;
-                var _outputCtx = null;
                 var _isActive = null;
                 var _currentLayout = null;
 
@@ -1643,7 +1643,6 @@ window.WebRTCRoomClient = function app(options){
                     videoCanvas.height = _size.height;
 
                     _inputCtx = videoCanvas.getContext('2d');
-                    _outputCtx = videoCanvas.getContext('2d');
 
                     _canvas = videoCanvas;
 
@@ -6565,9 +6564,9 @@ window.WebRTCRoomClient = function app(options){
             log('gotIceCandidate:  event.candidate',  event.candidate)
 
             if (event.candidate) {
-                if(event.candidate.candidate.indexOf("relay")<0){ // if no relay address is found, assuming it means no TURN server
+                /*if(event.candidate.candidate.indexOf("relay")<0){ /for testing only (TURN server)
                     return;
-                }
+                }*/
 
                 log('gotIceCandidate: existingParticipant', existingParticipant)
                 log('gotIceCandidate: candidate: ' + event.candidate.candidate)

@@ -65,6 +65,8 @@
     },
     "invite": {
         "command": "Invite",
+        "Invite": "Invite",
+        "Share": "Share",
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
         "youCanNowPaste": "You can now paste this link somewhere to invite people",
         "dialog": {
