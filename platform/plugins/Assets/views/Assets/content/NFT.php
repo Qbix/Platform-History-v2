@@ -6,104 +6,79 @@
             <div class="assets_nft_row">
                 <div class="assets_nft_col_eight">
                     <?php
-                        echo Q::tool(array(
-                                "Streams/preview" => array(
-                                    "publisherId" => $stream->publisherId,
-                                    "streamName" => $stream->name,
-                                    "editable" => false,
-                                    "closeable" => false
-                                ),
-                                "Assets/NFT/preview" => array(
-                                     "poster" => $poster,
-                                     "movie"=> $movie,
-                                     "src" => $stream->getAttribute("src")
-                                )
-                            )
-                        );
+                        echo Q::tool("Assets/NFT/preview", array(
+                             "tokenId" => $tokenId,
+                             "chainId"=> $chainId
+                        ));
                     ?>
                 </div>
                 <div class="assets_nft_col_four">
                     <div class="assets_nft_details">
                         <div class="assets_nft_details_header">
                             <div class="assets_nft_details_header_left">
-                                <h2><?php echo Q::tool("Streams/inplace", array(
-										"stream" => $stream,
-										"editable" => $stream->testWriteLevel("edit"),
-										"inplaceType" => "text",
-										"field" => "title",
-										"inplace" => array(
-											"placeholder" => $texts["NFT"]["TitlePlaceholder"]
-										)
-									), Q_Utils::normalize($stream->name . "_title")) ?></h2>
-                            </div>
-                            <div class="assets_nft_details_header_right <?php echo $likes["res"] ? "Q_selected" : "" ?>">
-                                <i class="far fa-heart"></i>
-                                <span><?php echo ($likes["likes"] ?: "") ?></span>
+                                <h2><?=$nftInfo["name"]?></h2>
                             </div>
                         </div>
                         <div class="assets_nft_body">
                             <div class="assets_nft_body_left author">
-                                <h2>Author</h2>
+                                <h2><?=$texts["NFT"]["Author"]?></h2>
                                 <div class="assets_nft_body_details">
                                     <img src="../../img/t.png"/>
-                                    <span class="assets_nft_wallet"></span>
+                                    <span class="assets_nft_wallet"><?=$nftInfo["author"]?></span>
                                 </div>
                             </div>
                             <div class="assets_nft_body_left owner">
-                                <h2>Owner</h2>
+                                <h2><?=$texts["NFT"]["Owner"]?></h2>
                                 <div class="assets_nft_body_details">
                                     <img src="../../img/t.png"/>
-                                    <span class="assets_nft_wallet"></span>
+                                    <span class="assets_nft_wallet"><?=$nftInfo["name"]?></span>
                                 </div>
                             </div>
-							<?php if (!empty($collections)) { ?>
-                                <div class="assets_nft_body_left">
-                                    <h2>Collection</h2>
-                                    <div class="assets_nft_body_collection">
-										<?php
-										foreach ($collections as $collection) {
-											echo "<span>" . $collection . "</span>";
-										}
-										?>
-                                    </div>
-                                </div>
-							<?php } ?>
                         </div>
-						<?php if ($royalty) { ?>
-                            <p class="assets_nft_buttons"><?php echo $royalty ?>
-                                % <?php echo $texts["NFT"]["SalesCreator"] ?></p>
-						<?php } ?>
                         <div class="assets_nft_tabs">
                             <ul>
-                                <li id="details" class="tablinks active"><?php echo $texts["NFT"]["Details"] ?></li>
-                                <li id="bids" class="tablinks" style="display: none;"><?php echo $texts["NFT"]["Bids"] ?></li>
-                                <li id="history" class="tablinks" style="display: none;"><?php echo $texts["NFT"]["History"] ?></li>
+                                <li id="details" class="tablinks active"><?=$texts["NFT"]["Details"]?></li>
+                                <li id="bids" class="tablinks" style="display: none;"><?=$texts["NFT"]["Bids"]?></li>
+                                <li id="history" class="tablinks" style="display: none;"><?=$texts["NFT"]["History"]?></li>
                             </ul>
                         </div>
 						<div class="table_description">
 						    <table class="assets_collection_info">
 							    <tr>
-							        <td>Title:</td>
-                                    <td>
-                                        <?php echo Q::tool("Streams/inplace", array(
-                                                "stream" => $stream,
-                                                "editable" => $stream->testWriteLevel("edit"),
-                                                "inplaceType" => "textarea",
-                                                "field" => "title",
-                                                "inplace" => array(
-                                                    "placeholder" => $texts["NFT"]["DescriptionPlaceholder"]
-                                                )
-                                            ), Q_Utils::normalize($stream->name . "_content")) ?>
-                                    </td>
+							        <td><?=$texts["NFT"]["Title"]?>:</td>
+                                    <td><?=$nftInfo["data"]["name"]?></td>
 							    </tr>
                                 <tr>
-							        <td>Creator:</td><td><a href="<?= Q_Request::baseUrl()?>/profile/<?= $stream->publisherId?>"><?= $authorName?></a></td>
+							        <td><?=$texts["NFT"]["Author"]?>:</td>
+                                    <td><?=$nftInfo["author"]?></td>
                                 </tr>
-							</table>
+                                <tr>
+                                    <td><?=$texts["NFT"]["Owner"]?>:</td>
+                                    <td><?=$nftInfo["owner"]?></td>
+                                </tr>
+								<?php if ($nftInfo["data"]["description"]) {?>
+                                    <tr>
+                                        <td><?=$texts["NFT"]["Description"]?>:</td><td><?=$nftInfo["data"]["description"]?></td>
+                                    </tr>
+								<?php } ?>
+								<?php if (!empty($nftInfo["data"]["attributes"])) {?>
+                                    <tr>
+                                        <td style="vertical-align: top"><?=$texts["NFT"]["attributes"]["Attributes"]?>:</td><td>
+                                            <table class="assetsNFTAttributes">
+												<?php foreach ($nftInfo["data"]["attributes"] as $attribute) {
+													echo "<tr><td>".$attribute["trait_type"].":</td><td>".$attribute["value"]."</td></tr>";
+												} ?>
+                                            </table>
+                                        </td>
+                                    </tr>
+								<?php } ?>
+                            </table>
 						</div>
+                        <?php if ($ownerId) { ?>
                         <div class="assets_goback_section">
                             <button class="Q_button assets_register_submit" id="assets_goback"><?php echo $texts["NFT"]["Back"] ?></button>
                         </div>
+                        <?php } ?>
                         <div class="tabcontent details active-content">
 
                         </div>
@@ -119,6 +94,5 @@
         </div>
     </div>
 
-    <input type="hidden" name="publisherId" value="<?php echo $stream->publisherId ?>">
-    <input type="hidden" name="streamName" value="<?php echo $stream->name ?>">
+    <input type="hidden" name="ownerId" value="<?=$ownerId?>">
 </div>

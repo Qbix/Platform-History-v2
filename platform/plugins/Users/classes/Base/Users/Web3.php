@@ -17,11 +17,10 @@
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
  * @param {string} [$fields.chainId] defaults to ""
+ * @param {string} [$fields.contract] defaults to ""
  * @param {string} [$fields.methodName] defaults to ""
  * @param {string} [$fields.params] defaults to ""
- * @param {string} [$fields.contract] defaults to ""
  * @param {string} [$fields.result] defaults to null
- * @param {string} [$fields.extra] defaults to "{}"
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
  */
@@ -29,6 +28,12 @@ abstract class Base_Users_Web3 extends Db_Row
 {
 	/**
 	 * @property $chainId
+	 * @type string
+	 * @default ""
+	 * 
+	 */
+	/**
+	 * @property $contract
 	 * @type string
 	 * @default ""
 	 * 
@@ -46,21 +51,9 @@ abstract class Base_Users_Web3 extends Db_Row
 	 * 
 	 */
 	/**
-	 * @property $contract
-	 * @type string
-	 * @default ""
-	 * 
-	 */
-	/**
 	 * @property $result
 	 * @type string
 	 * @default null
-	 * 
-	 */
-	/**
-	 * @property $extra
-	 * @type string
-	 * @default "{}"
 	 * 
 	 */
 	/**
@@ -87,8 +80,9 @@ abstract class Base_Users_Web3 extends Db_Row
 		$this->setPrimaryKey(
 			array (
 			  0 => 'chainId',
-			  1 => 'methodName',
-			  2 => 'params',
+			  1 => 'contract',
+			  2 => 'methodName',
+			  3 => 'params',
 			)
 		);
 	}
@@ -305,7 +299,7 @@ abstract class Base_Users_Web3 extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('chainId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -349,6 +343,61 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_contract
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_contract($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('contract', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".contract");
+		if (strlen($value) > 42)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".contract");
+		return array('contract', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the contract field
+	 * @return {integer}
+	 */
+	function maxSize_contract()
+	{
+
+		return 42;			
+	}
+
+	/**
+	 * Returns schema information for contract column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_contract()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '42',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => NULL,
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_methodName
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -360,7 +409,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('methodName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -415,7 +464,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('params', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -459,61 +508,6 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_contract
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_contract($value)
-	{
-		if (!isset($value)) {
-			$value='';
-		}
-		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
-			return array('contract', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".contract");
-		if (strlen($value) > 42)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".contract");
-		return array('contract', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the contract field
-	 * @return {integer}
-	 */
-	function maxSize_contract()
-	{
-
-		return 42;			
-	}
-
-	/**
-	 * Returns schema information for contract column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_contract()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '42',
-    2 => '',
-    3 => false,
-  ),
-  1 => false,
-  2 => '',
-  3 => NULL,
-);			
-	}
-
-	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_result
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -525,7 +519,7 @@ return array (
 			return array('result', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('result', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -567,61 +561,6 @@ return array (
 	}
 
 	/**
-	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
-	 * Optionally accept numeric value which is converted to string
-	 * @method beforeSet_extra
-	 * @param {string} $value
-	 * @return {array} An array of field name and value
-	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
-	 */
-	function beforeSet_extra($value)
-	{
-		if (!isset($value)) {
-			return array('extra', $value);
-		}
-		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
-			return array('extra', $value);
-		}
-		if (!is_string($value) and !is_numeric($value))
-			throw new Exception('Must pass a string to '.$this->getTable().".extra");
-		if (strlen($value) > 1024)
-			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".extra");
-		return array('extra', $value);			
-	}
-
-	/**
-	 * Returns the maximum string length that can be assigned to the extra field
-	 * @return {integer}
-	 */
-	function maxSize_extra()
-	{
-
-		return 1024;			
-	}
-
-	/**
-	 * Returns schema information for extra column
-	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
-	 */
-	static function column_extra()
-	{
-
-return array (
-  0 => 
-  array (
-    0 => 'varchar',
-    1 => '1024',
-    2 => '',
-    3 => false,
-  ),
-  1 => true,
-  2 => '',
-  3 => '{}',
-);			
-	}
-
-	/**
 	 * Method is called before setting the field and normalize the DateTime string
 	 * @method beforeSet_insertedTime
 	 * @param {string} $value
@@ -631,7 +570,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -658,7 +597,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1024',
+    1 => '1023',
     2 => '',
     3 => false,
   ),
@@ -681,7 +620,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -708,7 +647,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1024',
+    1 => '1023',
     2 => '',
     3 => false,
   ),
@@ -729,7 +668,7 @@ return array (
 	{
 		if (!$this->retrieved) {
 			$table = $this->getTable();
-			foreach (array('chainId') as $name) {
+			foreach (array('chainId','contract') as $name) {
 				if (!isset($value[$name])) {
 					throw new Exception("the field $table.$name needs a value, because it is NOT NULL, not auto_increment, and lacks a default value.");
 				}
@@ -750,7 +689,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('chainId', 'methodName', 'params', 'contract', 'result', 'extra', 'insertedTime', 'updatedTime');
+		$field_names = array('chainId', 'contract', 'methodName', 'params', 'result', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

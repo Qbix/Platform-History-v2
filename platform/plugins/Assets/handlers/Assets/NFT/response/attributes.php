@@ -1,7 +1,7 @@
 <?php
 function Assets_NFT_response_attributes ($params) {
 	$params = array_merge($_REQUEST, $params);
-	$displayTypes = Q_Config::expect("Assets", "Web3", "NFT", "attributes", "display_type");
+	$displayTypes = Q_Config::expect("Assets", "NFT", "attributes", "display_type");
 	$res = array();
 
 	foreach ($displayTypes as $displayType) {

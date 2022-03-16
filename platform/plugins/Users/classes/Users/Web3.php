@@ -61,9 +61,8 @@ class Users_Web3 extends Base_Users_Web3 {
 			$params = array($params);
 		}
 
-		$cache = null;
+		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 		if ($caching !== false && $cacheDuration) {
-			$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
 			if ($cache->wasRetrieved()) {
 				return Q::json_decode($cache->result);
 			}
@@ -129,6 +128,12 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		if ($data instanceof \phpseclib\Math\BigInteger) {
 			$data = $data->toString();
+		} elseif (is_array($data)) {
+			foreach ($data as $key => $item) {
+				if ($item instanceof \phpseclib\Math\BigInteger) {
+					$data[$key] = $item->toString();
+				}
+			}
 		}
 
 		if ($cache) {
@@ -146,6 +151,7 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		return $data;
 	}
+
 	/**
 	 * Get the filename of the ABI file for a contract. 
 	 * Taken from Users/web3/contracts/$contractName/filename config.
@@ -200,7 +206,8 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * for the given query on the given chain
 	 * @method getCache
 	 * @static
-	 * @param {String} $contract
+	 * @param {String} $chainId
+	 * @param {String} $contract - smart contract address
 	 * @param {String} $methodName
 	 * @param {String} $params params used to call the method
 	 * @param {integer} [$cacheDuration=3600]
@@ -208,8 +215,8 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @return {Db_Row}
 	 */
 	static function getCache (
-		$chainId, 
-		$contract, 
+		$chainId,
+		$contract,
 		$methodName, 
 		$params, 
 		$cacheDuration)

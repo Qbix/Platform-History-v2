@@ -39,7 +39,7 @@ function Assets_batch_response_batch () {
 				} elseif ($action == "NFT" && $slot == "getInfo") {
 					$params = array(
 						'tokenId' => $args[2],
-						'network' => $args[3],
+						'chainId' => $args[3],
 						'updateCache' => (bool)$args[4]
 					);
 				}

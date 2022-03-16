@@ -7,23 +7,30 @@
  * Methods for manipulating "Assets/NFT" streams
  * @class Assets_NFT
  */
-class Assets_NFT extends Base_Assets_Credits
+class Assets_NFT
 {
+	static $categoryStreamName = "Assets/user/NFTs";
+
     /**
 	 * Check if NFT category exists, and create if not
 	 * @method category
-	 * @param string [$publisherId=null] If null - logged user id used.
+	 * @param {string} [$publisherId=null] If null - logged user id used.
 	 */
-	static function category($publisherId)
+	static function category($publisherId=null)
 	{
 		if ($publisherId === null) {
 			$publisherId = Users::loggedInUser(true)->id;
 		}
+		if (empty($publisherId)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'publisherId',
+				'range' => 'nonempty'
+			));
+		}
 
-		$streamName = "Assets/user/NFTs";
-		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
 		if (!$stream) {
-			Streams::create(null, $publisherId, 'Streams/category', array('name' => $streamName));
+			Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
 		}
 
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
@@ -34,41 +41,44 @@ class Assets_NFT extends Base_Assets_Credits
 		return $stream;
 	}
 
-    /**
+	/**
 	 * Get or create new NFT empty stream for composer
-	 * @method stream
+	 * This is for user creating new NFT streams in the interface
+	 * @method getNFTStream
 	 * @param {string} [$userId=null] If null loggedin user id used
 	 * @return {Streams_Stream}
 	 */
-	static function stream ($userId = null) {
+	static function getNFTStream ($userId = null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
-		self::category($userId);
+		$category = self::category($userId);
 
-		$stream = Streams::related($userId, $userId, $streamName, true, array(
+		$streams = Streams::related($userId, $userId, $category->name, true, array(
 			"type" => "new",
 			"streamsOnly" => true,
 			"ignoreCache" => true
 		));
 
-		if (empty($stream)) {
-			return Streams::create($userId, $userId, "Assets/NFT", array(), array(
+		if (empty($streams)) {
+			$stream = Streams::create($userId, $userId, "Assets/NFT", array(), array(
 				"publisherId" => $userId,
 				"streamName" => $category->name,
 				"type" => "new"
 			));
+			$stream->join(compact("userId"));
+			return $stream;
 		} else {
-			return reset($stream);
+			return reset($streams);
 		}
 	}
 
-    /**
+	/**
 	 * Updated NFT stream with new data
-	 * @method update
+	 * @method updateNFT
 	 * @param {Streams_Stream} $stream NFT stream
 	 * @param {array} $fields Array of data to update stream
 	 * @return {Streams_Stream}
 	 */
-	static function update ($stream, $fields) {
+	static function updateNFT ($stream, $fields) {
 		$communityId = Users::communityId();
 		$userId = Users::loggedInUser(true)->id;
 
@@ -118,20 +128,83 @@ class Assets_NFT extends Base_Assets_Credits
 		}
 
 		// change stream relation
-		$categoryStreamName = "Assets/user/NFTs";
-		Streams::unrelate($userId, $stream->publisherId, $categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, $categoryStreamName, "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
+		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
 
-		$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
-		if ($onMarketPlace == "true") {
-			// relate to main category
-			Streams::relate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
-		} elseif ($onMarketPlace == "false") {
-			// unrelate from main category
-			Streams::unrelate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name);
-		}
+		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
+		//if ($onMarketPlace == "true") {
+		// relate to main category
+		Streams::relate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		//} elseif ($onMarketPlace == "false") {
+		// unrelate from main category
+		//	Streams::unrelate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name);
+		//}
 
 		return $stream;
 	}
 
+	/**
+	 * Get currency by chainId and currency token
+	 * @method getCurrencyByChain
+	 * @static
+	 * @param {String} $chainId
+	 * @param {String} $currencyToken currency token
+	 * @return array
+	 */
+	static function getCurrencyByChain ($chainId, $currencyToken) {
+		$currencies = Q_Config::expect("Assets", "NFT", "currencies");
+		foreach ($currencies as $currency) {
+			if ($currency[$chainId] == $currencyToken) {
+				return $currency;
+			}
+		}
+	}
+
+	/**
+	 * Get available blockchain networks info (contact address, currency, rpcUrl, blockExplorerUrl)
+	 * @method getChains
+	 * @param {string} [$needChainId] if defined return only this chain info
+	 * @static
+	 * @return array
+	 */
+	static function getChains ($needChainId=null) {
+		$chains = Q_Config::get("Users", "apps", "web3", array());
+		$currencies = Q_Config::get("Assets", "NFT", "currencies", array());
+		$chainsClient = array();
+		foreach ($chains as $i => $chain) {
+			// if contract or rpcUrls undefined, skip this chain
+			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
+			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
+			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
+			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", null);
+			$chainId = Q::ifset($chain, "appId", null);
+
+			if (!$contract || !$rpcUrl) {
+				unset($chain[$i]);
+				continue;
+			}
+
+			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
+			$rpcUrls = array($rpcUrl);
+			$temp = compact("chainId", "contract", "rpcUrls", "blockExplorerUrl");
+
+			foreach ($currencies as $currency) {
+				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
+					$temp["currency"] = $currency;
+					$temp["currency"]["token"] = $currency[$chainId];
+					break;
+				}
+			}
+
+			$temp["default"] = $i == Users::communityId();
+
+			if ($needChainId && $chainId == $needChainId) {
+				return $temp;
+			}
+
+			$chainsClient[$chainId] = $temp;
+		}
+
+		return $chainsClient;
+	}
 };

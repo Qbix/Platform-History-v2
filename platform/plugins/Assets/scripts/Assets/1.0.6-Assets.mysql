@@ -1,4 +1,5 @@
-CREATE TABLE IF NOT EXISTS {{prefix}}nft_attributes (
+DROP TABLE IF EXISTS {{prefix}}nft_attributes;
+CREATE TABLE {{prefix}}nft_attributes (
   publisherId varchar(8) NOT NULL,
   display_type varchar(50) NOT NULL,
   trait_type varchar(100) NOT NULL,
