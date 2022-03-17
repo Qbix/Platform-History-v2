@@ -319,6 +319,9 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options=array()]
 	 *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
 	 *  See Db_Query_Mysql::options().
+	 *  @param {boolean|string} [$options.begin] This can be used to begin a transaction,
+	 *   it is passed to Db_Row->retrieve() but only when fetching one stream.
+	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
 	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
@@ -337,6 +340,8 @@ abstract class Streams extends Base_Streams
 	 *	 pass array('withRelatedFromTotals' => array($streamName => true)) for all rows
 	 *	 pass array('withRelatedFromTotals' => array($streamName => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
+	 *  @param {reference} $results=array()
+	 *   pass an array here, to be filled with intermediate results you might want to use
 	 * @return {array}
 	 *  Returns an array of Streams_Stream objects with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -348,7 +353,8 @@ abstract class Streams extends Base_Streams
 		$publisherId,
 		$name,
 		$fields = '*',
-		$options = array())
+		$options = array(),
+		&$results = array())
 	{
 		if (!isset($asUserId)) {
 			$asUserId = Users::loggedInUser();
@@ -384,7 +390,7 @@ abstract class Streams extends Base_Streams
 		} else {
 			$namesToFetch = $name;
 		}
-		$criteria = array(
+		$results['criteria'] = $criteria = array(
 			'publisherId' => $publisherId,
 			'name' => $namesToFetch
 		);
@@ -528,6 +534,9 @@ abstract class Streams extends Base_Streams
 	 * @param {array} $options=array()
 	 *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
 	 *  See Db_Query_Mysql::options().
+	 *  @param {boolean|string} [$options.begin] This can be used to begin a transaction,
+	 *   it is passed to Db_Row->retrieve() but only when fetching one stream.
+	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
 	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
 	 *   and save a new cache if necessary.
 	 *  @param {boolean} [$options.dontCache] Do not cache the results of
@@ -545,6 +554,8 @@ abstract class Streams extends Base_Streams
 	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
 	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
 	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
+	 *  @param {reference} $results=array()
+	 *   pass an array here, to be filled with intermediate results you might want to use
 	 * @return {Streams_Stream|null}
 	 *  Returns a Streams_Stream object with access info calculated
 	 *  specifically for $asUserId . Make sure to call the methods 
@@ -557,7 +568,8 @@ abstract class Streams extends Base_Streams
 		$publisherId,
 		$name,
 		$fields = '*',
-		$options = array())
+		$options = array(),
+		&$results = array())
 	{
 		$options['limit'] = 1;
 		$throwIfMissing = false;
@@ -565,7 +577,10 @@ abstract class Streams extends Base_Streams
 			$throwIfMissing = true;
 			$fields = '*';
 		}
-		$streams = Streams::fetch($asUserId, $publisherId, $name, $fields, $options);
+		$streams = Streams::fetch(
+			$asUserId, $publisherId, $name, 
+			$fields, $options, $results
+		);
 		if (empty($streams)) {
 			if ($throwIfMissing) {
 				throw new Q_Exception_MissingRow(array(
@@ -4522,7 +4537,7 @@ abstract class Streams extends Base_Streams
 		} else {
 			$userInviteUrl = $stream->getAttribute('userInviteUrl');
 		}
-		return $userInviteUrl . '?' . http_build_query($fields, null, '&');
+		return $userInviteUrl . '?' . http_build_query($fields, '', '&');
 	}
 	
 	protected static function afterFetchExtended($publisherId, $streams)
@@ -4863,7 +4878,7 @@ abstract class Streams extends Base_Streams
 		if (is_string($streamNames)) {
 			$streamNames = array($streamNames);
 		}
-		
+
 		$params = @compact('publisherId', 'streamNames');
 		
 		/**
@@ -4873,59 +4888,33 @@ abstract class Streams extends Base_Streams
 		 */
 		Q::event("Streams/remove", $params, 'before');
 
-		Streams_RelatedTo::delete()
-			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
-			->orWhere(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
-			->execute();
+		$db = self::db();
+		$fieldsRelatedToStreams = array(
+			array("publisherId", "streamName"),
+			array("toPublisherId", "toStreamName"),
+			array("fromPublisherId", "fromStreamName")
+		);
+		$tables = $db->rawQuery('SHOW TABLES')->fetchAll();
+		foreach ($tables as $table) {
+			$tableName = $table[0];
+			$fields = $db->rawQuery("SHOW COLUMNS FROM ".$tableName)->execute()->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($fieldsRelatedToStreams as $fieldsRelatedToStream) {
+				$matchAmount = 0;
+				foreach ($fields as $field) {
+					$fieldName = $field["Field"];
+					if (!in_array($fieldName, $fieldsRelatedToStream)) {
+						continue;
+					}
 
-		Streams_RelatedFrom::delete()
-			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
-			->orWhere(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
-			->execute();
+					$matchAmount++;
+				}
 
-		Streams_Message::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_MessageTotal::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Participant::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Access::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Subscription::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_SubscriptionRule::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Invite::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_Notification::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
-
-		Streams_RelatedFromTotal::delete()
-			->where(array('fromPublisherId' => $publisherId, 'fromStreamName' => $streamNames))
-			->execute();
-
-		Streams_RelatedToTotal::delete()
-			->where(array('toPublisherId' => $publisherId, 'toStreamName' => $streamNames))
-			->execute();
-
-		Streams_Task::delete()
-			->where(array('publisherId' => $publisherId, 'streamName' => $streamNames))
-			->execute();
+				if ($matchAmount == count($fieldsRelatedToStream)) {
+					$query = "delete from ".$tableName." where ".$fieldsRelatedToStream[0]."='".$publisherId."' and ".$fieldsRelatedToStream[1]." in ('".implode("','", $streamNames)."')";
+					$db->rawQuery($query)->execute();
+				}
+			}
+		}
 
 		Streams_Stream::delete()
 			->where(array('publisherId' => $publisherId, 'name' => $streamNames))

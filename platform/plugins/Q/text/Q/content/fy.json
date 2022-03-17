@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Flater {{status}} by fersyk",
+        "canceled": "Fersyk annulearre",
+        "500": "Ynterne tsjinner flater",
+        "404": "Net fûn: {{url}}",
+        "501": "Fersyk ûnderbrutsen"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Sesje ferrûn. Ferfarskje de side en besykje it nochris.",
+        "otherDomain": "Blokkearre cross-domain fersyk nei bûtenlânsk domein by {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
+        "click": "klik",
+        "yes": "ja",
+        "no": "Nee",
         "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "Click": "Klikje",
+        "Yes": "ja",
+        "No": "Nee"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "jannewaris",
+        "2": "febrewaris",
+        "3": "maart",
+        "4": "april",
+        "5": "Meie",
+        "6": "juny",
+        "7": "july",
+        "8": "augustus",
+        "9": "spetimber",
+        "10": "oktober",
+        "11": "novimber",
+        "12": "desimber"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "twadde",
+        "seconds": "sekonden",
+        "minute": "minút",
+        "minutes": "minuten",
+        "hour": "oeren",
+        "day": "dei",
+        "days": "dagen",
+        "week": "wike",
+        "weeks": "wiken",
+        "month": "moanne",
+        "months": "moannen",
+        "year": "jier",
+        "years": "jier",
+        "decade": "dekade",
+        "decades": "desennia",
+        "century": "ieu",
+        "centuries": "ieuwen"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
+        "allowMicrophoneAccess": "Tastean asjebleaft tagong ta jo mikrofoan",
+        "record": "Opnimme",
+        "recording": "Opname",
+        "remains": "oerbliuwsel",
+        "maximum": "maksimum",
+        "playing": "Boartsjen",
+        "recorded": "Opnommen",
+        "clip": "klip",
         "discard": "Discard",
-        "encoding": "Encoding"
+        "encoding": "Kodearring"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "klip",
+        "errorNoSource": "Gjin fideo boarne",
+        "SkipAfter": "Oerslaan nei",
+        "Skip": "Oerslaan"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "klip",
+        "errorNoSource": "Gjin pdf boarne"
     },
     "clip": {
         "SetClipStart": "Set Clip Start",
         "ClipStart": "Clip Start",
         "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "ClipEnd": "Klip ein",
+        "StartMoreEnd": "Startposysje kin net mear wêze as einposysje",
+        "EndLessStart": "Einposysje kin net minder wêze as begjinposysje",
+        "WhichInvalid": "Argumint &#39;wat&#39; ûnjildich"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Alarmearje"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Befêstigje",
+        "ok": "ja",
+        "cancel": "Nee"
     },
     "prompt": {
         "title": "Prompt",
-        "ok": "Go"
+        "ok": "Gean"
     },
     "tabs": {
-        "more": "more",
+        "more": "mear",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Flater by it lêzen fan bestân",
+        "errorType": "Sorry, mar dit triemtype wurdt net stipe",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Wat soesto dwaan wolle?",
+            "photo": "Nim nije foto",
+            "library": "Selektearje út bibleteek"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Kies asjebleaft in gruttere ôfbylding.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Pas grutte en posysje oan",
+            "touchscreen": "Brûk jo fingers om te zoomjen en te slepen",
+            "notTouchscreen": "Brûk jo mûs en tsjil om te zoomjen en te slepen"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "justerjûn",
+        "lastEvening": "lêste jûn",
+        "yesterday": "juster",
+        "thisMorning": "fannemoarn",
+        "today": "hjoed",
+        "tonight": "fannacht",
+        "tomorrowMorning": "moarn moarn",
+        "tomorrow": "moarn",
+        "hoursAgo": "{{h}} oeren lyn",
+        "hourAgo": "{{h}} oere lyn",
+        "minuteAgo": "{{m}} minút lyn",
+        "minutesAgo": "{{m}} minuten lyn",
+        "secondAgo": "{{s}} sekonde lyn",
+        "secondsAgo": "{{s}} sekonden lyn",
+        "fewSecondsAgo": "sekonden lyn",
+        "rightNow": "fuortendaalks",
+        "inSecond": "yn {{s}} sekonde",
+        "inSeconds": "yn {{s}} sekonden",
+        "inMinute": "yn {{m}} minút",
+        "inMinutes": "yn {{m}} minuten",
+        "inHour": "yn {{h}} oere",
+        "inHours": "yn {{h}} oeren",
+        "inUnderMinute": "yn minder as 1 minút"
     }
 }

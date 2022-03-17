@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Нажмите, чтобы оплатить"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: платеж обработан за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Благодарим вас за платеж {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} подписаны на {{plan.title}}",
+        "YouSubscribedTo": "Вы подписаны на {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Вы получаете платеж в размере {{displayAmount}} от {{call 'publisher.displayName'}} от &quot;{{description}}&quot;",
+        "HasBeenCharged": "Здравствуйте, это просто для того, чтобы вы знали, что {{1}} было списано {{2}} за {{3}} {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Спасибо за оплату за &quot;{{description}}&quot;",
+        "HavePaid": "Здравствуйте, {{1}}, это просто быстрое подтверждение того, что вы успешно заплатили {{2}} {{3}} за {{4}}."
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Информация о заказе",
+        "PaymentMethod": "Способ оплаты",
+        "ContactInfo": "Контактная информация",
+        "Pay": "Платить"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Приглашение принято {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} введено имя",
+        "Streams_user_lastname": "{{invitedUserName}} введена фамилия",
+        "Streams_user_icon": "{{invitedUserName}} введенный значок",
+        "Places_user_location": "{{invitedUserName}} введенное местоположение",
+        "Streams_greeting": "{{invitedUserName}} введено приветствие",
+        "YouHaveCreditsToStart": "У вас есть {{amount}} кредитов, чтобы начать",
+        "PaymentFor": "Платеж за &quot;{{1}}&quot;",
+        "PaymentTo": "Платеж {{1}}",
+        "PaymentToUser": "Платеж {{toUserName}}",
+        "CreatePaidStream": "за создание {{toStreamName}}",
+        "JoinedPaidStream": "для бронирования в &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "за создание сообщества &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "в качестве возмещения за бронирование в &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Куплено {{amount}} кредитов",
+        "BonusCredits": "Бонусные {{amount}} кредиты",
+        "BuyAmountCredits": "Купить {{amount}} кредитов",
+        "WatchClip": "Заработано {{amount}} кредитов за просмотр {{fromStreamTitle}}",
+        "MissingCredits": "Отсутствующие кредиты",
+        "YouMissingCredits": "Для продолжения вам потребуется еще {{amount}} кредитов.",
+        "BuyCredits": "Купить кредиты",
+        "BuyBonus": "Покупка {{amount}} кредитов сразу приведет к бонусу {{bonus}} кредитов.",
+        "Buy": "Купить",
+        "PurchaseCredits": "Покупка кредитов",
+        "Credits": "Кредиты",
+        "ErrorInvalidAmount": "Сумма недействительна",
+        "ErrorInvalidCurrency": "К сожалению, мы пока не поддерживаем валюту {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} кредитов",
+            "BonusCredits": "{{amount}} кредитов"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Дата",
+        "Amount": "Количество",
+        "Description": "Описание",
+        "Client": "Клиент",
+        "To": "к",
+        "From": "от",
+        "SeeHistory": "Посмотреть историю платежей для {{1}}",
+        "HistoryEmpty": "У вас еще нет данных",
+        "PaymentFor": "Отправлено {{amount}} кредитов",
+        "PaymentTo": "Отправлено {{amount}} кредитов",
+        "PaymentToUser": "Отправлено {{amount}} кредитов",
+        "CreatePaidStream": "Потрачено {{amount}} кредитов",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Заработано {{amount}} кредитов",
+            "-": "Потрачено {{amount}} кредитов"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Заработано {{amount}} кредитов",
+            "-": "Потрачено {{amount}} кредитов"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Получено {{amount}} кредитов",
+            "-": "Отправлено {{amount}} кредитов"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Потрачено {{amount}} кредитов",
+        "BoughtCredits": "Куплено {{amount}} кредитов",
+        "BonusCredits": "Получил бонус {{amount}} кредитов",
+        "InviteAcceptedBy": "Заработано {{amount}} кредитов",
+        "Streams_user_firstname": "Заработано {{amount}} кредитов",
+        "Streams_user_lastname": "Заработано {{amount}} кредитов",
+        "Streams_user_icon": "Заработано {{amount}} кредитов",
+        "Places_user_location": "Заработано {{amount}} кредитов",
+        "Streams_greeting": "Заработано {{amount}} кредитов",
+        "YouHaveCreditsToStart": "Заработано {{amount}} кредитов"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Установить платежную информацию",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Начать подписку",
+            "message": "Хотите подписаться на {{title}}?",
+            "ok": "В ПОРЯДКЕ",
+            "cancel": "Отмена"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Кредитная или дебетовая карта",
+        "SubscribePayment": "Подписаться Оплата",
+        "ImmediatePayment": "Немедленная оплата"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Установить платежную информацию",
+        "BuyAmountCredits": "Купить {{amount}} кредитов",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Совершить платеж",
+            "message": "Вы согласны заплатить {{symbol}}{{amount}}?",
+            "ok": "В ПОРЯДКЕ",
+            "cancel": "Отмена"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Кредиты",
+            "description": "следит за кредитами и платежами"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "План подписки",
+            "description": "план подписки"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Подписка",
+            "description": "подписка"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Продукт",
+            "description": "продукт продается"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Услуга",
+            "description": "предлагаемая услуга"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Заработано {{amount}} кредитов"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Куплено {{amount}} кредитов"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Бонусные кредиты {{amount}}"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Потрачено {{amount}} кредитов"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Отправлено {{amount}} кредитов на {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Получено {{amount}} кредитов от {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Новая услуга",
+            "TitlePlaceholder": "Название услуги",
+            "PricePlaceholder": "Установить цену",
+            "LinkPlaceholder": "установить ссылку на дополнительную информацию",
+            "DescriptionPlaceholder": "Описание услуг",
+            "SaveService": "Сохранить сервис",
+            "SelectRequiredParticipants": "Требуемые участники"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Управление шаблонами услуг",
+        "ManageServices": "Управление службами",
+        "Free": "Бесплатно",
+        "OptionalContribution": "Дополнительный вклад",
+        "RequiredPayment": "Требуемый платеж",
+        "AreYouSureDelete": "Вы уверены, что хотите удалить эту службу?",
+        "AmountServicesRelated": "Доступно {{amount}}, связанное с этой услугой. Они также будут удалены."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Информация о {{title}} NFT",
+        "Description": "Подробная информация о NFT",
+        "FixedBid": "Купи сейчас",
+        "CurrentBid": "текущая ставка",
+        "StartingIn": "Начиная с",
+        "EndingIn": "Кончающийся на",
+        "CreateNFT": "Создать NFT",
+        "TitlePlaceholder": "Дайте вашему NFT название",
+        "DescriptionPlaceholder": "Дайте вашему NFT описание",
+        "CreateYourNFT": "Создайте свой NFT",
+        "Royalties": "Роялти",
+        "RoyaltyPlaceholder": "По желанию. Сумма, выплаченная создателю до передачи.",
+        "ExpirationDate": "Дата окончания срока",
+        "StartingDate": "Дата начала",
+        "BidsBelowThisAmount": "Ставки ниже этой суммы не допускаются.",
+        "MinimumBid": "Минимальная ставка",
+        "Price": "Цена",
+        "Owner": "Владелец",
+        "SelectCategory": "Выбрать категорию",
+        "Day": "День",
+        "Days": "Дни",
+        "Hour": "Час",
+        "Hours": "Часы",
+        "Minute": "Минута",
+        "Minutes": "Минуты",
+        "Second": "Второй",
+        "Seconds": "Секунды",
+        "SalesCreator": "продаж пойдет автору",
+        "Details": "Подробности",
+        "Bids": "Ставки",
+        "History": "История",
+        "LoremIpsum": "Lorem Ipsum — это просто текст-пустышка полиграфической и наборной индустрии.",
+        "PutOnSale": "Выставить на продажу",
+        "PutOffSale": "Снять с продажи",
+        "Transfer": "Перечислить",
+        "Update": "Обновлять",
+        "UpdateToken": "Обновить токен",
+        "CreateToken": "Создать токен",
+        "PlaceBid": "Место ставку",
+        "SoldOut": "Продал",
+        "NftName": "Имя NFT",
+        "DescribeYourNFT": "Пожалуйста, опишите ваш NFT",
+        "NftPicture": "Изображение для представления NFT",
+        "NftMovie": "Фильм, представляющий NFT",
+        "UploadMovie": "Загрузить фильм",
+        "MovieSource": "Источник фильма",
+        "UploadFile": "Загрузить файл",
+        "PutOnMarketplace": "Выложить на рынок",
+        "InstantPurchase": "Введите цену, чтобы пользователи могли мгновенно приобрести ваш NFT",
+        "FixedPrice": "Измененная цена",
+        "TimedAuction": "Временный аукцион",
+        "OpenForBids": "Открыт для ставок",
+        "PriceOnePiece": "Введите цену за одну штуку",
+        "EnterMinimumBid": "Введите минимальную ставку",
+        "SelectChain": "Выберите цепочку",
+        "WrongChain": "Этот NFT создан под &quot;{{chain}}&quot;. Пожалуйста, используйте эту цепочку.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Импорт NFT",
+            "fileNotFound": "Извините, файл CSV не найден.",
+            "fileEmpty": "Извините, CSV-файл пуст.",
+            "userIdNotFound": "пользователь существует, но идентификатор пуст",
+            "errorLine": "строка {{1}}",
+            "fieldNotFound": "Обязательное поле &quot;{{1}}&quot; не найдено",
+            "taskStreamInvalid": "поток задач недействителен",
+            "instructionsEmpty": "инструкции потока задач пусты",
+            "complete": "Полный",
+            "activateUsers": "отправить сообщение об активации пользователям?",
+            "importProgress": "Прогресс",
+            "importOptions": "Опции",
+            "sampleCSV": "Скачать образец CSV",
+            "fileLabel": "Загрузить таблицу:",
+            "errorsTitle": "Произошли ошибки"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Фильтр по коллекциям NFT",
+                "ShowNFTCollection": "Показать коллекцию NFT в...",
+                "AllCollections": "Все коллекции"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Все авторы",
+                "AllUsers": "Все",
+                "FilterByAuthors": "Фильтровать по авторам"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Назад к коллекции"
     }
 }

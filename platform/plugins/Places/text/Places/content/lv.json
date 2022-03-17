@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} lats, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "laikā {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "metrs",
+        "meters": "metri",
+        "kilometer": "kilometrs",
+        "kilometers": "kilometri",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "jūdze",
+        "miles": "jūdzes",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "pēda",
+        "feet": "pēdas",
+        "inches": "collas"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Mani interesē lietas, kas notiek {{select}} laikā no",
+        "update": "Atjaunināt manu atrašanās vietu",
+        "set": "Iestatīt manu atrašanās vietu",
+        "prompt": "{{ClickOrTap}} šeit, lai<br> iestatiet savu<br> atrašanās vieta",
+        "myCurrentLocation": "Mana pašreizējā atrašanās vieta",
+        "enterAddress": "Ievadiet adresi",
+        "enterPostcode": "Lūdzu, ievadiet savu pasta indeksu\/pasta indeksu",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Pievienot atrašanās vietu",
+            "title": "Jauna vieta",
+            "nameYourLocation": "Nosauciet savu atrašanās vietu"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Vai saglabāt šo atrašanās vietu?",
+            "message": "Vai plānojat šo vietu izmantot arī turpmāk?",
+            "ok": "Jā",
+            "cancel": "Nē"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Nosauciet šo vietu",
+            "placeholder": "Mājas, darbs utt.",
+            "ok": "Saglabāt"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Izvēlieties Atrašanās vieta"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Vai šajā vietā ir kāda zona?",
+        "newArea": "Jauns rajons",
+        "promptTitle": "Ievadiet apgabala nosaukumu:",
+        "absent": "Lūdzu, iestatiet apgabalu",
+        "error": "Kļūda",
+        "exist": "Teritorija jau pastāv",
+        "addNewArea": "Pievienojiet jaunu apgabalu",
+        "add": "Pievienot"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "vietu kolekcija",
+            "displayType": "Atrašanās vietas"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Apzīmē ēku, norises vietu, kuģi, parku utt.",
+            "displayType": "Atrašanās vieta"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Apzīmē apgabalu atrašanās vietā, piemēram, istabu vai komplektu",
+            "displayType": "Apgabals"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Apzīmē stāvu ēkā vai kuģī",
+            "displayType": "Stāvs"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Apzīmē kolonnu ēkā vai kuģī",
+            "displayType": "Sleja"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategorija lietām, kas atrodas noteiktā attālumā no ģeohašas",
+            "displayType": "Blakus vietām"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategorija lietām, kas atrodas noteiktā attālumā no ģeohašas, kas atbilst interesēm",
+            "displayType": "Interesējošās vietas"
         }
     }
 }

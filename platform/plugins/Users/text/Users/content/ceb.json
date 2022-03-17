@@ -1,15 +1,15 @@
 {
     "actions": {
         "LogIn": "sulod",
-        "LogOut": "paggawas"
+        "LogOut": "log out"
     },
     "activate": {
-        "SetAsPrimary": "Ibutang ang {{1}} isip akong pangunang {{2}}",
-        "ChoosePassPhrase": "Pagpili og usa ka <strong>hugpong<\/strong> sa pasword nga mag-log in. <br> Usa ka yano nga hugpong sa pulong nga naglangkob sa pipila ka mga pulong nga daling mahinumduman nimo.",
-        "ChoosePassPhraseSeeSuggestions": "Pagpili sa usa ka maayo <strong>nga hugpong<\/strong> sa mga <strong>pulong<\/strong> aron mapanalipdan ang imong account Tan-awa ang mga sugyot alang sa pipila ka mga ideya.",
-        "LogOutAndTryAgain": "Paggawas ug Sulayi Pag-usab",
-        "IfYouFeel": "Kon may gibati ka nga sayop, mahimo nimo",
-        "SetIdentifierButtonTitle": "magsugod"
+        "SetAsPrimary": "Ibutang ang {{1}} isip akong panguna {{2}}",
+        "ChoosePassPhrase": "Pagpili og <strong>pass phrase<\/strong> aron maka-log in.<br> Usa ka yano nga hugpong sa mga pulong nga naglangkob sa pipila ka mga pulong nga dali nimong mahinumduman.",
+        "ChoosePassPhraseSeeSuggestions": "Pagpili og maayong <strong>pass phrase<\/strong> aron maprotektahan ang imong account. Tan-awa ang mga sugyot alang sa pipila ka mga ideya.",
+        "LogOutAndTryAgain": "Log Out ug Sulayi Pag-usab",
+        "IfYouFeel": "Kung gibati nimo nga adunay sayup, mahimo nimo",
+        "SetIdentifierButtonTitle": "magsugod na usab"
     },
     "session": {
         "GetStarted": "Pagsugod"
@@ -17,113 +17,113 @@
     "authorize": {
         "GetStarted": "Pagsugod",
         "Authorize": "Pagtugot",
-        "TermsLabel": "Akong nabasa ug nagkauyon <br> ngadto sa {{link}}",
-        "TermsTitle": "Mga Termino",
+        "TermsLabel": "Nakabasa ko ug miuyon<br> ngadto sa {{link}}",
+        "TermsTitle": "Mga termino",
         "mustAgree": "Una kinahanglan ka mouyon sa mga termino."
     },
     "register": {
-        "TermsLabel": "Akong gidawat ang {{link}}",
-        "TermsTitle": "Mga Termino"
+        "TermsLabel": "Gidawat nako ang {{link}}",
+        "TermsTitle": "Mga termino"
     },
     "notifications": {
-        "title": "Pagtugot",
-        "prompt": "Buot ka ba nga makapahimo sa mga pahibalo? Makadawat ka og mga update sa tinuod nga panahon mahitungod sa mga butang nga imong gimahal.",
+        "title": "Permiso",
+        "prompt": "Gusto ba nimong i-enable ang mga pahibalo? Makadawat ka ug real-time nga mga update bahin sa mga butang nga imong gimahal.",
         "yes": "Oo",
         "no": "Dili",
-        "WelcomePleaseVerifyEmail": "Maayo! Palihug i-verify ang imong email address.",
-        "WelcomeVerifyEmail": "Maayo! Tinoa ang imong email address.",
-        "ForgetPass": "Hoy, nakalimot ka ba sa imong passphrase?",
-        "PassphraseSaved": "Ang imong pass parirala naluwas.",
-        "IdentifierActivated": "Gi-aktibo ang imong {{type}}.",
-        "CompletedActivation": "Nakompleto nimo ang pagpaaktibo sa tiggamit.",
-        "CompletedActivationLogIn": "Nakompleto nimo ang pagpaaktibo sa user. Sulayi ang pag-log in karon."
+        "WelcomePleaseVerifyEmail": "Welcome! Palihug pamatud-i ang imong email address.",
+        "WelcomeVerifyEmail": "Welcome! I-verify ang imong email address.",
+        "ForgetPass": "Uy, nakalimot ka sa imong passphrase?",
+        "PassphraseSaved": "Ang imong pass phrase na-save na.",
+        "IdentifierActivated": "Ang imong {{type}} gi-aktibo.",
+        "CompletedActivation": "Nakompleto na nimo ang pagpaaktibo sa user.",
+        "CompletedActivationLogIn": "Nakompleto na nimo ang pagpaaktibo sa user. Sulayi ang pag-log in karon."
     },
     "contacts": {
         "dialog": {
             "title": "Pilia ang kontak",
-            "CreateAccount": "+ Bag-ong Pakigkontak",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create dili makapangita",
-            "SearchByName": "Pagpangita pinaagi sa ngalan",
-            "EmptyContacts": "Wala makit-an ang mga contact ..."
+            "CreateAccount": "+ Bag-ong Kontak",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create dili makita",
+            "SearchByName": "Pangitaa pinaagi sa ngalan",
+            "EmptyContacts": "Wala makit-an ang mga kontak..."
         },
         "select": {
-            "title": "Pagpili sa kontak sa {{displayName}}"
+            "title": "Pagpili og kontak sa {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Palihug pagpili og label.",
-        "inviteUser": "Pagdapit sa Gumagamit",
+        "selectLabel": "Palihug pilia ang label.",
+        "inviteUser": "Dapita ang mga Gumagamit",
         "selectRole": "Pilia ang Papel",
-        "inviteRole": "Pagdapit sa {{role}}"
+        "inviteRole": "Pagdapit {{role}}"
     },
-    "invalidLanguageSelected": "Walay bakak nga piniling pinulongan",
+    "invalidLanguageSelected": "Dili balido nga pinulongan ang gipili",
     "login": {
-        "title": "Pag-abot",
-        "directions": "Paghimo usa ka account, o pag-log in.",
-        "directionsNoRegister": "Pag-log kung ikaw adunay usa ka account.",
-        "goButton": "Pag-adto",
-        "passphrase": "Pagsulud sa imong pass parirala:",
+        "title": "Welcome",
+        "directions": "Paghimo og account, o pag-log in.",
+        "directionsNoRegister": "Log in kung naa kay account.",
+        "goButton": "Lakaw",
+        "passphrase": "Ibutang ang imong pass phrase:",
         "loginButton": "Pagsugod",
         "registerButton": "Pagsugod",
-        "resendButton": "Magpadala nga mensahe sa pagpaaktibo",
-        "forgot": "Nakalimtan ba?",
-        "resendConfirm": "Gusto ba nimo ipadala nga mensahe aron ma-reset ang imong passphrase?",
-        "resendSuccess": "Pagsusi alang sa usa ka mensahe aron ma-reset ang imong passphrase",
+        "resendButton": "Ipadala ang Mensahe sa Pagpaaktibo",
+        "forgot": "Nakalimot na?",
+        "resendConfirm": "Gusto ba nimong magpadala usa ka mensahe aron ma-reset ang imong passphrase?",
+        "resendSuccess": "Susiha ang usa ka mensahe aron i-reset ang imong passphrase",
         "resendClose": "Suod nga",
-        "noPassphrase": "Sa wala ka pa maka-log in, kinahanglan ka magbutang usa ka pass phrase pinaagi sa pag-klik sa link sa imong mensahe sa pagpaaktibo.",
-        "notVerified": "Kinahanglan nga ipadala nimo ang imong kaugalingon usa ka mensahe sa pagpaaktibo aron maka-log in.",
-        "emailExists": "Gisulayan ba nimo nga magparehistro sa kini nga email kaniadto? Kung mao, susihon ang imong inbox aron maaktibo ang imong account. <a href='#resend' class='Q_button Users_activation_resend'>Pag-klik aron ipadala ang mensahe<\/a>",
-        "mobileExists": "Gisulayan ba nimo nga magparehistro sa kini nga numero sa mobile kaniadto? Kung mao kana, susiha ang imong SMS aron ma-aktibo ang imong account. <a href='#resend' class='Q_button Users_activation_resend'>Pag-klik aron ipadala ang mensahe<\/a>",
-        "usingOther": "o kaya nimo",
-        "prompt": "Pagpili usa ka username:",
-        "newUser": "o paghimo us aka bag-ong account",
+        "noPassphrase": "Sa dili ka pa maka log in, kinahanglan ka magbutang ug pass phrase pinaagi sa pag-klik sa link sa imong mensahe sa pagpaaktibo.",
+        "notVerified": "Kinahanglan ka magpadala sa imong kaugalingon og mensahe sa pagpaaktibo aron maka-log in.",
+        "emailExists": "Nakasulay ka ba nga magparehistro sa kini nga email kaniadto? Kung mao, susiha ang imong inbox aron ma-aktibo ang imong account. <a href='#resend' class='Q_button Users_activation_resend'>I-klik aron ipadala pag-usab ang mensahe<\/a>",
+        "mobileExists": "Nasulayan na ba nimo nga magparehistro gamit kini nga numero sa mobile kaniadto? Kon mao, susiha ang imong SMS aron ma-activate ang imong account. <a href='#resend' class='Q_button Users_activation_resend'>I-klik aron ipadala pag-usab ang mensahe<\/a>",
+        "usingOther": "o mahimo nimo",
+        "prompt": "Pagpili og username:",
+        "newUser": "o paghimo og bag-ong account sa ubos",
         "placeholders": {
             "identifier": "imong mobile # o email",
-            "mobile": "mosulod sa imong mobile #",
-            "email": "isulud ang imong email address",
-            "username": "username"
+            "mobile": "isulod ang imong mobile #",
+            "email": "isulod ang imong email address",
+            "username": "gamita lang ang mga letra ug numero"
         },
-        "confirmTerms": "Dawata ang Mga Termino sa Pag-alagad?",
-        "facebookNoEmail": "Nawala ang imong facebook account sa usa ka nakumpirma nga email address. Pag-log in sa lumad nga paagi.",
-        "picTooltip": "Mahimo nimo nga usbon kini nga litrato sa ulahi",
+        "confirmTerms": "Dawata ang Mga Termino sa Serbisyo?",
+        "facebookNoEmail": "Ang imong facebook account kulang sa usa ka gikumpirma nga email address. Pag-log in sa lumad nga paagi.",
+        "picTooltip": "Mahimo nimong usbon kini nga litrato sa ulahi",
         "wallet": {
-            "payload": "Pag-log in sa {{host}} sa oras nga {{timestamp}}",
+            "payload": "Log ngadto sa {{host}} sa panahon {{timestamp}}",
             "alert": {
-                "title": "Pagdiretso sa Wallet",
-                "content": "Sa higayon nga imong gisirhan kini nga dayalogo, dad-on ka sa imong pitaka. Pagkahuman sa imong pag-sign in, pagbalik sa kini nga panid."
+                "title": "Pag-redirect sa Wallet",
+                "content": "Kung imong tapuson kini nga dialog, dad-on ka sa imong pitaka. Pagkahuman nimo pag-sign in, balik sa kini nga panid."
             }
         }
     },
     "setIdentifier": {
-        "title": "Pagdugang usa ka paagi aron maka-log in",
-        "sendMessage": "Magpadala nga mensahe sa pagpaaktibo",
+        "title": "Pagdugang usa ka paagi sa pag-log in",
+        "sendMessage": "Ipadala ang Mensahe sa Pagpaaktibo",
         "placeholders": {
-            "identifier": "isulud ang imong mobile # o email",
-            "mobile": "isulud ang imong numero sa mobile",
-            "email": "isulud ang imong email address",
+            "identifier": "isulod ang imong mobile # o email",
+            "mobile": "isulod ang imong mobile number",
+            "email": "isulod ang imong email address",
             "username": "username"
         }
     },
     "prompt": {
         "title": "{{Platform}} Account",
-        "areUsing": "Gigamit mo ang {{platform}} ingon",
-        "noLongerUsing": "Dili ka na konektado sa {{platform}} ingon",
-        "doAuth": "Pag-log sa niini nga account",
-        "doSwitch": "Pagbalhin sa kini nga asoy"
+        "areUsing": "Gigamit nimo ang {{platform}} isip",
+        "noLongerUsing": "Wala ka na konektado sa {{platform}} ingon",
+        "doAuth": "Log in gamit kini nga account",
+        "doSwitch": "Pagbalhin sa kini nga account"
     },
     "roles": {
         "Owner": "Tag-iya",
         "Admin": "Admin",
-        "Member": "Member",
+        "Member": "Miyembro",
         "Guest": "Bisita",
-        "Host": "Tagbalay"
+        "Host": "Host"
     },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Adlaw-adlaw",
-        "Weekly": "Matag semana",
-        "Monthly": "Binulan",
-        "Application": "Pag-aplay",
+        "Weekly": "Kada semana",
+        "Monthly": "Kada bulan",
+        "Application": "Aplikasyon",
         "Pages": "Mga panid",
         "Services": "Mga serbisyo",
         "Faq": "Faq",

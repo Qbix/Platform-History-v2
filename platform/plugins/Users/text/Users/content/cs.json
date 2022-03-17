@@ -5,8 +5,8 @@
     },
     "activate": {
         "SetAsPrimary": "Nastavit {{1}} jako primární {{2}}",
-        "ChoosePassPhrase": "Zvolte <strong>heslo<\/strong> pro přihlášení. <br> Jednoduchá fráze skládající se z několika slov, která si snadno zapamatujete.",
-        "ChoosePassPhraseSeeSuggestions": "Chcete-li svůj účet chránit, vyberte dobrou <strong>frázi<\/strong> . Podívejte se na návrhy pro některé nápady.",
+        "ChoosePassPhrase": "Vyberte <strong>heslo<\/strong> , pomocí kterého se chcete přihlásit.<br> Jednoduchá fráze složená z pár slov, které si snadno zapamatujete.",
+        "ChoosePassPhraseSeeSuggestions": "Vyberte si dobrou <strong>přístupovou frázi<\/strong> k ochraně svého účtu. Podívejte se na návrhy některých nápadů.",
         "LogOutAndTryAgain": "Odhlaste se a zkuste to znovu",
         "IfYouFeel": "Pokud máte pocit, že se něco pokazilo, můžete",
         "SetIdentifierButtonTitle": "začít znovu"
@@ -17,41 +17,41 @@
     "authorize": {
         "GetStarted": "Začít",
         "Authorize": "Povolit",
-        "TermsLabel": "Četl jsem a souhlasím <br> do {{link}}",
+        "TermsLabel": "Přečetl jsem a souhlasím<br> do {{link}}",
         "TermsTitle": "Podmínky",
         "mustAgree": "Nejprve musíte souhlasit s podmínkami."
     },
     "register": {
-        "TermsLabel": "Souhlasím s {{link}}",
+        "TermsLabel": "Přijímám {{link}}",
         "TermsTitle": "Podmínky"
     },
     "notifications": {
         "title": "Povolení",
-        "prompt": "Chcete povolit upozornění? Dostanete aktuální informace o věcech, na kterých vám záleží.",
+        "prompt": "Chcete povolit upozornění? Budete dostávat aktualizace v reálném čase o věcech, které vás zajímají.",
         "yes": "Ano",
         "no": "Ne",
-        "WelcomePleaseVerifyEmail": "Vítejte! Zkontrolujte prosím svou e-mailovou adresu.",
+        "WelcomePleaseVerifyEmail": "Vítejte! Prosím ověřte svou e-mailovou adresu.",
         "WelcomeVerifyEmail": "Vítejte! Ověřte svou e-mailovou adresu.",
-        "ForgetPass": "Hej, zapomněl jsi na své heslo?",
-        "PassphraseSaved": "Vaše přístupová fráze byla uložena.",
-        "IdentifierActivated": "Vaše {{type}} byla aktivována.",
+        "ForgetPass": "Hej, zapomněl jsi heslo?",
+        "PassphraseSaved": "Vaše heslo bylo uloženo.",
+        "IdentifierActivated": "Váš {{type}} byl aktivován.",
         "CompletedActivation": "Dokončili jste aktivaci uživatele.",
-        "CompletedActivationLogIn": "Dokončili jste aktivaci uživatele. Zkuste se přihlásit hned."
+        "CompletedActivationLogIn": "Dokončili jste aktivaci uživatele. Zkuste se nyní přihlásit."
     },
     "usersContacts": {
-        "selectLabel": "Vyberte prosím popisek.",
-        "inviteUser": "Pozvěte uživatele",
-        "selectRole": "Vyberte roli",
+        "selectLabel": "Vyberte štítek.",
+        "inviteUser": "Pozvat uživatele",
+        "selectRole": "Vyberte Role",
         "inviteRole": "Pozvat {{role}}"
     },
-    "invalidLanguageSelected": "Byl vybrán neplatný jazyk",
+    "invalidLanguageSelected": "Vybrán neplatný jazyk",
     "contacts": {
         "dialog": {
             "title": "Vyberte kontakt",
-            "SearchByName": "Hledat podle jména",
+            "SearchByName": "Hledejte podle jména",
             "CreateAccount": "+ Nový kontakt",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create nebyl nalezen",
-            "EmptyContacts": "Kontakty nebyly nalezeny ..."
+            "EmptyContacts": "Kontakty nenalezeny..."
         },
         "select": {
             "title": "Vyberte kontakt {{displayName}}"
@@ -62,35 +62,35 @@
         "directions": "Vytvořte si účet nebo se přihlaste.",
         "directionsNoRegister": "Přihlaste se, pokud máte účet.",
         "goButton": "Jít",
-        "passphrase": "Zadejte vaši frázi:",
+        "passphrase": "Zadejte heslo:",
         "loginButton": "Začít",
         "registerButton": "Začít",
         "resendButton": "Odeslat aktivační zprávu",
         "forgot": "Zapomeň na to?",
-        "resendConfirm": "Chcete poslat zprávu k obnovení hesla?",
-        "resendSuccess": "Vyhledejte zprávu a resetujte heslo",
+        "resendConfirm": "Chcete odeslat zprávu pro resetování přístupové fráze?",
+        "resendSuccess": "Vyhledejte zprávu o resetování přístupového hesla",
         "resendClose": "Zavřít",
-        "noPassphrase": "Než se budete moci přihlásit, musíte nastavit přístupovou frázi kliknutím na odkaz ve své aktivační zprávě.",
-        "notVerified": "Abyste se mohli přihlásit, musíte si zaslat aktivační zprávu.",
-        "emailExists": "Pokusili jste se dříve u tohoto e-mailu zaregistrovat? Pokud ano, zkontrolujte svůj účet a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Klepnutím zprávu znovu odešlete<\/a>",
-        "mobileExists": "Pokusili jste se dříve zaregistrovat toto mobilní číslo? Pokud ano, zkontrolujte svůj účet a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Klepnutím zprávu znovu odešlete<\/a>",
+        "noPassphrase": "Než se budete moci přihlásit, musíte kliknutím na odkaz v aktivační zprávě nastavit heslo.",
+        "notVerified": "Abyste se mohli přihlásit, musíte si poslat aktivační zprávu.",
+        "emailExists": "Zkoušeli jste se registrovat pomocí tohoto e-mailu dříve? Pokud ano, zkontrolujte svou doručenou poštu a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím zprávu znovu odešlete<\/a>",
+        "mobileExists": "Zkoušeli jste se dříve registrovat pomocí tohoto mobilního čísla? Pokud ano, zkontrolujte svou SMS a aktivujte svůj účet. <a href='#resend' class='Q_button Users_activation_resend'>Kliknutím zprávu znovu odešlete<\/a>",
         "usingOther": "nebo můžete",
         "prompt": "Vyberte si uživatelské jméno:",
-        "newUser": "nebo si vytvořte nový účet níže",
+        "newUser": "nebo si níže vytvořte nový účet",
         "placeholders": {
-            "identifier": "váš mobilní telefon nebo e-mail",
-            "mobile": "zadejte svůj mobilní #",
+            "identifier": "váš mobil # nebo e-mail",
+            "mobile": "zadejte svůj mobil #",
             "email": "vložte svou e-mailovou adresu",
-            "username": "uživatelské jméno"
+            "username": "používejte pouze písmena a číslice"
         },
-        "confirmTerms": "Přijímáte smluvní podmínky?",
-        "facebookNoEmail": "Na vašem facebookovém účtu chybí potvrzená e-mailová adresa. Stačí se přihlásit nativním způsobem.",
+        "confirmTerms": "Přijmout podmínky služby?",
+        "facebookNoEmail": "Ve vašem facebookovém účtu chybí potvrzená e-mailová adresa. Jednoduše se přihlaste nativním způsobem.",
         "picTooltip": "Tento obrázek můžete později změnit",
         "wallet": {
-            "payload": "Přihlásit se do služby {{host}} v čase {{timestamp}}",
+            "payload": "Přihlaste se do {{host}} v čase {{timestamp}}",
             "alert": {
                 "title": "Přesměrování do Peněženky",
-                "content": "Po zavření tohoto dialogu se dostanete do své peněženky. Po přihlášení se vraťte na tuto stránku."
+                "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
             }
         }
     },
@@ -98,7 +98,7 @@
         "title": "Přidejte způsob přihlášení",
         "sendMessage": "Odeslat aktivační zprávu",
         "placeholders": {
-            "identifier": "zadejte svůj mobilní telefon nebo e-mail",
+            "identifier": "zadejte číslo svého mobilního telefonu nebo e-mail",
             "mobile": "Vložte své telefonní číslo",
             "email": "vložte svou e-mailovou adresu",
             "username": "uživatelské jméno"
@@ -113,7 +113,7 @@
     },
     "roles": {
         "Owner": "Majitel",
-        "Admin": "Správce",
+        "Admin": "Admin",
         "Member": "Člen",
         "Guest": "Host",
         "Host": "Hostitel"
@@ -124,9 +124,9 @@
         "Weekly": "Týdně",
         "Monthly": "Měsíční",
         "Application": "aplikace",
-        "Pages": "Stránky",
+        "Pages": "stránky",
         "Services": "Služby",
-        "Faq": "Časté dotazy",
-        "WeekDays": "Týden Dny"
+        "Faq": "Faq",
+        "WeekDays": "Týdenní dny"
     }
 }

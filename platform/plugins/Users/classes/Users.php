@@ -613,7 +613,7 @@ abstract class Users extends Base_Users
 				// somehow this externalFrom disappeared from the database
 				throw new Q_Exception_MissingRow(array(
 					'table' => 'ExternalFrom',
-					'criteria' => http_build_query($pk, null, ' & ')
+					'criteria' => http_build_query($pk, '', ' & ')
 				));
 			}
 
@@ -2086,7 +2086,7 @@ abstract class Users extends Base_Users
 			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
-			$parts = explode("\t", $parts[0]); // backwards compatibility
+			$parts = str_replace("\t", "_", $parts); // backwards compatibility
 			$parts = explode("_", $type);
 			switch ($parts[0]) {
 				case 'email':

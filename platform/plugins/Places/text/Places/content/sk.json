@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} zemepisná šírka, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "v rámci {{1}}"
     },
     "units": {
         "meter": "meter",
-        "meters": "meters",
+        "meters": "metrov",
         "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "kilometers": "kilometrov",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "míľa",
+        "miles": "míľ",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "chodidlo",
+        "feet": "nohy",
+        "inches": "palce"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Zaujímam sa o veci, ktoré sa dejú do {{select}} od",
+        "update": "Aktualizujte moju polohu",
+        "set": "Nastaviť moju polohu",
+        "prompt": "{{ClickOrTap}} sem<br> nastavte si<br> umiestnenie",
+        "myCurrentLocation": "Moja aktuálna poloha",
+        "enterAddress": "Zadajte adresu",
+        "enterPostcode": "Zadajte svoje PSČ",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Pridať polohu",
+            "title": "Nová poloha",
+            "nameYourLocation": "Pomenujte svoju polohu"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Chcete uložiť toto miesto?",
+            "message": "Plánujete v budúcnosti znova využiť túto lokalitu?",
+            "ok": "Áno",
+            "cancel": "nie"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Pomenujte toto miesto",
+            "placeholder": "Domov, Práca atď.",
+            "ok": "Uložiť"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Vyberte umiestnenie"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Nejaká oblasť v tejto lokalite?",
+        "newArea": "Nová oblasť",
+        "promptTitle": "Zadajte názov oblasti:",
+        "absent": "Nastavte oblasť",
+        "error": "Chyba",
+        "exist": "Oblasť už existuje",
+        "addNewArea": "Pridať novú oblasť",
+        "add": "Pridať"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "zbierka miest",
+            "displayType": "Miesta"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Predstavuje budovu, miesto konania, loď, park atď.",
+            "displayType": "Miesto"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Predstavuje oblasť v rámci miesta, ako je napríklad izba alebo apartmán",
+            "displayType": "Oblasť"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Predstavuje podlahu v budove alebo lodi",
+            "displayType": "Poschodie"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Predstavuje stĺpec v budove alebo lodi",
+            "displayType": "Stĺpec"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategória pre veci v určitej vzdialenosti od geohash",
+            "displayType": "V blízkosti miest"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategória pre veci v určitej vzdialenosti od geohash, zodpovedajúce záujmu",
+            "displayType": "Záujem o miesta"
         }
     }
 }

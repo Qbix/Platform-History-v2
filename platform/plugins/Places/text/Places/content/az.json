@@ -7,82 +7,82 @@
     "units": {
         "meter": "metr",
         "meters": "metr",
-        "kilometer": "kilometrə",
-        "kilometers": "Kiometers",
+        "kilometer": "kilometr",
+        "kilometers": "kilometr",
         "km": "km",
         "mile": "mil",
         "miles": "mil",
         "mi": "mi",
         "foot": "ayaq",
-        "feet": "ayaqları",
-        "inches": "inç"
+        "feet": "ayaq",
+        "inches": "düym"
     },
     "location": {
-        "interested": "{{select}} daxilində baş verən hadisələrlə maraqlanıram",
-        "update": "Mənim yerimi yeniləyin",
-        "prompt": "{{ClickOrTap}} burada <br> qurmaq <br> yer",
+        "interested": "{{select}} ərzində baş verənlərlə maraqlanıram",
+        "update": "Məkanımı Yeniləyin",
+        "prompt": "{{ClickOrTap}} buradan<br> təyin edin<br> yer",
         "myCurrentLocation": "Mənim cari yerim",
-        "enterAddress": "Bir ünvan daxil edin",
-        "enterPostcode": "Xahiş edirik poçt kodunu \/ poçt kodunu daxil edin",
+        "enterAddress": "Ünvan daxil edin",
+        "enterPostcode": "Zəhmət olmasa poçt indeksinizi \/ poçt indeksinizi daxil edin",
         "create": {
-            "action": "Yerini əlavə edin",
-            "title": "Yeni Yer",
+            "action": "Məkan əlavə edin",
+            "title": "Yeni Məkan",
             "nameYourLocation": "Yerinizi adlandırın"
         },
         "confirm": {
-            "title": "Bu yeri saxla?",
-            "message": "Gələcəkdə bu yeri yenidən istifadə etməyi planlaşdırırsınız?",
+            "title": "Bu məkan yadda saxlansın?",
+            "message": "Gələcəkdə bu məkandan yenidən istifadə etməyi planlaşdırırsınız?",
             "ok": "Bəli",
             "cancel": "Yox"
         },
         "add": {
             "title": "Bu yeri adlandırın",
-            "placeholder": "Ev, iş və s.",
+            "placeholder": "Ev, İş və s.",
             "ok": "Yadda saxla"
         },
         "dialog": {
-            "title": "Yer seç"
+            "title": "Yer seçin"
         },
-        "set": "Məkanımı təyin edin"
+        "set": "Yerimi təyin edin"
     },
     "areas": {
-        "filterPlaceholder": "Bu yerdəki hər hansı bir sahə?",
-        "newArea": "Yeni sahə",
-        "promptTitle": "Ərazi üçün bir ad daxil edin:",
-        "absent": "Bölgəni seçin",
-        "error": "Səhv",
-        "exist": "Alan artıq mövcuddur",
+        "filterPlaceholder": "Bu məkanın daxilində hər hansı sahə varmı?",
+        "newArea": "Yeni ərazi",
+        "promptTitle": "Ərazi üçün ad daxil edin:",
+        "absent": "Zəhmət olmasa ərazini təyin edin",
+        "error": "Xəta",
+        "exist": "Ərazi artıq mövcuddur",
         "addNewArea": "Yeni sahə əlavə edin",
         "add": "Əlavə et"
     },
     "types": {
         "Places\/locations": {
-            "description": "yerlər toplusu",
-            "displayType": "Yerlər"
+            "description": "yerlərin toplusu",
+            "displayType": "Məkanlar"
         },
         "Places\/location": {
-            "description": "Bir bina, məkan, gəmi, park və s.",
-            "displayType": "Yer"
+            "description": "Binanı, məkanı, gəmini, parkı və s.",
+            "displayType": "Məkan"
         },
         "Places\/area": {
-            "description": "Bir otaq və ya suite kimi bir məkanda bir ərazini təmsil edir",
-            "displayType": "Sahə"
+            "description": "Otaq və ya suite kimi məkan daxilində ərazini təmsil edir",
+            "displayType": "Ərazi"
         },
         "Places\/floor": {
-            "description": "Bir binada və ya gəmidə bir mərtəbə təqdim edir",
+            "description": "Bina və ya gəmidəki mərtəbəni təmsil edir",
             "displayType": "Mərtəbə"
         },
         "Places\/column": {
-            "description": "Bir bina və ya gəmidə bir sütunu təmsil edir",
+            "description": "Bina və ya gəmidəki sütunu təmsil edir",
             "displayType": "Sütun"
         },
         "Places\/nearby": {
-            "description": "Bir geohash müəyyən bir məsafədəki əşyalar üçün kateqoriya",
+            "description": "Bir geohashdan müəyyən bir məsafədə olan şeylər üçün kateqoriya",
             "displayType": "Yerlərə yaxın"
         },
         "Places\/interest": {
-            "description": "Bir marağınıza uyğun bir geohaş məsafəsində olan şeylər üçün kateqoriya",
-            "displayType": "Yerlər maraq"
+            "description": "Geohashdan müəyyən məsafədə olan, marağa uyğun gələn şeylər üçün kateqoriya",
+            "displayType": "Maraqlı yerlər"
         }
     }
 }

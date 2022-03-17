@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Ödəniş üçün dokunun"
+        "button": "Ödəmək üçün toxunun"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} üçün işlənilən ödəniş",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} üçün ödəniş etdiyiniz üçün təşəkkür edirik",
-        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} səhifəsinə abunə",
-        "YouSubscribedTo": "{{plan.title}} səhifəsinə abunə oldunuz"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} üçün ödəniş işlənib",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ödədiyiniz üçün təşəkkür edirik",
+        "SubscribedTo": "{{call 'user.displayName'}} abunə oldu {{plan.title}}",
+        "YouSubscribedTo": "Siz {{plan.title}} kanalına abunə olmusunuz"
     },
     "payment": {
         "AboutOrder": "Sifariş haqqında məlumat",
         "PaymentMethod": "Ödəniş üsulu",
         "ContactInfo": "Əlaqə məlumatı",
-        "Pay": "Ödəyin"
+        "Pay": "Ödəmək"
     },
     "credits": {
-        "InviteAcceptedBy": "{{1}} tərəfindən qəbul edilən dəvət",
-        "YouHaveCreditsToStart": "Başlamaq üçün {{1}} kreditiniz var",
+        "InviteAcceptedBy": "Dəvət {{invitedUserName}} tərəfindən qəbul edildi",
+        "YouHaveCreditsToStart": "Başlamaq üçün {{amount}} kreditiniz var",
         "PaymentFor": "&quot;{{1}}&quot; üçün ödəniş",
-        "PaymentTo": "Ödəniş {{1}}",
-        "PaymentToUser": "Ödəniş {{userName}}",
-        "JoinedPaidStream": "qoşulduğu üçün &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "icma yaratmaq üçün &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; tərk etdiyi üçün",
-        "BoughtCredits": "{{amount}} kredit aldı",
+        "PaymentTo": "{{1}} üçün ödəniş",
+        "PaymentToUser": "{{toUserName}} üçün ödəniş",
+        "JoinedPaidStream": "rezervasiya üçün &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; icmasını yaratmaq üçün",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;-də rezervasiyanın geri qaytarılması kimi",
+        "BoughtCredits": "{{amount}} kredit alıb",
         "BuyAmountCredits": "{{amount}} kredit alın",
-        "MissingCredits": "Yarımçıq Kreditlər",
-        "YouMissingCredits": "{{amount}} kredit itkin",
-        "BuyCredits": "Kreditlər alın",
-        "Buy": "Alın",
+        "MissingCredits": "Çatışmayan Kreditlər",
+        "YouMissingCredits": "Davam etmək üçün sizə əlavə {{amount}} kredit lazımdır.",
+        "BuyCredits": "Kredit alın",
+        "Buy": "al",
         "Credits": "Kreditlər",
         "ErrorInvalidAmount": "Məbləğ etibarsızdır",
-        "ErrorInvalidCurrency": "Təəssüf ki, hələ {{currency}} valyuta bilmir",
-        "WatchClip": "{{fromStreamTitle}} filmini izləmək üçün {{amount}} kredit qazandı",
-        "PurchaseCredits": "Satınalma kreditləri",
+        "ErrorInvalidCurrency": "Təəssüf ki, biz hələ {{currency}} valyutasını dəstəkləmirik",
+        "WatchClip": "{{fromStreamTitle}} izləmək üçün {{amount}} kredit qazanıldı",
+        "PurchaseCredits": "Kreditlərin alınması",
         "forMessages": {
             "BoughtCredits": "{{amount}} kredit",
             "BonusCredits": "{{amount}} kredit"
         },
         "CreatePaidStream": "yaratmaq üçün {{toStreamName}}",
-        "BonusCredits": "Bonus {{amount}} krediti",
-        "BuyBonus": "Bir anda {{amount}} krediti alsanız, {{bonus}} kredit bonusu əldə edəcəksiniz.",
+        "BonusCredits": "Bonus {{amount}} kredit",
+        "BuyBonus": "Bir dəfəyə {{amount}} kredit almaq, {{bonus}} kredit bonusuna səbəb olacaq.",
         "Streams_user_firstname": "{{invitedUserName}} ad daxil etdi",
         "Streams_user_lastname": "{{invitedUserName}} soyadını daxil etdi",
         "Streams_user_icon": "{{invitedUserName}} ikona daxil edildi",
@@ -50,34 +50,34 @@
     },
     "history": {
         "Date": "Tarix",
-        "Amount": "Miqdarı",
+        "Amount": "Məbləğ",
         "Description": "Təsvir",
         "Client": "Müştəri",
         "To": "üçün",
-        "From": "dən",
+        "From": "-dan",
         "HistoryEmpty": "Hələ məlumatınız yoxdur",
-        "SeeHistory": "{{1}} üçün ödəniş tarixinə baxın",
-        "PaymentFor": "{{amount}} kreditləri sərf etdi",
+        "SeeHistory": "{{1}} üçün ödəniş tarixçəsinə baxın",
+        "PaymentFor": "{{amount}} kredit göndərildi",
         "PaymentTo": "{{amount}} kredit göndərildi",
         "PaymentToUser": "{{amount}} kredit göndərildi",
         "JoinedPaidStream": {
-            "+": "Qazanılmış {{amount}} kredit",
-            "-": "{{amount}} kreditləri sərf etdi"
+            "+": "{{amount}} kredit qazandı",
+            "-": "{{amount}} kredit xərclədi"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} kredit aldı",
+            "+": "{{amount}} kredit alındı",
             "-": "{{amount}} kredit göndərildi"
         },
-        "CreatedCommunity": "{{amount}} kreditləri sərf etdi",
-        "BoughtCredits": "{{amount}} kredit aldı",
-        "InviteAcceptedBy": "Qazanılmış {{amount}} kredit",
-        "YouHaveCreditsToStart": "Qazanılmış {{amount}} kredit",
-        "CreatePaidStream": "{{amount}} kredit xərcləndi",
+        "CreatedCommunity": "{{amount}} kredit xərclədi",
+        "BoughtCredits": "{{amount}} kredit alıb",
+        "InviteAcceptedBy": "{{amount}} kredit qazandı",
+        "YouHaveCreditsToStart": "{{amount}} kredit qazandı",
+        "CreatePaidStream": "{{amount}} kredit xərclədi",
         "WatchClip": {
             "+": "{{amount}} kredit qazandı",
-            "-": "{{amount}} kredit xərcləndi"
+            "-": "{{amount}} kredit xərclədi"
         },
-        "BonusCredits": "Bonus {{amount}} krediti var",
+        "BonusCredits": "Bonus {{amount}} kredit əldə etdi",
         "Streams_user_firstname": "{{amount}} kredit qazandı",
         "Streams_user_lastname": "{{amount}} kredit qazandı",
         "Streams_user_icon": "{{amount}} kredit qazandı",
@@ -85,22 +85,22 @@
         "Streams_greeting": "{{amount}} kredit qazandı"
     },
     "subscriptions": {
-        "infoTitle": "Ödəniş məlumatlarını təyin edin",
+        "infoTitle": "Ödəniş məlumatını təyin edin",
         "confirm": {
             "title": "Abunəliyə başlayın",
-            "message": "{{title}} səhifəsinə abunə olmaq istərdinizmi?",
+            "message": "{{title}} kanalına abunə olmaq istərdinizmi?",
             "ok": "tamam",
             "cancel": "Ləğv et"
         },
         "CreditOrDebitCard": "Kredit və ya debet kartı",
         "SubscribePayment": "Abunə Ödəniş",
-        "ImmediatePayment": "Dərhal ödəniş"
+        "ImmediatePayment": "Dərhal Ödəniş"
     },
     "payments": {
-        "infoTitle": "Ödəniş məlumatlarını təyin edin",
+        "infoTitle": "Ödəniş məlumatını təyin edin",
         "confirm": {
             "title": "Ödəniş edin",
-            "message": "{{symbol}} {{amount}} ödəməyə razısınız?",
+            "message": "{{symbol}}{{amount}} ödəməyə razısınız?",
             "ok": "tamam",
             "cancel": "Ləğv et"
         },
@@ -109,19 +109,19 @@
     "types": {
         "Assets\/credits": {
             "displayType": "Kreditlər",
-            "description": "kreditlər və ödənişləri izləyir"
+            "description": "kreditlərin və ödənişlərin uçotunu aparır"
         },
         "Assets\/plan": {
-            "displayType": "Qəbul Planı",
+            "displayType": "Abunə Planı",
             "description": "abunə planı"
         },
         "Assets\/subscription": {
-            "displayType": "Abunə",
+            "displayType": "Abunəlik",
             "description": "abunə"
         },
         "Assets\/product": {
             "displayType": "Məhsul",
-            "description": "satılan məhsul"
+            "description": "məhsul satılır"
         },
         "Assets\/service": {
             "displayType": "Xidmət",
@@ -130,49 +130,49 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Qazanılmış {{amount}} kredit"
+            "content": "{{amount}} kredit qazandı"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} kreditləri sərf etdi"
+            "content": "{{amount}} kredit xərclədi"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} kredit göndərdi"
+            "content": "{{amount}} kredit {{toUserName}} ünvanına göndərildi"
         },
         "Assets\/credits\/received": {
-            "content": "{{amount}} kredit aldı"
+            "content": "{{fromUserName}} tərəfindən {{amount}} kredit alındı"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} kredit aldı"
+            "content": "{{amount}} kredit alıb"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} krediti"
+            "content": "Bonus {{amount}} kredit"
         }
     },
     "charge": {
-        "Subject": "{{displayAmount}} ödənişini &quot;{{description}}&quot; ilə {{call 'publisher.displayName'}} alırsınız",
-        "HasBeenCharged": "Hey, bu yalnız {{1}} tərəfindən {{3}} üçün {{4}} tərəfindən ittiham olunduğunu bildirmək üçündür"
+        "Subject": "Siz &quot;{{description}}&quot; ilə {{call 'publisher.displayName'}} {{displayAmount}} məbləğində ödəniş alırsınız",
+        "HasBeenCharged": "Hey, bu sizə bildirmək üçündür ki, {{1}} {{2}} üçün {{3}} tərəfindən {{4}} tərəfindən tutuldu"
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; üçün ödəməyiniz üçün təşəkkür edirik",
-        "HavePaid": "Hey {{1}}, bu {{4}} üçün {{2}} -ı {{3}} -ə uğurla ödəməyinizin qısa bir təsdiqidir."
+        "Subject": "&quot;{{description}}&quot; ödənişinizə görə təşəkkür edirik",
+        "HavePaid": "Salam {{1}}, bu, {{2}} üçün {{3}} üçün {{4}} ödənişini uğurla etdiyinizin qısa təsdiqidir."
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Yeni Xidmət",
-            "TitlePlaceholder": "Xidmətin adı",
-            "PricePlaceholder": "Qiyməti təyin edin",
-            "LinkPlaceholder": "əlavə məlumat bağlantısı qurun",
-            "DescriptionPlaceholder": "Xidmətin təsviri",
+            "TitlePlaceholder": "Xidmət adı",
+            "PricePlaceholder": "Qiymət təyin edin",
+            "LinkPlaceholder": "əlavə məlumat linki təyin edin",
+            "DescriptionPlaceholder": "Xidmət təsviri",
             "SaveService": "Xidməti Saxla",
             "SelectRequiredParticipants": "Tələb olunan İştirakçılar"
         },
-        "ManageServiceTemplates": "Xidmət şablonlarını idarə edin",
-        "ManageServices": "Xidmətləri idarə et",
+        "ManageServiceTemplates": "Xidmət Şablonlarını idarə edin",
+        "ManageServices": "Xidmətləri idarə edin",
         "FreeEvent": "Pulsuz hadisə",
         "OptionalContribution": "Könüllü töhfə",
         "RequiredPayment": "Tələb olunan ödəniş",
         "AreYouSureDelete": "Bu xidməti silmək istədiyinizə əminsiniz?",
-        "AmountServicesRelated": "Bu xidmətlə əlaqəli {{amount}} çatışmazlıqlar var. Bunlar da çıxarılacaq.",
+        "AmountServicesRelated": "Bu xidmətlə bağlı {{amount}} əlçatanlıq var. Onlar da silinəcək.",
         "Free": "Pulsuz"
     },
     "NFT": {

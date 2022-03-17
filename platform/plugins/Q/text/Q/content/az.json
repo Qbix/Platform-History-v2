@@ -1,47 +1,47 @@
 {
     "request": {
-        "error": "İstek zamanı {{status}} hatası",
-        "canceled": "İstək ləğv edildi",
-        "500": "Daxili server səhvi",
+        "error": "Sorğu zamanı xəta {{status}}",
+        "canceled": "Sorğu ləğv edildi",
+        "500": "Daxili server xətası",
         "404": "Tapılmadı: {{url}}",
-        "501": "İstək müdaxilə etdi"
+        "501": "Sorğu kəsildi"
     },
     "nonce": {
-        "sameDomain": "Sessiya başa çatıb. Sayfayı yeniləyin və yenidən cəhd edin.",
-        "otherDomain": "{{baseUrl}} saytında xarici domain üçün cross-domain sorğusunu blokladı"
+        "sameDomain": "Sessiya başa çatıb. Səhifəni yeniləyin və yenidən cəhd edin.",
+        "otherDomain": "{{baseUrl}} ünvanında xarici domen üçün bloklanmış çarpaz domen sorğusu"
     },
     "words": {
         "tap": "vurun",
-        "click": "klikləyin",
+        "click": "basın",
         "yes": "bəli",
         "no": "yox",
-        "Tap": "Tap",
-        "Click": "Basın",
+        "Tap": "vurun",
+        "Click": "klikləyin",
         "Yes": "Bəli",
         "No": "Yox"
     },
     "months": {
         "1": "yanvar",
-        "2": "Fevral",
+        "2": "fevral",
         "3": "mart",
-        "4": "Aprel",
+        "4": "aprel",
         "5": "Bilər",
-        "6": "İyun",
-        "7": "İyul",
-        "8": "Avqust",
-        "9": "Sentyabr",
+        "6": "iyun",
+        "7": "iyul",
+        "8": "avqust",
+        "9": "sentyabr",
         "10": "oktyabr",
-        "11": "Noyabr",
-        "12": "Dekabr"
+        "11": "noyabr",
+        "12": "dekabr"
     },
     "audio": {
-        "allowMicrophoneAccess": "Mikrofonunuza girişə icazə verin",
-        "record": "Record",
-        "recording": "Qeydiyyat",
+        "allowMicrophoneAccess": "Zəhmət olmasa mikrofonunuza girişə icazə verin",
+        "record": "Qeyd",
+        "recording": "Səsyazma",
         "remains": "qalır",
         "maximum": "maksimum",
         "playing": "Oynayan",
-        "recorded": "Qeyd edildi",
+        "recorded": "Qeydə alınıb",
         "clip": "klip",
         "orupload": "Və ya yükləyin",
         "usethis": "Bunu istifadə et",
@@ -49,7 +49,7 @@
         "encoding": "Kodlaşdırma"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Xəbərdarlıq"
     },
     "confirm": {
         "title": "Təsdiq edin",
@@ -57,27 +57,27 @@
         "cancel": "Yox"
     },
     "prompt": {
-        "title": "Sövq et",
-        "ok": "Gedin"
+        "title": "Tələb",
+        "ok": "Get"
     },
     "imagepicker": {
-        "errorReadingFile": "Fayl oxuması səhvi",
+        "errorReadingFile": "Faylın oxunması xətası",
         "cameraCommands": {
-            "prompt": "Nə istəyirsiniz?",
+            "prompt": "Nə etmək istərdiniz?",
             "photo": "Yeni şəkil çəkin",
             "library": "Kitabxanadan seçin"
         },
-        "tooSmall": "Daha böyük bir şəkil seçin.",
+        "tooSmall": "Zəhmət olmasa daha böyük şəkil seçin.",
         "cropping": {
-            "title": "Ölçü və mövqeyi seçin",
-            "touchscreen": "Zənginləşdirmək və sürükləmək üçün barmaqlarınızdan istifadə edin",
-            "notTouchscreen": "Zənginləşdirmək və sürükləmək üçün siçanınızı və təkərdən istifadə edin"
+            "title": "Ölçü və mövqeyi tənzimləyin",
+            "touchscreen": "Böyütmək və sürükləmək üçün barmaqlarınızdan istifadə edin",
+            "notTouchscreen": "Böyütmək və sürüşdürmək üçün siçan və təkərdən istifadə edin"
         },
         "errorType": "Üzr istəyirik, lakin bu fayl növü dəstəklənmir"
     },
     "timestamp": {
         "lastNight": "keçən gecə",
-        "lastEvening": "ötən ərəfə",
+        "lastEvening": "son axşam",
         "yesterday": "dünən",
         "thisMorning": "bu səhər",
         "today": "bu gün",
@@ -88,17 +88,17 @@
         "hourAgo": "{{h}} saat əvvəl",
         "minuteAgo": "{{m}} dəqiqə əvvəl",
         "minutesAgo": "{{m}} dəqiqə əvvəl",
-        "secondAgo": "{{s}} ikinci dəfə",
+        "secondAgo": "{{s}} saniyə əvvəl",
         "secondsAgo": "{{s}} saniyə əvvəl",
         "fewSecondsAgo": "saniyə əvvəl",
-        "rightNow": "hazırda",
-        "inSecond": "{{s}} saniyədə",
+        "rightNow": "indi",
+        "inSecond": "{{s}} saniyəyə",
         "inSeconds": "{{s}} saniyə ərzində",
-        "inMinute": "{{m}} dəqiqədə",
-        "inMinutes": "{{m}} dəqiqədə",
-        "inHour": "{{h}} saatda",
-        "inHours": "{{h}} saatda",
-        "inUnderMinute": "1 dəqiqə ərzində"
+        "inMinute": "{{m}} dəqiqəyə",
+        "inMinutes": "{{m}} dəqiqəyə",
+        "inHour": "{{h}} saat ərzində",
+        "inHours": "{{h}} saat ərzində",
+        "inUnderMinute": "1 dəqiqədən az müddətdə"
     },
     "tabs": {
         "more": "daha çox",
@@ -112,16 +112,16 @@
     },
     "pdf": {
         "clip": "klip",
-        "errorNoSource": "Pdf mənbəyi yoxdur"
+        "errorNoSource": "Pdf mənbə yoxdur"
     },
     "clip": {
         "SetClipStart": "Klip Başlanğıcını təyin edin",
-        "ClipStart": "Klip Başlayın",
+        "ClipStart": "Klip Başlanğıc",
         "SetClipEnd": "Klip Sonunu təyin edin",
-        "ClipEnd": "Klip sonu",
+        "ClipEnd": "Klipin sonu",
         "StartMoreEnd": "Başlanğıc mövqeyi son mövqedən çox ola bilməz",
         "EndLessStart": "Son mövqe başlanğıc mövqeyindən az ola bilməz",
-        "WhichInvalid": "&quot;Hansı&quot; etibarsızdır"
+        "WhichInvalid": "&quot;Hansı&quot; arqumenti etibarsızdır"
     },
     "durations": {
         "second": "ikinci",
@@ -136,7 +136,7 @@
         "month": "ay",
         "months": "ay",
         "year": "il",
-        "years": "il",
+        "years": "illər",
         "decade": "onillik",
         "decades": "onilliklər",
         "century": "əsr",

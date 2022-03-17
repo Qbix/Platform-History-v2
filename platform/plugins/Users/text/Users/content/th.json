@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "การวิเคราะห์",
+        "Daily": "รายวัน",
+        "Weekly": "รายสัปดาห์",
+        "Monthly": "รายเดือน",
+        "Application": "แอปพลิเคชัน",
+        "Pages": "หน้า",
+        "Services": "บริการ",
+        "Faq": "คำถามที่พบบ่อย",
+        "WeekDays": "สัปดาห์วัน"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "เข้าสู่ระบบ",
+        "LogOut": "ออกจากระบบ"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "ตั้ง {{1}} เป็น {{2}} หลักของฉัน",
+        "ChoosePassPhrase": "เลือก <strong>วลีรหัสผ่าน<\/strong> เพื่อเข้าสู่ระบบด้วย<br> วลีง่ายๆ ที่ประกอบด้วยคำสองสามคำที่คุณจำได้ง่าย",
+        "ChoosePassPhraseSeeSuggestions": "เลือก <strong>วลีรหัสผ่าน<\/strong> ที่ดีเพื่อปกป้องบัญชีของคุณ ดูคำแนะนำสำหรับแนวคิดบางอย่าง",
+        "LogOutAndTryAgain": "ออกจากระบบแล้วลองอีกครั้ง",
+        "IfYouFeel": "หากคุณรู้สึกว่ามีบางอย่างผิดพลาด คุณสามารถ",
+        "SetIdentifierButtonTitle": "เริ่มต้นใหม่"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "เริ่ม"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "เริ่ม",
+        "Authorize": "อนุญาต",
+        "TermsLabel": "ฉันได้อ่านและตกลง<br> ถึง {{link}}",
+        "TermsTitle": "เงื่อนไข",
+        "mustAgree": "ก่อนอื่นคุณต้องยอมรับข้อกำหนด"
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "ฉันยอมรับ {{link}}",
+        "TermsTitle": "เงื่อนไข"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "การอนุญาต",
+        "prompt": "คุณต้องการเปิดใช้งานการแจ้งเตือนหรือไม่? คุณจะได้รับข้อมูลอัปเดตแบบเรียลไทม์เกี่ยวกับสิ่งที่คุณสนใจ",
+        "yes": "ใช่",
+        "no": "ไม่",
+        "WelcomePleaseVerifyEmail": "ยินดีต้อนรับ! โปรดยืนยันที่อยู่อีเมลของคุณ",
+        "WelcomeVerifyEmail": "ยินดีต้อนรับ! ยืนยันที่อยู่อีเมลของคุณ.",
+        "ForgetPass": "เฮ้ คุณลืมข้อความรหัสผ่านของคุณหรือไม่",
+        "PassphraseSaved": "บันทึกวลีรหัสผ่านของคุณแล้ว",
+        "IdentifierActivated": "{{type}} ของคุณเปิดใช้งานแล้ว",
+        "CompletedActivation": "คุณเปิดใช้งานผู้ใช้เรียบร้อยแล้ว",
+        "CompletedActivationLogIn": "คุณเปิดใช้งานผู้ใช้เรียบร้อยแล้ว ลองเข้าสู่ระบบตอนนี้"
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "เลือกติดต่อ",
+            "CreateAccount": "+ ผู้ติดต่อใหม่",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ไม่พบ",
+            "SearchByName": "ค้นหาด้วยชื่อ",
+            "EmptyContacts": "ไม่พบผู้ติดต่อ..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "เลือกผู้ติดต่อของ {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "โปรดเลือกป้ายกำกับ",
+        "inviteUser": "เชิญผู้ใช้",
+        "selectRole": "เลือกบทบาท",
+        "inviteRole": "เชิญ {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "ภาษาที่เลือกไม่ถูกต้อง",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "ยินดีต้อนรับ",
+        "directions": "สร้างบัญชีหรือเข้าสู่ระบบ",
+        "directionsNoRegister": "เข้าสู่ระบบถ้าคุณมีบัญชี",
+        "goButton": "ไป",
+        "passphrase": "ป้อนวลีรหัสผ่านของคุณ:",
+        "loginButton": "เริ่ม",
+        "registerButton": "เริ่ม",
+        "resendButton": "ส่งข้อความเปิดใช้งาน",
+        "forgot": "ลืมเหรอ?",
+        "resendConfirm": "คุณต้องการส่งข้อความเพื่อรีเซ็ตข้อความรหัสผ่านของคุณหรือไม่?",
+        "resendSuccess": "ตรวจสอบข้อความเพื่อรีเซ็ตข้อความรหัสผ่านของคุณ",
+        "resendClose": "ปิด",
+        "noPassphrase": "ก่อนที่คุณจะเข้าสู่ระบบได้ คุณต้องตั้งค่าวลีรหัสผ่านโดยคลิกลิงก์ในข้อความเปิดใช้งานของคุณ",
+        "notVerified": "คุณต้องส่งข้อความการเปิดใช้งานถึงตัวเองเพื่อเข้าสู่ระบบ",
+        "emailExists": "คุณเคยพยายามลงทะเบียนด้วยอีเมลนี้มาก่อนหรือไม่ หากเป็นเช่นนั้น ให้ตรวจสอบกล่องจดหมายของคุณเพื่อเปิดใช้งานบัญชีของคุณ <a href='#resend' class='Q_button Users_activation_resend'>คลิกเพื่อส่งข้อความอีกครั้ง<\/a>",
+        "mobileExists": "คุณเคยลองลงทะเบียนด้วยหมายเลขโทรศัพท์มือถือนี้มาก่อนหรือไม่? ถ้าใช่ ให้ตรวจสอบ SMS ของคุณเพื่อเปิดใช้งานบัญชีของคุณ <a href='#resend' class='Q_button Users_activation_resend'>คลิกเพื่อส่งข้อความอีกครั้ง<\/a>",
+        "usingOther": "หรือคุณสามารถ",
+        "prompt": "เลือกชื่อผู้ใช้:",
+        "newUser": "หรือสร้างบัญชีใหม่ด้านล่าง",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "มือถือของคุณ # หรืออีเมล",
+            "mobile": "เข้าสู่มือถือของคุณ #",
+            "email": "ป้อนที่อยู่อีเมลของคุณ",
+            "username": "ใช้ตัวอักษรและตัวเลขเท่านั้น"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "ยอมรับข้อกำหนดในการให้บริการหรือไม่",
+        "facebookNoEmail": "บัญชี Facebook ของคุณไม่มีที่อยู่อีเมลที่ได้รับการยืนยัน เพียงเข้าสู่ระบบด้วยวิธีดั้งเดิม",
+        "picTooltip": "คุณสามารถเปลี่ยนรูปภาพนี้ได้ในภายหลัง",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "เข้าสู่ระบบ {{host}} ในเวลา {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "กำลังเปลี่ยนเส้นทางไปยัง Wallet",
+                "content": "เมื่อคุณปิดกล่องโต้ตอบนี้ คุณจะเข้าสู่กระเป๋าเงินของคุณ หลังจากที่คุณลงชื่อเข้าใช้แล้ว ให้กลับมาที่หน้านี้"
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "เพิ่มช่องทางการเข้าสู่ระบบ",
+        "sendMessage": "ส่งข้อความเปิดใช้งาน",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "ใส่เบอร์มือถือของคุณหรืออีเมล",
+            "mobile": "ใส่หมายเลขโทรศัพท์มือถือของคุณ",
+            "email": "ป้อนที่อยู่อีเมลของคุณ",
+            "username": "ชื่อผู้ใช้"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} บัญชี",
+        "areUsing": "คุณกำลังใช้ {{platform}} as",
+        "noLongerUsing": "คุณไม่ได้เชื่อมต่อกับ {{platform}} as . แล้ว",
+        "doAuth": "เข้าสู่ระบบด้วยบัญชีนี้",
+        "doSwitch": "เปลี่ยนไปใช้บัญชีนี้"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "เจ้าของ",
+        "Admin": "แอดมิน",
+        "Member": "สมาชิก",
+        "Guest": "แขก",
+        "Host": "เจ้าภาพ"
     }
 }

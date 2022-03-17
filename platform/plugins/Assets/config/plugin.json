@@ -128,6 +128,15 @@
 				"defaults": {
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
+			},
+			"Assets/NFT/pointer": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "NFT Pointer",
+					"icon": "Streams/file"
+				}
 			}
 		},
 		"onInsert": {

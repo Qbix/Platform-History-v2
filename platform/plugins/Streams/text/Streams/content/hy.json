@@ -1,124 +1,124 @@
 {
     "preview": {
-        "NewItemTitle": "Նոր նյութեր"
+        "NewItemTitle": "Նոր Նյութ"
     },
     "labels": {
-        "Streams\/invited": "Մարդիկ հրավիրեցի",
-        "Streams\/invitedMe": "Ով է ինձ հրավիրել",
+        "Streams\/invited": "Մարդիկ, որոնց ես հրավիրել եմ",
+        "Streams\/invitedMe": "Ով ինձ հրավիրեց",
         "AreYouAgree": "Համաձա՞յն եք:",
-        "Yes": "Այո",
+        "Yes": "Այո՛",
         "No": "Ոչ",
         "DoYouAgree": "Համաձայն ես?"
     },
     "interests": {
-        "Filter": "Ինչ եք վայելում:",
-        "CanAdd": "Եթե դեռ չեք կարող գտնել այն, ինչ փնտրում եք, կարող եք ավելացնել նոր հետաքրքրություն ստորեւ:",
-        "TrySynonyms": "Չեմ տեսնում այն: Փորձեք որոշ հոմանիշներ:",
-        "AddUnderCategory": "Ավելացնել կատեգորիայի տակ ...",
+        "Filter": "Ի՞նչ հետաքրքրություններ ունեք:",
+        "CanAdd": "Եթե դեռ չեք կարողանում գտնել այն, ինչ փնտրում եք, կարող եք ավելացնել նոր հետաքրքրություն ստորև.",
+        "TrySynonyms": "Չե՞ք տեսնում: Փորձեք որոշ հոմանիշներ:",
+        "AddUnderCategory": "Ավելացնել կատեգորիայի տակ...",
         "Other": "Այլ",
-        "Unlisted": "Լիցենզավորված չէ"
+        "Unlisted": "Չգրանցված"
     },
     "chat": {
-        "flaggedForAdminReview": "Հաղորդագրությունը դրված է admin- ի վերանայման համար: Հպեք կրկին անփայլ:",
+        "flaggedForAdminReview": "Հաղորդագրությունը նշվել է ադմինիստրատորի վերանայման համար: Կրկին հպեք՝ դրոշն անջատելու համար:",
         "noOneSaid": "Ոչ ոք ոչինչ չի ասել",
-        "closeChatButton": "Զրույցը զրուցելիս",
-        "closeChatConfirmTitle": "Զրույցը փակել:",
-        "closeChatConfirm": "Վստահ եք, որ ցանկանում եք փակել այս զրույցը:",
-        "closeChatConfirmYes": "Այո",
+        "closeChatButton": "Փակել զրույցը",
+        "closeChatConfirmTitle": "Փակե՞լ այս զրույցը",
+        "closeChatConfirm": "Իսկապե՞ս ուզում եք փակել այս զրույցը:",
+        "closeChatConfirmYes": "Այո՛",
         "closeChatConfirmNo": "Ոչ",
         "earlierComments": "ավելի վաղ մեկնաբանություններ",
-        "Subscribed": "Անլռելի ծանուցումներ",
-        "Unsubscribed": "Ստանալ ծանուցումներ",
+        "Subscribed": "Ծանուցումները միացված են",
+        "Unsubscribed": "Ծանուցումներն անջատված են",
         "notAllowedToJoinCall": "Դուք չունեք հաղորդագրություն փակցնելու միանալու թույլտվություն:",
-        "startedConversation": "զրույց սկսեց",
+        "startedConversation": "խոսակցություն սկսեց",
         "RealTimeCall": "Իրական ժամանակի զանգ",
-        "SearchByName": "Որոնել անունով",
+        "SearchByName": "Որոնել ըստ անունով",
         "Notifications": {
-            "Visit": "99 99 999}}-ը այցելում է զրույցը",
-            "Join": "{99 999}} -ը միացավ զրույցին",
-            "Leave": "{99 999}} -ը թողեց զրույցը",
-            "RelatedTo": "99 {999}} -ը սկսեց {{stream.displayType}}"
+            "Visit": "{{displayName}} այցելում է զրույց",
+            "Join": "{{displayName}} միացել է զրույցին",
+            "Leave": "{{displayName}} լքեց զրույցը",
+            "RelatedTo": "{{displayName}} սկսել է {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Հաղորդագրություն {{& message.fields.type}} - ից {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ասել է.",
-        "Streams\/changed": "{{stream.fields.title}} էջում փոփոխություններ են կատարվել",
-        "Streams\/invite": "Դուք հրավիրված եք {{& stream.fields.title}}",
-        "Streams\/announcement": "Հայտարարություն {{& streams.fields.title}} - ում",
-        "Streams\/access": "{{999} }- ը փոխեց հոսքի հասանելիությունը",
-        "Streams\/chat\/edit": "Խմբագրված հաղորդագրությունը խմբագրվել է",
-        "Streams\/chat\/remove": "Զրուցարան հաղորդագրություն հեռացվեց",
-        "Streams\/closed": "{{stream.fields.title}} - ը փակվել է",
-        "Streams\/task\/progress": "{{stream.fields.title}} - ում կատարված առաջընթաց",
-        "Streams\/task\/complete": "Առաջադրանքն ավարտվեց `{{stream.fields.title}}",
-        "Streams\/task\/error": "{{stream.fields.title}} - ի սխալ ժամանակ",
-        "Streams\/incoming\/*": "{{app}}: Մուտքային հաղորդագրություն",
-        "Streams\/relatedTo\/Streams\/call": "Նոր զանգը սկսվեց 99 99 999}} – ում",
-        "Streams\/relatedTo\/*": "Նոր {99 999}} in {{1000}",
-        "Streams\/relatedFrom\/*": "Ավելացված է {{toTitle}} -ի որպես {{relationDisplayType}} -ի",
-        "Streams\/mention": "99 99 999} you -ը ձեզ նշել է մեկնաբանության մեջ",
-        "Streams\/call": "99 99 999}} -ը իրական ժամանակում զանգ է սկսել",
-        "ManageEmailSubscriptions": "կառավարեք ձեր էլփոստի բաժանորդագրությունները",
-        "IfUnsubscribe": "Եթե ուզում եք բաժանորդագրվել"
+        "*": "Հաղորդագրություն {{& message.fields.type}}-ին {{& stream.fields.title}}-ին",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ասաց՝ {{& message.content}}",
+        "Streams\/changed": "Փոփոխություններ {{stream.fields.title}}-ում",
+        "Streams\/invite": "Դուք հրավիրվել եք {{& stream.fields.title}}",
+        "Streams\/announcement": "Հայտարարություն {{& stream.fields.title}}-ում",
+        "Streams\/access": "{{&call 'avatar.displayName'}} փոխել է մուտքը {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Զրույցի հաղորդագրությունը խմբագրվել է {{& stream.fields.title}}-ում",
+        "Streams\/chat\/remove": "Զրույցի հաղորդագրությունը հեռացվել է {{& stream.fields.title}}-ում",
+        "Streams\/closed": "{{stream.fields.title}} փակվել է",
+        "Streams\/task\/progress": "Առաջընթաց է գրանցվել {{stream.fields.title}}",
+        "Streams\/task\/complete": "Առաջադրանքն ավարտված է՝ {{stream.fields.title}}",
+        "Streams\/task\/error": "Սխալ՝ {{stream.fields.title}} ընթացքում",
+        "Streams\/incoming\/*": "{{app}}. մուտքային հաղորդագրություն",
+        "Streams\/relatedTo\/Streams\/call": "Նոր զանգը սկսվել է {{toTitle}}-ին",
+        "Streams\/relatedTo\/*": "Նոր {{relationDisplayType}} {{toTitle}}-ում",
+        "Streams\/relatedFrom\/*": "Ավելացվել է {{toTitle}} որպես {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} նշել է ձեզ մեկնաբանությունում",
+        "Streams\/call": "{{displayName}}-ը իրական ժամանակի զանգ է սկսել",
+        "ManageEmailSubscriptions": "կառավարել ձեր էլփոստի բաժանորդագրությունները",
+        "IfUnsubscribe": "Եթե ցանկանում եք չեղարկել բաժանորդագրությունը"
     },
     "invite": {
-        "messageContent": "{{displayName}} հրավիրեց ձեզ {{inviteUrl}}",
+        "messageContent": "{{displayName}} հրավիրել է ձեզ {{inviteUrl}}",
         "dialog": {
             "chooseFromContacts": "Ընտրեք ձեր կոնտակտներից",
-            "chooseAgainFromContacts": "Ընտրեք կրկին կոնտակտներից",
-            "inviteSelectedContacts": "Հրավիրեք ընտրված կոնտակտներ",
-            "selectFromContacts": "Ընտրեք կոնտակտներից",
+            "chooseAgainFromContacts": "Ընտրեք Կրկին Կոնտակտներից",
+            "inviteSelectedContacts": "Հրավիրեք ընտրված կոնտակտներին",
+            "selectFromContacts": "Ընտրեք Կոնտակտներից",
             "photo": "Լուսանկարել",
-            "photoInstruction": "Եթե ձեր QR- կոդը սկանավորողը ձեր առջեւ է, ապա նրանց լուսանկարը",
-            "to": "{{Stream Title}}",
-            "go": "Գնացեք",
-            "title": "Հրավիրեք",
+            "photoInstruction": "Եթե ձեր QR կոդը սկանավորած անձը ձեր առջև է, լուսանկարեք նրան",
+            "to": "Դեպի՝ {{Stream Title}}",
+            "go": "Գնա",
+            "title": "Հրավիրել",
             "placeholder": "Բջջային համարը կամ էլփոստի հասցեն",
-            "orInvite": "Կամ հրավիրեք մարդկանց, օգտագործելով `",
-            "QR": "{{ClickOrTap}}, QR կոդը ստեղծելու համար",
-            "QRtitle": "Scan այս QR կոդը",
-            "QRscanned": "Նրանք սկանեցին այն:",
-            "byEmail": "Email",
-            "byText": "Տեքստը",
-            "byFacebook": "Facebook- ը",
-            "byTwitter": "Twitter- ը",
-            "scannedQR": "99 99 999}} եթե կոդը սկանավորվել է",
-            "copyLink": "Invite 99 999} հրավեր հղումը պատճենելու համար",
-            "userChooserPlaceholder": "Որոնել անունով",
+            "orInvite": "Կամ հրավիրեք մարդկանց՝ օգտագործելով՝",
+            "QR": "{{ClickOrTap}} QR կոդ ստեղծելու համար",
+            "QRtitle": "Սկանավորեք այս QR կոդը",
+            "QRscanned": "Նրանք սկանավորեցին այն:",
+            "byEmail": "Էլ",
+            "byText": "Տեքստ",
+            "byFacebook": "Ֆեյսբուք",
+            "byTwitter": "Twitter",
+            "scannedQR": "{{ClickOrTap}} եթե կոդը սկանավորվել է",
+            "copyLink": "{{ClickOrTap}} հրավիրելու հղումը պատճենելու համար",
+            "userChooserPlaceholder": "Որոնել ըստ անունով",
             "shareOrCopyLink": "{{ClickOrTap}} հրավերի հղումը համօգտագործելու կամ պատճենելու համար"
         },
         "email": {
-            "subject": "Hey, ստուգեք սա",
-            "PleaseVisitLink": "Խնդրում ենք այցելել հետեւյալ հղումը.",
-            "InvitingYou": "Ես հրավիրում եմ ձեզ {{title}}",
+            "subject": "Հեյ, ստուգիր սա",
+            "PleaseVisitLink": "Խնդրում ենք այցելել հետևյալ հղումը.",
+            "InvitingYou": "Ես ձեզ հրավիրում եմ {{title}}",
             "HasInvitedYou": "{{displayName}} հրավիրել է ձեզ {{title}}",
-            "HasMentionedYou": "99 {999}} -ը ձեզ նշել է «{{title}}» –ում",
-            "YOUAREINVITED": "Դուք հրավիրված եք:",
-            "AcceptInvite": "Ընդունեք հրավիրել"
+            "HasMentionedYou": "{{displayName}}-ը նշել է ձեզ «{1000}}»-ում",
+            "YOUAREINVITED": "ԴՈՒ ՀՐԱՎԻՐՎԱԾ ԵՔ։",
+            "AcceptInvite": "Ընդունել հրավերը"
         },
         "sms": {
-            "content": "Դուք հրավիրվել եք {{title}}: Խնդրում ենք `{{url}}"
+            "content": "Դուք հրավիրվել եք {{title}}: Խնդրում ենք սեղմել {{url}}"
         },
         "notice": {
-            "text": "Դուք հրավիրվել եք: {{ClickOrTap}} այստեղ ընդունելու եւ միանալու համար:"
+            "text": "Ձեզ հրավիրել են։ {{ClickOrTap}} այստեղ ընդունելու և միանալու համար:"
         },
         "command": "Հրավիրել",
-        "youCanNowPaste": "Այժմ կարող եք տեղադրել այս հղումը ինչ-որ տեղ `մարդկանց հրավիրելու համար"
+        "youCanNowPaste": "Այժմ կարող եք տեղադրել այս հղումը ինչ-որ տեղ՝ մարդկանց հրավիրելու համար"
     },
     "followup": {
         "mobile": {
-            "alert": "Հրավիրատոմսերը ուղարկվում են մեր թվից, որոնք ձեր ընկերները դեռեւս չեն ճանաչում: Հետեւեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
-            "confirm": "Հրավիրատոմսերը ուղարկվում են մեր թվից, որոնք ձեր ընկերները դեռեւս չեն ճանաչում: Ցանկանում եք հետեւել արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
-            "check": "Hey, ես պարզապես հրավիրել եմ {{app}} հավելված: Խնդրում ենք ստուգել ձեր sms եւ սեղմեք հղումը:",
-            "CheckYourMobile": "Ստուգեք SMS- ը և հետևեք հրահանգներին:"
+            "alert": "Մեր համարից ուղարկվում են հրավերներ, որոնք ձեր ընկերները դեռ չեն ճանաչում: Հետևեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերը ձեզանից է, խնդրելով սեղմել հղումը:",
+            "confirm": "Մեր համարից ուղարկվում են հրավերներ, որոնք ձեր ընկերները դեռ չեն ճանաչում: Ցանկանու՞մ եք հետևել արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերը ձեզանից է, խնդրելով սեղմել հղման վրա:",
+            "check": "Ողջույն, ես հենց նոր ձեզ հրավեր ուղարկեցի դեպի {{app}} հավելված: Խնդրում ենք ստուգել ձեր sms-ը և սեղմել հղումը:",
+            "CheckYourMobile": "Խնդրում ենք ստուգել SMS-ը և հետևել հրահանգներին:"
         },
         "email": {
-            "alert": "Հրավիրատոմսերը ուղարկվում են մեր տիրույթից, որը ձեր ընկերները դեռեւս չեն ճանաչում: Հետեւեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
-            "confirm": "Հրավիրատոմսերը ուղարկվում են մեր տիրույթից, որը ձեր ընկերները դեռեւս չեն ճանաչում: Ցանկանում եք հետեւել արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերն եկել է ձեզանից, խնդրելով սեղմել հղումը:",
-            "subject": "Դուք հրավիրել եք:",
-            "body": "Hey, ես պարզապես հրավիրել եմ {{app}} հավելված: Խնդրում ենք ստուգել ձեր էլ.փոստը եւ սեղմեք հղումը:",
-            "CheckYourEmail": "Խնդրում ենք ստուգել ձեր էլ.փոստը և հետևեք հրահանգներին:"
+            "alert": "Հրավերներ են ուղարկվում մեր տիրույթից, որոնք ձեր ընկերները դեռ չեն ճանաչում: Հետևեք արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերը ձեզանից է, խնդրելով սեղմել հղումը:",
+            "confirm": "Հրավերներ են ուղարկվում մեր տիրույթից, որոնք ձեր ընկերները դեռ չեն ճանաչում: Ցանկանու՞մ եք հետևել արագ տեքստին, որպեսզի նրանք իմանան, որ հրավերը ձեզանից է, խնդրելով սեղմել հղման վրա:",
+            "subject": "Հրավեր ստացե՞լ եք։",
+            "body": "Ողջույն, ես հենց նոր ձեզ հրավեր ուղարկեցի դեպի {{app}} հավելված: Խնդրում ենք ստուգել ձեր էլ.փոստը և սեղմել այնտեղ գտնվող հղումը:",
+            "CheckYourEmail": "Խնդրում ենք ստուգել ձեր էլ.փոստը և հետևել հրահանգներին:"
         }
     },
     "webrtc": {
@@ -126,116 +126,116 @@
             "microphoneTitle": "Միացնել խոսափողը",
             "cameraTitle": "Միացնել տեսախցիկը",
             "cameraAndMicrophoneTitle": "Միացնել Camera եւ Microphone",
-            "dialogTitle": "Կապող",
+            "dialogTitle": "Միացում",
             "microphoneBtn": "Միացնել խոսափողը",
             "cameraBtn": "Միացնել տեսախցիկը",
             "cameraAndMicrophoneBtn": "Միացնել տեսախցիկը և խոսափողը"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Ցուցումներ",
-            "permissionDenied": "999 {Perm թույլտվությունը մերժվեց: Օգտագործելու համար խնդրում ենք հետևել հետևյալ քայլերին.",
-            "point1": "Գնացեք «Կարգավորումներ» -&gt; «Ընդլայնված» -&gt; «Գաղտնիություն և անվտանգություն» -&gt; «Կայքի կայանքներ» -&gt; «Տեսախցիկ» կամ «Կայքի պարամետրեր» -&gt; «խոսափող»",
-            "point2": "Հեռացրեք Block {999}} «Բլոկ» ցուցակից"
+            "dialogTitle": "Հրահանգներ",
+            "permissionDenied": "{{kind}}-ի թույլտվությունը մերժված է: Այն օգտագործելու համար խնդրում ենք հետևել հետևյալ քայլերին.",
+            "point1": "Գնացեք «Կարգավորումներ» -&gt; «Ընդլայնված» -&gt; «Գաղտնիություն և անվտանգություն» -&gt; «Կայքի կարգավորումներ» -&gt; «Տեսախցիկ» կամ «Կայքի կարգավորումներ» -&gt; «Խոսափող»",
+            "point2": "Հեռացնել {{hostname}}-ը «Արգելափակման» ցանկից"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Ցուցումներ",
-            "permissionDenied": "999 {Perm թույլտվությունը մերժվեց: Խնդրում ենք վերաբեռնել այս էջը և հաստատել մուտքը {999}} ՝ գիտաժողովին միանալու համար:"
+            "dialogTitle": "Հրահանգներ",
+            "permissionDenied": "{{kind}}-ի թույլտվությունը մերժված է: Խնդրում ենք վերաբեռնել այս էջը և հաստատել մուտքը {{kind}}՝ համաժողովին միանալու համար:"
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Ցուցումներ",
-            "permissionDenied": "999 {Perm թույլտվությունը մերժվեց: Օգտագործելու համար խնդրում ենք հետևել հետևյալ քայլերին.",
-            "point1": "Անցեք ձեր Android կարգավորումները",
-            "point2": "Բացեք «Ծրագրեր և ծանուցումներ»",
+            "dialogTitle": "Հրահանգներ",
+            "permissionDenied": "{{kind}}-ի թույլտվությունը մերժված է: Այն օգտագործելու համար խնդրում ենք հետևել հետևյալ քայլերին.",
+            "point1": "Գնացեք ձեր Android-ի կարգավորումներ",
+            "point2": "Բացեք «Հավելվածներ և ծանուցումներ»",
             "point3": "Գտեք «{{communityName}}» և բացեք այն",
-            "point4": "Թակել Թույլտվությունների վրա",
-            "point5": "Միացնել {999}}"
+            "point4": "Կտտացրեք Թույլտվությունները",
+            "point5": "Միացնել {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Ցուցումներ",
-            "permissionDenied": "999 {Perm թույլտվությունը մերժվեց: Օգտագործելու համար խնդրում ենք հետևել հետևյալ քայլերին.",
-            "point1": "Գնացեք ձեր iOS կարգավորումները",
+            "dialogTitle": "Հրահանգներ",
+            "permissionDenied": "{{kind}}-ի թույլտվությունը մերժված է: Այն օգտագործելու համար խնդրում ենք հետևել հետևյալ քայլերին.",
+            "point1": "Գնացեք ձեր iOS-ի կարգավորումներ",
             "point2": "Բացեք «Գաղտնիություն»",
-            "point3": "Գտեք {99 999}} և բացեք այն",
+            "point3": "Գտեք {{kind}} և բացեք այն",
             "point4": "Գտեք «{{communityName}}» և միացրեք"
         },
         "notices": {
-            "youJoinedRoom": "Դուք միացաք սենյակ",
-            "joining": "Միանում է. {{userName}}",
-            "sbLeftRoom": "99 99 999}} դուրս եկավ սենյակից",
+            "youJoinedRoom": "Դուք միացաք սենյակին",
+            "joining": "Միացում՝ {{userName}}",
+            "sbLeftRoom": "{{userName}} դուրս եկավ սենյակից",
             "youLeftRoom": "Դու դուրս եկար սենյակից",
             "codeCopied": "Դու դուրս եկար սենյակից",
-            "sbBeganFbLive": "Call 99 999} }- ն սկսեց հեռարձակել այս զանգը Facebook- ում",
-            "sbStoppedFbLive": "Call 99 999}} -ը դադարեցրեց այս զանգի հեռարձակումը Facebook- ում",
-            "youBeganFbLive": "Դուք սկսեցիք հեռարձակել այս զանգը Ֆեյսբուքում",
-            "youStoppedFbLive": "Դու դադարեցրել ես այդ զանգի հեռարձակումը Facebook- ում",
-            "linkCopiedToCb": "ՈՒղեցույցը պատճենված է clipboard- ում",
-            "codeCopiedToCb": "Կոդը պատճենված է clipboard- ում",
-            "userHasNoVideo": "Մասնակիցը տեսանյութ չունի",
-            "openInBrowserAlert": "Կոնֆերանսին միանալու համար Safari զննարկիչում բացեք հղումը:",
-            "youBeganVideoRecording": "Դուք սկսեցիք ձայնագրել այս գիտաժողովը",
-            "youStoppedVideoRecording": "Դուք դադարեցիք ձայնագրել այս գիտաժողովը",
-            "switchingRoom": "Փոխարկիչ սենյակ ...",
-            "forceDisconnecting": "5 վայրկյանի ընթացքում ձեզ կապն անջատվի",
-            "youStartedLive": "Դուք սկսեցիք հեռարձակել այս զանգը սովորական RTMP- ով",
-            "youStoppedLive": "Դուք դադարեցրեցիք այս զանգի հեռարձակումը սովորական RTMP- ով",
-            "sbStartedLiveStreaming": "{{userName}} - ը սկսվեց ուղիղ եթերում",
-            "sbStoppedLiveStreaming": "{{userName}} -ն ավարտվեց ուղիղ եթերում",
-            "liveStopped": "Սխալ առաջացավ տեսանյութը վերջնակետին ուղարկելիս",
+            "sbBeganFbLive": "{{userName}} սկսեց հեռարձակել այս զանգը Facebook-ում",
+            "sbStoppedFbLive": "{{userName}} դադարեցրել է այս զանգի հեռարձակումը Facebook-ում",
+            "youBeganFbLive": "Դուք սկսեցիք հեռարձակել այս զանգը Facebook-ում",
+            "youStoppedFbLive": "Դուք դադարեցրել եք այս զանգի հեռարձակումը Facebook-ում",
+            "linkCopiedToCb": "Հղումը պատճենվեց սեղմատախտակին",
+            "codeCopiedToCb": "Կոդը պատճենվեց clipboard-ում",
+            "userHasNoVideo": "Մասնակիցը չունի տեսանյութ",
+            "openInBrowserAlert": "Բացեք հղումը Safari բրաուզերում՝ համաժողովին միանալու համար:",
+            "youBeganVideoRecording": "Դուք սկսեցիք ձայնագրել այս համաժողովը",
+            "youStoppedVideoRecording": "Դուք դադարեցրել եք այս համաժողովի ձայնագրումը",
+            "switchingRoom": "Փոխանակման սենյակ...",
+            "forceDisconnecting": "Դուք կանջատվեք 5 վայրկյանում",
+            "youStartedLive": "Դուք սկսեցիք հեռարձակել այս զանգը հատուկ RTMP-ով",
+            "youStoppedLive": "Դուք դադարեցրել եք այս զանգի հեռարձակումը հատուկ RTMP-ին",
+            "sbStartedLiveStreaming": "{{userName}} սկսել է ուղիղ եթերում",
+            "sbStoppedLiveStreaming": "{{userName}} ավարտվեց ուղիղ եթերում",
+            "liveStopped": "Սխալ է տեղի ունեցել տեսանյութը վերջնական կետ ուղարկելիս",
             "forceDisconnectingImmediately": "Ձեզ անջատել է տանտերը"
         },
         "settingsPopup": {
-            "webCamera": "Վեբ ֆոտոխցիկ",
+            "webCamera": "Վեբ տեսախցիկ",
             "screenSharing": "Էկրանի փոխանակում",
-            "shareAnotherScreen": "Համօգտագործեք մեկ այլ էկրան",
-            "turnOffCameras": "Անջատեք բոլոր տեսախցիկները",
-            "startFBLive": "Սկսեք Facebook- ի Livestream- ը",
-            "stopFBLive": "Դադարեցրեք Facebook- ի Livestream- ը",
-            "fbLiveTitle": "Կենդանի վերնագիր",
-            "fbLiveDescription": "Կենդանի նկարագրություն",
+            "shareAnotherScreen": "Կիսվեք մեկ այլ էկրանով",
+            "turnOffCameras": "Անջատեք տեսախցիկը",
+            "startFBLive": "Սկսեք Facebook Livestream-ը",
+            "stopFBLive": "Դադարեցրեք Facebook Livestream-ը",
+            "fbLiveTitle": "Livestream-ի անվանումը",
+            "fbLiveDescription": "Նկարագրեք ձեր Livestream-ը: Ինչի մասին է?",
             "fbOnlyMeLiveAccess": "Միայն ես",
             "fbFriendsAccess": "Ընկերներ",
             "fbPublicAccess": "Հանրային",
-            "fbStartLive": "Ապրիր կենդանի",
-            "fbStopLive": "Վերջ կենդանի",
+            "fbStartLive": "Անցեք ուղիղ եթերում",
+            "fbStopLive": "Ավարտեք Livestream-ը",
             "fbEmbedCode": "Տեղադրել",
             "copy": "Պատճենել",
-            "turnOffVideo": "Անջատեք խցիկի \/ էկրանի համօգտագործումը",
+            "turnOffVideo": "Անջատեք տեսախցիկի\/էկրանի համօգտագործումը",
             "turnOffScreenSharing": "Անջատեք էկրանի համօգտագործումը",
             "cameraIsTurnedOff": "Տեսախցիկը անջատված է",
-            "startRecording": "Սկսել ձայնագրումը",
-            "stopRecording": "Դադարեցրեք ձայնագրումը",
-            "recordingInProgress": "Ձայնագրումն ընթացքի մեջ է ...",
-            "publishOnTimeline": "Հրապարակել ժամանակացույցով",
-            "publishToGroup": "Հրապարակել խմբին",
+            "startRecording": "Սկսեք ձայնագրումը",
+            "stopRecording": "Դադարեցնել ձայնագրումը",
+            "recordingInProgress": "Ձայնագրումն ընթացքի մեջ է...",
+            "publishOnTimeline": "Հրապարակել ժամանակացույցում",
+            "publishToGroup": "Հրապարակել խմբում",
             "turnOffAudioInput": "Անջատել խոսափողը",
             "micIsTurnedOff": "Խոսափողն անջատված է",
             "start": "Սկսել",
             "stop": "Դադարեցրեք",
             "streamingSettings": "Կարգավորումներ",
-            "streamToRTMP": "Հոսք դեպի սովորական RTMP",
+            "streamToRTMP": "Հոսում դեպի հատուկ RTMP",
             "dialogTitle": "Տեսանյութի կարգավորումներ",
             "startBroadcasting": "Սկսեք հեռարձակումը",
             "broadcastingInProgress": "Հեռարձակումն ընթացքի մեջ է"
         },
         "participantsPopup": {
-            "disconnect": "Անջատեք",
+            "disconnect": "Անջատել",
             "floatingScreens": "Լողացող էկրաններ",
             "tiledScreens": "Սալիկապատ էկրաններ",
-            "loudestExceptMe": "Ինձանից բարձր ձայնով",
-            "maximizeLoudest": "Առավելագույնը բարձրացրեք",
-            "staticMaximized": "Ստատիկ առավելագույնը",
+            "loudestExceptMe": "Ինձնից բացի ամենաաղմկոտ",
+            "maximizeLoudest": "Առավելագույնի հասցնել ամենաբարձրը",
+            "staticMaximized": "Ստատիկ առավելագույնի հասցված",
             "manual": "Ձեռնարկ",
             "fullScreen": "Ամբողջ էկրանով",
             "turnOffCamera": "Թաքցնել տեսանյութը",
-            "turnOffAudio": "Կլոր աուդիո",
+            "turnOffAudio": "Անջատել ձայնը",
             "turnOffScreenSharing": "Թաքցնել էկրանի համօգտագործումը",
-            "turnOnCamera": "Showուցադրել տեսանյութը",
-            "turnOnAudio": "Լսեք ձայնագրությունը",
-            "turnOnScreenSharing": "Showուցադրել էկրանի համօգտագործումը",
+            "turnOnCamera": "Ցույց տալ տեսանյութը",
+            "turnOnAudio": "Միացնել ձայնը",
+            "turnOnScreenSharing": "Ցույց տալ էկրանի համօգտագործումը",
             "dialogTitle": "Մասնակիցների կարգավորումներ"
         },
         "notAllowedToJoinCall": "Դուք այս հոսքին միանալու թույլտվություն չունեք:",
-        "streamTitle": "99 99 999}} կենդանի զանգ",
+        "streamTitle": "{{1}}-ը ուղիղ զանգ է սկսել",
         "preview": {
             "preamble": "Հանդիպում",
             "Meeting": "Հանդիպում",
@@ -244,11 +244,11 @@
         "preparing": {
             "micIsOff": "Խոսափողն անջատված է",
             "micIsOn": "Խոսափողը միացված է",
-            "cameraIsOff": "Տեսախցիկն անջատված է",
+            "cameraIsOff": "Տեսախցիկը անջատված է",
             "cameraIsOn": "Տեսախցիկը միացված է",
-            "screenSharingIsOn": "Էկրանների փոխանակումը միացված է",
-            "screenSharingIsOff": "Կիսել էկրանը",
-            "joinNow": "Միացեք Callանգին"
+            "screenSharingIsOn": "Էկրանի համօգտագործումը միացված է",
+            "screenSharingIsOff": "Համօգտագործել էկրանը",
+            "joinNow": "Միացե՛ք Զանգին"
         },
         "audioSettings": {
             "dialogTitle": "Աուդիո կարգավորումներ",
@@ -261,31 +261,31 @@
     },
     "messages": {
         "html": {
-            "posted": "փակցված է <em>99 99 999}}<\/em> հաղորդագրությամբ {{1000}"
+            "posted": "փակցրել է <em>{{message.fields.type}}<\/em> հաղորդագրություն {{stream.fields.title}} հասցեին"
         },
         "text": {
-            "commentedOn": "մեկնաբանեց",
-            "in": "ներս",
-            "body": "in {{& url}}: {{1000}",
+            "commentedOn": "մեկնաբանել է",
+            "in": "մեջ",
+            "body": "{{& url}}-ում՝ {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "փակցված է",
-                "byAvatar": "ըստ {99 999}}"
+                "hasBeenPostedTo": "տեղադրվել է",
+                "byAvatar": "կողմից {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ունի նոր 99 999}}",
-                "byAvatar": "ավելացրել է 99 {999}} -ի կողմից"
+                "hasANew": "ունի նոր {{instructions.fromDisplayType}}",
+                "byAvatar": "ավելացրել է {{avatar.displayName}}"
             },
-            "startedCallIn": "զանգ է սկսել"
+            "startedCallIn": "զանգ սկսեց"
         }
     },
     "types": {
         "Streams\/invited": {
             "displayType": "Հրավիրված",
-            "description": "Ներարկղ `հրավիրատոմսերի համար"
+            "description": "Հրավերների արկղ"
         },
         "Streams\/resource": {
             "displayType": "Ռեսուրս",
-            "description": "հոսք ռեսուրս մուտքի կառավարման և թարմացումների վերաբերյալ հաղորդագրություններ փակցնելու համար"
+            "description": "հոսք՝ ռեսուրսի հասանելիությունը կառավարելու և թարմացումների մասին հաղորդագրություններ փակցնելու համար"
         },
         "Streams\/task": {
             "description": "որոշակի առաջադրանքի առաջընթացի մասին թարմացումներ ստանալու համար",
@@ -296,16 +296,16 @@
             "displayType": "Առաջադրանքներ"
         },
         "Streams\/experience": {
-            "description": "համայնքի փորձի համար ընդհանուր փորձ",
-            "displayType": "Համայնքի անդամների համար ընդհանուր փորձ"
+            "description": "ընդհանուր փորձ համայնքի անդամների համար",
+            "displayType": "Ընդհանուր փորձ համայնքի անդամների համար"
         },
         "Streams\/greeting": {
-            "description": "ողջույն, որի միջոցով օգտագործողը կարող է ներկայացնել իրենց",
+            "description": "ողջույն, որով օգտատերը կարող է ներկայանալ",
             "displayType": "Ողջույն"
         },
         "Streams\/number": {
             "displayType": "Թիվ",
-            "description": "մաթեմատիկական համարը"
+            "description": "մաթեմատիկական թիվ"
         },
         "Streams\/date": {
             "displayType": "Ամսաթիվ",
@@ -313,15 +313,15 @@
         },
         "Streams\/text": {
             "displayType": "Տեքստ",
-            "description": "տեքստի մարմինը"
+            "description": "տեքստի մարմին"
         },
         "Streams\/text\/small": {
             "displayType": "Տեքստ",
-            "description": "տեքստի փոքր մարմին"
+            "description": "տեքստի փոքր մասը"
         },
         "Streams\/text\/medium": {
             "displayType": "Տեքստ",
-            "description": "տեքստի միջին մարմին"
+            "description": "տեքստի միջին մասը"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "Էլեկտրոնային հասցե",
@@ -345,16 +345,16 @@
             "description": "պատկերների պատկերասրահ"
         },
         "Streams\/album": {
-            "displayType": "Ալբոմը",
-            "description": "ալբոմ, որի հետ կապված են տարբեր լրատվամիջոցներ"
+            "displayType": "Ալբոմ",
+            "description": "ալբոմ, որին առնչվում են տարբեր լրատվամիջոցներ"
         },
         "Streams\/file": {
             "displayType": "Ֆայլ",
-            "description": "վերբեռնված ֆայլ",
-            "newItem": "Ավելացնել ֆայլ"
+            "description": "բեռնված ֆայլը",
+            "newItem": "Ավելացնել Ֆայլ"
         },
         "Streams\/audio": {
-            "displayType": "Ձայնային տեսահոլովակ",
+            "displayType": "Աուդիո հոլովակ",
             "description": "աուդիո հոլովակ",
             "newItem": "Ավելացնել աուդիո"
         },
@@ -368,28 +368,28 @@
             "description": "կենդանի աուդիո կամ վիդեո"
         },
         "Streams\/category": {
-            "displayType": "Կատեգորիա",
+            "displayType": "Կարգավիճակ",
             "description": "կատեգորիա, որի հետ կարող են կապված լինել այլ հոսքեր"
         },
         "Streams\/participating": {
-            "displayType": "Մասնակցության ցուցիչ",
-            "description": "հոսքերը կապված են դրա հետ \/ կապ չունեն, երբ օգտագործողը միանում է \/ հեռանում է"
+            "displayType": "Մասնակից ինդեքս",
+            "description": "հոսքերը կապված են\/կապված չեն դրա հետ, երբ օգտատերը միանում է\/հեռանում է"
         },
         "Streams\/interest": {
             "displayType": "Հետաքրքրություն",
-            "description": "ներկայացնում է օգտագործողի հետաքրքրությունը որոշակի թեմայի վերաբերյալ"
+            "description": "ներկայացնում է օգտատիրոջ հետաքրքրությունը որոշակի թեմայի նկատմամբ"
         },
         "Streams\/incoming": {
-            "displayType": "Ներգնա",
-            "description": "այլ օգտվողների կողմից ուղարկված հաղորդագրությունների նպատակակետը"
+            "displayType": "Մուտքային",
+            "description": "այլ օգտվողների կողմից ուղարկված հաղորդագրությունների նպատակակետ"
         },
         "Streams\/chat": {
-            "displayType": "Խոսակցություն",
-            "description": "խոսակցություն օգտվողների միջև ՝ պատմության հետ"
+            "displayType": "Զրույց",
+            "description": "խոսակցություն օգտվողների միջև, պատմության հետ"
         },
         "Streams\/webrtc": {
             "displayType": "Իրական ժամանակի զանգ",
-            "description": "իրական ժամանակի վիդեո \/ աուդիո զանգ"
+            "description": "իրական ժամանակի տեսա\/աուդիո զանգ"
         },
         "Streams\/pdf": {
             "displayType": "PDF փաստաթուղթ",
@@ -398,141 +398,141 @@
         },
         "Streams\/question": {
             "displayType": "Հարց",
-            "description": "հարցի հոսք"
+            "description": "հարցերի հոսք"
         },
         "Streams\/answer": {
             "displayType": "Պատասխանել",
-            "description": "պատասխան հոսք"
+            "description": "պատասխանների հոսք"
         },
         "Streams\/calls": {
             "displayType": "Զանգեր",
-            "description": "Streams\/webrtc կատեգորիա",
-            "MaxRelationsExceeded": "Առավելագույն զանգերը գերազանցված են"
+            "description": "կատեգորիա Streams\/webrtc-ի համար",
+            "MaxRelationsExceeded": "Զանգերի առավելագույն քանակը գերազանցվել է"
         }
     },
     "participating": {
         "Title": "Կոչում",
-        "Subscribed": "Բաժանորդագրված",
-        "Participants": "Մասնակիցները",
-        "AreYouSureRemoveIdentifier": "Համոզվա՞ծ եք հեռացնել այս նույնացուցիչը:",
-        "AreYouSureUnsubscribeIdentifier": "Համոզվա՞ծ եք, որ բաժանորդագրվում եք այս նույնացուցիչին: Դա անջատելու է այս նույնացուցիչին վերաբերող ծանուցումները:",
-        "AreYouSureUnsubscribeDevice": "Համոզվա՞ծ եք, որ բաժանորդագրվում եք այս սարքին: Դա անջատելու է ծանուցումները այս սարքին:",
-        "Identifiers": "Նույնականացուցիչներ",
+        "Subscribed": "Բաժանորդագրված է",
+        "Participants": "Մասնակիցներ",
+        "AreYouSureRemoveIdentifier": "Վստա՞հ եք հեռացնել այս նույնացուցիչը:",
+        "AreYouSureUnsubscribeIdentifier": "Վստա՞հ եք, որ չեղարկեք այս նույնացուցիչի բաժանորդագրությունը: Այն կանջատի այս նույնացուցիչի ծանուցումները:",
+        "AreYouSureUnsubscribeDevice": "Իսկապե՞ս չեղարկե՞լ այս սարքի բաժանորդագրությունը: Այն կանջատի այս սարքի ծանուցումները:",
+        "Identifiers": "Նույնացուցիչներ",
         "Devices": "Սարքեր",
         "Streams": "Հոսքեր",
-        "AreYouSureRemoveParticipant": "Համոզվա՞ծ եք, որ ցանկանում եք հեռացնել այս մասնակիցին:",
-        "RemoveParticipant": "Հեռացրեք մասնակիցը"
+        "AreYouSureRemoveParticipant": "Իսկապե՞ս ուզում եք հեռացնել այս մասնակցին:",
+        "RemoveParticipant": "Հեռացնել մասնակցին"
     },
     "menu": {
-        "placeholder": "մուտքագրեք էջի վերնագիր",
+        "placeholder": "մուտքագրեք էջի վերնագիրը",
         "ModTab": "Փոփոխել նյութը",
-        "Save": "Խնայել",
-        "Delete": "Նջել",
-        "Submenu": "Ենթա"
+        "Save": "Պահպանել",
+        "Delete": "Ջնջել",
+        "Submenu": "Ենթամենյու"
     },
     "errors": {
-        "HiddenFromYou": "Այս բովանդակությունը թաքնված է ձեզանից:"
+        "HiddenFromYou": "Այս բովանդակությունը թաքցված է ձեզանից:"
     },
     "audio": {
         "record": "Գրառում",
         "reset": "Վերականգնել",
         "edit": "Խմբագրել",
         "title": "կոչում",
-        "description": "նկարագրություն",
+        "description": "նկարագրությունը",
         "upload": "Վերբեռնել",
         "link": "Հղում",
-        "setUrl": "Սահմանեք URL",
-        "save": "Խնայել",
-        "setClip": "Կտրել տեսահոլովակը",
+        "setUrl": "Սահմանել URL",
+        "save": "Պահպանել",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Անվավեր URL",
         "invalidFile": "Անվավեր ֆայլ",
         "errorNoSource": "Աուդիո աղբյուր չկա",
-        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
-        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+        "uploadLimit": "Ֆայլի առավելագույն չափը՝ {{size}}",
+        "errorFileSize": "Ներողություն, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
     },
     "video": {
         "reset": "Վերականգնել",
         "edit": "Խմբագրել",
         "title": "կոչում",
-        "description": "նկարագրություն",
+        "description": "նկարագրությունը",
         "upload": "Վերբեռնել",
         "link": "Հղում",
-        "setUrl": "Սահմանեք URL",
-        "save": "Խնայել",
-        "setClip": "Կտրել տեսահոլովակը",
+        "setUrl": "Սահմանել URL",
+        "save": "Պահպանել",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Անվավեր URL",
         "invalidFile": "Անվավեր ֆայլ",
         "errorNoSource": "Տեսանյութի աղբյուր չկա",
-        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
-        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+        "uploadLimit": "Ֆայլի առավելագույն չափը՝ {{size}}",
+        "errorFileSize": "Ներողություն, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
     },
     "pdf": {
         "reset": "Վերականգնել",
         "edit": "Խմբագրել",
         "title": "կոչում",
-        "description": "նկարագրություն",
+        "description": "նկարագրությունը",
         "upload": "Վերբեռնել",
         "link": "Հղում",
-        "setUrl": "Սահմանեք URL",
-        "save": "Խնայել",
-        "setClip": "Կտրել տեսահոլովակը",
+        "setUrl": "Սահմանել URL",
+        "save": "Պահպանել",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Անվավեր URL",
         "invalidFile": "Անվավեր ֆայլ",
-        "errorNoSource": "Ոչ մի pdf աղբյուր",
-        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
-        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
+        "errorNoSource": "pdf աղբյուր չկա",
+        "uploadLimit": "Ֆայլի առավելագույն չափը՝ {{size}}",
+        "errorFileSize": "Ներողություն, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է"
     },
     "image": {
         "reset": "Վերականգնել",
         "edit": "Խմբագրել",
         "title": "կոչում",
-        "description": "նկարագրություն",
+        "description": "նկարագրությունը",
         "upload": "Վերբեռնել",
         "link": "Հղում",
-        "setUrl": "Սահմանեք URL",
-        "save": "Խնայել",
-        "setClip": "Կտրել տեսահոլովակը",
+        "setUrl": "Սահմանել URL",
+        "save": "Պահպանել",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Անվավեր URL",
         "invalidFile": "Անվավեր ֆայլ",
         "errorNoSource": "Պատկերի աղբյուր չկա",
-        "uploadLimit": "Ֆայլի առավելագույն չափը ՝ {{size}}",
-        "errorFileSize": "Ներեցեք, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է",
+        "uploadLimit": "Ֆայլի առավելագույն չափը՝ {{size}}",
+        "errorFileSize": "Ներողություն, բայց ֆայլը չափազանց մեծ է:<br> Ֆայլի առավելագույն չափը {{size}} է",
         "uploadedImage": "Վերբեռնված պատկեր",
-        "imageTitle": "Պատկերի վերնագիրը"
+        "imageTitle": "Պատկերի վերնագիր"
     },
     "questions": {
         "Questions": "Հարցեր",
         "Answers": "Պատասխանները",
         "AnswerQuestion": "Պատասխանել հարցին",
         "SetYourAnswer": "Խնդրում եմ պատասխանել հարցին",
-        "NewQuestion": "Նոր հարց",
-        "NewAnswer": "Նոր պատասխան",
-        "AnswerDetails": "Պատասխանի մանրամասները",
+        "NewQuestion": "Նոր Հարց",
+        "NewAnswer": "Նոր Պատասխան",
+        "AnswerDetails": "Պատասխան Մանրամասներ",
         "answerOption": "Տարբերակ",
         "answerOptionExclusive": "Բացառիկ",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "անվճար պատասխան ...",
-        "SaveQuestion": "Հարցը պահպանել",
-        "SaveAnswer": "Պահպանեք պատասխանը",
-        "AddAnotherAnswer": "Ավելացրեք մեկ այլ պատասխան",
-        "ErrorAnswers": "Խնդրում եմ ավելացնել նույնիսկ մեկ պատասխան",
-        "AlreadyAnswered": "Արդեն պատասխանեց",
+        "FreeAnswer": "Ձեր պատասխանը գրեք այստեղ",
+        "SaveQuestion": "Պահպանել հարցը",
+        "SaveAnswer": "Պահպանել պատասխանը",
+        "AddAnotherAnswer": "Ավելացնել ևս մեկ պատասխան",
+        "ErrorAnswers": "Խնդրում եմ ավելացնել թեկուզ մեկ պատասխան",
+        "AlreadyAnswered": "Արդեն պատասխանել է",
         "TitlePlaceholder": "Մուտքագրեք ձեր հարցը",
-        "ContentPlaceholder": "Տեղադրեք այստեղ ցանկացած լրացուցիչ տեղեկություն ՝ մարդկանց օգնելու համար",
+        "ContentPlaceholder": "Տեղադրեք ցանկացած հավելյալ տեղեկատվություն այստեղ՝ օգնելու մարդկանց պատասխանել",
         "ErrorTitle": "Հարց է պահանջվում",
         "Placeholder": "Տեղապահ"
     },
     "experience": {
         "NewExperience": "Նոր փորձ",
-        "DefineTitle": "Խնդրում ենք վերնագիր սահմանել",
+        "DefineTitle": "Խնդրում եմ վերնագիր սահմանեք",
         "Create": "Ստեղծել"
     },
     "calls": {
         "SettingsTitle": "Զանգեր",
-        "MaxCalls": "Մաքսը զանգում է",
+        "MaxCalls": "Զանգում է Մաքսը",
         "Update": "Թարմացնել",
-        "NoCallsYet": "Դեռ զանգեր չկան",
-        "CallReasonTitle": "Ինչի՞ մասին է այս կոչը:",
+        "NoCallsYet": "Զանգեր դեռ չկան",
+        "CallReasonTitle": "Ինչի՞ մասին է այս զանգը։",
         "WaitingRoom": "Սպասասրահ"
     }
 }

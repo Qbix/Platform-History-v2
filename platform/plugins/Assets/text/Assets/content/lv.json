@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Pieskarieties, lai maksātu"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: maksa apstrādāta par {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Paldies par maksājumu adresātam {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonēja {{plan.title}}",
+        "YouSubscribedTo": "Jūs esat abonējis {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Jūs saņemat maksājumu {{displayAmount}} apmērā no {{call 'publisher.displayName'}} no &quot;{{description}}&quot;",
+        "HasBeenCharged": "Sveiki! Vēlamies jūs informēt, ka {{1}} ir iekasējis maksu {{2}} par {{3}}, ko veicis {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Paldies par maksājumu par &quot;{{description}}&quot;",
+        "HavePaid": "Sveiki, {{1}}! Šis ir tikai īss apstiprinājums, ka esat veiksmīgi samaksājis {{2}} adresātam {{3}} par {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Informācija par pasūtījumu",
+        "PaymentMethod": "Apmaksas veids",
+        "ContactInfo": "Kontaktinformācija",
+        "Pay": "Maksājiet"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Uzaicinājumu pieņēma {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} ievadīja vārdu",
+        "Streams_user_lastname": "{{invitedUserName}} ievadīja uzvārdu",
+        "Streams_user_icon": "{{invitedUserName}} ievadīta ikona",
+        "Places_user_location": "{{invitedUserName}} ievadīja atrašanās vietu",
+        "Streams_greeting": "{{invitedUserName}} ievadīja sveicienu",
+        "YouHaveCreditsToStart": "Jums ir {{amount}} kredīti, lai sāktu",
+        "PaymentFor": "Maksājums par &quot;{{1}}&quot;",
+        "PaymentTo": "Maksājums uz {{1}}",
+        "PaymentToUser": "Maksājums uz {{toUserName}}",
+        "CreatePaidStream": "lai izveidotu {{toStreamName}}",
+        "JoinedPaidStream": "rezervācijai &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "kopienas &quot;{{communityId}}&quot; izveidei",
+        "LeftPaidStream": "kā rezervācijas atmaksa pakalpojumā <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>",
+        "BoughtCredits": "Nopirka {{amount}} kredītus",
+        "BonusCredits": "Bonusa kredīti: {{amount}}",
+        "BuyAmountCredits": "Pērciet {{amount}} kredītu",
+        "WatchClip": "Nopelnīti {{amount}} kredītpunkti, skatoties {{fromStreamTitle}}",
+        "MissingCredits": "Trūkst kredītu",
+        "YouMissingCredits": "Lai turpinātu, jums ir nepieciešams papildu {{amount}} kredīts.",
+        "BuyCredits": "Pirkt kredītus",
+        "BuyBonus": "Iegādājoties {{amount}} kredītu uzreiz, jūs saņemsiet {{bonus}} kredītu bonusu.",
+        "Buy": "Pirkt",
+        "PurchaseCredits": "Pirkuma kredīti",
+        "Credits": "Kredīti",
+        "ErrorInvalidAmount": "Summa nav derīga",
+        "ErrorInvalidCurrency": "Diemžēl mēs vēl neatbalstām valūtu {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} kredīti",
+            "BonusCredits": "{{amount}} kredīti"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Datums",
+        "Amount": "Summa",
+        "Description": "Apraksts",
+        "Client": "Klients",
+        "To": "uz",
+        "From": "no",
+        "SeeHistory": "Skatīt maksājumu vēsturi par {{1}}",
+        "HistoryEmpty": "Jums vēl nav datu",
+        "PaymentFor": "Nosūtīts {{amount}} kredīts",
+        "PaymentTo": "Nosūtīts {{amount}} kredīts",
+        "PaymentToUser": "Nosūtīts {{amount}} kredīts",
+        "CreatePaidStream": "Iztērēti {{amount}} kredīti",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Nopelnīti {{amount}} kredīti",
+            "-": "Iztērēti {{amount}} kredīti"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Nopelnīti {{amount}} kredīti",
+            "-": "Iztērēti {{amount}} kredīti"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Saņemti {{amount}} kredīti",
+            "-": "Nosūtīts {{amount}} kredīts"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Iztērēti {{amount}} kredīti",
+        "BoughtCredits": "Nopirka {{amount}} kredītus",
+        "BonusCredits": "Saņēma bonusa {{amount}} kredītus",
+        "InviteAcceptedBy": "Nopelnīti {{amount}} kredīti",
+        "Streams_user_firstname": "Nopelnīti {{amount}} kredīti",
+        "Streams_user_lastname": "Nopelnīti {{amount}} kredīti",
+        "Streams_user_icon": "Nopelnīti {{amount}} kredīti",
+        "Places_user_location": "Nopelnīti {{amount}} kredīti",
+        "Streams_greeting": "Nopelnīti {{amount}} kredīti",
+        "YouHaveCreditsToStart": "Nopelnīti {{amount}} kredīti"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Iestatiet maksājuma informāciju",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Sāciet abonementu",
+            "message": "Vai vēlaties abonēt {{title}}?",
+            "ok": "labi",
+            "cancel": "Atcelt"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kredītkarte vai debetkarte",
+        "SubscribePayment": "Abonēt Maksājumu",
+        "ImmediatePayment": "Tūlītēja samaksa"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Iestatiet maksājuma informāciju",
+        "BuyAmountCredits": "Pērciet {{amount}} kredītu",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Veikt maksājumu",
+            "message": "Vai piekrītat maksāt {{symbol}}{{amount}}?",
+            "ok": "labi",
+            "cancel": "Atcelt"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Kredīti",
+            "description": "seko kredītiem un maksājumiem"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Abonēšanas plāns",
+            "description": "abonēšanas plāns"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Abonēšana",
+            "description": "abonements"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Produkts",
+            "description": "produkts tiek pārdots"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "apkalpošana",
+            "description": "tiek piedāvāts pakalpojums"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Nopelnīti {{amount}} kredīti"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Nopirka {{amount}} kredītus"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonusa kredīti: {{amount}}"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Iztērēti {{amount}} kredīti"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Nosūtīja {{amount}} kredītu uz {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Saņemti {{amount}} kredīti no {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Jauns pakalpojums",
+            "TitlePlaceholder": "Pakalpojuma nosaukums",
+            "PricePlaceholder": "Iestatiet cenu",
+            "LinkPlaceholder": "iestatiet papildu informācijas saiti",
+            "DescriptionPlaceholder": "Pakalpojuma apraksts",
+            "SaveService": "Saglabāt pakalpojumu",
+            "SelectRequiredParticipants": "Nepieciešamie dalībnieki"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Pārvaldīt pakalpojumu veidnes",
+        "ManageServices": "Pārvaldīt pakalpojumus",
+        "Free": "Bezmaksas",
+        "OptionalContribution": "Izvēles ieguldījums",
+        "RequiredPayment": "Nepieciešamais maksājums",
+        "AreYouSureDelete": "Vai tiešām vēlaties dzēst šo pakalpojumu?",
+        "AmountServicesRelated": "Ir {{amount}} pieejamība saistībā ar šo pakalpojumu. Tie arī tiks noņemti."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Informācija par {{title}} NFT",
+        "Description": "Sīkāka informācija par NFT",
+        "FixedBid": "Pērc tagad",
+        "CurrentBid": "pašreizējā likme",
+        "StartingIn": "Sākot ar",
+        "EndingIn": "Beidzas",
+        "CreateNFT": "Izveidojiet NFT",
+        "TitlePlaceholder": "Piešķiriet savam NFT virsrakstu",
+        "DescriptionPlaceholder": "Sniedziet savam NFT aprakstu",
+        "CreateYourNFT": "Izveidojiet savu NFT",
+        "Royalties": "Autoratlīdzības",
+        "RoyaltyPlaceholder": "Neobligāti. Summa, kas samaksāta radītājam pirms pārsūtīšanas.",
+        "ExpirationDate": "Derīguma termiņš",
+        "StartingDate": "Sākuma datums",
+        "BidsBelowThisAmount": "Cenas, kas ir zemākas par šo summu, netiks atļautas",
+        "MinimumBid": "Minimālā cena",
+        "Price": "Cena",
+        "Owner": "Īpašnieks",
+        "SelectCategory": "Izvēlieties kategoriju",
+        "Day": "diena",
+        "Days": "Dienas",
+        "Hour": "Stunda",
+        "Hours": "Stundas",
+        "Minute": "Minūte",
+        "Minutes": "Minūtes",
+        "Second": "Otrkārt",
+        "Seconds": "Sekundes",
+        "SalesCreator": "pārdošanas apjoms tiks piešķirts radītājam",
+        "Details": "Sīkāka informācija",
+        "Bids": "Cenas",
+        "History": "Vēsture",
+        "LoremIpsum": "Lorem Ipsum ir vienkārši drukas un salikšanas nozares fiktīvais teksts.",
+        "PutOnSale": "Likts pārdošanā",
+        "PutOffSale": "Izstāties no pārdošanas",
+        "Transfer": "Pārsūtīšana",
+        "Update": "Atjaunināt",
+        "UpdateToken": "Atjaunināt marķieri",
+        "CreateToken": "Izveidot marķieri",
+        "PlaceBid": "Vieta solīšana",
+        "SoldOut": "Pārdots",
+        "NftName": "NFT nosaukums",
+        "DescribeYourNFT": "Lūdzu, aprakstiet savu NFT",
+        "NftPicture": "Attēls, kas attēlo NFT",
+        "NftMovie": "Filma, kas pārstāv NFT",
+        "UploadMovie": "Augšupielādēt filmu",
+        "MovieSource": "Filmas avots",
+        "UploadFile": "Augšupielādējiet failu",
+        "PutOnMarketplace": "Ielieciet tirgū",
+        "InstantPurchase": "Ievadiet cenu, lai lietotāji varētu uzreiz iegādāties jūsu NFT",
+        "FixedPrice": "Fiksētā cena",
+        "TimedAuction": "Laika izsole",
+        "OpenForBids": "Atvērts piedāvājumiem",
+        "PriceOnePiece": "Ievadiet cenu par vienu gabalu",
+        "EnterMinimumBid": "Ievadiet minimālo cenu",
+        "SelectChain": "Izvēlieties ķēdi",
+        "WrongChain": "Šis NFT tika izveidots zem &quot;{{chain}}&quot;. Lūdzu, izmantojiet šo ķēdi.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
+            "importNFT": "NFT importēšana",
+            "fileNotFound": "Diemžēl CSV fails netika atrasts.",
+            "fileEmpty": "Atvainojiet, CSV fails ir tukšs.",
+            "userIdNotFound": "lietotājs pastāv, bet ID ir tukšs",
+            "errorLine": "rinda {{1}}",
+            "fieldNotFound": "Obligātais lauks &quot;{{1}}&quot; netika atrasts",
+            "taskStreamInvalid": "uzdevumu straume nav derīga",
+            "instructionsEmpty": "uzdevumu straumes norādījumi ir tukši",
+            "complete": "Pabeigts",
+            "activateUsers": "Vai nosūtīt lietotājiem aktivizācijas ziņojumu?",
             "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importOptions": "Iespējas",
+            "sampleCSV": "Lejupielādēt CSV paraugu",
+            "fileLabel": "Augšupielādēt izklājlapu:",
+            "errorsTitle": "Radās kļūdas"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtrējiet pēc NFT kolekcijām",
+                "ShowNFTCollection": "Rādīt NFT kolekciju...",
+                "AllCollections": "Visas kolekcijas"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Visi autori",
+                "AllUsers": "Visi",
+                "FilterByAuthors": "Filtrēt pēc autoriem"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Atpakaļ uz kolekciju"
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "မြှင့်တင်ရန်လင့်ခ်",
+                "startDate": "စတင်သည့်ရက်စွဲ",
+                "startTime": "စတင်ချိန်",
+                "endDate": "ကုန်ဆုံးရက်စွဲ",
+                "endTime": "ကုန်ဆုံးချိန်",
+                "budget": "ဘတ်ဂျက်"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "စိတ်ဝင်စားမှုအလိုက် စစ်ထုတ်ပါ။",
+                "FilterInterests": "စိတ်ပါဝင်စားစွာ စာရိုက်ပါ..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "အတိုး",
+            "Location": "တည်နေရာ"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "သွားတော့",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "လိုက်ကြည့်သည်။",
+            "WriteToStartConversation": "စကားစမြည်စတင်ရန် သင့်အတွေးများကို ရေးပါ။",
+            "StartConversation": "စကားဝိုင်းကို စတင်ပါ။",
+            "GotoConversation": "စကားဝိုင်းသို့ သွားပါ။",
+            "reset": "ပြန်လည်သတ်မှတ်ပါ။",
+            "edit": "တည်းဖြတ်ပါ။",
+            "link": "လင့်",
+            "setUrl": "URL သတ်မှတ်ပါ။",
+            "save": "သိမ်းဆည်းပါ။",
+            "setClip": "အပိုင်းဖြတ်ပါ။",
+            "invalidURL": "မမှန်ကန်သော URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "ကက်ရှ်လုပ်ရန်အတွက် ဖိုင်အလွန်ကြီးသည်။ အများဆုံး ဖိုင်အရွယ်အစား {{size}}",
+        "InvalidPDF": "ဖိုင်သည် တရားဝင် PDF မဟုတ်ပါ။",
+        "StartTypingTitleOrKeywords": "ခေါင်းစဉ် သို့မဟုတ် အဓိကစကားလုံးများကို စတင်ရိုက်ထည့်ပါ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "အမျိုးမျိုးသော အသုံးပြုသူများ ကြည့်ရှု တည်းဖြတ်နိုင်သော HTML စာရွက်စာတမ်း",
+            "displayType": "ဆောင်းပါး"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "တင်ပြမှုတစ်ခုတွင် ဆလိုက်တစ်ခု၊ HTML၊ အသံစသည်တို့ ပါဝင်နိုင်သည်။",
+            "displayType": "လျှော"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "အမျိုးမျိုးသော slides များပါဝင်သည့်တင်ဆက်မှု",
+            "displayType": "တင်ပြခြင်း။"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "ဝဘ်ဆိုဒ်တွင် ကြော်ငြာယူနစ်တစ်ခု",
+            "displayType": "ကြော်ငြာယူနစ်"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "အမည်တစ်ခုအောက်တွင် ကြော်ငြာယူနစ်များကို အုပ်စုဖွဲ့နည်း",
+            "displayType": "ကြော်ငြာနေရာချထားခြင်း။"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "ကြော်ငြာတစ်ခုအတွက် အကြောင်းအရာ",
+            "displayType": "ဖန်တီးမှုကြော်ငြာ"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "ကြော်ငြာလှုပ်ရှားမှုတစ်ခု",
+            "displayType": "ကြော်ငြာစည်းရုံးရေး"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "မက်တာဒေတာကို ဖျက်လိုက်သည့် ဝဘ်ဆိုက်ကို ကိုယ်စားပြုသည်။",
+            "displayType": "ဝက်ဘ်စာမျက်နှာ"
         }
     }
 }

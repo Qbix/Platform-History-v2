@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Link pentru promovare",
+                "startDate": "Data de început",
+                "startTime": "Timpul de începere",
+                "endDate": "Data de încheiere",
+                "endTime": "Sfârșitul timpului",
+                "budget": "Buget"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filtrați după interes",
+                "FilterInterests": "Începeți să scrieți un interes..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Interes",
+            "Location": "Locație"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Merge",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Naviga",
+            "WriteToStartConversation": "Scrie-ți gândurile pentru a începe conversația",
+            "StartConversation": "Începe conversația",
+            "GotoConversation": "Accesați Conversație",
+            "reset": "Resetați",
+            "edit": "Editați | ×",
+            "link": "Legătură",
+            "setUrl": "Setați adresa URL",
+            "save": "salva",
+            "setClip": "Clipul decupat",
+            "invalidURL": "URL invalid"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Fișier prea mare pentru stocare în cache. Dimensiunea maximă a fișierului {{size}}",
+        "InvalidPDF": "Fișierul nu este un PDF valid",
+        "StartTypingTitleOrKeywords": "Începeți să introduceți titlul sau cuvintele cheie..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Un document HTML pe care diverși utilizatori îl pot vizualiza și edita",
+            "displayType": "Articol"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "description": "Un diapozitiv dintr-o prezentare poate include HTML, audio etc.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "O prezentare formată din diferite diapozitive",
+            "displayType": "Prezentare"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "O unitate de publicitate pe un site web",
+            "displayType": "Unitate de publicitate"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "O modalitate de grupare a unităților de publicitate sub un nume",
+            "displayType": "Plasarea reclamelor"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Conținut pentru o reclamă",
+            "displayType": "Reclamă creativă"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "O campanie de publicitate",
+            "displayType": "Campanie publicitara"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Reprezintă un site web ale cărui metadate au fost răzuite",
+            "displayType": "pagină web"
         }
     }
 }

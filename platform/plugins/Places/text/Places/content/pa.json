@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "{{1}} ਦੇ ਅੰਦਰ"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "meter": "ਮੀਟਰ",
+        "meters": "ਮੀਟਰ",
+        "kilometer": "ਕਿਲੋਮੀਟਰ",
+        "kilometers": "ਕਿਲੋਮੀਟਰ",
+        "km": "ਕਿਲੋਮੀਟਰ",
+        "mile": "ਮੀਲ",
+        "miles": "ਮੀਲ",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "ਪੈਰ",
+        "feet": "ਪੈਰ",
+        "inches": "ਇੰਚ"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "ਮੈਨੂੰ {{select}} ਦੇ ਅੰਦਰ ਹੋਣ ਵਾਲੀਆਂ ਚੀਜ਼ਾਂ ਵਿੱਚ ਦਿਲਚਸਪੀ ਹੈ",
+        "update": "ਮੇਰਾ ਟਿਕਾਣਾ ਅੱਪਡੇਟ ਕਰੋ",
+        "set": "ਮੇਰਾ ਟਿਕਾਣਾ ਸੈੱਟ ਕਰੋ",
+        "prompt": "{{ClickOrTap}} ਇੱਥੇ ਤੱਕ<br> ਆਪਣੇ ਸੈੱਟ ਕਰੋ<br> ਟਿਕਾਣਾ",
+        "myCurrentLocation": "ਮੇਰਾ ਮੌਜੂਦਾ ਟਿਕਾਣਾ",
+        "enterAddress": "ਕੋਈ ਪਤਾ ਦਾਖਲ ਕਰੋ",
+        "enterPostcode": "ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਪੋਸਟਕੋਡ\/ਜ਼ਿਪਕੋਡ ਦਾਖਲ ਕਰੋ",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "ਟਿਕਾਣਾ ਸ਼ਾਮਲ ਕਰੋ",
+            "title": "ਨਵਾਂ ਟਿਕਾਣਾ",
+            "nameYourLocation": "ਆਪਣੇ ਟਿਕਾਣੇ ਨੂੰ ਨਾਮ ਦਿਓ"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "ਕੀ ਇਸ ਟਿਕਾਣੇ ਨੂੰ ਸੁਰੱਖਿਅਤ ਕਰਨਾ ਹੈ?",
+            "message": "ਕੀ ਤੁਸੀਂ ਭਵਿੱਖ ਵਿੱਚ ਇਸ ਟਿਕਾਣੇ ਨੂੰ ਦੁਬਾਰਾ ਵਰਤਣ ਦੀ ਯੋਜਨਾ ਬਣਾ ਰਹੇ ਹੋ?",
+            "ok": "ਹਾਂ",
+            "cancel": "ਨੰ"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "ਇਸ ਸਥਾਨ ਨੂੰ ਨਾਮ ਦਿਓ",
+            "placeholder": "ਘਰ, ਕੰਮ ਆਦਿ।",
+            "ok": "ਸੇਵ ਕਰੋ"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "ਟਿਕਾਣਾ ਚੁਣੋ"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "ਇਸ ਟਿਕਾਣੇ ਦੇ ਅੰਦਰ ਕੋਈ ਖੇਤਰ ਹੈ?",
+        "newArea": "ਨਵਾਂ ਖੇਤਰ",
+        "promptTitle": "ਖੇਤਰ ਲਈ ਇੱਕ ਨਾਮ ਦਰਜ ਕਰੋ:",
+        "absent": "ਕਿਰਪਾ ਕਰਕੇ ਖੇਤਰ ਸੈੱਟ ਕਰੋ",
+        "error": "ਗਲਤੀ",
+        "exist": "ਖੇਤਰ ਪਹਿਲਾਂ ਹੀ ਮੌਜੂਦ ਹੈ",
+        "addNewArea": "ਨਵਾਂ ਖੇਤਰ ਸ਼ਾਮਲ ਕਰੋ",
+        "add": "ਸ਼ਾਮਲ ਕਰੋ"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "ਸਥਾਨਾਂ ਦਾ ਸੰਗ੍ਰਹਿ",
+            "displayType": "ਟਿਕਾਣੇ"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "ਇੱਕ ਇਮਾਰਤ, ਸਥਾਨ, ਜਹਾਜ਼, ਪਾਰਕ, ਆਦਿ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ।",
+            "displayType": "ਟਿਕਾਣਾ"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "ਕਿਸੇ ਸਥਾਨ ਦੇ ਅੰਦਰ ਇੱਕ ਖੇਤਰ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ, ਜਿਵੇਂ ਕਿ ਇੱਕ ਕਮਰਾ ਜਾਂ ਸੂਟ",
+            "displayType": "ਖੇਤਰ"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "ਇੱਕ ਇਮਾਰਤ ਜਾਂ ਜਹਾਜ਼ ਵਿੱਚ ਇੱਕ ਮੰਜ਼ਿਲ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ",
+            "displayType": "ਮੰਜ਼ਿਲ"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "ਇੱਕ ਇਮਾਰਤ ਜਾਂ ਜਹਾਜ਼ ਵਿੱਚ ਇੱਕ ਕਾਲਮ ਨੂੰ ਦਰਸਾਉਂਦਾ ਹੈ",
+            "displayType": "ਕਾਲਮ"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "ਜਿਓਹਸ਼ ਦੀ ਇੱਕ ਨਿਸ਼ਚਿਤ ਦੂਰੀ ਦੇ ਅੰਦਰ ਚੀਜ਼ਾਂ ਲਈ ਸ਼੍ਰੇਣੀ",
+            "displayType": "ਸਥਾਨਾਂ ਦੇ ਨੇੜੇ"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "ਕਿਸੇ ਦਿਲਚਸਪੀ ਨਾਲ ਮੇਲ ਖਾਂਦਾ, ਜਿਓਹਸ਼ ਦੀ ਇੱਕ ਨਿਸ਼ਚਿਤ ਦੂਰੀ ਦੇ ਅੰਦਰ ਚੀਜ਼ਾਂ ਲਈ ਸ਼੍ਰੇਣੀ",
+            "displayType": "ਦਿਲਚਸਪੀ ਵਾਲੇ ਸਥਾਨ"
         }
     }
 }

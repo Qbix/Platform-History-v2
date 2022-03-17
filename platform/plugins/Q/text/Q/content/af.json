@@ -2,16 +2,16 @@
     "request": {
         "error": "Fout {{status}} tydens versoek",
         "canceled": "Versoek gekanselleer",
-        "500": "Interne bediener fout",
+        "500": "Interne bedienerfout",
         "404": "Nie gevind nie: {{url}}",
         "501": "Versoek onderbreek"
     },
     "nonce": {
-        "sameDomain": "Sessie verstryk. Herlaai die bladsy en probeer weer.",
-        "otherDomain": "Geblokkeerde kruis domein versoek na vreemde domein by {{baseUrl}}"
+        "sameDomain": "Sessie het verval. Herlaai die bladsy en probeer weer.",
+        "otherDomain": "Geblokkeerde kruisdomeinversoek na buitelandse domein by {{baseUrl}}"
     },
     "words": {
-        "tap": "kraan",
+        "tap": "tik",
         "click": "klik",
         "yes": "ja",
         "no": "geen",
@@ -35,29 +35,29 @@
         "12": "Desember"
     },
     "audio": {
-        "allowMicrophoneAccess": "Gee asseblief toegang tot u mikrofoon",
-        "record": "rekord",
-        "recording": "opname",
-        "remains": "oorblyfsels",
+        "allowMicrophoneAccess": "Laat asseblief toegang tot jou mikrofoon toe",
+        "record": "Rekord",
+        "recording": "Opname",
+        "remains": "oorbly",
         "maximum": "maksimum",
-        "playing": "speel",
-        "recorded": "aangeteken",
-        "clip": "clip",
+        "playing": "Speel",
+        "recorded": "Opgeneem",
+        "clip": "knip",
         "orupload": "Of oplaai",
         "usethis": "Gebruik hierdie",
-        "discard": "Gooi",
-        "encoding": "enkodering"
+        "discard": "Gooi weg",
+        "encoding": "Enkodering"
     },
     "alert": {
-        "title": "alert"
+        "title": "Waarskuwing"
     },
     "confirm": {
-        "title": "bevestig",
+        "title": "Bevestig",
         "ok": "Ja",
         "cancel": "Geen"
     },
     "prompt": {
-        "title": "prompt",
+        "title": "Vinnig",
         "ok": "Gaan"
     },
     "imagepicker": {
@@ -67,11 +67,11 @@
             "photo": "Neem nuwe foto",
             "library": "Kies uit biblioteek"
         },
-        "tooSmall": "Kies asseblief &#39;n groter prentjie.",
+        "tooSmall": "Kies asseblief &#39;n groter prent.",
         "cropping": {
             "title": "Pas grootte en posisie aan",
-            "touchscreen": "Gebruik jou vingers om te zoom en sleep",
-            "notTouchscreen": "Gebruik jou muis en wiel om te zoom en sleep"
+            "touchscreen": "Gebruik jou vingers om te zoem en te sleep",
+            "notTouchscreen": "Gebruik jou muis en wiel om te zoem en te sleep"
         },
         "errorType": "Jammer, maar hierdie lêertipe word nie ondersteun nie"
     },
@@ -79,25 +79,25 @@
         "lastNight": "gisteraand",
         "lastEvening": "laaste aand",
         "yesterday": "gister",
-        "thisMorning": "hierdie môre",
+        "thisMorning": "vanoggend",
         "today": "vandag",
         "tonight": "vanaand",
-        "tomorrowMorning": "Tom Morn",
+        "tomorrowMorning": "môreoggend",
         "tomorrow": "môre",
-        "hoursAgo": "{{h}} uur gelede",
+        "hoursAgo": "{{h}} ure gelede",
         "hourAgo": "{{h}} uur gelede",
         "minuteAgo": "{{m}} minuut gelede",
         "minutesAgo": "{{m}} minute gelede",
-        "secondAgo": "{{s}} tweede gelede",
+        "secondAgo": "{{s}} sekonde gelede",
         "secondsAgo": "{{s}} sekondes gelede",
         "fewSecondsAgo": "sekondes gelede",
         "rightNow": "nou dadelik",
-        "inSecond": "oor {{s}} sekonde",
-        "inSeconds": "binne {{s}} sekondes",
-        "inMinute": "binne {{m}} minuut",
-        "inMinutes": "binne {{m}} minute",
-        "inHour": "binne {{h}} uur",
-        "inHours": "binne {{h}} uur",
+        "inSecond": "in {{s}} sekonde",
+        "inSeconds": "oor {{s}} sekondes",
+        "inMinute": "oor {{m}} minuut",
+        "inMinutes": "oor {{m}} minute",
+        "inHour": "oor {{h}} uur",
+        "inHours": "oor {{h}} ure",
         "inUnderMinute": "binne minder as 1 minuut"
     },
     "tabs": {
@@ -106,7 +106,7 @@
     },
     "video": {
         "clip": "knip",
-        "errorNoSource": "Geen video-bron nie",
+        "errorNoSource": "Geen videobron nie",
         "SkipAfter": "Slaan oor na",
         "Skip": "Huppel"
     },
@@ -115,13 +115,13 @@
         "errorNoSource": "Geen pdf-bron nie"
     },
     "clip": {
-        "SetClipStart": "Stel Clip Start",
-        "ClipStart": "Knip begin",
-        "SetClipEnd": "Stel die einde van die knip",
-        "ClipEnd": "Knip einde",
+        "SetClipStart": "Stel Clip Start in",
+        "ClipStart": "Knip Begin",
+        "SetClipEnd": "Stel Clip End",
+        "ClipEnd": "Knip Einde",
         "StartMoreEnd": "Beginposisie kan nie meer as eindposisie wees nie",
-        "EndLessStart": "Die eindposisie kan nie minder wees as die beginposisie nie",
-        "WhichInvalid": "Argument &#39;wat&#39; ongeldig is"
+        "EndLessStart": "Eindposisie kan nie minder as beginposisie wees nie",
+        "WhichInvalid": "Argument &#39;watter&#39; ongeldig"
     },
     "durations": {
         "second": "tweede",

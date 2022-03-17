@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "リクエスト中のエラー{{status}}",
+        "canceled": "リクエストはキャンセルされました",
+        "500": "内部サーバーエラー",
+        "404": "見つかりません：{{url}}",
+        "501": "リクエストが中断されました"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "セッションの有効期限が切れ。ページを更新して、再試行してください。",
+        "otherDomain": "{{baseUrl}}で外部ドメインへのクロスドメインリクエストをブロックしました"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "タップ",
+        "click": "クリック",
+        "yes": "はい",
+        "no": "いいえ",
+        "Tap": "タップ",
+        "Click": "クリック",
+        "Yes": "はい",
+        "No": "番号"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "1月",
+        "2": "2月",
+        "3": "行進",
+        "4": "4月",
+        "5": "5月",
+        "6": "六月",
+        "7": "7月",
+        "8": "8月",
+        "9": "9月",
+        "10": "10月",
+        "11": "11月",
+        "12": "12月"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "2番目",
+        "seconds": "秒",
+        "minute": "分",
+        "minutes": "分",
+        "hour": "時間",
+        "day": "日",
+        "days": "日々",
+        "week": "週",
+        "weeks": "数週間",
+        "month": "月",
+        "months": "月",
+        "year": "年",
+        "years": "年",
+        "decade": "十年",
+        "decades": "数十年",
+        "century": "世紀",
+        "centuries": "何世紀も"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "マイクへのアクセスを許可してください",
+        "record": "記録",
+        "recording": "録音",
+        "remains": "残っている",
+        "maximum": "最大",
+        "playing": "遊ぶ",
+        "recorded": "記録",
+        "clip": "クリップ",
+        "discard": "破棄",
+        "encoding": "エンコーディング"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "クリップ",
+        "errorNoSource": "ビデオソースなし",
+        "SkipAfter": "後にスキップ",
+        "Skip": "スキップ"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "クリップ",
+        "errorNoSource": "PDFソースなし"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "クリップ開始を設定",
+        "ClipStart": "クリップスタート",
+        "SetClipEnd": "クリップエンドを設定",
+        "ClipEnd": "クリップエンド",
+        "StartMoreEnd": "開始位置は終了位置を超えることはできません",
+        "EndLessStart": "終了位置は開始位置より小さくすることはできません",
+        "WhichInvalid": "引数 &#39;これは&#39;無効です"
     },
     "alert": {
-        "title": "Alert"
+        "title": "アラート"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "確認",
+        "ok": "はい",
+        "cancel": "番号"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "促す",
+        "ok": "行け"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "もっと",
+        "Menu": "メニュー"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "ファイルの読み取りエラー",
+        "errorType": "申し訳ありませんが、このファイルタイプはサポートされていません",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "何をしたいですか？",
+            "photo": "新しい写真を撮る",
+            "library": "ライブラリから選択"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "大きい画像を選択してください。",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "サイズと位置を調整する",
+            "touchscreen": "指を使ってズームおよびドラッグします",
+            "notTouchscreen": "マウスとホイールを使用してズームとドラッグ"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "昨晩",
+        "lastEvening": "最後の前夜",
+        "yesterday": "昨日",
+        "thisMorning": "この朝",
+        "today": "今日",
+        "tonight": "今晩",
+        "tomorrowMorning": "トムモーン",
+        "tomorrow": "明日",
+        "hoursAgo": "{{h}}時間前",
+        "hourAgo": "{{h}}時間前",
+        "minuteAgo": "{{m}}分前",
+        "minutesAgo": "{{m}}分前",
+        "secondAgo": "{{s}}秒前",
+        "secondsAgo": "{{s}}秒前",
+        "fewSecondsAgo": "数秒前",
+        "rightNow": "たった今",
+        "inSecond": "{{s}}秒で",
+        "inSeconds": "{{s}}秒で",
+        "inMinute": "{{m}}分で",
+        "inMinutes": "{{m}}分で",
+        "inHour": "{{h}}時間で",
+        "inHours": "{{h}}時間で",
+        "inUnderMinute": "1分以内に"
     }
 }

@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Ketok pikeun mayar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: biaya diolah pikeun {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Hatur nuhun pikeun mayar anjeun ka {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ngalanggan {{plan.title}}",
+        "YouSubscribedTo": "Anjeun parantos ngalanggan {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Anjeun nampi bayaran {{displayAmount}} ti {{call 'publisher.displayName'}} ku &quot;{{description}}&quot;",
+        "HasBeenCharged": "Héy, ieu ngan ukur ngabéjaan yén {{1}} parantos ditagih {{2}} kanggo {{3}} ku {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Hatur nuhun pikeun mayar anjeun pikeun &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, ieu ngan ukur konfirmasi gancang yén anjeun parantos suksés mayar {{2}} ka {{3}} kanggo {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Inpormasi ngeunaan pesenan",
+        "PaymentMethod": "Cara pembayaran",
+        "ContactInfo": "Inpo kontak",
+        "Pay": "Mayar"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Ondangan ditarima ku {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} ngasupkeun ngaran hareup",
+        "Streams_user_lastname": "{{invitedUserName}} ngasupkeun ngaran tukang",
+        "Streams_user_icon": "{{invitedUserName}} diasupkeun ikon",
+        "Places_user_location": "{{invitedUserName}} diasupkeun lokasi",
+        "Streams_greeting": "{{invitedUserName}} diasupkeun salam",
+        "YouHaveCreditsToStart": "Anjeun gaduh {{amount}} sks pikeun ngamimitian",
+        "PaymentFor": "Pamayaran pikeun &quot;{{1}}&quot;",
+        "PaymentTo": "Mayar ka {{1}}",
+        "PaymentToUser": "Mayar ka {{toUserName}}",
+        "CreatePaidStream": "pikeun nyieun {{toStreamName}}",
+        "JoinedPaidStream": "pikeun reservasi di &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
+        "CreatedCommunity": "pikeun nyieun komunitas &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "salaku ngabalikeun duit reservasi dina &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
+        "BoughtCredits": "Mésér {{amount}} kiridit",
+        "BonusCredits": "Bonus {{amount}} kiridit",
+        "BuyAmountCredits": "Mésér {{amount}} kiridit",
+        "WatchClip": "Kéngingkeun sks {{amount}} pikeun nonton {{fromStreamTitle}}",
+        "MissingCredits": "Leungit kiridit",
+        "YouMissingCredits": "Anjeun peryogi sks tambahan {{amount}} pikeun neruskeun.",
+        "BuyCredits": "Mésér sks",
+        "BuyBonus": "Meuli {{amount}} sks sakaligus, bakal ngakibatkeun {{bonus}} bonus sks.",
+        "Buy": "Meuli",
+        "PurchaseCredits": "Beuli Kredit",
+        "Credits": "Kiridit",
+        "ErrorInvalidAmount": "Jumlah teu valid",
+        "ErrorInvalidCurrency": "Hanjakalna urang teu ngadukung mata uang {{currency}} acan",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} kiridit",
+            "BonusCredits": "{{amount}} kiridit"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Kaping",
+        "Amount": "Jumlah",
+        "Description": "Katerangan",
+        "Client": "klien",
+        "To": "ka",
+        "From": "ti",
+        "SeeHistory": "Tempo sajarah pamayaran pikeun {{1}}",
+        "HistoryEmpty": "Anjeun teu acan gaduh data",
+        "PaymentFor": "Ngirim sks {{amount}}.",
+        "PaymentTo": "Ngirim sks {{amount}}.",
+        "PaymentToUser": "Ngirim sks {{amount}}.",
+        "CreatePaidStream": "Méakkeun {{amount}} sks",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Kéngingkeun {{amount}} sks",
+            "-": "Méakkeun {{amount}} sks"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Kéngingkeun {{amount}} sks",
+            "-": "Méakkeun {{amount}} sks"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Narima {{amount}} sks",
+            "-": "Ngirim sks {{amount}}."
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Méakkeun {{amount}} sks",
+        "BoughtCredits": "Meuli sks {{amount}}.",
+        "BonusCredits": "Meunang bonus {{amount}} sks",
+        "InviteAcceptedBy": "Kéngingkeun {{amount}} sks",
+        "Streams_user_firstname": "Kéngingkeun sks {{amount}}.",
+        "Streams_user_lastname": "Kéngingkeun {{amount}} sks",
+        "Streams_user_icon": "Kéngingkeun {{amount}} sks",
+        "Places_user_location": "Kéngingkeun {{amount}} sks",
+        "Streams_greeting": "Kéngingkeun {{amount}} sks",
+        "YouHaveCreditsToStart": "Kéngingkeun {{amount}} sks"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Nyetél Émbaran pamayaran",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Mimitian Langganan",
+            "message": "Naha anjeun badé ngalanggan {{title}}?",
+            "ok": "Oké",
+            "cancel": "Ngabolaykeun"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "kiridit atawa kartu debit",
+        "SubscribePayment": "Ngalanggan Pamayaran",
+        "ImmediatePayment": "Pamayaran Geura"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Nyetél Émbaran pamayaran",
+        "BuyAmountCredits": "Mésér {{amount}} kiridit",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Jieun pamayaran a",
+            "message": "Naha anjeun satuju mayar {{symbol}}{{amount}}?",
+            "ok": "Oké",
+            "cancel": "Ngabolaykeun"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Kiridit",
+            "description": "ngalacak kiridit na pangmayaran"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Rencana langganan",
+            "description": "rencana langganan"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Langganan",
+            "description": "langganan"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "produk",
+            "description": "produk anu dijual"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Palayanan",
+            "description": "jasa anu ditawarkeun"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Kéngingkeun {{amount}} sks"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Meuli sks {{amount}}."
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} kiridit"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Méakkeun {{amount}} sks"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Ngirim sks {{amount}} ka {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Narima {{amount}} sks ti {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Service Anyar",
+            "TitlePlaceholder": "Judul jasa",
+            "PricePlaceholder": "Nyetél harga",
+            "LinkPlaceholder": "set info tambahan link",
+            "DescriptionPlaceholder": "Katerangan jasa",
+            "SaveService": "Simpen Service",
+            "SelectRequiredParticipants": "Peserta Diperlukeun"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Atur Service Citakan",
+        "ManageServices": "Ngatur Jasa",
+        "Free": "Gratis",
+        "OptionalContribution": "Kontribusi pilihan",
+        "RequiredPayment": "pamayaran diperlukeun",
+        "AreYouSureDelete": "Naha anjeun yakin hoyong ngahapus jasa ieu?",
+        "AmountServicesRelated": "Aya {{amount}} kasadiaan anu aya hubunganana sareng jasa ieu. Éta ogé bakal dipiceun."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
+        "Title": "Émbaran ngeunaan {{title}} NFT",
+        "Description": "Inpo wincik ngeunaan NFT",
+        "FixedBid": "Mésér ayeuna",
+        "CurrentBid": "nawar ayeuna",
+        "StartingIn": "Dimimitian di",
+        "EndingIn": "Ditungtungan ku",
+        "CreateNFT": "Jieun hiji NFT",
+        "TitlePlaceholder": "Masihan judul NFT Anjeun",
+        "DescriptionPlaceholder": "Masihan NFT anjeun pedaran",
+        "CreateYourNFT": "Jieun NFT Anjeun",
+        "Royalties": "Royalti",
+        "RoyaltyPlaceholder": "Pilihan. Jumlah anu dibayar ka panyipta sateuacan transfer.",
+        "ExpirationDate": "Tanggal kadaluarsa",
+        "StartingDate": "Tanggal mimiti",
+        "BidsBelowThisAmount": "Tawaran di handap jumlah ieu moal diidinan",
+        "MinimumBid": "nawar minimum",
+        "Price": "Harga",
+        "Owner": "Nu boga",
+        "SelectCategory": "Pilih kategori",
+        "Day": "Dinten",
+        "Days": "Poé",
+        "Hour": "Jam",
+        "Hours": "Jam-jaman",
+        "Minute": "Menit",
+        "Minutes": "Menit",
+        "Second": "Kadua",
+        "Seconds": "Detik-detik",
+        "SalesCreator": "tina penjualan bakal angkat ka panyipta",
+        "Details": "Rincian",
+        "Bids": "Panawaran",
+        "History": "Sajarah",
+        "LoremIpsum": "Lorem Ipsum ngan saukur téks dummy tina industri percetakan sareng pangaturan huruf.",
+        "PutOnSale": "Dijual",
+        "PutOffSale": "Dicabut tina dijual",
+        "Transfer": "Mindahkeun",
+        "Update": "Pembaruan",
         "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "CreateToken": "Jieun Token",
+        "PlaceBid": "Tempat Panawaran",
+        "SoldOut": "Dijual",
+        "NftName": "Ngaran NFT",
+        "DescribeYourNFT": "Mangga ngajelaskeun NFT Anjeun",
+        "NftPicture": "Gambar pikeun ngagambarkeun NFT",
+        "NftMovie": "Pilem pikeun ngagambarkeun NFT",
+        "UploadMovie": "Unggah pilem",
+        "MovieSource": "Sumber Pilem",
+        "UploadFile": "Unggah file",
+        "PutOnMarketplace": "Pasang di pasar",
+        "InstantPurchase": "Lebetkeun harga pikeun ngawenangkeun pangguna langsung mésér NFT anjeun",
+        "FixedPrice": "harga tetep",
+        "TimedAuction": "Lelang waktos",
+        "OpenForBids": "Dibuka pikeun nawar",
+        "PriceOnePiece": "Lebetkeun harga pikeun hiji sapotong",
+        "EnterMinimumBid": "Lebetkeun tawaran Minimum",
+        "SelectChain": "Pilih ranté",
+        "WrongChain": "NFT ieu dijieun dina &quot;{{chain}}&quot;. Mangga nganggo ranté ieu.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Ngimpor NFT urang",
+            "fileNotFound": "Punten, file CSV teu kapendak.",
+            "fileEmpty": "Punten, file CSV kosong.",
+            "userIdNotFound": "pamaké aya tapi id kosong",
+            "errorLine": "garis {{1}}",
+            "fieldNotFound": "Widang diperlukeun &quot;{{1}}&quot; teu kapanggih",
+            "taskStreamInvalid": "aliran tugas teu valid",
+            "instructionsEmpty": "paréntah stream tugas kosong",
+            "complete": "Lengkep",
+            "activateUsers": "ngirim pesen aktivasina ka pamaké?",
+            "importProgress": "Kamajuan",
+            "importOptions": "Pilihan",
+            "sampleCSV": "Unduh Contoh CSV",
+            "fileLabel": "Unggah Spreadsheet:",
+            "errorsTitle": "Kasalahan lumangsung"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filter ku NFT Koléksi",
+                "ShowNFTCollection": "Tampilkeun koleksi NFT di ...",
+                "AllCollections": "Sadaya Koléksi"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Sadayana Pangarang",
+                "AllUsers": "dulur",
+                "FilterByAuthors": "Nyaring ku Pangarang"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Balik deui ka Koléksi"
     }
 }

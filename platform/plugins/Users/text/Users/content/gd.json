@@ -1,132 +1,132 @@
 {
     "analytics": {
         "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Daily": "Gach latha",
+        "Weekly": "Seachdaineach",
+        "Monthly": "Mìosail",
+        "Application": "Iarrtas",
+        "Pages": "Duilleagan",
+        "Services": "Seirbheisean",
+        "Faq": "Ceistean Cumanta",
+        "WeekDays": "Làithean na Seachdain"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Log a-steach",
+        "LogOut": "Log a-mach"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Suidhich {{1}} mar mo phrìomh {{2}}",
+        "ChoosePassPhrase": "Tagh <strong>abairt pas<\/strong> airson logadh a-steach leis.<br> Abairtean sìmplidh anns a bheil beagan fhaclan air am bi cuimhne agad gu furasta.",
+        "ChoosePassPhraseSeeSuggestions": "Tagh <strong>abairt pas<\/strong> math gus do chunntas a dhìon. Faic na molaidhean airson cuid de bheachdan.",
+        "LogOutAndTryAgain": "Log a-mach agus feuch ris a-rithist",
+        "IfYouFeel": "Ma tha thu a’ faireachdainn gun deach rudeigin ceàrr, faodaidh tu",
+        "SetIdentifierButtonTitle": "tòiseachadh thairis"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Tòisich"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Tòisich",
+        "Authorize": "Ùghdarrachadh",
+        "TermsLabel": "Tha mi air leughadh agus aontachadh<br> dhan {{link}}",
+        "TermsTitle": "Teirmean",
+        "mustAgree": "An toiseach feumaidh tu aontachadh ris na cumhachan."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Tha mi a&#39; gabhail ris a&#39; {{link}}",
+        "TermsTitle": "Teirmean"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Cead",
+        "prompt": "A bheil thu airson fiosan a chur an comas? Gheibh thu ùrachaidhean fìor-ùine mu rudan a tha cudromach dhut.",
+        "yes": "tha",
+        "no": "Chan eil",
+        "WelcomePleaseVerifyEmail": "Fàilte! Feuch an dearbhaich thu do sheòladh puist-d.",
+        "WelcomeVerifyEmail": "Fàilte! Dearbhaich an seòladh puist-d agad.",
+        "ForgetPass": "Hey, an do dhìochuimhnich thu am facal-faire agad?",
+        "PassphraseSaved": "Chaidh an abairt pas agad a shàbhaladh.",
+        "IdentifierActivated": "Chaidh do {{type}} a chur an gnìomh.",
+        "CompletedActivation": "Tha thu air gnìomhachd cleachdaiche a chrìochnachadh.",
+        "CompletedActivationLogIn": "Tha thu air gnìomhachd cleachdaiche a chrìochnachadh. Feuch ri logadh a-steach an-dràsta."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Tagh conaltradh",
+            "CreateAccount": "+ Fios ùr",
+            "CreateAccountNotFound": "Cha deach Q.Users.Cordova.UI.create a lorg",
+            "SearchByName": "Lorg le ainm",
+            "EmptyContacts": "Caraidean cha deach a lorg..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Tagh caraid bho {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Feuch an tagh thu leubail.",
+        "inviteUser": "Thoir cuireadh do luchd-cleachdaidh",
+        "selectRole": "Tagh Dreuchd",
+        "inviteRole": "Thoir cuireadh {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Cànan mì-dhligheach air a thaghadh",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Fàilte",
+        "directions": "Cruthaich cunntas, no log a-steach.",
+        "directionsNoRegister": "Log a-steach ma tha cunntas agad.",
+        "goButton": "Rachaibh",
+        "passphrase": "Cuir a-steach an abairt pas agad:",
+        "loginButton": "Tòisich",
+        "registerButton": "Tòisich",
+        "resendButton": "Cuir Teachdaireachd Gnìomhachaidh",
+        "forgot": "Dhìochuimhnich e?",
+        "resendConfirm": "A bheil thu airson teachdaireachd a chuir gus am facal-faire agad ath-shuidheachadh?",
+        "resendSuccess": "Thoir sùil airson teachdaireachd gus am facal-faire agad ath-shuidheachadh",
+        "resendClose": "Dùin",
+        "noPassphrase": "Mus urrainn dhut logadh a-steach, feumaidh tu abairt pas a shuidheachadh le bhith a’ cliogadh air a’ cheangal sa teachdaireachd gnìomhachaidh agad.",
+        "notVerified": "Feumaidh tu teachdaireachd gnìomhachaidh a chuir thu fhèin gus logadh a-steach.",
+        "emailExists": "An do dh&#39;fheuch thu ri clàradh leis a&#39; phost-d seo roimhe? Ma tha, thoir sùil air a’ bhogsa a-steach agad gus do chunntas a chuir an gnìomh. <a href='#resend' class='Q_button Users_activation_resend'>Cliog gus an teachdaireachd a chuir a-rithist<\/a>",
+        "mobileExists": "An do dh&#39;fheuch thu ri clàradh leis an àireamh fòn-làimhe seo roimhe? Ma tha, thoir sùil air an SMS agad gus do chunntas a chuir an gnìomh. <a href='#resend' class='Q_button Users_activation_resend'>Cliog gus an teachdaireachd a chuir a-rithist<\/a>",
+        "usingOther": "no faodaidh tu",
+        "prompt": "Tagh ainm-cleachdaidh:",
+        "newUser": "no cruthaich cunntas ùr gu h-ìosal",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "am fòn-làimhe # no post-d agad",
+            "mobile": "cuir a-steach am fòn-làimhe agad #",
+            "email": "cuir a-steach do sheòladh puist-d",
+            "username": "cleachd litrichean is àireamhan a-mhàin"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Gabh ris na Cumhachan Seirbheis?",
+        "facebookNoEmail": "Tha seòladh puist-d dearbhte a dhìth air a’ chunntas facebook agad. Dìreach log a-steach san dòigh dhùthchasach.",
+        "picTooltip": "Faodaidh tu an dealbh seo atharrachadh nas fhaide air adhart",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Log a-steach gu {{host}} aig àm {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Ag ath-stiùireadh gu Wallet",
+                "content": "Cho luath ‘s a dhùineas tu an còmhradh seo, thèid do thoirt chun wallet agad. Às deidh dhut clàradh a-steach, till air ais chun duilleag seo."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Cuir a-steach dòigh air logadh a-steach",
+        "sendMessage": "Cuir Teachdaireachd Gnìomhachaidh",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "cuir a-steach am fòn-làimhe agad # no post-d",
+            "mobile": "cuir a-steach an àireamh fòn-làimhe agad",
+            "email": "cuir a-steach do sheòladh puist-d",
+            "username": "ainm neach-cleachdaidh"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Cunntas",
+        "areUsing": "Tha thu a&#39; cleachdadh {{platform}} mar",
+        "noLongerUsing": "Chan eil thu ceangailte ri {{platform}} tuilleadh mar",
+        "doAuth": "Log a-steach leis a’ chunntas seo",
+        "doSwitch": "Gluais dhan chunntas seo"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Sealbhadair",
+        "Admin": "Rianachd",
+        "Member": "Ball",
+        "Guest": "Aoigh",
+        "Host": "òstair"
     }
 }

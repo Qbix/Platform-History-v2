@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Жарнамалау үшін сілтеме",
+                "startDate": "Басталатын күн",
+                "startTime": "Басталу уақыты",
+                "endDate": "Аяқталу күні",
+                "endTime": "Аяқталу уақыты",
+                "budget": "Бюджет"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Қызығушылық бойынша сүзгілеу",
+                "FilterInterests": "Қызығушылықты теруді бастаңыз..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Қызығушылық",
+            "Location": "Орналасқан жері"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Барыңыз",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Шолу",
+            "WriteToStartConversation": "Әңгімені бастау үшін өз ойларыңызды жазыңыз",
+            "StartConversation": "Сөйлесуді бастау",
+            "GotoConversation": "Сөйлесуге өтіңіз",
+            "reset": "Қалпына келтіру",
+            "edit": "Өңдеу",
+            "link": "Сілтеме",
+            "setUrl": "URL мекенжайын орнату",
+            "save": "Сақтау",
+            "setClip": "Клипті кесу",
+            "invalidURL": "Жарамсыз URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Кэштеу үшін файл тым үлкен. Максималды файл өлшемі {{size}}",
+        "InvalidPDF": "Файл жарамды PDF емес",
+        "StartTypingTitleOrKeywords": "Тақырып немесе кілт сөздерді теруді бастаңыз..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Әртүрлі пайдаланушылар қарап, өңдей алатын HTML құжаты",
+            "displayType": "Мақала"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Презентациядағы слайд HTML, аудио және т.б. қамтуы мүмкін.",
+            "displayType": "Слайд"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Әртүрлі слайдтардан тұратын презентация",
+            "displayType": "Тұсаукесер"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Веб-сайттағы жарнама бөлімі",
+            "displayType": "Жарнама бірлігі"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Жарнама бірліктерін атаумен топтастыру тәсілі",
+            "displayType": "Жарнама орналастыру"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Жарнамаға арналған мазмұн",
+            "displayType": "Креативті жарнама"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Жарнамалық науқан",
+            "displayType": "Жарнамалық науқан"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Метадеректері жойылған веб-сайтты білдіреді",
+            "displayType": "веб парақ"
         }
     }
 }

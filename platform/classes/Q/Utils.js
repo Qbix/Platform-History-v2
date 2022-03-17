@@ -255,7 +255,7 @@ function _request(method, uri, data /* '' */, query /* null */, user_agent /* Mo
 		'host': host
 	};
 
-	if (typeof data !== "string") data = http_build_query(data, null, '&');
+	if (typeof data !== "string") data = http_build_query(data, '', '&');
 
 	var request = {
 		headers: header,

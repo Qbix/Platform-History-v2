@@ -1,51 +1,51 @@
 {
     "browsertab": {
-        "html": "{{button}}",
+        "html": "{{999}",
         "button": "ለመክፈል መታ ያድርጉ"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}} ፦ ክፍያ ለ {{call 'user.displayName'}} ተከናውኗል",
-        "ThankYouForYourPayment": "ለ {{call 'publisher.displayName'}} ክፍያዎ እናመሰግናለን",
-        "SubscribedTo": "{{call 'user.displayName'}} ለ {{plan.title}} ተመዝግበዋል",
+        "ChargeProcessedFor": "{{999}፡ ክፍያ ለ{1000} ተሰራ",
+        "ThankYouForYourPayment": "ለ{999}} ክፍያዎ እናመሰግናለን",
+        "SubscribedTo": "{{call 'user.displayName'}} ለ{1000}} ተመዝግቧል",
         "YouSubscribedTo": "ለ {{plan.title}} ተመዝግበዋል"
     },
     "charge": {
-        "Subject": "የ {{displayAmount}} ክፍያ ከ {{call 'publisher.displayName'}} በ «{{description}}» ያገኛሉ",
-        "HasBeenCharged": "እሺ ፣ ይህ {{1}} በ {{3}} በ {{4}} {{100}} { \/ 100}} { \/ 1} እንደተከፈለ {101} ለማሳወቅ ነው"
+        "Subject": "የ{999}} ክፍያ ከ{1000} በ&quot;{{description}}&quot; ያገኛሉ",
+        "HasBeenCharged": "ሄይ፣ ይህ በ{1002} {999} {1000} በ{1001}} መከፈሉን ለማሳወቅ ነው።"
     },
     "charged": {
-        "Subject": "ለ «{{description}}» ክፍያዎ እናመሰግናለን",
-        "HavePaid": "ሠላም {{1}} ፣ ይህ በተሳካ ሁኔታ ለ {{4}} {1000}} ለ {{3}} የከፈሉበት ፈጣን ማረጋገጫ ነው"
+        "Subject": "ለ«{{description}}» ክፍያዎ እናመሰግናለን",
+        "HavePaid": "ሰላም {{1}}፣ ይህ እርስዎ በተሳካ ሁኔታ ለ{1001} {{3}} ለ{1002}} መክፈላችሁ ፈጣን ማረጋገጫ ነው"
     },
     "payment": {
         "AboutOrder": "ስለ ትዕዛዝ መረጃ",
-        "PaymentMethod": "የክፍያ ዘዴ",
+        "PaymentMethod": "የመክፈያ ዘዴ",
         "ContactInfo": "የመገኛ አድራሻ",
         "Pay": "ይክፈሉ"
     },
     "credits": {
-        "InviteAcceptedBy": "ግብዣ በ {{invitedUserName}} ተቀባይነት አግኝቷል",
-        "YouHaveCreditsToStart": "ለመጀመር {{amount}} ክሬዲቶች አሉዎት",
-        "PaymentFor": "የ «{{1}}» »ክፍያ",
-        "PaymentTo": "ክፍያ ለ {{1}}",
-        "PaymentToUser": "ክፍያ ለ {{toUserName}}",
-        "CreatePaidStream": "{{toStreamName}} ን ለመፍጠር",
-        "JoinedPaidStream": "በ « <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> » ውስጥ ቦታ ለማስያዝ",
-        "CreatedCommunity": "ማህበረሰብ «{{communityId}}» ን ለመፍጠር",
-        "LeftPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>በ «{{toStreamTitle}}<\/a> » ውስጥ እንደ ቦታ ማስያዣ ተመላሽ ገንዘብ",
-        "BoughtCredits": "{{amount}} ክሬዲቶችን ገዝቷል",
-        "BonusCredits": "ጉርሻ {{amount}} ክሬዲቶች",
-        "BuyAmountCredits": "{{amount}} ክሬዲቶችን ይግዙ",
-        "WatchClip": "{{99}} {1000}} ን ለመመልከት ምስጋናዎች አግኝተዋል",
-        "MissingCredits": "የጎደሉ ክሬዲቶች",
-        "YouMissingCredits": "ለመቀጠል ተጨማሪ {{amount}} ክሬዲቶች ያስፈልግዎታል።",
-        "BuyCredits": "ክሬዲቶችን ይግዙ",
-        "BuyBonus": "{{amount}} ክሬዲቶችን በአንድ ጊዜ መግዛት ፣ ወደ {{bonus}} ክሬዲቶች ጉርሻ ይመራል።",
+        "InviteAcceptedBy": "ግብዣ በ {{invitedUserName}} ተቀብሏል",
+        "YouHaveCreditsToStart": "ለመጀመር {{amount}} ምስጋናዎች አሉዎት",
+        "PaymentFor": "ለ«{{1}}» ክፍያ",
+        "PaymentTo": "ክፍያ ለ{999}",
+        "PaymentToUser": "ክፍያ ለ{999}",
+        "CreatePaidStream": "{{toStreamName}}ን ለመፍጠር",
+        "JoinedPaidStream": "በ&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; ውስጥ ለማስያዝ",
+        "CreatedCommunity": "ማህበረሰብ ለመፍጠር &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "በ&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; ውስጥ እንደ ማስያዣ ተመላሽ ገንዘብ",
+        "BoughtCredits": "{{amount}} ክሬዲቶችን ገዝቷል።",
+        "BonusCredits": "ጉርሻ {999} ክሬዲቶች",
+        "BuyAmountCredits": "{{999} ክሬዲቶችን ይግዙ",
+        "WatchClip": "በመመልከት የተገኘ {{999} ምስጋናዎች {{fromStreamTitle}}",
+        "MissingCredits": "የጠፉ ክሬዲቶች",
+        "YouMissingCredits": "ለመቀጠል ተጨማሪ {{amount}} ክሬዲቶች ያስፈልገዎታል።",
+        "BuyCredits": "ክሬዲቶች ይግዙ",
+        "BuyBonus": "በአንድ ጊዜ {999} ክሬዲቶችን መግዛት ወደ {{bonus}} የክሬዲት ቦነስ ይመራል።",
         "Buy": "ግዛ",
-        "PurchaseCredits": "ክሬዲት ይግዙ",
+        "PurchaseCredits": "የግዢ ክሬዲቶች",
         "Credits": "ምስጋናዎች",
-        "ErrorInvalidAmount": "መጠኑ ልክ ያልሆነ ነው",
-        "ErrorInvalidCurrency": "እንደ አለመታደል ሆኖ እስካሁን የምንዛሬን {{currency}} አንደግፍም",
+        "ErrorInvalidAmount": "መጠኑ ልክ ያልሆነ",
+        "ErrorInvalidCurrency": "እንደ አለመታደል ሆኖ እስካሁን ምንዛሬን አንደግፍም {{currency}}",
         "forMessages": {
             "BoughtCredits": "{{amount}} ምስጋናዎች",
             "BonusCredits": "{{amount}} ምስጋናዎች"
@@ -64,52 +64,52 @@
         "To": "ወደ",
         "From": "ከ",
         "SeeHistory": "ለ {{1}} የክፍያ ታሪክን ይመልከቱ",
-        "HistoryEmpty": "እስካሁን ምንም ውሂብ የለዎትም",
-        "PaymentFor": "{{amount}} ክሬዲቶችን ልከዋል",
-        "PaymentTo": "{{amount}} ክሬዲቶችን ልከዋል",
-        "PaymentToUser": "{{amount}} ክሬዲቶችን ልከዋል",
-        "CreatePaidStream": "{{amount}} ክሬዲቶችን አሳልፈዋል",
+        "HistoryEmpty": "እስካሁን ምንም ውሂብ የሎትም።",
+        "PaymentFor": "{{amount}} ምስጋናዎች ተልኳል።",
+        "PaymentTo": "{{amount}} ምስጋናዎች ተልኳል።",
+        "PaymentToUser": "{{amount}} ምስጋናዎች ተልኳል።",
+        "CreatePaidStream": "{{amount}} ክሬዲቶችን አውጥቷል።",
         "WatchClip": {
-            "+": "{{amount}} ክሬዲቶች አግኝተዋል",
-            "-": "{{amount}} ክሬዲቶችን አሳልፈዋል"
+            "+": "የተገኘው {999} ክሬዲት",
+            "-": "{{amount}} ክሬዲቶችን አውጥቷል።"
         },
         "JoinedPaidStream": {
-            "+": "{{amount}} ክሬዲቶች አግኝተዋል",
-            "-": "{{amount}} ክሬዲቶችን አሳልፈዋል"
+            "+": "የተገኘው {999} ክሬዲት",
+            "-": "{{amount}} ክሬዲቶችን አውጥቷል።"
         },
         "LeftPaidStream": {
-            "+": "{{amount}} ክሬዲቶች ተቀብለዋል",
-            "-": "{{amount}} ክሬዲቶችን ልከዋል"
+            "+": "{{amount}} ክሬዲቶች ተቀብለዋል።",
+            "-": "{{amount}} ምስጋናዎች ተልኳል።"
         },
-        "CreatedCommunity": "{{amount}} ክሬዲቶችን አሳልፈዋል",
-        "BoughtCredits": "{{amount}} ክሬዲቶችን ገዝቷል",
-        "BonusCredits": "ጉርሻ አግኝተዋል {{amount}} ክሬዲቶች",
-        "InviteAcceptedBy": "{{amount}} ክሬዲቶች አግኝተዋል",
-        "YouHaveCreditsToStart": "{{amount}} ክሬዲቶች አግኝተዋል",
+        "CreatedCommunity": "{{amount}} ክሬዲቶችን አውጥቷል።",
+        "BoughtCredits": "{{amount}} ክሬዲቶችን ገዝቷል።",
+        "BonusCredits": "ጉርሻ {{amount}} ክሬዲቶች አግኝቷል",
+        "InviteAcceptedBy": "የተገኘው {999} ክሬዲት",
+        "YouHaveCreditsToStart": "የተገኘው {999} ክሬዲቶች",
         "Streams_user_firstname": "የተገኘው {999} ክሬዲት",
         "Streams_user_lastname": "የተገኘው {999} ክሬዲት",
         "Streams_user_icon": "የተገኘው {999} ክሬዲት",
-        "Places_user_location": "የተገኘው {999} ክሬዲት",
+        "Places_user_location": "የተገኘው {999} ክሬዲቶች",
         "Streams_greeting": "የተገኘው {999} ክሬዲት"
     },
     "subscriptions": {
-        "infoTitle": "የክፍያ መረጃን ያዘጋጁ",
+        "infoTitle": "የክፍያ መረጃ ያቀናብሩ",
         "confirm": {
-            "title": "የደንበኝነት ምዝገባን ይጀምሩ",
-            "message": "ለ {{title}} ደንበኝነት መመዝገብ ይፈልጋሉ?",
+            "title": "የደንበኝነት ምዝገባን ጀምር",
+            "message": "ለ{999}} መመዝገብ ይፈልጋሉ?",
             "ok": "እሺ",
             "cancel": "ሰርዝ"
         },
         "CreditOrDebitCard": "ክሬዲት ወይም ዴቢት ካርድ",
-        "SubscribePayment": "የደንበኝነት ምዝገባ ክፍያ",
-        "ImmediatePayment": "አስቸኳይ ክፍያ"
+        "SubscribePayment": "ክፍያ ይመዝገቡ",
+        "ImmediatePayment": "አፋጣኝ ክፍያ"
     },
     "payments": {
-        "infoTitle": "የክፍያ መረጃን ያዘጋጁ",
-        "BuyAmountCredits": "{{amount}} ክሬዲቶችን ይግዙ",
+        "infoTitle": "የክፍያ መረጃ ያቀናብሩ",
+        "BuyAmountCredits": "{{999} ክሬዲቶችን ይግዙ",
         "confirm": {
-            "title": "ክፍያ ይፈጽሙ",
-            "message": "{{symbol}} {{amount}} ን ለመክፈል ተስማምተዋል?",
+            "title": "ክፍያ ፈጽሙ",
+            "message": "{{999}{1000}} ለመክፈል ተስማምተሃል?",
             "ok": "እሺ",
             "cancel": "ሰርዝ"
         }
@@ -120,8 +120,8 @@
             "description": "ክሬዲቶችን እና ክፍያዎችን ይከታተላል"
         },
         "Assets\/plan": {
-            "displayType": "ድጎማ የማድረግ ዕቅድ",
-            "description": "የደንበኝነት ምዝገባ ዕቅድ"
+            "displayType": "የደንበኝነት ምዝገባ እቅድ",
+            "description": "የደንበኝነት ምዝገባ እቅድ"
         },
         "Assets\/subscription": {
             "displayType": "የደንበኝነት ምዝገባ",
@@ -129,50 +129,50 @@
         },
         "Assets\/product": {
             "displayType": "ምርት",
-            "description": "ምርት እየተሸጠ ነው"
+            "description": "እየተሸጠ ያለ ምርት"
         },
         "Assets\/service": {
             "displayType": "አገልግሎት",
-            "description": "አገልግሎት እየቀረበ ነው"
+            "description": "አገልግሎት እየተሰጠ ነው።"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{{amount}} ክሬዲቶች አግኝተዋል"
+            "content": "የተገኘው {999} ክሬዲት"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} ክሬዲቶችን ገዝቷል"
+            "content": "{{amount}} ክሬዲቶችን ገዝቷል።"
         },
         "Assets\/credits\/bonus": {
-            "content": "ጉርሻ {{amount}} ክሬዲቶች"
+            "content": "ጉርሻ {999} ክሬዲቶች"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} ክሬዲቶችን አሳልፈዋል"
+            "content": "{{amount}} ክሬዲቶችን አውጥቷል።"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} ክሬዲቶችን ለ {{toUserName}} ልከዋል"
+            "content": "{{amount}} ምስጋናዎች ወደ {{toUserName}} ተልኳል"
         },
         "Assets\/credits\/received": {
-            "content": "{{amount}} ክሬዲቶችን ከ {{fromUserName}} ተቀብለዋል"
+            "content": "ከ{1000} {{amount}} ምስጋናዎች ተቀብለዋል"
         }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "አዲስ አገልግሎት",
             "TitlePlaceholder": "የአገልግሎት ርዕስ",
-            "PricePlaceholder": "ዋጋ አዘጋጅ",
-            "LinkPlaceholder": "ተጨማሪ የመረጃ አገናኝ ያዘጋጁ",
+            "PricePlaceholder": "ዋጋ ያዘጋጁ",
+            "LinkPlaceholder": "ተጨማሪ መረጃ አገናኝ ያዘጋጁ",
             "DescriptionPlaceholder": "የአገልግሎት መግለጫ",
-            "SaveService": "አገልግሎት አስቀምጥ",
-            "SelectRequiredParticipants": "ተፈላጊ ተሳታፊዎች"
+            "SaveService": "አገልግሎት ይቆጥቡ",
+            "SelectRequiredParticipants": "አስፈላጊ ተሳታፊዎች"
         },
-        "ManageServiceTemplates": "የአገልግሎት አብነቶችን ያቀናብሩ",
+        "ManageServiceTemplates": "የአገልግሎት አብነቶችን አስተዳድር",
         "ManageServices": "አገልግሎቶችን ያስተዳድሩ",
         "Free": "ፍርይ",
-        "OptionalContribution": "አማራጭ መዋጮ",
-        "RequiredPayment": "ተፈላጊ ክፍያ",
+        "OptionalContribution": "አማራጭ አስተዋፅዖ",
+        "RequiredPayment": "የሚፈለግ ክፍያ",
         "AreYouSureDelete": "እርግጠኛ ነዎት ይህን አገልግሎት መሰረዝ ይፈልጋሉ?",
-        "AmountServicesRelated": "ከዚህ አገልግሎት ጋር የሚዛመዱ {{amount}} ተደራሽነቶች አሉ። እነሱ ደግሞ ይወገዳሉ።"
+        "AmountServicesRelated": "ከዚህ አገልግሎት ጋር የተያያዙ {{amount}} አቅርቦቶች አሉ። እንዲሁም ይወገዳሉ."
     },
     "NFT": {
         "Title": "ስለ {{title}} NFT መረጃ",

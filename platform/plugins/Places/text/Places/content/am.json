@@ -1,8 +1,8 @@
 {
-    "LatLng": "({{1}} lat ፣ {{2}} lng)",
+    "LatLng": "({999} lat፣ {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "በ {{1}} ውስጥ"
+        "PostcodeLabel": "{{1}} ({1000})",
+        "Title": "በ{999} ውስጥ"
     },
     "units": {
         "meter": "ሜትር",
@@ -11,47 +11,47 @@
         "kilometers": "ኪዮሜትሮች",
         "km": "ኪ.ሜ",
         "mile": "ማይል",
-        "miles": "ማይሎች",
-        "mi": "ማይ",
+        "miles": "ማይል",
+        "mi": "ሚ",
         "foot": "እግር",
         "feet": "እግሮች",
         "inches": "ኢንች"
     },
     "location": {
-        "interested": "በ {{select}} ውስጥ ባሉ ነገሮች ላይ ፍላጎት አለኝ",
+        "interested": "በ{999} ውስጥ በሚከናወኑ ነገሮች ላይ ፍላጎት አለኝ",
         "update": "የእኔን አካባቢ አዘምን",
-        "set": "የእኔን አካባቢ ያዘጋጁ",
-        "prompt": "{{ClickOrTap}} እዚህ<br> አዘጋጅ<br> ቦታ",
-        "myCurrentLocation": "የአሁኑ ሥፍራዬ",
-        "enterAddress": "አድራሻ ያስገቡ",
-        "enterPostcode": "እባክዎን የፖስታ ኮድ \/ ዚፕ ኮድዎን ያስገቡ",
+        "set": "አካባቢዬን አቀናብር",
+        "prompt": "{{ClickOrTap}} እዚህ ለ<br> የእርስዎን<br> አካባቢ",
+        "myCurrentLocation": "አሁን ያለኝ ቦታ",
+        "enterAddress": "አድራሻ አስገባ",
+        "enterPostcode": "እባክዎ የፖስታ ኮድዎን \/ ዚፕ ኮድዎን ያስገቡ",
         "create": {
-            "action": "አካባቢ ያክሉ",
-            "title": "አዲስ አካባቢ",
-            "nameYourLocation": "ቦታዎን ይሰይሙ"
+            "action": "አካባቢ ጨምር",
+            "title": "አዲስ ቦታ",
+            "nameYourLocation": "አካባቢዎን ይሰይሙ"
         },
         "confirm": {
             "title": "ይህ አካባቢ ይቀመጥ?",
-            "message": "ለወደፊቱ ይህንን ቦታ እንደገና ለመጠቀም አቅደዋል?",
+            "message": "ለወደፊቱ ይህንን ቦታ እንደገና ለመጠቀም አስበዋል?",
             "ok": "አዎ",
             "cancel": "አይ"
         },
         "add": {
-            "title": "ይህንን ቦታ ይሰይሙ",
+            "title": "ይህን አካባቢ ይሰይሙ",
             "placeholder": "ቤት ፣ ሥራ ፣ ወዘተ.",
             "ok": "አስቀምጥ"
         },
         "dialog": {
-            "title": "አካባቢ ይምረጡ"
+            "title": "ቦታ ይምረጡ"
         }
     },
     "areas": {
-        "filterPlaceholder": "በዚህ ቦታ ውስጥ ማንኛውም አካባቢ አለ?",
+        "filterPlaceholder": "በዚህ አካባቢ ውስጥ ያለ ማንኛውም ቦታ?",
         "newArea": "አዲስ አካባቢ",
-        "promptTitle": "ለአካባቢው ስም ያስገቡ ፦",
+        "promptTitle": "ለአካባቢው ስም ያስገቡ፡-",
         "absent": "እባክዎን አካባቢ ያዘጋጁ",
         "error": "ስህተት",
-        "exist": "አካባቢ አስቀድሞ አለ",
+        "exist": "አካባቢ አስቀድሞ አለ።",
         "addNewArea": "አዲስ አካባቢ ያክሉ",
         "add": "አክል"
     },
@@ -61,28 +61,28 @@
             "displayType": "ቦታዎች"
         },
         "Places\/location": {
-            "description": "አንድ ሕንፃ ፣ ቦታ ፣ መርከብ ፣ መናፈሻ ፣ ወዘተ ይወክላል።",
+            "description": "ሕንፃ፣ ቦታ፣ መርከብ፣ ፓርክ፣ ወዘተ ይወክላል።",
             "displayType": "አካባቢ"
         },
         "Places\/area": {
-            "description": "በአንድ ክፍል ውስጥ እንደ ክፍል ወይም ስብስብ ያሉ አካባቢን ይወክላል",
+            "description": "እንደ ክፍል ወይም ክፍል ያለ አካባቢን ይወክላል",
             "displayType": "አካባቢ"
         },
         "Places\/floor": {
-            "description": "በህንፃ ወይም በመርከብ ውስጥ ወለሉን ይወክላል",
+            "description": "በህንፃ ወይም በመርከብ ውስጥ ወለልን ይወክላል",
             "displayType": "ወለል"
         },
         "Places\/column": {
-            "description": "በህንፃ ወይም በመርከብ ውስጥ ዓምድ ይወክላል",
+            "description": "በህንፃ ወይም በመርከብ ውስጥ አንድ አምድ ይወክላል",
             "displayType": "አምድ"
         },
         "Places\/nearby": {
-            "description": "በጂኦሃሽ በተወሰነ ርቀት ውስጥ ላሉት ነገሮች ምድብ",
+            "description": "በጂኦሃሽ የተወሰነ ርቀት ውስጥ ላሉ ነገሮች ምድብ",
             "displayType": "በቦታዎች አቅራቢያ"
         },
         "Places\/interest": {
-            "description": "ከአንድ ጂኦሃሽ በተወሰነ ርቀት ውስጥ ላሉ ነገሮች ፣ ከፍላጎት ጋር የሚዛመድ",
-            "displayType": "ቦታዎች ወለድ"
+            "description": "በተወሰነ የጂኦሃሽ ርቀት ውስጥ ያሉ ነገሮች ምድብ፣ ከፍላጎት ጋር የሚዛመድ",
+            "displayType": "ቦታዎች ፍላጎት"
         }
     }
 }

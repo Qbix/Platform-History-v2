@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "เกิดข้อผิดพลาด {{status}} ระหว่างการร้องขอ",
+        "canceled": "คำขอถูกยกเลิก",
+        "500": "ข้อผิดพลาดภายในเซิร์ฟเวอร์",
+        "404": "ไม่พบ: {{url}}",
+        "501": "คำขอถูกขัดจังหวะ"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "เซสชั่นหมดอายุ รีเฟรชหน้าแล้วลองอีกครั้ง",
+        "otherDomain": "บล็อกคำขอข้ามโดเมนไปยังโดเมนต่างประเทศที่ {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "แตะ",
+        "click": "คลิก",
+        "yes": "ใช่",
+        "no": "ไม่",
+        "Tap": "แตะ",
+        "Click": "คลิก",
+        "Yes": "ใช่",
+        "No": "ไม่"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "มกราคม",
+        "2": "กุมภาพันธ์",
+        "3": "มีนาคม",
+        "4": "เมษายน",
+        "5": "พฤษภาคม",
+        "6": "มิถุนายน",
+        "7": "กรกฎาคม",
+        "8": "สิงหาคม",
+        "9": "กันยายน",
+        "10": "ตุลาคม",
+        "11": "พฤศจิกายน",
+        "12": "ธันวาคม"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "ที่สอง",
+        "seconds": "วินาที",
+        "minute": "นาที",
+        "minutes": "นาที",
+        "hour": "ชั่วโมง",
+        "day": "วัน",
+        "days": "วัน",
+        "week": "สัปดาห์",
+        "weeks": "สัปดาห์",
+        "month": "เดือน",
+        "months": "เดือน",
+        "year": "ปี",
+        "years": "ปี",
+        "decade": "ทศวรรษ",
+        "decades": "ทศวรรษ",
+        "century": "ศตวรรษ",
+        "centuries": "ศตวรรษ"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "โปรดอนุญาตให้เข้าถึงไมโครโฟนของคุณ",
+        "record": "บันทึก",
+        "recording": "การบันทึก",
+        "remains": "ซาก",
+        "maximum": "ขีดสุด",
+        "playing": "กำลังเล่น",
+        "recorded": "บันทึกไว้",
+        "clip": "คลิป",
+        "discard": "ทิ้ง",
+        "encoding": "การเข้ารหัส"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "คลิป",
+        "errorNoSource": "ไม่มีแหล่งที่มาของวิดีโอ",
+        "SkipAfter": "ข้ามหลังจาก",
+        "Skip": "ข้าม"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "คลิป",
+        "errorNoSource": "ไม่มีแหล่ง pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "ตั้งคลิปเริ่ม",
+        "ClipStart": "คลิปเริ่มต้น",
+        "SetClipEnd": "ตั้งปลายคลิป",
+        "ClipEnd": "คลิปจบ",
+        "StartMoreEnd": "ตำแหน่งเริ่มต้นต้องไม่เกินตำแหน่งสิ้นสุด",
+        "EndLessStart": "ตำแหน่งสิ้นสุดต้องไม่น้อยกว่าตำแหน่งเริ่มต้น",
+        "WhichInvalid": "อาร์กิวเมนต์ &#39;ซึ่ง&#39; ไม่ถูกต้อง"
     },
     "alert": {
-        "title": "Alert"
+        "title": "เตือน"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "ยืนยัน",
+        "ok": "ใช่",
+        "cancel": "ไม่"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "พร้อมท์",
+        "ok": "ไป"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "มากกว่า",
+        "Menu": "เมนู"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "เกิดข้อผิดพลาดในการอ่านไฟล์",
+        "errorType": "ขออภัย ไม่รองรับไฟล์ประเภทนี้",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "คุณอยากจะทำอะไร?",
+            "photo": "ถ่ายรูปใหม่",
+            "library": "เลือกจากห้องสมุด"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "กรุณาเลือกภาพขนาดใหญ่",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "ปรับขนาดและตำแหน่ง",
+            "touchscreen": "ใช้นิ้วของคุณเพื่อซูมและลาก",
+            "notTouchscreen": "ใช้เมาส์และวงล้อเพื่อซูมและลาก"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "เมื่อคืน",
+        "lastEvening": "วันก่อน",
+        "yesterday": "เมื่อวาน",
+        "thisMorning": "เช้านี้",
+        "today": "วันนี้",
+        "tonight": "คืนนี้",
+        "tomorrowMorning": "ทอม มอร์น",
+        "tomorrow": "พรุ่งนี้",
+        "hoursAgo": "{{h}} ชั่วโมงที่แล้ว",
+        "hourAgo": "{{h}} ชั่วโมงที่แล้ว",
+        "minuteAgo": "{{m}} นาทีที่แล้ว",
+        "minutesAgo": "{{m}} นาทีที่แล้ว",
+        "secondAgo": "{{s}} วินาทีที่แล้ว",
+        "secondsAgo": "{{s}} วินาทีที่แล้ว",
+        "fewSecondsAgo": "วินาทีที่แล้ว",
+        "rightNow": "ตอนนี้",
+        "inSecond": "ใน {{s}} วินาที",
+        "inSeconds": "ใน {{s}} วินาที",
+        "inMinute": "ใน {{m}} นาที",
+        "inMinutes": "ใน {{m}} นาที",
+        "inHour": "ใน {{h}} ชั่วโมง",
+        "inHours": "ใน {{h}} ชั่วโมง",
+        "inUnderMinute": "ภายใน 1 นาที"
     }
 }

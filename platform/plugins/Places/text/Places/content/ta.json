@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "{{1}}க்குள்"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "மீட்டர்",
+        "meters": "மீட்டர்",
+        "kilometer": "கிலோமீட்டர்",
+        "kilometers": "கியோமீட்டர்கள்",
+        "km": "கி.மீ",
+        "mile": "மைல்",
+        "miles": "மைல்கள்",
+        "mi": "மை",
+        "foot": "கால்",
+        "feet": "அடி",
+        "inches": "அங்குலங்கள்"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "{{select}}க்குள் நடக்கும் விஷயங்களில் ஆர்வமாக உள்ளேன்",
+        "update": "எனது இருப்பிடத்தைப் புதுப்பிக்கவும்",
+        "set": "எனது இருப்பிடத்தை அமைக்கவும்",
+        "prompt": "{{ClickOrTap}} இங்கே<br> உங்கள் அமைக்க<br> இடம்",
+        "myCurrentLocation": "எனது தற்போதைய இடம்",
+        "enterAddress": "முகவரியை உள்ளிடவும்",
+        "enterPostcode": "உங்கள் அஞ்சல் குறியீடு \/ அஞ்சல் குறியீட்டை உள்ளிடவும்",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "இருப்பிடத்தைச் சேர்க்கவும்",
+            "title": "புதிய இடம்",
+            "nameYourLocation": "உங்கள் இருப்பிடத்திற்கு பெயரிடவும்"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "இந்த இடத்தை சேமிக்கவா?",
+            "message": "எதிர்காலத்தில் இந்த இடத்தை மீண்டும் பயன்படுத்த திட்டமிட்டுள்ளீர்களா?",
+            "ok": "ஆம்",
+            "cancel": "இல்லை"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "இந்த இடத்திற்கு பெயரிடவும்",
+            "placeholder": "வீடு, வேலை போன்றவை.",
+            "ok": "சேமிக்கவும்"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "இருப்பிடத்தைத் தேர்ந்தெடுக்கவும்"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "இந்த இருப்பிடத்திற்குள் ஏதேனும் பகுதி உள்ளதா?",
+        "newArea": "புதிய பகுதி",
+        "promptTitle": "பகுதிக்கான பெயரை உள்ளிடவும்:",
+        "absent": "பகுதியை அமைக்கவும்",
+        "error": "பிழை",
+        "exist": "பகுதி ஏற்கனவே உள்ளது",
+        "addNewArea": "புதிய பகுதியைச் சேர்க்கவும்",
+        "add": "கூட்டு"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "இடங்களின் தொகுப்பு",
+            "displayType": "இடங்கள்"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "ஒரு கட்டிடம், இடம், கப்பல், பூங்கா போன்றவற்றைக் குறிக்கிறது.",
+            "displayType": "இடம்"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "அறை அல்லது தொகுப்பு போன்ற ஒரு இடத்திற்குள் இருக்கும் பகுதியைக் குறிக்கிறது",
+            "displayType": "பகுதி"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "ஒரு கட்டிடம் அல்லது கப்பலில் ஒரு தளத்தை குறிக்கிறது",
+            "displayType": "தரை"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "ஒரு கட்டிடம் அல்லது கப்பலில் உள்ள நெடுவரிசையைக் குறிக்கிறது",
+            "displayType": "நெடுவரிசை"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "ஜியோஹாஷின் குறிப்பிட்ட தூரத்தில் உள்ள பொருட்களுக்கான வகை",
+            "displayType": "இடங்களுக்கு அருகில்"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "ஜியோஹாஷின் குறிப்பிட்ட தூரத்தில் உள்ள விஷயங்களுக்கான வகை, ஆர்வத்துடன் பொருந்துகிறது",
+            "displayType": "ஆர்வமுள்ள இடங்கள்"
         }
     }
 }

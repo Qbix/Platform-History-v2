@@ -4,37 +4,37 @@
         "button": "Tik om te betalen"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: kosten in rekening gebracht voor {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Bedankt voor uw betaling tot {{call 'publisher.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: afschrijving verwerkt voor {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Bedankt voor uw betaling aan {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} geabonneerd op {{plan.title}}",
-        "YouSubscribedTo": "U bent ingeschreven voor {{plan.title}}"
+        "YouSubscribedTo": "Je bent geabonneerd op {{plan.title}}"
     },
     "payment": {
         "AboutOrder": "Info over bestelling",
-        "PaymentMethod": "Betalingswijze",
+        "PaymentMethod": "Betalingsmiddel",
         "ContactInfo": "Contact informatie",
         "Pay": "Betalen"
     },
     "credits": {
-        "InviteAcceptedBy": "Uitnodiging geaccepteerd door {{1}}",
-        "YouHaveCreditsToStart": "Je hebt {{1}} credits om te starten",
-        "PaymentFor": "Betaling voor &#39;{{1}}&#39;",
+        "InviteAcceptedBy": "Uitnodiging geaccepteerd door {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Je hebt {{amount}} tegoeden om te beginnen",
+        "PaymentFor": "Betaling voor &quot;{{1}}&quot;",
         "PaymentTo": "Betaling aan {{1}}",
-        "PaymentToUser": "Betaling aan {{userName}}",
-        "JoinedPaidStream": "voor deelname aan &#39; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;",
-        "CreatedCommunity": "voor het maken van community &#39;{{communityId}}&#39;",
-        "LeftPaidStream": "voor het verlaten van &#39; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &#39;",
-        "BoughtCredits": "{{amount}} credits gekocht",
-        "BuyAmountCredits": "Koop {{amount}} credits",
-        "MissingCredits": "Ontbrekende credits",
-        "YouMissingCredits": "Je mist {{amount}} credits",
+        "PaymentToUser": "Betaling aan {{toUserName}}",
+        "JoinedPaidStream": "voor reservering in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "voor het maken van community &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "als reserveringsterugbetaling in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "{{amount}} tegoed gekocht",
+        "BuyAmountCredits": "Koop {{amount}} tegoeden",
+        "MissingCredits": "Ontbrekende tegoeden",
+        "YouMissingCredits": "U heeft nog {{amount}} tegoeden nodig om door te gaan.",
         "BuyCredits": "Koop tegoed",
         "Buy": "Kopen",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Ongeldig bedrag",
+        "Credits": "tegoeden",
+        "ErrorInvalidAmount": "Bedrag ongeldig",
         "ErrorInvalidCurrency": "Helaas ondersteunen we valuta {{currency}} nog niet",
-        "WatchClip": "{{amount}} credits verdiend voor het kijken naar {{fromStreamTitle}}",
-        "PurchaseCredits": "Koop tegoeden",
+        "WatchClip": "{{amount}} credits verdiend voor het kijken van {{fromStreamTitle}}",
+        "PurchaseCredits": "Tegoed kopen",
         "forMessages": {
             "BoughtCredits": "{{amount}} tegoeden",
             "BonusCredits": "{{amount}} tegoeden"
@@ -50,26 +50,26 @@
     },
     "history": {
         "Date": "Datum",
-        "Amount": "Bedrag",
-        "Description": "Omschrijving",
+        "Amount": "Hoeveelheid",
+        "Description": "Beschrijving",
         "Client": "Cliënt",
         "To": "naar",
         "From": "van",
         "HistoryEmpty": "U heeft nog geen gegevens",
-        "SeeHistory": "Bekijk de betalingsgeschiedenis voor {{1}}",
-        "PaymentFor": "{{amount}} credits uitgegeven",
-        "PaymentTo": "Heeft {{amount}} tegoed verzonden",
-        "PaymentToUser": "Heeft {{amount}} tegoed verzonden",
+        "SeeHistory": "Bekijk betalingsgeschiedenis voor {{1}}",
+        "PaymentFor": "Verzonden {{amount}} tegoeden",
+        "PaymentTo": "Verzonden {{amount}} tegoeden",
+        "PaymentToUser": "Verzonden {{amount}} tegoeden",
         "JoinedPaidStream": {
             "+": "{{amount}} credits verdiend",
-            "-": "{{amount}} credits uitgegeven"
+            "-": "{{amount}} tegoeden besteed"
         },
         "LeftPaidStream": {
-            "+": "Heeft {{amount}} tegoed ontvangen",
-            "-": "Heeft {{amount}} tegoed verzonden"
+            "+": "{{amount}} tegoeden ontvangen",
+            "-": "Verzonden {{amount}} tegoeden"
         },
-        "CreatedCommunity": "{{amount}} credits uitgegeven",
-        "BoughtCredits": "{{amount}} credits gekocht",
+        "CreatedCommunity": "{{amount}} tegoeden besteed",
+        "BoughtCredits": "{{amount}} tegoed gekocht",
         "InviteAcceptedBy": "{{amount}} credits verdiend",
         "YouHaveCreditsToStart": "{{amount}} credits verdiend",
         "CreatePaidStream": "{{amount}} tegoeden besteed",
@@ -85,85 +85,85 @@
         "Streams_greeting": "{{amount}} credits verdiend"
     },
     "subscriptions": {
-        "infoTitle": "Stel betalingsinformatie in",
+        "infoTitle": "Betalingsinformatie instellen",
         "confirm": {
-            "title": "Start abonnement",
+            "title": "Abonnement starten",
             "message": "Wilt u zich abonneren op {{title}}?",
-            "ok": "OK",
-            "cancel": "annuleren"
+            "ok": "oke",
+            "cancel": "Annuleren"
         },
         "CreditOrDebitCard": "Creditcard of bankpas",
-        "SubscribePayment": "Abonneren op betaling",
+        "SubscribePayment": "Abonneren Betaling",
         "ImmediatePayment": "Onmiddellijke betaling"
     },
     "payments": {
-        "infoTitle": "Stel betalingsinformatie in",
+        "infoTitle": "Betalingsinformatie instellen",
         "confirm": {
             "title": "Maak een betaling",
-            "message": "Ga je akkoord om {{symbol}} {{amount}} te betalen?",
-            "ok": "OK",
-            "cancel": "annuleren"
+            "message": "Gaat u akkoord met het betalen van {{symbol}}{{amount}}?",
+            "ok": "oke",
+            "cancel": "Annuleren"
         },
-        "BuyAmountCredits": "Koop {{amount}} credits"
+        "BuyAmountCredits": "Koop {{amount}} tegoeden"
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "credits",
-            "description": "houdt credits en betalingen bij"
+            "displayType": "tegoeden",
+            "description": "houdt kredieten en betalingen bij"
         },
         "Assets\/plan": {
-            "displayType": "Abonnement Plan",
-            "description": "abonnement plan"
+            "displayType": "Abonnementsplan",
+            "description": "abonnement"
         },
         "Assets\/subscription": {
             "displayType": "Abonnement",
             "description": "abonnement"
         },
         "Assets\/product": {
-            "displayType": "Artikel",
-            "description": "product wordt verkocht"
+            "displayType": "Product",
+            "description": "product dat wordt verkocht"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service wordt aangeboden"
+            "displayType": "Dienst",
+            "description": "dienst die wordt aangeboden"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Verdiende {{amount}} credits"
+            "content": "{{amount}} credits verdiend"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} credits uitgegeven"
+            "content": "{{amount}} tegoeden besteed"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} credits verzonden"
+            "content": "Verzonden {{amount}} tegoeden naar {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Ontvangen {{amount}} credits"
+            "content": "{{amount}} tegoeden ontvangen van {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "{{amount}} credits gekocht"
+            "content": "{{amount}} tegoed gekocht"
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} tegoeden"
         }
     },
     "charge": {
-        "Subject": "U krijgt {{displayAmount}} van {{call 'publisher.displayName'}} betaald door &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hé, dit is alleen om u te laten weten dat {{1}} {{3}} in rekening is gebracht voor {{3}} door {{4}}"
+        "Subject": "U ontvangt een betaling van {{displayAmount}} van {{call 'publisher.displayName'}} door &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hé, dit is alleen om je te laten weten dat {{1}} {{2}} voor {{3}} in rekening is gebracht door {{4}}"
     },
     "charged": {
-        "Subject": "Hartelijk dank voor uw betaling voor &#39;{{description}}&#39;",
-        "HavePaid": "Hoi {{1}}, dit is slechts een snelle bevestiging dat je {{2}} met succes hebt betaald aan {{3}} voor {{4}}"
+        "Subject": "Bedankt voor uw betaling voor &quot;{{description}}&quot;",
+        "HavePaid": "Hallo {{1}}, dit is slechts een snelle bevestiging dat u met succes {{2}} aan {{3}} heeft betaald voor {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Nieuwe dienst",
-            "TitlePlaceholder": "Servicetitel",
+            "TitlePlaceholder": "Diensttitel",
             "PricePlaceholder": "Prijs instellen",
-            "LinkPlaceholder": "stel extra info link in",
+            "LinkPlaceholder": "extra info-link instellen",
             "DescriptionPlaceholder": "Dienstbeschrijving",
-            "SaveService": "Bespaar service",
+            "SaveService": "Service opslaan",
             "SelectRequiredParticipants": "Vereiste deelnemers"
         },
         "ManageServiceTemplates": "Servicesjablonen beheren",
@@ -203,7 +203,7 @@
         "Minutes": "Minuten",
         "Second": "Seconde",
         "Seconds": "seconden",
-        "SalesCreator": "van de verkoop gaat naar de maker",
+        "SalesCreator": "van de omzet gaat naar de maker",
         "Details": "Details",
         "Bids": "Biedingen",
         "History": "Geschiedenis",

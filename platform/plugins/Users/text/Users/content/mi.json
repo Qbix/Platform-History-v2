@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
+        "Title": "Nga tātaritanga",
+        "Daily": "Ia rā",
+        "Weekly": "Ia wiki",
+        "Monthly": "Ia marama",
+        "Application": "Taupānga",
+        "Pages": "Nga wharangi",
+        "Services": "Ratonga",
         "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "WeekDays": "Nga Ra Wiki"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "takiuru",
+        "LogOut": "puta ki waho"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Tautuhi {{1}} hei tuatahi {{2}}",
+        "ChoosePassPhrase": "Kōwhiria he <strong>kīanga tuku<\/strong> hei takiuru.<br> He rerenga korero ngawari kei roto i etahi kupu ka ngawari ki te maumahara.",
+        "ChoosePassPhraseSeeSuggestions": "Kōwhiria he <strong>kīanga tuku<\/strong> pai hei tiaki i tō pūkete. Tirohia nga whakaaro mo etahi whakaaro.",
+        "LogOutAndTryAgain": "Takiputa atu ka ngana ano",
+        "IfYouFeel": "Mena ka whakaaro koe kua he tetahi, ka taea e koe",
+        "SetIdentifierButtonTitle": "timata ano"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Tīmatahia"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Tīmatahia",
+        "Authorize": "Whakamana",
+        "TermsLabel": "Kua panui ahau me te whakaae<br> ki te {{link}}",
+        "TermsTitle": "Nga tikanga",
+        "mustAgree": "Tuatahi me whakaae koe ki nga tikanga."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Ka whakaae ahau ki te {{link}}",
+        "TermsTitle": "Nga tikanga"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Whakaaetanga",
+        "prompt": "Kei te pirangi koe ki te whakahohe i nga whakamohiotanga? Ka whiwhi koe i nga korero whakamohiotanga mo nga mea e aro nui ana koe.",
+        "yes": "Ae",
+        "no": "Kao",
+        "WelcomePleaseVerifyEmail": "Nau mai haere mai! Tena koa manatokohia to wahitau imeera.",
+        "WelcomeVerifyEmail": "Nau mai haere mai! Manatokohia to wahitau imeera.",
+        "ForgetPass": "Hey, i wareware koe ki to kīangahipa?",
+        "PassphraseSaved": "Kua tiakina to rerenga korero.",
+        "IdentifierActivated": "Kua whakahohehia to {{type}}.",
+        "CompletedActivation": "Kua oti i a koe te whakahohe kaiwhakamahi.",
+        "CompletedActivationLogIn": "Kua oti i a koe te whakahohe kaiwhakamahi. Ngana ki te takiuru inaianei."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Kōwhiri hoapā",
+            "CreateAccount": "+ Hoapā Hou",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create kāore i kitea",
+            "SearchByName": "Rapua ma te ingoa",
+            "EmptyContacts": "Kaore i kitea nga hoapā..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Tīpakohia te hoapā o {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Tīpakohia te tapanga.",
+        "inviteUser": "Powhiri Kaiwhakamahi",
+        "selectRole": "Tīpako Tūnga",
+        "inviteRole": "Powhiri {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "He reo muhu kua tohua",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Nau mai haere mai",
+        "directions": "Waihangahia he kaute, takiuru ranei.",
+        "directionsNoRegister": "Takiuru mena he putea taau.",
+        "goButton": "Haere",
+        "passphrase": "Whakauruhia to rerenga korero:",
+        "loginButton": "Tīmatahia",
+        "registerButton": "Tīmatahia",
+        "resendButton": "Tukua Karere Whakahohe",
+        "forgot": "Kua wareware?",
+        "resendConfirm": "Kei te pirangi koe ki te tuku karere ki te tautuhi i to kīangahipa?",
+        "resendSuccess": "Takina he karere hei tautuhi i to kupuhipa",
+        "resendClose": "Katia",
+        "noPassphrase": "I mua i to urunga, me whakarite e koe he kupu whakawhiti ma te panui i te hono i to karere whakahohenga.",
+        "notVerified": "Me tuku e koe he karere whakaoho kia taea ai te takiuru.",
+        "emailExists": "I ngana koe ki te rehita me tenei imeera i mua? Ki te pera, tirohia to pouakaroto ki te whakahohe i to putea. <a href='#resend' class='Q_button Users_activation_resend'>Paatohia kia tukuna ano te karere<\/a>",
+        "mobileExists": "I ngana koe ki te rehita me tenei nama waea i mua? Ki te pera, tirohia to SMS ki te whakahohe i to putea. <a href='#resend' class='Q_button Users_activation_resend'>Paatohia kia tukuna ano te karere<\/a>",
+        "usingOther": "ka taea ranei e koe",
+        "prompt": "Kōwhiria he ingoa kaiwhakamahi:",
+        "newUser": "hanga ranei he kaute hou i raro nei",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "to waea pūkoro #, imeera ranei",
+            "mobile": "tomo to waea pūkoro #",
+            "email": "tomo tō wāhitau īmēra",
+            "username": "whakamahia nga reta me nga nama anake"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Whakaaetia nga Ture o te Ratonga?",
+        "facebookNoEmail": "Kei te ngaro to putea facebook he wahitau imeera kua whakapumautia. Me takiuru noa i te huarahi taketake.",
+        "picTooltip": "Ka taea e koe te huri i tenei pikitia i muri mai",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Takiuru ki {{host}} i te wa {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Ka anga ki te Pukoro",
+                "content": "Kia kati koe i tenei korero, ka haria koe ki to putea. Whai muri i to hainatanga, hoki mai ki tenei wharangi."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Tāpirihia he huarahi ki te takiuru",
+        "sendMessage": "Tukua Karere Whakahohe",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "tomo to waea pūkoro #, imeera ranei",
+            "mobile": "tomo koutou tau pūkoro",
+            "email": "tomo tō wāhitau īmēra",
+            "username": "ingoa kaiwhakamahi"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Pūkete",
+        "areUsing": "Kei te whakamahi koe {{platform}} hei",
+        "noLongerUsing": "Kua kore koe e hono atu ki a {{platform}} as",
+        "doAuth": "Takiuru me tenei kaute",
+        "doSwitch": "Hurihia ki tenei kaute"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Rangatira",
+        "Admin": "Kaiwhakahaere",
+        "Member": "Mema",
+        "Guest": "Manuhiri",
+        "Host": "Kaihautū"
     }
 }

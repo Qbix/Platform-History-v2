@@ -1,14 +1,14 @@
 {
     "actions": {
-        "LogIn": "hyni në",
+        "LogIn": "identifikohu",
         "LogOut": "shkyç"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} si parësore {{2}}",
-        "ChoosePassPhrase": "Zgjidh një <strong>frazë kalimi<\/strong> për t&#39;u identifikuar. <br> Një frazë e thjeshtë që përbëhet nga disa fjalë që ju do të lehtë të mbani mend.",
-        "ChoosePassPhraseSeeSuggestions": "Zgjidhni një <strong>frazë<\/strong> të mirë të <strong>kalimit<\/strong> për të mbrojtur llogarinë tuaj. Shikoni sugjerimet për disa ide.",
+        "SetAsPrimary": "Cakto {{1}} si primar tim {{2}}",
+        "ChoosePassPhrase": "Zgjidhni një <strong>frazë kalimi<\/strong> për t&#39;u identifikuar.<br> Një frazë e thjeshtë e përbërë nga disa fjalë që do t&#39;i mbani mend lehtë.",
+        "ChoosePassPhraseSeeSuggestions": "Zgjidhni një <strong>frazë të mirë kalimi<\/strong> për të mbrojtur llogarinë tuaj. Shihni sugjerimet për disa ide.",
         "LogOutAndTryAgain": "Dilni dhe provoni përsëri",
-        "IfYouFeel": "Nëse ndjeni që diçka gaboi, mundeni",
+        "IfYouFeel": "Nëse mendoni se diçka shkoi keq, mundeni",
         "SetIdentifierButtonTitle": "filloje nga e para"
     },
     "session": {
@@ -17,116 +17,116 @@
     "authorize": {
         "GetStarted": "Fillo",
         "Authorize": "Autorizoj",
-        "TermsLabel": "Kam lexuar dhe pajtohem <br> në {{link}}",
+        "TermsLabel": "Kam lexuar dhe jam dakord<br> në {{link}}",
         "TermsTitle": "Kushtet",
-        "mustAgree": "Së pari duhet të pajtoheni me kushtet."
+        "mustAgree": "Së pari ju duhet të pajtoheni me kushtet."
     },
     "register": {
-        "TermsLabel": "Unë pranoj {{link}}",
+        "TermsLabel": "Unë e pranoj {{link}}",
         "TermsTitle": "Kushtet"
     },
     "notifications": {
-        "title": "leje",
-        "prompt": "Dëshiron të aktivizosh njoftimet? Ju do të merrni përditësime në kohë reale për gjërat që ju interesojnë.",
+        "title": "Leja",
+        "prompt": "Dëshiron të aktivizosh njoftimet? Do të merrni përditësime në kohë reale për gjërat që ju interesojnë.",
         "yes": "po",
-        "no": "jo",
-        "WelcomePleaseVerifyEmail": "Mirë se vini! Ju lutemi verifikoni adresën tuaj të postës elektronike.",
-        "WelcomeVerifyEmail": "Mirë se vini! Verifikoni adresën tuaj të postës elektronike.",
-        "ForgetPass": "Hej, a keni harruar fjalëkalimin tuaj?",
+        "no": "Nr",
+        "WelcomePleaseVerifyEmail": "Mirë se vini! Ju lutemi verifikoni adresën tuaj të emailit.",
+        "WelcomeVerifyEmail": "Mirë se vini! Verifikoni adresën tuaj të emailit.",
+        "ForgetPass": "Hej, e harrove frazën e kalimit?",
         "PassphraseSaved": "Fraza juaj e kalimit është ruajtur.",
-        "IdentifierActivated": "99 999 juaj u aktivizua.",
+        "IdentifierActivated": "{{type}} juaj është aktivizuar.",
         "CompletedActivation": "Ju keni përfunduar aktivizimin e përdoruesit.",
-        "CompletedActivationLogIn": "Ju keni përfunduar aktivizimin e përdoruesit. Provoni të regjistroheni tani."
+        "CompletedActivationLogIn": "Ju keni përfunduar aktivizimin e përdoruesit. Provoni të identifikoheni tani."
     },
     "usersContacts": {
         "selectLabel": "Ju lutemi zgjidhni etiketën.",
-        "inviteUser": "Fto Përdoruesin",
-        "selectRole": "Zgjidhni rolin",
-        "inviteRole": "Ftoni {999}"
+        "inviteUser": "Ftoni përdoruesit",
+        "selectRole": "Zgjidhni Rolin",
+        "inviteRole": "Fto {{role}}"
     },
-    "invalidLanguageSelected": "Gjuhë e pavlefshme e zgjedhur",
+    "invalidLanguageSelected": "Është zgjedhur gjuhë e pavlefshme",
     "contacts": {
         "dialog": {
             "title": "Zgjidhni kontaktin",
-            "SearchByName": "Kërkoni sipas emrit",
+            "SearchByName": "Kërko sipas emrit",
             "CreateAccount": "+ Kontakt i ri",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.krijoni nuk u gjet",
-            "EmptyContacts": "Kontaktet nuk u gjetën ..."
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nuk u gjet",
+            "EmptyContacts": "Kontaktet nuk u gjetën..."
         },
         "select": {
-            "title": "Përzgjidh kontaktin e {{displayName}}"
+            "title": "Zgjidh kontaktin e {{displayName}}"
         }
     },
     "login": {
-        "title": "i mirëpritur",
-        "directions": "Krijoni një llogari ose regjistrohuni.",
+        "title": "Mirë se vini",
+        "directions": "Krijo një llogari, ose identifikohu.",
         "directionsNoRegister": "Hyni nëse keni një llogari.",
-        "goButton": "shkoj",
-        "passphrase": "Vendosni frazën tuaj të kalimit:",
+        "goButton": "Shkoni",
+        "passphrase": "Shkruani frazën tuaj të kalimit:",
         "loginButton": "Fillo",
         "registerButton": "Fillo",
-        "resendButton": "Dërgoni mesazh aktivizimi",
+        "resendButton": "Dërgoni një mesazh aktivizimi",
         "forgot": "E harrova?",
-        "resendConfirm": "A doni të dërgoni një mesazh për të rivendosur frazën tuaj?",
-        "resendSuccess": "Kontrolloni për një mesazh për të rivendosur frazën tuaj",
-        "resendClose": "afër",
-        "noPassphrase": "Para se të regjistroheni, duhet të vendosni një frazë kalimi duke klikuar lidhjen në mesazhin tuaj të aktivizimit.",
-        "notVerified": "Ju duhet të dërgoni vetes një mesazh aktivizimi për t&#39;u regjistruar.",
-        "emailExists": "A u përpoqët të regjistrohesh më parë me këtë email? Nëse po, kontrolloni kutinë tuaj për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të dërguar mesazhin<\/a>",
-        "mobileExists": "A u përpoqët të regjistrohesh më parë me këtë numër celular? Nëse është kështu, kontrolloni SMS-në tuaj për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të dërguar mesazhin<\/a>",
-        "usingOther": "ose mundeni",
+        "resendConfirm": "Dëshiron të dërgosh një mesazh për të rivendosur frazën e kalimit?",
+        "resendSuccess": "Kontrolloni për një mesazh për të rivendosur frazën tuaj të kalimit",
+        "resendClose": "Mbylle",
+        "noPassphrase": "Përpara se të mund të identifikoheni, duhet të vendosni një frazë kalimi duke klikuar lidhjen në mesazhin tuaj të aktivizimit.",
+        "notVerified": "Ju duhet t&#39;i dërgoni vetes një mesazh aktivizimi në mënyrë që të identifikoheni.",
+        "emailExists": "A keni provuar të regjistroheni me këtë email më parë? Nëse po, kontrolloni kutinë tuaj hyrëse për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të ridërguar mesazhin<\/a>",
+        "mobileExists": "A keni provuar të regjistroheni me këtë numër celular më parë? Nëse po, kontrolloni SMS për të aktivizuar llogarinë tuaj. <a href='#resend' class='Q_button Users_activation_resend'>Klikoni për të ridërguar mesazhin<\/a>",
+        "usingOther": "ose mundesh",
         "prompt": "Zgjidhni një emër përdoruesi:",
         "newUser": "ose krijoni një llogari të re më poshtë",
         "placeholders": {
-            "identifier": "# ose emaili juaj celular",
-            "mobile": "shkruani celularin #",
+            "identifier": "# celulari ose emaili juaj",
+            "mobile": "shkruani numrin tuaj celular",
             "email": "shkruani adresën tuaj të emailit",
-            "username": "Emri i përdoruesit"
+            "username": "përdorni vetëm shkronja dhe numra"
         },
-        "confirmTerms": "Pranoni Kushtet e Shërbimit?",
-        "facebookNoEmail": "Në llogarinë tuaj në facebook mungon një adresë e konfirmuar e-mail. Thjesht futuni në mënyrën amtare.",
-        "picTooltip": "Ju mund ta ndryshoni këtë pamje më vonë",
+        "confirmTerms": "Prano Kushtet e Shërbimit?",
+        "facebookNoEmail": "Llogarisë suaj në facebook i mungon një adresë emaili e konfirmuar. Thjesht regjistrohuni në mënyrë amtare.",
+        "picTooltip": "Ju mund ta ndryshoni këtë foto më vonë",
         "wallet": {
             "payload": "Hyni në {{host}} në kohën {{timestamp}}",
             "alert": {
-                "title": "Përcjellja në Wallet",
-                "content": "Pasi ta mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të regjistroheni, kthehuni në këtë faqe."
+                "title": "Ridrejtimi te Portofoli",
+                "content": "Pasi të mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të identifikoheni, kthehuni në këtë faqe."
             }
         }
     },
     "setIdentifier": {
-        "title": "Shtoni një mënyrë për t&#39;u regjistruar",
-        "sendMessage": "Dërgoni mesazh aktivizimi",
+        "title": "Shtoni një mënyrë për t&#39;u identifikuar",
+        "sendMessage": "Dërgoni një mesazh aktivizimi",
         "placeholders": {
-            "identifier": "shkruani numrin tuaj celular ose emailin tuaj",
+            "identifier": "shkruani numrin e celularit ose emailin tuaj",
             "mobile": "shkruani numrin tuaj celular",
             "email": "shkruani adresën tuaj të emailit",
-            "username": "Emri i përdoruesit"
+            "username": "emri i përdoruesit"
         }
     },
     "prompt": {
-        "title": "Llogari {999",
-        "areUsing": "Ju jeni duke përdorur 99 99 999} si",
-        "noLongerUsing": "Ju nuk jeni më të lidhur me 99 999}} si",
+        "title": "Llogaria {{Platform}}",
+        "areUsing": "Po përdorni {{platform}} si",
+        "noLongerUsing": "Nuk je më i lidhur me {{platform}} si",
         "doAuth": "Identifikohu me këtë llogari",
-        "doSwitch": "Kalo te kjo llogari"
+        "doSwitch": "Kalo në këtë llogari"
     },
     "roles": {
-        "Owner": "pronar",
-        "Admin": "admin",
-        "Member": "anëtar",
-        "Guest": "mysafir",
+        "Owner": "Pronari",
+        "Admin": "Admin",
+        "Member": "Anëtar",
+        "Guest": "I ftuar",
         "Host": "Mikpritës"
     },
     "analytics": {
-        "Title": "Analitikë",
-        "Daily": "Të përditshme",
+        "Title": "Analiza",
+        "Daily": "Ditore",
         "Weekly": "Javore",
         "Monthly": "Mujore",
         "Application": "Aplikacion",
         "Pages": "Faqet",
         "Services": "Shërbimet",
         "Faq": "Fak",
-        "WeekDays": "Ditët e Javës"
+        "WeekDays": "Ditët e javës"
     }
 }

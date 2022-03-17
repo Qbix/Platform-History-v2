@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "ეს კონტენტი იმალება თქვენგან."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Ახალი ნივთი"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "ხალხი მე დავპატიჟე",
+        "Streams\/invitedMe": "ვინ დამპატიჟა",
+        "DoYouAgree": "Მეთანხმები?",
+        "Yes": "დიახ",
+        "No": "არა"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Რა ინტერესები გაქვთ?",
+        "CanAdd": "თუ მაინც ვერ პოულობთ იმას, რასაც ეძებთ, შეგიძლიათ დაამატოთ ახალი ინტერესი ქვემოთ:",
+        "TrySynonyms": "არ ხედავ? სცადეთ რამდენიმე სინონიმი.",
+        "AddUnderCategory": "დაამატეთ კატეგორიაში...",
+        "Other": "სხვა",
+        "Unlisted": "ჩამოთვლილი"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "შეტყობინება მონიშნულია ადმინისტრატორის განსახილველად. შეეხეთ ხელახლა დროშის მოსახსნელად.",
+        "noOneSaid": "არავის არაფერი უთქვამს",
+        "closeChatButton": "ჩატის დახურვა",
+        "closeChatConfirmTitle": "დაიხუროს ეს ჩატი?",
+        "closeChatConfirm": "დარწმუნებული ხართ, რომ გსურთ ამ ჩატის დახურვა?",
+        "Subscribed": "შეტყობინებები ჩართულია",
+        "Unsubscribed": "შეტყობინებები დადუმებულია",
+        "closeChatConfirmYes": "დიახ",
+        "closeChatConfirmNo": "არა",
+        "earlierComments": "ადრე კომენტარები",
+        "startedConversation": "დაიწყო საუბარი",
+        "RealTimeCall": "რეალურ დროში ზარი",
+        "SearchByName": "მოძებნეთ სახელით",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} სტუმრობს ჩატს",
+            "Join": "{{displayName}} შეუერთდა ჩეთს",
+            "Leave": "{{displayName}} დატოვა ჩატი",
+            "RelatedTo": "{{displayName}} დაიწყო {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "მართეთ თქვენი ელ.ფოსტის გამოწერები",
+        "IfUnsubscribe": "თუ გსურთ გამოწერის გაუქმება",
+        "*": "გაგზავნეთ {{& message.fields.type}} {{& stream.fields.title}}-ს",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} თქვა: {{& message.content}}",
+        "Streams\/changed": "ცვლილებები {{stream.fields.title}}-ში",
+        "Streams\/invite": "თქვენ მიწვეული ხართ {{& stream.fields.title}}-ზე",
+        "Streams\/announcement": "განცხადება {{& stream.fields.title}}-ში",
+        "Streams\/access": "{{&call 'avatar.displayName'}} შეცვალა წვდომა {{& stream.fields.title}}-ში",
+        "Streams\/chat\/edit": "ჩატის შეტყობინება რედაქტირებულია {{& stream.fields.title}}-ში",
+        "Streams\/chat\/remove": "ჩეთის შეტყობინება წაიშალა {{& stream.fields.title}}-ში",
+        "Streams\/closed": "{{stream.fields.title}} დაიხურა",
+        "Streams\/task\/progress": "პროგრესი მიღწეულია {{stream.fields.title}}",
+        "Streams\/task\/complete": "დავალება დასრულებულია: {{stream.fields.title}}",
+        "Streams\/task\/error": "შეცდომა დროს: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: შემომავალი შეტყობინება",
+        "Streams\/relatedTo\/Streams\/call": "ახალი ზარი დაიწყო {{toTitle}}-ში",
+        "Streams\/relatedTo\/*": "ახალი {{relationDisplayType}} {{toTitle}}-ში",
+        "Streams\/relatedFrom\/*": "დამატებულია {{toTitle}}-ში, როგორც {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} მოგახსენეთ კომენტარში",
+        "Streams\/call": "{{displayName}} დაიწყო რეალურ დროში ზარი"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "მოიწვიე",
+        "messageContent": "{{displayName}} მოგიწვიათ {{inviteUrl}}",
+        "youCanNowPaste": "ახლა შეგიძლიათ ჩასვათ ეს ბმული სადმე ხალხის მოსაწვევად",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
+            "chooseFromContacts": "აირჩიეთ თქვენი კონტაქტებიდან",
+            "chooseAgainFromContacts": "აირჩიეთ ხელახლა კონტაქტებიდან",
+            "inviteSelectedContacts": "არჩეული კონტაქტების მოწვევა",
+            "selectFromContacts": "აირჩიეთ კონტაქტებიდან",
+            "userChooserPlaceholder": "მოძებნეთ სახელით",
+            "photo": "Გადაიღეთ სურათი",
+            "photoInstruction": "თუ თქვენს თვალწინ არის ადამიანი, ვინც დაასკანირა თქვენი QR კოდი, გადაუღეთ მას ფოტო",
+            "to": "მისამართი: {{Stream Title}}",
+            "go": "წადი",
+            "title": "მოიწვიე",
+            "placeholder": "მობილურის ნომერი ან ელექტრონული ფოსტის მისამართი",
+            "orInvite": "ან მოიწვიე ხალხი:",
+            "copyLink": "{{ClickOrTap}} მოწვევის ბმულის დასაკოპირებლად",
+            "shareOrCopyLink": "{{ClickOrTap}} მოწვევის ბმულის გასაზიარებლად ან დასაკოპირებლად",
+            "QR": "{{ClickOrTap}} QR კოდის გენერირებისთვის",
+            "QRtitle": "დაასკანირეთ ეს QR კოდი",
+            "QRscanned": "მათ დაასკანერეს!",
+            "scannedQR": "{{ClickOrTap}} თუ კოდი სკანირებული იყო",
+            "byEmail": "ფოსტა",
+            "byText": "ტექსტი",
+            "byFacebook": "ფეისბუქი",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "ჰეი, შეამოწმეთ ეს",
+            "PleaseVisitLink": "გთხოვთ ეწვიოთ შემდეგ ბმულს:",
+            "InvitingYou": "გეპატიჟებით {{title}}",
+            "HasInvitedYou": "{{displayName}} მოგიწვიათ {{title}}",
+            "HasMentionedYou": "{{displayName}} მოგახსენეთ „{{title}}“-ში",
+            "YOUAREINVITED": "თქვენ მოწვეული ხართ!",
+            "AcceptInvite": "მიიღეთ მოწვევა"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "თქვენ მიწვეული ხართ {{title}}-ში. გთხოვთ, შეეხეთ {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "თქვენ მოწვეული ხართ. {{ClickOrTap}} აქ მისაღებად და გასაწევრიანებლად."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "გამოაქვეყნა <em>{{message.fields.type}}<\/em> შეტყობინება {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
+            "commentedOn": "დააკომენტარა",
+            "startedCallIn": "დაიწყო ზარი",
             "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "body": "{{& url}}-ში: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "გამოქვეყნებულია",
+                "byAvatar": "მიერ {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "აქვს ახალი {{instructions.fromDisplayType}}",
+                "byAvatar": "დაამატა {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "მოსაწვევები იგზავნება ჩვენი ნომრიდან, რომელსაც თქვენი მეგობრები ჯერ არ ცნობენ. მიჰყევით მოკლე ტექსტს, რათა აცნობოთ, რომ მოწვევა მოვიდა თქვენგან და სთხოვეთ დააწკაპუნონ ბმულზე.",
+            "confirm": "მოსაწვევები იგზავნება ჩვენი ნომრიდან, რომელსაც თქვენი მეგობრები ჯერ არ ცნობენ. გნებავთ შემდგომი ტექსტის გაგზავნა, რათა მათ აცნობონ, რომ მოწვევა მოვიდა თქვენგან და სთხოვეთ დააწკაპუნონ ბმულზე.",
+            "check": "ჰეი, ახლახან გამოგიგზავნეთ მოწვევა {{app}} აპში. გთხოვთ, შეამოწმოთ თქვენი sms და დააჭიროთ ბმულს!",
+            "CheckYourMobile": "გთხოვთ, შეამოწმოთ SMS და მიჰყევით ინსტრუქციას!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "მოსაწვევები იგზავნება ჩვენი დომენიდან, რომელსაც თქვენი მეგობრები ჯერ არ ცნობენ. მიჰყევით მოკლე ტექსტს, რათა აცნობოთ, რომ მოწვევა მოვიდა თქვენგან და სთხოვეთ დააწკაპუნონ ბმულზე.",
+            "confirm": "მოსაწვევები იგზავნება ჩვენი დომენიდან, რომელსაც თქვენი მეგობრები ჯერ არ ცნობენ. გნებავთ შემდგომი ტექსტის გაგზავნა, რათა მათ აცნობონ, რომ მოწვევა მოვიდა თქვენგან და სთხოვეთ დააწკაპუნონ ბმულზე.",
+            "subject": "მიგიღიათ მოწვევა?",
+            "body": "ჰეი, ახლახან გამოგიგზავნეთ მოწვევა {{app}} აპში. გთხოვთ, შეამოწმოთ თქვენი ელფოსტა და დააწკაპუნეთ ბმულზე!",
+            "CheckYourEmail": "გთხოვთ, შეამოწმოთ თქვენი ელ.წერილი და მიჰყევით ინსტრუქციას!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "სათაური",
+        "Subscribed": "გამოწერილი",
+        "Participants": "Მონაწილეები",
+        "AreYouSureRemoveIdentifier": "დარწმუნებული ხართ, რომ წაშალეთ ეს იდენტიფიკატორი?",
+        "AreYouSureUnsubscribeIdentifier": "დარწმუნებული ხართ, რომ გააუქმებთ ამ იდენტიფიკატორს? ის გამორთავს შეტყობინებებს ამ იდენტიფიკატორზე.",
+        "AreYouSureUnsubscribeDevice": "დარწმუნებული ხართ, რომ გააუქმებთ ამ მოწყობილობის გამოწერას? ის გამორთავს შეტყობინებებს ამ მოწყობილობისთვის.",
+        "AreYouSureRemoveParticipant": "დარწმუნებული ხართ, რომ გსურთ ამ მონაწილის წაშლა?",
+        "RemoveParticipant": "მონაწილის წაშლა",
+        "Identifiers": "იდენტიფიკატორები",
+        "Devices": "მოწყობილობები",
+        "Streams": "ნაკადები"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "თქვენ არ გაქვთ ნებართვა შეუერთდეთ ამ ნაკადს.",
+        "streamTitle": "{{1}} დაიწყო პირდაპირი ზარი",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "დაკავშირება",
+            "microphoneBtn": "მიკროფონის ჩართვა",
+            "cameraBtn": "კამერის ჩართვა",
+            "cameraAndMicrophoneBtn": "ჩართეთ კამერა და მიკროფონი"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "მიკროფონი გამორთულია",
+            "micIsOn": "მიკროფონი ჩართულია",
+            "cameraIsOff": "კამერა გამორთულია",
+            "cameraIsOn": "კამერა ჩართულია",
+            "screenSharingIsOn": "ეკრანის გაზიარება ჩართულია",
+            "screenSharingIsOff": "ეკრანის გაზიარება",
+            "joinNow": "შეუერთდი ზარს"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "ინსტრუქციები",
+            "permissionDenied": "{{kind}}-ის ნებართვა უარყოფილია. მის გამოსაყენებლად, მიჰყევით ამ ნაბიჯებს:",
+            "point1": "გადადით &quot;პარამეტრები&quot; -&gt; &quot;გაფართოებული&quot; -&gt; &quot;კონფიდენციალურობა და უსაფრთხოება&quot; -&gt; &quot;საიტის პარამეტრები&quot; -&gt; &quot;კამერა&quot; ან &quot;საიტის პარამეტრები&quot; -&gt; &quot;მიკროფონი&quot;",
+            "point2": "წაშალეთ {{hostname}} „დაბლოკვის“ სიიდან"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "ინსტრუქციები",
+            "permissionDenied": "{{kind}}-ის ნებართვა უარყოფილია. გთხოვთ, გადატვირთოთ ეს გვერდი და დაადასტუროთ წვდომა {{kind}} კონფერენციაზე გასაწევრიანებლად."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "ინსტრუქციები",
+            "permissionDenied": "{{kind}}-ის ნებართვა უარყოფილია. მის გამოსაყენებლად, მიჰყევით ამ ნაბიჯებს:",
+            "point1": "გადადით თქვენს Android პარამეტრებში",
+            "point2": "გახსენით &quot;აპები და შეტყობინებები&quot;",
+            "point3": "იპოვეთ „{{communityName}}“ და გახსენით",
+            "point4": "შეეხეთ ნებართვებს",
+            "point5": "ჩართეთ {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "ინსტრუქციები",
+            "permissionDenied": "{{kind}}-ის ნებართვა უარყოფილია. მის გამოსაყენებლად, მიჰყევით ამ ნაბიჯებს:",
+            "point1": "გადადით თქვენს iOS პარამეტრებში",
+            "point2": "გახსენით &quot;კონფიდენციალურობა&quot;",
+            "point3": "იპოვეთ {{kind}} და გახსენით",
+            "point4": "იპოვეთ „{{communityName}}“ და ჩართეთ"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "შენ შეუერთდი ოთახს",
+            "joining": "გაწევრიანება: {{userName}}",
+            "sbLeftRoom": "{{userName}} დატოვა ოთახი",
+            "switchingRoom": "გადართვის ოთახი...",
+            "forceDisconnecting": "5 წამში გათიშული იქნებით",
+            "forceDisconnectingImmediately": "თქვენ გათიშეთ მასპინძელმა",
+            "youLeftRoom": "ოთახიდან გამოხვედი",
+            "codeCopied": "ოთახიდან გამოხვედი",
+            "sbBeganFbLive": "{{userName}}-მა დაიწყო ამ ზარის მაუწყებლობა Facebook-ზე",
+            "sbStoppedFbLive": "{{userName}} შეწყვიტა ამ ზარის მაუწყებლობა Facebook-ზე",
+            "youBeganFbLive": "თქვენ დაიწყეთ ამ ზარის მაუწყებლობა Facebook-ზე",
+            "youStoppedFbLive": "თქვენ შეწყვიტეთ ამ ზარის მაუწყებლობა Facebook-ზე",
+            "youStartedLive": "თქვენ დაიწყეთ ამ ზარის მაუწყებლობა მორგებულ RTMP-ზე",
+            "youStoppedLive": "თქვენ შეაჩერეთ ამ ზარის მაუწყებლობა მორგებულ RTMP-ზე",
+            "sbStartedLiveStreaming": "{{userName}} დაიწყო პირდაპირ ეთერში",
+            "sbStoppedLiveStreaming": "{{userName}} დასრულდა პირდაპირ ეთერში",
+            "liveStopped": "მოხდა შეცდომა ვიდეოს საბოლოო წერტილში გაგზავნისას",
+            "youBeganVideoRecording": "თქვენ დაიწყეთ ამ კონფერენციის ჩაწერა",
+            "youStoppedVideoRecording": "თქვენ შეწყვიტეთ ამ კონფერენციის ჩაწერა",
+            "linkCopiedToCb": "ბმული კოპირებულია ბუფერში",
+            "codeCopiedToCb": "კოდი კოპირებულია ბუფერში",
+            "userHasNoVideo": "მონაწილეს არ აქვს ვიდეო",
+            "openInBrowserAlert": "გახსენით ბმული Safari ბრაუზერში, რათა შეუერთდეთ კონფერენციას."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "ვიდეოს პარამეტრები",
+            "webCamera": "Ვებ კამერა",
+            "screenSharing": "ეკრანის გაზიარება",
+            "shareAnotherScreen": "გააზიარეთ სხვა ეკრანი",
+            "turnOffCameras": "გამორთეთ კამერა",
+            "turnOffVideo": "გამორთეთ კამერა\/ეკრანის გაზიარება",
+            "turnOffAudioInput": "მიკროფონის დადუმება",
+            "turnOffScreenSharing": "ეკრანის გაზიარების გამორთვა",
+            "cameraIsTurnedOff": "კამერა გამორთულია",
+            "micIsTurnedOff": "მიკროფონი გამორთულია",
+            "startFBLive": "დაიწყეთ Facebook Livestream",
+            "stopFBLive": "შეაჩერე Facebook Livestream",
+            "startRecording": "ჩაწერის დაწყება",
+            "stopRecording": "ჩაწერის შეწყვეტა",
+            "start": "დაწყება",
+            "stop": "გაჩერდი",
+            "recordingInProgress": "მიმდინარეობს ჩაწერა...",
+            "fbLiveTitle": "Livestream-ის სათაური",
+            "fbLiveDescription": "აღწერეთ თქვენი Livestream. Რის შესახებაა?",
+            "fbOnlyMeLiveAccess": "Მხოლოდ მე",
+            "fbFriendsAccess": "Მეგობრები",
+            "fbPublicAccess": "საჯარო",
+            "publishOnTimeline": "გამოაქვეყნეთ ვადებში",
+            "publishToGroup": "გამოქვეყნება ჯგუფში",
+            "fbStartLive": "გადადით პირდაპირ ეთერში",
+            "fbStopLive": "დაასრულეთ Livestream",
+            "streamingSettings": "პარამეტრები",
+            "fbEmbedCode": "ჩაშენება",
+            "copy": "კოპირება",
+            "streamToRTMP": "სტრიმინგი მორგებულ RTMP-ზე",
+            "startBroadcasting": "დაიწყეთ მაუწყებლობა",
+            "broadcastingInProgress": "მაუწყებლობა მიმდინარეობს"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "აუდიო პარამეტრები",
+            "speakers": "დინამიკები",
+            "microphone": "მიკროფონი"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "მონაწილის პარამეტრები",
+            "disconnect": "გათიშვა",
+            "floatingScreens": "მცურავი ეკრანები",
+            "tiledScreens": "კრამიტით მოპირკეთებული ეკრანები",
+            "loudestExceptMe": "ყველაზე ხმამაღალი ჩემს გარდა",
+            "maximizeLoudest": "მაქსიმალურად ხმამაღალი",
+            "staticMaximized": "სტატიკური მაქსიმალური",
+            "fullScreen": "Მთლიანი ეკრანი",
+            "manual": "სახელმძღვანელო",
+            "turnOffCamera": "ვიდეოს დამალვა",
+            "turnOffAudio": "აუდიოს დადუმება",
+            "turnOffScreenSharing": "ეკრანის გაზიარების დამალვა",
+            "turnOnCamera": "ვიდეოს ჩვენება",
+            "turnOnAudio": "აუდიოს დადუმების მოხსნა",
+            "turnOnScreenSharing": "ეკრანის გაზიარების ჩვენება"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "სტრიმინგის პარამეტრები"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Შეხვედრა",
+            "MeetingEnded": "შეხვედრა დასრულდა"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "მოწვეული",
+            "description": "ინბოქსი მოსაწვევებისთვის"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "რესურსი",
+            "description": "ნაკადი რესურსზე წვდომის მართვისთვის და განახლებების შესახებ შეტყობინებების გამოქვეყნებისთვის"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "გარკვეული დავალების პროგრესის შესახებ განახლებების მისაღებად",
+            "displayType": "დავალება"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "კატეგორია დავალებისთვის",
+            "displayType": "Დავალებები"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "საერთო გამოცდილება საზოგადოების წევრებისთვის",
+            "displayType": "საერთო გამოცდილება საზოგადოების წევრებისთვის"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "მისალოცი, რომლითაც მომხმარებელს შეუძლია საკუთარი თავის გაცნობა",
+            "displayType": "მისალმება"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "ნომერი",
+            "description": "მათემატიკური რიცხვი"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "თარიღი",
+            "description": "თარიღი"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "ტექსტი",
+            "description": "ტექსტის სხეული"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "ტექსტი",
+            "description": "ტექსტის მცირე ნაწილი"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "ტექსტი",
+            "description": "ტექსტის საშუალო ნაწილი"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Ელექტრონული მისამართი",
+            "description": "ელექტრონული მისამართი"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Ტელეფონის ნომერი",
+            "description": "ტელეფონის ნომერი"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ბმული ინტერნეტში"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "გამოსახულება",
+            "description": "ვიზუალური გამოსახულება",
+            "newItem": "სურათის დამატება"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "სურათების გალერეა",
+            "description": "სურათების გალერეა"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "ალბომი",
+            "description": "ალბომი, რომელსაც სხვადასხვა მედია უკავშირდება"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "ფაილი",
+            "description": "ატვირთული ფაილი",
+            "newItem": "Ფაილის დამატება"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "აუდიო კლიპი",
+            "description": "აუდიო კლიპი",
+            "newItem": "აუდიოს დამატება"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "ვიდეო კლიპი",
+            "description": "ვიდეო კლიპი",
+            "newItem": "ვიდეოს დამატება"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF დოკუმენტი",
+            "description": "PDF დოკუმენტი",
+            "newItem": "დაამატეთ PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Პირდაპირი ეთერი",
+            "description": "ცოცხალი აუდიო ან ვიდეო"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "კატეგორია",
+            "description": "კატეგორია, რომელთანაც სხვა ნაკადები შეიძლება იყოს დაკავშირებული"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "მონაწილეობის ინდექსი",
+            "description": "ნაკადები დაკავშირებულია\/არ უკავშირდება ამას, როდესაც მომხმარებელი უერთდება\/მიდის"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "ინტერესი",
+            "description": "წარმოადგენს მომხმარებლის ინტერესს გარკვეული თემის მიმართ"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "შემომავალი",
+            "description": "დანიშნულება სხვა მომხმარებლების მიერ გაგზავნილი შეტყობინებებისთვის"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Საუბარი",
+            "description": "საუბარი მომხმარებლებს შორის, ისტორიასთან"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "რეალურ დროში ზარი",
+            "description": "რეალურ დროში ვიდეო\/აუდიო ზარი"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Კითხვა",
+            "description": "კითხვების ნაკადი"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "უპასუხე",
+            "description": "პასუხების ნაკადი"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "რეკავს",
+            "description": "კატეგორია Streams\/webrtc",
+            "MaxRelationsExceeded": "ზარების მაქსიმუმი გადააჭარბა"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "აკრიფეთ გვერდის სათაური",
+        "ModTab": "ელემენტის შეცვლა",
+        "Save": "Შენახვა",
+        "Delete": "წაშლა",
+        "Submenu": "ქვემენიუ"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "ჩანაწერი",
+        "reset": "გადატვირთვა",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "URL-ის დაყენება",
+        "save": "Შენახვა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "აუდიო წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "გადატვირთვა",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "URL-ის დაყენება",
+        "save": "Შენახვა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "ვიდეოს წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "გადატვირთვა",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "URL-ის დაყენება",
+        "save": "Შენახვა",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "pdf წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "გადატვირთვა",
+        "edit": "რედაქტირება",
+        "title": "სათაური",
+        "description": "აღწერა",
+        "upload": "ატვირთვა",
+        "link": "Ბმული",
+        "setUrl": "URL-ის დაყენება",
+        "save": "Შენახვა",
+        "uploadedImage": "ატვირთული სურათი",
+        "imageTitle": "სურათის სათაური",
+        "setClip": "ამოჭრა კლიპი",
+        "invalidURL": "არასწორი ლინკი",
+        "invalidFile": "Არასწორი ფაილი",
+        "errorNoSource": "სურათის წყარო არ არის",
+        "uploadLimit": "ფაილის მაქსიმალური ზომა: {{size}}",
+        "errorFileSize": "უკაცრავად, მაგრამ ფაილი ძალიან დიდია.<br> ფაილის მაქსიმალური ზომაა {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "კითხვები",
+        "Answers": "პასუხები",
+        "AnswerQuestion": "პასუხი კითხვაზე",
+        "SetYourAnswer": "გთხოვთ მიპასუხოთ კითხვაზე",
+        "NewQuestion": "ახალი კითხვა",
+        "NewAnswer": "ახალი პასუხი",
+        "AnswerDetails": "პასუხის დეტალები",
+        "answerOption": "ვარიანტი",
+        "answerOptionExclusive": "ექსკლუზიური",
+        "answerTextarea": "ტექსტარეა",
+        "FreeAnswer": "დაწერე შენი პასუხი აქ",
+        "SaveQuestion": "შეკითხვის შენახვა",
+        "SaveAnswer": "პასუხის შენახვა",
+        "AddAnotherAnswer": "დაამატეთ სხვა პასუხი",
+        "ErrorAnswers": "გთხოვთ დაამატოთ თუნდაც ერთი პასუხი",
+        "AlreadyAnswered": "უკვე უპასუხა",
+        "TitlePlaceholder": "ჩაწერეთ თქვენი შეკითხვა",
+        "ContentPlaceholder": "განათავსეთ ნებისმიერი დამატებითი ინფორმაცია აქ, რათა დაეხმაროთ ხალხს პასუხის გაცემაში",
+        "ErrorTitle": "კითხვაა საჭირო",
+        "Placeholder": "ადგილის მფლობელი"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Ახალი გამოცდილება",
+        "DefineTitle": "გთხოვთ განსაზღვროთ სათაური",
+        "Create": "Შექმნა"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "რეკავს",
+        "MaxCalls": "მაქსი რეკავს",
+        "Update": "განახლება",
+        "NoCallsYet": "ჯერ არ არის ზარები",
+        "CallReasonTitle": "რაზეა ეს ზარი?",
+        "WaitingRoom": "Მოსაცდელი ოთახი"
     }
 }

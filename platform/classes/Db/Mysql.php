@@ -815,7 +815,9 @@ class Db_Mysql implements Db_Interface
 		static $dbtime = null, $phptime = null;
 		if (!isset($dbtime)) {
 			$phptime1 = time();
-			$row = $this->select('CURRENT_TIMESTAMP', '')->execute()->fetch(PDO::FETCH_NUM);
+			$row = $this->select('CURRENT_TIMESTAMP', '')
+				->execute()
+				->fetch(PDO::FETCH_NUM);
 			$dbtime = $this->fromDateTime($row[0]);
 			$phptime2 = time();
 			$phptime = round(($phptime1 + $phptime2) / 2);

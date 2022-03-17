@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "പണമടയ്ക്കാൻ ടാപ്പ് ചെയ്യുക"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} എന്നതിനുള്ള ചാർജ് പ്രോസസ്സ് ചെയ്തു",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} എന്നതിലേക്കുള്ള നിങ്ങളുടെ പേയ്‌മെന്റിന് നന്ദി",
+        "SubscribedTo": "{{call 'user.displayName'}} സബ്‌സ്‌ക്രൈബുചെയ്‌തു {{plan.title}}",
+        "YouSubscribedTo": "നിങ്ങൾ {{plan.title}} സബ്‌സ്‌ക്രൈബ് ചെയ്‌തു"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "&quot;{{description}}&quot; വഴി നിങ്ങൾക്ക് {{call 'publisher.displayName'}} എന്നതിൽ നിന്ന് {{displayAmount}} പേയ്‌മെന്റ് ലഭിക്കും",
+        "HasBeenCharged": "ഹേയ്, {{1}} എന്നതിൽ നിന്ന് {{3}} എന്നതിന് {{3}} {{4}} നിരക്ക് ഈടാക്കിയെന്ന് നിങ്ങളെ അറിയിക്കാൻ വേണ്ടി മാത്രമാണിത്."
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "&quot;{{description}}&quot; എന്നതിനുള്ള പണമടച്ചതിന് നന്ദി",
+        "HavePaid": "ഹേയ് {{1}}, നിങ്ങൾ {{2}} എന്നതിലേക്ക് {{3}} എന്നതിനായി {{4}} വിജയകരമായി പണമടച്ചു എന്നതിന്റെ പെട്ടെന്നുള്ള സ്ഥിരീകരണം മാത്രമാണ് ഇത്"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ഓർഡറിനെക്കുറിച്ചുള്ള വിവരങ്ങൾ",
+        "PaymentMethod": "പണംകൊടുക്കൽരീതി",
+        "ContactInfo": "ബന്ധപ്പെടുന്നതിനുള്ള വിവരം",
+        "Pay": "പണം നൽകുക"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "ക്ഷണം {{invitedUserName}} സ്വീകരിച്ചു",
+        "Streams_user_firstname": "{{invitedUserName}} ആദ്യനാമം നൽകി",
+        "Streams_user_lastname": "{{invitedUserName}} അവസാന നാമം നൽകി",
+        "Streams_user_icon": "{{invitedUserName}} ഐക്കൺ നൽകി",
+        "Places_user_location": "{{invitedUserName}} ലൊക്കേഷൻ നൽകി",
+        "Streams_greeting": "{{invitedUserName}} ആശംസ നൽകി",
+        "YouHaveCreditsToStart": "നിങ്ങൾക്ക് ആരംഭിക്കാൻ {{amount}} ക്രെഡിറ്റുകൾ ഉണ്ട്",
+        "PaymentFor": "&quot;{{1}}&quot; എന്നതിനുള്ള പേയ്‌മെന്റ്",
+        "PaymentTo": "{{1}} എന്നതിലേക്കുള്ള പേയ്‌മെന്റ്",
+        "PaymentToUser": "{{toUserName}} എന്നതിലേക്കുള്ള പേയ്‌മെന്റ്",
+        "CreatePaidStream": "{{toStreamName}} സൃഷ്‌ടിക്കുന്നതിന്",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; എന്നതിലെ റിസർവേഷനായി",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; കമ്മ്യൂണിറ്റി സൃഷ്‌ടിക്കുന്നതിന്",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; എന്നതിലെ റിസർവേഷൻ റീഫണ്ടായി",
+        "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി",
+        "BonusCredits": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ",
+        "BuyAmountCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "WatchClip": "{{fromStreamTitle}} കണ്ടതിന് {{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "MissingCredits": "ക്രെഡിറ്റുകൾ കാണുന്നില്ല",
+        "YouMissingCredits": "തുടരാൻ നിങ്ങൾക്ക് ഒരു അധിക {{amount}} ക്രെഡിറ്റുകൾ ആവശ്യമാണ്.",
+        "BuyCredits": "ക്രെഡിറ്റുകൾ വാങ്ങുക",
+        "BuyBonus": "ഒരേസമയം {{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുന്നത്, {{bonus}} ക്രെഡിറ്റ് ബോണസിലേക്ക് നയിക്കും.",
+        "Buy": "വാങ്ങാൻ",
+        "PurchaseCredits": "പർച്ചേസ് ക്രെഡിറ്റുകൾ",
+        "Credits": "ക്രെഡിറ്റുകൾ",
+        "ErrorInvalidAmount": "തുക അസാധുവാണ്",
+        "ErrorInvalidCurrency": "നിർഭാഗ്യവശാൽ ഞങ്ങൾ ഇതുവരെ കറൻസി {{currency}} പിന്തുണയ്ക്കുന്നില്ല",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ",
+            "BonusCredits": "{{amount}} ക്രെഡിറ്റുകൾ"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "തീയതി",
+        "Amount": "തുക",
+        "Description": "വിവരണം",
+        "Client": "കക്ഷി",
+        "To": "വരെ",
+        "From": "നിന്ന്",
+        "SeeHistory": "{{1}} പേയ്‌മെന്റ് ചരിത്രം കാണുക",
+        "HistoryEmpty": "നിങ്ങൾക്ക് ഇതുവരെ ഡാറ്റയൊന്നുമില്ല",
+        "PaymentFor": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
+        "PaymentTo": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
+        "PaymentToUser": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു",
+        "CreatePaidStream": "ചെലവഴിച്ച {{amount}} ക്രെഡിറ്റുകൾ",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+            "-": "ചെലവഴിച്ച {{amount}} ക്രെഡിറ്റുകൾ"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+            "-": "ചെലവഴിച്ച {{amount}} ക്രെഡിറ്റുകൾ"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "{{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു",
+            "-": "{{amount}} ക്രെഡിറ്റുകൾ അയച്ചു"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "ചെലവഴിച്ച {{amount}} ക്രെഡിറ്റുകൾ",
+        "BoughtCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി",
+        "BonusCredits": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു",
+        "InviteAcceptedBy": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "Streams_user_firstname": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "Streams_user_lastname": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "Streams_user_icon": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "Places_user_location": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "Streams_greeting": "{{amount}} ക്രെഡിറ്റുകൾ നേടി",
+        "YouHaveCreditsToStart": "{{amount}} ക്രെഡിറ്റുകൾ നേടി"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "പേയ്‌മെന്റ് വിവരങ്ങൾ സജ്ജമാക്കുക",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "സബ്സ്ക്രിപ്ഷൻ ആരംഭിക്കുക",
+            "message": "നിങ്ങൾക്ക് {{title}} സബ്‌സ്‌ക്രൈബ് ചെയ്യാൻ താൽപ്പര്യമുണ്ടോ?",
+            "ok": "ശരി",
+            "cancel": "റദ്ദാക്കുക"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "ക്രെഡിറ്റ് അല്ലെങ്കിൽ ഡെബിറ്റ് കാർഡ്",
+        "SubscribePayment": "പേയ്‌മെന്റ് സബ്‌സ്‌ക്രൈബ് ചെയ്യുക",
+        "ImmediatePayment": "ഉടനടി പണമടയ്ക്കൽ"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "പേയ്‌മെന്റ് വിവരങ്ങൾ സജ്ജമാക്കുക",
+        "BuyAmountCredits": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങുക",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "ഒരു പേയ്മെന്റ് നടത്തുക",
+            "message": "{{symbol}}{{amount}} അടയ്ക്കാൻ നിങ്ങൾ സമ്മതിക്കുന്നുണ്ടോ?",
+            "ok": "ശരി",
+            "cancel": "റദ്ദാക്കുക"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "ക്രെഡിറ്റുകൾ",
+            "description": "ക്രെഡിറ്റുകളുടെയും പേയ്‌മെന്റുകളുടെയും ട്രാക്ക് സൂക്ഷിക്കുന്നു"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "സബ്‌സ്‌ക്രിപ്‌ഷൻ പ്ലാൻ",
+            "description": "സബ്സ്ക്രിപ്ഷൻ പ്ലാൻ"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "സബ്സ്ക്രിപ്ഷൻ",
+            "description": "സബ്സ്ക്രിപ്ഷൻ"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "ഉൽപ്പന്നം",
+            "description": "വിൽക്കുന്ന ഉൽപ്പന്നം"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "സേവനം",
+            "description": "സേവനം വാഗ്ദാനം ചെയ്യുന്നു"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "{{amount}} ക്രെഡിറ്റുകൾ നേടി"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "{{amount}} ക്രെഡിറ്റുകൾ വാങ്ങി"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "ബോണസ് {{amount}} ക്രെഡിറ്റുകൾ"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "ചെലവഴിച്ച {{amount}} ക്രെഡിറ്റുകൾ"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "{{toUserName}} എന്നയാൾക്ക് {{amount}} ക്രെഡിറ്റുകൾ അയച്ചു"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "{{fromUserName}}-ൽ നിന്ന് {{amount}} ക്രെഡിറ്റുകൾ ലഭിച്ചു"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "പുതിയ സേവനം",
+            "TitlePlaceholder": "സേവന ശീർഷകം",
+            "PricePlaceholder": "വില നിശ്ചയിക്കുക",
+            "LinkPlaceholder": "അധിക വിവര ലിങ്ക് സജ്ജമാക്കുക",
+            "DescriptionPlaceholder": "സേവന വിവരണം",
+            "SaveService": "സേവനം സംരക്ഷിക്കുക",
+            "SelectRequiredParticipants": "ആവശ്യമായ പങ്കാളികൾ"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "സേവന ടെംപ്ലേറ്റുകൾ നിയന്ത്രിക്കുക",
+        "ManageServices": "സേവനങ്ങൾ നിയന്ത്രിക്കുക",
+        "Free": "സൗ ജന്യം",
+        "OptionalContribution": "ഓപ്ഷണൽ സംഭാവന",
+        "RequiredPayment": "ആവശ്യമായ പേയ്മെന്റ്",
+        "AreYouSureDelete": "ഈ സേവനം ഇല്ലാതാക്കണമെന്ന് തീർച്ചയാണോ?",
+        "AmountServicesRelated": "ഈ സേവനവുമായി ബന്ധപ്പെട്ട് {{amount}} ലഭ്യതകളുണ്ട്. അവയും നീക്കം ചെയ്യപ്പെടും."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "{{title}} NFT-യെ കുറിച്ചുള്ള വിവരങ്ങൾ",
+        "Description": "NFT-യെക്കുറിച്ചുള്ള വിശദമായ വിവരങ്ങൾ",
+        "FixedBid": "ഇപ്പോൾ വാങ്ങുക",
+        "CurrentBid": "നിലവിലെ ബിഡ്",
+        "StartingIn": "ആരംഭിക്കുന്നത്",
+        "EndingIn": "അവസാനിക്കുന്നു",
+        "CreateNFT": "ഒരു NFT സൃഷ്ടിക്കുക",
+        "TitlePlaceholder": "നിങ്ങളുടെ NFT യ്ക്ക് ഒരു തലക്കെട്ട് നൽകുക",
+        "DescriptionPlaceholder": "നിങ്ങളുടെ NFT ഒരു വിവരണം നൽകുക",
+        "CreateYourNFT": "നിങ്ങളുടെ NFT സൃഷ്ടിക്കുക",
+        "Royalties": "റോയൽറ്റി",
+        "RoyaltyPlaceholder": "ഓപ്ഷണൽ. കൈമാറ്റത്തിന് മുമ്പ് സ്രഷ്ടാവിന് നൽകിയ തുക.",
+        "ExpirationDate": "കാലഹരണപ്പെടുന്ന തീയതി",
+        "StartingDate": "തുടങ്ങുന്ന ദിവസം",
+        "BidsBelowThisAmount": "ഈ തുകയിൽ താഴെയുള്ള ലേലങ്ങൾ അനുവദിക്കില്ല",
+        "MinimumBid": "കുറഞ്ഞ ബിഡ്",
+        "Price": "വില",
+        "Owner": "ഉടമ",
+        "SelectCategory": "വിഭാഗം തിരഞ്ഞെടുക്കൂ",
+        "Day": "ദിവസം",
+        "Days": "ദിവസങ്ങളിൽ",
+        "Hour": "മണിക്കൂർ",
+        "Hours": "മണിക്കൂറുകൾ",
+        "Minute": "മിനിറ്റ്",
+        "Minutes": "മിനിറ്റ്",
+        "Second": "രണ്ടാമത്",
+        "Seconds": "സെക്കന്റുകൾ",
+        "SalesCreator": "വിൽപ്പനയുടെ സ്രഷ്ടാവിലേക്ക് പോകും",
+        "Details": "വിശദാംശങ്ങൾ",
+        "Bids": "ലേലങ്ങൾ",
+        "History": "ചരിത്രം",
+        "LoremIpsum": "ലോറെം ഇപ്‌സം എന്നത് പ്രിന്റിംഗ്, ടൈപ്പ് സെറ്റിംഗ് വ്യവസായത്തിന്റെ കേവലം വ്യാജ വാചകമാണ്.",
+        "PutOnSale": "വിൽപ്പനയ്ക്ക് വയ്ക്കുക",
+        "PutOffSale": "വിൽപ്പനയിൽ നിന്ന് പിൻവലിക്കുക",
+        "Transfer": "കൈമാറ്റം",
+        "Update": "അപ്ഡേറ്റ് ചെയ്യുക",
+        "UpdateToken": "ടോക്കൺ അപ്ഡേറ്റ് ചെയ്യുക",
+        "CreateToken": "ടോക്കൺ സൃഷ്ടിക്കുക",
+        "PlaceBid": "ബിഡ് സ്ഥാപിക്കുക",
+        "SoldOut": "വിറ്റു",
+        "NftName": "NFT പേര്",
+        "DescribeYourNFT": "നിങ്ങളുടെ NFT വിവരിക്കുക",
+        "NftPicture": "NFT-യെ പ്രതിനിധീകരിക്കുന്ന ചിത്രം",
+        "NftMovie": "NFTയെ പ്രതിനിധീകരിക്കുന്ന സിനിമ",
+        "UploadMovie": "സിനിമ അപ്‌ലോഡ് ചെയ്യുക",
+        "MovieSource": "സിനിമാ ഉറവിടം",
+        "UploadFile": "ഒരു ഫയൽ അപ്‌ലോഡ് ചെയ്യുക",
+        "PutOnMarketplace": "ചന്തയിൽ വയ്ക്കുക",
+        "InstantPurchase": "നിങ്ങളുടെ NFT തൽക്ഷണം വാങ്ങാൻ ഉപയോക്താക്കളെ അനുവദിക്കുന്നതിന് വില നൽകുക",
+        "FixedPrice": "നിശ്ചിത വില",
+        "TimedAuction": "സമയബന്ധിതമായ ലേലം",
+        "OpenForBids": "ലേലങ്ങൾക്കായി തുറന്നിരിക്കുന്നു",
+        "PriceOnePiece": "ഒരു കഷണത്തിന്റെ വില നൽകുക",
+        "EnterMinimumBid": "മിനിമം ബിഡ് നൽകുക",
+        "SelectChain": "ചെയിൻ തിരഞ്ഞെടുക്കുക",
+        "WrongChain": "ഈ NFT &quot;{{chain}}&quot; എന്നതിന് കീഴിൽ സൃഷ്ടിച്ചു. ദയവായി ഈ ചെയിൻ ഉപയോഗിക്കുക.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFT ഇറക്കുമതി ചെയ്യുന്നു",
+            "fileNotFound": "ക്ഷമിക്കണം, CSV ഫയൽ കണ്ടെത്തിയില്ല.",
+            "fileEmpty": "ക്ഷമിക്കണം, CSV ഫയൽ ശൂന്യമാണ്.",
+            "userIdNotFound": "ഉപയോക്താവ് ഉണ്ടെങ്കിലും ഐഡി ശൂന്യമാണ്",
+            "errorLine": "ലൈൻ {{1}}",
+            "fieldNotFound": "ആവശ്യമായ &quot;{{1}}&quot; ഫീൽഡ് കണ്ടെത്തിയില്ല",
+            "taskStreamInvalid": "ടാസ്ക് സ്ട്രീം അസാധുവാണ്",
+            "instructionsEmpty": "ടാസ്‌ക് സ്ട്രീം നിർദ്ദേശങ്ങൾ ശൂന്യമാണ്",
+            "complete": "പൂർത്തിയാക്കുക",
+            "activateUsers": "ഉപയോക്താക്കൾക്ക് സജീവമാക്കൽ സന്ദേശം അയക്കണോ?",
+            "importProgress": "പുരോഗതി",
+            "importOptions": "ഓപ്ഷനുകൾ",
+            "sampleCSV": "സാമ്പിൾ CSV ഡൗൺലോഡ് ചെയ്യുക",
+            "fileLabel": "സ്‌പ്രെഡ്‌ഷീറ്റ് അപ്‌ലോഡ് ചെയ്യുക:",
+            "errorsTitle": "പിശകുകൾ സംഭവിച്ചു"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "NFT ശേഖരങ്ങൾ പ്രകാരം ഫിൽട്ടർ ചെയ്യുക",
+                "ShowNFTCollection": "ഇതിൽ NFT ശേഖരം കാണിക്കുക...",
+                "AllCollections": "എല്ലാ ശേഖരങ്ങളും"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "എല്ലാ രചയിതാക്കളും",
+                "AllUsers": "എല്ലാവരും",
+                "FilterByAuthors": "രചയിതാക്കൾ പ്രകാരം ഫിൽട്ടർ ചെയ്യുക"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "ശേഖരത്തിലേക്ക് മടങ്ങുക"
     }
 }

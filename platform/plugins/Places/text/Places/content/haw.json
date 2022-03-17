@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "i loko o {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "mika",
+        "meters": "mika",
+        "kilometer": "kilomika",
+        "kilometers": "nā kilomika",
         "km": "km",
         "mile": "mile",
-        "miles": "miles",
+        "miles": "mile",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "wāwae",
+        "feet": "wāwae",
+        "inches": "iniha"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Makemake au i nā mea e hana nei i loko o {{select}} o",
+        "update": "Hoʻohou i kaʻu wahi",
+        "set": "Hoʻonoho i koʻu wahi",
+        "prompt": "{{ClickOrTap}} maanei i<br> hoonoho i kou<br> wahi",
+        "myCurrentLocation": "ʻO koʻu wahi i kēia manawa",
+        "enterAddress": "E hoʻokomo i kahi helu wahi",
+        "enterPostcode": "E ʻoluʻolu e hoʻokomo i kāu leka uila \/ zipcode",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Hoʻohui Wahi",
+            "title": "Wahi Hou",
+            "nameYourLocation": "E inoa i kou wahi"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "E mālama i kēia wahi?",
+            "message": "Makemake ʻoe e hoʻohana hou i kēia wahi i ka wā e hiki mai ana?",
+            "ok": "ae",
+            "cancel": "Aʻole"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "E inoa i kēia wahi",
+            "placeholder": "Home, Hana etc.",
+            "ok": "Mālama"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "E koho i kahi"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Aia kekahi wahi i loko o kēia wahi?",
+        "newArea": "Wahi hou",
+        "promptTitle": "E hookomo i inoa no ka wahi:",
+        "absent": "E ʻoluʻolu e hoʻonoho i kahi",
+        "error": "Kuhihewa",
+        "exist": "Aia ka wahi",
+        "addNewArea": "Hoʻohui i kahi hou",
+        "add": "Hoʻohui"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "he ohi o na wahi",
+            "displayType": "Nā wahi"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Hōʻike i kahi hale, wahi, moku, paka, etc.",
+            "displayType": "Wahi"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Hōʻike i kahi wahi i loko o kahi wahi, e like me kahi lumi a i ʻole suite",
+            "displayType": "Wahi"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Hōʻike i kahi papahele i loko o kahi hale a moku paha",
+            "displayType": "papahele"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Hōʻike i kahi kolamu i loko o kahi hale a moku paha",
+            "displayType": "kolamu"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Māhele no nā mea i loko o kahi mamao o kahi geohash",
+            "displayType": "Ma kahi kokoke i nā wahi"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Māhele no nā mea i loko o kahi mamao o kahi geohash, pili i kahi hoihoi",
+            "displayType": "Nā wahi hoihoi"
         }
     }
 }

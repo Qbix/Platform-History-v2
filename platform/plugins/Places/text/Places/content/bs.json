@@ -8,23 +8,23 @@
         "meter": "metar",
         "meters": "metara",
         "kilometer": "kilometar",
-        "kilometers": "kiometri",
+        "kilometers": "kilometara",
         "km": "km",
-        "mile": "mile",
+        "mile": "milju",
         "miles": "milja",
         "mi": "mi",
         "foot": "stopalo",
         "feet": "stopala",
-        "inches": "inča"
+        "inches": "inches"
     },
     "location": {
         "interested": "Zanimaju me stvari koje se dešavaju unutar {{select}} od",
-        "update": "Ažuriraj moju lokaciju",
-        "set": "Postavi moju lokaciju",
-        "prompt": "{{ClickOrTap}} evo<br> postavite svoj<br> lokacija",
+        "update": "Ažurirajte moju lokaciju",
+        "set": "Postavite moju lokaciju",
+        "prompt": "{{ClickOrTap}} ovdje za<br> postavite svoj<br> lokacija",
         "myCurrentLocation": "Moja trenutna lokacija",
         "enterAddress": "Unesite adresu",
-        "enterPostcode": "Molimo unesite svoj poštanski broj",
+        "enterPostcode": "Unesite svoj poštanski broj",
         "create": {
             "action": "Dodaj lokaciju",
             "title": "Nova lokacija",
@@ -32,24 +32,24 @@
         },
         "confirm": {
             "title": "Sačuvati ovu lokaciju?",
-            "message": "Planirate li koristiti ovu lokaciju u budućnosti?",
+            "message": "Planirate li ponovo koristiti ovu lokaciju u budućnosti?",
             "ok": "Da",
-            "cancel": "Ne"
+            "cancel": "br"
         },
         "add": {
             "title": "Imenujte ovu lokaciju",
-            "placeholder": "Kuća, posao itd.",
-            "ok": "Save"
+            "placeholder": "Dom, posao itd.",
+            "ok": "Sačuvaj"
         },
         "dialog": {
-            "title": "Odaberite lokaciju"
+            "title": "Odaberite Lokacija"
         }
     },
     "areas": {
         "filterPlaceholder": "Ima li područja unutar ove lokacije?",
         "newArea": "Novo područje",
         "promptTitle": "Unesite naziv područja:",
-        "absent": "Molimo vas postavite područje",
+        "absent": "Molimo postavite područje",
         "error": "Greška",
         "exist": "Područje već postoji",
         "addNewArea": "Dodajte novo područje",
@@ -61,28 +61,28 @@
             "displayType": "Lokacije"
         },
         "Places\/location": {
-            "description": "Predstavlja zgradu, mjesto, brod, park itd.",
-            "displayType": "Location"
+            "description": "Predstavlja zgradu, mjesto, brod, park, itd.",
+            "displayType": "Lokacija"
         },
         "Places\/area": {
-            "description": "Predstavlja područje unutar lokacije, poput sobe ili apartmana",
-            "displayType": "Area"
+            "description": "Predstavlja područje unutar lokacije, kao što je soba ili apartman",
+            "displayType": "Područje"
         },
         "Places\/floor": {
-            "description": "Predstavlja pod u zgradi ili na brodu",
-            "displayType": "Pod"
+            "description": "Predstavlja kat u zgradi ili brodu",
+            "displayType": "Kat"
         },
         "Places\/column": {
             "description": "Predstavlja kolonu u zgradi ili brodu",
             "displayType": "Kolona"
         },
         "Places\/nearby": {
-            "description": "Kategorija za stvari unutar određene udaljenosti od geohasha",
+            "description": "Kategorija za stvari na određenoj udaljenosti od geohaša",
             "displayType": "U blizini mjesta"
         },
         "Places\/interest": {
-            "description": "Kategorija za stvari na određenoj udaljenosti od geohasha, koje odgovaraju interesu",
-            "displayType": "Mjesta od interesa"
+            "description": "Kategorija za stvari na određenoj udaljenosti od geohaša, koja odgovara interesu",
+            "displayType": "Mesta interesovanja"
         }
     }
 }

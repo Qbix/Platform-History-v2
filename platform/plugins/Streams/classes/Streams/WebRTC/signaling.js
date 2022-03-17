@@ -16,46 +16,74 @@ module.exports = function(socket,io) {
         socket.roomStartTime = identity.roomStartTime;
         socket.roomPublisherId = roomPublisherId = identity.roomPublisher;
 
-        if(_debug) console.log('rooms: ', socket.adapter.rooms);
-        for (var key in socket.adapter.rooms) {
-            if (socket.adapter.rooms.hasOwnProperty(key)) {
-                if(key == identity.room) {
-                    if(_debug) console.log('rooms: roomExists');
-                    break;
+        function onParticipantValidation() {
+            if(_debug) console.log('rooms: ', socket.adapter.rooms);
+            for (var key in socket.adapter.rooms) {
+                if (socket.adapter.rooms.hasOwnProperty(key)) {
+                    if(key == identity.room) {
+                        if(_debug) console.log('rooms: roomExists');
+                        break;
+                    }
                 }
             }
+
+            socket.join(roomId, function () {
+                if(_debug) console.log(nspName + '#' + socket.client.id + ' now in rooms: ', socket.rooms);
+                io.of('/webrtc').in(roomId).clients(function (error, clients) {
+                    if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
+                });
+            })
+
+            if(_debug) console.log('Participant joined to room', roomId);
+
+            //console.log('Streams/webrtc/participantConnected', socket)
+            socket.broadcast.to(roomId).emit('Streams/webrtc/participantConnected', {
+                username:identity.username,
+                sid:socket.client.id,
+                info:identity.info,
+                fromSid:identity.sid
+            });
+
+            io.of('/webrtc').in(roomId).clients(function (error, clients) {
+                if(_debug) console.log(clients);
+                var participantsList = [];
+                for (var i in clients) {
+                    console.log('Streams/webrtc/roomParticipants', clients[i])
+                    if (nspName + '#' + socket.client.id != clients[i]) {
+                        participantsList.push({sid: clients[i]});
+                    }
+                }
+                webrtcNamespace.to(nspName + '#' + socket.client.id).emit('Streams/webrtc/roomParticipants', participantsList);
+                if(cb != null) cb(JSON.stringify(participantsList));
+
+            });
         }
 
-        socket.join(roomId, function () {
-            if(_debug) console.log(nspName + '#' + socket.client.id + ' now in rooms: ', socket.rooms);
-            io.of('/webrtc').in(roomId).clients(function (error, clients) {
-                if(_debug) console.log('PARTICIPANTS IN THE ROOM', clients.length);
-            });
-        })
-
-        if(_debug) console.log('Participant joined to room', roomId);
-
-        //console.log('Streams/webrtc/participantConnected', socket)
-        socket.broadcast.to(roomId).emit('Streams/webrtc/participantConnected', {
-            username:identity.username,
-            sid:socket.client.id,
-            info:identity.info,
-            fromSid:identity.sid
-        });
-
-        io.of('/webrtc').in(roomId).clients(function (error, clients) {
-            if(_debug) console.log(clients);
-            var participantsList = [];
-            for (var i in clients) {
-                console.log('Streams/webrtc/roomParticipants', clients[i])
-                if (nspName + '#' + socket.client.id != clients[i]) {
-                    participantsList.push({sid: clients[i]});
-                }
+        var streamName = 'Streams/webrtc/' + roomId;
+        Q.plugins.Streams.fetchOne(socket.userPlatformId, roomPublisherId, streamName, function (err, stream) {
+            if(err || !stream) {
+                return;
             }
-            webrtcNamespace.to(nspName + '#' + socket.client.id).emit('Streams/webrtc/roomParticipants', participantsList);
-            if(cb != null) cb(JSON.stringify(participantsList));
+
+            let onlyParticipantsAllowed = stream.getAttribute('onlyParticipantsAllowed');
+            onlyParticipantsAllowed = onlyParticipantsAllowed == true || onlyParticipantsAllowed == 'true';
+            if(_debug) console.log('CONNECT: onlyParticipantsAllowed', onlyParticipantsAllowed);
+            if(!onlyParticipantsAllowed) {
+                onParticipantValidation();
+            } else {
+                Q.plugins.Streams.getParticipants(roomPublisherId, streamName, function (participants) {
+                    if(participants && participants[socket.userPlatformId] != null) {
+                        onParticipantValidation();
+                    } else {
+                        if(_debug) console.log('CONNECT: participants only participants allowed');
+
+                    }
+                });
+            }
+
 
         });
+
 
     });
 

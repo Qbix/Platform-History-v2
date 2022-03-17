@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Toque para pagar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: cobrança processada por {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Obrigado por seu pagamento para {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} se inscreveu em {{plan.title}}",
+        "YouSubscribedTo": "Você se inscreveu em {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Você recebe o pagamento de {{displayAmount}} de {{call 'publisher.displayName'}} por &quot;{{description}}&quot;",
+        "HasBeenCharged": "Olá, isso é apenas para informar que {{1}} foi cobrado {{2}} por {{3}} por {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Agradecemos seu pagamento por &quot;{{description}}&quot;",
+        "HavePaid": "Olá {{1}}, esta é apenas uma confirmação rápida de que você pagou {{2}} a {{3}} por {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Informações sobre o pedido",
+        "PaymentMethod": "Forma de pagamento",
+        "ContactInfo": "Informações de contato",
+        "Pay": "Pagar"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Convite aceito por {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} digitou o primeiro nome",
+        "Streams_user_lastname": "{{invitedUserName}} digitou o sobrenome",
+        "Streams_user_icon": "{{invitedUserName}} ícone inserido",
+        "Places_user_location": "{{invitedUserName}} local inserido",
+        "Streams_greeting": "{{invitedUserName}} digitou saudação",
+        "YouHaveCreditsToStart": "Você tem {{amount}} créditos para começar",
+        "PaymentFor": "Pagamento para &quot;{{1}}&quot;",
+        "PaymentTo": "Pagamento para {{1}}",
+        "PaymentToUser": "Pagamento para {{toUserName}}",
+        "CreatePaidStream": "para criar {{toStreamName}}",
+        "JoinedPaidStream": "para reserva em &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "para criar a comunidade &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "como reembolso de reserva em &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Comprou {{amount}} créditos",
+        "BonusCredits": "Bônus {{amount}} créditos",
+        "BuyAmountCredits": "Compre {{amount}} créditos",
+        "WatchClip": "Ganhou {{amount}} créditos por assistir {{fromStreamTitle}}",
+        "MissingCredits": "Créditos ausentes",
+        "YouMissingCredits": "Você precisa de {{amount}} créditos adicionais para continuar.",
+        "BuyCredits": "Compre créditos",
+        "BuyBonus": "A compra de {{amount}} créditos de uma só vez resultará em {{bonus}} bônus de créditos.",
+        "Buy": "Comprar",
+        "PurchaseCredits": "Créditos de compra",
+        "Credits": "Créditos",
+        "ErrorInvalidAmount": "Valor inválido",
+        "ErrorInvalidCurrency": "Infelizmente, ainda não oferecemos suporte à moeda {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} créditos",
+            "BonusCredits": "{{amount}} créditos"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Encontro",
+        "Amount": "Montante",
+        "Description": "Descrição",
+        "Client": "Cliente",
+        "To": "para",
+        "From": "a partir de",
+        "SeeHistory": "Veja o histórico de pagamentos de {{1}}",
+        "HistoryEmpty": "Você ainda não tem dados",
+        "PaymentFor": "Enviou {{amount}} créditos",
+        "PaymentTo": "Enviou {{amount}} créditos",
+        "PaymentToUser": "Enviou {{amount}} créditos",
+        "CreatePaidStream": "Gastou {{amount}} créditos",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ganhou {{amount}} créditos",
+            "-": "Gastou {{amount}} créditos"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ganhou {{amount}} créditos",
+            "-": "Gastou {{amount}} créditos"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Recebeu {{amount}} créditos",
+            "-": "Enviou {{amount}} créditos"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Gastou {{amount}} créditos",
+        "BoughtCredits": "Comprou {{amount}} créditos",
+        "BonusCredits": "Ganhei {{amount}} créditos de bônus",
+        "InviteAcceptedBy": "Ganhou {{amount}} créditos",
+        "Streams_user_firstname": "Ganhou {{amount}} créditos",
+        "Streams_user_lastname": "Ganhou {{amount}} créditos",
+        "Streams_user_icon": "Ganhou {{amount}} créditos",
+        "Places_user_location": "Ganhou {{amount}} créditos",
+        "Streams_greeting": "Ganhou {{amount}} créditos",
+        "YouHaveCreditsToStart": "Ganhou {{amount}} créditos"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Definir informações de pagamento",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Iniciar assinatura",
+            "message": "Deseja se inscrever em {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Cancelar"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Cartão de crédito ou débito",
+        "SubscribePayment": "Pagamento de assinatura",
+        "ImmediatePayment": "Pagamento imediato"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Definir informações de pagamento",
+        "BuyAmountCredits": "Compre {{amount}} créditos",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Faça um pagamento",
+            "message": "Você concorda em pagar {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Cancelar"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Créditos",
+            "description": "mantém o controle de créditos e pagamentos"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Plano de assinatura",
+            "description": "plano de assinatura"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Inscrição",
+            "description": "inscrição"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "produtos",
+            "description": "produto sendo vendido"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Serviço",
+            "description": "serviço que está sendo oferecido"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Ganhou {{amount}} créditos"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Comprou {{amount}} créditos"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bônus {{amount}} créditos"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Gastou {{amount}} créditos"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Enviou {{amount}} créditos para {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Recebeu {{amount}} créditos de {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Novo serviço",
+            "TitlePlaceholder": "Título do serviço",
+            "PricePlaceholder": "Definir preço",
+            "LinkPlaceholder": "definir link de informações adicionais",
+            "DescriptionPlaceholder": "Descrição do Serviço",
+            "SaveService": "Salvar serviço",
+            "SelectRequiredParticipants": "Participantes obrigatórios"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Gerenciar modelos de serviço",
+        "ManageServices": "Gerenciar serviços",
+        "Free": "Livre",
+        "OptionalContribution": "Contribuição opcional",
+        "RequiredPayment": "Pagamento obrigatório",
+        "AreYouSureDelete": "Tem certeza de que deseja excluir este serviço?",
+        "AmountServicesRelated": "Existem {{amount}} disponibilidades relacionadas a este serviço. Eles também serão removidos."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "Title": "Informações sobre {{title}} NFT",
+        "Description": "Informações detalhadas sobre NFT",
+        "FixedBid": "Compre Agora",
+        "CurrentBid": "Oferta atual",
+        "StartingIn": "Começando em",
+        "EndingIn": "Acabando",
+        "CreateNFT": "Criar um NFT",
+        "TitlePlaceholder": "Dê um título à sua NFT",
+        "DescriptionPlaceholder": "Dê uma descrição à sua NFT",
+        "CreateYourNFT": "Crie seu NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "RoyaltyPlaceholder": "Opcional. Valor pago ao criador antes da transferência.",
+        "ExpirationDate": "Data de validade",
+        "StartingDate": "Data de início",
+        "BidsBelowThisAmount": "Lances abaixo desse valor não serão permitidos",
+        "MinimumBid": "Lance mínimo",
+        "Price": "Preço",
+        "Owner": "Proprietário",
+        "SelectCategory": "Selecione a Categoria",
+        "Day": "Dia",
+        "Days": "Dias",
+        "Hour": "Hora",
+        "Hours": "Horas",
+        "Minute": "Minuto",
+        "Minutes": "Minutos",
+        "Second": "Segundo",
+        "Seconds": "Segundos",
+        "SalesCreator": "das vendas irá para o criador",
+        "Details": "Detalhes",
+        "Bids": "Lances",
+        "History": "História",
+        "LoremIpsum": "Lorem Ipsum é simplesmente um texto fictício da indústria tipográfica e de impressão.",
+        "PutOnSale": "Colocar à venda",
+        "PutOffSale": "Retirar da venda",
+        "Transfer": "Transferir",
+        "Update": "Atualizar",
+        "UpdateToken": "Atualizar token",
+        "CreateToken": "Criar token",
+        "PlaceBid": "Colocar lance",
+        "SoldOut": "Vendido",
+        "NftName": "Nome NFT",
+        "DescribeYourNFT": "Descreva sua NFT",
+        "NftPicture": "Imagem para representar NFT",
+        "NftMovie": "Filme para representar NFT",
+        "UploadMovie": "Carregar filme",
+        "MovieSource": "Fonte do filme",
+        "UploadFile": "Enviar um arquivo",
+        "PutOnMarketplace": "Colocar no mercado",
+        "InstantPurchase": "Insira o preço para permitir que os usuários comprem instantaneamente sua NFT",
+        "FixedPrice": "Preço fixo",
+        "TimedAuction": "Leilão cronometrado",
+        "OpenForBids": "Aberto para lances",
+        "PriceOnePiece": "Insira o preço de uma peça",
+        "EnterMinimumBid": "Insira o lance mínimo",
+        "SelectChain": "Selecionar cadeia",
+        "WrongChain": "Esta NFT foi criada em &quot;{{chain}}&quot;. Por favor, use esta corrente.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Importando NFTs",
+            "fileNotFound": "Desculpe, arquivo CSV não encontrado.",
+            "fileEmpty": "Desculpe, o arquivo CSV está vazio.",
+            "userIdNotFound": "usuário existe, mas id vazio",
+            "errorLine": "linha {{1}}",
+            "fieldNotFound": "Campo obrigatório &quot;{{1}}&quot; não encontrado",
+            "taskStreamInvalid": "fluxo de tarefas inválido",
+            "instructionsEmpty": "instruções de fluxo de tarefas vazias",
+            "complete": "Completo",
+            "activateUsers": "enviar mensagem de ativação aos usuários?",
+            "importProgress": "Progresso",
+            "importOptions": "Opções",
+            "sampleCSV": "Baixar Amostra de CSV",
+            "fileLabel": "Carregar planilha:",
+            "errorsTitle": "Ocorreram erros"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtrar por coleções NFT",
+                "ShowNFTCollection": "Mostrar coleção NFT em ...",
+                "AllCollections": "Todas as coleções"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Todos os autores",
+                "AllUsers": "Todo o mundo",
+                "FilterByAuthors": "Filtrar por autores"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Voltar para a coleção"
     }
 }

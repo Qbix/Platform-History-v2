@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "{{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "PostcodeLabel": "{{1}} ({1000})",
+        "Title": "gudaha {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "mitir",
+        "meters": "mitir",
+        "kilometer": "kiiloomitir",
+        "kilometers": "kiiloomitir",
         "km": "km",
-        "mile": "mile",
+        "mile": "mayl",
         "miles": "miles",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
+        "foot": "cagta",
+        "feet": "cagaha",
         "inches": "inches"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Waxaan xiiseeyaa waxyaalaha ka dhacaya gudaha {{select}} ee",
+        "update": "Cusbooneysii Goobtayda",
+        "set": "Deji goobtayda",
+        "prompt": "{{ClickOrTap}} halkan ilaa<br> dhigay kaaga<br> goobta",
+        "myCurrentLocation": "Goobta aan hadda joogo",
+        "enterAddress": "Gali ciwaan",
+        "enterPostcode": "Fadlan geli koodka boostada \/ sibka koodka",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Kudar Goobta",
+            "title": "Goob Cusub",
+            "nameYourLocation": "Magaca goobtaada"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Meeshan kaydi?",
+            "message": "Ma qorsheyneysaa inaad isticmaasho goobtan mar kale mustaqbalka?",
+            "ok": "Haa",
+            "cancel": "Maya"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Magaca meeshan",
+            "placeholder": "Guriga, Shaqada iwm.",
+            "ok": "Badbaadin"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Dooro Goobta"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Ma jiraan meel ku taal goobtan?",
+        "newArea": "Deegaan cusub",
+        "promptTitle": "Geli magaca aagga:",
+        "absent": "Fadlan deji aag",
+        "error": "Khalad",
+        "exist": "Aag hore ayaa u jiray",
+        "addNewArea": "Ku dar aag cusub",
+        "add": "Kudar"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "ururinta goobaha",
+            "displayType": "Goobaha"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Waxay ka dhigan tahay dhismo, goob, markab, baarkin, iwm.",
+            "displayType": "Goobta"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Waxay u taagan tahay aag meel ku dhex taal, sida qol ama qol",
+            "displayType": "Aagga"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Waxay ka dhigan tahay dabaqa dhismaha ama markabka",
+            "displayType": "Dabaq"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Waxay ka dhigan tahay tiir dhisme ama markabka ku dhex yaal",
+            "displayType": "Tiirka"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Qaybta walxaha masaafo gaar ah u jirta geohash",
+            "displayType": "Meelo u dhow"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Qaybta walxaha masaafo gaar ah u jirta geohash, oo u dhiganta xiisaha",
+            "displayType": "Meelaha xiisaha"
         }
     }
 }

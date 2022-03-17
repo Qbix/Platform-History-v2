@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Feil {{status}} under forespørsel",
+        "canceled": "Forespørsel kansellert",
+        "500": "Intern server feil",
+        "404": "Ikke funnet: {{url}}",
+        "501": "Forespørselen ble avbrutt"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Sesjon utløpt. Oppdater siden og prøv igjen.",
+        "otherDomain": "Blokkert forespørsel på tvers av domener til utenlandsk domene på {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "trykk",
+        "click": "klikk",
+        "yes": "ja",
+        "no": "Nei",
+        "Tap": "Trykk på",
+        "Click": "Klikk",
+        "Yes": "Ja",
+        "No": "Nei"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "januar",
+        "2": "februar",
+        "3": "mars",
+        "4": "april",
+        "5": "Kan",
+        "6": "juni",
+        "7": "juli",
+        "8": "august",
+        "9": "september",
+        "10": "oktober",
+        "11": "november",
+        "12": "desember"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "sekund",
+        "seconds": "sekunder",
+        "minute": "minutt",
+        "minutes": "minutter",
+        "hour": "timer",
+        "day": "dag",
+        "days": "dager",
+        "week": "uke",
+        "weeks": "uker",
+        "month": "måned",
+        "months": "måneder",
+        "year": "år",
+        "years": "år",
+        "decade": "tiår",
+        "decades": "tiår",
+        "century": "århundre",
+        "centuries": "århundrer"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Gi tilgang til mikrofonen din",
+        "record": "Ta opp",
+        "recording": "Innspilling",
+        "remains": "rester",
+        "maximum": "maksimum",
+        "playing": "Spiller",
+        "recorded": "Innspilt",
+        "clip": "klipp",
+        "discard": "Kast",
+        "encoding": "Koding"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "klipp",
+        "errorNoSource": "Ingen videokilde",
+        "SkipAfter": "Hopp over etter",
+        "Skip": "Hopp over"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "klipp",
+        "errorNoSource": "Ingen pdf-kilde"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Still inn klippstart",
+        "ClipStart": "Klipp Start",
+        "SetClipEnd": "Sett Clip End",
+        "ClipEnd": "Klipp slutt",
+        "StartMoreEnd": "Startposisjon kan ikke være mer enn sluttposisjon",
+        "EndLessStart": "Sluttposisjon kan ikke være mindre enn startposisjon",
+        "WhichInvalid": "Argumentet &quot;hvilket&quot; er ugyldig"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Varsling"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Bekrefte",
+        "ok": "Ja",
+        "cancel": "Nei"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Spør",
+        "ok": "Gå"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "mer",
+        "Menu": "Meny"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Feil ved lesing av fil",
+        "errorType": "Beklager, men denne filtypen støttes ikke",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Hva har du lyst til å gjøre?",
+            "photo": "Ta nytt bilde",
+            "library": "Velg fra biblioteket"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Vennligst velg et større bilde.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Juster størrelse og plassering",
+            "touchscreen": "Bruk fingrene til å zoome og dra",
+            "notTouchscreen": "Bruk musen og hjulet for å zoome og dra"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "i går kveld",
+        "lastEvening": "siste kveld",
+        "yesterday": "i går",
+        "thisMorning": "denne morgenen",
+        "today": "i dag",
+        "tonight": "i kveld",
+        "tomorrowMorning": "i morgen",
+        "tomorrow": "i morgen",
+        "hoursAgo": "{{h}} timer siden",
+        "hourAgo": "{{h}} time siden",
+        "minuteAgo": "For {{m}} minutt siden",
+        "minutesAgo": "For {{m}} minutter siden",
+        "secondAgo": "{{s}} sekund siden",
+        "secondsAgo": "{{s}} sekunder siden",
+        "fewSecondsAgo": "sekunder siden",
+        "rightNow": "akkurat nå",
+        "inSecond": "om {{s}} sekund",
+        "inSeconds": "om {{s}} sekunder",
+        "inMinute": "om {{m}} minutt",
+        "inMinutes": "om {{m}} minutter",
+        "inHour": "om {{h}} time",
+        "inHours": "om {{h}} timer",
+        "inUnderMinute": "på under 1 minutt"
     }
 }

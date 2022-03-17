@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "ഉള്ളിൽ {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "മീറ്റർ",
+        "meters": "മീറ്റർ",
+        "kilometer": "കിലോമീറ്റർ",
+        "kilometers": "കിയോമീറ്ററുകൾ",
+        "km": "കി.മീ",
+        "mile": "നാഴിക",
+        "miles": "മൈലുകൾ",
+        "mi": "മൈൽ",
+        "foot": "കാൽ",
+        "feet": "അടി",
+        "inches": "ഇഞ്ച്"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "{{select}} എന്നതിനുള്ളിൽ നടക്കുന്ന കാര്യങ്ങളിൽ എനിക്ക് താൽപ്പര്യമുണ്ട്",
+        "update": "എന്റെ ലൊക്കേഷൻ അപ്ഡേറ്റ് ചെയ്യുക",
+        "set": "എന്റെ ലൊക്കേഷൻ സജ്ജമാക്കുക",
+        "prompt": "{{ClickOrTap}} ഇവിടെ<br> നിങ്ങളുടെ സജ്ജമാക്കുക<br> സ്ഥാനം",
+        "myCurrentLocation": "എന്റെ ഇപ്പോഴത്തെ സ്ഥാനം",
+        "enterAddress": "ഒരു വിലാസം നൽകുക",
+        "enterPostcode": "ദയവായി നിങ്ങളുടെ പിൻകോഡ് \/ പിൻകോഡ് നൽകുക",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "ലൊക്കേഷൻ ചേർക്കുക",
+            "title": "പുതിയ സ്ഥാനം",
+            "nameYourLocation": "നിങ്ങളുടെ സ്ഥാനത്തിന് പേര് നൽകുക"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "ഈ ലൊക്കേഷൻ സംരക്ഷിക്കണോ?",
+            "message": "ഭാവിയിൽ ഈ ലൊക്കേഷൻ വീണ്ടും ഉപയോഗിക്കാൻ നിങ്ങൾ ഉദ്ദേശിക്കുന്നുണ്ടോ?",
+            "ok": "അതെ",
+            "cancel": "ഇല്ല"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "ഈ സ്ഥലത്തിന് പേര് നൽകുക",
+            "placeholder": "വീട്, ജോലി തുടങ്ങിയവ.",
+            "ok": "രക്ഷിക്കും"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "ലൊക്കേഷൻ തിരഞ്ഞെടുക്കുക"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "ഈ ലൊക്കേഷനിൽ ഏതെങ്കിലും പ്രദേശം ഉണ്ടോ?",
+        "newArea": "പുതിയ പ്രദേശം",
+        "promptTitle": "പ്രദേശത്തിന് ഒരു പേര് നൽകുക:",
+        "absent": "ദയവായി ഏരിയ സജ്ജമാക്കുക",
+        "error": "പിശക്",
+        "exist": "പ്രദേശം ഇതിനകം നിലവിലുണ്ട്",
+        "addNewArea": "പുതിയ ഏരിയ ചേർക്കുക",
+        "add": "ചേർക്കുക"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "ലൊക്കേഷനുകളുടെ ഒരു ശേഖരം",
+            "displayType": "സ്ഥാനങ്ങൾ"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "ഒരു കെട്ടിടം, സ്ഥലം, കപ്പൽ, പാർക്ക് മുതലായവയെ പ്രതിനിധീകരിക്കുന്നു.",
+            "displayType": "സ്ഥാനം"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "ഒരു മുറിയോ സ്യൂട്ടോ പോലുള്ള ഒരു സ്ഥലത്തിനുള്ളിലെ ഒരു പ്രദേശത്തെ പ്രതിനിധീകരിക്കുന്നു",
+            "displayType": "ഏരിയ"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "ഒരു കെട്ടിടത്തിലോ കപ്പലിലോ ഉള്ള ഒരു നിലയെ പ്രതിനിധീകരിക്കുന്നു",
+            "displayType": "തറ"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "ഒരു കെട്ടിടത്തിലോ കപ്പലിലോ ഉള്ള ഒരു നിരയെ പ്രതിനിധീകരിക്കുന്നു",
+            "displayType": "കോളം"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "ജിയോഹാഷിന്റെ ഒരു നിശ്ചിത അകലത്തിലുള്ള കാര്യങ്ങൾക്കുള്ള വിഭാഗം",
+            "displayType": "സ്ഥലങ്ങൾക്കടുത്ത്"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "താൽപ്പര്യവുമായി പൊരുത്തപ്പെടുന്ന, ജിയോഹാഷിന്റെ ഒരു നിശ്ചിത അകലത്തിലുള്ള കാര്യങ്ങൾക്കുള്ള വിഭാഗം",
+            "displayType": "താൽപ്പര്യമുള്ള സ്ഥലങ്ങൾ"
         }
     }
 }

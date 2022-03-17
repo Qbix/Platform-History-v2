@@ -29,7 +29,7 @@ class Q_Html
 			 : $default;
 		}
 		$query_array = array_merge($query_array, $more_fields);
-		$query = http_build_query($query_array, null, '&');
+		$query = http_build_query($query_array, '', '&');
 	}
 	
 	/**
@@ -1116,7 +1116,7 @@ class Q_Html
 	 * @param {array} $attributes Associative array of name => value pairs.
 	 * @param {string} [$between=' '] The text to insert between the attribute="value"
 	 * @param {string} [$escape=true] Whether to escape the attribute names and values.
-	 * @param {string} [$tag=null]
+	 * @param {string} [$tag='']
 	 * @param {array} [$options=array()]
 	 * @param {boolean} [$options.ignoreEnvironment=false] If true, doesn't apply environment transformations
 	 * @param {string} [$options.hash=null] If URL was already processed with cachedUrlAndCache, set hash here to avoid calling it again
@@ -1126,7 +1126,7 @@ class Q_Html
 		array $attributes, 
 		$between = ' ', 
 		$escape = true, 
-		$tag = null,
+		$tag = '',
 		$options = array())
 	{
 		$cacheBust = null;

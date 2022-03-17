@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Maksa napauttamalla"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: veloitus käsitelty: {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Kiitos maksustasi vastaanottajalle {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} tilasi {{plan.title}}",
+        "YouSubscribedTo": "Olet tilannut {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Saat maksun {{displayAmount}} lähettäjältä {{call 'publisher.displayName'}} &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, tämä on vain ilmoitus, että {{1}} on veloitettu {{2}} summasta {{3}}, {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Kiitos maksusta &quot;{{description}}&quot;",
+        "HavePaid": "Hei {{1}}, tämä on vain nopea vahvistus siitä, että olet onnistuneesti maksanut {{2}} henkilölle {{3}} summasta {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Tietoja tilauksesta",
+        "PaymentMethod": "Maksutapa",
+        "ContactInfo": "Yhteystiedot",
+        "Pay": "Maksaa"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Kutsun hyväksyi {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} antoi etunimen",
+        "Streams_user_lastname": "{{invitedUserName}} syötti sukunimen",
+        "Streams_user_icon": "{{invitedUserName}} syötetty kuvake",
+        "Places_user_location": "{{invitedUserName}} syötetty sijainti",
+        "Streams_greeting": "{{invitedUserName}} näppäili tervehdyksen",
+        "YouHaveCreditsToStart": "Sinulla on {{amount}} saldoa aloittaaksesi",
+        "PaymentFor": "Maksu kohteelle &quot;{{1}}&quot;",
+        "PaymentTo": "Maksu: {{1}}",
+        "PaymentToUser": "Maksu: {{toUserName}}",
+        "CreatePaidStream": "luomiseen {{toStreamName}}",
+        "JoinedPaidStream": "varaukseen paikassa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "yhteisön &quot;{{communityId}}&quot; luomiseen",
+        "LeftPaidStream": "varaushyvityksenä kohteessa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Ostin {{amount}} krediittiä",
+        "BonusCredits": "Bonus {{amount}} krediittiä",
+        "BuyAmountCredits": "Osta {{amount}} krediittiä",
+        "WatchClip": "Ansainnut {{amount}} saldoa katsomalla {{fromStreamTitle}}",
+        "MissingCredits": "Krediitit puuttuvat",
+        "YouMissingCredits": "Tarvitset lisää {{amount}} saldoa jatkaaksesi.",
+        "BuyCredits": "Osta krediittejä",
+        "BuyBonus": "Kun ostat {{amount}} saldoa kerralla, saat {{bonus}} krediittiä bonuksen.",
+        "Buy": "Ostaa",
+        "PurchaseCredits": "Ostokreditit",
+        "Credits": "Krediitit",
+        "ErrorInvalidAmount": "Summa virheellinen",
+        "ErrorInvalidCurrency": "Valitettavasti emme vielä tue valuuttaa {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} luottoa",
+            "BonusCredits": "{{amount}} luottoa"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Päivämäärä",
+        "Amount": "Määrä",
+        "Description": "Kuvaus",
+        "Client": "Asiakas",
+        "To": "kohtaan",
+        "From": "alkaen",
+        "SeeHistory": "Katso maksuhistoria: {{1}}",
+        "HistoryEmpty": "Sinulla ei ole vielä tietoja",
+        "PaymentFor": "Lähetetty {{amount}} hyvitystä",
+        "PaymentTo": "Lähetetty {{amount}} hyvitystä",
+        "PaymentToUser": "Lähetetty {{amount}} hyvitystä",
+        "CreatePaidStream": "Käyttänyt {{amount}} krediittiä",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ansaittu {{amount}} krediittiä",
+            "-": "Käyttänyt {{amount}} krediittiä"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ansaittu {{amount}} krediittiä",
+            "-": "Käyttänyt {{amount}} krediittiä"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Sai {{amount}} hyvitystä",
+            "-": "Lähetetty {{amount}} hyvitystä"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Käyttänyt {{amount}} krediittiä",
+        "BoughtCredits": "Ostin {{amount}} krediittiä",
+        "BonusCredits": "Sain {{amount}} bonuspistettä",
+        "InviteAcceptedBy": "Ansaittu {{amount}} krediittiä",
+        "Streams_user_firstname": "Ansaittu {{amount}} krediittiä",
+        "Streams_user_lastname": "Ansaittu {{amount}} krediittiä",
+        "Streams_user_icon": "Ansaittu {{amount}} krediittiä",
+        "Places_user_location": "Ansaittu {{amount}} krediittiä",
+        "Streams_greeting": "Ansaittu {{amount}} krediittiä",
+        "YouHaveCreditsToStart": "Ansaittu {{amount}} krediittiä"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Aseta maksutiedot",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Aloita tilaus",
+            "message": "Haluatko tilata {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Peruuttaa"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Luotto- tai pankkikortti",
+        "SubscribePayment": "Tilaa Maksu",
+        "ImmediatePayment": "Välitön maksu"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Aseta maksutiedot",
+        "BuyAmountCredits": "Osta {{amount}} krediittiä",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Suorita maksu",
+            "message": "Suostutko maksamaan {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Peruuttaa"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Krediitit",
+            "description": "pitää kirjaa hyvityksistä ja maksuista"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Tilaussuunnitelma",
+            "description": "tilaussuunnitelma"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Tilaus",
+            "description": "tilaus"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Tuote",
+            "description": "tuotetta myydään"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Palvelu",
+            "description": "palvelua tarjotaan"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Ansaittu {{amount}} krediittiä"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Ostin {{amount}} krediittiä"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} krediittiä"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Käyttänyt {{amount}} krediittiä"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Lähetetty {{amount}} hyvitystä henkilölle {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Sai {{amount}} hyvitystä käyttäjältä {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Uusi Palvelu",
+            "TitlePlaceholder": "Palvelun otsikko",
+            "PricePlaceholder": "Aseta hinta",
+            "LinkPlaceholder": "aseta lisätietolinkki",
+            "DescriptionPlaceholder": "Palvelun kuvaus",
+            "SaveService": "Tallenna palvelu",
+            "SelectRequiredParticipants": "Pakolliset osallistujat"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Hallinnoi palvelumalleja",
+        "ManageServices": "Hallinnoi palveluita",
+        "Free": "Vapaa",
+        "OptionalContribution": "Valinnainen panos",
+        "RequiredPayment": "Vaadittu maksu",
+        "AreYouSureDelete": "Haluatko varmasti poistaa tämän palvelun?",
+        "AmountServicesRelated": "Tähän palveluun liittyy {{amount}} saatavuutta. Ne myös poistetaan."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Tietoja {{title}} NFT:stä",
+        "Description": "Yksityiskohtaiset tiedot NFT:stä",
+        "FixedBid": "Osta nyt",
+        "CurrentBid": "Tämänhetkinen tarjous",
+        "StartingIn": "Alkaa sisään",
+        "EndingIn": "Päättyy sisään",
+        "CreateNFT": "Luo NFT",
+        "TitlePlaceholder": "Anna NFT:llesi otsikko",
+        "DescriptionPlaceholder": "Anna NFT:llesi kuvaus",
+        "CreateYourNFT": "Luo NFT",
+        "Royalties": "Rojaltit",
+        "RoyaltyPlaceholder": "Valinnainen. Tekijälle ennen siirtoa maksettu summa.",
+        "ExpirationDate": "Viimeinen käyttöpäivä",
+        "StartingDate": "Aloituspäivämäärä",
+        "BidsBelowThisAmount": "Tämän summan alapuolella olevia tarjouksia ei hyväksytä",
+        "MinimumBid": "Minimihinta",
+        "Price": "Hinta",
+        "Owner": "Omistaja",
+        "SelectCategory": "Valitse kategoria",
+        "Day": "Päivä",
+        "Days": "päivää",
+        "Hour": "Tunnin",
+        "Hours": "Tuntia",
+        "Minute": "Minuutti",
+        "Minutes": "Pöytäkirja",
+        "Second": "Toinen",
+        "Seconds": "Sekuntia",
+        "SalesCreator": "myynnistä menee luojalle",
+        "Details": "Yksityiskohdat",
+        "Bids": "Tarjoukset",
+        "History": "Historia",
+        "LoremIpsum": "Lorem Ipsum on yksinkertaisesti paino- ja ladontateollisuuden näennäistä tekstiä.",
+        "PutOnSale": "Laita myyntiin",
+        "PutOffSale": "Vetäytyä myynnistä",
+        "Transfer": "Siirtää",
+        "Update": "Päivittää",
+        "UpdateToken": "Päivitä Token",
+        "CreateToken": "Luo tunnus",
+        "PlaceBid": "Asettaa tarjous",
+        "SoldOut": "myyty",
+        "NftName": "NFT nimi",
+        "DescribeYourNFT": "Kuvaile NFT:täsi",
+        "NftPicture": "NFT:tä edustava kuva",
+        "NftMovie": "NFT:tä edustava elokuva",
+        "UploadMovie": "Lataa elokuva",
+        "MovieSource": "Elokuvan lähde",
+        "UploadFile": "Lataa tiedosto",
+        "PutOnMarketplace": "Laita torille",
+        "InstantPurchase": "Anna hinta, jotta käyttäjät voivat ostaa NFT:si välittömästi",
+        "FixedPrice": "Kiinteä hinta",
+        "TimedAuction": "Ajastettu huutokauppa",
+        "OpenForBids": "Avoinna tarjouksille",
+        "PriceOnePiece": "Syötä hinta yhdelle kappaleelle",
+        "EnterMinimumBid": "Anna vähimmäishinta",
+        "SelectChain": "Valitse ketju",
+        "WrongChain": "Tämä NFT luotiin nimellä &quot;{{chain}}&quot;. Käytä tätä ketjua.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFT:n tuonti",
+            "fileNotFound": "Anteeksi, CSV-tiedostoa ei löydy.",
+            "fileEmpty": "Anteeksi, CSV-tiedosto on tyhjä.",
+            "userIdNotFound": "käyttäjä on olemassa, mutta id tyhjä",
+            "errorLine": "rivi {{1}}",
+            "fieldNotFound": "Pakollista kenttää &quot;{{1}}&quot; ei löydy",
+            "taskStreamInvalid": "tehtävävirta on virheellinen",
+            "instructionsEmpty": "tehtävävirran ohjeet tyhjät",
+            "complete": "Saattaa loppuun",
+            "activateUsers": "lähettää aktivointiviestin käyttäjille?",
+            "importProgress": "Edistyminen",
+            "importOptions": "Vaihtoehdot",
+            "sampleCSV": "Lataa malli-CSV",
+            "fileLabel": "Lataa laskentataulukko:",
+            "errorsTitle": "Virheitä tapahtui"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Suodata NFT-kokoelman mukaan",
+                "ShowNFTCollection": "Näytä NFT-kokoelma...",
+                "AllCollections": "Kaikki kokoelmat"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Kaikki tekijät",
+                "AllUsers": "Kaikki",
+                "FilterByAuthors": "Suodata tekijöiden mukaan"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Takaisin kokoelmaan"
     }
 }

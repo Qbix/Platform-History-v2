@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tap om te beteljen"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: kosten ferwurke foar {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tankewol foar jo betelling oan {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonnearre op {{plan.title}}",
+        "YouSubscribedTo": "Jo binne ynskreaun op {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Jo krije betelling fan {{displayAmount}} fan {{call 'publisher.displayName'}} troch &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hee, dit is gewoan om jo te litten witte dat {{1}} yn rekken brocht is {{2}} foar {{3}} troch {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Betanke foar jo betelling foar &quot;{{description}}&quot;",
+        "HavePaid": "Hoi {{1}}, dit is mar in flugge befêstiging dat jo mei súkses {{2}} betelle hawwe oan {{3}} foar {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Ynformaasje oer oarder",
+        "PaymentMethod": "Wize fan beteljen",
+        "ContactInfo": "Kontakt ynformaasje",
+        "Pay": "Betelje"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
+        "InviteAcceptedBy": "Utnoeging akseptearre troch {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} foarnamme ynfierd",
+        "Streams_user_lastname": "{{invitedUserName}} hat efternamme ynfierd",
+        "Streams_user_icon": "{{invitedUserName}} ynfierd ikoan",
+        "Places_user_location": "{{invitedUserName}} ynfierde lokaasje",
+        "Streams_greeting": "{{invitedUserName}} hat in groetnis ynfierd",
+        "YouHaveCreditsToStart": "Jo hawwe {{amount}} credits om te begjinnen",
+        "PaymentFor": "Betelling foar &quot;{{1}}&quot;",
+        "PaymentTo": "Betelling oan {{1}}",
+        "PaymentToUser": "Betelling oan {{toUserName}}",
+        "CreatePaidStream": "foar it meitsjen fan {{toStreamName}}",
+        "JoinedPaidStream": "foar reservearring yn &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "foar it meitsjen fan mienskip &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "as reservearring werombetelle yn &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kocht {{amount}} credits",
         "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
+        "BuyAmountCredits": "Keapje {{amount}} credits",
+        "WatchClip": "Fertsjinne {{amount}} credits foar it besjen fan {{fromStreamTitle}}",
         "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
+        "YouMissingCredits": "Jo hawwe in ekstra {{amount}} credits nedich om troch te gean.",
+        "BuyCredits": "Keapje credits",
+        "BuyBonus": "It keapjen fan {{amount}} credits tagelyk, sil liede ta {{bonus}} credits bonus.",
+        "Buy": "Keapje",
+        "PurchaseCredits": "Keapje Credits",
         "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "ErrorInvalidAmount": "Bedrach ûnjildich",
+        "ErrorInvalidCurrency": "Spitigernôch stypje wy muntienheid {{currency}} noch net",
         "forMessages": {
             "BoughtCredits": "{{amount}} credits",
             "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Datum",
+        "Amount": "Tal",
+        "Description": "Beskriuwing",
+        "Client": "Kliïnt",
+        "To": "nei",
+        "From": "fan",
+        "SeeHistory": "Sjoch betellingsskiednis foar {{1}}",
+        "HistoryEmpty": "Jo hawwe noch gjin gegevens",
+        "PaymentFor": "Ferstjoerd {{amount}} credits",
+        "PaymentTo": "Ferstjoerd {{amount}} credits",
+        "PaymentToUser": "Ferstjoerd {{amount}} credits",
+        "CreatePaidStream": "{{amount}} credits bestege",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Fertsjinne {{amount}} credits",
+            "-": "{{amount}} credits bestege"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Fertsjinne {{amount}} credits",
+            "-": "{{amount}} credits bestege"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Krige {{amount}} credits",
+            "-": "Ferstjoerd {{amount}} credits"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "{{amount}} credits bestege",
+        "BoughtCredits": "Kocht {{amount}} credits",
+        "BonusCredits": "Krige bonus {{amount}} credits",
+        "InviteAcceptedBy": "Fertsjinne {{amount}} credits",
+        "Streams_user_firstname": "Fertsjinne {{amount}} credits",
+        "Streams_user_lastname": "Fertsjinne {{amount}} credits",
+        "Streams_user_icon": "Fertsjinne {{amount}} credits",
+        "Places_user_location": "Fertsjinne {{amount}} credits",
+        "Streams_greeting": "Fertsjinne {{amount}} credits",
+        "YouHaveCreditsToStart": "Fertsjinne {{amount}} credits"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Set betelling ynformaasje",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Start Abonnemint",
+            "message": "Wolle jo jo abonnearje op {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Ofbrekke"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kredyt- of debitkaart",
+        "SubscribePayment": "Ynskriuwe Payment",
+        "ImmediatePayment": "Direkte betelling"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Set betelling ynformaasje",
+        "BuyAmountCredits": "Keapje {{amount}} credits",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Betelje",
+            "message": "Binne jo akkoard om {{symbol}}{{amount}} te beteljen?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Ofbrekke"
         }
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "description": "hâldt credits en betellingen by"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Abonnemintsplan",
+            "description": "abonnemint plan"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Ynskriuwing",
+            "description": "ynskriuwing"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Produkt",
+            "description": "produkt wurdt ferkocht"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Betsjinning",
+            "description": "tsjinst wurdt oanbean"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Fertsjinne {{amount}} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Kocht {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "{{amount}} credits bestege"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Stjoerde {{amount}} credits nei {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Krige {{amount}} credits fan {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Nije tsjinst",
+            "TitlePlaceholder": "Service titel",
+            "PricePlaceholder": "Set priis",
+            "LinkPlaceholder": "ynstelle ekstra ynfo keppeling",
+            "DescriptionPlaceholder": "Service beskriuwing",
+            "SaveService": "Bewarje Service",
+            "SelectRequiredParticipants": "Required Participanten"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Beheare Service Templates",
+        "ManageServices": "Tsjinsten beheare",
+        "Free": "Frij",
+        "OptionalContribution": "Opsjonele bydrage",
+        "RequiredPayment": "Ferplichte betelling",
+        "AreYouSureDelete": "Binne jo wis dat jo dizze tsjinst fuortsmite wolle?",
+        "AmountServicesRelated": "D&#39;r binne {{amount}} beskikberens yn ferbân mei dizze tsjinst. Se wurde ek fuortsmiten."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "Title": "Ynformaasje oer {{title}} NFT",
+        "Description": "Detaillearre ynformaasje oer NFT",
+        "FixedBid": "No keapje",
+        "CurrentBid": "hjoeddeistige bod",
+        "StartingIn": "Begjin yn",
+        "EndingIn": "Einigje yn",
+        "CreateNFT": "Meitsje in NFT",
+        "TitlePlaceholder": "Jou jo NFT in titel",
+        "DescriptionPlaceholder": "Jou jo NFT in beskriuwing",
+        "CreateYourNFT": "Meitsje jo NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
+        "RoyaltyPlaceholder": "Fakultatyf. Bedrach betelle oan skepper foar oerdracht.",
+        "ExpirationDate": "Ferfaldatum",
+        "StartingDate": "Begjin Datum",
+        "BidsBelowThisAmount": "Biedingen ûnder dit bedrach wurde net tastien",
+        "MinimumBid": "Minimum bod",
+        "Price": "Priis",
+        "Owner": "Eigner",
+        "SelectCategory": "Selektearje kategory",
+        "Day": "Dei",
+        "Days": "Dagen",
+        "Hour": "Oere",
+        "Hours": "Oeren",
+        "Minute": "Minút",
+        "Minutes": "Minuten",
+        "Second": "Twadde",
+        "Seconds": "Sekonden",
+        "SalesCreator": "fan ferkeap sil gean nei skepper",
         "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
+        "Bids": "Biedingen",
+        "History": "Skiednis",
+        "LoremIpsum": "Lorem Ipsum is gewoan dummy-tekst fan &#39;e print- en setyndustry.",
+        "PutOnSale": "Te keap sette",
+        "PutOffSale": "Weromlûke út ferkeap",
+        "Transfer": "Oerdracht",
         "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "UpdateToken": "Token bywurkje",
+        "CreateToken": "Token oanmeitsje",
+        "PlaceBid": "Pleats bod",
+        "SoldOut": "Ferkocht",
+        "NftName": "NFT namme",
+        "DescribeYourNFT": "Beskriuw asjebleaft jo NFT",
+        "NftPicture": "Ofbylding te fertsjintwurdigjen NFT",
+        "NftMovie": "Film om NFT te fertsjintwurdigjen",
+        "UploadMovie": "Upload film",
+        "MovieSource": "Movie Boarne",
+        "UploadFile": "Upload in triem",
+        "PutOnMarketplace": "Set op merk",
+        "InstantPurchase": "Fier priis yn om brûkers jo NFT direkt te keapjen",
+        "FixedPrice": "Fêste priis",
+        "TimedAuction": "Timed feiling",
+        "OpenForBids": "Iepenje foar biedingen",
+        "PriceOnePiece": "Fier priis yn foar ien stik",
+        "EnterMinimumBid": "Fier minimumbod yn",
+        "SelectChain": "Selektearje ketting",
+        "WrongChain": "Dizze NFT makke ûnder &quot;{{chain}}&quot;. Brûk dizze ketting asjebleaft.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
+            "importNFT": "It ymportearjen fan NFT&#39;s",
+            "fileNotFound": "Sorry, CSV-bestân net fûn.",
+            "fileEmpty": "Sorry, CSV-bestân is leech.",
+            "userIdNotFound": "brûker bestiet mar id leech",
             "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
+            "fieldNotFound": "Fereaske fjild &quot;{{1}}&quot; net fûn",
+            "taskStreamInvalid": "taakstream ûnjildich",
+            "instructionsEmpty": "taakstream ynstruksjes leech",
+            "complete": "Kompleet",
+            "activateUsers": "aktivearring berjocht stjoere nei brûkers?",
+            "importProgress": "Foarútgong",
+            "importOptions": "Opsjes",
             "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "fileLabel": "Spreadsheet uploade:",
+            "errorsTitle": "Der barde flaters"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filter troch NFT-kolleksjes",
+                "ShowNFTCollection": "NFT-kolleksje sjen litte yn ...",
+                "AllCollections": "Alle kolleksjes"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Alle skriuwers",
+                "AllUsers": "Elkenien",
+                "FilterByAuthors": "Filter troch skriuwers"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Werom nei Kolleksje"
     }
 }

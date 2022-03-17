@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "این محتوا از شما پنهان است."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "گزینه جدید"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "افرادی را که دعوت کردم",
+        "Streams\/invitedMe": "کی دعوتم کرد",
+        "DoYouAgree": "موافقید؟",
+        "Yes": "آره",
+        "No": "خیر"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "علایق شما چیست؟",
+        "CanAdd": "اگر هنوز چیزی را که به دنبالش هستید پیدا نکردید، می‌توانید علاقه جدیدی را در زیر اضافه کنید:",
+        "TrySynonyms": "آیا آن را نمی بینید؟ چند مترادف را امتحان کنید.",
+        "AddUnderCategory": "اضافه کردن زیر دسته...",
+        "Other": "دیگر",
+        "Unlisted": "فهرست نشده"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "پیام برای بررسی سرپرست علامت گذاری شده است. برای لغو پرچم دوباره ضربه بزنید.",
+        "noOneSaid": "هیچکس چیزی نگفته است",
+        "closeChatButton": "بستن چت",
+        "closeChatConfirmTitle": "این گپ بسته شود؟",
+        "closeChatConfirm": "آیا مطمئنید که می خواهید این گپ را ببندید؟",
+        "Subscribed": "اعلان ها فعال شد",
+        "Unsubscribed": "اعلان‌ها بی‌صدا شدند",
+        "closeChatConfirmYes": "آره",
+        "closeChatConfirmNo": "خیر",
+        "earlierComments": "نظرات قبلی",
+        "startedConversation": "گفتگو را آغاز کرد",
+        "RealTimeCall": "تماس زمان واقعی",
+        "SearchByName": "جستجو براساس نام",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} در حال بازدید از چت است",
+            "Join": "{{displayName}} به چت پیوست",
+            "Leave": "{{displayName}} گپ را ترک کرد",
+            "RelatedTo": "{{displayName}} یک {{stream.displayType}} را شروع کرد"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "اشتراک های ایمیل خود را مدیریت کنید",
+        "IfUnsubscribe": "اگر می خواهید اشتراک را لغو کنید",
+        "*": "پیام {{& message.fields.type}} به {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} گفت: {{& message.content}}",
+        "Streams\/changed": "تغییرات در {{stream.fields.title}}",
+        "Streams\/invite": "شما به {{& stream.fields.title}} دعوت شدید",
+        "Streams\/announcement": "اطلاعیه در {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} تغییر دسترسی در {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "پیام چت ویرایش شده در {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "پیام چت در {{& stream.fields.title}} حذف شد",
+        "Streams\/closed": "{{stream.fields.title}} بسته شده است",
+        "Streams\/task\/progress": "پیشرفت در {{stream.fields.title}}",
+        "Streams\/task\/complete": "کار تکمیل شد: {{stream.fields.title}}",
+        "Streams\/task\/error": "خطا در طول: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: پیام ورودی",
+        "Streams\/relatedTo\/Streams\/call": "تماس جدید در {{toTitle}} شروع شد",
+        "Streams\/relatedTo\/*": "جدید {{relationDisplayType}} در {{toTitle}}",
+        "Streams\/relatedFrom\/*": "اضافه شده به {{toTitle}} به عنوان {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} از شما در یک نظر نام برد",
+        "Streams\/call": "{{displayName}} یک تماس هم‌زمان را شروع کرد"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "دعوت",
+        "messageContent": "{{displayName}} شما را به {{inviteUrl}} دعوت کرد",
+        "youCanNowPaste": "اکنون می توانید این پیوند را در جایی بچسبانید تا افراد را دعوت کنید",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "از مخاطبین خود انتخاب کنید",
+            "chooseAgainFromContacts": "دوباره از مخاطبین انتخاب کنید",
+            "inviteSelectedContacts": "از مخاطبین انتخاب شده دعوت کنید",
+            "selectFromContacts": "از مخاطبین را انتخاب کنید",
+            "userChooserPlaceholder": "جستجو براساس نام",
+            "photo": "عکس گرفتن",
+            "photoInstruction": "اگر شخصی که کد QR شما را اسکن کرده است روبروی شماست، از او عکس بگیرید",
+            "to": "به: {{Stream Title}}",
+            "go": "برو",
+            "title": "دعوت",
+            "placeholder": "شماره موبایل یا آدرس ایمیل",
+            "orInvite": "یا با استفاده از:",
+            "copyLink": "{{ClickOrTap}} پیوند دعوت را کپی کنید",
+            "shareOrCopyLink": "برای اشتراک‌گذاری یا کپی پیوند دعوت، {{ClickOrTap}}",
+            "QR": "{{ClickOrTap}} برای تولید کد QR",
+            "QRtitle": "این کد QR را اسکن کنید",
+            "QRscanned": "اسکن کردند!",
+            "scannedQR": "{{ClickOrTap}} اگر کد اسکن شده باشد",
+            "byEmail": "پست الکترونیک",
+            "byText": "متن",
+            "byFacebook": "فیس بوک",
+            "byTwitter": "توییتر"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "هی، این را بررسی کنید",
+            "PleaseVisitLink": "لطفا از لینک زیر دیدن فرمایید:",
+            "InvitingYou": "من شما را به {{title}} دعوت می کنم",
+            "HasInvitedYou": "{{displayName}} شما را به {{title}} دعوت کرده است",
+            "HasMentionedYou": "{{displayName}} از شما در &quot;{1000}}&quot; نام برده است",
+            "YOUAREINVITED": "شما دعوت شده اید!",
+            "AcceptInvite": "پذیرفتن دعوت"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "شما به {{title}} دعوت شده اید. لطفاً روی {{url}} ضربه بزنید"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "شما دعوت شده اید. {{ClickOrTap}} اینجا را بپذیرید و بپیوندید."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "یک پیام <em>{999}}<\/em> به {{stream.fields.title}} ارسال کرد"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "نظر داد",
+            "startedCallIn": "تماسی را شروع کرد",
+            "in": "که در",
+            "body": "در {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "ارسال شده است به",
+                "byAvatar": "توسط {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "یک {{instructions.fromDisplayType}} جدید دارد",
+                "byAvatar": "اضافه شده توسط {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "دعوت نامه ها از شماره ما ارسال می شود که دوستان شما هنوز آنها را نمی شناسند. پیام کوتاهی را دنبال کنید تا بدانند دعوتنامه از طرف شما آمده است و از آنها بخواهید روی پیوند کلیک کنند.",
+            "confirm": "دعوت نامه ها از شماره ما ارسال می شود که دوستان شما هنوز آنها را نمی شناسند. آیا می‌خواهید با یک پیام کوتاه سریع به آنها اطلاع دهید که دعوتنامه از طرف شما آمده است و از آنها بخواهید روی پیوند کلیک کنند.",
+            "check": "سلام، من به تازگی برای شما دعوت نامه ای به برنامه {{app}} ارسال کردم. لطفا اس ام اس خود را بررسی کنید و روی لینک کلیک کنید!",
+            "CheckYourMobile": "لطفا SMS را بررسی کنید و دستورالعمل ها را دنبال کنید!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "دعوت‌نامه‌ها از دامنه ما ارسال می‌شوند که دوستان شما هنوز آن‌ها را نمی‌شناسند. پیام کوتاهی را دنبال کنید تا بدانند دعوتنامه از طرف شما آمده است و از آنها بخواهید روی پیوند کلیک کنند.",
+            "confirm": "دعوت‌نامه‌ها از دامنه ما ارسال می‌شوند که دوستان شما هنوز آن‌ها را نمی‌شناسند. آیا می‌خواهید با یک پیام کوتاه سریع به آنها اطلاع دهید که دعوتنامه از طرف شما آمده است و از آنها بخواهید روی پیوند کلیک کنند.",
+            "subject": "دعوتنامه گرفتی؟",
+            "body": "سلام، من به تازگی برای شما دعوت نامه ای به برنامه {{app}} ارسال کردم. لطفا ایمیل خود را بررسی کنید و روی لینک موجود در آن کلیک کنید!",
+            "CheckYourEmail": "لطفا ایمیل خود را بررسی کنید و دستورالعمل ها را دنبال کنید!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "عنوان",
+        "Subscribed": "مشترک شد",
+        "Participants": "شركت كنندگان",
+        "AreYouSureRemoveIdentifier": "آیا مطمئن هستید که این شناسه را حذف می کنید؟",
+        "AreYouSureUnsubscribeIdentifier": "آیا مطمئن هستید که اشتراک این شناسه را لغو می کنید؟ اعلان‌های این شناسه را خاموش می‌کند.",
+        "AreYouSureUnsubscribeDevice": "آیا مطمئن هستید که اشتراک این دستگاه را لغو می کنید؟ اعلان‌های این دستگاه را خاموش می‌کند.",
+        "AreYouSureRemoveParticipant": "آیا مطمئنید که می خواهید این شرکت کننده را حذف کنید؟",
+        "RemoveParticipant": "حذف شرکت کننده",
+        "Identifiers": "شناسه ها",
+        "Devices": "دستگاه ها",
+        "Streams": "جریان ها"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "شما مجوز پیوستن به این جریان را ندارید.",
+        "streamTitle": "{{1}} یک تماس زنده را شروع کرد",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "برقراری ارتباط",
+            "microphoneBtn": "میکروفون را فعال کنید",
+            "cameraBtn": "دوربین را فعال کنید",
+            "cameraAndMicrophoneBtn": "دوربین و میکروفون را فعال کنید"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "میکروفون خاموش است",
+            "micIsOn": "میکروفون روشن است",
+            "cameraIsOff": "دوربین خاموش است",
+            "cameraIsOn": "دوربین روشن است",
+            "screenSharingIsOn": "اشتراک‌گذاری صفحه نمایش روشن است",
+            "screenSharingIsOff": "اشتراک گذاری صفحه",
+            "joinNow": "به تماس بپیوندید"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "دستورالعمل ها",
+            "permissionDenied": "اجازه برای {{kind}} رد شد. برای استفاده از آن لطفا این مراحل را دنبال کنید:",
+            "point1": "به &quot;تنظیمات&quot; -&gt; &quot;پیشرفته&quot; -&gt; &quot;حریم خصوصی و امنیت&quot; -&gt; &quot;تنظیمات سایت&quot; -&gt; &quot;دوربین&quot; یا &quot;تنظیمات سایت&quot; -&gt; &quot;میکروفون&quot; بروید",
+            "point2": "{{hostname}} را از لیست &quot;مسدود کردن&quot; حذف کنید"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "دستورالعمل ها",
+            "permissionDenied": "اجازه برای {{kind}} رد شد. لطفاً این صفحه را دوباره بارگیری کنید و دسترسی به {{kind}} را برای پیوستن به کنفرانس تأیید کنید."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "دستورالعمل ها",
+            "permissionDenied": "اجازه برای {{kind}} رد شد. برای استفاده از آن لطفا این مراحل را دنبال کنید:",
+            "point1": "به تنظیمات اندروید خود بروید",
+            "point2": "&quot;برنامه ها و اعلان ها&quot; را باز کنید",
+            "point3": "&quot;{999}}&quot; را پیدا کرده و باز کنید",
+            "point4": "روی Permissions ضربه بزنید",
+            "point5": "فعال کردن {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "دستورالعمل ها",
+            "permissionDenied": "اجازه برای {{kind}} رد شد. برای استفاده از آن لطفا این مراحل را دنبال کنید:",
+            "point1": "به تنظیمات iOS خود بروید",
+            "point2": "&quot;Privacy&quot; را باز کنید",
+            "point3": "{{kind}} را پیدا کرده و باز کنید",
+            "point4": "&quot;{999}}&quot; را پیدا کرده و فعال کنید"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "تو به اتاق ملحق شدی",
+            "joining": "پیوستن: {{userName}}",
+            "sbLeftRoom": "{{userName}} از اتاق خارج شد",
+            "switchingRoom": "سوئیچ اتاق ...",
+            "forceDisconnecting": "در عرض 5 ثانیه ارتباط شما قطع خواهد شد",
+            "forceDisconnectingImmediately": "شما توسط یک میزبان قطع شده بودید",
+            "youLeftRoom": "از اتاق بیرون رفتی",
+            "codeCopied": "از اتاق بیرون رفتی",
+            "sbBeganFbLive": "{{userName}} شروع به پخش این تماس در Facebook کرد",
+            "sbStoppedFbLive": "{{userName}} پخش این تماس را در Facebook متوقف کرد",
+            "youBeganFbLive": "شما شروع به پخش این تماس در فیس بوک کردید",
+            "youStoppedFbLive": "شما پخش این تماس را در فیس بوک متوقف کردید",
+            "youStartedLive": "شما شروع به پخش این تماس به RTMP سفارشی کردید",
+            "youStoppedLive": "شما پخش این تماس را به RTMP سفارشی متوقف کردید",
+            "sbStartedLiveStreaming": "{{userName}} به صورت زنده شروع شد",
+            "sbStoppedLiveStreaming": "{{userName}} زنده به پایان رسید",
+            "liveStopped": "هنگام ارسال ویدیو به نقطه پایانی خطایی رخ داد",
+            "youBeganVideoRecording": "شما شروع به ضبط این کنفرانس کردید",
+            "youStoppedVideoRecording": "ضبط این کنفرانس را متوقف کردید",
+            "linkCopiedToCb": "پیوند در کلیپ بورد کپی شد",
+            "codeCopiedToCb": "کد در کلیپ بورد کپی شد",
+            "userHasNoVideo": "شرکت کننده ویدیو ندارد",
+            "openInBrowserAlert": "برای پیوستن به کنفرانس لینک را در مرورگر سافاری باز کنید."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "تنظیمات ویدیو",
+            "webCamera": "دوربین وب",
+            "screenSharing": "اشتراک گذاری صفحه نمایش",
+            "shareAnotherScreen": "صفحه دیگری را به اشتراک بگذارید",
+            "turnOffCameras": "دوربین را خاموش کنید",
+            "turnOffVideo": "اشتراک گذاری دوربین\/صفحه نمایش را خاموش کنید",
+            "turnOffAudioInput": "میکروفون را بی صدا کنید",
+            "turnOffScreenSharing": "اشتراک‌گذاری صفحه را خاموش کنید",
+            "cameraIsTurnedOff": "دوربین خاموش است",
+            "micIsTurnedOff": "میکروفون خاموش است",
+            "startFBLive": "پخش زنده فیس بوک را شروع کنید",
+            "stopFBLive": "پخش زنده فیسبوک را متوقف کنید",
+            "startRecording": "شروع به ضبط کنید",
+            "stopRecording": "توقف ضبط",
+            "start": "شروع کنید",
+            "stop": "متوقف کردن",
+            "recordingInProgress": "ضبط در حال انجام است...",
+            "fbLiveTitle": "عنوان پخش زنده",
+            "fbLiveDescription": "پخش زنده خود را شرح دهید. در مورد چیست؟",
+            "fbOnlyMeLiveAccess": "فقط من",
+            "fbFriendsAccess": "دوستان",
+            "fbPublicAccess": "عمومی",
+            "publishOnTimeline": "در تایم لاین منتشر کنید",
+            "publishToGroup": "انتشار در گروه",
+            "fbStartLive": "پخش زنده",
+            "fbStopLive": "پایان پخش زنده",
+            "streamingSettings": "تنظیمات",
+            "fbEmbedCode": "جاسازی کنید",
+            "copy": "کپی 🀄",
+            "streamToRTMP": "پخش جریانی به RTMP سفارشی",
+            "startBroadcasting": "شروع به پخش کنید",
+            "broadcastingInProgress": "پخش در حال انجام است"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "تنظیمات صدا",
+            "speakers": "بلندگوها",
+            "microphone": "میکروفون"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "تنظیمات شرکت کننده",
+            "disconnect": "قطع شدن",
+            "floatingScreens": "نمایشگرهای شناور",
+            "tiledScreens": "پرده های کاشی کاری شده",
+            "loudestExceptMe": "بلندترین جز من",
+            "maximizeLoudest": "بلندترین را به حداکثر برسانید",
+            "staticMaximized": "استاتیک حداکثر شده است",
+            "fullScreen": "تمام صفحه",
+            "manual": "کتابچه راهنمای",
+            "turnOffCamera": "ویدیو را مخفی کنید",
+            "turnOffAudio": "صدا را بی صدا کنید",
+            "turnOffScreenSharing": "اشتراک گذاری صفحه نمایش را مخفی کنید",
+            "turnOnCamera": "نمایش ویدیو",
+            "turnOnAudio": "صدا را باصدا کنید",
+            "turnOnScreenSharing": "نمایش اشتراک‌گذاری صفحه"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "تنظیمات جریان"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "ملاقات",
+            "MeetingEnded": "جلسه به پایان رسید"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "دعوت کرد",
+            "description": "صندوق ورودی برای دعوت نامه ها"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "منبع",
+            "description": "جریان برای مدیریت دسترسی به یک منبع و ارسال پیام در مورد به روز رسانی"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "برای دریافت به روز رسانی در مورد پیشرفت در یک کار خاص",
+            "displayType": "وظیفه"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "دسته بندی برای وظایف",
+            "displayType": "وظایف"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "یک تجربه مشترک برای اعضای یک جامعه",
+            "displayType": "تجربه مشترک برای اعضای یک جامعه"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "سلامی که با آن کاربر می تواند خود را معرفی کند",
+            "displayType": "تبریک"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "عدد",
+            "description": "عدد ریاضی"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "تاریخ",
+            "description": "تاریخ"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "متن",
+            "description": "بدنه متن"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "متن",
+            "description": "متن کوچک"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "متن",
+            "description": "متن متوسط"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "آدرس ایمیل",
+            "description": "آدرس ایمیل"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "شماره تلفن",
+            "description": "شماره تلفن"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "لینک در وب"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "تصویر",
+            "description": "تصویر بصری",
+            "newItem": "تصویر اضافه کن"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "گالری تصاویر",
+            "description": "گالری تصاویر"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "آلبوم",
+            "description": "آلبومی که رسانه های مختلف به آن مربوط می شود"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "فایل",
+            "description": "فایل آپلود شده",
+            "newItem": "افزودن فایل"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "کلیپ صوتی",
+            "description": "کلیپ صوتی",
+            "newItem": "افزودن صدا"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "کلیپ ویدیویی",
+            "description": "کلیپ ویدیویی",
+            "newItem": "افزودن ویدئو"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "سند PDF",
+            "description": "سند PDF",
+            "newItem": "PDF اضافه کنید"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "پخش زنده",
+            "description": "صوتی یا تصویری زنده"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "دسته بندی",
+            "description": "مقوله ای که جریان های دیگر را می توان به آن مرتبط کرد"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "شاخص مشارکت",
+            "description": "هنگامی که کاربر می‌پیوندد\/خروج می‌شود، جریان‌ها به این موضوع مرتبط\/بی‌ربط هستند"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "علاقه",
+            "description": "نشان دهنده علاقه یک کاربر به یک موضوع خاص است"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "ورودی",
+            "description": "مقصد پیام های ارسال شده توسط سایر کاربران"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "گفتگو",
+            "description": "مکالمه بین کاربران، با تاریخچه"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "تماس بلادرنگ",
+            "description": "یک تماس ویدیویی\/صوتی در زمان واقعی"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "سوال",
+            "description": "جریان سوال"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "پاسخ",
+            "description": "جریان پاسخ"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "تماس می گیرد",
+            "description": "دسته بندی برای Streams\/webrtc",
+            "MaxRelationsExceeded": "بیش از حداکثر تماس"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "عنوان صفحه را تایپ کنید",
+        "ModTab": "مورد را اصلاح کنید",
+        "Save": "صرفه جویی",
+        "Delete": "حذف",
+        "Submenu": "منوی فرعی"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "رکورد",
+        "reset": "بازنشانی کنید",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "URL نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع صوتی وجود ندارد",
+        "uploadLimit": "حداکثر اندازه فایل: {{size}}",
+        "errorFileSize": "متاسفم، اما فایل خیلی بزرگ است.<br> حداکثر اندازه فایل {{size}} است"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "بازنشانی کنید",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "URL نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع ویدیویی وجود ندارد",
+        "uploadLimit": "حداکثر اندازه فایل: {{size}}",
+        "errorFileSize": "متاسفم، اما فایل خیلی بزرگ است.<br> حداکثر اندازه فایل {{size}} است"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "بازنشانی کنید",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "setClip": "برش کلیپ",
+        "invalidURL": "URL نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع پی دی اف نیست",
+        "uploadLimit": "حداکثر اندازه فایل: {{size}}",
+        "errorFileSize": "متاسفم، اما فایل خیلی بزرگ است.<br> حداکثر اندازه فایل {{size}} است"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "بازنشانی کنید",
+        "edit": "ویرایش کنید",
+        "title": "عنوان",
+        "description": "شرح",
+        "upload": "بارگذاری",
+        "link": "ارتباط دادن",
+        "setUrl": "URL را تنظیم کنید",
+        "save": "صرفه جویی",
+        "uploadedImage": "تصویر آپلود شده",
+        "imageTitle": "عنوان تصویر",
+        "setClip": "برش کلیپ",
+        "invalidURL": "URL نامعتبر است",
+        "invalidFile": "فایل نامعتبر",
+        "errorNoSource": "منبع تصویری وجود ندارد",
+        "uploadLimit": "حداکثر اندازه فایل: {{size}}",
+        "errorFileSize": "متاسفم، اما فایل خیلی بزرگ است.<br> حداکثر اندازه فایل {{size}} است"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "سوالات",
+        "Answers": "پاسخ ها",
+        "AnswerQuestion": "پاسخ به سوال",
+        "SetYourAnswer": "لطفا به سوال پاسخ دهید",
+        "NewQuestion": "سوال جدید",
+        "NewAnswer": "پاسخ جدید",
+        "AnswerDetails": "پاسخ جزئیات",
+        "answerOption": "گزینه",
+        "answerOptionExclusive": "انحصاری",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "پاسخ خود را اینجا بنویسید",
+        "SaveQuestion": "ذخیره سوال",
+        "SaveAnswer": "ذخیره پاسخ",
+        "AddAnotherAnswer": "پاسخ دیگری اضافه کنید",
+        "ErrorAnswers": "لطفا حتی یک پاسخ اضافه کنید",
+        "AlreadyAnswered": "قبلاً پاسخ داده شده است",
+        "TitlePlaceholder": "سوال خود را تایپ کنید",
+        "ContentPlaceholder": "هر گونه اطلاعات اضافی را در اینجا قرار دهید تا به افراد کمک کند پاسخ دهند",
+        "ErrorTitle": "سوال مورد نیاز",
+        "Placeholder": "مکان نگهدار"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "تجربه جدید",
+        "DefineTitle": "لطفا یک عنوان تعریف کنید",
+        "Create": "ايجاد كردن"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "تماس می گیرد",
+        "MaxCalls": "حداکثر تماس می گیرد",
+        "Update": "به روز رسانی",
+        "NoCallsYet": "هنوز تماسی وجود ندارد",
+        "CallReasonTitle": "این تماس برای چیست؟",
+        "WaitingRoom": "اتاق انتظار"
     }
 }

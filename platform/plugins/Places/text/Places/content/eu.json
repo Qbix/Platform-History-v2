@@ -5,40 +5,40 @@
         "Title": "{{1}} barruan"
     },
     "units": {
-        "meter": "metro",
-        "meters": "metro",
-        "kilometer": "kilometro",
-        "kilometers": "kiometers",
+        "meter": "metroa",
+        "meters": "metroak",
+        "kilometer": "kilometroa",
+        "kilometers": "kiometroak",
         "km": "km",
-        "mile": "milia",
-        "miles": "mila",
+        "mile": "kilometroa",
+        "miles": "kilometroak",
         "mi": "mi",
-        "foot": "oinez",
+        "foot": "oina",
         "feet": "oinak",
-        "inches": "hazbeteko"
+        "inches": "zentimetroak"
     },
     "location": {
-        "interested": "{{select}}} ren barruan gertatzen diren gauzak interesatzen zait",
-        "update": "Eguneratu nire kokapena",
-        "prompt": "{{ClickOrTap}} hemen <br> ezarri zure <br> kokapena",
+        "interested": "{{select}} barrutik gertatzen diren gauzak interesatzen zait",
+        "update": "Eguneratu Nire kokapena",
+        "prompt": "{{ClickOrTap}} hona<br> ezarri zure<br> kokapena",
         "myCurrentLocation": "Nire uneko kokapena",
-        "enterAddress": "Idatzi helbide bat",
-        "enterPostcode": "Mesedez, sartu zure posta kodea \/ kodea",
+        "enterAddress": "Sartu helbide bat",
+        "enterPostcode": "Mesedez, idatzi zure posta-kodea \/ posta-kodea",
         "create": {
             "action": "Gehitu kokapena",
-            "title": "Kokaleku berria",
+            "title": "Kokapen berria",
             "nameYourLocation": "Izena zure kokapena"
         },
         "confirm": {
-            "title": "Gorde kokapena?",
-            "message": "Etorkizunean kokapen hau erabiltzeko asmoa al duzu?",
+            "title": "Kokapen hau gorde nahi duzu?",
+            "message": "Kokapen hau berriro erabiltzeko asmoa duzu etorkizunean?",
             "ok": "Bai",
             "cancel": "Ez"
         },
         "add": {
-            "title": "Izen hau kokatu",
-            "placeholder": "Etxea, lan egitea eta abar.",
-            "ok": "Save"
+            "title": "Izena kokapen honi",
+            "placeholder": "Etxea, lana etab.",
+            "ok": "Gorde"
         },
         "dialog": {
             "title": "Aukeratu Kokapena"
@@ -46,12 +46,12 @@
         "set": "Ezarri Nire kokapena"
     },
     "areas": {
-        "filterPlaceholder": "Kokapen honen barneko eremua?",
+        "filterPlaceholder": "Kokapen honen barruan dagoen eremurik?",
         "newArea": "Eremu berria",
         "promptTitle": "Sartu eremuaren izena:",
-        "absent": "Mesedez ezarri area",
-        "error": "Akatsa",
-        "exist": "Area dagoeneko existitzen da",
+        "absent": "Mesedez, ezarri eremua",
+        "error": "Errorea",
+        "exist": "Dagoeneko eremua existitzen da",
         "addNewArea": "Gehitu eremu berria",
         "add": "Gehitu"
     },
@@ -61,28 +61,28 @@
             "displayType": "Kokalekuak"
         },
         "Places\/location": {
-            "description": "Eraikina, egoitza, ontzia, parkea eta abar adierazten ditu.",
-            "displayType": "Kokalekua"
+            "description": "Eraikin, lokal, itsasontzi, parke eta abar adierazten du.",
+            "displayType": "Kokapena"
         },
         "Places\/area": {
-            "description": "Kokapen bateko eremua adierazten du, hala nola gela edo suite bat",
-            "displayType": "Area"
+            "description": "Kokapen bateko eremu bat adierazten du, hala nola gela edo suite bat",
+            "displayType": "Eremua"
         },
         "Places\/floor": {
-            "description": "Eraikin edo ontzi bateko zorua adierazten du",
-            "displayType": "solairua"
+            "description": "Eraikin edo itsasontzi bateko solairu bat adierazten du",
+            "displayType": "Solairua"
         },
         "Places\/column": {
-            "description": "Eraikin edo ontzi bateko zutabe bat adierazten du",
-            "displayType": "Zutabe"
+            "description": "Eraikin edo itsasontzi bateko zutabe bat adierazten du",
+            "displayType": "Zutabea"
         },
         "Places\/nearby": {
-            "description": "Geohash baten distantzia jakin batera dauden gauzak egiteko kategoria",
+            "description": "Geohash batetik distantzia jakin bateko gauzen kategoria",
             "displayType": "Lekuetatik gertu"
         },
         "Places\/interest": {
-            "description": "Kategoria bat geohash baten distantzia jakin batera, interesak bat datozenentzako",
-            "displayType": "Leku interesgarriak"
+            "description": "Geohash batetik distantzia jakin bateko gauzen kategoria, interes batekin bat datorrena",
+            "displayType": "Lekuen interesa"
         }
     }
 }

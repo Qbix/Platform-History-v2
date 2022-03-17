@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Ev naverok ji we veşartî ye."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Babetê Nû"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Kesên ku min vexwendin",
+        "Streams\/invitedMe": "Kê ez vexwendim",
+        "DoYouAgree": "Tu dipejirînî?",
+        "Yes": "Erê",
+        "No": "Na"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
+        "Filter": "Berjewendiyên we çi ne?",
+        "CanAdd": "Heke hûn hîn jî nikanin tiştê ku hûn lê digerin bibînin, hûn dikarin berjewendiyek nû li jêr zêde bikin:",
+        "TrySynonyms": "Ma nabîne? Hin hevwateyan biceribînin.",
+        "AddUnderCategory": "Di binê kategoriyê de zêde bikin...",
+        "Other": "Yên din",
         "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "flaggedForAdminReview": "Mesaj ji bo vekolîna rêveberê hate nîşankirin. Ji bo rakirina alayê dîsa bikirtînin.",
+        "noOneSaid": "Kesî tiştek negotiye",
+        "closeChatButton": "Sohbetê bigire",
+        "closeChatConfirmTitle": "Vê sohbetê bigire?",
+        "closeChatConfirm": "Ma tu bi rastî dixwazî vê sohbetê bigirî?",
         "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "Unsubscribed": "Notifications Bided",
+        "closeChatConfirmYes": "Erê",
+        "closeChatConfirmNo": "Na",
+        "earlierComments": "şîroveyên berê",
+        "startedConversation": "dest bi sohbetê kir",
+        "RealTimeCall": "Call Time Real",
+        "SearchByName": "Bi navê lêgerîn",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} serdana chatê dike",
+            "Join": "{{displayName}} tevlî sohbetê bû",
+            "Leave": "{{displayName}} ji sohbetê derket",
+            "RelatedTo": "{{displayName}} dest pê kir {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "aboneyên e-nameya xwe birêve bibin",
+        "IfUnsubscribe": "Ger tu dixwazî abonetiyê bikî",
+        "*": "Peyama {{& message.fields.type}} ji bo {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} got: {{& message.content}}",
+        "Streams\/changed": "Guhertinên di {{stream.fields.title}} de",
+        "Streams\/invite": "Hûn hatin vexwendin ji bo {{& stream.fields.title}}",
+        "Streams\/announcement": "Daxuyanî di {{& stream.fields.title}} de",
+        "Streams\/access": "{{&call 'avatar.displayName'}} guhêrbar li {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Peyama sohbetê di {{& stream.fields.title}} de hate guherandin",
+        "Streams\/chat\/remove": "Peyama sohbetê li {{& stream.fields.title}} hat rakirin",
+        "Streams\/closed": "{{stream.fields.title}} hatiye girtin",
+        "Streams\/task\/progress": "Pêşveçûn di {{stream.fields.title}} de pêk hat",
+        "Streams\/task\/complete": "Kar qediya: {{stream.fields.title}}",
+        "Streams\/task\/error": "Çewtiya di dema: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Peyama Hatine",
+        "Streams\/relatedTo\/Streams\/call": "Banga Nû di {{toTitle}} de dest pê kir",
+        "Streams\/relatedTo\/*": "Nû {{relationDisplayType}} li {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Li {{toTitle}} wekî {{relationDisplayType}} hat zêdekirin",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} di şîroveyekê de behsa te kir",
+        "Streams\/call": "{{displayName}} bangek rast-dem dest pê kir"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Ezimanden",
+        "messageContent": "{{displayName}} te vexwend {{inviteUrl}}",
+        "youCanNowPaste": "Naha hûn dikarin vê lînkê li cîhek bixin da ku mirovan vexwînin",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "chooseFromContacts": "Ji Têkiliyên xwe hilbijêrin",
+            "chooseAgainFromContacts": "Dîsa ji Têkilî Hilbijêre",
+            "inviteSelectedContacts": "Têkiliyên Hilbijartî vexwendin",
+            "selectFromContacts": "Ji Têkilî Hilbijêre",
+            "userChooserPlaceholder": "Bi navê lêgerîn",
+            "photo": "Wêneyek bikişînin",
+            "photoInstruction": "Ger kesê ku koda QR-ya we skan kiriye li ber we be, wêneyek ji wan bigirin",
+            "to": "Bo: {{Stream Title}}",
+            "go": "Çûyin",
+            "title": "Ezimanden",
+            "placeholder": "Hejmara mobîl an navnîşana e-nameyê",
+            "orInvite": "An jî bi karanîna mirovan vexwendin:",
+            "copyLink": "{{ClickOrTap}} ji bo kopîkirina girêdana vexwendinê",
+            "shareOrCopyLink": "{{ClickOrTap}} ji bo parvekirin an kopîkirina girêdana vexwendinê",
+            "QR": "{{ClickOrTap}} ji bo afirandina koda QR",
+            "QRtitle": "Vê koda QR-ê bişopînin",
+            "QRscanned": "Wan ew scan kir!",
+            "scannedQR": "{{ClickOrTap}} ger kod hatiba skenandin",
             "byEmail": "Email",
-            "byText": "Text",
+            "byText": "Nivîstok",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Heye, vê yekê kontrol bikin",
+            "PleaseVisitLink": "Ji kerema xwe lînka jêrîn biçin:",
+            "InvitingYou": "Ez we vedixwînim {{title}}",
+            "HasInvitedYou": "{{displayName}} we vexwendiye {{title}}",
+            "HasMentionedYou": "{{displayName}} di &quot;{{title}}&quot; de behsa te kiriye",
+            "YOUAREINVITED": "TU DAWOTIN!",
+            "AcceptInvite": "Vexwendin qebûl bikin"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Hûn hatine vexwendin ji bo {{title}}. Ji kerema xwe li {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Hûn hatine vexwendin. {{ClickOrTap}} li vir qebûl bikin û tevlê bibin."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "peyamek <em>{{message.fields.type}}<\/em> ji {{stream.fields.title}} re şand"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "şîrove kirin",
+            "startedCallIn": "dest bi bangekê kir",
+            "in": "li",
+            "body": "di {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "hatiye şandin",
+                "byAvatar": "ji hêla {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "nû {{instructions.fromDisplayType}} heye",
+                "byAvatar": "ji hêla {{avatar.displayName}} ve hatî zêdekirin"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Vexwendname ji hejmara me têne şandin, ku hevalên we hîna nas nakin. Bi nivîsek bilez bişopînin da ku ew zanibin ku vexwendname ji we hatî, ji wan bipirsin ku zencîreyê bitikînin.",
+            "confirm": "Vexwendname ji hejmara me têne şandin, ku hevalên we hîna nas nakin. Ma hûn dixwazin bi nivîsek bilez bişopînin da ku ew zanibin ku vexwendname ji we hatî, ji wan bipirsin ku lînkê bikirtînin.",
+            "check": "Heye, min ji bo sepana {{app}} vexwendname ji te re şand. Ji kerema xwe sms-a xwe kontrol bikin û lînkê bikirtînin!",
+            "CheckYourMobile": "Ji kerema xwe SMS-ê kontrol bikin û rêwerzan bişopînin!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Vexwendname ji domaina me têne şandin, ku hevalên we hîn nas nakin. Bi nivîsek bilez bişopînin da ku ew zanibin ku vexwendname ji we hatî, ji wan bipirsin ku zencîreyê bitikînin.",
+            "confirm": "Vexwendname ji domaina me têne şandin, ku hevalên we hîn nas nakin. Ma hûn dixwazin bi nivîsek bilez bişopînin da ku ew zanibin ku vexwendname ji we hatî, ji wan bipirsin ku lînkê bikirtînin.",
+            "subject": "We dawetname girt?",
+            "body": "Heye, min ji bo sepana {{app}} vexwendname ji te re şand. Ji kerema xwe e-nameya xwe kontrol bikin û lînka li wir bikirtînin!",
+            "CheckYourEmail": "Ji kerema xwe e-nameya xwe kontrol bikin û rêwerzan bişopînin!"
         }
     },
     "participating": {
-        "Title": "Title",
+        "Title": "Nav",
         "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
+        "Participants": "Beşdarên",
+        "AreYouSureRemoveIdentifier": "Ma hûn guman dikin ku vê nasnameyê jêbirin?",
+        "AreYouSureUnsubscribeIdentifier": "Ma hûn guman dikin ku abonetiya vê nasnamê rakin? Ew ê agahiyên li ser vê nasnamê qut bike.",
+        "AreYouSureUnsubscribeDevice": "Ma hûn guman dikin ku abonetiya vê cîhazê betal bikin? Ew ê agahdariya vê cîhazê qut bike.",
+        "AreYouSureRemoveParticipant": "Ma hûn pê bawer in ku hûn dixwazin vî beşdarvanî rakin?",
+        "RemoveParticipant": "Beşdar jêbirin",
+        "Identifiers": "Nasname",
         "Devices": "Devices",
         "Streams": "Streams"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Destûra te ya tevlêbûna vê herikînê nîne.",
+        "streamTitle": "{{1}} bangek zindî dest pê kir",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Girêdan",
+            "microphoneBtn": "Mîkrofon çalak bike",
+            "cameraBtn": "Kamera çalak bike",
+            "cameraAndMicrophoneBtn": "Kamera û Mîkrofon çalak bike"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mîkrof negirtî ye",
+            "micIsOn": "Mîkrof li ser e",
+            "cameraIsOff": "Kamera ye",
+            "cameraIsOn": "Kamera li ser e",
+            "screenSharingIsOn": "Parvekirina ekranê ye",
+            "screenSharingIsOff": "Parvekirina ekranê",
+            "joinNow": "Tevlî Bangê bibin"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "permissionDenied": "Destûra ji bo {{kind}} hat redkirin. Ji bo karanîna wê ji kerema xwe van gavan bişopînin:",
+            "point1": "Herin &quot;Mîheng&quot; -&gt; &quot;Pêşketî&quot; -&gt; &quot;Nepenî û ewlehî&quot; -&gt; &quot;Mîhengên Malperê&quot; -&gt; &quot;Kamera&quot; an &quot;Mîhengên Malperê&quot; -&gt; &quot;Mîkrofon&quot;",
+            "point2": "{{hostname}} ji lîsteya &quot;Bloke&quot;yê rake"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "permissionDenied": "Destûra ji bo {{kind}} hat redkirin. Ji kerema xwe vê rûpelê nû bar bike û ketina {{kind}} piştrast bike ku beşdarî konferansê bibe."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "permissionDenied": "Destûra ji bo {{kind}} hat redkirin. Ji bo karanîna wê ji kerema xwe van gavan bişopînin:",
+            "point1": "Herin Mîhengên Android-ya xwe",
+            "point2": "&quot;Serlêdan û agahdarî&quot; vekin",
+            "point3": "&quot;{{communityName}}&quot; bibîne û veke",
+            "point4": "Li ser Destûran bikirtînin",
+            "point5": "Çalak bike {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "permissionDenied": "Destûra ji bo {{kind}} hat redkirin. Ji bo karanîna wê ji kerema xwe van gavan bişopînin:",
+            "point1": "Herin Mîhengên iOS-ê xwe",
+            "point2": "&quot;Nepenîtiyê&quot; vekin",
+            "point3": "{{kind}} bibînin û vekin",
+            "point4": "&quot;{{communityName}}&quot; bibînin û çalak bikin"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Hûn tevlî odeyê bûn",
+            "joining": "Tevlîbûn: {{userName}}",
+            "sbLeftRoom": "{{userName}} ji odeyê derket",
+            "switchingRoom": "Odeya guherînê...",
+            "forceDisconnecting": "Hûn ê di nav 5 çirkeyan de qut bibin",
+            "forceDisconnectingImmediately": "Hûn ji hêla mêvandar ve hatin qut kirin",
+            "youLeftRoom": "Tu ji odeyê derketî",
+            "codeCopied": "Tu ji odeyê derketî",
+            "sbBeganFbLive": "{{userName}} dest bi weşana vê bangê li Facebookê kir",
+            "sbStoppedFbLive": "{{userName}} weşana vê bangê li Facebookê rawestand",
+            "youBeganFbLive": "We dest bi weşana vê bangê li Facebookê kir",
+            "youStoppedFbLive": "We weşana vê bangê li Facebookê rawestand",
+            "youStartedLive": "We dest bi weşana vê bangê ji RTMP-ya xwerû re kir",
+            "youStoppedLive": "We weşana vê bangê ji RTMP-ya xwerû re rawestand",
+            "sbStartedLiveStreaming": "{{userName}} zindî dest pê kir",
+            "sbStoppedLiveStreaming": "{{userName}} zindî qediya",
+            "liveStopped": "Di dema şandina vîdyoyê de ji xala dawî re çewtî derket",
+            "youBeganVideoRecording": "We dest bi tomarkirina vê konferansê kir",
+            "youStoppedVideoRecording": "We qeydkirina vê konferansê rawestand",
+            "linkCopiedToCb": "Girêdan li clipboard hate kopî kirin",
+            "codeCopiedToCb": "Kod li clipboard hate kopî kirin",
+            "userHasNoVideo": "Vîdyoyek beşdar tune",
+            "openInBrowserAlert": "Zencîreya di geroka Safari de vekin da ku beşdarî konferansê bibin."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
+            "dialogTitle": "Mîhengên Vîdyoyê",
+            "webCamera": "Kamera Webê",
+            "screenSharing": "Parvekirina Screen",
+            "shareAnotherScreen": "Ekranek din parve bikin",
+            "turnOffCameras": "Kamera vemirînin",
+            "turnOffVideo": "Kamera\/parvekirina ekranê vekin",
+            "turnOffAudioInput": "Mîkrofonê qut bike",
+            "turnOffScreenSharing": "Parvekirina ekranê vekin",
+            "cameraIsTurnedOff": "Kamera tê girtin",
+            "micIsTurnedOff": "Mîkrofon tê girtin",
+            "startFBLive": "Facebook Livestream dest pê bikin",
+            "stopFBLive": "Weşana Zindî ya Facebookê Rawestînin",
+            "startRecording": "Dest bi Tomarkirinê bikin",
+            "stopRecording": "Rawestandina Tomarkirinê",
+            "start": "Destpêkirin",
+            "stop": "Rawestan",
+            "recordingInProgress": "Tomarkirin berdewam e...",
+            "fbLiveTitle": "Sernavê Livestream",
+            "fbLiveDescription": "Weşana Zindî ya xwe diyar bikin. li ser çi ye?",
+            "fbOnlyMeLiveAccess": "Tenê Me",
             "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
+            "fbPublicAccess": "Alenî",
+            "publishOnTimeline": "Li ser demjimêrê biweşînin",
+            "publishToGroup": "Ji bo komê biweşînin",
+            "fbStartLive": "Biçe Zindî",
+            "fbStopLive": "Weşana Zindî biqede",
             "streamingSettings": "Settings",
             "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "copy": "Kopî",
+            "streamToRTMP": "Stream bo RTMP-ya xwerû",
+            "startBroadcasting": "Dest bi weşanê bike",
+            "broadcastingInProgress": "Weşan dewam dike"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
+            "dialogTitle": "Settings Audio",
             "speakers": "Speakers",
-            "microphone": "Microphone"
+            "microphone": "Mîkrofon"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
+            "dialogTitle": "Mîhengên Beşdar",
+            "disconnect": "Hevqetandin",
+            "floatingScreens": "Screens Floating",
+            "tiledScreens": "Screens Tiled",
+            "loudestExceptMe": "Ji bilî Min Dengbêj",
+            "maximizeLoudest": "Bi dengek herî zêde bikin",
             "staticMaximized": "Static Maximized",
             "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "manual": "Destî",
+            "turnOffCamera": "Vîdyoyê veşêre",
+            "turnOffAudio": "Dengê qut bike",
+            "turnOffScreenSharing": "Parvekirina ekranê veşêre",
+            "turnOnCamera": "Vîdyoyê nîşan bide",
+            "turnOnAudio": "Dengê veke",
+            "turnOnScreenSharing": "Parvekirina ekranê nîşan bide"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Mîhengên Streaming"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Hevdîtinî",
+            "MeetingEnded": "Civîn bi dawî bû"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Vexwendin",
+            "description": "Inbox ji bo vexwendinê"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Kanî",
+            "description": "stream ji bo birêvebirina gihîştina çavkaniyek û şandina peyamên li ser nûvekirinan"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "ji bo wergirtina nûvekirinên li ser pêşkeftina li ser karek diyarkirî",
+            "displayType": "Karî"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
+            "description": "kategoriya ji bo peywiran",
             "displayType": "Tasks"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "ezmûnek hevpar ji bo endamên civakê",
+            "displayType": "Ezmûna hevpar ji bo endamên civakê"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "silava ku bi bikarhênerek dikare xwe bide nasîn",
+            "displayType": "Silav"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Jimare",
+            "description": "hejmara matematîkî"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Rojek",
+            "description": "rojek"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Nivîstok",
+            "description": "bedena nivîsê"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Nivîstok",
+            "description": "bedena biçûk ji text"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Nivîstok",
+            "description": "bedena navîn ya nivîsê"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Navnîşana emailê",
+            "description": "navnîşana emailê"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Jimare telefon",
+            "description": "jimare telefon"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "girêdana li ser webê"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Wêne",
+            "description": "wêneyê dîtbarî",
+            "newItem": "Wêne zêde bikin"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Galeriya Wêne",
+            "description": "galeriya wêneyan"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Albûm",
+            "description": "albûmek ku medyayên cihêreng pê re têkildar e"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Dosî",
+            "description": "pelê barkirî",
+            "newItem": "Pelê zêde bikin"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "description": "klîba deng",
+            "newItem": "Audio lê zêde bike"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
+            "displayType": "Vîdyo Klîp",
             "description": "video clip",
-            "newItem": "Add Video"
+            "newItem": "Vîdyoyê lê zêde bike"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "Belgeya PDF",
+            "description": "Belgeya PDF",
+            "newItem": "PDF-ê zêde bikin"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "deng an vîdyoyê zindî"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Liq",
+            "description": "kategoriyek ku herikên din dikarin pê re têkildar bin"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Indeksa Beşdar",
+            "description": "dema ku bikarhênerek tevlî\/derdiçe, herik bi vê ve girêdayî ne"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Zem",
+            "description": "berjewendiya bikarhênerek di mijarek diyar de temsîl dike"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Hatin",
+            "description": "cîhê peyamên ku ji hêla bikarhênerên din ve têne şandin"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Kêfî",
+            "description": "axaftinek di navbera bikarhêneran de, bi dîrokê re"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Banga Rast-Time",
+            "description": "bangek vîdyoyî \/ dengî ya dema rast"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Pirs",
+            "description": "çema pirsê"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Bersiv",
+            "description": "stream bersiv"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Gazî dike",
+            "description": "kategoriya Streams\/webrtc",
+            "MaxRelationsExceeded": "Bangên Max zêde bûn"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "sernavê rûpelê binivîse",
+        "ModTab": "Biguherîne Babetê",
+        "Save": "Rizgarkirin",
+        "Delete": "Jêbirin",
+        "Submenu": "Binmenu"
     },
     "audio": {
-        "record": "Record",
+        "record": "Rekor",
         "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Barkirin",
+        "link": "Pêvek",
+        "setUrl": "URL-ê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Clip Out Clip",
+        "invalidURL": "URL nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniyek deng tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Mixabin, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
     },
     "video": {
         "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Barkirin",
+        "link": "Pêvek",
+        "setUrl": "URL-ê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Clip Out Clip",
+        "invalidURL": "URL nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniyek vîdyoyê tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Mixabin, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
     },
     "pdf": {
         "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Barkirin",
+        "link": "Pêvek",
+        "setUrl": "URL-ê saz bikin",
+        "save": "Rizgarkirin",
+        "setClip": "Clip Out Clip",
+        "invalidURL": "URL nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniyek pdf tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Mixabin, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
     },
     "image": {
         "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "edit": "Weşandin",
+        "title": "nav",
+        "description": "terîf",
+        "upload": "Barkirin",
+        "link": "Pêvek",
+        "setUrl": "URL-ê saz bikin",
+        "save": "Rizgarkirin",
+        "uploadedImage": "Wêneyê barkirî",
+        "imageTitle": "Sernavê wêneyê",
+        "setClip": "Clip Out Clip",
+        "invalidURL": "URL nederbasdar",
+        "invalidFile": "Pelê nederbasdar",
+        "errorNoSource": "Çavkaniya wêneyê tune",
+        "uploadLimit": "Mezinahiya pelê ya herî zêde: {{size}}",
+        "errorFileSize": "Mixabin, lê pel pir mezin e.<br> Mezinahiya pelê herî zêde {{size}} e"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "Pirs",
+        "Answers": "Bersiv",
+        "AnswerQuestion": "Bersiva Pirs",
+        "SetYourAnswer": "Ji kerema xwe bersiva pirsê bidin",
+        "NewQuestion": "Pirsa Nû",
+        "NewAnswer": "Bersiva Nû",
+        "AnswerDetails": "Bersiv Details",
+        "answerOption": "Dibe",
+        "answerOptionExclusive": "Hew",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
+        "FreeAnswer": "Bersiva xwe li vir binivîsin",
+        "SaveQuestion": "Pirsê hilînin",
+        "SaveAnswer": "Bersiv xilas bike",
+        "AddAnotherAnswer": "Bersivek din lê zêde bike",
+        "ErrorAnswers": "Ji kerema xwe bersivek jî lê zêde bike",
+        "AlreadyAnswered": "Jixwe bersiv da",
+        "TitlePlaceholder": "Pirsa xwe binivîse",
+        "ContentPlaceholder": "Agahiyên zêde li vir bixin da ku ji mirovan re bibin alîkar ku bersiv bidin",
+        "ErrorTitle": "Pirs pêwîst",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Ezmûna Nû",
+        "DefineTitle": "Ji kerema xwe sernavek diyar bike",
+        "Create": "Xûliqandin"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Gazî dike",
+        "MaxCalls": "Max bang dike",
+        "Update": "Nûvekirin",
+        "NoCallsYet": "Hîn jî tu telefon tune",
+        "CallReasonTitle": "Ev bang li ser çi ye?",
+        "WaitingRoom": "Odeya bendê"
     }
 }

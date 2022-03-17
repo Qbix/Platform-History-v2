@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Линк за промоцију",
+                "startDate": "Датум почетка",
+                "startTime": "Почетно време",
+                "endDate": "Крајњи датум",
+                "endTime": "Време завршетка",
+                "budget": "Буџет"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Филтрирај по интересовању",
+                "FilterInterests": "Почните да куцате интересовање..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Интерес",
+            "Location": "Локација"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
-            "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "Go": "Иди",
+            "PasteLinkHere": "хттпс:\/\/...",
+            "BrowseTheWeb": "Прегледај",
+            "WriteToStartConversation": "Напишите своје мисли да бисте започели разговор",
+            "StartConversation": "Започни разговор",
+            "GotoConversation": "Идите на Разговор",
+            "reset": "Ресетовати",
+            "edit": "Уредити",
+            "link": "Линк",
+            "setUrl": "Подесите УРЛ",
+            "save": "сачувати",
+            "setClip": "Цут Оут Цлип",
+            "invalidURL": "Неважећи УРЛ"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Датотека је превелика за кеширање. Максимална величина датотеке {{size}}",
+        "InvalidPDF": "Датотека није важећи ПДФ",
+        "StartTypingTitleOrKeywords": "Почните да куцате наслов или кључне речи..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "ХТМЛ документ који различити корисници могу да виде и уређују",
+            "displayType": "Чланак"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Слајд у презентацији, може да садржи ХТМЛ, аудио итд.",
+            "displayType": "Тобоган"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Презентација која се састоји од различитих слајдова",
+            "displayType": "Презентација"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Огласна јединица на веб локацији",
+            "displayType": "Огласна јединица"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Начин груписања рекламних јединица под именом",
+            "displayType": "Постављање огласа"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Садржај за оглас",
+            "displayType": "Огласна креатива"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Рекламна кампања",
+            "displayType": "Огласна кампања"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Представља веб локацију чији су метаподаци уклоњени",
+            "displayType": "веб страна"
         }
     }
 }

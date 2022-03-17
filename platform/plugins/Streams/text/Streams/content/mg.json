@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Miafina aminao ity atiny ity."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Zavatra vaovao"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Olona nasaiko",
+        "Streams\/invitedMe": "Izay nanasa ahy",
+        "DoYouAgree": "Manaiky izany ve ianao?",
+        "Yes": "ENY",
+        "No": "tsy misy"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Inona no mahaliana anao?",
+        "CanAdd": "Raha mbola tsy hitanao izay tadiavinao dia azonao atao ny manampy tombontsoa vaovao eto ambany:",
+        "TrySynonyms": "Tsy hitanao ve? Andramo ny mitovy hevitra.",
+        "AddUnderCategory": "Ampio eo ambanin&#39;ny sokajy...",
+        "Other": "Hafa",
+        "Unlisted": "Tsy voatanisa"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
+        "flaggedForAdminReview": "Ny hafatra dia nasiana marika ho an&#39;ny famerenan&#39;ny admin. Tsindrio indray raha hanala saina.",
+        "noOneSaid": "Tsy nisy nilaza na inona na inona",
+        "closeChatButton": "Akatona ny chat",
+        "closeChatConfirmTitle": "Akatona ity resaka ity?",
+        "closeChatConfirm": "Tena te hanakatona ity chat ity ve ianao?",
         "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "Unsubscribed": "Fampandrenesana mangingina",
+        "closeChatConfirmYes": "ENY",
+        "closeChatConfirmNo": "tsy misy",
+        "earlierComments": "fanehoan-kevitra teo aloha",
+        "startedConversation": "nanomboka resaka",
+        "RealTimeCall": "Antso tena fotoana",
+        "SearchByName": "Karoka amin&#39;ny anarana",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} dia mitsidika ny chat",
+            "Join": "{{displayName}} dia niditra tao amin&#39;ny chat",
+            "Leave": "{{displayName}} nandao ny chat",
+            "RelatedTo": "{{displayName}} dia nanomboka {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "tantano ny famandrihanao mailaka",
+        "IfUnsubscribe": "Raha te hiala misoratra anarana ianao",
+        "*": "Hafatra {{& message.fields.type}} ho an&#39;i {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} hoy: {{& message.content}}",
+        "Streams\/changed": "Fanovana ao {{stream.fields.title}}",
+        "Streams\/invite": "Nasaina {{& stream.fields.title}} ianao",
+        "Streams\/announcement": "Fanambarana tamin&#39;ny {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} nanova ny fidirana tao {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Hafatra amin&#39;ny chat namboarina tamin&#39;ny {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Nesorina tamin&#39;ny chat {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} dia nakatona",
+        "Streams\/task\/progress": "Fandrosoana natao tamin&#39;ny {{stream.fields.title}}",
+        "Streams\/task\/complete": "Vita ny asa: {{stream.fields.title}}",
+        "Streams\/task\/error": "Hadisoana nandritra ny: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Hafatra miditra",
+        "Streams\/relatedTo\/Streams\/call": "Antso vaovao nanomboka tamin&#39;ny {{toTitle}}",
+        "Streams\/relatedTo\/*": "Vaovao {{relationDisplayType}} ao {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Nampiana {{toTitle}} ho {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} dia nanonona anao tamin&#39;ny fanehoan-kevitra",
+        "Streams\/call": "{{displayName}} dia nanomboka antso amin&#39;ny fotoana tena izy"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Asao",
+        "messageContent": "{{displayName}} nanasa anao {{inviteUrl}}",
+        "youCanNowPaste": "Afaka mametaka ity rohy ity ianao izao hanasana olona",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
+            "chooseFromContacts": "Misafidiana amin&#39;ny Contacts anao",
+            "chooseAgainFromContacts": "Misafidiana indray amin&#39;ny Contacts",
+            "inviteSelectedContacts": "Asao ny Fifandraisana voafantina",
+            "selectFromContacts": "Select avy amin&#39;ny Contacts",
+            "userChooserPlaceholder": "Karoka amin&#39;ny anarana",
+            "photo": "Makà sary",
+            "photoInstruction": "Raha eo anoloanao ilay olona nanao scan ny kaody QR anao dia alaivo sary izy ireo",
+            "to": "Ho an&#39;ny: {{Stream Title}}",
+            "go": "Mandehana",
+            "title": "Asao",
+            "placeholder": "Laharana finday na adiresy mailaka",
+            "orInvite": "Na manasà olona amin&#39;ny fampiasana:",
+            "copyLink": "{{ClickOrTap}} handika ny rohy fanasana",
+            "shareOrCopyLink": "{{ClickOrTap}} hizara na handika rohy fanasana",
+            "QR": "{{ClickOrTap}} hamorona kaody QR",
+            "QRtitle": "Andramo ity kaody QR ity",
+            "QRscanned": "Nojeren&#39;izy ireo izany!",
+            "scannedQR": "{{ClickOrTap}} raha nojerena ilay kaody",
+            "byEmail": "mailaka",
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hey, jereo ity",
+            "PleaseVisitLink": "Tsidiho azafady ny rohy manaraka:",
+            "InvitingYou": "Manasa anao aho {{title}}",
+            "HasInvitedYou": "{{displayName}} dia nanasa anao {{title}}",
+            "HasMentionedYou": "{{displayName}} dia nanonona anao tao amin&#39;ny &quot;{{title}}&quot;",
+            "YOUAREINVITED": "ASAINA IANAO!",
+            "AcceptInvite": "Ekeo ny fanasana"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Nasaina ho {{title}} ianao. Tsindrio azafady {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Nasaina ianao. {{ClickOrTap}} eto mba hanaiky sy hanatevin-daharana."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "nandefa hafatra <em>{{message.fields.type}}<\/em> ho an&#39;i {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
+            "commentedOn": "naneho hevitra momba ny",
+            "startedCallIn": "nanomboka niantso",
             "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "body": "tamin&#39;ny {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "efa nalefa any",
+                "byAvatar": "nataon&#39;i {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "manana {{instructions.fromDisplayType}} vaovao",
+                "byAvatar": "nampian&#39;i {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Misy fanasana avy amin&#39;ny nomerao, izay tsy fantatry ny namanao. Araho miaraka amin&#39;ny lahatsoratra haingana hampahafantarana azy ireo fa avy aminao ny fanasana, mangataka azy ireo hanindry ny rohy.",
+            "confirm": "Misy fanasana avy amin&#39;ny nomerao, izay tsy fantatry ny namanao. Te-hanaraka lahatsoratra haingana ve ianao mba hampahafantarana azy ireo fa avy aminao ny fanasana, mangataka azy ireo hanindry ny rohy.",
+            "check": "Hey, vao avy nandefa fanasana anao ho amin&#39;ny fampiharana {{app}} aho. Azafady, jereo ny sms-nao ary tsindrio ny rohy!",
+            "CheckYourMobile": "Azafady, jereo ny SMS ary araho ny torolàlana!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Ny fanasana dia alefa avy amin&#39;ny sehatray, izay tsy mbola fantatry ny namanao. Araho miaraka amin&#39;ny lahatsoratra haingana hampahafantarana azy ireo fa avy aminao ny fanasana, mangataka azy ireo hanindry ny rohy.",
+            "confirm": "Ny fanasana dia alefa avy amin&#39;ny sehatray, izay tsy mbola fantatry ny namanao. Te-hanaraka lahatsoratra haingana ve ianao mba hampahafantarana azy ireo fa avy aminao ny fanasana, mangataka azy ireo hanindry ny rohy.",
+            "subject": "Nahazo fanasana ve ianao?",
+            "body": "Hey, vao avy nandefa fanasana anao ho amin&#39;ny fampiharana {{app}} aho. Azafady, jereo ny mailakao ary tsindrio ny rohy ao!",
+            "CheckYourEmail": "Azafady, jereo ny mailakao ary araho ny torolàlana!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "lohateny",
+        "Subscribed": "famandrihana",
+        "Participants": "mpandray anjara",
+        "AreYouSureRemoveIdentifier": "Tena hanala an&#39;io famantarana io ve ianao?",
+        "AreYouSureUnsubscribeIdentifier": "Tena tsy misoratra anarana amin&#39;io famantarana io ve ianao? Hovonoiny ny fampandrenesana an&#39;io famantarana io.",
+        "AreYouSureUnsubscribeDevice": "Tena tsy misoratra anarana amin&#39;ity fitaovana ity ve ianao? Hovonoiny ny fampandrenesana an&#39;ity fitaovana ity.",
+        "AreYouSureRemoveParticipant": "Tena te hanala an&#39;io mpandray anjara io ve ianao?",
+        "RemoveParticipant": "Esory ny mpandray anjara",
+        "Identifiers": "Mpanondro",
+        "Devices": "fitaovana",
+        "Streams": "mikoriana"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Tsy manana alalana hiditra amin&#39;ity stream ity ianao.",
+        "streamTitle": "{{1}} dia nanomboka antso mivantana",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
+            "dialogTitle": "mampifandray",
+            "microphoneBtn": "Alefaso ny Microphone",
             "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "cameraAndMicrophoneBtn": "Alefaso ny Camera sy Microphone"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mic tsy maty",
+            "micIsOn": "Mic dia mandeha",
+            "cameraIsOff": "Tsy mandeha ny fakan-tsary",
+            "cameraIsOn": "Mandeha ny fakan-tsary",
+            "screenSharingIsOn": "Misokatra ny fifampizarana efijery",
+            "screenSharingIsOff": "Zarao ny efijery",
+            "joinNow": "Midira amin&#39;ny Antso"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Nolavina ny fahazoan-dàlana ho an&#39;ny {{kind}}. Raha hampiasa azy dia araho ireto dingana ireto:",
+            "point1": "Mandehana any amin&#39;ny &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy and security&quot; -&gt; &quot;Settings Site&quot; -&gt; &quot;Camera&quot; na &quot;Settings Site&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Esory {{hostname}} amin&#39;ny lisitra &quot;Block&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Nolavina ny fahazoan-dàlana ho an&#39;ny {{kind}}. Avereno azafady ity pejy ity ary hamafiso ny fidirana amin&#39;ny {{kind}} hanatevin-daharana ny fihaonambe."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Nolavina ny fahazoan-dàlana ho an&#39;ny {{kind}}. Raha hampiasa azy dia araho ireto dingana ireto:",
+            "point1": "Mandehana any amin&#39;ny Settings Android anao",
+            "point2": "Sokafy ny &quot;Apps &amp; notifications&quot;",
+            "point3": "Tadiavo ny &quot;{{communityName}}&quot; ary sokafy izany",
+            "point4": "Tsindrio ny Permissions",
+            "point5": "Alefa {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "torolalana",
+            "permissionDenied": "Nolavina ny fahazoan-dàlana ho an&#39;ny {{kind}}. Raha hampiasa azy dia araho ireto dingana ireto:",
+            "point1": "Mandehana any amin&#39;ny iOS Settings anao",
+            "point2": "Sokafy ny &quot;Privacy&quot;",
+            "point3": "Tadiavo {{kind}} ary sokafy",
+            "point4": "Tadiavo ny &quot;{{communityName}}&quot; ary avelao"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Niditra tao amin&#39;ny efitrano ianao",
+            "joining": "Midira: {{userName}}",
+            "sbLeftRoom": "{{userName}} nandao ny efitrano",
+            "switchingRoom": "Fametrahana efitrano...",
+            "forceDisconnecting": "Ho tapaka ianao ao anatin&#39;ny 5 segondra",
+            "forceDisconnectingImmediately": "Notapahina tamin&#39;ny mpampiantrano iray ianao",
+            "youLeftRoom": "Nivoaka ny efitrano ianao",
+            "codeCopied": "Nivoaka ny efitrano ianao",
+            "sbBeganFbLive": "{{userName}} dia nanomboka nandefa ity antso ity tao amin&#39;ny Facebook",
+            "sbStoppedFbLive": "{{userName}} dia nijanona tsy nandefa ity antso ity tao amin&#39;ny Facebook",
+            "youBeganFbLive": "Nanomboka nandefa ity antso ity tao amin&#39;ny Facebook ianao",
+            "youStoppedFbLive": "Nitsahatra tsy nandefa ity antso ity tao amin&#39;ny Facebook ianao",
+            "youStartedLive": "Nanomboka nandefa ity antso ity tamin&#39;ny RTMP mahazatra ianao",
+            "youStoppedLive": "Nitsahatra tsy nandefa ity antso ity tamin&#39;ny RTMP mahazatra ianao",
+            "sbStartedLiveStreaming": "{{userName}} dia nanomboka mivantana",
+            "sbStoppedLiveStreaming": "{{userName}} dia nifarana mivantana",
+            "liveStopped": "Nisy hadisoana teo am-pandefasana horonan-tsary mankany amin&#39;ny teboka farany",
+            "youBeganVideoRecording": "Nanomboka nandrakitra ity fihaonambe ity ianao",
+            "youStoppedVideoRecording": "Nitsahatra tsy nandrakitra ity fihaonambe ity ianao",
+            "linkCopiedToCb": "Nadika ho amin&#39;ny solaitrabe ny rohy",
+            "codeCopiedToCb": "Kaody nadika amin&#39;ny solaitrabe",
+            "userHasNoVideo": "Tsy manana video ny mpandray anjara",
+            "openInBrowserAlert": "Sokafy ny rohy ao amin&#39;ny navigateur Safari raha te hanatevin-daharana ny fihaonambe."
         },
         "settingsPopup": {
             "dialogTitle": "Video Settings",
             "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "screenSharing": "Fizarana efijery",
+            "shareAnotherScreen": "Mizarà efijery hafa",
+            "turnOffCameras": "Vonoy ny fakantsary",
+            "turnOffVideo": "Vonoy ny fizarana fakantsary\/ecran",
+            "turnOffAudioInput": "Mangina mikrô",
+            "turnOffScreenSharing": "Vonoy ny fizarana efijery",
+            "cameraIsTurnedOff": "Mamono ny fakan-tsary",
+            "micIsTurnedOff": "Novonoina ny mikrô",
+            "startFBLive": "Manomboka Facebook Livestream",
+            "stopFBLive": "Atsaharo ny Livestream Facebook",
+            "startRecording": "Atombohy ny firaketana",
+            "stopRecording": "Atsaharo ny firaketana",
+            "start": "fanombohana",
+            "stop": "Mijanòna",
+            "recordingInProgress": "An-dalam-pandraiketana...",
+            "fbLiveTitle": "Lohatenin&#39;ny Livestream",
+            "fbLiveDescription": "Farito ny Livestream anao. Momba inona izany?",
+            "fbOnlyMeLiveAccess": "Izaho irery",
+            "fbFriendsAccess": "NAMANA",
+            "fbPublicAccess": "-bahoaka",
+            "publishOnTimeline": "Avoahy amin&#39;ny fizotry ny fotoana",
+            "publishToGroup": "Avoahy amin&#39;ny vondrona",
+            "fbStartLive": "Mandehana mivantana",
+            "fbStopLive": "Farano ny Livestream",
+            "streamingSettings": "Fikirana",
+            "fbEmbedCode": "Ampidiro",
+            "copy": "dika mitovy",
+            "streamToRTMP": "Mandehana mankany amin&#39;ny RTMP mahazatra",
+            "startBroadcasting": "Manomboka mandefa",
+            "broadcastingInProgress": "Mandeha ny fampielezam-peo"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Fikirana Audio",
+            "speakers": "mpandahateny",
+            "microphone": "mikrô"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
+            "dialogTitle": "Fikirana mpandray anjara",
+            "disconnect": "elektrônika",
+            "floatingScreens": "Screens mitsingevana",
             "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
+            "loudestExceptMe": "Mafana indrindra afa-tsy Izaho",
             "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "staticMaximized": "static Maximized",
+            "fullScreen": "Mameno efijery",
+            "manual": "boky fampianarana",
+            "turnOffCamera": "Afeno ny video",
+            "turnOffAudio": "Mangina feo",
+            "turnOffScreenSharing": "Afeno ny fizarana efijery",
+            "turnOnCamera": "Asehoy video",
+            "turnOnAudio": "Atsaharo ny feo",
+            "turnOnScreenSharing": "Asehoy ny fizarana efijery"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Fikirana streaming"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "fihaonana",
+            "MeetingEnded": "Nifarana ny fivoriana"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "NIANGAVY",
+            "description": "Inbox ho an&#39;ny fanasana"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "loharano",
+            "description": "stream ho an&#39;ny fitantanana ny fidirana amina loharano iray sy fandefasana hafatra momba ny fanavaozana"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "mba handraisana vaovao momba ny fandrosoana amin&#39;ny asa iray",
+            "displayType": "ASA"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "sokajy ho an&#39;ny asa",
+            "displayType": "asa"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "traikefa mahazatra ho an&#39;ny mpikambana ao amin&#39;ny fiarahamonina iray",
+            "displayType": "Traikefa mahazatra ho an&#39;ny mpikambana ao amin&#39;ny vondrom-piarahamonina"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "fiarahabana izay ahafahan&#39;ny mpampiasa mampahafantatra ny tenany",
+            "displayType": "Miarahaba"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "isa",
+            "description": "isa matematika"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Daty",
+            "description": "daty"
         },
         "Streams\/text": {
             "displayType": "Text",
-            "description": "body of text"
+            "description": "vatana lahatsoratra"
         },
         "Streams\/text\/small": {
             "displayType": "Text",
-            "description": "small body of text"
+            "description": "vatan-tsoratra kely"
         },
         "Streams\/text\/medium": {
             "displayType": "Text",
-            "description": "medium body of text"
+            "description": "vatana antonony ny lahatsoratra"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Adiresy mailaka",
+            "description": "adiresy mailaka"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Nomeraon-telefaona",
+            "description": "nomeraon-telefaona"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "rohy amin&#39;ny tranonkala"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "SARY",
+            "description": "sary hita maso",
+            "newItem": "Ampio sary"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Sary Gallery",
+            "description": "galerian&#39;ny sary"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "raki-kira",
+            "description": "rakikira misy ifandraisany amin&#39;ny haino aman-jery isan-karazany"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
+            "displayType": "rakitra",
+            "description": "rakitra nakarina",
             "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Clip Audio",
+            "description": "raki-peo",
+            "newItem": "Ampio Audio"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Horonantsary",
+            "description": "horonan-tsary",
+            "newItem": "Ampio Video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "antontan-taratasy PDF",
+            "description": "antontan-taratasy PDF",
+            "newItem": "Ampio PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "feo na horonan-tsary mivantana"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Sokajy",
+            "description": "sokajy iray izay azo ifandraisan&#39;ny renirano hafa"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Fanondroana fandraisana anjara",
+            "description": "mifandray\/tsy mifandray amin&#39;izany ny streams rehefa miditra\/miala ny mpampiasa"
         },
         "Streams\/interest": {
             "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "description": "maneho ny fahalianan&#39;ny mpampiasa amina lohahevitra iray"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Narahi-",
+            "description": "toerana ho an&#39;ny hafatra nalefan&#39;ny mpampiasa hafa"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "RESAKA",
+            "description": "resaka eo amin&#39;ny mpampiasa, misy tantara"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Antso tena fotoana",
+            "description": "antso an-tsary\/peo tena izy"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Fanontaniana",
+            "description": "fanontaniana stream"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Valio",
+            "description": "valiny stream"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "antso",
+            "description": "sokajy ho an&#39;ny Streams\/webrtc",
+            "MaxRelationsExceeded": "Nihoatra ny antso max"
         }
     },
     "menu": {
-        "placeholder": "type page title",
+        "placeholder": "soraty lohatenin&#39;ny pejy",
         "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "Save": "afa-tsy",
+        "Delete": "Mamafa",
         "Submenu": "Submenu"
     },
     "audio": {
         "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Mamerina",
+        "edit": "Ovay",
+        "title": "lohateny",
+        "description": "Description",
+        "upload": "fampitana",
+        "link": "Rohy",
+        "setUrl": "Mametraka URL",
+        "save": "afa-tsy",
+        "setClip": "Tapaho Clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharanon-peo",
+        "uploadLimit": "Haben&#39;ny rakitra ambony indrindra: {{size}}",
+        "errorFileSize": "Miala tsiny fa lehibe loatra ny rakitra.<br> {{size}} ny haben&#39;ny rakitra ambony indrindra"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Mamerina",
+        "edit": "Ovay",
+        "title": "lohateny",
+        "description": "Description",
+        "upload": "fampitana",
+        "link": "Rohy",
+        "setUrl": "Mametraka URL",
+        "save": "afa-tsy",
+        "setClip": "Tapaho Clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharanon-tsary",
+        "uploadLimit": "Haben&#39;ny rakitra ambony indrindra: {{size}}",
+        "errorFileSize": "Miala tsiny fa lehibe loatra ny rakitra.<br> {{size}} ny haben&#39;ny rakitra ambony indrindra"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Mamerina",
+        "edit": "Ovay",
+        "title": "lohateny",
+        "description": "Description",
+        "upload": "fampitana",
+        "link": "Rohy",
+        "setUrl": "Mametraka URL",
+        "save": "afa-tsy",
+        "setClip": "Tapaho Clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharano pdf",
+        "uploadLimit": "Haben&#39;ny rakitra ambony indrindra: {{size}}",
+        "errorFileSize": "Miala tsiny fa lehibe loatra ny rakitra.<br> {{size}} ny haben&#39;ny rakitra ambony indrindra"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Mamerina",
+        "edit": "Ovay",
+        "title": "lohateny",
+        "description": "Description",
+        "upload": "fampitana",
+        "link": "Rohy",
+        "setUrl": "Mametraka URL",
+        "save": "afa-tsy",
+        "uploadedImage": "Sary nampidirina",
+        "imageTitle": "Lohateny sary",
+        "setClip": "Tapaho Clip",
+        "invalidURL": "URL tsy mety",
+        "invalidFile": "File tsy mety",
+        "errorNoSource": "Tsy misy loharanon-tsary",
+        "uploadLimit": "Haben&#39;ny rakitra ambony indrindra: {{size}}",
+        "errorFileSize": "Miala tsiny fa lehibe loatra ny rakitra.<br> {{size}} ny haben&#39;ny rakitra ambony indrindra"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "fanontaniana",
+        "Answers": "VALIN&#39;NY",
+        "AnswerQuestion": "Valio fanontaniana",
+        "SetYourAnswer": "Valio azafady ny fanontaniana",
+        "NewQuestion": "Fanontaniana vaovao",
+        "NewAnswer": "Valiny vaovao",
+        "AnswerDetails": "Valio ny antsipiriany",
+        "answerOption": "SAFIDY",
+        "answerOptionExclusive": "manokana",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
+        "FreeAnswer": "Soraty eto ny valinteninao",
         "SaveQuestion": "Save Question",
         "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "AddAnotherAnswer": "Ampio valiny hafa",
+        "ErrorAnswers": "Mba ampio valiny iray aza",
+        "AlreadyAnswered": "Efa namaly",
+        "TitlePlaceholder": "Soraty ny fanontanianao",
+        "ContentPlaceholder": "Apetraho eto izay fampahalalana fanampiny hanampiana ny olona hamaly",
+        "ErrorTitle": "Fanontaniana ilaina",
+        "Placeholder": "placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Experience vaovao",
+        "DefineTitle": "Farito lohateny iray azafady",
+        "Create": "MANANGANA"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "antso",
+        "MaxCalls": "Max miantso",
+        "Update": "vaovao farany",
+        "NoCallsYet": "Tsy mbola misy antso",
+        "CallReasonTitle": "Inona izany antso izany?",
+        "WaitingRoom": "Efitra fiandrasana"
     }
 }

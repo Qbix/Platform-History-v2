@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "ao anatin&#39;ny {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "metatra",
+        "meters": "metatra",
+        "kilometer": "kilometatra",
+        "kilometers": "kiometatra",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "mile": "kilaometatra",
+        "miles": "kilaometatra",
+        "mi": "km",
+        "foot": "tongotra",
+        "feet": "TONGOTR&#39;IZY",
+        "inches": "santimetatra"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Liana amin&#39;ny zava-mitranga ao anatin&#39;ny {{select}} aho",
+        "update": "Havaozy ny toerana misy ahy",
+        "set": "Apetraho ny toerana misy ahy",
+        "prompt": "{{ClickOrTap}} eto<br> mametraka ny anao<br> toerana",
+        "myCurrentLocation": "Ny toerana misy ahy ankehitriny",
+        "enterAddress": "Ampidiro adiresy",
+        "enterPostcode": "Ampidiro azafady ny kaodim-paositra \/ kaody paositra",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Ampio toerana",
+            "title": "Toerana vaovao",
+            "nameYourLocation": "Omeo anarana ny toerana misy anao"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Tehirizo ity toerana ity?",
+            "message": "Mikasa ny hampiasa an&#39;io toerana io indray ve ianao amin&#39;ny ho avy?",
+            "ok": "ENY",
+            "cancel": "tsy misy"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Omeo anarana ity toerana ity",
+            "placeholder": "Trano, Asa sns.",
+            "ok": "afa-tsy"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Mifidiana toerana"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Misy faritra ao anatin&#39;ity toerana ity?",
+        "newArea": "Faritra vaovao",
+        "promptTitle": "Ampidiro anarana ho an&#39;ny faritra:",
+        "absent": "Mametraha faritra azafady",
+        "error": "fahadisoana",
+        "exist": "Efa misy ny faritra",
+        "addNewArea": "Manampia faritra vaovao",
+        "add": "hametraka"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "fanangonana toerana",
+            "displayType": "TOERANA"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Maneho tranobe, toerana, sambo, zaridaina, sns.",
+            "displayType": "Toerana"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Maneho faritra iray ao anatin&#39;ny toerana iray, toy ny efitrano na suite",
+            "displayType": "FARITRY NY"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Maneho gorodona ao anaty tranobe na sambo",
+            "displayType": "tany"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Maneho tsanganana ao anaty tranobe na sambo",
+            "displayType": "Tsanganana"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Sokajy ho an&#39;ny zavatra ao anatin&#39;ny halavirana iray amin&#39;ny geohash",
+            "displayType": "Akaikin&#39;ny toerana"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Sokajy ho an&#39;ny zavatra ao anatin&#39;ny halavirana iray amin&#39;ny geohash, mifanandrify amin&#39;ny fahalianana",
+            "displayType": "Toerana mahaliana"
         }
     }
 }

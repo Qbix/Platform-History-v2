@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} лат, {{2}} должина)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "во рамките на {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "метар",
+        "meters": "метри",
+        "kilometer": "километар",
+        "kilometers": "киометри",
+        "km": "км",
+        "mile": "милја",
+        "miles": "милји",
+        "mi": "милји",
+        "foot": "нога",
+        "feet": "стапалата",
+        "inches": "инчи"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ме интересира работите да се случуваат во рок од {{select}} од",
+        "update": "Ажурирајте ја мојата локација",
+        "set": "Поставете ја мојата локација",
+        "prompt": "{{ClickOrTap}} овде до<br> поставете го вашиот<br> локација",
+        "myCurrentLocation": "Мојата моментална локација",
+        "enterAddress": "Внесете адреса",
+        "enterPostcode": "Ве молиме внесете го вашиот поштенски број \/ поштенски код",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Додадете локација",
+            "title": "Нова локација",
+            "nameYourLocation": "Именувајте ја вашата локација"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Да се зачува оваа локација?",
+            "message": "Дали планирате да ја користите оваа локација повторно во иднина?",
+            "ok": "Да",
+            "cancel": "бр"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Именувајте ја оваа локација",
+            "placeholder": "Дом, работа итн.",
+            "ok": "Зачувај"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Изберете Локација"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Некоја област во оваа локација?",
+        "newArea": "Нова област",
+        "promptTitle": "Внесете име за областа:",
+        "absent": "Ве молиме поставете област",
+        "error": "Грешка",
+        "exist": "Областа веќе постои",
+        "addNewArea": "Додадете нова област",
+        "add": "Додадете"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "збирка локации",
+            "displayType": "Локации"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Претставува зграда, место на одржување, брод, парк итн.",
+            "displayType": "Локација"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Претставува област во локација, како што е соба или апартман",
+            "displayType": "Површина"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Претставува кат во зграда или брод",
+            "displayType": "Кат"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Претставува колона во зграда или брод",
+            "displayType": "Колона"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Категорија за работи на одредена оддалеченост од геохаш",
+            "displayType": "Во близина на места"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Категорија за работи на одредена оддалеченост од геохаш, што одговара на интерес",
+            "displayType": "Интересни места"
         }
     }
 }

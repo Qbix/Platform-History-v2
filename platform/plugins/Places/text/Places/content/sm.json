@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "i totonu {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kilomita",
+        "kilometers": "kiometeri",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "maila",
+        "miles": "maila",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "vae",
+        "feet": "vae",
+        "inches": "inisi"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ou te fiafia i mea e tutupu i totonu {{select}} o",
+        "update": "Fa&#39;afou Lo&#39;u Nofoaga",
+        "set": "Seti Lo&#39;u Nofoaga",
+        "prompt": "{{ClickOrTap}} iinei i<br> seti lau<br> nofoaga",
+        "myCurrentLocation": "O lo&#39;u nofoaga o iai nei",
+        "enterAddress": "Ulufale se tuatusi",
+        "enterPostcode": "Fa&#39;amolemole tu&#39;u lau postcode \/ zipcode",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Fa&#39;aopoopo le Nofoaga",
+            "title": "Nofoaga Fou",
+            "nameYourLocation": "Ta&#39;u lou nofoaga"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Faasaoina lenei nofoaga?",
+            "message": "E te fuafua e toe fa&#39;aoga lenei nofoaga i le lumana&#39;i?",
+            "ok": "ioe",
+            "cancel": "leai"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Ta&#39;u le nofoaga lea",
+            "placeholder": "Fale, Galuega ma isi.",
+            "ok": "Faasaoina"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Filifili Nofoaga"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "So&#39;o se vaega i totonu o lenei nofoaga?",
+        "newArea": "Eria fou",
+        "promptTitle": "Tu&#39;u se igoa mo le eria:",
+        "absent": "Fa&#39;amolemole seti vaega",
+        "error": "Sese",
+        "exist": "Ua iai le vaega",
+        "addNewArea": "Fa&#39;aopoopo se vaega fou",
+        "add": "Faaopoopo"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "se faaputuga o nofoaga",
+            "displayType": "Nofoaga"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Fa&#39;atusa se fale, nofoaga, va&#39;a, paka, ma isi.",
+            "displayType": "Nofoaga"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
+            "description": "Fa&#39;atusa se vaega i totonu o se nofoaga, e pei o se potu po&#39;o se potu",
             "displayType": "Area"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Fa&#39;atusa se fola i totonu o se fale po&#39;o se va&#39;a",
+            "displayType": "Folafola"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Fa&#39;atusa se koluma i totonu o se fale po&#39;o se va&#39;a",
+            "displayType": "Koluma"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Vaega mo mea i totonu o se mamao patino o se geohash",
+            "displayType": "Latalata i nofoaga"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Vaega mo mea i totonu o se mamao patino o se geohash, fetaui ma se fiafia",
+            "displayType": "Tulaga fiafia"
         }
     }
 }

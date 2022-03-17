@@ -1,132 +1,132 @@
 {
     "actions": {
-        "LogIn": "Accedi",
+        "LogIn": "accede",
         "LogOut": "scunnettà si"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} cum&#39;è a mo primu {{2}}",
-        "ChoosePassPhrase": "Sceglite una <strong>frase<\/strong> per a so log in. <br> Una semplice frase chì consiste in poche parole chì vi ricordate.",
-        "ChoosePassPhraseSeeSuggestions": "Sceglite una bona <strong>frase<\/strong> per proteggere u vostru contu. Vede i suggerimenti per qualchì idea.",
-        "LogOutAndTryAgain": "Esci duvete è pruvate dinò",
-        "IfYouFeel": "Se sentite chì qualcosa hà sbagatu, pudete",
-        "SetIdentifierButtonTitle": "ripartisce"
+        "SetAsPrimary": "Imposta {{1}} cum&#39;è u mo primu {{2}}",
+        "ChoosePassPhrase": "Sceglite una <strong>passfrase<\/strong> per accede cù.<br> Una frasa simplice custituita da uni pochi di parolle chì vi ricurdate facilmente.",
+        "ChoosePassPhraseSeeSuggestions": "Sceglite una bona <strong>passfrase<\/strong> per prutege u vostru contu. Vede i suggerimenti per qualchi idee.",
+        "LogOutAndTryAgain": "Sconnette è pruvate di novu",
+        "IfYouFeel": "Se senti chì qualcosa hè andatu male, pudete",
+        "SetIdentifierButtonTitle": "ricomincia"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Cumincià"
     },
     "authorize": {
-        "GetStarted": "Get Started",
+        "GetStarted": "Cumincià",
         "Authorize": "Autorizà",
-        "TermsLabel": "Aghju letto è d&#39;accordu <br> a {{link}}",
-        "TermsTitle": "Cundizioni",
-        "mustAgree": "Prima duvete accettà i termini."
+        "TermsLabel": "Aghju lettu è d&#39;accordu<br> à u {{link}}",
+        "TermsTitle": "Termini",
+        "mustAgree": "Prima vi tocca à accettà i termini."
     },
     "register": {
-        "TermsLabel": "Sò accettatu u {999}}",
-        "TermsTitle": "Cundizioni"
+        "TermsLabel": "Accetta u {{link}}",
+        "TermsTitle": "Termini"
     },
     "notifications": {
         "title": "Permissione",
-        "prompt": "Vulete abilità notifiche? Riceverete l&#39;aggiornamentu in tempo reale nantu à e cose chì vi interessanu.",
+        "prompt": "Vulete attivà e notificazioni ? Riceverete aghjurnamenti in tempu reale nantu à e cose chì ti interessanu.",
         "yes": "Iè",
         "no": "Innò",
         "WelcomePleaseVerifyEmail": "Benvenuti! Per piacè verificate u vostru indirizzu email.",
         "WelcomeVerifyEmail": "Benvenuti! Verificate u vostru indirizzu email.",
-        "ForgetPass": "Hey, hai scurdatu u passphrase?",
-        "PassphraseSaved": "A vostra frasa di passaghju hè stata salvata.",
+        "ForgetPass": "Ehi, avete scurdatu u vostru passphrase?",
+        "PassphraseSaved": "A vostra passfrase hè stata salvata.",
         "IdentifierActivated": "U vostru {{type}} hè statu attivatu.",
-        "CompletedActivation": "Avete cumpletatu l&#39;attivazione di l&#39;utilizatori.",
-        "CompletedActivationLogIn": "Avete cumpletatu l&#39;attivazione di l&#39;utilizatori. Pruvate u login in avà."
+        "CompletedActivation": "Avete finitu l&#39;attivazione di l&#39;utilizatori.",
+        "CompletedActivationLogIn": "Avete finitu l&#39;attivazione di l&#39;utilizatori. Pruvate login avà."
     },
     "contacts": {
         "dialog": {
-            "title": "Sceglite u cuntattu",
+            "title": "Sceglie u cuntattu",
             "CreateAccount": "+ Novu Cuntattu",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create micca truvatu",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create micca trovu",
             "SearchByName": "Ricerca per nome",
-            "EmptyContacts": "Cuntatti micca truvati ..."
+            "EmptyContacts": "Cuntatti micca trovu..."
         },
         "select": {
-            "title": "Selezziunate u cuntattu di {{displayName}}"
+            "title": "Sceglie u cuntattu di {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Selezziunate etichetta.",
-        "inviteUser": "Invita l&#39;Utilizzatore",
-        "selectRole": "Selezziunate Role",
+        "selectLabel": "Per piacè selezziunate l&#39;etichetta.",
+        "inviteUser": "Invita l&#39;utilizatori",
+        "selectRole": "Selezziunà Role",
         "inviteRole": "Invita {{role}}"
     },
-    "invalidLanguageSelected": "Lingua selezionata non validu",
+    "invalidLanguageSelected": "Lingua invalida scelta",
     "login": {
         "title": "Benvenuti",
-        "directions": "Crea un cuntu, o entra.",
-        "directionsNoRegister": "Log in se avete un contu.",
+        "directions": "Crea un contu, o accede.",
+        "directionsNoRegister": "Entra s&#39;è vo avete un contu.",
         "goButton": "Vai",
-        "passphrase": "Inserite a vostra frasa di pass:",
-        "loginButton": "Aghjunghjite",
-        "registerButton": "Aghjunghjite",
-        "resendButton": "Mandate u Messaghju d&#39;Activazione",
-        "forgot": "Dimenticatu lu?",
-        "resendConfirm": "Vulete mandà un messagiu per resettà a vostra password?",
-        "resendSuccess": "Verificate per un messaghju per resettà a vostra parolla",
-        "resendClose": "Chiudere",
-        "noPassphrase": "Prima di pudè log in, duvete stabilisce una frasa di passaghju clicchendu in u ligame in u vostru messagiu d&#39;activazione.",
-        "notVerified": "Hè necessariu mandà un missaghju d&#39;attivazione per entra.",
-        "emailExists": "Avete pruvatu à registrà cù questu email prima? In casu, verificate a vostra inbox per attivà u vostru contu. <a href='#resend' class='Q_button Users_activation_resend'>Cliccate per rinvià u messagiu<\/a>",
-        "mobileExists": "Avete pruvatu à registrà cù stu numeru mobile prima? In casu, verificate u vostru SMS per attivà u vostru contu. <a href='#resend' class='Q_button Users_activation_resend'>Cliccate per rinvià u messagiu<\/a>",
+        "passphrase": "Inserite u vostru passphrase:",
+        "loginButton": "Cumincià",
+        "registerButton": "Cumincià",
+        "resendButton": "Mandate un missaghju di attivazione",
+        "forgot": "Avete scurdatu?",
+        "resendConfirm": "Vulete mandà un missaghju per resettate a vostra passphrase?",
+        "resendSuccess": "Verificate un missaghju per resettate a vostra passphrase",
+        "resendClose": "Chiudi",
+        "noPassphrase": "Prima di pudè login, duvete stabilisce una passphrase clicchendu u ligame in u vostru messagiu di attivazione.",
+        "notVerified": "Avete da mandà un missaghju di attivazione per accede.",
+        "emailExists": "Avete pruvatu à registrà cù questu email prima? Sì cusì, verificate a vostra inbox per attivà u vostru contu. <a href='#resend' class='Q_button Users_activation_resend'>Cliccate per rinvià u missaghju<\/a>",
+        "mobileExists": "Avete pruvatu à registrà cù stu numeru mobile prima? Sì cusì, verificate u vostru SMS per attivà u vostru contu. <a href='#resend' class='Q_button Users_activation_resend'>Cliccate per rinvià u missaghju<\/a>",
         "usingOther": "o pudete",
         "prompt": "Sceglite un nome d&#39;utilizatore:",
-        "newUser": "o creà un novu contu",
+        "newUser": "o crea un novu contu sottu",
         "placeholders": {
-            "identifier": "u to telefonu mobili # o email",
+            "identifier": "u vostru # mobile o email",
             "mobile": "entre in u vostru mobile #",
-            "email": "entre in u vostru indirizzu email",
-            "username": "nome d&#39;utilizatore"
+            "email": "entre u vostru indirizzu email",
+            "username": "aduprà solu lettere è numeri"
         },
-        "confirmTerms": "Acepta i Termini di serviziu?",
-        "facebookNoEmail": "U vostru contu di Facebook manca un indirizzu email cunfirmatu. Basta à cunnette in a manera nativa.",
-        "picTooltip": "Pudete cambià sta stampa più tardi",
+        "confirmTerms": "Accetta i Termini di serviziu?",
+        "facebookNoEmail": "U vostru contu Facebook manca un indirizzu email cunfirmatu. Simply log in u modu nativu.",
+        "picTooltip": "Pudete cambià sta stampa dopu",
         "wallet": {
-            "payload": "Cunnettatevi {{host}} à tempu {{timestamp}}",
+            "payload": "Entra in {{host}} à tempu {{timestamp}}",
             "alert": {
-                "title": "Reindirizzamentu à Wallet",
-                "content": "Una volta chjusu stu dialogu, sarete purtatu à u vostru portafogliu. Dopu avè firmatu, tornate à sta pagina."
+                "title": "Redirecting à Wallet",
+                "content": "Una volta chjusu stu dialogu, sarete purtatu à a vostra billetera. Dopu avè firmatu, torna à sta pagina."
             }
         }
     },
     "setIdentifier": {
-        "title": "Aghjunghjite una manera di login",
-        "sendMessage": "Mandate u Messaghju d&#39;Activazione",
+        "title": "Aghjunghjite un modu per accede",
+        "sendMessage": "Mandate un missaghju di attivazione",
         "placeholders": {
-            "identifier": "entre in u vostru telefuninu # o email",
-            "mobile": "entre in u vostru numaru mubile",
-            "email": "entre in u vostru indirizzu email",
+            "identifier": "entre u vostru # mobile o email",
+            "mobile": "entre u vostru numeru mobile",
+            "email": "entre u vostru indirizzu email",
             "username": "nome d&#39;utilizatore"
         }
     },
     "prompt": {
         "title": "{{Platform}} Account",
-        "areUsing": "Vi sò aduprà {{platform}} cum&#39;è",
-        "noLongerUsing": "Ùn sia più cunnessu à {{platform}} cum&#39;è",
-        "doAuth": "Logu cù stu contu",
+        "areUsing": "Avete aduprà {{platform}} cum&#39;è",
+        "noLongerUsing": "Ùn site più cunnessu à {{platform}} cum&#39;è",
+        "doAuth": "Entra cù stu contu",
         "doSwitch": "Cambia à stu contu"
     },
     "roles": {
         "Owner": "Pruprietariu",
-        "Admin": "Amministratore",
+        "Admin": "Admin",
         "Member": "Membru",
         "Guest": "Invitatu",
-        "Host": "Òspite"
+        "Host": "Host"
     },
     "analytics": {
-        "Title": "Analitica",
+        "Title": "Analytics",
         "Daily": "Ogni ghjornu",
-        "Weekly": "Semanale",
+        "Weekly": "Ogni settimana",
         "Monthly": "Mensili",
         "Application": "Applicazione",
         "Pages": "Pagine",
-        "Services": "I servizii",
+        "Services": "servizii",
         "Faq": "Faq",
-        "WeekDays": "Ghjorni di a Settimana"
+        "WeekDays": "I ghjorni di a settimana"
     }
 }

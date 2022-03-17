@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Энэ агуулгыг танаас нуусан."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Шинэ зүйл"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Миний урьсан хүмүүс",
+        "Streams\/invitedMe": "Хэн намайг урьсан юм",
+        "DoYouAgree": "Та санал нийлж байна уу?",
+        "Yes": "Тиймээ",
+        "No": "Үгүй"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Таны сонирхол юу вэ?",
+        "CanAdd": "Хэрэв та хайж буй зүйлээ олж чадаагүй хэвээр байвал доорх шинэ сонирхлыг нэмж болно.",
+        "TrySynonyms": "Харахгүй байна уу? Хэд хэдэн ижил утгатай үгсийг туршиж үзээрэй.",
+        "AddUnderCategory": "Ангилал дор нэмэх...",
+        "Other": "Бусад",
+        "Unlisted": "Жагсаалтаас гадуур"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Мессежийг админ шалгахаар дарцагласан байна. Дарцаг арилгахын тулд дахин товшино уу.",
+        "noOneSaid": "Хэн ч юу ч хэлээгүй",
+        "closeChatButton": "Чатыг хаах",
+        "closeChatConfirmTitle": "Энэ чатыг хаах уу?",
+        "closeChatConfirm": "Та энэ чатыг хаахдаа итгэлтэй байна уу?",
+        "Subscribed": "Мэдэгдэл идэвхжүүлсэн",
+        "Unsubscribed": "Мэдэгдлийн дууг хаасан",
+        "closeChatConfirmYes": "Тиймээ",
+        "closeChatConfirmNo": "Үгүй",
+        "earlierComments": "өмнөх сэтгэгдэл",
+        "startedConversation": "яриа эхлүүлэв",
+        "RealTimeCall": "Бодит цагийн дуудлага",
+        "SearchByName": "Нэрээр нь хайх",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} чат руу зочилж байна",
+            "Join": "{{displayName}} чатад нэгдсэн",
+            "Leave": "{{displayName}} чатаас гарлаа",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} эхлүүлсэн"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "и-мэйл захиалгаа удирдах",
+        "IfUnsubscribe": "Хэрэв та бүртгэлээ цуцлахыг хүсвэл",
+        "*": "{{& message.fields.type}}-г {{& stream.fields.title}} руу мессеж илгээх",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} хэлэхдээ: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}}-н өөрчлөлт",
+        "Streams\/invite": "Таныг {{& stream.fields.title}}-д урьсан",
+        "Streams\/announcement": "{{& stream.fields.title}} дахь зарлал",
+        "Streams\/access": "{{&call 'avatar.displayName'}} хандалтыг {{& stream.fields.title}}-д өөрчилсөн",
+        "Streams\/chat\/edit": "Чатын мессежийг {{& stream.fields.title}}-д зассан",
+        "Streams\/chat\/remove": "{{& stream.fields.title}}-д чатын мессежийг устгасан",
+        "Streams\/closed": "{{stream.fields.title}} хаагдсан",
+        "Streams\/task\/progress": "{{stream.fields.title}}-д ахиц дэвшил гарсан",
+        "Streams\/task\/complete": "Ажил дууссан: {{stream.fields.title}}",
+        "Streams\/task\/error": "Алдаа: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Ирж буй мессеж",
+        "Streams\/relatedTo\/Streams\/call": "Шинэ дуудлага {{toTitle}}-д эхэлсэн",
+        "Streams\/relatedTo\/*": "{{toTitle}}-д шинэ {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}}-д {{relationDisplayType}} нэрээр нэмсэн",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} таныг сэтгэгдэлдээ дурдсан",
+        "Streams\/call": "{{displayName}} бодит цагийн дуудлага эхлүүлсэн"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Урих",
+        "messageContent": "{{displayName}} таныг {{inviteUrl}}-д урьсан",
+        "youCanNowPaste": "Та одоо энэ холбоосыг хаа нэгтээ буулгаж хүмүүсийг урих боломжтой",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "Харилцагчидаасаа сонгоно уу",
+            "chooseAgainFromContacts": "Харилцагчаас дахин сонгоно уу",
+            "inviteSelectedContacts": "Сонгосон харилцагчдыг урих",
+            "selectFromContacts": "Харилцагчаас сонгоно уу",
+            "userChooserPlaceholder": "Нэрээр нь хайх",
+            "photo": "Зураг авах",
+            "photoInstruction": "Таны QR кодыг уншсан хүн таны өмнө байвал зургийг нь аваарай",
+            "to": "Хэнд: {{Stream Title}}",
+            "go": "Яв",
+            "title": "Урих",
+            "placeholder": "Гар утасны дугаар эсвэл имэйл хаяг",
+            "orInvite": "Эсвэл дараахыг ашиглан хүмүүсийг урих:",
+            "copyLink": "Урилгын холбоосыг хуулах бол {{ClickOrTap}}",
+            "shareOrCopyLink": "Урилгын холбоосыг хуваалцах эсвэл хуулахын тулд {{ClickOrTap}}",
+            "QR": "QR код үүсгэхийн тулд {{ClickOrTap}}",
+            "QRtitle": "Энэ QR кодыг уншина уу",
+            "QRscanned": "Тэд үүнийг сканнердсан!",
+            "scannedQR": "{{ClickOrTap}} кодыг сканнердсан бол",
+            "byEmail": "Имэйл",
+            "byText": "Текст",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Хөөе, үүнийг шалгаарай",
+            "PleaseVisitLink": "Дараах холбоосоор зочилно уу.",
+            "InvitingYou": "Би таныг {{title}}-д урьж байна",
+            "HasInvitedYou": "{{displayName}} таныг {{title}}-д урьсан",
+            "HasMentionedYou": "{{displayName}} таныг &quot;{{title}}&quot;-д дурдсан",
+            "YOUAREINVITED": "ТАНЫГ УРЬЖ БАЙНА!",
+            "AcceptInvite": "Урилгыг хүлээн авна уу"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Таныг {{title}}-д урьсан. {{url}} товшино уу"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Таныг урьсан байна. {{ClickOrTap}} эндээс зөвшөөрч, нэгдээрэй."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "{{stream.fields.title}} руу { <em>{999}}<\/em> мессеж нийтэлсэн"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
+            "commentedOn": "талаар тайлбар хийсэн",
+            "startedCallIn": "руу залгаж эхлэв",
             "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "body": "{{& url}}-д: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "-д нийтлэгдсэн байна",
+                "byAvatar": "{{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "шинэ {{instructions.fromDisplayType}} байна",
+                "byAvatar": "{{avatar.displayName}} нэмсэн"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Найзууд тань танихгүй байгаа манай дугаараас урилга илгээсэн. Танаас урилга ирснийг мэдэгдэхийн тулд холбоос дээр дарахыг хүснэ үү.",
+            "confirm": "Найзууд тань танихгүй байгаа манай дугаараас урилга илгээсэн. Холбоос дээр дарахыг хүссэн урилга чамаас ирснийг мэдэгдэхийн тулд хурдан текст илгээхийг хүсч байна уу.",
+            "check": "Хөөе, би танд {{app}} апп руу урилга илгээлээ. SMS-ээ шалгаад холбоос дээр дарна уу!",
+            "CheckYourMobile": "SMS шалгаад зааврыг дагана уу!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Манай домэйноос урилга илгээсэн бөгөөд таны найзууд үүнийг хараахан танихгүй байна. Танаас урилга ирснийг мэдэгдэхийн тулд холбоос дээр дарахыг хүснэ үү.",
+            "confirm": "Манай домэйноос урилга илгээсэн бөгөөд таны найзууд үүнийг хараахан танихгүй байна. Холбоос дээр дарахыг хүссэн урилга чамаас ирснийг мэдэгдэхийн тулд хурдан текст илгээхийг хүсч байна уу.",
+            "subject": "Та урилга авсан уу?",
+            "body": "Хөөе, би танд {{app}} апп руу урилга илгээлээ. Имэйлээ шалгаад тэнд байгаа холбоос дээр дарна уу!",
+            "CheckYourEmail": "Имэйлээ шалгаад зааврыг дагана уу!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Гарчиг",
+        "Subscribed": "Бүртгүүлсэн",
+        "Participants": "Оролцогчид",
+        "AreYouSureRemoveIdentifier": "Та энэ танигчийг устгахдаа итгэлтэй байна уу?",
+        "AreYouSureUnsubscribeIdentifier": "Та энэ танигчийг бүртгэлээ цуцлахдаа итгэлтэй байна уу? Энэ нь энэ танигчийн мэдэгдлийг унтраах болно.",
+        "AreYouSureUnsubscribeDevice": "Та энэ төхөөрөмжийн бүртгэлийг цуцлахдаа итгэлтэй байна уу? Энэ нь энэ төхөөрөмжийн мэдэгдлийг унтраах болно.",
+        "AreYouSureRemoveParticipant": "Та энэ оролцогчийг устгахдаа итгэлтэй байна уу?",
+        "RemoveParticipant": "Оролцогчийг хасах",
+        "Identifiers": "Тодорхойлогч",
+        "Devices": "Төхөөрөмжүүд",
+        "Streams": "Дамжуулалт"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Танд энэ дамжуулалтад нэгдэх зөвшөөрөл байхгүй.",
+        "streamTitle": "{{1}} шууд дуудлага эхлүүлсэн",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Холбож байна",
+            "microphoneBtn": "Микрофоныг идэвхжүүл",
+            "cameraBtn": "Камерыг идэвхжүүл",
+            "cameraAndMicrophoneBtn": "Камер болон микрофоныг идэвхжүүлнэ үү"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Микрофон унтраалттай байна",
+            "micIsOn": "Микрофон асаалттай байна",
+            "cameraIsOff": "Камер унтраалттай байна",
+            "cameraIsOn": "Камер асаалттай байна",
+            "screenSharingIsOn": "Дэлгэц хуваалцах боломжтой",
+            "screenSharingIsOff": "Дэлгэц хуваалцах",
+            "joinNow": "Дуудлагад нэгдээрэй"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}}-н зөвшөөрлийг үгүйсгэв. Үүнийг ашиглахын тулд дараах алхмуудыг дагана уу:",
+            "point1": "&quot;Тохиргоо&quot; -&gt; &quot;Нарийвчилсан&quot; -&gt; &quot;Нууцлал ба аюулгүй байдал&quot; -&gt; &quot;Сайтын тохиргоо&quot; -&gt; &quot;Камер&quot; эсвэл &quot;Сайтын тохиргоо&quot; -&gt; &quot;Микрофон&quot; руу очно уу.",
+            "point2": "{{hostname}}-г &quot;Блоклох&quot; жагсаалтаас хас"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}}-н зөвшөөрлийг үгүйсгэв. Хуралд нэгдэхийн тулд энэ хуудсыг дахин ачаалж, {{kind}} руу нэвтрэх эрхийг баталгаажуулна уу."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}}-н зөвшөөрлийг үгүйсгэв. Үүнийг ашиглахын тулд дараах алхмуудыг дагана уу:",
+            "point1": "Өөрийн Android тохиргоо руу очно уу",
+            "point2": "&quot;Програм ба мэдэгдлүүд&quot;-ийг нээх",
+            "point3": "&quot;{{communityName}}&quot;-г олоод нээнэ үү",
+            "point4": "Зөвшөөрөл дээр дарна уу",
+            "point5": "{{kind}}-г идэвхжүүлэх"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Зааварчилгаа",
+            "permissionDenied": "{{kind}}-н зөвшөөрлийг үгүйсгэв. Үүнийг ашиглахын тулд дараах алхмуудыг дагана уу:",
+            "point1": "Өөрийн iOS тохиргоо руу очно уу",
+            "point2": "&quot;Нууцлал&quot;-ыг нээх",
+            "point3": "{{kind}}-г олоод нээнэ үү",
+            "point4": "&quot;{{communityName}}&quot;-г олоод идэвхжүүлнэ үү"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Та өрөөнд орлоо",
+            "joining": "Нэгдэх: {{userName}}",
+            "sbLeftRoom": "{{userName}} өрөөнөөс гарлаа",
+            "switchingRoom": "Өрөө солих...",
+            "forceDisconnecting": "Та 5 секундын дотор салгагдах болно",
+            "forceDisconnectingImmediately": "Таныг хост салгасан байна",
+            "youLeftRoom": "Та өрөөнөөс гарлаа",
+            "codeCopied": "Та өрөөнөөс гарлаа",
+            "sbBeganFbLive": "{{userName}} энэ дуудлагыг Facebook дээр цацаж эхэлсэн",
+            "sbStoppedFbLive": "{{userName}} энэ дуудлагыг Facebook дээр дамжуулахаа больсон",
+            "youBeganFbLive": "Та энэ дуудлагыг Facebook дээр цацаж эхэлсэн",
+            "youStoppedFbLive": "Та энэ дуудлагыг Facebook дээр дамжуулахаа больсон",
+            "youStartedLive": "Та энэ дуудлагыг захиалгат RTMP руу цацаж эхэлсэн",
+            "youStoppedLive": "Та энэ дуудлагыг захиалгат RTMP руу дамжуулахаа зогсоосон",
+            "sbStartedLiveStreaming": "{{userName}} шууд нэвтрүүлж эхэлсэн",
+            "sbStoppedLiveStreaming": "{{userName}} шууд дамжуулалтыг дуусгасан",
+            "liveStopped": "Төгсгөлийн цэг рүү видео илгээх явцад алдаа гарлаа",
+            "youBeganVideoRecording": "Та энэ хурлын бичлэгийг хийж эхэлсэн",
+            "youStoppedVideoRecording": "Та энэ хурлын бичлэгийг зогсоосон",
+            "linkCopiedToCb": "Холбоосыг санах ой руу хуулсан",
+            "codeCopiedToCb": "Кодыг санах ой руу хуулсан",
+            "userHasNoVideo": "Оролцогчид видео байхгүй",
+            "openInBrowserAlert": "Хуралд нэгдэхийн тулд Safari хөтөч дээр холбоосыг нээнэ үү."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "Видео тохиргоо",
+            "webCamera": "Вэб камер",
+            "screenSharing": "Дэлгэц хуваалцах",
+            "shareAnotherScreen": "Өөр дэлгэц хуваалцах",
+            "turnOffCameras": "Камерыг унтраа",
+            "turnOffVideo": "Камер\/дэлгэц хуваалцахыг унтраа",
+            "turnOffAudioInput": "Микрофоны дууг хаах",
+            "turnOffScreenSharing": "Дэлгэц хуваалцахыг унтраа",
+            "cameraIsTurnedOff": "Камер унтарсан байна",
+            "micIsTurnedOff": "Микрофон унтарсан байна",
+            "startFBLive": "Facebook шууд дамжуулалтыг эхлүүлнэ үү",
+            "stopFBLive": "Facebook шууд дамжуулалтыг зогсоо",
+            "startRecording": "Бичлэг эхлүүлнэ үү",
+            "stopRecording": "Бичлэгээ зогсоо",
+            "start": "Эхлэх",
+            "stop": "Зогс",
+            "recordingInProgress": "Бичлэг хийгдэж байна...",
+            "fbLiveTitle": "Шууд дамжуулалтын гарчиг",
+            "fbLiveDescription": "Шууд дамжуулалтаа тайлбарлана уу. Энэ юуны тухай вэ?",
+            "fbOnlyMeLiveAccess": "Зөвхөн би",
+            "fbFriendsAccess": "Найзууд",
+            "fbPublicAccess": "Олон нийтийн",
+            "publishOnTimeline": "Он цагийн хэлхээс дээр нийтлэх",
+            "publishToGroup": "Бүлэгт нийтлэх",
+            "fbStartLive": "Амьд явах",
+            "fbStopLive": "Шууд дамжуулалтыг дуусгах",
+            "streamingSettings": "Тохиргоо",
+            "fbEmbedCode": "Оруулсан",
+            "copy": "Хуулбарлах",
+            "streamToRTMP": "Захиалгат RTMP руу дамжуулах",
+            "startBroadcasting": "Нэвтрүүлгээ эхлүүл",
+            "broadcastingInProgress": "Нэвтрүүлэг хийгдэж байна"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Аудио тохиргоо",
+            "speakers": "Илтгэгчид",
+            "microphone": "Микрофон"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Оролцогчийн тохиргоо",
+            "disconnect": "Салга",
+            "floatingScreens": "Хөвөгч дэлгэц",
+            "tiledScreens": "Хавтантай дэлгэц",
+            "loudestExceptMe": "Надаас бусад нь хамгийн чанга",
+            "maximizeLoudest": "Хамгийн чанга",
+            "staticMaximized": "Статикийг дээд зэргээр нэмэгдүүлсэн",
+            "fullScreen": "Дэлгэц дүүрэн",
+            "manual": "Гарын авлага",
+            "turnOffCamera": "Видеог нуух",
+            "turnOffAudio": "Аудио хаах",
+            "turnOffScreenSharing": "Дэлгэц хуваалцахыг нуух",
+            "turnOnCamera": "Видео харуулах",
+            "turnOnAudio": "Дууны дууг нээх",
+            "turnOnScreenSharing": "Дэлгэц хуваалцахыг харуулах"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Дамжуулалтын тохиргоо"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Уулзалт",
+            "MeetingEnded": "Уулзалт дууслаа"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Урьсан",
+            "description": "Урилгын имэйл хайрцаг"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Нөөц",
+            "description": "нөөцийн хандалтыг удирдах, шинэчлэлтийн тухай мессеж нийтлэх урсгал"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "тодорхой ажлын явцын талаарх шинэчлэлтүүдийг хүлээн авахад зориулагдсан",
+            "displayType": "Даалгавар"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "даалгаврын ангилал",
+            "displayType": "Даалгаврууд"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "нийгэмлэгийн гишүүдийн нийтлэг туршлага",
+            "displayType": "Нийгэмлэгийн гишүүдэд зориулсан нийтлэг туршлага"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "хэрэглэгч өөрийгөө танилцуулах мэндчилгээ",
+            "displayType": "Мэндчилгээ"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Тоо",
+            "description": "математикийн тоо"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Огноо",
+            "description": "огноо"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Текст",
+            "description": "текстийн хэсэг"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Текст",
+            "description": "жижиг текст"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Текст",
+            "description": "текстийн дунд хэсэг"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Имэйл хаяг",
+            "description": "имэйл хаяг"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Утасны дугаар",
+            "description": "утасны дугаар"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "вэб дээрх холбоос"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Зураг",
+            "description": "харааны зураг",
+            "newItem": "Зураг нэмэх"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Зургийн цомог",
+            "description": "зургийн галерей"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Цомог",
+            "description": "янз бүрийн хэвлэл мэдээллийн хэрэгсэлтэй холбоотой цомог"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Файл",
+            "description": "байршуулсан файл",
+            "newItem": "Файл нэмэх"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Аудио клип",
+            "description": "аудио клип",
+            "newItem": "Аудио нэмэх"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Видео клип",
+            "description": "видео клип",
+            "newItem": "Видео нэмэх"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF баримт",
+            "description": "PDF баримт",
+            "newItem": "PDF нэмэх"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Шууд дамжуулалт",
+            "description": "амьд аудио эсвэл видео"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Ангилал",
+            "description": "бусад урсгалууд холбогдох боломжтой ангилал"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Оролцогчдын индекс",
+            "description": "Хэрэглэгч нэгдэх\/гарах үед урсгалууд үүнтэй холбоотой\/холбоотой байна"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Сонирхол",
+            "description": "тодорхой сэдвээр хэрэглэгчийн сонирхлыг илэрхийлдэг"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Ирж байна",
+            "description": "бусад хэрэглэгчдийн илгээсэн мессежийн очих газар"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Яриа",
+            "description": "түүхтэй хэрэглэгчдийн хоорондын яриа"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Бодит цагийн дуудлага",
+            "description": "бодит цагийн видео\/аудио дуудлага"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Асуулт",
+            "description": "асуултын урсгал"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Хариулах",
+            "description": "хариултын урсгал"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Дуудлага",
+            "description": "Streams\/webrtc-д зориулсан ангилал",
+            "MaxRelationsExceeded": "Дуудлага хийх дээд хэмжээ хэтэрсэн"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "хуудасны гарчгийг бичнэ үү",
+        "ModTab": "Зүйлийг өөрчлөх",
+        "Save": "Хадгалах",
+        "Delete": "Устгах",
+        "Submenu": "Дэд цэс"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Бичлэг",
+        "reset": "Дахин тохируулах",
+        "edit": "Засварлах",
+        "title": "гарчиг",
+        "description": "тайлбар",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Cut Out клип",
+        "invalidURL": "Хүчингүй URL",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "Аудио эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, файл хэтэрхий том байна.<br> Файлын дээд хэмжээ {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Дахин тохируулах",
+        "edit": "Засварлах",
+        "title": "гарчиг",
+        "description": "тайлбар",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Cut Out клип",
+        "invalidURL": "Хүчингүй URL",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "Видеоны эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, файл хэтэрхий том байна.<br> Файлын дээд хэмжээ {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Дахин тохируулах",
+        "edit": "Засварлах",
+        "title": "гарчиг",
+        "description": "тайлбар",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "setClip": "Cut Out клип",
+        "invalidURL": "Хүчингүй URL",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "PDF эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, файл хэтэрхий том байна.<br> Файлын дээд хэмжээ {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Дахин тохируулах",
+        "edit": "Засварлах",
+        "title": "гарчиг",
+        "description": "тайлбар",
+        "upload": "Байршуулах",
+        "link": "Холбоос",
+        "setUrl": "URL тохируулах",
+        "save": "Хадгалах",
+        "uploadedImage": "Байршуулсан зураг",
+        "imageTitle": "Зургийн гарчиг",
+        "setClip": "Cut Out клип",
+        "invalidURL": "Хүчингүй URL",
+        "invalidFile": "Буруу файл",
+        "errorNoSource": "Зургийн эх сурвалж байхгүй",
+        "uploadLimit": "Файлын дээд хэмжээ: {{size}}",
+        "errorFileSize": "Уучлаарай, файл хэтэрхий том байна.<br> Файлын дээд хэмжээ {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "Асуултууд",
+        "Answers": "Хариултууд",
+        "AnswerQuestion": "Хариулт асуулт",
+        "SetYourAnswer": "Асуултанд хариулна уу",
+        "NewQuestion": "Шинэ асуулт",
+        "NewAnswer": "Шинэ хариулт",
+        "AnswerDetails": "Хариултын дэлгэрэнгүй мэдээлэл",
+        "answerOption": "Сонголт",
+        "answerOptionExclusive": "Онцгой",
+        "answerTextarea": "Текстареа",
+        "FreeAnswer": "Хариултаа энд бичнэ үү",
+        "SaveQuestion": "Асуултыг хадгалах",
+        "SaveAnswer": "Хариултыг хадгалах",
+        "AddAnotherAnswer": "Өөр хариулт нэмнэ үү",
+        "ErrorAnswers": "Нэг хариултыг ч гэсэн нэмнэ үү",
+        "AlreadyAnswered": "Аль хэдийн хариулсан",
+        "TitlePlaceholder": "Асуултаа бичнэ үү",
+        "ContentPlaceholder": "Хүмүүст хариулахад нь туслах нэмэлт мэдээллийг энд оруулаарай",
+        "ErrorTitle": "Асуулт шаардлагатай",
+        "Placeholder": "Орлуулагч"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Шинэ туршлага",
+        "DefineTitle": "Гарчиг тодорхойлно уу",
+        "Create": "Үүсгэх"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Дуудлага",
+        "MaxCalls": "Хамгийн их дуудлага",
+        "Update": "Шинэчлэх",
+        "NoCallsYet": "Одоогоор дуудлага алга",
+        "CallReasonTitle": "Энэ дуудлага юу вэ?",
+        "WaitingRoom": "Хүлээлгийн өрөө"
     }
 }

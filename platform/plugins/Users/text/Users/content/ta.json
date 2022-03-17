@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "பகுப்பாய்வு",
+        "Daily": "தினசரி",
+        "Weekly": "வாரந்தோறும்",
+        "Monthly": "மாதாந்திர",
+        "Application": "விண்ணப்பம்",
+        "Pages": "பக்கங்கள்",
+        "Services": "சேவைகள்",
+        "Faq": "ஃபாக்",
+        "WeekDays": "வார நாட்கள்"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "உள்நுழைய",
+        "LogOut": "வெளியேறு"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "எனது முதன்மை {{2}} ஆக {{1}} அமை",
+        "ChoosePassPhrase": "உள்நுழைய, <strong>கடவுச் சொற்றொடரைத்<\/strong> தேர்ந்தெடுக்கவும்.<br> நீங்கள் எளிதாக நினைவில் வைத்திருக்கும் சில சொற்களைக் கொண்ட ஒரு எளிய சொற்றொடர்.",
+        "ChoosePassPhraseSeeSuggestions": "உங்கள் கணக்கைப் பாதுகாக்க நல்ல <strong>பாஸ் சொற்றொடரைத்<\/strong> தேர்வு செய்யவும். சில யோசனைகளுக்கான பரிந்துரைகளைப் பார்க்கவும்.",
+        "LogOutAndTryAgain": "வெளியேறி மீண்டும் முயற்சிக்கவும்",
+        "IfYouFeel": "ஏதேனும் தவறு நடந்ததாக நீங்கள் உணர்ந்தால், உங்களால் முடியும்",
+        "SetIdentifierButtonTitle": "மீண்டும் ஆரம்பி"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "தொடங்குங்கள்"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "தொடங்குங்கள்",
+        "Authorize": "அங்கீகரிக்கவும்",
+        "TermsLabel": "படித்து ஒத்துக்கொண்டேன்<br> {{link}}க்கு",
+        "TermsTitle": "விதிமுறை",
+        "mustAgree": "முதலில் நீங்கள் விதிமுறைகளை ஏற்க வேண்டும்."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "நான் {{link}} ஏற்கிறேன்",
+        "TermsTitle": "விதிமுறை"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "அனுமதி",
+        "prompt": "அறிவிப்புகளை இயக்க விரும்புகிறீர்களா? நீங்கள் விரும்பும் விஷயங்களைப் பற்றிய நிகழ்நேர அறிவிப்புகளைப் பெறுவீர்கள்.",
+        "yes": "ஆம்",
+        "no": "இல்லை",
+        "WelcomePleaseVerifyEmail": "வரவேற்பு! உங்கள் மின்னஞ்சல் முகவரியைச் சரிபார்க்கவும்.",
+        "WelcomeVerifyEmail": "வரவேற்பு! உங்கள் மின்னஞ்சல் முகவரியை சரிபார்க்கவும்.",
+        "ForgetPass": "ஏய், உங்கள் கடவுச்சொற்றொடரை மறந்துவிட்டீர்களா?",
+        "PassphraseSaved": "உங்கள் பாஸ் சொற்றொடர் சேமிக்கப்பட்டது.",
+        "IdentifierActivated": "உங்கள் {{type}} செயல்படுத்தப்பட்டது.",
+        "CompletedActivation": "பயனர் செயல்படுத்தலை முடித்துவிட்டீர்கள்.",
+        "CompletedActivationLogIn": "பயனர் செயல்படுத்தலை முடித்துவிட்டீர்கள். இப்போது உள்நுழைய முயற்சிக்கவும்."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "தொடர்பைத் தேர்ந்தெடுக்கவும்",
+            "CreateAccount": "+ புதிய தொடர்பு",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create கிடைக்கவில்லை",
+            "SearchByName": "பெயரால் தேடுங்கள்",
+            "EmptyContacts": "தொடர்புகள் கிடைக்கவில்லை..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "{{displayName}} இன் தொடர்பைத் தேர்ந்தெடுக்கவும்"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "லேபிளைத் தேர்ந்தெடுக்கவும்.",
+        "inviteUser": "பயனர்களை அழைக்கவும்",
+        "selectRole": "பாத்திரத்தைத் தேர்ந்தெடுக்கவும்",
+        "inviteRole": "அழை {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "தவறான மொழி தேர்ந்தெடுக்கப்பட்டது",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "வரவேற்பு",
+        "directions": "கணக்கை உருவாக்கவும் அல்லது உள்நுழையவும்.",
+        "directionsNoRegister": "உங்களிடம் கணக்கு இருந்தால் உள்நுழையவும்.",
+        "goButton": "போ",
+        "passphrase": "உங்கள் பாஸ் சொற்றொடரை உள்ளிடவும்:",
+        "loginButton": "தொடங்குங்கள்",
+        "registerButton": "தொடங்குங்கள்",
+        "resendButton": "செயல்படுத்தும் செய்தியை அனுப்பவும்",
+        "forgot": "மறந்துவிட்டதா?",
+        "resendConfirm": "உங்கள் கடவுச்சொற்றொடரை மீட்டமைக்க செய்தியை அனுப்ப விரும்புகிறீர்களா?",
+        "resendSuccess": "உங்கள் கடவுச்சொற்றொடரை மீட்டமைக்க ஒரு செய்தியைச் சரிபார்க்கவும்",
+        "resendClose": "நெருக்கமான",
+        "noPassphrase": "நீங்கள் உள்நுழைவதற்கு முன், உங்கள் செயல்படுத்தும் செய்தியில் உள்ள இணைப்பைக் கிளிக் செய்வதன் மூலம் கடவுச்சொல்லை அமைக்க வேண்டும்.",
+        "notVerified": "உள்நுழைய, செயல்படுத்தும் செய்தியை நீங்களே அனுப்ப வேண்டும்.",
+        "emailExists": "இதற்கு முன் இந்த மின்னஞ்சலில் பதிவு செய்ய முயற்சித்தீர்களா? அப்படியானால், உங்கள் கணக்கைச் செயல்படுத்த உங்கள் இன்பாக்ஸைச் சரிபார்க்கவும். <a href='#resend' class='Q_button Users_activation_resend'>செய்தியை மீண்டும் அனுப்ப கிளிக் செய்யவும்<\/a>",
+        "mobileExists": "இதற்கு முன் இந்த மொபைல் எண்ணில் பதிவு செய்ய முயற்சித்தீர்களா? அப்படியானால், உங்கள் கணக்கைச் செயல்படுத்த உங்கள் SMS ஐச் சரிபார்க்கவும். <a href='#resend' class='Q_button Users_activation_resend'>செய்தியை மீண்டும் அனுப்ப கிளிக் செய்யவும்<\/a>",
+        "usingOther": "அல்லது உங்களால் முடியும்",
+        "prompt": "உபயோகிப்பாளர் பெயரை தேர்ந்தெடு:",
+        "newUser": "அல்லது கீழே ஒரு புதிய கணக்கை உருவாக்கவும்",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "உங்கள் மொபைல் # அல்லது மின்னஞ்சல்",
+            "mobile": "உங்கள் மொபைலை உள்ளிடவும் #",
+            "email": "உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+            "username": "எழுத்துக்கள் மற்றும் எண்களை மட்டும் பயன்படுத்தவும்"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "சேவை விதிமுறைகளை ஏற்கவா?",
+        "facebookNoEmail": "உங்கள் facebook கணக்கில் உறுதிப்படுத்தப்பட்ட மின்னஞ்சல் முகவரி இல்லை. சொந்த வழியில் உள்நுழையவும்.",
+        "picTooltip": "இந்த படத்தை நீங்கள் பின்னர் மாற்றலாம்",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "{{timestamp}} நேரத்தில் {{host}} இல் உள்நுழைக",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Wallet க்கு திருப்பி விடப்படுகிறது",
+                "content": "இந்த உரையாடலை மூடியதும், உங்கள் பணப்பைக்கு அழைத்துச் செல்லப்படுவீர்கள். நீங்கள் உள்நுழைந்த பிறகு, இந்தப் பக்கத்திற்குத் திரும்பவும்."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "உள்நுழைவதற்கான வழியைச் சேர்க்கவும்",
+        "sendMessage": "செயல்படுத்தும் செய்தியை அனுப்பவும்",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "உங்கள் மொபைல் # அல்லது மின்னஞ்சலை உள்ளிடவும்",
+            "mobile": "உங்களுடைய கைபேசி எண்ணை உள்ளிடவும்",
+            "email": "உங்கள் மின்னஞ்சல் முகவரியை உள்ளிடவும்",
+            "username": "பயனர் பெயர்"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} கணக்கு",
+        "areUsing": "நீங்கள் {{platform}} ஐப் பயன்படுத்துகிறீர்கள்",
+        "noLongerUsing": "நீங்கள் இனி {{platform}} உடன் இணைக்கப்படவில்லை",
+        "doAuth": "இந்தக் கணக்கில் உள்நுழையவும்",
+        "doSwitch": "இந்தக் கணக்கிற்கு மாறவும்"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "உரிமையாளர்",
+        "Admin": "நிர்வாகம்",
+        "Member": "உறுப்பினர்",
+        "Guest": "விருந்தினர்",
+        "Host": "தொகுப்பாளர்"
     }
 }

@@ -4,44 +4,44 @@
         "button": "Націсніце, каб аплаціць"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: зарад апрацоўваецца для {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Дзякуй за ваш плацёж да {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} падпісаўся {{plan.title}}",
-        "YouSubscribedTo": "Вы падпісаліся на {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: плата апрацавана на {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Дзякуй за ваш плацёж на адрас {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} падпісаўся на {{plan.title}}",
+        "YouSubscribedTo": "Вы былі падпісаныя на {{plan.title}}"
     },
     "payment": {
         "AboutOrder": "Інфармацыя пра заказ",
         "PaymentMethod": "Спосаб аплаты",
         "ContactInfo": "Кантактная інфармацыя",
-        "Pay": "Плацяць"
+        "Pay": "Плаціць"
     },
     "credits": {
-        "InviteAcceptedBy": "Запрашэнне прынятае {{1}}",
-        "YouHaveCreditsToStart": "Для вас {{1}} крэдытаў",
+        "InviteAcceptedBy": "Запрашэнне прынята {{invitedUserName}}",
+        "YouHaveCreditsToStart": "У вас ёсць {{amount}} крэдытаў для пачатку",
         "PaymentFor": "Аплата за &quot;{{1}}&quot;",
         "PaymentTo": "Аплата {{1}}",
-        "PaymentToUser": "Аплата {{userName}}",
-        "JoinedPaidStream": "за далучэнне да &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "для стварэння суполкі &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "за ад&#39;езд &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "PaymentToUser": "Аплата {{toUserName}}",
+        "JoinedPaidStream": "для браніравання ў &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "за стварэнне суполкі &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "як вяртанне сродкаў за браніраванне ў &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
         "BoughtCredits": "Купіў {{amount}} крэдытаў",
-        "BuyAmountCredits": "Купі {{amount}} крэдытаў",
-        "MissingCredits": "Зніклыя крэдыты",
-        "YouMissingCredits": "Вам не хапае {{amount}} крэдытаў",
+        "BuyAmountCredits": "Купіце крэдыты на {{amount}}",
+        "MissingCredits": "Адсутнічаюць крэдыты",
+        "YouMissingCredits": "Вам патрэбны дадатковыя {{amount}} крэдытаў, каб працягнуць.",
         "BuyCredits": "Купляйце крэдыты",
-        "Buy": "Купляйце",
+        "Buy": "Купіць",
         "Credits": "Крэдыты",
         "ErrorInvalidAmount": "Сума несапраўдная",
         "ErrorInvalidCurrency": "На жаль, мы пакуль не падтрымліваем валюту {{currency}}",
-        "WatchClip": "Зароблена {{amount}} крэдытаў за прагляд {{fromStreamTitle}}",
-        "PurchaseCredits": "Пакупка крэдытаў",
+        "WatchClip": "Атрымана {{amount}} крэдытаў за прагляд {{fromStreamTitle}}",
+        "PurchaseCredits": "Купля крэдытаў",
         "forMessages": {
             "BoughtCredits": "{{amount}} крэдытаў",
             "BonusCredits": "{{amount}} крэдытаў"
         },
         "CreatePaidStream": "для стварэння {{toStreamName}}",
-        "BonusCredits": "Бонусныя крэдыты {{amount}}",
-        "BuyBonus": "Купля адразу {{amount}} крэдытаў прывядзе да бонусу крэдытаў {{bonus}}.",
+        "BonusCredits": "Бонусныя {{amount}} крэдыты",
+        "BuyBonus": "Купля адразу {{amount}} крэдытаў прывядзе да {{bonus}} бонуса крэдытаў.",
         "Streams_user_firstname": "{{invitedUserName}} увёў імя",
         "Streams_user_lastname": "{{invitedUserName}} увёў прозвішча",
         "Streams_user_icon": "{{invitedUserName}} уведзены значок",
@@ -53,31 +53,31 @@
         "Amount": "Сума",
         "Description": "Апісанне",
         "Client": "Кліент",
-        "To": "да",
+        "To": "каб",
         "From": "ад",
         "HistoryEmpty": "У вас пакуль няма дадзеных",
-        "SeeHistory": "Глядзіце гісторыю плацяжоў для {{1}}",
-        "PaymentFor": "Выдаткаваны {{amount}} крэдытаў",
-        "PaymentTo": "Высланы {{amount}} крэдытаў",
-        "PaymentToUser": "Высланы {{amount}} крэдытаў",
+        "SeeHistory": "Глядзіце гісторыю плацяжоў за {{1}}",
+        "PaymentFor": "Адпраўлена {{amount}} крэдытаў",
+        "PaymentTo": "Адпраўлена {{amount}} крэдытаў",
+        "PaymentToUser": "Адпраўлена {{amount}} крэдытаў",
         "JoinedPaidStream": {
-            "+": "Зарабіў {{amount}} крэдытаў",
-            "-": "Выдаткаваны {{amount}} крэдытаў"
+            "+": "Атрымана {{amount}} крэдытаў",
+            "-": "Вытрачана {{amount}} крэдытаў"
         },
         "LeftPaidStream": {
-            "+": "Атрымаў {{amount}} крэдытаў",
-            "-": "Высланы {{amount}} крэдытаў"
+            "+": "Атрымана {{amount}} крэдытаў",
+            "-": "Адпраўлена {{amount}} крэдытаў"
         },
-        "CreatedCommunity": "Выдаткаваны {{amount}} крэдытаў",
+        "CreatedCommunity": "Вытрачана {{amount}} крэдытаў",
         "BoughtCredits": "Купіў {{amount}} крэдытаў",
-        "InviteAcceptedBy": "Зарабіў {{amount}} крэдытаў",
-        "YouHaveCreditsToStart": "Зарабіў {{amount}} крэдытаў",
-        "CreatePaidStream": "Вытрачаны {{amount}} крэдытаў",
+        "InviteAcceptedBy": "Атрымана {{amount}} крэдытаў",
+        "YouHaveCreditsToStart": "Атрымана {{amount}} крэдытаў",
+        "CreatePaidStream": "Вытрачана {{amount}} крэдытаў",
         "WatchClip": {
-            "+": "Зарабілі {{amount}} крэдытаў",
-            "-": "Вытрачаны {{amount}} крэдытаў"
+            "+": "Атрымана {{amount}} крэдытаў",
+            "-": "Вытрачана {{amount}} крэдытаў"
         },
-        "BonusCredits": "Атрымаў бонус {{amount}} крэдытаў",
+        "BonusCredits": "Атрымаў бонусныя {{amount}} крэдытаў",
         "Streams_user_firstname": "Атрымана {{amount}} крэдытаў",
         "Streams_user_lastname": "Атрымана {{amount}} крэдытаў",
         "Streams_user_icon": "Атрымана {{amount}} крэдытаў",
@@ -88,23 +88,23 @@
         "infoTitle": "Усталюйце інфармацыю аб аплаце",
         "confirm": {
             "title": "Пачаць падпіску",
-            "message": "Жадаеце падпісацца на {{title}}?",
+            "message": "Вы жадаеце падпісацца на {{title}}?",
             "ok": "добра",
             "cancel": "Адмяніць"
         },
-        "CreditOrDebitCard": "Крэдытная ці дэбетавая карта",
-        "SubscribePayment": "Падпісацца на аплату",
+        "CreditOrDebitCard": "Крэдытная або дэбетавая карта",
+        "SubscribePayment": "Аплата падпіскі",
         "ImmediatePayment": "Неадкладная аплата"
     },
     "payments": {
         "infoTitle": "Усталюйце інфармацыю аб аплаце",
         "confirm": {
-            "title": "Зрабіце плацёж",
-            "message": "Ці згодныя вы плаціць {{symbol}} {{amount}}?",
+            "title": "Зрабіце аплату",
+            "message": "Ці згодныя вы аплаціць {{symbol}}{{amount}}?",
             "ok": "добра",
             "cancel": "Адмяніць"
         },
-        "BuyAmountCredits": "Купі {{amount}} крэдытаў"
+        "BuyAmountCredits": "Купіце крэдыты на {{amount}}"
     },
     "types": {
         "Assets\/credits": {
@@ -112,7 +112,7 @@
             "description": "адсочвае крэдыты і плацяжы"
         },
         "Assets\/plan": {
-            "displayType": "План субсідыі",
+            "displayType": "Абанементны план",
             "description": "план падпіскі"
         },
         "Assets\/subscription": {
@@ -121,58 +121,58 @@
         },
         "Assets\/product": {
             "displayType": "Прадукт",
-            "description": "тавар прадаецца"
+            "description": "прадукт, які прадаецца"
         },
         "Assets\/service": {
-            "displayType": "Служба",
-            "description": "прапануецца паслуга"
+            "displayType": "Абслугоўванне",
+            "description": "паслуга, якая прапануецца"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Зарабіў {{amount}} крэдытаў"
+            "content": "Атрымана {{amount}} крэдытаў"
         },
         "Assets\/credits\/spent": {
-            "content": "Выдаткаваны {{amount}} крэдытаў"
+            "content": "Вытрачана {{amount}} крэдытаў"
         },
         "Assets\/credits\/sent": {
-            "content": "Высланы {{amount}} крэдытаў"
+            "content": "Адпраўлена {{amount}} крэдытаў на {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Атрымаў {{amount}} крэдытаў"
+            "content": "Атрымана {{amount}} крэдытаў ад {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
             "content": "Купіў {{amount}} крэдытаў"
         },
         "Assets\/credits\/bonus": {
-            "content": "Бонусныя крэдыты {{amount}}"
+            "content": "Бонусныя {{amount}} крэдыты"
         }
     },
     "charge": {
-        "Subject": "Вы атрымліваеце аплату {{displayAmount}} ад {{call 'publisher.displayName'}} праз &quot;{{description}}&quot;",
-        "HasBeenCharged": "Эй, гэта проста, каб паведаміць вам, што {{1}} {{3}} быў спагнаны {{4}}."
+        "Subject": "Вы атрымліваеце аплату {{displayAmount}} ад {{call 'publisher.displayName'}} ад &quot;{{description}}&quot;",
+        "HasBeenCharged": "Гэй, гэта проста для таго, каб паведаміць вам, што {{1}} быў спагнаны {{2}} за {{3}} з {{4}}"
     },
     "charged": {
-        "Subject": "Дзякуем вам за плату за &quot;{{description}}&quot;",
-        "HavePaid": "Эй, {{1}}, гэта проста хуткае пацверджанне таго, што ты паспяхова заплаціў {{2}} да {{3}} за {{4}}"
+        "Subject": "Дзякуй за аплату за &quot;{{description}}&quot;",
+        "HavePaid": "Гэй, {{1}}, гэта простае пацвярджэнне таго, што вы паспяхова аплацілі {{2}} {{3}} за {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Новая паслуга",
+            "Title": "Новы сэрвіс",
             "TitlePlaceholder": "Назва службы",
-            "PricePlaceholder": "Усталюйце цану",
-            "LinkPlaceholder": "ўсталяваць дадатковую інфармацыйную спасылку",
+            "PricePlaceholder": "Устанавіць цану",
+            "LinkPlaceholder": "ўсталяваць спасылку на дадатковую інфармацыю",
             "DescriptionPlaceholder": "Апісанне паслугі",
-            "SaveService": "Захаваць сэрвіс",
+            "SaveService": "Сэрвіс захавання",
             "SelectRequiredParticipants": "Абавязковыя ўдзельнікі"
         },
-        "ManageServiceTemplates": "Кіраванне службовымі шаблонамі",
+        "ManageServiceTemplates": "Кіраванне шаблонамі сэрвісаў",
         "ManageServices": "Кіраванне паслугамі",
         "FreeEvent": "Бясплатнае мерапрыемства",
-        "OptionalContribution": "Неабавязковы ўклад",
-        "RequiredPayment": "Абавязковы плацеж",
-        "AreYouSureDelete": "Вы ўпэўнены, што хочаце выдаліць гэтую паслугу?",
-        "AmountServicesRelated": "Ёсць {{amount}} даступнасць, звязаная з гэтай паслугай. Яны таксама будуць выдаленыя.",
+        "OptionalContribution": "Дадатковы ўклад",
+        "RequiredPayment": "Абавязковая аплата",
+        "AreYouSureDelete": "Вы ўпэўнены, што жадаеце выдаліць гэты сэрвіс?",
+        "AmountServicesRelated": "Ёсць {{amount}} даступнасці, звязаныя з гэтай паслугай. Яны таксама будуць выдаленыя.",
         "Free": "Бясплатна"
     },
     "NFT": {

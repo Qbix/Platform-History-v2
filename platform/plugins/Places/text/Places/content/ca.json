@@ -8,7 +8,7 @@
         "meter": "metre",
         "meters": "metres",
         "kilometer": "quilòmetre",
-        "kilometers": "kiòmetres",
+        "kilometers": "quiòmetres",
         "km": "km",
         "mile": "milla",
         "miles": "milles",
@@ -18,70 +18,70 @@
         "inches": "polzades"
     },
     "location": {
-        "interested": "M&#39;interessa que les coses tinguin lloc a {{select}} de",
-        "update": "Actualitzeu la meva ubicació",
-        "prompt": "{{ClickOrTap}} aquí <br> establiu el vostre <br> ubicació",
+        "interested": "M&#39;interessen les coses que tenen lloc dins de {{select}}",
+        "update": "Actualitza la meva ubicació",
+        "prompt": "{{ClickOrTap}} aquí per<br> configura el teu<br> ubicació",
         "myCurrentLocation": "La meva ubicació actual",
         "enterAddress": "Introduïu una adreça",
-        "enterPostcode": "Introduïu el codi postal \/ codi postal",
+        "enterPostcode": "Introduïu el vostre codi postal\/codi postal",
         "create": {
             "action": "Afegeix una ubicació",
-            "title": "Nova ubicació",
-            "nameYourLocation": "Anomeneu la vostra ubicació"
+            "title": "Nova Ubicació",
+            "nameYourLocation": "Anomena la teva ubicació"
         },
         "confirm": {
-            "title": "Voleu desar aquesta ubicació?",
-            "message": "Voleu tornar a utilitzar aquesta ubicació en el futur?",
+            "title": "Vols desar aquesta ubicació?",
+            "message": "Teniu previst tornar a utilitzar aquesta ubicació en el futur?",
             "ok": "Sí",
             "cancel": "No"
         },
         "add": {
-            "title": "Anomeneu aquesta ubicació",
-            "placeholder": "Inici, Treball, etc.",
+            "title": "Anomena aquesta ubicació",
+            "placeholder": "Casa, Treball, etc.",
             "ok": "Desa"
         },
         "dialog": {
-            "title": "Trieu la ubicació"
+            "title": "Trieu Ubicació"
         },
-        "set": "Establiu la meva ubicació"
+        "set": "Estableix la meva ubicació"
     },
     "areas": {
-        "filterPlaceholder": "Hi ha cap àrea dins d’aquesta ubicació?",
-        "newArea": "Nova àrea",
-        "promptTitle": "Introduïu un nom per a la zona:",
-        "absent": "Indiqueu l’àrea",
+        "filterPlaceholder": "Alguna zona dins d&#39;aquesta ubicació?",
+        "newArea": "Zona nova",
+        "promptTitle": "Introduïu un nom per a l&#39;àrea:",
+        "absent": "Si us plau, defineix l&#39;àrea",
         "error": "Error",
-        "exist": "L&#39;àrea ja existeix",
-        "addNewArea": "Afegeix una àrea nova",
+        "exist": "Zona ja existeix",
+        "addNewArea": "Afegeix una nova àrea",
         "add": "Afegeix"
     },
     "types": {
         "Places\/locations": {
-            "description": "una col·lecció d’ubicacions",
+            "description": "una col·lecció d&#39;ubicacions",
             "displayType": "Ubicacions"
         },
         "Places\/location": {
-            "description": "Representa un edifici, seu, nau, parc, etc.",
+            "description": "Representa un edifici, un local, un vaixell, un parc, etc.",
             "displayType": "Ubicació"
         },
         "Places\/area": {
-            "description": "Representa una zona dins d’una ubicació, com ara una habitació o suite",
+            "description": "Representa una àrea dins d&#39;una ubicació, com ara una habitació o una suite",
             "displayType": "Àrea"
         },
         "Places\/floor": {
-            "description": "Representa un pis en un edifici o nau",
-            "displayType": "Sòl"
+            "description": "Representa un pis en un edifici o vaixell",
+            "displayType": "Pis"
         },
         "Places\/column": {
-            "description": "Representa una columna en un edifici o nau",
+            "description": "Representa una columna en un edifici o vaixell",
             "displayType": "Columna"
         },
         "Places\/nearby": {
-            "description": "Categoria de coses a una certa distància d’un geohash",
-            "displayType": "A prop de llocs"
+            "description": "Categoria per a coses dins d&#39;una distància determinada d&#39;un geohash",
+            "displayType": "Llocs a prop"
         },
         "Places\/interest": {
-            "description": "Categoria per a coses que es trobin a una certa distància d&#39;un geohash, que coincideixi amb un interès",
+            "description": "Categoria per a coses dins d&#39;una distància determinada d&#39;un geohash, que coincideix amb un interès",
             "displayType": "Llocs d&#39;interès"
         }
     }

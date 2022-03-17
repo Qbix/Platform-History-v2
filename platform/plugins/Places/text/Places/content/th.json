@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "ภายใน {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "เมตร",
+        "meters": "เมตร",
+        "kilometer": "กิโลเมตร",
+        "kilometers": "กิโลเมตร",
+        "km": "กม.",
+        "mile": "ไมล์",
+        "miles": "ไมล์",
+        "mi": "มิ",
+        "foot": "เท้า",
+        "feet": "เท้า",
+        "inches": "นิ้ว"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "ฉันสนใจสิ่งต่างๆ ที่เกิดขึ้นภายใน {{select}} จาก",
+        "update": "อัปเดตตำแหน่งของฉัน",
+        "set": "ตั้งค่าตำแหน่งของฉัน",
+        "prompt": "{{ClickOrTap}} ที่นี่เพื่อ<br> ตั้งค่าของคุณ<br> ที่ตั้ง",
+        "myCurrentLocation": "ตำแหน่งปัจจุบันของฉัน",
+        "enterAddress": "ใส่ที่อยู่",
+        "enterPostcode": "กรุณาใส่รหัสไปรษณีย์ของคุณ \/ รหัสไปรษณีย์",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "เพิ่มสถานที่",
+            "title": "ที่ตั้งใหม่",
+            "nameYourLocation": "ตั้งชื่อที่ตั้งของคุณ"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "บันทึกสถานที่นี้ไหม",
+            "message": "คุณวางแผนที่จะใช้สถานที่นี้อีกในอนาคตหรือไม่?",
+            "ok": "ใช่",
+            "cancel": "ไม่"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "ตั้งชื่อสถานที่นี้",
+            "placeholder": "บ้าน ที่ทำงาน ฯลฯ",
+            "ok": "บันทึก"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "เลือกสถานที่"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "พื้นที่ใดภายในสถานที่นี้?",
+        "newArea": "พื้นที่ใหม่",
+        "promptTitle": "ป้อนชื่อสำหรับพื้นที่:",
+        "absent": "โปรดกำหนดพื้นที่",
+        "error": "ข้อผิดพลาด",
+        "exist": "มีพื้นที่อยู่แล้ว",
+        "addNewArea": "เพิ่มพื้นที่ใหม่",
+        "add": "เพิ่ม"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "แหล่งรวมสถานที่",
+            "displayType": "สถานที่"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "หมายถึง อาคาร สถานที่ เรือ สวนสาธารณะ ฯลฯ",
+            "displayType": "ที่ตั้ง"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "หมายถึงพื้นที่ภายในสถานที่ เช่น ห้องหรือห้องชุด",
+            "displayType": "พื้นที่"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "หมายถึงชั้นในอาคารหรือเรือ",
+            "displayType": "พื้น"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "หมายถึงเสาในอาคารหรือเรือ",
+            "displayType": "คอลัมน์"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "หมวดหมู่สำหรับสิ่งต่าง ๆ ภายในระยะทางที่กำหนดของ geohash",
+            "displayType": "สถานที่ใกล้เคียง"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "หมวดหมู่สำหรับสิ่งต่าง ๆ ภายในระยะทางที่กำหนดของ geohash ตรงกับความสนใจ",
+            "displayType": "สถานที่น่าสนใจ"
         }
     }
 }

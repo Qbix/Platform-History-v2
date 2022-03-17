@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "ප්‍රවර්ධනය කිරීමට සබැඳිය",
+                "startDate": "ආරම්භක දිනය",
+                "startTime": "ආරම්භක වේලාව",
+                "endDate": "අවසාන දිනය",
+                "endTime": "අවසන් කාලය",
+                "budget": "අයවැය"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "පොලී අනුව පෙරන්න",
+                "FilterInterests": "රුචියක් ටයිප් කිරීම අරඹන්න..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "උනන්දුව",
+            "Location": "ස්ථානය"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "යන්න",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
+            "BrowseTheWeb": "බ්‍රවුස් කරන්න",
+            "WriteToStartConversation": "සංවාදය ආරම්භ කිරීමට ඔබේ අදහස් ලියන්න",
+            "StartConversation": "සංවාදය ආරම්භ කරන්න",
+            "GotoConversation": "සංවාදය වෙත යන්න",
+            "reset": "යළි පිහිටුවන්න",
+            "edit": "සංස්කරණය කරන්න",
+            "link": "සබැඳිය",
+            "setUrl": "URL සකසන්න",
+            "save": "සුරකින්න",
             "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "invalidURL": "වලංගු නැති URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "ගොනුව හැඹිලිගත කිරීමට විශාල වැඩිය. උපරිම ගොනු ප්‍රමාණය {{size}}",
+        "InvalidPDF": "ගොනුව වලංගු PDF එකක් නොවේ",
+        "StartTypingTitleOrKeywords": "මාතෘකාව හෝ මූල පද ටයිප් කිරීම අරඹන්න..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "විවිධ පරිශීලකයින්ට බැලීමට සහ සංස්කරණය කළ හැකි HTML ලේඛනයක්",
+            "displayType": "ලිපිය"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "ඉදිරිපත් කිරීමක විනිවිදකයක්, HTML, ශ්‍රව්‍ය ආදිය ඇතුළත් කළ හැක.",
+            "displayType": "ස්ලයිඩය"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "විවිධ විනිවිදක වලින් සමන්විත ඉදිරිපත් කිරීමක්",
+            "displayType": "ඉදිරිපත් කිරීම"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "වෙබ් අඩවියක ප්‍රචාරණ ඒකකයක්",
+            "displayType": "දැන්වීම් ඒකකය"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "නමක් යටතේ ප්‍රචාරක ඒකක කාණ්ඩගත කිරීමේ ක්‍රමයක්",
+            "displayType": "දැන්වීම් ස්ථානගත කිරීම"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "වෙළඳ දැන්වීමක් සඳහා අන්තර්ගතය",
+            "displayType": "නිර්මාණශීලී දැන්වීම්"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "ප්‍රචාරණ ව්‍යාපාරයක්",
+            "displayType": "දැන්වීම් ව්‍යාපාරය"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "පාර-දත්ත සීරීමට ලක් වූ වෙබ් අඩවියක් නියෝජනය කරයි",
+            "displayType": "වෙබ් පිටුව"
         }
     }
 }

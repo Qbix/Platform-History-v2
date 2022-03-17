@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "ఈ కంటెంట్ మీ నుండి దాచబడింది."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "కొత్త వస్తువు"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "నేను ఆహ్వానించిన వ్యక్తులు",
+        "Streams\/invitedMe": "నన్ను ఎవరు ఆహ్వానించారు",
+        "DoYouAgree": "మీరు అంగీకరిస్తారా?",
+        "Yes": "అవును",
+        "No": "సంఖ్య"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "మీ ఆసక్తులు ఏమిటి?",
+        "CanAdd": "మీరు వెతుకుతున్నది ఇప్పటికీ కనుగొనలేకపోతే, మీరు దిగువన కొత్త ఆసక్తిని జోడించవచ్చు:",
+        "TrySynonyms": "చూడలేదా? కొన్ని పర్యాయపదాలను ప్రయత్నించండి.",
+        "AddUnderCategory": "వర్గం కింద జోడించండి...",
+        "Other": "ఇతర",
+        "Unlisted": "జాబితా చేయబడలేదు"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "అడ్మిన్ సమీక్ష కోసం సందేశం ఫ్లాగ్ చేయబడింది. అన్‌ఫ్లాగ్ చేయడానికి మళ్లీ నొక్కండి.",
+        "noOneSaid": "ఎవరూ ఏమీ అనలేదు",
+        "closeChatButton": "చాట్‌ని మూసివేయండి",
+        "closeChatConfirmTitle": "ఈ చాట్‌ని మూసివేయాలా?",
+        "closeChatConfirm": "మీరు ఖచ్చితంగా ఈ చాట్‌ని మూసివేయాలనుకుంటున్నారా?",
+        "Subscribed": "నోటిఫికేషన్‌లు ప్రారంభించబడ్డాయి",
+        "Unsubscribed": "నోటిఫికేషన్‌లు మ్యూట్ చేయబడ్డాయి",
+        "closeChatConfirmYes": "అవును",
+        "closeChatConfirmNo": "సంఖ్య",
+        "earlierComments": "మునుపటి వ్యాఖ్యలు",
+        "startedConversation": "సంభాషణను ప్రారంభించాడు",
+        "RealTimeCall": "రియల్ టైమ్ కాల్",
+        "SearchByName": "పేరు ద్వారా శోధించండి",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} చాట్‌ని సందర్శిస్తున్నారు",
+            "Join": "{{displayName}} చాట్‌లో చేరారు",
+            "Leave": "{{displayName}} చాట్ నుండి నిష్క్రమించారు",
+            "RelatedTo": "{{displayName}} {{stream.displayType}}ని ప్రారంభించింది"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "మీ ఇమెయిల్ సభ్యత్వాలను నిర్వహించండి",
+        "IfUnsubscribe": "మీరు చందాను తీసివేయాలనుకుంటే",
+        "*": "{{& stream.fields.title}}కి {{& message.fields.type}} సందేశం పంపండి",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} చెప్పారు: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}}లో మార్పులు",
+        "Streams\/invite": "మీరు {{& stream.fields.title}}కి ఆహ్వానించబడ్డారు",
+        "Streams\/announcement": "{{& stream.fields.title}}లో ప్రకటన",
+        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}}లో యాక్సెస్‌ని మార్చారు",
+        "Streams\/chat\/edit": "చాట్ సందేశం {{& stream.fields.title}}లో సవరించబడింది",
+        "Streams\/chat\/remove": "{{& stream.fields.title}}లో చాట్ సందేశం తీసివేయబడింది",
+        "Streams\/closed": "{{stream.fields.title}} మూసివేయబడింది",
+        "Streams\/task\/progress": "{{stream.fields.title}}లో పురోగతి సాధించబడింది",
+        "Streams\/task\/complete": "పని పూర్తయింది: {{stream.fields.title}}",
+        "Streams\/task\/error": "ఈ సమయంలో లోపం: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: ఇన్‌కమింగ్ మెసేజ్",
+        "Streams\/relatedTo\/Streams\/call": "కొత్త కాల్ {{toTitle}}లో ప్రారంభించబడింది",
+        "Streams\/relatedTo\/*": "{{toTitle}}లో కొత్త {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}}కి {{relationDisplayType}}గా జోడించబడింది",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} మిమ్మల్ని వ్యాఖ్యలో పేర్కొన్నారు",
+        "Streams\/call": "{{displayName}} నిజ-సమయ కాల్‌ని ప్రారంభించారు"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "ఆహ్వానించండి",
+        "messageContent": "{{displayName}} మిమ్మల్ని {{inviteUrl}}కి ఆహ్వానించారు",
+        "youCanNowPaste": "వ్యక్తులను ఆహ్వానించడానికి మీరు ఇప్పుడు ఈ లింక్‌ని ఎక్కడైనా అతికించవచ్చు",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "మీ పరిచయాల నుండి ఎంచుకోండి",
+            "chooseAgainFromContacts": "పరిచయాల నుండి మళ్లీ ఎంచుకోండి",
+            "inviteSelectedContacts": "ఎంచుకున్న పరిచయాలను ఆహ్వానించండి",
+            "selectFromContacts": "పరిచయాల నుండి ఎంచుకోండి",
+            "userChooserPlaceholder": "పేరు ద్వారా శోధించండి",
+            "photo": "ఒక ఫోటో తీసుకుని",
+            "photoInstruction": "మీ QR కోడ్‌ని స్కాన్ చేసిన వ్యక్తి మీ ముందు ఉంటే, వారి ఫోటో తీయండి",
+            "to": "వీరికి: {{Stream Title}}",
+            "go": "వెళ్ళండి",
+            "title": "ఆహ్వానించండి",
+            "placeholder": "మొబైల్ నంబర్ లేదా ఇమెయిల్ చిరునామా",
+            "orInvite": "లేదా ఉపయోగించి వ్యక్తులను ఆహ్వానించండి:",
+            "copyLink": "ఆహ్వాన లింక్‌ని కాపీ చేయడానికి {{ClickOrTap}}",
+            "shareOrCopyLink": "ఆహ్వాన లింక్‌ని భాగస్వామ్యం చేయడానికి లేదా కాపీ చేయడానికి {{ClickOrTap}}",
+            "QR": "QR కోడ్‌ని రూపొందించడానికి {{ClickOrTap}}",
+            "QRtitle": "ఈ QR కోడ్‌ని స్కాన్ చేయండి",
+            "QRscanned": "వారు దానిని స్కాన్ చేసారు!",
+            "scannedQR": "{{ClickOrTap}} కోడ్ స్కాన్ చేయబడితే",
+            "byEmail": "ఇమెయిల్",
+            "byText": "వచనం",
+            "byFacebook": "ఫేస్బుక్",
+            "byTwitter": "ట్విట్టర్"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "హే, దీన్ని తనిఖీ చేయండి",
+            "PleaseVisitLink": "దయచేసి క్రింది లింక్‌ని సందర్శించండి:",
+            "InvitingYou": "నేను మిమ్మల్ని {{title}}కి ఆహ్వానిస్తున్నాను",
+            "HasInvitedYou": "{{displayName}} మిమ్మల్ని {{title}}కి ఆహ్వానించారు",
+            "HasMentionedYou": "{{displayName}} మిమ్మల్ని &quot;{{title}}&quot;లో పేర్కొన్నారు",
+            "YOUAREINVITED": "మీరు ఆహ్వానించబడ్డారు!",
+            "AcceptInvite": "ఆహ్వానాన్ని ఆమోదించండి"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "మీరు {{title}}కి ఆహ్వానించబడ్డారు. దయచేసి {{url}} నొక్కండి"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "మీరు ఆహ్వానించబడ్డారు. అంగీకరించడానికి మరియు చేరడానికి {{ClickOrTap}} ఇక్కడ ఉంది."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "{{stream.fields.title}}కి { <em>{999}}<\/em> సందేశాన్ని పోస్ట్ చేసారు"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "అని వ్యాఖ్యానించారు",
+            "startedCallIn": "ఒక కాల్ ప్రారంభించింది",
+            "in": "లో",
+            "body": "{{& url}}లో: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "కు పోస్ట్ చేయబడింది",
+                "byAvatar": "{{avatar.displayName}} ద్వారా"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "కొత్త {{instructions.fromDisplayType}}ని కలిగి ఉంది",
+                "byAvatar": "జోడించినది {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "మీ స్నేహితులు ఇంకా గుర్తించని మా నంబర్ నుండి ఆహ్వానాలు పంపబడ్డాయి. మీ నుండి ఆహ్వానం వచ్చిందని వారికి తెలియజేయడానికి శీఘ్ర వచనాన్ని అనుసరించండి, లింక్‌పై క్లిక్ చేయమని వారిని అడుగుతుంది.",
+            "confirm": "మీ స్నేహితులు ఇంకా గుర్తించని మా నంబర్ నుండి ఆహ్వానాలు పంపబడ్డాయి. మీ నుండి ఆహ్వానం వచ్చిందని వారికి తెలియజేయడానికి మీరు శీఘ్ర వచనాన్ని అనుసరించాలనుకుంటున్నారా, లింక్‌పై క్లిక్ చేయమని వారిని అడుగుతున్నారు.",
+            "check": "హే, నేను మీకు {{app}} యాప్‌కి ఆహ్వానం పంపాను. దయచేసి మీ smsని తనిఖీ చేసి, లింక్‌పై క్లిక్ చేయండి!",
+            "CheckYourMobile": "దయచేసి SMSని తనిఖీ చేయండి మరియు సూచనలను అనుసరించండి!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "మీ స్నేహితులు ఇంకా గుర్తించని మా డొమైన్ నుండి ఆహ్వానాలు పంపబడ్డాయి. మీ నుండి ఆహ్వానం వచ్చిందని వారికి తెలియజేయడానికి శీఘ్ర వచనాన్ని అనుసరించండి, లింక్‌పై క్లిక్ చేయమని వారిని అడుగుతుంది.",
+            "confirm": "మీ స్నేహితులు ఇంకా గుర్తించని మా డొమైన్ నుండి ఆహ్వానాలు పంపబడ్డాయి. మీ నుండి ఆహ్వానం వచ్చిందని వారికి తెలియజేయడానికి మీరు శీఘ్ర వచనాన్ని అనుసరించాలనుకుంటున్నారా, లింక్‌పై క్లిక్ చేయమని వారిని అడుగుతున్నారు.",
+            "subject": "మీకు ఆహ్వానం వచ్చిందా?",
+            "body": "హే, నేను మీకు {{app}} యాప్‌కి ఆహ్వానం పంపాను. దయచేసి మీ ఇమెయిల్‌ని తనిఖీ చేసి, అక్కడ ఉన్న లింక్‌పై క్లిక్ చేయండి!",
+            "CheckYourEmail": "దయచేసి మీ ఇమెయిల్‌ను తనిఖీ చేయండి మరియు సూచనలను అనుసరించండి!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "శీర్షిక",
+        "Subscribed": "సభ్యత్వం పొందారు",
+        "Participants": "పాల్గొనేవారు",
+        "AreYouSureRemoveIdentifier": "మీరు ఈ ఐడెంటిఫైయర్‌ని ఖచ్చితంగా తీసివేయాలనుకుంటున్నారా?",
+        "AreYouSureUnsubscribeIdentifier": "మీరు ఖచ్చితంగా ఈ ఐడెంటిఫైయర్‌ని అన్‌సబ్‌స్క్రయిబ్ చేస్తారా? ఇది ఈ ఐడెంటిఫైయర్‌కి నోటిఫికేషన్‌లను ఆఫ్ చేస్తుంది.",
+        "AreYouSureUnsubscribeDevice": "మీరు ఖచ్చితంగా ఈ పరికరాన్ని అన్‌సబ్‌స్క్రైబ్ చేస్తారా? ఇది ఈ పరికరానికి నోటిఫికేషన్‌లను ఆఫ్ చేస్తుంది.",
+        "AreYouSureRemoveParticipant": "మీరు ఖచ్చితంగా ఈ పార్టిసిపెంట్‌ని తీసివేయాలనుకుంటున్నారా?",
+        "RemoveParticipant": "పాల్గొనేవారిని తీసివేయండి",
+        "Identifiers": "ఐడెంటిఫైయర్లు",
+        "Devices": "పరికరాలు",
+        "Streams": "ప్రవాహాలు"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "ఈ స్ట్రీమ్‌లో చేరడానికి మీకు అనుమతి లేదు.",
+        "streamTitle": "{{1}} ప్రత్యక్ష కాల్‌ని ప్రారంభించారు",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "కనెక్ట్ అవుతోంది",
+            "microphoneBtn": "మైక్రోఫోన్‌ని ప్రారంభించండి",
+            "cameraBtn": "కెమెరాను ప్రారంభించండి",
+            "cameraAndMicrophoneBtn": "కెమెరా మరియు మైక్రోఫోన్‌ను ప్రారంభించండి"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "మైక్ ఆఫ్‌లో ఉంది",
+            "micIsOn": "మైక్ ఆన్‌లో ఉంది",
+            "cameraIsOff": "కెమెరా ఆఫ్‌లో ఉంది",
+            "cameraIsOn": "కెమెరా ఆన్‌లో ఉంది",
+            "screenSharingIsOn": "స్క్రీన్ షేరింగ్ ఆన్‌లో ఉంది",
+            "screenSharingIsOff": "స్క్రీన్ షేర్ చేయండి",
+            "joinNow": "కాల్‌లో చేరండి"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "సూచనలు",
+            "permissionDenied": "{{kind}}కి అనుమతి నిరాకరించబడింది. దీన్ని ఉపయోగించడానికి దయచేసి ఈ దశలను అనుసరించండి:",
+            "point1": "&quot;సెట్టింగ్‌లు&quot; -&gt; &quot;అధునాతన&quot; -&gt; &quot;గోప్యత మరియు భద్రత&quot; -&gt; &quot;సైట్ సెట్టింగ్‌లు&quot; -&gt; &quot;కెమెరా&quot; లేదా &quot;సైట్ సెట్టింగ్‌లు&quot; -&gt; &quot;మైక్రోఫోన్&quot;కి వెళ్లండి",
+            "point2": "&quot;బ్లాక్&quot; జాబితా నుండి {{hostname}}ని తీసివేయండి"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "సూచనలు",
+            "permissionDenied": "{{kind}}కి అనుమతి నిరాకరించబడింది. దయచేసి ఈ పేజీని మళ్లీ లోడ్ చేయండి మరియు కాన్ఫరెన్స్‌లో చేరడానికి {{kind}}కి ప్రాప్యతను నిర్ధారించండి."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "సూచనలు",
+            "permissionDenied": "{{kind}}కి అనుమతి నిరాకరించబడింది. దీన్ని ఉపయోగించడానికి దయచేసి ఈ దశలను అనుసరించండి:",
+            "point1": "మీ Android సెట్టింగ్‌లకు వెళ్లండి",
+            "point2": "&quot;యాప్‌లు &amp; నోటిఫికేషన్‌లు&quot; తెరవండి",
+            "point3": "&quot;{{communityName}}&quot;ని కనుగొని, దాన్ని తెరవండి",
+            "point4": "అనుమతులపై నొక్కండి",
+            "point5": "ప్రారంభించు {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "సూచనలు",
+            "permissionDenied": "{{kind}}కి అనుమతి నిరాకరించబడింది. దీన్ని ఉపయోగించడానికి దయచేసి ఈ దశలను అనుసరించండి:",
+            "point1": "మీ iOS సెట్టింగ్‌లకు వెళ్లండి",
+            "point2": "&quot;గోప్యత&quot; తెరవండి",
+            "point3": "{{kind}}ని కనుగొని, దాన్ని తెరవండి",
+            "point4": "&quot;{{communityName}}&quot;ని కనుగొని, ప్రారంభించండి"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "మీరు గదిలోకి చేరారు",
+            "joining": "చేరుతున్నారు: {{userName}}",
+            "sbLeftRoom": "{{userName}} గది నుండి నిష్క్రమించారు",
+            "switchingRoom": "గది మారుతోంది...",
+            "forceDisconnecting": "మీరు 5 సెకన్లలో డిస్‌కనెక్ట్ చేయబడతారు",
+            "forceDisconnectingImmediately": "మీరు హోస్ట్ ద్వారా డిస్‌కనెక్ట్ చేయబడ్డారు",
+            "youLeftRoom": "మీరు గది నుండి వెళ్లిపోయారు",
+            "codeCopied": "మీరు గది నుండి వెళ్లిపోయారు",
+            "sbBeganFbLive": "{{userName}} ఈ కాల్‌ని Facebookలో ప్రసారం చేయడం ప్రారంభించింది",
+            "sbStoppedFbLive": "{{userName}} Facebookలో ఈ కాల్‌ని ప్రసారం చేయడం ఆపివేసింది",
+            "youBeganFbLive": "మీరు Facebookలో ఈ కాల్‌ని ప్రసారం చేయడం ప్రారంభించారు",
+            "youStoppedFbLive": "మీరు Facebookలో ఈ కాల్‌ని ప్రసారం చేయడం ఆపివేశారు",
+            "youStartedLive": "మీరు ఈ కాల్‌ని అనుకూల RTMPకి ప్రసారం చేయడం ప్రారంభించారు",
+            "youStoppedLive": "మీరు ఈ కాల్‌ని అనుకూల RTMPకి ప్రసారం చేయడాన్ని ఆపివేశారు",
+            "sbStartedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ప్రారంభమైంది",
+            "sbStoppedLiveStreaming": "{{userName}} ప్రత్యక్ష ప్రసారం ముగిసింది",
+            "liveStopped": "ఎండ్‌పాయింట్‌కి వీడియోను పంపుతున్నప్పుడు లోపం సంభవించింది",
+            "youBeganVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం ప్రారంభించారు",
+            "youStoppedVideoRecording": "మీరు ఈ సమావేశాన్ని రికార్డ్ చేయడం ఆపివేశారు",
+            "linkCopiedToCb": "లింక్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది",
+            "codeCopiedToCb": "కోడ్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది",
+            "userHasNoVideo": "పాల్గొనేవారి వద్ద వీడియో లేదు",
+            "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ని తెరవండి."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "వీడియో సెట్టింగ్‌లు",
+            "webCamera": "వెబ్ కెమెరా",
+            "screenSharing": "స్క్రీన్ భాగస్వామ్యం",
+            "shareAnotherScreen": "మరొక స్క్రీన్‌ని షేర్ చేయండి",
+            "turnOffCameras": "కెమెరాను ఆఫ్ చేయండి",
+            "turnOffVideo": "కెమెరా\/స్క్రీన్ షేరింగ్‌ని ఆఫ్ చేయండి",
+            "turnOffAudioInput": "మైక్రోఫోన్‌ను మ్యూట్ చేయండి",
+            "turnOffScreenSharing": "స్క్రీన్ షేరింగ్‌ని ఆఫ్ చేయండి",
+            "cameraIsTurnedOff": "కెమెరా ఆఫ్ చేయబడింది",
+            "micIsTurnedOff": "మైక్రోఫోన్ ఆఫ్ చేయబడింది",
+            "startFBLive": "Facebook ప్రత్యక్ష ప్రసారాన్ని ప్రారంభించండి",
+            "stopFBLive": "ఫేస్బుక్ లైవ్ స్ట్రీమ్ను ఆపండి",
+            "startRecording": "రికార్డింగ్ ప్రారంభించండి",
+            "stopRecording": "రికార్డింగ్ ఆపివేయండి",
+            "start": "ప్రారంభించండి",
+            "stop": "ఆపు",
+            "recordingInProgress": "రికార్డింగ్ ప్రోగ్రెస్‌లో ఉంది...",
+            "fbLiveTitle": "ప్రత్యక్ష ప్రసారం యొక్క శీర్షిక",
+            "fbLiveDescription": "మీ ప్రత్యక్ష ప్రసారాన్ని వివరించండి. ఇది దేని గురించి?",
+            "fbOnlyMeLiveAccess": "నేనొక్కడినే",
+            "fbFriendsAccess": "స్నేహితులు",
+            "fbPublicAccess": "ప్రజా",
+            "publishOnTimeline": "టైమ్‌లైన్‌లో ప్రచురించండి",
+            "publishToGroup": "సమూహానికి ప్రచురించండి",
+            "fbStartLive": "ప్రత్యక్ష ప్రసారం చేయి",
+            "fbStopLive": "ప్రత్యక్ష ప్రసారాన్ని ముగించండి",
+            "streamingSettings": "సెట్టింగ్‌లు",
+            "fbEmbedCode": "పొందుపరచండి",
+            "copy": "కాపీ చేయండి",
+            "streamToRTMP": "అనుకూల RTMPకి ప్రసారం చేయండి",
+            "startBroadcasting": "ప్రసారాన్ని ప్రారంభించండి",
+            "broadcastingInProgress": "ప్రసారం జరుగుతోంది"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "ఆడియో సెట్టింగ్‌లు",
+            "speakers": "స్పీకర్లు",
+            "microphone": "మైక్రోఫోన్"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "పాల్గొనేవారి సెట్టింగ్‌లు",
+            "disconnect": "డిస్‌కనెక్ట్ చేయండి",
+            "floatingScreens": "తేలియాడే తెరలు",
+            "tiledScreens": "టైల్డ్ స్క్రీన్‌లు",
+            "loudestExceptMe": "నేను తప్ప బిగ్గరగా",
+            "maximizeLoudest": "బిగ్గరగా పెంచండి",
+            "staticMaximized": "స్టాటిక్ గరిష్టీకరించబడింది",
+            "fullScreen": "పూర్తి స్క్రీన్",
+            "manual": "మాన్యువల్",
+            "turnOffCamera": "వీడియోను దాచు",
+            "turnOffAudio": "ఆడియోను మ్యూట్ చేయండి",
+            "turnOffScreenSharing": "స్క్రీన్ షేరింగ్‌ని దాచండి",
+            "turnOnCamera": "వీడియో చూపించు",
+            "turnOnAudio": "ఆడియోను అన్‌మ్యూట్ చేయండి",
+            "turnOnScreenSharing": "స్క్రీన్ షేరింగ్‌ని చూపించు"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "స్ట్రీమింగ్ సెట్టింగ్‌లు"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "సమావేశం",
+            "MeetingEnded": "సమావేశం ముగిసింది"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "ఆహ్వానించారు",
+            "description": "ఆహ్వానాల కోసం ఇన్‌బాక్స్"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "వనరు",
+            "description": "రిసోర్స్‌కి యాక్సెస్‌ని నిర్వహించడం మరియు అప్‌డేట్‌ల గురించి సందేశాలను పోస్ట్ చేయడం కోసం స్ట్రీమ్ చేయండి"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "ఒక నిర్దిష్ట పనిలో పురోగతి గురించి నవీకరణలను స్వీకరించడం కోసం",
+            "displayType": "టాస్క్"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "విధుల కోసం వర్గం",
+            "displayType": "పనులు"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "సంఘంలోని సభ్యులకు ఒక సాధారణ అనుభవం",
+            "displayType": "సంఘంలోని సభ్యులకు సాధారణ అనుభవం"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "ఒక వినియోగదారు తమను తాము పరిచయం చేసుకోగలిగే గ్రీటింగ్",
+            "displayType": "నమస్కారం"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "సంఖ్య",
+            "description": "గణిత సంఖ్య"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "తేదీ",
+            "description": "తేదీ"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "వచనం",
+            "description": "టెక్స్ట్ యొక్క శరీరం"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "వచనం",
+            "description": "టెక్స్ట్ యొక్క చిన్న భాగం"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "వచనం",
+            "description": "టెక్స్ట్ యొక్క మీడియం బాడీ"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "ఇమెయిల్ చిరునామా",
+            "description": "ఇమెయిల్ చిరునామా"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "ఫోను నంబరు",
+            "description": "ఫోను నంబరు"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "వెబ్‌లో లింక్"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "చిత్రం",
+            "description": "దృశ్య చిత్రం",
+            "newItem": "చిత్రాన్ని జోడించండి"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "చిత్ర గ్యాలరీ",
+            "description": "చిత్రాల గ్యాలరీ"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "ఆల్బమ్",
+            "description": "వివిధ మాధ్యమాలకు సంబంధించిన ఆల్బమ్"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "ఫైల్",
+            "description": "అప్‌లోడ్ చేసిన ఫైల్",
+            "newItem": "ఫైల్‌ని జోడించండి"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "ఆడియో క్లిప్",
+            "description": "ఆడియో క్లిప్",
+            "newItem": "ఆడియోని జోడించండి"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "వీడియో క్లిప్",
+            "description": "వీడియో క్లిప్",
+            "newItem": "వీడియోని జోడించండి"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF పత్రం",
+            "description": "PDF పత్రం",
+            "newItem": "PDFని జోడించండి"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "అంతర్జాలం ద్వారా ప్రత్యక్ష ప్రసారం",
+            "description": "ప్రత్యక్ష ఆడియో లేదా వీడియో"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "వర్గం",
+            "description": "ఇతర స్ట్రీమ్‌లకు సంబంధించిన వర్గం"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "పాల్గొనే సూచిక",
+            "description": "వినియోగదారు చేరినప్పుడు\/వెళ్లినప్పుడు స్ట్రీమ్‌లు దీనికి సంబంధించినవి\/సంబంధం లేనివి"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "ఆసక్తి",
+            "description": "నిర్దిష్ట అంశంలో వినియోగదారు ఆసక్తిని సూచిస్తుంది"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "ఇన్కమింగ్",
+            "description": "ఇతర వినియోగదారులు పంపిన సందేశాల గమ్యం"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "సంభాషణ",
+            "description": "చరిత్రతో వినియోగదారుల మధ్య సంభాషణ"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "నిజ-సమయ కాల్",
+            "description": "నిజ సమయ వీడియో\/ఆడియో కాల్"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "ప్రశ్న",
+            "description": "ప్రశ్న ప్రవాహం"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "సమాధానం",
+            "description": "జవాబు ప్రవాహం"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "కాల్స్",
+            "description": "స్ట్రీమ్‌లు\/webrtc కోసం వర్గం",
+            "MaxRelationsExceeded": "గరిష్ట కాల్‌లు మించిపోయాయి"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "పేజీ శీర్షికను టైప్ చేయండి",
+        "ModTab": "అంశాన్ని సవరించండి",
+        "Save": "సేవ్ చేయండి",
+        "Delete": "తొలగించు",
+        "Submenu": "ఉపమెను"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "రికార్డ్ చేయండి",
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించు",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URLని సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "ఆడియో సోర్స్ లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, కానీ ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించు",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URLని సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "వీడియో మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించు",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URLని సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "పిడిఎఫ్ మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "రీసెట్ చేయండి",
+        "edit": "సవరించు",
+        "title": "శీర్షిక",
+        "description": "వివరణ",
+        "upload": "అప్‌లోడ్ చేయండి",
+        "link": "లింక్",
+        "setUrl": "URLని సెట్ చేయండి",
+        "save": "సేవ్ చేయండి",
+        "uploadedImage": "అప్‌లోడ్ చేసిన చిత్రం",
+        "imageTitle": "చిత్ర శీర్షిక",
+        "setClip": "కట్ అవుట్ క్లిప్",
+        "invalidURL": "చెల్లని URL",
+        "invalidFile": "చెల్లుబాటులోలేని ఫైలు",
+        "errorNoSource": "చిత్ర మూలం లేదు",
+        "uploadLimit": "గరిష్ట ఫైల్ పరిమాణం: {{size}}",
+        "errorFileSize": "క్షమించండి, ఫైల్ చాలా పెద్దది.<br> గరిష్ట ఫైల్ పరిమాణం {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "ప్రశ్నలు",
+        "Answers": "సమాధానాలు",
+        "AnswerQuestion": "ప్రశ్నకు సమాధానం ఇవ్వండి",
+        "SetYourAnswer": "దయచేసి ప్రశ్నకు సమాధానం ఇవ్వండి",
+        "NewQuestion": "కొత్త ప్రశ్న",
+        "NewAnswer": "కొత్త సమాధానం",
+        "AnswerDetails": "జవాబు వివరాలు",
+        "answerOption": "ఎంపిక",
+        "answerOptionExclusive": "ప్రత్యేకమైనది",
+        "answerTextarea": "టెక్స్టారియా",
+        "FreeAnswer": "మీ సమాధానాన్ని ఇక్కడ వ్రాయండి",
+        "SaveQuestion": "ప్రశ్నను సేవ్ చేయండి",
+        "SaveAnswer": "సమాధానాన్ని సేవ్ చేయండి",
+        "AddAnotherAnswer": "మరొక సమాధానాన్ని జోడించండి",
+        "ErrorAnswers": "దయచేసి ఒక్క సమాధానాన్ని కూడా జోడించండి",
+        "AlreadyAnswered": "ఇప్పటికే సమాధానం ఇచ్చారు",
+        "TitlePlaceholder": "మీ ప్రశ్నను టైప్ చేయండి",
+        "ContentPlaceholder": "వ్యక్తులు సమాధానమివ్వడంలో సహాయపడటానికి ఏదైనా అదనపు సమాచారాన్ని ఇక్కడ ఉంచండి",
+        "ErrorTitle": "ప్రశ్న అవసరం",
+        "Placeholder": "ప్లేస్‌హోల్డర్"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "కొత్త అనుభవం",
+        "DefineTitle": "దయచేసి శీర్షికను నిర్వచించండి",
+        "Create": "సృష్టించు"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "కాల్స్",
+        "MaxCalls": "గరిష్ట కాల్స్",
+        "Update": "నవీకరించు",
+        "NoCallsYet": "ఇంకా కాల్‌లు లేవు",
+        "CallReasonTitle": "ఈ కాల్ దేని గురించి?",
+        "WaitingRoom": "వేచివుండు గది"
     }
 }

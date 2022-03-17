@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Khalad {{status}} marka la codsado",
+        "canceled": "Codsiga waa la joojiyay",
+        "500": "Cilad gudaha server-ka",
+        "404": "Lama helin: {{url}}",
+        "501": "Codsiga waa la joojiyay"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Fadhigu wuu dhacay Dib u cusboonaysii bogga oo isku day mar kale.",
+        "otherDomain": "Codsiga interneedka ee la xidhay {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "taabo",
+        "click": "guji",
+        "yes": "haa",
+        "no": "maya",
+        "Tap": "Taabo",
+        "Click": "Guji",
+        "Yes": "Haa",
+        "No": "Maya"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
+        "1": "Janaayo",
+        "2": "Febraayo",
+        "3": "Maarso",
+        "4": "Abriil",
+        "5": "Laga yaabaa",
+        "6": "Juun",
+        "7": "Julaay",
+        "8": "Ogosto",
+        "9": "Sebtembar",
+        "10": "Oktoobar",
+        "11": "Nofeembar",
         "12": "December"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "labaad",
+        "seconds": "ilbiriqsi",
+        "minute": "daqiiqo",
+        "minutes": "daqiiqado",
+        "hour": "saacadood",
+        "day": "maalin",
+        "days": "maalmo",
+        "week": "usbuuca",
+        "weeks": "toddobaadyo",
+        "month": "bil",
+        "months": "bilo",
+        "year": "sanad",
+        "years": "sanado",
+        "decade": "toban sano",
+        "decades": "tobanaan sano",
+        "century": "qarniga",
+        "centuries": "qarniyo"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
+        "allowMicrophoneAccess": "Fadlan u oggolow gelitaanka makarafoonkaaga",
+        "record": "Diiwaangeli",
+        "recording": "Duubista",
+        "remains": "haray",
+        "maximum": "ugu badnaan",
+        "playing": "Ciyaarta",
+        "recorded": "La duubay",
         "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "discard": "Tuur",
+        "encoding": "Codaynta"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "errorNoSource": "Ma jiro il muuqaal ah",
+        "SkipAfter": "Ka dib ka bood",
+        "Skip": "Ka bood"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "Ma jiro il pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Deji Bilawga Clip-ka",
+        "ClipStart": "Bilow Bilow",
+        "SetClipEnd": "Deji Dhamaadka Clip",
+        "ClipEnd": "Clip Dhamaad",
+        "StartMoreEnd": "Booska bilowgu kama badnaan karo booska dhamaadka",
+        "EndLessStart": "Booska dhamaadka kama yaraan karo booska bilowga",
+        "WhichInvalid": "Doodda &#39;oo&#39; aan sax ahayn"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Digniin"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Xaqiiji",
+        "ok": "Haa",
+        "cancel": "Maya"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "degdeg",
+        "ok": "Tag"
     },
     "tabs": {
-        "more": "more",
+        "more": "dheeraad ah",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Khalad akhriska faylka",
+        "errorType": "Waan ka xunahay, laakiin nooca faylkan lama taageero",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Maxaad jeclaan lahayd inaad sameyso?",
+            "photo": "Sawir cusub qaado",
+            "library": "Ka dooro maktabadda"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Fadlan door sawir ka weyn",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Hagaajin cabbirka iyo booska",
+            "touchscreen": "Isticmaal farahaaga si aad u dhawaajiso oo u jiido",
+            "notTouchscreen": "Isticmaal jiirkaaga &amp; giraangirahaaga si aad u dhawaajiso oo aad u jiiddo"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "xalay",
+        "lastEvening": "habeen hore",
+        "yesterday": "shalay",
+        "thisMorning": "subaxan",
+        "today": "maanta",
+        "tonight": "caawa",
+        "tomorrowMorning": "tom subax",
+        "tomorrow": "berrito",
+        "hoursAgo": "{{h}} saac kahor",
+        "hourAgo": "{{h}} saac kahor",
+        "minuteAgo": "{{m}} daqiiqo kahor",
+        "minutesAgo": "{{m}} daqiiqo kahor",
+        "secondAgo": "{{s}} ilbiriqsi kahor",
+        "secondsAgo": "{{s}} ilbiriqsi kahor",
+        "fewSecondsAgo": "ilbiriqsi ka hor",
+        "rightNow": "haddadaan",
+        "inSecond": "gudaha {{s}} ilbiriqsi",
+        "inSeconds": "gudaha {{s}} sekan",
+        "inMinute": "gudaha {{m}} daqiiqo",
+        "inMinutes": "gudaha {{m}} daqiiqo",
+        "inHour": "gudaha {{h}} saac",
+        "inHours": "gudaha {{h}} saacadood",
+        "inUnderMinute": "in ka yar 1 daqiiqo"
     }
 }

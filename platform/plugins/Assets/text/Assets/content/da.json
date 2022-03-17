@@ -4,44 +4,44 @@
         "button": "Tryk for at betale"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: gebyr behandlet for {{call 'user.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: opkrævning behandlet for {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Tak for din betaling til {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} abonnerer på {{plan.title}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonnerede på {{plan.title}}",
         "YouSubscribedTo": "Du er blevet abonneret på {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Info om ordre",
+        "AboutOrder": "Info om bestilling",
         "PaymentMethod": "Betalingsmetode",
         "ContactInfo": "Kontaktoplysninger",
         "Pay": "Betale"
     },
     "credits": {
-        "InviteAcceptedBy": "Invitér accepteret af {{1}}",
-        "YouHaveCreditsToStart": "Du har {{1}} kreditter til at starte",
+        "InviteAcceptedBy": "Invitation accepteret af {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Du har {{amount}} kreditter til at starte",
         "PaymentFor": "Betaling for &quot;{{1}}&quot;",
         "PaymentTo": "Betaling til {{1}}",
-        "PaymentToUser": "Betaling til {{userName}}",
-        "JoinedPaidStream": "for at deltage i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "til oprettelse af community &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "for at forlade &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Købt {{amount}} credits",
+        "PaymentToUser": "Betaling til {{toUserName}}",
+        "JoinedPaidStream": "til reservation i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "for at oprette fællesskabet &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "som reservationsrefusion i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Købte {{amount}} kreditter",
         "BuyAmountCredits": "Køb {{amount}} kreditter",
-        "MissingCredits": "Manglende kredit",
-        "YouMissingCredits": "Du mangler {{amount}} kreditter",
+        "MissingCredits": "Manglende kreditter",
+        "YouMissingCredits": "Du skal bruge yderligere {{amount}} kreditter for at fortsætte.",
         "BuyCredits": "Køb kreditter",
         "Buy": "Købe",
-        "Credits": "credits",
+        "Credits": "Credits",
         "ErrorInvalidAmount": "Beløb ugyldigt",
-        "ErrorInvalidCurrency": "Desværre understøtter vi ikke valuta {{currency}} endnu",
-        "WatchClip": "Optjent {{amount}} kredit for at se {{fromStreamTitle}}",
-        "PurchaseCredits": "Købskreditter",
+        "ErrorInvalidCurrency": "Desværre understøtter vi ikke valutaen {{currency}} endnu",
+        "WatchClip": "Optjente {{amount}} kreditter for at se {{fromStreamTitle}}",
+        "PurchaseCredits": "Køb kreditter",
         "forMessages": {
             "BoughtCredits": "{{amount}} kreditter",
             "BonusCredits": "{{amount}} kreditter"
         },
-        "CreatePaidStream": "til oprettelse af {{toStreamName}}",
-        "BonusCredits": "Bonus {{amount}}",
-        "BuyBonus": "Hvis du køber {{amount}} credits på én gang, vil det føre til en {{bonus}} credits bonus.",
+        "CreatePaidStream": "for at oprette {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} kreditter",
+        "BuyBonus": "Hvis du køber {{amount}} kreditter på én gang, vil det føre til en bonus på {{bonus}} kreditter.",
         "Streams_user_firstname": "{{invitedUserName}} indtastede fornavn",
         "Streams_user_lastname": "{{invitedUserName}} indtastede efternavn",
         "Streams_user_icon": "{{invitedUserName}} indtastet ikon",
@@ -55,13 +55,13 @@
         "Client": "Klient",
         "To": "til",
         "From": "fra",
-        "HistoryEmpty": "Du har endnu ingen data",
+        "HistoryEmpty": "Du har ingen data endnu",
         "SeeHistory": "Se betalingshistorik for {{1}}",
-        "PaymentFor": "Brugte {{amount}} kreditter",
+        "PaymentFor": "Sendte {{amount}} kreditter",
         "PaymentTo": "Sendte {{amount}} kreditter",
         "PaymentToUser": "Sendte {{amount}} kreditter",
         "JoinedPaidStream": {
-            "+": "Optjent {{amount}} credits",
+            "+": "Optjente {{amount}} kreditter",
             "-": "Brugte {{amount}} kreditter"
         },
         "LeftPaidStream": {
@@ -69,15 +69,15 @@
             "-": "Sendte {{amount}} kreditter"
         },
         "CreatedCommunity": "Brugte {{amount}} kreditter",
-        "BoughtCredits": "Købt {{amount}} credits",
-        "InviteAcceptedBy": "Optjent {{amount}} credits",
-        "YouHaveCreditsToStart": "Optjent {{amount}} credits",
-        "CreatePaidStream": "Brugte {{amount}} credits",
+        "BoughtCredits": "Købte {{amount}} kreditter",
+        "InviteAcceptedBy": "Optjente {{amount}} kreditter",
+        "YouHaveCreditsToStart": "Optjente {{amount}} kreditter",
+        "CreatePaidStream": "Brugte {{amount}} kreditter",
         "WatchClip": {
-            "+": "Optjent {{amount}} credits",
-            "-": "Brugte {{amount}} credits"
+            "+": "Optjente {{amount}} kreditter",
+            "-": "Brugte {{amount}} kreditter"
         },
-        "BonusCredits": "Fik bonus {{amount}}",
+        "BonusCredits": "Fik bonuskreditter på {{amount}}",
         "Streams_user_firstname": "Optjente {{amount}} kreditter",
         "Streams_user_lastname": "Optjente {{amount}} kreditter",
         "Streams_user_icon": "Optjente {{amount}} kreditter",
@@ -85,22 +85,22 @@
         "Streams_greeting": "Optjente {{amount}} kreditter"
     },
     "subscriptions": {
-        "infoTitle": "Angiv betalingsoplysninger",
+        "infoTitle": "Indstil betalingsoplysninger",
         "confirm": {
             "title": "Start abonnement",
-            "message": "Vil du gerne abonnere på {{title}}?",
+            "message": "Vil du abonnere på {{title}}?",
             "ok": "Okay",
             "cancel": "Afbestille"
         },
         "CreditOrDebitCard": "Kredit- eller betalingskort",
-        "SubscribePayment": "Abonnér betaling",
-        "ImmediatePayment": "Umiddelbar betaling"
+        "SubscribePayment": "Abonner Betaling",
+        "ImmediatePayment": "Øjeblikkelig betaling"
     },
     "payments": {
-        "infoTitle": "Angiv betalingsoplysninger",
+        "infoTitle": "Indstil betalingsoplysninger",
         "confirm": {
             "title": "Foretage en betaling",
-            "message": "Er du enig i at betale {{symbol}} {{amount}}?",
+            "message": "Accepterer du at betale {{symbol}}{{amount}}?",
             "ok": "Okay",
             "cancel": "Afbestille"
         },
@@ -108,11 +108,11 @@
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "credits",
+            "displayType": "Credits",
             "description": "holder styr på kreditter og betalinger"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
+            "displayType": "Abonnementsplan",
             "description": "abonnementsplan"
         },
         "Assets\/subscription": {
@@ -125,54 +125,54 @@
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service der tilbydes"
+            "description": "service, der tilbydes"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Optjent {{amount}} credits"
+            "content": "Optjente {{amount}} kreditter"
         },
         "Assets\/credits\/spent": {
             "content": "Brugte {{amount}} kreditter"
         },
         "Assets\/credits\/sent": {
-            "content": "Sendte {{amount}} kreditter"
+            "content": "Sendte {{amount}} kreditter til {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Modtaget {{amount}} kreditter"
+            "content": "Modtaget {{amount}} kreditter fra {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Købt {{amount}} credits"
+            "content": "Købte {{amount}} kreditter"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}}"
+            "content": "Bonus {{amount}} kreditter"
         }
     },
     "charge": {
-        "Subject": "Du får betaling af {{displayAmount}} fra {{call 'publisher.displayName'}} med &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hej, dette er bare for at fortælle dig {{1}} er blevet debiteret {{2}} for {{3}} af {{4}}"
+        "Subject": "Du får betaling på {{displayAmount}} fra {{call 'publisher.displayName'}} af &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, dette er bare for at fortælle dig, at {{1}} er blevet debiteret {{2}} for {{3}} af {{4}}"
     },
     "charged": {
         "Subject": "Tak for din betaling for &quot;{{description}}&quot;",
-        "HavePaid": "Hej {{1}}, dette er bare en hurtig bekræftelse af, at du har betalt {{2}} til {{3}} for {{4}}"
+        "HavePaid": "Hej {{1}}, dette er blot en hurtig bekræftelse på, at du har betalt {{2}} til {{3}} for {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Ny service",
-            "TitlePlaceholder": "Servicetitel",
+            "TitlePlaceholder": "Service titel",
             "PricePlaceholder": "Sæt pris",
-            "LinkPlaceholder": "indstil yderligere infolink",
+            "LinkPlaceholder": "sæt yderligere infolink",
             "DescriptionPlaceholder": "Servicebeskrivelse",
-            "SaveService": "Gem service",
-            "SelectRequiredParticipants": "Påkrævede deltagere"
+            "SaveService": "Gem tjeneste",
+            "SelectRequiredParticipants": "Nødvendige deltagere"
         },
-        "ManageServiceTemplates": "Administrer serviceskabeloner",
+        "ManageServiceTemplates": "Administrer tjenesteskabeloner",
         "ManageServices": "Administrer tjenester",
         "FreeEvent": "Gratis arrangement",
         "OptionalContribution": "Valgfrit bidrag",
-        "RequiredPayment": "Krævet betaling",
-        "AreYouSureDelete": "Er du sikker på, at du vil slette denne service?",
-        "AmountServicesRelated": "Der er {{amount}} tilgængeligheder relateret til denne service. De fjernes også.",
+        "RequiredPayment": "Påkrævet betaling",
+        "AreYouSureDelete": "Er du sikker på, at du vil slette denne tjeneste?",
+        "AmountServicesRelated": "Der er {{amount}} tilgængeligheder relateret til denne tjeneste. De vil også blive fjernet.",
         "Free": "Gratis"
     },
     "NFT": {

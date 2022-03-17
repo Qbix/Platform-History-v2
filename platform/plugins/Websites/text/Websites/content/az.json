@@ -2,72 +2,72 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Təşviq etmək üçün əlaqə",
-                "startDate": "Başlanğıc tarixi",
-                "startTime": "Vaxtını başla",
+                "link": "Təbliğ etmək üçün keçid",
+                "startDate": "Başlama tarixi",
+                "startTime": "Başlama vaxtı",
                 "endDate": "Bitmə vaxtı",
-                "endTime": "End Time",
+                "endTime": "Bitmə vaxtı",
                 "budget": "Büdcə"
             },
             "interests": {
-                "Title": "Faizlərə görə Filter",
-                "FilterInterests": "Maraq yazmağa başlayın ..."
+                "Title": "Maraqla Filtrləyin",
+                "FilterInterests": "Maraq yazmağa başlayın..."
             },
-            "Interest": "Faiz",
-            "Location": "Yer"
+            "Interest": "Maraq",
+            "Location": "Məkan"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Gedin",
-            "PasteLinkHere": "Burada bir keçid qoyun",
+            "Go": "Get",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Gözdən keçirin",
-            "WriteToStartConversation": "Söhbətdən başlamaq üçün fikirlərinizi yazın",
+            "WriteToStartConversation": "Söhbətə başlamaq üçün fikirlərinizi yazın",
             "StartConversation": "Söhbətə başlayın",
-            "GotoConversation": "Söhbətə gedin",
-            "reset": "Sıfırla",
-            "edit": "Redaktə edin",
-            "link": "Bağlantı",
-            "setUrl": "URL qurun",
+            "GotoConversation": "Söhbətə keçin",
+            "reset": "Sıfırlayın",
+            "edit": "Redaktə et",
+            "link": "Link",
+            "setUrl": "URL təyin edin",
             "save": "Yadda saxla",
-            "setClip": "Klipsi kəsin",
+            "setClip": "Klipi kəsin",
             "invalidURL": "Yanlış URL"
         },
-        "FileTooLarge": "Önbellek üçün çox böyük fayl. Maksimum fayl ölçüsü {{size}}",
-        "InvalidPDF": "Fayl düzgün PDF deyil",
-        "StartTypingTitleOrKeywords": "Başlıq və ya açar sözlər yazmağa başlayın ..."
+        "FileTooLarge": "Fayl keşləmə üçün çox böyükdür. Maksimum fayl ölçüsü {{size}}",
+        "InvalidPDF": "Fayl etibarlı PDF deyil",
+        "StartTypingTitleOrKeywords": "Başlıq və ya açar sözləri yazmağa başlayın..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Müxtəlif istifadəçilərin baxa və düzəldə biləcəyi HTML sənəd",
+            "description": "Müxtəlif istifadəçilərin baxa və redaktə edə biləcəyi HTML sənədi",
             "displayType": "Məqalə"
         },
         "Websites\/slide": {
-            "description": "Təqdimatdakı slayd, HTML, audio və s. Daxil ola bilər.",
-            "displayType": "Sürüşdürün"
+            "description": "Təqdimatdakı slayd HTML, audio və s. daxil ola bilər.",
+            "displayType": "Slayd"
         },
         "Websites\/presentation": {
             "description": "Müxtəlif slaydlardan ibarət təqdimat",
             "displayType": "Təqdimat"
         },
         "Websites\/advert\/unit": {
-            "description": "Bir veb saytında bir reklam vahidi",
+            "description": "Veb saytdakı reklam bölməsi",
             "displayType": "Reklam vahidi"
         },
         "Websites\/advert\/placement": {
-            "description": "Reklam bölmələrini bir ad altında qruplaşdırmağın bir yolu",
-            "displayType": "Reklam yerləşdirmə"
+            "description": "Reklam vahidlərinin ad altında qruplaşdırılması üsulu",
+            "displayType": "Reklam yerləşdirilməsi"
         },
         "Websites\/advert\/creative": {
-            "description": "Bir reklam üçün məzmun",
-            "displayType": "Yaradıcı reklam edin"
+            "description": "Reklam üçün məzmun",
+            "displayType": "Yaradıcı reklam"
         },
         "Websites\/advert\/campaign": {
-            "description": "Reklam kampaniyası",
+            "description": "Bir reklam kampaniyası",
             "displayType": "Reklam kampaniyası"
         },
         "Websites\/webpage": {
-            "description": "Metadata zədələnmiş bir veb sayt təqdim edir",
+            "description": "Metadatası silinmiş veb saytı təmsil edir",
             "displayType": "veb səhifə"
         }
     }

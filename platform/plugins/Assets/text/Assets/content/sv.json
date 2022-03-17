@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tryck för att betala"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: debitering behandlas för {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tack för din betalning till {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} prenumererade på {{plan.title}}",
+        "YouSubscribedTo": "Du har prenumererat på {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Du får betalning på {{displayAmount}} från {{call 'publisher.displayName'}} av &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hej, detta är bara för att meddela dig att {{1}} har debiterats {{2}} för {{3}} av {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Tack för din betalning för &quot;{{description}}&quot;",
+        "HavePaid": "Hej {{1}}, det här är bara en snabb bekräftelse på att du har betalat {{2}} till {{3}} för {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Info om beställning",
+        "PaymentMethod": "Betalningsmetod",
+        "ContactInfo": "Kontaktinformation",
+        "Pay": "Betala"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Inbjudan accepteras av {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} angav förnamn",
+        "Streams_user_lastname": "{{invitedUserName}} angav efternamn",
+        "Streams_user_icon": "{{invitedUserName}} angett ikon",
+        "Places_user_location": "{{invitedUserName}} angav plats",
+        "Streams_greeting": "{{invitedUserName}} skrev en hälsning",
+        "YouHaveCreditsToStart": "Du har {{amount}} krediter att börja",
+        "PaymentFor": "Betalning för &quot;{{1}}&quot;",
+        "PaymentTo": "Betalning till {{1}}",
+        "PaymentToUser": "Betalning till {{toUserName}}",
+        "CreatePaidStream": "för att skapa {{toStreamName}}",
+        "JoinedPaidStream": "för bokning i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "för att skapa gruppen &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "som reservationsåterbetalning i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Köpte {{amount}} krediter",
+        "BonusCredits": "Bonus {{amount}} krediter",
+        "BuyAmountCredits": "Köp {{amount}} krediter",
+        "WatchClip": "Fick {{amount}} krediter för att titta på {{fromStreamTitle}}",
+        "MissingCredits": "Saknade krediter",
+        "YouMissingCredits": "Du behöver ytterligare {{amount}} krediter för att fortsätta.",
+        "BuyCredits": "Köp krediter",
+        "BuyBonus": "Att köpa {{amount}} krediter på en gång kommer att leda till {{bonus}} krediter i bonus.",
+        "Buy": "köpa",
+        "PurchaseCredits": "Köp krediter",
+        "Credits": "Krediter",
+        "ErrorInvalidAmount": "Ogiltigt belopp",
+        "ErrorInvalidCurrency": "Tyvärr stöder vi inte valutan {{currency}} ännu",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} krediter",
+            "BonusCredits": "{{amount}} krediter"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Datum",
+        "Amount": "Belopp",
+        "Description": "Beskrivning",
+        "Client": "Klient",
+        "To": "till",
+        "From": "från",
+        "SeeHistory": "Se betalningshistorik för {{1}}",
+        "HistoryEmpty": "Du har inga uppgifter än",
+        "PaymentFor": "Skickade {{amount}} krediter",
+        "PaymentTo": "Skickade {{amount}} krediter",
+        "PaymentToUser": "Skickade {{amount}} krediter",
+        "CreatePaidStream": "Spenderade {{amount}} krediter",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Fick {{amount}} krediter",
+            "-": "Spenderade {{amount}} krediter"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Fick {{amount}} krediter",
+            "-": "Spenderade {{amount}} krediter"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Fick {{amount}} krediter",
+            "-": "Skickade {{amount}} krediter"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Spenderade {{amount}} krediter",
+        "BoughtCredits": "Köpte {{amount}} krediter",
+        "BonusCredits": "Fick {{amount}} bonuspoäng",
+        "InviteAcceptedBy": "Fick {{amount}} krediter",
+        "Streams_user_firstname": "Fick {{amount}} krediter",
+        "Streams_user_lastname": "Fick {{amount}} krediter",
+        "Streams_user_icon": "Fick {{amount}} krediter",
+        "Places_user_location": "Fick {{amount}} krediter",
+        "Streams_greeting": "Fick {{amount}} krediter",
+        "YouHaveCreditsToStart": "Fick {{amount}} krediter"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Ställ in betalningsinformation",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Starta prenumeration",
+            "message": "Vill du prenumerera på {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Annullera"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kredit-eller betalkort",
+        "SubscribePayment": "Prenumerera Betalning",
+        "ImmediatePayment": "Omedelbar betalning"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Ställ in betalningsinformation",
+        "BuyAmountCredits": "Köp {{amount}} krediter",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Betala",
+            "message": "Godkänner du att betala {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Annullera"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Krediter",
+            "description": "håller reda på krediter och betalningar"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Prenumerationsplan",
+            "description": "prenumerationsplan"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Prenumeration",
+            "description": "prenumeration"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Produkt",
+            "description": "produkt som säljs"
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service being offered"
+            "description": "tjänst som erbjuds"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Fick {{amount}} krediter"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Köpte {{amount}} krediter"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} krediter"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Spenderade {{amount}} krediter"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Skickade {{amount}} krediter till {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Fick {{amount}} krediter från {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Ny tjänst",
+            "TitlePlaceholder": "Tjänstens titel",
+            "PricePlaceholder": "Sätt pris",
+            "LinkPlaceholder": "ställ in ytterligare informationslänk",
+            "DescriptionPlaceholder": "Service beskrivning",
+            "SaveService": "Spara tjänst",
+            "SelectRequiredParticipants": "Obligatoriska deltagare"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Hantera servicemallar",
+        "ManageServices": "Hantera tjänster",
+        "Free": "Fri",
+        "OptionalContribution": "Valfritt bidrag",
+        "RequiredPayment": "Krävs betalning",
+        "AreYouSureDelete": "Är du säker på att du vill ta bort den här tjänsten?",
+        "AmountServicesRelated": "Det finns {{amount}} tillgänglighet relaterade till den här tjänsten. De kommer också att tas bort."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "Title": "Information om {{title}} NFT",
+        "Description": "Detaljerad information om NFT",
+        "FixedBid": "Köp nu",
+        "CurrentBid": "Nuvarande bud",
+        "StartingIn": "Börjar in",
+        "EndingIn": "Slutar i",
+        "CreateNFT": "Skapa en NFT",
+        "TitlePlaceholder": "Ge din NFT en titel",
+        "DescriptionPlaceholder": "Ge din NFT en beskrivning",
+        "CreateYourNFT": "Skapa din NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "RoyaltyPlaceholder": "Frivillig. Belopp som betalades till skaparen före överföringen.",
+        "ExpirationDate": "Utgångsdatum",
+        "StartingDate": "Start datum",
+        "BidsBelowThisAmount": "Bud under detta belopp tillåts inte",
+        "MinimumBid": "Minsta bud",
+        "Price": "Pris",
+        "Owner": "Ägare",
+        "SelectCategory": "Välj kategori",
+        "Day": "Dag",
+        "Days": "dagar",
+        "Hour": "Timme",
+        "Hours": "Timmar",
+        "Minute": "Minut",
+        "Minutes": "Minuter",
+        "Second": "Andra",
+        "Seconds": "Sekunder",
+        "SalesCreator": "av försäljningen går till skaparen",
+        "Details": "Detaljer",
+        "Bids": "Bud",
+        "History": "Historia",
+        "LoremIpsum": "Lorem Ipsum är helt enkelt dummy text från tryckeri- och sättningsindustrin.",
+        "PutOnSale": "Säljes till försäljning",
+        "PutOffSale": "Återträder från försäljning",
+        "Transfer": "Överföra",
+        "Update": "Uppdatering",
+        "UpdateToken": "Uppdatera token",
+        "CreateToken": "Skapa token",
+        "PlaceBid": "Lägga bud",
+        "SoldOut": "Såld",
+        "NftName": "NFT-namn",
+        "DescribeYourNFT": "Beskriv din NFT",
+        "NftPicture": "Bild för att representera NFT",
+        "NftMovie": "Film som representerar NFT",
+        "UploadMovie": "Ladda upp film",
+        "MovieSource": "Filmkälla",
+        "UploadFile": "Ladda upp en fil",
+        "PutOnMarketplace": "Sätt på marknadsplats",
+        "InstantPurchase": "Ange pris för att tillåta användare att köpa din NFT direkt",
+        "FixedPrice": "Fast pris",
+        "TimedAuction": "Tidsinställd auktion",
+        "OpenForBids": "Öppen för bud",
+        "PriceOnePiece": "Ange pris för ett stycke",
+        "EnterMinimumBid": "Ange lägsta bud",
+        "SelectChain": "Välj kedja",
+        "WrongChain": "Denna NFT skapades under &quot;{{chain}}&quot;. Använd denna kedja.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Importera NFT",
+            "fileNotFound": "Tyvärr, CSV-filen hittades inte.",
+            "fileEmpty": "Tyvärr, CSV-filen är tom.",
+            "userIdNotFound": "användaren finns men id tomt",
+            "errorLine": "rad {{1}}",
+            "fieldNotFound": "Det obligatoriska fältet &quot;{{1}}&quot; hittades inte",
+            "taskStreamInvalid": "ogiltig uppgiftsström",
+            "instructionsEmpty": "uppgiftsströmsinstruktionerna är tomma",
+            "complete": "Komplett",
+            "activateUsers": "skicka aktiveringsmeddelande till användare?",
+            "importProgress": "Framsteg",
+            "importOptions": "alternativ",
+            "sampleCSV": "Ladda ner exempel på CSV",
+            "fileLabel": "Ladda upp kalkylblad:",
+            "errorsTitle": "Fel uppstod"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtrera efter NFT-samlingar",
+                "ShowNFTCollection": "Visa NFT-samling i ...",
+                "AllCollections": "Alla samlingar"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Alla författare",
+                "AllUsers": "Alla",
+                "FilterByAuthors": "Filtrera efter författare"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Tillbaka till samlingen"
     }
 }

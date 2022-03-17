@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "یہ مواد آپ سے پوشیدہ ہے۔"
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "نئی چیز"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "جن لوگوں کو میں نے مدعو کیا۔",
+        "Streams\/invitedMe": "جس نے مجھے دعوت دی۔",
+        "DoYouAgree": "آپ اتفاق کرتے ہیں؟",
+        "Yes": "جی ہاں",
+        "No": "نہیں"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "آپ کے مشاغل کیا ہیں؟",
+        "CanAdd": "اگر آپ اب بھی وہ چیز نہیں ڈھونڈ پا رہے ہیں جس کی آپ تلاش کر رہے ہیں، تو آپ ذیل میں ایک نئی دلچسپی شامل کر سکتے ہیں:",
+        "TrySynonyms": "نظر نہیں آرہا؟ کچھ مترادفات آزمائیں۔",
+        "AddUnderCategory": "زمرہ کے تحت شامل کریں...",
+        "Other": "دیگر",
+        "Unlisted": "غیر فہرست شدہ"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "ایڈمن کے جائزے کے لیے پیغام کو جھنڈا لگا دیا گیا ہے۔ پرچم ہٹانے کے لیے دوبارہ تھپتھپائیں۔",
+        "noOneSaid": "کسی نے کچھ نہیں کہا",
+        "closeChatButton": "چیٹ بند کریں۔",
+        "closeChatConfirmTitle": "اس چیٹ کو بند کریں؟",
+        "closeChatConfirm": "کیا آپ واقعی اس چیٹ کو بند کرنا چاہتے ہیں؟",
+        "Subscribed": "اطلاعات فعال ہیں۔",
+        "Unsubscribed": "اطلاعات خاموش کر دی گئیں۔",
+        "closeChatConfirmYes": "جی ہاں",
+        "closeChatConfirmNo": "نہیں",
+        "earlierComments": "پہلے کے تبصرے",
+        "startedConversation": "بات چیت شروع کی",
+        "RealTimeCall": "ریئل ٹائم کال",
+        "SearchByName": "نام سے تلاش کریں۔",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} چیٹ پر جا رہا ہے۔",
+            "Join": "{{displayName}} چیٹ میں شامل ہوئے۔",
+            "Leave": "{{displayName}} نے چیٹ چھوڑ دیا۔",
+            "RelatedTo": "{{displayName}} نے ایک {{stream.displayType}} شروع کیا"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "اپنی ای میل سبسکرپشنز کا نظم کریں۔",
+        "IfUnsubscribe": "اگر آپ ان سبسکرائب کرنا چاہتے ہیں۔",
+        "*": "پیغام {{& message.fields.type}} سے {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} نے کہا: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} میں تبدیلیاں",
+        "Streams\/invite": "آپ کو {{& stream.fields.title}} میں مدعو کیا گیا تھا",
+        "Streams\/announcement": "{{& stream.fields.title}} میں اعلان",
+        "Streams\/access": "{{&call 'avatar.displayName'}} نے {{& stream.fields.title}} میں رسائی کو تبدیل کر دیا",
+        "Streams\/chat\/edit": "چیٹ پیغام میں ترمیم کی گئی {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "چیٹ پیغام کو {{& stream.fields.title}} میں ہٹا دیا گیا",
+        "Streams\/closed": "{{stream.fields.title}} بند کر دیا گیا ہے۔",
+        "Streams\/task\/progress": "پیش رفت {{stream.fields.title}} کو ہوئی",
+        "Streams\/task\/complete": "کام مکمل ہوا: {{stream.fields.title}}",
+        "Streams\/task\/error": "اس دوران خرابی: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: آنے والا پیغام",
+        "Streams\/relatedTo\/Streams\/call": "نئی کال {{toTitle}} میں شروع ہوئی",
+        "Streams\/relatedTo\/*": "{{toTitle}} میں نیا {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} میں بطور {{relationDisplayType}} شامل کیا گیا",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} نے ایک تبصرہ میں آپ کا تذکرہ کیا۔",
+        "Streams\/call": "{{displayName}} نے ریئل ٹائم کال شروع کی۔"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "دعوت دیں۔",
+        "messageContent": "{{displayName}} نے آپ کو {{inviteUrl}} میں مدعو کیا",
+        "youCanNowPaste": "اب آپ لوگوں کو مدعو کرنے کے لیے اس لنک کو کہیں پیسٹ کر سکتے ہیں۔",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "اپنے رابطوں میں سے انتخاب کریں۔",
+            "chooseAgainFromContacts": "رابطوں سے دوبارہ منتخب کریں۔",
+            "inviteSelectedContacts": "منتخب رابطوں کو مدعو کریں۔",
+            "selectFromContacts": "رابطوں سے منتخب کریں۔",
+            "userChooserPlaceholder": "نام سے تلاش کریں۔",
+            "photo": "ایک تصویر لے لو",
+            "photoInstruction": "اگر وہ شخص جس نے آپ کا QR کوڈ اسکین کیا ہے وہ آپ کے سامنے ہے، اس کی تصویر لیں۔",
+            "to": "بنام: {{Stream Title}}",
+            "go": "جاؤ",
+            "title": "دعوت دیں۔",
+            "placeholder": "موبائل نمبر یا ای میل ایڈریس",
+            "orInvite": "یا استعمال کرکے لوگوں کو مدعو کریں:",
+            "copyLink": "دعوت کا لنک کاپی کرنے کے لیے {{ClickOrTap}}",
+            "shareOrCopyLink": "دعوتی لنک کو شیئر کرنے یا کاپی کرنے کے لیے {{ClickOrTap}}",
+            "QR": "QR کوڈ بنانے کے لیے {{ClickOrTap}}",
+            "QRtitle": "اس QR کوڈ کو اسکین کریں۔",
+            "QRscanned": "انہوں نے اسے اسکین کیا!",
+            "scannedQR": "{{ClickOrTap}} اگر کوڈ اسکین کیا گیا تھا۔",
+            "byEmail": "ای میل",
+            "byText": "متن",
+            "byFacebook": "فیس بک",
+            "byTwitter": "ٹویٹر"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "ارے، یہ چیک کریں",
+            "PleaseVisitLink": "براہ کرم درج ذیل لنک پر جائیں:",
+            "InvitingYou": "میں آپ کو {{title}} میں مدعو کر رہا ہوں",
+            "HasInvitedYou": "{{displayName}} نے آپ کو {{title}} میں مدعو کیا ہے",
+            "HasMentionedYou": "{{displayName}} نے &quot;{{title}}&quot; میں آپ کا ذکر کیا ہے",
+            "YOUAREINVITED": "آپ کو مدعو کر رہے ہیں!",
+            "AcceptInvite": "دعوت قبول کریں۔"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "آپ کو {{title}} میں مدعو کیا گیا ہے۔ براہ کرم {{url}} کو تھپتھپائیں"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "آپ کو مدعو کیا گیا ہے۔ قبول کرنے اور شامل ہونے کے لیے یہاں {{ClickOrTap}}۔"
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "ایک <em>{{message.fields.type}}<\/em> پیغام {{stream.fields.title}} کو پوسٹ کیا"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "پر تبصرہ کیا",
+            "startedCallIn": "میں کال شروع کی",
+            "in": "میں",
+            "body": "{{& url}} میں: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "پر پوسٹ کیا گیا ہے۔",
+                "byAvatar": "بذریعہ {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "ایک نیا {{instructions.fromDisplayType}} ہے",
+                "byAvatar": "{{avatar.displayName}} کے ذریعے شامل کیا گیا"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "دعوت نامے ہمارے نمبر سے بھیجے جاتے ہیں، جنہیں آپ کے دوست ابھی تک نہیں پہچانتے ہیں۔ انہیں یہ بتانے کے لیے کہ آپ کی طرف سے دعوت نامہ آیا ہے، ان سے لنک پر کلک کرنے کو کہتے ہوئے فوری متن کے ساتھ فالو اپ کریں۔",
+            "confirm": "دعوت نامے ہمارے نمبر سے بھیجے جاتے ہیں، جنہیں آپ کے دوست ابھی تک نہیں پہچانتے ہیں۔ کیا آپ انہیں یہ بتانے کے لیے کہ آپ کی طرف سے دعوت نامہ آیا ہے، ان سے لنک پر کلک کرنے کے لیے ایک فوری متن کے ساتھ فالو اپ کرنا چاہیں گے۔",
+            "check": "ارے، میں نے ابھی آپ کو {{app}} ایپ پر ایک دعوت نامہ بھیجا ہے۔ براہ کرم اپنا ایس ایم ایس چیک کریں اور لنک پر کلک کریں!",
+            "CheckYourMobile": "براہ کرم ایس ایم ایس چیک کریں اور ہدایات پر عمل کریں!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "دعوت نامے ہمارے ڈومین سے بھیجے جاتے ہیں، جنہیں آپ کے دوست ابھی تک نہیں پہچانتے ہیں۔ انہیں یہ بتانے کے لیے کہ آپ کی طرف سے دعوت نامہ آیا ہے، ان سے لنک پر کلک کرنے کو کہتے ہوئے فوری متن کے ساتھ فالو اپ کریں۔",
+            "confirm": "دعوت نامے ہمارے ڈومین سے بھیجے جاتے ہیں، جنہیں آپ کے دوست ابھی تک نہیں پہچانتے ہیں۔ کیا آپ انہیں یہ بتانے کے لیے کہ آپ کی طرف سے دعوت نامہ آیا ہے، ان سے لنک پر کلک کرنے کے لیے ایک فوری متن کے ساتھ فالو اپ کرنا چاہیں گے۔",
+            "subject": "کیا آپ کو دعوت نامہ ملا؟",
+            "body": "ارے، میں نے ابھی آپ کو {{app}} ایپ پر ایک دعوت نامہ بھیجا ہے۔ براہ کرم اپنا ای میل چیک کریں اور وہاں موجود لنک پر کلک کریں!",
+            "CheckYourEmail": "براہ کرم اپنا ای میل چیک کریں اور ہدایات پر عمل کریں!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "عنوان",
+        "Subscribed": "سبسکرائب کیا",
+        "Participants": "امیدوار",
+        "AreYouSureRemoveIdentifier": "کیا آپ یقینی طور پر اس شناخت کنندہ کو ہٹانا چاہتے ہیں؟",
+        "AreYouSureUnsubscribeIdentifier": "کیا آپ یقینی طور پر اس شناخت کنندہ کو اَن سبسکرائب کرتے ہیں؟ یہ اس شناخت کنندہ کی اطلاعات کو بند کر دے گا۔",
+        "AreYouSureUnsubscribeDevice": "کیا آپ واقعی اس ڈیوائس کو اَن سبسکرائب کرتے ہیں؟ یہ اس آلہ پر اطلاعات کو بند کر دے گا۔",
+        "AreYouSureRemoveParticipant": "کیا آپ واقعی اس شرکت کنندہ کو ہٹانا چاہتے ہیں؟",
+        "RemoveParticipant": "شریک کو ہٹا دیں۔",
+        "Identifiers": "شناخت کنندگان",
+        "Devices": "آلات",
+        "Streams": "سلسلے"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "آپ کو اس سلسلے میں شامل ہونے کی اجازت نہیں ہے۔",
+        "streamTitle": "{{1}} نے ایک لائیو کال شروع کی۔",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "جڑ رہا ہے۔",
+            "microphoneBtn": "مائیکروفون کو فعال کریں۔",
+            "cameraBtn": "کیمرہ فعال کریں۔",
+            "cameraAndMicrophoneBtn": "کیمرہ اور مائیکروفون کو فعال کریں۔"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "مائیک بند ہے۔",
+            "micIsOn": "مائیک آن ہے۔",
+            "cameraIsOff": "کیمرہ آف ہے۔",
+            "cameraIsOn": "کیمرہ آن ہے۔",
+            "screenSharingIsOn": "اسکرین شیئرنگ آن ہے۔",
+            "screenSharingIsOff": "اسکرین شیئر کریں۔",
+            "joinNow": "کال میں شامل ہوں۔"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "ہدایات",
+            "permissionDenied": "{{kind}} کی اجازت مسترد کر دی گئی۔ اسے استعمال کرنے کے لیے ان مراحل پر عمل کریں:",
+            "point1": "&quot;ترتیبات&quot; -&gt; &quot;ایڈوانسڈ&quot; -&gt; &quot;پرائیویسی اور سیکیورٹی&quot; -&gt; &quot;سائٹ سیٹنگز&quot; -&gt; &quot;کیمرہ&quot; یا &quot;سائٹ سیٹنگز&quot; -&gt; &quot;مائیکروفون&quot; پر جائیں۔",
+            "point2": "&quot;بلاک&quot; کی فہرست سے {{hostname}} کو ہٹا دیں۔"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "ہدایات",
+            "permissionDenied": "{{kind}} کی اجازت مسترد کر دی گئی۔ براہ کرم اس صفحہ کو دوبارہ لوڈ کریں اور کانفرنس میں شامل ہونے کے لیے {{kind}} تک رسائی کی تصدیق کریں۔"
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "ہدایات",
+            "permissionDenied": "{{kind}} کی اجازت مسترد کر دی گئی۔ اسے استعمال کرنے کے لیے ان مراحل پر عمل کریں:",
+            "point1": "اپنی اینڈرائیڈ سیٹنگز پر جائیں۔",
+            "point2": "&quot;ایپس اور اطلاعات&quot; کھولیں",
+            "point3": "&quot;{{communityName}}&quot; تلاش کریں اور اسے کھولیں۔",
+            "point4": "اجازتوں پر ٹیپ کریں۔",
+            "point5": "فعال کریں {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "ہدایات",
+            "permissionDenied": "{{kind}} کی اجازت مسترد کر دی گئی۔ اسے استعمال کرنے کے لیے ان مراحل پر عمل کریں:",
+            "point1": "اپنی iOS کی ترتیبات پر جائیں۔",
+            "point2": "&quot;رازداری&quot; کھولیں",
+            "point3": "{{kind}} تلاش کریں اور اسے کھولیں۔",
+            "point4": "&quot;{{communityName}}&quot; تلاش کریں اور فعال کریں۔"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "آپ کمرے میں شامل ہو گئے۔",
+            "joining": "شمولیت: {{userName}}",
+            "sbLeftRoom": "{{userName}} کمرے سے نکل گئے۔",
+            "switchingRoom": "سوئچنگ روم...",
+            "forceDisconnecting": "آپ کا رابطہ 5 سیکنڈ میں منقطع ہو جائے گا۔",
+            "forceDisconnectingImmediately": "آپ کو ایک میزبان نے منقطع کر دیا تھا۔",
+            "youLeftRoom": "آپ کمرے سے نکل گئے۔",
+            "codeCopied": "آپ کمرے سے نکل گئے۔",
+            "sbBeganFbLive": "{{userName}} نے فیس بک میں اس کال کو نشر کرنا شروع کیا۔",
+            "sbStoppedFbLive": "{{userName}} نے Facebook میں اس کال کو نشر کرنا بند کر دیا۔",
+            "youBeganFbLive": "آپ نے اس کال کو فیس بک پر نشر کرنا شروع کیا۔",
+            "youStoppedFbLive": "آپ نے فیس بک میں اس کال کو نشر کرنا بند کر دیا ہے۔",
+            "youStartedLive": "آپ نے اس کال کو حسب ضرورت RTMP پر نشر کرنا شروع کیا۔",
+            "youStoppedLive": "آپ نے اس کال کو حسب ضرورت RTMP پر نشر کرنا بند کر دیا ہے۔",
+            "sbStartedLiveStreaming": "{{userName}} نے لائیو شروع کیا۔",
+            "sbStoppedLiveStreaming": "{{userName}} لائیو ختم ہوا۔",
+            "liveStopped": "اینڈ پوائنٹ پر ویڈیو بھیجتے وقت خرابی پیش آگئی",
+            "youBeganVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا شروع کیا۔",
+            "youStoppedVideoRecording": "آپ نے اس کانفرنس کو ریکارڈ کرنا بند کر دیا۔",
+            "linkCopiedToCb": "لنک کلپ بورڈ پر کاپی ہو گیا۔",
+            "codeCopiedToCb": "کوڈ کلپ بورڈ پر کاپی ہو گیا۔",
+            "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے۔",
+            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لیے سفاری براؤزر میں لنک کھولیں۔"
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "ویڈیو کی ترتیبات",
+            "webCamera": "ویب کیمرا",
+            "screenSharing": "اسکرین شیئرنگ",
+            "shareAnotherScreen": "دوسری اسکرین کا اشتراک کریں۔",
+            "turnOffCameras": "کیمرہ بند کر دیں۔",
+            "turnOffVideo": "کیمرہ\/اسکرین شیئرنگ بند کریں۔",
+            "turnOffAudioInput": "مائیکروفون خاموش کریں۔",
+            "turnOffScreenSharing": "اسکرین شیئرنگ کو بند کریں۔",
+            "cameraIsTurnedOff": "کیمرہ بند ہے۔",
+            "micIsTurnedOff": "مائیکروفون بند ہے۔",
+            "startFBLive": "فیس بک لائیو اسٹریم شروع کریں۔",
+            "stopFBLive": "فیس بک لائیو اسٹریم بند کریں۔",
+            "startRecording": "ریکارڈنگ شروع کریں۔",
+            "stopRecording": "ریکارڈنگ بند کرو",
+            "start": "شروع کریں۔",
+            "stop": "رک جاؤ",
+            "recordingInProgress": "ریکارڈنگ جاری ہے...",
+            "fbLiveTitle": "لائیو اسٹریم کا عنوان",
+            "fbLiveDescription": "اپنے لائیو اسٹریم کی وضاحت کریں۔ اس کے بارے میں کیا ہے؟",
+            "fbOnlyMeLiveAccess": "صرف میں",
+            "fbFriendsAccess": "دوستو",
+            "fbPublicAccess": "عوام",
+            "publishOnTimeline": "ٹائم لائن پر شائع کریں۔",
+            "publishToGroup": "گروپ میں شائع کریں۔",
+            "fbStartLive": "لائیو جاؤ",
+            "fbStopLive": "لائیو اسٹریم ختم کریں۔",
+            "streamingSettings": "ترتیبات",
+            "fbEmbedCode": "ایمبیڈ",
+            "copy": "کاپی کریں۔",
+            "streamToRTMP": "حسب ضرورت RTMP پر سلسلہ بندی کریں۔",
+            "startBroadcasting": "نشریات شروع کریں۔",
+            "broadcastingInProgress": "نشریات جاری ہیں۔"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "آڈیو کی ترتیبات",
+            "speakers": "مقررین",
+            "microphone": "مائیکروفون"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "شرکت کنندہ کی ترتیبات",
+            "disconnect": "منقطع کرنا",
+            "floatingScreens": "فلوٹنگ اسکرینز",
+            "tiledScreens": "ٹائلڈ اسکرینز",
+            "loudestExceptMe": "میرے علاوہ سب سے بلند آواز",
+            "maximizeLoudest": "زیادہ سے زیادہ بلند آواز",
+            "staticMaximized": "جامد زیادہ سے زیادہ",
+            "fullScreen": "مکمل اسکرین یا بڑی اسکرین",
+            "manual": "دستی",
+            "turnOffCamera": "ویڈیو چھپائیں۔",
+            "turnOffAudio": "آڈیو خاموش کریں۔",
+            "turnOffScreenSharing": "اسکرین شیئرنگ کو چھپائیں۔",
+            "turnOnCamera": "ویڈیو دکھائیں۔",
+            "turnOnAudio": "آڈیو کو چالو کریں۔",
+            "turnOnScreenSharing": "اسکرین شیئرنگ دکھائیں۔"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "سلسلہ بندی کی ترتیبات"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "ملاقات",
+            "MeetingEnded": "میٹنگ ختم ہوئی۔"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "مدعو کیا۔",
+            "description": "دعوت نامے کے لیے ان باکس کریں۔"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "وسیلہ",
+            "description": "کسی وسائل تک رسائی کا انتظام کرنے اور اپ ڈیٹس کے بارے میں پیغامات پوسٹ کرنے کے لیے سلسلہ"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "کسی خاص کام پر پیش رفت کے بارے میں اپ ڈیٹس حاصل کرنے کے لیے",
+            "displayType": "کام"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "کاموں کے لیے زمرہ",
+            "displayType": "کام"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "کمیونٹی کے اراکین کے لیے ایک عام تجربہ",
+            "displayType": "کمیونٹی کے اراکین کے لیے عام تجربہ"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "سلام جس کے ساتھ صارف اپنا تعارف کروا سکتا ہے۔",
+            "displayType": "سلام کرنا"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "نمبر",
+            "description": "ریاضیاتی نمبر"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "تاریخ",
+            "description": "تاریخ"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "متن",
+            "description": "متن کا جسم"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "متن",
+            "description": "متن کا چھوٹا سا حصہ"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "متن",
+            "description": "متن کا درمیانی حصہ"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "ای میل اڈریس",
+            "description": "ای میل اڈریس"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "فون نمبر",
+            "description": "فون نمبر"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ویب پر لنک"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "تصویر",
+            "description": "بصری تصویر",
+            "newItem": "تصویر شامل کریں۔"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "تصویری گیلری",
+            "description": "تصاویر کی گیلری"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "البم",
+            "description": "ایک البم جس سے مختلف میڈیا کا تعلق ہے۔"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "فائل",
+            "description": "اپ لوڈ کردہ فائل",
+            "newItem": "فائل شامل کریں"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "آڈیو کلپ",
+            "description": "آڈیو کلپ",
+            "newItem": "آڈیو شامل کریں۔"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "ویڈیو کلپ",
+            "description": "ویڈیو کلپ",
+            "newItem": "ویڈیو شامل کریں۔"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "پی ڈی ایف دستاویز",
+            "description": "پی ڈی ایف دستاویز",
+            "newItem": "پی ڈی ایف شامل کریں۔"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "لائیو سٹریم",
+            "description": "لائیو آڈیو یا ویڈیو"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "قسم",
+            "description": "ایک زمرہ جس سے دوسرے سلسلے وابستہ ہو سکتے ہیں۔"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "حصہ لینے والا انڈیکس",
+            "description": "اسٹریمز اس سے متعلق\/غیر متعلق ہوتے ہیں جب کوئی صارف شامل ہوتا ہے\/چھوڑتا ہے۔"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "دلچسپی",
+            "description": "کسی خاص موضوع میں صارف کی دلچسپی کی نمائندگی کرتا ہے۔"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "آنے والا",
+            "description": "دوسرے صارفین کے بھیجے گئے پیغامات کی منزل"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "بات چیت",
+            "description": "تاریخ کے ساتھ صارفین کے درمیان گفتگو"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "ریئل ٹائم کال",
+            "description": "ایک حقیقی وقت کی ویڈیو\/آڈیو کال"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "سوال",
+            "description": "سوال کا سلسلہ"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "جواب دیں۔",
+            "description": "جوابی سلسلہ"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "کالز",
+            "description": "اسٹریمز\/webrtc کے لیے زمرہ",
+            "MaxRelationsExceeded": "زیادہ سے زیادہ کالز ہو گئیں۔"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "صفحہ کا عنوان ٹائپ کریں۔",
+        "ModTab": "آئٹم میں ترمیم کریں۔",
+        "Save": "محفوظ کریں۔",
+        "Delete": "حذف کریں۔",
+        "Submenu": "ذیلی مینیو"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "ریکارڈ",
+        "reset": "دوبارہ ترتیب دیں۔",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں۔",
+        "link": "لنک",
+        "setUrl": "URL سیٹ کریں۔",
+        "save": "محفوظ کریں۔",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی آڈیو ذریعہ نہیں ہے۔",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{size}}",
+        "errorFileSize": "معذرت، لیکن فائل بہت بڑی ہے۔<br> فائل کا زیادہ سے زیادہ سائز {{size}} ہے"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "دوبارہ ترتیب دیں۔",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں۔",
+        "link": "لنک",
+        "setUrl": "URL سیٹ کریں۔",
+        "save": "محفوظ کریں۔",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی ویڈیو سورس نہیں ہے۔",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{size}}",
+        "errorFileSize": "معذرت، لیکن فائل بہت بڑی ہے۔<br> فائل کا زیادہ سے زیادہ سائز {{size}} ہے"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "دوبارہ ترتیب دیں۔",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں۔",
+        "link": "لنک",
+        "setUrl": "URL سیٹ کریں۔",
+        "save": "محفوظ کریں۔",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "کوئی پی ڈی ایف سورس نہیں۔",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{size}}",
+        "errorFileSize": "معذرت، لیکن فائل بہت بڑی ہے۔<br> فائل کا زیادہ سے زیادہ سائز {{size}} ہے"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "دوبارہ ترتیب دیں۔",
+        "edit": "ترمیم",
+        "title": "عنوان",
+        "description": "تفصیل",
+        "upload": "اپ لوڈ کریں۔",
+        "link": "لنک",
+        "setUrl": "URL سیٹ کریں۔",
+        "save": "محفوظ کریں۔",
+        "uploadedImage": "اپ لوڈ کردہ تصویر",
+        "imageTitle": "تصویر کا عنوان",
+        "setClip": "کٹ آؤٹ کلپ",
+        "invalidURL": "غلط URL",
+        "invalidFile": "غلط فائل",
+        "errorNoSource": "تصویر کا کوئی ذریعہ نہیں ہے۔",
+        "uploadLimit": "فائل کا زیادہ سے زیادہ سائز: {{size}}",
+        "errorFileSize": "معذرت، لیکن فائل بہت بڑی ہے۔<br> فائل کا زیادہ سے زیادہ سائز {{size}} ہے"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "سوالات",
+        "Answers": "جوابات",
+        "AnswerQuestion": "سوال کا جواب دیں۔",
+        "SetYourAnswer": "براہ کرم سوال کا جواب دیں۔",
+        "NewQuestion": "نیا سوال",
+        "NewAnswer": "نیا جواب",
+        "AnswerDetails": "جواب کی تفصیلات",
+        "answerOption": "اختیار",
+        "answerOptionExclusive": "خصوصی",
+        "answerTextarea": "ٹیکسٹیریا",
+        "FreeAnswer": "اپنا جواب یہاں لکھیں۔",
+        "SaveQuestion": "سوال محفوظ کریں۔",
+        "SaveAnswer": "جواب محفوظ کریں۔",
+        "AddAnotherAnswer": "ایک اور جواب شامل کریں۔",
+        "ErrorAnswers": "براہ کرم ایک جواب بھی شامل کریں۔",
+        "AlreadyAnswered": "پہلے ہی جواب دے چکے ہیں۔",
+        "TitlePlaceholder": "اپنا سوال ٹائپ کریں۔",
+        "ContentPlaceholder": "لوگوں کو جواب دینے میں مدد کے لیے کوئی بھی اضافی معلومات یہاں رکھیں",
+        "ErrorTitle": "سوال درکار ہے۔",
+        "Placeholder": "پلیس ہولڈر"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "نیا تجربہ",
+        "DefineTitle": "براہ کرم ایک عنوان کی وضاحت کریں۔",
+        "Create": "بنانا"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "کالز",
+        "MaxCalls": "زیادہ سے زیادہ کالز",
+        "Update": "اپ ڈیٹ",
+        "NoCallsYet": "ابھی تک کوئی کال نہیں آئی",
+        "CallReasonTitle": "یہ کال کس بارے میں ہے؟",
+        "WaitingRoom": "انتظار گاہ"
     }
 }

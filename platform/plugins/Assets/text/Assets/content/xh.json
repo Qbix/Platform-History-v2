@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Cofa ukuhlawula"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: intlawulo iqhutyelwe kwi {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Enkosi ngentlawulo yakho eya {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} ubhalisele {{plan.title}}",
+        "YouSubscribedTo": "Ubhaliselwe ku- {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Ufumana intlawulo ye {{displayAmount}} ukusuka {{call 'publisher.displayName'}} nge &quot;{1001}}&quot;",
+        "HasBeenCharged": "Heyi, oku kukwazisa nje {{1}} ihlawuliswe {{2}} nge {{3}} ngu {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Enkosi ngentlawulo yakho ye-&quot;{999}}&quot;",
+        "HavePaid": "Hey {{1}}, olu luqinisekiso olukhawulezayo lokuba uhlawule ngempumelelo {{2}} ku {{3}} ye {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Ulwazi malunga nomyalelo",
+        "PaymentMethod": "Uhlobo lokuhlawula",
+        "ContactInfo": "Iinkcukacha zoqhagamshelwano",
+        "Pay": "Hlawula"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Isimemo samkelwe ngu {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} ufake igama lokuqala",
+        "Streams_user_lastname": "{{invitedUserName}} ufake ifani",
+        "Streams_user_icon": "{{invitedUserName}} i icon efakiwe",
+        "Places_user_location": "{{invitedUserName}} indawo engenisiweyo",
+        "Streams_greeting": "{{invitedUserName}} ungene ebulisa",
+        "YouHaveCreditsToStart": "Une {{amount}} iikhredithi zokuqalisa",
+        "PaymentFor": "Intlawulo ka-&quot;{999}}&quot;",
+        "PaymentTo": "Intlawulo eya {{1}}",
+        "PaymentToUser": "Intlawulo eya {{toUserName}}",
+        "CreatePaidStream": "ukuyila {{toStreamName}}",
+        "JoinedPaidStream": "ugcino kwi &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ngokwenza uluntu &quot;{999}}&quot;",
+        "LeftPaidStream": "njengembuyekezo yogcino kwi &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Uthenge {{amount}} iikhredithi",
+        "BonusCredits": "Ibhonasi {{amount}} iikhredithi",
+        "BuyAmountCredits": "Thenga {{amount}} iikhredithi",
+        "WatchClip": "Ufumene {{amount}} iikhredithi ngokubukela {{fromStreamTitle}}",
+        "MissingCredits": "IiKhredithi ezilahlekileyo",
+        "YouMissingCredits": "Udinga {{amount}} iikhredithi ezongezelelweyo ukuze uqhubeke.",
+        "BuyCredits": "Thenga iikhredithi",
+        "BuyBonus": "Ukuthenga {{amount}} iikhredithi kanye, kuya kukhokelela {{bonus}} kwiibhonasi zekhredithi.",
+        "Buy": "Thenga",
+        "PurchaseCredits": "Ukuthenga iiKhredithi",
+        "Credits": "Iikhredithi",
+        "ErrorInvalidAmount": "Imali ayisebenzi",
+        "ErrorInvalidCurrency": "Ngelishwa asiyixhasi imali {{currency}} okwangoku",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} iikhredithi",
+            "BonusCredits": "{{amount}} iikhredithi"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Umhla",
+        "Amount": "Isixa",
+        "Description": "Inkcazo",
+        "Client": "Umxhasi",
+        "To": "ukuya",
+        "From": "ukusuka",
+        "SeeHistory": "Jonga imbali yentlawulo ye {{1}}",
+        "HistoryEmpty": "Awunayo idatha okwangoku",
+        "PaymentFor": "Thumela {{amount}} iikhredithi",
+        "PaymentTo": "Thumela {{amount}} iikhredithi",
+        "PaymentToUser": "Thumela {{amount}} iikhredithi",
+        "CreatePaidStream": "Uchithile {{amount}} iikhredithi",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ufumene {{amount}} iikhredithi",
+            "-": "Uchithile {{amount}} iikhredithi"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ufumene {{amount}} iikhredithi",
+            "-": "Uchithile {{amount}} iikhredithi"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Ufumene {{amount}} iikhredithi",
+            "-": "Thumela {{amount}} iikhredithi"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Uchithile {{amount}} iikhredithi",
+        "BoughtCredits": "Uthenge {{amount}} iikhredithi",
+        "BonusCredits": "Ufumene ibhonasi {{amount}} iikhredithi",
+        "InviteAcceptedBy": "Ufumene {{amount}} iikhredithi",
+        "Streams_user_firstname": "Ufumene {{amount}} iikhredithi",
+        "Streams_user_lastname": "Ufumene {{amount}} iikhredithi",
+        "Streams_user_icon": "Ufumene {{amount}} iikhredithi",
+        "Places_user_location": "Ufumene {{amount}} iikhredithi",
+        "Streams_greeting": "Ufumene {{amount}} iikhredithi",
+        "YouHaveCreditsToStart": "Ufumene {{amount}} iikhredithi"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Seta Ulwazi lweNtlawulo",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Qala Umrhumo",
+            "message": "Ngaba ungathanda ukubhalisela {{title}}?",
+            "ok": "Kulungile",
+            "cancel": "Rhoxisa"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "ikhadi letyala okanye debit",
+        "SubscribePayment": "Bhalisa Intlawulo",
+        "ImmediatePayment": "Intlawulo ekhawulezileyo"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Seta Ulwazi lweNtlawulo",
+        "BuyAmountCredits": "Thenga {{amount}} iikhredithi",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Yenza iNtlawulo",
+            "message": "Ngaba uyavuma ukuhlawula {{symbol}} {{amount}}?",
+            "ok": "Kulungile",
+            "cancel": "Rhoxisa"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Iikhredithi",
+            "description": "ugcina umkhondo weekhredithi kunye neentlawulo"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Isicwangciso sokurhuma",
+            "description": "isicwangciso sorhumo"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Umrhumo",
+            "description": "umrhumo"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Imveliso",
+            "description": "imveliso iyathengiswa"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Inkonzo",
+            "description": "inkonzo enikezelwayo"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Ufumene {{amount}} iikhredithi"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Uthenge {{amount}} iikhredithi"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Ibhonasi {{amount}} iikhredithi"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Uchithile {{amount}} iikhredithi"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Thumela {{amount}} iikhredithi ku {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Ufumene {{amount}} iikhredithi ukusuka {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Inkonzo entsha",
+            "TitlePlaceholder": "Isihloko senkonzo",
+            "PricePlaceholder": "Seta ixabiso",
+            "LinkPlaceholder": "cwangcisa ulwazi olongezelelweyo ikhonkco",
+            "DescriptionPlaceholder": "Inkcazo yenkonzo",
+            "SaveService": "Gcina Inkonzo",
+            "SelectRequiredParticipants": "Abathathi-nxaxheba abafunekayo"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Lawula iSakhelo seNkonzo",
+        "ManageServices": "Lawula Iinkonzo",
+        "Free": "Mahala",
+        "OptionalContribution": "Igalelo lokuzikhethela",
+        "RequiredPayment": "Intlawulo efunekayo",
+        "AreYouSureDelete": "Uqinisekile ufuna ukucima le nkonzo?",
+        "AmountServicesRelated": "Kukho {{amount}} izinto ezifumanekayo ezinxulumene nale nkonzo. Nazo ziya kususwa."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Ulwazi malunga {{title}} ne-NFT",
+        "Description": "Iinkcukacha ezithe vetshe malunga ne-NFT",
+        "FixedBid": "Thenga ngoku",
+        "CurrentBid": "ukhuphiswano langoku",
+        "StartingIn": "Ukuqala kwi",
+        "EndingIn": "Ukuphela",
+        "CreateNFT": "Yenza i-NFT",
+        "TitlePlaceholder": "Nika iNFT yakho isihloko",
+        "DescriptionPlaceholder": "Nika iNFT yakho inkcazo",
+        "CreateYourNFT": "Yenza i-NFT yakho",
+        "Royalties": "Imirhumo",
+        "RoyaltyPlaceholder": "Ukhetho. Imali ehlawulwe kumdali phambi kokudluliselwa.",
+        "ExpirationDate": "Umhla WOKUPHELELWA",
+        "StartingDate": "Umhla wokuqala",
+        "BidsBelowThisAmount": "Iibhidi ezingaphantsi kwesi sixa-mali aziyi kuvunyelwa",
+        "MinimumBid": "Ubuncinci bebhidi",
+        "Price": "Ixabiso",
+        "Owner": "Umnini",
+        "SelectCategory": "Khetha udidi",
+        "Day": "Usuku",
+        "Days": "Iintsuku",
+        "Hour": "Yure",
+        "Hours": "Iiyure",
+        "Minute": "Mzuzu",
+        "Minutes": "Imizuzu",
+        "Second": "Isibini",
+        "Seconds": "Imizuzwana",
+        "SalesCreator": "yentengiso iya kumdali",
+        "Details": "Iinkcukacha",
+        "Bids": "Iibhidi",
+        "History": "Imbali",
+        "LoremIpsum": "I-Lorem Ipsum sisicatshulwa nje esiludummy soshicilelo kunye neshishini lokucwangcisa.",
+        "PutOnSale": "Beka kwintengiso",
+        "PutOffSale": "Ukurhoxa kwintengiso",
+        "Transfer": "Udluliselo",
+        "Update": "Hlaziya",
+        "UpdateToken": "Hlaziya uphawu",
+        "CreateToken": "Yenza uMqondiso",
+        "PlaceBid": "Faka Ubhejo",
+        "SoldOut": "Iyathengiswa",
+        "NftName": "NFT igama",
+        "DescribeYourNFT": "Nceda uchaze i-NFT yakho",
+        "NftPicture": "Umfanekiso oza kumela i-NFT",
+        "NftMovie": "Umboniso bhanyabhanya ozakumela iNFT",
+        "UploadMovie": "Layisha imuvi",
+        "MovieSource": "Umthombo weMovie",
+        "UploadFile": "Layisha ifayile",
+        "PutOnMarketplace": "Beka kwindawo yentengiso",
+        "InstantPurchase": "Faka ixabiso ukuvumela abasebenzisi ukuba bathenge iNFT yakho ngoko nangoko",
+        "FixedPrice": "Ixabiso elimiselweyo",
+        "TimedAuction": "Ifandesi yexesha",
+        "OpenForBids": "Vula kwiibhidi",
+        "PriceOnePiece": "Faka ixabiso ngeqhekeza elinye",
+        "EnterMinimumBid": "Ngenisa Ubuncinane bebhidi",
+        "SelectChain": "Khetha ikhonkco",
+        "WrongChain": "Le NFT yenziwe phantsi kwe-&quot;{999}}&quot;. Nceda usebenzise elitsheyini.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Ukuthathwa ngaphandle kwe-NFT&#39;s",
+            "fileNotFound": "Uxolo, ifayile ye-CSV ayifunyenwanga.",
+            "fileEmpty": "Uxolo, ifayile ye-CSV ayinanto.",
+            "userIdNotFound": "umsebenzisi ukhona kodwa id ayinanto",
+            "errorLine": "umgca {{1}}",
+            "fieldNotFound": "Indawo efunekayo &quot;{999}}&quot; ayifunyenwanga",
+            "taskStreamInvalid": "umsebenzi awusebenzi",
+            "instructionsEmpty": "imiyalelo yomjelo womsebenzi ayinanto",
+            "complete": "Gqibezela",
+            "activateUsers": "thumela umyalezo wokuvula kubasebenzisi?",
+            "importProgress": "Inkqubela phambili",
+            "importOptions": "Iinketho",
+            "sampleCSV": "Khuphela isampuli ye-CSV",
+            "fileLabel": "Layisha Ispreadsheet:",
+            "errorsTitle": "Iimpazamo zenzekile"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Hluza ngeeNgqokelela ze-NFT",
+                "ShowNFTCollection": "Bonisa ingqokelela ye-NFT kwi...",
+                "AllCollections": "Zonke Iingqokelela"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Bonke Ababhali",
+                "AllUsers": "Wonke umntu",
+                "FilterByAuthors": "Hluza ngabaBhali"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Buyela kwiQokelelo"
     }
 }

@@ -12,122 +12,122 @@
     },
     "interests": {
         "Filter": "Jaké máš zájmy?",
-        "CanAdd": "Pokud stále nemůžete najít to, co hledáte, můžete přidat nový zájem níže:",
-        "TrySynonyms": "Nevidíš to? Vyzkoušejte některá synonyma.",
-        "AddUnderCategory": "Přidat do kategorie ...",
+        "CanAdd": "Pokud stále nemůžete najít, co hledáte, můžete níže přidat nový zájem:",
+        "TrySynonyms": "nevidíš to? Zkuste nějaká synonyma.",
+        "AddUnderCategory": "Přidat do kategorie...",
         "Other": "jiný",
-        "Unlisted": "Nevyplněno"
+        "Unlisted": "Neuvedeno"
     },
     "chat": {
-        "flaggedForAdminReview": "Zpráva byla pro kontrolu uživatele označena příznakem. Opětovným ťuknutím znovu rozbalíte.",
+        "flaggedForAdminReview": "Zpráva byla označena ke kontrole administrátorem. Dalším klepnutím označení zrušíte.",
         "noOneSaid": "Nikdo nic neřekl",
-        "closeChatButton": "Zavřete chat",
-        "closeChatConfirmTitle": "Zavřete tento chat?",
+        "closeChatButton": "Zavřít chat",
+        "closeChatConfirmTitle": "Zavřít tento chat?",
         "closeChatConfirm": "Opravdu chcete tento chat zavřít?",
         "closeChatConfirmYes": "Ano",
         "closeChatConfirmNo": "Ne",
-        "earlierComments": "dřívějších připomínek",
-        "Subscribed": "Ztlumit oznámení",
-        "Unsubscribed": "Získejte oznámení",
+        "earlierComments": "dřívější komentáře",
+        "Subscribed": "Upozornění povolena",
+        "Unsubscribed": "Oznámení jsou ztlumena",
         "notAllowedToJoinCall": "K této konverzaci nemáte povolení.",
         "startedConversation": "zahájil konverzaci",
         "RealTimeCall": "Volání v reálném čase",
-        "SearchByName": "Hledat podle jména",
+        "SearchByName": "Hledejte podle jména",
         "Notifications": {
             "Visit": "{{displayName}} navštěvuje chat",
-            "Join": "{{displayName}} se připojil k chatu",
-            "Leave": "{{displayName}} opustil chat",
-            "RelatedTo": "{{displayName}} odstartoval {{stream.displayType}}"
+            "Join": "{{displayName}} se připojil(a) k chatu",
+            "Leave": "{{displayName}} opustil(a) chat",
+            "RelatedTo": "{{displayName}} zahájil(a) {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Zpráva {{& message.fields.type}} až {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} řekl:",
+        "*": "Zpráva {{& message.fields.type}} uživateli {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} řekl: {{& message.content}}",
         "Streams\/changed": "Změny v {{stream.fields.title}}",
-        "Streams\/invite": "Byli jste pozváni na adresu {{& stream.fields.title}}",
-        "Streams\/announcement": "Oznámení v {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} změnil přístup k datům",
-        "Streams\/chat\/edit": "Zpráva chatu byla upravena",
-        "Streams\/chat\/remove": "Zpráva chatu byla odstraněna",
-        "Streams\/closed": "{{stream.fields.title}} bylo zavřeno",
-        "Streams\/task\/progress": "Pokrok provedený {{stream.fields.title}}",
+        "Streams\/invite": "Byli jste pozváni do {{& stream.fields.title}}",
+        "Streams\/announcement": "Oznámení v {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} změnil přístup v {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chatová zpráva upravena v {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chatová zpráva odstraněna za {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} bylo uzavřeno",
+        "Streams\/task\/progress": "Pokrok dosažený dne {{stream.fields.title}}",
         "Streams\/task\/complete": "Úkol dokončen: {{stream.fields.title}}",
         "Streams\/task\/error": "Chyba během: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Příchozí zpráva",
-        "ManageEmailSubscriptions": "spravovat odběry e-mailů",
+        "ManageEmailSubscriptions": "spravovat své odběry e-mailů",
         "IfUnsubscribe": "Pokud se chcete odhlásit",
-        "Streams\/relatedTo\/Streams\/call": "Nový hovor byl zahájen v {{toTitle}}",
-        "Streams\/relatedTo\/*": "Nový {{relationDisplayType}} v {{toTitle}}",
+        "Streams\/relatedTo\/Streams\/call": "Nový hovor zahájen v {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nové {{relationDisplayType}} v {{toTitle}}",
         "Streams\/relatedFrom\/*": "Přidáno do {{toTitle}} jako {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} se o vás zmínil v komentáři",
-        "Streams\/call": "{{displayName}} zahájil hovor v reálném čase"
+        "Streams\/call": "{{displayName}} zahájil(a) hovor v reálném čase"
     },
     "invite": {
-        "messageContent": "{{displayName}} vás pozvalo na {{inviteUrl}}",
+        "messageContent": "{{displayName}} vás pozval(a) do {{100}}",
         "dialog": {
-            "chooseFromContacts": "Vyberte si z kontaktů",
-            "selectFromContacts": "Vyberte možnost Z kontaktů",
+            "chooseFromContacts": "Vyberte si ze svých kontaktů",
+            "selectFromContacts": "Vyberte Z kontaktů",
             "photo": "Vyfoť",
-            "photoInstruction": "Pokud je osoba, která naskenovala váš QR kód, před vámi, pořiďte si je",
+            "photoInstruction": "Pokud je před vámi osoba, která naskenovala váš QR kód, vyfoťte ji",
             "to": "Komu: {{Stream Title}}",
             "go": "Jít",
             "title": "Pozvat",
             "placeholder": "Mobilní číslo nebo e-mailová adresa",
-            "orInvite": "Nebo pozvat lidi pomocí:",
-            "QR": "{{ClickOrTap}} pro generování QR kódu",
+            "orInvite": "Nebo pozvěte lidi pomocí:",
+            "QR": "{{ClickOrTap}} pro vygenerování QR kódu",
             "QRtitle": "Naskenujte tento QR kód",
             "byEmail": "E-mailem",
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Cvrlikání",
-            "QRscanned": "Prohledali to!",
-            "chooseAgainFromContacts": "Znovu vyberte možnost Kontakty",
-            "inviteSelectedContacts": "Pozvěte vybrané kontakty",
+            "QRscanned": "Naskenovali to!",
+            "chooseAgainFromContacts": "Vyberte Znovu z Kontaktů",
+            "inviteSelectedContacts": "Pozvat vybrané kontakty",
             "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován",
-            "copyLink": "{{ClickOrTap}} zkopírujte odkaz na pozvání",
-            "userChooserPlaceholder": "Hledat podle jména",
+            "copyLink": "{{ClickOrTap}} zkopírujte odkaz s pozvánkou",
+            "userChooserPlaceholder": "Hledejte podle jména",
             "shareOrCopyLink": "{{ClickOrTap}} pro sdílení nebo zkopírování odkazu s pozvánkou"
         },
         "email": {
-            "subject": "Hej, podívejte se na to",
-            "PleaseVisitLink": "Navštivte následující odkaz:",
-            "InvitingYou": "Zvu vás na {{title}}",
-            "HasInvitedYou": "{{displayName}} vás pozvalo na {{title}}",
-            "HasMentionedYou": "{{displayName}} se o vás zmínil v &quot;{{title}}&quot;",
+            "subject": "Hej, podívej se na tohle",
+            "PleaseVisitLink": "Navštivte prosím následující odkaz:",
+            "InvitingYou": "Zvu vás do {{title}}",
+            "HasInvitedYou": "{{displayName}} vás zve do {{100}}",
+            "HasMentionedYou": "{{displayName}} se o vás zmínil v „{{title}}“",
             "YOUAREINVITED": "JSTE ZVÁNI!",
-            "AcceptInvite": "Přijmout pozvání"
+            "AcceptInvite": "Přijměte pozvání"
         },
         "sms": {
-            "content": "Byli jste pozváni na adresu {{title}}. Klepněte na {{url}}"
+            "content": "Byli jste pozváni do {{title}}. Klepněte prosím na {{100}}"
         },
         "notice": {
-            "text": "Byli jste pozváni. {{ClickOrTap}} zde přijměte a připojte se."
+            "text": "Byli jste pozváni. {{ClickOrTap}} zde pro přijetí a připojení."
         },
         "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi",
         "command": "Pozvat"
     },
     "followup": {
         "mobile": {
-            "alert": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
-            "confirm": "Pozvánky jsou zasílány z našeho čísla, které vaši přátelé ještě nepoznají. Chcete následovat rychlý text a informovat je, že pozvání přišlo od vás, a požádat je, aby klikli na odkaz.",
-            "check": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím sms a klikněte na odkaz!",
-            "CheckYourMobile": "Zkontrolujte SMS a postupujte podle pokynů!"
+            "alert": "Pozvánky jsou odesílány z našeho čísla, které vaši přátelé ještě neznají. Poté jim pošlete rychlou textovou zprávu, abyste věděli, že pozvánka přišla od vás, a požádejte je, aby klikli na odkaz.",
+            "confirm": "Pozvánky jsou odesílány z našeho čísla, které vaši přátelé ještě neznají. Chtěli byste jim dát rychlou textovou zprávu, abyste věděli, že pozvánka přišla od vás, a požádejte je, aby klikli na odkaz.",
+            "check": "Ahoj, právě jsem ti poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím svou sms a klikněte na odkaz!",
+            "CheckYourMobile": "Zkontrolujte prosím SMS a postupujte podle pokynů!"
         },
         "email": {
-            "alert": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě nepoznají. Následujte rychlý text a dejte jim vědět, že pozvání přišlo od vás, a požádejte je, aby klikli na odkaz.",
-            "confirm": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě nepoznají. Chcete následovat rychlý text a informovat je, že pozvání přišlo od vás, a požádat je, aby klikli na odkaz.",
-            "subject": "Dostali jste pozvání?",
-            "body": "Hej, právě jsem vám poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím svůj e-mail a klikněte na odkaz!",
+            "alert": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě neznají. Poté jim pošlete rychlou textovou zprávu, abyste věděli, že pozvánka přišla od vás, a požádejte je, aby klikli na odkaz.",
+            "confirm": "Pozvánky jsou odesílány z naší domény, kterou vaši přátelé ještě neznají. Chtěli byste jim dát rychlou textovou zprávu, abyste věděli, že pozvánka přišla od vás, a požádejte je, aby klikli na odkaz.",
+            "subject": "Dostali jste pozvánku?",
+            "body": "Ahoj, právě jsem ti poslal pozvánku do aplikace {{app}}. Zkontrolujte prosím svůj e-mail a klikněte na odkaz v něm!",
             "CheckYourEmail": "Zkontrolujte prosím svůj e-mail a postupujte podle pokynů!"
         }
     },
     "participating": {
         "Title": "Titul",
-        "Subscribed": "Přihlásit se",
+        "Subscribed": "Odebíráno",
         "Participants": "Účastníci",
-        "AreYouSureRemoveIdentifier": "Opravdu jste tento identifikátor odstranili?",
-        "AreYouSureUnsubscribeIdentifier": "Jste si jisti, že jste tento identifikátor odhlásili? Vypne oznámení k tomuto identifikátoru.",
-        "AreYouSureUnsubscribeDevice": "Jste si jisti, že chcete toto zařízení odhlásit? Vypne oznámení do tohoto zařízení.",
+        "AreYouSureRemoveIdentifier": "Opravdu chcete tento identifikátor odstranit?",
+        "AreYouSureUnsubscribeIdentifier": "Opravdu odhlásit odběr tohoto identifikátoru? Vypne upozornění na tento identifikátor.",
+        "AreYouSureUnsubscribeDevice": "Opravdu odhlásit odběr tohoto zařízení? Vypne upozornění na toto zařízení.",
         "Identifiers": "Identifikátory",
         "Devices": "Zařízení",
         "Streams": "Proudy",
@@ -139,60 +139,60 @@
             "microphoneTitle": "Povolit mikrofon",
             "cameraTitle": "Povolit kameru",
             "cameraAndMicrophoneTitle": "Zapněte fotoaparát a mikrofon",
-            "dialogTitle": "Povolení dialogu",
+            "dialogTitle": "Spojovací",
             "microphoneBtn": "Povolit mikrofon",
-            "cameraBtn": "Povolit kameru",
-            "cameraAndMicrophoneBtn": "Povolit kameru a mikrofon"
+            "cameraBtn": "Povolit fotoaparát",
+            "cameraAndMicrophoneBtn": "Povolit fotoaparát a mikrofon"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukce",
-            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Chcete-li jej použít, postupujte takto:",
-            "point1": "Přejděte na „Nastavení“ -&gt; „Upřesnit“ -&gt; „Ochrana soukromí a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
-            "point2": "Odebrat {{hostname}} ze seznamu &quot;Blokovat&quot;"
+            "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
+            "point1": "Přejděte na „Nastavení“ -&gt; „Pokročilé“ -&gt; „Ochrana osobních údajů a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
+            "point2": "Odebrat {{hostname}} ze seznamu „Blokovat“."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instrukce",
-            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Znovu načtěte tuto stránku a potvrďte přístup na stránku {{kind}} a připojte se ke konferenci."
+            "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li se připojit ke konferenci, znovu načtěte tuto stránku a potvrďte přístup k {{kind}}."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instrukce",
-            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Chcete-li jej použít, postupujte takto:",
-            "point1": "Přejděte do nastavení Androidu",
+            "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
+            "point1": "Přejděte do Nastavení systému Android",
             "point2": "Otevřete „Aplikace a oznámení“",
-            "point3": "Najděte &quot;{{communityName}}&quot; a otevřete jej",
+            "point3": "Najděte „{{communityName}}“ a otevřete jej",
             "point4": "Klepněte na Oprávnění",
             "point5": "Povolit {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instrukce",
-            "permissionDenied": "Povolení pro {{kind}} bylo zamítnuto. Chcete-li jej použít, postupujte takto:",
-            "point1": "Přejděte do nastavení iOS",
-            "point2": "Otevřete „Ochrana osobních údajů“",
+            "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
+            "point1": "Přejděte do Nastavení iOS",
+            "point2": "Otevřete &quot;Ochrana osobních údajů&quot;",
             "point3": "Najděte {{kind}} a otevřete jej",
-            "point4": "Najděte &quot;{{communityName}}&quot; a povolte"
+            "point4": "Najděte „{{communityName}}“ a povolte"
         },
         "notices": {
-            "youJoinedRoom": "Připojili jste se do místnosti",
+            "youJoinedRoom": "Připojil jsi se k místnosti",
             "joining": "Připojování: {{userName}}",
             "sbLeftRoom": "{{userName}} opustil místnost",
-            "youLeftRoom": "Opustil jsi pokoj",
-            "codeCopied": "Opustil jsi pokoj",
-            "sbBeganFbLive": "{{userName}} začal tento hovor vysílat na Facebooku",
-            "sbStoppedFbLive": "{{userName}} přestal vysílat tento hovor na Facebooku",
-            "youBeganFbLive": "Tento hovor jste začali vysílat na Facebooku",
-            "youStoppedFbLive": "Tento hovor jste přestali vysílat na Facebooku",
-            "linkCopiedToCb": "Odkaz byl zkopírován do schránky",
+            "youLeftRoom": "Odešel jsi z místnosti",
+            "codeCopied": "Odešel jsi z místnosti",
+            "sbBeganFbLive": "{{userName}} začal vysílat tento hovor na Facebooku",
+            "sbStoppedFbLive": "{{userName}} přestal(a) tento hovor vysílat na Facebooku",
+            "youBeganFbLive": "Tuto výzvu jste začali vysílat na Facebooku",
+            "youStoppedFbLive": "Přestali jste tento hovor vysílat na Facebooku",
+            "linkCopiedToCb": "Odkaz zkopírován do schránky",
             "codeCopiedToCb": "Kód zkopírován do schránky",
             "userHasNoVideo": "Účastník nemá žádné video",
             "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci.",
-            "youBeganVideoRecording": "Začali jste nahrávat tuto konferenci",
-            "youStoppedVideoRecording": "Zastavili jste nahrávání této konference",
-            "switchingRoom": "Šatna ...",
-            "forceDisconnecting": "Budete odpojeni do 5 sekund",
-            "youStartedLive": "Toto volání jste začali vysílat na vlastní RTMP",
-            "youStoppedLive": "Přestali jste vysílat tento hovor na vlastní RTMP",
-            "sbStartedLiveStreaming": "{{userName}} zahájeno živě",
-            "sbStoppedLiveStreaming": "{{userName}} skončil živě",
+            "youBeganVideoRecording": "Začal jste nahrávat tuto konferenci",
+            "youStoppedVideoRecording": "Přestali jste nahrávat tuto konferenci",
+            "switchingRoom": "Přepínací místnost...",
+            "forceDisconnecting": "Do 5 sekund budete odpojeni",
+            "youStartedLive": "Toto volání jste začali vysílat do vlastního RTMP",
+            "youStoppedLive": "Přestali jste vysílat toto volání na vlastní RTMP",
+            "sbStartedLiveStreaming": "{{userName}} začalo živě",
+            "sbStoppedLiveStreaming": "{{userName}} skončilo živě",
             "liveStopped": "Při odesílání videa do koncového bodu došlo k chybě",
             "forceDisconnectingImmediately": "Byli jste odpojeni hostitelem"
         },
@@ -200,24 +200,24 @@
             "webCamera": "Webová kamera",
             "screenSharing": "Sdílení obrazovky",
             "shareAnotherScreen": "Sdílejte další obrazovku",
-            "turnOffCameras": "Vypněte všechny kamery",
+            "turnOffCameras": "Vypněte fotoaparát",
             "startFBLive": "Spusťte Facebook Livestream",
-            "stopFBLive": "Zastavte Livestream na Facebooku",
-            "fbLiveTitle": "Živý název",
-            "fbLiveDescription": "Živý popis",
+            "stopFBLive": "Zastavte Facebook Livestream",
+            "fbLiveTitle": "Název živého přenosu",
+            "fbLiveDescription": "Popište svůj přímý přenos. O čem to je?",
             "fbOnlyMeLiveAccess": "Jen já",
             "fbFriendsAccess": "Přátelé",
             "fbPublicAccess": "Veřejnost",
             "fbStartLive": "Běž žít",
-            "fbStopLive": "End Live",
+            "fbStopLive": "Ukončit přímý přenos",
             "fbEmbedCode": "Vložit",
             "copy": "kopírovat",
-            "turnOffVideo": "Vypněte sdílení fotoaparátu \/ obrazovky",
+            "turnOffVideo": "Vypněte sdílení fotoaparátu\/obrazovky",
             "turnOffScreenSharing": "Vypněte sdílení obrazovky",
-            "cameraIsTurnedOff": "Fotoaparát je vypnutý",
+            "cameraIsTurnedOff": "Kamera je vypnutá",
             "startRecording": "Začít nahrávat",
-            "stopRecording": "Zastavte nahrávání",
-            "recordingInProgress": "Probíhá nahrávání ...",
+            "stopRecording": "Zastavit nahrávání",
+            "recordingInProgress": "Nahrávání probíhá...",
             "publishOnTimeline": "Publikovat na časové ose",
             "publishToGroup": "Publikovat do skupiny",
             "turnOffAudioInput": "Ztlumit mikrofon",
@@ -225,7 +225,7 @@
             "start": "Start",
             "stop": "Stop",
             "streamingSettings": "Nastavení",
-            "streamToRTMP": "Streamujte na vlastní RTMP",
+            "streamToRTMP": "Streamujte do vlastního RTMP",
             "dialogTitle": "Nastavení videa",
             "startBroadcasting": "Začněte vysílat",
             "broadcastingInProgress": "Probíhá vysílání"
@@ -233,33 +233,33 @@
         "participantsPopup": {
             "disconnect": "Odpojit",
             "floatingScreens": "Plovoucí obrazovky",
-            "tiledScreens": "Kachlová obrazovky",
-            "loudestExceptMe": "Nejhlasitější kromě mě",
-            "maximizeLoudest": "Maximalizujte nejhlasitější",
-            "staticMaximized": "Statická maximalizace",
+            "tiledScreens": "Dlaždicové obrazovky",
+            "loudestExceptMe": "Nejhlasitější Kromě mě",
+            "maximizeLoudest": "Maximalizovat nejhlasitější",
+            "staticMaximized": "Statické Maximalizováno",
             "manual": "Manuál",
             "turnOffCamera": "Skrýt video",
             "turnOffAudio": "Ztlumit zvuk",
             "turnOffScreenSharing": "Skrýt sdílení obrazovky",
             "turnOnCamera": "Zobrazit video",
-            "turnOnAudio": "Ztlumit zvuk",
+            "turnOnAudio": "Zapnout zvuk",
             "turnOnScreenSharing": "Zobrazit sdílení obrazovky",
             "fullScreen": "Celá obrazovka",
             "dialogTitle": "Nastavení účastníka"
         },
-        "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto proudu.",
-        "streamTitle": "{{1}} živý hovor",
+        "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto streamu.",
+        "streamTitle": "{{1}} zahájil(a) živý hovor",
         "preview": {
             "preamble": "Setkání:",
             "Meeting": "Setkání",
-            "MeetingEnded": "Setkání skončilo"
+            "MeetingEnded": "Setkání ukončeno"
         },
         "preparing": {
             "micIsOff": "Mikrofon je vypnutý",
             "micIsOn": "Mikrofon je zapnutý",
-            "cameraIsOff": "Fotoaparát je vypnutý",
-            "cameraIsOn": "Fotoaparát je zapnutý",
-            "screenSharingIsOn": "Sdílení obrazovky je zapnuté",
+            "cameraIsOff": "Kamera je vypnutá",
+            "cameraIsOn": "Kamera je zapnutá",
+            "screenSharingIsOn": "Sdílení obrazovky je zapnuto",
             "screenSharingIsOff": "Sdílet obrazovku",
             "joinNow": "Připojte se k výzvě"
         },
@@ -283,7 +283,7 @@
         },
         "Streams\/task": {
             "displayType": "Úkol",
-            "description": "úkol, který mají vykonávat lidé nebo stroje"
+            "description": "pro příjem aktualizací o postupu na určitém úkolu"
         },
         "Streams\/number": {
             "displayType": "Číslo",
@@ -295,7 +295,7 @@
         },
         "Streams\/text": {
             "displayType": "Text",
-            "description": "text"
+            "description": "tělo textu"
         },
         "Streams\/text\/small": {
             "displayType": "Text",
@@ -319,7 +319,7 @@
         },
         "Streams\/image": {
             "displayType": "obraz",
-            "description": "vizuální obrázek",
+            "description": "vizuální obraz",
             "newItem": "Přidat obrázek"
         },
         "Streams\/images": {
@@ -347,15 +347,15 @@
         },
         "Streams\/live": {
             "displayType": "Živý přenos",
-            "description": "živý zvuk nebo video"
+            "description": "živé audio nebo video"
         },
         "Streams\/category": {
             "displayType": "Kategorie",
-            "description": "kategorie, se kterou mohou být spojeny další proudy"
+            "description": "kategorie, ke které lze přiřadit další proudy"
         },
         "Streams\/participating": {
-            "displayType": "Účastnický index",
-            "description": "proudy s tím souvisí \/ nesouvisí, když se uživatel připojí \/ opustí"
+            "displayType": "Zúčastněný index",
+            "description": "streamy s tím souvisí\/nesouvisí, když se uživatel připojí\/odchází"
         },
         "Streams\/interest": {
             "displayType": "Zájem",
@@ -367,19 +367,19 @@
         },
         "Streams\/chat": {
             "displayType": "Konverzace",
-            "description": "konverzace mezi uživateli, s historií"
+            "description": "konverzace mezi uživateli s historií"
         },
         "Streams\/webrtc": {
             "displayType": "Hovor v reálném čase",
-            "description": "video \/ audio volání v reálném čase"
+            "description": "video\/audio hovor v reálném čase"
         },
         "Streams\/tasks": {
             "description": "kategorie pro úkoly",
             "displayType": "Úkoly"
         },
         "Streams\/experience": {
-            "description": "společná zkušenost členů komunity",
-            "displayType": "Společná zkušenost členů komunity"
+            "description": "společný zážitek pro členy komunity",
+            "displayType": "Společná zkušenost pro členy komunity"
         },
         "Streams\/greeting": {
             "description": "pozdrav, kterým se uživatel může představit",
@@ -399,26 +399,26 @@
             "description": "stream odpovědí"
         },
         "Streams\/calls": {
-            "displayType": "Hovory",
+            "displayType": "hovory",
             "description": "kategorie pro Streams\/webrtc",
-            "MaxRelationsExceeded": "Byl překročen maximální počet hovorů"
+            "MaxRelationsExceeded": "Překročen maximální počet hovorů"
         }
     },
     "messages": {
         "html": {
-            "posted": "zveřejnil <em>{{message.fields.type}}<\/em> zprávu na {{stream.fields.title}}"
+            "posted": "přidal zprávu <em>{{message.fields.type}}<\/em> do {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "okomentoval",
+            "commentedOn": "komentoval",
             "in": "v",
             "body": "v {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "byl přidán do",
-                "byAvatar": "o {{avatar.displayName}}"
+                "hasBeenPostedTo": "bylo odesláno do",
+                "byAvatar": "od {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "má nový {{instructions.fromDisplayType}}",
-                "byAvatar": "přidal {{avatar.displayName}}"
+                "byAvatar": "přidal(a) {{avatar.displayName}}"
             },
             "startedCallIn": "zahájil hovor"
         }
@@ -427,7 +427,7 @@
         "placeholder": "zadejte název stránky",
         "ModTab": "Upravit položku",
         "Save": "Uložit",
-        "Delete": "Odstranit",
+        "Delete": "Vymazat",
         "Submenu": "Podnabídka"
     },
     "errors": {
@@ -448,7 +448,7 @@
         "invalidFile": "Neplatný soubor",
         "errorNoSource": "Žádný zdroj zvuku",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
-        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+        "errorFileSize": "Omlouváme se, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
     },
     "video": {
         "reset": "Resetovat",
@@ -464,7 +464,7 @@
         "invalidFile": "Neplatný soubor",
         "errorNoSource": "Žádný zdroj videa",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
-        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+        "errorFileSize": "Omlouváme se, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
     },
     "pdf": {
         "reset": "Resetovat",
@@ -478,9 +478,9 @@
         "setClip": "Vystřihnout klip",
         "invalidURL": "neplatná URL",
         "invalidFile": "Neplatný soubor",
-        "errorNoSource": "Žádný zdroj ve formátu PDF",
+        "errorNoSource": "Žádný zdroj pdf",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
-        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
+        "errorFileSize": "Omlouváme se, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}"
     },
     "image": {
         "reset": "Resetovat",
@@ -496,29 +496,29 @@
         "invalidFile": "Neplatný soubor",
         "errorNoSource": "Žádný zdroj obrázku",
         "uploadLimit": "Maximální velikost souboru: {{size}}",
-        "errorFileSize": "Litujeme, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}",
+        "errorFileSize": "Omlouváme se, ale soubor je příliš velký.<br> Maximální velikost souboru je {{size}}",
         "uploadedImage": "Nahraný obrázek",
         "imageTitle": "Název obrázku"
     },
     "questions": {
-        "Questions": "Dotazy",
+        "Questions": "Otázky",
         "Answers": "Odpovědi",
         "AnswerQuestion": "Odpověď na otázku",
         "SetYourAnswer": "Odpovězte prosím na otázku",
         "NewQuestion": "Nová otázka",
         "NewAnswer": "Nová odpověď",
-        "AnswerDetails": "Odpovědět Podrobnosti",
+        "AnswerDetails": "Podrobnosti odpovědi",
         "answerOption": "Volba",
         "answerOptionExclusive": "Výhradní",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "bezplatná odpověď ...",
+        "FreeAnswer": "Zde napište svou odpověď",
         "SaveQuestion": "Uložit otázku",
         "SaveAnswer": "Uložit odpověď",
         "AddAnotherAnswer": "Přidejte další odpověď",
-        "ErrorAnswers": "Přidejte prosím jen jednu odpověď",
-        "AlreadyAnswered": "Již odpověděl",
-        "TitlePlaceholder": "Napište svůj dotaz",
-        "ContentPlaceholder": "Sem vložte další informace, které lidem pomohou odpovědět",
+        "ErrorAnswers": "Přidejte prosím i jednu odpověď",
+        "AlreadyAnswered": "Již zodpovězeno",
+        "TitlePlaceholder": "Napište svou otázku",
+        "ContentPlaceholder": "Sem zadejte jakékoli další informace, které lidem pomohou odpovědět",
         "ErrorTitle": "Vyžaduje se otázka",
         "Placeholder": "Zástupný symbol"
     },
@@ -528,8 +528,8 @@
         "Create": "Vytvořit"
     },
     "calls": {
-        "SettingsTitle": "Hovory",
-        "MaxCalls": "Max volá",
+        "SettingsTitle": "hovory",
+        "MaxCalls": "Max volání",
         "Update": "Aktualizace",
         "NoCallsYet": "Zatím žádné hovory",
         "CallReasonTitle": "O čem je tento hovor?",

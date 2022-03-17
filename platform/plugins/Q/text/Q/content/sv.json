@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Fel {{status}} under begäran",
+        "canceled": "Begäran avbröts",
+        "500": "Internt serverfel",
+        "404": "Hittade inte: {{url}}",
+        "501": "Begäran avbröts"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Sessionen löpte. Uppdatera sidan och försök igen.",
+        "otherDomain": "Blockerad begäran över flera domäner till utländsk domän på {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "knacka",
+        "click": "klick",
+        "yes": "ja",
+        "no": "Nej",
+        "Tap": "Knacka",
+        "Click": "Klick",
+        "Yes": "Ja",
+        "No": "Nej"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "januari",
+        "2": "februari",
+        "3": "Mars",
+        "4": "april",
+        "5": "Maj",
+        "6": "juni",
+        "7": "juli",
+        "8": "augusti",
+        "9": "september",
+        "10": "oktober",
+        "11": "november",
+        "12": "december"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "andra",
+        "seconds": "sekunder",
+        "minute": "minut",
+        "minutes": "minuter",
+        "hour": "timmar",
+        "day": "dag",
+        "days": "dagar",
+        "week": "vecka",
+        "weeks": "Veckor",
+        "month": "månad",
+        "months": "månader",
+        "year": "år",
+        "years": "år",
+        "decade": "årtionde",
+        "decades": "decennier",
+        "century": "århundrade",
+        "centuries": "århundraden"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Tillåt åtkomst till din mikrofon",
+        "record": "Spela in",
+        "recording": "Inspelning",
+        "remains": "resterna",
+        "maximum": "maximal",
+        "playing": "Spelar",
+        "recorded": "Spelade in",
+        "clip": "klämma",
+        "discard": "Kassera",
+        "encoding": "Kodning"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "klämma",
+        "errorNoSource": "Ingen videokälla",
+        "SkipAfter": "Hoppa över efter",
+        "Skip": "Hoppa"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "klämma",
+        "errorNoSource": "Ingen pdf-källa"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Ställ in Clip Start",
+        "ClipStart": "Klippstart",
+        "SetClipEnd": "Ställ in Clip End",
+        "ClipEnd": "Klipp slut",
+        "StartMoreEnd": "Startposition kan inte vara mer än slutposition",
+        "EndLessStart": "Slutpositionen får inte vara mindre än startpositionen",
+        "WhichInvalid": "Argumentet &quot;vilket&quot; är ogiltigt"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Varna"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Bekräfta",
+        "ok": "Ja",
+        "cancel": "Nej"
     },
     "prompt": {
         "title": "Prompt",
-        "ok": "Go"
+        "ok": "Gå"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "Mer",
+        "Menu": "Meny"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Det gick inte att läsa filen",
+        "errorType": "Tyvärr, men den här filtypen stöds inte",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Vad skulle du vilja göra?",
+            "photo": "Ta ett nytt foto",
+            "library": "Välj från biblioteket"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Välj en större bild.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Justera storlek och position",
+            "touchscreen": "Använd fingrarna för att zooma och dra",
+            "notTouchscreen": "Använd musen och hjulet för att zooma och dra"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "igår kväll",
+        "lastEvening": "förra kvällen",
+        "yesterday": "i går",
+        "thisMorning": "i morse",
+        "today": "i dag",
+        "tonight": "i kväll",
+        "tomorrowMorning": "imorgon",
+        "tomorrow": "i morgon",
+        "hoursAgo": "{{h}} timmar sedan",
+        "hourAgo": "{{h}} timme sedan",
+        "minuteAgo": "{{m}} minut sedan",
+        "minutesAgo": "för {{m}} minuter sedan",
+        "secondAgo": "{{s}} sekund sedan",
+        "secondsAgo": "{{s}} sekunder sedan",
+        "fewSecondsAgo": "för några sekunder sedan",
+        "rightNow": "just nu",
+        "inSecond": "på {{s}} sekund",
+        "inSeconds": "om {{s}} sekunder",
+        "inMinute": "om {{m}} minut",
+        "inMinutes": "om {{m}} minuter",
+        "inHour": "om {{h}} timme",
+        "inHours": "om {{h}} timmar",
+        "inUnderMinute": "på under 1 minut"
     }
 }

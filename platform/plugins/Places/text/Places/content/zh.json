@@ -1,43 +1,43 @@
 {
-    "LatLng": "（{{1}} lat，{{2}} lng）",
+    "LatLng": "（{{1}} 纬度，{{2}} 经）",
     "nearby": {
-        "PostcodeLabel": "{{1}}（{{2}}）",
-        "Title": "在{{1}}内"
+        "PostcodeLabel": "{{1}} ({{2}})",
+        "Title": "{{1}} 内"
     },
     "units": {
         "meter": "仪表",
         "meters": "米",
         "kilometer": "公里",
-        "kilometers": "kiometers",
-        "km": "千米",
+        "kilometers": "公里",
+        "km": "公里",
         "mile": "英里",
         "miles": "英里",
-        "mi": "MI",
-        "foot": "脚丫子",
+        "mi": "米",
+        "foot": "脚",
         "feet": "脚",
         "inches": "英寸"
     },
     "location": {
-        "interested": "我对{{select}}内发生的事情感兴趣",
+        "interested": "我对 {{select}} 内发生的事情感兴趣",
         "update": "更新我的位置",
-        "prompt": "{{ClickOrTap}}来到这里<br>设置你的<br>地点",
-        "myCurrentLocation": "我目前的位置",
+        "prompt": "{{ClickOrTap}} 到这里<br>设置你的<br>地点",
+        "myCurrentLocation": "我现在的位置",
         "enterAddress": "输入地址",
-        "enterPostcode": "请输入您的邮政编码\/邮政编码",
+        "enterPostcode": "请输入您的邮政编码\/邮编",
         "create": {
             "action": "添加位置",
             "title": "新位置",
-            "nameYourLocation": "为您的位置命名"
+            "nameYourLocation": "命名您的位置"
         },
         "confirm": {
-            "title": "保存这个位置？",
-            "message": "你打算将来再次使用这个位置吗？",
-            "ok": "是",
-            "cancel": "没有"
+            "title": "保存此位置？",
+            "message": "您打算将来再次使用此位置吗？",
+            "ok": "是的",
+            "cancel": "不"
         },
         "add": {
             "title": "命名此位置",
-            "placeholder": "家庭，工作等",
+            "placeholder": "家庭、工作等",
             "ok": "保存"
         },
         "dialog": {
@@ -46,43 +46,43 @@
         "set": "设置我的位置"
     },
     "areas": {
-        "filterPlaceholder": "这个位置内的任何区域？",
-        "newArea": "新区域",
-        "promptTitle": "输入区域的名称：",
+        "filterPlaceholder": "此位置内有任何区域吗？",
+        "newArea": "新区",
+        "promptTitle": "输入区域名称：",
         "absent": "请设置区域",
         "error": "错误",
-        "exist": "区域已经存在",
+        "exist": "区域已存在",
         "addNewArea": "添加新区域",
-        "add": "加"
+        "add": "添加"
     },
     "types": {
         "Places\/locations": {
-            "description": "一系列地点",
+            "description": "位置集合",
             "displayType": "地点"
         },
         "Places\/location": {
-            "description": "代表建筑物，场地，船舶，公园等。",
+            "description": "代表建筑物、场地、船舶、公园等。",
             "displayType": "地点"
         },
         "Places\/area": {
-            "description": "表示某个位置内的区域，例如房间或套房",
+            "description": "表示一个位置内的一个区域，例如房间或套房",
             "displayType": "区域"
         },
         "Places\/floor": {
-            "description": "代表建筑物或船舶的地板",
-            "displayType": "地板"
+            "description": "代表建筑物或船舶的楼层",
+            "displayType": "地面"
         },
         "Places\/column": {
-            "description": "表示建筑物或船舶中的列",
-            "displayType": "柱"
+            "description": "代表建筑物或船舶中的柱子",
+            "displayType": "柱子"
         },
         "Places\/nearby": {
-            "description": "在geohash的特定距离内的事物的类别",
-            "displayType": "靠近地方"
+            "description": "geohash 一定距离内的事物的类别",
+            "displayType": "附近的地方"
         },
         "Places\/interest": {
-            "description": "在geohash的特定距离内的事物的类别，匹配兴趣",
-            "displayType": "地方利益"
+            "description": "geohash 一定距离内的事物的类别，匹配兴趣",
+            "displayType": "感兴趣的地方"
         }
     }
 }

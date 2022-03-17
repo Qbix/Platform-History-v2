@@ -8,50 +8,50 @@
         "meter": "måler",
         "meters": "meter",
         "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "kilometers": "kilometer",
         "km": "km",
         "mile": "mil",
         "miles": "miles",
         "mi": "mi",
         "foot": "fod",
         "feet": "fødder",
-        "inches": "inches"
+        "inches": "tommer"
     },
     "location": {
         "interested": "Jeg er interesseret i ting, der finder sted inden for {{select}} af",
         "update": "Opdater min placering",
-        "prompt": "{{ClickOrTap}} her til <br> sæt din <br> Beliggenhed",
+        "prompt": "{{ClickOrTap}} her for at<br> sæt din<br> Beliggenhed",
         "myCurrentLocation": "Min nuværende placering",
         "enterAddress": "Indtast en adresse",
-        "enterPostcode": "Indtast venligst dit postnummer \/ postnummer",
+        "enterPostcode": "Indtast venligst dit postnummer\/postnummer",
         "create": {
             "action": "Tilføj placering",
             "title": "Ny placering",
             "nameYourLocation": "Navngiv din placering"
         },
         "confirm": {
-            "title": "Gem denne placering?",
+            "title": "Vil du gemme denne placering?",
             "message": "Planlægger du at bruge denne placering igen i fremtiden?",
             "ok": "Ja",
             "cancel": "Ingen"
         },
         "add": {
             "title": "Navngiv denne placering",
-            "placeholder": "Hjem, Arbejde mv.",
+            "placeholder": "Hjem, arbejde osv.",
             "ok": "Gemme"
         },
         "dialog": {
             "title": "Vælg Placering"
         },
-        "set": "Indstil Min placering"
+        "set": "Indstil min placering"
     },
     "areas": {
-        "filterPlaceholder": "Ethvert område inden for denne placering?",
+        "filterPlaceholder": "Noget område inden for dette sted?",
         "newArea": "Nyt område",
-        "promptTitle": "Indtast et navn for området:",
+        "promptTitle": "Indtast et navn til området:",
         "absent": "Indstil venligst område",
         "error": "Fejl",
-        "exist": "Område eksisterer allerede",
+        "exist": "Området findes allerede",
         "addNewArea": "Tilføj nyt område",
         "add": "Tilføje"
     },
@@ -61,15 +61,15 @@
             "displayType": "Placeringer"
         },
         "Places\/location": {
-            "description": "Repræsenterer en bygning, spillested, skib, park osv.",
+            "description": "Repræsenterer en bygning, mødested, skib, park osv.",
             "displayType": "Beliggenhed"
         },
         "Places\/area": {
-            "description": "Repræsenterer et område inden for et sted, såsom et værelse eller en suite",
+            "description": "Repræsenterer et område inden for en placering, såsom et værelse eller en suite",
             "displayType": "Areal"
         },
         "Places\/floor": {
-            "description": "Repræsenterer et gulv i en bygning eller et skib",
+            "description": "Repræsenterer en etage i en bygning eller et skib",
             "displayType": "Etage"
         },
         "Places\/column": {
@@ -77,11 +77,11 @@
             "displayType": "Kolonne"
         },
         "Places\/nearby": {
-            "description": "Kategori for ting inden for en bestemt afstand fra en geohash",
-            "displayType": "Tæt ved steder"
+            "description": "Kategori for ting inden for en vis afstand fra en geohash",
+            "displayType": "I nærheden af steder"
         },
         "Places\/interest": {
-            "description": "Kategori for ting inden for en bestemt afstand fra en geohash, der matcher en interesse",
+            "description": "Kategori for ting inden for en vis afstand fra en geohash, der matcher en interesse",
             "displayType": "Steder interesse"
         }
     }

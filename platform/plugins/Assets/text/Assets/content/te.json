@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "చెల్లించడానికి నొక్కండి"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}}కి ఛార్జ్ ప్రాసెస్ చేయబడింది",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}కి మీరు చెల్లించినందుకు ధన్యవాదాలు",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}}కి సభ్యత్వం పొందారు",
+        "YouSubscribedTo": "మీరు {{plan.title}}కి సభ్యత్వం పొందారు"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "మీరు &quot;{{description}}&quot; ద్వారా {{call 'publisher.displayName'}} నుండి {{displayAmount}} చెల్లింపును పొందుతారు",
+        "HasBeenCharged": "హే, ఇది కేవలం {{1}}కి {{3}}కి {{3}}కి {{4}} ఛార్జ్ చేయబడిందని మీకు తెలియజేయడం కోసమే"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "&quot;{{description}}&quot; కోసం మీరు చెల్లించినందుకు ధన్యవాదాలు",
+        "HavePaid": "హే {{1}}, మీరు {{4}} కోసం {{3}}కి {{2}} విజయవంతంగా చెల్లించారని ఇది త్వరిత నిర్ధారణ మాత్రమే"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ఆర్డర్ గురించి సమాచారం",
+        "PaymentMethod": "చెల్లింపు పద్ధతి",
+        "ContactInfo": "సంప్రదింపు సమాచారం",
+        "Pay": "చెల్లించండి"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "ఆహ్వానం {{invitedUserName}} ద్వారా ఆమోదించబడింది",
+        "Streams_user_firstname": "{{invitedUserName}} మొదటి పేరును నమోదు చేసారు",
+        "Streams_user_lastname": "{{invitedUserName}} చివరి పేరును నమోదు చేసారు",
+        "Streams_user_icon": "{{invitedUserName}} చిహ్నం నమోదు చేయబడింది",
+        "Places_user_location": "{{invitedUserName}} స్థానాన్ని నమోదు చేసారు",
+        "Streams_greeting": "{{invitedUserName}} గ్రీటింగ్‌ని నమోదు చేసింది",
+        "YouHaveCreditsToStart": "మీరు ప్రారంభించడానికి {{amount}} క్రెడిట్‌లను కలిగి ఉన్నారు",
+        "PaymentFor": "&quot;{{1}}&quot; కోసం చెల్లింపు",
+        "PaymentTo": "{{1}}కి చెల్లింపు",
+        "PaymentToUser": "{{toUserName}}కి చెల్లింపు",
+        "CreatePaidStream": "సృష్టించడం కోసం {{toStreamName}}",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;లో రిజర్వేషన్ కోసం",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; సంఘాన్ని సృష్టించడం కోసం",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;లో రిజర్వేషన్ వాపసుగా",
+        "BoughtCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసారు",
+        "BonusCredits": "బోనస్ {{amount}} క్రెడిట్‌లు",
+        "BuyAmountCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేయండి",
+        "WatchClip": "{{fromStreamTitle}} చూసినందుకు {{amount}} క్రెడిట్‌లను పొందారు",
+        "MissingCredits": "క్రెడిట్‌లు లేవు",
+        "YouMissingCredits": "కొనసాగడానికి మీకు అదనపు {{amount}} క్రెడిట్‌లు అవసరం.",
+        "BuyCredits": "క్రెడిట్లను కొనుగోలు చేయండి",
+        "BuyBonus": "ఒకేసారి {{amount}} క్రెడిట్‌లను కొనుగోలు చేస్తే, {{bonus}} క్రెడిట్‌ల బోనస్‌కి దారి తీస్తుంది.",
+        "Buy": "కొనుగోలు",
+        "PurchaseCredits": "కొనుగోలు క్రెడిట్స్",
+        "Credits": "క్రెడిట్స్",
+        "ErrorInvalidAmount": "అమౌంట్ చెల్లదు",
+        "ErrorInvalidCurrency": "దురదృష్టవశాత్తూ మేము ఇంకా కరెన్సీ {{currency}}కి మద్దతు ఇవ్వడం లేదు",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} క్రెడిట్‌లు",
+            "BonusCredits": "{{amount}} క్రెడిట్‌లు"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "తేదీ",
+        "Amount": "మొత్తం",
+        "Description": "వివరణ",
+        "Client": "క్లయింట్",
+        "To": "కు",
+        "From": "నుండి",
+        "SeeHistory": "{{1}} చెల్లింపు చరిత్రను చూడండి",
+        "HistoryEmpty": "మీ దగ్గర ఇంకా డేటా లేదు",
+        "PaymentFor": "{{amount}} క్రెడిట్‌లను పంపారు",
+        "PaymentTo": "{{amount}} క్రెడిట్‌లను పంపారు",
+        "PaymentToUser": "{{amount}} క్రెడిట్‌లను పంపారు",
+        "CreatePaidStream": "ఖర్చు చేసిన {{amount}} క్రెడిట్‌లు",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} క్రెడిట్‌లను పొందారు",
+            "-": "ఖర్చు చేసిన {{amount}} క్రెడిట్‌లు"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} క్రెడిట్‌లను పొందారు",
+            "-": "ఖర్చు చేసిన {{amount}} క్రెడిట్‌లు"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "{{amount}} క్రెడిట్‌లను స్వీకరించారు",
+            "-": "{{amount}} క్రెడిట్‌లను పంపారు"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "ఖర్చు చేసిన {{amount}} క్రెడిట్‌లు",
+        "BoughtCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసారు",
+        "BonusCredits": "బోనస్ {{amount}} క్రెడిట్‌లను పొందారు",
+        "InviteAcceptedBy": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "Streams_user_firstname": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "Streams_user_lastname": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "Streams_user_icon": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "Places_user_location": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "Streams_greeting": "{{amount}} క్రెడిట్‌లను పొందారు",
+        "YouHaveCreditsToStart": "{{amount}} క్రెడిట్‌లను పొందారు"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "సభ్యత్వాన్ని ప్రారంభించండి",
+            "message": "మీరు {{title}}కి సభ్యత్వం పొందాలనుకుంటున్నారా?",
+            "ok": "అలాగే",
+            "cancel": "రద్దు చేయండి"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "క్రెడిట్ లేదా డెబిట్ కార్డ్",
+        "SubscribePayment": "చెల్లింపు సభ్యత్వం పొందండి",
+        "ImmediatePayment": "తక్షణ చెల్లింపు"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
+        "BuyAmountCredits": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేయండి",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "డబ్బులు చెల్లించండి",
+            "message": "మీరు {{symbol}}{{amount}} చెల్లించడానికి అంగీకరిస్తున్నారా?",
+            "ok": "అలాగే",
+            "cancel": "రద్దు చేయండి"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "క్రెడిట్స్",
+            "description": "క్రెడిట్‌లు మరియు చెల్లింపులను ట్రాక్ చేస్తుంది"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "సబ్‌స్క్రిప్షన్ ప్లాన్",
+            "description": "చందా ప్రణాళిక"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "చందా",
+            "description": "చందా"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "ఉత్పత్తి",
+            "description": "ఉత్పత్తి విక్రయిస్తున్నారు"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "సేవ",
+            "description": "సేవ అందిస్తున్నారు"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "{{amount}} క్రెడిట్‌లను పొందారు"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "{{amount}} క్రెడిట్‌లను కొనుగోలు చేసారు"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "బోనస్ {{amount}} క్రెడిట్‌లు"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "ఖర్చు చేసిన {{amount}} క్రెడిట్‌లు"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "{{toUserName}}కి {{amount}} క్రెడిట్‌లను పంపారు"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "{{fromUserName}} నుండి {{amount}} క్రెడిట్‌లను పొందారు"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "కొత్త సేవ",
+            "TitlePlaceholder": "సేవా శీర్షిక",
+            "PricePlaceholder": "ధరను నిర్ణయించండి",
+            "LinkPlaceholder": "అదనపు సమాచార లింక్‌ని సెట్ చేయండి",
+            "DescriptionPlaceholder": "సేవ వివరణ",
+            "SaveService": "సేవను సేవ్ చేయండి",
+            "SelectRequiredParticipants": "అవసరమైన పాల్గొనేవారు"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "సేవా టెంప్లేట్‌లను నిర్వహించండి",
+        "ManageServices": "సేవలను నిర్వహించండి",
+        "Free": "ఉచిత",
+        "OptionalContribution": "ఐచ్ఛిక సహకారం",
+        "RequiredPayment": "అవసరమైన చెల్లింపు",
+        "AreYouSureDelete": "మీరు ఖచ్చితంగా ఈ సేవను తొలగించాలనుకుంటున్నారా?",
+        "AmountServicesRelated": "ఈ సేవకు సంబంధించి {{amount}} లభ్యతలు ఉన్నాయి. అవి కూడా తీసివేయబడతాయి."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "{{title}} NFT గురించి సమాచారం",
+        "Description": "NFT గురించి వివరణాత్మక సమాచారం",
+        "FixedBid": "ఇప్పుడే కొనండి",
+        "CurrentBid": "ప్రస్తుత బిడ్",
+        "StartingIn": "లో ప్రారంభమవుతుంది",
+        "EndingIn": "ముగుస్తుంది",
+        "CreateNFT": "NFTని సృష్టించండి",
+        "TitlePlaceholder": "మీ NFTకి శీర్షిక ఇవ్వండి",
+        "DescriptionPlaceholder": "మీ NFTకి వివరణ ఇవ్వండి",
+        "CreateYourNFT": "మీ NFTని సృష్టించండి",
+        "Royalties": "రాయల్టీలు",
+        "RoyaltyPlaceholder": "ఐచ్ఛికం. బదిలీకి ముందు సృష్టికర్తకు చెల్లించిన మొత్తం.",
+        "ExpirationDate": "గడువు తేదీ",
+        "StartingDate": "ప్రారంబపు తేది",
+        "BidsBelowThisAmount": "ఈ మొత్తం కంటే తక్కువ బిడ్‌లు అనుమతించబడవు",
+        "MinimumBid": "కనిష్ట బిడ్",
+        "Price": "ధర",
+        "Owner": "యజమాని",
+        "SelectCategory": "వర్గం ఎంచుకోండి",
+        "Day": "రోజు",
+        "Days": "రోజులు",
+        "Hour": "గంట",
+        "Hours": "గంటలు",
+        "Minute": "నిమిషం",
+        "Minutes": "నిమిషాలు",
+        "Second": "రెండవ",
+        "Seconds": "సెకన్లు",
+        "SalesCreator": "విక్రయాల మొత్తం సృష్టికర్తకు వెళ్తుంది",
+        "Details": "వివరాలు",
+        "Bids": "బిడ్లు",
+        "History": "చరిత్ర",
+        "LoremIpsum": "లోరెమ్ ఇప్సమ్ అనేది ప్రింటింగ్ మరియు టైప్‌సెట్టింగ్ పరిశ్రమ యొక్క డమ్మీ టెక్స్ట్.",
+        "PutOnSale": "అమ్మకానికి పెట్టండి",
+        "PutOffSale": "అమ్మకం నుండి ఉపసంహరించుకోండి",
+        "Transfer": "బదిలీ చేయండి",
+        "Update": "నవీకరించు",
+        "UpdateToken": "టోకెన్‌ని నవీకరించండి",
+        "CreateToken": "టోకెన్ సృష్టించండి",
+        "PlaceBid": "వేలం వెయ్యి",
+        "SoldOut": "విక్రయించబడింది",
+        "NftName": "NFT పేరు",
+        "DescribeYourNFT": "దయచేసి మీ NFTని వివరించండి",
+        "NftPicture": "NFTని సూచించే చిత్రం",
+        "NftMovie": "NFTకి ప్రాతినిధ్యం వహించే సినిమా",
+        "UploadMovie": "సినిమాని అప్‌లోడ్ చేయండి",
+        "MovieSource": "సినిమా మూలం",
+        "UploadFile": "ఫైల్‌ను అప్‌లోడ్ చేయండి",
+        "PutOnMarketplace": "మార్కెట్‌లో ఉంచండి",
+        "InstantPurchase": "వినియోగదారులు తక్షణమే మీ NFTని కొనుగోలు చేయడానికి ధరను నమోదు చేయండి",
+        "FixedPrice": "స్థిర ధర",
+        "TimedAuction": "గడువు ముగిసిన వేలం",
+        "OpenForBids": "బిడ్‌ల కోసం తెరవండి",
+        "PriceOnePiece": "ఒక ముక్క ధరను నమోదు చేయండి",
+        "EnterMinimumBid": "కనిష్ట బిడ్‌ని నమోదు చేయండి",
+        "SelectChain": "గొలుసును ఎంచుకోండి",
+        "WrongChain": "ఈ NFT &quot;{{chain}}&quot; క్రింద సృష్టించబడింది. దయచేసి ఈ గొలుసును ఉపయోగించండి.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFTలను దిగుమతి చేస్తోంది",
+            "fileNotFound": "క్షమించండి, CSV ఫైల్ కనుగొనబడలేదు.",
+            "fileEmpty": "క్షమించండి, CSV ఫైల్ ఖాళీగా ఉంది.",
+            "userIdNotFound": "వినియోగదారు ఉన్నారు కానీ ఐడి ఖాళీగా ఉంది",
+            "errorLine": "లైన్ {{1}}",
+            "fieldNotFound": "అవసరమైన ఫీల్డ్ &quot;{{1}}&quot; కనుగొనబడలేదు",
+            "taskStreamInvalid": "టాస్క్ స్ట్రీమ్ చెల్లదు",
+            "instructionsEmpty": "టాస్క్ స్ట్రీమ్ సూచనలు ఖాళీగా ఉన్నాయి",
+            "complete": "పూర్తి",
+            "activateUsers": "వినియోగదారులకు యాక్టివేషన్ సందేశాన్ని పంపాలా?",
+            "importProgress": "పురోగతి",
+            "importOptions": "ఎంపికలు",
+            "sampleCSV": "నమూనా CSVని డౌన్‌లోడ్ చేయండి",
+            "fileLabel": "స్ప్రెడ్‌షీట్‌ని అప్‌లోడ్ చేయండి:",
+            "errorsTitle": "లోపాలు సంభవించాయి"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "NFT సేకరణల ద్వారా ఫిల్టర్ చేయండి",
+                "ShowNFTCollection": "ఇందులో NFT సేకరణను చూపు...",
+                "AllCollections": "అన్ని సేకరణలు"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "రచయితలందరూ",
+                "AllUsers": "ప్రతి ఒక్కరూ",
+                "FilterByAuthors": "రచయితల వారీగా ఫిల్టర్ చేయండి"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "తిరిగి సేకరణకి"
     }
 }

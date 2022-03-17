@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Nakatago sa iyo ang nilalamang ito."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Bagong Item"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Mga taong inimbitahan ko",
+        "Streams\/invitedMe": "Sino ang nag-imbita sa akin",
+        "DoYouAgree": "Sumasang-ayon ka ba?",
+        "Yes": "Oo",
+        "No": "Hindi"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Ano ang iyong mga interes?",
+        "CanAdd": "Kung hindi mo pa rin mahanap ang iyong hinahanap, maaari kang magdagdag ng bagong interes sa ibaba:",
+        "TrySynonyms": "Hindi mo ba nakikita? Subukan ang ilang kasingkahulugan.",
+        "AddUnderCategory": "Idagdag sa ilalim ng kategorya...",
+        "Other": "Iba pa",
+        "Unlisted": "Hindi nakalista"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Na-flag ang mensahe para sa pagsusuri ng admin. I-tap muli para i-unflag.",
+        "noOneSaid": "Walang nagsabi ng kahit ano",
+        "closeChatButton": "Isara ang chat",
+        "closeChatConfirmTitle": "Isara ang chat na ito?",
+        "closeChatConfirm": "Sigurado ka bang gusto mong isara ang chat na ito?",
+        "Subscribed": "Naka-enable ang Mga Notification",
+        "Unsubscribed": "Naka-mute ang Mga Notification",
+        "closeChatConfirmYes": "Oo",
+        "closeChatConfirmNo": "Hindi",
+        "earlierComments": "mga naunang komento",
+        "startedConversation": "nagsimula ng usapan",
+        "RealTimeCall": "Real Time na Tawag",
+        "SearchByName": "Maghanap ayon sa pangalan",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} ay bumibisita sa chat",
+            "Join": "{{displayName}} sumali sa chat",
+            "Leave": "{{displayName}} umalis sa chat",
+            "RelatedTo": "{{displayName}} nagsimula ng {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "pamahalaan ang iyong mga subscription sa email",
+        "IfUnsubscribe": "Kung gusto mong mag-unsubscribe",
+        "*": "Mensahe {{& message.fields.type}} kay {{& stream.fields.title}}",
+        "Streams\/chat\/message": "Sinabi ni {{&call 'avatar.displayName'}}: {{& message.content}}",
+        "Streams\/changed": "Mga pagbabago sa {{stream.fields.title}}",
+        "Streams\/invite": "Inimbitahan ka sa {{& stream.fields.title}}",
+        "Streams\/announcement": "Anunsyo sa {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} binago ang access sa {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Na-edit ang mensahe ng chat noong {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Inalis ang mensahe ng chat noong {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} ay sarado na",
+        "Streams\/task\/progress": "Nagawa ang pag-unlad noong {{stream.fields.title}}",
+        "Streams\/task\/complete": "Nakumpleto ang gawain: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error habang: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Papasok na Mensahe",
+        "Streams\/relatedTo\/Streams\/call": "Nagsimula ang Bagong Tawag noong {{toTitle}}",
+        "Streams\/relatedTo\/*": "Bagong {{relationDisplayType}} sa {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Idinagdag sa {{toTitle}} bilang {{relationDisplayType}}",
+        "Streams\/mention": "Binanggit ka ni {{&call 'avatar.displayName'}} sa isang komento",
+        "Streams\/call": "{{displayName}} nagsimula ng isang real-time na tawag"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Mag-anyaya",
+        "messageContent": "Inimbitahan ka ni {{displayName}} sa {{inviteUrl}}",
+        "youCanNowPaste": "Maaari mo na ngayong i-paste ang link na ito sa isang lugar para mag-imbita ng mga tao",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "chooseFromContacts": "Pumili mula sa iyong Mga Contact",
+            "chooseAgainFromContacts": "Pumili Muli mula sa Mga Contact",
+            "inviteSelectedContacts": "Mag-imbita ng Mga Piniling Contact",
+            "selectFromContacts": "Piliin Mula sa Mga Contact",
+            "userChooserPlaceholder": "Maghanap ayon sa pangalan",
+            "photo": "Kumuha ng litrato",
+            "photoInstruction": "Kung nasa harap mo ang taong nag-scan sa iyong QR code, kunan sila ng larawan",
+            "to": "Para kay: {{Stream Title}}",
+            "go": "Pumunta ka",
+            "title": "Mag-anyaya",
+            "placeholder": "Numero ng mobile o email address",
+            "orInvite": "O mag-imbita ng mga tao sa pamamagitan ng paggamit ng:",
+            "copyLink": "{{ClickOrTap}} para kopyahin ang link ng imbitasyon",
+            "shareOrCopyLink": "{{ClickOrTap}} para ibahagi o kopyahin ang link ng imbitasyon",
+            "QR": "{{ClickOrTap}} upang bumuo ng QR code",
+            "QRtitle": "I-scan ang QR code na ito",
+            "QRscanned": "Ini-scan nila ito!",
+            "scannedQR": "{{ClickOrTap}} kung na-scan ang code",
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hoy, tingnan mo ito",
+            "PleaseVisitLink": "Mangyaring bisitahin ang sumusunod na link:",
+            "InvitingYou": "Iniimbitahan kita sa {{title}}",
+            "HasInvitedYou": "Inimbitahan ka ni {{displayName}} na {{title}}",
+            "HasMentionedYou": "Binanggit ka ni {{displayName}} sa &quot;{{title}}&quot;",
+            "YOUAREINVITED": "IKAW AY INIIMBITAHAN!",
+            "AcceptInvite": "Tanggapin ang Imbitasyon"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Inimbitahan ka sa {{title}}. Paki-tap ang {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Ikaw ay naimbitahan. {{ClickOrTap}} dito para tanggapin at sumali."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "nag-post ng <em>{{message.fields.type}}<\/em> mensahe kay {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "nagkomento sa",
+            "startedCallIn": "nagsimula ng tawag",
+            "in": "sa",
+            "body": "noong {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "ay nai-post sa",
+                "byAvatar": "ni {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "ay may bagong {{instructions.fromDisplayType}}",
+                "byAvatar": "idinagdag ni {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Ang mga imbitasyon ay ipinapadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Mag-follow up gamit ang isang mabilis na text para ipaalam sa kanila na nagmula sa iyo ang imbitasyon, na humihiling sa kanila na i-click ang link.",
+            "confirm": "Ang mga imbitasyon ay ipinapadala mula sa aming numero, na hindi pa nakikilala ng iyong mga kaibigan. Gusto mo bang mag-follow up ng isang mabilis na text para ipaalam sa kanila na sa iyo nanggaling ang imbitasyon, na humihiling sa kanila na i-click ang link.",
+            "check": "Uy, pinadalhan kita ng imbitasyon sa {{app}} app. Mangyaring suriin ang iyong sms at i-click ang link!",
+            "CheckYourMobile": "Mangyaring suriin ang SMS at sundin ang mga tagubilin!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Ipinapadala ang mga imbitasyon mula sa aming domain, na hindi pa nakikilala ng iyong mga kaibigan. Mag-follow up gamit ang isang mabilis na text para ipaalam sa kanila na nagmula sa iyo ang imbitasyon, na humihiling sa kanila na i-click ang link.",
+            "confirm": "Ipinapadala ang mga imbitasyon mula sa aming domain, na hindi pa nakikilala ng iyong mga kaibigan. Gusto mo bang mag-follow up ng isang mabilis na text para ipaalam sa kanila na sa iyo nanggaling ang imbitasyon, na humihiling sa kanila na i-click ang link.",
+            "subject": "Nakatanggap ka ba ng imbitasyon?",
+            "body": "Uy, nagpadala lang ako sa iyo ng imbitasyon sa {{app}} app. Mangyaring suriin ang iyong email at i-click ang link doon!",
+            "CheckYourEmail": "Mangyaring suriin ang iyong email at sundin ang mga tagubilin!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Pamagat",
+        "Subscribed": "Naka-subscribe",
+        "Participants": "Mga kalahok",
+        "AreYouSureRemoveIdentifier": "Sigurado ka bang aalisin ang identifier na ito?",
+        "AreYouSureUnsubscribeIdentifier": "Sigurado ka bang i-unsubscribe ang identifier na ito? I-o-off nito ang mga notification sa identifier na ito.",
+        "AreYouSureUnsubscribeDevice": "Sigurado ka bang i-unsubscribe ang device na ito? I-o-off nito ang mga notification sa device na ito.",
+        "AreYouSureRemoveParticipant": "Sigurado ka bang gusto mong alisin ang kalahok na ito?",
+        "RemoveParticipant": "Alisin ang kalahok",
+        "Identifiers": "Mga Identifier",
+        "Devices": "Mga device",
+        "Streams": "Batis"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa stream na ito.",
+        "streamTitle": "Nagsimula si {{1}} ng live na tawag",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Kumokonekta",
+            "microphoneBtn": "Paganahin ang Mikropono",
+            "cameraBtn": "Paganahin ang Camera",
+            "cameraAndMicrophoneBtn": "Paganahin ang Camera at Mikropono"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Naka-off ang Mic",
+            "micIsOn": "Naka-on ang Mic",
+            "cameraIsOff": "Naka-off ang camera",
+            "cameraIsOn": "Naka-on ang camera",
+            "screenSharingIsOn": "Naka-on ang pagbabahagi ng screen",
+            "screenSharingIsOff": "Iskreen na ibinabahagi",
+            "joinNow": "Sumali sa Tawag"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Upang gamitin ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa &quot;Mga Setting&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy at seguridad&quot; -&gt; &quot;Mga Setting ng Site&quot; -&gt; &quot;Camera&quot; o &quot;Mga Setting ng Site&quot; -&gt; &quot;Mikropono&quot;",
+            "point2": "Alisin ang {{hostname}} mula sa listahan ng &quot;I-block&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Mangyaring i-reload ang pahinang ito at kumpirmahin ang pag-access sa {{kind}} upang sumali sa kumperensya."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Upang gamitin ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa iyong Mga Setting ng Android",
+            "point2": "Buksan ang &quot;Mga app at notification&quot;",
+            "point3": "Hanapin ang &quot;{{communityName}}&quot; at buksan ito",
+            "point4": "I-tap ang Mga Pahintulot",
+            "point5": "Paganahin ang {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Mga tagubilin",
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Upang gamitin ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa iyong Mga Setting ng iOS",
+            "point2": "Buksan ang &quot;Privacy&quot;",
+            "point3": "Hanapin ang {{kind}} at buksan ito",
+            "point4": "Hanapin ang &quot;{{communityName}}&quot; at paganahin"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Sumama ka sa kwarto",
+            "joining": "Sumasali: {{userName}}",
+            "sbLeftRoom": "{{userName}} umalis ng kwarto",
+            "switchingRoom": "Lumipat ng kwarto...",
+            "forceDisconnecting": "Madidiskonekta ka sa loob ng 5 segundo",
+            "forceDisconnectingImmediately": "Nadiskonekta ka ng isang host",
+            "youLeftRoom": "Lumabas ka ng kwarto",
+            "codeCopied": "Lumabas ka ng kwarto",
+            "sbBeganFbLive": "Sinimulan ni {{userName}} na i-broadcast ang tawag na ito sa Facebook",
+            "sbStoppedFbLive": "Huminto si {{userName}} sa pagsasahimpapawid ng tawag na ito sa Facebook",
+            "youBeganFbLive": "Sinimulan mong i-broadcast ang tawag na ito sa Facebook",
+            "youStoppedFbLive": "Huminto ka sa pagsasahimpapawid ng tawag na ito sa Facebook",
+            "youStartedLive": "Sinimulan mong i-broadcast ang tawag na ito sa custom na RTMP",
+            "youStoppedLive": "Huminto ka sa pag-broadcast ng tawag na ito sa custom na RTMP",
+            "sbStartedLiveStreaming": "{{userName}} nagsimula nang live",
+            "sbStoppedLiveStreaming": "{{userName}} ay natapos nang live",
+            "liveStopped": "Nagkaroon ng error habang nagpapadala ng video sa endpoint",
+            "youBeganVideoRecording": "Sinimulan mong i-record ang kumperensyang ito",
+            "youStoppedVideoRecording": "Huminto ka sa pagre-record sa kumperensyang ito",
+            "linkCopiedToCb": "Nakopya ang link sa clipboard",
+            "codeCopiedToCb": "Nakopya ang code sa clipboard",
+            "userHasNoVideo": "Walang video ang kalahok",
+            "openInBrowserAlert": "Buksan ang link sa Safari browser para sumali sa conference."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
+            "dialogTitle": "Mga setting ng video",
             "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "screenSharing": "Pagbabahagi ng Screen",
+            "shareAnotherScreen": "Magbahagi ng isa pang screen",
+            "turnOffCameras": "I-off ang camera",
+            "turnOffVideo": "I-off ang pagbabahagi ng camera\/screen",
+            "turnOffAudioInput": "I-mute ang mikropono",
+            "turnOffScreenSharing": "I-off ang pagbabahagi ng screen",
+            "cameraIsTurnedOff": "Naka-off ang camera",
+            "micIsTurnedOff": "Naka-off ang mikropono",
+            "startFBLive": "Simulan ang Facebook Livestream",
+            "stopFBLive": "Itigil ang Facebook Livestream",
+            "startRecording": "Simulan ang recording",
+            "stopRecording": "Ihinto ang Pagre-record",
+            "start": "Magsimula",
+            "stop": "Tumigil ka",
+            "recordingInProgress": "Kasalukuyang isinasagawa ang pagre-record...",
+            "fbLiveTitle": "Pamagat ng Livestream",
+            "fbLiveDescription": "Ilarawan ang iyong Livestream. Tungkol Saan yan?",
+            "fbOnlyMeLiveAccess": "Ako lang",
+            "fbFriendsAccess": "Mga kaibigan",
+            "fbPublicAccess": "Pampubliko",
+            "publishOnTimeline": "I-publish sa timeline",
+            "publishToGroup": "I-publish sa pangkat",
+            "fbStartLive": "Mag-live",
+            "fbStopLive": "Tapusin ang Livestream",
+            "streamingSettings": "Mga setting",
+            "fbEmbedCode": "I-embed",
+            "copy": "Kopya",
+            "streamToRTMP": "Stream sa custom na RTMP",
+            "startBroadcasting": "Simulan ang pagsasahimpapawid",
+            "broadcastingInProgress": "Ang pagsasahimpapawid ay isinasagawa"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Mga setting ng audio",
+            "speakers": "Mga nagsasalita",
+            "microphone": "mikropono"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
+            "dialogTitle": "Mga Setting ng Kalahok",
+            "disconnect": "Idiskonekta",
+            "floatingScreens": "Mga Lumulutang na Screen",
+            "tiledScreens": "Mga Tiled na Screen",
+            "loudestExceptMe": "Pinakamaingay Except Me",
+            "maximizeLoudest": "I-maximize ang Pinakamalakas",
             "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "fullScreen": "Buong Screen",
+            "manual": "Manwal",
+            "turnOffCamera": "Itago ang video",
+            "turnOffAudio": "I-mute ang audio",
+            "turnOffScreenSharing": "Itago ang pagbabahagi ng screen",
+            "turnOnCamera": "Ipakita ang video",
+            "turnOnAudio": "I-unmute ang audio",
+            "turnOnScreenSharing": "Ipakita ang pagbabahagi ng screen"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Mga Setting ng Streaming"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Pagpupulong",
+            "MeetingEnded": "Natapos ang pagpupulong"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Inimbitahan",
+            "description": "Inbox para sa mga imbitasyon"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "mapagkukunan",
+            "description": "stream para sa pamamahala ng access sa isang mapagkukunan at pag-post ng mga mensahe tungkol sa mga update"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "para sa pagtanggap ng mga update tungkol sa pag-unlad sa isang partikular na gawain",
+            "displayType": "Gawain"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "kategorya para sa mga gawain",
+            "displayType": "Mga gawain"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "isang karaniwang karanasan para sa mga miyembro ng isang komunidad",
+            "displayType": "Karaniwang karanasan para sa mga miyembro ng isang komunidad"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "pagbati kung saan maaaring ipakilala ng isang user ang kanilang sarili",
+            "displayType": "Pagbati"
         },
         "Streams\/number": {
-            "displayType": "Number",
+            "displayType": "Numero",
             "description": "mathematical number"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Petsa",
+            "description": "petsa"
         },
         "Streams\/text": {
             "displayType": "Text",
-            "description": "body of text"
+            "description": "katawan ng teksto"
         },
         "Streams\/text\/small": {
             "displayType": "Text",
-            "description": "small body of text"
+            "description": "maliit na katawan ng teksto"
         },
         "Streams\/text\/medium": {
             "displayType": "Text",
-            "description": "medium body of text"
+            "description": "katamtamang katawan ng teksto"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "Email Address",
             "description": "email address"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Numero ng telepono",
+            "description": "numero ng telepono"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "link sa web"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Imahe",
+            "description": "biswal na larawan",
+            "newItem": "Magdagdag ng larawan"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Gallery ng Larawan",
+            "description": "gallery ng mga larawan"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "isang album kung saan nauugnay ang iba&#39;t ibang media"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "file",
+            "description": "na-upload na file",
+            "newItem": "Magdagdag ng File"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
             "description": "audio clip",
-            "newItem": "Add Audio"
+            "newItem": "Magdagdag ng Audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
             "description": "video clip",
-            "newItem": "Add Video"
+            "newItem": "Magdagdag ng Video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF na dokumento",
+            "description": "PDF na dokumento",
+            "newItem": "Magdagdag ng PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "live na audio o video"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Kategorya",
+            "description": "isang kategorya kung saan maaaring maiugnay ang iba pang mga stream"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Kalahok na Index",
+            "description": "ang mga stream ay nauugnay\/walang kaugnayan dito kapag sumali\/umalis ang isang user"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "interes",
+            "description": "kumakatawan sa interes ng isang user sa isang partikular na paksa"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Papasok",
+            "description": "destinasyon para sa mga mensaheng ipinadala ng ibang mga user"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Pag-uusap",
+            "description": "isang pag-uusap sa pagitan ng mga user, na may kasaysayan"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Real-Time na Tawag",
+            "description": "isang real time na video\/audio call"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Tanong",
+            "description": "stream ng tanong"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Sagot",
+            "description": "sagot stream"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Mga tawag",
+            "description": "kategorya para sa Mga Stream\/webrtc",
+            "MaxRelationsExceeded": "Lumampas ang max na tawag"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "placeholder": "i-type ang pamagat ng pahina",
+        "ModTab": "Baguhin ang Item",
+        "Save": "I-save",
+        "Delete": "Tanggalin",
         "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
+        "record": "Itala",
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "Mag-upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Itakda ang URL",
+        "save": "I-save",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang audio source",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "Mag-upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Itakda ang URL",
+        "save": "I-save",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang pinagmumulan ng video",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "Mag-upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Itakda ang URL",
+        "save": "I-save",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang pdf source",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
+        "reset": "I-reset",
+        "edit": "I-edit",
+        "title": "pamagat",
+        "description": "paglalarawan",
+        "upload": "Mag-upload",
         "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "setUrl": "Itakda ang URL",
+        "save": "I-save",
+        "uploadedImage": "Na-upload na larawan",
+        "imageTitle": "Pamagat ng larawan",
+        "setClip": "Gupitin ang Clip",
+        "invalidURL": "Di-wastong URL",
+        "invalidFile": "Di-wastong File",
+        "errorNoSource": "Walang pinagmumulan ng larawan",
+        "uploadLimit": "Max na laki ng file: {{size}}",
+        "errorFileSize": "Paumanhin, ngunit masyadong malaki ang file.<br> Ang maximum na laki ng file ay {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "Mga tanong",
+        "Answers": "Mga sagot",
+        "AnswerQuestion": "Sagot tanong",
+        "SetYourAnswer": "Pakisagot ang tanong",
+        "NewQuestion": "Bagong Tanong",
+        "NewAnswer": "Bagong Sagot",
+        "AnswerDetails": "Sagutin ang mga Detalye",
+        "answerOption": "Pagpipilian",
+        "answerOptionExclusive": "Eksklusibo",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
+        "FreeAnswer": "Isulat ang iyong sagot dito",
+        "SaveQuestion": "I-save ang Tanong",
+        "SaveAnswer": "I-save ang Sagot",
+        "AddAnotherAnswer": "Magdagdag ng isa pang sagot",
+        "ErrorAnswers": "Mangyaring magdagdag ng kahit isang sagot",
+        "AlreadyAnswered": "Sinagot na",
+        "TitlePlaceholder": "I-type ang iyong tanong",
+        "ContentPlaceholder": "Maglagay ng anumang karagdagang impormasyon dito upang matulungan ang mga tao na sumagot",
+        "ErrorTitle": "Kailangang tanong",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Bagong karanasan",
+        "DefineTitle": "Mangyaring tukuyin ang isang pamagat",
+        "Create": "Lumikha"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
+        "SettingsTitle": "Mga tawag",
+        "MaxCalls": "Tumatawag si Max",
         "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "NoCallsYet": "Wala pang tawag",
+        "CallReasonTitle": "Tungkol saan ang tawag na ito?",
+        "WaitingRoom": "Silidhintayan"
     }
 }

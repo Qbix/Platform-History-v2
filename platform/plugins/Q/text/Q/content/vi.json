@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Lỗi {{status}} trong khi yêu cầu",
+        "canceled": "Yêu cầu đã bị hủy",
+        "500": "Lỗi máy chủ nội bộ",
+        "404": "Không tìm thấy: {{url}}",
+        "501": "Yêu cầu bị gián đoạn"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Phiên hết hạn. Làm mới trang và thử lại.",
+        "otherDomain": "Yêu cầu tên miền chéo bị chặn đối với tên miền nước ngoài tại {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "vô nhẹ",
+        "click": "nhấp chuột",
+        "yes": "Đúng",
+        "no": "không",
+        "Tap": "Vô nhẹ",
+        "Click": "Nhấp chuột",
+        "Yes": "Đúng",
+        "No": "Không"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Tháng một",
+        "2": "tháng 2",
+        "3": "hành khúc",
+        "4": "tháng tư",
+        "5": "Có thể",
+        "6": "tháng Sáu",
+        "7": "tháng Bảy",
+        "8": "tháng Tám",
+        "9": "Tháng Chín",
+        "10": "Tháng Mười",
+        "11": "tháng Mười Một",
+        "12": "tháng 12"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "thứ hai",
+        "seconds": "giây",
+        "minute": "phút",
+        "minutes": "phút",
+        "hour": "giờ",
+        "day": "ngày",
+        "days": "ngày",
+        "week": "tuần",
+        "weeks": "tuần",
+        "month": "tháng",
+        "months": "tháng",
+        "year": "năm",
+        "years": "năm",
+        "decade": "thập kỷ",
+        "decades": "thập kỷ",
+        "century": "thế kỷ",
+        "centuries": "thế kỉ"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Vui lòng cho phép truy cập vào micrô của bạn",
+        "record": "Ghi lại",
+        "recording": "ghi âm",
+        "remains": "còn lại",
+        "maximum": "tối đa",
+        "playing": "Đang chơi",
+        "recorded": "Đã ghi lại",
+        "clip": "kẹp",
+        "discard": "Bỏ đi",
+        "encoding": "Mã hóa"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "kẹp",
+        "errorNoSource": "Không có nguồn video",
+        "SkipAfter": "Bỏ qua sau",
+        "Skip": "Nhảy"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "kẹp",
+        "errorNoSource": "Không có nguồn pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Đặt bắt đầu clip",
+        "ClipStart": "Bắt đầu clip",
+        "SetClipEnd": "Đặt kết thúc clip",
+        "ClipEnd": "Clip kết thúc",
+        "StartMoreEnd": "Vị trí bắt đầu không được nhiều hơn vị trí kết thúc",
+        "EndLessStart": "Vị trí kết thúc không được nhỏ hơn vị trí bắt đầu",
+        "WhichInvalid": "Đối số &#39;mà&#39; không hợp lệ"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Báo động"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Xác nhận",
+        "ok": "Đúng",
+        "cancel": "Không"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Lời nhắc",
+        "ok": "Đi"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "hơn",
+        "Menu": "Thực đơn"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Lỗi khi đọc tệp",
+        "errorType": "Xin lỗi, nhưng loại tệp này không được hỗ trợ",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Bạn thích làm gì?",
+            "photo": "Chụp ảnh mới",
+            "library": "Chọn từ thư viện"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Vui lòng chọn một hình ảnh lớn hơn.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Điều chỉnh kích thước và vị trí",
+            "touchscreen": "Sử dụng ngón tay của bạn để thu phóng và kéo",
+            "notTouchscreen": "Sử dụng chuột và bánh xe của bạn để thu phóng và kéo"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
+        "lastNight": "tối hôm qua",
+        "lastEvening": "đêm trước",
+        "yesterday": "hôm qua",
+        "thisMorning": "bà già này",
+        "today": "hôm nay",
+        "tonight": "đêm nay",
         "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "tomorrow": "ngày mai",
+        "hoursAgo": "{{h}} giờ trước",
+        "hourAgo": "{{h}} giờ trước",
+        "minuteAgo": "{{m}} phút trước",
+        "minutesAgo": "{{m}} phút trước",
+        "secondAgo": "{{s}} giây trước",
+        "secondsAgo": "{{s}} giây trước",
+        "fewSecondsAgo": "Cách đây vài giây",
+        "rightNow": "ngay lập tức",
+        "inSecond": "sau {{s}} giây",
+        "inSeconds": "sau {{s}} giây",
+        "inMinute": "sau {{m}} phút nữa",
+        "inMinutes": "sau {{m}} phút nữa",
+        "inHour": "sau {{h}} giờ nữa",
+        "inHours": "sau {{h}} giờ",
+        "inUnderMinute": "trong dưới 1 phút"
     }
 }

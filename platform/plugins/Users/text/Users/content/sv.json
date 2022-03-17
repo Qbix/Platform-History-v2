@@ -1,132 +1,132 @@
 {
     "analytics": {
         "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Daily": "Dagligen",
+        "Weekly": "Varje vecka",
+        "Monthly": "En gång i månaden",
+        "Application": "Ansökan",
+        "Pages": "Sidor",
+        "Services": "Tjänster",
+        "Faq": "FAQ",
+        "WeekDays": "Veckodagar"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "logga in",
+        "LogOut": "logga ut"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Ställ in {{1}} som min primära {{2}}",
+        "ChoosePassPhrase": "Välj en <strong>lösenordsfras<\/strong> att logga in med.<br> En enkel fras som består av några få ord som du lätt kommer ihåg.",
+        "ChoosePassPhraseSeeSuggestions": "Välj en bra <strong>lösenordsfras<\/strong> för att skydda ditt konto. Se förslagen för några idéer.",
+        "LogOutAndTryAgain": "Logga ut och försök igen",
+        "IfYouFeel": "Om du känner att något gick fel kan du",
+        "SetIdentifierButtonTitle": "börja om"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Komma igång"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Komma igång",
+        "Authorize": "Godkänna",
+        "TermsLabel": "Jag har läst och håller med<br> till {{link}}",
+        "TermsTitle": "Villkor",
+        "mustAgree": "Först måste du godkänna villkoren."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Jag accepterar {{link}}",
+        "TermsTitle": "Villkor"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Tillstånd",
+        "prompt": "Vill du aktivera aviseringar? Du kommer att få uppdateringar i realtid om saker du bryr dig om.",
+        "yes": "Ja",
+        "no": "Nej",
+        "WelcomePleaseVerifyEmail": "Välkommen! Vänligen verifiera din email adress.",
+        "WelcomeVerifyEmail": "Välkommen! Verifiera din e-postadress.",
+        "ForgetPass": "Hej, har du glömt din lösenfras?",
+        "PassphraseSaved": "Din lösenordsfras har sparats.",
+        "IdentifierActivated": "Din {{type}} har aktiverats.",
+        "CompletedActivation": "Du har slutfört användaraktiveringen.",
+        "CompletedActivationLogIn": "Du har slutfört användaraktiveringen. Testa att logga in nu."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Välj kontakt",
+            "CreateAccount": "+ Ny kontakt",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create hittades inte",
+            "SearchByName": "Sök på namn",
+            "EmptyContacts": "Hittade inte kontakter..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Välj kontakt för {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Välj etikett.",
+        "inviteUser": "Bjud in användare",
+        "selectRole": "Välj Roll",
+        "inviteRole": "Bjud in {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Ogiltigt språk valt",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Välkommen",
+        "directions": "Skapa ett konto eller logga in.",
+        "directionsNoRegister": "Logga in om du har ett konto.",
+        "goButton": "Gå",
+        "passphrase": "Ange din lösenordsfras:",
+        "loginButton": "Komma igång",
+        "registerButton": "Komma igång",
+        "resendButton": "Skicka aktiveringsmeddelande",
+        "forgot": "Glömde det?",
+        "resendConfirm": "Vill du skicka ett meddelande för att återställa din lösenfras?",
+        "resendSuccess": "Sök efter ett meddelande för att återställa din lösenfras",
+        "resendClose": "Stänga",
+        "noPassphrase": "Innan du kan logga in måste du ställa in en lösenordsfras genom att klicka på länken i ditt aktiveringsmeddelande.",
+        "notVerified": "Du måste skicka ett aktiveringsmeddelande till dig själv för att kunna logga in.",
+        "emailExists": "Försökte du registrera dig med det här mejlet tidigare? Om så är fallet, kontrollera din inkorg för att aktivera ditt konto. <a href='#resend' class='Q_button Users_activation_resend'>Klicka för att skicka meddelandet igen<\/a>",
+        "mobileExists": "Har du försökt registrera dig med detta mobilnummer tidigare? Om så är fallet, kontrollera ditt SMS för att aktivera ditt konto. <a href='#resend' class='Q_button Users_activation_resend'>Klicka för att skicka meddelandet igen<\/a>",
+        "usingOther": "Eller kan du",
+        "prompt": "Välj ett användarnamn:",
+        "newUser": "eller skapa ett nytt konto nedan",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "ditt mobilnummer eller e-post",
+            "mobile": "ange ditt mobilnummer",
+            "email": "Skriv in din mailadress",
+            "username": "använd endast bokstäver och siffror"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Acceptera användarvillkoren?",
+        "facebookNoEmail": "Ditt Facebook-konto saknar en bekräftad e-postadress. Logga helt enkelt på det ursprungliga sättet.",
+        "picTooltip": "Du kan ändra den här bilden senare",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Logga in på {{host}} vid tidpunkten {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Omdirigerar till Wallet",
+                "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Lägg till ett sätt att logga in",
+        "sendMessage": "Skicka aktiveringsmeddelande",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "ange ditt mobilnummer eller e-post",
+            "mobile": "Skriv in ditt mobilnummer",
+            "email": "Skriv in din mailadress",
+            "username": "Användarnamn"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Konto",
+        "areUsing": "Du använder {{platform}} som",
+        "noLongerUsing": "Du är inte längre ansluten till {{platform}} som",
+        "doAuth": "Logga in med detta konto",
+        "doSwitch": "Byt till det här kontot"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Ägare",
+        "Admin": "Administration",
+        "Member": "Medlem",
+        "Guest": "Gäst",
+        "Host": "Värd"
     }
 }

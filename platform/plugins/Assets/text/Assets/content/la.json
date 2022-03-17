@@ -1,252 +1,252 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "ICTUS ut stipendium"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: crimen discursum pro {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Gratias ago tibi pro solutione tua ad {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} subscripserunt ad {{plan.title}}",
+        "YouSubscribedTo": "subscripta sunt {999}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Pecuniam {999}} ab {{call 'publisher.displayName'}} ab &quot;{{description}} accipis&quot;",
+        "HasBeenCharged": "Heus, hoc solum est ut scias {{1}} accusatus est {{2}} pro {{3}} a {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Gratias ago tibi pro mercede tua &quot;{999}}&quot;",
+        "HavePaid": "Heus {{1}}, haec confirmatio celeris iusta est te bene solvisse {{2}} ad {{3}} pro {{4}}"
     },
     "payment": {
         "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "PaymentMethod": "Solucionis methodo",
+        "ContactInfo": "Contactus info",
+        "Pay": "Stipendium"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "InviteAcceptedBy": "Invita acceptum ab {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} primum nomen intravit",
+        "Streams_user_lastname": "{{invitedUserName}} nomen novissimum intraverunt",
+        "Streams_user_icon": "{{invitedUserName}} iconem intraverunt",
+        "Places_user_location": "{{invitedUserName}} locum intraverunt",
+        "Streams_greeting": "{{invitedUserName}} salutationem ingressus",
+        "YouHaveCreditsToStart": "Habes {999}} credit incipere",
+        "PaymentFor": "Mercedem &quot;{999}}&quot;",
+        "PaymentTo": "Mercedem facere {{1}}",
+        "PaymentToUser": "Mercedem facere {{toUserName}}",
+        "CreatePaidStream": "ad creandum {999}}",
+        "JoinedPaidStream": "ad reservationem in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ad communitatem creandam &quot;{999}}&quot;",
+        "LeftPaidStream": "sicut reservatio refugium in &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{100}}<\/a> &quot;",
+        "BoughtCredits": "Emit {{amount}} creditorum",
+        "BonusCredits": "Bonus {{amount}} credit",
+        "BuyAmountCredits": "Emptum {{amount}} creditorum",
+        "WatchClip": "Meruit {999}} credita pro spectandis {{fromStreamTitle}}",
+        "MissingCredits": "Absentis Credits",
+        "YouMissingCredits": "Additamenta ad {{amount}} credita procedere.",
+        "BuyCredits": "Buy credit",
+        "BuyBonus": "Merces {{amount}} creditorum statim ducet ad {{bonus}} creditorum bonum.",
         "Buy": "Buy",
         "PurchaseCredits": "Purchase Credits",
         "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "ErrorInvalidAmount": "Quantum invalidum",
+        "ErrorInvalidCurrency": "Infeliciter monetam non sustinemus {{currency}} adhuc",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} creditorum",
+            "BonusCredits": "{{amount}} creditorum"
         }
     },
     "history": {
         "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
+        "Amount": "Moles",
+        "Description": "Descriptio",
         "Client": "Client",
         "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "From": "e*",
+        "SeeHistory": "Historiam solutionis vide pro {{1}}",
+        "HistoryEmpty": "Nullas notitia adhuc",
+        "PaymentFor": "Missi {{amount}} creditorum",
+        "PaymentTo": "Missi {{amount}} creditorum",
+        "PaymentToUser": "Missi {{amount}} creditorum",
+        "CreatePaidStream": "Consumptus {{amount}} credit",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Meruit {{amount}} credit",
+            "-": "Consumptus {{amount}} credit"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Meruit {{amount}} credit",
+            "-": "Consumptus {{amount}} credit"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Receptum {999}} creditorum",
+            "-": "Missi {{amount}} creditorum"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Consumptus {{amount}} credit",
+        "BoughtCredits": "Emit {{amount}} creditorum",
+        "BonusCredits": "Obtinuit bonus {{amount}} credit",
+        "InviteAcceptedBy": "Meruit {{amount}} credit",
+        "Streams_user_firstname": "Meruit {{amount}} credit",
+        "Streams_user_lastname": "Meruit {{amount}} credit",
+        "Streams_user_icon": "Meruit {{amount}} credit",
+        "Places_user_location": "Meruit {{amount}} credit",
+        "Streams_greeting": "Meruit {{amount}} credit",
+        "YouHaveCreditsToStart": "Meruit {{amount}} credit"
     },
     "subscriptions": {
         "infoTitle": "Set Payment Information",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
+            "title": "Satus Subscription",
+            "message": "Visne subscribere {{title}}?",
+            "ok": "Bene",
             "cancel": "Cancel"
         },
-        "CreditOrDebitCard": "Credit or debit card",
+        "CreditOrDebitCard": "Credit vel debitum card",
         "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "ImmediatePayment": "Immediata Payment"
     },
     "payments": {
         "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "BuyAmountCredits": "Emptum {{amount}} creditorum",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
+            "title": "Mercedem",
+            "message": "Placetne tibi reddere {{symbol}}{{amount}}?",
+            "ok": "Bene",
             "cancel": "Cancel"
         }
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "description": "servat track creditorum et solutionum"
         },
         "Assets\/plan": {
             "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "description": "subscriptione consilium"
         },
         "Assets\/subscription": {
             "displayType": "Subscription",
-            "description": "subscription"
+            "description": "subscriptione"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Productum",
+            "description": "productum quod vendidit"
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service being offered"
+            "description": "munus oblatum"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Meruit {{amount}} credit"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Emit {{amount}} creditorum"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} credit"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Consumptus {{amount}} credit"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Missus est {999}} credit ad {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Acceptae sunt {999}} creditorum ab {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Nova Service",
+            "TitlePlaceholder": "Servitium titulum",
+            "PricePlaceholder": "Pretium",
+            "LinkPlaceholder": "pone additional info link",
+            "DescriptionPlaceholder": "Servitium descriptio",
+            "SaveService": "Servare Service",
+            "SelectRequiredParticipants": "Participes required"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Administrare Service Templates",
+        "ManageServices": "Curo Services",
+        "Free": "Liber",
+        "OptionalContribution": "Ad libitum conlationem",
+        "RequiredPayment": "Requiritur solucionis",
+        "AreYouSureDelete": "Visne vero hoc officium delere?",
+        "AmountServicesRelated": "Sunt {999}} auxilia ad hoc servitium pertinentia. Ipsae etiam te soluta sit."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
+        "Title": "Informationes de {{title}} NFT",
+        "Description": "Detailed notitia de NFT",
+        "FixedBid": "Buy nunc",
         "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
+        "StartingIn": "Satus in",
+        "EndingIn": "ending in",
         "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "TitlePlaceholder": "Da tuum NFT titulum",
+        "DescriptionPlaceholder": "Da tuum NFT descriptionem",
+        "CreateYourNFT": "Creata NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
+        "RoyaltyPlaceholder": "Libitum. Pretium auctor ante translationem.",
+        "ExpirationDate": "Expirata Date",
+        "StartingDate": "Satus Date",
+        "BidsBelowThisAmount": "Iubet hoc quantum infra non licere",
         "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
+        "Price": "Pretium",
+        "Owner": "dominus",
+        "SelectCategory": "Genus eligere",
+        "Day": "dies",
+        "Days": "diebus",
+        "Hour": "Hora",
+        "Hours": "Horae",
+        "Minute": "Minutum",
+        "Minutes": "Minuta",
+        "Second": "Secundus",
+        "Seconds": "Secundis",
+        "SalesCreator": "de Sales ibo ad creatorem",
+        "Details": "Singula",
+        "Bids": "Iubet",
+        "History": "Historia",
         "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
+        "PutOnSale": "Venditionis posuit",
+        "PutOffSale": "Recede venditionis",
+        "Transfer": "TRANSFERENDIS",
+        "Update": "Renovatio",
+        "UpdateToken": "Update Thochen",
+        "CreateToken": "Create Thochen",
+        "PlaceBid": "Pone oblatio",
+        "SoldOut": "venundatus",
         "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
+        "DescribeYourNFT": "Placere describere tuum NFT",
+        "NftPicture": "Imaginem repraesentare NFT",
+        "NftMovie": "Movie repraesentare NFT",
         "UploadMovie": "Upload movie",
         "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "UploadFile": "Upload lima",
+        "PutOnMarketplace": "Pone in foro",
+        "InstantPurchase": "Intra pretium ut users statim mercari tuum NFT",
+        "FixedPrice": "Certum pretium",
+        "TimedAuction": "Intempestivo auction",
+        "OpenForBids": "Aperi iubet",
+        "PriceOnePiece": "Intra pretium pro una",
+        "EnterMinimumBid": "Intra bid Minimum",
+        "SelectChain": "Lego catenae",
+        "WrongChain": "Hoc NFT sub &quot;{999}}&quot; creatum est. Quaeso utere hac catena.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
+            "importNFT": "Inferentes NFT&#39;s",
+            "fileNotFound": "Nos paenitet, CSV fasciculus non inventus est.",
+            "fileEmpty": "Nos paenitet, CSV fasciculus inanis est.",
+            "userIdNotFound": "user est sed id inanis",
+            "errorLine": "linea {{1}}",
+            "fieldNotFound": "Requisitis campus &quot;{{1}}&quot; non inventus est",
+            "taskStreamInvalid": "negotium amnis invalidum",
+            "instructionsEmpty": "negotium amnis instructiones inanes",
             "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
+            "activateUsers": "mitte activation ad users?",
+            "importProgress": "Progressus",
+            "importOptions": "Optiones",
+            "sampleCSV": "Sample CSV",
             "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "errorsTitle": "Errores occurrit"
         },
         "filter": {
             "ByCategory": {
@@ -255,11 +255,11 @@
                 "AllCollections": "All Collections"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Omnes Auctores",
+                "AllUsers": "omnes",
+                "FilterByAuthors": "Ab Auctoribus Saccare"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Ad Collection"
     }
 }

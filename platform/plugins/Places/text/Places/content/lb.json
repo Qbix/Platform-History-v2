@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "bannent {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "Meter",
+        "meters": "Meter",
+        "kilometer": "Kilometer",
+        "kilometers": "Kilometer",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "Meile",
+        "miles": "Meilen",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "Fouss",
+        "feet": "Fouss",
+        "inches": "Zoll"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ech sinn interesséiert fir Saachen déi bannent {{select}} vun",
+        "update": "Update Meng Location",
+        "set": "Set Meng Location",
+        "prompt": "{{ClickOrTap}} hei fir<br> setzen Är<br> Standuert",
+        "myCurrentLocation": "Meng aktuell Positioun",
+        "enterAddress": "Gitt eng Adress un",
+        "enterPostcode": "Gitt w.e.g. Är Postleitzuel \/ Postleitzuel un",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Location addéieren",
+            "title": "Nei Location",
+            "nameYourLocation": "Numm Är Plaz"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Dës Plaz späicheren?",
+            "message": "Plan Dir dës Plaz an Zukunft erëm ze benotzen?",
+            "ok": "jo",
+            "cancel": "Nee"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Nennt dës Plaz",
+            "placeholder": "Heem, Aarbecht etc.",
+            "ok": "Spueren"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Wielt Location"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "All Beräich bannent dëser Plaz?",
+        "newArea": "Neit Gebitt",
+        "promptTitle": "Gitt en Numm fir d&#39;Gebitt un:",
+        "absent": "Weg setzen Beräich",
+        "error": "Feeler",
+        "exist": "Beräich schonn existéieren",
+        "addNewArea": "Füügt neit Gebitt",
+        "add": "Addéieren"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "eng Sammlung vu Plazen",
+            "displayType": "Plaze"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
+            "description": "Representéiert e Gebai, Plaz, Schëff, Park, etc.",
             "displayType": "Location"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Representéiert e Gebitt an enger Plaz, sou wéi e Raum oder Suite",
+            "displayType": "Gebiet"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Representéiert e Buedem an engem Gebai oder Schëff",
+            "displayType": "Buedem"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Representéiert eng Kolonn an engem Gebai oder Schëff",
+            "displayType": "Kolonn"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategorie fir Saachen bannent enger bestëmmter Distanz vun engem Geohash",
+            "displayType": "No bei Plaze"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategorie fir Saachen bannent enger gewëssener Distanz vun engem Geohash, passenden Interessi",
+            "displayType": "Plaze Interessi"
         }
     }
 }

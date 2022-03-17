@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Paʻi e uku"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: hoʻoponopono ʻia ka uku no {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Mahalo no kāu uku iā {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} i kakau inoa ia {{plan.title}}",
+        "YouSubscribedTo": "Ua kau inoa ʻoe iā {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Loaʻa iā ʻoe ka uku o {{displayAmount}} mai {{call 'publisher.displayName'}} e &quot;{{description}}&quot;",
+        "HasBeenCharged": "ʻAe, he mea kēia e hōʻike aku iā ʻoe ua uku ʻia {{2}} no {{3}} e {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Mahalo no kāu uku no &quot;{{description}}&quot;",
+        "HavePaid": "ʻAuhea {{1}}, he hōʻoia wikiwiki kēia i kou uku ʻana {{2}} iā {{3}} no {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ʻIke e pili ana i ke kauoha",
+        "PaymentMethod": "Kaʻina uku",
+        "ContactInfo": "ʻIke pili",
+        "Pay": "Uku"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Ua ʻae ʻia ke kono e {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} komo i ka inoa mua",
+        "Streams_user_lastname": "{{invitedUserName}} hoʻokomo i ka inoa hope",
+        "Streams_user_icon": "{{invitedUserName}} komo i ka ikona",
+        "Places_user_location": "{{invitedUserName}} komo i kahi",
+        "Streams_greeting": "{{invitedUserName}} komo i ke aloha",
+        "YouHaveCreditsToStart": "Loaʻa iā ʻoe {{amount}} mau hōʻaiʻē e hoʻomaka",
+        "PaymentFor": "Uku no &quot;{{1}}&quot;",
+        "PaymentTo": "Uku iā {{1}}",
+        "PaymentToUser": "Uku iā {{toUserName}}",
+        "CreatePaidStream": "no ka hana ʻana {{toStreamName}}",
+        "JoinedPaidStream": "no ka hoʻopaʻa &#39;ana ma &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "no ka hana ʻana i ke kaiāulu &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "e like me ka ho&#39;iho&#39;i &#39;ana ma &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Ua kūʻai mai {{amount}} aie",
+        "BonusCredits": "Loaʻa kālā {{amount}}.",
+        "BuyAmountCredits": "Kūʻai {{amount}} hōʻaiʻē",
+        "WatchClip": "Loaʻa iā {{amount}} nā ʻaiʻē no ka nānā ʻana {{fromStreamTitle}}",
+        "MissingCredits": "Nalo na aie",
+        "YouMissingCredits": "Pono ʻoe i {{amount}} hōʻaiʻē hou e hoʻomau.",
+        "BuyCredits": "E kūʻai i nā hōʻaiʻē",
+        "BuyBonus": "ʻO ke kūʻai ʻana i {{amount}} hōʻaiʻē i ka manawa hoʻokahi, e alakaʻi i {{bonus}} bonus hōʻaiʻē.",
+        "Buy": "Kūʻai",
+        "PurchaseCredits": "Kūʻai ʻaiʻē",
+        "Credits": "Nā aie",
+        "ErrorInvalidAmount": "Helu ʻole ka nui",
+        "ErrorInvalidCurrency": "ʻAʻole mākou kākoʻo i ke kālā {{currency}} i kēia manawa",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} aie",
+            "BonusCredits": "{{amount}} aie"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Lā",
+        "Amount": "Ka nui",
+        "Description": "wehewehe",
+        "Client": "Mea kūʻai",
+        "To": "i",
+        "From": "mai",
+        "SeeHistory": "E ʻike i ka mōʻaukala uku no {{1}}",
+        "HistoryEmpty": "ʻAʻohe āu ʻikepili i kēia manawa",
+        "PaymentFor": "Ua hoʻouna ʻia {{amount}}.",
+        "PaymentTo": "Ua hoʻouna ʻia {{amount}}.",
+        "PaymentToUser": "Ua hoʻouna ʻia {{amount}}.",
+        "CreatePaidStream": "Ua lilo {{amount}} aie",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Loaʻa iā {{amount}} hōʻaiʻē",
+            "-": "Ua lilo {{amount}} aie"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Loaʻa iā {{amount}} hōʻaiʻē",
+            "-": "Ua lilo {{amount}} aie"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Loaʻa iā {{amount}} hōʻaiʻē",
+            "-": "Ua hoʻouna ʻia {{amount}}."
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Ua lilo {{amount}} aie",
+        "BoughtCredits": "Ua kūʻai mai {{amount}} aie",
+        "BonusCredits": "Loaʻa ka bonus {{amount}} aie",
+        "InviteAcceptedBy": "Loaʻa iā {{amount}} hōʻaiʻē",
+        "Streams_user_firstname": "Loaʻa iā {{amount}} hōʻaiʻē",
+        "Streams_user_lastname": "Loaʻa iā {{amount}} hōʻaiʻē",
+        "Streams_user_icon": "Loaʻa iā {{amount}} hōʻaiʻē",
+        "Places_user_location": "Loaʻa iā {{amount}} hōʻaiʻē",
+        "Streams_greeting": "Loaʻa iā {{amount}} hōʻaiʻē",
+        "YouHaveCreditsToStart": "Loaʻa iā {{amount}} hōʻaiʻē"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Hoʻonohonoho i ka ʻike uku",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "E hoʻomaka i ke kau inoa",
+            "message": "Makemake ʻoe e kau inoa iā {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Hoʻopau"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kāleka hōʻaiʻē a hōʻaiʻē paha",
+        "SubscribePayment": "Kakau inoa",
+        "ImmediatePayment": "Uku koke"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Hoʻonohonoho i ka ʻike uku",
+        "BuyAmountCredits": "Kūʻai {{amount}} hōʻaiʻē",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Hana i kahi uku",
+            "message": "ʻAe ʻoe e uku iā {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Hoʻopau"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Nā aie",
+            "description": "mālama i nā hōʻaiʻē a me nā uku"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Hoʻolālā hoʻolimalima",
+            "description": "papahana hoʻopaʻa inoa"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Kau inoa",
+            "description": "kau inoa"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Huahana",
+            "description": "huahana e kūʻai ʻia nei"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "lawelawe",
+            "description": "lawelawe ʻia"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Loaʻa iā {{amount}} hōʻaiʻē"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Ua kūʻai mai {{amount}} aie"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Loaʻa kālā {{amount}}."
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Ua lilo {{amount}} aie"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Hoʻouna {{amount}} aie iā {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Loaʻa iā {{amount}} nā hōʻaiʻē mai {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Hana Hou",
+            "TitlePlaceholder": "Poʻo inoa lawelawe",
+            "PricePlaceholder": "Hoʻonoho i ke kumu kūʻai",
+            "LinkPlaceholder": "hoʻonoho i ka loulou ʻike hou aku",
+            "DescriptionPlaceholder": "wehewehe lawelawe",
+            "SaveService": "Mālama i ka lawelawe",
+            "SelectRequiredParticipants": "Pono nā mea komo"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "E hoʻokele i nā laʻana hana",
+        "ManageServices": "Mālama i nā lawelawe",
+        "Free": "Kuokoa",
+        "OptionalContribution": "Hāʻawi koho",
+        "RequiredPayment": "Uku koiia",
+        "AreYouSureDelete": "Makemake ʻoe e holoi i kēia lawelawe?",
+        "AmountServicesRelated": "Aia {{amount}} mau mea e pili ana i keia lawelawe. E wehe ʻia nō hoʻi lākou."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "Title": "ʻIke e pili ana iā {{title}} NFT",
+        "Description": "ʻIke kikoʻī e pili ana i ka NFT",
+        "FixedBid": "Kūʻai i kēia manawa",
+        "CurrentBid": "Kūʻai i kēia manawa",
+        "StartingIn": "E hoʻomaka ana i loko",
+        "EndingIn": "E pau ana",
+        "CreateNFT": "E hana i kahi NFT",
+        "TitlePlaceholder": "Hāʻawi i kāu inoa NFT",
+        "DescriptionPlaceholder": "Hāʻawi i kāu NFT i kahi wehewehe",
+        "CreateYourNFT": "E hana i kāu NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "RoyaltyPlaceholder": "Koho. Ka nui i uku ʻia i ka mea hana ma mua o ka hoʻoili ʻana.",
+        "ExpirationDate": "Ka lā pau",
+        "StartingDate": "Lā Hoʻomaka",
+        "BidsBelowThisAmount": "ʻAʻole ʻae ʻia nā bila ma lalo o kēia nui",
+        "MinimumBid": "Kūʻai liʻiliʻi",
+        "Price": "Kumukuai",
+        "Owner": "mea nona",
+        "SelectCategory": "E koho i ka waeʻano",
+        "Day": "Lā",
+        "Days": "Nā lā",
+        "Hour": "Hola",
+        "Hours": "Nā hola",
+        "Minute": "Minuke",
+        "Minutes": "Nā minuke",
+        "Second": "Ka lua",
+        "Seconds": "Kekona",
+        "SalesCreator": "o nā kūʻai e hele i ka mea hana",
+        "Details": "Nā kikoʻī",
+        "Bids": "Kūʻai",
+        "History": "Moolelo",
+        "LoremIpsum": "ʻO Lorem Ipsum he kikokikona dummy wale nō o ka ʻoihana paʻi a me ka hoʻonohonoho ʻana.",
+        "PutOnSale": "E kūʻai aku",
+        "PutOffSale": "Hoʻihoʻi mai ke kūʻai aku",
+        "Transfer": "Hoʻololi",
+        "Update": "Hoʻohou",
+        "UpdateToken": "Hoʻohou Token",
+        "CreateToken": "Hana i ka hōʻailona",
+        "PlaceBid": "Wahi Bid",
+        "SoldOut": "Kuai aku",
+        "NftName": "NFT inoa",
+        "DescribeYourNFT": "E ʻoluʻolu e wehewehe i kāu NFT",
+        "NftPicture": "Kiʻi e hōʻike iā NFT",
+        "NftMovie": "Kiʻiʻoniʻoni e hōʻike iā NFT",
+        "UploadMovie": "Hoʻouka kiʻiʻoniʻoni",
+        "MovieSource": "Puna Kiʻiʻoniʻoni",
+        "UploadFile": "Hoʻouka i kahi faila",
+        "PutOnMarketplace": "E kau ma ka mākeke",
+        "InstantPurchase": "E hoʻokomo i ke kumukūʻai e ʻae i nā mea hoʻohana e kūʻai koke i kāu NFT",
+        "FixedPrice": "Kumukuai paa",
+        "TimedAuction": "Kudala manawa",
+        "OpenForBids": "Wehe no nā kūʻai",
+        "PriceOnePiece": "E hookomo i ke kumukuai no ka apana hookahi",
+        "EnterMinimumBid": "E hoʻokomo i ke kumu kūʻai liʻiliʻi",
+        "SelectChain": "E koho i ke kaulahao",
+        "WrongChain": "Hana ʻia kēia NFT ma lalo o &quot;{{chain}}&quot;. E ʻoluʻolu e hoʻohana i kēia kaulahao.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Ke lawe mai nei i nā NFT",
+            "fileNotFound": "E kala mai, ʻaʻole i loaʻa ka faila CSV.",
+            "fileEmpty": "E kala mai, nele ka waihona CSV.",
+            "userIdNotFound": "Aia ka mea hoʻohana akā ʻaʻohe id",
+            "errorLine": "laina {{1}}",
+            "fieldNotFound": "ʻAʻole i loaʻa ka māla makemake &quot;{{1}}&quot;.",
+            "taskStreamInvalid": "hewa ʻole ke kahawai hana",
+            "instructionsEmpty": "ʻAʻohe ʻōlelo kuhikuhi kahawai hana",
+            "complete": "Paʻa",
+            "activateUsers": "hoʻouna i ka leka hoʻāla i nā mea hoʻohana?",
+            "importProgress": "Holomua",
+            "importOptions": "Nā koho",
+            "sampleCSV": "Hoʻoiho i ka laʻana CSV",
+            "fileLabel": "Hoʻouka i ka Papapalapala:",
+            "errorsTitle": "Ua hala nā hewa"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Kānana e nā NFT Collections",
+                "ShowNFTCollection": "Hōʻike i ka hōʻiliʻili NFT ma ...",
+                "AllCollections": "Nā ʻOhi a pau"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Nā mea kākau a pau",
+                "AllUsers": "ʻO kēlā me kēia kanaka",
+                "FilterByAuthors": "Kānana e nā mea kākau"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Hoʻi i ka ʻOhi"
     }
 }

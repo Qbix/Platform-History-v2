@@ -1,133 +1,133 @@
 {
     "preview": {
-        "NewItemTitle": "новы элемент"
+        "NewItemTitle": "Новы пункт"
     },
     "labels": {
-        "Streams\/invited": "Людзі, якіх я запрасіў",
-        "Streams\/invitedMe": "Хто запрасіў мяне",
+        "Streams\/invited": "Людзі, якіх я запрашаў",
+        "Streams\/invitedMe": "Хто мяне запрасіў",
         "AreYouAgree": "Вы згодныя?",
         "Yes": "Так",
-        "No": "Не",
+        "No": "не",
         "DoYouAgree": "Вы згодныя?"
     },
     "interests": {
         "Filter": "Якія вашы інтарэсы?",
-        "CanAdd": "Калі вы ўсё яшчэ не можаце знайсці тое, што вы шукаеце, вы можаце дадаць новы цікавасць ніжэй:",
-        "TrySynonyms": "Калі вы не бачыце яго? Паспрабуйце сінонімы.",
-        "AddUnderCategory": "Дадаць пад катэгорыю ...",
-        "Other": "іншае",
-        "Unlisted": "Unlisted"
+        "CanAdd": "Калі вы ўсё яшчэ не можаце знайсці тое, што шукаеце, вы можаце дадаць новы інтарэс ніжэй:",
+        "TrySynonyms": "Не бачыце? Паспрабуйце некалькі сінонімаў.",
+        "AddUnderCategory": "Дадаць у катэгорыю...",
+        "Other": "Іншае",
+        "Unlisted": "Не ў спісе"
     },
     "chat": {
-        "flaggedForAdminReview": "Паведамленне было заўважана для праверкі адміністратара. Націсніце яшчэ раз, каб на данно.",
-        "noOneSaid": "Ніхто не сказаў нічога",
-        "closeChatButton": "зачыніць чат",
-        "closeChatConfirmTitle": "Зачыніце гэты чат?",
-        "closeChatConfirm": "Вы ўпэўненыя, што жадаеце закрыць гэты чат?",
-        "closeChatConfirmYes": "ды",
-        "closeChatConfirmNo": "няма",
-        "earlierComments": "больш раннія каментары",
-        "Subscribed": "Адключэнне гуку апавяшчэнняў",
-        "Unsubscribed": "Атрымаць апавяшчэнні",
+        "flaggedForAdminReview": "Паведамленне было пазначана для разгляду адміністратарам. Націсніце яшчэ раз, каб зняць сцяг.",
+        "noOneSaid": "Ніхто нічога не сказаў",
+        "closeChatButton": "Закрыць чат",
+        "closeChatConfirmTitle": "Закрыць гэты чат?",
+        "closeChatConfirm": "Вы ўпэўнены, што хочаце закрыць гэты чат?",
+        "closeChatConfirmYes": "Так",
+        "closeChatConfirmNo": "не",
+        "earlierComments": "ранейшыя каментарыі",
+        "Subscribed": "Апавяшчэнні ўключаны",
+        "Unsubscribed": "Апавяшчэнні адключаны",
         "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтай размовы.",
         "startedConversation": "пачаў размову",
         "RealTimeCall": "Званок у рэжыме рэальнага часу",
-        "SearchByName": "Пошук па імені",
+        "SearchByName": "Шукаць па назве",
         "Notifications": {
             "Visit": "{{displayName}} наведвае чат",
             "Join": "{{displayName}} далучыўся да чата",
-            "Leave": "{{displayName}} выйшаў з чата",
-            "RelatedTo": "{{displayName}} запусціў {{stream.displayType}}"
+            "Leave": "{{displayName}} пакінуў чат",
+            "RelatedTo": "{{displayName}} пачаў {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Паведамленне {{& message.fields.type}} на {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} сказаў:",
+        "*": "Паведамленне {{& message.fields.type}} да {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} сказаў: {{& message.content}}",
         "Streams\/changed": "Змены ў {{stream.fields.title}}",
-        "Streams\/invite": "Вы былі запрошаны {{& stream.fields.title}}",
-        "Streams\/announcement": "Аб&#39;яву ў {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} змяніў доступ патоку",
-        "Streams\/chat\/edit": "Чат паведамленне адрэдагаваў",
-        "Streams\/chat\/remove": "Чат паведамленне удалено",
-        "Streams\/closed": "{{stream.fields.title}} была зачынена",
-        "Streams\/task\/progress": "Прагрэс, дасягнуты на {{stream.fields.title}}",
-        "Streams\/task\/complete": "Задача выканана: {{stream.fields.title}}",
-        "Streams\/task\/error": "Памылка пры: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Уваходныя паведамленні",
-        "ManageEmailSubscriptions": "кіраваць падпіскамі на электронную пошту",
-        "IfUnsubscribe": "Калі вы хочаце, каб адпісацца",
-        "Streams\/relatedTo\/Streams\/call": "Новы званок пачаўся ў {{toTitle}}",
-        "Streams\/relatedTo\/*": "Новы {{relationDisplayType}} у {{toTitle}}",
+        "Streams\/invite": "Вас запрасілі на {{& stream.fields.title}}",
+        "Streams\/announcement": "Аб&#39;ява ў {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} змяніў доступ у {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Паведамленне ў чаце адрэдагавана ў {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Паведамленне ў чаце выдалена праз {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} зачынены",
+        "Streams\/task\/progress": "Дасягнуты прагрэс на {{stream.fields.title}}",
+        "Streams\/task\/complete": "Заданне выканана: {{stream.fields.title}}",
+        "Streams\/task\/error": "Памылка падчас: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Уваходнае паведамленне",
+        "ManageEmailSubscriptions": "кіраваць падпіскамі па электроннай пошце",
+        "IfUnsubscribe": "Калі вы хочаце адмовіцца ад падпіскі",
+        "Streams\/relatedTo\/Streams\/call": "Новы выклік пачаўся праз {{toTitle}}",
+        "Streams\/relatedTo\/*": "Новае {{relationDisplayType}} у {{toTitle}}",
         "Streams\/relatedFrom\/*": "Дададзена ў {{toTitle}} як {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} у каментары згадаў вас",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} згадаў вас у каментарыі",
         "Streams\/call": "{{displayName}} пачаў званок у рэжыме рэальнага часу"
     },
     "invite": {
-        "messageContent": "{{displayName}} запрасіў вас {{inviteUrl}}",
+        "messageContent": "{{displayName}} запрасіў вас на {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Абярыце з спісу кантактаў",
-            "selectFromContacts": "Выберыце З кантактаў",
-            "photo": "сфатаграфуйце",
-            "photoInstruction": "Калі чалавек, які скануецца свой QR-код знаходзіцца перад вамі, сфатаграфуйце іх",
-            "to": "To: {{Stream Title}}",
-            "go": "ісці",
-            "title": "запрашэнне",
-            "placeholder": "Мабільны тэлефон ці адрас электроннай пошты",
-            "orInvite": "Ці запрасіць людзей, выкарыстоўваючы:",
-            "QR": "{{ClickOrTap}} для генерацыі QR-кода",
-            "QRtitle": "Отсканируйте гэты QR-код",
-            "byEmail": "E-mail",
-            "byText": "тэкст",
-            "byFacebook": "facebook",
-            "byTwitter": "шчэбет",
-            "QRscanned": "Яны сканавалі яго!",
-            "chooseAgainFromContacts": "Абярыце зноў з кантактаў",
-            "inviteSelectedContacts": "Запрасіце выбраныя кантакты",
+            "chooseFromContacts": "Выберыце з вашых кантактаў",
+            "selectFromContacts": "Выберыце з кантактаў",
+            "photo": "Сфатаграфуйце",
+            "photoInstruction": "Калі чалавек, які сканаваў ваш QR-код, знаходзіцца перад вамі, сфатаграфуйце яго",
+            "to": "Каму: {{Stream Title}}",
+            "go": "Ідзі",
+            "title": "Запрасіць",
+            "placeholder": "Нумар мабільнага тэлефона або адрас электроннай пошты",
+            "orInvite": "Або запрашайце людзей з дапамогай:",
+            "QR": "{{ClickOrTap}} для стварэння QR-кода",
+            "QRtitle": "Адсканіруйце гэты QR-код",
+            "byEmail": "Электронная пошта",
+            "byText": "Тэкст",
+            "byFacebook": "Facebook",
+            "byTwitter": "Twitter",
+            "QRscanned": "Яны прасканавалі!",
+            "chooseAgainFromContacts": "Выберыце Зноў з Кантактаў",
+            "inviteSelectedContacts": "Запрасіць выбраныя кантакты",
             "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны",
-            "copyLink": "{{ClickOrTap}} скапіяваць запрашальную спасылку",
-            "userChooserPlaceholder": "Пошук па назве",
+            "copyLink": "{{ClickOrTap}}, каб скапіяваць спасылку на запрашэнне",
+            "userChooserPlaceholder": "Шукаць па назве",
             "shareOrCopyLink": "{{ClickOrTap}}, каб падзяліцца або скапіяваць спасылку на запрашэнне"
         },
         "email": {
-            "subject": "Эй, праверыць гэта",
-            "PleaseVisitLink": "Калі ласка, перайдзіце па наступнай спасылцы:",
-            "InvitingYou": "Я запрашаю вас да {{title}}",
-            "HasInvitedYou": "{{displayName}} запрасіў вас {{title}}",
+            "subject": "Гэй, праверце гэта",
+            "PleaseVisitLink": "Калі ласка, наведайце наступную спасылку:",
+            "InvitingYou": "Я запрашаю вас на {{title}}",
+            "HasInvitedYou": "{{displayName}} запрасіў вас на {{title}}",
             "HasMentionedYou": "{{displayName}} згадаў вас у &quot;{{title}}&quot;",
             "YOUAREINVITED": "ВЫ ЗАПРОШАНЫ!",
-            "AcceptInvite": "Прыміце запрашэнне"
+            "AcceptInvite": "Прыняць запрашэнне"
         },
         "sms": {
-            "content": "Вы былі запрошаны {{title}}. Калі ласка, націсніце {{url}}"
+            "content": "Вас запрасілі на {{title}}. Калі ласка, націсніце {{url}}"
         },
         "notice": {
-            "text": "Вы былі запрошаны. {{ClickOrTap}} тут, каб прыняць і далучыцца."
+            "text": "Вас запрасілі. {{ClickOrTap}} тут, каб прыняць і далучыцца."
         },
         "youCanNowPaste": "Цяпер вы можаце ўставіць гэтую спасылку куды-небудзь, каб запрасіць людзей",
         "command": "Запрасіць"
     },
     "followup": {
         "mobile": {
-            "alert": "Прапаную адсылаецца з нашага колькасці, якія вашыя сябры яшчэ не прызнаюць. Наступны з хуткім тэкстам, каб паведаміць ім прыйшло запрашэнне ад вас, з просьбай націснуць на спасылку.",
-            "confirm": "Прапаную адсылаецца з нашага колькасці, якія вашыя сябры яшчэ не прызнаюць. Вы хочаце, каб сачыць за хуткім тэкстам, каб паведаміць ім прыйшло запрашэнне ад вас, з просьбай націснуць на спасылку.",
-            "check": "Эй, я толькі што адправіў вам запрашэнне да {{app}} прыкладання. Калі ласка, праверце смс і націсніце на спасылку!",
+            "alert": "Запрашэнні адпраўляюцца з нашага нумара, які вашы сябры яшчэ не пазнаюць. Далей хутка паведаміце ім, што запрашэнне прыйшло ад вас, і папрасіце іх націснуць на спасылку.",
+            "confirm": "Запрашэнні адпраўляюцца з нашага нумара, які вашы сябры яшчэ не пазнаюць. Вы жадаеце адправіць кароткі тэкст, каб паведаміць ім, што запрашэнне прыйшло ад вас, і папрасіце іх націснуць на спасылку.",
+            "check": "Гэй, я толькі што адправіў вам запрашэнне ў праграму {{app}}. Калі ласка, праверце свае смс і націсніце на спасылку!",
             "CheckYourMobile": "Калі ласка, праверце SMS і выконвайце інструкцыі!"
         },
         "email": {
-            "alert": "Прапаную адпраўляецца з нашага дамена, якія вашыя сябры яшчэ не прызнаюць. Наступны з хуткім тэкстам, каб паведаміць ім прыйшло запрашэнне ад вас, з просьбай націснуць на спасылку.",
-            "confirm": "Прапаную адпраўляецца з нашага дамена, якія вашыя сябры яшчэ не прызнаюць. Вы хочаце, каб сачыць за хуткім тэкстам, каб паведаміць ім прыйшло запрашэнне ад вас, з просьбай націснуць на спасылку.",
-            "subject": "Ці атрымалі вы запрашэнне?",
-            "body": "Эй, я толькі што адправіў вам запрашэнне да {{app}} прыкладання. Калі ласка, праверце сваю электронную пошту і націсніце на спасылку там!",
-            "CheckYourEmail": "Калі ласка, праверце сваю электронную пошту і выконвайце інструкцыі!"
+            "alert": "Запрашэнні адпраўляюцца з нашага дамена, які вашы сябры яшчэ не пазнаюць. Далей хутка паведаміце ім, што запрашэнне прыйшло ад вас, і папрасіце іх націснуць на спасылку.",
+            "confirm": "Запрашэнні адпраўляюцца з нашага дамена, які вашы сябры яшчэ не пазнаюць. Вы жадаеце адправіць кароткі тэкст, каб паведаміць ім, што запрашэнне прыйшло ад вас, і папрасіце іх націснуць на спасылку.",
+            "subject": "Вы атрымалі запрашэнне?",
+            "body": "Гэй, я толькі што адправіў вам запрашэнне ў праграму {{app}}. Калі ласка, праверце сваю электронную пошту і націсніце там спасылку!",
+            "CheckYourEmail": "Праверце электронную пошту і выконвайце інструкцыі!"
         }
     },
     "participating": {
-        "Title": "Назва",
-        "Subscribed": "Падпіска",
+        "Title": "Загаловак",
+        "Subscribed": "Падпісаны",
         "Participants": "Удзельнікі",
-        "AreYouSureRemoveIdentifier": "Вы ўпэўнены, што выдаліце гэты ідэнтыфікатар?",
-        "AreYouSureUnsubscribeIdentifier": "Вы ўпэўнены, адпішыцеся на гэты ідэнтыфікатар? Ён будзе адключаць апавяшчэнні пра гэты ідэнтыфікатар.",
-        "AreYouSureUnsubscribeDevice": "Вы ўпэўнены, што адпішыцеся на гэтую прыладу? Ён будзе адключаць апавяшчэнні на гэтай прыладзе.",
+        "AreYouSureRemoveIdentifier": "Вы ўпэўненыя, што выдаліце гэты ідэнтыфікатар?",
+        "AreYouSureUnsubscribeIdentifier": "Вы ўпэўненыя, што адмовіцца ад падпіскі на гэты ідэнтыфікатар? Гэта адключыць апавяшчэнні для гэтага ідэнтыфікатара.",
+        "AreYouSureUnsubscribeDevice": "Вы ўпэўненыя, што адмовіцца ад падпіскі на гэту прыладу? Гэта адключыць апавяшчэнні на гэтай прыладзе.",
         "Identifiers": "Ідэнтыфікатары",
         "Devices": "Прылады",
         "Streams": "Патокі",
@@ -139,116 +139,116 @@
             "microphoneTitle": "Уключыць мікрафон",
             "cameraTitle": "Уключыць камеру",
             "cameraAndMicrophoneTitle": "Уключыць камеру і мікрафон",
-            "dialogTitle": "Уключэнне дыялогавага дыялога",
+            "dialogTitle": "Падключэнне",
             "microphoneBtn": "Уключыць мікрафон",
             "cameraBtn": "Уключыць камеру",
             "cameraAndMicrophoneBtn": "Уключыць камеру і мікрафон"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Інструкцыі",
-            "permissionDenied": "У дазволе {{kind}} адмоўлена. Каб выкарыстоўваць яго, выканайце наступныя дзеянні:",
-            "point1": "Перайдзіце ў раздзел &quot;Налады&quot; -&gt; &quot;Дадатковыя&quot; -&gt; &quot;Канфідэнцыяльнасць і бяспека&quot; -&gt; &quot;Налады сайта&quot; -&gt; &quot;Камера&quot; ці &quot;Налады сайта&quot; -&gt; &quot;Мікрафон&quot;",
-            "point2": "Выдаліце {{hostname}} са спісу &quot;Блакаваць&quot;"
+            "permissionDenied": "У дазволе на {{kind}} адмоўлена. Каб выкарыстоўваць яго, выканайце наступныя дзеянні:",
+            "point1": "Перайдзіце ў «Настройкі» -&gt; «Дадаткова» -&gt; «Прыватнасць і бяспека» -&gt; «Настройкі сайта» -&gt; «Камера» або «Настройкі сайта» -&gt; «Мікрафон»",
+            "point2": "Выдаліце {{hostname}} са спісу &quot;Блакаваць&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Інструкцыі",
-            "permissionDenied": "У дазволе {{kind}} адмоўлена. Перазагрузіце гэтую старонку і пацвердзіце доступ да {{kind}}, каб далучыцца да канферэнцыі."
+            "permissionDenied": "У дазволе на {{kind}} адмоўлена. Перазагрузіце гэтую старонку і пацвердзіце доступ да {{kind}}, каб далучыцца да канферэнцыі."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Інструкцыі",
-            "permissionDenied": "У дазволе {{kind}} адмоўлена. Каб выкарыстоўваць яго, выканайце наступныя дзеянні:",
+            "permissionDenied": "У дазволе на {{kind}} адмоўлена. Каб выкарыстоўваць яго, выканайце наступныя дзеянні:",
             "point1": "Перайдзіце ў налады Android",
-            "point2": "Адкрыйце &quot;Прыкладанні і апавяшчэнні&quot;",
+            "point2": "Адкрыйце «Праграмы і апавяшчэнні»",
             "point3": "Знайдзіце &quot;{{communityName}}&quot; і адкрыйце яго",
-            "point4": "Націсніце Дазволы",
+            "point4": "Націсніце на Дазволы",
             "point5": "Уключыць {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Інструкцыі",
-            "permissionDenied": "У дазволе {{kind}} адмоўлена. Каб выкарыстоўваць яго, выканайце наступныя дзеянні:",
+            "permissionDenied": "У дазволе на {{kind}} адмоўлена. Каб выкарыстоўваць яго, выканайце наступныя дзеянні:",
             "point1": "Перайдзіце ў налады iOS",
-            "point2": "Адкрыйце &quot;Канфідэнцыяльнасць&quot;",
+            "point2": "Адкрыйце «Прыватнасць»",
             "point3": "Знайдзіце {{kind}} і адкрыйце яго",
             "point4": "Знайдзіце &quot;{{communityName}}&quot; і ўключыце"
         },
         "notices": {
-            "youJoinedRoom": "Вы ўступілі ў пакой",
+            "youJoinedRoom": "Вы далучыліся да пакоя",
             "joining": "Далучэнне: {{userName}}",
             "sbLeftRoom": "{{userName}} выйшаў з пакоя",
-            "youLeftRoom": "Вы выйшлі з пакоя",
-            "codeCopied": "Вы выйшлі з пакоя",
+            "youLeftRoom": "Вы пакінулі пакой",
+            "codeCopied": "Вы пакінулі пакой",
             "sbBeganFbLive": "{{userName}} пачаў трансляваць гэты званок у Facebook",
-            "sbStoppedFbLive": "{{userName}} перастаў трансляваць гэты званок у Facebook",
+            "sbStoppedFbLive": "{{userName}} спыніў трансляцыю гэтага выкліку ў Facebook",
             "youBeganFbLive": "Вы пачалі трансляваць гэты званок у Facebook",
-            "youStoppedFbLive": "Вы перасталі трансляваць гэты званок у Facebook",
+            "youStoppedFbLive": "Вы спынілі трансляцыю гэтага званка ў Facebook",
             "linkCopiedToCb": "Спасылка скапіравана ў буфер абмену",
-            "codeCopiedToCb": "Код скапіруецца ў буфер абмену",
-            "userHasNoVideo": "У ўдзельніка няма відэа",
-            "openInBrowserAlert": "Адкрыйце спасылку ў браўзэры Safari, каб далучыцца да канферэнцыі.",
-            "youBeganVideoRecording": "Вы пачалі запісваць гэтую канферэнцыю",
+            "codeCopiedToCb": "Код скапіраваны ў буфер абмену",
+            "userHasNoVideo": "Удзельнік не мае відэа",
+            "openInBrowserAlert": "Адкрыйце спасылку ў браўзеры Safari, каб далучыцца да канферэнцыі.",
+            "youBeganVideoRecording": "Вы пачалі запіс гэтай канферэнцыі",
             "youStoppedVideoRecording": "Вы спынілі запіс гэтай канферэнцыі",
-            "switchingRoom": "Размяшчэнне ...",
+            "switchingRoom": "Пакой пераключэння...",
             "forceDisconnecting": "Вы будзеце адключаны на працягу 5 секунд",
             "youStartedLive": "Вы пачалі трансляваць гэты выклік на карыстальніцкі RTMP",
             "youStoppedLive": "Вы спынілі трансляцыю гэтага выкліку на карыстальніцкі RTMP",
-            "sbStartedLiveStreaming": "{{userName}} пачалі жыць",
-            "sbStoppedLiveStreaming": "{{userName}} скончылася ў прамым эфіры",
-            "liveStopped": "Адбылася памылка пры адпраўцы відэа на канчатковую кропку",
+            "sbStartedLiveStreaming": "{{userName}} пачаў жывы эфір",
+            "sbStoppedLiveStreaming": "{{userName}} скончыўся ў прамым эфіры",
+            "liveStopped": "Адбылася памылка пры адпраўцы відэа ў канчатковую кропку",
             "forceDisconnectingImmediately": "Вас адключыў хост"
         },
         "settingsPopup": {
             "webCamera": "Вэб-камера",
-            "screenSharing": "Абмен экрана",
-            "shareAnotherScreen": "Адкрыць доступ да іншага экрана",
-            "turnOffCameras": "Выключыце ўсе камеры",
-            "startFBLive": "Запусціце Facebook Livestream",
-            "stopFBLive": "Спыніце Facebook Livestream",
-            "fbLiveTitle": "Назва жывога",
-            "fbLiveDescription": "Апісанне жывога",
+            "screenSharing": "Абагульванне экрана",
+            "shareAnotherScreen": "Падзяліцеся іншым экранам",
+            "turnOffCameras": "Выключыце камеру",
+            "startFBLive": "Пачаць прамую трансляцыю ў Facebook",
+            "stopFBLive": "Спыніце прамую трансляцыю Facebook",
+            "fbLiveTitle": "Назва жывой трансляцыі",
+            "fbLiveDescription": "Апішыце сваю прамую трансляцыю. Пра што гаворка?",
             "fbOnlyMeLiveAccess": "Толькі я",
             "fbFriendsAccess": "Сябры",
             "fbPublicAccess": "Грамадскі",
-            "fbStartLive": "Ідзіце жыць",
-            "fbStopLive": "Канец жыць",
+            "fbStartLive": "Перайсці ў прамы эфір",
+            "fbStopLive": "Завяршыць прамую трансляцыю",
             "fbEmbedCode": "Ўстаўляць",
             "copy": "Копія",
-            "turnOffVideo": "Выключыце сумеснае выкарыстанне камеры \/ экрана",
-            "turnOffScreenSharing": "Выключыце сумеснае выкарыстанне экрана",
-            "cameraIsTurnedOff": "Камера адключана",
-            "startRecording": "Пачніце запіс",
+            "turnOffVideo": "Выключыце абагульванне камеры\/экрана",
+            "turnOffScreenSharing": "Выключыце абагульванне экрана",
+            "cameraIsTurnedOff": "Камера выключана",
+            "startRecording": "Пачаць запіс",
             "stopRecording": "Спыніць запіс",
-            "recordingInProgress": "Запіс ідзе ...",
-            "publishOnTimeline": "Апублікаваць на часовай шкале",
+            "recordingInProgress": "Ідзе запіс...",
+            "publishOnTimeline": "Апублікаваць на шкале часу",
             "publishToGroup": "Апублікаваць у групе",
-            "turnOffAudioInput": "Выключэнне мікрафона",
+            "turnOffAudioInput": "Адключыць мікрафон",
             "micIsTurnedOff": "Мікрафон адключаны",
             "start": "Пачаць",
-            "stop": "Стоп",
+            "stop": "Спыніцеся",
             "streamingSettings": "Налады",
-            "streamToRTMP": "Паток у карыстацкі RTMP",
+            "streamToRTMP": "Паток у карыстальніцкі RTMP",
             "dialogTitle": "Налады відэа",
             "startBroadcasting": "Пачаць трансляцыю",
-            "broadcastingInProgress": "Ідзе трансляцыя"
+            "broadcastingInProgress": "Працягваецца трансляцыя"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",
-            "floatingScreens": "Плаваючыя экраны",
-            "tiledScreens": "Кафляныя экраны",
-            "loudestExceptMe": "Самае гучнае, акрамя мяне",
-            "maximizeLoudest": "Максімальна гучна",
-            "staticMaximized": "Статычная максімальная",
+            "floatingScreens": "Плаваюць экраны",
+            "tiledScreens": "Пліткавыя экраны",
+            "loudestExceptMe": "Самы гучны, акрамя мяне",
+            "maximizeLoudest": "Максімальна гучней",
+            "staticMaximized": "Статычны максімум",
             "manual": "Кіраўніцтва",
             "turnOffCamera": "Схаваць відэа",
-            "turnOffAudio": "Адключэнне гуку",
-            "turnOffScreenSharing": "Схаваць агульны доступ да экрана",
+            "turnOffAudio": "Адключыць гук",
+            "turnOffScreenSharing": "Схаваць абагульванне экрана",
             "turnOnCamera": "Паказаць відэа",
-            "turnOnAudio": "Уключыць гук для гуку",
-            "turnOnScreenSharing": "Паказаць сумеснае выкарыстанне экрана",
+            "turnOnAudio": "Уключыць гук",
+            "turnOnScreenSharing": "Паказаць абагульванне экрана",
             "fullScreen": "Поуны экран",
             "dialogTitle": "Налады ўдзельнікаў"
         },
-        "notAllowedToJoinCall": "Вы не маеце дазволу далучыцца да гэтага патоку.",
-        "streamTitle": "{{1}} Жывы званок",
+        "notAllowedToJoinCall": "У вас няма дазволу далучыцца да гэтага патоку.",
+        "streamTitle": "{{1}} пачаў жывы званок",
         "preview": {
             "preamble": "Сустрэча:",
             "Meeting": "Сустрэча",
@@ -259,9 +259,9 @@
             "micIsOn": "Мікрафон уключаны",
             "cameraIsOff": "Камера выключана",
             "cameraIsOn": "Камера ўключана",
-            "screenSharingIsOn": "Скрынінг уключаны",
-            "screenSharingIsOff": "Абагуліць экран",
-            "joinNow": "Далучайцеся да выкліку"
+            "screenSharingIsOn": "Абагульванне экрана ўключана",
+            "screenSharingIsOff": "Падзяліцца экранам",
+            "joinNow": "Далучайцеся да званка"
         },
         "audioSettings": {
             "dialogTitle": "Налады аўдыё",
@@ -274,16 +274,16 @@
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Запрашаюць",
-            "description": "Уваходныя паведамленні для запрашэнняў"
+            "displayType": "Запрошаны",
+            "description": "Уваходныя для запрашэнняў"
         },
         "Streams\/resource": {
             "displayType": "Рэсурс",
             "description": "паток для кіравання доступам да рэсурсу і размяшчэння паведамленняў аб абнаўленнях"
         },
         "Streams\/task": {
-            "displayType": "Заданне",
-            "description": "заданне, якое трэба зрабіць людзям ці машынам"
+            "displayType": "Задача",
+            "description": "для атрымання абнаўленняў аб ходзе выканання пэўнай задачы"
         },
         "Streams\/number": {
             "displayType": "Нумар",
@@ -291,19 +291,19 @@
         },
         "Streams\/date": {
             "displayType": "Дата",
-            "description": "даты"
+            "description": "дата"
         },
         "Streams\/text": {
             "displayType": "Тэкст",
-            "description": "цела тэксту"
+            "description": "тэкст"
         },
         "Streams\/text\/small": {
             "displayType": "Тэкст",
-            "description": "невялікі тэкст"
+            "description": "невялікі аб&#39;ём тэксту"
         },
         "Streams\/text\/medium": {
             "displayType": "Тэкст",
-            "description": "сярэдняя частка тэксту"
+            "description": "сярэдні аб&#39;ём тэксту"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "Адрас электроннай пошты",
@@ -315,10 +315,10 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "спасылка ў Інтэрнэце"
+            "description": "спасылку ў Інтэрнэце"
         },
         "Streams\/image": {
-            "displayType": "Выява",
+            "displayType": "Малюнак",
             "description": "візуальны вобраз",
             "newItem": "Дадаць малюнак"
         },
@@ -328,17 +328,17 @@
         },
         "Streams\/album": {
             "displayType": "Альбом",
-            "description": "альбом, да якога звязаныя розныя сродкі масавай інфармацыі"
+            "description": "альбом, да якога звязаны розныя СМІ"
         },
         "Streams\/file": {
             "displayType": "Файл",
-            "description": "загружаны файл",
+            "description": "запампаваны файл",
             "newItem": "Дадаць файл"
         },
         "Streams\/audio": {
-            "displayType": "Аўдыёкліп",
-            "description": "аўдыёкліп",
-            "newItem": "Дадаць аўдыя"
+            "displayType": "Аўдыё кліп",
+            "description": "аўдыё кліп",
+            "newItem": "Дадаць аўдыё"
         },
         "Streams\/video": {
             "displayType": "Відэа кліп",
@@ -346,48 +346,48 @@
             "newItem": "Дадаць відэа"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "жывое аўдыё ці відэа"
+            "displayType": "Прамая трансляцыя",
+            "description": "жывы аўдыё або відэа"
         },
         "Streams\/category": {
             "displayType": "Катэгорыя",
-            "description": "катэгорыя, да якой могуць быць звязаны іншыя патокі"
+            "description": "катэгорыя, да якой могуць быць звязаныя іншыя патокі"
         },
         "Streams\/participating": {
-            "displayType": "Індэкс удзелу",
-            "description": "Калі карыстальнік далучаецца \/ выходзіць, патокі звязаныя \/ не звязаныя з гэтым"
+            "displayType": "Індэкс удзельніка",
+            "description": "патокі звязаныя\/не звязаныя з гэтым, калі карыстальнік далучаецца\/выходзіць"
         },
         "Streams\/interest": {
             "displayType": "Цікавасць",
-            "description": "уяўляе цікавасць карыстальніка да пэўнай тэмы"
+            "description": "прадстаўляе інтарэс карыстальніка да пэўнай тэмы"
         },
         "Streams\/incoming": {
-            "displayType": "Уваходны",
-            "description": "прызначэнне для паведамленняў, адпраўленых іншымі карыстальнікамі"
+            "displayType": "Уваходныя",
+            "description": "месца прызначэння для паведамленняў, адпраўленых іншымі карыстальнікамі"
         },
         "Streams\/chat": {
-            "displayType": "Размова",
-            "description": "размова паміж карыстальнікамі, з гісторыяй"
+            "displayType": "Гутарка",
+            "description": "размова паміж карыстальнікамі з гісторыяй"
         },
         "Streams\/webrtc": {
             "displayType": "Выклік у рэжыме рэальнага часу",
-            "description": "відэа \/ аўдыязванок у рэжыме рэальнага часу"
+            "description": "відэа\/аўдыявыклік у рэжыме рэальнага часу"
         },
         "Streams\/tasks": {
             "description": "катэгорыя для заданняў",
-            "displayType": "Заданні"
+            "displayType": "Задачы"
         },
         "Streams\/experience": {
-            "description": "агульны досвед для членаў супольнасці",
-            "displayType": "Агульны досвед удзельнікаў супольнасці"
+            "description": "агульны вопыт для членаў супольнасці",
+            "displayType": "Агульны вопыт для членаў супольнасці"
         },
         "Streams\/greeting": {
             "description": "прывітанне, з якім карыстальнік можа прадставіць сябе",
             "displayType": "Прывітанне"
         },
         "Streams\/pdf": {
-            "displayType": "Дакумент PDF",
-            "description": "Дакумент PDF",
+            "displayType": "Дакумент pdf",
+            "description": "Дакумент pdf",
             "newItem": "Дадаць PDF"
         },
         "Streams\/question": {
@@ -400,21 +400,21 @@
         },
         "Streams\/calls": {
             "displayType": "Званкі",
-            "description": "катэгорыя для патокаў\/webrtc",
-            "MaxRelationsExceeded": "Максімальныя выклікі перавышаны"
+            "description": "катэгорыя для Streams\/webrtc",
+            "MaxRelationsExceeded": "Перавышана максімальная колькасць выклікаў"
         }
     },
     "messages": {
         "html": {
-            "posted": "адправіў паведамленне <em>{{message.fields.type}} на<\/em> паведамленне {{stream.fields.title}}"
+            "posted": "апублікаваў паведамленне <em>{{message.fields.type}}<\/em> на {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "пракаментаваў",
-            "in": "ў",
-            "body": "ў {{& url}}: {{& message.fields.content}}",
+            "in": "у",
+            "body": "у {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "быў апублікаваны ў",
-                "byAvatar": "па {{avatar.displayName}}"
+                "byAvatar": "ад {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "мае новы {{instructions.fromDisplayType}}",
@@ -424,107 +424,107 @@
         }
     },
     "menu": {
-        "placeholder": "тып старонкі загалоўка",
-        "ModTab": "Змена пункта",
+        "placeholder": "увядзіце назву старонкі",
+        "ModTab": "Змяніць пункт",
         "Save": "Захаваць",
         "Delete": "Выдаліць",
         "Submenu": "Падменю"
     },
     "errors": {
-        "HiddenFromYou": "Гэта ўтрыманне ад вас схавана."
+        "HiddenFromYou": "Гэты кантэнт схаваны ад вас."
     },
     "audio": {
         "record": "Запіс",
-        "reset": "Скід",
+        "reset": "Скінуць",
         "edit": "Рэдагаваць",
-        "title": "загаловак",
+        "title": "тытул",
         "description": "апісанне",
         "upload": "Загрузіць",
         "link": "Спасылка",
-        "setUrl": "Устанавіць URL",
+        "setUrl": "Задаць URL",
         "save": "Захаваць",
         "setClip": "Выразаць кліп",
         "invalidURL": "Няправільны URL",
-        "invalidFile": "Няправільны файл",
+        "invalidFile": "Несапраўдны файл",
         "errorNoSource": "Няма крыніцы гуку",
         "uploadLimit": "Максімальны памер файла: {{size}}",
-        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+        "errorFileSize": "Прабачце, але файл занадта вялікі.<br> Максімальны памер файла {{size}}"
     },
     "video": {
-        "reset": "Скід",
+        "reset": "Скінуць",
         "edit": "Рэдагаваць",
-        "title": "загаловак",
+        "title": "тытул",
         "description": "апісанне",
         "upload": "Загрузіць",
         "link": "Спасылка",
-        "setUrl": "Устанавіць URL",
+        "setUrl": "Задаць URL",
         "save": "Захаваць",
         "setClip": "Выразаць кліп",
         "invalidURL": "Няправільны URL",
-        "invalidFile": "Няправільны файл",
+        "invalidFile": "Несапраўдны файл",
         "errorNoSource": "Няма крыніцы відэа",
         "uploadLimit": "Максімальны памер файла: {{size}}",
-        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+        "errorFileSize": "Прабачце, але файл занадта вялікі.<br> Максімальны памер файла {{size}}"
     },
     "pdf": {
-        "reset": "Скід",
+        "reset": "Скінуць",
         "edit": "Рэдагаваць",
-        "title": "загаловак",
+        "title": "тытул",
         "description": "апісанне",
         "upload": "Загрузіць",
         "link": "Спасылка",
-        "setUrl": "Устанавіць URL",
+        "setUrl": "Задаць URL",
         "save": "Захаваць",
         "setClip": "Выразаць кліп",
         "invalidURL": "Няправільны URL",
-        "invalidFile": "Няправільны файл",
+        "invalidFile": "Несапраўдны файл",
         "errorNoSource": "Няма крыніцы pdf",
         "uploadLimit": "Максімальны памер файла: {{size}}",
-        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}"
+        "errorFileSize": "Прабачце, але файл занадта вялікі.<br> Максімальны памер файла {{size}}"
     },
     "image": {
-        "reset": "Скід",
+        "reset": "Скінуць",
         "edit": "Рэдагаваць",
-        "title": "загаловак",
+        "title": "тытул",
         "description": "апісанне",
         "upload": "Загрузіць",
         "link": "Спасылка",
-        "setUrl": "Устанавіць URL",
+        "setUrl": "Задаць URL",
         "save": "Захаваць",
         "setClip": "Выразаць кліп",
         "invalidURL": "Няправільны URL",
-        "invalidFile": "Няправільны файл",
+        "invalidFile": "Несапраўдны файл",
         "errorNoSource": "Няма крыніцы выявы",
         "uploadLimit": "Максімальны памер файла: {{size}}",
-        "errorFileSize": "На жаль, файл занадта вялікі.<br> Максімальны памер файла {{size}}",
-        "uploadedImage": "Запампаваны відарыс",
+        "errorFileSize": "Прабачце, але файл занадта вялікі.<br> Максімальны памер файла {{size}}",
+        "uploadedImage": "Загружаны малюнак",
         "imageTitle": "Назва выявы"
     },
     "questions": {
         "Questions": "Пытанні",
         "Answers": "Адказы",
         "AnswerQuestion": "Адкажыце на пытанне",
-        "SetYourAnswer": "Калі ласка, адкажыце на пытанне",
-        "NewQuestion": "Новае пытанне",
+        "SetYourAnswer": "Адкажыце, калі ласка, на пытанне",
+        "NewQuestion": "Новае Пытанне",
         "NewAnswer": "Новы адказ",
-        "AnswerDetails": "Адказы на падрабязнасці",
+        "AnswerDetails": "Падрабязнасці адказу",
         "answerOption": "Варыянт",
         "answerOptionExclusive": "Эксклюзіў",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "бясплатны адказ ...",
+        "FreeAnswer": "Напішыце свой адказ тут",
         "SaveQuestion": "Захаваць пытанне",
         "SaveAnswer": "Захаваць адказ",
         "AddAnotherAnswer": "Дадайце яшчэ адзін адказ",
-        "ErrorAnswers": "Калі ласка, дадайце нават адзін адказ",
+        "ErrorAnswers": "Калі ласка, дадайце хоць адзін адказ",
         "AlreadyAnswered": "Ужо адказаў",
-        "TitlePlaceholder": "Набярыце пытанне",
-        "ContentPlaceholder": "Дадайце сюды дадатковую інфармацыю, каб дапамагчы людзям адказаць",
-        "ErrorTitle": "Пытанне патрабуецца",
+        "TitlePlaceholder": "Увядзіце сваё пытанне",
+        "ContentPlaceholder": "Змяшчайце тут любую дадатковую інфармацыю, каб дапамагчы людзям адказаць",
+        "ErrorTitle": "Патрабуецца пытанне",
         "Placeholder": "Запаўняльнік"
     },
     "experience": {
         "NewExperience": "Новы досвед",
-        "DefineTitle": "Вызначце назву",
+        "DefineTitle": "Калі ласка, вызначце назву",
         "Create": "Стварыць"
     },
     "calls": {

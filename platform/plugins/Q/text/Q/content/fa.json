@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "خطای {{status}} در حین درخواست",
+        "canceled": "درخواست لغو شد",
+        "500": "خطای سرور داخلی",
+        "404": "یافت نشد: {{url}}",
+        "501": "درخواست قطع شد"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "جلسه تمام شده. صفحه را بازخوانی کنید و دوباره امتحان کنید.",
+        "otherDomain": "درخواست بین دامنه به دامنه خارجی در {{baseUrl}} مسدود شده است"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "ضربه زدن",
+        "click": "کلیک",
+        "yes": "آره",
+        "no": "نه",
+        "Tap": "ضربه زدن",
+        "Click": "کلیک",
+        "Yes": "آره",
+        "No": "خیر"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "ژانویه",
+        "2": "فوریه",
+        "3": "مارس",
+        "4": "آوریل",
+        "5": "ممکن است",
+        "6": "ژوئن",
+        "7": "جولای",
+        "8": "اوت",
+        "9": "سپتامبر",
+        "10": "اکتبر",
+        "11": "نوامبر",
+        "12": "دسامبر"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "دومین",
+        "seconds": "ثانیه",
+        "minute": "دقیقه",
+        "minutes": "دقایق",
+        "hour": "ساعت ها",
+        "day": "روز",
+        "days": "روزها",
+        "week": "هفته",
+        "weeks": "هفته ها",
+        "month": "ماه",
+        "months": "ماه ها",
+        "year": "سال",
+        "years": "سال ها",
+        "decade": "دهه",
+        "decades": "دهه ها",
+        "century": "قرن",
+        "centuries": "قرن ها"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "لطفا اجازه دسترسی به میکروفون خود را بدهید",
+        "record": "رکورد",
+        "recording": "در حال ضبط",
+        "remains": "باقی",
+        "maximum": "بیشترین",
+        "playing": "بازی کردن",
+        "recorded": "ثبت شده",
+        "clip": "کلیپ",
+        "discard": "دور انداختن",
+        "encoding": "رمزگذاری"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "کلیپ",
+        "errorNoSource": "منبع ویدیویی وجود ندارد",
+        "SkipAfter": "پس از آن بگذرید",
+        "Skip": "پرش کنید"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "کلیپ",
+        "errorNoSource": "منبع پی دی اف نیست"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "شروع کلیپ را تنظیم کنید",
+        "ClipStart": "شروع کلیپ",
+        "SetClipEnd": "پایان کلیپ را تنظیم کنید",
+        "ClipEnd": "پایان کلیپ",
+        "StartMoreEnd": "موقعیت شروع نمی تواند بیشتر از موقعیت پایان باشد",
+        "EndLessStart": "موقعیت پایان نمی تواند کمتر از موقعیت شروع باشد",
+        "WhichInvalid": "استدلال «کدام» نامعتبر است"
     },
     "alert": {
-        "title": "Alert"
+        "title": "هشدار"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "تایید",
+        "ok": "آره",
+        "cancel": "خیر"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "سریع",
+        "ok": "برو"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "بیشتر",
+        "Menu": "منو"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "خطا در خواندن فایل",
+        "errorType": "متأسفیم، اما این نوع فایل پشتیبانی نمی شود",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "دوست دارید چه کار کنید؟",
+            "photo": "عکس جدید بگیر",
+            "library": "از کتابخانه انتخاب کنید"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "لطفا یک تصویر بزرگتر انتخاب کنید.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "اندازه و موقعیت را تنظیم کنید",
+            "touchscreen": "از انگشتان خود برای بزرگنمایی و کشیدن استفاده کنید",
+            "notTouchscreen": "از ماوس و چرخ خود برای بزرگنمایی و کشیدن استفاده کنید"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "دیشب",
+        "lastEvening": "شب گذشته",
+        "yesterday": "دیروز",
+        "thisMorning": "امروز صبح",
+        "today": "امروز",
+        "tonight": "امشب",
+        "tomorrowMorning": "تام مورن",
+        "tomorrow": "فردا",
+        "hoursAgo": "{{h}} ساعت قبل",
+        "hourAgo": "{{h}} ساعت قبل",
+        "minuteAgo": "{{m}} دقیقه قبل",
+        "minutesAgo": "{{m}} دقیقه پیش",
+        "secondAgo": "{{s}} ثانیه پیش",
+        "secondsAgo": "{{s}} ثانیه پیش",
+        "fewSecondsAgo": "چند ثانیه پیش",
+        "rightNow": "همین الان",
+        "inSecond": "در {{s}} ثانیه",
+        "inSeconds": "در {{s}} ثانیه",
+        "inMinute": "در {{m}} دقیقه",
+        "inMinutes": "در {{m}} دقیقه",
+        "inHour": "در {{h}} ساعت",
+        "inHours": "در {{h}} ساعت",
+        "inUnderMinute": "در کمتر از 1 دقیقه"
     }
 }

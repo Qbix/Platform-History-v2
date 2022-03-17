@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Link a promócióhoz",
+                "startDate": "Kezdő dátum",
+                "startTime": "Kezdési idő",
+                "endDate": "Befejezés dátuma",
+                "endTime": "Idő vége",
+                "budget": "Költségvetés"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Szűrés érdeklődés szerint",
+                "FilterInterests": "Kezdje el beírni az érdeklődési kört..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Érdeklődés",
+            "Location": "Elhelyezkedés"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Megy",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
+            "BrowseTheWeb": "Tallózás",
+            "WriteToStartConversation": "A beszélgetés elindításához írja le gondolatait",
+            "StartConversation": "Beszélgetés indítása",
+            "GotoConversation": "Nyissa meg a Beszélgetést",
+            "reset": "Visszaállítás",
+            "edit": "Szerkesztés",
             "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "setUrl": "URL beállítása",
+            "save": "Megment",
+            "setClip": "Kivágott klip",
+            "invalidURL": "érvénytelen URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "A fájl túl nagy a gyorsítótárazáshoz. Max fájlméret {{size}}",
+        "InvalidPDF": "A fájl nem érvényes PDF",
+        "StartTypingTitleOrKeywords": "Kezdje el beírni a címet vagy a kulcsszavakat..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Egy HTML-dokumentum, amelyet különböző felhasználók megtekinthetnek és szerkeszthetnek",
+            "displayType": "Cikk"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "A prezentációban lévő dia tartalmazhat HTML-t, hangot stb.",
+            "displayType": "Csúszik"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Különféle diákból álló prezentáció",
+            "displayType": "Bemutatás"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Hirdetési egység egy weboldalon",
+            "displayType": "Hirdetési egység"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "A hirdetési egységek név alatti csoportosításának módja",
+            "displayType": "Reklám elhelyezés"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Tartalom egy hirdetéshez",
+            "displayType": "Reklám kreatív"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Reklámkampány",
+            "displayType": "Reklámkampány"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Olyan webhelyet jelöl, amelynek metaadatait lekaparták",
+            "displayType": "honlap"
         }
     }
 }

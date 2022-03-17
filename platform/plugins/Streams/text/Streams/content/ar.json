@@ -3,102 +3,102 @@
         "NewItemTitle": "عنصر جديد"
     },
     "labels": {
-        "Streams\/invited": "الناس الذين دعوتهم",
+        "Streams\/invited": "الأشخاص الذين دعوتهم",
         "Streams\/invitedMe": "من دعاني",
         "AreYouAgree": "هل أنت موافق؟",
         "Yes": "نعم",
-        "No": "لا",
+        "No": "رقم",
         "DoYouAgree": "هل توافق؟"
     },
     "interests": {
         "Filter": "ماهي إهتماماتك؟",
         "CanAdd": "إذا كنت لا تزال غير قادر على العثور على ما تبحث عنه ، فيمكنك إضافة اهتمام جديد أدناه:",
-        "TrySynonyms": "لا ترى ذلك؟ جرب بعض المرادفات.",
+        "TrySynonyms": "ألا تراها؟ جرب بعض المرادفات.",
         "AddUnderCategory": "إضافة تحت فئة ...",
         "Other": "آخر",
         "Unlisted": "غير مدرج"
     },
     "chat": {
-        "flaggedForAdminReview": "تم وضع علامة على الرسالة لمراجعة المشرف. اضغط مرة أخرى لإلغاء تحديد.",
+        "flaggedForAdminReview": "تم وضع علامة على الرسالة لمراجعة المشرف. انقر مرة أخرى لإلغاء الإشارة.",
         "noOneSaid": "لا أحد قال أي شيء",
         "closeChatButton": "إغلاق الدردشة",
-        "closeChatConfirmTitle": "أغلق هذه الدردشة؟",
-        "closeChatConfirm": "هل أنت متأكد من أنك تريد إغلاق هذه الدردشة؟",
-        "closeChatConfirmYes": "نعم فعلا",
-        "closeChatConfirmNo": "لا",
+        "closeChatConfirmTitle": "هل تريد إغلاق هذه الدردشة؟",
+        "closeChatConfirm": "هل أنت متأكد أنك تريد إغلاق هذه الدردشة؟",
+        "closeChatConfirmYes": "نعم",
+        "closeChatConfirmNo": "رقم",
         "earlierComments": "التعليقات السابقة",
-        "Subscribed": "كتم الإخطارات",
-        "Unsubscribed": "الحصول على الإشعارات",
+        "Subscribed": "تمكين الإخطارات",
+        "Unsubscribed": "تم كتم صوت التنبيهات",
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذه المحادثة.",
-        "startedConversation": "بدأت محادثة",
-        "RealTimeCall": "نداء الوقت الحقيقي",
+        "startedConversation": "بدأ محادثة",
+        "RealTimeCall": "مكالمة فورية",
         "SearchByName": "البحث عن طريق الإسم",
         "Notifications": {
             "Visit": "{{displayName}} يزور الدردشة",
             "Join": "انضم {{displayName}} إلى الدردشة",
-            "Leave": "{{displayName}} غادر الدردشة",
-            "RelatedTo": "{{displayName}} بدأ {{stream.displayType}}"
+            "Leave": "غادر {{displayName}} المحادثة",
+            "RelatedTo": "بدأ {{displayName}} {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "رسالة {{& message.fields.type}} إلى {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} قال:",
+        "*": "أرسل {{& message.fields.type}} إلى {{& stream.fields.title}}",
+        "Streams\/chat\/message": "قال {{&call 'avatar.displayName'}}: {{& message.content}}",
         "Streams\/changed": "التغييرات في {{stream.fields.title}}",
-        "Streams\/invite": "تمت دعوتك إلى {{& stream.fields.title}}",
-        "Streams\/announcement": "إعلان في {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} تم تغيير دخول الدفق",
-        "Streams\/chat\/edit": "تم تعديل رسالة الدردشة",
-        "Streams\/chat\/remove": "تمت إزالة رسالة الدردشة",
+        "Streams\/invite": "لقد تمت دعوتك إلى {{& stream.fields.title}}",
+        "Streams\/announcement": "إعلان في {{& stream.fields.title}}",
+        "Streams\/access": "تم تغيير وصول {{&call 'avatar.displayName'}} في {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "تم تحرير رسالة الدردشة في {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "تمت إزالة رسالة الدردشة في {{& stream.fields.title}}",
         "Streams\/closed": "تم إغلاق {{stream.fields.title}}",
-        "Streams\/task\/progress": "التقدم المحرز في {{stream.fields.title}}",
-        "Streams\/task\/complete": "المهمة مكتملة: {{stream.fields.title}}",
+        "Streams\/task\/progress": "تم إحراز التقدم في {{stream.fields.title}}",
+        "Streams\/task\/complete": "اكتملت المهمة: {{stream.fields.title}}",
         "Streams\/task\/error": "خطأ أثناء: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: رسالة واردة",
         "ManageEmailSubscriptions": "إدارة اشتراكات البريد الإلكتروني الخاص بك",
-        "IfUnsubscribe": "إذا كنت ترغب في إلغاء الاشتراك",
-        "Streams\/relatedTo\/Streams\/call": "تم بدء مكالمة جديدة في {{toTitle}}",
-        "Streams\/relatedTo\/*": "الجديد {{relationDisplayType}} في {{toTitle}}",
-        "Streams\/relatedFrom\/*": "تمت الإضافة إلى {{toTitle}} كـ {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ذكرك في تعليق",
+        "IfUnsubscribe": "إذا كنت تريد إلغاء الاشتراك",
+        "Streams\/relatedTo\/Streams\/call": "بدأت مكالمة جديدة في {{toTitle}}",
+        "Streams\/relatedTo\/*": "جديد {{relationDisplayType}} في {{toTitle}}",
+        "Streams\/relatedFrom\/*": "تمت إضافته إلى {{toTitle}} كـ {{relationDisplayType}}",
+        "Streams\/mention": "أشار {{&call 'avatar.displayName'}} إليك في أحد التعليقات",
         "Streams\/call": "بدأ {{displayName}} مكالمة في الوقت الفعلي"
     },
     "invite": {
-        "messageContent": "{{displayName}} دعاك إلى {{inviteUrl}}",
+        "messageContent": "تلقيت دعوة من {{displayName}} لحضور {{inviteUrl}}",
         "dialog": {
             "chooseFromContacts": "اختر من جهات الاتصال الخاصة بك",
-            "selectFromContacts": "اختر من جهات الاتصال",
+            "selectFromContacts": "حدد من جهات الاتصال",
             "photo": "التقاط صورة",
-            "photoInstruction": "إذا كان الشخص الذي قام بمسح رمز QR ضوئيًا أمامك ، فاخذ صورة منه",
+            "photoInstruction": "إذا كان الشخص الذي مسح رمز الاستجابة السريعة الخاص بك أمامك ، فالتقط صورة له",
             "to": "إلى: {{Stream Title}}",
-            "go": "اذهب",
-            "title": "دعا",
-            "placeholder": "رقم الجوال أو عنوان البريد الإلكتروني",
-            "orInvite": "أو دعوة أشخاص باستخدام:",
+            "go": "يذهب",
+            "title": "يدعو",
+            "placeholder": "رقم الهاتف المحمول أو عنوان البريد الإلكتروني",
+            "orInvite": "أو ادعُ الناس باستخدام:",
             "QR": "{{ClickOrTap}} لإنشاء رمز الاستجابة السريعة",
-            "QRtitle": "مسح رمز الاستجابة السريعة هذا",
-            "byEmail": "البريد الإلكتروني",
+            "QRtitle": "امسح رمز الاستجابة السريعة هذا ضوئيًا",
+            "byEmail": "بريد الالكتروني",
             "byText": "نص",
-            "byFacebook": "فيس بوك",
-            "byTwitter": "تغريد",
+            "byFacebook": "موقع التواصل الاجتماعي الفيسبوك",
+            "byTwitter": "تويتر",
             "QRscanned": "قاموا بمسحها ضوئيًا!",
             "chooseAgainFromContacts": "اختر مرة أخرى من جهات الاتصال",
             "inviteSelectedContacts": "دعوة جهات الاتصال المحددة",
-            "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز",
+            "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز ضوئيًا",
             "copyLink": "{{ClickOrTap}} لنسخ رابط الدعوة",
             "userChooserPlaceholder": "البحث عن طريق الإسم",
             "shareOrCopyLink": "{{ClickOrTap}} لمشاركة أو نسخ رابط الدعوة"
         },
         "email": {
-            "subject": "مهلا ، تحقق من ذلك",
-            "PleaseVisitLink": "يرجى زيارة الرابط التالي:",
-            "InvitingYou": "أنا أدعوك إلى {{title}}",
-            "HasInvitedYou": "دعاك {{displayName}} إلى {{title}}",
-            "HasMentionedYou": "{{displayName}} ذكرك في &quot;{{title}}&quot;",
+            "subject": "مرحبًا ، تحقق من هذا",
+            "PleaseVisitLink": "الرجاء زيارة الرابط التالي:",
+            "InvitingYou": "أدعوكم إلى {{title}}",
+            "HasInvitedYou": "تلقيت دعوة من {{displayName}} لحضور {{title}}",
+            "HasMentionedYou": "لقد أشار إليك {{displayName}} في &quot;{{title}}&quot;",
             "YOUAREINVITED": "انت مدعو!",
             "AcceptInvite": "قبول دعوة"
         },
         "sms": {
-            "content": "تمت دعوتك إلى {{title}}. يرجى النقر {{url}}"
+            "content": "لقد تمت دعوتك إلى {{title}}. الرجاء النقر على {{url}}"
         },
         "notice": {
             "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
@@ -108,26 +108,26 @@
     },
     "followup": {
         "mobile": {
-            "alert": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
-            "confirm": "يتم إرسال الدعوات من رقمنا ، والتي لم يتعرف عليها أصدقاؤك بعد. هل ترغب في المتابعة بنص سريع لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر على الرابط.",
-            "check": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من الرسائل القصيرة الخاصة بك وانقر على الرابط!",
+            "alert": "يتم إرسال الدعوات من رقمنا الذي لم يتعرف عليه أصدقاؤك بعد. تابع ذلك بنص سريع لإخبارهم بأن الدعوة جاءت منك ، واطلب منهم النقر فوق الارتباط.",
+            "confirm": "يتم إرسال الدعوات من رقمنا الذي لم يتعرف عليه أصدقاؤك بعد. هل ترغب في المتابعة برسالة نصية سريعة لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر فوق الارتباط.",
+            "check": "مرحبًا ، لقد أرسلت إليك دعوة للتو إلى تطبيق {{app}}. يرجى التحقق من الرسائل القصيرة الخاصة بك والنقر على الرابط!",
             "CheckYourMobile": "يرجى التحقق من الرسائل القصيرة واتباع التعليمات!"
         },
         "email": {
-            "alert": "يتم إرسال الدعوات من نطاقنا ، والتي لم يتعرف عليها أصدقاؤك بعد. تابع بنص سريع لإعلامهم بأن الدعوة جاءت منك ، واطلب منهم النقر على الرابط.",
-            "confirm": "يتم إرسال الدعوات من نطاقنا ، والتي لم يتعرف عليها أصدقاؤك بعد. هل ترغب في المتابعة بنص سريع لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر على الرابط.",
+            "alert": "يتم إرسال الدعوات من مجالنا ، وهو ما لم يتعرف عليه أصدقاؤك بعد. تابع ذلك بنص سريع لإخبارهم بأن الدعوة جاءت منك ، واطلب منهم النقر فوق الارتباط.",
+            "confirm": "يتم إرسال الدعوات من مجالنا ، وهو ما لم يتعرف عليه أصدقاؤك بعد. هل ترغب في المتابعة برسالة نصية سريعة لإعلامهم بأن الدعوة جاءت منك ، وتطلب منهم النقر فوق الارتباط.",
             "subject": "هل تلقيت دعوة؟",
-            "body": "مرحبًا ، لقد أرسلت إليك دعوة إلى تطبيق {{app}}. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط هناك!",
+            "body": "مرحبًا ، لقد أرسلت إليك دعوة للتو إلى تطبيق {{app}}. يرجى التحقق من بريدك الإلكتروني والنقر على الرابط هناك!",
             "CheckYourEmail": "يرجى التحقق من بريدك الإلكتروني واتباع التعليمات!"
         }
     },
     "participating": {
         "Title": "عنوان",
-        "Subscribed": "المشترك",
-        "Participants": "المشاركين",
+        "Subscribed": "مشترك",
+        "Participants": "مشاركون",
         "AreYouSureRemoveIdentifier": "هل أنت متأكد من إزالة هذا المعرف؟",
-        "AreYouSureUnsubscribeIdentifier": "هل أنت متأكد من إلغاء اشتراك هذا المعرف؟ سيؤدي ذلك إلى إيقاف تشغيل الإشعارات لهذا المعرف.",
-        "AreYouSureUnsubscribeDevice": "هل أنت متأكد من إلغاء اشتراك هذا الجهاز؟ سيؤدي إلى إيقاف تشغيل الإشعارات لهذا الجهاز.",
+        "AreYouSureUnsubscribeIdentifier": "هل أنت متأكد من إلغاء الاشتراك في هذا المعرف؟ سيتم إيقاف تشغيل الإشعارات لهذا المعرف.",
+        "AreYouSureUnsubscribeDevice": "هل أنت متأكد من إلغاء الاشتراك في هذا الجهاز؟ سيتم إيقاف تشغيل الإشعارات لهذا الجهاز.",
         "Identifiers": "معرفات",
         "Devices": "الأجهزة",
         "Streams": "تيارات",
@@ -139,24 +139,24 @@
             "microphoneTitle": "تمكين الميكروفون",
             "cameraTitle": "قم بتفعيل الكاميرا",
             "cameraAndMicrophoneTitle": "تمكين الكاميرا والميكروفون",
-            "dialogTitle": "تمكين الحوار",
+            "dialogTitle": "توصيل",
             "microphoneBtn": "تمكين الميكروفون",
             "cameraBtn": "قم بتفعيل الكاميرا",
             "cameraAndMicrophoneBtn": "تمكين الكاميرا والميكروفون"
         },
         "webInstructionsDialog": {
             "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض إذن {{kind}}. لاستخدامها ، يرجى اتباع الخطوات التالية:",
+            "permissionDenied": "تم رفض الإذن لـ {{kind}}. لاستخدامه يرجى اتباع الخطوات التالية:",
             "point1": "انتقل إلى &quot;الإعدادات&quot; -&gt; &quot;خيارات متقدمة&quot; -&gt; &quot;الخصوصية والأمان&quot; -&gt; &quot;إعدادات الموقع&quot; -&gt; &quot;الكاميرا&quot; أو &quot;إعدادات الموقع&quot; -&gt; &quot;الميكروفون&quot;",
-            "point2": "أزل {{hostname}} من قائمة &quot;الحظر&quot;"
+            "point2": "قم بإزالة {{hostname}} من قائمة &quot;الحظر&quot;"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض إذن {{kind}}. يرجى إعادة تحميل هذه الصفحة وتأكيد الوصول إلى {{kind}} للانضمام إلى المؤتمر."
+            "permissionDenied": "تم رفض الإذن لـ {{kind}}. يرجى إعادة تحميل هذه الصفحة وتأكيد الوصول إلى {{kind}} للانضمام إلى المؤتمر."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض إذن {{kind}}. لاستخدامها ، يرجى اتباع الخطوات التالية:",
+            "permissionDenied": "تم رفض الإذن لـ {{kind}}. لاستخدامه يرجى اتباع الخطوات التالية:",
             "point1": "انتقل إلى إعدادات Android",
             "point2": "افتح &quot;التطبيقات والإشعارات&quot;",
             "point3": "ابحث عن &quot;{{communityName}}&quot; وافتحه",
@@ -165,34 +165,34 @@
         },
         "iosInstructionsDialog": {
             "dialogTitle": "تعليمات",
-            "permissionDenied": "تم رفض إذن {{kind}}. لاستخدامها ، يرجى اتباع الخطوات التالية:",
+            "permissionDenied": "تم رفض الإذن لـ {{kind}}. لاستخدامه يرجى اتباع الخطوات التالية:",
             "point1": "انتقل إلى إعدادات iOS الخاصة بك",
-            "point2": "فتح &quot;الخصوصية&quot;",
+            "point2": "افتح &quot;الخصوصية&quot;",
             "point3": "ابحث عن {{kind}} وافتحه",
-            "point4": "ابحث عن &quot;{{communityName}}&quot; وقم بتمكينه"
+            "point4": "ابحث عن &quot;{{communityName}}&quot; ومكّنه"
         },
         "notices": {
             "youJoinedRoom": "لقد انضممت إلى الغرفة",
             "joining": "الانضمام: {{userName}}",
             "sbLeftRoom": "{{userName}} غادر الغرفة",
-            "youLeftRoom": "لقد تركت الغرفة",
-            "codeCopied": "لقد تركت الغرفة",
-            "sbBeganFbLive": "{{userName}} بدأ بث هذه الدعوة في Facebook",
-            "sbStoppedFbLive": "{{userName}} توقف عن بث هذه المكالمة في Facebook",
-            "youBeganFbLive": "لقد بدأت بث هذه المكالمة في Facebook",
+            "youLeftRoom": "لقد غادرت الغرفة",
+            "codeCopied": "لقد غادرت الغرفة",
+            "sbBeganFbLive": "بدأ {{userName}} بث هذه المكالمة في Facebook",
+            "sbStoppedFbLive": "توقف {{userName}} عن بث هذه المكالمة في Facebook",
+            "youBeganFbLive": "لقد بدأت في بث هذه المكالمة على Facebook",
             "youStoppedFbLive": "لقد توقفت عن بث هذه المكالمة في Facebook",
             "linkCopiedToCb": "تم نسخ الرابط إلى الحافظة",
             "codeCopiedToCb": "تم نسخ الرمز إلى الحافظة",
             "userHasNoVideo": "المشارك ليس لديه فيديو",
             "openInBrowserAlert": "افتح الرابط في متصفح Safari للانضمام إلى المؤتمر.",
-            "youBeganVideoRecording": "لقد بدأت تسجيل هذا المؤتمر",
+            "youBeganVideoRecording": "لقد بدأت في تسجيل هذا المؤتمر",
             "youStoppedVideoRecording": "لقد توقفت عن تسجيل هذا المؤتمر",
             "switchingRoom": "غرفة التبديل ...",
             "forceDisconnecting": "سيتم قطع اتصالك في غضون 5 ثوان",
             "youStartedLive": "لقد بدأت في بث هذه المكالمة إلى RTMP المخصص",
             "youStoppedLive": "لقد توقفت عن بث هذه المكالمة إلى RTMP المخصص",
             "sbStartedLiveStreaming": "{{userName}} بدأ البث المباشر",
-            "sbStoppedLiveStreaming": "انتهى {{userName}} مباشرة",
+            "sbStoppedLiveStreaming": "انتهى البث المباشر {{userName}}",
             "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية",
             "forceDisconnectingImmediately": "تم قطع اتصالك من قبل مضيف"
         },
@@ -200,55 +200,55 @@
             "webCamera": "كاميرا ويب",
             "screenSharing": "مشاركة الشاشة",
             "shareAnotherScreen": "مشاركة شاشة أخرى",
-            "turnOffCameras": "أطفئ جميع الكاميرات",
-            "startFBLive": "بدء الفيسبوك Livestream",
-            "stopFBLive": "وقف الفيسبوك Livestream",
-            "fbLiveTitle": "عنوان لايف",
-            "fbLiveDescription": "وصف لايف",
+            "turnOffCameras": "قم بإيقاف تشغيل الكاميرا",
+            "startFBLive": "ابدأ البث المباشر من Facebook",
+            "stopFBLive": "أوقف البث المباشر على Facebook",
+            "fbLiveTitle": "عنوان البث المباشر",
+            "fbLiveDescription": "صِف البث المباشر. عن ماذا يتكلم؟",
             "fbOnlyMeLiveAccess": "انا فقط",
-            "fbFriendsAccess": "اصحاب",
-            "fbPublicAccess": "عامة",
-            "fbStartLive": "الذهاب لايف",
-            "fbStopLive": "نهاية لايف",
+            "fbFriendsAccess": "أصدقاء",
+            "fbPublicAccess": "عام",
+            "fbStartLive": "انطلق مباشرة",
+            "fbStopLive": "إنهاء البث المباشر",
             "fbEmbedCode": "تضمين",
-            "copy": "نسخ",
+            "copy": "ينسخ",
             "turnOffVideo": "قم بإيقاف تشغيل مشاركة الكاميرا \/ الشاشة",
             "turnOffScreenSharing": "قم بإيقاف تشغيل مشاركة الشاشة",
             "cameraIsTurnedOff": "تم إيقاف تشغيل الكاميرا",
             "startRecording": "ابدأ التسجيل",
             "stopRecording": "إيقاف التسجيل",
             "recordingInProgress": "التسجيل قيد التقدم ...",
-            "publishOnTimeline": "نشر على الجدول الزمني",
-            "publishToGroup": "نشر إلى المجموعة",
+            "publishOnTimeline": "انشر في الجدول الزمني",
+            "publishToGroup": "انشر في المجموعة",
             "turnOffAudioInput": "كتم صوت الميكروفون",
             "micIsTurnedOff": "تم إيقاف تشغيل الميكروفون",
             "start": "يبدأ",
             "stop": "قف",
             "streamingSettings": "إعدادات",
-            "streamToRTMP": "دفق إلى RTMP مخصص",
+            "streamToRTMP": "دفق إلى RTMP المخصص",
             "dialogTitle": "اعدادات الفيديو",
             "startBroadcasting": "بدء البث",
             "broadcastingInProgress": "البث قيد التقدم"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
-            "floatingScreens": "شاشات عائمة",
-            "tiledScreens": "شاشات المتجانبة",
-            "loudestExceptMe": "بأعلى صوتي إلا أنا",
-            "maximizeLoudest": "تعظيم بصوت أعلى",
-            "staticMaximized": "ثابت تعظيم",
+            "floatingScreens": "الشاشات العائمة",
+            "tiledScreens": "شاشات القرميد",
+            "loudestExceptMe": "بصوت عالٍ ما عدا أنا",
+            "maximizeLoudest": "تعظيم بصوت عال",
+            "staticMaximized": "تكبير ثابت",
             "manual": "كتيب",
             "turnOffCamera": "إخفاء الفيديو",
             "turnOffAudio": "كتم الصوت",
             "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
-            "turnOnCamera": "عرض الفيديو",
-            "turnOnAudio": "إلغاء كتم الصوت",
-            "turnOnScreenSharing": "إظهار مشاركة الشاشة",
+            "turnOnCamera": "مشاهدة الفيديو",
+            "turnOnAudio": "إعادة الصوت",
+            "turnOnScreenSharing": "عرض مشاركة الشاشة",
             "fullScreen": "شاشة كاملة",
-            "dialogTitle": "إعدادات المشاركين"
+            "dialogTitle": "إعدادات المشتركين"
         },
-        "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا الدفق.",
-        "streamTitle": "{{1}} مكالمة مباشرة",
+        "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا التدفق.",
+        "streamTitle": "بدأ {{1}} مكالمة مباشرة",
         "preview": {
             "preamble": "لقاء:",
             "Meeting": "لقاء",
@@ -274,19 +274,19 @@
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "دعوة",
-            "description": "البريد الوارد للدعوات"
+            "displayType": "مدعو",
+            "description": "صندوق الوارد للدعوات"
         },
         "Streams\/resource": {
-            "displayType": "مورد",
-            "description": "دفق لإدارة الوصول إلى مورد ونشر رسائل حول التحديثات"
+            "displayType": "الموارد",
+            "description": "تيار لإدارة الوصول إلى مورد ونشر رسائل حول التحديثات"
         },
         "Streams\/task": {
             "displayType": "مهمة",
-            "description": "المهمة التي يتعين القيام بها من قبل البشر أو الآلات"
+            "description": "لتلقي تحديثات حول التقدم المحرز في مهمة معينة"
         },
         "Streams\/number": {
-            "displayType": "رقم",
+            "displayType": "عدد",
             "description": "رقم رياضي"
         },
         "Streams\/date": {
@@ -295,27 +295,27 @@
         },
         "Streams\/text": {
             "displayType": "نص",
-            "description": "نص النص"
+            "description": "النص الأساسي"
         },
         "Streams\/text\/small": {
             "displayType": "نص",
-            "description": "نص صغير من النص"
+            "description": "نص صغير"
         },
         "Streams\/text\/medium": {
             "displayType": "نص",
-            "description": "النص المتوسط للنص"
+            "description": "نص متوسط"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "عنوان بريد الكتروني",
-            "description": "عنوان بريد الكتروني"
+            "displayType": "عنوان البريد الالكترونى",
+            "description": "عنوان البريد الالكترونى"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "رقم الهاتف",
-            "description": "رقم الهاتف"
+            "displayType": "رقم التليفون",
+            "description": "رقم التليفون"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "رابط على شبكة الإنترنت"
+            "description": "رابط على الويب"
         },
         "Streams\/image": {
             "displayType": "صورة",
@@ -324,15 +324,15 @@
         },
         "Streams\/images": {
             "displayType": "معرض الصور",
-            "description": "معرض للصور"
+            "description": "معرض الصور"
         },
         "Streams\/album": {
-            "displayType": "الألبوم",
-            "description": "ألبوم يرتبط به وسائط متعددة"
+            "displayType": "البوم",
+            "description": "ألبوم ترتبط به وسائط مختلفة"
         },
         "Streams\/file": {
             "displayType": "ملف",
-            "description": "ملف تم الرفع",
+            "description": "الملف الذي تم تحميله",
             "newItem": "اضف ملف"
         },
         "Streams\/audio": {
@@ -347,42 +347,42 @@
         },
         "Streams\/live": {
             "displayType": "البث المباشر",
-            "description": "الصوت المباشر أو الفيديو"
+            "description": "صوت مباشر أو فيديو"
         },
         "Streams\/category": {
-            "displayType": "الفئة",
-            "description": "فئة يمكن أن ترتبط بها التدفقات الأخرى"
+            "displayType": "فئة",
+            "description": "فئة يمكن أن ترتبط بها تدفقات أخرى"
         },
         "Streams\/participating": {
-            "displayType": "مؤشر المشاركة",
-            "description": "ترتبط التدفقات \/ غير مرتبطة بهذا عندما ينضم مستخدم \/ يترك"
+            "displayType": "المؤشر المشارك",
+            "description": "التدفقات مرتبطة \/ غير مرتبطة بهذا عندما ينضم \/ يغادر المستخدم"
         },
         "Streams\/interest": {
             "displayType": "فائدة",
-            "description": "يمثل مصلحة المستخدم في موضوع معين"
+            "description": "يمثل اهتمام المستخدم بموضوع معين"
         },
         "Streams\/incoming": {
-            "displayType": "الوارد",
-            "description": "وجهة للرسائل المرسلة من قبل المستخدمين الآخرين"
+            "displayType": "واردة",
+            "description": "وجهة الرسائل المرسلة من قبل مستخدمين آخرين"
         },
         "Streams\/chat": {
             "displayType": "محادثة",
             "description": "محادثة بين المستخدمين ، مع التاريخ"
         },
         "Streams\/webrtc": {
-            "displayType": "دعوة في الوقت الحقيقي",
-            "description": "في الوقت الحقيقي مكالمة فيديو \/ الصوت"
+            "displayType": "مكالمة في الوقت الفعلي",
+            "description": "مكالمة فيديو \/ صوتية في الوقت الحقيقي"
         },
         "Streams\/tasks": {
-            "description": "فئة للمهام",
+            "description": "فئة المهام",
             "displayType": "مهام"
         },
         "Streams\/experience": {
-            "description": "تجربة مشتركة لأعضاء المجتمع",
-            "displayType": "تجربة مشتركة لأفراد المجتمع"
+            "description": "تجربة مشتركة لأفراد المجتمع",
+            "displayType": "تجربة مشتركة لأعضاء المجتمع"
         },
         "Streams\/greeting": {
-            "description": "التحية التي يمكن للمستخدم تقديم أنفسهم",
+            "description": "التحية التي يمكن للمستخدم من خلالها تقديم نفسه",
             "displayType": "تحية"
         },
         "Streams\/pdf": {
@@ -395,7 +395,7 @@
             "description": "تيار السؤال"
         },
         "Streams\/answer": {
-            "displayType": "إجابة",
+            "displayType": "إجابه",
             "description": "الجواب تيار"
         },
         "Streams\/calls": {
@@ -406,27 +406,27 @@
     },
     "messages": {
         "html": {
-            "posted": "نشر رسالة <em>{{message.fields.type}}<\/em> على {{stream.fields.title}}"
+            "posted": "نشر <em>{{message.fields.type}}<\/em> رسالة إلى {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "علق على",
             "in": "في",
             "body": "في {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "تم نشر إلى",
+                "hasBeenPostedTo": "تم نشره إلى",
                 "byAvatar": "بواسطة {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "لديه {{instructions.fromDisplayType}} جديد",
-                "byAvatar": "أضيفت بواسطة {{avatar.displayName}}"
+                "byAvatar": "تمت إضافته بواسطة {{avatar.displayName}}"
             },
-            "startedCallIn": "بدأت مكالمة في"
+            "startedCallIn": "بدأ مكالمة في"
         }
     },
     "menu": {
         "placeholder": "اكتب عنوان الصفحة",
         "ModTab": "تعديل البند",
-        "Save": "حفظ",
+        "Save": "يحفظ",
         "Delete": "حذف",
         "Submenu": "القائمة الفرعية"
     },
@@ -435,14 +435,14 @@
     },
     "audio": {
         "record": "سجل",
-        "reset": "إعادة تعيين",
+        "reset": "إعادة ضبط",
         "edit": "تعديل",
-        "title": "عنوان",
+        "title": "لقب",
         "description": "وصف",
-        "upload": "رفع",
-        "link": "حلقة الوصل",
+        "upload": "تحميل",
+        "link": "وصلة",
         "setUrl": "تعيين URL",
-        "save": "حفظ",
+        "save": "يحفظ",
         "setClip": "قطع مقطع",
         "invalidURL": "URL غير صالح",
         "invalidFile": "ملف غير صالح",
@@ -451,14 +451,14 @@
         "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
     },
     "video": {
-        "reset": "إعادة تعيين",
+        "reset": "إعادة ضبط",
         "edit": "تعديل",
-        "title": "عنوان",
+        "title": "لقب",
         "description": "وصف",
-        "upload": "رفع",
-        "link": "حلقة الوصل",
+        "upload": "تحميل",
+        "link": "وصلة",
         "setUrl": "تعيين URL",
-        "save": "حفظ",
+        "save": "يحفظ",
         "setClip": "قطع مقطع",
         "invalidURL": "URL غير صالح",
         "invalidFile": "ملف غير صالح",
@@ -467,14 +467,14 @@
         "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
     },
     "pdf": {
-        "reset": "إعادة تعيين",
+        "reset": "إعادة ضبط",
         "edit": "تعديل",
-        "title": "عنوان",
+        "title": "لقب",
         "description": "وصف",
-        "upload": "رفع",
-        "link": "حلقة الوصل",
+        "upload": "تحميل",
+        "link": "وصلة",
         "setUrl": "تعيين URL",
-        "save": "حفظ",
+        "save": "يحفظ",
         "setClip": "قطع مقطع",
         "invalidURL": "URL غير صالح",
         "invalidFile": "ملف غير صالح",
@@ -483,14 +483,14 @@
         "errorFileSize": "عذرا ، ولكن الملف كبير جدا.<br> الحد الأقصى لحجم الملف هو {{size}}"
     },
     "image": {
-        "reset": "إعادة تعيين",
+        "reset": "إعادة ضبط",
         "edit": "تعديل",
-        "title": "عنوان",
+        "title": "لقب",
         "description": "وصف",
-        "upload": "رفع",
-        "link": "حلقة الوصل",
+        "upload": "تحميل",
+        "link": "وصلة",
         "setUrl": "تعيين URL",
-        "save": "حفظ",
+        "save": "يحفظ",
         "setClip": "قطع مقطع",
         "invalidURL": "URL غير صالح",
         "invalidFile": "ملف غير صالح",
@@ -508,10 +508,10 @@
         "NewQuestion": "سؤال جديد",
         "NewAnswer": "إجابة جديدة",
         "AnswerDetails": "تفاصيل الإجابة",
-        "answerOption": "اختيار",
+        "answerOption": "خيار",
         "answerOptionExclusive": "حصرية",
         "answerTextarea": "تيكستاريا",
-        "FreeAnswer": "إجابة مجانية ...",
+        "FreeAnswer": "اكتب إجابتك هنا",
         "SaveQuestion": "حفظ السؤال",
         "SaveAnswer": "حفظ الجواب",
         "AddAnotherAnswer": "أضف إجابة أخرى",
@@ -520,12 +520,12 @@
         "TitlePlaceholder": "اكتب سؤالك",
         "ContentPlaceholder": "ضع أي معلومات إضافية هنا لمساعدة الناس على الإجابة",
         "ErrorTitle": "السؤال مطلوب",
-        "Placeholder": "نائب"
+        "Placeholder": "عنصر نائب"
     },
     "experience": {
         "NewExperience": "تجربة جديدة",
         "DefineTitle": "يرجى تحديد العنوان",
-        "Create": "إنشاء"
+        "Create": "يخلق"
     },
     "calls": {
         "SettingsTitle": "المكالمات",

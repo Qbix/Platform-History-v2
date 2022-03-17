@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Izi zabisika kwa inu."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Chinthu Chatsopano"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Anthu amene ndinawaitana",
+        "Streams\/invitedMe": "Yemwe adandiyitana",
+        "DoYouAgree": "Kodi mukuvomereza?",
+        "Yes": "Inde",
+        "No": "Ayi"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Zokonda zanu ndi zotani?",
+        "CanAdd": "Ngati simukupezabe zomwe mukuyang&#39;ana, mutha kuwonjezera chidwi chatsopano pansipa:",
+        "TrySynonyms": "Simukuziwona? Yesani mawu ofanana ndi mawu.",
+        "AddUnderCategory": "Onjezani pansi pa gulu...",
+        "Other": "Zina",
+        "Unlisted": "Sanatchulidwe"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
+        "flaggedForAdminReview": "Uthenga waperekedwa kuti awunikenso ndi oyang&#39;anira. Dinaninso kuti muchotse chizindikiro.",
+        "noOneSaid": "Palibe amene ananenapo kalikonse",
+        "closeChatButton": "Tsekani macheza",
+        "closeChatConfirmTitle": "Tsekani machezawa?",
+        "closeChatConfirm": "Mukutsimikiza kuti mukufuna kutseka machezawa?",
+        "Subscribed": "Zidziwitso Zayatsidwa",
+        "Unsubscribed": "Zidziwitso Zasinthidwa",
+        "closeChatConfirmYes": "Inde",
+        "closeChatConfirmNo": "Ayi",
+        "earlierComments": "ndemanga zam&#39;mbuyomu",
+        "startedConversation": "anayamba kucheza",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "SearchByName": "Sakani ndi dzina",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} akuyendera macheza",
+            "Join": "{{displayName}} adalowa nawo pamacheza",
+            "Leave": "{{displayName}} adasiya macheza",
+            "RelatedTo": "{{displayName}} adayambitsa {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "konzani zolembetsa zanu za imelo",
+        "IfUnsubscribe": "Ngati mukufuna kusiya kulemba",
+        "*": "Uthenga {{& message.fields.type}} kwa {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} anati: {{& message.content}}",
+        "Streams\/changed": "Zosintha mu {{stream.fields.title}}",
+        "Streams\/invite": "Munaitanidwa ku {{& stream.fields.title}}",
+        "Streams\/announcement": "Chilengezo mu {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} anasintha kulowa mu {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Mauthenga ochezera asinthidwa mu {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Mauthenga ochezera achotsedwa mu {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} yatsekedwa",
+        "Streams\/task\/progress": "Kupita patsogolo pa {{stream.fields.title}}",
+        "Streams\/task\/complete": "Ntchito yamalizidwa: {{stream.fields.title}}",
+        "Streams\/task\/error": "Zolakwika pa: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Uthenga Umene Ukubwera",
+        "Streams\/relatedTo\/Streams\/call": "Kuyimba Kwatsopano Kuyambika mu {{toTitle}}",
+        "Streams\/relatedTo\/*": "Chatsopano {{relationDisplayType}} mu {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Awonjezedwa ku {{toTitle}} ngati {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} anakutchulani mu ndemanga",
+        "Streams\/call": "{{displayName}} adayambitsa foni yeniyeni"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Itanani",
+        "messageContent": "{{displayName}} anakuitanani ku {{inviteUrl}}",
+        "youCanNowPaste": "Mutha kumata ulalowu penapake kuti muyitanire anthu",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "Sankhani kuchokera pa Ma Contacts anu",
+            "chooseAgainFromContacts": "Sankhani kachiwiri kuchokera Contacts",
+            "inviteSelectedContacts": "Itanani Ma Contacts Osankhidwa",
+            "selectFromContacts": "Sankhani Kuchokera Contacts",
+            "userChooserPlaceholder": "Sakani ndi dzina",
+            "photo": "Jambulani chithunzi",
+            "photoInstruction": "Ngati munthu amene wasanthula nambala yanu ya QR ali patsogolo panu, mujambuleni chithunzi",
+            "to": "Kwa: {{Stream Title}}",
+            "go": "Pitani",
+            "title": "Itanani",
+            "placeholder": "Nambala yam&#39;manja kapena imelo adilesi",
+            "orInvite": "Kapena kuitanira anthu pogwiritsa ntchito:",
+            "copyLink": "{{ClickOrTap}} kuti mukopere ulalo woyitanitsa",
+            "shareOrCopyLink": "{{ClickOrTap}} kugawana kapena kukopera ulalo woitanira",
+            "QR": "{{ClickOrTap}} kuti mupange QR code",
+            "QRtitle": "Jambulani nambala ya QR iyi",
+            "QRscanned": "Iwo anajambula izo!",
+            "scannedQR": "{{ClickOrTap}} ngati khodiyo idasinthidwa",
+            "byEmail": "Imelo",
+            "byText": "Mawu",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hei, fufuzani izi",
+            "PleaseVisitLink": "Chonde pitani ulalo wotsatirawu:",
+            "InvitingYou": "Ndikukuitanani ku {{title}}",
+            "HasInvitedYou": "{{displayName}} wakuitanani ku {{title}}",
+            "HasMentionedYou": "{{displayName}} wakutchulani mu &quot;{1000}}&quot;",
+            "YOUAREINVITED": "MUKUYITANIDWA!",
+            "AcceptInvite": "Landirani Kuyitanira"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Mwaitanidwa ku {{title}}. Chonde dinani {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Mwaitanidwa. {{ClickOrTap}} apa kuvomera ndikujowina."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "adatumiza <em>{{message.fields.type}}<\/em> uthenga ku {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "adayankhapo ndemanga",
+            "startedCallIn": "adayamba kuyimba",
+            "in": "mu",
+            "body": "mu {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "yatumizidwa ku",
+                "byAvatar": "ndi {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "ali ndi {{instructions.fromDisplayType}}",
+                "byAvatar": "owonjezedwa ndi {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Kuyitanira kumatumizidwa kuchokera pa nambala yathu, yomwe anzanu sanakuzindikireni. Tsatirani ndi mawu ofulumira kuwadziwitsa kuti kuyitanidwa kwachokera kwa inu, kuwapempha kuti adina ulalo.",
+            "confirm": "Kuyitanira kumatumizidwa kuchokera pa nambala yathu, yomwe anzanu sanakuzindikireni. Mukufuna kutsatira ndi mawu ofulumira kuwadziwitsa kuti kuyitanidwa kwachokera kwa inu, kuwafunsa kuti adina ulalo.",
+            "check": "Eya, ndakutumizirani kukuyitanira ku pulogalamu ya {{app}}. Chonde onani ma sms anu ndikudina ulalo!",
+            "CheckYourMobile": "Chonde onani SMS ndikutsatira malangizo!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Kuyitanira kumatumizidwa kuchokera ku domeni yathu, zomwe anzanu sakuzizindikira. Tsatirani ndi mawu ofulumira kuwadziwitsa kuti kuyitanidwa kwachokera kwa inu, kuwapempha kuti adina ulalo.",
+            "confirm": "Kuyitanira kumatumizidwa kuchokera ku domeni yathu, zomwe anzanu sakuzizindikira. Mukufuna kutsatira ndi mawu ofulumira kuwadziwitsa kuti kuyitanidwa kwachokera kwa inu, kuwafunsa kuti adina ulalo.",
+            "subject": "Kodi mwalandira kuyitanidwa?",
+            "body": "Eya, ndakutumizirani kukuyitanira ku pulogalamu ya {{app}}. Chonde onani imelo yanu ndikudina ulalo womwe uli pamenepo!",
+            "CheckYourEmail": "Chonde onani imelo yanu ndikutsatira malangizo!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Mutu",
+        "Subscribed": "Olembetsa",
+        "Participants": "Otenga nawo mbali",
+        "AreYouSureRemoveIdentifier": "Mukutsimikiza kuchotsa chozindikiritsa ichi?",
+        "AreYouSureUnsubscribeIdentifier": "Kodi mukutsimikiza kuti simunalembetse chizindikiritsochi? Izimitsa zidziwitso pachizindikiritso ichi.",
+        "AreYouSureUnsubscribeDevice": "Kodi mukutsimikiza kusiya kulembetsa pachipangizochi? Izimitsa zidziwitso ku chipangizochi.",
+        "AreYouSureRemoveParticipant": "Kodi mukutsimikiza kuti mukufuna kuchotsa otenga nawo gawo?",
+        "RemoveParticipant": "Chotsani wophunzira",
+        "Identifiers": "Zozindikiritsa",
+        "Devices": "Zipangizo",
+        "Streams": "Mitsinje"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Mulibe chilolezo cholowa nawo pamtsinjewu.",
+        "streamTitle": "{{1}} adayimba foni yokha",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Kulumikizana",
+            "microphoneBtn": "Yambitsani Maikolofoni",
+            "cameraBtn": "Yambitsani Kamera",
+            "cameraAndMicrophoneBtn": "Yambitsani Kamera ndi Maikolofoni"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mic yazimitsa",
+            "micIsOn": "Mic yayatsidwa",
+            "cameraIsOff": "Kamera ndiyozimitsa",
+            "cameraIsOn": "Kamera yayatsidwa",
+            "screenSharingIsOn": "Kugawana skrini kwayatsidwa",
+            "screenSharingIsOff": "Gawani skrini",
+            "joinNow": "Lowani Kuyitana"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Kuti mugwiritse ntchito chonde tsatirani izi:",
+            "point1": "Pitani ku &quot;Zikhazikiko&quot; -&gt; &quot;Zapamwamba&quot; -&gt; &quot;Zazinsinsi ndi chitetezo&quot; -&gt; &quot;Zikhazikiko za Tsamba&quot; -&gt; &quot;Kamera&quot; kapena &quot;Zikhazikiko za Tsamba&quot; -&gt; &quot;Mayikrofoni&quot;",
+            "point2": "Chotsani {{hostname}} pamndandanda wa &quot;Block&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Chonde tsegulaninso tsambali ndikutsimikizira kulowa {{kind}} kuti mulowe nawo kumsonkhano."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Kuti mugwiritse ntchito chonde tsatirani izi:",
+            "point1": "Pitani ku Zikhazikiko wanu Android",
+            "point2": "Tsegulani &quot;Mapulogalamu &amp; zidziwitso&quot;",
+            "point3": "Pezani &quot;{{communityName}}&quot; ndikutsegula",
+            "point4": "Dinani pa Zilolezo",
+            "point5": "Yambitsani {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Malangizo",
+            "permissionDenied": "Chilolezo cha {{kind}} chakanidwa. Kuti mugwiritse ntchito chonde tsatirani izi:",
+            "point1": "Pitani ku Zikhazikiko wanu iOS",
+            "point2": "Tsegulani &quot;Zazinsinsi&quot;",
+            "point3": "Pezani {{kind}} ndikutsegula",
+            "point4": "Pezani &quot;{{communityName}}&quot; ndi kuyatsa"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Munalowa m&#39;chipindamo",
+            "joining": "Kujowina: {{userName}}",
+            "sbLeftRoom": "{{userName}} adatuluka mchipindamo",
+            "switchingRoom": "Chipinda chosinthira...",
+            "forceDisconnecting": "Mudzachotsedwa pakadutsa masekondi asanu",
+            "forceDisconnectingImmediately": "Mudalumikizidwe ndi wolandila",
+            "youLeftRoom": "Munatuluka m’chipindamo",
+            "codeCopied": "Munatuluka m’chipindamo",
+            "sbBeganFbLive": "{{userName}} anayamba kuulutsa foniyi pa Facebook",
+            "sbStoppedFbLive": "{{userName}} anasiya kuulutsa foniyi pa Facebook",
+            "youBeganFbLive": "Munayamba kuulutsa foniyi pa Facebook",
+            "youStoppedFbLive": "Mwasiya kuulutsa foniyi pa Facebook",
+            "youStartedLive": "Munayamba kuulutsa foniyi ku RTMP yokonda",
+            "youStoppedLive": "Mwasiya kuyimba foniyi ku RTMP yokonda",
+            "sbStartedLiveStreaming": "{{userName}} adayamba",
+            "sbStoppedLiveStreaming": "{{userName}} inatha",
+            "liveStopped": "Panali vuto potumiza kanema kumapeto",
+            "youBeganVideoRecording": "Mwayamba kujambula msonkhano uno",
+            "youStoppedVideoRecording": "Mwasiya kujambula msonkhano uno",
+            "linkCopiedToCb": "Ulalo wakoperedwa ku bolodi",
+            "codeCopiedToCb": "Khodi idakopedwa pa bolodi",
+            "userHasNoVideo": "Wophunzira alibe kanema",
+            "openInBrowserAlert": "Tsegulani ulalo mu msakatuli wa Safari kuti mulowe nawo pamsonkhano."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "Kanema Zokonda",
+            "webCamera": "Kamera ya Webusayiti",
+            "screenSharing": "Kugawana Screen",
+            "shareAnotherScreen": "Gawani chophimba china",
+            "turnOffCameras": "Zimitsani kamera",
+            "turnOffVideo": "Zimitsani kugawana kamera\/zenera",
+            "turnOffAudioInput": "Tsekani maikolofoni",
+            "turnOffScreenSharing": "Zimitsani kugawana zenera",
+            "cameraIsTurnedOff": "Kamera ndiyozimitsa",
+            "micIsTurnedOff": "Maikolofoni yazimitsidwa",
+            "startFBLive": "Yambitsani Facebook Livestream",
+            "stopFBLive": "Letsani Facebook Livestream",
+            "startRecording": "Yambani Kujambula",
+            "stopRecording": "Lekani Kujambulitsa",
+            "start": "Yambani",
+            "stop": "Imani",
+            "recordingInProgress": "Kujambula kuli mkati...",
+            "fbLiveTitle": "Mutu wa Livestream",
+            "fbLiveDescription": "Fotokozani Livestream yanu. Ndi chiyani?",
+            "fbOnlyMeLiveAccess": "Ine ndekha",
+            "fbFriendsAccess": "Anzanga",
+            "fbPublicAccess": "Pagulu",
+            "publishOnTimeline": "Sindikizani pa nthawi",
+            "publishToGroup": "Sindikizani ku gulu",
+            "fbStartLive": "Pitani Live",
+            "fbStopLive": "Malizitsani Livestream",
+            "streamingSettings": "Zokonda",
+            "fbEmbedCode": "Ikani",
+            "copy": "Koperani",
+            "streamToRTMP": "Pitani ku RTMP yokhazikika",
+            "startBroadcasting": "Yambani kuwulutsa",
+            "broadcastingInProgress": "Kuwulutsa kuli mkati"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Zokonda pa Audio",
+            "speakers": "Olankhula",
+            "microphone": "Maikolofoni"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
+            "dialogTitle": "Zokonda pagulu",
+            "disconnect": "Lumikizani",
+            "floatingScreens": "Zowonetsera Zoyandama",
+            "tiledScreens": "Mawonekedwe a matailosi",
+            "loudestExceptMe": "Phokoso Kwambiri Kupatula Ine",
+            "maximizeLoudest": "Kwezani Mokweza Kwambiri",
             "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "fullScreen": "Kudzaza zenera lonse",
+            "manual": "Pamanja",
+            "turnOffCamera": "Bisani kanema",
+            "turnOffAudio": "Tsegulani mawu",
+            "turnOffScreenSharing": "Bisani kugawana zenera",
+            "turnOnCamera": "Onetsani kanema",
+            "turnOnAudio": "Tsegulani mawu",
+            "turnOnScreenSharing": "Onetsani kugawana zenera"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Zokonda zotsatsira"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Msonkhano",
+            "MeetingEnded": "Msonkhano watha"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Waitanidwa",
+            "description": "Ma inbox oitanira anthu"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Zothandizira",
+            "description": "mtsinje wowongolera mwayi wofikira kuzinthu ndi kutumiza mauthenga okhudza zosintha"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "polandila zosintha za momwe ntchito ina ikuyendera",
+            "displayType": "Ntchito"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "gulu la ntchito",
+            "displayType": "Ntchito"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "zochitika zodziwika kwa anthu ammudzi",
+            "displayType": "Zomwe zimachitikira anthu ammudzi"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "moni womwe wogwiritsa ntchito angadziwonetse nawo",
+            "displayType": "Moni"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Nambala",
+            "description": "nambala ya masamu"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Tsiku",
+            "description": "tsiku"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Mawu",
+            "description": "thupi lalemba"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Mawu",
+            "description": "kalembedwe kakang&#39;ono"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Mawu",
+            "description": "zolemba zapakati"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Imelo adilesi",
+            "description": "imelo adilesi"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Nambala yafoni",
+            "description": "nambala yafoni"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ulalo pa intaneti"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Chithunzi",
+            "description": "chithunzi chowoneka",
+            "newItem": "Onjezani Chithunzi"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Zithunzi Zojambula",
+            "description": "zithunzi"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "Album yomwe ili ndi ma media osiyanasiyana"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Fayilo",
+            "description": "fayilo yokwezedwa",
+            "newItem": "Onjezani Fayilo"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "description": "chomvera",
+            "newItem": "Onjezani Audio"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Kanema Kanema",
+            "description": "kanema kanema",
+            "newItem": "Onjezani Kanema"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF chikalata",
+            "description": "PDF chikalata",
+            "newItem": "Onjezani PDF"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "live audio or video"
+            "description": "audio kapena kanema wamoyo"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Gulu",
+            "description": "gulu lomwe mitsinje ina ingagwirizane nayo"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Chilolezo chotenga nawo mbali",
+            "description": "mitsinje ndi yogwirizana\/yosagwirizana ndi izi pamene wogwiritsa ntchito ajowina\/achoka"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Chidwi",
+            "description": "imayimira chidwi cha wogwiritsa ntchito pamutu wina"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Obwera",
+            "description": "kopita mauthenga otumizidwa ndi ogwiritsa ntchito ena"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Kukambirana",
+            "description": "kukambirana pakati pa ogwiritsa ntchito, ndi mbiri"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Kuyimba Kwanthawi Yeniyeni",
+            "description": "kuyimba kwamavidiyo nthawi yeniyeni \/ audio"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Funso",
+            "description": "funso mtsinje"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Yankhani",
+            "description": "yankho mtsinje"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Kuitana",
+            "description": "gulu la Streams\/webrc",
+            "MaxRelationsExceeded": "Ma foni ambiri adapitilira"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "placeholder": "lembani mutu watsamba",
+        "ModTab": "Sinthani Kanthu",
+        "Save": "Sungani",
+        "Delete": "Chotsani",
         "Submenu": "Submenu"
     },
     "audio": {
         "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Bwezerani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Clip",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo yolakwika",
+        "errorNoSource": "Palibe audio source",
+        "uploadLimit": "Kukula kwakukulu kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma fayilo yayikulu kwambiri.<br> Kukula kwakukulu kwa fayilo ndi {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Bwezerani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Clip",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo yolakwika",
+        "errorNoSource": "Palibe gwero lamavidiyo",
+        "uploadLimit": "Kukula kwakukulu kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma fayilo yayikulu kwambiri.<br> Kukula kwakukulu kwa fayilo ndi {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Bwezerani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "setClip": "Dulani Clip",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo yolakwika",
+        "errorNoSource": "Palibe gwero la pdf",
+        "uploadLimit": "Kukula kwakukulu kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma fayilo yayikulu kwambiri.<br> Kukula kwakukulu kwa fayilo ndi {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Bwezerani",
+        "edit": "Sinthani",
+        "title": "mutu",
+        "description": "kufotokoza",
+        "upload": "Kwezani",
+        "link": "Lumikizani",
+        "setUrl": "Khazikitsani URL",
+        "save": "Sungani",
+        "uploadedImage": "Chithunzi chokwezedwa",
+        "imageTitle": "Mutu wazithunzi",
+        "setClip": "Dulani Clip",
+        "invalidURL": "URL yolakwika",
+        "invalidFile": "Fayilo yolakwika",
+        "errorNoSource": "Palibe gwero lazithunzi",
+        "uploadLimit": "Kukula kwakukulu kwa fayilo: {{size}}",
+        "errorFileSize": "Pepani, koma fayilo yayikulu kwambiri.<br> Kukula kwakukulu kwa fayilo ndi {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "Mafunso",
+        "Answers": "Mayankho",
+        "AnswerQuestion": "Yankhani Funso",
+        "SetYourAnswer": "Chonde yankhani funsolo",
+        "NewQuestion": "Funso Latsopano",
+        "NewAnswer": "Yankho Latsopano",
+        "AnswerDetails": "Yankhani Tsatanetsatane",
+        "answerOption": "Njira",
+        "answerOptionExclusive": "Kwapadera",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "Lembani yankho lanu apa",
+        "SaveQuestion": "Sungani Funso",
+        "SaveAnswer": "Sungani Yankho",
+        "AddAnotherAnswer": "Onjezani yankho lina",
+        "ErrorAnswers": "Chonde onjezani ngakhale yankho limodzi",
+        "AlreadyAnswered": "Adayankha kale",
+        "TitlePlaceholder": "Lembani funso lanu",
+        "ContentPlaceholder": "Ikani zina zowonjezera apa kuti muthandize anthu kuyankha",
+        "ErrorTitle": "Funso ndilofunika",
+        "Placeholder": "Choyimira"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Zatsopano",
+        "DefineTitle": "Chonde tanthauzirani mutu",
+        "Create": "Pangani"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Kuitana",
+        "MaxCalls": "Max akuyimba",
+        "Update": "Kusintha",
+        "NoCallsYet": "Palibe mafoni panobe",
+        "CallReasonTitle": "Kodi kuitana kumeneku ndi chiyani?",
+        "WaitingRoom": "Malo Odikirira"
     }
 }

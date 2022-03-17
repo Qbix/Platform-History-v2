@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "பணம் செலுத்த தட்டவும்"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}}க்கான கட்டணம் செயலாக்கப்பட்டது",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}}க்கு பணம் செலுத்தியதற்கு நன்றி",
+        "SubscribedTo": "{{plan.title}}க்கு {{call 'user.displayName'}} குழுசேர்ந்தார்",
+        "YouSubscribedTo": "நீங்கள் {{plan.title}} இல் குழுசேர்ந்துள்ளீர்கள்"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "&quot;{{description}}&quot; மூலம் {{call 'publisher.displayName'}} இலிருந்து {{displayAmount}} கட்டணத்தைப் பெறுவீர்கள்",
+        "HasBeenCharged": "ஏய், இது {{1}} {{3}}க்கு {{3}}க்கு {{4}} கட்டணம் விதிக்கப்பட்டுள்ளது என்பதை உங்களுக்குத் தெரியப்படுத்துவதற்காகத் தான்"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "&quot;{{description}}&quot;க்கான உங்கள் கட்டணத்திற்கு நன்றி",
+        "HavePaid": "ஏய் {{1}}, நீங்கள் {{4}}க்கு {{3}}க்கு {{2}} வெற்றிகரமாகச் செலுத்தியுள்ளீர்கள் என்பதற்கான விரைவான உறுதிப்படுத்தல்"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ஆர்டர் பற்றிய தகவல்",
+        "PaymentMethod": "பணம் செலுத்தும் முறை",
+        "ContactInfo": "தொடர்பு தகவல்",
+        "Pay": "செலுத்து"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "அழைப்பை {{invitedUserName}} ஏற்றுக்கொண்டார்",
+        "Streams_user_firstname": "{{invitedUserName}} முதல் பெயரை உள்ளிட்டது",
+        "Streams_user_lastname": "{{invitedUserName}} கடைசிப் பெயரை உள்ளிட்டது",
+        "Streams_user_icon": "{{invitedUserName}} ஐகான் உள்ளிட்டது",
+        "Places_user_location": "{{invitedUserName}} இருப்பிடத்தை உள்ளிட்டது",
+        "Streams_greeting": "{{invitedUserName}} வாழ்த்தை உள்ளிட்டது",
+        "YouHaveCreditsToStart": "தொடங்குவதற்கு உங்களிடம் {{amount}} வரவுகள் உள்ளன",
+        "PaymentFor": "&quot;{{1}}&quot;க்கான கட்டணம்",
+        "PaymentTo": "{{1}}க்கு பணம் செலுத்துதல்",
+        "PaymentToUser": "{{toUserName}}க்கு பணம் செலுத்துதல்",
+        "CreatePaidStream": "உருவாக்குவதற்கு {{toStreamName}}",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; இல் முன்பதிவு செய்ய",
+        "CreatedCommunity": "&quot;{{communityId}}&quot; சமூகத்தை உருவாக்குவதற்காக",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; இல் முன்பதிவு பணத்தைத் திரும்பப்பெறுதல்",
+        "BoughtCredits": "{{amount}} கிரெடிட்களை வாங்கினேன்",
+        "BonusCredits": "போனஸ் {{amount}} வரவுகள்",
+        "BuyAmountCredits": "{{amount}} கிரெடிட்களை வாங்கவும்",
+        "WatchClip": "{{fromStreamTitle}} பார்த்ததற்காக {{amount}} கிரெடிட்களைப் பெற்றார்",
+        "MissingCredits": "வரவுகளை காணவில்லை",
+        "YouMissingCredits": "தொடர உங்களுக்கு கூடுதல் {{amount}} கிரெடிட்கள் தேவை.",
+        "BuyCredits": "கடன்களை வாங்கவும்",
+        "BuyBonus": "ஒரே நேரத்தில் {{amount}} கிரெடிட்களை வாங்கினால், {{bonus}} கிரெடிட் போனஸ் கிடைக்கும்.",
+        "Buy": "வாங்க",
+        "PurchaseCredits": "கொள்முதல் கடன்கள்",
+        "Credits": "கடன்கள்",
+        "ErrorInvalidAmount": "செல்லாத தொகை",
+        "ErrorInvalidCurrency": "துரதிர்ஷ்டவசமாக நாங்கள் இன்னும் நாணயத்தை {{currency}} ஆதரிக்கவில்லை",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} வரவுகள்",
+            "BonusCredits": "{{amount}} வரவுகள்"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "தேதி",
+        "Amount": "தொகை",
+        "Description": "விளக்கம்",
+        "Client": "வாடிக்கையாளர்",
+        "To": "செய்ய",
+        "From": "இருந்து",
+        "SeeHistory": "{{1}}க்கான கட்டண வரலாற்றைப் பார்க்கவும்",
+        "HistoryEmpty": "உங்களிடம் இன்னும் தரவு இல்லை",
+        "PaymentFor": "{{amount}} வரவுகளை அனுப்பியது",
+        "PaymentTo": "{{amount}} வரவுகளை அனுப்பியது",
+        "PaymentToUser": "{{amount}} வரவுகளை அனுப்பியது",
+        "CreatePaidStream": "செலவழித்த {{amount}} வரவுகள்",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+            "-": "செலவழித்த {{amount}} வரவுகள்"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+            "-": "செலவழித்த {{amount}} வரவுகள்"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+            "-": "{{amount}} வரவுகளை அனுப்பியது"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "செலவழித்த {{amount}} வரவுகள்",
+        "BoughtCredits": "{{amount}} கிரெடிட்களை வாங்கினேன்",
+        "BonusCredits": "போனஸ் {{amount}} கிரெடிட்கள் கிடைத்துள்ளன",
+        "InviteAcceptedBy": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "Streams_user_firstname": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "Streams_user_lastname": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "Streams_user_icon": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "Places_user_location": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "Streams_greeting": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது",
+        "YouHaveCreditsToStart": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "சந்தாவைத் தொடங்கவும்",
+            "message": "நீங்கள் {{title}} இல் குழுசேர விரும்புகிறீர்களா?",
+            "ok": "சரி",
+            "cancel": "ரத்து செய்"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "கிரெடிட் அல்லது டெபிட் கார்டு",
+        "SubscribePayment": "கட்டணத்திற்கு குழுசேரவும்",
+        "ImmediatePayment": "உடனடி கட்டணம்"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
+        "BuyAmountCredits": "{{amount}} கிரெடிட்களை வாங்கவும்",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "பணம் செலுத்துங்கள்",
+            "message": "{{symbol}}{{amount}} செலுத்த ஒப்புக்கொள்கிறீர்களா?",
+            "ok": "சரி",
+            "cancel": "ரத்து செய்"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "கடன்கள்",
+            "description": "வரவுகள் மற்றும் கொடுப்பனவுகளை கண்காணிக்கிறது"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "சந்தா திட்டம்",
+            "description": "சந்தா திட்டம்"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "சந்தா",
+            "description": "சந்தா"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "தயாரிப்பு",
+            "description": "தயாரிப்பு விற்கப்படுகிறது"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "சேவை",
+            "description": "சேவை வழங்கப்படுகிறது"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "{{amount}} கிரெடிட்களைப் பெற்றுள்ளது"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "{{amount}} கிரெடிட்களை வாங்கினேன்"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "போனஸ் {{amount}} வரவுகள்"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "செலவழித்த {{amount}} வரவுகள்"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "{{toUserName}}க்கு {{amount}} வரவுகளை அனுப்பினார்"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "{{fromUserName}} இடமிருந்து {{amount}} வரவுகளைப் பெற்றுள்ளது"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "புதிய சேவை",
+            "TitlePlaceholder": "சேவை தலைப்பு",
+            "PricePlaceholder": "விலையை அமைக்கவும்",
+            "LinkPlaceholder": "கூடுதல் தகவல் இணைப்பை அமைக்கவும்",
+            "DescriptionPlaceholder": "சேவை விளக்கம்",
+            "SaveService": "சேவையைச் சேமிக்கவும்",
+            "SelectRequiredParticipants": "தேவையான பங்கேற்பாளர்கள்"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "சேவை டெம்ப்ளேட்களை நிர்வகிக்கவும்",
+        "ManageServices": "சேவைகளை நிர்வகிக்கவும்",
+        "Free": "இலவசம்",
+        "OptionalContribution": "விருப்ப பங்களிப்பு",
+        "RequiredPayment": "தேவையான கட்டணம்",
+        "AreYouSureDelete": "இந்தச் சேவையை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
+        "AmountServicesRelated": "இந்தச் சேவையுடன் தொடர்புடைய {{amount}} வசதிகள் உள்ளன. அவையும் அகற்றப்படும்."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "{{title}} NFT பற்றிய தகவல்",
+        "Description": "NFT பற்றிய விரிவான தகவல்கள்",
+        "FixedBid": "இப்போது வாங்க",
+        "CurrentBid": "தற்போதைய ஏலம்",
+        "StartingIn": "இல் தொடங்குகிறது",
+        "EndingIn": "முடிவடைகிறது",
+        "CreateNFT": "ஒரு NFT ஐ உருவாக்கவும்",
+        "TitlePlaceholder": "உங்கள் NFTக்கு ஒரு தலைப்பைக் கொடுங்கள்",
+        "DescriptionPlaceholder": "உங்கள் NFTக்கு ஒரு விளக்கத்தைக் கொடுங்கள்",
+        "CreateYourNFT": "உங்கள் NFT ஐ உருவாக்கவும்",
+        "Royalties": "ஆதாய உரிமைகள்",
+        "RoyaltyPlaceholder": "விருப்பமானது. பரிமாற்றத்திற்கு முன் படைப்பாளிக்கு செலுத்தப்பட்ட தொகை.",
+        "ExpirationDate": "காலாவதி தேதி",
+        "StartingDate": "தொடக்க தேதி",
+        "BidsBelowThisAmount": "இந்தத் தொகைக்குக் குறைவான ஏலங்கள் அனுமதிக்கப்படாது",
+        "MinimumBid": "குறைந்தபட்ச ஏலம்",
+        "Price": "விலை",
+        "Owner": "உரிமையாளர்",
+        "SelectCategory": "பிரிவை தேர்வு செய்க",
+        "Day": "நாள்",
+        "Days": "நாட்களில்",
+        "Hour": "மணி",
+        "Hours": "மணி",
+        "Minute": "நிமிடம்",
+        "Minutes": "நிமிடங்கள்",
+        "Second": "இரண்டாவது",
+        "Seconds": "நொடிகள்",
+        "SalesCreator": "விற்பனையானது படைப்பாளரிடம் செல்லும்",
+        "Details": "விவரங்கள்",
+        "Bids": "ஏலங்கள்",
+        "History": "வரலாறு",
+        "LoremIpsum": "லோரெம் இப்சம் என்பது அச்சிடும் மற்றும் தட்டச்சுத் துறையின் போலி உரை.",
+        "PutOnSale": "விற்பனைக்கு வையுங்கள்",
+        "PutOffSale": "விற்பனையிலிருந்து திரும்பப் பெறவும்",
+        "Transfer": "இடமாற்றம்",
+        "Update": "புதுப்பிக்கவும்",
+        "UpdateToken": "டோக்கனைப் புதுப்பிக்கவும்",
+        "CreateToken": "டோக்கனை உருவாக்கவும்",
+        "PlaceBid": "ஏலம் வைக்கவும்",
+        "SoldOut": "விற்கப்பட்டது",
+        "NftName": "NFT பெயர்",
+        "DescribeYourNFT": "உங்கள் NFTயை விவரிக்கவும்",
+        "NftPicture": "NFT ஐக் குறிக்கும் படம்",
+        "NftMovie": "NFT ஐப் பிரதிநிதித்துவப்படுத்தும் திரைப்படம்",
+        "UploadMovie": "திரைப்படத்தைப் பதிவேற்றவும்",
+        "MovieSource": "திரைப்பட ஆதாரம்",
+        "UploadFile": "கோப்பைப் பதிவேற்றவும்",
+        "PutOnMarketplace": "சந்தையில் வைக்கவும்",
+        "InstantPurchase": "பயனர்கள் உடனடியாக உங்கள் NFT ஐ வாங்குவதற்கு விலையை உள்ளிடவும்",
+        "FixedPrice": "நிலையான விலை",
+        "TimedAuction": "காலக்கெடு ஏலம்",
+        "OpenForBids": "ஏலத்திற்குத் திறக்கவும்",
+        "PriceOnePiece": "ஒரு துண்டுக்கான விலையை உள்ளிடவும்",
+        "EnterMinimumBid": "குறைந்தபட்ச ஏலத்தை உள்ளிடவும்",
+        "SelectChain": "சங்கிலியைத் தேர்ந்தெடுக்கவும்",
+        "WrongChain": "இந்த NFT &quot;{{chain}}&quot; இன் கீழ் உருவாக்கப்பட்டது. தயவுசெய்து இந்த சங்கிலியைப் பயன்படுத்தவும்.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFT களை இறக்குமதி செய்கிறது",
+            "fileNotFound": "மன்னிக்கவும், CSV கோப்பு கிடைக்கவில்லை.",
+            "fileEmpty": "மன்னிக்கவும், CSV கோப்பு காலியாக உள்ளது.",
+            "userIdNotFound": "பயனர் இருக்கிறார் ஆனால் ஐடி காலியாக உள்ளது",
+            "errorLine": "வரி {{1}}",
+            "fieldNotFound": "தேவையான புலம் &quot;{{1}}&quot; கிடைக்கவில்லை",
+            "taskStreamInvalid": "பணி ஸ்ட்ரீம் தவறானது",
+            "instructionsEmpty": "பணி ஸ்ட்ரீம் வழிமுறைகள் காலியாக உள்ளன",
+            "complete": "முழுமை",
+            "activateUsers": "பயனர்களுக்கு செயல்படுத்தும் செய்தியை அனுப்பவா?",
+            "importProgress": "முன்னேற்றம்",
+            "importOptions": "விருப்பங்கள்",
+            "sampleCSV": "மாதிரி CSV ஐப் பதிவிறக்கவும்",
+            "fileLabel": "விரிதாளைப் பதிவேற்றவும்:",
+            "errorsTitle": "பிழைகள் ஏற்பட்டன"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "NFT சேகரிப்புகளின்படி வடிகட்டவும்",
+                "ShowNFTCollection": "இதில் NFT சேகரிப்பைக் காட்டு...",
+                "AllCollections": "அனைத்து தொகுப்புகள்"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "அனைத்து ஆசிரியர்கள்",
+                "AllUsers": "அனைவரும்",
+                "FilterByAuthors": "ஆசிரியர்களால் வடிகட்டவும்"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "தொகுப்புக்குத் திரும்பு"
     }
 }

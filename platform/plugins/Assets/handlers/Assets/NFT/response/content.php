@@ -75,6 +75,30 @@ function Assets_NFT_response_content ($params) {
 		exit;
 	}
 
+	$title = $stream->title;
+	$description = $stream->content;
+	$icon = $stream->iconUrl('700x980.png');
+	$royalty = $stream->getAttribute("royalty");
+	$relations = Streams_RelatedTo::select()->where(array(
+		"fromPublisherId" => $stream->publisherId,
+		"fromStreamName" => $stream->name,
+		"type" => "NFT/interest"
+	))->fetchDbRows();
+	$collections = array();
+	foreach ($relations as $relation) {
+		$interest = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName);
+		$collections[] = $interest->title;
+	}
+
+	// get likes
+	$res = false;
+	if ($loggedInUserId) {
+		$res = (boolean)Streams_Stream::countLikes($publisherId, $stream->name, $loggedInUserId);
+	}
+	$likes = array(
+		"res" => $res,
+		"likes" => Streams_Stream::countLikes($publisherId, $stream->name)
+	);
 	$user = Users_ExternalTo::select()->where(array(
 		"xid" => $nftInfo["owner"]
 	))->fetchDbRow();

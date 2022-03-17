@@ -1,31 +1,31 @@
 {
     "request": {
-        "error": "请求期间出错{{status}}",
+        "error": "请求期间出现错误 {{status}}",
         "canceled": "请求已取消",
         "500": "内部服务器错误",
-        "404": "找不到：{{url}}",
+        "404": "未找到：{{url}}",
         "501": "请求中断"
     },
     "nonce": {
-        "sameDomain": "会话已过期。刷新页面然后重试。",
-        "otherDomain": "在{{baseUrl}}阻止对外国域的跨域请求"
+        "sameDomain": "会话已过期。刷新页面并重试。",
+        "otherDomain": "在 {{baseUrl}} 阻止对外部域的跨域请求"
     },
     "words": {
-        "tap": "龙头",
+        "tap": "轻敲",
         "click": "点击",
-        "yes": "是",
-        "no": "没有",
-        "Tap": "龙头",
+        "yes": "是的",
+        "no": "不",
+        "Tap": "轻敲",
         "Click": "点击",
-        "Yes": "是",
-        "No": "没有"
+        "Yes": "是的",
+        "No": "不"
     },
     "months": {
         "1": "一月",
         "2": "二月",
-        "3": "游行",
+        "3": "行进",
         "4": "四月",
-        "5": "可以",
+        "5": "可能",
         "6": "六月",
         "7": "七月",
         "8": "八月",
@@ -39,10 +39,10 @@
         "record": "记录",
         "recording": "记录",
         "remains": "遗迹",
-        "maximum": "最大值",
+        "maximum": "最大限度",
         "playing": "播放",
-        "recorded": "记录",
-        "clip": "夹",
+        "recorded": "录制的",
+        "clip": "夹子",
         "orupload": "或上传",
         "usethis": "用这个",
         "discard": "丢弃",
@@ -53,75 +53,75 @@
     },
     "confirm": {
         "title": "确认",
-        "ok": "是",
-        "cancel": "没有"
+        "ok": "是的",
+        "cancel": "不"
     },
     "prompt": {
-        "title": "提示",
-        "ok": "走"
+        "title": "迅速的",
+        "ok": "去"
     },
     "imagepicker": {
         "errorReadingFile": "读取文件时出错",
         "cameraCommands": {
             "prompt": "你想干什么？",
-            "photo": "拍新照片",
+            "photo": "拍摄新照片",
             "library": "从库中选择"
         },
-        "tooSmall": "请选择一个更大的图像。",
+        "tooSmall": "请选择更大的图像。",
         "cropping": {
             "title": "调整大小和位置",
-            "touchscreen": "用手指进行缩放和拖动",
+            "touchscreen": "用手指缩放和拖动",
             "notTouchscreen": "使用鼠标和滚轮进行缩放和拖动"
         },
         "errorType": "抱歉，不支持此文件类型"
     },
     "timestamp": {
-        "lastNight": "昨晚",
-        "lastEvening": "前夕",
+        "lastNight": "昨夜",
+        "lastEvening": "前夜",
         "yesterday": "昨天",
-        "thisMorning": "这个早晨",
+        "thisMorning": "今天早上",
         "today": "今天",
         "tonight": "今晚",
-        "tomorrowMorning": "汤姆早晨",
+        "tomorrowMorning": "汤姆·莫恩",
         "tomorrow": "明天",
-        "hoursAgo": "{{h}}小时前",
-        "hourAgo": "{{h}}小时前",
-        "minuteAgo": "{{m}}分钟前",
-        "minutesAgo": "{{m}}分钟前",
-        "secondAgo": "{{s}}前",
-        "secondsAgo": "{{s}}秒前",
-        "fewSecondsAgo": "秒前",
-        "rightNow": "马上",
-        "inSecond": "在{{s}}秒内",
-        "inSeconds": "在{{s}}秒内",
-        "inMinute": "在{{m}}分钟内",
-        "inMinutes": "在{{m}}分钟内",
-        "inHour": "在{{h}}小时内",
-        "inHours": "在{{h}}小时内",
-        "inUnderMinute": "不到1分钟"
+        "hoursAgo": "{{h}} 小时前",
+        "hourAgo": "{{h}} 小时前",
+        "minuteAgo": "{{m}} 分钟前",
+        "minutesAgo": "{{m}} 分钟前",
+        "secondAgo": "{{s}} 秒前",
+        "secondsAgo": "{{s}} 秒前",
+        "fewSecondsAgo": "几秒钟前",
+        "rightNow": "现在",
+        "inSecond": "{{s}} 秒后",
+        "inSeconds": "在 {{s}} 秒内",
+        "inMinute": "{{m}} 分钟内",
+        "inMinutes": "{{m}} 分钟后",
+        "inHour": "{{h}} 小时内",
+        "inHours": "{{h}} 小时内",
+        "inUnderMinute": "不到 1 分钟"
     },
     "tabs": {
-        "more": "更多",
+        "more": "更多的",
         "Menu": "菜单"
     },
     "video": {
-        "clip": "夹",
+        "clip": "夹子",
         "errorNoSource": "没有视频源",
-        "SkipAfter": "跳过后",
-        "Skip": "跳跃"
+        "SkipAfter": "之后跳过",
+        "Skip": "跳过"
     },
     "pdf": {
-        "clip": "夹",
-        "errorNoSource": "没有pdf来源"
+        "clip": "夹子",
+        "errorNoSource": "没有pdf源"
     },
     "clip": {
         "SetClipStart": "设置剪辑开始",
         "ClipStart": "剪辑开始",
         "SetClipEnd": "设置剪辑结束",
-        "ClipEnd": "夹端",
+        "ClipEnd": "剪辑结束",
         "StartMoreEnd": "开始位置不能超过结束位置",
         "EndLessStart": "结束位置不能小于开始位置",
-        "WhichInvalid": "参数“which”无效"
+        "WhichInvalid": "参数“哪个”无效"
     },
     "durations": {
         "second": "第二",
@@ -129,17 +129,17 @@
         "minute": "分钟",
         "minutes": "分钟",
         "hour": "小时",
-        "day": "天",
+        "day": "日",
         "days": "天",
-        "week": "周",
+        "week": "星期",
         "weeks": "周",
         "month": "月",
         "months": "月",
         "year": "年",
-        "years": "年份",
+        "years": "年",
         "decade": "十年",
         "decades": "几十年",
         "century": "世纪",
-        "centuries": "几个世纪"
+        "centuries": "世纪"
     }
 }

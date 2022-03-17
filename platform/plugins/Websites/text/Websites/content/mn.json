@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Сурталчлах холбоос",
+                "startDate": "Эхлэх өдөр",
+                "startTime": "Эхлэх цаг",
+                "endDate": "Дуусах огноо",
+                "endTime": "Дуусах цаг",
+                "budget": "Төсөв"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Сонирхлын дагуу шүүх",
+                "FilterInterests": "Сонирхсон зүйлээ бичиж эхлээрэй..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Сонирхол",
+            "Location": "Байршил"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Яв",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Үзэх",
+            "WriteToStartConversation": "Ярилцлагыг эхлүүлэхийн тулд санал бодлоо бичээрэй",
+            "StartConversation": "Яриа эхлүүлэх",
+            "GotoConversation": "Харилцан яриа руу очно уу",
+            "reset": "Дахин тохируулах",
+            "edit": "Засварлах",
+            "link": "Холбоос",
+            "setUrl": "URL тохируулах",
+            "save": "Хадгалах",
+            "setClip": "Cut Out клип",
+            "invalidURL": "Хүчингүй URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Файлыг кэш хийхэд хэт том байна. Файлын дээд хэмжээ {{size}}",
+        "InvalidPDF": "Файл хүчинтэй PDF биш байна",
+        "StartTypingTitleOrKeywords": "Гарчиг эсвэл түлхүүр үг бичиж эхлээрэй..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Төрөл бүрийн хэрэглэгчид үзэж, засах боломжтой HTML баримт бичиг",
+            "displayType": "Нийтлэл"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Үзүүлэн дэх слайд нь HTML, аудио гэх мэтийг агуулж болно.",
+            "displayType": "Слайд"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Төрөл бүрийн слайдаас бүрдсэн танилцуулга",
+            "displayType": "Илтгэл"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Вэбсайт дээрх зар сурталчилгааны нэгж",
+            "displayType": "Зар сурталчилгааны нэгж"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Зар сурталчилгааны нэгжүүдийг нэрийн дор бүлэглэх арга",
+            "displayType": "Зар сурталчилгаа байршуулах"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Зар сурталчилгаанд зориулсан контент",
+            "displayType": "Бүтээлч сурталчилгаа"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Зар сурталчилгааны кампанит ажил",
+            "displayType": "Зар сурталчилгааны кампанит ажил"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Мета өгөгдлийг устгасан вэбсайтыг төлөөлдөг",
+            "displayType": "Вэб хуудас"
         }
     }
 }

@@ -2,8 +2,8 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Odkaz na podporu",
-                "startDate": "Počáteční datum",
+                "link": "Odkaz na propagaci",
+                "startDate": "Datum zahájení",
                 "startTime": "Doba spuštění",
                 "endDate": "Datum ukončení",
                 "endTime": "Čas ukončení",
@@ -11,7 +11,7 @@
             },
             "interests": {
                 "Title": "Filtrovat podle zájmu",
-                "FilterInterests": "Začněte psát zájem ..."
+                "FilterInterests": "Začněte psát zájem..."
             },
             "Interest": "Zájem",
             "Location": "Umístění"
@@ -20,11 +20,11 @@
     "webpage": {
         "composer": {
             "Go": "Jít",
-            "PasteLinkHere": "Vložte odkaz zde",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Procházet",
             "WriteToStartConversation": "Napište své myšlenky a začněte konverzaci",
-            "StartConversation": "Spusťte konverzaci",
-            "GotoConversation": "Přejít na konverzaci",
+            "StartConversation": "Zahájit konverzaci",
+            "GotoConversation": "Přejděte do konverzace",
             "reset": "Resetovat",
             "edit": "Upravit",
             "link": "Odkaz",
@@ -33,17 +33,17 @@
             "setClip": "Vystřihnout klip",
             "invalidURL": "neplatná URL"
         },
-        "FileTooLarge": "Soubor je příliš velký pro ukládání do mezipaměti. Maximální velikost souboru {{size}}",
+        "FileTooLarge": "Soubor je pro ukládání do mezipaměti příliš velký. Maximální velikost souboru {{size}}",
         "InvalidPDF": "Soubor není platný PDF",
-        "StartTypingTitleOrKeywords": "Začněte psát název nebo klíčová slova ..."
+        "StartTypingTitleOrKeywords": "Začněte psát název nebo klíčová slova..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Dokument HTML, který mohou různí uživatelé prohlížet a upravovat",
+            "description": "Dokument HTML, který mohou prohlížet a upravovat různí uživatelé",
             "displayType": "Článek"
         },
         "Websites\/slide": {
-            "description": "Snímek v prezentaci může obsahovat HTML, audio atd.",
+            "description": "Snímek v prezentaci může obsahovat HTML, zvuk atd.",
             "displayType": "Skluzavka"
         },
         "Websites\/presentation": {
@@ -55,19 +55,19 @@
             "displayType": "Reklamní jednotka"
         },
         "Websites\/advert\/placement": {
-            "description": "Způsob seskupování reklamních jednotek pod jménem",
+            "description": "Způsob seskupování reklamních jednotek pod názvem",
             "displayType": "Umístění reklamy"
         },
         "Websites\/advert\/creative": {
-            "description": "Obsah reklamy",
-            "displayType": "Inzerujte kreativní"
+            "description": "Obsah pro reklamu",
+            "displayType": "Reklamní kreativa"
         },
         "Websites\/advert\/campaign": {
             "description": "Reklamní kampaň",
             "displayType": "Reklamní kampaň"
         },
         "Websites\/webpage": {
-            "description": "Představuje web, jehož metadata byla seškrabána",
+            "description": "Představuje webovou stránku, jejíž metadata byla odstraněna",
             "displayType": "webová stránka"
         }
     }

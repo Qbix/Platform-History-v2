@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
+        "Title": "Kev tsom xam",
+        "Daily": "Txhua hnub",
+        "Weekly": "Txhua lub lim tiam",
+        "Monthly": "Txhua hli",
+        "Application": "Daim ntawv thov",
+        "Pages": "Nplooj ntawv",
+        "Services": "Kev pabcuam",
         "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "WeekDays": "Lub Limtiam Hnub"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "nkag rau hauv",
+        "LogOut": "log tawm"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Teem {{1}} ua kuv thawj {{2}}",
+        "ChoosePassPhrase": "Xaiv ib <strong>kab lus hla<\/strong> mus nkag nrog.<br> Ib kab lus yooj yim uas muaj ob peb lo lus uas koj yuav nco tau yooj yim.",
+        "ChoosePassPhraseSeeSuggestions": "Xaiv ib <strong>kab lus<\/strong> zoo los tiv thaiv koj tus account. Saib cov lus qhia rau qee lub tswv yim.",
+        "LogOutAndTryAgain": "Log Out thiab sim dua",
+        "IfYouFeel": "Yog tias koj xav tias muaj qee yam tsis raug, koj tuaj yeem ua tau",
+        "SetIdentifierButtonTitle": "pib dua"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Pib pib"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Pib pib",
+        "Authorize": "Tso cai",
+        "TermsLabel": "Kuv tau nyeem thiab pom zoo<br> mus rau {{link}}",
+        "TermsTitle": "Cov ntsiab lus",
+        "mustAgree": "Ua ntej koj yuav tsum pom zoo rau cov nqe lus."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Kuv lees txais {{link}}",
+        "TermsTitle": "Cov ntsiab lus"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Tso cai",
+        "prompt": "Koj puas xav qhib cov ntawv ceeb toom? Koj yuav tau txais cov xov xwm tshiab ntawm lub sijhawm tiag tiag txog yam koj nyiam.",
+        "yes": "Yog lawm",
+        "no": "Tsis muaj",
+        "WelcomePleaseVerifyEmail": "Zoo siab txais tos! Thov txheeb xyuas koj tus email chaw nyob.",
+        "WelcomeVerifyEmail": "Zoo siab txais tos! Xyuas koj tus email chaw nyob.",
+        "ForgetPass": "Hav, koj puas tsis nco qab koj lo lus zais?",
+        "PassphraseSaved": "Koj cov kab lus hla tau raug cawm lawm.",
+        "IdentifierActivated": "Koj li {{type}} tau qhib.",
+        "CompletedActivation": "Koj tau ua tiav cov neeg siv ua kom tiav.",
+        "CompletedActivationLogIn": "Koj tau ua tiav cov neeg siv ua kom tiav. Sim nkag rau hauv tam sim no."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Xaiv tus hu",
+            "CreateAccount": "+ Kev tiv tauj tshiab",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create tsis pom",
+            "SearchByName": "Nrhiav lub npe",
+            "EmptyContacts": "Tsis pom muaj neeg..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Xaiv tus neeg sib cuag ntawm {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Thov xaiv daim ntawv lo.",
+        "inviteUser": "Caw cov neeg siv",
+        "selectRole": "Xaiv lub luag haujlwm",
+        "inviteRole": "Caw {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Xaiv hom lus tsis raug",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Zoo siab txais tos",
+        "directions": "Tsim ib tus account, lossis nkag mus.",
+        "directionsNoRegister": "Nkag mus yog tias koj muaj tus account.",
+        "goButton": "Mus",
+        "passphrase": "Sau koj cov kab lus hla:",
+        "loginButton": "Pib pib",
+        "registerButton": "Pib pib",
+        "resendButton": "Xa cov lus qhib",
+        "forgot": "Tsis nco qab lawm?",
+        "resendConfirm": "Koj puas xav xa cov lus los rov pib dua koj tus lej password?",
+        "resendSuccess": "Txheeb xyuas cov lus kom rov pib dua koj tus lej password",
+        "resendClose": "Kaw",
+        "noPassphrase": "Ua ntej koj tuaj yeem nkag mus rau hauv, koj yuav tsum teeb tsa ib kab lus dhau los ntawm nyem qhov txuas hauv koj cov lus qhib.",
+        "notVerified": "Koj yuav tsum xa koj tus kheej cov lus qhib kom nkag mus.",
+        "emailExists": "Koj puas tau sim sau npe nrog email no ua ntej? Yog tias muaj, kos koj lub inbox kom qhib koj tus account. <a href='#resend' class='Q_button Users_activation_resend'>Nyem kom rov xa cov lus<\/a>",
+        "mobileExists": "Koj puas tau sim sau npe nrog tus lej xov tooj no ua ntej? Yog tias muaj, kos koj SMS kom qhib koj tus account. <a href='#resend' class='Q_button Users_activation_resend'>Nyem kom rov xa cov lus<\/a>",
+        "usingOther": "los yog koj ua tau",
+        "prompt": "Xaiv tus neeg siv lub npe:",
+        "newUser": "los yog tsim ib tus account tshiab hauv qab no",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "koj lub xov tooj # lossis email",
+            "mobile": "nkag mus rau koj lub xov tooj ntawm tes #",
+            "email": "sau koj email chaw nyob",
+            "username": "siv cov tsiaj ntawv thiab cov lej xwb"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Txais Cov Kev Pabcuam?",
+        "facebookNoEmail": "Koj tus account facebook ploj lawm ib qho email chaw nyob. Tsuas yog nkag mus rau hauv lub neej.",
+        "picTooltip": "Koj tuaj yeem hloov daim duab no tom qab",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Nkag mus rau {{host}} ntawm lub sijhawm {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Redirecting rau Wallet",
+                "content": "Thaum koj kaw qhov kev sib tham no, koj yuav raug coj mus rau koj lub hnab nyiaj. Tom qab koj kos npe rau hauv, rov qab mus rau nplooj ntawv no."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Ntxiv ib txoj hauv kev nkag mus",
+        "sendMessage": "Xa cov lus qhib",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "sau koj lub xov tooj ntawm tes # lossis email",
+            "mobile": "sau koj tus lej xov tooj ntawm tes",
+            "email": "sau koj email chaw nyob",
+            "username": "tus neeg siv lub npe"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Tus account",
+        "areUsing": "Koj siv {{platform}} li",
+        "noLongerUsing": "Koj tsis txuas nrog {{platform}} li",
+        "doAuth": "Nkag mus nrog tus account no",
+        "doSwitch": "Hloov mus rau tus account no"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "Tus tswv",
         "Admin": "Admin",
-        "Member": "Member",
+        "Member": "Tus tswv cuab",
         "Guest": "Guest",
-        "Host": "Host"
+        "Host": "Tus tswv"
     }
 }

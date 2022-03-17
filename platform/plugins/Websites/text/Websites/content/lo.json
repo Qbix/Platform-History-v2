@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "ເຊື່ອມຕໍ່ເພື່ອສົ່ງເສີມ",
+                "startDate": "ວັນ​ທີ່​ເລີ່ມ",
+                "startTime": "ເວລາເລີ່ມຕົ້ນ",
+                "endDate": "ວັນທີສິ້ນສຸດ",
+                "endTime": "ເວລາສິ້ນສຸດ",
+                "budget": "ງົບປະມານ"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "ກັ່ນຕອງຕາມຄວາມສົນໃຈ",
+                "FilterInterests": "ເລີ່ມພິມຄວາມສົນໃຈ..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "ດອກເບ້ຍ",
+            "Location": "ສະຖານທີ່"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "ໄປ",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "ຄົ້ນຫາ",
+            "WriteToStartConversation": "ຂຽນຄວາມຄິດຂອງທ່ານເພື່ອເລີ່ມຕົ້ນການສົນທະນາ",
+            "StartConversation": "ເລີ່ມການສົນທະນາ",
+            "GotoConversation": "ໄປທີ່ການສົນທະນາ",
+            "reset": "ຣີເຊັດ",
+            "edit": "ແກ້ໄຂ",
+            "link": "ເຊື່ອມຕໍ່",
+            "setUrl": "ຕັ້ງ URL",
+            "save": "ບັນທຶກ",
+            "setClip": "ຕັດອອກ Clip",
+            "invalidURL": "URL ບໍ່ຖືກຕ້ອງ"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "ໄຟລ໌ໃຫຍ່ເກີນໄປສໍາລັບການເກັບຂໍ້ມູນ. ຂະໜາດໄຟລ໌ສູງສຸດ {{size}}",
+        "InvalidPDF": "ໄຟລ໌ບໍ່ແມ່ນ PDF ທີ່ຖືກຕ້ອງ",
+        "StartTypingTitleOrKeywords": "ເລີ່ມພິມຊື່ ຫຼືຄຳສໍາຄັນ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "ເອກະສານ HTML ທີ່ຜູ້ໃຊ້ຕ່າງໆສາມາດເບິ່ງແລະແກ້ໄຂໄດ້",
+            "displayType": "ບົດຄວາມ"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "ສະໄລ້ໃນການນຳສະເໜີ, ສາມາດປະກອບມີ HTML, ສຽງ ແລະ ອື່ນໆ.",
+            "displayType": "ສະໄລ້"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "ການນຳສະເໜີທີ່ປະກອບດ້ວຍສະໄລ້ຕ່າງໆ",
+            "displayType": "ການນໍາສະເຫນີ"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "ຫນ່ວຍໂຄສະນາຢູ່ໃນເວັບໄຊທ໌",
+            "displayType": "ຫນ່ວຍໂຄສະນາ"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "ວິທີການຈັດກຸ່ມໂຄສະນາພາຍໃຕ້ຊື່",
+            "displayType": "ການຈັດວາງໂຄສະນາ"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "ເນື້ອຫາສໍາລັບການໂຄສະນາ",
+            "displayType": "ໂຄສະນາສ້າງສັນ"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "ການໂຄສະນາການໂຄສະນາ",
+            "displayType": "ໂຄສະນາ"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "ເປັນຕົວແທນຂອງເວັບໄຊທ໌ທີ່ metadata ໄດ້ຖືກຂູດ",
+            "displayType": "ຫນ້າ​ເວັບ"
         }
     }
 }

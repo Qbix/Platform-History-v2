@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Soʻrov paytida xatolik {{status}}",
+        "canceled": "So‘rov bekor qilindi",
+        "500": "Serverdagi ichki xatolik",
+        "404": "Topilmadi: {{url}}",
+        "501": "Soʻrov uzildi"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Seans muddati tugadi. Sahifani yangilang va qaytadan urinib ko&#39;ring.",
+        "otherDomain": "{{baseUrl}} da xorijiy domenga oʻzaro domen soʻrovi bloklangan"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "teging",
+        "click": "bosing",
+        "yes": "ha",
+        "no": "yo&#39;q",
+        "Tap": "ga teging",
+        "Click": "bosing",
+        "Yes": "Ha",
+        "No": "Yo&#39;q"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Yanvar",
+        "2": "fevral",
+        "3": "Mart",
+        "4": "aprel",
+        "5": "may",
+        "6": "iyun",
+        "7": "iyul",
+        "8": "avgust",
+        "9": "sentyabr",
+        "10": "oktyabr",
+        "11": "noyabr",
+        "12": "dekabr"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "ikkinchi",
+        "seconds": "soniya",
+        "minute": "daqiqa",
+        "minutes": "daqiqa",
+        "hour": "soat",
+        "day": "kun",
+        "days": "kunlar",
+        "week": "hafta",
+        "weeks": "haftalar",
+        "month": "oy",
+        "months": "oylar",
+        "year": "yil",
+        "years": "yillar",
+        "decade": "o&#39;n yil",
+        "decades": "o&#39;n yillar",
+        "century": "asr",
+        "centuries": "asrlar"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Mikrofoningizga kirishga ruxsat bering",
+        "record": "Yozib olish",
+        "recording": "Yozib olish",
+        "remains": "qoladi",
+        "maximum": "maksimal",
+        "playing": "Oʻynamoqda",
+        "recorded": "Yozib olingan",
+        "clip": "klip",
+        "discard": "Bekor qilish",
+        "encoding": "Kodlash"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "klip",
+        "errorNoSource": "Video manbasi yo&#39;q",
+        "SkipAfter": "Keyin o&#39;tkazib yuboring",
+        "Skip": "Oʻtkazib yuborish"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "klip",
+        "errorNoSource": "Pdf manbasi yo&#39;q"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Klipni boshlashni o&#39;rnating",
+        "ClipStart": "Klipni boshlash",
+        "SetClipEnd": "Klip oxirini o&#39;rnating",
+        "ClipEnd": "Klip oxiri",
+        "StartMoreEnd": "Boshlang&#39;ich pozitsiyasi oxirgi holatdan oshmasligi kerak",
+        "EndLessStart": "Yakuniy pozitsiya boshlang&#39;ich pozitsiyasidan kam bo&#39;lmasligi kerak",
+        "WhichInvalid": "“Qaysi” argumenti yaroqsiz"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Ogohlantirish"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Tasdiqlash",
+        "ok": "Ha",
+        "cancel": "Yo&#39;q"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Tezkor",
+        "ok": "Bor"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "Ko&#39;proq",
+        "Menu": "Menyu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Faylni o‘qishda xatolik yuz berdi",
+        "errorType": "Kechirasiz, lekin bu fayl turi qo&#39;llab-quvvatlanmaydi",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Nima qilgingiz kelyapdi?",
+            "photo": "Yangi suratga oling",
+            "library": "Kutubxonadan tanlang"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Iltimos, kattaroq rasmni tanlang.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "O&#39;lcham va joylashuvni sozlang",
+            "touchscreen": "Kattalashtirish va sudrab borish uchun barmoqlaringizdan foydalaning",
+            "notTouchscreen": "Kattalashtirish va sudrab borish uchun sichqoncha va g‘ildirakdan foydalaning"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "kecha tunda",
+        "lastEvening": "oxirgi oqshom",
+        "yesterday": "kecha",
+        "thisMorning": "bugun ertalab",
+        "today": "Bugun",
+        "tonight": "bugun kechqurun",
+        "tomorrowMorning": "tom tong",
+        "tomorrow": "ertaga",
+        "hoursAgo": "{{h}} soat oldin",
+        "hourAgo": "{{h}} soat oldin",
+        "minuteAgo": "{{m}} daqiqa oldin",
+        "minutesAgo": "{{m}} daqiqa oldin",
+        "secondAgo": "{{s}} soniya oldin",
+        "secondsAgo": "{{s}} soniya oldin",
+        "fewSecondsAgo": "soniya oldin",
+        "rightNow": "hoziroq",
+        "inSecond": "{{s}} soniyada",
+        "inSeconds": "{{s}} soniyada",
+        "inMinute": "{{m}} daqiqada",
+        "inMinutes": "{{m}} daqiqada",
+        "inHour": "{{h}} soatdan keyin",
+        "inHours": "{{h}} soatdan keyin",
+        "inUnderMinute": "1 daqiqa ichida"
     }
 }

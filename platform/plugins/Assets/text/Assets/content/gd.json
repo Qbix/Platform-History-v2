@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tap air gus pàigheadh"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: cosgais air a phròiseasadh airson {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Tapadh leibh airson ur pàigheadh gu {{call 'publisher.displayName'}}",
+        "SubscribedTo": "Rinn {{call 'user.displayName'}} fo-sgrìobhadh do {{plan.title}}",
+        "YouSubscribedTo": "Tha thu air fo-sgrìobhadh gu {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Gheibh thu pàigheadh de {{displayAmount}} o {{call 'publisher.displayName'}} le &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, chan eil seo ach airson fios a leigeil dhut gun deach {{2}} a ghearradh airson {{3}} le {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Tapadh leibh airson ur pàigheadh airson &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, chan eil an seo ach dearbhadh sgiobalta gun do phàigh thu {{2}} gu {{3}} airson {{4}} gu soirbheachail"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Fiosrachadh mu òrdugh",
+        "PaymentMethod": "Modh pàighidh",
+        "ContactInfo": "Fiosrachadh conaltraidh",
+        "Pay": "Pàigh"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Chaidh gabhail ris a&#39; chuireadh le {{invitedUserName}}",
+        "Streams_user_firstname": "Chuir {{invitedUserName}} a&#39; chiad ainm a-steach",
+        "Streams_user_lastname": "Chuir {{invitedUserName}} a-steach an t-ainm mu dheireadh",
+        "Streams_user_icon": "Chuir {{invitedUserName}} a-steach an ìomhaigheag",
+        "Places_user_location": "Chaidh {{invitedUserName}} a-steach don àite",
+        "Streams_greeting": "Chuir {{invitedUserName}} a-steach am fàilte",
+        "YouHaveCreditsToStart": "Tha {{amount}} creideas agad airson tòiseachadh",
+        "PaymentFor": "Pàigheadh airson &quot;{{1}}&quot;",
+        "PaymentTo": "Pàigheadh gu {{1}}",
+        "PaymentToUser": "Pàigheadh gu {{toUserName}}",
+        "CreatePaidStream": "airson {{toStreamName}} a chruthachadh",
+        "JoinedPaidStream": "airson glèidheadh ann an &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "airson coimhearsnachd &quot;{{communityId}}&quot; a chruthachadh",
+        "LeftPaidStream": "mar ath-dhìoladh ann an &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Cheannaich {{amount}} creideas",
+        "BonusCredits": "Creideas bònas {{amount}}",
+        "BuyAmountCredits": "Ceannaich {{amount}} creideas",
+        "WatchClip": "Choisinn {{amount}} creideas airson coimhead air {{fromStreamTitle}}",
+        "MissingCredits": "Creideasan air chall",
+        "YouMissingCredits": "Feumaidh tu {{amount}} creideas a bharrachd mus lean thu air adhart.",
+        "BuyCredits": "Ceannaich creideasan",
+        "BuyBonus": "Ma cheannaicheas tu {{amount}} creideasan aig an aon àm, thig gu {{bonus}} bònas creideasan.",
+        "Buy": "Ceannaich",
+        "PurchaseCredits": "Creideasan Ceannach",
+        "Credits": "Creideasan",
+        "ErrorInvalidAmount": "An t-suim neo-dhligheach",
+        "ErrorInvalidCurrency": "Gu mì-fhortanach chan eil sinn a&#39; cur taic ri airgead {{currency}} fhathast",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} creideas",
+            "BonusCredits": "{{amount}} creideas"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Ceann-latha",
+        "Amount": "Suim",
+        "Description": "Tuairisgeul",
+        "Client": "Cliant",
+        "To": "gu",
+        "From": "bho",
+        "SeeHistory": "Faic eachdraidh pàighidh airson {{1}}",
+        "HistoryEmpty": "Chan eil dàta agad fhathast",
+        "PaymentFor": "Chuir sinn {{amount}} creideas",
+        "PaymentTo": "Chuir sinn {{amount}} creideas",
+        "PaymentToUser": "Chuir sinn {{amount}} creideas",
+        "CreatePaidStream": "Chaidh {{amount}} creideas a chosg",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Choisinn {{amount}} creideas",
+            "-": "Chaidh {{amount}} creideas a chosg"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Choisinn {{amount}} creideas",
+            "-": "Chaidh {{amount}} creideas a chosg"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Fhuair sinn {{amount}} creideas",
+            "-": "Chuir sinn {{amount}} creideas"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Chaidh {{amount}} creideas a chosg",
+        "BoughtCredits": "Cheannaich {{amount}} creideas",
+        "BonusCredits": "Fhuair mi creideas bonus {{amount}}",
+        "InviteAcceptedBy": "Choisinn {{amount}} creideas",
+        "Streams_user_firstname": "Choisinn {{amount}} creideas",
+        "Streams_user_lastname": "Choisinn {{amount}} creideas",
+        "Streams_user_icon": "Choisinn {{amount}} creideas",
+        "Places_user_location": "Choisinn {{amount}} creideas",
+        "Streams_greeting": "Choisinn {{amount}} creideas",
+        "YouHaveCreditsToStart": "Choisinn {{amount}} creideas"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Suidhich Fiosrachadh Pàighidh",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Tòisich fo-sgrìobhadh",
+            "message": "Am bu toil leat fo-sgrìobhadh gu {{title}}?",
+            "ok": "ceart gu leòr",
+            "cancel": "Sguir dheth"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Cairt creideis no cunntais",
+        "SubscribePayment": "Subscribe Pàigheadh",
+        "ImmediatePayment": "Pàigheadh sa bhad"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Suidhich Fiosrachadh Pàighidh",
+        "BuyAmountCredits": "Ceannaich {{amount}} creideas",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Dèan Pàigheadh",
+            "message": "A bheil thu ag aontachadh {{symbol}}{{amount}} a phàigheadh?",
+            "ok": "ceart gu leòr",
+            "cancel": "Sguir dheth"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Creideasan",
+            "description": "a’ cumail sùil air creideasan agus pàighidhean"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Plana subsadaidh",
+            "description": "plana ballrachd"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Fo-sgrìobhadh",
+            "description": "fo-sgrìobhadh"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Bathar",
+            "description": "toradh ga reic"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Seirbheis",
+            "description": "seirbheis air a thabhann"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Choisinn {{amount}} creideas"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Cheannaich {{amount}} creideas"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Creideas bònas {{amount}}"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Chaidh {{amount}} creideas a chosg"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Chuir sinn {{amount}} creideas gu {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Fhuair sinn {{amount}} creideas o {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Seirbheis Ùr",
+            "TitlePlaceholder": "Tiotal na seirbheis",
+            "PricePlaceholder": "Suidhich prìs",
+            "LinkPlaceholder": "suidhich ceangal fiosrachaidh a bharrachd",
+            "DescriptionPlaceholder": "Tuairisgeul seirbheis",
+            "SaveService": "Sàbhail Seirbheis",
+            "SelectRequiredParticipants": "Com-pàirtichean a dhìth"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Stiùirich templates seirbheis",
+        "ManageServices": "Stiùirich Seirbheisean",
+        "Free": "Saor",
+        "OptionalContribution": "Tabhartas roghainneil",
+        "RequiredPayment": "Pàigheadh a dhìth",
+        "AreYouSureDelete": "A bheil thu cinnteach gu bheil thu airson an t-seirbheis seo a sguabadh às?",
+        "AmountServicesRelated": "Tha {{amount}} ri fhaighinn co-cheangailte ris an t-seirbheis seo. Bidh iad cuideachd air an toirt air falbh."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Fiosrachadh mu {{title}} NFT",
+        "Description": "Fiosrachadh mun chompanaidh NFT",
+        "FixedBid": "Ceannaich an-dràsta",
+        "CurrentBid": "Tagradh làithreach",
+        "StartingIn": "A’ tòiseachadh a-staigh",
+        "EndingIn": "A’ crìochnachadh ann an",
+        "CreateNFT": "Cruthaich NFT",
+        "TitlePlaceholder": "Thoir tiotal don NFT agad",
+        "DescriptionPlaceholder": "Thoir cunntas air an NFT agad",
+        "CreateYourNFT": "Cruthaich do NFT",
+        "Royalties": "Dìoghaltas",
+        "RoyaltyPlaceholder": "Roghainneil. An t-suim a chaidh a phàigheadh don neach-cruthachaidh mus deach a ghluasad.",
+        "ExpirationDate": "Ceann-latha crìche",
+        "StartingDate": "Ceann-latha tòiseachaidh",
+        "BidsBelowThisAmount": "Cha cheadaichear tagraidhean nas ìsle na an t-suim seo",
+        "MinimumBid": "Tairgse as ìsle",
+        "Price": "Prìs",
+        "Owner": "Sealbhadair",
+        "SelectCategory": "Tagh roinn-seòrsa",
+        "Day": "Latha",
+        "Days": "Làithean",
+        "Hour": "Uair",
+        "Hours": "Uairean",
+        "Minute": "Mionaid",
+        "Minutes": "Mionaidean",
+        "Second": "An dàrna",
+        "Seconds": "Diogan",
+        "SalesCreator": "thèid an reic chun neach-cruthachaidh",
+        "Details": "Mion-fhiosrachadh",
+        "Bids": "Tagraidhean",
+        "History": "Eachdraidh",
+        "LoremIpsum": "Is e dìreach teacsa meallta den ghnìomhachas clò-bhualaidh is clò-bhualaidh a th’ ann an Lorem Ipsum.",
+        "PutOnSale": "Air a reic",
+        "PutOffSale": "Tarraing a-mach à reic",
+        "Transfer": "Gluasad",
+        "Update": "Ùraich",
+        "UpdateToken": "Ùraich an t-suaicheantas",
+        "CreateToken": "Cruthaich Token",
+        "PlaceBid": "Àite Bid",
+        "SoldOut": "Reic",
+        "NftName": "Ainm NFT",
+        "DescribeYourNFT": "Feuch an toir thu cunntas air an NFT agad",
+        "NftPicture": "Dealbh a’ riochdachadh NFT",
+        "NftMovie": "Film a &#39; riochdachadh NFT",
+        "UploadMovie": "Film a luchdadh a-nuas",
+        "MovieSource": "Stòr film",
+        "UploadFile": "Luchdaich suas faidhle",
+        "PutOnMarketplace": "Cuir air a’ mhargaidh",
+        "InstantPurchase": "Cuir a-steach prìs gus leigeil le luchd-cleachdaidh an NFT agad a cheannach sa bhad",
+        "FixedPrice": "Prìs stèidhichte",
+        "TimedAuction": "Rop le ùine",
+        "OpenForBids": "Fosgailte airson tagraidhean",
+        "PriceOnePiece": "Cuir a-steach prìs airson aon phìos",
+        "EnterMinimumBid": "Cuir a-steach an tairgse as ìsle",
+        "SelectChain": "Tagh slabhraidh",
+        "WrongChain": "Chaidh an NFT seo a chruthachadh fo &quot;{{chain}}&quot;. Feuch an cleachd thu an t-sreath seo.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "A &#39;toirt a-steach NFTan",
+            "fileNotFound": "Duilich, cha deach am faidhle CSV a lorg.",
+            "fileEmpty": "Duilich, tha am faidhle CSV falamh.",
+            "userIdNotFound": "cleachdaiche ann ach id falamh",
+            "errorLine": "loidhne {{1}}",
+            "fieldNotFound": "Raon a tha a dhìth &quot;{{1}}&quot; cha deach a lorg",
+            "taskStreamInvalid": "sruth-obrach neo-dhligheach",
+            "instructionsEmpty": "stiùireadh sruth-obrach falamh",
+            "complete": "Crìochnaich",
+            "activateUsers": "cuir teachdaireachd gnìomhachaidh gu luchd-cleachdaidh?",
+            "importProgress": "Adhartas",
+            "importOptions": "Roghainnean",
+            "sampleCSV": "Luchdaich a-nuas CSV airson samp",
+            "fileLabel": "Luchdaich suas spreadsheet:",
+            "errorsTitle": "Thachair mearachdan"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Criathraich a rèir NFT Collections",
+                "ShowNFTCollection": "Seall cruinneachadh NFT ann an ...",
+                "AllCollections": "A h-uile cruinneachadh"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "A h-uile Ùghdar",
+                "AllUsers": "A h-uile duine",
+                "FilterByAuthors": "Criathraich a-rèir Ùghdaran"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Air ais dhan Chruinneachadh"
     }
 }

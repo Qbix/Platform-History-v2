@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "ప్రచారం చేయడానికి లింక్",
+                "startDate": "ప్రారంబపు తేది",
+                "startTime": "ప్రారంభ సమయం",
+                "endDate": "ఆఖరి తేది",
+                "endTime": "ముగింపు సమయం",
+                "budget": "బడ్జెట్"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "ఆసక్తి ఆధారంగా ఫిల్టర్ చేయండి",
+                "FilterInterests": "ఆసక్తిని టైప్ చేయడం ప్రారంభించండి..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "ఆసక్తి",
+            "Location": "స్థానం"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "వెళ్ళండి",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "బ్రౌజ్ చేయండి",
+            "WriteToStartConversation": "సంభాషణను ప్రారంభించడానికి మీ ఆలోచనలను వ్రాయండి",
+            "StartConversation": "సంభాషణను ప్రారంభించండి",
+            "GotoConversation": "సంభాషణకు వెళ్లండి",
+            "reset": "రీసెట్ చేయండి",
+            "edit": "సవరించు",
+            "link": "లింక్",
+            "setUrl": "URLని సెట్ చేయండి",
+            "save": "సేవ్ చేయండి",
+            "setClip": "కట్ అవుట్ క్లిప్",
+            "invalidURL": "చెల్లని URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "కాషింగ్ కోసం ఫైల్ చాలా పెద్దది. గరిష్ట ఫైల్ పరిమాణం {{size}}",
+        "InvalidPDF": "ఫైల్ చెల్లుబాటు అయ్యే PDF కాదు",
+        "StartTypingTitleOrKeywords": "టైటిల్ లేదా కీలకపదాలను టైప్ చేయడం ప్రారంభించండి..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "వివిధ వినియోగదారులు వీక్షించగల మరియు సవరించగల HTML పత్రం",
+            "displayType": "వ్యాసం"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "ప్రెజెంటేషన్‌లోని స్లయిడ్, HTML, ఆడియో మొదలైన వాటిని కలిగి ఉంటుంది.",
+            "displayType": "స్లయిడ్"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "వివిధ స్లయిడ్‌లతో కూడిన ప్రదర్శన",
+            "displayType": "ప్రెజెంటేషన్"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "వెబ్‌సైట్‌లో అడ్వర్టైజింగ్ యూనిట్",
+            "displayType": "ప్రకటన యూనిట్"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "ఒక పేరుతో ప్రకటనల యూనిట్లను సమూహపరిచే మార్గం",
+            "displayType": "ప్రకటన ప్లేస్‌మెంట్"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "ప్రకటన కోసం కంటెంట్",
+            "displayType": "సృజనాత్మక ప్రకటన"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "ఒక ప్రకటనల ప్రచారం",
+            "displayType": "ప్రకటన ప్రచారం"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "మెటాడేటా స్క్రాప్ చేయబడిన వెబ్‌సైట్‌ను సూచిస్తుంది",
+            "displayType": "వెబ్ పేజీ"
         }
     }
 }

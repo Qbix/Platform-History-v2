@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Zaplatíte"
+        "button": "Zaplaťte klepnutím"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: poplatek zpracován pro {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Děkujeme za platbu ve výši {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} se přihlásilo k odběru {{plan.title}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: zpracována platba za {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Děkujeme za vaši platbu na adresu {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} se přihlásil k odběru {{plan.title}}",
         "YouSubscribedTo": "Byli jste přihlášeni k odběru {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informace o objednávce",
+        "AboutOrder": "Info o objednávce",
         "PaymentMethod": "Způsob platby",
         "ContactInfo": "Kontaktní informace",
         "Pay": "Platit"
     },
     "credits": {
-        "InviteAcceptedBy": "Pozvání přijato {{1}}",
-        "YouHaveCreditsToStart": "Máte {{1}} kredity ke spuštění",
-        "PaymentFor": "Platba za &quot;{{1}}&quot;",
-        "PaymentTo": "Platba do {{1}}",
-        "PaymentToUser": "Platba do {{userName}}",
-        "JoinedPaidStream": "za připojení &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "pro vytvoření komunity &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "za odchod &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Koupeno {{amount}} kreditů",
+        "InviteAcceptedBy": "Pozvánku přijal {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Do začátku máte {{amount}} kreditů",
+        "PaymentFor": "Platba za „{{1}}“",
+        "PaymentTo": "Platba na účet {{1}}",
+        "PaymentToUser": "Platba na účet {{toUserName}}",
+        "JoinedPaidStream": "pro rezervaci v „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
+        "CreatedCommunity": "za vytvoření komunity „{{communityId}}“",
+        "LeftPaidStream": "jako refundace za rezervaci v „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
+        "BoughtCredits": "Zakoupeno {{amount}} kreditů",
         "BuyAmountCredits": "Koupit {{amount}} kreditů",
-        "MissingCredits": "Chybějící úvěry",
-        "YouMissingCredits": "Chybí vám {{amount}} kreditů",
+        "MissingCredits": "Chybějící kredity",
+        "YouMissingCredits": "Abyste mohli pokračovat, potřebujete další {{amount}} kreditů.",
         "BuyCredits": "Koupit kredity",
         "Buy": "Koupit",
-        "Credits": "Úvěry",
+        "Credits": "Kredity",
         "ErrorInvalidAmount": "Částka je neplatná",
         "ErrorInvalidCurrency": "Bohužel zatím nepodporujeme měnu {{currency}}",
-        "WatchClip": "Získali jste kredit {{amount}} za sledování {{fromStreamTitle}}",
-        "PurchaseCredits": "Nákup kreditů",
+        "WatchClip": "Získali jste {{amount}} kreditů za sledování {{fromStreamTitle}}",
+        "PurchaseCredits": "Nákupní kredity",
         "forMessages": {
-            "BoughtCredits": "Kredity {{amount}}",
+            "BoughtCredits": "{{amount}} kreditů",
             "BonusCredits": "{{amount}} kreditů"
         },
-        "CreatePaidStream": "pro vytváření {{toStreamName}}",
-        "BonusCredits": "Bonusové kredity {{amount}}",
-        "BuyBonus": "Nákupem kreditů ve výši {{amount}} najednou získáte bonus ve výši {{bonus}} kreditů.",
+        "CreatePaidStream": "za vytvoření {{toStreamName}}",
+        "BonusCredits": "Bonusové {{amount}} kredity",
+        "BuyBonus": "Nákup {{amount}} kreditů najednou povede k bonusu {{bonus}} kreditů.",
         "Streams_user_firstname": "{{invitedUserName}} zadal křestní jméno",
         "Streams_user_lastname": "{{invitedUserName}} zadal příjmení",
         "Streams_user_icon": "{{invitedUserName}} zadaná ikona",
@@ -56,28 +56,28 @@
         "To": "na",
         "From": "z",
         "HistoryEmpty": "Zatím nemáte žádná data",
-        "SeeHistory": "Zobrazit historii plateb pro {{1}}",
-        "PaymentFor": "Utracené {{amount}} kredity",
-        "PaymentTo": "Odesláno {{amount}} kreditů",
-        "PaymentToUser": "Odesláno {{amount}} kreditů",
+        "SeeHistory": "Zobrazit historii plateb za {{1}}",
+        "PaymentFor": "Posláno {{amount}} kreditů",
+        "PaymentTo": "Posláno {{amount}} kreditů",
+        "PaymentToUser": "Posláno {{amount}} kreditů",
         "JoinedPaidStream": {
-            "+": "Získané kredity {{amount}}",
-            "-": "Utracené {{amount}} kredity"
+            "+": "Získali jste {{amount}} kreditů",
+            "-": "Utraceno {{amount}} kreditů"
         },
         "LeftPaidStream": {
-            "+": "Obdrženo {{amount}} kreditů",
-            "-": "Odesláno {{amount}} kreditů"
+            "+": "Přijato {{amount}} kreditů",
+            "-": "Posláno {{amount}} kreditů"
         },
-        "CreatedCommunity": "Utracené {{amount}} kredity",
-        "BoughtCredits": "Koupeno {{amount}} kreditů",
-        "InviteAcceptedBy": "Získané kredity {{amount}}",
-        "YouHaveCreditsToStart": "Získané kredity {{amount}}",
-        "CreatePaidStream": "Utratené kredity {{amount}}",
+        "CreatedCommunity": "Utraceno {{amount}} kreditů",
+        "BoughtCredits": "Zakoupeno {{amount}} kreditů",
+        "InviteAcceptedBy": "Získali jste {{amount}} kreditů",
+        "YouHaveCreditsToStart": "Získali jste {{amount}} kreditů",
+        "CreatePaidStream": "Utraceno {{amount}} kreditů",
         "WatchClip": {
-            "+": "Získejte {{amount}} kredity",
-            "-": "Utratené kredity {{amount}}"
+            "+": "Získali jste {{amount}} kreditů",
+            "-": "Utraceno {{amount}} kreditů"
         },
-        "BonusCredits": "Získali jste bonusové kredity ve výši {{amount}}",
+        "BonusCredits": "Máte bonusové {{amount}} kredity",
         "Streams_user_firstname": "Získali jste {{amount}} kreditů",
         "Streams_user_lastname": "Získali jste {{amount}} kreditů",
         "Streams_user_icon": "Získali jste {{amount}} kreditů",
@@ -85,22 +85,22 @@
         "Streams_greeting": "Získali jste {{amount}} kreditů"
     },
     "subscriptions": {
-        "infoTitle": "Nastavte informace o platbě",
+        "infoTitle": "Nastavte platební údaje",
         "confirm": {
-            "title": "Zahajte předplatné",
+            "title": "Spusťte předplatné",
             "message": "Chcete se přihlásit k odběru {{title}}?",
             "ok": "OK",
             "cancel": "zrušení"
         },
         "CreditOrDebitCard": "Kreditní nebo debetní karta",
-        "SubscribePayment": "Přihlaste se k odběru platby",
+        "SubscribePayment": "Předplatitelská platba",
         "ImmediatePayment": "Okamžitá platba"
     },
     "payments": {
-        "infoTitle": "Nastavte informace o platbě",
+        "infoTitle": "Nastavte platební údaje",
         "confirm": {
             "title": "Zaplatit",
-            "message": "Souhlasíte s tím, že zaplatíte {{symbol}} {{amount}}?",
+            "message": "Souhlasíte s platbou {{symbol}}{{amount}}?",
             "ok": "OK",
             "cancel": "zrušení"
         },
@@ -108,11 +108,11 @@
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Úvěry",
-            "description": "sleduje úvěry a platby"
+            "displayType": "Kredity",
+            "description": "sleduje kredity a platby"
         },
         "Assets\/plan": {
-            "displayType": "Plán předplatného",
+            "displayType": "Předplatitelský plán",
             "description": "plán předplatného"
         },
         "Assets\/subscription": {
@@ -124,44 +124,44 @@
             "description": "prodávaný produkt"
         },
         "Assets\/service": {
-            "displayType": "Služba",
+            "displayType": "Servis",
             "description": "nabízená služba"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Získané kredity {{amount}}"
+            "content": "Získali jste {{amount}} kreditů"
         },
         "Assets\/credits\/spent": {
-            "content": "Utracené {{amount}} kredity"
+            "content": "Utraceno {{amount}} kreditů"
         },
         "Assets\/credits\/sent": {
-            "content": "Odesláno {{amount}} kreditů"
+            "content": "Posláno {{amount}} kreditů uživateli {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Obdrženo {{amount}} kreditů"
+            "content": "Přijato {{amount}} kreditů od {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Koupeno {{amount}} kreditů"
+            "content": "Zakoupeno {{amount}} kreditů"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonusové kredity {{amount}}"
+            "content": "Bonusové {{amount}} kredity"
         }
     },
     "charge": {
-        "Subject": "Dostanete platbu ve výši {{displayAmount}} od {{call 'publisher.displayName'}} do &quot;{{description}}&quot;",
-        "HasBeenCharged": "Ahoj, jen proto, abychom vás informovali, {{1}} byl {{3}} účtován poplatek {{3}} {{4}}"
+        "Subject": "Obdržíte platbu ve výši {{displayAmount}} od {{call 'publisher.displayName'}} prostřednictvím „{{description}}“",
+        "HasBeenCharged": "Dobrý den, tímto vám chceme oznámit, že {{4}} byla účtována částka {{1}} {{2}} za {{3}}"
     },
     "charged": {
         "Subject": "Děkujeme za vaši platbu za „{{description}}“",
-        "HavePaid": "Ahoj {{1}}, je to jen rychlé potvrzení, že jste úspěšně zaplatili {{2}} do {{3}} za {{4}}"
+        "HavePaid": "Dobrý den, {{1}}, toto je jen rychlé potvrzení, že jste úspěšně zaplatili {{2}} uživateli {{3}} za {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Nová služba",
             "TitlePlaceholder": "Název služby",
             "PricePlaceholder": "Nastavit cenu",
-            "LinkPlaceholder": "nastavit další informační odkaz",
+            "LinkPlaceholder": "nastavit odkaz na další informace",
             "DescriptionPlaceholder": "Popis služby",
             "SaveService": "Uložit službu",
             "SelectRequiredParticipants": "Povinní účastníci"
@@ -172,7 +172,7 @@
         "OptionalContribution": "Nepovinný příspěvek",
         "RequiredPayment": "Požadovaná platba",
         "AreYouSureDelete": "Opravdu chcete tuto službu smazat?",
-        "AmountServicesRelated": "S touto službou souvisí {{amount}} možnosti. Budou také odstraněny.",
+        "AmountServicesRelated": "S touto službou souvisí {{amount}} dostupných možností. Budou také odstraněny.",
         "Free": "Volný, uvolnit"
     },
     "NFT": {
