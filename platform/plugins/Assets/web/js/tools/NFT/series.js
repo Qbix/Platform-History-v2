@@ -23,11 +23,12 @@
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onCreated] Event occur when series created.
      */
-    Q.Tool.define("Assets/NFT/series", function(options) {
+    Q.Tool.define("Assets/NFT/series/preview", ["Streams/preview"],function(options, preview) {
         var tool = this;
         var state = tool.state;
         var $toolElement = $(this.element);
-        tool.preview = Q.Tool.from(this.element, "Streams/preview");
+        tool.preview = preview;
+        var previewState = tool.preview.state;
         var loggedInUserId = Q.Users.loggedInUserId();
 
         // is admin
@@ -41,20 +42,23 @@
             return console.warn("xid required!");
         }
 
-        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
-            $toolElement.addClass("Q_working");
+        // <set Streams/preview imagepicker settings>
+        previewState.imagepicker.showSize = state.imagepicker.showSize;
+        previewState.imagepicker.fullSize = state.imagepicker.fullSize;
+        previewState.imagepicker.save = state.imagepicker.save;
+        // </set Streams/preview imagepicker settings>
 
-            if (state.seriesId) {
-                $toolElement.addClass("Q_working");
+        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
+            if (previewState.streamName) {
                 state.chain = NFT.chains[state.chainId];
-                $toolElement.attr("data-seriesId", state.seriesId);
+                $toolElement.attr("data-publisherId", previewState.publisherId);
+                $toolElement.attr("data-streamName", previewState.streamName);
                 $toolElement.attr("data-chainId", state.chainId);
 
-                tool.init();
+                previewState.onRefresh.add(tool.refresh.bind(tool), tool);
             } else {
                 if ((loggedInUserId && state.userId === loggedInUserId) || tool.isAdmin) {
-                    $toolElement.removeClass("Q_working");
-                    tool.composer();
+                    previewState.onComposer.add(tool.composer.bind(tool), tool);
                 } else {
                     Q.Tool.remove(tool.element, true, true);
                 }
@@ -77,9 +81,9 @@
         userId: null,
         chainId: null,
         contractAddress: null,
-        useWeb3: true,
+        onMarketPlace: true,
         imagepicker: {
-            showSize: "200",
+            showSize: "200.png",
             save: "Streams/image"
         },
         onInvoke: new Q.Event(),
@@ -89,375 +93,78 @@
 
     {
         /**
-         * Get all data from blockchain and refresh
-         * @method init
-         */
-        init: function () {
-            var tool = this;
-            var state = this.state;
-            var $toolElement = $(this.element);
-            var pipeList = ["author", "owner", "commissionInfo", "saleInfo", "authorUserId"];
-
-            $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
-
-            var pipe = new Q.pipe(pipeList, function (params, subjects) {
-                // collect errors
-                var errors = [];
-                Q.each(pipeList, function (index, value) {
-                    var err = Q.getObject([value, 0], params);
-                    err && errors.push(err);
-                });
-                if (!Q.isEmpty(errors)) {
-                    return console.warn(errors);
-                }
-
-                var author = params.author[1];
-                var owner = params.owner[1];
-                var commissionInfo = params.commissionInfo[1];
-                var saleInfo = params.saleInfo[1];
-                var authorUserId = params.authorUserId[1];
-                authorUserId = authorUserId || '';
-
-                tool.refresh(author, owner, commissionInfo, saleInfo, authorUserId);
-                $toolElement.removeClass("Q_working");
-
-                Users.Web3.onAccountsChanged.set(function () {
-                    tool.refresh(author, owner, commissionInfo, saleInfo, authorUserId);
-                }, tool);
-            });
-
-            if (state.useWeb3) {
-                Q.handle(Assets.batchFunction(), null, ["NFTSeries", "getInfo", state.seriesId, state.chainId, state.contractAddress, state.updateCache, function (err, data) {
-                    state.updateCache = false;
-
-                    var msg = Q.firstErrorMessage(err, data);
-                    if (msg) {
-                        return console.error(msg);
-                    }
-
-                    var currencyToken = this.saleInfo[0];
-                    var price = this.saleInfo[1];
-                    var priceDecimal = price ? parseInt(price)/1e18 : null;
-                    var isSale = this.saleInfo[2];
-
-                    pipe.fill("authorUserId")(null, this.authorUserId || "");
-                    pipe.fill("author")(null, this.author || "");
-                    pipe.fill("owner")(null, this.owner || "");
-                    pipe.fill("commissionInfo")(null, this.commissionInfo || "");
-                    pipe.fill("saleInfo")(null, {
-                        isSale: isSale,
-                        price: price,
-                        priceDecimal: priceDecimal,
-                        currencyToken: currencyToken
-                    });
-
-                }]);
-
-                // get smart contract just to set contract events to update preview
-                NFT.getContract(state.chain);
-            } else {
-                if (state.chainId !== Q.getObject("ethereum.chainId", window)) {
-                    return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
-                }
-
-                Q.handle(NFT.getAuthor, tool, [state.seriesId, state.chain, function (err, author) {
-                    if (err) {
-                        return console.warn(err);
-                    }
-
-                    pipe.fill("author")(arguments[0], arguments[1], arguments[2]);
-                    Q.req("Assets/NFT", "getUserIdByWallet", function (err, response) {
-                        if (err) {
-                            return console.warn(err);
-                        }
-
-                        pipe.fill("authorUserId")(null, response.slots.getUserIdByWallet);
-                    }, {
-                        fields: { wallet: author }
-                    });
-                }]);
-                Q.handle(NFT.getOwner, tool, [state.seriesId, state.chain, pipe.fill("owner")]);
-                Q.handle(NFT.commissionInfo, tool, [state.seriesId, state.chain, pipe.fill("commissionInfo")]);
-                Q.handle(NFT.saleInfo, tool, [state.seriesId, state.chain, pipe.fill("saleInfo")]);
-            }
-        },
-        /**
          * Refreshes the appearance of the tool completely
          * @method refresh
-         * @param {String} author
-         * @param {String} owner
-         * @param {object} comissionInfo
-         * @param {object} saleInfo
-         * @param {string} authorUserId - id of NFT author user
+         * @param {Streams_Stream} stream
          */
-        refresh: function (author, owner, comissionInfo, saleInfo, authorUserId) {
+        refresh: function (stream) {
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
+            var authorUserId = stream.getAttribute("authorId") || stream.fields.publisherId;
+            var untilTime = stream.getAttribute("untilTime");
 
-            var selectedAddress = (Q.getObject("ethereum.selectedAddress", window) || "").toLowerCase();
-            owner = owner || "";
-
-            if (owner) {
-                $toolElement.attr("data-owned", owner.toLowerCase() === selectedAddress.toLowerCase());
-            } else {
-                $toolElement.attr("data-owned", false);
-            }
-
-            if (saleInfo) {
-                $toolElement.attr("data-onSale", Q.getObject("isSale", saleInfo));
-            } else {
-                $toolElement.attr("data-onSale", false);
-            }
-
-            var currencyToken = saleInfo.currencyToken;
-            var currency;
-            if (typeof state.tokenId !== 'undefined' && !isNaN(parseInt(state.tokenId))) {
-                // get currency symbol from currency token and chainId
-                currency = NFT.currencies.filter(function(item) { return item[state.chainId] === currencyToken; });
-                if (Q.isArrayLike(currency)) {
-                    currency = currency[0];
-                }
-            } else {
-                $toolElement.addClass("Assets_NFT_comingsoon");
-            }
-
-            var price = Q.getObject("priceDecimal", saleInfo);
-
-            NFT.onTransfer.set(function (oldAddress, newAddress, token) {
-                var processedTokenId = parseInt(token._hex, 16);
-                if (parseInt(state.tokenId) !== processedTokenId) {
-                    return;
-                }
-
-                state.updateCache = true;
-                tool.init();
-            }, tool);
-
-            var _saleChanged = function (token) {
-                var processedTokenId = parseInt(token._hex, 16);
-                if (parseInt(state.tokenId) !== processedTokenId) {
-                    return;
-                }
-
-                state.updateCache = true;
-                tool.init();
-            };
-            NFT.onTokenAddedToSale.set(function (tokenId, amount, consumeToken) {
-                _saleChanged(tokenId);
-            }, tool);
-            NFT.onTokenRemovedFromSale.set(function (tokenId) {
-                _saleChanged(tokenId);
-            }, tool);
-
-            Q.Template.render('Assets/NFT/view', {
-                title: data.name,
-                price: price,
-                currency: currency,
-                owner: NFT.minimizeAddress(owner, 20, 3)
+            Q.Template.render('Assets/NFT/series/view', {
+                title: stream.fields.title,
+                description: stream.fields.content,
+                price: stream.getAttribute("price"),
+                currency: stream.getAttribute("currency"),
+                untilTime: untilTime
             }, (err, html) => {
                 tool.element.innerHTML = html;
 
                 $toolElement.activate();
 
-                if (authorUserId) {
-                    $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
-                        userId: authorUserId,
-                        icon: 50,
-                        contents: true,
-                        editable: false
-                    }).activate(function () {
-                        $(this.element).on(Q.Pointer.fastclick, function (e) {
-                            Q.handle(state.onAvatar, this, [e]);
-                        });
+                $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
+                    userId: authorUserId,
+                    icon: 40,
+                    contents: true,
+                    editable: false
+                }).activate(function () {
+                    $(this.element).on(Q.Pointer.fastclick, function (e) {
+                        Q.handle(state.onAvatar, this, [e]);
                     });
-                } else {
-                    $(".Assets_NFT_avatar", tool.element).html(NFT.minimizeAddress(author, 20, 3));
-                }
+                });
 
-                // apply Streams/preview icon behavior
-                var movie = data.animation_url;
-                var poster = state.poster;
-                var nftMovie = state.movie;
-                var nftSrc = state.src;
-                var $videoContainer = $(".video-container", tool.element);
-
-                if (nftMovie) {
-                    $videoContainer.html('<video preload="auto" poster="' + poster + '" controls="" src="' + nftMovie + '"></video>');
-                    $videoContainer.on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                } else if (nftSrc) {
-                    $videoContainer.empty().css("background-image", 'url(' + nftSrc + ')');
-                } else if (movie && !data.image) {
-                    var qVideo = $("<div>").tool("Q/video", {
-                        url: movie,
-                        loop: true
-                    }).activate();
-                    qVideo.on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                    $videoContainer.html(qVideo);
-                } else {
-                    $videoContainer.empty().css("background-image", 'url(' + data.image + ')');
-                }
+                var $icon = $("img.NFT_series_icon", tool.element);
+                tool.preview.icon($icon[0]);
 
                 // handle with days, hours, minutes visibility
-                var $startDate = $(".assets_NFT_startDate", tool.element);
-                var $endDate = $(".assets_NFT_endDate", tool.element);
-                if ($startDate.length || $endDate.length) {
-                    // apply Q/countdown tool to startTime, endTime
-                    $("[data-timestamp]", tool.element).each(function () {
-                        $(this).tool("Q/countdown", {
-                            onRefresh: function () {
-                                var $currentElement = $(this.element);
-                                var currentTimestamp = Date.now()/1000;
-                                if (startTime > currentTimestamp) {
-                                    $startDate.show();
-                                    $endDate.hide();
-                                } else {
-                                    $startDate.hide();
-                                    $endDate.show();
-                                    $toolElement.removeClass("Assets_NFT_notStarted");
-
-                                    if (endTime && endTime < currentTimestamp) {
-                                        $toolElement.addClass("Assets_NFT_ended");
+                $("[data-timestamp]", tool.element).each(function () {
+                    var $this = $(this);
+                    $this.tool("Q/countdown", {
+                        onRefresh: function () {
+                            var $currentElement = $(this.element);
+                            $(".Q_days:visible, .Q_hours:visible, .Q_minutes:visible, .Q_seconds:visible", $currentElement).each(function () {
+                                var $this = $(this);
+                                if (($this.hasClass("Q_days") || $this.hasClass("Q_hours") || $this.hasClass("Q_minutes")) && $this.text() === "0") {
+                                    var $parent = $this.parent();
+                                    var $prevSpan = $parent.prev("span:visible");
+                                    if (!$prevSpan.length) {
+                                        $parent.hide();
                                     }
                                 }
 
-                                $(".Q_days:visible, .Q_hours:visible, .Q_minutes:visible, .Q_seconds:visible", $currentElement).each(function () {
-                                    var $this = $(this);
-                                    if (($this.hasClass("Q_days") || $this.hasClass("Q_hours") || $this.hasClass("Q_minutes")) && $this.text() === "0") {
-                                        var $parent = $this.parent();
-                                        var $prevSpan = $parent.prev("span:visible");
-                                        if (!$prevSpan.length) {
-                                            $parent.hide();
+                                Q.each(["day", "hour", "minute"], function(i, val) {
+                                    if (val === 'day') {
+                                        if ($this.hasClass("Q_" +val + "s") && $this.text() === "1") {
+                                            $this.next("." + val + "sText").text(tool.text.NFT[val.toCapitalized()]);
+                                        } else {
+                                            $this.next("." + val + "sText").text(tool.text.NFT[(val + "s").toCapitalized()]);
                                         }
+                                    } else {
+                                        $this.next("." + val + "sText").text(':');
                                     }
 
-                                    Q.each(["day", "hour", "minute"], function(i, val) {
-                                        if (val === 'day') {
-                                            if ($this.hasClass("Q_" +val + "s") && $this.text() === "1") {
-                                                $this.next("." + val + "sText").text(tool.text.NFT[val.toCapitalized()]);
-                                            } else {
-                                                $this.next("." + val + "sText").text(tool.text.NFT[(val + "s").toCapitalized()]);
-                                            }
-                                        } else {
-                                            $this.next("." + val + "sText").text(':');
-                                        }
-
-                                    });
                                 });
-                            }
-                        }).activate();
-                    });
-                }
+                            });
+                        }
+                    }).activate();
+                });
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                    Q.handle(state.onInvoke, tool, [state.tokenId, state.chainId, author, owner]);
-                });
-
-                // buy NFT
-                $("button[name=buy]", tool.element).on(Q.Pointer.fastclick, function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    NFT.checkProvider(state.chain, function (err) {
-                        if (err) {
-                            return;
-                        }
-
-                        NFT.buy(state.tokenId, state.chain, currency, function (err, transaction) {
-                            state.updateCache = true;
-                            tool.init();
-                        });
-                    });
-                });
-
-                // button only for owner, provide actions Transfer and put on/off sale
-                $("button[name=update]", tool.element).on(Q.Pointer.fastclick, function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    var content = "";
-                    if (Q.getObject("isSale", saleInfo)) {
-                        content += '<button name="offSale" class="Q_button">' + tool.text.NFT.PutOffSale + '</button>';
-                    } else {
-                        content += '<button name="onSale" class="Q_button">' + tool.text.NFT.PutOnSale + '</button>';
-                    }
-
-                    content += '<button name="transfer" class="Q_button">' + tool.text.NFT.Transfer + '</button>';
-
-                    Q.Dialogs.push({
-                        title: tool.text.NFT.Actions,
-                        content: content,
-                        className: 'Assets_NFT_series_update',
-                        onActivate: function (dialog) {
-                            // Put NFT on sale
-                            $("button[name=onSale]", dialog).on("click", function () {
-                                NFT.checkProvider(state.chain, function (err, contract) {
-                                    if (err) {
-                                        return $toolElement.removeClass("Q_working");
-                                    }
-
-                                    contract["listForSale(uint256,uint256,address)"](state.tokenId.toString(), saleInfo.price.toString(), saleInfo.currencyToken).catch(function (e) {
-                                        console.error(e);
-                                        $toolElement.removeClass("Q_working");
-                                    });
-                                });
-
-                                Q.Dialogs.pop();
-                                $toolElement.addClass("Q_working");
-                            });
-
-                            // Put NFT off sale
-                            $("button[name=offSale]", dialog).on("click", function () {
-                                NFT.checkProvider(state.chain, function (err, contract) {
-                                    if (err) {
-                                        return $toolElement.removeClass("Q_working");
-                                    }
-
-                                    contract.removeFromSale(state.tokenId).catch(function (e) {
-                                        console.error(e);
-                                        $toolElement.removeClass("Q_working");
-                                    });
-                                });
-
-                                Q.Dialogs.pop();
-                                $toolElement.addClass("Q_working");
-                            });
-
-                            // Transfer NFT from one wallet to another
-                            $("button[name=transfer]", dialog).on("click", function () {
-                                Q.prompt(null, function (address) {
-                                    if (!address) {
-                                        return;
-                                    }
-
-                                    NFT.checkProvider(state.chain, function (err, contract) {
-                                        if (err) {
-                                            return $toolElement.removeClass("Q_working");
-                                        }
-
-                                        contract.transferFrom(owner, address, state.tokenId).catch(function (e) {
-                                            console.error(e);
-                                            $toolElement.removeClass("Q_working");
-                                        });
-                                    });
-
-                                    Q.Dialogs.pop();
-                                    $toolElement.addClass("Q_working");
-                                },{
-                                    title: "Wallet address"
-                                });
-                            });
-                        }
-                    });
+                    Q.handle(state.onInvoke, tool, [stream]);
                 });
             });
         },
@@ -469,16 +176,15 @@
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
-            var previewState = {};
-            var chains = {};
+            var previewState = tool.preview.state;
             var userId = state.userId;
+            var relatedTool = Q.Tool.from($toolElement.closest(".Streams_related_tool")[0], "Streams/related");
 
-            $toolElement.addClass("Assets_NFT_series_composer");
+            $toolElement.addClass("Assets_NFT_series_new");
 
-            // get supported chains
-            Q.each(NFT.chains, function (i, chain) {
-                chains[chain.name] = chain;
-            });
+            var currencies = NFT.currencies.map(function (item) {
+                return item["0x4"] ? item.symbol : false;
+            }).filter(function (item) { return item});
 
             var _openDialog = function () {
                 Q.Dialogs.push({
@@ -487,8 +193,7 @@
                     template: {
                         name: "Assets/NFT/series/Create",
                         fields: {
-                            chains: chains,
-                            currencies: NFT.currencies.map(a => a.symbol),
+                            currencies: currencies,
                             onMarketPlace: state.onMarketPlace,
                             baseUrl: Q.baseUrl()
                         }
@@ -505,37 +210,16 @@
                             $icon.trigger("click");
                         });
 
-                        // composer tabs (Fixed price, Timed action ...)
-                        $(".Assets_nft_clickable", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".Assets_nft_clickable").removeClass("active");
-                            $(this).closest(".Assets_nft_clickable").addClass("active");
-                        });
-
                         // switch onMarketPlace
                         var $onMarketPlace = $(".Assets_nft_check", dialog);
                         $onMarketPlace.click(function() {
-                            $(".Assets_nft_form_details, .Assets_nft_royalties, .Assets_nft_selectNetwork", dialog).attr("data-active", $onMarketPlace.prop('checked'));
-                        });
-
-                        //$(".time_details", dialog).hide();
-
-                        $("[data-type=fixed]", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".fixed_details", dialog).show();
-                            $(".time_details", dialog).hide();
-                        });
-
-                        $("[data-type=time]", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".fixed_details", dialog).hide();
-                            $(".time_details", dialog).show();
-                        });
-
-                        $("[data-type=bid]", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".fTransferixed_details", dialog).hide();
-                            $(".time_details", dialog).hide();
+                            var checked = $onMarketPlace.prop('checked');
+                            var $assetsNFTformDetails = $(".Assets_nft_form_details", dialog);
+                            if (checked) {
+                                $assetsNFTformDetails.removeClass("Q_disabled");
+                            } else {
+                                $assetsNFTformDetails.addClass("Q_disabled");
+                            }
                         });
 
                         // get a stream by data got from "newItem" request
@@ -558,46 +242,14 @@
 
                             $(dialog).addClass("Q_disabled");
 
-                            // set WEB3_CONNECT_MODAL_ID element z-index
-                            var modalLimit = 5000;
-                            var modalPeriod = 500;
-                            var modalCounter = 0;
-                            tool.modalExist = setInterval(function() {
-                                modalCounter += modalPeriod;
-                                if (modalCounter >= modalLimit) {
-                                    clearInterval(tool.modalExist);
-                                }
-
-                                var $modal = $("#WEB3_CONNECT_MODAL_ID");
-                                if (!$modal.length) {
-                                    return;
-                                }
-
-                                clearInterval(tool.modalExist);
-
-                                var modalZIndex = $(".Q_overlay_open:visible").css("z-index");
-                                if (!modalZIndex) {
-                                    return;
-                                }
-                                modalZIndex = parseInt(modalZIndex) + 1;
-                                $(".web3modal-modal-lightbox", $modal).css("z-index", modalZIndex);
-                            }, modalPeriod);
-
-                            var startTime = $("input[name=startTime]", dialog).val();
-                            if (startTime) {
-                                startTime = Date.parse(startTime)/1000;
+                            var untilTime = $("input[name=untilTime]", dialog).val();
+                            if (untilTime) {
+                                untilTime = Date.parse(untilTime)/1000;
                             }
 
-                            var endTime = $("input[name=endTime]", dialog).val();
-                            if (endTime) {
-                                endTime = Date.parse(endTime)/1000;
-                            }
-
-                            var royalty = $("input[name=royalty]", dialog).val();
-                            var price = parseFloat($("input[name=fixedPrice]:visible", dialog).val() || $("input[name=minBid]:visible", dialog).val()) || 0;
+                            var price = parseFloat($("input[name=price]:visible", dialog).val()) || 0;
                             var onMarketPlace = $onMarketPlace.prop("checked");
-                            var chainId = $("select[name=chain]", dialog).val();
-                            var chain = NFT.chains[chainId];
+                            var chain = NFT.chains[state.chainId];
                             var currencySymbol = $("select[name=currency]", dialog).val();
                             var currency = {};
                             Q.each(NFT.currencies, function (i, c) {
@@ -606,78 +258,41 @@
                                 }
 
                                 currency = c;
-                                currency.token = c[chainId];
+                                currency.token = c[state.chainId];
                             });
 
-                            // method to create NFT stream after tokenId created
-                            var _reqCreateSeries = function (params) {
-                                var seriesId = Q.getObject("seriesId", params);
-                                var chainId = Q.getObject("chainId", params);
-                                var attributes = Q.extend({
-                                    onMarketPlace: onMarketPlace,
-                                    currency: $("select[name=currency] option:selected", dialog).text(),
-                                    price: $("input[name=fixedPrice]", dialog).val(),
-                                    royalty: royalty
-                                }, params);
-                                if (seriesId) {
-                                    attributes.seriesId = seriesId;
-                                }
-                                if (chainId) {
-                                    attributes.chainId = chainId;
-                                }
-
-                                // after token created, create NFT stream (actually update composer stream and change relation from "new" to "NFT")
-                                // and set tokenId, chainId, currency, royalty in attributes
-                                Q.req("Assets/NFT",function (err) {
-                                    Q.Dialogs.pop();
-
-                                    Q.Tool.remove(tool.element, true, false);
-                                    tool.element.className = "";
-                                    tool.element.innerHTML = "";
-
-                                    $toolElement.tool("Assets/NFT/series", {
-                                        seriesId: seriesId,
-                                        chainId: chainId
-                                    }).activate();
-
-                                    Q.handle(state.onCreated, tool, [seriesId, chainId]);
-                                }, {
-                                    method: "post",
-                                    fields: {
-                                        userId: userId,
-                                        title: $("input[name=title]", dialog).val(),
-                                        content: $("input[name=description]", dialog).val(),
-                                        attributes: attributes
-                                    }
-                                });
+                            var seriesId = state.seriesId;
+                            var chainId = state.chainId;
+                            var attributes = {
+                                onMarketPlace: onMarketPlace,
+                                currency: currencySymbol,
+                                seriesId: seriesId,
+                                chainId: chainId,
+                                price: price,
+                                untilTime: untilTime
                             };
 
-                            if (onMarketPlace) {
-                                // create token for NFT
-                                tool.createSeries(price, currency, chain, royalty, onMarketPlace, function (err, tokenId, chainId) {
-                                    if (err) {
-                                        return $(dialog).removeClass("Q_disabled");
-                                    }
-
-                                    Q.Dialogs.pop();
-
-                                    // now, when tokenId create, create NFT stream
-                                    _reqCreateSeries({
-                                        "tokenId": tokenId,
-                                        "chainId": chainId
-                                    });
-                                });
-                            } else {
-                                _reqCreateSeries();
+                            Q.req("Assets/NFTSeries",function (err) {
                                 Q.Dialogs.pop();
-                            }
+                                tool.composer();
+                                relatedTool && relatedTool.loadMore();
+                                Q.handle(state.onCreated, tool, [previewState.publisherId, previewState.streamName]);
+                            }, {
+                                method: "post",
+                                fields: {
+                                    userId: userId,
+                                    title: $("input[name=title]", dialog).val(),
+                                    content: $("input[name=description]", dialog).val(),
+                                    attributes: attributes
+                                }
+                            });
                         });
                     }
                 });
             };
 
-            Q.Template.render('Assets/NFT/series/composer', {}, function(err, html) {
-                tool.element.innerHTML = html;
+            Q.Template.render('Assets/NFT/series/newItem', {}, function(err, html) {
+                    tool.element.innerHTML = html;
 
                 // get or create composer stream
                 Q.req("Assets/NFTSeries", "newItem", function (err, response) {
@@ -687,131 +302,25 @@
 
                     var newItem = response.slots.newItem;
 
-                    // activate Streams/preview tool if not activated yet.
-                    if (!tool.preview) {
-                        $toolElement.tool("Streams/preview", {
-                            publisherId: newItem.publisherId,
-                            streamName: newItem.streamName,
-                            closeable: false
-                        }).activate(function () {
-                            // this is weird, but 'this' is not a Streams/preview tool, but Assets/NFT/Series
-                            tool.preview = Q.Tool.from(this.element, "Streams/preview");
+                    previewState.publisherId = newItem.publisherId;
+                    previewState.streamName = newItem.streamName;
 
-                            previewState = tool.preview.state;
+                    // this need for Streams/related tool to avoid appear composer twice
+                    Q.setObject("options.streams_preview.publisherId", newItem.publisherId, tool.element);
+                    Q.setObject("options.streams_preview.streamName", newItem.streamName, tool.element);
 
-                            // <set Streams/preview imagepicker settings>
-                            previewState.imagepicker.showSize = state.imagepicker.showSize;
-                            previewState.imagepicker.fullSize = state.imagepicker.fullSize;
-                            previewState.imagepicker.save = state.imagepicker.save;
-                            previewState.imagepicker.useAnySize = true;
-                            previewState.imagepicker.sendOriginal = true;
-                            previewState.imagepicker.saveSizeName = {};
-                            Q.each(NFT.icon.sizes, function (i, size) {
-                                previewState.imagepicker.saveSizeName[size] = size;
-                            });
-                            // </set Streams/preview imagepicker settings>
-
-                            $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
-                        });
-                    } else {
-                        $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
-                    }
+                    $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", _openDialog);
                 }, {
                     fields: {
                         userId: userId
                     }
                 });
             });
-        },
-        /**
-         * Create token for NFT
-         * @method createSeries
-         * @param {number} price - Price of NFT in decimal.
-         * @param {object} currency - Object with details of currency (symbol, name, decimals, token, commissionToken).
-         * @param {object} chain - Object with details of chain (chainId, contract, name, rpcUrls, blockExplorerUrls) selected to create token in.
-         * @param {number} royalty - Royalty in percents from price.
-         * @param {boolean} [onSale=false] If false, call contract.create which just create token, but not put NFT to listForSale
-         * @param {function} callback
-         */
-        createSeries: function (price, currency, chain, royalty, onSale,  callback) {
-            var tool = this;
-            var currencyToken = currency.token;
-            var commissionToken = currency.commissionToken;
-            var previewState = tool.preview.state;
-            var streamId = tool.preview.state.streamName.split("/").pop();
-
-            NFT.checkProvider(chain, function (err, contract) {
-                if (err) {
-                    return Q.handle(callback, tool, [err]);
-                }
-
-                // price should be integer with 18 decimals
-                price = 1e18 * price.toFixed(4);
-                var reduceCommissionPercent = price ? 0 : 10000;
-                royalty = parseFloat(royalty).toFixed(2) || 0;
-                royalty = parseInt(royalty > 0 ? price/(100/royalty) : 0) || 0;
-                royalty = '0x'+(royalty).toString(16);
-                var commissionParams = [commissionToken, royalty, 1, 0, 1, reduceCommissionPercent];
-                if (onSale && !price) {
-                    Q.alert(tool.text.errors.PriceRequired, {
-                        title: tool.text.errors.Error
-                    });
-                    return Q.handle(callback, tool, [tool.text.errors.PriceRequired]);
-                }
-
-                // listen transaction receipt and get TokenCreated event results
-                var _transactionHandler = function (TransactionReceipt) {
-                    if (NFT.isSuccessfulTransaction(TransactionReceipt)) {
-                        for (var i in TransactionReceipt.events) {
-                            if (TransactionReceipt.events[i].event !== "TokenCreated") {
-                                continue;
-                            }
-
-                            return Q.handle(callback, tool, [
-                                null,
-                                TransactionReceipt.events[i].args['tokenId'].toString(),
-                                window.ethereum.chainId,
-                                TransactionReceipt.events[i].args['author']
-                            ]);
-                        }
-                    } else {
-                        Q.handle(callback, null, ["transaction failed"]);
-                    }
-                };
-                var _transactionFailed = function (err) {
-                    var errMsg = err.reason || err.message;
-                    Q.alert(errMsg, {
-                        title: tool.text.errors.Error
-                    });
-                    Q.handle(callback, null, [errMsg]);
-                };
-
-                var _jsonURL = Q.url("Assets/NFT/" + previewState.publisherId + "/" + streamId + ".json");
-
-                if (onSale) { // if need to put NFT on sale, use method "createAndSale", which create token and put on sale
-                    contract.createAndSale(
-                        _jsonURL,
-                        commissionParams,
-                        '0x'+(price).toString(16),
-                        currencyToken
-                    ).then(function (transactionRequest) {
-                        transactionRequest.wait(1).then(_transactionHandler, _transactionFailed);
-                    }, _transactionFailed);
-                } else { // else use method "create", which just create token
-                    var arrayArgs = [_jsonURL, commissionParams];
-                    if (tool.series) { // if series created, add one more argument
-                        arrayArgs.push(tokensAmount);
-                    }
-                    contract.create.apply(null, arrayArgs).then(function (transactionRequest) {
-                        transactionRequest.wait(1).then(_transactionHandler, _transactionFailed);
-                    }, _transactionFailed);
-                }
-            });
         }
     });
 
-    Q.Template.set('Assets/NFT/series/composer',
-        `<div class="Assets_NFT_series_composer"></div>`,
+    Q.Template.set('Assets/NFT/series/newItem',
+        `<div class="Assets_NFT_series_newItem">{{NFT.series.NewItem}}</div>`,
         {text: ['Assets/content']}
     );
 
@@ -854,7 +363,7 @@
                     </div>
                     <div class="Assets_nft_form_date">
                         <label>{{NFT.ExpirationDate}}</label>
-                        <input type="datetime-local" name="endTime">
+                        <input type="datetime-local" name="untilTime">
                     </div>
                 </div>
             </div>
@@ -864,21 +373,27 @@
     Q.Template.set('Assets/NFT/series/view',
         `<div class="tile-block">
         <div class="tile_block_header">
-            <ul class="online-c Assets_author">
-                <li><div class="Assets_NFT_avatar"></div></li>
-            </ul>
+            <div class="Assets_NFT_avatar"></div>
         </div>
-        <div class="video-container"></div>
+        <img class="NFT_series_icon">
         <h2 class="tile-name">{{title}}</h2>
         <ul class="bid-info">
             <li class="Assets_NFT_price">
-                <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
+                <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency}}</p>
             </li>
-            <li class="action-block">
-                <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
-                <button name="update" class="Q_button">{{NFT.Actions}}</button>
-            </li>
+            {{#if untilTime}}
+                <li>
+                    <span>{{NFT.series.EndingIn}}</span>
+                </li>
+                <li class="Assets_NFT_series_untilTime">
+                    <p data-timestamp="{{untilTime}}">
+                        <span class="dateDays"><span class="Q_days"></span> <span class="daysText">{{NFT.Days}}</span></span>
+                        <span class="dateHours"><span class="Q_hours"></span> :</span>
+                        <span class="dateMinutes"><span class="Q_minutes"></span> :</span>
+                        <span class="dateSeconds"><span class="Q_seconds"></span></span>
+                    </p>
+                </li>
+            {{/if}}
         </ul>
     </div>`,
         {text: ['Assets/content']}

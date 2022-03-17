@@ -261,8 +261,10 @@
             "Description": "Description",
             "Author": "Author",
             "OnSale": "on sale",
+            "NewItem": "New NFT series",
             "NamePlaceholder": "Enter series name",
-            "DescPlaceholder": "Enter series description"
+            "DescPlaceholder": "Enter series description",
+            "EndingIn": "Ending In"
         },
         "profile": {
             "Title": "Profile for {{userName}}",

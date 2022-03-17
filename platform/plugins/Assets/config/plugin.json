@@ -120,6 +120,14 @@
 				"defaults": {
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
+			},
+			"Assets/NFT/series": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"icon": "{{Assets}}/img/empty_white.png"
+				}
 			}
 		},
 		"onInsert": {
