@@ -7,8 +7,40 @@
  * Methods for manipulating "Assets/NFT/Series" streams
  * @class Assets_NFT_Series
  */
-class Assets_NFT_Series extends Assets_NFT
+class Assets_NFT_Series
 {
+	static $categoryStreamName = "Assets/user/NFT/series";
+
+	/**
+	 * Check if NFT/series category exists, and create if not
+	 * @method category
+	 * @param {string} [$publisherId=null] If null - logged user id used.
+	 */
+	static function category($publisherId=null)
+	{
+		if ($publisherId === null) {
+			$publisherId = Users::loggedInUser(true)->id;
+		}
+		if (empty($publisherId)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'publisherId',
+				'range' => 'nonempty'
+			));
+		}
+
+		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
+		if (!$stream) {
+			$stream = Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
+		}
+
+		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
+			$stream->setAttribute('Assets/NFT/minted/total', 0);
+			$stream->changed();
+		}
+
+		return $stream;
+	}
+
 	/**
 	 * Get or create new NFT empty stream for composer
 	 * This is for user creating new NFT streams in the interface
@@ -27,7 +59,7 @@ class Assets_NFT_Series extends Assets_NFT
 		));
 
 		if (empty($streams)) {
-			$stream = Streams::create($userId, $userId, "Assets/NFT", array(), array(
+			$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(), array(
 				"publisherId" => $userId,
 				"streamName" => $category->name,
 				"type" => "new"
@@ -47,7 +79,6 @@ class Assets_NFT_Series extends Assets_NFT
 	 * @return {Streams_Stream}
 	 */
 	static function update ($stream, $fields) {
-		$communityId = Users::communityId();
 		$userId = Users::loggedInUser(true)->id;
 
 		$fieldsUpdated = false;
@@ -68,41 +99,21 @@ class Assets_NFT_Series extends Assets_NFT
 				$attributes = array();
 			}
 			$stream->attributes = Q::json_encode(array_merge($attributes, $fields["attributes"]));
+			$fieldsUpdated = true;
 		}
 
 		if ($fieldsUpdated) {
 			$stream->save();
 		}
 
-		$interestsRelationType = "NFT/interest";
-		// remove relations
-		$relateds = Streams_RelatedTo::select()->where(array(
-			"type" => $interestsRelationType,
-			"fromPublisherId" => $stream->publisherId,
-			"fromStreamName" => $stream->name
-		))->fetchDbRows();
-		foreach ($relateds as $related) {
-			Streams::unrelate($userId, $related->toPublisherId, $related->toStreamName, $interestsRelationType, $stream->publisherId, $stream->name);
-		}
-
-		if (!empty(Q::ifset($fields, "interests", null))) {
-			foreach ($fields["interests"] as $key => $interest) {
-				$interestStream = Streams::getInterest(trim($interest));
-				$fields["interests"][$key] = $interestStream->name;
-			}
-
-			// relate to interests
-			Streams::relate($userId, $communityId, $fields["interests"], $interestsRelationType, $stream->publisherId, $stream->name);
-		}
-
 		// change stream relation
 		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT/series", $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
 		// relate to main category
-		Streams::relate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		//Streams::relate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
 		//} elseif ($onMarketPlace == "false") {
 		// unrelate from main category
 		//	Streams::unrelate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name);
