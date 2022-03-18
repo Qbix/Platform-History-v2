@@ -7368,17 +7368,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             roomId = (response.slots.room.roomId).replace('Streams/webrtc/', '');
                             if(_options.roomId == null) _options.roomId = roomId;
-                            if(_options.roomPublisherId == null) _options.roomPublisherId = response.slots.room.stream.publisherId;
+                            if(_options.roomPublisherId == null) _options.roomPublisherId = response.slots.room.stream.fields.publisherId;
                             var turnCredentials = response.slots.room.turnCredentials;
                             var socketServer = response.slots.room.socketServer;
                             _debug = response.slots.room.debug;
 
                             overrideDefaultOptions(response.slots.room.options);
-                            log('createRoomStream: Q.Streams.ge', response.slots.room);
+                            log('createRoomStream: Q.Streams.get', response.slots.room, response.slots.room.stream.fields);
+                            log('createRoomStream: Q.Streams.get 2', _options.roomPublisherId);
 
                             //var connectUrl = updateQueryStringParameter(location.href, 'Q.rid', roomId);
                             //connectUrl = updateQueryStringParameter(connectUrl, 'Q.pid', asPublisherId);
-                            Q.Streams.get(/*asPublisherId*/response.slots.room.stream.publisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
+                            Q.Streams.get(response.slots.room.stream.fields.publisherId, 'Streams/webrtc/' + roomId, function (err, stream) {
                                 log('createRoomStream: joined/connected: pull stream');
 
                                 _roomStream = stream;
