@@ -80,7 +80,6 @@ class Assets_NFT_Series
 	 */
 	static function update ($stream, $fields) {
 		$userId = Users::loggedInUser(true)->id;
-
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
 			if (!Q::ifset($fields, $field)) {
@@ -92,7 +91,9 @@ class Assets_NFT_Series
 		}
 
 		// update attributes
+		$chainId = null;
 		if (Q::ifset($fields, "attributes")) {
+			$chainId = Q::ifset($fields, "attributes", "chainId", null);
 			if ($stream->attributes) {
 				$attributes = (array)Q::json_decode($stream->attributes);
 			} else {
@@ -109,6 +110,9 @@ class Assets_NFT_Series
 		// change stream relation
 		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
 		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT/series", $stream->publisherId, $stream->name, array("weight" => time()));
+		if ($chainId) {
+			Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT/series/".$chainId, $stream->publisherId, $stream->name, array("weight" => time()));
+		}
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
