@@ -1,88 +1,88 @@
 {
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
-        "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "PostcodeLabel": "{{1}} {{2}})",
+        "Title": "hauv {{1}}"
     },
     "units": {
         "meter": "meter",
         "meters": "meters",
-        "kilometer": "kilometer",
+        "kilometer": "km",
         "kilometers": "kiometers",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "mais",
+        "miles": "mais",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "ko taw",
+        "feet": "ko taw",
+        "inches": "ntiv tes"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Kuv txaus siab rau tej yam tshwm sim nyob rau hauv {{select}} ntawm",
+        "update": "Hloov Kho Kuv Qhov Chaw",
+        "set": "Teem Kuv Qhov Chaw",
+        "prompt": "{{ClickOrTap}} ntawm no mus<br> teem koj<br> qhov chaw",
+        "myCurrentLocation": "Kuv qhov chaw nyob tam sim no",
+        "enterAddress": "Sau qhov chaw nyob",
+        "enterPostcode": "Thov sau koj tus lej xa ntawv \/ zipcode",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Ntxiv qhov chaw",
+            "title": "Qhov chaw tshiab",
+            "nameYourLocation": "Npe koj qhov chaw nyob"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Txuag qhov chaw no?",
+            "message": "Koj puas npaj yuav siv qhov chaw no dua yav tom ntej?",
+            "ok": "Yog lawm",
+            "cancel": "Tsis muaj"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Sau npe rau qhov chaw no",
+            "placeholder": "Tsev, Ua haujlwm thiab lwm yam.",
+            "ok": "Txuag"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Xaiv qhov chaw"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Puas muaj chaw nyob hauv qhov chaw no?",
+        "newArea": "Thaj chaw tshiab",
+        "promptTitle": "Sau lub npe rau thaj chaw:",
+        "absent": "Thov teem cheeb tsam",
+        "error": "yuam kev",
+        "exist": "Thaj chaw twb muaj lawm",
+        "addNewArea": "Ntxiv thaj chaw tshiab",
+        "add": "Ntxiv"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "ib qho kev sau ntawm qhov chaw",
+            "displayType": "Qhov chaw"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Sawv cev rau lub tsev, qhov chaw, nkoj, chaw ua si, thiab lwm yam.",
+            "displayType": "Qhov chaw"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Sawv cev rau thaj tsam hauv ib qho chaw, xws li chav tsev lossis chav suite",
+            "displayType": "Thaj chaw"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Sawv cev hauv pem teb hauv ib lub tsev lossis lub nkoj",
+            "displayType": "Pem teb"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Sawv cev ib kem hauv ib lub tsev lossis lub nkoj",
+            "displayType": "Kem"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Qeb rau cov khoom nyob rau hauv ib qho kev ncua deb ntawm geohash",
+            "displayType": "Nyob ze ntawm qhov chaw"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Qeb rau tej yam nyob rau hauv ib tug tej yam deb ntawm ib tug geohash, txuam ib tug txaus siab",
+            "displayType": "Qhov chaw txaus siab"
         }
     }
 }

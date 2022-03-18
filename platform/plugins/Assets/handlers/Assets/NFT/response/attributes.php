@@ -8,7 +8,9 @@ function Assets_NFT_response_attributes ($params) {
 		$res[$displayType] = array();
 	}
 
-	$resMysql = Assets_NftAttributes::select()->where(array("publisherId" => $params["publisherId"]))->fetchDbRows();
+	$resMysql = Assets_NftAttributes::select()->where(array(
+		"publisherId" => $params["publisherId"]
+	))->fetchDbRows();
 
 	foreach ($resMysql as $rm) {
 		if (!is_array($res[$rm->display_type])) {

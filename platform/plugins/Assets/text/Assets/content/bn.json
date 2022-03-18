@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "বেতন দিতে আলতো চাপুন"
+        "button": "পেমেন্ট করতে ট্যাপ করুন"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} এর জন্য প্রক্রিয়াকৃত চার্জ",
-        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} এ আপনার প্রদানের জন্য আপনাকে ধন্যবাদ",
-        "SubscribedTo": "{{call 'user.displayName'}} সাবস্ক্রাইব {{plan.title}}",
-        "YouSubscribedTo": "আপনি {{plan.title}} সাবস্ক্রাইব করেছেন"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} এর জন্য চার্জ প্রক্রিয়া করা হয়েছে",
+        "ThankYouForYourPayment": "{{call 'publisher.displayName'}} এ আপনার অর্থপ্রদানের জন্য আপনাকে ধন্যবাদ",
+        "SubscribedTo": "{{call 'user.displayName'}} সদস্যতা নিয়েছে {{plan.title}}",
+        "YouSubscribedTo": "আপনি {{plan.title}} এ সদস্যতা নিয়েছেন"
     },
     "payment": {
         "AboutOrder": "অর্ডার সম্পর্কে তথ্য",
         "PaymentMethod": "মূল্যপরিশোধ পদ্ধতি",
         "ContactInfo": "যোগাযোগের তথ্য",
-        "Pay": "পে"
+        "Pay": "বেতন"
     },
     "credits": {
-        "InviteAcceptedBy": "আমন্ত্রিত আমন্ত্রণ {{1}}",
-        "YouHaveCreditsToStart": "আপনার {{1}} ক্রেডিট শুরু করার আছে",
-        "PaymentFor": "&quot;{{1}}&quot; এর জন্য অর্থ প্রদান",
-        "PaymentTo": "{{999} to এ প্রদান",
-        "PaymentToUser": "{{999} to এ প্রদান",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; যোগদানের জন্য",
-        "CreatedCommunity": "&quot;{{communityId}}&quot; সম্প্রদায় তৈরি করার জন্য",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; ছাড়ার জন্য",
-        "BoughtCredits": "{999}} ক্রেডিট কিনেছেন",
-        "BuyAmountCredits": "{9 999}} ক্রেডিট কিনুন",
-        "MissingCredits": "অনুপস্থিতি",
-        "YouMissingCredits": "আপনি {9 999} its ক্রেডিট হারিয়েছেন",
+        "InviteAcceptedBy": "আমন্ত্রণ গৃহীত হয়েছে {{invitedUserName}}",
+        "YouHaveCreditsToStart": "শুরু করার জন্য আপনার কাছে {{amount}}টি ক্রেডিট আছে",
+        "PaymentFor": "&quot;{{1}}&quot; এর জন্য অর্থপ্রদান",
+        "PaymentTo": "{{1}} এ অর্থপ্রদান",
+        "PaymentToUser": "{{toUserName}} এ অর্থপ্রদান",
+        "JoinedPaidStream": "রিজার্ভেশনের জন্য &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "সম্প্রদায় তৈরি করার জন্য &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "রিজার্ভেশন রিফান্ড হিসাবে &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "{{amount}} ক্রেডিট কিনেছেন৷",
+        "BuyAmountCredits": "{{amount}} ক্রেডিট কিনুন",
+        "MissingCredits": "অনুপস্থিত ক্রেডিট",
+        "YouMissingCredits": "এগিয়ে যাওয়ার জন্য আপনার একটি অতিরিক্ত {{amount}} ক্রেডিট প্রয়োজন৷",
         "BuyCredits": "ক্রেডিট কিনুন",
         "Buy": "কেনা",
         "Credits": "ক্রেডিট",
-        "ErrorInvalidAmount": "অবৈধ পরিমাণ",
-        "ErrorInvalidCurrency": "দুর্ভাগ্যক্রমে আমরা এখনও মুদ্রা {{999} don&#39;t সমর্থন করি না",
-        "WatchClip": "{{1000} watching দেখার জন্য {Ear 999}} ক্রেডিট অর্জন করেছেন",
-        "PurchaseCredits": "ক্রয় ক্রেডিট",
+        "ErrorInvalidAmount": "পরিমাণ অবৈধ",
+        "ErrorInvalidCurrency": "দুর্ভাগ্যবশত আমরা এখনও মুদ্রা {{currency}} সমর্থন করি না",
+        "WatchClip": "{{fromStreamTitle}} দেখার জন্য {{amount}} ক্রেডিট অর্জন করেছেন",
+        "PurchaseCredits": "ক্রেডিট ক্রয়",
         "forMessages": {
-            "BoughtCredits": "{9 999}} ক্রেডিট",
+            "BoughtCredits": "{{amount}} ক্রেডিট",
             "BonusCredits": "{{amount}} ক্রেডিট"
         },
-        "CreatePaidStream": "{{toStreamName}} তৈরির জন্য",
+        "CreatePaidStream": "{{toStreamName}} তৈরি করার জন্য",
         "BonusCredits": "বোনাস {{amount}} ক্রেডিট",
-        "BuyBonus": "একবারে {{amount}} ক্রেডিট কিনলে, {{bonus}} ক্রেডিট বোনাস পাবে।",
+        "BuyBonus": "একবারে {{amount}} ক্রেডিট কিনলে, {{bonus}} ক্রেডিট বোনাস পাবে৷",
         "Streams_user_firstname": "{{invitedUserName}} প্রথম নাম প্রবেশ করান",
         "Streams_user_lastname": "{{invitedUserName}} পদবি প্রবেশ করান",
         "Streams_user_icon": "{{invitedUserName}} আইকন প্রবেশ করান",
@@ -51,31 +51,31 @@
     "history": {
         "Date": "তারিখ",
         "Amount": "পরিমাণ",
-        "Description": "বিবরণ",
-        "Client": "মক্কেল",
-        "To": "থেকে",
+        "Description": "বর্ণনা",
+        "Client": "ক্লায়েন্ট",
+        "To": "প্রতি",
         "From": "থেকে",
-        "HistoryEmpty": "আপনার কাছে এখনও কোনও ডেটা নেই",
-        "SeeHistory": "Payment {999} for এর জন্য অর্থ প্রদানের ইতিহাস দেখুন",
-        "PaymentFor": "{9 999}} ক্রেডিট ব্যয় করেছেন",
-        "PaymentTo": "{9 999}} জমা দেওয়া",
-        "PaymentToUser": "{9 999}} জমা দেওয়া",
+        "HistoryEmpty": "আপনার কাছে এখনও কোনো ডেটা নেই",
+        "SeeHistory": "{{1}}-এর পেমেন্টের ইতিহাস দেখুন",
+        "PaymentFor": "{{amount}} ক্রেডিট পাঠানো হয়েছে",
+        "PaymentTo": "{{amount}} ক্রেডিট পাঠানো হয়েছে",
+        "PaymentToUser": "{{amount}} ক্রেডিট পাঠানো হয়েছে",
         "JoinedPaidStream": {
-            "+": "{999}} ক্রেডিট অর্জন করেছেন",
-            "-": "{9 999}} ক্রেডিট ব্যয় করেছেন"
+            "+": "অর্জন করেছে {{amount}} ক্রেডিট",
+            "-": "{{amount}} ক্রেডিট খরচ করেছেন"
         },
         "LeftPaidStream": {
-            "+": "{999}} ক্রেডিট প্রাপ্ত হয়েছে",
-            "-": "{9 999}} জমা দেওয়া"
-        },
-        "CreatedCommunity": "{9 999}} ক্রেডিট ব্যয় করেছেন",
-        "BoughtCredits": "{999}} ক্রেডিট কিনেছেন",
-        "InviteAcceptedBy": "{999}} ক্রেডিট অর্জন করেছেন",
-        "YouHaveCreditsToStart": "{999}} ক্রেডিট অর্জন করেছেন",
-        "CreatePaidStream": "{{amount}} ক্রেডিট ব্যয় করেছেন",
-        "WatchClip": {
             "+": "{{amount}} ক্রেডিট পেয়েছেন",
-            "-": "{{amount}} ক্রেডিট ব্যয় করেছেন"
+            "-": "{{amount}} ক্রেডিট পাঠানো হয়েছে"
+        },
+        "CreatedCommunity": "{{amount}} ক্রেডিট খরচ করেছেন",
+        "BoughtCredits": "{{amount}} ক্রেডিট কিনেছেন৷",
+        "InviteAcceptedBy": "অর্জন করেছে {{amount}} ক্রেডিট",
+        "YouHaveCreditsToStart": "অর্জিত {{amount}} ক্রেডিট",
+        "CreatePaidStream": "{{amount}} ক্রেডিট খরচ করেছেন",
+        "WatchClip": {
+            "+": "অর্জন করেছে {{amount}} ক্রেডিট",
+            "-": "{{amount}} ক্রেডিট খরচ করেছেন"
         },
         "BonusCredits": "বোনাস {{amount}} ক্রেডিট পেয়েছেন",
         "Streams_user_firstname": "অর্জন করেছে {{amount}} ক্রেডিট",
@@ -85,26 +85,26 @@
         "Streams_greeting": "অর্জন করেছে {{amount}} ক্রেডিট"
     },
     "subscriptions": {
-        "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
+        "infoTitle": "পেমেন্ট তথ্য সেট করুন",
         "confirm": {
-            "title": "সাবস্ক্রিপশন শুরু করুন",
-            "message": "আপনি কি {{999} to সাবস্ক্রাইব করতে চান?",
+            "title": "সদস্যতা শুরু করুন",
+            "message": "আপনি কি {{title}}-এ সদস্যতা নিতে চান?",
             "ok": "ঠিক আছে",
-            "cancel": "বাতিল"
+            "cancel": "বাতিল করুন"
         },
         "CreditOrDebitCard": "ক্রেডিট বা ডেবিট কার্ড",
-        "SubscribePayment": "অর্থ প্রদান সাবস্ক্রাইব করুন",
+        "SubscribePayment": "পেমেন্ট সদস্যতা",
         "ImmediatePayment": "জরুরী টাকা প্রদান"
     },
     "payments": {
-        "infoTitle": "অর্থ প্রদানের তথ্য সেট করুন",
+        "infoTitle": "পেমেন্ট তথ্য সেট করুন",
         "confirm": {
             "title": "মূল্য পরিশোধ কর",
-            "message": "আপনি কি pay {999}} {{1000} pay দিতে সম্মত হন?",
+            "message": "আপনি কি {{symbol}}{{amount}} দিতে রাজি?",
             "ok": "ঠিক আছে",
-            "cancel": "বাতিল"
+            "cancel": "বাতিল করুন"
         },
-        "BuyAmountCredits": "{9 999}} ক্রেডিট কিনুন"
+        "BuyAmountCredits": "{{amount}} ক্রেডিট কিনুন"
     },
     "types": {
         "Assets\/credits": {
@@ -116,11 +116,11 @@
             "description": "সাবস্ক্রিপশন পরিকল্পনা"
         },
         "Assets\/subscription": {
-            "displayType": "চাঁদা",
-            "description": "চাঁদা"
+            "displayType": "সাবস্ক্রিপশন",
+            "description": "সদস্যতা"
         },
         "Assets\/product": {
-            "displayType": "প্রোডাক্ট",
+            "displayType": "পণ্য",
             "description": "পণ্য বিক্রি হচ্ছে"
         },
         "Assets\/service": {
@@ -130,50 +130,50 @@
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "{999}} ক্রেডিট অর্জন করেছেন"
+            "content": "অর্জন করেছে {{amount}} ক্রেডিট"
         },
         "Assets\/credits\/spent": {
-            "content": "{9 999}} ক্রেডিট ব্যয় করেছেন"
+            "content": "খরচ {{amount}} ক্রেডিট"
         },
         "Assets\/credits\/sent": {
-            "content": "{9 999}} জমা দেওয়া"
+            "content": "{{toUserName}} কে {{amount}} ক্রেডিট পাঠানো হয়েছে"
         },
         "Assets\/credits\/received": {
-            "content": "{999}} ক্রেডিট প্রাপ্ত হয়েছে"
+            "content": "{{fromUserName}} থেকে {{amount}} ক্রেডিট পেয়েছেন"
         },
         "Assets\/credits\/bought": {
-            "content": "{999}} ক্রেডিট কিনেছেন"
+            "content": "{{amount}} ক্রেডিট কিনেছেন৷"
         },
         "Assets\/credits\/bonus": {
             "content": "বোনাস {{amount}} ক্রেডিট"
         }
     },
     "charge": {
-        "Subject": "আপনি &quot;{{description}}&quot; দ্বারা {{call 'publisher.displayName'}} থেকে {{999} of এর পেমেন্ট পান",
-        "HasBeenCharged": "আরে, আপনাকে কেবল এটি জানাতেই {2 1009}} দ্বারা 1 1 1001}} এর জন্য {{1}} থেকে {{1000} charged চার্জ করা হয়েছে"
+        "Subject": "আপনি &quot;{1001}}&quot; দ্বারা {{call 'publisher.displayName'}} থেকে {{displayAmount}} পেমেন্ট পাবেন",
+        "HasBeenCharged": "আরে, এটি শুধুমাত্র আপনাকে জানানোর জন্য {{1}} {{4}} দ্বারা {{3}} এর জন্য {{2}} চার্জ করা হয়েছে"
     },
     "charged": {
-        "Subject": "&quot;{{description}}&quot; এর জন্য আপনার অর্থ প্রদানের জন্য আপনাকে ধন্যবাদ",
-        "HavePaid": "আরে {9 999}}, এটি কেবলমাত্র একটি দ্রুত নিশ্চিতকরণ যা আপনি সফলভাবে {{4}} এর জন্য {{10001} থেকে {{1001} paid প্রদান করেছেন"
+        "Subject": "&quot;{{description}}&quot; এর জন্য আপনার অর্থপ্রদানের জন্য আপনাকে ধন্যবাদ",
+        "HavePaid": "আরে {{1}}, এটি শুধুমাত্র একটি দ্রুত নিশ্চিতকরণ যে আপনি সফলভাবে {{4}} এর জন্য {{3}} কে {{2}} প্রদান করেছেন"
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "নতুন পরিষেবা",
-            "TitlePlaceholder": "পরিষেবার শিরোনাম",
+            "TitlePlaceholder": "পরিষেবা শিরোনাম",
             "PricePlaceholder": "দাম নির্ধারণ করো",
             "LinkPlaceholder": "অতিরিক্ত তথ্য লিঙ্ক সেট করুন",
             "DescriptionPlaceholder": "সেবা বর্ণনা",
-            "SaveService": "পরিষেবা সংরক্ষণ করুন",
-            "SelectRequiredParticipants": "প্রয়োজনীয় অংশগ্রহণকারীরা"
+            "SaveService": "সেভ সার্ভিস",
+            "SelectRequiredParticipants": "প্রয়োজনীয় অংশগ্রহণকারীদের"
         },
-        "ManageServiceTemplates": "পরিষেবা টেম্পলেটগুলি পরিচালনা করুন",
-        "ManageServices": "পরিষেবাদি পরিচালনা করুন",
+        "ManageServiceTemplates": "পরিষেবা টেমপ্লেট পরিচালনা করুন",
+        "ManageServices": "পরিষেবাগুলি পরিচালনা করুন",
         "FreeEvent": "নিখরচায় অনুষ্ঠান",
-        "OptionalContribution": "Ptionচ্ছিক অবদান",
-        "RequiredPayment": "প্রয়োজনীয় অর্থ প্রদান",
-        "AreYouSureDelete": "আপনি কি নিশ্চিত যে আপনি এই পরিষেবাটি মুছতে চান?",
-        "AmountServicesRelated": "এই পরিষেবাটি সম্পর্কিত There {999}} উপলভ্যতা রয়েছে। সেগুলিও সরানো হবে।",
-        "Free": "ফ্রি"
+        "OptionalContribution": "ঐচ্ছিক অবদান",
+        "RequiredPayment": "প্রয়োজনীয় অর্থপ্রদান",
+        "AreYouSureDelete": "আপনি কি এই পরিষেবাটি মুছে দেওয়ার বিষয়ে নিশ্চিত?",
+        "AmountServicesRelated": "এই পরিষেবার সাথে সম্পর্কিত {{amount}} উপলব্ধতা রয়েছে৷ সেগুলোও সরানো হবে।",
+        "Free": "বিনামূল্যে"
     },
     "NFT": {
         "Title": "{{title}} NFT সম্পর্কে তথ্য",

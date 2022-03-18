@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Ralat {{status}} semasa permintaan",
+        "canceled": "Permintaan dibatalkan",
+        "500": "Ralat pelayan dalaman",
+        "404": "Tidak ditemui: {{url}}",
+        "501": "Permintaan terganggu"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Sesi tamat tempoh. Muat semula halaman dan cuba lagi.",
+        "otherDomain": "Permintaan merentas domain yang disekat ke domain asing di {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "ketuk",
+        "click": "klik",
+        "yes": "ya",
+        "no": "tidak",
+        "Tap": "Ketik",
+        "Click": "klik",
+        "Yes": "ya",
+        "No": "Tidak"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
+        "1": "Januari",
+        "2": "Februari",
+        "3": "Mac",
         "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
+        "5": "Mungkin",
+        "6": "Jun",
+        "7": "Julai",
+        "8": "Ogos",
         "9": "September",
-        "10": "October",
+        "10": "Oktober",
         "11": "November",
-        "12": "December"
+        "12": "Disember"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "kedua",
+        "seconds": "detik",
+        "minute": "minit",
+        "minutes": "minit",
+        "hour": "Jam",
+        "day": "hari",
+        "days": "hari",
+        "week": "minggu",
+        "weeks": "minggu",
+        "month": "bulan",
+        "months": "bulan",
+        "year": "tahun",
+        "years": "tahun",
+        "decade": "dekad",
+        "decades": "berdekad-dekad",
+        "century": "abad",
+        "centuries": "berabad-abad"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Sila benarkan akses kepada mikrofon anda",
+        "record": "Rekod",
+        "recording": "Rakaman",
+        "remains": "tinggal",
+        "maximum": "maksimum",
+        "playing": "bermain",
+        "recorded": "Dirakam",
+        "clip": "klip",
+        "discard": "Buang",
+        "encoding": "Pengekodan"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "klip",
+        "errorNoSource": "Tiada sumber video",
+        "SkipAfter": "Langkau selepas",
+        "Skip": "Langkau"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "klip",
+        "errorNoSource": "Tiada sumber pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Tetapkan Mula Klip",
+        "ClipStart": "Mula Klip",
+        "SetClipEnd": "Tetapkan Klip Tamat",
+        "ClipEnd": "Klip Tamat",
+        "StartMoreEnd": "Kedudukan mula tidak boleh lebih daripada kedudukan akhir",
+        "EndLessStart": "Kedudukan tamat tidak boleh kurang daripada kedudukan mula",
+        "WhichInvalid": "Hujah &#39;yang&#39; tidak sah"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Amaran"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "sahkan",
+        "ok": "ya",
+        "cancel": "Tidak"
     },
     "prompt": {
         "title": "Prompt",
-        "ok": "Go"
+        "ok": "Pergi"
     },
     "tabs": {
-        "more": "more",
+        "more": "lebih",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Ralat membaca fail",
+        "errorType": "Maaf, tetapi jenis fail ini tidak disokong",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Apa yang anda ingin lakukan?",
+            "photo": "Ambil foto baharu",
+            "library": "Pilih daripada perpustakaan"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Sila pilih imej yang lebih besar.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Laraskan saiz dan kedudukan",
+            "touchscreen": "Gunakan jari anda untuk mengezum dan menyeret",
+            "notTouchscreen": "Gunakan tetikus &amp; roda anda untuk mengezum dan menyeret"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "malam semalam",
+        "lastEvening": "malam lepas",
+        "yesterday": "semalam",
+        "thisMorning": "pagi ini",
+        "today": "hari ini",
+        "tonight": "malam ini",
+        "tomorrowMorning": "pagi esok",
+        "tomorrow": "esok",
+        "hoursAgo": "{{h}} jam yang lalu",
+        "hourAgo": "{{h}} jam yang lalu",
+        "minuteAgo": "{{m}} minit yang lalu",
+        "minutesAgo": "{{m}} minit yang lalu",
+        "secondAgo": "{{s}} saat yang lalu",
+        "secondsAgo": "{{s}} saat yang lalu",
+        "fewSecondsAgo": "beberapa saat lalu",
+        "rightNow": "sekarang",
+        "inSecond": "dalam {{s}} saat",
+        "inSeconds": "dalam {{s}} saat",
+        "inMinute": "dalam {{m}} minit",
+        "inMinutes": "dalam {{m}} minit",
+        "inHour": "dalam {{h}} jam",
+        "inHours": "dalam {{h}} jam",
+        "inUnderMinute": "dalam masa kurang 1 minit"
     }
 }

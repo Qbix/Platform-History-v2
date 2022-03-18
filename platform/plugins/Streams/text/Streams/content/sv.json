@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Detta innehåll är dolt för dig."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Nytt föremål"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Människor jag bjudit in",
+        "Streams\/invitedMe": "Vem bjöd in mig",
+        "DoYouAgree": "Håller du med?",
+        "Yes": "Ja",
+        "No": "Nej"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Vad är dina intressen?",
+        "CanAdd": "Om du fortfarande inte hittar det du letar efter kan du lägga till ett nytt intresse nedan:",
+        "TrySynonyms": "Ser du det inte? Prova några synonymer.",
+        "AddUnderCategory": "Lägg till under kategori...",
+        "Other": "Övrig",
+        "Unlisted": "Onoterat"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Meddelandet har flaggats för administratörsgranskning. Tryck igen för att ta bort flaggan.",
+        "noOneSaid": "Ingen har sagt något",
+        "closeChatButton": "Stäng chatten",
+        "closeChatConfirmTitle": "Stäng den här chatten?",
+        "closeChatConfirm": "Är du säker på att du vill stänga den här chatten?",
+        "Subscribed": "Aviseringar aktiverade",
+        "Unsubscribed": "Aviseringar avstängda",
+        "closeChatConfirmYes": "Ja",
+        "closeChatConfirmNo": "Nej",
+        "earlierComments": "tidigare kommentarer",
+        "startedConversation": "startade en konversation",
+        "RealTimeCall": "Realtidssamtal",
+        "SearchByName": "Sök på namn",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} besöker chatten",
+            "Join": "{{displayName}} gick med i chatten",
+            "Leave": "{{displayName}} lämnade chatten",
+            "RelatedTo": "{{displayName}} startade en {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "hantera dina e-postprenumerationer",
+        "IfUnsubscribe": "Om du vill avsluta prenumerationen",
+        "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sa: {{& message.content}}",
+        "Streams\/changed": "Ändringar i {{stream.fields.title}}",
+        "Streams\/invite": "Du blev inbjuden till {{& stream.fields.title}}",
+        "Streams\/announcement": "Tillkännagivande i {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ändrade åtkomst i {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chattmeddelande redigerat i {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chattmeddelande togs bort i {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} har stängts",
+        "Streams\/task\/progress": "Framsteg gjordes den {{stream.fields.title}}",
+        "Streams\/task\/complete": "Uppgift slutförd: {{stream.fields.title}}",
+        "Streams\/task\/error": "Fel under: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Inkommande meddelande",
+        "Streams\/relatedTo\/Streams\/call": "Nytt samtal startade {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nytt {{relationDisplayType}} i {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Lades till i {{toTitle}} som {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} nämnde dig i en kommentar",
+        "Streams\/call": "{{displayName}} startade ett samtal i realtid"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Inbjudan",
+        "messageContent": "{{displayName}} bjöd in dig till {{inviteUrl}}",
+        "youCanNowPaste": "Du kan nu klistra in den här länken någonstans för att bjuda in personer",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
+            "chooseFromContacts": "Välj bland dina kontakter",
+            "chooseAgainFromContacts": "Välj igen från Kontakter",
+            "inviteSelectedContacts": "Bjud in valda kontakter",
+            "selectFromContacts": "Välj Från kontakter",
+            "userChooserPlaceholder": "Sök på namn",
+            "photo": "Ta ett foto",
+            "photoInstruction": "Om personen som skannade din QR-kod är framför dig, ta ett foto på dem",
+            "to": "Till: {{Stream Title}}",
+            "go": "Gå",
+            "title": "Inbjudan",
+            "placeholder": "Mobilnummer eller e-postadress",
+            "orInvite": "Eller bjud in personer genom att använda:",
+            "copyLink": "{{ClickOrTap}} för att kopiera inbjudningslänken",
+            "shareOrCopyLink": "{{ClickOrTap}} för att dela eller kopiera inbjudningslänken",
+            "QR": "{{ClickOrTap}} för att generera QR-kod",
+            "QRtitle": "Skanna den här QR-koden",
+            "QRscanned": "De skannade det!",
+            "scannedQR": "{{ClickOrTap}} om koden skannades",
+            "byEmail": "E-post",
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hej, kolla in det här",
+            "PleaseVisitLink": "Besök gärna följande länk:",
+            "InvitingYou": "Jag bjuder in dig till {{title}}",
+            "HasInvitedYou": "{{displayName}} har bjudit in dig till {{title}}",
+            "HasMentionedYou": "{{displayName}} har nämnt dig i &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DU ÄR INBJUDEN!",
+            "AcceptInvite": "Acceptera inbjudan"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Du har blivit inbjuden till {{title}}. Tryck på {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "skickade ett <em>{{message.fields.type}}<\/em> meddelande till {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "kommenterade",
+            "startedCallIn": "startade ett samtal",
+            "in": "i",
+            "body": "i {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "har postats till",
+                "byAvatar": "av {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "har en ny {{instructions.fromDisplayType}}",
+                "byAvatar": "lagt till av {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig, och be dem klicka på länken.",
+            "confirm": "Inbjudningar skickas från vårt nummer, som dina vänner ännu inte känner igen. Vill du följa upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem klicka på länken.",
+            "check": "Hej, jag skickade precis en inbjudan till {{app}}-appen. Kontrollera ditt sms och klicka på länken!",
+            "CheckYourMobile": "Kontrollera SMS och följ instruktionerna!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Följ upp med en snabb text för att låta dem veta att inbjudan kom från dig, och be dem klicka på länken.",
+            "confirm": "Inbjudningar skickas från vår domän, som dina vänner ännu inte känner igen. Vill du följa upp med en snabb text för att låta dem veta att inbjudan kom från dig och be dem klicka på länken.",
+            "subject": "Fick du en inbjudan?",
+            "body": "Hej, jag skickade precis en inbjudan till {{app}}-appen. Kontrollera din e-post och klicka på länken där!",
+            "CheckYourEmail": "Kontrollera din e-post och följ instruktionerna!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Titel",
+        "Subscribed": "Prenumererade",
+        "Participants": "Deltagare",
+        "AreYouSureRemoveIdentifier": "Är du säker på att ta bort denna identifierare?",
+        "AreYouSureUnsubscribeIdentifier": "Är du säker på att avregistrera denna identifierare? Det kommer att stänga av meddelanden till denna identifierare.",
+        "AreYouSureUnsubscribeDevice": "Är du säker på att avsluta prenumerationen på den här enheten? Det kommer att stänga av aviseringar till den här enheten.",
+        "AreYouSureRemoveParticipant": "Är du säker på att du vill ta bort denna deltagare?",
+        "RemoveParticipant": "Ta bort deltagare",
+        "Identifiers": "Identifierare",
+        "Devices": "Enheter",
+        "Streams": "Strömmar"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Du har inte behörighet att gå med i denna stream.",
+        "streamTitle": "{{1}} startade ett livesamtal",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Ansluter",
+            "microphoneBtn": "Aktivera mikrofon",
+            "cameraBtn": "Aktivera kamera",
+            "cameraAndMicrophoneBtn": "Aktivera kamera och mikrofon"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mikrofonen är avstängd",
+            "micIsOn": "Mic är på",
+            "cameraIsOff": "Kameran är avstängd",
+            "cameraIsOn": "Kameran är på",
+            "screenSharingIsOn": "Skärmdelning är på",
+            "screenSharingIsOff": "Dela skärm",
+            "joinNow": "Gå med i samtalet"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
+            "point1": "Gå till &quot;Inställningar&quot; -&gt; &quot;Avancerat&quot; -&gt; &quot;Sekretess och säkerhet&quot; -&gt; &quot;Webbplatsinställningar&quot; -&gt; &quot;Kamera&quot; eller &quot;Webbplatsinställningar&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Ta bort {{hostname}} från &quot;Blockera&quot;-listan"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomst till {{kind}} för att gå med i konferensen."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
+            "point1": "Gå till dina Android-inställningar",
+            "point2": "Öppna &quot;Appar och aviseringar&quot;",
+            "point3": "Hitta &quot;{{communityName}}&quot; och öppna den",
+            "point4": "Tryck på Behörigheter",
+            "point5": "Aktivera {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Instruktioner",
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
+            "point1": "Gå till dina iOS-inställningar",
+            "point2": "Öppna &quot;Sekretess&quot;",
+            "point3": "Hitta {{kind}} och öppna den",
+            "point4": "Hitta &quot;{{communityName}}&quot; och aktivera"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Du gick med i rummet",
+            "joining": "Går med: {{userName}}",
+            "sbLeftRoom": "{{userName}} lämnade rummet",
+            "switchingRoom": "Byter rum...",
+            "forceDisconnecting": "Du kommer att kopplas från inom 5 sekunder",
+            "forceDisconnectingImmediately": "Du kopplades bort av en värd",
+            "youLeftRoom": "Du lämnade rummet",
+            "codeCopied": "Du lämnade rummet",
+            "sbBeganFbLive": "{{userName}} började sända det här samtalet på Facebook",
+            "sbStoppedFbLive": "{{userName}} slutade sända det här samtalet på Facebook",
+            "youBeganFbLive": "Du började sända det här samtalet på Facebook",
+            "youStoppedFbLive": "Du slutade sända det här samtalet på Facebook",
+            "youStartedLive": "Du började sända det här samtalet till anpassad RTMP",
+            "youStoppedLive": "Du slutade sända det här samtalet till anpassad RTMP",
+            "sbStartedLiveStreaming": "{{userName}} började live",
+            "sbStoppedLiveStreaming": "{{userName}} slutade live",
+            "liveStopped": "Ett fel uppstod när videon skulle skickas till slutpunkten",
+            "youBeganVideoRecording": "Du började spela in den här konferensen",
+            "youStoppedVideoRecording": "Du slutade spela in den här konferensen",
+            "linkCopiedToCb": "Länken har kopierats till urklipp",
+            "codeCopiedToCb": "Koden har kopierats till urklipp",
+            "userHasNoVideo": "Deltagaren har ingen video",
+            "openInBrowserAlert": "Öppna länken i webbläsaren Safari för att gå med i konferensen."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
+            "dialogTitle": "Videoinställningar",
+            "webCamera": "Webbkamera",
+            "screenSharing": "Skärmdelning",
+            "shareAnotherScreen": "Dela en annan skärm",
+            "turnOffCameras": "Stäng av kameran",
+            "turnOffVideo": "Stäng av kamera\/skärmdelning",
+            "turnOffAudioInput": "Stäng av mikrofonen",
+            "turnOffScreenSharing": "Stäng av skärmdelning",
+            "cameraIsTurnedOff": "Kameran är avstängd",
+            "micIsTurnedOff": "Mikrofonen är avstängd",
+            "startFBLive": "Starta Facebook Livestream",
+            "stopFBLive": "Stoppa Facebook Livestream",
+            "startRecording": "Börja spela in",
+            "stopRecording": "Stoppa inspelning",
             "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "stop": "Sluta",
+            "recordingInProgress": "Inspelning pågår...",
+            "fbLiveTitle": "Titel på Livestream",
+            "fbLiveDescription": "Beskriv din livestream. Vad handlar det om?",
+            "fbOnlyMeLiveAccess": "Bara jag",
+            "fbFriendsAccess": "Vänner",
+            "fbPublicAccess": "offentlig",
+            "publishOnTimeline": "Publicera på tidslinjen",
+            "publishToGroup": "Publicera till grupp",
+            "fbStartLive": "Gå och lev",
+            "fbStopLive": "Avsluta livestream",
+            "streamingSettings": "inställningar",
+            "fbEmbedCode": "Bädda in",
+            "copy": "Kopiera",
+            "streamToRTMP": "Streama till anpassad RTMP",
+            "startBroadcasting": "Börja sända",
+            "broadcastingInProgress": "Sändning pågår"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Ljudinställningar",
+            "speakers": "Högtalare",
+            "microphone": "Mikrofon"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Deltagarinställningar",
+            "disconnect": "Koppla ifrån",
+            "floatingScreens": "Flytande skärmar",
+            "tiledScreens": "Kaklade skärmar",
+            "loudestExceptMe": "Högst utom jag",
+            "maximizeLoudest": "Maximera Högst",
+            "staticMaximized": "Statisk maximerad",
+            "fullScreen": "Fullskärm",
+            "manual": "Manuell",
+            "turnOffCamera": "Dölj video",
+            "turnOffAudio": "Stäng av ljudet",
+            "turnOffScreenSharing": "Dölj skärmdelning",
+            "turnOnCamera": "Visa video",
+            "turnOnAudio": "Slå på ljudet",
+            "turnOnScreenSharing": "Visa skärmdelning"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Streaminginställningar"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Möte",
+            "MeetingEnded": "Mötet avslutat"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Inbjudna",
+            "description": "Inkorg för inbjudningar"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Resurs",
+            "description": "ström för att hantera åtkomst till en resurs och skicka meddelanden om uppdateringar"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "för att ta emot uppdateringar om framsteg på en viss uppgift",
+            "displayType": "Uppgift"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "kategori för uppgifter",
+            "displayType": "Uppgifter"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "en gemensam upplevelse för medlemmar i en gemenskap",
+            "displayType": "Gemensam erfarenhet för medlemmar i en gemenskap"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "hälsning som en användare kan presentera sig med",
+            "displayType": "Hälsning"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "siffra",
+            "description": "matematiskt tal"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Datum",
+            "description": "datum"
         },
         "Streams\/text": {
             "displayType": "Text",
-            "description": "body of text"
+            "description": "texten"
         },
         "Streams\/text\/small": {
             "displayType": "Text",
-            "description": "small body of text"
+            "description": "liten textdel"
         },
         "Streams\/text\/medium": {
             "displayType": "Text",
-            "description": "medium body of text"
+            "description": "medelstor text"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "E-postadress",
+            "description": "e-postadress"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Telefonnummer",
+            "description": "telefonnummer"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "länk på webben"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Bild",
+            "description": "visuell bild",
+            "newItem": "Lägg till bild"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Bildgalleri",
+            "description": "galleri med bilder"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "ett album som olika medier är relaterade till"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Fil",
+            "description": "uppladdad fil",
+            "newItem": "Lägg till fil"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Ljudklipp",
+            "description": "ljudklipp",
+            "newItem": "Lägg till ljud"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Videoklipp",
+            "description": "videoklipp",
+            "newItem": "Lägg till video"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF-dokument",
+            "description": "PDF-dokument",
+            "newItem": "Lägg till PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Direktsändning",
+            "description": "liveljud eller video"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Kategori",
+            "description": "en kategori som andra strömmar kan relateras till"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Deltagande Index",
+            "description": "strömmar är relaterade\/inte relaterade till detta när en användare går med\/går ur"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Intressera",
+            "description": "representerar en användares intresse för ett visst ämne"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Inkommande",
+            "description": "destination för meddelanden som skickats av andra användare"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Konversation",
+            "description": "en konversation mellan användare, med historik"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Realtidssamtal",
+            "description": "ett video-\/ljudsamtal i realtid"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Fråga",
+            "description": "frågeström"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Svar",
+            "description": "svarsström"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Samtal",
+            "description": "kategori för Streams\/webrtc",
+            "MaxRelationsExceeded": "Max antal samtal har överskridits"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "skriv sidtitel",
+        "ModTab": "Ändra objekt",
+        "Save": "Spara",
+        "Delete": "Radera",
+        "Submenu": "Undermeny"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Spela in",
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen ljudkälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Max filstorlek är {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen videokälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Max filstorlek är {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen pdf-källa",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Max filstorlek är {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Återställa",
+        "edit": "Redigera",
+        "title": "titel",
+        "description": "beskrivning",
+        "upload": "Ladda upp",
+        "link": "Länk",
+        "setUrl": "Ange URL",
+        "save": "Spara",
+        "uploadedImage": "Uppladdad bild",
+        "imageTitle": "Bildens titel",
+        "setClip": "Klipp ut klipp",
+        "invalidURL": "Ogiltig URL",
+        "invalidFile": "Felaktig fil",
+        "errorNoSource": "Ingen bildkälla",
+        "uploadLimit": "Max filstorlek: {{size}}",
+        "errorFileSize": "Tyvärr, men filen är för stor.<br> Max filstorlek är {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "Frågor",
+        "Answers": "Svar",
+        "AnswerQuestion": "Svar fråga",
+        "SetYourAnswer": "Vänligen svara på frågan",
+        "NewQuestion": "Ny fråga",
+        "NewAnswer": "Nytt svar",
+        "AnswerDetails": "Svarsdetaljer",
+        "answerOption": "Alternativ",
+        "answerOptionExclusive": "Exklusiv",
+        "answerTextarea": "Textområde",
+        "FreeAnswer": "Skriv ditt svar här",
+        "SaveQuestion": "Spara fråga",
+        "SaveAnswer": "Spara svar",
+        "AddAnotherAnswer": "Lägg till ett annat svar",
+        "ErrorAnswers": "Lägg till ett enda svar",
+        "AlreadyAnswered": "Redan svarat",
+        "TitlePlaceholder": "Skriv din fråga",
+        "ContentPlaceholder": "Lägg in ytterligare information här för att hjälpa andra att svara",
+        "ErrorTitle": "Fråga krävs",
+        "Placeholder": "Platshållare"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Ny upplevelse",
+        "DefineTitle": "Vänligen definiera en titel",
+        "Create": "Skapa"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Samtal",
+        "MaxCalls": "Max ringer",
+        "Update": "Uppdatering",
+        "NoCallsYet": "Inga samtal än",
+        "CallReasonTitle": "Vad handlar det här samtalet om?",
+        "WaitingRoom": "Väntrum"
     }
 }

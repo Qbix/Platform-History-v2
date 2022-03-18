@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Dizze ynhâld is foar jo ferburgen."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Nij item"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Minsken dy&#39;t ik útnoege",
+        "Streams\/invitedMe": "Wa útnoege my",
+        "DoYouAgree": "Bist it iens?",
+        "Yes": "ja",
+        "No": "Nee"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Wat binne dyn ynteresses?",
+        "CanAdd": "As jo noch net kinne fine wat jo sykje, kinne jo hjirûnder in nij ynteresse tafoegje:",
+        "TrySynonyms": "Sjochst it net? Besykje wat synonimen.",
+        "AddUnderCategory": "Taheakje ûnder kategory...",
+        "Other": "Oar",
+        "Unlisted": "Net notearre"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
+        "flaggedForAdminReview": "Berjocht is markearre foar beoardieling troch admin. Tik nochris om de flagge út te skeakeljen.",
+        "noOneSaid": "Nimmen hat wat sein",
+        "closeChatButton": "Chat slute",
+        "closeChatConfirmTitle": "Dit petear slute?",
+        "closeChatConfirm": "Binne jo wis dat jo dit petear slute wolle?",
+        "Subscribed": "Notifikaasjes ynskeakele",
+        "Unsubscribed": "Notifikaasjes Muted",
+        "closeChatConfirmYes": "ja",
+        "closeChatConfirmNo": "Nee",
+        "earlierComments": "earder comments",
+        "startedConversation": "begûn in petear",
         "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "SearchByName": "Sykje op namme",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} besiket it petear",
+            "Join": "{{displayName}} die mei oan it petear",
+            "Leave": "{{displayName}} ferliet it petear",
+            "RelatedTo": "{{displayName}} begûn in {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "beheare jo e-postabonneminten",
+        "IfUnsubscribe": "As jo wolle ôfmelde",
+        "*": "Berjocht {{& message.fields.type}} oan {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sei: {{& message.content}}",
+        "Streams\/changed": "Feroarings yn {{stream.fields.title}}",
+        "Streams\/invite": "Jo binne útnoege foar {{& stream.fields.title}}",
+        "Streams\/announcement": "Oankundiging yn {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} feroare tagong yn {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Petearberjocht bewurke yn {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Petearberjocht fuortsmiten yn {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} is sluten",
+        "Streams\/task\/progress": "Foarútgong makke op {{stream.fields.title}}",
+        "Streams\/task\/complete": "Taak foltôge: {{stream.fields.title}}",
+        "Streams\/task\/error": "Flater tidens: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Ynkommend berjocht",
+        "Streams\/relatedTo\/Streams\/call": "Nije oprop begûn yn {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nije {{relationDisplayType}} yn {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Taheakke oan {{toTitle}} as {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} neamde dy yn in reaksje",
+        "Streams\/call": "{{displayName}} begûn in oprop yn echte tiid"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Noegje",
+        "messageContent": "{{displayName}} hat jo útnoege ta {{inviteUrl}}",
+        "youCanNowPaste": "Jo kinne no dizze keppeling earne plakke om minsken út te noegjen",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
+            "chooseFromContacts": "Kies út jo kontakten",
+            "chooseAgainFromContacts": "Kies nochris út Kontakten",
+            "inviteSelectedContacts": "Noegje selektearre kontakten út",
+            "selectFromContacts": "Selektearje Fan kontakten",
+            "userChooserPlaceholder": "Sykje op namme",
+            "photo": "Meitsje in foto",
+            "photoInstruction": "As de persoan dy&#39;t jo QR-koade scande foar jo is, nim dan in foto fan har",
+            "to": "Oan: {{Stream Title}}",
+            "go": "Gean",
+            "title": "Noegje",
+            "placeholder": "Mobyl nûmer of e-postadres",
+            "orInvite": "Of noegje minsken út troch te brûken:",
+            "copyLink": "{{ClickOrTap}} om útnoegingskeppeling te kopiearjen",
+            "shareOrCopyLink": "{{ClickOrTap}} om útnoegingskeppeling te dielen of te kopiearjen",
+            "QR": "{{ClickOrTap}} om QR-koade te generearjen",
+            "QRtitle": "Scan dizze QR-koade",
+            "QRscanned": "Se scanden it!",
+            "scannedQR": "{{ClickOrTap}} as de koade skansearre is",
             "byEmail": "Email",
-            "byText": "Text",
+            "byText": "Tekst",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hey, check dit út",
+            "PleaseVisitLink": "Besykje asjebleaft de folgjende keppeling:",
+            "InvitingYou": "Ik noegje jo út foar {{title}}",
+            "HasInvitedYou": "{{displayName}} hat jo útnoege ta {{title}}",
+            "HasMentionedYou": "{{displayName}} hat dy neamd yn &quot;{{title}}&quot;",
+            "YOUAREINVITED": "DO BIST ÚTNOEGE!",
+            "AcceptInvite": "Akseptearje útnoeging"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Jo binne útnoege ta {{title}}. Tik op {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Jo binne útnoege. {{ClickOrTap}} hjir om te akseptearjen en mei te dwaan."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "pleatste in <em>{{message.fields.type}}<\/em> berjocht nei {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "kommentearre op",
+            "startedCallIn": "begûn in oprop yn",
+            "in": "yn",
+            "body": "yn {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "is pleatst oan",
+                "byAvatar": "troch {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "hat in nij {{instructions.fromDisplayType}}",
+                "byAvatar": "tafoege troch {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Utnoegings wurde ferstjoerd fanôf ús nûmer, dat jo freonen noch net werkenne. Folgje op mei in rappe tekst om se te litten witte dat de útnoeging fan jo kaam, en freegje har om op de keppeling te klikken.",
+            "confirm": "Utnoegings wurde ferstjoerd fanôf ús nûmer, dat jo freonen noch net werkenne. Wolle jo opfolgje mei in rappe tekst om se te litten witte dat de útnoeging fan jo kaam, en freegje se om op de keppeling te klikken.",
+            "check": "Hee, ik haw dy krekt in útnoeging stjoerd foar de {{app}} app. Kontrolearje asjebleaft jo sms en klik op de keppeling!",
+            "CheckYourMobile": "Kontrolearje asjebleaft SMS en folgje ynstruksjes!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Utnoegings wurde ferstjoerd fan ús domein, dat jo freonen noch net werkenne. Folgje op mei in rappe tekst om se te litten witte dat de útnoeging fan jo kaam, en freegje har om op de keppeling te klikken.",
+            "confirm": "Utnoegings wurde ferstjoerd fan ús domein, dat jo freonen noch net werkenne. Wolle jo opfolgje mei in rappe tekst om se te litten witte dat de útnoeging fan jo kaam, en freegje se om op de keppeling te klikken.",
+            "subject": "Hawwe jo in útnoeging krigen?",
+            "body": "Hee, ik haw dy krekt in útnoeging stjoerd foar de {{app}} app. Kontrolearje asjebleaft jo e-post en klikje op de keppeling dêryn!",
+            "CheckYourEmail": "Kontrolearje asjebleaft jo e-post en folgje ynstruksjes!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
+        "Title": "Titel",
+        "Subscribed": "Ynskreaun",
+        "Participants": "Dielnimmers",
+        "AreYouSureRemoveIdentifier": "Binne jo wis dat jo dizze identifier fuortsmite?",
+        "AreYouSureUnsubscribeIdentifier": "Binne jo wis dat jo dizze identifier ôfskriuwe? It sil notifikaasjes foar dizze identifier útskeakelje.",
+        "AreYouSureUnsubscribeDevice": "Binne jo wis dat jo dit apparaat ôfmelde? It sil notifikaasjes nei dit apparaat útsette.",
+        "AreYouSureRemoveParticipant": "Binne jo wis dat jo dizze dielnimmer fuortsmite wolle?",
+        "RemoveParticipant": "Fuortsmite dielnimmer",
+        "Identifiers": "Identifikaasjes",
+        "Devices": "Apparaten",
         "Streams": "Streams"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Jo hawwe gjin tastimming om mei te dwaan oan dizze stream.",
+        "streamTitle": "{{1}} begûn in live oprop",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Ferbine",
+            "microphoneBtn": "Mikrofoan ynskeakelje",
+            "cameraBtn": "Kamera ynskeakelje",
+            "cameraAndMicrophoneBtn": "Kamera en mikrofoan ynskeakelje"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Mic is út",
+            "micIsOn": "Mic is oan",
+            "cameraIsOff": "Kamera is út",
+            "cameraIsOn": "Kamera stiet oan",
+            "screenSharingIsOn": "Skermdieling is oan",
+            "screenSharingIsOff": "Diele skerm",
+            "joinNow": "Doch mei oan de oprop"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Om it te brûken, folgje dizze stappen:",
+            "point1": "Gean nei &quot;Ynstellings&quot; -&gt; &quot;Avansearre&quot; -&gt; &quot;Privacy en feiligens&quot; -&gt; &quot;Sideynstellingen&quot; -&gt; &quot;Kamera&quot; of &quot;Sideynstellingen&quot; -&gt; &quot;Mikrofoan&quot;",
+            "point2": "Fuortsmite {{hostname}} út &quot;Blokkearje&quot; list"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Laad dizze side opnij en befêstigje tagong ta {{kind}} om mei te dwaan oan &#39;e konferinsje."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Om it te brûken, folgje dizze stappen:",
+            "point1": "Gean nei jo Android-ynstellingen",
+            "point2": "Iepenje &quot;Apps en notifikaasjes&quot;",
+            "point3": "Fyn &quot;{{communityName}}&quot; en iepenje it",
+            "point4": "Tap op Fergunningen",
+            "point5": "Aktivearje {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Ynstruksjes",
+            "permissionDenied": "Tastimming foar {{kind}} wegere. Om it te brûken, folgje dizze stappen:",
+            "point1": "Gean nei jo iOS-ynstellingen",
+            "point2": "Iepenje &quot;Privacy&quot;",
+            "point3": "Fyn {{kind}} en iepenje it",
+            "point4": "Fyn &quot;{{communityName}}&quot; en ynskeakelje"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Do bist by de keamer",
+            "joining": "Meidwaan: {{userName}}",
+            "sbLeftRoom": "{{userName}} ferliet de keamer",
+            "switchingRoom": "Keamer wikselje...",
+            "forceDisconnecting": "Jo wurde binnen 5 sekonden loskeppele",
+            "forceDisconnectingImmediately": "Jo binne loskeppele troch in host",
+            "youLeftRoom": "Jo hawwe de keamer ferlitten",
+            "codeCopied": "Jo hawwe de keamer ferlitten",
+            "sbBeganFbLive": "{{userName}} begûn dizze oprop út te stjoeren op Facebook",
+            "sbStoppedFbLive": "{{userName}} stoppe mei it útstjoeren fan dizze oprop yn Facebook",
+            "youBeganFbLive": "Jo begon dizze oprop út te stjoeren op Facebook",
+            "youStoppedFbLive": "Jo binne stoppe mei it útstjoeren fan dizze oprop op Facebook",
+            "youStartedLive": "Jo begon dizze oprop út te stjoeren nei oanpaste RTMP",
+            "youStoppedLive": "Jo binne stoppe mei it útstjoeren fan dizze oprop nei oanpaste RTMP",
+            "sbStartedLiveStreaming": "{{userName}} live begûn",
+            "sbStoppedLiveStreaming": "{{userName}} live einige",
+            "liveStopped": "Der barde flater by it ferstjoeren fan fideo nei einpunt",
+            "youBeganVideoRecording": "Jo binne begûn mei it opnimmen fan dizze konferinsje",
+            "youStoppedVideoRecording": "Jo binne stoppe mei it opnimmen fan dizze konferinsje",
+            "linkCopiedToCb": "Link kopiearre nei klamboerd",
+            "codeCopiedToCb": "Koade kopiearre nei klamboerd",
+            "userHasNoVideo": "Dielnimmer hat gjin fideo",
+            "openInBrowserAlert": "Iepenje keppeling yn Safari-blêder om mei te dwaan oan &#39;e konferinsje."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
+            "dialogTitle": "Video Ynstellings",
+            "webCamera": "Web kamera",
+            "screenSharing": "Skerm diele",
+            "shareAnotherScreen": "Diel in oar skerm",
+            "turnOffCameras": "Kamera útsette",
+            "turnOffVideo": "Skeakelje kamera \/ skerm dielen út",
+            "turnOffAudioInput": "Dempe mikrofoan",
+            "turnOffScreenSharing": "Skeakelje skerm dielen út",
+            "cameraIsTurnedOff": "Kamera is útskeakele",
+            "micIsTurnedOff": "Mikrofoan is útskeakele",
             "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
+            "stopFBLive": "Stopje Facebook Livestream",
+            "startRecording": "Begjin opname",
+            "stopRecording": "Stopje opname",
             "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "stop": "Ophâlde",
+            "recordingInProgress": "Opname is dwaande...",
+            "fbLiveTitle": "Titel fan Livestream",
+            "fbLiveDescription": "Beskriuw jo Livestream. Wêr giet it oer?",
+            "fbOnlyMeLiveAccess": "Allinnich ik",
+            "fbFriendsAccess": "Freonen",
+            "fbPublicAccess": "Iepenbier",
+            "publishOnTimeline": "Publisearje op tiidline",
+            "publishToGroup": "Publisearje nei groep",
+            "fbStartLive": "Gean libjen",
+            "fbStopLive": "Livestream einigje",
+            "streamingSettings": "Ynstellings",
+            "fbEmbedCode": "Ynbêde",
+            "copy": "Kopy",
+            "streamToRTMP": "Stream nei oanpaste RTMP",
+            "startBroadcasting": "Begjin útstjoeren",
+            "broadcastingInProgress": "De útstjoering is oan &#39;e gong"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Audio ynstellings",
+            "speakers": "Sprekkers",
+            "microphone": "Mikrofoan"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
+            "dialogTitle": "Participant Ynstellings",
+            "disconnect": "Ferbine",
             "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
+            "tiledScreens": "Betegele skermen",
+            "loudestExceptMe": "Lûdst útsein my",
             "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "staticMaximized": "Statyske maksimalisearre",
+            "fullScreen": "Folslein skerm",
+            "manual": "Hantlieding",
+            "turnOffCamera": "Fideo ferbergje",
+            "turnOffAudio": "Dempe audio",
+            "turnOffScreenSharing": "Skermdieling ferbergje",
+            "turnOnCamera": "Fideo sjen litte",
+            "turnOnAudio": "Audio útskeakelje",
+            "turnOnScreenSharing": "Skermdieling sjen litte"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Streaming ynstellings"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Moeting",
+            "MeetingEnded": "Gearkomste einige"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Utnoege",
+            "description": "Postfak foar útnoegings"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Helpmiddel",
+            "description": "stream foar it behearen fan tagong ta in boarne en it pleatsen fan berjochten oer updates"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "foar it ûntfangen fan updates oer foarútgong op in bepaalde taak",
+            "displayType": "Taak"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "kategory foar taken",
+            "displayType": "Taken"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "in mienskiplike ûnderfining foar leden fan in mienskip",
+            "displayType": "Mienskiplike ûnderfining foar leden fan in mienskip"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "groetnis wêrmei in brûker har foarstelle kin",
+            "displayType": "Groet"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Nûmer",
+            "description": "wiskundige getal"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Datum",
+            "description": "datum"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Tekst",
+            "description": "lichem fan tekst"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Tekst",
+            "description": "lyts lichem fan tekst"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Tekst",
+            "description": "medium lichem fan tekst"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "E-postadres",
+            "description": "e-postadres"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Telefoannûmer",
+            "description": "telefoannûmer"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "link op it web"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Byld",
+            "description": "fisuele ôfbylding",
+            "newItem": "Ofbylding tafoegje"
         },
         "Streams\/images": {
             "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "description": "galery fan bylden"
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "an album to which various media is related"
+            "description": "in album dêr&#39;t ferskate media oan besibbe binne"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Map",
+            "description": "uploaded triem",
+            "newItem": "Bestân taheakje"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
+            "displayType": "Audio klip",
+            "description": "audio klip",
             "newItem": "Add Audio"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Videoklip",
+            "description": "fideoklip",
+            "newItem": "Fideo tafoegje"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
+            "displayType": "PDF dokumint",
+            "description": "PDF dokumint",
             "newItem": "Add PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Streekrjochte útstjoering",
+            "description": "live audio of fideo"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Kategory",
+            "description": "in kategory dêr&#39;t oare streamingen oan relatearre wurde kinne"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Dielnimmende Index",
+            "description": "streamen binne besibbe \/ net besibbe oan dit as in brûker meidwaan \/ ferlit"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Rinte",
+            "description": "fertsjintwurdiget de belangstelling fan in brûker yn in bepaald ûnderwerp"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Ynkommende",
+            "description": "bestimming foar berjochten ferstjoerd troch oare brûkers"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Petear",
+            "description": "in petear tusken brûkers, mei skiednis"
         },
         "Streams\/webrtc": {
             "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "description": "in echte tiid fideo \/ audio oprop"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Fraach",
+            "description": "fraach stream"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Antwurdzje",
+            "description": "antwurd stream"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Oproppen",
+            "description": "kategory foar Streams \/ webrtc",
+            "MaxRelationsExceeded": "Maksimum oproppen oertroffen"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
+        "placeholder": "type side titel",
+        "ModTab": "Item wizigje",
+        "Save": "Rêde",
+        "Delete": "Wiskje",
         "Submenu": "Submenu"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "record": "Opnimme",
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "save": "Rêde",
+        "setClip": "Knippe út klip",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildige triem",
+        "errorNoSource": "Gjin audio boarne",
+        "uploadLimit": "Maksimale triemgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar it bestân is te grut.<br> Maksimum triemgrutte is {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "save": "Rêde",
+        "setClip": "Knippe út klip",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildige triem",
+        "errorNoSource": "Gjin fideo boarne",
+        "uploadLimit": "Maksimale triemgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar it bestân is te grut.<br> Maksimum triemgrutte is {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "save": "Rêde",
+        "setClip": "Knippe út klip",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildige triem",
+        "errorNoSource": "Gjin pdf boarne",
+        "uploadLimit": "Maksimale triemgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar it bestân is te grut.<br> Maksimum triemgrutte is {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
+        "reset": "Weromsette",
+        "edit": "Bewurkje",
+        "title": "titel",
+        "description": "beskriuwing",
         "upload": "Upload",
         "link": "Link",
         "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "save": "Rêde",
+        "uploadedImage": "Uploaded ôfbylding",
+        "imageTitle": "Ofbylding titel",
+        "setClip": "Knippe út klip",
+        "invalidURL": "Unjildige URL",
+        "invalidFile": "Unjildige triem",
+        "errorNoSource": "Gjin ôfbylding boarne",
+        "uploadLimit": "Maksimale triemgrutte: {{size}}",
+        "errorFileSize": "Sorry, mar it bestân is te grut.<br> Maksimum triemgrutte is {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "Fragen",
+        "Answers": "Antwurden",
+        "AnswerQuestion": "Antwurd fraach",
+        "SetYourAnswer": "Beantwurdzje asjebleaft de fraach",
+        "NewQuestion": "Nije fraach",
+        "NewAnswer": "Nij antwurd",
+        "AnswerDetails": "Antwurd Details",
+        "answerOption": "Opsje",
+        "answerOptionExclusive": "Eksklusyf",
+        "answerTextarea": "Tekstgebiet",
+        "FreeAnswer": "Skriuw jo antwurd hjir",
+        "SaveQuestion": "Bewarje fraach",
+        "SaveAnswer": "Bewarje Antwurd",
+        "AddAnotherAnswer": "Foegje in oar antwurd ta",
+        "ErrorAnswers": "Foegje sels ien antwurd ta",
+        "AlreadyAnswered": "Al beäntwurde",
+        "TitlePlaceholder": "Typ jo fraach",
+        "ContentPlaceholder": "Set hjir alle oanfoljende ynformaasje om minsken te helpen antwurdzje",
+        "ErrorTitle": "Fraach fereaske",
+        "Placeholder": "Plakhâlder"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Nije ûnderfining",
+        "DefineTitle": "Definiearje asjebleaft in titel",
+        "Create": "Meitsje"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
+        "SettingsTitle": "Oproppen",
+        "MaxCalls": "Max ropt",
         "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "NoCallsYet": "Noch gjin oproppen",
+        "CallReasonTitle": "Wêr giet dizze oprop oer?",
+        "WaitingRoom": "Wachtkeamer"
     }
 }

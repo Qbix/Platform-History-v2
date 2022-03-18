@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Ukitu ordaintzeko"
+        "button": "Sakatu ordaintzeko"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} (r) en prozesatutako arduraduna",
-        "ThankYouForYourPayment": "Eskerrik asko {{call 'publisher.displayName'}} zerbitzura ordaintzeagatik",
-        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} (e) n harpidetu da",
-        "YouSubscribedTo": "{{plan.title}} zerbitzuan harpidetu zara"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: karga prozesatu da {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Eskerrik asko {{call 'publisher.displayName'}}-ri egindako ordainketagatik",
+        "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}}-ra harpidetu da",
+        "YouSubscribedTo": "{{plan.title}}-ra harpidetuta zaude"
     },
     "payment": {
         "AboutOrder": "Eskaerari buruzko informazioa",
-        "PaymentMethod": "Ordaintzeko modua",
-        "ContactInfo": "Harremanetarako datuak",
+        "PaymentMethod": "Ordainketa modua",
+        "ContactInfo": "Harremanetarako informazioa",
         "Pay": "Ordaindu"
     },
     "credits": {
-        "InviteAcceptedBy": "{999}} -k onartutako gonbidapena",
-        "YouHaveCreditsToStart": "{{1}} kreditu dituzu hasteko",
-        "PaymentFor": "&quot;{{1}}&quot; ordainketa",
-        "PaymentTo": "Ordainketa {{1}} (e) ra",
-        "PaymentToUser": "Ordainketa {{userName}} (e) ra",
-        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>elkartzeko<\/a>",
+        "InviteAcceptedBy": "{{invitedUserName}}-k onartu du gonbidapena",
+        "YouHaveCreditsToStart": "{{amount}} kreditu dituzu hasteko",
+        "PaymentFor": "&quot;{{1}}&quot;-ren ordainketa",
+        "PaymentTo": "Ordainketa {{1}}",
+        "PaymentToUser": "Ordainketa {{toUserName}}",
+        "JoinedPaidStream": "erreserba egiteko &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
         "CreatedCommunity": "&quot;{{communityId}}&quot; komunitatea sortzeko",
-        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>uzteagatik<\/a>",
-        "BoughtCredits": "Erosi {{amount}} kreditu",
-        "BuyAmountCredits": "Erosi {{amount}} kredituak",
-        "MissingCredits": "Kredituen falta",
-        "YouMissingCredits": "{{amount}} kredituak falta zaizkizu",
+        "LeftPaidStream": "erreserbaren itzulketa gisa &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;-n",
+        "BoughtCredits": "{{amount}} kreditu erosi",
+        "BuyAmountCredits": "Erosi {{amount}} kreditu",
+        "MissingCredits": "Kredituak falta dira",
+        "YouMissingCredits": "Aurrera egiteko, {{amount}} kreditu gehiago behar dituzu.",
         "BuyCredits": "Erosi kredituak",
         "Buy": "Erosi",
-        "Credits": "kredituak",
+        "Credits": "Kredituak",
         "ErrorInvalidAmount": "Zenbatekoa baliogabea",
-        "ErrorInvalidCurrency": "Zoritxarrez ez dugu moneta {{currency}} onartzen oraindik",
-        "WatchClip": "{{amount}} kreditu irabazi dituzu {{fromStreamTitle}} ikusteagatik",
-        "PurchaseCredits": "Erosi kredituak",
+        "ErrorInvalidCurrency": "Zoritxarrez, oraindik ez dugu {{currency}} moneta onartzen",
+        "WatchClip": "{{amount}} kreditu irabazi ditu {{fromStreamTitle}} ikusteagatik",
+        "PurchaseCredits": "Erosketa Kredituak",
         "forMessages": {
             "BoughtCredits": "{{amount}} kreditu",
             "BonusCredits": "{{amount}} kreditu"
         },
-        "CreatePaidStream": "{{toStreamName}} sortzeagatik",
-        "BonusCredits": "Hobari {{amount}} kredituak",
-        "BuyBonus": "{{amount}} kreditu aldi berean erosteak {{bonus}} kreditu hobea ekarriko du.",
+        "CreatePaidStream": "{{toStreamName}} sortzeko",
+        "BonusCredits": "{{amount}} kreditu gehigarriak",
+        "BuyBonus": "{{amount}} kreditu aldi berean erosiz gero, {{bonus}} kreditu hobaria ekarriko du.",
         "Streams_user_firstname": "{{invitedUserName}}-k izena idatzi du",
         "Streams_user_lastname": "{{invitedUserName}}-k abizena idatzi du",
         "Streams_user_icon": "{{invitedUserName}} sartu da ikonoa",
@@ -49,131 +49,131 @@
         "Streams_greeting": "{{invitedUserName}} agurra sartu da"
     },
     "history": {
-        "Date": "data",
-        "Amount": "Zenbateko",
-        "Description": "deskribapena",
-        "Client": "Bezero",
+        "Date": "Data",
+        "Amount": "Zenbatekoa",
+        "Description": "Deskribapena",
+        "Client": "Bezeroa",
         "To": "to",
-        "From": "batetik",
-        "HistoryEmpty": "Datuak oraindik ez dituzu",
-        "SeeHistory": "Ikusi {{1}} ordainketaren historia",
-        "PaymentFor": "{{amount}} kreditu igorri dira",
-        "PaymentTo": "{{amount}} kreditu bidali dira",
-        "PaymentToUser": "{{amount}} kreditu bidali dira",
+        "From": "tik",
+        "HistoryEmpty": "Oraindik ez duzu daturik",
+        "SeeHistory": "Ikusi {{1}} ordainketen historia",
+        "PaymentFor": "{{amount}} kreditu bidali ditu",
+        "PaymentTo": "{{amount}} kreditu bidali ditu",
+        "PaymentToUser": "{{amount}} kreditu bidali ditu",
         "JoinedPaidStream": {
-            "+": "Irabazitako {{amount}} kredituak",
-            "-": "{{amount}} kreditu igorri dira"
-        },
-        "LeftPaidStream": {
-            "+": "{{amount}} kredituak jaso dira",
-            "-": "{{amount}} kreditu bidali dira"
-        },
-        "CreatedCommunity": "{{amount}} kreditu igorri dira",
-        "BoughtCredits": "Erosi {{amount}} kreditu",
-        "InviteAcceptedBy": "Irabazitako {{amount}} kredituak",
-        "YouHaveCreditsToStart": "Irabazitako {{amount}} kredituak",
-        "CreatePaidStream": "{{amount}} kreditu gastatu",
-        "WatchClip": {
-            "+": "Irabazitako {{amount}} kreditu",
+            "+": "{{amount}} kreditu irabazi ditu",
             "-": "{{amount}} kreditu gastatu"
         },
-        "BonusCredits": "{{amount}} kreditu hobeak lortu dituzu",
+        "LeftPaidStream": {
+            "+": "{{amount}} kreditu jaso ditu",
+            "-": "{{amount}} kreditu bidali ditu"
+        },
+        "CreatedCommunity": "{{amount}} kreditu gastatu",
+        "BoughtCredits": "{{amount}} kreditu erosi",
+        "InviteAcceptedBy": "{{amount}} kreditu lortu dituzu",
+        "YouHaveCreditsToStart": "{{amount}} kreditu irabazi ditu",
+        "CreatePaidStream": "{{amount}} kreditu gastatu",
+        "WatchClip": {
+            "+": "{{amount}} kreditu lortu dituzu",
+            "-": "{{amount}} kreditu gastatu"
+        },
+        "BonusCredits": "{{amount}} kreditu gehigarriak lortu dituzu",
         "Streams_user_firstname": "{{amount}} kreditu irabazi ditu",
-        "Streams_user_lastname": "{{amount}} kreditu irabazi ditu",
+        "Streams_user_lastname": "{{amount}} kreditu lortu dituzu",
         "Streams_user_icon": "{{amount}} kreditu irabazi ditu",
         "Places_user_location": "{{amount}} kreditu irabazi ditu",
-        "Streams_greeting": "{{amount}} kreditu irabazi ditu"
+        "Streams_greeting": "{{amount}} kreditu lortu dituzu"
     },
     "subscriptions": {
-        "infoTitle": "Ezarri ordainketa informazioa",
+        "infoTitle": "Ezarri ordainketa-informazioa",
         "confirm": {
-            "title": "Hasi harpidetza",
-            "message": "{{title}} (e) k harpidetu nahi al duzu?",
+            "title": "Hasi Harpidetza",
+            "message": "{{title}}-ra harpidetu nahi al zara?",
             "ok": "Ados",
             "cancel": "Utzi"
         },
         "CreditOrDebitCard": "Kreditu edo zordunketa txartela",
-        "SubscribePayment": "Harpidetu Ordainketa",
-        "ImmediatePayment": "Berehalako ordainketa"
+        "SubscribePayment": "Harpidetza Ordainketa",
+        "ImmediatePayment": "Berehalako Ordainketa"
     },
     "payments": {
-        "infoTitle": "Ezarri ordainketa informazioa",
+        "infoTitle": "Ezarri ordainketa-informazioa",
         "confirm": {
-            "title": "Egin ordainketa",
-            "message": "Onartzen al duzu {{symbol}} {{amount}} ordaintzea?",
+            "title": "Egin Ordainketa",
+            "message": "Onartzen al zara {{symbol}}{{amount}} ordaintzea?",
             "ok": "Ados",
             "cancel": "Utzi"
         },
-        "BuyAmountCredits": "Erosi {{amount}} kredituak"
+        "BuyAmountCredits": "Erosi {{amount}} kreditu"
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "kredituak",
-            "description": "kredituak eta ordainketak kontrolatzen ditu"
+            "displayType": "Kredituak",
+            "description": "kredituen eta ordainketen jarraipena egiten du"
         },
         "Assets\/plan": {
-            "displayType": "Dirulaguntza Plana",
+            "displayType": "Harpidetza Plana",
             "description": "harpidetza plana"
         },
         "Assets\/subscription": {
-            "displayType": "harpidetza",
+            "displayType": "Harpidetza",
             "description": "harpidetza"
         },
         "Assets\/product": {
-            "displayType": "Produktuen",
+            "displayType": "Produktua",
             "description": "saltzen ari den produktua"
         },
         "Assets\/service": {
-            "displayType": "zerbitzua",
-            "description": "zerbitzua eskaintzen ari da"
+            "displayType": "Zerbitzua",
+            "description": "eskaintzen ari den zerbitzua"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Irabazitako {{amount}} kredituak"
+            "content": "{{amount}} kreditu irabazi ditu"
         },
         "Assets\/credits\/spent": {
-            "content": "{{amount}} kreditu igorri dira"
+            "content": "{{amount}} kreditu gastatu"
         },
         "Assets\/credits\/sent": {
-            "content": "{{amount}} kreditu bidali dira"
+            "content": "{{amount}} kreditu bidali dizkio {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "{{amount}} kredituak jaso dira"
+            "content": "{{amount}} kreditu jaso ditu {{fromUserName}}-tik"
         },
         "Assets\/credits\/bought": {
-            "content": "Erosi {{amount}} kreditu"
+            "content": "{{amount}} kreditu erosi"
         },
         "Assets\/credits\/bonus": {
-            "content": "Hobari {{amount}} kredituak"
+            "content": "{{amount}} kreditu gehigarriak"
         }
     },
     "charge": {
-        "Subject": "{{displayAmount}} (e) tik {{call 'publisher.displayName'}} ordainketa &quot;{{description}}&quot; bidez jasotzen duzu",
-        "HasBeenCharged": "He, hau jakinarazteko besterik ez da {{1}} {{3}} {{3}} kargutik {{4}} kargatu zaizu"
+        "Subject": "{{displayAmount}} ordaintzen duzu {{call 'publisher.displayName'}}-tik &quot;{{description}}&quot; bidez",
+        "HasBeenCharged": "Aizu, hau {{1}} {{2}} {{3}} kobratu duela jakinarazteko besterik ez da {{4}}"
     },
     "charged": {
-        "Subject": "Eskerrik asko &quot;{{description}}&quot; delakoagatik ordaintzeagatik.",
-        "HavePaid": "Kaixo {{1}}, baieztapen bizkorra besterik ez da {{3}} {{3}} (e) tik {{4}} ondo ordaindu duzula."
+        "Subject": "Eskerrik asko &quot;{{description}}&quot;-ren ordainketagatik",
+        "HavePaid": "Kaixo, {{1}}, hau {{2}} {{3}}-ri {{4}} behar bezala ordaindu diozuela berrespen azkar bat besterik ez da"
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Zerbitzu berria",
+            "Title": "Zerbitzu Berria",
             "TitlePlaceholder": "Zerbitzuaren titulua",
             "PricePlaceholder": "Ezarri prezioa",
-            "LinkPlaceholder": "ezarri esteka informazio gehigarria",
+            "LinkPlaceholder": "ezarri informazio gehigarria esteka",
             "DescriptionPlaceholder": "Zerbitzuaren deskribapena",
-            "SaveService": "Gorde zerbitzua",
-            "SelectRequiredParticipants": "Beharrezko Partehartzaileak"
+            "SaveService": "Gorde Zerbitzua",
+            "SelectRequiredParticipants": "Beharrezko partaideak"
         },
-        "ManageServiceTemplates": "Zerbitzuaren txantiloiak kudeatu",
+        "ManageServiceTemplates": "Kudeatu Zerbitzu Txantiloiak",
         "ManageServices": "Zerbitzuak kudeatu",
         "FreeEvent": "Doako ekitaldia",
         "OptionalContribution": "Aukerako ekarpena",
         "RequiredPayment": "Beharrezko ordainketa",
         "AreYouSureDelete": "Ziur zerbitzu hau ezabatu nahi duzula?",
-        "AmountServicesRelated": "Zerbitzu honekin lotutako {{amount}} erabilgarritasun daude. Dira ere kendu egingo dira.",
-        "Free": "Doakoa"
+        "AmountServicesRelated": "Zerbitzu honekin erlazionatutako {{amount}} erabilgarritasun daude. Horiek ere kenduko dira.",
+        "Free": "Doan"
     },
     "NFT": {
         "Title": "{{title}} NFTri buruzko informazioa",

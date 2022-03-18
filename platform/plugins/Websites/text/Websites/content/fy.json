@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Link om te befoarderjen",
+                "startDate": "Begjin Datum",
+                "startTime": "Begjintiid",
+                "endDate": "Eindatum",
+                "endTime": "Eintiid",
+                "budget": "Begrutting"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filterje op ynteresse",
+                "FilterInterests": "Begjin in ynteresse yn te typen ..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Rinte",
+            "Location": "Lokaasje"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Gean",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
+            "BrowseTheWeb": "Blêdzje",
+            "WriteToStartConversation": "Skriuw jo gedachten om it petear te begjinnen",
+            "StartConversation": "Begjin petear",
+            "GotoConversation": "Gean nei Conversation",
+            "reset": "Weromsette",
+            "edit": "Bewurkje",
             "link": "Link",
             "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "save": "Rêde",
+            "setClip": "Knippe út klip",
+            "invalidURL": "Unjildige URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Triem te grut foar caching. Maksimale triemgrutte {{size}}",
+        "InvalidPDF": "Triem is gjin jildige PDF",
+        "StartTypingTitleOrKeywords": "Begjin titel of kaaiwurden yn te typen ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "In HTML-dokumint dat ferskate brûkers kinne besjen en bewurkje",
+            "displayType": "Lidwurd"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "description": "In dia yn in presintaasje kin HTML, audio ensfh.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "In presintaasje besteande út ferskate dia&#39;s",
+            "displayType": "Presintaasje"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "In reklame ienheid op in webside",
+            "displayType": "Advertinsje ienheid"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "In manier om reklame-ienheden ûnder in namme te groepearjen",
+            "displayType": "Advertinsje pleatsing"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Ynhâld foar in advertinsje",
+            "displayType": "Kreatyf reklame"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "In reklamekampanje",
+            "displayType": "Advertinsje kampanje"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Fertsjintwurdet in webside wêrfan de metadata is skrast",
+            "displayType": "webside"
         }
     }
 }

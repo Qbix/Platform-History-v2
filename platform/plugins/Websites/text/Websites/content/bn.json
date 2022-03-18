@@ -2,7 +2,7 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "প্রচার লিঙ্ক",
+                "link": "প্রচারের লিঙ্ক",
                 "startDate": "শুরুর তারিখ",
                 "startTime": "সময় শুরু",
                 "endDate": "শেষ তারিখ",
@@ -10,8 +10,8 @@
                 "budget": "বাজেট"
             },
             "interests": {
-                "Title": "সুদ দ্বারা ফিল্টার করুন",
-                "FilterInterests": "একটি আগ্রহ টাইপ শুরু করুন ..."
+                "Title": "আগ্রহ অনুসারে ফিল্টার করুন",
+                "FilterInterests": "একটি আগ্রহ টাইপ করা শুরু করুন..."
             },
             "Interest": "স্বার্থ",
             "Location": "অবস্থান"
@@ -20,55 +20,55 @@
     "webpage": {
         "composer": {
             "Go": "যাওয়া",
-            "PasteLinkHere": "এখানে একটি লিঙ্ক পেস্ট করুন",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "ব্রাউজ করুন",
-            "WriteToStartConversation": "কথোপকথন শুরু আপনার চিন্তা লিখুন",
+            "WriteToStartConversation": "কথোপকথন শুরু করতে আপনার চিন্তা লিখুন",
             "StartConversation": "কথোপকথন শুরু করুন",
             "GotoConversation": "কথোপকথনে যান",
             "reset": "রিসেট",
             "edit": "সম্পাদনা করুন",
             "link": "লিঙ্ক",
-            "setUrl": "ইউআরএল সেট করুন",
+            "setUrl": "URL সেট করুন",
             "save": "সংরক্ষণ",
-            "setClip": "ক্লিপ কাট",
-            "invalidURL": "অবৈধ ইউআরএল"
+            "setClip": "কাট আউট ক্লিপ",
+            "invalidURL": "অবৈধ URL"
         },
-        "FileTooLarge": "ক্যাশিংয়ের জন্য ফাইল খুব বড়। সর্বাধিক ফাইলের আকার {{999}",
-        "InvalidPDF": "ফাইলটি কোনও বৈধ পিডিএফ নয়",
-        "StartTypingTitleOrKeywords": "শিরোনাম বা কীওয়ার্ড লিখতে শুরু করুন ..."
+        "FileTooLarge": "ক্যাশে করার জন্য ফাইলটি খুব বড়। সর্বোচ্চ ফাইলের আকার {{size}}",
+        "InvalidPDF": "ফাইলটি একটি বৈধ PDF নয়",
+        "StartTypingTitleOrKeywords": "শিরোনাম বা কীওয়ার্ড টাইপ করা শুরু করুন..."
     },
     "types": {
         "Websites\/article": {
-            "description": "একটি HTML ডকুমেন্ট যা বিভিন্ন ব্যবহারকারী দেখতে এবং সম্পাদনা করতে পারে",
+            "description": "একটি HTML নথি যা বিভিন্ন ব্যবহারকারী দেখতে এবং সম্পাদনা করতে পারে",
             "displayType": "প্রবন্ধ"
         },
         "Websites\/slide": {
-            "description": "উপস্থাপনাটির একটি স্লাইডে এইচটিএমএল, অডিও ইত্যাদি অন্তর্ভুক্ত থাকতে পারে",
-            "displayType": "স্লাইড্"
+            "description": "একটি উপস্থাপনার একটি স্লাইড, এইচটিএমএল, অডিও ইত্যাদি অন্তর্ভুক্ত করতে পারে।",
+            "displayType": "স্লাইড"
         },
         "Websites\/presentation": {
             "description": "বিভিন্ন স্লাইড সমন্বিত একটি উপস্থাপনা",
-            "displayType": "উপহার"
+            "displayType": "উপস্থাপনা"
         },
         "Websites\/advert\/unit": {
             "description": "একটি ওয়েবসাইটে একটি বিজ্ঞাপন ইউনিট",
             "displayType": "বিজ্ঞাপন ইউনিট"
         },
         "Websites\/advert\/placement": {
-            "description": "নামের অধীনে বিজ্ঞাপন ইউনিটকে গ্রুপিংয়ের একটি উপায়",
-            "displayType": "বিজ্ঞাপন স্থাপন"
+            "description": "একটি নামের অধীনে বিজ্ঞাপন ইউনিট গোষ্ঠীবদ্ধ করার একটি উপায়",
+            "displayType": "বিজ্ঞাপন বসানো"
         },
         "Websites\/advert\/creative": {
-            "description": "একটি বিজ্ঞাপনের জন্য সামগ্রী",
+            "description": "একটি বিজ্ঞাপন জন্য বিষয়বস্তু",
             "displayType": "সৃজনশীল বিজ্ঞাপন"
         },
         "Websites\/advert\/campaign": {
-            "description": "একটি বিজ্ঞাপন প্রচার",
+            "description": "একটি বিজ্ঞাপন প্রচারাভিযান",
             "displayType": "বিজ্ঞাপন প্রচার"
         },
         "Websites\/webpage": {
-            "description": "এমন একটি ওয়েবসাইটের প্রতিনিধিত্ব করে যার মেটাডেটা স্ক্র্যাপড ছিল",
-            "displayType": "ওয়েব পৃষ্ঠা"
+            "description": "এমন একটি ওয়েবসাইটের প্রতিনিধিত্ব করে যার মেটাডেটা স্ক্র্যাপ করা হয়েছে",
+            "displayType": "ওয়েব পেজ"
         }
     }
 }

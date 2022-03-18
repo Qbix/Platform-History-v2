@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "i roto {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "mita",
+        "meters": "mita",
+        "kilometer": "kiromita",
+        "kilometers": "kiomita",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "maero",
+        "miles": "maero",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "waewae",
+        "feet": "waewae",
+        "inches": "inihi"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Kei te pirangi au ki nga mahi kei roto {{select}} o",
+        "update": "Whakahou Taku Tauwāhi",
+        "set": "Tautuhi Taku Tauwāhi",
+        "prompt": "{{ClickOrTap}} ki konei<br> whakaritea to<br> wāhi",
+        "myCurrentLocation": "Ko taku waahi o naianei",
+        "enterAddress": "Whakauruhia he wahitau",
+        "enterPostcode": "Whakauruhia koa to waehere poutāpeta \/ waehere",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Tāpiri Tauwāhi",
+            "title": "Tauwāhi Hou",
+            "nameYourLocation": "Whakaingoatia to waahi"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Tiakina tenei waahi?",
+            "message": "Kei te whakamahere koe ki te whakamahi ano i tenei waahi a muri ake nei?",
+            "ok": "Ae",
+            "cancel": "Kao"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Whakaingoatia tenei waahi",
+            "placeholder": "Kainga, Mahi etc.",
+            "ok": "Tiaki"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Kōwhiri Tauwāhi"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "He waahi kei roto i tenei waahi?",
+        "newArea": "Te rohe hou",
+        "promptTitle": "Whakauruhia he ingoa mo te rohe:",
+        "absent": "Whakatakotoria he horahanga",
+        "error": "Hapa",
+        "exist": "Kua noho kē te rohe",
+        "addNewArea": "Taapirihia he waahi hou",
+        "add": "Tāpiri"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "he kohinga waahi",
+            "displayType": "Nga waahi"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "He tohu whare, waahi, kaipuke, papa, aha atu.",
+            "displayType": "Tauwāhi"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Ka tohu i tetahi waahi i roto i tetahi waahi, penei i te ruma, te huinga ranei",
+            "displayType": "Rohe"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "He tohu mo te papa o te whare, kaipuke ranei",
+            "displayType": "Papa"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "He tohu i te pou o te whare, kaipuke ranei",
+            "displayType": "Tīwae"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Ko te waahanga mo nga mea kei roto i tetahi tawhiti o te geohash",
+            "displayType": "Tata ki nga waahi"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Ko te waahanga mo nga mea kei roto i tetahi tawhiti o te geohash, e rite ana ki tetahi paanga",
+            "displayType": "Nga waahi paanga"
         }
     }
 }

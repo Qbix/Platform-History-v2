@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Taabo si aad u bixiso"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: Kharashka ayaa lagu habeeyey {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Waad ku mahadsan tahay lacag bixintaada {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} la diiwaan galiyay {{plan.title}}",
+        "YouSubscribedTo": "Waxaad ku biirtay {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Waxaad ka helaysaa {{displayAmount}} {{call 'publisher.displayName'}} &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, tani waa in lagu ogeysiiyo {999} in {1000} lagu dalacay {{3}} {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Waad ku mahadsan tahay lacag bixinta &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, tani waa xaqiijin degdeg ah inaad si guul leh u bixisay {{2}} {{3}} {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Macluumaadka ku saabsan nidaamka",
+        "PaymentMethod": "Qaabka mushaar-bixinta",
+        "ContactInfo": "Macluumaadka xiriirka",
+        "Pay": "Bixi"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Casuumada waxaa aqbalay {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} ayaa galay magaca koowaad",
+        "Streams_user_lastname": "{{invitedUserName}} ayaa galay magaca dambe",
+        "Streams_user_icon": "{{invitedUserName}} galka icon",
+        "Places_user_location": "{{invitedUserName}} goobta la galay",
+        "Streams_greeting": "{{invitedUserName}} ayaa galay salaanta",
+        "YouHaveCreditsToStart": "Waxaad haysataa {999} credits si aad u bilowdo",
+        "PaymentFor": "Lacag bixinta &quot;{999}}&quot;",
+        "PaymentTo": "Lacag bixinta {{1}}",
+        "PaymentToUser": "Lacag bixinta {{toUserName}}",
+        "CreatePaidStream": "abuurista {{toStreamName}}",
+        "JoinedPaidStream": "Boos sii qabsi gudaha &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "abuurista bulsho &quot;{999}}&quot;",
+        "LeftPaidStream": "sida lacag celinta boos celinta &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Iibsaday {999} credits",
+        "BonusCredits": "Gunnada {{amount}} credits",
+        "BuyAmountCredits": "Iibso {{amount}} credits",
+        "WatchClip": "Lagu kasbaday {{999} credits daawashada {{fromStreamTitle}}",
+        "MissingCredits": "Dhibcaha Maqan",
+        "YouMissingCredits": "Waxaad u baahan tahay {{amount}} credits dheeraad ah si aad u sii wadato.",
+        "BuyCredits": "Iibso credits",
+        "BuyBonus": "Iibsashada {{amount}} buundooyinka hal mar, waxay horseedi doontaa {{bonus}} gunnada credits.",
+        "Buy": "Iibso",
+        "PurchaseCredits": "Qiimaha Iibka",
+        "Credits": "credits",
+        "ErrorInvalidAmount": "Qadarka aan shaqayn",
+        "ErrorInvalidCurrency": "Nasiib darro weli ma taageerno lacagta {{currency}}",
         "forMessages": {
             "BoughtCredits": "{{amount}} credits",
             "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Taariikhda",
+        "Amount": "Qadarka",
+        "Description": "Sharaxaada",
+        "Client": "Macmiil",
+        "To": "ku",
+        "From": "ka",
+        "SeeHistory": "Eeg taariikhda lacag bixinta {{1}}",
+        "HistoryEmpty": "Wali ma haysatid xog",
+        "PaymentFor": "La diray {{999} credits",
+        "PaymentTo": "La diray {{999} credits",
+        "PaymentToUser": "La diray {{999} credits",
+        "CreatePaidStream": "Ku qaatay {{amount}} credits",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Lagu kasbaday {{999} credits",
+            "-": "La qaatay {{amount}} credits"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Lagu kasbaday {{999} credits",
+            "-": "Ku qaatay {{amount}} credits"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Helay {999} credits",
+            "-": "La diray {{999} credits"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Ku qaatay {{amount}} credits",
+        "BoughtCredits": "Iibsaday {{amount}} credits",
+        "BonusCredits": "Helay gunno {{amount}} credits",
+        "InviteAcceptedBy": "Lagu kasbaday {{999} credits",
+        "Streams_user_firstname": "Lagu kasbaday {{999} credits",
+        "Streams_user_lastname": "Lagu kasbaday {{999} credits",
+        "Streams_user_icon": "Lagu kasbaday {{999} credits",
+        "Places_user_location": "Lagu kasbaday {{999} credits",
+        "Streams_greeting": "Lagu kasbaday {{999} credits",
+        "YouHaveCreditsToStart": "Lagu kasbaday {{999} credits"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Deji Macluumaadka Lacag-bixinta",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Bilow Is-diiwaangelinta",
+            "message": "Ma jeceshahay inaad iska diiwaan geliso {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Jooji"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kaarka deynta ama kaarka deynta",
+        "SubscribePayment": "Lacag-bixinta Subscribe",
+        "ImmediatePayment": "Lacag-bixinta degdega ah"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Deji Macluumaadka Lacag-bixinta",
+        "BuyAmountCredits": "Iibso {{amount}} credits",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Bixi Lacag",
+            "message": "Ma ogolaatay inaad bixiso {{999}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Jooji"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "credits",
+            "description": "wuxuu la socdaa credits iyo lacag bixinta"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Qorshaha Rukunka",
+            "description": "qorshaha is-diiwaangelinta"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Isdiiwaangelinta",
+            "description": "rukunid"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Alaabta",
+            "description": "alaabta la iibinayo"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Adeegga",
+            "description": "adeega la bixiyo"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Lagu kasbaday {{999} credits"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Iibsaday {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Gunnada {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "La qaatay {{amount}} credits"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Loo diray {{999} credits {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Helay {999} credits {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Adeeg Cusub",
+            "TitlePlaceholder": "Magaca adeegga",
+            "PricePlaceholder": "Deji qiimaha",
+            "LinkPlaceholder": "dhig isku xidhka macluumaadka dheeraadka ah",
+            "DescriptionPlaceholder": "Sharaxaada adeegga",
+            "SaveService": "Adeegga Keydi",
+            "SelectRequiredParticipants": "Ka-qaybgalayaasha loo baahan yahay"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Maamul Qaababka Adeegga",
+        "ManageServices": "Maamul Adeegyada",
+        "Free": "Bilaash",
+        "OptionalContribution": "Wax ku biirinta ikhtiyaarka ah",
+        "RequiredPayment": "Lacag bixinta loo baahan yahay",
+        "AreYouSureDelete": "Ma hubtaa inaad doonayso inaad tirtirto adeegan?",
+        "AmountServicesRelated": "Waxa jira {999}} la heli karo oo la xidhiidha adeegan. Iyaga waa laga saarayaa."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "Title": "Macluumaadka ku saabsan {{title}} NFT",
+        "Description": "Macluumaad faahfaahsan oo ku saabsan NFT",
+        "FixedBid": "Hadda iibso",
+        "CurrentBid": "Dalabka hadda",
+        "StartingIn": "Laga bilaabo",
+        "EndingIn": "Ku dhamaanaya",
+        "CreateNFT": "Samee NFT",
+        "TitlePlaceholder": "Sii NFT kaaga cinwaan",
+        "DescriptionPlaceholder": "Sii NFT-gaaga sharaxaad",
+        "CreateYourNFT": "Abuur NFT kaaga",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "RoyaltyPlaceholder": "Ikhtiyaar Qadarka la siiyay abuuraha ka hor inta aan la wareejin",
+        "ExpirationDate": "Taariikhda uu dhacayo",
+        "StartingDate": "Taariikhda billowga",
+        "BidsBelowThisAmount": "Qandaraasyada ka hooseeya lacagtan lama ogolaan doono",
+        "MinimumBid": "Dalabka ugu yar",
+        "Price": "Qiimo",
+        "Owner": "Milkiilaha",
+        "SelectCategory": "Dooro qaybta",
+        "Day": "Maalinta",
+        "Days": "Maalmo",
+        "Hour": "Saacada",
+        "Hours": "Saacadaha",
+        "Minute": "Daqiqo",
+        "Minutes": "Daqiiqado",
+        "Second": "Labaad",
+        "Seconds": "Ilbiriqsi",
+        "SalesCreator": "iibka ayaa u tagi doona abuuraha",
+        "Details": "Faahfaahin",
+        "Bids": "Qandaraasyada",
+        "History": "Taariikhda",
+        "LoremIpsum": "Lorem Ipsum waa qoraal fudud oo ka mid ah warshadaha daabacaadda iyo daabacaadda.",
+        "PutOnSale": "Iibka saar",
+        "PutOffSale": "Ka noqoshada iibka",
+        "Transfer": "Wareejin",
+        "Update": "Cusbooneysii",
+        "UpdateToken": "Cusbooneysii Token",
+        "CreateToken": "Abuur Token",
+        "PlaceBid": "Goobta Qandaraaska",
+        "SoldOut": "iibiyey",
+        "NftName": "Magaca NFT",
+        "DescribeYourNFT": "Fadlan sharax NFT kaaga",
+        "NftPicture": "Sawirka si uu u matalo NFT",
+        "NftMovie": "Filimka si uu u matalo NFT",
+        "UploadMovie": "Soo rar filim",
+        "MovieSource": "Isha Filimka",
+        "UploadFile": "Soo rar fayl",
+        "PutOnMarketplace": "Dhig suuqa",
+        "InstantPurchase": "Geli qiimaha si aad ugu ogolaato isticmaalayaasha inay isla markiiba iibsadaan NFT gaaga",
+        "FixedPrice": "Qiimaha go&#39;an",
+        "TimedAuction": "Xaraashka wakhtiga",
+        "OpenForBids": "U furan dalabyo",
+        "PriceOnePiece": "Geli qiimaha hal gabal",
+        "EnterMinimumBid": "Gali dalabka ugu yar",
+        "SelectChain": "Dooro silsilad",
+        "WrongChain": "NFT-kan wuxuu ku hoos sameeyay &quot;{{chain}}&quot;. Fadlan isticmaal silsiladan",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
+            "importNFT": "Soo dejinta NFT&#39;s",
+            "fileNotFound": "Waan ka xunahay, faylka CSV lama helin.",
+            "fileEmpty": "Waan ka xunahay, faylka CSV waa faaruq.",
+            "userIdNotFound": "isticmaaluhu wuu jiraa laakiin id madhan",
             "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "fieldNotFound": "Goobta loo baahan yahay &quot;{{1}}&quot; lama helin",
+            "taskStreamInvalid": "socodka hawsha ma ansaxayo",
+            "instructionsEmpty": "durdurka hawsha tilmaamaha maran",
+            "complete": "Dhameystiran",
+            "activateUsers": "u dir fariin kicin isticmaalayaasha?",
+            "importProgress": "Horumarka",
+            "importOptions": "Ikhtiyaarada",
+            "sampleCSV": "Soo deji Tusaalaha CSV",
+            "fileLabel": "Soo rar xaashida faafinta:",
+            "errorsTitle": "Khaladaad ayaa dhacay"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Ku shaandhayn ururinta NFT",
+                "ShowNFTCollection": "Ku muuji ururinta NFT gudaha...",
+                "AllCollections": "Dhammaan Ururinta"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Dhammaan Qorayaasha",
+                "AllUsers": "Qof walba",
+                "FilterByAuthors": "Shaandhee by Qorayaasha"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Ku laabo Ururinta"
     }
 }

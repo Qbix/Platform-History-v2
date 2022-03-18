@@ -5,7 +5,7 @@ function Assets_NFT_post ($params) {
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
 
 	// update NFT attributes
-	if (Q_Request::slotName("attrUpdate")) {
+	if (!empty($_REQUEST['updateAttributes'])) {
 		$attribute = new Assets_NftAttributes();
 		$attribute->publisherId = $req["publisherId"];
 		$attribute->display_type = $req["display_type"];
@@ -15,12 +15,14 @@ function Assets_NFT_post ($params) {
 			$attribute->save();
 		}
 
-		Q_Response::setSlot('attrUpdate', true);
+		Q_Response::setSlot('updatedAttributes', true);
 		return;
 	}
 
 	$stream = Assets_NFT::stream($userId);
-	$fields = Q::take($req, array('title', 'content', 'attributes', 'interests'));
+	$fields = Q::take($req, array(
+		'title', 'content', 'attributes', 'interests'
+	));
 
 	Assets_NFT::update($stream, $fields);
 }

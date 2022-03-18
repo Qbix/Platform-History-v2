@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "अनुरोध के दौरान त्रुटि {{status}}",
+        "canceled": "अनुरोध रद्द किया गया",
+        "500": "आंतरिक सर्वर त्रुटि",
+        "404": "नहीं मिला: {{url}}",
+        "501": "अनुरोध बाधित"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "सत्र समाप्त हुआ। पृष्ठ को ताज़ा करें और पुनः प्रयास करें।",
+        "otherDomain": "{{baseUrl}} पर विदेशी डोमेन के लिए क्रॉस-डोमेन अनुरोध को ब्लॉक किया गया"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "नल",
+        "click": "क्लिक",
+        "yes": "हां",
+        "no": "नहीं",
+        "Tap": "नल",
+        "Click": "क्लिक",
+        "Yes": "हां",
+        "No": "नहीं"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "जनवरी",
+        "2": "फ़रवरी",
+        "3": "जुलूस",
+        "4": "अप्रैल",
+        "5": "मई",
+        "6": "जून",
+        "7": "जुलाई",
+        "8": "अगस्त",
+        "9": "सितंबर",
+        "10": "अक्टूबर",
+        "11": "नवंबर",
+        "12": "दिसंबर"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "दूसरा",
+        "seconds": "सेकंड",
+        "minute": "मिनट",
+        "minutes": "मिनट",
+        "hour": "घंटे",
+        "day": "दिन",
+        "days": "दिन",
+        "week": "सप्ताह",
+        "weeks": "हफ्तों",
+        "month": "महीना",
+        "months": "महीने",
+        "year": "वर्ष",
+        "years": "वर्षों",
+        "decade": "दशक",
+        "decades": "दशक",
+        "century": "सदी",
+        "centuries": "सदियों"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "कृपया अपने माइक्रोफ़ोन तक पहुंच की अनुमति दें",
+        "record": "अभिलेख",
+        "recording": "रिकॉर्डिंग",
+        "remains": "खंडहर",
+        "maximum": "ज्यादा से ज्यादा",
+        "playing": "खेल रहे हैं",
+        "recorded": "रिकॉर्डेड",
+        "clip": "क्लिप",
+        "discard": "रद्द करें",
+        "encoding": "एन्कोडिंग"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "क्लिप",
+        "errorNoSource": "कोई वीडियो स्रोत नहीं",
+        "SkipAfter": "बाद में छोड़ें",
+        "Skip": "छोड़ें"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "क्लिप",
+        "errorNoSource": "कोई पीडीएफ स्रोत नहीं"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "क्लिप स्टार्ट सेट करें",
+        "ClipStart": "क्लिप प्रारंभ",
+        "SetClipEnd": "क्लिप एंड सेट करें",
+        "ClipEnd": "क्लिप एंड",
+        "StartMoreEnd": "प्रारंभ स्थिति अंतिम स्थिति से अधिक नहीं हो सकती",
+        "EndLessStart": "समाप्ति स्थिति प्रारंभ स्थिति से कम नहीं हो सकती",
+        "WhichInvalid": "तर्क &#39;जो&#39; अमान्य"
     },
     "alert": {
-        "title": "Alert"
+        "title": "चेतावनी"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "पुष्टि करना",
+        "ok": "हां",
+        "cancel": "नहीं"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "तत्पर",
+        "ok": "जाओ"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "अधिक",
+        "Menu": "मेन्यू"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "फ़ाइल पढ़ने में त्रुटि",
+        "errorType": "क्षमा करें, लेकिन यह फ़ाइल प्रकार समर्थित नहीं है",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "आप क्या करना पसंद करेंगे?",
+            "photo": "नई फ़ोटो लें",
+            "library": "पुस्तकालय से चुनें"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "कृपया एक बड़ी छवि चुनें।",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "आकार और स्थिति समायोजित करें",
+            "touchscreen": "ज़ूम करने और खींचने के लिए अपनी उंगलियों का उपयोग करें",
+            "notTouchscreen": "ज़ूम और ड्रैग करने के लिए अपने माउस और व्हील का उपयोग करें"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "पिछली रात",
+        "lastEvening": "पिछली शाम",
+        "yesterday": "बीता हुआ कल",
+        "thisMorning": "आज सुबह",
+        "today": "आज",
+        "tonight": "आज की रात",
+        "tomorrowMorning": "टॉम मॉर्निंग",
+        "tomorrow": "कल",
+        "hoursAgo": "{{h}} घंटे पहले",
+        "hourAgo": "{{h}} घंटे पहले",
+        "minuteAgo": "{{m}} मिनट पहले",
+        "minutesAgo": "{{m}} मिनट पहले",
+        "secondAgo": "{{s}} सेकंड पहले",
+        "secondsAgo": "{{s}} सेकंड पहले",
+        "fewSecondsAgo": "एक सेकंड पहले",
+        "rightNow": "अभी",
+        "inSecond": "{{s}} सेकंड में",
+        "inSeconds": "{{s}} सेकंड में",
+        "inMinute": "{{m}} मिनट में",
+        "inMinutes": "{{m}} मिनट में",
+        "inHour": "{{h}} घंटे में",
+        "inHours": "{{h}} घंटों में",
+        "inUnderMinute": "1 मिनट के अंदर"
     }
 }

@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Pịa iji kwụọ ụgwọ"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: akwadoro ụgwọ maka {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Daalụ maka ịkwụ ụgwọ gị na {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} debanyere aha na {{plan.title}}",
+        "YouSubscribedTo": "Edebanyela gị aha na {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Ị na-enweta ugwo nke {{displayAmount}} site na {{call 'publisher.displayName'}} site na &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, nke a bụ naanị ime ka ị mata {{1}} agbala {{2}} maka {{3}} site na {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Daalụ maka ịkwụ ụgwọ gị maka &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, nke a bụ naanị nkwenye ngwa ngwa na ị kwụgoro nke ọma {{2}} na {{3}} maka {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Ozi gbasara usoro",
+        "PaymentMethod": "Ụzọ nkwụnye ụgwọ",
+        "ContactInfo": "Ozi kọntaktị",
+        "Pay": "Kwụọ"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "{{invitedUserName}} nabatara òkù a.",
+        "Streams_user_firstname": "{{invitedUserName}} banyere aha mbụ",
+        "Streams_user_lastname": "{{invitedUserName}} banyere aha ikpeazụ",
+        "Streams_user_icon": "{{invitedUserName}} abanyela akara ngosi",
+        "Places_user_location": "{{invitedUserName}} banyere ebe",
+        "Streams_greeting": "{{invitedUserName}} banyere ekele",
+        "YouHaveCreditsToStart": "Ị nwere kredit {{amount}} ịmalite",
+        "PaymentFor": "Ụgwọ maka &quot;{{1}}&quot;",
+        "PaymentTo": "Ụgwọ maka {{1}}",
+        "PaymentToUser": "Ụgwọ maka {{toUserName}}",
+        "CreatePaidStream": "maka imepụta {{toStreamName}}",
+        "JoinedPaidStream": "maka ndoputa na &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "maka ịmepụta obodo &quot;{999}}&quot;",
+        "LeftPaidStream": "dịka nkwụghachi ndoputa na &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Zụrụ {{amount}} kredit",
+        "BonusCredits": "Ego ego {999} kredit",
+        "BuyAmountCredits": "Zụrụ kredit {{amount}}",
+        "WatchClip": "Nweta kredit {999} maka ikiri {{fromStreamTitle}}",
+        "MissingCredits": "Ebe kredit efu",
+        "YouMissingCredits": "Ị ga-achọkwu kredit {{amount}} ka ịga n&#39;ihu.",
+        "BuyCredits": "Zụrụ kredit",
+        "BuyBonus": "Ịzụta kredit {{amount}} ozugbo, ga-eduga na {{bonus}} kredit kredit.",
+        "Buy": "Zụrụ",
+        "PurchaseCredits": "Ịzụta Ebe E Si Nweta",
+        "Credits": "Ebe e si nweta",
+        "ErrorInvalidAmount": "Ọnụ ego ezighi ezi",
+        "ErrorInvalidCurrency": "Ọ dị nwute na anyị anaghị akwado ego {{currency}} ma",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "kredit {{amount}}",
+            "BonusCredits": "kredit {{amount}}"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Ụbọchị",
+        "Amount": "Ọnụ ego",
+        "Description": "Nkọwa",
+        "Client": "Onye ahịa",
+        "To": "ka",
+        "From": "si",
+        "SeeHistory": "Hụ akụkọ ịkwụ ụgwọ maka {{1}}",
+        "HistoryEmpty": "Ị nwebeghị data",
+        "PaymentFor": "Ezitere {999} kredit",
+        "PaymentTo": "Ezitere {999} kredit",
+        "PaymentToUser": "Ezitere {999} kredit",
+        "CreatePaidStream": "Ezufuru {{amount}} kredit",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Nweta kredit {{amount}}",
+            "-": "Ezufuru {{amount}} kredit"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Nweta kredit {{amount}}",
+            "-": "Ezufuru {{amount}} kredit"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Anatara kredit {{amount}}",
+            "-": "Ezitere {999} kredit"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Ezufuru {{amount}} kredit",
+        "BoughtCredits": "Zụrụ {{amount}} kredit",
+        "BonusCredits": "Nweta kredit {{amount}} ego",
+        "InviteAcceptedBy": "Nweta kredit {{amount}}",
+        "Streams_user_firstname": "Nweta kredit {{amount}}",
+        "Streams_user_lastname": "Nweta kredit {{amount}}",
+        "Streams_user_icon": "Nweta kredit {{amount}}",
+        "Places_user_location": "Nweta kredit {{amount}}",
+        "Streams_greeting": "Nweta kredit {{amount}}",
+        "YouHaveCreditsToStart": "Nweta kredit {{amount}}"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Tọọ ozi ịkwụ ụgwọ",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Malite ndenye aha",
+            "message": "Ọ ga-amasị gị ịdenye aha na {{title}}?",
+            "ok": "Ọ DỊ MMA",
+            "cancel": "Kagbuo"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kaadị kredit ma ọ bụ debit",
+        "SubscribePayment": "Ịdenye aha ịkwụ ụgwọ",
+        "ImmediatePayment": "Ịkwụ Ụgwọ ozugbo"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Tọọ ozi ịkwụ ụgwọ",
+        "BuyAmountCredits": "Zụrụ kredit {{amount}}",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Kwuo ugwo",
+            "message": "Ị kwenyere ịkwụ ụgwọ {{symbol}}{{amount}}?",
+            "ok": "Ọ DỊ MMA",
+            "cancel": "Kagbuo"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Ebe e si nweta",
+            "description": "na-echekwa kredit na ịkwụ ụgwọ"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Atụmatụ ndenye aha",
+            "description": "atụmatụ ndenye aha"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Ndebanye aha",
+            "description": "ndenye aha"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Ngwaahịa",
+            "description": "ngwaahịa a na-ere"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Ọrụ",
+            "description": "a na-enye ọrụ"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Nweta kredit {{amount}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Zụrụ {{amount}} kredit"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Ego ego {999} kredit"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Ezufuru {{amount}} kredit"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "E zigara {{999} kredit na {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Nnata {{amount}} kredit sitere na {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Ọrụ Ọhụrụ",
+            "TitlePlaceholder": "Aha ọrụ",
+            "PricePlaceholder": "Tọọ ọnụ ahịa",
+            "LinkPlaceholder": "tọọ njikọ ozi agbakwunyere",
+            "DescriptionPlaceholder": "Nkọwa ọrụ",
+            "SaveService": "Chekwa Ọrụ",
+            "SelectRequiredParticipants": "Ndị so na ya chọrọ"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Jikwaa ndebiri ọrụ",
+        "ManageServices": "Jikwaa ọrụ",
+        "Free": "N&#39;efu",
+        "OptionalContribution": "Onyinye nhọrọ",
+        "RequiredPayment": "Ịkwụ ụgwọ achọrọ",
+        "AreYouSureDelete": "Ị ji n&#39;aka na ịchọrọ ihichapụ ọrụ a?",
+        "AmountServicesRelated": "Enwere ohere {999}} metụtara ọrụ a. A ga-ewepụkwa ha."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Ozi gbasara {{title}} NFT",
+        "Description": "Ozi zuru ezu gbasara NFT",
+        "FixedBid": "Zụta ugbu a",
+        "CurrentBid": "Ahịa ugbu a",
+        "StartingIn": "Malite na",
+        "EndingIn": "Na-agwụ agwụ",
+        "CreateNFT": "Mepụta NFT",
+        "TitlePlaceholder": "Nye NFT gị aha",
+        "DescriptionPlaceholder": "Nye nkọwa NFT gị",
+        "CreateYourNFT": "Mepụta NFT gị",
+        "Royalties": "Ụgwọ eze",
+        "RoyaltyPlaceholder": "Nhọrọ. Ego akwụgoro nye onye okike tupu ebufee ya.",
+        "ExpirationDate": "Ụbọchị mmebi",
+        "StartingDate": "Ụbọchị mmalite",
+        "BidsBelowThisAmount": "Agaghị anabata ntinye ego n&#39;okpuru ego a",
+        "MinimumBid": "Ọnụ ahịa kacha nta",
+        "Price": "Ọnụ ahịa",
+        "Owner": "Onye nwe",
+        "SelectCategory": "Họrọ udi",
+        "Day": "Ụbọchị",
+        "Days": "Ụbọchị",
+        "Hour": "Oge awa",
+        "Hours": "Oge awa",
+        "Minute": "Nkeji",
+        "Minutes": "Nkeji",
+        "Second": "Nke abụọ",
+        "Seconds": "Sekọnd",
+        "SalesCreator": "nke ire ga-aga onye kere",
+        "Details": "Nkọwa",
+        "Bids": "Ahịa",
+        "History": "Akụkọ ihe mere eme",
+        "LoremIpsum": "Lorem Ipsum bụ naanị ederede nke ụlọ ọrụ mbipụta na ụdị mbipụta.",
+        "PutOnSale": "Tinye na ire ere",
+        "PutOffSale": "Wepụ na ire ere",
+        "Transfer": "Nyefee",
+        "Update": "Mmelite",
+        "UpdateToken": "Melite Token",
+        "CreateToken": "Mepụta Token",
+        "PlaceBid": "Ebe Bid",
+        "SoldOut": "rere",
+        "NftName": "NFT aha",
+        "DescribeYourNFT": "Biko kọwaa NFT gị",
+        "NftPicture": "Foto ga-anọchi anya NFT",
+        "NftMovie": "Ihe nkiri na-anọchi anya NFT",
+        "UploadMovie": "Bulite ihe nkiri",
+        "MovieSource": "Isi mmalite ihe nkiri",
+        "UploadFile": "Bulite faịlụ",
+        "PutOnMarketplace": "Tinye n&#39;ahịa",
+        "InstantPurchase": "Tinye ọnụ ahịa iji nye ndị ọrụ ohere ịzụta NFT gị ozugbo",
+        "FixedPrice": "Ọnụ ego edobere",
+        "TimedAuction": "Mgbara ahịa nke oge",
+        "OpenForBids": "Mepee maka ọnụahịa",
+        "PriceOnePiece": "Tinye ọnụ ahịa maka otu ibe",
+        "EnterMinimumBid": "Tinye ọnụ ahịa kacha nta",
+        "SelectChain": "Họrọ yinye",
+        "WrongChain": "NFT a kere n&#39;okpuru &quot;{{chain}}&quot;. Biko jiri yinye a.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Na-ebubata NFT",
+            "fileNotFound": "Ndo, ahụghị faịlụ CSV.",
+            "fileEmpty": "Ndo, faịlụ CSV efu.",
+            "userIdNotFound": "onye ọrụ dị mana id efu",
+            "errorLine": "ahịrị {{1}}",
+            "fieldNotFound": "Achọtaghị mpaghara &quot;{999}}&quot; achọrọ",
+            "taskStreamInvalid": "iyi ọrụ ezighi ezi",
+            "instructionsEmpty": "ọrụ iyi ntuziaka efu",
+            "complete": "Zuru oke",
+            "activateUsers": "ziga ndị ọrụ ozi mmalite?",
+            "importProgress": "Ọganihu",
+            "importOptions": "Nhọrọ",
+            "sampleCSV": "Budata ihe atụ CSV",
+            "fileLabel": "Bulite akwụkwọ akụkọ",
+            "errorsTitle": "Njehie mere"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Nyocha site na mkpokọta NFT",
+                "ShowNFTCollection": "Gosi mkpokọta NFT na...",
+                "AllCollections": "Nchịkọta niile"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Ndị ode akwụkwọ niile",
+                "AllUsers": "Onye ọ bụla",
+                "FilterByAuthors": "Nyocha site n&#39;aka ndị ode akwụkwọ"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Laghachi na mkpokọta"
     }
 }

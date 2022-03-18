@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
+                "link": "Link fir ze promoten",
+                "startDate": "Ufanks Datum",
+                "startTime": "Start Zäit",
+                "endDate": "Enn Datum",
+                "endTime": "Enn Zäit",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filter no Interesse",
+                "FilterInterests": "Fänkt un en Interesse ze schreiwen ..."
             },
-            "Interest": "Interest",
+            "Interest": "Interessi",
             "Location": "Location"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Gitt",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
+            "BrowseTheWeb": "Surfen",
+            "WriteToStartConversation": "Schreift Är Gedanken fir d&#39;Gespréich unzefänken",
+            "StartConversation": "Start Gespréich",
+            "GotoConversation": "Gitt op Gespréich",
+            "reset": "Zerécksetzen",
             "edit": "Edit",
             "link": "Link",
             "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
+            "save": "Spueren",
+            "setClip": "Ausschneiden Clip",
             "invalidURL": "Invalid URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Fichier ze grouss fir Cache. Max Dateigréisst {{size}}",
+        "InvalidPDF": "De Fichier ass net e gültege PDF",
+        "StartTypingTitleOrKeywords": "Fänkt un Titel oder Schlësselwieder ze schreiwen ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "En HTML Dokument dat verschidde Benotzer kënne kucken an änneren",
+            "displayType": "Artikel"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "E Rutsch an enger Presentatioun, kann HTML, Audio etc.",
+            "displayType": "Rutsch"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Eng Presentatioun déi aus verschiddene Rutschen besteet",
+            "displayType": "Presentatioun"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Eng Reklamm Eenheet op enger Websäit",
+            "displayType": "Annonce Eenheet"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Eng Manéier fir Reklamm Eenheeten ënner engem Numm ze gruppéieren",
+            "displayType": "Annonce Placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Inhalt fir eng Annonce",
+            "displayType": "Reklamm kreativ"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Eng Werbekampagne",
+            "displayType": "Annonce Campagne"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Representéiert eng Websäit, där hir Metadaten geschrauft goufen",
+            "displayType": "Internet Säit"
         }
     }
 }

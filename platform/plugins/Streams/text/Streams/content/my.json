@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "ဤအကြောင်းအရာကို သင့်ထံမှ ဝှက်ထားသည်။"
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "ပစ္စည်းအသစ်"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "ဖိတ်ခေါ်တဲ့လူတွေ",
+        "Streams\/invitedMe": "ဘယ်သူက ဖိတ်တာလဲ။",
+        "DoYouAgree": "သဘောတူပါသလား?",
+        "Yes": "ဟုတ်ကဲ့",
+        "No": "မရှိ"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "မင်းရဲ့စိတ်ဝင်စားမှုကဘာလဲ။",
+        "CanAdd": "သင်ရှာနေသည့်အရာကို ရှာမတွေ့သေးပါက၊ အောက်ပါ စိတ်ဝင်စားမှုအသစ်ကို သင်ထည့်နိုင်သည်-",
+        "TrySynonyms": "မမြင်ဘူးလား? တူညီသောအသုံးအနှုန်းအချို့ကို စမ်းကြည့်ပါ။",
+        "AddUnderCategory": "အမျိုးအစားအောက်မှာ ထည့်ပါ...",
+        "Other": "တခြား",
+        "Unlisted": "စာရင်းမဝင်"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "စီမံခန့်ခွဲသူ ပြန်လည်သုံးသပ်ရန်အတွက် မက်ဆေ့ဂျ်ကို အလံပြထားသည်။ အလံဖြုတ်ရန် ထပ်မံနှိပ်ပါ။",
+        "noOneSaid": "ဘယ်သူမှ ဘာမှ မပြောသေးဘူး။",
+        "closeChatButton": "စကားပြောခန်းကို ပိတ်ပါ။",
+        "closeChatConfirmTitle": "ဤချတ်ကို ပိတ်မလား။",
+        "closeChatConfirm": "ဤချတ်ကို ပိတ်လိုသည်မှာ သေချာပါသလား။",
+        "Subscribed": "အကြောင်းကြားချက်များကို ဖွင့်ထားသည်။",
+        "Unsubscribed": "အကြောင်းကြားချက်များကို အသံတိတ်ထားသည်။",
+        "closeChatConfirmYes": "ဟုတ်ကဲ့",
+        "closeChatConfirmNo": "မရှိ",
+        "earlierComments": "အစောပိုင်းမှတ်ချက်များ",
+        "startedConversation": "စကားဝိုင်းတစ်ခုကို စတင်ခဲ့သည်။",
+        "RealTimeCall": "အချိန်နှင့်တပြေးညီခေါ်ဆိုပါ။",
+        "SearchByName": "အမည်ဖြင့်ရှာဖွေပါ။",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} သည် ချတ်သို့ လည်ပတ်နေသည်။",
+            "Join": "{{displayName}} သည် ချတ်တွင် ပါဝင်ခဲ့သည်။",
+            "Leave": "{{displayName}} သည် ချတ်မှ ထွက်သွားသည်။",
+            "RelatedTo": "{{displayName}} သည် {{stream.displayType}} ကို စတင်ခဲ့သည်"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "သင့်အီးမေးလ်စာရင်းသွင်းမှုများကို စီမံပါ။",
+        "IfUnsubscribe": "စာရင်းသွင်းချင်ရင် ဖြုတ်လိုက်ပါ။",
+        "*": "{{& stream.fields.title}} သို့ {{& message.fields.type}} မက်ဆေ့ချ်",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ကပြောသည်- {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} တွင် အပြောင်းအလဲများ",
+        "Streams\/invite": "သင့်ကို {{& stream.fields.title}} သို့ ဖိတ်ကြားခဲ့သည်",
+        "Streams\/announcement": "{{& stream.fields.title}} တွင် ကြေငြာချက်",
+        "Streams\/access": "{{&call 'avatar.displayName'}} သည် {{& stream.fields.title}} တွင် အသုံးပြုခွင့်ကို ပြောင်းခဲ့သည်",
+        "Streams\/chat\/edit": "{{& stream.fields.title}} တွင် တည်းဖြတ်ထားသော ချတ်မက်ဆေ့ချ်",
+        "Streams\/chat\/remove": "{{& stream.fields.title}} တွင် ချတ်မက်ဆေ့ချ်ကို ဖယ်ရှားခဲ့သည်",
+        "Streams\/closed": "{{stream.fields.title}} ကို ပိတ်လိုက်ပါပြီ။",
+        "Streams\/task\/progress": "{{stream.fields.title}} တွင် တိုးတက်မှု",
+        "Streams\/task\/complete": "လုပ်ဆောင်စရာ ပြီးပါပြီ- {{stream.fields.title}}",
+        "Streams\/task\/error": "ကာလအတွင်း အမှားအယွင်း- {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}- အဝင်မက်ဆေ့ဂျ်",
+        "Streams\/relatedTo\/Streams\/call": "ခေါ်ဆိုမှုအသစ် {{toTitle}} တွင် စတင်ခဲ့သည်",
+        "Streams\/relatedTo\/*": "{{toTitle}} တွင် {{relationDisplayType}} အသစ်",
+        "Streams\/relatedFrom\/*": "{{relationDisplayType}} အဖြစ် {{toTitle}} သို့ ထည့်ခဲ့သည်",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} က သင့်အား မှတ်ချက်တစ်ခုတွင် ဖော်ပြခဲ့သည်။",
+        "Streams\/call": "{{displayName}} သည် အချိန်နှင့်တစ်ပြေးညီ ခေါ်ဆိုမှုကို စတင်ခဲ့သည်။"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "ဖိတ်ခေါ်ပါတယ်။",
+        "messageContent": "{{displayName}} က သင့်ကို {{inviteUrl}} သို့ ဖိတ်ကြားခဲ့သည်",
+        "youCanNowPaste": "လူများကို ဖိတ်ကြားရန် ဤလင့်ခ်ကို တစ်နေရာရာသို့ ကူးထည့်နိုင်ပါပြီ။",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "သင့်အဆက်အသွယ်များမှ ရွေးချယ်ပါ။",
+            "chooseAgainFromContacts": "အဆက်အသွယ်များမှ ထပ်မံရွေးချယ်ပါ။",
+            "inviteSelectedContacts": "ရွေးချယ်ထားသော အဆက်အသွယ်များကို ဖိတ်ကြားပါ။",
+            "selectFromContacts": "အဆက်အသွယ်များမှ ရွေးပါ။",
+            "userChooserPlaceholder": "အမည်ဖြင့်ရှာဖွေပါ။",
+            "photo": "ဓာတ်ပုံရိုက်ပါ။",
+            "photoInstruction": "သင်၏ QR ကုဒ်ကို စကင်ဖတ်သူသည် သင့်ရှေ့တွင် ရှိနေပါက ၎င်းတို့ကို ဓာတ်ပုံရိုက်ပါ။",
+            "to": "သို့- {{Stream Title}}",
+            "go": "သွားတော့",
+            "title": "ဖိတ်ခေါ်ပါတယ်။",
+            "placeholder": "မိုဘိုင်းနံပါတ် သို့မဟုတ် အီးမေးလ်လိပ်စာ",
+            "orInvite": "သို့မဟုတ် အသုံးပြု၍ လူများကို ဖိတ်ကြားပါ-",
+            "copyLink": "ဖိတ်ကြားချက်လင့်ခ်ကို ကူးယူရန် {{ClickOrTap}}",
+            "shareOrCopyLink": "ဖိတ်ကြားချက်လင့်ခ်ကို မျှဝေရန် သို့မဟုတ် ကူးယူရန် {{ClickOrTap}}",
+            "QR": "QR ကုဒ်ထုတ်လုပ်ရန် {{ClickOrTap}}",
+            "QRtitle": "ဤ QR ကုဒ်ကို စကင်န်ဖတ်ပါ။",
+            "QRscanned": "သူတို့က စကင်န်ဖတ်တယ်။",
+            "scannedQR": "ကုဒ်ကို စကင်န်ဖတ်ထားလျှင် {{ClickOrTap}}",
+            "byEmail": "အီးမေးလ်",
+            "byText": "စာသား",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "တွစ်တာ"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "ဟေး၊ ဒါကို စစ်ဆေးကြည့်ပါ။",
+            "PleaseVisitLink": "အောက်ပါလင့်ခ်ကို ဝင်ရောက်ကြည့်ရှုပါ-",
+            "InvitingYou": "{{title}} သို့ ဖိတ်ခေါ်ပါသည်",
+            "HasInvitedYou": "{{displayName}} သည် သင့်အား {{title}} သို့ ဖိတ်ကြားထားသည်",
+            "HasMentionedYou": "{{displayName}} သည် သင့်အား &quot;{{title}}&quot; တွင် ဖော်ပြထားပါသည်။",
+            "YOUAREINVITED": "သင့်ကို ဖိတ်ကြားထားသည်။",
+            "AcceptInvite": "ဖိတ်ကြားချက်ကို လက်ခံပါ။"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "သင့်ကို {{title}} သို့ ဖိတ်ကြားထားသည်။ ကျေးဇူးပြု၍ {{url}} ကို တို့ပါ"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "မင်းကို ဖိတ်ထားတယ်။ လက်ခံရန်နှင့် ပါဝင်ရန် ဤနေရာတွင် {{ClickOrTap}}။"
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "{{stream.fields.title}} သို့ { <em>{999}}<\/em> မက်ဆေ့ဂျ်တစ်စောင် တင်ခဲ့သည်"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "မှတ်ချက်ပေးခဲ့သည်။",
+            "startedCallIn": "ခေါ်ဆိုမှုတစ်ခု စတင်ခဲ့သည်။",
+            "in": "၌",
+            "body": "{{& url}} တွင်- {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "တွင် တင်ထားသည်။",
+                "byAvatar": "{{avatar.displayName}} မှ"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "{{instructions.fromDisplayType}} အသစ် ရှိသည်",
+                "byAvatar": "{{avatar.displayName}} မှထည့်သည်"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "သင့်သူငယ်ချင်းများ မမှတ်မိသေးသော ကျွန်ုပ်တို့၏နံပါတ်မှ ဖိတ်ကြားချက်များကို ပေးပို့ပါသည်။ လင့်ခ်ကိုနှိပ်ခိုင်းပြီး သင့်ထံမှ ဖိတ်ကြားချက်လာကြောင်း ၎င်းတို့အား အသိပေးရန် အမြန်စာတိုဖြင့် လိုက်နာပါ။",
+            "confirm": "သင့်သူငယ်ချင်းများ မမှတ်မိသေးသော ကျွန်ုပ်တို့၏နံပါတ်မှ ဖိတ်ကြားချက်များကို ပေးပို့ပါသည်။ လင့်ခ်ကိုနှိပ်ခိုင်းပြီး ဖိတ်ကြားချက်က သင့်ထံမှလာကြောင်း ၎င်းတို့အား အသိပေးရန် အမြန်စာတိုတစ်စောင်ကို လိုက်နာလိုပါသလား။",
+            "check": "ဟေး၊ ကျွန်ုပ်သည် သင့်အား {{app}} အက်ပ်သို့ ဖိတ်ကြားချက်တစ်ခု ပို့လိုက်ပါသည်။ သင်၏ sms ကိုစစ်ဆေးပြီး link ကိုနှိပ်ပါ။",
+            "CheckYourMobile": "SMS ကိုစစ်ဆေးပြီး ညွှန်ကြားချက်များကို လိုက်နာပါ။"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "ဖိတ်ကြားချက်များကို သင့်သူငယ်ချင်းများ မမှတ်မိသေးသော ကျွန်ုပ်တို့၏ဒိုမိန်းမှ ပေးပို့ပါသည်။ လင့်ခ်ကိုနှိပ်ခိုင်းပြီး သင့်ထံမှ ဖိတ်ကြားချက်လာကြောင်း ၎င်းတို့အား အသိပေးရန် အမြန်စာတိုဖြင့် လိုက်နာပါ။",
+            "confirm": "ဖိတ်ကြားချက်များကို သင့်သူငယ်ချင်းများ မမှတ်မိသေးသော ကျွန်ုပ်တို့၏ဒိုမိန်းမှ ပေးပို့ပါသည်။ လင့်ခ်ကိုနှိပ်ခိုင်းပြီး ဖိတ်ကြားချက်က သင့်ထံမှလာကြောင်း ၎င်းတို့အား အသိပေးရန် အမြန်စာတိုတစ်စောင်ကို လိုက်နာလိုပါသလား။",
+            "subject": "ဖိတ်စာရခဲ့ပါသလား။",
+            "body": "ဟေး၊ ကျွန်ုပ်သည် သင့်အား {{app}} အက်ပ်သို့ ဖိတ်ကြားချက်တစ်ခု ပို့လိုက်ပါသည်။ ကျေးဇူးပြု၍ သင့်အီးမေးလ်ကို စစ်ဆေးပြီး ထိုနေရာရှိ လင့်ခ်ကို နှိပ်ပါ။",
+            "CheckYourEmail": "သင့်အီးမေးလ်ကို စစ်ဆေးပြီး ညွှန်ကြားချက်များကို လိုက်နာပါ။"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "ခေါင်းစဥ်",
+        "Subscribed": "စာရင်းသွင်းထားသည်။",
+        "Participants": "ပါဝင်သူများ",
+        "AreYouSureRemoveIdentifier": "ဤသတ်မှတ်စနစ်ကို ဖယ်ရှားရန် သေချာပါသလား။",
+        "AreYouSureUnsubscribeIdentifier": "ဤသတ်မှတ်စနစ်ကို စာရင်းသွင်းခြင်းမှ ရပ်ဆိုင်းရန် သေချာပါသလား။ ၎င်းသည် ဤသတ်မှတ်သူထံ အကြောင်းကြားချက်များကို ပိတ်လိုက်ပါမည်။",
+        "AreYouSureUnsubscribeDevice": "ဤစက်ပစ္စည်းကို စာရင်းသွင်းမှု ရပ်ဆိုင်းရန် သေချာပါသလား။ ၎င်းသည် ဤစက်ပစ္စည်းသို့ အကြောင်းကြားချက်များကို ပိတ်လိုက်ပါမည်။",
+        "AreYouSureRemoveParticipant": "ဤပါဝင်သူကို ဖယ်ရှားလိုသည်မှာ သေချာပါသလား။",
+        "RemoveParticipant": "ပါဝင်သူကို ဖယ်ရှားပါ။",
+        "Identifiers": "ခွဲခြားသတ်မှတ်သည်။",
+        "Devices": "စက်များ",
+        "Streams": "ချောင်းများ"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "ဤထုတ်လွှင့်မှုတွင် ပါဝင်ရန် သင့်တွင် ခွင့်ပြုချက်မရှိပါ။",
+        "streamTitle": "{{1}} က တိုက်ရိုက်ခေါ်ဆိုမှုကို စတင်ခဲ့သည်။",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "ချိတ်ဆက်နေသည်။",
+            "microphoneBtn": "မိုက်ခရိုဖုန်းကို ဖွင့်ပါ။",
+            "cameraBtn": "ကင်မရာကိုဖွင့်ပါ။",
+            "cameraAndMicrophoneBtn": "ကင်မရာနှင့် မိုက်ခရိုဖုန်းကို ဖွင့်ပါ။"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "မိုက်ကို ပိတ်ထားသည်။",
+            "micIsOn": "မိုက်ကို ဖွင့်ထားသည်။",
+            "cameraIsOff": "ကင်မရာပိတ်ထားသည်။",
+            "cameraIsOn": "ကင်မရာဖွင့်ထားသည်။",
+            "screenSharingIsOn": "မျက်နှာပြင်မျှဝေခြင်းကို ဖွင့်ထားသည်။",
+            "screenSharingIsOff": "မျက်နှာပြင်ကို မျှဝေပါ။",
+            "joinNow": "ခေါ်ဆိုမှုတွင် ပါဝင်ပါ။"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "ညွှန်ကြားချက်များ",
+            "permissionDenied": "{{kind}} အတွက် ခွင့်ပြုချက်ကို ငြင်းဆိုထားသည်။ ၎င်းကိုအသုံးပြုရန် အောက်ပါအဆင့်များကို လိုက်နာပါ-",
+            "point1": "&quot;ဆက်တင်များ&quot; -&gt; &quot;အဆင့်မြင့်&quot; -&gt; &quot;ကိုယ်ရေးကိုယ်တာနှင့် လုံခြုံရေး&quot; -&gt; &quot;ဆိုက်ဆက်တင်များ&quot; -&gt; &quot;ကင်မရာ&quot; သို့မဟုတ် &quot;ဆိုက်ဆက်တင်များ&quot; -&gt; &quot;မိုက်ခရိုဖုန်း&quot; သို့ သွားပါ။",
+            "point2": "&quot;ပိတ်ဆို့ခြင်း&quot; စာရင်းမှ {{hostname}} ကို ဖယ်ရှားပါ။"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "ညွှန်ကြားချက်များ",
+            "permissionDenied": "{{kind}} အတွက် ခွင့်ပြုချက်ကို ငြင်းဆိုထားသည်။ ကျေးဇူးပြု၍ ဤစာမျက်နှာကို ပြန်လည်စတင်ပြီး ညီလာခံတွင် ပါဝင်ရန် {{kind}} သို့ ဝင်ရောက်ခွင့်ကို အတည်ပြုပါ။"
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "ညွှန်ကြားချက်များ",
+            "permissionDenied": "{{kind}} အတွက် ခွင့်ပြုချက်ကို ငြင်းဆိုထားသည်။ ၎င်းကိုအသုံးပြုရန် အောက်ပါအဆင့်များကို လိုက်နာပါ-",
+            "point1": "သင်၏ Android ဆက်တင်များသို့ သွားပါ။",
+            "point2": "&quot;အက်ပ်များနှင့် အသိပေးချက်များ&quot; ကိုဖွင့်ပါ",
+            "point3": "&quot;{{communityName}}&quot; ကိုရှာပြီးဖွင့်ပါ။",
+            "point4": "ခွင့်ပြုချက်များကို နှိပ်ပါ။",
+            "point5": "{{kind}} ကိုဖွင့်ပါ"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "ညွှန်ကြားချက်များ",
+            "permissionDenied": "{{kind}} အတွက် ခွင့်ပြုချက်ကို ငြင်းဆိုထားသည်။ ၎င်းကိုအသုံးပြုရန် အောက်ပါအဆင့်များကို လိုက်နာပါ-",
+            "point1": "သင်၏ iOS ဆက်တင်များသို့ သွားပါ။",
+            "point2": "&quot;ကိုယ်ရေးကိုယ်တာ&quot; ကိုဖွင့်ပါ",
+            "point3": "{{kind}} ကိုရှာပြီးဖွင့်ပါ။",
+            "point4": "&quot;{{communityName}}&quot; ကိုရှာပြီး ဖွင့်ပါ။"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "မင်း အခန်းထဲဝင်သွားပြီ",
+            "joining": "ပါဝင်နေသည်- {{userName}}",
+            "sbLeftRoom": "{{userName}} အခန်းမှ ထွက်သွားသည်။",
+            "switchingRoom": "အခန်းပြောင်း...",
+            "forceDisconnecting": "5 စက္ကန့်အတွင်း သင့်ကို အဆက်အသွယ်ဖြတ်သွားပါမည်။",
+            "forceDisconnectingImmediately": "သင့်အား လက်ခံဆောင်ရွက်ပေးသူမှ အဆက်အသွယ်ဖြတ်ထားသည်။",
+            "youLeftRoom": "မင်းအခန်းထဲကထွက်သွားတယ်။",
+            "codeCopied": "မင်းအခန်းထဲကထွက်သွားတယ်။",
+            "sbBeganFbLive": "{{userName}} သည် ဤခေါ်ဆိုမှုကို Facebook တွင် စတင်ထုတ်လွှင့်ခဲ့သည်။",
+            "sbStoppedFbLive": "{{userName}} သည် ဤခေါ်ဆိုမှုကို Facebook တွင် ထုတ်လွှင့်ခြင်းကို ရပ်လိုက်ပါသည်။",
+            "youBeganFbLive": "သင်သည် ဤခေါ်ဆိုမှုကို Facebook တွင် စတင်ထုတ်လွှင့်ခဲ့သည်။",
+            "youStoppedFbLive": "သင်သည် ဤခေါ်ဆိုမှုကို Facebook တွင် ထုတ်လွှင့်ခြင်းကို ရပ်လိုက်ပါပြီ။",
+            "youStartedLive": "သင်သည် ဤခေါ်ဆိုမှုကို စိတ်ကြိုက် RTMP သို့ စတင်ထုတ်လွှင့်ခဲ့သည်။",
+            "youStoppedLive": "သင်သည် ဤခေါ်ဆိုမှုကို စိတ်ကြိုက် RTMP သို့ ထုတ်လွှင့်ခြင်းကို ရပ်လိုက်ပါပြီ။",
+            "sbStartedLiveStreaming": "{{userName}} တိုက်ရိုက်လွှင့်ခဲ့သည်။",
+            "sbStoppedLiveStreaming": "{{userName}} တိုက်ရိုက်ထုတ်လွှင့်မှု အဆုံးသတ်ခဲ့သည်။",
+            "liveStopped": "ဗီဒီယိုကို အဆုံးမှတ်သို့ ပို့စဉ် အမှားဖြစ်သွားသည်။",
+            "youBeganVideoRecording": "သင်သည် ဤညီလာခံကို စတင်မှတ်တမ်းတင်ခဲ့သည်။",
+            "youStoppedVideoRecording": "သင်သည် ဤညီလာခံကို မှတ်တမ်းတင်ခြင်းကို ရပ်လိုက်သည်။",
+            "linkCopiedToCb": "လင့်ခ်ကို ကလစ်ဘုတ်သို့ ကူးယူထားသည်။",
+            "codeCopiedToCb": "ကုဒ်ကို ကလစ်ဘုတ်သို့ ကူးယူထားသည်။",
+            "userHasNoVideo": "ပါဝင်သူတွင် ဗီဒီယိုမရှိပါ။",
+            "openInBrowserAlert": "ညီလာခံတက်ရောက်ရန် Safari ဘရောက်ဆာတွင် လင့်ခ်ကိုဖွင့်ပါ။"
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "ဗီဒီယို ဆက်တင်များ",
+            "webCamera": "ဝဘ်ကင်မရာ",
+            "screenSharing": "မျက်နှာပြင်မျှဝေခြင်း။",
+            "shareAnotherScreen": "အခြားမျက်နှာပြင်ကို မျှဝေပါ။",
+            "turnOffCameras": "ကင်မရာကို ပိတ်ပါ။",
+            "turnOffVideo": "ကင်မရာ\/စခရင် မျှဝေခြင်းကို ပိတ်ပါ။",
+            "turnOffAudioInput": "မိုက်ခရိုဖုန်းကို အသံတိတ်ပါ။",
+            "turnOffScreenSharing": "မျက်နှာပြင်မျှဝေခြင်းကို ပိတ်ပါ။",
+            "cameraIsTurnedOff": "ကင်မရာကို ပိတ်ထားသည်။",
+            "micIsTurnedOff": "မိုက်ခရိုဖုန်းကို ပိတ်ထားသည်။",
+            "startFBLive": "Facebook တိုက်ရိုက်ထုတ်လွှင့်မှုကို စတင်ပါ။",
+            "stopFBLive": "Facebook တိုက်ရိုက်ထုတ်လွှင့်မှုကို ရပ်ပါ။",
+            "startRecording": "စတင်ရိုက်ကူးပါ။",
+            "stopRecording": "မှတ်တမ်းတင်ခြင်းကို ရပ်ပါ။",
+            "start": "စတင်ပါ။",
+            "stop": "ရပ်",
+            "recordingInProgress": "မှတ်တမ်းတင်ခြင်းကို လုပ်ဆောင်နေသည်...",
+            "fbLiveTitle": "တိုက်ရိုက်ထုတ်လွှင့်မှု ခေါင်းစဉ်",
+            "fbLiveDescription": "သင်၏ တိုက်ရိုက်ထုတ်လွှင့်မှုကို ဖော်ပြပါ။ အဲဒီအကြောင်းကားအဘယ်သို့?",
+            "fbOnlyMeLiveAccess": "ငါသာလျှင်",
+            "fbFriendsAccess": "သူငယ်ချင်း",
+            "fbPublicAccess": "အများသူငှာ",
+            "publishOnTimeline": "Timeline တွင် လွှင့်တင်ပါ။",
+            "publishToGroup": "အဖွဲ့သို့ လွှင့်တင်ပါ။",
+            "fbStartLive": "တိုက်ရိုက်သွားပါ။",
+            "fbStopLive": "တိုက်ရိုက်ထုတ်လွှင့်မှုကို အဆုံးသတ်ပါ။",
+            "streamingSettings": "ဆက်တင်များ",
+            "fbEmbedCode": "မြှုပ်ထား",
+            "copy": "ကော်ပီ",
+            "streamToRTMP": "စိတ်ကြိုက် RTMP သို့ တိုက်ရိုက်ကြည့်ရှုပါ။",
+            "startBroadcasting": "စတင်ထုတ်လွှင့်သည်။",
+            "broadcastingInProgress": "ရုပ်သံလွှင့်ခြင်းကို လုပ်ဆောင်နေပါသည်။"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "အသံ ဆက်တင်များ",
+            "speakers": "စပီ",
+            "microphone": "မိုက်ခရိုဖုန်း"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
+            "dialogTitle": "ပါဝင်သူ ဆက်တင်များ",
+            "disconnect": "အဆက်အသွယ်ဖြတ်ပါ။",
+            "floatingScreens": "ရေပေါ်မျက်နှာပြင်များ",
+            "tiledScreens": "ကြွေပြားစခရင်များ",
+            "loudestExceptMe": "ငါမှလွဲ၍ အသံအကျယ်ဆုံး",
+            "maximizeLoudest": "အကျယ်ဆုံးကို ချဲ့ပါ။",
             "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "fullScreen": "မျက်နှာပြင်အပြည့်",
+            "manual": "လူကိုယ်တိုင်",
+            "turnOffCamera": "ဗီဒီယိုကို ဖျောက်ပါ။",
+            "turnOffAudio": "အသံတိတ်",
+            "turnOffScreenSharing": "မျက်နှာပြင်မျှဝေခြင်းကို ဝှက်ထားပါ။",
+            "turnOnCamera": "ဗီဒီယိုပြပါ။",
+            "turnOnAudio": "အသံပြန်ဖွင့်ပါ။",
+            "turnOnScreenSharing": "မျက်နှာပြင်မျှဝေခြင်းကိုပြသပါ။"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "ထုတ်လွှင့်မှု ဆက်တင်များ"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "အစည်းအဝေး",
+            "MeetingEnded": "အစည်းအဝေး ပြီးသွားတယ်။"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "ဖိတ်ကြားထားသည်။",
+            "description": "ဖိတ်စာများအတွက် ဝင်စာ"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "အရင်းအမြစ်",
+            "description": "အရင်းအမြစ်တစ်ခုသို့ဝင်ရောက်ခွင့်ကို စီမံခန့်ခွဲရန်နှင့် အပ်ဒိတ်များအကြောင်း မက်ဆေ့ချ်များတင်ခြင်းအတွက် stream"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "အလုပ်တစ်ခုအပေါ် တိုးတက်မှုအကြောင်း အပ်ဒိတ်များ လက်ခံရရှိရန်",
+            "displayType": "တာဝန်"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "အလုပ်များအတွက် အမျိုးအစား",
+            "displayType": "လုပ်ငန်းတာဝန်များ"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "အသိုင်းအဝိုင်းတစ်ခု၏ အဖွဲ့ဝင်များအတွက် ဘုံအတွေ့အကြုံတစ်ခု",
+            "displayType": "အသိုက်အဝန်းတစ်ခု၏အဖွဲ့ဝင်များအတွက် ဘုံအတွေ့အကြုံ"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "အသုံးပြုသူကိုယ်တိုင် မိတ်ဆက်ပေးနိုင်သော နှုတ်ဆက်ခြင်း။",
+            "displayType": "နှုတ်ဆက်သည်။"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "နံပါတ်",
+            "description": "သင်္ချာနံပါတ်"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "ရက်စွဲ",
+            "description": "ရက်စွဲ"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "စာသား",
+            "description": "စာသားကိုယ်ထည်"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "စာသား",
+            "description": "သေးငယ်သော စာသား"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "စာသား",
+            "description": "စာသားအလတ်စား"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "အီးမေးလ်လိပ်စာ",
+            "description": "အီးမေးလ်လိပ်စာ"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "ဖုန်းနံပါတ်",
+            "description": "ဖုန်းနံပါတ်"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ဝဘ်ပေါ်ရှိလင့်ခ်"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "ပုံ",
+            "description": "အမြင်အာရုံပုံရိပ်",
+            "newItem": "ပုံထည့်ပါ။"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "ရုပ်ပုံပြခန်း",
+            "description": "ပုံများပြခန်း"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "အခွေ",
+            "description": "မီဒီယာမျိုးစုံနဲ့ ဆက်စပ်နေတဲ့ အယ်လ်ဘမ်"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "ဖို",
+            "description": "တင်ထားသောဖိုင်",
+            "newItem": "ဖိုင်ထည့်ပါ။"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "အသံအပိုင်း",
+            "description": "အသံဖိုင်",
+            "newItem": "အသံထည့်ပါ။"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "ဗီဒီယိုအပိုင်း",
+            "description": "ဗီဒီယိုကလစ်",
+            "newItem": "ဗီဒီယိုထည့်ပါ။"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF စာရွက်စာတမ်း",
+            "description": "PDF စာရွက်စာတမ်း",
+            "newItem": "PDF ထည့်ပါ။"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "တိုက်ရိုက်ထုတ်လွှင့်ခြင်း",
+            "description": "တိုက်ရိုက်အသံ သို့မဟုတ် ဗီဒီယို"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "အမျိုးအစား",
+            "description": "အခြားသော ထုတ်လွှင့်မှုများနှင့် ဆက်စပ်နိုင်သော အမျိုးအစားတစ်ခု"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "ပါဝင်ခြင်းအညွှန်း",
+            "description": "အသုံးပြုသူသည် ပူးပေါင်း\/ထွက်ခွာသည့်အခါ ဤအရာနှင့် ဆက်စပ်\/မသက်ဆိုင်ပါ။"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "အတိုး",
+            "description": "အကြောင်းအရာတစ်ခုအတွက် သုံးစွဲသူတစ်ဦး၏ စိတ်ဝင်စားမှုကို ကိုယ်စားပြုသည်။"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "ဝင်လာ",
+            "description": "အခြားအသုံးပြုသူများပေးပို့သော မက်ဆေ့ချ်များအတွက် ဦးတည်ရာ"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "စကားဝိုင်း",
+            "description": "အသုံးပြုသူများအကြား စကားဝိုင်းတစ်ခု၊ မှတ်တမ်းနှင့်အတူ"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "အချိန်နှင့်တပြေးညီခေါ်ဆိုပါ။",
+            "description": "အချိန်နှင့်တပြေးညီ ဗီဒီယို\/အသံခေါ်ဆိုမှု"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "မေးခွန်း",
+            "description": "မေးခွန်းစီးကြောင်း"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "ဖြေ",
+            "description": "အဖြေ stream"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "ခေါ်ဆိုမှုများ",
+            "description": "Stream\/webrtc အတွက် အမျိုးအစား",
+            "MaxRelationsExceeded": "အများဆုံးခေါ်ဆိုမှု ကျော်လွန်သွားပါပြီ။"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "စာမျက်နှာခေါင်းစဉ်ကိုရိုက်ပါ။",
+        "ModTab": "အကြောင်းအရာကို ပြင်ဆင်ပါ။",
+        "Save": "သိမ်းဆည်းပါ။",
+        "Delete": "ဖျက်ပါ။",
+        "Submenu": "မီနူး"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "မှတ်တမ်း",
+        "reset": "ပြန်လည်သတ်မှတ်ပါ။",
+        "edit": "တည်းဖြတ်ပါ။",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်သည်။",
+        "link": "လင့်",
+        "setUrl": "URL သတ်မှတ်ပါ။",
+        "save": "သိမ်းဆည်းပါ။",
+        "setClip": "အပိုင်းဖြတ်ပါ။",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သော ဖိုင်",
+        "errorNoSource": "အသံအရင်းအမြစ်မရှိပါ။",
+        "uploadLimit": "အများဆုံး ဖိုင်အရွယ်အစား- {{size}}",
+        "errorFileSize": "တောင်းပန်ပါတယ်၊ ဒါပေမယ့် ဖိုင်က အရမ်းကြီးတယ်။<br> အများဆုံး ဖိုင်အရွယ်အစားမှာ {{size}} ဖြစ်သည်"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "ပြန်လည်သတ်မှတ်ပါ။",
+        "edit": "တည်းဖြတ်ပါ။",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်သည်။",
+        "link": "လင့်",
+        "setUrl": "URL သတ်မှတ်ပါ။",
+        "save": "သိမ်းဆည်းပါ။",
+        "setClip": "အပိုင်းဖြတ်ပါ။",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သော ဖိုင်",
+        "errorNoSource": "ဗီဒီယိုအရင်းအမြစ်မရှိပါ။",
+        "uploadLimit": "အများဆုံး ဖိုင်အရွယ်အစား- {{size}}",
+        "errorFileSize": "တောင်းပန်ပါတယ်၊ ဒါပေမယ့် ဖိုင်က အရမ်းကြီးတယ်။<br> အများဆုံး ဖိုင်အရွယ်အစားမှာ {{size}} ဖြစ်သည်"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "ပြန်လည်သတ်မှတ်ပါ။",
+        "edit": "တည်းဖြတ်ပါ။",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်သည်။",
+        "link": "လင့်",
+        "setUrl": "URL သတ်မှတ်ပါ။",
+        "save": "သိမ်းဆည်းပါ။",
+        "setClip": "အပိုင်းဖြတ်ပါ။",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သော ဖိုင်",
+        "errorNoSource": "pdf အရင်းအမြစ်မရှိပါ။",
+        "uploadLimit": "အများဆုံး ဖိုင်အရွယ်အစား- {{size}}",
+        "errorFileSize": "ဝမ်းနည်းပါတယ်၊ ဒါပေမယ့် ဖိုင်က အရမ်းကြီးတယ်။<br> အများဆုံး ဖိုင်အရွယ်အစားမှာ {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "ပြန်လည်သတ်မှတ်ပါ။",
+        "edit": "တည်းဖြတ်ပါ။",
+        "title": "ခေါင်းစဥ်",
+        "description": "ဖော်ပြချက်",
+        "upload": "တင်သည်။",
+        "link": "လင့်",
+        "setUrl": "URL သတ်မှတ်ပါ။",
+        "save": "သိမ်းဆည်းပါ။",
+        "uploadedImage": "အပ်လုဒ်လုပ်ထားသောပုံ",
+        "imageTitle": "ပုံခေါင်းစဉ်",
+        "setClip": "အပိုင်းဖြတ်ပါ။",
+        "invalidURL": "မမှန်ကန်သော URL",
+        "invalidFile": "မမှန်ကန်သော ဖိုင်",
+        "errorNoSource": "ပုံအရင်းအမြစ်မရှိပါ။",
+        "uploadLimit": "အများဆုံး ဖိုင်အရွယ်အစား- {{size}}",
+        "errorFileSize": "တောင်းပန်ပါတယ်၊ ဒါပေမယ့် ဖိုင်က အရမ်းကြီးတယ်။<br> အများဆုံး ဖိုင်အရွယ်အစားမှာ {{size}} ဖြစ်သည်"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "မေးခွန်းများ",
+        "Answers": "အဖြေများ",
+        "AnswerQuestion": "မေးခွန်းကိုဖြေပါ",
+        "SetYourAnswer": "မေးခွန်းကို ဖြေပါ။",
+        "NewQuestion": "မေးခွန်းအသစ်",
+        "NewAnswer": "အဖြေအသစ်",
+        "AnswerDetails": "အသေးစိတ်ဖြေဆိုပါ။",
+        "answerOption": "ရွေးချယ်မှု",
+        "answerOptionExclusive": "သီးသန့်",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "သင့်အဖြေကို ဤနေရာတွင် ရေးပါ။",
+        "SaveQuestion": "မေးခွန်းကို သိမ်းဆည်းပါ။",
+        "SaveAnswer": "အဖြေကိုသိမ်းဆည်းပါ။",
+        "AddAnotherAnswer": "နောက်ထပ်အဖြေတစ်ခုထပ်ထည့်ပါ။",
+        "ErrorAnswers": "အဖြေတစ်ခုတောင်ထည့်ပါ။",
+        "AlreadyAnswered": "ဖြေပြီးပြီ။",
+        "TitlePlaceholder": "သင့်မေးခွန်းကို ရိုက်ထည့်ပါ။",
+        "ContentPlaceholder": "လူများဖြေကြားရာတွင် အကူအညီဖြစ်စေရန် နောက်ထပ်အချက်အလက်များကို ဤနေရာတွင် ထားပါ။",
+        "ErrorTitle": "လိုအပ်သောမေးခွန်း",
+        "Placeholder": "နေရာယူသည်။"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "အတွေ့အကြုံသစ်",
+        "DefineTitle": "ကျေးဇူးပြု၍ ခေါင်းစဉ်တစ်ခု သတ်မှတ်ပါ။",
+        "Create": "ဖန်တီးပါ။"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "ခေါ်ဆိုမှုများ",
+        "MaxCalls": "Max ဖုန်းခေါ်ဆိုမှုများ",
+        "Update": "မွမ်းမံ",
+        "NoCallsYet": "ဖုန်းခေါ်ဆိုမှုမရှိသေးပါ။",
+        "CallReasonTitle": "ဒီခေါ်ဆိုမှုက ဘာအကြောင်းလဲ။",
+        "WaitingRoom": "စောင့်ဆိုင်းခန်း"
     }
 }

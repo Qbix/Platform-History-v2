@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Erro {{status}} durante a solicitude",
+        "canceled": "Solicitude cancelada",
+        "500": "Error interno do servidor",
+        "404": "Non atopado: {{url}}",
+        "501": "Solicitude interrompida"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "A sesión caducou. Actualiza a páxina e téntao de novo.",
+        "otherDomain": "Bloqueouse a solicitude de varios dominios a un dominio estranxeiro en {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "toca",
+        "click": "prema",
+        "yes": "si",
+        "no": "non",
+        "Tap": "Toca",
+        "Click": "Fai clic",
+        "Yes": "Si",
+        "No": "Non"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "xaneiro",
+        "2": "febreiro",
+        "3": "marzo",
+        "4": "abril",
+        "5": "maio",
+        "6": "xuño",
+        "7": "xullo",
+        "8": "agosto",
+        "9": "setembro",
+        "10": "Outubro",
+        "11": "novembro",
+        "12": "decembro"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "segundo",
+        "seconds": "segundos",
+        "minute": "minuto",
+        "minutes": "minutos",
+        "hour": "horas",
+        "day": "día",
+        "days": "días",
+        "week": "semana",
+        "weeks": "semanas",
+        "month": "mes",
+        "months": "meses",
+        "year": "ano",
+        "years": "anos",
+        "decade": "década",
+        "decades": "décadas",
+        "century": "século",
+        "centuries": "séculos"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
+        "allowMicrophoneAccess": "Permite o acceso ao teu micrófono",
+        "record": "Gravar",
+        "recording": "Gravación",
+        "remains": "queda",
+        "maximum": "máximo",
+        "playing": "Xogando",
+        "recorded": "Gravado",
         "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "discard": "Descartar",
+        "encoding": "Codificación"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "errorNoSource": "Sen fonte de vídeo",
+        "SkipAfter": "Saltar despois",
+        "Skip": "Saltar"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "Sen fonte pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Establecer o inicio do clip",
+        "ClipStart": "Inicio do clip",
+        "SetClipEnd": "Establecer o final do clip",
+        "ClipEnd": "Fin do clip",
+        "StartMoreEnd": "A posición inicial non pode ser máis que a posición final",
+        "EndLessStart": "A posición final non pode ser inferior á posición inicial",
+        "WhichInvalid": "Argumento &#39;cal&#39; non é válido"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Alerta"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Confirmar",
+        "ok": "Si",
+        "cancel": "Non"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Aviso",
+        "ok": "Vaia"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "máis",
+        "Menu": "Menú"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Erro ao ler o ficheiro",
+        "errorType": "Sentímolo, pero este tipo de ficheiro non é compatible",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Que che gustaría facer?",
+            "photo": "Saca unha foto nova",
+            "library": "Seleccionar da biblioteca"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Escolle unha imaxe máis grande.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Axustar tamaño e posición",
+            "touchscreen": "Use os dedos para facer zoom e arrastrar",
+            "notTouchscreen": "Usa o rato e a roda para facer zoom e arrastrar"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "Onte á noite",
+        "lastEvening": "última véspera",
+        "yesterday": "onte",
+        "thisMorning": "esta mañá",
+        "today": "hoxe",
+        "tonight": "esta noite",
+        "tomorrowMorning": "mañá pola mañá",
+        "tomorrow": "mañá",
+        "hoursAgo": "Hai {{h}} horas",
+        "hourAgo": "Hai {{h}} hora",
+        "minuteAgo": "Hai {{m}} minuto",
+        "minutesAgo": "Hai {{m}} minutos",
+        "secondAgo": "Hai {{s}} segundo",
+        "secondsAgo": "Hai {{s}} segundos",
+        "fewSecondsAgo": "segundos atrás",
+        "rightNow": "agora",
+        "inSecond": "en {{s}} segundos",
+        "inSeconds": "en {{s}} segundos",
+        "inMinute": "en {{m}} minuto",
+        "inMinutes": "en {{m}} minutos",
+        "inHour": "en {{h}} hora",
+        "inHours": "en {{h}} horas",
+        "inUnderMinute": "en menos de 1 minuto"
     }
 }

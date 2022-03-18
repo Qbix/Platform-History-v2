@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Este contido está oculto para ti."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Elemento novo"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Persoas que convidei",
+        "Streams\/invitedMe": "Quen me invitou",
+        "DoYouAgree": "Estás de acordo?",
+        "Yes": "Si",
+        "No": "Non"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Cales son os teus intereses?",
+        "CanAdd": "Se aínda non atopas o que buscas, podes engadir un novo interese a continuación:",
+        "TrySynonyms": "Non o ves? Proba algúns sinónimos.",
+        "AddUnderCategory": "Engadir na categoría...",
+        "Other": "Outra",
+        "Unlisted": "Non listado"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "A mensaxe marcouse para a revisión do administrador. Toca de novo para quitar a marca.",
+        "noOneSaid": "Ninguén dixo nada",
+        "closeChatButton": "Pecha o chat",
+        "closeChatConfirmTitle": "Queres pechar este chat?",
+        "closeChatConfirm": "Estás seguro de que queres pechar este chat?",
+        "Subscribed": "Notificacións activadas",
+        "Unsubscribed": "Notificacións silenciadas",
+        "closeChatConfirmYes": "Si",
+        "closeChatConfirmNo": "Non",
+        "earlierComments": "comentarios anteriores",
+        "startedConversation": "comezou unha conversa",
+        "RealTimeCall": "Chamada en tempo real",
+        "SearchByName": "Busca polo nome",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} está visitando o chat",
+            "Join": "{{displayName}} uniuse ao chat",
+            "Leave": "{{displayName}} saíu do chat",
+            "RelatedTo": "{{displayName}} comezou un {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "xestiona as túas subscricións de correo electrónico",
+        "IfUnsubscribe": "Se queres darte de baixa",
+        "*": "Mensaxe {{& message.fields.type}} a {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dixo: {{& message.content}}",
+        "Streams\/changed": "Cambios en {{stream.fields.title}}",
+        "Streams\/invite": "Convidáronte a {{& stream.fields.title}}",
+        "Streams\/announcement": "Anuncio en {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} cambiou o acceso en {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Mensaxe de chat editada en {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Mensaxe de chat eliminada en {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} pechouse",
+        "Streams\/task\/progress": "Progreso realizado en {{stream.fields.title}}",
+        "Streams\/task\/complete": "Tarefa completada: {{stream.fields.title}}",
+        "Streams\/task\/error": "Erro durante: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Mensaxe entrante",
+        "Streams\/relatedTo\/Streams\/call": "Nova chamada iniciada en {{toTitle}}",
+        "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} en {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Engadido a {{toTitle}} como {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} mencionoute nun comentario",
+        "Streams\/call": "{{displayName}} iniciou unha chamada en tempo real"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Invitar",
+        "messageContent": "{{displayName}} invitoute a {{inviteUrl}}",
+        "youCanNowPaste": "Agora podes pegar esta ligazón nalgún lugar para invitar persoas",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "Escolle entre os teus contactos",
+            "chooseAgainFromContacts": "Escolle de novo entre Contactos",
+            "inviteSelectedContacts": "Invitar os contactos seleccionados",
+            "selectFromContacts": "Seleccione Desde Contactos",
+            "userChooserPlaceholder": "Busca polo nome",
+            "photo": "Sacar unha foto",
+            "photoInstruction": "Se a persoa que escaneou o teu código QR está diante de ti, fai unha foto dela",
+            "to": "Para: {{Stream Title}}",
+            "go": "Vaia",
+            "title": "Invitar",
+            "placeholder": "Número de móbil ou enderezo de correo electrónico",
+            "orInvite": "Ou invitar persoas usando:",
+            "copyLink": "{{ClickOrTap}} para copiar a ligazón de invitación",
+            "shareOrCopyLink": "{{ClickOrTap}} para compartir ou copiar a ligazón de invitación",
+            "QR": "{{ClickOrTap}} para xerar código QR",
+            "QRtitle": "Escanee este código QR",
+            "QRscanned": "Escaneárono!",
+            "scannedQR": "{{ClickOrTap}} se o código foi dixitalizado",
+            "byEmail": "Correo electrónico",
+            "byText": "Texto",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Ei, mira isto",
+            "PleaseVisitLink": "Visite a seguinte ligazón:",
+            "InvitingYou": "Convídote a {{title}}",
+            "HasInvitedYou": "{{displayName}} invitoute a {{title}}",
+            "HasMentionedYou": "{{displayName}} mencionoute en &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VOSTEDE É INVITADO!",
+            "AcceptInvite": "Aceptar a invitación"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Invitáronte a {{title}}. Toca {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Estás convidado. {{ClickOrTap}} aquí para aceptar e unirse."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "publicou unha mensaxe <em>{{message.fields.type}}<\/em> para {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "comentou",
+            "startedCallIn": "comezou unha chamada",
+            "in": "en",
+            "body": "en {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "foi publicado en",
+                "byAvatar": "por {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "ten un novo {{instructions.fromDisplayType}}",
+                "byAvatar": "engadido por {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "As invitacións envíanse dende o noso número, que os teus amigos aínda non recoñecen. Continúa cun texto rápido para informarlles que a invitación foi de ti, pedíndolles que fagan clic na ligazón.",
+            "confirm": "As invitacións envíanse dende o noso número, que os teus amigos aínda non recoñecen. Gustaríache seguir cun texto rápido para informarlles que a invitación foi de ti, pedíndolles que fagan clic na ligazón.",
+            "check": "Ola, acabo de enviarche unha invitación á aplicación {{app}}. Comproba o teu sms e fai clic na ligazón!",
+            "CheckYourMobile": "Comprobe o SMS e siga as instrucións!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "As invitacións envíanse dende o noso dominio, que os teus amigos aínda non recoñecen. Continúa cun texto rápido para informarlles que a invitación foi de ti, pedíndolles que fagan clic na ligazón.",
+            "confirm": "As invitacións envíanse dende o noso dominio, que os teus amigos aínda non recoñecen. Gustaríache seguir cun texto rápido para informarlles que a invitación foi de ti, pedíndolles que fagan clic na ligazón.",
+            "subject": "Recibiches unha invitación?",
+            "body": "Ola, acabo de enviarche unha invitación á aplicación {{app}}. Consulta o teu correo electrónico e fai clic na ligazón que hai alí!",
+            "CheckYourEmail": "Consulte o seu correo electrónico e siga as instrucións!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Título",
+        "Subscribed": "Subscrito",
+        "Participants": "Participantes",
+        "AreYouSureRemoveIdentifier": "Estás seguro de eliminar este identificador?",
+        "AreYouSureUnsubscribeIdentifier": "Estás seguro de cancelar a subscrición a este identificador? Desactivará as notificacións a este identificador.",
+        "AreYouSureUnsubscribeDevice": "Estás seguro de cancelar a subscrición a este dispositivo? Desactivará as notificacións a este dispositivo.",
+        "AreYouSureRemoveParticipant": "Estás seguro de que queres eliminar este participante?",
+        "RemoveParticipant": "Eliminar participante",
+        "Identifiers": "Identificadores",
+        "Devices": "Dispositivos",
+        "Streams": "Fluxos"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Non tes permiso para unirte a esta emisión.",
+        "streamTitle": "{{1}} iniciou unha chamada en directo",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Conectando",
+            "microphoneBtn": "Activa o micrófono",
+            "cameraBtn": "Activa a cámara",
+            "cameraAndMicrophoneBtn": "Activa a cámara e o micrófono"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "O micrófono está apagado",
+            "micIsOn": "O micrófono está acendido",
+            "cameraIsOff": "A cámara está apagada",
+            "cameraIsOn": "A cámara está activada",
+            "screenSharingIsOn": "O uso compartido de pantalla está activado",
+            "screenSharingIsOff": "Compartir pantalla",
+            "joinNow": "Únete á convocatoria"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Permiso para {{kind}} denegado. Para usalo, siga estes pasos:",
+            "point1": "Vaia a &quot;Configuración&quot; -&gt; &quot;Avanzado&quot; -&gt; &quot;Privacidade e seguridade&quot; -&gt; &quot;Configuración do sitio&quot; -&gt; &quot;Cámara&quot; ou &quot;Configuración do sitio&quot; -&gt; &quot;Micrófono&quot;",
+            "point2": "Elimina {{hostname}} da lista &quot;Bloquear&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Permiso para {{kind}} denegado. Volve cargar esta páxina e confirma o acceso a {{kind}} para unirte á conferencia."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Permiso para {{kind}} denegado. Para usalo, siga estes pasos:",
+            "point1": "Vaia á configuración de Android",
+            "point2": "Abre &quot;Aplicacións e notificacións&quot;",
+            "point3": "Busca &quot;{{communityName}}&quot; e ábreo",
+            "point4": "Toca Permisos",
+            "point5": "Activar {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Instrucións",
+            "permissionDenied": "Permiso para {{kind}} denegado. Para usalo, siga estes pasos:",
+            "point1": "Vaia á configuración de iOS",
+            "point2": "Abre &quot;Privacidade&quot;",
+            "point3": "Busca {{kind}} e ábreo",
+            "point4": "Busca &quot;{{communityName}}&quot; e activa"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Sumácheste á sala",
+            "joining": "Unirse: {{userName}}",
+            "sbLeftRoom": "{{userName}} saíu da sala",
+            "switchingRoom": "Cambio de sala...",
+            "forceDisconnecting": "Desconectarase en 5 segundos",
+            "forceDisconnectingImmediately": "Un anfitrión desconectouche",
+            "youLeftRoom": "Saíches do cuarto",
+            "codeCopied": "Saíches do cuarto",
+            "sbBeganFbLive": "{{userName}} comezou a transmitir esta chamada en Facebook",
+            "sbStoppedFbLive": "{{userName}} deixou de transmitir esta chamada en Facebook",
+            "youBeganFbLive": "Comezaches a transmitir esta chamada en Facebook",
+            "youStoppedFbLive": "Deixaches de transmitir esta chamada en Facebook",
+            "youStartedLive": "Comezaches a transmitir esta chamada a RTMP personalizado",
+            "youStoppedLive": "Deixaches de transmitir esta chamada a RTMP personalizado",
+            "sbStartedLiveStreaming": "{{userName}} comezou en directo",
+            "sbStoppedLiveStreaming": "{{userName}} rematou en directo",
+            "liveStopped": "Produciuse un erro ao enviar o vídeo ao punto final",
+            "youBeganVideoRecording": "Comezaches a gravar esta conferencia",
+            "youStoppedVideoRecording": "Deixaches de gravar esta conferencia",
+            "linkCopiedToCb": "A ligazón copiouse no portapapeis",
+            "codeCopiedToCb": "Copiouse o código no portapapeis",
+            "userHasNoVideo": "O participante non ten ningún vídeo",
+            "openInBrowserAlert": "Abre a ligazón no navegador Safari para unirte á conferencia."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "Configuración de vídeo",
+            "webCamera": "Cámara web",
+            "screenSharing": "Compartir pantalla",
+            "shareAnotherScreen": "Comparte outra pantalla",
+            "turnOffCameras": "Apague a cámara",
+            "turnOffVideo": "Desactivar compartir cámara\/pantalla",
+            "turnOffAudioInput": "Silenciar o micrófono",
+            "turnOffScreenSharing": "Desactiva o uso compartido de pantalla",
+            "cameraIsTurnedOff": "A cámara está desactivada",
+            "micIsTurnedOff": "O micrófono está desactivado",
+            "startFBLive": "Inicia Facebook Livestream",
+            "stopFBLive": "Detén a transmisión en directo de Facebook",
+            "startRecording": "Comezar a gravar",
+            "stopRecording": "Deter a gravación",
+            "start": "Comeza",
+            "stop": "Pare",
+            "recordingInProgress": "A gravación está en curso...",
+            "fbLiveTitle": "Título da transmisión en directo",
+            "fbLiveDescription": "Describe a túa emisión en directo. De que se trata?",
+            "fbOnlyMeLiveAccess": "Só eu",
+            "fbFriendsAccess": "Amigos",
+            "fbPublicAccess": "Público",
+            "publishOnTimeline": "Publicar na liña de tempo",
+            "publishToGroup": "Publicar no grupo",
+            "fbStartLive": "Ir ao vivo",
+            "fbStopLive": "Finalizar a transmisión en directo",
+            "streamingSettings": "Configuración",
+            "fbEmbedCode": "Inserir",
+            "copy": "Copiar",
+            "streamToRTMP": "Transmitir a RTMP personalizado",
+            "startBroadcasting": "Comeza a transmitir",
+            "broadcastingInProgress": "A emisión está en curso"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Configuración de audio",
+            "speakers": "Altofalantes",
+            "microphone": "Micrófono"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
+            "dialogTitle": "Configuración dos participantes",
+            "disconnect": "Desconectar",
+            "floatingScreens": "Pantallas flotantes",
+            "tiledScreens": "Pantallas de mosaico",
+            "loudestExceptMe": "O máis alto excepto eu",
+            "maximizeLoudest": "Maximizar o máis alto",
+            "staticMaximized": "Maximizado estático",
+            "fullScreen": "Pantalla completa",
             "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "turnOffCamera": "Ocultar vídeo",
+            "turnOffAudio": "Silenciar o audio",
+            "turnOffScreenSharing": "Ocultar a pantalla compartida",
+            "turnOnCamera": "Mostrar vídeo",
+            "turnOnAudio": "Activar o audio",
+            "turnOnScreenSharing": "Mostrar compartir pantalla"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Configuración de transmisión"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Reunión",
+            "MeetingEnded": "Rematou a reunión"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Invitado",
+            "description": "Inbox para invitacións"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Recurso",
+            "description": "fluxo para xestionar o acceso a un recurso e publicar mensaxes sobre actualizacións"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "para recibir actualizacións sobre o progreso dunha determinada tarefa",
+            "displayType": "Tarefa"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "categoría para tarefas",
+            "displayType": "Tarefas"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "unha experiencia común para os membros dunha comunidade",
+            "displayType": "Experiencia común para os membros dunha comunidade"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "saúdo co que un usuario pode presentarse",
+            "displayType": "Saúdo"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Número",
+            "description": "número matemático"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Data",
+            "description": "data"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Texto",
+            "description": "corpo do texto"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Texto",
+            "description": "pequeno corpo de texto"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Texto",
+            "description": "corpo medio do texto"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Enderezo electrónico",
+            "description": "Enderezo electrónico"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Número de teléfono",
+            "description": "número de teléfono"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "ligazón na web"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Imaxe",
+            "description": "imaxe visual",
+            "newItem": "Engadir imaxe"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Galería de imaxes",
+            "description": "galería de imaxes"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Álbum",
+            "description": "un álbum co que se relacionan diversos medios"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Arquivo",
+            "description": "ficheiro cargado",
+            "newItem": "Engadir ficheiro"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Clip de audio",
+            "description": "clip de audio",
+            "newItem": "Engadir audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "description": "videoclip",
+            "newItem": "Engadir vídeo"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "Documento PDF",
+            "description": "Documento PDF",
+            "newItem": "Engadir PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Transmisión en directo",
+            "description": "audio ou vídeo en directo"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Categoría",
+            "description": "unha categoría coa que se poden relacionar outros fluxos"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Índice de participación",
+            "description": "os fluxos están relacionados ou non están relacionados con isto cando un usuario se une ou sae"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Interese",
+            "description": "representa o interese dun usuario nun determinado tema"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Entrante",
+            "description": "destino para as mensaxes enviadas por outros usuarios"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Conversa",
+            "description": "unha conversa entre usuarios, con historia"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Chamada en tempo real",
+            "description": "unha videochamada\/audio en tempo real"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Pregunta",
+            "description": "fluxo de preguntas"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Resposta",
+            "description": "fluxo de respostas"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Chamadas",
+            "description": "categoría para Streams\/webrtc",
+            "MaxRelationsExceeded": "Superouse o número máximo de chamadas"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "escriba o título da páxina",
+        "ModTab": "Modificar elemento",
+        "Save": "Gardar",
+        "Delete": "Eliminar",
+        "Submenu": "Submenú"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Gravar",
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Establecer URL",
+        "save": "Gardar",
+        "setClip": "Recortar Clip",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Sen fonte de audio",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "O ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Establecer URL",
+        "save": "Gardar",
+        "setClip": "Recortar Clip",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Sen fonte de vídeo",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "O ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Establecer URL",
+        "save": "Gardar",
+        "setClip": "Recortar Clip",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Sen fonte pdf",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "O ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Restablecer",
+        "edit": "Editar",
+        "title": "título",
+        "description": "descrición",
+        "upload": "Cargar",
+        "link": "Ligazón",
+        "setUrl": "Establecer URL",
+        "save": "Gardar",
+        "uploadedImage": "Imaxe cargada",
+        "imageTitle": "Título da imaxe",
+        "setClip": "Recortar Clip",
+        "invalidURL": "URL non válido",
+        "invalidFile": "Ficheiro non válido",
+        "errorNoSource": "Sen fonte de imaxe",
+        "uploadLimit": "Tamaño máximo do ficheiro: {{size}}",
+        "errorFileSize": "O ficheiro é demasiado grande.<br> O tamaño máximo do ficheiro é {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "Preguntas",
+        "Answers": "Respostas",
+        "AnswerQuestion": "Responde a pregunta",
+        "SetYourAnswer": "Por favor, responda a pregunta",
+        "NewQuestion": "Nova Pregunta",
+        "NewAnswer": "Nova Resposta",
+        "AnswerDetails": "Detalles da resposta",
+        "answerOption": "Opción",
+        "answerOptionExclusive": "Exclusivo",
+        "answerTextarea": "Área de texto",
+        "FreeAnswer": "Escribe aquí a túa resposta",
+        "SaveQuestion": "Gardar pregunta",
+        "SaveAnswer": "Gardar resposta",
+        "AddAnotherAnswer": "Engade outra resposta",
+        "ErrorAnswers": "Engade aínda unha resposta",
+        "AlreadyAnswered": "Xa respondeu",
+        "TitlePlaceholder": "Escribe a túa pregunta",
+        "ContentPlaceholder": "Pon aquí calquera información adicional para que a xente responda",
+        "ErrorTitle": "Pregunta necesaria",
+        "Placeholder": "Marcador de posición"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Nova experiencia",
+        "DefineTitle": "Define un título",
+        "Create": "Crear"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Chamadas",
+        "MaxCalls": "Máximo de chamadas",
+        "Update": "Actualizar",
+        "NoCallsYet": "Aínda non hai chamadas",
+        "CallReasonTitle": "De que trata esta chamada?",
+        "WaitingRoom": "Sala de espera"
     }
 }

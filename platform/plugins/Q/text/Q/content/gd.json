@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Mearachd {{status}} ri linn an iarrtais",
+        "canceled": "Iarrtas air a chur dheth",
+        "500": "Mearachd an fhrithealaiche a-staigh",
+        "404": "Cha deach a lorg: {{url}}",
+        "501": "Iarrtas air a bhriseadh"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Thàinig an seisean gu crìch. Ùraich an duilleag is feuch ris a-rithist.",
+        "otherDomain": "Iarrtas tar-àrainn air a bhacadh gu àrainn chèin aig {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
+        "tap": "tapadh",
+        "click": "cliog",
+        "yes": "tha",
+        "no": "Chan eil",
         "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "Click": "Cliog",
+        "Yes": "tha",
+        "No": "Chan eil"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Am Faoilleach",
+        "2": "An Gearran",
+        "3": "Am Màrt",
+        "4": "A &#39;Ghiblean",
+        "5": "A &#39;Chèitean",
+        "6": "An t-Ògmhios",
+        "7": "An t-Iuchar",
+        "8": "An Lùnastal",
+        "9": "An t-Sultain",
+        "10": "An Dàmhair",
+        "11": "An t-Samhain",
+        "12": "An Dùbhlachd"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "an dàrna",
+        "seconds": "diogan",
+        "minute": "mionaid",
+        "minutes": "mionaidean",
+        "hour": "uairean",
+        "day": "latha",
+        "days": "làithean",
+        "week": "seachdain",
+        "weeks": "seachdainean",
+        "month": "mìos",
+        "months": "mìosan",
+        "year": "bliadhna",
+        "years": "bliadhnaichean",
+        "decade": "deichead",
+        "decades": "deicheadan",
+        "century": "linn",
+        "centuries": "linntean"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Feuch an leig thu leis a’ mhicreofon agad faighinn a-steach",
+        "record": "Clàr",
+        "recording": "Clàradh",
+        "remains": "fuigheall",
+        "maximum": "as àirde",
+        "playing": "A&#39; cluich",
+        "recorded": "Air a chlàradh",
+        "clip": "criomag",
+        "discard": "Cuir air chùl",
+        "encoding": "Còdachadh"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "criomag",
+        "errorNoSource": "Gun stòr bhidio",
+        "SkipAfter": "Leum às deidh",
+        "Skip": "Leum"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "criomag",
+        "errorNoSource": "Chan eil tùs pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Suidhich Clip Start",
+        "ClipStart": "Tòisich clip",
+        "SetClipEnd": "Suidhich Clip End",
+        "ClipEnd": "Deireadh Clip",
+        "StartMoreEnd": "Chan urrainn don t-suidheachadh tòiseachaidh a bhith nas fhaide na an suidheachadh deireannach",
+        "EndLessStart": "Chan urrainn don t-suidheachadh crìochnachaidh a bhith nas lugha na an suidheachadh tòiseachaidh",
+        "WhichInvalid": "Argument ‘which’ neo-dhligheach"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Rabhadh"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Dearbhaich",
+        "ok": "tha",
+        "cancel": "Chan eil"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Brosnaich",
+        "ok": "Rachaibh"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "tuilleadh",
+        "Menu": "Clàr-taice"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Thachair mearachd le leughadh an fhaidhle",
+        "errorType": "Duilich, ach chan eil taic ris an t-seòrsa faidhle seo",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Dè bu toil leat a dhèanamh?",
+            "photo": "Gabh dealbh ùr",
+            "library": "Tagh bhon leabharlann"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Feuch an tagh thu dealbh nas motha.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Atharraich meud agus suidheachadh",
+            "touchscreen": "Cleachd do chorragan airson gluasad agus slaodadh",
+            "notTouchscreen": "Cleachd do luchag &amp; cuibhle gus gluasad agus slaod"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "a-raoir",
+        "lastEvening": "oidhche mu dheireadh",
+        "yesterday": "an dè",
+        "thisMorning": "madainn an-diugh",
+        "today": "an diugh",
+        "tonight": "nochd",
+        "tomorrowMorning": "tom madainn",
+        "tomorrow": "a-màireach",
+        "hoursAgo": "{{h}} uairean air ais",
+        "hourAgo": "{{h}} uair air ais",
+        "minuteAgo": "{{m}} mionaid air ais",
+        "minutesAgo": "{{m}} mionaidean air ais",
+        "secondAgo": "{{s}} diog air ais",
+        "secondsAgo": "{{s}} diogan air ais",
+        "fewSecondsAgo": "diogan air ais",
+        "rightNow": "An-dràsta fhèin",
+        "inSecond": "ann an {{s}} diog",
+        "inSeconds": "ann an {{s}} diogan",
+        "inMinute": "ann am {{m}} mhionaid",
+        "inMinutes": "ann an {{m}} mionaidean",
+        "inHour": "ann an {{h}} uair",
+        "inHours": "ann an {{h}} uairean",
+        "inUnderMinute": "ann an nas lugha na 1 mhionaid"
     }
 }

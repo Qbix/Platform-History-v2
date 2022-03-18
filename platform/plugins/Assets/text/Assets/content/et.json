@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Maksmiseks puudutage"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tasu töödeldud summas {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Täname teid makse eest: {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} tellis {{plan.title}}",
+        "YouSubscribedTo": "Olete tellinud {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Saate makse summas {{displayAmount}} kasutajalt {{call 'publisher.displayName'}}, saatja &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei! Anname teile teada, et {{1}} on {{4}} võtnud tasu {{2}} summas {{3}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Täname teid makse eest &quot;{{description}}&quot;",
+        "HavePaid": "Tere, {{1}}, see on lihtsalt kiire kinnitus, et olete edukalt maksnud {{2}} isikule {{3}} summas {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Info tellimuse kohta",
+        "PaymentMethod": "Makseviis",
+        "ContactInfo": "Kontaktinfo",
+        "Pay": "Maksma"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Kutse võttis vastu {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} sisestas eesnime",
+        "Streams_user_lastname": "{{invitedUserName}} sisestas perekonnanime",
+        "Streams_user_icon": "{{invitedUserName}} sisestatud ikoon",
+        "Places_user_location": "{{invitedUserName}} sisestatud asukoht",
+        "Streams_greeting": "{{invitedUserName}} sisestas tervituse",
+        "YouHaveCreditsToStart": "Teil on alustamiseks {{amount}} krediiti",
+        "PaymentFor": "Makse &quot;{{1}}&quot; eest",
+        "PaymentTo": "Makse: {{1}}",
+        "PaymentToUser": "Makse: {{toUserName}}",
+        "CreatePaidStream": "{{toStreamName}} loomise eest",
+        "JoinedPaidStream": "broneerimiseks asukohas &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "kommuuni &quot;{{communityId}}&quot; loomise eest",
+        "LeftPaidStream": "broneeringu tagasimaksena asukohas &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Ostsin {{amount}} krediiti",
+        "BonusCredits": "Boonus {{amount}} krediiti",
+        "BuyAmountCredits": "Ostke {{amount}} krediiti",
+        "WatchClip": "Teenisite {{amount}} krediiti {{fromStreamTitle}} vaatamise eest",
+        "MissingCredits": "Krediidid puuduvad",
+        "YouMissingCredits": "Jätkamiseks vajate täiendavat {{amount}} krediiti.",
+        "BuyCredits": "Ostke krediiti",
+        "BuyBonus": "Kui ostate korraga {{amount}} krediiti, saate boonuse {{bonus}} krediiti.",
+        "Buy": "Osta",
+        "PurchaseCredits": "Ostukrediiti",
+        "Credits": "Krediidid",
+        "ErrorInvalidAmount": "Summa on kehtetu",
+        "ErrorInvalidCurrency": "Kahjuks ei toeta me veel valuutat {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} krediiti",
+            "BonusCredits": "{{amount}} krediiti"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Kuupäev",
+        "Amount": "Summa",
+        "Description": "Kirjeldus",
+        "Client": "Klient",
+        "To": "juurde",
+        "From": "alates",
+        "SeeHistory": "Vaadake {{1}} maksete ajalugu",
+        "HistoryEmpty": "Teil pole veel andmeid",
+        "PaymentFor": "Saadetud {{amount}} krediiti",
+        "PaymentTo": "Saadetud {{amount}} krediiti",
+        "PaymentToUser": "Saadetud {{amount}} krediiti",
+        "CreatePaidStream": "Kulutas {{amount}} krediiti",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Teenitud {{amount}} krediiti",
+            "-": "Kulutas {{amount}} krediiti"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Teenitud {{amount}} krediiti",
+            "-": "Kulutas {{amount}} krediiti"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Sai {{amount}} krediiti",
+            "-": "Saadetud {{amount}} krediiti"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Kulutas {{amount}} krediiti",
+        "BoughtCredits": "Ostsin {{amount}} krediiti",
+        "BonusCredits": "Sain {{amount}} boonuskrediiti",
+        "InviteAcceptedBy": "Teenitud {{amount}} krediiti",
+        "Streams_user_firstname": "Teenitud {{amount}} krediiti",
+        "Streams_user_lastname": "Teenitud {{amount}} krediiti",
+        "Streams_user_icon": "Teenitud {{amount}} krediiti",
+        "Places_user_location": "Teenitud {{amount}} krediiti",
+        "Streams_greeting": "Teenitud {{amount}} krediiti",
+        "YouHaveCreditsToStart": "Teenitud {{amount}} krediiti"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Määra makseteave",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Alusta tellimust",
+            "message": "Kas soovite tellida kanali {{title}}?",
+            "ok": "Okei",
+            "cancel": "Tühista"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Krediit- või deebetkaart",
+        "SubscribePayment": "Telli makse",
+        "ImmediatePayment": "Kohene makse"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Määra makseteave",
+        "BuyAmountCredits": "Ostke {{amount}} krediiti",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Tehke makse",
+            "message": "Kas olete nõus maksma {{symbol}}{{amount}}?",
+            "ok": "Okei",
+            "cancel": "Tühista"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Krediidid",
+            "description": "jälgib krediite ja makseid"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Tellimisplaan",
+            "description": "liitumisplaan"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Tellimus",
+            "description": "tellimus"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Toode",
+            "description": "müüdav toode"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Teenindus",
+            "description": "pakutavat teenust"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Teenitud {{amount}} krediiti"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Ostsin {{amount}} krediiti"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Boonus {{amount}} krediiti"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Kulutas {{amount}} krediiti"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Saadeti {{amount}} krediiti kasutajale {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Sai {{amount}} krediiti kasutajalt {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Uus Teenus",
+            "TitlePlaceholder": "Teenuse nimetus",
+            "PricePlaceholder": "Määra hind",
+            "LinkPlaceholder": "lisateabe link",
+            "DescriptionPlaceholder": "Teenuse kirjeldus",
+            "SaveService": "Salvesta teenus",
+            "SelectRequiredParticipants": "Nõutavad osalejad"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Teenuse mallide haldamine",
+        "ManageServices": "Teenuste haldamine",
+        "Free": "Tasuta",
+        "OptionalContribution": "Valikuline panus",
+        "RequiredPayment": "Nõutav makse",
+        "AreYouSureDelete": "Kas olete kindel, et soovite selle teenuse kustutada?",
+        "AmountServicesRelated": "Selle teenusega on seotud {{amount}} saadavust. Samuti eemaldatakse need."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Teave {{title}} NFT kohta",
+        "Description": "Üksikasjalik teave NFT kohta",
+        "FixedBid": "Osta kohe",
+        "CurrentBid": "hetke pakkumine",
+        "StartingIn": "Alates sisse",
+        "EndingIn": "Lõpetades",
+        "CreateNFT": "Looge NFT",
+        "TitlePlaceholder": "Andke oma NFT-le pealkiri",
+        "DescriptionPlaceholder": "Andke oma NFT-le kirjeldus",
+        "CreateYourNFT": "Looge oma NFT",
+        "Royalties": "Autoritasud",
+        "RoyaltyPlaceholder": "Valikuline. Enne ülekandmist loojale makstud summa.",
+        "ExpirationDate": "Aegumiskuupäev",
+        "StartingDate": "Algus kuupäev",
+        "BidsBelowThisAmount": "Sellest summast väiksemad pakkumised ei ole lubatud",
+        "MinimumBid": "Minimaalne pakkumine",
+        "Price": "Hind",
+        "Owner": "Omanik",
+        "SelectCategory": "Vali kategooria",
+        "Day": "päev",
+        "Days": "Päevad",
+        "Hour": "Tund",
+        "Hours": "Tundi",
+        "Minute": "Minut",
+        "Minutes": "Minutid",
+        "Second": "Teiseks",
+        "Seconds": "Sekundid",
+        "SalesCreator": "müügist läheb loojale",
+        "Details": "Üksikasjad",
+        "Bids": "Pakkumised",
+        "History": "Ajalugu",
+        "LoremIpsum": "Lorem Ipsum on lihtsalt trüki- ja trükitööstuse näiv tekst.",
+        "PutOnSale": "Pane müüki",
+        "PutOffSale": "Loobuge müügist",
+        "Transfer": "Ülekanne",
+        "Update": "Värskenda",
+        "UpdateToken": "Värskenda Token",
+        "CreateToken": "Loo tunnus",
+        "PlaceBid": "Tehke pakkumine",
+        "SoldOut": "Müüdud",
+        "NftName": "NFT nimi",
+        "DescribeYourNFT": "Kirjeldage oma NFT-d",
+        "NftPicture": "Pilt, mis kujutab NFT-d",
+        "NftMovie": "Film, mis esindab NFT-d",
+        "UploadMovie": "Laadi film üles",
+        "MovieSource": "Filmi allikas",
+        "UploadFile": "Laadige üles fail",
+        "PutOnMarketplace": "Pane turule",
+        "InstantPurchase": "Sisestage hind, et kasutajad saaksid teie NFT kohe osta",
+        "FixedPrice": "Püsihind",
+        "TimedAuction": "Ajastatud oksjon",
+        "OpenForBids": "Avatud pakkumistele",
+        "PriceOnePiece": "Sisesta ühe tüki hind",
+        "EnterMinimumBid": "Sisestage minimaalne pakkumine",
+        "SelectChain": "Valige kett",
+        "WrongChain": "See NFT loodi &quot;{{chain}}&quot; all. Palun kasutage seda ketti.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFT-de importimine",
+            "fileNotFound": "Vabandust, CSV-faili ei leitud.",
+            "fileEmpty": "Vabandust, CSV-fail on tühi.",
+            "userIdNotFound": "kasutaja on olemas, kuid ID on tühi",
+            "errorLine": "rida {{1}}",
+            "fieldNotFound": "Kohustuslikku välja &quot;{{1}}&quot; ei leitud",
+            "taskStreamInvalid": "ülesandevoog on kehtetu",
+            "instructionsEmpty": "ülesandevoo juhised tühjad",
+            "complete": "Täielik",
+            "activateUsers": "Kas saata kasutajatele aktiveerimissõnum?",
+            "importProgress": "Edusammud",
+            "importOptions": "Valikud",
+            "sampleCSV": "Laadige alla CSV näidis",
+            "fileLabel": "Laadi üles arvutustabel:",
+            "errorsTitle": "Tekkisid vead"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtreerige NFT kogude järgi",
+                "ShowNFTCollection": "Näita NFT kollektsiooni...",
+                "AllCollections": "Kõik kollektsioonid"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Kõik autorid",
+                "AllUsers": "Kõik",
+                "FilterByAuthors": "Filtreeri autorite järgi"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Tagasi kollektsiooni"
     }
 }

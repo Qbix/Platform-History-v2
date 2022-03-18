@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Link para i-promote",
+                "startDate": "Petsa ng Pagsisimula",
+                "startTime": "Oras ng umpisa",
+                "endDate": "Petsa ng Pagtatapos",
+                "endTime": "Oras ng Pagtatapos",
+                "budget": "Badyet"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Salain Ayon sa Interes",
+                "FilterInterests": "Magsimulang mag-type ng interes..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "interes",
+            "Location": "Lokasyon"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Pumunta ka",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
+            "BrowseTheWeb": "Mag-browse",
+            "WriteToStartConversation": "Isulat ang iyong mga saloobin upang simulan ang pag-uusap",
+            "StartConversation": "Simulan ang Pag-uusap",
+            "GotoConversation": "Pumunta sa Pag-uusap",
+            "reset": "I-reset",
+            "edit": "I-edit",
             "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "setUrl": "Itakda ang URL",
+            "save": "I-save",
+            "setClip": "Gupitin ang Clip",
+            "invalidURL": "Di-wastong URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Masyadong malaki ang file para sa pag-cache. Max na laki ng file {{size}}",
+        "InvalidPDF": "Ang file ay hindi wastong PDF",
+        "StartTypingTitleOrKeywords": "Simulan ang pag-type ng pamagat o mga keyword..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Isang HTML na dokumento na maaaring tingnan at i-edit ng iba&#39;t ibang mga user",
+            "displayType": "Artikulo"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "description": "Ang isang slide sa isang presentasyon, ay maaaring magsama ng HTML, audio atbp.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Isang pagtatanghal na binubuo ng iba&#39;t ibang mga slide",
+            "displayType": "Pagtatanghal"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Isang yunit ng advertising sa isang website",
+            "displayType": "Unit ng ad"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Isang paraan ng pagpapangkat ng mga unit ng advertising sa ilalim ng isang pangalan",
+            "displayType": "Paglalagay ng ad"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Nilalaman para sa isang patalastas",
+            "displayType": "Malikhain ng ad"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Isang kampanya sa advertising",
+            "displayType": "Kampanya ng patalastas"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Kumakatawan sa isang website na ang metadata ay na-scrap",
+            "displayType": "Pahina ng web"
         }
     }
 }

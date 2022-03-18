@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "Þetta efni er falið fyrir þér."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Nýr vara"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "Fólki sem ég bauð",
+        "Streams\/invitedMe": "Hver bauð mér",
+        "DoYouAgree": "Ertu sammála?",
+        "Yes": "Já",
+        "No": "Nei"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "Hver eru áhugamál þín?",
+        "CanAdd": "Ef þú finnur enn ekki það sem þú ert að leita að geturðu bætt við nýju áhugamáli hér að neðan:",
+        "TrySynonyms": "Sérðu það ekki? Prófaðu nokkur samheiti.",
+        "AddUnderCategory": "Bæta við undir flokk...",
+        "Other": "Annað",
+        "Unlisted": "Óskráð"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "Skilaboðin hafa verið merkt til skoðunar stjórnanda. Pikkaðu aftur til að afmerkja.",
+        "noOneSaid": "Enginn hefur sagt neitt",
+        "closeChatButton": "Lokaðu spjallinu",
+        "closeChatConfirmTitle": "Loka þessu spjalli?",
+        "closeChatConfirm": "Ertu viss um að þú viljir loka þessu spjalli?",
+        "Subscribed": "Tilkynningar virkar",
+        "Unsubscribed": "Tilkynningar þaggaðar",
+        "closeChatConfirmYes": "Já",
+        "closeChatConfirmNo": "Nei",
+        "earlierComments": "fyrri athugasemdir",
+        "startedConversation": "hóf samtal",
+        "RealTimeCall": "Rauntímasímtal",
+        "SearchByName": "Leitaðu eftir nafni",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} er að heimsækja spjallið",
+            "Join": "{{displayName}} tengdist spjallinu",
+            "Leave": "{{displayName}} yfirgaf spjallið",
+            "RelatedTo": "{{displayName}} hóf {{stream.displayType}}"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "stjórna tölvupóstáskriftum þínum",
+        "IfUnsubscribe": "Ef þú vilt segja upp áskrift",
+        "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sagði: {{& message.content}}",
+        "Streams\/changed": "Breytingar á {{stream.fields.title}}",
+        "Streams\/invite": "Þér var boðið í {{& stream.fields.title}}",
+        "Streams\/announcement": "Tilkynning í {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} breytti aðgangi í {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Spjallskilaboðum breytt í {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Spjallskilaboð fjarlægð í {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} hefur verið lokað",
+        "Streams\/task\/progress": "Framfarir á {{stream.fields.title}}",
+        "Streams\/task\/complete": "Verkefni lokið: {{stream.fields.title}}",
+        "Streams\/task\/error": "Villa við: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Skilaboð berast",
+        "Streams\/relatedTo\/Streams\/call": "Nýtt símtal byrjað {{toTitle}}",
+        "Streams\/relatedTo\/*": "Nýtt {{relationDisplayType}} í {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Bætt við {{toTitle}} sem {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} minntist á þig í athugasemd",
+        "Streams\/call": "{{displayName}} hóf símtal í rauntíma"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "Bjóða",
+        "messageContent": "{{displayName}} bauð þér á {{inviteUrl}}",
+        "youCanNowPaste": "Þú getur nú límt þennan hlekk einhvers staðar til að bjóða fólki",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
+            "chooseFromContacts": "Veldu úr tengiliðunum þínum",
+            "chooseAgainFromContacts": "Veldu Aftur úr Tengiliðir",
+            "inviteSelectedContacts": "Bjóddu völdum tengiliðum",
+            "selectFromContacts": "Veldu Frá tengiliðum",
+            "userChooserPlaceholder": "Leitaðu eftir nafni",
+            "photo": "Taktu mynd",
+            "photoInstruction": "Ef sá sem skannaði QR kóðann þinn er fyrir framan þig skaltu taka mynd af honum",
+            "to": "Til: {{Stream Title}}",
+            "go": "Farðu",
+            "title": "Bjóða",
+            "placeholder": "Farsímanúmer eða netfang",
+            "orInvite": "Eða bjóðið fólki með því að nota:",
+            "copyLink": "{{ClickOrTap}} til að afrita boðstengil",
+            "shareOrCopyLink": "{{ClickOrTap}} til að deila eða afrita boðstengil",
+            "QR": "{{ClickOrTap}} til að búa til QR kóða",
+            "QRtitle": "Skannaðu þennan QR kóða",
+            "QRscanned": "Þeir skannaðu það!",
+            "scannedQR": "{{ClickOrTap}} ef kóðinn var skannaður",
+            "byEmail": "Tölvupóstur",
+            "byText": "Texti",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "Hey, athugaðu þetta",
+            "PleaseVisitLink": "Vinsamlegast farðu á eftirfarandi hlekk:",
+            "InvitingYou": "Ég býð þér að {{title}}",
+            "HasInvitedYou": "{{displayName}} hefur boðið þér að {{title}}",
+            "HasMentionedYou": "{{displayName}} hefur minnst á þig í „{{title}}“",
+            "YOUAREINVITED": "ÞÉR ER BOÐIÐ!",
+            "AcceptInvite": "Samþykkja boð"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "Þér hefur verið boðið í {{title}}. Ýttu á {{url}}"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "Þér hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "setti inn <em>{{message.fields.type}}<\/em> skilaboð til {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "gerði athugasemd við",
+            "startedCallIn": "byrjaði að hringja inn",
+            "in": "inn",
+            "body": "í {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "hefur verið sent til",
+                "byAvatar": "eftir {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "er með nýjan {{instructions.fromDisplayType}}",
+                "byAvatar": "bætt við af {{avatar.displayName}}"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "Boð eru send úr númerinu okkar, sem vinir þínir þekkja ekki enn. Fylgdu eftir með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá um að smella á hlekkinn.",
+            "confirm": "Boð eru send úr númerinu okkar, sem vinir þínir þekkja ekki enn. Viltu fylgja eftir með stuttum texta til að láta þá vita að boðið kom frá þér, biðja þá um að smella á hlekkinn.",
+            "check": "Hæ, ég sendi þér boð í {{app}} appið. Vinsamlegast athugaðu sms-ið þitt og smelltu á hlekkinn!",
+            "CheckYourMobile": "Vinsamlegast athugaðu SMS og fylgdu leiðbeiningunum!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki enn. Fylgdu eftir með stuttum texta til að láta þá vita að boðið kom frá þér og biðja þá um að smella á hlekkinn.",
+            "confirm": "Boð eru send frá léninu okkar, sem vinir þínir þekkja ekki enn. Viltu fylgja eftir með stuttum texta til að láta þá vita að boðið kom frá þér, biðja þá um að smella á hlekkinn.",
+            "subject": "Fékkstu boð?",
+            "body": "Hæ, ég sendi þér boð í {{app}} appið. Vinsamlegast athugaðu tölvupóstinn þinn og smelltu á hlekkinn þar!",
+            "CheckYourEmail": "Vinsamlegast athugaðu tölvupóstinn þinn og fylgdu leiðbeiningunum!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "Titill",
+        "Subscribed": "Gerður áskrifandi",
+        "Participants": "Þátttakendur",
+        "AreYouSureRemoveIdentifier": "Ertu viss um að fjarlægja þetta auðkenni?",
+        "AreYouSureUnsubscribeIdentifier": "Ertu viss um að hætta áskrift að þessu auðkenni? Það mun slökkva á tilkynningum til þessa auðkennis.",
+        "AreYouSureUnsubscribeDevice": "Ertu viss um að segja upp áskriftinni að þessu tæki? Það mun slökkva á tilkynningum í þetta tæki.",
+        "AreYouSureRemoveParticipant": "Ertu viss um að þú viljir fjarlægja þennan þátttakanda?",
+        "RemoveParticipant": "Fjarlægðu þátttakanda",
+        "Identifiers": "Auðkenni",
+        "Devices": "Tæki",
+        "Streams": "Straumar"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "Þú hefur ekki leyfi til að tengjast þessum straumi.",
+        "streamTitle": "{{1}} hóf símtal í beinni",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "Tengist",
+            "microphoneBtn": "Virkja hljóðnema",
+            "cameraBtn": "Virkja myndavél",
+            "cameraAndMicrophoneBtn": "Virkja myndavél og hljóðnema"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "Slökkt er á hljóðnemanum",
+            "micIsOn": "Hljóðneminn er á",
+            "cameraIsOff": "Slökkt er á myndavélinni",
+            "cameraIsOn": "Kveikt er á myndavélinni",
+            "screenSharingIsOn": "Kveikt er á skjádeilingu",
+            "screenSharingIsOff": "Deila skjá",
+            "joinNow": "Skráðu þig í símtalið"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} hafnað. Til að nota það vinsamlegast fylgdu þessum skrefum:",
+            "point1": "Farðu í &quot;Stillingar&quot; -&gt; &quot;Ítarlegar&quot; -&gt; &quot;Persónuvernd og öryggi&quot; -&gt; &quot;Site Settings&quot; -&gt; &quot;Camera&quot; eða &quot;Site Settings&quot; -&gt; &quot;Hljóðnemi&quot;",
+            "point2": "Fjarlægðu {{hostname}} af &quot;Loka&quot; listanum"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} hafnað. Endurhlaðaðu þessa síðu og staðfestu aðgang að {{kind}} til að taka þátt í ráðstefnunni."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} hafnað. Til að nota það vinsamlegast fylgdu þessum skrefum:",
+            "point1": "Farðu í Android stillingarnar þínar",
+            "point2": "Opnaðu „Forrit og tilkynningar“",
+            "point3": "Finndu &quot;{{communityName}}&quot; og opnaðu það",
+            "point4": "Bankaðu á Heimildir",
+            "point5": "Virkja {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "Leiðbeiningar",
+            "permissionDenied": "Leyfi fyrir {{kind}} hafnað. Til að nota það vinsamlegast fylgdu þessum skrefum:",
+            "point1": "Farðu í iOS stillingarnar þínar",
+            "point2": "Opnaðu „Persónuvernd“",
+            "point3": "Finndu {{kind}} og opnaðu það",
+            "point4": "Finndu „{{communityName}}“ og virkjaðu"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "Þú gekkst inn í herbergið",
+            "joining": "Tengjast: {{userName}}",
+            "sbLeftRoom": "{{userName}} yfirgaf herbergið",
+            "switchingRoom": "Skiptir um herbergi...",
+            "forceDisconnecting": "Þú verður aftengdur innan 5 sekúndna",
+            "forceDisconnectingImmediately": "Þú varst aftengdur af gestgjafa",
+            "youLeftRoom": "Þú fórst út úr herberginu",
+            "codeCopied": "Þú fórst út úr herberginu",
+            "sbBeganFbLive": "{{userName}} byrjaði að senda þetta símtal á Facebook",
+            "sbStoppedFbLive": "{{userName}} hætti að senda þetta símtal á Facebook",
+            "youBeganFbLive": "Þú byrjaðir að senda þetta símtal á Facebook",
+            "youStoppedFbLive": "Þú hættir að senda þetta símtal á Facebook",
+            "youStartedLive": "Þú byrjaðir að senda þetta símtal í sérsniðið RTMP",
+            "youStoppedLive": "Þú hættir að senda þetta símtal í sérsniðið RTMP",
+            "sbStartedLiveStreaming": "{{userName}} byrjaði í beinni",
+            "sbStoppedLiveStreaming": "{{userName}} lauk í beinni",
+            "liveStopped": "Villa kom upp við að senda myndskeið á endapunkt",
+            "youBeganVideoRecording": "Þú byrjaðir að taka upp þessa ráðstefnu",
+            "youStoppedVideoRecording": "Þú hættir að taka upp þessa ráðstefnu",
+            "linkCopiedToCb": "Tengill afritaður á klippiborð",
+            "codeCopiedToCb": "Kóði afritaður á klemmuspjald",
+            "userHasNoVideo": "Þátttakandi hefur ekkert myndband",
+            "openInBrowserAlert": "Opnaðu tengil í Safari vafra til að taka þátt í ráðstefnunni."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "Myndskeiðsstillingar",
+            "webCamera": "Vefmyndavél",
+            "screenSharing": "Skjádeiling",
+            "shareAnotherScreen": "Deildu öðrum skjá",
+            "turnOffCameras": "Slökktu á myndavélinni",
+            "turnOffVideo": "Slökktu á myndavél\/skjádeilingu",
+            "turnOffAudioInput": "Slökkva á hljóðnema",
+            "turnOffScreenSharing": "Slökktu á skjádeilingu",
+            "cameraIsTurnedOff": "Slökkt er á myndavélinni",
+            "micIsTurnedOff": "Slökkt er á hljóðnema",
+            "startFBLive": "Byrjaðu Facebook Livestream",
+            "stopFBLive": "Stöðva Facebook Livestream",
+            "startRecording": "Byrjaðu upptöku",
+            "stopRecording": "Hætta upptöku",
+            "start": "Byrjaðu",
+            "stop": "Hættu",
+            "recordingInProgress": "Upptaka stendur yfir...",
+            "fbLiveTitle": "Titill Livestream",
+            "fbLiveDescription": "Lýstu straumnum þínum í beinni. Um hvað snýst þetta?",
+            "fbOnlyMeLiveAccess": "Bara ég",
+            "fbFriendsAccess": "Vinir",
+            "fbPublicAccess": "Opinber",
+            "publishOnTimeline": "Birta á tímalínu",
+            "publishToGroup": "Birta í hóp",
+            "fbStartLive": "Fara í loftið",
+            "fbStopLive": "Ljúka beinni útsendingu",
+            "streamingSettings": "Stillingar",
+            "fbEmbedCode": "Fella inn",
+            "copy": "Afrita",
+            "streamToRTMP": "Straumaðu í sérsniðið RTMP",
+            "startBroadcasting": "Byrjaðu að senda út",
+            "broadcastingInProgress": "Útsending stendur yfir"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "Hljóðstillingar",
+            "speakers": "Hátalarar",
+            "microphone": "Hljóðnemi"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "Stillingar þátttakanda",
+            "disconnect": "Aftengdu",
+            "floatingScreens": "Fljótandi skjáir",
+            "tiledScreens": "Flísalagt skjár",
+            "loudestExceptMe": "Háværast nema ég",
+            "maximizeLoudest": "Hámarka háværast",
+            "staticMaximized": "Static hámörkuð",
+            "fullScreen": "Fullur skjár",
+            "manual": "Handbók",
+            "turnOffCamera": "Fela myndband",
+            "turnOffAudio": "Slökkva á hljóði",
+            "turnOffScreenSharing": "Fela skjádeilingu",
+            "turnOnCamera": "Sýna myndband",
+            "turnOnAudio": "Kveikja á hljóði",
+            "turnOnScreenSharing": "Sýna skjádeilingu"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "Straumstillingar"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Fundur",
+            "MeetingEnded": "Fundi slitið"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "Boðið",
+            "description": "Innhólf fyrir boð"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "Auðlind",
+            "description": "streymi til að stjórna aðgangi að auðlind og senda skilaboð um uppfærslur"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "fyrir að fá uppfærslur um framvindu á ákveðnu verkefni",
+            "displayType": "Verkefni"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "flokki fyrir verkefni",
+            "displayType": "Verkefni"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "sameiginleg reynsla meðlima samfélags",
+            "displayType": "Sameiginleg reynsla fyrir meðlimi samfélags"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "kveðju sem notandi getur kynnt sig með",
+            "displayType": "Kveðja"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "Númer",
+            "description": "stærðfræðileg tala"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "Dagsetning",
+            "description": "dagsetningu"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "Texti",
+            "description": "meginmál textans"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "Texti",
+            "description": "lítill texti"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "Texti",
+            "description": "miðlungs meginmál texta"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "Netfang",
+            "description": "Netfang"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "Símanúmer",
+            "description": "símanúmer"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "hlekkur á vefnum"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "Mynd",
+            "description": "sjónræn mynd",
+            "newItem": "Bæta við mynd"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "Myndasafn",
+            "description": "myndasafn"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "Albúm",
+            "description": "plata sem ýmsir miðlar tengjast"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "Skrá",
+            "description": "hlaðið upp skrá",
+            "newItem": "Bæta við skrá"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "Hljóðbút",
+            "description": "hljóðbút",
+            "newItem": "Bæta við hljóði"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "Myndskeið",
+            "description": "myndskeið",
+            "newItem": "Bæta við myndbandi"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF skjal",
+            "description": "PDF skjal",
+            "newItem": "Bæta við PDF"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "Bein útsending",
+            "description": "lifandi hljóð eða mynd"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "Flokkur",
+            "description": "flokkur sem aðrir straumar geta tengst"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "Þátttökuvísitala",
+            "description": "straumar eru tengdir\/ótengdir þessu þegar notandi tengist\/fer"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "Áhugi",
+            "description": "táknar áhuga notanda á ákveðnu efni"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "Komandi",
+            "description": "áfangastaður fyrir skilaboð send af öðrum notendum"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "Samtal",
+            "description": "samtal á milli notenda, með sögu"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Rauntímasímtal",
+            "description": "mynd-\/hljóðsímtal í rauntíma"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "Spurning",
+            "description": "spurningastraumur"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "Svaraðu",
+            "description": "svarstraumur"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "Símtöl",
+            "description": "flokkur fyrir Streams\/webrtc",
+            "MaxRelationsExceeded": "Hámarks símtöl náð"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "sláðu inn titil síðu",
+        "ModTab": "Breyta hlut",
+        "Save": "Vista",
+        "Delete": "Eyða",
+        "Submenu": "Undirvalmynd"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "Met",
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsingu",
+        "upload": "Hlaða upp",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippa út",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Enginn hljóðgjafi",
+        "uploadLimit": "Hámarksskráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skráin er of stór.<br> Hámarksskráarstærð er {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsingu",
+        "upload": "Hlaða upp",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippa út",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Enginn myndbandsuppspretta",
+        "uploadLimit": "Hámarksskráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skráin er of stór.<br> Hámarksskráarstærð er {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsingu",
+        "upload": "Hlaða upp",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "setClip": "Klippa út",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin pdf heimild",
+        "uploadLimit": "Hámarksskráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skráin er of stór.<br> Hámarksskráarstærð er {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "Endurstilla",
+        "edit": "Breyta",
+        "title": "titill",
+        "description": "lýsingu",
+        "upload": "Hlaða upp",
+        "link": "Tengill",
+        "setUrl": "Stilltu vefslóð",
+        "save": "Vista",
+        "uploadedImage": "Hlaðið inn mynd",
+        "imageTitle": "Titill myndar",
+        "setClip": "Klippa út",
+        "invalidURL": "Ógild vefslóð",
+        "invalidFile": "Ógild skrá",
+        "errorNoSource": "Engin myndheimild",
+        "uploadLimit": "Hámarksskráarstærð: {{size}}",
+        "errorFileSize": "Því miður, en skráin er of stór.<br> Hámarksskráarstærð er {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "Spurningar",
+        "Answers": "Svör",
+        "AnswerQuestion": "Svaraðu spurningu",
+        "SetYourAnswer": "Vinsamlegast svaraðu spurningunni",
+        "NewQuestion": "Ný spurning",
+        "NewAnswer": "Nýtt svar",
+        "AnswerDetails": "Upplýsingar um svar",
+        "answerOption": "Valmöguleiki",
+        "answerOptionExclusive": "Einkarétt",
+        "answerTextarea": "Textasvæði",
+        "FreeAnswer": "Skrifaðu svar þitt hér",
+        "SaveQuestion": "Vista spurningu",
+        "SaveAnswer": "Vista svar",
+        "AddAnotherAnswer": "Bættu við öðru svari",
+        "ErrorAnswers": "Vinsamlegast bættu jafnvel einu svari við",
+        "AlreadyAnswered": "Búinn að svara",
+        "TitlePlaceholder": "Sláðu inn spurninguna þína",
+        "ContentPlaceholder": "Settu allar viðbótarupplýsingar hér til að hjálpa fólki að svara",
+        "ErrorTitle": "Spurning nauðsynleg",
+        "Placeholder": "Staðfestir"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "Ný upplifun",
+        "DefineTitle": "Vinsamlega skilgreindu titil",
+        "Create": "Búa til"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "Símtöl",
+        "MaxCalls": "Max hringir",
+        "Update": "Uppfærsla",
+        "NoCallsYet": "Engin símtöl ennþá",
+        "CallReasonTitle": "Um hvað snýst þetta símtal?",
+        "WaitingRoom": "Biðstofa"
     }
 }

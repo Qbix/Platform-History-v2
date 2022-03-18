@@ -1,22 +1,22 @@
 {
     "request": {
-        "error": "{{status}} errorea eskaera bitartean",
+        "error": "Errore bat {{status}} eskaeran",
         "canceled": "Eskaera bertan behera utzi da",
         "500": "Barneko zerbitzari-errorea",
         "404": "Ez da aurkitu: {{url}}",
-        "501": "Eskaera eten egin da"
+        "501": "Eskaera eten da"
     },
     "nonce": {
-        "sameDomain": "Saioa amaitu zen. Freskatu orria eta saiatu berriro.",
-        "otherDomain": "Blokeatu domeinu zeharkako eskaera {999}} domeinuan"
+        "sameDomain": "Saioa iraungi da. Freskatu orria eta saiatu berriro.",
+        "otherDomain": "Domeinuen arteko eskaera blokeatu da atzerriko domeinurako {{baseUrl}} helbidean"
     },
     "words": {
-        "tap": "iturriko",
-        "click": "Klik",
+        "tap": "sakatu",
+        "click": "egin klik",
         "yes": "bai",
-        "no": "no",
-        "Tap": "Ukitu",
-        "Click": "klik",
+        "no": "ez",
+        "Tap": "Sakatu",
+        "Click": "Egin klik",
         "Yes": "Bai",
         "No": "Ez"
     },
@@ -24,29 +24,29 @@
         "1": "Urtarrila",
         "2": "Otsaila",
         "3": "martxoa",
-        "4": "April",
-        "5": "Maiatza",
-        "6": "June",
-        "7": "uztailean",
+        "4": "Apirila",
+        "5": "maiatza",
+        "6": "ekaina",
+        "7": "uztaila",
         "8": "Abuztu",
-        "9": "iraila",
+        "9": "Iraila",
         "10": "urria",
         "11": "Azaroa",
         "12": "abendua"
     },
     "audio": {
-        "allowMicrophoneAccess": "Baimendu zure mikrofonoan sartzeko",
-        "record": "Record",
+        "allowMicrophoneAccess": "Mesedez, baimendu mikrofonorako sarbidea",
+        "record": "Grabatu",
         "recording": "Grabaketa",
-        "remains": "aztarnak",
+        "remains": "hondarrak",
         "maximum": "gehienez",
-        "playing": "jolasean",
-        "recorded": "Grabazioa",
-        "clip": "clip",
+        "playing": "Jolasean",
+        "recorded": "Grabatua",
+        "clip": "klipa",
         "orupload": "Edo kargatu",
         "usethis": "Erabili hau",
         "discard": "Baztertu",
-        "encoding": "Encoding"
+        "encoding": "Kodeketa"
     },
     "alert": {
         "title": "Alerta"
@@ -57,48 +57,48 @@
         "cancel": "Ez"
     },
     "prompt": {
-        "title": "Galdetu",
-        "ok": "joan"
+        "title": "Galdera",
+        "ok": "Zoaz"
     },
     "imagepicker": {
-        "errorReadingFile": "Errorea fitxategia irakurtzean",
+        "errorReadingFile": "Errore bat gertatu da fitxategia irakurtzean",
         "cameraCommands": {
             "prompt": "Zer egin nahi duzu?",
-            "photo": "Hartu argazki berria",
-            "library": "Aukeratu liburutegitik"
+            "photo": "Atera argazki berria",
+            "library": "Hautatu liburutegitik"
         },
-        "tooSmall": "Aukeratu irudi handiagoa.",
+        "tooSmall": "Mesedez, aukeratu irudi handiago bat.",
         "cropping": {
             "title": "Doitu tamaina eta posizioa",
-            "touchscreen": "Erabili hatzak handitzeko eta arrastatzeko",
-            "notTouchscreen": "Erabili zure sagua eta gurpila zoom eta arrastatu"
+            "touchscreen": "Erabili hatzak zooma egiteko eta arrastatu",
+            "notTouchscreen": "Erabili sagua eta gurpila handitzeko eta arrastatu"
         },
         "errorType": "Barkatu, baina fitxategi mota hau ez da onartzen"
     },
     "timestamp": {
         "lastNight": "bart",
-        "lastEvening": "azken bezperan",
-        "yesterday": "atzoko",
-        "thisMorning": "goiz honetan",
+        "lastEvening": "azken bezpera",
+        "yesterday": "atzo",
+        "thisMorning": "gaur goizean",
         "today": "gaur",
         "tonight": "gaur gauean",
-        "tomorrowMorning": "Tom goiza",
+        "tomorrowMorning": "bihar goizean",
         "tomorrow": "bihar",
         "hoursAgo": "Duela {{h}} ordu",
         "hourAgo": "Duela {{h}} ordu",
         "minuteAgo": "Duela {{m}} minutu",
         "minutesAgo": "Duela {{m}} minutu",
-        "secondAgo": "Duela {{s}} bigarren",
+        "secondAgo": "Duela {{s}} segundo",
         "secondsAgo": "Duela {{s}} segundo",
-        "fewSecondsAgo": "segundo batzuk",
+        "fewSecondsAgo": "duela segundo",
         "rightNow": "oraintxe bertan",
-        "inSecond": "{{s}} bigarrenean",
-        "inSeconds": "{{s}} segundoan",
-        "inMinute": "{{m}} minutuan",
-        "inMinutes": "{{m}} minutu barru",
-        "inHour": "{{h}} orduan",
-        "inHours": "{{h}} orduetan",
-        "inUnderMinute": "1 minutu baino gutxiagoan"
+        "inSecond": "{{s}} segundoan",
+        "inSeconds": "{{s}} segundotan",
+        "inMinute": "{{m}} minutu barru",
+        "inMinutes": "{{m}} minututan",
+        "inHour": "{{h}} ordu barru",
+        "inHours": "{{h}} ordutan",
+        "inUnderMinute": "minutu 1 baino gutxiagoan"
     },
     "tabs": {
         "more": "gehiago",
@@ -116,29 +116,29 @@
     },
     "clip": {
         "SetClipStart": "Ezarri Clip Start",
-        "ClipStart": "Clip Hasi",
-        "SetClipEnd": "Ezarri kliparen amaiera",
-        "ClipEnd": "Kliparen amaiera",
-        "StartMoreEnd": "Hasierako posizioa ezin da amaierako posizioa baino gehiago izan",
-        "EndLessStart": "Amaiera posizioa ezin da hasierako posizioa baino txikiagoa izan",
-        "WhichInvalid": "&#39;Zein&#39; argumentua baliogabea da"
+        "ClipStart": "Clip Start",
+        "SetClipEnd": "Ezarri cliparen amaiera",
+        "ClipEnd": "Clip amaiera",
+        "StartMoreEnd": "Hasierako posizioa ezin da izan amaierako posizioa baino gehiago",
+        "EndLessStart": "Amaiera-posizioa ezin da izan hasierako posizioa baino txikiagoa",
+        "WhichInvalid": "&#39;zein&#39; argudio baliogabea"
     },
     "durations": {
         "second": "bigarrena",
-        "seconds": "segundo",
+        "seconds": "segundoak",
         "minute": "minutua",
         "minutes": "minutu",
-        "hour": "ordu",
+        "hour": "orduak",
         "day": "eguna",
         "days": "egunak",
         "week": "astea",
         "weeks": "asteak",
         "month": "hilabetea",
         "months": "hilabeteak",
-        "year": "urtea",
+        "year": "urtean",
         "years": "urteak",
         "decade": "hamarkada",
-        "decades": "hamarkadetan",
+        "decades": "hamarkadak",
         "century": "mendean",
         "centuries": "mendeetan"
     }

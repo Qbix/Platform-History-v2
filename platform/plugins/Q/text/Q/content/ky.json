@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Сурам учурунда {{status}} катасы",
+        "canceled": "Сурам жокко чыгарылды",
+        "500": "Сервердин ички катасы",
+        "404": "Табылган жок: {{url}}",
+        "501": "Сурам үзүлдү"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Сессия бүттү. Баракты жаңыртып, кайра аракет кылыңыз.",
+        "otherDomain": "Чет өлкөлүк доменге бөгөттөлгөн кайчылаш домен сурамы {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
+        "tap": "таптаңыз",
+        "click": "чыкылдатыңыз",
+        "yes": "Ооба",
+        "no": "жок",
+        "Tap": "таптаңыз",
         "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "Yes": "Ооба",
+        "No": "Жок"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Январь",
+        "2": "Февраль",
+        "3": "Март",
+        "4": "Апрель",
+        "5": "Май",
+        "6": "Июнь",
+        "7": "Июль",
+        "8": "Август",
+        "9": "Сентябрь",
+        "10": "Октябрь",
+        "11": "Ноябрь",
+        "12": "Декабрь"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "экинчи",
+        "seconds": "секунд",
+        "minute": "мүнөт",
+        "minutes": "мүнөт",
+        "hour": "саат",
+        "day": "күн",
+        "days": "күн",
+        "week": "жума",
+        "weeks": "жума",
+        "month": "ай",
+        "months": "айлар",
+        "year": "жыл",
+        "years": "жыл",
+        "decade": "декада",
+        "decades": "ондогон жылдар",
+        "century": "кылым",
+        "centuries": "кылымдар"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Микрофонуңузга кирүүгө уруксат бериңиз",
+        "record": "Жаздыруу",
+        "recording": "Жаздыруу",
+        "remains": "калат",
+        "maximum": "максимум",
+        "playing": "Ойнотуу",
+        "recorded": "Жазылган",
+        "clip": "клип",
+        "discard": "Жок кылуу",
+        "encoding": "Коддоо"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "клип",
+        "errorNoSource": "Видео булагы жок",
+        "SkipAfter": "Кийин өткөрүп жиберүү",
+        "Skip": "Өткөрүп жибер"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "клип",
+        "errorNoSource": "PDF булагы жок"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
+        "SetClipStart": "Клип баштоону коюңуз",
+        "ClipStart": "Клип баштоо",
+        "SetClipEnd": "Клиптин аягына коюу",
         "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "StartMoreEnd": "Баштапкы позиция акыркы позициядан ашпашы керек",
+        "EndLessStart": "Аяккы позиция баштапкы абалынан аз болбошу керек",
+        "WhichInvalid": "&quot;Кайсысы&quot; деген аргумент жараксыз"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Ырастоо",
+        "ok": "Ооба",
+        "cancel": "Жок"
     },
     "prompt": {
         "title": "Prompt",
         "ok": "Go"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "дагы",
+        "Menu": "Меню"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Файлды окуу катасы",
+        "errorType": "Кечиресиз, бирок бул файл түрү колдоого алынбайт",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Эмне кылгыңыз келет?",
+            "photo": "Жаңы сүрөткө тартуу",
+            "library": "Китепканадан тандаңыз"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Сураныч, чоңураак сүрөт тандаңыз.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Өлчөмдү жана ордун тууралаңыз",
+            "touchscreen": "Чоңойтуу жана сүйрөө үчүн манжаларыңызды колдонуңуз",
+            "notTouchscreen": "Чоңойтуу жана сүйрөө үчүн чычканыңызды жана дөңгөлөкүңүздү колдонуңуз"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "акыркы түнү",
+        "lastEvening": "акыркы түн",
+        "yesterday": "кечээ",
+        "thisMorning": "бүгүн эртең менен",
+        "today": "бүгүн",
+        "tonight": "бүгүн түнү",
+        "tomorrowMorning": "эртең менен",
+        "tomorrow": "эртең",
+        "hoursAgo": "{{h}} саат мурун",
+        "hourAgo": "{{h}} саат мурун",
+        "minuteAgo": "{{m}} мүнөт мурун",
+        "minutesAgo": "{{m}} мүнөт мурун",
+        "secondAgo": "{{s}} секунд мурун",
+        "secondsAgo": "{{s}} секунд мурун",
+        "fewSecondsAgo": "секунд мурун",
+        "rightNow": "Азыр",
+        "inSecond": "{{s}} секундда",
+        "inSeconds": "{{s}} секунддан кийин",
+        "inMinute": "{{m}} мүнөттөн кийин",
+        "inMinutes": "{{m}} мүнөттөн кийин",
+        "inHour": "{{h}} саатта",
+        "inHours": "{{h}} саатта",
+        "inUnderMinute": "1 мүнөттүн ичинде"
     }
 }

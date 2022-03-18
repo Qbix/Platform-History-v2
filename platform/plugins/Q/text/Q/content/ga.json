@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Earráid {{status}} le linn an iarratais",
+        "canceled": "Iarratas cealaithe",
+        "500": "Earráid Freastalaí Inmheánach",
+        "404": "Gan aimsiú: {{url}}",
+        "501": "Cuireadh isteach ar an iarratas"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Chuaigh an seisiún in éag. Athnuaigh an leathanach agus bain triail eile as.",
+        "otherDomain": "Iarratas trasfhearainn bactha chuig fearann eachtrach ag {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "sconna",
+        "click": "cliceáil",
+        "yes": "tá",
+        "no": "níl",
+        "Tap": "Sconna",
+        "Click": "Cliceáil",
+        "Yes": "Tá",
+        "No": "Níl"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Eanáir",
+        "2": "Feabhra",
+        "3": "Márta",
+        "4": "Aibreán",
+        "5": "Bealtaine",
+        "6": "Meitheamh",
+        "7": "Iúil",
+        "8": "Lúnasa",
+        "9": "Meán Fómhair",
+        "10": "Deireadh Fómhair",
+        "11": "Samhain",
+        "12": "Nollaig"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "dara",
+        "seconds": "soicind",
+        "minute": "nóiméad",
+        "minutes": "nóiméad",
+        "hour": "uair an chloig",
+        "day": "lá",
+        "days": "laethanta",
+        "week": "seachtain",
+        "weeks": "seachtaine",
+        "month": "mí",
+        "months": "míonna",
+        "year": "bhliain",
+        "years": "blianta",
+        "decade": "deich mbliana",
+        "decades": "scór bliain",
+        "century": "haois",
+        "centuries": "cianta"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Ceadaigh rochtain ar do mhicreafón",
+        "record": "Taifead",
+        "recording": "Taifeadadh",
+        "remains": "iarsmaí",
+        "maximum": "uasta",
+        "playing": "Ag imirt",
+        "recorded": "Taifeadta",
+        "clip": "gearrthóg",
+        "discard": "Caith amach",
+        "encoding": "Ionchódú"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "gearrthóg",
+        "errorNoSource": "Gan fhoinse físeáin",
+        "SkipAfter": "Scipeáil tar éis",
+        "Skip": "Scipeáil"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "gearrthóg",
+        "errorNoSource": "Níl aon fhoinse pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Socraigh Tosaigh Clip",
+        "ClipStart": "Tosaigh gearrthóg",
+        "SetClipEnd": "Socraigh Deireadh Clip",
+        "ClipEnd": "Críoch Clip",
+        "StartMoreEnd": "Ní féidir leis an suíomh tosaigh a bheith níos mó ná an suíomh deiridh",
+        "EndLessStart": "Ní féidir leis an suíomh deiridh a bheith níos lú ná an t-ionad tosaigh",
+        "WhichInvalid": "Argument ‘which’ neamhbhailí"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Airdeall"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Deimhnigh",
+        "ok": "Tá",
+        "cancel": "Níl"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Leid",
+        "ok": "Téigh"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "níos mó",
+        "Menu": "Roghchlár"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Earráid agus an comhad á léamh",
+        "errorType": "Ár leithscéal, ach ní thacaítear leis an gcineál comhaid seo",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Céard ba mhaith leat a dhéanamh?",
+            "photo": "Tóg grianghraf nua",
+            "library": "Roghnaigh ón leabharlann"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Roghnaigh íomhá níos mó.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Coigeartaigh méid agus suíomh",
+            "touchscreen": "Bain úsáid as do mhéara chun zúmáil agus tarraing",
+            "notTouchscreen": "Bain úsáid as do luch &amp; roth chun zúmáil agus tarraing"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "aréir",
+        "lastEvening": "oíche dheireanach",
+        "yesterday": "inné",
+        "thisMorning": "ar maidin",
+        "today": "inniu",
+        "tonight": "anocht",
+        "tomorrowMorning": "maidin tom",
+        "tomorrow": "amárach",
+        "hoursAgo": "{{h}} uair ó shin",
+        "hourAgo": "{{h}} uair ó shin",
+        "minuteAgo": "{{m}} nóiméad ó shin",
+        "minutesAgo": "{{m}} nóiméad ó shin",
+        "secondAgo": "{{s}} soicind ó shin",
+        "secondsAgo": "{{s}} soicind ó shin",
+        "fewSecondsAgo": "soicind ó shin",
+        "rightNow": "Anois",
+        "inSecond": "i {{s}} soicind",
+        "inSeconds": "i {{s}} soicind",
+        "inMinute": "i {{m}} nóiméad",
+        "inMinutes": "i {{m}} nóiméad",
+        "inHour": "i {{h}} uair",
+        "inHours": "i {{h}} uair an chloig",
+        "inUnderMinute": "i níos lú ná 1 nóiméad"
     }
 }

@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "צאַפּן צו באַצאָלן"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: אָפּצאָל פּראַסעסט פֿאַר {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "דאנק איר פֿאַר דיין צאָלונג צו {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} אַבאָנירן צו {{plan.title}}",
+        "YouSubscribedTo": "איר האָט שוין אַבאָנירן צו {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "איר באַקומען צאָלונג פון {{displayAmount}} פֿון {{call 'publisher.displayName'}} דורך &quot;{{description}}&quot;",
+        "HasBeenCharged": "היי, דאָס איז נאָר צו לאָזן איר וויסן אַז {{1}} איז באפוילן געווארן {{2}} פֿאַר {{3}} דורך {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "דאנק איר פֿאַר דיין צאָלונג פֿאַר &quot;{{description}}&quot;",
+        "HavePaid": "היי {{1}}, דאָס איז בלויז אַ שנעל באַשטעטיקונג אַז איר האָט הצלחה באַצאָלט {{2}} צו {{3}} פֿאַר {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "אינפֿאָרמאַציע וועגן סדר",
+        "PaymentMethod": "צאָלונג אופֿן",
+        "ContactInfo": "קאָנטאַקט אינפֿאָרמאַציע",
+        "Pay": "באַצאָלן"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "פאַרבעטן אנגענומען דורך {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} האָט אַרײַן ערשטן נאָמען",
+        "Streams_user_lastname": "{{invitedUserName}} איינגעשריבן לעצטע נאמען",
+        "Streams_user_icon": "{{invitedUserName}} אריין בילדל",
+        "Places_user_location": "{{invitedUserName}} אַרײַן אָרט",
+        "Streams_greeting": "{{invitedUserName}} איז אריין אין גרוס",
+        "YouHaveCreditsToStart": "איר האָט {{amount}} קרעדיץ צו אָנהייבן",
+        "PaymentFor": "צאָלונג פֿאַר &quot;{{1}}&quot;",
+        "PaymentTo": "צאָלונג צו {{1}}",
+        "PaymentToUser": "צאָלונג צו {{toUserName}}",
+        "CreatePaidStream": "פֿאַר קריייטינג {{toStreamName}}",
+        "JoinedPaidStream": "פֿאַר רעזערוואַציע אין &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "פֿאַר קריייטינג קהל &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ווי רעזערוואַציע צוריקצאָל אין &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "געקויפט {{amount}} קרעדיץ",
+        "BonusCredits": "באָנוס {{amount}} קרעדיץ",
+        "BuyAmountCredits": "קויפן {{amount}} קרעדיץ",
+        "WatchClip": "ערנד {{amount}} קרעדיץ פֿאַר וואַטשינג {{fromStreamTitle}}",
+        "MissingCredits": "פעלנדיק קרעדיץ",
+        "YouMissingCredits": "איר דאַרפֿן אַן נאָך {{amount}} קרעדיץ צו פאָרזעצן.",
+        "BuyCredits": "קויפן קרעדיץ",
+        "BuyBonus": "בייינג {{amount}} קרעדיץ אין אַמאָל, וועט פירן צו {{bonus}} קרעדיץ באָנוס.",
+        "Buy": "קויפן",
+        "PurchaseCredits": "קויפן קרעדיץ",
+        "Credits": "קרעדיץ",
+        "ErrorInvalidAmount": "סכום אומגילטיק",
+        "ErrorInvalidCurrency": "ליידער, מיר שטיצן נישט קיין קראַנטקייַט {{currency}} נאָך",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} קרעדיץ",
+            "BonusCredits": "{{amount}} קרעדיץ"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "טאָג",
+        "Amount": "סומע",
+        "Description": "באַשרייַבונג",
+        "Client": "קליענט",
+        "To": "צו",
+        "From": "פון",
+        "SeeHistory": "זען צאָלונג געשיכטע פֿאַר {{1}}",
+        "HistoryEmpty": "איר האָט נאָך קיין דאַטן",
+        "PaymentFor": "געשיקט {{amount}} קרעדיץ",
+        "PaymentTo": "געשיקט {{amount}} קרעדיץ",
+        "PaymentToUser": "געשיקט {{amount}} קרעדיץ",
+        "CreatePaidStream": "פארבראכט {{amount}} קרעדיץ",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "ערנד {{amount}} קרעדיץ",
+            "-": "פארבראכט {{amount}} קרעדיץ"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "ערנד {{amount}} קרעדיץ",
+            "-": "פארבראכט {{amount}} קרעדיץ"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "באקומען {{amount}} קרעדיץ",
+            "-": "געשיקט {{amount}} קרעדיץ"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "פארבראכט {{amount}} קרעדיץ",
+        "BoughtCredits": "געקויפט {{amount}} קרעדיץ",
+        "BonusCredits": "באַקומען באָנוס {{amount}} קרעדיץ",
+        "InviteAcceptedBy": "ערנד {{amount}} קרעדיץ",
+        "Streams_user_firstname": "ערנד {{amount}} קרעדיץ",
+        "Streams_user_lastname": "ערנד {{amount}} קרעדיץ",
+        "Streams_user_icon": "ערנד {{amount}} קרעדיץ",
+        "Places_user_location": "ערנד {{amount}} קרעדיץ",
+        "Streams_greeting": "ערנד {{amount}} קרעדיץ",
+        "YouHaveCreditsToStart": "ערנד {{amount}} קרעדיץ"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "שטעלן צאָלונג אינפֿאָרמאַציע",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "אָנהייב אַבאָנעמענט",
+            "message": "וואָלט איר ווי צו אַבאָנירן צו {{title}}?",
+            "ok": "אקעי",
+            "cancel": "באָטל מאַכן"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "קרעדיט אָדער דעביט קאַרטל",
+        "SubscribePayment": "אַבאָנירן צאָלונג",
+        "ImmediatePayment": "גלייך צאָלונג"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "שטעלן צאָלונג אינפֿאָרמאַציע",
+        "BuyAmountCredits": "קויפן {{amount}} קרעדיץ",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "מאַכן אַ צאָלונג",
+            "message": "צי איר שטימען צו צאָלן {{symbol}}{{amount}}?",
+            "ok": "אקעי",
+            "cancel": "באָטל מאַכן"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "קרעדיץ",
+            "description": "האלט שפּור פון קרעדיץ און פּיימאַנץ"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "אַבאָנעמענט פּלאַן",
+            "description": "אַבאָנעמענט פּלאַן"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "אַבאָנעמענט",
+            "description": "אַבאָנעמענט"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "פּראָדוקט",
+            "description": "פּראָדוקט איז סאָלד"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "סערוויס",
+            "description": "דינסט זייַענדיק געפֿינט"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "ערנד {{amount}} קרעדיץ"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "געקויפט {{amount}} קרעדיץ"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "באָנוס {{amount}} קרעדיץ"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "פארבראכט {{amount}} קרעדיץ"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "געשיקט {{amount}} קרעדיץ צו {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "באקומען {{amount}} קרעדיץ פון {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "ניו סערוויס",
+            "TitlePlaceholder": "סערוויס טיטל",
+            "PricePlaceholder": "באַשטעטיקט פּרייַז",
+            "LinkPlaceholder": "שטעלן נאָך אינפֿאָרמאַציע לינק",
+            "DescriptionPlaceholder": "סערוויס באַשרייַבונג",
+            "SaveService": "היט סערוויס",
+            "SelectRequiredParticipants": "פארלאנגט פּאַרטיסיפּאַנץ"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "פירן סערוויס טעמפּלאַטעס",
+        "ManageServices": "פירן סערוויסעס",
+        "Free": "פרייַ",
+        "OptionalContribution": "אָפּטיאָנאַל צושטייַער",
+        "RequiredPayment": "פארלאנגט צאָלונג",
+        "AreYouSureDelete": "זענט איר זיכער אַז איר ווילן צו ויסמעקן דעם דינסט?",
+        "AmountServicesRelated": "עס זענען {{amount}} אַוויילאַביליטיז שייַכות צו דעם דינסט. זיי וועלן אויך זיין אַוועקגענומען."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "אינפֿאָרמאַציע וועגן {{title}} NFT",
+        "Description": "דיטיילד אינפֿאָרמאַציע וועגן NFT",
+        "FixedBid": "קויף יעצט",
+        "CurrentBid": "איצטיקע באַפעלן",
+        "StartingIn": "סטאַרטינג אין",
+        "EndingIn": "סוף אין",
+        "CreateNFT": "שאַפֿן אַ NFT",
+        "TitlePlaceholder": "געבן דיין NFT אַ טיטל",
+        "DescriptionPlaceholder": "געבן דיין NFT אַ באַשרייַבונג",
+        "CreateYourNFT": "שאַפֿן דיין NFT",
+        "Royalties": "רויאַלטיעס",
+        "RoyaltyPlaceholder": "אָפּטיאָנאַל. סומע באַצאָלט צו באשעפער איידער אַריבערפירן.",
+        "ExpirationDate": "אויסלויף טאג",
+        "StartingDate": "אנהייב דאטום",
+        "BidsBelowThisAmount": "בידס אונטער דעם סומע וועט נישט זיין ערלויבט",
+        "MinimumBid": "מינימום באַפעלן",
+        "Price": "פּרייַז",
+        "Owner": "באַזיצער",
+        "SelectCategory": "אויסקלייַבן קאַטעגאָריע",
+        "Day": "טאָג",
+        "Days": "טעג",
+        "Hour": "שעה",
+        "Hours": "שעהן",
+        "Minute": "מינוט",
+        "Minutes": "מינוטן",
+        "Second": "סעקונדע",
+        "Seconds": "סעקונדעס",
+        "SalesCreator": "פון פארקויפונג וועט גיין צו באשעפער",
+        "Details": "דעטאַילס",
+        "Bids": "בידס",
+        "History": "געשיכטע",
+        "LoremIpsum": "Lorem Ipsum איז פשוט אַ באָק טעקסט פון די דרוקן און טייפּסעטינג אינדוסטריע.",
+        "PutOnSale": "שטעלן אויף פאַרקויף",
+        "PutOffSale": "צוריקציען פון פאַרקויף",
+        "Transfer": "אַריבערפירן",
+        "Update": "דערהייַנטיקן",
+        "UpdateToken": "דערהייַנטיקן טאָקען",
+        "CreateToken": "שאַפֿן טאָקען",
+        "PlaceBid": "שטעלן באַפעלן",
+        "SoldOut": "סאָלד",
+        "NftName": "NFT נאָמען",
+        "DescribeYourNFT": "ביטע באַשרייַבן דיין NFT",
+        "NftPicture": "בילד צו פאָרשטעלן NFT",
+        "NftMovie": "פֿילם צו פאָרשטעלן NFT",
+        "UploadMovie": "צופֿעליקער פֿילם",
+        "MovieSource": "פֿילם מקור",
+        "UploadFile": "צופֿעליקער אַ טעקע",
+        "PutOnMarketplace": "שטעלן אויף מאַרק",
+        "InstantPurchase": "אַרייַן די פּרייַז צו לאָזן ניצערס גלייך קויפן דיין NFT",
+        "FixedPrice": "פאַרפעסטיקט פּרייַז",
+        "TimedAuction": "טיימד ליציטאַציע",
+        "OpenForBids": "עפענען פֿאַר בידס",
+        "PriceOnePiece": "אַרייַן די פּרייַז פֿאַר איין שטיק",
+        "EnterMinimumBid": "אַרייַן די מינימום פאָרשלאָג",
+        "SelectChain": "אויסקלייַבן קייט",
+        "WrongChain": "דעם NFT באשאפן אונטער &quot;{{chain}}&quot;. ביטע נוצן דעם קייט.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "ימפּאָרטינג NFT ס",
+            "fileNotFound": "אנטשולדיגט, CSV טעקע ניט געפֿונען.",
+            "fileEmpty": "אנטשולדיגט, CSV טעקע איז ליידיק.",
+            "userIdNotFound": "באַניצער עקסיסטירן אָבער ID ליידיק",
+            "errorLine": "שורה {{1}}",
+            "fieldNotFound": "פארלאנגט פעלד &quot;{{1}}&quot; ניט געפֿונען",
+            "taskStreamInvalid": "אַרבעט סטרים פאַרקריפּלט",
+            "instructionsEmpty": "אַרבעט טייַך ינסטראַקשאַנז ליידיק",
+            "complete": "גאַנץ",
+            "activateUsers": "שיקן אַקטאַוויישאַן אָנזאָג צו וסערס?",
+            "importProgress": "פּראָגרעס",
+            "importOptions": "אָפּציעס",
+            "sampleCSV": "אראפקאפיע מוסטער קסוו",
+            "fileLabel": "צופֿעליקער ספּרעדשיט:",
+            "errorsTitle": "ערראָרס פארגעקומען"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "פילטער לויט NFT זאַמלונגען",
+                "ShowNFTCollection": "ווייַזן NFT זאַמלונג אין ...",
+                "AllCollections": "אַלע זאַמלונגען"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "אַלע מחברים",
+                "AllUsers": "אַלעמען",
+                "FilterByAuthors": "פילטער לויט מחברים"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "צוריק צו זאַמלונג"
     }
 }

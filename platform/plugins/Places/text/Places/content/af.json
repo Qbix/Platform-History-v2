@@ -1,5 +1,5 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} lat, {{2}} ng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
         "Title": "binne {{1}}"
@@ -8,11 +8,11 @@
         "meter": "meter",
         "meters": "meter",
         "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "kilometers": "kilometers",
         "km": "km",
         "mile": "myl",
         "miles": "myl",
-        "mi": "mi",
+        "mi": "my",
         "foot": "voet",
         "feet": "voete",
         "inches": "duim"
@@ -20,69 +20,69 @@
     "location": {
         "interested": "Ek stel belang in dinge wat plaasvind binne {{select}} van",
         "update": "Dateer my ligging op",
-        "prompt": "{{ClickOrTap}} hier na <br> stel jou <br> plek",
+        "prompt": "{{ClickOrTap}} hier om<br> stel jou<br> ligging",
         "myCurrentLocation": "My huidige ligging",
         "enterAddress": "Voer &#39;n adres in",
-        "enterPostcode": "Voer asseblief u poskode \/ poskode in",
+        "enterPostcode": "Voer asseblief jou poskode\/poskode in",
         "create": {
             "action": "Voeg ligging by",
-            "title": "Nuwe Plek",
-            "nameYourLocation": "Noem jou plek"
+            "title": "Nuwe ligging",
+            "nameYourLocation": "Noem jou ligging"
         },
         "confirm": {
-            "title": "Stoor hierdie plek?",
-            "message": "Het jy van plan om hierdie plek weer in die toekoms te gebruik?",
+            "title": "Stoor hierdie ligging?",
+            "message": "Beplan jy om hierdie ligging weer in die toekoms te gebruik?",
             "ok": "Ja",
             "cancel": "Geen"
         },
         "add": {
-            "title": "Noem hierdie plek",
-            "placeholder": "Huis, Werk, ens.",
-            "ok": "Save"
+            "title": "Noem hierdie ligging",
+            "placeholder": "Huis, werk ens.",
+            "ok": "Stoor"
         },
         "dialog": {
             "title": "Kies Ligging"
         },
-        "set": "Stel my ligging in"
+        "set": "Stel my ligging"
     },
     "areas": {
-        "filterPlaceholder": "Enige area binne hierdie plek?",
+        "filterPlaceholder": "Enige area binne hierdie ligging?",
         "newArea": "Nuwe area",
         "promptTitle": "Voer &#39;n naam vir die area in:",
-        "absent": "Stel asseblief die area in",
-        "error": "fout",
+        "absent": "Stel asseblief area",
+        "error": "Fout",
         "exist": "Area bestaan reeds",
         "addNewArea": "Voeg nuwe area by",
-        "add": "Voeg"
+        "add": "Voeg by"
     },
     "types": {
         "Places\/locations": {
-            "description": "&#39;n versameling plekke",
-            "displayType": "plekke"
+            "description": "&#39;n versameling liggings",
+            "displayType": "Liggings"
         },
         "Places\/location": {
-            "description": "Verteenwoordig &#39;n gebou, lokaal, skip, park, ens.",
-            "displayType": "plek"
+            "description": "Verteenwoordig &#39;n gebou, plek, skip, park, ens.",
+            "displayType": "Ligging"
         },
         "Places\/area": {
-            "description": "Verteenwoordig &#39;n gebied op &#39;n plek, soos &#39;n kamer of suite",
-            "displayType": "gebied"
+            "description": "Verteenwoordig &#39;n area binne &#39;n ligging, soos &#39;n kamer of suite",
+            "displayType": "Gebied"
         },
         "Places\/floor": {
             "description": "Stel &#39;n vloer in &#39;n gebou of skip voor",
-            "displayType": "vloer"
+            "displayType": "Vloer"
         },
         "Places\/column": {
             "description": "Stel &#39;n kolom in &#39;n gebou of skip voor",
-            "displayType": "kolom"
+            "displayType": "Kolom"
         },
         "Places\/nearby": {
-            "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohash",
+            "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohasj",
             "displayType": "Naby plekke"
         },
         "Places\/interest": {
-            "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohash, wat ooreenstem met &#39;n belangstelling",
-            "displayType": "Plaas belangstelling"
+            "description": "Kategorie vir dinge binne &#39;n sekere afstand van &#39;n geohasj, wat ooreenstem met &#39;n belangstelling",
+            "displayType": "Plekke belangstelling"
         }
     }
 }

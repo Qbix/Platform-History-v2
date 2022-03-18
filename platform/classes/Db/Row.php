@@ -4,7 +4,7 @@
  * @module Db
  */
 
-class Db_Row implements Iterator
+class Db_Row
 {
 	/**
 	 * This class lets you use Db rows and object-relational mapping functionality.
@@ -1551,7 +1551,7 @@ class Db_Row implements Iterator
 	 *  But if it wasn't retrieved, then the modified fields are used as the search criteria.
 	 * @param {boolean} [$useIndex=null] If true, the primary key is used in searching for rows to delete. 
 	 *  An exception is thrown when some fields of the primary key are not specified
-	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
+	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the remove operation.
 	 * @return {integer} Returns number of rows deleted
 	 */
 	function remove ($search_criteria = null, $useIndex = false, $commit = false)
@@ -2335,44 +2335,6 @@ class Db_Row implements Iterator
 			$result->$k = $v;
 		}
 		return $result;
-	}
-
-	/*
-	 * Iterator implementation - rewind
-	 */
-	function rewind ()
-	{
-		if (! empty($this->fields))
-			$this->beyondLastField = false; else
-			$this->beyondLastField = true;
-		return reset($this->fields);
-	}
-
-	function valid ()
-	{
-		return ! $this->beyondLastField;
-	}
-
-	function current ()
-	{
-		return current($this->fields);
-	}
-
-	function key ()
-	{
-		return key($this->fields);
-	}
-
-	function next ()
-	{
-		$next = next($this->fields);
-		$key = key($this->fields);
-		if (isset($key)) {
-			return $next;
-		} else {
-			$this->beyondLastField = true;
-			return false; // doesn't matter what we return here, see valid()
-		}
 	}
 
 	/**

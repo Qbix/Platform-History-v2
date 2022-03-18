@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "అభ్యర్థన సమయంలో లోపం {{status}}",
+        "canceled": "అభ్యర్థన రద్దు చేయబడింది",
+        "500": "అంతర్గత సర్వర్ లోపం",
+        "404": "కనుగొనబడలేదు: {{url}}",
+        "501": "అభ్యర్థన అంతరాయం కలిగింది"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "సెషన్ ముగిసిపోయింది. పేజీని రిఫ్రెష్ చేసి, మళ్లీ ప్రయత్నించండి.",
+        "otherDomain": "{{baseUrl}} వద్ద విదేశీ డొమైన్‌కి క్రాస్-డొమైన్ అభ్యర్థన బ్లాక్ చేయబడింది"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "నొక్కండి",
+        "click": "క్లిక్ చేయండి",
+        "yes": "అవును",
+        "no": "సంఖ్య",
+        "Tap": "నొక్కండి",
+        "Click": "క్లిక్ చేయండి",
+        "Yes": "అవును",
+        "No": "సంఖ్య"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "జనవరి",
+        "2": "ఫిబ్రవరి",
+        "3": "మార్చి",
+        "4": "ఏప్రిల్",
+        "5": "మే",
+        "6": "జూన్",
+        "7": "జూలై",
+        "8": "ఆగస్టు",
+        "9": "సెప్టెంబర్",
+        "10": "అక్టోబర్",
+        "11": "నవంబర్",
+        "12": "డిసెంబర్"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "రెండవ",
+        "seconds": "సెకన్లు",
+        "minute": "నిమిషం",
+        "minutes": "నిమిషాలు",
+        "hour": "గంటలు",
+        "day": "రోజు",
+        "days": "రోజులు",
+        "week": "వారం",
+        "weeks": "వారాలు",
+        "month": "నెల",
+        "months": "నెలల",
+        "year": "సంవత్సరం",
+        "years": "సంవత్సరాలు",
+        "decade": "దశాబ్దం",
+        "decades": "దశాబ్దాలు",
+        "century": "శతాబ్దం",
+        "centuries": "శతాబ్దాలు"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "దయచేసి మీ మైక్రోఫోన్‌కు ప్రాప్యతను అనుమతించండి",
+        "record": "రికార్డ్ చేయండి",
+        "recording": "రికార్డింగ్",
+        "remains": "అవశేషాలు",
+        "maximum": "గరిష్టంగా",
+        "playing": "ఆడుతున్నారు",
+        "recorded": "రికార్డ్ చేయబడింది",
+        "clip": "క్లిప్",
+        "discard": "విస్మరించండి",
+        "encoding": "ఎన్కోడింగ్"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "క్లిప్",
+        "errorNoSource": "వీడియో మూలం లేదు",
+        "SkipAfter": "తర్వాత దాటవేయి",
+        "Skip": "దాటవేయి"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "క్లిప్",
+        "errorNoSource": "పిడిఎఫ్ మూలం లేదు"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "క్లిప్ ప్రారంభాన్ని సెట్ చేయండి",
+        "ClipStart": "క్లిప్ ప్రారంభం",
+        "SetClipEnd": "క్లిప్ ముగింపుని సెట్ చేయండి",
+        "ClipEnd": "క్లిప్ ముగింపు",
+        "StartMoreEnd": "ప్రారంభ స్థానం ముగింపు స్థానం కంటే ఎక్కువగా ఉండకూడదు",
+        "EndLessStart": "ముగింపు స్థానం ప్రారంభ స్థానం కంటే తక్కువగా ఉండకూడదు",
+        "WhichInvalid": "&#39;ఏది&#39; అనే వాదన చెల్లదు"
     },
     "alert": {
-        "title": "Alert"
+        "title": "హెచ్చరిక"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "నిర్ధారించండి",
+        "ok": "అవును",
+        "cancel": "సంఖ్య"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "ప్రాంప్ట్",
+        "ok": "వెళ్ళండి"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "మరింత",
+        "Menu": "మెను"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "ఫైల్‌ని చదవడంలో లోపం ఏర్పడింది",
+        "errorType": "క్షమించండి, కానీ ఈ ఫైల్ రకానికి మద్దతు లేదు",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "మీరు ఏమి చెయ్యాలనుకుంటున్నారు?",
+            "photo": "కొత్త ఫోటో తీయండి",
+            "library": "లైబ్రరీ నుండి ఎంచుకోండి"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "దయచేసి పెద్ద చిత్రాన్ని ఎంచుకోండి.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "పరిమాణం మరియు స్థానాన్ని సర్దుబాటు చేయండి",
+            "touchscreen": "జూమ్ చేయడానికి మరియు లాగడానికి మీ వేళ్లను ఉపయోగించండి",
+            "notTouchscreen": "జూమ్ చేయడానికి మరియు లాగడానికి మీ మౌస్ &amp; చక్రాన్ని ఉపయోగించండి"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "నిన్న రాత్రి",
+        "lastEvening": "చివరి సాయంత్రం",
+        "yesterday": "నిన్న",
+        "thisMorning": "ఈ ఉదయం",
+        "today": "నేడు",
+        "tonight": "ఈరాత్రి",
+        "tomorrowMorning": "టామ్ ఉదయం",
+        "tomorrow": "రేపు",
+        "hoursAgo": "{{h}} గంటల క్రితం",
+        "hourAgo": "{{h}} గంట క్రితం",
+        "minuteAgo": "{{m}} నిమిషం క్రితం",
+        "minutesAgo": "{{m}} నిమిషాల క్రితం",
+        "secondAgo": "{{s}} సెకను క్రితం",
+        "secondsAgo": "{{s}} సెకన్ల క్రితం",
+        "fewSecondsAgo": "సెకన్ల క్రితం",
+        "rightNow": "ఇప్పుడే",
+        "inSecond": "{{s}} సెకనులో",
+        "inSeconds": "{{s}} సెకన్లలో",
+        "inMinute": "{{m}} నిమిషంలో",
+        "inMinutes": "{{m}} నిమిషాల్లో",
+        "inHour": "{{h}} గంటలో",
+        "inHours": "{{h}} గంటల్లో",
+        "inUnderMinute": "1 నిమిషంలోపు"
     }
 }

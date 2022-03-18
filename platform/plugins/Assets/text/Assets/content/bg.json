@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Докоснете, за да платите"
+        "button": "Докоснете за плащане"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: таксата, обработена за {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Благодарим Ви за плащането до {{call 'publisher.displayName'}}",
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: таксуването е обработено за {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Благодарим ви за плащането на {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} се абонира за {{plan.title}}",
-        "YouSubscribedTo": "Абонирани сте за {{plan.title}}"
+        "YouSubscribedTo": "Абонирахте се за {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Информация за поръчка",
+        "AboutOrder": "Информация за поръчката",
         "PaymentMethod": "Начин на плащане",
         "ContactInfo": "Информация за контакт",
-        "Pay": "Pay"
+        "Pay": "Плати"
     },
     "credits": {
-        "InviteAcceptedBy": "Покана, приета от {{1}}",
-        "YouHaveCreditsToStart": "Имате {{1}} кредити за започване",
-        "PaymentFor": "Плащане за &quot;{{1}}&quot;",
-        "PaymentTo": "Плащане на {{1}}",
-        "PaymentToUser": "Плащане на {{userName}}",
-        "JoinedPaidStream": "за присъединяване към &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "InviteAcceptedBy": "Поканата е приета от {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Имате {{amount}} кредити, за да започнете",
+        "PaymentFor": "Плащане за „{{1}}“",
+        "PaymentTo": "Плащане до {{1}}",
+        "PaymentToUser": "Плащане до {{toUserName}}",
+        "JoinedPaidStream": "за резервация в „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
         "CreatedCommunity": "за създаване на общност &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "за напускане на &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Закупени {{amount}} кредити",
+        "LeftPaidStream": "като възстановяване на сума за резервация в „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> “",
+        "BoughtCredits": "Купих {{amount}} кредити",
         "BuyAmountCredits": "Купете {{amount}} кредити",
         "MissingCredits": "Липсващи кредити",
-        "YouMissingCredits": "Липсват ви {{amount}} кредити",
+        "YouMissingCredits": "Нуждаете се от допълнителни {{amount}} кредити, за да продължите.",
         "BuyCredits": "Купувайте кредити",
         "Buy": "Купува",
         "Credits": "Кредити",
-        "ErrorInvalidAmount": "Сумата е невалидна",
+        "ErrorInvalidAmount": "Невалидна сума",
         "ErrorInvalidCurrency": "За съжаление все още не поддържаме валута {{currency}}",
-        "WatchClip": "Спечелени {{amount}} кредита за гледане на {{fromStreamTitle}}",
-        "PurchaseCredits": "Кредити за покупка",
+        "WatchClip": "Спечелени {{amount}} кредити за гледане на {{fromStreamTitle}}",
+        "PurchaseCredits": "Закупуване на кредити",
         "forMessages": {
             "BoughtCredits": "{{amount}} кредити",
             "BonusCredits": "{{amount}} кредити"
         },
         "CreatePaidStream": "за създаване на {{toStreamName}}",
-        "BonusCredits": "Бонус {{amount}} кредита",
-        "BuyBonus": "Закупуването на {{amount}} кредита наведнъж ще доведе до {{bonus}} бонуса за кредити.",
+        "BonusCredits": "Бонус {{amount}} кредити",
+        "BuyBonus": "Купуването на {{amount}} кредита наведнъж ще доведе до бонус за {{bonus}} кредита.",
         "Streams_user_firstname": "{{invitedUserName}} въведе собствено име",
         "Streams_user_lastname": "{{invitedUserName}} въведе фамилно име",
         "Streams_user_icon": "{{invitedUserName}} въведена икона",
@@ -51,33 +51,33 @@
     "history": {
         "Date": "Дата",
         "Amount": "Количество",
-        "Description": "описание",
+        "Description": "Описание",
         "Client": "клиент",
         "To": "да се",
         "From": "от",
         "HistoryEmpty": "Все още нямате данни",
         "SeeHistory": "Вижте историята на плащанията за {{1}}",
-        "PaymentFor": "Похарчени {{amount}} кредити",
+        "PaymentFor": "Изпратени {{amount}} кредити",
         "PaymentTo": "Изпратени {{amount}} кредити",
         "PaymentToUser": "Изпратени {{amount}} кредити",
         "JoinedPaidStream": {
             "+": "Спечелени {{amount}} кредити",
-            "-": "Похарчени {{amount}} кредити"
+            "-": "Изхарчени {{amount}} кредити"
         },
         "LeftPaidStream": {
-            "+": "Получени {{amount}} кредити",
+            "+": "Получихте {{amount}} кредити",
             "-": "Изпратени {{amount}} кредити"
         },
-        "CreatedCommunity": "Похарчени {{amount}} кредити",
-        "BoughtCredits": "Закупени {{amount}} кредити",
+        "CreatedCommunity": "Изхарчени {{amount}} кредити",
+        "BoughtCredits": "Купих {{amount}} кредити",
         "InviteAcceptedBy": "Спечелени {{amount}} кредити",
         "YouHaveCreditsToStart": "Спечелени {{amount}} кредити",
-        "CreatePaidStream": "Похарчени {{amount}} кредита",
+        "CreatePaidStream": "Изхарчени {{amount}} кредити",
         "WatchClip": {
-            "+": "Спечелени {{amount}} кредита",
-            "-": "Похарчени {{amount}} кредита"
+            "+": "Спечелени {{amount}} кредити",
+            "-": "Изхарчени {{amount}} кредити"
         },
-        "BonusCredits": "Получих бонус {{amount}} кредита",
+        "BonusCredits": "Получих бонус {{amount}} кредити",
         "Streams_user_firstname": "Спечелени {{amount}} кредити",
         "Streams_user_lastname": "Спечелени {{amount}} кредити",
         "Streams_user_icon": "Спечелени {{amount}} кредити",
@@ -87,22 +87,22 @@
     "subscriptions": {
         "infoTitle": "Задайте информация за плащане",
         "confirm": {
-            "title": "Стартирайте абонамента",
+            "title": "Стартиране на абонамента",
             "message": "Искате ли да се абонирате за {{title}}?",
             "ok": "Добре",
-            "cancel": "Отказ"
+            "cancel": "Отмяна"
         },
         "CreditOrDebitCard": "Кредитна или дебитна карта",
-        "SubscribePayment": "Абонирайте се за плащане",
+        "SubscribePayment": "Абониране за плащане",
         "ImmediatePayment": "Незабавно плащане"
     },
     "payments": {
         "infoTitle": "Задайте информация за плащане",
         "confirm": {
-            "title": "Направете плащане",
-            "message": "Съгласни ли сте да платите {{symbol}} {{amount}}?",
+            "title": "Извършете плащане",
+            "message": "Съгласни ли сте да платите {{symbol}}{{amount}}?",
             "ok": "Добре",
-            "cancel": "Отказ"
+            "cancel": "Отмяна"
         },
         "BuyAmountCredits": "Купете {{amount}} кредити"
     },
@@ -112,20 +112,20 @@
             "description": "следи кредитите и плащанията"
         },
         "Assets\/plan": {
-            "displayType": "План за субсидиране",
+            "displayType": "Абонаментен план",
             "description": "абонаментен план"
         },
         "Assets\/subscription": {
-            "displayType": "абонамент",
+            "displayType": "Абонамент",
             "description": "абонамент"
         },
         "Assets\/product": {
-            "displayType": "продукт",
+            "displayType": "Продукт",
             "description": "продукт, който се продава"
         },
         "Assets\/service": {
             "displayType": "Обслужване",
-            "description": "предлагана услуга"
+            "description": "предлаганата услуга"
         }
     },
     "messages": {
@@ -136,43 +136,43 @@
             "content": "Похарчени {{amount}} кредити"
         },
         "Assets\/credits\/sent": {
-            "content": "Изпратени {{amount}} кредити"
+            "content": "Изпрати {{amount}} кредити до {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Получени {{amount}} кредити"
+            "content": "Получихте {{amount}} кредити от {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Закупени {{amount}} кредити"
+            "content": "Купих {{amount}} кредити"
         },
         "Assets\/credits\/bonus": {
-            "content": "Бонус {{amount}} кредита"
+            "content": "Бонус {{amount}} кредити"
         }
     },
     "charge": {
-        "Subject": "Получавате плащане на {{displayAmount}} от {{call 'publisher.displayName'}} от &quot;{{description}}&quot;",
-        "HasBeenCharged": "Хей, това е само за да уведомите {{1}} е таксуван {{2}} за {{3}} от {{4}}"
+        "Subject": "Получавате плащане в размер на {{displayAmount}} от {{call 'publisher.displayName'}} от „{{description}}“",
+        "HasBeenCharged": "Хей, това е само за да ви уведомя, че {{1}} е таксуван {{2}} за {{3}} от {{4}}"
     },
     "charged": {
-        "Subject": "Благодарим Ви за плащането за „{{description}}“",
-        "HavePaid": "Хей {{1}}, това е само бързо потвърждение, че успешно сте платили {{2}} до {{3}} за {{4}}"
+        "Subject": "Благодарим ви за плащането за „{{description}}“",
+        "HavePaid": "Хей, {{1}}, това е само бързо потвърждение, че успешно сте платили {{2}} на {{3}} за {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Нова услуга",
             "TitlePlaceholder": "Заглавие на услугата",
             "PricePlaceholder": "Задайте цена",
-            "LinkPlaceholder": "задайте допълнителна информационна връзка",
+            "LinkPlaceholder": "задайте връзка за допълнителна информация",
             "DescriptionPlaceholder": "Описание на услугата",
             "SaveService": "Запазване на услугата",
             "SelectRequiredParticipants": "Задължителни участници"
         },
-        "ManageServiceTemplates": "Управление на сервизните шаблони",
+        "ManageServiceTemplates": "Управление на шаблони за услуги",
         "ManageServices": "Управление на услугите",
         "FreeEvent": "Безплатно събитие",
         "OptionalContribution": "Незадължителен принос",
         "RequiredPayment": "Задължително плащане",
         "AreYouSureDelete": "Наистина ли искате да изтриете тази услуга?",
-        "AmountServicesRelated": "Има {{amount}} наличности, свързани с тази услуга. Те също са премахнати.",
+        "AmountServicesRelated": "Има {{amount}} наличности, свързани с тази услуга. Те също ще бъдат премахнати.",
         "Free": "Безплатно"
     },
     "NFT": {

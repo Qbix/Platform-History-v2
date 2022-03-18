@@ -1,47 +1,47 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Toqueu per pagar"
+        "button": "Toca per pagar"
     },
     "notifications": {
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: càrrec processat per {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Gràcies pel vostre pagament a {{call 'publisher.displayName'}}",
+        "ThankYouForYourPayment": "Gràcies pel pagament a {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} s&#39;ha subscrit a {{plan.title}}",
-        "YouSubscribedTo": "Heu estat subscrit a {{plan.title}}"
+        "YouSubscribedTo": "T&#39;has subscrit a {{plan.title}}"
     },
     "payment": {
-        "AboutOrder": "Informació sobre comanda",
+        "AboutOrder": "Informació sobre la comanda",
         "PaymentMethod": "Mètode de pagament",
         "ContactInfo": "Dades de contacte",
         "Pay": "Pagar"
     },
     "credits": {
-        "InviteAcceptedBy": "Convidat acceptat per {{1}}",
-        "YouHaveCreditsToStart": "Teniu {{1}} crèdits per començar",
-        "PaymentFor": "Pagament per a &quot;{{1}}&quot;",
+        "InviteAcceptedBy": "Invitació acceptada per {{invitedUserName}}",
+        "YouHaveCreditsToStart": "Tens {{amount}} crèdits per començar",
+        "PaymentFor": "Pagament de &quot;{{1}}&quot;",
         "PaymentTo": "Pagament a {{1}}",
-        "PaymentToUser": "Pagament a {{userName}}",
-        "JoinedPaidStream": "per unir-se a &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "PaymentToUser": "Pagament a {{toUserName}}",
+        "JoinedPaidStream": "per reservar a &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
         "CreatedCommunity": "per crear la comunitat &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "per sortir de &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "Es van comprar {{amount}} crèdits",
-        "BuyAmountCredits": "Compreu {{amount}} crèdits",
-        "MissingCredits": "Falta crèdits",
-        "YouMissingCredits": "Et falten {{amount}} crèdits",
-        "BuyCredits": "Compra crèdits",
-        "Buy": "Compra",
+        "LeftPaidStream": "com a devolució de la reserva a &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;",
+        "BoughtCredits": "He comprat {{amount}} crèdits",
+        "BuyAmountCredits": "Compra {{amount}} crèdits",
+        "MissingCredits": "Falten crèdits",
+        "YouMissingCredits": "Necessites {{amount}} crèdits addicionals per continuar.",
+        "BuyCredits": "Comprar crèdits",
+        "Buy": "Comprar",
         "Credits": "Crèdits",
         "ErrorInvalidAmount": "Import no vàlid",
-        "ErrorInvalidCurrency": "Malauradament encara no admetem moneda {{currency}}",
-        "WatchClip": "He guanyat {{amount}} crèdits per veure {{fromStreamTitle}}",
+        "ErrorInvalidCurrency": "Malauradament, encara no admetem la moneda {{currency}}",
+        "WatchClip": "Heu guanyat {{amount}} crèdits per veure {{fromStreamTitle}}",
         "PurchaseCredits": "Compra de crèdits",
         "forMessages": {
             "BoughtCredits": "{{amount}} crèdits",
             "BonusCredits": "{{amount}} crèdits"
         },
         "CreatePaidStream": "per crear {{toStreamName}}",
-        "BonusCredits": "Bono {{amount}} de crèdits",
-        "BuyBonus": "Si compreu {{amount}} crèdits alhora, obtindreu una bonificació de {{bonus}} crèdits.",
+        "BonusCredits": "{{amount}} crèdits de bonificació",
+        "BuyBonus": "Si compra {{amount}} crèdits alhora, obtindreu una bonificació de {{bonus}} crèdits.",
         "Streams_user_firstname": "{{invitedUserName}} ha introduït el nom",
         "Streams_user_lastname": "{{invitedUserName}} ha introduït el cognom",
         "Streams_user_icon": "{{invitedUserName}} icona introduïda",
@@ -50,34 +50,34 @@
     },
     "history": {
         "Date": "Data",
-        "Amount": "Quantitat",
+        "Amount": "Import",
         "Description": "Descripció",
         "Client": "Client",
         "To": "a",
         "From": "des de",
-        "HistoryEmpty": "Encara no teniu dades",
-        "SeeHistory": "Consulteu l’historial de pagaments de {{1}}",
-        "PaymentFor": "Es van gastar {{amount}} crèdits",
+        "HistoryEmpty": "Encara no tens dades",
+        "SeeHistory": "Consulta l&#39;historial de pagaments de {{1}}",
+        "PaymentFor": "S&#39;han enviat {{amount}} crèdits",
         "PaymentTo": "S&#39;han enviat {{amount}} crèdits",
         "PaymentToUser": "S&#39;han enviat {{amount}} crèdits",
         "JoinedPaidStream": {
-            "+": "Obtinguts {{amount}} crèdits",
-            "-": "Es van gastar {{amount}} crèdits"
+            "+": "{{amount}} crèdits obtinguts",
+            "-": "{{amount}} crèdits gastats"
         },
         "LeftPaidStream": {
             "+": "S&#39;han rebut {{amount}} crèdits",
             "-": "S&#39;han enviat {{amount}} crèdits"
         },
-        "CreatedCommunity": "Es van gastar {{amount}} crèdits",
-        "BoughtCredits": "Es van comprar {{amount}} crèdits",
-        "InviteAcceptedBy": "Obtinguts {{amount}} crèdits",
-        "YouHaveCreditsToStart": "Obtinguts {{amount}} crèdits",
-        "CreatePaidStream": "Crèdits gastats {{amount}}",
+        "CreatedCommunity": "{{amount}} crèdits gastats",
+        "BoughtCredits": "He comprat {{amount}} crèdits",
+        "InviteAcceptedBy": "{{amount}} crèdits obtinguts",
+        "YouHaveCreditsToStart": "{{amount}} crèdits obtinguts",
+        "CreatePaidStream": "{{amount}} crèdits gastats",
         "WatchClip": {
-            "+": "He guanyat {{amount}} crèdits",
-            "-": "Crèdits gastats {{amount}}"
+            "+": "{{amount}} crèdits obtinguts",
+            "-": "{{amount}} crèdits gastats"
         },
-        "BonusCredits": "He obtingut crèdits de bonificació de {{amount}}",
+        "BonusCredits": "Teniu {{amount}} crèdits addicionals",
         "Streams_user_firstname": "{{amount}} crèdits obtinguts",
         "Streams_user_lastname": "{{amount}} crèdits obtinguts",
         "Streams_user_icon": "{{amount}} crèdits obtinguts",
@@ -85,34 +85,34 @@
         "Streams_greeting": "{{amount}} crèdits obtinguts"
     },
     "subscriptions": {
-        "infoTitle": "Establiu la informació de pagament",
+        "infoTitle": "Estableix la informació de pagament",
         "confirm": {
-            "title": "Inicia la subscripció",
-            "message": "Voleu subscriure-us a {{title}}?",
+            "title": "Inicieu la subscripció",
+            "message": "Vols subscriure&#39;t a {{title}}?",
             "ok": "D&#39;acord",
             "cancel": "Cancel · lar"
         },
         "CreditOrDebitCard": "Targeta de crèdit o dèbit",
-        "SubscribePayment": "Subscripció de pagament",
-        "ImmediatePayment": "Pagament immediat"
+        "SubscribePayment": "Pagament de subscripció",
+        "ImmediatePayment": "Pagament Immediat"
     },
     "payments": {
-        "infoTitle": "Establiu la informació de pagament",
+        "infoTitle": "Estableix la informació de pagament",
         "confirm": {
             "title": "Fer un pagament",
-            "message": "Accepteu de pagar {{symbol}} {{amount}}?",
+            "message": "Accepteu pagar {{symbol}}{{amount}}?",
             "ok": "D&#39;acord",
             "cancel": "Cancel · lar"
         },
-        "BuyAmountCredits": "Compreu {{amount}} crèdits"
+        "BuyAmountCredits": "Compra {{amount}} crèdits"
     },
     "types": {
         "Assets\/credits": {
             "displayType": "Crèdits",
-            "description": "fa un seguiment de crèdits i pagaments"
+            "description": "fa un seguiment dels crèdits i pagaments"
         },
         "Assets\/plan": {
-            "displayType": "Pla de subscripció",
+            "displayType": "Pla d&#39;abonaments",
             "description": "pla de subscripció"
         },
         "Assets\/subscription": {
@@ -125,54 +125,54 @@
         },
         "Assets\/service": {
             "displayType": "Servei",
-            "description": "servei que s’ofereix"
+            "description": "servei que s&#39;ofereix"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Obtinguts {{amount}} crèdits"
+            "content": "{{amount}} crèdits obtinguts"
         },
         "Assets\/credits\/spent": {
-            "content": "Es van gastar {{amount}} crèdits"
+            "content": "{{amount}} crèdits gastats"
         },
         "Assets\/credits\/sent": {
-            "content": "S&#39;han enviat {{amount}} crèdits"
+            "content": "S&#39;han enviat {{amount}} crèdits a {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "S&#39;han rebut {{amount}} crèdits"
+            "content": "S&#39;ha rebut {{amount}} crèdits de {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "Es van comprar {{amount}} crèdits"
+            "content": "He comprat {{amount}} crèdits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bono {{amount}} de crèdits"
+            "content": "{{amount}} crèdits addicionals"
         }
     },
     "charge": {
-        "Subject": "Obteniu el pagament de {{displayAmount}} de {{call 'publisher.displayName'}} per &quot;{{description}}&quot;",
-        "HasBeenCharged": "Hola, només us heu de fer saber que {{1}} ha estat cobrat per {{3}} per {{3}} per {{4}}"
+        "Subject": "Rebreu el pagament de {{displayAmount}} de {{call 'publisher.displayName'}} per &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hola, això és només per informar-vos que {{1}} s&#39;ha cobrat {{2}} per {{3}} per {{4}}"
     },
     "charged": {
-        "Subject": "Gràcies pel vostre pagament per &quot;{{description}}&quot;",
-        "HavePaid": "Hola {{1}}, això és només una confirmació ràpida que heu pagat amb èxit {{2}} a {{3}} per {{4}}"
+        "Subject": "Gràcies pel pagament de &quot;{{description}}&quot;",
+        "HavePaid": "Hola, {{1}}, això és només una confirmació ràpida que heu pagat correctament {{2}} a {{3}} per {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "Nou servei",
+            "Title": "Nou Servei",
             "TitlePlaceholder": "Títol del servei",
-            "PricePlaceholder": "Preu fixat",
-            "LinkPlaceholder": "configura un enllaç d&#39;informació addicional",
+            "PricePlaceholder": "Establir preu",
+            "LinkPlaceholder": "establiu un enllaç d&#39;informació addicional",
             "DescriptionPlaceholder": "Descripció del servei",
-            "SaveService": "Servei d’estalvi",
+            "SaveService": "Servei d&#39;estalvi",
             "SelectRequiredParticipants": "Participants obligatoris"
         },
-        "ManageServiceTemplates": "Gestiona les plantilles de servei",
-        "ManageServices": "Serveis de Gestió",
+        "ManageServiceTemplates": "Gestionar plantilles de servei",
+        "ManageServices": "Gestionar Serveis",
         "FreeEvent": "Esdeveniment gratuït",
         "OptionalContribution": "Aportació opcional",
         "RequiredPayment": "Pagament obligatori",
         "AreYouSureDelete": "Esteu segur que voleu suprimir aquest servei?",
-        "AmountServicesRelated": "Hi ha {{amount}} disponibilitats relacionades amb aquest servei. També seran eliminats.",
+        "AmountServicesRelated": "Hi ha {{amount}} disponibilitats relacionades amb aquest servei. També s&#39;eliminaran.",
         "Free": "Gratuït"
     },
     "NFT": {
@@ -217,7 +217,7 @@
         "PlaceBid": "Posa l&#39;oferta",
         "SoldOut": "Vengut",
         "NftName": "Nom NFT",
-        "DescribeYourNFT": "Descriu el teu NFT",
+        "DescribeYourNFT": "Descriu la teva NFT",
         "NftPicture": "Imatge per representar NFT",
         "NftMovie": "Pel·lícula per representar NFT",
         "UploadMovie": "Carrega pel·lícula",

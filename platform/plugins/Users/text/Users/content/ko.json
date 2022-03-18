@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "해석학",
+        "Daily": "일일",
+        "Weekly": "주간",
+        "Monthly": "월간 간행물",
+        "Application": "애플리케이션",
+        "Pages": "페이지",
+        "Services": "서비스",
+        "Faq": "자주하는 질문",
+        "WeekDays": "요일"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "로그인",
+        "LogOut": "로그 아웃"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "{{1}}을(를) 기본 {{2}}으로 설정",
+        "ChoosePassPhrase": "로그인 <strong>할 암호<\/strong> 를 선택하십시오.<br> 당신이 쉽게 기억할 몇 단어로 구성된 간단한 문구.",
+        "ChoosePassPhraseSeeSuggestions": "계정을 보호하기 위해 좋은 <strong>암호<\/strong> 를 선택하십시오. 몇 가지 아이디어에 대한 제안을 참조하십시오.",
+        "LogOutAndTryAgain": "로그아웃하고 다시 시도",
+        "IfYouFeel": "문제가 발생했다고 생각되면 다음을 수행할 수 있습니다.",
+        "SetIdentifierButtonTitle": "다시 시작하다"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "시작하다"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "시작하다",
+        "Authorize": "승인",
+        "TermsLabel": "읽었으며 동의합니다<br> {{link}}에게",
+        "TermsTitle": "자귀",
+        "mustAgree": "먼저 약관에 동의해야 합니다."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "동의합니다 {{link}}",
+        "TermsTitle": "자귀"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "허가",
+        "prompt": "알림을 사용하시겠습니까? 관심 있는 항목에 대한 실시간 업데이트를 받게 됩니다.",
+        "yes": "네",
+        "no": "아니",
+        "WelcomePleaseVerifyEmail": "어서 오십시오! 이메일 주소를 확인하세요.",
+        "WelcomeVerifyEmail": "어서 오십시오! 이메일 주소를 확인.",
+        "ForgetPass": "야, 암호를 잊어버렸니?",
+        "PassphraseSaved": "암호가 저장되었습니다.",
+        "IdentifierActivated": "{{type}}이(가) 활성화되었습니다.",
+        "CompletedActivation": "사용자 활성화를 완료했습니다.",
+        "CompletedActivationLogIn": "사용자 활성화를 완료했습니다. 지금 로그인해 보세요."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "연락처 선택",
+            "CreateAccount": "+ 새 연락처",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create를 찾을 수 없음",
+            "SearchByName": "이름으로 검색",
+            "EmptyContacts": "연락처를 찾을 수 없습니다..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "{{displayName}}의 연락처 선택"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "라벨을 선택하세요.",
+        "inviteUser": "사용자 초대",
+        "selectRole": "역할 선택",
+        "inviteRole": "{{role}} 초대"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "잘못된 언어 선택",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "어서 오십시오",
+        "directions": "계정을 만들거나 로그인하세요.",
+        "directionsNoRegister": "계정이 있으면 로그인하세요.",
+        "goButton": "가다",
+        "passphrase": "암호를 입력하십시오:",
+        "loginButton": "시작하다",
+        "registerButton": "시작하다",
+        "resendButton": "활성화 메시지 보내기",
+        "forgot": "잊어 버려?",
+        "resendConfirm": "암호를 재설정하라는 메시지를 보내시겠습니까?",
+        "resendSuccess": "암호를 재설정하라는 메시지 확인",
+        "resendClose": "닫다",
+        "noPassphrase": "로그인하기 전에 활성화 메시지의 링크를 클릭하여 암호를 설정해야 합니다.",
+        "notVerified": "로그인하려면 자신에게 활성화 메시지를 보내야 합니다.",
+        "emailExists": "이전에 이 이메일로 등록을 시도하셨습니까? 그렇다면 받은 편지함을 확인하여 계정을 활성화하십시오. <a href='#resend' class='Q_button Users_activation_resend'>메시지를 다시 보내려면 클릭하십시오.<\/a>",
+        "mobileExists": "이전에 이 휴대폰 번호로 등록을 시도하셨습니까? 그렇다면 SMS를 확인하여 계정을 활성화하십시오. <a href='#resend' class='Q_button Users_activation_resend'>메시지를 다시 보내려면 클릭하십시오.<\/a>",
+        "usingOther": "또는 당신은 할 수 있습니다",
+        "prompt": "사용자 이름 선택:",
+        "newUser": "또는 아래에서 새 계정을 만드십시오.",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "휴대폰 번호 또는 이메일",
+            "mobile": "휴대폰 번호를 입력하세요.",
+            "email": "이메일 주소를 입력하세요",
+            "username": "문자와 숫자만 사용"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "서비스 약관에 동의하시겠습니까?",
+        "facebookNoEmail": "귀하의 Facebook 계정에 확인된 이메일 주소가 없습니다. 기본 방식으로 로그인하기만 하면 됩니다.",
+        "picTooltip": "이 사진은 나중에 변경할 수 있습니다.",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "{{timestamp}} 시간에 {{host}}에 로그인합니다.",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "지갑으로 리디렉션",
+                "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "로그인 방법 추가",
+        "sendMessage": "활성화 메시지 보내기",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "휴대폰 번호 또는 이메일을 입력하세요",
+            "mobile": "당신의 휴대폰 번호를 입력하십시오",
+            "email": "이메일 주소를 입력하세요",
+            "username": "사용자 이름"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} 계정",
+        "areUsing": "{{platform}}을(를) 다음으로 사용 중입니다.",
+        "noLongerUsing": "더 이상 {{platform}}에 다음과 같이 연결되어 있지 않습니다.",
+        "doAuth": "이 계정으로 로그인",
+        "doSwitch": "이 계정으로 전환"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "소유자",
+        "Admin": "관리자",
+        "Member": "회원",
+        "Guest": "손님",
+        "Host": "주최자"
     }
 }

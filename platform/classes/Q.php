@@ -341,6 +341,9 @@ class Q
 				return null;
 			}
 		}
+		if (!$expression) {
+			$expression = '';
+		}
 		$a = (
 			strpos($expression, '{{0}}') === false
 			and strpos($expression, '$0') === false
@@ -717,6 +720,7 @@ class Q
 			 */
 			self::event('Q/exception', @compact('exception'));
 		}
+
 	}
 
 	/**
@@ -1360,8 +1364,9 @@ class Q
 			$app = defined('APP_DIR') ? basename(APP_DIR) : 'Q App';
 		}
 		$message = "(".(isset($_SERVER['SERVER_NAME']) ? $_SERVER['SERVER_NAME'] : "cli").") $app: $message";
+		$default_max_len = ini_get('log_errors_max_len');
 		$max_len = Q::ifset($options, 'maxLength', 
-			Q_Config::get('Q', 'log', 'maxLength', ini_get('log_errors_max_len'))
+			Q_Config::get('Q', 'log', 'maxLength', $default_max_len ? $default_max_len : 1024)
 		);
 		$path = self::logsDirectory();
 
@@ -1536,7 +1541,7 @@ class Q
 			self::$var_dump_max_levels = $max_levels;
 		}
 		try {
-			self::do_dump($var, $label . $vname, null, null, $as_text);
+			self::do_dump($var, $label . $vname, '', null, $as_text);
 		} catch (Exception $e) {
 			// maybe can't traverse an already closed generator, or something else
 			// just continue
@@ -1883,7 +1888,7 @@ class Q
 	static private function do_dump (
 		&$var,
 		$var_name = NULL,
-		$indent = NULL,
+		$indent = '',
 		$reference = NULL,
 		$as_text = false)
 	{

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Povezava za promocijo",
+                "startDate": "Začetni datum",
+                "startTime": "Začetni čas",
+                "endDate": "Končni datum",
+                "endTime": "Končni čas",
+                "budget": "Proračun"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filtriraj po zanimanju",
+                "FilterInterests": "Začnite vnašati zanimanje ..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Obresti",
+            "Location": "Lokacija"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Pojdi",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Prebrskaj",
+            "WriteToStartConversation": "Za začetek pogovora napišite svoje misli",
+            "StartConversation": "Začni pogovor",
+            "GotoConversation": "Pojdite na Pogovor",
+            "reset": "Ponastaviti",
+            "edit": "Uredi",
+            "link": "Povezava",
+            "setUrl": "Nastavite URL",
+            "save": "Shrani",
+            "setClip": "Izrezani posnetek",
+            "invalidURL": "Neveljaven URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Datoteka je prevelika za predpomnjenje. Največja velikost datoteke {{size}}",
+        "InvalidPDF": "Datoteka ni veljaven PDF",
+        "StartTypingTitleOrKeywords": "Začnite vnašati naslov ali ključne besede ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Dokument HTML, ki si ga lahko ogledajo in urejajo različni uporabniki",
+            "displayType": "Članek"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Diapozitiv v predstavitvi lahko vključuje HTML, zvok itd.",
+            "displayType": "Zdrs"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Predstavitev, sestavljena iz različnih diapozitivov",
+            "displayType": "Predstavitev"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Oglaševalska enota na spletni strani",
+            "displayType": "Oglasna enota"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Način združevanja oglaševalskih enot pod imenom",
+            "displayType": "Umestitev oglasa"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Vsebina za oglas",
+            "displayType": "Oglasna kreativa"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Oglaševalska kampanja",
+            "displayType": "Oglasna kampanja"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Predstavlja spletno mesto, katerega metapodatki so bili postrgani",
+            "displayType": "Spletna stran"
         }
     }
 }

@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Atingeți pentru a plăti"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: taxa procesată pentru {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Vă mulțumim pentru plata către {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} s-a abonat la {{plan.title}}",
+        "YouSubscribedTo": "V-ați abonat la {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Primiți o plată de {{displayAmount}} de la {{call 'publisher.displayName'}} prin „{{description}}”",
+        "HasBeenCharged": "Hei, este doar pentru a vă anunța că {{1}} a fost taxat cu {{2}} pentru {{3}} de către {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Vă mulțumim pentru plata pentru „{{description}}”",
+        "HavePaid": "Bună, {{1}}, aceasta este doar o confirmare rapidă că ați plătit cu succes {{2}} către {{3}} pentru {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Informatii despre comanda",
+        "PaymentMethod": "Modalitate de plată",
+        "ContactInfo": "Informatii de contact",
+        "Pay": "A plati"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Invitație acceptată de {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} a introdus prenumele",
+        "Streams_user_lastname": "{{invitedUserName}} a introdus numele de familie",
+        "Streams_user_icon": "{{invitedUserName}} pictograma introdusă",
+        "Places_user_location": "{{invitedUserName}} a introdus locația",
+        "Streams_greeting": "{{invitedUserName}} a introdus mesajul de întâmpinare",
+        "YouHaveCreditsToStart": "Aveți {{amount}} credite pentru a începe",
+        "PaymentFor": "Plată pentru „{{1}}”",
+        "PaymentTo": "Plată către {{1}}",
+        "PaymentToUser": "Plată către {{toUserName}}",
+        "CreatePaidStream": "pentru crearea {{toStreamName}}",
+        "JoinedPaidStream": "pentru rezervare în „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> ”",
+        "CreatedCommunity": "pentru crearea comunității „{{communityId}}”",
+        "LeftPaidStream": "ca rambursare a rezervării în „ <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> ”",
+        "BoughtCredits": "Achiziționat {{amount}} credite",
+        "BonusCredits": "{{amount}} credite bonus",
+        "BuyAmountCredits": "Cumpărați {{amount}} credite",
+        "WatchClip": "A câștigat {{amount}} credite pentru vizionarea {{fromStreamTitle}}",
+        "MissingCredits": "Credite lipsă",
+        "YouMissingCredits": "Aveți nevoie de {{amount}} credite suplimentare pentru a continua.",
+        "BuyCredits": "Cumpărați credite",
+        "BuyBonus": "Cumpărând {{amount}} credite simultan, va duce la un bonus de {{bonus}} credite.",
+        "Buy": "Cumpără",
+        "PurchaseCredits": "Cumpărați credite",
+        "Credits": "credite",
+        "ErrorInvalidAmount": "Suma nevalidă",
+        "ErrorInvalidCurrency": "Din păcate, nu acceptăm încă moneda {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} credite",
+            "BonusCredits": "{{amount}} credite"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
+        "Date": "Data",
+        "Amount": "Cantitate",
+        "Description": "Descriere",
         "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "To": "la",
+        "From": "din",
+        "SeeHistory": "Vedeți istoricul plăților pentru {{1}}",
+        "HistoryEmpty": "Nu aveți încă date",
+        "PaymentFor": "Au trimis {{amount}} credite",
+        "PaymentTo": "Au trimis {{amount}} credite",
+        "PaymentToUser": "Au trimis {{amount}} credite",
+        "CreatePaidStream": "{{amount}} credite cheltuite",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ați câștigat {{amount}} credite",
+            "-": "{{amount}} credite cheltuite"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Ați câștigat {{amount}} credite",
+            "-": "{{amount}} credite cheltuite"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "A primit {{amount}} credite",
+            "-": "Au trimis {{amount}} credite"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "{{amount}} credite cheltuite",
+        "BoughtCredits": "Achiziționat {{amount}} credite",
+        "BonusCredits": "Am primit {{amount}} credite bonus",
+        "InviteAcceptedBy": "Ați câștigat {{amount}} credite",
+        "Streams_user_firstname": "Ați câștigat {{amount}} credite",
+        "Streams_user_lastname": "Ați câștigat {{amount}} credite",
+        "Streams_user_icon": "Ați câștigat {{amount}} credite",
+        "Places_user_location": "Ați câștigat {{amount}} credite",
+        "Streams_greeting": "Ați câștigat {{amount}} credite",
+        "YouHaveCreditsToStart": "Ați câștigat {{amount}} credite"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Setați informațiile de plată",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Începeți abonamentul",
+            "message": "Doriți să vă abonați la {{title}}?",
+            "ok": "O.K",
+            "cancel": "Anulare"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Card de credit sau debit",
+        "SubscribePayment": "Plata abonamentului",
+        "ImmediatePayment": "Plată imediată"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Setați informațiile de plată",
+        "BuyAmountCredits": "Cumpărați {{amount}} credite",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Fa o plata",
+            "message": "Sunteți de acord să plătiți {{symbol}}{{amount}}?",
+            "ok": "O.K",
+            "cancel": "Anulare"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "credite",
+            "description": "ține evidența creditelor și plăților"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Planul de abonament",
+            "description": "plan de abonament"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Abonament",
+            "description": "abonament"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Produs",
+            "description": "produsul care se vinde"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Serviciu",
+            "description": "serviciul fiind oferit"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Ați câștigat {{amount}} credite"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Am cumpărat {{amount}} credite"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "{{amount}} credite bonus"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "{{amount}} credite cheltuite"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Am trimis {{amount}} credite către {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "A primit {{amount}} credite de la {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Serviciu nou",
+            "TitlePlaceholder": "Titlul serviciului",
+            "PricePlaceholder": "Preț stabilit",
+            "LinkPlaceholder": "setați linkul de informații suplimentare",
+            "DescriptionPlaceholder": "Descrierea serviciului",
+            "SaveService": "Salvare serviciu",
+            "SelectRequiredParticipants": "Participanți obligatorii"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Gestionați șabloanele de servicii",
+        "ManageServices": "Gestionați Serviciile",
+        "Free": "Gratuit",
+        "OptionalContribution": "Contribuție opțională",
+        "RequiredPayment": "Plata obligatorie",
+        "AreYouSureDelete": "Sigur doriți să ștergeți acest serviciu?",
+        "AmountServicesRelated": "Există {{amount}} disponibilități legate de acest serviciu. De asemenea, vor fi eliminate."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
+        "Title": "Informații despre {{title}} NFT",
+        "Description": "Informații detaliate despre NFT",
+        "FixedBid": "Cumpără acum",
+        "CurrentBid": "Oferta curentă",
+        "StartingIn": "Incepand in",
+        "EndingIn": "Se termina in",
+        "CreateNFT": "Creați un NFT",
+        "TitlePlaceholder": "Dați-vă un titlu NFT",
+        "DescriptionPlaceholder": "Dă-ți NFT o descriere",
+        "CreateYourNFT": "Creați-vă NFT",
+        "Royalties": "Redevențe",
+        "RoyaltyPlaceholder": "Opțional. Suma plătită creatorului înainte de transfer.",
+        "ExpirationDate": "Data expirării",
+        "StartingDate": "Data de început",
+        "BidsBelowThisAmount": "Ofertele sub această sumă nu vor fi permise",
+        "MinimumBid": "Oferta minima",
+        "Price": "Preț",
+        "Owner": "Proprietar",
+        "SelectCategory": "Selecteaza categoria",
+        "Day": "Zi",
+        "Days": "Zile",
+        "Hour": "Ora",
+        "Hours": "Ore",
+        "Minute": "Minut",
+        "Minutes": "Minute",
+        "Second": "Al doilea",
+        "Seconds": "secunde",
+        "SalesCreator": "din vânzări va merge către creator",
+        "Details": "Detalii",
+        "Bids": "Licite",
+        "History": "Istorie",
+        "LoremIpsum": "Lorem Ipsum este pur și simplu un text fals al industriei de tipărire și de tipărire.",
+        "PutOnSale": "Pune la vânzare",
+        "PutOffSale": "Retrageți de la vânzare",
         "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Update": "Actualizați",
+        "UpdateToken": "Token de actualizare",
+        "CreateToken": "Creați token",
+        "PlaceBid": "Plasați oferta",
+        "SoldOut": "Vândut",
+        "NftName": "Nume NFT",
+        "DescribeYourNFT": "Vă rugăm să descrieți NFT-ul dvs",
+        "NftPicture": "Imagine pentru a reprezenta NFT",
+        "NftMovie": "Film pentru a reprezenta NFT",
+        "UploadMovie": "Încărcați film",
+        "MovieSource": "Sursa filmului",
+        "UploadFile": "Incarca un fisier",
+        "PutOnMarketplace": "Pune pe piață",
+        "InstantPurchase": "Introduceți prețul pentru a permite utilizatorilor să achiziționeze instantaneu NFT-ul dvs",
+        "FixedPrice": "Preț fix",
+        "TimedAuction": "Licitație programată",
+        "OpenForBids": "Deschis pentru licitații",
+        "PriceOnePiece": "Introduceți prețul pentru o bucată",
+        "EnterMinimumBid": "Introduceți suma licitată minimă",
+        "SelectChain": "Selectați lanțul",
+        "WrongChain": "Acest NFT creat sub „{{chain}}”. Vă rugăm să utilizați acest lanț.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Importul NFT-urilor",
+            "fileNotFound": "Ne pare rău, fișierul CSV nu a fost găsit.",
+            "fileEmpty": "Ne pare rău, fișierul CSV este gol.",
+            "userIdNotFound": "utilizator există, dar ID este gol",
+            "errorLine": "linie {{1}}",
+            "fieldNotFound": "Câmpul obligatoriu „{{1}}” nu a fost găsit",
+            "taskStreamInvalid": "flux de activități nevalid",
+            "instructionsEmpty": "instrucțiunile fluxului de activități sunt goale",
+            "complete": "Complet",
+            "activateUsers": "trimite mesaj de activare utilizatorilor?",
+            "importProgress": "Progres",
+            "importOptions": "Opțiuni",
+            "sampleCSV": "Descărcați exemplu de CSV",
+            "fileLabel": "Încărcați foaie de calcul:",
+            "errorsTitle": "Au apărut erori"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtrați după colecțiile NFT",
+                "ShowNFTCollection": "Afișați colecția NFT în...",
+                "AllCollections": "Toate colecțiile"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Toți autorii",
+                "AllUsers": "Toata lumea",
+                "FilterByAuthors": "Filtrați după autori"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Înapoi la colecție"
     }
 }

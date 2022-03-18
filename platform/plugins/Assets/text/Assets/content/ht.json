@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tape pou peye"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: chaj trete pou {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Mèsi pou peman ou bay {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abònman nan {{plan.title}}",
+        "YouSubscribedTo": "Ou te abònman nan {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Ou resevwa peman {{displayAmount}} nan men {{call 'publisher.displayName'}} pa &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hey, sa a se jis pou fè w konnen {{1}} yo te chaje {{2}} pou {{3}} pa {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Mèsi pou peman ou pou &quot;{{description}}&quot;",
+        "HavePaid": "Hey {{1}}, sa a se jis yon konfimasyon rapid ke ou te byen peye {{2}} {{3}} pou {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Enfòmasyon sou lòd",
+        "PaymentMethod": "Metòd peman",
+        "ContactInfo": "Enfòmasyon pou kontakte",
+        "Pay": "Peye"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Envitasyon aksepte pa {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} te antre premye non",
+        "Streams_user_lastname": "{{invitedUserName}} te antre siyati",
+        "Streams_user_icon": "{{invitedUserName}} te antre nan icon",
+        "Places_user_location": "{{invitedUserName}} antre kote",
+        "Streams_greeting": "{{invitedUserName}} te antre nan bonjou",
+        "YouHaveCreditsToStart": "Ou gen {{amount}} kredi pou kòmanse",
+        "PaymentFor": "Peman pou &quot;{{1}}&quot;",
+        "PaymentTo": "Peman bay {{1}}",
+        "PaymentToUser": "Peman bay {{toUserName}}",
+        "CreatePaidStream": "pou kreye {{toStreamName}}",
+        "JoinedPaidStream": "pou rezèvasyon nan &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "pou kreye kominote &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kòm ranbousman rezèvasyon nan &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Te achte {{amount}} kredi",
+        "BonusCredits": "Bonis {{amount}} kredi",
+        "BuyAmountCredits": "Achte {{amount}} kredi",
+        "WatchClip": "Te touche {{amount}} kredi pou gade {{fromStreamTitle}}",
+        "MissingCredits": "Kredi ki manke yo",
+        "YouMissingCredits": "Ou bezwen yon lòt {{amount}} kredi pou kontinye.",
+        "BuyCredits": "Achte kredi",
+        "BuyBonus": "Achte {{amount}} kredi alafwa, sa ap mennen nan bonis {{bonus}} kredi.",
+        "Buy": "Achte",
+        "PurchaseCredits": "Achte Kredi",
+        "Credits": "Kredi",
+        "ErrorInvalidAmount": "Kantite lajan pa valab",
+        "ErrorInvalidCurrency": "Malerezman nou poko sipòte lajan {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} kredi",
+            "BonusCredits": "{{amount}} kredi"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Dat",
+        "Amount": "Kantite lajan",
+        "Description": "Deskripsyon",
+        "Client": "Kliyan",
+        "To": "pou",
+        "From": "soti nan",
+        "SeeHistory": "Gade istwa peman pou {{1}}",
+        "HistoryEmpty": "Ou pa gen okenn done ankò",
+        "PaymentFor": "Te voye {{amount}} kredi",
+        "PaymentTo": "Te voye {{amount}} kredi",
+        "PaymentToUser": "Te voye {{amount}} kredi",
+        "CreatePaidStream": "Te depanse {{amount}} kredi",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Te touche {{amount}} kredi",
+            "-": "Te depanse {{amount}} kredi"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Te touche {{amount}} kredi",
+            "-": "Te depanse {{amount}} kredi"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Te resevwa {{amount}} kredi",
+            "-": "Te voye {{amount}} kredi"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Te depanse {{amount}} kredi",
+        "BoughtCredits": "Te achte {{amount}} kredi",
+        "BonusCredits": "Gen bonis {{amount}} kredi",
+        "InviteAcceptedBy": "Te touche {{amount}} kredi",
+        "Streams_user_firstname": "Te touche {{amount}} kredi",
+        "Streams_user_lastname": "Te touche {{amount}} kredi",
+        "Streams_user_icon": "Te touche {{amount}} kredi",
+        "Places_user_location": "Te touche {{amount}} kredi",
+        "Streams_greeting": "Te touche {{amount}} kredi",
+        "YouHaveCreditsToStart": "Te touche {{amount}} kredi"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Mete Enfòmasyon sou Peman",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Kòmanse abònman",
+            "message": "Èske w ta renmen abònman ak {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Anile"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kat kredi oswa debi",
+        "SubscribePayment": "Abònman Peman",
+        "ImmediatePayment": "Peman Imedya"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Mete Enfòmasyon sou Peman",
+        "BuyAmountCredits": "Achte {{amount}} kredi",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Fè yon Peman",
+            "message": "Èske w dakò peye {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Anile"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Kredi",
+            "description": "kenbe tras kredi ak peman yo"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Plan abònman",
+            "description": "plan abònman"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Abònman",
+            "description": "abònman"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Pwodwi",
+            "description": "pwodwi yo te vann"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Sèvis",
+            "description": "sèvis y ap ofri"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Te touche {{amount}} kredi"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Te achte {{amount}} kredi"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonis {{amount}} kredi"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Te depanse {{amount}} kredi"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Voye {{amount}} kredi bay {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Te resevwa {{amount}} kredi nan men {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Nouvo Sèvis",
+            "TitlePlaceholder": "Tit sèvis",
+            "PricePlaceholder": "Mete pri",
+            "LinkPlaceholder": "mete lyen enfòmasyon adisyonèl",
+            "DescriptionPlaceholder": "Deskripsyon sèvis",
+            "SaveService": "Sove Sèvis",
+            "SelectRequiredParticipants": "Patisipan obligatwa yo"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Jere modèl sèvis yo",
+        "ManageServices": "Jere Sèvis",
+        "Free": "Gratis",
+        "OptionalContribution": "Kontribisyon si ou vle",
+        "RequiredPayment": "Peman obligatwa",
+        "AreYouSureDelete": "Èske w sèten ou vle efase sèvis sa a?",
+        "AmountServicesRelated": "Gen {{amount}} disponiblite ki gen rapò ak sèvis sa a. Yo pral retire tou."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Enfòmasyon sou {{title}} NFT",
+        "Description": "Enfòmasyon detaye sou NFT",
+        "FixedBid": "Achte kounya",
+        "CurrentBid": "Òf aktyèl la",
+        "StartingIn": "Kòmanse nan",
+        "EndingIn": "Fini nan",
+        "CreateNFT": "Kreye yon NFT",
+        "TitlePlaceholder": "Bay NFT ou yon tit",
+        "DescriptionPlaceholder": "Bay NFT ou yon deskripsyon",
+        "CreateYourNFT": "Kreye NFT ou",
+        "Royalties": "Redevans",
+        "RoyaltyPlaceholder": "Si ou vle. Kantite lajan yo peye bay kreyatè anvan transfè.",
+        "ExpirationDate": "Dat ekspirasyon",
+        "StartingDate": "Dat Kòmanse",
+        "BidsBelowThisAmount": "Yo p ap pèmèt òf ki pi ba yo",
+        "MinimumBid": "Òf minimòm",
+        "Price": "Pri",
+        "Owner": "Pwopriyetè",
+        "SelectCategory": "Chwazi kategori",
+        "Day": "Jounen",
+        "Days": "Jou",
+        "Hour": "Lè",
+        "Hours": "Orè",
+        "Minute": "Minit",
+        "Minutes": "Minit",
+        "Second": "Dezyèmman",
+        "Seconds": "Segond",
+        "SalesCreator": "nan lavant pral ale nan kreyatè",
+        "Details": "Detay yo",
+        "Bids": "Òf",
+        "History": "Istwa",
+        "LoremIpsum": "Lorem Ipsum se tou senpleman enbesil tèks nan endistri enprime ak konpoze.",
+        "PutOnSale": "Mete sou vant",
+        "PutOffSale": "Retire nan vant",
+        "Transfer": "Transfè",
+        "Update": "Mizajou",
+        "UpdateToken": "Mizajou Token",
+        "CreateToken": "Kreye siy",
+        "PlaceBid": "Bay yon pri",
+        "SoldOut": "Vann",
+        "NftName": "Non NFT",
+        "DescribeYourNFT": "Tanpri dekri NFT ou a",
+        "NftPicture": "Foto ki reprezante NFT",
+        "NftMovie": "Fim pou reprezante NFT",
+        "UploadMovie": "Telechaje fim",
+        "MovieSource": "Sous fim",
+        "UploadFile": "Telechaje yon fichye",
+        "PutOnMarketplace": "Mete sou mache",
+        "InstantPurchase": "Antre pri pou pèmèt itilizatè yo achte NFT ou a imedyatman",
+        "FixedPrice": "Pri fiks",
+        "TimedAuction": "Kwonometre vann piblik",
+        "OpenForBids": "Louvri pou òf",
+        "PriceOnePiece": "Antre pri pou yon sèl pyès",
+        "EnterMinimumBid": "Antre òf minimòm",
+        "SelectChain": "Chwazi chèn",
+        "WrongChain": "NFT sa a te kreye anba &quot;{{chain}}&quot;. Tanpri itilize chèn sa a.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Enpòte NFT yo",
+            "fileNotFound": "Padon, dosye CSV pa jwenn.",
+            "fileEmpty": "Padon, dosye CSV vid.",
+            "userIdNotFound": "itilizatè egziste men id vid",
+            "errorLine": "liy {{1}}",
+            "fieldNotFound": "Yo pa jwenn jaden obligatwa &quot;{{1}}&quot;.",
+            "taskStreamInvalid": "kouran travay pa valab",
+            "instructionsEmpty": "enstriksyon kouran travay yo vid",
+            "complete": "Ranpli",
+            "activateUsers": "voye mesaj aktivasyon bay itilizatè yo?",
+            "importProgress": "Pwogrè",
+            "importOptions": "Opsyon",
+            "sampleCSV": "Telechaje echantiyon CSV",
+            "fileLabel": "Telechaje Fèy kalkil:",
+            "errorsTitle": "Erè ki te fèt"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtre pa Koleksyon NFT",
+                "ShowNFTCollection": "Montre koleksyon NFT nan...",
+                "AllCollections": "Tout Koleksyon"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Tout Otè",
+                "AllUsers": "Tout moun",
+                "FilterByAuthors": "Filtre pa Otè"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Retounen nan Koleksyon"
     }
 }

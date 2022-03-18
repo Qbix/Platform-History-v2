@@ -20,14 +20,14 @@ function Assets_NFT_response_setLikes ($params) {
 		$UsersVote->remove();
 		return array(
 			"res" => false,
-			"likes" => Assets::getLikes($publisherId, $streamName)
+			"likes" => Streams_Stream::countLikes($publisherId, $streamName)
 		);
 	} else {
 		$UsersVote->value = 1;
 		$UsersVote->save();
 		return array(
 			"res" => true,
-			"likes" => Assets::getLikes($publisherId, $streamName)
+			"likes" => Streams_Stream::countLikes($publisherId, $streamName)
 		);
 	}
 }

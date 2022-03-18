@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "విశ్లేషణలు",
+        "Daily": "రోజువారీ",
+        "Weekly": "వారానికోసారి",
+        "Monthly": "నెలవారీ",
+        "Application": "అప్లికేషన్",
+        "Pages": "పేజీలు",
+        "Services": "సేవలు",
+        "Faq": "ఎఫ్ ఎ క్యూ",
+        "WeekDays": "వారం రోజులు"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "ప్రవేశించండి",
+        "LogOut": "లాగ్ అవుట్"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "{{1}}ని నా ప్రాథమిక {{2}}గా సెట్ చేయి",
+        "ChoosePassPhrase": "లాగిన్ చేయడానికి <strong>పాస్ పదబంధాన్ని<\/strong> ఎంచుకోండి.<br> మీరు సులభంగా గుర్తుంచుకునే కొన్ని పదాలతో కూడిన సాధారణ పదబంధం.",
+        "ChoosePassPhraseSeeSuggestions": "మీ ఖాతాను రక్షించడానికి మంచి <strong>పాస్ పదబంధాన్ని<\/strong> ఎంచుకోండి. కొన్ని ఆలోచనల కోసం సూచనలను చూడండి.",
+        "LogOutAndTryAgain": "లాగ్ అవుట్ చేసి మళ్లీ ప్రయత్నించండి",
+        "IfYouFeel": "ఏదైనా తప్పు జరిగిందని మీకు అనిపిస్తే, మీరు చేయవచ్చు",
+        "SetIdentifierButtonTitle": "మళ్లీ మొదలెట్టు"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "ప్రారంభించడానికి"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "ప్రారంభించడానికి",
+        "Authorize": "అధికారం ఇవ్వండి",
+        "TermsLabel": "నేను చదివి అంగీకరించాను<br> {{link}}కి",
+        "TermsTitle": "నిబంధనలు",
+        "mustAgree": "ముందుగా మీరు నిబంధనలను అంగీకరించాలి."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "నేను {{link}}ని అంగీకరిస్తున్నాను",
+        "TermsTitle": "నిబంధనలు"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "అనుమతి",
+        "prompt": "మీరు నోటిఫికేషన్‌లను ప్రారంభించాలనుకుంటున్నారా? మీరు శ్రద్ధ వహించే విషయాల గురించి మీరు నిజ-సమయ నవీకరణలను అందుకుంటారు.",
+        "yes": "అవును",
+        "no": "సంఖ్య",
+        "WelcomePleaseVerifyEmail": "స్వాగతం! దయచేసి మీ ఇమెయిల్ చిరునామాను ధృవీకరించండి.",
+        "WelcomeVerifyEmail": "స్వాగతం! మీ ఈ - మెయిల్ చిరునామాను తనిఖీ చేసుకోండి.",
+        "ForgetPass": "హే, మీరు మీ పాస్‌ఫ్రేజ్‌ని మర్చిపోయారా?",
+        "PassphraseSaved": "మీ పాస్ పదబంధం సేవ్ చేయబడింది.",
+        "IdentifierActivated": "మీ {{type}} యాక్టివేట్ చేయబడింది.",
+        "CompletedActivation": "మీరు వినియోగదారు సక్రియాన్ని పూర్తి చేసారు.",
+        "CompletedActivationLogIn": "మీరు వినియోగదారు సక్రియాన్ని పూర్తి చేసారు. ఇప్పుడు లాగిన్ అవ్వడానికి ప్రయత్నించండి."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "పరిచయాన్ని ఎంచుకోండి",
+            "CreateAccount": "+ కొత్త పరిచయం",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create కనుగొనబడలేదు",
+            "SearchByName": "పేరు ద్వారా శోధించండి",
+            "EmptyContacts": "పరిచయాలు కనుగొనబడలేదు..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "{{displayName}} పరిచయాన్ని ఎంచుకోండి"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "దయచేసి లేబుల్‌ని ఎంచుకోండి.",
+        "inviteUser": "వినియోగదారులను ఆహ్వానించండి",
+        "selectRole": "పాత్రను ఎంచుకోండి",
+        "inviteRole": "ఆహ్వానించండి {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "చెల్లని భాష ఎంచుకోబడింది",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "స్వాగతం",
+        "directions": "ఖాతాను సృష్టించండి లేదా లాగిన్ చేయండి.",
+        "directionsNoRegister": "మీకు ఖాతా ఉంటే లాగిన్ చేయండి.",
+        "goButton": "వెళ్ళండి",
+        "passphrase": "మీ పాస్ పదబంధాన్ని నమోదు చేయండి:",
+        "loginButton": "ప్రారంభించడానికి",
+        "registerButton": "ప్రారంభించడానికి",
+        "resendButton": "యాక్టివేషన్ మెసేజ్ పంపండి",
+        "forgot": "మరిచిపోయారా?",
+        "resendConfirm": "మీరు మీ పాస్‌ఫ్రేజ్‌ని రీసెట్ చేయడానికి సందేశాన్ని పంపాలనుకుంటున్నారా?",
+        "resendSuccess": "మీ పాస్‌ఫ్రేజ్‌ని రీసెట్ చేయడానికి సందేశం కోసం తనిఖీ చేయండి",
+        "resendClose": "దగ్గరగా",
+        "noPassphrase": "మీరు లాగిన్ చేయడానికి ముందు, మీరు మీ యాక్టివేషన్ మెసేజ్‌లోని లింక్‌ను క్లిక్ చేయడం ద్వారా తప్పనిసరిగా పాస్ పదబంధాన్ని సెట్ చేయాలి.",
+        "notVerified": "లాగిన్ చేయడానికి మీరు తప్పనిసరిగా ఒక యాక్టివేషన్ సందేశాన్ని పంపాలి.",
+        "emailExists": "మీరు ఇంతకు ముందు ఈ ఇమెయిల్‌తో నమోదు చేసుకోవడానికి ప్రయత్నించారా? అలా అయితే, మీ ఖాతాను సక్రియం చేయడానికి మీ ఇన్‌బాక్స్‌ని తనిఖీ చేయండి. <a href='#resend' class='Q_button Users_activation_resend'>సందేశాన్ని మళ్లీ పంపడానికి క్లిక్ చేయండి<\/a>",
+        "mobileExists": "మీరు ఇంతకు ముందు ఈ మొబైల్ నంబర్‌తో నమోదు చేసుకోవడానికి ప్రయత్నించారా? అలా అయితే, మీ ఖాతాను సక్రియం చేయడానికి మీ SMSని తనిఖీ చేయండి. <a href='#resend' class='Q_button Users_activation_resend'>సందేశాన్ని మళ్లీ పంపడానికి క్లిక్ చేయండి<\/a>",
+        "usingOther": "లేదా మీరు చెయ్యగలరు",
+        "prompt": "వినియోగదారు పేరును ఎంచుకోండి:",
+        "newUser": "లేదా దిగువన కొత్త ఖాతాను సృష్టించండి",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "మీ మొబైల్ # లేదా ఇమెయిల్",
+            "mobile": "మీ మొబైల్ #ని నమోదు చేయండి",
+            "email": "మీ ఈ మెయిల్ వివరాలని నమోదు చేయండి",
+            "username": "అక్షరాలు మరియు సంఖ్యలను మాత్రమే ఉపయోగించండి"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "సేవా నిబంధనలను ఆమోదించాలా?",
+        "facebookNoEmail": "మీ facebook ఖాతాలో ధృవీకరించబడిన ఇమెయిల్ చిరునామా లేదు. కేవలం స్థానిక మార్గంలో లాగిన్ చేయండి.",
+        "picTooltip": "మీరు ఈ చిత్రాన్ని తర్వాత మార్చవచ్చు",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "{{timestamp}} సమయంలో {{host}}కి లాగిన్ చేయండి",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "వాలెట్‌కి దారి మళ్లిస్తోంది",
+                "content": "మీరు ఈ డైలాగ్‌ని మూసివేసిన తర్వాత, మీరు మీ వాలెట్‌కి తీసుకెళ్లబడతారు. మీరు సైన్ ఇన్ చేసిన తర్వాత, ఈ పేజీకి తిరిగి వెళ్లండి."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "లాగిన్ చేయడానికి ఒక మార్గాన్ని జోడించండి",
+        "sendMessage": "యాక్టివేషన్ మెసేజ్ పంపండి",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "మీ మొబైల్ # లేదా ఇమెయిల్‌ని నమోదు చేయండి",
+            "mobile": "మీ మొబైల్ నెంబర్ ను ఎంటర్ చేయండి",
+            "email": "మీ ఈ మెయిల్ వివరాలని నమోదు చేయండి",
+            "username": "వినియోగదారు పేరు"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} ఖాతా",
+        "areUsing": "మీరు {{platform}}ని ఉపయోగిస్తున్నారు",
+        "noLongerUsing": "మీరు ఇప్పుడు {{platform}}కి కనెక్ట్ చేయబడరు",
+        "doAuth": "ఈ ఖాతాతో లాగిన్ చేయండి",
+        "doSwitch": "ఈ ఖాతాకు మారండి"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "యజమాని",
+        "Admin": "అడ్మిన్",
+        "Member": "సభ్యుడు",
+        "Guest": "అతిథి",
+        "Host": "హోస్ట్"
     }
 }

@@ -2,16 +2,16 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link za promicanje",
+                "link": "Link za promociju",
                 "startDate": "Početni datum",
                 "startTime": "Vrijeme početka",
                 "endDate": "Datum završetka",
                 "endTime": "Vrijeme završetka",
-                "budget": "budžet"
+                "budget": "Proračun"
             },
             "interests": {
                 "Title": "Filtriraj po interesu",
-                "FilterInterests": "Počnite tipkati interes ..."
+                "FilterInterests": "Počnite upisivati interes..."
             },
             "Interest": "Interes",
             "Location": "Mjesto"
@@ -20,54 +20,54 @@
     "webpage": {
         "composer": {
             "Go": "Ići",
-            "PasteLinkHere": "Ovdje zalijepite vezu",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "pretraživati",
             "WriteToStartConversation": "Napišite svoje misli kako biste započeli razgovor",
-            "StartConversation": "Pokreni razgovor",
+            "StartConversation": "Započni razgovor",
             "GotoConversation": "Idite na Razgovor",
-            "reset": "Resetirati",
+            "reset": "Resetiraj",
             "edit": "Uredi",
             "link": "Veza",
-            "setUrl": "Postavi URL",
+            "setUrl": "Postavite URL",
             "save": "Uštedjeti",
-            "setClip": "Izrežite isječak",
+            "setClip": "Izrezani isječak",
             "invalidURL": "Neispravan URL"
         },
-        "FileTooLarge": "Datoteka je prevelika za predmemoriranje. Maksimalna veličina datoteke {{size}}",
-        "InvalidPDF": "Datoteka nije važeći PDF",
-        "StartTypingTitleOrKeywords": "Počnite tipkati naslov ili ključne riječi ..."
+        "FileTooLarge": "Datoteka je prevelika za predmemoriju. Maksimalna veličina datoteke {{size}}",
+        "InvalidPDF": "Datoteka nije valjani PDF",
+        "StartTypingTitleOrKeywords": "Počnite upisivati naslov ili ključne riječi..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML dokument koji različiti korisnici mogu pregledati i uređivati",
+            "description": "HTML dokument koji različiti korisnici mogu pregledavati i uređivati",
             "displayType": "Članak"
         },
         "Websites\/slide": {
-            "description": "Slajd u prezentaciji, može sadržavati HTML, audio itd.",
-            "displayType": "klizanje"
+            "description": "Slajd u prezentaciji, može uključivati HTML, audio itd.",
+            "displayType": "Slajd"
         },
         "Websites\/presentation": {
-            "description": "Prezentacija koja se sastoji od različitih dijapozitiva",
-            "displayType": "prezentacija"
+            "description": "Prezentacija koja se sastoji od raznih slajdova",
+            "displayType": "Prezentacija"
         },
         "Websites\/advert\/unit": {
-            "description": "Reklamna jedinica na web mjestu",
+            "description": "Oglasna jedinica na web stranici",
             "displayType": "Oglasna jedinica"
         },
         "Websites\/advert\/placement": {
-            "description": "Način grupiranja reklamnih jedinica pod nazivom",
-            "displayType": "Položaj oglasa"
+            "description": "Način grupiranja oglasnih jedinica pod imenom",
+            "displayType": "Postavljanje oglasa"
         },
         "Websites\/advert\/creative": {
-            "description": "Sadržaj za oglas",
-            "displayType": "Oglas oglas"
+            "description": "Sadržaj za reklamu",
+            "displayType": "Oglasna kreativa"
         },
         "Websites\/advert\/campaign": {
             "description": "Reklamna kampanja",
             "displayType": "Oglasna kampanja"
         },
         "Websites\/webpage": {
-            "description": "Predstavlja web mjesto čiji su metapodaci zapisani",
+            "description": "Predstavlja web-mjesto čiji su metapodaci očišćeni",
             "displayType": "Web stranica"
         }
     }

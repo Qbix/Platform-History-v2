@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Sese {{status}} a&#39;o talosaga",
+        "canceled": "Talosaga ua faaleaogaina",
+        "500": "Sese server i totonu",
+        "404": "Le maua: {{url}}",
+        "501": "Talosaga ua motusia"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Ua uma le sauniga. Toe faafou le itulau ma toe taumafai.",
+        "otherDomain": "Talosaga fa&#39;asaga i le itu i fafo ile {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
+        "click": "kiliki",
+        "yes": "ioe",
+        "no": "leai",
         "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "Click": "Kiliki",
+        "Yes": "ioe",
+        "No": "leai"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Ianuari",
+        "2": "Fepuari",
+        "3": "Mati",
+        "4": "Apelila",
+        "5": "Mae",
+        "6": "Iuni",
+        "7": "Iuli",
+        "8": "Aukuso",
+        "9": "Setema",
+        "10": "Okitopa",
+        "11": "Novema",
+        "12": "Tesema"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
+        "second": "tulaga lua",
+        "seconds": "sekone",
         "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "minutes": "minute",
+        "hour": "itula",
+        "day": "aso",
+        "days": "aso",
+        "week": "vaiaso",
+        "weeks": "vaiaso",
+        "month": "masina",
+        "months": "masina",
+        "year": "tausaga",
+        "years": "tausaga",
+        "decade": "sefulu tausaga",
+        "decades": "sefulu tausaga",
+        "century": "seneturi",
+        "centuries": "seneturi"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Fa&#39;amolemole fa&#39;ataga le avanoa i lau masini faaleotele leo",
+        "record": "Faamaumauga",
+        "recording": "Faamaumauga",
+        "remains": "tumau",
+        "maximum": "maualuga",
+        "playing": "Ta&#39;alo",
+        "recorded": "Faamauina",
+        "clip": "kilipa",
+        "discard": "lafoai",
+        "encoding": "Fa&#39;ailoga"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "kilipa",
+        "errorNoSource": "Leai se puna vitio",
+        "SkipAfter": "Fa&#39;ase&#39;e pe a uma",
+        "Skip": "Fa&#39;ase&#39;e"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "kilipa",
+        "errorNoSource": "Leai se puna pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Seti le Clip Amata",
+        "ClipStart": "Clip Amata",
+        "SetClipEnd": "Seti le Fa&#39;ai&#39;uga",
+        "ClipEnd": "Kilipi Fa&#39;ai&#39;uga",
+        "StartMoreEnd": "Tulaga amata e le mafai ona sili atu nai lo le tulaga fa&#39;ai&#39;u",
+        "EndLessStart": "Ole tulaga fa&#39;ai&#39;u e le mafai ona la&#39;ititi nai lo le tulaga amata",
+        "WhichInvalid": "Fa&#39;amatalaga &#39;lea&#39; le aoga"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Lapata&#39;i"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Faamaonia",
+        "ok": "ioe",
+        "cancel": "leai"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Fa&#39;anatinati",
+        "ok": "Alu"
     },
     "tabs": {
-        "more": "more",
+        "more": "sili atu",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Sese faitau faila",
+        "errorType": "Fa&#39;amalie atu, ae le&#39;o lagolagoina lenei ituaiga faila",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "O le a le mea e te mana&#39;o e fai?",
+            "photo": "Pu&#39;e ata fou",
+            "library": "Filifili mai le faletusi"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Fa&#39;amolemole filifili se ata tele.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Fetuunai le tele ma le tulaga",
+            "touchscreen": "Fa&#39;aoga ou tamatamailima e fa&#39;aloma ma toso",
+            "notTouchscreen": "Fa&#39;aoga lau isumu ma le uili e fa&#39;aoso ma toso"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "anapo",
+        "lastEvening": "po mulimuli",
+        "yesterday": "ananafi",
+        "thisMorning": "i lenei taeao",
+        "today": "aso nei",
+        "tonight": "i le po nei",
+        "tomorrowMorning": "taeao taeao",
+        "tomorrow": "taeao",
+        "hoursAgo": "{{h}} itula talu ai",
+        "hourAgo": "{{h}} itula talu ai",
+        "minuteAgo": "{{m}} minute talu ai",
+        "minutesAgo": "{{m}} minute ua mavae",
+        "secondAgo": "{{s}} lona lua talu ai",
+        "secondsAgo": "{{s}} sekone talu ai",
+        "fewSecondsAgo": "sekone ua mavae",
+        "rightNow": "taimi nei",
+        "inSecond": "i {{s}} lona lua",
+        "inSeconds": "i {{s}} sekone",
+        "inMinute": "i {{m}} minute",
+        "inMinutes": "i {{m}} minute",
+        "inHour": "i {{h}} itula",
+        "inHours": "i {{h}} itula",
+        "inUnderMinute": "i lalo ole 1 minute"
     }
 }

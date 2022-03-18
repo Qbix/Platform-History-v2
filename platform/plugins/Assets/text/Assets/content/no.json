@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Trykk for å betale"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: belastning behandlet for {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Takk for betalingen til {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} abonnerte på {{plan.title}}",
+        "YouSubscribedTo": "Du har blitt abonnert på {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Du får betaling på {{displayAmount}} fra {{call 'publisher.displayName'}} med «{{description}}»",
+        "HasBeenCharged": "Hei, dette er bare for å fortelle deg at {{1}} har blitt belastet {{2}} for {{3}} av {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Takk for betalingen for «{{description}}»",
+        "HavePaid": "Hei {{1}}, dette er bare en rask bekreftelse på at du har betalt {{2}} til {{3}} for {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Info om bestilling",
+        "PaymentMethod": "Betalingsmetode",
+        "ContactInfo": "Kontaktinfo",
+        "Pay": "Betale"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Invitasjon godtatt av {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} skrev inn fornavn",
+        "Streams_user_lastname": "{{invitedUserName}} skrev inn etternavn",
+        "Streams_user_icon": "{{invitedUserName}} angitt ikon",
+        "Places_user_location": "{{invitedUserName}} anga plassering",
+        "Streams_greeting": "{{invitedUserName}} skrev inn hilsen",
+        "YouHaveCreditsToStart": "Du har {{amount}} kreditter til å begynne med",
+        "PaymentFor": "Betaling for «{{1}}»",
+        "PaymentTo": "Betaling til {{1}}",
+        "PaymentToUser": "Betaling til {{toUserName}}",
+        "CreatePaidStream": "for å lage {{toStreamName}}",
+        "JoinedPaidStream": "for reservasjon i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "for å opprette fellesskapet «{{communityId}}»",
+        "LeftPaidStream": "som reservasjonsrefusjon i &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Kjøpte {{amount}} kreditter",
+        "BonusCredits": "Bonus {{amount}} kreditter",
+        "BuyAmountCredits": "Kjøp {{amount}} kreditter",
+        "WatchClip": "Opptjente {{amount}} kreditter for å se {{fromStreamTitle}}",
+        "MissingCredits": "Manglende studiepoeng",
+        "YouMissingCredits": "Du trenger ytterligere {{amount}} kreditter for å fortsette.",
+        "BuyCredits": "Kjøp kreditter",
+        "BuyBonus": "Å kjøpe {{amount}} kreditter på en gang, vil føre til {{bonus}} kreditter bonus.",
+        "Buy": "Kjøpe",
+        "PurchaseCredits": "Kjøp kreditter",
+        "Credits": "Studiepoeng",
+        "ErrorInvalidAmount": "Beløp ugyldig",
+        "ErrorInvalidCurrency": "Dessverre støtter vi ikke valuta {{currency}} ennå",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} studiepoeng",
+            "BonusCredits": "{{amount}} studiepoeng"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Dato",
+        "Amount": "Beløp",
+        "Description": "Beskrivelse",
+        "Client": "Klient",
+        "To": "til",
+        "From": "fra",
+        "SeeHistory": "Se betalingshistorikk for {{1}}",
+        "HistoryEmpty": "Du har ingen data ennå",
+        "PaymentFor": "Sendte {{amount}} studiepoeng",
+        "PaymentTo": "Sendte {{amount}} studiepoeng",
+        "PaymentToUser": "Sendte {{amount}} studiepoeng",
+        "CreatePaidStream": "Brukte {{amount}} studiepoeng",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Opptjente {{amount}} studiepoeng",
+            "-": "Brukte {{amount}} studiepoeng"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Opptjent {{amount}} studiepoeng",
+            "-": "Brukte {{amount}} studiepoeng"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Fikk {{amount}} studiepoeng",
+            "-": "Sendte {{amount}} studiepoeng"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Brukte {{amount}} studiepoeng",
+        "BoughtCredits": "Kjøpte {{amount}} kreditter",
+        "BonusCredits": "Fikk {{amount}} bonuskreditter",
+        "InviteAcceptedBy": "Opptjent {{amount}} studiepoeng",
+        "Streams_user_firstname": "Opptjente {{amount}} studiepoeng",
+        "Streams_user_lastname": "Opptjente {{amount}} studiepoeng",
+        "Streams_user_icon": "Opptjente {{amount}} studiepoeng",
+        "Places_user_location": "Opptjente {{amount}} studiepoeng",
+        "Streams_greeting": "Opptjent {{amount}} studiepoeng",
+        "YouHaveCreditsToStart": "Opptjent {{amount}} studiepoeng"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Angi betalingsinformasjon",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "title": "Start abonnement",
+            "message": "Vil du abonnere på {{title}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Avbryt"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kreditt- eller debetkort",
+        "SubscribePayment": "Abonner Betaling",
+        "ImmediatePayment": "Umiddelbar betaling"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Angi betalingsinformasjon",
+        "BuyAmountCredits": "Kjøp {{amount}} kreditter",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
+            "title": "Gjennomføre en betaling",
+            "message": "Godtar du å betale {{symbol}}{{amount}}?",
             "ok": "OK",
-            "cancel": "Cancel"
+            "cancel": "Avbryt"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Studiepoeng",
+            "description": "holder styr på kreditter og betalinger"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Abonnementsplan",
+            "description": "abonnementsplan"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Abonnement",
+            "description": "abonnement"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Produkt",
+            "description": "produktet som selges"
         },
         "Assets\/service": {
             "displayType": "Service",
-            "description": "service being offered"
+            "description": "tjeneste som tilbys"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Opptjente {{amount}} studiepoeng"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Kjøpte {{amount}} kreditter"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} kreditter"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Brukte {{amount}} studiepoeng"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Sendte {{amount}} kreditter til {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Mottok {{amount}} kreditter fra {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Ny tjeneste",
+            "TitlePlaceholder": "Tjenestetittel",
+            "PricePlaceholder": "Sett pris",
+            "LinkPlaceholder": "angi tilleggsinformasjonslink",
+            "DescriptionPlaceholder": "Tjenestebeskrivelse",
+            "SaveService": "Lagre tjeneste",
+            "SelectRequiredParticipants": "Nødvendige deltakere"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Administrer tjenestemaler",
+        "ManageServices": "Administrer tjenester",
+        "Free": "Gratis",
+        "OptionalContribution": "Valgfritt bidrag",
+        "RequiredPayment": "Påkrevd betaling",
+        "AreYouSureDelete": "Er du sikker på at du vil slette denne tjenesten?",
+        "AmountServicesRelated": "Det er {{amount}} tilgjengeligheter knyttet til denne tjenesten. De vil også bli fjernet."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
+        "Title": "Informasjon om {{title}} NFT",
+        "Description": "Detaljert informasjon om NFT",
+        "FixedBid": "Kjøp nå",
+        "CurrentBid": "Nåværende bud",
+        "StartingIn": "Starter i",
+        "EndingIn": "Slutter om",
+        "CreateNFT": "Lag en NFT",
+        "TitlePlaceholder": "Gi din NFT en tittel",
+        "DescriptionPlaceholder": "Gi din NFT en beskrivelse",
+        "CreateYourNFT": "Lag din NFT",
         "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "RoyaltyPlaceholder": "Valgfri. Beløp betalt til skaperen før overføring.",
+        "ExpirationDate": "Utløpsdato",
+        "StartingDate": "Startdato",
+        "BidsBelowThisAmount": "Bud under dette beløpet tillates ikke",
+        "MinimumBid": "Minimumsbud",
+        "Price": "Pris",
+        "Owner": "Eieren",
+        "SelectCategory": "Velg kategori",
+        "Day": "Dag",
+        "Days": "Dager",
+        "Hour": "Time",
+        "Hours": "Timer",
+        "Minute": "Minutt",
+        "Minutes": "Minutter",
+        "Second": "Sekund",
+        "Seconds": "Sekunder",
+        "SalesCreator": "av salget vil gå til skaperen",
+        "Details": "Detaljer",
+        "Bids": "Bud",
+        "History": "Historie",
+        "LoremIpsum": "Lorem Ipsum er rett og slett en dummy tekst fra trykkeri- og setteindustrien.",
+        "PutOnSale": "Sett på salg",
+        "PutOffSale": "Trekk fra salg",
+        "Transfer": "Overføre",
+        "Update": "Oppdater",
+        "UpdateToken": "Oppdater token",
+        "CreateToken": "Opprett token",
+        "PlaceBid": "Gi bud",
+        "SoldOut": "Solgt",
+        "NftName": "NFT navn",
+        "DescribeYourNFT": "Vennligst beskriv din NFT",
+        "NftPicture": "Bilde for å representere NFT",
+        "NftMovie": "Film for å representere NFT",
+        "UploadMovie": "Last opp film",
+        "MovieSource": "Filmkilde",
+        "UploadFile": "Last opp en fil",
+        "PutOnMarketplace": "Sett på markedsplassen",
+        "InstantPurchase": "Angi pris for å la brukere kjøpe din NFT umiddelbart",
+        "FixedPrice": "Fast pris",
+        "TimedAuction": "Tidsbestemt auksjon",
+        "OpenForBids": "Åpen for bud",
+        "PriceOnePiece": "Oppgi pris for ett stykke",
+        "EnterMinimumBid": "Angi minimumsbud",
+        "SelectChain": "Velg kjede",
+        "WrongChain": "Denne NFT opprettet under «{{chain}}». Vennligst bruk denne kjeden.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Importerer NFT-er",
+            "fileNotFound": "Beklager, CSV-filen ble ikke funnet.",
+            "fileEmpty": "Beklager, CSV-filen er tom.",
+            "userIdNotFound": "brukeren eksisterer, men ID-en er tom",
+            "errorLine": "linje {{1}}",
+            "fieldNotFound": "Det obligatoriske feltet «{{1}}» ble ikke funnet",
+            "taskStreamInvalid": "oppgavestrømmen er ugyldig",
+            "instructionsEmpty": "oppgavestrøminstruksjonene er tomme",
+            "complete": "Fullstendig",
+            "activateUsers": "sende aktiveringsmelding til brukere?",
+            "importProgress": "Framgang",
+            "importOptions": "Alternativer",
+            "sampleCSV": "Last ned eksempel CSV",
+            "fileLabel": "Last opp regneark:",
+            "errorsTitle": "Det oppsto feil"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtrer etter NFT-samlinger",
+                "ShowNFTCollection": "Vis NFT-samling i ...",
+                "AllCollections": "Alle samlinger"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Alle forfattere",
+                "AllUsers": "Alle sammen",
+                "FilterByAuthors": "Filtrer etter forfattere"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Tilbake til samlingen"
     }
 }

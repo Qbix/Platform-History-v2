@@ -1,88 +1,88 @@
 {
-    "LatLng": "({{1}} lat, {{2}} lng)",
+    "LatLng": "({{1}} лат, {{2}} лнг)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "дар доираи {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "метр",
+        "meters": "метр",
+        "kilometer": "километр",
+        "kilometers": "километр",
+        "km": "км",
+        "mile": "мил",
+        "miles": "мил",
+        "mi": "мил",
+        "foot": "пои",
+        "feet": "пой",
+        "inches": "инч"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ман ба чизҳое шавқ дорам, ки дар давоми {{select}} аз",
+        "update": "Ҷойгиршавии манро навсозӣ кунед",
+        "set": "Ҷойгиршавии манро таъин кунед",
+        "prompt": "{{ClickOrTap}} дар ин ҷо ба<br> худро муқаррар кунед<br> ҷойгиршавӣ",
+        "myCurrentLocation": "Ҷойгоҳи ҳозираи ман",
+        "enterAddress": "Суроғаро ворид кунед",
+        "enterPostcode": "Лутфан индекси почта \/ индекси худро ворид кунед",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Иловаи ҷойгиршавӣ",
+            "title": "Ҷойгоҳи нав",
+            "nameYourLocation": "Ҷойгиршавии худро номбар кунед"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Ин маконро захира кунед?",
+            "message": "Оё шумо ният доред, ки дар оянда ин маконро дубора истифода баред?",
+            "ok": "Бале",
+            "cancel": "Не"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Ин маконро номбар кунед",
+            "placeholder": "Хона, кор ва ғ.",
+            "ok": "Захира кунед"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Ҷойгирро интихоб кунед"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Дар дохили ин макон ягон минтақа?",
+        "newArea": "Майдони нав",
+        "promptTitle": "Номи минтақаро ворид кунед:",
+        "absent": "Лутфан минтақаро таъин кунед",
+        "error": "Хатогӣ",
+        "exist": "Майдон аллакай вуҷуд дорад",
+        "addNewArea": "Минтақаи нав илова кунед",
+        "add": "Илова"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "маҷмӯи маконҳо",
+            "displayType": "Ҷойҳо"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Бино, макон, киштӣ, боғ ва ғайраро ифода мекунад.",
+            "displayType": "Ҷойгиршавӣ"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Минтақаро дар дохили макон, ба монанди ҳуҷра ё люкс намояндагӣ мекунад",
+            "displayType": "Майдон"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Як фаршро дар бино ё киштӣ намояндагӣ мекунад",
+            "displayType": "Ошёна"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Сутунро дар бино ё киштӣ намояндагӣ мекунад",
+            "displayType": "Сутун"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Категория барои чизҳое, ки дар масофаи муайяни геохаш ҷойгиранд",
+            "displayType": "Дар наздикии ҷойҳо"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Категория барои чизҳое, ки дар масофаи муайяни геохаш ҷойгиранд, ба манфиати мувофиқ",
+            "displayType": "Ҷойҳои таваҷҷӯҳ"
         }
     }
 }

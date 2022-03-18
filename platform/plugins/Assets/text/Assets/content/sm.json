@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tap e totogi"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tau fa&#39;agasolo mo {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Faafetai mo lau totogi ia {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} sa lesitala i {{plan.title}}",
+        "YouSubscribedTo": "Ua uma ona e lesitala i {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "E te maua le totogi o {{displayAmount}} mai {{call 'publisher.displayName'}} e le &quot;{{description}}&quot;",
+        "HasBeenCharged": "Ei, ua na&#39;o le ta&#39;u atu ia te oe {{1}} ua molia {{2}} mo {{3}} e {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Faafetai mo lau totogi mo le &quot;{{description}}&quot;",
+        "HavePaid": "Talofa {{1}}, ua na&#39;o se fa&#39;amaoniga vave ua e totogia {{2}}} ia {{3}} mo {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Fa&#39;amatalaga e uiga i oka",
+        "PaymentMethod": "Auala totogi",
+        "ContactInfo": "Fa&#39;amatalaga fa&#39;afeso&#39;ota&#39;i",
+        "Pay": "Totogi"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Na talia le valaaulia e {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} ulufale i le igoa muamua",
+        "Streams_user_lastname": "{{invitedUserName}} ulufale i le igoa faai&#39;u",
+        "Streams_user_icon": "{{invitedUserName}} fa&#39;ailoga fa&#39;ailoga",
+        "Places_user_location": "{{invitedUserName}} ulufale i le nofoaga",
+        "Streams_greeting": "{{invitedUserName}} ulufale i le faafeiloaiga",
+        "YouHaveCreditsToStart": "E iai au {{amount}} togi e amata ai",
+        "PaymentFor": "Totogi mo le &quot;{{1}}&quot;",
+        "PaymentTo": "Totogi ia {{1}}",
+        "PaymentToUser": "Totogi ia {{toUserName}}",
+        "CreatePaidStream": "mo le fatuina {{toStreamName}}",
+        "JoinedPaidStream": "mo le fa&#39;asao ile &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "mo le fa&#39;atupuina o nu&#39;u &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "e pei o le reservation refund i le &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Fa&#39;atau {{amount}} credits",
+        "BonusCredits": "Ponesi {{amount}} credits",
+        "BuyAmountCredits": "Fa&#39;atau {{amount}} credits",
+        "WatchClip": "Maua {{amount}} maka mo le matamata {{fromStreamTitle}}",
+        "MissingCredits": "Ua misi Credits",
+        "YouMissingCredits": "E te mana&#39;omia se fa&#39;aopoopo {{amount}} maka e fa&#39;agasolo ai.",
+        "BuyCredits": "Fa&#39;atau aitalafu",
+        "BuyBonus": "Fa&#39;atau {{amount}} credits i le taimi e tasi, e o&#39;o atu i {{bonus}} credits ponesi.",
+        "Buy": "Fa&#39;atau",
+        "PurchaseCredits": "Fa&#39;atauga Tupe",
+        "Credits": "Fa&#39;aaitalafu",
+        "ErrorInvalidAmount": "E le aoga le aofa&#39;i",
+        "ErrorInvalidCurrency": "Ae paga lea matou te le o lagolagoina tupe {{currency}} i le taimi nei",
         "forMessages": {
             "BoughtCredits": "{{amount}} credits",
             "BonusCredits": "{{amount}} credits"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Aso",
+        "Amount": "Aofaiga",
+        "Description": "Fa&#39;amatalaga",
+        "Client": "Tagata fa&#39;atau",
+        "To": "ia",
+        "From": "mai",
+        "SeeHistory": "Va&#39;ai tala&#39;aga totogi mo {{1}}",
+        "HistoryEmpty": "E leai sau fa&#39;amatalaga i le taimi nei",
+        "PaymentFor": "lafo {{amount}} credits",
+        "PaymentTo": "lafo {{amount}} credits",
+        "PaymentToUser": "lafo {{amount}} credits",
+        "CreatePaidStream": "Fa&#39;aalu {{amount}} maka",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Maua {{amount}} maka",
+            "-": "Fa&#39;aalu {{amount}} maka"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Maua {{amount}} maka",
+            "-": "Fa&#39;aalu {{amount}} maka"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Maua {{amount}} credits",
+            "-": "lafo {{amount}} credits"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Fa&#39;aalu {{amount}} maka",
+        "BoughtCredits": "Fa&#39;atau {{amount}} credits",
+        "BonusCredits": "Maua ponesi {{amount}} credits",
+        "InviteAcceptedBy": "Maua {{amount}} maka",
+        "Streams_user_firstname": "Maua {{amount}} maka",
+        "Streams_user_lastname": "Maua {{amount}} maka",
+        "Streams_user_icon": "Maua {{amount}} maka",
+        "Places_user_location": "Maua {{amount}} maka",
+        "Streams_greeting": "Maua {{amount}} maka",
+        "YouHaveCreditsToStart": "Maua {{amount}} maka"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Seti Fa&#39;amatalaga Totogi",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Amata le Fa&#39;asoa",
+            "message": "E te mana&#39;o e te lesitala i {{title}}?",
+            "ok": "Ua lelei",
+            "cancel": "Fa&#39;aleaogaina"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "aitalafu po&#39;o aitalafu aitalafu",
+        "SubscribePayment": "Totogi Totogi",
+        "ImmediatePayment": "Totogi vave"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Seti Fa&#39;amatalaga Totogi",
+        "BuyAmountCredits": "Fa&#39;atau {{amount}} credits",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Fai se Totogi",
+            "message": "Ete malie e totogi {{symbol}}{{amount}}?",
+            "ok": "Ua lelei",
+            "cancel": "Fa&#39;aleaogaina"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Fa&#39;aaitalafu",
+            "description": "siaki aitalafu ma totogi"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Fuafuaga Fa&#39;asoa",
+            "description": "fuafuaga tau saofaga"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Fa&#39;asoa",
+            "description": "saofaga"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Oloa",
+            "description": "oloa o lo&#39;o fa&#39;atau atu"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Auaunaga",
+            "description": "auaunaga o loo ofoina atu"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Maua {{amount}} maka"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Fa&#39;atau {{amount}} credits"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Ponesi {{amount}} credits"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Fa&#39;aalu {{amount}} maka"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Na lafo {{amount}} credits ia {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Maua {{amount}} credits mai {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Auaunaga Fou",
+            "TitlePlaceholder": "Igoa tautua",
+            "PricePlaceholder": "Seti tau",
+            "LinkPlaceholder": "seti fa&#39;amatalaga fa&#39;aopoopo so&#39;oga",
+            "DescriptionPlaceholder": "Fa&#39;amatalaga o auaunaga",
+            "SaveService": "Faasaoina Auaunaga",
+            "SelectRequiredParticipants": "Tagata Auai Manaomia"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Puleaina Au&#39;aunaga Fa&#39;ata&#39;ita&#39;iga",
+        "ManageServices": "Puleaina Auaunaga",
+        "Free": "Sa&#39;oloto",
+        "OptionalContribution": "Saofai faitalia",
+        "RequiredPayment": "Manaomia totogi",
+        "AreYouSureDelete": "E te mautinoa e te mana&#39;o e tape lenei tautua?",
+        "AmountServicesRelated": "E iai {{amount}} avanoa e feso&#39;ota&#39;i ma lea tautua. O le a aveesea foi i latou."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
+        "Title": "Fa&#39;amatalaga e uiga i {{title}} NFT",
+        "Description": "Fa&#39;amatalaga auiliili e uiga i le NFT",
+        "FixedBid": "Faatau nei",
+        "CurrentBid": "Tauofo o iai nei",
+        "StartingIn": "Amata i totonu",
+        "EndingIn": "Fa&#39;ai&#39;u i",
+        "CreateNFT": "Fausia se NFT",
+        "TitlePlaceholder": "Tu&#39;u lou igoa NFT",
+        "DescriptionPlaceholder": "Tuʻu lau NFT faʻamatalaga",
+        "CreateYourNFT": "Fausia lau NFT",
+        "Royalties": "Malo",
+        "RoyaltyPlaceholder": "Filifili. Aofa&#39;iga e totogi ile foafoa ae le&#39;i fesiitai.",
+        "ExpirationDate": "Uma le aoga",
+        "StartingDate": "Aso Amata",
+        "BidsBelowThisAmount": "O tauofo i lalo ole aofa&#39;i ole a le fa&#39;atagaina",
+        "MinimumBid": "Fa&#39;atauga maualalo",
+        "Price": "Tau",
+        "Owner": "Pule",
+        "SelectCategory": "Filifili vaega",
+        "Day": "Aso",
+        "Days": "Aso",
+        "Hour": "Itula",
+        "Hours": "Itula",
         "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Minutes": "minute",
+        "Second": "Tulaga lua",
+        "Seconds": "Sekona",
+        "SalesCreator": "o fa&#39;atauga o le a alu ile foafoa",
+        "Details": "Fa&#39;amatalaga",
+        "Bids": "Tauofoga",
+        "History": "Tala&#39;aga",
+        "LoremIpsum": "Lorem Ipsum ua na&#39;o ni tusitusiga fa&#39;atauva&#39;a o le fale lomitusi ma fa&#39;ailoga tusi.",
+        "PutOnSale": "Fa&#39;atau atu",
+        "PutOffSale": "Aveese mai le fa&#39;atau",
+        "Transfer": "Fa&#39;aliliuina",
+        "Update": "Fa&#39;afouga",
+        "UpdateToken": "Fa&#39;afouina Token",
+        "CreateToken": "Fausia Token",
+        "PlaceBid": "Tu&#39;u Tauofo",
+        "SoldOut": "Fa&#39;atau atu",
+        "NftName": "NFT igoa",
+        "DescribeYourNFT": "Fa&#39;amolemole fa&#39;amatala lau NFT",
+        "NftPicture": "Ata e fai ma sui o le NFT",
+        "NftMovie": "Ata tifaga e fai ma sui o le NFT",
+        "UploadMovie": "La&#39;u ata tifaga",
+        "MovieSource": "Punavai Ataata",
+        "UploadFile": "Tu&#39;u i luga se faila",
+        "PutOnMarketplace": "Tuu i luga o le maketi",
+        "InstantPurchase": "Ulufale tau e fa&#39;ataga ai tagata fa&#39;aoga e fa&#39;atau vave lau NFT",
+        "FixedPrice": "Tau tumau",
+        "TimedAuction": "Fa&#39;atautu&#39;i taimi",
+        "OpenForBids": "Tatala mo tauofoga",
+        "PriceOnePiece": "Tu&#39;u le tau mo le fasi pepa e tasi",
+        "EnterMinimumBid": "Ulufale i lalo ole tauofoga",
+        "SelectChain": "Filifili filifili",
+        "WrongChain": "O lenei NFT na faia i lalo o le &quot;{{chain}}&quot;. Fa&#39;amolemole fa&#39;aaoga lenei filifili.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Fa&#39;aulufale mai NFT",
+            "fileNotFound": "Fa&#39;amalie atu, e le&#39;i maua le faila CSV.",
+            "fileEmpty": "Fa&#39;amalie atu, o lo&#39;o gaogao le faila CSV.",
+            "userIdNotFound": "e iai le tagata fa&#39;aoga ae leai se id",
+            "errorLine": "laina {{1}}",
+            "fieldNotFound": "E le maua le fanua mana&#39;omia &quot;{{1}}&quot;.",
+            "taskStreamInvalid": "e le aoga le tafega o galuega",
+            "instructionsEmpty": "gaogao faatonuga alia galuega",
+            "complete": "mae&#39;a",
+            "activateUsers": "auina atu le fe&#39;au fa&#39;agaoioiga i tagata fa&#39;aoga?",
+            "importProgress": "Alualu i luma",
+            "importOptions": "Filifiliga",
+            "sampleCSV": "La&#39;u mai le Fa&#39;ata&#39;ita&#39;iga CSV",
+            "fileLabel": "La&#39;uina atu le Pepa Pepa:",
+            "errorsTitle": "Na tutupu mea sese"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filifili e ala ile NFT Collections",
+                "ShowNFTCollection": "Faaali atu le aoina o le NFT i...",
+                "AllCollections": "Aoina uma"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Tusitala uma",
+                "AllUsers": "Tagata uma",
+                "FilterByAuthors": "Filifili e Tusitala"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Toe fo&#39;i ile Aoina"
     }
 }

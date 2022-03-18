@@ -10,17 +10,17 @@
                 "budget": "Budžet"
             },
             "interests": {
-                "Title": "Filtriraj po kamati",
-                "FilterInterests": "Počnite upisivati interes ..."
+                "Title": "Filtriraj po interesu",
+                "FilterInterests": "Počnite kucati interesovanje..."
             },
-            "Interest": "Kamata",
-            "Location": "Location"
+            "Interest": "Interes",
+            "Location": "Lokacija"
         }
     },
     "webpage": {
         "composer": {
             "Go": "Idi",
-            "PasteLinkHere": "https: \/\/ ...",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Pregledaj",
             "WriteToStartConversation": "Napišite svoje misli kako biste započeli razgovor",
             "StartConversation": "Započni razgovor",
@@ -28,26 +28,26 @@
             "reset": "Resetovati",
             "edit": "Uredi",
             "link": "Veza",
-            "setUrl": "Postavi URL",
-            "save": "Save",
+            "setUrl": "Postavite URL",
+            "save": "Sačuvaj",
             "setClip": "Cut Out Clip",
             "invalidURL": "Nevažeći URL"
         },
-        "FileTooLarge": "Datoteka je prevelika za keširanje. Maksimalna veličina datoteke {{size}}",
+        "FileTooLarge": "Fajl je prevelik za keširanje. Maksimalna veličina fajla {{size}}",
         "InvalidPDF": "Datoteka nije važeći PDF",
-        "StartTypingTitleOrKeywords": "Počnite pisati naslov ili ključne riječi ..."
+        "StartTypingTitleOrKeywords": "Počnite kucati naslov ili ključne riječi..."
     },
     "types": {
         "Websites\/article": {
-            "description": "HTML dokument koji različiti korisnici mogu pregledavati i uređivati",
+            "description": "HTML dokument koji različiti korisnici mogu vidjeti i uređivati",
             "displayType": "Članak"
         },
         "Websites\/slide": {
-            "description": "Slajd u prezentaciji može uključivati HTML, audio itd.",
-            "displayType": "Slide"
+            "description": "Slajd u prezentaciji, može uključivati HTML, audio itd.",
+            "displayType": "Slajd"
         },
         "Websites\/presentation": {
-            "description": "Prezentacija koja se sastoji od različitih slajdova",
+            "description": "Prezentacija koja se sastoji od raznih slajdova",
             "displayType": "Prezentacija"
         },
         "Websites\/advert\/unit": {
@@ -55,19 +55,19 @@
             "displayType": "Oglasna jedinica"
         },
         "Websites\/advert\/placement": {
-            "description": "Način grupiranja oglasnih jedinica pod imenom",
-            "displayType": "Položaj oglasa"
+            "description": "Način grupisanja reklamnih jedinica pod imenom",
+            "displayType": "Postavljanje oglasa"
         },
         "Websites\/advert\/creative": {
-            "description": "Sadržaj za oglas",
-            "displayType": "Oglas kreativan"
+            "description": "Sadržaj za reklamu",
+            "displayType": "Oglasna kreativa"
         },
         "Websites\/advert\/campaign": {
             "description": "Reklamna kampanja",
             "displayType": "Oglasna kampanja"
         },
         "Websites\/webpage": {
-            "description": "Predstavlja web stranicu čiji su metapodaci izbrisani",
+            "description": "Predstavlja web stranicu čiji su metapodaci očišćeni",
             "displayType": "Web stranica"
         }
     }

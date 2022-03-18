@@ -4,70 +4,70 @@
             "placeholders": {
                 "link": "Sustatzeko esteka",
                 "startDate": "Hasiera data",
-                "startTime": "Hasi ordua",
-                "endDate": "Amaiera data",
-                "endTime": "Amaierako ordua",
+                "startTime": "Hasiera Ordua",
+                "endDate": "Amaiera-data",
+                "endTime": "Amaiera Ordua",
                 "budget": "Aurrekontua"
             },
             "interests": {
-                "Title": "Iragazi interesak",
-                "FilterInterests": "Interes bat idazten hasi ..."
+                "Title": "Iragazi interesen arabera",
+                "FilterInterests": "Hasi interes bat idazten..."
             },
-            "Interest": "Interes",
-            "Location": "Kokalekua"
+            "Interest": "Interesa",
+            "Location": "Kokapena"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "joan",
-            "PasteLinkHere": "Itsatsi esteka hemen",
-            "BrowseTheWeb": "arakatu",
+            "Go": "Zoaz",
+            "PasteLinkHere": "https:\/\/...",
+            "BrowseTheWeb": "Arakatu",
             "WriteToStartConversation": "Idatzi zure pentsamenduak elkarrizketa hasteko",
             "StartConversation": "Hasi elkarrizketa",
-            "GotoConversation": "Joan hizketaldia",
+            "GotoConversation": "Joan Elkarrizketara",
             "reset": "Berrezarri",
             "edit": "Editatu",
             "link": "Esteka",
             "setUrl": "Ezarri URLa",
             "save": "Gorde",
-            "setClip": "Ebaki klipa",
+            "setClip": "Moztu Clip",
             "invalidURL": "URL baliogabea"
         },
-        "FileTooLarge": "Fitxategia handiegia da cachean gordetzeko. Gehienezko fitxategiaren tamaina {{size}}",
-        "InvalidPDF": "Fitxategiak ez du baliozko PDFa",
-        "StartTypingTitleOrKeywords": "Hasi izenburua edo hitz gakoak idazten ..."
+        "FileTooLarge": "Fitxategi handiegia cachean gordetzeko. Fitxategiaren gehienezko tamaina {{size}}",
+        "InvalidPDF": "Fitxategia ez da baliozko PDF bat",
+        "StartTypingTitleOrKeywords": "Hasi izenburua edo gako-hitzak idazten..."
     },
     "types": {
         "Websites\/article": {
-            "description": "Hainbat erabiltzailek ikusi eta editatzeko HTML dokumentua",
+            "description": "Hainbat erabiltzailek ikusi eta edita dezaketen HTML dokumentua",
             "displayType": "Artikulu"
         },
         "Websites\/slide": {
-            "description": "Aurkezpen batean aurkezten den diapositiba, HTML, audio eta abar izan daitezke.",
-            "displayType": "Slide"
+            "description": "Aurkezpen bateko diapositiba bat, HTML, audioa eta abar izan ditzake.",
+            "displayType": "Diapositiba"
         },
         "Websites\/presentation": {
-            "description": "Aurkezpena hainbat diapositibaz osatuta",
-            "displayType": "aurkezpena"
+            "description": "Hainbat diapositibaz osatutako aurkezpena",
+            "displayType": "Aurkezpena"
         },
         "Websites\/advert\/unit": {
-            "description": "Webgune bateko publizitate unitatea",
-            "displayType": "Iragarkien unitatea"
+            "description": "Webgune bateko iragarki-unitatea",
+            "displayType": "Iragarki-unitatea"
         },
         "Websites\/advert\/placement": {
-            "description": "Izen azpian publizitate unitateak taldekatzeko modua",
-            "displayType": "Iragarkien kokapena"
+            "description": "Iragarki-unitateak izen baten azpian taldekatzeko modua",
+            "displayType": "Iragarkia jartzea"
         },
         "Websites\/advert\/creative": {
-            "description": "Iragarki baten edukia",
-            "displayType": "Iragarkiaren sortzailea"
+            "description": "Iragarki baterako edukia",
+            "displayType": "Iragarki sortzailea"
         },
         "Websites\/advert\/campaign": {
-            "description": "Publizitate kanpaina",
-            "displayType": "Iragarkien kanpaina"
+            "description": "Publizitate kanpaina bat",
+            "displayType": "Iragarki kanpaina"
         },
         "Websites\/webpage": {
-            "description": "Webguneak zein metadatuak zatikatu diren adierazten du",
+            "description": "Metadatuak scraped dituen webgune bat adierazten du",
             "displayType": "web orria"
         }
     }

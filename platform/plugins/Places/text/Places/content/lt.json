@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "per {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "metras",
+        "meters": "metrų",
+        "kilometer": "kilometro",
+        "kilometers": "kilometrų",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "mylia",
+        "miles": "mylios",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "foot": "pėda",
+        "feet": "pėdos",
+        "inches": "colių"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Mane domina dalykai, vykstantys per {{select}} nuo",
+        "update": "Atnaujinti Mano vietą",
+        "set": "Nustatyti Mano vietą",
+        "prompt": "{{ClickOrTap}} čia<br> nustatykite savo<br> vieta",
+        "myCurrentLocation": "Mano dabartinė vieta",
+        "enterAddress": "Įveskite adresą",
+        "enterPostcode": "Įveskite savo pašto kodą \/ pašto kodą",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Pridėti vietą",
+            "title": "Nauja Vieta",
+            "nameYourLocation": "Pavadinkite savo vietą"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Išsaugoti šią vietą?",
+            "message": "Ar planuojate ateityje vėl naudoti šią vietą?",
+            "ok": "Taip",
+            "cancel": "Nr"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Pavadinkite šią vietą",
+            "placeholder": "Namai, Darbas ir kt.",
+            "ok": "Sutaupyti"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Pasirinkite Vieta"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Ar yra kokia nors sritis šioje vietoje?",
+        "newArea": "Nauja sritis",
+        "promptTitle": "Įveskite srities pavadinimą:",
+        "absent": "Nustatykite plotą",
+        "error": "Klaida",
+        "exist": "Teritorija jau egzistuoja",
+        "addNewArea": "Pridėti naują sritį",
+        "add": "Papildyti"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "vietų rinkinys",
+            "displayType": "Vietos"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Atstovauja pastatui, vietai, laivui, parkui ir kt.",
+            "displayType": "Vieta"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Atstovauja tam tikroje vietoje esančią sritį, pvz., kambarį ar apartamentą",
+            "displayType": "Plotas"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Reiškia aukštą pastate arba laive",
+            "displayType": "Grindys"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Reiškia koloną pastate ar laive",
+            "displayType": "Stulpelis"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategorija daiktams, esantiems tam tikru atstumu nuo geohash",
+            "displayType": "Netoliese esančios vietos"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategorija daiktams, esantiems tam tikru atstumu nuo geohash, atitinkanti pomėgius",
+            "displayType": "Įdomios vietos"
         }
     }
 }

@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
+                "link": "Lien à promouvoir",
+                "startDate": "Date de début",
+                "startTime": "Heure de début",
+                "endDate": "Date de fin",
+                "endTime": "Heure de fin",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Filtrer par intérêt",
+                "FilterInterests": "Commencez à saisir un centre d&#39;intérêt..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "L&#39;intérêt",
+            "Location": "Emplacement"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Aller",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Parcourir",
+            "WriteToStartConversation": "Écrivez vos pensées pour démarrer la conversation",
+            "StartConversation": "Démarrer la conversation",
+            "GotoConversation": "Aller à Conversation",
+            "reset": "Réinitialiser",
+            "edit": "Éditer",
+            "link": "Lien",
+            "setUrl": "Définir l&#39;URL",
+            "save": "Sauvegarder",
+            "setClip": "Clip découpé",
+            "invalidURL": "URL invalide"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Fichier trop volumineux pour la mise en cache. Taille de fichier maximale {{size}}",
+        "InvalidPDF": "Le fichier n&#39;est pas un PDF valide",
+        "StartTypingTitleOrKeywords": "Commencez à saisir le titre ou les mots-clés..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
+            "description": "Un document HTML que différents utilisateurs peuvent afficher et modifier",
             "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Une diapositive dans une présentation peut inclure du HTML, de l&#39;audio, etc.",
+            "displayType": "Glisser"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Une présentation composée de plusieurs diapositives",
+            "displayType": "Présentation"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Un bloc publicitaire sur un site web",
+            "displayType": "Unité d&#39;annonce"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Un moyen de regrouper des blocs publicitaires sous un nom",
+            "displayType": "Emplacement de l&#39;annonce"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Contenu d&#39;une publicité",
+            "displayType": "Création publicitaire"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Une campagne publicitaire",
+            "displayType": "Campagne publicitaire"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Représente un site Web dont les métadonnées ont été récupérées",
+            "displayType": "page Web"
         }
     }
 }

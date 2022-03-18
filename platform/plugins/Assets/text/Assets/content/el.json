@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Πατήστε για πληρωμή"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: επεξεργασία χρέωσης για {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Σας ευχαριστούμε για την πληρωμή σας στο {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} εγγεγραμμένος στο {{plan.title}}",
+        "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Λαμβάνετε πληρωμή {{displayAmount}} από {{call 'publisher.displayName'}} από το &quot;{{description}}&quot;",
+        "HasBeenCharged": "Γεια σας, αυτό είναι απλώς για να σας ενημερώσουμε ότι το {{1}} έχει χρεωθεί {{2}} για {{3}} από {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Σας ευχαριστούμε για την πληρωμή σας για το &quot;{{description}}&quot;",
+        "HavePaid": "Γεια σας {{1}}, αυτή είναι απλώς μια γρήγορη επιβεβαίωση ότι πληρώσατε με επιτυχία {{2}} στον {{3}} για {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Πληροφορίες για την παραγγελία",
+        "PaymentMethod": "Μέθοδος πληρωμής",
+        "ContactInfo": "Πληροφορίες επαφής",
+        "Pay": "Πληρωμή"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} πληκτρολογήσατε το όνομα",
+        "Streams_user_lastname": "{{invitedUserName}} πληκτρολογήσατε το επώνυμο",
+        "Streams_user_icon": "{{invitedUserName}} εισαγάγατε το εικονίδιο",
+        "Places_user_location": "{{invitedUserName}} εισαγάγατε την τοποθεσία",
+        "Streams_greeting": "Ο {{invitedUserName}} εισήγαγε χαιρετισμό",
+        "YouHaveCreditsToStart": "Έχετε {{amount}} πιστώσεις για να ξεκινήσετε",
+        "PaymentFor": "Πληρωμή για &quot;{{1}}&quot;",
+        "PaymentTo": "Πληρωμή σε {{1}}",
+        "PaymentToUser": "Πληρωμή σε {{toUserName}}",
+        "CreatePaidStream": "για δημιουργία {{toStreamName}}",
+        "JoinedPaidStream": "για κράτηση στο &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "για τη δημιουργία κοινότητας &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ως επιστροφή χρημάτων κράτησης στο &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Αγόρασα πιστώσεις {{amount}}",
+        "BonusCredits": "Μπόνους {{amount}} πιστώσεις",
+        "BuyAmountCredits": "Αγοράστε {{amount}} πιστώσεις",
+        "WatchClip": "Κέρδισε {{amount}} πιστώσεις για την παρακολούθηση {{fromStreamTitle}}",
+        "MissingCredits": "Πιστώσεις που λείπουν",
+        "YouMissingCredits": "Χρειάζεστε επιπλέον {{amount}} πιστώσεις για να συνεχίσετε.",
+        "BuyCredits": "Αγοράστε πιστώσεις",
+        "BuyBonus": "Η αγορά {{amount}} πιστώσεων ταυτόχρονα, θα οδηγήσει σε {{bonus}} μπόνους πιστώσεων.",
+        "Buy": "Αγορά",
+        "PurchaseCredits": "Αγορά πιστώσεων",
+        "Credits": "Πιστώσεις",
+        "ErrorInvalidAmount": "Μη έγκυρο ποσό",
+        "ErrorInvalidCurrency": "Δυστυχώς, δεν υποστηρίζουμε ακόμη το νόμισμα {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} πιστώσεις",
+            "BonusCredits": "{{amount}} πιστώσεις"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Ημερομηνία",
+        "Amount": "Ποσό",
+        "Description": "Περιγραφή",
+        "Client": "Πελάτης",
+        "To": "προς το",
+        "From": "από",
+        "SeeHistory": "Δείτε το ιστορικό πληρωμών για {{1}}",
+        "HistoryEmpty": "Δεν έχετε δεδομένα ακόμα",
+        "PaymentFor": "Έστειλε {{amount}} πιστώσεις",
+        "PaymentTo": "Έστειλε {{amount}} πιστώσεις",
+        "PaymentToUser": "Έστειλε {{amount}} πιστώσεις",
+        "CreatePaidStream": "Δαπανήθηκαν {{amount}} πιστώσεις",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Κέρδισε {{amount}} πιστώσεις",
+            "-": "Δαπανήθηκαν {{amount}} πιστώσεις"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Κέρδισε {{amount}} πιστώσεις",
+            "-": "Δαπανήθηκαν {{amount}} πιστώσεις"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Έλαβε {{amount}} πιστώσεις",
+            "-": "Έστειλε {{amount}} πιστώσεις"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Δαπανήθηκαν {{amount}} πιστώσεις",
+        "BoughtCredits": "Αγόρασα πιστώσεις {{amount}}",
+        "BonusCredits": "Πήρα μπόνους {{amount}} πιστώσεις",
+        "InviteAcceptedBy": "Κέρδισε {{amount}} πιστώσεις",
+        "Streams_user_firstname": "Κέρδισε {{amount}} πιστώσεις",
+        "Streams_user_lastname": "Κέρδισε {{amount}} πιστώσεις",
+        "Streams_user_icon": "Κέρδισε {{amount}} πιστώσεις",
+        "Places_user_location": "Κέρδισε {{amount}} πιστώσεις",
+        "Streams_greeting": "Κέρδισε {{amount}} πιστώσεις",
+        "YouHaveCreditsToStart": "Κέρδισε {{amount}} πιστώσεις"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Ορισμός πληροφοριών πληρωμής",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Έναρξη Συνδρομής",
+            "message": "Θέλετε να εγγραφείτε στο {{title}};",
+            "ok": "Εντάξει",
+            "cancel": "Ματαίωση"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Πιστωτική ή χρεωστική κάρτα",
+        "SubscribePayment": "Εγγραφή πληρωμής",
+        "ImmediatePayment": "Άμεση Πληρωμή"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Ορισμός πληροφοριών πληρωμής",
+        "BuyAmountCredits": "Αγοράστε {{amount}} πιστώσεις",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Κάνω μια πληρωμή",
+            "message": "Συμφωνείτε να πληρώσετε {{symbol}}{{amount}};",
+            "ok": "Εντάξει",
+            "cancel": "Ματαίωση"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Πιστώσεις",
+            "description": "παρακολουθεί τις πιστώσεις και τις πληρωμές"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Σχέδιο Συνδρομής",
+            "description": "πρόγραμμα συνδρομής"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Συνδρομή",
+            "description": "συνδρομή"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Προϊόν",
+            "description": "προϊόν που πωλείται"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Υπηρεσία",
+            "description": "υπηρεσία που προσφέρεται"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Κέρδισε {{amount}} πιστώσεις"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Αγόρασα πιστώσεις {{amount}}"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Μπόνους {{amount}} πιστώσεις"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Δαπανήθηκαν {{amount}} πιστώσεις"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Έστειλε {{amount}} πιστώσεις στο {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Έλαβε {{amount}} πιστώσεις από {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Νέα Υπηρεσία",
+            "TitlePlaceholder": "Τίτλος υπηρεσίας",
+            "PricePlaceholder": "Ορισμός τιμής",
+            "LinkPlaceholder": "ορίστε τον σύνδεσμο πρόσθετων πληροφοριών",
+            "DescriptionPlaceholder": "Περιγραφή υπηρεσίας",
+            "SaveService": "Αποθήκευση υπηρεσίας",
+            "SelectRequiredParticipants": "Απαιτούμενοι Συμμετέχοντες"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Διαχείριση προτύπων υπηρεσιών",
+        "ManageServices": "Διαχείριση Υπηρεσιών",
+        "Free": "Ελεύθερος",
+        "OptionalContribution": "Προαιρετική συνεισφορά",
+        "RequiredPayment": "Απαιτούμενη πληρωμή",
+        "AreYouSureDelete": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την υπηρεσία;",
+        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητες που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Πληροφορίες σχετικά με το {{title}} NFT",
+        "Description": "Αναλυτικές πληροφορίες για το NFT",
+        "FixedBid": "Αγορασε τωρα",
+        "CurrentBid": "Τρέχουσα προσφορά",
+        "StartingIn": "Ξεκινώντας μέσα",
+        "EndingIn": "Τελειωνει σε",
+        "CreateNFT": "Δημιουργήστε ένα NFT",
+        "TitlePlaceholder": "Δώστε έναν τίτλο στο NFT σας",
+        "DescriptionPlaceholder": "Δώστε μια περιγραφή του NFT σας",
+        "CreateYourNFT": "Δημιουργήστε το NFT σας",
+        "Royalties": "Δικαιώματα",
+        "RoyaltyPlaceholder": "Προαιρετικός. Ποσό που καταβλήθηκε στον δημιουργό πριν από τη μεταφορά.",
+        "ExpirationDate": "Ημερομηνία λήξης",
+        "StartingDate": "Ημερομηνία έναρξης",
+        "BidsBelowThisAmount": "Δεν θα επιτρέπονται προσφορές κάτω από αυτό το ποσό",
+        "MinimumBid": "Ελάχιστη προσφορά",
+        "Price": "Τιμή",
+        "Owner": "Ιδιοκτήτης",
+        "SelectCategory": "Επιλέξτε Κατηγορία",
+        "Day": "Ημέρα",
+        "Days": "Ημέρες",
+        "Hour": "Ωρα",
+        "Hours": "Ωρες",
+        "Minute": "Λεπτό",
+        "Minutes": "Λεπτά",
+        "Second": "Δεύτερος",
+        "Seconds": "Δευτερόλεπτα",
+        "SalesCreator": "των πωλήσεων θα πάνε στον δημιουργό",
+        "Details": "Λεπτομέριες",
+        "Bids": "Προσφορές",
+        "History": "Ιστορία",
+        "LoremIpsum": "Το Lorem Ipsum είναι απλώς εικονικό κείμενο της βιομηχανίας εκτύπωσης και στοιχειοθεσίας.",
+        "PutOnSale": "Βάλτε προς πώληση",
+        "PutOffSale": "Απόσυρση από την πώληση",
+        "Transfer": "ΜΕΤΑΦΟΡΑ",
+        "Update": "Εκσυγχρονίζω",
+        "UpdateToken": "Ενημέρωση διακριτικού",
+        "CreateToken": "Δημιουργία διακριτικού",
+        "PlaceBid": "Τοποθετήστε την προσφορά",
+        "SoldOut": "Πωληθεί",
+        "NftName": "Όνομα NFT",
+        "DescribeYourNFT": "Περιγράψτε το NFT σας",
+        "NftPicture": "Εικόνα που αντιπροσωπεύει το NFT",
+        "NftMovie": "Ταινία που αντιπροσωπεύει το NFT",
+        "UploadMovie": "Ανεβάστε ταινία",
+        "MovieSource": "Πηγή ταινίας",
+        "UploadFile": "Ανέβασε ένα αρχείο",
+        "PutOnMarketplace": "Διαθέστε στην αγορά",
+        "InstantPurchase": "Εισαγάγετε την τιμή για να επιτρέψετε στους χρήστες να αγοράσουν άμεσα το NFT σας",
+        "FixedPrice": "Σταθερή τιμή",
+        "TimedAuction": "Χρονική δημοπρασία",
+        "OpenForBids": "Ανοιχτό για προσφορές",
+        "PriceOnePiece": "Εισαγάγετε τιμή για ένα τεμάχιο",
+        "EnterMinimumBid": "Εισαγάγετε την ελάχιστη προσφορά",
+        "SelectChain": "Επιλέξτε αλυσίδα",
+        "WrongChain": "Αυτό το NFT δημιουργήθηκε στο &quot;{{chain}}&quot;. Χρησιμοποιήστε αυτήν την αλυσίδα.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Εισαγωγή NFT",
+            "fileNotFound": "Λυπούμαστε, το αρχείο CSV δεν βρέθηκε.",
+            "fileEmpty": "Λυπούμαστε, το αρχείο CSV είναι κενό.",
+            "userIdNotFound": "χρήστης υπάρχει αλλά το αναγνωριστικό είναι κενό",
+            "errorLine": "γραμμή {{1}}",
+            "fieldNotFound": "Το υποχρεωτικό πεδίο &quot;{{1}}&quot; δεν βρέθηκε",
+            "taskStreamInvalid": "Μη έγκυρη ροή εργασιών",
+            "instructionsEmpty": "κενές οι οδηγίες ροής εργασιών",
+            "complete": "Πλήρης",
+            "activateUsers": "αποστολή μηνύματος ενεργοποίησης στους χρήστες;",
+            "importProgress": "Πρόοδος",
+            "importOptions": "Επιλογές",
+            "sampleCSV": "Λήψη δείγματος CSV",
+            "fileLabel": "Μεταφόρτωση υπολογιστικού φύλλου:",
+            "errorsTitle": "Παρουσιάστηκαν σφάλματα"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Φιλτράρισμα κατά συλλογές NFT",
+                "ShowNFTCollection": "Εμφάνιση συλλογής NFT σε...",
+                "AllCollections": "Όλες οι Συλλογές"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Όλοι οι Συγγραφείς",
+                "AllUsers": "Ολοι",
+                "FilterByAuthors": "Φιλτράρισμα κατά συγγραφείς"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Επιστροφή στη Συλλογή"
     }
 }

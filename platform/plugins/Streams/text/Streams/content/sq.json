@@ -1,137 +1,137 @@
 {
     "preview": {
-        "NewItemTitle": "Artikulli i ri"
+        "NewItemTitle": "Artikull i ri"
     },
     "labels": {
-        "Streams\/invited": "Njerëzit që kam ftuar",
+        "Streams\/invited": "Njerëz që i ftova",
         "Streams\/invitedMe": "Kush më ftoi",
         "AreYouAgree": "A jeni dakord?",
         "Yes": "po",
-        "No": "Jo",
+        "No": "Nr",
         "DoYouAgree": "A jeni dakord?"
     },
     "interests": {
         "Filter": "Cilat janë interesat tuaja?",
-        "CanAdd": "Nëse ende nuk mund të gjesh atë që kërkon, mund të shtosh një interes të ri më poshtë:",
-        "TrySynonyms": "Mos e shihni? Provoni disa sinonime.",
-        "AddUnderCategory": "Shto nën kategorinë ...",
-        "Other": "tjetër",
-        "Unlisted": "Unlisted"
+        "CanAdd": "Nëse ende nuk mund të gjeni atë që po kërkoni, mund të shtoni një interes të ri më poshtë:",
+        "TrySynonyms": "Nuk e sheh? Provoni disa sinonime.",
+        "AddUnderCategory": "Shto nën kategorinë...",
+        "Other": "Të tjera",
+        "Unlisted": "I palistuar"
     },
     "chat": {
-        "flaggedForAdminReview": "Mesazhi është shënuar për shqyrtim nga admin. Trokit sërish për të zhvendosur.",
+        "flaggedForAdminReview": "Mesazhi është raportuar për shqyrtim nga administratori. Prekni sërish për të hequr flamurin.",
         "noOneSaid": "Askush nuk ka thënë asgjë",
-        "closeChatButton": "Mbyll chat",
-        "closeChatConfirmTitle": "Mbyll këtë chat?",
-        "closeChatConfirm": "Jeni i sigurt se doni ta mbyllni këtë chat?",
+        "closeChatButton": "Mbylle bisedën",
+        "closeChatConfirmTitle": "Të mbyllet kjo bisedë?",
+        "closeChatConfirm": "Je i sigurt që dëshiron ta mbyllësh këtë bisedë?",
         "closeChatConfirmYes": "po",
-        "closeChatConfirmNo": "jo",
-        "earlierComments": "Komentet e mëhershme",
-        "Subscribed": "Njoftime për heshtje",
-        "Unsubscribed": "Merrni Njoftimet",
+        "closeChatConfirmNo": "Nr",
+        "earlierComments": "komentet e mëparshme",
+        "Subscribed": "Njoftimet u aktivizuan",
+        "Unsubscribed": "Njoftimet janë të heshtura",
         "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë bisedë.",
         "startedConversation": "filloi një bisedë",
         "RealTimeCall": "Thirrje në kohë reale",
-        "SearchByName": "Kërkoni sipas emrit",
+        "SearchByName": "Kërko sipas emrit",
         "Notifications": {
-            "Visit": "99 99 999}} po viziton bisedën",
-            "Join": "99 99 999}} iu bashkua bisedës",
-            "Leave": "99 999}} u larguan nga biseda",
-            "RelatedTo": "99 {999}} filloi një {{1000}"
+            "Visit": "{{displayName}} po viziton bisedën",
+            "Join": "{{displayName}} iu bashkua bisedës",
+            "Leave": "{{displayName}} u largua nga biseda",
+            "RelatedTo": "{{displayName}} filloi një {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Mesazhi {{& message.fields.type}} në {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ka thënë:",
+        "*": "Mesazh {{& message.fields.type}} te {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} tha: {{& message.content}}",
         "Streams\/changed": "Ndryshimet në {{stream.fields.title}}",
-        "Streams\/invite": "Ju u ftuat te {{& stream.fields.title}}",
-        "Streams\/announcement": "Njoftim në {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ndryshoi qasjen e transmetimit",
-        "Streams\/chat\/edit": "Mesazhi i mesazhit u ndryshua",
-        "Streams\/chat\/remove": "Mesazhi i bisedës u hoq",
+        "Streams\/invite": "Jeni të ftuar në {{& stream.fields.title}}",
+        "Streams\/announcement": "Njoftim në {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ndryshoi qasjen në {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Mesazhi i bisedës është modifikuar në {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Mesazhi i bisedës u hoq në {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} është mbyllur",
-        "Streams\/task\/progress": "Progresi i bërë në {{stream.fields.title}}",
+        "Streams\/task\/progress": "Progresi i bërë më {{stream.fields.title}}",
         "Streams\/task\/complete": "Detyra e përfunduar: {{stream.fields.title}}",
         "Streams\/task\/error": "Gabim gjatë: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Mesazhi i ardhur",
-        "ManageEmailSubscriptions": "menaxho abonimet tuaja me email",
-        "IfUnsubscribe": "Nëse dëshironi të abonoheni",
-        "Streams\/relatedTo\/Streams\/call": "Thirrja e re Filloi në 99 99 999}}",
-        "Streams\/relatedTo\/*": "New 999 të reja} në {{1000}",
-        "Streams\/relatedFrom\/*": "Shtuar në 99 999 si {{1000}",
-        "Streams\/mention": "99 99 999}} ju përmenda në një koment",
-        "Streams\/call": "99 99 999} filloi një telefonatë në kohë reale"
+        "Streams\/incoming\/*": "{{app}}: Mesazh në hyrje",
+        "ManageEmailSubscriptions": "menaxhoni abonimet tuaja me email",
+        "IfUnsubscribe": "Nëse dëshironi të çregjistroheni",
+        "Streams\/relatedTo\/Streams\/call": "Telefonatë e re filloi në {{toTitle}}",
+        "Streams\/relatedTo\/*": "E re {{relationDisplayType}} në {{toTitle}}",
+        "Streams\/relatedFrom\/*": "Shtuar në {{toTitle}} si {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ju përmendi në një koment",
+        "Streams\/call": "{{displayName}} filloi një telefonatë në kohë reale"
     },
     "invite": {
-        "messageContent": "{{displayName}} ju ftoi për të {{inviteUrl}}",
+        "messageContent": "{{displayName}} ju ftoi në {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Zgjidhni nga Kontaktet tuaja",
+            "chooseFromContacts": "Zgjidhni nga kontaktet tuaja",
             "selectFromContacts": "Zgjidhni Nga Kontaktet",
             "photo": "Bej nje foto",
-            "photoInstruction": "Nëse personi që skanon kodin tuaj QR është para jush, merrni një fotografi prej tyre",
+            "photoInstruction": "Nëse personi që ka skanuar kodin tuaj QR është para jush, fotografoni ata",
             "to": "Për: {{Stream Title}}",
-            "go": "shkoj",
-            "title": "ftoj",
-            "placeholder": "Numri i celularit ose adresa e postës elektronike",
-            "orInvite": "Ose ftoj njerëzit duke përdorur:",
+            "go": "Shkoni",
+            "title": "Fto",
+            "placeholder": "Numri i celularit ose adresa e emailit",
+            "orInvite": "Ose ftoni njerëzit duke përdorur:",
             "QR": "{{ClickOrTap}} për të gjeneruar kodin QR",
-            "QRtitle": "Skano këtë QR kod",
+            "QRtitle": "Skanoni këtë kod QR",
             "byEmail": "Email",
-            "byText": "tekst",
+            "byText": "Teksti",
             "byFacebook": "Facebook",
             "byTwitter": "Cicëroj",
-            "QRscanned": "Ata e skanuan atë!",
-            "chooseAgainFromContacts": "Zgjidhni përsëri nga Kontaktet",
-            "inviteSelectedContacts": "Fto kontaktet e zgjedhura",
-            "scannedQR": "99 99 999}} nëse kodi ishte skanuar",
-            "copyLink": "99 99 999}} për të kopjuar lidhjen e ftesës",
+            "QRscanned": "E skanuan!",
+            "chooseAgainFromContacts": "Zgjidhni Përsëri nga Kontaktet",
+            "inviteSelectedContacts": "Ftoni kontaktet e zgjedhura",
+            "scannedQR": "{{ClickOrTap}} nëse kodi është skanuar",
+            "copyLink": "{{ClickOrTap}} për të kopjuar lidhjen e ftesës",
             "userChooserPlaceholder": "Kërko sipas emrit",
             "shareOrCopyLink": "{{ClickOrTap}} për të ndarë ose kopjuar lidhjen e ftesës"
         },
         "email": {
-            "subject": "Hej, shiko këtë",
+            "subject": "Hej, shikoni këtë",
             "PleaseVisitLink": "Ju lutemi vizitoni lidhjen e mëposhtme:",
-            "InvitingYou": "Unë jam duke ju ftuar për të {{title}}",
-            "HasInvitedYou": "{{displayName}} ju ka ftuar për të {{title}}",
-            "HasMentionedYou": "99 {999}} ju ka përmendur në &quot;{{title}}&quot;",
+            "InvitingYou": "Unë po ju ftoj në {{title}}",
+            "HasInvitedYou": "{{displayName}} ju ka ftuar në {{title}}",
+            "HasMentionedYou": "{{displayName}} ju ka përmendur në &quot;{{title}}&quot;",
             "YOUAREINVITED": "JU JENI TË FTUAR!",
-            "AcceptInvite": "Pranoni Fto"
+            "AcceptInvite": "Prano Ftesën"
         },
         "sms": {
-            "content": "Ju jeni ftuar për {{title}}. Përzgjidhni {{url}}"
+            "content": "Jeni të ftuar në {{title}}. Ju lutemi trokitni {{url}}"
         },
         "notice": {
-            "text": "Ju keni qenë të ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
+            "text": "Ju jeni ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
         },
-        "youCanNowPaste": "Tani mund të ngjitni këtë lidhje diku për të ftuar njerëz",
-        "command": "ftoj"
+        "youCanNowPaste": "Tani mund ta ngjitësh këtë lidhje diku për të ftuar njerëzit",
+        "command": "Fto"
     },
     "followup": {
         "mobile": {
-            "alert": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
-            "confirm": "Ftesat janë dërguar nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Do të dëshironit të përcillni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
-            "check": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni sms-in tuaj dhe klikoni lidhjen!",
+            "alert": "Ftesat dërgohen nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;i bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikojnë lidhjen.",
+            "confirm": "Ftesat dërgohen nga numri ynë, të cilin miqtë tuaj ende nuk e njohin. Dëshironi të vazhdoni me një mesazh të shpejtë për t&#39;i bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikojnë lidhjen.",
+            "check": "Hej, sapo të dërgova një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni sms-në tuaj dhe klikoni lidhjen!",
             "CheckYourMobile": "Ju lutemi kontrolloni SMS dhe ndiqni udhëzimet!"
         },
         "email": {
-            "alert": "Ftesat dërgohen nga domenin tonë, të cilin miqtë tuaj ende nuk e njohin. Ndiqni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
-            "confirm": "Ftesat dërgohen nga domenin tonë, të cilin miqtë tuaj ende nuk e njohin. Do të dëshironit të përcillni me një tekst të shpejtë për t&#39;u bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikonin lidhjen.",
+            "alert": "Ftesat dërgohen nga domeni ynë, të cilat miqtë tuaj ende nuk i njohin. Ndiqni me një tekst të shpejtë për t&#39;i bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikojnë lidhjen.",
+            "confirm": "Ftesat dërgohen nga domeni ynë, të cilat miqtë tuaj ende nuk i njohin. Dëshironi të vazhdoni me një mesazh të shpejtë për t&#39;i bërë të ditur se ftesa erdhi nga ju, duke u kërkuar atyre të klikojnë lidhjen.",
             "subject": "A keni marrë një ftesë?",
-            "body": "Hej, sapo kam dërguar një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni email-in tuaj dhe klikoni lidhjen atje!",
+            "body": "Hej, sapo të dërgova një ftesë në aplikacionin {{app}}. Ju lutemi kontrolloni emailin tuaj dhe klikoni lidhjen atje!",
             "CheckYourEmail": "Ju lutemi kontrolloni emailin tuaj dhe ndiqni udhëzimet!"
         }
     },
     "participating": {
-        "Title": "titull",
-        "Subscribed": "regjistruar",
-        "Participants": "pjesëmarrësit",
-        "AreYouSureRemoveIdentifier": "Jeni i sigurt për të hequr këtë identifikues?",
-        "AreYouSureUnsubscribeIdentifier": "A jeni i sigurt se abononi këtë identifikues? Do të fiket njoftimet për këtë identifikues.",
-        "AreYouSureUnsubscribeDevice": "A jeni i sigurt se abononi këtë pajisje? Do të fiket njoftimet në këtë pajisje.",
-        "Identifiers": "identifikues",
-        "Devices": "Devices",
-        "Streams": "streams",
-        "AreYouSureRemoveParticipant": "Jeni i sigurt që doni të hiqni këtë pjesëmarrës?",
+        "Title": "Titulli",
+        "Subscribed": "Abonuar",
+        "Participants": "Pjesëmarrësit",
+        "AreYouSureRemoveIdentifier": "Jeni i sigurt për ta hequr këtë identifikues?",
+        "AreYouSureUnsubscribeIdentifier": "Jeni i sigurt që e çabononi këtë identifikues? Do të çaktivizojë njoftimet për këtë identifikues.",
+        "AreYouSureUnsubscribeDevice": "Je i sigurt që ta çabonosh këtë pajisje? Do të çaktivizojë njoftimet për këtë pajisje.",
+        "Identifiers": "Identifikuesit",
+        "Devices": "Pajisjet",
+        "Streams": "Përrenjtë",
+        "AreYouSureRemoveParticipant": "Jeni i sigurt që dëshironi ta hiqni këtë pjesëmarrës?",
         "RemoveParticipant": "Hiq pjesëmarrësin"
     },
     "webrtc": {
@@ -139,58 +139,58 @@
             "microphoneTitle": "Aktivizo mikrofonin",
             "cameraTitle": "Aktivizo kamerën",
             "cameraAndMicrophoneTitle": "Aktivizo kamerën dhe mikrofonin",
-            "dialogTitle": "Mundësimi i Dialogut",
-            "microphoneBtn": "Aktivizoni mikrofonin",
+            "dialogTitle": "Duke u lidhur",
+            "microphoneBtn": "Aktivizo mikrofonin",
             "cameraBtn": "Aktivizo kamerën",
             "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Udhëzime",
-            "permissionDenied": "Leja për 99 999 nuk u pranua. Për ta përdorur atë, ju lutemi ndiqni këto hapa:",
-            "point1": "Shkoni te &quot;Cilësimet&quot; -&gt; &quot;Avancuar&quot; -&gt; &quot;Intimiteti dhe siguria&quot; -&gt; &quot;Cilësimet e sitit&quot; -&gt; &quot;Kamera&quot; ose &quot;Cilësimet e sitit&quot; -&gt; &quot;Mikrofoni&quot;",
-            "point2": "Hiq {999} nga lista &quot;Bllok&quot;"
+            "dialogTitle": "udhëzime",
+            "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
+            "point1": "Shkoni te &quot;Cilësimet&quot; -&gt; &quot;Të avancuara&quot; -&gt; &quot;Privatësia dhe siguria&quot; -&gt; &quot;Cilësimet e sitit&quot; -&gt; &quot;Kamera&quot; ose &quot;Cilësimet e faqes&quot; -&gt; &quot;Mikrofoni&quot;",
+            "point2": "Hiq {{hostname}} nga lista &quot;Blloko&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Udhëzime",
-            "permissionDenied": "Leja për 99 999 nuk u pranua. Ju lutemi rifreskoni këtë faqe dhe konfirmoni qasjen në {999} për t&#39;u bashkuar me konferencën."
+            "dialogTitle": "udhëzime",
+            "permissionDenied": "Leja për {{kind}} u refuzua. Ju lutemi ringarkoni këtë faqe dhe konfirmoni hyrjen në {{kind}} për t&#39;u bashkuar me konferencën."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Udhëzime",
-            "permissionDenied": "Leja për 99 999 nuk u pranua. Për ta përdorur atë, ju lutemi ndiqni këto hapa:",
-            "point1": "Shkoni te Parametrat tuaj të Android",
-            "point2": "Hapni &quot;Aplikacione dhe njoftime&quot;",
-            "point3": "Gjeni &quot;{{communityName}}&quot; dhe hapeni",
-            "point4": "Takoni mbi Lejet",
-            "point5": "Aktivizo {{999}"
+            "dialogTitle": "udhëzime",
+            "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
+            "point1": "Shkoni te cilësimet tuaja të Android",
+            "point2": "Hapni &quot;Aplikacionet dhe njoftimet&quot;",
+            "point3": "Gjeni &quot;{{communityName}}&quot; dhe hapeni atë",
+            "point4": "Prekni te Lejet",
+            "point5": "Aktivizo {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Udhëzime",
-            "permissionDenied": "Leja për 99 999 nuk u pranua. Për ta përdorur atë, ju lutemi ndiqni këto hapa:",
-            "point1": "Shkoni te Parametrat e iOS tuaj",
-            "point2": "Hapni &quot;Privatësinë&quot;",
-            "point3": "Gjeni 99 999}} dhe hapeni",
+            "dialogTitle": "udhëzime",
+            "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
+            "point1": "Shkoni te cilësimet tuaja iOS",
+            "point2": "Hapni &quot;Privatësia&quot;",
+            "point3": "Gjeni {{kind}} dhe hapeni",
             "point4": "Gjeni &quot;{{communityName}}&quot; dhe aktivizoni"
         },
         "notices": {
-            "youJoinedRoom": "Ju u bashkua në dhomë",
-            "joining": "Bashkimi: {{userName}}",
-            "sbLeftRoom": "999} dolën nga dhoma",
-            "youLeftRoom": "U largove nga dhoma",
-            "codeCopied": "U largove nga dhoma",
-            "sbBeganFbLive": "99 99 999} filluan transmetimin e kësaj thirrje në Facebook",
-            "sbStoppedFbLive": "99 99 999} ndaloi transmetimin e kësaj thirrje në Facebook",
-            "youBeganFbLive": "Ju filluat të transmetoni këtë thirrje në Facebook",
-            "youStoppedFbLive": "Ndalove transmetimin e kësaj thirrje në Facebook",
-            "linkCopiedToCb": "Lidhja e kopjuar në clipboard",
-            "codeCopiedToCb": "Kodi i kopjuar në clipboard",
+            "youJoinedRoom": "Ju u bashkuat me dhomën",
+            "joining": "Duke u bashkuar: {{userName}}",
+            "sbLeftRoom": "{{userName}} u largua nga dhoma",
+            "youLeftRoom": "Dole nga dhoma",
+            "codeCopied": "Dole nga dhoma",
+            "sbBeganFbLive": "{{userName}} filloi transmetimin e kësaj telefonate në Facebook",
+            "sbStoppedFbLive": "{{userName}} ndaloi transmetimin e kësaj telefonate në Facebook",
+            "youBeganFbLive": "Ju filluat ta transmetoni këtë telefonatë në Facebook",
+            "youStoppedFbLive": "Ju ndaluat transmetimin e kësaj telefonate në Facebook",
+            "linkCopiedToCb": "Lidhja u kopjua në kujtesën e fragmenteve",
+            "codeCopiedToCb": "Kodi u kopjua në kujtesën e fragmenteve",
             "userHasNoVideo": "Pjesëmarrësi nuk ka video",
-            "openInBrowserAlert": "Lidhje e hapur në shfletuesin Safari për t&#39;u bashkuar me konferencën.",
-            "youBeganVideoRecording": "Ju filluat regjistrimin e kësaj konference",
-            "youStoppedVideoRecording": "Ju ndaloi regjistrimin e kësaj konference",
-            "switchingRoom": "Ndërrimi i dhomës ...",
+            "openInBrowserAlert": "Hapni lidhjen në shfletuesin Safari për t&#39;u bashkuar me konferencën.",
+            "youBeganVideoRecording": "Filluat të regjistroni këtë konferencë",
+            "youStoppedVideoRecording": "Ju ndaluat regjistrimin e kësaj konference",
+            "switchingRoom": "Dhomë ndërrimi...",
             "forceDisconnecting": "Do të shkëputeni brenda 5 sekondave",
             "youStartedLive": "Fillove ta transmetosh këtë telefonatë në RTMP të personalizuar",
-            "youStoppedLive": "Ndalove transmetimin e kësaj thirrjeje në RTMP të personalizuar",
+            "youStoppedLive": "E ndalove transmetimin e kësaj telefonate në RTMP të personalizuar",
             "sbStartedLiveStreaming": "{{userName}} filloi drejtpërdrejt",
             "sbStoppedLiveStreaming": "{{userName}} përfundoi drejtpërdrejt",
             "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare",
@@ -200,29 +200,29 @@
             "webCamera": "Kamera në internet",
             "screenSharing": "Ndarja e ekranit",
             "shareAnotherScreen": "Ndani një ekran tjetër",
-            "turnOffCameras": "Fikni të gjitha kamerat",
-            "startFBLive": "Filloni Facebook Livestream",
-            "stopFBLive": "Ndaloni Facebook Livestream",
-            "fbLiveTitle": "Titulli i drejtpërdrejtë",
-            "fbLiveDescription": "Përshkrimi i drejtpërdrejtë",
+            "turnOffCameras": "Fik kamerën",
+            "startFBLive": "Nisni Facebook Livestream",
+            "stopFBLive": "Ndalo transmetimin e drejtpërdrejtë të Facebook",
+            "fbLiveTitle": "Titulli i Livestream",
+            "fbLiveDescription": "Përshkruani transmetimin tuaj të drejtpërdrejtë. Për çfarë bëhet fjalë?",
             "fbOnlyMeLiveAccess": "Vetëm unë",
-            "fbFriendsAccess": "Miqtë",
-            "fbPublicAccess": "publik",
+            "fbFriendsAccess": "miq",
+            "fbPublicAccess": "Publike",
             "fbStartLive": "Shko jeto",
-            "fbStopLive": "Fund Jetoni",
-            "fbEmbedCode": "mbjell",
-            "copy": "kopje",
-            "turnOffVideo": "Fikni ndarjen e kamerës \/ ekranit",
-            "turnOffScreenSharing": "Fikni ndarjen e ekranit",
+            "fbStopLive": "Përfundo transmetimin e drejtpërdrejtë",
+            "fbEmbedCode": "Embed",
+            "copy": "Kopjo",
+            "turnOffVideo": "Çaktivizo ndarjen e kamerës\/ekranit",
+            "turnOffScreenSharing": "Çaktivizo ndarjen e ekranit",
             "cameraIsTurnedOff": "Kamera është e fikur",
-            "startRecording": "Filloni Regjistrimin",
-            "stopRecording": "Ndaloni regjistrimin",
-            "recordingInProgress": "Regjistrimi është në proces ...",
+            "startRecording": "Filloni regjistrimin",
+            "stopRecording": "Ndalo regjistrimin",
+            "recordingInProgress": "Regjistrimi është në vazhdim...",
             "publishOnTimeline": "Publikoni në afatin kohor",
             "publishToGroup": "Publikoni në grup",
             "turnOffAudioInput": "Çaktivizo mikrofonin",
             "micIsTurnedOff": "Mikrofoni është i fikur",
-            "start": "Fillo",
+            "start": "Filloni",
             "stop": "Ndalo",
             "streamingSettings": "Cilësimet",
             "streamToRTMP": "Transmetoni në RTMP të personalizuar",
@@ -231,27 +231,27 @@
             "broadcastingInProgress": "Transmetimi është në vazhdim"
         },
         "participantsPopup": {
-            "disconnect": "shqit",
+            "disconnect": "Shkëputeni",
             "floatingScreens": "Ekranet lundrues",
-            "tiledScreens": "Ekranet e pllakave",
-            "loudestExceptMe": "Me zë të lartë përveç meje",
-            "maximizeLoudest": "Maksimizoni me zë të lartë",
-            "staticMaximized": "Maksimumi statik",
-            "manual": "udhëzues",
-            "turnOffCamera": "Fshih video",
-            "turnOffAudio": "Qëndroni audio",
+            "tiledScreens": "Ekrane me pllaka",
+            "loudestExceptMe": "Më e zëshme përveç meje",
+            "maximizeLoudest": "Maksimizimi më i zhurmshëm",
+            "staticMaximized": "Maksimizuar statike",
+            "manual": "Manual",
+            "turnOffCamera": "Fshih videon",
+            "turnOffAudio": "Çaktivizo audion",
             "turnOffScreenSharing": "Fshih ndarjen e ekranit",
-            "turnOnCamera": "Shfaq videon",
-            "turnOnAudio": "Une audio",
+            "turnOnCamera": "Shfaq video",
+            "turnOnAudio": "Çaktivizo audion",
             "turnOnScreenSharing": "Shfaq ndarjen e ekranit",
             "fullScreen": "Ekran i plotë",
             "dialogTitle": "Cilësimet e pjesëmarrësve"
         },
-        "notAllowedToJoinCall": "Ju nuk keni leje për t&#39;u bashkuar me këtë rrjedhë.",
-        "streamTitle": "999 thirrje live",
+        "notAllowedToJoinCall": "Nuk ke leje për t&#39;u bashkuar me këtë transmetim.",
+        "streamTitle": "{{1}} filloi një telefonatë drejtpërdrejt",
         "preview": {
             "preamble": "Takimi:",
-            "Meeting": "Takim",
+            "Meeting": "Takimi",
             "MeetingEnded": "Takimi përfundoi"
         },
         "preparing": {
@@ -259,7 +259,7 @@
             "micIsOn": "Mikrofoni është aktiv",
             "cameraIsOff": "Kamera është e fikur",
             "cameraIsOn": "Kamera është e ndezur",
-            "screenSharingIsOn": "Ndarja e ekranit është aktiv",
+            "screenSharingIsOn": "Ndarja e ekranit është aktive",
             "screenSharingIsOff": "Ndani ekranin",
             "joinNow": "Bashkohuni me Thirrjen"
         },
@@ -274,40 +274,40 @@
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "të ftuar",
+            "displayType": "I ftuar",
             "description": "Inbox për ftesa"
         },
         "Streams\/resource": {
-            "displayType": "burime",
-            "description": "lumë për menaxhimin e qasjes në një burim dhe postimin e mesazheve në lidhje me azhurnimet"
+            "displayType": "Burim",
+            "description": "transmetim për menaxhimin e aksesit në një burim dhe postimin e mesazheve rreth përditësimeve"
         },
         "Streams\/task": {
-            "displayType": "detyrë",
-            "description": "detyrë që duhet të bëhet nga njerëzit ose makinat"
+            "displayType": "Detyrë",
+            "description": "për marrjen e përditësimeve në lidhje me përparimin në një detyrë të caktuar"
         },
         "Streams\/number": {
-            "displayType": "numër",
-            "description": "numri matematikor"
+            "displayType": "Numri",
+            "description": "numër matematikor"
         },
         "Streams\/date": {
-            "displayType": "data",
-            "description": "data"
+            "displayType": "Data",
+            "description": "datë"
         },
         "Streams\/text": {
-            "displayType": "tekst",
+            "displayType": "Teksti",
             "description": "trupi i tekstit"
         },
         "Streams\/text\/small": {
-            "displayType": "tekst",
-            "description": "trup i vogël i tekstit"
+            "displayType": "Teksti",
+            "description": "trup i vogël teksti"
         },
         "Streams\/text\/medium": {
-            "displayType": "tekst",
-            "description": "trup i mesëm i tekstit"
+            "displayType": "Teksti",
+            "description": "trupi mesatar i tekstit"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Adresa e postës elektronike",
-            "description": "adresa e postës elektronike"
+            "displayType": "Adresa e emailit",
+            "description": "adresën e emailit"
         },
         "Streams\/text\/phoneNumber": {
             "displayType": "Numri i telefonit",
@@ -315,193 +315,193 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "lidhje në internet"
+            "description": "lidhje në ueb"
         },
         "Streams\/image": {
-            "displayType": "imazh",
+            "displayType": "Imazhi",
             "description": "imazh vizual",
-            "newItem": "Shto imazhin"
+            "newItem": "Shto imazh"
         },
         "Streams\/images": {
             "displayType": "Galeria e Imazheve",
-            "description": "galeri e imazheve"
+            "description": "galeria e imazheve"
         },
         "Streams\/album": {
-            "displayType": "album",
+            "displayType": "Albumi",
             "description": "një album me të cilin lidhen media të ndryshme"
         },
         "Streams\/file": {
-            "displayType": "skedar",
-            "description": "skedar i ngarkuar",
-            "newItem": "Shto skedarin"
+            "displayType": "Skedari",
+            "description": "skedari i ngarkuar",
+            "newItem": "Shto skedar"
         },
         "Streams\/audio": {
             "displayType": "Klip audio",
             "description": "klip audio",
-            "newItem": "Shto Audio"
+            "newItem": "Shto audio"
         },
         "Streams\/video": {
-            "displayType": "Klip video",
+            "displayType": "Videoklipi",
             "description": "videoklip",
-            "newItem": "Shto video"
+            "newItem": "Shto Video"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
+            "displayType": "Transmetim i drejtpërdrejtë",
             "description": "audio ose video live"
         },
         "Streams\/category": {
-            "displayType": "kategori",
-            "description": "një kategori me të cilën mund të lidhen rrjedhat e tjera"
+            "displayType": "Kategoria",
+            "description": "një kategori me të cilën mund të lidhen rrymat e tjera"
         },
         "Streams\/participating": {
-            "displayType": "Indeksi i Pjesëmarrjes",
-            "description": "rrjedhjet janë të lidhura \/ nuk lidhen me këtë kur një përdorues bashkohet \/ largohet"
+            "displayType": "Indeksi pjesëmarrës",
+            "description": "transmetimet janë të lidhura\/pa lidhje me këtë kur një përdorues bashkohet\/largohet"
         },
         "Streams\/interest": {
-            "displayType": "interes",
-            "description": "përfaqëson interesin e përdoruesit për një temë të caktuar"
+            "displayType": "Interesi",
+            "description": "përfaqëson interesin e një përdoruesi për një temë të caktuar"
         },
         "Streams\/incoming": {
-            "displayType": "hyrje",
+            "displayType": "Në hyrje",
             "description": "destinacioni për mesazhet e dërguara nga përdoruesit e tjerë"
         },
         "Streams\/chat": {
-            "displayType": "bisedë",
-            "description": "një bisedë midis përdoruesve, me histori"
+            "displayType": "bashkëbisedim",
+            "description": "një bisedë midis përdoruesve, me historinë"
         },
         "Streams\/webrtc": {
             "displayType": "Thirrje në kohë reale",
-            "description": "një thirrje video \/ audio në kohë reale"
+            "description": "një telefonatë video\/audio në kohë reale"
         },
         "Streams\/tasks": {
             "description": "kategori për detyra",
-            "displayType": "detyrat"
+            "displayType": "Detyrat"
         },
         "Streams\/experience": {
-            "description": "një përvojë e zakonshme për anëtarët e një komuniteti",
-            "displayType": "Përvojë e përbashkët për anëtarët e një komuniteti"
+            "description": "një përvojë e përbashkët për anëtarët e një komuniteti",
+            "displayType": "Përvoja e zakonshme për anëtarët e një komuniteti"
         },
         "Streams\/greeting": {
-            "description": "përshëndetje me të cilën një përdorues mund të prezantojë veten e tyre",
-            "displayType": "përshëndetje"
+            "description": "përshëndetje me të cilën një përdorues mund të prezantohet",
+            "displayType": "pershendetje"
         },
         "Streams\/pdf": {
-            "displayType": "Dokumenti PDF",
-            "description": "Dokumenti PDF",
+            "displayType": "dokument PDF",
+            "description": "dokument PDF",
             "newItem": "Shto PDF"
         },
         "Streams\/question": {
             "displayType": "Pyetje",
-            "description": "rryma e pyetjeve"
+            "description": "rrymë pyetjesh"
         },
         "Streams\/answer": {
-            "displayType": "Përgjigje",
-            "description": "lumë përgjigjesh"
+            "displayType": "Përgjigju",
+            "description": "rrjedha e përgjigjeve"
         },
         "Streams\/calls": {
-            "displayType": "Telefonatat",
+            "displayType": "Thirrjet",
             "description": "kategori për Streams\/webrtc",
-            "MaxRelationsExceeded": "Thirrjet maksimale u tejkaluan"
+            "MaxRelationsExceeded": "Maksimumi i telefonatave u tejkalua"
         }
     },
     "messages": {
         "html": {
-            "posted": "99 99 999}} postoi një mesazh <em>{{1000}<\/em> to tek {1001}"
+            "posted": "postoi një mesazh <em>{{message.fields.type}}<\/em> për {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "komentohet",
+            "commentedOn": "komentuar mbi",
             "in": "në",
-            "body": "{99 999}} në {{& url}}: {{& message.fields.content}}",
+            "body": "në {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "eshte postuar ne",
-                "byAvatar": "nga {99 999}}"
+                "hasBeenPostedTo": "është postuar në",
+                "byAvatar": "nga {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "ka një new 999 të reja",
+                "hasANew": "ka një të re {{instructions.fromDisplayType}}",
                 "byAvatar": "shtuar nga {{avatar.displayName}}"
             },
-            "startedCallIn": "filloi një telefonatë në"
+            "startedCallIn": "filloi një telefonatë"
         }
     },
     "menu": {
-        "placeholder": "shtypni titullin e faqes",
-        "ModTab": "Modifikoni Artikullin",
-        "Save": "Save",
-        "Delete": "fshini",
-        "Submenu": "submenu"
+        "placeholder": "shkruani titullin e faqes",
+        "ModTab": "Modifiko artikullin",
+        "Save": "Ruaj",
+        "Delete": "Fshije",
+        "Submenu": "Nënmenyja"
     },
     "errors": {
         "HiddenFromYou": "Kjo përmbajtje është e fshehur nga ju."
     },
     "audio": {
-        "record": "Rekord",
+        "record": "Regjistro",
         "reset": "Rivendos",
         "edit": "Redakto",
-        "title": "titulli",
+        "title": "titullin",
         "description": "përshkrim",
         "upload": "Ngarkoni",
         "link": "Lidhje",
-        "setUrl": "Vendos URL",
+        "setUrl": "Cakto URL-në",
         "save": "Ruaj",
         "setClip": "Klip i prerë",
         "invalidURL": "URL e pavlefshme",
         "invalidFile": "Skedar i pavlefshëm",
-        "errorNoSource": "Asnjë burim audio",
+        "errorNoSource": "Nuk ka burim audio",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
         "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
     },
     "video": {
         "reset": "Rivendos",
         "edit": "Redakto",
-        "title": "titulli",
+        "title": "titullin",
         "description": "përshkrim",
         "upload": "Ngarkoni",
         "link": "Lidhje",
-        "setUrl": "Vendos URL",
+        "setUrl": "Cakto URL-në",
         "save": "Ruaj",
         "setClip": "Klip i prerë",
         "invalidURL": "URL e pavlefshme",
         "invalidFile": "Skedar i pavlefshëm",
-        "errorNoSource": "Asnjë burim video",
+        "errorNoSource": "Nuk ka burim video",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
         "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
     },
     "pdf": {
         "reset": "Rivendos",
         "edit": "Redakto",
-        "title": "titulli",
+        "title": "titullin",
         "description": "përshkrim",
         "upload": "Ngarkoni",
         "link": "Lidhje",
-        "setUrl": "Vendos URL",
+        "setUrl": "Cakto URL-në",
         "save": "Ruaj",
         "setClip": "Klip i prerë",
         "invalidURL": "URL e pavlefshme",
         "invalidFile": "Skedar i pavlefshëm",
-        "errorNoSource": "Asnjë burim pdf",
+        "errorNoSource": "Nuk ka burim pdf",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
         "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}"
     },
     "image": {
         "reset": "Rivendos",
         "edit": "Redakto",
-        "title": "titulli",
+        "title": "titullin",
         "description": "përshkrim",
         "upload": "Ngarkoni",
         "link": "Lidhje",
-        "setUrl": "Vendos URL",
+        "setUrl": "Cakto URL-në",
         "save": "Ruaj",
         "setClip": "Klip i prerë",
         "invalidURL": "URL e pavlefshme",
         "invalidFile": "Skedar i pavlefshëm",
-        "errorNoSource": "Asnjë burim imazhi",
+        "errorNoSource": "Nuk ka burim imazhi",
         "uploadLimit": "Madhësia maksimale e skedarit: {{size}}",
         "errorFileSize": "Na vjen keq, por skedari është shumë i madh.<br> Madhësia maksimale e skedarit është {{size}}",
         "uploadedImage": "Imazhi i ngarkuar",
         "imageTitle": "Titulli i imazhit"
     },
     "questions": {
-        "Questions": "Pyetjet",
+        "Questions": "Pyetje",
         "Answers": "Përgjigjet",
         "AnswerQuestion": "Pergjigju pyetjes",
         "SetYourAnswer": "Ju lutemi përgjigjuni pyetjes",
@@ -511,27 +511,27 @@
         "answerOption": "Opsioni",
         "answerOptionExclusive": "Ekskluzive",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "përgjigje falas ...",
-        "SaveQuestion": "Ruaje pyetjen",
+        "FreeAnswer": "Shkruani përgjigjen tuaj këtu",
+        "SaveQuestion": "Ruaj pyetjen",
         "SaveAnswer": "Ruaj përgjigjen",
         "AddAnotherAnswer": "Shtoni një përgjigje tjetër",
-        "ErrorAnswers": "Ju lutemi shtoni edhe një përgjigje",
-        "AlreadyAnswered": "Tashmë përgjigjur",
-        "TitlePlaceholder": "Shtyp pyetjen tënde",
-        "ContentPlaceholder": "Vendosni ndonjë informacion shtesë këtu për t&#39;i ndihmuar njerëzit të përgjigjen",
+        "ErrorAnswers": "Ju lutemi shtoni qoftë edhe një përgjigje",
+        "AlreadyAnswered": "Tashmë është përgjigjur",
+        "TitlePlaceholder": "Shkruani pyetjen tuaj",
+        "ContentPlaceholder": "Vendos çdo informacion shtesë këtu për t&#39;i ndihmuar njerëzit të përgjigjen",
         "ErrorTitle": "Kërkohet pyetje",
-        "Placeholder": "Vendmbajtës"
+        "Placeholder": "Vendmbajtësi"
     },
     "experience": {
-        "NewExperience": "Përvoja e re",
+        "NewExperience": "Përvojë e re",
         "DefineTitle": "Ju lutemi përcaktoni një titull",
         "Create": "Krijo"
     },
     "calls": {
-        "SettingsTitle": "Telefonatat",
-        "MaxCalls": "Thirrjet maksimale",
+        "SettingsTitle": "Thirrjet",
+        "MaxCalls": "Maks telefonon",
         "Update": "Përditëso",
-        "NoCallsYet": "Ende pa thirrje",
+        "NoCallsYet": "Ende nuk ka telefonata",
         "CallReasonTitle": "Për çfarë bëhet fjalë kjo thirrje?",
         "WaitingRoom": "Dhome pritje"
     }

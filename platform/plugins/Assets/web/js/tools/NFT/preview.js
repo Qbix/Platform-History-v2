@@ -5,7 +5,8 @@
 
     var Users = Q.Users;
     var Assets = Q.Assets;
-    var NFT = Assets.NFT;
+    var Web3 = Assets.Web3;
+    var NFT = Assets.NFT.Web3;
 
     /**
      * YUIDoc description goes here

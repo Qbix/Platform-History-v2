@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "binnen {{1}}"
     },
     "units": {
         "meter": "meter",
         "meters": "meters",
         "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "kilometers": "kilometers",
         "km": "km",
-        "mile": "mile",
-        "miles": "miles",
+        "mile": "myl",
+        "miles": "milen",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
+        "foot": "foet",
+        "feet": "fuotten",
         "inches": "inches"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Ik bin ynteressearre yn dingen dy&#39;t plakfine binnen {{select}} fan",
+        "update": "Update Myn lokaasje",
+        "set": "Myn lokaasje ynstelle",
+        "prompt": "{{ClickOrTap}} hjir om<br> set dyn<br> lokaasje",
+        "myCurrentLocation": "Myn hjoeddeistige lokaasje",
+        "enterAddress": "Fier in adres yn",
+        "enterPostcode": "Fier jo postkoade \/ postkoade yn",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Foegje Lokaasje ta",
+            "title": "Nije Lokaasje",
+            "nameYourLocation": "Neam jo lokaasje"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Dizze lokaasje bewarje?",
+            "message": "Binne jo fan plan om dizze lokaasje yn &#39;e takomst wer te brûken?",
+            "ok": "ja",
+            "cancel": "Nee"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Neam dizze lokaasje",
+            "placeholder": "Thús, Wurk ensfh.",
+            "ok": "Rêde"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Kies Lokaasje"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
+        "filterPlaceholder": "Elk gebiet binnen dizze lokaasje?",
+        "newArea": "Nij gebiet",
+        "promptTitle": "Fier in namme yn foar it gebiet:",
+        "absent": "Stel asjebleaft gebiet yn",
+        "error": "Fersin",
+        "exist": "Gebiet bestiet al",
+        "addNewArea": "Add nij gebiet",
         "add": "Add"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "in samling lokaasjes",
+            "displayType": "Lokaasjes"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Fertsjintwurdet in gebou, lokaasje, skip, park, ensfh.",
+            "displayType": "Lokaasje"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Fertsjintwurdet in gebiet binnen in lokaasje, lykas in keamer of suite",
+            "displayType": "Krite"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Fertsjintwurdet in flier yn in gebou of skip",
+            "displayType": "Flier"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Fertsjintwurdet in kolom yn in gebou of skip",
+            "displayType": "Pylder"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategory foar dingen binnen in bepaalde ôfstân fan in geoash",
+            "displayType": "Tichtby plakken"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategory foar dingen binnen in bepaalde ôfstân fan in geoash, oerienkommende in ynteresse",
+            "displayType": "Plakken ynteresse"
         }
     }
 }

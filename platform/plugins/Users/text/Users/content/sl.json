@@ -1,132 +1,132 @@
 {
     "analytics": {
-        "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Title": "analitika",
+        "Daily": "Dnevno",
+        "Weekly": "tedensko",
+        "Monthly": "Mesečno",
+        "Application": "Aplikacija",
+        "Pages": "strani",
+        "Services": "Storitve",
+        "Faq": "Pogosta vprašanja",
+        "WeekDays": "Dnevi v tednu"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Vpiši se",
+        "LogOut": "Odjava"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Nastavi {{1}} kot moj primarni {{2}}",
+        "ChoosePassPhrase": "Izberite <strong>geslo<\/strong> za prijavo.<br> Preprosta fraza, sestavljena iz nekaj besed, ki si jih boste zlahka zapomnili.",
+        "ChoosePassPhraseSeeSuggestions": "Izberite dobro <strong>geslo<\/strong> , da zaščitite svoj račun. Oglejte si predloge za nekaj idej.",
+        "LogOutAndTryAgain": "Odjavite se in poskusite znova",
+        "IfYouFeel": "Če menite, da je šlo nekaj narobe, lahko",
+        "SetIdentifierButtonTitle": "začeti znova"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Začeti"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Začeti",
+        "Authorize": "Pooblasti",
+        "TermsLabel": "Prebral sem in se strinjam<br> na {{link}}",
+        "TermsTitle": "Pogoji",
+        "mustAgree": "Najprej se morate strinjati s pogoji."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Sprejemam {{link}}",
+        "TermsTitle": "Pogoji"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "dovoljenje",
+        "prompt": "Ali želite omogočiti obvestila? V realnem času boste prejemali obvestila o stvareh, ki vas zanimajo.",
+        "yes": "da",
+        "no": "št",
+        "WelcomePleaseVerifyEmail": "Dobrodošli! Prosimo, preverite svoj e-poštni naslov.",
+        "WelcomeVerifyEmail": "Dobrodošli! Preverite svoj e-poštni naslov.",
+        "ForgetPass": "Hej, si pozabil svoje geslo?",
+        "PassphraseSaved": "Vaše geslo je shranjeno.",
+        "IdentifierActivated": "Vaš {{type}} je bil aktiviran.",
+        "CompletedActivation": "Dokončali ste aktivacijo uporabnika.",
+        "CompletedActivationLogIn": "Dokončali ste aktivacijo uporabnika. Poskusite se prijaviti zdaj."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Izberite stik",
+            "CreateAccount": "+ Nov stik",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ni bilo mogoče najti",
+            "SearchByName": "Išči po imenu",
+            "EmptyContacts": "Stikov ni bilo mogoče najti ..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Izberite stik od {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Prosimo, izberite oznako.",
+        "inviteUser": "Povabite uporabnike",
+        "selectRole": "Izberite Vloga",
+        "inviteRole": "Povabi {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Izbran je neveljaven jezik",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Dobrodošli",
+        "directions": "Ustvarite račun ali se prijavite.",
+        "directionsNoRegister": "Prijavite se, če imate račun.",
+        "goButton": "Pojdi",
+        "passphrase": "Vnesite svoje geslo:",
+        "loginButton": "Začeti",
+        "registerButton": "Začeti",
+        "resendButton": "Pošlji aktivacijsko sporočilo",
+        "forgot": "Ste pozabili?",
+        "resendConfirm": "Ali želite poslati sporočilo za ponastavitev gesla?",
+        "resendSuccess": "Preverite, ali je sporočilo, da ponastavite geslo",
+        "resendClose": "Zapri",
+        "noPassphrase": "Preden se lahko prijavite, morate nastaviti geslo s klikom na povezavo v aktivacijskem sporočilu.",
+        "notVerified": "Za prijavo si morate poslati aktivacijsko sporočilo.",
+        "emailExists": "Ste se že poskušali registrirati s tem e-poštnim naslovom? Če je tako, preverite svojo mapo »Prejeto«, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite za ponovno pošiljanje sporočila<\/a>",
+        "mobileExists": "Ste se že poskušali registrirati s to številko mobilnega telefona? Če je tako, preverite svoj SMS, da aktivirate svoj račun. <a href='#resend' class='Q_button Users_activation_resend'>Kliknite za ponovno pošiljanje sporočila<\/a>",
+        "usingOther": "ali pa lahko",
+        "prompt": "Izberi uporabniško ime:",
+        "newUser": "ali ustvarite nov račun spodaj",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "vaš mobilni telefon ali e-pošta",
+            "mobile": "vnesite svoj mobilni #",
+            "email": "Vnesi svoj elektronski naslov",
+            "username": "uporabljajte samo črke in številke"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Sprejemate pogoje storitve?",
+        "facebookNoEmail": "V vašem facebook računu manjka potrjen e-poštni naslov. Preprosto se prijavite na domači način.",
+        "picTooltip": "To sliko lahko pozneje spremenite",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Prijavite se v {{host}} ob {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Preusmeritev v Denarnico",
+                "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v svojo denarnico. Ko se prijavite, se vrnite na to stran."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Dodajte način za prijavo",
+        "sendMessage": "Pošlji aktivacijsko sporočilo",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "vnesite svoj mobilni telefon ali e-pošto",
+            "mobile": "vnesite svojo mobilno številko",
+            "email": "Vnesi svoj elektronski naslov",
+            "username": "uporabniško ime"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Račun",
+        "areUsing": "Uporabljate {{platform}} kot",
+        "noLongerUsing": "Niste več povezani z {{platform}} kot",
+        "doAuth": "Prijavite se s tem računom",
+        "doSwitch": "Preklopite na ta račun"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "Lastnik",
         "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Member": "član",
+        "Guest": "Gost",
+        "Host": "Gostitelj"
     }
 }

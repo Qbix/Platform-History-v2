@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Ketik untuk membayar"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: caj diproses untuk {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Terima kasih atas pembayaran anda kepada {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} melanggan {{plan.title}}",
+        "YouSubscribedTo": "Anda telah melanggan {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Anda mendapat bayaran sebanyak {{displayAmount}} daripada {{call 'publisher.displayName'}} oleh &quot;{{description}}&quot;",
+        "HasBeenCharged": "Hei, ini hanya untuk memberitahu anda {{1}} telah dikenakan bayaran {{2}} untuk {{3}} oleh {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Terima kasih atas pembayaran anda untuk &quot;{{description}}&quot;",
+        "HavePaid": "Hai {{1}}, ini hanyalah pengesahan pantas bahawa anda telah berjaya membayar {{2}} kepada {{3}} untuk {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Info tentang pesanan",
+        "PaymentMethod": "Kaedah pembayaran",
+        "ContactInfo": "Maklumat hubungan",
+        "Pay": "bayar"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Jemputan diterima oleh {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} memasukkan nama pertama",
+        "Streams_user_lastname": "{{invitedUserName}} memasukkan nama keluarga",
+        "Streams_user_icon": "{{invitedUserName}} memasukkan ikon",
+        "Places_user_location": "{{invitedUserName}} memasukkan lokasi",
+        "Streams_greeting": "{{invitedUserName}} memasukkan salam",
+        "YouHaveCreditsToStart": "Anda mempunyai {{amount}} kredit untuk bermula",
+        "PaymentFor": "Pembayaran untuk &quot;{{1}}&quot;",
+        "PaymentTo": "Pembayaran kepada {{1}}",
+        "PaymentToUser": "Pembayaran kepada {{toUserName}}",
+        "CreatePaidStream": "untuk mencipta {{toStreamName}}",
+        "JoinedPaidStream": "untuk tempahan dalam &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "untuk mewujudkan komuniti &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "sebagai bayaran balik tempahan dalam &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Membeli {{amount}} kredit",
+        "BonusCredits": "Bonus {{amount}} kredit",
+        "BuyAmountCredits": "Beli {{amount}} kredit",
+        "WatchClip": "Memperoleh {{amount}} kredit untuk menonton {{fromStreamTitle}}",
+        "MissingCredits": "Hilang Kredit",
+        "YouMissingCredits": "Anda memerlukan {{amount}} kredit tambahan untuk meneruskan.",
+        "BuyCredits": "Beli kredit",
+        "BuyBonus": "Membeli {{amount}} kredit sekali gus, akan membawa kepada {{bonus}} bonus kredit.",
+        "Buy": "Beli",
+        "PurchaseCredits": "Kredit Belian",
+        "Credits": "Kredit",
+        "ErrorInvalidAmount": "Jumlah tidak sah",
+        "ErrorInvalidCurrency": "Malangnya kami tidak menyokong mata wang {{currency}} lagi",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Tarikh",
+        "Amount": "Jumlah",
+        "Description": "Penerangan",
+        "Client": "Pelanggan",
+        "To": "kepada",
+        "From": "daripada",
+        "SeeHistory": "Lihat sejarah pembayaran untuk {{1}}",
+        "HistoryEmpty": "Anda belum mempunyai data lagi",
+        "PaymentFor": "Menghantar {{amount}} kredit",
+        "PaymentTo": "Menghantar {{amount}} kredit",
+        "PaymentToUser": "Menghantar {{amount}} kredit",
+        "CreatePaidStream": "Menghabiskan {{amount}} kredit",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Menghabiskan {{amount}} kredit"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Menghabiskan {{amount}} kredit"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Menerima {{amount}} kredit",
+            "-": "Menghantar {{amount}} kredit"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Menghabiskan {{amount}} kredit",
+        "BoughtCredits": "Membeli {{amount}} kredit",
+        "BonusCredits": "Mendapat bonus {{amount}} kredit",
+        "InviteAcceptedBy": "Memperoleh {{amount}} kredit",
+        "Streams_user_firstname": "Memperoleh {{amount}} kredit",
+        "Streams_user_lastname": "Memperoleh {{amount}} kredit",
+        "Streams_user_icon": "Memperoleh {{amount}} kredit",
+        "Places_user_location": "Memperoleh {{amount}} kredit",
+        "Streams_greeting": "Memperoleh {{amount}} kredit",
+        "YouHaveCreditsToStart": "Memperoleh {{amount}} kredit"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Tetapkan Maklumat Pembayaran",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Mula Langganan",
+            "message": "Adakah anda ingin melanggan {{title}}?",
+            "ok": "okey",
+            "cancel": "Batal"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kad kredit atau debit",
+        "SubscribePayment": "Langgan Pembayaran",
+        "ImmediatePayment": "Pembayaran Segera"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Tetapkan Maklumat Pembayaran",
+        "BuyAmountCredits": "Beli {{amount}} kredit",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Membuat pembayaran",
+            "message": "Adakah anda bersetuju untuk membayar {{symbol}}{{amount}}?",
+            "ok": "okey",
+            "cancel": "Batal"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Kredit",
+            "description": "menjejaki kredit dan pembayaran"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Pelan Subscription",
+            "description": "pelan langganan"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Langganan",
+            "description": "langganan"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "produk",
+            "description": "produk yang dijual"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Perkhidmatan",
+            "description": "perkhidmatan yang ditawarkan"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Memperoleh {{amount}} kredit"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Membeli {{amount}} kredit"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} kredit"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Menghabiskan {{amount}} kredit"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Menghantar {{amount}} kredit kepada {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Menerima {{amount}} kredit daripada {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Perkhidmatan Baru",
+            "TitlePlaceholder": "Tajuk perkhidmatan",
+            "PricePlaceholder": "Tetapkan harga",
+            "LinkPlaceholder": "tetapkan pautan maklumat tambahan",
+            "DescriptionPlaceholder": "Penerangan perkhidmatan",
+            "SaveService": "Simpan Perkhidmatan",
+            "SelectRequiredParticipants": "Peserta Diperlukan"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Urus Templat Perkhidmatan",
+        "ManageServices": "Urus Perkhidmatan",
+        "Free": "Percuma",
+        "OptionalContribution": "Sumbangan pilihan",
+        "RequiredPayment": "Bayaran yang diperlukan",
+        "AreYouSureDelete": "Adakah anda pasti mahu memadamkan perkhidmatan ini?",
+        "AmountServicesRelated": "Terdapat {{amount}} ketersediaan yang berkaitan dengan perkhidmatan ini. Mereka juga akan dikeluarkan."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Maklumat tentang {{title}} NFT",
+        "Description": "Maklumat terperinci tentang NFT",
+        "FixedBid": "Beli sekarang",
+        "CurrentBid": "Tawaran semasa",
+        "StartingIn": "Bermula dalam",
+        "EndingIn": "Berakhir dalam",
+        "CreateNFT": "Buat NFT",
+        "TitlePlaceholder": "Berikan NFT anda tajuk",
+        "DescriptionPlaceholder": "Berikan huraian NFT anda",
+        "CreateYourNFT": "Cipta NFT anda",
+        "Royalties": "Royalti",
+        "RoyaltyPlaceholder": "Pilihan. Amaun yang dibayar kepada pencipta sebelum pemindahan.",
+        "ExpirationDate": "Tarikh luput",
+        "StartingDate": "Tarikh mula",
+        "BidsBelowThisAmount": "Bida di bawah jumlah ini tidak akan dibenarkan",
+        "MinimumBid": "Tawaran minimum",
+        "Price": "harga",
+        "Owner": "Pemilik",
+        "SelectCategory": "Pilih Kategori",
+        "Day": "Hari",
+        "Days": "hari-hari",
+        "Hour": "Jam",
+        "Hours": "Jam",
+        "Minute": "minit",
+        "Minutes": "minit",
+        "Second": "Kedua",
+        "Seconds": "Detik",
+        "SalesCreator": "daripada jualan akan diberikan kepada pencipta",
+        "Details": "Butiran",
+        "Bids": "bidaan",
+        "History": "Sejarah",
+        "LoremIpsum": "Lorem Ipsum hanyalah teks tiruan bagi industri percetakan dan penataan huruf.",
+        "PutOnSale": "Dijual",
+        "PutOffSale": "Menarik diri daripada jualan",
+        "Transfer": "Pemindahan",
+        "Update": "Kemas kini",
+        "UpdateToken": "Kemas Kini Token",
+        "CreateToken": "Cipta Token",
+        "PlaceBid": "Letakkan taruhan",
+        "SoldOut": "terjual",
+        "NftName": "nama NFT",
+        "DescribeYourNFT": "Sila terangkan NFT anda",
+        "NftPicture": "Gambar untuk mewakili NFT",
+        "NftMovie": "Filem untuk mewakili NFT",
+        "UploadMovie": "Muat naik filem",
+        "MovieSource": "Sumber Filem",
+        "UploadFile": "Muat naik fail",
+        "PutOnMarketplace": "Letakkan di pasaran",
+        "InstantPurchase": "Masukkan harga untuk membolehkan pengguna membeli NFT anda dengan serta-merta",
+        "FixedPrice": "Harga tetap",
+        "TimedAuction": "Lelongan bermasa",
+        "OpenForBids": "Terbuka untuk tawaran",
+        "PriceOnePiece": "Masukkan harga untuk sekeping",
+        "EnterMinimumBid": "Masukkan bida minimum",
+        "SelectChain": "Pilih rantai",
+        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Sila gunakan rantai ini.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Mengimport NFT",
+            "fileNotFound": "Maaf, fail CSV tidak ditemui.",
+            "fileEmpty": "Maaf, fail CSV kosong.",
+            "userIdNotFound": "pengguna wujud tetapi id kosong",
+            "errorLine": "baris {{1}}",
+            "fieldNotFound": "Medan yang diperlukan &quot;{{1}}&quot; tidak ditemui",
+            "taskStreamInvalid": "aliran tugas tidak sah",
+            "instructionsEmpty": "arahan aliran tugas kosong",
+            "complete": "lengkap",
+            "activateUsers": "hantar mesej pengaktifan kepada pengguna?",
+            "importProgress": "Kemajuan",
+            "importOptions": "Pilihan",
+            "sampleCSV": "Muat turun Contoh CSV",
+            "fileLabel": "Muat Naik Hamparan:",
+            "errorsTitle": "Ralat berlaku"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Tapis mengikut Koleksi NFT",
+                "ShowNFTCollection": "Tunjukkan koleksi NFT dalam ...",
+                "AllCollections": "Semua Koleksi"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Semua Pengarang",
+                "AllUsers": "Semua orang",
+                "FilterByAuthors": "Tapis mengikut Pengarang"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Kembali ke Koleksi"
     }
 }

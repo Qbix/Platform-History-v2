@@ -2,34 +2,34 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "رابط لتعزيز",
+                "link": "رابط للترويج",
                 "startDate": "تاريخ البدء",
                 "startTime": "وقت البدء",
                 "endDate": "تاريخ الانتهاء",
                 "endTime": "وقت النهاية",
-                "budget": "ميزانية"
+                "budget": "الدخل"
             },
             "interests": {
                 "Title": "تصفية حسب الفائدة",
                 "FilterInterests": "ابدأ في كتابة اهتمام ..."
             },
             "Interest": "فائدة",
-            "Location": "موقعك"
+            "Location": "موقع"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "اذهب",
-            "PasteLinkHere": "الصق رابط هنا",
+            "Go": "يذهب",
+            "PasteLinkHere": "https: \/\/ ...",
             "BrowseTheWeb": "تصفح",
             "WriteToStartConversation": "اكتب أفكارك لبدء المحادثة",
-            "StartConversation": "بدء المحادثة",
+            "StartConversation": "ابدأ المحادثة",
             "GotoConversation": "اذهب إلى المحادثة",
-            "reset": "إعادة تعيين",
+            "reset": "إعادة ضبط",
             "edit": "تعديل",
-            "link": "حلقة الوصل",
+            "link": "وصلة",
             "setUrl": "تعيين URL",
-            "save": "حفظ",
+            "save": "يحفظ",
             "setClip": "قطع مقطع",
             "invalidURL": "URL غير صالح"
         },
@@ -39,36 +39,36 @@
     },
     "types": {
         "Websites\/article": {
-            "description": "مستند HTML يمكن للعديد من المستخدمين عرضه وتعديله",
+            "description": "مستند HTML يمكن للعديد من المستخدمين عرضه وتحريره",
             "displayType": "مقالة - سلعة"
         },
         "Websites\/slide": {
-            "description": "شريحة في عرض تقديمي ، يمكن أن تتضمن HTML ، صوت إلخ.",
+            "description": "شريحة في عرض تقديمي ، يمكن أن تتضمن HTML والصوت وما إلى ذلك.",
             "displayType": "الانزلاق"
         },
         "Websites\/presentation": {
-            "description": "عرض تقديمي يتكون من عدة شرائح",
+            "description": "عرض يتكون من شرائح مختلفة",
             "displayType": "عرض"
         },
         "Websites\/advert\/unit": {
-            "description": "وحدة إعلانية على موقع الويب",
-            "displayType": "وحدة الإعلان"
+            "description": "وحدة إعلانية على موقع على شبكة الإنترنت",
+            "displayType": "وحدة الاعلان"
         },
         "Websites\/advert\/placement": {
             "description": "طريقة لتجميع الوحدات الإعلانية تحت اسم",
-            "displayType": "الإعلان التنسيب"
+            "displayType": "التنسيب الإعلان"
         },
         "Websites\/advert\/creative": {
-            "description": "محتوى الإعلان",
-            "displayType": "الإعلان الإبداعي"
+            "description": "محتوى للإعلان",
+            "displayType": "إعلان إبداعي"
         },
         "Websites\/advert\/campaign": {
             "description": "حملة إعلانية",
-            "displayType": "أعلن الحملة"
+            "displayType": "حملة إعلانية"
         },
         "Websites\/webpage": {
-            "description": "يمثل موقع ويب تم إلغاء بيانات التعريف الخاصة به",
-            "displayType": "صفحة ويب"
+            "description": "يمثل موقع ويب تم كشط بياناته الوصفية",
+            "displayType": "صفحة على الإنترنت"
         }
     }
 }

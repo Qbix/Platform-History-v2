@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "הקש כדי לשלם"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: החיוב עובד עבור {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "תודה על התשלום שלך אל {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} נרשם ל-{{plan.title}}",
+        "YouSubscribedTo": "נרשמת ל-{{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "אתה מקבל תשלום של {{displayAmount}} מ-{{call 'publisher.displayName'}} על ידי &quot;{{description}}&quot;",
+        "HasBeenCharged": "היי, זה רק כדי ליידע אותך על {{1}} חויב {{2}} עבור {{3}} על ידי {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "תודה על התשלום עבור &quot;{{description}}&quot;",
+        "HavePaid": "היי {{1}}, זה רק אישור מהיר ששילמת בהצלחה {{2}} ל-{{3}} עבור {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "מידע על הזמנה",
+        "PaymentMethod": "אמצעי תשלום",
+        "ContactInfo": "פרטים ליצירת קשר",
+        "Pay": "לְשַׁלֵם"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "ההזמנה התקבלה על ידי {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} הזין את השם הפרטי",
+        "Streams_user_lastname": "{{invitedUserName}} הזין שם משפחה",
+        "Streams_user_icon": "{{invitedUserName}} הוזן סמל",
+        "Places_user_location": "{{invitedUserName}} הזין מיקום",
+        "Streams_greeting": "{{invitedUserName}} הזין ברכה",
+        "YouHaveCreditsToStart": "יש לך {{amount}} זיכויים להתחיל",
+        "PaymentFor": "תשלום עבור &quot;{{1}}&quot;",
+        "PaymentTo": "תשלום אל {{1}}",
+        "PaymentToUser": "תשלום אל {{toUserName}}",
+        "CreatePaidStream": "ליצירת {{toStreamName}}",
+        "JoinedPaidStream": "להזמנה ב&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "ליצירת קהילה &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "כהחזר הזמנה ב&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "קנה {{amount}} זיכויים",
+        "BonusCredits": "בונוס {{amount}} זיכויים",
+        "BuyAmountCredits": "קנה {{amount}} זיכויים",
+        "WatchClip": "הרוויח {{amount}} קרדיטים על צפייה ב{{fromStreamTitle}}",
+        "MissingCredits": "חסרים קרדיטים",
+        "YouMissingCredits": "אתה צריך עוד {{amount}} זיכויים כדי להמשיך.",
+        "BuyCredits": "קנה קרדיטים",
+        "BuyBonus": "קנייה של {{amount}} זיכויים בבת אחת, תוביל לבונוס של {{bonus}} זיכויים.",
+        "Buy": "לִקְנוֹת",
+        "PurchaseCredits": "רכישת קרדיטים",
+        "Credits": "נקודות זכות",
+        "ErrorInvalidAmount": "סכום לא חוקי",
+        "ErrorInvalidCurrency": "למרבה הצער, אנחנו עדיין לא תומכים במטבע {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} זיכויים",
+            "BonusCredits": "{{amount}} זיכויים"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "תַאֲרִיך",
+        "Amount": "כמות",
+        "Description": "תיאור",
+        "Client": "לָקוּחַ",
+        "To": "ל",
+        "From": "מ",
+        "SeeHistory": "ראה היסטוריית תשלומים עבור {{1}}",
+        "HistoryEmpty": "אין לך עדיין נתונים",
+        "PaymentFor": "נשלחו {{amount}} זיכויים",
+        "PaymentTo": "נשלחו {{amount}} זיכויים",
+        "PaymentToUser": "נשלחו {{amount}} זיכויים",
+        "CreatePaidStream": "בזבז {{amount}} קרדיטים",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "הרוויח {{amount}} זיכויים",
+            "-": "בזבז {{amount}} קרדיטים"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "הרוויח {{amount}} זיכויים",
+            "-": "בזבז {{amount}} קרדיטים"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "קיבל {{amount}} זיכויים",
+            "-": "נשלחו {{amount}} זיכויים"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "בזבז {{amount}} קרדיטים",
+        "BoughtCredits": "קנה {{amount}} זיכויים",
+        "BonusCredits": "קיבלת זיכויים של {{amount}} בונוס",
+        "InviteAcceptedBy": "הרווח {{amount}} זיכויים",
+        "Streams_user_firstname": "הרווח {{amount}} זיכויים",
+        "Streams_user_lastname": "הרווח {{amount}} זיכויים",
+        "Streams_user_icon": "הרווח {{amount}} זיכויים",
+        "Places_user_location": "הרוויח {{amount}} זיכויים",
+        "Streams_greeting": "הרוויח {{amount}} זיכויים",
+        "YouHaveCreditsToStart": "הרוויח {{amount}} זיכויים"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "הגדר פרטי תשלום",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "התחל מנוי",
+            "message": "האם תרצה להירשם ל-{{title}}?",
+            "ok": "בסדר",
+            "cancel": "לְבַטֵל"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "כרטיס אשראי או חיוב",
+        "SubscribePayment": "הירשם תשלום",
+        "ImmediatePayment": "תשלום מיידי"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "הגדר פרטי תשלום",
+        "BuyAmountCredits": "קנה {{amount}} זיכויים",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "לבצע תשלום",
+            "message": "האם אתה מסכים לשלם {{symbol}}{{amount}}?",
+            "ok": "בסדר",
+            "cancel": "לְבַטֵל"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "נקודות זכות",
+            "description": "עוקב אחר זיכויים ותשלומים"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "תוכנית מנוי",
+            "description": "תוכנית מנוי"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "מִנוּי",
+            "description": "מִנוּי"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "מוצר",
+            "description": "המוצר הנמכר"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "שֵׁרוּת",
+            "description": "השירות המוצע"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "הרווח {{amount}} זיכויים"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "קנה {{amount}} זיכויים"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "בונוס {{amount}} זיכויים"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "בזבז {{amount}} קרדיטים"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "נשלחו {{amount}} זיכויים אל {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "קיבלו {{amount}} זיכויים מ-{{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "שירות חדש",
+            "TitlePlaceholder": "כותרת השירות",
+            "PricePlaceholder": "קבע מחיר",
+            "LinkPlaceholder": "הגדר קישור מידע נוסף",
+            "DescriptionPlaceholder": "תיאור השירות",
+            "SaveService": "שמור שירות",
+            "SelectRequiredParticipants": "משתתפים נדרשים"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "ניהול תבניות שירות",
+        "ManageServices": "ניהול שירותים",
+        "Free": "חינם",
+        "OptionalContribution": "תרומה אופציונלית",
+        "RequiredPayment": "תשלום נדרש",
+        "AreYouSureDelete": "האם אתה בטוח שברצונך למחוק שירות זה?",
+        "AmountServicesRelated": "ישנן {{amount}} זמינות הקשורות לשירות זה. הם גם יוסרו."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "מידע על {{title}} NFT",
+        "Description": "מידע מפורט על NFT",
+        "FixedBid": "קנה עכשיו",
+        "CurrentBid": "הצעת מחיר נוכחית",
+        "StartingIn": "מתחיל ב",
+        "EndingIn": "מסתיים ב",
+        "CreateNFT": "צור NFT",
+        "TitlePlaceholder": "תן ל-NFT שלך כותרת",
+        "DescriptionPlaceholder": "תן ל-NFT שלך תיאור",
+        "CreateYourNFT": "צור את ה-NFT שלך",
+        "Royalties": "תמלוגים",
+        "RoyaltyPlaceholder": "אופציונאלי. הסכום ששולם ליוצר לפני ההעברה.",
+        "ExpirationDate": "תאריך תפוגה",
+        "StartingDate": "תאריך התחלה",
+        "BidsBelowThisAmount": "לא תתאפשר הצעות מתחת לסכום זה",
+        "MinimumBid": "הצעת מינימום",
+        "Price": "מחיר",
+        "Owner": "בעלים",
+        "SelectCategory": "בחר קטגוריה",
+        "Day": "יְוֹם",
+        "Days": "ימים",
+        "Hour": "שָׁעָה",
+        "Hours": "שעה (ות",
+        "Minute": "דַקָה",
+        "Minutes": "דקות",
+        "Second": "שְׁנִיָה",
+        "Seconds": "שניות",
+        "SalesCreator": "מהמכירות יעברו ליוצר",
+        "Details": "פרטים",
+        "Bids": "הצעות מחיר",
+        "History": "הִיסטוֹרִיָה",
+        "LoremIpsum": "Lorem Ipsum הוא פשוט טקסט דמה של תעשיית הדפוס והקביעה.",
+        "PutOnSale": "שים למכירה",
+        "PutOffSale": "לסגת ממכירה",
+        "Transfer": "לְהַעֲבִיר",
+        "Update": "עדכון",
+        "UpdateToken": "עדכן אסימון",
+        "CreateToken": "צור אסימון",
+        "PlaceBid": "הצע הצעה",
+        "SoldOut": "נמכר",
+        "NftName": "שם NFT",
+        "DescribeYourNFT": "אנא תאר את ה-NFT שלך",
+        "NftPicture": "תמונה לייצג NFT",
+        "NftMovie": "סרט לייצג NFT",
+        "UploadMovie": "העלה סרט",
+        "MovieSource": "מקור הסרט",
+        "UploadFile": "לעלות קובץ",
+        "PutOnMarketplace": "שים בשוק",
+        "InstantPurchase": "הזן מחיר כדי לאפשר למשתמשים לרכוש את ה-NFT שלך באופן מיידי",
+        "FixedPrice": "מחיר קבוע",
+        "TimedAuction": "מכירה פומבית מתוזמנת",
+        "OpenForBids": "פתוח להצעות",
+        "PriceOnePiece": "הזן מחיר עבור חתיכה אחת",
+        "EnterMinimumBid": "הזן הצעת מינימום",
+        "SelectChain": "בחר שרשרת",
+        "WrongChain": "NFT זה נוצר תחת &quot;{{chain}}&quot;. אנא השתמש בשרשרת זו.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "ייבוא של NFT",
+            "fileNotFound": "מצטערים, קובץ CSV לא נמצא.",
+            "fileEmpty": "מצטערים, קובץ ה-CSV ריק.",
+            "userIdNotFound": "המשתמש קיים אך המזהה ריק",
+            "errorLine": "שורה {{1}}",
+            "fieldNotFound": "השדה הנדרש &quot;{{1}}&quot; לא נמצא",
+            "taskStreamInvalid": "זרם המשימות לא חוקי",
+            "instructionsEmpty": "הוראות זרם המשימות ריקות",
+            "complete": "לְהַשְׁלִים",
+            "activateUsers": "לשלוח הודעת הפעלה למשתמשים?",
+            "importProgress": "התקדמות",
+            "importOptions": "אפשרויות",
+            "sampleCSV": "הורד CSV לדוגמה",
+            "fileLabel": "העלה גיליון אלקטרוני:",
+            "errorsTitle": "אירעו שגיאות"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "סינון לפי אוספי NFT",
+                "ShowNFTCollection": "הצג את אוסף NFT ב...",
+                "AllCollections": "כל האוספים"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "כל המחברים",
+                "AllUsers": "כל אחד",
+                "FilterByAuthors": "סנן לפי מחברים"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "חזרה לאוסף"
     }
 }

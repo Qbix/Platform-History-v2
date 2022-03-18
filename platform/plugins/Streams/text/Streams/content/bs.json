@@ -1,82 +1,82 @@
 {
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Nova stavka"
     },
     "labels": {
         "Streams\/invited": "Ljudi koje sam pozvao",
         "Streams\/invitedMe": "Ko me je pozvao",
         "AreYouAgree": "Slažete li se?",
         "Yes": "Da",
-        "No": "Ne",
+        "No": "br",
         "DoYouAgree": "Slažeš li se?"
     },
     "interests": {
-        "Filter": "Šta uživate?",
-        "CanAdd": "Ako i dalje ne možete pronaći ono što tražite, u nastavku možete dodati novu kamatu:",
-        "TrySynonyms": "Ne vidite? Isprobajte neke sinonime.",
-        "AddUnderCategory": "Dodaj pod kategoriju ...",
-        "Other": "Drugo",
-        "Unlisted": "Unlisted"
+        "Filter": "Koji su vaši interesi?",
+        "CanAdd": "Ako i dalje ne možete pronaći ono što tražite, možete dodati novo interesovanje ispod:",
+        "TrySynonyms": "Ne vidite? Pokušajte s nekim sinonimima.",
+        "AddUnderCategory": "Dodaj pod kategoriju...",
+        "Other": "Ostalo",
+        "Unlisted": "Nenavedeno"
     },
     "chat": {
-        "flaggedForAdminReview": "Poruka je označena za pregled administratora. Dodirnite ponovo za brisanje.",
-        "noOneSaid": "Niko nije ništa rekao",
-        "closeChatButton": "Zatvori razgovor",
-        "closeChatConfirmTitle": "Zatvori ovaj razgovor?",
+        "flaggedForAdminReview": "Poruka je označena za pregled administratora. Dodirnite ponovo da uklonite zastavicu.",
+        "noOneSaid": "Niko ništa nije rekao",
+        "closeChatButton": "Zatvori chat",
+        "closeChatConfirmTitle": "Zatvoriti ovaj chat?",
         "closeChatConfirm": "Jeste li sigurni da želite zatvoriti ovaj chat?",
         "closeChatConfirmYes": "Da",
-        "closeChatConfirmNo": "Ne",
+        "closeChatConfirmNo": "br",
         "earlierComments": "raniji komentari",
-        "Subscribed": "Isključivanje zvuka",
-        "Unsubscribed": "Dobijajte obavijesti",
+        "Subscribed": "Obavještenja su omogućena",
+        "Unsubscribed": "Obavještenja su isključena",
         "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom razgovoru.",
-        "startedConversation": "započeo razgovor",
-        "RealTimeCall": "Poziv u stvarnom vremenu",
+        "startedConversation": "započeli razgovor",
+        "RealTimeCall": "Poziv u realnom vremenu",
         "SearchByName": "Traži po imenu",
         "Notifications": {
-            "Visit": "{{displayName}} posećuje ćaskanje",
-            "Join": "{{displayName}} pridružio se ćaskanju",
-            "Leave": "{{displayName}} napustio ćaskanje",
-            "RelatedTo": "{{displayName}} pokrenuo je {{stream.displayType}}"
+            "Visit": "{{displayName}} posjećuje chat",
+            "Join": "{{displayName}} se pridružio chatu",
+            "Leave": "{{displayName}} je napustio chat",
+            "RelatedTo": "{{displayName}} je započeo {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Poruka {{& message.fields.type}} do {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} je rekao:",
+        "*": "Poruka {{& message.fields.type}} za {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} je rekao: {{& message.content}}",
         "Streams\/changed": "Promjene u {{stream.fields.title}}",
         "Streams\/invite": "Pozvani ste na {{& stream.fields.title}}",
-        "Streams\/announcement": "Najava u {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} je promijenio pristup streamu",
-        "Streams\/chat\/edit": "Uređena poruka za ćaskanje",
-        "Streams\/chat\/remove": "Uklonjena poruka za ćaskanje",
-        "Streams\/closed": "{{stream.fields.title}} je zatvoren",
+        "Streams\/announcement": "Najava u {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} promijenio pristup u {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Chat poruka uređena u {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Chat poruka uklonjena u {{& stream.fields.title}}",
+        "Streams\/closed": "{{stream.fields.title}} je zatvoreno",
         "Streams\/task\/progress": "Napredak postignut {{stream.fields.title}}",
-        "Streams\/task\/complete": "Zadatak je završen: {{stream.fields.title}}",
-        "Streams\/task\/error": "Greška u toku: {{stream.fields.title}}",
+        "Streams\/task\/complete": "Zadatak završen: {{stream.fields.title}}",
+        "Streams\/task\/error": "Greška tokom: {{stream.fields.title}}",
         "Streams\/incoming\/*": "{{app}}: Dolazna poruka",
-        "Streams\/relatedTo\/Streams\/call": "Novi poziv započeo u {{toTitle}}",
+        "Streams\/relatedTo\/Streams\/call": "Novi poziv je započeo za {{toTitle}}",
         "Streams\/relatedTo\/*": "Novo {{relationDisplayType}} u {{toTitle}}",
         "Streams\/relatedFrom\/*": "Dodano u {{toTitle}} kao {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} spomenuo vas je u komentaru",
-        "Streams\/call": "{{displayName}} započeo je poziv u stvarnom vremenu",
-        "ManageEmailSubscriptions": "upravljanje pretplatama za e-poštu",
-        "IfUnsubscribe": "Ako želite odjaviti pretplatu"
+        "Streams\/mention": "{{&call 'avatar.displayName'}} vas je spomenuo u komentaru",
+        "Streams\/call": "{{displayName}} je započeo poziv u realnom vremenu",
+        "ManageEmailSubscriptions": "upravljajte svojim pretplatama na e-poštu",
+        "IfUnsubscribe": "Ako želite da se odjavite"
     },
     "invite": {
-        "messageContent": "{{displayName}} vas je pozvao na {{inviteUrl}}",
+        "messageContent": "{{displayName}} te pozvao na {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Izaberite iz Kontakata",
-            "chooseAgainFromContacts": "Izaberite Ponovo iz Kontakata",
-            "inviteSelectedContacts": "Pozovi izabrane kontakte",
-            "selectFromContacts": "Izaberite Iz kontakata",
+            "chooseFromContacts": "Odaberite iz svojih kontakata",
+            "chooseAgainFromContacts": "Izaberite Ponovo iz Kontakti",
+            "inviteSelectedContacts": "Pozovite odabrane kontakte",
+            "selectFromContacts": "Odaberite Iz kontakata",
             "photo": "Uslikaj",
-            "photoInstruction": "Ako je osoba koja je skenirala vaš QR kod ispred vas, napravite fotografiju",
+            "photoInstruction": "Ako je osoba koja je skenirala vaš QR kod ispred vas, fotografirajte je",
             "to": "Za: {{Stream Title}}",
             "go": "Idi",
             "title": "Pozovi",
-            "placeholder": "Broj mobilnog telefona ili adresa e-pošte",
-            "orInvite": "Ili pozovite ljude pomoću:",
-            "QR": "{{ClickOrTap}} za generisanje QR koda",
+            "placeholder": "Broj mobilnog telefona ili email adresa",
+            "orInvite": "Ili pozovite ljude koristeći:",
+            "QR": "{{ClickOrTap}} za generiranje QR koda",
             "QRtitle": "Skenirajte ovaj QR kod",
             "QRscanned": "Skenirali su ga!",
             "byEmail": "Email",
@@ -84,41 +84,41 @@
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
             "scannedQR": "{{ClickOrTap}} ako je kod skeniran",
-            "copyLink": "{{ClickOrTap}} za kopiranje pozivnice",
-            "userChooserPlaceholder": "Pretražujte po imenu",
+            "copyLink": "{{ClickOrTap}} za kopiranje linka poziva",
+            "userChooserPlaceholder": "Traži po imenu",
             "shareOrCopyLink": "{{ClickOrTap}} za dijeljenje ili kopiranje linka poziva"
         },
         "email": {
-            "subject": "Hej, vidi ovo",
-            "PleaseVisitLink": "Posjetite sljedeći link:",
-            "InvitingYou": "Pozivam vas na {{title}}",
+            "subject": "Hej, pogledaj ovo",
+            "PleaseVisitLink": "Molimo posjetite sljedeći link:",
+            "InvitingYou": "Pozivam te na {{title}}",
             "HasInvitedYou": "{{displayName}} vas je pozvao na {{title}}",
-            "HasMentionedYou": "{{displayName}} te spominje u &quot;{{title}}&quot;",
-            "YOUAREINVITED": "POZDRAVLJEN ste!",
+            "HasMentionedYou": "{{displayName}} vas je spomenuo u &quot;{{title}}&quot;",
+            "YOUAREINVITED": "POZVANI STE!",
             "AcceptInvite": "Prihvati poziv"
         },
         "sms": {
-            "content": "Pozvani ste na {{title}}. Dodirnite {{url}}"
+            "content": "Pozvani ste na {{title}}. Molimo dodirnite {{url}}"
         },
         "notice": {
-            "text": "Pozvani ste. {{ClickOrTap}} ovde da prihvatim i pridružim se."
+            "text": "Pozvani ste. {{ClickOrTap}} ovdje da prihvatite i pridružite se."
         },
-        "command": "Pozovite",
-        "youCanNowPaste": "Sada možete zalijepiti ovu vezu negdje da biste pozvali ljude"
+        "command": "Pozovi",
+        "youCanNowPaste": "Sada možete zalijepiti ovu vezu negdje da pozovete ljude"
     },
     "followup": {
         "mobile": {
-            "alert": "Pozivi se šalju iz našeg broja, koje vaši prijatelji još ne prepoznaju. Nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći od njih da kliknu na vezu.",
-            "confirm": "Pozivi se šalju iz našeg broja, koje vaši prijatelji još ne prepoznaju. Želite li da nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći da kliknu na vezu.",
-            "check": "Hej, upravo sam ti poslao pozivnicu u {{app}} aplikaciju. Molimo Vas da pogledate sms i kliknete na link!",
+            "alert": "Pozivnice se šalju sa našeg broja, koji vaši prijatelji još ne prepoznaju. Nastavite kratkim tekstom kako biste ih obavijestili da ste dobili pozivnicu i zamolili ih da kliknu na vezu.",
+            "confirm": "Pozivnice se šalju sa našeg broja, koji vaši prijatelji još ne prepoznaju. Da li biste željeli poslati kratki tekst kako biste im rekli da ste dobili pozivnicu i zamolili ih da kliknu na vezu.",
+            "check": "Hej, upravo sam ti poslao pozivnicu za aplikaciju {{app}}. Provjerite svoj sms i kliknite na link!",
             "CheckYourMobile": "Molimo provjerite SMS i slijedite upute!"
         },
         "email": {
-            "alert": "Pozivi se šalju iz našeg domena, koje vaši prijatelji još ne prepoznaju. Nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći od njih da kliknu na vezu.",
-            "confirm": "Pozivi se šalju iz našeg domena, koje vaši prijatelji još ne prepoznaju. Želite li da nastavite sa kratkim tekstom da biste saznali da je poziv stigao od vas, tražeći da kliknu na vezu.",
+            "alert": "Pozivnice se šalju sa naše domene, koju vaši prijatelji još ne prepoznaju. Nastavite kratkim tekstom kako biste ih obavijestili da ste dobili pozivnicu i zamolili ih da kliknu na vezu.",
+            "confirm": "Pozivnice se šalju sa naše domene, koju vaši prijatelji još ne prepoznaju. Da li biste željeli poslati kratki tekst kako biste im rekli da ste dobili pozivnicu i zamolili ih da kliknu na vezu.",
             "subject": "Jeste li dobili pozivnicu?",
-            "body": "Hej, upravo sam ti poslao pozivnicu u {{app}} aplikaciju. Molimo provjerite Vašu e-poštu i kliknite na link tamo!",
-            "CheckYourEmail": "Provjerite e-poštu i slijedite upute!"
+            "body": "Hej, upravo sam ti poslao pozivnicu za aplikaciju {{app}}. Molimo provjerite svoju e-poštu i kliknite na link tamo!",
+            "CheckYourEmail": "Molimo provjerite svoju e-poštu i slijedite upute!"
         }
     },
     "webrtc": {
@@ -129,31 +129,31 @@
             "dialogTitle": "Povezivanje",
             "microphoneBtn": "Omogući mikrofon",
             "cameraBtn": "Omogući kameru",
-            "cameraAndMicrophoneBtn": "Omogući kameru i mikrofon"
+            "cameraAndMicrophoneBtn": "Omogućite kameru i mikrofon"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcije",
-            "permissionDenied": "Dozvola za {{kind}} odbijena. Da biste ga koristili slijedite ove korake:",
-            "point1": "Idite na &quot;Podešavanja&quot; -&gt; &quot;Napredno&quot; -&gt; &quot;Privatnost i sigurnost&quot; -&gt; &quot;Postavke web mjesta&quot; -&gt; &quot;Kamera&quot; ili &quot;Postavke stranice&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Uklonite {{hostname}} sa liste &quot;Blokiraj&quot;"
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Za korištenje slijedite ove korake:",
+            "point1": "Idite na &quot;Postavke&quot; -&gt; &quot;Napredno&quot; -&gt; &quot;Privatnost i sigurnost&quot; -&gt; &quot;Postavke stranice&quot; -&gt; &quot;Kamera&quot; ili &quot;Postavke stranice&quot; -&gt; &quot;Mikrofon&quot;",
+            "point2": "Uklonite {{hostname}} sa liste &quot;Blokiraj&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instrukcije",
-            "permissionDenied": "Dozvola za {{kind}} odbijena. Ponovo učitajte ovu stranicu i potvrdite pristup {{kind}} da biste se pridružili konferenciji."
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Ponovo učitajte ovu stranicu i potvrdite pristup {{kind}} da se pridružite konferenciji."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instrukcije",
-            "permissionDenied": "Dozvola za {{kind}} odbijena. Da biste ga koristili slijedite ove korake:",
-            "point1": "Idite na Android postavke",
-            "point2": "Otvorite &quot;Aplikacije i obavijesti&quot;",
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Za korištenje slijedite ove korake:",
+            "point1": "Idite na svoje Android postavke",
+            "point2": "Otvorite &quot;Aplikacije i obavještenja&quot;",
             "point3": "Pronađite &quot;{{communityName}}&quot; i otvorite ga",
             "point4": "Dodirnite Dozvole",
             "point5": "Omogući {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instrukcije",
-            "permissionDenied": "Dozvola za {{kind}} odbijena. Da biste ga koristili slijedite ove korake:",
-            "point1": "Idite na iOS postavke",
+            "permissionDenied": "Dozvola za {{kind}} odbijena. Za korištenje slijedite ove korake:",
+            "point1": "Idite na svoje iOS postavke",
             "point2": "Otvorite &quot;Privatnost&quot;",
             "point3": "Pronađite {{kind}} i otvorite ga",
             "point4": "Pronađite &quot;{{communityName}}&quot; i omogućite"
@@ -161,81 +161,81 @@
         "notices": {
             "youJoinedRoom": "Pridružio si se sobi",
             "joining": "Pridruživanje: {{userName}}",
-            "sbLeftRoom": "{{userName}} napustio sobu",
-            "youLeftRoom": "Izašli ste iz sobe",
-            "codeCopied": "Izašli ste iz sobe",
-            "sbBeganFbLive": "{{userName}} započeo je emitovanje ovog poziva na Facebooku",
-            "sbStoppedFbLive": "{{userName}} prestao je sa emitovanjem ovog poziva na Facebooku",
-            "youBeganFbLive": "Počeli ste emitovati ovaj poziv na Facebooku",
-            "youStoppedFbLive": "Prestali ste emitirati ovaj poziv na Facebooku",
-            "linkCopiedToCb": "Veza je kopirana u međuspremnik",
-            "codeCopiedToCb": "Kod je kopiran u međuspremnik",
+            "sbLeftRoom": "{{userName}} je napustio sobu",
+            "youLeftRoom": "Napustio si sobu",
+            "codeCopied": "Napustio si sobu",
+            "sbBeganFbLive": "{{userName}} je počeo da emituje ovaj poziv na Fejsbuku",
+            "sbStoppedFbLive": "{{userName}} je prestao emitovati ovaj poziv na Facebooku",
+            "youBeganFbLive": "Počeli ste da emitujete ovaj poziv na Fejsbuku",
+            "youStoppedFbLive": "Prestali ste da emitujete ovaj poziv na Fejsbuku",
+            "linkCopiedToCb": "Link je kopiran u međuspremnik",
+            "codeCopiedToCb": "Kôd je kopiran u međuspremnik",
             "userHasNoVideo": "Učesnik nema video",
-            "openInBrowserAlert": "Otvorite vezu u pregledniku Safari da biste se pridružili konferenciji.",
-            "youBeganVideoRecording": "Počeli ste snimati ovu konferenciju",
+            "openInBrowserAlert": "Otvorite vezu u Safari pretraživaču da se pridružite konferenciji.",
+            "youBeganVideoRecording": "Počeli ste da snimate ovu konferenciju",
             "youStoppedVideoRecording": "Prestali ste snimati ovu konferenciju",
-            "switchingRoom": "Smenjivanje ...",
-            "forceDisconnecting": "Prekinut ćete vezu u roku od 5 sekundi",
-            "youStartedLive": "Počeli ste emitirati ovaj poziv na prilagođeni RTMP",
+            "switchingRoom": "Promena soba...",
+            "forceDisconnecting": "Bićete isključeni u roku od 5 sekundi",
+            "youStartedLive": "Počeli ste da emitujete ovaj poziv na prilagođeni RTMP",
             "youStoppedLive": "Prestali ste emitirati ovaj poziv na prilagođeni RTMP",
-            "sbStartedLiveStreaming": "{{userName}} počeo uživo",
-            "sbStoppedLiveStreaming": "{{userName}} završilo uživo",
-            "liveStopped": "Došlo je do greške pri slanju videa na krajnju tačku",
+            "sbStartedLiveStreaming": "{{userName}} je počeo uživo",
+            "sbStoppedLiveStreaming": "{{userName}} je završio uživo",
+            "liveStopped": "Došlo je do greške prilikom slanja videa na krajnju tačku",
             "forceDisconnectingImmediately": "Domaćin vas je prekinuo"
         },
         "settingsPopup": {
-            "webCamera": "Web kamera",
-            "screenSharing": "Deljenje ekrana",
-            "shareAnotherScreen": "Dijelite drugi ekran",
-            "turnOffCameras": "Isključite sve kamere",
+            "webCamera": "Web Camera",
+            "screenSharing": "Screen Sharing",
+            "shareAnotherScreen": "Podijelite drugi ekran",
+            "turnOffCameras": "Isključite kameru",
             "startFBLive": "Pokrenite Facebook Livestream",
             "stopFBLive": "Zaustavite Facebook Livestream",
-            "fbLiveTitle": "Naslov uživo",
-            "fbLiveDescription": "Opis uživo",
+            "fbLiveTitle": "Naslov prijenosa uživo",
+            "fbLiveDescription": "Opišite svoj prijenos uživo. O čemu se radi?",
             "fbOnlyMeLiveAccess": "Samo ja",
             "fbFriendsAccess": "Prijatelji",
             "fbPublicAccess": "Javno",
             "fbStartLive": "Ići uživo",
-            "fbStopLive": "Prestani uživo",
-            "fbEmbedCode": "Ugradi",
+            "fbStopLive": "Završi prijenos uživo",
+            "fbEmbedCode": "Embed",
             "copy": "Kopiraj",
-            "turnOffVideo": "Isključite dijeljenje kamere \/ ekrana",
-            "turnOffScreenSharing": "Isključite deljenje ekrana",
+            "turnOffVideo": "Isključite dijeljenje kamere\/ekrana",
+            "turnOffScreenSharing": "Isključite dijeljenje ekrana",
             "cameraIsTurnedOff": "Kamera je isključena",
-            "startRecording": "Započnite snimanje",
-            "stopRecording": "Zaustavite snimanje",
-            "recordingInProgress": "Snimanje je u toku ...",
-            "publishOnTimeline": "Objavite na vremenskoj traci",
-            "publishToGroup": "Objavite u grupi",
-            "turnOffAudioInput": "Isključivanje mikrofona",
+            "startRecording": "Započni snimanje",
+            "stopRecording": "Zaustavi snimanje",
+            "recordingInProgress": "Snimanje je u toku...",
+            "publishOnTimeline": "Objavite na vremenskoj liniji",
+            "publishToGroup": "Objavi u grupi",
+            "turnOffAudioInput": "Isključite mikrofon",
             "micIsTurnedOff": "Mikrofon je isključen",
             "start": "Počni",
-            "stop": "Stop",
+            "stop": "Stani",
             "streamingSettings": "Postavke",
-            "streamToRTMP": "Prijenos prema prilagođenom RTMP -u",
+            "streamToRTMP": "Stream na prilagođeni RTMP",
             "dialogTitle": "Video Settings",
             "startBroadcasting": "Počni sa emitovanjem",
-            "broadcastingInProgress": "Emitovanje je u toku"
+            "broadcastingInProgress": "Emitiranje je u toku"
         },
         "participantsPopup": {
             "disconnect": "Prekini vezu",
             "floatingScreens": "Plutajući ekrani",
-            "tiledScreens": "Popločane platne",
-            "loudestExceptMe": "Najglasnije osim mene",
-            "maximizeLoudest": "Maksimizirajte najglasnije",
-            "staticMaximized": "Statički maksimiziran",
-            "manual": "Priručnik",
+            "tiledScreens": "Tiled Screens",
+            "loudestExceptMe": "Najglasniji osim mene",
+            "maximizeLoudest": "Maksimiziraj Najglasnije",
+            "staticMaximized": "Static Maximized",
+            "manual": "Manual",
             "fullScreen": "Cijeli ekran",
             "turnOffCamera": "Sakrij video",
-            "turnOffAudio": "Isključivanje zvuka",
-            "turnOffScreenSharing": "Sakrij deljenje ekrana",
+            "turnOffAudio": "Isključi zvuk",
+            "turnOffScreenSharing": "Sakrij dijeljenje ekrana",
             "turnOnCamera": "Prikaži video",
-            "turnOnAudio": "Zanemarivanje zvuka",
+            "turnOnAudio": "Uključi zvuk",
             "turnOnScreenSharing": "Prikaži dijeljenje ekrana",
             "dialogTitle": "Postavke učesnika"
         },
-        "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom toku.",
-        "streamTitle": "{999}} poziv uživo",
+        "notAllowedToJoinCall": "Nemate dozvolu da se pridružite ovom prijenosu.",
+        "streamTitle": "{{1}} je započeo poziv uživo",
         "preview": {
             "preamble": "Sastanak:",
             "Meeting": "Sastanak",
@@ -261,21 +261,21 @@
     },
     "messages": {
         "html": {
-            "posted": "objavio je <em>{{message.fields.type}}<\/em> poruku {{stream.fields.title}}"
+            "posted": "poslao <em>{{message.fields.type}}<\/em> poruku na {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "komentirao",
-            "in": "u",
+            "commentedOn": "komentarisao",
+            "in": "in",
             "body": "u {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "objavljeno je u",
-                "byAvatar": "do {{avatar.displayName}}"
+                "hasBeenPostedTo": "je objavljeno na",
+                "byAvatar": "od {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "ima novi {{instructions.fromDisplayType}}",
                 "byAvatar": "dodao {{avatar.displayName}}"
             },
-            "startedCallIn": "započeo je poziv"
+            "startedCallIn": "započeo poziv"
         }
     },
     "types": {
@@ -296,11 +296,11 @@
             "displayType": "Zadaci"
         },
         "Streams\/experience": {
-            "description": "zajedničko iskustvo za članove neke zajednice",
-            "displayType": "Uobičajeno iskustvo za članove zajednice"
+            "description": "zajedničko iskustvo za članove zajednice",
+            "displayType": "Zajedničko iskustvo za članove zajednice"
         },
         "Streams\/greeting": {
-            "description": "pozdrav s kojim se korisnik može predstaviti",
+            "description": "pozdrav kojim se korisnik može predstaviti",
             "displayType": "Pozdrav"
         },
         "Streams\/number": {
@@ -317,11 +317,11 @@
         },
         "Streams\/text\/small": {
             "displayType": "Tekst",
-            "description": "mali tekst teksta"
+            "description": "mali korpus teksta"
         },
         "Streams\/text\/medium": {
             "displayType": "Tekst",
-            "description": "srednji dio teksta"
+            "description": "srednje tijelo teksta"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "E-mail adresa",
@@ -333,10 +333,10 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "veza na webu"
+            "description": "link na webu"
         },
         "Streams\/image": {
-            "displayType": "Image",
+            "displayType": "Slika",
             "description": "vizuelna slika",
             "newItem": "Dodaj sliku"
         },
@@ -346,41 +346,41 @@
         },
         "Streams\/album": {
             "displayType": "Album",
-            "description": "album na koji se odnose razni mediji"
+            "description": "album za koji su povezani razni mediji"
         },
         "Streams\/file": {
-            "displayType": "Datoteka",
-            "description": "prenesena datoteka",
+            "displayType": "File",
+            "description": "uploaded file",
             "newItem": "Dodaj datoteku"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio snimak",
-            "newItem": "Dodajte zvuk"
+            "displayType": "Audio isječak",
+            "description": "audio klip",
+            "newItem": "Dodaj audio"
         },
         "Streams\/video": {
-            "displayType": "Video klip",
+            "displayType": "Video Clip",
             "description": "video klip",
             "newItem": "Dodaj video"
         },
         "Streams\/live": {
             "displayType": "Livestream",
-            "description": "audio ili video zapis uživo"
+            "description": "audio ili video uživo"
         },
         "Streams\/category": {
             "displayType": "Kategorija",
-            "description": "kategoriju na koju se mogu povezati drugi tokovi"
+            "description": "kategorija na koju se drugi tokovi mogu povezati"
         },
         "Streams\/participating": {
             "displayType": "Indeks učešća",
-            "description": "potoci su povezani \/ nevezani za to kada se korisnik pridruži \/ napusti"
+            "description": "streamovi su povezani\/nepovezani sa ovim kada se korisnik pridruži\/napusti"
         },
         "Streams\/interest": {
-            "displayType": "Kamata",
-            "description": "predstavlja zanimanje korisnika za određenu temu"
+            "displayType": "Interes",
+            "description": "predstavlja interes korisnika za određenu temu"
         },
         "Streams\/incoming": {
-            "displayType": "Dolazni",
+            "displayType": "Incoming",
             "description": "odredište za poruke koje šalju drugi korisnici"
         },
         "Streams\/chat": {
@@ -388,116 +388,116 @@
             "description": "razgovor između korisnika, sa istorijom"
         },
         "Streams\/webrtc": {
-            "displayType": "Poziv u stvarnom vremenu",
-            "description": "video \/ audio poziv u stvarnom vremenu"
+            "displayType": "Poziv u realnom vremenu",
+            "description": "video\/audio poziv u realnom vremenu"
         },
         "Streams\/pdf": {
             "displayType": "PDF dokument",
             "description": "PDF dokument",
-            "newItem": "Dodajte PDF"
+            "newItem": "Dodaj PDF"
         },
         "Streams\/question": {
             "displayType": "Pitanje",
             "description": "tok pitanja"
         },
         "Streams\/answer": {
-            "displayType": "Odgovorite",
-            "description": "tok odgovora"
+            "displayType": "Odgovori",
+            "description": "stream odgovora"
         },
         "Streams\/calls": {
             "displayType": "Pozivi",
             "description": "kategorija za Streams\/webrtc",
-            "MaxRelationsExceeded": "Maksimalan broj poziva je premašen"
+            "MaxRelationsExceeded": "Maksimalni broj poziva je premašen"
         }
     },
     "participating": {
         "Title": "Naslov",
         "Subscribed": "Pretplaćeni",
         "Participants": "Učesnici",
-        "AreYouSureRemoveIdentifier": "Jeste li sigurni da ste uklonili ovaj identifikator?",
-        "AreYouSureUnsubscribeIdentifier": "Jeste li sigurni da možete poništiti pretplatu na ovaj identifikator? Isključit će obavijesti ovom identifikatoru.",
-        "AreYouSureUnsubscribeDevice": "Jeste li sigurni da ćete odjaviti ovaj uređaj? Isključit će obavijesti na ovom uređaju.",
+        "AreYouSureRemoveIdentifier": "Jeste li sigurni da ćete ukloniti ovaj identifikator?",
+        "AreYouSureUnsubscribeIdentifier": "Jeste li sigurni da otkažete pretplatu na ovaj identifikator? Isključit će obavještenja za ovaj identifikator.",
+        "AreYouSureUnsubscribeDevice": "Jeste li sigurni da otkažete pretplatu na ovaj uređaj? Isključit će obavještenja za ovaj uređaj.",
         "Identifiers": "Identifikatori",
         "Devices": "Uređaji",
-        "Streams": "Struje",
-        "AreYouSureRemoveParticipant": "Jeste li sigurni da želite ukloniti ovog sudionika?",
+        "Streams": "Streams",
+        "AreYouSureRemoveParticipant": "Jeste li sigurni da želite ukloniti ovog učesnika?",
         "RemoveParticipant": "Ukloni učesnika"
     },
     "menu": {
-        "placeholder": "unesite naslov stranice",
-        "ModTab": "Izmijeni predmet",
-        "Save": "Spremi",
+        "placeholder": "ukucajte naslov stranice",
+        "ModTab": "Modify Item",
+        "Save": "Sačuvaj",
         "Delete": "Izbriši",
         "Submenu": "Podmeni"
     },
     "errors": {
-        "HiddenFromYou": "Ovaj sadržaj je sakriven od vas."
+        "HiddenFromYou": "Ovaj sadržaj je skriven od vas."
     },
     "audio": {
-        "record": "Record",
+        "record": "Zapis",
         "reset": "Resetovati",
         "edit": "Uredi",
         "title": "naslov",
         "description": "opis",
-        "upload": "Otpremi",
+        "upload": "Upload",
         "link": "Veza",
-        "setUrl": "Postavi URL",
-        "save": "Save",
-        "setClip": "Izrežite isječak",
+        "setUrl": "Postavite URL",
+        "save": "Sačuvaj",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Nevažeći URL",
-        "invalidFile": "Nevažeća datoteka",
+        "invalidFile": "Nevažeći fajl",
         "errorNoSource": "Nema izvora zvuka",
-        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
-        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+        "uploadLimit": "Maksimalna veličina fajla: {{size}}",
+        "errorFileSize": "Žao nam je, ali fajl je prevelik.<br> Maksimalna veličina fajla je {{size}}"
     },
     "video": {
         "reset": "Resetovati",
         "edit": "Uredi",
         "title": "naslov",
         "description": "opis",
-        "upload": "Otpremi",
+        "upload": "Upload",
         "link": "Veza",
-        "setUrl": "Postavi URL",
-        "save": "Save",
-        "setClip": "Izrežite isječak",
+        "setUrl": "Postavite URL",
+        "save": "Sačuvaj",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Nevažeći URL",
-        "invalidFile": "Nevažeća datoteka",
+        "invalidFile": "Nevažeći fajl",
         "errorNoSource": "Nema video izvora",
-        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
-        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+        "uploadLimit": "Maksimalna veličina fajla: {{size}}",
+        "errorFileSize": "Žao nam je, ali fajl je prevelik.<br> Maksimalna veličina fajla je {{size}}"
     },
     "pdf": {
         "reset": "Resetovati",
         "edit": "Uredi",
         "title": "naslov",
         "description": "opis",
-        "upload": "Otpremi",
+        "upload": "Upload",
         "link": "Veza",
-        "setUrl": "Postavi URL",
-        "save": "Save",
-        "setClip": "Izrežite isječak",
+        "setUrl": "Postavite URL",
+        "save": "Sačuvaj",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Nevažeći URL",
-        "invalidFile": "Nevažeća datoteka",
+        "invalidFile": "Nevažeći fajl",
         "errorNoSource": "Nema pdf izvora",
-        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
-        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}"
+        "uploadLimit": "Maksimalna veličina fajla: {{size}}",
+        "errorFileSize": "Žao nam je, ali fajl je prevelik.<br> Maksimalna veličina fajla je {{size}}"
     },
     "image": {
         "reset": "Resetovati",
         "edit": "Uredi",
         "title": "naslov",
         "description": "opis",
-        "upload": "Otpremi",
+        "upload": "Upload",
         "link": "Veza",
-        "setUrl": "Postavi URL",
-        "save": "Save",
-        "setClip": "Izrežite isječak",
+        "setUrl": "Postavite URL",
+        "save": "Sačuvaj",
+        "setClip": "Cut Out Clip",
         "invalidURL": "Nevažeći URL",
-        "invalidFile": "Nevažeća datoteka",
+        "invalidFile": "Nevažeći fajl",
         "errorNoSource": "Nema izvora slike",
-        "uploadLimit": "Maksimalna veličina datoteke: {{size}}",
-        "errorFileSize": "Žao nam je, ali datoteka je prevelika.<br> Maksimalna veličina datoteke je {{size}}",
-        "uploadedImage": "Otpremljena slika",
+        "uploadLimit": "Maksimalna veličina fajla: {{size}}",
+        "errorFileSize": "Žao nam je, ali fajl je prevelik.<br> Maksimalna veličina fajla je {{size}}",
+        "uploadedImage": "Uploaded image",
         "imageTitle": "Naslov slike"
     },
     "questions": {
@@ -507,30 +507,30 @@
         "SetYourAnswer": "Odgovorite na pitanje",
         "NewQuestion": "Novo pitanje",
         "NewAnswer": "Novi odgovor",
-        "AnswerDetails": "Pojedinosti o odgovoru",
+        "AnswerDetails": "Detalji odgovora",
         "answerOption": "Opcija",
         "answerOptionExclusive": "Ekskluzivno",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "besplatan odgovor ...",
-        "SaveQuestion": "Spremi pitanje",
+        "FreeAnswer": "Napišite svoj odgovor ovdje",
+        "SaveQuestion": "Sačuvaj pitanje",
         "SaveAnswer": "Sačuvaj odgovor",
         "AddAnotherAnswer": "Dodajte još jedan odgovor",
-        "ErrorAnswers": "Molimo dodajte jedan odgovor",
-        "AlreadyAnswered": "Već sam odgovorio",
-        "TitlePlaceholder": "Upišite svoje pitanje",
-        "ContentPlaceholder": "Ovdje dodajte sve dodatne informacije kako biste pomogli ljudima da odgovore",
-        "ErrorTitle": "Pitanje potrebno",
-        "Placeholder": "Čuvar mesta"
+        "ErrorAnswers": "Molimo dodajte makar jedan odgovor",
+        "AlreadyAnswered": "Već odgovoreno",
+        "TitlePlaceholder": "Unesite svoje pitanje",
+        "ContentPlaceholder": "Ovdje stavite sve dodatne informacije kako biste pomogli ljudima da odgovore",
+        "ErrorTitle": "Obavezno pitanje",
+        "Placeholder": "Čuvar mjesta"
     },
     "experience": {
         "NewExperience": "Novo iskustvo",
-        "DefineTitle": "Molimo definirajte naslov",
+        "DefineTitle": "Molimo definišite naslov",
         "Create": "Stvoriti"
     },
     "calls": {
         "SettingsTitle": "Pozivi",
-        "MaxCalls": "Max zove",
-        "Update": "Update",
+        "MaxCalls": "Maks poziva",
+        "Update": "Ažuriraj",
         "NoCallsYet": "Još nema poziva",
         "CallReasonTitle": "O čemu se radi u ovom pozivu?",
         "WaitingRoom": "Čekaonica"

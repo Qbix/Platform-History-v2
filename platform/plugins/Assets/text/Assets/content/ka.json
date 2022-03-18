@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "შეეხეთ გადასახდელად"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: გადასახადი დამუშავდა {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "გმადლობთ გადახდისთვის {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} გამოიწერა {{plan.title}}",
+        "YouSubscribedTo": "თქვენ გამოიწერეთ {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "თქვენ იღებთ {{displayAmount}}-ის გადახდას {{call 'publisher.displayName'}}-დან „{{description}}“-ის მიერ",
+        "HasBeenCharged": "გამარჯობა, უბრალოდ გაცნობებთ, რომ {{1}} ჩამოიჭრა {{2}} {{3}} {{4}}-ის მიერ"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "გმადლობთ გადახდისთვის &quot;{{description}}&quot;-ისთვის",
+        "HavePaid": "გამარჯობა, {{1}}, ეს მხოლოდ სწრაფი დადასტურებაა, რომ თქვენ წარმატებით გადაიხადეთ {{2}} {{3}} {{4}}-ისთვის"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "ინფორმაცია შეკვეთის შესახებ",
+        "PaymentMethod": "Გადახდის საშუალება",
+        "ContactInfo": "Საკონტაქტო ინფორმაცია",
+        "Pay": "გადაიხადე"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "მოწვევა მიღებულია {{invitedUserName}}-ის მიერ",
+        "Streams_user_firstname": "{{invitedUserName}} შეიყვანეთ სახელი",
+        "Streams_user_lastname": "{{invitedUserName}} შეიყვანეთ გვარი",
+        "Streams_user_icon": "{{invitedUserName}} შეყვანილი ხატულა",
+        "Places_user_location": "{{invitedUserName}} შეიყვანეთ მდებარეობა",
+        "Streams_greeting": "{{invitedUserName}} შევიდა მისალმება",
+        "YouHaveCreditsToStart": "დასაწყებად გაქვთ {{amount}} კრედიტი",
+        "PaymentFor": "გადახდა „{{1}}“-ისთვის",
+        "PaymentTo": "გადახდა {{1}}-ზე",
+        "PaymentToUser": "გადახდა {{toUserName}}-ზე",
+        "CreatePaidStream": "შესაქმნელად {{toStreamName}}",
+        "JoinedPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;-ში დაჯავშნისთვის",
+        "CreatedCommunity": "საზოგადოების &quot;{{communityId}}&quot; შესაქმნელად",
+        "LeftPaidStream": "&quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> &quot;-ში ჯავშნის დაბრუნების სახით",
+        "BoughtCredits": "ვიყიდე {{amount}} კრედიტი",
+        "BonusCredits": "ბონუს {{amount}} კრედიტი",
+        "BuyAmountCredits": "შეიძინეთ {{amount}} კრედიტი",
+        "WatchClip": "მოიპოვე {{amount}} კრედიტი ყურებისთვის {{fromStreamTitle}}",
+        "MissingCredits": "დაკარგული კრედიტები",
+        "YouMissingCredits": "გასაგრძელებლად გჭირდებათ დამატებითი {{amount}} კრედიტი.",
+        "BuyCredits": "შეიძინეთ კრედიტები",
+        "BuyBonus": "{{amount}} კრედიტის ერთდროულად ყიდვა გამოიწვევს {{bonus}} კრედიტის ბონუსს.",
+        "Buy": "იყიდე",
+        "PurchaseCredits": "შეიძინეთ კრედიტები",
+        "Credits": "კრედიტები",
+        "ErrorInvalidAmount": "თანხა არასწორია",
+        "ErrorInvalidCurrency": "სამწუხაროდ, ჩვენ ჯერ არ გვაქვს ვალუტის {{currency}} მხარდაჭერა",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} კრედიტი",
+            "BonusCredits": "{{amount}} კრედიტი"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "თარიღი",
+        "Amount": "თანხა",
+        "Description": "აღწერა",
+        "Client": "კლიენტი",
+        "To": "რომ",
+        "From": "დან",
+        "SeeHistory": "იხილეთ გადახდის ისტორია {{1}}-ისთვის",
+        "HistoryEmpty": "ჯერ მონაცემები არ გაქვთ",
+        "PaymentFor": "გაგზავნილი {{amount}} კრედიტი",
+        "PaymentTo": "გაგზავნილი {{amount}} კრედიტი",
+        "PaymentToUser": "გაგზავნილი {{amount}} კრედიტი",
+        "CreatePaidStream": "დახარჯული {{amount}} კრედიტი",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "მოიპოვა {{amount}} კრედიტი",
+            "-": "დახარჯული {{amount}} კრედიტი"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "მოიპოვა {{amount}} კრედიტი",
+            "-": "დახარჯული {{amount}} კრედიტი"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "მიღებულია {{amount}} კრედიტი",
+            "-": "გაგზავნილი {{amount}} კრედიტი"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "დახარჯული {{amount}} კრედიტი",
+        "BoughtCredits": "ვიყიდე {{amount}} კრედიტი",
+        "BonusCredits": "მიიღეთ ბონუსი {{amount}} კრედიტი",
+        "InviteAcceptedBy": "მოიპოვა {{amount}} კრედიტი",
+        "Streams_user_firstname": "მოიპოვა {{amount}} კრედიტი",
+        "Streams_user_lastname": "მოიპოვა {{amount}} კრედიტი",
+        "Streams_user_icon": "მოიპოვა {{amount}} კრედიტი",
+        "Places_user_location": "მოიპოვა {{amount}} კრედიტი",
+        "Streams_greeting": "მოიპოვა {{amount}} კრედიტი",
+        "YouHaveCreditsToStart": "მოიპოვა {{amount}} კრედიტი"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "გამოწერის დაწყება",
+            "message": "გსურთ გამოიწეროთ {{title}}?",
+            "ok": "კარგი",
+            "cancel": "გაუქმება"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "საკრედიტო ან სადებეტო ბარათი",
+        "SubscribePayment": "გადახდის გამოწერა",
+        "ImmediatePayment": "დაუყოვნებლივ გადახდა"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "დააყენეთ გადახდის ინფორმაცია",
+        "BuyAmountCredits": "შეიძინეთ {{amount}} კრედიტი",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Გადაიხადეთ",
+            "message": "თანახმა ხართ გადაიხადოთ {{symbol}}{{amount}}?",
+            "ok": "კარგი",
+            "cancel": "გაუქმება"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "კრედიტები",
+            "description": "თვალყურს ადევნებს კრედიტებსა და გადახდებს"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "გამოწერის გეგმა",
+            "description": "სააბონენტო გეგმა"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "გამოწერა",
+            "description": "გამოწერა"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "პროდუქტი",
+            "description": "იყიდება პროდუქტი"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "სერვისი",
+            "description": "მომსახურებას სთავაზობენ"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "მოიპოვა {{amount}} კრედიტი"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "ვიყიდე {{amount}} კრედიტი"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "ბონუს {{amount}} კრედიტი"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "დახარჯული {{amount}} კრედიტი"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "გაუგზავნა {{amount}} კრედიტი {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "მიღებულია {{amount}} კრედიტი {{fromUserName}}-ისგან"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "ახალი სერვისი",
+            "TitlePlaceholder": "სამსახურის სახელწოდება",
+            "PricePlaceholder": "დააყენეთ ფასი",
+            "LinkPlaceholder": "დააყენეთ დამატებითი ინფორმაციის ბმული",
+            "DescriptionPlaceholder": "სერვისის აღწერა",
+            "SaveService": "სერვისის შენახვა",
+            "SelectRequiredParticipants": "აუცილებელი მონაწილეები"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "სერვისის შაბლონების მართვა",
+        "ManageServices": "სერვისების მართვა",
+        "Free": "უფასო",
+        "OptionalContribution": "არჩევითი წვლილი",
+        "RequiredPayment": "საჭირო გადახდა",
+        "AreYouSureDelete": "დარწმუნებული ხართ, რომ გსურთ ამ სერვისის წაშლა?",
+        "AmountServicesRelated": "ამ სერვისთან დაკავშირებულია {{amount}} ხელმისაწვდომობა. ისინი ასევე მოიხსნება."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "ინფორმაცია {{title}} NFT-ის შესახებ",
+        "Description": "დეტალური ინფორმაცია NFT-ის შესახებ",
+        "FixedBid": "Იყიდე ეხლა",
+        "CurrentBid": "მიმდინარე შეთავაზება",
+        "StartingIn": "დაწყებული",
+        "EndingIn": "მთავრდება",
+        "CreateNFT": "შექმენით NFT",
+        "TitlePlaceholder": "მიეცით თქვენს NFT-ს სათაური",
+        "DescriptionPlaceholder": "მიეცით თქვენი NFT აღწერა",
+        "CreateYourNFT": "შექმენით თქვენი NFT",
+        "Royalties": "ჰონორარი",
+        "RoyaltyPlaceholder": "სურვილისამებრ. შემქმნელისთვის გადარიცხვამდე გადახდილი თანხა.",
+        "ExpirationDate": "Ვადის გასვლის თარიღი",
+        "StartingDate": "Დაწყების თარიღი",
+        "BidsBelowThisAmount": "ამ ოდენობის ქვემოთ შეთავაზებები დაუშვებელია",
+        "MinimumBid": "მინიმალური შეთავაზება",
+        "Price": "ფასი",
+        "Owner": "მფლობელი",
+        "SelectCategory": "Აირჩიეთ კატეგორია",
+        "Day": "Დღეს",
+        "Days": "დღეები",
+        "Hour": "საათი",
+        "Hours": "საათები",
+        "Minute": "წუთი",
+        "Minutes": "წუთები",
+        "Second": "მეორე",
+        "Seconds": "წამი",
+        "SalesCreator": "გაყიდვები გადაეცემა შემქმნელს",
+        "Details": "დეტალები",
+        "Bids": "წინადადებები",
+        "History": "ისტორია",
+        "LoremIpsum": "Lorem Ipsum უბრალოდ ბეჭდვისა და ბეჭდვის ინდუსტრიის მოჩვენებითი ტექსტია.",
+        "PutOnSale": "გასაყიდად გაიტანეთ",
+        "PutOffSale": "გაყიდვიდან ამოღება",
+        "Transfer": "Გადაცემა",
+        "Update": "განახლება",
+        "UpdateToken": "ტოკენის განახლება",
+        "CreateToken": "შექმენით ტოკენი",
+        "PlaceBid": "Დადო ფსონი",
+        "SoldOut": "გაიყიდა",
+        "NftName": "NFT სახელი",
+        "DescribeYourNFT": "გთხოვთ აღწეროთ თქვენი NFT",
+        "NftPicture": "სურათი, რომელიც წარმოადგენს NFT-ს",
+        "NftMovie": "ფილმი, რომელიც წარმოადგენს NFT-ს",
+        "UploadMovie": "ფილმის ატვირთვა",
+        "MovieSource": "ფილმის წყარო",
+        "UploadFile": "Ფაილის ატვირთვა",
+        "PutOnMarketplace": "განათავსეთ ბაზარზე",
+        "InstantPurchase": "შეიყვანეთ ფასი, რათა მომხმარებლებს საშუალება მისცეთ დაუყოვნებლივ შეიძინონ თქვენი NFT",
+        "FixedPrice": "Ფიქსირებული ფასი",
+        "TimedAuction": "დროული აუქციონი",
+        "OpenForBids": "ღიაა ტენდერებისთვის",
+        "PriceOnePiece": "შეიყვანეთ ფასი ერთი ცალი",
+        "EnterMinimumBid": "შეიყვანეთ მინიმალური წინადადება",
+        "SelectChain": "აირჩიეთ ჯაჭვი",
+        "WrongChain": "ეს NFT შექმნილია „{{chain}}“-ში. გთხოვთ გამოიყენოთ ეს ჯაჭვი.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "NFT-ების იმპორტი",
+            "fileNotFound": "უკაცრავად, CSV ფაილი ვერ მოიძებნა.",
+            "fileEmpty": "უკაცრავად, CSV ფაილი ცარიელია.",
+            "userIdNotFound": "მომხმარებელი არსებობს, მაგრამ ID ცარიელია",
+            "errorLine": "ხაზი {{1}}",
+            "fieldNotFound": "აუცილებელი ველი „{{1}}“ ვერ მოიძებნა",
+            "taskStreamInvalid": "დავალების ნაკადი არასწორია",
+            "instructionsEmpty": "დავალების ნაკადის ინსტრუქციები ცარიელია",
+            "complete": "სრული",
+            "activateUsers": "გაუგზავნოთ აქტივაციის შეტყობინება მომხმარებლებს?",
+            "importProgress": "პროგრესი",
+            "importOptions": "Პარამეტრები",
+            "sampleCSV": "ჩამოტვირთეთ ნიმუში CSV",
+            "fileLabel": "ელცხრილის ატვირთვა:",
+            "errorsTitle": "მოხდა შეცდომები"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "გაფილტვრა NFT კოლექციების მიხედვით",
+                "ShowNFTCollection": "NFT კოლექციის ჩვენება...",
+                "AllCollections": "ყველა კოლექცია"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "ყველა ავტორი",
+                "AllUsers": "ყველას",
+                "FilterByAuthors": "გაფილტვრა ავტორების მიხედვით"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "დაბრუნება კოლექციაში"
     }
 }

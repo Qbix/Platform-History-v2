@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "વિનંતી દરમિયાન ભૂલ {{status}}",
+        "canceled": "વિનંતી રદ કરી",
+        "500": "આંતરિક સર્વર ભૂલ",
+        "404": "મળ્યું નથી: {{url}}",
+        "501": "વિનંતી વિક્ષેપિત"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "સત્ર સમાપ્ત થઈ. પૃષ્ઠ તાજું કરો અને ફરી પ્રયાસ કરો.",
+        "otherDomain": "વિદેશી ડોમેન માટે {{baseUrl}} પર અવરોધિત ક્રોસ-ડોમેન વિનંતી"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "નળ",
+        "click": "ક્લિક કરો",
+        "yes": "હા",
+        "no": "ના",
+        "Tap": "નળ",
+        "Click": "ક્લિક કરો",
+        "Yes": "હા",
+        "No": "ના"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "જાન્યુઆરી",
+        "2": "ફેબ્રુઆરી",
+        "3": "કુચ",
+        "4": "એપ્રિલ",
+        "5": "મે",
+        "6": "જૂન",
+        "7": "જુલાઈ",
+        "8": "ઓગસ્ટ",
+        "9": "સપ્ટેમ્બર",
+        "10": "ઓક્ટોબર",
+        "11": "નવેમ્બર",
+        "12": "ડિસેમ્બર"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "બીજું",
+        "seconds": "સેકન્ડ",
+        "minute": "મિનિટ",
+        "minutes": "મિનિટ",
+        "hour": "કલાક",
+        "day": "દિવસ",
+        "days": "દિવસ",
+        "week": "સપ્તાહ",
+        "weeks": "અઠવાડિયા",
+        "month": "માસ",
+        "months": "મહિનાઓ",
+        "year": "વર્ષ",
+        "years": "વર્ષ",
+        "decade": "દાયકા",
+        "decades": "દાયકાઓ",
+        "century": "સદી",
+        "centuries": "સદીઓ"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "કૃપા કરીને તમારા માઇક્રોફોનને ઍક્સેસ કરવાની મંજૂરી આપો",
+        "record": "રેકોર્ડ",
+        "recording": "રેકોર્ડિંગ",
+        "remains": "રહે છે",
+        "maximum": "મહત્તમ",
+        "playing": "રમતા",
+        "recorded": "રેકોર્ડ કરેલ",
+        "clip": "ક્લિપ",
+        "discard": "કાઢી નાખો",
+        "encoding": "એન્કોડિંગ"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "ક્લિપ",
+        "errorNoSource": "કોઈ વિડિઓ સ્ત્રોત નથી",
+        "SkipAfter": "પછી અવગણો",
+        "Skip": "છોડો"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "ક્લિપ",
+        "errorNoSource": "કોઈ પીડીએફ સ્ત્રોત નથી"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "ક્લિપ સ્ટાર્ટ સેટ કરો",
+        "ClipStart": "ક્લિપ પ્રારંભ",
+        "SetClipEnd": "ક્લિપ એન્ડ સેટ કરો",
+        "ClipEnd": "ક્લિપ અંત",
+        "StartMoreEnd": "શરૂઆતની સ્થિતિ અંતિમ સ્થિતિ કરતાં વધુ ન હોઈ શકે",
+        "EndLessStart": "અંતની સ્થિતિ શરૂઆતની સ્થિતિથી ઓછી ન હોઈ શકે",
+        "WhichInvalid": "દલીલ &#39;જે&#39; અમાન્ય છે"
     },
     "alert": {
-        "title": "Alert"
+        "title": "ચેતવણી"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "પુષ્ટિ કરો",
+        "ok": "હા",
+        "cancel": "ના"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "પ્રોમ્પ્ટ",
+        "ok": "જાઓ"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "વધુ",
+        "Menu": "મેનુ"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "ફાઇલ વાંચવામાં ભૂલ",
+        "errorType": "માફ કરશો, પરંતુ આ ફાઇલ પ્રકાર સમર્થિત નથી",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "તમને શું કરવું ગમશે?",
+            "photo": "નવો ફોટો લો",
+            "library": "પુસ્તકાલયમાંથી પસંદ કરો"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "કૃપા કરીને મોટી છબી પસંદ કરો.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "કદ અને સ્થિતિને સમાયોજિત કરો",
+            "touchscreen": "ઝૂમ અને ડ્રેગ કરવા માટે તમારી આંગળીઓનો ઉપયોગ કરો",
+            "notTouchscreen": "ઝૂમ અને ડ્રેગ કરવા માટે તમારા માઉસ અને વ્હીલનો ઉપયોગ કરો"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "ગઈ કાલે રાત્રે",
+        "lastEvening": "છેલ્લી પૂર્વસંધ્યાએ",
+        "yesterday": "ગઇકાલે",
+        "thisMorning": "આ સવારે",
+        "today": "આજે",
+        "tonight": "આજની રાત",
+        "tomorrowMorning": "ટોમ મોર્ન",
+        "tomorrow": "આવતીકાલે",
+        "hoursAgo": "{{h}} કલાક પહેલાં",
+        "hourAgo": "{{h}} કલાક પહેલાં",
+        "minuteAgo": "{{m}} મિનિટ પહેલાં",
+        "minutesAgo": "{{m}} મિનિટ પહેલાં",
+        "secondAgo": "{{s}} સેકન્ડ પહેલાં",
+        "secondsAgo": "{{s}} સેકન્ડ પહેલાં",
+        "fewSecondsAgo": "સેકન્ડ પહેલા",
+        "rightNow": "અત્યારે જ",
+        "inSecond": "{{s}} સેકન્ડમાં",
+        "inSeconds": "{{s}} સેકન્ડમાં",
+        "inMinute": "{{m}} મિનિટમાં",
+        "inMinutes": "{{m}} મિનિટમાં",
+        "inHour": "{{h}} કલાકમાં",
+        "inHours": "{{h}} કલાકમાં",
+        "inUnderMinute": "1 મિનિટની અંદર"
     }
 }

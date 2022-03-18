@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Żball {{status}} waqt it-talba",
+        "canceled": "Talba kkanċellata",
+        "500": "Żball intern tas-server",
+        "404": "Mhux misjub: {{url}}",
+        "501": "Talba interrotta"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Is-sessjoni skadiet. Aġġorna l-paġna u erġa&#39; pprova.",
+        "otherDomain": "Talba ta&#39; cross-domain imblukkata għal dominju barrani fi {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "vit",
+        "click": "ikklikkja",
+        "yes": "iva",
+        "no": "le",
+        "Tap": "Tektek",
+        "Click": "Ikklikkja",
+        "Yes": "Iva",
+        "No": "Nru"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
+        "1": "Jannar",
+        "2": "Frar",
+        "3": "Marzu",
         "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "5": "Mejju",
+        "6": "Ġunju",
+        "7": "Lulju",
+        "8": "Awissu",
+        "9": "Settembru",
+        "10": "Ottubru",
+        "11": "Novembru",
+        "12": "Diċembru"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "it-tieni",
+        "seconds": "sekondi",
+        "minute": "minuta",
+        "minutes": "minuti",
+        "hour": "sigħat",
+        "day": "jum",
+        "days": "jiem",
+        "week": "ġimgħa",
+        "weeks": "ġimgħat",
+        "month": "xahar",
+        "months": "xhur",
+        "year": "sena",
+        "years": "snin",
+        "decade": "għaxar snin",
+        "decades": "għexieren ta’ snin",
+        "century": "seklu",
+        "centuries": "sekli"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
+        "allowMicrophoneAccess": "Jekk jogħġbok ħalli aċċess għall-mikrofonu tiegħek",
+        "record": "Rekord",
+        "recording": "Reġistrazzjoni",
+        "remains": "jibqa’",
+        "maximum": "massimu",
         "playing": "Playing",
-        "recorded": "Recorded",
+        "recorded": "Irreġistrat",
         "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "discard": "Armi",
+        "encoding": "Kodifikazzjoni"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "errorNoSource": "L-ebda sors tal-vidjo",
+        "SkipAfter": "Aqbeż wara",
+        "Skip": "Aqbeż"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "L-ebda sors pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
+        "SetClipStart": "Issettja Clip Start",
         "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipEnd": "Issettja Tmiem tal-Klip",
+        "ClipEnd": "Tmiem tal-Klip",
+        "StartMoreEnd": "Il-pożizzjoni tal-bidu ma tistax tkun aktar minn pożizzjoni tat-tmiem",
+        "EndLessStart": "Il-pożizzjoni tat-tmiem ma tistax tkun inqas mill-pożizzjoni tal-bidu",
+        "WhichInvalid": "Argument &#39;li&#39; invalidu"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Twissija"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Ikkonferma",
+        "ok": "Iva",
+        "cancel": "Nru"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Pront",
+        "ok": "Mur"
     },
     "tabs": {
-        "more": "more",
+        "more": "aktar",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Żball fil-qari tal-fajl",
+        "errorType": "Jiddispjaċini, iżda dan it-tip ta&#39; fajl mhux appoġġjat",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "X&#39;tixtieq tagħmel?",
+            "photo": "Ħu ritratt ġdid",
+            "library": "Agħżel mil-librerija"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Jekk jogħġbok agħżel immaġni akbar.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Aġġusta d-daqs u l-pożizzjoni",
+            "touchscreen": "Uża s-swaba &#39;tiegħek biex tkabbar u tkaxkar",
+            "notTouchscreen": "Uża l-maws u r-rota biex tkabbar u tkaxkar"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "il-lejl li għadda",
+        "lastEvening": "lejliet l-aħħar",
+        "yesterday": "ilbierah",
+        "thisMorning": "dalgħodu",
+        "today": "illum",
+        "tonight": "illejla",
+        "tomorrowMorning": "għada filgħodu",
+        "tomorrow": "għada",
+        "hoursAgo": "{{h}} sigħat ilu",
+        "hourAgo": "{{h}} siegħa ilu",
+        "minuteAgo": "{{m}} minuta ilu",
+        "minutesAgo": "{{m}} minuti ilu",
+        "secondAgo": "{{s}} it-tieni ilu",
+        "secondsAgo": "{{s}} sekondi ilu",
+        "fewSecondsAgo": "sekondi ilu",
+        "rightNow": "Bħalissa",
+        "inSecond": "fi {{s}} it-tieni",
+        "inSeconds": "fi {{s}} sekondi",
+        "inMinute": "fi {{m}} minuta",
+        "inMinutes": "fi {{m}} minuti",
+        "inHour": "fi {{h}} siegħa",
+        "inHours": "fi {{h}} sigħat",
+        "inUnderMinute": "f&#39;inqas minn minuta"
     }
 }

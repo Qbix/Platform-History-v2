@@ -4,57 +4,57 @@
         "LogOut": "ውጣ"
     },
     "activate": {
-        "SetAsPrimary": "{{1}} ን እንደ ዋናው {{2}} አድርጌ አዘጋጅ",
-        "ChoosePassPhrase": "ለመግባት <strong>የይለፍ ሐረግ<\/strong> ይምረጡ. <br> በቀላሉ የሚረዷቸው ጥቂት ቃላትን የያዘ ቀላል ሐረግ.",
-        "ChoosePassPhraseSeeSuggestions": "መለያዎን ለመጠበቅ ጥሩ <strong>የምልክት ሐረግ<\/strong> ይምረጡ. ለአንዳንድ ሀሳቦች የተሰጡ አስተያየቶችን ይመልከቱ.",
-        "LogOutAndTryAgain": "ዘግተው ይውጡ እና እንደገና ይሞክሩ",
-        "IfYouFeel": "የሆነ ነገር ተሳስቷል ብለው ከተሰማዎት ማድረግ ይችላሉ",
+        "SetAsPrimary": "{{1}}ን እንደ ዋና {{2}} አቀናብር",
+        "ChoosePassPhrase": "ለመግባት <strong>የማለፊያ ሀረግ<\/strong> ይምረጡ።<br> በቀላሉ የሚያስታውሷቸው ጥቂት ቃላትን የያዘ ቀላል ሐረግ።",
+        "ChoosePassPhraseSeeSuggestions": "መለያዎን ለመጠበቅ ጥሩ <strong>ማለፊያ ሐረግ<\/strong> ይምረጡ። ለአንዳንድ ሀሳቦች ጥቆማዎችን ይመልከቱ።",
+        "LogOutAndTryAgain": "ይውጡ እና እንደገና ይሞክሩ",
+        "IfYouFeel": "የሆነ ችግር እንደተፈጠረ ከተሰማዎት ማድረግ ይችላሉ።",
         "SetIdentifierButtonTitle": "እንደገና ጀምር"
     },
     "session": {
-        "GetStarted": "መጀመር"
+        "GetStarted": "እንጀምር"
     },
     "authorize": {
-        "GetStarted": "መጀመር",
-        "Authorize": "ፈቃድ ስጥ",
-        "TermsLabel": "እኔ አንብቤ ተስማማለሁ <br> ወደ {{link}}",
+        "GetStarted": "እንጀምር",
+        "Authorize": "ፍቀድ",
+        "TermsLabel": "አንብቤ ተስማምቻለሁ<br> ወደ {{link}}",
         "TermsTitle": "ውሎች",
-        "mustAgree": "በመጀመሪያ በውሎች መስማማት አለብዎት።"
+        "mustAgree": "በመጀመሪያ በውሉ መስማማት አለብዎት።"
     },
     "register": {
-        "TermsLabel": "{{link}} ተቀብያለሁ",
+        "TermsLabel": "{{999}ን ተቀብያለሁ",
         "TermsTitle": "ውሎች"
     },
     "notifications": {
         "title": "ፍቃድ",
-        "prompt": "ማሳወቂያዎችን ማንቃት ይፈልጋሉ? ስለሚጨነቁላቸው ነገሮች ቅጽበታዊ ዝማኔዎች ይደርሰዎታል.",
+        "prompt": "ማሳወቂያዎችን ማንቃት ይፈልጋሉ? ስለምትጨነቁላቸው ነገሮች የቅጽበታዊ ዝማኔዎችን ይደርስዎታል።",
         "yes": "አዎ",
         "no": "አይ",
-        "WelcomePleaseVerifyEmail": "እንኳን ደህና መጣህ! እባክዎ የኢሜይል አድራሻዎን ያረጋግጡ.",
+        "WelcomePleaseVerifyEmail": "እንኳን ደህና መጣህ! እባክህ የኢሜል አድራሻህን አረጋግጥ።",
         "WelcomeVerifyEmail": "እንኳን ደህና መጣህ! የኢሜይል አድራሻህን አረጋግጥ.",
-        "ForgetPass": "ሃይም, የይለፍ ሐረግዎን ረስተዋል?",
-        "PassphraseSaved": "የእርስዎ የማለፍ ሐረግ ተቀም beenል።",
-        "IdentifierActivated": "የእርስዎ {{type}} እንዲነቃ ተደርጓል።",
-        "CompletedActivation": "የተጠቃሚን ማግበር ጨርሰዋል ፡፡",
-        "CompletedActivationLogIn": "የተጠቃሚን ማግበር ጨርሰዋል ፡፡ አሁን በመለያ ለመግባት ይሞክሩ።"
+        "ForgetPass": "ሄይ የይለፍ ሐረግህን ረሳኸው?",
+        "PassphraseSaved": "የማለፊያ ሐረግዎ ተቀምጧል።",
+        "IdentifierActivated": "የእርስዎ {999} ነቅቷል።",
+        "CompletedActivation": "የተጠቃሚ ማግበር ጨርሰሃል።",
+        "CompletedActivationLogIn": "የተጠቃሚ ማግበር ጨርሰሃል። አሁን ለመግባት ይሞክሩ።"
     },
     "contacts": {
         "dialog": {
-            "title": "ዕውቂያ ይምረጡ",
+            "title": "እውቂያ ይምረጡ",
             "CreateAccount": "+ አዲስ እውቂያ",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create አልተገኘም",
-            "SearchByName": "በስም ይፈልጉ",
-            "EmptyContacts": "እውቅያዎች አልተገኙም ..."
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create አልተገኘም።",
+            "SearchByName": "በስም ፈልግ",
+            "EmptyContacts": "እውቂያዎች አልተገኙም..."
         },
         "select": {
-            "title": "የ {{displayName}} እውቂያ ይምረጡ"
+            "title": "የ{999}ን አድራሻ ይምረጡ"
         }
     },
     "usersContacts": {
-        "selectLabel": "እባክዎ መለያውን ይምረጡ.",
-        "inviteUser": "ተጠቃሚ ጋብዝ",
+        "selectLabel": "እባክዎ መለያ ይምረጡ።",
+        "inviteUser": "ተጠቃሚዎችን ይጋብዙ",
         "selectRole": "ሚና ይምረጡ",
-        "inviteRole": "መጋበዝ {{role}}"
+        "inviteRole": "ጋብዝ {999}"
     },
     "invalidLanguageSelected": "ልክ ያልሆነ ቋንቋ ተመርጧል",
     "login": {
@@ -62,52 +62,52 @@
         "directions": "መለያ ይፍጠሩ ወይም ይግቡ።",
         "directionsNoRegister": "መለያ ካለዎት ይግቡ።",
         "goButton": "ሂድ",
-        "passphrase": "የማለፍ ሐረግዎን ያስገቡ",
-        "loginButton": "መጀመር",
-        "registerButton": "መጀመር",
-        "resendButton": "የማስገበሪያ መልእክት ይላኩ",
+        "passphrase": "የማለፊያ ሐረግዎን ያስገቡ፡-",
+        "loginButton": "እንጀምር",
+        "registerButton": "እንጀምር",
+        "resendButton": "የማግበር መልእክት ላክ",
         "forgot": "ረሳው?",
-        "resendConfirm": "የይለፍ ሐረግዎን ዳግም ለማስጀመር መልዕክት መላክ ይፈልጋሉ?",
-        "resendSuccess": "የይለፍ ሐረግዎን ዳግም ለማስጀመር መልዕክት ይመልከቱ",
+        "resendConfirm": "የይለፍ ሐረግዎን እንደገና ለማስጀመር መልእክት መላክ ይፈልጋሉ?",
+        "resendSuccess": "የይለፍ ሐረግዎን እንደገና ለማስጀመር መልእክት ካለ ያረጋግጡ",
         "resendClose": "ገጠመ",
-        "noPassphrase": "በመለያ ከመግባትዎ በፊት በአግብር መልዕክትዎ ውስጥ ያለውን አገናኝ ጠቅ በማድረግ የይለፍ ሐረግ ማዘጋጀት አለብዎት ፡፡",
-        "notVerified": "ለመግባት ለራስዎ የማነቃቂያ መልዕክት መላክ አለብዎት።",
-        "emailExists": "ከዚህ በፊት በዚህ ኢሜይል ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማግበር የገቢ መልእክት ሳጥንዎን ይመልከቱ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
-        "mobileExists": "ከዚህ በፊት በዚህ የሞባይል ቁጥር ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማሰራት ኤስኤምኤስዎን ይመልከቱ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
+        "noPassphrase": "ከመግባትዎ በፊት በማግበር መልእክትዎ ውስጥ ያለውን ሊንክ በመጫን ማለፊያ ሀረግ ማዘጋጀት አለብዎት።",
+        "notVerified": "ለመግባት ለራስህ የማግበር መልእክት መላክ አለብህ።",
+        "emailExists": "ከዚህ በፊት በዚህ ኢሜይል ለመመዝገብ ሞክረዋል? ከሆነ መለያዎን ለማግበር የገቢ መልእክት ሳጥንዎን ያረጋግጡ። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
+        "mobileExists": "ከዚህ በፊት በዚህ የሞባይል ቁጥር ለመመዝገብ ሞክረዋል? ከሆነ መለያህን ለማግበር ኤስኤምኤስህን ተመልከት። <a href='#resend' class='Q_button Users_activation_resend'>መልዕክቱን እንደገና ለመላክ ጠቅ ያድርጉ<\/a>",
         "usingOther": "ወይም ይችላሉ",
         "prompt": "የመጠቀሚያ ስም ምረጥ:",
-        "newUser": "ወይም አዲስ መለያ ይፍጠሩ",
+        "newUser": "ወይም ከዚህ በታች አዲስ መለያ ይፍጠሩ",
         "placeholders": {
-            "identifier": "የተንቀሳቃሽ ስልክዎ # ወይም በኢሜል",
-            "mobile": "የሞባይልዎን # ያስገቡ",
+            "identifier": "የእርስዎ ሞባይል # ወይም ኢሜይል",
+            "mobile": "ሞባይልዎን # ያስገቡ",
             "email": "የኢሜይል አድራሻዎን ያስገቡ",
-            "username": "የተጠቃሚ ስም"
+            "username": "ፊደሎችን እና ቁጥሮችን ብቻ ይጠቀሙ"
         },
         "confirmTerms": "የአገልግሎት ውሉን ይቀበሉ?",
-        "facebookNoEmail": "የእርስዎ facebook መለያ የተረጋገጠ የኢሜይል አድራሻ ይጎድለዋል። በቀላሉ በአገሬው መንገድ ይግቡ።",
-        "picTooltip": "ይህንን ስዕል በኋላ ላይ መለወጥ ይችላሉ",
+        "facebookNoEmail": "የፌስቡክ መለያህ የተረጋገጠ ኢሜል ይጎድላል። በቀላሉ በአገርኛ መንገድ ይግቡ።",
+        "picTooltip": "ይህን ምስል በኋላ መቀየር ይችላሉ",
         "wallet": {
-            "payload": "ወደ {{host}} በወቅቱ {{timestamp}} ይግቡ",
+            "payload": "ወደ {999}} በጊዜው ይግቡ {{timestamp}}",
             "alert": {
-                "title": "ወደ Wallet በማዛወር ላይ",
-                "content": "አንዴ ይህንን መገናኛ ከዘጋዎት በኋላ ወደ ቦርሳዎ ይወሰዳሉ። ከገቡ በኋላ ወደዚህ ገጽ ይመለሱ።"
+                "title": "ወደ Wallet በማዞር ላይ",
+                "content": "ይህን ንግግር አንዴ ከዘጉ፣ ወደ ቦርሳዎ ይወሰዳሉ። ከገቡ በኋላ ወደዚህ ገጽ ይመለሱ።"
             }
         }
     },
     "setIdentifier": {
-        "title": "ለመግባት መንገድ ያክሉ",
-        "sendMessage": "የማስገበሪያ መልእክት ይላኩ",
+        "title": "የመግቢያ መንገድ ያክሉ",
+        "sendMessage": "የማግበር መልእክት ላክ",
         "placeholders": {
-            "identifier": "ተንቀሳቃሽ # ወይም ኢሜል ያስገቡ",
+            "identifier": "ሞባይልዎን # ወይም ኢሜልዎን ያስገቡ",
             "mobile": "የተንቀሳቃሽ ስልክ ቁጥርዎን ያስገቡ",
             "email": "የኢሜይል አድራሻዎን ያስገቡ",
             "username": "የተጠቃሚ ስም"
         }
     },
     "prompt": {
-        "title": "{{Platform}} መለያ",
-        "areUsing": "እርስዎ እንደ {{platform}} ይጠቀማሉ",
-        "noLongerUsing": "ከአሁን በኋላ ከ {{platform}} ጋር አልተገናኙም",
+        "title": "{{999} መለያ",
+        "areUsing": "እንደ {{platform}} እየተጠቀምክ ነው።",
+        "noLongerUsing": "ከአሁን በኋላ ከ{999}} ጋር አልተገናኘህም።",
         "doAuth": "በዚህ መለያ ይግቡ",
         "doSwitch": "ወደዚህ መለያ ቀይር"
     },
@@ -119,12 +119,12 @@
         "Host": "አስተናጋጅ"
     },
     "analytics": {
-        "Title": "ትንታኔዎች",
+        "Title": "ትንታኔ",
         "Daily": "በየቀኑ",
-        "Weekly": "ሳምንታዊ",
+        "Weekly": "በየሳምንቱ",
         "Monthly": "ወርሃዊ",
-        "Application": "ማመልከቻ",
-        "Pages": "ገጾች",
+        "Application": "መተግበሪያ",
+        "Pages": "ገፆች",
         "Services": "አገልግሎቶች",
         "Faq": "በየጥ",
         "WeekDays": "የሳምንት ቀናት"

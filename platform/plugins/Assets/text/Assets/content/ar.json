@@ -1,13 +1,13 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "اضغط للدفع"
+        "button": "انقر للدفع"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: تمت معالجة النفقات لـ {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "شكرًا لك على دفعتك إلى {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} مشترك في {{plan.title}}",
-        "YouSubscribedTo": "لقد اشتركت في {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: تمت معالجة الرسوم بمبلغ {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "شكرًا لك على الدفع لـ {{call 'publisher.displayName'}}",
+        "SubscribedTo": "اشترك {{call 'user.displayName'}} في {{plan.title}}",
+        "YouSubscribedTo": "لقد تم اشتراكك في {{plan.title}}"
     },
     "payment": {
         "AboutOrder": "معلومات حول الطلب",
@@ -16,23 +16,23 @@
         "Pay": "دفع"
     },
     "credits": {
-        "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{1}}",
-        "YouHaveCreditsToStart": "لديك {{1}} ائتمانات للبدء",
-        "PaymentFor": "الدفع لـ &quot;{{1}}&quot;",
-        "PaymentTo": "الدفع إلى {{1}}",
-        "PaymentToUser": "الدفع إلى {{userName}}",
-        "JoinedPaidStream": "للانضمام إلى &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "CreatedCommunity": "لإنشاء المجتمع &quot;{{communityId}}&quot;",
-        "LeftPaidStream": "لمغادرة &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
-        "BoughtCredits": "اشترى {{amount}} ائتمانات",
-        "BuyAmountCredits": "شراء أرصدة {{amount}}",
+        "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{invitedUserName}}",
+        "YouHaveCreditsToStart": "لديك {{amount}} ائتمانات للبدء",
+        "PaymentFor": "الدفع مقابل &quot;{{1}}&quot;",
+        "PaymentTo": "دفع إلى {{1}}",
+        "PaymentToUser": "دفع إلى {{toUserName}}",
+        "JoinedPaidStream": "للحجز في &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "لإنشاء مجتمع &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "كاسترداد للحجز في &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "اشترى رصيدًا بقيمة {{amount}}",
+        "BuyAmountCredits": "شراء رصيد بقيمة {{amount}}",
         "MissingCredits": "قروض مفقودة",
-        "YouMissingCredits": "تنقصك أرصدة {{amount}}",
+        "YouMissingCredits": "أنت بحاجة إلى أرصدة {{amount}} إضافية للمتابعة.",
         "BuyCredits": "شراء إئتمانات",
-        "Buy": "يشترى",
-        "Credits": "ائتمانات",
+        "Buy": "يشتري",
+        "Credits": "الاعتمادات",
         "ErrorInvalidAmount": "المبلغ غير صالح",
-        "ErrorInvalidCurrency": "للأسف ، لا ندعم العملة {{currency}} بعد",
+        "ErrorInvalidCurrency": "للأسف ، لا ندعم العملة {{currency}} حتى الآن",
         "WatchClip": "حصلت على {{amount}} أرصدة مقابل مشاهدة {{fromStreamTitle}}",
         "PurchaseCredits": "قروض شراء",
         "forMessages": {
@@ -40,7 +40,7 @@
             "BonusCredits": "{{amount}} ائتمانات"
         },
         "CreatePaidStream": "لإنشاء {{toStreamName}}",
-        "BonusCredits": "منحة {{amount}} ائتمانات",
+        "BonusCredits": "ائتمانات منحة {{amount}}",
         "BuyBonus": "سيؤدي شراء رصيد بقيمة {999}} مرة واحدة إلى الحصول على {{bonus}} رصيد إضافي.",
         "Streams_user_firstname": "أدخل {{invitedUserName}} الاسم الأول",
         "Streams_user_lastname": "أدخل {{invitedUserName}} الاسم الأخير",
@@ -50,28 +50,28 @@
     },
     "history": {
         "Date": "تاريخ",
-        "Amount": "كمية",
+        "Amount": "مقدار",
         "Description": "وصف",
         "Client": "عميل",
-        "To": "إلى",
-        "From": "من عند",
-        "HistoryEmpty": "لا يوجد لديك بيانات حتى الآن",
+        "To": "ل",
+        "From": "من",
+        "HistoryEmpty": "ليس لديك بيانات حتى الان",
         "SeeHistory": "راجع سجل الدفع لـ {{1}}",
-        "PaymentFor": "نفقت أرصدة {{amount}}",
-        "PaymentTo": "تم إرسال {{amount}} رصيد",
-        "PaymentToUser": "تم إرسال {{amount}} رصيد",
+        "PaymentFor": "تم إرسال {{amount}} من الائتمانات",
+        "PaymentTo": "تم إرسال {{amount}} من الائتمانات",
+        "PaymentToUser": "تم إرسال {{amount}} من الائتمانات",
         "JoinedPaidStream": {
-            "+": "ربح {{amount}} رصيد",
-            "-": "نفقت أرصدة {{amount}}"
+            "+": "حصلت على {{amount}} ائتمانات",
+            "-": "أنفقت {{amount}} من الاعتمادات"
         },
         "LeftPaidStream": {
-            "+": "تم استلام {{amount}} ائتمانات",
-            "-": "تم إرسال {{amount}} رصيد"
+            "+": "تلقيت {{amount}} من الاعتمادات",
+            "-": "تم إرسال {{amount}} من الائتمانات"
         },
-        "CreatedCommunity": "نفقت أرصدة {{amount}}",
-        "BoughtCredits": "اشترى {{amount}} ائتمانات",
-        "InviteAcceptedBy": "ربح {{amount}} رصيد",
-        "YouHaveCreditsToStart": "ربح {{amount}} رصيد",
+        "CreatedCommunity": "أنفقت {{amount}} من الاعتمادات",
+        "BoughtCredits": "اشترى رصيدًا بقيمة {{amount}}",
+        "InviteAcceptedBy": "حصلت على {{amount}} ائتمانات",
+        "YouHaveCreditsToStart": "حصلت على {{amount}} ائتمانات",
         "CreatePaidStream": "أنفقت {{amount}} من الاعتمادات",
         "WatchClip": {
             "+": "حصلت على {{amount}} ائتمانات",
@@ -85,76 +85,76 @@
         "Streams_greeting": "حصلت على {{amount}} ائتمانات"
     },
     "subscriptions": {
-        "infoTitle": "ضبط معلومات الدفع",
+        "infoTitle": "تعيين معلومات الدفع",
         "confirm": {
-            "title": "بدء الاشتراك",
+            "title": "ابدأ الاشتراك",
             "message": "هل ترغب في الاشتراك في {{title}}؟",
-            "ok": "حسنا",
-            "cancel": "إلغاء"
+            "ok": "موافق",
+            "cancel": "يلغي"
         },
         "CreditOrDebitCard": "بطاقة الائتمان أو الخصم",
-        "SubscribePayment": "الاشتراك الدفع",
+        "SubscribePayment": "اشتراك الدفع",
         "ImmediatePayment": "الدفع الفوري"
     },
     "payments": {
-        "infoTitle": "ضبط معلومات الدفع",
+        "infoTitle": "تعيين معلومات الدفع",
         "confirm": {
             "title": "أتم عملية الدفع",
-            "message": "هل توافق على الدفع {{symbol}} {{amount}}؟",
-            "ok": "حسنا",
-            "cancel": "إلغاء"
+            "message": "هل توافق على دفع {{symbol}} {{amount}}؟",
+            "ok": "موافق",
+            "cancel": "يلغي"
         },
-        "BuyAmountCredits": "شراء أرصدة {{amount}}"
+        "BuyAmountCredits": "شراء رصيد بقيمة {{amount}}"
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "قروض",
-            "description": "بتتبع الاعتمادات والمدفوعات"
+            "displayType": "الاعتمادات",
+            "description": "يتتبع الائتمانات والمدفوعات"
         },
         "Assets\/plan": {
-            "displayType": "خطة التقديم",
+            "displayType": "خطة الاشتراك",
             "description": "خطة الاشتراك"
         },
         "Assets\/subscription": {
-            "displayType": "اشتراك",
-            "description": "اشتراك"
+            "displayType": "الاشتراك",
+            "description": "الاشتراك"
         },
         "Assets\/product": {
-            "displayType": "المنتج",
+            "displayType": "منتج",
             "description": "المنتج الذي يتم بيعه"
         },
         "Assets\/service": {
-            "displayType": "الخدمات",
-            "description": "الخدمة المقدمة"
+            "displayType": "خدمة",
+            "description": "يتم تقديم الخدمة"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "حصل على {{amount}} ائتمانات"
+            "content": "حصلت على {{amount}} ائتمانات"
         },
         "Assets\/credits\/spent": {
-            "content": "الاعتمادات المستهلكة {{amount}}"
+            "content": "أنفقت {{amount}} من الاعتمادات"
         },
         "Assets\/credits\/sent": {
-            "content": "أرسلت {{amount}} ائتمانات"
+            "content": "تم إرسال {{amount}} من الاعتمادات إلى {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "تلقى {{amount}} ائتمانات"
+            "content": "تلقيت {{amount}} أرصدة من {{fromUserName}}"
         },
         "Assets\/credits\/bought": {
-            "content": "اشترى {{amount}} ائتمانات"
+            "content": "اشترى {{amount}} رصيد"
         },
         "Assets\/credits\/bonus": {
-            "content": "منحة {{amount}} ائتمانات"
+            "content": "ائتمانات منحة {{amount}}"
         }
     },
     "charge": {
-        "Subject": "تحصل على دفعة بقيمة {{displayAmount}} من {{call 'publisher.displayName'}} بواسطة &quot;{{description}}&quot;",
+        "Subject": "تحصل على دفعة قدرها {{displayAmount}} من {{call 'publisher.displayName'}} عن طريق &quot;{{description}}&quot;",
         "HasBeenCharged": "مرحبًا ، هذا فقط لإعلامك بأنه تم تحصيل مبلغ {{1}} {{2}} مقابل {{3}} بواسطة {{4}}"
     },
     "charged": {
-        "Subject": "شكرًا لك على دفعتك مقابل &quot;{{description}}&quot;",
-        "HavePaid": "مرحبًا {{1}} ، هذا مجرد تأكيد سريع بأنك دفعت {{2}} بنجاح إلى {{3}} مقابل {{4}}"
+        "Subject": "شكرًا لك على الدفع مقابل &quot;{{description}}&quot;",
+        "HavePaid": "مرحبًا {{1}} ، هذا مجرد تأكيد سريع على أنك دفعت مبلغ {{2}} بنجاح إلى {{3}} مقابل {{4}}"
     },
     "services": {
         "NewServiceTemplate": {
@@ -172,12 +172,12 @@
         "OptionalContribution": "مساهمة اختيارية",
         "RequiredPayment": "الدفع المطلوب",
         "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف هذه الخدمة؟",
-        "AmountServicesRelated": "هناك {{amount}} من الإمكانيات المتاحة لهذه الخدمة. كما سيتم إزالتها.",
-        "Free": "مجانا"
+        "AmountServicesRelated": "هناك {{amount}} توافر متعلق بهذه الخدمة. هم أيضا سيتم إزالتها.",
+        "Free": "حر"
     },
     "NFT": {
         "Title": "معلومات حول {{title}} NFT",
-        "Description": "معلومات مفصلة حول NFT",
+        "Description": "معلومات مفصلة عن NFT",
         "FixedBid": "اشتري الآن",
         "CurrentBid": "مناقصه قائمة",
         "StartingIn": "يبدأ في",

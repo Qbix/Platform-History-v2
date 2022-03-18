@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Gwall {{status}} yn ystod y cais",
+        "canceled": "Cais wedi&#39;i ganslo",
+        "500": "Gwall gweinydd mewnol",
+        "404": "Heb ei ganfod: {{url}}",
+        "501": "Torrwyd ar draws y cais"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Sesiwn wedi dod i ben. Adnewyddwch y dudalen a cheisiwch eto.",
+        "otherDomain": "Cais traws-barth wedi&#39;i rwystro i barth tramor yn {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
+        "click": "cliciwch",
+        "yes": "oes",
+        "no": "nac oes",
         "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "Click": "Cliciwch",
+        "Yes": "Oes",
+        "No": "Nac ydw"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Ionawr",
+        "2": "Chwefror",
+        "3": "Mawrth",
+        "4": "Ebrill",
+        "5": "Mai",
+        "6": "Mehefin",
+        "7": "Gorffennaf",
+        "8": "Awst",
+        "9": "Medi",
+        "10": "Hydref",
+        "11": "Tachwedd",
+        "12": "Rhagfyr"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "ail",
+        "seconds": "eiliadau",
+        "minute": "munud",
+        "minutes": "munudau",
+        "hour": "oriau",
+        "day": "Dydd",
+        "days": "dyddiau",
+        "week": "wythnos",
+        "weeks": "wythnosau",
+        "month": "mis",
+        "months": "misoedd",
+        "year": "blwyddyn",
+        "years": "mlynedd",
+        "decade": "degawd",
+        "decades": "degawdau",
+        "century": "canrif",
+        "centuries": "canrifoedd"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
+        "allowMicrophoneAccess": "Caniatewch fynediad i&#39;ch meicroffon",
+        "record": "Cofnod",
+        "recording": "Recordio",
+        "remains": "olion",
+        "maximum": "uchafswm",
+        "playing": "Chwarae",
+        "recorded": "Wedi&#39;i recordio",
         "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "discard": "Taflwch",
+        "encoding": "Amgodio"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "errorNoSource": "Dim ffynhonnell fideo",
+        "SkipAfter": "Hepiwch ar ôl",
+        "Skip": "Sgipio"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "Dim ffynhonnell pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Gosod Clip Cychwyn",
+        "ClipStart": "Dechrau Clip",
+        "SetClipEnd": "Gosod Diwedd Clip",
+        "ClipEnd": "Diwedd Clip",
+        "StartMoreEnd": "Ni all safle cychwyn fod yn fwy na safle terfynol",
+        "EndLessStart": "Ni all safle terfynol fod yn llai na safle cychwyn",
+        "WhichInvalid": "Dadl &#39;sy&#39; yn annilys"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Rhybudd"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Cadarnhau",
+        "ok": "Oes",
+        "cancel": "Nac ydw"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Yn brydlon",
+        "ok": "Ewch"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "mwy",
+        "Menu": "Bwydlen"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Gwall wrth ddarllen y ffeil",
+        "errorType": "Mae&#39;n ddrwg gennym, ond ni chefnogir y math hwn o ffeil",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Beth hoffech chi ei wneud?",
+            "photo": "Tynnwch lun newydd",
+            "library": "Dewiswch o&#39;r llyfrgell"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Dewiswch ddelwedd fwy.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Addasu maint a lleoliad",
+            "touchscreen": "Defnyddiwch eich bysedd i chwyddo a llusgo",
+            "notTouchscreen": "Defnyddiwch eich llygoden a&#39;ch olwyn i chwyddo a llusgo"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "neithiwr",
+        "lastEvening": "noswyl diweddaf",
+        "yesterday": "ddoe",
+        "thisMorning": "y bore yma",
+        "today": "heddiw",
+        "tonight": "heno",
+        "tomorrowMorning": "tom bore",
+        "tomorrow": "yfory",
+        "hoursAgo": "{{h}} awr yn ôl",
+        "hourAgo": "{{h}} awr yn ôl",
+        "minuteAgo": "{{m}} munud yn ôl",
+        "minutesAgo": "{{m}} munudau yn ôl",
+        "secondAgo": "{{s}} eiliad yn ôl",
+        "secondsAgo": "{{s}} eiliad yn ôl",
+        "fewSecondsAgo": "eiliadau yn ôl",
+        "rightNow": "ar hyn o bryd",
+        "inSecond": "mewn {{s}} eiliad",
+        "inSeconds": "mewn {{s}} eiliad",
+        "inMinute": "mewn {{m}} munud",
+        "inMinutes": "mewn {{m}} munud",
+        "inHour": "mewn {{h}} awr",
+        "inHours": "mewn {{h}} awr",
+        "inUnderMinute": "mewn llai na 1 munud"
     }
 }

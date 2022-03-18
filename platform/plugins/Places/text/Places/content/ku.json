@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "di nav {{1}}"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
+        "meter": "jimarvan",
+        "meters": "metre",
+        "kilometer": "kîlometr",
+        "kilometers": "kiometre",
         "km": "km",
-        "mile": "mile",
+        "mile": "mîl",
         "miles": "miles",
         "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
+        "foot": "ling",
+        "feet": "lingan",
         "inches": "inches"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "Tiştên ku di nav {{select}} de diqewimin eleqedar im",
+        "update": "Cihê min nûve bikin",
+        "set": "Cihê Min Set",
+        "prompt": "{{ClickOrTap}} li vir<br> xwe danîn<br> cîh",
+        "myCurrentLocation": "Cihê min ê niha",
+        "enterAddress": "Navnîşanek binivîse",
+        "enterPostcode": "Ji kerema xwe koda posteyê \/ zipcoda xwe binivîse",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "Cih lê zêde bike",
+            "title": "Cihê Nû",
+            "nameYourLocation": "Navê cîhê xwe bidin"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "Vê cîhê tomar bike?",
+            "message": "Ma hûn plan dikin ku di pêşerojê de dîsa vê cîhê bikar bînin?",
+            "ok": "Erê",
+            "cancel": "Na"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "Navê vî cihî bidin",
+            "placeholder": "Mal, Kar hwd.",
+            "ok": "Rizgarkirin"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "Cih hilbijêre"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "Di hundurê vê deverê de cîhek heye?",
+        "newArea": "Qada nû",
+        "promptTitle": "Navekî herêmê binivîse:",
+        "absent": "Ji kerema xwe herêmê diyar bikin",
+        "error": "Şaşî",
+        "exist": "Herêm jixwe heye",
+        "addNewArea": "Qada nû lê zêde bike",
+        "add": "Lêzêdekirin"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "berhevoka cihan",
+            "displayType": "Cihan"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "Avahî, cîh, keştî, park, hwd.",
+            "displayType": "Cîh"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "Herêmek di nav cîhek de, wekî jûreyek an suite, temsîl dike",
+            "displayType": "Dewer"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "Qatek avahî an keştiyekê temsîl dike",
+            "displayType": "Erd"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "Di avahî an keştiyek de stûnek temsîl dike",
+            "displayType": "Ling"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "Kategorî ji bo tiştên ku di nav dûrek diyar a geohash de ne",
+            "displayType": "Nêzîkî cihan"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "Kategorî ji bo tiştên ku di nav dûrek diyar a geohash de, li gorî berjewendiyekê",
+            "displayType": "Cihên balkêş"
         }
     }
 }

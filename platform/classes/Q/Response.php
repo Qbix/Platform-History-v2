@@ -501,6 +501,9 @@ class Q_Response
 		), $params);
 
 		// remove from content new lines and html tags
+		if (!isset($params['content'])) {
+			$params['content'] = '';
+		}
 		$params['content'] = preg_replace("/\r|\n/", "", strip_tags($params['content']));
 
 		if ($params['attrValue'] == 'og:image') {

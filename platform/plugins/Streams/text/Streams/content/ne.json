@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "यो सामग्री तपाईंबाट लुकेको छ।"
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "नयाँ वस्तु"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "मैले निम्तो दिएका मानिसहरू",
+        "Streams\/invitedMe": "जसले मलाई निम्तो दियो",
+        "DoYouAgree": "के तपाईँ सहमत हुनुहुन्छ?",
+        "Yes": "हो",
+        "No": "छैन"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "तपाईको रुचि के हो?",
+        "CanAdd": "यदि तपाईंले अझै पनि आफूले खोजेको कुरा फेला पार्न सक्नुभएन भने, तपाईंले तल एउटा नयाँ रुचि थप्न सक्नुहुन्छ:",
+        "TrySynonyms": "देख्नु भएन? केही समानार्थी शब्दहरू प्रयास गर्नुहोस्।",
+        "AddUnderCategory": "श्रेणी अन्तर्गत थप्नुहोस्...",
+        "Other": "अन्य",
+        "Unlisted": "सूचीबद्ध नगरिएको"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "सन्देशलाई व्यवस्थापक समीक्षाको लागि फ्ल्याग गरिएको छ। फ्ल्याग हटाउन फेरि ट्याप गर्नुहोस्।",
+        "noOneSaid": "कसैले केही भनेका छैनन्",
+        "closeChatButton": "च्याट बन्द गर्नुहोस्",
+        "closeChatConfirmTitle": "यो च्याट बन्द गर्ने हो?",
+        "closeChatConfirm": "के तपाइँ यो च्याट बन्द गर्न निश्चित हुनुहुन्छ?",
+        "Subscribed": "सूचनाहरू सक्षम पारियो",
+        "Unsubscribed": "सूचनाहरू मौन",
+        "closeChatConfirmYes": "हो",
+        "closeChatConfirmNo": "छैन",
+        "earlierComments": "अघिल्लो टिप्पणीहरू",
+        "startedConversation": "कुराकानी सुरु गरे",
+        "RealTimeCall": "वास्तविक समय कल",
+        "SearchByName": "नाम द्वारा खोज्नुहोस्",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} च्याट भ्रमण गर्दै हुनुहुन्छ",
+            "Join": "{{displayName}} च्याटमा सामेल हुनुभयो",
+            "Leave": "{{displayName}} ले च्याट छोड्यो",
+            "RelatedTo": "{{displayName}} एक {{stream.displayType}} सुरु भयो"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "आफ्नो इमेल सदस्यता व्यवस्थापन",
+        "IfUnsubscribe": "यदि तपाइँ सदस्यता रद्द गर्न चाहनुहुन्छ भने",
+        "*": "सन्देश {{& message.fields.type}} लाई {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ले भन्नुभयो: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} मा परिवर्तनहरू",
+        "Streams\/invite": "तपाईंलाई {{& stream.fields.title}} मा आमन्त्रित गरिएको थियो",
+        "Streams\/announcement": "{{& stream.fields.title}} मा घोषणा",
+        "Streams\/access": "{{&call 'avatar.displayName'}} ले {{& stream.fields.title}} मा पहुँच परिवर्तन गर्नुभयो",
+        "Streams\/chat\/edit": "च्याट सन्देश {{& stream.fields.title}} मा सम्पादन गरियो",
+        "Streams\/chat\/remove": "च्याट सन्देश {{& stream.fields.title}} मा हटाइयो",
+        "Streams\/closed": "{{stream.fields.title}} बन्द गरिएको छ",
+        "Streams\/task\/progress": "{{stream.fields.title}} मा भएको प्रगति",
+        "Streams\/task\/complete": "कार्य सम्पन्न भयो: {{stream.fields.title}}",
+        "Streams\/task\/error": "यस समयमा त्रुटि: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: आगमन सन्देश",
+        "Streams\/relatedTo\/Streams\/call": "नयाँ कल {{toTitle}} मा सुरु भयो",
+        "Streams\/relatedTo\/*": "{{toTitle}} मा नयाँ {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} मा {{relationDisplayType}} को रूपमा थपियो",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ले तपाईंलाई टिप्पणीमा उल्लेख गर्नुभयो",
+        "Streams\/call": "{{displayName}} ले वास्तविक-समय कल सुरु गर्यो"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "आमन्त्रण",
+        "messageContent": "{{displayName}} ले तपाईंलाई {{inviteUrl}} मा निम्तो",
+        "youCanNowPaste": "तपाईं अब मानिसहरूलाई आमन्त्रित गर्न यो लिङ्क टाँस्न सक्नुहुन्छ",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "तपाईंको सम्पर्कहरूबाट छान्नुहोस्",
+            "chooseAgainFromContacts": "सम्पर्कहरूबाट फेरि छान्नुहोस्",
+            "inviteSelectedContacts": "चयन गरिएका सम्पर्कहरूलाई आमन्त्रित गर्नुहोस्",
+            "selectFromContacts": "सम्पर्कहरूबाट चयन गर्नुहोस्",
+            "userChooserPlaceholder": "नाम द्वारा खोज्नुहोस्",
+            "photo": "फोटो खिच्नुहोस्",
+            "photoInstruction": "यदि तपाईंको QR कोड स्क्यान गर्ने व्यक्ति तपाईंको अगाडि छ भने, तिनीहरूको फोटो खिच्नुहोस्",
+            "to": "प्रति: {{Stream Title}}",
+            "go": "जानुहोस्",
+            "title": "आमन्त्रण",
+            "placeholder": "मोबाइल नम्बर वा इमेल ठेगाना",
+            "orInvite": "वा प्रयोग गरेर मानिसहरूलाई आमन्त्रित गर्नुहोस्:",
+            "copyLink": "निमन्त्रणा लिङ्क प्रतिलिपि गर्न {{ClickOrTap}}",
+            "shareOrCopyLink": "{{ClickOrTap}} निमन्त्रणा लिङ्क साझेदारी वा प्रतिलिपि गर्न",
+            "QR": "QR कोड उत्पन्न गर्न {{ClickOrTap}}",
+            "QRtitle": "यो QR कोड स्क्यान गर्नुहोस्",
+            "QRscanned": "तिनीहरूले यसलाई स्क्यान गरे!",
+            "scannedQR": "{{ClickOrTap}} यदि कोड स्क्यान गरिएको थियो",
+            "byEmail": "इमेल",
+            "byText": "पाठ",
+            "byFacebook": "फेसबुक",
+            "byTwitter": "ट्विटर"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "हे, यो जाँच गर्नुहोस्",
+            "PleaseVisitLink": "कृपया निम्न लिङ्कमा जानुहोस्:",
+            "InvitingYou": "म तपाईंलाई {{title}} मा आमन्त्रित गर्दैछु",
+            "HasInvitedYou": "{{displayName}} ले तपाईंलाई {{title}} मा आमन्त्रित गर्नुभएको छ",
+            "HasMentionedYou": "{{displayName}} ले तपाईंलाई &quot;{{title}}&quot; मा उल्लेख गर्नुभएको छ",
+            "YOUAREINVITED": "तपाईं आमन्त्रित हुनुहुन्छ!",
+            "AcceptInvite": "निमन्त्रणा स्वीकार गर्नुहोस्"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "तपाईंलाई {{title}} मा आमन्त्रित गरिएको छ। कृपया {{url}} मा ट्याप गर्नुहोस्"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "तपाईंलाई निमन्त्रणा गरिएको छ। स्वीकार गर्न र सामेल हुन यहाँ {{ClickOrTap}}।"
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "{{stream.fields.title}} मा <em>{{message.fields.type}}<\/em> सन्देश पोस्ट गर्नुभयो"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "टिप्पणी गरे",
+            "startedCallIn": "मा कल गर्न थाले",
+            "in": "मा",
+            "body": "{{& url}} मा: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "मा पोस्ट गरिएको छ",
+                "byAvatar": "द्वारा {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "नयाँ {{instructions.fromDisplayType}} छ",
+                "byAvatar": "{{avatar.displayName}} द्वारा थपियो"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "निमन्त्रणाहरू हाम्रो नम्बरबाट पठाइन्छ, जुन तपाईंको साथीहरूले अझै चिन्न सकेनन्। तिनीहरूलाई लिंक क्लिक गर्न सोधेर, तपाईंबाट निमन्त्रणा आएको थाहा दिन द्रुत पाठको साथ पछ्याउनुहोस्।",
+            "confirm": "निमन्त्रणाहरू हाम्रो नम्बरबाट पठाइन्छ, जुन तपाईंको साथीहरूले अझै चिन्न सकेनन्। के तपाइँ तिनीहरूलाई लिंकमा क्लिक गर्न अनुरोध गर्दै, तपाइँबाट निमन्त्रणा आएको थाहा दिन द्रुत पाठको साथ फलो अप गर्न चाहनुहुन्छ।",
+            "check": "नमस्ते, मैले भर्खरै तपाईंलाई {{app}} एपमा निमन्त्रणा पठाएँ। कृपया आफ्नो एसएमएस जाँच गर्नुहोस् र लिङ्क क्लिक गर्नुहोस्!",
+            "CheckYourMobile": "कृपया एसएमएस जाँच गर्नुहोस् र निर्देशनहरू पालना गर्नुहोस्!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "निमन्त्रणाहरू हाम्रो डोमेनबाट पठाइन्छ, जसलाई तपाईंका साथीहरूले अझै चिन्नुहुन्न। तिनीहरूलाई लिंक क्लिक गर्न सोधेर, तपाईंबाट निमन्त्रणा आएको थाहा दिन द्रुत पाठको साथ पछ्याउनुहोस्।",
+            "confirm": "निमन्त्रणाहरू हाम्रो डोमेनबाट पठाइन्छ, जसलाई तपाईंका साथीहरूले अझै चिन्नुहुन्न। के तपाइँ तिनीहरूलाई लिंकमा क्लिक गर्न अनुरोध गर्दै, तपाइँबाट निमन्त्रणा आएको थाहा दिन द्रुत पाठको साथ फलो अप गर्न चाहनुहुन्छ।",
+            "subject": "के तपाईंले निमन्त्रणा पाउनुभयो?",
+            "body": "नमस्ते, मैले भर्खरै तपाईंलाई {{app}} एपमा निमन्त्रणा पठाएँ। कृपया आफ्नो इमेल जाँच गर्नुहोस् र त्यहाँ लिङ्क क्लिक गर्नुहोस्!",
+            "CheckYourEmail": "कृपया आफ्नो इमेल जाँच गर्नुहोस् र निर्देशनहरू पालना गर्नुहोस्!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "शीर्षक",
+        "Subscribed": "सदस्यता लिइयो",
+        "Participants": "सहभागीहरू",
+        "AreYouSureRemoveIdentifier": "के तपाइँ यो पहिचानकर्ता हटाउन निश्चित हुनुहुन्छ?",
+        "AreYouSureUnsubscribeIdentifier": "के तपाइँ यो पहिचानकर्ताको सदस्यता रद्द गर्न निश्चित हुनुहुन्छ? यसले यो पहिचानकर्तालाई सूचनाहरू बन्द गर्नेछ।",
+        "AreYouSureUnsubscribeDevice": "के तपाइँ यो यन्त्रको सदस्यता रद्द गर्न निश्चित हुनुहुन्छ? यसले यस यन्त्रमा सूचनाहरू बन्द गर्नेछ।",
+        "AreYouSureRemoveParticipant": "के तपाइँ यो सहभागीलाई हटाउन निश्चित हुनुहुन्छ?",
+        "RemoveParticipant": "सहभागी हटाउनुहोस्",
+        "Identifiers": "पहिचानकर्ताहरू",
+        "Devices": "यन्त्रहरू",
+        "Streams": "स्ट्रिमहरू"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "तपाईंसँग यो स्ट्रिममा सामेल हुने अनुमति छैन।",
+        "streamTitle": "{{1}} ले लाइभ कल सुरु गर्यो",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "जडान गर्दै",
+            "microphoneBtn": "माइक्रोफोन सक्षम गर्नुहोस्",
+            "cameraBtn": "क्यामेरा सक्षम गर्नुहोस्",
+            "cameraAndMicrophoneBtn": "क्यामेरा र माइक्रोफोन सक्षम गर्नुहोस्"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "माइक बन्द छ",
+            "micIsOn": "माइक अन छ",
+            "cameraIsOff": "क्यामेरा बन्द छ",
+            "cameraIsOn": "क्यामेरा अन छ",
+            "screenSharingIsOn": "स्क्रिन सेयरिङ सक्रिय छ",
+            "screenSharingIsOff": "स्क्रिन साझा गर्नुहोस्",
+            "joinNow": "कलमा सामेल हुनुहोस्"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "निर्देशनहरू",
+            "permissionDenied": "{{kind}} को लागि अनुमति अस्वीकार गरियो। यसलाई प्रयोग गर्नको लागि कृपया यी चरणहरू पालना गर्नुहोस्:",
+            "point1": "&quot;सेटिङ्हरू&quot; -&gt; &quot;उन्नत&quot; -&gt; &quot;गोपनीयता र सुरक्षा&quot; -&gt; &quot;साइट सेटिङहरू&quot; -&gt; &quot;क्यामेरा&quot; वा &quot;साइट सेटिङहरू&quot; -&gt; &quot;माइक्रोफोन&quot; मा जानुहोस्।",
+            "point2": "&quot;ब्लक&quot; सूचीबाट {{hostname}} हटाउनुहोस्"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "निर्देशनहरू",
+            "permissionDenied": "{{kind}} को लागि अनुमति अस्वीकार गरियो। कृपया यो पृष्ठ पुन: लोड गर्नुहोस् र सम्मेलनमा सामेल हुन {{kind}} मा पहुँच पुष्टि गर्नुहोस्।"
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "निर्देशनहरू",
+            "permissionDenied": "{{kind}} को लागि अनुमति अस्वीकार गरियो। यसलाई प्रयोग गर्नको लागि कृपया यी चरणहरू पालना गर्नुहोस्:",
+            "point1": "आफ्नो एन्ड्रोइड सेटिङहरूमा जानुहोस्",
+            "point2": "&quot;अनुप्रयोग र सूचनाहरू&quot; खोल्नुहोस्",
+            "point3": "&quot;{{communityName}}&quot; खोज्नुहोस् र यसलाई खोल्नुहोस्",
+            "point4": "अनुमतिहरूमा ट्याप गर्नुहोस्",
+            "point5": "सक्षम गर्नुहोस् {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "निर्देशनहरू",
+            "permissionDenied": "{{kind}} को लागि अनुमति अस्वीकार गरियो। यसलाई प्रयोग गर्नको लागि कृपया यी चरणहरू पालना गर्नुहोस्:",
+            "point1": "आफ्नो iOS सेटिङहरूमा जानुहोस्",
+            "point2": "&quot;गोपनीयता&quot; खोल्नुहोस्",
+            "point3": "खोज्नुहोस् {{kind}} र यसलाई खोल्नुहोस्",
+            "point4": "&quot;{{communityName}}&quot; खोज्नुहोस् र सक्षम गर्नुहोस्"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "तपाईं कोठामा सामेल हुनुभयो",
+            "joining": "सामेल हुँदै: {{userName}}",
+            "sbLeftRoom": "{{userName}} कोठाबाट निस्कनुभयो",
+            "switchingRoom": "कोठा स्विच गर्दै...",
+            "forceDisconnecting": "तपाइँ 5 सेकेन्ड भित्र विच्छेद हुनुहुनेछ",
+            "forceDisconnectingImmediately": "तपाइँ एक होस्ट द्वारा विच्छेद भएको थियो",
+            "youLeftRoom": "तपाईंले कोठा छोड्नुभयो",
+            "codeCopied": "तपाईंले कोठा छोड्नुभयो",
+            "sbBeganFbLive": "{{userName}} ले Facebook मा यो कल प्रसारण गर्न थाल्यो",
+            "sbStoppedFbLive": "{{userName}} ले Facebook मा यो कल प्रसारण गर्न बन्द गर्यो",
+            "youBeganFbLive": "तपाईंले Facebook मा यो कल प्रसारण गर्न थाल्नुभयो",
+            "youStoppedFbLive": "तपाईंले Facebook मा यो कल प्रसारण गर्न बन्द गर्नुभयो",
+            "youStartedLive": "तपाईंले आफू अनुकूल RTMP मा यो कल प्रसारण गर्न थाल्नुभयो",
+            "youStoppedLive": "तपाईंले अनुकूलन RTMP मा यो कल प्रसारण गर्न बन्द गर्नुभयो",
+            "sbStartedLiveStreaming": "{{userName}} लाइभ सुरु भयो",
+            "sbStoppedLiveStreaming": "{{userName}} लाइभ समाप्त भयो",
+            "liveStopped": "अन्तिम बिन्दुमा भिडियो पठाउँदा त्रुटि भयो",
+            "youBeganVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न थाल्नुभयो",
+            "youStoppedVideoRecording": "तपाईंले यो सम्मेलन रेकर्ड गर्न रोक्नुभयो",
+            "linkCopiedToCb": "लिंक क्लिपबोर्डमा प्रतिलिपि गरियो",
+            "codeCopiedToCb": "कोड क्लिपबोर्डमा प्रतिलिपि गरियो",
+            "userHasNoVideo": "सहभागीसँग कुनै भिडियो छैन",
+            "openInBrowserAlert": "सम्मेलनमा सामेल हुन सफारी ब्राउजरमा लिङ्क खोल्नुहोस्।"
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
-            "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "dialogTitle": "भिडियो सेटिङहरू",
+            "webCamera": "वेब क्यामेरा",
+            "screenSharing": "स्क्रिन साझेदारी",
+            "shareAnotherScreen": "अर्को स्क्रिन साझा गर्नुहोस्",
+            "turnOffCameras": "क्यामेरा बन्द गर्नुहोस्",
+            "turnOffVideo": "क्यामेरा\/स्क्रिन साझेदारी बन्द गर्नुहोस्",
+            "turnOffAudioInput": "माइक्रोफोन म्युट गर्नुहोस्",
+            "turnOffScreenSharing": "स्क्रिन साझेदारी बन्द गर्नुहोस्",
+            "cameraIsTurnedOff": "क्यामेरा बन्द छ",
+            "micIsTurnedOff": "माइक्रोफोन बन्द छ",
+            "startFBLive": "फेसबुक लाइभस्ट्रिम सुरु गर्नुहोस्",
+            "stopFBLive": "फेसबुक लाइभस्ट्रिम रोक्नुहोस्",
+            "startRecording": "रेकर्डिङ सुरु गर्नुहोस्",
+            "stopRecording": "रेकर्डिङ रोक्नुहोस्",
+            "start": "सुरु गर्नुहोस्",
+            "stop": "रोक",
+            "recordingInProgress": "रेकर्डिङ भइरहेको छ...",
+            "fbLiveTitle": "लाइभस्ट्रिमको शीर्षक",
+            "fbLiveDescription": "आफ्नो लाइभस्ट्रिमको वर्णन गर्नुहोस्। यसको बारेमा के हो?",
+            "fbOnlyMeLiveAccess": "म मात्र",
+            "fbFriendsAccess": "साथीहरू",
+            "fbPublicAccess": "सार्वजनिक",
+            "publishOnTimeline": "टाइमलाइनमा प्रकाशित गर्नुहोस्",
+            "publishToGroup": "समूहमा प्रकाशित गर्नुहोस्",
+            "fbStartLive": "लाइभ जानुहोस्",
+            "fbStopLive": "लाइभस्ट्रिम अन्त्य गर्नुहोस्",
+            "streamingSettings": "सेटिङहरू",
+            "fbEmbedCode": "इम्बेड गर्नुहोस्",
+            "copy": "कापी",
+            "streamToRTMP": "आफू अनुकूल RTMP मा स्ट्रिम गर्नुहोस्",
+            "startBroadcasting": "प्रसारण सुरु गर्नुहोस्",
+            "broadcastingInProgress": "प्रसारण भइरहेको छ"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "अडियो सेटिङहरू",
+            "speakers": "वक्ताहरू",
+            "microphone": "माइक्रोफोन"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "सहभागी सेटिङहरू",
+            "disconnect": "जडान विच्छेद गर्नुहोस्",
+            "floatingScreens": "फ्लोटिंग स्क्रिनहरू",
+            "tiledScreens": "टाइल गरिएको स्क्रिनहरू",
+            "loudestExceptMe": "म बाहेक सबै भन्दा ठूलो आवाज",
+            "maximizeLoudest": "लाउडेस्ट अधिकतम गर्नुहोस्",
+            "staticMaximized": "स्थिर अधिकतम",
+            "fullScreen": "फुल स्क्रिन",
+            "manual": "म्यानुअल",
+            "turnOffCamera": "भिडियो लुकाउनुहोस्",
+            "turnOffAudio": "अडियो म्युट गर्नुहोस्",
+            "turnOffScreenSharing": "स्क्रिन साझेदारी लुकाउनुहोस्",
+            "turnOnCamera": "भिडियो देखाउनुहोस्",
+            "turnOnAudio": "अडियो अनम्युट गर्नुहोस्",
+            "turnOnScreenSharing": "स्क्रिन साझेदारी देखाउनुहोस्"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "स्ट्रिमिङ सेटिङहरू"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "बैठक",
+            "MeetingEnded": "बैठक सकियो"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "आमन्त्रित",
+            "description": "निमन्त्रणा को लागी इनबक्स"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "स्रोत",
+            "description": "स्रोतमा पहुँच प्रबन्ध गर्न र अद्यावधिकहरूको बारेमा सन्देशहरू पोस्ट गर्नको लागि स्ट्रिम"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "एक निश्चित कार्य मा प्रगति बारे अद्यावधिक प्राप्त गर्न को लागी",
+            "displayType": "कार्य"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "कार्यहरूको लागि वर्ग",
+            "displayType": "कार्यहरू"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "समुदायका सदस्यहरूको लागि साझा अनुभव",
+            "displayType": "समुदायका सदस्यहरूको लागि साझा अनुभव"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "अभिवादन जसको साथ प्रयोगकर्ताले आफ्नो परिचय दिन सक्छन्",
+            "displayType": "अभिवादन"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "नम्बर",
+            "description": "गणितीय संख्या"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "मिति",
+            "description": "मिति"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "पाठ",
+            "description": "पाठको मुख्य भाग"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "पाठ",
+            "description": "पाठको सानो शरीर"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "पाठ",
+            "description": "पाठको मध्यम भाग"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "इ - मेल ठेगाना",
+            "description": "इ - मेल ठेगाना"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "फोन नम्बर",
+            "description": "फोन नम्बर"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "वेबमा लिङ्क"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "छवि",
+            "description": "दृश्य छवि",
+            "newItem": "छवि थप्नुहोस्"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "छवि ग्यालेरी",
+            "description": "छविहरूको ग्यालेरी"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "एल्बम",
+            "description": "एउटा एल्बम जसमा विभिन्न मिडिया सम्बन्धित छन्"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "फाइल",
+            "description": "अपलोड गरिएको फाइल",
+            "newItem": "फाइल थप्नुहोस्"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "displayType": "अडियो क्लिप",
+            "description": "अडियो क्लिप",
+            "newItem": "अडियो थप्नुहोस्"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "भिडियो क्लिप",
+            "description": "भिडियो क्लिप",
+            "newItem": "भिडियो थप्नुहोस्"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF कागजात",
+            "description": "PDF कागजात",
+            "newItem": "PDF थप्नुहोस्"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "प्रत्यक्ष प्रसारण",
+            "description": "लाइभ अडियो वा भिडियो"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "श्रेणी",
+            "description": "एउटा वर्ग जसमा अन्य स्ट्रिमहरू सम्बन्धित हुन सक्छन्"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "सहभागी सूचकांक",
+            "description": "स्ट्रिमहरू यससँग सम्बन्धित\/असम्बन्धित हुन्छन् जब प्रयोगकर्ता सामेल हुन्छ\/छोड्छ"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "ब्याज",
+            "description": "कुनै निश्चित विषयमा प्रयोगकर्ताको रुचि प्रतिनिधित्व गर्दछ"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "आगमन",
+            "description": "अन्य प्रयोगकर्ताहरूले पठाएको सन्देशहरूको लागि गन्तव्य"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "कुराकानी",
+            "description": "प्रयोगकर्ताहरू बीचको कुराकानी, इतिहासको साथ"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "वास्तविक समय कल",
+            "description": "एक वास्तविक समय भिडियो \/ अडियो कल"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "प्रश्न",
+            "description": "प्रश्न प्रवाह"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "जवाफ",
+            "description": "जवाफ प्रवाह"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "कलहरू",
+            "description": "स्ट्रिम\/webrtc को लागि श्रेणी",
+            "MaxRelationsExceeded": "अधिकतम कलहरू नाघ्यो"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "पृष्ठ शीर्षक टाइप गर्नुहोस्",
+        "ModTab": "वस्तु परिमार्जन गर्नुहोस्",
+        "Save": "बचत गर्नुहोस्",
+        "Delete": "मेटाउन",
+        "Submenu": "उपमेनु"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "record": "रेकर्ड",
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिङ्क",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अमान्य URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै अडियो स्रोत छैन",
+        "uploadLimit": "अधिकतम फाइल आकार: {{size}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाइल धेरै ठूलो छ।<br> अधिकतम फाइल आकार {{size}} हो"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिङ्क",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अमान्य URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै भिडियो स्रोत छैन",
+        "uploadLimit": "अधिकतम फाइल आकार: {{size}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाइल धेरै ठूलो छ।<br> अधिकतम फाइल आकार {{size}} हो"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिङ्क",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अमान्य URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै pdf स्रोत छैन",
+        "uploadLimit": "अधिकतम फाइल आकार: {{size}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाइल धेरै ठूलो छ।<br> अधिकतम फाइल आकार {{size}} हो"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
-        "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "reset": "रिसेट गर्नुहोस्",
+        "edit": "सम्पादन गर्नुहोस्",
+        "title": "शीर्षक",
+        "description": "विवरण",
+        "upload": "अपलोड गर्नुहोस्",
+        "link": "लिङ्क",
+        "setUrl": "URL सेट गर्नुहोस्",
+        "save": "बचत गर्नुहोस्",
+        "uploadedImage": "अपलोड गरिएको छवि",
+        "imageTitle": "छवि शीर्षक",
+        "setClip": "क्लिप काट्नुहोस्",
+        "invalidURL": "अमान्य URL",
+        "invalidFile": "अमान्य फाइल",
+        "errorNoSource": "कुनै छवि स्रोत छैन",
+        "uploadLimit": "अधिकतम फाइल आकार: {{size}}",
+        "errorFileSize": "माफ गर्नुहोस्, तर फाइल धेरै ठूलो छ।<br> अधिकतम फाइल आकार {{size}} हो"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
+        "Questions": "प्रश्नहरू",
+        "Answers": "जवाफहरू",
+        "AnswerQuestion": "प्रश्नको उत्तर दिनुहोस्",
+        "SetYourAnswer": "कृपया प्रश्नको जवाफ दिनुहोस्",
+        "NewQuestion": "नयाँ प्रश्न",
+        "NewAnswer": "नयाँ जवाफ",
+        "AnswerDetails": "उत्तर विवरणहरू",
+        "answerOption": "विकल्प",
+        "answerOptionExclusive": "विशेष",
         "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "FreeAnswer": "आफ्नो जवाफ यहाँ लेख्नुहोस्",
+        "SaveQuestion": "प्रश्न बचत गर्नुहोस्",
+        "SaveAnswer": "जवाफ सुरक्षित गर्नुहोस्",
+        "AddAnotherAnswer": "अर्को जवाफ थप्नुहोस्",
+        "ErrorAnswers": "कृपया एउटा जवाफ पनि थप्नुहोस्",
+        "AlreadyAnswered": "पहिले नै जवाफ दिए",
+        "TitlePlaceholder": "आफ्नो प्रश्न टाइप गर्नुहोस्",
+        "ContentPlaceholder": "मानिसहरूलाई जवाफ दिन मद्दत गर्न यहाँ कुनै पनि अतिरिक्त जानकारी राख्नुहोस्",
+        "ErrorTitle": "प्रश्न आवश्यक छ",
+        "Placeholder": "प्लेसहोल्डर"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "नयाँ अनुभव",
+        "DefineTitle": "कृपया शीर्षक परिभाषित गर्नुहोस्",
+        "Create": "सिर्जना गर्नुहोस्"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "कलहरू",
+        "MaxCalls": "अधिकतम कलहरू",
+        "Update": "अपडेट गर्नुहोस्",
+        "NoCallsYet": "अहिलेसम्म कुनै कल छैन",
+        "CallReasonTitle": "यो कल के हो?",
+        "WaitingRoom": "प्रतीक्षालय"
     }
 }

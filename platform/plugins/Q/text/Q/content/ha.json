@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Kuskure {{status}} yayin nema",
+        "canceled": "An soke nema",
+        "500": "Kuskuren na Cikin Saba",
+        "404": "Ba a samo shi ba: {{url}}",
+        "501": "An katse buƙatar"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Zaman ya kare. Sake sabunta shafin kuma a sake gwadawa.",
+        "otherDomain": "An toshe buƙatun yanki zuwa yankin waje a {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "click": "danna",
+        "yes": "iya",
+        "no": "a&#39;a",
+        "Tap": "Taɓa",
+        "Click": "Danna",
+        "Yes": "Ee",
+        "No": "A&#39;a"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "Janairu",
+        "2": "Fabrairu",
+        "3": "Maris",
+        "4": "Afrilu",
+        "5": "Mayu",
+        "6": "Yuni",
+        "7": "Yuli",
+        "8": "Agusta",
+        "9": "Satumba",
+        "10": "Oktoba",
+        "11": "Nuwamba",
+        "12": "Disamba"
     },
     "durations": {
-        "second": "second",
+        "second": "na biyu",
         "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
+        "minute": "minti",
+        "minutes": "mintuna",
         "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "day": "rana",
+        "days": "kwanaki",
+        "week": "mako",
+        "weeks": "makonni",
+        "month": "wata",
+        "months": "watanni",
+        "year": "shekara",
+        "years": "shekaru",
+        "decade": "shekaru goma",
+        "decades": "shekarun da suka gabata",
+        "century": "karni",
+        "centuries": "ƙarni"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
+        "allowMicrophoneAccess": "Da fatan za a ba da damar yin amfani da makirufo",
+        "record": "Yi rikodin",
+        "recording": "Rikodi",
+        "remains": "ragowar",
+        "maximum": "matsakaicin",
+        "playing": "Yin wasa",
+        "recorded": "An yi rikodin",
         "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "discard": "Yi watsi da",
+        "encoding": "Rufewa"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "errorNoSource": "Babu tushen bidiyo",
+        "SkipAfter": "Tsallake bayan",
+        "Skip": "Tsallake"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "Babu tushen pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Saita Clip Start",
+        "ClipStart": "Clip Fara",
+        "SetClipEnd": "Saita Ƙarshen shirin",
+        "ClipEnd": "Ƙarshen shirin",
+        "StartMoreEnd": "Matsayin farawa ba zai iya wuce matsayi na ƙarshe ba",
+        "EndLessStart": "Matsayin ƙarshe ba zai iya zama ƙasa da matsayin farawa ba",
+        "WhichInvalid": "Hujja &#39;wanda&#39; bata aiki"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Fadakarwa"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Tabbatar",
+        "ok": "Ee",
+        "cancel": "A&#39;a"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Da sauri",
+        "ok": "Tafi"
     },
     "tabs": {
-        "more": "more",
+        "more": "Kara",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Kuskuren karanta fayil",
+        "errorType": "Yi haƙuri, amma wannan nau&#39;in fayil ɗin ba shi da tallafi",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Me kuke so kuyi?",
+            "photo": "Ɗauki sabon hoto",
+            "library": "Zaɓi daga ɗakin karatu"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Da fatan za a zaɓi hoto mafi girma.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Daidaita girman da matsayi",
+            "touchscreen": "Yi amfani da yatsunsu don zuƙowa da ja",
+            "notTouchscreen": "Yi amfani da linzamin kwamfuta da dabaran ku don zuƙowa da ja"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "daren jiya",
+        "lastEvening": "daren jiya",
+        "yesterday": "jiya",
+        "thisMorning": "wannan safiya",
+        "today": "yau",
+        "tonight": "yau da dare",
+        "tomorrowMorning": "da safe",
+        "tomorrow": "gobe",
+        "hoursAgo": "Awanni {{h}} da suka wuce",
+        "hourAgo": "awa {999}} da ta wuce",
+        "minuteAgo": "Minti {999}} da suka wuce",
+        "minutesAgo": "Mintuna {{m}} da suka wuce",
+        "secondAgo": "{999}} dakika daya da suka wuce",
+        "secondsAgo": "{{s}} seconds da suka wuce",
+        "fewSecondsAgo": "seconds da suka wuce",
+        "rightNow": "a yanzu",
+        "inSecond": "a cikin dakika {{s}}",
+        "inSeconds": "a cikin dakika {{s}}",
+        "inMinute": "a cikin minti {{m}}",
+        "inMinutes": "a cikin mintuna {{m}}",
+        "inHour": "a cikin sa&#39;a {{h}}",
+        "inHours": "a cikin sa&#39;o&#39;i {{h}}",
+        "inUnderMinute": "a kasa da minti 1"
     }
 }

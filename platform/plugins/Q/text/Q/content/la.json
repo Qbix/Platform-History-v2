@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Error {{status}} in petitione",
+        "canceled": "Request cancellatam",
+        "500": "Internus servo errore",
+        "404": "Non inveni: {{url}}",
+        "501": "Petitio interrumpitur"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Periodus finit. Renova pagina et iterum conare.",
+        "otherDomain": "Obstructio crucis-domain petitio ad dominium alienum at {{baseUrl}}"
     },
     "words": {
         "tap": "tap",
         "click": "click",
-        "yes": "yes",
+        "yes": "sic",
         "no": "no",
         "Tap": "Tap",
         "Click": "Click",
-        "Yes": "Yes",
+        "Yes": "Ita",
         "No": "No"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
+        "1": "Ianuarii",
+        "2": "Februarius",
+        "3": "Martii",
+        "4": "Aprilis",
         "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "6": "mensis Iunii",
+        "7": "Iulii",
+        "8": "Aug",
+        "9": "Septembris",
+        "10": "Octobris",
+        "11": "Novembris",
+        "12": "Decembris"
     },
     "durations": {
-        "second": "second",
+        "second": "secundo",
         "seconds": "seconds",
         "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "minutes": "minuta",
+        "hour": "horae",
+        "day": "dies",
+        "days": "diebus",
+        "week": "hebdomadis",
+        "weeks": "hebdomades",
+        "month": "mensis",
+        "months": "menses",
+        "year": "annus",
+        "years": "annos",
+        "decade": "decennium",
+        "decades": "decennia",
+        "century": "saeculum",
+        "centuries": "saecula"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
+        "allowMicrophoneAccess": "Quaeso, ut aditus ad tortor ligula",
         "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
+        "recording": "Recordatio",
+        "remains": "reliquiae",
         "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
+        "playing": "Ludens",
+        "recorded": "Exposita",
         "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "discard": "Relinquere",
+        "encoding": "modum translitterandi"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
+        "errorNoSource": "Non video fontem",
+        "SkipAfter": "Skip post",
         "Skip": "Skip"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "errorNoSource": "Nulla pdf fons"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Set Clip Committitur",
+        "ClipStart": "Satus clip",
+        "SetClipEnd": "Set Tondeo finem",
+        "ClipEnd": "Finis clip",
+        "StartMoreEnd": "Initium loci non plus quam finis positionis",
+        "EndLessStart": "Finis positio non minus quam principium positio",
+        "WhichInvalid": "Argumentum quod irritum"
     },
     "alert": {
         "title": "Alert"
     },
     "confirm": {
         "title": "Confirm",
-        "ok": "Yes",
+        "ok": "Ita",
         "cancel": "No"
     },
     "prompt": {
-        "title": "Prompt",
+        "title": "promptus",
         "ok": "Go"
     },
     "tabs": {
-        "more": "more",
+        "more": "plus",
         "Menu": "Menu"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Error legere file",
+        "errorType": "Dolemus, sed hoc genus fasciculi non praebetur",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Quid velis agere?",
+            "photo": "Accipere novam photo",
+            "library": "Lego ex bibliotheca"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Maiorem imaginem elige.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Adjust magnitudine ac dignitate",
+            "touchscreen": "Digitis tuis utere to zoom and drag",
+            "notTouchscreen": "Utere tuo muris &amp; rota to zoom and drag"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
+        "lastNight": "heri",
+        "lastEvening": "novissime eve",
+        "yesterday": "heri",
+        "thisMorning": "hoc mane",
+        "today": "hodie",
+        "tonight": "hac nocte",
+        "tomorrowMorning": "tom mane",
+        "tomorrow": "cras",
         "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
+        "hourAgo": "{{h}} hour ago?",
         "minuteAgo": "{{m}} minute ago",
         "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
+        "secondAgo": "{{s}} secundo abhinc",
         "secondsAgo": "{{s}} seconds ago",
         "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
+        "rightNow": "nunc",
+        "inSecond": "in {999}} secundo",
         "inSeconds": "in {{s}} seconds",
         "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "inMinutes": "in {{m}} minuta",
+        "inHour": "in {{h}} hora",
+        "inHours": "in {{h}} horas",
+        "inUnderMinute": "in sub I momento"
     }
 }

@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "ඉල්ලීම අතරතුර දෝෂය {{status}}",
+        "canceled": "ඉල්ලීම අවලංගු කරන ලදී",
+        "500": "අභ්යන්තර සේවාදායක දෝෂය",
+        "404": "හමු නොවීය: {{url}}",
+        "501": "ඉල්ලීම බාධා විය"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "සැසිය කල් ඉකුත් විය. පිටුව නැවුම් කර නැවත උත්සාහ කරන්න.",
+        "otherDomain": "{{baseUrl}} හි විදේශීය වසම සඳහා හරස් වසම් ඉල්ලීම අවහිර කරන ලදී"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "තට්ටු කරන්න",
+        "click": "ක්ලික් කරන්න",
+        "yes": "ඔව්",
+        "no": "නැත",
+        "Tap": "තට්ටු කරන්න",
+        "Click": "ක්ලික් කරන්න",
+        "Yes": "ඔව්",
+        "No": "නැත"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "ජනවාරි",
+        "2": "පෙබරවාරි",
+        "3": "මාර්තු",
+        "4": "අප්රේල්",
+        "5": "මැයි",
+        "6": "ජූනි",
+        "7": "ජුලි",
+        "8": "අගෝස්තු",
+        "9": "සැප්තැම්බර්",
+        "10": "ඔක්තෝම්බර්",
+        "11": "නොවැම්බර්",
+        "12": "දෙසැම්බර්"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "දෙවැනි",
+        "seconds": "තත්පර",
+        "minute": "මිනිත්තුව",
+        "minutes": "මිනිත්තු",
+        "hour": "පැය",
+        "day": "දවස",
+        "days": "දින",
+        "week": "සතිය",
+        "weeks": "සති",
+        "month": "මස",
+        "months": "මාස",
+        "year": "වර්ෂය",
+        "years": "අවුරුදු",
+        "decade": "දශකය",
+        "decades": "දශක",
+        "century": "සියවස",
+        "centuries": "සියවස්"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "කරුණාකර ඔබේ මයික්‍රෆෝනයට ප්‍රවේශයට ඉඩ දෙන්න",
+        "record": "වාර්තාව",
+        "recording": "පටිගත කිරීම",
+        "remains": "ඉතිරි වේ",
+        "maximum": "උපරිම",
+        "playing": "සෙල්ලම් කරනවා",
+        "recorded": "පටිගත කර ඇත",
+        "clip": "ක්ලිප්",
+        "discard": "ඉවතලන්න",
+        "encoding": "කේතනය කිරීම"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "ක්ලිප්",
+        "errorNoSource": "වීඩියෝ මූලාශ්‍ර නැත",
+        "SkipAfter": "පසු මග හරින්න",
+        "Skip": "මඟ හරින්න"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "ක්ලිප්",
+        "errorNoSource": "pdf මූලාශ්‍රයක් නැත"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "පසුර ආරම්භය සකසන්න",
+        "ClipStart": "ක්ලිප් ආරම්භය",
+        "SetClipEnd": "පසුර අවසානය සකසන්න",
+        "ClipEnd": "ක්ලිප් අවසානය",
+        "StartMoreEnd": "ආරම්භක ස්ථානය අවසන් ස්ථානයට වඩා වැඩි විය නොහැක",
+        "EndLessStart": "අවසාන ස්ථානය ආරම්භක ස්ථානයට වඩා අඩු විය නොහැක",
+        "WhichInvalid": "&#39;කුමක්ද&#39; යන තර්කය වලංගු නැත"
     },
     "alert": {
-        "title": "Alert"
+        "title": "අනතුරු ඇඟවීම"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "තහවුරු කරන්න",
+        "ok": "ඔව්",
+        "cancel": "නැත"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "ඉක්මන් කරන්න",
+        "ok": "යන්න"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "තව",
+        "Menu": "මෙනු"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "ගොනුව කියවීමේ දෝෂයකි",
+        "errorType": "සමාවන්න, නමුත් මෙම ගොනු වර්ගය සහය නොදක්වයි",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "ඔබ කුමක් කිරීමට කැමතිද?",
+            "photo": "නව ඡායාරූපයක් ගන්න",
+            "library": "පුස්තකාලයෙන් තෝරන්න"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "කරුණාකර විශාල රූපයක් තෝරන්න.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "ප්රමාණය සහ ස්ථානය සකස් කරන්න",
+            "touchscreen": "විශාලනය කිරීමට සහ ඇදීමට ඔබේ ඇඟිලි භාවිතා කරන්න",
+            "notTouchscreen": "විශාලනය කිරීමට සහ ඇදගෙන යාමට ඔබේ මූසිකය සහ රෝදය භාවිතා කරන්න"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "අවසන් රාත්රිය",
+        "lastEvening": "පසුගිය හැන්දෑවේ",
+        "yesterday": "ඊයේ",
+        "thisMorning": "අද උදෑසන",
+        "today": "අද",
+        "tonight": "අද රෑ",
+        "tomorrowMorning": "ටොම් උදෑසන",
+        "tomorrow": "හෙට",
+        "hoursAgo": "පැය {{h}}කට පෙර",
+        "hourAgo": "පැය {{h}}කට පෙර",
+        "minuteAgo": "මිනිත්තු {{m}}කට පෙර",
+        "minutesAgo": "මිනිත්තු {{m}}කට පෙර",
+        "secondAgo": "තත්පර {{s}}කට පෙර",
+        "secondsAgo": "තත්පර {{s}}කට පෙර",
+        "fewSecondsAgo": "තත්පර කිහිපයකට පෙර",
+        "rightNow": "මේ දැන්",
+        "inSecond": "තත්පර {{s}}කින්",
+        "inSeconds": "තත්පර {{s}}කින්",
+        "inMinute": "මිනිත්තු {{m}}කින්",
+        "inMinutes": "මිනිත්තු {{m}}කින්",
+        "inHour": "පැය {{h}}කින්",
+        "inHours": "පැය {{h}}කින්",
+        "inUnderMinute": "මිනිත්තු 1 ට අඩු කාලයකදී"
     }
 }

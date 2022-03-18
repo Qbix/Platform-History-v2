@@ -1,9 +1,9 @@
 {
     "preview": {
-        "NewItemTitle": "Nou article"
+        "NewItemTitle": "Article nou"
     },
     "labels": {
-        "Streams\/invited": "Persones que he convidat",
+        "Streams\/invited": "Gent que vaig convidar",
         "Streams\/invitedMe": "Qui em va convidar",
         "AreYouAgree": "Estàs d&#39;acord?",
         "Yes": "Sí",
@@ -13,213 +13,213 @@
     "interests": {
         "Filter": "Quins són els teus interessos?",
         "CanAdd": "Si encara no trobeu el que busqueu, podeu afegir un nou interès a continuació:",
-        "TrySynonyms": "No ho veieu? Proveu alguns sinònims.",
-        "AddUnderCategory": "Afegeix a la categoria ...",
+        "TrySynonyms": "No ho veus? Proveu alguns sinònims.",
+        "AddUnderCategory": "Afegeix a la categoria...",
         "Other": "Altres",
-        "Unlisted": "Sense llista"
+        "Unlisted": "No cotitzades"
     },
     "chat": {
-        "flaggedForAdminReview": "S&#39;ha marcat el missatge per a la revisió de l’administrador. Toqueu de nou per desfer-se.",
+        "flaggedForAdminReview": "El missatge s&#39;ha marcat per a la revisió de l&#39;administrador. Torneu a tocar per desmarcar.",
         "noOneSaid": "Ningú ha dit res",
         "closeChatButton": "Tanca el xat",
-        "closeChatConfirmTitle": "Tanca aquest xat?",
-        "closeChatConfirm": "Esteu segur que voleu tancar aquest xat?",
+        "closeChatConfirmTitle": "Tancar aquest xat?",
+        "closeChatConfirm": "Confirmes que vols tancar aquest xat?",
         "closeChatConfirmYes": "Sí",
         "closeChatConfirmNo": "No",
         "earlierComments": "comentaris anteriors",
-        "Subscribed": "Notificacions de silenci",
-        "Unsubscribed": "Rebre notificacions",
+        "Subscribed": "Notificacions activades",
+        "Unsubscribed": "Notificacions silenciades",
         "notAllowedToJoinCall": "No teniu permís per unir-vos a aquesta conversa.",
         "startedConversation": "va iniciar una conversa",
         "RealTimeCall": "Trucada en temps real",
-        "SearchByName": "Cerca pel seu nom",
+        "SearchByName": "Cerca per nom",
         "Notifications": {
-            "Visit": "{{displayName}} visita el xat",
-            "Join": "{{displayName}} es va unir al xat",
-            "Leave": "{{displayName}} va deixar el xat",
+            "Visit": "{{displayName}} està visitant el xat",
+            "Join": "{{displayName}} s&#39;ha unit al xat",
+            "Leave": "{{displayName}} va sortir del xat",
             "RelatedTo": "{{displayName}} va iniciar un {{stream.displayType}}"
         }
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} va dir:",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} va dir: {{& message.content}}",
         "Streams\/changed": "Canvis a {{stream.fields.title}}",
-        "Streams\/invite": "Us han convidat a {{& stream.fields.title}}",
-        "Streams\/announcement": "Anunci en {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} ha canviat l’accés al flux",
-        "Streams\/chat\/edit": "S&#39;ha editat un missatge de xat",
-        "Streams\/chat\/remove": "S&#39;ha eliminat el missatge de xat",
+        "Streams\/invite": "T&#39;han convidat a {{& stream.fields.title}}",
+        "Streams\/announcement": "Anunci a {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} va canviar l&#39;accés a {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Missatge de xat editat a {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Missatge de xat eliminat a {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} s&#39;ha tancat",
-        "Streams\/task\/progress": "Progrés realitzat a {{stream.fields.title}}",
+        "Streams\/task\/progress": "Avenços realitzats el {{stream.fields.title}}",
         "Streams\/task\/complete": "Tasca completada: {{stream.fields.title}}",
         "Streams\/task\/error": "Error durant: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Missatge entrant",
-        "ManageEmailSubscriptions": "gestiona les vostres subscripcions de correu electrònic",
-        "IfUnsubscribe": "Si voleu donar-vos de baixa",
-        "Streams\/relatedTo\/Streams\/call": "La nova trucada va començar a {{toTitle}}",
+        "Streams\/incoming\/*": "{{app}}: missatge entrant",
+        "ManageEmailSubscriptions": "gestionar les vostres subscripcions de correu electrònic",
+        "IfUnsubscribe": "Si vols donar-te de baixa",
+        "Streams\/relatedTo\/Streams\/call": "Nova trucada començada el {{toTitle}}",
         "Streams\/relatedTo\/*": "Nou {{relationDisplayType}} a {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Afegit a {{toTitle}} com a {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "S&#39;ha afegit a {{toTitle}} com a {{relationDisplayType}}",
         "Streams\/mention": "{{&call 'avatar.displayName'}} t&#39;ha mencionat en un comentari",
         "Streams\/call": "{{displayName}} va iniciar una trucada en temps real"
     },
     "invite": {
         "messageContent": "{{displayName}} t&#39;ha convidat a {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Trieu un dels vostres contactes",
-            "selectFromContacts": "Seleccioneu De contactes",
+            "chooseFromContacts": "Trieu entre els vostres contactes",
+            "selectFromContacts": "Seleccioneu Des dels contactes",
             "photo": "Fer una foto",
-            "photoInstruction": "Si la persona que va escanejar el seu codi QR és davant vostre, feu una foto",
-            "to": "A: {{Stream Title}}",
-            "go": "Vagi",
+            "photoInstruction": "Si la persona que ha escanejat el teu codi QR està davant teu, fes-li una foto",
+            "to": "Per a: {{Stream Title}}",
+            "go": "Vés",
             "title": "Convidar",
             "placeholder": "Número de mòbil o adreça de correu electrònic",
-            "orInvite": "O convideu persones utilitzant:",
+            "orInvite": "O convidar persones utilitzant:",
             "QR": "{{ClickOrTap}} per generar codi QR",
             "QRtitle": "Escaneja aquest codi QR",
             "byEmail": "Correu electrònic",
             "byText": "Text",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "QRscanned": "El van escanejar!",
-            "chooseAgainFromContacts": "Trieu de nou els contactes",
-            "inviteSelectedContacts": "Convida a contactes seleccionats",
-            "scannedQR": "{{ClickOrTap}} si es va escanejar el codi",
-            "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç de la invitació",
+            "QRscanned": "L&#39;han escanejat!",
+            "chooseAgainFromContacts": "Trieu de nou a Contactes",
+            "inviteSelectedContacts": "Convida els contactes seleccionats",
+            "scannedQR": "{{ClickOrTap}} si el codi s&#39;ha escanejat",
+            "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç d&#39;invitació",
             "userChooserPlaceholder": "Cerca per nom",
             "shareOrCopyLink": "{{ClickOrTap}} per compartir o copiar l&#39;enllaç d&#39;invitació"
         },
         "email": {
-            "subject": "Hola, comprova-ho",
-            "PleaseVisitLink": "Visiteu l’enllaç següent:",
-            "InvitingYou": "Us convido a {{title}}",
+            "subject": "Ei, comproveu això",
+            "PleaseVisitLink": "Visiteu el següent enllaç:",
+            "InvitingYou": "Et convido a {{title}}",
             "HasInvitedYou": "{{displayName}} t&#39;ha convidat a {{title}}",
             "HasMentionedYou": "{{displayName}} t&#39;ha mencionat a &quot;{{title}}&quot;",
             "YOUAREINVITED": "VOSTÈ ESTÀ CONVIDAT!",
-            "AcceptInvite": "Accepta Convida"
+            "AcceptInvite": "Accepta la invitació"
         },
         "sms": {
-            "content": "Heu estat convidat a {{title}}. Toqueu {{url}}"
+            "content": "Has estat convidat a {{title}}. Toca {{url}}"
         },
         "notice": {
             "text": "Has estat convidat. {{ClickOrTap}} aquí per acceptar i unir-se."
         },
-        "youCanNowPaste": "Ara podeu enganxar aquest enllaç en algun lloc per convidar la gent",
+        "youCanNowPaste": "Ara pots enganxar aquest enllaç en algun lloc per convidar persones",
         "command": "Convidar"
     },
     "followup": {
         "mobile": {
-            "alert": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
-            "confirm": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que faci clic a l’enllaç.",
-            "check": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu els vostres sms i feu clic a l’enllaç.",
-            "CheckYourMobile": "Comproveu SMS i seguiu les instruccions."
+            "alert": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. Seguiu amb un missatge de text ràpid per fer-los saber que la invitació ha estat de vosaltres, demanant-los que facin clic a l&#39;enllaç.",
+            "confirm": "Les invitacions s&#39;envien des del nostre número, que els teus amics encara no reconeixen. T&#39;agradaria seguir amb un missatge de text ràpid per fer-los saber que la invitació ha estat teva, demanant-los que facin clic a l&#39;enllaç.",
+            "check": "Hola, t&#39;acabo d&#39;enviar una invitació a l&#39;aplicació {{app}}. Si us plau, comproveu el vostre sms i feu clic a l&#39;enllaç!",
+            "CheckYourMobile": "Si us plau, comproveu els SMS i seguiu les instruccions!"
         },
         "email": {
-            "alert": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Feu un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que facin clic a l&#39;enllaç.",
-            "confirm": "Les invitacions s&#39;envien des del nostre domini, que els teus amics encara no reconeixen. Voleu fer un seguiment amb un text ràpid per fer-los saber que la vostra invitació va venir, demanant-los que faci clic a l’enllaç.",
-            "subject": "Heu rebut una invitació?",
-            "body": "Hola, acabo de enviar-te una invitació a l&#39;aplicació {{app}}. Comproveu el vostre correu electrònic i feu clic a l’enllaç allà.",
-            "CheckYourEmail": "Comproveu el vostre correu electrònic i seguiu les instruccions."
+            "alert": "Les invitacions s&#39;envien des del nostre domini, que els vostres amics encara no reconeixen. Seguiu amb un missatge de text ràpid per fer-los saber que la invitació ha estat de vosaltres, demanant-los que facin clic a l&#39;enllaç.",
+            "confirm": "Les invitacions s&#39;envien des del nostre domini, que els vostres amics encara no reconeixen. T&#39;agradaria seguir amb un missatge de text ràpid per fer-los saber que la invitació ha estat teva, demanant-los que facin clic a l&#39;enllaç.",
+            "subject": "Has rebut una invitació?",
+            "body": "Hola, t&#39;acabo d&#39;enviar una invitació a l&#39;aplicació {{app}}. Si us plau, comproveu el vostre correu electrònic i feu clic a l&#39;enllaç que hi ha!",
+            "CheckYourEmail": "Si us plau, comproveu el vostre correu electrònic i seguiu les instruccions!"
         }
     },
     "participating": {
         "Title": "Títol",
         "Subscribed": "Subscrit",
         "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Esteu segur que traieu aquest identificador?",
-        "AreYouSureUnsubscribeIdentifier": "Confirmeu que anul·lar la subscripció d&#39;aquest identificador? Desactivaran les notificacions a aquest identificador.",
-        "AreYouSureUnsubscribeDevice": "Esteu segur \/ a de donar-vos de baixa d&#39;aquest dispositiu? Desactivaran les notificacions a aquest dispositiu.",
+        "AreYouSureRemoveIdentifier": "Esteu segur d&#39;eliminar aquest identificador?",
+        "AreYouSureUnsubscribeIdentifier": "Esteu segur de cancel·lar la subscripció a aquest identificador? Desactivarà les notificacions a aquest identificador.",
+        "AreYouSureUnsubscribeDevice": "Esteu segur de cancel·lar la subscripció a aquest dispositiu? Desactivarà les notificacions a aquest dispositiu.",
         "Identifiers": "Identificadors",
         "Devices": "Dispositius",
         "Streams": "Corrents",
         "AreYouSureRemoveParticipant": "Esteu segur que voleu eliminar aquest participant?",
-        "RemoveParticipant": "Elimina el participant"
+        "RemoveParticipant": "Elimina participant"
     },
     "webrtc": {
         "allow": {
             "microphoneTitle": "Activa el micròfon",
             "cameraTitle": "Habilita la càmera",
             "cameraAndMicrophoneTitle": "Activa la càmera i el micròfon",
-            "dialogTitle": "Habilitació del diàleg",
+            "dialogTitle": "Connectant",
             "microphoneBtn": "Activa el micròfon",
-            "cameraBtn": "Habilita la càmera",
+            "cameraBtn": "Activa la càmera",
             "cameraAndMicrophoneBtn": "Activa la càmera i el micròfon"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instruccions",
-            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Per utilitzar-lo, seguiu aquests passos:",
-            "point1": "Vés a &quot;Configuració&quot; -&gt; &quot;Avançada&quot; -&gt; &quot;Privacitat i seguretat&quot; -&gt; &quot;Configuració del lloc&quot; -&gt; &quot;Càmera&quot; o &quot;Configuració del lloc&quot; -&gt; &quot;Micròfon&quot;",
-            "point2": "Elimineu {{hostname}} de la llista &quot;Bloquejar&quot;"
+            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}}. Per utilitzar-lo, seguiu aquests passos:",
+            "point1": "Aneu a &quot;Configuració&quot; -&gt; &quot;Avançat&quot; -&gt; &quot;Privadesa i seguretat&quot; -&gt; &quot;Configuració del lloc&quot; -&gt; &quot;Càmera&quot; o &quot;Configuració del lloc&quot; -&gt; &quot;Micròfon&quot;",
+            "point2": "Elimina {{hostname}} de la llista &quot;Bloqueja&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instruccions",
-            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Torneu a carregar aquesta pàgina i confirmeu l’accés a {{kind}} per unir-vos a la conferència."
+            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}}. Torneu a carregar aquesta pàgina i confirmeu l&#39;accés a {{kind}} per unir-vos a la conferència."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instruccions",
-            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Per utilitzar-lo, seguiu aquests passos:",
-            "point1": "Vés a la configuració d’Android",
-            "point2": "Obre &quot;Aplicacions i notificacions&quot;",
+            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}}. Per utilitzar-lo, seguiu aquests passos:",
+            "point1": "Aneu a la configuració d&#39;Android",
+            "point2": "Obriu &quot;Aplicacions i notificacions&quot;",
             "point3": "Cerqueu &quot;{{communityName}}&quot; i obriu-lo",
-            "point4": "Toqueu els permisos",
+            "point4": "Toqueu Permisos",
             "point5": "Activa {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instruccions",
-            "permissionDenied": "El permís per a {{kind}} s&#39;ha denegat. Per utilitzar-lo, seguiu aquests passos:",
-            "point1": "Vés a la configuració d’iOS",
-            "point2": "Obre &quot;Privadesa&quot;",
+            "permissionDenied": "S&#39;ha denegat el permís per a {{kind}}. Per utilitzar-lo, seguiu aquests passos:",
+            "point1": "Aneu a la configuració d&#39;iOS",
+            "point2": "Obriu &quot;Privadesa&quot;",
             "point3": "Cerqueu {{kind}} i obriu-lo",
             "point4": "Cerqueu &quot;{{communityName}}&quot; i activeu-lo"
         },
         "notices": {
-            "youJoinedRoom": "Vas entrar a l’habitació",
-            "joining": "S’uneix: {{userName}}",
-            "sbLeftRoom": "{{userName}} va abandonar l&#39;habitació",
-            "youLeftRoom": "Vau sortir de l’habitació",
-            "codeCopied": "Vau sortir de l’habitació",
+            "youJoinedRoom": "T&#39;has incorporat a la sala",
+            "joining": "S&#39;hi uneix: {{userName}}",
+            "sbLeftRoom": "{{userName}} va sortir de la sala",
+            "youLeftRoom": "Vas sortir de l&#39;habitació",
+            "codeCopied": "Vas sortir de l&#39;habitació",
             "sbBeganFbLive": "{{userName}} va començar a emetre aquesta trucada a Facebook",
-            "sbStoppedFbLive": "{{userName}} va deixar de transmetre aquesta trucada a Facebook",
+            "sbStoppedFbLive": "{{userName}} va deixar d&#39;emetre aquesta trucada a Facebook",
             "youBeganFbLive": "Vau començar a emetre aquesta trucada a Facebook",
-            "youStoppedFbLive": "Heu deixat de publicar aquesta trucada a Facebook",
-            "linkCopiedToCb": "Enllaç copiat al porta-retalls",
+            "youStoppedFbLive": "Has deixat d&#39;emetre aquesta trucada a Facebook",
+            "linkCopiedToCb": "S&#39;ha copiat l&#39;enllaç al porta-retalls",
             "codeCopiedToCb": "Codi copiat al porta-retalls",
             "userHasNoVideo": "El participant no té cap vídeo",
-            "openInBrowserAlert": "Obrir un enllaç al navegador Safari per unir-se a la conferència.",
-            "youBeganVideoRecording": "Vau començar a enregistrar aquesta conferència",
-            "youStoppedVideoRecording": "Heu deixat de gravar aquesta conferència",
-            "switchingRoom": "Canvi de vestuari ...",
-            "forceDisconnecting": "Es desconnectarà en un termini de 5 segons",
-            "youStartedLive": "Has començat a emetre aquesta trucada a RTMP personalitzat",
-            "youStoppedLive": "Heu deixat d&#39;emetre aquesta trucada a RTMP personalitzat",
+            "openInBrowserAlert": "Obriu l&#39;enllaç al navegador Safari per unir-vos a la conferència.",
+            "youBeganVideoRecording": "Vau començar a gravar aquesta conferència",
+            "youStoppedVideoRecording": "Has deixat de gravar aquesta conferència",
+            "switchingRoom": "Canvi de sala...",
+            "forceDisconnecting": "Se us desconnectarà en 5 segons",
+            "youStartedLive": "Heu començat a emetre aquesta trucada a RTMP personalitzat",
+            "youStoppedLive": "Has deixat d&#39;emetre aquesta trucada a RTMP personalitzat",
             "sbStartedLiveStreaming": "{{userName}} va començar en directe",
-            "sbStoppedLiveStreaming": "{{userName}} ha finalitzat en directe",
+            "sbStoppedLiveStreaming": "{{userName}} ha acabat en directe",
             "liveStopped": "S&#39;ha produït un error en enviar el vídeo al punt final",
             "forceDisconnectingImmediately": "Un amfitrió t&#39;ha desconnectat"
         },
         "settingsPopup": {
             "webCamera": "Càmera web",
-            "screenSharing": "Compartir pantalla",
+            "screenSharing": "Compartició de pantalla",
             "shareAnotherScreen": "Comparteix una altra pantalla",
-            "turnOffCameras": "Apagueu totes les càmeres",
-            "startFBLive": "Inicieu Facebook en temps real",
-            "stopFBLive": "Atureu Facebook en temps real",
-            "fbLiveTitle": "Títol en directe",
-            "fbLiveDescription": "Descripció en directe",
+            "turnOffCameras": "Apagueu la càmera",
+            "startFBLive": "Inicieu Facebook Livestream",
+            "stopFBLive": "Atura la transmissió en directe de Facebook",
+            "fbLiveTitle": "Títol de Livestream",
+            "fbLiveDescription": "Descriu la teva emissió en directe. De què va?",
             "fbOnlyMeLiveAccess": "Només jo",
             "fbFriendsAccess": "Amics",
             "fbPublicAccess": "Públic",
             "fbStartLive": "Anar a viure",
-            "fbStopLive": "Acabar en directe",
-            "fbEmbedCode": "Incrustar",
+            "fbStopLive": "Finalitza l&#39;emissió en directe",
+            "fbEmbedCode": "Insereix",
             "copy": "Còpia",
-            "turnOffVideo": "Desactiveu l’ús compartit de càmera \/ pantalla",
-            "turnOffScreenSharing": "Desactiva l’ús compartit de pantalla",
-            "cameraIsTurnedOff": "La càmera està desactivada",
-            "startRecording": "Comença l&#39;enregistrament",
-            "stopRecording": "Deixa de gravar",
-            "recordingInProgress": "La gravació està en curs ...",
-            "publishOnTimeline": "Publica-la a la línia de temps",
-            "publishToGroup": "Publica per agrupar",
+            "turnOffVideo": "Desactiva la compartició de càmera\/pantalla",
+            "turnOffScreenSharing": "Desactiva la compartició de pantalla",
+            "cameraIsTurnedOff": "La càmera està apagada",
+            "startRecording": "Comença a gravar",
+            "stopRecording": "Atura la gravació",
+            "recordingInProgress": "La gravació està en curs...",
+            "publishOnTimeline": "Publicar a la línia de temps",
+            "publishToGroup": "Publicar al grup",
             "turnOffAudioInput": "Silencia el micròfon",
             "micIsTurnedOff": "El micròfon està apagat",
             "start": "Començar",
@@ -234,21 +234,21 @@
             "disconnect": "Desconnecta",
             "floatingScreens": "Pantalles flotants",
             "tiledScreens": "Pantalles enrajolades",
-            "loudestExceptMe": "Més fort excepte jo",
-            "maximizeLoudest": "Maximitza més fort",
-            "staticMaximized": "Màxim estàtic",
+            "loudestExceptMe": "El més fort excepte jo",
+            "maximizeLoudest": "Maximitza el més fort",
+            "staticMaximized": "Maximitzat estàtic",
             "manual": "Manual",
-            "turnOffCamera": "Amagueu el vídeo",
-            "turnOffAudio": "Silencia l’àudio",
-            "turnOffScreenSharing": "Amagueu la compartició de pantalla",
-            "turnOnCamera": "Mostra vídeo",
-            "turnOnAudio": "No activa el so",
-            "turnOnScreenSharing": "Mostra compartició de pantalla",
+            "turnOffCamera": "Amaga el vídeo",
+            "turnOffAudio": "Silencia l&#39;àudio",
+            "turnOffScreenSharing": "Amaga la compartició de pantalla",
+            "turnOnCamera": "Mostra el vídeo",
+            "turnOnAudio": "Activa l&#39;àudio",
+            "turnOnScreenSharing": "Mostra la compartició de pantalla",
             "fullScreen": "Pantalla completa",
             "dialogTitle": "Configuració dels participants"
         },
-        "notAllowedToJoinCall": "No teniu permís per unir-vos a aquest flux.",
-        "streamTitle": "{{1}} trucada en directe",
+        "notAllowedToJoinCall": "No tens permís per unir-te a aquest flux.",
+        "streamTitle": "{{1}} va iniciar una trucada en directe",
         "preview": {
             "preamble": "Reunió:",
             "Meeting": "Reunió",
@@ -258,10 +258,10 @@
             "micIsOff": "El micròfon està apagat",
             "micIsOn": "El micròfon està activat",
             "cameraIsOff": "La càmera està apagada",
-            "cameraIsOn": "La càmera està engegada",
-            "screenSharingIsOn": "La pantalla compartida està activada",
-            "screenSharingIsOff": "Compartir pantalla",
-            "joinNow": "Uniu-vos a la trucada"
+            "cameraIsOn": "La càmera està activada",
+            "screenSharingIsOn": "La compartició de pantalla està activada",
+            "screenSharingIsOff": "Comparteix pantalla",
+            "joinNow": "Uneix-te a la Crida"
         },
         "audioSettings": {
             "dialogTitle": "Configuració d&#39;àudio",
@@ -275,7 +275,7 @@
     "types": {
         "Streams\/invited": {
             "displayType": "Convidat",
-            "description": "Bústia d&#39;entrada per a invitacions"
+            "description": "Safata d&#39;entrada per a invitacions"
         },
         "Streams\/resource": {
             "displayType": "Recurs",
@@ -283,11 +283,11 @@
         },
         "Streams\/task": {
             "displayType": "Tasca",
-            "description": "tasca a realitzar per humans o màquines"
+            "description": "per rebre actualitzacions sobre el progrés en una tasca determinada"
         },
         "Streams\/number": {
             "displayType": "Número",
-            "description": "número matemàtic"
+            "description": "nombre matemàtic"
         },
         "Streams\/date": {
             "displayType": "Data",
@@ -295,7 +295,7 @@
         },
         "Streams\/text": {
             "displayType": "Text",
-            "description": "cos de text"
+            "description": "cos del text"
         },
         "Streams\/text\/small": {
             "displayType": "Text",
@@ -303,7 +303,7 @@
         },
         "Streams\/text\/medium": {
             "displayType": "Text",
-            "description": "cos mitjà de text"
+            "description": "cos mitjà del text"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "Correu electrònic",
@@ -315,7 +315,7 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "enllaç al web"
+            "description": "enllaç a la web"
         },
         "Streams\/image": {
             "displayType": "Imatge",
@@ -323,8 +323,8 @@
             "newItem": "Afegeix una imatge"
         },
         "Streams\/images": {
-            "displayType": "Galeria d’Imatges",
-            "description": "galeria d’imatges"
+            "displayType": "Galeria d&#39;imatges",
+            "description": "galeria d&#39;imatges"
         },
         "Streams\/album": {
             "displayType": "Àlbum",
@@ -332,12 +332,12 @@
         },
         "Streams\/file": {
             "displayType": "Dossier",
-            "description": "fitxer penjat",
+            "description": "fitxer carregat",
             "newItem": "Afegeix un fitxer"
         },
         "Streams\/audio": {
             "displayType": "Clip d&#39;àudio",
-            "description": "clip d’àudio",
+            "description": "clip d&#39;àudio",
             "newItem": "Afegeix àudio"
         },
         "Streams\/video": {
@@ -346,20 +346,20 @@
             "newItem": "Afegeix un vídeo"
         },
         "Streams\/live": {
-            "displayType": "Corrent en directe",
+            "displayType": "Transmissió en directe",
             "description": "àudio o vídeo en directe"
         },
         "Streams\/category": {
             "displayType": "Categoria",
-            "description": "una categoria a la qual es poden relacionar altres fluxos"
+            "description": "una categoria amb la qual es poden relacionar altres fluxos"
         },
         "Streams\/participating": {
             "displayType": "Índex de participació",
-            "description": "els fluxos estan relacionats \/ no tenen relació amb això quan un usuari s&#39;uneix \/ surt"
+            "description": "els fluxos estan relacionats\/no estan relacionats amb això quan un usuari s&#39;uneix o surt"
         },
         "Streams\/interest": {
             "displayType": "Interès",
-            "description": "representa l’interès d’un usuari en un tema determinat"
+            "description": "representa l&#39;interès d&#39;un usuari en un tema determinat"
         },
         "Streams\/incoming": {
             "displayType": "Entrant",
@@ -371,18 +371,18 @@
         },
         "Streams\/webrtc": {
             "displayType": "Trucada en temps real",
-            "description": "una trucada de vídeo \/ àudio en temps real"
+            "description": "una trucada de vídeo\/àudio en temps real"
         },
         "Streams\/tasks": {
             "description": "categoria per a tasques",
             "displayType": "Tasques"
         },
         "Streams\/experience": {
-            "description": "una experiència comuna per a membres d’una comunitat",
-            "displayType": "Experiència comuna per a membres d’una comunitat"
+            "description": "una experiència comuna per als membres d&#39;una comunitat",
+            "displayType": "Experiència comuna per als membres d&#39;una comunitat"
         },
         "Streams\/greeting": {
-            "description": "salutació amb la qual un usuari es pot presentar",
+            "description": "salutació amb la qual un usuari pot presentar-se",
             "displayType": "Salutació"
         },
         "Streams\/pdf": {
@@ -392,46 +392,46 @@
         },
         "Streams\/question": {
             "displayType": "Pregunta",
-            "description": "flux de preguntes"
+            "description": "corrent de preguntes"
         },
         "Streams\/answer": {
-            "displayType": "Resposta",
-            "description": "corrent de respostes"
+            "displayType": "Respon",
+            "description": "corrent de resposta"
         },
         "Streams\/calls": {
             "displayType": "Trucades",
-            "description": "categoria per a Streams \/ webrtc",
-            "MaxRelationsExceeded": "S&#39;han superat les trucades màximes"
+            "description": "categoria per a Streams\/webrtc",
+            "MaxRelationsExceeded": "S&#39;ha superat el màxim de trucades"
         }
     },
     "messages": {
         "html": {
-            "posted": "va publicar un missatge de {{ <em>1000}}<\/em> a {{stream.fields.title}}"
+            "posted": "ha publicat un missatge <em>{{message.fields.type}}<\/em> a {{stream.fields.title}}"
         },
         "text": {
-            "commentedOn": "va comentar",
-            "in": "a",
+            "commentedOn": "comentat",
+            "in": "en",
             "body": "a {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
                 "hasBeenPostedTo": "s&#39;ha publicat a",
                 "byAvatar": "per {{avatar.displayName}}"
             },
             "relatedTo": {
-                "hasANew": "té un {{instructions.fromDisplayType}} nou",
+                "hasANew": "té un nou {{instructions.fromDisplayType}}",
                 "byAvatar": "afegit per {{avatar.displayName}}"
             },
             "startedCallIn": "va iniciar una trucada"
         }
     },
     "menu": {
-        "placeholder": "escriu el títol de la pàgina",
+        "placeholder": "escriviu el títol de la pàgina",
         "ModTab": "Modifica l&#39;element",
         "Save": "Desa",
         "Delete": "Suprimeix",
         "Submenu": "Submenú"
     },
     "errors": {
-        "HiddenFromYou": "Aquest contingut està ocult."
+        "HiddenFromYou": "Aquest contingut està ocult per a tu."
     },
     "audio": {
         "record": "Registre",
@@ -439,14 +439,14 @@
         "edit": "Edita",
         "title": "títol",
         "description": "descripció",
-        "upload": "Pujar",
+        "upload": "Carrega",
         "link": "Enllaç",
         "setUrl": "Estableix l&#39;URL",
         "save": "Desa",
-        "setClip": "Clip retallable",
+        "setClip": "Retalla el clip",
         "invalidURL": "URL no vàlid",
         "invalidFile": "Fitxer no vàlid",
-        "errorNoSource": "No hi ha cap font d&#39;àudio",
+        "errorNoSource": "Sense font d&#39;àudio",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
         "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
     },
@@ -455,14 +455,14 @@
         "edit": "Edita",
         "title": "títol",
         "description": "descripció",
-        "upload": "Pujar",
+        "upload": "Carrega",
         "link": "Enllaç",
         "setUrl": "Estableix l&#39;URL",
         "save": "Desa",
-        "setClip": "Clip retallable",
+        "setClip": "Retalla el clip",
         "invalidURL": "URL no vàlid",
         "invalidFile": "Fitxer no vàlid",
-        "errorNoSource": "No hi ha cap font de vídeo",
+        "errorNoSource": "Sense font de vídeo",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
         "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
     },
@@ -471,14 +471,14 @@
         "edit": "Edita",
         "title": "títol",
         "description": "descripció",
-        "upload": "Pujar",
+        "upload": "Carrega",
         "link": "Enllaç",
         "setUrl": "Estableix l&#39;URL",
         "save": "Desa",
-        "setClip": "Clip retallable",
+        "setClip": "Retalla el clip",
         "invalidURL": "URL no vàlid",
         "invalidFile": "Fitxer no vàlid",
-        "errorNoSource": "No hi ha cap font en pdf",
+        "errorNoSource": "Sense font en pdf",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
         "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}"
     },
@@ -487,14 +487,14 @@
         "edit": "Edita",
         "title": "títol",
         "description": "descripció",
-        "upload": "Pujar",
+        "upload": "Carrega",
         "link": "Enllaç",
         "setUrl": "Estableix l&#39;URL",
         "save": "Desa",
-        "setClip": "Clip retallable",
+        "setClip": "Retalla el clip",
         "invalidURL": "URL no vàlid",
         "invalidFile": "Fitxer no vàlid",
-        "errorNoSource": "No hi ha cap font d’imatge",
+        "errorNoSource": "Sense font d&#39;imatge",
         "uploadLimit": "Mida màxima del fitxer: {{size}}",
         "errorFileSize": "Ho sentim, però el fitxer és massa gran.<br> La mida màxima del fitxer és {{size}}",
         "uploadedImage": "Imatge carregada",
@@ -504,22 +504,22 @@
         "Questions": "Preguntes",
         "Answers": "Respostes",
         "AnswerQuestion": "Respondre pregunta",
-        "SetYourAnswer": "Responeu la pregunta",
+        "SetYourAnswer": "Si us plau, respon a la pregunta",
         "NewQuestion": "Nova pregunta",
-        "NewAnswer": "Nova resposta",
-        "AnswerDetails": "Detalls de la resposta",
+        "NewAnswer": "Nova Resposta",
+        "AnswerDetails": "Detalls de resposta",
         "answerOption": "Opció",
         "answerOptionExclusive": "Exclusiu",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "resposta gratuïta ...",
+        "answerTextarea": "Àrea de text",
+        "FreeAnswer": "Escriu la teva resposta aquí",
         "SaveQuestion": "Desa la pregunta",
         "SaveAnswer": "Desa la resposta",
-        "AddAnotherAnswer": "Afegiu una altra resposta",
-        "ErrorAnswers": "Afegiu fins i tot una resposta",
-        "AlreadyAnswered": "Ja contestat",
+        "AddAnotherAnswer": "Afegeix una altra resposta",
+        "ErrorAnswers": "Si us plau, afegiu fins i tot una resposta",
+        "AlreadyAnswered": "Ja s&#39;ha contestat",
         "TitlePlaceholder": "Escriviu la vostra pregunta",
-        "ContentPlaceholder": "Poseu informació addicional aquí per ajudar la gent a respondre",
-        "ErrorTitle": "Pregunta obligatòria",
+        "ContentPlaceholder": "Posa aquí qualsevol informació addicional per ajudar la gent a respondre",
+        "ErrorTitle": "Pregunta necessària",
         "Placeholder": "Posseïdor del lloc"
     },
     "experience": {
@@ -529,7 +529,7 @@
     },
     "calls": {
         "SettingsTitle": "Trucades",
-        "MaxCalls": "Trucades màximes",
+        "MaxCalls": "Màxim de trucades",
         "Update": "Actualització",
         "NoCallsYet": "Encara no hi ha trucades",
         "CallReasonTitle": "De què tracta aquesta trucada?",

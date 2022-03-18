@@ -4,11 +4,11 @@
         "LogOut": "çıxış"
     },
     "activate": {
-        "SetAsPrimary": "{{1}} mənim əsas {{2}} kimi təyin et",
-        "ChoosePassPhrase": "Daxil olmaq üçün bir <strong>keçid ifadəsi<\/strong> seçin. <br> Asanlıqla xatırlayacağınız bir neçə sözdən ibarət sadə bir söz.",
-        "ChoosePassPhraseSeeSuggestions": "Hesabınızı qorumaq üçün yaxşı bir <strong>keçid ifadəsi<\/strong> seçin. Bəzi fikirlər üçün təkliflərə baxın.",
-        "LogOutAndTryAgain": "Çıxın və yenidən cəhd edin",
-        "IfYouFeel": "Bir şey yanlış getdi hiss etsəniz, edə bilərsiniz",
+        "SetAsPrimary": "{{1}}-ni əsas {{2}} olaraq təyin edin",
+        "ChoosePassPhrase": "Daxil olmaq üçün <strong>keçid ifadəsi<\/strong> seçin.<br> Asanlıqla xatırlayacağınız bir neçə sözdən ibarət sadə ifadə.",
+        "ChoosePassPhraseSeeSuggestions": "Hesabınızı qorumaq üçün yaxşı <strong>keçid ifadəsi<\/strong> seçin. Bəzi ideyalar üçün təkliflərə baxın.",
+        "LogOutAndTryAgain": "Çıxın və Yenidən cəhd edin",
+        "IfYouFeel": "Bir şeyin səhv getdiyini hiss edirsinizsə, edə bilərsiniz",
         "SetIdentifierButtonTitle": "yenidən başlamaq"
     },
     "session": {
@@ -16,30 +16,30 @@
     },
     "authorize": {
         "GetStarted": "Başlamaq",
-        "Authorize": "Səlahiyyət ver",
-        "TermsLabel": "Oxudum və razıyam <br> {{link}} üçün",
+        "Authorize": "Səlahiyyət verin",
+        "TermsLabel": "Oxudum və razıyam<br> {{link}} üçün",
         "TermsTitle": "Şərtlər",
         "mustAgree": "Əvvəlcə şərtlərlə razılaşmalısınız."
     },
     "register": {
-        "TermsLabel": "{{link}}}",
+        "TermsLabel": "Mən qəbul edirəm {{link}}",
         "TermsTitle": "Şərtlər"
     },
     "notifications": {
         "title": "İcazə",
-        "prompt": "Bildirişləri aktivləşdirmək istəyirsiniz? Sizi maraqlandıran şeylər haqqında real-time yenilikləri alacaqsınız.",
+        "prompt": "Bildirişləri aktiv etmək istəyirsiniz? Sizi maraqlandıran şeylər haqqında real vaxt yeniləmələri alacaqsınız.",
         "yes": "Bəli",
         "no": "Yox",
-        "WelcomePleaseVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı təsdiqləyin.",
-        "WelcomeVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı təsdiqləyin.",
-        "ForgetPass": "Hey, parolunuzu unutdun mu?",
-        "PassphraseSaved": "Keçid ifadəniz yadda qalıb.",
+        "WelcomePleaseVerifyEmail": "Xoş gəldiniz! Zəhmət olmasa e-poçt ünvanınızı yoxlayın.",
+        "WelcomeVerifyEmail": "Xoş gəldiniz! E-poçt ünvanınızı doğrulayın.",
+        "ForgetPass": "Hey, parol sözünü unutmusan?",
+        "PassphraseSaved": "Keçid ifadəniz yadda saxlanıldı.",
         "IdentifierActivated": "{{type}} aktivləşdirildi.",
-        "CompletedActivation": "İstifadəçinin aktivləşdirilməsini başa vurdunuz.",
-        "CompletedActivationLogIn": "İstifadəçinin aktivləşdirilməsini başa vurdunuz. İndi daxil olmağa çalışın."
+        "CompletedActivation": "İstifadəçinin aktivləşdirilməsini tamamladınız.",
+        "CompletedActivationLogIn": "İstifadəçinin aktivləşdirilməsini tamamladınız. İndi daxil olmağa çalışın."
     },
     "usersContacts": {
-        "selectLabel": "Xahiş edirik etiket seçin.",
+        "selectLabel": "Lütfən etiket seçin.",
         "inviteUser": "İstifadəçiləri dəvət edin",
         "selectRole": "Rol seçin",
         "inviteRole": "Dəvət edin {{role}}"
@@ -48,57 +48,57 @@
     "contacts": {
         "dialog": {
             "title": "Əlaqə seçin",
-            "SearchByName": "Adı ilə axtarın",
+            "SearchByName": "Ada görə axtarın",
             "CreateAccount": "+ Yeni Əlaqə",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create tapılmadı",
-            "EmptyContacts": "Əlaqə tapılmadı ..."
+            "EmptyContacts": "Kontaktlar tapılmadı..."
         },
         "select": {
-            "title": "{{displayName}}} kontaktını seçin"
+            "title": "{{displayName}} kontaktını seçin"
         }
     },
     "login": {
         "title": "Xoş gəldiniz",
-        "directions": "Bir hesab yaradın və ya daxil olun.",
-        "directionsNoRegister": "Bir hesabınız varsa daxil olun.",
-        "goButton": "Gedin",
+        "directions": "Hesab yaradın və ya daxil olun.",
+        "directionsNoRegister": "Hesabınız varsa daxil olun.",
+        "goButton": "Get",
         "passphrase": "Keçid ifadənizi daxil edin:",
         "loginButton": "Başlamaq",
         "registerButton": "Başlamaq",
         "resendButton": "Aktivləşdirmə mesajı göndərin",
-        "forgot": "Unutdun?",
-        "resendConfirm": "Parolunuzu yenidən qurmaq üçün bir mesaj göndərmək istəyirsiniz?",
-        "resendSuccess": "Parolunuzu yenidən qurmaq üçün bir mesaj yoxlayın",
+        "forgot": "Unutmusan?",
+        "resendConfirm": "Parolunuzu sıfırlamaq üçün mesaj göndərmək istəyirsiniz?",
+        "resendSuccess": "Parolunuzu sıfırlamaq üçün mesajı yoxlayın",
         "resendClose": "Yaxın",
-        "noPassphrase": "Girişdən əvvəl aktivləşdirmə mesajınızdakı linki tıklayaraq keçid ifadəsi qoymalısınız.",
-        "notVerified": "Daxil olmaq üçün özünüzə bir aktivasiya mesajı göndərməlisiniz.",
-        "emailExists": "Daha əvvəl bu e-poçtla qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün inboxunuzu yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün vurun<\/a>",
-        "mobileExists": "Daha əvvəl bu mobil nömrə ilə qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün SMS-i yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün vurun<\/a>",
-        "usingOther": "yoxsa edə bilərsən",
+        "noPassphrase": "Daxil etməzdən əvvəl aktivləşdirmə mesajınızdakı keçidə klikləməklə keçid ifadəsi təyin etməlisiniz.",
+        "notVerified": "Daxil olmaq üçün özünüzə aktivasiya mesajı göndərməlisiniz.",
+        "emailExists": "Daha əvvəl bu e-poçtla qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün gələnlər qutusunu yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün klikləyin<\/a>",
+        "mobileExists": "Daha əvvəl bu mobil nömrə ilə qeydiyyatdan keçməyə çalışmısınız? Əgər belədirsə, hesabınızı aktivləşdirmək üçün SMS-inizi yoxlayın. <a href='#resend' class='Q_button Users_activation_resend'>Mesajı yenidən göndərmək üçün klikləyin<\/a>",
+        "usingOther": "ya da bilərsən",
         "prompt": "İstifadəçi adı seçin:",
-        "newUser": "və ya aşağıda yeni bir hesab yaradın",
+        "newUser": "və ya aşağıda yeni hesab yaradın",
         "placeholders": {
             "identifier": "mobil # və ya e-poçtunuz",
-            "mobile": "mobil telefonunuza daxil olun",
+            "mobile": "mobil nömrənizi daxil edin",
             "email": "E-poçt ünvanınızı daxil edin",
-            "username": "istifadəçi adı"
+            "username": "yalnız hərf və rəqəmlərdən istifadə edin"
         },
-        "confirmTerms": "Xidmət şərtlərini qəbul edirsiniz?",
-        "facebookNoEmail": "Facebook hesabınızda təsdiqlənmiş bir e-poçt ünvanı yoxdur. Sadəcə doğma şəkildə daxil olun.",
-        "picTooltip": "Daha sonra bu şəkli dəyişə bilərsiniz",
+        "confirmTerms": "Xidmət Şərtlərini qəbul edirsiniz?",
+        "facebookNoEmail": "Facebook hesabınızda təsdiqlənmiş e-poçt ünvanı yoxdur. Sadəcə yerli şəkildə daxil olun.",
+        "picTooltip": "Bu şəkli sonra dəyişə bilərsiniz",
         "wallet": {
-            "payload": "{{timestamp}} vaxtında {{host}} saytına daxil olun",
+            "payload": "{{timestamp}} vaxtında {{host}} daxil olun",
             "alert": {
-                "title": "Cüzdana yönləndirilir",
-                "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Giriş etdikdən sonra bu səhifəyə qayıdın."
+                "title": "Pulqabıya yönləndirilir",
+                "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
             }
         }
     },
     "setIdentifier": {
-        "title": "Giriş üçün bir yol əlavə edin",
+        "title": "Daxil olmaq üçün bir yol əlavə edin",
         "sendMessage": "Aktivləşdirmə mesajı göndərin",
         "placeholders": {
-            "identifier": "mobil # və ya e-poçtunuzu daxil edin",
+            "identifier": "mobil nömrənizi və ya e-poçtunuzu daxil edin",
             "mobile": "mobil nömrənizi daxil edin",
             "email": "E-poçt ünvanınızı daxil edin",
             "username": "istifadəçi adı"
@@ -106,8 +106,8 @@
     },
     "prompt": {
         "title": "{{Platform}} Hesab",
-        "areUsing": "{{platform}} kimi istifadə edirsiniz",
-        "noLongerUsing": "Artıq {{platform}} ilə əlaqəniz yoxdur",
+        "areUsing": "Siz {{platform}} kimi istifadə edirsiniz",
+        "noLongerUsing": "Siz artıq {{platform}} ilə bağlı deyilsiniz",
         "doAuth": "Bu hesabla daxil olun",
         "doSwitch": "Bu hesaba keçin"
     },
@@ -119,14 +119,14 @@
         "Host": "Ev sahibi"
     },
     "analytics": {
-        "Title": "Analitik",
+        "Title": "Analitika",
         "Daily": "Gündəlik",
         "Weekly": "Həftəlik",
         "Monthly": "Aylıq",
-        "Application": "Tətbiq",
+        "Application": "Ərizə",
         "Pages": "Səhifələr",
         "Services": "Xidmətlər",
-        "Faq": "FAQ",
+        "Faq": "Faq",
         "WeekDays": "Həftə içi"
     }
 }

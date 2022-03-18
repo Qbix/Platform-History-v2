@@ -5,125 +5,125 @@
         "Weekly": "Weekly",
         "Monthly": "Monthly",
         "Application": "Application",
-        "Pages": "Pages",
+        "Pages": "Mapeji",
         "Services": "Services",
         "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "WeekDays": "Vhiki Mazuva"
     },
     "actions": {
         "LogIn": "log in",
-        "LogOut": "log out"
+        "LogOut": "kubuda"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Seta {{1}} sepuraimari yangu {{2}}",
+        "ChoosePassPhrase": "Sarudza chirevo <strong>chekupfuura<\/strong> chekupinda nacho.<br> Mutsara wakapfava une mazwi mashoma aunorangarira zviri nyore.",
+        "ChoosePassPhraseSeeSuggestions": "Sarudza chirevo chakanaka <strong>chekupasa<\/strong> kuchengetedza account yako. Ona mazano emamwe mazano.",
+        "LogOutAndTryAgain": "Log Out uye Edza Zvakare",
+        "IfYouFeel": "Kana iwe uchinzwa chimwe chinhu chisina kumira zvakanaka, unogona",
+        "SetIdentifierButtonTitle": "tanga patsva"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Tanga"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
+        "GetStarted": "Tanga",
+        "Authorize": "mvumo",
+        "TermsLabel": "Ndakaverenga uye ndinobvuma<br> ku {{link}}",
         "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "mustAgree": "Kutanga iwe unofanirwa kubvumirana nemitemo."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
+        "TermsLabel": "Ndinogamuchira {{link}}",
         "TermsTitle": "Terms"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Mvumo",
+        "prompt": "Unoda kugonesa zviziviso? Iwe uchagamuchira chaiyo-nguva zvigadziriso nezvezvinhu zvauri kufarira.",
+        "yes": "Ehe",
+        "no": "Aihwa",
+        "WelcomePleaseVerifyEmail": "Mauya! Ndokumbira utarise email yako.",
+        "WelcomeVerifyEmail": "Mauya! Simbisa email kero yako.",
+        "ForgetPass": "Hei, wakanganwa chirevo chako chekupfuura?",
+        "PassphraseSaved": "Chirevo chako chekupasa chachengetwa.",
+        "IdentifierActivated": "Yako {{type}} yakabatidzwa.",
+        "CompletedActivation": "Wapedza kushandisa mushandisi.",
+        "CompletedActivationLogIn": "Wapedza kushandisa mushandisi. Edza kupinda izvozvi."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
+            "title": "Sarudza contact",
             "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.gadzira haina kuwanikwa",
+            "SearchByName": "Tsvaga nezita",
+            "EmptyContacts": "Mazita haana kuwanikwa..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Sarudza contact ye {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Ndapota sarudza label.",
+        "inviteUser": "Koka Vashandisi",
+        "selectRole": "Sarudza Basa",
+        "inviteRole": "Koka {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Mutauro usiriwo wasarudzwa",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
+        "title": "Mauya",
+        "directions": "Gadzira account, kana kupinda.",
+        "directionsNoRegister": "Log in kana uine account.",
+        "goButton": "Enda",
+        "passphrase": "Isa chirevo chako chekupasa:",
+        "loginButton": "Tanga",
+        "registerButton": "Tanga",
         "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
+        "forgot": "Wazvikanganwa?",
+        "resendConfirm": "Unoda kutumira meseji yekuseta patsva izwi rako rekupfuura?",
+        "resendSuccess": "Tarisa kune meseji yekumisa patsva izwi rako rekupfuura",
         "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "noPassphrase": "Usati wapinda, unofanirwa kuseta chirevo chekupfuura nekudzvanya chinongedzo mune yako activation meseji.",
+        "notVerified": "Iwe unofanirwa kuzvitumira meseji yekushandisa kuitira kuti upinde.",
+        "emailExists": "Wakamboedza kunyoresa neiyi email? Kana zvakadaro, tarisa inbox yako kuti uvhure account yako. <a href='#resend' class='Q_button Users_activation_resend'>Dzvanya kuti utumirezve meseji<\/a>",
+        "mobileExists": "Wakamboedza kunyoresa nenharembozha iyi kare? Kana zvakadaro, tarisa SMS yako kuti uvhure account yako. <a href='#resend' class='Q_button Users_activation_resend'>Dzvanya kuti utumirezve meseji<\/a>",
+        "usingOther": "kana kuti unogona",
+        "prompt": "Sarudza zita rekushandisa:",
+        "newUser": "kana gadzira account nyowani pazasi",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "yako mbozhanhare # kana email",
+            "mobile": "isa nharembozha yako #",
+            "email": "isa email yako",
+            "username": "shandisa mavara nenhamba chete"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Kubvuma Mitemo Yebasa?",
+        "facebookNoEmail": "Yako facebook account haina email kero yakasimbiswa. Ingo pinda munzira yekuzvarwa.",
+        "picTooltip": "Unogona kushandura mufananidzo uyu gare gare",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Pinda mu {{host}} nenguva {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Kutungamira kuWallet",
+                "content": "Kana wangovhara iyi dialog, iwe unoendeswa kuchikwama chako. Kana wasaina, dzokera kupeji rino."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
+        "title": "Wedzera nzira yekupinda nayo",
         "sendMessage": "Send Activation Message",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
+            "identifier": "isa # yako mbozha kana email",
+            "mobile": "isa nhamba yako yefoni",
+            "email": "isa email yako",
             "username": "username"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Akaundi",
+        "areUsing": "Uri kushandisa {{platform}} se",
+        "noLongerUsing": "Iwe hausisiri kubatana ne {{platform}} se",
+        "doAuth": "Pinda neakaundi iyi",
+        "doSwitch": "Chinja kuakaundi iyi"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "Muridzi",
         "Admin": "Admin",
         "Member": "Member",
         "Guest": "Guest",

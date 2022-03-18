@@ -1,132 +1,132 @@
 {
     "analytics": {
         "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
+        "Daily": "Päivittäin",
+        "Weekly": "Viikoittain",
+        "Monthly": "Kuukausittain",
+        "Application": "Sovellus",
+        "Pages": "Sivut",
+        "Services": "Palvelut",
         "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "WeekDays": "Viikon päivät"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Kirjaudu sisään",
+        "LogOut": "kirjautua ulos"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Aseta {{1}} ensisijaiseksi {{2}}",
+        "ChoosePassPhrase": "Valitse <strong>salasana<\/strong> , jolla kirjaudut sisään.<br> Yksinkertainen lause, joka koostuu muutamasta sanasta, jonka muistat helposti.",
+        "ChoosePassPhraseSeeSuggestions": "Valitse hyvä <strong>tunnuslause<\/strong> tilisi suojaamiseksi. Katso ehdotuksista joitain ideoita.",
+        "LogOutAndTryAgain": "Kirjaudu ulos ja yritä uudelleen",
+        "IfYouFeel": "Jos sinusta tuntuu, että jokin meni pieleen, voit",
+        "SetIdentifierButtonTitle": "aloittaa alusta"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Aloittaa"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Aloittaa",
+        "Authorize": "Valtuuta",
+        "TermsLabel": "Olen lukenut ja samaa mieltä<br> kohteeseen {{link}}",
+        "TermsTitle": "Ehdot",
+        "mustAgree": "Ensin sinun on hyväksyttävä ehdot."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Hyväksyn {{link}}",
+        "TermsTitle": "Ehdot"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Lupa",
+        "prompt": "Haluatko ottaa ilmoitukset käyttöön? Saat reaaliaikaisia päivityksiä sinulle tärkeistä asioista.",
+        "yes": "Joo",
+        "no": "Ei",
+        "WelcomePleaseVerifyEmail": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
+        "WelcomeVerifyEmail": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
+        "ForgetPass": "Hei, unohditko salasanasi?",
+        "PassphraseSaved": "Salasanasi on tallennettu.",
+        "IdentifierActivated": "{{type}} on aktivoitu.",
+        "CompletedActivation": "Olet suorittanut käyttäjän aktivoinnin.",
+        "CompletedActivationLogIn": "Olet suorittanut käyttäjän aktivoinnin. Yritä kirjautua sisään nyt."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Valitse yhteystieto",
+            "CreateAccount": "+ Uusi yhteystieto",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create ei löydy",
+            "SearchByName": "Hae nimellä",
+            "EmptyContacts": "Yhteystietoja ei löydy..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Valitse yhteyshenkilö {{displayName}}"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Valitse tunniste.",
+        "inviteUser": "Kutsu käyttäjiä",
+        "selectRole": "Valitse Rooli",
+        "inviteRole": "Kutsu {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Virheellinen kieli valittu",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Tervetuloa",
+        "directions": "Luo tili tai kirjaudu sisään.",
+        "directionsNoRegister": "Kirjaudu sisään, jos sinulla on tili.",
+        "goButton": "Mennä",
+        "passphrase": "Kirjoita salasanasi:",
+        "loginButton": "Aloittaa",
+        "registerButton": "Aloittaa",
+        "resendButton": "Lähetä aktivointiviesti",
+        "forgot": "Unohdin sen?",
+        "resendConfirm": "Haluatko lähettää viestin salasanan nollaamiseksi?",
+        "resendSuccess": "Tarkista salasanan nollausviesti",
+        "resendClose": "kiinni",
+        "noPassphrase": "Ennen kuin voit kirjautua sisään, sinun on asetettava tunnuslause napsauttamalla aktivointiviestissäsi olevaa linkkiä.",
+        "notVerified": "Sinun tulee lähettää itsellesi aktivointiviesti, jotta voit kirjautua sisään.",
+        "emailExists": "Yrititkö rekisteröityä tällä sähköpostilla aiemmin? Jos näin on, tarkista postilaatikkosi aktivoidaksesi tilisi. <a href='#resend' class='Q_button Users_activation_resend'>Napsauta lähettääksesi viestin uudelleen<\/a>",
+        "mobileExists": "Yrititkö rekisteröityä tällä matkapuhelinnumerolla aiemmin? Jos näin on, tarkista tekstiviestisi aktivoidaksesi tilisi. <a href='#resend' class='Q_button Users_activation_resend'>Napsauta lähettääksesi viestin uudelleen<\/a>",
+        "usingOther": "tai voit",
+        "prompt": "Valitse käyttäjänimi:",
+        "newUser": "tai luo uusi tili alla",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "matkapuhelinnumerosi tai sähköpostisi",
+            "mobile": "syötä matkapuhelinnumerosi",
+            "email": "Syötä sähköpostiosoitteesi",
+            "username": "käytä vain kirjaimia ja numeroita"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Hyväksytkö käyttöehdot?",
+        "facebookNoEmail": "Facebook-tililtäsi puuttuu vahvistettu sähköpostiosoite. Kirjaudu sisään alkuperäisellä tavalla.",
+        "picTooltip": "Voit muuttaa tätä kuvaa myöhemmin",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Kirjaudu sisään {{host}} aikaan {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Uudelleenohjataan Walletiin",
+                "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Palaa tälle sivulle kirjautumisen jälkeen."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Lisää sisäänkirjautumistapa",
+        "sendMessage": "Lähetä aktivointiviesti",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "kirjoita matkapuhelinnumerosi tai sähköpostiosoitteesi",
+            "mobile": "Syötä matkapuhelinnumerosi",
+            "email": "Syötä sähköpostiosoitteesi",
+            "username": "käyttäjätunnus"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Tili",
+        "areUsing": "Käytät {{platform}} nimellä",
+        "noLongerUsing": "Et ole enää yhteydessä verkkotunnukseen {{platform}} as",
+        "doAuth": "Kirjaudu sisään tällä tilillä",
+        "doSwitch": "Vaihda tälle tilille"
     },
     "roles": {
-        "Owner": "Owner",
+        "Owner": "Omistaja",
         "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Member": "Jäsen",
+        "Guest": "Vieras",
+        "Host": "Isäntä"
     }
 }

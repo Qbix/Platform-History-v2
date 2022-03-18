@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
+                "link": "Link yekusimudzira",
+                "startDate": "Zuva Rokutanga",
+                "startTime": "Nguva Yokutanga",
                 "endDate": "End Date",
-                "endTime": "End Time",
+                "endTime": "Nguva Yekupera",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Sefa Nekufarira",
+                "FilterInterests": "Tanga kutaipa zvaunoda..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Kufarira",
+            "Location": "Nzvimbo"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Enda",
             "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
+            "WriteToStartConversation": "Nyora pfungwa dzako kuti utange hurukuro",
+            "StartConversation": "Tanga Kukurukurirana",
+            "GotoConversation": "Enda kuKukurukurirana",
             "reset": "Reset",
             "edit": "Edit",
             "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "setUrl": "Seta URL",
+            "save": "Sevha",
+            "setClip": "Cheka Clip",
+            "invalidURL": "URL haisiriyo"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Faira yakawandisa kuti isachengetedzwe. Saizi huru yefaira {{size}}",
+        "InvalidPDF": "Faira harisi PDF rinoshanda",
+        "StartTypingTitleOrKeywords": "Tanga kutaipa zita kana mazwi makuru..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
+            "description": "Gwaro reHTML iro vashandisi vakasiyana vanogona kuona nekugadzirisa",
             "displayType": "Article"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
+            "description": "Slide mumharidzo, inogona kusanganisira HTML, odhiyo nezvimwe.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
+            "description": "Mharidzo ine masiraidhi akasiyana-siyana",
             "displayType": "Presentation"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
+            "description": "Chikamu chekushambadzira pane webhusaiti",
             "displayType": "Advert unit"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
+            "description": "Nzira yekuunganidza zvikamu zvekushambadzira pasi pezita",
             "displayType": "Advert placement"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
+            "description": "Zvemukati zvekushambadzira",
             "displayType": "Advert creative"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
+            "description": "Mushandirapamwe wekushambadzira",
             "displayType": "Advert campaign"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Inomiririra webhusaiti ine metadata yakarukwa",
+            "displayType": "Webhu peji"
         }
     }
 }

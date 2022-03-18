@@ -5,10 +5,10 @@
     },
     "activate": {
         "SetAsPrimary": "Stel {{1}} as my primêre {{2}}",
-        "ChoosePassPhrase": "Kies &#39;n <strong>pasfrase<\/strong> om in te loggen met. <br> &#39;N Eenvoudige frase wat bestaan uit &#39;n paar woorde wat jy maklik sal onthou.",
-        "ChoosePassPhraseSeeSuggestions": "Kies &#39;n goeie <strong>paswoord<\/strong> om jou rekening te beskerm. Sien die voorstelle vir &#39;n paar idees.",
-        "LogOutAndTryAgain": "Teken uit en probeer weer",
-        "IfYouFeel": "As jy voel, het iets verkeerd gegaan, kan jy",
+        "ChoosePassPhrase": "Kies &#39;n wagwoordfrase <strong>om<\/strong> mee aan te meld.<br> &#39;n Eenvoudige frase wat uit &#39;n paar woorde bestaan wat jy maklik sal onthou.",
+        "ChoosePassPhraseSeeSuggestions": "Kies &#39;n goeie <strong>wagwoordfrase<\/strong> om jou rekening te beskerm. Sien die voorstelle vir &#39;n paar idees.",
+        "LogOutAndTryAgain": "Meld af en probeer weer",
+        "IfYouFeel": "As jy voel iets het verkeerd geloop, kan jy",
         "SetIdentifierButtonTitle": "oorbegin"
     },
     "session": {
@@ -17,32 +17,32 @@
     "authorize": {
         "GetStarted": "Begin",
         "Authorize": "Magtig",
-        "TermsLabel": "Ek het gelees en stem saam <br> na die {{link}}",
-        "TermsTitle": "terme",
-        "mustAgree": "U moet eers instem tot die bepalings."
+        "TermsLabel": "Ek het gelees en stem saam<br> na die {{link}}",
+        "TermsTitle": "Bepalings",
+        "mustAgree": "Eerstens moet jy instem tot die bepalings."
     },
     "register": {
         "TermsLabel": "Ek aanvaar die {{link}}",
-        "TermsTitle": "terme"
+        "TermsTitle": "Bepalings"
     },
     "notifications": {
-        "title": "toestemming",
-        "prompt": "Wil jy kennisgewings aktiveer? Jy sal real-time updates ontvang oor dinge waarvoor jy omgee.",
+        "title": "Toestemming",
+        "prompt": "Wil jy kennisgewings aktiveer? Jy sal intydse opdaterings ontvang oor dinge waarvoor jy omgee.",
         "yes": "Ja",
         "no": "Geen",
         "WelcomePleaseVerifyEmail": "Welkom! Verifieer asseblief jou e-posadres.",
         "WelcomeVerifyEmail": "Welkom! Bevestig jou e-pos adres.",
-        "ForgetPass": "Hey, het jy jou wagwoord vergeet?",
-        "PassphraseSaved": "Jou slaagsin is gestoor.",
-        "IdentifierActivated": "U {{type}} is geaktiveer.",
-        "CompletedActivation": "U het die gebruiker se aktivering voltooi.",
-        "CompletedActivationLogIn": "U het die gebruiker se aktivering voltooi. Probeer nou aanmeld."
+        "ForgetPass": "Haai, het jy jou wagwoordfrase vergeet?",
+        "PassphraseSaved": "Jou wagwoordfrase is gestoor.",
+        "IdentifierActivated": "Jou {{type}} is geaktiveer.",
+        "CompletedActivation": "Jy het gebruikeraktivering voltooi.",
+        "CompletedActivationLogIn": "Jy het gebruikeraktivering voltooi. Probeer nou om aan te meld."
     },
     "usersContacts": {
-        "selectLabel": "Kies asseblief die etiket.",
-        "inviteUser": "Nooi gebruiker",
-        "selectRole": "Kies rol",
-        "inviteRole": "Nooi {{role}} uit"
+        "selectLabel": "Kies asseblief etiket.",
+        "inviteUser": "Nooi gebruikers",
+        "selectRole": "Kies Rol",
+        "inviteRole": "Nooi {{role}}"
     },
     "invalidLanguageSelected": "Ongeldige taal gekies",
     "contacts": {
@@ -51,7 +51,7 @@
             "SearchByName": "Soek op naam",
             "CreateAccount": "+ Nuwe kontak",
             "CreateAccountNotFound": "Q.Users.Cordova.UI.create nie gevind nie",
-            "EmptyContacts": "Kontakte nie gevind nie ..."
+            "EmptyContacts": "Kontakte nie gevind nie..."
         },
         "select": {
             "title": "Kies kontak van {{displayName}}"
@@ -59,38 +59,38 @@
     },
     "login": {
         "title": "Welkom",
-        "directions": "Skep &#39;n rekening, of log in.",
-        "directionsNoRegister": "Meld aan as u &#39;n rekening het.",
+        "directions": "Skep &#39;n rekening, of meld aan.",
+        "directionsNoRegister": "Meld aan as jy &#39;n rekening het.",
         "goButton": "Gaan",
-        "passphrase": "Voer u slaagsin in:",
+        "passphrase": "Voer jou wagwoordfrase in:",
         "loginButton": "Begin",
         "registerButton": "Begin",
         "resendButton": "Stuur aktiveringsboodskap",
         "forgot": "Het dit vergeet?",
-        "resendConfirm": "Wil u &#39;n boodskap stuur om u wagwoordfrase terug te stel?",
-        "resendSuccess": "Kyk vir &#39;n boodskap om u wagwoordfrase terug te stel",
+        "resendConfirm": "Wil jy &#39;n boodskap stuur om jou wagwoordfrase terug te stel?",
+        "resendSuccess": "Kyk vir &#39;n boodskap om jou wagwoordfrase terug te stel",
         "resendClose": "Naby",
-        "noPassphrase": "Voordat u kan aanmeld, moet u &#39;n slaagsin stel deur op die skakel in u aktiveringsboodskap te klik.",
-        "notVerified": "U moet vir u &#39;n aktiveringsboodskap stuur om aan te meld.",
-        "emailExists": "Het u al voorheen met hierdie e-pos probeer registreer? As dit so is, kyk na u inkassie om u rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
-        "mobileExists": "Het u al voorheen by hierdie selfoonnommer probeer registreer? As dit so is, kyk na u SMS om u rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
+        "noPassphrase": "Voordat jy kan aanmeld, moet jy &#39;n wagwoordfrase stel deur op die skakel in jou aktiveringsboodskap te klik.",
+        "notVerified": "Jy moet vir jouself &#39;n aktiveringsboodskap stuur om aan te meld.",
+        "emailExists": "Het jy al voorheen met hierdie e-pos probeer registreer? Indien wel, gaan jou inkassie na om jou rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
+        "mobileExists": "Het jy al voorheen met hierdie selfoonnommer probeer registreer? Indien wel, gaan jou SMS na om jou rekening te aktiveer. <a href='#resend' class='Q_button Users_activation_resend'>Klik om die boodskap weer te stuur<\/a>",
         "usingOther": "of jy kan",
         "prompt": "Kies &#39;n gebruikers naam:",
         "newUser": "of skep &#39;n nuwe rekening hieronder",
         "placeholders": {
-            "identifier": "u mobiele nommer of e-pos",
-            "mobile": "voer jou selfoon in #",
-            "email": "vul u e-posadres in",
-            "username": "username"
+            "identifier": "jou selfoon # of e-pos",
+            "mobile": "voer jou selfoon # in",
+            "email": "voer jou e-posadres in",
+            "username": "gebruik slegs letters en syfers"
         },
-        "confirmTerms": "Aanvaar u die diensbepalings?",
-        "facebookNoEmail": "U bevestigde e-posadres ontbreek in u Facebook-rekening. Teken eenvoudig die oorspronklike manier aan.",
-        "picTooltip": "U kan hierdie foto later verander",
+        "confirmTerms": "Aanvaar die diensbepalings?",
+        "facebookNoEmail": "Jou Facebook-rekening ontbreek &#39;n bevestigde e-posadres. Meld eenvoudig aan op die inheemse manier.",
+        "picTooltip": "Jy kan hierdie prentjie later verander",
         "wallet": {
-            "payload": "Meld tydig by {{host}} aan {{timestamp}}",
+            "payload": "Meld aan by {{host}} op tyd {{timestamp}}",
             "alert": {
-                "title": "Herlei na Wallet",
-                "content": "Sodra u hierdie dialoog sluit, word u na u beursie geneem. Keer terug na hierdie bladsy nadat u aangemeld het."
+                "title": "Herlei tans na Wallet",
+                "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
             }
         }
     },
@@ -98,35 +98,35 @@
         "title": "Voeg &#39;n manier by om aan te meld",
         "sendMessage": "Stuur aktiveringsboodskap",
         "placeholders": {
-            "identifier": "voer u mobiele nommer of e-posadres in",
-            "mobile": "tik u selfoonnommer in",
-            "email": "vul u e-posadres in",
-            "username": "username"
+            "identifier": "voer jou selfoon # of e-pos in",
+            "mobile": "voer jou selfoonnommer in",
+            "email": "voer jou e-posadres in",
+            "username": "gebruikernaam"
         }
     },
     "prompt": {
-        "title": "{{Platform}} rekening",
-        "areUsing": "U gebruik {{platform}} as",
-        "noLongerUsing": "U is nie meer aan {{platform}} gekoppel nie",
-        "doAuth": "Teken in met hierdie rekening",
+        "title": "{{Platform}} Rekening",
+        "areUsing": "Jy gebruik {{platform}} as",
+        "noLongerUsing": "Jy is nie meer gekoppel aan {{platform}} as nie",
+        "doAuth": "Meld aan met hierdie rekening",
         "doSwitch": "Skakel oor na hierdie rekening"
     },
     "roles": {
         "Owner": "Eienaar",
         "Admin": "admin",
-        "Member": "lid",
-        "Guest": "gaste",
+        "Member": "Lid",
+        "Guest": "Gas",
         "Host": "Gasheer"
     },
     "analytics": {
-        "Title": "Analytics",
+        "Title": "Ontleding",
         "Daily": "Daagliks",
         "Weekly": "Weekliks",
         "Monthly": "Maandeliks",
-        "Application": "Aansoek",
+        "Application": "Toepassing",
         "Pages": "Bladsye",
         "Services": "Dienste",
-        "Faq": "FAQ",
+        "Faq": "Gereelde vrae",
         "WeekDays": "Weekdae"
     }
 }

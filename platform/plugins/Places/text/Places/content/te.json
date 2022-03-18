@@ -2,87 +2,87 @@
     "LatLng": "({{1}} lat, {{2}} lng)",
     "nearby": {
         "PostcodeLabel": "{{1}} ({{2}})",
-        "Title": "within {{1}}"
+        "Title": "{{1}} లోపల"
     },
     "units": {
-        "meter": "meter",
-        "meters": "meters",
-        "kilometer": "kilometer",
-        "kilometers": "kiometers",
-        "km": "km",
-        "mile": "mile",
-        "miles": "miles",
-        "mi": "mi",
-        "foot": "foot",
-        "feet": "feet",
-        "inches": "inches"
+        "meter": "మీటర్",
+        "meters": "మీటర్లు",
+        "kilometer": "కిలోమీటరు",
+        "kilometers": "కియోమీటర్లు",
+        "km": "కి.మీ",
+        "mile": "మైలు",
+        "miles": "మైళ్లు",
+        "mi": "మై",
+        "foot": "అడుగు",
+        "feet": "అడుగులు",
+        "inches": "అంగుళాలు"
     },
     "location": {
-        "interested": "I'm interested in things taking place within {{select}} of",
-        "update": "Update My Location",
-        "set": "Set My Location",
-        "prompt": "{{ClickOrTap}} here to<br>set your<br>location",
-        "myCurrentLocation": "My current location",
-        "enterAddress": "Enter an address",
-        "enterPostcode": "Please enter your postcode \/ zipcode",
+        "interested": "{{select}} లోపు జరిగే విషయాలపై నాకు ఆసక్తి ఉంది",
+        "update": "నా స్థానాన్ని నవీకరించండి",
+        "set": "నా స్థానాన్ని సెట్ చేయండి",
+        "prompt": "{{ClickOrTap}} ఇక్కడకు<br> మీ సెట్<br> స్థానం",
+        "myCurrentLocation": "నా ప్రస్తుత స్థానం",
+        "enterAddress": "చిరునామాను నమోదు చేయండి",
+        "enterPostcode": "దయచేసి మీ పోస్ట్‌కోడ్ \/ జిప్‌కోడ్‌ని నమోదు చేయండి",
         "create": {
-            "action": "Add Location",
-            "title": "New Location",
-            "nameYourLocation": "Name your location"
+            "action": "స్థానాన్ని జోడించండి",
+            "title": "కొత్త స్థానం",
+            "nameYourLocation": "మీ స్థానానికి పేరు పెట్టండి"
         },
         "confirm": {
-            "title": "Save this location?",
-            "message": "Do you plan to use this location again in the future?",
-            "ok": "Yes",
-            "cancel": "No"
+            "title": "ఈ స్థానాన్ని సేవ్ చేయాలా?",
+            "message": "మీరు భవిష్యత్తులో ఈ స్థానాన్ని మళ్లీ ఉపయోగించాలని ప్లాన్ చేస్తున్నారా?",
+            "ok": "అవును",
+            "cancel": "సంఖ్య"
         },
         "add": {
-            "title": "Name this location",
-            "placeholder": "Home, Work etc.",
-            "ok": "Save"
+            "title": "ఈ స్థానానికి పేరు పెట్టండి",
+            "placeholder": "ఇల్లు, పని మొదలైనవి.",
+            "ok": "సేవ్ చేయండి"
         },
         "dialog": {
-            "title": "Choose Location"
+            "title": "స్థానాన్ని ఎంచుకోండి"
         }
     },
     "areas": {
-        "filterPlaceholder": "Any area inside this location?",
-        "newArea": "New area",
-        "promptTitle": "Enter a name for the area:",
-        "absent": "Please set area",
-        "error": "Error",
-        "exist": "Area already exist",
-        "addNewArea": "Add new area",
-        "add": "Add"
+        "filterPlaceholder": "ఈ స్థానం లోపల ఏదైనా ప్రాంతం ఉందా?",
+        "newArea": "కొత్త ప్రాంతం",
+        "promptTitle": "ప్రాంతం కోసం పేరును నమోదు చేయండి:",
+        "absent": "దయచేసి ప్రాంతాన్ని సెట్ చేయండి",
+        "error": "లోపం",
+        "exist": "ప్రాంతం ఇప్పటికే ఉంది",
+        "addNewArea": "కొత్త ప్రాంతాన్ని జోడించండి",
+        "add": "జోడించు"
     },
     "types": {
         "Places\/locations": {
-            "description": "a collection of locations",
-            "displayType": "Locations"
+            "description": "స్థానాల సేకరణ",
+            "displayType": "స్థానాలు"
         },
         "Places\/location": {
-            "description": "Represents a building, venue, ship, park, etc.",
-            "displayType": "Location"
+            "description": "భవనం, వేదిక, ఓడ, పార్క్ మొదలైనవాటిని సూచిస్తుంది.",
+            "displayType": "స్థానం"
         },
         "Places\/area": {
-            "description": "Represents an area within a location, such as a room or suite",
-            "displayType": "Area"
+            "description": "గది లేదా సూట్ వంటి లొకేషన్‌లోని ప్రాంతాన్ని సూచిస్తుంది",
+            "displayType": "ప్రాంతం"
         },
         "Places\/floor": {
-            "description": "Represents a floor in a building or ship",
-            "displayType": "Floor"
+            "description": "భవనం లేదా ఓడలోని అంతస్తును సూచిస్తుంది",
+            "displayType": "అంతస్తు"
         },
         "Places\/column": {
-            "description": "Represents a column in a building or ship",
-            "displayType": "Column"
+            "description": "భవనం లేదా ఓడలో నిలువు వరుసను సూచిస్తుంది",
+            "displayType": "కాలమ్"
         },
         "Places\/nearby": {
-            "description": "Category for things within a certain distance of a geohash",
-            "displayType": "Near by places"
+            "description": "జియోహాష్‌కి కొంత దూరంలో ఉన్న వస్తువుల కోసం వర్గం",
+            "displayType": "స్థలాలకు సమీపంలో"
         },
         "Places\/interest": {
-            "description": "Category for things within a certain distance of a geohash, matching an interest",
-            "displayType": "Places interest"
+            "description": "ఆసక్తికి సరిపోలే జియోహాష్‌కి కొంత దూరంలో ఉన్న విషయాల కోసం వర్గం",
+            "displayType": "ఆసక్తికరమైన స్థలాలు"
         }
     }
 }

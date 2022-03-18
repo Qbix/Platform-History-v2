@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "Nasc le cur chun cinn",
+                "startDate": "Dáta tosaigh",
+                "startTime": "Am Tosaigh",
+                "endDate": "Dáta deiridh",
+                "endTime": "Am Deiridh",
+                "budget": "Buiséad"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "Scag De réir Úis",
+                "FilterInterests": "Tosaigh ag clóscríobh spéise..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "Ús",
+            "Location": "Suíomh"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "Téigh",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "Brabhsáil",
+            "WriteToStartConversation": "Scríobh do chuid smaointe chun tús a chur leis an gcomhrá",
+            "StartConversation": "Tosaigh Comhrá",
+            "GotoConversation": "Téigh go Comhrá",
+            "reset": "Athshocraigh",
+            "edit": "Cuir in eagar",
+            "link": "Nasc",
+            "setUrl": "Socraigh URL",
+            "save": "Sábháil",
+            "setClip": "Gearr Amach Clip",
+            "invalidURL": "URL neamhbhailí"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "Comhad rómhór le haghaidh taisce. Uasmhéid comhaid {{size}}",
+        "InvalidPDF": "Ní PDF bailí é an comhad",
+        "StartTypingTitleOrKeywords": "Tosaigh ag clóscríobh teidil nó eochairfhocail..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "Doiciméad HTML is féidir le húsáideoirí éagsúla a fheiceáil agus a chur in eagar",
+            "displayType": "Airteagal"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "Sleamhnán i gcur i láthair, is féidir HTML, fuaime etc.",
+            "displayType": "Sleamhnán"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "Cur i láthair ina bhfuil sleamhnáin éagsúla",
+            "displayType": "cur i láthair"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "Aonad fógraíochta ar shuíomh Gréasáin",
+            "displayType": "Aonad fógraíochta"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "Bealach chun aonaid fógraíochta a ghrúpáil faoi ainm",
+            "displayType": "Socrúchán fógraí"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "Ábhar le haghaidh fógraíochta",
+            "displayType": "Fógra cruthaitheach"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "Feachtas fógraíochta",
+            "displayType": "Feachtas fógraíochta"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "Is ionann é agus suíomh Gréasáin ar scríobadh meiteashonraí air",
+            "displayType": "leathanach gréasáin"
         }
     }
 }

@@ -1,5 +1,5 @@
 <?php
-function Assets_NFT_response_getFollowers ($params) {
+function Assets_NFT_response_countSubscribers ($params) {
 	$loggedInUser = Users::loggedInUser();
 	$loggedInUserId = Q::ifset($loggedInUser, 'id', null);
 	$request = array_merge($_REQUEST, $params);
@@ -11,11 +11,13 @@ function Assets_NFT_response_getFollowers ($params) {
 
 	$res = false;
 	if ($loggedInUserId) {
-		$res = (boolean)Assets::getFollowers($publisherId, $streamName, $loggedInUserId);
+		$res = (boolean)Streams_Stream::countSubscribers(
+			$publisherId, $streamName, $loggedInUserId
+		);
 	}
 
 	return array(
 		"res" => $res,
-		"followers" => Assets::getFollowers($publisherId, $streamName)
+		"followers" => Streams_Stream::countSubscribers($publisherId, $streamName)
 	);
 }

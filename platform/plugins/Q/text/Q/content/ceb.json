@@ -1,22 +1,22 @@
 {
     "request": {
-        "error": "Kasala {{status}} sa hangyo",
-        "canceled": "Gihangyo nga kanselahon",
-        "500": "Internal nga sayup nga server",
-        "404": "Dili makita: {{url}}",
-        "501": "Ang hangyo nahunong"
+        "error": "Sayop {{status}} sa panahon sa paghangyo",
+        "canceled": "Gikansela ang hangyo",
+        "500": "Sayop sa internal nga server",
+        "404": "Wala makit-an: {{url}}",
+        "501": "Nabalda ang hangyo"
     },
     "nonce": {
-        "sameDomain": "Nag-expire na ang sesyon. Papresyaha ang panid ug sulayi pag-usab.",
-        "otherDomain": "Giparehistro nga cross-domain request ngadto sa langyaw nga domain sa {{baseUrl}}"
+        "sameDomain": "Nag-expire ang sesyon. I-refresh ang panid ug sulayi pag-usab.",
+        "otherDomain": "Gibabagan ang cross-domain nga hangyo sa langyaw nga dominyo sa {{baseUrl}}"
     },
     "words": {
-        "tap": "i-tap",
-        "click": "i-klik",
+        "tap": "tap",
+        "click": "pag-klik",
         "yes": "oo",
         "no": "dili",
         "Tap": "Tapik",
-        "Click": "I-klik",
+        "Click": "Pag-klik",
         "Yes": "Oo",
         "No": "Dili"
     },
@@ -25,7 +25,7 @@
         "2": "Pebrero",
         "3": "Marso",
         "4": "Abril",
-        "5": "Mayo",
+        "5": "May",
         "6": "Hunyo",
         "7": "Hulyo",
         "8": "Agosto",
@@ -36,7 +36,7 @@
     },
     "audio": {
         "allowMicrophoneAccess": "Palihug tugoti ang pag-access sa imong mikropono",
-        "record": "Irekord",
+        "record": "Pagrekord",
         "recording": "Pagrekord",
         "remains": "nagpabilin",
         "maximum": "maximum",
@@ -49,7 +49,7 @@
         "encoding": "Pag-encode"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Alerto"
     },
     "confirm": {
         "title": "Sa pagmatuod sa",
@@ -57,89 +57,89 @@
         "cancel": "Dili"
     },
     "prompt": {
-        "title": "Gipangayo",
+        "title": "Giaghat",
         "ok": "Lakaw"
     },
     "imagepicker": {
-        "errorReadingFile": "Sayop nga pagbasa sa file",
+        "errorReadingFile": "Sayop sa pagbasa sa file",
         "cameraCommands": {
-            "prompt": "Unsa ang gusto nimo nga buhaton?",
-            "photo": "Pagdala og bag-o nga litrato",
+            "prompt": "Unsay gusto nimong buhaton?",
+            "photo": "Pagkuha og bag-ong litrato",
             "library": "Pagpili gikan sa librarya"
         },
-        "tooSmall": "Palihog pilia ang mas dako nga larawan.",
+        "tooSmall": "Palihug pagpili og mas dako nga hulagway.",
         "cropping": {
-            "title": "Usba ang gidak-on ug posisyon",
-            "touchscreen": "Gamita ang imong mga tudlo aron sa pag-zoom ug pag-drag",
-            "notTouchscreen": "Gamita ang imong mouse &amp; ligid aron sa pag-zoom ug pag-drag"
+            "title": "I-adjust ang gidak-on ug posisyon",
+            "touchscreen": "Gamita ang imong mga tudlo sa pag-zoom ug pag-drag",
+            "notTouchscreen": "Gamita ang imong mouse ug ligid sa pag-zoom ug pag-drag"
         },
         "errorType": "Pasayloa, apan kini nga matang sa file wala gisuportahan"
     },
     "timestamp": {
         "lastNight": "kagabii",
-        "lastEvening": "katapusang bisperas",
+        "lastEvening": "miaging bisperas",
         "yesterday": "kagahapon",
-        "thisMorning": "buntag",
-        "today": "karon",
+        "thisMorning": "karong buntaga",
+        "today": "karong adlawa",
         "tonight": "karong gabii",
-        "tomorrowMorning": "tom buntag",
+        "tomorrowMorning": "ugma sa buntag",
         "tomorrow": "ugma",
-        "hoursAgo": "{{h}} ka oras ang milabay",
-        "hourAgo": "{{h}} ka oras ang milabay",
+        "hoursAgo": "{{h}} mga oras ang milabay",
+        "hourAgo": "{{h}} oras ang milabay",
         "minuteAgo": "{{m}} minuto ang milabay",
-        "minutesAgo": "{{m}} minuto ang milabay",
-        "secondAgo": "{{s}} ikaduha na ang milabay",
-        "secondsAgo": "{{s}} segundo ang milabay",
-        "fewSecondsAgo": "segundo ang milabay",
+        "minutesAgo": "{{m}} mga minuto ang milabay",
+        "secondAgo": "{{s}} segundo na ang milabay",
+        "secondsAgo": "{{s}} segundos ang milabay",
+        "fewSecondsAgo": "segundos ang milabay",
         "rightNow": "karon dayon",
-        "inSecond": "sa {{s}} ikaduha",
-        "inSeconds": "sa {{s}} segundo",
+        "inSecond": "sa {{s}} segundo",
+        "inSeconds": "sa {{s}} segundos",
         "inMinute": "sa {{m}} minuto",
-        "inMinutes": "sa {{m}} minuto",
-        "inHour": "sa {{h}} nga oras",
-        "inHours": "sa {{h}} nga mga oras",
-        "inUnderMinute": "sa ilalum sa 1 minuto"
+        "inMinutes": "sa {{m}} mga minuto",
+        "inHour": "sa {{h}} oras",
+        "inHours": "sa {{h}} ka oras",
+        "inUnderMinute": "sa ubos sa 1 ka minuto"
     },
     "video": {
         "clip": "clip",
-        "errorNoSource": "Wala’y gigikanan sa video",
+        "errorNoSource": "Walay tinubdan sa video",
         "SkipAfter": "Laktaw pagkahuman",
         "Skip": "Laktaw"
     },
     "pdf": {
         "clip": "clip",
-        "errorNoSource": "Wala’y gigikanan sa pdf"
+        "errorNoSource": "Walay pdf nga tinubdan"
     },
     "clip": {
         "SetClipStart": "Ibutang ang Pagsugod sa Clip",
         "ClipStart": "Pagsugod sa Clip",
-        "SetClipEnd": "Itakda ang Kataposan sa Clip",
-        "ClipEnd": "Pagtapos sa Clip",
-        "StartMoreEnd": "Ang posisyon sa pagsugod dili mahimo nga labaw pa sa katapusan nga posisyon",
-        "EndLessStart": "Ang posisyon sa pagtapos dili mahimong mas gamay kaysa sa posisyon sa pagsugod",
-        "WhichInvalid": "Ang pangatarungan &#39;nga&#39; dili husto"
+        "SetClipEnd": "Ibutang ang Clip End",
+        "ClipEnd": "Katapusan sa Clip",
+        "StartMoreEnd": "Ang posisyon sa pagsugod dili mahimong labaw pa sa posisyon sa katapusan",
+        "EndLessStart": "Ang katapusan nga posisyon dili mahimong mubu sa pagsugod nga posisyon",
+        "WhichInvalid": "Ang argumento &#39;nga&#39; dili balido"
     },
     "tabs": {
-        "more": "labi pa",
+        "more": "labaw pa",
         "Menu": "Menu"
     },
     "durations": {
         "second": "ikaduha",
-        "seconds": "segundo",
+        "seconds": "segundos",
         "minute": "minuto",
         "minutes": "minuto",
-        "hour": "mga oras",
+        "hour": "oras",
         "day": "adlaw",
-        "days": "adlaw",
+        "days": "mga adlaw",
         "week": "semana",
-        "weeks": "mga semana",
+        "weeks": "semana",
         "month": "bulan",
-        "months": "bulan",
+        "months": "mga bulan",
         "year": "tuig",
-        "years": "tuig",
+        "years": "mga tuig",
         "decade": "dekada",
         "decades": "mga dekada",
         "century": "siglo",
-        "centuries": "kasiglohan"
+        "centuries": "mga siglo"
     }
 }

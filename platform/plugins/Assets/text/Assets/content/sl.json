@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Dotaknite se za plačilo"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: bremenitev obdelana za {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Hvala za plačilo {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} je naročen na {{plan.title}}",
+        "YouSubscribedTo": "Naročeni ste na {{plan.title}}"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Prejmete plačilo {{displayAmount}} od {{call 'publisher.displayName'}} s strani »{{description}}«",
+        "HasBeenCharged": "Hej, obveščamo vas samo o tem, da je {{1}} zaračunal {{2}} za {{3}} s strani {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Hvala za vaše plačilo za »{{description}}«",
+        "HavePaid": "Hej {{1}}, to je samo hitra potrditev, da ste uspešno plačali {{2}} {{3}} za {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Informacije o naročilu",
+        "PaymentMethod": "Način plačila",
+        "ContactInfo": "Kontaktne informacije",
+        "Pay": "plačati"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
-        "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "InviteAcceptedBy": "Povabilo je sprejel {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} je vnesel ime",
+        "Streams_user_lastname": "{{invitedUserName}} je vnesel priimek",
+        "Streams_user_icon": "{{invitedUserName}} vnesena ikona",
+        "Places_user_location": "{{invitedUserName}} je vnesel lokacijo",
+        "Streams_greeting": "{{invitedUserName}} je vnesel pozdrav",
+        "YouHaveCreditsToStart": "Za začetek imate {{amount}} kreditov",
+        "PaymentFor": "Plačilo za &quot;{{1}}&quot;",
+        "PaymentTo": "Plačilo za {{1}}",
+        "PaymentToUser": "Plačilo za {{toUserName}}",
+        "CreatePaidStream": "za ustvarjanje {{toStreamName}}",
+        "JoinedPaidStream": "za rezervacijo v » <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> «",
+        "CreatedCommunity": "za ustvarjanje skupnosti &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "kot vračilo rezervacije v » <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> «",
+        "BoughtCredits": "Kupil {{amount}} kreditov",
+        "BonusCredits": "Bonus {{amount}} kreditov",
+        "BuyAmountCredits": "Kupite {{amount}} kreditov",
+        "WatchClip": "Prisluženih {{amount}} kreditov za gledanje {{fromStreamTitle}}",
+        "MissingCredits": "Manjkajoči krediti",
+        "YouMissingCredits": "Za nadaljevanje potrebujete dodatnih {{amount}} kreditov.",
+        "BuyCredits": "Kupite kredite",
+        "BuyBonus": "Nakup {{amount}} kreditov naenkrat bo privedel do {{bonus}} bonusa kreditov.",
+        "Buy": "Kupite",
+        "PurchaseCredits": "Nakup kreditov",
+        "Credits": "Zasluge",
+        "ErrorInvalidAmount": "Znesek neveljaven",
+        "ErrorInvalidCurrency": "Žal še ne podpiramo valute {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} kreditov",
+            "BonusCredits": "{{amount}} kreditov"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
-        "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Date": "Datum",
+        "Amount": "Znesek",
+        "Description": "Opis",
+        "Client": "Stranka",
+        "To": "do",
+        "From": "od",
+        "SeeHistory": "Oglejte si zgodovino plačil za {{1}}",
+        "HistoryEmpty": "Nimate še podatkov",
+        "PaymentFor": "Poslano {{amount}} kreditov",
+        "PaymentTo": "Poslano {{amount}} kreditov",
+        "PaymentToUser": "Poslano {{amount}} kreditov",
+        "CreatePaidStream": "Porabljenih {{amount}} kreditov",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Prisluženih {{amount}} kreditov",
+            "-": "Porabljenih {{amount}} kreditov"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Prisluženih {{amount}} kreditov",
+            "-": "Porabljenih {{amount}} kreditov"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Prejeto {{amount}} kreditov",
+            "-": "Poslano {{amount}} kreditov"
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Porabljenih {{amount}} kreditov",
+        "BoughtCredits": "Kupil {{amount}} kreditov",
+        "BonusCredits": "Prejel bonus {{amount}} kreditov",
+        "InviteAcceptedBy": "Prisluženih {{amount}} kreditov",
+        "Streams_user_firstname": "Prisluženih {{amount}} kreditov",
+        "Streams_user_lastname": "Prisluženih {{amount}} kreditov",
+        "Streams_user_icon": "Prisluženih {{amount}} kreditov",
+        "Places_user_location": "Prisluženih {{amount}} kreditov",
+        "Streams_greeting": "Prisluženih {{amount}} kreditov",
+        "YouHaveCreditsToStart": "Prisluženih {{amount}} kreditov"
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Nastavite podatke o plačilu",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Začnite naročnino",
+            "message": "Ali se želite naročiti na {{title}}?",
+            "ok": "v redu",
+            "cancel": "Prekliči"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Kreditna ali debetna kartica",
+        "SubscribePayment": "Plačilo naročnine",
+        "ImmediatePayment": "Takojšnje plačilo"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Nastavite podatke o plačilu",
+        "BuyAmountCredits": "Kupite {{amount}} kreditov",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Izvedite plačilo",
+            "message": "Ali se strinjate s plačilom {{symbol}}{{amount}}?",
+            "ok": "v redu",
+            "cancel": "Prekliči"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "Zasluge",
+            "description": "spremlja kredite in plačila"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Naročniški načrt",
+            "description": "naročniški načrt"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Naročnina",
+            "description": "naročnina"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "Izdelek",
+            "description": "izdelek, ki se prodaja"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "Storitev",
+            "description": "storitev, ki se ponuja"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Prisluženih {{amount}} kreditov"
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Kupil {{amount}} kreditov"
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Bonus {{amount}} kreditov"
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Porabljenih {{amount}} kreditov"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Poslano {{amount}} dobroimetja na {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Prejeto {{amount}} kreditov od {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
-            "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "Title": "Nova storitev",
+            "TitlePlaceholder": "Naslov storitve",
+            "PricePlaceholder": "Določite ceno",
+            "LinkPlaceholder": "nastavite povezavo za dodatne informacije",
+            "DescriptionPlaceholder": "Opis storitve",
+            "SaveService": "Shrani storitev",
+            "SelectRequiredParticipants": "Zahtevani udeleženci"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Upravljajte predloge storitev",
+        "ManageServices": "Upravljanje storitev",
+        "Free": "prost",
+        "OptionalContribution": "Neobvezni prispevek",
+        "RequiredPayment": "Zahtevano plačilo",
+        "AreYouSureDelete": "Ali ste prepričani, da želite izbrisati to storitev?",
+        "AmountServicesRelated": "Na voljo je {{amount}} razpoložljivih storitev, povezanih s to storitvijo. Prav tako bodo odstranjeni."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
-        "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "Title": "Informacije o {{title}} NFT",
+        "Description": "Podrobne informacije o NFT",
+        "FixedBid": "Kupi zdaj",
+        "CurrentBid": "trenutna ponudba",
+        "StartingIn": "Začetek v",
+        "EndingIn": "Konča se v",
+        "CreateNFT": "Ustvarite NFT",
+        "TitlePlaceholder": "Dajte svojemu NFT naslov",
+        "DescriptionPlaceholder": "Opišite svoj NFT",
+        "CreateYourNFT": "Ustvarite svoj NFT",
+        "Royalties": "Licenčnine",
+        "RoyaltyPlaceholder": "Neobvezno. Znesek, plačan ustvarjalcu pred prenosom.",
+        "ExpirationDate": "Rok trajanja",
+        "StartingDate": "Začetni datum",
+        "BidsBelowThisAmount": "Ponudbe pod tem zneskom ne bodo dovoljene",
+        "MinimumBid": "Najnižja ponudba",
+        "Price": "Cena",
+        "Owner": "Lastnik",
+        "SelectCategory": "Izberite kategorijo",
+        "Day": "dan",
+        "Days": "Dnevi",
+        "Hour": "ura",
+        "Hours": "Ure",
+        "Minute": "Minuto",
+        "Minutes": "Minute",
+        "Second": "Drugič",
+        "Seconds": "Sekund",
+        "SalesCreator": "od prodaje bo šel ustvarjalcu",
+        "Details": "Podrobnosti",
+        "Bids": "Ponudbe",
+        "History": "Zgodovina",
+        "LoremIpsum": "Lorem Ipsum je preprosto navidezno besedilo tiskarske in pisateljske industrije.",
+        "PutOnSale": "Dano v prodajo",
+        "PutOffSale": "Umaknite iz prodaje",
+        "Transfer": "Prenos",
+        "Update": "Nadgradnja",
+        "UpdateToken": "Posodobite žeton",
+        "CreateToken": "Ustvari žeton",
+        "PlaceBid": "Postavite ponudbo",
+        "SoldOut": "Prodano",
+        "NftName": "NFT ime",
+        "DescribeYourNFT": "Prosimo, opišite svoj NFT",
+        "NftPicture": "Slika, ki predstavlja NFT",
+        "NftMovie": "Film, ki predstavlja NFT",
+        "UploadMovie": "Naložite film",
+        "MovieSource": "Vir filma",
+        "UploadFile": "Naložite datoteko",
+        "PutOnMarketplace": "Dajte na tržnico",
+        "InstantPurchase": "Vnesite ceno, da uporabnikom omogočite takojšen nakup vašega NFT",
+        "FixedPrice": "Fiksna cena",
+        "TimedAuction": "Časovna dražba",
+        "OpenForBids": "Odprto za ponudbe",
+        "PriceOnePiece": "Vnesite ceno za en kos",
+        "EnterMinimumBid": "Vnesite najnižjo ponudbo",
+        "SelectChain": "Izberite verigo",
+        "WrongChain": "Ta NFT je ustvarjen pod &quot;{{chain}}&quot;. Prosimo, uporabite to verigo.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Uvoz NFT-jev",
+            "fileNotFound": "Žal datoteke CSV ni mogoče najti.",
+            "fileEmpty": "Oprostite, datoteka CSV je prazna.",
+            "userIdNotFound": "uporabnik obstaja, vendar je ID prazen",
+            "errorLine": "vrstica {{1}}",
+            "fieldNotFound": "Zahtevanega polja »{{1}}« ni bilo mogoče najti",
+            "taskStreamInvalid": "tok opravil ni veljaven",
+            "instructionsEmpty": "navodila za tok opravil so prazna",
+            "complete": "Dokončano",
+            "activateUsers": "poslati aktivacijsko sporočilo uporabnikom?",
+            "importProgress": "napredek",
+            "importOptions": "Opcije",
+            "sampleCSV": "Prenesite vzorec CSV",
+            "fileLabel": "Naložite preglednico:",
+            "errorsTitle": "Prišlo je do napak"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Filtrirajte po zbirkah NFT",
+                "ShowNFTCollection": "Pokaži zbirko NFT v ...",
+                "AllCollections": "Vse zbirke"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Vsi avtorji",
+                "AllUsers": "Vsi",
+                "FilterByAuthors": "Filtrirajte po avtorjih"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Nazaj na zbirko"
     }
 }

@@ -1,124 +1,124 @@
 {
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "Articulu novu"
     },
     "labels": {
-        "Streams\/invited": "E persone ch&#39;e aghju invitato",
-        "Streams\/invitedMe": "Chi mi ha invitatu",
+        "Streams\/invited": "E persone chì aghju invitatu",
+        "Streams\/invitedMe": "Chi m&#39;hà invitatu",
         "AreYouAgree": "Site d’accunsentu?",
         "Yes": "Iè",
         "No": "Innò",
         "DoYouAgree": "d&#39;accordu ?"
     },
     "interests": {
-        "Filter": "Cosa ti piace?",
-        "CanAdd": "Sì ancu ùn pudete micca truvà ciò chì stai cercendu, pudete aghjunghje un interessu novu qui:",
-        "TrySynonyms": "Ùn la vede micca? Prova certi sinonimi",
-        "AddUnderCategory": "Add in category ...",
-        "Other": "Altri",
-        "Unlisted": "Non listatu"
+        "Filter": "Chì sò i vostri interessi ?",
+        "CanAdd": "Se ùn pudete ancu truvà ciò chì cercate, pudete aghjunghje un novu interessu quì sottu:",
+        "TrySynonyms": "Ùn vede micca? Pruvate alcuni sinonimi.",
+        "AddUnderCategory": "Aghjunghjite sottu a categuria...",
+        "Other": "Altru",
+        "Unlisted": "Unlisted"
     },
     "chat": {
-        "flaggedForAdminReview": "U missaghju hè statu tracciatu per una rivista amministrativa. Tocca torna per unflag.",
-        "noOneSaid": "Nisunu hà dettu qualcosa",
-        "closeChatButton": "Chiudite u chat",
-        "closeChatConfirmTitle": "Chiudite questu chat?",
-        "closeChatConfirm": "Sì sicuru chì vulete fermà sta chat?",
+        "flaggedForAdminReview": "U messagiu hè statu marcatu per a revisione amministrativa. Tocca di novu per annullà.",
+        "noOneSaid": "Nimu hà dettu nunda",
+        "closeChatButton": "Chiudi chat",
+        "closeChatConfirmTitle": "Chiudi sta chat ?",
+        "closeChatConfirm": "Sò sicuru chì vulete chjude sta chat ?",
         "closeChatConfirmYes": "Iè",
         "closeChatConfirmNo": "Innò",
-        "earlierComments": "primu commenti",
-        "Subscribed": "Mute Notificazioni",
-        "Unsubscribed": "Ricevi Notificazioni",
+        "earlierComments": "cumenti prima",
+        "Subscribed": "Notificazioni attivate",
+        "Unsubscribed": "Notificazioni silenziate",
         "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à sta cunversazione.",
-        "startedConversation": "hà principiatu una cunversazione",
-        "RealTimeCall": "Chjamate in tempu Reali",
+        "startedConversation": "principiatu una conversazione",
+        "RealTimeCall": "Chjama in tempu reale",
         "SearchByName": "Ricerca per nome",
         "Notifications": {
-            "Visit": "{{displayName}} visita a chat",
-            "Join": "{{displayName}} unitu à u chat",
-            "Leave": "{{displayName}} ha lasciatu u chat",
-            "RelatedTo": "{{displayName}} ha iniziatu un {{stream.displayType}}"
+            "Visit": "{{displayName}} visita u chat",
+            "Join": "{{displayName}} hà unitu à u chat",
+            "Leave": "{{displayName}} abbandunò u chat",
+            "RelatedTo": "{{displayName}} hà iniziatu un {{stream.displayType}}"
         }
     },
     "notifications": {
-        "*": "Messaggio {{& message.fields.type}} per {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ha dettu:",
-        "Streams\/changed": "Cambiamenti in {999}}",
-        "Streams\/invite": "Avete invitu à {{& stream.fields.title}}",
-        "Streams\/announcement": "Annuncio in {{& streams.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} hà cambiatu l&#39;accessu à u fluxu",
-        "Streams\/chat\/edit": "Modificatu un missaghju di chat",
-        "Streams\/chat\/remove": "Messu di chat eliminatu",
+        "*": "Missaghju {{& message.fields.type}} à {{& stream.fields.title}}",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} hà dettu: {{& message.content}}",
+        "Streams\/changed": "Cambiamenti in {{stream.fields.title}}",
+        "Streams\/invite": "Avete statu invitatu à {{& stream.fields.title}}",
+        "Streams\/announcement": "Annunciu in {{& stream.fields.title}}",
+        "Streams\/access": "{{&call 'avatar.displayName'}} hà cambiatu l&#39;accessu in {{& stream.fields.title}}",
+        "Streams\/chat\/edit": "Missaghju di chat editatu in {{& stream.fields.title}}",
+        "Streams\/chat\/remove": "Missaghju di chat eliminatu in {{& stream.fields.title}}",
         "Streams\/closed": "{{stream.fields.title}} hè statu chjusu",
-        "Streams\/task\/progress": "Progressu fattu in {{stream.fields.title}}",
-        "Streams\/task\/complete": "U travagliu cumpletitu: {{stream.fields.title}}",
-        "Streams\/task\/error": "Errore durante: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Messaggio in entrata",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
+        "Streams\/task\/progress": "Prugressu fattu in {{stream.fields.title}}",
+        "Streams\/task\/complete": "Task finitu: {{stream.fields.title}}",
+        "Streams\/task\/error": "Error durante: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: Missaghju Entratu",
+        "Streams\/relatedTo\/Streams\/call": "A nova Chjama hà iniziatu in {{toTitle}}",
         "Streams\/relatedTo\/*": "Novu {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Agghiuntu à {{toTitle}} cum&#39;è {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} ci hà mintuatu in un cumentu",
-        "Streams\/call": "{{displayName}} ha iniziatu una chjama in tempu reale",
-        "ManageEmailSubscriptions": "gestite i vostri abbonamenti per email",
-        "IfUnsubscribe": "Se vulete desubscrive"
+        "Streams\/relatedFrom\/*": "Aggiuntu à {{toTitle}} cum&#39;è {{relationDisplayType}}",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} vi mintuvatu in un cumentu",
+        "Streams\/call": "{{displayName}} hà iniziatu una chjama in tempu reale",
+        "ManageEmailSubscriptions": "gestisce i vostri abbonamenti email",
+        "IfUnsubscribe": "Sè vo vulete unsubscribe"
     },
     "invite": {
-        "messageContent": "{{displayName}} ti invita à {{inviteUrl}}",
+        "messageContent": "{{displayName}} vi hà invitatu à {{inviteUrl}}",
         "dialog": {
-            "chooseFromContacts": "Sceglite da i vostri Contatti",
-            "chooseAgainFromContacts": "Scegli una volta da i Contatti",
-            "inviteSelectedContacts": "Invita i Contatti Selezionati",
-            "selectFromContacts": "Sceglite Da i Contatti",
-            "photo": "Fate una foto",
-            "photoInstruction": "Se a persona chì scansiu u vostru codice QR hè davanti à voi, piglià una foto di loro",
-            "to": "A: {{Stream Title}}",
+            "chooseFromContacts": "Sceglite da i vostri cuntatti",
+            "chooseAgainFromContacts": "Sceglie di novu da Cuntatti",
+            "inviteSelectedContacts": "Invita i Cuntatti Scelti",
+            "selectFromContacts": "Selezziunà From Contacts",
+            "photo": "Pigliate una foto",
+            "photoInstruction": "Se a persona chì hà scansatu u vostru codice QR hè davanti à voi, pigliate una foto di elli",
+            "to": "À: {{Stream Title}}",
             "go": "Vai",
             "title": "Invita",
-            "placeholder": "Numero di mobile o indirizzu email",
-            "orInvite": "Invitendu o persone cù u:",
-            "QR": "{{ClickOrTap}} per generà u codice QR",
-            "QRtitle": "Scansione questo codice QR",
-            "QRscanned": "Hè spinuu!",
-            "byEmail": "Email",
-            "byText": "Testo",
+            "placeholder": "Numeru mobile o indirizzu email",
+            "orInvite": "O invita a ghjente usendu:",
+            "QR": "{{ClickOrTap}} per generà codice QR",
+            "QRtitle": "Scansate stu codice QR",
+            "QRscanned": "L&#39;anu scansatu !",
+            "byEmail": "E-mail",
+            "byText": "Testu",
             "byFacebook": "Facebook",
             "byTwitter": "Twitter",
-            "scannedQR": "{{ClickOrTap}} se u codice hè statu scannatu",
+            "scannedQR": "{{ClickOrTap}} se u codice hè scansatu",
             "copyLink": "{{ClickOrTap}} per copià u ligame d&#39;invitu",
             "userChooserPlaceholder": "Ricerca per nome",
             "shareOrCopyLink": "{{ClickOrTap}} per sparte o cupià u ligame d&#39;invitu"
         },
         "email": {
-            "subject": "Hey, fighjate questu",
-            "PleaseVisitLink": "Visite u ligame chì seguita:",
-            "InvitingYou": "Vi invita à {{title}}",
-            "HasInvitedYou": "{{displayName}} ti hà invitato à {{title}}",
-            "HasMentionedYou": "{{displayName}} ci hà citatu in &quot;{{title}}&quot;",
-            "YOUAREINVITED": "È INVITATU!",
-            "AcceptInvite": "Accetta Invitu"
+            "subject": "Ehi, verificate questu",
+            "PleaseVisitLink": "Per piacè visitate u ligame seguente:",
+            "InvitingYou": "Vi invitu à {{title}}",
+            "HasInvitedYou": "{{displayName}} vi hà invitatu à {{title}}",
+            "HasMentionedYou": "{{displayName}} t&#39;hà citatu in &quot;{{title}}&quot;",
+            "YOUAREINVITED": "VOI SI INVITATU !",
+            "AcceptInvite": "Accetta l&#39;invitu"
         },
         "sms": {
-            "content": "Avete invitu à {{title}}. Please tap tap {{url}}"
+            "content": "Avete statu invitatu à {{title}}. Per piacè tocca {{url}}"
         },
         "notice": {
-            "text": "Avete invitu. {{ClickOrTap}} quì per accettà è riunitevi."
+            "text": "Avete statu invitatu. {{ClickOrTap}} quì per accettà è unisce."
         },
         "command": "Invita",
-        "youCanNowPaste": "Pudete avà incollà stu ligame in qualchì locu per invità a ghjente"
+        "youCanNowPaste": "Pudete avà incollà stu ligame in un locu per invità a ghjente"
     },
     "followup": {
         "mobile": {
-            "alert": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",
-            "confirm": "L&#39;invite hè inviata da u nostru numeru, chì i vostri amichi ùn ricanùvanu micca. Ti piacerebbe seguitu cun un testu rapidu per fà sapè chì l&#39;invite venia da voi, dumandanduli di cliccà u ligame.",
-            "check": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru sms è cliccate nantu à u ligame!",
-            "CheckYourMobile": "Verificate SMS è seguitate struzzioni!"
+            "alert": "L&#39;inviti sò mandati da u nostru numeru, chì i vostri amichi ùn anu ancu ricunnisciutu. Segui cun un testu rapidu per fà sapè chì l&#39;invitu hè vinutu da voi, dumandendu à cliccà u ligame.",
+            "confirm": "L&#39;inviti sò mandati da u nostru numeru, chì i vostri amichi ùn anu ancu ricunnisciutu. Vulete seguità cù un testu rapidu per fà sapè chì l&#39;invitu hè vinutu da voi, dumandendu à cliccà u ligame.",
+            "check": "Ehi, aghju appena mandatu un invitu à l&#39;app {{app}}. Per piacè verificate u vostru sms è cliccate u ligame!",
+            "CheckYourMobile": "Per piacè verificate l&#39;SMS è seguite l&#39;istruzzioni!"
         },
         "email": {
-            "alert": "I inviti sò inviati da u nostru duminiu chì i vostri amichi ùn ricunnosce micca. Fate una prova à un testu rapidu per dà li sapete chì l&#39;invitazione hè venuta da voi, dumandanduli di cliccà u ligame.",
-            "confirm": "I inviti sò inviati da u nostru duminiu chì i vostri amichi ùn ricunnosce micca. Ti piacerebbe seguitu cun un testu rapidu per fà sapè chì l&#39;invite venia da voi, dumandanduli di cliccà u ligame.",
-            "subject": "Avete ottenutu un invita?",
-            "body": "Hey, aghju mandatu appena una invitazione à l&#39;applicazione {{app}}. Per piacè, verificate u vostru email è cliccate nantu à u ligame!",
-            "CheckYourEmail": "Verificate u vostru email è seguitate struzzioni!"
+            "alert": "L&#39;inviti sò mandati da u nostru duminiu, chì i vostri amichi ùn anu ancu ricunnisciutu. Segui cun un testu rapidu per fà sapè chì l&#39;invitu hè vinutu da voi, dumandendu à cliccà u ligame.",
+            "confirm": "L&#39;inviti sò mandati da u nostru duminiu, chì i vostri amichi ùn anu ancu ricunnisciutu. Vulete seguità cù un testu rapidu per fà sapè chì l&#39;invitu hè vinutu da voi, dumandendu à cliccà u ligame.",
+            "subject": "Avete ricevutu un invitu ?",
+            "body": "Ehi, aghju appena mandatu un invitu à l&#39;app {{app}}. Per piacè verificate u vostru email è cliccate u ligame quì!",
+            "CheckYourEmail": "Per piacè verificate u vostru email è seguite l&#39;istruzzioni!"
         }
     },
     "webrtc": {
@@ -126,129 +126,129 @@
             "microphoneTitle": "Abilate Microphone",
             "cameraTitle": "Abilita a Camera",
             "cameraAndMicrophoneTitle": "Abilita Fotocamera è Microphone",
-            "dialogTitle": "Cunnessione",
-            "microphoneBtn": "Habilita u Microfonu",
-            "cameraBtn": "Habilita a Camera",
-            "cameraAndMicrophoneBtn": "Habilita a Camera è u Microfonu"
+            "dialogTitle": "Cunnessu",
+            "microphoneBtn": "Habilita microfonu",
+            "cameraBtn": "Attivà Camera",
+            "cameraAndMicrophoneBtn": "Habilita a Camera è u Micrufonu"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Istruzzioni",
-            "permissionDenied": "U permissione per {{kind}} negatu. Per utilizallu per piacè seguite sti passi:",
-            "point1": "Vai à &quot;Configurazione&quot; -&gt; &quot;Avanzata&quot; -&gt; &quot;Privacità è sicurità&quot; -&gt; &quot;Configurazione situ&quot; -&gt; &quot;Camera&quot; o &quot;Configurazione situ&quot; -&gt; &quot;Microfonu&quot;",
-            "point2": "Elimina {{hostname}} da a lista &quot;Bloccà&quot;"
+            "permissionDenied": "Permissione per {{kind}} denegata. Per aduprà, seguite questi passi:",
+            "point1": "Andà à &quot;Settings&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy and security&quot; -&gt; &quot;Site Settings&quot; -&gt; &quot;Camera&quot; o &quot;Site Settings&quot; -&gt; &quot;Microphone&quot;",
+            "point2": "Eliminate {{hostname}} da a lista &quot;Block&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Istruzzioni",
-            "permissionDenied": "U permissione per {{kind}} negatu. Ricaricate questa pagina è cunfirmate l&#39;accessu à {{kind}} per unisce à a cunferenza."
+            "permissionDenied": "Permissione per {{kind}} denegata. Per piacè ricaricà sta pagina è cunfirmà l&#39;accessu à {{kind}} per unisce à a cunferenza."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Istruzzioni",
-            "permissionDenied": "U permissione per {{kind}} negatu. Per utilizallu per piacè seguite sti passi:",
+            "permissionDenied": "Permissione per {{kind}} denegata. Per aduprà, seguite questi passi:",
             "point1": "Andà à u vostru Settings Android",
-            "point2": "Apertura &quot;App &amp; notificazioni&quot;",
-            "point3": "Truvate &quot;{{communityName}}&quot; è apre u",
+            "point2": "Aprite &quot;Applicazioni è notificazioni&quot;",
+            "point3": "Truvate &quot;{{communityName}}&quot; è apre",
             "point4": "Tap nant&#39;à Permissions",
-            "point5": "Habilita {{kind}}"
+            "point5": "Attivà {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Istruzzioni",
-            "permissionDenied": "U permissione per {{kind}} negatu. Per utilizallu per piacè seguite sti passi:",
-            "point1": "Andà à u vostru Settings di iOS",
-            "point2": "Apertura &quot;Privacy&quot;",
-            "point3": "Truvate {{kind}} è apre lu",
-            "point4": "Truvate &quot;{{communityName}}&quot; è attivà"
+            "permissionDenied": "Permissione per {{kind}} denegata. Per aduprà, seguite questi passi:",
+            "point1": "Andà à u vostru Settings iOS",
+            "point2": "Aprite &quot;Privacy&quot;",
+            "point3": "Truvate {{kind}} è apre",
+            "point4": "Truvate &quot;{{communityName}}&quot; è attivate"
         },
         "notices": {
-            "youJoinedRoom": "Avete entratu in stanza",
-            "joining": "Unione: {{userName}}",
-            "sbLeftRoom": "{{userName}} ha lasciatu a stanza",
+            "youJoinedRoom": "Avete unitu à a stanza",
+            "joining": "Uniscimentu: {{userName}}",
+            "sbLeftRoom": "{{userName}} abbandunò a stanza",
             "youLeftRoom": "Avete lasciatu a stanza",
             "codeCopied": "Avete lasciatu a stanza",
-            "sbBeganFbLive": "{{userName}} hà iniziatu à trasmette sta chjamata in Facebook",
-            "sbStoppedFbLive": "{{userName}} ha cessatu di trasmette sta chjamata in Facebook",
-            "youBeganFbLive": "Avete cuminciatu à trasmissione sta chjamata in Facebook",
-            "youStoppedFbLive": "Avete dettu l&#39;emissioni di sta chjamata in Facebook",
+            "sbBeganFbLive": "{{userName}} hà cuminciatu à trasmette sta chjama in Facebook",
+            "sbStoppedFbLive": "{{userName}} hà cessatu di trasmette sta chjama in Facebook",
+            "youBeganFbLive": "Avete cuminciatu à trasmette sta chjama in Facebook",
+            "youStoppedFbLive": "Avete cessatu di trasmette sta chjama in Facebook",
             "linkCopiedToCb": "Link copiatu à u clipboard",
-            "codeCopiedToCb": "Codice copiatu à i clipboard",
-            "userHasNoVideo": "U participante ùn hà micca alcun video",
-            "openInBrowserAlert": "Link aperto in u navigatore Safari per unisce à a cunferenza.",
+            "codeCopiedToCb": "Codice copiatu in u clipboard",
+            "userHasNoVideo": "U participante ùn hà micca video",
+            "openInBrowserAlert": "Apri ligame in u navigatore Safari per unisce à a cunferenza.",
             "youBeganVideoRecording": "Avete cuminciatu à registrà sta cunferenza",
-            "youStoppedVideoRecording": "Avete firmatu di registrà sta cunferenza",
-            "switchingRoom": "Cambia ...",
-            "forceDisconnecting": "Sarete disconnessu in 5 secondi",
-            "youStartedLive": "Avete cuminciatu à trasmette sta chjamata à RTMP persunalizata",
-            "youStoppedLive": "Avete smessu di trasmette sta chjamata à RTMP persunalizata",
-            "sbStartedLiveStreaming": "{{userName}} hà principiatu in diretta",
-            "sbStoppedLiveStreaming": "{{userName}} finita in diretta",
-            "liveStopped": "Errore durante l&#39;inviu di u video à l&#39;endpoint",
-            "forceDisconnectingImmediately": "Avete statu scollegatu da un host"
+            "youStoppedVideoRecording": "Avete cessatu di arregistrà sta cunferenza",
+            "switchingRoom": "Stanza di cambiamentu ...",
+            "forceDisconnecting": "Vi sarà disconnected in 5 seconde",
+            "youStartedLive": "Avete cuminciatu à trasmette sta chjama à RTMP persunalizata",
+            "youStoppedLive": "Avete cessatu di trasmette sta chjama à RTMP persunalizata",
+            "sbStartedLiveStreaming": "{{userName}} hà cuminciatu in diretta",
+            "sbStoppedLiveStreaming": "{{userName}} finì in diretta",
+            "liveStopped": "Errore durante l&#39;invio di video à l&#39;endpoint",
+            "forceDisconnectingImmediately": "Avete statu disconnectatu da un host"
         },
         "settingsPopup": {
             "webCamera": "Camera Web",
-            "screenSharing": "Spartuta Screen",
-            "shareAnotherScreen": "Condividi un altru screnu",
-            "turnOffCameras": "Apaga tutte e camere",
-            "startFBLive": "Inizià Facebook Livestream",
-            "stopFBLive": "Pare Facebook Livestream",
-            "fbLiveTitle": "Titulu Vivu",
-            "fbLiveDescription": "Live Description",
-            "fbOnlyMeLiveAccess": "Solo Me",
-            "fbFriendsAccess": "Amichi",
+            "screenSharing": "Sharing Screen",
+            "shareAnotherScreen": "Sparte un altru screnu",
+            "turnOffCameras": "Spegne a camera",
+            "startFBLive": "Cumincià Facebook Livestream",
+            "stopFBLive": "Stop Facebook Livestream",
+            "fbLiveTitle": "Titulu di Livestream",
+            "fbLiveDescription": "Descrivite u vostru Livestream. Chì si tratta ?",
+            "fbOnlyMeLiveAccess": "Solu mè",
+            "fbFriendsAccess": "Amici",
             "fbPublicAccess": "Publicu",
-            "fbStartLive": "Vai Live",
-            "fbStopLive": "Fini Live",
-            "fbEmbedCode": "Incorpora",
+            "fbStartLive": "Andate in diretta",
+            "fbStopLive": "Finisce u livestream",
+            "fbEmbedCode": "Incrustà",
             "copy": "Copia",
-            "turnOffVideo": "Apaga a camara \/ schermu spartutu",
-            "turnOffScreenSharing": "Disattiva a spartera di schermu",
-            "cameraIsTurnedOff": "A camera hè disattivata",
-            "startRecording": "Cumincià a Registrazione",
-            "stopRecording": "Pare a registrazione",
-            "recordingInProgress": "A registrazione hè in corsu ...",
-            "publishOnTimeline": "Publicà nantu à a cronologia",
+            "turnOffVideo": "Disattiva a camera \/ schermu spartera",
+            "turnOffScreenSharing": "Disattiva a spartera di u screnu",
+            "cameraIsTurnedOff": "A camera hè spenta",
+            "startRecording": "Cumincià a registrazione",
+            "stopRecording": "Stop Recording",
+            "recordingInProgress": "A registrazione hè in corso...",
+            "publishOnTimeline": "Publicà nantu à u timeline",
             "publishToGroup": "Publicà à u gruppu",
-            "turnOffAudioInput": "Micca u micrufonu",
+            "turnOffAudioInput": "Mute microfonu",
             "micIsTurnedOff": "U microfonu hè disattivatu",
             "start": "Principià",
-            "stop": "Piantà",
-            "streamingSettings": "Impostazioni",
-            "streamToRTMP": "Stream à RTMP persunalizatu",
+            "stop": "Stop",
+            "streamingSettings": "Settings",
+            "streamToRTMP": "Stream à RTMP persunalizata",
             "dialogTitle": "Settings Video",
             "startBroadcasting": "Cumincià a trasmissione",
             "broadcastingInProgress": "A trasmissione hè in corso"
         },
         "participantsPopup": {
             "disconnect": "Disconnect",
-            "floatingScreens": "Screens Flottanti",
-            "tiledScreens": "Pantaloni piazzati",
-            "loudestExceptMe": "Più forte m&#39;hè Salvo",
-            "maximizeLoudest": "Maximizeghja più forte",
-            "staticMaximized": "Massimizatu staticu",
+            "floatingScreens": "schermi flottanti",
+            "tiledScreens": "Schermi piastrellati",
+            "loudestExceptMe": "U più forte eccettu mè",
+            "maximizeLoudest": "Maximize Loudest",
+            "staticMaximized": "Static Maximized",
             "manual": "Manuale",
-            "fullScreen": "Schermu sanu",
-            "turnOffCamera": "Oculta i video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Oculta a spartera di a pantalla",
-            "turnOnCamera": "Mostra video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Mostra u sparte di u screnu",
+            "fullScreen": "Pantalla piena",
+            "turnOffCamera": "Oculta u video",
+            "turnOffAudio": "Silenzia l&#39;audio",
+            "turnOffScreenSharing": "Oculte a spartera di u screnu",
+            "turnOnCamera": "Mostra u video",
+            "turnOnAudio": "Riattiva l&#39;audio",
+            "turnOnScreenSharing": "Mostra a spartera di u screnu",
             "dialogTitle": "Impostazioni di i participanti"
         },
-        "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à questu flussu.",
-        "streamTitle": "{{1}} chiamata in diretta",
+        "notAllowedToJoinCall": "Ùn avete micca permessu di unisce à stu flussu.",
+        "streamTitle": "{{1}} hà iniziatu una chjama in diretta",
         "preview": {
             "preamble": "Riunione:",
-            "Meeting": "Riunione",
+            "Meeting": "Reunione",
             "MeetingEnded": "A riunione hè finita"
         },
         "preparing": {
-            "micIsOff": "Mic hè spente",
-            "micIsOn": "Mic hè accesa",
-            "cameraIsOff": "A fotocamera hè spenta",
+            "micIsOff": "Mic hè spenta",
+            "micIsOn": "Mic hè attivatu",
+            "cameraIsOff": "A camera hè spenta",
             "cameraIsOn": "A camera hè accesa",
-            "screenSharingIsOn": "Screensharing hè attivatu",
-            "screenSharingIsOff": "Schernu di sparte",
-            "joinNow": "Unisciti à a Chjama"
+            "screenSharingIsOn": "U screensharing hè attivatu",
+            "screenSharingIsOff": "Share screen",
+            "joinNow": "Unisci à a Chjama"
         },
         "audioSettings": {
             "dialogTitle": "Settings Audio",
@@ -261,50 +261,50 @@
     },
     "messages": {
         "html": {
-            "posted": "signalatu un missaghju <em>{{message.fields.type}}<\/em> à {{stream.fields.title}}"
+            "posted": "hà publicatu un missaghju <em>{{message.fields.type}}<\/em> à {{stream.fields.title}}"
         },
         "text": {
             "commentedOn": "cummentatu",
             "in": "in",
             "body": "in {{& url}}: {{& message.fields.content}}",
             "relatedFrom": {
-                "hasBeenPostedTo": "hè statu posta in",
+                "hasBeenPostedTo": "hè stata publicata à",
                 "byAvatar": "da {{avatar.displayName}}"
             },
             "relatedTo": {
                 "hasANew": "hà un novu {{instructions.fromDisplayType}}",
                 "byAvatar": "aghjuntu da {{avatar.displayName}}"
             },
-            "startedCallIn": "hà cuminciatu una chjamata"
+            "startedCallIn": "hà iniziatu una chjama"
         }
     },
     "types": {
         "Streams\/invited": {
             "displayType": "Invitatu",
-            "description": "Inbox per inviti"
+            "description": "Inbox per l&#39;inviti"
         },
         "Streams\/resource": {
-            "displayType": "U risorse",
-            "description": "flussu di gestione di l&#39;accessu à una risorsa è di mandà messaggi riguardanti aghjornamenti"
+            "displayType": "Risorsa",
+            "description": "flussu per gestisce l&#39;accessu à una risorsa è pubblicà missaghji nantu à l&#39;aghjurnamenti"
         },
         "Streams\/task": {
-            "description": "per riceve aghjurnamenti annantu à u prugressu nantu à un certu compitu",
+            "description": "per riceve l&#39;aghjurnamenti nantu à u prugressu in una certa attività",
             "displayType": "Task"
         },
         "Streams\/tasks": {
             "description": "categuria per i travaglii",
-            "displayType": "Impegni"
+            "displayType": "I compiti"
         },
         "Streams\/experience": {
             "description": "una sperienza cumuna per i membri di una cumunità",
-            "displayType": "Esperienza cumuni per i membri di una cumunità"
+            "displayType": "Esperienza cumuna per i membri di una cumunità"
         },
         "Streams\/greeting": {
-            "description": "salutazione cù quale un utilizatore si pò presentà",
+            "description": "salutu cù quale un utilizatore pò presentà si",
             "displayType": "Salutu"
         },
         "Streams\/number": {
-            "displayType": "Numero",
+            "displayType": "numeru",
             "description": "numeru matematicu"
         },
         "Streams\/date": {
@@ -321,7 +321,7 @@
         },
         "Streams\/text\/medium": {
             "displayType": "Testu",
-            "description": "corpu di testu di mediu"
+            "description": "corpu mediu di testu"
         },
         "Streams\/text\/emailAddress": {
             "displayType": "Indirizzu mail",
@@ -333,71 +333,71 @@
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "ligame nantu à u web"
+            "description": "ligame nant&#39;à u web"
         },
         "Streams\/image": {
-            "displayType": "Maghjina",
-            "description": "maghjina visuale",
-            "newItem": "Aghjunghje Immagine"
+            "displayType": "Image",
+            "description": "imagine visuale",
+            "newItem": "Aggiungi Image"
         },
         "Streams\/images": {
-            "displayType": "Galleria di Image",
-            "description": "galeria d&#39;imaghjini"
+            "displayType": "Galleria d&#39;Image",
+            "description": "galerie d&#39;imaghjini"
         },
         "Streams\/album": {
-            "displayType": "Àlbum",
-            "description": "un album à quale diverse media sò in relazione"
+            "displayType": "Album",
+            "description": "un album à quale parechji media sò in relazione"
         },
         "Streams\/file": {
             "displayType": "File",
-            "description": "u schedariu carricatu",
-            "newItem": "Aghjunghje File"
+            "description": "u schedariu caricatu",
+            "newItem": "Add File"
         },
         "Streams\/audio": {
-            "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Aghjunghje Audio"
+            "displayType": "Clip audio",
+            "description": "clip audio",
+            "newItem": "Add Audio"
         },
         "Streams\/video": {
             "displayType": "Video Clip",
-            "description": "video",
-            "newItem": "Aghjunghje Video"
+            "description": "video clip",
+            "newItem": "Add Video"
         },
         "Streams\/live": {
-            "displayType": "In diretta",
+            "displayType": "Livestream",
             "description": "audio o video in diretta"
         },
         "Streams\/category": {
-            "displayType": "Categoria",
+            "displayType": "categuria",
             "description": "una categuria à quale altri flussi ponu esse ligati"
         },
         "Streams\/participating": {
-            "displayType": "Indici participanti",
-            "description": "i flussi sò rilativi \/ ùn anu micca relazione cù questu quandu un utilizatore si unisce \/ lascia"
+            "displayType": "Indice di participazione",
+            "description": "I flussi sò ligati \/ senza relazione cù questu quandu un utilizatore si unisce \/ esce"
         },
         "Streams\/interest": {
             "displayType": "Interessu",
-            "description": "rapprisenta l&#39;interessu di un utilizatore in un certu tema"
+            "description": "rapprisenta l&#39;interessu di l&#39;utilizatori in un certu tema"
         },
         "Streams\/incoming": {
-            "displayType": "Invenuta",
-            "description": "destinazione per i messaggi mandati da altri utilizatori"
+            "displayType": "Arrivutu",
+            "description": "destinazione per i missaghji mandati da altri utilizatori"
         },
         "Streams\/chat": {
             "displayType": "Cunversazione",
-            "description": "una cunversazione trà l&#39;utilizatori, cù a storia"
+            "description": "una conversazione trà utilizatori, cù a storia"
         },
         "Streams\/webrtc": {
-            "displayType": "Chjamate in tempu reale",
+            "displayType": "Chjama in tempu reale",
             "description": "una chjama video \/ audio in tempu reale"
         },
         "Streams\/pdf": {
-            "displayType": "Documentu PDF",
-            "description": "Documentu PDF",
-            "newItem": "Aghjunghje PDF"
+            "displayType": "document PDF",
+            "description": "document PDF",
+            "newItem": "Aghjunghjite PDF"
         },
         "Streams\/question": {
-            "displayType": "Dumanda",
+            "displayType": "Quistione",
             "description": "flussu di quistione"
         },
         "Streams\/answer": {
@@ -405,38 +405,38 @@
             "description": "flussu di risposta"
         },
         "Streams\/calls": {
-            "displayType": "Chjamate",
-            "description": "categuria per Streams \/ webrtc",
-            "MaxRelationsExceeded": "Max chiamate superate"
+            "displayType": "Chjama",
+            "description": "categuria per Streams\/webrtc",
+            "MaxRelationsExceeded": "U massimu di chjama superatu"
         }
     },
     "participating": {
         "Title": "Titulu",
-        "Subscribed": "Abbunatu",
-        "Participants": "Participanti",
-        "AreYouSureRemoveIdentifier": "Hè sicura di sguassà stu identificatore?",
-        "AreYouSureUnsubscribeIdentifier": "Hè sicura di desubscrive stu identificatore? Disattiva i notificazioni à questu identificatore.",
-        "AreYouSureUnsubscribeDevice": "Hè sicura di desubscrive stu dispusitivu? Chiuderà i notificazioni à stu dispusitivu.",
+        "Subscribed": "Abbonatu",
+        "Participants": "I participanti",
+        "AreYouSureRemoveIdentifier": "Sò sicuru di sguassà stu identificatore ?",
+        "AreYouSureUnsubscribeIdentifier": "Sò sicuru di annullà stu identificatore? Spegnerà e notificazioni à questu identificatore.",
+        "AreYouSureUnsubscribeDevice": "Sò sicuru di annullà l&#39;abbonamentu di stu dispusitivu? Spegnerà e notificazioni à stu dispusitivu.",
         "Identifiers": "Identificatori",
-        "Devices": "U dispositivu",
-        "Streams": "Strati",
-        "AreYouSureRemoveParticipant": "Hè sicuru chì vulete sguassà stu participante?",
-        "RemoveParticipant": "Elimina u participante"
+        "Devices": "Dispositivi",
+        "Streams": "Flussi",
+        "AreYouSureRemoveParticipant": "Sò sicuru chì vulete sguassà stu participante ?",
+        "RemoveParticipant": "Elimina participant"
     },
     "menu": {
-        "placeholder": "tipu titulu di pagina",
-        "ModTab": "Modificà Articulu",
+        "placeholder": "scrivite u titulu di a pagina",
+        "ModTab": "Mudificà l&#39;articulu",
         "Save": "Salvà",
-        "Delete": "Elimina",
-        "Submenu": "Submenu"
+        "Delete": "Sguassà",
+        "Submenu": "Sottomenu"
     },
     "errors": {
         "HiddenFromYou": "Stu cuntenutu hè oculatu da voi."
     },
     "audio": {
-        "record": "Récord",
+        "record": "Record",
         "reset": "Resettate",
-        "edit": "Mudificà",
+        "edit": "Edit",
         "title": "titulu",
         "description": "descrizzione",
         "upload": "Caricà",
@@ -445,14 +445,14 @@
         "save": "Salvà",
         "setClip": "Tagliate Clip",
         "invalidURL": "URL invalidu",
-        "invalidFile": "Fichju invalidu",
-        "errorNoSource": "Nisuna surghjente audio",
+        "invalidFile": "File invalidu",
+        "errorNoSource": "Nisuna fonte audio",
         "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
-        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+        "errorFileSize": "Scusate, ma u schedariu troppu grande.<br> A dimensione massima di u schedariu hè {{size}}"
     },
     "video": {
         "reset": "Resettate",
-        "edit": "Mudificà",
+        "edit": "Edit",
         "title": "titulu",
         "description": "descrizzione",
         "upload": "Caricà",
@@ -461,14 +461,14 @@
         "save": "Salvà",
         "setClip": "Tagliate Clip",
         "invalidURL": "URL invalidu",
-        "invalidFile": "Fichju invalidu",
-        "errorNoSource": "Nisuna surghjente video",
+        "invalidFile": "File invalidu",
+        "errorNoSource": "Nisuna fonte video",
         "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
-        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+        "errorFileSize": "Scusate, ma u schedariu troppu grande.<br> A dimensione massima di u schedariu hè {{size}}"
     },
     "pdf": {
         "reset": "Resettate",
-        "edit": "Mudificà",
+        "edit": "Edit",
         "title": "titulu",
         "description": "descrizzione",
         "upload": "Caricà",
@@ -477,14 +477,14 @@
         "save": "Salvà",
         "setClip": "Tagliate Clip",
         "invalidURL": "URL invalidu",
-        "invalidFile": "Fichju invalidu",
-        "errorNoSource": "Nisuna surghjente pdf",
+        "invalidFile": "File invalidu",
+        "errorNoSource": "Nisuna fonte pdf",
         "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
-        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}"
+        "errorFileSize": "Scusate, ma u schedariu troppu grande.<br> A dimensione massima di u schedariu hè {{size}}"
     },
     "image": {
         "reset": "Resettate",
-        "edit": "Mudificà",
+        "edit": "Edit",
         "title": "titulu",
         "description": "descrizzione",
         "upload": "Caricà",
@@ -493,46 +493,46 @@
         "save": "Salvà",
         "setClip": "Tagliate Clip",
         "invalidURL": "URL invalidu",
-        "invalidFile": "Fichju invalidu",
-        "errorNoSource": "Nisuna surghjente di maghjina",
+        "invalidFile": "File invalidu",
+        "errorNoSource": "Nisuna fonte d&#39;imaghjini",
         "uploadLimit": "Dimensione massima di u schedariu: {{size}}",
-        "errorFileSize": "Scusate, ma u schedariu hè troppu grande.<br> A dimensione massima di u fugliale hè {{size}}",
-        "uploadedImage": "Imagine caricata",
-        "imageTitle": "Titulu di l&#39;immagine"
+        "errorFileSize": "Scusate, ma u schedariu troppu grande.<br> A dimensione massima di u schedariu hè {{size}}",
+        "uploadedImage": "Immagine caricata",
+        "imageTitle": "Titulu di l&#39;imagine"
     },
     "questions": {
         "Questions": "Dumande",
         "Answers": "Risposte",
-        "AnswerQuestion": "Risponde à a dumanda",
-        "SetYourAnswer": "Per piacè risponde à a dumanda",
-        "NewQuestion": "Nova dumanda",
-        "NewAnswer": "Risposta nova",
-        "AnswerDetails": "Rispondi à i Dettagli",
+        "AnswerQuestion": "Rispondi à a quistione",
+        "SetYourAnswer": "Per piacè risponde à a quistione",
+        "NewQuestion": "Nova Question",
+        "NewAnswer": "Nova Risposta",
+        "AnswerDetails": "Rispondi Dettagli",
         "answerOption": "Opzione",
         "answerOptionExclusive": "Esclusivu",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "risposta libera ...",
-        "SaveQuestion": "Salva Quistione",
-        "SaveAnswer": "Salvà a Risposta",
-        "AddAnotherAnswer": "Aghjustate una altra risposta",
+        "answerTextarea": "Area di testu",
+        "FreeAnswer": "Scrivite a vostra risposta quì",
+        "SaveQuestion": "Salvà a quistione",
+        "SaveAnswer": "Salvà Risposta",
+        "AddAnotherAnswer": "Aghjunghjite una altra risposta",
         "ErrorAnswers": "Per piacè aghjunghje ancu una risposta",
         "AlreadyAnswered": "Digià rispostu",
         "TitlePlaceholder": "Scrivite a vostra dumanda",
-        "ContentPlaceholder": "Mettite ogni infurmazione addiziunale quì per aiutà a ghjente à risponde",
-        "ErrorTitle": "Dumanda necessaria",
+        "ContentPlaceholder": "Mettite qualsiasi infurmazione supplementaria quì per aiutà e persone à risponde",
+        "ErrorTitle": "Quistione necessaria",
         "Placeholder": "Placeholder"
     },
     "experience": {
-        "NewExperience": "Nova Esperienza",
-        "DefineTitle": "Per piacè definite un titulu",
-        "Create": "Creà"
+        "NewExperience": "Esperienza nova",
+        "DefineTitle": "Per piacè definisce un titulu",
+        "Create": "Crià"
     },
     "calls": {
-        "SettingsTitle": "Chjamate",
+        "SettingsTitle": "Chjama",
         "MaxCalls": "Max chjama",
-        "Update": "Aghjurnamentu",
-        "NoCallsYet": "Mancu chjama",
-        "CallReasonTitle": "Di chì tratta sta chjama?",
+        "Update": "Actualizazione",
+        "NoCallsYet": "Nisuna chjama ancora",
+        "CallReasonTitle": "Chì ghjè sta chjama?",
         "WaitingRoom": "Sala d&#39;attesa"
     }
 }

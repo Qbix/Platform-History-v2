@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Error {{status}} durante la solicitud",
+        "canceled": "Solicitud cancelada",
+        "500": "Error de servidor interno",
+        "404": "No encontrado: {{url}}",
+        "501": "Solicitud interrumpida"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Sesión expirada. Actualice la página y vuelva a intentarlo.",
+        "otherDomain": "Solicitud de dominio cruzado bloqueada a dominio extranjero en {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
+        "tap": "grifo",
+        "click": "hacer clic",
+        "yes": "sí",
+        "no": "No",
+        "Tap": "Grifo",
+        "Click": "Hacer clic",
+        "Yes": "sí",
         "No": "No"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "enero",
+        "2": "febrero",
+        "3": "marcha",
+        "4": "abril",
+        "5": "Mayo",
+        "6": "junio",
+        "7": "mes de julio",
+        "8": "agosto",
+        "9": "septiembre",
+        "10": "octubre",
+        "11": "noviembre",
+        "12": "diciembre"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "segundo",
+        "seconds": "segundos",
+        "minute": "minuto",
+        "minutes": "minutos",
+        "hour": "horas",
+        "day": "día",
+        "days": "días",
+        "week": "semana",
+        "weeks": "semanas",
+        "month": "mes",
+        "months": "meses",
+        "year": "año",
+        "years": "años",
+        "decade": "década",
+        "decades": "décadas",
+        "century": "siglo",
+        "centuries": "siglos"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Permita el acceso a su micrófono",
+        "record": "Registro",
+        "recording": "Grabación",
+        "remains": "restos",
+        "maximum": "máximo",
+        "playing": "Jugando",
+        "recorded": "Grabado",
+        "clip": "acortar",
+        "discard": "Descarte",
+        "encoding": "Codificación"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "acortar",
+        "errorNoSource": "Sin fuente de video",
+        "SkipAfter": "Saltar después",
+        "Skip": "Saltar"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "acortar",
+        "errorNoSource": "Sin fuente en pdf"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Establecer inicio de clip",
+        "ClipStart": "Comienzo del clip",
+        "SetClipEnd": "Establecer final de clip",
+        "ClipEnd": "Final del clip",
+        "StartMoreEnd": "La posición inicial no puede ser más que la posición final",
+        "EndLessStart": "La posición final no puede ser inferior a la posición inicial",
+        "WhichInvalid": "Argumento &#39;cuál&#39; inválido"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Alerta"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
+        "title": "Confirmar",
+        "ok": "sí",
         "cancel": "No"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Inmediato",
+        "ok": "Vamos"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "más",
+        "Menu": "Menú"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Error al leer el archivo",
+        "errorType": "Lo sentimos, pero este tipo de archivo no es compatible",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Que te gustaría hacer?",
+            "photo": "Tomar nueva foto",
+            "library": "Seleccionar de la biblioteca"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Por favor elige una imagen más grande.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Ajustar tamaño y posición",
+            "touchscreen": "Usa tus dedos para hacer zoom y arrastrar",
+            "notTouchscreen": "Use su mouse y rueda para hacer zoom y arrastrar"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "anoche",
+        "lastEvening": "última víspera",
+        "yesterday": "ayer",
+        "thisMorning": "esta mañana",
+        "today": "hoy dia",
+        "tonight": "esta noche",
+        "tomorrowMorning": "Tom mañana",
+        "tomorrow": "mañana",
+        "hoursAgo": "Hace {{h}} horas",
+        "hourAgo": "Hace {{h}} hora",
+        "minuteAgo": "Hace {{m}} minutos",
+        "minutesAgo": "Hace {{m}} minutos",
+        "secondAgo": "Hace {{s}} segundos",
+        "secondsAgo": "Hace {{s}} segundos",
+        "fewSecondsAgo": "hace segundos",
+        "rightNow": "ahora",
+        "inSecond": "en {{s}} segundo",
+        "inSeconds": "en {{s}} segundos",
+        "inMinute": "en {{m}} minuto",
+        "inMinutes": "en {{m}} minutos",
+        "inHour": "en {{h}} hora",
+        "inHours": "en {{h}} horas",
+        "inUnderMinute": "en menos de 1 minuto"
     }
 }

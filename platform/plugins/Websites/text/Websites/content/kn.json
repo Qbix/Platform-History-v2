@@ -2,73 +2,73 @@
     "advert": {
         "campaign": {
             "placeholders": {
-                "link": "Link to promote",
-                "startDate": "Start Date",
-                "startTime": "Start Time",
-                "endDate": "End Date",
-                "endTime": "End Time",
-                "budget": "Budget"
+                "link": "ಪ್ರಚಾರ ಮಾಡಲು ಲಿಂಕ್",
+                "startDate": "ಪ್ರಾರಂಭ ದಿನಾಂಕ",
+                "startTime": "ಆರಂಭವಾಗುವ",
+                "endDate": "ಅಂತಿಮ ದಿನಾಂಕ",
+                "endTime": "ಅಂತಿಮ ಸಮಯ",
+                "budget": "ಬಜೆಟ್"
             },
             "interests": {
-                "Title": "Filter By Interest",
-                "FilterInterests": "Start typing an interest..."
+                "Title": "ಆಸಕ್ತಿಯಿಂದ ಫಿಲ್ಟರ್ ಮಾಡಿ",
+                "FilterInterests": "ಆಸಕ್ತಿಯನ್ನು ಟೈಪ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ..."
             },
-            "Interest": "Interest",
-            "Location": "Location"
+            "Interest": "ಆಸಕ್ತಿ",
+            "Location": "ಸ್ಥಳ"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Go",
+            "Go": "ಹೋಗು",
             "PasteLinkHere": "https:\/\/...",
-            "BrowseTheWeb": "Browse",
-            "WriteToStartConversation": "Write your thoughts to start off the conversation",
-            "StartConversation": "Start Conversation",
-            "GotoConversation": "Go to Conversation",
-            "reset": "Reset",
-            "edit": "Edit",
-            "link": "Link",
-            "setUrl": "Set URL",
-            "save": "Save",
-            "setClip": "Cut Out Clip",
-            "invalidURL": "Invalid URL"
+            "BrowseTheWeb": "ಬ್ರೌಸ್",
+            "WriteToStartConversation": "ಸಂಭಾಷಣೆಯನ್ನು ಪ್ರಾರಂಭಿಸಲು ನಿಮ್ಮ ಆಲೋಚನೆಗಳನ್ನು ಬರೆಯಿರಿ",
+            "StartConversation": "ಸಂಭಾಷಣೆಯನ್ನು ಪ್ರಾರಂಭಿಸಿ",
+            "GotoConversation": "ಸಂವಾದಕ್ಕೆ ಹೋಗಿ",
+            "reset": "ಮರುಹೊಂದಿಸಿ",
+            "edit": "ತಿದ್ದು",
+            "link": "ಲಿಂಕ್",
+            "setUrl": "URL ಹೊಂದಿಸಿ",
+            "save": "ಉಳಿಸಿ",
+            "setClip": "ಕ್ಲಿಪ್ ಕತ್ತರಿಸಿ",
+            "invalidURL": "ಅಮಾನ್ಯ URL"
         },
-        "FileTooLarge": "File too large for caching. Max file size {{size}}",
-        "InvalidPDF": "File is not a valid PDF",
-        "StartTypingTitleOrKeywords": "Start typing title or keywords..."
+        "FileTooLarge": "ಹಿಡಿದಿಟ್ಟುಕೊಳ್ಳಲು ಫೈಲ್ ತುಂಬಾ ದೊಡ್ಡದಾಗಿದೆ. ಗರಿಷ್ಠ ಫೈಲ್ ಗಾತ್ರ {{size}}",
+        "InvalidPDF": "ಫೈಲ್ ಮಾನ್ಯವಾದ PDF ಅಲ್ಲ",
+        "StartTypingTitleOrKeywords": "ಶೀರ್ಷಿಕೆ ಅಥವಾ ಕೀವರ್ಡ್‌ಗಳನ್ನು ಟೈಪ್ ಮಾಡಲು ಪ್ರಾರಂಭಿಸಿ..."
     },
     "types": {
         "Websites\/article": {
-            "description": "An HTML document that various users can view and edit",
-            "displayType": "Article"
+            "description": "ವಿವಿಧ ಬಳಕೆದಾರರು ವೀಕ್ಷಿಸಬಹುದಾದ ಮತ್ತು ಸಂಪಾದಿಸಬಹುದಾದ HTML ಡಾಕ್ಯುಮೆಂಟ್",
+            "displayType": "ಲೇಖನ"
         },
         "Websites\/slide": {
-            "description": "A slide in a presentation, can include HTML, audio etc.",
-            "displayType": "Slide"
+            "description": "ಪ್ರಸ್ತುತಿಯಲ್ಲಿನ ಸ್ಲೈಡ್, HTML, ಆಡಿಯೋ ಇತ್ಯಾದಿಗಳನ್ನು ಒಳಗೊಂಡಿರುತ್ತದೆ.",
+            "displayType": "ಸ್ಲೈಡ್"
         },
         "Websites\/presentation": {
-            "description": "A presentation consisting of various slides",
-            "displayType": "Presentation"
+            "description": "ವಿವಿಧ ಸ್ಲೈಡ್‌ಗಳನ್ನು ಒಳಗೊಂಡಿರುವ ಪ್ರಸ್ತುತಿ",
+            "displayType": "ಪ್ರಸ್ತುತಿ"
         },
         "Websites\/advert\/unit": {
-            "description": "An advertising unit on a website",
-            "displayType": "Advert unit"
+            "description": "ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಜಾಹೀರಾತು ಘಟಕ",
+            "displayType": "ಜಾಹೀರಾತು ಘಟಕ"
         },
         "Websites\/advert\/placement": {
-            "description": "A way of grouping advertising units under a name",
-            "displayType": "Advert placement"
+            "description": "ಹೆಸರಿನಡಿಯಲ್ಲಿ ಜಾಹೀರಾತು ಘಟಕಗಳನ್ನು ಗುಂಪು ಮಾಡುವ ವಿಧಾನ",
+            "displayType": "ಜಾಹೀರಾತು ನಿಯೋಜನೆ"
         },
         "Websites\/advert\/creative": {
-            "description": "Content for an advertisement",
-            "displayType": "Advert creative"
+            "description": "ಜಾಹೀರಾತಿಗಾಗಿ ವಿಷಯ",
+            "displayType": "ಜಾಹೀರಾತು ಸೃಜನಶೀಲ"
         },
         "Websites\/advert\/campaign": {
-            "description": "An advertising campaign",
-            "displayType": "Advert campaign"
+            "description": "ಒಂದು ಜಾಹೀರಾತು ಪ್ರಚಾರ",
+            "displayType": "ಜಾಹೀರಾತು ಪ್ರಚಾರ"
         },
         "Websites\/webpage": {
-            "description": "Represents a website whose metadata was scraped",
-            "displayType": "Web page"
+            "description": "ಮೆಟಾಡೇಟಾವನ್ನು ಸ್ಕ್ರ್ಯಾಪ್ ಮಾಡಿದ ವೆಬ್‌ಸೈಟ್ ಅನ್ನು ಪ್ರತಿನಿಧಿಸುತ್ತದೆ",
+            "displayType": "ಅಂತರ್ಜಾಲ ಪುಟ"
         }
     }
 }

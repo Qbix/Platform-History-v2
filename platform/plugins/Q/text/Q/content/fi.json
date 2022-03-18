@@ -1,143 +1,143 @@
 {
     "request": {
-        "error": "Error {{status}} during request",
-        "canceled": "Request canceled",
-        "500": "Internal server error",
-        "404": "Not found: {{url}}",
-        "501": "Request interrupted"
+        "error": "Virhe {{status}} pyynnön aikana",
+        "canceled": "Pyyntö peruttu",
+        "500": "Sisäinen palvelinvirhe",
+        "404": "Ei löydy: {{url}}",
+        "501": "Pyyntö keskeytetty"
     },
     "nonce": {
-        "sameDomain": "Session expired. Refresh the page and try again.",
-        "otherDomain": "Blocked cross-domain request to foreign domain at {{baseUrl}}"
+        "sameDomain": "Istunto päättyi. Päivitä sivu ja yritä uudelleen.",
+        "otherDomain": "Estetty verkkotunnusten välinen pyyntö vieraalle verkkotunnukselle osoitteessa {{baseUrl}}"
     },
     "words": {
-        "tap": "tap",
-        "click": "click",
-        "yes": "yes",
-        "no": "no",
-        "Tap": "Tap",
-        "Click": "Click",
-        "Yes": "Yes",
-        "No": "No"
+        "tap": "napauta",
+        "click": "klikkaus",
+        "yes": "Joo",
+        "no": "ei",
+        "Tap": "Napauta",
+        "Click": "Klikkaus",
+        "Yes": "Joo",
+        "No": "Ei"
     },
     "months": {
-        "1": "January",
-        "2": "February",
-        "3": "March",
-        "4": "April",
-        "5": "May",
-        "6": "June",
-        "7": "July",
-        "8": "August",
-        "9": "September",
-        "10": "October",
-        "11": "November",
-        "12": "December"
+        "1": "tammikuu",
+        "2": "helmikuu",
+        "3": "maaliskuuta",
+        "4": "huhtikuu",
+        "5": "saattaa",
+        "6": "kesäkuuta",
+        "7": "heinäkuu",
+        "8": "elokuu",
+        "9": "syyskuu",
+        "10": "lokakuu",
+        "11": "marraskuu",
+        "12": "joulukuu"
     },
     "durations": {
-        "second": "second",
-        "seconds": "seconds",
-        "minute": "minute",
-        "minutes": "minutes",
-        "hour": "hours",
-        "day": "day",
-        "days": "days",
-        "week": "week",
-        "weeks": "weeks",
-        "month": "month",
-        "months": "months",
-        "year": "year",
-        "years": "years",
-        "decade": "decade",
-        "decades": "decades",
-        "century": "century",
-        "centuries": "centuries"
+        "second": "toinen",
+        "seconds": "sekuntia",
+        "minute": "minuutti",
+        "minutes": "pöytäkirja",
+        "hour": "tuntia",
+        "day": "päivä",
+        "days": "päivää",
+        "week": "viikko",
+        "weeks": "viikkoa",
+        "month": "kuukausi",
+        "months": "kuukaudet",
+        "year": "vuosi",
+        "years": "vuotta",
+        "decade": "vuosikymmen",
+        "decades": "vuosikymmeniä",
+        "century": "vuosisadalla",
+        "centuries": "vuosisadat"
     },
     "audio": {
-        "allowMicrophoneAccess": "Please allow access to your microphone",
-        "record": "Record",
-        "recording": "Recording",
-        "remains": "remains",
-        "maximum": "maximum",
-        "playing": "Playing",
-        "recorded": "Recorded",
-        "clip": "clip",
-        "discard": "Discard",
-        "encoding": "Encoding"
+        "allowMicrophoneAccess": "Salli mikrofonisi käyttö",
+        "record": "Ennätys",
+        "recording": "Äänite",
+        "remains": "jäännökset",
+        "maximum": "enimmäismäärä",
+        "playing": "Pelaaminen",
+        "recorded": "Äänitetty",
+        "clip": "leike",
+        "discard": "Hävitä",
+        "encoding": "Koodaus"
     },
     "video": {
-        "clip": "clip",
-        "errorNoSource": "No video source",
-        "SkipAfter": "Skip after",
-        "Skip": "Skip"
+        "clip": "leike",
+        "errorNoSource": "Ei videolähdettä",
+        "SkipAfter": "Ohita jälkeen",
+        "Skip": "Ohita"
     },
     "pdf": {
-        "clip": "clip",
-        "errorNoSource": "No pdf source"
+        "clip": "leike",
+        "errorNoSource": "Ei pdf-lähdettä"
     },
     "clip": {
-        "SetClipStart": "Set Clip Start",
-        "ClipStart": "Clip Start",
-        "SetClipEnd": "Set Clip End",
-        "ClipEnd": "Clip End",
-        "StartMoreEnd": "Start position can't be more than end position",
-        "EndLessStart": "End position can't be less than start position",
-        "WhichInvalid": "Argument 'which' invalid"
+        "SetClipStart": "Aseta leikkeen aloitus",
+        "ClipStart": "Leikkeen aloitus",
+        "SetClipEnd": "Aseta leikkeen loppu",
+        "ClipEnd": "Leikkeen loppu",
+        "StartMoreEnd": "Aloitusasento ei voi olla enempää kuin loppuasento",
+        "EndLessStart": "Loppuasento ei voi olla pienempi kuin aloitusasento",
+        "WhichInvalid": "Argumentti &quot;mikä&quot; on virheellinen"
     },
     "alert": {
-        "title": "Alert"
+        "title": "Varoitus"
     },
     "confirm": {
-        "title": "Confirm",
-        "ok": "Yes",
-        "cancel": "No"
+        "title": "Vahvistaa",
+        "ok": "Joo",
+        "cancel": "Ei"
     },
     "prompt": {
-        "title": "Prompt",
-        "ok": "Go"
+        "title": "Kehote",
+        "ok": "Mennä"
     },
     "tabs": {
-        "more": "more",
-        "Menu": "Menu"
+        "more": "lisää",
+        "Menu": "Valikko"
     },
     "imagepicker": {
-        "errorReadingFile": "Error reading file",
-        "errorType": "Sorry, but this file type not supported",
+        "errorReadingFile": "Virhe tiedoston lukemisessa",
+        "errorType": "Valitettavasti tätä tiedostotyyppiä ei tueta",
         "cameraCommands": {
-            "prompt": "What would you like to do?",
-            "photo": "Take new photo",
-            "library": "Select from library"
+            "prompt": "Mitä haluaisit tehdä?",
+            "photo": "Ota uusi kuva",
+            "library": "Valitse kirjastosta"
         },
-        "tooSmall": "Please choose a larger image.",
+        "tooSmall": "Valitse suurempi kuva.",
         "cropping": {
-            "title": "Adjust size and position",
-            "touchscreen": "Use your fingers to zoom and drag",
-            "notTouchscreen": "Use your mouse & wheel to zoom and drag"
+            "title": "Säädä kokoa ja sijaintia",
+            "touchscreen": "Zoomaa ja vedä sormillasi",
+            "notTouchscreen": "Zoomaa ja vedä hiirellä ja rullalla"
         }
     },
     "timestamp": {
-        "lastNight": "last night",
-        "lastEvening": "last eve",
-        "yesterday": "yesterday",
-        "thisMorning": "this morn",
-        "today": "today",
-        "tonight": "tonight",
-        "tomorrowMorning": "tom morn",
-        "tomorrow": "tomorrow",
-        "hoursAgo": "{{h}} hours ago",
-        "hourAgo": "{{h}} hour ago",
-        "minuteAgo": "{{m}} minute ago",
-        "minutesAgo": "{{m}} minutes ago",
-        "secondAgo": "{{s}} second ago",
-        "secondsAgo": "{{s}} seconds ago",
-        "fewSecondsAgo": "seconds ago",
-        "rightNow": "right now",
-        "inSecond": "in {{s}} second",
-        "inSeconds": "in {{s}} seconds",
-        "inMinute": "in {{m}} minute",
-        "inMinutes": "in {{m}} minutes",
-        "inHour": "in {{h}} hour",
-        "inHours": "in {{h}} hours",
-        "inUnderMinute": "in under 1 minute"
+        "lastNight": "viime yö",
+        "lastEvening": "viime aattona",
+        "yesterday": "eilen",
+        "thisMorning": "tänä aamuna",
+        "today": "tänään",
+        "tonight": "tänä yönä",
+        "tomorrowMorning": "huomenta",
+        "tomorrow": "huomenna",
+        "hoursAgo": "{{h}} tuntia sitten",
+        "hourAgo": "{{h}} tunti sitten",
+        "minuteAgo": "{{m}} minuutti sitten",
+        "minutesAgo": "{{m}} minuuttia sitten",
+        "secondAgo": "{{s}} sekunti sitten",
+        "secondsAgo": "{{s}} sekuntia sitten",
+        "fewSecondsAgo": "sekuntia sitten",
+        "rightNow": "juuri nyt",
+        "inSecond": "{{s}} sekunnissa",
+        "inSeconds": "{{s}} sekunnissa",
+        "inMinute": "{{m}} minuutissa",
+        "inMinutes": "{{m}} minuutissa",
+        "inHour": "{{h}} tunnin kuluttua",
+        "inHours": "{{h}} tunnissa",
+        "inUnderMinute": "alle 1 minuutissa"
     }
 }

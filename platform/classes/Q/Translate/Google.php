@@ -14,7 +14,6 @@ class   Q_Translate_Google {
 		$locale = count($parts) > 1 ? $parts[1] : null;
 		$in = $this->parent->getSrc($fromLang, $locale, true);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
-			var_dump($toLang);
 			if (($toLang === $fromLang) && $this->parent->options['out']) {
 				$res = $in;
 			}
@@ -120,12 +119,14 @@ class   Q_Translate_Google {
 		$in = $this->replaceTagsByNumbers($in);
 		$in2 = array();
 		$rt = Q::ifset($this, 'parent', 'options', 'retranslate', array());
+		$rta = Q::ifset($this, 'parent', 'options', 'retranslate-all', null);
+		$translateAll = isset($rta);
 		$rt = is_array($rt) ? $rt : array($rt);
 		foreach ($in as $n => $v) {
 			$key = $v['dirname'] . "\t" . implode("\t", $v['key']);
 			$key2 = implode("/", $v['key']);
 			$doIt = false;
-			if (empty($out[$key])) {
+			if (empty($out[$key]) or $translateAll) {
 				$doIt = true;
 			} else {
 				foreach ($rt as $v2) {
@@ -163,7 +164,7 @@ class   Q_Translate_Google {
 			if (!$response) {
 				throw new Q_Exception ("Bad translation response");
 			}
-			if ($response['error']) {
+			if (!empty($response['error'])) {
 				$more = "Make sure you have Q/translate/google/key specified.";
 				throw new Q_Exception($response['error']['message'] . ' ' . $more);
 			}

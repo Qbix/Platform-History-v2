@@ -1,54 +1,54 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Հպեք ՝ վճարելու համար"
+        "button": "Հպեք՝ վճարելու համար"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}. Վճարը մշակվում է {{call 'user.displayName'}} - ի համար",
-        "ThankYouForYourPayment": "Շնորհակալություն {{call 'publisher.displayName'}} - ին վճարման համար",
-        "SubscribedTo": "{{call 'user.displayName'}} բաժանորդագրվել է {{plan.title}} - ին",
-        "YouSubscribedTo": "Դուք բաժանորդագրված եք {{plan.title}} - ին"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}. վճարը մշակվել է {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Շնորհակալություն {{call 'publisher.displayName'}}-ին ձեր վճարման համար",
+        "SubscribedTo": "{{call 'user.displayName'}} բաժանորդագրվել է {{plan.title}}",
+        "YouSubscribedTo": "Դուք բաժանորդագրված եք {{plan.title}}-ին"
     },
     "charge": {
-        "Subject": "Դուք վճարում եք {{displayAmount}} - ի արժեքը {{call 'publisher.displayName'}} - ից «{{description}}» - ի կողմից",
-        "HasBeenCharged": "Այո, սա պարզապես ձեզ տեղեկացնելու համար է, որ {{1}} - ը գանձվել է {{2}} {{3}} - ի համար {{4}} - ի կողմից"
+        "Subject": "Դուք ստանում եք {{displayAmount}} վճարում {{call 'publisher.displayName'}}-ից «{1001}}»-ի կողմից",
+        "HasBeenCharged": "Ողջույն, սա պարզապես ձեզ տեղեկացնելու համար է, որ {{1}} {{2}} {{3}} համար {{4}}-ի կողմից գանձվել է"
     },
     "charged": {
-        "Subject": "Շնորհակալություն «{{description}}» - ի համար վճարման համար",
-        "HavePaid": "Ողջույն, {{1}}, սա պարզապես արագ հաստատում է, որ դուք հաջողությամբ վճարել եք {{2}} {{3}} - ին {{4}} - ի համար"
+        "Subject": "Շնորհակալություն «{{description}}»-ի համար վճարման համար",
+        "HavePaid": "Բարև, {{1}}, սա պարզապես արագ հաստատում է, որ դուք հաջողությամբ վճարել եք {{2}} {{3}} {{4}} համար"
     },
     "payment": {
-        "AboutOrder": "Տեղեկատվություն պատվերի մասին",
+        "AboutOrder": "Տեղեկություններ պատվերի մասին",
         "PaymentMethod": "Վճարման եղանակ",
         "ContactInfo": "Կոնտակտային տվյալները",
         "Pay": "Վճարել"
     },
     "credits": {
-        "InviteAcceptedBy": "Հրավերն ընդունված է {{invitedUserName}} - ի կողմից",
-        "YouHaveCreditsToStart": "Սկսելու համար ունեք {{amount}} կրեդիտ",
-        "PaymentFor": "Վճարում «{{1}}» - ի համար",
-        "PaymentTo": "Վճարում {{1}} - ին",
-        "PaymentToUser": "Վճարում {{toUserName}} - ին",
+        "InviteAcceptedBy": "Հրավերն ընդունվել է {{invitedUserName}}-ի կողմից",
+        "YouHaveCreditsToStart": "Դուք ունեք {{amount}} միավոր սկսելու համար",
+        "PaymentFor": "Վճարում «{{1}}»-ի համար",
+        "PaymentTo": "Վճարում {{1}}-ին",
+        "PaymentToUser": "Վճարում {{toUserName}}-ին",
         "CreatePaidStream": "{{toStreamName}} ստեղծելու համար",
-        "JoinedPaidStream": "<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>«{{toStreamTitle}}<\/a> » - ում ամրագրման համար",
+        "JoinedPaidStream": "« <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> »-ում ամրագրման համար",
         "CreatedCommunity": "«{{communityId}}» համայնք ստեղծելու համար",
-        "LeftPaidStream": "որպես ամրագրման փոխհատուցում « <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> » - ում",
+        "LeftPaidStream": "որպես ամրագրման փոխհատուցում « <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{1001}}<\/a> »-ում",
         "BoughtCredits": "Գնել է {{amount}} վարկ",
         "BonusCredits": "Բոնուսային {{amount}} վարկեր",
-        "BuyAmountCredits": "Գնեք {{amount}} կրեդիտ",
-        "WatchClip": "Վաստակել է {{amount}} միավոր {{fromStreamTitle}} դիտելու համար",
+        "BuyAmountCredits": "Գնեք {{amount}} վարկ",
+        "WatchClip": "Վաստակել է {{amount}} միավոր՝ դիտելու համար {{fromStreamTitle}}",
         "MissingCredits": "Բացակայող վարկեր",
-        "YouMissingCredits": "Շարունակելու համար ձեզ անհրաժեշտ է լրացուցիչ {{amount}} կրեդիտ:",
+        "YouMissingCredits": "Շարունակելու համար ձեզ հարկավոր է լրացուցիչ {{amount}} վարկ:",
         "BuyCredits": "Գնեք վարկեր",
         "BuyBonus": "Միանգամից {{amount}} վարկ գնելը կհանգեցնի {{bonus}} վարկի բոնուսի:",
         "Buy": "Գնել",
         "PurchaseCredits": "Գնեք վարկեր",
         "Credits": "Վարկեր",
-        "ErrorInvalidAmount": "Գումարը անվավեր է",
-        "ErrorInvalidCurrency": "Unfortunatelyավոք, մենք դեռ չենք աջակցում արժույթը {{currency}}",
+        "ErrorInvalidAmount": "Գումարն անվավեր է",
+        "ErrorInvalidCurrency": "Ցավոք, մենք դեռ չենք աջակցում արժույթը {{currency}}",
         "forMessages": {
-            "BoughtCredits": "{{amount}} վարկ",
-            "BonusCredits": "{{amount}} վարկ"
+            "BoughtCredits": "{{amount}} վարկեր",
+            "BonusCredits": "{{amount}} վարկեր"
         },
         "Streams_user_firstname": "{{invitedUserName}} մուտքագրել է անունը",
         "Streams_user_lastname": "{{invitedUserName}} մուտքագրել է ազգանունը",
@@ -62,30 +62,30 @@
         "Description": "Նկարագրություն",
         "Client": "Հաճախորդ",
         "To": "դեպի",
-        "From": "ից",
-        "SeeHistory": "Դիտեք վճարումների պատմությունը {{1}} - ի համար",
+        "From": "-ից",
+        "SeeHistory": "Տես վճարումների պատմությունը {{1}}-ի համար",
         "HistoryEmpty": "Դուք դեռ տվյալներ չունեք",
-        "PaymentFor": "Ուղարկվել է {{amount}} կրեդիտ",
-        "PaymentTo": "Ուղարկվել է {{amount}} կրեդիտ",
-        "PaymentToUser": "Ուղարկվել է {{amount}} կրեդիտ",
-        "CreatePaidStream": "Spախսեց {{amount}} կրեդիտ",
+        "PaymentFor": "Ուղարկվել է {{amount}} միավոր",
+        "PaymentTo": "Ուղարկվել է {{amount}} միավոր",
+        "PaymentToUser": "Ուղարկվել է {{amount}} միավոր",
+        "CreatePaidStream": "Ծախսված {{amount}} վարկեր",
         "WatchClip": {
-            "+": "Վաստակել է {{amount}} կրեդիտ",
-            "-": "Spախսեց {{amount}} կրեդիտ"
+            "+": "Վաստակել է {{amount}} վարկ",
+            "-": "Ծախսված {{amount}} վարկեր"
         },
         "JoinedPaidStream": {
-            "+": "Վաստակել է {{amount}} կրեդիտ",
-            "-": "Spախսեց {{amount}} կրեդիտ"
+            "+": "Վաստակել է {{amount}} վարկ",
+            "-": "Ծախսված {{amount}} վարկեր"
         },
         "LeftPaidStream": {
-            "+": "Ստացել է {{amount}} կրեդիտ",
-            "-": "Ուղարկվել է {{amount}} կրեդիտ"
+            "+": "Ստացել է {{amount}} վարկ",
+            "-": "Ուղարկվել է {{amount}} միավոր"
         },
-        "CreatedCommunity": "Spախսեց {{amount}} կրեդիտ",
+        "CreatedCommunity": "Ծախսված {{amount}} վարկեր",
         "BoughtCredits": "Գնել է {{amount}} վարկ",
-        "BonusCredits": "Ստացել է բոնուսային {{amount}} վարկեր",
-        "InviteAcceptedBy": "Վաստակել է {{amount}} կրեդիտ",
-        "YouHaveCreditsToStart": "Վաստակել է {{amount}} կրեդիտ",
+        "BonusCredits": "Ստացա բոնուսային {{amount}} վարկ",
+        "InviteAcceptedBy": "Վաստակել է {{amount}} վարկ",
+        "YouHaveCreditsToStart": "Վաստակել է {{amount}} վարկ",
         "Streams_user_firstname": "Վաստակել է {{amount}} վարկ",
         "Streams_user_lastname": "Վաստակել է {{amount}} վարկ",
         "Streams_user_icon": "Վաստակել է {{amount}} վարկ",
@@ -93,23 +93,23 @@
         "Streams_greeting": "Վաստակել է {{amount}} վարկ"
     },
     "subscriptions": {
-        "infoTitle": "Սահմանեք վճարման տեղեկատվություն",
+        "infoTitle": "Սահմանեք վճարման տվյալները",
         "confirm": {
-            "title": "Սկսել բաժանորդագրությունը",
-            "message": "Youանկանու՞մ եք բաժանորդագրվել {{title}} - ին:",
+            "title": "Սկսեք բաժանորդագրությունը",
+            "message": "Ցանկանու՞մ եք բաժանորդագրվել {{title}}-ին:",
             "ok": "լավ",
             "cancel": "Չեղարկել"
         },
         "CreditOrDebitCard": "Վարկային կամ դեբետային քարտ",
-        "SubscribePayment": "Բաժանորդագրվեք Վճարում",
+        "SubscribePayment": "Բաժանորդագրվել վճարում",
         "ImmediatePayment": "Անմիջական վճարում"
     },
     "payments": {
-        "infoTitle": "Սահմանեք վճարման տեղեկատվություն",
-        "BuyAmountCredits": "Գնեք {{amount}} կրեդիտ",
+        "infoTitle": "Սահմանեք վճարման տվյալները",
+        "BuyAmountCredits": "Գնեք {{amount}} վարկ",
         "confirm": {
-            "title": "Վճարում կատարեք",
-            "message": "Համաձա՞յն եք վճարել {{symbol}} {{amount}}:",
+            "title": "Կատարել վճարում",
+            "message": "Համաձա՞յն եք վճարել {{symbol}}{{amount}}:",
             "ok": "լավ",
             "cancel": "Չեղարկել"
         }
@@ -117,7 +117,7 @@
     "types": {
         "Assets\/credits": {
             "displayType": "Վարկեր",
-            "description": "հետևում է վարկերի և վճարումների ընթացքին"
+            "description": "հետևում է վարկերի և վճարումների"
         },
         "Assets\/plan": {
             "displayType": "Բաժանորդագրման պլան",
@@ -133,12 +133,12 @@
         },
         "Assets\/service": {
             "displayType": "Ծառայություն",
-            "description": "մատուցվող ծառայություն"
+            "description": "առաջարկվող ծառայություն"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Վաստակել է {{amount}} կրեդիտ"
+            "content": "Վաստակել է {{amount}} վարկ"
         },
         "Assets\/credits\/bought": {
             "content": "Գնել է {{amount}} վարկ"
@@ -147,32 +147,32 @@
             "content": "Բոնուսային {{amount}} վարկեր"
         },
         "Assets\/credits\/spent": {
-            "content": "Spախսեց {{amount}} կրեդիտ"
+            "content": "Ծախսված {{amount}} վարկեր"
         },
         "Assets\/credits\/sent": {
-            "content": "Ուղարկվել է {{amount}} կրեդիտ {{toUserName}} - ին"
+            "content": "Ուղարկվել է {{amount}} միավոր {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Ստացել է {{amount}} կրեդիտ {{fromUserName}} - ից"
+            "content": "Ստացել է {{amount}} միավոր {{fromUserName}}-ից"
         }
     },
     "services": {
         "NewServiceTemplate": {
             "Title": "Նոր ծառայություն",
-            "TitlePlaceholder": "Serviceառայության կոչում",
+            "TitlePlaceholder": "Ծառայության անվանումը",
             "PricePlaceholder": "Սահմանել գինը",
-            "LinkPlaceholder": "սահմանել լրացուցիչ տեղեկատվական հղում",
-            "DescriptionPlaceholder": "Serviceառայության նկարագրությունը",
-            "SaveService": "Պահել ծառայությունը",
-            "SelectRequiredParticipants": "Պահանջվող մասնակիցներ"
+            "LinkPlaceholder": "սահմանել լրացուցիչ տեղեկատվության հղում",
+            "DescriptionPlaceholder": "Ծառայության նկարագրությունը",
+            "SaveService": "Պահպանել ծառայությունը",
+            "SelectRequiredParticipants": "Պահանջվող Մասնակիցներ"
         },
         "ManageServiceTemplates": "Կառավարեք ծառայության ձևանմուշները",
         "ManageServices": "Կառավարեք ծառայությունները",
         "Free": "Անվճար",
         "OptionalContribution": "Ընտրովի ներդրում",
         "RequiredPayment": "Պահանջվող վճարում",
-        "AreYouSureDelete": "Վստա՞հ եք, որ ցանկանում եք ջնջել այս ծառայությունը:",
-        "AmountServicesRelated": "Այս ծառայության հետ կապված {{amount}} մատչելիություն կա: Նրանք նույնպես կհեռացվեն:"
+        "AreYouSureDelete": "Իսկապե՞ս ուզում եք ջնջել այս ծառայությունը:",
+        "AmountServicesRelated": "Այս ծառայության հետ կապված {{amount}} հասանելիություն կա: Դրանք նույնպես կհեռացվեն։"
     },
     "NFT": {
         "Title": "Տեղեկություններ {{title}} NFT-ի մասին",
@@ -217,7 +217,7 @@
         "SoldOut": "Վաճառվել է",
         "NftName": "NFT անվանումը",
         "DescribeYourNFT": "Խնդրում ենք նկարագրել ձեր NFT-ը",
-        "NftPicture": "Նկար՝ NFT-ին ներկայացնելու համար",
+        "NftPicture": "Նկար՝ NFT-ը ներկայացնելու համար",
         "NftMovie": "Ֆիլմ, որը ներկայացնում է NFT-ն",
         "UploadMovie": "Վերբեռնել ֆիլմը",
         "MovieSource": "Ֆիլմի աղբյուրը",

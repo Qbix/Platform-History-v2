@@ -2224,6 +2224,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 		return $metas;
 	}
+
 	/**
 	 * Detect if streams icon is custom.
 	 * @method isCustomIcon
@@ -2233,6 +2234,7 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		return strpos(Q::ifset($this, 'icon', null), 'uploads/Streams') !== false;
 	}
+
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
@@ -2246,6 +2248,84 @@ class Streams_Stream extends Base_Streams_Stream
 		foreach($array as $k => $v)
 			$result->$k = $v;
 		return $result;
+	}
+
+	/**
+	 * Returns the number of users who like the stream, excluding its publisher
+	 * @method countLikes
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} [$userId] If defined search likes related to this user
+	 */
+	static function countLikes ($publisherId, $streamName, $userId = null) {
+		$where = array(
+			"forId" => "$publisherId/$streamName",
+			"value" => 1
+		);
+		if ($userId) {
+			$where["userId"] = $userId;
+		}
+		return Users_Vote::select('COUNT(1)')
+			->where($where)
+			->ignoreCache()
+			->execute()	
+			->fetch(PDO::FETCH_NUM);
+	}
+
+	/**
+	 * Returns the number of users subscribed to the stream, excluding its publisher
+	 * @method countSubscribers
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @param {string} [$userId] If defined return whether this user is subscribed
+	 */
+	static function countSubscribers ($publisherId, $streamName, $userId = null) {
+		$where = array(
+			"publisherId" => $publisherId,
+			"streamName" => $streamName,
+			"userId !=" => $publisherId,
+			"subscribed" => "yes"
+		);
+		if ($userId) {
+			$where["userId"] = $userId;
+		}
+		return Streams_Participant::select('COUNT(1)')
+			->where($where)
+			->ignoreCache()
+			->execute()
+			->fetch(PDO::FETCH_NUM);
+	}
+
+	/**
+	 * Get number of users to whose stream the $userId is subscribed
+	 * @method countSubscribed
+	 * @param {string} $userId
+	 * @param {string} [$streamType=null] Can be used to filter by type of stream
+	 * @param {string} [$streamName=null] Can be used to filter by name of stream
+	 */
+	static function countSubscribed ($userId, $streamType = null, $streamName =  null) {
+		$where = array(
+			"a.toPublisherId" => $userId,
+			"a.toStreamName" => 'Streams/participating',
+			"b.subscribed" => "yes"
+		);
+		if (!empty($streamType)) {
+			$where['a.type'] = $streamType;
+		}
+		if (!empty($streamName)) {
+			$where['a.fromStreamName'] = $streamName;
+		}
+		return Streams_RelatedTo::select('COUNT(1)', array(
+			'a' => Streams_RelatedTo::table(),
+			'b' => Streams_Participant::table()
+		))->join(Streams_Participant::table(), array(
+			'a.fromPublisherId' => 'b.publisherId',
+			'a.fromStreamName' => 'b.streamName'
+		))->where($where)
+		->groupBy('b.publisherId')
+		->ignoreCache()
+		->execute()
+		->fetch(PDO::FETCH_NUM);
 	}
 	
 	/**

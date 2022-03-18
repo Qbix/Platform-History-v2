@@ -1,532 +1,532 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "මෙම අන්තර්ගතය ඔබෙන් සඟවා ඇත."
     },
     "preview": {
-        "NewItemTitle": "New Item"
+        "NewItemTitle": "නව අයිතමය"
     },
     "labels": {
-        "Streams\/invited": "People I invited",
-        "Streams\/invitedMe": "Who invited me",
-        "DoYouAgree": "Do you agree?",
-        "Yes": "Yes",
-        "No": "No"
+        "Streams\/invited": "මම ආරාධනා කළ අය",
+        "Streams\/invitedMe": "කවුද මට ආරාධනා කළේ",
+        "DoYouAgree": "ඔයා එකඟ වෙනවා ද?",
+        "Yes": "ඔව්",
+        "No": "නැත"
     },
     "interests": {
-        "Filter": "What are your interests?",
-        "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
-        "TrySynonyms": "Don't see it? Try some synonyms.",
-        "AddUnderCategory": "Add under category...",
-        "Other": "Other",
-        "Unlisted": "Unlisted"
+        "Filter": "ඔබේ රුචිකත්වයන් මොනවාද?",
+        "CanAdd": "ඔබට තවමත් ඔබ සොයන දේ සොයාගත නොහැකි නම්, ඔබට පහතින් නව උනන්දුවක් එක් කළ හැක:",
+        "TrySynonyms": "එය නොපෙනේද? සමාන පද කිහිපයක් උත්සාහ කරන්න.",
+        "AddUnderCategory": "ප්‍රවර්ගය යටතේ එක් කරන්න...",
+        "Other": "වෙනත්",
+        "Unlisted": "ලැයිස්තුගත නොකළ"
     },
     "chat": {
-        "flaggedForAdminReview": "Message has been flagged for admin review. Tap again to unflag.",
-        "noOneSaid": "No one has said anything",
-        "closeChatButton": "Close chat",
-        "closeChatConfirmTitle": "Close this chat?",
-        "closeChatConfirm": "Are you sure you want to close this chat?",
-        "Subscribed": "Notifications Enabled",
-        "Unsubscribed": "Notifications Muted",
-        "closeChatConfirmYes": "Yes",
-        "closeChatConfirmNo": "No",
-        "earlierComments": "earlier comments",
-        "startedConversation": "started a conversation",
-        "RealTimeCall": "Real Time Call",
-        "SearchByName": "Search by name",
+        "flaggedForAdminReview": "පරිපාලක සමාලෝචනය සඳහා පණිවිඩය සලකුණු කර ඇත. සලකුණු කිරීම ඉවත් කිරීමට නැවත තට්ටු කරන්න.",
+        "noOneSaid": "කිසිවෙක් කිසිත් කීවේ නැත",
+        "closeChatButton": "කතාබස් වසන්න",
+        "closeChatConfirmTitle": "මෙම කතාබහ වසන්නද?",
+        "closeChatConfirm": "ඔබට මෙම කතාබහ වැසීමට අවශ්‍ය බව විශ්වාසද?",
+        "Subscribed": "දැනුම්දීම් සබල කර ඇත",
+        "Unsubscribed": "දැනුම්දීම් නිහඬ කර ඇත",
+        "closeChatConfirmYes": "ඔව්",
+        "closeChatConfirmNo": "නැත",
+        "earlierComments": "කලින් අදහස්",
+        "startedConversation": "සංවාදයක් ආරම්භ කළේය",
+        "RealTimeCall": "තත්‍ය කාලීන ඇමතුම",
+        "SearchByName": "නම අනුව සොයන්න",
         "Notifications": {
-            "Visit": "{{displayName}} is visiting the chat",
-            "Join": "{{displayName}} joined the chat",
-            "Leave": "{{displayName}} left the chat",
-            "RelatedTo": "{{displayName}} started a {{stream.displayType}}"
+            "Visit": "{{displayName}} කතාබස් වෙත පැමිණෙමින් සිටී",
+            "Join": "{{displayName}} කතාබහට එකතු විය",
+            "Leave": "{{displayName}} කතාබහෙන් ඉවත් විය",
+            "RelatedTo": "{{displayName}} {{stream.displayType}} එකක් ආරම්භ කළේය"
         }
     },
     "notifications": {
-        "ManageEmailSubscriptions": "manage your email subscriptions",
-        "IfUnsubscribe": "If you want to unsubscribe",
-        "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
-        "Streams\/changed": "Changes in {{stream.fields.title}}",
-        "Streams\/invite": "You were invited to {{& stream.fields.title}}",
-        "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
-        "Streams\/access": "{{&call 'avatar.displayName'}} changed access in {{& stream.fields.title}}",
-        "Streams\/chat\/edit": "Chat message edited in {{& stream.fields.title}}",
-        "Streams\/chat\/remove": "Chat message removed in {{& stream.fields.title}}",
-        "Streams\/closed": "{{stream.fields.title}} has been closed",
-        "Streams\/task\/progress": "Progress made on {{stream.fields.title}}",
-        "Streams\/task\/complete": "Task completed: {{stream.fields.title}}",
-        "Streams\/task\/error": "Error during: {{stream.fields.title}}",
-        "Streams\/incoming\/*": "{{app}}: Incoming Message",
-        "Streams\/relatedTo\/Streams\/call": "New Call Started in {{toTitle}}",
-        "Streams\/relatedTo\/*": "New {{relationDisplayType}} in {{toTitle}}",
-        "Streams\/relatedFrom\/*": "Added to {{toTitle}} as {{relationDisplayType}}",
-        "Streams\/mention": "{{&call 'avatar.displayName'}} mentioned you in a comment",
-        "Streams\/call": "{{displayName}} started a real-time call"
+        "ManageEmailSubscriptions": "ඔබගේ ඊමේල් දායකත්වයන් කළමනාකරණය කරන්න",
+        "IfUnsubscribe": "ඔබට දායකත්වයෙන් ඉවත් වීමට අවශ්‍ය නම්",
+        "*": "{{& message.fields.type}} වෙත {{& stream.fields.title}} වෙත පණිවිඩයක් යවන්න",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} පැවසුවේ: {{& message.content}}",
+        "Streams\/changed": "{{stream.fields.title}} හි වෙනස්කම්",
+        "Streams\/invite": "ඔබට {{& stream.fields.title}} වෙත ආරාධනා කර ඇත",
+        "Streams\/announcement": "{{& stream.fields.title}} හි නිවේදනය",
+        "Streams\/access": "{{&call 'avatar.displayName'}} {{& stream.fields.title}} හි ප්‍රවේශය වෙනස් කළේය",
+        "Streams\/chat\/edit": "කතාබස් පණිවිඩය {{& stream.fields.title}} හි සංස්කරණය කරන ලදී",
+        "Streams\/chat\/remove": "{{& stream.fields.title}} තුළ කතාබස් පණිවිඩය ඉවත් කරන ලදී",
+        "Streams\/closed": "{{stream.fields.title}} වසා ඇත",
+        "Streams\/task\/progress": "{{stream.fields.title}} ප්‍රගතිය",
+        "Streams\/task\/complete": "කාර්යය සම්පූර්ණයි: {{stream.fields.title}}",
+        "Streams\/task\/error": "මෙම කාලය තුළ දෝෂයකි: {{stream.fields.title}}",
+        "Streams\/incoming\/*": "{{app}}: එන පණිවිඩය",
+        "Streams\/relatedTo\/Streams\/call": "නව ඇමතුම {{toTitle}} දී ආරම්භ විය",
+        "Streams\/relatedTo\/*": "{{toTitle}} හි නව {{relationDisplayType}}",
+        "Streams\/relatedFrom\/*": "{{toTitle}} වෙත {{relationDisplayType}} ලෙස එක් කරන ලදී",
+        "Streams\/mention": "{{&call 'avatar.displayName'}} ඔබව අදහස් දැක්වීමක සඳහන් කළේය",
+        "Streams\/call": "{{displayName}} තත්‍ය කාලීන ඇමතුමක් ආරම්භ කළේය"
     },
     "invite": {
-        "command": "Invite",
-        "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
-        "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "command": "ආරාධනා කරන්න",
+        "messageContent": "{{displayName}} ඔබට {{inviteUrl}} වෙත ආරාධනා කළේය",
+        "youCanNowPaste": "ඔබට දැන් මිනිසුන්ට ආරාධනා කිරීමට මෙම සබැඳිය කොහේ හෝ ඇලවිය හැක",
         "dialog": {
-            "chooseFromContacts": "Choose from your Contacts",
-            "chooseAgainFromContacts": "Choose Again from Contacts",
-            "inviteSelectedContacts": "Invite Selected Contacts",
-            "selectFromContacts": "Select From Contacts",
-            "userChooserPlaceholder": "Search by name",
-            "photo": "Take a photo",
-            "photoInstruction": "If the person who scanned your QR code is in front of you, take a photo of them",
-            "to": "To: {{Stream Title}}",
-            "go": "Go",
-            "title": "Invite",
-            "placeholder": "Mobile number or email address",
-            "orInvite": "Or invite people by using:",
-            "copyLink": "{{ClickOrTap}} to copy invite link ",
-            "shareOrCopyLink": "{{ClickOrTap}} to share or copy invite link ",
-            "QR": "{{ClickOrTap}} to generate QR code",
-            "QRtitle": "Scan this QR code",
-            "QRscanned": "They scanned it!",
-            "scannedQR": "{{ClickOrTap}} if the code was scanned",
-            "byEmail": "Email",
-            "byText": "Text",
-            "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "chooseFromContacts": "ඔබගේ සම්බන්ධතා වලින් තෝරන්න",
+            "chooseAgainFromContacts": "සම්බන්ධතා වලින් නැවත තෝරන්න",
+            "inviteSelectedContacts": "තෝරාගත් සම්බන්ධතා වලට ආරාධනා කරන්න",
+            "selectFromContacts": "සම්බන්ධතා වලින් තෝරන්න",
+            "userChooserPlaceholder": "නම අනුව සොයන්න",
+            "photo": "පින්තුරයක් ගන්න",
+            "photoInstruction": "ඔබේ QR කේතය ස්කෑන් කළ පුද්ගලයා ඔබ ඉදිරියෙහි සිටී නම්, ඔවුන්ගේ ඡායාරූපයක් ගන්න",
+            "to": "වෙත: {{Stream Title}}",
+            "go": "යන්න",
+            "title": "ආරාධනා කරන්න",
+            "placeholder": "ජංගම දුරකථන අංකය හෝ ඊමේල් ලිපිනය",
+            "orInvite": "නැතහොත් භාවිතා කිරීමෙන් පුද්ගලයින්ට ආරාධනා කරන්න:",
+            "copyLink": "ආරාධනා සබැඳිය පිටපත් කිරීමට {{ClickOrTap}}",
+            "shareOrCopyLink": "{{ClickOrTap}} ආරාධනා සබැඳිය බෙදා ගැනීමට හෝ පිටපත් කිරීමට",
+            "QR": "QR කේතය ජනනය කිරීමට {{ClickOrTap}}",
+            "QRtitle": "මෙම QR කේතය පරිලෝකනය කරන්න",
+            "QRscanned": "ඔවුන් එය ස්කෑන් කළා!",
+            "scannedQR": "කේතය ස්කෑන් කර ඇත්නම් {{ClickOrTap}}",
+            "byEmail": "විද්යුත් තැපෑල",
+            "byText": "පෙළ",
+            "byFacebook": "ෆේස්බුක්",
+            "byTwitter": "ට්විටර්"
         },
         "email": {
-            "subject": "Hey, check this out",
-            "PleaseVisitLink": "Please visit the following link:",
-            "InvitingYou": "I am inviting you to {{title}}",
-            "HasInvitedYou": "{{displayName}} has invited you to {{title}}",
-            "HasMentionedYou": "{{displayName}} has mentioned you in \"{{title}}\"",
-            "YOUAREINVITED": "YOU ARE INVITED!",
-            "AcceptInvite": "Accept Invite"
+            "subject": "හේයි, මේක බලන්න",
+            "PleaseVisitLink": "කරුණාකර පහත සබැඳියට පිවිසෙන්න:",
+            "InvitingYou": "මම ඔබට {{title}} වෙත ආරාධනා කරමි",
+            "HasInvitedYou": "{{displayName}} ඔබට {{title}} වෙත ආරාධනා කර ඇත",
+            "HasMentionedYou": "{{displayName}} ඔබව &quot;{{title}}&quot; හි සඳහන් කර ඇත",
+            "YOUAREINVITED": "ඔබට ආරාධනා කර ඇත!",
+            "AcceptInvite": "ආරාධනය පිළිගන්න"
         },
         "sms": {
-            "content": "You have been invited to {{title}}. Please tap {{url}}"
+            "content": "ඔබට {{title}} වෙත ආරාධනා කර ඇත. කරුණාකර {{url}} තට්ටු කරන්න"
         },
         "notice": {
-            "text": "You have been invited. {{ClickOrTap}} here to accept and join."
+            "text": "ඔබට ආරාධනා කර ඇත. පිළිගැනීමට සහ එක් වීමට {{ClickOrTap}} මෙන්න."
         }
     },
     "messages": {
         "html": {
-            "posted": "posted a <em>{{message.fields.type}}<\/em> message to {{stream.fields.title}}"
+            "posted": "{{stream.fields.title}} වෙත { <em>{999}}<\/em> පණිවිඩයක් පළ කරන ලදී"
         },
         "text": {
-            "commentedOn": "commented on",
-            "startedCallIn": "started a call in",
-            "in": "in",
-            "body": "in {{& url}}: {{& message.fields.content}}",
+            "commentedOn": "අදහස් දැක්වූවා",
+            "startedCallIn": "ඇමතුමක් ආරම්භ කළේය",
+            "in": "තුල",
+            "body": "{{& url}}: {{& message.fields.content}} තුළ",
             "relatedFrom": {
-                "hasBeenPostedTo": "has been posted to",
-                "byAvatar": "by {{avatar.displayName}}"
+                "hasBeenPostedTo": "වෙත පළ කර ඇත",
+                "byAvatar": "{{avatar.displayName}} විසින්"
             },
             "relatedTo": {
-                "hasANew": "has a new {{instructions.fromDisplayType}}",
-                "byAvatar": "added by {{avatar.displayName}}"
+                "hasANew": "අලුත් {{instructions.fromDisplayType}} එකක් ඇත",
+                "byAvatar": "{{avatar.displayName}} විසින් එකතු කරන ලදී"
             }
         }
     },
     "followup": {
         "mobile": {
-            "alert": "Invites are sent from our number, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our number, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "check": "Hey, I just sent you an invite to the {{app}} app. Please check your sms and click the link!",
-            "CheckYourMobile": "Please check SMS and follow instructions!"
+            "alert": "ඔබගේ මිතුරන් තවමත් හඳුනා නොගත් අපගේ අංකයෙන් ආරාධනා එවනු ලැබේ. සබැඳිය ක්ලික් කරන ලෙස ඉල්ලා, ඔබෙන් ආරාධනය පැමිණි බව ඔවුන්ට දැනුම් දීමට ඉක්මන් පෙළක් අනුගමනය කරන්න.",
+            "confirm": "ඔබගේ මිතුරන් තවමත් හඳුනා නොගත් අපගේ අංකයෙන් ආරාධනා එවනු ලැබේ. සබැඳිය ක්ලික් කරන ලෙස ඉල්ලා, ඔබෙන් ආරාධනය පැමිණි බව ඔවුන්ට දැනුම් දීමට ඉක්මන් පෙළක් අනුගමනය කිරීමට ඔබ කැමතිද.",
+            "check": "හේයි, මම ඔබට {{app}} යෙදුමට ආරාධනාවක් එවා ඇත. කරුණාකර ඔබගේ කෙටි පණිවුඩ පරීක්ෂා කර සබැඳිය ක්ලික් කරන්න!",
+            "CheckYourMobile": "කරුණාකර SMS පරීක්ෂා කර උපදෙස් අනුගමනය කරන්න!"
         },
         "email": {
-            "alert": "Invites are sent from our domain, which your friends don't yet recognize. Follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "confirm": "Invites are sent from our domain, which your friends don't yet recognize. Would you like to follow up with a quick text to let them know the invitation came from you, asking them to click the link.",
-            "subject": "Did you get an invite?",
-            "body": "Hey, I just sent you an invite to the {{app}} app. Please check your email and click the link in there!",
-            "CheckYourEmail": "Please check your email and follow instructions!"
+            "alert": "ඔබගේ මිතුරන් තවමත් හඳුනා නොගත් අපගේ වසම වෙතින් ආරාධනා යවනු ලැබේ. සබැඳිය ක්ලික් කරන ලෙස ඉල්ලා, ඔබෙන් ආරාධනය පැමිණි බව ඔවුන්ට දැනුම් දීමට ඉක්මන් පෙළක් අනුගමනය කරන්න.",
+            "confirm": "ඔබගේ මිතුරන් තවමත් හඳුනා නොගත් අපගේ වසම වෙතින් ආරාධනා යවනු ලැබේ. සබැඳිය ක්ලික් කරන ලෙස ඉල්ලා, ඔබෙන් ආරාධනය පැමිණි බව ඔවුන්ට දැනුම් දීමට ඉක්මන් පෙළක් අනුගමනය කිරීමට ඔබ කැමතිද.",
+            "subject": "ඔබට ආරාධනාවක් ලැබුණාද?",
+            "body": "හේයි, මම ඔබට {{app}} යෙදුමට ආරාධනාවක් එවා ඇත. කරුණාකර ඔබගේ විද්‍යුත් තැපෑල පරීක්ෂා කර එහි ඇති සබැඳිය ක්ලික් කරන්න!",
+            "CheckYourEmail": "කරුණාකර ඔබගේ විද්‍යුත් තැපෑල පරීක්ෂා කර උපදෙස් අනුගමනය කරන්න!"
         }
     },
     "participating": {
-        "Title": "Title",
-        "Subscribed": "Subscribed",
-        "Participants": "Participants",
-        "AreYouSureRemoveIdentifier": "Are you sure to remove this identifier?",
-        "AreYouSureUnsubscribeIdentifier": "Are you sure unsubscribe this identifier? It will turn off notifications to this identifier.",
-        "AreYouSureUnsubscribeDevice": "Are you sure unsubscribe this device? It will turn off notifications to this device.",
-        "AreYouSureRemoveParticipant": "Are you sure you want to remove this participant?",
-        "RemoveParticipant": "Remove participant",
-        "Identifiers": "Identifiers",
-        "Devices": "Devices",
-        "Streams": "Streams"
+        "Title": "ශීර්ෂය",
+        "Subscribed": "දායක විය",
+        "Participants": "සහභාගිවන්නන්",
+        "AreYouSureRemoveIdentifier": "ඔබට මෙම හැඳුනුම්කාරකය ඉවත් කිරීමට විශ්වාසද?",
+        "AreYouSureUnsubscribeIdentifier": "ඔබට මෙම හැඳුනුම්කාරකය දායක නොවන බව විශ්වාසද? එය මෙම හැඳුනුම්කාරකයට දැනුම්දීම් අක්‍රිය කරයි.",
+        "AreYouSureUnsubscribeDevice": "ඔබට මෙම උපාංගය දායක නොවන බව විශ්වාසද? එය මෙම උපාංගය වෙත දැනුම්දීම් අක්‍රිය කරයි.",
+        "AreYouSureRemoveParticipant": "ඔබට මෙම සහභාගිකයා ඉවත් කිරීමට අවශ්‍ය බව විශ්වාසද?",
+        "RemoveParticipant": "සහභාගිකයා ඉවත් කරන්න",
+        "Identifiers": "හඳුනාගැනීම්",
+        "Devices": "උපකරණ",
+        "Streams": "ධාරා"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "notAllowedToJoinCall": "ඔබට මෙම ප්‍රවාහයට සම්බන්ධ වීමට අවසර නැත.",
+        "streamTitle": "{{1}} සජීවී ඇමතුමක් ආරම්භ කළේය",
         "allow": {
-            "dialogTitle": "Connecting",
-            "microphoneBtn": "Enable Microphone",
-            "cameraBtn": "Enable Camera",
-            "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
+            "dialogTitle": "සම්බන්ධ වෙමින්",
+            "microphoneBtn": "මයික්‍රෆෝනය සබල කරන්න",
+            "cameraBtn": "කැමරාව සබල කරන්න",
+            "cameraAndMicrophoneBtn": "කැමරාව සහ මයික්‍රෆෝනය සබල කරන්න"
         },
         "preparing": {
-            "micIsOff": "Mic is off",
-            "micIsOn": "Mic is on",
-            "cameraIsOff": "Camera is off",
-            "cameraIsOn": "Camera is on",
-            "screenSharingIsOn": "Screensharing is on",
-            "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "micIsOff": "මයික් ක්‍රියා විරහිතයි",
+            "micIsOn": "මයික් ක්‍රියාත්මකයි",
+            "cameraIsOff": "කැමරාව ක්‍රියාවිරහිතයි",
+            "cameraIsOn": "කැමරාව ක්‍රියාත්මකයි",
+            "screenSharingIsOn": "තිර බෙදාගැනීම ක්‍රියාත්මකයි",
+            "screenSharingIsOff": "තිරය බෙදා ගන්න",
+            "joinNow": "ඇමතුමට සම්බන්ධ වන්න"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to \"Settings\" -> \"Advanced\" -> \"Privacy and security\" -> \"Site Settings\" -> \"Camera\" or \"Site Settings\" -> \"Microphone\"",
-            "point2": "Remove {{hostname}} from \"Block\" list"
+            "dialogTitle": "උපදෙස්",
+            "permissionDenied": "{{kind}} සඳහා අවසරය ප්‍රතික්ෂේප විය. එය භාවිතා කිරීමට කරුණාකර පහත පියවර අනුගමනය කරන්න:",
+            "point1": "&quot;සැකසීම්&quot; -&gt; &quot;උසස්&quot; -&gt; &quot;පෞද්ගලිකත්වය සහ ආරක්ෂාව&quot; -&gt; &quot;අඩවි සැකසීම්&quot; -&gt; &quot;කැමරාව&quot; හෝ &quot;අඩවි සැකසීම්&quot; -&gt; &quot;මයික්‍රොෆෝනය&quot; වෙත යන්න",
+            "point2": "&quot;බ්ලොක්&quot; ලැයිස්තුවෙන් {{hostname}} ඉවත් කරන්න"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. Please reload this page and confirm access to {{kind}} to join the conference."
+            "dialogTitle": "උපදෙස්",
+            "permissionDenied": "{{kind}} සඳහා අවසරය ප්‍රතික්ෂේප විය. කරුණාකර මෙම පිටුව නැවත පූරණය කර සම්මන්ත්‍රණයට සම්බන්ධ වීමට {{kind}} වෙත ප්‍රවේශය තහවුරු කරන්න."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your Android Settings",
-            "point2": "Open \"Apps & notifications\"",
-            "point3": "Find \"{{communityName}}\" and open it",
-            "point4": "Tap on Permissions",
-            "point5": "Enable {{kind}}"
+            "dialogTitle": "උපදෙස්",
+            "permissionDenied": "{{kind}} සඳහා අවසරය ප්‍රතික්ෂේප විය. එය භාවිතා කිරීමට කරුණාකර පහත පියවර අනුගමනය කරන්න:",
+            "point1": "ඔබගේ Android සැකසීම් වෙත යන්න",
+            "point2": "&quot;යෙදුම් සහ දැනුම්දීම්&quot; විවෘත කරන්න",
+            "point3": "&quot;{{communityName}}&quot; සොයාගෙන එය විවෘත කරන්න",
+            "point4": "අවසර මත තට්ටු කරන්න",
+            "point5": "සබල කරන්න {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
-            "permissionDenied": "Permission for {{kind}} denied. To use it please follow these steps:",
-            "point1": "Go to your iOS Settings",
-            "point2": "Open \"Privacy\"",
-            "point3": "Find {{kind}} and open it",
-            "point4": "Find \"{{communityName}}\" and enable"
+            "dialogTitle": "උපදෙස්",
+            "permissionDenied": "{{kind}} සඳහා අවසරය ප්‍රතික්ෂේප විය. එය භාවිතා කිරීමට කරුණාකර පහත පියවර අනුගමනය කරන්න:",
+            "point1": "ඔබගේ iOS සැකසීම් වෙත යන්න",
+            "point2": "&quot;පෞද්ගලිකත්වය&quot; විවෘත කරන්න",
+            "point3": "{{kind}} සොයාගෙන එය විවෘත කරන්න",
+            "point4": "&quot;{{communityName}}&quot; සොයාගෙන සබල කරන්න"
         },
         "notices": {
-            "youJoinedRoom": "You joined the room",
-            "joining": "Joining: {{userName}}",
-            "sbLeftRoom": "{{userName}} left the room",
-            "switchingRoom": "Switching room...",
-            "forceDisconnecting": "You will be disconnected within 5 seconds",
-            "forceDisconnectingImmediately": "You was disconnected by a host",
-            "youLeftRoom": "You left the room",
-            "codeCopied": "You left the room",
-            "sbBeganFbLive": "{{userName}} began broadcasting this call in Facebook",
-            "sbStoppedFbLive": "{{userName}} stopped broadcasting this call in Facebook",
-            "youBeganFbLive": "You began broadcasting this call in Facebook",
-            "youStoppedFbLive": "You stopped broadcasting this call in Facebook",
-            "youStartedLive": "You began broadcasting this call to custom RTMP",
-            "youStoppedLive": "You stopped broadcasting  this call to custom RTMP",
-            "sbStartedLiveStreaming": "{{userName}} started live",
-            "sbStoppedLiveStreaming": "{{userName}} ended live",
-            "liveStopped": "Error while sending video to endpoint occurred",
-            "youBeganVideoRecording": "You began recording this conference",
-            "youStoppedVideoRecording": "You stopped recording this conference",
-            "linkCopiedToCb": "Link copied to clipboard",
-            "codeCopiedToCb": "Code copied to clipboard",
-            "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "youJoinedRoom": "ඔබ කාමරයට එකතු විය",
+            "joining": "එක්වෙමින්: {{userName}}",
+            "sbLeftRoom": "{{userName}} කාමරයෙන් පිටව ගියේය",
+            "switchingRoom": "කාමරය මාරු කරමින්...",
+            "forceDisconnecting": "තත්පර 5ක් ඇතුළත ඔබ විසන්ධි වේ",
+            "forceDisconnectingImmediately": "ඔබ සත්කාරකයකු විසින් විසන්ධි කර ඇත",
+            "youLeftRoom": "ඔබ කාමරයෙන් පිටව ගියා",
+            "codeCopied": "ඔබ කාමරයෙන් පිටව ගියා",
+            "sbBeganFbLive": "{{userName}} මෙම ඇමතුම Facebook හි විකාශනය කිරීම ආරම්භ කළේය",
+            "sbStoppedFbLive": "{{userName}} මෙම ඇමතුම Facebook හි විකාශනය කිරීම නතර කළේය",
+            "youBeganFbLive": "ඔබ මෙම ඇමතුම Facebook හි විකාශනය කිරීමට පටන් ගත්තේය",
+            "youStoppedFbLive": "ඔබ මෙම ඇමතුම Facebook හි විකාශනය කිරීම නතර කළා",
+            "youStartedLive": "ඔබ මෙම ඇමතුම අභිරුචි RTMP වෙත විකාශනය කිරීමට පටන් ගත්තේය",
+            "youStoppedLive": "ඔබ මෙම ඇමතුම අභිරුචි RTMP වෙත විකාශනය කිරීම නතර කර ඇත",
+            "sbStartedLiveStreaming": "{{userName}} සජීවීව ආරම්භ විය",
+            "sbStoppedLiveStreaming": "{{userName}} සජීවීව අවසන් විය",
+            "liveStopped": "අන්ත ලක්ෂ්‍යයට වීඩියෝව යැවීමේදී දෝෂයක් ඇති විය",
+            "youBeganVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීම ආරම්භ කළා",
+            "youStoppedVideoRecording": "ඔබ මෙම සමුළුව පටිගත කිරීම නැවැත්තුවා",
+            "linkCopiedToCb": "සබැඳිය පසුරු පුවරුවට පිටපත් කරන ලදී",
+            "codeCopiedToCb": "කේතය පසුරු පුවරුවට පිටපත් කරන ලදී",
+            "userHasNoVideo": "සහභාගිවන්නෙකුට වීඩියෝවක් නොමැත",
+            "openInBrowserAlert": "සමුළුවට සම්බන්ධ වීමට සෆාරි බ්‍රවුසරයේ සබැඳිය විවෘත කරන්න."
         },
         "settingsPopup": {
-            "dialogTitle": "Video Settings",
-            "webCamera": "Web Camera",
-            "screenSharing": "Screen Sharing",
-            "shareAnotherScreen": "Share another screen",
-            "turnOffCameras": "Turn off camera",
-            "turnOffVideo": "Turn off camera\/screen sharing",
-            "turnOffAudioInput": "Mute microphone",
-            "turnOffScreenSharing": "Turn off screen sharing",
-            "cameraIsTurnedOff": "Camera is turned off",
-            "micIsTurnedOff": "Microphone is turned off",
-            "startFBLive": "Start Facebook Livestream",
-            "stopFBLive": "Stop Facebook Livestream",
-            "startRecording": "Start Recording",
-            "stopRecording": "Stop Recording",
-            "start": "Start",
-            "stop": "Stop",
-            "recordingInProgress": "Recording is in progress...",
-            "fbLiveTitle": "Title of Livestream",
-            "fbLiveDescription": "Describe your Livestream. What is it about?",
-            "fbOnlyMeLiveAccess": "Only Me",
-            "fbFriendsAccess": "Friends",
-            "fbPublicAccess": "Public",
-            "publishOnTimeline": "Publish on timeline",
-            "publishToGroup": "Publish to group",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "End Livestream",
-            "streamingSettings": "Settings",
+            "dialogTitle": "වීඩියෝ සැකසුම්",
+            "webCamera": "වෙබ් කැමරාව",
+            "screenSharing": "තිර බෙදාගැනීම",
+            "shareAnotherScreen": "වෙනත් තිරයක් බෙදා ගන්න",
+            "turnOffCameras": "කැමරාව ක්‍රියා විරහිත කරන්න",
+            "turnOffVideo": "කැමරා\/තිර බෙදාගැනීම අක්‍රිය කරන්න",
+            "turnOffAudioInput": "මයික්‍රෆෝනය නිශ්ශබ්ද කරන්න",
+            "turnOffScreenSharing": "තිර බෙදාගැනීම අක්‍රිය කරන්න",
+            "cameraIsTurnedOff": "කැමරාව ක්‍රියා විරහිත කර ඇත",
+            "micIsTurnedOff": "මයික්‍රෆෝනය ක්‍රියාවිරහිත කර ඇත",
+            "startFBLive": "Facebook Livestream ආරම්භ කරන්න",
+            "stopFBLive": "Facebook Livestream නවත්වන්න",
+            "startRecording": "පටිගත කිරීම ආරම්භ කරන්න",
+            "stopRecording": "පටිගත කිරීම නවත්වන්න",
+            "start": "ආරම්භ කරන්න",
+            "stop": "නවත්වන්න",
+            "recordingInProgress": "පටිගත කිරීම සිදු වෙමින් පවතී...",
+            "fbLiveTitle": "සජීවී ප්‍රවාහයේ මාතෘකාව",
+            "fbLiveDescription": "ඔබේ සජීවී ප්‍රවාහය විස්තර කරන්න. එය කුමක් ගැනද?",
+            "fbOnlyMeLiveAccess": "මම විතරයි",
+            "fbFriendsAccess": "මිතුරන්",
+            "fbPublicAccess": "මහජන",
+            "publishOnTimeline": "කාලරාමුව මත පළ කරන්න",
+            "publishToGroup": "සමූහයට ප්‍රකාශ කරන්න",
+            "fbStartLive": "සජීවීව යන්න",
+            "fbStopLive": "සජීවී ප්‍රවාහය අවසන් කරන්න",
+            "streamingSettings": "සැකසුම්",
             "fbEmbedCode": "Embed",
-            "copy": "Copy",
-            "streamToRTMP": "Stream to custom RTMP",
-            "startBroadcasting": "Start broadcasting",
-            "broadcastingInProgress": "Broadcasting is in progress"
+            "copy": "පිටපත් කරන්න",
+            "streamToRTMP": "අභිරුචි RTMP වෙත ප්‍රවාහ කරන්න",
+            "startBroadcasting": "විකාශනය ආරම්භ කරන්න",
+            "broadcastingInProgress": "විකාශනය සිදු වෙමින් පවතී"
         },
         "audioSettings": {
-            "dialogTitle": "Audio Settings",
-            "speakers": "Speakers",
-            "microphone": "Microphone"
+            "dialogTitle": "ශ්රව්ය සැකසුම්",
+            "speakers": "කථිකයන්",
+            "microphone": "මයික්රෆෝනය"
         },
         "participantsPopup": {
-            "dialogTitle": "Participant Settings",
-            "disconnect": "Disconnect",
-            "floatingScreens": "Floating Screens",
-            "tiledScreens": "Tiled Screens",
-            "loudestExceptMe": "Loudest Except Me",
-            "maximizeLoudest": "Maximize Loudest",
-            "staticMaximized": "Static Maximized",
-            "fullScreen": "Full Screen",
-            "manual": "Manual",
-            "turnOffCamera": "Hide video",
-            "turnOffAudio": "Mute audio",
-            "turnOffScreenSharing": "Hide screen sharing",
-            "turnOnCamera": "Show video",
-            "turnOnAudio": "Unmute audio",
-            "turnOnScreenSharing": "Show screen sharing"
+            "dialogTitle": "සහභාගිවන්නන්ගේ සැකසුම්",
+            "disconnect": "විසන්ධි කරන්න",
+            "floatingScreens": "පාවෙන තිර",
+            "tiledScreens": "ටයිල් කළ තිර",
+            "loudestExceptMe": "මම හැර හයියෙන්",
+            "maximizeLoudest": "උපරිම ශබ්ද නඟා",
+            "staticMaximized": "ස්ථිතික උපරිමය",
+            "fullScreen": "පුන් තිරය",
+            "manual": "අත්පොත",
+            "turnOffCamera": "වීඩියෝව සඟවන්න",
+            "turnOffAudio": "ශ්‍රව්‍ය නිශ්ශබ්ද කරන්න",
+            "turnOffScreenSharing": "තිර බෙදාගැනීම සඟවන්න",
+            "turnOnCamera": "වීඩියෝව පෙන්වන්න",
+            "turnOnAudio": "ශ්‍රව්‍ය නිහඬ නොකරන්න",
+            "turnOnScreenSharing": "තිර බෙදාගැනීම පෙන්වන්න"
         },
         "streamingSettings": {
-            "title": "Streaming Settings"
+            "title": "ප්‍රවාහ සැකසුම්"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "රැස්වීම",
+            "MeetingEnded": "රැස්වීම අවසන් විය"
         }
     },
     "types": {
         "Streams\/invited": {
-            "displayType": "Invited",
-            "description": "Inbox for invitations"
+            "displayType": "ආරාධනා කළා",
+            "description": "ආරාධනා සඳහා inbox කරන්න"
         },
         "Streams\/resource": {
-            "displayType": "Resource",
-            "description": "stream for managing access to a resource and posting messages about updates"
+            "displayType": "සම්පත්",
+            "description": "සම්පතකට ප්‍රවේශය කළමනාකරණය කිරීම සහ යාවත්කාලීන පිළිබඳ පණිවිඩ පළ කිරීම සඳහා ප්‍රවාහය"
         },
         "Streams\/task": {
-            "description": "for receiving updates about progress on a certain task",
-            "displayType": "Task"
+            "description": "යම් කාර්යයක ප්‍රගතිය පිළිබඳ යාවත්කාලීන ලබා ගැනීම සඳහා",
+            "displayType": "කාර්ය"
         },
         "Streams\/tasks": {
-            "description": "category for tasks",
-            "displayType": "Tasks"
+            "description": "කාර්යයන් සඳහා ප්රවර්ගය",
+            "displayType": "කාර්යයන්"
         },
         "Streams\/experience": {
-            "description": "a common experience for members of a community",
-            "displayType": "Common experience for members of a community"
+            "description": "ප්රජාවක සාමාජිකයන් සඳහා පොදු අත්දැකීමක්",
+            "displayType": "ප්‍රජාවක සාමාජිකයන් සඳහා පොදු අත්දැකීම"
         },
         "Streams\/greeting": {
-            "description": "greeting with which a user can introduce themselves",
-            "displayType": "Greeting"
+            "description": "පරිශීලකයෙකුට තමන්ව හඳුන්වා දිය හැකි සුබ පැතුම්",
+            "displayType": "සුභ පැතුම්"
         },
         "Streams\/number": {
-            "displayType": "Number",
-            "description": "mathematical number"
+            "displayType": "ගණන",
+            "description": "ගණිතමය අංකය"
         },
         "Streams\/date": {
-            "displayType": "Date",
-            "description": "date"
+            "displayType": "දිනය",
+            "description": "දිනය"
         },
         "Streams\/text": {
-            "displayType": "Text",
-            "description": "body of text"
+            "displayType": "පෙළ",
+            "description": "පෙළ ශරීරය"
         },
         "Streams\/text\/small": {
-            "displayType": "Text",
-            "description": "small body of text"
+            "displayType": "පෙළ",
+            "description": "කුඩා පෙළ කොටස"
         },
         "Streams\/text\/medium": {
-            "displayType": "Text",
-            "description": "medium body of text"
+            "displayType": "පෙළ",
+            "description": "මධ්‍යම පෙළ පෙළ"
         },
         "Streams\/text\/emailAddress": {
-            "displayType": "Email Address",
-            "description": "email address"
+            "displayType": "විද්යුත් තැපැල් ලිපිනය",
+            "description": "විද්යුත් තැපැල් ලිපිනය"
         },
         "Streams\/text\/phoneNumber": {
-            "displayType": "Phone Number",
-            "description": "phone number"
+            "displayType": "දුරකතන අංකය",
+            "description": "දුරකතන අංකය"
         },
         "Streams\/text\/url": {
             "displayType": "URL",
-            "description": "link on the web"
+            "description": "වෙබයේ සබැඳිය"
         },
         "Streams\/image": {
-            "displayType": "Image",
-            "description": "visual image",
-            "newItem": "Add Image"
+            "displayType": "රූප",
+            "description": "දෘශ්ය රූපය",
+            "newItem": "රූපය එකතු කරන්න"
         },
         "Streams\/images": {
-            "displayType": "Image Gallery",
-            "description": "gallery of images"
+            "displayType": "පින්තූර ගැලරිය",
+            "description": "පින්තූර ගැලරිය"
         },
         "Streams\/album": {
-            "displayType": "Album",
-            "description": "an album to which various media is related"
+            "displayType": "ඇල්බමය",
+            "description": "විවිධ මාධ්‍ය සම්බන්ධ ඇල්බමයකි"
         },
         "Streams\/file": {
-            "displayType": "File",
-            "description": "uploaded file",
-            "newItem": "Add File"
+            "displayType": "ගොනුව",
+            "description": "උඩුගත කළ ගොනුව",
+            "newItem": "ගොනුව එක් කරන්න"
         },
         "Streams\/audio": {
             "displayType": "Audio Clip",
-            "description": "audio clip",
-            "newItem": "Add Audio"
+            "description": "ශ්රව්ය පටය",
+            "newItem": "ශ්රව්ය උපකරණ එකතු කරන්න"
         },
         "Streams\/video": {
-            "displayType": "Video Clip",
-            "description": "video clip",
-            "newItem": "Add Video"
+            "displayType": "වීඩියෝ පටය",
+            "description": "වීඩියෝ පටය",
+            "newItem": "වීඩියෝ එකතු කරන්න"
         },
         "Streams\/pdf": {
-            "displayType": "PDF document",
-            "description": "PDF document",
-            "newItem": "Add PDF"
+            "displayType": "PDF ලේඛනය",
+            "description": "PDF ලේඛනය",
+            "newItem": "PDF එකතු කරන්න"
         },
         "Streams\/live": {
-            "displayType": "Livestream",
-            "description": "live audio or video"
+            "displayType": "සජීවී විකාශය",
+            "description": "සජීවී ශ්‍රව්‍ය හෝ වීඩියෝ"
         },
         "Streams\/category": {
-            "displayType": "Category",
-            "description": "a category to which other streams can be related"
+            "displayType": "වර්ගය",
+            "description": "වෙනත් ප්‍රවාහයන් සම්බන්ධ කළ හැකි ප්‍රවර්ගයකි"
         },
         "Streams\/participating": {
-            "displayType": "Participating Index",
-            "description": "streams are related\/unrelated to this when a user joins\/leaves"
+            "displayType": "සහභාගීත්ව දර්ශකය",
+            "description": "ප්‍රවාහයන් පරිශීලකයෙකු එක්වන විට\/පිටව යන විට මෙයට සම්බන්ධ\/සම්බන්ධ නොවේ"
         },
         "Streams\/interest": {
-            "displayType": "Interest",
-            "description": "represents a user's interest in a certain topic"
+            "displayType": "උනන්දුව",
+            "description": "යම් මාතෘකාවක් සඳහා පරිශීලකයාගේ උනන්දුව නියෝජනය කරයි"
         },
         "Streams\/incoming": {
-            "displayType": "Incoming",
-            "description": "destination for messages sent by other users"
+            "displayType": "එන",
+            "description": "වෙනත් පරිශීලකයින් විසින් එවන ලද පණිවිඩ සඳහා ගමනාන්තය"
         },
         "Streams\/chat": {
-            "displayType": "Conversation",
-            "description": "a conversation between users, with history"
+            "displayType": "සාකච්ඡාව",
+            "description": "ඉතිහාසය සමඟ පරිශීලකයන් අතර සංවාදයක්"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "තත්‍ය කාලීන ඇමතුම",
+            "description": "තත්‍ය කාලීන වීඩියෝ\/ශ්‍රව්‍ය ඇමතුමක්"
         },
         "Streams\/question": {
-            "displayType": "Question",
-            "description": "question stream"
+            "displayType": "ප්රශ්නය",
+            "description": "ප්රශ්න ධාරාව"
         },
         "Streams\/answer": {
-            "displayType": "Answer",
-            "description": "answer stream"
+            "displayType": "පිළිතුර",
+            "description": "පිළිතුරු ධාරාව"
         },
         "Streams\/calls": {
-            "displayType": "Calls",
-            "description": "category for Streams\/webrtc",
-            "MaxRelationsExceeded": "Max calls exceeded"
+            "displayType": "ඇමතුම්",
+            "description": "ප්‍රවාහ\/webrtc සඳහා ප්‍රවර්ගය",
+            "MaxRelationsExceeded": "උපරිම ඇමතුම් ඉක්මවා ඇත"
         }
     },
     "menu": {
-        "placeholder": "type page title",
-        "ModTab": "Modify Item",
-        "Save": "Save",
-        "Delete": "Delete",
-        "Submenu": "Submenu"
+        "placeholder": "පිටු මාතෘකාව ටයිප් කරන්න",
+        "ModTab": "අයිතමය වෙනස් කරන්න",
+        "Save": "සුරකින්න",
+        "Delete": "මකන්න",
+        "Submenu": "උප මෙනුව"
     },
     "audio": {
-        "record": "Record",
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
+        "record": "වාර්තාව",
+        "reset": "යළි පිහිටුවන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
         "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No audio source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "ශ්‍රව්‍ය මූලාශ්‍රයක් නැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව විශාල වැඩියි.<br> උපරිම ගොනු ප්‍රමාණය {{size}}"
     },
     "video": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
+        "reset": "යළි පිහිටුවන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
         "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No video source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "වීඩියෝ මූලාශ්‍ර නැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව විශාල වැඩියි.<br> උපරිම ගොනු ප්‍රමාණය {{size}}"
     },
     "pdf": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
+        "reset": "යළි පිහිටුවන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
         "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No pdf source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "pdf මූලාශ්‍රයක් නැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව විශාල වැඩියි.<br> උපරිම ගොනු ප්‍රමාණය {{size}}"
     },
     "image": {
-        "reset": "Reset",
-        "edit": "Edit",
-        "title": "title",
-        "description": "description",
-        "upload": "Upload",
-        "link": "Link",
-        "setUrl": "Set URL",
-        "save": "Save",
-        "uploadedImage": "Uploaded image",
-        "imageTitle": "Image title",
+        "reset": "යළි පිහිටුවන්න",
+        "edit": "සංස්කරණය කරන්න",
+        "title": "ශීර්ෂය",
+        "description": "විස්තර",
+        "upload": "උඩුගත කරන්න",
+        "link": "සබැඳිය",
+        "setUrl": "URL සකසන්න",
+        "save": "සුරකින්න",
+        "uploadedImage": "උඩුගත කළ රූපය",
+        "imageTitle": "රූපයේ මාතෘකාව",
         "setClip": "Cut Out Clip",
-        "invalidURL": "Invalid URL",
-        "invalidFile": "Invalid File",
-        "errorNoSource": "No image source",
-        "uploadLimit": "Max file size: {{size}}",
-        "errorFileSize": "Sorry, but file too large.<br>Max file size is {{size}}"
+        "invalidURL": "වලංගු නැති URL",
+        "invalidFile": "වලංගු නොවන ගොනු",
+        "errorNoSource": "රූප මූලාශ්‍රයක් නැත",
+        "uploadLimit": "උපරිම ගොනු ප්‍රමාණය: {{size}}",
+        "errorFileSize": "කණගාටුයි, නමුත් ගොනුව විශාල වැඩියි.<br> උපරිම ගොනු ප්‍රමාණය {{size}}"
     },
     "questions": {
-        "Questions": "Questions",
-        "Answers": "Answers",
-        "AnswerQuestion": "Answer Question",
-        "SetYourAnswer": "Please answer the question",
-        "NewQuestion": "New Question",
-        "NewAnswer": "New Answer",
-        "AnswerDetails": "Answer Details",
-        "answerOption": "Option",
-        "answerOptionExclusive": "Exclusive",
-        "answerTextarea": "Textarea",
-        "FreeAnswer": "Write your answer here",
-        "SaveQuestion": "Save Question",
-        "SaveAnswer": "Save Answer",
-        "AddAnotherAnswer": "Add another answer",
-        "ErrorAnswers": "Please add even one answer",
-        "AlreadyAnswered": "Already answered",
-        "TitlePlaceholder": "Type your question",
-        "ContentPlaceholder": "Put any additional information here to help people answer",
-        "ErrorTitle": "Question required",
-        "Placeholder": "Placeholder"
+        "Questions": "ප්රශ්නය",
+        "Answers": "පිළිතුරු",
+        "AnswerQuestion": "ප්රශ්නයට පිළිතුරු දෙන්න",
+        "SetYourAnswer": "කරුණාකර ප්‍රශ්නයට පිළිතුරු දෙන්න",
+        "NewQuestion": "අලුත් ප්‍රශ්නය",
+        "NewAnswer": "නව පිළිතුර",
+        "AnswerDetails": "පිළිතුරු විස්තර",
+        "answerOption": "විකල්පය",
+        "answerOptionExclusive": "බැහැරව",
+        "answerTextarea": "ටෙක්ස්ටාරියා",
+        "FreeAnswer": "ඔබේ පිළිතුර මෙහි ලියන්න",
+        "SaveQuestion": "ප්‍රශ්නය සුරකින්න",
+        "SaveAnswer": "පිළිතුර සුරකින්න",
+        "AddAnotherAnswer": "තවත් පිළිතුරක් එක් කරන්න",
+        "ErrorAnswers": "කරුණාකර එක් පිළිතුරක් හෝ එක් කරන්න",
+        "AlreadyAnswered": "දැනටමත් පිළිතුරු දී ඇත",
+        "TitlePlaceholder": "ඔබේ ප්‍රශ්නය ටයිප් කරන්න",
+        "ContentPlaceholder": "මිනිසුන්ට පිළිතුරු දීමට උදවු කිරීමට ඕනෑම අමතර තොරතුරු මෙහි දමන්න",
+        "ErrorTitle": "ප්‍රශ්නය අවශ්‍යයි",
+        "Placeholder": "ස්ථාන දරන්නා"
     },
     "experience": {
-        "NewExperience": "New Experience",
-        "DefineTitle": "Please define a title",
-        "Create": "Create"
+        "NewExperience": "අලුත් අත්දැකීමක්",
+        "DefineTitle": "කරුණාකර මාතෘකාවක් නිර්වචනය කරන්න",
+        "Create": "නිර්මාණය කරන්න"
     },
     "calls": {
-        "SettingsTitle": "Calls",
-        "MaxCalls": "Max calls",
-        "Update": "Update",
-        "NoCallsYet": "No calls yet",
-        "CallReasonTitle": "What is this call about?",
-        "WaitingRoom": "Waiting Room"
+        "SettingsTitle": "ඇමතුම්",
+        "MaxCalls": "උපරිම ඇමතුම්",
+        "Update": "යාවත්කාලීන කරන්න",
+        "NoCallsYet": "තවම ඇමතුම් නැත",
+        "CallReasonTitle": "මෙම ඇමතුම කුමක් සඳහාද?",
+        "WaitingRoom": "නැවතීම් ශාලාව"
     }
 }

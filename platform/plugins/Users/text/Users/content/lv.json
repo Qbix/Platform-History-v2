@@ -1,132 +1,132 @@
 {
     "analytics": {
         "Title": "Analytics",
-        "Daily": "Daily",
-        "Weekly": "Weekly",
-        "Monthly": "Monthly",
-        "Application": "Application",
-        "Pages": "Pages",
-        "Services": "Services",
-        "Faq": "Faq",
-        "WeekDays": "Week Days"
+        "Daily": "Ikdienas",
+        "Weekly": "Iknedēļas",
+        "Monthly": "Ikmēneša",
+        "Application": "Pieteikums",
+        "Pages": "Lapas",
+        "Services": "Pakalpojumi",
+        "Faq": "FAQ",
+        "WeekDays": "Nedēļas dienas"
     },
     "actions": {
-        "LogIn": "log in",
-        "LogOut": "log out"
+        "LogIn": "Pieslēgties",
+        "LogOut": "izlogoties"
     },
     "activate": {
-        "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
-        "LogOutAndTryAgain": "Log Out and Try Again",
-        "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetAsPrimary": "Iestatīt {{1}} kā galveno {{2}}",
+        "ChoosePassPhrase": "Izvēlieties <strong>ieejas frāzi<\/strong> , ar kuru pieteikties.<br> Vienkārša frāze, kas sastāv no dažiem vārdiem, ko jūs viegli atcerēsities.",
+        "ChoosePassPhraseSeeSuggestions": "Izvēlieties labu <strong>ieejas frāzi<\/strong> , lai aizsargātu savu kontu. Skatiet ieteikumus dažām idejām.",
+        "LogOutAndTryAgain": "Izejiet un mēģiniet vēlreiz",
+        "IfYouFeel": "Ja jūtat, ka kaut kas nogāja greizi, varat",
+        "SetIdentifierButtonTitle": "sākt no jauna"
     },
     "session": {
-        "GetStarted": "Get Started"
+        "GetStarted": "Sāc"
     },
     "authorize": {
-        "GetStarted": "Get Started",
-        "Authorize": "Authorize",
-        "TermsLabel": "I have read and agree<br>to the {{link}}",
-        "TermsTitle": "Terms",
-        "mustAgree": "First you must agree to the terms."
+        "GetStarted": "Sāc",
+        "Authorize": "Autorizēties",
+        "TermsLabel": "Izlasīju un piekrītu<br> uz {{link}}",
+        "TermsTitle": "Noteikumi",
+        "mustAgree": "Vispirms jums jāpiekrīt noteikumiem."
     },
     "register": {
-        "TermsLabel": "I accept the {{link}}",
-        "TermsTitle": "Terms"
+        "TermsLabel": "Es piekrītu {{link}}",
+        "TermsTitle": "Noteikumi"
     },
     "notifications": {
-        "title": "Permission",
-        "prompt": "Do you want to enable notifications? You'll receive real-time updates about things you care about.",
-        "yes": "Yes",
-        "no": "No",
-        "WelcomePleaseVerifyEmail": "Welcome! Please verify your email address.",
-        "WelcomeVerifyEmail": "Welcome! Verify your email address.",
-        "ForgetPass": "Hey, did you forget your passphrase?",
-        "PassphraseSaved": "Your pass phrase has been saved.",
-        "IdentifierActivated": "Your {{type}} has been activated.",
-        "CompletedActivation": "You've completed user activation.",
-        "CompletedActivationLogIn": "You've completed user activation. Try logging in now."
+        "title": "Atļauja",
+        "prompt": "Vai vēlaties iespējot paziņojumus? Jūs saņemsit reāllaika atjauninājumus par lietām, kas jums rūp.",
+        "yes": "Jā",
+        "no": "Nē",
+        "WelcomePleaseVerifyEmail": "Laipni lūdzam! Lūdzu, apstipriniet savu e-pasta adresi.",
+        "WelcomeVerifyEmail": "Laipni lūdzam! Pārbaudiet savu e-pasta adresi.",
+        "ForgetPass": "Sveiki, vai aizmirsāt savu ieejas frāzi?",
+        "PassphraseSaved": "Jūsu ieejas frāze ir saglabāta.",
+        "IdentifierActivated": "Jūsu {{type}} ir aktivizēts.",
+        "CompletedActivation": "Jūs esat pabeidzis lietotāja aktivizāciju.",
+        "CompletedActivationLogIn": "Jūs esat pabeidzis lietotāja aktivizāciju. Mēģiniet pieteikties tūlīt."
     },
     "contacts": {
         "dialog": {
-            "title": "Choose contact",
-            "CreateAccount": "+ New Contact",
-            "CreateAccountNotFound": "Q.Users.Cordova.UI.create not found",
-            "SearchByName": "Search by name",
-            "EmptyContacts": "Contacts not found..."
+            "title": "Izvēlieties kontaktpersonu",
+            "CreateAccount": "+ Jauna kontaktpersona",
+            "CreateAccountNotFound": "Q.Users.Cordova.UI.create nav atrasts",
+            "SearchByName": "Meklēt pēc vārda",
+            "EmptyContacts": "Kontakti nav atrasti..."
         },
         "select": {
-            "title": "Select contact of {{displayName}}"
+            "title": "Atlasīt {{displayName}} kontaktpersonu"
         }
     },
     "usersContacts": {
-        "selectLabel": "Please select label.",
-        "inviteUser": "Invite Users",
-        "selectRole": "Select Role",
-        "inviteRole": "Invite {{role}}"
+        "selectLabel": "Lūdzu, atlasiet iezīmi.",
+        "inviteUser": "Uzaiciniet lietotājus",
+        "selectRole": "Atlasiet Loma",
+        "inviteRole": "Uzaicināt {{role}}"
     },
-    "invalidLanguageSelected": "Invalid language selected",
+    "invalidLanguageSelected": "Atlasīta nederīga valoda",
     "login": {
-        "title": "Welcome",
-        "directions": "Create an account, or log in.",
-        "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
-        "passphrase": "Enter your pass phrase:",
-        "loginButton": "Get Started",
-        "registerButton": "Get Started",
-        "resendButton": "Send Activation Message",
-        "forgot": "Forgot it?",
-        "resendConfirm": "Do you want to send a message to reset your passphrase?",
-        "resendSuccess": "Check for a message to reset your passphrase",
-        "resendClose": "Close",
-        "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
-        "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "usingOther": "or you can ",
-        "prompt": "Choose a username:",
-        "newUser": "or create a new account below",
+        "title": "Laipni lūdzam",
+        "directions": "Izveidojiet kontu vai piesakieties.",
+        "directionsNoRegister": "Piesakieties, ja jums ir konts.",
+        "goButton": "Aiziet",
+        "passphrase": "Ievadiet ieejas frāzi:",
+        "loginButton": "Sāc",
+        "registerButton": "Sāc",
+        "resendButton": "Nosūtiet aktivizācijas ziņojumu",
+        "forgot": "Aizmirsāt?",
+        "resendConfirm": "Vai vēlaties nosūtīt ziņojumu, lai atiestatītu ieejas frāzi?",
+        "resendSuccess": "Meklējiet ziņojumu, lai atiestatītu ieejas frāzi",
+        "resendClose": "Aizvērt",
+        "noPassphrase": "Lai varētu pieteikties, jums jāiestata ieejas frāze, noklikšķinot uz saites aktivizācijas ziņojumā.",
+        "notVerified": "Lai pieteiktos, jums ir jānosūta sev aktivizācijas ziņojums.",
+        "emailExists": "Vai iepriekš mēģinājāt reģistrēties, izmantojot šo e-pastu? Ja tā, pārbaudiet savu iesūtni, lai aktivizētu savu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu<\/a>",
+        "mobileExists": "Vai iepriekš mēģinājāt reģistrēties ar šo mobilā tālruņa numuru? Ja tā, pārbaudiet savu SMS, lai aktivizētu savu kontu. <a href='#resend' class='Q_button Users_activation_resend'>Noklikšķiniet, lai atkārtoti nosūtītu ziņojumu<\/a>",
+        "usingOther": "vai arī jūs varat",
+        "prompt": "Izvēlies lietotājvārdu:",
+        "newUser": "vai izveidojiet jaunu kontu tālāk",
         "placeholders": {
-            "identifier": "your mobile # or email",
-            "mobile": "enter your mobile #",
-            "email": "enter your email address",
-            "username": "use letters and numbers only"
+            "identifier": "savu mobilā tālruņa numuru vai e-pastu",
+            "mobile": "ievadiet savu mobilā tālruņa numuru",
+            "email": "ievadiet savu e-pasta adresi",
+            "username": "izmantojiet tikai burtus un ciparus"
         },
-        "confirmTerms": "Accept the Terms of Service?",
-        "facebookNoEmail": "Your facebook account is missing a confirmed email address. Simply log in the native way.",
-        "picTooltip": "You can change this picture later",
+        "confirmTerms": "Vai piekrītat pakalpojumu sniegšanas noteikumiem?",
+        "facebookNoEmail": "Jūsu Facebook kontā trūkst apstiprinātas e-pasta adreses. Vienkārši piesakieties vietējā veidā.",
+        "picTooltip": "Vēlāk varat mainīt šo attēlu",
         "wallet": {
-            "payload": "Log into {{host}} at time {{timestamp}}",
+            "payload": "Piesakieties {{host}} laikā {{timestamp}}",
             "alert": {
-                "title": "Redirecting to Wallet",
-                "content": "Once you close this dialog, you'll be taken to your wallet. After you sign in, return to this page."
+                "title": "Notiek novirzīšana uz maku",
+                "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
             }
         }
     },
     "setIdentifier": {
-        "title": "Add a way to log in",
-        "sendMessage": "Send Activation Message",
+        "title": "Pievienojiet veidu, kā pieteikties",
+        "sendMessage": "Nosūtiet aktivizācijas ziņojumu",
         "placeholders": {
-            "identifier": "enter your mobile # or email",
-            "mobile": "enter your mobile number",
-            "email": "enter your email address",
-            "username": "username"
+            "identifier": "ievadiet savu mobilā tālruņa numuru vai e-pastu",
+            "mobile": "ievadiet savu mobilā tālruņa numuru",
+            "email": "ievadiet savu e-pasta adresi",
+            "username": "lietotājvārds"
         }
     },
     "prompt": {
-        "title": "{{Platform}} Account",
-        "areUsing": "You are using {{platform}} as",
-        "noLongerUsing": "You are no longer connected to {{platform}} as",
-        "doAuth": "Log in with this account",
-        "doSwitch": "Switch to this account"
+        "title": "{{Platform}} Konts",
+        "areUsing": "Jūs izmantojat {{platform}} kā",
+        "noLongerUsing": "Jūs vairs neesat savienots ar {{platform}} kā",
+        "doAuth": "Piesakieties ar šo kontu",
+        "doSwitch": "Pārslēdzieties uz šo kontu"
     },
     "roles": {
-        "Owner": "Owner",
-        "Admin": "Admin",
-        "Member": "Member",
-        "Guest": "Guest",
-        "Host": "Host"
+        "Owner": "Īpašnieks",
+        "Admin": "Administrators",
+        "Member": "Biedrs",
+        "Guest": "Viesis",
+        "Host": "Uzņēmēja"
     }
 }

@@ -1,265 +1,265 @@
 {
     "browsertab": {
         "html": "{{button}}",
-        "button": "Tap to pay"
+        "button": "Tsindrio handoa"
     },
     "notifications": {
-        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
-        "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
-        "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "ChargeProcessedFor": "{{call 'publisher.displayName'}}: voarindra ho an&#39;ny {{call 'user.displayName'}}",
+        "ThankYouForYourPayment": "Misaotra anao tamin&#39;ny fandoavanao {{call 'publisher.displayName'}}",
+        "SubscribedTo": "{{call 'user.displayName'}} nisoratra anarana {{plan.title}}",
+        "YouSubscribedTo": "Efa nisoratra anarana tamin&#39;ny {{plan.title}} ianao"
     },
     "charge": {
-        "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
-        "HasBeenCharged": "Hey, this is just to let you know {{1}} has been charged {{2}} for {{3}} by {{4}}"
+        "Subject": "Mahazo fandoavana {{displayAmount}} avy amin&#39;ny {{call 'publisher.displayName'}} amin&#39;ny &quot;{{description}}&quot; ianao",
+        "HasBeenCharged": "Hey, mampahafantatra anao fotsiny ity fa {{1}} dia voapanga {{2}} {{3}} tamin&#39;ny {{4}}"
     },
     "charged": {
-        "Subject": "Thank you for your payment for \"{{description}}\"",
-        "HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+        "Subject": "Misaotra anao tamin&#39;ny fandoavanao ny &quot;{{description}}&quot;",
+        "HavePaid": "Ry {{1}}, fanamafisam-peo haingana fotsiny ity fa nahavita nandoa {{2}} tamin&#39;ny {{3}} ho an&#39;ny {{4}}"
     },
     "payment": {
-        "AboutOrder": "Info about order",
-        "PaymentMethod": "Payment method",
-        "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "AboutOrder": "Info momba ny baiko",
+        "PaymentMethod": "Fomba fandoavam-bola",
+        "ContactInfo": "Fifandraisana",
+        "Pay": "vola"
     },
     "credits": {
-        "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
-        "Streams_user_firstname": "{{invitedUserName}} entered first name",
-        "Streams_user_lastname": "{{invitedUserName}} entered last name",
-        "Streams_user_icon": "{{invitedUserName}} entered icon",
-        "Places_user_location": "{{invitedUserName}} entered location",
-        "Streams_greeting": "{{invitedUserName}} entered greeting",
-        "YouHaveCreditsToStart": "You have {{amount}} credits to start",
-        "PaymentFor": "Payment for \"{{1}}\"",
-        "PaymentTo": "Payment to {{1}}",
-        "PaymentToUser": "Payment to {{toUserName}}",
-        "CreatePaidStream": "for creating {{toStreamName}}",
-        "JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "CreatedCommunity": "for creating community \"{{communityId}}\"",
-        "LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Bonus {{amount}} credits",
-        "BuyAmountCredits": "Buy {{amount}} credits",
-        "WatchClip": "Earned {{amount}} credits for watching {{fromStreamTitle}}",
-        "MissingCredits": "Missing Credits",
-        "YouMissingCredits": "You need an additional {{amount}} credits to proceed.",
-        "BuyCredits": "Buy credits",
-        "BuyBonus": "Buying {{amount}} credits at once, will lead to {{bonus}} credits bonus.",
+        "InviteAcceptedBy": "Fanasana neken&#39;ny {{invitedUserName}}",
+        "Streams_user_firstname": "{{invitedUserName}} dia nampiditra anarana voalohany",
+        "Streams_user_lastname": "{{invitedUserName}} dia nampiditra anarana farany",
+        "Streams_user_icon": "{{invitedUserName}} niditra kisary",
+        "Places_user_location": "{{invitedUserName}} niditra toerana",
+        "Streams_greeting": "{{invitedUserName}} dia niditra fiarahabana",
+        "YouHaveCreditsToStart": "Manana crédit {{amount}} ianao hanombohana",
+        "PaymentFor": "Fandoavana ny &quot;{{1}}&quot;",
+        "PaymentTo": "Fandoavana amin&#39;ny {{1}}",
+        "PaymentToUser": "Fandoavana amin&#39;ny {{toUserName}}",
+        "CreatePaidStream": "amin&#39;ny famoronana {{toStreamName}}",
+        "JoinedPaidStream": "ho famandrihana ao amin&#39;ny &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "CreatedCommunity": "amin&#39;ny famoronana vondrom-piarahamonina &quot;{{communityId}}&quot;",
+        "LeftPaidStream": "ho famerenan&#39;ny famandrihana ao amin&#39;ny &quot; <a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a> &quot;",
+        "BoughtCredits": "Nividy crédit {{amount}}.",
+        "BonusCredits": "Mahazo tombony {{amount}}.",
+        "BuyAmountCredits": "Mividiana crédit {{amount}}.",
+        "WatchClip": "Nahazo crédit {{amount}} tamin&#39;ny fijerena {{fromStreamTitle}}",
+        "MissingCredits": "Credits tsy hita",
+        "YouMissingCredits": "Mila crédit fanampiny {{amount}} ianao raha te handroso.",
+        "BuyCredits": "Mividiana crédit",
+        "BuyBonus": "Ny fividianana crédit {{amount}} indray mandeha dia hitondra tombony {{bonus}} crédit.",
         "Buy": "Buy",
-        "PurchaseCredits": "Purchase Credits",
-        "Credits": "Credits",
-        "ErrorInvalidAmount": "Amount invalid",
-        "ErrorInvalidCurrency": "Unfortunately we don't support currency {{currency}} yet",
+        "PurchaseCredits": "Mividiana Credits",
+        "Credits": "nahazoan-dalana",
+        "ErrorInvalidAmount": "Tsy manan-kery",
+        "ErrorInvalidCurrency": "Indrisy fa tsy mbola manohana vola {{currency}} izahay",
         "forMessages": {
-            "BoughtCredits": "{{amount}} credits",
-            "BonusCredits": "{{amount}} credits"
+            "BoughtCredits": "{{amount}} crédit",
+            "BonusCredits": "{{amount}} crédit"
         }
     },
     "history": {
-        "Date": "Date",
-        "Amount": "Amount",
+        "Date": "Daty",
+        "Amount": "vola",
         "Description": "Description",
-        "Client": "Client",
-        "To": "to",
-        "From": "from",
-        "SeeHistory": "See payment history for {{1}}",
-        "HistoryEmpty": "You have no data yet",
-        "PaymentFor": "Sent {{amount}} credits",
-        "PaymentTo": "Sent {{amount}} credits",
-        "PaymentToUser": "Sent {{amount}} credits",
-        "CreatePaidStream": "Spent {{amount}} credits",
+        "Client": "mpanjifa",
+        "To": "ny",
+        "From": "From",
+        "SeeHistory": "Jereo ny tantaran&#39;ny fandoavana ny {{1}}",
+        "HistoryEmpty": "Tsy mbola manana angona ianao",
+        "PaymentFor": "Nandefa crédit {{amount}}.",
+        "PaymentTo": "Nandefa crédit {{amount}}.",
+        "PaymentToUser": "Nandefa crédit {{amount}}.",
+        "CreatePaidStream": "Nandany {{amount}} crédit",
         "WatchClip": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Nahazo crédit {{amount}}.",
+            "-": "Nandany {{amount}} crédit"
         },
         "JoinedPaidStream": {
-            "+": "Earned {{amount}} credits",
-            "-": "Spent {{amount}} credits"
+            "+": "Nahazo crédit {{amount}}.",
+            "-": "Nandany {{amount}} crédit"
         },
         "LeftPaidStream": {
-            "+": "Received {{amount}} credits",
-            "-": "Sent {{amount}} credits"
+            "+": "Nahazo crédit {{amount}}.",
+            "-": "Nandefa crédit {{amount}}."
         },
-        "CreatedCommunity": "Spent {{amount}} credits",
-        "BoughtCredits": "Bought {{amount}} credits",
-        "BonusCredits": "Got bonus {{amount}} credits",
-        "InviteAcceptedBy": "Earned {{amount}} credits",
-        "Streams_user_firstname": "Earned {{amount}} credits",
-        "Streams_user_lastname": "Earned {{amount}} credits",
-        "Streams_user_icon": "Earned {{amount}} credits",
-        "Places_user_location": "Earned {{amount}} credits",
-        "Streams_greeting": "Earned {{amount}} credits",
-        "YouHaveCreditsToStart": "Earned {{amount}} credits"
+        "CreatedCommunity": "Nandany {{amount}} crédit",
+        "BoughtCredits": "Nividy crédit {{amount}}.",
+        "BonusCredits": "Nahazo tombony {{amount}} crédit",
+        "InviteAcceptedBy": "Nahazo crédit {{amount}}.",
+        "Streams_user_firstname": "Nahazo crédit {{amount}}.",
+        "Streams_user_lastname": "Nahazo crédit {{amount}}.",
+        "Streams_user_icon": "Nahazo crédit {{amount}}.",
+        "Places_user_location": "Nahazo crédit {{amount}}.",
+        "Streams_greeting": "Nahazo crédit {{amount}}.",
+        "YouHaveCreditsToStart": "Nahazo crédit {{amount}}."
     },
     "subscriptions": {
-        "infoTitle": "Set Payment Information",
+        "infoTitle": "Mametraha fampahalalana momba ny fandoavam-bola",
         "confirm": {
-            "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Manomboka famandrihana",
+            "message": "Te-hisoratra anarana amin&#39;ny {{title}} ve ianao?",
+            "ok": "ok",
+            "cancel": "hanafoana"
         },
-        "CreditOrDebitCard": "Credit or debit card",
-        "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "CreditOrDebitCard": "Carte de crédit na debit",
+        "SubscribePayment": "Misoratra anarana fandoavam-bola",
+        "ImmediatePayment": "Fandoavana avy hatrany"
     },
     "payments": {
-        "infoTitle": "Set Payment Information",
-        "BuyAmountCredits": "Buy {{amount}} credits",
+        "infoTitle": "Mametraha fampahalalana momba ny fandoavam-bola",
+        "BuyAmountCredits": "Mividiana crédit {{amount}}.",
         "confirm": {
-            "title": "Make a Payment",
-            "message": "Do you agree to pay {{symbol}}{{amount}}?",
-            "ok": "OK",
-            "cancel": "Cancel"
+            "title": "Manaova fandoavana",
+            "message": "Manaiky handoa {{symbol}}{{amount}} ve ianao?",
+            "ok": "ok",
+            "cancel": "hanafoana"
         }
     },
     "types": {
         "Assets\/credits": {
-            "displayType": "Credits",
-            "description": "keeps track of credits and payments"
+            "displayType": "nahazoan-dalana",
+            "description": "manara-maso ny crédit sy ny fandoavam-bola"
         },
         "Assets\/plan": {
-            "displayType": "Subsription Plan",
-            "description": "subscription plan"
+            "displayType": "Drafitra famandrihana",
+            "description": "drafitra famandrihana"
         },
         "Assets\/subscription": {
-            "displayType": "Subscription",
-            "description": "subscription"
+            "displayType": "Famandrihana",
+            "description": "famandrihana"
         },
         "Assets\/product": {
-            "displayType": "Product",
-            "description": "product being sold"
+            "displayType": "vokatra",
+            "description": "vokatra amidy"
         },
         "Assets\/service": {
-            "displayType": "Service",
-            "description": "service being offered"
+            "displayType": "fanompoana",
+            "description": "serivisy atolotra"
         }
     },
     "messages": {
         "Assets\/credits\/earned": {
-            "content": "Earned {{amount}} credits"
+            "content": "Nahazo crédit {{amount}}."
         },
         "Assets\/credits\/bought": {
-            "content": "Bought {{amount}} credits"
+            "content": "Nividy crédit {{amount}}."
         },
         "Assets\/credits\/bonus": {
-            "content": "Bonus {{amount}} credits"
+            "content": "Mahazo tombony {{amount}}."
         },
         "Assets\/credits\/spent": {
-            "content": "Spent {{amount}} credits"
+            "content": "Nandany {{amount}} crédit"
         },
         "Assets\/credits\/sent": {
-            "content": "Sent {{amount}} credits to {{toUserName}}"
+            "content": "Nandefa crédit {{amount}} ho an&#39;i {{toUserName}}"
         },
         "Assets\/credits\/received": {
-            "content": "Received {{amount}} credits from {{fromUserName}}"
+            "content": "Nahazo crédit {{amount}} avy amin&#39;ny {{fromUserName}}"
         }
     },
     "services": {
         "NewServiceTemplate": {
-            "Title": "New Service",
-            "TitlePlaceholder": "Service title",
-            "PricePlaceholder": "Set price",
-            "LinkPlaceholder": "set additional info link",
-            "DescriptionPlaceholder": "Service description",
+            "Title": "Serivisy vaovao",
+            "TitlePlaceholder": "Lohatenin&#39;ny serivisy",
+            "PricePlaceholder": "Mametraha vidiny",
+            "LinkPlaceholder": "mametraka rohy fampahalalana fanampiny",
+            "DescriptionPlaceholder": "Famaritana momba ny serivisy",
             "SaveService": "Save Service",
-            "SelectRequiredParticipants": "Required Participants"
+            "SelectRequiredParticipants": "Ilaina ny mpandray anjara"
         },
-        "ManageServiceTemplates": "Manage Service Templates",
-        "ManageServices": "Manage Services",
-        "Free": "Free",
-        "OptionalContribution": "Optional contribution",
-        "RequiredPayment": "Required payment",
-        "AreYouSureDelete": "Are you sure you want to delete this service?",
-        "AmountServicesRelated": "There are {{amount}} availabilities related to this service. They are also will be removed."
+        "ManageServiceTemplates": "Tantano ny Templates Service",
+        "ManageServices": "Mitantana serivisy",
+        "Free": "maimaim-poana",
+        "OptionalContribution": "Fandraisan&#39;anjara azo atao",
+        "RequiredPayment": "Fandoavana takina",
+        "AreYouSureDelete": "Tena te-hamafa ity serivisy ity ve ianao?",
+        "AmountServicesRelated": "Misy {{amount}} fahafahana mifandray amin&#39;ity tolotra ity. Ho esorina koa izy ireo."
     },
     "NFT": {
-        "Title": "Information about {{title}} NFT",
-        "Description": "Detailed information about NFT",
-        "FixedBid": "Buy now",
-        "CurrentBid": "Current bid",
-        "StartingIn": "Starting in",
-        "EndingIn": "Ending in",
-        "CreateNFT": "Create an NFT",
-        "TitlePlaceholder": "Give your NFT a title",
-        "DescriptionPlaceholder": "Give your NFT a description",
-        "CreateYourNFT": "Create your NFT",
-        "Royalties": "Royalties",
-        "RoyaltyPlaceholder": "Optional. Amount paid to creator before transfer.",
-        "ExpirationDate": "Expiration Date",
-        "StartingDate": "Start Date",
-        "BidsBelowThisAmount": "Bids below this amount won't be allowed",
-        "MinimumBid": "Minimum bid",
-        "Price": "Price",
-        "Owner": "Owner",
-        "SelectCategory": "Select category",
-        "Day": "Day",
-        "Days": "Days",
-        "Hour": "Hour",
-        "Hours": "Hours",
-        "Minute": "Minute",
-        "Minutes": "Minutes",
-        "Second": "Second",
-        "Seconds": "Seconds",
-        "SalesCreator": "of sales will go to creator",
-        "Details": "Details",
-        "Bids": "Bids",
-        "History": "History",
-        "LoremIpsum": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-        "PutOnSale": "Put on sale",
-        "PutOffSale": "Withdraw from sale",
-        "Transfer": "Transfer",
-        "Update": "Update",
+        "Title": "Fampahafantarana momba ny {{title}} NFT",
+        "Description": "Fampahafantarana amin&#39;ny antsipiriany momba ny NFT",
+        "FixedBid": "Hividy izao",
+        "CurrentBid": "Tolotra ankehitriny",
+        "StartingIn": "Manomboka amin&#39;ny",
+        "EndingIn": "Miafara amin&#39;ny",
+        "CreateNFT": "Mamorona NFT",
+        "TitlePlaceholder": "Omeo lohateny ny NFT anao",
+        "DescriptionPlaceholder": "Omeo famaritana ny NFT anao",
+        "CreateYourNFT": "Mamorona ny NFT anao",
+        "Royalties": "-pitrandrahana",
+        "RoyaltyPlaceholder": "Tsy voatery. Vola aloa amin&#39;ny mpamorona alohan&#39;ny famindrana.",
+        "ExpirationDate": "Daty farany",
+        "StartingDate": "Daty nanombohana",
+        "BidsBelowThisAmount": "Ny tolo-bidy ambany io vola io dia tsy azo ekena",
+        "MinimumBid": "Tolotra farany ambany",
+        "Price": "Vidiny",
+        "Owner": "TOMPON&#39;NY",
+        "SelectCategory": "Mifidiana sokajy",
+        "Day": "Andro",
+        "Days": "Andro",
+        "Hour": "Ora",
+        "Hours": "ORA",
+        "Minute": "minitra",
+        "Minutes": "minitra",
+        "Second": "FAHAROA",
+        "Seconds": "segondra",
+        "SalesCreator": "ny varotra dia ho any amin&#39;ny mpamorona",
+        "Details": "tsipiriany",
+        "Bids": "manao veloma",
+        "History": "FIAINANY TALOHA",
+        "LoremIpsum": "Lorem Ipsum dia lahatsoratra saro-takarina amin&#39;ny indostrian&#39;ny fanontana sy fanoratana.",
+        "PutOnSale": "Atao amidy",
+        "PutOffSale": "Mialà amin&#39;ny fivarotana",
+        "Transfer": "famindrana",
+        "Update": "vaovao farany",
         "UpdateToken": "Update Token",
-        "CreateToken": "Create Token",
-        "PlaceBid": "Place Bid",
-        "SoldOut": "Sold",
-        "NftName": "NFT name",
-        "DescribeYourNFT": "Please describe your NFT",
-        "NftPicture": "Picture to represent NFT",
-        "NftMovie": "Movie to represent NFT",
-        "UploadMovie": "Upload movie",
-        "MovieSource": "Movie Source",
-        "UploadFile": "Upload a file",
-        "PutOnMarketplace": "Put on marketplace",
-        "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
-        "FixedPrice": "Fixed price",
-        "TimedAuction": "Timed auction",
-        "OpenForBids": "Open for bids",
-        "PriceOnePiece": "Enter price for one piece",
-        "EnterMinimumBid": "Enter Minimum bid",
-        "SelectChain": "Select chain",
-        "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain.",
+        "CreateToken": "Mamorona Token",
+        "PlaceBid": "Toerana Bid",
+        "SoldOut": "lafo",
+        "NftName": "Ny anarana NFT",
+        "DescribeYourNFT": "Farito azafady ny NFT anao",
+        "NftPicture": "Sary maneho ny NFT",
+        "NftMovie": "Sarimihetsika hanehoana ny NFT",
+        "UploadMovie": "Ampidiro sarimihetsika",
+        "MovieSource": "Loharano sarimihetsika",
+        "UploadFile": "Mampiakara rakitra",
+        "PutOnMarketplace": "Ataovy an-tsena",
+        "InstantPurchase": "Ampidiro ny vidiny ahafahan&#39;ny mpampiasa mividy avy hatrany ny NFT anao",
+        "FixedPrice": "Vidiny raikitra",
+        "TimedAuction": "Auction ara-potoana",
+        "OpenForBids": "Misokatra ho an&#39;ny tolo-bidy",
+        "PriceOnePiece": "Ampidiro ny vidin&#39;ny ampahany iray",
+        "EnterMinimumBid": "Ampidiro ny tolo-bidy farany ambany",
+        "SelectChain": "Mifidiana rojo",
+        "WrongChain": "Ity NFT ity dia noforonina eo ambanin&#39;ny &quot;{{chain}}&quot;. Ampiasao ity rojo ity azafady.",
         "import": {
-            "importNFT": "Importing NFT's",
-            "fileNotFound": "Sorry, CSV file not found.",
-            "fileEmpty": "Sorry, CSV file is empty.",
-            "userIdNotFound": "user exist but id empty",
-            "errorLine": "line {{1}}",
-            "fieldNotFound": "Required field \"{{1}}\" not found",
-            "taskStreamInvalid": "task stream invalid",
-            "instructionsEmpty": "task stream instructions empty",
-            "complete": "Complete",
-            "activateUsers": "send activation message to users?",
-            "importProgress": "Progress",
-            "importOptions": "Options",
-            "sampleCSV": "Download Sample CSV",
-            "fileLabel": "Upload Spreadsheet:",
-            "errorsTitle": "Errors occurred"
+            "importNFT": "Manafatra ny NFT",
+            "fileNotFound": "Miala tsiny fa tsy hita ny rakitra CSV.",
+            "fileEmpty": "Miala tsiny, banga ny rakitra CSV.",
+            "userIdNotFound": "misy mpampiasa fa id foana",
+            "errorLine": "tsipika {{1}}",
+            "fieldNotFound": "Tsy hita ny saha ilaina &quot;{{1}}&quot;.",
+            "taskStreamInvalid": "tsy manan-kery ny rindranasa asa",
+            "instructionsEmpty": "banga ny torolalana amin&#39;ny fandehanana asa",
+            "complete": "feno",
+            "activateUsers": "mandefa hafatra fampahavitrihana amin&#39;ny mpampiasa?",
+            "importProgress": "fandrosoana",
+            "importOptions": "FANDIKANA",
+            "sampleCSV": "Misintona santionany CSV",
+            "fileLabel": "Alefaso ny takelaka:",
+            "errorsTitle": "Nisy lesoka"
         },
         "filter": {
             "ByCategory": {
-                "FilterByNFTCollections": "Filter by NFT Collections",
-                "ShowNFTCollection": "Show NFT collection in ...",
-                "AllCollections": "All Collections"
+                "FilterByNFTCollections": "Sivanina amin&#39;ny NFT Collections",
+                "ShowNFTCollection": "Asehoy ny fanangonana NFT amin&#39;ny...",
+                "AllCollections": "Collections rehetra"
             },
             "ByUser": {
-                "AllAuthors": "All Authors",
-                "AllUsers": "Everyone",
-                "FilterByAuthors": "Filter by Authors"
+                "AllAuthors": "Mpanoratra rehetra",
+                "AllUsers": "Ny olon-drehetra",
+                "FilterByAuthors": "Sivanin&#39;ny Mpanoratra"
             }
         },
-        "Back": "Back to Collection"
+        "Back": "Hiverina any amin&#39;ny Collection"
     }
 }

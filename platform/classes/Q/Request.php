@@ -235,7 +235,7 @@ class Q_Request
 			}
 		}
 		if (!empty($query)) {
-			return self::$url.'?'.http_build_query($query, null, '&');
+			return self::$url.'?'.http_build_query($query, '', '&');
 		}
 		return self::$url;
 	}

@@ -3,39 +3,39 @@
         "campaign": {
             "placeholders": {
                 "link": "Link per prumove",
-                "startDate": "Data di Principiu",
+                "startDate": "Data di principiu",
                 "startTime": "Start Time",
                 "endDate": "Data di fine",
-                "endTime": "Tempu di Fine",
+                "endTime": "Tempu di a fine",
                 "budget": "Budget"
             },
             "interests": {
-                "Title": "Filtra Per Interessu",
+                "Title": "Filtru Per Interessi",
                 "FilterInterests": "Cumincià à scrive un interessu ..."
             },
             "Interest": "Interessu",
-            "Location": "Situazione"
+            "Location": "Locu"
         }
     },
     "webpage": {
         "composer": {
-            "Go": "Andà",
-            "PasteLinkHere": "https: \/\/ ...",
+            "Go": "Vai",
+            "PasteLinkHere": "https:\/\/...",
             "BrowseTheWeb": "Sfoglia",
-            "WriteToStartConversation": "Scrivite i vostri penseri per inizià a cunversazione",
+            "WriteToStartConversation": "Scrivite i vostri pinsamenti per inizià a conversazione",
             "StartConversation": "Principià a cunversazione",
-            "GotoConversation": "Andà à Cunversazione",
+            "GotoConversation": "Andà à Conversazione",
             "reset": "Resettate",
-            "edit": "Mudificà",
+            "edit": "Edit",
             "link": "Link",
             "setUrl": "Set URL",
             "save": "Salvà",
-            "setClip": "Tagliate u Clip",
+            "setClip": "Tagliate Clip",
             "invalidURL": "URL invalidu"
         },
-        "FileTooLarge": "File troppu grande per a cache. Dimensione massima di u fugliale {{size}}",
+        "FileTooLarge": "File troppu grande per a cache. Dimensione massima di u schedariu {{size}}",
         "InvalidPDF": "U schedariu ùn hè micca un PDF validu",
-        "StartTypingTitleOrKeywords": "Principià à scrive titulu o parolle chjave ..."
+        "StartTypingTitleOrKeywords": "Cumincià à scrive u titulu o e parolle chjave..."
     },
     "types": {
         "Websites\/article": {
@@ -43,32 +43,32 @@
             "displayType": "Articulu"
         },
         "Websites\/slide": {
-            "description": "Una diapositiva in una presentazione, pò include HTML, audio ecc.",
+            "description": "Una diapositiva in una presentazione, pò include HTML, audio etc.",
             "displayType": "Slide"
         },
         "Websites\/presentation": {
-            "description": "Una presentazione custituita da varie diapositive",
-            "displayType": "Prisentazione"
+            "description": "Una presentazione custituita da diverse diapositive",
+            "displayType": "Presentazione"
         },
         "Websites\/advert\/unit": {
-            "description": "Una unità di publicità nantu à un situ web",
+            "description": "Una unità di publicità in un situ web",
             "displayType": "Unità di publicità"
         },
         "Websites\/advert\/placement": {
-            "description": "Un modu di raggruppà unità publicitarii sottu un nome",
-            "displayType": "Piazzamentu annunziale"
+            "description": "Un modu di raggruppà unità di publicità sottu un nome",
+            "displayType": "A piazza di l&#39;annunziu"
         },
         "Websites\/advert\/creative": {
             "description": "Cuntenutu per una publicità",
-            "displayType": "Annunziu creativu"
+            "displayType": "Publicità creativa"
         },
         "Websites\/advert\/campaign": {
-            "description": "Una campagna publicitaria",
-            "displayType": "Campagna publicitaria"
+            "description": "Una campagna di publicità",
+            "displayType": "Campagna di publicità"
         },
         "Websites\/webpage": {
-            "description": "Rapprisenta un situ web chì i so metadati sò stati scraped",
-            "displayType": "Pagina Web"
+            "description": "Rapprisenta un situ web chì i metadati sò stati scraped",
+            "displayType": "Pagina web"
         }
     }
 }
