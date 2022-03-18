@@ -144,7 +144,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					return;
 				}
 
-				delete tool.previewElements[publisherId][streamName];
+				if (Q.getObject([publisherId, streamName], tool.previewElements)) {
+					delete tool.previewElements[publisherId][streamName];
+				}
 				if (Q.isEmpty(tool.previewElements[publisherId])) {
 					delete tool.previewElements[publisherId];
 				}
@@ -476,6 +478,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var state = tool.state;
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
 		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
+
+		// remove all old previews
+		if (tool.state.result) {
+			Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
+			tool.state.result= {};
+		}
 
 		Streams.retainWith(tool).related(
 			publisherId, 
