@@ -48,9 +48,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
     var _debug = null;
     var _debugTimer = {};
 
-    Streams.WebRTC = function Streams_WebRTC() {
+    Streams.WebRTC = function Streams_WebRTC(options) {
         if(!new.target) {
-            return new Streams_WebRTC();
+            return new Streams_WebRTC(options);
         }
         /**
          * WebRTC options that also can be set it local/app.json
@@ -103,6 +103,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 audio: true,
                 video: false
             },
+            audioOnlyMode: false,
             showPreparingDialogue: false,
             useCordovaPlugins: false,
             showScreenSharingInSeparateScreen: true,
@@ -145,6 +146,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 streamName: null
             }
         };
+
+        overrideDefaultOptions(options);
+
         var publicAppInterface;
         var WebRTCconference;
 
@@ -1087,9 +1091,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             };
 
             if(Q.info.isMobile){
-                viewMode = prevViewMode = _options.defaultMobileViewMode || 'maximizedMobile';
-
-            } else viewMode = prevViewMode = _options.defaultDesktopViewMode || 'regular';
+                if(_options.audioOnlyMode) {
+                    viewMode = prevViewMode = 'audio';
+                } else {
+                    viewMode = prevViewMode = _options.defaultMobileViewMode || 'maximizedMobile';
+                }
+            } else {
+                if(_options.audioOnlyMode) {
+                    viewMode = prevViewMode = 'audio';
+                } else {
+                    viewMode = prevViewMode = _options.defaultDesktopViewMode || 'regular';
+                }
+            }
             if(_options.minimizeOnPageSwitching) {
                 Q.Page.onActivate('').set(function(){
                     if(viewMode == 'minimized' || viewMode == 'minimizedMobile') return;
@@ -6189,8 +6202,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //meetingStatus.appendChild(participantsIcon);
                 mediaDevicesDialog.appendChild(cameraPreview);
                 buttonsInner.appendChild(switchMicBtn);
-                buttonsInner.appendChild(switchCameraBtn);
-                if(!(Q.info.isMobile || Q.info.isTablet) || Q.info.isCordova) buttonsInner.appendChild(switchScreenSharingBtn);
+                if(!_options.audioOnlyMode) buttonsInner.appendChild(switchCameraBtn);
+                if(!(Q.info.isMobile || Q.info.isTablet || _options.audioOnlyMode) || Q.info.isCordova) buttonsInner.appendChild(switchScreenSharingBtn);
                 buttonsCon.appendChild(buttonsInner);
                 mediaDevicesDialog.appendChild(buttonsCon);
                 joinButtonCon.appendChild(joinButton);
@@ -7052,11 +7065,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     _options[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : _options[key];
                 }
 
-                if(!Q.info.isMobile && options.defaultDesktopViewMode != null) {
+                /*if(!Q.info.isMobile && options.defaultDesktopViewMode != null) {
                     screensRendering.setViewMode(options.defaultDesktopViewMode );
                 } else if(Q.info.isMobile && options.defaultMobilevViewMode != null) {
                     screensRendering.setViewMode(options.defaultMobileViewMode);
-                }
+                }*/
             }
 
         }
@@ -7087,7 +7100,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {Number} [options.roomPublisherId] Id of publisher of the stream (stream represents room).
          *      Is required as argument for getting Stream from db
          */
-        function start(options) {
+        function start() {
             publicAppInterface = this;
             Q.addStylesheet('{{Streams}}/css/tools/webrtc.css?ts=' + performance.now(), function () {
 
@@ -7104,7 +7117,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 appDebug.sendReportsInterbal = setInterval(function () {
                     appDebug.sendReportToServer();
                 }, 3000);
-                overrideDefaultOptions(options);
+                //overrideDefaultOptions(options);
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
 
@@ -7184,7 +7197,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             }, function(){console.error("Permission is not granted");})
                         }
 
-                        if(startWith.audio && startWith.video) {
+                        if(startWith.audio && startWith.video && !_options.audioOnlyMode) {
                             requestMicPermission(function () {
                                 requestCameraPermission(function () {
                                     publishMediaTracks({video: startWith.video, audio: startWith.audio});
@@ -7192,9 +7205,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             });
                         } else if (startWith.audio) {
                             requestMicPermission(function () {
-                                publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                                publishMediaTracks({video: startWith.video && !_options.audioOnlyMode, audio: startWith.audio});
                             });
-                        } else if (startWith.video) {
+                        } else if (startWith.video && !_options.audioOnlyMode) {
                             requestCameraPermission(function () {
                                 publishMediaTracks({video: startWith.video, audio: startWith.audio});
                             });
@@ -7216,12 +7229,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                         }
                     } else if(Q.info.isCordova && Q.info.platform === 'ios' && _options.useCordovaPlugins){
                         log('start: onConnect: isCordova && isiOS');
-                        publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                        publishMediaTracks({video: startWith.video && !_options.audioOnlyMode, audio: startWith.audio});
                     } else if(!((Q.info.isMobile || Q.info.isTablet) && !Q.info.isCordova)) {
                         log('start: onConnect: isDesktop');
                     }
-
-
 
                     if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
                         Q.alert('Unfortunatelly your browser doesn\'t support WebRTC')
@@ -7422,7 +7433,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 if(permissionPopupTimeout != null) clearTimeout(permissionPopupTimeout);
                                 createOrJoinRoomStream(_options.roomId, _options.roomPublisherId);
                             };
-                            publishMediaTracks({video: startWith.video, audio: true}, premissionGrantedCallback);
+                            publishMediaTracks({video: startWith.video && !_options.audioOnlyMode, audio: true}, premissionGrantedCallback);
 
                             /*permissionPopupTimeout = setTimeout(function () {
                                 if(_options.streams != null) return;
@@ -7443,11 +7454,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 connectionState.updateStatus('Disconnected')
                             });
                         } else {
-                            publishMediaTracks({video: startWith.video, audio: startWith.audio});
+                            publishMediaTracks({video: startWith.video && !_options.audioOnlyMode, audio: startWith.audio});
                             if(_options.showMediaDevicesDialog && (startWith.audio || startWith.video)) {
                                 setTimeout(function () {
                                     if(_options.streams != null) return;
-                                    showPermissionsDialogue({video: startWith.video, audio: startWith.audio});
+                                    showPermissionsDialogue({video: startWith.video && !_options.audioOnlyMode, audio: startWith.audio});
                                 }, _options.showMediaDevicesDialog ? _options.showMediaDevicesDialog : 2000);
 
                             }
@@ -7656,7 +7667,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             return _roomStream;
         }
 
-        function options() {
+        function getOptions() {
             return _options;
         }
 
@@ -7676,7 +7687,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             controls: controls,
             roomsMediaContainer: roomsMediaContainer,
             roomStream: roomStream,
-            options: options,
+            getOptions: getOptions,
             isActive: isActive,
             textes: textes,
             screenRendering: screensRendering,
@@ -7819,7 +7830,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         console.log('Streams.WebRTC.start', options)
 
-        return Q.Streams.WebRTC().start({
+        return Q.Streams.WebRTC({
+            audioOnlyMode: options.audioOnlyMode,
             element: options.element,
             roomId: options.roomId,
             roomPublisherId: options.roomPublisherId,
@@ -7865,7 +7877,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             onWebRTCRoomEnded: function () {
                 Q.handle(options.onEnd, this);
             }
-        });
+        }).start();
 
     }
 })(Q, jQuery);

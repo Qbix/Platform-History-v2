@@ -3,6 +3,7 @@
 		camera: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.335 -0.255 101 101" enable-background="new -0.335 -0.255 101 101"    xml:space="preserve">  <defs>  </defs>  <path opacity="0.2" d="M50,2.5C23.809,2.5,2.5,23.808,2.5,50S23.808,97.499,50,97.499c26.191,0,47.5-21.308,47.5-47.499   C97.5,23.809,76.19,2.5,50,2.5z"/>  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C100,22.431,77.569,0,50,0z M77.71,61.245l-15.599-9.006v8.553H25.516V37.254h36.595v8.839l15.599-9.006V61.245z"/>  </svg>',
 		cameraTransparent: '<svg class="camera-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" class="cameraPath" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M77.156,60.693l-15.521-8.961v8.51H25.223v-23.42   h36.412v8.795l15.521-8.961V60.693z"/>  </svg>',
 		disabledCamera: '<svg  version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M49.584,95.203   c-25.198,0-45.698-20.501-45.698-45.699s20.5-45.699,45.698-45.699c25.199,0,45.699,20.5,45.699,45.699S74.783,95.203,49.584,95.203   z"/>  <polygon fill="#FFFFFF" points="61.635,39.34 43.63,60.242 61.635,60.242 61.635,51.732 77.156,60.693 77.156,36.656 61.635,45.617    "/>  <polygon fill="#FFFFFF" points="25.223,36.822 25.223,60.242 34.391,60.242 54.564,36.822 "/>  <rect x="47.585" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3117 -20.7363)" fill="#C12337" width="4" height="73.163"/>  </svg>',
+		moreOptions: '<svg class="camera-icon" version="1.1" x="0px" y="0px" viewBox="-0.165 -0.245 99.499 99.498" enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve" id="svg119" sodipodi:docname="camera_icon2.svg" inkscape:version="1.1.2 (b8e25be833, 2022-02-05)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs123" /><sodipodi:namedview id="namedview121" pagecolor="#ffffff" bordercolor="#666666" borderopacity="1.0" inkscape:pageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" showgrid="false" inkscape:zoom="2.0301915" inkscape:cx="3.2016683" inkscape:cy="75.116065" inkscape:window-width="1920" inkscape:window-height="1001" inkscape:window-x="-9" inkscape:window-y="-9" inkscape:window-maximized="1" inkscape:current-layer="svg119" /> <g id="g2038" transform="translate(0,-0.61459512)" style="fill:#ffffff"><path id="circle3410" style="fill:#ffffff;stroke-width:6.83351;stroke-linejoin:round;paint-order:fill markers stroke" d="m 57.556933,74.510017 a 7.972434,7.972434 0 0 1 -7.972434,7.972434 7.972434,7.972434 0 0 1 -7.972434,-7.972434 7.972434,7.972434 0 0 1 7.972434,-7.972434 7.972434,7.972434 0 0 1 7.972434,7.972434 z m 0,-24.391422 a 7.972434,7.972434 0 0 1 -7.972434,7.972434 7.972434,7.972434 0 0 1 -7.972434,-7.972434 7.972434,7.972434 0 0 1 7.972434,-7.972434 7.972434,7.972434 0 0 1 7.972434,7.972434 z m 0,-24.391422 a 7.972434,7.972434 0 0 1 -7.972434,7.972434 7.972434,7.972434 0 0 1 -7.972434,-7.972434 7.972434,7.972434 0 0 1 7.972434,-7.972434 7.972434,7.972434 0 0 1 7.972434,7.972434 z M 49.584,0.36959512 c -27.431,0 -49.749,22.31699988 -49.749,49.74899988 0,27.432 22.317,49.749 49.749,49.749 27.432,0 49.75,-22.317 49.75,-49.749 0,-27.431 -22.318,-49.74899988 -49.75,-49.74899988 z" /></g></svg>',
 		microphone:'<svg version="1.1" id="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <path opacity="0.2" d="M49.834,0.755c-27.018,0-49,21.981-49,49s21.98,48.999,49,48.999c27.018,0,49-21.98,49-48.999   C98.835,22.737,76.853,0.755,49.834,0.755z"/>  <path fill="#FFFFFF" d="M49.834-0.245c-27.569,0-50,22.43-50,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C99.835,22.186,77.404-0.245,49.834-0.245z M41.269,32.48c0-4.678,3.794-8.473,8.474-8.473s8.473,3.793,8.473,8.473v19.961   c0,4.679-3.793,8.474-8.473,8.474s-8.474-3.794-8.474-8.474V32.48z M64.251,52.842c0,7.357-5.51,13.551-12.818,14.408v5.436h6.782   v3.381H41.27v-3.381h6.783V67.25c-7.308-0.857-12.817-7.051-12.818-14.408V42.46h3.379v10.176c0,6.146,4.983,11.129,11.129,11.129   c6.146,0,11.129-4.983,11.129-11.129V42.46h3.38V52.842z"/>  </svg>',
 		microphoneTransparent:'<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>',
 		disabledMicrophone:'<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>',
@@ -490,7 +491,7 @@
 
 				tool.WebRTCLib.event.on('switchRoom', function (e) {
                     console.log('EVENT: switchRoom', e);
-                    var options = tool.WebRTCClass.options();
+                    var options = tool.WebRTCClass.getOptions();
                     if(tool.broadcastClient != null && options.webcastSettings.disconnectOnRoomSwitch) {
                         tool.broadcastClient.disconnect();
                     } else if(tool.broadcastClient != null && !options.webcastSettings.disconnectOnRoomSwitch) {
@@ -681,7 +682,7 @@
 					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
 				}).length;
 
-				if(tool.WebRTCLib.localMediaControls.frontCameraDevice() == null && enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null && !(typeof cordova != 'undefined' && window.device.platform === 'iOS')) {
+				if(!tool.WebRTCClass.getOptions().audioOnlyMode && tool.WebRTCLib.localMediaControls.frontCameraDevice() == null && enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null && !(typeof cordova != 'undefined' && window.device.platform === 'iOS')) {
 					tool.settingsPopup.videoInputListSection.turnOnCamera();
 					return;
 				}
@@ -715,7 +716,7 @@
 				cameraBtn.className = 'Streams_webrtc_camera-control-btn';
 				var cameraBtnIcon = document.createElement('DIV');
 				cameraBtnIcon.className = 'Streams_webrtc_camera-control-icon';
-				cameraBtnIcon.innerHTML = icons.disabledCamera;
+				cameraBtnIcon.innerHTML = tool.WebRTCClass.getOptions().audioOnlyMode ? icons.moreOptions : icons.disabledCamera;
                 cameraBtnCon.appendChild(cameraBtn);
                 cameraBtnCon.appendChild(cameraBtnIcon);
                 controlBarCon.appendChild(cameraBtnCon);
@@ -780,7 +781,7 @@
                 usersBtnCon.appendChild(counterBadge);
                 controlBarCon.appendChild(usersBtnCon);
 
-                if(!tool.WebRTCClass.options().disconnectBtnInParticipants) {
+                if(!tool.WebRTCClass.getOptions().disconnectBtnInParticipants) {
                     var disconnectBtnCon = document.createElement('DIV');
                     disconnectBtnCon.className = 'Streams_webrtc_manage-users-btn';
                     var disconnectBtn = document.createElement('DIV');
@@ -987,8 +988,8 @@
 									"div", // or pass an existing element
 									"Streams/chat",
 									{
-										publisherId:tool.WebRTCClass.options().roomPublisherId,
-										streamName:'Streams/webrtc/' + tool.WebRTCClass.options().roomId.replace('Streams/webrtc/', '')
+										publisherId:tool.WebRTCClass.getOptions().roomPublisherId,
+										streamName:'Streams/webrtc/' + tool.WebRTCClass.getOptions().roomId.replace('Streams/webrtc/', '')
 									}
 								)
 							),
@@ -1198,21 +1199,23 @@
 			 * @method updateControlBar
 			 */
 			updateControlBar: function () {
-				console.log('updateControlBar')
-				var tool = this;
-				if(tool.controlBar == null) return;
-				var localParticipant = tool.WebRTCLib.localParticipant();
-				var localMediaControls = tool.WebRTCLib.localMediaControls;
+                console.log('updateControlBar')
+                var tool = this;
+                if (tool.controlBar == null) return;
+                var localParticipant = tool.WebRTCLib.localParticipant();
+                var localMediaControls = tool.WebRTCLib.localMediaControls;
                 console.log('updateControlBar localParticipant', localParticipant)
 
-				var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
-					return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
-				}).length;
+                var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
+                    return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+                }).length;
 
                 console.log('updateControlBar enabledVideoTracks', enabledVideoTracks, tool.WebRTCLib.localParticipant().videoStream)
 
-
-                if(enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
+				if(tool.WebRTCClass.getOptions().audioOnlyMode) {
+                    console.log('updateControlBar 0')
+                    tool.cameraBtnIcon.innerHTML = icons.moreOptions;
+            	} else if(enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
                     console.log('updateControlBar 1')
 
                     tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
@@ -1478,7 +1481,7 @@
 
 							if(buttonObj.type == 'camera') {
                                 deselectCameraButtons();
-                                if(!tool.WebRTCClass.options().showScreenSharingInSeparateScreen) {
+                                if(!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
                                     _startScreenSharingBtn.switchToRegularState();
                                     _turnOffCameraBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffVideo", tool.textes);
                                 } else {
@@ -1486,7 +1489,7 @@
 								}
 								_turnOffCameraBtn.switchToRegularState();
                             } else if(buttonObj.type == 'screen') {
-                            	if(!tool.WebRTCClass.options().showScreenSharingInSeparateScreen) {
+                            	if(!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
                                     deselectCameraButtons();
                                     _turnOffCameraBtn.switchToRegularState();
                                 } else {
@@ -1495,7 +1498,7 @@
 								}
 
                             } else if(buttonObj.type == 'mobileScreen') {
-                            	if(!tool.WebRTCClass.options().showScreenSharingInSeparateScreen) {
+                            	if(!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
                                     deselectCameraButtons();
                                     _turnOffCameraBtn.switchToRegularState();
                                 } else {
@@ -1508,7 +1511,7 @@
                                 _stopScreenSharingBtn.hide();
 							} else if (buttonObj.type == 'off'){
                                 deselectCameraButtons();
-                                if(!tool.WebRTCClass.options().showScreenSharingInSeparateScreen) {
+                                if(!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
                                     _startScreenSharingBtn.switchToRegularState();
                                     _startAnotherScreenSharingBtn.hide();
                                     _stopScreenSharingBtn.hide();
@@ -1530,6 +1533,7 @@
 
                         function loadCamerasList () {
                         	console.log('loadCamerasList')
+							if(tool.WebRTCClass.getOptions().audioOnlyMode) return;
                             //location.reload();
                             var count = 1;
 
@@ -1855,7 +1859,7 @@
                             videoinputList.appendChild(turnOnCameraItem);
                             if(!Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(screenSharingRadioItem);
                             if(!Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(anotherScreenSharingRadioItem);
-                            if (tool.WebRTCClass.options().showScreenSharingInSeparateScreen && !Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(turnScreenSharingOff);
+                            if (tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen && !Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(turnScreenSharingOff);
                             if((Q.info.isMobile || Q.info.isTablet) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
                             videoinputList.appendChild(turnOffradioBtnItem);
 
@@ -2002,7 +2006,7 @@
                             streamingAndUploading.appendChild(facebookLiveItem);
 
                             startStreamingBtnCon.appendChild(settingsBtn);
-                            if(!tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+                            if(!tool.WebRTCClass.getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
                                 facebookLiveTtle.appendChild(facebookLiveTtleInput);
                                 fbStreamingStartSettings.appendChild(facebookLiveTtle);
                                 facebookLiveDesc.appendChild(facebookLiveDescInput);
@@ -2555,8 +2559,8 @@
                             var linkCon = document.createElement('DIV');
                             linkCon.className = 'Streams_webrtc_streaming_link_con';
 
-                            var roomId = 'broadcast-' + tool.WebRTCClass.options().roomId + '-' + (tool.WebRTCLib.localParticipant().sid).replace('/webrtc#', '');
-                            //var roomId = 'broadcast-' + tool.WebRTCClass.options().roomId + '-' + Q.Users.loggedInUserId();
+                            var roomId = 'broadcast-' + tool.WebRTCClass.getOptions().roomId + '-' + (tool.WebRTCLib.localParticipant().sid).replace('/webrtc#', '');
+                            //var roomId = 'broadcast-' + tool.WebRTCClass.getOptions().roomId + '-' + Q.Users.loggedInUserId();
 
                             var linkInputCon = document.createElement('LABEL');
                             linkInputCon.className = 'Streams_webrtc_streaming_label';
@@ -2666,7 +2670,8 @@
 
                         function createStreamingAndRecordingSection() {
                             _streamingAndRecordingEl = document.createElement('DIV');
-                            _streamingAndRecordingEl.className = 'Streams_webrtc_streaming_recording'
+                            _streamingAndRecordingEl.className = 'Streams_webrtc_streaming_recording';
+                            if(tool.WebRTCClass.getOptions().audioOnlyMode) _streamingAndRecordingEl.classList.add('Streams_webrtc_streaming_recording_audioOnly')
                             _streamingAndRecordingEl.appendChild(createStreamingLink());
                             _streamingAndRecordingEl.appendChild(createCustomRTMPlink());
                             _streamingAndRecordingEl.appendChild(createBroadcastingLink());
@@ -2678,11 +2683,11 @@
                         	createSection: createStreamingAndRecordingSection
 						}
                     }());
-					
+
 					function show() {
                         tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
                     }
-					
+
 					function hide() {
                         tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
                     }
@@ -2690,7 +2695,7 @@
                     function createSettingsPopUp() {
                         var settingsPopup = document.createElement('DIV');
                         settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
-                        settingsPopup.appendChild(videoInputListSection.createVideoInputList());
+                        if(!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopup.appendChild(videoInputListSection.createVideoInputList());
                         settingsPopup.appendChild(streamingAndRecordingSection.createSection());
 
                         tool.settingsPopupEl = settingsPopup;
@@ -3598,7 +3603,7 @@
 					participantItem.appendChild(tracksControlBtns);
                     muteVideo.appendChild(muteCameraBtn);
                     muteVideo.appendChild(muteScreenSharingBtn);
-					tracksControlBtns.appendChild(muteVideo);
+					if(!tool.WebRTCClass.getOptions().audioOnlyMode) tracksControlBtns.appendChild(muteVideo);
 					tracksControlBtns.appendChild(muteAudioBtn);
 					participantItem.appendChild(tracksControlBtns);
 					participantIdentity.appendChild(audioVisualization);
@@ -3714,7 +3719,7 @@
 
 					var topBtns = document.createElement('DIV');
 					topBtns.className = 'participants-list-btns';
-                    if(tool.WebRTCClass.options().disconnectBtnInParticipants) {
+                    if(tool.WebRTCClass.getOptions().disconnectBtnInParticipants) {
                         var disconnectBtn = document.createElement('DIV');
                         disconnectBtn.className = 'Streams_webrtc_disconnect-btn';
                         disconnectBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.disconnect", tool.textes);
@@ -3722,219 +3727,223 @@
                         topBtns.appendChild(disconnectBtn);
                     }
 
-                    if(!Q.info.isMobile) {
-                        var floatingViewModeBtn = document.createElement('DIV');
-                        floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
-                        floatingViewModeBtn.dataset.viewMode = 'floatingView';
-                        floatingViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.floatingScreens", tool.textes);
-                        var floatingViewModeBtnIcon = document.createElement('SPAN');
-                        floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
-                        floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
-                        topBtns.appendChild(floatingViewModeBtn);
-                    }
+                    if(!tool.WebRTCClass.getOptions().audioOnlyMode) {
+                        if (!Q.info.isMobile) {
+                            var floatingViewModeBtn = document.createElement('DIV');
+                            floatingViewModeBtn.className = 'Streams_webrtc_floating-mode-btn';
+                            floatingViewModeBtn.dataset.viewMode = 'floatingView';
+                            floatingViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.floatingScreens", tool.textes);
+                            var floatingViewModeBtnIcon = document.createElement('SPAN');
+                            floatingViewModeBtnIcon.innerHTML = icons.freeViewModeOff;
+                            floatingViewModeBtn.appendChild(floatingViewModeBtnIcon);
+                            topBtns.appendChild(floatingViewModeBtn);
+                        }
 
-					var tiledViewModeBtn = document.createElement('DIV');
-					tiledViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
-					tiledViewModeBtn.dataset.viewMode = 'tiledView';
-					tiledViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.tiledScreens", tool.textes);
-					var tiledViewModeBtnIcon = document.createElement('SPAN');
-					tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
-                    tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
-                    topBtns.appendChild(tiledViewModeBtn);
+                        var tiledViewModeBtn = document.createElement('DIV');
+                        tiledViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
+                        tiledViewModeBtn.dataset.viewMode = 'tiledView';
+                        tiledViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.tiledScreens", tool.textes);
+                        var tiledViewModeBtnIcon = document.createElement('SPAN');
+                        tiledViewModeBtnIcon.innerHTML = icons.tiledViewModeOff;
+                        tiledViewModeBtn.appendChild(tiledViewModeBtnIcon);
+                        topBtns.appendChild(tiledViewModeBtn);
 
-                    if(Q.info.isMobile) {
-                        var squaresViewModeBtn = document.createElement('DIV');
-                        squaresViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
-                        squaresViewModeBtn.dataset.viewMode = 'squaresView';
-                        squaresViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.tiledScreens", tool.textes);
-                        var squaresViewModeBtnIcon = document.createElement('SPAN');
-                        squaresViewModeBtnIcon.innerHTML = icons.squaresViewModeOff;
-                        squaresViewModeBtn.appendChild(squaresViewModeBtnIcon);
-                        topBtns.appendChild(squaresViewModeBtn);
-                    }
-
-
-					var loudestExceptMeBtn = document.createElement('DIV');
-					loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
-					loudestExceptMeBtn.dataset.viewMode = 'loudestExceptMe';
-					loudestExceptMeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.loudestExceptMe", tool.textes);
-					var loudestExceptMeBtnIcon = document.createElement('SPAN');
-					loudestExceptMeBtnIcon.innerHTML = icons.loudestExceptMeOff;
-                    loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
-                    topBtns.appendChild(loudestExceptMeBtn);
-
-					var loudestBtn = document.createElement('DIV');
-					loudestBtn.className = 'Streams_webrtc_loudest-mode-btn';
-					loudestBtn.dataset.viewMode = 'loudest';
-					loudestBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.maximizeLoudest", tool.textes);
-					var loudestBtnIcon = document.createElement('SPAN');
-					loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
-                    loudestBtn.appendChild(loudestBtnIcon);
-                    topBtns.appendChild(loudestBtn);
-
-					/*var maximizeStaticBtn = document.createElement('DIV');
-					maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
-					maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
-					maximizeStaticBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.staticMaximized", tool.textes);
-					var maximizeStaticBtnIcon = document.createElement('SPAN');
-					maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
-					maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
-					topBtns.appendChild(maximizeStaticBtn);*/
-
-					var fullScreenBtn = document.createElement('DIV');
-                    fullScreenBtn.className = 'Streams_webrtc_fullScreen-mode-btn';
-                    fullScreenBtn.dataset.viewMode = 'fullScreen';
-                    fullScreenBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.fullScreen", tool.textes);
-					var fullScreenBtnIcon = document.createElement('SPAN');
-                    fullScreenBtnIcon.innerHTML = icons.staticMaximizeOff;
-                    fullScreenBtn.appendChild(fullScreenBtnIcon);
-                    topBtns.appendChild(fullScreenBtn);
-
-					var audioLayoutBtn = document.createElement('DIV');
-                    audioLayoutBtn.className = 'Streams_webrtc_audio-mode-btn';
-                    audioLayoutBtn.dataset.viewMode = 'audio';
-                    audioLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.fullScreen", tool.textes);
-					var audioLayoutBtnIcon = document.createElement('SPAN');
-                    audioLayoutBtnIcon.innerHTML = icons.audioLayoutOff;
-                    audioLayoutBtn.appendChild(audioLayoutBtnIcon);
-                    topBtns.appendChild(audioLayoutBtn);
-
-                    if(!Q.info.isMobile) {
-                        var manualLayoutBtn = document.createElement('DIV');
-                        manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
-                        manualLayoutBtn.dataset.viewMode = 'manual';
-                        manualLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.manual", tool.textes);
-                        var manualLayoutBtnIcon = document.createElement('SPAN');
-                        manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
-                        manualLayoutBtn.appendChild(manualLayoutBtnIcon);
-                        topBtns.appendChild(manualLayoutBtn);
-                    }
+                        if (Q.info.isMobile) {
+                            var squaresViewModeBtn = document.createElement('DIV');
+                            squaresViewModeBtn.className = 'Streams_webrtc_tiled-mode-btn';
+                            squaresViewModeBtn.dataset.viewMode = 'squaresView';
+                            squaresViewModeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.tiledScreens", tool.textes);
+                            var squaresViewModeBtnIcon = document.createElement('SPAN');
+                            squaresViewModeBtnIcon.innerHTML = icons.squaresViewModeOff;
+                            squaresViewModeBtn.appendChild(squaresViewModeBtnIcon);
+                            topBtns.appendChild(squaresViewModeBtn);
+                        }
 
 
-					participantsListCon.appendChild(topBtns)
+                        var loudestExceptMeBtn = document.createElement('DIV');
+                        loudestExceptMeBtn.className = 'Streams_webrtc_lem-mode-btn';
+                        loudestExceptMeBtn.dataset.viewMode = 'loudestExceptMe';
+                        loudestExceptMeBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.loudestExceptMe", tool.textes);
+                        var loudestExceptMeBtnIcon = document.createElement('SPAN');
+                        loudestExceptMeBtnIcon.innerHTML = icons.loudestExceptMeOff;
+                        loudestExceptMeBtn.appendChild(loudestExceptMeBtnIcon);
+                        topBtns.appendChild(loudestExceptMeBtn);
 
-					var buttonsArr = [
-						{
-							viewMode:'tiledView',
-							btn: tiledViewModeBtn,
-							icon: tiledViewModeBtnIcon,
-							onIcon: icons.tiledViewModeOn,
-							offIcon: icons.tiledViewModeOff,
-							handler: function () {
-								toggleLoudesScreenMode('disabled');
-								if(Q.info.isMobile)
-									tool.state.webrtcClass.screenRendering.renderTiledScreensGridMobile();
-								else tool.state.webrtcClass.screenRendering.renderTiledScreensGridDesktop();
-							}
-						},
-						{
-							viewMode:'loudestExceptMe',
-							btn: loudestExceptMeBtn,
-							icon: loudestExceptMeBtnIcon,
-							onIcon: icons.loudestExceptMeOn,
-							offIcon: icons.loudestExceptMeOff,
-							handler: function () {
-								toggleLoudesScreenMode('allButMe');
-							}
-						},
-						{
-							viewMode:'loudest',
-							btn: loudestBtn,
-							icon: loudestBtnIcon,
-							onIcon: icons.maximizeLoudestOn,
-							offIcon: icons.maximizeLoudestOff,
-							handler: function () {
-								toggleLoudesScreenMode('all');
-							}
-						},
-						{
-							viewMode:'fullScreen',
-							btn: fullScreenBtn,
-							icon: fullScreenBtnIcon,
-							onIcon: icons.staticMaximizeOn,
-							offIcon: icons.staticMaximizeOff,
-							handler: function(){
-								toggleLoudesScreenMode('disabled');
-								var maximize = function(screen) {
-									if(Q.info.isMobile)
-										tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(screen, 300);
-									else tool.state.webrtcClass.screenRendering.renderFullScreenLayout(screen, 300);
-								}
-								var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
-								if(activeScreen != null) {
-									maximize(activeScreen);
-								} else {
-									var screens = tool.WebRTCClass.screenRendering.getScreens();
-									maximize(screens[0]);
-								}
-							}
-						},
-                        {
-                            viewMode:'audio',
-                            btn: audioLayoutBtn,
-                            icon: audioLayoutBtnIcon,
-                            onIcon: icons.audioLayoutOn,
-                            offIcon: icons.audioLayoutOff,
-                            handler: function () {
-                                toggleLoudesScreenMode('disabled');
-                                if(Q.info.isMobile) {
-                                    tool.state.webrtcClass.screenRendering.renderAudioScreensGrid();
-                                } else {
-                                	tool.state.webrtcClass.screenRendering.renderAudioScreensGrid();
+                        var loudestBtn = document.createElement('DIV');
+                        loudestBtn.className = 'Streams_webrtc_loudest-mode-btn';
+                        loudestBtn.dataset.viewMode = 'loudest';
+                        loudestBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.maximizeLoudest", tool.textes);
+                        var loudestBtnIcon = document.createElement('SPAN');
+                        loudestBtnIcon.innerHTML = icons.maximizeLoudestOff;
+                        loudestBtn.appendChild(loudestBtnIcon);
+                        topBtns.appendChild(loudestBtn);
+
+                        /*var maximizeStaticBtn = document.createElement('DIV');
+                        maximizeStaticBtn.className = 'Streams_webrtc_loudest-mode-btn';
+                        maximizeStaticBtn.dataset.viewMode = 'maximizeStatic';
+                        maximizeStaticBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.staticMaximized", tool.textes);
+                        var maximizeStaticBtnIcon = document.createElement('SPAN');
+                        maximizeStaticBtnIcon.innerHTML = icons.staticMaximizeOff;
+                        maximizeStaticBtn.appendChild(maximizeStaticBtnIcon);
+                        topBtns.appendChild(maximizeStaticBtn);*/
+
+                        var fullScreenBtn = document.createElement('DIV');
+                        fullScreenBtn.className = 'Streams_webrtc_fullScreen-mode-btn';
+                        fullScreenBtn.dataset.viewMode = 'fullScreen';
+                        fullScreenBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.fullScreen", tool.textes);
+                        var fullScreenBtnIcon = document.createElement('SPAN');
+                        fullScreenBtnIcon.innerHTML = icons.staticMaximizeOff;
+                        fullScreenBtn.appendChild(fullScreenBtnIcon);
+                        topBtns.appendChild(fullScreenBtn);
+
+                        var audioLayoutBtn = document.createElement('DIV');
+                        audioLayoutBtn.className = 'Streams_webrtc_audio-mode-btn';
+                        audioLayoutBtn.dataset.viewMode = 'audio';
+                        audioLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.fullScreen", tool.textes);
+                        var audioLayoutBtnIcon = document.createElement('SPAN');
+                        audioLayoutBtnIcon.innerHTML = icons.audioLayoutOff;
+                        audioLayoutBtn.appendChild(audioLayoutBtnIcon);
+                        topBtns.appendChild(audioLayoutBtn);
+
+                        if (!Q.info.isMobile) {
+                            var manualLayoutBtn = document.createElement('DIV');
+                            manualLayoutBtn.className = 'Streams_webrtc_loudest-mode-btn';
+                            manualLayoutBtn.dataset.viewMode = 'manual';
+                            manualLayoutBtn.dataset.touchlabel = Q.getObject("webrtc.participantsPopup.manual", tool.textes);
+                            var manualLayoutBtnIcon = document.createElement('SPAN');
+                            manualLayoutBtnIcon.innerHTML = icons.dragIconOff;
+                            manualLayoutBtn.appendChild(manualLayoutBtnIcon);
+                            topBtns.appendChild(manualLayoutBtn);
+                        }
+
+
+                        participantsListCon.appendChild(topBtns)
+
+                        var buttonsArr = [
+                            {
+                                viewMode: 'tiledView',
+                                btn: tiledViewModeBtn,
+                                icon: tiledViewModeBtnIcon,
+                                onIcon: icons.tiledViewModeOn,
+                                offIcon: icons.tiledViewModeOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('disabled');
+                                    if (Q.info.isMobile)
+                                        tool.state.webrtcClass.screenRendering.renderTiledScreensGridMobile();
+                                    else tool.state.webrtcClass.screenRendering.renderTiledScreensGridDesktop();
+                                }
+                            },
+                            {
+                                viewMode: 'loudestExceptMe',
+                                btn: loudestExceptMeBtn,
+                                icon: loudestExceptMeBtnIcon,
+                                onIcon: icons.loudestExceptMeOn,
+                                offIcon: icons.loudestExceptMeOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('allButMe');
+                                }
+                            },
+                            {
+                                viewMode: 'loudest',
+                                btn: loudestBtn,
+                                icon: loudestBtnIcon,
+                                onIcon: icons.maximizeLoudestOn,
+                                offIcon: icons.maximizeLoudestOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('all');
+                                }
+                            },
+                            {
+                                viewMode: 'fullScreen',
+                                btn: fullScreenBtn,
+                                icon: fullScreenBtnIcon,
+                                onIcon: icons.staticMaximizeOn,
+                                offIcon: icons.staticMaximizeOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('disabled');
+                                    var maximize = function (screen) {
+                                        if (Q.info.isMobile)
+                                            tool.state.webrtcClass.screenRendering.renderMaximizedScreensGridMobile(screen, 300);
+                                        else tool.state.webrtcClass.screenRendering.renderFullScreenLayout(screen, 300);
+                                    }
+                                    var activeScreen = tool.state.webrtcClass.screenRendering.getActiveSreen();
+                                    if (activeScreen != null) {
+                                        maximize(activeScreen);
+                                    } else {
+                                        var screens = tool.WebRTCClass.screenRendering.getScreens();
+                                        maximize(screens[0]);
+                                    }
+                                }
+                            },
+                            {
+                                viewMode: 'audio',
+                                btn: audioLayoutBtn,
+                                icon: audioLayoutBtnIcon,
+                                onIcon: icons.audioLayoutOn,
+                                offIcon: icons.audioLayoutOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('disabled');
+                                    if (Q.info.isMobile) {
+                                        tool.state.webrtcClass.screenRendering.renderAudioScreensGrid();
+                                    } else {
+                                        tool.state.webrtcClass.screenRendering.renderAudioScreensGrid();
+                                    }
                                 }
                             }
+                        ];
+
+                        if (!Q.info.isMobile) {
+                            buttonsArr.unshift({
+                                viewMode: 'floatingView',
+                                btn: floatingViewModeBtn,
+                                icon: floatingViewModeBtnIcon,
+                                onIcon: icons.freeViewModeOn,
+                                offIcon: icons.freeViewModeOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('disabled');
+                                    tool.state.webrtcClass.screenRendering.renderDesktopScreensGrid();
+                                }
+                            })
+                            buttonsArr.push({
+                                viewMode: 'manual',
+                                btn: manualLayoutBtn,
+                                icon: manualLayoutBtnIcon,
+                                onIcon: icons.dragIconOn,
+                                offIcon: icons.dragIconOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('disabled');
+                                    tool.state.webrtcClass.screenRendering.renderManualScreensGrid();
+
+                                }
+                            })
                         }
-						];
+                        if (Q.info.isMobile) {
+                            buttonsArr.unshift({
+                                viewMode: 'squaresView',
+                                btn: squaresViewModeBtn,
+                                icon: squaresViewModeBtnIcon,
+                                onIcon: icons.squaresViewModeOn,
+                                offIcon: icons.squaresViewModeOff,
+                                handler: function () {
+                                    toggleLoudesScreenMode('disabled');
+                                    if (Q.info.isMobile)
+                                        tool.state.webrtcClass.screenRendering.renderSquaresGridMobile();
+                                    else tool.state.webrtcClass.screenRendering.renderSquaresGridMobile();
+                                }
+                            })
 
-                    if(!Q.info.isMobile) {
-                        buttonsArr.unshift({
-                            viewMode:'floatingView',
-                            btn: floatingViewModeBtn,
-                            icon: floatingViewModeBtnIcon,
-                            onIcon: icons.freeViewModeOn,
-                            offIcon: icons.freeViewModeOff,
-                            handler: function () {
-                                toggleLoudesScreenMode('disabled');
-                                tool.state.webrtcClass.screenRendering.renderDesktopScreensGrid();
-                            }
-                        })
-                        buttonsArr.push({
-                            viewMode:'manual',
-                            btn: manualLayoutBtn,
-                            icon: manualLayoutBtnIcon,
-                            onIcon: icons.dragIconOn,
-                            offIcon: icons.dragIconOff,
-                            handler: function(){
-                                toggleLoudesScreenMode('disabled');
-                                tool.state.webrtcClass.screenRendering.renderManualScreensGrid();
+                        }
 
-                            }
-                        })
+                        for (var b in buttonsArr) {
+                            buttonsArr[b].btn.addEventListener('mouseup', function (e) {
+                                toggleViewMode(e, buttonsArr);
+                            });
+                        }
+
+                        tool.toggleViewBtns = buttonsArr;
+                    } else {
+                    	participantsListCon.appendChild(topBtns);
                     }
-                    if(Q.info.isMobile) {
-                        buttonsArr.unshift({
-                            viewMode:'squaresView',
-                            btn: squaresViewModeBtn,
-                            icon: squaresViewModeBtnIcon,
-                            onIcon: icons.squaresViewModeOn,
-                            offIcon: icons.squaresViewModeOff,
-                            handler: function () {
-                                toggleLoudesScreenMode('disabled');
-                                if(Q.info.isMobile)
-                                    tool.state.webrtcClass.screenRendering.renderSquaresGridMobile();
-                                else tool.state.webrtcClass.screenRendering.renderSquaresGridMobile();
-                            }
-                        })
-
-                    }
-
-					for (var b in buttonsArr) {
-						buttonsArr[b].btn.addEventListener('mouseup', function (e) {
-							toggleViewMode(e, buttonsArr);
-						});
-					}
-
-					tool.toggleViewBtns = buttonsArr;
 
 					tool.participantListEl = document.createElement('UL');
 					tool.participantListEl.className = 'Streams_webrtc_participants-list';
@@ -4285,7 +4294,7 @@
 
 
 						var satrtLive = function () {
-							if (tool.WebRTCClass.options().liveStreaming.startFbLiveViaGoLiveDialog) {
+							if (tool.WebRTCClass.getOptions().liveStreaming.startFbLiveViaGoLiveDialog) {
 								goLiveDialog(callback);
 								return
 							}
@@ -4337,7 +4346,7 @@
 							});
 						}
 
-						if(tool.WebRTCClass.options().liveStreaming.useRecordRTCLibrary) {
+						if(tool.WebRTCClass.getOptions().liveStreaming.useRecordRTCLibrary) {
 							Q.addScript([
 								"{{Streams}}/js/tools/webrtc/RecordRTC.js"
 							], function () {
