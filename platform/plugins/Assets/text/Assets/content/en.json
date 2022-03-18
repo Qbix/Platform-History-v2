@@ -261,6 +261,7 @@
             "Description": "Description",
             "Author": "Author",
             "OnSale": "on sale",
+            "SelectAuthor": "Select author",
             "NewItem": "New NFT series",
             "NamePlaceholder": "Enter series name",
             "DescPlaceholder": "Enter series description",

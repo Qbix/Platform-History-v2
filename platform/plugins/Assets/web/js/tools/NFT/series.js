@@ -106,7 +106,6 @@
 
             Q.Template.render('Assets/NFT/series/view', {
                 title: stream.fields.title,
-                description: stream.fields.content,
                 price: stream.getAttribute("price"),
                 currency: stream.getAttribute("currency"),
                 untilTime: untilTime
@@ -183,7 +182,7 @@
             $toolElement.addClass("Assets_NFT_series_new");
 
             var currencies = NFT.currencies.map(function (item) {
-                return item["0x4"] ? item.symbol : false;
+                return item[state.chainId] ? item.symbol : false;
             }).filter(function (item) { return item});
 
             var _openDialog = function () {
@@ -193,6 +192,7 @@
                     template: {
                         name: "Assets/NFT/series/Create",
                         fields: {
+                            isAdmin: tool.isAdmin,
                             currencies: currencies,
                             onMarketPlace: state.onMarketPlace,
                             baseUrl: Q.baseUrl()
@@ -203,6 +203,29 @@
 
                         // apply Streams/preview icon behavior
                         tool.preview.icon($icon[0]);
+
+                        var authorTool = null;
+                        var $author = $(".Assets_NFT_series_author", dialog);
+                        if ($author.length) {
+                            $author.tool("Users/avatar", {
+                                userId: userId
+                            }).activate(function () {
+                                authorTool = this;
+                                $author.on(Q.Pointer.fastclick, function () {
+                                    Q.Dialogs.push({
+                                        title: tool.text.NFT.series.SelectAuthor,
+                                        className: "Assets_NFT_series_author_select",
+                                        content: $("<div><input></div>").tool("Streams/userChooser", {
+                                            onChoose: function (selectedUserId) {
+                                                authorTool.state.userId = selectedUserId;
+                                                authorTool.refresh();
+                                                Q.Dialogs.pop();
+                                            }
+                                        })
+                                    });
+                                });
+                            });
+                        }
 
                         // upload image button
                         $(".Assets_nft_upload_button", dialog).on(Q.Pointer.fastclick, function (event) {
@@ -282,7 +305,6 @@
                                 fields: {
                                     userId: userId,
                                     title: $("input[name=title]", dialog).val(),
-                                    content: $("input[name=description]", dialog).val(),
                                     attributes: attributes
                                 }
                             });
@@ -320,19 +342,23 @@
     });
 
     Q.Template.set('Assets/NFT/series/newItem',
-        `<div class="Assets_NFT_series_newItem">{{NFT.series.NewItem}}</div>`,
+`<div class="tile-block">
+            <h2 class="tile-name">{{NFT.series.NewItem}}</h2>
+        </div>`,
         {text: ['Assets/content']}
     );
 
     Q.Template.set('Assets/NFT/series/Create',
 `<form>
+            {{#if isAdmin}}
+            <div class="Assets_nft_form_group" data-type="author">
+                <label>{{NFT.series.Author}}:</label>
+                <div class="Assets_NFT_series_author"></div>
+            </div>
+            {{/if}}
             <div class="Assets_nft_form_group">
                 <label>{{NFT.series.Name}}:</label>
                 <input type="text" name="title" class="Assets_nft_form_control" placeholder="{{NFT.series.NamePlaceholder}}">
-            </div>
-            <div class="Assets_nft_form_group">
-                <label>{{NFT.series.Description}}:</label>
-                <input type="text" name="description" class="Assets_nft_form_control" placeholder="{{NFT.series.DescPlaceholder}}">
             </div>
             <div class="Assets_nft_form_group">
                 <label>{{NFT.series.Icon}}:</label>
@@ -378,20 +404,16 @@
         <img class="NFT_series_icon">
         <h2 class="tile-name">{{title}}</h2>
         <ul class="bid-info">
-            <li class="Assets_NFT_price">
-                <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency}}</p>
-            </li>
+            <li class="Assets_NFT_price"><span class="Assets_NFT_price_value">{{price}}</span> {{currency}}</li>
             {{#if untilTime}}
                 <li>
                     <span>{{NFT.series.EndingIn}}</span>
                 </li>
-                <li class="Assets_NFT_series_untilTime">
-                    <p data-timestamp="{{untilTime}}">
-                        <span class="dateDays"><span class="Q_days"></span> <span class="daysText">{{NFT.Days}}</span></span>
-                        <span class="dateHours"><span class="Q_hours"></span> :</span>
-                        <span class="dateMinutes"><span class="Q_minutes"></span> :</span>
-                        <span class="dateSeconds"><span class="Q_seconds"></span></span>
-                    </p>
+                <li class="Assets_NFT_series_untilTime" data-timestamp="{{untilTime}}">
+                    <span class="dateDays"><span class="Q_days"></span> <span class="daysText">{{NFT.Days}}</span></span>
+                    <span class="dateHours"><span class="Q_hours"></span> :</span>
+                    <span class="dateMinutes"><span class="Q_minutes"></span> :</span>
+                    <span class="dateSeconds"><span class="Q_seconds"></span></span>
                 </li>
             {{/if}}
         </ul>
