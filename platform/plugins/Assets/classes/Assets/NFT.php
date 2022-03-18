@@ -212,11 +212,12 @@ class Assets_NFT
 	/**
 	 * Get default chain
 	 * @method getDefaultChain
+	 * @params {array} [$chains]
 	 * @static
 	 * @return array
 	 */
-	static function getDefaultChain () {
-		$chains = self::getChains();
+	static function getDefaultChain ($chains = null) {
+		$chains = $chains ?: self::getChains();
 		foreach ($chains as $chain) {
 			if (!$chain["default"]) {
 				continue;
