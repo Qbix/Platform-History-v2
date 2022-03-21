@@ -5,9 +5,8 @@
 
     var Users = Q.Users;
     var Assets = Q.Assets;
-    var Web3 = Assets.Web3;
-    var NFT = Assets.NFT.Web3;
-
+    var Web3 = Assets.NFT.Web3;
+    var NFT = Assets.NFT;
     /**
      * YUIDoc description goes here
      * @class Assets NFT/preview
@@ -167,7 +166,7 @@
                 }]);
 
                 // get smart contract just to set contract events to update preview
-                NFT.getContract(state.chain);
+                Web3.getContract(state.chain);
             } else {
                 if (state.chainId !== Q.getObject("ethereum.chainId", window)) {
                     return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
@@ -177,10 +176,10 @@
                 if (state.data) {
                     pipe.fill("data")(null, state.data);
                 } else {
-                    Q.handle(NFT.getTokenJSON, tool, [state.tokenId, state.chain, pipe.fill("data")]);
+                    Q.handle(Web3.getTokenJSON, tool, [state.tokenId, state.chain, pipe.fill("data")]);
                 }
 
-                Q.handle(NFT.getAuthor, tool, [state.tokenId, state.chain, function (err, author) {
+                Q.handle(Web3.getAuthor, tool, [state.tokenId, state.chain, function (err, author) {
                     if (err) {
                         return console.warn(err);
                     }
@@ -196,9 +195,9 @@
                         fields: { wallet: author }
                     });
                 }]);
-                Q.handle(NFT.getOwner, tool, [state.tokenId, state.chain, pipe.fill("owner")]);
-                Q.handle(NFT.commissionInfo, tool, [state.tokenId, state.chain, pipe.fill("commissionInfo")]);
-                Q.handle(NFT.saleInfo, tool, [state.tokenId, state.chain, pipe.fill("saleInfo")]);
+                Q.handle(Web3.getOwner, tool, [state.tokenId, state.chain, pipe.fill("owner")]);
+                Q.handle(Web3.commissionInfo, tool, [state.tokenId, state.chain, pipe.fill("commissionInfo")]);
+                Q.handle(Web3.saleInfo, tool, [state.tokenId, state.chain, pipe.fill("saleInfo")]);
             }
         },
         /**
@@ -245,7 +244,7 @@
 
             var price = Q.getObject("priceDecimal", saleInfo);
 
-            NFT.onTransfer.set(function (oldAddress, newAddress, token) {
+            Web3.onTransfer.set(function (oldAddress, newAddress, token) {
                 var processedTokenId = parseInt(token._hex, 16);
                 if (parseInt(state.tokenId) !== processedTokenId) {
                     return;
@@ -264,10 +263,10 @@
                 state.updateCache = true;
                 tool.init();
             };
-            NFT.onTokenAddedToSale.set(function (tokenId, amount, consumeToken) {
+            Web3.onTokenAddedToSale.set(function (tokenId, amount, consumeToken) {
                 _saleChanged(tokenId);
             }, tool);
-            NFT.onTokenRemovedFromSale.set(function (tokenId) {
+            Web3.onTokenRemovedFromSale.set(function (tokenId) {
                 _saleChanged(tokenId);
             }, tool);
 
@@ -275,7 +274,7 @@
                 title: data.name,
                 price: price,
                 currency: currency,
-                owner: NFT.minimizeAddress(owner, 20, 3)
+                owner: Web3.minimizeAddress(owner, 20, 3)
             }, (err, html) => {
                 tool.element.innerHTML = html;
 
@@ -293,7 +292,7 @@
                         });
                     });
                 } else {
-                    $(".Assets_NFT_avatar", tool.element).html(NFT.minimizeAddress(author, 20, 3));
+                    $(".Assets_NFT_avatar", tool.element).html(Web3.minimizeAddress(author, 20, 3));
                 }
 
                 // apply Streams/preview icon behavior
@@ -388,12 +387,12 @@
                     e.stopPropagation();
                     e.preventDefault();
 
-                    NFT.checkProvider(state.chain, function (err) {
+                    Web3.checkProvider(state.chain, function (err) {
                         if (err) {
                             return;
                         }
 
-                        NFT.buy(state.tokenId, state.chain, currency, function (err, transaction) {
+                        Web3.buy(state.tokenId, state.chain, currency, function (err, transaction) {
                             state.updateCache = true;
                             tool.init();
                         });
@@ -421,7 +420,7 @@
                         onActivate: function (dialog) {
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
-                                NFT.checkProvider(state.chain, function (err, contract) {
+                                Web3.checkProvider(state.chain, function (err, contract) {
                                     if (err) {
                                         return $toolElement.removeClass("Q_working");
                                     }
@@ -438,7 +437,7 @@
 
                             // Put NFT off sale
                             $("button[name=offSale]", dialog).on("click", function () {
-                                NFT.checkProvider(state.chain, function (err, contract) {
+                                Web3.checkProvider(state.chain, function (err, contract) {
                                     if (err) {
                                         return $toolElement.removeClass("Q_working");
                                     }
@@ -460,7 +459,7 @@
                                         return;
                                     }
 
-                                    NFT.checkProvider(state.chain, function (err, contract) {
+                                    Web3.checkProvider(state.chain, function (err, contract) {
                                         if (err) {
                                             return $toolElement.removeClass("Q_working");
                                         }
@@ -886,7 +885,7 @@
             var previewState = tool.preview.state;
             var streamId = tool.preview.state.streamName.split("/").pop();
 
-            NFT.checkProvider(chain, function (err, contract) {
+            Web3.checkProvider(chain, function (err, contract) {
                 if (err) {
                     return Q.handle(callback, tool, [err]);
                 }
@@ -907,7 +906,7 @@
 
                 // listen transaction receipt and get TokenCreated event results
                 var _transactionHandler = function (TransactionReceipt) {
-                    if (NFT.isSuccessfulTransaction(TransactionReceipt)) {
+                    if (Web3.isSuccessfulTransaction(TransactionReceipt)) {
                         for (var i in TransactionReceipt.events) {
                             if (TransactionReceipt.events[i].event !== "TokenCreated") {
                                 continue;
