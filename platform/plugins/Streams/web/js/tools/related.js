@@ -483,6 +483,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		if (tool.state.result) {
 			Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
 			tool.state.result= {};
+			tool.previewElements = {};
 		}
 
 		Streams.retainWith(tool).related(
