@@ -175,7 +175,11 @@
     vertical-align: middle;
     cursor: pointer;
 }
-
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_form_market,
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_royalties,
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_selectNetwork {
+    display: none;
+}
 .Assets_NFT_preview_composer .Assets_nft .Assets_nft_form_group.Assets_nft_selectNetwork {
     border-bottom: 1px solid rgba(4, 4, 5, 0.07);
 }

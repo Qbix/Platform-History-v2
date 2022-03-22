@@ -15,6 +15,8 @@
      *  @param {string} chainId - blockchain chain id
      *  @param {string} tokenId - NFT token is in the chain described by chainId
      *  @param {boolean} [composer=false] - If true build composer.
+     *  @param {String} [mode=regular] - Can be "regular" and "series".
+     *  If "series" - skip definition of "price", "currency", "royalty", "chain", because get these data from serie.
      *  @param {boolean} [useWeb3=false] If true use backend to read data from blockchain
      *  @param {string} [userId] - id of user on whose behalf NFT will be created
      *  @param {boolean} [poster] URL of poster image for movie (If movie provided)
@@ -69,6 +71,7 @@
         tokenId: null,
         data: null,
         userId: null,
+        mode: "regular", // "series"
         composer: false,
         useWeb3: true,
         imagepicker: {
@@ -506,6 +509,7 @@
                         name: "Assets/NFT/nftCreate",
                         fields: {
                             chains: chains,
+                            mode: state.mode,
                             currencies: NFT.currencies.map(a => a.symbol),
                             onMarketPlace: state.onMarketPlace,
                             baseUrl: Q.baseUrl()
@@ -1164,7 +1168,7 @@
     );
 
     Q.Template.set('Assets/NFT/nftCreate',
-        `<div class="Assets_nft">
+        `<div class="Assets_nft" data-mode="{{mode}}">
         <form>
             <div class="Assets_nft_form_group">
                 <label>{{NFT.NftName}}:</label>
@@ -1194,11 +1198,7 @@
                     <div class="Assets_nft_movie"></div>
                 </div>
             </div>
-            <div class="Assets_nft_form_group" style="display: none">
-                <label>{{NFT.SelectCategory}}:</label>
-                <div class="Assets_nft_categories"></div>
-            </div>
-            <div class="Assets_nft_form_group">
+            <div class="Assets_nft_form_group Assets_nft_form_market">
                 <div class="Assets_nft_market">
                     <div>
                         <label>{{NFT.PutOnMarketplace}} :</label>
