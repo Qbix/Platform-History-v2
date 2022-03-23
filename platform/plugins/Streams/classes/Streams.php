@@ -2384,7 +2384,7 @@ abstract class Streams extends Base_Streams
 			$max = is_numeric($options['max']) ? $options['max'] : strtotime($options['max']);
 		}
 		if (isset($min) or isset($max)) {
-			$range = new Db_Range($min ? $min : 0, true, true, $max ? $max : pow(10, 20));
+			$range = new Db_Range($min ? $min : 0, true, true, $max ? $max : null);
 			$query = $query->where(array('weight' => $range));
 		}
 		if (isset($limit)) {

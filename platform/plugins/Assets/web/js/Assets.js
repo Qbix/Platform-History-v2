@@ -1295,7 +1295,7 @@
 							title: texts.errors.Error
 						});
 					}
-					var _waitTransaction = function (transactionRequest) {
+					function _waitTransaction(transactionRequest) {
 						if (!Q.getObject("wait", transactionRequest)) {
 							Q.handle(callback, null, [true])
 							return Q.alert("Transaction request invalid!");
@@ -1330,7 +1330,10 @@
                             }).catch(function (err) {
                                 debugger;
                             });*/
-							contract.buy(tokenId, {value: price.price, gasLimit: 10000000}).then(_waitTransaction);
+							contract.buy(tokenId, {
+								value: price.price,
+								gasLimit: 10000000
+							}).then(_waitTransaction);
 						});
 					});
 				},
