@@ -35,7 +35,7 @@ function _Streams_participants(options) {
 	var tool = this;
 	var state = tool.state;
 	var $toolElement = $(tool.element);
-	
+
 	if (!state.publisherId) {
 		throw new Q.Error("Streams/chat: missing publisherId option");
 	}
@@ -106,7 +106,7 @@ function _Streams_participants(options) {
 			name: 'Streams/participants/invite',
 			fields: { 
 				src: Q.Streams.iconUrl('labels/Streams/invited', 40), 
-				alt: 'Invite', 
+				alt: 'Invite',
 				title: 'Invite'
 			}
 		}
@@ -261,10 +261,17 @@ function _Streams_participants(options) {
 				}
 				Q.Text.get("Streams/content", function (err, result) {
 					var text = result && result.invite;
-					if (text) {
-						state.templates.invite.fields.alt = text.command;
-						state.templates.invite.fields.title = text.command;
+					if (result && result.invite[state.templates.invite.fields.alt]) {
+						state.templates.invite.fields.alt = text[state.templates.invite.fields.alt];
+					} else {
+                        state.templates.invite.fields.alt = text.command;
 					}
+					if (result && result.invite[state.templates.invite.fields.title]) {
+						state.templates.invite.fields.title = text[state.templates.invite.fields.title];
+					} else {
+                        state.templates.invite.fields.title = text.command;
+					}
+
 					Q.Template.render(
 						'Streams/participants/invite',
 						state.templates.invite.fields,
