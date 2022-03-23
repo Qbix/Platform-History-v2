@@ -1131,7 +1131,7 @@
 						contract.on("TokenRemovedFromSale", function (tokenId) {
 							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId])
 						});
-						contract.on("TokenAddedToSale", function (tokenId, amount, consumeToken) {
+						contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
 							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
 						});
 						contract.on("Transfer", function (oldAddress, newAddress, token) {
