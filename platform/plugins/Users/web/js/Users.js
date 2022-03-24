@@ -3873,6 +3873,8 @@
 				.then(function (accounts) {
 					Users.Web3.provider = ethereum;
 					return Q.handle(callback, null, [null, Users.Web3.provider]);
+				}).catch(function (e) {
+					Q.handle(callback, null, [e]);
 				});
 			}
 
