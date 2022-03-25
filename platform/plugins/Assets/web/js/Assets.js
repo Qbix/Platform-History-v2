@@ -1001,30 +1001,49 @@
 				onTokenAddedToSale: new Q.Event(),
 				onTransfer: new Q.Event(),
 				onTransferAuthorship: new Q.Event(),
+				onInstanceCreated: new Q.Event(),
+				onInstanceOwnershipTransferred: new Q.Event(),
 				_onContractUpdated: {},
+				_onFactoryUpdated: {},
 				onContractUpdated: Q.Event.factory(this._onContractUpdated, [""]),
+				onFactoryUpdated: Q.Event.factory(this._onFactoryUpdated, [""]),
 				contracts: [],
+				factories: [],
 
 				/**
 				 * Check web3 provider (MetaMask) connected, and switch to valid chain
 				 * @method checkProvider
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} [options]
+				 * @param {object} [options.mode="contract"] - What to create "contract" or "factory"
 				 */
-				checkProvider: function (chain, callback) {
+				checkProvider: function (chain, callback, options) {
+					var mode = Q.getObject("mode", options) || "contract";
 					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
 
+						var _process = function () {
+							if (mode === "contract") {
+								Assets.NFT.Web3.getContract(chain, callback, options);
+							} else if (mode === "factory") {
+								Assets.NFT.Web3.getFactory(chain, callback, options);
+							} else {
+								throw new Q.Exception("mode " + mode + " is not supported in Assets.NFT.Web3.checkProvider");
+							}
+						};
 						// check valid chain selected
 						if (window.ethereum.chainId === chain.chainId) {
-							Assets.NFT.Web3.getContract(chain, callback);
+							_process();
 						} else { // if no, lead to switch chain
 							Q.Users.Web3.setChain(chain, function () {
 								// after chain switched need update contract
 								Assets.NFT.Web3.contracts[chain.chainId] = null;
-								Assets.NFT.Web3.getContract(chain, callback);
+								Assets.NFT.Web3.factories[chain.chainId] = null;
+
+								_process();
 							}, function (err) {
 								Q.handle(callback, null, [err]);
 							});
@@ -1087,6 +1106,64 @@
 					});
 				},
 				/**
+				 * Get or create factory
+				 * @method getFactory
+				 * @params {Object} chain
+				 * @params {function} callback
+				 * @params {object} [options]
+				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 */
+				getFactory: function (chain, callback, options) {
+					if (Q.isEmpty(window.ethereum)) {
+						return Q.handle(callback, null, ["Ethereum provider not found", null]);
+					}
+
+					// if chain is a chainId, convert to chain
+					if (Q.typeOf(chain) === "string") {
+						chain = Assets.NFT.Web3.chains[chain];
+					}
+
+					var _subMethod = function (factory) {
+						// if option checkWeb3 defined, check if web3 wallet connected
+						if (Q.getObject("checkWeb3", options) === true) {
+							return Q.Users.Web3.connect(function (err, provider) {
+								Q.handle(callback, null, [err, factory]);
+							});
+						}
+
+						// else just return factory
+						Q.handle(callback, null, [null, factory]);
+					};
+
+					var factory = Assets.NFT.Web3.factories[chain.chainId];
+
+					// if factory exists, return one
+					if (factory) {
+						return _subMethod(factory);
+					}
+
+					var address = chain.factory;
+
+					// loading ABI json
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + address + ".json"), function (ABI) {
+						var provider = new ethers.providers.Web3Provider(window.ethereum);
+						factory = new ethers.Contract(address, ABI, provider.getSigner());
+
+						factory.on("InstanceCreated", function (name, symbol, instance, length) {
+							Q.handle(Assets.NFT.Web3.onInstanceCreated, null, [name, symbol, instance, length])
+						});
+						factory.on("OwnershipTransferred", function (previousOwner, newOwner) {
+							Q.handle(Assets.NFT.Web3.onInstanceOwnershipTransferred, null, [previousOwner, newOwner]);
+						});
+
+						Assets.NFT.Web3.factories[chain.chainId] = factory;
+
+						Q.handle(Assets.NFT.Web3.onFactoryUpdated(chain.chainId), null, [factory]);
+
+						return _subMethod(factory);
+					});
+				},
+				/**
 				 * Create contract for user
 				 * @method getContract
 				 * @params {Object} chain
@@ -1123,22 +1200,24 @@
 						return _subMethod(contract);
 					}
 
+					var address = chain.contract;
+
 					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.contract + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + address + ".json"), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						contract = new ethers.Contract(chain.contract, ABI, provider.getSigner());
+						contract = new ethers.Contract(address, ABI, provider.getSigner());
 
 						contract.on("TokenRemovedFromSale", function (tokenId) {
-							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId])
+							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId]);
 						});
 						contract.on("TokenAddedToSale", function (tokenId, amount, consumeToken) {
-							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
+							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken]);
 						});
 						contract.on("Transfer", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token])
+							Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token]);
 						});
 						contract.on("TransferAuthorship", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.NFT.Web3.onTransferAuthorship, null, [oldAddress, newAddress, token])
+							Q.handle(Assets.NFT.Web3.onTransferAuthorship, null, [oldAddress, newAddress, token]);
 						});
 
 						Assets.NFT.Web3.contracts[chain.chainId] = contract;
