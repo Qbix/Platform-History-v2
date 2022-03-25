@@ -9,7 +9,7 @@
  */
 class Assets_NFT_Series
 {
-	static $categoryStreamName = "Assets/user/NFT/series";
+	static $categoryStreamName = "Assets/user/NFT/contract";
 
 	/**
 	 * Check if NFT/series category exists, and create if not
@@ -30,7 +30,7 @@ class Assets_NFT_Series
 
 		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
 		if (!$stream) {
-			$stream = Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
+			throw new Exception("Assets/user/NFT/contract stream not found");
 		}
 
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
