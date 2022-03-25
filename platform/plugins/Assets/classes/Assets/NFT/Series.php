@@ -32,6 +32,9 @@ class Assets_NFT_Series
 		if (!$stream) {
 			throw new Exception("Assets/user/NFT/contract stream not found");
 		}
+		if (!$stream->getAttribute("address")) {
+			throw new Exception("contract address not found in Assets/user/NFT/contract stream");
+		}
 
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
 			$stream->setAttribute('Assets/NFT/minted/total', 0);
@@ -59,7 +62,14 @@ class Assets_NFT_Series
 		));
 
 		if (empty($streams)) {
-			$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(), array(
+			$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(
+				"attributes" => array(
+					"contract" => array(
+						"address" => $category->getAttribute("address"),
+						"symbol" => $category->getAttribute("symbol")
+					)
+				)
+			), array(
 				"publisherId" => $userId,
 				"streamName" => $category->name,
 				"type" => "new"

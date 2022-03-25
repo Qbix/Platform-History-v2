@@ -1038,7 +1038,7 @@
 						if (window.ethereum.chainId === chain.chainId) {
 							_process();
 						} else { // if no, lead to switch chain
-							Q.Users.Web3.setChain(chain, function () {
+							Q.Users.Web3.switchChain(chain, function () {
 								// after chain switched need update contract
 								Assets.NFT.Web3.contracts[chain.chainId] = null;
 								Assets.NFT.Web3.factories[chain.chainId] = null;
@@ -1068,6 +1068,7 @@
 				 * @param {Address} [info.commission.address] where to send commissions to
 				 * @param {String} [info.baseURI] to override global baseURI, if necessary
 				 * @param {String} [info.suffix] to override global suffix, if necessary
+				 * @param {Function} [callback]
 				 * @return {Promise} promise from ethers.Contract call transaction
 				 */
 				setSeriesInfo: function (contractAddress, seriesId, info, callback) {
@@ -1093,14 +1094,14 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract(contractAddress)
+					return Q.Users.Web3.getContract(contractAddress, {abiFileName: "userNFTContractTemplate"})
 					.then(function (contract) {
 						return contract.setSeriesInfo(seriesId, 
 							[authorAddress, limit, 
 								[onSaleUntil, currency, price],
 								[commissionFraction, commissionAddress], baseURI, suffix
 							]
-						);
+						).then(callback);
 					}).catch(function (err) {
 						Q.alert(err);
 					});
