@@ -6,6 +6,7 @@
     var Users = Q.Users;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
+    var Web3 = NFT.Web3;
 
     /**
      * YUIDoc description goes here
@@ -13,10 +14,9 @@
      * @constructor
      * @param {Object} [options] Override various options for this tool
      *  @param {string} userId - owner user id
-     *  @param {string} xid - NFT token is in the chain described by chainId
      *  @param {string} contractAddress
      *  @param {string} chainId - chain id
-     *  @param {string} [seriesId] - blockchain chain id
+     *  @param {string} seriesId
      *  @param {boolean} [composer=false] - If true build composer.
      *  @param {boolean} [useWeb3=false] If true use backend to read data from blockchain
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
@@ -38,8 +38,8 @@
         if (Q.isEmpty(state.chainId)) {
             return console.warn("chain id required!");
         }
-        if (Q.isEmpty(state.xid)) {
-            return console.warn("xid required!");
+        if (Q.isEmpty(state.seriesId)) {
+            return console.warn("seriesId required!");
         }
 
         // <set Streams/preview imagepicker settings>
@@ -63,7 +63,6 @@
                     Q.Tool.remove(tool.element, true, true);
                 }
             }
-
         });
 
         Q.addStylesheet("{{Assets}}/css/tools/NFT/series.css", pipe.fill('stylesheet'), { slotName: 'Assets' });
@@ -77,7 +76,6 @@
 
     { // default options here
         seriesId: null,
-        xid: null,
         userId: null,
         chainId: null,
         contractAddress: null,
@@ -313,29 +311,71 @@
                 });
             };
 
-            Q.Template.render('Assets/NFT/series/newItem', {}, function(err, html) {
-                    tool.element.innerHTML = html;
-
-                // get or create composer stream
-                Q.req("Assets/NFTSeries", "newItem", function (err, response) {
+            var _clickComposer = function () {
+                Q.Streams.get(userId, "Assets/user/NFT/contract", function (err) {
                     if (err) {
+                        if (Q.getObject([0, "classname"], err) === "Q_Exception_MissingRow") {
+                            // create new contract
+                            Web3.checkProvider(state.chainId, function (err, factory) {
+                                if (err) {
+                                    return $toolElement.removeClass("Q_working");
+                                }
+
+                                Web3.onInstanceOwnershipTransferred.set(function (previousOwner, newOwner) {
+                                    Q.Streams.create({
+                                        publisherId: userId,
+                                        streamName: "Assets/user/NFT/contract",
+                                        type: "Streams/category"
+                                    }, function (err, stream, extra) {
+                                        if (err) {
+                                            return err;
+                                        }
+
+                                        _clickComposer();
+                                    });
+                                }, tool);
+
+                                factory.produce(Q.Users.communityId + "_" + userId, "0x0000000000000000000000000000000000000000", null).catch(function (e) {
+                                    console.error(e);
+                                    $toolElement.removeClass("Q_working");
+                                });
+                            }, {
+                                getFactory: true
+                            });
+                        }
+
                         return;
                     }
 
-                    var newItem = response.slots.newItem;
+                    Q.req("Assets/NFTSeries", "newItem", function (err, response) {
+                        if (err) {
+                            return $toolElement.removeClass("Q_working");
+                        }
 
-                    previewState.publisherId = newItem.publisherId;
-                    previewState.streamName = newItem.streamName;
+                        var newItem = response.slots.newItem;
 
-                    // this need for Streams/related tool to avoid appear composer twice
-                    Q.setObject("options.streams_preview.publisherId", newItem.publisherId, tool.element);
-                    Q.setObject("options.streams_preview.streamName", newItem.streamName, tool.element);
+                        previewState.publisherId = newItem.publisherId;
+                        previewState.streamName = newItem.streamName;
 
-                    $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", _openDialog);
-                }, {
-                    fields: {
-                        userId: userId
-                    }
+                        // this need for Streams/related tool to avoid appear composer twice
+                        Q.setObject("options.streams_preview.publisherId", newItem.publisherId, tool.element);
+                        Q.setObject("options.streams_preview.streamName", newItem.streamName, tool.element);
+                    }, {
+                        fields: {
+                            userId: userId
+                        }
+                    });
+                });
+            };
+
+            Q.Template.render('Assets/NFT/series/newItem', {}, function(err, html) {
+                    tool.element.innerHTML = html;
+
+                $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", function () {
+
+                    $toolElement.addClass("Q_working");
+
+                    _clickComposer();
                 });
             });
         }
