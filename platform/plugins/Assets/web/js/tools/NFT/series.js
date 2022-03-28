@@ -3,7 +3,6 @@
      * @module Assets
      */
 
-    var Users = Q.Users;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
     var Web3 = NFT.Web3;
@@ -17,7 +16,6 @@
      *  @param {string} chainId - chain id
      *  @param {string} seriesId
      *  @param {boolean} [composer=false] - If true build composer.
-     *  @param {boolean} [useWeb3=false] If true use backend to read data from blockchain
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onCreated] Event occur when series created.
@@ -39,6 +37,9 @@
         }
         if (Q.isEmpty(state.seriesId)) {
             return console.warn("seriesId required!");
+        }
+        if (Q.isEmpty(state.contract)) {
+            return console.warn("contract address required!");
         }
 
         // remove trailing zeros
@@ -80,6 +81,7 @@
     { // default options here
         seriesId: null,
         userId: null,
+        contract: null,
         chainId: null,
         onMarketPlace: true,
         imagepicker: {
@@ -277,7 +279,7 @@
 
                                 // activate series in blockchain
                                 try {
-                                    Q.Assets.NFT.Web3.setSeriesInfo(Q.getObject("address", tool.stream.getAttribute("contract")), seriesId, {price:price}, function () {
+                                    Q.Assets.NFT.Web3.setSeriesInfo(Q.getObject("address", state.contract), seriesId, {price:price}, function () {
                                         Q.Streams.get.force(tool.stream.fields.publisherId, tool.stream.fields.name, function () {
                                             $toolElement.removeClass("Q_working");
                                             tool.refresh(this);
@@ -303,26 +305,10 @@
                 });
             };
 
-            var _clickComposer = function () {
-                Q.Streams.get.force(userId, NFT.userContractStreamName, function (err) {
-                    if (err) {
-                        if (Q.getObject([0, "classname"], err) === "Q_Exception_MissingRow") {
-                            // create new contract
-                            tool.createContract(function () {
-                                _clickComposer();
-                            });
-                        }
-
-                        return;
-                    }
-
-                    var stream = this;
-                    if (!stream.getAttribute("address")) {
-                        // create new contract
-                        return tool.createContract(function () {
-                            _clickComposer();
-                        });
-                    }
+            Q.Template.render('Assets/NFT/series/newItem', {}, function(err, html) {
+                tool.element.innerHTML = html;
+                $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", function () {
+                    $toolElement.addClass("Q_working");
 
                     Q.req("Assets/NFTSeries", "newItem", function (err, response) {
                         if (err) {
@@ -344,80 +330,6 @@
                         }
                     });
                 });
-            };
-
-            var _composerTemplate = function () {
-                Q.Template.render('Assets/NFT/series/newItem', {}, function(err, html) {
-                    tool.element.innerHTML = html;
-                    $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", function () {
-                        $toolElement.addClass("Q_working");
-                        _clickComposer();
-                    });
-                });
-            };
-            Q.Streams.get.force(userId, NFT.userContractStreamName, function (err) {
-                if (err) {
-                    if (Q.getObject([0, "classname"], err) === "Q_Exception_MissingRow") {
-                        _composerTemplate();
-                    }
-                    return;
-                }
-
-                // check if
-                this.relatedTo("Assets/NFT/series/" + state.chainId, function () {
-                    if (!Q.isEmpty(this.relatedStreams)) {
-                        var stream = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
-                        previewState.publisherId = stream.fields.publisherId;
-                        previewState.streamName = stream.fields.name;
-                        tool.refresh(stream);
-                        return;
-                    }
-
-                    _composerTemplate();
-                });
-            });
-        },
-        createContract: function (callback) {
-            var tool = this;
-            var $toolElement = $(this.element);
-            var state = this.state;
-            var userId = state.userId;
-
-            Web3.checkProvider(state.chain, function (err, factory) {
-                if (err) {
-                    return $toolElement.removeClass("Q_working");
-                }
-
-                Web3.onInstanceCreated.set(function (name, symbol, instance) {
-                    if (state.onInstanceCreatedCalled) {
-                        return;
-                    }
-
-                    state.onInstanceCreatedCalled = true;
-
-                    Q.req("Assets/NFTSeries", ["contractStream"], function (err, response) {
-                        Q.handle(callback);
-                    }, {
-                        method: "post",
-                        fields: {
-                            userId: userId,
-                            name: name,
-                            symbol: symbol,
-                            address: instance
-                        }
-                    });
-                }, tool);
-
-                try {
-                    factory["produce(string,string,string)"](Q.Users.communityId + "_" + userId + "_1", "0x0000000000000000000000000000000000000000", "").catch(function (e) {
-                        console.error(e);
-                        $toolElement.removeClass("Q_working");
-                    });
-                } catch (e) {
-                    $toolElement.removeClass("Q_working");
-                }
-            }, {
-                mode: "factory"
             });
         }
     });
