@@ -605,7 +605,6 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$dsn = $connInfo['dsn'];
 			$nt = & self::$nestedTransactions[$dsn];
 			if (!isset($nt)) {
-				$nt = & self::$nestedTransactions[$dsn];
 				$nt = array('count' => 0, 'keys' => array());
 			}
 			$ntc = & $nt['count'];

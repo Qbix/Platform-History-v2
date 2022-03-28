@@ -4062,7 +4062,6 @@
 							reject(err);
 						} else {
 							_continue(provider);
-							resolve(provider);
 						}
 					});
 				}
