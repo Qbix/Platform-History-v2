@@ -40,14 +40,13 @@
     border-radius: 30px;
     padding: 5px;
     cursor: pointer;
-    height: 370px;
 }
 .Assets_NFT_series_preview_tool h2.tile-name {
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 18px !important;
-    color: #8d8d8d;
+    color: #fff;
     font-weight: 900 !important;
     border-top: solid 1px #414141;
     border-bottom: solid 1px #414141;

@@ -21,12 +21,16 @@ function Users_activate_response_content()
 			if ($qs = $_SERVER['QUERY_STRING']) {
 				$qs = "&$qs";
 			}
-			$url = Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl)
-				.'?Q.fromSuccess=Users/activate'.$qs;
-			$url = Q_Uri::fixUrl(Q::interpolate($url, array(
-				'email' => urlencode($emailAddress),
-				'mobile' => urlencode($mobileNumber)
-			)));
+			if (!empty($_REQUEST['redirect'])) {
+				$url = $_REQUEST['redirect'];
+			} else {
+				$url = Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl)
+					.'?Q.fromSuccess=Users/activate'.$qs;
+				$url = Q_Uri::fixUrl(Q::interpolate($url, array(
+					'email' => urlencode($emailAddress),
+					'mobile' => urlencode($mobileNumber)
+				)));
+			}
 			Q_Response::redirect($url);
 			return true;
 		}

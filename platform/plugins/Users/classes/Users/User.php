@@ -431,6 +431,7 @@ class Users_User extends Base_Users_User
 	 * @param {string} [$options.from] An array of (emailAddress, human_readable_name)
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.redirect] The URL to redirect to after activation is completed
 	 * @param {Users_Email} [&$email] Optional reference to be filled
 	 * @return {boolean}
 	 *  Returns true on success.
@@ -489,10 +490,15 @@ class Users_User extends Base_Users_User
 			"CURRENT_TIMESTAMP + INTERVAL $minutes MINUTE"
 		);
 		$email->authCode = sha1(microtime() . mt_rand());
-		$link = Q_Uri::url(
-			'Users/activate?code='.urlencode($email->activationCode)
-			. ' emailAddress='.urlencode($email->address)
+		$arr = array(
+			'code' => $email->activationCode,
+			'emailAddress' => $email->address
 		);
+		if (!empty($options['redirect'])) {
+			$arr['redirect'] = $options['redirect'];
+		}
+		$querystring = http_build_query($arr);
+		$link = Q_Uri::url("Users/activate?$querystring");
 		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $email->authCode, 
 			'emailAddress' => $email->address
@@ -739,6 +745,7 @@ class Users_User extends Base_Users_User
 	 * @param {array} [$options=array()] Array of options. Can include:
 	 * @param {string} [$options.delay] A delay, in milliseconds, to wait until sending email. Only works if Node server is listening.
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for getting activation messages by default. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.redirect] The URL to redirect to after activation is completed
 	 * @param {Users_Mobile} [&$mobile] Optional reference to be filled
 	 * @return {boolean}
 	 *  Returns true on success.
@@ -797,10 +804,15 @@ class Users_User extends Base_Users_User
 			$number = substr($number, 2);
 		}
 		$mobile->authCode = sha1(microtime() . mt_rand());
-		$link = Q_Uri::url(
-			'Users/activate?code='.urlencode($mobile->activationCode)
-			. ' mobileNumber='.urlencode($number)
+		$arr = array(
+			'code' => $mobile->activationCode,
+			'mobileNumber' => $number
 		);
+		if (!empty($options['redirect'])) {
+			$arr['redirect'] = $options['redirect'];
+		}
+		$querystring = http_build_query($arr);
+		$link = Q_Uri::url("Users/activate?$querystring");
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
 		/**
