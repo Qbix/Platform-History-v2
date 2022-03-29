@@ -267,6 +267,11 @@
             "DescPlaceholder": "Enter series description",
             "EndingIn": "Ending In"
         },
+        "contract": {
+            "CreateContract": "Create contract",
+            "CreateContractFor": "Create contract for \"{{chain}}\"",
+            "ContractFor": "Contract for \"{{chain}}\""
+        },
         "profile": {
             "Title": "Profile for {{userName}}",
             "Description": "User details",

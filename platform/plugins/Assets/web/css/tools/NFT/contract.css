@@ -1,0 +1,14 @@
+.Assets_NFT_contract_composer {
+    cursor: pointer;
+}
+.Assets_NFT_contract_preview_tool .Streams_preview_title,
+.Assets_NFT_contract_composer .Streams_preview_title {
+    display: inline-block;
+}
+.Assets_NFT_contract_preview_tool .Assets_NFT_avatar {
+    vertical-align: middle;
+}
+.NFTRemix_profile #content .Streams_related_tool.Assets_NFT_contract_series {
+    text-align: left;
+    margin-left: 100px;
+}
