@@ -1038,7 +1038,7 @@
 						if (window.ethereum.chainId === chain.chainId) {
 							_process();
 						} else { // if no, lead to switch chain
-							Q.Users.Web3.setChain(chain, function () {
+							Q.Users.Web3.switchChain(chain, function () {
 								// after chain switched need update contract
 								Assets.NFT.Web3.contracts[chain.chainId] = null;
 								Assets.NFT.Web3.factories[chain.chainId] = null;
@@ -1112,6 +1112,7 @@
 				 * @params {function} callback
 				 * @params {object} [options]
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 * @params {boolean} [options.factoryJson] If defined, used this json file name instead standard
 				 */
 				getFactory: function (chain, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
@@ -1145,7 +1146,7 @@
 					var address = chain.factory;
 
 					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + address + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + (Q.getObject("factoryJson", options) || address) + ".json"), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
 						factory = new ethers.Contract(address, ABI, provider.getSigner());
 
@@ -1170,6 +1171,7 @@
 				 * @params {function} callback
 				 * @params {object} [options]
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
+				 * @params {boolean} [options.contractJson] If defined, used this json file name instead standard
 				 */
 				getContract: function (chain, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
@@ -1203,7 +1205,7 @@
 					var address = chain.contract;
 
 					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + address + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + (Q.getObject("contractJson", options) || address) + ".json"), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
 						contract = new ethers.Contract(address, ABI, provider.getSigner());
 
@@ -1561,6 +1563,7 @@
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/series.js",
+		"Assets/NFT/contract/preview": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
 	});

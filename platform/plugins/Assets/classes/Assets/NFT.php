@@ -175,7 +175,14 @@ class Assets_NFT
 			// if contract or rpcUrls undefined, skip this chain
 			$name = Q::ifset($chain, "name", null);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
+			if ($contract) {
+				$contractPath = is_file(APP_WEB_DIR.DS."ABI".DS.$contract.".json") ? $contract.".json" : "userNFTContractTemplate.json";
+			}
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
+			$factoryPath = null;
+			if ($factory) {
+				$factoryPath = is_file(APP_WEB_DIR.DS."ABI".DS.$factory.".json") ? $factory.".json" : "userNFTFactoryTemplate.json";
+			}
 			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
 			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", null);
@@ -188,7 +195,7 @@ class Assets_NFT
 
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
-			$temp = compact("name", "chainId", "contract", "factory", "rpcUrls", "blockExplorerUrl");
+			$temp = compact("name", "chainId", "contract", "contractJson", "factory", "factoryJson", "rpcUrls", "blockExplorerUrl");
 
 			foreach ($currencies as $currency) {
 				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
