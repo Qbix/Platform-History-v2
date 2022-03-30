@@ -270,7 +270,13 @@
         "contract": {
             "CreateContract": "Create contract",
             "CreateContractFor": "Create contract for \"{{chain}}\"",
-            "ContractFor": "Contract for \"{{chain}}\""
+            "ContractFor": "Contract for \"{{chain}}\"",
+            "UpdateContract": "Update Contract",
+            "TransferOwnership": "Transfer Ownership",
+            "SetBaseURI": "Set Base URI",
+            "SetSuffix": "Set Suffix",
+            "CurrentOwner": "Current Owner",
+            "CurrentBaseURL": "Current BaseURL"
         },
         "profile": {
             "Title": "Profile for {{userName}}",

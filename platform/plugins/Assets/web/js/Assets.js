@@ -1000,15 +1000,8 @@
 				onTokenRemovedFromSale: new Q.Event(),
 				onTokenAddedToSale: new Q.Event(),
 				onTransfer: new Q.Event(),
-				onTransferAuthorship: new Q.Event(),
 				onInstanceCreated: new Q.Event(),
 				onInstanceOwnershipTransferred: new Q.Event(),
-				_onContractUpdated: {},
-				_onFactoryUpdated: {},
-				onContractUpdated: Q.Event.factory(this._onContractUpdated, [""]),
-				onFactoryUpdated: Q.Event.factory(this._onFactoryUpdated, [""]),
-				contracts: [],
-				factories: [],
 
 				/**
 				 * Check web3 provider (MetaMask) connected, and switch to valid chain
@@ -1020,6 +1013,12 @@
 				 */
 				checkProvider: function (chain, callback, options) {
 					var mode = Q.getObject("mode", options) || "contract";
+
+					// if chain is a chainId, convert to chain
+					if (Q.typeOf(chain) === "string") {
+						chain = Assets.NFT.chains[chain];
+					}
+
 					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
 							Q.handle(callback, null, [err]);
@@ -1039,10 +1038,6 @@
 							_process();
 						} else { // if no, lead to switch chain
 							Q.Users.Web3.switchChain(chain, function () {
-								// after chain switched need update contract
-								Assets.NFT.Web3.contracts[chain.chainId] = null;
-								Assets.NFT.Web3.factories[chain.chainId] = null;
-
 								_process();
 							}, function (err) {
 								Q.handle(callback, null, [err]);
@@ -1053,7 +1048,7 @@
 				/**
 				 * Set the info for a series
 				 * @method setSeriesInfo
-				 * @param {String} contractAddress
+				 * @param {String} chainId
 				 * @param {String} seriesId
 				 * @param {Object} info Only info.price is really required
 				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
@@ -1070,10 +1065,10 @@
 				 * @param {String} [info.suffix] to override global suffix, if necessary
 				 * @return {Promise} promise from ethers.Contract call transaction
 				 */
-				setSeriesInfo: function (contractAddress, seriesId, info, callback) {
-					if (typeof contractAddress !== 'string'
-						&& !(contractAddress instanceof String)) {
-						throw new Q.Error("contractAddress must be a string");
+				setSeriesInfo: function (chainId, seriesId, info, callback) {
+					if (typeof chainId !== 'string'
+						&& !(chainId instanceof String)) {
+						throw new Q.Error("chainId must be a string");
 					}
 					if (seriesId.toString().substr(0, 2) !== '0x') {
 						throw new Q.Error("seriesId must be a string starting with 0x");
@@ -1093,17 +1088,20 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract(contractAddress)
-						.then(function (contract) {
-							return contract.setSeriesInfo(seriesId,
-								[authorAddress, limit,
-									[onSaleUntil, currency, price],
-									[commissionFraction, commissionAddress], baseURI, suffix
-								]
-							);
-						}).catch(function (err) {
+					return Q.Assets.NFT.Web3.getContract(chainId, function (err, contract) {
+						if (err) {
+							return;
+						}
+
+						return contract.setSeriesInfo(seriesId,
+							[authorAddress, limit,
+								[onSaleUntil, currency, price],
+								[commissionFraction, commissionAddress], baseURI, suffix
+							]
+						).then(callback).catch(function (err) {
 							Q.alert(err);
 						});
+					});
 				},
 				/**
 				 * Get or create factory
@@ -1112,7 +1110,6 @@
 				 * @params {function} callback
 				 * @params {object} [options]
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
-				 * @params {boolean} [options.factoryJson] If defined, used this json file name instead standard
 				 */
 				getFactory: function (chain, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
@@ -1136,19 +1133,12 @@
 						Q.handle(callback, null, [null, factory]);
 					};
 
-					var factory = Assets.NFT.Web3.factories[chain.chainId];
-
-					// if factory exists, return one
-					if (factory) {
-						return _subMethod(factory);
-					}
-
 					var address = chain.factory;
 
 					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + (Q.getObject("factoryJson", options) || address) + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.factoryJson), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						factory = new ethers.Contract(address, ABI, provider.getSigner());
+						var factory = new ethers.Contract(address, ABI, provider.getSigner());
 
 						factory.on("InstanceCreated", function (name, symbol, instance, length) {
 							Q.handle(Assets.NFT.Web3.onInstanceCreated, null, [name, symbol, instance, length])
@@ -1156,10 +1146,6 @@
 						factory.on("OwnershipTransferred", function (previousOwner, newOwner) {
 							Q.handle(Assets.NFT.Web3.onInstanceOwnershipTransferred, null, [previousOwner, newOwner]);
 						});
-
-						Assets.NFT.Web3.factories[chain.chainId] = factory;
-
-						Q.handle(Assets.NFT.Web3.onFactoryUpdated(chain.chainId), null, [factory]);
 
 						return _subMethod(factory);
 					});
@@ -1171,7 +1157,7 @@
 				 * @params {function} callback
 				 * @params {object} [options]
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
-				 * @params {boolean} [options.contractJson] If defined, used this json file name instead standard
+				 * @params {boolean} [options.contractAddress] If defined, used instead default contract address
 				 */
 				getContract: function (chain, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
@@ -1195,36 +1181,22 @@
 						Q.handle(callback, null, [null, contract]);
 					};
 
-					var contract = Assets.NFT.Web3.contracts[chain.chainId];
-
-					// if contract exists, return one
-					if (contract) {
-						return _subMethod(contract);
-					}
-
-					var address = chain.contract;
+					var address = Q.getObject("contractAddress", options) || chain.contract;
 
 					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + (Q.getObject("contractJson", options) || address) + ".json"), function (ABI) {
+					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.contractJson), function (ABI) {
 						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						contract = new ethers.Contract(address, ABI, provider.getSigner());
+						var contract = new ethers.Contract(address, ABI, provider.getSigner());
 
 						contract.on("TokenRemovedFromSale", function (tokenId) {
 							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId]);
 						});
-						contract.on("TokenAddedToSale", function (tokenId, amount, consumeToken) {
+						contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
 							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken]);
 						});
 						contract.on("Transfer", function (oldAddress, newAddress, token) {
 							Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token]);
 						});
-						contract.on("TransferAuthorship", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.NFT.Web3.onTransferAuthorship, null, [oldAddress, newAddress, token]);
-						});
-
-						Assets.NFT.Web3.contracts[chain.chainId] = contract;
-
-						Q.handle(Assets.NFT.Web3.onContractUpdated(chain.chainId), null, [contract]);
 
 						return _subMethod(contract);
 					});

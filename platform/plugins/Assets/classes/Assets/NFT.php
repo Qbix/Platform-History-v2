@@ -176,12 +176,12 @@ class Assets_NFT
 			$name = Q::ifset($chain, "name", null);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			if ($contract) {
-				$contractPath = is_file(APP_WEB_DIR.DS."ABI".DS.$contract.".json") ? $contract.".json" : "userNFTContractTemplate.json";
+				$contractJson = is_file(APP_WEB_DIR.DS."ABI".DS.$contract.".json") ? $contract.".json" : "userNFTContractTemplate.json";
 			}
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
 			$factoryPath = null;
 			if ($factory) {
-				$factoryPath = is_file(APP_WEB_DIR.DS."ABI".DS.$factory.".json") ? $factory.".json" : "userNFTFactoryTemplate.json";
+				$factoryJson = is_file(APP_WEB_DIR.DS."ABI".DS.$factory.".json") ? $factory.".json" : "userNFTFactoryTemplate.json";
 			}
 			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);

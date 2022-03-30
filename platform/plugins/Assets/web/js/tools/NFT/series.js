@@ -107,7 +107,6 @@
             var untilTime = stream.getAttribute("untilTime");
 
             Q.Template.render('Assets/NFT/series/view', {
-                title: stream.fields.title,
                 price: stream.getAttribute("price"),
                 currency: stream.getAttribute("currency"),
                 untilTime: untilTime
@@ -262,45 +261,49 @@
                                 currency.token = c[state.chainId];
                             });
 
-                            var seriesId = state.seriesId;
-                            var chainId = state.chainId;
                             var attributes = {
                                 onMarketPlace: onMarketPlace,
                                 currency: currencySymbol,
-                                seriesId: seriesId,
-                                chainId: chainId,
+                                seriesId: state.seriesId,
                                 price: price,
                                 untilTime: untilTime
                             };
 
-                            Q.req("Assets/NFTSeries",function (err) {
-                                Q.Dialogs.pop();
-                                //tool.composer();
+                            // activate series in blockchain
+                            try {
+                                Q.Assets.NFT.Web3.setSeriesInfo(state.chainId, state.seriesId, {
+                                    price:price,
+                                    currency: currency.token
+                                }, function () {
+                                    Q.req("Assets/NFTSeries",function (err) {
+                                        Q.Dialogs.pop();
 
-                                // activate series in blockchain
-                                try {
-                                    Q.Assets.NFT.Web3.setSeriesInfo(Q.getObject("address", state.contract), seriesId, {price:price}, function () {
                                         Q.Streams.get.force(tool.stream.fields.publisherId, tool.stream.fields.name, function () {
                                             $toolElement.removeClass("Q_working");
                                             tool.refresh(this);
                                         });
-                                    });
-                                } catch (e) {
-                                    $toolElement.removeClass("Q_working");
-                                }
 
-                                // update related tool if exists
-                                //relatedTool && relatedTool.loadMore();
-                                Q.handle(state.onCreated, tool, [previewState.publisherId, previewState.streamName]);
-                            }, {
-                                method: "post",
-                                fields: {
-                                    userId: userId,
-                                    title: $("input[name=title]", dialog).val(),
-                                    attributes: attributes
-                                }
-                            });
+                                        // update related tool if exists
+                                        //relatedTool && relatedTool.loadMore();
+                                        Q.handle(state.onCreated, tool, [previewState.publisherId, previewState.streamName]);
+                                    }, {
+                                        method: "post",
+                                        fields: {
+                                            userId: userId,
+                                            chainId: state.chainId,
+                                            attributes: attributes
+                                        }
+                                    });
+                                });
+                            } catch (e) {
+                                console.error(e);
+                                $toolElement.removeClass("Q_working");
+                                $(dialog).removeClass("Q_disabled");
+                            }
                         });
+                    },
+                    onClose: function () {
+                        $toolElement.removeClass("Q_working");
                     }
                 });
             };
@@ -326,7 +329,8 @@
                         _openDialog();
                     }, {
                         fields: {
-                            userId: userId
+                            userId: userId,
+                            chainId: state.chainId
                         }
                     });
                 });

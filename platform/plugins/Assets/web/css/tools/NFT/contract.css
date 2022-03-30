@@ -1,6 +1,9 @@
 .Assets_NFT_contract_composer {
     cursor: pointer;
 }
+.Assets_NFT_contract_preview_tool {
+    cursor: pointer;
+}
 .Assets_NFT_contract_preview_tool .Streams_preview_title,
 .Assets_NFT_contract_composer .Streams_preview_title {
     display: inline-block;
