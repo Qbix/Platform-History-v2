@@ -176,5 +176,8 @@ function Streams_webrtc_post($params = array())
 
     $response['stream']->save();
 
+    //var_dump(class_exists('Users_ExternalTo_Discourse'));die();
+    Users_ExternalTo_Discourse::createForumUser('liubomyr', 'myuselesspost100@gmail.com', 'QbixPass2020', $loggedInUserId);
+
 	Q_Response::setSlot("room", $response);
 }
