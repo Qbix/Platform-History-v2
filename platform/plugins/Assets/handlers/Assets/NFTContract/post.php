@@ -12,17 +12,20 @@ function Assets_NFTContract_post ($params) {
 
 	$texts = Q_Text::get('Assets/content')['NFT']['contract'];
 
+	$chain = Assets_NFT::getChains($req["chainId"]);
+
 	$streamName = Q::interpolate(Assets_NFT_Series::$categoryStreamName, array("chainId" => $req["chainId"]));
 	$stream = Streams::fetchOne(null, $userId, $streamName);
 	if (!$stream) {
 		$stream = Streams::create(null, $userId, "Streams/category", array(
-			"title" => Q::interpolate($texts["ContractFor"], array("chain" => Assets_NFT::getChains($req["chainId"])["name"])),
+			"title" => Q::interpolate($texts["ContractFor"], array("chain" => $chain["name"])),
 			"name" => $streamName,
 			"readLevel" => 40,
 			"writeLevel" => 10,
 			"adminLevel" => 20
 		));
 	}
+	$stream->setAttribute("factory", $chain["factory"]);
 	$stream->setAttribute("address", $req["address"]);
 	$stream->setAttribute("symbol", $req["symbol"]);
 	$stream->changed();
