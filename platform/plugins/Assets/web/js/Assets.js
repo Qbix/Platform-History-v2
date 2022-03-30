@@ -1131,7 +1131,7 @@
 						contract.on("TokenRemovedFromSale", function (tokenId) {
 							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId])
 						});
-						contract.on("TokenAddedToSale", function (tokenId, amount, consumeToken) {
+						contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
 							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
 						});
 						contract.on("Transfer", function (oldAddress, newAddress, token) {
@@ -1295,7 +1295,7 @@
 							title: texts.errors.Error
 						});
 					}
-					var _waitTransaction = function (transactionRequest) {
+					function _waitTransaction(transactionRequest) {
 						if (!Q.getObject("wait", transactionRequest)) {
 							Q.handle(callback, null, [true])
 							return Q.alert("Transaction request invalid!");
@@ -1330,7 +1330,10 @@
                             }).catch(function (err) {
                                 debugger;
                             });*/
-							contract.buy(tokenId, {value: price.price, gasLimit: 10000000}).then(_waitTransaction);
+							contract.buy(tokenId, {
+								value: price.price,
+								gasLimit: 10000000
+							}).then(_waitTransaction);
 						});
 					});
 				},
