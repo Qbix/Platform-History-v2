@@ -1793,7 +1793,7 @@
 
                                         // We have to convert the buffer to a blob:
                                         let audioBlob = new Blob([new Uint8Array(buffer)], { type: mime });
-                                        console.log('addAudioSource onload', audio)
+                                        console.log('addAudioSource onload', audioBlob)
 
                                         // The blob gives us a URL to the video file:
                                         let url = window.URL.createObjectURL(audioBlob);
