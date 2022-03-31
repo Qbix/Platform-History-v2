@@ -1134,20 +1134,38 @@
 					};
 
 					var address = chain.factory;
+					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTFactoryTemplate.json")];
+					var pipe = new Q.pipe(urls, function (params) {
+						var contractURL = null;
+						Q.each(urls, function (i, url) {
+							if (contractURL || params[url][0] !== 200) {
+								return;
+							}
 
-					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.factoryJson), function (ABI) {
-						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						var factory = new ethers.Contract(address, ABI, provider.getSigner());
-
-						factory.on("InstanceCreated", function (name, symbol, instance, length) {
-							Q.handle(Assets.NFT.Web3.onInstanceCreated, null, [name, symbol, instance, length])
-						});
-						factory.on("OwnershipTransferred", function (previousOwner, newOwner) {
-							Q.handle(Assets.NFT.Web3.onInstanceOwnershipTransferred, null, [previousOwner, newOwner]);
+							contractURL = url;
 						});
 
-						return _subMethod(factory);
+						if (!contractURL) {
+							throw new Q.Exception("contract ABI url invalid");
+						}
+
+						// loading ABI json
+						$.getJSON(contractURL, function (ABI) {
+							var provider = new ethers.providers.Web3Provider(window.ethereum);
+							var factory = new ethers.Contract(address, ABI, provider.getSigner());
+
+							factory.on("InstanceCreated", function (name, symbol, instance, length) {
+								Q.handle(Assets.NFT.Web3.onInstanceCreated, null, [name, symbol, instance, length])
+							});
+							factory.on("OwnershipTransferred", function (previousOwner, newOwner) {
+								Q.handle(Assets.NFT.Web3.onInstanceOwnershipTransferred, null, [previousOwner, newOwner]);
+							});
+
+							_subMethod(factory);
+						});
+					});
+					Q.each(urls, function (i, url) {
+						Q.getUrlStatus(url, pipe.fill(url));
 					});
 				},
 				/**
@@ -1182,23 +1200,41 @@
 					};
 
 					var address = Q.getObject("contractAddress", options) || chain.contract;
+					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTContractTemplate.json")];
+					var pipe = new Q.pipe(urls, function (params) {
+						var contractURL = null;
+						Q.each(urls, function (i, url) {
+							if (contractURL || params[url][0] !== 200) {
+								return;
+							}
 
-					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.contractJson), function (ABI) {
-						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						var contract = new ethers.Contract(address, ABI, provider.getSigner());
-
-						contract.on("TokenRemovedFromSale", function (tokenId) {
-							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId]);
-						});
-						contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
-							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken]);
-						});
-						contract.on("Transfer", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token]);
+							contractURL = url;
 						});
 
-						return _subMethod(contract);
+						if (!contractURL) {
+							throw new Q.Exception("contract ABI url invalid");
+						}
+
+						// loading ABI json
+						$.getJSON(url, function (ABI) {
+							var provider = new ethers.providers.Web3Provider(window.ethereum);
+							var contract = new ethers.Contract(address, ABI, provider.getSigner());
+
+							contract.on("TokenRemovedFromSale", function (tokenId) {
+								Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId]);
+							});
+							contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
+								Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken]);
+							});
+							contract.on("Transfer", function (oldAddress, newAddress, token) {
+								Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token]);
+							});
+
+							_subMethod(contract);
+						});
+					});
+					Q.each(urls, function (i, url) {
+						Q.getUrlStatus(url, pipe.fill(url));
 					});
 				},
 				/**
