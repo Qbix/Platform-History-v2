@@ -283,7 +283,7 @@
                             return $toolElement.removeClass("Q_working");
                         }
 
-                        Q.req("Assets/NFTContract", ["stream"],function (err, response) {
+                        Q.req("Assets/NFTcontract", ["stream"],function (err, response) {
                             if (err) {
                                 return;
                             }

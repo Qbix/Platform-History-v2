@@ -275,7 +275,7 @@
                                     price:price,
                                     currency: currency.token
                                 }, function () {
-                                    Q.req("Assets/NFTSeries",function (err) {
+                                    Q.req("Assets/NFTseries",function (err) {
                                         Q.Dialogs.pop();
 
                                         Q.Streams.get.force(tool.stream.fields.publisherId, tool.stream.fields.name, function () {
@@ -313,7 +313,7 @@
                 $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", function () {
                     $toolElement.addClass("Q_working");
 
-                    Q.req("Assets/NFTSeries", "newItem", function (err, response) {
+                    Q.req("Assets/NFTseries", "newItem", function (err, response) {
                         if (err) {
                             return $toolElement.removeClass("Q_working");
                         }

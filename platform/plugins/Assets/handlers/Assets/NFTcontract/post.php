@@ -1,5 +1,5 @@
 <?php
-function Assets_NFTContract_post ($params) {
+function Assets_NFTcontract_post ($params) {
 	$req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array("userId", "chainId", "address", "symbol"), $req, true);
 	$loggedInUserId = Users::loggedInUser(true)->id;
