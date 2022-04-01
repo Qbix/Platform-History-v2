@@ -150,7 +150,7 @@
 		},
 		"onInsert": {
 			"community": ["Assets/NFTs"],
-			"person": ["Assets/user/NFTs"]
+			"person": ["Assets/user/NFTs", "Assets/NFT/contracts"]
 		}
 	},
 	"Assets": {
