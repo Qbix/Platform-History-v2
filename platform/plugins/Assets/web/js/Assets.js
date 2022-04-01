@@ -1165,7 +1165,7 @@
 						});
 					});
 					Q.each(urls, function (i, url) {
-						Q.getUrlStatus(url, pipe.fill(url));
+						Q.Request.getUrlStatus(url, pipe.fill(url));
 					});
 				},
 				/**
@@ -1234,7 +1234,7 @@
 						});
 					});
 					Q.each(urls, function (i, url) {
-						Q.getUrlStatus(url, pipe.fill(url));
+						Q.Request.getUrlStatus(url, pipe.fill(url));
 					});
 				},
 				/**

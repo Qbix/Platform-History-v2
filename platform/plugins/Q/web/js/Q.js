@@ -136,22 +136,6 @@ Q.assert = function (condition, complaint) {
 };
 
 /**
- * CHeck if url don't return code 404
- * @method getUrlStatus
- * @param {string} url
- * @param {function} callback - get http.status as argument
- * @return {string}
- */
-Q.getUrlStatus = function(url,callback) {
-	var http = new XMLHttpRequest();
-	http.addEventListener("load", function () {
-		Q.handle(callback, http, [this.status]);
-	});
-	http.open('HEAD', url);
-	http.send();
-};
-
-/**
  * By default this is set to the root Promise object, which may be undefined
  * in browsers such as Internet Explorer.
  * You can load a Promises library and set Q.Promise to the Promise constructor
@@ -5482,6 +5466,22 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 	this.slotNames = slotNames;
 	this.callback = callback;
 	this.options = options;
+};
+
+/**
+ * Return URL http code
+ * @method getUrlStatus
+ * @param {string} url
+ * @param {function} callback - get http.status as argument
+ * @return {string}
+ */
+Q.Request.getUrlStatus = function(url, callback) {
+	var http = new XMLHttpRequest();
+	http.addEventListener("load", function () {
+		Q.handle(callback, http, [this.status]);
+	});
+	http.open('HEAD', url);
+	http.send();
 };
 
 /**
