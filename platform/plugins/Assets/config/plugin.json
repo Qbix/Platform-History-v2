@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.7",
+				"version": "1.0.8",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -129,6 +129,15 @@
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
+			"Assets/NFT/contract": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"canCreate": ["Users/admins", "Users/owners"],
+				"defaults": {
+					"icon": "{{Assets}}/img/empty_white.png"
+				}
+			},
 			"Assets/NFT/pointer": {
 				"create": true,
 				"close": true,
@@ -229,6 +238,10 @@
 				"tokensByOwner": {
 					"limit": 100
 				}
+			},
+			"URI": {
+				"base": "{{baseUrl}}/Assets/NFT/{{contractId}}/0x",
+				"suffix": ".json"
 			},
 			"currencies": [
 				{
