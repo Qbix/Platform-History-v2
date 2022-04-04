@@ -269,14 +269,23 @@
         },
         "contract": {
             "CreateContract": "Create contract",
-            "CreateContractFor": "Create contract for \"{{chain}}\"",
-            "ContractFor": "Contract for \"{{chain}}\"",
+            "SelectContract": "Select contract",
+            "CreateContractFor": "Create contract for {{userName}}",
+            "ContractFor": "Contract for {{userName}}",
             "UpdateContract": "Update Contract",
             "TransferOwnership": "Transfer Ownership",
             "SetBaseURI": "Set Base URI",
             "SetSuffix": "Set Suffix",
             "CurrentOwner": "Current Owner",
-            "CurrentBaseURL": "Current BaseURL"
+            "CurrentBaseURL": "Current BaseURL",
+            "ContractAddressAbsent": "Contract address absent",
+            "FactoryAddressAbsent": "Factory address absent",
+            "GlobalContractFor": "Global contract for {{chainNetwork}}",
+            "CustomContractFor": "Custom contract for {{chainNetwork}}",
+            "TitleRequired": "Title required",
+            "SymbolRequired": "Symbol required",
+            "TypeContractName": "Please type contract name",
+            "TypeContractSymbol": "Please type contract symbol"
         },
         "profile": {
             "Title": "Profile for {{userName}}",
