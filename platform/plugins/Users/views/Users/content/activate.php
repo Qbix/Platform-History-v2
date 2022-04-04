@@ -93,7 +93,28 @@
 	Q.addScript('{{Q}}/js/sha1.js');
 	
 	var form = $('form');
-	form.data('onBeforeSubmit', new Q.Event())
+	form.data('onBeforeSubmit', new Q.Event());
+	var onBeforeSubmit = $form.data('onBeforeSubmit');
+	onBeforeSubmit.set(function () {
+		var $form = $(this);
+		var $input = $form.find(\"input[name=passphrase]\");
+		var password = $input.val();
+
+		if (password.length < 8) {
+			Q.Text.get('Intercoin/dialogs', function (err, text) {
+				if (err) {
+					return;
+				}
+
+				Q.alert(text.userActivation.passwordShort);
+			});
+
+			$input.addClass('Q_error');
+			return false;
+		}
+
+		$('<input type=\"hidden\" name=\"password\">').val(password).appendTo($form);
+	});
 	form.on('submit', function (event) {
         if (Q.handle(form.data('onBeforeSubmit'), this) === false) {
             event.stopImmediatePropagation();

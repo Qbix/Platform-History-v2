@@ -153,6 +153,7 @@
                 var mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
                 var WebRTCClientUI = tool.state.mainWebrtcRoom = Streams.WebRTC.start({
                     element: tool.state.mainRoomConfig.mainRoomContainer,
+                    audioOnlyMode: true,
                     roomPublisherId: mainRoomStream ? mainRoomStream.fields.publisherId : null,
                     roomId: mainRoomStream ? mainRoomStream.fields.name : null,
                     publisherId: tool.state.eventsStream.fields.publisherId,
@@ -394,6 +395,7 @@
                         //start webrtc waiting room and relate it to Streams/calls/main so hosts can see new call
                         state.waitingRoom = Streams.WebRTC.start({
                             element: tool.state.mainRoomConfig.mainRoomContainer,
+                            audioOnlyMode: true,
                             publisherId: state.publisherId,
                             streamName: state.streamName,
                             relationType: state.relationType,

@@ -1685,7 +1685,7 @@
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control {
     display: flex;
-    min-width: 120px;
+    /*min-width: 120px;*/
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-video-btn,
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list .Streams_webrtc_tracks-control .Streams_webrtc_mute-audio-btn {
@@ -2720,6 +2720,9 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
     border-top: 1px solid #ccc;
     padding: 5px 0 25px 0;
     margin: 15px 15px 0 15px;
+}
+.Streams_webrtc_streaming_recording.Streams_webrtc_streaming_recording_audioOnly {
+    border-top: none;
 }
 .Streams_webrtc_popup-box {
     background: #fff;

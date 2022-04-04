@@ -240,9 +240,9 @@
 
                     } else {
                         console.log('previewMediaContainer', previewMediaContainer);
-                        var WebConference = Q.Streams.WebRTC();
-                        tool.state.guestWaitingRoom = WebConference.start({
+                        var WebConference = Q.Streams.WebRTC({
                             element: previewMediaContainer,
+                            audioOnlyMode: true,
                             roomId: stream.fields.name.split('/').pop(),
                             roomPublisherId: stream.fields.publisherId,
                             mode: 'node',
@@ -266,6 +266,7 @@
                                 tool.state.guestWaitingRoom = null;
                             }
                         });
+                        tool.state.guestWaitingRoom = WebConference.start();
                     }
 
 
@@ -373,7 +374,7 @@
                 }
                 function moveVisualizationToMainContainer() {
                     console.log('moveVisualizationToMainContainer');
-                    let mediaContainerOfMainRoom = tool.state.guestWaitingRoom.options().element;
+                    let mediaContainerOfMainRoom = tool.state.guestWaitingRoom.getOptions().element;
                     let currentMediaContainer = tool.state.guestWaitingRoom.roomsMediaContainer();
 
                     if(currentMediaContainer && mediaContainerOfMainRoom) {
