@@ -9,7 +9,7 @@
  */
 class Assets_NFT_Series
 {
-	static $categoryStreamName = "Assets/user/NFT/contract/{{chainId}}";
+	static $categoryStreamName = "Assets/NFT/contract/{{chainId}}";
 
 	/**
 	 * Check if NFT/series category exists, and create if not

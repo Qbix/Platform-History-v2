@@ -183,7 +183,6 @@ class Assets_NFT
 			$chainId = Q::ifset($chain, "appId", null);
 
 			if (!$contract || !$rpcUrl) {
-				unset($chain[$i]);
 				continue;
 			}
 
