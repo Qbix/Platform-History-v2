@@ -1216,7 +1216,7 @@
 						}
 
 						// loading ABI json
-						$.getJSON(url, function (ABI) {
+						$.getJSON(contractURL, function (ABI) {
 							var provider = new ethers.providers.Web3Provider(window.ethereum);
 							var contract = new ethers.Contract(address, ABI, provider.getSigner());
 
@@ -1571,7 +1571,7 @@
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/series.js",
-		"Assets/NFT/contract/preview": "{{Assets}}/js/tools/NFT/contract.js",
+		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
 	});
