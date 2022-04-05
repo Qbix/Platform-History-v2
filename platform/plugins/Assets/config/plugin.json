@@ -240,7 +240,7 @@
 				}
 			},
 			"URI": {
-				"base": "{{baseUrl}}/Assets/NFT/{{contractId}}/0x",
+				"base": "{{baseUrl}}/Assets/NFT/{{contractId}}/{{tokenId}}",
 				"suffix": ".json"
 			},
 			"currencies": [

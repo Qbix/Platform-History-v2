@@ -43,4 +43,7 @@ function Assets_before_Q_responseExtras() {
 
 	// set Assets.NFT.sales.manual.address
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.sales.manual.address', Q_Config::get("Assets", "NFT", "sales", "manual", "address", null));
+
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.base', Q_Config::get("Assets", "NFT", "URI", "base", array()));
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.suffix', Q_Config::get("Assets", "NFT", "URI", "suffix", array()));
 }
