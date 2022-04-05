@@ -13,7 +13,7 @@ foreach ($chains as $chain) {
 			'name' => $streamName,
 			'title' => $title,
 			'readLevel' => 40,
-			'writeLevel' => 10,
+			'writeLevel' => 23,
 			'adminLevel' => 20
 		));
 	}
