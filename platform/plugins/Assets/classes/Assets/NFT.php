@@ -287,4 +287,33 @@ class Assets_NFT
 			}
 		}
 	}
+
+	/**
+	 * Replace all relations with only one relation
+	 * @method replaceAllRelationsWithOne
+	 * @param {Streams_Stream} $category - category stream
+	 * @param {String} $relationType
+	 * @param {Streams_stream} $stream - stream to relate to category
+	 * @static
+	 */
+	static function replaceAllRelationsWithOne ($category, $relationType, $stream) {
+		$relatedStreams = Streams_RelatedTo::select()->where(array(
+			"toPublisherId" => $category->publisherId,
+			"toStreamName" => $category->name,
+			"type" => $relationType
+		))->fetchDbRows();
+		foreach ($relatedStreams as $relation) {
+			Streams::unrelate(null, $relation->toPublisherId, $relation->toStreamName, $relation->type, $relation->fromPublisherId, $relation->fromStreamName, array(
+				"skipAccess" => true,
+				"skipMessageTo" => true,
+				"skipMessageFrom" => true
+			));
+		}
+		Streams::relate(null, $category->publisherId, $category->name, $relationType, $stream->publisherId, $stream->name, array(
+			"skipAccess" => true,
+			"skipMessageTo" => true,
+			"skipMessageFrom" => true,
+			"ignoreCache" => true
+		));
+	}
 };
