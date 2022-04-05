@@ -284,8 +284,8 @@
             "CustomContractFor": "Custom contract for {{chainNetwork}}",
             "TitleRequired": "Title required",
             "SymbolRequired": "Symbol required",
-            "TypeContractName": "Please type contract name",
-            "TypeContractSymbol": "Please type contract symbol"
+            "TypeContractName": "contract name",
+            "TypeContractSymbol": "contract symbol (max 10 chars)"
         },
         "profile": {
             "Title": "Profile for {{userName}}",
