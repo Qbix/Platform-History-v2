@@ -17,7 +17,8 @@
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"]
+			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
+			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
 		},
 		"routes@start": {
 			"Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
@@ -135,7 +136,10 @@
 				"edit": true,
 				"canCreate": ["Users/admins", "Users/owners"],
 				"defaults": {
-					"icon": "{{Assets}}/img/empty_white.png"
+					"icon": "{{Assets}}/img/empty_white.png",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				}
 			},
 			"Assets/NFT/pointer": {
