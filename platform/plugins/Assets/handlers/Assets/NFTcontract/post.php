@@ -3,7 +3,7 @@ function Assets_NFTcontract_post ($params) {
 	$req = array_merge($_REQUEST, $params);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
-	$adminLabels = Q_Config::get("Assets", "canCheckPaid", null);
+	$adminLabels = Q_Config::get("Users", "communities", "admins", null);
 	// if user try to update align profile or is not an admin
 	if ($userId != $loggedInUserId && !(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
 		throw new Users_Exception_NotAuthorized();
@@ -43,20 +43,17 @@ function Assets_NFTcontract_post ($params) {
 		return;
 	}
 
-	Q_Valid::requireFields(array("userId", "chainId", "address", "symbol"), $req, true);
+	Q_Valid::requireFields(array("userId", "chainId", "contract", "symbol"), $req, true);
 
 	$stream = Streams::fetchOne(null, $userId, $streamName);
 	if (!$stream) {
-		$stream = Streams::create(null, $userId, "Streams/category", array(
+		$stream = Streams::create(null, $userId, "Assets/NFT/contract", array(
 			"title" => Q::interpolate($texts["CustomContractFor"], array("chainNetwork" => $chain["name"])),
-			"name" => $streamName,
-			"readLevel" => 40,
-			"writeLevel" => 10,
-			"adminLevel" => 20
+			"name" => $streamName
 		));
 	}
 	$stream->setAttribute("factory", $chain["factory"]);
-	$stream->setAttribute("address", $req["address"]);
+	$stream->setAttribute("contract", $req["contract"]);
 	$stream->setAttribute("symbol", $req["symbol"]);
 	$stream->changed();
 

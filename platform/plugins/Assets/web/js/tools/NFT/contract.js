@@ -120,7 +120,7 @@
                     tool.renderView({
                         $element: $globalContract,
                         title: tool.text.NFT.contract.GlobalContractFor.interpolate({chainNetwork: chainNetwork}),
-                        address: contract,
+                        contract: contract,
                         publisherId: communityId,
                         streamName: selectedStreamName,
                         onInvoke: function () {
@@ -203,7 +203,7 @@
                                                                 tool.renderView({
                                                                     $element: $customContract,
                                                                     title: tool.stream.fields.title,
-                                                                    address: tool.stream.getAttribute("address"),
+                                                                    contract: tool.stream.getAttribute("contract"),
                                                                     publisherId: tool.stream.fields.publisherId,
                                                                     streamName: tool.stream.fields.name,
                                                                     onInvoke: function () {
@@ -230,11 +230,14 @@
                                                                 userId: state.userId,
                                                                 chainId: selectedChainId,
                                                                 symbol: symbol,
-                                                                address: address
+                                                                contract: address
                                                             }
                                                         });
                                                     });
                                                 });
+                                            },
+                                            onClose: function () {
+                                                $customContract.removeClass("Q_working");
                                             }
                                         });
                                     });
@@ -246,7 +249,7 @@
                         tool.renderView({
                             $element: $customContract,
                             title: tool.text.NFT.contract.CustomContractFor.interpolate({chainNetwork: chainNetwork}),
-                            address: this.getAttribute("address"),
+                            contract: this.getAttribute("contract"),
                             publisherId: this.fields.publisherId,
                             streamName: this.fields.name,
                             onInvoke: function () {
@@ -351,7 +354,7 @@
          * @param {String} options.title
          * @param {String} options.publisherId - publisher of contract stream
          * @param {String} options.streamName - stream name of contract stream
-         * @param {String} [options.address]
+         * @param {String} [options.contract]
          * @param {function} [options.onInvoke] - onclick element
          * @param {function} [options.onAvatar] - onclick avatar
          * @param {function} [options.callback] - on template rendered
@@ -361,7 +364,7 @@
             var state = this.state;
             var $element = options.$element || $(this.element);
             var title = options.title;
-            var contractAddress = options.address;
+            var contractAddress = options.contract;
             var onInvoke = options.onInvoke;
             var onAvatar = options.onAvatar;
             var callback = options.callback;
@@ -373,7 +376,7 @@
 
             Q.Template.render('Assets/NFT/contract/view', {
                 title: title, //tool.text.NFT.contract.CustomContractFor.interpolate({chainNetwork: chainNetwork})
-                address: contractAddress
+                contract: contractAddress
             }, (err, html) => {
                 $element[0].innerHTML = html;
 
@@ -512,7 +515,7 @@
                             userId: state.userId,
                             seriesId: Q.Streams.toHexString(state.userId),
                             chainId: chainId,
-                            contract: contractAddress
+                            contractAddress: contractAddress
                         }
                     };
 

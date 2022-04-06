@@ -3,7 +3,7 @@ function Assets_NFT_post ($params) {
 	$req = array_merge($_REQUEST, $params);
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
-	$adminLabels = Q_Config::get("Assets", "canCheckPaid", null);
+	$adminLabels = Q_Config::get("Users", "communities", "admins", null);
 	// if user try to update align profile or is not an admin
 	if ($userId != $loggedInUserId && !(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
 		throw new Users_Exception_NotAuthorized();
