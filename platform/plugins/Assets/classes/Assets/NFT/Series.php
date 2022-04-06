@@ -32,12 +32,11 @@ class Assets_NFT_Series
 		$streamName = Q::interpolate(self::$categoryStreamName, compact("chainId"));
 		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
 		if (!$stream) {
-			throw new Exception("Assets/user/NFT/contract stream not found");
+			throw new Exception($streamName." stream not found");
 		}
-		if (!$stream->getAttribute("address")) {
-			throw new Exception("contract address not found in Assets/user/NFT/contract stream");
+		if (!$stream->getAttribute("contract")) {
+			throw new Exception("contract contract not found in ".$streamName." stream");
 		}
-
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
 			$stream->setAttribute('Assets/NFT/minted/total', 0);
 			$stream->changed();
@@ -50,49 +49,52 @@ class Assets_NFT_Series
 	 * Get or create new NFT empty stream for composer
 	 * This is for user creating new NFT streams in the interface
 	 * @method getComposerStream
+	 * @param {string} $chainId
+	 * @param {Streams_Stream} $category - contract stream, which is category for series streams
 	 * @param {string} [$userId=null] If null loggedin user id used
 	 * @return {Streams_Stream}
 	 */
-	static function getComposerStream ($chainId, $userId = null) {
+	static function getComposerStream ($chainId, $category, $userId = null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
-		$category = self::category($chainId, $userId);
 
-		$streams = Streams::related($userId, $userId, $category->name, true, array(
-			"type" => "new",
-			"streamsOnly" => true,
-			"ignoreCache" => true
-		));
+		$relations = Streams_RelatedTo::select()->where(array(
+			"toPublisherId" => $category->publisherId,
+			"toStreamName" => $category->name,
+			"type" => "new"
+		))->ignoreCache()->fetchDbRows();
 
-		if (empty($streams)) {
+		if (empty($relations)) {
 			$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(
 				"attributes" => array(
 					"chainId" => $chainId,
 					"contract" => array(
-						"address" => $category->getAttribute("address"),
+						"contract" => $category->getAttribute("contract"),
 						"factory" => $category->getAttribute("factory"),
 						"symbol" => $category->getAttribute("symbol")
 					)
 				)
 			), array(
-				"publisherId" => $userId,
+				"publisherId" => $category->publisherId,
 				"streamName" => $category->name,
 				"type" => "new"
 			));
 			$stream->join(compact("userId"));
 			return $stream;
 		} else {
-			return reset($streams);
+			$relation = reset($relations);
+			return Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName);
 		}
 	}
 
 	/**
 	 * Updated NFT stream with new data
 	 * @method update
-	 * @param {Streams_Stream} $stream NFT stream
-	 * @param {array} $fields Array of data to update stream
+	 * @param {Streams_Stream} $stream - NFT stream
+	 * @param {array} $fields - Array of data to update stream
+	 * @param {Streams_Stream} $category - contract stream which is category
 	 * @return {Streams_Stream}
 	 */
-	static function update ($stream, $fields) {
+	static function update ($stream, $fields, $category) {
 		$userId = Users::loggedInUser(true)->id;
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
@@ -119,16 +121,14 @@ class Assets_NFT_Series
 			$stream->save();
 		}
 
-		$chainId = $stream->getAttribute("chainId");
-		$factory = Q::ifset($stream->getAttribute("contract"), "factory", null);
-		if (!$factory) {
+		$contract = Q::ifset($stream->getAttribute("contract"), "contract", null);
+		if (!$contract) {
 			throw new Exception("Factory address not found");
 		}
-		$categoryStreamName = Q::interpolate(self::$categoryStreamName, compact("chainId"));
 
 		// change stream relation
-		Streams::unrelate($userId, $stream->publisherId, $categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, $categoryStreamName, "Assets/NFT/series/".$factory, $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name);
+		Streams::relate($userId, $category->publisherId, $category->name, "Assets/NFT/series/".$contract, $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
