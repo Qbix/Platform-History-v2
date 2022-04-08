@@ -41,8 +41,8 @@
 
     { // default options here
         userId: Q.Users.loggedInUserId(),
-        onlyDefaultChain: true,
-        customContracts: false,
+        onlyDefaultChain: false,
+        customContracts: true,
         withSeries: true,
         limitSeries: 1,
         onAvatar: new Q.Event(),
