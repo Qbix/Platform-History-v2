@@ -182,7 +182,7 @@ class Assets_NFT
 			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", null);
 			$chainId = Q::ifset($chain, "appId", null);
 
-			if (!$contract || !$rpcUrl) {
+			if (!$rpcUrl) {
 				continue;
 			}
 

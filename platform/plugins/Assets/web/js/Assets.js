@@ -1002,6 +1002,8 @@
 				onTransfer: new Q.Event(),
 				onInstanceCreated: new Q.Event(),
 				onInstanceOwnershipTransferred: new Q.Event(),
+				onSeriesPutOnSale: new Q.Event(),
+				onSeriesRemovedFromSale: new Q.Event(),
 
 				/**
 				 * Check web3 provider (MetaMask) connected, and switch to valid chain
@@ -1063,7 +1065,8 @@
 				 * @param {Address} [info.commission.address] where to send commissions to
 				 * @param {String} [info.baseURI] to override global baseURI, if necessary
 				 * @param {String} [info.suffix] to override global suffix, if necessary
-				 * @return {Promise} promise from ethers.Contract call transaction
+				 * @param {String} [info.contractAddress] to override global contract address for this chainId
+				 * @param {function} callback - called when transaction failed (with err true) or success (with err null)
 				 */
 				setSeriesInfo: function (chainId, seriesId, info, callback) {
 					if (typeof chainId !== 'string'
@@ -1088,19 +1091,43 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Assets.NFT.Web3.getContract(chainId, function (err, contract) {
+
+					Q.Assets.NFT.Web3.checkProvider(chainId, function (err, contract) {
 						if (err) {
-							return;
+							return Q.handle(callback, null, [true]);
 						}
 
-						return contract.setSeriesInfo(seriesId,
+						var _waitTransaction = function (transactionRequest) {
+							if (!Q.getObject("wait", transactionRequest)) {
+								Q.handle(callback, null, [true])
+								return Q.alert("Transaction request invalid!");
+							}
+
+							transactionRequest.wait(1).then(function (TransactionReceipt) {
+								if (Assets.NFT.Web3.isSuccessfulTransaction(TransactionReceipt)) {
+									Q.handle(callback, TransactionReceipt, [null, seriesId]);
+								} else {
+									Q.handle(callback, TransactionReceipt, ["transaction failed", seriesId]);
+								}
+							}, function (err) {
+								Q.alert(err.reason, {
+									title: "Error"
+								});
+								Q.handle(callback, null, [err.reason]);
+							});
+						};
+
+						contract.setSeriesInfo(seriesId,
 							[authorAddress, limit,
 								[onSaleUntil, currency, price],
 								[commissionFraction, commissionAddress], baseURI, suffix
 							]
-						).then(callback).catch(function (err) {
-							Q.alert(err);
+						).then(_waitTransaction).catch(function (err) {
+							Q.handle(callback, this, [err]);
+							Q.alert(Q.firstErrorMessage(err));
 						});
+					}, {
+						contractAddress: info.contractAddress
 					});
 				},
 				/**
@@ -1228,6 +1255,12 @@
 							});
 							contract.on("Transfer", function (oldAddress, newAddress, token) {
 								Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token]);
+							});
+							contract.on("SeriesPutOnSale", function (seriesId, price, currency, onSaleUntil) {
+								Q.handle(Assets.NFT.Web3.onSeriesPutOnSale, null, [seriesId, price, currency, onSaleUntil]);
+							});
+							contract.on("SeriesRemovedFromSale", function (seriesId) {
+								Q.handle(Assets.NFT.Web3.onSeriesRemovedFromSale, null, [seriesId]);
 							});
 
 							_subMethod(contract);
