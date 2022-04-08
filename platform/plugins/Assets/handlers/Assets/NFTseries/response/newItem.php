@@ -7,7 +7,6 @@ function Assets_NFTseries_response_newItem ($params) {
 	$categoryPublisherId = Q::ifset($req, "category", "publisherId", $userId);
 	$category = Assets_NFT_Series::category($req["chainId"], $categoryPublisherId);
 	$stream = Assets_NFT_Series::getComposerStream($req["chainId"], $category, $userId);
-	$data = Q::event("Users/external/response/data", array("userId"));
 
-	return array("publisherId" => $stream->publisherId, "streamName" => $stream->name, "wallet" => $data["wallet"]);
+	return array("publisherId" => $stream->publisherId, "streamName" => $stream->name);
 }

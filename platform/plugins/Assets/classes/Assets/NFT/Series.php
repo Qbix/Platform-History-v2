@@ -35,7 +35,7 @@ class Assets_NFT_Series
 			throw new Exception($streamName." stream not found");
 		}
 		if (!$stream->getAttribute("contract")) {
-			throw new Exception("contract contract not found in ".$streamName." stream");
+			throw new Exception("contract address not found in ".$streamName." stream");
 		}
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
 			$stream->setAttribute('Assets/NFT/minted/total', 0);
@@ -64,14 +64,11 @@ class Assets_NFT_Series
 		))->ignoreCache()->fetchDbRows();
 
 		if (empty($relations)) {
+			$data = Q::event("Users/external/response/data", array("userId"));
 			$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(
 				"attributes" => array(
 					"chainId" => $chainId,
-					"contract" => array(
-						"contract" => $category->getAttribute("contract"),
-						"factory" => $category->getAttribute("factory"),
-						"symbol" => $category->getAttribute("symbol")
-					)
+					"author" => $data["wallet"]
 				)
 			), array(
 				"publisherId" => $category->publisherId,
@@ -91,10 +88,10 @@ class Assets_NFT_Series
 	 * @method update
 	 * @param {Streams_Stream} $stream - NFT stream
 	 * @param {array} $fields - Array of data to update stream
-	 * @param {Streams_Stream} $category - contract stream which is category
+	 * @param {Streams_Stream} [$category] - contract stream which is category
 	 * @return {Streams_Stream}
 	 */
-	static function update ($stream, $fields, $category) {
+	static function update ($stream, $fields, $category=null) {
 		$userId = Users::loggedInUser(true)->id;
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
@@ -121,14 +118,24 @@ class Assets_NFT_Series
 			$stream->save();
 		}
 
-		$contract = Q::ifset($stream->getAttribute("contract"), "contract", null);
-		if (!$contract) {
-			throw new Exception("Factory address not found");
-		}
+		// check if new
+		$relation = Streams_RelatedTo::select()->where(array(
+			"fromPublisherId" => $stream->publisherId,
+			"fromStreamName" => $stream->name,
+			"type" => "new",
+			"toStreamName" => "Assets/NFT/contract/".$stream->getAttribute("chainId")
+		))->fetchDbRow();
+		if ($relation) {
+			$category = Streams::fetchOne($relation->toPublisherId, $relation->toPublisherId, $relation->toStreamName, true);
+			$contract = $category->getAttribute("contract");
+			if (!$contract) {
+				throw new Exception("Factory address not found");
+			}
 
-		// change stream relation
-		Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $category->publisherId, $category->name, "Assets/NFT/series/".$contract, $stream->publisherId, $stream->name, array("weight" => time()));
+			// change stream relation
+			Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name);
+			Streams::relate($userId, $category->publisherId, $category->name, "Assets/NFT/series/".$contract, $stream->publisherId, $stream->name, array("weight" => time()));
+		}
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
