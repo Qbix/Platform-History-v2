@@ -1,15 +1,15 @@
-.Assets_NFT_contract_composer {
-    cursor: pointer;
-}
 .Assets_NFT_contract_tool {
     display: inline-block;
 }
-.Assets_NFT_contract_tool .Streams_preview_title,
-.Assets_NFT_contract_composer .Streams_preview_title {
+.Assets_NFT_contract_tool .Streams_preview_title {
     display: inline-block;
 }
 .Assets_NFT_contract_tool .Assets_NFT_avatar {
     vertical-align: middle;
+}
+.Assets_NFT_contract_tool[data-onlyDefaultChain=true] select[name=chains],
+.Assets_NFT_contract_tool[data-customContracts=false] .Assets_NFT_contract[data-type=custom] {
+    display: none;
 }
 .NFTRemix_profile #content .Streams_related_tool.Assets_NFT_contract_series {
     text-align: left;

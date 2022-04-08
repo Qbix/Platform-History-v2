@@ -16,6 +16,7 @@ function Assets_after_Streams_fetch_Assets_NFT_contract ($params) {
 		$chainId = end($parts);
 		$streams[$streamName]->setAttribute("contract", Q::ifset($chains, $chainId, "contract", null));
 		$streams[$streamName]->setAttribute("factory", Q::ifset($chains, $chainId, "factory", null));
+		$streams[$streamName]->save();
 	}
 
 }
