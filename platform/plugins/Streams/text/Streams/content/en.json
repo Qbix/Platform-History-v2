@@ -91,7 +91,14 @@
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Invite People",
+            "chooseMethod": "Choose a method:",
+            "selectContacts": "Select Contacts",
+            "scanQRCode": "Scan QR Code",
+            "shareLink": "Share a link",
+            "chooseFromRegistered": "Choose from registered users",
+            "inviteViaEmailOrSms": "Invite via email or SMS"
         },
         "email": {
             "subject": "Hey, check this out",

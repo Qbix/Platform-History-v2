@@ -1000,171 +1000,409 @@ Streams.Dialogs = {
 				copyLinkText = text.shareOrCopyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
 			}
 
-			Q.Dialogs.push({
-				title: options.title || text.title,
-				template: {
-					name: options.templateName,
-					fields: {
-						isContactsPicker: isContactsPicker,
-						userChooser: options.userChooser,
-						text: text,
-						photo: (options.photo)? text.photo: options.photo,
-						to: text.to.interpolate({"Stream Title": stream.fields.title}),
-						copyLink: copyLinkText,
-						QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap})
-					}
-				},
-				stylesheet: '{{Streams}}/css/Streams/invite.css',
-				className: 'Streams_invite_dialog',
-				onActivate: function (dialog) {
-					if (data) {
-						dialog.addClass('Streams_suggestion_ready');
-					}
+            var _renderInviteList = function (contacts, $eContacts) {
+                Q.Template.render("Users/templates/contacts/display", {
+                    contacts: contacts,
+                    text: text
+                }, function (err, html) {
+                    if (err) {
+                        return;
+                    }
 
-					var $eContacts = $(".Streams_invite_contacts", dialog);
+                    $eContacts.html(html).activate();
 
-					var _renderInviteList = function (contacts) {
-						Q.Template.render("Users/templates/contacts/display", {
-							contacts: contacts,
-							text: text
-						}, function (err, html) {
-							if (err) {
-								return;
-							}
+                    $("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
+                        var inviteParams;
+                        for(var i in contacts) {
+                            inviteParams = {
+                                stream: stream,
+                                data: data
+                            };
 
-							$eContacts.html(html).activate();
+                            if (contacts[i].prefix === "user") {
+                                inviteParams.userId = contacts[i]["id"];
+                            } else {
+                                inviteParams.identifier = contacts[i][contacts[i].prefix];
+                            }
+                            Q.handle(callback, Streams, [inviteParams]);
+                        }
+                        Q.Dialogs.pop();
+                        Q.Dialogs.pop();
+                    });
 
-							$("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-								var inviteParams;
-								for(var i in contacts) {
-									inviteParams = {
-										stream: stream,
-										data: data
-									};
+                    $(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+                        var $this = $(this);
+                        var id = $this.attr('data-id');
+                        $this.closest("tr").remove();
+                        delete contacts[id];
 
-									if (contacts[i].prefix === "user") {
-										inviteParams.userId = contacts[i]["id"];
-									} else {
-										inviteParams.identifier = contacts[i][contacts[i].prefix];
-									}
-									Q.handle(callback, Streams, [inviteParams]);
-								}
-								Q.Dialogs.pop(); // close the Dialog
-							});
+                        $eContacts.data("contacts", contacts);
 
-							$(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
-								var $this = $(this);
-								var id = $this.attr('data-id');
-								$this.closest("tr").remove();
-								delete contacts[id];
+                        if ($.isEmptyObject(contacts)) {
+                            $("button.Streams_invite_submit_contact", $eContacts).remove();
+                        }
+                    });
+                });
+            };
 
-								$eContacts.data("contacts", contacts);
+			if(options.templateName == 'Streams/templates/invite/classicDialog'){
+                Q.Dialogs.push({
+                    title: options.title || text.title,
+                    template: {
+                        name: 'Streams/templates/invite/dialog',
+                        fields: {
+                            isContactsPicker: isContactsPicker,
+                            userChooser: options.userChooser,
+                            text: text,
+                            photo: (options.photo)? text.photo: options.photo,
+                            to: text.to.interpolate({"Stream Title": stream.fields.title}),
+                            copyLink: copyLinkText,
+                            QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap})
+                        }
+                    },
+                    stylesheet: '{{Streams}}/css/Streams/invite.css',
+                    className: 'Streams_invite_dialog',
+                    onActivate: function (dialog) {
+                        if (data) {
+                            dialog.addClass('Streams_suggestion_ready');
+                        }
 
-								if ($.isEmptyObject(contacts)) {
-									$("button.Streams_invite_submit_contact", $eContacts).remove();
-								}
-							});
-						});
-					};
+                        var $eContacts = $(".Streams_invite_contacts", dialog);
 
-					// invite user from registered users
-					var userChooserTool = Q.Tool.from($(".Streams_userChooser_tool", dialog), "Streams/userChooser");
-					if (userChooserTool) {
-						userChooserTool.state.resultsHeight = 180;
-						userChooserTool.stateChanged("resultsHeight");
-						userChooserTool.state.onChoose.set(function (userId, avatar) {
-							var contacts = $eContacts.data("contacts") || {};
-							contacts[userId] = {id: userId, name: avatar.displayName(), prefix: "user"}
+                        var _renderInviteList = function (contacts) {
+                            Q.Template.render("Users/templates/contacts/display", {
+                                contacts: contacts,
+                                text: text
+                            }, function (err, html) {
+                                if (err) {
+                                    return;
+                                }
 
-							_renderInviteList(contacts);
+                                $eContacts.html(html).activate();
 
-							$eContacts.data("contacts", contacts);
+                                $("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
+                                    var inviteParams;
+                                    for(var i in contacts) {
+                                        inviteParams = {
+                                            stream: stream,
+                                            data: data
+                                        };
 
-							/*Q.handle(callback, Streams, [{
-								userId: userId,
-								stream: stream,
-								data: data
-							}]);
-							Q.Dialogs.pop(); // close the Dialog*/
+                                        if (contacts[i].prefix === "user") {
+                                            inviteParams.userId = contacts[i]["id"];
+                                        } else {
+                                            inviteParams.identifier = contacts[i][contacts[i].prefix];
+                                        }
+                                        Q.handle(callback, Streams, [inviteParams]);
+                                    }
+                                    Q.Dialogs.pop(); // close the Dialog
+                                });
 
-						}, "Streams_invite_dialog");
-					}
+                                $(".qp-communities-close", $eContacts).on(Q.Pointer.fastclick, function () {
+                                    var $this = $(this);
+                                    var id = $this.attr('data-id');
+                                    $this.closest("tr").remove();
+                                    delete contacts[id];
 
-					// handle "choose from contacts" button
-					$('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
-						var $this = $(this);
-						$eContacts.empty();
+                                    $eContacts.data("contacts", contacts);
 
-						var params = {
-							prefix: "Users",
-							data: $eContacts.data("contacts") || null,
-							identifierTypes: options.identifierTypes
-						};
+                                    if ($.isEmptyObject(contacts)) {
+                                        $("button.Streams_invite_submit_contact", $eContacts).remove();
+                                    }
+                                });
+                            });
+                        };
 
-						$this.addClass('loading');
+                        // invite user from registered users
+                        var userChooserTool = Q.Tool.from($(".Streams_userChooser_tool", dialog), "Streams/userChooser");
+                        if (userChooserTool) {
+                            userChooserTool.state.resultsHeight = 180;
+                            userChooserTool.stateChanged("resultsHeight");
+                            userChooserTool.state.onChoose.set(function (userId, avatar) {
+                                var contacts = $eContacts.data("contacts") || {};
+                                contacts[userId] = {id: userId, name: avatar.displayName(), prefix: "user"}
 
-						Users.Dialogs.contacts(params, function (contacts) {
-							$this.removeClass('loading');
-							$eContacts.data("contacts", contacts);
+                                _renderInviteList(contacts, $eContacts);
 
-							if (!contacts || Object.keys(contacts).length <= 0) {
-								return;
-							}
+                                $eContacts.data("contacts", contacts);
 
-							_renderInviteList(contacts);
+                                /*Q.handle(callback, Streams, [{
+                                    userId: userId,
+                                    stream: stream,
+                                    data: data
+                                }]);
+                                Q.Dialogs.pop(); // close the Dialog*/
 
-							$this.text(text.chooseAgainFromContacts).addClass("");
-						})
-					});
+                            }, "Streams_invite_dialog");
+                        }
 
-					if (!Q.info.isTouchscreen) {
-						$('.Streams_invite_submit input[type=text]').focus();
-						setTimeout(function () {
-							$('.Streams_invite_submit input[type=text]').plugin('Q/clickfocus');
-						}, 300);
-					}
-					// handle go button
-					$('.Streams_invite_submit').on('submit', function (e) {
-						Q.handle(callback, Streams, [{
-							identifier: $("input[type=text]", this).val(),
-							stream: stream,
-							data: data
-						}]);
-						Q.Dialogs.pop(); // close the Dialog
-						e.preventDefault();
-					});
+                        // handle "choose from contacts" button
+                        $('.Streams_invite_choose_contact', dialog).on(Q.Pointer.fastclick, function () {
+                            var $this = $(this);
+                            $eContacts.empty();
 
-					// handle social buttons
-					$('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
-					.on(Q.Pointer.fastclick, function () {
-						var sendBy = $(this).data('sendby');
-						var result = {
-							token: suggestion,
-							identifier: null,
-							sendBy: sendBy,
-							stream: stream,
-							data: data
-						};
-						Q.Dialogs.pop(); // close the Dialog
-						Q.handle(callback, Streams, [result]);
-					});
-					
-					// handle social buttons
-					$('.Streams_invite_social_buttons button, .Streams_invite_copyLink', dialog)
-					.on(Q.Pointer.fastclick, function () {
-						var sendBy = $(this).data('sendby');
-						var result = {
-							token: suggestion,
-							identifier: null,
-							sendBy: sendBy,
-							stream: stream,
-							data: data
-						};
-						Q.Dialogs.pop(); // close the Dialog
-						Q.handle(callback, Streams, [result]);
-					});
-				}
-			});
+                            var params = {
+                                prefix: "Users",
+                                data: $eContacts.data("contacts") || null,
+                                identifierTypes: options.identifierTypes
+                            };
+
+                            $this.addClass('loading');
+
+                            Users.Dialogs.contacts(params, function (contacts) {
+                                $this.removeClass('loading');
+                                $eContacts.data("contacts", contacts);
+
+                                if (!contacts || Object.keys(contacts).length <= 0) {
+                                    return;
+                                }
+
+                                _renderInviteList(contacts, $eContacts);
+
+                                $this.text(text.chooseAgainFromContacts).addClass("");
+                            })
+                        });
+
+                        if (!Q.info.isTouchscreen) {
+                            $('.Streams_invite_submit input[type=text]').focus();
+                            setTimeout(function () {
+                                $('.Streams_invite_submit input[type=text]').plugin('Q/clickfocus');
+                            }, 300);
+                        }
+                        // handle go button
+                        $('.Streams_invite_submit').on('submit', function (e) {
+                            Q.handle(callback, Streams, [{
+                                identifier: $("input[type=text]", this).val(),
+                                stream: stream,
+                                data: data
+                            }]);
+                            Q.Dialogs.pop(); // close the Dialog
+                            e.preventDefault();
+                        });
+
+                        // handle social buttons
+                        $('.Streams_invite_social_buttons button, .Streams_invite_QR', dialog)
+                            .on(Q.Pointer.fastclick, function () {
+                                var sendBy = $(this).data('sendby');
+                                var result = {
+                                    token: suggestion,
+                                    identifier: null,
+                                    sendBy: sendBy,
+                                    stream: stream,
+                                    data: data
+                                };
+                                Q.Dialogs.pop(); // close the Dialog
+                                Q.handle(callback, Streams, [result]);
+                            });
+
+                        // handle social buttons
+                        $('.Streams_invite_social_buttons button, .Streams_invite_copyLink', dialog)
+                            .on(Q.Pointer.fastclick, function () {
+                                var sendBy = $(this).data('sendby');
+                                var result = {
+                                    token: suggestion,
+                                    identifier: null,
+                                    sendBy: sendBy,
+                                    stream: stream,
+                                    data: data
+                                };
+                                Q.Dialogs.pop(); // close the Dialog
+                                Q.handle(callback, Streams, [result]);
+                            });
+                    }
+                });
+			} else {
+                Q.Dialogs.push({
+                    title: options.title || text.title2,
+                    template: {
+                        name: 'Streams/templates/invite/modernDialog',
+                        fields: {
+                            isContactsPicker: isContactsPicker,
+                            userChooser: options.userChooser,
+                            text: text,
+                            photo: (options.photo)? text.photo: options.photo,
+                            to: text.to.interpolate({"Stream Title": stream.fields.title}),
+                            copyLink: copyLinkText,
+                            QR: text.QR.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap}),
+                            QRIcon: Q.url("{{Users}}/img/qr-code-scan.svg"),
+                            contactBookIcon: Q.url("{{Users}}/img/contact-book.svg"),
+                            shareIcon: Q.url("{{Users}}/img/share.svg")
+                        }
+                    },
+                    stylesheet: '{{Streams}}/css/Streams/modern_invite.css',
+                    className: 'Streams_invite_dialog',
+                    onActivate: function (dialog) {
+                        if (data) {
+                            dialog.addClass('Streams_suggestion_ready');
+                        }
+
+                        var $eContacts = $(".Streams_invite_contacts", dialog);
+
+                        // handle "choose from contacts" button
+                        $('.Streams_invite_select_contacts', dialog).on(Q.Pointer.fastclick, function () {
+                            var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
+                            if(isContactsPicker) {
+                                Q.Dialogs.push({
+                                    className: '',
+                                    title: text.chooseFromContacts,
+                                    content: '<div class="Streams_invite_contacts_picker">'
+                                    + '<div class="Streams_invite_contacts"></div>'
+                                    + '<div class="Streams_invite_contacts_content"></div>'
+                                    + '</div>',
+                                    onActivate: function (dialog) {
+                                        var $dialogContent = $(".Streams_invite_contacts_content", dialog);
+
+                                        var $eContacts = $(".Streams_invite_contacts", dialog);
+                                        var $selectContactBtn = $('<button></button>').text(text.chooseFromContacts);
+                                        $selectContactBtn.addClass('Q_button');
+                                        $selectContactBtn.addClass('Streams_invite_choose_contact');
+                                        $dialogContent.append($selectContactBtn);
+                                        $selectContactBtn.on(Q.Pointer.fastclick, function () {
+                                            var $this = $(this);
+                                            $eContacts.empty();
+
+                                            var params = {
+                                                prefix: "Users",
+                                                data: $eContacts.data("contacts") || null,
+                                                identifierTypes: Streams.invite.options.identifierTypes
+                                            };
+
+                                            $this.addClass('loading');
+
+                                            Users.Dialogs.contacts(params, function (contacts) {
+                                                $this.removeClass('loading');
+                                                $eContacts.data("contacts", contacts);
+
+                                                if (!contacts || Object.keys(contacts).length <= 0) {
+                                                    return;
+                                                }
+
+                                                _renderInviteList(contacts, $eContacts);
+
+                                                $this.text(text.chooseAgainFromContacts).addClass("");
+                                            })
+                                        });
+
+                                    }
+                                });
+                            } else {
+                                Q.Dialogs.push({
+                                    className: '',
+                                    title: text.inviteViaEmailOrSms,
+                                    content: '<div class="Streams_invite_contacts_picker">'
+                                    + '<div class="Streams_invite_caption"></div>'
+                                    + '<div class="Streams_invite_contacts"></div>'
+                                    + '<div class="Q_tool Streams_userChooser_tool">'
+                                    + 	'<input name="query" value="" type="text" class="text Streams_userChooser_input" autocomplete="off">'
+                                    + '</div>'
+                                    + '<div class="Streams_invite_caption2"></div>'
+                                    + '<div class="Streams_invite_contacts_content"></div>'
+                                    + '</div>',
+
+                                    onActivate: function (dialog) {
+                                        var $dialogContent = $(".Streams_invite_contacts_content", dialog);
+                                        var $eContacts = $(".Streams_invite_contacts", dialog);
+                                        var $userChoserInput = $(".Streams_userChooser_input", dialog);
+                                        $userChoserInput.attr({placeholder: text.userChooserPlaceholder});
+                                        var $inviteCaption = $(".Streams_invite_caption", dialog);
+                                        $inviteCaption.text(text.chooseFromRegistered);
+                                        var $inviteCaption2 = $(".Streams_invite_caption2", dialog);
+                                        $inviteCaption2.text(text.orInvite);
+                                        var $selectContactForm = $('<form></form>');
+                                        $selectContactForm.addClass('Q_buttons');
+                                        $selectContactForm.addClass('Streams_invite_submit');
+                                        var $selectContactInput = $('<input>').attr({
+                                            type: 'text',
+                                            placeholder: text.placeholder
+                                        });
+                                        var $selectContactBtn = $('<button></button>').text(text.go);
+                                        $selectContactBtn.addClass('Q_button');
+                                        $selectContactForm.append($selectContactInput);
+                                        $selectContactForm.append($selectContactBtn);
+                                        $dialogContent.append($selectContactForm);
+
+                                        if (!Q.info.isTouchscreen) {
+                                            $selectContactInput.focus();
+                                            setTimeout(function () {
+                                                $selectContactInput.plugin('Q/clickfocus');
+                                            }, 300);
+                                        }
+                                        // handle go button
+                                        $selectContactForm.on('submit', function (e) {
+                                            Q.handle(callback, Streams, [{
+                                                identifier: $("input[type=text]", this).val(),
+                                                stream: stream,
+                                                data: data
+                                            }]);
+                                            Q.Dialogs.pop();
+                                            Q.Dialogs.pop();
+                                            e.preventDefault();
+                                        });
+
+
+                                        // invite user from registered users
+                                        $(".Streams_userChooser_tool", dialog).tool("Streams/userChooser", {}).activate(function () {
+                                            var userChooserTool = this;
+                                            userChooserTool.state.resultsHeight = 180;
+                                            userChooserTool.stateChanged("resultsHeight");
+                                            userChooserTool.state.onChoose.set(function (userId, avatar) {
+                                                var contacts = $eContacts.data("contacts") || {};
+                                                contacts[userId] = {id: userId, name: avatar.displayName(), prefix: "user"}
+
+                                                _renderInviteList(contacts, $eContacts);
+
+                                                $eContacts.data("contacts", contacts);
+                                            }, "Streams_invite_dialog");
+                                        });
+
+                                    }
+                                });
+                            }
+                        });
+
+                        $('.Streams_invite_scan_qr', dialog).on(Q.Pointer.fastclick, function () {
+                            var sendBy = $(this).data('sendby');
+                            var result = {
+                                token: suggestion,
+                                identifier: null,
+                                sendBy: sendBy,
+                                stream: stream,
+                                data: data
+                            };
+                            Q.Dialogs.pop(); // close the Dialog
+                            Q.handle(callback, Streams, [result]);
+                        });
+
+                        $('.Streams_invite_share_link', dialog)
+                            .on(Q.Pointer.fastclick, function () {
+                                var sendBy = $(this).data('sendby');
+                                var result = {
+                                    token: suggestion,
+                                    identifier: null,
+                                    sendBy: sendBy,
+                                    stream: stream,
+                                    data: data
+                                };
+                                Q.Dialogs.pop(); // close the Dialog
+                                Q.handle(callback, Streams, [result]);
+                            });
+
+                        $('.Streams_invite_social_buttons button', dialog).on(Q.Pointer.fastclick, function () {
+                            var sendBy = $(this).data('sendby');
+                            var result = {
+                                token: suggestion,
+                                identifier: null,
+                                sendBy: sendBy,
+                                stream: stream,
+                                data: data
+                            };
+                            Q.Dialogs.pop(); // close the Dialog
+                            Q.handle(callback, Streams, [result]);
+                        });
+                    }
+                });
+			}
+
 		});
 
 		Q.Text.get("Streams/content", function (err, result) {
@@ -1550,6 +1788,14 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		return _request();
 	}
 	Q.Text.get('Streams/content', function (err, text) {
+		var options = {
+            title: o.title,
+            identifierTypes: o.identifierTypes,
+            userChooser: o.userChooser
+        };
+		if(o.templateName) {
+            options.templateName = o.templateName;
+		}
 		Streams.Dialogs.invite(publisherId, streamName, function (r) {
 			if (!r) return;
 			for (var option in r) {
@@ -1560,11 +1806,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			} else {
 				_request();
 			}
-		}, {
-			title: o.title,
-			identifierTypes: o.identifierTypes,
-			userChooser: o.userChooser
-		});
+		}, options);
 	});
 	return null;
 };
