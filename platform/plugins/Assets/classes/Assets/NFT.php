@@ -188,7 +188,8 @@ class Assets_NFT
 
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
-			$temp = compact("name", "chainId", "contract", "contractJson", "factory", "factoryJson", "rpcUrls", "blockExplorerUrl");
+			$blockExplorerUrls = array($blockExplorerUrl);
+			$temp = compact("name", "chainId", "contract", "contractJson", "factory", "factoryJson", "rpcUrls", "blockExplorerUrls");
 
 			foreach ($currencies as $currency) {
 				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
