@@ -475,7 +475,14 @@
                             return;
                         }
 
-                        if (this.relations.length < state.limitSeries) {
+                        var relationAmount = 0;
+                        Q.each(this.relations, function (i, val) {
+                            if (val.fromPublisherId === state.userId) {
+                                relationAmount++;
+                            }
+                        });
+
+                        if (relationAmount < state.limitSeries) {
                             relatedOptions.creatable = {
                                 'Assets/NFT/series': {
                                     publisherId: state.userId,
