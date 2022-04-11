@@ -27,6 +27,8 @@ class Users_Web3 extends Base_Users_Web3 {
 	 *  Set to null to cache any truthy result while not caching falsy results.
 	 *  Or set to a callable function, to be passed the data as JSON, and return boolean indicating whether to cache or not.
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
+	 * @param {string} [$defaultBlock='latest'] Can be one of 'latest', 'earliest', 'pending'
+	 * @param {integer} [$delay=0] If not found in cache, set how many microseconds to delay before querying the blockchain
 	 * @return array
 	 */
 	static function execute (
@@ -35,7 +37,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		$params = array(),
 		$appId = null,
 		$caching = true,
-		$cacheDuration = null)
+		$cacheDuration = null,
+		$defaultBlock = 'latest',
+		$delay = 0)
 	{
 		if (is_array($contractAddress)) {
 			list($contractAddress, $abi) = $contractAddress;
@@ -66,6 +70,10 @@ class Users_Web3 extends Base_Users_Web3 {
 			if ($cache->wasRetrieved()) {
 				return Q::json_decode($cache->result);
 			}
+		}
+
+		if ($delay) {
+			usleep($delay);
 		}
 
 		if (empty($appInfo['rpcUrl'])) {
@@ -122,7 +130,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		};
 
 		// call contract function
-		$contract = (new Contract($rpcUrl, $abi))
+		$contract = (new Contract($rpcUrl, $abi, $defaultBlock))
 		->at($contractAddress);
 		call_user_func_array([$contract, "call"], $arguments);
 
