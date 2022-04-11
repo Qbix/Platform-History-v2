@@ -56,7 +56,7 @@
     display: block;
     position: absolute;
     top: 0;
-    right: 0;
+    right: 5px;
 }
 .Assets_NFT_series_preview_tool[data-onSale=true] .Assets_NFT_series_sale .onSale {
     display: block;
