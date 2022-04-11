@@ -4040,10 +4040,15 @@
 		 * @method getContract
 		 * @static
 		 * @param {string} contractAddress
-		 * @param {Function} callback receives (err, contract)
+		 * @param {Object} [options]
+		 * @param {Object} [options.abiFileName] - the exact name of ABI json file
+		 * @param {Function} [callback] receives (err, contract)
 		 * @return {Promise} that returns the ethers.Contract
 		 */
-		getContract: function(contractAddress, callback) {
+		getContract: function(contractAddress, options, callback) {
+			if (Q.typeOf(options) === "function") {
+				callback = options;
+			}
 			return new Q.Promise(function (resolve, reject) {
 				if (window.ethereum
 				&& ethereum.chainId === Q.getObject([
@@ -4053,7 +4058,7 @@
 				} else {
 					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
-							callback && callback(err);
+							Q.handle(callback, null, [err]);
 							reject(err);
 						} else {
 							_continue(provider);
@@ -4061,17 +4066,18 @@
 					});
 				}
 				function _continue(provider) {
-					fetch(Q.url('{{baseUrl}}/ABI/'+contractAddress+'.json'))
+					var abiURL = Q.url('{{baseUrl}}/ABI/' + (Q.getObject("abiFileName", options) || contractAddress) + '.json');
+					fetch(abiURL)
 					.then(function (response) {
 						return response.json();
 					}).then(function (ABI) {
 						var signer = new ethers.providers.Web3Provider(provider).getSigner();
 						var contract = new ethers.Contract(contractAddress, ABI, signer);
-						callback && callback(null, contract);
-						resolve(contract);
+						Q.handle(callback, null, [null, contract]);
+						Q.handle(resolve, null, [contract]);
 					}).catch(function (err) {
-						callback && callback(err);
-						reject(err);
+						Q.handle(callback, null, [err]);
+						Q.handle(reject, null, [err]);
 					});
 				}
 			});

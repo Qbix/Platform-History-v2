@@ -4985,6 +4985,54 @@ Streams.isMessage = function (value) {
 };
 
 /**
+ * Converts the publisherId and the first 24 characters of
+ * an ID that is typically used as the final segment in a streamName
+ * to a hex string starting with "0x" representing a uint256 type.
+ * Both inputs are padded by 0's on the right in the hex string.
+ * For example Streams::toHexString("abc", "def") returns
+ * 0x6162630000000000646566000000000000000000000000000000000000000000
+ * while Streams::toHexString("abc", "123/def") returns
+ * 0x616263000000007b646566000000000000000000000000000000000000000000
+ * @static
+ * @method toHexString
+ * @param {string} publisherId - Takes the first 8 ASCII characters
+ * @param {string|integer} [streamId] - Takes the first 24 ASCII characters, or an unsigned integer up to PHP_INT_MAX
+ *  If the $streamId contains a slash, then the first part is interpreted as an unsigned integer up to 255,
+ *  and determines the 15th and 16th hexit in the string. This is typically used for "seriesId" under a publisher.
+ * @param {boolean} [isNotNumeric] - Set to true to encode $streamId as an ASCII string, even if it is numeric
+ * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 24 hexits.
+ */
+Streams.toHexString = function (publisherId, streamId = "", isNotNumeric = null) {
+	var parts = streamId.split("/");
+	var seriesId = null;
+	if (parts.length > 1) {
+		seriesId = parts[0];
+		streamId = parts[1];
+		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
+			throw new Q.Exception('seriesId must be in range integer 0-255');
+		}
+	}
+
+	var publisherHex = publisherId.substring(0, 8).asc2hex();
+	var pad = "padStart";
+	var streamHex = streamId.toString(16);
+	if (!isNotNumeric && streamId && !isNaN(streamId)) {
+		if (Math.floor(streamId) !== streamId || streamId < 0) {
+			throw new Q.Exception('seriesId must be in range integer 0-255');
+		}
+	} else {
+		streamHex = streamId.substring(0, 24).asc2hex();
+		pad = "padEnd";
+	}
+	var hexFirstPart = publisherHex.padEnd(16, 0);
+	var hexSecondPart = eval('streamHex.' + pad + '(48, 0)');
+	if (seriesId) {
+		hexFirstPart = hexFirstPart.substring(0, 14) + seriesId.toString(16).padStart(2, '0');
+	}
+	return "0x" + hexFirstPart + hexSecondPart;
+};
+
+/**
  * Use this to check whether user subscribed to stream
  * and also whether subscribed to message type (from streams_subscription_rule)
  * @static

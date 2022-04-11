@@ -7,7 +7,10 @@
     margin-bottom: 20px;
     margin-right: 0.8%;
 }
-
+.Assets_NFT_preview_tool > img[src*="loading.gif"] {
+    display: block;
+    margin: 100px auto;
+}
 .Assets_NFT_preview_tool .tile-block {
     position: relative;
     outline: solid 1px #535353;
@@ -50,6 +53,9 @@
     line-height: 300px;
     overflow: hidden;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center center;
 }
 .Assets_NFT_preview_tool .NFT_preview_owner {
     display: none;
@@ -169,7 +175,11 @@
     vertical-align: middle;
     cursor: pointer;
 }
-
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_form_market,
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_royalties,
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_selectNetwork {
+    display: none;
+}
 .Assets_NFT_preview_composer .Assets_nft .Assets_nft_form_group.Assets_nft_selectNetwork {
     border-bottom: 1px solid rgba(4, 4, 5, 0.07);
 }
@@ -353,6 +363,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .Assets_NFT_preview_composer .switch {

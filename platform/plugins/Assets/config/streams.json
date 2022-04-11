@@ -6,5 +6,13 @@
     "readLevel": 40,
     "writeLevel": 10,
     "adminLevel": 0
+  },
+  "Assets/NFT/contracts": {
+    "type": "Streams/category",
+    "title": "Users custom contract",
+    "icon": "",
+    "readLevel": 40,
+    "writeLevel": 10,
+    "adminLevel": 0
   }
 }
