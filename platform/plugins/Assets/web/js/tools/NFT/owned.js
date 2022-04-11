@@ -1,100 +1,142 @@
 (function (window, Q, $, undefined) {
-    /**
-     * @module Assets
-     */
 
-    var Assets = Q.Assets;
-    var Users = Q.Users;
-    var Web3 = Users.Web3;
+/**
+ * @module Assets
+ */
 
-    /**
-     * YUIDoc description goes here
-     * @class Assets NFT/owned
-     * @constructor
-     * @param {Object} [options] Override various options for this tool
-     *  @param {string} ownerAddress Owner wallet address
-     *  @param {string} contractAddress
-     */
-    Q.Tool.define("Assets/NFT/owned", function(options) {
-        var tool = this;
-        var state = tool.state;
+var Assets = Q.Assets;
+var Web3 = Assets.Web3;
+var NFT = Web3.NFT;
 
-        if (Q.isEmpty(state.contractAddress)) {
-            return Q.alert("contract address required!");
-        }
-        if (Q.isEmpty(state.ownerAddress)) {
-            return Q.alert("owner address required!");
-        }
+/**
+ * List of owned NFTs
+ * @class Assets NFT/owned
+ * @constructor
+ * @param {Object} options Override various options for this tool
+ */
 
-        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
-            Web3.getContract(state.contractAddress, function (err, contract) {
-                if (err) {
-                    return Q.alert(err.message);
-                }
+Q.Tool.define("Assets/NFT/owned", function (options) {
+	var tool = this;
+	var state = this.state;
 
-                tool.contract = contract;
+	if (!state.userId) {
+		return console.warn("user id required");
+	}
 
-                var methodName = "tokensByOwner";
-                if (!contract[methodName]) {
-                    methodName = "balanceOf";
-                    if (!contract[methodName]) {
-                        return Q.alert("Method name not supported!");
-                    }
-                }
+	var pipe = Q.pipe(['styles', 'texts'], function () {
+		tool.refresh();
+	});
 
-                Q.handle(Web3.execute, null, [methodName, state.ownerAddress, contract, function (err, result) {
-                    if (err) {
-                        return;
-                    }
+	Q.addStylesheet('{{Assets}}/css/tools/NFT/owned.css', pipe.fill("styles"), { slotName: 'Assets' });
+	Q.Text.get('Assets/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			return console.warn(msg);
+		}
 
-                    //TODO: balanceOf didn't work because you didn't switch chain to BSCT
-                    // tokensByOwner return array of tokens, balanceOf return amount of tokens
-                    var tokens = parseInt(Q.getObject("0._hex", result));
+		tool.text = text.NFT;
+		pipe.fill("texts")();
+	});
+},
 
-                    if (!tokens) {
-                        return;
-                    }
+{ // default options here
+	userId: null,
+	limit: 10
+},
 
-                    return tool.refresh(tokens);
-                }]);
-            });
-        });
+{ // methods go here
+	refresh: function () {
+		var tool = this;
+		var state = this.state;
 
-        Q.addStylesheet("{{Assets}}/css/tools/NFT/owned.css", pipe.fill('stylesheet'), { slotName: 'Assets' });
-        Q.Text.get('Assets/content', function(err, text) {
-            tool.text = text;
-            pipe.fill('text')();
-        }, {
-            ignoreCache: true
-        });
-    },
+		// add composer
+		tool.createComposer();
 
-    { // default options here
-        ownerAddress: null,
-        contractAddress: null
-    },
+		var _onInvoke = function () {
+			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
+			var infiniteTool = this;
 
-    {
-        /**
-         * Refreshes the appearance of the tool completely
-         * @method refresh
-         * @param {Integer} amount Tokens amount
-         */
-        refresh: function (amount) {
-            var tool = this;
-            var state = tool.state;
-            var $toolElement = $(this.element);
+			// skip duplicated (same offsets) requests
+			if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+				return;
+			}
 
-            for (var i=1; i<=amount; i++) {
-                Q.handle(Web3.execute, null, ["tokenOfOwnerByIndex", [state.ownerAddress, i], tool.contract, function (err, result) {
-                    if (err) {
-                        return;
-                    }
+			infiniteTool.setLoading(true);
+			infiniteTool.state.offset = offset;
+			tool.loadMore(offset, function () {
+				infiniteTool.setLoading(false);
+			});
+		};
+		var $scrollingParent = $(tool.element.scrollingParent());
+		var infiniteTool = Q.Tool.from($scrollingParent, "Q/infinitescroll");
+		if (infiniteTool) {
+			infiniteTool.state.offset = undefined;
+			infiniteTool.state.onInvoke.set(_onInvoke, tool);
+			$scrollingParent.trigger("scroll");
+			return;
+		}
 
+		$scrollingParent.tool('Q/infinitescroll').activate(function () {
+			this.state.onInvoke.set(_onInvoke, tool);
+			$scrollingParent.trigger("scroll");
+		});
+	},
+	/**
+	 * Load state.limit NFTs starting from offset
+	 * @method loadMore
+	 * @param {number} offset - already loaded amount
+	 * @param {function} callback
+	 */
+	loadMore: function (offset, callback) {
+		var tool = this;
+		var state = this.state;
 
-                    //$("<div>").tool("Assets/NFT/preview")
-                }]);
-            }
-        }
-    });
+		var $loading = $("<img src='" + Q.url("{{Q}}/img/throbbers/loading.gif") + "' />").appendTo(tool.element);
+
+		Q.req("Assets/NFT", "owned", function (err, response) {
+
+			$loading.remove();
+
+			if (err) {
+				return console.warn(err);
+			}
+
+			var NFTResults = response.slots.owned;
+
+			Q.each(NFTResults, function (index, result) {
+				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", result, result.tokenId + "-" + result.chainId).activate();
+			});
+
+			Q.handle(callback);
+		}, {
+			fields: {
+				userId: state.userId,
+				offset: offset,
+				limit: state.limit
+			}
+		});
+	},
+	/**
+	 * Create Assets/NFT/preview in composer mode.
+	 * @method createComposer
+	 */
+	createComposer: function () {
+		var tool = this;
+		var state = this.state;
+
+		// if composer already exists
+		if ($(".Assets_NFT_composer", tool.element).length) {
+			return;
+		}
+
+		$("<div>").prependTo(tool.element).tool("Assets/NFT/preview", {
+			composer: true,
+			userId: state.userId,
+			onCreated: function () {
+				tool.createComposer();
+			}
+		}, state.userId + "-" + Date.now()).activate();
+	}
+});
+
 })(window, Q, jQuery);

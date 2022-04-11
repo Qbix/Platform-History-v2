@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.6",
+				"version": "1.0.8",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -17,10 +17,12 @@
 			"Assets/charge": ["Assets/after/Assets_charge"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
-			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"]
+			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
+			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
 		},
 		"routes@start": {
-			"Q/plugins/Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },
@@ -120,13 +122,24 @@
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
-			"Assets/NFT/category": {
+			"Assets/NFT/series": {
 				"create": true,
 				"close": true,
 				"edit": true,
 				"defaults": {
-					"title": "Untitled NFT Category",
-					"icon": "Streams/category"
+					"icon": "{{Assets}}/img/empty_white.png"
+				}
+			},
+			"Assets/NFT/contract": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"canCreate": ["Users/admins", "Users/owners"],
+				"defaults": {
+					"icon": "{{Assets}}/img/empty_white.png",
+					"readLevel": 40,
+					"writeLevel": 10,
+					"adminLevel": 20
 				}
 			},
 			"Assets/NFT/pointer": {
@@ -141,7 +154,7 @@
 		},
 		"onInsert": {
 			"community": ["Assets/NFTs"],
-			"person": ["Assets/user/NFTs"]
+			"person": ["Assets/user/NFTs", "Assets/NFT/contracts"]
 		}
 	},
 	"Assets": {
@@ -225,6 +238,15 @@
 			"attributes": {
 				"display_type": ["string", "number", "date", "list"]
 			},
+			"methods": {
+				"tokensByOwner": {
+					"limit": 100
+				}
+			},
+			"URI": {
+				"base": "{{baseUrl}}/Assets/NFT/{{contractId}}/{{tokenId}}",
+				"suffix": ".json"
+			},
 			"currencies": [
 				{
 					"symbol": "BNB",
@@ -275,6 +297,13 @@
 					"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA",
 					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+				},
+				{
+					"symbol": "MATIC",
+					"name": "MATIC",
+					"decimals": 18,
+					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+					"0x89": "0x0000000000000000000000000000000000000000"
 				}
 			]
 		}

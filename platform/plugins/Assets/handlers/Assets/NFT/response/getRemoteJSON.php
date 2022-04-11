@@ -3,13 +3,10 @@ function Assets_NFT_response_getRemoteJSON ($params) {
 	Q_Valid::nonce(true);
 
 	$request = array_merge($_REQUEST, $params);
-	$required = array('url');
+	$required = array('chainId', 'contractAddress', 'tokenURI');
 	Q_Valid::requireFields($required, $request, true);
 
-	$content = file_get_contents($request["url"]);
-	if (!$content) {
-		throw new Exception("url return empty content");
-	}
+	$dataJson = Assets_NFT::getJson($request["chainId"], $request["contractAddress"], $request["tokenURI"]);
 
-	return Q::json_decode($content, true);
+	return $dataJson;
 }
