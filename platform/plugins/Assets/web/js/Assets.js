@@ -1181,11 +1181,18 @@
 							var provider = new ethers.providers.Web3Provider(window.ethereum);
 							var factory = new ethers.Contract(address, ABI, provider.getSigner());
 
-							factory.on("InstanceCreated", function (name, symbol, instance, length) {
-								Q.handle(Assets.NFT.Web3.onInstanceCreated, null, [name, symbol, instance, length])
-							});
-							factory.on("OwnershipTransferred", function (previousOwner, newOwner) {
-								Q.handle(Assets.NFT.Web3.onInstanceOwnershipTransferred, null, [previousOwner, newOwner]);
+							var events = {
+								InstanceCreated: "onInstanceCreated",
+								OwnershipTransferred: "onInstanceOwnershipTransferred"
+							};
+							Q.each(ABI, function (index, obj) {
+								Q.each(events, function (event1, event2) {
+									if (obj.type === "event" && obj.name === event1) {
+										contract.on(event1, function () {
+											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										});
+									}
+								});
 							});
 
 							_subMethod(factory);
@@ -1247,20 +1254,23 @@
 							var provider = new ethers.providers.Web3Provider(window.ethereum);
 							var contract = new ethers.Contract(address, ABI, provider.getSigner());
 
-							contract.on("TokenRemovedFromSale", function (tokenId) {
-								Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId]);
-							});
-							contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
-								Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken]);
-							});
-							contract.on("Transfer", function (oldAddress, newAddress, token) {
-								Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token]);
-							});
-							contract.on("SeriesPutOnSale", function (seriesId, price, currency, onSaleUntil) {
-								Q.handle(Assets.NFT.Web3.onSeriesPutOnSale, null, [seriesId, price, currency, onSaleUntil]);
-							});
-							contract.on("SeriesRemovedFromSale", function (seriesId) {
-								Q.handle(Assets.NFT.Web3.onSeriesRemovedFromSale, null, [seriesId]);
+							var events = {
+								TokenRemovedFromSale: "onTokenRemovedFromSale",
+								TokenPutOnSale: "onTokenAddedToSale",
+								Transfer: "onTransfer",
+								OwnershipTransferred: "onTransferOwnership",
+								TokenBought: "onTokenBought",
+								SeriesPutOnSale: "onSeriesPutOnSale",
+								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+							};
+							Q.each(ABI, function (index, obj) {
+								Q.each(events, function (event1, event2) {
+									if (obj.type === "event" && obj.name === event1) {
+										contract.on(event1, function () {
+											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										});
+									}
+								});
 							});
 
 							_subMethod(contract);
