@@ -1427,7 +1427,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			delete o.photo;
 		}
 		var rsd = r.data;
-		rsd.url = r.appUrl || rsd.url;
 		var rss = r.stream;
 		var t;
 		switch (o.sendBy) {
