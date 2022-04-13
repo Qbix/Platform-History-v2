@@ -377,7 +377,8 @@ abstract class Streams extends Base_Streams
 			$fields = join(',', Streams_Stream::fieldNames());
 		}
 		$allCached = array();
-		if (empty($options['refetch']) and (is_array($name) or is_string($name))) {
+		if (empty($options['refetch']) and empty($options['begin'])
+		and (is_array($name) or is_string($name))) {
 			$arr = is_array($name) ? $name : array($name);
 			$namesToFetch = array();
 			foreach ($arr as $n) {
