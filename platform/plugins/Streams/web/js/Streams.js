@@ -5002,7 +5002,8 @@ Streams.isMessage = function (value) {
  * @param {boolean} [isNotNumeric] - Set to true to encode $streamId as an ASCII string, even if it is numeric
  * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 24 hexits.
  */
-Streams.toHexString = function (publisherId, streamId = "", isNotNumeric = null) {
+Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
+	streamId = streamId || '';
 	var parts = streamId.split("/");
 	var seriesId = null;
 	if (parts.length > 1) {

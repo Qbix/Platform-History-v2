@@ -174,7 +174,9 @@ class Assets_NFT
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
 			$name = Q::ifset($chain, "name", null);
+			$default = Q::ifset($chain, "default", false);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
+			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
 			$factoryPath = null;
 			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
@@ -188,7 +190,7 @@ class Assets_NFT
 
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
-			$temp = compact("name", "chainId", "contract", "contractJson", "factory", "factoryJson", "rpcUrls", "blockExplorerUrl");
+			$temp = compact("name", "chainId", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrl");
 
 			foreach ($currencies as $currency) {
 				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
@@ -197,8 +199,6 @@ class Assets_NFT
 					break;
 				}
 			}
-
-			$temp["default"] = $i == Users::communityId();
 
 			if ($needChainId && $chainId == $needChainId) {
 				return $temp;
@@ -220,13 +220,10 @@ class Assets_NFT
 	static function getDefaultChain ($chains = null) {
 		$chains = $chains ?: self::getChains();
 		foreach ($chains as $chain) {
-			if (!$chain["default"]) {
-				continue;
+			if ($chain["default"]) {
+				return $chain;
 			}
-
-			return $chain;
 		}
-
 		return null;
 	}
 
