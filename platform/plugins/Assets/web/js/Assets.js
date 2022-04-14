@@ -998,7 +998,7 @@
 			 */
 			Web3: {
 				onTokenRemovedFromSale: new Q.Event(),
-				onTokenAddedToSale: new Q.Event(),
+				onTokenPutOnSale: new Q.Event(),
 				onTransfer: new Q.Event(),
 				onInstanceCreated: new Q.Event(),
 				onInstanceOwnershipTransferred: new Q.Event(),
@@ -1081,7 +1081,7 @@
 					var authorAddress = info.authorAddress || Q.Users.Web3.getSelectedXid();
 					var limit = info.limit || 0;
 					var onSaleUntil = info.onSaleUntil
-						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
+						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*365));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
 					var price = info.fixedPointPrice
 						? String(info.fixedPointPrice)

@@ -266,7 +266,7 @@
                 state.updateCache = true;
                 tool.init();
             };
-            Web3.onTokenAddedToSale.set(function (tokenId, amount, consumeToken) {
+            Web3.onTokenPutOnSale.set(function (tokenId, amount, consumeToken) {
                 _saleChanged(tokenId);
             }, tool);
             Web3.onTokenRemovedFromSale.set(function (tokenId) {
