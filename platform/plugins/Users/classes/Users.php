@@ -2086,7 +2086,7 @@ abstract class Users extends Base_Users
 			$hashed = $identifier;
 			$ui_type = $type;
 		} else {
-			$parts = str_replace("\t", "_", $parts); // backwards compatibility
+			$type = str_replace("\t", "_", $type); // backwards compatibility
 			$parts = explode("_", $type);
 			switch ($parts[0]) {
 				case 'email':
