@@ -174,7 +174,7 @@ class Assets_NFT
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
 			$name = Q::ifset($chain, "name", null);
-			$default = Q::ifset($chain, "default", false);
+			$default = $i == Q::app();
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
