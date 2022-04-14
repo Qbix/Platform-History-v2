@@ -1128,7 +1128,8 @@ Streams.Dialogs = {
 						Q.handle(callback, Streams, [{
 							identifier: $("input[type=text]", this).val(),
 							stream: stream,
-							data: data
+							data: data,
+							appUrl: options.appUrl
 						}]);
 						Q.Dialogs.pop(); // close the Dialog
 						e.preventDefault();
@@ -1143,7 +1144,8 @@ Streams.Dialogs = {
 							identifier: null,
 							sendBy: sendBy,
 							stream: stream,
-							data: data
+							data: data,
+							appUrl: options.appUrl
 						};
 						Q.Dialogs.pop(); // close the Dialog
 						Q.handle(callback, Streams, [result]);
@@ -1158,7 +1160,8 @@ Streams.Dialogs = {
 							identifier: null,
 							sendBy: sendBy,
 							stream: stream,
-							data: data
+							data: data,
+							appUrl: options.appUrl
 						};
 						Q.Dialogs.pop(); // close the Dialog
 						Q.handle(callback, Streams, [result]);
@@ -1563,7 +1566,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 		}, {
 			title: o.title,
 			identifierTypes: o.identifierTypes,
-			userChooser: o.userChooser
+			userChooser: o.userChooser,
+			appUrl: o.appUrl
 		});
 	});
 	return null;
