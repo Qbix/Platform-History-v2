@@ -124,6 +124,134 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		uasort($result, array('Streams_RelatedTo', '_compareByWeight'));
 		return $result;
 	}
+
+	/**
+	 * Call this function to relate a stream with the weight being
+	 * inserted randomly among other weights. To not disturb already-consumed
+	 * relations, indicate the name of the attribute holding the weight of the
+	 * latest-consumed relations.
+	 * @method insertRandomly
+	 * @static
+	 * @param {Streams_Stream} $category
+	 * @param {string} $relationType
+	 * @param {Streams_Stream} $stream
+	 * @param {string} [$consumedAttribute] name of attribute holding the highest weight of already-consumed related streams, if any
+	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 */
+	static function insertRandomly(
+		$category,
+		$relationType,
+		$stream,
+		$consumedAttribute = null,
+		$totalAttribute = null
+	) {
+		// let's find a random NFT that wasn't minted yet
+		$consumedWeight = $consumedAttribute
+			? $category->getAttribute($consumedAttribute, 0)
+			: 0;
+		if ($totalAttribute) {
+			$total = $category->getAttribute($totalAttribute, 0);
+		} else {
+			$rtt = new Streams_RelatedToTotal(array(
+				'toPublisherId' => $category->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $relationType,
+				'fromStreamType' => $stream->type
+			));
+			$total = $rtt->retrieve()
+				? $rtt->relationCount
+				: 0;
+		}
+		$weight = $total + 1;
+		list($relations, $relatedStreams) = $category->related($category->publisherId, true, array(
+			$relationType,
+			'orderBy' => 'RAND()',
+			'limit' => 1,
+			'where' => array(
+				'weight >' => $consumedWeight
+			)
+		));
+		$r = reset($relations);
+		$rs = reset($relatedStreams);
+		if ($rs) {
+			// swap weights with a previous relation
+			Streams::updateRelation(
+				$category->publisherId,
+				$category->publisherId,
+				$category->name,
+				$relationType,
+				$rs->publisherId,
+				$rs->streamName,
+				$weight
+			);
+			$stream->relateTo(
+				$category, 
+				$relationType, 
+				$category->publisherId,
+				array(
+					'weight' => $r->weight
+				)
+			);
+		} else {
+			// just insert a new relation
+			$stream->relateTo(
+				$category, 
+				$relationType, 
+				$category->publisherId,
+				array(
+					'weight' => $weight
+				)
+			);
+		}
+		$category->setAttribute($totalAttribute, $weight);
+		$category->save(); // we added another randomized relation
+	}
+
+	/**
+	 * Call this method to indicate the next relation "consumed"
+	 * and advance the pointer by one.
+	 * @method consume
+	 * @static
+	 * @param {Streams_Stream} $category
+	 * @param {string} $relationType
+	 * @param {string} $consumedAttribute name of attribute holding the highest weight of already-consumed related streams, if any
+	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @return {Streams_Stream|null} The related stream, or null
+	 * @throw {Q_Exception_MissingObject} 
+	 */
+	static function consume(
+		$category,
+		$relationType,
+		$consumedAttribute,
+		$totalAttribute = null)
+	{
+		$consumed = $category->getAttribute($consumedAttribute, 0);
+		$weight = $consumed + 1;
+		if ($totalAttribute) {
+			$total = $category->getAttribute($totalAttribute, 0);
+			if ($weight > $total) {
+				return false;
+			}
+		}
+		$streams = Streams::related(
+			Q::ifset($options, 'asUserId', null),
+			$category->publisherId,
+			$category->name,
+			true,
+			array(
+				'weight' => $weight,
+				'limit' => 1,
+				'streamsOnly' => true,
+				'type' => $relationType
+			)
+		);
+		if (!$streams) {
+			return null;
+		}
+		$category->setAttribute($consumedAttribute, $weight);
+		$category->save();
+		return reset($streams);
+	}
 	
 	static function _compareByWeight($a, $b)
 	{

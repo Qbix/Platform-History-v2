@@ -74,7 +74,7 @@ abstract class Assets extends Base_Assets
 	 * @param {string} [$locale] Can be used to override the locale
 	 * @return {string} The display, in the current locale
 	 */
-	static function formatted($format = "%=(n", $amount, $locale = null)
+	static function formatted($amount, $format = "%=(n", $locale = null)
 	{
 		if (is_callable('money_format')) {
 			$ob = new Q_OutputBuffer(null, $locale);

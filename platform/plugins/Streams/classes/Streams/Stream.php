@@ -1130,7 +1130,7 @@ class Streams_Stream extends Base_Streams_Stream
 			$changes[$f] = null; // the value may be too big, etc.
 		}
 		unset($changes['updatedTime']);
-		if (!$changes) {
+		if (!$changes and !$commit) {
 			return false; // we found no reason to update the stream in the database
 		}
 		$result = $this->save(false, $commit);

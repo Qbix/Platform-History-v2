@@ -262,7 +262,8 @@
 					"canRemove": [],
 					"canSee": []
 				}
-			}
+			},
+			"admins": ["Users/owners", "Users/admins"]
 		},
 		"web3": {
 			"contracts": {

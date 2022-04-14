@@ -377,7 +377,8 @@ abstract class Streams extends Base_Streams
 			$fields = join(',', Streams_Stream::fieldNames());
 		}
 		$allCached = array();
-		if (empty($options['refetch']) and (is_array($name) or is_string($name))) {
+		if (empty($options['refetch']) and empty($options['begin'])
+		and (is_array($name) or is_string($name))) {
 			$arr = is_array($name) ? $name : array($name);
 			$namesToFetch = array();
 			foreach ($arr as $n) {
@@ -2260,7 +2261,7 @@ abstract class Streams extends Base_Streams
 	 * @param {double} [$options.max] the maximum orderBy value (inclusive) to filter by, if any
 	 * @param {string|array|Db_Range} [$options.type] if specified, this filters the type of the relation.
 	 *   Can be useful for implementing custom indexes using relations and varying the value of "type".
-	 * @param {string|array|Db_Range} [$options.weight] if specified, this filters the weight of the relation.
+	 * @param {number|array|Db_Range} [$options.weight] if specified, this filters the weight of the relation.
 	 *   Can be useful for implementing custom indexes using relations and varying the weight ranges.
 	 *   Only used if $options.isCategory is true.
 	 * @param {string} [$options.prefix] if specified, this filters by the prefix of the related streams
@@ -2275,6 +2276,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.skipTypes] Optional array of ($streamName => $relationTypes) to skip when fetching relations.
 	 * @param {array} [$options.includeTemplates] Defaults to false. Pass true here to include template streams (whose name ends in a slash) among the related streams.
 	 * @param {boolean} [$options.ignoreCache=false] If true, ignore cache during sql requests
+	 * @param {boolean} [$options.overrideMaximums=false] Set to true to potentially exceed max limit and offset
 	 * @return {array}
 	 *  Returns array($relations, $relatedStreams, $stream).
 	 *  However, if $streamName wasn't a string or ended in "/"
@@ -2367,11 +2369,13 @@ abstract class Streams extends Base_Streams
 		$max_offset = (Q_Config::expect('Streams', 'db', 'pages') - 1) * $max_limit - 1;
 		$offset = !empty($options['offset']) ? $options['offset'] : 0;
 		$limit = !empty($options['limit']) ? $options['limit'] : $max_limit;
-		if (!is_numeric($offset) or $offset > $max_offset) {
-			throw new Q_Exception("Streams::related offset is too large, must be <= $max_offset");
-		}
-		if (!is_numeric($limit) or $limit > $max_limit) {
-			throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
+		if (empty($options['overrideMaximums'])) {
+			if (!is_numeric($offset) or $offset > $max_offset) {
+				throw new Q_Exception("Streams::related offset is too large, must be <= $max_offset");
+			}
+			if (!is_numeric($limit) or $limit > $max_limit) {
+				throw new Q_Exception("Streams::related limit is too large, must be <= $max_limit");
+			}
 		}
 
 		$min = null;
@@ -2387,7 +2391,7 @@ abstract class Streams extends Base_Streams
 			$range = new Db_Range($min ? $min : 0, true, true, $max ? $max : null);
 			$query = $query->where(array('weight' => $range));
 		}
-		if (isset($limit)) {
+		if ($limit or $offset) {
 			$query = $query->limit($limit, $offset);
 		}
 		if (isset($options['type'])) {
@@ -4942,7 +4946,7 @@ abstract class Streams extends Base_Streams
 	 *  If the $streamId contains a slash, then the first part is interpreted as an unsigned integer up to 255,
 	 *  and determines the 15th and 16th hexit in the string. This is typically used for "seriesId" under a publisher.
 	 * @param {boolean} [$isNotNumeric=null] Set to true to encode $streamId as an ASCII string, even if it is numeric
-	 * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 24 hexits.
+	 * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 48 hexits.
 	 */
 	static function toHexString($publisherId, $streamId, $isNotNumeric = null)
 	{

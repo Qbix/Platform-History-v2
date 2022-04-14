@@ -351,6 +351,21 @@ Sp.queryField = function Q_queryField(name, value) {
 };
 
 /**
+ * Convert ascii string to hex
+ * @method asc2hex
+ * @return {string}
+ */
+Sp.asc2hex = function() {
+	var arr1 = [];
+	for (var n = 0, l = this.length; n < l; n ++)
+	{
+		var hex = Number(this.charCodeAt(n)).toString(16);
+		arr1.push(hex);
+	}
+	return arr1.join('');
+};
+
+/**
  * Obtain some unique hash from a string, analogous to Q_Utils::hashCode
  * @method hashCode
  * @return {number}
@@ -5451,6 +5466,22 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 	this.slotNames = slotNames;
 	this.callback = callback;
 	this.options = options;
+};
+
+/**
+ * Return URL http code
+ * @method getUrlStatus
+ * @param {string} url
+ * @param {function} callback - get http.status as argument
+ * @return {string}
+ */
+Q.Request.getUrlStatus = function(url, callback) {
+	var http = new XMLHttpRequest();
+	http.addEventListener("load", function () {
+		Q.handle(callback, http, [this.status]);
+	});
+	http.open('HEAD', url);
+	http.send();
 };
 
 /**

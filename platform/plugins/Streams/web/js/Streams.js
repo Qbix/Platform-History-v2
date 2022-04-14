@@ -967,38 +967,38 @@ Streams.Dialogs = {
 	 * @param {string} [options.token] Use to set the invite token, if you have enough permissions
 	 * @param {String} [options.userChooser=false] If true allow to invite registered users with Streams/userChooser tool.
 	 */
-	invite: function(publisherId, streamName, callback, options) {
-		var stream = null;
-		var text = null;
-		options = Q.extend({}, Streams.Dialogs.invite.options, options);
+    invite: function(publisherId, streamName, callback, options) {
+        var stream = null;
+        var text = null;
+        options = Q.extend({}, Streams.Dialogs.invite.options, options);
 
-		var suggestion = null, data = null;
-		var fields = {
-			publisherId: publisherId,
-			streamName: streamName
-		};
-		if (options.token) {
-			fields.token = options.token;
-		}
-		Q.req('Streams/invite', ['suggestion', 'data'], function (err, response) {
-			var slots = response && response.slots;
-			if (slots) {
-				suggestion = slots.suggestion;
-				data = slots.data;
-				$('.Streams_invite_dialog').addClass('Streams_suggestion_ready');
-			}
-		}, {
-			fields: fields
-		});
+        var suggestion = null, data = null;
+        var fields = {
+            publisherId: publisherId,
+            streamName: streamName
+        };
+        if (options.token) {
+            fields.token = options.token;
+        }
+        Q.req('Streams/invite', ['suggestion', 'data'], function (err, response) {
+            var slots = response && response.slots;
+            if (slots) {
+                suggestion = slots.suggestion;
+                data = slots.data;
+                $('.Streams_invite_dialog').addClass('Streams_suggestion_ready');
+            }
+        }, {
+            fields: fields
+        });
 
-		// detect if cordova or Contacts Picker API available.
-		var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
+        // detect if cordova or Contacts Picker API available.
+        var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
 
-		var pipe = Q.pipe(['stream', 'text'], function () {
-			var copyLinkText = text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
-			if (Q.getObject("share", navigator)) {
-				copyLinkText = text.shareOrCopyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
-			}
+        var pipe = Q.pipe(['stream', 'text'], function () {
+            var copyLinkText = text.copyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+            if (Q.getObject("share", navigator)) {
+                copyLinkText = text.shareOrCopyLink.interpolate({ClickOrTap: Q.text.Q.words.ClickOrTap});
+            }
 
             var _renderInviteList = function (contacts, $eContacts) {
                 Q.Template.render("Users/templates/contacts/display", {
@@ -1045,7 +1045,7 @@ Streams.Dialogs = {
                 });
             };
 
-			if(options.templateName == 'Streams/templates/invite/classicDialog'){
+            if(options.templateName == 'Streams/templates/invite/classicDialog'){
                 Q.Dialogs.push({
                     title: options.title || text.title,
                     template: {
@@ -1174,7 +1174,8 @@ Streams.Dialogs = {
                             Q.handle(callback, Streams, [{
                                 identifier: $("input[type=text]", this).val(),
                                 stream: stream,
-                                data: data
+                                data: data,
+                                appUrl: options.appUrl
                             }]);
                             Q.Dialogs.pop(); // close the Dialog
                             e.preventDefault();
@@ -1189,7 +1190,8 @@ Streams.Dialogs = {
                                     identifier: null,
                                     sendBy: sendBy,
                                     stream: stream,
-                                    data: data
+                                    data: data,
+                                    appUrl: options.appUrl
                                 };
                                 Q.Dialogs.pop(); // close the Dialog
                                 Q.handle(callback, Streams, [result]);
@@ -1204,14 +1206,15 @@ Streams.Dialogs = {
                                     identifier: null,
                                     sendBy: sendBy,
                                     stream: stream,
-                                    data: data
+                                    data: data,
+                                    appUrl: options.appUrl
                                 };
                                 Q.Dialogs.pop(); // close the Dialog
                                 Q.handle(callback, Streams, [result]);
                             });
                     }
                 });
-			} else {
+            } else {
                 Q.Dialogs.push({
                     title: options.title || text.title2,
                     template: {
@@ -1367,7 +1370,8 @@ Streams.Dialogs = {
                                 identifier: null,
                                 sendBy: sendBy,
                                 stream: stream,
-                                data: data
+                                data: data,
+                                appUrl: options.appUrl
                             };
                             Q.Dialogs.pop(); // close the Dialog
                             Q.handle(callback, Streams, [result]);
@@ -1381,7 +1385,8 @@ Streams.Dialogs = {
                                     identifier: null,
                                     sendBy: sendBy,
                                     stream: stream,
-                                    data: data
+                                    data: data,
+                                    appUrl: options.appUrl
                                 };
                                 Q.Dialogs.pop(); // close the Dialog
                                 Q.handle(callback, Streams, [result]);
@@ -1394,27 +1399,28 @@ Streams.Dialogs = {
                                 identifier: null,
                                 sendBy: sendBy,
                                 stream: stream,
-                                data: data
+                                data: data,
+                                appUrl: options.appUrl
                             };
                             Q.Dialogs.pop(); // close the Dialog
                             Q.handle(callback, Streams, [result]);
                         });
                     }
                 });
-			}
+            }
 
-		});
+        });
 
-		Q.Text.get("Streams/content", function (err, result) {
-			text = Q.getObject(["invite", "dialog"], result);
-			pipe.fill('text')();
-		});
+        Q.Text.get("Streams/content", function (err, result) {
+            text = Q.getObject(["invite", "dialog"], result);
+            pipe.fill('text')();
+        });
 
-		Streams.get(publisherId, streamName, function() {
-			stream = this;
-			pipe.fill('stream')();
-		});
-	}
+        Streams.get(publisherId, streamName, function() {
+            stream = this;
+            pipe.fill('stream')();
+        });
+    }
 };
 
 Streams.Dialogs.invite.options = {
@@ -1560,255 +1566,255 @@ Streams.release = function (key) {
  * @return {Q.Request} represents the request that was made if an identifier was provided
  */
 Streams.invite = function (publisherId, streamName, options, callback) {
-	// TODO: start integrating this with Cordova methods to invite people
-	// from your contacts or facebook flow.
-	// Follow up with the Groups app, maybe! :)
-	var loggedUserId = Users.loggedInUserId();
-	if (!loggedUserId) {
-		Q.handle(callback, null, ["Streams.invite: not logged in"]);
-		return false; // not logged in
-	}
-	var baseUrl = Q.baseUrl({
-		publisherId: publisherId,
-		streamName: streamName
-	});
-	var o = Q.extend({
-		uri: 'Streams/invite'
-	}, Streams.invite.options, options);
-	o.publisherId = publisherId;
-	o.streamName = streamName;
-	if (typeof o.appUrl === 'function') {
-		o.appUrl = o.appUrl();
-	}
-	function _request() {
-		return Q.req(o.uri, ['data'], function (err, response) {
-			var msg = Q.firstErrorMessage(err, response && response.errors);
-			if (msg) {
-				alert(msg);
-				var args = [err, response];
-				return Streams.onError.handle.call(this, msg, args);
-			}
-			Participant.get.cache.removeEach([publisherId, streamName]);
-			Streams.get.cache.removeEach([publisherId, streamName]);
-			var rsd = response.slots.data;
-			Q.handle(o && o.callback, null, [err, rsd]);
-			Q.handle(callback, null, [err, rsd]);
-			var emailAddresses = [];
-			var mobileNumbers = [];
-			var fb_xids = [];
-			// The invite mechanism allows clients to know whether
-			// certain identifiers are verified with the site or not,
-			// but will not let clients know which userIds they correspond to.
-			Q.each(rsd.statuses, function (i, s) {
-				// The invite mechanism no longer leak participant userIds to clients,
-				// so you can't match external identifiers to userIds
-				// That is why rsd.alreadyParticipating is no longer returned:
-				// if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
-				// 	return;
-				// }
-				var shouldFollowup = (o.followup === true)
-					|| (o.followup !== false && s === 'future');
-				if (!shouldFollowup) {
-					return; // next one
-				}
-				var identifier = rsd.identifiers[i];
-				var identifierType = rsd.identifierTypes[i];
-				switch (identifierType) {
-					case 'userId': break;
-					case 'email': emailAddresses.push(identifier); break;
-					case 'mobile': mobileNumbers.push(identifier); break;
-					case 'facebook':
-						if (shouldFollowup === true) {
-							fb_xids.push(identifier[i]);
-						}
-						break;
-					case 'label':
-					case 'newFutureUsers':
-					default:
-						break;
-				}
-			});
-			Streams.followup({
-				mobile: {
-					numbers: mobileNumbers
-				},
-				email: {
-					addresses: emailAddresses
-				},
-				facebook: {
-					xids: fb_xids
-				}
-			}, callback);
-		}, { method: 'post', fields: o, baseUrl: baseUrl });
-	}
-	function _sendBy(r, text) {
-		// Send a request to create the actual invite
-		Q.req(o.uri, ['data', 'stream'], function (err, response) {
-			var msg = Q.firstErrorMessage(err, response && response.errors);
-			if (msg) {
-				alert(msg);
-				var args = [err, response];
-				return Streams.onError.handle.call(this, msg, args);
-			}
-			Q.handle(o && o.callback, null, [err, rsd]);
-			Q.handle(callback, null, [err, rsd]);
-		}, {
-			method: 'post',
-			fields: o,
-			baseUrl: baseUrl
-		});
-		if (o.photo) {
-			var photo = o.photo;
-			delete o.photo;
-		}
-		var rsd = r.data;
-		var rss = r.stream;
-		var t;
-		switch (o.sendBy) {
-		case "email":
-			t = Q.extend({
-				url: rsd.url,
-				title: rss.fields.title
-			}, 10, text);
-			Q.Template.render("Streams/templates/invite/email", t,
-				function (err, body) {
-					if (err) return;
-					var subject = Q.getObject(['invite', 'email', 'subject'], text);
-					var url = Q.Links.email(subject, body);
-					window.location = url;
-				});
-			break;
-		case "text":
-			var content = Q.getObject(['invite', 'sms', 'content'], text)
-				.interpolate({
-					url: rsd.url,
-					title: rss.fields.title
-				});
-			t = Q.extend({
-				content: content,
-				url: rsd.url,
-				title: streamName
-			}, 10, text);
-			Q.Template.render("Streams/templates/invite/sms", t,function (err, text) {
-				if (err) {
-					return;
-				}
+    // TODO: start integrating this with Cordova methods to invite people
+    // from your contacts or facebook flow.
+    // Follow up with the Groups app, maybe! :)
+    var loggedUserId = Users.loggedInUserId();
+    if (!loggedUserId) {
+        Q.handle(callback, null, ["Streams.invite: not logged in"]);
+        return false; // not logged in
+    }
+    var baseUrl = Q.baseUrl({
+        publisherId: publisherId,
+        streamName: streamName
+    });
+    var o = Q.extend({
+        uri: 'Streams/invite'
+    }, Streams.invite.options, options);
+    o.publisherId = publisherId;
+    o.streamName = streamName;
+    if (typeof o.appUrl === 'function') {
+        o.appUrl = o.appUrl();
+    }
+    function _request() {
+        return Q.req(o.uri, ['data'], function (err, response) {
+            var msg = Q.firstErrorMessage(err, response && response.errors);
+            if (msg) {
+                alert(msg);
+                var args = [err, response];
+                return Streams.onError.handle.call(this, msg, args);
+            }
+            Participant.get.cache.removeEach([publisherId, streamName]);
+            Streams.get.cache.removeEach([publisherId, streamName]);
+            var rsd = response.slots.data;
+            Q.handle(o && o.callback, null, [err, rsd]);
+            Q.handle(callback, null, [err, rsd]);
+            var emailAddresses = [];
+            var mobileNumbers = [];
+            var fb_xids = [];
+            // The invite mechanism allows clients to know whether
+            // certain identifiers are verified with the site or not,
+            // but will not let clients know which userIds they correspond to.
+            Q.each(rsd.statuses, function (i, s) {
+                // The invite mechanism no longer leak participant userIds to clients,
+                // so you can't match external identifiers to userIds
+                // That is why rsd.alreadyParticipating is no longer returned:
+                // if (rsd.alreadyParticipating.indexOf(userId) >= 0) {
+                // 	return;
+                // }
+                var shouldFollowup = (o.followup === true)
+                    || (o.followup !== false && s === 'future');
+                if (!shouldFollowup) {
+                    return; // next one
+                }
+                var identifier = rsd.identifiers[i];
+                var identifierType = rsd.identifierTypes[i];
+                switch (identifierType) {
+                    case 'userId': break;
+                    case 'email': emailAddresses.push(identifier); break;
+                    case 'mobile': mobileNumbers.push(identifier); break;
+                    case 'facebook':
+                        if (shouldFollowup === true) {
+                            fb_xids.push(identifier[i]);
+                        }
+                        break;
+                    case 'label':
+                    case 'newFutureUsers':
+                    default:
+                        break;
+                }
+            });
+            Streams.followup({
+                mobile: {
+                    numbers: mobileNumbers
+                },
+                email: {
+                    addresses: emailAddresses
+                },
+                facebook: {
+                    xids: fb_xids
+                }
+            }, callback);
+        }, { method: 'post', fields: o, baseUrl: baseUrl });
+    }
+    function _sendBy(r, text) {
+        // Send a request to create the actual invite
+        Q.req(o.uri, ['data', 'stream'], function (err, response) {
+            var msg = Q.firstErrorMessage(err, response && response.errors);
+            if (msg) {
+                alert(msg);
+                var args = [err, response];
+                return Streams.onError.handle.call(this, msg, args);
+            }
+            Q.handle(o && o.callback, null, [err, rsd]);
+            Q.handle(callback, null, [err, rsd]);
+        }, {
+            method: 'post',
+            fields: o,
+            baseUrl: baseUrl
+        });
+        if (o.photo) {
+            var photo = o.photo;
+            delete o.photo;
+        }
+        var rsd = r.data;
+        var rss = r.stream;
+        var t;
+        switch (o.sendBy) {
+            case "email":
+                t = Q.extend({
+                    url: rsd.url,
+                    title: rss.fields.title
+                }, 10, text);
+                Q.Template.render("Streams/templates/invite/email", t,
+                    function (err, body) {
+                        if (err) return;
+                        var subject = Q.getObject(['invite', 'email', 'subject'], text);
+                        var url = Q.Links.email(subject, body);
+                        window.location = url;
+                    });
+                break;
+            case "text":
+                var content = Q.getObject(['invite', 'sms', 'content'], text)
+                    .interpolate({
+                        url: rsd.url,
+                        title: rss.fields.title
+                    });
+                t = Q.extend({
+                    content: content,
+                    url: rsd.url,
+                    title: streamName
+                }, 10, text);
+                Q.Template.render("Streams/templates/invite/sms", t,function (err, text) {
+                    if (err) {
+                        return;
+                    }
 
-				window.location = Q.Links.sms(text);
-			});
-			break;
-		case "facebook":
-			window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
-			break;
-		case "twitter":
-			window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
-			break;
-		case "copyLink":
-			if (Q.getObject("share", navigator)) {
-				navigator.share({url: rsd.url});
-			} else {
-				Q.Clipboard.copy(rsd.url);
-				Q.Text.get("Streams/content", function (err, result) {
-					var text = result && result.invite;
-					if (text) {
-						var element = Q.alert(text.youCanNowPaste, {
-							title: ''
-						});
-						setTimeout(function () {
-							if (element === Q.Dialogs.element()) {
-								Q.Dialogs.pop();
-							}
-						}, Streams.invite.options.youCanNowPasteDuration);
-					}
-				});
-			}
-			break;
-		case "QR":
-			Q.Dialogs.push({
-				className: 'Streams_invite_QR',
-				title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
-				content: '<div class="Streams_invite_QR_content"></div>'
-					+ '<div class="Q_buttons">'
-					+ '<button class="Q_button">'
-					+ text.invite.dialog.scannedQR.interpolate(Q.text.Q.words)
-					+'</button>'
-					+ '</div>',
-				onActivate: function (dialog) {
-					// fill QR code
-					Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
-						var $qrIcon = $(".Streams_invite_QR_content", dialog);
-						new QRCode($qrIcon[0], {
-							text: rsd.url,
-							width: 250,
-							height: 250,
-							colorDark : "#000000",
-							colorLight : "#ffffff",
-							correctLevel : QRCode.CorrectLevel.H
-						});
-						$('.Q_button', dialog).plugin('Q/clickable')
-							.on(Q.Pointer.click, function () {
-								Q.Dialogs.push({
-									title: Q.getObject(['invite', 'dialog', 'photo'], text),
-									apply: true,
-									content:
-										'<div class="Streams_invite_photo_dialog">' +
-										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
-										'<div class="Streams_invite_photo_camera">' +
-										'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
-										'</div>' +
-										'</div>',
-									onActivate: function (dialog) {
-										// handle "photo" button
-										var photo = null;
-										var saveSizeName = {};
-										Q.each(Users.icon.sizes, function (k, v) {
-											saveSizeName[k] = v;
-										});
-										var o = {
-											path: 'Q/uploads/Users',
-											save: 'Users/icon',
-											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
-											saveSizeName: saveSizeName,
-											onFinish: function () {
-												Q.Dialogs.pop();
-											}
-										};
-										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
-									}
-								});
-							});
-					});
-				}
-			});
-			break;
-		}
-		return true;
-	}
-	if (o.identifier || o.token || o.xids || o.userIds || o.label) {
-		return _request();
-	}
-	Q.Text.get('Streams/content', function (err, text) {
-		var options = {
+                    window.location = Q.Links.sms(text);
+                });
+                break;
+            case "facebook":
+                window.open("https://www.facebook.com/sharer/sharer.php?u=" + rsd.url, "_blank");
+                break;
+            case "twitter":
+                window.open("http://www.twitter.com/share?url=" + rsd.url, "_blank");
+                break;
+            case "copyLink":
+                if (Q.getObject("share", navigator)) {
+                    navigator.share({url: rsd.url});
+                } else {
+                    Q.Clipboard.copy(rsd.url);
+                    Q.Text.get("Streams/content", function (err, result) {
+                        var text = result && result.invite;
+                        if (text) {
+                            var element = Q.alert(text.youCanNowPaste, {
+                                title: ''
+                            });
+                            setTimeout(function () {
+                                if (element === Q.Dialogs.element()) {
+                                    Q.Dialogs.pop();
+                                }
+                            }, Streams.invite.options.youCanNowPasteDuration);
+                        }
+                    });
+                }
+                break;
+            case "QR":
+                Q.Dialogs.push({
+                    className: 'Streams_invite_QR',
+                    title: Q.getObject(['invite', 'dialog', 'QRtitle'], text),
+                    content: '<div class="Streams_invite_QR_content"></div>'
+                    + '<div class="Q_buttons">'
+                    + '<button class="Q_button">'
+                    + text.invite.dialog.scannedQR.interpolate(Q.text.Q.words)
+                    +'</button>'
+                    + '</div>',
+                    onActivate: function (dialog) {
+                        // fill QR code
+                        Q.addScript("{{Q}}/js/qrcode/qrcode.js", function(){
+                            var $qrIcon = $(".Streams_invite_QR_content", dialog);
+                            new QRCode($qrIcon[0], {
+                                text: rsd.url,
+                                width: 250,
+                                height: 250,
+                                colorDark : "#000000",
+                                colorLight : "#ffffff",
+                                correctLevel : QRCode.CorrectLevel.H
+                            });
+                            $('.Q_button', dialog).plugin('Q/clickable')
+                                .on(Q.Pointer.click, function () {
+                                    Q.Dialogs.push({
+                                        title: Q.getObject(['invite', 'dialog', 'photo'], text),
+                                        apply: true,
+                                        content:
+                                        '<div class="Streams_invite_photo_dialog">' +
+                                        '<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
+                                        '<div class="Streams_invite_photo_camera">' +
+                                        '<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+                                        '</div>' +
+                                        '</div>',
+                                        onActivate: function (dialog) {
+                                            // handle "photo" button
+                                            var photo = null;
+                                            var saveSizeName = {};
+                                            Q.each(Users.icon.sizes, function (k, v) {
+                                                saveSizeName[k] = v;
+                                            });
+                                            var o = {
+                                                path: 'Q/uploads/Users',
+                                                save: 'Users/icon',
+                                                subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
+                                                saveSizeName: saveSizeName,
+                                                onFinish: function () {
+                                                    Q.Dialogs.pop();
+                                                }
+                                            };
+                                            $('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
+                                        }
+                                    });
+                                });
+                        });
+                    }
+                });
+                break;
+        }
+        return true;
+    }
+    if (o.identifier || o.token || o.xids || o.userIds || o.label) {
+        return _request();
+    }
+    Q.Text.get('Streams/content', function (err, text) {
+        var options = {
             title: o.title,
             identifierTypes: o.identifierTypes,
             userChooser: o.userChooser
         };
-		if(o.templateName) {
+        if(o.templateName) {
             options.templateName = o.templateName;
-		}
-		Streams.Dialogs.invite(publisherId, streamName, function (r) {
-			if (!r) return;
-			for (var option in r) {
-				o[option] = r[option];
-			}
-			if (r.sendBy) {
-				_sendBy(r, text);
-			} else {
-				_request();
-			}
-		}, options);
-	});
-	return null;
+        }
+        Streams.Dialogs.invite(publisherId, streamName, function (r) {
+            if (!r) return;
+            for (var option in r) {
+                o[option] = r[option];
+            }
+            if (r.sendBy) {
+                _sendBy(r, text);
+            } else {
+                _request();
+            }
+        }, options);
+    });
+    return null;
 };
 
 Streams.invite.options = {
@@ -5224,6 +5230,55 @@ Streams.isStream = function (value) {
  */
 Streams.isMessage = function (value) {
 	return Q.getObject('constructor.isConstructorOf', value) === 'Q.Streams.Message';
+};
+
+/**
+ * Converts the publisherId and the first 24 characters of
+ * an ID that is typically used as the final segment in a streamName
+ * to a hex string starting with "0x" representing a uint256 type.
+ * Both inputs are padded by 0's on the right in the hex string.
+ * For example Streams::toHexString("abc", "def") returns
+ * 0x6162630000000000646566000000000000000000000000000000000000000000
+ * while Streams::toHexString("abc", "123/def") returns
+ * 0x616263000000007b646566000000000000000000000000000000000000000000
+ * @static
+ * @method toHexString
+ * @param {string} publisherId - Takes the first 8 ASCII characters
+ * @param {string|integer} [streamId] - Takes the first 24 ASCII characters, or an unsigned integer up to PHP_INT_MAX
+ *  If the $streamId contains a slash, then the first part is interpreted as an unsigned integer up to 255,
+ *  and determines the 15th and 16th hexit in the string. This is typically used for "seriesId" under a publisher.
+ * @param {boolean} [isNotNumeric] - Set to true to encode $streamId as an ASCII string, even if it is numeric
+ * @return {string} A hex string starting with "0x..." followed by 16 hexits and then 24 hexits.
+ */
+Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
+	streamId = streamId || '';
+	var parts = streamId.split("/");
+	var seriesId = null;
+	if (parts.length > 1) {
+		seriesId = parts[0];
+		streamId = parts[1];
+		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
+			throw new Q.Exception('seriesId must be in range integer 0-255');
+		}
+	}
+
+	var publisherHex = publisherId.substring(0, 8).asc2hex();
+	var pad = "padStart";
+	var streamHex = streamId.toString(16);
+	if (!isNotNumeric && streamId && !isNaN(streamId)) {
+		if (Math.floor(streamId) !== streamId || streamId < 0) {
+			throw new Q.Exception('seriesId must be in range integer 0-255');
+		}
+	} else {
+		streamHex = streamId.substring(0, 24).asc2hex();
+		pad = "padEnd";
+	}
+	var hexFirstPart = publisherHex.padEnd(16, 0);
+	var hexSecondPart = eval('streamHex.' + pad + '(48, 0)');
+	if (seriesId) {
+		hexFirstPart = hexFirstPart.substring(0, 14) + seriesId.toString(16).padStart(2, '0');
+	}
+	return "0x" + hexFirstPart + hexSecondPart;
 };
 
 /**

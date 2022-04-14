@@ -62,7 +62,7 @@
 					'<button class="Q_button" name="buy">{{texts.PurchaseCredits}}</button>'
 				);
 				Q.Template.set('Assets/credits/buy',
-			'{{#each bonuses}}' +
+					'{{#each bonuses}}' +
 					'	<div class="Assets_credits_bonus">{{this}}</div>' +
 					'{{/each}}' +
 					'<div class="Assets_credits_buy"><input name="amount" value="{{amount}}"> {{texts.Credits}}</div>' +
@@ -100,7 +100,7 @@
 							if (!rate) {
 								return Q.alert(Assets.texts.credits.ErrorInvalidCurrency.interpolate({currency: currency}));
 							}
-							
+
 							// apply currency rate
 							var amount = Math.ceil(credits/rate);
 
@@ -998,33 +998,49 @@
 			 */
 			Web3: {
 				onTokenRemovedFromSale: new Q.Event(),
-				onTokenAddedToSale: new Q.Event(),
+				onTokenPutOnSale: new Q.Event(),
 				onTransfer: new Q.Event(),
-				onTransferAuthorship: new Q.Event(),
-				_onContractUpdated: {},
-				onContractUpdated: Q.Event.factory(this._onContractUpdated, [""]),
-				contracts: [],
+				onInstanceCreated: new Q.Event(),
+				onInstanceOwnershipTransferred: new Q.Event(),
+				onSeriesPutOnSale: new Q.Event(),
+				onSeriesRemovedFromSale: new Q.Event(),
 
 				/**
 				 * Check web3 provider (MetaMask) connected, and switch to valid chain
 				 * @method checkProvider
 				 * @param {Object} chain
 				 * @param {function} callback
+				 * @param {object} [options]
+				 * @param {object} [options.mode="contract"] - What to create "contract" or "factory"
 				 */
-				checkProvider: function (chain, callback) {
+				checkProvider: function (chain, callback, options) {
+					var mode = Q.getObject("mode", options) || "contract";
+
+					// if chain is a chainId, convert to chain
+					if (Q.typeOf(chain) === "string") {
+						chain = Assets.NFT.chains[chain];
+					}
+
 					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
 
+						var _process = function () {
+							if (mode === "contract") {
+								Assets.NFT.Web3.getContract(chain, callback, options);
+							} else if (mode === "factory") {
+								Assets.NFT.Web3.getFactory(chain, callback, options);
+							} else {
+								throw new Q.Exception("mode " + mode + " is not supported in Assets.NFT.Web3.checkProvider");
+							}
+						};
 						// check valid chain selected
 						if (window.ethereum.chainId === chain.chainId) {
-							Assets.NFT.Web3.getContract(chain, callback);
+							_process();
 						} else { // if no, lead to switch chain
-							Q.Users.Web3.setChain(chain, function () {
-								// after chain switched need update contract
-								Assets.NFT.Web3.contracts[chain.chainId] = null;
-								Assets.NFT.Web3.getContract(chain, callback);
+							Q.Users.Web3.switchChain(chain, function () {
+								_process();
 							}, function (err) {
 								Q.handle(callback, null, [err]);
 							});
@@ -1034,7 +1050,7 @@
 				/**
 				 * Set the info for a series
 				 * @method setSeriesInfo
-				 * @param {String} contractAddress
+				 * @param {String} chainId
 				 * @param {String} seriesId
 				 * @param {Object} info Only info.price is really required
 				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
@@ -1049,12 +1065,13 @@
 				 * @param {Address} [info.commission.address] where to send commissions to
 				 * @param {String} [info.baseURI] to override global baseURI, if necessary
 				 * @param {String} [info.suffix] to override global suffix, if necessary
-				 * @return {Promise} promise from ethers.Contract call transaction
+				 * @param {String} [info.contractAddress] to override global contract address for this chainId
+				 * @param {function} callback - called when transaction failed (with err true) or success (with err null)
 				 */
-				setSeriesInfo: function (contractAddress, seriesId, info, callback) {
-					if (typeof contractAddress !== 'string'
-					&& !(contractAddress instanceof String)) {
-						throw new Q.Error("contractAddress must be a string");
+				setSeriesInfo: function (chainId, seriesId, info, callback) {
+					if (typeof chainId !== 'string'
+						&& !(chainId instanceof String)) {
+						throw new Q.Error("chainId must be a string");
 					}
 					if (seriesId.toString().substr(0, 2) !== '0x') {
 						throw new Q.Error("seriesId must be a string starting with 0x");
@@ -1064,7 +1081,7 @@
 					var authorAddress = info.authorAddress || Q.Users.Web3.getSelectedXid();
 					var limit = info.limit || 0;
 					var onSaleUntil = info.onSaleUntil
-						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
+						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*365));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
 					var price = info.fixedPointPrice
 						? String(info.fixedPointPrice)
@@ -1074,16 +1091,115 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract(contractAddress)
-					.then(function (contract) {
-						return contract.setSeriesInfo(seriesId, 
-							[authorAddress, limit, 
+
+					Q.Assets.NFT.Web3.checkProvider(chainId, function (err, contract) {
+						if (err) {
+							return Q.handle(callback, null, [true]);
+						}
+
+						var _waitTransaction = function (transactionRequest) {
+							if (!Q.getObject("wait", transactionRequest)) {
+								Q.handle(callback, null, [true])
+								return Q.alert("Transaction request invalid!");
+							}
+
+							transactionRequest.wait(1).then(function (TransactionReceipt) {
+								if (Assets.NFT.Web3.isSuccessfulTransaction(TransactionReceipt)) {
+									Q.handle(callback, TransactionReceipt, [null, seriesId]);
+								} else {
+									Q.handle(callback, TransactionReceipt, ["transaction failed", seriesId]);
+								}
+							}, function (err) {
+								Q.alert(err.reason, {
+									title: "Error"
+								});
+								Q.handle(callback, null, [err.reason]);
+							});
+						};
+
+						contract.setSeriesInfo(seriesId,
+							[authorAddress, limit,
 								[onSaleUntil, currency, price],
 								[commissionFraction, commissionAddress], baseURI, suffix
 							]
-						);
-					}).catch(function (err) {
-						Q.alert(err);
+						).then(_waitTransaction).catch(function (err) {
+							Q.handle(callback, this, [err]);
+							Q.alert(Q.firstErrorMessage(err));
+						});
+					}, {
+						contractAddress: info.contractAddress
+					});
+				},
+				/**
+				 * Get or create factory
+				 * @method getFactory
+				 * @params {Object} chain
+				 * @params {function} callback
+				 * @params {object} [options]
+				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 */
+				getFactory: function (chain, callback, options) {
+					if (Q.isEmpty(window.ethereum)) {
+						return Q.handle(callback, null, ["Ethereum provider not found", null]);
+					}
+
+					// if chain is a chainId, convert to chain
+					if (Q.typeOf(chain) === "string") {
+						chain = Assets.NFT.chains[chain];
+					}
+
+					var _subMethod = function (factory) {
+						// if option checkWeb3 defined, check if web3 wallet connected
+						if (Q.getObject("checkWeb3", options) === true) {
+							return Q.Users.Web3.connect(function (err, provider) {
+								Q.handle(callback, null, [err, factory]);
+							});
+						}
+
+						// else just return factory
+						Q.handle(callback, null, [null, factory]);
+					};
+
+					var address = chain.factory;
+					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTFactoryTemplate.json")];
+					var pipe = new Q.pipe(urls, function (params) {
+						var contractURL = null;
+						Q.each(urls, function (i, url) {
+							if (contractURL || params[url][0] !== 200) {
+								return;
+							}
+
+							contractURL = url;
+						});
+
+						if (!contractURL) {
+							throw new Q.Exception("contract ABI url invalid");
+						}
+
+						// loading ABI json
+						$.getJSON(contractURL, function (ABI) {
+							var provider = new ethers.providers.Web3Provider(window.ethereum);
+							var factory = new ethers.Contract(address, ABI, provider.getSigner());
+
+							var events = {
+								InstanceCreated: "onInstanceCreated",
+								OwnershipTransferred: "onInstanceOwnershipTransferred"
+							};
+							Q.each(ABI, function (index, obj) {
+								Q.each(events, function (event1, event2) {
+									if (obj.type === "event" && obj.name === event1) {
+										contract.on(event1, function () {
+											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										});
+									}
+								});
+							});
+
+							_subMethod(factory);
+						});
+					});
+					Q.each(urls, function (i, url) {
+						Q.Request.getUrlStatus(url, pipe.fill(url));
 					});
 				},
 				/**
@@ -1093,6 +1209,7 @@
 				 * @params {function} callback
 				 * @params {object} [options]
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
+				 * @params {boolean} [options.contractAddress] If defined, used instead default contract address
 				 */
 				getContract: function (chain, callback, options) {
 					if (Q.isEmpty(window.ethereum)) {
@@ -1101,7 +1218,7 @@
 
 					// if chain is a chainId, convert to chain
 					if (Q.typeOf(chain) === "string") {
-						chain = Assets.NFT.Web3.chains[chain];
+						chain = Assets.NFT.chains[chain];
 					}
 
 					var _subMethod = function (contract) {
@@ -1116,36 +1233,51 @@
 						Q.handle(callback, null, [null, contract]);
 					};
 
-					var contract = Assets.NFT.Web3.contracts[chain.chainId];
+					var address = Q.getObject("contractAddress", options) || chain.contract;
+					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTContractTemplate.json")];
+					var pipe = new Q.pipe(urls, function (params) {
+						var contractURL = null;
+						Q.each(urls, function (i, url) {
+							if (contractURL || params[url][0] !== 200) {
+								return;
+							}
 
-					// if contract exists, return one
-					if (contract) {
-						return _subMethod(contract);
-					}
-
-					// loading ABI json
-					$.getJSON(Q.url("{{baseUrl}}/ABI/" + chain.contract + ".json"), function (ABI) {
-						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						contract = new ethers.Contract(chain.contract, ABI, provider.getSigner());
-
-						contract.on("TokenRemovedFromSale", function (tokenId) {
-							Q.handle(Assets.NFT.Web3.onTokenRemovedFromSale, null, [tokenId])
-						});
-						contract.on("TokenPutOnSale", function (tokenId, amount, consumeToken) {
-							Q.handle(Assets.NFT.Web3.onTokenAddedToSale, null, [tokenId, amount, consumeToken])
-						});
-						contract.on("Transfer", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.NFT.Web3.onTransfer, null, [oldAddress, newAddress, token])
-						});
-						contract.on("TransferAuthorship", function (oldAddress, newAddress, token) {
-							Q.handle(Assets.NFT.Web3.onTransferAuthorship, null, [oldAddress, newAddress, token])
+							contractURL = url;
 						});
 
-						Assets.NFT.Web3.contracts[chain.chainId] = contract;
+						if (!contractURL) {
+							throw new Q.Exception("contract ABI url invalid");
+						}
 
-						Q.handle(Assets.NFT.Web3.onContractUpdated(chain.chainId), null, [contract]);
+						// loading ABI json
+						$.getJSON(contractURL, function (ABI) {
+							var provider = new ethers.providers.Web3Provider(window.ethereum);
+							var contract = new ethers.Contract(address, ABI, provider.getSigner());
 
-						return _subMethod(contract);
+							var events = {
+								TokenRemovedFromSale: "onTokenRemovedFromSale",
+								TokenPutOnSale: "onTokenAddedToSale",
+								Transfer: "onTransfer",
+								OwnershipTransferred: "onTransferOwnership",
+								TokenBought: "onTokenBought",
+								SeriesPutOnSale: "onSeriesPutOnSale",
+								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+							};
+							Q.each(ABI, function (index, obj) {
+								Q.each(events, function (event1, event2) {
+									if (obj.type === "event" && obj.name === event1) {
+										contract.on(event1, function () {
+											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										});
+									}
+								});
+							});
+
+							_subMethod(contract);
+						});
+					});
+					Q.each(urls, function (i, url) {
+						Q.Request.getUrlStatus(url, pipe.fill(url));
 					});
 				},
 				/**
@@ -1295,7 +1427,7 @@
 							title: texts.errors.Error
 						});
 					}
-					function _waitTransaction(transactionRequest) {
+					var _waitTransaction = function (transactionRequest) {
 						if (!Q.getObject("wait", transactionRequest)) {
 							Q.handle(callback, null, [true])
 							return Q.alert("Transaction request invalid!");
@@ -1330,10 +1462,7 @@
                             }).catch(function (err) {
                                 debugger;
                             });*/
-							contract.buy(tokenId, {
-								value: price.price,
-								gasLimit: 10000000
-							}).then(_waitTransaction);
+							contract.buy(tokenId, {value: price.price, gasLimit: 10000000}).then(_waitTransaction);
 						});
 					});
 				},
@@ -1373,17 +1502,17 @@
 			}
 		},
 		Web3: {
-		   	/**
-		   	 * Generates a link for opening a coin
-		   	 * @static
-		   	 * @method addAsset
-		   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+			/**
+			 * Generates a link for opening a coin
+			 * @static
+			 * @method addAsset
+			 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
 			 * @param {String} symbol A ticker symbol or shorthand, up to 5 chars.
 			 * @param {Number} decimals The number of decimals in the token
 			 * @param {String} [image] A string url of the token logo
-		   	 * @return {String}
-		   	 */			
-			addAsset: {	
+			 * @return {String}
+			 */
+			addAsset: {
 				metamask: function (asset, symbol, decimals, image) {
 					return ethereum.request({
 						method: 'wallet_watchAsset',
@@ -1402,60 +1531,60 @@
 					window.open(Assets.Web3.Links.addAsset.trustwallet('c60_t'+asset));
 				}
 			},
-			
+
 			Links: {
-			   	/**
-			   	 * Generates a link for adding an asset
-			   	 * @static
-			   	 * @method addAsset
-			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
-			   	 * @return {String}
-			   	 */
+				/**
+				 * Generates a link for adding an asset
+				 * @static
+				 * @method addAsset
+				 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+				 * @return {String}
+				 */
 				addAsset: { trustwallet: function (asset) {
-					return 'https://link.trustwallet.com/add_asset?asset='+asset;
-				}},
-			   	/**
-			   	 * Generates a link for opening a coin
-			   	 * @static
-			   	 * @method openCoin
-			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
-			   	 * @return {String}
-			   	 */
-			   	openCoin: { trustwallet: function (asset) {
-					return 'https://link.trustwallet.com/open_coin?asset='+asset;
-				}},
-			   	/**
-			   	 * Generates a link for sending a payment
-			   	 * @static
-			   	 * @method send
-			   	 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
-			   	 * @param {String} address some Ethereum address
-			   	 * @param {Number} amount The amount to send
-			   	 * @param {String} [memo] What to say with the payment
-			   	 * @return {String}
-			   	 */
-			   	send: { trustwallet: function (asset, address, amount, memo) {
-					return Q.url('https://link.trustwallet.com/send', {
-						asset: asset,
-						address: address,
-						amount: amount,
-						memo: memo || ''
-					});
-				}},
-			   	/**
-			   	 * Generates a link for swapping between tokens
-			   	 * @static
-			   	 * @method addAsset
-			   	 * @param {String} from in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
-			   	 * @param {String} to in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
-			   	 * @return {String}
-			   	 */
-			   	swap: { trustwallet: function (from, to) {
-					return Q.url('https://link.trustwallet.com/swap', {
-						from: from,
-						to: to,
-					});
-				}}
+						return 'https://link.trustwallet.com/add_asset?asset='+asset;
+					}},
+				/**
+				 * Generates a link for opening a coin
+				 * @static
+				 * @method openCoin
+				 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+				 * @return {String}
+				 */
+				openCoin: { trustwallet: function (asset) {
+						return 'https://link.trustwallet.com/open_coin?asset='+asset;
+					}},
+				/**
+				 * Generates a link for sending a payment
+				 * @static
+				 * @method send
+				 * @param {String} asset in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+				 * @param {String} address some Ethereum address
+				 * @param {Number} amount The amount to send
+				 * @param {String} [memo] What to say with the payment
+				 * @return {String}
+				 */
+				send: { trustwallet: function (asset, address, amount, memo) {
+						return Q.url('https://link.trustwallet.com/send', {
+							asset: asset,
+							address: address,
+							amount: amount,
+							memo: memo || ''
+						});
+					}},
+				/**
+				 * Generates a link for swapping between tokens
+				 * @static
+				 * @method addAsset
+				 * @param {String} from in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+				 * @param {String} to in UAI format https://github.com/trustwallet/developer/blob/master/assets/universal_asset_id.md
+				 * @return {String}
+				 */
+				swap: { trustwallet: function (from, to) {
+						return Q.url('https://link.trustwallet.com/swap', {
+							from: from,
+							to: to,
+						});
+					}}
 			}
 		}
 	};
@@ -1484,9 +1613,12 @@
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
+		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/series.js",
+		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
+		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
 	});
-	
+
 	Q.onInit.add(function () {
 		// preload this, so it's available on gesture handlers
 		Q.Text.get('Assets/content', function (err, text) {

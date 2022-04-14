@@ -82,13 +82,13 @@ function Streams_before_Q_objects()
 		// schedule the invite to be accepted after the user logs in
 		$_SESSION['Streams']['invite']['token'] = $token;
 		// tell Users plugin we have an icon ready for a certain user
-		$splitId = Q_Utils::splitId($invite->invitingUserId);
+		$splitId = Q_Utils::splitId($invite->invitingUserId, 3, "/");
 		$path = 'Q/uploads/Users';
 		$subpath = $splitId.'/invited/'.$token;
-		$pathToToken = APP_DIR.'/web/'.$path.DS.$subpath;
+		$pathToToken = APP_DIR.'/web/'.$path.'/'.$subpath;
 		Q_Utils::normalizePath($pathToToken);
 		if (file_exists($pathToToken)) {
-			$_SESSION['Users']['register']['icon'] = Q_Html::themedUrl("$path/$subpath");
+			$_SESSION['Users']['register']['icon'] = Q_Html::themedUrl("$path/$subpath", array("baseUrlPlaceholder" => true));
 		}
 		return;
 	}

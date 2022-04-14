@@ -11,7 +11,7 @@ class Assets_NFT
 {
 	static $categoryStreamName = "Assets/user/NFTs";
 
-    /**
+	/**
 	 * Check if NFT category exists, and create if not
 	 * @method category
 	 * @param {string} [$publisherId=null] If null - logged user id used.
@@ -30,7 +30,7 @@ class Assets_NFT
 
 		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
 		if (!$stream) {
-			Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
+			$stream = Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
 		}
 
 		if ($stream->getAttribute('Assets/NFT/minted/total', null) === null) {
@@ -44,11 +44,11 @@ class Assets_NFT
 	/**
 	 * Get or create new NFT empty stream for composer
 	 * This is for user creating new NFT streams in the interface
-	 * @method getNFTStream
+	 * @method getComposerStream
 	 * @param {string} [$userId=null] If null loggedin user id used
 	 * @return {Streams_Stream}
 	 */
-	static function getNFTStream ($userId = null) {
+	static function getComposerStream ($userId = null) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
 		$category = self::category($userId);
 
@@ -129,7 +129,7 @@ class Assets_NFT
 
 		// change stream relation
 		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT", $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
@@ -173,20 +173,25 @@ class Assets_NFT
 		$chainsClient = array();
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
+			$name = Q::ifset($chain, "name", null);
+			$default = $i == Q::app();
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
+			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
+			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
+			$factoryPath = null;
 			$rpcUrl = Q::ifset($chain, "rpcUrl", null);
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
 			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", null);
 			$chainId = Q::ifset($chain, "appId", null);
 
-			if (!$contract || !$rpcUrl) {
-				unset($chain[$i]);
+			if (!$rpcUrl) {
 				continue;
 			}
 
 			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
 			$rpcUrls = array($rpcUrl);
-			$temp = compact("chainId", "contract", "rpcUrls", "blockExplorerUrl");
+			$blockExplorerUrls = array($blockExplorerUrl);
+			$temp = compact("name", "chainId", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrls");
 
 			foreach ($currencies as $currency) {
 				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
@@ -196,8 +201,6 @@ class Assets_NFT
 				}
 			}
 
-			$temp["default"] = $i == Users::communityId();
-
 			if ($needChainId && $chainId == $needChainId) {
 				return $temp;
 			}
@@ -206,5 +209,109 @@ class Assets_NFT
 		}
 
 		return $chainsClient;
+	}
+
+	/**
+	 * Get default chain
+	 * @method getDefaultChain
+	 * @params {array} [$chains]
+	 * @static
+	 * @return array
+	 */
+	static function getDefaultChain ($chains = null) {
+		$chains = $chains ?: self::getChains();
+		foreach ($chains as $chain) {
+			if ($chain["default"]) {
+				return $chain;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * Get NFT json data
+	 * @method getJson
+	 * @param {String} $chainId
+	 * @param {String} $contract
+	 * @param {String} $tokenURI
+	 * @param {Sreing} [$caching=true] If false, don't use cache, but real request and update cache.
+	 * @param {Integer} [$cacheDuration=31536000] default 1 year
+	 * @static
+	 * @return array
+	 */
+	static function getJson ($chainId, $contract, $tokenURI, $caching=true, $cacheDuration=31536000) {
+		$cache = Users_Web3::getCache($chainId, $contract, "getNFTJsonData", $tokenURI, $cacheDuration);
+		if ($caching && $cache->wasRetrieved()) {
+			return Q::json_decode($cache->result, true);
+		}
+
+		$response = Q_Utils::get($tokenURI, null, array(
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false
+		));
+		$cache->result = $response;
+		$cache->save();
+
+		return Q::json_decode($response, true);
+	}
+
+	/**
+	 * Get NFT json data
+	 * @method getJson
+	 * @param {String} $chainId
+	 * @param {String} $contractAddress
+	 * @param {array} $wallets - array of wallet addresses
+	 * @static
+	 * @return array
+	 */
+	static function clearContractCache ($chainId, $contractAddress, $wallets) {
+		$longDuration = 31104000;
+		$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
+
+		if (!is_array($wallets)) {
+			$wallets = array($wallets);
+		}
+
+		foreach ($wallets as $wallet) {
+			Users_Web3::getCache($chainId, $contractAddress, "tokensByOwner", array($wallet, $tokensByOwnerLimit), $longDuration)->remove();
+
+			$balanceOfOwnerRow = Users_Web3::getCache($chainId, $contractAddress, "balanceOf", $wallet, $longDuration);
+			if ($balanceOfOwnerRow->wasRetrieved()) {
+				$balanceOfOwner = (int)Q::json_decode($balanceOfOwnerRow->result);
+				$balanceOfOwnerRow->remove();
+				for ($i = 0; $i < $balanceOfOwner; $i++) {
+					Users_Web3::getCache($chainId, $contractAddress, "tokenOfOwnerByIndex", array($wallet, $i), $longDuration)->remove();
+				}
+			}
+		}
+	}
+
+	/**
+	 * Replace all relations with only one relation
+	 * @method replaceAllRelationsWithOne
+	 * @param {Streams_Stream} $category - category stream
+	 * @param {String} $relationType
+	 * @param {Streams_stream} $stream - stream to relate to category
+	 * @static
+	 */
+	static function replaceAllRelationsWithOne ($category, $relationType, $stream) {
+		$relatedStreams = Streams_RelatedTo::select()->where(array(
+			"toPublisherId" => $category->publisherId,
+			"toStreamName" => $category->name,
+			"type" => $relationType
+		))->fetchDbRows();
+		foreach ($relatedStreams as $relation) {
+			Streams::unrelate(null, $relation->toPublisherId, $relation->toStreamName, $relation->type, $relation->fromPublisherId, $relation->fromStreamName, array(
+				"skipAccess" => true,
+				"skipMessageTo" => true,
+				"skipMessageFrom" => true
+			));
+		}
+		Streams::relate(null, $category->publisherId, $category->name, $relationType, $stream->publisherId, $stream->name, array(
+			"skipAccess" => true,
+			"skipMessageTo" => true,
+			"skipMessageFrom" => true,
+			"ignoreCache" => true
+		));
 	}
 };

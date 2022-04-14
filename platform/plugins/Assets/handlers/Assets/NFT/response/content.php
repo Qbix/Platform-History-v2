@@ -1,35 +1,73 @@
 <?php
 function Assets_NFT_response_content ($params) {
-	$loggedInUser = Users::loggedInUser();
-	$request = array_merge($_REQUEST, $params);
 	$uri = Q_Dispatcher::uri();
-	$tokenId = Q::ifset($r, 'tokenId', Q::ifset($uri, 'tokenId', null));
-	$chainId = Q::ifset($r, 'chainId', Q::ifset($uri, 'chainId', null));
+	$request = array_merge($_REQUEST, $params);
+	$tokenId = Q::ifset($request, 'tokenId', Q::ifset($uri, 'tokenId', null));
+	$chainId = Q::ifset($request, 'chainId', Q::ifset($uri, 'chainId', null));
+	if (!$chainId) {
+		$chain = Assets_NFT::getDefaultChain();
+		if (!$chain) {
+			throw new Exception("Default chain not found");
+		}
 
+		$chainId = $chain["chainId"];
+	}
+
+	$url = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
 	$needle = ".json";
-	$isJson = substr_compare($chainId, $needle, -strlen($needle)) === 0;
+	$isJson = substr_compare($url, $needle, -strlen($needle)) === 0;
 	if ($isJson) {
 		$chainId = str_replace($needle, "", $chainId);
+		$tokenId = str_replace($needle, "", $tokenId);
 	}
 
-	if (empty($tokenId)) {
-		throw new Exception("NFT::view tokenId required!");
+	if ($tokenId === null) {
+		throw new Exception("tokenId required!");
 	}
 	if (empty($chainId)) {
-		throw new Exception("NFT::view chainId required!");
+		throw new Exception("chainId required!");
 	}
 
-    $communityId = Users::communityId();
     $texts = Q_Text::get('Assets/content');
 
-	$url = implode("/", array(Q_Request::baseUrl(), "NFT", $tokenId, $chainId));
+	// try to get stream
+	$stream = Streams::fetchOne(null, $tokenId, "Assets/NFT/".$chainId);
+	if ($stream) {
+		if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
+			$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
+		} else {
+			foreach (array("original", "x", "2048", "700x", "700x980") as $size) {
+				$image = $stream->iconUrl($size.'.png');
+				if (is_file(Q_Uri::filenameFromUrl($image))) {
+					break;
+				}
+			}
+		}
+		$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
+		if ($isJson) {
+			header("Content-type: application/json");
+			echo Q::json_encode(array(
+				"name" => $stream->title,
+				"description" => $stream->content,
+				"external_url" => $url,
+				"image" => $image,
+				"animation_url" => $stream->getAttribute('animation_url'),
+				"attributes" => $assetsNFTAttributes,
+			), JSON_PRETTY_PRINT);
+			exit;
+		}
+
+		$tokenId = $stream->getAttribute("tokenId");
+		$chainId = $stream->getAttribute("chainId");
+	}
+
 	$nftInfo = Q::event("Assets/NFT/response/getInfo", compact("tokenId", "chainId"));
 	if ($isJson) {
 		header("Content-type: application/json");
 		echo Q::json_encode(array(
 			"name" => $nftInfo["data"]["name"],
 			"description" => $nftInfo["data"]["description"],
-			"external_url" => $url,
+			"external_url" => $nftInfo["tokenURI"],
 			"image" => $nftInfo["data"]["image"],
 			"animation_url" => $nftInfo["data"]["animation_url"],
 			"attributes" => $nftInfo["data"]["attributes"]
