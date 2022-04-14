@@ -14,9 +14,14 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 {
     public static function createForumUser ($name, $email, $password, $platformId) {
         // don't save api key to logs
-        $apiKey = Q_Config::expect("Discourse", "API", "key");
-        $apiHost = Q_Config::expect("Discourse", "API", "host");
-        $userName = Q_Config::expect("Discourse", "API", "apiUsername");
+        $apiKey = Q_Config::get("Discourse", "API", "key", null);
+        $apiHost = Q_Config::get("Discourse", "API", "host", null);
+        $userName = Q_Config::get("Discourse", "API", "apiUsername", null);
+
+        if(is_null($apiKey) || is_null($apiHost)) {
+            return;
+        }
+
         $url = sprintf("%s/users", $apiHost);
 
         $fields = array(
@@ -101,9 +106,14 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
     public static function updateForumUserAvatar() {
         $qbixUserId = Users::loggedInUser(true)->id;
-        $apiKey = Q_Config::expect("Discourse", "API", "key");
-        $apiHost = Q_Config::expect("Discourse", "API", "host");
-        $userName = Q_Config::expect("Discourse", "API", "apiUsername");
+        $apiKey = Q_Config::get("Discourse", "API", "key", null);
+        $apiHost = Q_Config::get("Discourse", "API", "host", null);
+        $userName = Q_Config::get("Discourse", "API", "apiUsername", null);
+
+        if(is_null($apiKey) || is_null($apiHost)) {
+            return;
+        }
+
         $stream = Streams::fetchOne($qbixUserId, $qbixUserId, 'Streams/user/discourse');
 
         if(!$stream) {
@@ -128,9 +138,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $tail = str_replace($baseUrl . '/Q/uploads/', DS, $avatarUrl);
         $imagePath = $head . $tail;
         if (!file_exists($imagePath)) {
-            throw new Q_Exception_MissingFile(array(
-                'filename' => $imagePath
-            ));
+            Q::log("File doesn't exist: ".$imagePath, "discourse");
+            return;
         }
 
         $imageInfo = getimagesize($imagePath);
