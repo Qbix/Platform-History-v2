@@ -9,16 +9,8 @@ function Streams_after_Users_setLoggedInUser($params)
 		if ($invite and $invite->accept(array(
 			'access' => true,
 			'subscribe' => true
-		)));
-		unset($_SESSION['Streams']['invite']['token']);
-		$splitId = Q_Utils::splitId($invite->invitingUserId);
-		$path = 'Q/uploads/Users';
-		$subpath = $splitId.'/invited/'.$token;
-		$pathToToken = APP_DIR.'/web/'.$path.DS.$subpath;
-		Q_Utils::normalizePath($pathToToken);
-		if (file_exists($pathToToken) && $user->icon != $subpath && !Users::isCustomIcon($user->icon)) {
-			$user->icon = Q_Html::themedUrl("$path/$subpath");
-			$user->save();
+		))) {
+			unset($_SESSION['Streams']['invite']['token']);
 		}
 	}
 

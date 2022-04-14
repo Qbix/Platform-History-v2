@@ -46,7 +46,8 @@ abstract class Users extends Base_Users
 			return false;
 		}
 		return strpos($icon, 'imported') !== false
-		or preg_match("/\/icon\/[0-9]+/", $icon);
+		|| preg_match("/\/icon\/[0-9]+/", $icon)
+		|| strpos($icon, 'invited') !== false;
 	}
 
 	/**
@@ -1145,6 +1146,7 @@ abstract class Users extends Base_Users
 		if (!is_array($icon) and !empty($_SESSION['Users']['register']['icon'])) {
 			$icon = $_SESSION['Users']['register']['icon'];
 			unset($_SESSION['Users']['register']['icon']);
+			$user->set('skipIconSearch', $icon);
 		}
 		if (is_array($icon)) {
 			$user->set('skipIconSearch', $icon);
