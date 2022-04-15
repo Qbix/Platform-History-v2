@@ -1024,7 +1024,7 @@
 
                                 _fileManagerTool.state.onSelect.set(function (stream) {
                                     console.log('Streams/fileManager onSelect', stream)
-                                    var attributes = JSON.parse(stream['attributes']);
+                                    var attributes = JSON.parse(stream.fields.attributes);
                                     var link = Q.url(attributes['Q.file.url']);
                                     console.log('Streams/fileManager attributes', link)
                                     if(stream['type'] == 'Streams/video') {

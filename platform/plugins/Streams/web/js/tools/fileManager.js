@@ -148,6 +148,8 @@
                 Q.addScript("{{Q}}/js/contextual.js", function () {
                     $(fileManagerControlsAddCon).plugin('Q/contextual', {
                         className: "Streams_fileManager_uploadFile",
+                        fadeTime: 300,
+                        doubleBlink: true,
                         onConstruct: function (contextual, cid) {
                             tool.addonsContextual = this;
                             contextualToolLoadHandler();
@@ -354,10 +356,10 @@
 
                     //var attributes = JSON.parse(fileStream['attributes']);
                     //console.log('loadFilesList for', attributes);
-                    if(fileStream.type == 'Streams/video') {
+                    if(fileStream.fields.type == 'Streams/video') {
                         $(fileItemInner).tool("Streams/preview", {
-                            publisherId: fileStream.publisherId,
-                            streamName: fileStream.name,
+                            publisherId: fileStream.fields.publisherId,
+                            streamName: fileStream.fields.name,
                             type: "Streams/video"
                         }).tool("Streams/video/preview").activate(function () {
                             console.log('Streams/video/preview this.element', this);
@@ -378,10 +380,10 @@
                                 iconCon.appendChild(icon);
                             })
                         });
-                    } else  if(fileStream.type == 'Streams/audio') {
+                    } else  if(fileStream.fields.type == 'Streams/audio') {
                         $(fileItemInner).tool("Streams/preview", {
-                            publisherId: fileStream.publisherId,
-                            streamName: fileStream.name,
+                            publisherId: fileStream.fields.publisherId,
+                            streamName: fileStream.fields.name,
                             type: "Streams/audio"
                         }).tool("Streams/audio/preview").activate(function () {
                             var streamsPreview = Q.Tool.from(fileItemInner, "Streams/preview");
@@ -399,10 +401,10 @@
 
 
                         });
-                    } else if(fileStream.type == 'Streams/image') {
+                    } else if(fileStream.fields.type == 'Streams/image') {
                         $(fileItemInner).tool("Streams/preview", {
-                            publisherId: fileStream.publisherId,
-                            streamName: fileStream.name,
+                            publisherId: fileStream.fields.publisherId,
+                            streamName: fileStream.fields.name,
                             type: "Streams/image"
                         }).tool("Streams/image/preview").activate(function () {
                             var streamsPreview = Q.Tool.from(fileItemInner, "Streams/preview");
@@ -414,10 +416,10 @@
                             imagePreview.preview.options.actions.size = '16';
                             imagePreview.options.templates.edit.name = 'Streams/fileManager/image/preview/edit';
                         });
-                    } else if(fileStream.type == 'Streams/category') {
+                    } else if(fileStream.fields.type == 'Streams/category') {
                         $(fileItemInner).tool("Streams/preview", {
-                            publisherId: fileStream.publisherId,
-                            streamName: fileStream.name,
+                            publisherId: fileStream.fields.publisherId,
+                            streamName: fileStream.fields.name,
                             type: "Streams/image"
                         }).tool("Streams/category/preview").activate(function () {
                             var categoryPreview = Q.Tool.from(fileItemInner, "Streams/category/preview");
@@ -431,7 +433,7 @@
                     tool.explorerEl.appendChild(fileItem);
 
                     fileItem.addEventListener('click', function (e) {
-                        if(fileStream.type == 'Streams/category') {
+                        if(fileStream.fields.type == 'Streams/category') {
                             tool.state.currentDirStreamName = fileStream['name'];
                            // tool.state.history.streams.push(fileStream['name']);
                             var elementsToRemove = tool.state.history.streams.length - tool.state.history.currentIndex - 1;

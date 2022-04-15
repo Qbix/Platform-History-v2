@@ -2802,6 +2802,17 @@ Streams_webrtc_desktop-screen .Streams_webrtc_popup-box {
 }
 
 
+.Streams_webrtc_streaming_manager {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+}
+.Streams_webrtc_streaming_manager .Q_button{
+    background-color: #28a745;
+    border-color: #28a745;
+}
 .Streams_webrtc_streaming .Streams_webrtc_streaming_url,
 .Streams_webrtc_streaming label {
     border: 1px solid #e1e1e1;

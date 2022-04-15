@@ -261,6 +261,7 @@
             "fbStartLive": "Go Live",
             "fbStopLive": "End Livestream",
             "streamingSettings": "Settings",
+            "manageStream": "Manage Livestream",
             "fbEmbedCode": "Embed",
             "copy": "Copy",
             "streamToRTMP": "Stream to custom RTMP",
