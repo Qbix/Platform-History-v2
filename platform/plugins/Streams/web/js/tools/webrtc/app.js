@@ -1585,6 +1585,7 @@ window.WebRTCRoomClient = function app(options){
             var _activeScene = null;
             var _defaultScene = null;
 
+
             var Scene = function () {
                 this.title = null;
                 this.sources = [];
@@ -1599,12 +1600,83 @@ window.WebRTCRoomClient = function app(options){
 
 
             function createScene(name) {
+                console.log('canvasComposer: createScene');
                 var newScene = new Scene();
                 newScene.title = name;
+                _scenes.push(newScene);
+            }
+
+            function removeScene(sceneInstance) {
+                console.log('canvasComposer: removeScene', sceneInstance);
+                for (let s in _scenes) {
+                    if (_scenes[s] == sceneInstance) {
+                        _scenes.splice(s, 1)
+                        break;
+                    }
+                }
+                console.log('canvasComposer: removeScene: scenes.sources', sceneInstance.sources.length);
+
+                for (let r in sceneInstance.sources) {
+                    videoComposer.removeSource(sceneInstance.sources[r], sceneInstance, true);
+                }
+                console.log('canvasComposer: removeScene: scenes.sources 2', sceneInstance.sources.length);
+
             }
 
             function getScenes() {
                 return _scenes;
+            }
+
+            function moveSceneUp(scene) {
+                let index;
+                for(let i in _scenes) {
+                    if(scene == _scenes[i]) {
+                        index = parseInt(i);
+                        break;
+                    }
+                }
+                if(index != null) {
+                    moveScene(index, index - 1);
+                }
+            }
+
+            function moveSceneDown(scene) {
+                let index;
+                for(let i in _scenes) {
+                    if(scene == _scenes[i]) {
+                        index = parseInt(i);
+                        break;
+                    }
+                }
+                if(index != null) {
+                    moveScene(index, index + 1);
+                }
+            }
+
+            function moveScene(old_index, new_index) {
+                console.log('moveScene', old_index, new_index);
+                if (new_index < 0) {
+                    new_index = 0;
+                }
+                if (new_index >= _scenes.length) {
+                    new_index = _scenes.length - 1;
+                }
+                _scenes.splice(new_index, 0, _scenes.splice(old_index, 1)[0]);
+                _eventDispatcher.dispatch('sceneMoved');
+
+                return _scenes;
+            }
+
+            function selectScene(sceneInstance) {
+                let sceneExists = false;
+                for(let s in _scenes) {
+                    if(_scenes[s] == sceneInstance) sceneExists = true;
+                }
+                if(sceneExists) {
+                    _activeScene = sceneInstance;
+                    return true;
+                }
+                return false;
             }
 
             function getActiveScene() {
@@ -2007,6 +2079,7 @@ window.WebRTCRoomClient = function app(options){
                                 return {index:j, childItemsNum: childItems };
                             }
                         }
+                        return {index:0, childItemsNum: 0 };
                     }
 
                     if(newSource.sourceType == 'webrtc') {
@@ -5258,6 +5331,13 @@ window.WebRTCRoomClient = function app(options){
                 videoTrackIsMuted: function () {
                     return _videoTrackIsMuted;
                 },
+                createScene: createScene,
+                removeScene: removeScene,
+                moveSceneUp: moveSceneUp,
+                moveSceneDown: moveSceneDown,
+                getScenes: getScenes,
+                selectScene: selectScene,
+                getActiveScene: getActiveScene
             }
         }(app))
 
