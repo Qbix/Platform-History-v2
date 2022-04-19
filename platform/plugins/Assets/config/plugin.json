@@ -230,9 +230,9 @@
 		},
 		"canCheckPaid": ["Users/owners", "Users/admins", "Assets/admins"],
 		"NFT": {
-			"factory": {
-				"contract": {
-					"address": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
+			"contract": {
+				"allow": {
+					"author": true
 				}
 			},
 			"attributes": {

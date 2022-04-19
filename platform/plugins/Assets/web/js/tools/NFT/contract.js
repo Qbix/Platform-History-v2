@@ -37,6 +37,10 @@
         Q.Text.get('Assets/content', pipe.fill('text'), {
             ignoreCache: true
         });
+
+        // is admin
+        var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
+        tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
     },
 
     { // default options here
@@ -156,6 +160,10 @@
                     Q.Streams.get.force(state.userId, selectedStreamName, function (err) {
                         if (err) {
                             if (Q.getObject([0, "classname"], err) === "Q_Exception_MissingRow") {
+                                if (!tool.isAdmin && !Q.getObject("NFT.contract.allow.author", Assets)) {
+                                    return $customContract.remove();
+                                }
+
                                 Q.Template.render("Assets/NFT/contract/composer", {
                                     iconUrl: Q.url("{{Q}}/img/actions/add.png")
                                 }, function (err, html) {
@@ -389,7 +397,7 @@
             var streamName = options.streamName;
             var chainId = streamName.split("/").pop();
             var chain = NFT.chains[chainId];
-            var relationType = "Assets/NFT/series/" + contractAddress;
+            var relationType = Assets.NFT.seriesRelationType.interpolate({contract: contractAddress});
 
             $element.attr("data-contract", contractAddress);
 
