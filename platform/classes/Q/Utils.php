@@ -1568,7 +1568,7 @@ class Q_Utils
 	 * @static
 	 * @param {string} $dir
 	 */
-	function rmdir($dir)
+	static function rmdir($dir)
 	{
 		if (!file_exists($dir)) {
 			return true;
