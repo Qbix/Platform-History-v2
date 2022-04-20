@@ -1560,6 +1560,32 @@ class Q_Utils
 			throw new Q_Exception("Link $link to target $target was not created");
 		}
 	}
+
+	/**
+	 * Recursively traverse directory and remove everything in it.
+	 * Then remove the directory.
+	 * @method rmdir
+	 * @static
+	 * @param {string} $dir
+	 */
+	function rmdir($dir)
+	{
+		if (!file_exists($dir)) {
+			return true;
+		}
+		if (!is_dir($dir)) {
+			return unlink($dir);
+		}
+		foreach (scandir($dir) as $item) {
+			if ($item == '.' || $item == '..') {
+				continue;
+			}
+			if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+				return false;
+			}
+		}
+		return rmdir($dir);
+	}
 	
 	/**
 	 * Used to split ids into one or more segments, in order to store millions
