@@ -47,6 +47,7 @@
 .Assets_NFT_series_preview_tool .Q_seconds {
     display: inline-block;
     width: 20px;
+    text-align: center;
 }
 .Assets_NFT_series_preview_tool .Assets_NFT_series_sale,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_sale > * {
@@ -80,6 +81,12 @@
 .Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_sale .offSale {
     display: block;
 }
+.Assets_NFT_series_composer .Assets_nft_series_author label {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
 /***create nft form css***/
 .Assets_NFT_series_composer {
     width: 350px;

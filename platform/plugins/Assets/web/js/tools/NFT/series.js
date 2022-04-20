@@ -75,6 +75,20 @@
         }, {
             ignoreCache: true
         });
+
+        // tried to request canManageSeries method, but it don't work
+        /*Q.req("Assets/NFTseries", "getInfo", function (err, response) {
+            if (err) {
+                return;
+            }
+
+            var info = response.slots.getInfo;
+        }, {
+            fields: {
+                seriesId: state.seriesId,
+                chainId: state.chainId
+            }
+        });*/
     },
 
     { // default options here
@@ -234,6 +248,7 @@
             if (untilTime) {
                 onMarketPlace = untilTime*1000 > Date.now();
             }
+            var authorUserId = stream.getAttribute("authorId") || stream.fields.publisherId;
 
             var currencies = NFT.currencies.map(function (item) {
                 return item[state.chainId] ? {symbol: item.symbol, selected: item.symbol===selectedCurrency} : false;
@@ -288,6 +303,18 @@
                     //    event.preventDefault();
                     //    $icon.trigger("click");
                     //});
+
+                    Q.req("Users/external", "data", function (err, response) {
+                        if (err) {
+                            return;
+                        }
+
+                        $("input[name=author]", dialog).val(response.slots.data.wallet);
+                    }, {
+                        fields: {
+                            userId: authorUserId
+                        }
+                    });
 
                     // switch onMarketPlace
                     var $onMarketPlace = $(".Assets_nft_check", dialog);
@@ -403,11 +430,14 @@
 
     Q.Template.set('Assets/NFT/series/Create',
 `<form>
+        {{#if isAdmin}}
+        <div class="Assets_nft_form_group Assets_nft_series_author">
+            <label>{{NFT.series.Author}}:</label><input name="author">
+        </div>
+        {{/if}}
         <div class="Assets_nft_form_group">
             <div class="Assets_nft_market">
-                <div>
-                    <label>{{NFT.series.OnSale}} :</label>
-                </div>
+                <label>{{NFT.series.OnSale}} :</label>
                 <label class="switch">
                     <input type="checkbox" {{#if onMarketPlace}}checked{{/if}} class="Assets_nft_check">
                     <span class="slider round"></span>
