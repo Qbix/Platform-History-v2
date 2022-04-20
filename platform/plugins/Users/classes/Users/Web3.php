@@ -3,6 +3,7 @@ require_once USERS_PLUGIN_DIR.'/vendor/autoload.php';
 use Web3\Web3;
 use Web3\Contract;
 use Crypto\Keccak;
+use Web3p\EthereumTx\Transaction;
 
 /**
  * @module Users
@@ -14,7 +15,9 @@ use Crypto\Keccak;
  */
 class Users_Web3 extends Base_Users_Web3 {
 	/**
-	 * Used to execute methods on the blockchain
+	 * Used to execute methods on the blockchain.
+	 * If you don't pass privateKey, then it returns the result of a "view" operation (possibly cached locally).
+	 * If you pass a privateKey, then it returns the hash of a transaction submitted to be mined.
 	 * @method execute
 	 * @static
 	 * @param {string|array} $contractAddress the contract address to call the method on,
@@ -29,7 +32,9 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {integer} [$cacheDuration=3600] How many seconds in the past to look for a cache
 	 * @param {string} [$defaultBlock='latest'] Can be one of 'latest', 'earliest', 'pending'
 	 * @param {integer} [$delay=0] If not found in cache, set how many microseconds to delay before querying the blockchain
-	 * @return array
+	 * @param {array} [$transaction=array()] Additional information for transaction, with possible keys 'from', 'gas', 'gasPrice', 'value', 'nonce'
+	 * @param {string} [$privateKey=null] Optionally pass an ECDSA private key here, to sign the transaction with (e.g. to change blockchain state).
+	 * @return {mixed} Returns the transaction hash, if privateKey was specified. Otherwise, returns the (possibly cached) result of "view" operation on the blockchain.
 	 */
 	static function execute (
 		$contractAddress,
@@ -39,7 +44,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		$caching = true,
 		$cacheDuration = null,
 		$defaultBlock = 'latest',
-		$delay = 0)
+		$delay = 0,
+		$transaction = array(),
+		$privateKey = null)
 	{
 		if (is_array($contractAddress)) {
 			list($contractAddress, $abi) = $contractAddress;
@@ -95,7 +102,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		foreach ($params as $param) {
 			$arguments[] = $param;
 		}
-		$arguments[] = function ($err, $results) use (&$data) {
+		$callback = function ($err, $results) use (&$data) {
 			if ($err) {
 				$errMessage = Q::ifset($err, "message", null);
 				if (!$errMessage) {
@@ -123,9 +130,58 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		};
 
-		// call contract function
 		$contract = (new Contract($rpcUrl, $abi, $defaultBlock))
-		->at($contractAddress);
+			->at($contractAddress);
+		if ($privateKey) {
+			$eth = $contract->eth;
+			$rawTransactionData = '0x' . 
+				call_user_func_array([$contract, "getData"], $arguments);
+			$transactionCount = null;
+			$eth->getTransactionCount($fromAccount,
+			function ($err, $count) use(&$transactionCount) {
+				if ($err) { 
+					throw new Q_Exception('transaction count error: ' . $err->getMessage());
+				}
+				$transactionCount = $count;
+			});
+			$transactionParams = array_merge(array(
+				'nonce' => "0x" . dechex($transactionCount->toString()),
+				'from' => $fromAccount,
+				'to' =>  $contractAddress,
+				// 'gas' =>  '0x' . dechex(8000000),
+				'value' => Q::ifset($transaction, 'value', '0x0'),
+				'data' => $rawTransactionData
+			), $transaction);
+			if (empty($transactionParams['gas'])) {
+				$estimatedGas = null;
+				$contract->estimateGas($transactionParams,
+				function ($err, $gas) use (&$estimatedGas) {
+					if ($err) {
+						throw new Q_Exception('estimate gas error: ' . $err->getMessage());
+					}
+					$estimatedGas = $gas;
+				});
+				$transactionParams['gas'] = $estimatedGas;
+			}
+			$tx = new Transaction($transactionParams);
+			$signedTx = '0x' . $tx->sign($fromAccountPrivateKey);
+			$transactionHash = null;
+			$eth->sendRawTransaction($signedTx,
+			function ($err, $txHash) use (&$transactionHash) {
+				if ($err) { 
+					throw new Q_Exception('transaction error: ' . $err->getMessage());
+				} else {
+					$transactionHash = $txHash;
+				}
+			});
+			// NOTE: This hasn't been tested yet
+			return $transactionHash;
+		}
+		$arguments[] = $transaction;
+		$arguments[] = $defaultBlock;
+		$arguments[] = $callback;
+		// call contract function
+		
 		call_user_func_array([$contract, "call"], $arguments);
 
 		if ($data instanceof \phpseclib\Math\BigInteger) {
