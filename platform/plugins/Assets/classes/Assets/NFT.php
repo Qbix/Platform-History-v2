@@ -174,7 +174,7 @@ class Assets_NFT
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
 			$name = Q::ifset($chain, "name", null);
-			$default = Q::ifset($chain, "default", null);
+			$default = $i == Q::app();
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
@@ -194,8 +194,7 @@ class Assets_NFT
 			$temp = compact("name", "chainId", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrls");
 
 			foreach ($currencies as $currency) {
-				if (!empty($currency[$chainId])
-				and $currency[$chainId] == "0x0000000000000000000000000000000000000000") {
+				if (Q::ifset($currency, $chainId, null) == "0x0000000000000000000000000000000000000000") {
 					$temp["currency"] = $currency;
 					$temp["currency"]["token"] = $currency[$chainId];
 					break;
@@ -257,8 +256,8 @@ class Assets_NFT
 	}
 
 	/**
-	 * Get NFT json data
-	 * @method getJson
+	 * Clear cache related to contract
+	 * @method clearContractCache
 	 * @param {String} $chainId
 	 * @param {String} $contractAddress
 	 * @param {array} $wallets - array of wallet addresses
@@ -266,7 +265,7 @@ class Assets_NFT
 	 * @return array
 	 */
 	static function clearContractCache ($chainId, $contractAddress, $wallets) {
-		$longDuration = 31104000;
+		$longDuration = 31104000; // seconds in a year
 		$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
 
 		if (!is_array($wallets)) {
