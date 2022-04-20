@@ -133,11 +133,16 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contract = (new Contract($rpcUrl, $abi, $defaultBlock))
 			->at($contractAddress);
 		if ($privateKey) {
+			if (empty($transaction['from'])) {
+				throw new Q_Exception_MissingObject(array(
+					'name' => 'transaction.from'
+				));
+			}
 			$eth = $contract->eth;
 			$rawTransactionData = '0x' . 
 				call_user_func_array([$contract, "getData"], $arguments);
 			$transactionCount = null;
-			$eth->getTransactionCount($fromAccount,
+			$eth->getTransactionCount($transaction['from'],
 			function ($err, $count) use(&$transactionCount) {
 				if ($err) { 
 					throw new Q_Exception('transaction count error: ' . $err->getMessage());
@@ -146,10 +151,10 @@ class Users_Web3 extends Base_Users_Web3 {
 			});
 			$transactionParams = array_merge(array(
 				'nonce' => "0x" . dechex($transactionCount->toString()),
-				'from' => $fromAccount,
+				'from' => $transaction['from'],
 				'to' =>  $contractAddress,
 				// 'gas' =>  '0x' . dechex(8000000),
-				'value' => Q::ifset($transaction, 'value', '0x0'),
+				'value' => '0x0',
 				'data' => $rawTransactionData
 			), $transaction);
 			if (empty($transactionParams['gas'])) {
@@ -164,7 +169,7 @@ class Users_Web3 extends Base_Users_Web3 {
 				$transactionParams['gas'] = $estimatedGas;
 			}
 			$tx = new Transaction($transactionParams);
-			$signedTx = '0x' . $tx->sign($fromAccountPrivateKey);
+			$signedTx = '0x' . $tx->sign($privateKey);
 			$transactionHash = null;
 			$eth->sendRawTransaction($signedTx,
 			function ($err, $txHash) use (&$transactionHash) {
@@ -246,15 +251,15 @@ class Users_Web3 extends Base_Users_Web3 {
 		);
 		if (!empty($config['filename'])) {
 			$filename = Q::interpolate($config['filename'], compact("contractAddress"));
-			return APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
+			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
 		}
 		if (!empty($config['dir'])) {
-			return APP_WEB_DIR . DS . implode(DS, explode('/', $config['dir']))
+			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $config['dir']))
 				. DS . "$contractAddress.json";
 		}
 		if (!empty($config['url'])) {
 			$url = Q_Uri::interpolateUrl($config['url'], compact("baseUrl", "contractAddress"));
-			return Q_Uri::filenameFromUrl($url);
+			$filename = Q_Uri::filenameFromUrl($url);
 		}
 
 		$filename = implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
