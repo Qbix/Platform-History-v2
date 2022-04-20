@@ -1740,7 +1740,8 @@ abstract class Users extends Base_Users
 		} else {
 			$id = $appInfo = null;
 			foreach ($apps as $k => $v) {
-				if ($v['appId'] === $appId) {
+				if (!empty($v['appId'])
+				&& $v['appId'] === $appId) {
 					$appInfo = $v;
 					$id = $k;
 					break;
