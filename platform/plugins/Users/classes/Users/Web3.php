@@ -149,6 +149,9 @@ class Users_Web3 extends Base_Users_Web3 {
 				}
 				$transactionCount = $count;
 			});
+			if (!isset($transactionCount)) {
+				return null;
+			}
 			$transactionParams = array_merge(array(
 				'nonce' => "0x" . dechex($transactionCount->toString()),
 				'from' => $transaction['from'],
