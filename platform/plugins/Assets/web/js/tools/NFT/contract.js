@@ -3,6 +3,7 @@
      * @module Assets
      */
 
+    var Users = Q.Users;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
     var Web3 = NFT.Web3;
@@ -39,12 +40,12 @@
         });
 
         // is admin
-        var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
+        var roles = Object.keys(Q.getObject("roles", Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
     },
 
     { // default options here
-        userId: Q.Users.loggedInUserId(),
+        userId: Users.loggedInUserId(),
         onlyDefaultChain: false,
         customContracts: true,
         withSeries: true,
@@ -91,7 +92,7 @@
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
-            var communityId = Q.Users.communityId;
+            var communityId = Users.communityId;
 
             $toolElement.attr("data-customContracts", state.customContracts);
             $toolElement.attr("data-onlyDefaultChain", state.onlyDefaultChain);
@@ -132,7 +133,7 @@
                     $globalContract.attr("data-streamName", selectedStreamName);
                     tool.renderView({
                         $element: $globalContract,
-                        title: tool.text.NFT.contract.GlobalContractFor.interpolate({chainNetwork: chainNetwork}),
+                        title: tool.text.NFT.contract.GlobalContractFor.interpolate({chainNetwork: chainNetwork, communityName: Users.communityName}),
                         contract: contract,
                         publisherId: communityId,
                         streamName: selectedStreamName,
