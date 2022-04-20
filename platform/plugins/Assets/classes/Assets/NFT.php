@@ -174,7 +174,7 @@ class Assets_NFT
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
 			$name = Q::ifset($chain, "name", null);
-			$default = $i == Q::app();
+			$default = Q::ifset($chain, "default", null);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
@@ -194,7 +194,8 @@ class Assets_NFT
 			$temp = compact("name", "chainId", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrls");
 
 			foreach ($currencies as $currency) {
-				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
+				if (!empty($currency[$chainId])
+				and $currency[$chainId] == "0x0000000000000000000000000000000000000000") {
 					$temp["currency"] = $currency;
 					$temp["currency"]["token"] = $currency[$chainId];
 					break;

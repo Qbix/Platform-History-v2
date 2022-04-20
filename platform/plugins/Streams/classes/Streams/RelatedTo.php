@@ -181,7 +181,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				$category->name,
 				$relationType,
 				$rs->publisherId,
-				$rs->streamName,
+				$rs->name,
 				$weight
 			);
 			$stream->relateTo(
