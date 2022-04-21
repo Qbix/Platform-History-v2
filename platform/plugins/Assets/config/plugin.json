@@ -236,7 +236,28 @@
 				}
 			},
 			"attributes": {
-				"display_type": ["string", "number", "date", "list"]
+				"display_type": [
+					{
+						"name": "Text",
+						"value": "string"
+					},
+					{
+						"name": "Date",
+						"value": "date"
+					},
+					{
+						"name": "Number",
+						"value": "number"
+					},
+					{
+						"name": "Relative Number",
+						"value": "boost_number"
+					},
+					{
+						"name": "Relative Percentage",
+						"value": "boost_percentage"
+					}
+				]
 			},
 			"methods": {
 				"tokensByOwner": {
