@@ -948,9 +948,6 @@
                     }, _transactionFailed);
                 } else { // else use method "create", which just create token
                     var arrayArgs = [_jsonURL, commissionParams];
-                    if (tool.series) { // if series created, add one more argument
-                        arrayArgs.push(tokensAmount);
-                    }
                     contract.create.apply(null, arrayArgs).then(function (transactionRequest) {
                         transactionRequest.wait(1).then(_transactionHandler, _transactionFailed);
                     }, _transactionFailed);
