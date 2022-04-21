@@ -322,6 +322,7 @@ class Assets_NFT
 	 * Add/remove attributes relations of NFT to category
 	 * @method updateRelations
 	 * @static
+	 * @param {Streams_Stream} $stream
 	 * @return {Assets_NftAttributes} Class instance
 	 */
 	static function updateAttributesRelations ($stream) {
