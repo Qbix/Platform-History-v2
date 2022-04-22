@@ -32,17 +32,22 @@ function Assets_NFTcontract_post ($params) {
 		return;
 	}
 
-	Q_Valid::requireFields(array("userId", "chainId", "contract", "symbol"), $req, true);
+	Q_Valid::requireFields(array("userId", "chainId", "contract", "name", "symbol"), $req, true);
 
 	$stream = Assets_NFT_Contract::getStream($req["chainId"], $userId);
 	if (!$stream) {
 		$stream = Streams::create(null, $userId, "Assets/NFT/contract", array(
-			"title" => Q::interpolate($texts["CustomContractFor"], array("chainNetwork" => $chain["name"])),
-			"name" => Q::interpolate(Assets_NFT_Contract::$categoryStreamName, array("chainId" => $req["chainId"]))
+			"title" => Q::interpolate($texts["CustomContractFor"], array(
+				"contractName" => $req["name"],
+				"contractSymbol" => $req["symbol"],
+				"chainNetwork" => $chain["name"]
+			)),
+			"name" => Q::interpolate(Assets_NFT_Contract::$streamName, array("chainId" => $req["chainId"]))
 		));
 	}
 	$stream->setAttribute("factory", $chain["factory"]);
 	$stream->setAttribute("contract", $req["contract"]);
+	$stream->setAttribute("name", $req["name"]);
 	$stream->setAttribute("symbol", $req["symbol"]);
 	$stream->changed();
 

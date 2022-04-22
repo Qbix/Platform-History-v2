@@ -271,7 +271,7 @@
                         $customContract.attr("data-streamName", this.fields.name);
                         tool.renderView({
                             $element: $customContract,
-                            title: tool.text.NFT.contract.CustomContractFor.interpolate({chainNetwork: chainNetwork}),
+                            title: this.fields.title,
                             contract: this.getAttribute("contract"),
                             publisherId: this.fields.publisherId,
                             streamName: this.fields.name,
