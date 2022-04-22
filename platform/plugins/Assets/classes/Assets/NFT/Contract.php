@@ -73,7 +73,7 @@ class Assets_NFT_Contract
 	 */
 	static function getStream ($chainId, $userId=null, $throwIfNotFound=false) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
-		$streamName = Q::interpolate(self::$categoryStreamName, array("chainId" => $chainId));
+		$streamName = Q::interpolate(self::$streamName, array("chainId" => $chainId));
 		$stream = Streams::fetchOne(null, $userId, $streamName);
 		if (!$stream && $throwIfNotFound) {
 			throw new Exception("Stream $userId : $streamName not found");
