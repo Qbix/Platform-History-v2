@@ -1086,7 +1086,7 @@
                             $value.prop("disabled", false);
 
                             $("[data-type=attr]", $value).remove();
-                            Q.each(Q.getObject([dtVal, ttVal], defaultAttributes) || [], function (index, value) {
+                            Q.each(Q.getObject([dtVal, "data", ttVal], defaultAttributes) || [], function (index, value) {
                                 $('<option data-type="attr">' + value + '</option>').insertBefore($value_);
                             });
 
@@ -1106,7 +1106,7 @@
 
                             $("[data-type=attr]", $traitType).remove();
 
-                            Q.each(Q.getObject(dtVal, defaultAttributes) || [], function (index, value) {
+                            Q.each(Q.getObject([dtVal, "data"], defaultAttributes) || [], function (index, value) {
                                 $('<option data-type="attr">' + index + '</option>').insertBefore($traitType_);
                             });
 
@@ -1283,7 +1283,7 @@
         `<div class="Assets_NFT_attribute">
 <select name='display_type'><option value="">{{NFT.attributes.DisplayTitle}}</option>` +
         '{{#each attributes}}' +
-        '<option>{{@key}}</option>' +
+        '<option value="{{@key}}">{{this.name}}</option>' +
         '{{/each}}' +
         `</select>
 <select name='trait_type'><option value="">{{NFT.attributes.TraitTitle}}</option><option value="_">{{NFT.attributes.NewTrait}}</option></select>
@@ -1291,6 +1291,14 @@
 <div class="basic32 basic32_remove"></div>
 </div>`,
         {text: ['Assets/content']}
+    );
+
+    Q.Template.set('TokenSociety/NFT/update',
+`   <div class='TokenSociety_nft_attributes'></div>
+    <button class='Q_button' name='addAttribute'>{{NFT.attributes.NewAttribute}}</button>
+    <div class='TokenSociety_nft_description'></div>
+    <button class='Q_button' name='saveAttributes'>{{NFT.attributes.SaveAttributes}}</button>`,
+    {text: ['TokenSociety/content']}
     );
 
     Q.Template.set('Assets/NFT/view',
