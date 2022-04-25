@@ -43,6 +43,7 @@
  *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
  *   @param {Q.Event} [options.onContextualCreated] Event for when contextual menu for addons rendered
  *   @param {Q.Event} [options.beforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
+ *   @param {Q.Event} [options.afterPost] Execute after message post.
  */
 Q.Tool.define('Streams/chat', function(options) {		
 	var tool = this;
@@ -165,6 +166,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	onMessageRender: new Q.Event(),
 	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),
+	afterPost: new Q.Event(),
 	preprocess: [],
 	openInSameColumn: [],
 	templates: {
@@ -976,6 +978,9 @@ Q.Tool.define('Streams/chat', function(options) {
 						tool.scrollToBottom();
 						return;
 					}
+
+					Q.handle(state.afterPost, tool, [fields, args]);
+
 					state.stream.refresh(null, {
 						messages: true, 
 						unlessSocket: true,
