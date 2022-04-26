@@ -189,6 +189,9 @@
     },
     "NFT": {
         "Title": "Title",
+        "Name": "Name",
+        "EnterName": "Enter name",
+        "EnterAuthorWallet": "Enter author wallet",
         "InformationAboutTitle": "Information about {{title}} NFT",
         "Description": "Description",
         "DetailedInformationAboutNFT": "Detailed information about NFT",
@@ -284,7 +287,7 @@
             "ContractAddressAbsent": "Contract address absent",
             "FactoryAddressAbsent": "Factory address absent",
             "GlobalContractFor": "{{communityName}} ({{chainNetwork}})",
-            "CustomContractFor": "{{contractName}} {{contractSymbol}} ({{chainNetwork}})",
+            "CustomContractFor": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
             "TitleRequired": "Title required",
             "SymbolRequired": "Symbol required",
             "TypeContractName": "contract name",

@@ -3,6 +3,7 @@
      * @module Assets
      */
 
+    var Users = Q.Users;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
     var Web3 = NFT.Web3;
@@ -26,11 +27,12 @@
         var $toolElement = $(this.element);
         tool.preview = preview;
         var previewState = tool.preview.state;
-        var loggedInUserId = Q.Users.loggedInUserId();
 
         // is admin
-        var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
+        var roles = Object.keys(Q.getObject("roles", Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
+        tool.canManage = tool.isAdmin || Users.loggedInUserId() === state.userId;
+        $toolElement.attr("data-canManage", tool.canManage);
 
         if (Q.isEmpty(state.chainId)) {
             return console.warn("chain id required!");
@@ -60,7 +62,7 @@
 
                 previewState.onRefresh.add(tool.refresh.bind(tool), tool);
             } else {
-                if ((loggedInUserId && state.userId === loggedInUserId) || tool.isAdmin) {
+                if (tool.canManage) {
                     previewState.onComposer.add(tool.composer.bind(tool), tool);
                 } else {
                     Q.Tool.remove(tool.element, true, true);
@@ -122,6 +124,7 @@
             $toolElement.attr("data-onSale", untilTime*1000 > Date.now());
 
             Q.Template.render('Assets/NFT/series/view', {
+                name: stream.fields.title || "",
                 price: stream.getAttribute("price"),
                 currency: stream.getAttribute("currency"),
                 untilTime: untilTime
@@ -150,8 +153,16 @@
                     $this.tool("Q/countdown", {
                         onRefresh: function () {
                             var $currentElement = $(this.element);
+                            if (!$currentElement.is(":visible")) {
+                                return Q.Tool.remove($this[0], true, true);
+                            }
+                            var expired = true;
                             $(".Q_days:visible, .Q_hours:visible, .Q_minutes:visible, .Q_seconds:visible", $currentElement).each(function () {
                                 var $this = $(this);
+                                if (parseInt($this.text()) > 0) {
+                                    expired = false;
+                                }
+
                                 if (($this.hasClass("Q_days") || $this.hasClass("Q_hours") || $this.hasClass("Q_minutes")) && $this.text() === "0") {
                                     var $parent = $this.parent();
                                     var $prevSpan = $parent.prev("span:visible");
@@ -173,15 +184,23 @@
 
                                 });
                             });
+
+                            if (expired) {
+                                Q.Tool.remove($this[0], true, true);
+                                $toolElement.attr("data-onSale", false);
+                            }
                         }
                     }).activate();
                 });
 
                 // set onInvoke event
-                $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                    tool.update(stream);
-                    Q.handle(state.onInvoke, tool, [stream]);
-                });
+                $toolElement.off(Q.Pointer.fastclick);
+                if (tool.canManage) {
+                    $toolElement.on(Q.Pointer.fastclick, function () {
+                        tool.update(stream);
+                        Q.handle(state.onInvoke, tool, [stream]);
+                    });
+                }
             });
         },
         /**
@@ -284,6 +303,7 @@
                     name: "Assets/NFT/series/Create",
                     fields: {
                         isAdmin: tool.isAdmin,
+                        name: stream.fields.title,
                         currencies: currencies,
                         buttonText: isNew ? tool.text.NFT.Create : tool.text.NFT.Update,
                         price: stream.getAttribute("price"),
@@ -349,6 +369,7 @@
 
                         dialog.addClass("Q_disabled");
 
+                        var name = $("input[name=name]:visible", dialog).val();
                         var price = parseFloat($("input[name=price]:visible", dialog).val());
                         if (!price) {
                             dialog.removeClass("Q_disabled");
@@ -403,6 +424,7 @@
                                     method: "post",
                                     fields: {
                                         streamName: stream.fields.name,
+                                        title: name,
                                         userId: state.userId,
                                         chainId: state.chainId,
                                         attributes: attributes
@@ -424,17 +446,30 @@
     });
 
     Q.Template.set('Assets/NFT/series/newItem',
-`<img src="{{iconUrl}}" alt="new" class="Streams_preview_add">
+        `<img src="{{iconUrl}}" alt="new" class="Streams_preview_add">
         <h3 class="Streams_preview_title">{{NFT.series.NewItem}}</h3>`, {text: ['Assets/content']}
     );
 
     Q.Template.set('Assets/NFT/series/Create',
-`<form>
+    `<form>
         {{#if isAdmin}}
         <div class="Assets_nft_form_group Assets_nft_series_author">
-            <label>{{NFT.series.Author}}:</label><input name="author">
+            <label>{{NFT.series.Author}}:</label><input type="text" name="author" class="Assets_nft_form_control" placeholder="{{NFT.EnterAuthorWallet}}">
         </div>
         {{/if}}
+        <div class="Assets_nft_form_group Assets_nft_series_name">
+            <label>{{NFT.Name}}:</label>
+            <input type="text" name="name" class="Assets_nft_form_control" placeholder="{{NFT.EnterName}}" value="{{name}}">
+        </div>
+        <div class="Assets_nft_form_group Assets_nft_form_price">
+            <label>{{NFT.Price}}:</label>
+            <input type="text" name="price" class="Assets_nft_form_control" placeholder="{{NFT.EnterPrice}}" value="{{price}}">
+            <select name="currency">
+                {{#each currencies}}
+                    <option {{#if this.selected}}selected{{/if}}>{{this.symbol}}</option>
+                {{/each}}
+            </select>
+        </div>
         <div class="Assets_nft_form_group">
             <div class="Assets_nft_market">
                 <label>{{NFT.series.OnSale}} :</label>
@@ -444,15 +479,6 @@
                 </label>
             </div>
             <div class="Assets_nft_form_details">
-                <div class="Assets_nft_form_price">
-                    <label>{{NFT.Price}}</label>
-                    <input type="text" name="price" class="Assets_nft_form_control" placeholder="{{NFT.EnterPrice}}" value="{{price}}">
-                    <select name="currency">
-                        {{#each currencies}}
-                            <option {{#if this.selected}}selected{{/if}}>{{this.symbol}}</option>
-                        {{/each}}
-                    </select>
-                </div>
                 <div class="Assets_nft_form_date">
                     <label>{{NFT.ExpirationDate}}</label>
                     <input type="datetime-local" name="untilTime" value="{{untilTime}}">
@@ -469,6 +495,7 @@
             <div class="offSale">{{NFT.series.OffSale}}</div>
         </div>
         <div class="Assets_NFT_series_info">
+            <div class="Assets_NFT_series_name">{{name}}</div>
             <div class="Assets_NFT_series_price"><span class="Assets_NFT_series_price_value">{{price}}</span> {{currency}}</div>
             {{#if untilTime}}
             <div class="Assets_NFT_series_ending"><span>{{NFT.series.EndingIn}}</span></div>
