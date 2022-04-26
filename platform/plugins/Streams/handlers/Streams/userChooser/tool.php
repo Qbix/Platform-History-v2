@@ -15,6 +15,7 @@
  *       parameters when a user is chosen
  *   @param {integer} [$options.delay=500] how long to delay before sending a request
  *    to allow more characters to be entered
+ *   @param {bool} [options.communitiesOnly=false] If true, search communities instead regular users
  *   @param {array} [$options.exclude] hash of {userId: true}, 
  *    where userId are the ids of the users to exclude from the results.
  *    Defaults to id of logged-in user, if logged in.

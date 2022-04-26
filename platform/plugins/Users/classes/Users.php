@@ -1143,8 +1143,9 @@ abstract class Users extends Base_Users
 		}
 		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
-		if (!is_array($icon) and !empty($_SESSION['Users']['register']['icon'])) {
-			$icon = $_SESSION['Users']['register']['icon'];
+		$usersRegisterIcon = Q::ifset($_SESSION, 'Users', 'register', 'icon', null);
+		if (!is_array($icon) and $usersRegisterIcon) {
+			$icon = $usersRegisterIcon;
 			unset($_SESSION['Users']['register']['icon']);
 			$user->set('skipIconSearch', $icon);
 		}
@@ -1740,7 +1741,8 @@ abstract class Users extends Base_Users
 		} else {
 			$id = $appInfo = null;
 			foreach ($apps as $k => $v) {
-				if ($v['appId'] === $appId) {
+				if (!empty($v['appId'])
+				&& $v['appId'] === $appId) {
 					$appInfo = $v;
 					$id = $k;
 					break;

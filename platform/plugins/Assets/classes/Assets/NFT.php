@@ -84,7 +84,7 @@ class Assets_NFT
 
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
-			if (!Q::ifset($fields, $field)) {
+			if (!Q::ifset($fields, $field, null)) {
 				continue;
 			}
 
@@ -93,7 +93,7 @@ class Assets_NFT
 		}
 
 		// update attributes
-		if (Q::ifset($fields, "attributes")) {
+		if (Q::ifset($fields, "attributes", null)) {
 			if ($stream->attributes) {
 				$attributes = (array)Q::json_decode($stream->attributes);
 			} else {
@@ -104,6 +104,9 @@ class Assets_NFT
 
 		if ($fieldsUpdated) {
 			$stream->save();
+			if (Q::ifset($fields, "attributes", "Assets/NFT/attributes", null)) {
+				self::updateAttributesRelations($stream);
+			}
 		}
 
 		$interestsRelationType = "NFT/interest";
@@ -194,7 +197,7 @@ class Assets_NFT
 			$temp = compact("name", "chainId", "contract", "bulkContract", "default", "factory", "rpcUrls", "blockExplorerUrls");
 
 			foreach ($currencies as $currency) {
-				if ($currency[$chainId] == "0x0000000000000000000000000000000000000000") {
+				if (Q::ifset($currency, $chainId, null) == "0x0000000000000000000000000000000000000000") {
 					$temp["currency"] = $currency;
 					$temp["currency"]["token"] = $currency[$chainId];
 					break;
@@ -256,8 +259,8 @@ class Assets_NFT
 	}
 
 	/**
-	 * Get NFT json data
-	 * @method getJson
+	 * Clear cache related to contract
+	 * @method clearContractCache
 	 * @param {String} $chainId
 	 * @param {String} $contractAddress
 	 * @param {array} $wallets - array of wallet addresses
@@ -265,7 +268,7 @@ class Assets_NFT
 	 * @return array
 	 */
 	static function clearContractCache ($chainId, $contractAddress, $wallets) {
-		$longDuration = 31104000;
+		$longDuration = 31104000; // seconds in a year
 		$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
 
 		if (!is_array($wallets)) {
@@ -313,5 +316,50 @@ class Assets_NFT
 			"skipMessageFrom" => true,
 			"ignoreCache" => true
 		));
+	}
+
+	/**
+	 * Add/remove attributes relations of NFT to category
+	 * @method updateRelations
+	 * @static
+	 * @param {Streams_Stream} $stream
+	 * @return {Assets_NftAttributes} Class instance
+	 */
+	static function updateAttributesRelations ($stream) {
+		$category = self::category($stream->publisherId);
+		$relations = Streams_RelatedTo::select()->where(array(
+			"toPublisherId" => $category->publisherId,
+			"toStreamName" => $category->name,
+			"fromPublisherId" => $stream->publisherId,
+			"fromStreamName" => $stream->name,
+			"type like " => "attribute/%"
+		))->fetchDbRows();
+
+		$prevDbCaching = Db::allowCaching(false);
+
+		// unrelate all attributes relations
+		foreach ($relations as $relation) {
+			Streams::unrelate(null, $relation->toPublisherId, $relation->toStreamName, $relation->type, $relation->fromPublisherId, $relation->fromStreamName);
+		}
+
+		// relate all attributes relations
+		$nftAttributes = $stream->getAttribute("Assets/NFT/attributes", array());
+		foreach ($nftAttributes as $nftAttribute) {
+			$normalizedAttributeName = Q_Utils::normalize($nftAttribute["trait_type"]);
+			$normalizedAttributeValue = Q_Utils::normalize($nftAttribute["value"]);
+			$weight = time();
+			if (empty($nftAttribute["display_type"]) || $nftAttribute["display_type"] == "string") {
+				$relationType = implode("/", array("attribute", $normalizedAttributeName, $normalizedAttributeValue));
+			} else {
+				$relationType = implode("/", array("attribute", $normalizedAttributeName));
+				$weight = $normalizedAttributeValue;
+			}
+			$stream->relateTo($category, $relationType, null, array(
+				'skipAccess' => true,
+				'weight' => $weight
+			));
+		}
+
+		Db::allowCaching($prevDbCaching);
 	}
 };

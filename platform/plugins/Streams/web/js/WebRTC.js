@@ -7331,7 +7331,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if (_options.element != document.body) {
                         _options.element.dataset.webrtcContainer = true;
                     }
-                    _options.element.appendChild(roomsMedia);
+                    (_options.element || document.body).appendChild(roomsMedia);
                     _roomsMedia = roomsMedia;
                     setResizeObserver();
                     Q.activate(

@@ -1756,6 +1756,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                     Q.Dialogs.push({
                                         title: Q.getObject(['invite', 'dialog', 'photo'], text),
                                         apply: true,
+                                        className: "Dialog_invite_photo_camera",
                                         content:
                                         '<div class="Streams_invite_photo_dialog">' +
                                         '<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
@@ -1797,7 +1798,8 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         var options = {
             title: o.title,
             identifierTypes: o.identifierTypes,
-            userChooser: o.userChooser
+            userChooser: o.userChooser,
+            appUrl: o.appUrl
         };
         if(o.templateName) {
             options.templateName = o.templateName;

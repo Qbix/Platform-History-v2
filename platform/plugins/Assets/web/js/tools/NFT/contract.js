@@ -3,6 +3,7 @@
      * @module Assets
      */
 
+    var Users = Q.Users;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
     var Web3 = NFT.Web3;
@@ -23,6 +24,7 @@
     Q.Tool.define("Assets/NFT/contract", function(options) {
         var tool = this;
         var state = tool.state;
+        var $toolElement = $(this.element);
 
         if (Q.isEmpty(state.userId)) {
             return console.warn("user id required!");
@@ -37,10 +39,16 @@
         Q.Text.get('Assets/content', pipe.fill('text'), {
             ignoreCache: true
         });
+
+        // is admin
+        var roles = Object.keys(Q.getObject("roles", Users) || {});
+        tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
+        tool.canManage = tool.isAdmin || (Q.getObject("NFT.contract.allow.author", Assets) && Users.loggedInUserId() === state.userId);
+        $toolElement.attr("data-canManage", tool.canManage);
     },
 
     { // default options here
-        userId: Q.Users.loggedInUserId(),
+        userId: Users.loggedInUserId(),
         onlyDefaultChain: false,
         customContracts: true,
         withSeries: true,
@@ -87,7 +95,7 @@
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
-            var communityId = Q.Users.communityId;
+            var communityId = Users.communityId;
 
             $toolElement.attr("data-customContracts", state.customContracts);
             $toolElement.attr("data-onlyDefaultChain", state.onlyDefaultChain);
@@ -118,6 +126,10 @@
                 $globalContract.removeClass("Q_selected", "Q_working").off("click").empty();
                 $customContract.removeClass("Q_selected", "Q_working").off("click").empty();
 
+                Q.each(["data-streamName", "data-publisherId", "data-contract"], function (i, attr) {
+                    $globalContract.add($customContract).removeAttr(attr);
+                });
+
                 // remove all related tools
                 $(".Streams_related_tool", tool.element).each(function () {
                     Q.Tool.remove(this, true, true);
@@ -128,7 +140,7 @@
                     $globalContract.attr("data-streamName", selectedStreamName);
                     tool.renderView({
                         $element: $globalContract,
-                        title: tool.text.NFT.contract.GlobalContractFor.interpolate({chainNetwork: chainNetwork}),
+                        title: tool.text.NFT.contract.GlobalContractFor.interpolate({chainNetwork: chainNetwork, communityName: Users.communityName}),
                         contract: contract,
                         publisherId: communityId,
                         streamName: selectedStreamName,
@@ -153,9 +165,11 @@
                 }
 
                 if (state.customContracts && factory) {
+                    $customContract.removeClass("Assets_NFT_contract_composer");
                     Q.Streams.get.force(state.userId, selectedStreamName, function (err) {
                         if (err) {
                             if (Q.getObject([0, "classname"], err) === "Q_Exception_MissingRow") {
+                                $customContract.addClass("Assets_NFT_contract_composer");
                                 Q.Template.render("Assets/NFT/contract/composer", {
                                     iconUrl: Q.url("{{Q}}/img/actions/add.png")
                                 }, function (err, html) {
@@ -262,7 +276,7 @@
                         $customContract.attr("data-streamName", this.fields.name);
                         tool.renderView({
                             $element: $customContract,
-                            title: tool.text.NFT.contract.CustomContractFor.interpolate({chainNetwork: chainNetwork}),
+                            title: this.fields.title,
                             contract: this.getAttribute("contract"),
                             publisherId: this.fields.publisherId,
                             streamName: this.fields.name,
@@ -389,7 +403,7 @@
             var streamName = options.streamName;
             var chainId = streamName.split("/").pop();
             var chain = NFT.chains[chainId];
-            var relationType = "Assets/NFT/series/" + contractAddress;
+            var relationType = Assets.NFT.seriesRelationType.interpolate({contract: contractAddress});
 
             $element.attr("data-contract", contractAddress);
 
@@ -413,11 +427,11 @@
                 });
 
                 $element.off("click");
-                if (onInvoke) {
+                if (tool.canManage && onInvoke) {
                     $element.on("click", onInvoke);
                 }
 
-                if (publisherId === state.userId) {
+                if (tool.canManage) {
                     $element.plugin('Q/actions', {
                         alwaysShow: true,
                         actions: {
@@ -482,7 +496,7 @@
                             }
                         });
 
-                        if (relationAmount < state.limitSeries) {
+                        if (tool.canManage && relationAmount < state.limitSeries) {
                             relatedOptions.creatable = {
                                 'Assets/NFT/series': {
                                     publisherId: state.userId,

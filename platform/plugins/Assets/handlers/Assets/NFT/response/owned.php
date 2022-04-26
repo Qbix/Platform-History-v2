@@ -1,4 +1,14 @@
 <?php
+/**
+ * Get all tokens user owned in all chains (means chains registered in config)
+ * @class HTTP Assets NFT owned
+ * @method owned
+ * @param {array} [$_REQUEST]
+ *   @param {string} $_REQUEST.userId
+ *   @param {string} $_REQUEST.offset
+ *   @param {string} $_REQUEST.limit
+ * @return {void}
+ */
 function Assets_NFT_response_owned ($params) {
 	$loggedInUser = Users::loggedInUser();
 	$request = array_merge($_REQUEST, $params);
@@ -43,29 +53,23 @@ function Assets_NFT_response_owned ($params) {
 
 	// get tokens by owner
 	foreach ($chains as $chain) {
-		if (Users_Web3::existsInABI("tokensByOwner", $chain["contract"], "function")) {
-			try {
-				$tokens = Users_Web3::execute($chain["contract"], "tokensByOwner", [$wallet, $tokensByOwnerLimit], $chain["chainId"]);
-			} catch (Exception $e) {
-				continue;
-			}
+		if (empty($chain["contract"])) {
+			continue;
+		}
 
-			if (empty($tokens)) {
-				continue;
-			}
+		try {
+			$tokens = Users_Web3::execute($chain["contract"], "tokensByOwner", [$wallet, $tokensByOwnerLimit], $chain["chainId"]);
+		} catch (Exception $e) {
+			continue;
+		}
 
-			foreach ($tokens as $tokenId) {
-				if (_Assets_NFT_response_owned_json($tokenId, $chain, $tokenJSON, $countNFTs) === false){
-					break;
-				}
-			}
-		} else {
-			$tokens = (int)Users_Web3::execute($chain["contract"], "balanceOf", $wallet, $chain["chainId"]);
-			for ($i = 0; $i < $tokens; $i++) {
-				$tokenId = (int)Users_Web3::execute($chain["contract"], "tokenOfOwnerByIndex", array($wallet, $i), $chain["chainId"], true, $GLOBALS["Assets_NFT_response_owned"]["secondsInYear"]);
-				if (_Assets_NFT_response_owned_json($tokenId, $chain, $tokenJSON, $countNFTs) === false) {
-					break;
-				}
+		if (empty($tokens)) {
+			continue;
+		}
+
+		foreach ($tokens as $tokenId) {
+			if (_Assets_NFT_response_owned_json($tokenId, $chain, $tokenJSON, $countNFTs) === false){
+				break;
 			}
 		}
 	}

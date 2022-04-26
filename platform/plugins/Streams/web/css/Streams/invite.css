@@ -113,7 +113,9 @@
 	text-align: center;
 	margin: 10px;
 }
-
+.Dialog_invite_photo_camera .Q_dialog_content {
+	overflow: hidden;
+}
 .Streams_invite_photo_camera {
 	display: flex;
 	justify-content: center;
