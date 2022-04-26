@@ -1515,6 +1515,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 								Q.Dialogs.push({
 									title: Q.getObject(['invite', 'dialog', 'photo'], text),
 									apply: true,
+									className: "Dialog_invite_photo_camera",
 									content:
 										'<div class="Streams_invite_photo_dialog">' +
 										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
