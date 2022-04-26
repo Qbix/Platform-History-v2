@@ -15,15 +15,17 @@
         pauseIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="44px" height="51px" viewBox="-0.53 -0.91 44 51" enable-background="new -0.53 -0.91 44 51" xml:space="preserve"> <defs> </defs> <rect width="16.173" height="50"/> <rect x="26.97" y="0.09" width="16.173" height="50"/> </svg>'
     }
 
-    var ua=navigator.userAgent;
+    var ua = navigator.userAgent;
+    var _isMobile = false;
     var _isiOS = false;
     var _isAndroid = false;
     var _isiOSCordova = false;
     var _isAndroidCordova = false;
-    if(ua.indexOf('iPad')!=-1||ua.indexOf('iPhone')!=-1||ua.indexOf('iPod')!=-1) _isiOS = true;
-    if(ua.indexOf('Android')!=-1) _isAndroid = true;
-    if(typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
-    if(typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
+    if (ua.indexOf('iPad') != -1 || ua.indexOf('iPhone') != -1 || ua.indexOf('iPod') != -1) _isiOS = true;
+    if (ua.indexOf('Android') != -1) _isAndroid = true;
+    if (ua.indexOf('Android') != -1 || ua.indexOf('iPhone') != -1) _isMobile = true;
+    if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
+    if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
     function copyToClipboard(el) {
         if(Q.info.platform === 'ios') {
@@ -111,50 +113,130 @@
                 var _sourcesEl = null;
                 var _optionsEl = null;
 
-                var scenesInterface = (function() {
+                var scenesInterface = (function () {
 
                     var _scenesList = [];
                     var _activeScene = null;
 
                     var SceneListItem = function (name) {
-                        this.title = name != null ? name : null;
+                        var sceneListInstance = this;
+                        this._title = name != null ? name : null;
                         this.itemEl = null;
+                        this.sceneInstance = null;
                         this.remove = function () {
                             var currentItem = this;
-                            if(this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
-                            for(var i in _scenesList) {
-                                if(_scenesList[i] == currentItem) {
+                            if (this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
+                            for (var i in _scenesList) {
+                                if (_scenesList[i] == currentItem) {
                                     _scenesList.splice(i, 1);
                                     break;
                                 }
                             }
                         };
+                        this.isActive = function () {
+                            var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
+                            for (let i in scenes) {
+                                if (scenes[i] == this.sceneInstance) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        };
 
                         var itemEl = document.createElement('DIV');
                         itemEl.className = 'Streams_webrtc_popup-scenes-item';
                         this.itemEl = itemEl;
+
+                        itemEl.addEventListener('click', function (e) {
+                            selectScene(sceneListInstance);
+                        })
+
                     }
                     Object.defineProperties(SceneListItem.prototype, {
                         'title': {
-                            'set': function(val) { if(this.itemEl) this.itemEl.innerHTML = val; }
+                            'set': function (val) {
+                                this._title = val;
+                                if (this.itemEl) this.itemEl.innerHTML = val;
+                            },
+                            'get': function (val) {
+                                return this._title;
+                            }
                         }
                     });
 
+                    function addNewScene(name) {
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.createScene(name);
+                        syncList();
+                    }
+
                     function selectScene(sceneItem) {
-                        console.log('selectScene', sceneItem);
+                        console.log('selectScene', sceneItem, sceneItem.itemEl);
+                        if (sceneItem.itemEl && !sceneItem.itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) {
+                            console.log('selectScene add class');
+                            sceneItem.itemEl.classList.add('Streams_webrtc_popup-scenes-item-active');
+                        }
                         var switchScene = _activeScene != sceneItem;
                         _activeScene = sceneItem;
-                        for(var i in _scenesList) {
-                            if(_scenesList[i] == sceneItem) continue;
-                            if(_scenesList[i].itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('Streams_webrtc_popup-scenes-item-active');
+                        let sources = sourcesInterface.visualSources.getSourcesList();
+                        for(let s in sources) {
+                            if(sources[s].resizingElement != null && sources[s].resizingElement.parentElement) {
+                                sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
+                            }
                         }
-                        if(sceneItem.itemEl && !sceneItem.itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) sceneItem.itemEl.classList.add('Streams_webrtc_popup-scenes-item-active');
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.selectScene(_activeScene.sceneInstance);
+                        for (var i in _scenesList) {
+                            if (_scenesList[i] == sceneItem) continue;
+                            if (_scenesList[i].itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('Streams_webrtc_popup-scenes-item-active');
+                        }
 
                         sourcesInterface.update();
                     }
 
+                    function moveSceneUp() {
+                        console.log('moveUp');
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.moveSceneUp(_activeScene.sceneInstance);
+
+                        sortScenesList();
+                    }
+
+                    function moveSceneDown() {
+                        console.log('moveSceneDown');
+                        controlsTool.WebRTCLib.mediaManager.canvasComposer.moveSceneDown(_activeScene.sceneInstance);
+
+                        sortScenesList();
+                    }
+
+                    function removeScene() {
+                        console.log('removeScene', _activeScene);
+                        if (_activeScene != null) {
+                            let sceneToRemove = _activeScene;
+                            let indexOfScreneToRemove;
+                            let sceneToSwitchTo;
+                            if (_scenesList.length > 1) {
+                                for (let s in _scenesList) {
+                                    if (_scenesList[s] == _activeScene) {
+                                        indexOfScreneToRemove = s;
+                                        break;
+                                    }
+                                }
+
+                                if (_scenesList[indexOfScreneToRemove + 1] != null) {
+                                    selectScene(_scenesList[indexOfScreneToRemove + 1]);
+                                } else if (_scenesList[indexOfScreneToRemove - 1] != null) {
+                                    selectScene(_scenesList[indexOfScreneToRemove - 1]);
+                                }
+
+                                controlsTool.WebRTCLib.mediaManager.canvasComposer.removeScene(sceneToRemove.sceneInstance);
+                                syncList();
+                            } else {
+                                //at least once scene should exist
+                            }
+
+                        };
+                    }
+
                     function createSceneItem(item) {
-                        if(item == null) return;
+                        if (item == null) return;
                         var itemEl = document.createElement('DIV');
                         itemEl.className = 'Streams_webrtc_popup-scenes-item';
                         item.itemEl = itemEl;
@@ -167,45 +249,234 @@
                     }
 
                     function addSceneItemToList(item) {
-                        if(item == null || _scenesEl == null) return;
+                        console.log('scenesInterface: addSceneItemToList', item, item.title)
+
+                        if (item == null || _scenesEl == null) return;
                         _scenesList.push(item)
                         _scenesEl.appendChild(item.itemEl);
-                        _scenesEl.addEventListener('click', function (e) {
-                            selectScene(item);
-                        })
-                        console.log('CONTROLS ADD SCENES _scenesEl', _scenesEl)
+                    }
 
+                    function sortScenesList(type) {
+                        var listArr = _scenesList;
+                        var listEl = _scenesEl;
+                        var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
+
+                        console.log('sortList: scenes', scenes, listArr);
+
+                        if (scenes.length !== listArr.length) {
+                            return;
+                        }
+                        listArr.sort((a, b) => {
+                            return scenes.findIndex(p => p === a.sceneInstance) - scenes.findIndex(p => p === b.sceneInstance);
+                        });
+
+                        console.log('sortList: listArr', listArr.map(el => { return el.itemEl.innerText }));
+                        console.log('sortList: NOT sortedElements', Array.from(listEl.childNodes).map(el => { return el.innerText }))
+
+                        listEl.innerHTML == '';
+                        for (let e = 0; e < listArr.length; e++) {
+                            listEl.appendChild(listArr[e].itemEl)
+                        }
 
                     }
 
                     function syncList() {
-                        var roomStream = controlsTool.WebRTCClass.roomStream();
-                        var title = roomStream.fields.name != null ? ((roomStream.fields.name).replace('Streams/webrtc/', '') + (roomStream.fields.title != null ? (' - ' + roomStream.fields.title) : '')) : '';
+
+                        console.log('scenes: syncList _scenesList', _scenesList.length);
+
+                        for (let i = _scenesList.length - 1; i >= 0; i--) {
+                            console.log('scenes: syncList _scenesList', _scenesList[i]);
+                            if (_scenesList[i] == null) continue;
+
+                            if (_scenesList[i].isActive() == false) {
+                                console.log('scenes: syncList remove', _scenesList[i]);
+
+                                _scenesList[i].remove();
+                                continue;
+                            }
+                        }
+
                         var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
 
-                        console.log('CONTROLS ADD SCENES', scenes)
+                        console.log('scenesInterface: all', scenes);
 
-
-                        for(let s in scenes) {
+                        for (let s in scenes) {
                             console.log('CONTROLS ADD SCENES', scenes[s])
                             console.log('CONTROLS ADD SOURCES', scenes[s].sources)
-                            let sourceAlreadyExists = false;
-                            for(let e in _scenesList) {
-                                if(_scenesList[e].sceneInstance == scenes[s]) sourceAlreadyExists = true;
+                            let sceneAlreadyExists = false;
+                            for (let e in _scenesList) {
+                                if (_scenesList[e].sceneInstance == scenes[s]) sceneAlreadyExists = true;
                             }
-                            if(sourceAlreadyExists) continue;
+                            if (sceneAlreadyExists) continue;
+                            console.log('scenesInterface: not exist')
 
                             var item = new SceneListItem()
+                            item.title = scenes[s].title;
                             item.sceneInstance = scenes[s];
                             addSceneItemToList(item);
 
-                            if(scenes[s].title == 'default'){
-                                item.title = title;
+                            if (scenes[s].title == 'default') {
+                                item.title = 'default';
                                 selectScene(item)
                             }
 
                         }
+
+                        //sortList('visual');
                     }
+
+                    var addNewScenePopup = (function () {
+                        var _dialogueEl = null;
+                        var _isHidden = true;
+
+                        console.log('addNewScenePopup')
+                        var dialogue = document.createElement('DIV');
+                        dialogue.className = 'Streams_webrtc_dialog-box dialog-box Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
+                        _dialogueEl = dialogue;
+                        var close = document.createElement('div');
+                        close.className = 'close-dialog-sign';
+                        close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
+                        close.style.backgroundRepeat = 'no-repeat';
+                        close.style.backgroundSize = 'cover';
+
+                        var dialogTitle = document.createElement('H3');
+                        dialogTitle.innerHTML = 'Add scene';
+                        dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+
+                        var dialogInner = document.createElement('DIV');
+                        dialogInner.className = 'Streams_webrtc_dialog-inner';
+                        var boxContent = document.createElement('DIV');
+                        boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+
+                        var sceneNameInputCon = document.createElement('DIV');
+                        sceneNameInputCon.className = 'Streams_webrtc_dialog-name-con';
+                        var sceneNameInputText = document.createElement('SPAN');
+                        sceneNameInputText.className = 'Streams_webrtc_dialog-name-text';
+                        sceneNameInputText.innerHTML = 'Please, enter name of scene';
+                        var sceneNameInput = document.createElement('INPUT');
+                        sceneNameInput.className = 'Streams_webrtc_dialog-name';
+                        sceneNameInput.type = 'text';
+                        sceneNameInput.placeholder = 'Enter name of scene';
+                        sceneNameInput.name = 'nameOfScene';
+
+                        var buttonsCon = document.createElement('DIV');
+                        buttonsCon.className = 'Streams_webrtc_dialog-buttons';
+                        var okButton = document.createElement('BUTTON');
+                        okButton.className = 'Streams_webrtc_dialog-ok-btn';
+                        okButton.innerHTML = 'OK';
+
+                        sceneNameInputCon.appendChild(sceneNameInputText);
+                        sceneNameInputCon.appendChild(sceneNameInput);
+                        boxContent.appendChild(sceneNameInputCon);
+                        buttonsCon.appendChild(okButton);
+                        boxContent.appendChild(buttonsCon);
+                        dialogInner.appendChild(dialogTitle);
+
+                        dialogue.appendChild(close);
+                        dialogInner.appendChild(boxContent);
+                        dialogue.appendChild(dialogInner);
+
+                        controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+
+                        setTimeout(function () {
+                            Q.activate(
+                                Q.Tool.setUpElement(
+                                    dialogue, // or pass an existing element
+                                    "Q/resize",
+                                    {
+                                        move: true,
+                                        activateOnElement: dialogTitle,
+                                        resize: false,
+                                        active: true,
+                                        moveWithinArea: 'window',
+                                    }
+                                ),
+                                {},
+                                function () {
+
+                                }
+                            );
+                        }, 3000)
+
+                        var dialogWidth = 400;
+                        dialogue.style.width = dialogWidth + 'px';
+                        console.log('dialogWidth', dialogWidth);
+                        if (_isMobile) {
+                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            dialogue.style.bottom = '10px';
+                        } else {
+                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            dialogue.style.top = (window.innerHeight / 2 - 100) + 'px';
+                        }
+
+                        close.addEventListener('click', function () {
+                            hideDialog();
+                        });
+
+                        okButton.addEventListener('click', function () {
+                            if (sceneNameInput.value != '') {
+                                var val = sceneNameInput.value;
+                                addNewScene(val);
+                                hideDialog();
+                                sceneNameInput.value = '';
+                            }
+                        });
+
+                        function setDefaultSceneName() {
+                            sceneNameInput.value = 'Scene ' + parseInt(_scenesList.length + 1)
+                        }
+
+                        function closeOnWindowClick(e) {
+                            if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                                && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
+                                dropUpMenu.classList.add('Streams_webrtc_hidden');
+                                window.removeEventListener('click', closeOnWindowClick)
+                                e.preventDefault();
+                                e.stopPropagation();
+                            }
+                        }
+
+                        function showDialog(e) {
+                            sceneNameInput.value = '';
+                            if (_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
+                                _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                var _clientX = e.clientX;
+                                var _clientY = e.clientY;
+
+                                _isHidden = false;
+
+                                if (_isMobile) {
+                                    dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                    dialogue.style.top = '10px';
+                                } else {
+                                    dialogue.style.left = (_clientX + 50) + 'px';
+                                    dialogue.style.top = (_clientY - 200) + 'px';
+                                }
+                                window.removeEventListener('click', closeOnWindowClick)
+                                setDefaultSceneName();
+
+                            }
+                        }
+
+                        function hideDialog() {
+                            if (!_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
+                                _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                _isHidden = true;
+                            }
+                        }
+
+                        function toggle(e) {
+                            if (_isHidden) {
+                                showDialog(e);
+                            } else hideDialog(e);
+                        }
+
+                        return {
+                            hideDialog: hideDialog,
+                            showDialog: showDialog,
+                            toggle: toggle
+                        }
+                    }())
 
                     function createScenesCol() {
                         var scenesColumn = document.createElement('DIV');
@@ -218,7 +489,7 @@
                         scenesColumnTitleTab.className = 'Streams_webrtc_popup-scenes-title-tab Streams_webrtc_popup-scenes-title-tab-active';
                         var scenesColumnTitleTabInner = document.createElement('DIV');
                         scenesColumnTitleTabInner.className = 'Streams_webrtc_popup-scenes-title-tab-inner';
-                        scenesColumnTitleTabInner.innerHTML = 'Rooms';
+                        scenesColumnTitleTabInner.innerHTML = 'Scenes';
                         scenesColumnTitleTab.appendChild(scenesColumnTitleTabInner);
                         scenesColumnTitleInner.appendChild(scenesColumnTitleTab);
                         scenesColumnTitle.appendChild(scenesColumnTitleInner);
@@ -228,8 +499,45 @@
                         var scenesColumnBodyInner = document.createElement('DIV');
                         scenesColumnBodyInner.className = 'Streams_webrtc_popup-scenes-body-inner';
                         scenesColumnBody.appendChild(scenesColumnBodyInner);
+
+                        //var scenesColumnControl = document.createElement('DIV');
+                        //scenesColumnControl.className = 'Streams_webrtc_popup-scenes-control';
+                        //scenesColumnBody.appendChild(scenesColumnControl);
                         var scenesColumnControl = document.createElement('DIV');
                         scenesColumnControl.className = 'Streams_webrtc_popup-scenes-control';
+
+                        var scenesColumnControlAddBtn = document.createElement('DIV');
+                        scenesColumnControlAddBtn.className = 'Streams_webrtc_popup-scenes-control-btn Streams_webrtc_popup-scenes-control-btn-add';
+                        scenesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
+
+                        scenesColumnControlAddBtn.addEventListener('click', function (event) {
+                            addNewScenePopup.showDialog(event);
+                        });
+
+                        scenesColumnControl.appendChild(scenesColumnControlAddBtn);
+
+                        var scenesColumnControlBtn = document.createElement('DIV');
+                        scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn Streams_webrtc_popup-scenes-control-btn-remove';
+                        scenesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
+                        scenesColumnControlBtn.addEventListener('click', function () {
+                            removeScene();
+                        })
+                        scenesColumnControl.appendChild(scenesColumnControlBtn);
+                        var scenesColumnControlBtn = document.createElement('DIV');
+                        scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn';
+                        scenesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
+                        scenesColumnControlBtn.addEventListener('click', function () {
+                            moveSceneUp();
+                        })
+                        scenesColumnControl.appendChild(scenesColumnControlBtn);
+                        var scenesColumnControlBtn = document.createElement('DIV');
+                        scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn';
+                        scenesColumnControlBtn.innerHTML = _streamingIcons.moveDown;
+                        scenesColumnControlBtn.addEventListener('click', function () {
+                            moveSceneDown();
+                        })
+                        scenesColumnControl.appendChild(scenesColumnControlBtn);
+
                         scenesColumnBody.appendChild(scenesColumnControl);
                         scenesColumn.appendChild(scenesColumnBody);
                         _scenesEl = scenesColumnBodyInner;
@@ -242,8 +550,8 @@
 
 
                     return {
-                        createScenesCol:createScenesCol,
-                        syncList:syncList,
+                        createScenesCol: createScenesCol,
+                        syncList: syncList,
                         getActive: getActiveScene
                     }
 
@@ -286,106 +594,18 @@
                         if(sources.length !== listArr.length) {
                             return;
                         }
-                        var sourcesElements = listEl.children;
-                        var skipElements = [];
 
-                        var shouldSkip= function (item) {
-                            for(let i in skipElements) {
-                                if(skipElements[i] == item) return true;
-                            }
-                            return false;
+                        listArr.sort((a, b) => {
+                            return sources.findIndex(p => p === a.sourceInstance) - sources.findIndex(p => p === b.sourceInstance);
+                        });
+
+                        console.log('sortList: listArr', listArr.map(el => { return el.itemEl.innerText }));
+                        console.log('sortList: NOT sortedElements', Array.from(listEl.childNodes).map(el => { return el.innerText }))
+
+                        listEl.innerHTML == '';
+                        for (let e = 0; e < listArr.length; e++) {
+                            listEl.appendChild(listArr[e].itemEl)
                         }
-
-
-                        function applySort() {
-                            console.log('applySort: start');
-                            try {
-                                var err = (new Error);
-                                console.log(err.stack);
-                            } catch (e) {
-
-                            }
-
-                            for(let i in listArr) {
-                                console.log('applySort: i ' + i);
-
-                                if(shouldSkip(listArr[i])){
-                                    console.log('applySort: skip');
-                                    continue;
-                                }
-
-                                for(let s in sources) {
-                                    console.log('applySort: array s', sources[s]);
-
-                                    if(listArr[i].sourceInstance == sources[s]) {
-                                        console.log('applySort: array item', i, s);
-                                        skipElements.push(listArr[i]);
-                                        if(s !== i) moveItem(i, parseInt(s), listArr);
-                                        break;
-                                    }
-                                }
-                            }
-                            console.log('applySort: length', skipElements.length, listArr.length);
-
-                            if(skipElements.length != listArr.length) return applySort();
-                        }
-                        applySort();
-
-
-                        console.log('sortList: listArr', listArr);
-
-                        var moveElementTo = function (sourceElement, index) {
-                            if(index >= sourcesElements.length - 1) {
-                                listEl.appendChild(sourceElement);
-                            } else if(index < sourcesElements.length - 1) {
-                                listEl.insertBefore(sourceElement, sourcesElements[index + 1]);
-                            }
-                        }
-
-                        var sortedElements = [];
-
-                        var shouldSkipElement= function (itemEl) {
-                            for(let i in sortedElements) {
-                                if(sortedElements[i] == itemEl) return true;
-                            }
-                            return false;
-                        }
-
-                        function applySortElements() {
-                            console.log('applySortElements start', sortedElements.length, sourcesElements.length);
-                            console.log('applySortElements start 2', sourcesElements);
-
-                            for(let e in sourcesElements) {
-                                console.log('applySortElements el', sourcesElements[e]);
-
-                                if(shouldSkipElement(sourcesElements[e])){
-                                    console.log('applySortElements: skip');
-                                    continue;
-                                }
-                                var sourceListEl = null;
-                                var indexToMove = null;
-                                for (let i in listArr) {
-                                    if(listArr[i].itemEl == sourcesElements[e]) {
-                                        sourceListEl = sourcesElements[e];
-                                        indexToMove = parseInt(i);
-                                        break;
-                                    }
-                                }
-
-                                if(sourceListEl != null) {
-                                    console.log('applySortElements: move');
-
-                                    moveElementTo(sourceListEl, indexToMove);
-                                    sortedElements.push(sourceListEl);
-                                }
-                            }
-
-                            if(sortedElements.length != sourcesElements.length) applySortElements();
-                        }
-
-                        applySortElements();
-
-
                         for(let i in listArr) {
                             console.log('source level for', i)
                             console.log('source level parentGroup', listArr[i].sourceInstance.parentGroup)
@@ -1024,7 +1244,7 @@
 
                                 _fileManagerTool.state.onSelect.set(function (stream) {
                                     console.log('Streams/fileManager onSelect', stream)
-                                    var attributes = JSON.parse(stream['attributes']);
+                                    var attributes = JSON.parse(stream.fields.attributes);
                                     var link = Q.url(attributes['Q.file.url']);
                                     console.log('Streams/fileManager attributes', link)
                                     if(stream['type'] == 'Streams/video') {
@@ -1116,6 +1336,10 @@
                             dialogBody.appendChild(sourcesColumnControl)
 
                             return dialogBody;
+                        }
+
+                        function getSourcesList() {
+                            return _visualList;
                         }
 
                         var addVideoPopup = (function () {
@@ -1427,6 +1651,7 @@
                             addImageSource: addImageSource,
                             addVideoSource: addVideoSource,
                             getSelectedSource: getSelectedSource,
+                            getSourcesList: getSourcesList,
                             createOrGet: createVisualSourcesList
                         }
                     }())
@@ -2107,7 +2332,8 @@
                         createSourcesCol: createSourcesCol,
                         update: update,
                         loadSources: loadSources,
-                        getSelectedSource: getSelectedSource
+                        getSelectedSource: getSelectedSource,
+                        visualSources: visualSources
                     }
 
                 }())

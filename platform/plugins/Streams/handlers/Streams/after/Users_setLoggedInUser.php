@@ -11,6 +11,16 @@ function Streams_after_Users_setLoggedInUser($params)
 			'subscribe' => true
 		))) {
 			unset($_SESSION['Streams']['invite']['token']);
+
+			$splitId = Q_Utils::splitId($invite->invitingUserId, 3, "/");
+			$path = 'Q/uploads/Users';
+			$subpath = $splitId.'/invited/'.$token;
+			$pathToToken = APP_DIR.'/web/'.$path.'/'.$subpath;
+			Q_Utils::normalizePath($pathToToken);
+			if (file_exists($pathToToken) && !Users::isCustomIcon($user->icon)) {
+				$user->icon = Q_Html::themedUrl("$path/$subpath", array("baseUrlPlaceholder" => true));
+				$user->save();
+			}
 		}
 	}
 

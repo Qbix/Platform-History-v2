@@ -1,0 +1,248 @@
+.Streams_invite_modern_dialog {
+	padding: 20px;
+}
+.Streams_invite_modern_dialog_title {
+	padding-bottom:15px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.Streams_invite_modern_dialog_buttons {
+	display: flex;
+}
+
+.Streams_invite_modern_dialog_buttons svg{
+	height: 55px;
+	width: auto;
+}
+.Streams_invite_option {
+	flex-grow: 1;
+	flex-basis: 0;
+	padding:20px 10px;
+	border: 2px solid #000;
+	border-radius: 4px;
+	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+.Streams_invite_option:hover {
+	background: #e3e3e3;
+}
+.Streams_invite_share_link{
+	margin-right:0;
+}
+.Streams_invite_option_icon {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.Streams_invite_option_caption {
+	text-align: center;
+	line-height: 1;
+	margin-top: 10px;
+}
+
+/*Contacts picker dialog*/
+.Streams_invite_contacts {
+}
+.Streams_invite_contacts button {
+	margin-bottom: 10px;
+}
+.Streams_invite_contacts button,
+.Streams_invite_contacts_content button {
+	width: 100%;
+}
+.Streams_invite_contacts button {
+	margin-top: 10px;
+}
+.Streams_invite_submit {
+	display: flex;
+}
+.Streams_invite_submit input{
+	font-size: 18px;
+	flex-basis: 100%;
+	margin-right: 5px;
+}
+.Streams_invite_submit button{
+	width: auto;
+}
+
+.Streams_invite_contacts_picker {
+	padding: 10px;
+}
+.Q_notMobile .Streams_invite_contacts_picker {
+	min-width: 400px;
+}
+
+
+.Streams_invite_dialog .Streams_invite_social_buttons {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	margin-top: 20px;
+}
+
+.Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Q_button {
+	width: 49%;
+	font-size: 100%;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Q_button {
+	width: 24%;
+	font-size: 70%;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Q_button:not(:last-child) {
+	margin-right: 1%;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons img {
+	width: 30px;
+	margin: 0px;
+}
+
+.Streams_invite_dialog .Streams_invite_social_icons {
+	height: 30px;
+	width: 35px;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin: 0 auto;
+}
+
+/*
+Email
+------------------------------------------------------------ */
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email {
+	background-color: #8a5900;
+	background: -moz-linear-gradient(top, #b57500, #8a5900);
+	background: -webkit-linear-gradient(top, #b57500, #8a5900);
+	border: 1px solid #8a5900;
+	text-shadow: 0 -1px -1px #613400;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email:hover {
+	background-color: #b57500; /* fallback color */
+	background: -moz-linear-gradient(top, #8a5900, #b57500);
+	background: -ms-linear-gradient(top, #8a5900, #b57500);
+	background: -webkit-linear-gradient(top, #8a5900, #b57500);
+}
+
+.Streams_invite_dialog .Streams_invite_button_email .Streams_invite_social_icons {
+	background-image: url("../../img/invitations/email.svg");
+}
+
+/*
+Text
+------------------------------------------------------------ */
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text {
+	background: #227722;
+	background: -ms-linear-gradient(top, #449944, #227722);
+	background: -moz-linear-gradient(top, #449944, #227722);
+	background: -webkit-linear-gradient(top, #449944, #227722);
+	border: 1px solid #227722;
+	text-shadow: 0 -1px -1px #114c11;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text:hover {
+	background-color: #449944; /* fallback color */
+	background: -moz-linear-gradient(top, #227722, #449944);
+	background: -ms-linear-gradient(top, #227722, #449944);
+	background: -webkit-linear-gradient(top, #227722, #449944);
+}
+
+.Streams_invite_dialog .Streams_invite_button_text .Streams_invite_social_icons {
+	background-image: url("../../img/invitations/text.svg");
+}
+
+/*
+Facebook
+------------------------------------------------------------ */
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_facebook {
+	background-color: #2b4170; /* fallback color */
+	background: -moz-linear-gradient(top, #3b5998, #2b4170);
+	background: -ms-linear-gradient(top, #3b5998, #2b4170);
+	background: -webkit-linear-gradient(top, #3b5998, #2b4170);
+	border: 1px solid #2b4170;
+	text-shadow: 0 -1px -1px #1f2f52;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_facebook:hover {
+	background-color: #3b5998; /* fallback color */
+	background: -moz-linear-gradient(top, #2b4170, #3b5998);
+	background: -ms-linear-gradient(top, #2b4170, #3b5998);
+	background: -webkit-linear-gradient(top, #2b4170, #3b5998);
+}
+
+.Streams_invite_dialog .Streams_invite_button_facebook .Streams_invite_social_icons {
+	background-image: url("../../img/invitations/facebook.svg");
+}
+
+/*
+Twitter
+------------------------------------------------------------ */
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_twitter {
+	background-color: #0081ce; /* fallback color */
+	background: -moz-linear-gradient(top, #00aced, #0081ce);
+	background: -ms-linear-gradient(top, #00aced, #0081ce);
+	background: -webkit-linear-gradient(top, #00aced, #0081ce);
+	border: 1px solid #0081ce;
+	text-shadow: 0 -1px -1px #005ea3;
+}
+
+.Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_twitter:hover {
+	background-color: #00aced; /* fallback color */
+	background: -moz-linear-gradient(top, #0081ce, #00aced);
+	background: -ms-linear-gradient(top, #0081ce, #00aced);
+	background: -webkit-linear-gradient(top, #0081ce, #00aced);
+}
+
+.Streams_invite_dialog .Streams_invite_button_twitter .Streams_invite_social_icons {
+	background-image: url("../../img/invitations/twitter.svg");
+}
+
+/*photo dialog*/
+
+.Streams_invite_photo_dialog {
+	min-height: 300px;
+}
+
+.Streams_invite_photo_dialog p {
+	text-align: center;
+	margin: 10px;
+}
+
+.Streams_invite_photo_camera {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.Streams_invite_photo_dialog .Streams_invite_photo {
+	height: 200px;
+}
+
+.Streams_invite_photo_dialog .Streams_invite_photo_pulsate {
+	animation: pulsate 2s infinite;
+}
+
+.Streams_invite_QR_content canvas,
+.Streams_invite_QR_content img {
+	display: block;
+	padding: 20px;
+	margin: 0 auto;
+}
+
+@keyframes pulsate {
+	0% {transform: scale(1)}
+	50% {transform: scale(1.5)}
+	100% {transform: scale(1)}
+}
+
+.Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_email,
+.Q_cordova .Streams_invite_dialog .Streams_invite_social_buttons .Streams_invite_button_text {
+	display: none;
+}

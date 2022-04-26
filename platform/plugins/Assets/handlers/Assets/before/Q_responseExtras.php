@@ -30,7 +30,8 @@ function Assets_before_Q_responseExtras() {
 	}
 
 	// blockchain data
-	Q_Response::setScriptData('Q.plugins.Assets.NFT.userContractStreamName', Assets_NFT_Series::$categoryStreamName);
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.userContractStreamName', Assets_NFT_Contract::$streamName);
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.seriesRelationType', Assets_NFT_Series::$relationType);
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.chains', Assets_NFT::getChains());
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.currencies', Q_Config::get("Assets", "NFT", "currencies", array()));
 	$nf = Q_Config::get('Assets', 'NFT', 'factory', 'contract', 'address', null);
@@ -41,9 +42,7 @@ function Assets_before_Q_responseExtras() {
 	// set Users.Web3.NFT.icon.sizes for imagepicker
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
 
-	// set Assets.NFT.sales.manual.address
-	Q_Response::setScriptData('Q.plugins.Assets.NFT.sales.manual.address', Q_Config::get("Assets", "NFT", "sales", "manual", "address", null));
-
+	Q_Response::setScriptData('Q.plugins.Assets.NFT.contract.allow.author', Q_Config::get("Assets", "NFT", "contract", "allow", "author", true));
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.base', Q_Config::get("Assets", "NFT", "URI", "base", array()));
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.suffix', Q_Config::get("Assets", "NFT", "URI", "suffix", array()));
 }

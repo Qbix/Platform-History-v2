@@ -11,6 +11,6 @@ function Assets_NFTseries_post ($params) {
 	}
 
 	$stream = Streams::fetchOne($userId, $userId, $req["streamName"]);
-	$fields = Q::take($req, array("attributes"));
+	$fields = Q::take($req, array("title", "attributes"));
 	Assets_NFT_Series::update($stream, $fields);
 }

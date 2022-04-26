@@ -7,7 +7,7 @@ $text = Q_Text::get("Assets/content");
 foreach ($chains as $chain) {
 	$streamName = Q::interpolate($streamNameTemplate, $chain);
 	$stream = Streams::fetchOne($communityId, $communityId, $streamName);
-	$title = Q::interpolate($text["NFT"]["contract"]["GlobalContractFor"], array("chainNetwork" => $chain["name"]));
+	$title = Q::interpolate($text["NFT"]["contract"]["GlobalContractFor"], array("chainNetwork" => $chain["name"], "communityName" => Users::communityName()));
 	if (!$stream) {
 		$stream = Streams::create($communityId, $communityId, 'Assets/NFT/contract', array(
 			'name' => $streamName,

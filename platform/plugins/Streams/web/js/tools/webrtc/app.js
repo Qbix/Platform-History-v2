@@ -1585,6 +1585,7 @@ window.WebRTCRoomClient = function app(options){
             var _activeScene = null;
             var _defaultScene = null;
 
+
             var Scene = function () {
                 this.title = null;
                 this.sources = [];
@@ -1599,12 +1600,83 @@ window.WebRTCRoomClient = function app(options){
 
 
             function createScene(name) {
+                console.log('canvasComposer: createScene');
                 var newScene = new Scene();
                 newScene.title = name;
+                _scenes.push(newScene);
+            }
+
+            function removeScene(sceneInstance) {
+                console.log('canvasComposer: removeScene', sceneInstance);
+                for (let s in _scenes) {
+                    if (_scenes[s] == sceneInstance) {
+                        _scenes.splice(s, 1)
+                        break;
+                    }
+                }
+                console.log('canvasComposer: removeScene: scenes.sources', sceneInstance.sources.length);
+
+                for (let r in sceneInstance.sources) {
+                    videoComposer.removeSource(sceneInstance.sources[r], sceneInstance, true);
+                }
+                console.log('canvasComposer: removeScene: scenes.sources 2', sceneInstance.sources.length);
+
             }
 
             function getScenes() {
                 return _scenes;
+            }
+
+            function moveSceneUp(scene) {
+                let index;
+                for(let i in _scenes) {
+                    if(scene == _scenes[i]) {
+                        index = parseInt(i);
+                        break;
+                    }
+                }
+                if(index != null) {
+                    moveScene(index, index - 1);
+                }
+            }
+
+            function moveSceneDown(scene) {
+                let index;
+                for(let i in _scenes) {
+                    if(scene == _scenes[i]) {
+                        index = parseInt(i);
+                        break;
+                    }
+                }
+                if(index != null) {
+                    moveScene(index, index + 1);
+                }
+            }
+
+            function moveScene(old_index, new_index) {
+                console.log('moveScene', old_index, new_index);
+                if (new_index < 0) {
+                    new_index = 0;
+                }
+                if (new_index >= _scenes.length) {
+                    new_index = _scenes.length - 1;
+                }
+                _scenes.splice(new_index, 0, _scenes.splice(old_index, 1)[0]);
+                _eventDispatcher.dispatch('sceneMoved');
+
+                return _scenes;
+            }
+
+            function selectScene(sceneInstance) {
+                let sceneExists = false;
+                for(let s in _scenes) {
+                    if(_scenes[s] == sceneInstance) sceneExists = true;
+                }
+                if(sceneExists) {
+                    _activeScene = sceneInstance;
+                    return true;
+                }
+                return false;
             }
 
             function getActiveScene() {
@@ -2007,6 +2079,7 @@ window.WebRTCRoomClient = function app(options){
                                 return {index:j, childItemsNum: childItems };
                             }
                         }
+                        return {index:0, childItemsNum: 0 };
                     }
 
                     if(newSource.sourceType == 'webrtc') {
@@ -5258,6 +5331,13 @@ window.WebRTCRoomClient = function app(options){
                 videoTrackIsMuted: function () {
                     return _videoTrackIsMuted;
                 },
+                createScene: createScene,
+                removeScene: removeScene,
+                moveSceneUp: moveSceneUp,
+                moveSceneDown: moveSceneDown,
+                getScenes: getScenes,
+                selectScene: selectScene,
+                getActiveScene: getActiveScene
             }
         }(app))
 
@@ -9957,12 +10037,12 @@ window.WebRTCRoomClient = function app(options){
         }
 
         var connect = function (io, old) {
-            log('initWithNodeJs: connect');
+            log('initWithNodeJs: connect', options.nodeServer);
 
             //let io = io('/webrtc');
             var secure = options.nodeServer.indexOf('https://') == 0;
             if(old) {
-                log('initWithNodeJs: connect old', io.connect);
+                log('initWithNodeJs: connect old');
 
                 socket = io.connect('/webrtc', options.nodeServer, function (io) {
                     log('initWithNodeJs: connect socket', io);
@@ -9999,7 +10079,7 @@ window.WebRTCRoomClient = function app(options){
                 socket = io.connect(options.nodeServer + '/webrtc', {
                     transports: ['websocket'],
                     // path: options.roomName,
-                    'force new connection': window.WebRTCSocket != null ? false : true,
+                    'force new connection': true,
                     /* channel:'webrtc',
                      publish_key:'webrtc_test',
                      subscribe:'webrtc_test',*/
@@ -10008,6 +10088,26 @@ window.WebRTCRoomClient = function app(options){
                     reconnectionDelay: 1000,
                     reconnectionDelayMax: 5000,
                     reconnectionAttempts: 5
+                });
+                socket.on('connect', onConnect);
+
+                socket.on('connect_error', function(e) {
+                    log('initWithNodeJs: connect_error');
+                    app.event.dispatch('connectError');
+                    console.log('Connection failed');
+                    console.error(e);
+                });
+
+                socket.on('reconnect_failed', function(e) {
+                    log('initWithNodeJs: reconnect_failed');
+                    console.log(e)
+                    app.event.dispatch('reconnectError');
+                });
+                socket.on('reconnect_attempt', function(e) {
+                    log('initWithNodeJs: reconnect_attempt');
+                    console.log('reconnect_attempt', e)
+                    app.state = 'reconnecting';
+                    app.event.dispatch('reconnectAttempt', e);
                 });
             }
 
@@ -10021,11 +10121,11 @@ window.WebRTCRoomClient = function app(options){
         } else if(findScript('socket.io.js') && typeof io != 'undefined') {
             log('initWithNodeJs: use existing');
             connect(io);
-        } else {
+        } else if(2>1) {
             log('initWithNodeJs: add socket.io');
 
-            var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.1.3/socket.io.min.js'
-            var xhr = new XMLHttpRequest();
+            var url = 'https://demoproject.co.ua:10595/socket.io/socket.io.js'
+            /*var xhr = new XMLHttpRequest();
 
             xhr.open('GET', url, true);
 
@@ -10042,18 +10142,18 @@ window.WebRTCRoomClient = function app(options){
                     }
                 }
             }
-            xhr.send();
+            xhr.send();*/
 
-            /*var script = document.createElement('script');
+            var script = document.createElement('script');
 			script.onload = function () {
-				requirejs(['https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.js'], function (io) {
+				requirejs([url], function (io) {
 					window.io = io;
-					connect();
+					connect(io);
 				});
 			};
 			script.src = 'https://requirejs.org/docs/release/2.2.0/minified/require.js';
 
-			document.head.appendChild(script);*/
+			document.head.appendChild(script);
 
         }
 
