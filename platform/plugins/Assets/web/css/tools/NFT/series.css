@@ -20,6 +20,7 @@
 .Assets_NFT_series_preview_tool .Assets_NFT_series_untilTime {
     display: inline-block;
 }
+.Assets_NFT_series_preview_tool .Assets_NFT_series_name,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_price,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_ending,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_untilTime {
@@ -47,6 +48,7 @@
 .Assets_NFT_series_preview_tool .Q_seconds {
     display: inline-block;
     width: 20px;
+    text-align: center;
 }
 .Assets_NFT_series_preview_tool .Assets_NFT_series_sale,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_sale > * {
@@ -80,6 +82,11 @@
 .Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_sale .offSale {
     display: block;
 }
+.Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_ending,
+.Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_untilTime {
+    display: none;
+}
+
 /***create nft form css***/
 .Assets_NFT_series_composer {
     width: 350px;
@@ -242,17 +249,30 @@
     border-radius: 10px;
     padding: 10px;
 }
-.Assets_NFT_series_composer .Assets_nft_form_details .Assets_nft_form_price {
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price,
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author,
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name {
     white-space: nowrap;
-    margin-bottom: 10px;
 }
-.Assets_NFT_series_composer .Assets_nft_form_details .Assets_nft_form_price input[name=price] {
-    width: calc(100% - 70px);
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price label,
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author label,
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name label {
+    display: inline-block;
+    vertical-align: middle;
 }
-.Assets_NFT_series_composer .Assets_nft_form_details .Assets_nft_form_price select[name=currency] {
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price input[name=price] {
+    width: calc(100% - 130px);
+}
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price select[name=currency] {
     width: 65px;
-
 }
+.Assets_NFT_series_composer .Assets_nft_series_author input[name=author] {
+    width: calc(100% - 80px);
+}
+.Assets_NFT_series_composer .Assets_nft_series_name input[name=name] {
+    width: calc(100% - 80px);
+}
+
 /***create nft form css ends here***/
 
 @media screen and (max-width: 721px) and (min-width: 500px) {

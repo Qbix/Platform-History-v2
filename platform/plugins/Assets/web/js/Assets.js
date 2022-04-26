@@ -1124,7 +1124,7 @@
 							]
 						).then(_waitTransaction).catch(function (err) {
 							Q.handle(callback, this, [err]);
-							Q.alert(Q.firstErrorMessage(err));
+							Q.alert(Q.getObject("data.message", err) || Q.firstErrorMessage(err));
 						});
 					}, {
 						contractAddress: info.contractAddress

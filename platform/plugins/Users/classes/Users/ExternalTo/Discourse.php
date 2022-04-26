@@ -12,12 +12,20 @@
  */
 class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_ExternalTo_Interface
 {
+	protected static $apiKey = null;
+	protected static $apiHost = null;
+	protected static $userName = null;
+
+	protected static function _contract () {
+		self::$apiKey = Q_Config::get("Discourse", "API", "key", null);
+		self::$apiHost = Q_Config::get("Discourse", "API", "host", null);
+		self::$userName = Q_Config::get("Discourse", "API", "apiUsername", null);
+	}
     public static function createForumUser ($name, $email, $password, $platformId) {
+		self::_contract();
+
         // don't save api key to logs
-        $apiKey = Q_Config::expect("Discourse", "API", "key");
-        $apiHost = Q_Config::expect("Discourse", "API", "host");
-        $userName = Q_Config::expect("Discourse", "API", "apiUsername");
-        $url = sprintf("%s/users", $apiHost);
+        $url = sprintf("%s/users", self::$apiHost);
 
         $fields = array(
             'name' => $name,
@@ -32,8 +40,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         Q::log(print_r($f, true), "discourse");
 
         $headers = array(
-            "Api-Key: $apiKey",
-            "Api-Username: $userName"
+            "Api-Key: ".self::$apiKey,
+            "Api-Username: ".self::$userName
         );
 
         $result = Q_Utils::post($url, $fields, null,null, $headers);
@@ -67,12 +75,12 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         // if user registered, try to deactivate and activate
         // this trick need to approve email (https://meta.discourse.org/t/api-to-create-a-user-without-sending-out-activation-email/23432/9)
         if ($userId) {
-            $deactivateUrl = sprintf("%s/admin/users/%s/deactivate.json", $apiHost, $userId);
-            $activateUrl = sprintf("%s/admin/users/%s/activate.json", $apiHost ,$userId);
+            $deactivateUrl = sprintf("%s/admin/users/%s/deactivate.json", self::$apiHost, $userId);
+            $activateUrl = sprintf("%s/admin/users/%s/activate.json", self::$apiHost ,$userId);
 
             $data = array(
-                'api_key' => $apiKey,
-                'api_username' => $userName
+                'api_key' => self::$apiKey,
+                'api_username' => self::$userName
             );
 
             // deactivate user
@@ -100,10 +108,9 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
     }
 
     public static function updateForumUserAvatar() {
+		self::_contract();
+
         $qbixUserId = Users::loggedInUser(true)->id;
-        $apiKey = Q_Config::expect("Discourse", "API", "key");
-        $apiHost = Q_Config::expect("Discourse", "API", "host");
-        $userName = Q_Config::expect("Discourse", "API", "apiUsername");
         $stream = Streams::fetchOne($qbixUserId, $qbixUserId, 'Streams/user/discourse');
 
         if(!$stream) {
@@ -136,7 +143,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $imageInfo = getimagesize($imagePath);
         $cfile = curl_file_create($imagePath, $imageInfo['mime'], basename($imagePath));
 
-        $uploadsUrl = sprintf("%s/uploads.json", $apiHost);
+        $uploadsUrl = sprintf("%s/uploads.json", self::$apiHost);
 
         $fields = array(
             'type' => 'avatar',
@@ -149,8 +156,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 
         // don't save api key to logs
         $headers = array(
-            "Api-Key: $apiKey",
-            "Api-Username: $userName",
+            "Api-Key: ".self::$apiKey,
+            "Api-Username: ".self::$userName,
             "Content-Type: multipart/form-data"
         );
 
@@ -169,7 +176,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $uploadId = Q::ifset($result, 'id', null);
 
         if($uploadId) {
-            $updateAvatarUrl = sprintf("%s/u/%s/preferences/avatar/pick.json", $apiHost, $discourseUsername);
+            $updateAvatarUrl = sprintf("%s/u/%s/preferences/avatar/pick.json", self::$apiHost, $discourseUsername);
 
             $data = array(
                 'upload_id' => $uploadId,

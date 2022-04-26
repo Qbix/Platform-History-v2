@@ -5,7 +5,7 @@ function Assets_NFT_response_attributes ($params) {
 	$res = array();
 
 	foreach ($displayTypes as $displayType) {
-		$res[$displayType] = array();
+		$res[$displayType["value"]] = array("name" => $displayType["name"], "data" => array());
 	}
 
 	$resMysql = Assets_NftAttributes::select()->where(array(
@@ -14,14 +14,14 @@ function Assets_NFT_response_attributes ($params) {
 
 	foreach ($resMysql as $rm) {
 		if (!is_array($res[$rm->display_type])) {
-			$res[$rm->display_type] = array();
+			$res[$rm->display_type] = array("name" => $rm->display_type, "data" => array());
 		}
 
-		if (!is_array($res[$rm->display_type][$rm->trait_type])) {
-			$res[$rm->display_type][$rm->trait_type] = array();
+		if (!is_array(Q::ifset($res, $rm->display_type, "data", $rm->trait_type, null))) {
+			$res[$rm->display_type]["data"][$rm->trait_type] = array();
 		}
 
-		$res[$rm->display_type][$rm->trait_type][] = $rm->value;
+		$res[$rm->display_type]["data"][$rm->trait_type][] = $rm->value;
 	}
 
 	return $res;
