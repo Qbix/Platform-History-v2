@@ -22,7 +22,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 		self::$userName = Q_Config::get("Discourse", "API", "apiUsername", null);
 	}
     public static function createForumUser ($name, $email, $password, $platformId) {
-		self::_contract();
+		    self::_contract();
 
         // don't save api key to logs
         $url = sprintf("%s/users", self::$apiHost);
@@ -108,7 +108,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
     }
 
     public static function updateForumUserAvatar() {
-		self::_contract();
+		    self::_contract();
 
         $qbixUserId = Users::loggedInUser(true)->id;
         $stream = Streams::fetchOne($qbixUserId, $qbixUserId, 'Streams/user/discourse');
@@ -135,9 +135,8 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
         $tail = str_replace($baseUrl . '/Q/uploads/', DS, $avatarUrl);
         $imagePath = $head . $tail;
         if (!file_exists($imagePath)) {
-            throw new Q_Exception_MissingFile(array(
-                'filename' => $imagePath
-            ));
+            Q::log("File doesn't exist: ".$imagePath, "discourse");
+            return;
         }
 
         $imageInfo = getimagesize($imagePath);
