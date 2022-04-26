@@ -24,6 +24,7 @@
     Q.Tool.define("Assets/NFT/contract", function(options) {
         var tool = this;
         var state = tool.state;
+        var $toolElement = $(this.element);
 
         if (Q.isEmpty(state.userId)) {
             return console.warn("user id required!");
@@ -42,6 +43,8 @@
         // is admin
         var roles = Object.keys(Q.getObject("roles", Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
+        tool.canManage = tool.isAdmin || (Q.getObject("NFT.contract.allow.author", Assets) && Users.loggedInUserId() === state.userId);
+        $toolElement.attr("data-canManage", tool.canManage);
     },
 
     { // default options here
@@ -123,6 +126,10 @@
                 $globalContract.removeClass("Q_selected", "Q_working").off("click").empty();
                 $customContract.removeClass("Q_selected", "Q_working").off("click").empty();
 
+                Q.each(["data-streamName", "data-publisherId", "data-contract"], function (i, attr) {
+                    $globalContract.add($customContract).removeAttr(attr);
+                });
+
                 // remove all related tools
                 $(".Streams_related_tool", tool.element).each(function () {
                     Q.Tool.remove(this, true, true);
@@ -158,13 +165,11 @@
                 }
 
                 if (state.customContracts && factory) {
+                    $customContract.removeClass("Assets_NFT_contract_composer");
                     Q.Streams.get.force(state.userId, selectedStreamName, function (err) {
                         if (err) {
                             if (Q.getObject([0, "classname"], err) === "Q_Exception_MissingRow") {
-                                if (!tool.isAdmin && !Q.getObject("NFT.contract.allow.author", Assets)) {
-                                    return $customContract.remove();
-                                }
-
+                                $customContract.addClass("Assets_NFT_contract_composer");
                                 Q.Template.render("Assets/NFT/contract/composer", {
                                     iconUrl: Q.url("{{Q}}/img/actions/add.png")
                                 }, function (err, html) {
@@ -422,11 +427,11 @@
                 });
 
                 $element.off("click");
-                if (onInvoke) {
+                if (tool.canManage && onInvoke) {
                     $element.on("click", onInvoke);
                 }
 
-                if (publisherId === state.userId) {
+                if (tool.canManage) {
                     $element.plugin('Q/actions', {
                         alwaysShow: true,
                         actions: {
@@ -491,7 +496,7 @@
                             }
                         });
 
-                        if (relationAmount < state.limitSeries) {
+                        if (tool.canManage && relationAmount < state.limitSeries) {
                             relatedOptions.creatable = {
                                 'Assets/NFT/series': {
                                     publisherId: state.userId,
