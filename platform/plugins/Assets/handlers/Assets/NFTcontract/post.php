@@ -4,8 +4,9 @@ function Assets_NFTcontract_post ($params) {
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$userId = Q::ifset($req, "userId", $loggedInUserId);
 	$adminLabels = Q_Config::get("Users", "communities", "admins", null);
+	$allowAuthor = Q_Config::get("Assets", "NFT", "contract", "allow", "author", false);
 	// if user try to update align profile or is not an admin
-	if ($userId != $loggedInUserId && !(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
+	if (!($allowAuthor && $userId == $loggedInUserId) && !(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
