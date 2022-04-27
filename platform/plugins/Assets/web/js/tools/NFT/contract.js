@@ -45,6 +45,9 @@
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
         tool.canManage = tool.isAdmin || (Q.getObject("NFT.contract.allow.author", Assets) && Users.loggedInUserId() === state.userId);
         $toolElement.attr("data-canManage", tool.canManage);
+
+        // listen onAccountsChanged event to change canManage
+        Users.Web3.onAccountsChanged.set(tool.checkPermissions, tool);
     },
 
     { // default options here
@@ -109,7 +112,6 @@
                 var $selectedOption = $(":selected", $this);
                 var contract = $selectedOption.attr("data-contract");
                 var factory = $selectedOption.attr("data-factory");
-                var chainNetwork = $selectedOption.text();
 
                 var chainId = null;
                 var publisherId = null;
@@ -140,7 +142,6 @@
                     $globalContract.attr("data-streamName", selectedStreamName);
                     tool.renderView({
                         $element: $globalContract,
-                        title: tool.text.NFT.contract.GlobalContractFor.interpolate({chainNetwork: chainNetwork, communityName: Users.communityName}),
                         contract: contract,
                         publisherId: communityId,
                         streamName: selectedStreamName,
@@ -382,7 +383,7 @@
          * @method renderView
          * @param {object} options
          * @param {Element|jQuery} [options.$element] - elemen to render in, tool.element by default.
-         * @param {String} options.title
+         * @param {String} [options.title]
          * @param {String} options.publisherId - publisher of contract stream
          * @param {String} options.streamName - stream name of contract stream
          * @param {String} [options.contract]
@@ -394,10 +395,10 @@
             var tool = this;
             var state = this.state;
             var $element = options.$element || $(this.element);
-            var title = options.title;
             var contractAddress = options.contract;
             var onInvoke = options.onInvoke;
             var onAvatar = options.onAvatar;
+            var title = options.title || "";
             var callback = options.callback;
             var publisherId = options.publisherId;
             var streamName = options.streamName;
@@ -427,40 +428,69 @@
                 });
 
                 $element.off("click");
-                if (tool.canManage && onInvoke) {
+                if (onInvoke) {
                     $element.on("click", onInvoke);
                 }
 
-                if (tool.canManage) {
-                    $element.plugin('Q/actions', {
-                        alwaysShow: true,
-                        actions: {
-                            edit: function () {
-                                Q.prompt(null, function (address) {
-                                    if (!address) {
+                $element.addClass("Q_working");
+
+                // get contarct info
+                tool.getInfo({
+                    publisherId: publisherId,
+                    streamName: streamName,
+                    address: contractAddress,
+                    chainId: chainId,
+                    title: title
+                }, function (err) {
+                    $element.removeClass("Q_working");
+
+                    if (err) {
+                        return;
+                    }
+
+                    var data = this.slots.getInfo;
+                    if (data.name && data.symbol) {
+                        $(".Streams_preview_title", $element).text(tool.text.NFT.contract.ContractName.interpolate({
+                            contractName: data.name,
+                            contractSymbol: data.symbol,
+                            chainNetwork: chain.name
+                        }));
+                    }
+
+                    if (data.owner) {
+                        $element.attr("data-owner", data.owner);
+                        tool.checkPermissions();
+                    }
+                });
+
+                $element.plugin('Q/actions', {
+                    alwaysShow: true,
+                    actions: {
+                        edit: function () {
+                            Q.prompt(null, function (address) {
+                                if (!address) {
+                                    return;
+                                }
+
+                                Web3.checkProvider(chain, function (err, contract) {
+                                    if (err) {
                                         return;
                                     }
 
-                                    Web3.checkProvider(chain, function (err, contract) {
-                                        if (err) {
-                                            return;
-                                        }
+                                    contract.transferOwnership(address).then(function () {
 
-                                        contract.transferOwnership(address).then(function () {
-
-                                        }).catch(function (err) {
-                                            Q.alert(Q.getObject("data.message", err) || Q.firstErrorMessage(err));
-                                        });
-                                    }, {
-                                        contractAddress: contractAddress
-                                    })
-                                },{
-                                    title: tool.text.NFT.contract.TransferOwnership
-                                });
-                            }
+                                    }).catch(function (err) {
+                                        Q.alert(Q.getObject("data.message", err) || Q.firstErrorMessage(err));
+                                    });
+                                }, {
+                                    contractAddress: contractAddress
+                                })
+                            },{
+                                title: tool.text.NFT.contract.TransferOwnership
+                            });
                         }
-                    });
-                }
+                    }
+                });
 
                 if (state.withSeries) {
                     var relatedOptions = {
@@ -496,7 +526,7 @@
                             }
                         });
 
-                        if (tool.canManage && relationAmount < state.limitSeries) {
+                        if (relationAmount < state.limitSeries) {
                             relatedOptions.creatable = {
                                 'Assets/NFT/series': {
                                     publisherId: state.userId,
@@ -504,11 +534,61 @@
                                 }
                             };
                         }
-                        $("<div class='Assets_NFT_contract_series'>").insertAfter($element).tool("Streams/related", relatedOptions).activate();
+                        var $relatedTool = $("<div class='Assets_NFT_contract_series'>").insertAfter($element);
+                        tool.checkPermissions();
+                        $relatedTool.tool("Streams/related", relatedOptions).activate()
                     });
                 }
 
                 Q.handle(callback, $element);
+            });
+        },
+        /**
+         * Get info about contract (author, owner, ...)
+         * @method getInfo
+         * @param {object} options
+         * @param {String} options.address - contract address
+         * @param {String} options.chainId - chain id
+         * @param {String} options.publisherId - contract stream publisherId
+         * @param {String} options.streamName - contract stream name
+         * @param {String} [options.title] - if empty request contract name too
+         * @param {Function} callback
+         */
+        getInfo: function (options, callback) {
+            Q.req("Assets/NFTcontract", "getInfo", function (err, response) {
+                if (err) {
+                    return Q.handle(callback, response, [err]);
+                }
+
+                Q.handle(callback, response);
+            }, {
+                fields: {
+                    address: options.address,
+                    chainId: options.chainId,
+                    title: !!options.title,
+                    publisherId: options.publisherId,
+                    streamName: options.streamName
+                }
+            });
+        },
+        /**
+         * Check if user can manage contracts and apply appropriate actions
+         * @method checkPermissions
+         */
+        checkPermissions: function () {
+            var tool = this;
+
+            var currentWallet = Q.getObject('ethereum.selectedAddress');
+            $(".Assets_NFT_contract", tool.element).each(function () {
+                var $this = $(this);
+                var owner = $this.attr("data-owner");
+                if (!owner) {
+                    return;
+                }
+
+                var canManage = owner === currentWallet;
+                $this.attr("data-canManage", canManage);
+                $this.next(".Assets_NFT_contract_series").attr("data-canManage", canManage);
             });
         },
         /**
@@ -523,6 +603,7 @@
             var tool = this;
             var state = this.state;
             var chain = NFT.chains[chainId];
+            state.onInstanceCreatedCalled = false;
 
             Web3.checkProvider(chain, function (err, factory) {
                 if (err) {

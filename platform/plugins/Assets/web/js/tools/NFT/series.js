@@ -181,7 +181,6 @@
                                     } else {
                                         $this.next("." + val + "sText").text(':');
                                     }
-
                                 });
                             });
 
