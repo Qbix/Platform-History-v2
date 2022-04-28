@@ -60,7 +60,11 @@
 			fields.instructions = Q.extend({}, fields.instructions, {
 				'Streams/mentions': selectedIds
 			});
+		}, tool);
 
+		// on message render
+		state.chatTool.state.afterPost.set(function () {
+			// clear message stats on every new message
 			state.selectedIds = [];
 		}, tool);
 

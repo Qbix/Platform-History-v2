@@ -280,9 +280,12 @@
 					}
 				}
 			},
-			"Streams/resource": {
+			"Streams/access": {
 				"create": false,
-				"edit": false
+				"edit": false,
+				"defaults": {
+					"title": "Access Policy"
+				}
 			},
 			"Streams/task": {
 				"messages": {
@@ -644,7 +647,7 @@
 			"answered": ["Users/owners", "Users/admins"]
 		},
 		"chat": {
-			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image"],
+			"allowedRelatedStreams": ["Streams/video", "Streams/audio", "Streams/pdf", "Streams/image", "Streams/webrtc"],
 			"delay": 20 /* delay between chat messages in seconds */
 		}
 	}

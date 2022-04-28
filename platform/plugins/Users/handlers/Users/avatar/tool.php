@@ -14,7 +14,7 @@
  * @param {boolean} [$options.editable]
  *   Optional. Whether to provide an interface for editing the user's info. Can be array containing "icon", "name".
  * @param {array} [$options.inplaces] Additional fields to pass to the child Streams/inplace tools, if any
- * @param {boolean} [$options.renderOnClient]
+ * @param {boolean} [$options.renderOnClient=false]
  *    If true, only the html container is rendered, so the client will do the rest.
  */
 function Users_avatar_tool($options)

@@ -157,7 +157,10 @@ class Streams_Avatar extends Base_Streams_Avatar
 	{
 		$fn = $this->firstName;
 		$ln = $this->lastName;
-		$u = $this->username == $this->firstName || $this->username == $this->lastName ? "" : $this->username;
+		$u = $this->username == $this->firstName 
+			|| $this->username == $this->lastName 
+			? "" 
+			: $this->username;
 		if (!empty($options['escape']) or !empty($options['html'])) {
 			$fn = Q_Html::text($fn);
 			$ln = Q_Html::text($ln);	

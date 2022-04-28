@@ -233,7 +233,6 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	static function fromHexString($asUserId, $hexString, $hasSeriesId = false)
 	{
-		$Streams::fromHexString($hexString, $hasSeriesId);
 		if (substr($hexString, 0, 2) === '0x') {
 			$hexString = substr($hexString, 2);
 		}

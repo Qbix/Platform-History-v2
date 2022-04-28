@@ -938,8 +938,8 @@ class Db_Row
 			list ($name_internal, $value) = call_user_func($callback, $value);
 		}
 
-		if (!array_key_exists($name_internal, $this->fields)) {
-			$this->fieldsOriginal[$name_internal] = null;
+		if (!isset($this->fieldsOriginal[$name_internal])) {
+			$this->fieldsOriginal[$name_internal] = Q::ifset($this->fields, $name_internal, null);
 		}
 		$this->fields[$name_internal] = $value;
 		$this->fieldsModified[$name_internal] = true;

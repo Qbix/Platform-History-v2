@@ -39,7 +39,7 @@ function Streams_related_response()
 		'limit', 'offset', 'min', 'max', 'type', 'prefix', 'filter'
 	));
 	$options['relationsOnly'] = !$streams_requested;
-	$options['orderBy'] = filter_var($_REQUEST['ascending'], FILTER_VALIDATE_BOOLEAN);
+	$options['orderBy'] = filter_var(Q::ifset($_REQUEST, 'ascending', 'false'), FILTER_VALIDATE_BOOLEAN);
 	$options['fetchOptions'] = @compact('withParticipant');
 	$result = Streams::related(
 		$asUserId,

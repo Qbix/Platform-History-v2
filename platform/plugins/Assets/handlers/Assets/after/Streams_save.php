@@ -1,6 +1,15 @@
 <?php
 function Assets_after_Streams_save($params) {
 	$stream = $params['row'];
+
+	if (in_array($stream->type, array("Assets/NFT", "TokenSociety/NFT"))) {
+		if (Q::ifset($params, "modifiedFields", "attributes", null)) {
+			Assets_NFT::updateAttributesRelations($stream);
+		}
+
+		return;
+	}
+
 	$allowedNames = array(
 		array("name" => "Streams/user/firstName", "field" => "content"),
 		array("name" => "Streams/user/lastName", "field" => "content"),

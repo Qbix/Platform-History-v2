@@ -606,16 +606,25 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$nt = & self::$nestedTransactions[$dsn];
 			if (!isset($nt)) {
 				$nt = & self::$nestedTransactions[$dsn];
-				$nt = array('count' => 0, 'keys' => array());
+				$nt = array(
+					'count' => 0,
+					'keys' => array(),
+					'connections' => array(),
+					'backtraces' => array()
+				);
 			}
 			$ntc = & $nt['count'];
 			$ntk = & $nt['keys'];
+			$ntct = & $nt['connections'];
+			$ntbt = & $nt['backtraces'];
 
 			$sql = $query->getSQL();
 
 			try {
 				if (!empty($query->clauses["BEGIN"])) {
 					$ntk[] = Q::ifset($query, 'transactionKey', null);
+					$ntct[] = $connection;
+					$ntbt[] = Q::b();
 					if (++$ntc == 1) {
 						$pdo->beginTransaction();
 					}
@@ -667,10 +676,17 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						if ($lastTransactionKey
 						and $query->transactionKey !== $lastTransactionKey
 						and $query->transactionKey !== '*') {
+							Q::log("WARNING: Forgot to resolve transactions on $connections connections");
+							foreach (self::$nestedTransactions as $t) {
+								Q::log($t['connections']);
+								Q::log($t['backtraces']);
+							}
 							throw new Exception(
 								"forgot to resolve transaction with key $lastTransactionKey"
 							);
 						}
+						array_pop($ntct);
+						array_pop($ntbt);
 						if (--$ntc == 0) {
 							$pdo->commit();
 						}
@@ -797,9 +813,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			}
 		}
 		if ($connections) {
-			throw new Exception(
-				"forgot to resolve transactions on $connections connections"
-			);
+			Q::log("WARNING: Forgot to resolve transactions on $connections connections");
+			foreach (self::$nestedTransactions as $t) {
+				Q::log($t['connections']);
+				Q::log($t['backtraces']);
+			}
 		}
 	}
 
@@ -828,7 +846,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * you often need the "where" clauses to figure out which database to send it to,
 	 * if sharding is being used.
 	 * @method begin
-	 * @param {string} [$$lockType='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
+	 * @param {string} [$lockType='FOR UPDATE'] Defaults to 'FOR UPDATE', but can also be 'LOCK IN SHARE MODE'
 	 * or set it to null to avoid adding a "LOCK" clause
 	 * @param {string} [$transactionKey=null] Passing a key here makes the system throw an
 	 *  exception if the script exits without a corresponding commit by a query with the
@@ -843,6 +861,9 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$this->ignoreCache();
 		if ($lockType) {
 			$this->lock($lockType);
+		}
+		if (isset($transactionKey)) {
+			$this->transactionKey = $transactionKey;
 		}
 		$this->clauses["BEGIN"] = "START TRANSACTION";
 		return $this;
@@ -894,7 +915,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (!empty($this->clauses["ROLLBACK"])) {
 			throw new Exception("You can't use COMMIT and ROLLBACK in the same query.", -1);
 		}
+		$this->ignoreCache();
 		$this->clauses["COMMIT"] = "COMMIT";
+		if (isset($transactionKey)) {
+			$this->transactionKey = $transactionKey;
+		}
 		return $this;
 	}
 

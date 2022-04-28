@@ -14,4 +14,4 @@ class Users_Exception_LastIdentifier extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Users_Exception_LastIdentifier', "You can't remove last identifier");
+Q_Exception::add('Users_Exception_LastIdentifier', "You can't remove the last identifier");

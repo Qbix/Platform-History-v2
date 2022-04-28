@@ -480,7 +480,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
 
 		// remove all old previews
-		if (tool.state.result) {
+		if (!Q.isEmpty(tool.state.result)) {
 			Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
 			tool.state.result= {};
 			tool.previewElements = {};
@@ -524,7 +524,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 				&& s1.fields.name === s2.fields.name;
 		}
 		var tsr = tool.state.result;
-		if (tsr) {
+		if (!Q.isEmpty(tsr)) {
 			if (!partial) {
 				exiting = Q.diff(tsr.relatedStreams, result.relatedStreams, comparator);
 			}
