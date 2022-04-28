@@ -2,4 +2,4 @@ ALTER TABLE {{prefix}}web3
 MODIFY COLUMN contract varchar(42) NOT NULL AFTER chainId,
 ADD COLUMN fromAddress varchar(42) NULL DEFAULT NULL AFTER params,
 DROP PRIMARY KEY,
-ADD PRIMARY KEY (`chainId`,`contract`,`methodName`,`params`(511),`fromAddress`)
+ADD PRIMARY KEY (`chainId`,`contract`,`methodName`,`params`(123),`fromAddress`)
