@@ -185,6 +185,7 @@ class Users_User extends Base_Users_User
 		if (!isset($username)) {
 			return array('username', $username);
 		}
+
 		/**
 		 * @event Users/validate/username
 		 * @param {&string} username
@@ -266,18 +267,38 @@ class Users_User extends Base_Users_User
 
 		if (!empty($updatedFields['username'])) {
 			$app = Q::app();
-			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', false);
-			if ($unique) {
-				$username = $updatedFields['username'];
-				$criteria = @compact('username');
-				if (isset($this->id)) {
-					$criteria['id != '] = $this->id;
+			$unique = Q_Config::get('Users', 'model', $app, 'uniqueUsername', true);
+			$username = $updatedFields['username'];
+			$criteria = @compact('username');
+			if (isset($this->id)) {
+				$criteria['id != '] = $this->id;
+			}
+			$usernamePrev = Q::ifset($this->fieldsOriginal, 'username', null);
+			if ($usernamePrev !== $username) {
+				if ($username) {
+					$username_hashed = Q_Utils::hash(Q_Utils::normalize($username));
+					$ui = new Users_Identify();
+					$ui->identifier = "username_hashed:$username_hashed";
+					if ($ui->retrieve()) {
+						if ($ui->userId !== $this->id) {
+							throw new Users_Exception_UsernameExists($criteria, 'username');
+						}
+					} else {
+						$username_hashed = Q_Utils::hash(Q_Utils::normalize($username));
+						$ui = new Users_Identify();
+						$ui->identifier = "username_hashed:$username_hashed";
+						$ui->state = 'verified';
+						$ui->userId = $this->id;
+						$ui->save(true);
+					}
 				}
-				$rows = Users_User::select('COUNT(1)')
-					->where($criteria)
-					->fetchAll(PDO::FETCH_NUM);
-				if ($rows[0][0] > 0) {
-					throw new Users_Exception_UsernameExists($criteria, 'username');
+				if ($usernamePrev) {
+					$usernamePrev_hashed = Q_Utils::hash(Q_Utils::normalize($usernamePrev));
+					if ($usernamePrev_hashed != $username_hashed) {
+						$uiPrev = new Users_Identify();
+						$uiPrev->identifier = "username_hashed:$usernamePrev_hashed";
+						$uiPrev->remove();
+					}
 				}
 			}
 		}
@@ -710,27 +731,22 @@ class Users_User extends Base_Users_User
 	 * @method removeIdentifier
 	 * @param {string} $identifier
 	 * @throws Users_Exception_LastIdentifier
-	 * @return boolean
+	 * @return {boolean} whether something was removed
 	 */
 	function removeIdentifier($identifier)
 	{
 		$identifierType = Users::identifierType($identifier, $normalized);
 
 		if ($identifierType == 'email') {
-			if ($this->emailAddress == $normalized && empty($this->mobileNumber)) {
-				throw new Users_Exception_LastIdentifier();
-			}
-
 			$this->removeEmail($identifier);
-		} elseif ($identifierType == 'mobile') {
-			if ($this->mobileNumber == $normalized && empty($this->emailAddress)) {
-				throw new Users_Exception_LastIdentifier();
-			}
-
+			return true;
+		}
+		if ($identifierType == 'mobile') {
 			$this->removeMobile($identifier);
+			return true;
 		}
 
-		return true;
+		return false;
 	}
 	/**
 	 * Starts the process of adding a mobile to a saved user object.
@@ -1140,6 +1156,12 @@ class Users_User extends Base_Users_User
 		$users = array();
 		foreach ($identifiers as $i => $identifier) {
 			$identifierType = Users::identifierType($identifier, $ui_identifier);
+			if (!isset($identifierType)) {
+				throw new Q_Exception_WrongType(array(
+					'field' => "identifier '$identifier",
+					'type' => 'email address or mobile number'
+				), array('identifier', 'emailAddress', 'mobileNumber'));
+			}
 			$status = null;
 			$users[] = $user = Users::futureUser($identifierType, $ui_identifier, $status);
 			$statuses[] = $status;

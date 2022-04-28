@@ -1310,20 +1310,16 @@ abstract class Users extends Base_Users
 	 * @param {string} $identifier The identifier
 	 * @param {&string} [$normalized=null] Will be filled with the string representing the normalized
 	 *   email address or mobile number
-	 * @return {string} The identifier type, either "mobile" or "email"
+	 * @return {string} The identifier type, either "mobile", "email", or null if neither
 	 * @throws {Q_Exception_WrongType} if the identifier is not a valid email or phone number
 	 */
 	static function identifierType($identifier, &$normalized = null)
 	{
+		$identifierType = null;
 		if (Q_Valid::email($identifier, $normalized)) {
 			$identifierType = 'email';
 		} else if (Q_Valid::phone($identifier, $normalized)) {
 			$identifierType = 'mobile';
-		} else {
-			throw new Q_Exception_WrongType(array(
-				'field' => "identifier '$identifier",
-				'type' => 'email address or mobile number'
-			), array('identifier', 'emailAddress', 'mobileNumber'));
 		}
 		return $identifierType;
 	}
@@ -1332,13 +1328,14 @@ abstract class Users extends Base_Users
 	 * Returns Users_Identifier rows that correspond to the identifier in the database, if any.
 	 * @method identify
 	 * @static
-	 * @param {string|array} $type can be "email", "mobile", or $platform."_".$appId",
+	 * @param {string|array} $type can be "username", "email", "mobile", or $platform."_".$appId",
 	 *  or any of the above with optional "_hashed" suffix to indicate
 	 *  that the value has already been hashed.
 	 *  It could also be an array of ($type => $value) pairs.
 	 *  Then the second parameter should be null.
 	 * @param {string} $value The value corresponding to the type. If $type is
 	 *
+	 * * "username" - this is the user's username, if any
 	 * * "email" - this is one of the user's email addresses
 	 * * "mobile" - this is one of the user's mobile numbers
 	 * * "email_hashed" - this is the standard hash of the user's email address
@@ -1477,24 +1474,6 @@ abstract class Users extends Base_Users
 			$status = $ui->state;
 		}
 		return $user;
-	}
-
-	/**
-	 * Returns external data about the user
-	 * @method external
-	 * @param {string} $publisherId The id of the user corresponding to the publisher consuming the external data
-	 * @param {string} $userId The id of the user whose external data is going to be consumed
-	 * @return {Users_External}
-	 */
-	static function external($publisherId, $userId)
-	{
-		$ue = new User_External();
-		$ue->publisherId = $publisherId;
-		$ue->userId = $userId;
-		if (!$ue->retrieve()) {
-			$ue->save(); // should create a unique xid
-		}
-		return $ue;
 	}
 
 	/**
@@ -2127,7 +2106,7 @@ abstract class Users extends Base_Users
 					$normalized = $identifier;
 					break;
 				default:
-					$normalized = null;
+					$normalized = Q_Utils::normalize($identifier);
 					break;
 			}
 			$hashed = Q_Utils::hash($normalized);
