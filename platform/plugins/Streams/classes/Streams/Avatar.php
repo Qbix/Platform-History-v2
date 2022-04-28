@@ -183,12 +183,12 @@ class Streams_Avatar extends Base_Streams_Avatar
 			$ln2 = "<span $attr>$ln</span>";
 			$attributes['class'] = "Streams_username$class";
 			$attr = Q_Html::attributes($attributes);
-			$u2 = "@<span $attr>$u</span>";
+			$u2 = "<span $attr>$u</span>";
 			$f2 = "<span $attr>$fallback</span>";
 		} else {
 			$fn2 = $fn;
 			$ln2 = $ln;
-			$u2 = '@'.$u;
+			$u2 = $u;
 			$f2 = $fallback;
 		}
 
