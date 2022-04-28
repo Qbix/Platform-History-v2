@@ -4786,12 +4786,12 @@ Ap.displayName = function _Avatar_prototype_displayName (options, fallback) {
 	if (options && options.html) {
 		fn2 = '<span class="Streams_firstName">'+fn+'</span>';
 		ln2 = '<span class="Streams_lastName">'+ln+'</span>';
-		u2 = '<span class="Streams_username">'+u+'</span>';
+		u2 = '@<span class="Streams_username">'+u+'</span>';
 		f2 = '<span class="Streams_username">'+fallback+'</span>';
 	} else {
 		fn2 = fn;
 		ln2 = ln;
-		u2 = u;
+		u2 = '@'+u;
 		f2 = fallback;
 	}
 	if (options && options.show) {
