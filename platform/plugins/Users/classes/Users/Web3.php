@@ -72,7 +72,8 @@ class Users_Web3 extends Base_Users_Web3 {
 			$params = array($params);
 		}
 
-		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration);
+		$from = Q::ifset($transaction, 'from', null);
+		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
 		if ($caching !== false && $cacheDuration && $cache->wasRetrieved()) {
 			return Q::json_decode($cache->result);
 		}
@@ -287,8 +288,8 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {String} $contract - smart contract address
 	 * @param {String} $methodName
 	 * @param {String} $params params used to call the method
-	 * @param {integer} [$cacheDuration=3600]
-	 * @param {String} [$app] The internal app ID
+	 * @param {integer} [$cacheDuration=3600] Don't return cache if it's older than this many seconds
+	 * @param {String} [$fromAddress=null] If there is a specific address to make the request as, pass it here
 	 * @return {Db_Row}
 	 */
 	static function getCache (
@@ -296,7 +297,8 @@ class Users_Web3 extends Base_Users_Web3 {
 		$contract,
 		$methodName, 
 		$params, 
-		$cacheDuration=null)
+		$cacheDuration=null,
+		$fromAddress=null)
 	{
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
@@ -311,6 +313,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			'contract' => $contract,
 			'methodName' => $methodName,
 			'params' => Q::json_encode($params),
+			'fromAddress' => ($fromAddress ? $fromAddress : ''),
 			'updatedTime' => new Db_Range(
 				new Db_Expression("CURRENT_TIMESTAMP - INTERVAL $cacheDuration SECOND"),
 				false,
