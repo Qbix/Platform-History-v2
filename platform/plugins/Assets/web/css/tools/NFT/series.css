@@ -79,6 +79,10 @@
 .Assets_NFT_series_preview_tool .Assets_NFT_series_sale .offSale::before {
     background-color: red;
 }
+.Assets_NFT_series_preview_tool[data-canManage=false] {
+    pointer-events: none;
+}
+
 .Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_sale .offSale {
     display: block;
 }

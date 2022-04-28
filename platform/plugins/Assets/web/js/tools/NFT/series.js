@@ -31,8 +31,6 @@
         // is admin
         var roles = Object.keys(Q.getObject("roles", Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
-        tool.canManage = tool.isAdmin || Users.loggedInUserId() === state.userId;
-        $toolElement.attr("data-canManage", tool.canManage);
 
         if (Q.isEmpty(state.chainId)) {
             return console.warn("chain id required!");
@@ -62,11 +60,7 @@
 
                 previewState.onRefresh.add(tool.refresh.bind(tool), tool);
             } else {
-                if (tool.canManage) {
-                    previewState.onComposer.add(tool.composer.bind(tool), tool);
-                } else {
-                    Q.Tool.remove(tool.element, true, true);
-                }
+                previewState.onComposer.add(tool.composer.bind(tool), tool);
             }
         });
 
@@ -78,19 +72,10 @@
             ignoreCache: true
         });
 
-        // tried to request canManageSeries method, but it don't work
-        /*Q.req("Assets/NFTseries", "getInfo", function (err, response) {
-            if (err) {
-                return;
-            }
+        // listen onAccountsChanged event to change canManage
+        Users.Web3.onAccountsChanged.set(tool.checkPermissions.bind(tool), tool);
 
-            var info = response.slots.getInfo;
-        }, {
-            fields: {
-                seriesId: state.seriesId,
-                chainId: state.chainId
-            }
-        });*/
+        tool.getOwner();
     },
 
     { // default options here
@@ -122,6 +107,9 @@
             var untilTime = parseInt(stream.getAttribute("untilTime"));
 
             $toolElement.attr("data-onSale", untilTime*1000 > Date.now());
+            $toolElement.attr("data-author", stream.getAttribute("author"));
+
+            tool.getOwner();
 
             Q.Template.render('Assets/NFT/series/view', {
                 name: stream.fields.title || "",
@@ -193,14 +181,58 @@
                 });
 
                 // set onInvoke event
-                $toolElement.off(Q.Pointer.fastclick);
-                if (tool.canManage) {
-                    $toolElement.on(Q.Pointer.fastclick, function () {
-                        tool.update(stream);
-                        Q.handle(state.onInvoke, tool, [stream]);
-                    });
+                $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
+                    tool.update(stream);
+                    Q.handle(state.onInvoke, tool, [stream]);
+                });
+            });
+        },
+        /**
+         * Get contract owner and set as element attr
+         * @method getOwner
+         */
+        getOwner: function () {
+            var tool = this;
+            var state = this.state;
+            var $toolElement = $(this.element);
+
+            $toolElement.addClass("Q_working");
+            // get series owner as contract owner
+            Q.req("Assets/NFTcontract", "getInfo", function (err, response) {
+                $toolElement.removeClass("Q_working");
+
+                if (err) {
+                    return;
+                }
+
+                $toolElement.attr("data-owner", response.slots.getInfo.owner);
+                tool.checkPermissions();
+            }, {
+                fields: {
+                    address: state.contractAddress,
+                    chainId: state.chainId
                 }
             });
+        },
+        /**
+         * Check if user can manage series and apply appropriate actions
+         * @method checkPermissions
+         */
+        checkPermissions: function () {
+            var $toolElement = $(this.element);
+
+            var currentWallet = Q.getObject('ethereum.selectedAddress');
+            var owner = $toolElement.attr("data-owner");
+            var author = $toolElement.attr("data-author");
+            var canManage = false;
+            if ((owner || author) && currentWallet) {
+                owner = owner && owner.toLowerCase();
+                author = author && author.toLowerCase();
+                currentWallet = currentWallet.toLowerCase();
+                canManage = owner === currentWallet || author === currentWallet;
+            }
+
+            $toolElement.attr("data-canManage", canManage);
         },
         /**
          * Create series
@@ -214,6 +246,7 @@
             var relatedTool = Q.Tool.from($toolElement.closest(".Streams_related_tool")[0], "Streams/related");
 
             $toolElement.addClass("Assets_NFT_series_new");
+            $toolElement.attr("data-owner");
 
             Q.Template.render('Assets/NFT/series/newItem', {
                 iconUrl: Q.url("{{Q}}/img/actions/add.png")
@@ -369,6 +402,7 @@
                         dialog.addClass("Q_disabled");
 
                         var name = $("input[name=name]:visible", dialog).val();
+                        var authorAddress = $("input[name=author]:visible", dialog).val();
                         var price = parseFloat($("input[name=price]:visible", dialog).val());
                         if (!price) {
                             dialog.removeClass("Q_disabled");
@@ -388,6 +422,7 @@
 
                         var attributes = {
                             currency: currencySymbol,
+                            author: authorAddress,
                             seriesId: state.seriesId,
                             price: price,
                             untilTime: new Date($untilTime.val()).getTime()/1000
@@ -415,6 +450,7 @@
 
                                     Q.Streams.get.force(stream.fields.publisherId, stream.fields.name, function () {
                                         Q.Dialogs.pop();
+                                        $toolElement.removeClass("Assets_NFT_series_new");
                                         tool.refresh(this);
                                     });
 
