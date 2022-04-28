@@ -65,11 +65,11 @@
 }
 .Assets_NFT_contract_tool[data-canManage=false] select[name=chains],
 .Assets_NFT_contract_tool[data-canManage=false] .Assets_NFT_contract_composer,
-.Assets_NFT_contract_tool .Assets_NFT_contract[data-canManage=false] .Q_actions_container,
-.Assets_NFT_contract_tool .Assets_NFT_contract_series[data-canManage=false] .Assets_NFT_series_new {
+.Assets_NFT_contract_tool .Assets_NFT_contract[data-isOwner=false] .Q_actions_container,
+.Assets_NFT_contract_tool .Assets_NFT_contract_series[data-isOwner=false] .Assets_NFT_series_new {
     display: none !important;
 }
 
-.Assets_NFT_contract_tool .Assets_NFT_contract[data-canManage=false] {
+.Assets_NFT_contract_tool[data-canManage=false] .Assets_NFT_contract {
     pointer-events: none;
 }
