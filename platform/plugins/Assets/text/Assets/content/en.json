@@ -215,6 +215,8 @@
         "MinimumBid": "Minimum bid",
         "Author": "Author",
         "Price": "Price",
+        "Commission": "Commission",
+        "EnterCommission": "Enter commission",
         "Owner": "Owner",
         "SelectCategory": "Select category",
         "Day": "Day",

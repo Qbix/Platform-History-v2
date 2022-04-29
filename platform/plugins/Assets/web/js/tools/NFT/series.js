@@ -15,7 +15,6 @@
      * @param {Object} [options] Override various options for this tool
      *  @param {string} userId - owner user id
      *  @param {string} chainId - chain id
-     *  @param {string} [seriesId] - if null calculated from userId
      *  @param {string} [contractAddress] - If defined use this contract address instead default for this chainId
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
@@ -38,11 +37,6 @@
         if (Q.isEmpty(state.userId)) {
             return console.warn("user id required!");
         }
-
-        state.seriesId = state.seriesId || Q.Streams.toHexString(state.userId).replace(/0+$/, '');
-
-        // remove trailing zeros
-        $toolElement.attr("data-seriesid", state.seriesId);
 
         state.chain = NFT.chains[state.chainId];
 
@@ -79,7 +73,6 @@
     },
 
     { // default options here
-        seriesId: null,
         userId: null,
         chainId: null,
         contractAddress: null,
@@ -108,6 +101,9 @@
 
             $toolElement.attr("data-onSale", untilTime*1000 > Date.now());
             $toolElement.attr("data-author", stream.getAttribute("author"));
+
+            var seriesId = stream.getAttribute("seriesId");
+            $toolElement.attr("data-seriesid", seriesId);
 
             tool.getOwner();
 
@@ -293,6 +289,7 @@
             var $toolElement = $(tool.element);
             var state = this.state;
             var selectedCurrency = stream.getAttribute("currency");
+            var seriesId = stream.getAttribute("seriesId");
             var untilTime = parseInt(stream.getAttribute("untilTime"));
             var isNew = !untilTime; // if untilTime undefined - this is composer stream
             var onMarketPlace = state.onMarketPlace;
@@ -401,9 +398,9 @@
 
                         dialog.addClass("Q_disabled");
 
-                        var name = $("input[name=name]:visible", dialog).val();
-                        var authorAddress = $("input[name=author]:visible", dialog).val();
-                        var price = parseFloat($("input[name=price]:visible", dialog).val());
+                        var name = $("input[name=name]", dialog).val();
+                        var authorAddress = $("input[name=author]:visible", dialog).val() || stream.getAttribute("author");
+                        var price = parseFloat($("input[name=price]", dialog).val());
                         if (!price) {
                             dialog.removeClass("Q_disabled");
                             Q.alert(tool.text.errors.PriceInvalid);
@@ -419,19 +416,19 @@
                             currency = c;
                             currency.token = c[state.chainId];
                         });
+                        var commission = parseInt($("input[name=commission]", dialog).val()) || 0;
 
                         var attributes = {
                             currency: currencySymbol,
                             author: authorAddress,
-                            seriesId: state.seriesId,
                             price: price,
                             untilTime: new Date($untilTime.val()).getTime()/1000
                         };
 
                         // activate series in blockchain
                         try {
-                            Web3.setSeriesInfo(state.chainId, state.seriesId, {
-                                authorAddress: stream.getAttribute("author"),
+                            Web3.setSeriesInfo(state.chainId, seriesId, {
+                                authorAddress: authorAddress,
                                 price: price,
                                 currency: currency.token,
                                 onSaleUntil: untilTime,
@@ -504,6 +501,10 @@
                     <option {{#if this.selected}}selected{{/if}}>{{this.symbol}}</option>
                 {{/each}}
             </select>
+        </div>
+        <div class="Assets_nft_form_group Assets_nft_form_commission">
+            <label>{{NFT.Commission}}:</label>
+            <input type="number" min="0" max="100" name="commission" class="Assets_nft_form_control" value="{{commission}}">%
         </div>
         <div class="Assets_nft_form_group">
             <div class="Assets_nft_market">
