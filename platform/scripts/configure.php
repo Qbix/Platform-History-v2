@@ -102,18 +102,18 @@ if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	$it = new RecursiveDirectoryIterator(APP_DIR);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)) continue;
-		// return mime type ala mimetype extension
-		$finfo = finfo_open(FILEINFO_MIME);
-//check to see if the mime-type starts with 'text'
-		$mimeType = finfo_file($finfo, $filename);
-		$parts = explode('/', $mimeType);
+		$extension = pathinfo($filename, PATHINFO_EXTENSION);
+		if (!in_array(strtolower($extension), array(
+			'php', 'js', 'json',
+			'txt', 'log', 'handlebars',
+			'html', 'css', 
+		))) {
+			continue;
+		}
 		if (filesize($filename) > $maxFileSize) {
 			if ($verbose) {
 				echo Q_Utils::colored("Skipped because file is too large: " . $filename, 'light_gray') . PHP_EOL;
 			}
-			continue;
-		}
-		if (!in_array($parts[0], array('text'))) {
 			continue;
 		}
 		$contents = file_get_contents($filename);
