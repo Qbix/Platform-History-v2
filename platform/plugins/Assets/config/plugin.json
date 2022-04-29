@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.8",
+				"version": "1.0.9",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
 				"connections": ["Assets"]
@@ -152,9 +152,15 @@
 				}
 			}
 		},
+		"possibleUserStreams": {
+			"Assets/user/NFTs": true,
+			"Assets/NFT/contracts": true,
+			"Assets/NFT/series": true,
+			"Assets/contests": true
+		},
 		"onInsert": {
 			"community": ["Assets/NFTs"],
-			"person": ["Assets/user/NFTs", "Assets/NFT/contracts"]
+			"person": ["Assets/user/NFTs", "Assets/NFT/contracts", "Assets/NFT/series", "Assets/contests"]
 		}
 	},
 	"Assets": {

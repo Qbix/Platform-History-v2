@@ -4,6 +4,7 @@ $streamNameTemplate = "Assets/NFT/contract/{{chainId}}";
 $chains = Assets_NFT::getChains();
 $text = Q_Text::get("Assets/content");
 
+// create global contracts streams for all chains in config
 foreach ($chains as $chain) {
 	$streamName = Q::interpolate($streamNameTemplate, $chain);
 	$stream = Streams::fetchOne($communityId, $communityId, $streamName);
