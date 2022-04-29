@@ -624,7 +624,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				if (!empty($query->clauses["BEGIN"])) {
 					$ntk[] = Q::ifset($query, 'transactionKey', null);
 					$ntct[] = $connection;
-					$ntbt[] = Q::b();
+					//$ntbt[] = Q::b();
 					if (++$ntc == 1) {
 						$pdo->beginTransaction();
 					}
