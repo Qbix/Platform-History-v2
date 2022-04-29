@@ -10,6 +10,8 @@
 class Assets_NFT_Series
 {
 	static $relationType = "Assets/NFT/series/{{contract}}";
+	static $userSeriesCategoryStreamName = "Assets/NFT/series";
+	static $userSeriesCategoryRelationType = "Assets/NFT/series";
 
 	/**
 	 * Check if NFT/series category exists, and create if not
@@ -69,6 +71,18 @@ class Assets_NFT_Series
 				"streamName" => $category->name,
 				"type" => "new"
 			));
+			$maxWeight = Streams_RelatedTo::select()->where(array(
+				"toPublisherId" => $userId,
+				"toStreamName" => self::$userSeriesCategoryStreamName,
+				"type" => self::$userSeriesCategoryRelationType
+			))->orderBy("weight", false)->limit(1)->fetchDbRow();
+			$maxWeight = $maxWeight ? (int)$maxWeight->weight : 0;
+			$lastPart = explode("/", $stream->name);
+			$lastPart = end($lastPart);
+			$seriesId = Streams::toHexString($userId, "$maxWeight/$lastPart");
+			$seriesId = preg_replace("/0+$/", "", $seriesId);
+			$stream->setAttribute("seriesId", $seriesId)->save();
+
 			$stream->join(compact("userId"));
 			return $stream;
 		} else {
@@ -163,6 +177,7 @@ class Assets_NFT_Series
 			// change stream relation
 			Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name);
 			Streams::relate($userId, $category->publisherId, $category->name, Q::interpolate(self::$relationType, compact("contract")), $stream->publisherId, $stream->name, array("weight" => time()));
+			Streams::relate($userId, $stream->publisherId, self::$userSeriesCategoryStreamName, self::$userSeriesCategoryRelationType, $stream->publisherId, $stream->name, array("weight" => "+1"));
 		}
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
