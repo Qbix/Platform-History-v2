@@ -209,11 +209,11 @@
          * @param {Object} data
          * @param {String} author
          * @param {String} owner
-         * @param {object} comissionInfo
+         * @param {object} commissionInfo
          * @param {object} saleInfo
          * @param {string} authorUserId - id of NFT author user
          */
-        refresh: function (data, author, owner, comissionInfo, saleInfo, authorUserId) {
+        refresh: function (data, author, owner, commissionInfo, saleInfo, authorUserId) {
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);

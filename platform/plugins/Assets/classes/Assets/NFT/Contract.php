@@ -35,7 +35,7 @@ class Assets_NFT_Contract
 	}
 
 	/**
-	 * Get current category stream for a user
+	 * Get current contract stream for a user
 	 * @method getCurrent
 	 * @param {string} [$userId=null] If null loggedin user id used
 	 * @param {boolean} [$throwIfNotFound=false] - it true throw exception if stream absent
