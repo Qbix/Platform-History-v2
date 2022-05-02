@@ -169,6 +169,19 @@ Object.getPrototypeOf = function (obj) {
 };
 
 /**
+ * @class Array
+ * @description Q extended methods for Arrays
+ */
+
+var Ap = Array.prototype;
+
+Ap.toHex = function () {
+	return this.map(function (x) { 
+		return x.toString(16).padStart(2, '0');
+	}).join('');
+};
+
+/**
  * @class String
  * @description Q extended methods for Strings
  */
@@ -2261,12 +2274,13 @@ Q.calculateKey.keys = [];
  * @static
  * @method chain
  * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @param {Function} [callback] The final callback, if any, to call after the chain is done
  * @return {Function} The wrapper function
  */
-Q.chain = function (callbacks) {
-	var result = null;
-	Q.each(callbacks, function (i, callback) {
-		if (Q.typeOf(callback) !== 'function') {
+Q.chain = function (callbacks, callback) {
+	var result = callback;
+	Q.each(callbacks, function (i, cb) {
+		if (Q.typeOf(cb) !== 'function') {
 			return;
 		}
 
@@ -2274,7 +2288,7 @@ Q.chain = function (callbacks) {
 		result = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
-			return callback.apply(this, args);
+			return cb.apply(this, args);
 		};
 	}, {ascending: false, numeric: true});
 	return result;
@@ -5951,6 +5965,71 @@ Q.Cache.local.caches = {};
 Q.Cache.session.caches = {};
 
 /**
+ * Functions related to IndexedDB, when it is available
+ * @class Q.IndexedDB
+ * @constructor
+ * @param {String} uriString
+ */
+Q.IndexedDB = {
+	/**
+	 * Creates or uses an existing database and object store name.
+	 * @static
+	 * @method open
+	 * @param {String} dbName The name of the database
+	 * @param {String} storeName The name of the object store name inside the database
+	 * @param {String} keyPath The key path inside the object store
+	 * @param {Function} callback Receives (error, ObjectStore)
+	 * @param {Number} [version=1] The version of the database to open
+	 */
+	open: function (dbName, storeName, keyPath, callback, version) {
+		if (!root.indexedDB) {
+			return false;
+		}
+		var open = indexedDB.open(dbName, version || 1);
+		open.onupgradeneeded = function() {
+			var db = open.result;
+			var store = db.createObjectStore(storeName, {keyPath: keyPath});
+		};
+		open.onerror = function (event) {
+			callback && callback(event);
+		};
+		open.onsuccess = function() {
+			// Start a new transaction
+			var db = open.result;
+			var tx = db.transaction(storeName, "readwrite");
+			var store = tx.objectStore(storeName);
+			callback && callback(null, store);
+			// Close the db when the transaction is done
+			tx.oncomplete = function() {
+				db.close();
+			};
+		}
+	},
+	put: function (store, value, onSuccess, onError) {
+		if (!onError) {
+			onError = function () {
+				throw new Q.Error("Q.IndexedDB.put error:" + request.errorCode);
+			}
+		}
+		var request = store.put(value);
+		request.onsuccess = onSuccess;
+		request.onError = onError;
+	},
+	get: function (store, key, onSuccess, onError) {
+		if (!onError) {
+			onError = function () {
+				throw new Q.Error("Q.IndexedDB.get error:" + request.errorCode);
+			}
+		}
+		var request = store.get(key);
+		request.onsuccess = function (event) {
+			Q.handle(onSuccess, Q.IndexedDB, [event.target.result, event]);
+		};
+		request.onError = onError;
+	}
+};
+
+/**
  * A constructor to create Q.Page objects
  * @class Q.Page
  * @constructor
@@ -7459,6 +7538,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {boolean} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @param {Function} [options.onRedirect=Q.handle] if set and response data.redirect.url is not empty, automatically call this function.
  * @param {boolean} [options.timeout=5000] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
+ * @param {Array} [options.beforeRequest] array of handlers to call before the request, they receive url, slotNames, options, callback and must call the callback passing (possibly altered) url, slotNames, options
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. First argument is a function which can be called to cancel loading.
  * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
  * @param {Q.Event} [options.onProcessed] handler to call when a response was processed
@@ -7650,60 +7730,69 @@ Q.request = function (url, slotNames, callback, options) {
 			overrides.method = o.method;
 		}
 
-		if (o.form) {
-			if (o.extend !== false) {
-				overrides.iframe = true;
-				o.fields = Q.ajaxExtend(o.fields || {}, slotNames, overrides);
-			}
-			Q.formPost(url, o.fields, o.method, {
-				form: o.form,
-				onLoad: function (iframe) {
-					var resultFunction = o.resultFunction
-						? Q.getObject(o.resultFunction, iframe.contentWindow)
-						: null;
-					var result = typeof(resultFunction) === 'function' ? resultFunction() : undefined;
-					_Q_request_callback.call(request, null, result, true);
-				}
-			});
-			return;
-		}
-
-		if (!o.query && o.xhr !== false
-		&& (url.startsWith(Q.baseUrl()))) {
-			_onStart();
-			return xhr(_onResponse, _onCancel);
-		}
-
-		var i = Q.request.callbacks.length;
-		var url2 = url;
-		if (callback) {
-			Q.request.callbacks[i] = function _Q_request_JSONP(data) {
-				delete Q.request.callbacks[i];
-				Q.removeElement(script);
-				_onResponse(data, true);
-			};
-			if (o.callbackName) {
-				url2 = url + (url.indexOf('?') < 0 ? '?' : '&')
-					+ encodeURIComponent(o.callbackName) + '='
-					+ encodeURIComponent('Q.request.callbacks['+i+']');
-			} else {
-				url2 = (o.extend === false)
-					? url
-					: Q.ajaxExtend(url, slotNames, Q.extend(o, {
-						callback: 'Q.request.callbacks['+i+']'
-					}));
-			}
+		if (o.beforeRequest) {
+			var chain = Q.chain(o.beforeRequest);
+			chain(url, slotNames, o, _request);
 		} else {
-			url2 = (o.extend === false) ? url : Q.ajaxExtend(url, slotNames, o);
+			_request(url, slotNames, o);
 		}
-		if (options.fields) {
-			delim = (url.indexOf('?') < 0) ? '?' : '&';
-			url2 += delim + Q.queryString(options.fields);
+
+		function _request(url, slotNames, o) {
+			if (o.form) {
+				if (o.extend !== false) {
+					overrides.iframe = true;
+					o.fields = Q.ajaxExtend(o.fields || {}, slotNames, overrides);
+				}
+				Q.formPost(url, o.fields, o.method, {
+					form: o.form,
+					onLoad: function (iframe) {
+						var resultFunction = o.resultFunction
+							? Q.getObject(o.resultFunction, iframe.contentWindow)
+							: null;
+						var result = typeof(resultFunction) === 'function' ? resultFunction() : undefined;
+						_Q_request_callback.call(request, null, result, true);
+					}
+				});
+				return;
+			}
+	
+			if (!o.query && o.xhr !== false
+			&& (url.startsWith(Q.baseUrl()))) {
+				_onStart();
+				return xhr(_onResponse, _onCancel);
+			}
+	
+			var i = Q.request.callbacks.length;
+			var url2 = url;
+			if (callback) {
+				Q.request.callbacks[i] = function _Q_request_JSONP(data) {
+					delete Q.request.callbacks[i];
+					Q.removeElement(script);
+					_onResponse(data, true);
+				};
+				if (o.callbackName) {
+					url2 = url + (url.indexOf('?') < 0 ? '?' : '&')
+						+ encodeURIComponent(o.callbackName) + '='
+						+ encodeURIComponent('Q.request.callbacks['+i+']');
+				} else {
+					url2 = (o.extend === false)
+						? url
+						: Q.ajaxExtend(url, slotNames, Q.extend(o, {
+							callback: 'Q.request.callbacks['+i+']'
+						}));
+				}
+			} else {
+				url2 = (o.extend === false) ? url : Q.ajaxExtend(url, slotNames, o);
+			}
+			if (options.fields) {
+				delim = (url.indexOf('?') < 0) ? '?' : '&';
+				url2 += delim + Q.queryString(options.fields);
+			}
+			if (!o.query) {
+				var script = Q.addScript(url2, null, {'duplicate': o.duplicate});
+			}
+			request.urlRequested = url2;
 		}
-		if (!o.query) {
-			var script = Q.addScript(url2, null, {'duplicate': o.duplicate});
-		}
-		request.urlRequested = url2;
 	}
 };
 
@@ -7816,14 +7905,17 @@ Q.jsonRequest = Q.request;
  *  The object to serialize into a querystring that can be sent to PHP or something.
  *  The algorithm will recursively walk the object, and skip undefined values.
  *  You can also pass a form element here. If you pass a string, it will simply be returned.
- * @param {Array} keys
- *  An optional array of keys into the object, in the order to serialize things
+ * @param {Array|true} keys
+ *  An optional array of keys into the object, in the order to serialize things.
+ *  Or, pass true here to sort keys by ascending string order, recursively inside objects too.
  * @param {boolean} returnAsObject
  *  Pass true here to get an object of {fieldname: value} instead of a string
+ * @param {Object} [options]
+ * @param {boolean} [options.convertBooleanToInteger=false] Whether to convert true,false into 1,0
  * @return {String|Object}
  *  A querystring that can be used with HTTP requests.
  */
-Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
+Q.queryString = function _Q_queryString(fields, keys, returnAsObject, options) {
 	if (Q.isEmpty(fields)) {
 		return returnAsObject ? {} : '';
 	}
@@ -7861,7 +7953,12 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 			});
 		} else if (obj && Q.typeOf(obj) === "object") {
 			// Serialize object item.
-			for (var name in obj) {
+			var keys2 = Object.keys(obj);
+			if (keys === true) {
+				keys2.sort();
+			}
+			for (var i=0; i<keys2.length; ++i) {
+				var name = keys2[i];
 				_params(prefix + "[" + name + "]", obj[name], _add);
 			}
 		} else {
@@ -7876,6 +7973,9 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 		// If value is a function, invoke it and return its value
 		value = Q.typeOf(value) === "function" ? value() : value;
 		if (value == undefined) return;
+		if (options && options.convertBooleanToInteger) {
+			value = (value === true) ? 1 : (value === false ? 0 : value);
+		}
 		if (returnAsObject) {
 			result[key] = value;
 		} else {
@@ -7884,7 +7984,13 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	}
 
 	if (keys) {
-		Q.each(keys, function _Q_param_each(i, field) {
+		var keys2 = (keys !== true)
+			? keys
+			: (Q.isArrayLike(fields) && fields.map
+				? fields.map(function (e, i) { return i; }) 
+				: Object.keys(fields).sort()
+			);
+		Q.each(keys2, function _Q_param_each(i, field) {
 			_params(field, fields[field]);
 		});
 	} else {
@@ -7897,6 +8003,18 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject) {
 	return returnAsObject
 		? result
 		: parts.join("&").replace(/%20/g, "+");
+};
+
+/**
+ * Serialize objects in a canonical way, to match Q_Utils::serialize().
+ * Sorts the keys recursively inside the object, and 
+ * @param {Object} data
+ * @returns {String}
+ */
+Q.serialize = function _Q_serialize(data) {
+	return Q.queryString(data, true, false, {
+		convertBooleanToInteger: true
+	}).replace('+', '%20');
 };
 
 /**
@@ -14229,6 +14347,7 @@ Q.request.options = {
 		});
 	}, "Q"),
 	resultFunction: "result",
+	beforeRequest: [],
 	onLoadStart: new Q.Event(),
 	onShowCancel: new Q.Event(),
 	onLoadEnd: new Q.Event(),

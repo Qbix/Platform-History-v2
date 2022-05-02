@@ -248,11 +248,43 @@ class Q_Utils
 			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
 		if (is_array($data)) {
-			ksort($data);
-			$data = http_build_query($data, '', '&', PHP_QUERY_RFC3986);
-			$data = str_replace('+', '%20', $data);
+			$data = Q_Utils::serialize($data);
 		}
 		return self::hmac('sha1', $data, $secret);
+	}
+
+	/**
+	 * Create canonical serialization of an array
+	 * @method signature
+	 * @static
+	 * @param {array} $data
+	 * @param {string} [$secret] A different secret to use for generating the signature
+	 * @return {string}
+	 */
+	static function serialize(array $data)
+	{
+		self::ksort_recursive($data, SORT_STRING);
+		$data = http_build_query($data, '', '&', PHP_QUERY_RFC3986);
+		return str_replace('+', '%20', $data);
+	}
+
+	/**
+	 * Sorts an array in-place, recursively, using ksort
+	 * @method signature
+	 * @static
+	 * @param {array} $data
+	 * @param {integer} [$flags=SORT_STRING] A different secret to use for generating the signature
+	 * @return {array} Returns the data array, that was sorted in-place
+	 */
+	static function ksort_recursive(array &$data, $flags=SORT_STRING)
+	{
+		ksort($data, $flags);
+		foreach ($data as $k => &$v) {
+			if (is_array($v)) {
+				self::ksort_recursive($v, $flags);
+			}
+		}
+		return $data;
 	}
 
 	/**
@@ -1565,9 +1597,9 @@ class Q_Utils
 			}
 		}
 
-		if (!self::isWindows()) {
-			symlink($target, $link);
-		} else {
+		@symlink($target, $link);
+		if (self::isWindows() and !file_exists($link)) {
+			// try creating it a different way
 			$pswitch = is_dir($link) ? '/d' : '';
 			$target = str_replace('/', DS, $target);
 			$link = str_replace('/', DS, $link);

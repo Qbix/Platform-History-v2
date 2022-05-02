@@ -173,6 +173,13 @@
 		"avatarFields": [
 			"id", "username", "icon", "url"
 		],
+		"requireLogin": {
+			
+		},
+		"signatures": {
+			"sigField": "Q_Users_sig",
+			"nonceField": "Q_Users_nonce"
+		},
 		"authorize": {
 			"duration": "decade",
 			"terms": {

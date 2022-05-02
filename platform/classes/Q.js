@@ -883,12 +883,13 @@ Q.getter.THROTTLING = 3;
  * @static
  * @method chain
  * @param {Array} callbacks An array of callbacks, each taking another callback at the end
+ * @param {Function} [callback] The final callback, if any, that would be called by the final function in the chain
  * @return {Function} The wrapper function
  */
-Q.chain = function (callbacks) {
+Q.chain = function (callbacks, callback) {
 	var result = null;
-	Q.each(callbacks, function (i, callback) {
-		if (Q.typeOf(callback) !== 'function') {
+	Q.each(callbacks, function (i, cb) {
+		if (Q.typeOf(cb) !== 'function') {
 			return;
 		}
 
@@ -896,7 +897,7 @@ Q.chain = function (callbacks) {
 		result = function () {
 			var args = Array.prototype.slice.call(arguments, 0);
 			args.push(prevResult);
-			return callback.apply(this, args);
+			return cb.apply(this, args);
 		};
 	}, {ascending: false, numeric: true});
 	return result;
