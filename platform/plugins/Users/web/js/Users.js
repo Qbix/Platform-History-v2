@@ -595,24 +595,22 @@
 
 	Q.request.options.beforeRequest.push(
 	function (url, slotNames, options, callback) {
-		if (!options.fields) {
-			return callback(url, slotNames, options);
-		}
+		var fields = options.fields || {};
 		var found = false;
 		Q.each(Users.requireLogin, function (u, v) {
 			if (url.split('?')[0] != u) {
 				return;
 			}
 			var nonce = Date.now();
-			options.fields[Users.signatures.nonceField] = nonce;
+			fields[Users.signatures.nonceField] = nonce;
 			found = true;
-			var fieldNames = Q.isArrayLike(v) ? v : null;
-			Users.sign(options.fields,
+			var fieldNames = Q.isArrayLike(v) ? v : Object.keys(fields);
+			Users.sign(fields,
 			function (err, signature) {
 				if (err) {
 					callback(url, slotNames, options);
 				}
-				options.fields[Users.signatures.sigField] = {
+				fields[Users.signatures.sigField] = {
 					signature: signature,
 					fieldNames: fieldNames
 				}

@@ -33,17 +33,30 @@ function Users_before_Q_objects(&$params)
 		Q_Text::setLanguage($user->preferredLanguage);
 	}
 
-	if ($sigField = Q_Config::get('Users', 'signatures', 'sigField', null)) {
+	if ($sigField = Q_Config::get('Users', 'signatures', 'sigField', null)
+	and !empty($_SESSION['Users']['publicKey'])) {
 		$sigField = str_replace('.', '_', $sigField);
+		$nonceField = Q_Config::get('Users', 'signatures', 'nonce', null);
+		if ($nonceField) {
+			$nonceField = str_replace('.', '_', $nonceField);
+			Q_Valid::requireFields(array($nonceField), $_POST, true);
+			$nonce = $_POST[$nonceField];
+			$prevNonce = Q::ifset($_SESSION, 'Users', 'nonce', 0);
+			if ($nonce <= $prevNonce) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => $nonceField,
+					'range' => "something > $prevNonce"
+				));
+			}
+			$_SESSION['Users']['nonce'] = $nonce;
+			// session will probably be saved, unless transaction is rolled back
+		}
 		$rl = Q_Config::get('Users', 'requireLogin', array());
 		foreach ($rl as $k => $v) {
 			$uri = Q_Uri::from($k);
 			$duri = Q_Dispatcher::uri();
 			if (($uri->module != '*' and $uri->module = $duri->module)
 			or ($uri->action != '*' and $uri->action = $duri->action)) {
-				continue;
-			}
-			if (empty($_SESSION['Users']['publicKey'])) {
 				continue;
 			}
 			// validate the signature on the request
@@ -72,6 +85,7 @@ function Users_before_Q_objects(&$params)
 				// so we can silently exit, or write to the log
 				// SECURITY: inform the admins to update their PHP
 			}
+			break; // we already checked, once is enough
 		}	
 	}
 
