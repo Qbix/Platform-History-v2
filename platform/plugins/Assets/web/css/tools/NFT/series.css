@@ -24,7 +24,7 @@
 .Assets_NFT_series_preview_tool .Assets_NFT_series_price,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_ending,
 .Assets_NFT_series_preview_tool .Assets_NFT_series_untilTime {
-    line-height: 18px;
+    line-height: 23px;
 }
 .Assets_NFT_series_preview_tool {
     position: relative;
@@ -79,6 +79,10 @@
 .Assets_NFT_series_preview_tool .Assets_NFT_series_sale .offSale::before {
     background-color: red;
 }
+.Assets_NFT_series_preview_tool[data-canManage=false] {
+    pointer-events: none;
+}
+
 .Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_sale .offSale {
     display: block;
 }
@@ -251,12 +255,14 @@
 }
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author,
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name {
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name,
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_commission {
     white-space: nowrap;
 }
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price label,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author label,
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name label {
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name label,
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_commission label {
     display: inline-block;
     vertical-align: middle;
 }
@@ -265,6 +271,9 @@
 }
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price select[name=currency] {
     width: 65px;
+}
+.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_commission input[name=commission] {
+    width: 50px;
 }
 .Assets_NFT_series_composer .Assets_nft_series_author input[name=author] {
     width: calc(100% - 80px);

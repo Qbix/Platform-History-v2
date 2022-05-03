@@ -432,7 +432,7 @@
                         Q.Streams.get(tool.stream.fields.publisherId, tool.stream.fields.name, function (err, stream) {
                             var msg = Q.firstErrorMessage(err);
                             if (msg) {
-                                return Q.alert(msg);
+                                return console.warn(msg);
                             }
 
                             //tool.stream = stream;
@@ -449,7 +449,7 @@
                         var msg = Q.firstErrorMessage(err, response && response.errors);
 
                         if (msg) {
-                            return Q.alert(msg);
+                            return console.warn(msg);
                         }
                         console.log('callParticipants', response.slots.callParticipants);
                         console.log('callParticipants2', Object.keys(response.slots.callParticipants));
