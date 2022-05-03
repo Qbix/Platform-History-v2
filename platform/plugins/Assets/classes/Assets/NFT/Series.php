@@ -79,7 +79,8 @@ class Assets_NFT_Series
 			$maxWeight = $maxWeight ? (int)$maxWeight->weight : 0;
 			$lastPart = explode("/", $stream->name);
 			$lastPart = end($lastPart);
-			$seriesId = Streams::toHexString($userId, "$maxWeight/$lastPart");
+			//$seriesId = Streams::toHexString($userId, "$maxWeight/$lastPart");
+			$seriesId = Streams::toHexString($userId, "");
 			$seriesId = preg_replace("/0+$/", "", $seriesId);
 			$stream->setAttribute("seriesId", $seriesId)->save();
 
