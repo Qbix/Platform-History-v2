@@ -290,13 +290,17 @@
             var state = this.state;
             var selectedCurrency = stream.getAttribute("currency");
             var seriesId = stream.getAttribute("seriesId");
+            var author = stream.getAttribute("author");
+            var commission = {
+                value: Q.getObject("value", stream.getAttribute("commission")) || 0,
+                address: Q.getObject("address", stream.getAttribute("commission")) || author
+            };
             var untilTime = parseInt(stream.getAttribute("untilTime"));
             var isNew = !untilTime; // if untilTime undefined - this is composer stream
             var onMarketPlace = state.onMarketPlace;
             if (untilTime) {
                 onMarketPlace = untilTime*1000 > Date.now();
             }
-            var authorUserId = stream.getAttribute("authorId") || stream.fields.publisherId;
 
             var currencies = NFT.currencies.map(function (item) {
                 return item[state.chainId] ? {symbol: item.symbol, selected: item.symbol===selectedCurrency} : false;
@@ -333,6 +337,8 @@
                     fields: {
                         isAdmin: tool.isAdmin,
                         name: stream.fields.title,
+                        author: author,
+                        commission: commission,
                         currencies: currencies,
                         buttonText: isNew ? tool.text.NFT.Create : tool.text.NFT.Update,
                         price: stream.getAttribute("price"),
@@ -352,18 +358,6 @@
                     //    event.preventDefault();
                     //    $icon.trigger("click");
                     //});
-
-                    Q.req("Users/external", "data", function (err, response) {
-                        if (err) {
-                            return;
-                        }
-
-                        $("input[name=author]", dialog).val(response.slots.data.wallet);
-                    }, {
-                        fields: {
-                            userId: authorUserId
-                        }
-                    });
 
                     // switch onMarketPlace
                     var $onMarketPlace = $(".Assets_nft_check", dialog);
@@ -400,6 +394,11 @@
 
                         var name = $("input[name=name]", dialog).val();
                         var authorAddress = $("input[name=author]:visible", dialog).val() || stream.getAttribute("author");
+                        if (!authorAddress) {
+                            dialog.removeClass("Q_disabled");
+                            Q.alert(tool.text.errors.AuthorInvalid);
+                            return;
+                        }
                         var price = parseFloat($("input[name=price]", dialog).val());
                         if (!price) {
                             dialog.removeClass("Q_disabled");
@@ -416,12 +415,23 @@
                             currency = c;
                             currency.token = c[state.chainId];
                         });
-                        var commission = parseInt($("input[name=commission]", dialog).val()) || 0;
+                        var commissionValue = parseInt($("input[name=commission]", dialog).val()) || 0;
+                        var commission = {
+                            value: commissionValue,
+                            fraction: commissionValue/100,
+                            address: $("input[name=commission_address]", dialog).val()
+                        };
+                        if (commissionValue > 0 && commission.address.length < 42) {
+                            dialog.removeClass("Q_disabled");
+                            Q.alert(tool.text.NFT.series.CommissionAddressInvalid);
+                            return;
+                        }
 
                         var attributes = {
                             currency: currencySymbol,
                             author: authorAddress,
                             price: price,
+                            commission: commission,
                             untilTime: new Date($untilTime.val()).getTime()/1000
                         };
 
@@ -431,6 +441,7 @@
                                 authorAddress: authorAddress,
                                 price: price,
                                 currency: currency.token,
+                                commission: commission,
                                 onSaleUntil: untilTime,
                                 contractAddress: state.contractAddress
                             }, function (err) {
@@ -486,7 +497,7 @@
     `<form>
         {{#if isAdmin}}
         <div class="Assets_nft_form_group Assets_nft_series_author">
-            <label>{{NFT.series.Author}}:</label><input type="text" name="author" class="Assets_nft_form_control" placeholder="{{NFT.EnterAuthorWallet}}">
+            <label>{{NFT.series.Author}}:</label><input type="text" name="author" class="Assets_nft_form_control" value="{{author}}">
         </div>
         {{/if}}
         <div class="Assets_nft_form_group Assets_nft_series_name">
@@ -502,9 +513,18 @@
                 {{/each}}
             </select>
         </div>
-        <div class="Assets_nft_form_group Assets_nft_form_commission">
+        <div class="Assets_nft_form_group">
             <label>{{NFT.Commission}}:</label>
-            <input type="number" min="0" max="100" name="commission" class="Assets_nft_form_control" value="{{commission}}">%
+            <div class="Assets_nft_form_details">
+                <div class="Assets_nft_form_percents">
+                    <label>{{NFT.series.Value}}:</label>
+                    <input type="number" min="0" max="100" name="commission" class="Assets_nft_form_control" value="{{commission.value}}">%
+                </div>
+                <div class="Assets_nft_form_address">
+                    <label>{{NFT.series.Address}}:</label>
+                    <input type="text" name="commission_address" class="Assets_nft_form_control" value="{{commission.address}}">
+                </div>
+            </div>
         </div>
         <div class="Assets_nft_form_group">
             <div class="Assets_nft_market">

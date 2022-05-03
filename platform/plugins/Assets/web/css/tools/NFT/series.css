@@ -256,13 +256,15 @@
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name,
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_commission {
+.Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_percents,
+.Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_address {
     white-space: nowrap;
 }
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price label,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_author label,
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_series_name label,
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_commission label {
+.Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_percents label,
+.Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_address label {
     display: inline-block;
     vertical-align: middle;
 }
@@ -272,8 +274,11 @@
 .Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_price select[name=currency] {
     width: 65px;
 }
-.Assets_NFT_series_composer .Assets_nft_form_group.Assets_nft_form_commission input[name=commission] {
+.Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_percents input[name=commission] {
     width: 50px;
+}
+.Assets_NFT_series_composer .Assets_nft_form_group .Assets_nft_form_address input[name=commission_address] {
+    width: calc(100% - 90px);
 }
 .Assets_NFT_series_composer .Assets_nft_series_author input[name=author] {
     width: calc(100% - 80px);
