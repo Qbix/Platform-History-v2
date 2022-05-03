@@ -175,20 +175,8 @@
     vertical-align: middle;
     cursor: pointer;
 }
-.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_form_market,
-.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_royalties,
-.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_selectNetwork {
+.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_form_market {
     display: none;
-}
-.Assets_NFT_preview_composer .Assets_nft .Assets_nft_form_group.Assets_nft_selectNetwork {
-    border-bottom: 1px solid rgba(4, 4, 5, 0.07);
-}
-.Assets_NFT_preview_composer .Assets_nft .Assets_nft_form_group.Assets_nft_selectNetwork label {
-    white-space: nowrap;
-}
-.Assets_NFT_preview_composer .Assets_nft .Assets_nft_form_group.Assets_nft_selectNetwork select {
-    border: none;
-    font-size: 20px;
 }
 .Assets_NFT_preview_composer .Assets_nft_form_control {
     background: transparent;
@@ -628,8 +616,9 @@
     display: inline-block;
 }
 
-.Assets_NFT_preview_composer .Assets_nft_royalties[data-active=false],
-.Assets_NFT_preview_composer .Assets_nft_selectNetwork[data-active=false],
+.Assets_NFT_preview_composer .Assets_nft_form_details {
+    overflow: hidden;
+}
 .Assets_NFT_preview_composer .Assets_nft_form_details[data-active=false],
 #page .Assets_NFT_preview_tool.Assets_NFT_signature[data-owned=false][data-onSale=false] button[name=soldOut],
 #page .Assets_NFT_preview_tool[data-owned=true] button[name=soldOut],

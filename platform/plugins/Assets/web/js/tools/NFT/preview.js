@@ -4,6 +4,7 @@
      */
 
     var Users = Q.Users;
+    var Streams = Q.Streams;
     var Assets = Q.Assets;
     var Web3 = Assets.NFT.Web3;
     var NFT = Assets.NFT;
@@ -15,7 +16,8 @@
      *  @param {string} chainId - blockchain chain id
      *  @param {string} tokenId - NFT token is in the chain described by chainId
      *  @param {boolean} [composer=false] - If true build composer.
-     *  @param {String} [mode=regular] - Can be "regular" and "series".
+     *  @param {object} [series] - object {publisherId:..., streamName:...} or null. If defined the state.mode turned to
+     *  "series" and no market settings provided in composer. Instead market settings get from series stream.
      *  If "series" - skip definition of "price", "currency", "royalty", "chain", because get these data from serie.
      *  @param {boolean} [useWeb3=false] If true use backend to read data from blockchain
      *  @param {string} [userId] - id of user on whose behalf NFT will be created
@@ -31,12 +33,14 @@
         var tool = this;
         var state = tool.state;
         var $toolElement = $(this.element);
-        var loggedInUserId = Q.Users.loggedInUserId();
         tool.preview = Q.Tool.from(this.element, "Streams/preview");
 
         // is admin
         var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
+
+        // set mode related to state.series
+        state.mode = Q.isEmpty(state.series) ? "regular" : "series";
 
         if (!state.composer) {
             if (Q.isEmpty(state.chainId)) {
@@ -47,7 +51,7 @@
             }
         }
 
-        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
+        var pipe = Q.pipe(["stylesheet", "text", "series"], function (params, subjects) {
             $toolElement.addClass("Q_working");
             state.chain = NFT.chains[state.chainId];
             $toolElement.attr("data-tokenId", state.tokenId);
@@ -64,6 +68,18 @@
         }, {
             ignoreCache: true
         });
+        if (state.mode === "series") {
+            Streams.get.force(state.series.publisherId, state.series.streamName, function (err) {
+                if (err) {
+                    return;
+                }
+
+                tool.seriesStream = this;
+                pipe.fill('series')();
+            });
+        } else {
+            pipe.fill('series')();
+        }
     },
 
     { // default options here
@@ -71,7 +87,7 @@
         tokenId: null,
         data: null,
         userId: null,
-        mode: "regular", // "series"
+        series: null, // "regular"
         composer: false,
         useWeb3: true,
         imagepicker: {
@@ -605,7 +621,7 @@
                         };
 
                         // get a stream by data got from "newItem" request
-                        Q.Streams.get.force(previewState.publisherId, previewState.streamName, function () {
+                        Streams.get.force(previewState.publisherId, previewState.streamName, function () {
                             tool.stream = this;
                             _createVideoTool();
 
@@ -664,7 +680,7 @@
                                         return Q.handle([state.onError, state.onFinish], tool, [msg]);
                                     }
 
-                                    Q.Streams.get.force(previewState.publisherId, previewState.streamName, function () {
+                                    Streams.get.force(previewState.publisherId, previewState.streamName, function () {
                                         tool.stream = this;
                                         _createVideoTool();
                                         $inputURL.val("");
@@ -721,24 +737,40 @@
                                 $(".web3modal-modal-lightbox", $modal).css("z-index", modalZIndex);
                             }, modalPeriod);
 
-                            var priceType = $(".Assets_market_button .active", dialog).attr("data-type");
-
-                            var startTime = $("input[name=startTime]", dialog).val();
-                            if (startTime) {
-                                startTime = Date.parse(startTime)/1000;
-                            }
-
-                            var endTime = $("input[name=endTime]", dialog).val();
-                            if (endTime) {
-                                endTime = Date.parse(endTime)/1000;
-                            }
-
-                            var royalty = $("input[name=royalty]", dialog).val();
-                            var price = parseFloat($("input[name=fixedPrice]:visible", dialog).val() || $("input[name=minBid]:visible", dialog).val()) || 0;
+                            var price = parseFloat($("input[name=price]:visible", dialog).val() || $("input[name=minBid]:visible", dialog).val()) || 0;
                             var onMarketPlace = $onMarketPlace.prop("checked");
                             var chainId = $("select[name=chain]", dialog).val();
-                            var chain = NFT.chains[chainId];
                             var currencySymbol = $("select[name=currency]", dialog).val();
+
+                            if (state.mode === "series") {
+                                chainId =
+                                Q.req("Assets/NFT",function (err) {
+                                    Q.Dialogs.pop();
+
+                                    Q.Tool.remove(tool.element, true, false);
+                                    tool.element.className = "";
+                                    tool.element.innerHTML = "";
+
+                                    $toolElement.tool("Assets/NFT/preview", {
+                                        tokenId: tokenId,
+                                        chainId: chainId
+                                    }).activate();
+
+                                    Q.handle(state.onCreated, tool, [tokenId, chainId]);
+                                }, {
+                                    method: "post",
+                                    fields: {
+                                        userId: userId,
+                                        title: $("input[name=title]", dialog).val(),
+                                        content: $("input[name=description]", dialog).val(),
+                                        attributes: attributes
+                                    }
+                                });
+
+                                return;
+                            }
+
+                            var chain = NFT.chains[chainId];
                             var currency = {};
                             Q.each(NFT.currencies, function (i, c) {
                                 if (c.symbol !== currencySymbol) {
@@ -756,8 +788,7 @@
                                 var attributes = Q.extend({
                                     onMarketPlace: onMarketPlace,
                                     currency: $("select[name=currency] option:selected", dialog).text(),
-                                    price: $("input[name=fixedPrice]", dialog).val(),
-                                    royalty: royalty
+                                    price: $("input[name=price]", dialog).val()
                                 }, params);
                                 if (tokenId) {
                                     attributes.tokenId = tokenId;
@@ -1168,11 +1199,9 @@
         `<div class="Assets_nft" data-mode="{{mode}}">
         <form>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.NftName}}:</label>
                 <input type="text" name="title" class="Assets_nft_form_control" placeholder="{{NFT.TitlePlaceholder}}">
             </div>
             <div class="Assets_nft_form_group">
-                <label>{{NFT.Description}}:</label>
                 <input type="text" name="description" class="Assets_nft_form_control" placeholder="{{NFT.DescribeYourNFT}}">
             </div>
             <div class="Assets_nft_form_group" data-type="nft_attributes">
@@ -1206,73 +1235,23 @@
                     </label>
                 </div>
                 <div class="Assets_nft_form_details" data-active="{{onMarketPlace}}">
-                    <div class="Assets_market_button" style="display: none">
-                        <div class="Assets_nft_clickable active" data-type="fixed">
-                            <img src="{{baseUrl}}/img/price.svg" />
-                            <span>{{NFT.FixedPrice}}</span>
-                        </div>
-                        <div class="Assets_nft_clickable" data-type="time">
-                            <img src="{{baseUrl}}/img/time.svg" />
-                            <span>{{NFT.TimedAuction}}</span>
-                        </div>
-                        <div class="Assets_nft_clickable" data-type="bid">
-                            <img src="{{baseUrl}}/img/bid.svg" />
-                            <span>{{NFT.OpenForBids}}</span>
+                    <div class="Assets_nft_form_group">
+                        <div class="Assets_price">
+                            <input type="text" name="price" class="Assets_nft_form_control" placeholder="{{NFT.PriceOnePiece}}">
+                            <select name="currency">
+                                {{#each currencies}}
+                                    <option>{{this}}</option>
+                                {{/each}}
+                            </select>
+                            {{currency}}
                         </div>
                     </div>
-    
-                    <div class="fixed_details">
-                        <div class="Assets_nft_form_group">
-                            <label>{{NFT.Price}}</label>
-                            <div class="Assets_price">
-                                <input type="text" name="fixedPrice" class="Assets_nft_form_control" placeholder="{{NFT.PriceOnePiece}}">
-                                <select name="currency">
-                                    {{#each currencies}}
-                                        <option>{{this}}</option>
-                                    {{/each}}
-                                </select>
-                                {{currency}}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="time_details">
-                        <div class="Assets_nft_form_group">
-                            <label>{{NFT.MinimumBid}}</label>
-                            <div class="Assets_price">
-                                <input type="text" name="minBid" class="Assets_nft_form_control" placeholder="{{NFT.EnterMinimumBid}}">
-                                {{currency}}
-                            </div>
-                            <p>{{NFT.BidsBelowThisAmount}}</p>
-                        </div>
-                        <div class="Assets_nft_form_group">
-                            <div class="Assets_price">
-                                <div>
-                                    <label>{{NFT.StartingDate}}</label>
-                                    <input type="datetime-local" name="startTime">
-                                </div>
-                                <div>
-                                    <label>{{NFT.ExpirationDate}}</label>
-                                    <input type="datetime-local" name="endTime">
-                                </div>
-                            </div>
+                    <div class="Assets_nft_form_group Assets_nft_royalties">
+                        <div class="Assets_royality">
+                            <input type="number" name="royalty" class="Assets_nft_form_control" placeholder="{{NFT.RoyaltyPlaceholder}}">%
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="Assets_nft_form_group Assets_nft_royalties">
-                <label>{{NFT.Royalties}}:</label>
-                <div class="Assets_royality">
-                    <input type="number" name="royalty" class="Assets_nft_form_control" placeholder="{{NFT.RoyaltyPlaceholder}}">%
-                </div>
-            </div>
-            <div class="Assets_nft_form_group Assets_nft_selectNetwork">
-                <label>{{NFT.SelectChain}}:
-                <select name="chain">
-                {{#each chains}}
-                    <option value="{{this.chainId}}" {{#if this.default}}selected{{/if}}>{{@key}}</option>
-                {{/each}}
-                </select>
-                </label>
             </div>
             <button class="Q_button" name="save">{{NFT.CreateYourNFT}}</button>
         </form>
@@ -1281,20 +1260,20 @@
 
     Q.Template.set('Assets/NFT/manage/attributes',
         `<div class="Assets_NFT_attribute">
-<select name='display_type'><option value="">{{NFT.attributes.DisplayTitle}}</option>` +
-        '{{#each attributes}}' +
-        '<option value="{{@key}}">{{this.name}}</option>' +
-        '{{/each}}' +
-        `</select>
-<select name='trait_type'><option value="">{{NFT.attributes.TraitTitle}}</option><option value="_">{{NFT.attributes.NewTrait}}</option></select>
-<select name='value'><option value="">{{NFT.attributes.ValueTitle}}</option><option value="_">{{NFT.attributes.NewValue}}</option></select>
-<div class="basic32 basic32_remove"></div>
-</div>`,
+            <select name='display_type'><option value="">{{NFT.attributes.DisplayTitle}}</option>` +
+                '{{#each attributes}}' +
+                '<option value="{{@key}}">{{this.name}}</option>' +
+                '{{/each}}' +
+            `</select>
+            <select name='trait_type'><option value="">{{NFT.attributes.TraitTitle}}</option><option value="_">{{NFT.attributes.NewTrait}}</option></select>
+            <select name='value'><option value="">{{NFT.attributes.ValueTitle}}</option><option value="_">{{NFT.attributes.NewValue}}</option></select>
+            <div class="basic32 basic32_remove"></div>
+        </div>`,
         {text: ['Assets/content']}
     );
 
     Q.Template.set('TokenSociety/NFT/update',
-`   <div class='TokenSociety_nft_attributes'></div>
+    `<div class='TokenSociety_nft_attributes'></div>
     <button class='Q_button' name='addAttribute'>{{NFT.attributes.NewAttribute}}</button>
     <div class='TokenSociety_nft_description'></div>
     <button class='Q_button' name='saveAttributes'>{{NFT.attributes.SaveAttributes}}</button>`,
