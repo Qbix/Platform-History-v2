@@ -4939,7 +4939,7 @@ abstract class Streams extends Base_Streams
 	 * Both inputs are padded by 0's on the right in the hex string.
 	 * For example Streams::toHexString("abc", "def") returns
 	 * 0x6162630000000000646566000000000000000000000000000000000000000000
-	 * while Streams::toHexString("abc", "123/def") returns
+	 * while Streams::toHexString("abc/123", "def") returns
 	 * 0x616263000000007b646566000000000000000000000000000000000000000000
 	 * @param {string} $publisherId Takes the first 8 ASCII characters
 	 * @param {string|integer} $streamId Takes the first 24 ASCII characters, or an unsigned integer up to PHP_INT_MAX
@@ -4950,10 +4950,12 @@ abstract class Streams extends Base_Streams
 	 */
 	static function toHexString($publisherId, $streamId, $isNotNumeric = null)
 	{
-		$parts = explode('/', $streamId);
+		$parts = explode('/', $publisherId);
 		$seriesId = null;
+		$publisherHex = Q_Utils::asc2hex(substr($publisherId, 0, 8));
+		$hexFirstPart = str_pad($publisherHex, 16, '0', STR_PAD_RIGHT);
 		if (count($parts) > 1) {
-			list($seriesId, $streamId) = $parts;
+			list($publisherId, $seriesId) = $parts;
 			if ($seriesId > 255 || $seriesId < 0
 			|| floor($seriesId) != $seriesId) {
 				throw new Q_Exception_WrongValue(array(
@@ -4961,27 +4963,17 @@ abstract class Streams extends Base_Streams
 					'range' => 'integer 0-255'
 				));
 			}
+			$hexFirstPart = substr($hexFirstPart, 0, 14)
+				. str_pad(dechex($seriesId), 2, '0', STR_PAD_LEFT);
 		}
-		$publisherHex = Q_Utils::asc2hex(substr($publisherId, 0, 8));
 		if (!$isNotNumeric and is_numeric($streamId)) {
-			if (floor($streamId) != $streamId or $streamId < 0) {
-				throw new Q_Exception_WrongValue(array(
-					'field' => 'seriesId',
-					'range' => 'integer 0-255'
-				));
-			}
 			$streamHex = dechex($streamId);
 			$pad = STR_PAD_LEFT;
 		} else {
 			$streamHex = Q_Utils::asc2hex(substr($streamId, 0, 24));
 			$pad = STR_PAD_RIGHT;
 		}
-		$hexFirstPart = str_pad($publisherHex, 16, '0', STR_PAD_RIGHT);
 		$hexSecondPart = str_pad($streamHex, 48, '0', $pad);
-		if (isset($seriesId)) {
-			$hexFirstPart = substr($hexFirstPart, 0, 14)
-				. str_pad(dechex($seriesId), 2, '0', STR_PAD_LEFT);
-		}
 		return "0x$hexFirstPart$hexSecondPart";
 	}
 
@@ -4991,7 +4983,9 @@ abstract class Streams extends Base_Streams
 	 * of the streamId.
 	 * @param {string} $hexString Should start with "0x"
 	 * @param {bool} [$hasSeriesId=false] Set to true if it was produced with a seriesId,
-	 *  so streamId will be recovered in the form "34/abcdef"
+	 *  so publisherId will be recovered in the form "abcdefg/123".
+	 *  Note that it will be missing the last letter of the true publisherId,
+	 *  so you may have to use a Db_Range when using it in database queries.
 	 * @return {array} Assign to list($publisherId, $streamIdPrefix)
 	 */
 	static function fromHexString($hexString, $hasSeriesId = false)
@@ -5010,7 +5004,7 @@ abstract class Streams extends Base_Streams
 		$publisherId = Q_Utils::hex2asc($publisherHex);
 		$streamIdPrefix = Q_Utils::hex2asc($streamHex);
 		if ($hasSeriesId) {
-			$streamIdPrefix = "$seriesId/$streamIdPrefix";
+			$publisherId = "$publisherId/$seriesId";
 		}
 		return array($publisherId, $streamIdPrefix);
 	}
