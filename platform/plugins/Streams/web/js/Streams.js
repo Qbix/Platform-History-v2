@@ -5258,7 +5258,7 @@ Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
 	var seriesId = null;
 	var hexFirstPart = publisherId.substring(0, 8).asc2hex().padEnd(16, 0);
 	if (parts.length > 1) {
-		seriesId = parts[1];
+		seriesId = parseInt(parts[1]);
 		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
 			throw new Q.Exception('seriesId must be in range integer 0-255');
 		}
