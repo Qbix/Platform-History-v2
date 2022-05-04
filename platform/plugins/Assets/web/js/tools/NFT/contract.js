@@ -109,7 +109,7 @@
                 var selectedChainId = $this.val();
                 var $globalContract = $(".Assets_NFT_contract[data-type=global]", element);
                 var $customContract = $(".Assets_NFT_contract[data-type=custom]", element);
-                var selectedStreamName = NFT.userContractStreamName.interpolate({chainId: selectedChainId});
+                var selectedStreamName = NFT.contract.streamName.interpolate({chainId: selectedChainId});
                 var $selectedOption = $(":selected", $this);
                 var contract = $selectedOption.attr("data-contract");
                 var factory = $selectedOption.attr("data-factory");
@@ -408,7 +408,7 @@
             var streamName = options.streamName;
             var chainId = streamName.split("/").pop();
             var chain = NFT.chains[chainId];
-            var relationType = Assets.NFT.seriesRelationType.interpolate({contract: contractAddress});
+            var relationType = NFT.series.relationType.interpolate({contract: contractAddress});
 
             $element.attr("data-contract", contractAddress);
 
