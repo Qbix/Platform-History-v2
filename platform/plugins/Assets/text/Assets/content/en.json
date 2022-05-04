@@ -267,6 +267,8 @@
             "Value": "Value",
             "AuthorInvalid": "Author address invalid!",
             "Address": "Address",
+            "CoverImage": "Cover image",
+            "UploadCoverImage": "Upload cover image",
             "CommissionAddressInvalid": "Commission address invalid",
             "OnSale": "on sale",
             "OffSale": "off sale",

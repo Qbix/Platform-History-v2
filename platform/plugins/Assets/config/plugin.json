@@ -58,6 +58,12 @@
 				"defaultSize": "x",
 				"defaultCacheBust": 1000,
 				"maxStretch": 2
+			},
+			"NFT/series/icon": {
+				"sizes": ["300x","500x","700x","x"],
+				"defaultSize": "300x",
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
 			}
 		}
 	},
@@ -127,6 +133,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
+					"title": "",
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},

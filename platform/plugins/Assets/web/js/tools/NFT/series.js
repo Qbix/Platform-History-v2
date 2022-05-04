@@ -65,15 +65,18 @@
             var relatedOptions = {
                 publisherId: state.userId,
                 streamName: Assets.NFT.series.categoryStreamName,
-                type: Assets.NFT.series.relationType,
+                relationType: Assets.NFT.series.relationType,
                 editable: true,
                 closeable: true,
                 sortable: true,
                 relatedOptions: {
                     withParticipant: false
+                },
+                specificOptions: {
+                    userId: state.userId
                 }
             };
-            if (state.userId === loggedInUserId) {
+            if (tool.isAdmin || state.userId === loggedInUserId) {
                 relatedOptions.creatable = {};
                 relatedOptions.creatable[Assets.NFT.series.streamType] = {
                     publisherId: state.userId,
@@ -86,12 +89,19 @@
                     return;
                 }
 
-                var $relatedToolBox = $(".relatedToolBox", tool.element);
-                var $nftsToolBox = $(".nftsToolBox", tool.element);
+                tool.element.innerHTML = html;
+
+                var $relatedToolBox = $(".relatedToolBox", $toolElement);
+                var $nftsToolBox = $(".nftsToolBox", $toolElement);
                 $relatedToolBox.tool("Streams/related", relatedOptions).activate();
-                $relatedToolBox.forEachTool("Assets/NFT/series/preview", function () {
+                $relatedToolBox[0].forEachTool("Assets/NFT/series/preview", function () {
                     var seriesTool = this;
-                    var normalizedStreamName = Q.normalize(seriesTool.preview.state.streamName);
+                    var streamName = seriesTool.preview.state.streamName;
+                    if (!streamName) {
+                        return;
+                    }
+
+                    var normalizedStreamName = Q.normalize(streamName);
                     if ($("." + normalizedStreamName, $nftsToolBox).length) {
                         return;
                     }
@@ -100,7 +110,7 @@
                     var relatedOptions = {
                         publisherId: seriesTool.preview.state.publisherId,
                         streamName: seriesTool.preview.state.streamName,
-                        type: "Assets/NFT",
+                        relationType: "Assets/NFT",
                         editable: true,
                         closeable: true,
                         sortable: true,
@@ -108,12 +118,12 @@
                             withParticipant: false
                         }
                     };
-                    if (state.userId === loggedInUserId) {
+                    if (tool.isAdmin || state.userId === loggedInUserId) {
                         relatedOptions.creatable = {};
                         relatedOptions.creatable = {
                             "Assets/NFT": {
                                 publisherId: state.userId,
-                                title: tool.text.NFT.CreateYourNFT
+                                title: tool.text.NFT.CreateNFT
                             }
                         };
                     }
