@@ -4,6 +4,7 @@
      */
 
     var Users = Q.Users;
+    var Streams = Q.Streams;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
     var Web3 = NFT.Web3;
@@ -32,7 +33,7 @@
             return console.warn("user id required!");
         }
 
-        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
+        var pipe = Q.pipe(["stylesheet", "text", "selected"], function (params, subjects) {
             tool.refresh();
         });
 
@@ -42,6 +43,19 @@
             pipe.fill('text')();
         }, {
             ignoreCache: true
+        });
+        Streams.related(state.userId, Assets.NFT.series.categoryStreamName, NFT.series.selectedRelationType, true, function (err) {
+            if (err) {
+                return;
+            }
+
+            if (Q.isEmpty(this.relatedStreams)) {
+                tool.selectedSeries = null;
+            } else {
+                tool.selectedSeries = this.relatedStreams[Object.keys(this.relatedStreams)[0]];
+            }
+
+            pipe.fill('selected')();
         });
     },
 
@@ -96,17 +110,22 @@
                 $relatedToolBox.tool("Streams/related", relatedOptions).activate();
                 $relatedToolBox[0].forEachTool("Assets/NFT/series/preview", function () {
                     var seriesTool = this;
+                    var publisherId = seriesTool.preview.state.publisherId;
                     var streamName = seriesTool.preview.state.streamName;
                     if (!streamName) {
                         return;
                     }
+
+                    seriesTool.state.onInvoke.set(function (stream) {
+                        tool.setSelected(seriesTool, stream);
+                    }, tool);
 
                     var normalizedStreamName = Q.normalize(streamName);
                     if ($("." + normalizedStreamName, $nftsToolBox).length) {
                         return;
                     }
 
-                    var $nftsBox = $("<div>").addClass("." + normalizedStreamName).appendTo($nftsToolBox);
+                    var $nftsBox = $("<div>").addClass(normalizedStreamName).appendTo($nftsToolBox);
                     var relatedOptions = {
                         publisherId: seriesTool.preview.state.publisherId,
                         streamName: seriesTool.preview.state.streamName,
@@ -116,6 +135,27 @@
                         sortable: true,
                         relatedOptions: {
                             withParticipant: false
+                        },
+                        specificOptions: {
+                            userId: state.userId,
+                            onCreated: function (streamData) {
+                                var NFTPreview = this;
+
+                                Q.Streams.relate(
+                                    seriesTool.preview.state.publisherId,
+                                    seriesTool.preview.state.streamName,
+                                    "Assets/NFT",
+                                    streamData.publisherId,
+                                    streamData.streamName,
+                                    function () {
+                                        var NFTsRelatedTool = Q.Tool.from($(NFTPreview.element).closest(".Streams_related_tool")[0], "Streams/related");
+                                        NFTsRelatedTool.refresh();
+                                        $(".Assets_NFT_preview_tool.Streams_related_composer", $toolElement).each(function () {
+                                            Q.Tool.from(this, "Assets/NFT/preview").composer();
+                                        });
+                                    }
+                                );
+                            }
                         }
                     };
                     if (tool.isAdmin || state.userId === loggedInUserId) {
@@ -127,8 +167,51 @@
                             }
                         };
                     }
-                    $nftsBox.tool("Streams/related");
+                    $nftsBox[0].forEachTool("Streams/related", function () {
+                        if (Q.getObject("fields.name", tool.selectedSeries) === streamName) {
+                            tool.setSelected(seriesTool, {fields: {publisherId: publisherId, name: streamName}}, true);
+                        }
+                    });
+                    $nftsBox.tool("Streams/related", relatedOptions).activate();
                 });
+            });
+        },
+        /**
+         * Set series preview tool selected
+         * @method setSelected
+         * @param {Q_Tool} seriesPreview
+         * @param {Streams_Stream} stream - series stream
+         * @param {boolean} [local=false] - if true don't send request to server, just set tool selected on client
+         */
+        setSelected: function (seriesPreview, stream, local) {
+            var tool = this;
+            var $toolElement = $(this.element);
+            local = local === undefined ? false : local;
+            var _setSelectedElement = function () {
+                $(seriesPreview.element).addClass("Q_selected").siblings(".Assets_NFT_series_preview_tool").removeClass("Q_selected");
+                $(".nftsToolBox ." + Q.normalize(stream.fields.name), tool.element).addClass("Q_selected").siblings().removeClass("Q_selected");
+            };
+
+            if (local) {
+                return _setSelectedElement();
+            }
+
+            $toolElement.addClass("Q_working");
+
+            Q.req("Assets/NFTseries", ["selectNFTSeries"], function (err, response) {
+                $toolElement.removeClass("Q_working");
+                var errMsg = Q.firstErrorMessage(err, response && response.errors);
+                if (errMsg) {
+                    return Q.alert(errMsg);
+                }
+
+                _setSelectedElement();
+            }, {
+                method: "post",
+                fields: {
+                    publisherId: stream.fields.publisherId,
+                    streamName: stream.fields.name
+                }
             });
         }
     });

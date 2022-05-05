@@ -28,9 +28,14 @@ function Assets_NFT_post ($params) {
 	$fields = Q::take($req, array("title", "content", "attributes"));
 	Assets_NFT::updateNFT($stream, $fields);
 
-	$chainId = $fields["attributes"]["chainId"];
-	$chain = Assets_NFT::getChains($chainId);
-	$wallet = Users_Web3::getWalletById($userId);
+	$tokenId = $fields["attributes"]["tokenId"];
+	if ($tokenId) {
+		$chainId = $fields["attributes"]["chainId"];
+		$chain = Assets_NFT::getChains($chainId);
+		$wallet = Users_Web3::getWalletById($userId);
 
-	Assets_NFT::clearContractCache($chainId, $chain["contract"], $wallet);
+		Assets_NFT::clearContractCache($chainId, $chain["contract"], $wallet);
+	}
+
+	Q_Response::setSlot("NFTStream", array("publisherId" => $stream->publisherId, "streamName" => $stream->name));
 }

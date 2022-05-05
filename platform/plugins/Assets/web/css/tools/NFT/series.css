@@ -1,4 +1,14 @@
 .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool {
     display: inline-block;
     width: auto;
+    margin-left: 10px;
+}
+.Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool:first-of-type {
+    margin-left: 0;
+}
+.Assets_NFT_series_tool .nftsToolBox .Streams_related_tool {
+    display: none;
+}
+.Assets_NFT_series_tool .nftsToolBox .Streams_related_tool.Q_selected {
+    display: block;
 }

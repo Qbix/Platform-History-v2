@@ -137,7 +137,7 @@ class Assets_NFT
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
 		// relate to main category
-		Streams::relate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::relate(null, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
 		//} elseif ($onMarketPlace == "false") {
 		// unrelate from main category
 		//	Streams::unrelate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name);

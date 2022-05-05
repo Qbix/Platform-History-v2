@@ -85,6 +85,8 @@
 
             var seriesId = stream.getAttribute("seriesId");
             $toolElement.attr("data-seriesid", seriesId);
+            var isEditable = stream.testWriteLevel('edit');
+            $toolElement.attr("data-editable", isEditable);
 
             Q.Template.render('Assets/NFT/series/view', {
                 name: stream.fields.title || ""
@@ -102,12 +104,33 @@
                     });
                 });
 
+                if (isEditable) {
+                    setTimeout(function () {
+                        $toolElement.plugin('Q/actions', {
+                            alwaysShow: true,
+                            actions: {
+                                edit: function () {
+                                    tool.update(stream);
+                                },
+                                delete: function () {
+                                    Q.confirm(tool.text.NFT.series.AreYouSure, function(result) {
+                                        if (!result) {
+                                            return;
+                                        }
+
+                                        tool.preview.delete();
+                                    });
+                                }
+                            }
+                        });
+                    }, 100);
+                }
+
                 //var $icon = $("img.NFT_series_icon", tool.element);
                 //tool.preview.icon($icon[0]);
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                    tool.update(stream);
                     Q.handle(state.onInvoke, tool, [stream]);
                 });
             });

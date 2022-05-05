@@ -90,6 +90,9 @@
 .Assets_NFT_series_preview_tool[data-onSale=false] .Assets_NFT_series_untilTime {
     display: none;
 }
+.Assets_NFT_series_preview_tool[data-editable=true] {
+    padding-right: 70px;
+}
 
 /***create nft form css***/
 .Assets_NFT_series_composer {
@@ -268,7 +271,9 @@
     -webkit-box-pack: center;
     justify-content: center;
     flex-direction: column;
-    padding: 5px;
+}
+.Assets_NFT_series_composer .Assets_nft_series_icon .Assets_nft_form_details .NFT_series_icon {
+    display: block;
 }
 .Assets_NFT_series_composer .Assets_nft_series_icon .Assets_nft_form_details button {
     display: inline-block;

@@ -15,9 +15,6 @@
      * @param {Object} [options] Override various options for this tool
      *  @param {string} chainId - blockchain chain id
      *  @param {string} tokenId - NFT token is in the chain described by chainId
-     *  @param {object} [series] - object {publisherId:..., streamName:...} or null. If defined the state.mode turned to
-     *  "series" and no market settings provided in composer. Instead market settings get from series stream.
-     *  If "series" - skip definition of "price", "currency", "royalty", "chain", because get these data from serie.
      *  @param {boolean} [useWeb3=false] If true use backend to read data from blockchain
      *  @param {string} [userId] - id of user on whose behalf NFT will be created
      *  @param {boolean} [poster] URL of poster image for movie (If movie provided)
@@ -39,12 +36,20 @@
         var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
 
-        // set mode related to state.series
-        state.mode = Q.isEmpty(state.series) ? "regular" : "series";
+        // <set Streams/preview imagepicker settings>
+        previewState.imagepicker.showSize = state.imagepicker.showSize;
+        previewState.imagepicker.fullSize = state.imagepicker.fullSize;
+        previewState.imagepicker.save = state.imagepicker.save;
+        previewState.imagepicker.useAnySize = true;
+        previewState.imagepicker.sendOriginal = true;
+        previewState.imagepicker.saveSizeName = {};
+        Q.each(NFT.icon.sizes, function (i, size) {
+            previewState.imagepicker.saveSizeName[size] = size;
+        });
+        // </set Streams/preview imagepicker settings>
 
-        var pipe = Q.pipe(["stylesheet", "text", "series"], function (params, subjects) {
+        var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
             // get all data from blockchain and refresh
-
             if (previewState.streamName) {
                 $toolElement.attr("data-publisherId", previewState.publisherId);
                 $toolElement.attr("data-streamName", previewState.streamName);
@@ -61,23 +66,10 @@
         }, {
             ignoreCache: true
         });
-        if (state.mode === "series") {
-            Streams.get.force(state.series.publisherId, state.series.streamName, function (err) {
-                if (err) {
-                    return;
-                }
-
-                tool.seriesStream = this;
-                pipe.fill('series')();
-            });
-        } else {
-            pipe.fill('series')();
-        }
     },
 
     { // default options here
         userId: null,
-        series: null, // "regular"
         useWeb3: true,
         imagepicker: {
             showSize: NFT.icon.defaultSize,
@@ -216,6 +208,9 @@
             var state = tool.state;
             var $toolElement = $(this.element);
 
+            tool.minted = stream.getAttribute("tokenId");
+            $toolElement.attr("data-minted", tool.minted);
+
             Q.Template.render('Assets/NFT/view', {
                 title: stream.fields.title
             }, (err, html) => {
@@ -308,7 +303,7 @@
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
-            var previewState = {};
+            var previewState = tool.preview.state;
             var userId = state.userId;
 
             var _openDialog = function () {
@@ -318,11 +313,7 @@
                     template: {
                         name: "Assets/NFT/nftCreate",
                         fields: {
-                            chains: chains,
-                            mode: state.mode,
-                            currencies: NFT.currencies.map(a => a.symbol),
-                            onMarketPlace: state.onMarketPlace,
-                            baseUrl: Q.baseUrl()
+                            minted: false
                         }
                     },
                     onActivate: function (dialog) {
@@ -343,39 +334,6 @@
                         $(".Assets_nft_upload_button", dialog).on(Q.Pointer.fastclick, function (event) {
                             event.preventDefault();
                             $icon.trigger("click");
-                        });
-
-                        // composer tabs (Fixed price, Timed action ...)
-                        $(".Assets_nft_clickable", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".Assets_nft_clickable").removeClass("active");
-                            $(this).closest(".Assets_nft_clickable").addClass("active");
-                        });
-
-                        // switch onMarketPlace
-                        var $onMarketPlace = $(".Assets_nft_check", dialog);
-                        $onMarketPlace.click(function() {
-                            $(".Assets_nft_form_details, .Assets_nft_royalties, .Assets_nft_selectNetwork", dialog).attr("data-active", $onMarketPlace.prop('checked'));
-                        });
-
-                        $(".time_details", dialog).hide();
-
-                        $("[data-type=fixed]", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".fixed_details", dialog).show();
-                            $(".time_details", dialog).hide();
-                        });
-
-                        $("[data-type=time]", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".fixed_details", dialog).hide();
-                            $(".time_details", dialog).show();
-                        });
-
-                        $("[data-type=bid]", dialog).on(Q.Pointer.fastclick, function (event) {
-                            event.preventDefault();
-                            $(".fTransferixed_details", dialog).hide();
-                            $(".time_details", dialog).hide();
                         });
 
                         var videoTool;
@@ -531,26 +489,27 @@
                                 $(".web3modal-modal-lightbox", $modal).css("z-index", modalZIndex);
                             }, modalPeriod);
 
-                            var price = parseFloat($("input[name=price]:visible", dialog).val() || $("input[name=minBid]:visible", dialog).val()) || 0;
-                            var onMarketPlace = $onMarketPlace.prop("checked");
-                            var chainId = $("select[name=chain]", dialog).val();
-                            var currencySymbol = $("select[name=currency]", dialog).val();
+                            var attributes = {
+                                "Assets/NFT/attributes": tool.collectAttributes(dialog)
+                            };
+                            if ($inputURL.val()) {
+                                attributes["animation_url"] = $inputURL.val();
+                            } else if ($museVideoId.val()) {
+                                attributes["videoId"] = $museVideoId.val();
+                                attributes["videoProvider"] = "muse";
+                            }
 
-                            if (state.mode === "series") {
-                                chainId =
-                                Q.req("Assets/NFT",function (err) {
+                            if (!tool.minted) {
+                                Q.req("Assets/NFT", ["NFTStream"],function (err, response) {
+                                    if (err) {
+                                        return;
+                                    }
+
                                     Q.Dialogs.pop();
 
-                                    Q.Tool.remove(tool.element, true, false);
-                                    tool.element.className = "";
-                                    tool.element.innerHTML = "";
+                                    var streamData = response.slots.NFTStream;
 
-                                    $toolElement.tool("Assets/NFT/preview", {
-                                        tokenId: tokenId,
-                                        chainId: chainId
-                                    }).activate();
-
-                                    Q.handle(state.onCreated, tool, [tokenId, chainId]);
+                                    Q.handle(state.onCreated, tool, [streamData]);
                                 }, {
                                     method: "post",
                                     fields: {
@@ -564,6 +523,11 @@
                                 return;
                             }
 
+                            var price = parseFloat($("input[name=price]", dialog).val());
+                            var $onMarketPlace = $(".Assets_nft_check", dialog);
+                            var onMarketPlace = $onMarketPlace.prop("checked");
+                            var chainId = $("select[name=chain]", dialog).val();
+                            var currencySymbol = $("select[name=currency]", dialog).val();
                             var chain = NFT.chains[chainId];
                             var currency = {};
                             Q.each(NFT.currencies, function (i, c) {
@@ -582,7 +546,7 @@
                                 var attributes = Q.extend({
                                     onMarketPlace: onMarketPlace,
                                     currency: $("select[name=currency] option:selected", dialog).text(),
-                                    price: $("input[name=price]", dialog).val()
+                                    price: price
                                 }, params);
                                 if (tokenId) {
                                     attributes.tokenId = tokenId;
@@ -661,35 +625,14 @@
 
                     var newItem = response.slots.newItem;
 
-                    // activate Streams/preview tool if not activated yet.
-                    if (!tool.preview) {
-                        $toolElement.tool("Streams/preview", {
-                            publisherId: newItem.publisherId,
-                            streamName: newItem.streamName,
-                            closeable: false
-                        }).activate(function () {
-                            // this is weird, but 'this' is not a Streams/preview tool, but Assets/NFT/preview
-                            tool.preview = Q.Tool.from(this.element, "Streams/preview");
+                    previewState.publisherId = newItem.publisherId;
+                    previewState.streamName = newItem.streamName;
 
-                            previewState = tool.preview.state;
+                    // this need for Streams/related tool to avoid appear composer twice
+                    Q.setObject("options.streams_preview.publisherId", newItem.publisherId, tool.element);
+                    Q.setObject("options.streams_preview.streamName", newItem.streamName, tool.element);
 
-                            // <set Streams/preview imagepicker settings>
-                            previewState.imagepicker.showSize = state.imagepicker.showSize;
-                            previewState.imagepicker.fullSize = state.imagepicker.fullSize;
-                            previewState.imagepicker.save = state.imagepicker.save;
-                            previewState.imagepicker.useAnySize = true;
-                            previewState.imagepicker.sendOriginal = true;
-                            previewState.imagepicker.saveSizeName = {};
-                            Q.each(NFT.icon.sizes, function (i, size) {
-                                previewState.imagepicker.saveSizeName[size] = size;
-                            });
-                            // </set Streams/preview imagepicker settings>
-
-                            $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
-                        });
-                    } else {
-                        $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
-                    }
+                    $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
                 }, {
                     fields: {
                         userId: userId
@@ -908,7 +851,7 @@
     );
 
     Q.Template.set('Assets/NFT/nftCreate',
-        `<div class="Assets_nft" data-mode="{{mode}}">
+        `<div class="Assets_nft" data-minted="{{minted}}">
         <form>
             <div class="Assets_nft_form_group">
                 <input type="text" name="title" class="Assets_nft_form_control" placeholder="{{NFT.TitlePlaceholder}}">
@@ -989,7 +932,7 @@
         <div class="tile_block_header">
             <div class="Assets_NFT_avatar"></div>
         </div>
-        <div class="video-container"></div>
+        <div class="video-container"><img class="NFT_preview_icon"></div>
         <h2 class="tile-name">{{title}}</h2>
         <ul class="bid-info">
             <li class="Assets_NFT_price">

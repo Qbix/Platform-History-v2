@@ -11,6 +11,7 @@ class Assets_NFT_Series
 {
 	static $categoryStreamName = "Assets/NFT/series";
 	static $relationType = "Assets/NFT/series";
+	static $selectedRelationType = "selected";
 	static $streamType = "Assets/NFT/series";
 
 	/**

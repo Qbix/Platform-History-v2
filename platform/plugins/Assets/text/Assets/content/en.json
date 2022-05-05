@@ -265,6 +265,7 @@
             "Description": "Description",
             "Author": "Author",
             "Value": "Value",
+            "AreYouSure": "Are you sure?",
             "AuthorInvalid": "Author address invalid!",
             "Address": "Address",
             "CoverImage": "Cover image",

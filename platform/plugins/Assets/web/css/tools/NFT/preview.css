@@ -15,7 +15,7 @@
     position: relative;
     outline: solid 1px #535353;
     border-radius: 30px;
-    padding: 10px;
+    padding: 5px;
     min-height: 480px;
     cursor: pointer;
 }
@@ -175,7 +175,7 @@
     vertical-align: middle;
     cursor: pointer;
 }
-.Assets_NFT_preview_composer .Assets_nft[data-mode=series] .Assets_nft_form_market {
+.Assets_NFT_preview_composer .Assets_nft[data-minted=false] .Assets_nft_form_market {
     display: none;
 }
 .Assets_NFT_preview_composer .Assets_nft_form_control {
