@@ -584,6 +584,8 @@ Q.Tool.define({
 	"Streams/audioVisualization"	 : "{{Streams}}/js/tools/webrtc/audioVisualization.js",
 	"Streams/webrtc"	   : "{{Streams}}/js/tools/webrtc/webrtc.js",
 	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
+	"Streams/webrtc/preview/default" : "{{Streams}}/js/tools/webrtc/defaultWebrtcPreview.js",
+	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/callWebrtcPreview.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/webrtc/streamingEditor"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
 	"Streams/webrtc/livestreamInstructions"  : "{{Streams}}/js/tools/webrtc/livestreamInstructions.js",
@@ -606,7 +608,8 @@ Q.Tool.define({
 	"Streams/chat/preview": "{{Streams}}/js/tools/chat/preview.js",
 	"Streams/topic/preview": "{{Streams}}/js/tools/experience/preview.js",
 	"Streams/experience": "{{Streams}}/js/tools/experience/tool.js",
-	"Streams/calls": "{{Streams}}/js/tools/calls.js"
+	"Streams/calls": "{{Streams}}/js/tools/calls.js",
+	"Streams/calls/call": "{{Streams}}/js/tools/call.js"
 });
 
 Q.Tool.onActivate("Streams/chat").set(function () {
