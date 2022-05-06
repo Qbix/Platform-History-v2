@@ -83,7 +83,7 @@ class Assets_NFT_Series
 		}
 
 		// update attributes
-		if (Q::ifset($fields, "attributes")) {
+		if (Q::ifset($fields, "attributes", null)) {
 			if ($stream->attributes) {
 				$attributes = (array)Q::json_decode($stream->attributes);
 			} else {
@@ -91,6 +91,8 @@ class Assets_NFT_Series
 			}
 			$stream->attributes = Q::json_encode(array_merge($attributes, $fields["attributes"]));
 			$fieldsUpdated = true;
+		} else {
+			$stream->attributes = '{}';
 		}
 
 		if ($fieldsUpdated) {
