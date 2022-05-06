@@ -218,6 +218,7 @@ abstract class Base_Streams_Invited extends Db_Row
 				$rowObject = new Streams_Invited($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

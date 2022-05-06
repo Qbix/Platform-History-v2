@@ -213,6 +213,7 @@ abstract class Base_Assets_Customer extends Db_Row
 				$rowObject = new Assets_Customer($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

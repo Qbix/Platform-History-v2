@@ -215,6 +215,7 @@ abstract class Base_Streams_RelatedToTotal extends Db_Row
 				$rowObject = new Streams_RelatedToTotal($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

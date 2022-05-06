@@ -207,6 +207,7 @@ abstract class Base_Assets_Leader extends Db_Row
 				$rowObject = new Assets_Leader($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -213,6 +213,7 @@ abstract class Base_Websites_Article extends Db_Row
 				$rowObject = new Websites_Article($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -214,6 +214,7 @@ abstract class Base_Users_Contact extends Db_Row
 				$rowObject = new Users_Contact($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -221,6 +221,7 @@ abstract class Base_Users_Vote extends Db_Row
 				$rowObject = new Users_Vote($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

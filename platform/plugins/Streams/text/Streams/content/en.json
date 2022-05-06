@@ -231,7 +231,9 @@
             "linkCopiedToCb": "Link copied to clipboard",
             "codeCopiedToCb": "Code copied to clipboard",
             "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "openInBrowserAlert": "Open link in Safari browser to join the conference.",
+            "allowedVideoLimit": "Only {{limit}} video allowed in this room",
+            "allowedAudioLimit": "Only {{limit}} microphones allowed in this room"
         },
         "settingsPopup": {
             "dialogTitle": "Video Settings",
