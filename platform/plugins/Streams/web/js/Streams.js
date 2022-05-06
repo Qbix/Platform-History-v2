@@ -338,8 +338,9 @@ Streams.iconUrl = function(icon, basename) {
 	|| (!basename && basename !== false)) {
 		basename = '40';
 	}
-	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
-	var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
+	basename = (String(basename).match(/\.\w+$/g)) ? basename : basename+'.png';
+	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
+	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? src
 		: Q.url('{{Streams}}/img/icons/'+src);
