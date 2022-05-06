@@ -156,9 +156,10 @@
             }, function(err, html) {
                 tool.element.innerHTML = html;
                 $toolElement.off("click.nftSeriesComposer").on("click.nftSeriesComposer", function () {
+                    $toolElement.addClass("Q_working");
                     Q.req("Assets/NFTseries", "newItem", function (err, response) {
                         if (err) {
-                            return;
+                            return $toolElement.removeClass("Q_working");
                         }
 
                         var newItem = response.slots.newItem;
@@ -171,6 +172,7 @@
 
                         // get a stream by data got from "newItem" request
                         Streams.get.force(previewState.publisherId, previewState.streamName, function (err) {
+                            $toolElement.removeClass("Q_working");
                             if (err) {
                                 return;
                             }
@@ -205,7 +207,7 @@
 
             Q.Dialogs.push({
                 title: isNew ? tool.text.NFT.series.CreateSeries : tool.text.NFT.series.UpdateSeries,
-                className: "Assets_NFT_series_composer" + (isNew ? " Assets_NFT_series_new" : ""),
+                className: "Assets_NFT_series_composer",
                 template: {
                     name: "Assets/NFT/series/Create",
                     fields: {
@@ -241,6 +243,12 @@
                     $("button[name=save]", dialog).on(Q.Pointer.fastclick, function (event) {
                         event.preventDefault();
 
+                        var name = $("input[name=name]", dialog).val();
+
+                        if (!name) {
+                            return Q.alert(tool.text.errors.NameRequired);
+                        }
+
                         Q.Dialogs.pop();
 
                         Q.req("Assets/NFTseries",function (err) {
@@ -270,6 +278,7 @@
                         }, {
                             method: "post",
                             fields: {
+                                title: name,
                                 publisherId: tool.stream.fields.publisherId,
                                 streamName: tool.stream.fields.name
                             }
@@ -290,7 +299,7 @@
     Q.Template.set('Assets/NFT/series/Create',
 `<div class="Assets_nft_form_group Assets_nft_series_name">
             <label>{{NFT.Name}}:</label>
-            <input type="text" name="name">
+            <input type="text" name="name" value="{{name}}">
         </div>
         <div class="Assets_nft_form_group Assets_nft_series_icon">
             <label>{{NFT.series.CoverImage}}:</label>

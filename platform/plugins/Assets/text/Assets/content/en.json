@@ -4,6 +4,7 @@
         "WalletAbsent": "The wallet not connected.",
         "Rendering": "There were errors while rendering <span class='url'>{{1}}</span>",
         "PriceRequired": "Price required!",
+        "NameRequired": "Name required!",
         "PriceInvalid": "Price invalid!",
         "TransactionFailed": "Transaction Failed",
         "ChainNotSupported": "The selected chain is not supported. Supported chain: {{supportedChain}}",
