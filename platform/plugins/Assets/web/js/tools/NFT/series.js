@@ -176,6 +176,12 @@
                             tool.setSelected(seriesTool, {fields: {publisherId: publisherId, name: streamName}}, true);
                         }
                     });
+
+                    // onClose series
+                    seriesTool.preview.state.onClose.set(function () {
+                        $nftsBox.remove();
+                    }, seriesTool);
+
                     $nftsBox.tool("Streams/related", relatedOptions).activate();
                 });
             });
