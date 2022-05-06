@@ -44,7 +44,17 @@
 
                 });
             } else {
+                $(tool.element).tool("Streams/webrtc/preview/default", {
+                    publisherId: state.publisherId,
+                    streamName: state.streamName,
+                    relationType: state.relationType,
+                    editable: false,
+                    closeable: true,
+                    sortable: false,
+                    realtime: true,
+                }).activate(function () {
 
+                });
             }
 
 
