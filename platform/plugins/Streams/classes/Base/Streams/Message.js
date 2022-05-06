@@ -462,7 +462,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","10"," unsigned",true],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","10"," unsigned",true],false,"MUL","CURRENT_TIMESTAMP"];
 };
 
 /**

@@ -214,6 +214,16 @@ abstract class Base_Users_Total extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Total($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Total'))
@@ -290,7 +300,7 @@ abstract class Base_Users_Total extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('forType', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -345,7 +355,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('forId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -396,7 +406,7 @@ return array (
 	function beforeSet_voteCount($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('voteCount', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -444,7 +454,7 @@ return array (
 	function beforeSet_weightTotal($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('weightTotal', $value);
 		}
 		if (!is_numeric($value))
@@ -477,7 +487,7 @@ return array (
 	function beforeSet_value($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('value', $value);
 		}
 		if (!is_numeric($value))
@@ -520,7 +530,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

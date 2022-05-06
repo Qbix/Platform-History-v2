@@ -1625,7 +1625,8 @@ EOT;
 			if ($table_col['Key'] == 'PRI') {
 				$pk[] = $table_col['Field'];
 			}
-			if (strtolower($table_col['Default']) === 'current_timestamp()') {
+			if (!empty($table_col['Default'])
+			and strtolower($table_col['Default']) === 'current_timestamp()') {
 				$table_cols[$k]['Default'] = 'CURRENT_TIMESTAMP';
 			}
 		}
@@ -2023,7 +2024,7 @@ EOT;
 						: ($field_null ? null : '');
 					$isExpression = (
 						$default === 'CURRENT_TIMESTAMP'
-						or strpos($default, '(') !== false
+						or ($default and strpos($default, '(') !== false)
 					);
 					$defaults[] = $isExpression
 						? 'new Db_Expression(' . json_encode($default) . ')'
@@ -2556,6 +2557,16 @@ $field_hints
 	 */
 	static function insertManyAndExecute(\$rows = array(), \$options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach (\$rows as \$row) {
+			if (is_array(\$row)) {
+				\$rowObject = new $class_name(\$row);
+			} else {
+				\$rowObject = \$row;
+			}
+			\$rowObject->beforeSave(\$row);
+			\$row = \$rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), \$rows,
 			array_merge(\$options, array('className' => $class_name_var))

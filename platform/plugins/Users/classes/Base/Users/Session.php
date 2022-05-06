@@ -262,6 +262,16 @@ abstract class Base_Users_Session extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Session($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Session'))
@@ -338,7 +348,7 @@ abstract class Base_Users_Session extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('id', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -393,7 +403,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('content', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -448,7 +458,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('php', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -503,7 +513,7 @@ return array (
 			return array('userId', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -558,7 +568,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('deviceId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -609,7 +619,7 @@ return array (
 	function beforeSet_timeout($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('timeout', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -664,7 +674,7 @@ return array (
 	function beforeSet_duration($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('duration', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -723,7 +733,7 @@ return array (
 			return array('platform', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('platform', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -778,7 +788,7 @@ return array (
 			return array('appId', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -833,7 +843,7 @@ return array (
 			return array('version', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('version', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -887,7 +897,7 @@ return array (
 			return array('formFactor', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('formFactor', $value);
 		}
 		if (!in_array($value, array('mobile','tablet','desktop')))
@@ -926,7 +936,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -976,7 +986,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {

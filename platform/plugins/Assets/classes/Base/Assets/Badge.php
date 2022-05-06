@@ -221,6 +221,16 @@ abstract class Base_Assets_Badge extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Assets_Badge($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Assets_Badge'))
@@ -296,7 +306,8 @@ abstract class Base_Assets_Badge extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -350,7 +361,8 @@ return array (
 		if (!isset($value)) {
 			return array('communityId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('communityId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -404,7 +416,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('name', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -458,7 +471,8 @@ return array (
 		if (!isset($value)) {
 			return array('icon', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('icon', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -512,7 +526,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('title', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -566,7 +581,8 @@ return array (
 		if (!isset($value)) {
 			return array('description', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('description', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -616,7 +632,8 @@ return array (
 	 */
 	function beforeSet_points($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('points', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)

@@ -48,7 +48,7 @@ Q.mixin(Base, Row);
  * @property streamName
  * @type String|Buffer
  * @default ""
- * the name of the stream
+ * the name of the stream, can be more than one
  */
 /**
  * @property insertedTime
