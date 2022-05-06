@@ -256,6 +256,7 @@ abstract class Base_Streams_Message extends Db_Row
 				$rowObject = new Streams_Message($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

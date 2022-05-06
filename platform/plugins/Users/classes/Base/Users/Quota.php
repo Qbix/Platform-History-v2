@@ -211,6 +211,7 @@ abstract class Base_Users_Quota extends Db_Row
 				$rowObject = new Users_Quota($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -221,6 +221,7 @@ abstract class Base_Streams_Metrics extends Db_Row
 				$rowObject = new Streams_Metrics($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

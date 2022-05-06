@@ -233,6 +233,7 @@ abstract class Base_Users_Email extends Db_Row
 				$rowObject = new Users_Email($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

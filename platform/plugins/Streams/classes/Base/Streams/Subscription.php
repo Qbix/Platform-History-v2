@@ -235,6 +235,7 @@ abstract class Base_Streams_Subscription extends Db_Row
 				$rowObject = new Streams_Subscription($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -249,6 +249,7 @@ abstract class Base_Users_ExternalTo extends Db_Row
 				$rowObject = new Users_ExternalTo($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

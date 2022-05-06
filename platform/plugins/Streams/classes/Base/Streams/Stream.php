@@ -311,6 +311,7 @@ abstract class Base_Streams_Stream extends Db_Row
 				$rowObject = new Streams_Stream($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -256,6 +256,7 @@ abstract class Base_Users_Device extends Db_Row
 				$rowObject = new Users_Device($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

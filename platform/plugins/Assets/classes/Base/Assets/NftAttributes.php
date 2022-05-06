@@ -222,6 +222,7 @@ abstract class Base_Assets_NftAttributes extends Db_Row
 				$rowObject = new Assets_NftAttributes($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -220,6 +220,7 @@ abstract class Base_Users_Total extends Db_Row
 				$rowObject = new Users_Total($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

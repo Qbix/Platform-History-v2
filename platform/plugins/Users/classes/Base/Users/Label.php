@@ -220,6 +220,7 @@ abstract class Base_Users_Label extends Db_Row
 				$rowObject = new Users_Label($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

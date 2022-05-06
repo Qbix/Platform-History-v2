@@ -249,6 +249,7 @@ abstract class Base_Streams_Participant extends Db_Row
 				$rowObject = new Streams_Participant($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;
