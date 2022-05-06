@@ -213,6 +213,7 @@ abstract class Base_Streams_Category extends Db_Row
 				$rowObject = new Streams_Category($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

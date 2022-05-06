@@ -243,6 +243,7 @@ abstract class Base_Streams_Notification extends Db_Row
 				$rowObject = new Streams_Notification($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

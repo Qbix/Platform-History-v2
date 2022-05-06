@@ -257,6 +257,7 @@ abstract class Base_Streams_Access extends Db_Row
 				$rowObject = new Streams_Access($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

@@ -237,6 +237,7 @@ abstract class Base_Places_Autocomplete extends Db_Row
 				$rowObject = new Places_Autocomplete($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

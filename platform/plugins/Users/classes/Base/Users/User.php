@@ -303,6 +303,7 @@ abstract class Base_Users_User extends Db_Row
 				$rowObject = new Users_User($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

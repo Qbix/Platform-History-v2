@@ -219,6 +219,7 @@ abstract class Base_Websites_Webpage extends Db_Row
 				$rowObject = new Websites_Webpage($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

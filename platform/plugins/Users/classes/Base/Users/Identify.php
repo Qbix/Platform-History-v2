@@ -212,6 +212,7 @@ abstract class Base_Users_Identify extends Db_Row
 				$rowObject = new Users_Identify($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

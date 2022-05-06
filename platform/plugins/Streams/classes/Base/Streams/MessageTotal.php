@@ -207,6 +207,7 @@ abstract class Base_Streams_MessageTotal extends Db_Row
 				$rowObject = new Streams_MessageTotal($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

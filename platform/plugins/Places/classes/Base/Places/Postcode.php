@@ -253,6 +253,7 @@ abstract class Base_Places_Postcode extends Db_Row
 				$rowObject = new Places_Postcode($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

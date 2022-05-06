@@ -205,6 +205,7 @@ abstract class Base_Websites_Permalink extends Db_Row
 				$rowObject = new Websites_Permalink($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

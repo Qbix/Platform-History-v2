@@ -254,6 +254,7 @@ abstract class Base_Users_Mobile extends Db_Row
 				$rowObject = new Users_Mobile($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

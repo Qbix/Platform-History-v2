@@ -261,6 +261,7 @@ abstract class Base_Assets_Credits extends Db_Row
 				$rowObject = new Assets_Credits($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;

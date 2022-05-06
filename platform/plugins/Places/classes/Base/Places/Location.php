@@ -204,6 +204,7 @@ abstract class Base_Places_Location extends Db_Row
 				$rowObject = new Places_Location($row);
 			} else {
 				$rowObject = $row;
+				$row = $row->fields;
 			}
 			$rowObject->beforeSave($row);
 			$row = $rowObject->fields;
