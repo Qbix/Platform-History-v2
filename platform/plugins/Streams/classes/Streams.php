@@ -4139,7 +4139,7 @@ abstract class Streams extends Base_Streams
 			: "{{Streams}}/img/icons/$url";
 		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl) && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
 			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}
