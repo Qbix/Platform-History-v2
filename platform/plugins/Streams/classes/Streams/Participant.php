@@ -153,9 +153,6 @@ class Streams_Participant extends Base_Streams_Participant
 		if (empty($this->extra)) {
 			$this->extra = '{}';
 		}
-		$modifiedState = isset($modifiedFields['state']);
-		$modifiedSubscribed = isset($modifiedFields['subscribed']);
-		$modifiedExtra = isset($modifiedFields['extra']);
 		foreach ($this->fields as $name => $value) {
 			if (!empty($this->fieldsModified[$name])) {
 				$modifiedFields[$name] = $value;
@@ -173,7 +170,7 @@ class Streams_Participant extends Base_Streams_Participant
 	function afterSaveExecute($result, $query, $modifiedFields, $where)
 	{
 		if ($this->state !== 'participating') {
-			return $result;;
+			return $result;
 		}
 		// Relate to participating streams
 		$participatingNames = Streams_Stream::getConfigField(

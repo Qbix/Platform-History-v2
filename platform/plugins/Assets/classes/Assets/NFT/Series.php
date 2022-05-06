@@ -29,38 +29,38 @@ class Assets_NFT_Series
 			"type" => "new"
 		))->ignoreCache()->fetchDbRows();
 
-		if (empty($relations)) {
-			$data = Q::event("Users/external/response/data", array("userId"));
-			$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(
-				"attributes" => array(
-					"author" => $data["wallet"]
-				)
-			), array(
-				"publisherId" => $userId,
-				"streamName" => self::$categoryStreamName,
-				"type" => "new"
-			));
-			$maxWeight = Streams_RelatedTo::select()->where(array(
-				"toPublisherId" => $userId,
-				"toStreamName" => self::$categoryStreamName,
-				"type" => self::$relationType
-			))->orderBy("weight", false)->limit(1)->fetchDbRow();
-			$maxWeight = $maxWeight ? (int)$maxWeight->weight : 0;
-			$lastPart = explode("/", $stream->name);
-			$lastPart = end($lastPart);
-			$tokenId = Streams::toHexString($userId, "$maxWeight/$lastPart");
-			$tokenId = preg_replace("/0+$/", "", $tokenId);
-			$seriesId = substr($tokenId, 0, 18);
-			$stream->setAttribute("tokenId", $tokenId)->save();
-			$stream->setAttribute("seriesId", $seriesId)->save();
-
-			$stream->join(compact("userId"));
-			return $stream;
-		} else {
+		if (!empty($relations)) {
 			$relation = reset($relations);
 			$stream = Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName);
 			return $stream;
 		}
+
+		$data = Q::event("Users/external/response/data", array("userId"));
+		$stream = Streams::create($userId, $userId, "Assets/NFT/series", array(
+			"attributes" => array(
+				"author" => $data["wallet"]
+			)
+		), array(
+			"publisherId" => $userId,
+			"streamName" => self::$categoryStreamName,
+			"type" => "new"
+		));
+		$maxWeight = Streams_RelatedTo::select()->where(array(
+			"toPublisherId" => $userId,
+			"toStreamName" => self::$categoryStreamName,
+			"type" => self::$relationType
+		))->orderBy("weight", false)->limit(1)->fetchDbRow();
+		$maxWeight = $maxWeight ? (int)$maxWeight->weight : 0;
+		$lastPart = explode("/", $stream->name);
+		$lastPart = end($lastPart);
+		$tokenId = Streams::toHexString($userId, "$maxWeight/$lastPart");
+		$tokenId = preg_replace("/0+$/", "", $tokenId);
+		$seriesId = substr($tokenId, 0, 18);
+		$stream->setAttribute("tokenId", $tokenId)->save();
+		$stream->setAttribute("seriesId", $seriesId)->save();
+
+		$stream->join(compact("userId"));
+		return $stream;
 	}
 
 	/**

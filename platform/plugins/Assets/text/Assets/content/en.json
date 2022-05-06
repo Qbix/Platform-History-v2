@@ -301,12 +301,6 @@
             "TypeContractName": "contract name",
             "TypeContractSymbol": "contract symbol (max 10 chars)"
         },
-        "profile": {
-            "Title": "Profile for {{userName}}",
-            "Description": "User details",
-            "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Are you sure you want to log out?"
-        },
         "import": {
             "importNFT": "Importing NFT's",
             "importAttributes": "Import NFT attributes",

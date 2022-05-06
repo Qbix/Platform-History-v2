@@ -116,6 +116,10 @@
                         return;
                     }
 
+                    if (Q.getObject("fields.name", tool.selectedSeries) === streamName) {
+                        tool.setSelected(seriesTool, {fields: {publisherId: publisherId, name: streamName}}, true);
+                    }
+
                     seriesTool.state.onInvoke.set(function (stream) {
                         tool.setSelected(seriesTool, stream);
                     }, tool);
@@ -205,7 +209,11 @@
                     return Q.alert(errMsg);
                 }
 
+                tool.selectedSeries = stream;
+
                 _setSelectedElement();
+
+                Q.handle(seriesPreview.state.onSelected, seriesPreview, [seriesPreview.stream]);
             }, {
                 method: "post",
                 fields: {

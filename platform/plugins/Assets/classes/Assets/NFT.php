@@ -58,17 +58,17 @@ class Assets_NFT
 			"ignoreCache" => true
 		));
 
-		if (empty($streams)) {
-			$stream = Streams::create($userId, $userId, "Assets/NFT", array(), array(
-				"publisherId" => $userId,
-				"streamName" => $category->name,
-				"type" => "new"
-			));
-			$stream->join(compact("userId"));
-			return $stream;
-		} else {
+		if (!empty($streams)) {
 			return reset($streams);
 		}
+
+		$stream = Streams::create($userId, $userId, "Assets/NFT", array(), array(
+			"publisherId" => $userId,
+			"streamName" => $category->name,
+			"type" => "new"
+		));
+		$stream->join(compact("userId"));
+		return $stream;
 	}
 
 	/**

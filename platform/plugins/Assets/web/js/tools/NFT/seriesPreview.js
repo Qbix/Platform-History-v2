@@ -4,6 +4,7 @@
      */
 
     var Users = Q.Users;
+    var Streams = Q.Streams;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
     var Web3 = NFT.Web3;
@@ -14,10 +15,11 @@
      * @constructor
      * @param {Object} [options] Override various options for this tool
      *  @param {string} userId - owner user id
-     *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
-     *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
-     *  @param {Q.Event} [options.onCreated] Event occur when series created.
-     *  @param {Q.Event} [options.onIconChanged] Event occur when icon changed.
+     *  @param {Q.Event} [options.onInvoke] - Event occur when user click on tool element.
+     *  @param {Q.Event} [options.onAvatar] - Event occur when click on Users/avatar tool inside tool element.
+     *  @param {Q.Event} [options.onCreated] - Event occur when series created.
+     *  @param {Q.Event} [options.onIconChanged] - Event occur when icon changed.
+     *  @param {Q.Event} [options.onSelected] - Event occur when series selected
      */
     Q.Tool.define("Assets/NFT/series/preview", ["Streams/preview"],function(options, preview) {
         var tool = this;
@@ -69,7 +71,8 @@
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
-        onIconChanged: new Q.Event()
+        onIconChanged: new Q.Event(),
+        onSelected: new Q.Event()
     },
 
     {
@@ -82,19 +85,20 @@
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
+            tool.stream = stream;
 
-            var seriesId = stream.getAttribute("seriesId");
+            var seriesId = tool.stream.getAttribute("seriesId");
             $toolElement.attr("data-seriesid", seriesId);
-            var isEditable = stream.testWriteLevel('edit');
+            var isEditable = tool.stream.testWriteLevel('edit');
             $toolElement.attr("data-editable", isEditable);
 
             Q.Template.render('Assets/NFT/series/view', {
-                name: stream.fields.title || ""
+                name: tool.stream.fields.title || ""
             }, (err, html) => {
                 tool.element.innerHTML = html;
 
                 $(".Assets_NFT_series_avatar", tool.element).tool("Users/avatar", {
-                    userId: stream.fields.publisherId,
+                    userId: tool.stream.fields.publisherId,
                     icon: 40,
                     contents: false,
                     editable: false
@@ -110,7 +114,7 @@
                             alwaysShow: true,
                             actions: {
                                 edit: function () {
-                                    tool.update(stream);
+                                    tool.update();
                                 },
                                 delete: function () {
                                     Q.confirm(tool.text.NFT.series.AreYouSure, function(result) {
@@ -131,7 +135,7 @@
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                    Q.handle(state.onInvoke, tool, [stream]);
+                    Q.handle(state.onInvoke, tool, [tool.stream]);
                 });
             });
         },
@@ -152,7 +156,6 @@
             }, function(err, html) {
                 tool.element.innerHTML = html;
                 $toolElement.off("click.nftSeriesComposer").on("click.nftSeriesComposer", function () {
-
                     Q.req("Assets/NFTseries", "newItem", function (err, response) {
                         if (err) {
                             return;
@@ -167,12 +170,13 @@
                         Q.setObject("options.streams_preview.streamName", newItem.streamName, tool.element);
 
                         // get a stream by data got from "newItem" request
-                        Q.Streams.get.force(previewState.publisherId, previewState.streamName, function (err) {
+                        Streams.get.force(previewState.publisherId, previewState.streamName, function (err) {
                             if (err) {
                                 return;
                             }
 
-                            tool.update(this);
+                            tool.stream = this;
+                            tool.update();
                         });
                     }, {
                         fields: {
@@ -186,23 +190,26 @@
          * Update series
          * @method update
          */
-        update: function (stream) {
+        update: function () {
             var tool = this;
             var $toolElement = $(this.element);
             var state = this.state;
-            var isNew = !stream.fields.title;
+            var isNew = !tool.stream.fields.title;
 
-            stream.onFieldChanged("icon").set(function (modFields, field) {
-                Q.handle(state.onIconChanged, tool);
+            tool.stream.onFieldChanged("icon").set(function (modFields, field) {
+                Streams.get.force(tool.stream.fields.publisherId, tool.stream.fields.name, function () {
+                    tool.stream = this;
+                    Q.handle(state.onIconChanged, tool, [tool.stream]);
+                });
             }, tool);
 
             Q.Dialogs.push({
                 title: isNew ? tool.text.NFT.series.CreateSeries : tool.text.NFT.series.UpdateSeries,
-                className: "Assets_NFT_series_composer",
+                className: "Assets_NFT_series_composer" + (isNew ? " Assets_NFT_series_new" : ""),
                 template: {
                     name: "Assets/NFT/series/Create",
                     fields: {
-                        name: stream.fields.title,
+                        name: tool.stream.fields.title,
                         buttonText: isNew ? tool.text.NFT.Create : tool.text.NFT.Update
                     }
                 },
@@ -225,8 +232,8 @@
                     });
 
                     $(".series_name_inplace", dialog).tool("Streams/inplace", {
-                        publisherId: stream.fields.publisherId,
-                        streamName: stream.fields.name,
+                        publisherId: tool.stream.fields.publisherId,
+                        streamName: tool.stream.fields.name,
                         field: 'title',
                         inplaceType: "text"
                     }).activate();
@@ -246,7 +253,7 @@
                                 relatedTool.refresh();
                             }
 
-                            /*Q.Streams.get.force(stream.fields.publisherId, stream.fields.name, function () {
+                            /*Streams.get.force(stream.fields.publisherId, stream.fields.name, function () {
                                 Q.Dialogs.pop();
                                 $toolElement.removeClass("Assets_NFT_series_new");
 
@@ -259,12 +266,12 @@
                                 }).activate();
                             });*/
 
-                            Q.handle(state.onCreated, tool, [stream.fields.publisherId, stream.fields.name]);
+                            Q.handle(state.onCreated, tool, [tool.stream]);
                         }, {
                             method: "post",
                             fields: {
-                                publisherId: stream.fields.publisherId,
-                                streamName: stream.fields.name
+                                publisherId: tool.stream.fields.publisherId,
+                                streamName: tool.stream.fields.name
                             }
                         });
 
@@ -283,7 +290,7 @@
     Q.Template.set('Assets/NFT/series/Create',
 `<div class="Assets_nft_form_group Assets_nft_series_name">
             <label>{{NFT.Name}}:</label>
-            <div class="series_name_inplace"></div>
+            <input type="text" name="name">
         </div>
         <div class="Assets_nft_form_group Assets_nft_series_icon">
             <label>{{NFT.series.CoverImage}}:</label>
