@@ -162,7 +162,8 @@ class Q_Bootstrap
 	 */
 	static function revertSlashes($to_strip = null)
 	{		
-		if (!is_callable('get_magic_quotes_gpc')) {
+		if (version_compare(PHP_VERSION, '5.4', '>=')
+		or !is_callable('get_magic_quotes_gpc')) {
 			return;
 		}
 		if (get_magic_quotes_gpc()) {

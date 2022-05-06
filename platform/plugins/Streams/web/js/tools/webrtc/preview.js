@@ -12,7 +12,7 @@
      * @param {Q.Event} [options.onRender] called when tool element completely rendered
      */
     Q.Tool.define("Streams/webrtc/preview", ["Streams/preview"], function _Streams_webrtc_preview (options, preview) {
-        console.log('main preview', options);
+            console.log('main preview', options);
             var tool = this;
             this.state = Q.extend({}, this.state, options);
 
@@ -44,17 +44,7 @@
 
                 });
             } else {
-                $(tool.element).tool("Streams/webrtc/preview/default", {
-                    publisherId: state.publisherId,
-                    streamName: state.streamName,
-                    relationType: state.relationType,
-                    editable: false,
-                    closeable: true,
-                    sortable: false,
-                    realtime: true,
-                }).activate(function () {
 
-                });
             }
 
 

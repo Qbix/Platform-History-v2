@@ -5244,7 +5244,7 @@ Streams.isMessage = function (value) {
  * Both inputs are padded by 0's on the right in the hex string.
  * For example Streams::toHexString("abc", "def") returns
  * 0x6162630000000000646566000000000000000000000000000000000000000000
- * while Streams::toHexString("abc", "123/def") returns
+ * while Streams::toHexString("abc/123", "def") returns
  * 0x616263000000007b646566000000000000000000000000000000000000000000
  * @static
  * @method toHexString
@@ -5257,32 +5257,26 @@ Streams.isMessage = function (value) {
  */
 Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
 	streamId = streamId || '';
-	var parts = streamId.split("/");
+	var parts = publisherId.split("/");
 	var seriesId = null;
+	var hexFirstPart = publisherId.substring(0, 8).asc2hex().padEnd(16, 0);
 	if (parts.length > 1) {
-		seriesId = parts[0];
-		streamId = parts[1];
+		seriesId = parts[1];
 		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
 			throw new Q.Exception('seriesId must be in range integer 0-255');
 		}
-	}
-
-	var publisherHex = publisherId.substring(0, 8).asc2hex();
-	var pad = "padStart";
-	var streamHex = streamId.toString(16);
-	if (!isNotNumeric && streamId && !isNaN(streamId)) {
-		if (Math.floor(streamId) !== streamId || streamId < 0) {
-			throw new Q.Exception('seriesId must be in range integer 0-255');
-		}
-	} else {
-		streamHex = streamId.substring(0, 24).asc2hex();
-		pad = "padEnd";
-	}
-	var hexFirstPart = publisherHex.padEnd(16, 0);
-	var hexSecondPart = eval('streamHex.' + pad + '(48, 0)');
-	if (seriesId) {
 		hexFirstPart = hexFirstPart.substring(0, 14) + seriesId.toString(16).padStart(2, '0');
 	}
+
+	var pad, streamHex;
+	if (isNotNumeric || isNaN(streamId)) {
+		streamHex = streamId.substring(0, 24).asc2hex();
+		pad = "padEnd";
+	} else {
+		streamHex = streamId.toString(16)
+		pad = "padStart";
+	}
+	var hexSecondPart = streamHex[pad](48, 0);
 	return "0x" + hexFirstPart + hexSecondPart;
 };
 

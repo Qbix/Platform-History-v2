@@ -1,7 +1,7 @@
 {
   "Assets/user/NFTs": {
     "type": "Streams/category",
-    "title": "NFT's category",
+    "title": "Users NFT's",
     "icon": "",
     "readLevel": 40,
     "writeLevel": 10,
@@ -9,7 +9,23 @@
   },
   "Assets/NFT/contracts": {
     "type": "Streams/category",
-    "title": "Users custom contract",
+    "title": "Users custom contracts",
+    "icon": "",
+    "readLevel": 40,
+    "writeLevel": 10,
+    "adminLevel": 0
+  },
+  "Assets/NFT/series": {
+    "type": "Streams/category",
+    "title": "Users series",
+    "icon": "",
+    "readLevel": 40,
+    "writeLevel": 10,
+    "adminLevel": 0
+  },
+  "Assets/contests": {
+    "type": "Streams/category",
+    "title": "Users contests",
     "icon": "",
     "readLevel": 40,
     "writeLevel": 10,

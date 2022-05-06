@@ -807,7 +807,16 @@
 
 		var o = Q.extend({}, Users.login.options, options);
 		if (o.unlessLoggedIn && Users.loggedInUser) {
-			return _onConnect(Users.loggedInUser);
+			var pn = priv.used || 'native';
+			var ret = Q.handle(o.onResult, this, [
+				Users.loggedInUser, options, priv.result, pn
+			]);
+			if (false !== ret) {
+				Q.handle(o.onSuccess, this, [
+					Users.loggedInUser, options, priv.result, pn
+				]);
+			}
+			return;
 		}
 
 		if (typeof options === 'function') {

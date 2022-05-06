@@ -16,6 +16,7 @@ function Assets_NFTcontract_post ($params) {
 
 	Q_Valid::requireFields(array("userId", "chainId"), $req, true);
 
+	// set current contract for user
 	if (Q_Request::slotName("setContract")) {
 		$publisherId = Q::ifset($req, "publisherId", null);
 		if (!$publisherId) {
@@ -38,7 +39,7 @@ function Assets_NFTcontract_post ($params) {
 	$stream = Assets_NFT_Contract::getStream($req["chainId"], $userId);
 	if (!$stream) {
 		$stream = Streams::create(null, $userId, "Assets/NFT/contract", array(
-			"title" => Q::interpolate($texts["CustomContractFor"], array(
+			"title" => Q::interpolate($texts["ContractName"], array(
 				"contractName" => $req["name"],
 				"contractSymbol" => $req["symbol"],
 				"chainNetwork" => $chain["name"]

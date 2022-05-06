@@ -1515,6 +1515,17 @@ class Q_Utils
 		}
 		return true;
 	}
+
+	/**
+	 * Find out whether we are running in a Windows environment
+	 * @method isWindows
+	 * @static
+	 * @return {boolean}
+	 */
+	static function isWindows()
+	{
+		return strtoupper(substr(PHP_OS, 0, 3)) === 'WIN';
+	}
 	
 	/**
 	 * Create a symlink
@@ -1554,7 +1565,14 @@ class Q_Utils
 			}
 		}
 
-		@symlink($target, $link);
+		if (!self::isWindows()) {
+			symlink($target, $link);
+		} else {
+			$pswitch = is_dir($link) ? '/d' : '';
+			$target = str_replace('/', DS, $target);
+			$link = str_replace('/', DS, $link);
+			exec('mklink ' . $pswitch . ' "' . $link . '" "' . $target . '"');
+		}
 
 		if (!file_exists($link)) {
 			throw new Q_Exception("Link $link to target $target was not created");
