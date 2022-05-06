@@ -237,6 +237,16 @@ abstract class Base_Streams_SubscriptionRule extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Streams_SubscriptionRule($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_SubscriptionRule'))
@@ -312,7 +322,8 @@ abstract class Base_Streams_SubscriptionRule extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('ofUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -366,7 +377,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('publisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -420,7 +432,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('streamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -470,7 +483,8 @@ return array (
 	 */
 	function beforeSet_ordinal($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('ordinal', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -524,7 +538,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -573,7 +588,8 @@ return array (
 		if (!isset($value)) {
 			return array('readyTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('readyTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -623,7 +639,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('filter', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -677,7 +694,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('deliver', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -720,7 +738,8 @@ return array (
 
 	function beforeSet_relevance($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('relevance', $value);
 		}
 		if (!is_numeric($value))

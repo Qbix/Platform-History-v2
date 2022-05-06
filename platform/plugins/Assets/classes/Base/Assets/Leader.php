@@ -201,6 +201,16 @@ abstract class Base_Assets_Leader extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Assets_Leader($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Assets_Leader'))
@@ -276,7 +286,8 @@ abstract class Base_Assets_Leader extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('app', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -326,7 +337,8 @@ return array (
 	 */
 	function beforeSet_day($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('day', $value);
 		}
 		$date = date_parse($value);
@@ -377,7 +389,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -427,7 +440,8 @@ return array (
 	 */
 	function beforeSet_points($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('points', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)

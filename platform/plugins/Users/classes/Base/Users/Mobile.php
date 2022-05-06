@@ -248,6 +248,16 @@ abstract class Base_Users_Mobile extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Mobile($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Mobile'))
@@ -324,7 +334,7 @@ abstract class Base_Users_Mobile extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('number', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -375,7 +385,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -425,7 +435,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -476,7 +486,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -531,7 +541,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('extension', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -582,7 +592,7 @@ return array (
 	function beforeSet_carrier($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('carrier', $value);
 		}
 		if (!in_array($value, array('unverified','att','cingular','sprint','tmobile','verizon')))
@@ -621,7 +631,7 @@ return array (
 	function beforeSet_state($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('unverified','active','suspended','unsubscribed')))
@@ -660,7 +670,7 @@ return array (
 	function beforeSet_capabilities($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('capabilities', $value);
 		}
 		if (!in_array($value, array('unverified','sms','wap','internet','sms_and_wap','sms_and_internet')))
@@ -703,7 +713,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('activationCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -757,7 +767,7 @@ return array (
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -808,7 +818,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('authCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

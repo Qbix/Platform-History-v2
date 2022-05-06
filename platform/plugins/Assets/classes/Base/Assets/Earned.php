@@ -219,6 +219,16 @@ abstract class Base_Assets_Earned extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Assets_Earned($row);
+			} else {
+				$rowObject = $row;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Assets_Earned'))
@@ -294,7 +304,8 @@ abstract class Base_Assets_Earned extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('appId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -348,7 +359,8 @@ return array (
 		if (!isset($value)) {
 			return array('communityId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('communityId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -398,7 +410,8 @@ return array (
 	 */
 	function beforeSet_earnedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('earnedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -448,7 +461,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -502,7 +516,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('badgeName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -556,7 +571,8 @@ return array (
 		if (!isset($value)) {
 			return array('publisherId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('publisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -610,7 +626,8 @@ return array (
 		if (!isset($value)) {
 			return array('streamName', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('streamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
