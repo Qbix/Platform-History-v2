@@ -7,19 +7,16 @@
     var Streams = Q.Streams;
     var Assets = Q.Assets;
     var NFT = Assets.NFT;
-    var Web3 = NFT.Web3;
 
     /**
      * YUIDoc description goes here
      * @class Assets NFT/series
      * @constructor
      * @param {Object} [options] Override various options for this tool
-     *  @param {string} userId - owner user id
      *  @param {Q.Event} [options.onInvoke] - Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] - Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onCreated] - Event occur when series created.
      *  @param {Q.Event} [options.onIconChanged] - Event occur when icon changed.
-     *  @param {Q.Event} [options.onSelected] - Event occur when series selected
      */
     Q.Tool.define("Assets/NFT/series/preview", ["Streams/preview"],function(options, preview) {
         var tool = this;
@@ -31,10 +28,6 @@
         // is admin
         var roles = Object.keys(Q.getObject("roles", Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
-
-        if (Q.isEmpty(state.userId)) {
-            return console.warn("user id required!");
-        }
 
         // <set Streams/preview imagepicker settings>
         previewState.imagepicker.showSize = state.imagepicker.showSize;
@@ -63,7 +56,6 @@
     },
 
     { // default options here
-        userId: null,
         imagepicker: {
             showSize: "300x.png",
             save: "NFT/series/icon"
@@ -71,8 +63,7 @@
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
-        onIconChanged: new Q.Event(),
-        onSelected: new Q.Event()
+        onIconChanged: new Q.Event()
     },
 
     {
@@ -89,7 +80,7 @@
 
             var seriesId = tool.stream.getAttribute("seriesId");
             $toolElement.attr("data-seriesid", seriesId);
-            var isEditable = tool.stream.testWriteLevel('edit');
+            var isEditable = tool.preview.state.editable && tool.stream.testWriteLevel('edit');
             $toolElement.attr("data-editable", isEditable);
 
             Q.Template.render('Assets/NFT/series/view', {
@@ -182,7 +173,7 @@
                         });
                     }, {
                         fields: {
-                            userId: state.userId
+                            userId: previewState.publisherId
                         }
                     });
                 });
@@ -268,13 +259,17 @@
                                 tool.refresh(this);
 
                                 $("<div>").insertAfter($toolElement).tool("Streams/preview", {
-                                    publisherId: state.userId
+                                    publisherId: previewState.publisherId
                                 }).tool("Assets/NFT/series/preview", {
-                                    userId: state.userId
+                                    userId: previewState.publisherId
                                 }).activate();
                             });*/
 
-                            Q.handle(state.onCreated, tool, [tool.stream]);
+                            Streams.get.force(tool.stream.fields.publisherId, tool.stream.fields.name, function () {
+                                tool.stream = this;
+                                Q.handle(state.onCreated, tool, [tool.stream]);
+                            });
+
                         }, {
                             method: "post",
                             fields: {
