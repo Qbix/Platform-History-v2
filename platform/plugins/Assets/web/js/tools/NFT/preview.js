@@ -13,10 +13,6 @@
      * @class Assets NFT/preview
      * @constructor
      * @param {Object} [options] Override various options for this tool
-     *  @param {string} chainId - blockchain chain id
-     *  @param {string} tokenId - NFT token is in the chain described by chainId
-     *  @param {boolean} [useWeb3=false] If true use backend to read data from blockchain
-     *  @param {string} [userId] - id of user on whose behalf NFT will be created
      *  @param {boolean} [poster] URL of poster image for movie (If movie provided)
      *  @param {boolean} [movie] Movie URL. If no image defined during NFT creation, this movie will be used instead.
      *  On NFT/view the movie will display instead image (event if image defined).
@@ -69,13 +65,10 @@
     },
 
     { // default options here
-        userId: null,
-        useWeb3: true,
         imagepicker: {
             showSize: NFT.icon.defaultSize,
             save: "NFT/icon"
         },
-        onMarketPlace: true,
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
@@ -85,120 +78,6 @@
     },
 
     {
-        /**
-         * Get all data from blockchain and refresh
-         * @method init
-         */
-        init: function () {
-            var tool = this;
-            var state = this.state;
-            var $toolElement = $(this.element);
-            var loggedInUserId = Q.Users.loggedInUserId();
-            var pipeList = ["data", "author", "owner", "commissionInfo", "saleInfo", "authorUserId"];
-
-            if (state.composer) {
-                $toolElement.addClass("Assets_NFT_composer");
-                if ((loggedInUserId && state.userId === loggedInUserId) || tool.isAdmin) {
-                    $toolElement.removeClass("Q_working");
-                    tool.composer();
-                } else {
-                    Q.Tool.remove(tool.element, true, true);
-                }
-
-                return;
-            }
-
-            $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
-
-            var pipe = new Q.pipe(pipeList, function (params, subjects) {
-                // collect errors
-                var errors = [];
-                Q.each(pipeList, function (index, value) {
-                    var err = Q.getObject([value, 0], params);
-                    err && errors.push(err);
-                });
-                if (!Q.isEmpty(errors)) {
-                    return console.warn(errors);
-                }
-
-                var data = params.data[1];
-                var author = params.author[1];
-                var owner = params.owner[1];
-                var commissionInfo = params.commissionInfo[1];
-                var saleInfo = params.saleInfo[1];
-                var authorUserId = params.authorUserId[1];
-                authorUserId = authorUserId || '';
-
-                tool.refresh(data, author, owner, commissionInfo, saleInfo, authorUserId);
-                $toolElement.removeClass("Q_working");
-
-                Users.Web3.onAccountsChanged.set(function () {
-                    tool.refresh(data, author, owner, commissionInfo, saleInfo, authorUserId);
-                }, tool);
-            });
-
-            if (state.useWeb3) {
-                Q.handle(Assets.batchFunction(), null, ["NFT", "getInfo", state.tokenId, state.chainId, state.updateCache, function (err, data) {
-                    state.updateCache = false;
-
-                    var msg = Q.firstErrorMessage(err, data);
-                    if (msg) {
-                        return console.error(msg);
-                    }
-
-                    var currencyToken = this.saleInfo[0];
-                    var price = this.saleInfo[1];
-                    var priceDecimal = price ? parseInt(price)/1e18 : null;
-                    var isSale = this.saleInfo[2];
-
-                    pipe.fill("authorUserId")(null, this.authorUserId || "");
-                    pipe.fill("data")(null, this.data || "");
-                    pipe.fill("author")(null, this.author || "");
-                    pipe.fill("owner")(null, this.owner || "");
-                    pipe.fill("commissionInfo")(null, this.commissionInfo || "");
-                    pipe.fill("saleInfo")(null, {
-                        isSale: isSale,
-                        price: price,
-                        priceDecimal: priceDecimal,
-                        currencyToken: currencyToken
-                    });
-                }]);
-
-                // get smart contract just to set contract events to update preview
-                Web3.getContract(state.chain);
-            } else {
-                if (state.chainId !== Q.getObject("ethereum.chainId", window)) {
-                    return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
-                }
-
-                // if data defined, don't request it
-                if (state.data) {
-                    pipe.fill("data")(null, state.data);
-                } else {
-                    Q.handle(Web3.getTokenJSON, tool, [state.tokenId, state.chain, pipe.fill("data")]);
-                }
-
-                Q.handle(Web3.getAuthor, tool, [state.tokenId, state.chain, function (err, author) {
-                    if (err) {
-                        return console.warn(err);
-                    }
-
-                    pipe.fill("author")(arguments[0], arguments[1], arguments[2]);
-                    Q.req("Assets/NFT", "getUserIdByWallet", function (err, response) {
-                        if (err) {
-                            return console.warn(err);
-                        }
-
-                        pipe.fill("authorUserId")(null, response.slots.getUserIdByWallet);
-                    }, {
-                        fields: { wallet: author }
-                    });
-                }]);
-                Q.handle(Web3.getOwner, tool, [state.tokenId, state.chain, pipe.fill("owner")]);
-                Q.handle(Web3.commissionInfo, tool, [state.tokenId, state.chain, pipe.fill("commissionInfo")]);
-                Q.handle(Web3.saleInfo, tool, [state.tokenId, state.chain, pipe.fill("saleInfo")]);
-            }
-        },
         /**
          * Refreshes the appearance of the tool completely
          * @method refresh
@@ -274,24 +153,7 @@
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                    Q.handle(state.onInvoke, tool, []);
-                });
-
-                // buy NFT
-                $("button[name=buy]", tool.element).on(Q.Pointer.fastclick, function (e) {
-                    e.stopPropagation();
-                    e.preventDefault();
-
-                    Web3.checkProvider(state.chain, function (err) {
-                        if (err) {
-                            return;
-                        }
-
-                        Web3.buy(state.tokenId, state.chain, currency, function (err, transaction) {
-                            state.updateCache = true;
-                            tool.init();
-                        });
-                    });
+                    Q.handle(state.onInvoke, tool, [tool.preview.state.publisherId, tool.preview.state.streamName]);
                 });
             });
         },
@@ -304,7 +166,6 @@
             var state = tool.state;
             var $toolElement = $(this.element);
             var previewState = tool.preview.state;
-            var userId = state.userId;
 
             var _openDialog = function () {
                 Q.Dialogs.push({
@@ -513,7 +374,7 @@
                                 }, {
                                     method: "post",
                                     fields: {
-                                        userId: userId,
+                                        userId: previewState.publisherId,
                                         title: $("input[name=title]", dialog).val(),
                                         content: $("input[name=description]", dialog).val(),
                                         attributes: attributes
@@ -582,7 +443,7 @@
                                 }, {
                                     method: "post",
                                     fields: {
-                                        userId: userId,
+                                        userId: previewState.publisherId,
                                         title: $("input[name=title]", dialog).val(),
                                         content: $("input[name=description]", dialog).val(),
                                         attributes: attributes
@@ -635,7 +496,7 @@
                     $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
                 }, {
                     fields: {
-                        userId: userId
+                        userId: previewState.publisherId
                     }
                 });
             });
