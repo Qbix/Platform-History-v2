@@ -265,6 +265,7 @@
             "Icon": "Icon",
             "Description": "Description",
             "Author": "Author",
+            "SelectSeries": "Select series",
             "Value": "Value",
             "AreYouSure": "Are you sure?",
             "AuthorInvalid": "Author address invalid!",
