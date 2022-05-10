@@ -1953,7 +1953,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	if (typeof publisherId !== 'string') {
 		throw new Q.Error("Streams.related is expecting publisherId as a string");
 	}
-	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relatedType))) {
+	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relationType))) {
 		throw new Q.Error("Streams.related is expecting relationType as string or array");
 	}
 	if (typeof isCategory !== 'boolean') {
