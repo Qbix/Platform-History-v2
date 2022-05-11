@@ -13,14 +13,6 @@ function Assets_NFTseries_post ($params) {
 
 	$stream = Streams::fetchOne(null, $publisherId, $streamName);
 
-	if (Q_Request::slotName("selectNFTSeries")) {
-		Assets_NFT::replaceAllRelationsWithOne((object)array(
-			"publisherId" => $publisherId,
-			"name" => Assets_NFT_Series::$categoryStreamName
-		), Assets_NFT_Series::$selectedRelationType, $stream);
-		return Q_Response::setSlot("selectNFTSeries", true);
-	}
-
 	$fields = Q::take($req, array("title", "attributes"));
 	Assets_NFT_Series::update($stream, $fields);
 }

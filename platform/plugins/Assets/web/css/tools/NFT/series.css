@@ -16,17 +16,6 @@
 .Assets_NFT_series_tool .nftToolBox .Streams_related_tool.Q_selected {
     display: block;
 }
-.Assets_NFT_series_select .Q_dialog_content {
-    width: 300px;
-    padding: 5px;
-    background-color: #fff;
-}
-.Assets_NFT_series_select .Assets_NFT_series_preview_tool {
-    margin-bottom: 10px;
-}
-.Assets_NFT_series_select .Assets_NFT_series_preview_tool:last-of-type {
-    margin-bottom: 0;
-}
 .Assets_NFT_series_tool .Assets_NFT_series_select {
     display: inline-block;
     

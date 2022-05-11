@@ -33,7 +33,6 @@ function Assets_before_Q_responseExtras() {
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.contract.streamName', Assets_NFT_Contract::$streamName);
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.series.categoryStreamName', Assets_NFT_Series::$categoryStreamName);
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.series.relationType', Assets_NFT_Series::$relationType);
-	Q_Response::setScriptData('Q.plugins.Assets.NFT.series.selectedRelationType', Assets_NFT_Series::$selectedRelationType);
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.series.streamType', Assets_NFT_Series::$streamType);
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.chains', Assets_NFT::getChains());
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.currencies', Q_Config::get("Assets", "NFT", "currencies", array()));

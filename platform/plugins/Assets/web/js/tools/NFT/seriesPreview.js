@@ -17,6 +17,7 @@
      *  @param {Q.Event} [options.onAvatar] - Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onCreated] - Event occur when series created.
      *  @param {Q.Event} [options.onIconChanged] - Event occur when icon changed.
+     *  @param {Q.Event} [options.onClose] Event occur when series stream closed
      */
     Q.Tool.define("Assets/NFT/series/preview", ["Streams/preview"],function(options, preview) {
         var tool = this;
@@ -53,6 +54,11 @@
         }, {
             ignoreCache: true
         });
+
+        // onClose series
+        preview.state.onClose.set(function () {
+            Q.handle(state.onClose, preview);
+        }, tool);
     },
 
     { // default options here
@@ -63,7 +69,8 @@
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
-        onIconChanged: new Q.Event()
+        onIconChanged: new Q.Event(),
+        onClose: new Q.Event()
     },
 
     {
