@@ -709,55 +709,41 @@
 
 				var currency = options.currency || 'USD';
 
-				var supportedInstruments = [
-					{
-						supportedMethods: 'basic-card',
-						data: {
-							supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
-							supportedTypes: ['credit']
+				if (!Assets.Payments.googlePay) {
+					return callback({code: 9});
+				}
+
+				var supportedInstruments = [{
+					supportedMethods: 'https://google.com/pay',
+					data: {
+						environment: Assets.Payments.googlePay.environment,
+						apiVersion: 2,
+						apiVersionMinor: 0,
+						allowedPaymentMethods: [{
+							type: 'CARD',
+							parameters: {
+								allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+								allowedCardNetworks: ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "MIR", "VISA"]
+							},
+							tokenizationSpecification: {
+								type: 'PAYMENT_GATEWAY',
+								// Check with your payment gateway on the parameters to pass.
+								// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
+								parameters: {
+									"gateway": Assets.Payments.googlePay.gateway,
+									"stripe:version": Stripe.version.toString(),
+									"stripe:publishableKey": Assets.Payments.stripe.publishableKey
+								}
+							}
+						}],
+						transactionInfo: {
+							totalPriceStatus: "FINAL",
+							totalPrice: options.amount.toString(10),
+							currencyCode: currency
 						}
 					}
-				];
-				if (Assets.Payments.googlePay) {
-					supportedInstruments.push({
-						supportedMethods: 'https://google.com/pay',
-						data: {
-							environment: Assets.Payments.googlePay.environment,
-							apiVersion: 2,
-							apiVersionMinor: 0,
-							merchantInfo: {
-								// A merchant ID is available after approval by Google.
-								// @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
-								//merchantId: Assets.Payments.googlePay.merchantId,
-								//merchantName: Assets.Payments.googlePay.merchantName
-								merchantName: 'Example Merchant'
-							},
-							allowedPaymentMethods: [{
-								type: 'CARD',
-								parameters: {
-									allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-									allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
-								},
-								tokenizationSpecification: {
-									type: 'PAYMENT_GATEWAY',
-									// Check with your payment gateway on the parameters to pass.
-									// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
-									parameters: {
-										//'gateway': Assets.Payments.googlePay.gateway,
-										//'gatewayMerchantId': Assets.Payments.stripe.publishableKey
-										'gateway': 'example',
-										'gatewayMerchantId': 'exampleGatewayMerchantId'
-									}
-								}
-							}],
-							transactionInfo: {
-								totalPriceStatus: "FINAL",
-								totalPrice: options.amount.toString(10),
-								currencyCode: currency
-							}
-						}
-					})
-				}
+				}];
+
 				var globalShippingOptions = [
 					{
 						id: 'economy',
@@ -816,28 +802,7 @@
 				});
 				paymentRequest.show().then(function (result) {
 					var promise;
-					if (result.methodName === 'basic-card') {
-						promise = new Q.Promise(function (resolve, reject) {
-							Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-							Stripe.card.createToken({
-								number: result.details.cardNumber,
-								cvc: result.details.cardSecurityCode,
-								exp_month: result.details.expiryMonth,
-								exp_year: result.details.expiryYear
-							}, function (res, token) {
-								if (res !== 200) {
-									return reject({result: result, err: new Error('Stripe gateway error')});
-								}
-								options.token = token;
-								return Assets.Payments.pay('stripe', options, function (err) {
-									if (err) {
-										return reject({result: result, err: err});
-									}
-									return resolve(result);
-								});
-							});
-						});
-					} else if (result.methodName === 'https://google.com/pay') {
+					if (result.methodName === 'https://google.com/pay') {
 						promise = new Q.Promise(function (resolve, reject) {
 							options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
 							return Assets.Payments.pay('stripe', options, function (err) {
