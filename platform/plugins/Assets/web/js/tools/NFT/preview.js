@@ -86,6 +86,7 @@
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
+            tool.stream = stream;
 
             tool.minted = stream.getAttribute("tokenId");
             $toolElement.attr("data-minted", tool.minted);

@@ -351,6 +351,13 @@
             "NewAttribute": "New Attribute",
             "UpdateAttributes": "Update Attributes",
             "SaveAttributes": "Save Attributes"
+        },
+        "profile": {
+            "LogOut": "Log out",
+            "Title": "Profile for {{userName}}",
+            "Description": "User details",
+            "aboutPlaceholder": "Edit Bio",
+            "SureLogOut": "Are you sure you want to log out?"
         }
     }
 }

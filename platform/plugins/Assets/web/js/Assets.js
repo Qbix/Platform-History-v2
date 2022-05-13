@@ -1784,4 +1784,16 @@
 			return false;
 		}, 'Assets');
 	}, 'Assets');
+
+	var co = {
+		scrollbarsAutoHide: false,
+		handlers: {
+			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js"
+		}
+	};
+	if (Q.info.isMobile) {
+		co.back = {src: "Q/plugins/Q/img/x.png"};
+	}
+	Q.Tool.define.options('Q/columns', co);
+
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

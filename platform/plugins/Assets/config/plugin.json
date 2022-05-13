@@ -21,11 +21,12 @@
 			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
 		},
 		"routes@start": {
-			"Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
-			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },
+			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
+			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"}
 		},
 		"web": {
