@@ -2021,9 +2021,15 @@ class Streams_Stream extends Base_Streams_Stream
 		if (!$url) {
 			return null;
 		}
+		$streamNameParts = explode('/', $this->name);
+		if (strpos($url, '.[2]') !== false
+		and count($streamNameParts) <= 2) {
+			Q::log("Streams_Stream->url(): The URL string doesn't match some fields in the stream name: $url");
+			return null;
+		}
 		$urlString = Q_Handlebars::renderSource($url, array(
 			'publisherId' => $this->publisherId,
-			'streamName' => explode('/', $this->name),
+			'streamName' => $streamNameParts,
 			'name' => $this->name,
 			'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
 		));

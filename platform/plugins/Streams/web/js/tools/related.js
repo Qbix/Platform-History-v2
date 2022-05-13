@@ -18,7 +18,7 @@ var Streams = Q.Streams;
  *   @param {String} [options.streamName] Either this or "stream" is required. Name of the stream to which the others are related
  *   @param {String} [options.tag="div"] The type of element to contain the preview tool for each related stream.
  *   @param {Q.Streams.Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
- *   @param {String} options.relationType=null The type of the relation.
+ *   @param {String} [options.relationType=null] The type of the relation. If empty, will try to show all relations.
  *   @param {Boolean} [options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
@@ -50,7 +50,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
 	}
 	if (!state.relationType) {
-		throw new Q.Error("Streams/related tool: missing relationType");
+		// throw new Q.Error("Streams/related tool: missing relationType");
 	}
 	if (state.sortable === true) {
 		state.sortable = Q.Tool.define.options('Streams/related').sortable;
