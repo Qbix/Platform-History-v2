@@ -222,9 +222,13 @@
     cursor: pointer;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_users-counter,
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_users-countdown,
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_text-chat-counter{
-    width: 20px;
-    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    width: auto;
+    height: auto;
+    aspect-ratio: 1/1;
     border-radius: 50%;
     background: #777;
     position: absolute;
@@ -236,6 +240,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_conference-control-inner .Streams_webrtc_users-countdown {
+    right: -10px;
+    bottom:-5px;
+    top: auto;
+    display: none;
+    background: #c12236;
 }
 .Streams_webrtc_toggle-view-mode {
     display: flex;
@@ -496,7 +507,7 @@
     border-color: rgba(255, 255, 255, 0);
     border-radius: 50%;
 }
-.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-dummy {
+.Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-avatar-dummy {
     margin-top: 100%;
 }
 .Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar {
@@ -1047,7 +1058,7 @@
     border-color: rgba(255, 255, 255, 0);
     border-radius: 50%;
 }
-.Streams_webrtc_desktop-screen  .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar-dummy {
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-avatar-dummy {
     margin-top: 100%;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-audio-screen .Streams_webrtc_chat-participant-avatar {
@@ -1104,7 +1115,7 @@
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
@@ -1194,6 +1205,24 @@
     height: 100%;
     object-fit: cover;
 }
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant .Streams_webrtc_chat-participant-video .Streams_webrtc_chat-participant-inavatar {
+    height:100%;
+    width:100%;
+    padding:3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant .Streams_webrtc_chat-participant-video img {
+    object-fit: cover;
+    object-position: center;
+    height:100%;
+    max-height: 400px;
+    max-width: 400px;
+    border-radius: 50%;
+    aspect-ratio: 1 / 1;
+}
+
 .Streams_webrtc_desktop-screen .Streams_webrtc_chat-participant-name {
     width: 100%;
     box-sizing: border-box;
@@ -1437,7 +1466,7 @@
     flex-direction: column;
     height: 100%;
     width: 100%;
-    display: flex;
+    overflow: hidden;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_main-screen-stream {
     flex: 1;
@@ -1513,7 +1542,7 @@
 .Streams_webrtc_desktop-screen .Streams_webrtc_maximized-screens-grid .Streams_webrtc_chat-participant-video {
     flex: 1;
     background: black;
-    display: block;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     z-index: 1;
@@ -2085,6 +2114,7 @@
 }
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-size-pos input[type=text]{
     width: 50px;
+    min-height: 0;
 }
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-position-audio-bg,
 .Streams_webrtc_popup-options-params-body .Streams_webrtc_popup-options-params-captionbg,
@@ -2441,7 +2471,11 @@
     background: #525252;
     width: 100%;
 }
-
+.Streams_webrtc_inactive {
+    pointer-events: none;
+    opacity: 0.2;
+    cursor: not-allowed;
+}
 .Streams_webrtc_popup-scenes-control .Streams_webrtc_popup-scenes-control-btn,
 .Streams_webrtc_popup-sources-control .Streams_webrtc_popup-sources-control-btn {
     margin-right: 10px;
