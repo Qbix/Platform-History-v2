@@ -833,10 +833,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			this.intersectionObserver.disconnect();
 		}
 	}
-}
-
-);
-
-Streams.tabs.useStreamURLs = true;
+});
 
 })(Q, jQuery);
