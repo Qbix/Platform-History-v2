@@ -101,6 +101,7 @@
                 var $relatedToolBox = $(".relatedToolBox", $toolElement);
                 var $nftToolBox = $(".nftToolBox", $toolElement);
                 $relatedToolBox.tool("Streams/related", relatedOptions).activate();
+                var count = 0;
                 $relatedToolBox[0].forEachTool("Assets/NFT/series/preview", function () {
                     var seriesPreviewTool = this;
                     var streamName = seriesPreviewTool.preview.state.streamName;
@@ -108,10 +109,15 @@
                         return;
                     }
 
+                    count++;
+
                     seriesPreviewTool.state.onInvoke.set(function (stream) {
                         tool.setSelected(seriesPreviewTool);
                     }, tool);
 
+                    /*if (!tool.selectedSeries && count === 1) {
+                        tool.setSelected(seriesPreviewTool);
+                    } else*/
                     if (tool.selectedSeries === streamName) {
                         $(this.element).addClass("Q_selected");
                     }
@@ -166,15 +172,23 @@
                     $nftBox[0].forEachTool("Streams/related", function () {
                         if (tool.selectedSeries === streamName) {
                             $(this.element).addClass("Q_selected");
+                            $relatedToolBox.attr("data-seriesSelected", true);
                         }
                     });
 
                     // onClose series
                     seriesPreviewTool.state.onClose.set(function () {
+                        var wasSelected = false;
                         var $nftBox = $("." + normalizedStreamName, $nftToolBox);
                         if ($nftBox.length) {
+                            if ($nftBox.hasClass("Q_selected")) {
+                                wasSelected = true;
+                            }
                             Q.Tool.remove($nftBox[0], true, true);
                             $nftBox.remove();
+                        }
+                        if (wasSelected) {
+                            tool.setFirstSelected();
                         }
                     }, tool);
 
@@ -192,9 +206,11 @@
             var state = this.state;
             var publisherId = seriesPreview.preview.state.publisherId;
             var streamName = seriesPreview.preview.state.streamName;
+            var $relatedToolBox = $(".relatedToolBox", this.element);
 
             $(seriesPreview.element).addClass("Q_selected").siblings(".Assets_NFT_series_preview_tool").removeClass("Q_selected");
             $(".nftToolBox ." + Q.normalize(streamName), tool.element).addClass("Q_selected").siblings().removeClass("Q_selected");
+            $relatedToolBox.attr("data-seriesSelected", true);
 
             tool.selectedSeries = streamName;
 
@@ -202,6 +218,27 @@
 
             Streams.get(publisherId, streamName, function () {
                 Q.handle(state.onSelected, seriesPreview, [this]);
+            });
+        },
+        /**
+         * Set first series preview tool selected
+         * @method setFirstSelected
+         */
+        setFirstSelected: function () {
+            var tool = this;
+            var $relatedToolBox = $(".relatedToolBox", this.element);
+            $relatedToolBox.attr("data-seriesSelected", false);
+            var $tools = $(".Assets_NFT_series_preview_tool:not(.Streams_preview_composer)", $relatedToolBox);
+            if (!$tools.length) {
+                return;
+            }
+
+            $tools.each(function (i) {
+                if (i) {
+                    return;
+                }
+
+                tool.setSelected(Q.Tool.from(this, "Assets/NFT/series/preview"));
             });
         }
     });
