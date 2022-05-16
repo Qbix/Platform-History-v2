@@ -316,6 +316,10 @@
 .Assets_NFT_series_composer .Assets_nft_series_name input[name=name] {
     width: calc(100% - 80px);
 }
+.Assets_NFT_series_composer input,
+.Assets_NFT_series_composer button,
+.Assets_NFT_series_composer select {height: 40px;}
+
 .Assets_NFT_series_preview_tool .Assets_NFT_series_name {
     line-height: 40px;
 }

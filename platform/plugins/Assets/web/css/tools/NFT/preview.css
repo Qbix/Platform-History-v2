@@ -696,6 +696,9 @@
     width: 100%;
     margin-top: 5px;
 }
+.Assets_NFT_preview_composer input,
+.Assets_NFT_preview_composer button,
+.Assets_NFT_preview_composer select {height: 40px;}
 
 @media (max-width:1200px) {
 

@@ -6,17 +6,26 @@
 .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool:first-of-type {
     margin-left: 0;
 }
+.Q_mobile .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool {
+    width: 100%;
+    margin: 0;
+}
+.Q_notMobile .Assets_NFT_series_tool .relatedToolBox[data-seriesSelected=true] .Streams_preview_tool {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+}
 .Assets_NFT_series_tool .relatedToolBox,
 .Assets_NFT_series_tool .nftToolBox {
     text-align: center;
 }
 .Assets_NFT_series_tool .nftToolBox .Streams_related_tool {
     display: none;
+    padding-top: 10px;
 }
 .Assets_NFT_series_tool .nftToolBox .Streams_related_tool.Q_selected {
     display: block;
 }
 .Assets_NFT_series_tool .Assets_NFT_series_select {
     display: inline-block;
-    
 }
