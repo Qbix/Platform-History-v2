@@ -115,10 +115,9 @@
                         tool.setSelected(seriesPreviewTool);
                     }, tool);
 
-                    /*if (!tool.selectedSeries && count === 1) {
+                    if (!tool.selectedSeries && count === 1) {
                         tool.setSelected(seriesPreviewTool);
-                    } else*/
-                    if (tool.selectedSeries === streamName) {
+                    } else if (tool.selectedSeries === streamName) {
                         $(this.element).addClass("Q_selected");
                     }
 
@@ -188,7 +187,7 @@
                             $nftBox.remove();
                         }
                         if (wasSelected) {
-                            tool.setFirstSelected();
+                            $relatedToolBox.attr("data-seriesSelected", false);
                         }
                     }, tool);
 
