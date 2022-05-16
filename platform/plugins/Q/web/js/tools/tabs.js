@@ -444,7 +444,7 @@
 				}
 				if (!href && state.field && name) {
 					href = window.location.href.split('?')[0]
-						+ '?' + window.location.search.queryField(state.field, name);
+						+ window.location.search.queryField(state.field, name);
 				}
 				return href;
 			},

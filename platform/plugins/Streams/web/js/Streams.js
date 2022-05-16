@@ -2327,6 +2327,43 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 	}
 };
 
+/**
+ * Returns the canonical url of the stream, if any
+ * @method url
+ * @static
+ * @param {String} publisherId
+ * @param {String} streamName
+ * @param {String} streamType
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
+ * @return {String|null|false}
+ */
+Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseUrl) {
+	if (streamType == null) {
+		streamType = streamName.split('/').slice(0, -1).join('/');
+	}
+	var urls = Streams.urls;
+	var url = urls && (urls[streamType] || urls['*']);
+	url = url || "{{baseUrl}}/s/{{publisherId}}/{{name}}";
+	if (!url) {
+		return '';
+	}
+	var urlString = '';
+	Q.Template.set(url, url);
+	Q.Template.render(url, {
+		publisherId: publisherId,
+		streamName: streamName.split('/'),
+		name: streamName,
+		baseUrl: baseUrl || Q.baseUrl()
+	}, function (err, html) {
+		if (err) return;
+		urlString = html;
+	});
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
+	var qs = messageOrdinal ? sep+messageOrdinal : "";
+	return Q.url(urlString + qs);
+};
+
 Stream.get = Streams.get;
 Stream.create = Streams.create;
 Stream.define = Streams.define;
@@ -2730,30 +2767,16 @@ Sp.removePermission = function (permission) {
 };
 /**
  * Returns the canonical url of the stream, if any
+ * @method url
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
 Sp.url = function (messageOrdinal, baseUrl) {
-	var urls = Q.plugins.Streams.urls;
-	var url = urls && (urls[this.fields.type] || urls['*']);
-	url = url || "{{baseUrl}}/s/{{publisherId}}/{{name}}";
-
-	var urlString = '';
-
-	Q.Template.set(url, url);
-	Q.Template.render(url, {
-		publisherId: this.fields.publisherId,
-		streamName: this.fields.name.split('/'),
-		name: this.fields.name,
-		baseUrl: baseUrl || Q.baseUrl()
-	}, function (err, html) {
-		if (err) return;
-		urlString = html;
-	});
-	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
-	var qs = messageOrdinal ? sep+messageOrdinal : "";
-	return Q.url(urlString + qs);
+	return Streams.Stream.url(
+		this.fields.publisherId, this.fields.name,
+		this.fields.type, messageOrdinal, baseUrl
+	);
 };
 /**
  * Save a stream to the server

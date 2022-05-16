@@ -18,7 +18,7 @@ var Streams = Q.Streams;
  *   @param {String} [options.streamName] Either this or "stream" is required. Name of the stream to which the others are related
  *   @param {String} [options.tag="div"] The type of element to contain the preview tool for each related stream.
  *   @param {Q.Streams.Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
- *   @param {String} options.relationType=null The type of the relation.
+ *   @param {String} [options.relationType=null] The type of the relation. If empty, will try to show all relations.
  *   @param {Boolean} [options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
@@ -32,6 +32,9 @@ var Streams = Q.Streams;
  *   @param {Boolean} [options.realtime=false] Whether to refresh every time a relation is added, removed or updated by anyone
  *   @param {Object|Boolean} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
+ *   @param {Object} [options.tabsOptions] Options for the tabs function
+ *   @param {Boolean} [options.tabsOptions.useStreamURLs] Whether to use the stream URLs instead of Streams.key() and tab names
+ *   @param {String} [options.tabsOptions.streamType] You can manually enter the type of all related streams, to be used with Streams.Stream.url()
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
  *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
@@ -50,7 +53,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
 	}
 	if (!state.relationType) {
-		throw new Q.Error("Streams/related tool: missing relationType");
+		// throw new Q.Error("Streams/related tool: missing relationType");
 	}
 	if (state.sortable === true) {
 		state.sortable = Q.Tool.define.options('Streams/related').sortable;
@@ -182,7 +185,32 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	},
 	previewOptions: {},
 	tabs: function (previewTool, tabsTool) {
+		var ps = previewTool.state;
+		if (this.state.tabsOptions.useStreamURLs) {
+			var streamType = this.state.previewOptions.streamType;
+			if (!streamType) {
+				var cached = Streams.get.cache.get([
+					ps.publisherId,
+					ps.streamName
+				]);
+				if (cached && cached.subject) {
+					streamType = cached.subject.fields.type;
+				}
+			}
+			var url = Streams.Stream.url(
+				previewTool.state.publisherId,
+				previewTool.state.streamName,
+				streamType
+			);
+			if (url) {
+				return url;
+			}
+		}
 		return Streams.key(previewTool.state.publisherId, previewTool.state.streamName);
+	},
+	tabsOptions: {
+		useStreamURLs: true,
+		streamType: null
 	},
 	toolName: function (streamType) {
 		return streamType+'/preview';
@@ -674,7 +702,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		}, previewOptions);
 		var f = state.toolName;
 		if (typeof f === 'string') {
-			f = Q.getObject(state.toolName) || f;
+			f = Q.getObject(f) || f;
 		}
 		var toolName = (typeof f === 'function') ? f(streamType, o) : f;
 		var toolNames = ['Streams/preview', toolName];
@@ -808,5 +836,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 }
 
 );
+
+Streams.tabs.useStreamURLs = true;
 
 })(Q, jQuery);
