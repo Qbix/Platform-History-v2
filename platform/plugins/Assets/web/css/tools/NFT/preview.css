@@ -527,7 +527,9 @@
     display: block;
     justify-content: center;
 }
-
+html .Assets_NFT_preview_tool .Users_avatar_tool img {
+    margin-right: 10px;
+}
 .Assets_NFT_preview_tool span.m-t {
     /*margin-left: 19px;*/
     /*margin-right: 8px;*/

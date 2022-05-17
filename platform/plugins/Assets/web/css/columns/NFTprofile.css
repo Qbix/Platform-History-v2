@@ -41,7 +41,6 @@
     font-size: 20px;
     font-weight: 600;
     color: #929292;
-    margin-bottom: 50px;
 }
 .Assets_NFTprofile_column .punchline:not(.expanded) .Assets_NFTprofile_greeting {
     overflow: hidden;
@@ -57,6 +56,7 @@
     margin: 0 2%;
     flex-wrap: wrap;
     align-items: center;
+    min-height: 40px;
 }
 .Assets_NFTprofile_column ul.header-list-social .Communities_social_icon {
     display: inline-block;
@@ -121,6 +121,11 @@
     text-decoration: underline;
     font-weight: lighter;
 }
+.Assets_NFTprofile_column .profile-block {
+    max-width: 90%;
+    width: 100%;
+    margin: 50px auto 50px;
+}
 
 @media (max-width: 768px) {
     .Assets_NFTprofile_column .profile-name {
@@ -137,5 +142,10 @@
         position: relative;
         max-height: 200px !important;
         text-align: center;
+    }
+    .Assets_NFTprofile_column .banner-block {
+        min-height: unset;
+        max-height: unset;
+        height: 200px;
     }
 }
