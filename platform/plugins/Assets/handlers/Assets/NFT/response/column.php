@@ -1,14 +1,10 @@
 <?php
 function Assets_NFT_response_column (&$params, &$result) {
-	$loggedInUser = Users::loggedInUser();
-	$r = array_merge($_REQUEST, $params);
+	$request = array_merge($_REQUEST, $params);
 	$uri = Q_Dispatcher::uri();
-	$loggedInUserId = Q::ifset($r, 'userId',
-		Q::ifset($uri, 'userId', Q::ifset($loggedInUser, 'id', null))
-	);
 
-	$publisherId = Q::ifset($r, 'publisherId', Q::ifset($uri, 'publisherId', null));
-	$streamId = Q::ifset($r, 'streamId', Q::ifset($uri, 'streamId', null));
+	$publisherId = Q::ifset($request, 'publisherId', Q::ifset($uri, 'publisherId', null));
+	$streamId = Q::ifset($request, 'streamId', Q::ifset($uri, 'streamId', null));
 
 	if (empty($publisherId)) {
 		throw new Exception("NFT::view publisherId required!");
@@ -20,7 +16,7 @@ function Assets_NFT_response_column (&$params, &$result) {
 	$streamName = "Assets/NFT/".$streamId;
 	$communityId = Users::communityId();
 	$texts = Q_Text::get(array("Assets/content", $communityId."/content"));
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Q::ifset($request, "stream", Streams::fetchOne(null, $publisherId, $streamName, true));
 	$authorName = Users_User::fetch($publisherId, true)->displayName();
 	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
 	$title = $stream->title;
@@ -39,6 +35,7 @@ function Assets_NFT_response_column (&$params, &$result) {
 
 	// get likes
 	/*$res = false;
+	$loggedInUser = Users::loggedInUser();
 	if ($loggedInUserId) {
 		$res = (boolean)TokenSociety::getLikes($publisherId, $stream->name, $loggedInUserId);
 	}
@@ -90,7 +87,7 @@ function Assets_NFT_response_column (&$params, &$result) {
 	Assets::$columns['NFT'] = array(
 		'title' => $title,
 		'column' => $column,
-		'columnClass' => 'Assets_column_'.$columnsStyle,
+		'columnClass' => 'Assets_column_NFT Assets_column_'.$columnsStyle,
 		'controls' => $controls,
 		'close' => false,
 		'url' => $url
