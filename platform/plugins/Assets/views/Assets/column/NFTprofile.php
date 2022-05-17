@@ -63,7 +63,8 @@
 			<?php echo Q::tool("Users/avatar", array(
 				'userId' => $user->id,
 				'editable' => $self,
-				"icon" => false
+				"icon" => false,
+				'show' => 'u f l'
 			), "profile-name")?>
 		</div>
 
