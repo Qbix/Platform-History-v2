@@ -14,7 +14,6 @@
      * @constructor
      * @param {Object} [options] Override various options for this tool
      *  @param {Q.Event} [options.onInvoke] - Event occur when user click on tool element.
-     *  @param {Q.Event} [options.onAvatar] - Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onCreated] - Event occur when series created.
      *  @param {Q.Event} [options.onIconChanged] - Event occur when icon changed.
      *  @param {Q.Event} [options.onClose] Event occur when series stream closed
@@ -67,7 +66,6 @@
             save: "NFT/series/icon"
         },
         onInvoke: new Q.Event(),
-        onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
         onIconChanged: new Q.Event(),
         onClose: new Q.Event()
@@ -95,16 +93,7 @@
             }, (err, html) => {
                 tool.element.innerHTML = html;
 
-                $(".Assets_NFT_series_avatar", tool.element).tool("Users/avatar", {
-                    userId: tool.stream.fields.publisherId,
-                    icon: 40,
-                    contents: false,
-                    editable: false
-                }).activate(function () {
-                    $(this.element).on(Q.Pointer.fastclick, function (e) {
-                        Q.handle(state.onAvatar, this, [e]);
-                    });
-                });
+                $(".Assets_NFT_series_icon", $toolElement).css("background-image", "url(" + stream.iconUrl("x") + ")");
 
                 if (isEditable) {
                     setTimeout(function () {
@@ -314,7 +303,7 @@
         `, {text: ['Assets/content']});
 
     Q.Template.set('Assets/NFT/series/view',
-`<div class="Assets_NFT_series_avatar"></div>
+`<div class="Assets_NFT_series_icon"></div>
         <div class="Assets_NFT_series_info">
             <div class="Assets_NFT_series_name">{{name}}</div>
         </div>`,

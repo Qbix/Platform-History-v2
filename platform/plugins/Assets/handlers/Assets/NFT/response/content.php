@@ -25,6 +25,7 @@ function Assets_NFT_response_content ($params) {
 		$lastPart = end($lastPart);
 		$params["selectedSeriesId"] = $lastPart;
 	}
+	$params["userId"] = $publisherId;
 	Q::event('Assets/NFTprofile/response/column', $params);
 
 	Q::event('Assets/NFT/response/column', $params);

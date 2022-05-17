@@ -63,3 +63,6 @@
     white-space: nowrap;
     padding-right: 5px;
 }
+.NFT_fullsize_icon_dialog .Q_dialog_content {
+    overflow-x: auto;
+}
