@@ -12,6 +12,7 @@
     border-radius: 80px;
     border: solid 1px #3a665c;
     overflow: hidden;
+    margin: 0 auto;
 }
 .Assets_NFTprofile_column .banner-block video {
     position: absolute;
