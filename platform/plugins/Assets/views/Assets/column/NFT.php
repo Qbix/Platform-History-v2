@@ -4,13 +4,10 @@
             "Streams/preview" => array(
                 "publisherId" => $stream->publisherId,
                 "streamName" => $stream->name,
-                "editable" => false,
+                "editable" => true,
                 "closeable" => false
             ),
             "Assets/NFT/preview" => array(
-                 "poster" => $image,
-                 "movie"=> $movie,
-                 "src" => $src,
                  "imagepicker" => array("showSize" => "x.png")
             )
         )

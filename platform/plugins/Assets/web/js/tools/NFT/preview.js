@@ -77,7 +77,7 @@
         src: null
     },
 
-    {
+{
         /**
          * Refreshes the appearance of the tool completely
          * @method refresh
@@ -87,6 +87,7 @@
             var state = tool.state;
             var $toolElement = $(this.element);
             tool.stream = stream;
+            var previewState = tool.preview.state;
 
             tool.minted = stream.getAttribute("tokenId");
             $toolElement.attr("data-minted", tool.minted);

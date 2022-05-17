@@ -131,7 +131,7 @@
                         publisherId: seriesPreviewTool.preview.state.publisherId,
                         streamName: seriesPreviewTool.preview.state.streamName,
                         relationType: NFT.relationType,
-                        editable: true,
+                        editable: false,
                         closeable: true,
                         sortable: true,
                         relatedOptions: {
