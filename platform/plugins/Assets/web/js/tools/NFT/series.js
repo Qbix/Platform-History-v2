@@ -130,7 +130,7 @@
                     var relatedOptions = {
                         publisherId: seriesPreviewTool.preview.state.publisherId,
                         streamName: seriesPreviewTool.preview.state.streamName,
-                        relationType: "Assets/NFT",
+                        relationType: NFT.relationType,
                         editable: true,
                         closeable: true,
                         sortable: true,
@@ -145,7 +145,7 @@
                                 Q.Streams.relate(
                                     seriesPreviewTool.preview.state.publisherId,
                                     seriesPreviewTool.preview.state.streamName,
-                                    "Assets/NFT",
+                                    NFT.relationType,
                                     streamData.publisherId,
                                     streamData.streamName,
                                     function () {

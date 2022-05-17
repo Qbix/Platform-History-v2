@@ -10,6 +10,7 @@
 class Assets_NFT
 {
 	static $categoryStreamName = "Assets/user/NFTs";
+	static $relationType = "Assets/NFT";
 
 	/**
 	 * Check if NFT category exists, and create if not
@@ -132,7 +133,7 @@ class Assets_NFT
 
 		// change stream relation
 		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
-		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, "Assets/NFT", $stream->publisherId, $stream->name, array("weight" => time()));
+		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
 		//if ($onMarketPlace == "true") {
