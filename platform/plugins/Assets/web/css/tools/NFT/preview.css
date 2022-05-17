@@ -11,7 +11,7 @@
     display: block;
     margin: 100px auto;
 }
-.Assets_NFT_preview_tool .tile-block {
+.Assets_NFT_preview_tool .title-block {
     position: relative;
     outline: solid 1px #535353;
     border-radius: 30px;
@@ -29,7 +29,7 @@
 .Assets_NFT_preview_tool .Assets_NFT_overflowGlyph .Q_overflow_glyph_svg {
     width: 30px;
 }
-.Assets_NFT_preview_tool.Streams_preview_composer .tile-block {
+.Assets_NFT_preview_tool.Streams_preview_composer .title-block {
     height: 480px;
 }
 
@@ -79,13 +79,10 @@
     margin-top: -12px;
 }
 
-.Assets_NFT_preview_tool h2.tile-name {
+.Assets_NFT_preview_tool h2.title-name {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px !important;
-    color: #8d8d8d;
-    font-weight: 900 !important;
     border-top: solid 1px #414141;
     border-bottom: solid 1px #414141;
     padding: 10px 0 !important;
@@ -448,7 +445,7 @@
 /* new css */
 
 /* item list */
-.Assets_NFT_preview_tool .tile_block_header {
+.Assets_NFT_preview_tool .title_block_header {
     display: flex;
     justify-content: center;
     align-items: start;
@@ -741,7 +738,7 @@
     width: 100%;
     margin-right: 0.8%;
 }
-.Q_notMobile .Assets_NFT_preview_tool .tile-block {
+.Q_notMobile .Assets_NFT_preview_tool .title-block {
 }
 .Q_notMobile .Assets_NFT_preview_tool .video-container img {
     width: 100%;
@@ -749,7 +746,7 @@
 .Q_notMobile .Assets_NFT_preview_tool .video-container {
 }
 
-.Assets_NFT_preview_tool .tile-block.Assets_view_square {
+.Assets_NFT_preview_tool .title-block.Assets_view_square {
     background: none;
     height: auto;
     min-height: unset;
@@ -763,7 +760,7 @@
     padding: 20px;
 }
 
-.Assets_NFT_preview_tool .Assets_view_square .tile-name {
+.Assets_NFT_preview_tool .Assets_view_square .title-name {
     border: none;
     font-size: 24px !important;
 }
@@ -789,7 +786,7 @@
         width: 100%;
         margin-right: 0.8%;
     }
-    .Assets_NFT_preview_tool .tile-block {
+    .Assets_NFT_preview_tool .title-block {
         height: 450px;
     }
     .Assets_NFT_preview_tool .video-container img {

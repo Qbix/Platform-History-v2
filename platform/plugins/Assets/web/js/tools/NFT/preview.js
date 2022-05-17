@@ -130,14 +130,22 @@
                 } else if (nftSrc) {
                     $videoContainer.empty().html('<img alt="icon" class="NFT_preview_icon" src="' + Q.url(nftSrc) + '">');
                 } else if (movie && stream.fields.icon.includes("/img/empty_white.png")) {
-                    $qVideo = $("<div>");
+                    $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    });
                     $previewIcon.replaceWith($qVideo);
                     videoOptions = Q.extend({}, state.video, {
                         url: movie
                     });
                     $qVideo.tool("Q/video", videoOptions).activate();
                 } else if (videoId && stream.fields.icon.includes("/img/empty_white.png")) {
-                    $qVideo = $("<div>");
+                    $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        return false;
+                    });
                     $previewIcon.replaceWith($qVideo);
                     videoOptions = Q.extend({}, state.video, {
                         url: Q.getObject(["video", videoProvider, "url"], Q).interpolate({videoId: videoId})
@@ -703,7 +711,7 @@
     });
 
     Q.Template.set('Assets/NFT/composer',
-        `<div class="tile-block Assets_create_tiles">
+        `<div class="title-block Assets_create_titles">
        <div class="video-container Assets_create_video">
            <h4>{{NFT.CreateNFT}}</h4>
        </div>
@@ -790,12 +798,12 @@
     );
 
     Q.Template.set('Assets/NFT/view',
-        `<div class="tile-block">
-        <div class="tile_block_header">
+        `<div class="title-block">
+        <div class="title_block_header">
             <div class="Assets_NFT_avatar"></div>
         </div>
         <div class="video-container"><img class="NFT_preview_icon"></div>
-        <h2 class="tile-name">{{title}}</h2>
+        <h2 class="title-name">{{title}}</h2>
         <ul class="bid-info">
             <li class="Assets_NFT_price">
                 <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
