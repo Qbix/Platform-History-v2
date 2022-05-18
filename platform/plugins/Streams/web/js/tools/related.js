@@ -837,6 +837,4 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 );
 
-Streams.tabs.useStreamURLs = true;
-
 })(Q, jQuery);

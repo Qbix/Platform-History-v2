@@ -1097,6 +1097,7 @@ Q.Cache = function  _Q_Cache(options) {
 	options = options || {};
 	this.name = options.name;
 	this.data = {};
+	this.special = {};
 	this.max = options.max || 100;
 	this.earliest = this.latest = null;
 	this.count = 0;
@@ -1198,6 +1199,17 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 	if (this.count > this.max) {
 		this.remove(this.earliest);
 	}
+	// add to index for Cache.prototype.each
+	var parameters = JSON.parse(key);
+	var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
+	this.special[localStorageIndexInfoKey] = true;
+	for (var i=1, l=parameters.length; i<l; ++i) {
+		// key in the index
+		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+		var obj = this.special[k] || {};
+		obj[key] = 1;
+		this.special[k] = obj;
+	}
 	return existing ? true : false;
 };
 /**
@@ -1251,6 +1263,15 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 		this.earliest = existing.next;
 	}
 	delete this.data[key];
+	// remove from index for Cache.prototype.each
+	var parameters = JSON.parse(key);
+	for (var i=1, l=parameters.length; i<l; ++i) {
+		// key in the index
+		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+		var obj = this.special[k] || {};
+		delete obj[key];
+		this.special[k] = obj;
+	}
 	return true;
 };
 /**
@@ -1262,12 +1283,15 @@ Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
 	this.data = {};
 };
 /**
- * Cycles through all the entries in the cache
+ * Searches for entries matching a certain prefix of arguments array
+ * and calls the callback repeatedly with each matching result.
  * @method each
  * @param {Array} args An array consisting of some or all the arguments that form the key
  * @param {Function} callback Is passed two parameters: key, value, with this = the cache
+ * @param {Object} [options]
+ * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
  */
-Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback) {
+Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, options) {
 	var cache = this;
 	var prefix = null;
 	if (typeof args === 'function') {
@@ -1279,6 +1303,26 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback) {
 	}
 	if (!callback) {
 		return;
+	}
+	options = options || {};
+	var localStorageIndexInfoKey = Q_Cache_index_name(args.length);
+	if (this.special[localStorageIndexInfoKey]) {
+		var rawKey = Q.Cache.key(args);
+		var key = 'index:' + rawKey; // key in the index
+		var localStorageKeys = this.special[key] || {};
+		for (var k in localStorageKeys) {
+			callback.call(this, k, localStorageKeys[k]);
+		}
+		// also the key itself
+		var item = this.special[rawKey];
+		if (item !== undefined) {
+			callback.call(this, rawKey, item);
+		}
+		return;
+	}
+	// key doesn't exist
+	if (!options.evenIfNoIndex) {
+		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	return Q.each(this.data, function (k, v) {
 		if (prefix && !k.startsWith(prefix)) {

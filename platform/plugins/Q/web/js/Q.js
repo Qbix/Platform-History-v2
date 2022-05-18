@@ -5492,7 +5492,7 @@ Q.Request.getUrlStatus = function(url, callback) {
  * @param {boolean} [options.localStorage] use local storage instead of page storage
  * @param {boolean} [options.sessionStorage] use session storage instead of page storage
  * @param {String} [options.name] the name of the cache, not really used for now
- * @param {Integer} [options.max=100] the maximum number of items the cache should hold. Defaults to 100.
+ * @param {Integer} [options.max=100] the maximum number of items the cache should hold. Defaults to 100
  * @param {Q.Cache} [options.after] pass an existing cache with max > this cache's max, to look in first
  */
 Q.Cache = function _Q_Cache(options) {
@@ -5615,6 +5615,9 @@ Q.Cache = function _Q_Cache(options) {
 		};
 	}
 };
+function Q_Cache_index_name(parameterCount) {
+	return 'index' + parameterCount + 'parameters';
+}
 function Q_Cache_get(cache, key, special) {
 	if (cache.documentStorage) {
 		return (special === true) ? cache.special[key] : cache.data[key];
@@ -5764,6 +5767,18 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		this.remove(this.earliest());
 	}
 
+	// add to index for Cp.each
+	var parameters = JSON.parse(key);
+	var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
+	Q_Cache_set(this, localStorageIndexInfoKey, true, true);
+	for (var i=1, l=parameters.length; i<l; ++i) {
+		// key in the index
+		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+		var obj = Q_Cache_get(this, k, true) || {};
+		obj[key] = 1;
+		Q_Cache_set(this, k, obj, true);
+	}
+
 	return existing ? true : false;
 };
 /**
@@ -5829,6 +5844,16 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 	Q_Cache_pluck(this, existing);
 	Q_Cache_remove(this, key);
 
+	// remove from index for Cp.each
+	var parameters = JSON.parse(key);
+	for (var i=1, l=parameters.length; i<l; ++i) {
+		// key in the index
+		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+		var obj = Q_Cache_get(this, k, true) || {};
+		delete obj[key];
+		Q_Cache_set(this, k, obj, true);
+	}
+
 	return true;
 };
 /**
@@ -5856,12 +5881,38 @@ Cp.clear = function _Q_Cache_prototype_clear() {
 	this.count(0);
 };
 /**
- * Cycles through all the entries in the cache
+ * Searches for entries matching a certain prefix of arguments array
+ * and calls the callback repeatedly with each matching result.
  * @method each
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  * @param {Function} callback  Is passed two parameters: key, value, with this = the cache
+ * @param {Object} [options]
+ * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
  */
-Cp.each = function _Q_Cache_prototype_each(args, callback) {
+Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
+	if (!callback) {
+		return;
+	}
+	options = options || {};
+	var localStorageIndexInfoKey = Q_Cache_index_name(args.length);
+	if (Q_Cache_get(this, localStorageIndexInfoKey, true)) {
+		var rawKey = Q.Cache.key(args);
+		var key = 'index:' + rawKey; // key in the index
+		var localStorageKeys = Q_Cache_get(this, key, true) || {};
+		for (var k in localStorageKeys) {
+			callback.call(this, k, localStorageKeys[k]);
+		}
+		// also the key itself
+		var item = Q_Cache_get(this, rawKey);
+		if (item !== undefined) {
+			callback.call(this, rawKey, item);
+		}
+		return;
+	}
+	// key doesn't exist
+	if (!options.evenIfNoIndex) {
+		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
+	}
 	var prefix = null;
 	if (typeof args === 'function') {
 		callback = args;
@@ -5869,9 +5920,6 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 	} else {
 		var json = Q.Cache.key(args);
 		prefix = json.substring(0, json.length-1);
-	}
-	if (!callback) {
-		return;
 	}
 	var cache = this;
 	if (this.documentStorage) {
@@ -5911,10 +5959,11 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
  * @method removeEach
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  */
-Cp.removeEach = function _Q_Cache_prototype_each(args) {
+Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
+	options = options || { evenIfNoIndex: true };
 	this.each(args, function (key) {
 		this.remove(key);
-	});
+	}, options);
 	return this;
 };
 Q.Cache.document = function _Q_Cache_document(name, max) {
