@@ -176,6 +176,7 @@
             var state = tool.state;
             var $toolElement = $(this.element);
             var previewState = tool.preview.state;
+            previewState.editable = true; // we need to upload icon
 
             var _openDialog = function () {
                 Q.Dialogs.push({
