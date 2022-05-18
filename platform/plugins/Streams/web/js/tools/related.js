@@ -418,7 +418,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 			var tff = this.from.fields;
 
-			// if element exists - do nothing
+			// skip if stream exists in exiting
+			if (Q.getObject(tff.publisherId+"\t"+tff.name, exiting)) {
+				return;
+			}
+
+			// skip if element exists
 			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
 				return;
 			}
@@ -514,7 +519,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			tool.previewElements = {};
 		}
 
-		Streams.retainWith(tool).related(
+		Streams.retainWith(tool).related.force(
 			publisherId, 
 			streamName, 
 			state.relationType, 
