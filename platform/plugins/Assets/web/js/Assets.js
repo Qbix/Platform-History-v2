@@ -731,7 +731,7 @@
 								// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
 								parameters: {
 									"gateway": Assets.Payments.googlePay.gateway,
-									"stripe:version": Stripe.version.toString(),
+									"stripe:version": Assets.Payments.stripe.version,
 									"stripe:publishableKey": Assets.Payments.stripe.publishableKey
 								}
 							}
@@ -802,7 +802,7 @@
 				});
 				paymentRequest.show().then(function (result) {
 					var promise;
-					if (result.methodName === 'https://google.com/pay') {
+					if (result.methodName === 'https://google.com/pay' && !Q.getObject("details.errorCode", result)) {
 						promise = new Q.Promise(function (resolve, reject) {
 							options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
 							return Assets.Payments.pay('stripe', options, function (err) {
@@ -817,6 +817,9 @@
 				}).then(function (result) {
 					result.complete('success');
 					callback(null, result);
+				}, function (reject) {
+					console.warn(reject.result);
+					reject.result.complete("fail");
 				}).catch(function (err) {
 					if (Q.getObject("result.complete", err)) {
 						return err.result.complete('fail');
