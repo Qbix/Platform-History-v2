@@ -113,7 +113,7 @@
 
                     seriesPreviewTool.state.onInvoke.set(function (stream) {
                         tool.setSelected(seriesPreviewTool);
-                    }, tool);
+                    }, seriesPreviewTool);
 
                     if (!tool.selectedSeries && count === 1) {
                         tool.setSelected(seriesPreviewTool);
@@ -187,7 +187,7 @@
                         }
                     }, tool);
 
-                    $nftBox.tool("Streams/related", relatedOptions).activate();
+                    $nftBox.tool("Streams/related", relatedOptions, null, Q.normalize(streamName)).activate();
                 });
             });
         },
