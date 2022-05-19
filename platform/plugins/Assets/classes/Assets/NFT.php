@@ -46,14 +46,21 @@ class Assets_NFT
 	 * Get or create new NFT empty stream for composer
 	 * This is for user creating new NFT streams in the interface
 	 * @method getComposerStream
-	 * @param {string} [$userId=null] If null loggedin user id used
+	 * @param {string} [$publisherId=null] - If null loggedin user id used
+	 * @param {array} [$category=null] - array("publisherId" => ..., "streamName" => ...), if defined, use this stream as category for NFT composer
 	 * @return {Streams_Stream}
 	 */
-	static function getComposerStream ($userId = null) {
-		$userId = $userId ?: Users::loggedInUser(true)->id;
-		$category = self::category($userId);
+	static function getComposerStream ($publisherId = null, $category = null) {
+		$publisherId = $publisherId ?: Users::loggedInUser(true)->id;
+		if ($category) {
+			if (!($category instanceof Streams_Stream)) {
+				$category = Streams::fetchOne(null, $category["publisherId"], $category["streamName"], true);
+			}
+		} else {
+			$category = self::category($publisherId);
+		}
 
-		$streams = Streams::related($userId, $userId, $category->name, true, array(
+		$streams = Streams::related(null, $category->publisherId, $category->name, true, array(
 			"type" => "new",
 			"streamsOnly" => true,
 			"ignoreCache" => true
@@ -63,8 +70,8 @@ class Assets_NFT
 			return reset($streams);
 		}
 
-		$stream = Streams::create($userId, $userId, "Assets/NFT", array(), array(
-			"publisherId" => $userId,
+		$stream = Streams::create(null, $publisherId, "Assets/NFT", array(), array(
+			"publisherId" => $category->publisherId,
 			"streamName" => $category->name,
 			"type" => "new"
 		));
@@ -75,13 +82,18 @@ class Assets_NFT
 	/**
 	 * Updated NFT stream with new data
 	 * @method updateNFT
-	 * @param {Streams_Stream} $stream NFT stream
-	 * @param {array} $fields Array of data to update stream
+	 * @param {Streams_Stream} $stream - NFT stream
+	 * @param {array} $fields - Array of data to update stream
+	 * @param {array|Streams_Stream} [$category] - array with publisherId, streamName or stream, if defined used this stream as category
 	 * @return {Streams_Stream}
 	 */
-	static function updateNFT ($stream, $fields) {
+	static function updateNFT ($stream, $fields, $category=null) {
 		$communityId = Users::communityId();
 		$userId = Users::loggedInUser(true)->id;
+
+		if ($category && $category instanceof Streams_Stream) {
+			$category = array("publisherId" => $category->publisherId, "streamName" => $category->name);
+		}
 
 		$fieldsUpdated = false;
 		foreach (array("title", "content") as $field) {
@@ -112,13 +124,13 @@ class Assets_NFT
 
 		$interestsRelationType = "NFT/interest";
 		// remove relations
-		$relateds = Streams_RelatedTo::select()->where(array(
+		$interestRelations = Streams_RelatedTo::select()->where(array(
 			"type" => $interestsRelationType,
 			"fromPublisherId" => $stream->publisherId,
 			"fromStreamName" => $stream->name
 		))->fetchDbRows();
-		foreach ($relateds as $related) {
-			Streams::unrelate($userId, $related->toPublisherId, $related->toStreamName, $interestsRelationType, $stream->publisherId, $stream->name);
+		foreach ($interestRelations as $relation) {
+			Streams::unrelate($userId, $relation->toPublisherId, $relation->toStreamName, $interestsRelationType, $stream->publisherId, $stream->name);
 		}
 
 		if (!empty(Q::ifset($fields, "interests", null))) {
@@ -131,7 +143,13 @@ class Assets_NFT
 			Streams::relate($userId, $communityId, $fields["interests"], $interestsRelationType, $stream->publisherId, $stream->name);
 		}
 
-		// change stream relation
+		// special category relation
+		if ($category) {
+			Streams::unrelate($userId, $category["publisherId"], $category["streamName"], "new", $stream->publisherId, $stream->name);
+			Streams::relate($userId, $category["publisherId"], $category["streamName"], self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
+		}
+
+		// main Assets/userNFTs category
 		Streams::unrelate($userId, $stream->publisherId, self::$categoryStreamName, "new", $stream->publisherId, $stream->name);
 		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
 

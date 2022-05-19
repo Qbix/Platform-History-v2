@@ -1,7 +1,9 @@
 <?php
 function Assets_NFT_response_newItem ($params) {
-	$req = array_merge($_REQUEST, $params);
-	$userId = Q::ifset($req, "userId", null);
-	$stream = Assets_NFT::getComposerStream($userId);
+	$request = array_merge($_REQUEST, $params);
+	Q_Valid::requireFields(array("publisherId"), $request);
+	$publisherId = Q::ifset($request, "publisherId", null);
+	$category = Q::ifset($request, "category", null);
+	$stream = Assets_NFT::getComposerStream($publisherId, $category);
 	return array("publisherId" => $stream->publisherId, "streamName" => $stream->name);
 }

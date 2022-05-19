@@ -381,11 +381,16 @@
 
                                     var streamData = response.slots.NFTStream;
 
+                                    // need to refresh stream cache
+                                    Streams.get.force(streamData.publisherId, streamData.streamName);
+
                                     Q.handle(state.onCreated, tool, [streamData]);
                                 }, {
                                     method: "post",
                                     fields: {
-                                        userId: previewState.publisherId,
+                                        publisherId: previewState.publisherId,
+                                        streamName: previewState.streamName,
+                                        category: previewState.related,
                                         title: $("input[name=title]", dialog).val(),
                                         content: $("input[name=description]", dialog).val(),
                                         attributes: attributes
@@ -507,7 +512,8 @@
                     $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, _openDialog);
                 }, {
                     fields: {
-                        userId: previewState.publisherId
+                        publisherId: previewState.publisherId,
+                        category: previewState.related
                     }
                 });
             });

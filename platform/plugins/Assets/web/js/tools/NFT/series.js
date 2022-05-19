@@ -141,21 +141,17 @@
                             userId: state.userId,
                             onCreated: function (streamData) {
                                 var NFTPreview = this;
+                                var NFTsRelatedTool = Q.Tool.from($(NFTPreview.element).closest(".Streams_related_tool")[0], "Streams/related");
+                                NFTsRelatedTool && NFTsRelatedTool.refresh();
 
-                                Q.Streams.relate(
-                                    seriesPreviewTool.preview.state.publisherId,
-                                    seriesPreviewTool.preview.state.streamName,
-                                    NFT.relationType,
-                                    streamData.publisherId,
-                                    streamData.streamName,
-                                    function () {
-                                        var NFTsRelatedTool = Q.Tool.from($(NFTPreview.element).closest(".Streams_related_tool")[0], "Streams/related");
-                                        NFTsRelatedTool.refresh();
-                                        $(".Assets_NFT_preview_tool.Streams_related_composer", $toolElement).each(function () {
-                                            Q.Tool.from(this, "Assets/NFT/preview").composer();
-                                        });
+                                $(".Assets_NFT_preview_tool.Streams_related_composer", $toolElement).each(function () {
+                                    var NFTpreviewTool = Q.Tool.from(this, "Assets/NFT/preview");
+                                    if (NFTpreviewTool) {
+                                        NFTpreviewTool.composer();
+                                    } else {
+                                        debugger
                                     }
-                                );
+                                });
                             }
                         }
                     };
