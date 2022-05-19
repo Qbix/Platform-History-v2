@@ -130,7 +130,7 @@
                     });
                 } else if (nftSrc) {
                     $videoContainer.empty().html('<img alt="icon" class="NFT_preview_icon" src="' + Q.url(nftSrc) + '">');
-                } else if (movie && stream.fields.icon.includes("/img/empty_white.png")) {
+                } else if (movie) {
                     $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
                         e.preventDefault();
                         e.stopPropagation();
@@ -138,10 +138,11 @@
                     });
                     $previewIcon.replaceWith($qVideo);
                     videoOptions = Q.extend({}, state.video, {
-                        url: movie
+                        url: movie,
+                        image: stream.fields.icon.includes("/img/empty_white.png") ? "" : stream.iconUrl("x")
                     });
                     $qVideo.tool("Q/video", videoOptions).activate();
-                } else if (videoId && stream.fields.icon.includes("/img/empty_white.png")) {
+                } else if (videoId) {
                     $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
                         e.preventDefault();
                         e.stopPropagation();

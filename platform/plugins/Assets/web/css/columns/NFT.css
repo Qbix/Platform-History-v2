@@ -13,7 +13,7 @@
     width: 100%;
 }
 .Assets_column_NFT .Assets_NFT_preview_tool .video-container {
-    height: unset;
+    min-height: 300px;
     line-height: unset;
 }
 .Assets_column_NFT .Assets_NFT_preview_tool .title-name {

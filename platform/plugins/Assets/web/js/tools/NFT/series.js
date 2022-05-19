@@ -145,12 +145,8 @@
                                 NFTsRelatedTool && NFTsRelatedTool.refresh();
 
                                 $(".Assets_NFT_preview_tool.Streams_related_composer", $toolElement).each(function () {
-                                    var NFTpreviewTool = Q.Tool.from(this, "Assets/NFT/preview");
-                                    if (NFTpreviewTool) {
-                                        NFTpreviewTool.composer();
-                                    } else {
-                                        debugger
-                                    }
+                                    var NFTpreview = Q.Tool.from(this, "Assets/NFT/preview");
+                                    NFTpreview && NFTpreview.composer();
                                 });
                             }
                         }
