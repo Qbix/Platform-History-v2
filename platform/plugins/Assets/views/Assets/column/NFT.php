@@ -8,68 +8,50 @@
                 "closeable" => false
             ),
             "Assets/NFT/preview" => array(
-                 "imagepicker" => array("showSize" => "x.png")
+                "imagepicker" => array("showSize" => "x.png"),
+                "show" => array(
+                    "avatar" => false,
+                    "participants" => true,
+                    "title" => false
+                )
             )
         )
     );
 ?>
 
-<div class="Assets_nft_details_header">
-    <div class="Assets_nft_details_header_left">
-        <h2><?php echo Q::tool("Streams/inplace", array(
-                "stream" => $stream,
-                "editable" => $stream->testWriteLevel("edit"),
-                "inplaceType" => "text",
-                "field" => "title",
-                "inplace" => array(
-                    "placeholder" => $texts["NFT"]["TitlePlaceholder"]
-                )
-            ), Q_Utils::normalize($stream->name . "_title")) ?></h2>
-    </div>
-    <div class="Assets_nft_details_header_right <?php echo $likes["res"] ? "Q_selected" : "" ?>">
-        <i class="far fa-heart"></i>
-        <span><?php echo ($likes["likes"] ?: "") ?></span>
-    </div>
+
+<div class="Assets_NFT_section" data-type="author">
+    <div class="Assets_info_icon"><i class="qp-communities-owner"></i></div>
+    <div class="Assets_info_content"><a href="<?=Q_Request::baseUrl()."/profile/".$stream->publisherId?>"><?=$authorName?></a></div>
 </div>
-<ul class="Assets_nft_tabs">
-    <li class="Q_selected"><?php echo $texts["NFT"]["Details"] ?></li>
-</ul>
-<div class="table_description">
-    <table class="Assets_collection_info">
-        <tr>
-            <td>Title:</td>
-            <td>
-                <?php echo Q::tool("Streams/inplace", array(
-                        "stream" => $stream,
-                        "editable" => $stream->testWriteLevel("edit"),
-                        "inplaceType" => "textarea",
-                        "field" => "title",
-                        "inplace" => array(
-                            "placeholder" => $texts["NFT"]["DescriptionPlaceholder"]
-                        )
-                    ), Q_Utils::normalize($stream->name . "_content")) ?>
-            </td>
-        </tr>
-        <tr>
-            <td>Creator:</td><td><a href="<?= Q_Request::baseUrl()?>/profile/<?= $stream->publisherId?>"><?= $authorName?></a></td>
-        </tr>
-        <?php if ($stream->content) {?>
-        <tr>
-            <td>Description:</td><td><?=$stream->content?></td>
-        </tr>
-        <?php } ?>
-        <?php if (!empty($assetsNFTAttributes)) {?>
-            <tr>
-                <td style="vertical-align: top">Attributes:</td><td>
-                    <table class="assetsNFTAttributes">
-                        <?php foreach ($assetsNFTAttributes as $attribute) {
-                            echo "<tr><td>".$attribute["trait_type"].":</td><td>".$attribute["value"]."</td></tr>";
-                        } ?>
-                    </table>
-                </td>
-            </tr>
-        <?php } ?>
-    </table>
+<?php if ($stream->content) {?>
+    <div class="Assets_NFT_section" data-type="description">
+        <div class="Assets_info_icon"><i class="qp-communities-about"></i></div>
+        <div class="Assets_info_content"><?=$stream->content?></div>
+    </div>
+<?php } ?>
+<div class="Assets_NFT_section" data-type="chat">
+    <div class="Assets_info_icon"><i class="qp-calendars-conversations"></i></div>
+    <div class="Assets_info_content"><?=$texts["NFT"]["Conversation"]?></div>
 </div>
+<?php if (!empty($assetsNFTAttributes)) {?>
+    <div class="Assets_NFT_section" data-type="attributes">
+        <div class="Assets_info_icon"><i class="qp-communities-clipboard"></i></div>
+        <div class="Assets_info_content">
+            <table class="assetsNFTAttributes">
+				<?php foreach ($assetsNFTAttributes as $attribute) {
+					echo "<tr><td>".$attribute["trait_type"].":</td><td>".$attribute["value"]."</td></tr>";
+				} ?>
+            </table>
+        </div>
+    </div>
+<?php } ?>
+<?php if ($stream->testWriteLevel("edit")) {?>
+<div class="Assets_NFT_section" data-type="edit">
+    <div class="Assets_info_icon"><i class="qp-communities-account"></i></div>
+    <div class="Assets_info_content"><?=$texts["NFT"]["UpdateNFT"]?></div>
+</div>
+<?php } ?>
+
 <input type="hidden" name="publisherId" value="<?php echo $stream->publisherId ?>">
 <input type="hidden" name="streamName" value="<?php echo $stream->name ?>">

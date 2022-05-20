@@ -699,36 +699,6 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 .Assets_NFT_preview_composer button,
 .Assets_NFT_preview_composer select {height: 40px;}
 
-@media (max-width:1200px) {
-
-    .Assets_NFT_preview_tool .video-container img {
-        height: auto;
-    }
-
-}
-
-@media (max-width: 499px) {
-    .Assets_NFT_preview_tool .video-container .v-btn {
-        width: 50px;
-        height: 50px;
-        background-size: 100%;
-    }
-
-    .Assets_NFT_preview_composer .switch {
-        width: 65px;
-    }
-    .Assets_NFT_preview_composer .Assets_market_button .Assets_nft_clickable {
-        padding: 0 6px;
-    }
-    .Assets_NFT_preview_composer .Assets_nft form {
-        padding: 10px;
-    }
-    .Assets_price div{
-        width: 50%;
-    }
-
-}
-
 .Q_notMobile .Assets_NFT_preview_tool p.categories span {
     display: block;
     white-space: pre-line;
@@ -775,6 +745,42 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
     border-radius: 10px;
 }
 
+.Assets_NFT_preview_tool .Assets_NFT_participants {
+    padding: 5px 0 0 0;
+}
+.Assets_NFT_preview_tool .Assets_NFT_participants .Streams_participants_container {
+    margin-right: 0;
+}
+
+@media (max-width:1200px) {
+
+    .Assets_NFT_preview_tool .video-container img {
+        height: auto;
+    }
+
+}
+
+@media (max-width: 499px) {
+    .Assets_NFT_preview_tool .video-container .v-btn {
+        width: 50px;
+        height: 50px;
+        background-size: 100%;
+    }
+
+    .Assets_NFT_preview_composer .switch {
+        width: 65px;
+    }
+    .Assets_NFT_preview_composer .Assets_market_button .Assets_nft_clickable {
+        padding: 0 6px;
+    }
+    .Assets_NFT_preview_composer .Assets_nft form {
+        padding: 10px;
+    }
+    .Assets_price div{
+        width: 50%;
+    }
+
+}
 @media screen and (max-width: 721px) and (min-width: 500px) {
     .Assets_NFT_preview_tool p.categories span {
         display: block;

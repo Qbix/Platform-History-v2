@@ -1,6 +1,3 @@
-.Assets_column_NFT .Assets_NFT_preview_tool .title_block_header {
-    display: none;
-}
 .Assets_column_NFT .Assets_NFT_preview_tool .title-block {
     outline: none;
     min-height: unset;
@@ -13,11 +10,11 @@
     width: 100%;
 }
 .Assets_column_NFT .Assets_NFT_preview_tool .video-container {
-    min-height: 300px;
+    height: unset;
     line-height: unset;
 }
-.Assets_column_NFT .Assets_NFT_preview_tool .title-name {
-    display: none;
+.Assets_column_NFT .Assets_NFT_preview_tool .video-container .Q_video_tool {
+    height: 300px;
 }
 .Assets_column_NFT .Assets_nft_details_header {
     display: flex;
@@ -65,4 +62,35 @@
 }
 .NFT_fullsize_icon_dialog .Q_dialog_content {
     overflow-x: auto;
+}
+.Assets_column_NFT .Assets_NFT_section {
+    min-height: 55px;
+    display: flex;
+    align-items: center;
+    line-height: unset;
+    height: unset;
+    border: none;
+    border-radius: 7px;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 10%), 0 0 2px rgb(0 0 0 / 20%);
+    background: var(--button-bg-color-secondary);
+    color: var(--button-text-color-secondary);
+    padding: 0 10px;
+    margin-bottom: 10px;
+    white-space: nowrap;
+}
+.Assets_column_NFT .Q_aspect_chat {
+    cursor: pointer;
+}
+.Assets_column_NFT .Assets_info_icon {
+    padding: 0 5px;
+    line-height: 15px;
+}
+.Assets_NFT_conversation.Q_columns_column .Q_controls_slot {
+    height: unset;
+}
+.Assets_NFT_conversation .Streams_chat_messages .Streams_chat_from_me .Streams_chat_bubble {
+    background-color: unset;
+}
+.Assets_column_NFT .Assets_NFT_section[data-type=edit] {
+    border: 1px solid #f00;
 }
