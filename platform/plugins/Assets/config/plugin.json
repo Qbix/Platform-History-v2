@@ -126,6 +126,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
+					"title": "",
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
