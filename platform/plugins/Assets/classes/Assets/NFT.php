@@ -116,10 +116,15 @@ class Assets_NFT
 		}
 
 		if ($fieldsUpdated) {
-			$stream->save();
+			$stream->changed();
 			if (Q::ifset($fields, "attributes", "Assets/NFT/attributes", null)) {
 				self::updateAttributesRelations($stream);
 			}
+		}
+
+		// if category undefined skip relations
+		if (!$category) {
+			return $stream;
 		}
 
 		$interestsRelationType = "NFT/interest";
