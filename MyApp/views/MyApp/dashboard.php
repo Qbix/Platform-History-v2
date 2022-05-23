@@ -3,10 +3,6 @@
 		<h1><?php echo Users::communityName() ?></h1>
 	</a>
 
-	<div id="dashboard_user">
-		<?php echo Q::tool('Users/status') ?>
-	</div>
-
 	<div id="dashboard_user_contextual">
 		<ul class="Q_listing">
 			<li data-action="setIdentifier"><?php echo $dashboard['SetEmailAddress'] ?></li>
@@ -24,4 +20,8 @@
 		'tabs' => $tabs,
 		'urls' => $urls
 	))?>
+
+	<div id="dashboard_user">
+		<?php echo Q::tool('Users/status') ?>
+	</div>
 </div>
