@@ -72,6 +72,7 @@
         show: {
             avatar: true,
             title: true,
+            description: false,
             participants: false
         },
         onInvoke: new Q.Event(),
@@ -130,7 +131,15 @@
                     inplaceType: "text",
                     publisherId: stream.fields.publisherId,
                     streamName: stream.fields.name
-                }, "nft_preview_" + tool.stream.fields.name.split("/").pop()).activate();
+                }, "nft_preview_title_" + tool.stream.fields.name.split("/").pop()).activate();
+
+                $(".Assets_NFT_description", tool.element).tool("Streams/inplace", {
+                    editable: false,
+                    field: "content",
+                    inplaceType: "text",
+                    publisherId: stream.fields.publisherId,
+                    streamName: stream.fields.name
+                }, "nft_preview_description_" + tool.stream.fields.name.split("/").pop()).activate();
 
                 // apply Streams/preview icon behavior
                 var movie = stream.getAttribute("video") || stream.getAttribute("animation_url");
@@ -853,6 +862,9 @@
         <div class="video-container"><img class="NFT_preview_icon"></div>
         {{#if show.title}}
             <div class="Assets_NFT_title"></div>
+        {{/if}}
+        {{#if show.description}}
+            <div class="Assets_NFT_description"></div>
         {{/if}}
         {{#if show.participants}}
             <div class="Assets_NFT_participants"></div>
