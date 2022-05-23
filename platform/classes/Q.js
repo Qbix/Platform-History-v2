@@ -1168,7 +1168,8 @@ Q.Cache.key = function _Cache_key(args, functions) {
  * @return {Boolean} whether there was an existing entry under that key
  */
 Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
-	if (typeof key !== 'string') {
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
 		key = Q.Cache.key(key);
 	}
 	var existing = this.data[key], previous;
@@ -1199,16 +1200,17 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 	if (this.count > this.max) {
 		this.remove(this.earliest);
 	}
-	// add to index for Cache.prototype.each
-	var parameters = JSON.parse(key);
-	var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
-	this.special[localStorageIndexInfoKey] = true;
-	for (var i=1, l=parameters.length; i<l; ++i) {
-		// key in the index
-		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
-		var obj = this.special[k] || {};
-		obj[key] = 1;
-		this.special[k] = obj;
+	if (parameters) {
+		// add to index for Cache.prototype.each
+		var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
+		this.special[localStorageIndexInfoKey] = true;
+		for (var i=1, l=parameters.length; i<l; ++i) {
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = this.special[k] || {};
+			obj[key] = 1;
+			this.special[k] = obj;
+		}
 	}
 	return existing ? true : false;
 };
@@ -1248,7 +1250,8 @@ Q.Cache.prototype.get = function _Q_Cache_prototype_get(key, options) {
  * @return {Boolean} whether there was an existing entry under that key
  */
 Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
-	if (typeof key !== 'string') {
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
 		key = Q.Cache.key(key);
 	}
 	if (!(key in this.data)) {
@@ -1263,14 +1266,15 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 		this.earliest = existing.next;
 	}
 	delete this.data[key];
-	// remove from index for Cache.prototype.each
-	var parameters = JSON.parse(key);
-	for (var i=1, l=parameters.length; i<l; ++i) {
-		// key in the index
-		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
-		var obj = this.special[k] || {};
-		delete obj[key];
-		this.special[k] = obj;
+	if (parameters) {
+		// remove from index for Cache.prototype.each
+		for (var i=1, l=parameters.length; i<l; ++i) {
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = this.special[k] || {};
+			delete obj[key];
+			this.special[k] = obj;
+		}
 	}
 	return true;
 };

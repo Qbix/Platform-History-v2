@@ -5733,7 +5733,8 @@ var Cp = Q.Cache.prototype;
  */
 Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	var existing, previous, count;
-	if (typeof key !== 'string') {
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
 		key = Q.Cache.key(key);
 	}
 	if (!options || !options.dontTouch) {
@@ -5767,16 +5768,17 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		this.remove(this.earliest());
 	}
 
-	// add to index for Cp.each
-	var parameters = JSON.parse(key);
-	var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
-	Q_Cache_set(this, localStorageIndexInfoKey, true, true);
-	for (var i=1, l=parameters.length; i<l; ++i) {
-		// key in the index
-		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
-		var obj = Q_Cache_get(this, k, true) || {};
-		obj[key] = 1;
-		Q_Cache_set(this, k, obj, true);
+	if (parameters) {
+		// add to index for Cp.each
+		var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
+		Q_Cache_set(this, localStorageIndexInfoKey, true, true);
+		for (var i=1, l=parameters.length; i<l; ++i) {
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = Q_Cache_get(this, k, true) || {};
+			obj[key] = 1;
+			Q_Cache_set(this, k, obj, true);
+		}
 	}
 
 	return existing ? true : false;
@@ -5823,7 +5825,8 @@ Cp.get = function _Q_Cache_prototype_get(key, options) {
  */
 Cp.remove = function _Q_Cache_prototype_remove(key) {
 	var existing, count;
-	if (typeof key !== 'string') {
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
 		key = Q.Cache.key(key);
 	}
 	existing = this.get(key, {dontTouch: true});
@@ -5844,14 +5847,15 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 	Q_Cache_pluck(this, existing);
 	Q_Cache_remove(this, key);
 
-	// remove from index for Cp.each
-	var parameters = JSON.parse(key);
-	for (var i=1, l=parameters.length; i<l; ++i) {
-		// key in the index
-		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
-		var obj = Q_Cache_get(this, k, true) || {};
-		delete obj[key];
-		Q_Cache_set(this, k, obj, true);
+	if (parameters) {
+		// remove from index for Cp.each
+		for (var i=1, l=parameters.length; i<l; ++i) {
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = Q_Cache_get(this, k, true) || {};
+			delete obj[key];
+			Q_Cache_set(this, k, obj, true);
+		}
 	}
 
 	return true;
