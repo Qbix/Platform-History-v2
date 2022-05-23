@@ -79,18 +79,6 @@
     margin-top: -12px;
 }
 
-.Assets_NFT_preview_tool h2.title-name {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: solid 1px #414141;
-    border-bottom: solid 1px #414141;
-    padding: 10px 0 !important;
-    height: 60px;
-    overflow: hidden;
-    margin-bottom: 5px !important;
-}
-
 .Assets_NFT_preview_tool .NFT_preview_icon {
     margin: auto;
     vertical-align: middle;
@@ -180,6 +168,7 @@
     color: rgba(4, 4, 5, 0.8);
     font-weight: 500;
     font-family: inherit;
+    font-size: 1em;
     overflow: hidden;
     outline: none;
     width: 100%;
@@ -750,6 +739,18 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 }
 .Assets_NFT_preview_tool .Assets_NFT_participants .Streams_participants_container {
     margin-right: 0;
+}
+.Assets_NFT_preview_tool .Streams_inplace_tool {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: solid 1px #414141;
+    border-bottom: solid 1px #414141;
+    height: 60px;
+    overflow: hidden;
+    margin-bottom: 5px !important;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 @media (max-width:1200px) {

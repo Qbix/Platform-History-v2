@@ -98,7 +98,8 @@
 
             Q.Template.render('Assets/NFT/view', {
                 title: stream.fields.title,
-                show: state.show
+                show: state.show,
+                stream: stream
             }, (err, html) => {
                 tool.element.innerHTML = html;
 
@@ -122,6 +123,14 @@
                     publisherId: stream.fields.publisherId,
                     streamName: stream.fields.name
                 }).activate();
+
+                $(".Assets_NFT_title", tool.element).tool("Streams/inplace", {
+                    editable: false,
+                    field: "title",
+                    inplaceType: "text",
+                    publisherId: stream.fields.publisherId,
+                    streamName: stream.fields.name
+                }, "nft_preview_" + tool.stream.fields.name.split("/").pop()).activate();
 
                 // apply Streams/preview icon behavior
                 var movie = stream.getAttribute("video") || stream.getAttribute("animation_url");
@@ -249,7 +258,7 @@
                     tool.preview.icon($icon[0]);
 
                     // manage attributes
-                    tool.manageAttributes($(".Assets_nft_attributes", dialog));
+                    tool.manageAttributes($(".Assets_nft_attributes", dialog), tool.stream.getAttribute("Assets/NFT/attributes"));
                     $("button[name=addAttribute]", dialog).on(Q.Pointer.fastclick, function (event) {
                         event.preventDefault();
                         tool.manageAttributes($(".Assets_nft_attributes", dialog));
@@ -436,11 +445,15 @@
                                 var streamData = response.slots.NFTStream;
 
                                 // need to refresh stream cache
-                                Streams.get.force(streamData.publisherId, streamData.streamName);
+                                Streams.get.force(streamData.publisherId, streamData.streamName, function () {
+                                    // need to refresh streams because
+                                    Streams.refresh();
+                                    tool.stream = this;
+                                });
 
                                 Q.handle(state.onCreated, tool, [streamData]);
                             }, {
-                                method: "post",
+                                method: isNew ? "post" : "put",
                                 fields: {
                                     publisherId: previewState.publisherId,
                                     streamName: previewState.streamName,
@@ -545,7 +558,7 @@
             });
         },
         /**
-         * Create and sign signature
+         * Create attributes list
          * @method manageAttributes
          * @param {Element|jQuery} element - element which need to replace with manager
          * @param {Object} attributes - object with defined attributes
@@ -644,9 +657,10 @@
 
                                     Q.setObject([displayType, traitType], value, defaultAttributes);
                                 }, {
-                                    method: "post",
+                                    method: "put",
                                     fields: {
                                         publisherId: previewState.publisherId,
+                                        streamName: previewState.streamName,
                                         display_type: displayType,
                                         trait_type: traitType,
                                         value: value
@@ -840,7 +854,7 @@
         {{/if}}
         <div class="video-container"><img class="NFT_preview_icon"></div>
         {{#if show.title}}
-            <h2 class="title-name">{{title}}</h2>
+            <div class="Assets_NFT_title"></div>
         {{/if}}
         {{#if show.participants}}
             <div class="Assets_NFT_participants"></div>

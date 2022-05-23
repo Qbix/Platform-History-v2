@@ -7,6 +7,15 @@ Q.exports(function (options, index, column, data) {
 	var $column = $(column);
 	var publisherId = $("input[name=publisherId]", column).val();
 	var streamName = $("input[name=streamName]", column).val();
+	var $titleSlot = $(".Q_title_slot", column);
+
+	$titleSlot.empty().tool("Streams/inplace", {
+		editable: false,
+		field: "title",
+		inplaceType: "text",
+		publisherId: publisherId,
+		streamName: streamName
+	}, "nft_column_" + streamName.split("/").pop()).activate();
 
 	Q.Text.get('Assets/content', function (err, text) {
 		column.forEachTool("Assets/NFT/preview", function () {
@@ -103,6 +112,16 @@ Q.exports(function (options, index, column, data) {
 
 			nftTool.update();
 		});
+
+
+		Q.Streams.Stream.onAttribute(publisherId, streamName, "Assets/NFT/attributes").set(function (attributes, k) {
+			var $attrs = $(".assetsNFTAttributes", column);
+			$attrs.empty();
+
+			Q.each(attributes[k], function () {
+				$attrs.append("<tr><td>" + this.display_type + "</td><td>" + this.value + "</td></tr>");
+			});
+		}, true);
 	});
 });
 

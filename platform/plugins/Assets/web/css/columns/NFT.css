@@ -94,3 +94,9 @@
 .Assets_column_NFT .Assets_NFT_section[data-type=edit] {
     border: 1px solid #f00;
 }
+.Assets_column_NFT .Q_columns_title_container .Q_title_slot {
+    padding: 0;
+    vertical-align: middle;
+    height: 50px;
+    line-height: 50px;
+}
