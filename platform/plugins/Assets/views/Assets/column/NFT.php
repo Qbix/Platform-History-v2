@@ -4,7 +4,7 @@
             "Streams/preview" => array(
                 "publisherId" => $stream->publisherId,
                 "streamName" => $stream->name,
-                "editable" => true,
+                "editable" => false,
                 "closeable" => false
             ),
             "Assets/NFT/preview" => array(

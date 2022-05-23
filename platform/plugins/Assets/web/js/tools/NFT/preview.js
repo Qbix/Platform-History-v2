@@ -218,7 +218,14 @@
                     Q.setObject("options.streams_preview.publisherId", newItem.publisherId, tool.element);
                     Q.setObject("options.streams_preview.streamName", newItem.streamName, tool.element);
 
-                    $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, tool.update.bind(tool));
+                    Streams.get(previewState.publisherId, previewState.streamName, function (err) {
+                        if (err) {
+                            return;
+                        }
+
+                        tool.stream = this;
+                        $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, tool.update.bind(tool));
+                    });
                 }, {
                     fields: {
                         publisherId: previewState.publisherId,
@@ -236,7 +243,6 @@
             var $toolElement = $(this.element);
             var state = this.state;
             var previewState = this.preview.state;
-            previewState.editable = true; // we need to upload icon
             var isNew = $toolElement.hasClass("Streams_preview_composer");
 
             Q.Dialogs.push({
@@ -254,8 +260,10 @@
                 onActivate: function (dialog) {
                     var $icon = $("img.NFT_preview_icon", dialog);
 
-                    // apply Streams/preview icon behavior
-                    tool.preview.icon($icon[0]);
+                    // create new Streams/preview tool to set icon behavior to $icon element
+                    $("<div>").tool("Streams/preview", Q.extend(previewState, {editable: true})).activate(function () {
+                        this.icon($icon[0]);
+                    });
 
                     // manage attributes
                     tool.manageAttributes($(".Assets_nft_attributes", dialog), tool.stream.getAttribute("Assets/NFT/attributes"));
@@ -311,15 +319,6 @@
                     Streams.get.force(previewState.publisherId, previewState.streamName, function () {
                         tool.stream = this;
                         _createVideoTool();
-
-                        this.onFieldChanged("icon").set(function (modFields, field) {
-                            //modFields[field]
-                            this.refresh(function () {
-                                tool.preview.icon($icon[0]);
-                            }, {
-                                evenIfNotRetained: true
-                            });
-                        }, tool);
                     });
 
                     // set video URL
@@ -447,7 +446,7 @@
                                 // need to refresh stream cache
                                 Streams.get.force(streamData.publisherId, streamData.streamName, function () {
                                     // need to refresh streams because
-                                    Streams.refresh();
+                                    //Streams.refresh();
                                     tool.stream = this;
                                 });
 
@@ -457,7 +456,6 @@
                                 fields: {
                                     publisherId: previewState.publisherId,
                                     streamName: previewState.streamName,
-                                    category: previewState.related,
                                     title: $("input[name=title]", dialog).val(),
                                     content: $("input[name=description]", dialog).val(),
                                     attributes: attributes

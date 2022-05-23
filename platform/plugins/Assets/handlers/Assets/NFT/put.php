@@ -5,7 +5,6 @@ function Assets_NFT_put ($params) {
 	$loggedInUserId = Users::loggedInUser(true)->id;
 	$publisherId = Q::ifset($request, "publisherId", null);
 	$streamName = Q::ifset($request, "streamName", null);
-	$category = Q::ifset($request, "category", null);
 	$adminLabels = Q_Config::get("Users", "communities", "admins", null);
 	// if user try to update align profile or is not an admin
 	if ($publisherId != $loggedInUserId && !(bool)Users::roles(null, $adminLabels, array(), $loggedInUserId)) {
@@ -30,7 +29,7 @@ function Assets_NFT_put ($params) {
 	//$stream = Assets_NFT::getComposerStream($publisherId);
 	$stream = Streams::fetchOne(null, $publisherId, $streamName);
 	$fields = Q::take($request, array("title", "content", "attributes"));
-	Assets_NFT::updateNFT($stream, $fields, $category);
+	Assets_NFT::updateNFT($stream, $fields);
 
 	Q_Response::setSlot("NFTStream", array("publisherId" => $stream->publisherId, "streamName" => $stream->name));
 }
