@@ -95,32 +95,22 @@ class Assets_NFT
 			$category = array("publisherId" => $category->publisherId, "streamName" => $category->name);
 		}
 
-		$fieldsUpdated = false;
-		foreach (array("title", "content") as $field) {
-			if (!Q::ifset($fields, $field, null)) {
-				continue;
-			}
+		$title = Q::ifset($fields, "title", null);
+		if (!$title) {
+			throw new Exception("Title required!");
+		}
+		$stream->title = $title;
+		$stream->content = Q::ifset($fields, "content", null);
 
-			$stream->{$field} = $fields[$field];
-			$fieldsUpdated = true;
+		// update Assets/NFT/attributes attribute
+		$newNFTattributes = Q::ifset($fields, "attributes", "Assets/NFT/attributes", array());
+		$oldNFTattributes = (array)$stream->getAttribute("Assets/NFT/attributes");
+		if ($newNFTattributes !== $oldNFTattributes) {
+			$stream->setAttribute("Assets/NFT/attributes", $newNFTattributes);
+			self::updateAttributesRelations($stream);
 		}
 
-		// update attributes
-		if (Q::ifset($fields, "attributes", null)) {
-			if ($stream->attributes) {
-				$attributes = (array)Q::json_decode($stream->attributes);
-			} else {
-				$attributes = array();
-			}
-			$stream->attributes = Q::json_encode(array_merge($attributes, $fields["attributes"]));
-		}
-
-		if ($fieldsUpdated) {
-			$stream->changed();
-			if (Q::ifset($fields, "attributes", "Assets/NFT/attributes", null)) {
-				self::updateAttributesRelations($stream);
-			}
-		}
+		$stream->changed();
 
 		// if category undefined skip relations
 		if (!$category) {
