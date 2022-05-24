@@ -935,6 +935,9 @@ class Q_Session
 			return null;
 		}
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		if (!isset($secret)) {
+			$secret = Q::app();
+		}
 		return hash_hmac('sha256', $sessionId, $secret);
 	}
 
