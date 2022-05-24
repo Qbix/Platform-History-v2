@@ -68,8 +68,10 @@ table { table-layout: fixed; }
 
 #dashboard, #notices, #content { margin: auto; text-align: left; }
 #content { position: relative; }
+#dashboard h1 { text-align: left }
 
-#dashboard { display: inline-block; width: 100%; }
+#dashboard { display: flex; width: 100%; }
+.Q_layout_widebar #dashboard { display: flex; justify-content: space-between; }
 .Q_notMobile #dashboard { padding: 5px; }
 
 .Q_notMobile #dashboard_slot .MyApp_dashboard_logo {
@@ -286,7 +288,7 @@ html.Q_notMobile { height: 100%; }
 .Q_layout_sidebar.Q_notMobile body { height: 100%; }
 .Q_layout_sidebar.Q_notMobile #dashboard .UVSpinner_dashboard_logo { background-position: center top; padding-top: 250px; }
 .Q_layout_sidebar.Q_notMobile #dashboard .UVSpinner_dashboard_logo h1 { padding: 0; display: none; max-height: none; }
-.Q_notMobile #dashboard a { display: block; }
+.Q_notMobile #dashboard .Q_tabs_horizontal a { display: inline-block; }
 .Q_notMobile #dashboard>h1,
 .Q_layout_sidebar.Q_notMobile #dashboard>h2 { float: none; }
 .Q_layout_sidebar.Q_notMobile #dashboard .Q_tabs_tabs { text-align: left; }
