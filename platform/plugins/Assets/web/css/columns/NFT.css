@@ -100,3 +100,20 @@
     height: 50px;
     line-height: 50px;
 }
+.Assets_column_NFT .Streams_inplace_tool[id^=Streams_inplace-nft_preview_description] {
+    width: 100%;
+}
+.Assets_column_NFT hr {
+    border: none;
+    border-top: solid 1px #333333;
+}
+.Assets_column_NFT .Assets_NFT_section[data-type=attributes][data-empty="1"] {
+    display: none;
+}
+.Assets_column_NFT .assetsNFTAttributes tr td:first-of-type {
+    font-weight: bold;
+    text-align: right;
+}
+.Assets_column_NFT .assetsNFTAttributes tr td:last-of-type {
+    padding-left: 5px;
+}

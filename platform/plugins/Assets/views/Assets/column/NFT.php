@@ -24,12 +24,6 @@
     <div class="Assets_info_icon"><i class="qp-communities-owner"></i></div>
     <div class="Assets_info_content"><a href="<?=Q_Request::baseUrl()."/profile/".$stream->publisherId?>"><?=$authorName?></a></div>
 </div>
-<?php if ($stream->content) {?>
-    <div class="Assets_NFT_section" data-type="description">
-        <div class="Assets_info_icon"><i class="qp-communities-about"></i></div>
-        <div class="Assets_info_content"><?=$stream->content?></div>
-    </div>
-<?php } ?>
 <div class="Assets_NFT_section" data-type="chat">
     <div class="Assets_info_icon"><i class="qp-calendars-conversations"></i></div>
     <div class="Assets_info_content"><?=$texts["NFT"]["Conversation"]?></div>

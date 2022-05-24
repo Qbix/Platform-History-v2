@@ -251,6 +251,7 @@
         "NftMovie": "Movie to represent NFT",
         "UploadMovie": "Upload movie",
         "MovieSource": "Movie Source",
+        "MovieURL": "Movie URL",
         "UploadFile": "Upload a file",
         "PutOnMarketplace": "Put on marketplace",
         "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
