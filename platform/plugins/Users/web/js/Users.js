@@ -196,6 +196,10 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.init.web3 = function (callback, options) {
+		if (!Q.getObject('web3', Users.apps)) {
+			return;
+			
+		}
 		var scriptsToLoad = [
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
@@ -844,12 +848,15 @@
 			// try quietly, possible only with one of "facebook" or "web3"
 			if (o.tryQuietly) {
 				var platform = (typeof o.tryQuietly === 'string') ? o.tryQuietly : '';
-				var using = (typeof o.using === 'string') ? [o.using] : o.using;
-				Q.each(['facebook', 'web3'], function (i, k) {
-					if (!using && o.using.indexOf(k)) {
-						using = k;
-					}
-				});
+				if (!platform) {
+					var using = (typeof o.using === 'string') ? [o.using] : o.using;
+					Q.each(['facebook', 'web3'], function (i, k) {
+						if (!using || using.indexOf(k) >= 0) {
+							platform = k;
+							return;
+						}
+					});
+				}
 				Users.authenticate(platform, function (user) {
 					_onConnect(user);
 				}, function () {
