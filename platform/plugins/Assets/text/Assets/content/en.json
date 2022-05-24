@@ -306,6 +306,9 @@
             "TypeContractName": "contract name",
             "TypeContractSymbol": "contract symbol (max 10 chars)"
         },
+        "contests": {
+            "Title": "Contests"
+        },
         "import": {
             "importNFT": "Importing NFT's",
             "importAttributes": "Import NFT attributes",

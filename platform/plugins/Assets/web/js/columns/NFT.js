@@ -1,6 +1,5 @@
 "use strict";
 (function(Q, $, undefined) {
-	
 Q.exports(function (options, index, column, data) {
 	Q.addStylesheet('{{Assets}}/css/columns/NFT.css');
 
@@ -127,5 +126,4 @@ Q.exports(function (options, index, column, data) {
 		}, true);
 	});
 });
-
 })(Q, jQuery);

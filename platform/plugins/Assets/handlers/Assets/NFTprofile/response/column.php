@@ -58,7 +58,7 @@ function Assets_NFTprofile_response_column (&$params, &$result) {
 		}
 	}
 
-	$text = array_merge(Q_Text::get('Assets/content'), Q_Text::get('NFTRemix/content'));
+	$text = Q_Text::get('Assets/content');
 	$title = Q::interpolate(Q::ifset($text, 'profile', 'Title', null), array("userName" => $user->displayName()));
 	$description = Q::ifset($text, 'profile', 'Description', null);
 	$keywords = Q::ifset($text, 'profile', 'Keywords', null);
