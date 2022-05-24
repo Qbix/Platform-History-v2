@@ -254,314 +254,280 @@
             var previewState = this.preview.state;
             var isNew = $toolElement.hasClass("Streams_preview_composer");
 
-            Q.Dialogs.push({
-                title: isNew ? tool.text.NFT.CreateNFT : tool.text.NFT.UpdateNFT,
-                className: "Assets_NFT_preview_composer",
-                template: {
-                    name: "Assets/NFT/nftCreate",
-                    fields: {
-                        minted: false,
-                        title: Q.getObject("stream.fields.title", tool) || "",
-                        content: Q.getObject("stream.fields.content", tool) || "",
-                        saveButtonText: isNew ? tool.text.NFT.CreateYourNFT : tool.text.NFT.UpdateNFT
-                    }
-                },
-                onActivate: function (dialog) {
-                    var $icon = $("img.NFT_preview_icon", dialog);
+            Streams.get.force(previewState.publisherId, previewState.streamName, function () {
+                tool.stream = this;
 
-                    // create new Streams/preview tool to set icon behavior to $icon element
-                    $("<div>").tool("Streams/preview", Q.extend(previewState, {editable: true})).activate(function () {
-                        this.icon($icon[0]);
-                    });
-
-                    // manage attributes
-                    tool.manageAttributes($(".Assets_nft_attributes", dialog), tool.stream.getAttribute("Assets/NFT/attributes"));
-                    $("button[name=addAttribute]", dialog).on(Q.Pointer.fastclick, function (event) {
-                        event.preventDefault();
-                        tool.manageAttributes($(".Assets_nft_attributes", dialog));
-                        return false;
-                    });
-
-                    // upload image button
-                    $(".Assets_nft_upload_button", dialog).on(Q.Pointer.fastclick, function (event) {
-                        event.preventDefault();
-                        $icon.trigger("click");
-                    });
-
-                    var videoTool;
-                    var $videoParent = $(".Assets_nft_movie", dialog).closest(".Assets_nft_picture");
-                    var _createVideoTool = function (options) {
-                        var videoOptions = Q.extend({}, state.video);
-                        var videoId = tool.stream.getAttribute("videoId");
-                        var videoProvider = tool.stream.getAttribute("videoProvider");
-                        var videoUrl = tool.stream.getAttribute("animation_url");
-                        if (options) {
-                            videoId = Q.getObject("videoId", options);
-                            videoProvider = Q.getObject("videoProvider", options);
-                            videoUrl = Q.getObject("videoUrl", options);
+                Q.Dialogs.push({
+                    title: isNew ? tool.text.NFT.CreateNFT : tool.text.NFT.UpdateNFT,
+                    className: "Assets_NFT_preview_composer",
+                    template: {
+                        name: "Assets/NFT/nftCreate",
+                        fields: {
+                            minted: false,
+                            title: Q.getObject("stream.fields.title", tool) || "",
+                            content: Q.getObject("stream.fields.content", tool) || "",
+                            saveButtonText: isNew ? tool.text.NFT.CreateYourNFT : tool.text.NFT.UpdateNFT
                         }
+                    },
+                    onActivate: function (dialog) {
+                        var $icon = $("img.NFT_preview_icon", dialog);
 
-                        if (videoUrl) {
-                            videoOptions.url = videoUrl;
-                        } else if (videoId && videoProvider) {
-                            videoOptions.url = Q.getObject(["video", videoProvider, "url"], Q).interpolate({videoId: videoId})
-                        }
-
-                        var $element = $(".Assets_nft_movie", dialog);
-                        if (Q.Tool.from($element, "Q/video")) {
-                            var $newElement = $("<div class='Assets_nft_movie'></div>").insertAfter($element);
-                            Q.Tool.remove($element, true, true);
-                            $element = $newElement;
-                        }
-
-                        if (!videoOptions.url) {
-                            return;
-                        }
-
-                        $element.tool("Q/video", videoOptions).activate(function () {
-                            videoTool = this;
-                            $videoParent.removeClass("NFT_preview_loading");
+                        // create new Streams/preview tool to set icon behavior to $icon element
+                        $("<div>").tool("Streams/preview", Q.extend(previewState, {editable: true})).activate(function () {
+                            this.icon($icon[0]);
                         });
-                    };
 
-                    // get a stream by data got from "newItem" request
-                    Streams.get.force(previewState.publisherId, previewState.streamName, function () {
-                        tool.stream = this;
-                        _createVideoTool();
-                    });
-
-                    // set video URL
-                    var $inputURL = $("input[name=movieURL]", dialog);
-                    $inputURL.on("change", function () {
-                        if (!this.value.matchTypes('url', {requireScheme: false}).length) {
-                            return _createVideoTool();
-                        }
-
-                        _createVideoTool({
-                            videoId: null,
-                            videoUrl: this.value
+                        // manage attributes
+                        tool.manageAttributes($(".Assets_nft_attributes", dialog), tool.stream.getAttribute("Assets/NFT/attributes"));
+                        $("button[name=addAttribute]", dialog).on(Q.Pointer.fastclick, function (event) {
+                            event.preventDefault();
+                            tool.manageAttributes($(".Assets_nft_attributes", dialog));
+                            return false;
                         });
-                    });
 
-                    // set muse videoId
-                    var $museVideoId = $("input[name=museVideoId]", dialog);
-                    $museVideoId.on("change", function () {
-                        if (!this.value) {
-                            return _createVideoTool();
-                        }
-
-                        _createVideoTool({
-                            videoId: this.value,
-                            videoProvider: "muse",
-                            videoUrl: null
+                        // upload image button
+                        $(".Assets_nft_upload_button", dialog).on(Q.Pointer.fastclick, function (event) {
+                            event.preventDefault();
+                            $icon.trigger("click");
                         });
-                    });
 
-                    // upload video
-                    $("input[name=movieUpload]", dialog).on("change", function () {
-                        var file = this.files[0];
-                        if (!file) {
-                            return;
-                        }
+                        var videoTool;
+                        var $videoParent = $(".Assets_nft_movie", dialog).closest(".Assets_nft_picture");
+                        var _createVideoTool = function (options) {
+                            var videoOptions = Q.extend({}, state.video);
+                            var videoId = tool.stream.getAttribute("videoId");
+                            var videoProvider = tool.stream.getAttribute("videoProvider");
+                            var videoUrl = tool.stream.getAttribute("animation_url");
+                            if (options) {
+                                videoId = Q.getObject("videoId", options);
+                                videoProvider = Q.getObject("videoProvider", options);
+                                videoUrl = Q.getObject("videoUrl", options);
+                            }
 
-                        var reader = new FileReader();
-                        $videoParent.addClass("NFT_preview_loading");
-                        reader.readAsDataURL(file);
-                        reader.onload = function () {
-                            Q.request(Q.action("Streams/stream"), 'data',function (err, res) {
-                                var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
-                                if (msg) {
-                                    $videoParent.removeClass("NFT_preview_loading");
-                                    return Q.handle([state.onError, state.onFinish], tool, [msg]);
-                                }
+                            if (videoUrl) {
+                                videoOptions.url = videoUrl;
+                            } else if (videoId && videoProvider) {
+                                videoOptions.url = Q.getObject(["video", videoProvider, "url"], Q).interpolate({videoId: videoId})
+                            }
 
-                                Streams.get.force(previewState.publisherId, previewState.streamName, function () {
-                                    tool.stream = this;
-                                    _createVideoTool();
-                                    $inputURL.val("");
-                                });
-                            }, {
-                                fields: {
-                                    file: {
-                                        name: file.name,
-                                        data: reader.result,
-                                        subpath: previewState.publisherId.splitId() + "/" + previewState.streamName + "/file/movie"
-                                    },
-                                    publisherId: previewState.publisherId,
-                                    streamName: previewState.streamName
-                                },
-                                timeout: 100000,
-                                method: 'put'
+                            var $element = $(".Assets_nft_movie", dialog);
+                            if (Q.Tool.from($element, "Q/video")) {
+                                var $newElement = $("<div class='Assets_nft_movie'></div>").insertAfter($element);
+                                Q.Tool.remove($element, true, true);
+                                $element = $newElement;
+                            }
+
+                            if (!videoOptions.url) {
+                                return;
+                            }
+
+                            $element.tool("Q/video", videoOptions).activate(function () {
+                                videoTool = this;
+                                $videoParent.removeClass("NFT_preview_loading");
                             });
                         };
-                        reader.onerror = function (error) {
-                            console.log('Error: ', error);
-                            $videoParent.removeClass("NFT_preview_loading");
-                        };
-                        this.value = null;
-                    });
 
-                    // create NFT
-                    $("button[name=save]", dialog).on(Q.Pointer.fastclick, function (event) {
-                        event.preventDefault();
+                        _createVideoTool();
 
-                        $(dialog).addClass("Q_disabled");
-
-                        // set WEB3_CONNECT_MODAL_ID element z-index
-                        var modalLimit = 5000;
-                        var modalPeriod = 500;
-                        var modalCounter = 0;
-                        tool.modalExist = setInterval(function() {
-                            modalCounter += modalPeriod;
-                            if (modalCounter >= modalLimit) {
-                                clearInterval(tool.modalExist);
+                        // set video URL
+                        var $inputURL = $("input[name=movieURL]", dialog);
+                        $inputURL.on("change", function () {
+                            if (!this.value.matchTypes('url', {requireScheme: false}).length) {
+                                return _createVideoTool();
                             }
 
-                            var $modal = $("#WEB3_CONNECT_MODAL_ID");
-                            if (!$modal.length) {
+                            _createVideoTool({
+                                videoId: null,
+                                videoUrl: this.value
+                            });
+                        });
+
+                        // upload video
+                        $("input[name=movieUpload]", dialog).on("change", function () {
+                            var file = this.files[0];
+                            if (!file) {
                                 return;
                             }
 
-                            clearInterval(tool.modalExist);
+                            var reader = new FileReader();
+                            $videoParent.addClass("NFT_preview_loading");
+                            reader.readAsDataURL(file);
+                            reader.onload = function () {
+                                Q.req(Q.action("Streams/stream"), 'data',function (err, res) {
+                                    var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
+                                    if (msg) {
+                                        $videoParent.removeClass("NFT_preview_loading");
+                                        return Q.handle([state.onError, state.onFinish], tool, [msg]);
+                                    }
 
-                            var modalZIndex = $(".Q_overlay_open:visible").css("z-index");
-                            if (!modalZIndex) {
-                                return;
-                            }
-                            modalZIndex = parseInt(modalZIndex) + 1;
-                            $(".web3modal-modal-lightbox", $modal).css("z-index", modalZIndex);
-                        }, modalPeriod);
+                                    Streams.get.force(previewState.publisherId, previewState.streamName, function () {
+                                        tool.stream = this;
+                                        _createVideoTool();
+                                        $inputURL.val("");
+                                    });
+                                }, {
+                                    fields: {
+                                        file: {
+                                            name: file.name,
+                                            data: reader.result,
+                                            subpath: previewState.publisherId.splitId() + "/" + previewState.streamName + "/file/movie"
+                                        },
+                                        publisherId: previewState.publisherId,
+                                        streamName: previewState.streamName
+                                    },
+                                    timeout: 100000,
+                                    method: 'put'
+                                });
+                            };
+                            reader.onerror = function (error) {
+                                console.log('Error: ', error);
+                                $videoParent.removeClass("NFT_preview_loading");
+                            };
+                            this.value = null;
+                        });
 
-                        var attributes = {
-                            "Assets/NFT/attributes": tool.collectAttributes(dialog)
-                        };
-                        if ($inputURL.val()) {
-                            attributes["animation_url"] = $inputURL.val();
-                        } else if ($museVideoId.val()) {
-                            attributes["videoId"] = $museVideoId.val();
-                            attributes["videoProvider"] = "muse";
-                        }
+                        // create NFT
+                        $("button[name=save]", dialog).on(Q.Pointer.fastclick, function (event) {
+                            event.preventDefault();
 
-                        if (!tool.minted) {
-                            Q.req("Assets/NFT", ["NFTStream"],function (err, response) {
-                                if (err) {
+                            $(dialog).addClass("Q_disabled");
+
+                            // set WEB3_CONNECT_MODAL_ID element z-index
+                            var modalLimit = 5000;
+                            var modalPeriod = 500;
+                            var modalCounter = 0;
+                            tool.modalExist = setInterval(function() {
+                                modalCounter += modalPeriod;
+                                if (modalCounter >= modalLimit) {
+                                    clearInterval(tool.modalExist);
+                                }
+
+                                var $modal = $("#WEB3_CONNECT_MODAL_ID");
+                                if (!$modal.length) {
                                     return;
                                 }
 
-                                Q.Dialogs.pop();
+                                clearInterval(tool.modalExist);
 
-                                var streamData = response.slots.NFTStream;
+                                var modalZIndex = $(".Q_overlay_open:visible").css("z-index");
+                                if (!modalZIndex) {
+                                    return;
+                                }
+                                modalZIndex = parseInt(modalZIndex) + 1;
+                                $(".web3modal-modal-lightbox", $modal).css("z-index", modalZIndex);
+                            }, modalPeriod);
 
-                                // need to refresh stream cache
-                                Streams.get.force(streamData.publisherId, streamData.streamName, function () {
-                                    // need to refresh streams because
-                                    //Streams.refresh();
-                                    tool.stream = this;
+                            var attributes = {
+                                "Assets/NFT/attributes": tool.collectAttributes(dialog)
+                            };
+                            if ($inputURL.val()) {
+                                attributes["animation_url"] = $inputURL.val();
+                            }
+
+                            if (!tool.minted) {
+                                Q.req("Assets/NFT", ["NFTStream"],function (err, response) {
+                                    if (err) {
+                                        return;
+                                    }
+
+                                    Q.Dialogs.pop();
+                                    var streamData = response.slots.NFTStream;
+                                    Q.handle(state.onCreated, tool, [streamData]);
+                                }, {
+                                    method: isNew ? "post" : "put",
+                                    fields: {
+                                        publisherId: previewState.publisherId,
+                                        streamName: previewState.streamName,
+                                        title: $("input[name=title]", dialog).val(),
+                                        content: $("input[name=description]", dialog).val(),
+                                        attributes: attributes,
+                                        category: previewState.related
+                                    }
                                 });
 
-                                Q.handle(state.onCreated, tool, [streamData]);
-                            }, {
-                                method: isNew ? "post" : "put",
-                                fields: {
-                                    publisherId: previewState.publisherId,
-                                    streamName: previewState.streamName,
-                                    title: $("input[name=title]", dialog).val(),
-                                    content: $("input[name=description]", dialog).val(),
-                                    attributes: attributes
-                                }
-                            });
-
-                            return;
-                        }
-
-                        var price = parseFloat($("input[name=price]", dialog).val());
-                        var $onMarketPlace = $(".Assets_nft_check", dialog);
-                        var onMarketPlace = $onMarketPlace.prop("checked");
-                        var chainId = $("select[name=chain]", dialog).val();
-                        var currencySymbol = $("select[name=currency]", dialog).val();
-                        var chain = NFT.chains[chainId];
-                        var currency = {};
-                        Q.each(NFT.currencies, function (i, c) {
-                            if (c.symbol !== currencySymbol) {
                                 return;
                             }
 
-                            currency = c;
-                            currency.token = c[chainId];
-                        });
-
-                        // method to create NFT stream after tokenId created
-                        var _reqCreateNFT = function (params) {
-                            var tokenId = Q.getObject("tokenId", params);
-                            var chainId = Q.getObject("chainId", params);
-                            var attributes = Q.extend({
-                                onMarketPlace: onMarketPlace,
-                                currency: $("select[name=currency] option:selected", dialog).text(),
-                                price: price
-                            }, params);
-                            if (tokenId) {
-                                attributes.tokenId = tokenId;
-                            }
-                            if (chainId) {
-                                attributes.chainId = chainId;
-                            }
-                            if ($inputURL.val()) {
-                                attributes["animation_url"] = $inputURL.val();
-                            } else if ($museVideoId.val()) {
-                                attributes["videoId"] = $museVideoId.val();
-                                attributes["videoProvider"] = "muse";
-                            }
-
-                            // collect NFT attributes
-                            attributes["Assets/NFT/attributes"] = tool.collectAttributes(dialog);
-
-                            // after token created, create NFT stream (actually update composer stream and change relation from "new" to "NFT")
-                            // and set tokenId, chainId, currency, royalty in attributes
-                            Q.req("Assets/NFT",function (err) {
-                                Q.Dialogs.pop();
-
-                                Q.Tool.remove(tool.element, true, false);
-                                tool.element.className = "";
-                                tool.element.innerHTML = "";
-
-                                $toolElement.tool("Assets/NFT/preview", {
-                                    tokenId: tokenId,
-                                    chainId: chainId
-                                }).activate();
-
-                                Q.handle(state.onCreated, tool, [tokenId, chainId]);
-                            }, {
-                                method: "post",
-                                fields: {
-                                    userId: previewState.publisherId,
-                                    title: $("input[name=title]", dialog).val(),
-                                    content: $("input[name=description]", dialog).val(),
-                                    attributes: attributes
+                            var price = parseFloat($("input[name=price]", dialog).val());
+                            var $onMarketPlace = $(".Assets_nft_check", dialog);
+                            var onMarketPlace = $onMarketPlace.prop("checked");
+                            var chainId = $("select[name=chain]", dialog).val();
+                            var currencySymbol = $("select[name=currency]", dialog).val();
+                            var chain = NFT.chains[chainId];
+                            var currency = {};
+                            Q.each(NFT.currencies, function (i, c) {
+                                if (c.symbol !== currencySymbol) {
+                                    return;
                                 }
+
+                                currency = c;
+                                currency.token = c[chainId];
                             });
-                        };
 
-                        if (onMarketPlace) {
-                            // create token for NFT
-                            tool.createToken(price, currency, chain, royalty, onMarketPlace, function (err, tokenId, chainId) {
-                                if (err) {
-                                    return $(dialog).removeClass("Q_disabled");
+                            // method to create NFT stream after tokenId created
+                            var _reqCreateNFT = function (params) {
+                                var tokenId = Q.getObject("tokenId", params);
+                                var chainId = Q.getObject("chainId", params);
+                                var attributes = Q.extend({
+                                    onMarketPlace: onMarketPlace,
+                                    currency: $("select[name=currency] option:selected", dialog).text(),
+                                    price: price
+                                }, params);
+                                if (tokenId) {
+                                    attributes.tokenId = tokenId;
+                                }
+                                if (chainId) {
+                                    attributes.chainId = chainId;
                                 }
 
-                                Q.Dialogs.pop();
+                                // after token created, create NFT stream (actually update composer stream and change relation from "new" to "NFT")
+                                // and set tokenId, chainId, currency, royalty in attributes
+                                Q.req("Assets/NFT",function (err) {
+                                    Q.Dialogs.pop();
 
-                                // now, when tokenId create, create NFT stream
-                                _reqCreateNFT({
-                                    "tokenId": tokenId,
-                                    "chainId": chainId
+                                    Q.Tool.remove(tool.element, true, false);
+                                    tool.element.className = "";
+                                    tool.element.innerHTML = "";
+
+                                    $toolElement.tool("Assets/NFT/preview", {
+                                        tokenId: tokenId,
+                                        chainId: chainId
+                                    }).activate();
+
+                                    Q.handle(state.onCreated, tool, [tokenId, chainId]);
+                                }, {
+                                    method: "post",
+                                    fields: {
+                                        userId: previewState.publisherId,
+                                        title: $("input[name=title]", dialog).val(),
+                                        content: $("input[name=description]", dialog).val(),
+                                        attributes: attributes
+                                    }
                                 });
-                            });
-                        } else {
-                            _reqCreateNFT();
-                            Q.Dialogs.pop();
-                        }
-                    });
-                }
+                            };
+
+                            if (onMarketPlace) {
+                                // create token for NFT
+                                tool.createToken(price, currency, chain, royalty, onMarketPlace, function (err, tokenId, chainId) {
+                                    if (err) {
+                                        return $(dialog).removeClass("Q_disabled");
+                                    }
+
+                                    Q.Dialogs.pop();
+
+                                    // now, when tokenId create, create NFT stream
+                                    _reqCreateNFT({
+                                        "tokenId": tokenId,
+                                        "chainId": chainId
+                                    });
+                                });
+                            } else {
+                                _reqCreateNFT();
+                                Q.Dialogs.pop();
+                            }
+                        });
+                    }
+                });
             });
         },
         /**
@@ -799,16 +765,13 @@
             <div class="Assets_nft_form_group">
                 <label>{{NFT.NftMovie}}:</label>
                 <div class="Assets_nft_picture">
-                    <input name="museVideoId" placeholder="muse video id"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
-                    <input name="movieURL" placeholder="{{NFT.MovieSource}}">
+                    <input name="movieURL" placeholder="{{NFT.MovieURL}}"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
                     <div class="Assets_nft_movie"></div>
                 </div>
             </div>
             <div class="Assets_nft_form_group Assets_nft_form_market">
                 <div class="Assets_nft_market">
-                    <div>
-                        <label>{{NFT.PutOnMarketplace}} :</label>
-                    </div>
+                    <div><label>{{NFT.PutOnMarketplace}} :</label></div>
                     <label class="switch">
                         <input type="checkbox" {{#if onMarketPlace}}checked{{/if}} class="Assets_nft_check">
                         <span class="slider round"></span>
