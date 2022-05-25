@@ -137,7 +137,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	if (gallery = $this.data('gallery')) {
 		gallery.pause();
 		$this.empty();
-		if (options === null) {
+		if (o === null) {
 			return false;
 		}
 	}
