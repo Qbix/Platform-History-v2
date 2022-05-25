@@ -275,9 +275,9 @@
 	margin: 0 auto;
 	display: block;
 	padding: 6px;
-	margin-left: 35px;
+	margin-left: 45px;
 	height: 40px;
-	width: calc(100% - 35px);
+	width: calc(100% - 45px);
 	color: black;
 	padding-right: 40px;
 }
@@ -286,12 +286,12 @@
 .Streams_chat_composer .Streams_calls_tool {
 	cursor: pointer;
 	position: absolute;
-	right: 1px;
-	top: 2px;
+	right: 2px;
+	top: 3px;
 	background-size: contain;
 	background-repeat: no-repeat;
-	width: 27px;
-	height: 27px;
+	width: 35px;
+	height: 35px;
 	border: none;
 	margin: 0;
 	padding: 0;
