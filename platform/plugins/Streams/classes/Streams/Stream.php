@@ -2237,7 +2237,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 */
 	function isCustomIcon ()
 	{
-		return strpos(Q::ifset($this, 'icon', null), 'uploads/Streams') !== false;
+		return strpos(Q::ifset($this, 'icon', ''), 'uploads/Streams') !== false;
 	}
 
 	/* * * */
