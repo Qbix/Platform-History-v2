@@ -337,14 +337,3 @@
     font-weight: bold;
 }
 /***create nft form css ends here***/
-
-@media screen and (max-width: 721px) and (min-width: 500px) {
-    .Assets_NFT_series_preview_tool {
-        display: inline-block;
-        vertical-align: top;
-        max-width: 240px;
-        min-height: 440px;
-        width: 100%;
-        margin-right: 0.8%;
-    }
-}
