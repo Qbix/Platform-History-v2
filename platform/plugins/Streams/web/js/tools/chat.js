@@ -72,14 +72,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}
 	}
 
-	Q.Text.get('Streams/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			console.warn(msg);
-		}
-
-		tool.text = text.chat;
-
+	var pipe = new Q.Pipe(["text", "styles"], function () {
 		tool.refresh(function () {
 			if (state.scrollToBottom) {
 				tool.scrollToBottom();
@@ -90,6 +83,16 @@ Q.Tool.define('Streams/chat', function(options) {
 				state.stream.refresh(null, {messages: true});
 			}
 		}, tool);
+	});
+	Q.addStylesheet('{{Streams}}/css/tools/chat.css', pipe.fill("styles"));
+	Q.Text.get('Streams/content', function (err, text) {
+		var msg = Q.firstErrorMessage(err);
+		if (msg) {
+			console.warn(msg);
+		}
+
+		tool.text = text.chat;
+		pipe.fill("text")();
 	});
 
 	// close chat button handler
@@ -122,8 +125,6 @@ Q.Tool.define('Streams/chat', function(options) {
 
 		return false;
 	});
-
-	Q.addStylesheet('{{Streams}}/css/tools/chat.css');
 },
 
 {
