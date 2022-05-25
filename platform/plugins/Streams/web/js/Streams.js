@@ -6513,6 +6513,8 @@ function _updateMessageTotalsCache(msg) {
 			} else if (Q.isPlainObject[result] && (type in result)) {
 				++result[type];
 			}
+		}, {
+			evenIfNoIndex: true
 		});
 }
 
