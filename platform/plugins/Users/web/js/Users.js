@@ -4030,8 +4030,9 @@
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getSelectedXid: function () {
-			var result = Q.getObject('Q.Users.Web3.provider.selectedAddress')
-			|| (window.ethereum && ethereum.selectedAddress);
+			var result, provider
+			provider = Q.Users.Web3.provider || window.ethereum;
+			result = provider.selectedAddress || provider.accounts[0];
 			if (result) {
 				return result;
 			}
@@ -4067,9 +4068,9 @@
 			}
 			return new Q.Promise(function (resolve, reject) {
 				if (window.ethereum
-				&& ethereum.chainId === Q.getObject([
+				&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
 					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
-				])) {
+				]))) {
 					_continue(ethereum);
 				} else {
 					Q.Users.Web3.connect(function (err, provider) {
