@@ -1133,6 +1133,9 @@ Q.Cache = function  _Q_Cache(options) {
 		};
 	}
 };
+function Q_Cache_index_name(parameterCount) {
+	return 'index' + parameterCount + 'parameters';
+}
 /**
  * Generates the key under which things will be stored in a cache
  * @static
@@ -1201,10 +1204,14 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 		this.remove(this.earliest);
 	}
 	if (parameters) {
-		// add to index for Cache.prototype.each
-		var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
-		this.special[localStorageIndexInfoKey] = true;
-		for (var i=1, l=parameters.length; i<l; ++i) {
+		for (var i=1, l=parameters.length; i<=l; ++i) {
+			// add to index for Cache.prototype.each
+			this.special[Q_Cache_index_name(i)] = true;
+
+			if (i===l) {
+				break;
+			}
+
 			// key in the index
 			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
 			var obj = this.special[k] || {};
@@ -1212,7 +1219,7 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 			this.special[k] = obj;
 		}
 	}
-	return existing ? true : false;
+	return !!existing;
 };
 /**
  * Accesses the cache and gets an entry from it
@@ -1315,7 +1322,7 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 		var key = 'index:' + rawKey; // key in the index
 		var localStorageKeys = this.special[key] || {};
 		for (var k in localStorageKeys) {
-			callback.call(this, k, localStorageKeys[k]);
+			callback.call(this, k, this.get(k));
 		}
 		// also the key itself
 		var item = this.special[rawKey];
