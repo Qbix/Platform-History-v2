@@ -5769,10 +5769,14 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	}
 
 	if (parameters) {
-		// add to index for Cp.each
-		var localStorageIndexInfoKey = Q_Cache_index_name(parameters.length);
-		Q_Cache_set(this, localStorageIndexInfoKey, true, true);
-		for (var i=1, l=parameters.length; i<l; ++i) {
+		for (var i=1, l=parameters.length; i<=l; ++i) {
+			// add to index for Cp.each
+			Q_Cache_set(this, Q_Cache_index_name(i), true, true);
+
+			if (i===l) {
+				break;
+			}
+
 			// key in the index
 			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
 			var obj = Q_Cache_get(this, k, true) || {};
@@ -5781,7 +5785,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		}
 	}
 
-	return existing ? true : false;
+	return !!existing;
 };
 /**
  * Accesses the cache and gets an entry from it
@@ -5904,7 +5908,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 		var key = 'index:' + rawKey; // key in the index
 		var localStorageKeys = Q_Cache_get(this, key, true) || {};
 		for (var k in localStorageKeys) {
-			callback.call(this, k, localStorageKeys[k]);
+			callback.call(this, k, Q_Cache_get(this, k));
 		}
 		// also the key itself
 		var item = Q_Cache_get(this, rawKey);
