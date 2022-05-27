@@ -6216,9 +6216,17 @@ Q.onInit.add(function _Streams_onInit() {
 			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
-			var streamCached = Streams.get.cache.get([msg.publisherId, msg.streamName]);
-			Q.setObject("subject.fields.messageCount", parseInt(msg.ordinal), streamCached);
-			Streams.get.cache.set([msg.publisherId, msg.streamName], streamCached.cbpos, streamCached.subject, streamCached.params);
+
+			// update fields.messageCount of cached stream
+			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
+				if (!cached) {
+					return;
+				}
+
+				Q.setObject("subject.fields.messageCount", parseInt(msg.ordinal), cached);
+				Streams.get.cache.set([msg.publisherId, msg.streamName], cached.cbpos, cached.subject, cached.params);
+			});
+
 			Streams.get(msg.publisherId, msg.streamName, function (err) {
 				if (err) {
 					console.warn(Q.firstErrorMessage(err));
