@@ -5712,10 +5712,10 @@ Q.Cache.key = function _Cache_key(args, functions) {
 				functions.push(args[i]);
 			}
 		}
-	} else {
-		keys = args;
+		return JSON.stringify(keys);
 	}
-	return JSON.stringify(keys);
+
+	return args;
 };
 
 var Cp = Q.Cache.prototype;
@@ -5773,14 +5773,10 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 			// add to index for Cp.each
 			Q_Cache_set(this, Q_Cache_index_name(i), true, true);
 
-			if (i===l) {
-				break;
-			}
-
 			// key in the index
 			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
 			var obj = Q_Cache_get(this, k, true) || {};
-			obj[key] = 1;
+			obj[key] = Q_Cache_get(this, key);
 			Q_Cache_set(this, k, obj, true);
 		}
 	}
@@ -5902,7 +5898,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 		return;
 	}
 	options = options || {};
-	var localStorageIndexInfoKey = Q_Cache_index_name(args.length);
+	/*var localStorageIndexInfoKey = Q_Cache_index_name(args.length);
 	if (Q_Cache_get(this, localStorageIndexInfoKey, true)) {
 		var rawKey = Q.Cache.key(args);
 		var key = 'index:' + rawKey; // key in the index
@@ -5920,7 +5916,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 	// key doesn't exist
 	if (!options.evenIfNoIndex) {
 		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
-	}
+	}*/
 	var prefix = null;
 	if (typeof args === 'function') {
 		callback = args;
