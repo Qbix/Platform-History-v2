@@ -254,7 +254,7 @@
             var previewState = this.preview.state;
             var isNew = $toolElement.hasClass("Streams_preview_composer");
 
-            Streams.get.force(previewState.publisherId, previewState.streamName, function () {
+            Streams.get(previewState.publisherId, previewState.streamName, function () {
                 tool.stream = this;
 
                 Q.Dialogs.push({
