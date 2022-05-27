@@ -6182,6 +6182,8 @@ Q.onInit.add(function _Streams_onInit() {
 				console.warn(Q.firstErrorMessage(err));
 				return;
 			}
+
+			var stream = this;
 			var streamType = stream.fields.type;
 			var params = [stream, payload, 'ephemeral', latest];
 			var event = Streams.onEphemeral(streamType, payload.type);
