@@ -656,6 +656,7 @@ EOT;
 		$app_web_plugins_dir = APP_WEB_DIR.DS.'Q'.DS.'plugins';
 		$app_web_text_dir = APP_WEB_DIR.DS.'Q'.DS.'text';
 		$app_text_plugin_dir = APP_TEXT_DIR.DS.$plugin_name;
+		$app_web_text_plugin_dir = APP_WEB_DIR.DS.'Q'.DS.'text'.DS.$plugin_name;
 
 		/**
 		 * @event Q/Plugin/install {before}
@@ -749,11 +750,19 @@ EOT;
 			echo '  '.$p.PHP_EOL;
 			Q_Utils::symlink($plugin_dir.DS.'web', $p);
 		}
-
-		if (!file_exists($app_text_plugin_dir) and file_exists($plugin_text_dir)) {
+		
+		if (!file_exists($app_text_plugin_dir)
+		and file_exists($plugin_text_dir)) {
 			$p = $app_text_plugin_dir;
 			echo '  '.$p.PHP_EOL;
-			Q_Utils::symlink($plugin_text_dir, $app_text_plugin_dir);
+			Q_Utils::symlink($plugin_text_dir, $p);
+		}
+
+		if (!file_exists($app_web_text_plugin_dir)
+		and file_exists($app_text_plugin_dir)) {
+			$p = $app_web_text_plugin_dir;
+			echo '  '.$p.PHP_EOL;
+			Q_Utils::symlink($app_text_plugin_dir, $p);
 		}
 
 		//  Checking if schema update is requested and updating database version
