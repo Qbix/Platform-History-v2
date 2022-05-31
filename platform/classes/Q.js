@@ -694,7 +694,7 @@ Q.getter = function _Q_getter(original, options) {
 
 		// if caching is required check the cache -- maybe the result is there
 		if (gw.cache && !ignoreCache) {
-			if (cached = gw.cache.get(key)) {
+			if (cached = gw.cache.get(arguments2)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
 					_prepare(cached.subject, cached.params, callbacks[cbpos], ret, true);
@@ -734,7 +734,7 @@ Q.getter = function _Q_getter(original, options) {
 
 					// save the results in the cache
 					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(key, cbpos, this, arguments);
+						gw.cache.set(arguments2, cbpos, this, arguments);
 					}
 
 					// process waiting callbacks
@@ -846,9 +846,8 @@ Q.getter = function _Q_getter(original, options) {
 	}
 
 	gw.forget = function _forget() {
-		var key = Q.Cache.key(arguments);
-		if (key && gw.cache) {
-			return gw.cache.remove(key);
+		if (gw.cache) {
+			return gw.cache.remove(arguments);
 		}
 	};
 	
@@ -1163,7 +1162,7 @@ Q.Cache.key = function _Cache_key(args, functions) {
 /**
  * Accesses the cache and sets an entry in it
  * @method set
- * @param {String} key  the key to save the entry under, or an array of arguments
+ * @param {String|Array} key  the key to save the entry under, or an array of arguments
  * @param {number} cbpos the position of the callback
  * @param {Object} subject The "this" object for the callback
  * @param {Array} params The parameters for the callback
@@ -1174,7 +1173,7 @@ Q.Cache.key = function _Cache_key(args, functions) {
 Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	var parameters = (typeof key !== 'string' ? key : null);
 	if (parameters) {
-		key = Q.Cache.key(key);
+		key = Q.Cache.key(parameters);
 	}
 	var existing = this.data[key], previous;
 	if (!options || !options.dontTouch) {
@@ -1254,7 +1253,7 @@ Q.Cache.prototype.get = function _Q_Cache_prototype_get(key, options) {
 /**
  * Accesses the cache and removes an entry from it.
  * @method remove
- * @param {String} key the key of the entry to remove
+ * @param {String|Array} key the key of the entry to remove
  * @return {Boolean} whether there was an existing entry under that key
  */
 Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
