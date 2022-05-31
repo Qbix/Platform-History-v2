@@ -1,14 +1,15 @@
+.Assets_NFT_series_tool .relatedToolBox {
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-x: auto;
+}
 .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool {
     display: inline-block;
     width: auto;
-    margin-left: 10px;
+    margin-left: 1%;
 }
 .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool:first-of-type {
     margin-left: 0;
-}
-.Q_mobile .Assets_NFT_series_tool .relatedToolBox .Streams_preview_tool {
-    width: 100%;
-    margin: 0;
 }
 .Q_notMobile .Assets_NFT_series_tool .relatedToolBox[data-seriesSelected=true] .Streams_preview_tool {
     border-bottom-left-radius: 0;
