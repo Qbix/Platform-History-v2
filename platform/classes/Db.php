@@ -551,6 +551,11 @@ abstract class Db
 		if (isset(self::$dbs[$conn_name]) and self::$dbs[$conn_name] instanceof Db_Interface) {
 			return self::$dbs[$conn_name];
 		}
+		if (empty($conn_info['dsn'])) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Db/connections/$conn_name/dsn"
+			));
+		}
 		$dsn_array = Db::parseDsnString($conn_info['dsn']);
 		$class_name = 'Db_' . ucfirst($dsn_array['dbms']);
 		if (!class_exists($class_name)) {
