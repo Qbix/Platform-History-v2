@@ -1147,16 +1147,17 @@ function Q_Cache_index_name(parameterCount) {
 Q.Cache.key = function _Cache_key(args, functions) {
 	var i, keys = [];
 	if (Q.isArrayLike(args)) {
-		for (i=0; i<args.length; ++i) {
-			if (typeof args[i] !== 'function') {
-				keys.push(args[i]);
-			} else if (functions && functions.push) {
-				functions.push(args[i]);
-			}
-		}
-	} else {
-		keys = args;
+		return args;
 	}
+
+	for (i=0; i<args.length; ++i) {
+		if (typeof args[i] !== 'function') {
+			keys.push(args[i]);
+		} else if (functions && functions.push) {
+			functions.push(args[i]);
+		}
+	}
+
 	return JSON.stringify(keys);
 };
 /**
