@@ -5697,24 +5697,24 @@ function Q_Cache_pluck(cache, existing) {
  * Generates the key under which things will be stored in a cache
  * @static
  * @method key
- * @param  {Array} args the arguments from which to generate the key
+ * @param  {Array|String} args the arguments from which to generate the key
  * @param {Array} functions  optional array to which all the functions found in the arguments will be pushed
  * @return {String}
  */
 Q.Cache.key = function _Cache_key(args, functions) {
 	var i, keys = [];
-	if (Q.isArrayLike(args)) {
-		for (i=0; i<args.length; ++i) {
-			if (typeof args[i] !== 'function') {
-				keys.push(args[i]);
-			} else if (functions && functions.push) {
-				functions.push(args[i]);
-			}
-		}
-		return JSON.stringify(keys);
+	if (!Q.isArrayLike(args)) {
+		return args;
 	}
 
-	return args;
+	for (i=0; i<args.length; ++i) {
+		if (typeof args[i] !== 'function') {
+			keys.push(args[i]);
+		} else if (functions && functions.push) {
+			functions.push(args[i]);
+		}
+	}
+	return JSON.stringify(keys);
 };
 
 var Cp = Q.Cache.prototype;
