@@ -491,7 +491,6 @@ Streams.listen = function (options, servers) {
 		});
 		client.on('Streams/ephemeral',
 		function (clientId, capability, payload, dontNotifyObservers, fn) {
-			var now = Date.now() / 1000;
 			if (!payload || !payload.publisherId || !payload.streamName || !payload.type) {
 				return fn && fn("Payload must have publisherId and streamName and type set");
 			}
