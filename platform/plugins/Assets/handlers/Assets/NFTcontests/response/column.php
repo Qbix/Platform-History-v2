@@ -10,6 +10,7 @@ function Assets_NFTcontests_response_column () {
 	Q_Response::addScript("{{Assets}}/js/columns/NFTcontests.js");
 	Q_Response::addStylesheet("{{Assets}}/css/columns/NFTcontests.css");
 
+	$communityId = Users::communityId();
 	$text = Q_Text::get("Assets/content");
 	$title = Q::ifset($text, "NFT", "contests", "Title", null);
 	$description = Q::ifset($text, "NFT", "contests", "Description", null);
@@ -34,7 +35,7 @@ function Assets_NFTcontests_response_column () {
 		array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary')
 	));
 
-	$column = Q::view('Assets/column/NFTcontests.php', @compact("loggedInUserId"));
+	$column = Q::view('Assets/column/NFTcontests.php', @compact("loggedInUserId", "communityId"));
 
 	$url = Q_Uri::url("Assets/NFTcontests");
 	$columnsStyle = Q_Config::get('Communities', 'layout', 'columns', 'style', 'classic');
