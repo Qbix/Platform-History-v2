@@ -5,6 +5,9 @@
  * @class Users
  */
 "use strict";
+
+const { pipe } = require("../../Q/js/Q");
+
 /* jshint -W014 */
 (function (Q, $) {
 
@@ -633,21 +636,33 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var xid2;
-			if (xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users)) {
-				content_div.append(_usingInformation(xid2, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			} else {
-				caption = Q.text.Users.prompt.doAuth.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
+			var xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users);
+			var queries = ['me'];
+			if (xid2) {
+				queries.push('xid');
 			}
-			content_div.append(_usingInformation(xid, areUsing))
-				.append(_authenticateActions(caption));
+			var pipe = new pipe(queries, function (params, subjects) {
+				var meName = Q.getObject(['me', 0, 'name'], params);
+				var mePicture = Q.getObject(['me', 0, 'picture', 'data', 'url'], params);
+				var xidName = Q.getObject(['xid', 0, 'name'], params);
+				var xidPicture = Q.getObject(['xid', 0, 'picture', 'data', 'url'], params);
+				if (xidName) {
+					content_div.append(_usingInformation(xidPicture, xidName, noLongerUsing));
+					caption = Q.text.Users.prompt.doSwitch.interpolate({
+						'platform': platform,
+						'Platform': platformCapitalized
+					});
+				} else {
+					caption = Q.text.Users.prompt.doAuth.interpolate({
+						'platform': platform,
+						'Platform': platformCapitalized
+					});
+				}
+				content_div.append(_usingInformation(mePicture, meName, areUsing))
+					.append(_authenticateActions(caption));
+			});
+			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
+			FB.api("/"+xid2+"?fields=name,pipicture.width(50).height(50)cture", pipe.fill('xid'));
 
 			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
 			var titleSlot = $('<div class="Q_title_slot" />');
@@ -676,17 +691,17 @@
 			}
 		});
 
-		function _usingInformation(xid, explanation) {
+		function _usingInformation(icon, name, explanation) {
 			return $("<table />").append(
 				$("<tr />").append(
-					$("<td class='Users_profile_pic' />").html(
-						"<fb:profile-pic uid='" + xid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
+					$("<td class='Users_profile_pic' />").append(
+						$('<img />', {src: icon})
 					)
 				).append(
 					$("<td class='Users_explanation_name' />").append(
 						$("<div class='Users_explanation' />").html(explanation)
 					).append(
-						"<fb:name xid='" + xid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + xid + "</fb:name>"
+						name
 					)
 				)
 			);
