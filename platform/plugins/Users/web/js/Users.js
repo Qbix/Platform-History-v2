@@ -615,40 +615,6 @@
 		var platformCapitalized = platform.toCapitalized();
 
 		if (!Users.prompt.overlay) {
-			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'), {slotName: 'Users'});
-			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var caption;
-			var tookAction = false;
-
-			var content_div = $('<div />');
-			var xid;
-			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
-				content_div.append(_usingInformation(xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			} else {
-				caption = Q.text.Users.prompt.doAuth.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			}
-		}
-
-		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
 			var title = Q.text.Users.prompt.title.interpolate({
@@ -667,9 +633,9 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var xid;
-			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
-				content_div.append(_usingInformation(xid, noLongerUsing));
+			var xid2;
+			if (xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users)) {
+				content_div.append(_usingInformation(xid2, noLongerUsing));
 				caption = Q.text.Users.prompt.doSwitch.interpolate({
 					'platform': platform,
 					'Platform': platformCapitalized
