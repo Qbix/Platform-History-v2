@@ -6,8 +6,6 @@
  */
 "use strict";
 
-const { pipe } = require("../../Q/js/Q");
-
 /* jshint -W014 */
 (function (Q, $) {
 
@@ -641,7 +639,7 @@ const { pipe } = require("../../Q/js/Q");
 			if (xid2) {
 				queries.push('xid');
 			}
-			var pipe = new pipe(queries, function (params, subjects) {
+			var pipe = new Q.Pipe(queries, function (params, subjects) {
 				var meName = Q.getObject(['me', 0, 'name'], params);
 				var mePicture = Q.getObject(['me', 0, 'picture', 'data', 'url'], params);
 				var xidName = Q.getObject(['xid', 0, 'name'], params);
