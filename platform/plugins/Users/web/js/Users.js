@@ -636,8 +636,10 @@
 			var content_div = $('<div />');
 			var xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users);
 			var queries = ['me'];
+			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
 			if (xid2) {
-				queries.push('xid');
+				queries.push('xid')
+				FB.api("/"+xid2+"?fields=name,picture.width(50).height(50)", pipe.fill('xid'));;
 			}
 			var pipe = new Q.Pipe(queries, function (params, subjects) {
 				var meName = Q.getObject(['me', 0, 'name'], params);
@@ -659,8 +661,6 @@
 				content_div.append(_usingInformation(mePicture, meName, areUsing))
 					.append(_authenticateActions(caption));
 			});
-			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
-			FB.api("/"+xid2+"?fields=name,pipicture.width(50).height(50)cture", pipe.fill('xid'));
 
 			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
 			var titleSlot = $('<div class="Q_title_slot" />');
