@@ -269,10 +269,14 @@ class Users_Web3 extends Base_Users_Web3 {
 		$filename = implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
 
 		if (!is_file($filename)) {
-			if ($throwIfNotFound) {
-				throw new Q_Exception_MissingFile(compact('filename'));
-			} else {
-				return null;
+			$filename = implode(DS, [APP_WEB_DIR, "ABI", "userNFTContractTemplate.json"]);
+
+			if (!is_file($filename)) {
+				if ($throwIfNotFound) {
+					throw new Q_Exception_MissingFile(compact('filename'));
+				} else {
+					return null;
+				}
 			}
 		}
 
