@@ -160,9 +160,6 @@
     vertical-align: middle;
     cursor: pointer;
 }
-.Assets_NFT_preview_composer .Assets_nft[data-minted=false] .Assets_nft_form_market {
-    display: none;
-}
 .Assets_NFT_preview_composer .Assets_nft_form_control {
     background: transparent;
     color: rgba(4, 4, 5, 0.8);
@@ -437,6 +434,7 @@
     align-items: start;
     border-bottom: solid 1px #414141;
     padding-bottom: 5px;
+    height: 56px;
 }
 
 .Assets_NFT_preview_tool ul.online-c {
@@ -737,7 +735,7 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 .Assets_NFT_preview_tool .Assets_NFT_participants .Streams_participants_container {
     margin-right: 0;
 }
-.Assets_NFT_preview_tool .Streams_inplace_tool {
+.Assets_NFT_preview_tool .Assets_NFT_title {
     display: flex;
     align-items: center;
     justify-content: center;
