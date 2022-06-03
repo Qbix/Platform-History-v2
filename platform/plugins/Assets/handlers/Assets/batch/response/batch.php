@@ -40,7 +40,8 @@ function Assets_batch_response_batch () {
 					$params = array(
 						'tokenId' => $args[2],
 						'chainId' => $args[3],
-						'updateCache' => (bool)$args[4]
+						'contractAddress' => $args[4],
+						'updateCache' => (bool)$args[5]
 					);
 				}
 
