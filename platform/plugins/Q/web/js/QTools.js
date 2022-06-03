@@ -702,7 +702,7 @@
 				else if (info.coords.x + contextual.outerWidth() + 5 > $body.width())
 				{
 					x = $body.width() - contextual.outerWidth() - 10;
-					arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - x);
+					arrowLeft = (leftOffset + info.coords.x - x);
 					arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
 					arrow.css({ 'left': arrowLeft + 'px' });
 				}
