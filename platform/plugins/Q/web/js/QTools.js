@@ -569,14 +569,6 @@
 					var listing = scrollerWrapper.children('.Q_listing');
 					if (info.inBottomHalf && listing.height() > listingWrapperHeight)
 						scrollTop = listingWrapperHeight - listing.height();
-					if (Q.info.platform === 'android')
-					{
-						scrollerWrapper.plugin('Q/touchscroll', { 'y': scrollTop });
-					}
-					else
-					{
-						scrollerWrapper.plugin('Q/iScroll', { 'y': scrollTop });
-					}
 				}
 				info.curScroll = scrollerWrapper.data('Q/iScroll') ? 'iScroll' : 'touchscroll';
 			
@@ -775,9 +767,6 @@
 			var listingWrapper = contextual.children('.Q_listing_wrapper');
 			listingWrapper.plugin('Q/scroller', 'remove');
 			listingWrapper.plugin('Q/iScroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
-			listingWrapper.plugin('Q/touchscroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
 			if (Q.Contextual.fadeTime > 0) {

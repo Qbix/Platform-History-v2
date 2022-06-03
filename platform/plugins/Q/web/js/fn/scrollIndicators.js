@@ -299,8 +299,6 @@
                             }
                         }
                     }
-                    $(o.scroller).plugin('Q/touchscroll', 'bind', 'onScrollMove', updateTouchscroll);
-                    $(o.scroller).plugin('Q/touchscroll', 'bind', 'onScrollEnd', updateTouchscroll);
                     updateTouchscroll(o.scroller);
                     $this.data('Q_scroll_indicator_update', updateTouchscroll);
                 }
