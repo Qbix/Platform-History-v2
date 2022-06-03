@@ -40,7 +40,7 @@
 		"web": {
 			"ignoreUserAbort": true,
 			"requireValidNonce": [],
-			"statusBarOverlapped": true
+			"statusBarOverlapped": false
 		},
 		"response": {
 			"isBuffered": true,

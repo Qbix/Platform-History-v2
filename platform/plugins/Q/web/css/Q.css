@@ -319,7 +319,7 @@ body.Q_preventScroll {
 	white-space: nowrap;
 	border-width:1px; font-size:1em; padding: 1px 5px 1px 5px; color: #fff; cursor:pointer; border-radius: 0.3em;
 	border-radius: 0.3em; border-color: rgba(200,2050,200,50.5); border-bottom-color: rgba(0,50,200,50.2); border-right-color: rgba(0,50,200,50.2);
-	box-sizing: content-box;
+	box-sizing: border-box;
 	
 	box-shadow: 0 0 1px rgba(50,50,50,0.5); 
 	background: #444; /* for non-css3 browsers */
