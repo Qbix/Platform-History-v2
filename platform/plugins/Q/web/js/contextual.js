@@ -543,14 +543,7 @@
 					var listing = scrollerWrapper.children('.Q_listing');
 					if (info.inBottomHalf && listing.height() > listingWrapperHeight)
 						scrollTop = listingWrapperHeight - listing.height();
-					if (Q.info.platform === 'android')
-					{
-						scrollerWrapper.plugin('Q/touchscroll', { 'y': scrollTop });
-					}
-					else
-					{
-						scrollerWrapper.plugin('Q/iScroll', { 'y': scrollTop });
-					}
+					// scrollerWrapper.plugin('Q/iScroll', { 'y': scrollTop });
 				}
 				info.curScroll = scrollerWrapper.data('Q/iScroll') ? 'iScroll' : 'touchscroll';
 			
