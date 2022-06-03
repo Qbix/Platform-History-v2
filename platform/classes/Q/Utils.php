@@ -1598,7 +1598,7 @@ class Q_Utils
 			if ($item == '.' || $item == '..') {
 				continue;
 			}
-			if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+			if (!self::rmdir($dir . DIRECTORY_SEPARATOR . $item)) {
 				return false;
 			}
 		}
