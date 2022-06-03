@@ -14027,7 +14027,6 @@ Q.onJQuery.add(function ($) {
 		"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
 		"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
 		"Q/scroller": "{{Q}}/js/fn/scroller.js",
-		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
 		"Q/validator": "{{Q}}/js/fn/validator.js"
