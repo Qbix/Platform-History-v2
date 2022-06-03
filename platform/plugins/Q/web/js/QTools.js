@@ -469,9 +469,8 @@
 
 					// if it was mouseup / touchend on the triggering element, then use it to switch to iScroll instead of $.fn.scroller
 					if (info.curScroll !== 'iScroll' && info.curScroll !== 'touchscroll' &&
-							px >= offset.left && px <= offset.left + trigger.outerWidth() &&
-							py >= offset.top && py <= offset.top + trigger.outerHeight())
-					{
+						trigger[0] === document.elementFromPoint(event.clientX, event.clientY)
+					) {
 						Q.Contextual.toDismiss ?  Q.Contextual.hide() : Q.Contextual.applyScrolling();
 					}
 					else
