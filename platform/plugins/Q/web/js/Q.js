@@ -11965,10 +11965,6 @@ Q.Pointer = {
 				? oe.changedTouches[touchIndex]
 				: oe
 			);
-		var x = Q.getObject(['touches', 0, 'pageX'], oe);
-		if (x !== undefined) {
-			return x;
-		}
 		return Math.max(0, ('pageX' in oe) ? oe.pageX : oe.clientX + Q.Pointer.scrollLeft());
 	},
 	/**
@@ -11988,10 +11984,6 @@ Q.Pointer = {
 				? oe.changedTouches[touchIndex]
 				: oe
 			);
-		var y = Q.getObject(['touches', 0, 'pageY'], oe);
-		if (y !== undefined) {
-			return y;
-		}
 		return Math.max(0, ('pageY' in oe) ? oe.pageY : oe.clientY + Q.Pointer.scrollTop());
 	},
 	/**
