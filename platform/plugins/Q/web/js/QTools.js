@@ -695,7 +695,7 @@
 				if (info.coords.x < 5)
 				{
 					x = 5;
-					arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - 10);
+					arrowLeft = (leftOffset + info.coords.x - 10);
 					arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
 					arrow.css({ 'left': arrowLeft + 'px' });
 				}
