@@ -278,18 +278,30 @@ class Assets_NFT
 	 * Fetch meta data by URL
 	 * @method fetchMetadata
 	 * @param {String} $tokenURI
+	 * @param {boolean} [$caching=true] - Set false if skip cached value and remote request
+	 * @param {Number} [$cacheDuration=31536000] - use this cache duration when request cache (default 1 year)
 	 * @static
 	 * @return string
 	 */
-	static function fetchMetadata ($tokenURI) {
+	static function fetchMetadata ($tokenURI, $caching=true, $cacheDuration=31536000) {
 		if (!Q_Valid::url($tokenURI)) {
 			throw new Exception("invalid URL");
 		}
 
-		return Q_Utils::get($tokenURI, null, array(
+		$cache = Users_Web3::getCache("", "", "AssetsNFTfetchMetadata", $tokenURI, $cacheDuration);
+		if ($caching && $cache->wasRetrieved()) {
+			return Q::json_decode($cache->result, true);
+		}
+
+		$response = Q_Utils::get($tokenURI, null, array(
 			CURLOPT_SSL_VERIFYPEER => false,
 			CURLOPT_SSL_VERIFYHOST => false
 		));
+
+		$cache->result = $response;
+		$cache->save();
+
+		return $response;
 	}
 	/**
 	 * Clear cache related to contract
