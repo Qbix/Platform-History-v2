@@ -29,7 +29,7 @@ function Assets_NFT_response_owned ($params) {
 			$tokenURI = Users_Web3::execute($chain["contract"], "tokenURI", $tokenId, $chain["chainId"], true, $GLOBALS["Assets_NFT_response_owned"]["secondsInYear"]);
 
 			// try to request token URI, if response if not valid json - continue
-			$dataJson = Assets_NFT::getJson($chain["chainId"], $chain["contract"], $tokenURI);
+			$dataJson = Assets_NFT::metadata($chain["chainId"], $chain["contract"], $tokenURI);
 		} catch (Exception $e) {
 			return null;
 		}

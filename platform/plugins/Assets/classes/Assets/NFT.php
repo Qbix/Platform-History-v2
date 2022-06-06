@@ -253,7 +253,7 @@ class Assets_NFT
 
 	/**
 	 * Get NFT json data
-	 * @method getJson
+	 * @method metadata
 	 * @param {String} $chainId
 	 * @param {String} $contract
 	 * @param {String} $tokenURI
@@ -262,7 +262,7 @@ class Assets_NFT
 	 * @static
 	 * @return array
 	 */
-	static function getJson ($chainId, $contract, $tokenURI, $caching=true, $cacheDuration=31536000) {
+	static function metadata ($chainId, $contract, $tokenURI, $caching=true, $cacheDuration=31536000) {
 		$cache = Users_Web3::getCache($chainId, $contract, "getNFTJsonData", $tokenURI, $cacheDuration);
 		if ($caching && $cache->wasRetrieved()) {
 			return Q::json_decode($cache->result, true);
