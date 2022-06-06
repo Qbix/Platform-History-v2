@@ -3,7 +3,6 @@
      * @module Assets
      */
 
-    var Users = Q.Users;
     var Streams = Q.Streams;
     var Assets = Q.Assets;
     var Web3 = Assets.NFT.Web3;
