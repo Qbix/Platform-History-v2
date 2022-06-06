@@ -261,7 +261,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$abiUrl = Q::interpolate($abiUrl, compact("contractAddress"));
 
 		// check cache
-		$cache = self::getCache($chainId, $contractAddress, $methodName, array());
+		$cache = self::getCache($chainId, $contractAddress, $methodName, array($chainId, $contractAddress));
 		if ($caching && $cache->wasRetrieved()) {
 			return Q::json_decode($cache->result, true);
 		}
