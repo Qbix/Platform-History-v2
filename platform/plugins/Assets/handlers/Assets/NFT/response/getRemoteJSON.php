@@ -12,10 +12,7 @@ function Assets_NFT_response_getRemoteJSON ($params) {
 	if ($chainId && $contractAddress) {
 		$dataJson = Assets_NFT::getJson($chainId, $contractAddress, $tokenURI);
 	} else {
-		$dataJson = Q_Utils::get($tokenURI, null, array(
-			CURLOPT_SSL_VERIFYPEER => false,
-			CURLOPT_SSL_VERIFYHOST => false
-		));
+		$dataJson = Assets_NFT::fetchMetadata($tokenURI);
 	}
 
 	return $dataJson;

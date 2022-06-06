@@ -268,16 +268,29 @@ class Assets_NFT
 			return Q::json_decode($cache->result, true);
 		}
 
-		$response = Q_Utils::get($tokenURI, null, array(
-			CURLOPT_SSL_VERIFYPEER => false,
-			CURLOPT_SSL_VERIFYHOST => false
-		));
+		$response = self::fetchMetadata($tokenURI);
 		$cache->result = $response;
 		$cache->save();
 
 		return Q::json_decode($response, true);
 	}
+	/**
+	 * Fetch meta data by URL
+	 * @method fetchMetadata
+	 * @param {String} $tokenURI
+	 * @static
+	 * @return string
+	 */
+	static function fetchMetadata ($tokenURI) {
+		if (!Q_Valid::url($tokenURI)) {
+			throw new Exception("invalid URL");
+		}
 
+		return Q_Utils::get($tokenURI, null, array(
+			CURLOPT_SSL_VERIFYPEER => false,
+			CURLOPT_SSL_VERIFYHOST => false
+		));
+	}
 	/**
 	 * Clear cache related to contract
 	 * @method clearContractCache
