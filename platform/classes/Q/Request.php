@@ -441,6 +441,9 @@ class Q_Request
 			return $result;
 		}
 		$loadExtras = Q_Request::special('loadExtras', false);
+		if ($loadExtras === '1' or $loadExtras === 'true') {
+			$loadExtras = 'all';
+		}
 		if (!$loadExtras) {
 			if (!Q_Request::isAjax()) {
 				// SECURITY: Should load all types of extras, but make sure

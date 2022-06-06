@@ -130,7 +130,7 @@ function Q_form_tool($options)
 				$tr_rest = "<td class='Q_form_fieldinput' data-fieldname=\"$name_text\" $colspan>"
 					. ($extra ? "<div class='Q_form_label'>$label</div>" : '')
 					. Q_Html::smartTag($type, $attributes, $value, $o, $p)
-					. "</td></tr><tr><td class='Q_form_placeholder'>"
+					. "</td></tr><tr class='Q_form_undermessage'><td class='Q_form_placeholder'>"
 					. "</td><td class='Q_form_undermessage Q_form_textarea_undermessage' $colspan>"
 					. "<div class='Q_form_undermessagebubble'>$message</div></td>";
 				break;
@@ -142,7 +142,7 @@ function Q_form_tool($options)
 					. ($messages_td
 						? "<td class='Q_form_fieldmessage Q_form_{$type}_message'>$message</td>"
 						: '')
-					. "</tr><tr><td class='Q_form_placeholder'>"
+					. "</tr><tr class='Q_form_undermessage'><td class='Q_form_placeholder'>"
 					. "</td><td class='Q_form_undermessage Q_form_{$type}_undermessage' $colspan>"
 					. "<div class='Q_form_undermessagebubble'></div></td>";
 				break;

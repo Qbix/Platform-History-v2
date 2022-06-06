@@ -606,6 +606,15 @@ class Q_Plugin
 			self::installSchema($app_dir, $APP_NAME, 'app', $connection, $options);
 		}
 
+		$app_text_dir = $app_dir.DS.'text'.DS.$APP_NAME;
+		$app_text_dir = APP_TEXT_DIR.DS.$APP_NAME;
+		$app_web_text_app_dir = APP_WEB_DIR.DS.'Q'.DS.'text'.DS.$APP_NAME;
+		if (!file_exists($app_web_text_app_dir)
+		and file_exists($app_text_dir)) {
+			echo '  '.$app_web_text_app_dir.PHP_EOL;
+			Q_Utils::symlink($app_text_dir, $app_web_text_app_dir);
+		}
+
 		// Save info about app
 		echo 'Registering app'.PHP_EOL;
 		Q_Config::set('Q', 'appLocal', $APP_CONF);

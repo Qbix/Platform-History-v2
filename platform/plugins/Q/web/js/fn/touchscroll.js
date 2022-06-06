@@ -334,14 +334,7 @@ Q.Tool.jQuery('Q/touchscroll',
         },
 
         refresh: function (reserved1, reserved2) {
-            return this.each(function(index) {
-                var $this = $(this);
-                var o = $this.data('Q_touchscroll_options');
-                if (o) {
-                    $this.plugin('Q/touchscroll', 'remove')
-                        .plugin('Q/touchscroll', o);
-                }
-            });
+
         },
 
         remove: function (reserved1, reserved2) {

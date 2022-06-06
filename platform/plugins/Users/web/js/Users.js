@@ -5,6 +5,7 @@
  * @class Users
  */
 "use strict";
+
 /* jshint -W014 */
 (function (Q, $) {
 
@@ -615,40 +616,6 @@
 		var platformCapitalized = platform.toCapitalized();
 
 		if (!Users.prompt.overlay) {
-			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'), {slotName: 'Users'});
-			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var caption;
-			var tookAction = false;
-
-			var content_div = $('<div />');
-			var xid;
-			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
-				content_div.append(_usingInformation(xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			} else {
-				caption = Q.text.Users.prompt.doAuth.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			}
-		}
-
-		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
 			var title = Q.text.Users.prompt.title.interpolate({
@@ -667,21 +634,35 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var xid;
-			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
-				content_div.append(_usingInformation(xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			} else {
-				caption = Q.text.Users.prompt.doAuth.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
+			var xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users);
+			var queries = ['me'];
+			if (xid2) {
+				queries.push('xid')
 			}
-			content_div.append(_usingInformation(xid, areUsing))
-				.append(_authenticateActions(caption));
+			var pipe = new Q.Pipe(queries, function (params, subjects) {
+				var meName = Q.getObject(['me', 0, 'name'], params);
+				var mePicture = Q.getObject(['me', 0, 'picture', 'data', 'url'], params);
+				var xidName = Q.getObject(['xid', 0, 'name'], params);
+				var xidPicture = Q.getObject(['xid', 0, 'picture', 'data', 'url'], params);
+				if (xidName) {
+					content_div.append(_usingInformation(xidPicture, xidName, noLongerUsing));
+					caption = Q.text.Users.prompt.doSwitch.interpolate({
+						'platform': platform,
+						'Platform': platformCapitalized
+					});
+				} else {
+					caption = Q.text.Users.prompt.doAuth.interpolate({
+						'platform': platform,
+						'Platform': platformCapitalized
+					});
+				}
+				content_div.append(_usingInformation(mePicture, meName, areUsing))
+					.append(_authenticateActions(caption));
+			});
+			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
+			if (xid2) {
+				FB.api("/"+xid2+"?fields=name,picture.width(50).height(50)", pipe.fill('xid'));;
+			}
 
 			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
 			var titleSlot = $('<div class="Q_title_slot" />');
@@ -710,17 +691,17 @@
 			}
 		});
 
-		function _usingInformation(xid, explanation) {
+		function _usingInformation(icon, name, explanation) {
 			return $("<table />").append(
 				$("<tr />").append(
-					$("<td class='Users_profile_pic' />").html(
-						"<fb:profile-pic uid='" + xid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
+					$("<td class='Users_profile_pic' />").append(
+						$('<img />', {src: icon})
 					)
 				).append(
 					$("<td class='Users_explanation_name' />").append(
 						$("<div class='Users_explanation' />").html(explanation)
 					).append(
-						"<fb:name xid='" + xid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + xid + "</fb:name>"
+						name
 					)
 				)
 			);

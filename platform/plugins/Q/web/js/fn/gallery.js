@@ -22,7 +22,8 @@
  *   @param {String} [options.transition.type] type the type of transition. Can only be 'crossfade'
  *   @default 'crossfade'
  * @param {Object} [options.interval] interval object that contains properties for intervals
- *   @param {Number} [options.interval.duration] duration number of milliseconds between beginning times of consecutive transitions
+ *   @param {Number} [options.interval.duration] duration number of milliseconds between beginning times of consecutive transitions.
+ *      It's recommended to make this at least 2x the duration of the transitions!
  *   @param {String} [options.interval.ease] ease the type of easing function to apply from Q.Animation.ease object.
  *   @default 'smooth'
  *   @param {String} [options.interval.type] type is a what to do during this interval. Can be empty or 'kenburns'.
@@ -48,6 +49,7 @@
  */
 Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 	
+	o = o || {};
 	var $this = this, i, image, imgs=[], caps=[], current, tm, gallery;
 	var animTransition, animInterval, animPreviousInterval;
 	var intervals = {
@@ -160,7 +162,12 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 			return;
 		}
 		var image = o.images[index];
-		if (!image) return;
+		if (!image) {
+			image = {};
+		}
+		if (!image.src) {
+			image.src = Q.url('{{Q}}/img/throbbers/transparent.gif');
+		}
 		var img = $('<img />').attr({
 			alt: image.caption ? image.caption : 'image ' + index,
 			src: Q.url(image.src)
