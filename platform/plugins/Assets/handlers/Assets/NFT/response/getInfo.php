@@ -49,11 +49,7 @@ function Assets_NFT_response_getInfo ($params) {
 		$commissionInfo = Users_Web3::execute($contractAddress, "getCommission", $tokenId, $chainId, $caching, $longDuration);
 	}
 
-	// execute tokenURI if exists
-	if (Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
-		$tokenURI = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, $caching, $longDuration);
-		$metadata = Q::event('Assets/NFT/response/getRemoteJSON', compact("chainId", "contractAddress", "tokenURI"));
-	}
+	$metadata = Q::event('Assets/NFT/response/getRemoteJSON', compact("chainId", "contractAddress", "ABI"));
 
 	return compact("author", "owner", "saleInfo", "commissionInfo", "metadata", "authorUserId", "tokenURI");
 }
