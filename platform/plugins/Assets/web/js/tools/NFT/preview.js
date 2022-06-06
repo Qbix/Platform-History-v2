@@ -437,19 +437,11 @@
                     });
                     $qAudio.tool("Q/audio", audioOptions).activate();
                 };
+
                 if (movie) {
                     _renderVideoTool(movie);
                 } else if (audio) {
-                    $qAudio = $("<div>").on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                    $previewIcon.replaceWith($qAudio);
-                    audioOptions = Q.extend({}, {
-                        url: audio
-                    });
-                    $qAudio.tool("Q/audio", audioOptions).activate();
+                    _renderAudioTool(audio);
                 } else if (imageURL) {
                     $videoContainer.empty().html('<img alt="icon" class="NFT_preview_icon" src="' + imageURL + '">');
                 } else if (imageData) {
