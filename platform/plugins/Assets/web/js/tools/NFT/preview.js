@@ -149,7 +149,7 @@
                         return;
                     }
 
-                    var metadata = JSON.parse(response.slots.getRemoteJSON);
+                    var metadata = response.slots.getRemoteJSON;
                     tool.renderFromMetadata(metadata);
                 }, {
                     fields: {
