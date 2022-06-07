@@ -2,7 +2,7 @@
 use \CloudConvert\Models\Task;
 
 /**
- * @module Assets
+ * @module Streams
  */
 
 /**
@@ -10,26 +10,26 @@ use \CloudConvert\Models\Task;
  * @method post
  * @param {array} [$_REQUEST]
  */
-function Assets_cloudconvertWebhook_post()
+function Streams_cloudConvertWebhook_post()
 {
 	$taskKey = Q_Video_CloudConvert::getTaskKey();
-	$cloudconvert = Q_Video_CloudConvert::setup();
-	$signingSecretFinished = Q_Config::expect("Q", "video", "cloudconvert", "webhooks", "finished");
-	$signingSecretFailed = Q_Config::expect("Q", "video", "cloudconvert", "webhooks", "failed");
+	$cloudConvert = Q_Video_CloudConvert::setup();
+	$signingSecretFinished = Q_Config::expect("Q", "video", "cloudConvert", "webhooks", "finished");
+	$signingSecretFailed = Q_Config::expect("Q", "video", "cloudConvert", "webhooks", "failed");
 
 	$payload = @file_get_contents('php://input');
 	$signature = $_SERVER['HTTP_CLOUDCONVERT_SIGNATURE'];
-	Q::log("signature: ".$signature, "cloudconvert");
+	Q::log("signature: ".$signature, "cloudConvert");
 
-	function Assets_cloudconvert_post_exit () {
+	function Streams_cloudConvert_post_exit () {
 		header("HTTP/1.1 200 OK");
 		exit;
 	}
 
 	try {
-		$webhookEvent = $cloudconvert->webhookHandler()->constructEvent($payload, $signature, $signingSecretFinished);
-		Q::log("FINISHED:", "cloudconvert");
-		Q::log($payload, "cloudconvert", array("maxLength" => 100000));
+		$webhookEvent = $cloudConvert->webhookHandler()->constructEvent($payload, $signature, $signingSecretFinished);
+		Q::log("FINISHED:", "cloudConvert");
+		Q::log($payload, "cloudConvert", array("maxLength" => 100000));
 
 		$job = $webhookEvent->getJob();
 
@@ -51,7 +51,7 @@ function Assets_cloudconvertWebhook_post()
 			->whereName('export-'.$taskKey)[0];
 
 		$file = $exportTask->getResult()->files[0];
-		$source = $cloudconvert->getHttpTransport()->download($file->url)->detach();
+		$source = $cloudConvert->getHttpTransport()->download($file->url)->detach();
 		$fileName = preg_replace("/.*\./", "converted.", $file->filename);
 		$dest = fopen($directory.DS.$fileName, 'w');
 		stream_copy_to_stream($source, $dest);
@@ -61,21 +61,21 @@ function Assets_cloudconvertWebhook_post()
 		$stream->icon = $urlFromDir."/".$fileName;
 		$stream->changed();
 	} catch(\CloudConvert\Exceptions\UnexpectedDataException $e) {
-		Q::log("Finished/UnexpectedDataException: ".$e->getMessage(), "cloudconvert");
-		Assets_cloudconvert_post_exit();
+		Q::log("Finished/UnexpectedDataException: ".$e->getMessage(), "cloudConvert");
+		Streams_cloudConvert_post_exit();
 	} catch(\CloudConvert\Exceptions\SignatureVerificationException $e) {
 		try {
-			$webhookEvent = $cloudconvert->webhookHandler()->constructEvent($payload, $signature, $signingSecretFailed);
-			Q::log("FAILED:", "cloudconvert");
-			Q::log($payload, "cloudconvert", array("maxLength" => 100000));
+			$webhookEvent = $cloudConvert->webhookHandler()->constructEvent($payload, $signature, $signingSecretFailed);
+			Q::log("FAILED:", "cloudConvert");
+			Q::log($payload, "cloudConvert", array("maxLength" => 100000));
 		} catch(\CloudConvert\Exceptions\UnexpectedDataException $e) {
-			Q::log("Failed/UnexpectedDataException: ".$e->getMessage(), "cloudconvert");
-			Assets_cloudconvert_post_exit();
+			Q::log("Failed/UnexpectedDataException: ".$e->getMessage(), "cloudConvert");
+			Streams_cloudConvert_post_exit();
 		} catch(\CloudConvert\Exceptions\SignatureVerificationException $e) {
-			Q::log($e->getMessage(), "cloudconvert");
-			Assets_cloudconvert_post_exit();
+			Q::log($e->getMessage(), "cloudConvert");
+			Streams_cloudConvert_post_exit();
 		}
 
-		Assets_cloudconvert_post_exit();
+		Streams_cloudConvert_post_exit();
 	}
 }
