@@ -306,8 +306,8 @@
                 }, "nft_preview_description_" + tool.stream.fields.name.split("/").pop()).activate();
 
                 // apply Streams/preview icon behavior
-                var movie = state.video || stream.getAttribute("video") || stream.getAttribute("animation_url");
-                var audio = state.audio || stream.getAttribute("audio");
+                var movie = state.video || stream.getAttribute("videoUrl");
+                var audio = state.audio || stream.getAttribute("audioUrl");
                 var videoProvider = stream.getAttribute("videoProvider");
                 var videoId = stream.getAttribute("videoId");
                 var imageURL = state.image || stream.iconUrl("x");
@@ -579,15 +579,15 @@
                         var videoOptions = Q.extend({}, state.video);
                         var videoId = tool.stream.getAttribute("videoId");
                         var videoProvider = tool.stream.getAttribute("videoProvider");
-                        var videoUrl = tool.stream.getAttribute("animation_url");
+                        var videoUrl = tool.stream.getAttribute("videoUrl");
                         if (options) {
-                            videoId = Q.getObject("videoId", options);
-                            videoProvider = Q.getObject("videoProvider", options);
-                            videoUrl = Q.getObject("videoUrl", options);
+                            videoId = Q.getObject("videoId", options) || videoId;
+                            videoProvider = Q.getObject("videoProvider", options) || videoProvider;
+                            videoUrl = Q.getObject("videoUrl", options) || videoUrl;
                         }
 
                         if (videoUrl) {
-                            videoOptions.url = videoUrl;
+                            videoOptions.url = Q.url(videoUrl);
                         } else if (videoId && videoProvider) {
                             videoOptions.url = Q.getObject(["video", videoProvider, "url"], Q).interpolate({videoId: videoId})
                         }
@@ -600,7 +600,7 @@
                         }
 
                         if (!videoOptions.url) {
-                            return;
+                            return $videoParent.removeClass("NFT_preview_loading");
                         }
 
                         $element.tool("Q/video", videoOptions).activate(function () {
@@ -703,7 +703,7 @@
                             "Assets/NFT/attributes": tool.collectAttributes(dialog)
                         };
                         if ($inputURL.val()) {
-                            attributes["animation_url"] = $inputURL.val();
+                            attributes["videoUrl"] = $inputURL.val();
                         }
 
                         if (!tool.minted) {

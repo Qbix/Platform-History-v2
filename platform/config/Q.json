@@ -179,9 +179,11 @@
 			"google": null
 		},
 		"video": {
-			"muse": {
-				"url": "https://muse.ai/v/{{videoId}}",
-				"uploadEndPoint": "https://muse.ai/api/files/upload"
+			"cloudUpload": {
+				"muse": {
+					"url": "https://muse.ai/v/{{videoId}}",
+					"uploadEndPoint": "https://muse.ai/api/files/upload"
+				}
 			}
 		},
 		"random": {
