@@ -250,6 +250,61 @@
             }
         },
         /**
+         * Render NFT image
+         * @method renderImage
+         * @param {jQuery|Element} $container - image container element
+         * @param {String} imageUrl
+         */
+        renderImage: function ($container, imageUrl) {
+            if ($container instanceof Element) {
+                $container = $($container);
+            }
+
+            $container.empty().html('<img alt="icon" class="NFT_preview_icon" src="' + Q.url(imageUrl) + '">');
+        },
+        /**
+         * Render NFT video
+         * @method renderVideo element
+         * @param {jQuery|Element} $container - video container element
+         * @param {String} videoUrl
+         * @param {String} imageUrl - image that would be a poster of video
+         */
+        renderVideo: function ($container, videoUrl, imageUrl) {
+            if ($container instanceof Element) {
+                $container = $($container);
+            }
+
+            var $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            });
+            $container.empty().append($qVideo);
+            var videoOptions = Q.extend({}, {
+                url: videoUrl,
+                image: imageUrl && !imageUrl.includes("/img/empty_white.png") ? imageUrl : ""
+            });
+            $qVideo.tool("Q/video", videoOptions).activate();
+        },
+        /**
+         * Render NFT audio element
+         * @method renderVideo
+         * @param {jQuery|Element} $container - video container element
+         * @param {String} audioUrl
+         */
+        renderAudio: function ($container, audioUrl) {
+            var $qAudio = $("<div>").on(Q.Pointer.fastclick, function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+                return false;
+            });
+            $container.empty().append($qAudio);
+            var audioOptions = Q.extend({}, {
+                url: audioUrl
+            });
+            $qAudio.tool("Q/audio", audioOptions).activate();
+        },
+        /**
          * Refreshes the appearance of the tool completely
          * @method refresh
          * @param {Streams_Stream} stream - NFT stream
@@ -306,51 +361,23 @@
                 }, "nft_preview_description_" + tool.stream.fields.name.split("/").pop()).activate();
 
                 // apply Streams/preview icon behavior
-                var movie = state.video || stream.getAttribute("videoUrl");
-                var audio = state.audio || stream.getAttribute("audioUrl");
+                var videoUrl = state.video || stream.getAttribute("videoUrl");
+                var audioUrl = state.audio || stream.getAttribute("audioUrl");
                 var videoProvider = stream.getAttribute("videoProvider");
                 var videoId = stream.getAttribute("videoId");
-                var imageURL = state.image || stream.iconUrl("x");
-                var $videoContainer = $(".video-container", tool.element);
+                var imageUrl = state.image || stream.iconUrl("x");
+                var $container = $(".video-container", tool.element);
                 var $previewIcon = $("img.NFT_preview_icon", tool.element);
-                var $qVideo, videoOptions, $qAudio, audioOptions;
 
-                if (movie) {
-                    $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                    $previewIcon.replaceWith($qVideo);
-                    videoOptions = Q.extend({}, {
-                        url: movie,
-                        image: imageURL.includes("/img/empty_white.png") ? "" : imageURL
-                    });
-                    $qVideo.tool("Q/video", videoOptions).activate();
-                } else if (audio) {
-                    $qAudio = $("<div>").on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                    $previewIcon.replaceWith($qAudio);
-                    audioOptions = Q.extend({}, {
-                        url: audio
-                    });
-                    $qAudio.tool("Q/audio", audioOptions).activate();
-                } else if (imageURL) {
-                    $videoContainer.empty().html('<img alt="icon" class="NFT_preview_icon" src="' + Q.url(imageURL) + '">');
+                if (videoUrl) {
+                    tool.renderVideo($container, videoUrl, imageUrl);
+                } else if (audioUrl) {
+                    tool.renderAudio($container, audioUrl);
+                } else if (imageUrl && !imageUrl.includes("empty_white")) {
+                    tool.renderImage($container, imageUrl);
                 } else if (videoId) {
-                    $qVideo = $("<div>").on(Q.Pointer.fastclick, function (event) {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        return false;
-                    });
-                    $previewIcon.replaceWith($qVideo);
-                    videoOptions = Q.extend({}, state.video, {
-                        url: Q.getObject(["video", videoProvider, "url"], Q).interpolate({videoId: videoId})
-                    });
-                    $qVideo.tool("Q/video", videoOptions).activate();
+                    videoUrl = Q.getObject(["video", "cloudUpload", videoProvider, "url"], Q).interpolate({videoId: videoId});
+                    tool.renderVideo($container, videoUrl);
                 } else {
                     var overrides = NFT.icon.defaultSize ? {
                         "overrideShowSize": {
@@ -364,6 +391,22 @@
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onInvoke, tool, [tool.preview.state.publisherId, tool.preview.state.streamName]);
                 });
+
+                // set onMessage Streams/changed to change image or video or audio
+                stream.onMessage("Streams/changed").set(function (updatedStream, message) {
+                    var changed = message.getInstruction('changes');
+                    var iconChanged = Q.getObject("icon", changed);
+                    var attributes = Q.getObject("attributes", changed);
+                    try {
+                        attributes = JSON.parse(attributes);
+                    } catch (e) {}
+                    var videoChanged = Q.getObject("videoUrl", attributes);
+                    var audioChanged = Q.getObject("audioUrl", attributes)
+
+                    if (iconChanged || videoChanged || audioChanged) {
+                        tool.renderFromStream(updatedStream);
+                    }
+                }, [tool.id, Q.normalize(stream.fields.publisherId), Q.normalize(stream.fields.name.split("/").pop())].join("_"));
             });
         },
         /**
@@ -406,46 +449,20 @@
                     });
                 }
 
-                var movie = state.video || metadata.video || metadata.youtube_url;
-                var audio = state.audio;
-                var imageURL = state.image || metadata.image || "";
-                var imageData = metadata.image_data;
-                var $videoContainer = $(".video-container", tool.element);
-                var $previewIcon = $("img.NFT_preview_icon", tool.element);
-                var _renderVideoTool = function (url) {
-                    var $qVideo = $("<div>").on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                    $previewIcon.replaceWith($qVideo);
-                    var videoOptions = Q.extend({}, {
-                        url: url,
-                        image: imageURL
-                    });
-                    $qVideo.tool("Q/video", videoOptions).activate();
-                };
-                var _renderAudioTool = function (url) {
-                    var $qAudio = $("<div>").on(Q.Pointer.fastclick, function (e) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        return false;
-                    });
-                    $previewIcon.replaceWith($qAudio);
-                    var audioOptions = Q.extend({}, {
-                        url: url
-                    });
-                    $qAudio.tool("Q/audio", audioOptions).activate();
-                };
+                var videoUrl = state.video || metadata.video || metadata.youtube_url;
+                var audioUrl = state.audio;
+                var imageUrl = state.image || metadata.image || "";
+                if (!imageUrl && metadata.image_data) {
+                    imageUrl = 'data:image/svg+xml;utf8,' + imageUrl;
+                }
+                var $container = $(".video-container", tool.element);
 
-                if (movie) {
-                    _renderVideoTool(movie);
-                } else if (audio) {
-                    _renderAudioTool(audio);
-                } else if (imageURL) {
-                    $videoContainer.empty().html('<img alt="icon" class="NFT_preview_icon" src="' + imageURL + '">');
-                } else if (imageData) {
-                    $videoContainer.empty().html('<img alt="icon" class="NFT_preview_icon" src="data:image/svg+xml;utf8,' + imageURL + '">');
+                if (videoUrl) {
+                    tool.renderVideo($container, videoUrl, imageUrl);
+                } else if (audioUrl) {
+                    tool.renderAudio($container, audioUrl);
+                } else if (imageUrl) {
+                    tool.renderImage($container, imageUrl);
                 } else if (metadata.animation_url) {
                     /*var xhr = new XMLHttpRequest();
                     xhr.open('HEAD', metadata.animation_url, true);
@@ -465,9 +482,9 @@
                     }).done(function(message, text, jqXHR){
                         var contentType = jqXHR.getResponseHeader('Content-Type');
                         if (contentType.includes("video")) {
-                            _renderVideoTool(metadata.animation_url);
+                            tool.renderVideoTool(metadata.animation_url);
                         } else if (contentType.includes("audio")) {
-                            _renderAudioTool(metadata.animation_url);
+                            tool.renderAudioTool(metadata.animation_url);
                         }
                     });
                 }
@@ -553,10 +570,25 @@
                 },
                 onActivate: function (dialog) {
                     var $icon = $("img.NFT_preview_icon", dialog);
+                    var $imageContainer = $icon.closest(".Assets_nft_container");
 
                     // create new Streams/preview tool to set icon behavior to $icon element
                     $("<div>").tool("Streams/preview", Q.extend(previewState, {editable: true})).activate(function () {
-                        this.icon($icon[0]);
+                        this.icon($icon[0], function (element) {
+                            var src = element.src;
+
+                            if (src.includes("empty_white")) {
+                                $imageContainer.plugin("Q/actions", "remove");
+                            } else {
+                                $imageContainer.plugin("Q/actions", {
+                                    actions: {
+                                        remove: function () {
+                                            console.log("remove image");
+                                        }
+                                    }
+                                });
+                            }
+                        });
                     });
 
                     // manage attributes
@@ -574,7 +606,7 @@
                     });
 
                     var videoTool;
-                    var $videoParent = $(".Assets_nft_movie", dialog).closest(".Assets_nft_picture");
+                    var $videoContainer = $(".Assets_nft_movie", dialog).closest(".Assets_nft_container");
                     var _createVideoTool = function (options) {
                         var videoOptions = Q.extend({}, state.video);
                         var videoId = tool.stream.getAttribute("videoId");
@@ -589,7 +621,7 @@
                         if (videoUrl) {
                             videoOptions.url = Q.url(videoUrl);
                         } else if (videoId && videoProvider) {
-                            videoOptions.url = Q.getObject(["video", videoProvider, "url"], Q).interpolate({videoId: videoId})
+                            videoOptions.url = Q.getObject(["video", "cloudUpload", videoProvider, "url"], Q).interpolate({videoId: videoId})
                         }
 
                         var $element = $(".Assets_nft_movie", dialog);
@@ -599,21 +631,31 @@
                             $element = $newElement;
                         }
 
+                        $videoContainer.plugin("Q/actions", "remove");
+
                         if (!videoOptions.url) {
-                            return $videoParent.removeClass("NFT_preview_loading");
+                            return $videoContainer.removeClass("NFT_preview_loading");
                         }
 
                         $element.tool("Q/video", videoOptions).activate(function () {
                             videoTool = this;
-                            $videoParent.removeClass("NFT_preview_loading");
+                            $videoContainer.plugin("Q/actions", {
+                                actions: {
+                                    remove: function () {
+                                        console.log("remove video");
+                                    }
+                                }
+                            });
+                            $videoContainer.removeClass("NFT_preview_loading");
+
                         });
                     };
 
                     _createVideoTool();
 
-                    // set video URL
-                    var $inputURL = $("input[name=movieURL]", dialog);
-                    $inputURL.on("change", function () {
+                    // set video Url
+                    var $inputUrl = $("input[name=movieUrl]", dialog);
+                    $inputUrl.on("change", function () {
                         if (!this.value.matchTypes('url', {requireScheme: false}).length) {
                             return _createVideoTool();
                         }
@@ -632,20 +674,20 @@
                         }
 
                         var reader = new FileReader();
-                        $videoParent.addClass("NFT_preview_loading");
+                        $videoContainer.addClass("NFT_preview_loading");
                         reader.readAsDataURL(file);
                         reader.onload = function () {
                             Q.req(Q.action("Streams/stream"), 'data',function (err, res) {
                                 var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(res && res.errors);
                                 if (msg) {
-                                    $videoParent.removeClass("NFT_preview_loading");
+                                    $videoContainer.removeClass("NFT_preview_loading");
                                     return Q.handle([state.onError, state.onFinish], tool, [msg]);
                                 }
 
                                 Streams.get.force(previewState.publisherId, previewState.streamName, function () {
                                     tool.stream = this;
                                     _createVideoTool();
-                                    $inputURL.val("");
+                                    $inputUrl.val("");
                                 });
                             }, {
                                 fields: {
@@ -663,7 +705,7 @@
                         };
                         reader.onerror = function (error) {
                             console.log('Error: ', error);
-                            $videoParent.removeClass("NFT_preview_loading");
+                            $videoContainer.removeClass("NFT_preview_loading");
                         };
                         this.value = null;
                     });
@@ -702,8 +744,8 @@
                         var attributes = {
                             "Assets/NFT/attributes": tool.collectAttributes(dialog)
                         };
-                        if ($inputURL.val()) {
-                            attributes["videoUrl"] = $inputURL.val();
+                        if ($inputUrl.val()) {
+                            attributes["videoUrl"] = $inputUrl.val();
                         }
 
                         if (!tool.minted) {
@@ -1038,15 +1080,15 @@
             </div>
             <div class="Assets_nft_form_group">
                 <label>{{NFT.NftPicture}}:</label>
-                <div class="Assets_nft_picture">
+                <div class="Assets_nft_container">
                     <img class="NFT_preview_icon">
                     <button class="Assets_nft_upload_button">{{NFT.UploadFile}}</button>
                 </div>
             </div>
             <div class="Assets_nft_form_group">
                 <label>{{NFT.NftMovie}}:</label>
-                <div class="Assets_nft_picture">
-                    <input name="movieURL" placeholder="{{NFT.MovieURL}}"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
+                <div class="Assets_nft_container">
+                    <input name="movieUrl" placeholder="{{NFT.MovieURL}}"> <label>{{NFT.UploadMovie}}<input type="file" style="display: none;" name="movieUpload"></label>
                     <div class="Assets_nft_movie"></div>
                 </div>
             </div>
