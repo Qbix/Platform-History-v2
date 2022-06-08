@@ -4045,8 +4045,6 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 	return msg;
 };
 
-Message.latest = {};
-
 Message.defined = {};
 
 /**
@@ -4376,9 +4374,6 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 				// until things settle down on the screen
 				ordinal = parseInt(ordinal);
 				Q.each(messages, function (ordinal, message) {
-					if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
-						return; // it was already processed
-					}
 					Users.Socket.onEvent('Streams/post').handle(message, messages);
 				}, {ascending: true, numeric: true});
 
@@ -6186,6 +6181,8 @@ Q.onInit.add(function _Streams_onInit() {
 				console.warn(Q.firstErrorMessage(err));
 				return;
 			}
+
+			var stream = this;
 			var streamType = stream.fields.type;
 			var params = [stream, payload, 'ephemeral', latest];
 			var event = Streams.onEphemeral(streamType, payload.type);
@@ -6199,7 +6196,7 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!msg) {
 			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
 		}
-		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName, false);
+		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName);
 		if (latest && parseInt(msg.ordinal) <= latest) {
 			return;
 		}
@@ -6211,10 +6208,6 @@ Q.onInit.add(function _Streams_onInit() {
 			_message();
 		}
 		function _message() {
-			var ptn = msg.publisherId+"\t"+msg.streamName;
-			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
-				return; // it was already processed
-			}
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
@@ -6224,12 +6217,18 @@ Q.onInit.add(function _Streams_onInit() {
 			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
-			Message.latest[ptn] = parseInt(msg.ordinal);
-			var cached = Streams.get.cache.get(
-				[msg.publisherId, msg.streamName]
-			);
-			Streams.get(msg.publisherId, msg.streamName, function (err) {
 
+			// update fields.messageCount of cached stream
+			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
+				if (!cached) {
+					return;
+				}
+
+				Q.setObject("subject.fields.messageCount", parseInt(msg.ordinal), cached);
+				Streams.get.cache.set([msg.publisherId, msg.streamName], cached.cbpos, cached.subject, cached.params);
+			});
+
+			Streams.get(msg.publisherId, msg.streamName, function (err) {
 				if (err) {
 					console.warn(Q.firstErrorMessage(err));
 					console.log(err);
