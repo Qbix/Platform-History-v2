@@ -45,12 +45,14 @@ class Users_Vote extends Base_Users_Vote
 		$vote->forType = $modifiedFields['forType'];
 		$vote->forId = $modifiedFields['forId'];
 		$weightTotal = $total->weightTotal;
-		if ($vote->retrieve()) {
+		if (isset($modifiedFields['weight'])
+		and $vote->retrieve()) {
+			$weight = $modifiedFields['weight'];
 			if (!$total->voteCount) {
 				// something is wrong
 				$total->voteCount = 1;
 			}
-			$total->weightTotal += ($modifiedFields['weight'] - $vote->weight);
+			$total->weightTotal += ($weight - $vote->weight);
 			if (!$total->weightTotal) {
 				throw new Q_Exception_BadValue(array(
 					'internal' => 'Users_Vote_Total table', 
@@ -60,7 +62,7 @@ class Users_Vote extends Base_Users_Vote
 			$total->value = 
 				($total->value * $weightTotal 
 					- $vote->value * $vote->weight 
-					+ $modifiedFields['value'] * $modifiedFields['weight'])
+					+ $modifiedFields['value'] * $weight)
 				/ ($total->weightTotal);
 		} else {
 			if (!isset($modifiedFields['weight'])) {

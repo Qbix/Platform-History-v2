@@ -1328,8 +1328,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$returnAs='string'] Can be "array" or "string".
 	 * @param {array|string} [$uri=Q_Dispatcher::uri()]
 	 *  An array or string representing a uri to use instead of the Q_Dispatcher::uri()
-	 * @return {string}
-	 *  The name of the stream
+	 * @return {string|Db_Range}
+	 *  The name of the stream, or a Db_Range
 	 * @throws {Q_Exception_RequiredField}
 	 *  If the name can't be deduced, this is thrown
 	 */
@@ -1356,7 +1356,20 @@ abstract class Streams extends Base_Streams
 		}
 		if (isset($result)) {
 			if (is_array($result)) {
-				$result = implode('/', $result);
+				if (Q::isAssociative($result)
+				and isset($result['min'])
+				and isset($result['includeMin'])) {
+					$includeMin = filter_var($result['includeMin'], FILTER_VALIDATE_BOOLEAN);
+					$includeMax = filter_var($result['includeMax'], FILTER_VALIDATE_BOOLEAN);
+					$result = new Db_Range(
+						$result['min'],
+						$includeMin,
+						$includeMax,
+						$result['max']
+					);
+				} else {
+					$result = implode('/', $result);
+				}
 			}
 			$name = isset($uri->name_prefix) ? $uri->name_prefix.$result : $result;
 		} else if (Streams::$followedInvite) {
@@ -1367,7 +1380,7 @@ abstract class Streams extends Base_Streams
 				'streamName'
 			);
 		}
-		if ($throwIfMissing && !is_string($name)) {
+		if ($throwIfMissing && !is_string($name) && !($name instanceof Db_Range)) {
 			throw new Q_Exception_WrongType(array('field' => $fieldName, 'type' => 'string or array'));
 		}
 		if ($returnAs === 'array' and is_string($name)) {
@@ -2388,7 +2401,7 @@ abstract class Streams extends Base_Streams
 			$max = is_numeric($options['max']) ? $options['max'] : strtotime($options['max']);
 		}
 		if (isset($min) or isset($max)) {
-			$range = new Db_Range($min ? $min : 0, true, true, $max ? $max : null);
+			$range = new Db_Range(isset($min) ? $min : null, true, true, isset($max) ? $max : null);
 			$query = $query->where(array('weight' => $range));
 		}
 		if ($limit or $offset) {
@@ -4853,7 +4866,7 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $publisherId
 	 * @param {string} $streamName
 	 * @param {string} [$extra] You can pass time() here or something,
-	 *  if you don't want to overwrite old values.
+	 *  if you don't want to overwrite old values. It will append to the directory path.
 	 * @return {string}
 	 */
 	static function iconDirectory($publisherId, $streamName, $extra = null)

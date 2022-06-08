@@ -1921,7 +1921,7 @@ class Streams_Stream extends Base_Streams_Stream
 	 * Get the directory to import the icon into, for a stream.
 	 * Use this with Users::importIcon().
 	 * @param {string} [$extra] You can pass time() here or something,
-	 *  if you don't want to overwrite old values.
+	 *  if you don't want to overwrite old values. It will append to the directory path.
 	 * @return {string}
 	 */
 	function iconDirectory($extra = null)
