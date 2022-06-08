@@ -15,7 +15,7 @@
                     "title" => false
                 )
             )
-        )
+        ), "NFT_view"
     );
 ?>
 
