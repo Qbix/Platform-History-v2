@@ -53,7 +53,7 @@ function Streams_after_Q_file_save($params)
 	if (preg_match("/^video/", $mimeType)) {
 		// copy Q.file.save attribute to videoUrl attribute to know that video
 		$stream->setAttribute("videoUrl", $url);
-		$stream->save();
+		$stream->changed();
 
 		// try to use video provider, if defined in config
 		$cloudUpload = Q_Config::get("Q", "video", "cloudUpload", null);
@@ -72,7 +72,7 @@ function Streams_after_Q_file_save($params)
 				$stream->setAttribute("videoId", $result["videoId"]);
 				$stream->setAttribute("videoUrl", $result["videoUrl"]);
 				$stream->clearAttribute("Q.file.url");
-				$stream->save();
+				$stream->changed();
 				$uploadedToProvider = true;
 			}
 		}
