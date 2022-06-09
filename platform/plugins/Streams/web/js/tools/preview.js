@@ -396,7 +396,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 			// if icon url already valid, set it and src
 			if (icon.match(/\.[a-z]{3,4}$/i)) {
-				element.src = icon;
+				element.src = Q.url(icon);
 			} else {
 				element.src = Q.url(
 					Q.Streams.iconUrl(icon, file), null,
