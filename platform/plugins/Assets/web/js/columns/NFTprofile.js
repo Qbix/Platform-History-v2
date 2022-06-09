@@ -71,6 +71,8 @@ Q.exports(function (options, index, column, data) {
 			Q.addStylesheet('{{Assets}}/css/columns/NFT.css', { slotName: 'Assets' });
 		}, true);
 	});
+
+	$(".Q_column_slot", column).plugin("Q/scrollbarsAutoHide", {vertical: true, horizontal: true});
 });
 
 })(Q, jQuery);

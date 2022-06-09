@@ -125,5 +125,7 @@ Q.exports(function (options, index, column, data) {
 			});
 		}, true);
 	});
+
+	$(".Q_column_slot", column).plugin("Q/scrollbarsAutoHide", {vertical: true, horizontal: false});
 });
 })(Q, jQuery);
