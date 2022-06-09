@@ -4861,6 +4861,25 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Get the directory to upload files into, for a stream.
+	 * @method uploadsDirectory
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @return {string}
+	 */
+	static function uploadsDirectory($publisherId, $streamName)
+	{
+		$splitId = Q_Utils::splitId($publisherId);
+		$sn = implode(DS, explode('/', $streamName));
+		$path = APP_WEB_DIR . DS . 'Q' . DS . 'uploads' . DS . 'Streams';
+		if ($realpath = realpath($path)) {
+			$path = $realpath;
+		}
+		$subpath = $splitId . DS . $sn;
+		return $path . DS . $subpath;
+	}
+
+	/**
 	 * Get the directory to import the icon into, for a stream.
 	 * Use this with Users::importIcon().
 	 * @param {string} $publisherId
@@ -4881,7 +4900,7 @@ abstract class Streams extends Base_Streams
 		if ($extra) {
 			$subpath .= DS . $extra;
 		}
-		return $realpath . DS . $subpath;
+		return $path . DS . $subpath;
 	}
 	/**
 	 * Remove streams from the system, including all related rows.
