@@ -411,6 +411,10 @@
     border: none;
 }
 
+.Assets_NFT_preview_composer .Assets_nft_container .Q_actions_container {
+    z-index: 1;
+}
+
 /* Rounded sliders */
 .Assets_NFT_preview_composer .slider.round {
     border-radius: 34px;

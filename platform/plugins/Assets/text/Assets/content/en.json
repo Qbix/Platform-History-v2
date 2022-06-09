@@ -263,6 +263,8 @@
         "EnterMinimumBid": "Enter Minimum bid",
         "SelectChain": "Select chain",
         "Currency": "Currency",
+        "AreYouSureDeleteImage": "Are you sure you want to remove image?",
+        "AreYouSureDeleteVideo": "Are you sure you want to remove video?",
         "series": {
             "Name": "Name",
             "Icon": "Icon",

@@ -394,18 +394,7 @@
 
                 // set onMessage Streams/changed to change image or video or audio
                 stream.onMessage("Streams/changed").set(function (updatedStream, message) {
-                    var changed = message.getInstruction('changes');
-                    var iconChanged = Q.getObject("icon", changed);
-                    var attributes = Q.getObject("attributes", changed);
-                    try {
-                        attributes = JSON.parse(attributes);
-                    } catch (e) {}
-                    var videoChanged = Q.getObject("videoUrl", attributes);
-                    var audioChanged = Q.getObject("audioUrl", attributes)
-
-                    if (iconChanged || videoChanged || audioChanged) {
-                        tool.renderFromStream(updatedStream);
-                    }
+                    tool.renderFromStream(updatedStream);
                 }, [tool.id, Q.normalize(stream.fields.publisherId), Q.normalize(stream.fields.name.split("/").pop())].join("_"));
             });
         },
@@ -549,9 +538,11 @@
             var state = this.state;
             var previewState = this.preview.state;
             var isNew = $toolElement.hasClass("Streams_preview_composer");
+            var publisherId = tool.stream.fields.publisherId;
+            var streamName = tool.stream.fields.name;
 
             // need to update tool.stream
-            // actualy on this stage stream should be cached, so Streams.get is just reading stream from cache, hence it can be used as synchronous
+            // actually on this stage stream should be cached, so Streams.get is just reading stream from cache, hence it can be used as synchronous
             Streams.get(previewState.publisherId, previewState.streamName, function () {
                 tool.stream = this;
             });
@@ -583,7 +574,31 @@
                                 $imageContainer.plugin("Q/actions", {
                                     actions: {
                                         remove: function () {
-                                            console.log("remove image");
+                                            Q.confirm(tool.text.NFT.AreYouSureDeleteImage, function(result) {
+                                                if (!result) {
+                                                    return;
+                                                }
+
+                                                Q.req("Assets/NFT", ["image"], function (err) {
+                                                    if (err) {
+                                                        return;
+                                                    }
+
+                                                    Streams.get.force(publisherId, streamName, function (err) {
+                                                        if (err) {
+                                                            return;
+                                                        }
+
+                                                        tool.renderFromStream(this);
+                                                    });
+                                                }, {
+                                                    method: "delete",
+                                                    fields: {
+                                                        publisherId: publisherId,
+                                                        streamName: streamName
+                                                    }
+                                                });
+                                            });
                                         }
                                     }
                                 });
@@ -607,7 +622,7 @@
 
                     var videoTool;
                     var $videoContainer = $(".Assets_nft_movie", dialog).closest(".Assets_nft_container");
-                    var _createVideoTool = function (options) {
+                    var _updateVideoTool = function (options) {
                         var videoOptions = Q.extend({}, state.video);
                         var videoId = tool.stream.getAttribute("videoId");
                         var videoProvider = tool.stream.getAttribute("videoProvider");
@@ -642,7 +657,32 @@
                             $videoContainer.plugin("Q/actions", {
                                 actions: {
                                     remove: function () {
-                                        console.log("remove video");
+                                        Q.confirm(tool.text.NFT.AreYouSureDeleteVideo, function(result) {
+                                            if (!result) {
+                                                return;
+                                            }
+
+                                            Q.req("Assets/NFT", ["video"], function (err) {
+                                                if (err) {
+                                                    return;
+                                                }
+
+                                                Streams.get.force(publisherId, streamName, function (err) {
+                                                    if (err) {
+                                                        return;
+                                                    }
+
+                                                    tool.renderFromStream(this);
+                                                    _updateVideoTool();
+                                                });
+                                            }, {
+                                                method: "delete",
+                                                fields: {
+                                                    publisherId: publisherId,
+                                                    streamName: streamName
+                                                }
+                                            });
+                                        });
                                     }
                                 }
                             });
@@ -651,16 +691,16 @@
                         });
                     };
 
-                    _createVideoTool();
+                    _updateVideoTool();
 
                     // set video Url
                     var $inputUrl = $("input[name=movieUrl]", dialog);
                     $inputUrl.on("change", function () {
                         if (!this.value.matchTypes('url', {requireScheme: false}).length) {
-                            return _createVideoTool();
+                            return _updateVideoTool();
                         }
 
-                        _createVideoTool({
+                        _updateVideoTool({
                             videoId: null,
                             videoUrl: this.value
                         });
@@ -686,7 +726,7 @@
 
                                 Streams.get.force(previewState.publisherId, previewState.streamName, function () {
                                     tool.stream = this;
-                                    _createVideoTool();
+                                    _updateVideoTool();
                                     $inputUrl.val("");
                                 });
                             }, {
@@ -694,7 +734,7 @@
                                     file: {
                                         name: file.name,
                                         data: reader.result,
-                                        subpath: previewState.publisherId.splitId() + "/" + previewState.streamName + "/file/movie"
+                                        subpath: previewState.publisherId.splitId() + "/" + previewState.streamName + "/video"
                                     },
                                     publisherId: previewState.publisherId,
                                     streamName: previewState.streamName
