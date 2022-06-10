@@ -847,7 +847,7 @@ Q.getter = function _Q_getter(original, options) {
 
 	gw.forget = function _forget() {
 		if (gw.cache) {
-			return gw.cache.remove(arguments);
+			return gw.cache.remove(Array.prototype.slice.call(arguments));
 		}
 	};
 	
