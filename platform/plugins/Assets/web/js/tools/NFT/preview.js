@@ -112,11 +112,17 @@
             description: false,
             participants: false
         },
+        templates: {
+            view: {
+                name: 'Assets/NFT/view',
+                fields: {}
+            }
+        },
+        movie: null,
+        imageSrc: null,
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
-        onCreated: new Q.Event(),
-        movie: null,
-        imageSrc: null
+        onCreated: new Q.Event()
     },
 
 {
@@ -314,19 +320,23 @@
             var state = tool.state;
             var $toolElement = $(this.element);
             tool.stream = stream;
+            var publisherId = stream.fields.publisherId;
+            var streamName = stream.fields.name;
 
             tool.minted = stream.getAttribute("tokenId");
             $toolElement.attr("data-minted", !!tool.minted);
-
-            Q.Template.render('Assets/NFT/view', {
+            var templateName = state.templates.view.name;
+            var templateFields = Q.extend({
                 show: state.show
-            }, (err, html) => {
+            }, state.templates.view.fields);
+
+            Q.Template.render(templateName, templateFields, function (err, html) {
                 tool.element.innerHTML = html;
 
                 $toolElement.activate();
 
                 $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
-                    userId: stream.fields.publisherId,
+                    userId: publisherId,
                     icon: 50,
                     contents: true,
                     editable: false
@@ -340,24 +350,24 @@
                     showSummary: false,
                     showControls: true,
                     showBlanks: true,
-                    publisherId: stream.fields.publisherId,
-                    streamName: stream.fields.name
+                    publisherId: publisherId,
+                    streamName: streamName
                 }).activate();
 
                 $(".Assets_NFT_title", tool.element).tool("Streams/inplace", {
                     editable: false,
                     field: "title",
                     inplaceType: "text",
-                    publisherId: stream.fields.publisherId,
-                    streamName: stream.fields.name
+                    publisherId: publisherId,
+                    streamName: streamName
                 }, "nft_preview_title_" + tool.stream.fields.name.split("/").pop()).activate();
 
                 $(".Assets_NFT_description", tool.element).tool("Streams/inplace", {
                     editable: false,
                     field: "content",
                     inplaceType: "text",
-                    publisherId: stream.fields.publisherId,
-                    streamName: stream.fields.name
+                    publisherId: publisherId,
+                    streamName: streamName
                 }, "nft_preview_description_" + tool.stream.fields.name.split("/").pop()).activate();
 
                 // apply Streams/preview icon behavior
@@ -389,13 +399,13 @@
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
-                    Q.handle(state.onInvoke, tool, [tool.preview.state.publisherId, tool.preview.state.streamName]);
+                    Q.handle(state.onInvoke, tool, [publisherId, streamName]);
                 });
 
                 // set onMessage Streams/changed to change image or video or audio
                 stream.onMessage("Streams/changed").set(function (updatedStream, message) {
                     tool.renderFromStream(updatedStream);
-                }, [tool.id, Q.normalize(stream.fields.publisherId), Q.normalize(stream.fields.name.split("/").pop())].join("_"));
+                }, [tool.id, Q.normalize(publisherId), Q.normalize(streamName.split("/").pop())].join("_"));
             });
         },
         /**
@@ -415,12 +425,14 @@
 
             tool.minted = true;
             $toolElement.attr("data-minted", tool.minted);
-
-            Q.Template.render('Assets/NFT/view', {
+            var templateName = state.templates.view.name;
+            var templateFields = Q.extend({
                 title: metadata.name,
                 description: metadata.description,
                 show: state.show
-            }, (err, html) => {
+            }, state.templates.view.fields);
+
+            Q.Template.render(templateName, templateFields, (err, html) => {
                 tool.element.innerHTML = html;
 
                 $toolElement.activate();
@@ -536,14 +548,14 @@
             var tool = this;
             var $toolElement = $(this.element);
             var state = this.state;
-            var previewState = this.preview.state;
             var isNew = $toolElement.hasClass("Streams_preview_composer");
-            var publisherId = tool.stream.fields.publisherId;
-            var streamName = tool.stream.fields.name;
+            var previewState = this.preview.state;
+            var publisherId = previewState.publisherId;
+            var streamName = previewState.streamName;
 
             // need to update tool.stream
             // actually on this stage stream should be cached, so Streams.get is just reading stream from cache, hence it can be used as synchronous
-            Streams.get(previewState.publisherId, previewState.streamName, function () {
+            Streams.get(publisherId, streamName, function () {
                 tool.stream = this;
             });
 
@@ -724,7 +736,7 @@
                                     return Q.handle([state.onError, state.onFinish], tool, [msg]);
                                 }
 
-                                Streams.get.force(previewState.publisherId, previewState.streamName, function () {
+                                Streams.get.force(publisherId, streamName, function () {
                                     tool.stream = this;
                                     _updateVideoTool();
                                     $inputUrl.val("");
@@ -734,10 +746,10 @@
                                     file: {
                                         name: file.name,
                                         data: reader.result,
-                                        subpath: previewState.publisherId.splitId() + "/" + previewState.streamName + "/video"
+                                        subpath: publisherId.splitId() + "/" + streamName + "/video"
                                     },
-                                    publisherId: previewState.publisherId,
-                                    streamName: previewState.streamName
+                                    publisherId: publisherId,
+                                    streamName: streamName
                                 },
                                 timeout: 100000,
                                 method: 'put'
@@ -800,8 +812,8 @@
                             }, {
                                 method: isNew ? "post" : "put",
                                 fields: {
-                                    publisherId: previewState.publisherId,
-                                    streamName: previewState.streamName,
+                                    publisherId: publisherId,
+                                    streamName: streamName,
                                     title: $("input[name=title]", dialog).val(),
                                     content: $("input[name=description]", dialog).val(),
                                     attributes: attributes,
@@ -862,7 +874,7 @@
                             }, {
                                 method: "post",
                                 fields: {
-                                    userId: previewState.publisherId,
+                                    userId: publisherId,
                                     title: $("input[name=title]", dialog).val(),
                                     content: $("input[name=description]", dialog).val(),
                                     attributes: attributes
@@ -904,6 +916,8 @@
             var $element = element instanceof Element ? $(element) : element;
             var tool = this;
             var previewState = tool.preview.state;
+            var publisherId = previewState.publisherId;
+            var streamName = previewState.streamName;
 
             // get default attributes from server
             Q.req("Assets/NFT", "attributes", function (err, response) {
@@ -995,8 +1009,8 @@
                                 }, {
                                     method: "put",
                                     fields: {
-                                        publisherId: previewState.publisherId,
-                                        streamName: previewState.streamName,
+                                        publisherId: publisherId,
+                                        streamName: streamName,
                                         display_type: displayType,
                                         trait_type: traitType,
                                         value: value
@@ -1059,7 +1073,7 @@
                 });
             }, {
                 fields: {
-                    publisherId: previewState.publisherId
+                    publisherId: publisherId
                 }
             });
         },
