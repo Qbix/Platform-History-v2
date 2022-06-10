@@ -1292,6 +1292,7 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
  */
 Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
 	this.data = {};
+	this.special = {};
 };
 /**
  * Searches for entries matching a certain prefix of arguments array
