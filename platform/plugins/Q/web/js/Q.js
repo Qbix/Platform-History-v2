@@ -5667,7 +5667,7 @@ function Q_Cache_removeFromIndex(cache, parameters) {
 	for (var i=1, l=parameters.length; i<l; ++i) {
 		// key in the index
 		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
-		var obj = Q_Cache_get(parameters, k, true) || {};
+		var obj = Q_Cache_get(cache, k, true) || {};
 		delete obj[key];
 		Q_Cache_set(cache, k, obj, true);
 	}
