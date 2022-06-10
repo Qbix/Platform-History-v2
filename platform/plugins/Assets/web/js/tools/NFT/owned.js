@@ -50,7 +50,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var state = this.state;
 
 		// add composer
-		tool.createComposer();
+		//tool.createComposer();
 
 		var _onInvoke = function () {
 			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;

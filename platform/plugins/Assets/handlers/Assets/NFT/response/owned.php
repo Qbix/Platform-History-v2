@@ -58,21 +58,32 @@ function Assets_NFT_response_owned ($params) {
 		}
 
 		//TODO: use balanceOf and tokenOfOwnerByIndex if method tokensByOwner absent
+		$ABI = Users_Web3::getABIFileContent($chain["contract"], $chain["chainId"]);
+		$tokensByOwner = Users_Web3::existsInABI("tokensByOwner", $ABI, "function", false);
+		$balanceOf = Users_Web3::existsInABI("balanceOf", $ABI, "function", false);
+		$tokenOfOwnerByIndex = Users_Web3::existsInABI("tokenOfOwnerByIndex", $ABI, "function", false);
 
-		try {
+		if ($tokensByOwner) {
 			$tokens = Users_Web3::execute($chain["contract"], "tokensByOwner", [$wallet, $tokensByOwnerLimit], $chain["chainId"]);
-		} catch (Exception $e) {
-			continue;
-		}
-
-		if (empty($tokens)) {
-			continue;
-		}
-
-		foreach ($tokens as $tokenId) {
-			if ($_Assets_NFT_response_owned_json($tokenId, $chain, $tokenJSON, $countNFTs) === false){
-				break;
+			if (empty($tokens)) {
+				continue;
 			}
+
+			foreach ($tokens as $tokenId) {
+				if ($_Assets_NFT_response_owned_json($tokenId, $chain, $tokenJSON, $countNFTs) === false){
+					break;
+				}
+			}
+		} elseif ($balanceOf && $tokenOfOwnerByIndex) {
+			$tokens = (int)Users_Web3::execute($chain["contract"], "balanceOf", $wallet, $chain["chainId"]);
+			for ($i = 0; $i < $tokens; $i++) {
+				$tokenId = (int)Users_Web3::execute($chain["contract"], "tokenOfOwnerByIndex", array($wallet, $i), $chain["chainId"], true, $glob["Assets_NFT_response_owned"]["secondsInYear"]);
+				if ($_Assets_NFT_response_owned_json($tokenId, $chain, $tokenJSON, $countNFTs) === false) {
+					break;
+				}
+			}
+		} else {
+			throw new Exception("Contract ".$chain["contract"]." doesn't support methods tokensByOwner and ".($balanceOf ? "tokenOfOwnerByIndex" : "balanceOf"));
 		}
 	}
 
