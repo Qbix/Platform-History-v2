@@ -1279,7 +1279,9 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 			// key in the index
 			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
 			var obj = this.special[k] || {};
-			delete obj[key];
+			if (key in obj) {
+				delete obj[key];
+			}
 			this.special[k] = obj;
 		}
 	}

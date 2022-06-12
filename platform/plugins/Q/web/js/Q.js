@@ -5659,7 +5659,7 @@ function Q_Cache_set(cache, key, obj, special) {
 		
 	}
 }
-function Q_Cache_removeFromIndex(cache, parameters) {
+function Q_Cache_removeFromIndex(cache, parameters, key) {
 	if (!parameters) {
 		return false;
 	}
@@ -5668,7 +5668,9 @@ function Q_Cache_removeFromIndex(cache, parameters) {
 		// key in the index
 		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
 		var obj = Q_Cache_get(cache, k, true) || {};
-		delete obj[key];
+		if (key in obj) {
+			delete obj[key];
+		}
 		Q_Cache_set(cache, k, obj, true);
 	}
 	return true;
@@ -5863,7 +5865,7 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 
 	Q_Cache_pluck(this, existing);
 	Q_Cache_remove(this, key);
-	Q_Cache_removeFromIndex(this, parameters);
+	Q_Cache_removeFromIndex(this, parameters, key);
 
 	return true;
 };
@@ -5886,7 +5888,7 @@ Cp.clear = function _Q_Cache_prototype_clear() {
 			key = item.next;
 			Q_Cache_remove(this, prevkey);
 			try {
-				Q_Cache_removeFromIndex(this, JSON.parse(parameters));
+				Q_Cache_removeFromIndex(this, JSON.parse(key), key);
 			} catch (e) {}
 		}
 	}
