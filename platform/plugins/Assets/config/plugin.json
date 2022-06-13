@@ -22,6 +22,7 @@
 		},
 		"routes@start": {
 			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },
