@@ -55,8 +55,9 @@ class Assets_NFT_Series
 		$tokenId = Streams::toHexString($userId, "$maxWeight/$lastPart");
 		$tokenId = preg_replace("/0+$/", "", $tokenId);
 		$seriesId = substr($tokenId, 0, 18);
-		$stream->setAttribute("tokenId", $tokenId)->save();
-		$stream->setAttribute("seriesId", $seriesId)->save();
+		$stream->setAttribute("tokenId", $tokenId);
+		$stream->setAttribute("seriesId", $seriesId);
+		$stream->save();
 
 		$stream->join(compact("userId"));
 		return $stream;
