@@ -121,12 +121,13 @@ class Users_Web3 extends Base_Users_Web3 {
 				return;
 			}
 			if (sizeof($results) == 1) {
-				if (is_array($results[0])) {
-					foreach ($results[0] as $result) {
+				$value = reset($results);
+				if (is_array($value)) {
+					foreach ($value as $result) {
 						$data[] = $result->toString();
 					}
 				} else {
-					$data = $results[0];
+					$data = $value;
 				}
 			} else {
 				$data = $results;
