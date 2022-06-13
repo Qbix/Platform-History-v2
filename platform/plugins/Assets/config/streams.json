@@ -25,7 +25,7 @@
   },
   "Assets/contests": {
     "type": "Streams/category",
-    "title": "Users contests",
+    "title": "Community contests",
     "icon": "",
     "readLevel": 40,
     "writeLevel": 10,

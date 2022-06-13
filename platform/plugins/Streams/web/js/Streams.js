@@ -338,8 +338,9 @@ Streams.iconUrl = function(icon, basename) {
 	|| (!basename && basename !== false)) {
 		basename = '40';
 	}
-	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
-	var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
+	basename = (String(basename).match(/\.\w+$/g)) ? basename : basename+'.png';
+	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
+	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? src
 		: Q.url('{{Streams}}/img/icons/'+src);
@@ -1952,7 +1953,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	if (typeof publisherId !== 'string') {
 		throw new Q.Error("Streams.related is expecting publisherId as a string");
 	}
-	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relatedType))) {
+	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relationType))) {
 		throw new Q.Error("Streams.related is expecting relationType as string or array");
 	}
 	if (typeof isCategory !== 'boolean') {
@@ -5279,7 +5280,7 @@ Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
 	var seriesId = null;
 	var hexFirstPart = publisherId.substring(0, 8).asc2hex().padEnd(16, 0);
 	if (parts.length > 1) {
-		seriesId = parts[1];
+		seriesId = parseInt(parts[1]);
 		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
 			throw new Q.Exception('seriesId must be in range integer 0-255');
 		}

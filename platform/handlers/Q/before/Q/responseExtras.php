@@ -118,10 +118,10 @@ function Q_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.images.lazyload', $lazyload);
 
 	// pass videos data to client
-	$videoConfig = Q_Config::get("Q", "video", array());
+	$videoConfig = Q_Config::get("Q", "video", "cloudUpload", array());
 	foreach ($videoConfig as $provider => $data) {
 		if (!empty($data['url'])) {
-			Q_Response::setScriptData('Q.video.'.$provider.'.url', $data["url"]);
+			Q_Response::setScriptData('Q.video.cloudUpload.'.$provider.'.url', $data["url"]);
 		}
 	}
 }

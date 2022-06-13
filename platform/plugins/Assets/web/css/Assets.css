@@ -43,6 +43,7 @@
 	overflow: auto;
 }
 
+input[type=text], input[type=number], select {height: 40px}
 .Assets_aspect_business, .Assets_aspect_business::before,
 .Assets_aspect_deals, .Assets_aspect_deals::before { color: #e3892f; border-color: #e3892f; }
 .Assets_aspect_funds, .Assets_aspect_funds::before { color: #742e7f; border-color: #742e7f; }

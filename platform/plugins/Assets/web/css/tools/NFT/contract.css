@@ -11,10 +11,6 @@
 .Assets_NFT_contract_tool[data-customContracts=false] .Assets_NFT_contract[data-type=custom] {
     display: none;
 }
-.NFTRemix_profile #content .Streams_related_tool.Assets_NFT_contract_series {
-    text-align: left;
-    margin-left: 10%;
-}
 .Assets_NFT_contract_create .Q_dialog_content,
 .Assets_NFT_contract_select .Q_dialog_content {
     padding: 10px;

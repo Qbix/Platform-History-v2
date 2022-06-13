@@ -1909,6 +1909,7 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * Get the url of the stream's icon
+	 * @method iconUrl
 	 * @param {string|false} [$basename=null] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
 	 * @return {string} The stream's icon url
 	 */
@@ -1920,6 +1921,7 @@ class Streams_Stream extends Base_Streams_Stream
 	/**
 	 * Get the directory to import the icon into, for a stream.
 	 * Use this with Users::importIcon().
+	 * @method iconDirectory
 	 * @param {string} [$extra] You can pass time() here or something,
 	 *  if you don't want to overwrite old values. It will append to the directory path.
 	 * @return {string}
@@ -1928,7 +1930,17 @@ class Streams_Stream extends Base_Streams_Stream
 	{
 		return Streams::iconDirectory($this->publisherId, $this->name, $extra);
 	}
-	
+
+	/**
+	 * Get the directory to upload files into, for a stream.
+	 * @method uploadsDirectory
+	 * @return {string}
+	 */
+	function uploadsDirectory()
+	{
+		return Streams::uploadsDirectory($this->publisherId, $this->name);
+	}
+
 	/**
 	 * A convenience method to get the URL of the streams-related action
 	 * @method register

@@ -56,7 +56,9 @@ class Users_Web3 extends Base_Users_Web3 {
 			$appId = Q::app();
 		}
 
+		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
 		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
+		$appInfo = array_merge($appInfo, $usersWeb3Config);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
@@ -96,7 +98,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		);
 
 		if (empty($abi)) {
-			$abi = self::getABIFileContent($contractAddress);
+			$abi = self::getABIFileContent($contractAddress, $chainId);
 		}
 		$data = array();
 		$arguments = array($methodName);
@@ -119,12 +121,13 @@ class Users_Web3 extends Base_Users_Web3 {
 				return;
 			}
 			if (sizeof($results) == 1) {
-				if (is_array($results[0])) {
-					foreach ($results[0] as $result) {
+				$value = reset($results);
+				if (is_array($value)) {
+					foreach ($value as $result) {
 						$data[] = $result->toString();
 					}
 				} else {
-					$data = $results[0];
+					$data = $value;
 				}
 			} else {
 				$data = $results;
@@ -229,11 +232,13 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * 
 	 * @method getABIFileContent
 	 * @static
-	 * @param {string} $contractAddress The address of the contract. The chain doesn't matter because we assume all contracts with same address have same code on all chains.
+	 * @param {string} $contractAddress - The address of the contract. The chain doesn't matter because we assume all contracts with same address have same code on all chains.
+	 * @param {string} $chainId
+	 * @param {string} [$caching=true] - Set false to ignore cache and request blockchain every time.
 	 * @param {Boolean} [$throwIfNotFound=true] - If true, throw exception if ABI file not found.
 	 * @return {string|null} Tries filename, then $dir/$contractAddress.json, then url from config
 	 */
-	static function getABIFileContent ($contractAddress, $throwIfNotFound=true)
+	static function getABIFileContent ($contractAddress, $chainId, $caching=true, $throwIfNotFound=true)
 	{
 		/**
 		 * @event Users/Web3/getABIFilename {before}
@@ -241,42 +246,47 @@ class Users_Web3 extends Base_Users_Web3 {
 		 * @param {string} $appId
 		 * @return {string} the filename of the file to load
 		 */
-		$filename = Q::event(
-			'Users/Web/getABIFilename', compact('contractAddress'), 
-			'before', false, $filename
+		Q::event(
+			'Users/Web3/getABIFileContent', compact('contractAddress', 'chainId'),
+			'before', false, $ABIjson
 		);
-		if ($filename) {
-			return $filename;
+		if ($ABIjson) {
+			return $ABIjson;
 		}
 
-		$baseUrl = Q_Request::baseUrl();
-		$config = Q_Config::get(
-			'Users', 'web3', 'contracts', $contractAddress, array()
-		);
-		if (!empty($config['filename'])) {
-			$filename = Q::interpolate($config['filename'], compact("contractAddress"));
-			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
+		$methodName = "usersWeb3GetABI";
+		$abiUrl = Q_Config::get("Users", "web3", "chains", $chainId, "abiUrl", null);
+		if (!$abiUrl && $throwIfNotFound) {
+			throw new Exception("ABI URL not found for this chain");
 		}
-		if (!empty($config['dir'])) {
-			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $config['dir']))
-				. DS . "$contractAddress.json";
-		}
-		if (!empty($config['url'])) {
-			$url = Q_Uri::interpolateUrl($config['url'], compact("baseUrl", "contractAddress"));
-			$filename = Q_Uri::filenameFromUrl($url);
+		$abiUrl = Q::interpolate($abiUrl, compact("contractAddress"));
+
+		// check cache
+		$cache = self::getCache($chainId, $contractAddress, $methodName, array($chainId, $contractAddress));
+		if ($caching && $cache->wasRetrieved()) {
+			return Q::json_decode($cache->result, true);
 		}
 
-		$filename = implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]);
-
-		if (!is_file($filename)) {
-			if ($throwIfNotFound) {
-				throw new Q_Exception_MissingFile(compact('filename'));
+		// get remote json by ABI url
+		$content = file_get_contents($abiUrl);
+		try {
+			$ABIjson = Q::json_decode($content, true);
+			if (gettype($ABIjson["result"]) == "string") {
+				$ABIjson = Q::json_decode($ABIjson["result"], true);
 			} else {
-				return null;
+				$ABIjson = $ABIjson["result"];
 			}
+		} catch (Exception $e) {
+			if ($throwIfNotFound) {
+				throw new Exception("invalid ABI json");
+			}
+			return null;
 		}
 
-		return Q::json_decode(file_get_contents($filename), true);
+		$cache->result = Q::json_encode($ABIjson);
+		$cache->save(true);
+
+		return $ABIjson;
 	}
 
 	/**
@@ -383,22 +393,20 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @method existsInABI
 	 * @static
 	 * @param {String} $name - The name of method or event
-	 * @param {string} $contractAddress - The address of the contract.
-	 * @param {string} $type - The type of item. Can be "event" or "function".
+	 * @param {array} $ABI - ABI json
+	 * @param {string} [$type] - The type of item. Can be "event" or "function".
 	 * @param {Boolean} [$throwIfNotFound=false] If true, throw exception if wallet addres not found
 	 * @return {String|null}
 	 */
-	static function existsInABI ($name, $contractAddress, $type="function", $throwIfNotFound=false) {
-		$abi = self::getABIFileContent($contractAddress);
-
-		foreach ($abi as $item) {
+	static function existsInABI ($name, $ABI, $type="function", $throwIfNotFound=false) {
+		foreach ($ABI as $item) {
 			if (Q::ifset($item, "type", null) == $type && Q::ifset($item, "name", null) == $name) {
 				return true;
 			}
 		}
 
 		if ($throwIfNotFound) {
-			throw new Exception(Q::interpolate('{{type}} "{{name}}" not found in contract "{{contractAddress}}"', compact("name", "type", "contractAddress")));
+			throw new Exception(Q::interpolate('{{type}} "{{name}}" not found in contract"', compact("name", "type")));
 		}
 
 		return false;

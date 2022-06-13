@@ -1201,52 +1201,66 @@
 						Q.handle(callback, null, [null, contract]);
 					};
 
-					var address = Q.getObject("contractAddress", options) || chain.contract;
-					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTContractTemplate.json")];
-					var pipe = new Q.pipe(urls, function (params) {
-						var contractURL = null;
-						Q.each(urls, function (i, url) {
-							if (contractURL || params[url][0] !== 200) {
-								return;
-							}
+					var contractAddress = Q.getObject("contractAddress", options) || chain.contract;
 
-							contractURL = url;
+					Assets.NFT.Web3.fetchABI(chain.chainId, contractAddress, function (err, ABI) {
+						var provider = new ethers.providers.Web3Provider(window.ethereum);
+						var contract = new ethers.Contract(contractAddress, ABI, provider.getSigner());
+
+						var events = {
+							TokenRemovedFromSale: "onTokenRemovedFromSale",
+							TokenPutOnSale: "onTokenAddedToSale",
+							Transfer: "onTransfer",
+							OwnershipTransferred: "onTransferOwnership",
+							TokenBought: "onTokenBought",
+							SeriesPutOnSale: "onSeriesPutOnSale",
+							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+						};
+						Q.each(ABI, function (index, obj) {
+							Q.each(events, function (event1, event2) {
+								if (obj.type === "event" && obj.name === event1) {
+									contract.on(event1, function () {
+										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+									});
+								}
+							});
 						});
 
-						if (!contractURL) {
-							throw new Q.Exception("contract ABI url invalid");
+						_subMethod(contract);
+					});
+				},
+				/**
+				 * Get ABI by chainId and contractAddress
+				 * @method fetchABI
+				 * @params {String} chainId
+				 * @params {String} contractAddress
+				 * @params {function} callback
+				 */
+				fetchABI: function (chainId, contractAddress, callback) {
+					Q.handle(Assets.batchFunction(), null, ["NFT", "getABI", chainId, contractAddress, function (err) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
 						}
 
-						// loading ABI json
-						$.getJSON(contractURL, function (ABI) {
-							var provider = new ethers.providers.Web3Provider(window.ethereum);
-							var contract = new ethers.Contract(address, ABI, provider.getSigner());
+						Q.handle(callback, null, [null, this]);
+					}]);
+				},
+				/**
+				 * Get metadata
+				 * @method metadata
+				 * @params {String} tokenId - NFT tokenId
+				 * @params {String} chainId
+				 * @params {String} contractAddress
+				 * @params {function} callback
+				 */
+				metadata: function (tokenId, chainId, contractAddress, callback) {
+					Q.handle(Assets.batchFunction(), null, ["NFT", "getRemoteJSON", tokenId, chainId, contractAddress, function (err) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
+						}
 
-							var events = {
-								TokenRemovedFromSale: "onTokenRemovedFromSale",
-								TokenPutOnSale: "onTokenAddedToSale",
-								Transfer: "onTransfer",
-								OwnershipTransferred: "onTransferOwnership",
-								TokenBought: "onTokenBought",
-								SeriesPutOnSale: "onSeriesPutOnSale",
-								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-							};
-							Q.each(ABI, function (index, obj) {
-								Q.each(events, function (event1, event2) {
-									if (obj.type === "event" && obj.name === event1) {
-										contract.on(event1, function () {
-											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-										});
-									}
-								});
-							});
-
-							_subMethod(contract);
-						});
-					});
-					Q.each(urls, function (i, url) {
-						Q.Request.getUrlStatus(url, pipe.fill(url));
-					});
+						Q.handle(callback, null, [null, this]);
+					}]);
 				},
 				/**
 				 * Get amount of tokens by wallet and chain
@@ -1581,7 +1595,8 @@
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
-		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/series.js",
+		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
+		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
@@ -1783,4 +1798,17 @@
 			return false;
 		}, 'Assets');
 	}, 'Assets');
+
+	var co = {
+		scrollbarsAutoHide: false,
+		handlers: {
+			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
+			NFT: "{{Assets}}/js/columns/NFT.js"
+		}
+	};
+	if (Q.info.isMobile) {
+		co.back = {src: "Q/plugins/Q/img/x.png"};
+	}
+	Q.Tool.define.options('Q/columns', co);
+
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);
