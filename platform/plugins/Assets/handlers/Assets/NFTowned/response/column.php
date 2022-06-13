@@ -17,7 +17,7 @@ function Assets_NFTowned_response_column () {
 		$showControls = Q_Config::get('Assets', 'NFTprofile', 'controls', true);
 		$controls = $showControls ? Q::view('Assets/controls/NFTprofile.php') : null;
 	}*/
-	Assets::$columns['NFTcontests'] = array(
+	Assets::$columns['NFTowned'] = array(
 		'title' => $title,
 		'column' => $column,
 		'columnClass' => 'Assets_column_'.$columnsStyle,

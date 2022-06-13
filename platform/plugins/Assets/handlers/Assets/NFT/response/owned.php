@@ -57,7 +57,6 @@ function Assets_NFT_response_owned ($params) {
 			continue;
 		}
 
-		//TODO: use balanceOf and tokenOfOwnerByIndex if method tokensByOwner absent
 		$ABI = Users_Web3::getABIFileContent($chain["contract"], $chain["chainId"]);
 		$tokensByOwner = Users_Web3::existsInABI("tokensByOwner", $ABI, "function", false);
 		$balanceOf = Users_Web3::existsInABI("balanceOf", $ABI, "function", false);
