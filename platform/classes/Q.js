@@ -847,7 +847,7 @@ Q.getter = function _Q_getter(original, options) {
 
 	gw.forget = function _forget() {
 		if (gw.cache) {
-			return gw.cache.remove(arguments);
+			return gw.cache.remove(Array.prototype.slice.call(arguments));
 		}
 	};
 	
@@ -1279,7 +1279,9 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 			// key in the index
 			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
 			var obj = this.special[k] || {};
-			delete obj[key];
+			if (key in obj) {
+				delete obj[key];
+			}
 			this.special[k] = obj;
 		}
 	}
@@ -1292,6 +1294,7 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
  */
 Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
 	this.data = {};
+	this.special = {};
 };
 /**
  * Searches for entries matching a certain prefix of arguments array

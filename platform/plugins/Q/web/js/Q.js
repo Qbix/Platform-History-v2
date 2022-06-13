@@ -3856,7 +3856,7 @@ Q.getter = function _Q_getter(original, options) {
 
 	gw.forget = function _forget() {
 		if (gw.cache) {
-			return gw.cache.remove(arguments);
+			return gw.cache.remove(Array.prototype.slice.call(arguments));
 		}
 	};
 	
@@ -5659,6 +5659,22 @@ function Q_Cache_set(cache, key, obj, special) {
 		
 	}
 }
+function Q_Cache_removeFromIndex(cache, parameters, key) {
+	if (!parameters) {
+		return false;
+	}
+	// remove from index for Cp.each
+	for (var i=1, l=parameters.length; i<l; ++i) {
+		// key in the index
+		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+		var obj = Q_Cache_get(cache, k, true) || {};
+		if (key in obj) {
+			delete obj[key];
+		}
+		Q_Cache_set(cache, k, obj, true);
+	}
+	return true;
+}
 function Q_Cache_remove(cache, key, special) {
 	if (cache.documentStorage) {
 		if (special === true) {
@@ -5849,17 +5865,7 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 
 	Q_Cache_pluck(this, existing);
 	Q_Cache_remove(this, key);
-
-	if (parameters) {
-		// remove from index for Cp.each
-		for (var i=1, l=parameters.length; i<l; ++i) {
-			// key in the index
-			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
-			var obj = Q_Cache_get(this, k, true) || {};
-			delete obj[key];
-			Q_Cache_set(this, k, obj, true);
-		}
-	}
+	Q_Cache_removeFromIndex(this, parameters, key);
 
 	return true;
 };
@@ -5881,6 +5887,9 @@ Cp.clear = function _Q_Cache_prototype_clear() {
 			prevkey = key;
 			key = item.next;
 			Q_Cache_remove(this, prevkey);
+			try {
+				Q_Cache_removeFromIndex(this, JSON.parse(key), key);
+			} catch (e) {}
 		}
 	}
 	this.earliest(null);

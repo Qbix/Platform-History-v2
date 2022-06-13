@@ -500,6 +500,18 @@ div.Q_placeholder { pointer-events: none; }
 .Q_gallery_tool .Q_lazy_load,
 .Q_gallery_tool .Q_lazy_loaded { opacity: 1; transition: none; }
 
+img[data-lazyload-src],
+[data-q-lazyload="waiting"],
+[data-q-lazyload="removed"] {
+	opacity: 0.1;
+	transition: opacity 1s;
+}
+
+[data-q-lazyload="activated"] {
+	opacity: 1;
+	transition: opacity 1s;
+}
+
 #dialogs_slot { display: none; }
 
 .Q_notMobile .Q_overlay.Q_alert,
@@ -827,10 +839,6 @@ input[type=text],
 input[type=password] {
     -webkit-appearance: none;
     -moz-appearance: none;
-}
-
-img[data-lazyload-src] {
-	opacity: 0.1;
 }
 
 @keyframes Q_placeholder_shimmer {
