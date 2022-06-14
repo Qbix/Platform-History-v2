@@ -491,6 +491,7 @@
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
 				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
+					tool.element.addClass('Q_tabs_arranged');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(this);
 				}
@@ -587,6 +588,7 @@
 				}
 				if (!$overflow) {
 					tool.$overflow = null;
+					tool.element.addClass('Q_tabs_arranged');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(tool);
 				}
