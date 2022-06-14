@@ -4901,10 +4901,13 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  *  If null, calculates an automatically unique id beginning with the tool's name
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
+ * @param {Boolean} [lazyload=false]
+ *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+ *    activated on one of its containers.
  * @return {HTMLElement}
  *  Returns an element you can append to things, and/or call Q.activate on
  */
-Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix) {
+Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix, lazyload) {
 	if (typeof toolOptions === 'string') {
 		prefix = id;
 		id = toolOptions;
@@ -4948,6 +4951,9 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 			}
 			element.setAttribute('id', id);
 		}
+	}
+	if (lazyload) {
+		element.setAttribute('data-Q-lazyload', 'waiting');
 	}
 	return element;
 };
@@ -11212,12 +11218,15 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 *  Optional id of the tool, such as "Q_tabs_2"
 	 * @param {String} [prefix]
 	 *  Optional prefix to prepend to the tool's id
+	 * @param {Boolean} [lazyload=false]
+	 *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+	 *    activated on one of its containers.
 	 */
-	$.fn.tool = function _jQuery_fn_tool(toolName, toolOptions, id, prefix) {
+	$.fn.tool = function _jQuery_fn_tool(toolName, toolOptions, id, prefix, lazyload) {
 		var args = arguments;
 		return this.each(function () {
 			var id2 = (typeof id === 'function') ? id.apply(this, args) : id;
-			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix);
+			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix, lazyload);
 		});
 	};
 	/**
