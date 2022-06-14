@@ -1,7 +1,4 @@
 <?php
-require_once USERS_PLUGIN_DIR.'/vendor/autoload.php';
-use phpseclib\Math\BigInteger;
-
 function Assets_NFT_response_content ($params) {
 	$request = array_merge($_REQUEST, $params);
 	$uri = Q_Dispatcher::uri();
@@ -44,7 +41,9 @@ function Assets_NFT_response_content ($params) {
 
 	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
 	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
-	if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
+	if ($stream->icon === '{{Assets}}/img/empty_white.png') {
+		$image = null;
+	} else if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
 		$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
 		$defaultIconSize = '2048';
 	} else {
