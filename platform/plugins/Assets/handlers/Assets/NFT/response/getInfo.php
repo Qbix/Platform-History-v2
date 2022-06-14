@@ -16,8 +16,9 @@ function Assets_NFT_response_getInfo ($params) {
 	$longDuration = 31104000;
 	$chain = Assets_NFT::getChains($chainId);
 	$contractAddress = Q::ifset($request, "contractAddress", $chain["contract"]);
+	$tokenURI = Q::ifset($request, "tokenURI", null);
 
-	$ABI = Users_Web3::getABIFileContent($contractAddress, $chainId);
+	$ABI = Q::ifset($request, "ABI", Users_Web3::getABIFileContent($contractAddress, $chainId));
 
 	// execute authorOf if exists
 	if (Users_Web3::existsInABI("authorOf", $ABI, "function", false)) {
@@ -47,6 +48,11 @@ function Assets_NFT_response_getInfo ($params) {
 	// execute getCommission if exists
 	if (Users_Web3::existsInABI("getCommission", $ABI, "function", false)) {
 		$commissionInfo = Users_Web3::execute($contractAddress, "getCommission", $tokenId, $chainId, $caching, $longDuration);
+	}
+
+	if (!$tokenURI && Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
+		$tokenURI = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
+		$tokenURI = Q_Uri::interpolateUrl($tokenURI);
 	}
 
 	$metadata = Q::event('Assets/NFT/response/getRemoteJSON', compact("tokenId","chainId", "contractAddress", "ABI"));
