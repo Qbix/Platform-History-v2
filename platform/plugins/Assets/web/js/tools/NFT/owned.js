@@ -13,6 +13,10 @@ var NFT = Web3.NFT;
  * @class Assets NFT/owned
  * @constructor
  * @param {Object} options Override various options for this tool
+ * @param {string} [options.userId] - registered in app user id
+ * @param {string} [options.walletAddress] - override users wallet address
+ * @param {string} [options.chainId] - override chain id
+ * @param {string} [options.contractAddress] - override contract address
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
@@ -41,6 +45,9 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 
 { // default options here
 	userId: null,
+	walletAddress: null,
+	chainId: null,
+	contractAddress: null,
 	limit: 10
 },
 
@@ -109,6 +116,9 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		}, {
 			fields: {
 				userId: state.userId,
+				walletAddress: state.walletAddress,
+				chainId: state.chainId,
+				contractAddress: state.contractAddress,
 				offset: offset,
 				limit: state.limit
 			}

@@ -21,11 +21,9 @@ function Assets_NFT_response_owned ($params) {
 	$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
 
 	$chains = Assets_NFT::getChains();
-	$wallet = Users_Web3::getWalletById($userId, true);
-	// <test>
-	//$wallet = "0xB4281C6f9b20BD1658F25C894F31a3690DCbcfEa";
-	//$chains["0x1"]["contract"] = "0x596a0f276ee432d8a28441e55737ff55cf30d0f7";
-	// </test>
+	$walletAddress = Q::ifset($request, 'walletAddress', Users_Web3::getWalletById($userId, true));
+	$chainId = Q::ifset($request, 'chainId', null);
+	$contractAddress = Q::ifset($request, 'contractAddress', null);
 
 	$tokenJSON = array();
 
@@ -56,6 +54,16 @@ function Assets_NFT_response_owned ($params) {
 
 	// get tokens by owner
 	foreach ($chains as $chain) {
+		if ($chainId) {
+			if ($chainId != $chain["chainId"]) {
+				continue;
+			}
+
+			if ($contractAddress) {
+				$chain["contract"] = $contractAddress;
+			}
+		}
+
 		if (empty($chain["contract"])) {
 			continue;
 		}
@@ -72,7 +80,7 @@ function Assets_NFT_response_owned ($params) {
 				$methodName = "getNftsByOwner";
 			}
 
-			$tokens = Users_Web3::execute($chain["contract"], $methodName, [$wallet, $tokensByOwnerLimit], $chain["chainId"]);
+			$tokens = Users_Web3::execute($chain["contract"], $methodName, [$walletAddress, $tokensByOwnerLimit], $chain["chainId"]);
 			if (empty($tokens)) {
 				continue;
 			}
@@ -83,9 +91,9 @@ function Assets_NFT_response_owned ($params) {
 				}
 			}
 		} elseif ($balanceOf && $tokenOfOwnerByIndex) {
-			$tokens = (int)Users_Web3::execute($chain["contract"], "balanceOf", $wallet, $chain["chainId"]);
+			$tokens = (int)Users_Web3::execute($chain["contract"], "balanceOf", $walletAddress, $chain["chainId"]);
 			for ($i = 0; $i < $tokens; $i++) {
-				$tokenId = (int)Users_Web3::execute($chain["contract"], "tokenOfOwnerByIndex", array($wallet, $i), $chain["chainId"], true, $glob["Assets_NFT_response_owned"]["secondsInYear"]);
+				$tokenId = (int)Users_Web3::execute($chain["contract"], "tokenOfOwnerByIndex", array($walletAddress, $i), $chain["chainId"], true, $glob["Assets_NFT_response_owned"]["secondsInYear"]);
 				if ($_Assets_NFT_response_owned_json($tokenId, $chain, $ABI, $tokenJSON, $countNFTs) === false) {
 					break;
 				}
