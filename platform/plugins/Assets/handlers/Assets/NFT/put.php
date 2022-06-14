@@ -11,6 +11,12 @@ function Assets_NFT_put ($params) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
+	$stream = Streams::fetchOne(null, $publisherId, $streamName);
+
+	if ($stream->getAttribute("tokenId")) {
+		throw new Exception("This NFT minted, hence can't be changed!");
+	}
+
 	// update NFT attributes
 	if (Q_Request::slotName("attrUpdate")) {
 		$attribute = new Assets_NftAttributes();
@@ -26,8 +32,6 @@ function Assets_NFT_put ($params) {
 		return;
 	}
 
-	//$stream = Assets_NFT::getComposerStream($publisherId);
-	$stream = Streams::fetchOne(null, $publisherId, $streamName);
 	$fields = Q::take($request, array("title", "content", "attributes"));
 	Assets_NFT::updateNFT($stream, $fields);
 
