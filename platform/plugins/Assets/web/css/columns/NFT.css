@@ -84,6 +84,10 @@
     padding: 14px 5px 0 0;
     line-height: 15px;
 }
+.Assets_column_NFT .Assets_info_content {
+    display: flex;
+    align-items: center;
+}
 .Assets_NFT_conversation.Q_columns_column .Q_controls_slot {
     height: unset;
 }
