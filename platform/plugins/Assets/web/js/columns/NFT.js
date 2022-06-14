@@ -1,7 +1,7 @@
 "use strict";
 (function(Q, $, undefined) {
 Q.exports(function (options, index, column, data) {
-	Q.addStylesheet('{{Assets}}/css/columns/NFT.css');
+	Q.addStylesheet('{{Assets}}/css/columns/NFT.css', { slotName: 'Assets' });
 
 	var $column = $(column);
 	var publisherId = $("input[name=publisherId]", column).val();

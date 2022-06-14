@@ -113,7 +113,10 @@
 .Assets_column_NFT .assetsNFTAttributes tr td:first-of-type {
     font-weight: bold;
     text-align: right;
+    vertical-align: top;
+    white-space: nowrap;
 }
 .Assets_column_NFT .assetsNFTAttributes tr td:last-of-type {
     padding-left: 5px;
+    white-space: normal;
 }

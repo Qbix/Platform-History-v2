@@ -1803,6 +1803,7 @@
 		scrollbarsAutoHide: false,
 		handlers: {
 			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
+			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
 			NFT: "{{Assets}}/js/columns/NFT.js"
 		}
 	};
