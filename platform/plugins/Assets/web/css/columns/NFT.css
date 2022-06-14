@@ -66,7 +66,6 @@
 .Assets_column_NFT .Assets_NFT_section {
     min-height: 55px;
     display: flex;
-    align-items: center;
     line-height: unset;
     height: unset;
     border: none;
@@ -82,7 +81,7 @@
     cursor: pointer;
 }
 .Assets_column_NFT .Assets_info_icon {
-    padding: 0 5px;
+    padding: 14px 5px 0 0;
     line-height: 15px;
 }
 .Assets_NFT_conversation.Q_columns_column .Q_controls_slot {
