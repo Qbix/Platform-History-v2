@@ -6,7 +6,7 @@ function Streams_after_Q_image_save($params)
 	if (!$user) {
 		return;
 	}
-	$path = $subpath = null;
+	$subpath = null;
 	$data = $save = array();
 	extract($params, EXTR_OVERWRITE);
 	if (isset(Users::$cache['iconUrlWasChanged'])
@@ -30,25 +30,6 @@ function Streams_after_Q_image_save($params)
 		}
 		sort($sizes);
 		$stream->setAttribute('sizes', $sizes);
-	}
-
-	// save full size image as file
-	if ($_REQUEST["original"]) {
-		$imgData = base64_decode(chunk_split(substr($_REQUEST["original"], strpos($_REQUEST["original"], ',')+1)));
-		if (Q_image::isJPEG($imgData)) {
-			$ext = "jpg";
-		} elseif (Q_image::isPNG($imgData)) {
-			$ext = "png";
-		} else {
-			$ext = "gif";
-		}
-		$file = array(
-			'data' => $_REQUEST["original"],
-			'name' => "original.$ext",
-			'path' => $path,
-			'subpath' => Q_Utils::splitId($stream->publisherId).DS."{$stream->name}".DS."file".DS.time()
-		);
-		Q::event("Q/file/post", $file);
 	}
 
 	if (empty(Streams::$beingSavedQuery)) {

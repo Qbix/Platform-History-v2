@@ -4152,7 +4152,7 @@ abstract class Streams extends Base_Streams
 			: "{{Streams}}/img/icons/$url";
 		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl) && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
 			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}
@@ -4861,6 +4861,25 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Get the directory to upload files into, for a stream.
+	 * @method uploadsDirectory
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @return {string}
+	 */
+	static function uploadsDirectory($publisherId, $streamName)
+	{
+		$splitId = Q_Utils::splitId($publisherId);
+		$sn = implode(DS, explode('/', $streamName));
+		$path = APP_WEB_DIR . DS . 'Q' . DS . 'uploads' . DS . 'Streams';
+		if ($realpath = realpath($path)) {
+			$path = $realpath;
+		}
+		$subpath = $splitId . DS . $sn;
+		return $path . DS . $subpath;
+	}
+
+	/**
 	 * Get the directory to import the icon into, for a stream.
 	 * Use this with Users::importIcon().
 	 * @param {string} $publisherId
@@ -4881,7 +4900,7 @@ abstract class Streams extends Base_Streams
 		if ($extra) {
 			$subpath .= DS . $extra;
 		}
-		return $realpath . DS . $subpath;
+		return $path . DS . $subpath;
 	}
 	/**
 	 * Remove streams from the system, including all related rows.

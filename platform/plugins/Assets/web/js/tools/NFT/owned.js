@@ -50,7 +50,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var state = this.state;
 
 		// add composer
-		tool.createComposer();
+		//tool.createComposer();
 
 		var _onInvoke = function () {
 			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
@@ -94,9 +94,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var $loading = $("<img src='" + Q.url("{{Q}}/img/throbbers/loading.gif") + "' />").appendTo(tool.element);
 
 		Q.req("Assets/NFT", "owned", function (err, response) {
-
 			$loading.remove();
-
 			if (err) {
 				return console.warn(err);
 			}
@@ -104,7 +102,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			var NFTResults = response.slots.owned;
 
 			Q.each(NFTResults, function (index, result) {
-				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", result, result.tokenId + "-" + result.chainId).activate();
+				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", {metadata: result}).activate();
 			});
 
 			Q.handle(callback);

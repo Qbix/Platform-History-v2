@@ -5,15 +5,17 @@ $categoryStreamNames = array("Assets/NFT/series", "Assets/contests");
 $adminLabels = Q_Config::get("Users", "communities", "admins", null);
 // create access row
 foreach ($adminLabels as $adminLabel) {
-	$access = new Streams_Access();
-	$access->publisherId = "";
-	$access->streamName = $categoryStreamName;
-	$access->ofContactLabel = $adminLabel;
-	if (!$access->retrieve()) {
-		$access->readLevel = 40;
-		$access->writeLevel = 40;
-		$access->adminLevel = 40;
-		$access->save();
+	foreach ($categoryStreamNames as $categoryStreamName) {
+		$access = new Streams_Access();
+		$access->publisherId = "";
+		$access->streamName = $categoryStreamName;
+		$access->ofContactLabel = $adminLabel;
+		if (!$access->retrieve()) {
+			$access->readLevel = 40;
+			$access->writeLevel = 40;
+			$access->adminLevel = 40;
+			$access->save();
+		}
 	}
 }
 
@@ -26,11 +28,11 @@ while (1) {
 		break;
 	}
 	foreach ($users as $user) {
-		if (Users::isCommunityId($user->id)) {
-			continue;
-		}
-
 		foreach ($categoryStreamNames as $categoryStreamName) {
+			if (Users::isCommunityId($user->id) && $categoryStreamName=="Assets/NFT/series") {
+				continue;
+			}
+
 			$stream = Streams::fetchOne($user->id, $user->id, $categoryStreamName);
 			if ($stream) {
 				continue;

@@ -100,10 +100,10 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		'position': 'absolute'
 	});
 	state.label = $('<label class="Q_imagepicker_label" for="'+inputId+'"></label>');
-	var originalSrc = $this.attr('src');
+	var originalSrc = $this.prop('src');
 	if (originalSrc && originalSrc.indexOf('?') < 0) {
 		// cache busting
-		$this.attr('src', Q.url(originalSrc, null, {cacheBust: state.cacheBust}));
+		$this.prop('src', Q.url(originalSrc, null, {cacheBust: state.cacheBust}));
 	}
 	$this.before(state.input).before(state.label);
 	$this.addClass('Q_imagepicker');
@@ -111,9 +111,9 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	
 	function _process() {
 		var state = $this.state('Q/imagepicker');
-		state.oldSrc = $this.attr('src');
+		state.oldSrc = $this.prop('src');
 		if (state.throbber) {
-			$this.attr('src', Q.url(state.throbber));
+			$this.prop('src', Q.url(state.throbber));
 		}
 		$this.addClass('Q_uploading');
 		var reader = new FileReader();
@@ -258,7 +258,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		function _callback (err, res) {
 			var msg = Q.firstErrorMessage(err, res);
 			if (msg) {
-				$this.attr('src', state.oldSrc).stop().removeClass('Q_uploading');
+				$this.prop('src', state.oldSrc).stop().removeClass('Q_uploading');
 				return Q.handle([state.onError, state.onFinish], $this, [msg]);
 			}
 			var key = state.showSize;
@@ -270,7 +270,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				[res.slots.data, key, state.file || null]
 			);
 			if (c !== false && key) {
-				$this.attr('src', 
+				$this.prop('src',
 					Q.url(res.slots.data[key], null, {cacheBust: state.cacheBust})
 				);
 			}
@@ -396,7 +396,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 				$(canvas).remove();
 				$img.remove();
 				callback.call(this, imageData, null);
-			}).attr('src', src)
+			}).prop('src', src)
 			.css('display', 'none')
 			.appendTo('body');
 		};
@@ -620,7 +620,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 	
 		function _revert() {
 			var state = $this.state('Q/imagepicker');
-			$this.attr('src', state.oldSrc)
+			$this.prop('src', state.oldSrc)
 				.stop()
 				.removeClass('Q_uploading');
 		}
@@ -679,7 +679,7 @@ Q.Tool.jQuery('Q/imagepicker', function _Q_imagepicker(o) {
 		var _callback = function (err, res) {
 			var msg = Q.firstErrorMessage(err, res);
 			if (msg) {
-				$this.attr('src', state.oldSrc).stop().removeClass('Q_uploading');
+				$this.prop('src', state.oldSrc).stop().removeClass('Q_uploading');
 				return Q.handle([state.onError, state.onFinish], $this, [msg]);
 			}
 			var c = Q.handle([state.onSuccess, state.onFinish], $this,

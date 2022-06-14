@@ -266,15 +266,14 @@
 			"admins": ["Users/owners", "Users/admins"]
 		},
 		"web3": {
-			"contracts": {
-
-			},
 			"chains": {
 				"0x1": {
 					"name": "Ethereum Mainnet",
 					"publicRPC": "https://main-light.eth.linkpool.io/",
 					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
-					"blockExplorerUrl": "https://etherscan.io/"
+					"blockExplorerUrl": "https://etherscan.io/",
+					"rpcUrl": "https://mainnet.infura.io/v3/{{infuraId}}",
+					"abiUrl": "https://api.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}"
 				},
 				"0x3": {
 					"name": "Ropsten"
@@ -282,7 +281,10 @@
 				"0x4": {
 					"name": "Rinkeby",
 					"publicRPC": "https://main-light.eth.linkpool.io/",
-					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws"
+					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
+					"rpcUrl": "https://rinkeby.infura.io/v3/{{infuraId}}",
+					"blockExplorerUrl": "https://rinkeby.etherscan.io/",
+					"abiUrl": "https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}"
 				},
 				"0x5": {
 					"name": "Goerli",
@@ -293,15 +295,23 @@
 					"name": "Binance SmartChain",
 					"publicRPC": "https://bsc-dataseed.binance.org/",
 					"publicWebsocket": "wss://bsc-ws-node.nariox.org:443",
-					"blockExplorerUrl": "https://bscscan.com"
+					"blockExplorerUrl": "https://bscscan.com",
+					"rpcUrl": "https://bsc-dataseed.binance.org/",
+					"abiUrl": "https://api.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}"
 				},
 				"0x61": {
 					"name": "Binance Smart Chain Testnet",
-					"publicRPC": "https://data-seed-prebsc-1-s1.binance.org:8545"
+					"publicRPC": "https://data-seed-prebsc-1-s1.binance.org:8545",
+					"rpcUrl": "https://data-seed-prebsc-1-s1.binance.org:8545/",
+					"blockExplorerUrl": "https://testnet.bscscan.com",
+					"abiUrl": "https://api-testnet.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}"
 				},
 				"0x89": {
 					"name": "Polygon Mainnet",
-					"publicRPC": "https://polygon-rpc.com/"
+					"publicRPC": "https://polygon-rpc.com/",
+					"rpcUrl": "https://polygon-rpc.com/",
+					"blockExplorerUrl": "https://polygonscan.com/",
+					"abiUrl": "https://api.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}"
 				}
 			}
 		}

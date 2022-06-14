@@ -4,6 +4,7 @@
         "WalletAbsent": "The wallet not connected.",
         "Rendering": "There were errors while rendering <span class='url'>{{1}}</span>",
         "PriceRequired": "Price required!",
+        "NameRequired": "Name required!",
         "PriceInvalid": "Price invalid!",
         "TransactionFailed": "Transaction Failed",
         "ChainNotSupported": "The selected chain is not supported. Supported chain: {{supportedChain}}",
@@ -199,6 +200,7 @@
         "OwnerUserNotFound": "Owner of this NFT is not registered in our application.",
         "BuyNow": "Buy now",
         "Buy": "Buy",
+        "Conversation": "Conversation",
         "Create": "Create",
         "CurrentBid": "Current bid",
         "StartingIn": "Starting in",
@@ -238,6 +240,7 @@
         "Actions": "Actions",
         "Update": "Update",
         "UpdateToken": "Update Token",
+        "UpdateNFT": "Update NFT",
         "CreateToken": "Create Token",
         "PlaceBid": "Place Bid",
         "SoldOut": "Sold",
@@ -248,6 +251,7 @@
         "NftMovie": "Movie to represent NFT",
         "UploadMovie": "Upload movie",
         "MovieSource": "Movie Source",
+        "MovieURL": "Movie URL",
         "UploadFile": "Upload a file",
         "PutOnMarketplace": "Put on marketplace",
         "InstantPurchase": "Enter price to allow users instantly purchase your NFT",
@@ -259,11 +263,21 @@
         "EnterMinimumBid": "Enter Minimum bid",
         "SelectChain": "Select chain",
         "Currency": "Currency",
+        "AreYouSureDeleteImage": "Are you sure you want to remove image?",
+        "AreYouSureDeleteVideo": "Are you sure you want to remove video?",
         "series": {
             "Name": "Name",
             "Icon": "Icon",
             "Description": "Description",
             "Author": "Author",
+            "SelectSeries": "Select series",
+            "Value": "Value",
+            "AreYouSure": "Are you sure?",
+            "AuthorInvalid": "Author address invalid!",
+            "Address": "Address",
+            "CoverImage": "Cover image",
+            "UploadCoverImage": "Upload cover image",
+            "CommissionAddressInvalid": "Commission address invalid",
             "OnSale": "on sale",
             "OffSale": "off sale",
             "CreateSeries": "Create Series",
@@ -294,11 +308,9 @@
             "TypeContractName": "contract name",
             "TypeContractSymbol": "contract symbol (max 10 chars)"
         },
-        "profile": {
-            "Title": "Profile for {{userName}}",
-            "Description": "User details",
-            "aboutPlaceholder": "Edit Bio",
-            "SureLogOut": "Are you sure you want to log out?"
+        "contests": {
+            "Title": "Contests",
+            "NewContest": "New Contest"
         },
         "import": {
             "importNFT": "Importing NFT's",
@@ -348,6 +360,13 @@
             "NewAttribute": "New Attribute",
             "UpdateAttributes": "Update Attributes",
             "SaveAttributes": "Save Attributes"
+        },
+        "profile": {
+            "LogOut": "Log out",
+            "Title": "Profile for {{userName}}",
+            "Description": "User details",
+            "aboutPlaceholder": "Edit Bio",
+            "SureLogOut": "Are you sure you want to log out?"
         }
     }
 }

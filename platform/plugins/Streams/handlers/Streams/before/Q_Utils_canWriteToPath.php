@@ -40,7 +40,7 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 					$l = $j;
 					for ($i=$c-1; $i>$j; --$i) {
 						$l = $i;
-						if (in_array($parts[$i], array('icon', 'file'))) {
+						if (in_array($parts[$i], array('icon', 'file', 'video', 'audio'))) {
 							break;
 						}
 					}

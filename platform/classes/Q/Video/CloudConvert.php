@@ -12,16 +12,16 @@ use \CloudConvert\Models\Task;
  */
 class Q_Video_CloudConvert {
 	static function setup () {
-		$cloudconvert = new CloudConvert([
-			'api_key' => Q_Config::expect("Q", "video", "cloudconvert", "key"),
+		$cloudConvert = new CloudConvert([
+			'api_key' => Q_Config::expect("Q", "video", "cloudConvert", "key"),
 			'sandbox' => false
 		]);
 
-		return $cloudconvert;
+		return $cloudConvert;
 	}
 
 	static function getTaskKey () {
-		return Q_Config::get("Q", "video", "cloudconvert", "taskKey", "my-file");
+		return Q_Config::get("Q", "video", "cloudConvert", "taskKey", "uploadedFile");
 	}
 
 	/**
@@ -38,7 +38,7 @@ class Q_Video_CloudConvert {
 	 */
 	static function convert ($inputFile, $tag=null, $format="gif", $options=array())	{
 		$taskKey = self::getTaskKey();
-		$cloudconvert = self::setup();
+		$cloudConvert = self::setup();
 
 		if (filter_var($inputFile, FILTER_VALIDATE_URL)) {
 			$job = (new Job())
@@ -70,14 +70,14 @@ class Q_Video_CloudConvert {
 
 		$job->setTag($tag);
 
-		$cloudconvert->jobs()->create($job);
+		$cloudConvert->jobs()->create($job);
 
 		// if local path, start uploading
 		if (!filter_var($inputFile, FILTER_VALIDATE_URL)) {
 			$uploadTask = $job->getTasks()->whereName('import-'.$taskKey)[0];
-			$cloudconvert->tasks()->upload($uploadTask, fopen($inputFile, 'r'), basename($inputFile));
+			$cloudConvert->tasks()->upload($uploadTask, fopen($inputFile, 'r'), basename($inputFile));
 		}
 
-		return compact("cloudconvert", "job");
+		return compact("cloudConvert", "job");
 	}
 };

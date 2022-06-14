@@ -1140,19 +1140,21 @@ Streams.messageHandler = function(msgType, callback) {
  * @static
  * @method iconUrl
  * @param {String} icon the value of the stream's "icon" field
- * @param {Number} [size=40] the size of the icon to render. Defaults to 40.
+ * @param {String|Number|false} [basename=40] The last part after the slash, such as "50.png" or "50". Setting it to false skips appending "/basename"
  * @return {String} the url
  */
-Streams.iconUrl = function(icon, size) {
+Streams.iconUrl = function(icon, basename) {
 	if (!icon) {
 		console.warn("Streams.iconUrl: icon is empty");
 		return '';
 	}
-	if (!size || size === true) {
-		size = '40';
+	if ((basename === true) // for backward compatibility
+		|| (!basename && basename !== false)) {
+		basename = '40';
 	}
-	size = (String(size).indexOf('.') >= 0) ? size : size+'.png';
-	var src = Q.interpolateUrl(icon + '/' + size);
+	basename = (String(basename).match(/\.\w+$/g)) ? basename : basename+'.png';
+	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
+	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? src
 		: Q.url('{{Streams}}/img/icons/'+src);
