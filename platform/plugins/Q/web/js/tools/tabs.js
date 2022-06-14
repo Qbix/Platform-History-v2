@@ -488,7 +488,6 @@
 					}
 					$o.remove();
 				}
-				tool.element.addClass('Q_tabs_arranged');
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
 				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
