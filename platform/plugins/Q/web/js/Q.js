@@ -11371,7 +11371,8 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| Q.cookie('Q_cordova');
 
 var detected = Q.Browser.detect();
-var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
+var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
+var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
 /**
