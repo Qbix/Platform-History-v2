@@ -11,10 +11,12 @@
  * @constructor
  * @param {Object} [options] options is an Object with function parameters
  * @param {Array} [options.images] images an array of objects containing object <code> { src: String , caption: String , interval: Number, transition: Object} </code>
- *   @param {String} [options.images.src] src url of the image, will be fed through Q.url(). Required.
- *   @param {String} [options.images.caption] caption for the image. Optional
- *   @param {Number} [options.images.interval] interval number overriding default interval. Optional.
- *   @param {Object} [options.images.transition] transition object overriding default transition. Optional.
+ *   @param {String} [options.images.N.name] optional, put a name here, that is used for css classes
+ *   @param {String} [options.images.N.src] src url of the image, will be fed through Q.url(). Required.
+ *   @param {String} [options.images.N.caption] caption for the image. Optional
+ *   @param {String} [options.images.N.customCaptionPosition] set to true if you're overriding the position with your own css
+ *   @param {Number} [options.images.N.interval] interval duration overriding default interval duration. Optional.
+ *   @param {Object} [options.images.N.transition] transition object overriding default transition. Optional.
  * @param {Object} [options.transition] transition object that contains properties for making transitions
  *   @param {Number} [options.transition.duration] duration the number of milliseconds the transition should take (where the intervals overlap)
  *   @param {String} [options.transition.ease] ease the type of easing function to apply from Q.Animation.ease object
@@ -168,6 +170,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 		if (!image.src) {
 			image.src = Q.url('{{Q}}/img/throbbers/transparent.gif');
 		}
+		var name = image.name ? Q.normalize(image.name) : '';
 		var img = $('<img />').attr({
 			alt: image.caption ? image.caption : 'image ' + index,
 			src: Q.url(image.src)
@@ -178,6 +181,9 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 			left: '0px'
 		}).appendTo($this)
 		.load(onLoad);
+		if (name) {
+			img.addClass('Q_gallery_caption_' + name);
+		}
 		imgs[index] = img;
 		img.each(function () {
 			if (this.complete) {
@@ -192,9 +198,15 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 				.css(css)
 				.html(image.caption)
 				.appendTo($this);
+			if (!image.customCaptionPosition) {
+				cap.addClass('Q_gallery_caption_centered');
+			}
 			caps[index] = cap;
 		} else {
 			caps[index] = $([]);
+		}
+		if (name) {
+			cap.addClass('Q_gallery_caption_' + name);
 		}
 		function onLoad() {
 			imgs[index] = img;
