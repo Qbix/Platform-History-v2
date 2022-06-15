@@ -1559,10 +1559,12 @@ class Q_Response
 	/**
 	 * Returns the string containing all the html attributes
 	 * @method htmlAttributes
+	 * @param {string} [$separator="\n"]
+	 *  You can override the separator to be a space, for example
 	 * @static
 	 * @return {string}
 	 */
-	static function htmlAttributes()
+	static function htmlAttributes($separator = "\n")
 	{
 		$touchscreen = Q_Request::isTouchscreen() ? 'Q_touchscreen' : 'Q_notTouchscreen';
 		$mobile = Q_Request::isMobile() ? 'Q_mobile' : 'Q_notMobile';
@@ -1592,11 +1594,14 @@ class Q_Response
 			'attributes' => &$attributes,
 			'language' => &$language
 		), 'before');
-		return 'lang="' . $language . '" '
-			. 'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#" '
-			. 'itemscope itemtype="https://schema.org/WebPage" '
-			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes' "
-			.implode(' ', $attributes);
+		$defaults = array(
+			'lang="' . $language . '"',
+			'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#"',
+			'itemscope itemtype="https://schema.org/WebPage"',
+			"class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'"
+		);
+		$attributes = array_merge($defaults, $attributes);
+		return implode($separator, $attributes);
 	}
 
 	/**

@@ -118,7 +118,7 @@ function Streams_batch_response_batch()
 				Q_Response::clearSlot($k);
 			}
 		} catch (Exception $e) {
-			$result[] = array('errors' => Q_Exception::toArray(array($e)));
+			$result[] = array('errors' => Q_Exception::buildArray(array($e)));
 		}
 		$_REQUEST = $prev_request;
 		Q_Request::$slotNames_override = null;
