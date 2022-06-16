@@ -281,6 +281,9 @@ Q.Tool.define('Streams/chat', function(options) {
 		var res  = {};
 		var tool = this;
 		var state = tool.state;
+		if (Q.isEmpty(messages)) {
+			return res;
+		}
 
 		if ('content' in messages) {
 			// this is a single message
