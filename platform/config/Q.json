@@ -12,6 +12,13 @@
 		"handlersAfterEvent": {
 			"Q/tool/render": ["Q/after/Q/tool/render"]
 		},
+		"autoload": {
+			"requires": {
+				"Q_Crypto": {
+					"PHP": 7.3
+				}
+			}
+		},
 		"routes": {
 			
 		},

@@ -2,7 +2,7 @@
 
 /**
  * This tool renders all user sessions opened.
- * @class Users status
+ * @class Users sessions
  * @constructor
  * @param {array} [$options] An associative array of parameters, containing:
  * @param {string} [$options.userId]
