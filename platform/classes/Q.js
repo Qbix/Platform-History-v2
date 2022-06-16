@@ -1325,6 +1325,10 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 		var key = 'index:' + rawKey; // key in the index
 		var localStorageKeys = this.special[key] || {};
 		for (var k in localStorageKeys) {
+			var result = this.get(k);
+			if (result === undefined) {
+				continue;
+			}
 			callback.call(this, k, this.get(k));
 		}
 		// also the key itself
