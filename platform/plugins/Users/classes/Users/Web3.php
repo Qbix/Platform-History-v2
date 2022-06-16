@@ -58,7 +58,7 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
 		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
-		$appInfo = array_merge($appInfo, $usersWeb3Config);
+		$appInfo = array_merge($usersWeb3Config, $appInfo);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
