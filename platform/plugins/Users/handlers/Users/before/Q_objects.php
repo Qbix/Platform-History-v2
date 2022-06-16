@@ -35,22 +35,6 @@ function Users_before_Q_objects(&$params)
 
 	if ($sigField = Q_Config::get('Users', 'signatures', 'sigField', null)
 	and !empty($_SESSION['Users']['publicKey'])) {
-		$sigField = str_replace('.', '_', $sigField);
-		$nonceField = Q_Config::get('Users', 'signatures', 'nonce', null);
-		if ($nonceField) {
-			$nonceField = str_replace('.', '_', $nonceField);
-			Q_Valid::requireFields(array($nonceField), $_POST, true);
-			$nonce = $_POST[$nonceField];
-			$prevNonce = Q::ifset($_SESSION, 'Users', 'nonce', 0);
-			if ($nonce <= $prevNonce) {
-				throw new Q_Exception_WrongValue(array(
-					'field' => $nonceField,
-					'range' => "something > $prevNonce"
-				));
-			}
-			$_SESSION['Users']['nonce'] = $nonce;
-			// session will probably be saved, unless transaction is rolled back
-		}
 		$rl = Q_Config::get('Users', 'requireLogin', array());
 		foreach ($rl as $k => $v) {
 			$uri = Q_Uri::from($k);
@@ -59,6 +43,23 @@ function Users_before_Q_objects(&$params)
 			or ($uri->action != '*' and $uri->action = $duri->action)) {
 				continue;
 			}
+
+			$sigField = str_replace('.', '_', $sigField);
+			$nonceField = Q_Config::get('Users', 'signatures', 'nonceField', null);
+			if ($nonceField) {
+				Q_Valid::requireFields(array($nonceField), $_POST, true);
+				$nonce = $_POST[$nonceField];
+				$prevNonce = Q::ifset($_SESSION, 'Users', 'nonce', 0);
+				if ($nonce <= $prevNonce) {
+					throw new Q_Exception_WrongValue(array(
+						'field' => $nonceField,
+						'range' => "something > $prevNonce"
+					));
+				}
+				$_SESSION['Users']['nonce'] = $nonce;
+				// session will probably be saved, unless transaction is rolled back
+			}
+
 			// validate the signature on the request
 			$payload = $_POST;
 			$signature = Q::ifset($payload, $sigField, null);
@@ -86,7 +87,7 @@ function Users_before_Q_objects(&$params)
 				// SECURITY: inform the admins to update their PHP
 			}
 			break; // we already checked, once is enough
-		}	
+		}
 	}
 
 	// If app is in preview mode (for screenshots) and user is not logged in
