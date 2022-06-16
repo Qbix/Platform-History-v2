@@ -632,6 +632,8 @@
 	 * Gets canonical serialization of the payload with Q.serialize(),
 	 * then gets the key from IndexedDB and signs the serialization.
 	 * It can be verified with Users.verify() or Q_Users::verify()
+	 * @method sign
+	 * @static
 	 * @param {Object} payload The payload to sign. It will be serialized with Q.serialize()
 	 * @param {Function} callback Receives the signature, if one was computed
 	 * @param {Array} [fieldNames] The names of the fields from the payload to sign, otherwise signs all.
@@ -650,14 +652,14 @@
 			Q.IndexedDB.open('Q.Users', 'keys', 'id',
 			function (err, store) {
 				if (err) {
-					return callback(err);
+					return Q.handle(callback, null, [err]);
 				}
 				var request = store.get('Users.Session');
 				request.onsuccess = function (event) {
 					_sign(Users.Session.key.loaded = event.target.result.key);
 				};
 				request.onerror = function (event) {
-					callback(event);
+					Q.handle(callback, null, [event]);
 				};
 			});
 		}
@@ -673,7 +675,7 @@
 				var signature = Array.prototype.slice.call(
 					new Uint8Array(arrayBuffer), 0
 				).toHex();
-				callback && callback(null, signature);
+				Q.handle(callback, null, [signature]);
 			});
 		}
 	}
