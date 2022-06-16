@@ -513,7 +513,7 @@ class Users_User extends Base_Users_User
 		$email->authCode = sha1(microtime() . mt_rand());
 		$arr = array(
 			'code' => $email->activationCode,
-			'emailAddress' => $email->address
+			'e' => $email->address
 		);
 		if (!empty($options['redirect'])) {
 			$arr['redirect'] = $options['redirect'];
@@ -522,7 +522,7 @@ class Users_User extends Base_Users_User
 		$link = Q_Uri::url("Users/activate?$querystring");
 		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $email->authCode, 
-			'emailAddress' => $email->address
+			'e' => $email->address
 		)));
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
@@ -822,13 +822,17 @@ class Users_User extends Base_Users_User
 		$mobile->authCode = sha1(microtime() . mt_rand());
 		$arr = array(
 			'code' => $mobile->activationCode,
-			'mobileNumber' => $number
+			'm' => $number
 		);
 		if (!empty($options['redirect'])) {
 			$arr['redirect'] = $options['redirect'];
 		}
 		$querystring = http_build_query($arr);
 		$link = Q_Uri::url("Users/activate?$querystring");
+		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
+			'authCode' =>  $mobile->authCode, 
+			'm' => $mobile->number
+		)));
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
 		/**
