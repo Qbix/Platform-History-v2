@@ -5922,7 +5922,11 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 		var key = 'index:' + rawKey; // key in the index
 		var localStorageKeys = Q_Cache_get(this, key, true) || {};
 		for (var k in localStorageKeys) {
-			callback.call(this, k, Q_Cache_get(this, k));
+			var result = Q_Cache_get(this, k);
+			if (result === undefined) {
+				continue;
+			}
+			callback.call(this, k, result);
 		}
 		// also the key itself
 		var item = Q_Cache_get(this, rawKey);
@@ -12163,7 +12167,7 @@ Q.Pointer = {
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
-						if (!targets[i].exists()) {
+						if (!(targets[i] instanceof Element) || !targets[i].exists()) {
 							continue;
 						}
 						var img2 = img1.cloneNode(false);
