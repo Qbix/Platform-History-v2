@@ -5537,6 +5537,8 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 				} else if (Q.isPlainObject[result] && (type in result)) {
 					result[type] = messageTotals[type];
 				}
+			}, {
+				evenIfNoIndex: true
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
