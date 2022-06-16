@@ -4968,6 +4968,7 @@ var Interests = Streams.Interests = {
 			}
 			var results = {};
 			var relatedTo = response.slots.interests;
+			relatedTo = Q.isEmpty(relatedTo) ? {} : relatedTo;
 			for (var w in relatedTo) {
 				var info = relatedTo[w];
 				var title = info[2];
