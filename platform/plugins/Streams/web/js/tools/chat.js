@@ -45,7 +45,7 @@
  *   @param {Q.Event} [options.beforePost] Execute before message post (before calling Q.Message.post). Pass fields as argument.
  *   @param {Q.Event} [options.afterPost] Execute after message post.
  */
-Q.Tool.define('Streams/chat', function(options) {		
+Q.Tool.define('Streams/chat', function(options) {
 	var tool = this;
 	var state = tool.state;
 	state.more = {};
@@ -201,7 +201,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		}
 	}
-}, 
+},
 
 {
 	Q: {
@@ -238,8 +238,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		state.seen = value;
 		if (value) {
 			Q.Streams.Message.Total.seen(
-				state.publisherId, 
-				state.streamName, 
+				state.publisherId,
+				state.streamName,
 				'Streams/chat/message',
 				true
 			);
@@ -281,7 +281,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		var res  = {};
 		var tool = this;
 		var state = tool.state;
-		
+
 		if ('content' in messages) {
 			// this is a single message
 			var m = messages;
@@ -377,7 +377,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				&& !state.stream.testWriteLevel('post')) {
 					tool.$('.Streams_chat_composer').hide();
 				}
-				
+
 				tool.$('.Streams_chat_composer').submit(function () {
 					return false;
 				});
@@ -441,7 +441,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				state.templates.Streams_chat_noMessages
 			);
 		}
-		
+
 		function _processMessage(ordinal, fields) {
 			// TODO: in the future, render stream players inside message template
 			// according to the instructions in the message
@@ -604,11 +604,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			callback(items, messages);
 		}).run();
-		
+
 		if (state.seen) {
 			Q.Streams.Message.Total.seen(
-				state.publisherId, 
-				state.streamName, 
+				state.publisherId,
+				state.streamName,
 				'Streams/chat/message',
 				true
 			);
@@ -623,11 +623,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			message.time = Date.now() / 1000;
 
 			Q.Template.render(
-				'Streams/chat/message/notification', 
-				message, 
+				'Streams/chat/message/notification',
+				message,
 				function(error, html){
 					if (error) { return error }
-					
+
 					tool.$('.Streams_chat_noMessages').remove();
 					tool.$('.Streams_chat_messages').append(html);
 				},
@@ -646,11 +646,11 @@ Q.Tool.define('Streams/chat', function(options) {
 		};
 
 		Q.Template.render(
-			'Streams/chat/message/error', 
-			fields, 
+			'Streams/chat/message/error',
+			fields,
 			function(error, html){
 				if (error) { return error; }
-    	
+
 				tool.$('.Streams_chat_noMessages').remove();
 				tool.$('.Streams_chat_messages').append(html);
 				var timestamp = data.date || Date.now()/1000;
@@ -817,16 +817,19 @@ Q.Tool.define('Streams/chat', function(options) {
 		// new message arrived
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/chat/message')
 		.set(function (stream, message) {
+			state.stream = stream;
 			tool.renderMessage(message);
 		}, tool);
 		// a new stream was related (including a call)
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/relatedTo')
 		.set(function(stream, message) {
+			state.stream = stream;
 			tool.renderMessage(message);
 		}, tool);
 		// a new stream was related (including a call)
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/unrelatedTo')
 		.set(function(stream, message) {
+			state.stream = stream;
 			var instructions = JSON.parse(message.instructions);
 			var fromPublisherId = Q.getObject("fromPublisherId", instructions);
 			var fromStreamName = Q.getObject("fromStreamName", instructions);
@@ -847,6 +850,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		// new user joined
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/join')
 		.set(function(stream, message) {
+			state.stream = stream;
 			var messages = tool.prepareMessages(message, 'join');
 			tool.renderNotification(Q.first(messages));
 		}, tool);
@@ -854,12 +858,14 @@ Q.Tool.define('Streams/chat', function(options) {
 		// new user left
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/leave')
 		.set(function(stream, message) {
+			state.stream = stream;
 			var messages = tool.prepareMessages(message, 'leave');
 			tool.renderNotification(Q.first(messages));
 		}, tool);
 
 		// new user left
 		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribe').set(function(stream, message) {
+			state.stream = stream;
 			$te.find('.Streams_chat_subscription').attr({
 				'data-subscribed': 'true'
 			})
@@ -983,7 +989,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					Q.handle(state.afterPost, tool, [fields, args]);
 
 					state.stream.refresh(null, {
-						messages: true, 
+						messages: true,
 						unlessSocket: true,
 						evenIfNotRetained: true
 					});
@@ -997,8 +1003,8 @@ Q.Tool.define('Streams/chat', function(options) {
 					state.hadFocus = false;
 					if (state.seen) {
 						Q.Streams.Message.Total.seen(
-							state.publisherId, 
-							state.streamName, 
+							state.publisherId,
+							state.streamName,
 							'Streams/chat/message',
 							true
 						);
@@ -1197,25 +1203,25 @@ Q.Tool.define('Streams/chat', function(options) {
 		}
 		state.hadFocus = false;
 	},
-	
+
 	refresh: function (callback) {
-		
+
 		var tool = this;
 		var state = tool.state;
-		
+
 		function _render(messages) {
 			Q.each(messages, function (ordinal) {
 				state.earliest = ordinal;
 				return false;
 			}, {ascending: true, numeric: true});
-		
+
 			tool.render(function() {
 				tool.renderMessages(
-					tool.prepareMessages(messages), 
+					tool.prepareMessages(messages),
 					function (items) {
 						Q.each(items, function (key, $html) {
 							tool.$('.Streams_chat_noMessages').remove();
-							var $scm = tool.$('.Streams_chat_messages'); 
+							var $scm = tool.$('.Streams_chat_messages');
 							$html.appendTo($scm).activate();
 							$scm.off('scroll.Streams_chat')
 							.on('scroll.Streams_chat', function () {
@@ -1224,27 +1230,27 @@ Q.Tool.define('Streams/chat', function(options) {
 						});
 					}
 				);
-				
+
 				Q.handle(callback, tool);
 				tool.processDOM();
 				tool.addEvents();
-				
+
 				Q.handle(state.onRefresh, tool);
-				
+
 				tool.scrollToBottom();
 
 				// if startWebRTC is true, start webrtc
 				if (state.startWebRTC
-				|| (location.href.indexOf(state.stream.url() >= 0) 
+				|| (location.href.indexOf(state.stream.url() >= 0)
 					&& location.href.indexOf('startWebRTC') >= 0
 				)) {
 					tool.startWebRTC();
 				}
 			});
-		
+
 		}
 
-		Q.Streams.retainWith(this).get(state.publisherId, state.streamName, function () {
+		Q.Streams.retainWith(this).get.force(state.publisherId, state.streamName, function () {
 			state.stream = this;
 			tool.more(function () {
 				_render.apply(this, arguments);
@@ -1287,7 +1293,7 @@ Q.Template.set('Streams/chat/message/bubble',
 	'</div>'
 );
 
-Q.Template.set('Streams/chat/message/notification', 
+Q.Template.set('Streams/chat/message/notification',
 	'<div class="Streams_chat_notification>'+
 		'<div class="Streams_chat_timestamp" data-time="{{time}}"></div>'+
 		'{{#if visit}}{{interpolate Visit displayName=displayName}}{{/if}}'+
@@ -1314,12 +1320,12 @@ Q.Template.set('Streams/chat/Streams_chat_noMessages',
 	'<i class="Streams_chat_noMessages">{{text.noOneSaid}}</i>'
 );
 
-Q.Template.set('Streams/chat/main', 
+Q.Template.set('Streams/chat/main',
 	'<div class="Q_clear"></div>'+
 	'<div class="Streams_chat_messages">'+
 		'{{#isClick}}'+
 			'<div class="Streams_chat_more">'+
-				'<img src="{{earlierSrc}}">{{text.earlierComments}}'+ 
+				'<img src="{{earlierSrc}}">{{text.earlierComments}}'+
 			'</div>'+
 		'{{/isClick}}'+
 		'<!-- messages -->'+
