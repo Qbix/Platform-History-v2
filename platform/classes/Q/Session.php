@@ -938,6 +938,7 @@ class Q_Session
 		if (!isset($secret)) {
 			$secret = Q::app();
 		}
+		$a = hash_hmac('sha256', $sessionId, $secret);
 		return hash_hmac('sha256', $sessionId, $secret);
 	}
 
@@ -964,6 +965,9 @@ class Q_Session
 				null, null, false, false
 			);
 		}
+		$_SESSION['Q']['nonce'] = $nonce;
+		session_write_close();
+		session_start();
 		Q_Session::$nonceWasSet = true;
 	}
 
