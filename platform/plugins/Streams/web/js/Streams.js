@@ -4968,6 +4968,7 @@ var Interests = Streams.Interests = {
 			}
 			var results = {};
 			var relatedTo = response.slots.interests;
+			relatedTo = Q.isEmpty(relatedTo) ? {} : relatedTo;
 			for (var w in relatedTo) {
 				var info = relatedTo[w];
 				var title = info[2];
@@ -5536,6 +5537,8 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 				} else if (Q.isPlainObject[result] && (type in result)) {
 					result[type] = messageTotals[type];
 				}
+			}, {
+				evenIfNoIndex: true
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
