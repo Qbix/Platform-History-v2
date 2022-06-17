@@ -365,7 +365,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 		var tool = this;
 		var state = tool.state;
 		if (!element) {
-			return onLoad(false);;
+			return onLoad(false);
 		}
 		options = options || {};
 		Q.Streams.get(state.publisherId, state.streamName, function () {
