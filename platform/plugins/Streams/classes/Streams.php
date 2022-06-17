@@ -4116,13 +4116,10 @@ abstract class Streams extends Base_Streams
 			$first = $parts[0];
 		} else {
 			$first = $fullName;
+			$last = '';
 		}
-		if ($first) {
-			$first = trim($first);
-		}
-		if ($last) {
-			$last = trim($last);
-		}
+		$first = trim($first);
+		$last = trim($last);
 
 		return @compact('first', 'last');
 	}
