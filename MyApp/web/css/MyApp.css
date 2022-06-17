@@ -70,6 +70,11 @@ table { table-layout: fixed; }
 #content { position: relative; }
 #dashboard h1 { text-align: left }
 
+.Q_mobile #dashboard_slot,
+.Q_mobile #notices_slot {
+	position: absolute;
+}
+
 #dashboard { display: flex; width: 100%; }
 .Q_layout_widebar #dashboard { display: flex; justify-content: space-between; }
 .Q_notMobile #dashboard { padding: 5px; }
