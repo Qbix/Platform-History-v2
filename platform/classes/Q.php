@@ -1620,7 +1620,7 @@ class Q
 			if ($code = json_last_error()) {
 				throw new Q_Exception_JsonDecode(array(
 					'message' => json_last_error_msg()
-				), null, $code);
+				), array(), $code);
 			}
 		} else if (!isset($result) and strtolower(trim($args[0])) !== 'null') {
 			throw new Q_Exception_JsonEncode(array(
