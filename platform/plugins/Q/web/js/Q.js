@@ -5676,8 +5676,8 @@ function Q_Cache_removeFromIndex(cache, parameters, key) {
 		var obj = Q_Cache_get(cache, k, true) || {};
 		if (key in obj) {
 			delete obj[key];
+			Q_Cache_set(cache, k, obj, true);
 		}
-		Q_Cache_set(cache, k, obj, true);
 	}
 	return true;
 }

@@ -1281,8 +1281,8 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 			var obj = this.special[k] || {};
 			if (key in obj) {
 				delete obj[key];
+				this.special[k] = obj;
 			}
-			this.special[k] = obj;
 		}
 	}
 	return true;
