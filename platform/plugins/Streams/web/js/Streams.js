@@ -3992,6 +3992,8 @@ var Message = Streams.Message = function Streams_Message(fields) {
 	this.typename = 'Q.Streams.Message';
 };
 
+Message.latest = {}; // for helping not create old messages
+
 /**
  * Constructs a Streams.Message from fields.
  * If the Streams.Message.define() function was not called,
