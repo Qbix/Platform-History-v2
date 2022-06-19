@@ -5538,7 +5538,7 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 					result[type] = messageTotals[type];
 				}
 			}, {
-				evenIfNoIndex: true
+				throwIfNoIndex: false
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
@@ -6209,15 +6209,26 @@ Q.onInit.add(function _Streams_onInit() {
 		// (e.g. from a post or retrieving a stream, or because there was no cache yet)
 		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message);
 		function _message() {
+			var ptn = msg.publisherId+"\t"+msg.streamName;
+			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
+				return; // it was already processed
+			}
+
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
 
+			
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
+
+			Message.latest[ptn] = parseInt(msg.ordinal);
+			var cached = Streams.get.cache.get(
+				[msg.publisherId, msg.streamName]
+			);
 
 			// update fields.messageCount of cached stream
 			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
@@ -6514,7 +6525,7 @@ function _updateMessageTotalsCache(msg) {
 				++result[type];
 			}
 		}, {
-			evenIfNoIndex: true
+			throwIfNoIndex: false
 		});
 }
 
