@@ -1224,7 +1224,7 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key
+ * @param {String|Array} key
  * @param {Object} options supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined

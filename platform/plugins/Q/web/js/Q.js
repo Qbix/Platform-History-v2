@@ -5811,7 +5811,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key  the key to search for
+ * @param {String|Array} key  the key to search for
  * @param {Object} options  supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined
