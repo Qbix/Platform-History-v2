@@ -4342,14 +4342,16 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		});
 		waiting[ord] = [event, handlerKey];
 	});
-	p.add(ordinals, 1, function () {
-		if (!alreadyCalled) {
-			Q.handle(callback, this, [true, ordinals]);
-		}
-		clearTimeout(t);
-		alreadyCalled = true;
-		return true;
-	}).run();
+	if (latest < ordinal) {
+		p.add(ordinals, 1, function () {
+			if (!alreadyCalled) {
+				Q.handle(callback, this, [true, ordinals]);
+			}
+			clearTimeout(t);
+			alreadyCalled = true;
+			return true;
+		}).run();
+	}
 	return p;
 
 	function _tryLoading() {

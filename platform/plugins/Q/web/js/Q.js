@@ -5926,7 +5926,9 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 			if (result === undefined) {
 				continue;
 			}
-			callback.call(this, k, result);
+			if (false === callback.call(this, k, result)) {
+				continue;
+			}
 		}
 		// also the key itself
 		var item = Q_Cache_get(this, rawKey);

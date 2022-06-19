@@ -1329,7 +1329,9 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 			if (result === undefined) {
 				continue;
 			}
-			callback.call(this, k, this.get(k));
+			if (false === callback.call(this, k, this.get(k))) {
+				continue;
+			}
 		}
 		// also the key itself
 		var item = this.special[rawKey];
