@@ -1303,7 +1303,7 @@ Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
  * @param {Array} args An array consisting of some or all the arguments that form the key
  * @param {Function} callback Is passed two parameters: key, value, with this = the cache
  * @param {Object} [options]
- * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
+ * @param {Boolean} [options.throwIfNoIndex] pass true to trigger an exception if an index doesn't exist
  */
 Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, options) {
 	var cache = this;
@@ -1339,7 +1339,7 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 		return;
 	}
 	// key doesn't exist
-	if (!options.evenIfNoIndex) {
+	if (!options.throwIfNoIndex) {
 		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	return Q.each(this.data, function (k, v) {

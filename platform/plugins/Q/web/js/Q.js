@@ -5909,7 +5909,7 @@ Cp.clear = function _Q_Cache_prototype_clear() {
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  * @param {Function} callback  Is passed two parameters: key, value, with this = the cache
  * @param {Object} [options]
- * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
+ * @param {Boolean} [options.throwIfNoIndex] pass true to throw an exception if an index doesn't exist
  */
 Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 	if (!callback) {
@@ -5936,7 +5936,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 		return;
 	}
 	// key doesn't exist
-	if (!options.evenIfNoIndex) {
+	if (options.throwIfNoIndex) {
 		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	var prefix = null;
@@ -5986,7 +5986,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  */
 Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
-	options = options || { evenIfNoIndex: true };
+	options = options || { throwIfNoIndex: false };
 	this.each(args, function (key) {
 		this.remove(JSON.parse(key));
 	}, options);
