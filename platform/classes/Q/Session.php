@@ -972,10 +972,6 @@ class Q_Session
 			);
 		}
 		$_SESSION['Q']['nonce'] = $nonce;
-		// write session, close it, and start another
-		// so that the transaction will commit and another one will begin
-		session_write_close();
-		Q_Session::start(false, session_id());
 		Q_Session::$nonceWasSet = true;
 	}
 
