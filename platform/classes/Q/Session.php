@@ -231,9 +231,9 @@ class Q_Session
 	 *   Sessions
 	 * @return {boolean} Whether a new session was started or not.
 	 */
-	static function start($throwIfMissingOrInvalid = false)
+	static function start($throwIfMissingOrInvalid = false, $setId = null)
 	{
-		if (self::id()) {
+		if (self::id() and !$setId) {
 			// Session has already started
 			return false;
 		}
@@ -260,11 +260,12 @@ class Q_Session
 		}
 		self::init();
 		$name = Q_Session::name();
-		$id = isset($_REQUEST[$name])
-			? $_REQUEST[$name]
-			: (isset($_COOKIE[$name])
-				? $_COOKIE[$name]
-				: null);
+		$id = $setId
+			? $setId
+			: (isset($_REQUEST[$name])
+				? $_REQUEST[$name]
+				: Q_Response::cookie($name)
+			);
 
 		$isNew = false;
 		if (!self::isValidId($id)) {
@@ -962,12 +963,14 @@ class Q_Session
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
 			Q_Response::setCookie(
 				'Q_nonce', $nonce, $duration ? time()+$duration : 0,
-				null, null, false, false
+				null, null, true, false
 			);
 		}
 		$_SESSION['Q']['nonce'] = $nonce;
+		// write session, close it, and start another
+		// so that the transaction will commit and another one will begin
 		session_write_close();
-		session_start();
+		Q_Session::start(false, session_id());
 		Q_Session::$nonceWasSet = true;
 	}
 

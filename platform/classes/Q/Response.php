@@ -1786,6 +1786,25 @@ class Q_Response
 	}
 
 	/**
+	 * Get the value of a cookie that will be sent to the client.
+	 * This is different than the value of the cookie that was sent
+	 * from the client, which is stored in $_COOKIE[$name].
+	 * Use this for session IDs and other things.
+	 * @method cookie
+	 * @static
+	 * @param {string} $name The name of the cookie
+	 * @return {string}
+	 */
+	static function cookie($name)
+	{
+		return isset(self::$cookies[$name])
+			? self::$cookies[$name]
+			: (
+				isset($_COOKIE[$name]) ? $_COOKIE[$name] : null
+			);
+	}
+
+	/**
 	 * @method setCookie
 	 * @static
 	 * @param {string} $name The name of the cookie
@@ -1826,7 +1845,6 @@ class Q_Response
 		}
 		// see https://bugs.php.net/bug.php?id=38104
 		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly);
-		$_COOKIE[$name] = $value;
 		return $value;
 	}
 	
@@ -1865,7 +1883,7 @@ class Q_Response
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
-			@compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
+			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
 			'after', false, $header
 		);
 		if ($header) {
