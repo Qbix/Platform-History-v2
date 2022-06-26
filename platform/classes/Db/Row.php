@@ -1746,8 +1746,8 @@ class Db_Row
 		foreach ($this->fields as $name => $value) {
 			if ($this->fieldsModified[$name]) {
 				if ($evenIfNotModified
-				or !array_key_exists($value, $this->fieldsOriginal)
-				or $value !== $this->fieldsOriginal[$value]) {
+				or !array_key_exists($name, $this->fieldsOriginal)
+				or $value !== $this->fieldsOriginal[$name]) {
 					$modifiedFields[$name] = $value;
 				}
 			}
