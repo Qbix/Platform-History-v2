@@ -1813,6 +1813,11 @@ class Db_Row
 			if (empty($fieldsToSave)
 			or (!$evenIfNotModified and empty($reallyModifiedFields))) {
 				$this->wasModified(false);
+				if ($commit) {
+					$query = self::db()->rawQuery('')->commit();
+					$query->className = get_class($this);
+					$query->execute(false, $query->shard(null, $where));
+				}
 				return false;
             }
 			$query = $db->update($table)

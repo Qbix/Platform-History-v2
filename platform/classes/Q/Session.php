@@ -619,9 +619,10 @@ class Q_Session
 	static function writeHandler ($id, $sess_data)
 	{
 		try {
-			// if the request is AJAX request that came without session cookie, then do not write session, ignore it
-			if (Q_Request::isAjax() && !isset($_COOKIE[self::name()])) {
-				return true;
+			// if the request is AJAX request that came without session cookie
+			// and no session cookie is being set, then do not write session, ignore it
+			if (Q_Request::isAjax() && Q_Response::cookie(self::name() !== null)) {
+				return true; // TODO: debate whether this optimization should be removed
 			}
 
 			// don't save sessions when running from command-line (cli)
@@ -736,6 +737,9 @@ class Q_Session
 				$_SESSION = $t->getAll();
 				$params['existing_data'] = $existing_data;
 				$params['merged_data'] = $merged_data = session_id() ? session_encode() : '';
+				if ($params['existing_data'] !== $params['merged_data']) {
+					
+				}
 				/**
 				 * @event Q/session/save {before}
 				 * @param {string} sess_data
