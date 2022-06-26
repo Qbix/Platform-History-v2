@@ -373,6 +373,7 @@ var _retainedByKey = {};
 var _retainedByStream = {};
 var _retainedStreams = {};
 var _retainedNodes = {};
+var _publicStreams = {};
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
@@ -624,6 +625,27 @@ Q.Tool.onActivate("Streams/chat").set(function () {
 }, 'Streams');
 
 /**
+ * Used to mark some streams as public, so that Streams.get()
+ * will initiate public batch fetching of these streams.
+ * This results in much faster fetching of streams across
+ * multiple publishers in a batch, but doesn't support getting
+ * related participants, messages, templates, mutable, etc.
+ * @method arePublic
+ * @static
+ * @param {Object} publishersAndNames Should be a structure containing { publisherId: { name: true } } pairs
+ */
+Streams.arePublic = function _Streams_Stream_isPublic (
+	publishersAndNames	
+) {
+	for (var publisherId in publishersAndNames) {
+		for (var i=0, l=names.length; i<l; ++i) {
+			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
+			_publicStreams[publisherId][names[i]] = true;
+		}
+	}
+};
+
+/**
  * Streams batch getter.
  * @static
  * @method get
@@ -656,24 +678,26 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	if (!streamName) {
 		throw new Q.Error("Streams.get: streamName is empty");
 	}
-	if (extra) {
-		if (extra.participants) {
-			url += '&'+$.param({"participants": extra.participants});
-			slotNames.push('participants');
-		}
-		if (extra.messages) {
-			url += '&'+$.param({messages: extra.messages});
-			slotNames.push('messages');
-		}
-		if (f = extra.fields) {
-			for (var i=0, l=f.length; i<l; ++i) {
-				var cached = Streams.get.cache.get([publisherId, streamName]);
-				if (cached && cached.subject.fields[f[i]] == null) {
-					Streams.get.forget(publisherId, streamName, null, extra);
-					break;
-				}
+	extra = extra || {};
+	if (extra.participants) {
+		url += '&'+$.param({"participants": extra.participants});
+		slotNames.push('participants');
+	}
+	if (extra.messages) {
+		url += '&'+$.param({messages: extra.messages});
+		slotNames.push('messages');
+	}
+	if (f = extra.fields) {
+		for (var i=0, l=f.length; i<l; ++i) {
+			var cached = Streams.get.cache.get([publisherId, streamName]);
+			if (cached && cached.subject.fields[f[i]] == null) {
+				Streams.get.forget(publisherId, streamName, null, extra);
+				break;
 			}
 		}
+	}
+	if (Q.getObject([publisherid, streamName], _publicStreams)) {
+		extra.public = 1;
 	}
 	var func = Streams.batchFunction(Q.baseUrl({
 		publisherId: publisherId,
