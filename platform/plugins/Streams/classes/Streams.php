@@ -512,6 +512,40 @@ abstract class Streams extends Base_Streams
 		}
 		return $streams;
 	}
+
+	/**
+	 * Fetches public streams from the database, even from multiple publishers.
+	 * Unlike Streams::fetch(), this method doesn't check the access control,
+	 * because the streams should be accessible to be read by anybody.
+	 * It simply returns the Streams_Stream rows with their own read/write/admin levels.
+	 * Also, it skips any sort of template and mutable stuff.
+	 * @method fetchPublicStreams
+	 * @static
+	 * @param {array} $publishersAndNames
+	 *  Array of ($publisherId => $namesArray) pairs
+	 * @return {array}
+	 *  Returns an array of Streams_Stream objects indexed by
+	 *  $publisherId => $name => $stream
+	 *  It may end up missing some streams, if they weren't in the database.
+	 */
+	static function fetchPublicStreams(
+		$publishersAndNames,
+		$fields = '*',
+		$options = array(),
+		&$results = array())
+	{
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
+		$rows = Streams_Stream::select($fields)->where(array(
+			'publisherId,name' => $publishersAndNames
+		))->fetchDbRows();
+		$streams = array();
+		foreach ($rows as $row) {
+			$streams[$row->publisherId][$row->name] = $row;
+		}
+		return $streams;
+	}
 	
 	/**
 	 * Fetches one stream from the database.
