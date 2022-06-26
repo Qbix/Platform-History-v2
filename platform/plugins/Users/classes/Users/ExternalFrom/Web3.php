@@ -49,10 +49,10 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		$payload = Q::ifset($_REQUEST, 'payload', null);
 		$signature = Q::ifset($_REQUEST, 'signature', null);
 		if (!$payload or $signature) {
-			$cookieName = "wsr_$platformAppId";
+			$cookieName = "Users_wsr_$platformAppId";
 			if (isset($_COOKIE[$cookieName])) {
 				// A previous request has set the wsr cookie
-				$wsr_json = $_COOKIE[$cookieName];
+				$wsr_json = Q_Request::special($cookieName, null, $_COOKIE);
 				if ($wsr = Q::json_decode($wsr_json, true)) {
 					list($payload, $signature) = $wsr;
 				}
