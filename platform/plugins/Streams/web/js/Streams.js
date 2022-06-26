@@ -696,7 +696,7 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 			}
 		}
 	}
-	if (Q.getObject([publisherid, streamName], _publicStreams)) {
+	if (Q.getObject([publisherId, streamName], _publicStreams)) {
 		extra.public = 1;
 	}
 	var func = Streams.batchFunction(Q.baseUrl({
