@@ -1742,13 +1742,14 @@ class Db_Row
 			}
 		}
 
-		$modifiedFields = array();
+		$modifiedFields = $reallyModifiedFields = array();
 		foreach ($this->fields as $name => $value) {
 			if ($this->fieldsModified[$name]) {
+				$modifiedFields[$name] = $value;
 				if ($evenIfNotModified
 				or !array_key_exists($name, $this->fieldsOriginal)
 				or $value !== $this->fieldsOriginal[$name]) {
-					$modifiedFields[$name] = $value;
+					$reallyModifiedFields[$name] = $value;
 				}
 			}
 		}
@@ -1756,7 +1757,8 @@ class Db_Row
 		$callback = array($this, "beforeSave");
 		if (is_callable($callback)) {
 			$modifiedFields = call_user_func(
-				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit
+				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit,
+				$reallyModifiedFields
 			);
 		}
 		if (! isset($modifiedFields) or $modifiedFields === false) {
@@ -1808,7 +1810,8 @@ class Db_Row
 			if (!$where) {
 				throw new Exception("The primary key is not specified for $table");
 			}
-			if (empty($fieldsToSave)) {
+			if (empty($fieldsToSave)
+			or (!$evenIfNotModified and empty($reallyModifiedFields))) {
 				$this->wasModified(false);
 				return false;
             }

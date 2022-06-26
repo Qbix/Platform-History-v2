@@ -1786,14 +1786,14 @@ class Q_Response
 	}
 
 	/**
-	 * Get the value of a cookie that will be sent to the client.
+	 * Get the info for a cookie that will be sent to the client.
 	 * This is different than the value of the cookie that was sent
 	 * from the client, which is stored in $_COOKIE[$name].
 	 * Use this for session IDs and other things.
 	 * @method cookie
 	 * @static
 	 * @param {string} $name The name of the cookie
-	 * @return {string}
+	 * @return {array} array($value, $expires, $path, $domain, $secure, $httponly))
 	 */
 	static function cookie($name)
 	{

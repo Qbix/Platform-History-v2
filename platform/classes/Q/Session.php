@@ -264,7 +264,7 @@ class Q_Session
 			? $setId
 			: (isset($_REQUEST[$name])
 				? $_REQUEST[$name]
-				: Q_Response::cookie($name)
+				: (($arr = Q_Response::cookie($name)) ? $arr[0] : null)
 			);
 
 		$isNew = false;

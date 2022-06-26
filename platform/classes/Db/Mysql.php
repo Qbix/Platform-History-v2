@@ -414,7 +414,13 @@ class Db_Mysql implements Db_Interface
 				if (class_exists('Q') and class_exists($className)) {
 					Q::event("Db/Row/$className/save", array(
 						'row' => $row
-					), 'before');
+					), 'before'); 
+				}
+				$callback = array($row, "beforeSave");
+				if (is_callable($callback)) {
+					call_user_func(
+						$callback, $row->fields, false, false
+					);
 				}
 				$fieldNames = method_exists($row, 'fieldNames')
 					? $row->fieldNames()

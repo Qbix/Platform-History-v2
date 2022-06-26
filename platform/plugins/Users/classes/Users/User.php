@@ -237,7 +237,7 @@ class Users_User extends Base_Users_User
 	/**
 	 * Assigns 'id' and verifies 'username' fields
 	 * @method beforeSave
-	 * @param {array} $modifiedFields
+	 * @param {array} $updatedFields
 	 * @return {array}
 	 * @throws {Users_Exception_UsernameExists}
 	 *	If username already exists
