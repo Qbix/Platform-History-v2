@@ -9134,7 +9134,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	if (o.onActivate) {
 		onActivate = o.onActivate;
 	}
-	var _loadUrlObject = {url: url};
+	var _loadUrlObject = {url: url, options: options};
 	Q.loadUrl.loading[o.key] = _loadUrlObject;
 	loader(urlToLoad, slotNames, loadResponse, o);
 	
@@ -9167,7 +9167,13 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		}
 		if (loadingUrlObject &&
 		_loadUrlObject != loadingUrlObject) {
-			e = 'newer HTTP request was sent after this one';
+			var sn1 = loadingUrlObject.options && loadingUrlObject.options.slotNames || [];
+			var sn2 = _loadUrlObject.options && _loadUrlObject.options.slotNames || [];
+			e = 'request to ' + loadingUrlObject.url
+				+ ' (' + sn1.join(',') + ') '
+				+ ' was initiated after ' 
+				+ ' current one to ' + _loadUrlObject.url
+				+ ' (' + _loadUrlObject.options.slotNames.join(',') + ')';
 			_reject && _reject(e);
 			return; // a newer request was sent
 		}

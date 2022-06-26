@@ -958,12 +958,12 @@
 
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
-			Users.onLogin.handle(user);
 			var pn = priv.used || 'native';
 			var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
 			if (false !== ret) {
 				Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
 			}
+			Users.onLogin.handle(user);
 			Users.login.occurring = false;
 		}
 	};
