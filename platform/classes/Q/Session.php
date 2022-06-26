@@ -564,9 +564,14 @@ class Q_Session
 				$row = new $class();
 				$row->$id_field = $id;
 				if ($row->retrieve()) {
+					// NOTE: we don't need to begin a transaction
+					// when we open the session and commit when we close it
+					// because we have a convention to merge session
 					self::$sessionExists = $sessionExists = true;
 				}
 				self::$session_db_row = $row;
+			} else {
+				self::$sessionExists = $sessionExists = true;
 			}
 			$result = isset(self::$session_db_row->$data_field)
 				? self::$session_db_row->$data_field : '';
