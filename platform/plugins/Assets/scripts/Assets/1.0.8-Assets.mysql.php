@@ -7,7 +7,7 @@ $text = Q_Text::get("Assets/content");
 // create global contracts streams for all chains in config
 foreach ($chains as $chain) {
 	$streamName = Q::interpolate($streamNameTemplate, $chain);
-	$stream = Streams::fetchOne($communityId, $communityId, $streamName);
+	$stream = Streams_Stream::fetch($communityId, $communityId, $streamName);
 	$title = Q::interpolate($text["NFT"]["contract"]["GlobalContractFor"], array("chainNetwork" => $chain["name"], "communityName" => Users::communityName()));
 	if (!$stream) {
 		$stream = Streams::create($communityId, $communityId, 'Assets/NFT/contract', array(
@@ -51,7 +51,7 @@ while (1) {
 			continue;
 		}
 
-		$stream = Streams::fetchOne($user->id, $user->id, $categoryStreamName);
+		$stream = Streams_Stream::fetch($user->id, $user->id, $categoryStreamName);
 		if ($stream) {
 			continue;
 		}

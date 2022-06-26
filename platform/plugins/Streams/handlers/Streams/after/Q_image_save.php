@@ -12,7 +12,7 @@ function Streams_after_Q_image_save($params)
 	if (isset(Users::$cache['iconUrlWasChanged'])
 	and (Users::$cache['iconUrlWasChanged'] === false)) {
 		// the logged-in user's icon was changed without the url changing
-		$stream = Streams::fetchOne($user->id, $user->id, "Streams/user/icon");
+		$stream = Streams_Stream::fetch($user->id, $user->id, "Streams/user/icon");
 	} else if (!empty(Streams::$cache['canWriteToStream'])) {
 		// some stream's icon was being changed
 		$stream = Streams::$cache['canWriteToStream'];

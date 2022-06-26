@@ -21,7 +21,7 @@ class Streams_Webcast
     static function fetchStream($publisherId, $roomId, $resumeClosed) {
         if (!empty($roomId)) {
             $streamName = "Streams/webcast/$roomId";
-            $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+            $stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
             if (($stream && $resumeClosed) || ($stream && empty($stream->closedTime))) {
 
                 if($resumeClosed) {

@@ -13,7 +13,7 @@ function Streams_invited_response()
 	}
 	$querystring = http_build_query(array('Q.Streams.token' => $token), '', '&');
 	if (!Q_Valid::url($invite->appUrl)) {
-		$stream = Streams::fetchOne($invite->publisherId, $invite->publisherId, $invite->streamName, true);
+		$stream = Streams_Stream::fetch($invite->publisherId, $invite->publisherId, $invite->streamName, true);
 		$invite->appUrl = $stream->url();
 	}
 	Q_Response::redirect($invite->appUrl.'?'.$querystring);

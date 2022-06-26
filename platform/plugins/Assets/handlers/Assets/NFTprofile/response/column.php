@@ -24,7 +24,7 @@ function Assets_NFTprofile_response_column (&$params, &$result) {
 	$self = $loggedInUser->id == $user->id;
 	$app = Q::app();
 	$communityId = Users::communityId();
-	$greeting = Streams::fetchOne(null, $user->id, "Streams/greeting/$communityId");
+	$greeting = Streams_Stream::fetch(null, $user->id, "Streams/greeting/$communityId");
 
 	Q_Response::addScript("{{Assets}}/js/columns/NFTprofile.js");
 	Q_Response::addStylesheet("{{Assets}}/css/columns/NFTprofile.css");
@@ -47,7 +47,7 @@ function Assets_NFTprofile_response_column (&$params, &$result) {
 	// get cover
 	$cover = array();
 	if ($selectedSeriesId) {
-		$selectedSeriesStream = Streams::fetchOne(null, $userId, Assets_NFT_Series::$streamType."/".$selectedSeriesId);
+		$selectedSeriesStream = Streams_Stream::fetch(null, $userId, Assets_NFT_Series::$streamType."/".$selectedSeriesId);
 		if ($selectedSeriesStream) {
 			$cover["url"] = $selectedSeriesStream->iconUrl("x.png");
 			$coverFile = Q_Uri::filenameFromUrl($cover["url"]);

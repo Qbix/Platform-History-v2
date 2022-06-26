@@ -33,7 +33,7 @@ while (1) {
 				continue;
 			}
 
-			$stream = Streams::fetchOne($user->id, $user->id, $categoryStreamName);
+			$stream = Streams_Stream::fetch($user->id, $user->id, $categoryStreamName);
 			if ($stream) {
 				continue;
 			}

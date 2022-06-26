@@ -12,7 +12,7 @@ function Streams_1_0_2_Streams()
 			break;
 		}
 		foreach ($userIds as $userId) {
-			$stream = Streams::fetchOne($userId, $userId, 'Streams/user/gender');
+			$stream = Streams_Stream::fetch($userId, $userId, 'Streams/user/gender');
 			if (!$stream) {
 				continue;
 			}

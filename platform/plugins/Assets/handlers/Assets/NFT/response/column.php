@@ -16,7 +16,7 @@ function Assets_NFT_response_column (&$params, &$result) {
 	$streamName = "Assets/NFT/".$streamId;
 	$communityId = Users::communityId();
 	$texts = Q_Text::get(array("Assets/content", $communityId."/content"));
-	$stream = Q::ifset($request, "stream", Streams::fetchOne(null, $publisherId, $streamName, true));
+	$stream = Q::ifset($request, "stream", Streams_Stream::fetch(null, $publisherId, $streamName, true));
 	$authorName = Users_User::fetch($publisherId, true)->displayName();
 	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
 	$title = $stream->title;
@@ -29,7 +29,7 @@ function Assets_NFT_response_column (&$params, &$result) {
 	))->fetchDbRows();
 	$interests = array();
 	foreach ($relations as $relation) {
-		$interest = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName);
+		$interest = Streams_Stream::fetch(null, $relation->toPublisherId, $relation->toStreamName);
 		$interests[] = $interest->title;
 	}
 

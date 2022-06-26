@@ -21,7 +21,7 @@ function Streams_form_post($params = array())
 			));
 		}
 		list($streamExists, $publisherId, $streamName, $fieldName) = $info;
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
 			if ($user->id !== $publisherId
 			or !Q_Config::get('Streams', 'possibleUserStreams', $streamName, false)) {

@@ -11,7 +11,7 @@ function Assets_NFT_delete ($params) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	$directoryToClear = null;
 	$slotName = null;
 

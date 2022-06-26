@@ -11,7 +11,7 @@ function Assets_NFTseries_post ($params) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 
 	$fields = Q::take($req, array("title", "attributes"));
 	Assets_NFT_Series::update($stream, $fields);

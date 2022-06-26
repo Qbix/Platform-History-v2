@@ -17,7 +17,7 @@ function Streams_0_1_9_Streams()
 				continue;
 			}
 
-			$stream = Streams::fetchOne($user->id, $user->id, 'Streams/mentioned');
+			$stream = Streams_Stream::fetch($user->id, $user->id, 'Streams/mentioned');
 			if ($stream) {
 				continue;
 			}

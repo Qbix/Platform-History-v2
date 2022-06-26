@@ -7,7 +7,7 @@ function Websites_before_Q_responseExtras()
 	$websitesUserId = Users::communityId();
 	$sha1 = sha1(Q_Dispatcher::uri());
 	$seoStreamName = "Websites/seo/$sha1";
-	$stream = Streams::fetchOne($userId, $websitesUserId, $seoStreamName);
+	$stream = Streams_Stream::fetch($userId, $websitesUserId, $seoStreamName);
 	if ($stream) {
 		$fields = Q::take(
 			$stream->getAllAttributes(),

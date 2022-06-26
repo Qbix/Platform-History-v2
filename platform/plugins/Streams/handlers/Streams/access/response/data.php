@@ -5,7 +5,7 @@ function Streams_access_response_data()
 	$user 		 = Users::loggedInUser(true);
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName  = Streams::requestedName(true);
-	$stream      = Streams::fetchOne($user->id, $publisherId, $streamName);
+	$stream      = Streams_Stream::fetch($user->id, $publisherId, $streamName);
 
 	if (!$stream->testAdminLevel('own')) {
 		throw new Users_Exception_NotAuthorized();

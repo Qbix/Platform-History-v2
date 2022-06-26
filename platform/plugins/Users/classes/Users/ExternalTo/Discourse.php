@@ -111,7 +111,7 @@ class Users_ExternalTo_Discourse extends Users_ExternalTo implements Users_Exter
 		    self::_contract();
 
         $qbixUserId = Users::loggedInUser(true)->id;
-        $stream = Streams::fetchOne($qbixUserId, $qbixUserId, 'Streams/user/discourse');
+        $stream = Streams_Stream::fetch($qbixUserId, $qbixUserId, 'Streams/user/discourse');
 
         if(!$stream) {
             return;

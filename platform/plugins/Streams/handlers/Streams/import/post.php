@@ -49,7 +49,7 @@ function Streams_import_post()
 	$streamTitle = Q_Config::expect('Streams', 'import', 'task', 'title');
 	$communityName = Users::communityName();
 	$task = isset($_REQUEST['taskStreamName'])
-		? Streams::fetchOne($luid, $communityId, $_REQUEST['taskStreamName'], true)
+		? Streams_Stream::fetch($luid, $communityId, $_REQUEST['taskStreamName'], true)
 		: Streams::create($luid, $communityId, 'Streams/task', array(
 			'skipAccess' => true,
 			'title' => Q::interpolate($streamTitle, @compact('communityName')),
@@ -130,7 +130,7 @@ function Streams_import_post()
 					$stream = reset($streams);
 					if (!$stream) {
 						$vn = Q_Utils::normalize($value);
-						$stream = Streams::fetchOne($luid, $communityId, "Streams/experience/$vn");
+						$stream = Streams_Stream::fetch($luid, $communityId, "Streams/experience/$vn");
 						if (!$stream) {
 							$stream = Streams::create($luid, $communityId, 'Streams/experience', array(
 								'name' => "Streams/experience/$vn",

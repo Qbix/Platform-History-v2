@@ -515,53 +515,23 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Fetches one stream from the database.
+	 * Only here for backward compatibility. @see Streams_Stream::fetch();
 	 * @method fetchOne
 	 * @static
 	 * @param {string} $asUserId
-	 *  Set this to the user for which you are fetching the streams.
-	 *  If this matches the publisherId, just returns the streams.
-	 *  If this is '', only returns the streams anybody can see.
-	 *  Otherwise, return the streams joined with the calculated access settings.
-	 *  If you pass null here, then either the logged-in user's id or '' will be used.
 	 * @param {string} $publisherId
-	 *  The id of the user publishing these streams
 	 * @param {string|array|Db_Range} $name
-	 *  The name of the stream to fetch. Can end in "/" for template streams.
-	 *  Also it can be an array of stream names, or a custom Db_Range for stream names
 	 * @param {string|boolean} $fields='*'
-	 *  Must include "publisherId" and "name" fields, since they
-	 *  make up the primary key of the stream table.
-	 *  Pass true here to throw an exception if the stream is missing.
 	 * @param {array} $options=array()
-	 *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
-	 *  See Db_Query_Mysql::options().
-	 *  @param {boolean|string} [$options.begin] This can be used to begin a transaction,
-	 *   it is passed to Db_Row->retrieve() but only when fetching one stream.
-	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
-	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
-	 *   and save a new cache if necessary.
-	 *  @param {boolean} [$options.dontCache] Do not cache the results of
-	 *   fetching the streams
-	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
-	 *   on the stream object, with the participant object corresponding to $asUserId, if any.
+	 *  @param {boolean|string} [$options.begin]
+	 *  @param {boolean} [$options.refetch]
+	 *  @param {boolean} [$options.dontCache]
+	 *  @param {boolean} [$options.withParticipant]
 	 *  @param {array} [$options.withMessageTotals]
-	 *   Pass an array of arrays ($streamName => $messageTypes) here
-	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedToTotals]
-	 *	 pass array('withRelatedToTotals' => array('streamName' => true)) for all rows
-	 *	 pass array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
-	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedFromTotals]
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
-	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 *  @param {reference} $results=array()
-	 *   pass an array here, to be filled with intermediate results you might want to use
 	 * @return {Streams_Stream|null}
-	 *  Returns a Streams_Stream object with access info calculated
-	 *  specifically for $asUserId . Make sure to call the methods 
-	 *  testReadLevel(), testWriteLevel() and testAdminLevel()
-	 *  on these streams before using them on the user's behalf.
 	 * @throws {Q_Exception_MissingRow} If the stream is missing and $fields == true
 	 */
 	static function fetchOne(
@@ -572,26 +542,7 @@ abstract class Streams extends Base_Streams
 		$options = array(),
 		&$results = array())
 	{
-		$options['limit'] = 1;
-		$throwIfMissing = false;
-		if ($fields === true) {
-			$throwIfMissing = true;
-			$fields = '*';
-		}
-		$streams = Streams::fetch(
-			$asUserId, $publisherId, $name, 
-			$fields, $options, $results
-		);
-		if (empty($streams)) {
-			if ($throwIfMissing) {
-				throw new Q_Exception_MissingRow(array(
-					'table' => 'Stream', 
-					'criteria' => Q::json_encode(@compact('publisherId', 'name'))
-				));
-			}
-			return null;
-		}
-		return reset($streams);
+		return Streams_Stream::fetch($asUserId, $publisherId, $name, $fields, $options, $results);
 	}
 
 	/**

@@ -40,7 +40,7 @@ function Streams_chat_tool($options)
 		if (!isset($streamName)) {
 			$streamName = Streams::requestedName();
 		}
-		$stream = Streams::fetchOne($userId, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch($userId, $publisherId, $streamName);
 		if (!$stream) {
 			throw new Q_Exception_MissingRow(array(
 				'table'    => 'stream',

@@ -42,7 +42,7 @@ function Assets_NFT_response_content ($params) {
 		$streamName = "Assets/NFT/".$streamId;
 	}
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
 	if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
 		$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
