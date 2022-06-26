@@ -638,6 +638,7 @@ Streams.arePublic = function _Streams_Stream_isPublic (
 	publishersAndNames	
 ) {
 	for (var publisherId in publishersAndNames) {
+		var names = publishersAndNames[publisherId];
 		for (var i=0, l=names.length; i<l; ++i) {
 			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
 			_publicStreams[publisherId][names[i]] = true;
