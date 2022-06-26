@@ -7603,7 +7603,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var redirected = false;
 			if (data && data.redirect && data.redirect.url) {
 				Q.handle(o.onRedirect, Q, [data.redirect.url]);
-				redirected = true;
+				redirected = data.redirect.url;
 			}
 			callback && callback.call(this, err, data, redirected);
 			Q.handle(o.onProcessed, this, [err, data, redirected]);
@@ -9057,8 +9057,6 @@ Q.replace = function _Q_replace(container, source, options) {
 	return container;
 };
 
-var _latestLoadUrlObjects = {};
-
 /**
  * Requests a URL served by Qbix Platform and loads it as if it was a page loaded in the browser.
  * @static
@@ -9136,8 +9134,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	if (o.onActivate) {
 		onActivate = o.onActivate;
 	}
-	var _loadUrlObject = {};
-	_latestLoadUrlObjects[o.key] = _loadUrlObject;
+	var _loadUrlObject = {url: url};
+	Q.loadUrl.loading[o.key] = _loadUrlObject;
 	loader(urlToLoad, slotNames, loadResponse, o);
 	
 	var promise = {};
@@ -9152,39 +9150,46 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	promise.cancel = function () {
 		_canceled = true;
-		Q.handle(_reject);
+		_reject && reject("request canceled");
 	};
 	return promise;
 
 	function loadResponse(err, response, redirected) {
+		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
 		}
-		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
-			Q.handle(_reject);
+		var loadingUrlObject = Q.loadUrl.loading[o.key];
+		delete Q.loadUrl.loading[o.key]; // it's loaded
+		if (redirected) {
+			_resolve && _resolve(response);
+			return; // it was just a redirect
+		}
+		if (loadingUrlObject &&
+		_loadUrlObject != loadingUrlObject) {
+			e = 'newer HTTP request was sent after this one';
+			_reject && _reject(e);
 			return; // a newer request was sent
 		}
 		if (!Q.isEmpty(err)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
+			e = Q.firstErrorMessage(err);
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		if (Q.isEmpty(response)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, ["Response is empty", response]);
+			e = "Response is empty";
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e, response]);
 		}
 		if (!Q.isEmpty(response.errors)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, [response.errors[0].message]);
+			response.errors[0].message
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		var unloadedUrl = o.unloadedUrl || location.href;
 		Q.handle(o.beforeUnloadUrl, this, [unloadedUrl, url, response]);
-		
-		if (redirected) {
-			Q.handle(_reject);
-			return;
-		}
-		
+
 		_resolve && _resolve(response);
 		
 		Q.Page.beingProcessed = true;
@@ -9594,6 +9599,8 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 	}
 };
 
+Q.loadUrl.loading = {};
+
 /**
  * Used for handling callbacks, whether they come as functions,
  * strings referring to functions (if evaluated), arrays or hashes.
@@ -9698,7 +9705,9 @@ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options)
 						onActivate: function () {
 							if (callback) callback();
 						}
-					}, o));
+					}, o)).then(function () {
+
+					});
 				} else if (o.externalLoader) {
 					o.externalLoader.apply(this, arguments);
 				} else {
