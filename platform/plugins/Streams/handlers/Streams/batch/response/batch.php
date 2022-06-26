@@ -47,7 +47,9 @@ function Streams_batch_response_batch()
 	$userId = $user ? $user->id : "";
 	
 	// Fetch the actual streams
-	$streams = Streams::fetchPublicStreams($fetchPublic);
+	$streams = $toFetchPublic
+		? Streams::fetchPublicStreams($toFetchPublic)
+		: array();
 	foreach ($toFetch as $publisherId => $names) {
 		$options = array('withParticipant' => true);
 		foreach ($wNames as $wn) {

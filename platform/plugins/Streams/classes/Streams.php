@@ -537,8 +537,14 @@ abstract class Streams extends Base_Streams
 		if ($fields === '*') {
 			$fields = join(',', Streams_Stream::fieldNames());
 		}
+		$pns = array();
+		foreach ($publishersAndNames as $publisherId => $names) {
+			foreach ($names as $name) {
+				$pns[] = array($publisherId, $name);
+			}
+		}
 		$rows = Streams_Stream::select($fields)->where(array(
-			'publisherId,name' => $publishersAndNames
+			'publisherId,name' => $pns
 		))->fetchDbRows();
 		$streams = array();
 		foreach ($rows as $row) {
