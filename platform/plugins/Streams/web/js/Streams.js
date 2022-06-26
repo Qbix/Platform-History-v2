@@ -638,10 +638,9 @@ Streams.arePublic = function _Streams_Stream_isPublic (
 	publishersAndNames	
 ) {
 	for (var publisherId in publishersAndNames) {
-		var names = publishersAndNames[publisherId];
-		for (var i=0, l=names.length; i<l; ++i) {
+		for (var name in publishersAndNames[publisherId]) {
 			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
-			_publicStreams[publisherId][names[i]] = true;
+			_publicStreams[publisherId][name] = true;
 		}
 	}
 };
@@ -679,26 +678,28 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	if (!streamName) {
 		throw new Q.Error("Streams.get: streamName is empty");
 	}
-	extra = extra || {};
-	if (extra.participants) {
-		url += '&'+$.param({"participants": extra.participants});
-		slotNames.push('participants');
+	if (Q.getObject([publisherId, streamName], _publicStreams)) {
+		extra = extra || {};
+		extra.public = 1;
 	}
-	if (extra.messages) {
-		url += '&'+$.param({messages: extra.messages});
-		slotNames.push('messages');
-	}
-	if (f = extra.fields) {
-		for (var i=0, l=f.length; i<l; ++i) {
-			var cached = Streams.get.cache.get([publisherId, streamName]);
-			if (cached && cached.subject.fields[f[i]] == null) {
-				Streams.get.forget(publisherId, streamName, null, extra);
-				break;
+	if (extra) {
+		if (extra.participants) {
+			url += '&'+$.param({"participants": extra.participants});
+			slotNames.push('participants');
+		}
+		if (extra.messages) {
+			url += '&'+$.param({messages: extra.messages});
+			slotNames.push('messages');
+		}
+		if (f = extra.fields) {
+			for (var i=0, l=f.length; i<l; ++i) {
+				var cached = Streams.get.cache.get([publisherId, streamName]);
+				if (cached && cached.subject.fields[f[i]] == null) {
+					Streams.get.forget(publisherId, streamName, null, extra);
+					break;
+				}
 			}
 		}
-	}
-	if (Q.getObject([publisherId, streamName], _publicStreams)) {
-		extra.public = 1;
 	}
 	var func = Streams.batchFunction(Q.baseUrl({
 		publisherId: publisherId,
