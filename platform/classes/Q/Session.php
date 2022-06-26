@@ -309,9 +309,10 @@ class Q_Session
 					// TODO: Think about session fixation attacks, require nonce.
 					$durationName = self::durationName();
 					$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+					$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 					Q_Response::setCookie(
 						self::name(), $id, $duration ? time()+$duration : 0, 
-						null, null, true, true
+						null, null, $secure, true
 					);
 				}
 			}
@@ -459,9 +460,10 @@ class Q_Session
 			if (is_string($duration)) {
 				$duration = Q_Config::get('Q', 'session', 'durations', $duration, 0);
 			};
+			$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 			Q_Response::setCookie(
 				self::name(), $sid, $duration ? time()+$duration : 0,
-				null, null, true, true
+				null, null, $secure, true
 			);
 		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
@@ -966,9 +968,10 @@ class Q_Session
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 			Q_Response::setCookie(
 				'Q_nonce', $nonce, $duration ? time()+$duration : 0,
-				null, null, true, false
+				null, null, $secure, false
 			);
 		}
 		$_SESSION['Q']['nonce'] = $nonce;

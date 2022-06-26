@@ -85,6 +85,9 @@
 			"timeLimit": 600
 		},
 		"session": {
+			"cookie": {
+				"secure": true
+			},
 			"appendSuffix": false,
 			"custom": true,
 			"db": null,
