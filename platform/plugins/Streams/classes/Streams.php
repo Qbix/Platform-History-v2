@@ -548,6 +548,7 @@ abstract class Streams extends Base_Streams
 		))->fetchDbRows();
 		$streams = array();
 		foreach ($rows as $row) {
+			$row->set('public', true);
 			if ($row->readLevel === Streams::$READ_LEVEL['max']) {
 				// make sure the stream really has max read level
 				$streams[$row->publisherId][$row->name] = $row;

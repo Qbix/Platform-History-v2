@@ -1731,7 +1731,8 @@ class Streams_Stream extends Base_Streams_Stream
 			$user = Users::loggedInUser(false, false);
 			$asUserId = $user ? $user->id : '';
 		}
-		if (!empty($options["skipAccess"])) {
+		if (!empty($options["skipAccess"])
+		or $this->get('public', false)) {
 			$skip = true;
 		} else {
 			$this->calculateAccess($asUserId);
