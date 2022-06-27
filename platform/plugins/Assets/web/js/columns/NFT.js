@@ -31,7 +31,7 @@ Q.exports(function (options, index, column, data) {
 					className: "NFT_fullsize_icon_dialog",
 					content: "<img class='NFT_fullsize_icon' src='" + stream.iconUrl("x") + "'>",
 					onActivate: function (dialog) {
-						$(".NFT_fullsize_icon", dialog).load(function () {
+						$(".NFT_fullsize_icon", dialog).on('load', function () {
 							var $img = $(this);
 							var width = $img.width();
 							var image = new Image();
