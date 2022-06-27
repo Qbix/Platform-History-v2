@@ -31,7 +31,7 @@ function Assets_NFT_response_content ($params) {
     $texts = Q_Text::get('Assets/content');
 
 	// try to get stream
-	$stream = Streams::fetchOne(null, $tokenId, "Assets/NFT/".$chainId);
+	$stream = Streams_Stream::fetch(null, $tokenId, "Assets/NFT/".$chainId);
 	if ($stream) {
 		if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
 			$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
@@ -86,7 +86,7 @@ function Assets_NFT_response_content ($params) {
 	))->fetchDbRows();
 	$collections = array();
 	foreach ($relations as $relation) {
-		$interest = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName);
+		$interest = Streams_Stream::fetch(null, $relation->toPublisherId, $relation->toStreamName);
 		$collections[] = $interest->title;
 	}
 

@@ -39,7 +39,7 @@ function Assets_NFT_response_content ($params) {
 		$streamName = "Assets/NFT/".$streamId;
 	}
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
 	if ($stream->icon === '{{Assets}}/img/empty_white.png') {
 		$image = null;

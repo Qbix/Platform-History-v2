@@ -85,6 +85,9 @@
 			"timeLimit": 600
 		},
 		"session": {
+			"cookie": {
+				"secure": true
+			},
 			"appendSuffix": false,
 			"custom": true,
 			"db": null,
@@ -104,7 +107,7 @@
 		},
 		"javascript": {
 			"responseExtras": {
-				"{{Q}}/js/jquery-1.11.1.min.js": true,
+				"{{Q}}/js/jquery-3.2.1.min.js": true,
 				"{{Q}}/js/handlebars-v4.0.10.min.js": true,
 				"{{Q}}/js/Q.js": true
 			},

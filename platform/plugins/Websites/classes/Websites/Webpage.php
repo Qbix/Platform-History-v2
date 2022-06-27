@@ -465,12 +465,12 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$streams = new Streams_Stream();
 		$streams->name = $streamType.'/'.self::normalizeUrl($url);
 		if ($streams->retrieve()) {
-			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
+			return Streams_Stream::fetch($streams->publisherId, $streams->publisherId, $streams->name);
 		}
 
 		$streams->name .= '_';
 		if ($streams->retrieve()) {
-			return Streams::fetchOne($streams->publisherId, $streams->publisherId, $streams->name);
+			return Streams_Stream::fetch($streams->publisherId, $streams->publisherId, $streams->name);
 		}
 
 		return null;
@@ -735,7 +735,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$interestPublisherId = Q_Response::getSlot('publisherId');
 		$interestStreamName = Q_Response::getSlot('streamName');
 
-		$interestStream = Streams::fetchOne(null, $interestPublisherId, $interestStreamName);
+		$interestStream = Streams_Stream::fetch(null, $interestPublisherId, $interestStreamName);
 
 		if ($contentType != 'text/html') {
 			// trying to get icon

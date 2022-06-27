@@ -369,7 +369,7 @@ class Q_Tree
 					$json = include($filename2);
 				} else {
 					$json = Q::readFile($filename2, Q::take($config, array(
-						'ignoreCache' => true,
+						'ignoreCache' => $ignoreCache,
 						'dontCache' => true,
 						'duration' => 3600
 					)));

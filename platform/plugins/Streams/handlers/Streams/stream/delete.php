@@ -16,7 +16,7 @@ function Streams_stream_delete($params) {
 	$publisherId = Q::ifset($params, "publisherId", null) ?: Streams::requestedPublisherId(true);
 	$streamName = Q::ifset($params, "streamName", null) ?: Streams::requestedName(true);
 	
-	$stream = Streams::fetchOne($asUserId, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName, true);
 	$close = Streams_Stream::getConfigField($stream->type, 'close', true);
 	if (!$close) {
         throw new Q_Exception("This app doesn't let clients directly close streams of type ".$stream->type, 'type');

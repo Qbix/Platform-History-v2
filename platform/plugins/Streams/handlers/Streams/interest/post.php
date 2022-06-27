@@ -39,7 +39,7 @@ function Streams_interest_post($params = array())
 	}
 	
 	$myInterestsName = 'Streams/user/interests';
-	$myInterests = Streams::fetchOne($userId, $userId, $myInterestsName);
+	$myInterests = Streams_Stream::fetch($userId, $userId, $myInterestsName);
 	if (!$myInterests) {
 		$myInterests = new Streams_Stream();
 		$myInterests->publisherId = $userId;

@@ -36,7 +36,7 @@ function Streams_cloudConvertWebhook_post()
 		$tag = json_decode($job->getTag(), true, 512, JSON_THROW_ON_ERROR); // can be used to store an ID
 		$publisherId = $tag["publisherId"];
 		$streamName = $tag["streamName"];
-		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName, true);
+		$stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName, true);
 		$directory = $stream->iconDirectory();
 		if (!is_dir($directory) && !@mkdir($directory, 0777, true)) {
 			throw new Q_Exception_FilePermissions(array(

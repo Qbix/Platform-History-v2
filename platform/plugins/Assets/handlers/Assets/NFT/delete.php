@@ -11,11 +11,7 @@ function Assets_NFT_delete ($params) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
-	if ($stream->getAttribute("tokenId")) {
-		throw new Exception("This NFT minted, hence can't be changed!");
-	}
-
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	$directoryToClear = null;
 	$slotName = null;
 

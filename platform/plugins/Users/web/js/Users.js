@@ -958,12 +958,12 @@
 
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
-			Users.onLogin.handle(user);
 			var pn = priv.used || 'native';
 			var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
 			if (false !== ret) {
 				Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
 			}
+			Users.onLogin.handle(user);
 			Users.login.occurring = false;
 		}
 	};
@@ -1336,7 +1336,7 @@
 				'background-position': 'right center'
 			});
 			if (window.CryptoJS) {
-				var p = $('#Users_form_passphrase');
+				var p = $('#current-password');
 				var v = p.val();
 				if (v) {
 					if (!/^[0-9a-f]{40}$/i.test(v)) {
@@ -1350,7 +1350,7 @@
 			var url = $this.attr('action') + '?' + $this.serialize();
 			Q.request(url, 'data', function (err, response) {
 
-				$('#Users_form_passphrase').attr('value', '').trigger('change');
+				$('#current-password').attr('value', '').trigger('change');
 
 				$('input', $this).css('background-image', 'none');
 				if (err || (response && response.errors)) {
@@ -1396,7 +1396,7 @@
 		}
 
 		function setupLoginForm() {
-			var passphrase_input = $('<input type="password" name="passphrase" id="Users_form_passphrase" class="Q_password" />')
+			var passphrase_input = $('<input type="password" name="passphrase" id="current-password" class="Q_password" />')
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('autocomplete', 'current-password')

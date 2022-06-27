@@ -59,7 +59,7 @@ function Assets_batch_response_batch () {
 				$result[] = Q::event("Assets/$action/response/$slot", $params);
 			}
 		} catch (Exception $e) {
-			$result[] = array('errors' => Q_Exception::toArray(array($e)));
+			$result[] = array('errors' => Q_Exception::buildArray(array($e)));
 		}
 	}
 	

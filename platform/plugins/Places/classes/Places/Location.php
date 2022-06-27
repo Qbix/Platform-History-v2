@@ -46,7 +46,7 @@ class Places_Location extends Base_Places_Location
 			return null;
 		}
 		$streamName = "Places/user/location";
-		$stream = Streams::fetchOne($user->id, $user->id, $streamName);
+		$stream = Streams_Stream::fetch($user->id, $user->id, $streamName);
 		if (!$stream) {
 			$stream = Streams::create($user->id, $user->id, 'Places/location', array(
 				'name' => $streamName
@@ -91,7 +91,7 @@ class Places_Location extends Base_Places_Location
 
 		// see if it's already in the system
 		$streamName = "Places/location/$result";
-		$location = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		$location = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
 		if ($location) {
 			$ut = $location->updatedTime;
 			if (isset($ut)) {
@@ -198,7 +198,7 @@ class Places_Location extends Base_Places_Location
 			$floor && $column ? $floor.$column : $title
 		);
 		$name = "Places/area/$placeId/$areaName";
-		$area = Streams::fetchOne($asUserId, $publisherId, $name, $options);
+		$area = Streams_Stream::fetch($asUserId, $publisherId, $name, $options);
 		if (!$area) {
 			$attributes = array(
 				'locationName' => $locationName,
@@ -214,7 +214,7 @@ class Places_Location extends Base_Places_Location
 			if ($floorName) {
 				$name = $floorName;
 				$title = $location->title." floor $floor";
-				if (!($floor = Streams::fetchOne($asUserId, $publisherId, $name))) {
+				if (!($floor = Streams_Stream::fetch($asUserId, $publisherId, $name))) {
 					$floor = Streams::create($asUserId, $publisherId, 'Places/floor',
 						@compact('name', 'title', 'skipAccess')
 					);
@@ -224,7 +224,7 @@ class Places_Location extends Base_Places_Location
 			if ($columnName) {
 				$name = $columnName;
 				$title = $location->title." column $column";
-				if (!($column = Streams::fetchOne($asUserId, $publisherId, $name))) {
+				if (!($column = Streams_Stream::fetch($asUserId, $publisherId, $name))) {
 					$column = Streams::create($asUserId, $publisherId, 'Places/column',
 						@compact('name', 'title', 'skipAccess')
 					);
@@ -233,10 +233,10 @@ class Places_Location extends Base_Places_Location
 			}
 		} else {
 			$column = $columnName
-				? Streams::fetchOne($asUserId, $publisherId, $columnName)
+				? Streams_Stream::fetch($asUserId, $publisherId, $columnName)
 				: null;
 			$floor = $floorName
-				? Streams::fetchOne($asUserId, $publisherId, $floorName)
+				? Streams_Stream::fetch($asUserId, $publisherId, $floorName)
 				: null;
 		}
 		return array($area, $floor, $column);

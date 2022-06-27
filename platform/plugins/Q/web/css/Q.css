@@ -458,7 +458,8 @@ box-shadow:0 0 10px #000; }
 
 .Q_actions_action { cursor: pointer !important; display: inline-block; zoom: 1; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; box-shadow: black 3px 3px 10px; }
-.Q_gallery_caption { z-index: 201; position: absolute; }
+.Q_gallery_caption { z-index: 201; position: absolute; text-align: center; }
+.Q_gallery_caption_centered { left: 50%; transform: translate(-50%, 0); white-space: nowrap; }
 .Q_contextual { display: none; }
 .Q_rating_tool { display: inline-block; min-height: 20px; }
 .Q_rating_tool div.Q_rating_star,

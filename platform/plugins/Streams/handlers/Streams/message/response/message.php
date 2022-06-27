@@ -21,7 +21,7 @@ function Streams_message_response_message()
 	$userId = $user ? $user->id : "";
 	$stream = isset(Streams::$cache['stream'])
 		? Streams::$cache['stream']
-		: Streams::fetchOne($userId, $publisherId, $streamName);
+		: Streams_Stream::fetch($userId, $publisherId, $streamName);
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'Stream', 

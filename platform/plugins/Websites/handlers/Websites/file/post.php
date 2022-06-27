@@ -15,7 +15,7 @@ function Websites_file_post($params)
 	$clipEnd = $fields['clipEnd'];
 
 	if ($publisherId && $streamName) {
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 	} else {
 		// stream required if publisherId and streamName slots requested
 		$streamCreate = Q_Request::slotName("publisherId") && Q_Request::slotName("streamName");

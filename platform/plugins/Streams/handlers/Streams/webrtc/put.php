@@ -11,7 +11,7 @@ function Streams_webrtc_put($params = array()) {
     if(Q_Request::slotName('updateParticipantSid')) {
 		Q_Response::setSlot('updateParticipantSid', true);
 		if ($publisherId && $streamName) {
-			$stream = Streams::fetchOne($loggedUserId, $publisherId, $streamName);
+			$stream = Streams_Stream::fetch($loggedUserId, $publisherId, $streamName);
 			$meAsParticipant = $stream->participant();
 			if ($meAsParticipant) {
 				$meAsParticipant->setExtra('participantSid', $participantSid);
@@ -41,7 +41,7 @@ function Streams_webrtc_put($params = array()) {
         $logsPath = (defined('APP_FILES_DIR') ? APP_FILES_DIR : Q_FILES_DIR).DS.$logsDirectory.DS.'webrtc';
 
         $streamName = "Streams/webrtc/$roomId";
-        $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+        $stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
         $startTime = date('YmdHis', round($stream->getAttribute('startTime') / 1000));
 
         $folderName = $roomId . '_' . $startTime;

@@ -303,7 +303,7 @@
 #Users_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
 #Users_login_explanation { font-size: 13px; color: #779; text-indent: 5px; }
 #Users_login_usingPlatforms { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: center; }
-#Users_form_passphrase { width: 100%; padding: 2%; }
+#Users_login_passphrase_div #current-password { width: 100%; padding: 2%; }
 .Users_login_get_started { text-align: center; margin-top: 10px; }
 
 #Users_login_passphrase_div { position: relative; }

@@ -1224,7 +1224,7 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key
+ * @param {String|Array} key
  * @param {Object} options supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined
@@ -1281,8 +1281,8 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 			var obj = this.special[k] || {};
 			if (key in obj) {
 				delete obj[key];
+				this.special[k] = obj;
 			}
-			this.special[k] = obj;
 		}
 	}
 	return true;
@@ -1303,7 +1303,7 @@ Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
  * @param {Array} args An array consisting of some or all the arguments that form the key
  * @param {Function} callback Is passed two parameters: key, value, with this = the cache
  * @param {Object} [options]
- * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
+ * @param {Boolean} [options.throwIfNoIndex] pass true to trigger an exception if an index doesn't exist
  */
 Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, options) {
 	var cache = this;
@@ -1325,7 +1325,13 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 		var key = 'index:' + rawKey; // key in the index
 		var localStorageKeys = this.special[key] || {};
 		for (var k in localStorageKeys) {
-			callback.call(this, k, this.get(k));
+			var result = this.get(k);
+			if (result === undefined) {
+				continue;
+			}
+			if (false === callback.call(this, k, this.get(k))) {
+				continue;
+			}
 		}
 		// also the key itself
 		var item = this.special[rawKey];
@@ -1335,7 +1341,7 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 		return;
 	}
 	// key doesn't exist
-	if (!options.evenIfNoIndex) {
+	if (!options.throwIfNoIndex) {
 		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	return Q.each(this.data, function (k, v) {

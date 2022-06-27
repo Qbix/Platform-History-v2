@@ -1568,7 +1568,7 @@ class Q_Utils
 		if (!self::isWindows()) {
 			symlink($target, $link);
 		} else {
-			$pswitch = is_dir($link) ? '/d' : '';
+			$pswitch = is_dir($target) ? '/d' : '';
 			$target = str_replace('/', DS, $target);
 			$link = str_replace('/', DS, $link);
 			exec('mklink ' . $pswitch . ' "' . $link . '" "' . $target . '"');

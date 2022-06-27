@@ -343,7 +343,7 @@ class Places_Nearby
 				$latQuantized, $longQuantized, $meters, $experienceId
 			);
 		}
-		if ($stream = Streams::fetchOne(null, $publisherId, $streamName)) {
+		if ($stream = Streams_Stream::fetch(null, $publisherId, $streamName)) {
 			return $stream;
 		}
 		$postcode = $postcodes ? reset($postcodes) : null;

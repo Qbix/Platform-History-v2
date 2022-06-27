@@ -129,13 +129,9 @@ class Q_Text
 			$filename = "text/$name/en.json";
 		}
 		$config = Q_Config::get('Q', 'text', '*', array());
-        $json = Q::readFile($filename, Q::take($config, array(
-			'ignoreCache' => true,
-			'dontCache' => true,
-			'duration' => 60
-		)));
-		if ($json) {
-			$content = Q::json_decode($json, true);
+		$tree = Q_Tree::createAndLoad($filename, !empty($options['ignoreCache']));
+		$content = $tree ? $tree->getAll() : null;
+		if ($content) {
 			return self::set($name, $content, Q::ifset($options, 'merge', false));
 		}
 		return array();

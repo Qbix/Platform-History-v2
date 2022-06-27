@@ -32,7 +32,7 @@ function Assets_NFTcontract_response_getInfo ($params) {
 		$name = Users_Web3::execute($contractAddress, "name", array(), $chainId);
 		$symbol = Users_Web3::execute($contractAddress, "symbol", array(), $chainId);
 		if ($publisherId && $streamName) {
-			$stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+			$stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
 			$stream->title = Q::interpolate($texts["ContractName"], array(
 				"contractName" => $name,
 				"contractSymbol" => $symbol,

@@ -1559,10 +1559,12 @@ class Q_Response
 	/**
 	 * Returns the string containing all the html attributes
 	 * @method htmlAttributes
+	 * @param {string} [$separator="\n"]
+	 *  You can override the separator to be a space, for example
 	 * @static
 	 * @return {string}
 	 */
-	static function htmlAttributes()
+	static function htmlAttributes($separator = "\n")
 	{
 		$touchscreen = Q_Request::isTouchscreen() ? 'Q_touchscreen' : 'Q_notTouchscreen';
 		$mobile = Q_Request::isMobile() ? 'Q_mobile' : 'Q_notMobile';
@@ -1592,11 +1594,14 @@ class Q_Response
 			'attributes' => &$attributes,
 			'language' => &$language
 		), 'before');
-		return 'lang="' . $language . '" '
-			. 'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#" '
-			. 'itemscope itemtype="https://schema.org/WebPage" '
-			. "class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes' "
-			.implode(' ', $attributes);
+		$defaults = array(
+			'lang="' . $language . '"',
+			'prefix="og:http://ogp.me/ns# object:http://ogp.me/ns/object# website:http://ogp.me/ns/website# fb:http://ogp.me/ns/fb#"',
+			'itemscope itemtype="https://schema.org/WebPage"',
+			"class='$touchscreen $mobile $cordova $platform $ie $ie8 $classes'"
+		);
+		$attributes = array_merge($defaults, $attributes);
+		return implode($separator, $attributes);
 	}
 
 	/**
@@ -1781,6 +1786,25 @@ class Q_Response
 	}
 
 	/**
+	 * Get the value for a cookie that will be sent to the client.
+	 * This is different than the value of the cookie that was sent
+	 * from the client, which is stored in $_COOKIE[$name].
+	 * Use this for session IDs and other things.
+	 * @method cookie
+	 * @static
+	 * @param {string} $name The name of the cookie
+	 * @return {string} The value of the cookie
+	 */
+	static function cookie($name)
+	{
+		return isset(self::$cookies[$name][0])
+			? self::$cookies[$name][0]
+			: (
+				isset($_COOKIE[$name]) ? $_COOKIE[$name] : null
+			);
+	}
+
+	/**
 	 * @method setCookie
 	 * @static
 	 * @param {string} $name The name of the cookie
@@ -1821,7 +1845,6 @@ class Q_Response
 		}
 		// see https://bugs.php.net/bug.php?id=38104
 		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly);
-		$_COOKIE[$name] = $value;
 		return $value;
 	}
 	
@@ -1860,7 +1883,7 @@ class Q_Response
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
-			@compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
+			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
 			'after', false, $header
 		);
 		if ($header) {

@@ -36,7 +36,7 @@ function Streams_file_post($params = array())
 	$splitId = Q_Utils::splitId($publisherId);
 	
 	// get the stream
-	$stream = Streams::fetchOne($user->id, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
 
 	// Hold on to any file that was posted
 	$file = null;
@@ -54,7 +54,7 @@ function Streams_file_post($params = array())
 	// since it might have been retrieved and modified to be different
 	// from what is currently in $stream.
 	// This also calculates the access levels on the stream.
-	$stream = Streams::fetchOne($user->id, $publisherId, $stream->name, '*', array(
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $stream->name, '*', array(
 		'refetch' => true
 	));
 	

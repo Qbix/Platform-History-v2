@@ -373,6 +373,7 @@ var _retainedByKey = {};
 var _retainedByStream = {};
 var _retainedStreams = {};
 var _retainedNodes = {};
+var _publicStreams = {};
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
@@ -624,6 +625,27 @@ Q.Tool.onActivate("Streams/chat").set(function () {
 }, 'Streams');
 
 /**
+ * Used to mark some streams as public, so that Streams.get()
+ * will initiate public batch fetching of these streams.
+ * This results in much faster fetching of streams across
+ * multiple publishers in a batch, but doesn't support getting
+ * related participants, messages, templates, mutable, etc.
+ * @method arePublic
+ * @static
+ * @param {Object} publishersAndNames Should be a structure containing { publisherId: { name: true } } pairs
+ */
+Streams.arePublic = function _Streams_Stream_isPublic (
+	publishersAndNames	
+) {
+	for (var publisherId in publishersAndNames) {
+		for (var name in publishersAndNames[publisherId]) {
+			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
+			_publicStreams[publisherId][name] = true;
+		}
+	}
+};
+
+/**
  * Streams batch getter.
  * @static
  * @method get
@@ -655,6 +677,10 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	}
 	if (!streamName) {
 		throw new Q.Error("Streams.get: streamName is empty");
+	}
+	if (Q.getObject([publisherId, streamName], _publicStreams)) {
+		extra = extra || {};
+		extra.public = 1;
 	}
 	if (extra) {
 		if (extra.participants) {
@@ -3992,6 +4018,8 @@ var Message = Streams.Message = function Streams_Message(fields) {
 	this.typename = 'Q.Streams.Message';
 };
 
+Message.latest = {}; // for helping not create old messages
+
 /**
  * Constructs a Streams.Message from fields.
  * If the Streams.Message.define() function was not called,
@@ -4342,14 +4370,16 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		});
 		waiting[ord] = [event, handlerKey];
 	});
-	p.add(ordinals, 1, function () {
-		if (!alreadyCalled) {
-			Q.handle(callback, this, [true, ordinals]);
-		}
-		clearTimeout(t);
-		alreadyCalled = true;
-		return true;
-	}).run();
+	if (latest < ordinal) {
+		p.add(ordinals, 1, function () {
+			if (!alreadyCalled) {
+				Q.handle(callback, this, [true, ordinals]);
+			}
+			clearTimeout(t);
+			alreadyCalled = true;
+			return true;
+		}).run();
+	}
 	return p;
 
 	function _tryLoading() {
@@ -4968,6 +4998,7 @@ var Interests = Streams.Interests = {
 			}
 			var results = {};
 			var relatedTo = response.slots.interests;
+			relatedTo = Q.isEmpty(relatedTo) ? {} : relatedTo;
 			for (var w in relatedTo) {
 				var info = relatedTo[w];
 				var title = info[2];
@@ -5536,6 +5567,8 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 				} else if (Q.isPlainObject[result] && (type in result)) {
 					result[type] = messageTotals[type];
 				}
+			}, {
+				throwIfNoIndex: false
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
@@ -6205,19 +6238,27 @@ Q.onInit.add(function _Streams_onInit() {
 		// Will return immediately if previous message is already cached
 		// (e.g. from a post or retrieving a stream, or because there was no cache yet)
 		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message);
-		if (typeof ret === 'boolean') {
-			_message();
-		}
 		function _message() {
+			var ptn = msg.publisherId+"\t"+msg.streamName;
+			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
+				return; // it was already processed
+			}
+
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
 
+			
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
+
+			Message.latest[ptn] = parseInt(msg.ordinal);
+			var cached = Streams.get.cache.get(
+				[msg.publisherId, msg.streamName]
+			);
 
 			// update fields.messageCount of cached stream
 			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
@@ -6514,7 +6555,7 @@ function _updateMessageTotalsCache(msg) {
 				++result[type];
 			}
 		}, {
-			evenIfNoIndex: true
+			throwIfNoIndex: false
 		});
 }
 

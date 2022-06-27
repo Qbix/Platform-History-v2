@@ -13,7 +13,7 @@ function Streams_before_Users_canManageLabels($params, &$result)
 			return;
 		}
 	}
-	$stream = Streams::fetchOne($asUserId, $userId, 'Streams/labels');
+	$stream = Streams_Stream::fetch($asUserId, $userId, 'Streams/labels');
 	if (!$stream or !$stream->testReadLevel('content')) {
 		return;
 	}

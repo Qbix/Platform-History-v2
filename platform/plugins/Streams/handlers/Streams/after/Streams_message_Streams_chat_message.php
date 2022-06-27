@@ -15,7 +15,7 @@ function Streams_after_Streams_message_Streams_chat_message($params)
 	foreach ($matches[0] as $match) {
 		$userId = str_replace('@', '', $match);
 		$displayName = Streams::displayName($message->byUserId, array('show' => 'fl'));
-		$mentionStream = Streams::fetchOne($userId, $userId, 'Streams/mentioned');
+		$mentionStream = Streams_Stream::fetch($userId, $userId, 'Streams/mentioned');
 
 		if (!$mentionStream) {
 			continue;

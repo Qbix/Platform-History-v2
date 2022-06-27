@@ -52,7 +52,7 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
         ))->orderBy("weight", false)->limit(1)->fetchDbRow();
 
         if ($lastRelated) {
-            $webrtcStream = Streams::fetchOne(null, $lastRelated->fields['fromPublisherId'], $lastRelated->fields['fromStreamName']);
+            $webrtcStream = Streams_Stream::fetch(null, $lastRelated->fields['fromPublisherId'], $lastRelated->fields['fromStreamName']);
 
             if ($webrtcStream && $resumeClosed) {
                 $webrtcStream->closedTime = null;
@@ -97,7 +97,7 @@ class Streams_WebRTC_Node extends Streams_WebRTC implements Streams_WebRTC_Inter
         }
 
         $streamName = "Streams/webrtc/$roomId";
-        $stream = Streams::fetchOne($publisherId, $publisherId, $streamName);
+        $stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
         //$stream->setAttribute('endTime', time());
         //$stream->changed();
 

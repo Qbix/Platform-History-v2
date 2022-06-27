@@ -4901,10 +4901,13 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  *  If null, calculates an automatically unique id beginning with the tool's name
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
+ * @param {Boolean} [lazyload=false]
+ *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+ *    activated on one of its containers.
  * @return {HTMLElement}
  *  Returns an element you can append to things, and/or call Q.activate on
  */
-Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix) {
+Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix, lazyload) {
 	if (typeof toolOptions === 'string') {
 		prefix = id;
 		id = toolOptions;
@@ -4948,6 +4951,9 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 			}
 			element.setAttribute('id', id);
 		}
+	}
+	if (lazyload) {
+		element.setAttribute('data-Q-lazyload', 'waiting');
 	}
 	return element;
 };
@@ -5670,8 +5676,8 @@ function Q_Cache_removeFromIndex(cache, parameters, key) {
 		var obj = Q_Cache_get(cache, k, true) || {};
 		if (key in obj) {
 			delete obj[key];
+			Q_Cache_set(cache, k, obj, true);
 		}
-		Q_Cache_set(cache, k, obj, true);
 	}
 	return true;
 }
@@ -5805,7 +5811,7 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key  the key to search for
+ * @param {String|Array} key  the key to search for
  * @param {Object} options  supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined
@@ -5903,7 +5909,7 @@ Cp.clear = function _Q_Cache_prototype_clear() {
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  * @param {Function} callback  Is passed two parameters: key, value, with this = the cache
  * @param {Object} [options]
- * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
+ * @param {Boolean} [options.throwIfNoIndex] pass true to throw an exception if an index doesn't exist
  */
 Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 	if (!callback) {
@@ -5916,7 +5922,13 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 		var key = 'index:' + rawKey; // key in the index
 		var localStorageKeys = Q_Cache_get(this, key, true) || {};
 		for (var k in localStorageKeys) {
-			callback.call(this, k, Q_Cache_get(this, k));
+			var result = Q_Cache_get(this, k);
+			if (result === undefined) {
+				continue;
+			}
+			if (false === callback.call(this, k, result)) {
+				continue;
+			}
 		}
 		// also the key itself
 		var item = Q_Cache_get(this, rawKey);
@@ -5926,7 +5938,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
 		return;
 	}
 	// key doesn't exist
-	if (!options.evenIfNoIndex) {
+	if (options.throwIfNoIndex) {
 		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	var prefix = null;
@@ -5976,7 +5988,7 @@ Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  */
 Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
-	options = options || { evenIfNoIndex: true };
+	options = options || { throwIfNoIndex: false };
 	this.each(args, function (key) {
 		this.remove(JSON.parse(key));
 	}, options);
@@ -7591,7 +7603,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var redirected = false;
 			if (data && data.redirect && data.redirect.url) {
 				Q.handle(o.onRedirect, Q, [data.redirect.url]);
-				redirected = true;
+				redirected = data.redirect.url;
 			}
 			callback && callback.call(this, err, data, redirected);
 			Q.handle(o.onProcessed, this, [err, data, redirected]);
@@ -9045,8 +9057,6 @@ Q.replace = function _Q_replace(container, source, options) {
 	return container;
 };
 
-var _latestLoadUrlObjects = {};
-
 /**
  * Requests a URL served by Qbix Platform and loads it as if it was a page loaded in the browser.
  * @static
@@ -9124,8 +9134,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	if (o.onActivate) {
 		onActivate = o.onActivate;
 	}
-	var _loadUrlObject = {};
-	_latestLoadUrlObjects[o.key] = _loadUrlObject;
+	var _loadUrlObject = {url: url, options: options};
+	Q.loadUrl.loading[o.key] = _loadUrlObject;
 	loader(urlToLoad, slotNames, loadResponse, o);
 	
 	var promise = {};
@@ -9140,39 +9150,52 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	promise.cancel = function () {
 		_canceled = true;
-		Q.handle(_reject);
+		_reject && reject("request canceled");
 	};
 	return promise;
 
 	function loadResponse(err, response, redirected) {
+		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
 		}
-		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
-			Q.handle(_reject);
+		var loadingUrlObject = Q.loadUrl.loading[o.key];
+		delete Q.loadUrl.loading[o.key]; // it's loaded
+		if (redirected) {
+			_resolve && _resolve(response);
+			return; // it was just a redirect
+		}
+		if (loadingUrlObject &&
+		_loadUrlObject != loadingUrlObject) {
+			var sn1 = loadingUrlObject.options && loadingUrlObject.options.slotNames || [];
+			var sn2 = _loadUrlObject.options && _loadUrlObject.options.slotNames || [];
+			e = 'request to ' + loadingUrlObject.url
+				+ ' (' + sn1.join(',') + ') '
+				+ ' was initiated after ' 
+				+ ' current one to ' + _loadUrlObject.url
+				+ ' (' + _loadUrlObject.options.slotNames.join(',') + ')';
+			_reject && _reject(e);
 			return; // a newer request was sent
 		}
 		if (!Q.isEmpty(err)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
+			e = Q.firstErrorMessage(err);
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		if (Q.isEmpty(response)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, ["Response is empty", response]);
+			e = "Response is empty";
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e, response]);
 		}
 		if (!Q.isEmpty(response.errors)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, [response.errors[0].message]);
+			response.errors[0].message
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		var unloadedUrl = o.unloadedUrl || location.href;
 		Q.handle(o.beforeUnloadUrl, this, [unloadedUrl, url, response]);
-		
-		if (redirected) {
-			Q.handle(_reject);
-			return;
-		}
-		
+
 		_resolve && _resolve(response);
 		
 		Q.Page.beingProcessed = true;
@@ -9582,6 +9605,8 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 	}
 };
 
+Q.loadUrl.loading = {};
+
 /**
  * Used for handling callbacks, whether they come as functions,
  * strings referring to functions (if evaluated), arrays or hashes.
@@ -9686,7 +9711,9 @@ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options)
 						onActivate: function () {
 							if (callback) callback();
 						}
-					}, o));
+					}, o)).then(function () {
+
+					});
 				} else if (o.externalLoader) {
 					o.externalLoader.apply(this, arguments);
 				} else {
@@ -11212,12 +11239,15 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 *  Optional id of the tool, such as "Q_tabs_2"
 	 * @param {String} [prefix]
 	 *  Optional prefix to prepend to the tool's id
+	 * @param {Boolean} [lazyload=false]
+	 *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+	 *    activated on one of its containers.
 	 */
-	$.fn.tool = function _jQuery_fn_tool(toolName, toolOptions, id, prefix) {
+	$.fn.tool = function _jQuery_fn_tool(toolName, toolOptions, id, prefix, lazyload) {
 		var args = arguments;
 		return this.each(function () {
 			var id2 = (typeof id === 'function') ? id.apply(this, args) : id;
-			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix);
+			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix, lazyload);
 		});
 	};
 	/**
@@ -11362,7 +11392,8 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| Q.cookie('Q_cordova');
 
 var detected = Q.Browser.detect();
-var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
+var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
+var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
 /**
@@ -12153,7 +12184,7 @@ Q.Pointer = {
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
-						if (!targets[i].exists()) {
+						if (!(targets[i] instanceof Element) || !targets[i].exists()) {
 							continue;
 						}
 						var img2 = img1.cloneNode(false);

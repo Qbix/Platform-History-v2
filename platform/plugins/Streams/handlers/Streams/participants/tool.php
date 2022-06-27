@@ -55,7 +55,7 @@ function Streams_participants_tool($options)
 	$showSummary = Q::ifset($options, 'showSummary', false);
 	
 	if (empty($stream)) {
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 	}
 	if (empty($stream)) {
 		throw new Q_Exception_MissingRow(array(

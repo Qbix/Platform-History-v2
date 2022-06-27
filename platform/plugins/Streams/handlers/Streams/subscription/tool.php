@@ -21,7 +21,7 @@ function Streams_subscription_tool($options) {
 		$streamName = Streams::requestedName();
 	}
 
-	$stream = Streams::fetchOne($user->id, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table'    => 'stream',

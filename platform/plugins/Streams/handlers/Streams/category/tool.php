@@ -18,7 +18,7 @@ function Streams_category_tool($options) {
 		$options['streamName'] = $streamName = Streams::requestedName(true);
 	}
 	Q_Response::setToolOptions($options);
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	$userId = Users::loggedInUser(true)->id;
 	return Q::tool('Streams/related', $options);
 }

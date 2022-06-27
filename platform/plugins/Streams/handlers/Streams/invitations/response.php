@@ -18,7 +18,7 @@ function Streams_invitations_response()
 	$invitingUserId = $_REQUEST['invitingUserId'];
 	$batch = $_REQUEST['batch'];
 	$user = Users::loggedInUser(true);
-	$stream = Streams::fetchOne(null, $invitingUserId, 'Streams/invitations', true);
+	$stream = Streams_Stream::fetch(null, $invitingUserId, 'Streams/invitations', true);
 	if (!$stream->testReadLevel('content')) {
 		throw new Users_Exception_NotAuthorized();
 	}

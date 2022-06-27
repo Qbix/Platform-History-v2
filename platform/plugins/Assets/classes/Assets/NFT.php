@@ -29,7 +29,7 @@ class Assets_NFT
 			));
 		}
 
-		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
+		$stream = Streams_Stream::fetch($publisherId, $publisherId, self::$categoryStreamName);
 		if (!$stream) {
 			$stream = Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
 		}
@@ -54,7 +54,7 @@ class Assets_NFT
 		$publisherId = $publisherId ?: Users::loggedInUser(true)->id;
 		if ($category) {
 			if (!($category instanceof Streams_Stream)) {
-				$category = Streams::fetchOne(null, $category["publisherId"], $category["streamName"], true);
+				$category = Streams_Stream::fetch(null, $category["publisherId"], $category["streamName"], true);
 			}
 		} else {
 			$category = self::category($publisherId);

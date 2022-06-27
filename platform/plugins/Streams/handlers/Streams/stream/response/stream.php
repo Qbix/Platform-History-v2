@@ -20,7 +20,7 @@ function Streams_stream_response_stream()
 		}
 	}
 
-	Streams::$cache['stream'] = $stream = Streams::fetchOne(
+	Streams::$cache['stream'] = $stream = Streams_Stream::fetch(
 		$userId, $publisherId, $name, $fields, $options
 	);
 	return $stream ? $stream->exportArray() : null;

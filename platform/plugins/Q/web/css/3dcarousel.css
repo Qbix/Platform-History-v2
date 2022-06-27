@@ -11,7 +11,7 @@
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-    background: white;
+    background: transparent;
     /*-webkit-perspective: 1000px;
     perspective: 1000px;*/
     /*perspective: 10000px;*/

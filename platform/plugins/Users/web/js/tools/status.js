@@ -68,7 +68,7 @@ Q.Tool.define("Users/status", function(options) {
 		function _wireup() {
 			tool.$('.Users_status_login')
 			.plugin('Q/clickable')
-			.on('click', tool, function () {
+			.on(Q.Pointer.click, tool, function () {
 				Q.Users.login()
 			})
 		}

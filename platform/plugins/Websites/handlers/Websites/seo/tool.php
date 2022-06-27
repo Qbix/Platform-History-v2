@@ -20,7 +20,7 @@ function Websites_seo_tool($options)
 		$websitesUserId = Users::communityId();
 		$sha1 = sha1(Q_Dispatcher::uri());
 		$seoStreamName = "Websites/seo/$sha1";
-		$stream = Streams::fetchOne(null, $websitesUserId, $seoStreamName);
+		$stream = Streams_Stream::fetch(null, $websitesUserId, $seoStreamName);
 		$user = Users::loggedInUser();
 		if (!$user or ($stream and !$stream->testWriteLevel('suggest'))) {
 			$options['skip'] = true;
