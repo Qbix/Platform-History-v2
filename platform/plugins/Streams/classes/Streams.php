@@ -599,11 +599,10 @@ abstract class Streams extends Base_Streams
 	 */
 	static function arePublic($publishersAndNames)
 	{
-		foreach ($publishersAndNames as $publisherId => $names) {
-			foreach ($names as $name) {
-				self::$arePublic[$publisherId][$name] = true;
-			}
-		}
+		self::$arePublic = array_merge_recursive(
+			self::$arePublic, 
+			$publishersAndNames
+		);
 	}
 
 	/**
