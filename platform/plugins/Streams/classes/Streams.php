@@ -601,7 +601,7 @@ abstract class Streams extends Base_Streams
 	{
 		foreach ($publishersAndNames as $publisherId => $names) {
 			foreach ($names as $name) {
-				self::$arePublic[$publisherId][] = $name;
+				self::$arePublic[$publisherId][$name] = true;
 			}
 		}
 	}
