@@ -6,7 +6,7 @@ function Streams_after_Q_sessionExtras()
 		$preloaded = Db::exportArray($preloaded);
 		Q_Response::setScriptData('Q.plugins.Streams.Stream._preloaded', $preloaded);
 	}
-	if ($arePublic = Streams_Stream::$arePublic) {
+	if ($arePublic = Streams::$arePublic) {
 		Q_Response::setScriptData('Q.plugins.Streams._public', $arePublic);
 	}
 	if ($preloaded = Streams_Avatar::$preloaded) {
