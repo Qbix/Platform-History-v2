@@ -167,7 +167,7 @@
 				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
 			}
 			Users.init.facebook.completed[appId] = true;
-			callback && callback();
+			Q.handle(callback);
 		}
 
 		if (!$('#fb-root').length) {
@@ -178,6 +178,7 @@
 			_init,
 			{
 				onError: function () {
+					Q.handle(callback, null, [true]);
 					console.log("Couldn't load script:", this, arguments);
 				}
 			}
@@ -3521,17 +3522,21 @@
 			}
 			Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 			Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-			Users.init.facebook(function logoutCallback() {
+			Users.init.facebook(function logoutCallback(err) {
+				if (err) {
+					return Q.handle(callback);
+				}
+
 				Users.Facebook.getLoginStatus(function (response) {
 					setTimeout(function () {
 						Users.logout.occurring = false;
 					}, 0);
 					if (!response.authResponse) {
-						return callback();
+						return Q.handle(callback);
 					}
 					return FB.logout(function () {
 						delete Users.connected.facebook;
-						callback();
+						Q.handle(callback);
 					});
 				}, true);
 			}, {
