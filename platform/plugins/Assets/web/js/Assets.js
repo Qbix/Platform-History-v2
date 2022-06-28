@@ -506,8 +506,17 @@
 				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
 					Assets.Payments.applePayCordova(options, function (err, res) {
 						if (err) {
-							return Assets.Payments.standardStripe(options, callback);
+							Assets.Payments.applePayStripe(options, function (err, res) {
+								if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
+									Assets.Payments.standardStripe(options, callback);
+									return;
+								}
+
+								Q.handle(callback, null, [err, res]);
+							});
+							return;
 						}
+
 						Q.handle(callback, null, [err, res]);
 					});
 				} else if (!Q.info.isCordova && window.PaymentRequest) {
