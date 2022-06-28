@@ -590,6 +590,23 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Tell the client using scriptData to call Q.Streams.arePublic()
+	 * and mark some streams as public
+	 * @method arePublic
+	 * @static
+	 * @param {array} $publishersAndNames
+	 *  Array of ($publisherId => $namesArray) pairs
+	 */
+	static function arePublic($publishersAndNames)
+	{
+		foreach ($publishersAndNames as $publisherId => $names) {
+			foreach ($names as $name) {
+				self::$arePublic[$publisherId][] = $name;
+			}
+		}
+	}
+
+	/**
 	 * Calculates the access for one or more streams by querying the database
 	 * Modifies the objects in the $streams array, setting their access levels.
 	 * After the function returns, you will be able to call the methods
@@ -883,7 +900,7 @@ abstract class Streams extends Base_Streams
 		}
 		if (!$authorized and $retrieved and !empty($relate['streamName'])) {
 			// Check if user is perhaps authorized to create a related stream
-			$to_stream = Streams::fetchOne(
+			$to_stream = Streams_Stream::fetch(
 				$userId, $relate['publisherId'], $relate['streamName']
 			);
 			if ($to_stream and $to_stream->testWriteLevel('relate')) {
@@ -1019,7 +1036,7 @@ abstract class Streams extends Base_Streams
 	
 		// ready to persist this stream to the database
 		if (!empty($relate['streamName']) && Q::ifset($relate, 'inheritAccess', true)) {
-			$rs = Streams::fetchOne(
+			$rs = Streams_Stream::fetch(
 				$asUserId,
 				$relate['publisherId'],
 				$relate['streamName']
@@ -2500,7 +2517,7 @@ abstract class Streams extends Base_Streams
 	 * @return {boolean} if available or not
 	 */
 	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $options=array()) {
-		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
 		$maxRelations = Q::ifset($stream->getAttribute("Streams/maxRelations"), $relationType, null);
 		if (!is_numeric($maxRelations)) {
 			return true;
@@ -2897,7 +2914,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($relateStreams as $pn => $streamTypes) {
 			foreach ($streamTypes as $streamType => $streamNames) {
-				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+				if (!Streams_Stream::fetch($asUserId, $asUserId, $pn)) {
 					Streams::create($asUserId, $asUserId, 'Streams/participating', array('name' => $pn));
 				}
 				$extraArray = array();
@@ -3051,7 +3068,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($unrelateStreams as $pn => $streamTypes) {
 			foreach ($streamTypes as $streamType => $streamNames) {
-				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+				if (!Streams_Stream::fetch($asUserId, $asUserId, $pn)) {
 					Streams::create($asUserId, $asUserId, null, array('name' => $pn));
 				}
 				Streams::unrelate(
@@ -3570,7 +3587,7 @@ abstract class Streams extends Base_Streams
 		}
 
 		// Fetch the stream as the logged-in user
-		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName, true);
+		$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName, true);
 
 		// Do we have enough admin rights to invite others to this stream?
 		if (!$stream->testAdminLevel('invite') || !$stream->testWriteLevel('join')) {
@@ -3923,7 +3940,7 @@ abstract class Streams extends Base_Streams
 		}
 		
 		// fetch the stream as the logged-in user
-		$stream = Streams::fetchOne($userId, $publisherId, $streamName, true);
+		$stream = Streams_Stream::fetch($userId, $publisherId, $streamName, true);
 
 		// process any requested levels
 		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
@@ -4129,7 +4146,7 @@ abstract class Streams extends Base_Streams
 	static function experience($experienceId = 'main')
 	{
 		$communityId = Users::communityId();
-		return Streams::fetchOne(null, $communityId, "Streams/experience/$experienceId", true);
+		return Streams_Stream::fetch(null, $communityId, "Streams/experience/$experienceId", true);
 	}
 	/**
 	 * Get the url of the stream's icon
@@ -4533,7 +4550,7 @@ abstract class Streams extends Base_Streams
 			$fields['s'] = substr($fields['s'], 0, $len);
 		}
 		$streamName = 'Streams/user/profile';
-		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		$stream = Streams_Stream::fetch($userId, $userId, $streamName);
 		$now = time();
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Streams/user/profile', array(
@@ -4799,7 +4816,7 @@ abstract class Streams extends Base_Streams
 		$streamName = 'Streams/interest/' . Q_Utils::normalize(trim($title));
 		$publisherId = $publisherId ?: Users::communityId();
 
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
 			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
@@ -5069,6 +5086,7 @@ abstract class Streams extends Base_Streams
 	static $requestedName_override = null;
 	static $beingSaved = null;
 	static $beingSavedQuery = null;
+	static $arePublic = array();
 	/**
 	 * You can set this to true to prevent caching for a while,
 	 * e.g. during installer scripts, but make sure to set it back to false when done.

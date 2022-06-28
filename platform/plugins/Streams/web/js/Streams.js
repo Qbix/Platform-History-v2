@@ -373,7 +373,6 @@ var _retainedByKey = {};
 var _retainedByStream = {};
 var _retainedStreams = {};
 var _retainedNodes = {};
-var _publicStreams = {};
 
 /**
  * Calculate the key of a stream used internally for retaining and releasing
@@ -644,6 +643,8 @@ Streams.arePublic = function _Streams_Stream_isPublic (
 		}
 	}
 };
+
+var _publicStreams = Streams.arePublic.collection = {};
 
 /**
  * Streams batch getter.
@@ -6479,15 +6480,19 @@ Q.Page.beforeUnload("").set(function () {
 function _preloaded(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams and avatars data we find
-	Q.each(Stream.preloaded, function (i, fields) {
+	Q.each(Stream._preloaded, function (i, fields) {
 		Stream.construct(fields, {}, null, true);
 	});
-	Stream.preloaded = null;
-	Q.each(Avatar.preloaded, function (i, fields) {
+	Stream._preloaded = null;
+	Q.each(Avatar._preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);
 		Avatar.get.cache.set([fields.publisherId], 0, avatar, [null, avatar]);
 	});
-	Avatar.preloaded = null;
+	Avatar._preloaded = null;
+	if (Streams._public) {
+		Streams.arePublic(Streams._public);
+	}
+	Streams._public = null;
 }
 
 function _updateMessageCache(msg) {
