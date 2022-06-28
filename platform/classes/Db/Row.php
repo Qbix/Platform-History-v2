@@ -1814,7 +1814,7 @@ class Db_Row
 			or (!$evenIfNotModified and empty($reallyModifiedFields))) {
 				$this->wasModified(false);
 				if ($commit) {
-					$query = self::db()->rawQuery('')->commit();
+					$query = static::db()->rawQuery('')->commit();
 					$query->className = get_class($this);
 					$query->execute(false, $query->shard(null, $where));
 				}
