@@ -707,10 +707,13 @@
 			paymentRequestStripe: function (options, callback) {
 				Assets.Payments.checkLoaded();
 
+				// while "basic-card" payment method refused and GooglePay not adjusted yet
+				return Q.handle(callback, null, [{code: 9}]);
+
 				var currency = options.currency || 'USD';
 
 				if (!Assets.Payments.googlePay) {
-					return callback({code: 9});
+					return Q.handle(callback, null, {code: 9});
 				}
 
 				var supportedInstruments = [{
@@ -816,7 +819,7 @@
 					return promise ? promise : Q.Promise.reject({result: result, err: new Error('Unsupported method')});
 				}).then(function (result) {
 					result.complete('success');
-					callback(null, result);
+					Q.handle(callback, null, [null, result]);
 				}, function (reject) {
 					console.warn(reject.result);
 					reject.result.complete("fail");
@@ -824,7 +827,7 @@
 					if (Q.getObject("result.complete", err)) {
 						return err.result.complete('fail');
 					}
-					callback(err);
+					Q.handle(callback, null, [err]);
 				});
 			},
 			/**
