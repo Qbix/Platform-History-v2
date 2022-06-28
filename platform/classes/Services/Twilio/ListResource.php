@@ -138,6 +138,7 @@ abstract class Services_Twilio_ListResource
      * @return {integer}
      *
      */
+    #[\ReturnTypeWillChange]
     public function count() {
         try {
             $page = $this->getPage(0, 1);
@@ -166,6 +167,7 @@ abstract class Services_Twilio_ListResource
      *
      * @return {Services_Twilio_AutoPagingIterator} An iterator
      */
+    #[\ReturnTypeWillChange]
     public function getIterator(
         $page = 0, $size = 50, array $filters = array()
     ) {

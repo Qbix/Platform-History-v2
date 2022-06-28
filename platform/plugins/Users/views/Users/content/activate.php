@@ -11,7 +11,8 @@
 				<div class='Q_big_prompt'>
 					<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
 					<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
-						value="<?php echo Q_Html::text($identifier) ?>">
+						value="<?php echo Q_Html::text($identifier) ?>"
+						autocomplete="username">
 					<div class='Q_buttons'>
 						<button class="Q_button" id="Users_activate_set_emailAddress" type="submit">
 							<?php echo Q::text($activate['SetAsPrimary'], array($identifier, $type)) ?>
@@ -39,10 +40,11 @@
 					</p>
 					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
 						<?php echo Q_Html::formInfo(null) ?>
-						<input type="password" id='activate_passphrase' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
+						<input type="password" id='new-password' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
 						<button type="submit" class="Q_button">Activate My Account</button>
 						<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
-							value="<?php echo Q_Html::text($identifier) ?>">
+							value="<?php echo Q_Html::text($identifier) ?>"
+							autocomplete="username">
 						<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
 						<input type="hidden" name="isHashed" value="0" id="Users_login_isHashed">
 						<?php if (!empty($_REQUEST['p'])): ?>
@@ -88,7 +90,7 @@
 		}
 	)})
 	$("#activate_login").click(function() { Q.plugins.Users.login(); });
-	$("#activate_passphrase").val("").focus();
+	$("#new-password").val("").focus();
 	
 	Q.addScript("{{Q}}/js/sha1.js");
 	
@@ -111,7 +113,7 @@
 		if (!window.CryptoJS || !salt) {
 			return;
 		}
-		var p = $("#activate_passphrase");
+		var p = $("#new-password");
 		var v = p.val();
 		if (v) {
 			if (!/^[0-9a-f]{40}$/i.test(v)) {
@@ -125,7 +127,7 @@
 	
 	// Get the suggestions from YAHOO, if possible
 	
-	$("#activate_passphrase").plugin("Q/placeholders").plugin("Q/clickfocus");
+	$("#new-password").plugin("Q/placeholders").plugin("Q/clickfocus");
 	
 	// this used to work:
 	// var url = "http://query.yahooapis.com/v1/public/yql?format=json&diagnostics=false&q=select%20abstract%20from%20search.news%20where%20query%3D%22{{verb_ue}}%22";
