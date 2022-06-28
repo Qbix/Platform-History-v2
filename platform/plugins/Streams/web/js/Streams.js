@@ -6177,7 +6177,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 			}, true);
 		}
-	}, "Streams");
+	}, "Streams.invited");
 
 	Users.Socket.onEvent('Streams/debug').set(function _Streams_debug_handler (msg) {
 		console.log('DEBUG:', msg);
@@ -6447,7 +6447,7 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
-	Q.beforeActivate.add(_preloaded, 'Streams');
+	Q.Page.onLoad('').add(_preloaded, 'Streams.preloaded');
 	Q.loadUrl.options.onResponse.add(_preloaded, 'Streams');
 
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
