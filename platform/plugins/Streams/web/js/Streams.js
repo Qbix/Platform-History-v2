@@ -6447,8 +6447,7 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
-	Q.Page.onLoad('').add(_preloaded, 'Streams.preloaded');
-	Q.loadUrl.options.onResponse.add(_preloaded, 'Streams');
+	Q.request.options.onResponse.add(_preloaded, 'Streams.preloaded');
 
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
