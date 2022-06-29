@@ -5469,15 +5469,22 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 
 	var authResponse;
 	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
-		Users.init.facebook(function() {
-			if ((authResponse = FB.getAuthResponse())) {
-				for (var k in authResponse) {
-					register_form.append(
-						$('<input type="hidden" />')
-							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-							.attr('value', authResponse[k])
-					);
-				}
+		Users.init.facebook(function(err) {
+			if (err) {
+				return;
+			}
+
+			authResponse = FB.getAuthResponse();
+			if (!authResponse) {
+				return;
+			}
+
+			for (var k in authResponse) {
+				register_form.append(
+					$('<input type="hidden" />')
+						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+						.attr('value', authResponse[k])
+				);
 			}
 		});
 	}

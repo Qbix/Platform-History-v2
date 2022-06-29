@@ -222,7 +222,6 @@
 			composer: function (callback) {
 				var tool = this;
 				var state = this.state;
-				var hasUserMedia = (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia);
 				var maxUploadSize = Q.humanReadable(Q.info.maxUploadSize, {bytes: true});
 
 				/**
@@ -572,6 +571,9 @@
 
 						// set clip start/end for upload
 						$("input[type=file]", mainDialog).on('change', function () {
+							if (!this.files.length) {
+								return;
+							}
 							var $audioElement = $(".Q_tabbing_container [data-content=upload] .Streams_audio_composer_preview", mainDialog);
 							var $clipElement = $(".Q_tabbing_container [data-content=upload] .Streams_audio_composer_clip", mainDialog);
 							var url = URL.createObjectURL(this.files[0]);
