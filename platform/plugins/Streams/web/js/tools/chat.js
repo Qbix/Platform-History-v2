@@ -1,8 +1,6 @@
 (function (Q, $) {
 
-	var WebRTC = Q.Streams.WebRTC;
-
-	/**
+/**
  * Streams Tools
  * @module Streams-tools
  */
@@ -79,7 +77,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 		});
 		Q.Streams.refresh.beforeRequest.add(function () {
-			if (state.stream && state.stream.refrresh) {
+			if (state.stream && state.stream.refresh) {
 				state.stream.refresh(null, {messages: true});
 			}
 		}, tool);
@@ -256,11 +254,10 @@ Q.Tool.define('Streams/chat', function(options) {
 	 *  Pass false here to re-enable the textarea.
 	 * @return {HTMLElement} the div that replaces the textarea
 	 */
-	prevent: function (message, callback) {
+	prevent: function (message) {
 		var tool = this;
 		var state = tool.state;
 		var $ie = state.$inputElement;
-		var $prevent = state.$prevent;
 		if (state.prevented && message === false) {
 			$ie.attr('placeholder', state.lastPlaceholder)
 			.removeAttr('disabled')
@@ -279,8 +276,6 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 	prepareMessages: function(messages, action){
 		var res  = {};
-		var tool = this;
-		var state = tool.state;
 		if (Q.isEmpty(messages)) {
 			return res;
 		}
