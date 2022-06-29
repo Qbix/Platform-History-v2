@@ -1815,7 +1815,7 @@ class Db_Row
 				$this->wasModified(false);
 				if ($commit) {
 					$class = get_class($this);
-					$db = call_user_func($class, 'db');
+					$db = call_user_func(array($class, 'db'));
 					$query = $db->rawQuery('')->commit();
 					$query->className = get_class($this);
 					$query->execute(false, $query->shard(null, $where));
