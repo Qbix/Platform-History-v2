@@ -483,7 +483,6 @@
                 }
 
                 var $Assets_NFT_owner = $(".Assets_NFT_owner", tool.element);
-                ownerUserId = "aofgeedy";
                 if ($Assets_NFT_owner.length && ownerUserId) {
                     $Assets_NFT_owner.tool("Users/avatar", {
                         userId: ownerUserId,
