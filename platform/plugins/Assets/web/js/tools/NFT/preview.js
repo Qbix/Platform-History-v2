@@ -383,7 +383,7 @@
                     tool.renderVideo($container, videoUrl, imageUrl);
                 } else if (audioUrl) {
                     tool.renderAudio($container, audioUrl);
-                } else if (imageUrl && !imageUrl.includes("empty_white")) {
+                } else if (imageUrl) {
                     tool.renderImage($container, imageUrl);
                 } else if (videoId) {
                     videoUrl = Q.getObject(["video", "cloudUpload", videoProvider, "url"], Q).interpolate({videoId: videoId});
@@ -452,42 +452,30 @@
 
                 var videoUrl = state.video || metadata.video || metadata.youtube_url;
                 var audioUrl = state.audio;
-                var imageUrl = state.image || metadata.image || "";
+                var imageUrl = state.image || metadata.image || null;
                 if (!imageUrl && metadata.image_data) {
                     imageUrl = 'data:image/svg+xml;utf8,' + imageUrl;
                 }
                 var $container = $(".video-container", tool.element);
 
-                if (videoUrl) {
-                    tool.renderVideo($container, videoUrl, imageUrl);
-                } else if (audioUrl) {
-                    tool.renderAudio($container, audioUrl);
-                } else if (imageUrl) {
-                    tool.renderImage($container, imageUrl);
-                } else if (metadata.animation_url) {
-                    /*var xhr = new XMLHttpRequest();
-                    xhr.open('HEAD', metadata.animation_url, true);
-                    xhr.onload = function() {
-                        var contentType = xhr.getResponseHeader('Content-Type');
-                        if (contentType.includes("video")) {
-                            _renderVideoTool(metadata.animation_url);
-                        } else if (contentType.includes("audio")) {
-                            _renderAudioTool(metadata.animation_url);
-                        }
-                    };
-                    xhr.send();*/
-
+                if (metadata.animation_url) {
                     $.ajax({
                         type: "HEAD",
                         url: metadata.animation_url,
                     }).done(function(message, text, jqXHR){
                         var contentType = jqXHR.getResponseHeader('Content-Type');
                         if (contentType.includes("video")) {
-                            tool.renderVideoTool(metadata.animation_url);
+                            tool.renderVideo($container, metadata.animation_url, imageUrl);
                         } else if (contentType.includes("audio")) {
-                            tool.renderAudioTool(metadata.animation_url);
+                            tool.renderAudio($container, metadata.animation_url, imageUrl);
                         }
                     });
+                } else if (videoUrl) {
+                    tool.renderVideo($container, videoUrl, imageUrl);
+                } else if (audioUrl) {
+                    tool.renderAudio($container, audioUrl);
+                } else if (imageUrl) {
+                    tool.renderImage($container, imageUrl);
                 }
 
                 // set onInvoke event
@@ -800,13 +788,13 @@
                             attributes["videoUrl"] = $inputUrl.val();
                         }
 
-                        if (!tool.minted) {
+                        //if (!tool.minted) {
                             Q.req("Assets/NFT", ["NFTStream"],function (err, response) {
+                                Q.Dialogs.pop();
                                 if (err) {
-                                    return;
+                                    return Q.alert(Q.firstErrorMessage(err));
                                 }
 
-                                Q.Dialogs.pop();
                                 var streamData = response.slots.NFTStream;
                                 Q.handle(state.onCreated, tool, [streamData]);
                             }, {
@@ -822,7 +810,7 @@
                             });
 
                             return;
-                        }
+                        //}
 
                         var price = parseFloat($("input[name=price]", dialog).val());
                         var $onMarketPlace = $(".Assets_nft_check", dialog);
@@ -860,6 +848,9 @@
                             // and set tokenId, chainId, currency, royalty in attributes
                             Q.req("Assets/NFT",function (err) {
                                 Q.Dialogs.pop();
+                                if (err) {
+                                    return Q.alert(Q.firstErrorMessage(err));
+                                }
 
                                 Q.Tool.remove(tool.element, true, false);
                                 tool.element.className = "";
@@ -998,7 +989,7 @@
                                 Q.req("Assets/NFT", ["attrUpdate"], function (err, response) {
                                     var fem = Q.firstErrorMessage(err, response);
                                     if (fem) {
-                                        return console.error(fem);
+                                        return Q.alert(fem);
                                     }
 
                                     if (!response.slots.attrUpdate) {

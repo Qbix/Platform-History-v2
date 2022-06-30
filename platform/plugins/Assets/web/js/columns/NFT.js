@@ -1,7 +1,7 @@
 "use strict";
 (function(Q, $, undefined) {
 Q.exports(function (options, index, column, data) {
-	Q.addStylesheet('{{Assets}}/css/columns/NFT.css');
+	Q.addStylesheet('{{Assets}}/css/columns/NFT.css', { slotName: 'Assets' });
 
 	var $column = $(column);
 	var publisherId = $("input[name=publisherId]", column).val();
@@ -31,7 +31,7 @@ Q.exports(function (options, index, column, data) {
 					className: "NFT_fullsize_icon_dialog",
 					content: "<img class='NFT_fullsize_icon' src='" + stream.iconUrl("x") + "'>",
 					onActivate: function (dialog) {
-						$(".NFT_fullsize_icon", dialog).load(function () {
+						$(".NFT_fullsize_icon", dialog).on('load', function () {
 							var $img = $(this);
 							var width = $img.width();
 							var image = new Image();

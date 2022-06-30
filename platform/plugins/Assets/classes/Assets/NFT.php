@@ -268,8 +268,8 @@ class Assets_NFT
 			return Q::json_decode($cache->result, true);
 		}
 
-		$response = self::fetchMetadata($tokenURI);
-		$cache->result = $response;
+		$response = self::fetchMetadata(Q_Uri::interpolateUrl($tokenURI));
+		$cache->result = gettype($response) == "string" ? $response : Q::json_encode($response);
 		$cache->save();
 
 		return Q::json_decode($response, true);
@@ -298,7 +298,7 @@ class Assets_NFT
 			CURLOPT_SSL_VERIFYHOST => false
 		));
 
-		$cache->result = $response;
+		$cache->result = gettype($response) == "string" ? $response : Q::json_encode($response);
 		$cache->save();
 
 		return $response;
