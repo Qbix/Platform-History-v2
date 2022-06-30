@@ -778,7 +778,16 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
     display: block;
     margin: 0 auto;
 }
-
+.Assets_NFT_preview_tool .Assets_NFT_role .Users_avatar_icon {
+    box-shadow: #222 0 3px 5px;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .Users_avatar_name {
+    font-weight: bold;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .Assets_NFT_title {
+    font-weight: normal;
+    font-size: 1em;
+}
 @media (max-width:1200px) {
     .Assets_NFT_preview_tool .video-container img {
         height: auto;
