@@ -30,7 +30,7 @@ var Streams = Q.Streams;
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
  *   @param {Function} [options.toolName] Function that takes (streamType, options) and returns the name of the tool to render (and then activate) for that stream. That tool should reqire the "Streams/preview" tool, and work with it as documented in "Streams/preview".
  *   @param {Boolean} [options.realtime=false] Whether to refresh every time a relation is added, removed or updated by anyone
- *   @param {Object|Boolean} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
+ *   @param {Object|Boolean} [options.sortable=false] Options for "Q/sortable" jQuery plugin. Pass true here to disable sorting interface, or an object of custom options for Q/sortable tool. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
  *   @param {Object} [options.tabsOptions] Options for the tabs function
  *   @param {Boolean} [options.tabsOptions.useStreamURLs] Whether to use the stream URLs instead of Streams.key() and tab names
@@ -56,7 +56,10 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		// throw new Q.Error("Streams/related tool: missing relationType");
 	}
 	if (state.sortable === true) {
-		state.sortable = Q.Tool.define.options('Streams/related').sortable;
+		state.sortable = Q.extend({
+			draggable: '.Streams_related_stream',
+			droppable: '.Streams_related_stream'
+		}, Q.Tool.define.options('Streams/related').sortable);
 	} else if (state.sortable && typeof state.sortable !== 'object') {
 		throw new Q.Error("Streams/related tool: sortable must be an object or boolean");
 	}
@@ -179,10 +182,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		limit: 50,
 		offset: 0
 	},
-	sortable: {
-		draggable: '.Streams_related_stream',
-		droppable: '.Streams_related_stream'
-	},
+	sortable: false,
 	previewOptions: {},
 	tabs: function (previewTool, tabsTool) {
 		var ps = previewTool.state;
