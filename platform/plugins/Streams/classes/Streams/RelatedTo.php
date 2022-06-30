@@ -163,25 +163,25 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				: 0;
 		}
 		$weight = $total + 1;
-		list($relations, $relatedStreams) = $category->related($category->publisherId, true, array(
+		$relations = $category->related($category->publisherId, true, array(
 			$relationType,
-			'orderBy' => 'RAND()',
+			'orderBy' => 'random',
 			'limit' => 1,
 			'where' => array(
 				'weight >' => $consumedWeight
-			)
+			),
+			'relationsOnly' => true
 		));
 		$r = reset($relations);
-		$rs = reset($relatedStreams);
-		if ($rs) {
+		if ($r and $r->fromStreamName) {
 			// swap weights with a previous relation
 			Streams::updateRelation(
 				$category->publisherId,
 				$category->publisherId,
 				$category->name,
 				$relationType,
-				$rs->publisherId,
-				$rs->name,
+				$r->fromPublisherId,
+				$r->fromStreamName,
 				$weight,
 				0
 			);

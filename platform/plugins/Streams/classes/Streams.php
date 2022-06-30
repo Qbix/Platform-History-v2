@@ -2278,7 +2278,7 @@ abstract class Streams extends Base_Streams
 	 *  If true, returns all the streams this related to this category.
 	 *  If a string, returns all the streams related to this category with names prefixed by this string.
 	 * @param {array} $options=array()
-	 * @param {boolean} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight.
+	 * @param {boolean|string} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight. Also can pass "random" to order randomly.
 	 * @param {integer} [$options.limit] number of records to fetch
 	 * @param {integer} [$options.offset] offset to start from
 	 * @param {double} [$options.min] the minimum orderBy value (inclusive) to filter by, if any
@@ -2362,7 +2362,17 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		if ($isCategory) {
-			$query = $query->orderBy('weight', Q::ifset($options, "orderBy", false));
+			$orderBy = Q::ifset($options, "orderBy", false);
+			if (is_bool($orderBy)) {
+				$query = $query->orderBy('weight', $orderBy);
+			} else if (strtolower($orderBy) === 'random') {
+				$query = $query->orderBy('random', null)->ignoreCache();
+			} else {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'orderBy',
+					'range' => 'true, false, or "random"'
+				));
+			}
 
 			if (!empty($options['weight'])) {
 				$query = $query->andWhere(array('weight' => $options['weight']));
