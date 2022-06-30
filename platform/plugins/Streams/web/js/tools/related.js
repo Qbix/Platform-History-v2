@@ -36,7 +36,7 @@ var Streams = Q.Streams;
  *   @param {Boolean} [options.tabsOptions.useStreamURLs] Whether to use the stream URLs instead of Streams.key() and tab names
  *   @param {String} [options.tabsOptions.streamType] You can manually enter the type of all related streams, to be used with Streams.Stream.url()
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
- *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
+ *   @param {Boolean|Object} [infinitescroll=false] If true or object, enables loading more related streams on demand, by activate Q/infinitescroll tool on closest scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params. 
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
  *   @param {Object} [options.beforeRenderPreview] Event occur before Streams/preview tool rendered inside related tool.
  *   If executing result of this handler===false, skip adding this preview tool to the related list.
@@ -331,8 +331,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					// set data-streamName attribute to mark tool as not composer
 					element.setAttribute("data-streamName", stream.fields.name);
 
-					// set weight to element
+					// set weight to preview tool and to element
 					Q.setObject("options.streams_preview.related.weight", this.state.related.weight, element);
+					element.setAttribute('data-weight', this.state.related.weight);
 
 					// place new preview to the valid place in the list
 					_placeRelatedTool(element);
@@ -760,6 +761,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		e.setAttribute('data-publisherId', publisherId);
 		e.setAttribute('data-streamName', streamName);
 		e.setAttribute('data-streamType', streamType);
+		e.setAttribute('data-weight', weight);
  		return e;
 	},
 
