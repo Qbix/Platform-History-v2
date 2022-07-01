@@ -184,7 +184,8 @@
                     ownerAddress: params.owner[1],
                     commissionInfo: params.commissionInfo[1],
                     saleInfo: params.saleInfo[1],
-                    authorUserId: params.authorUserId[1] || ''
+                    authorUserId: params.authorUserId[1] || '',
+                    ownerUserId: params.ownerUserId[1] || ''
                 });
                 $toolElement.removeClass("Q_working");
 
