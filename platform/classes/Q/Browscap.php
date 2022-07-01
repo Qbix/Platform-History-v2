@@ -363,12 +363,7 @@ class Q_Browscap
         // Add the keys for each property
         $array = array();
         foreach ($browser as $key => $value) {
-            if ($value === 'true') {
-                $value = true;
-            } elseif ($value === 'false') {
-                $value = false;
-            }
-            $array[$this->_properties[$key]] = $value;
+            $array[$this->_properties[$key]] = filter_var($value, FILTER_VALIDATE_BOOLEAN);
         }
 
         return $return_array ? $array : (object) $array;
