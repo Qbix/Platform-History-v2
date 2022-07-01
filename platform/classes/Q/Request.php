@@ -440,8 +440,8 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
-		$loadExtras = filter_var(Q_Request::special('loadExtras', false), FILTER_VALIDATE_BOOLEAN);
-		if ($loadExtras) {
+		$loadExtras = Q_Request::special('loadExtras', false);
+		if (filter_var($loadExtras, FILTER_VALIDATE_BOOLEAN)) {
 			$loadExtras = 'all';
 		}
 		if (!$loadExtras) {
