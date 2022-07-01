@@ -1336,6 +1336,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Adds an ORDER BY clause to the query
 	 * @method orderBy
 	 * @param {Db_Expression|string} $expression A string or Db_Expression with the expression to order the results by.
+	 *  Can also be "random", in which case you are highly encouraged to call ->ignoreCache() as well to get a new random result every time!
 	 * @param {boolean} $ascending=true If false, sorts results as descending, otherwise ascending.
 	 * @return {Db_Query_Mysql}  The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If ORDER BY clause does not belong to context
@@ -1362,7 +1363,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (! is_string($expression))
 			throw new Exception("The ORDER BY expression has to be specified correctly.",-1);
 
-		if (is_bool($ascending)) {
+		if (is_string($expression) and (
+			strtoupper($expression) === 'RANDOM'
+			or strtoupper($expression) === 'RAND()'
+		)) {
+			$expression = 'RAND()';
+		} else if (is_bool($ascending)) {
 			$expression .= $ascending ? ' ASC' : ' DESC';
 		} else if (is_string($ascending)) {
 			if (strtoupper($ascending) == 'ASC') {
