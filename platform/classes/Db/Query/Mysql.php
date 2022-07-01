@@ -1363,11 +1363,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (! is_string($expression))
 			throw new Exception("The ORDER BY expression has to be specified correctly.",-1);
 
-		if (is_string($expression)) {
-			if (strtoupper($expression) === 'RANDOM'
-			or strtoupper($expression) === 'RAND()') {
-				$expression = 'RAND()';
-			}
+		if (is_string($expression) and (
+			strtoupper($expression) === 'RANDOM'
+			or strtoupper($expression) === 'RAND()'
+		)) {
+			$expression = 'RAND()';
 		} else if (is_bool($ascending)) {
 			$expression .= $ascending ? ' ASC' : ' DESC';
 		} else if (is_string($ascending)) {
