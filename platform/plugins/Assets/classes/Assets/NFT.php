@@ -102,6 +102,11 @@ class Assets_NFT
 		$stream->title = $title;
 		$stream->content = Q::ifset($fields, "content", null);
 
+		$icon = Q::ifset($fields, "icon", null);
+		if ($icon) {
+			$stream->icon = $icon;
+		}
+
 		// update Assets/NFT/attributes attribute
 		$newNFTattributes = Q::ifset($fields, "attributes", "Assets/NFT/attributes", array());
 		$oldNFTattributes = (array)$stream->getAttribute("Assets/NFT/attributes");
