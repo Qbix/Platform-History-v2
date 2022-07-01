@@ -6,6 +6,11 @@ function Assets_NFT_response_content ($params) {
 	$streamId = Q::ifset($request, 'streamId', Q::ifset($uri, 'streamId', null));
 	$tokenId = Q::ifset($request, 'tokenId', Q::ifset($uri, 'tokenId', null));
 	$isJson = preg_match("/\.json$/", $_SERVER["REQUEST_URI"]);
+	if ($isJson) {
+		$publisherId = str_replace(".json", "", $publisherId);
+		$tokenId = str_replace(".json", "", $tokenId);
+		$streamId = str_replace(".json", "", $streamId);
+	}
 
 	if (empty($tokenId) && empty($publisherId)) {
 		throw new Exception("NFT::view publisherId required!");
@@ -18,10 +23,6 @@ function Assets_NFT_response_content ($params) {
 	}
 
 	if ($tokenId) {
-		if ($isJson) {
-			$tokenId = str_replace(".json", "", $tokenId);
-		}
-
 		$decodedToken = Streams::fromHexString($tokenId);
 		if (!is_array($decodedToken) || sizeof($decodedToken) != 2) {
 			throw new Exception("Invalid token Id");
