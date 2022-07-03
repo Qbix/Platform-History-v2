@@ -6,6 +6,12 @@ function Websites_webpage_post($params)
 
 	$request = array_merge($_REQUEST, $params);
 
+	// add scheme to url if not exist
+	$parts = explode('#', $request['url']);
+	$request['url'] = reset($parts);
+	if (parse_url($request['url'], PHP_URL_SCHEME) === null) {
+		$request['url'] = 'http://'.$request['url'];
+	}
 	$stream = Websites_Webpage::createStream($request);
 
 	Q_Response::setSlot('publisherId', $stream->publisherId);

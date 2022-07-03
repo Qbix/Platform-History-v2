@@ -1480,19 +1480,20 @@ abstract class Users extends Base_Users
 	 * Imports an icon and sets $user->icon to the url.
 	 * @method importIcon
 	 * @static
-	 * @param {array} $user The user for whom the icon should be downloaded
+	 * @param {object} $obj An object with "icon" property, for whom the icon should be downloaded
 	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
-	 * @param {string} [$directory=null] Defaults to APP/files/APP/uploads/Users/USERID/icon/imported
+	 * @param {string} [$directory=null] Set this unless $obj is a Users_User, in which case it will
+	 *   defaults to APP/files/APP/uploads/Users/USERID/icon/imported
 	 * @param {string|array} [$cookies=null] The cookies to pass, if downloading from URLs
 	 * @return {string} the path to the icon directory, or false if files weren't created
 	 */
-	static function importIcon($user, $urls = array(), $directory = null, $cookies = null)
+	static function importIcon($obj, $urls = array(), $directory = null, $cookies = null)
 	{
 		$app = Q::app();
 		if (empty($directory)) {
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
-				.DS.Q_Utils::splitId($user->id).DS.'icon'.DS.'imported';
+				.DS.Q_Utils::splitId($obj->id).DS.'icon'.DS.'imported';
 		}
 		if (empty($urls)) {
 			return $directory;
@@ -1628,7 +1629,7 @@ abstract class Users extends Base_Users
 		}
 		$head = APP_FILES_DIR.DS.$app.DS.'uploads';
 		$tail = str_replace(DS, '/', substr($directory, strlen($head)));
-		$user->icon = '{{baseUrl}}/Q/uploads'.$tail;
+		$obj->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
 	}
 

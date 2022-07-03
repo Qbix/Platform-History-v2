@@ -19,6 +19,10 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 */
 	static function scrape($url)
 	{
+		$parts = explode('#', $url);
+		$url = reset($parts);
+		$originalUrl = $url;
+
 		// add scheme to url if not exist
 		if (parse_url($url, PHP_URL_SCHEME) === null) {
 			$url = 'http://'.$url;
@@ -26,13 +30,6 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		if (!Q_Valid::url($url)) {
 			throw new Exception("Invalid URL");
-		}
-
-		if (!function_exists('_returnScrape')) {
-			function _returnScrape ($url, $result) {
-				Websites_Webpage::cacheSet($url, $result);
-				return $result;
-			}
 		}
 
 		$parsedUrl = parse_url($url);
@@ -47,19 +44,32 @@ class Websites_Webpage extends Base_Websites_Webpage
 		//$document = file_get_contents($url);
 
         // try to get cache
-		$cached = self::cacheGet($url);
+		$cached = self::cacheGet($originalUrl);
+		if (!$cached) {
+			if (substr($url, -1) === '/') {
+				$cached = self::cacheGet(substr($originalUrl, 0, -1));
+			} else {
+				$cached = self::cacheGet($originalUrl.'/');
+			}
+		}
 		if ($cached) {
 			return $cached;
 		}
 
 		$headers = get_headers($url, 1);
 		for ($i=0; $i<5; ++$i) {
-			if (preg_match('/HTTP.*\ 301/', $headers[0])) {
+			if ($header = Q::ifset($headers, 0, '')
+			and preg_match('/HTTP.*\ 301/', $header)) {
 				// Do up to 5 redirects
 				if (empty($headers['Location'])) {
 					throw new Q_Exception("Redirect to empty location");
 				}
-				$url = end($headers['Location']);
+				$url = self::normalizeHref(
+					is_array($headers['Location'])
+						? end($headers['Location'])
+						: $headers['Location'],
+					$url
+				);
 				$headers = get_headers($url, 1);
 			} else {
 				break;
@@ -95,7 +105,7 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'type' => $extension
             ));
 
-            return _returnScrape($url, $result);
+            return self::_returnScrape($originalUrl, $url, $result);
         }
 
 		// If http response header mentions that content is gzipped, then uncompress it
@@ -174,12 +184,12 @@ class Websites_Webpage extends Base_Websites_Webpage
 		// get title
 		$result['title'] = $xpath->query('//title')->item(0)->textContent;
 
-		$query = $xpath->query('//*/link');
+		$elements = $xpath->query('//*/link');
 		$icons = array();
 		$canonicalUrl = null;
-		foreach ($query as $item) {
-			$rel = strtolower($item->getAttribute('rel'));
-			$href = $item->getAttribute('href');
+		foreach ($elements as $element) {
+			$rel = strtolower($element->getAttribute('rel'));
+			$href = $element->getAttribute('href');
 
 			if(!empty($rel)){
 				if (preg_match('#icon#', $rel)) {
@@ -192,6 +202,20 @@ class Websites_Webpage extends Base_Websites_Webpage
 			}
 		}
 
+		$elements = $xpath->query('//*/meta');
+		foreach ($elements as $element) {
+			$itemprop = strtolower($element->getAttribute('itemprop'));
+			$metaname = strtolower($element->getAttribute('name'));
+			if ($itemprop === 'image'
+			or strpos($metaname, ':image') !== false) {
+				$href = $element->getAttribute('content');
+				if (!$href) {
+					$href = $element->getAttribute('value');
+				}
+				$items['image'] = self::normalizeHref($href, $url);
+			}
+		}
+
 		// parse url
 		$result['url'] = $canonicalUrl ? $canonicalUrl : $url;
 
@@ -200,7 +224,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$bigIconAllowedMetas = array( // search icon among <link> with these "rel"
 			'apple-touch-icon',
 			'apple-touch-icon-precomposed',
-			'icon'
+			'image'
 		);
 		if (Q_Valid::url($icon)) {
 			$result['iconBig'] = $icon;
@@ -214,6 +238,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		// get small icon
+		$result['iconSmall'] = $result['iconBig']; // default
 		$smallIconAllowedMetas = array( // search icon among <link> with these "rel"
 			'icon',
 			'shortcut icon'
@@ -223,14 +248,12 @@ class Websites_Webpage extends Base_Websites_Webpage
 				$result['iconSmall'] = $item;
 				break;
 			}
-
-			// by default
-			$result['iconSmall'] = $result['iconBig'];
 		}
 
 		// as we don't support SVG images in Users::importIcon, try to select another image
 		// when we start support SVG, just remove these blocks
-		if (pathinfo($result['iconBig'], PATHINFO_EXTENSION) == 'svg') {
+		if (!empty($result['iconBig'])
+		and pathinfo($result['iconBig'], PATHINFO_EXTENSION) == 'svg') {
 			reset($bigIconAllowedMetas);
 			foreach ($bigIconAllowedMetas as $item) {
 				$item = Q::ifset($icons, $item, null);
@@ -240,7 +263,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 				}
 			}
 		}
-		if (pathinfo($result['iconSmall'], PATHINFO_EXTENSION) == 'svg') {
+		if (!empty($result['iconSmall'])
+		and pathinfo($result['iconSmall'], PATHINFO_EXTENSION) == 'svg') {
 			reset($smallIconAllowedMetas);
 			foreach ($smallIconAllowedMetas as $item) {
 				$item = Q::ifset($icons, $item, null);
@@ -269,8 +293,17 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$result['iconBig'] = Q::ifset($result, 'iconBig', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/80.png"));
 		$result['iconSmall'] = Q::ifset($result, 'iconSmall', Q_Uri::interpolateUrl("{{baseUrl}}/{{Websites}}/img/icons/Websites/webpage/40.png"));
 
-		return _returnScrape($url, $result);
+		return self::_returnScrape($originalUrl, $url, $result);
 	}
+
+	private static function _returnScrape ($originalUrl, $url, $result) {
+		Websites_Webpage::cacheSet($originalUrl, $result);
+		if ($url !== $originalUrl) {
+			Websites_Webpage::cacheSet($url, $result);
+		}
+		return $result;
+	}
+
 	/**
 	 * Get search youtube videos or get info about video.
 	 * @method youtube
@@ -461,6 +494,13 @@ class Websites_Webpage extends Base_Websites_Webpage
 			return $parts['scheme'] . '://' . $parts['host'] . $href;
 		}
 
+		if (substr($baseUrl, -1) === '/') {
+			$baseUrl = substr($baseUrl, 0, -1);
+		}
+		if (preg_match("#^.\\/#", $href)) {
+			return $baseUrl . '/' . substr($href, 2);
+		}
+
 		return $href;
 	}
 	/**
@@ -512,7 +552,7 @@ class Websites_Webpage extends Base_Websites_Webpage
         $host = Q::ifset($parsed, 'host', null);
 
         $path_info = pathinfo($url);
-        $extension = Q::ifset($path_info, 'extension', null);
+        $extension = Q::ifset($path_info, 'extension', '');
 
         $videoHosts = Q_Config::get("Websites", "videoHosts", array());
         $videoExtensions = Q_Config::get("Websites", "videoExtensions", array());
@@ -703,6 +743,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 	 */
 	static function createStream ($params, $quotaName='Websites/webpage/chat', $skipAccess=false) {
 		$url = Q::ifset($params, 'url', null);
+		
 		// add scheme to url if not exist
 		if (parse_url($url, PHP_URL_SCHEME) === null) {
 			$url = 'http://'.$url;
@@ -746,7 +787,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$iconSmall = self::normalizeHref(Q::ifset($siteData, 'iconSmall', null), $url);
 		$contentType = Q::ifset($siteData, 'headers', 'Content-Type', 'text/html'); // content type by default text/html
 		$contentType = explode(';', $contentType)[0];
-		$streamIcon = $iconBig ?: Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
+		$streamIcon = $iconBig ? $iconBig : Q_Config::get('Streams', 'types', 'Websites/webpage', 'defaults', 'icon', null);
 
 		// special interest stream for websites/webpage stream
 		$port = Q::ifset($urlParsed, 'port', null);
@@ -803,6 +844,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 		$streamParams = array(
             'name' => $streamName,
             'title' => trim($title),
+			'icon' => $streamIcon,
             'content' => $td ? $td : "",
             'attributes' => array(
                 'url' => $url,
@@ -812,6 +854,10 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'port' => $port,
                 'copyright' => $copyright,
                 'contentType' => $contentType,
+				'interest' => array(
+					'publisherId' => $interestStream->publisherId,
+					'streamName' => $interestStream->name
+				),
                 'lang' => Q::ifset($siteData, 'lang', 'en')
             ),
             'skipAccess' => $skipAccess
@@ -833,9 +879,6 @@ class Websites_Webpage extends Base_Websites_Webpage
                 'relatedParams' => $relatedParams
             ));
         }
-
-		// import icon to event stream
-		self::importIcon($streamIcon, $webpageStream);
 
 		// grant access to this stream for logged user
 		$streamsAccess = new Streams_Access();
@@ -873,13 +916,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		return $webpageStream;
 	}
 	/**
-	 * Get stream interests in one array
-	 * return should be
-	[
-	{publisherId: "...", streamName: "...", title: "..."},
-	{publisherId: "...", streamName: "...", title: "..."},
-	...
-	]
+	 * Get stream interests in one array with items having properties
+	 *  {publisherId, streamName, title}
 	 * @method getInterests
 	 * @static
 	 * @param Streams_Stream $stream Websites/webpage stream
@@ -902,13 +940,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		return $rows[0];
 	}
 	/**
-	 * Get stream keywords in one array
-	 * return should be
-	[
-	{publisherId: "...", streamName: "...", title: "..."},
-	{publisherId: "...", streamName: "...", title: "..."},
-	...
-	]
+	 * Get stream interests in one array with items having properties
+	 *  {publisherId, streamName, title}
 	 * @method getKeywords
 	 * @static
 	 * @param Streams_Stream $stream Websites/webpage stream
