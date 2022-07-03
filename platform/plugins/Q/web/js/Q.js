@@ -1099,7 +1099,7 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
  * @method forEachTool
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {Function} callback The callback to execute at the right time
- * @param {String} [key]
+ * @param {String} [key] Optional, to be used for the onActivate handler that gets added
  */
 Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 	var element = this;
@@ -9927,6 +9927,7 @@ function _activateTools(toolElement, options, shared) {
 						Q.extend(this.options, Q.Tool.options.levels, o2);
 					}
 					this.name = toolName;
+					this.constructor = toolConstructor;
 					Q.Tool.call(this, element, options);
 					this.state = Q.copy(this.options, toolConstructor.stateKeys);
 					var prevTool = Q.Tool.beingActivated;
