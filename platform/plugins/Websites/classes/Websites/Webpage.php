@@ -53,6 +53,18 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		$headers = get_headers($url, 1);
+		for ($i=0; $i<5; ++$i) {
+			if (preg_match('/HTTP.*\ 301/', $headers[0])) {
+				// Do up to 5 redirects
+				if (empty($headers['Location'])) {
+					throw new Q_Exception("Redirect to empty location");
+				}
+				$url = end($headers['Location']);
+				$headers = get_headers($url, 1);
+			} else {
+				break;
+			}
+		}
 		$headers = array_change_key_case($headers, CASE_LOWER);
         if (is_array($headers['content-type'])) {
             $contentType = end($headers['content-type']);
@@ -86,9 +98,22 @@ class Websites_Webpage extends Base_Websites_Webpage
             return _returnScrape($url, $result);
         }
 
-		$document = self::readURL($url);
-		if (!$document) {
-			throw new Exception("Unable to access the site");
+		// If http response header mentions that content is gzipped, then uncompress it
+		$gzip = false;
+		foreach ($http_response_header as $item) {
+			if(stristr($item, 'content-encoding') && stristr($item, 'gzip')) {
+				//Now lets uncompress the compressed data
+				$gzip = true;
+				$document = file_get_contents($url);
+				$document = gzinflate(substr($document,10,-8) );
+				break;
+			}
+		}
+		if (!$gzip) {
+			$document = self::readURL($url);
+			if (!$document) {
+				throw new Exception("Unable to access the site");
+			}
 		}
 
 		$doc = new DOMDocument();
@@ -523,7 +548,7 @@ class Websites_Webpage extends Base_Websites_Webpage
 			$chunk_size = 4096; // Haven't bothered to tune this, maybe other values would work better??
 			$got = 0;
 
-			// Grab the first 64 KB of the file
+			// Grab the first 64 KB of the file	
 			while(!feof($urlp) && $got < $dataLimit) {
 				$data = $data . fgets($urlp, $chunk_size);
 				$got = strlen($data);
