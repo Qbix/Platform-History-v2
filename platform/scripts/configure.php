@@ -75,7 +75,12 @@ do {
 		$parts = explode(DS, $filename);
 		foreach ($parts as $p) {
 			if (substr($p, 0, 1) === '.') {
-				continue 2;
+				$b = basename($filename);
+				if (!in_array($b, array(
+					'.hgignore', '.gitignore', '.htaccess'
+				))) {
+					continue 2;
+				}
 			}
 		}
 		// fixed / to DIRECTORY_SEPARATOR
@@ -99,14 +104,14 @@ do {
 
 $maxFileSize = min(pow(2, 20), Q_Utils::memoryLimit()/2);
 if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
-	$it = new RecursiveDirectoryIterator(APP_DIR);
+	$it = new RecursiveDirectoryIterator(APP_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)) continue;
 		$extension = pathinfo($filename, PATHINFO_EXTENSION);
 		if (!in_array(strtolower($extension), array(
 			'php', 'js', 'json',
 			'txt', 'log', 'handlebars',
-			'html', 'css', 
+			'html', 'css', 'hgignore', 'gitignore', 'htaccess'
 		))) {
 			continue;
 		}
