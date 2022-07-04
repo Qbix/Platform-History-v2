@@ -106,7 +106,10 @@ $maxFileSize = min(pow(2, 20), Q_Utils::memoryLimit()/2);
 if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
 	$it = new RecursiveDirectoryIterator(APP_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
-		if (is_dir($filename) or is_link($filename)) continue;
+		if (is_dir($filename) or is_link($filename)
+		or $filename === APP_SCRIPTS_DIR . DS . 'Q' . DS . 'configure.php') {
+			continue;
+		}
 		$extension = pathinfo($filename, PATHINFO_EXTENSION);
 		if (!in_array(strtolower($extension), array(
 			'php', 'js', 'json',
