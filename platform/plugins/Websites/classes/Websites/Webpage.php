@@ -281,6 +281,9 @@ class Websites_Webpage extends Base_Websites_Webpage
 			$result['iconBig'] = $result['iconSmall'];
 		}
 
+		$result['iconBig'] = self::normalizeHref($result['iconBig'], $url);
+		$result['iconSmall'] = self::normalizeHref($result['iconSmall'], $url);
+
 		// additional handler for youtube.com
 		if (in_array($host, array('www.youtube.com', 'youtube.com'))) {
 			preg_match("#(?<=v=)[a-zA-Z0-9-]+(?=&)|(?<=v\\/)[^&\n]+(?=\\?)|(?<=v=)[^&\n]+|(?<=youtu.be/)[^&\n]+#", $url, $videoId);
@@ -492,6 +495,10 @@ class Websites_Webpage extends Base_Websites_Webpage
 
 		if (preg_match("#^\\/#", $href)) {
 			return $parts['scheme'] . '://' . $parts['host'] . $href;
+		}
+
+		if (!Q_Valid::url($href)) {
+			return $parts['scheme'] . '://' . $parts['host'] . '/' . $href;
 		}
 
 		if (substr($baseUrl, -1) === '/') {
