@@ -47,6 +47,11 @@ class Q_Exception extends Exception
 			$this->traceAsString = $traceAsString;
 		}
 		
+		$className = get_class($this);
+		$this->header = isset(self::$headers[$className])
+			? self::$headers[$className]
+			: 412; // our catch-all HTTP error code
+
 		if (is_string($params)) {
 			parent::__construct($params, is_numeric($code) ? $code : -1);
 			if (isset($code)) {
@@ -56,15 +61,11 @@ class Q_Exception extends Exception
 		}
 		$this->params = is_array($params) ? $params : array();
 
-		$className = get_class($this);
 		$message = isset(self::$messages[$className])
 			? Q::interpolate(self::$messages[$className], $this->params)
 			: $className;
 		$code = isset($code) ? $code : 
 			(isset(self::$codes[$className]) ? self::$codes[$className] : 1);
-		$this->header = isset(self::$headers[$className])
-			? self::$headers[$className]
-			: 412; // our catch-all HTTP error code
 		parent::__construct($message, $code);
 	}
 	

@@ -44,7 +44,8 @@
 			relationType: 'Websites/webpage'
 		},
 		onScrape: new Q.Event(),
-		onCreate: new Q.Event()
+		onCreate: new Q.Event(),
+		onRefresh: new Q.Event()
 	},
 
 	{
@@ -99,6 +100,8 @@
 					}
 				});
 				$goButton.on(Q.Pointer.fastclick, _scrape);
+
+				Q.handle(state.onRefresh, tool);
 				
 				function _scrape() {
 					var url = $url.val();
@@ -109,15 +112,23 @@
 					}
 
 					// start url parsing
-					$message.removeClass("Q_disabled").plugin('Q/clickfocus');
+					var val = $message.val();
+					$url.addClass('Q_disabled');
+					$url.find('input').attr('disabled', 'disabled');
+					$message.removeClass("Q_disabled")
+						.plugin('Q/clickfocus');
+					setTimeout(function () {
+						$message.val(val).trigger('Q_refresh');
+					}, 500); // sometimes the Return key affects the textbox
 					$te.addClass('Websites_webpage_loading');
 
 					Q.req('Websites/scrape', ['result'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
-						if (msg) {
+						if (msg || !response.slots) {
 							$te.removeClass('Websites_webpage_loading');
 							$message.addClass('Q_disabled');
-							return Q.alert(msg);
+							$url.removeClass('Q_disabled').removeAttr('disabled');
+							return Q.alert(msg || "Something went wrong");
 						}
 
 						var siteData = response.slots.result;
@@ -165,12 +176,14 @@
 		createStream: function (callback) {
 			var tool = this;
 			var state = this.state;
+			var $button = tool.$('button');
 			var $message = tool.$('textarea[name=message]');
 
 			Q.req("Websites/webpage", ["publisherId", "streamName"], function (err, response) {
 				var msg = Q.firstErrorMessage(err, response && response.errors);
-				if (msg) {
-					return Q.alert(msg);
+				if (msg || !response.slots) {
+					$button.removeClass('Q_working').removeAttr('disabled');
+					return Q.alert(msg || "Something went wrong");
 				}
 
 				state.publisherId = response.slots.publisherId;

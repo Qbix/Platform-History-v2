@@ -10,6 +10,8 @@ function Websites_scrape_post($params)
 	$fields = Q::take($params, array('url', 'skipStream'));
 
 	$url = $fields['url'];
+	$parts = explode('#', $url);
+	$url = reset($parts);
 
 	// stream required if publisherId and streamName slots requested
 	$streamRequired = Q_Request::slotName("publisherId") && Q_Request::slotName("streamName");
