@@ -36,8 +36,10 @@ function _Q_clickfocus(o) {
 		$p.scrollTop(scrollTop - autoScrolled);
 	}
 	if ($this.is('input, textarea, select')) {
-		$this.trigger("focus");
-		$this.trigger("click");
+		if (!$this.attr('tabindex')) {
+			$this.attr('tabindex', '-1');
+		}
+		$this.trigger("focus").trigger("click");
 	}
 	$this.focus();
 	setTimeout(function () {
