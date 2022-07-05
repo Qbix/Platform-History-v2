@@ -573,7 +573,8 @@ Q.Tool.define("Q/columns", function(options) {
 				div.setClass('Q_columns_hasControls', $controlsSlot[0] && !!$controlsSlot[0].innerHTML);
 				Q.layout(tool.element);
 				if (o.focusAfterActivate) {
-					$('input', $columnSlot).slice(0, 1).plugin('Q/clickfocus');
+					$('input[type=text],textarea', $columnSlot)
+					.slice(0, 1).plugin('Q/clickfocus');
 					setTimeout(function () {
 						$('input[type=text],textarea', $columnSlot)
 						.slice(0, 1).plugin('Q/clickfocus');
