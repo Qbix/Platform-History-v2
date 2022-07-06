@@ -469,9 +469,8 @@
 
 					// if it was mouseup / touchend on the triggering element, then use it to switch to iScroll instead of $.fn.scroller
 					if (info.curScroll !== 'iScroll' && info.curScroll !== 'touchscroll' &&
-							px >= offset.left && px <= offset.left + trigger.outerWidth() &&
-							py >= offset.top && py <= offset.top + trigger.outerHeight())
-					{
+						trigger[0] && trigger[0].contains(document.elementFromPoint(event.clientX, event.clientY))
+					) {
 						Q.Contextual.toDismiss ?  Q.Contextual.hide() : Q.Contextual.applyScrolling();
 					}
 					else
@@ -569,14 +568,6 @@
 					var listing = scrollerWrapper.children('.Q_listing');
 					if (info.inBottomHalf && listing.height() > listingWrapperHeight)
 						scrollTop = listingWrapperHeight - listing.height();
-					if (Q.info.platform === 'android')
-					{
-						scrollerWrapper.plugin('Q/touchscroll', { 'y': scrollTop });
-					}
-					else
-					{
-						scrollerWrapper.plugin('Q/iScroll', { 'y': scrollTop });
-					}
 				}
 				info.curScroll = scrollerWrapper.data('Q/iScroll') ? 'iScroll' : 'touchscroll';
 			
@@ -704,14 +695,14 @@
 				if (info.coords.x < 5)
 				{
 					x = 5;
-					arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - 10);
+					arrowLeft = (leftOffset + info.coords.x - 10);
 					arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
 					arrow.css({ 'left': arrowLeft + 'px' });
 				}
 				else if (info.coords.x + contextual.outerWidth() + 5 > $body.width())
 				{
 					x = $body.width() - contextual.outerWidth() - 10;
-					arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - x);
+					arrowLeft = (leftOffset + info.coords.x - x);
 					arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
 					arrow.css({ 'left': arrowLeft + 'px' });
 				}
@@ -775,9 +766,6 @@
 			var listingWrapper = contextual.children('.Q_listing_wrapper');
 			listingWrapper.plugin('Q/scroller', 'remove');
 			listingWrapper.plugin('Q/iScroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
-			listingWrapper.plugin('Q/touchscroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
 			if (Q.Contextual.fadeTime > 0) {

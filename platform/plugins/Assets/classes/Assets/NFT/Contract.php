@@ -24,7 +24,7 @@ class Assets_NFT_Contract
 			$publisherId = Users::loggedInUser(true)->id;
 		}
 
-		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
+		$stream = Streams_Stream::fetch($publisherId, $publisherId, self::$categoryStreamName);
 		if (!$stream) {
 			$stream = Streams::create($publisherId, $publisherId, "Streams/category", array(
 				"name" => self::$categoryStreamName
@@ -59,7 +59,7 @@ class Assets_NFT_Contract
 		}
 
 		$relation = reset($relations);
-		return Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName, $throwIfNotFound ?: "*");
+		return Streams_Stream::fetch($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName, $throwIfNotFound ?: "*");
 	}
 
 	/**
@@ -74,7 +74,7 @@ class Assets_NFT_Contract
 	static function getStream ($chainId, $userId=null, $throwIfNotFound=false) {
 		$userId = $userId ?: Users::loggedInUser(true)->id;
 		$streamName = Q::interpolate(self::$streamName, array("chainId" => $chainId));
-		$stream = Streams::fetchOne(null, $userId, $streamName);
+		$stream = Streams_Stream::fetch(null, $userId, $streamName);
 		if (!$stream && $throwIfNotFound) {
 			throw new Exception("Stream $userId : $streamName not found");
 		}

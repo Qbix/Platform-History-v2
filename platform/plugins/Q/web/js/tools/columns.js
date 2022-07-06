@@ -238,6 +238,7 @@ Q.Tool.define("Q/columns", function(options) {
 	 *  @param {Object} [options.title] override the title of the column
 	 *  @param {Object} [options.column] override the html of the column
 	 *  @param {Object} [options.url] a url to request the slots "title" and "column" from
+	 *  @param {Object} [options.focusAfterActivate] pass true here to focus the first input after the column is activated
 	 * @param {Number} index The index of the column to open
 	 * @param {Function} callback Called when the column is opened
 	 * @return {Boolean} Whether the column will be opened
@@ -263,8 +264,8 @@ Q.Tool.define("Q/columns", function(options) {
 			throw new Q.Exception("Q/columns open: index is negative");
 		}
 		
-		if (false === state.beforeOpen.handle.call(tool, options, index)
-		 || false === Q.handle(options.beforeOpen, tool, [options, index])) {
+		if (false === state.beforeOpen.handle.call(tool, o, index)
+		 || false === Q.handle(o.beforeOpen, tool, [o, index])) {
 			return false;
 		}
 		
@@ -319,8 +320,8 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
-		if (options.className) {
-			$(div).addClass(options.className);
+		if (o.className) {
+			$(div).addClass(o.className);
 		}
 		if (o.name && state.classes && state.classes[o.name]) {
 			$(div).addClass(state.classes[o.name]);
@@ -392,17 +393,17 @@ Q.Tool.define("Q/columns", function(options) {
 			$div.attr('data-url', url);
 			$div.attr('data-prevUrl', location.href);
 		}
-		if (o && o.columnClass) {
+		if (o.columnClass) {
 			$div.addClass(o.columnClass);
 		}
-		if (o && o.className) {
+		if (o.className) {
 			$(div).addClass(o.className);
 		}
 		var dataMore = div.getAttribute('data-more');
 		tool.state.data[index] = Q.extend(
 			{},
 			dataMore && JSON.parse(dataMore),
-			options && options.data
+			o.data
 		);
 		if (o.attributes) {
 			$div.attr(attributes);
@@ -438,8 +439,8 @@ Q.Tool.define("Q/columns", function(options) {
 
 		$div.attr('data-index', index).addClass('Q_column_'+index);
 		if (o.name) {
-			var n = Q.normalize(options.name, null, null, null, true);
-			$div.attr('data-name', options.name)
+			var n = Q.normalize(o.name, null, null, null, true);
+			$div.attr('data-name', o.name)
 				.addClass('Q_column_'+n);
 		}
 		
@@ -461,7 +462,7 @@ Q.Tool.define("Q/columns", function(options) {
 			var p = Q.pipe();
 			var _suddenlyClosing = false;
 			var waitFor = ['animation'];
-			if (options.url) {
+			if (o.url) {
 				waitFor.push('activated');
 				function _suddenClose() {
 					_suddenlyClosing = true;
@@ -480,7 +481,7 @@ Q.Tool.define("Q/columns", function(options) {
 					ignorePage: true,
 					onError: {"Q/columns": _suddenClose},
 					onRedirect: {"Q": _suddenClose}
-				}, options);
+				}, o);
 				params.handler = function _handler(response) {
 					var elementsToActivate = {};
 					if ('title' in response.slots) {
@@ -499,8 +500,8 @@ Q.Tool.define("Q/columns", function(options) {
 					return elementsToActivate;
 				};
 				params.onActivate = p.fill('activated');
-				// this.state.triggers[index] = options.trigger || null;
-				Q.loadUrl(options.url, params);
+				// this.state.triggers[index] = o.trigger || null;
+				Q.loadUrl(o.url, params);
 			}
 			
 			if (o.title != undefined) {
@@ -540,10 +541,10 @@ Q.Tool.define("Q/columns", function(options) {
 					if (js) {
 						if (typeof js === 'string') {
 							Q.require(js, function (js) {
-								Q.handle(js, tool, [options, index, div, data]);
+								Q.handle(js, tool, [o, index, div, data]);
 							});
 						} else {
-							Q.handle(js, tool, [options, index, div, data]);
+							Q.handle(js, tool, [o, index, div, data]);
 						}
 					}
 					// check url before document location changed
@@ -556,14 +557,14 @@ Q.Tool.define("Q/columns", function(options) {
 
 					// call the callback before the events,
 					// so something custom can be done first
-					Q.handle(callback, tool, [options, index, div, data]);
-					Q.handle(options.onActivate, tool, [options, index, div, data]);
-					state.onActivate.handle.call(tool, options, index, div, data);
+					Q.handle(callback, tool, [o, index, div, data]);
+					Q.handle(o.onActivate, tool, [o, index, div, data]);
+					state.onActivate.handle.call(tool, o, index, div, data);
 					setTimeout(function () {
 						$mask.remove();
 						$div.removeClass('Q_columns_loading');
-						Q.handle(options.afterDelay, tool, [options, index, div, data]);
-						Q.handle(state.afterDelay, tool, [options, index, div, data]);
+						Q.handle(o.afterDelay, tool, [o, index, div, data]);
+						Q.handle(state.afterDelay, tool, [o, index, div, data]);
 					}, o.delay.duration);
 				} else {
 					$mask.remove();
@@ -571,10 +572,18 @@ Q.Tool.define("Q/columns", function(options) {
 				}
 				div.setClass('Q_columns_hasControls', $controlsSlot[0] && !!$controlsSlot[0].innerHTML);
 				Q.layout(tool.element);
+				if (o.focusAfterActivate) {
+					$('input[type=text],textarea', $columnSlot)
+					.slice(0, 1).plugin('Q/clickfocus');
+					setTimeout(function () {
+						$('input[type=text],textarea', $columnSlot)
+						.slice(0, 1).plugin('Q/clickfocus');
+					}, 1000);
+				}
 			}).run();
 			
 			Q.each(['on', 'before'], function (k, prefix) {
-				var event = options[prefix+'Close'];
+				var event = o[prefix+'Close'];
 				var stateEvent = state[prefix+'Close'];
 				event = Q.extend(new Q.Event(), event);
 				var key = stateEvent.set(function (i) {

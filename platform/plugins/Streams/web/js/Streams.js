@@ -338,8 +338,9 @@ Streams.iconUrl = function(icon, basename) {
 	|| (!basename && basename !== false)) {
 		basename = '40';
 	}
-	basename = (String(basename).indexOf('.') >= 0) ? basename : basename+'.png';
-	var src = Q.interpolateUrl(icon + (basename ? '/' + basename : ''));
+	basename = (String(basename).match(/\.\w+$/g)) ? basename : basename+'.png';
+	icon = icon.match(/\.\w+$/g) ? icon : icon + (basename ? '/' + basename : '');
+	var src = Q.interpolateUrl(icon);
 	return src.isUrl() || icon.substr(0, 2) == '{{'
 		? src
 		: Q.url('{{Streams}}/img/icons/'+src);
@@ -623,6 +624,29 @@ Q.Tool.onActivate("Streams/chat").set(function () {
 }, 'Streams');
 
 /**
+ * Used to mark some streams as public, so that Streams.get()
+ * will initiate public batch fetching of these streams.
+ * This results in much faster fetching of streams across
+ * multiple publishers in a batch, but doesn't support getting
+ * related participants, messages, templates, mutable, etc.
+ * @method arePublic
+ * @static
+ * @param {Object} publishersAndNames Should be a structure containing { publisherId: { name: true } } pairs
+ */
+Streams.arePublic = function _Streams_Stream_isPublic (
+	publishersAndNames	
+) {
+	for (var publisherId in publishersAndNames) {
+		for (var name in publishersAndNames[publisherId]) {
+			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
+			_publicStreams[publisherId][name] = true;
+		}
+	}
+};
+
+var _publicStreams = Streams.arePublic.collection = {};
+
+/**
  * Streams batch getter.
  * @static
  * @method get
@@ -654,6 +678,10 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	}
 	if (!streamName) {
 		throw new Q.Error("Streams.get: streamName is empty");
+	}
+	if (Q.getObject([publisherId, streamName], _publicStreams)) {
+		extra = extra || {};
+		extra.public = 1;
 	}
 	if (extra) {
 		if (extra.participants) {
@@ -1952,7 +1980,7 @@ Streams.related = function _Streams_related(publisherId, streamName, relationTyp
 	if (typeof publisherId !== 'string') {
 		throw new Q.Error("Streams.related is expecting publisherId as a string");
 	}
-	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relatedType))) {
+	if ((relationType && typeof relationType !== 'string' && !Q.isArrayLike(relationType))) {
 		throw new Q.Error("Streams.related is expecting relationType as string or array");
 	}
 	if (typeof isCategory !== 'boolean') {
@@ -2324,6 +2352,43 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 		}]);
 		return stream;
 	}
+};
+
+/**
+ * Returns the canonical url of the stream, if any
+ * @method url
+ * @static
+ * @param {String} publisherId
+ * @param {String} streamName
+ * @param {String} streamType
+ * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
+ * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
+ * @return {String|null|false}
+ */
+Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseUrl) {
+	if (streamType == null) {
+		streamType = streamName.split('/').slice(0, -1).join('/');
+	}
+	var urls = Streams.urls;
+	var url = urls && (urls[streamType] || urls['*']);
+	url = url || "{{baseUrl}}/s/{{publisherId}}/{{name}}";
+	if (!url) {
+		return '';
+	}
+	var urlString = '';
+	Q.Template.set(url, url);
+	Q.Template.render(url, {
+		publisherId: publisherId,
+		streamName: streamName.split('/'),
+		name: streamName,
+		baseUrl: baseUrl || Q.baseUrl()
+	}, function (err, html) {
+		if (err) return;
+		urlString = html;
+	});
+	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
+	var qs = messageOrdinal ? sep+messageOrdinal : "";
+	return Q.url(urlString + qs);
 };
 
 Stream.get = Streams.get;
@@ -2729,30 +2794,16 @@ Sp.removePermission = function (permission) {
 };
 /**
  * Returns the canonical url of the stream, if any
+ * @method url
  * @param {Integer} [messageOrdinal] pass this to link to a message in the stream, e.g. to highlight it
  * @param {String} [baseUrl] you can override the default found in "Q"/"web"/"appRootUrl" config
  * @return {String|null|false}
  */
 Sp.url = function (messageOrdinal, baseUrl) {
-	var urls = Q.plugins.Streams.urls;
-	var url = urls && (urls[this.fields.type] || urls['*']);
-	url = url || "{{baseUrl}}/s/{{publisherId}}/{{name}}";
-
-	var urlString = '';
-
-	Q.Template.set(url, url);
-	Q.Template.render(url, {
-		publisherId: this.fields.publisherId,
-		streamName: this.fields.name.split('/'),
-		name: this.fields.name,
-		baseUrl: baseUrl || Q.baseUrl()
-	}, function (err, html) {
-		if (err) return;
-		urlString = html;
-	});
-	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
-	var qs = messageOrdinal ? sep+messageOrdinal : "";
-	return Q.url(urlString + qs);
+	return Streams.Stream.url(
+		this.fields.publisherId, this.fields.name,
+		this.fields.type, messageOrdinal, baseUrl
+	);
 };
 /**
  * Save a stream to the server
@@ -3968,6 +4019,8 @@ var Message = Streams.Message = function Streams_Message(fields) {
 	this.typename = 'Q.Streams.Message';
 };
 
+Message.latest = {}; // for helping not create old messages
+
 /**
  * Constructs a Streams.Message from fields.
  * If the Streams.Message.define() function was not called,
@@ -4021,8 +4074,6 @@ Message.construct = function Streams_Message_construct(fields, updateCache) {
 	}
 	return msg;
 };
-
-Message.latest = {};
 
 Message.defined = {};
 
@@ -4320,14 +4371,16 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		});
 		waiting[ord] = [event, handlerKey];
 	});
-	p.add(ordinals, 1, function () {
-		if (!alreadyCalled) {
-			Q.handle(callback, this, [true, ordinals]);
-		}
-		clearTimeout(t);
-		alreadyCalled = true;
-		return true;
-	}).run();
+	if (latest < ordinal) {
+		p.add(ordinals, 1, function () {
+			if (!alreadyCalled) {
+				Q.handle(callback, this, [true, ordinals]);
+			}
+			clearTimeout(t);
+			alreadyCalled = true;
+			return true;
+		}).run();
+	}
 	return p;
 
 	function _tryLoading() {
@@ -4353,9 +4406,6 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 				// until things settle down on the screen
 				ordinal = parseInt(ordinal);
 				Q.each(messages, function (ordinal, message) {
-					if (Message.latest[publisherId+"\t"+streamName] >= ordinal) {
-						return; // it was already processed
-					}
 					Users.Socket.onEvent('Streams/post').handle(message, messages);
 				}, {ascending: true, numeric: true});
 
@@ -4949,6 +4999,7 @@ var Interests = Streams.Interests = {
 			}
 			var results = {};
 			var relatedTo = response.slots.interests;
+			relatedTo = Q.isEmpty(relatedTo) ? {} : relatedTo;
 			for (var w in relatedTo) {
 				var info = relatedTo[w];
 				var title = info[2];
@@ -5261,7 +5312,7 @@ Streams.toHexString = function (publisherId, streamId, isNotNumeric) {
 	var seriesId = null;
 	var hexFirstPart = publisherId.substring(0, 8).asc2hex().padEnd(16, 0);
 	if (parts.length > 1) {
-		seriesId = parts[1];
+		seriesId = parseInt(parts[1]);
 		if (seriesId > 255 || seriesId < 0 || Math.floor(seriesId) !== seriesId) {
 			throw new Q.Exception('seriesId must be in range integer 0-255');
 		}
@@ -5418,15 +5469,22 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 
 	var authResponse;
 	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
-		Users.init.facebook(function() {
-			if ((authResponse = FB.getAuthResponse())) {
-				for (var k in authResponse) {
-					register_form.append(
-						$('<input type="hidden" />')
-							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-							.attr('value', authResponse[k])
-					);
-				}
+		Users.init.facebook(function(err) {
+			if (err) {
+				return;
+			}
+
+			authResponse = FB.getAuthResponse();
+			if (!authResponse) {
+				return;
+			}
+
+			for (var k in authResponse) {
+				register_form.append(
+					$('<input type="hidden" />')
+						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+						.attr('value', authResponse[k])
+				);
 			}
 		});
 	}
@@ -5517,6 +5575,8 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 				} else if (Q.isPlainObject[result] && (type in result)) {
 					result[type] = messageTotals[type];
 				}
+			}, {
+				throwIfNoIndex: false
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
@@ -6124,7 +6184,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 			}, true);
 		}
-	}, "Streams");
+	}, "Streams.invited");
 
 	Users.Socket.onEvent('Streams/debug').set(function _Streams_debug_handler (msg) {
 		console.log('DEBUG:', msg);
@@ -6163,6 +6223,8 @@ Q.onInit.add(function _Streams_onInit() {
 				console.warn(Q.firstErrorMessage(err));
 				return;
 			}
+
+			var stream = this;
 			var streamType = stream.fields.type;
 			var params = [stream, payload, 'ephemeral', latest];
 			var event = Streams.onEphemeral(streamType, payload.type);
@@ -6176,7 +6238,7 @@ Q.onInit.add(function _Streams_onInit() {
 		if (!msg) {
 			throw new Q.Error("Q.Users.Socket.onEvent('Streams/post') msg is empty");
 		}
-		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName, false);
+		var latest = Message.latestOrdinal(msg.publisherId, msg.streamName);
 		if (latest && parseInt(msg.ordinal) <= latest) {
 			return;
 		}
@@ -6184,29 +6246,39 @@ Q.onInit.add(function _Streams_onInit() {
 		// Will return immediately if previous message is already cached
 		// (e.g. from a post or retrieving a stream, or because there was no cache yet)
 		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message);
-		if (typeof ret === 'boolean') {
-			_message();
-		}
 		function _message() {
 			var ptn = msg.publisherId+"\t"+msg.streamName;
 			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
 				return; // it was already processed
 			}
+
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
 
+			
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
+
 			Message.latest[ptn] = parseInt(msg.ordinal);
 			var cached = Streams.get.cache.get(
 				[msg.publisherId, msg.streamName]
 			);
-			Streams.get(msg.publisherId, msg.streamName, function (err) {
 
+			// update fields.messageCount of cached stream
+			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
+				if (!cached) {
+					return;
+				}
+
+				Q.setObject("subject.fields.messageCount", parseInt(msg.ordinal), cached);
+				Streams.get.cache.set([msg.publisherId, msg.streamName], cached.cbpos, cached.subject, cached.params);
+			});
+
+			Streams.get(msg.publisherId, msg.streamName, function (err) {
 				if (err) {
 					console.warn(Q.firstErrorMessage(err));
 					console.log(err);
@@ -6382,8 +6454,7 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
-	Q.beforeActivate.add(_preloaded, 'Streams');
-	Q.loadUrl.options.onResponse.add(_preloaded, 'Streams');
+	Q.request.options.onResponse.add(_preloaded, 'Streams.preloaded');
 
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
@@ -6415,15 +6486,19 @@ Q.Page.beforeUnload("").set(function () {
 function _preloaded(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams and avatars data we find
-	Q.each(Stream.preloaded, function (i, fields) {
+	Q.each(Stream._preloaded, function (i, fields) {
 		Stream.construct(fields, {}, null, true);
 	});
-	Stream.preloaded = null;
-	Q.each(Avatar.preloaded, function (i, fields) {
+	Stream._preloaded = null;
+	Q.each(Avatar._preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);
 		Avatar.get.cache.set([fields.publisherId], 0, avatar, [null, avatar]);
 	});
-	Avatar.preloaded = null;
+	Avatar._preloaded = null;
+	if (Streams._public) {
+		Streams.arePublic(Streams._public);
+	}
+	Streams._public = null;
 }
 
 function _updateMessageCache(msg) {
@@ -6490,6 +6565,8 @@ function _updateMessageTotalsCache(msg) {
 			} else if (Q.isPlainObject[result] && (type in result)) {
 				++result[type];
 			}
+		}, {
+			throwIfNoIndex: false
 		});
 }
 

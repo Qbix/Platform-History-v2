@@ -19,7 +19,7 @@ function Assets_payment_post($params = array())
 	$publisherId = Q::ifset($req, 'publisherId', Users::communityId());
 	$streamName = Q::ifset($req, 'streamName', null);
 	if ($publisherId and $streamName) {
-		$stream = Streams::fetchOne($publisherId, $publisherId, $streamName, true);
+		$stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName, true);
 	}
 	$userId = Users::loggedInUser(true)->id;
 

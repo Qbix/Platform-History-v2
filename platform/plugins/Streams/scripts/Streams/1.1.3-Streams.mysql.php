@@ -29,7 +29,7 @@ function Streams_1_1_3_Streams()
 			continue;
 		}
 
-		if (Streams::fetchOne($community->id, $community->id, $streamName)) {
+		if (Streams_Stream::fetch($community->id, $community->id, $streamName)) {
 			continue;
 		}
 

@@ -11,8 +11,8 @@ function Streams_calls_response_manage ($params) {
     $eventsStreamName = $params["eventsStreamName"];
     $isHost = (bool)Users::roles($communityId, array("Users/hosts"), array(), $currentUser->id);
 
-    $webrtc = Streams::fetchOne($webrtcStreamPublisher, $webrtcStreamPublisher, $webrtcStreamName);
-    $eventsStream = Streams::fetchOne($eventsStreamPublisher, $eventsStreamPublisher, $eventsStreamName);
+    $webrtc = Streams_Stream::fetch($webrtcStreamPublisher, $webrtcStreamPublisher, $webrtcStreamName);
+    $eventsStream = Streams_Stream::fetch($eventsStreamPublisher, $eventsStreamPublisher, $eventsStreamName);
 
     if (!$isHost || !$webrtc->testAdminLevel("invite")) {
         throw new Users_Exception_NotAuthorized();

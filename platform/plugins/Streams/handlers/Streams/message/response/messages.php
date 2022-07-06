@@ -19,7 +19,7 @@ function Streams_message_response_messages()
 	}
 	$o = $withMessageTotals ? @compact('withMessageTotals') : array();
 	$stream = Q::ifset(Streams::$cache, 'stream', 
-		Streams::fetchOne(null, $publisherId, $streamName, true, $o)
+		Streams_Stream::fetch(null, $publisherId, $streamName, true, $o)
 	);
 	if (!$stream->testReadLevel('messages')) {
 		throw new Users_Exception_NotAuthorized();

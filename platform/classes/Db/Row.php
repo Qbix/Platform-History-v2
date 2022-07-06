@@ -720,9 +720,10 @@ class Db_Row
 	 * @method wasModified
 	 * @param {string} [$fieldName=null] The name of the field.
 	 *  You can also pass false here to mark the whole row unmodified.
+	 * @param {boolean} [$evenIfValuesDidntChange=false]
 	 * @return {boolean} Whether the field with that name was modified in the first place.
 	 */
-	function wasModified ($fieldName = null)
+	function wasModified ($fieldName = null, $evenIfValuesDidntChange = false)
 	{
 		if ($fieldName === false) {
 			if (is_array($this->fields)) {
@@ -735,8 +736,11 @@ class Db_Row
 		}
 		if (!isset($fieldName)) {
 			foreach ($this->fieldsModified as $key => $value) {
-				if (! empty($value)) {
-					return true;
+				if (!empty($value)) {
+					if ($evenIfValuesDidntChange
+					or $this->fieldsOriginal[$key] !== $this->fields[$key]) {
+						return true;
+					}
 				}
 			}
 			return false;
@@ -1701,10 +1705,11 @@ class Db_Row
 	 *  or set it to an array to override specific fields with your own Db_Expressions
 	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
 	 *  Use this only if you started a transaction before. 
+	 * @param {boolean} [$evenIfNotModified=false] If no fields changed, don't execute any query (but still possibly commit)
 	 * @return {boolean|Db_Query} If successful, returns the Db_Query that was executed.
 	 *  Otherwise, returns false.
 	 */
-	function save ($onDuplicateKeyUpdate = false, $commit = false)
+	function save ($onDuplicateKeyUpdate = false, $commit = false, $evenIfNotModified = false)
 	{
 		$this_class = get_class($this);
 		if ($this_class == 'Db_Row') {
@@ -1737,17 +1742,23 @@ class Db_Row
 			}
 		}
 
-		$modifiedFields = array();
+		$modifiedFields = $reallyModifiedFields = array();
 		foreach ($this->fields as $name => $value) {
 			if ($this->fieldsModified[$name]) {
 				$modifiedFields[$name] = $value;
+				if ($evenIfNotModified
+				or !array_key_exists($name, $this->fieldsOriginal)
+				or $value !== $this->fieldsOriginal[$name]) {
+					$reallyModifiedFields[$name] = $value;
+				}
 			}
 		}
 		
 		$callback = array($this, "beforeSave");
 		if (is_callable($callback)) {
 			$modifiedFields = call_user_func(
-				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit
+				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit,
+				$reallyModifiedFields
 			);
 		}
 		if (! isset($modifiedFields) or $modifiedFields === false) {
@@ -1799,8 +1810,16 @@ class Db_Row
 			if (!$where) {
 				throw new Exception("The primary key is not specified for $table");
 			}
-			if (empty($fieldsToSave)) {
+			if (empty($fieldsToSave)
+			or (!$evenIfNotModified and empty($reallyModifiedFields))) {
 				$this->wasModified(false);
+				if ($commit) {
+					$class = get_class($this);
+					$db = call_user_func(array($class, 'db'));
+					$query = $db->rawQuery('')->commit();
+					$query->className = get_class($this);
+					$query->execute(false, $query->shard(null, $where));
+				}
 				return false;
             }
 			$query = $db->update($table)

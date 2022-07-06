@@ -163,26 +163,27 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				: 0;
 		}
 		$weight = $total + 1;
-		list($relations, $relatedStreams) = $category->related($category->publisherId, true, array(
+		$relations = $category->related($category->publisherId, true, array(
 			$relationType,
-			'orderBy' => 'RAND()',
+			'orderBy' => 'random',
 			'limit' => 1,
 			'where' => array(
 				'weight >' => $consumedWeight
-			)
+			),
+			'relationsOnly' => true
 		));
 		$r = reset($relations);
-		$rs = reset($relatedStreams);
-		if ($rs) {
+		if ($r and $r->fromStreamName) {
 			// swap weights with a previous relation
 			Streams::updateRelation(
 				$category->publisherId,
 				$category->publisherId,
 				$category->name,
 				$relationType,
-				$rs->publisherId,
-				$rs->name,
-				$weight
+				$r->fromPublisherId,
+				$r->fromStreamName,
+				$weight,
+				0
 			);
 			$stream->relateTo(
 				$category, 
@@ -208,6 +209,88 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	}
 
 	/**
+	 * Call this function to unrelate a stream whose weight was inserted
+	 * randomly among other weights, and swap in the relation with the highets
+	 * weight.
+	 * @method removeInsertedRandomly
+	 * @static
+	 * @param {Streams_Stream} $category
+	 * @param {string} $relationType
+	 * @param {Streams_Stream} $stream
+	 * @param {string} [$consumedAttribute] name of attribute holding the highest weight of already-consumed related streams, if any
+	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @return {boolean} whether it was removed
+	 */
+	static function removeInsertedRandomly(
+		$category,
+		$relationType,
+		$stream,
+		$consumedAttribute = null,
+		$totalAttribute = null
+	) {
+		$rt = (new Streams_RelatedTo(array(
+			'toPublisherId' => $category->publisherId,
+			'toStreamName' => $category->name,
+			'type' => $relationType,
+			'fromPublisherId' => $stream->publisherId,
+			'fromStreamName' => $stream->name
+		)))->retrieve();
+		if (!$rt) {
+			return false; // nothing to remove
+		}
+		// remove current relation
+		$stream->unrelateTo($category, $relationType, $category->publisherId);
+		if ($totalAttribute) {
+			$total = $category->getAttribute($totalAttribute, 0);
+		} else {
+			$rtt = new Streams_RelatedToTotal(array(
+				'toPublisherId' => $category->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $relationType,
+				'fromStreamType' => $stream->type
+			));
+			$total = $rtt->retrieve()
+				? $rtt->relationCount
+				: 0;
+		}
+		$relatedStreams = $category->related(
+			$category->publisherId, true,
+			array(
+				$relationType,
+				'limit' => 1,
+				'where' => array(
+					'weight' => $total
+				),
+				'streamsOnly' => true
+			)
+		);
+		$rs = reset($relatedStreams);
+		if ($rs) {
+			// fill weight hole with relation that has largest weight
+			Streams::updateRelation(
+				$category->publisherId,
+				$category->publisherId,
+				$category->name,
+				$relationType,
+				$rs->publisherId,
+				$rs->name,
+				$rt->weight,
+				0
+			);
+		}
+		$consumedWeight = $consumedAttribute
+			? $category->getAttribute($consumedAttribute, 0)
+			: 0;
+		if ($consumedAttribute and $rt->weight <= $consumedWeight) {
+			// it was already consumed
+			$category->setAttribute($consumedAttribute, $consumedWeight - 1);
+		}
+		$category->setAttribute($totalAttribute, $total - 1);
+		$category->save(); // we added another randomized relation
+		return $rt;
+	}
+
+	/**
 	 * Call this method to indicate the next relation "consumed"
 	 * and advance the pointer by one.
 	 * @method consume
@@ -225,30 +308,32 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		$consumedAttribute,
 		$totalAttribute = null)
 	{
-		$consumed = $category->getAttribute($consumedAttribute, 0);
-		$weight = $consumed + 1;
+		$consumedWeight = $category->getAttribute($consumedAttribute, 0);
 		if ($totalAttribute) {
 			$total = $category->getAttribute($totalAttribute, 0);
-			if ($weight > $total) {
-				return false;
+			if ($consumedWeight + 1 > $total) {
+				return false; // there are no more to consume
 			}
 		}
-		$streams = Streams::related(
+		list($relations, $streams, $stream) = Streams::related(
 			Q::ifset($options, 'asUserId', null),
 			$category->publisherId,
 			$category->name,
 			true,
 			array(
-				'weight' => $weight,
+				'weight' => new Db_Range($consumedWeight, false, true, null),
+				'orderBy' => false,
 				'limit' => 1,
 				'streamsOnly' => true,
 				'type' => $relationType
 			)
 		);
-		if (!$streams) {
+		$stream = reset($streams);
+		if (!$stream) {
 			return null;
 		}
-		$category->setAttribute($consumedAttribute, $weight);
+		$relation = reset($relations);
+		$category->setAttribute($consumedAttribute, $relation->weight);
 		$category->save();
 		return reset($streams);
 	}

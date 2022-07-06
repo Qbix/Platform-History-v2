@@ -15,7 +15,7 @@ function Q_errors($params) {
 	}
 	$errors = Q_Response::getErrors();
 
-	$errors_array = Q_Exception::toArray($errors);
+	$errors_array = Q_Exception::buildArray($errors);
 
 	// Simply return the errors, if this was an AJAX request
 	if ($is_ajax = Q_Request::isAjax()) {

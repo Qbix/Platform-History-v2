@@ -193,7 +193,7 @@ function Streams_after_Users_User_saveExecute($params)
 		// Save a greeting stream, to be edited
 		$communityId = Users::communityId();
 		$name = "Streams/greeting/$communityId";
-		$stream = Streams::fetchOne($user->id, $user->id, $name, array('dontCache' => true));
+		$stream = Streams_Stream::fetch($user->id, $user->id, $name, array('dontCache' => true));
 
 		if (!$stream) {
 			Streams::create($user->id, $user->id, "Streams/greeting", @compact('name'));
@@ -268,7 +268,7 @@ function Streams_after_Users_User_saveExecute($params)
 
 			$stream = isset(Streams::$beingSaved[$field])
 				? Streams::$beingSaved[$field]
-				: Streams::fetchOne($user->id, $user->id, $name);
+				: Streams_Stream::fetch($user->id, $user->id, $name);
 			if (!$stream) { // it should probably already be in the db
 				continue;
 			}

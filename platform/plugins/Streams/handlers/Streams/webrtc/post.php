@@ -55,7 +55,7 @@ function Streams_webrtc_post($params = array())
         $app = Q::app();
 
         $task = isset($_REQUEST['taskStreamName'])
-            ? Streams::fetchOne($luid, $communityId, $taskStreamName, true)
+            ? Streams_Stream::fetch($luid, $communityId, $taskStreamName, true)
             : Streams::create($luid, $communityId, 'Streams/task', array(
                 'skipAccess' => true,
             )/*, array(
@@ -72,7 +72,7 @@ function Streams_webrtc_post($params = array())
         $luid = Users::loggedInUser(true)->id;
         $app = Q::app();
 
-        $taskStream = Streams::fetchOne($luid, $communityId, $taskStreamName, true);
+        $taskStream = Streams_Stream::fetch($luid, $communityId, $taskStreamName, true);
         $progress = '30';
         $taskStream->setAttribute('progress', $progress);
         $taskStream->save();

@@ -40,14 +40,26 @@ function Assets_batch_response_batch () {
 					$params = array(
 						'tokenId' => $args[2],
 						'chainId' => $args[3],
-						'updateCache' => (bool)$args[4]
+						'contractAddress' => $args[4],
+						'updateCache' => (bool)$args[5]
+					);
+				} elseif ($action == "NFT" && $slot == "getABI") {
+					$params = array(
+						'chainId' => $args[2],
+						'contractAddress' => $args[3]
+					);
+				} elseif ($action == "NFT" && $slot == "getRemoteJSON") {
+					$params = array(
+						'tokenId' => $args[2],
+						'chainId' => $args[3],
+						'contractAddress' => $args[4]
 					);
 				}
 
 				$result[] = Q::event("Assets/$action/response/$slot", $params);
 			}
 		} catch (Exception $e) {
-			$result[] = array('errors' => Q_Exception::toArray(array($e)));
+			$result[] = array('errors' => Q_Exception::buildArray(array($e)));
 		}
 	}
 	

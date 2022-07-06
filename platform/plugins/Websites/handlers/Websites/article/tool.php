@@ -20,7 +20,7 @@ function Websites_article_tool($options)
 {
 	$publisherId = $options['publisherId'];
 	$streamName = $options['streamName'];
-	$article = Q::ifset($options, 'stream', Streams::fetchOne(null, $publisherId, $streamName));
+	$article = Q::ifset($options, 'stream', Streams_Stream::fetch(null, $publisherId, $streamName));
 	if (!$article) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'article', 

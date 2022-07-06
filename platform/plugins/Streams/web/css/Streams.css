@@ -198,6 +198,7 @@
 	text-overflow: ellipsis;
 	text-align: center;
 	vertical-align: top;
+	max-width: 80px;
 }
 
 .Streams_participants_tool .Streams_participants_invite {

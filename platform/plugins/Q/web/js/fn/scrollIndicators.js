@@ -299,8 +299,6 @@
                             }
                         }
                     }
-                    o.scroller.plugin('Q/touchscroll', 'bind', 'onScrollMove', updateTouchscroll);
-                    o.scroller.plugin('Q/touchscroll', 'bind', 'onScrollEnd', updateTouchscroll);
                     updateTouchscroll(o.scroller);
                     $this.data('Q_scroll_indicator_update', updateTouchscroll);
                 }
@@ -350,7 +348,7 @@
                             }
                         }
                     }
-                    o.scroller.plugin('Q/scroller', 'bind', 'onScroll', updateScroller);
+                    $(o.scroller).plugin('Q/scroller', 'bind', 'onScroll', updateScroller);
                     var percentage = $.fn.Q_scroller.collection[o.scroller.data('Q_scroller_id')].info.percentage;
                     updateScroller(percentage);
                     $this.data('Q_scroll_indicator_update', updateScroller);

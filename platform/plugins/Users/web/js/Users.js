@@ -5,6 +5,7 @@
  * @class Users
  */
 "use strict";
+
 /* jshint -W014 */
 (function (Q, $) {
 
@@ -166,7 +167,7 @@
 				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
 			}
 			Users.init.facebook.completed[appId] = true;
-			callback && callback();
+			Q.handle(callback);
 		}
 
 		if (!$('#fb-root').length) {
@@ -177,6 +178,7 @@
 			_init,
 			{
 				onError: function () {
+					Q.handle(callback, null, [true]);
 					console.log("Couldn't load script:", this, arguments);
 				}
 			}
@@ -196,6 +198,10 @@
 	 *   @param {String} [options.appId=Q.info.app] Only needed if you have multiple apps on platform
 	 */
 	Users.init.web3 = function (callback, options) {
+		if (!Q.getObject('web3', Users.apps)) {
+			return;
+			
+		}
 		var scriptsToLoad = [
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
@@ -611,40 +617,6 @@
 		var platformCapitalized = platform.toCapitalized();
 
 		if (!Users.prompt.overlay) {
-			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'), {slotName: 'Users'});
-			var o = Q.extend({}, Users.prompt.options, options);
-			var title = Q.text.Users.prompt.title.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var areUsing = Q.text.Users.prompt.areUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var noLongerUsing = Q.text.Users.prompt.noLongerUsing.interpolate({
-				'platform': platform,
-				'Platform': platformCapitalized
-			});
-			var caption;
-			var tookAction = false;
-
-			var content_div = $('<div />');
-			var xid;
-			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
-				content_div.append(_usingInformation(xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			} else {
-				caption = Q.text.Users.prompt.doAuth.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			}
-		}
-
-		if (!Users.prompt.overlay) {
 			Q.addStylesheet(Q.url('{{Users}}/css/Users.css'));
 			var o = Q.extend({}, Users.prompt.options, options);
 			var title = Q.text.Users.prompt.title.interpolate({
@@ -663,21 +635,35 @@
 			var tookAction = false;
 
 			var content_div = $('<div />');
-			var xid;
-			if (xid = Q.getObject(['loggedInUser', 'identifiers', platform], Users)) {
-				content_div.append(_usingInformation(xid, noLongerUsing));
-				caption = Q.text.Users.prompt.doSwitch.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
-			} else {
-				caption = Q.text.Users.prompt.doAuth.interpolate({
-					'platform': platform,
-					'Platform': platformCapitalized
-				});
+			var xid2 = Q.getObject(['loggedInUser', 'xids', platform], Users);
+			var queries = ['me'];
+			if (xid2) {
+				queries.push('xid')
 			}
-			content_div.append(_usingInformation(xid, areUsing))
-				.append(_authenticateActions(caption));
+			var pipe = new Q.Pipe(queries, function (params, subjects) {
+				var meName = Q.getObject(['me', 0, 'name'], params);
+				var mePicture = Q.getObject(['me', 0, 'picture', 'data', 'url'], params);
+				var xidName = Q.getObject(['xid', 0, 'name'], params);
+				var xidPicture = Q.getObject(['xid', 0, 'picture', 'data', 'url'], params);
+				if (xidName) {
+					content_div.append(_usingInformation(xidPicture, xidName, noLongerUsing));
+					caption = Q.text.Users.prompt.doSwitch.interpolate({
+						'platform': platform,
+						'Platform': platformCapitalized
+					});
+				} else {
+					caption = Q.text.Users.prompt.doAuth.interpolate({
+						'platform': platform,
+						'Platform': platformCapitalized
+					});
+				}
+				content_div.append(_usingInformation(mePicture, meName, areUsing))
+					.append(_authenticateActions(caption));
+			});
+			FB.api("/me?fields=name,picture.width(50).height(50)", pipe.fill('me'));
+			if (xid2) {
+				FB.api("/"+xid2+"?fields=name,picture.width(50).height(50)", pipe.fill('xid'));;
+			}
 
 			Users.prompt.overlay = $('<div id="Users_prompt_overlay" class="Users_prompt_overlay" />');
 			var titleSlot = $('<div class="Q_title_slot" />');
@@ -706,17 +692,17 @@
 			}
 		});
 
-		function _usingInformation(xid, explanation) {
+		function _usingInformation(icon, name, explanation) {
 			return $("<table />").append(
 				$("<tr />").append(
-					$("<td class='Users_profile_pic' />").html(
-						"<fb:profile-pic uid='" + xid + "' linked='false' size='square' class='fb_profile_pic'></fb:profile-pic>"
+					$("<td class='Users_profile_pic' />").append(
+						$('<img />', {src: icon})
 					)
 				).append(
 					$("<td class='Users_explanation_name' />").append(
 						$("<div class='Users_explanation' />").html(explanation)
 					).append(
-						"<fb:name xid='" + xid + "' useyou='false' linked='false' size='square' class='fb_name'>user id " + xid + "</fb:name>"
+						name
 					)
 				)
 			);
@@ -844,12 +830,15 @@
 			// try quietly, possible only with one of "facebook" or "web3"
 			if (o.tryQuietly) {
 				var platform = (typeof o.tryQuietly === 'string') ? o.tryQuietly : '';
-				var using = (typeof o.using === 'string') ? [o.using] : o.using;
-				Q.each(['facebook', 'web3'], function (i, k) {
-					if (!using && o.using.indexOf(k)) {
-						using = k;
-					}
-				});
+				if (!platform) {
+					var using = (typeof o.using === 'string') ? [o.using] : o.using;
+					Q.each(['facebook', 'web3'], function (i, k) {
+						if (!using || using.indexOf(k) >= 0) {
+							platform = k;
+							return;
+						}
+					});
+				}
 				Users.authenticate(platform, function (user) {
 					_onConnect(user);
 				}, function () {
@@ -970,12 +959,12 @@
 
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
-			Users.onLogin.handle(user);
 			var pn = priv.used || 'native';
 			var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
 			if (false !== ret) {
 				Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
 			}
+			Users.onLogin.handle(user);
 			Users.login.occurring = false;
 		}
 	};
@@ -1348,7 +1337,7 @@
 				'background-position': 'right center'
 			});
 			if (window.CryptoJS) {
-				var p = $('#Users_form_passphrase');
+				var p = $('#current-password');
 				var v = p.val();
 				if (v) {
 					if (!/^[0-9a-f]{40}$/i.test(v)) {
@@ -1362,7 +1351,7 @@
 			var url = $this.attr('action') + '?' + $this.serialize();
 			Q.request(url, 'data', function (err, response) {
 
-				$('#Users_form_passphrase').attr('value', '').trigger('change');
+				$('#current-password').attr('value', '').trigger('change');
 
 				$('input', $this).css('background-image', 'none');
 				if (err || (response && response.errors)) {
@@ -1408,7 +1397,7 @@
 		}
 
 		function setupLoginForm() {
-			var passphrase_input = $('<input type="password" name="passphrase" id="Users_form_passphrase" class="Q_password" />')
+			var passphrase_input = $('<input type="password" name="passphrase" id="current-password" class="Q_password" />')
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('autocomplete', 'current-password')
@@ -3533,17 +3522,21 @@
 			}
 			Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 			Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-			Users.init.facebook(function logoutCallback() {
+			Users.init.facebook(function logoutCallback(err) {
+				if (err) {
+					return Q.handle(callback);
+				}
+
 				Users.Facebook.getLoginStatus(function (response) {
 					setTimeout(function () {
 						Users.logout.occurring = false;
 					}, 0);
 					if (!response.authResponse) {
-						return callback();
+						return Q.handle(callback);
 					}
 					return FB.logout(function () {
 						delete Users.connected.facebook;
-						callback();
+						Q.handle(callback);
 					});
 				}, true);
 			}, {
@@ -4023,8 +4016,9 @@
 		 * @return {string} the currently selected address of the user in web3
 		 */
 		getSelectedXid: function () {
-			var result = Q.getObject('Q.Users.Web3.provider.selectedAddress')
-			|| (window.ethereum && ethereum.selectedAddress);
+			var result, provider
+			provider = Q.Users.Web3.provider || window.ethereum;
+			result = provider.selectedAddress || provider.accounts[0];
 			if (result) {
 				return result;
 			}
@@ -4060,9 +4054,9 @@
 			}
 			return new Q.Promise(function (resolve, reject) {
 				if (window.ethereum
-				&& ethereum.chainId === Q.getObject([
+				&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
 					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
-				])) {
+				]))) {
 					_continue(ethereum);
 				} else {
 					Q.Users.Web3.connect(function (err, provider) {

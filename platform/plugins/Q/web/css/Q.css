@@ -319,7 +319,7 @@ body.Q_preventScroll {
 	white-space: nowrap;
 	border-width:1px; font-size:1em; padding: 1px 5px 1px 5px; color: #fff; cursor:pointer; border-radius: 0.3em;
 	border-radius: 0.3em; border-color: rgba(200,2050,200,50.5); border-bottom-color: rgba(0,50,200,50.2); border-right-color: rgba(0,50,200,50.2);
-	box-sizing: content-box;
+	box-sizing: border-box;
 	
 	box-shadow: 0 0 1px rgba(50,50,50,0.5); 
 	background: #444; /* for non-css3 browsers */
@@ -356,6 +356,7 @@ button:focus:disabled,
 button.basic16 { background-color: #eee; color: black; }
 .Q_notTouchscreen button.basic16:active { background-color: #ccc; color: black; }
 .Q_button { padding: 0.4em 1em 0.4em 1em; box-sizing: border-box; }
+input { box-sizing: border-box; }
 
 .Q_aspect_who, .Q_aspect_who::before { color: #394ad5; border-color: #394ad5; }
 .Q_aspect_what, .Q_aspect_what::before { color: #bf1118; border-color: #bf1118; }
@@ -430,7 +431,7 @@ box-shadow:0 0 10px #000; }
 .Q_big_prompt select,
 .Q_big_prompt .Q_button { font-size: 18px; } 
 .Q_big_prompt .Q_button,
-.Q_notTouchscreen .Q_big_prompt .Q_button { padding: 5px 1em; box-sizing: content-box; display: inline-block; }
+.Q_notTouchscreen .Q_big_prompt .Q_button { padding: 5px 1em; display: inline-block; }
 .Q_big_prompt .Q_button span { display: inline-block; line-height: 1em; margin-top: -2px; }
 .Q_big_prompt .Q_buttons { white-space: nowrap; }
 .Q_big_prompt input[type=text],
@@ -457,7 +458,8 @@ box-shadow:0 0 10px #000; }
 
 .Q_actions_action { cursor: pointer !important; display: inline-block; zoom: 1; }
 .Q_zoomer { z-index: 9000; border-radius: 1px; box-shadow: black 3px 3px 10px; }
-.Q_gallery_caption { z-index: 201; position: absolute; }
+.Q_gallery_caption { z-index: 201; position: absolute; text-align: center; }
+.Q_gallery_caption_centered { left: 50%; transform: translate(-50%, 0); white-space: nowrap; }
 .Q_contextual { display: none; }
 .Q_rating_tool { display: inline-block; min-height: 20px; }
 .Q_rating_tool div.Q_rating_star,
@@ -498,6 +500,18 @@ div.Q_placeholder { pointer-events: none; }
 .Q_lazy_loaded { opacity: 1; transition: opacity 300ms; }
 .Q_gallery_tool .Q_lazy_load,
 .Q_gallery_tool .Q_lazy_loaded { opacity: 1; transition: none; }
+
+img[data-lazyload-src],
+[data-q-lazyload="waiting"],
+[data-q-lazyload="removed"] {
+	opacity: 0.1;
+	transition: opacity 1s;
+}
+
+[data-q-lazyload="activated"] {
+	opacity: 1;
+	transition: opacity 1s;
+}
 
 #dialogs_slot { display: none; }
 
@@ -826,10 +840,6 @@ input[type=text],
 input[type=password] {
     -webkit-appearance: none;
     -moz-appearance: none;
-}
-
-img[data-lazyload-src] {
-	opacity: 0.1;
 }
 
 @keyframes Q_placeholder_shimmer {

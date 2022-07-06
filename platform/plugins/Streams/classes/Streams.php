@@ -512,56 +512,70 @@ abstract class Streams extends Base_Streams
 		}
 		return $streams;
 	}
+
+	/**
+	 * Fetches public streams from the database, even from multiple publishers.
+	 * Unlike Streams::fetch(), this method doesn't check the access control,
+	 * because the streams should be accessible to be read by anybody.
+	 * It simply returns the Streams_Stream rows with their own read/write/admin levels.
+	 * Also, it skips any sort of template and mutable stuff.
+	 * @method fetchPublicStreams
+	 * @static
+	 * @param {array} $publishersAndNames
+	 *  Array of ($publisherId => $namesArray) pairs
+	 * @return {array}
+	 *  Returns an array of Streams_Stream objects indexed by
+	 *  $publisherId => $name => $stream
+	 *  It may end up missing some streams, if they weren't in the database.
+	 */
+	static function fetchPublicStreams(
+		$publishersAndNames,
+		$fields = '*',
+		$options = array(),
+		&$results = array())
+	{
+		if ($fields === '*') {
+			$fields = join(',', Streams_Stream::fieldNames());
+		}
+		$pns = array();
+		foreach ($publishersAndNames as $publisherId => $names) {
+			foreach ($names as $name) {
+				$pns[] = array($publisherId, $name);
+			}
+		}
+		$rows = Streams_Stream::select($fields)->where(array(
+			'publisherId,name' => $pns
+		))->fetchDbRows();
+		$streams = array();
+		foreach ($rows as $row) {
+			$row->set('public', true);
+			if ($row->readLevel === Streams::$READ_LEVEL['max']) {
+				// make sure the stream really has max read level
+				$streams[$row->publisherId][$row->name] = $row;
+			}
+		}
+		return $streams;
+	}
 	
 	/**
 	 * Fetches one stream from the database.
+	 * Only here for backward compatibility. @see Streams_Stream::fetch();
 	 * @method fetchOne
 	 * @static
 	 * @param {string} $asUserId
-	 *  Set this to the user for which you are fetching the streams.
-	 *  If this matches the publisherId, just returns the streams.
-	 *  If this is '', only returns the streams anybody can see.
-	 *  Otherwise, return the streams joined with the calculated access settings.
-	 *  If you pass null here, then either the logged-in user's id or '' will be used.
 	 * @param {string} $publisherId
-	 *  The id of the user publishing these streams
 	 * @param {string|array|Db_Range} $name
-	 *  The name of the stream to fetch. Can end in "/" for template streams.
-	 *  Also it can be an array of stream names, or a custom Db_Range for stream names
 	 * @param {string|boolean} $fields='*'
-	 *  Must include "publisherId" and "name" fields, since they
-	 *  make up the primary key of the stream table.
-	 *  Pass true here to throw an exception if the stream is missing.
 	 * @param {array} $options=array()
-	 *  Provide additional query options like 'limit', 'offset', 'orderBy', 'where' etc.
-	 *  See Db_Query_Mysql::options().
-	 *  @param {boolean|string} [$options.begin] This can be used to begin a transaction,
-	 *   it is passed to Db_Row->retrieve() but only when fetching one stream.
-	 *   Later on, you should tell $stream->save() or $stream->changed() to commit the transaction.
-	 *  @param {boolean} [$options.refetch] Ignore cache of previous calls to fetch, 
-	 *   and save a new cache if necessary.
-	 *  @param {boolean} [$options.dontCache] Do not cache the results of
-	 *   fetching the streams
-	 *  @param {boolean} [$options.withParticipant] Additionally call ->set('participant', $p)
-	 *   on the stream object, with the participant object corresponding to $asUserId, if any.
+	 *  @param {boolean|string} [$options.begin]
+	 *  @param {boolean} [$options.refetch]
+	 *  @param {boolean} [$options.dontCache]
+	 *  @param {boolean} [$options.withParticipant]
 	 *  @param {array} [$options.withMessageTotals]
-	 *   Pass an array of arrays ($streamName => $messageTypes) here
-	 *   to additionally call ->set('messageTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedToTotals]
-	 *	 pass array('withRelatedToTotals' => array('streamName' => true)) for all rows
-	 *	 pass array('withRelatedToTotals' => array('streamName' => array('relationType', ...))) for particular rows
-	 *   to additionally call ->set('relatedToTotals', $t) on the stream objects.
 	 *  @param {array} [$options.withRelatedFromTotals]
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => true)) for all rows
-	 *	 pass array('withRelatedFromTotals' => array('streamName' => array('relationType', ...))) for particular rows
-	 *   to additionally call ->set('relatedFromTotals', $t) on the stream objects.
 	 *  @param {reference} $results=array()
-	 *   pass an array here, to be filled with intermediate results you might want to use
 	 * @return {Streams_Stream|null}
-	 *  Returns a Streams_Stream object with access info calculated
-	 *  specifically for $asUserId . Make sure to call the methods 
-	 *  testReadLevel(), testWriteLevel() and testAdminLevel()
-	 *  on these streams before using them on the user's behalf.
 	 * @throws {Q_Exception_MissingRow} If the stream is missing and $fields == true
 	 */
 	static function fetchOne(
@@ -572,26 +586,23 @@ abstract class Streams extends Base_Streams
 		$options = array(),
 		&$results = array())
 	{
-		$options['limit'] = 1;
-		$throwIfMissing = false;
-		if ($fields === true) {
-			$throwIfMissing = true;
-			$fields = '*';
-		}
-		$streams = Streams::fetch(
-			$asUserId, $publisherId, $name, 
-			$fields, $options, $results
+		return Streams_Stream::fetch($asUserId, $publisherId, $name, $fields, $options, $results);
+	}
+
+	/**
+	 * Tell the client using scriptData to call Q.Streams.arePublic()
+	 * and mark some streams as public
+	 * @method arePublic
+	 * @static
+	 * @param {array} $publishersAndNames
+	 *  Array of ($publisherId => $namesArray) pairs
+	 */
+	static function arePublic($publishersAndNames)
+	{
+		self::$arePublic = array_merge_recursive(
+			self::$arePublic, 
+			$publishersAndNames
 		);
-		if (empty($streams)) {
-			if ($throwIfMissing) {
-				throw new Q_Exception_MissingRow(array(
-					'table' => 'Stream', 
-					'criteria' => Q::json_encode(@compact('publisherId', 'name'))
-				));
-			}
-			return null;
-		}
-		return reset($streams);
 	}
 
 	/**
@@ -888,7 +899,7 @@ abstract class Streams extends Base_Streams
 		}
 		if (!$authorized and $retrieved and !empty($relate['streamName'])) {
 			// Check if user is perhaps authorized to create a related stream
-			$to_stream = Streams::fetchOne(
+			$to_stream = Streams_Stream::fetch(
 				$userId, $relate['publisherId'], $relate['streamName']
 			);
 			if ($to_stream and $to_stream->testWriteLevel('relate')) {
@@ -1024,7 +1035,7 @@ abstract class Streams extends Base_Streams
 	
 		// ready to persist this stream to the database
 		if (!empty($relate['streamName']) && Q::ifset($relate, 'inheritAccess', true)) {
-			$rs = Streams::fetchOne(
+			$rs = Streams_Stream::fetch(
 				$asUserId,
 				$relate['publisherId'],
 				$relate['streamName']
@@ -1328,8 +1339,8 @@ abstract class Streams extends Base_Streams
 	 * @param {string} [$returnAs='string'] Can be "array" or "string".
 	 * @param {array|string} [$uri=Q_Dispatcher::uri()]
 	 *  An array or string representing a uri to use instead of the Q_Dispatcher::uri()
-	 * @return {string}
-	 *  The name of the stream
+	 * @return {string|Db_Range}
+	 *  The name of the stream, or a Db_Range
 	 * @throws {Q_Exception_RequiredField}
 	 *  If the name can't be deduced, this is thrown
 	 */
@@ -1356,7 +1367,20 @@ abstract class Streams extends Base_Streams
 		}
 		if (isset($result)) {
 			if (is_array($result)) {
-				$result = implode('/', $result);
+				if (Q::isAssociative($result)
+				and isset($result['min'])
+				and isset($result['includeMin'])) {
+					$includeMin = filter_var($result['includeMin'], FILTER_VALIDATE_BOOLEAN);
+					$includeMax = filter_var($result['includeMax'], FILTER_VALIDATE_BOOLEAN);
+					$result = new Db_Range(
+						$result['min'],
+						$includeMin,
+						$includeMax,
+						$result['max']
+					);
+				} else {
+					$result = implode('/', $result);
+				}
 			}
 			$name = isset($uri->name_prefix) ? $uri->name_prefix.$result : $result;
 		} else if (Streams::$followedInvite) {
@@ -1367,7 +1391,7 @@ abstract class Streams extends Base_Streams
 				'streamName'
 			);
 		}
-		if ($throwIfMissing && !is_string($name)) {
+		if ($throwIfMissing && !is_string($name) && !($name instanceof Db_Range)) {
 			throw new Q_Exception_WrongType(array('field' => $fieldName, 'type' => 'string or array'));
 		}
 		if ($returnAs === 'array' and is_string($name)) {
@@ -2254,7 +2278,7 @@ abstract class Streams extends Base_Streams
 	 *  If true, returns all the streams this related to this category.
 	 *  If a string, returns all the streams related to this category with names prefixed by this string.
 	 * @param {array} $options=array()
-	 * @param {boolean} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight.
+	 * @param {boolean|string} [$options.orderBy=false] Defaults to false, which means order by decreasing weight. True means order by increasing weight. Also can pass "random" to order randomly.
 	 * @param {integer} [$options.limit] number of records to fetch
 	 * @param {integer} [$options.offset] offset to start from
 	 * @param {double} [$options.min] the minimum orderBy value (inclusive) to filter by, if any
@@ -2338,7 +2362,17 @@ abstract class Streams extends Base_Streams
 			));
 		}
 		if ($isCategory) {
-			$query = $query->orderBy('weight', Q::ifset($options, "orderBy", false));
+			$orderBy = Q::ifset($options, "orderBy", false);
+			if (is_bool($orderBy)) {
+				$query = $query->orderBy('weight', $orderBy);
+			} else if (strtolower($orderBy) === 'random') {
+				$query = $query->orderBy('random', null)->ignoreCache();
+			} else {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'orderBy',
+					'range' => 'true, false, or "random"'
+				));
+			}
 
 			if (!empty($options['weight'])) {
 				$query = $query->andWhere(array('weight' => $options['weight']));
@@ -2388,7 +2422,7 @@ abstract class Streams extends Base_Streams
 			$max = is_numeric($options['max']) ? $options['max'] : strtotime($options['max']);
 		}
 		if (isset($min) or isset($max)) {
-			$range = new Db_Range($min ? $min : 0, true, true, $max ? $max : null);
+			$range = new Db_Range(isset($min) ? $min : null, true, true, isset($max) ? $max : null);
 			$query = $query->where(array('weight' => $range));
 		}
 		if ($limit or $offset) {
@@ -2492,7 +2526,7 @@ abstract class Streams extends Base_Streams
 	 * @return {boolean} if available or not
 	 */
 	static function checkAvailableRelations ($asUserId, $publisherId, $streamName, $relationType, $options=array()) {
-		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName);
 		$maxRelations = Q::ifset($stream->getAttribute("Streams/maxRelations"), $relationType, null);
 		if (!is_numeric($maxRelations)) {
 			return true;
@@ -2798,7 +2832,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($participant->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$participant->extra = Q::json_encode($tree->getAll(), true);
+				$participant->extra = Q::json_encode($tree->getAll(), JSON_FORCE_OBJECT);
 			}
 			$streamNamesUpdate[] = $sn;
 			$type = ($participant->state === 'participating') ? 'visit' : 'join';
@@ -2889,7 +2923,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($relateStreams as $pn => $streamTypes) {
 			foreach ($streamTypes as $streamType => $streamNames) {
-				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+				if (!Streams_Stream::fetch($asUserId, $asUserId, $pn)) {
 					Streams::create($asUserId, $asUserId, 'Streams/participating', array('name' => $pn));
 				}
 				$extraArray = array();
@@ -2969,7 +3003,7 @@ abstract class Streams extends Base_Streams
 				$extra = Q::json_decode($p->extra, true);
 				$tree = new Q_Tree($extra);
 				$tree->merge($options['extra']);
-				$extra = $p->extra = Q::json_encode($tree->getAll(), true);
+				$extra = $p->extra = Q::json_encode($tree->getAll(), JSON_FORCE_OBJECT);
 			}
 			$streamNamesUpdate[] = $sn;
 			$updateCounts[$p->state][] = $sn;
@@ -3043,7 +3077,7 @@ abstract class Streams extends Base_Streams
 		}
 		foreach ($unrelateStreams as $pn => $streamTypes) {
 			foreach ($streamTypes as $streamType => $streamNames) {
-				if (!Streams::fetchOne($asUserId, $asUserId, $pn)) {
+				if (!Streams_Stream::fetch($asUserId, $asUserId, $pn)) {
 					Streams::create($asUserId, $asUserId, null, array('name' => $pn));
 				}
 				Streams::unrelate(
@@ -3562,7 +3596,7 @@ abstract class Streams extends Base_Streams
 		}
 
 		// Fetch the stream as the logged-in user
-		$stream = Streams::fetchOne($asUserId, $publisherId, $streamName, true);
+		$stream = Streams_Stream::fetch($asUserId, $publisherId, $streamName, true);
 
 		// Do we have enough admin rights to invite others to this stream?
 		if (!$stream->testAdminLevel('invite') || !$stream->testWriteLevel('join')) {
@@ -3915,7 +3949,7 @@ abstract class Streams extends Base_Streams
 		}
 		
 		// fetch the stream as the logged-in user
-		$stream = Streams::fetchOne($userId, $publisherId, $streamName, true);
+		$stream = Streams_Stream::fetch($userId, $publisherId, $streamName, true);
 
 		// process any requested levels
 		$readLevel = isset($options['readLevel']) ? $options['readLevel'] : null;
@@ -4103,6 +4137,7 @@ abstract class Streams extends Base_Streams
 			$first = $parts[0];
 		} else {
 			$first = $fullName;
+			$last = '';
 		}
 		$first = trim($first);
 		$last = trim($last);
@@ -4120,7 +4155,7 @@ abstract class Streams extends Base_Streams
 	static function experience($experienceId = 'main')
 	{
 		$communityId = Users::communityId();
-		return Streams::fetchOne(null, $communityId, "Streams/experience/$experienceId", true);
+		return Streams_Stream::fetch(null, $communityId, "Streams/experience/$experienceId", true);
 	}
 	/**
 	 * Get the url of the stream's icon
@@ -4139,7 +4174,7 @@ abstract class Streams extends Base_Streams
 			: "{{Streams}}/img/icons/$url";
 		$baseUrl = Q_Request::baseUrl();
 		$themedUrl = Q_Html::themedUrl($url);
-		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl)) {
+		if ($basename !== false && Q::startsWith($themedUrl, $baseUrl) && !preg_match("/\.\w{2,4}$/", $themedUrl)) {
 			if ($basename === null or $basename === true) {
 				$basename = '40';
 			}
@@ -4524,7 +4559,7 @@ abstract class Streams extends Base_Streams
 			$fields['s'] = substr($fields['s'], 0, $len);
 		}
 		$streamName = 'Streams/user/profile';
-		$stream = Streams::fetchOne($userId, $userId, $streamName);
+		$stream = Streams_Stream::fetch($userId, $userId, $streamName);
 		$now = time();
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Streams/user/profile', array(
@@ -4790,7 +4825,7 @@ abstract class Streams extends Base_Streams
 		$streamName = 'Streams/interest/' . Q_Utils::normalize(trim($title));
 		$publisherId = $publisherId ?: Users::communityId();
 
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
 			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
@@ -4848,12 +4883,31 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Get the directory to upload files into, for a stream.
+	 * @method uploadsDirectory
+	 * @param {string} $publisherId
+	 * @param {string} $streamName
+	 * @return {string}
+	 */
+	static function uploadsDirectory($publisherId, $streamName)
+	{
+		$splitId = Q_Utils::splitId($publisherId);
+		$sn = implode(DS, explode('/', $streamName));
+		$path = APP_WEB_DIR . DS . 'Q' . DS . 'uploads' . DS . 'Streams';
+		if ($realpath = realpath($path)) {
+			$path = $realpath;
+		}
+		$subpath = $splitId . DS . $sn;
+		return $path . DS . $subpath;
+	}
+
+	/**
 	 * Get the directory to import the icon into, for a stream.
 	 * Use this with Users::importIcon().
 	 * @param {string} $publisherId
 	 * @param {string} $streamName
 	 * @param {string} [$extra] You can pass time() here or something,
-	 *  if you don't want to overwrite old values.
+	 *  if you don't want to overwrite old values. It will append to the directory path.
 	 * @return {string}
 	 */
 	static function iconDirectory($publisherId, $streamName, $extra = null)
@@ -4868,7 +4922,7 @@ abstract class Streams extends Base_Streams
 		if ($extra) {
 			$subpath .= DS . $extra;
 		}
-		return $realpath . DS . $subpath;
+		return $path . DS . $subpath;
 	}
 	/**
 	 * Remove streams from the system, including all related rows.
@@ -5041,6 +5095,7 @@ abstract class Streams extends Base_Streams
 	static $requestedName_override = null;
 	static $beingSaved = null;
 	static $beingSavedQuery = null;
+	static $arePublic = array();
 	/**
 	 * You can set this to true to prevent caching for a while,
 	 * e.g. during installer scripts, but make sure to set it back to false when done.

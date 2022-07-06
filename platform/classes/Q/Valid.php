@@ -258,7 +258,7 @@ class Q_Valid
 	 * @method nonce
 	 * @static
 	 * @param {boolean} [$throwIfInvalid=false] If true, throws an exception if the nonce is invalid.
-	 * @param {boolean} [$missingIsValid=false] If true, returns true if request body is missing nonce.
+	 * @param {boolean} [$missingIsValid=false] If true, this function will return true if request body is missing nonce.
 	 * @throws {Q_Exception_FailedValidation}
 	 */
 	static function nonce(

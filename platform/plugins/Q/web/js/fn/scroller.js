@@ -60,7 +60,7 @@ Q.Tool.jQuery("Q/scroller", function _Q_scroller(o) {
                     'overflow': $this.css('overflow'),
                     'maxHeight': parseInt($this.css('max-height')) ? $this.css('max-height') : ''
                 };
-                $this.css({ 'overflow': 'hidden', 'max-height': scroller.height });
+                $this.css({ 'overflow': 'auto', 'max-height': scroller.height });
                 $this.children().wrapAll('<div class="Q_scroller_wrapper" />');
                 scroller.wrapper = $($this.children('.Q_scroller_wrapper').get(0));
 

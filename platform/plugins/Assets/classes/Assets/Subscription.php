@@ -60,7 +60,7 @@ abstract class Assets_Subscription
 		$publisherId = Q::ifset($options, 'publisherId', Users::communityId());
 		$publisher = Users_User::fetch($publisherId);
 		$streamName = "Assets/subscription/{$user->id}/{$plan->name}";
-		if ($subscription = Streams::fetchOne($publisherId, $publisherId, $streamName)) {
+		if ($subscription = Streams_Stream::fetch($publisherId, $publisherId, $streamName)) {
 			return $subscription; // it already started
 		}
 		$attributes = Q::json_encode(array(
@@ -147,7 +147,7 @@ abstract class Assets_Subscription
 	 */
 	static function getPlan($subscriptionStream)
 	{
-		return Streams::fetchOne(
+		return Streams_Stream::fetch(
 			$stream->getAttribute('planPublisherId'),
 			$stream->getAttribute('planPublisherId'),
 			$stream->getAttribute('planStreamName'),

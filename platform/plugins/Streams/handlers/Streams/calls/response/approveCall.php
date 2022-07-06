@@ -8,7 +8,7 @@ function Streams_calls_response_approveCall ($params) {
     $action = $params["action"];
     $isHost = (bool)Users::roles($communityId, array("Users/hosts"), array(), $currentUser->id);
 
-    $webrtc = Streams::fetchOne($webrtcStreamPublisher, $webrtcStreamPublisher, $webrtcStreamName);
+    $webrtc = Streams_Stream::fetch($webrtcStreamPublisher, $webrtcStreamPublisher, $webrtcStreamName);
 
     if (!$isHost || !$webrtc->testAdminLevel("invite")) {
         throw new Users_Exception_NotAuthorized();

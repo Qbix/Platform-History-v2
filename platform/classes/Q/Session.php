@@ -231,9 +231,9 @@ class Q_Session
 	 *   Sessions
 	 * @return {boolean} Whether a new session was started or not.
 	 */
-	static function start($throwIfMissingOrInvalid = false)
+	static function start($throwIfMissingOrInvalid = false, $setId = null)
 	{
-		if (self::id()) {
+		if (self::id() and !$setId) {
 			// Session has already started
 			return false;
 		}
@@ -260,11 +260,12 @@ class Q_Session
 		}
 		self::init();
 		$name = Q_Session::name();
-		$id = isset($_REQUEST[$name])
-			? $_REQUEST[$name]
-			: (isset($_COOKIE[$name])
-				? $_COOKIE[$name]
-				: null);
+		$id = $setId
+			? $setId
+			: (isset($_REQUEST[$name])
+				? $_REQUEST[$name]
+				: Q_Response::cookie($name)
+			);
 
 		$isNew = false;
 		if (!self::isValidId($id)) {
@@ -308,9 +309,10 @@ class Q_Session
 					// TODO: Think about session fixation attacks, require nonce.
 					$durationName = self::durationName();
 					$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+					$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 					Q_Response::setCookie(
 						self::name(), $id, $duration ? time()+$duration : 0, 
-						null, null, true, true
+						null, null, $secure, true
 					);
 				}
 			}
@@ -458,9 +460,10 @@ class Q_Session
 			if (is_string($duration)) {
 				$duration = Q_Config::get('Q', 'session', 'durations', $duration, 0);
 			};
+			$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 			Q_Response::setCookie(
 				self::name(), $sid, $duration ? time()+$duration : 0,
-				null, null, true, true
+				null, null, $secure, true
 			);
 		}
 		$_SESSION = $old_SESSION; // restore $_SESSION, which will be saved when session closes
@@ -563,9 +566,14 @@ class Q_Session
 				$row = new $class();
 				$row->$id_field = $id;
 				if ($row->retrieve()) {
+					// NOTE: we don't need to begin a transaction
+					// when we open the session and commit when we close it
+					// because we have a convention to merge session
 					self::$sessionExists = $sessionExists = true;
 				}
 				self::$session_db_row = $row;
+			} else {
+				self::$sessionExists = $sessionExists = true;
 			}
 			$result = isset(self::$session_db_row->$data_field)
 				? self::$session_db_row->$data_field : '';
@@ -611,9 +619,10 @@ class Q_Session
 	static function writeHandler ($id, $sess_data)
 	{
 		try {
-			// if the request is AJAX request that came without session cookie, then do not write session, ignore it
-			if (Q_Request::isAjax() && !isset($_COOKIE[self::name()])) {
-				return true;
+			// if the request is AJAX request that came without session cookie
+			// and no session cookie is being set, then do not write session, ignore it
+			if (Q_Request::isAjax() && Q_Response::cookie(self::name() !== null)) {
+				return true; // TODO: debate whether this optimization should be removed
 			}
 
 			// don't save sessions when running from command-line (cli)
@@ -728,6 +737,9 @@ class Q_Session
 				$_SESSION = $t->getAll();
 				$params['existing_data'] = $existing_data;
 				$params['merged_data'] = $merged_data = session_id() ? session_encode() : '';
+				if ($params['existing_data'] !== $params['merged_data']) {
+					
+				}
 				/**
 				 * @event Q/session/save {before}
 				 * @param {string} sess_data
@@ -935,6 +947,10 @@ class Q_Session
 			return null;
 		}
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
+		if (!isset($secret)) {
+			$secret = Q::app();
+		}
+		$a = hash_hmac('sha256', $sessionId, $secret);
 		return hash_hmac('sha256', $sessionId, $secret);
 	}
 
@@ -956,11 +972,13 @@ class Q_Session
 		if (!empty($_SERVER['HTTP_HOST'])) {
 			$durationName = self::durationName();
 			$duration = Q_Config::get('Q', 'session', 'durations', $durationName, 0);
+			$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 			Q_Response::setCookie(
 				'Q_nonce', $nonce, $duration ? time()+$duration : 0,
-				null, null, false, false
+				null, null, $secure, false
 			);
 		}
+		$_SESSION['Q']['nonce'] = $nonce;
 		Q_Session::$nonceWasSet = true;
 	}
 

@@ -1099,7 +1099,7 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
  * @method forEachTool
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
  * @param {Function} callback The callback to execute at the right time
- * @param {String} [key]
+ * @param {String} [key] Optional, to be used for the onActivate handler that gets added
  */
 Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 	var element = this;
@@ -3708,7 +3708,7 @@ Q.getter = function _Q_getter(original, options) {
 
 		// if caching is required, check the cache -- maybe the result is there
 		if (gw.cache && !ignoreCache) {
-			if (cached = gw.cache.get(key)) {
+			if (cached = gw.cache.get(arguments2)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
 					_prepare(cached.subject, cached.params, callbacks[cbpos], ret, true);
@@ -3745,7 +3745,7 @@ Q.getter = function _Q_getter(original, options) {
 				return function _Q_getter_callback() {
 					// save the results in the cache
 					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(key, cbpos, this, arguments);
+						gw.cache.set(arguments2, cbpos, this, arguments);
 					}
 					// process waiting callbacks
 					var wk = _waiting[key];
@@ -3855,9 +3855,8 @@ Q.getter = function _Q_getter(original, options) {
 	}
 
 	gw.forget = function _forget() {
-		var key = Q.Cache.key(arguments);
-		if (key && gw.cache) {
-			return gw.cache.remove(key);
+		if (gw.cache) {
+			return gw.cache.remove(Array.prototype.slice.call(arguments));
 		}
 	};
 	
@@ -4902,10 +4901,13 @@ Q.Tool.encodeOptions = function _Q_Tool_encodeOptions(options) {
  *  If null, calculates an automatically unique id beginning with the tool's name
  * @param {String} [prefix]
  *  Optional prefix to prepend to the tool's id
+ * @param {Boolean} [lazyload=false]
+ *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+ *    activated on one of its containers.
  * @return {HTMLElement}
  *  Returns an element you can append to things, and/or call Q.activate on
  */
-Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix) {
+Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptions, id, prefix, lazyload) {
 	if (typeof toolOptions === 'string') {
 		prefix = id;
 		id = toolOptions;
@@ -4949,6 +4951,9 @@ Q.Tool.setUpElement = function _Q_Tool_setUpElement(element, toolName, toolOptio
 			}
 			element.setAttribute('id', id);
 		}
+	}
+	if (lazyload) {
+		element.setAttribute('data-Q-lazyload', 'waiting');
 	}
 	return element;
 };
@@ -5492,7 +5497,7 @@ Q.Request.getUrlStatus = function(url, callback) {
  * @param {boolean} [options.localStorage] use local storage instead of page storage
  * @param {boolean} [options.sessionStorage] use session storage instead of page storage
  * @param {String} [options.name] the name of the cache, not really used for now
- * @param {Integer} [options.max=100] the maximum number of items the cache should hold. Defaults to 100.
+ * @param {Integer} [options.max=100] the maximum number of items the cache should hold. Defaults to 100
  * @param {Q.Cache} [options.after] pass an existing cache with max > this cache's max, to look in first
  */
 Q.Cache = function _Q_Cache(options) {
@@ -5615,6 +5620,9 @@ Q.Cache = function _Q_Cache(options) {
 		};
 	}
 };
+function Q_Cache_index_name(parameterCount) {
+	return 'index' + parameterCount + 'parameters';
+}
 function Q_Cache_get(cache, key, special) {
 	if (cache.documentStorage) {
 		return (special === true) ? cache.special[key] : cache.data[key];
@@ -5657,6 +5665,22 @@ function Q_Cache_set(cache, key, obj, special) {
 		
 	}
 }
+function Q_Cache_removeFromIndex(cache, parameters, key) {
+	if (!parameters) {
+		return false;
+	}
+	// remove from index for Cp.each
+	for (var i=1, l=parameters.length; i<l; ++i) {
+		// key in the index
+		var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+		var obj = Q_Cache_get(cache, k, true) || {};
+		if (key in obj) {
+			delete obj[key];
+			Q_Cache_set(cache, k, obj, true);
+		}
+	}
+	return true;
+}
 function Q_Cache_remove(cache, key, special) {
 	if (cache.documentStorage) {
 		if (special === true) {
@@ -5695,22 +5719,22 @@ function Q_Cache_pluck(cache, existing) {
  * Generates the key under which things will be stored in a cache
  * @static
  * @method key
- * @param  {Array} args the arguments from which to generate the key
+ * @param  {Array|String} args the arguments from which to generate the key
  * @param {Array} functions  optional array to which all the functions found in the arguments will be pushed
  * @return {String}
  */
 Q.Cache.key = function _Cache_key(args, functions) {
 	var i, keys = [];
-	if (Q.isArrayLike(args)) {
-		for (i=0; i<args.length; ++i) {
-			if (typeof args[i] !== 'function') {
-				keys.push(args[i]);
-			} else if (functions && functions.push) {
-				functions.push(args[i]);
-			}
+	if (!Q.isArrayLike(args)) {
+		return args;
+	}
+
+	for (i=0; i<args.length; ++i) {
+		if (typeof args[i] !== 'function') {
+			keys.push(args[i]);
+		} else if (functions && functions.push) {
+			functions.push(args[i]);
 		}
-	} else {
-		keys = args;
 	}
 	return JSON.stringify(keys);
 };
@@ -5720,7 +5744,7 @@ var Cp = Q.Cache.prototype;
 /**
  * Accesses the cache and sets an entry in it
  * @method set
- * @param {String} key  the key to save the entry under, or an array of arguments
+ * @param {String|Array} key  the key to save the entry under, or an array of arguments
  * @param {number} cbpos the position of the callback
  * @param {Object} subject The "this" object for the callback
  * @param {Array} params The parameters for the callback
@@ -5730,8 +5754,9 @@ var Cp = Q.Cache.prototype;
  */
 Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 	var existing, previous, count;
-	if (typeof key !== 'string') {
-		key = Q.Cache.key(key);
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
+		key = Q.Cache.key(parameters);
 	}
 	if (!options || !options.dontTouch) {
 		// marks the item as being recently used, if it existed in the cache already
@@ -5764,12 +5789,29 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		this.remove(this.earliest());
 	}
 
-	return existing ? true : false;
+	if (parameters) {
+		for (var i=1, l=parameters.length; i<=l; ++i) {
+			// add to index for Cp.each
+			Q_Cache_set(this, Q_Cache_index_name(i), true, true);
+
+			if (i===l) {
+				break;
+			}
+
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = Q_Cache_get(this, k, true) || {};
+			obj[key] = 1;
+			Q_Cache_set(this, k, obj, true);
+		}
+	}
+
+	return !!existing;
 };
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key  the key to search for
+ * @param {String|Array} key  the key to search for
  * @param {Object} options  supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined
@@ -5803,12 +5845,13 @@ Cp.get = function _Q_Cache_prototype_get(key, options) {
  * Accesses the cache and removes an entry from it.
  * @static
  * @method remove
- * @param {String} key  the key of the entry to remove
+ * @param {String|Array} key  the key of the entry to remove
  * @return {boolean} whether there was an existing entry under that key
  */
 Cp.remove = function _Q_Cache_prototype_remove(key) {
 	var existing, count;
-	if (typeof key !== 'string') {
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
 		key = Q.Cache.key(key);
 	}
 	existing = this.get(key, {dontTouch: true});
@@ -5828,6 +5871,7 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 
 	Q_Cache_pluck(this, existing);
 	Q_Cache_remove(this, key);
+	Q_Cache_removeFromIndex(this, parameters, key);
 
 	return true;
 };
@@ -5849,6 +5893,9 @@ Cp.clear = function _Q_Cache_prototype_clear() {
 			prevkey = key;
 			key = item.next;
 			Q_Cache_remove(this, prevkey);
+			try {
+				Q_Cache_removeFromIndex(this, JSON.parse(key), key);
+			} catch (e) {}
 		}
 	}
 	this.earliest(null);
@@ -5856,12 +5903,44 @@ Cp.clear = function _Q_Cache_prototype_clear() {
 	this.count(0);
 };
 /**
- * Cycles through all the entries in the cache
+ * Searches for entries matching a certain prefix of arguments array
+ * and calls the callback repeatedly with each matching result.
  * @method each
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  * @param {Function} callback  Is passed two parameters: key, value, with this = the cache
+ * @param {Object} [options]
+ * @param {Boolean} [options.throwIfNoIndex] pass true to throw an exception if an index doesn't exist
  */
-Cp.each = function _Q_Cache_prototype_each(args, callback) {
+Cp.each = function _Q_Cache_prototype_each(args, callback, options) {
+	if (!callback) {
+		return;
+	}
+	options = options || {};
+	var localStorageIndexInfoKey = Q_Cache_index_name(args.length);
+	if (Q_Cache_get(this, localStorageIndexInfoKey, true)) {
+		var rawKey = Q.Cache.key(args);
+		var key = 'index:' + rawKey; // key in the index
+		var localStorageKeys = Q_Cache_get(this, key, true) || {};
+		for (var k in localStorageKeys) {
+			var result = Q_Cache_get(this, k);
+			if (result === undefined) {
+				continue;
+			}
+			if (false === callback.call(this, k, result)) {
+				continue;
+			}
+		}
+		// also the key itself
+		var item = Q_Cache_get(this, rawKey);
+		if (item !== undefined) {
+			callback.call(this, rawKey, item);
+		}
+		return;
+	}
+	// key doesn't exist
+	if (options.throwIfNoIndex) {
+		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
+	}
 	var prefix = null;
 	if (typeof args === 'function') {
 		callback = args;
@@ -5869,9 +5948,6 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
 	} else {
 		var json = Q.Cache.key(args);
 		prefix = json.substring(0, json.length-1);
-	}
-	if (!callback) {
-		return;
 	}
 	var cache = this;
 	if (this.documentStorage) {
@@ -5911,10 +5987,11 @@ Cp.each = function _Q_Cache_prototype_each(args, callback) {
  * @method removeEach
  * @param {Array} args  An array consisting of some or all the arguments that form the key
  */
-Cp.removeEach = function _Q_Cache_prototype_each(args) {
+Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
+	options = options || { throwIfNoIndex: false };
 	this.each(args, function (key) {
-		this.remove(key);
-	});
+		this.remove(JSON.parse(key));
+	}, options);
 	return this;
 };
 Q.Cache.document = function _Q_Cache_document(name, max) {
@@ -7300,7 +7377,7 @@ Q.action = function _Q_action(uri, fields, options) {
  *  * @param {String} [options.method] if set, adds a &Q.method=$method to the querystring
  *  * @param {String|Function} [options.callback] if a string, adds a "&Q.callback="+encodeURIComponent(callback) to the querystring.
  *  * @param {Boolean} [options.iframe] if true, tells the server to render the response as HTML in an iframe, which should call the specified callback
- *  * @param {Boolean|String} [options.loadExtras] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load, can also be "response", "session" or "response,session"
+ *  * @param {String} [options.loadExtras] if 'all, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load, can also be "response", "session" or "response,session"
  *  * @param {Array} [options.idPrefixes] optional array of Q_Html::pushIdPrefix values for each slotName
  *  * @param {number} [options.timestamp] whether to include a timestamp (e.g. as a cache-breaker)
  * @return {String|Object}
@@ -7526,7 +7603,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var redirected = false;
 			if (data && data.redirect && data.redirect.url) {
 				Q.handle(o.onRedirect, Q, [data.redirect.url]);
-				redirected = true;
+				redirected = data.redirect.url;
 			}
 			callback && callback.call(this, err, data, redirected);
 			Q.handle(o.onProcessed, this, [err, data, redirected]);
@@ -8980,8 +9057,6 @@ Q.replace = function _Q_replace(container, source, options) {
 	return container;
 };
 
-var _latestLoadUrlObjects = {};
-
 /**
  * Requests a URL served by Qbix Platform and loads it as if it was a page loaded in the browser.
  * @static
@@ -9002,7 +9077,7 @@ var _latestLoadUrlObjects = {};
  * @param {boolean} [options.ignoreHash=false] if true, does not navigate to the hash part of the URL in browsers that can support it
  * @param {Object} [options.fields] additional fields to pass via the querystring
  * @param {Object} [options.formdata] if set, instead of fields, submits the formdata (including multipart form-data such as files, etc.) 
- * @param {Boolean|String} [options.loadExtras=false] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
+ * @param {String} [options.loadExtras=null] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {Number|boolean} [options.timeout=1500] milliseconds to wait for response, before showing cancel button and triggering onTimeout event, if any, passed to the options
  * @param {boolean} [options.quiet=false] if true, allows visual indications that the request is going to take place.
  * @param {String|Array} [options.slotNames] an array of slot names to request and process (default is all slots in Q.info.slotNames)
@@ -9059,8 +9134,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	if (o.onActivate) {
 		onActivate = o.onActivate;
 	}
-	var _loadUrlObject = {};
-	_latestLoadUrlObjects[o.key] = _loadUrlObject;
+	var _loadUrlObject = {url: url, options: options};
+	Q.loadUrl.loading[o.key] = _loadUrlObject;
 	loader(urlToLoad, slotNames, loadResponse, o);
 	
 	var promise = {};
@@ -9075,39 +9150,52 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	}
 	promise.cancel = function () {
 		_canceled = true;
-		Q.handle(_reject);
+		_reject && reject("request canceled");
 	};
 	return promise;
 
 	function loadResponse(err, response, redirected) {
+		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
 		}
-		if (_loadUrlObject != _latestLoadUrlObjects[o.key]) {
-			Q.handle(_reject);
+		var loadingUrlObject = Q.loadUrl.loading[o.key];
+		delete Q.loadUrl.loading[o.key]; // it's loaded
+		if (redirected) {
+			_resolve && _resolve(response);
+			return; // it was just a redirect
+		}
+		if (loadingUrlObject &&
+		_loadUrlObject != loadingUrlObject) {
+			var sn1 = loadingUrlObject.options && loadingUrlObject.options.slotNames || [];
+			var sn2 = _loadUrlObject.options && _loadUrlObject.options.slotNames || [];
+			e = 'request to ' + loadingUrlObject.url
+				+ ' (' + sn1.join(',') + ') '
+				+ ' was initiated after ' 
+				+ ' current one to ' + _loadUrlObject.url
+				+ ' (' + _loadUrlObject.options.slotNames.join(',') + ')';
+			_reject && _reject(e);
 			return; // a newer request was sent
 		}
 		if (!Q.isEmpty(err)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, [Q.firstErrorMessage(err)]);
+			e = Q.firstErrorMessage(err);
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		if (Q.isEmpty(response)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, ["Response is empty", response]);
+			e = "Response is empty";
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e, response]);
 		}
 		if (!Q.isEmpty(response.errors)) {
-			Q.handle(_reject);
-			return Q.handle(onError, this, [response.errors[0].message]);
+			response.errors[0].message
+			_reject && _reject(e);
+			return Q.handle(onError, this, [e]);
 		}
 		Q.handle(o.onLoad, this, [response]);
 		var unloadedUrl = o.unloadedUrl || location.href;
 		Q.handle(o.beforeUnloadUrl, this, [unloadedUrl, url, response]);
-		
-		if (redirected) {
-			Q.handle(_reject);
-			return;
-		}
-		
+
 		_resolve && _resolve(response);
 		
 		Q.Page.beingProcessed = true;
@@ -9517,6 +9605,8 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 	}
 };
 
+Q.loadUrl.loading = {};
+
 /**
  * Used for handling callbacks, whether they come as functions,
  * strings referring to functions (if evaluated), arrays or hashes.
@@ -9540,7 +9630,7 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
  *	Note: this will still not supress loading of external websites done with other means, such as window.location
  *  @param {Object} [options.fields] optional fields to pass with any method other than "get"
  *  @param {String|Function} [options.callback] if a string, adds a '&Q.callback='+encodeURIComponent(callback) to the querystring. If a function, this is the callback.
- *  @param {boolean} [options.loadExtras=true] if true, asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load
+ * @param {String} [options.loadExtras="all"] if "all", asks the server to load the extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  *  @param {String} [options.target] the name of a window or iframe to use as the target. In this case callables is treated as a url.
  *  @param {String|Array} [options.slotNames] a comma-separated list of slot names, or an array of slot names
  *  @param {boolean} [options.quiet] defaults to false. If true, allows visual indications that the request is going to take place.
@@ -9616,12 +9706,14 @@ Q.handle = function _Q_handle(callables, /* callback, */ context, args, options)
 				if (callables.search(baseUrl) === 0) {
 					// Use AJAX to refresh the page whenever the request is for a local page
 					Q.loadUrl(callables, Q.extend({
-						loadExtras: true,
+						loadExtras: 'all',
 						ignoreHistory: false,
 						onActivate: function () {
 							if (callback) callback();
 						}
-					}, o));
+					}, o)).then(function () {
+
+					});
 				} else if (o.externalLoader) {
 					o.externalLoader.apply(this, arguments);
 				} else {
@@ -9835,6 +9927,7 @@ function _activateTools(toolElement, options, shared) {
 						Q.extend(this.options, Q.Tool.options.levels, o2);
 					}
 					this.name = toolName;
+					this.constructor = toolConstructor;
 					Q.Tool.call(this, element, options);
 					this.state = Q.copy(this.options, toolConstructor.stateKeys);
 					var prevTool = Q.Tool.beingActivated;
@@ -11147,12 +11240,15 @@ Q.jQueryPluginPlugin = function _Q_jQueryPluginPlugin() {
 	 *  Optional id of the tool, such as "Q_tabs_2"
 	 * @param {String} [prefix]
 	 *  Optional prefix to prepend to the tool's id
+	 * @param {Boolean} [lazyload=false]
+	 *    Pass true to allow the tool to be lazy-loaded by a Q/lazyload tool if it is
+	 *    activated on one of its containers.
 	 */
-	$.fn.tool = function _jQuery_fn_tool(toolName, toolOptions, id, prefix) {
+	$.fn.tool = function _jQuery_fn_tool(toolName, toolOptions, id, prefix, lazyload) {
 		var args = arguments;
 		return this.each(function () {
 			var id2 = (typeof id === 'function') ? id.apply(this, args) : id;
-			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix);
+			Q.Tool.setUpElement(this, toolName, toolOptions, id2, prefix, lazyload);
 		});
 	};
 	/**
@@ -11297,7 +11393,8 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 	|| Q.cookie('Q_cordova');
 
 var detected = Q.Browser.detect();
-var isTouchscreen = ('ontouchstart' in root || !!root.navigator.msMaxTouchPoints);
+var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
+var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
 	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
 /**
@@ -12088,7 +12185,7 @@ Q.Pointer = {
 				if (Q.isArrayLike(targets)) {
 					img1.target = targets[0];
 					for (i=1, l=targets.length; i<l; ++i) {
-						if (!targets[i].exists()) {
+						if (!(targets[i] instanceof Element) || !targets[i].exists()) {
 							continue;
 						}
 						var img2 = img1.cloneNode(false);
@@ -13153,8 +13250,8 @@ Q.extend(Q.prompt.options, Q.text.prompt);
  * @static
  * @param {Object} options These options are passed to each handler.
  *   They should contain at least "trigger", "title", and "content" (or "template")
- * @param {String|Element} options.title The title to display, as HTML
- * @param {String|Element} options.content The content to display, as HTML
+ * @param {String|Element} options.title The title to display, as HTML or a reference to an element
+ * @param {String|Element} options.content The content to display, as HTML or a reference to an element
  * @param {Element} options.trigger The element that the user interacted with to result in this function call
 *  @param {String} [options.className] a CSS class name or space-separated list of classes to append to the container (dialog or column, etc.).
  * @param {Object} [options.template] can be used instead of content option.
@@ -13970,7 +14067,6 @@ Q.onJQuery.add(function ($) {
 		"Q/scrollIndicators": "{{Q}}/js/fn/scrollIndicators.js",
 		"Q/iScroll": "{{Q}}/js/fn/iScroll.js",
 		"Q/scroller": "{{Q}}/js/fn/scroller.js",
-		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
 		"Q/validator": "{{Q}}/js/fn/validator.js"

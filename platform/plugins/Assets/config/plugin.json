@@ -21,11 +21,16 @@
 			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
 		},
 		"routes@start": {
-			"Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },
+			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
+			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
+			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
+			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
+			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"}
 		},
 		"web": {
@@ -56,6 +61,12 @@
 			"NFT/icon": {
 				"sizes": ["300x","500x","700x","x"],
 				"defaultSize": "x",
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
+			},
+			"NFT/series/icon": {
+				"sizes": ["300x","500x","700x","x"],
+				"defaultSize": "300x",
 				"defaultCacheBust": 1000,
 				"maxStretch": 2
 			}
@@ -119,6 +130,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
+					"title": "",
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
@@ -127,6 +139,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
+					"title": "",
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
@@ -150,6 +163,24 @@
 					"title": "NFT Pointer",
 					"icon": "Streams/file"
 				}
+			},
+			"Assets/contest": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "",
+					"icon": "Streams/category"
+				}
+			},
+			"Assets/contest/round": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "",
+					"icon": "Streams/category"
+				}
 			}
 		},
 		"possibleUserStreams": {
@@ -159,8 +190,8 @@
 			"Assets/contests": true
 		},
 		"onInsert": {
-			"community": ["Assets/NFTs"],
-			"person": ["Assets/user/NFTs", "Assets/NFT/contracts", "Assets/NFT/series", "Assets/contests"]
+			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/contests"],
+			"person": ["Assets/user/NFTs", "Assets/NFT/contracts", "Assets/NFT/series"]
 		}
 	},
 	"Assets": {

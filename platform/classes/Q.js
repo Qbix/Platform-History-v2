@@ -694,7 +694,7 @@ Q.getter = function _Q_getter(original, options) {
 
 		// if caching is required check the cache -- maybe the result is there
 		if (gw.cache && !ignoreCache) {
-			if (cached = gw.cache.get(key)) {
+			if (cached = gw.cache.get(arguments2)) {
 				cbpos = cached.cbpos;
 				if (callbacks[cbpos]) {
 					_prepare(cached.subject, cached.params, callbacks[cbpos], ret, true);
@@ -734,7 +734,7 @@ Q.getter = function _Q_getter(original, options) {
 
 					// save the results in the cache
 					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(key, cbpos, this, arguments);
+						gw.cache.set(arguments2, cbpos, this, arguments);
 					}
 
 					// process waiting callbacks
@@ -846,9 +846,8 @@ Q.getter = function _Q_getter(original, options) {
 	}
 
 	gw.forget = function _forget() {
-		var key = Q.Cache.key(arguments);
-		if (key && gw.cache) {
-			return gw.cache.remove(key);
+		if (gw.cache) {
+			return gw.cache.remove(Array.prototype.slice.call(arguments));
 		}
 	};
 	
@@ -1097,6 +1096,7 @@ Q.Cache = function  _Q_Cache(options) {
 	options = options || {};
 	this.name = options.name;
 	this.data = {};
+	this.special = {};
 	this.max = options.max || 100;
 	this.earliest = this.latest = null;
 	this.count = 0;
@@ -1132,6 +1132,9 @@ Q.Cache = function  _Q_Cache(options) {
 		};
 	}
 };
+function Q_Cache_index_name(parameterCount) {
+	return 'index' + parameterCount + 'parameters';
+}
 /**
  * Generates the key under which things will be stored in a cache
  * @static
@@ -1143,22 +1146,23 @@ Q.Cache = function  _Q_Cache(options) {
 Q.Cache.key = function _Cache_key(args, functions) {
 	var i, keys = [];
 	if (Q.isArrayLike(args)) {
-		for (i=0; i<args.length; ++i) {
-			if (typeof args[i] !== 'function') {
-				keys.push(args[i]);
-			} else if (functions && functions.push) {
-				functions.push(args[i]);
-			}
-		}
-	} else {
-		keys = args;
+		return args;
 	}
+
+	for (i=0; i<args.length; ++i) {
+		if (typeof args[i] !== 'function') {
+			keys.push(args[i]);
+		} else if (functions && functions.push) {
+			functions.push(args[i]);
+		}
+	}
+
 	return JSON.stringify(keys);
 };
 /**
  * Accesses the cache and sets an entry in it
  * @method set
- * @param {String} key  the key to save the entry under, or an array of arguments
+ * @param {String|Array} key  the key to save the entry under, or an array of arguments
  * @param {number} cbpos the position of the callback
  * @param {Object} subject The "this" object for the callback
  * @param {Array} params The parameters for the callback
@@ -1167,8 +1171,9 @@ Q.Cache.key = function _Cache_key(args, functions) {
  * @return {Boolean} whether there was an existing entry under that key
  */
 Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
-	if (typeof key !== 'string') {
-		key = Q.Cache.key(key);
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
+		key = Q.Cache.key(parameters);
 	}
 	var existing = this.data[key], previous;
 	if (!options || !options.dontTouch) {
@@ -1198,12 +1203,28 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 	if (this.count > this.max) {
 		this.remove(this.earliest);
 	}
-	return existing ? true : false;
+	if (parameters) {
+		for (var i=1, l=parameters.length; i<=l; ++i) {
+			// add to index for Cache.prototype.each
+			this.special[Q_Cache_index_name(i)] = true;
+
+			if (i===l) {
+				break;
+			}
+
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = this.special[k] || {};
+			obj[key] = 1;
+			this.special[k] = obj;
+		}
+	}
+	return !!existing;
 };
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key
+ * @param {String|Array} key
  * @param {Object} options supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined
@@ -1232,11 +1253,12 @@ Q.Cache.prototype.get = function _Q_Cache_prototype_get(key, options) {
 /**
  * Accesses the cache and removes an entry from it.
  * @method remove
- * @param {String} key the key of the entry to remove
+ * @param {String|Array} key the key of the entry to remove
  * @return {Boolean} whether there was an existing entry under that key
  */
 Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
-	if (typeof key !== 'string') {
+	var parameters = (typeof key !== 'string' ? key : null);
+	if (parameters) {
 		key = Q.Cache.key(key);
 	}
 	if (!(key in this.data)) {
@@ -1251,6 +1273,18 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 		this.earliest = existing.next;
 	}
 	delete this.data[key];
+	if (parameters) {
+		// remove from index for Cache.prototype.each
+		for (var i=1, l=parameters.length; i<l; ++i) {
+			// key in the index
+			var k = 'index:' + Q.Cache.key(parameters.slice(0, i));
+			var obj = this.special[k] || {};
+			if (key in obj) {
+				delete obj[key];
+				this.special[k] = obj;
+			}
+		}
+	}
 	return true;
 };
 /**
@@ -1260,14 +1294,18 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
  */
 Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
 	this.data = {};
+	this.special = {};
 };
 /**
- * Cycles through all the entries in the cache
+ * Searches for entries matching a certain prefix of arguments array
+ * and calls the callback repeatedly with each matching result.
  * @method each
  * @param {Array} args An array consisting of some or all the arguments that form the key
  * @param {Function} callback Is passed two parameters: key, value, with this = the cache
+ * @param {Object} [options]
+ * @param {Boolean} [options.throwIfNoIndex] pass true to trigger an exception if an index doesn't exist
  */
-Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback) {
+Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, options) {
 	var cache = this;
 	var prefix = null;
 	if (typeof args === 'function') {
@@ -1279,6 +1317,32 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback) {
 	}
 	if (!callback) {
 		return;
+	}
+	options = options || {};
+	var localStorageIndexInfoKey = Q_Cache_index_name(args.length);
+	if (this.special[localStorageIndexInfoKey]) {
+		var rawKey = Q.Cache.key(args);
+		var key = 'index:' + rawKey; // key in the index
+		var localStorageKeys = this.special[key] || {};
+		for (var k in localStorageKeys) {
+			var result = this.get(k);
+			if (result === undefined) {
+				continue;
+			}
+			if (false === callback.call(this, k, this.get(k))) {
+				continue;
+			}
+		}
+		// also the key itself
+		var item = this.special[rawKey];
+		if (item !== undefined) {
+			callback.call(this, rawKey, item);
+		}
+		return;
+	}
+	// key doesn't exist
+	if (!options.throwIfNoIndex) {
+		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	return Q.each(this.data, function (k, v) {
 		if (prefix && !k.startsWith(prefix)) {

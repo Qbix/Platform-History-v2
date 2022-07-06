@@ -6,7 +6,7 @@ function Assets_0_3()
 	$streamName = "Assets/plans";
 
 	// if stream already exist - exit
-	if (Streams::fetchOne($app, $app, $streamName)) {
+	if (Streams_Stream::fetch($app, $app, $streamName)) {
 		return;
 	}
 
