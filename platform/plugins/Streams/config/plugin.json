@@ -580,18 +580,19 @@
 		"onInsert": { /* streams to insert when a row is inserted */
 			"user": [
 				"Streams/contacts",
-				"Streams/labels"
+				"Streams/labels",
+				"Streams/user/username",
+				"Streams/participating"
 			],
 			"person": [
-				"Streams/participating",
 				"Streams/invited",
 				"Streams/mentioned",
-				"Streams/user/username",
 				"Streams/user/icon",
 				"Streams/user/firstName",
 				"Streams/user/lastName",
 				"Streams/user/emailAddress",
 				"Streams/user/mobileNumber",
+				"Streams/user/birthday",
 				"Streams/user/interests",
 				"Streams/image/album"
 			],
