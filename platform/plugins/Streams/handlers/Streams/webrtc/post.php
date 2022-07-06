@@ -32,6 +32,7 @@ function Streams_webrtc_post($params = array())
     $turnServers = Q_Config::get('Streams', 'webrtc', 'turnServers', []);
     $useTwilioTurn = Q_Config::get('Streams', 'webrtc', 'useTwilioTurnServers', null);
     $liveStreamingConfig = Q_Config::get('Streams', 'webrtc', 'liveStreaming', []);
+    $globalLimitsConfig = Q_Config::get('Streams', 'webrtc', 'limits', []);
     $debug = Q_Config::get('Streams', 'webrtc', 'debug', false);
 
 	$params = array_merge($_REQUEST, $params);
@@ -101,7 +102,8 @@ function Streams_webrtc_post($params = array())
         'turnCredentials' => $turnServers,
         'debug' => $debug,
         'options' => array(
-            'liveStreaming' => $liveStreamingConfig
+            'liveStreaming' => $liveStreamingConfig,
+            'limits' => $globalLimitsConfig
         )
     );
 
@@ -120,6 +122,23 @@ function Streams_webrtc_post($params = array())
 
     $response['stream'] = $webrtcStream;
     $response['roomId'] = $webrtcStream->name;
+
+    $specificLimitsConfig = $webrtcStream->getAttribute('limits', null);
+
+    if(!is_null($specificLimitsConfig)) {
+        if(isset($specificLimitsConfig['video'])) {
+            $response['options']['limits']['video'] = $specificLimitsConfig['video'];
+        }
+        if(isset($specificLimitsConfig['audio'])) {
+            $response['options']['limits']['audio'] = $specificLimitsConfig['audio'];
+        }
+        if(isset($specificLimitsConfig['minimalTimeOfUsingSlot'])) {
+            $response['options']['limits']['minimalTimeOfUsingSlot'] = $specificLimitsConfig['minimalTimeOfUsingSlot'];
+        }
+        if(isset($specificLimitsConfig['timeBeforeForceUserToDisconnect'])) {
+            $response['options']['limits']['timeBeforeForceUserToDisconnect'] = $specificLimitsConfig['timeBeforeForceUserToDisconnect'];
+        }
+    }
 
     // check maxCalls
 	if (!empty($relate["publisherId"]) && !empty($relate["streamName"]) && !empty($relate["relationType"])) {
