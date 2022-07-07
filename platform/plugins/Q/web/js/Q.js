@@ -6411,7 +6411,7 @@ Q.ready = function _Q_ready() {
  * @param {Object} context The "this" to pass to the callback
  * @param {Array} args The arguments to pass to the callback
  */
-Q.loadNonce = Q.getter(function _Q_loadNonce(callback, context, args) {
+Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 	if (Q.nonce) {
 		Q.handle(callback, context, args);
 		return;
@@ -6435,6 +6435,10 @@ Q.loadNonce = Q.getter(function _Q_loadNonce(callback, context, args) {
 			}
 		});
 	}
+	return _loadNonceReq(callback, context, args);
+};
+
+var _loadNonceReq = Q.getter(function (callback, context, args) {
 	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
@@ -6466,7 +6470,7 @@ Q.loadNonce = Q.getter(function _Q_loadNonce(callback, context, args) {
 	});
 }, {
 	cache: Q.Cache.document('Q.loadNonce', 1)
-});
+})
 
 /**
  * This function is called by Q to make sure that we've loaded the Handlebars library
