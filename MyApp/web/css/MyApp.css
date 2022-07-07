@@ -18,6 +18,10 @@ h2 { margin: 0; }
 *, *::before, *::after { box-sizing: inherit; }
 table { table-layout: fixed; }
 
+:root {
+	--dashboard-main-color: rgba(255, 255, 255, 1.0);
+}
+
 /* The various slot containers */
 #notices_slot {
 	position: fixed;
