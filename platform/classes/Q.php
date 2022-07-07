@@ -1321,23 +1321,22 @@ class Q
 	 *  the message to append. Usually a string.
 	 * @param {string} $key=null
 	 *  The name of log file. Defaults to "$app_name.log"
-	 * @param {bool} $timestamp=true
-	 *  whether to prepend the current timestamp
 	 * @param {array} $options
 	 * @param {integer} [$options.maxLength=ini_get('log_errors_max_len')]
 	 * @param {integer} [$options.maxDepth=3]
+	 * @param {bool} [$options.timestamp=true] whether to prepend the current timestamp
 	 * @throws {Q_Exception_MissingFile}
 	 *	If unable to create directory or file for the log
 	 */
 	static function log (
 		$message,
 		$key = null,
-		$timestamp = true,
 		$options = array())
 	{
-		if (is_array($timestamp)) {
-			$options = $timestamp;
-			$timestamp = true;
+		if (is_bool($options)) {
+			$timestamp = $options;
+		} else {
+			$timestamp = Q::ifset($options, 'timestamp', true);
 		}
 		if (is_array($key)) {
 			$options = $key;
