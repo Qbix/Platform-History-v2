@@ -857,7 +857,7 @@ abstract class Users extends Base_Users
 		}
 		Q_Session::start();
 
-		$nonce = Q_Session::$nonceWasSet or Q_Valid::nonce($throwIfNotLoggedIn, false);
+		$nonce = Q_Session::$nonceWasSet || Q_Valid::nonce($throwIfNotLoggedIn, false);
 
 		if (!$nonce or !isset($_SESSION['Users']['loggedInUser']['id'])) {
 			if ($throwIfNotLoggedIn) {
