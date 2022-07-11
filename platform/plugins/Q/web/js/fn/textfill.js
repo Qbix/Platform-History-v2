@@ -33,7 +33,9 @@ Q.Tool.jQuery('Q/textfill',
 
 	},
 
-	{},
+	{
+		refreshOnLayout: true
+	},
 
 	{
 		refresh: function (options) {
