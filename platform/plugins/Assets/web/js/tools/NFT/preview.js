@@ -148,7 +148,7 @@
             $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
 
             if (metadata) {
-                return tool.renderFromMetadata(metadata);
+                return tool.renderFromMetadata({metadata: metadata});
             } else if (tokenURI) {
                 Q.req("Assets/NFT", "getRemoteJSON", function (err, response) {
                     if (err) {
@@ -156,7 +156,7 @@
                     }
 
                     var metadata = response.slots.getRemoteJSON;
-                    tool.renderFromMetadata(metadata);
+                    tool.renderFromMetadata({metadata: metadata});
                 }, {
                     fields: {
                         tokenURI: tokenURI
@@ -166,7 +166,7 @@
                 return;
             }
 
-            var pipeList = ["metadata", "author", "owner", "commissionInfo", "saleInfo", "authorUserId"];
+            var pipeList = ["metadata", "author", "owner", "commissionInfo", "saleInfo", "authorUserId", "ownerUserId"];
             var pipe = new Q.pipe(pipeList, function (params, subjects) {
                 // collect errors
                 var errors = [];
@@ -178,15 +178,15 @@
                     return console.warn(errors);
                 }
 
-                var metadata = params.metadata[1];
-                var authorAddress = params.author[1];
-                var ownerAddress = params.owner[1];
-                var commissionInfo = params.commissionInfo[1];
-                var saleInfo = params.saleInfo[1];
-                var authorUserId = params.authorUserId[1];
-                authorUserId = authorUserId || '';
-
-                tool.renderFromMetadata(metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId);
+                tool.renderFromMetadata({
+                    metadata: params.metadata[1],
+                    authorAddress: params.author[1],
+                    ownerAddress: params.owner[1],
+                    commissionInfo: params.commissionInfo[1],
+                    saleInfo: params.saleInfo[1],
+                    authorUserId: params.authorUserId[1] || '',
+                    ownerUserId: params.ownerUserId[1] || ''
+                });
                 $toolElement.removeClass("Q_working");
 
                 //Users.Web3.onAccountsChanged.set(tool.refresh.bind(tool), tool);
@@ -207,6 +207,7 @@
                     var isSale = Q.getObject(["saleInfo", 2], this);
 
                     pipe.fill("authorUserId")(null, this.authorUserId || "");
+                    pipe.fill("ownerUserId")(null, this.ownerUserId || "");
                     pipe.fill("metadata")(null, this.metadata || "");
                     pipe.fill("author")(null, this.author || "");
                     pipe.fill("owner")(null, this.owner || "");
@@ -250,7 +251,22 @@
                         fields: { wallet: author }
                     });
                 }]);
-                Q.handle(Web3.getOwner, tool, [state.tokenId, state.chain, pipe.fill("owner")]);
+                Q.handle(Web3.getOwner, tool, [state.tokenId, state.chain, function (err, owner) {
+                    if (err) {
+                        return console.warn(err);
+                    }
+
+                    pipe.fill("owner")(arguments[0], arguments[1], arguments[2]);
+                    Q.req("Assets/NFT", "getUserIdByWallet", function (err, response) {
+                        if (err) {
+                            return console.warn(err);
+                        }
+
+                        pipe.fill("ownerUserId")(null, response.slots.getUserIdByWallet);
+                    }, {
+                        fields: { wallet: owner }
+                    });
+                }]);
                 Q.handle(Web3.commissionInfo, tool, [state.tokenId, state.chain, pipe.fill("commissionInfo")]);
                 Q.handle(Web3.saleInfo, tool, [state.tokenId, state.chain, pipe.fill("saleInfo")]);
             }
@@ -335,7 +351,7 @@
 
                 $toolElement.activate();
 
-                $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
+                $(".Assets_NFT_author", tool.element).tool("Users/avatar", {
                     userId: publisherId,
                     icon: 50,
                     contents: true,
@@ -411,17 +427,26 @@
         /**
          * Render preview from metadata object
          * @method renderFromMetadata
-         * @param {object} metadata
-         * @param {String} authorAddress
-         * @param {String} ownerAddress
-         * @param {object} commissionInfo
-         * @param {object} saleInfo
-         * @param {string} authorUserId - id of NFT author user
+         * @param {Object} params
+         * @param {object} params.metadata
+         * @param {String} [params.authorAddress]
+         * @param {String} [params.ownerAddress]
+         * @param {object} [params.commissionInfo]
+         * @param {object} [params.saleInfo]
+         * @param {string} [params.authorUserId] - id of NFT author user
+         * @param {string} [params.ownerUserId] - id of NFT owner user
          */
-        renderFromMetadata: function (metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId) {
+        renderFromMetadata: function (params) {
             var tool = this;
             var state = tool.state;
             var $toolElement = $(this.element);
+            var metadata = Q.getObject("metadata", params);
+            var authorAddress = Q.getObject("authorAddress", params);
+            var ownerAddress = Q.getObject("ownerAddress", params);
+            var commissionInfo = Q.getObject("commissionInfo", params);
+            var saleInfo = Q.getObject("saleInfo", params);
+            var authorUserId = Q.getObject("authorUserId", params);
+            var ownerUserId = Q.getObject("ownerUserId", params);
 
             tool.minted = true;
             $toolElement.attr("data-minted", tool.minted);
@@ -437,8 +462,9 @@
 
                 $toolElement.activate();
 
-                if (authorUserId) {
-                    $(".Assets_NFT_avatar", tool.element).tool("Users/avatar", {
+                var $Assets_NFT_author = $(".Assets_NFT_author", tool.element);
+                if ($Assets_NFT_author.length && authorUserId) {
+                    $Assets_NFT_author.tool("Users/avatar", {
                         userId: authorUserId,
                         icon: 50,
                         contents: true,
@@ -447,6 +473,34 @@
                         $(this.element).on(Q.Pointer.fastclick, function (e) {
                             Q.handle(state.onAvatar, this, [e]);
                         });
+                    });
+                } else if ($Assets_NFT_author.length) {
+                    Q.Template.render("Assets/NFT/avatar", {
+                        size: 50,
+                        address: Web3.minimizeAddress(authorAddress, 20, 3)
+                    }, (err, html) => {
+                        $Assets_NFT_author.html(html);
+                    });
+                }
+
+                var $Assets_NFT_owner = $(".Assets_NFT_owner", tool.element);
+                if ($Assets_NFT_owner.length && ownerUserId) {
+                    $Assets_NFT_owner.tool("Users/avatar", {
+                        userId: ownerUserId,
+                        icon: 80,
+                        contents: true,
+                        editable: false
+                    }).activate(function () {
+                        $(this.element).on(Q.Pointer.fastclick, function (e) {
+                            Q.handle(state.onAvatar, this, [e]);
+                        });
+                    });
+                } else if ($Assets_NFT_owner.length) {
+                    Q.Template.render("Assets/NFT/avatar", {
+                        size: 80,
+                        address: Web3.minimizeAddress(ownerAddress, 20, 3)
+                    }, (err, html) => {
+                        $Assets_NFT_owner.html(html);
                     });
                 }
 
@@ -1189,7 +1243,7 @@
         `<div class="title-block">
         {{#if show.avatar}}
             <div class="title_block_header">
-                <div class="Assets_NFT_avatar"></div>
+                <div class="Assets_NFT_author"></div>
             </div>
         {{/if}}
         <div class="video-container"><img class="NFT_preview_icon"></div>
@@ -1214,6 +1268,26 @@
             </li>
         </ul>
     </div>`,
+        {text: ['Assets/content']}
+    );
+
+    Q.Template.set('Assets/NFT/role',
+        `<div class="Assets_NFT_role">
+        <div class="video-container"><img class="NFT_preview_icon"></div>
+        <div class="Assets_NFT_owner"></div>
+        {{#if show.title}}
+            <div class="Assets_NFT_title">{{title}}</div>
+        {{/if}}
+        {{#if show.participants}}
+            <div class="Assets_NFT_participants"></div>
+        {{/if}}
+    </div>`,
+        {text: ['Assets/content']}
+    );
+
+    Q.Template.set('Assets/NFT/avatar',
+`<img src="{{baseUrl}}/Q/plugins/Users/img/icons/default/{{size}}.png" class="Users_avatar_icon Users_avatar_icon_{{size}}">
+        <span class="Users_avatar_name">{{address}}</span>`,
         {text: ['Assets/content']}
     );
 })(window, Q, jQuery);

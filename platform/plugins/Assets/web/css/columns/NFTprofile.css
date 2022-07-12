@@ -1,3 +1,7 @@
+:root {
+    --banner-width: 1463px;
+}
+
 .Assets_NFTprofile_column .banner-container {
     position: relative;
     max-height: 305px;
@@ -7,7 +11,7 @@
     position: relative;
     background-size: cover;
     background-position: center center;
-    max-width: 1463px;
+    max-width: var(--banner-width);
     min-height: 305px;
     border-radius: 80px;
     border: solid 1px #3a665c;
@@ -50,10 +54,10 @@
 }
 .Assets_NFTprofile_column ul.header-list-social {
     display: flex;
-    max-width: 100%;
+    max-width: var(--banner-width);
     list-style: none;
     padding: 0;
-    margin: 0 2%;
+    margin: 0 auto;
     flex-wrap: wrap;
     align-items: center;
     min-height: 40px;

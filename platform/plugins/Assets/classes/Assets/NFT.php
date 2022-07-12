@@ -102,6 +102,11 @@ class Assets_NFT
 		$stream->title = $title;
 		$stream->content = Q::ifset($fields, "content", null);
 
+		$icon = Q::ifset($fields, "icon", null);
+		if ($icon) {
+			$stream->icon = $icon;
+		}
+
 		// update Assets/NFT/attributes attribute
 		$newNFTattributes = Q::ifset($fields, "attributes", "Assets/NFT/attributes", array());
 		$oldNFTattributes = (array)$stream->getAttribute("Assets/NFT/attributes");
@@ -149,10 +154,10 @@ class Assets_NFT
 		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
-		//if ($onMarketPlace == "true") {
+		//if (filter_var($onMarketPlace, FILTER_VALIDATE_BOOLEAN)) {
 		// relate to main category
 		Streams::relate(null, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
-		//} elseif ($onMarketPlace == "false") {
+		//} else {
 		// unrelate from main category
 		//	Streams::unrelate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name);
 		//}

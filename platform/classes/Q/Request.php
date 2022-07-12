@@ -441,7 +441,7 @@ class Q_Request
 			return $result;
 		}
 		$loadExtras = Q_Request::special('loadExtras', false);
-		if ($loadExtras === '1' or $loadExtras === 'true') {
+		if (filter_var($loadExtras, FILTER_VALIDATE_BOOLEAN)) {
 			$loadExtras = 'all';
 		}
 		if (!$loadExtras) {
