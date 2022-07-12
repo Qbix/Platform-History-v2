@@ -14069,8 +14069,8 @@ Q.onJQuery.add(function ($) {
 		"Q/scroller": "{{Q}}/js/fn/scroller.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js"
-		//"Q/audio": "{{Q}}/js/fn/audio.js"
+		"Q/validator": "{{Q}}/js/fn/validator.js",
+		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js"
 	});
 	
 	Q.onLoad.add(function () {
