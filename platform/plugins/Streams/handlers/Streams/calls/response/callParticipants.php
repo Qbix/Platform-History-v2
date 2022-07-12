@@ -10,7 +10,7 @@ function Streams_calls_response_callParticipants ($params) {
     $webrtc = Streams_Stream::fetch($webrtcStreamPublisher, $webrtcStreamPublisher, $webrtcStreamName);
 
     if (!$isHost || !$webrtc->testAdminLevel("invite")) {
-        throw new Users_Exception_NotAuthorized();
+        return [];
     }
 
     // get participants

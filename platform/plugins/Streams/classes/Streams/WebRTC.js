@@ -32,181 +32,6 @@ function WebRTC() {
 
 }
 
-WebRTC.rooms = [];
-
-function eventSystem(){
-
-    var events = {};
-
-    var CustomEvent = function (eventName) {
-
-        this.eventName = eventName;
-        this.callbacks = [];
-
-        this.registerCallback = function(callback) {
-            this.callbacks.push(callback);
-        }
-
-        this.unregisterCallback = function(callback) {
-            const index = this.callbacks.indexOf(callback);
-            if (index > -1) {
-                this.callbacks.splice(index, 1);
-            }
-        }
-
-        this.fire = function(data) {
-            const callbacks = this.callbacks.slice(0);
-            callbacks.forEach((callback) => {
-                callback(data);
-            });
-        }
-    }
-
-    var dispatch = function(eventName, data) {
-        if(!doesHandlerExist(eventName)) {
-            return;
-        }
-
-        const event = events[eventName];
-        if (event) {
-            event.fire(data);
-        }
-    }
-
-    var on = function(eventName, callback) {
-        let event = events[eventName];
-        if (!event) {
-            event = new CustomEvent(eventName);
-            events[eventName] = event;
-        }
-        event.registerCallback(callback);
-    }
-
-    var off = function(eventName, callback) {
-        const event = events[eventName];
-        if (event && event.callbacks.indexOf(callback) > -1) {
-            event.unregisterCallback(callback);
-            if (event.callbacks.length === 0) {
-                delete events[eventName];
-            }
-        }
-    }
-
-    var doesHandlerExist = function (eventName) {
-        if(events[eventName] != null && events[eventName].callbacks.length != 0) return true;
-        return false;
-    }
-
-    return {
-        dispatch:dispatch,
-        on:on,
-        off:off,
-    }
-}
-
-WebRTC.Room = function (id) {
-    this.id = id;
-    this.isActive = true;
-    this.roomPublisherId = id;
-    this.participants = [];
-    this.addParticipant = function (participant) {
-        let participantExists;
-        for (let p in this.participants) {
-            if(this.participants[p] == participant) {
-                participantExists = true;
-                break;
-            }
-        }
-        if(participantExists) return;
-
-        this.participants.push(participant);
-        participant.online = true;
-        participant.room = this;
-    }
-    this.getParticipants = function (all) {
-        if(all) {
-            return this.participants;
-        } else {
-            return this.participants.filter(function (participant) {
-                return (participant.online !== false);
-            });
-        }
-    }
-    this.close = function () {
-        console.log('close room');
-        var room = this;
-        this.isActive = false;
-        this.removeTimer = setTimeout(function () {
-            room.remove();
-        }, 1000*30)
-    }
-    this.remove = function () {
-        console.log('close room');
-
-        var room = this;
-        for (var i = WebRTC.rooms.length - 1; i >= 0; i--) {
-            if (WebRTC.rooms[i] == room) {
-                WebRTC.rooms.splice(i, 1);
-                break;
-            }
-        }
-        room = null;
-    }
-    this.active = function (value) {
-        if(value === true) {
-            if(this.removeTimer != null) {
-                clearTimeout(this.removeTimer);
-                this.removeTimer = null;
-            }
-        }
-        this.isActive = value;
-    }
-    this.removeTimer = null;
-    this.event = eventSystem();
-}
-
-WebRTC.Participant = function (id) {
-    this.id = id;
-    this.userPlatformId = null;
-    this.online = false;
-    this.name = 'Connecting...';
-    this.room = null;
-    this.RTCPeerConnection = null;
-    this.tracks = [];
-    this.liveStreaming = {connectionManager: null, room: null, canvasComposer: null};
-    this.recording = {path: null, startTime: null, stopTime: null, parallelRecordings:[], parallelRecordingsFile:null};
-    this.videoTracks = function (activeTracksOnly) {
-        if(activeTracksOnly) {
-            return this.tracks.filter(function (trackObj) {
-                return trackObj.kind == 'video' && !(trackObj.mediaStreamTrack.muted == true || trackObj.mediaStreamTrack.enabled == false || trackObj.mediaStreamTrack.readyState == 'ended');
-            });
-        }
-
-        return this.tracks.filter(function (trackObj) {
-            return trackObj.kind == 'video';
-        });
-
-    };
-    this.audioTracks = function () {
-        return this.tracks.filter(function (trackObj) {
-            return trackObj.kind == 'audio';
-        });
-    };
-    this.removeFromRoom = function () {
-        if(this.room == null) return;
-        for (var i = this.room.participants.length - 1; i >= 0; i--) {
-            if (this.room.participants[i] == this) {
-                this.room.participants.splice(i, 1);
-                break;
-            }
-        }
-    }
-}
-
-WebRTC.Track = function (kind) {
-    this.kind = kind;
-    this.mediaStreamTrack = null;
-}
 /**
  * Start internal listener for Streams plugin. Accepts messages such as<br/>
  * "Streams/Stream/join",
@@ -244,6 +69,8 @@ WebRTC.listen = function () {
     var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
     var io = socket.io;
     var webrtcNamespace = io.of('/webrtc');
+
+    Q.plugins.Streams.WebRTC.rooms = [];
 
     webrtcNamespace.on('connection', function(socket) {
         if(_debug) console.log('made sockets connection', socket.id);
@@ -677,7 +504,7 @@ WebRTC.listen = function () {
                 io.of('/webrtc').in(socket.webrtcRoom.id).clients(function (error, clients) {
                     if (clients.length == 0) {
                         processRecordings();
-                        socket.webrtcRoom.close();
+                        //socket.webrtcRoom.close();
                     }
                 });
             }
