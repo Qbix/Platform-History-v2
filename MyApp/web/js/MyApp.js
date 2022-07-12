@@ -93,8 +93,7 @@ var MyApp = (function (Q, $) {
 		'Q/contextual', 
 		'Q/scrollIndicators', 
 		'Q/iScroll', 
-		'Q/scroller', 
-		'Q/touchscroll'
+		'Q/scroller'
 	]);
 	
 	Q.Users.cache.where = 'local';
