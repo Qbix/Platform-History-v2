@@ -760,8 +760,6 @@
 			listingWrapper.plugin('Q/scroller', 'remove');
 			listingWrapper.plugin('Q/iScroll', 'remove');
 			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
-			listingWrapper.plugin('Q/touchscroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
 			var fadeTime = contextual.data("fadeTime") || Q.Contextual.fadeTime;

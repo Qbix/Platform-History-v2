@@ -23,16 +23,20 @@ function Assets_NFT_response_getInfo ($params) {
 	// execute authorOf if exists
 	if (Users_Web3::existsInABI("authorOf", $ABI, "function", false)) {
 		$author = Users_Web3::execute($contractAddress, "authorOf", $tokenId, $chainId, $caching, $longDuration);
-		$user = Users_ExternalTo::select()->where(array(
+		$userAuthor = Users_ExternalTo::select()->where(array(
 			"xid" => $author
 		))->fetchDbRow();
-		$authorUserId = Q::ifset($user, "userId", null);
+		$authorUserId = Q::ifset($userAuthor, "userId", null);
 	}
 
 	// execute ownerOf if exists
 	if (Users_Web3::existsInABI("ownerOf", $ABI, "function", false)) {
 		$cachedOwnerOf = Users_Web3::getCache($chainId, $contractAddress, "ownerOf", $tokenId, $longDuration);
 		$owner = Users_Web3::execute($contractAddress, "ownerOf", $tokenId, $chainId, $caching, $cacheDuration);
+		$userOwner = Users_ExternalTo::select()->where(array(
+			"xid" => $owner
+		))->fetchDbRow();
+		$ownerUserId = Q::ifset($userOwner, "userId", null);
 		// if owner changed, remove the cache rows related to ownership to update them on new request
 		if ($cachedOwnerOf->wasRetrieved() && $owner != Q::json_decode($cachedOwnerOf->result)) {
 			$cachedOwnerOf = Q::json_decode($cachedOwnerOf->result);
@@ -57,5 +61,5 @@ function Assets_NFT_response_getInfo ($params) {
 
 	$metadata = Q::event('Assets/NFT/response/getRemoteJSON', compact("tokenId","chainId", "contractAddress", "ABI"));
 
-	return compact("author", "owner", "saleInfo", "commissionInfo", "metadata", "authorUserId", "tokenURI");
+	return compact("author", "owner", "saleInfo", "commissionInfo", "metadata", "authorUserId", "ownerUserId", "tokenURI");
 }

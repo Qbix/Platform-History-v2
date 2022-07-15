@@ -11,13 +11,17 @@
     display: block;
     margin: 100px auto;
 }
-.Assets_NFT_preview_tool .title-block {
+.Assets_NFT_preview_tool .title-block,
+.Assets_NFT_preview_tool .Assets_NFT_role {
     position: relative;
     outline: solid 1px #535353;
-    border-radius: 30px;
+    border-radius: 10px;
     padding: 5px;
     min-height: 480px;
     cursor: pointer;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role {
+    min-height: unset;
 }
 .Assets_NFT_preview_tool .Assets_NFT_overflowGlyph {
     position: absolute;
@@ -56,6 +60,19 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
+}
+.Assets_NFT_preview_tool .video-container .Q_video_tool {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .video-container {
+    height: 100%;
+    padding-bottom: 100%;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .video-container > * {
+    position: absolute;
+    left: 0;
+    top: 0;
 }
 .Assets_NFT_preview_tool .NFT_preview_owner {
     display: none;
@@ -743,17 +760,38 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
     border-bottom: solid 1px #414141;
     height: 60px;
     overflow: hidden;
-    margin-bottom: 5px !important;
     font-size: 24px;
     font-weight: bold;
 }
-
+.Assets_NFT_preview_tool .Assets_NFT_role .Assets_NFT_title {
+    border: none;
+}
+.Assets_NFT_preview_tool .Assets_NFT_owner {
+    height: 40px;
+    position: relative;
+    top: -50px;
+    overflow: unset;
+}
+.Assets_NFT_preview_tool .Assets_NFT_owner .Users_avatar_icon {
+    border-radius: 50%;
+    background-color: #fff;
+    display: block;
+    margin: 0 auto;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .Users_avatar_icon {
+    box-shadow: #222 0 3px 5px;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .Users_avatar_name {
+    font-weight: bold;
+}
+.Assets_NFT_preview_tool .Assets_NFT_role .Assets_NFT_title {
+    font-weight: normal;
+    font-size: 1em;
+}
 @media (max-width:1200px) {
-
     .Assets_NFT_preview_tool .video-container img {
         height: auto;
     }
-
 }
 
 @media (max-width: 499px) {
@@ -762,7 +800,6 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
         height: 50px;
         background-size: 100%;
     }
-
     .Assets_NFT_preview_composer .switch {
         width: 65px;
     }
@@ -775,7 +812,6 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
     .Assets_price div{
         width: 50%;
     }
-
 }
 @media screen and (max-width: 721px) and (min-width: 500px) {
     .Assets_NFT_preview_tool p.categories span {

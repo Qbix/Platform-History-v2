@@ -1172,7 +1172,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 
 	scrollToTop: function() {
-		$scm = this.$('.Streams_chat_messages');
+		var $scm = this.$('.Streams_chat_messages');
 		$scm.animate({ scrollTop: 0 }, this.state.animations.duration);
 	},
 

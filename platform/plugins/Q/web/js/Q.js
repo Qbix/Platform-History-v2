@@ -6435,6 +6435,10 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 			}
 		});
 	}
+	return _loadNonceReq(callback, context, args);
+};
+
+var _loadNonceReq = Q.getter(function (callback, context, args) {
 	Q.req('Q/nonce', 'data', function _Q_loadNonce_nonceLoaded(err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
@@ -6464,7 +6468,9 @@ Q.loadNonce = function _Q_loadNonce(callback, context, args) {
 			"Q.startNewSession": true
 		}
 	});
-};
+}, {
+	cache: Q.Cache.document('Q.loadNonce', 1)
+})
 
 /**
  * This function is called by Q to make sure that we've loaded the Handlebars library
@@ -14069,8 +14075,8 @@ Q.onJQuery.add(function ($) {
 		"Q/scroller": "{{Q}}/js/fn/scroller.js",
 		"Q/scrollbarsAutoHide": "{{Q}}/js/fn/scrollbarsAutoHide.js",
 		"Q/sortable": "{{Q}}/js/fn/sortable.js",
-		"Q/validator": "{{Q}}/js/fn/validator.js"
-		//"Q/audio": "{{Q}}/js/fn/audio.js"
+		"Q/validator": "{{Q}}/js/fn/validator.js",
+		"Q/touchscroll": "{{Q}}/js/fn/touchscroll.js"
 	});
 	
 	Q.onLoad.add(function () {
