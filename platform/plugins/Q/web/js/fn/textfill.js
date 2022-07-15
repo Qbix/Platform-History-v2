@@ -49,21 +49,21 @@ Q.Tool.jQuery('Q/textfill',
 				}
 			});
 			if (!ourElement) {
-				var e = new Q.Error("Q/textfill missing a visible element inside the container");
-				console.warn(e);
+				//var e = new Q.Error("Q/textfill missing a visible element inside the container");
+				//console.warn(e);
 				return false;
 			}
 			var $this = $(this);
 			var fontSize = o.maxFontPixels || ($this.height() + 10);
 			var lastGoodFontSize = 0, lastBadFontSize = fontSize, jump;
-			var maxHeight = o.fillPadding ? $this.innerHeight() : $this.height();
-			var maxWidth = o.fillPadding ? $this.innerWidth() : $this.width();
+			var maxHeight = Math.round(o.fillPadding ? $this.innerHeight() : $this.height());
+			var maxWidth = Math.round(o.fillPadding ? $this.innerWidth() : $this.width());
 			var textHeight, textWidth, lines, tooBig;
 			ourElement.addClass('Q_textfill_resizing');
 			for (var i=0; i<100; ++i) {
 				ourElement.css('font-size', fontSize + 'px');
-				textHeight = ourElement.outerHeight(true);
-				textWidth = ourElement.outerWidth(true);
+				textHeight = Math.round(ourElement.outerHeight(true));
+				textWidth = Math.round(ourElement.outerWidth(true));
 				if (o.maxLines) {
 					lines = textHeight / Math.floor(fontSize * 1.5);
 				}
