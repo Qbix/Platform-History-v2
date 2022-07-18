@@ -3677,6 +3677,9 @@ Q.getter = function _Q_getter(original, options) {
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
+			if (Q.firstErrorMessage(params[0], params[1])) {
+				ret.dontCache = true;
+			}
 			if (gw.prepare) {
 				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
