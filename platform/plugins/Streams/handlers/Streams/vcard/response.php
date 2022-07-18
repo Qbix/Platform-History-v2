@@ -25,7 +25,8 @@ function Streams_vcard_response ($params) {
     }
 
     $userUrl = Q_Uri::interpolateUrl("{{baseUrl}}/profile/$user->id");
-    $vcr .= "URL:$userUrl\n";
+    $vcr .= "item1.URL:$userUrl\n";
+    $vcr .= "item1.X-ABLABEL: My Profile\n";
 
     $photo = Q_Uri::interpolateUrl($user->icon.'/400.png');
     $type = pathinfo($photo, PATHINFO_EXTENSION);
@@ -130,7 +131,8 @@ function Streams_vcard_response ($params) {
         if ($linkedinStream->testReadLevel('content')) {
             $linkedinName = $linkedinStream->fields['content'];
             if(!empty($linkedinName)){
-                $vcr .= "x-socialProfile;type=linkedin:https://www.linkedin.com/in/$linkedinName\n";
+                $vcr .= "item2.URL:https://www.linkedin.com/in/$linkedinName\n";
+                $vcr .= "item2.X-ABLABEL: My Linkedin\n";
             }
         }
     }
@@ -141,7 +143,8 @@ function Streams_vcard_response ($params) {
         if ($facebookStream->testReadLevel('content')) {
             $fbProfile = $facebookStream->fields['content'];
             if(!empty($fbProfile)){
-                $vcr .= "x-socialProfile;type=facebook:https://www.facebook.com/profile.php?id=$fbProfile\n";
+                $vcr .= "item3.URL:https://www.facebook.com/profile.php?id=$fbProfile\n";
+                $vcr .= "item3.X-ABLABEL: My Facebook\n";
             }
         }
     }
@@ -152,7 +155,8 @@ function Streams_vcard_response ($params) {
         if ($twitterStream->testReadLevel('content')) {
             $twitterName = $twitterStream->fields['content'];
             if(!empty($twitterName)){
-                $vcr .= "x-socialProfile;type=twitter:https://twitter.com/$twitterName\n";
+                $vcr .= "item4.URL:https://twitter.com/$twitterName\n";
+                $vcr .= "item4.X-ABLABEL: My Twitter\n";
             }
         }
     }
@@ -163,7 +167,8 @@ function Streams_vcard_response ($params) {
         if ($instagramStream->testReadLevel('content')) {
             $instagramName = $instagramStream->fields['content'];
             if(!empty($instagramName)){
-                $vcr .= "x-socialProfile;type=instagram:https://instagram.com/$instagramName\n";
+                $vcr .= "item5.URL:https://instagram.com/$instagramName\n";
+                $vcr .= "item5.X-ABLABEL: My Instagram\n";
             }
         }
     }
