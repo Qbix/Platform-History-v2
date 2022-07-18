@@ -57,7 +57,8 @@ function Streams_vcard_response ($params) {
 
         $greetingStream->calculateAccess($user->id);
         if ($greetingStream->testReadLevel('content')) {
-            $note = $greetingStream->fields['content'];
+            $note = preg_replace("/\n/m", "\\n", $greetingStream->fields['content']);
+
             if(!empty($note)){
                 $vcr .= "NOTE:$note\n";
             }
