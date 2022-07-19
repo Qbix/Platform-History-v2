@@ -26,7 +26,7 @@ function Streams_vcard_response ($params) {
 
     $userUrl = Q_Uri::interpolateUrl("{{baseUrl}}/profile/$user->id");
     $vcr .= "item1.URL:$userUrl\n";
-    $vcr .= "item1.X-ABLABEL: My Profile\n";
+    $vcr .= "item1.X-ABLABEL: My $communityName Profile\n";
 
     $photo = Q_Uri::interpolateUrl($user->icon.'/400.png');
     $type = pathinfo($photo, PATHINFO_EXTENSION);
@@ -169,6 +169,17 @@ function Streams_vcard_response ($params) {
             if(!empty($instagramName)){
                 $vcr .= "item5.URL:https://instagram.com/$instagramName\n";
                 $vcr .= "item5.X-ABLABEL: My Instagram\n";
+            }
+        }
+    }
+    $githubStream = Streams::fetchOne(null, $user->id, "Streams/user/github");
+    if($githubStream) {
+        $githubStream->calculateAccess($user->id);
+        if ($githubStream->testReadLevel('content')) {
+            $githubName = $githubStream->fields['content'];
+            if(!empty($githubName)){
+                $vcr .= "item6.URL:https://github.com/$githubName\n";
+                $vcr .= "item6.X-ABLABEL: My GitHub\n";
             }
         }
     }

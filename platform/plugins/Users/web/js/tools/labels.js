@@ -3,7 +3,7 @@
 var Users = Q.Users;
 
 Q.setObject({
-	'Q.text.Users.labels.addToPhonebook': 'Add to Phonebook',
+	'Q.text.Users.labels.addToPhonebook': 'Add to My Phone Contacts',
 	'Q.text.Users.labels.addLabel': 'New Label',
 	'Q.text.Users.labels.prompt': 'Give it a name'
 });
