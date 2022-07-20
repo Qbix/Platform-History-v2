@@ -1043,20 +1043,41 @@ Streams.Dialogs = {
                     $eContacts.html(html).activate();
 
                     $("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-                        var inviteParams;
-                        for(var i in contacts) {
-                            inviteParams = {
-                                stream: stream,
-                                data: data
-                            };
+						Q.each(contacts, function (identifier, obj) {
+							var inviteParams = {
+								stream: stream,
+								data: data
+							};
 
-                            if (contacts[i].prefix === "user") {
-                                inviteParams.userId = contacts[i]["id"];
-                            } else {
-                                inviteParams.identifier = contacts[i][contacts[i].prefix];
-                            }
-                            Q.handle(callback, Streams, [inviteParams]);
-                        }
+							if (obj.prefix === "user") {
+								inviteParams.userId = obj["id"];
+							} else {
+								inviteParams.identifier = obj[obj.prefix];
+							}
+
+							var pipe = new Q.pipe(Object.keys(obj), function (params) {
+								Q.handle(callback, Streams, [inviteParams]);
+							});
+
+							Q.each(obj, function (key, value) {
+                            	if (Q.isArrayLike(value)) {
+                            		value = value[0];
+								}
+
+                            	if (key === 'icon') {
+									var reader = new FileReader();
+									reader.readAsDataURL(value);
+									reader.onloadend = function() {
+										inviteParams[key] = reader.result;
+										pipe.fill(key)();
+									}
+									return;
+								}
+
+								inviteParams[key] = value;
+								pipe.fill(key)();
+							});
+                        });
                         Q.Dialogs.pop();
                         Q.Dialogs.pop();
                     });
@@ -1270,8 +1291,6 @@ Streams.Dialogs = {
                             dialog.addClass('Streams_suggestion_ready');
                         }
 
-                        var $eContacts = $(".Streams_invite_contacts", dialog);
-
                         // handle "choose from contacts" button
                         $('.Streams_invite_select_contacts', dialog).on(Q.Pointer.fastclick, function () {
                             var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
@@ -1316,7 +1335,6 @@ Streams.Dialogs = {
                                                 $this.text(text.chooseAgainFromContacts).addClass("");
                                             })
                                         });
-
                                     }
                                 });
                             } else {
@@ -1836,7 +1854,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             options.templateName = o.templateName;
         }
         Streams.Dialogs.invite(publisherId, streamName, function (r) {
-            if (!r) return;
+            if (Q.isEmpty(r)) {
+				return;
+			}
             for (var option in r) {
                 o[option] = r[option];
             }

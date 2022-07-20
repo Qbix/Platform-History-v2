@@ -15,7 +15,13 @@ function Streams_basic_post($params = array())
 {
 	Q_Valid::nonce(true);
 	$request = array_merge($_REQUEST, $params);
-	$user = Users::loggedInUser(true);
+	$userId = Q::ifset($params, "userId", null);
+	if ($userId) {
+		$user = Users::fetch($userId);
+	} else {
+		$user = Users::loggedInUser(true);
+	}
+
 	$fields = array();
 	if (!empty($request['birthday_year'])
 	&& !empty($request['birthday_month'])
