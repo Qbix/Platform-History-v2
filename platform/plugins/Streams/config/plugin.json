@@ -50,7 +50,8 @@
 			"Streams/participating": {"module": "Streams", "action": "participating"},
 			"Streams/cloudConvert": {"module": "Streams", "action": "cloudConvertWebhook"},
 			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
-			"Q/plugins/Streams/:action": {"module": "Streams"}
+			"Q/plugins/Streams/:action": {"module": "Streams"},
+			"Users/:userId.vcf": { "module": "Streams", "action": "vcard" }
 		},
 		"web": {
 			"requireValidNonce": ["Streams"]
