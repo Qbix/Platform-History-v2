@@ -641,6 +641,7 @@ Q.batcher.options = {
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
+ * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
@@ -670,6 +671,9 @@ Q.getter = function _Q_getter(original, options) {
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
+			if (!gw.cacheErrorMessages && Q.firstErrorMessage(params[0], params[1])) {
+				ret.dontCache = true;
+			}
 			if (gw.prepare) {
 				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
