@@ -33,7 +33,7 @@ function Streams_invite_post()
 	
 	$r = Q::take($_REQUEST, array(
 		'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-		'addLabel', 'addMyLabel', 'appUrl', 'alwaysSend',
+		'addLabel', 'addMyLabel', 'appUrl', 'alwaysSend', 'name', 'icon',
 		'userId', 'xid', 'platform', 'label', 'identifier', 'token'
 	));
 

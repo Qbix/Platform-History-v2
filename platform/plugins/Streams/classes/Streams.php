@@ -3583,8 +3583,8 @@ abstract class Streams extends Base_Streams
 	{
 		$options = Q::take($options, array(
 			'readLevel', 'writeLevel', 'adminLevel', 'permissions', 'asUserId', 'html',
-			'addLabel', 'addMyLabel', 'displayName', 'appUrl', 'alwaysSend', 'skipAccess',
-			'templateDir'
+			'addLabel', 'addMyLabel', 'name', 'appUrl', 'alwaysSend', 'skipAccess',
+			'templateDir', 'icon'
 		));
 		
 		if (isset($options['asUserId'])) {
@@ -3792,12 +3792,29 @@ abstract class Streams extends Base_Streams
 				$myLabel2 = Q::isAssociative($myLabel) ? array_keys($myLabel) : $myLabel;
 				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
 			}
+
+			$displayName = Q::ifset($options, 'name', Streams::displayName($asUser));
+			if ($displayName) {
+				try {
+					Q::event("Streams/basic/post", array(
+						"userId" => $userId,
+						"fullName" => $displayName
+					));
+				} catch (Exception $e) {}
+			}
+			$icon = Q::ifset($options, 'icon', null);
+			if ($icon) {
+				Q::event('Q/image/post', array(
+					'data' => $icon,
+					'path' => "Q/uploads/Users",
+					'subpath' => Q_Utils::splitId($userId, 3, '/')."/icon/".time(),
+					'save' => "Users/icon",
+					'skipAccess' => true
+				));
+			}
 		}
 
 		// let node handle the rest, and get the result
-		$displayName = isset($options['displayName'])
-			? $options['displayName']
-			: Streams::displayName($asUser);
 		$params = array(
 			"Q/method" => "Streams/Stream/invite",
 			"invitingUserId" => $asUserId,

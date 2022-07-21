@@ -96,8 +96,8 @@ var MyApp = (function (Q, $) {
 		'Q/scroller'
 	]);
 	
-	Q.Users.cache.where = 'local';
-	Q.Streams.cache.where = 'local';
+	Q.Users.cache.where = 'document';
+	Q.Streams.cache.where = 'document';
 	
 	return MyApp;
 	
