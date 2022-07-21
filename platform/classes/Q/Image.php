@@ -242,9 +242,9 @@ class Q_Image
 		$key = Q_Config::expect('Q', 'images', 'google', 'key');
 		$url = 'https://www.googleapis.com/customsearch/v1?'
 		. http_build_query(array(
-			'imgType' => 'face',
-			'searchType' => 'image',
-			'imgSize' => 'medium',
+			'imgType' => Q::ifset($options, 'imgType', 'face'),
+			'searchType' => Q::ifset($options, 'searchType', 'image'),
+			'imgSize' => Q::ifset($options, 'imgSize', 'medium'),
 			'num' => 3,
 			'cx' => '009593684493750256938:4qicgdisydu',
 			'key' => $key,
