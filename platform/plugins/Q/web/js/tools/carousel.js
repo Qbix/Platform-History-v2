@@ -483,7 +483,74 @@
                     }
                 }
 
+                //start rotating only if user moves pointer more than X px
+                var pointerInfo = {
+                    startX: null,
+                    startY: null,
+                    prevY: null,
+                    prevX: null,
+                };
+
+                function capturePointer(e) {
+                    if (e.type == 'touchstart' || e.type == 'mousedown') {
+                        pointerInfo.mouseIsPressed = true;
+                        pointerInfo.startX = Q.info.isTouchscreen && e.touches ? e.touches[0].clientX : e.clientX;
+                        pointerInfo.startY = Q.info.isTouchscreen && e.touches ? e.touches[0].clientY : e.clientY;
+                        return;
+                    }
+
+                    if (e.type == 'touchmove' || e.type == 'mousemove') {
+                        pointerInfo.prevX = Q.info.isTouchscreen && e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+                        pointerInfo.prevY = Q.info.isTouchscreen && e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+                        return;
+                    }
+
+                    if (e.type == 'touchend' || e.type == 'mouseup') {
+                        pointerInfo.mouseIsPressed = false;
+                        pointerInfo.endX = Q.info.isTouchscreen && e.changedTouches ? e.changedTouches[0].clientX : e.clientX;
+                        pointerInfo.endY = Q.info.isTouchscreen && e.changedTouches ? e.changedTouches[0].clientY : e.clientY;
+                        return;
+                    }
+
+                }
+
+                if(Q.info.isTouchscreen) {
+                    window.addEventListener('touchstart', function (e) {
+                        capturePointer(e);
+                        window.addEventListener('touchmove', capturePointer);
+                        window.addEventListener('touchend', mouseUpHandler);
+
+                        function mouseUpHandler() {
+                            capturePointer(e);
+                            pointerInfo.startX = pointerInfo.startY = pointerInfo.endX = pointerInfo.endY = pointerInfo.prevX = pointerInfo.prevY = null;
+                            window.removeEventListener('touchmove', capturePointer);
+                            window.removeEventListener('touchend', mouseUpHandler);
+                        }
+
+                    })
+                } else {
+                    window.addEventListener('mousedown', function (e) {
+                        capturePointer(e);
+                        window.addEventListener('mousemove', capturePointer);
+                        window.addEventListener('mouseup', mouseUpHandler);
+
+                        function mouseUpHandler() {
+                            capturePointer(e);
+                            pointerInfo.startX = pointerInfo.startY = pointerInfo.endX = pointerInfo.endY = pointerInfo.prevX = pointerInfo.prevY = null;
+                            window.removeEventListener('mousemove', capturePointer);
+                            window.removeEventListener('mouseup', mouseUpHandler);
+                        }
+
+                    })
+                }
+
+                function distance(x1,y1,x2,y2) {
+                    if(x1 == null || y1 == null || x2 == null || y2 == null) return
+                    return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                }
+
                 function onpointermove(e) {
+
                     e = e || window.event;
                     var nX, nY
                     if(!Q.info.isTouchscreen) {
@@ -508,12 +575,13 @@
                     applyTranform(obox, e.target);
                     sX = nX;
                     sY = nY;
+
                 }
 
                 function removeEventListeners() {
                     if(!Q.info.isTouchscreen) {
-                        window.removeEventListener('mousemove', onpointermove)
-                        window.removeEventListener('mouseup', onpointerup)
+                        window.removeEventListener('mousemove', onpointermove, true)
+                        window.removeEventListener('mouseup', onpointerup, true)
                     } else {
                         window.removeEventListener('touchmove', onpointermove)
                         window.removeEventListener('touchend', onpointerup)
@@ -536,7 +604,12 @@
                         }
                     }, 17);
 
-                    removeEventListeners();
+                    if (pointerInfo.mouseIsPressed && pointerInfo.startX != null && pointerInfo.startY != null && pointerInfo.prevX != null && pointerInfo.prevY != null && distance(pointerInfo.startX, pointerInfo.startY, pointerInfo.prevX, pointerInfo.prevY) > 10) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+
+                    removeEventListeners(e);
                 }
 
                 function onDocumentLeave() {
@@ -544,11 +617,13 @@
                     document.removeEventListener('mouseleave', onDocumentLeave)
                 }
 
+
+
                 function onpointerdown(e) {
                     draggingIsActive(true);
                     clearInterval(obox.timer);
 
-                    e = e || window.event;
+                   // e = e || window.event;
                     if(!Q.info.isTouchscreen) {
                         sX = e.clientX;
                         sY = e.clientY;
@@ -560,21 +635,28 @@
                     }
 
                     if(!Q.info.isTouchscreen) {
-                        window.addEventListener('mousemove', onpointermove, {passive: true})
-                        window.addEventListener('mouseup', onpointerup)
+                        window.addEventListener('mousemove', onpointermove, true)
+                        window.addEventListener('mouseup', onpointerup, true)
 
                         document.addEventListener('mouseleave', onDocumentLeave)
                     } else {
-                        window.addEventListener('touchmove', onpointermove, {passive: true})
+                        window.addEventListener('touchmove', onpointermove)
                         window.addEventListener('touchend', onpointerup)
                         window.addEventListener('mouseleave', removeEventListeners)
                     }
+
 
                     return false;
                 }
 
                 if(!Q.info.isTouchscreen) {
                     obox.addEventListener('mousedown', onpointerdown)
+                    obox.addEventListener('click', function (e) {
+                        if (pointerInfo.mouseIsPressed && pointerInfo.startX != null && pointerInfo.startY != null && pointerInfo.prevX != null && pointerInfo.prevY != null && distance(pointerInfo.startX, pointerInfo.startY, pointerInfo.prevX, pointerInfo.prevY) > 10) {
+                            e.preventDefault();
+                            e.stopPropagation();
+                        }
+                    }, true)
                 } else {
                     obox.addEventListener('touchstart', onpointerdown)
                 }
@@ -583,7 +665,7 @@
                     if(state.debug) console.log('visibilitychange', tX, obox.style.transform)
                 }
 
-                document.addEventListener("visibilitychange", onTabSwitch);
+                //document.addEventListener("visibilitychange", onTabSwitch);
                 //document.addEventListener("pagehide", onTabSwitch);
 
 

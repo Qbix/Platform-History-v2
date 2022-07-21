@@ -26,7 +26,7 @@ function Streams_vcard_response ($params) {
 
     $userUrl = Q_Uri::interpolateUrl("{{baseUrl}}/profile/$user->id");
     $vcr .= "item1.URL:$userUrl\n";
-    $vcr .= "item1.X-ABLABEL: My $communityName Profile\n";
+    $vcr .= "item1.X-ABLABEL: $communityName Profile\n";
 
     $photo = Q_Uri::interpolateUrl($user->icon.'/400.png');
     $type = pathinfo($photo, PATHINFO_EXTENSION);
@@ -132,7 +132,7 @@ function Streams_vcard_response ($params) {
             $linkedinName = $linkedinStream->fields['content'];
             if(!empty($linkedinName)){
                 $vcr .= "item2.URL:https://www.linkedin.com/in/$linkedinName\n";
-                $vcr .= "item2.X-ABLABEL: My Linkedin\n";
+                $vcr .= "item2.X-ABLABEL:Linkedin\n";
             }
         }
     }
@@ -144,7 +144,7 @@ function Streams_vcard_response ($params) {
             $fbProfile = $facebookStream->fields['content'];
             if(!empty($fbProfile)){
                 $vcr .= "item3.URL:https://www.facebook.com/profile.php?id=$fbProfile\n";
-                $vcr .= "item3.X-ABLABEL: My Facebook\n";
+                $vcr .= "item3.X-ABLABEL:Facebook\n";
             }
         }
     }
@@ -156,7 +156,7 @@ function Streams_vcard_response ($params) {
             $twitterName = $twitterStream->fields['content'];
             if(!empty($twitterName)){
                 $vcr .= "item4.URL:https://twitter.com/$twitterName\n";
-                $vcr .= "item4.X-ABLABEL: My Twitter\n";
+                $vcr .= "item4.X-ABLABEL:Twitter\n";
             }
         }
     }
@@ -168,7 +168,7 @@ function Streams_vcard_response ($params) {
             $instagramName = $instagramStream->fields['content'];
             if(!empty($instagramName)){
                 $vcr .= "item5.URL:https://instagram.com/$instagramName\n";
-                $vcr .= "item5.X-ABLABEL: My Instagram\n";
+                $vcr .= "item5.X-ABLABEL:Instagram\n";
             }
         }
     }
@@ -179,7 +179,7 @@ function Streams_vcard_response ($params) {
             $githubName = $githubStream->fields['content'];
             if(!empty($githubName)){
                 $vcr .= "item6.URL:https://github.com/$githubName\n";
-                $vcr .= "item6.X-ABLABEL: My GitHub\n";
+                $vcr .= "item6.X-ABLABEL:GitHub\n";
             }
         }
     }
