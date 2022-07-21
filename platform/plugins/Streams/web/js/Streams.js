@@ -1043,20 +1043,41 @@ Streams.Dialogs = {
                     $eContacts.html(html).activate();
 
                     $("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-                        var inviteParams;
-                        for(var i in contacts) {
-                            inviteParams = {
-                                stream: stream,
-                                data: data
-                            };
+						Q.each(contacts, function (identifier, obj) {
+							var inviteParams = {
+								stream: stream,
+								data: data
+							};
 
-                            if (contacts[i].prefix === "user") {
-                                inviteParams.userId = contacts[i]["id"];
-                            } else {
-                                inviteParams.identifier = contacts[i][contacts[i].prefix];
-                            }
-                            Q.handle(callback, Streams, [inviteParams]);
-                        }
+							if (obj.prefix === "user") {
+								inviteParams.userId = obj["id"];
+							} else {
+								inviteParams.identifier = obj[obj.prefix];
+							}
+
+							var pipe = new Q.pipe(Object.keys(obj), function (params) {
+								Q.handle(callback, Streams, [inviteParams]);
+							});
+
+							Q.each(obj, function (key, value) {
+                            	if (Q.isArrayLike(value)) {
+                            		value = value[0];
+								}
+
+                            	if (key === 'icon') {
+									var reader = new FileReader();
+									reader.readAsDataURL(value);
+									reader.onloadend = function() {
+										inviteParams[key] = reader.result;
+										pipe.fill(key)();
+									}
+									return;
+								}
+
+								inviteParams[key] = value;
+								pipe.fill(key)();
+							});
+                        });
                         Q.Dialogs.pop();
                         Q.Dialogs.pop();
                     });
@@ -1270,8 +1291,6 @@ Streams.Dialogs = {
                             dialog.addClass('Streams_suggestion_ready');
                         }
 
-                        var $eContacts = $(".Streams_invite_contacts", dialog);
-
                         // handle "choose from contacts" button
                         $('.Streams_invite_select_contacts', dialog).on(Q.Pointer.fastclick, function () {
                             var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
@@ -1316,7 +1335,6 @@ Streams.Dialogs = {
                                                 $this.text(text.chooseAgainFromContacts).addClass("");
                                             })
                                         });
-
                                     }
                                 });
                             } else {
@@ -1782,39 +1800,46 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 colorLight : "#ffffff",
                                 correctLevel : QRCode.CorrectLevel.H
                             });
-                            $('.Q_button', dialog).plugin('Q/clickable')
-                                .on(Q.Pointer.click, function () {
-                                    Q.Dialogs.push({
-                                        title: Q.getObject(['invite', 'dialog', 'photo'], text),
-                                        apply: true,
-                                        className: "Dialog_invite_photo_camera",
-                                        content:
-                                        '<div class="Streams_invite_photo_dialog">' +
-                                        '<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
-                                        '<div class="Streams_invite_photo_camera">' +
-                                        '<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
-                                        '</div>' +
-                                        '</div>',
-                                        onActivate: function (dialog) {
-                                            // handle "photo" button
-                                            var photo = null;
-                                            var saveSizeName = {};
-                                            Q.each(Users.icon.sizes, function (k, v) {
-                                                saveSizeName[k] = v;
-                                            });
-                                            var o = {
-                                                path: 'Q/uploads/Users',
-                                                save: 'Users/icon',
-                                                subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
-                                                saveSizeName: saveSizeName,
-                                                onFinish: function () {
-                                                    Q.Dialogs.pop();
-                                                }
-                                            };
-                                            $('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
-                                        }
-                                    });
-                                });
+                            var _setPhoto = function (message) {
+                            	Q.Dialogs.pop();
+								Q.Dialogs.push({
+									title: Q.getObject(['invite', 'dialog', 'photo'], text),
+									apply: true,
+									className: "Dialog_invite_photo_camera",
+									content:
+										'<div class="Streams_invite_photo_dialog">' +
+										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
+										'<div class="Streams_invite_photo_camera">' +
+										'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+										'</div>' +
+										'</div>',
+									onActivate: function (dialog) {
+										// handle "photo" button
+										var saveSizeName = {};
+										Q.each(Users.icon.sizes, function (k, v) {
+											saveSizeName[k] = v;
+										});
+										var o = {
+											path: 'Q/uploads/Users',
+											save: 'Users/icon',
+											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
+											saveSizeName: saveSizeName,
+											onFinish: function () {
+												Q.Dialogs.pop();
+											}
+										};
+										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
+									}
+								});
+							};
+                            $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
+							rss.onMessage('Streams/invite/accept').set(function (stream, message) {
+								if (message.getInstruction('token') !== Q.getObject("invite.token", rsd)) {
+									return;
+								}
+
+								_setPhoto();
+							}, 'Streams_invite_QR_content');
                         });
                     }
                 });
@@ -1836,7 +1861,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             options.templateName = o.templateName;
         }
         Streams.Dialogs.invite(publisherId, streamName, function (r) {
-            if (!r) return;
+            if (Q.isEmpty(r)) {
+				return;
+			}
             for (var option in r) {
                 o[option] = r[option];
             }

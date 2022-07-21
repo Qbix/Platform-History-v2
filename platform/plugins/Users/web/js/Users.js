@@ -2999,7 +2999,7 @@
 
 		// method to get contacts for browser Picker Contacts API (if exists)
 		function _getPickerContacts () {
-			navigator.contacts.select(['name', 'email', 'tel'], {multiple: true})
+			navigator.contacts.select(['name', 'email', 'tel', 'icon'], {multiple: true})
 			.then(function (results) {
 				Q.each(results, function (i, obj) {
 					obj.displayName = obj.name[0];
@@ -3009,6 +3009,7 @@
 					}
 
 					obj.emails = Array.from(new Set(obj.email));
+					obj.icons = Array.from(new Set(obj.icon));
 
 					obj.phoneNumbers = Array.from(new Set(obj.tel));
 					obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
@@ -3019,6 +3020,7 @@
 
 					obj.emails = obj.emails.length ? obj.emails : null;
 					obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
+					obj.icons = obj.icons.length ? obj.icons : null;
 
 					contacts.push(obj);
 				});
@@ -3056,14 +3058,15 @@
 
 			Q.addStylesheet('{{Users}}/css/Users/contacts.css', {slotName: 'Users'});
 
-			var _addContact = function (id, name, contact, contactType) {
+			var _addContact = function (options) {
 				var c = {
-					id: id,
-					name: name,
-					prefix: contactType
+					id: options.id,
+					name: options.name,
+					icon: options.icon,
+					prefix: options.contactType
 				};
-				c[contactType] = contact;
-				selectedContacts[id] = c;
+				c[options.contactType] = options.contact;
+				selectedContacts[options.id] = c;
 			};
 			var _removeContact = function (id, dialog) {
 				$('.tr[data-rawid="'+ id +'"] .Users_contacts_dialog_' + selectedContacts[id].prefix, dialog)
@@ -3128,11 +3131,11 @@
 								return;
 							}
 							$email.addClass("checked");
-							_addContact(rawid, name, data, "email");
+							_addContact({id: rawid, name: name, icon: icon, contact: data, contactType:"email"});
 						})
 					} else if (emailContact.length === 1) {
 						$email.addClass("checked");
-						_addContact(rawid, name, emailContact[0], "email");
+						_addContact({id: rawid, name: name, icon: icon, contact: emailContact[0], contactType:"email"});
 					}
 				} else if (Q.getObject('length', phoneContact)) {
 					if (phoneContact.length > 1) {
@@ -3146,11 +3149,11 @@
 								return;
 							}
 							$phone.addClass("checked");
-							_addContact(rawid, name, data, "phone");
+							_addContact({id: rawid, name: name, icon: icon, contact: data, contactType: "phone"});
 						})
 					} else if (phoneContact.length === 1) {
 						$phone.addClass("checked");
-						_addContact(rawid, name, phoneContact[0], "phone");
+						_addContact({id: rawid, name: name, icon: icon, contact: phoneContact[0], contactType: "phone"});
 					}
 				}
 			};
@@ -3228,10 +3231,10 @@
 										$this.removeClass("checked");
 										return;
 									}
-									_addContact(rawid, name, data, contactType);
+									_addContact({id: rawid, name: name, contact: data, contactType: contactType});
 								})
 							} else {
-								_addContact(rawid, name, contact[0], contactType);
+								_addContact({id: rawid, name: name, contact: contact[0], contactType: contactType});
 							}
 
 							return false;
@@ -3369,12 +3372,24 @@
 
 							if (type === 'email' && !Q.isEmpty(contact.emails)) {
 								added = true;
-								return _addContact(contact.id, contact.displayName, contact.emails[0], 'email');
+								return _addContact({
+									id: contact.id,
+									name: contact.displayName,
+									icon: contact.icon,
+									contact: contact.emails[0],
+									contactType:'email'
+								});
 							}
 
 							if (type === 'mobile' && !Q.isEmpty(contact.phoneNumbers)) {
 								added = true;
-								return _addContact(contact.id, contact.displayName, contact.phoneNumbers[0], 'phone');
+								return _addContact({
+									id: contact.id,
+									name: contact.displayName,
+									icon: contact.icon,
+									contact: contact.phoneNumbers[0],
+									contactType:'phone'
+								});
 							}
 						});
 					});

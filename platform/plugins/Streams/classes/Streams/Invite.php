@@ -166,6 +166,7 @@ class Streams_Invite extends Base_Streams_Invite
 			return false;
 		}
 
+		$this->userId = $userId;
 		$this->state = 'accepted';
 		if (!$this->save()) {
 			return false;
