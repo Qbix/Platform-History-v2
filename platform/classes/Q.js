@@ -3568,8 +3568,19 @@ Sp.matchTypes = function (types) {
 };
 
 Sp.matchTypes.adapters = {
-	url: function () {
-		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
+	url: function (options) {
+		var parts = this.split(' ');
+		var res = [];
+		var regexp = (options && options.requireScheme)
+			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
+			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
+		for (var i=0; i<parts.length; i++) {
+			if (!parts[i].match(regexp)) {
+				continue;
+			}
+			res.push(parts[i]);
+		}
+		return res;
 	},
 	email: function () {
 		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];
