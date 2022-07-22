@@ -14,3 +14,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
 }
+.Websites_lookup_tool input,
+input.Websites_lookup_tool {
+    height: 40px;
+}
