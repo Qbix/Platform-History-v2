@@ -11,6 +11,7 @@
 	 * @param {Array} [options] Override various options for this tool
 	 * @param {object} options.platforms platforms user can search from (youtube, soundcloud etc)
 	 * @param {integer} options.debounce milliseconds to debounce onFilter event
+	 * @param {function} [options.onResults] Set here function to update results before render.
 	 * @param {Q.Event} [options.onChoose] This event handler occurs when one of the elements with class "Q_filter_results" is chosen.
 	 * @param {Q.Event} [options.onClear] This event handler occurs when chosen result clear.
 	 * @param {Object} [options.filter] any options for the Q/filter tool
@@ -41,6 +42,7 @@
 		filter: {
 			placeholder: "Start typing..."
 		},
+		onResults: null,
 		onChoose: new Q.Event(),
 		onClear: new Q.Event()
 	}, {
@@ -110,7 +112,9 @@
 					return callback(msg, null);
 				}
 
-				Q.handle(callback, tool, [data.slots.results]);
+				var results = data.slots.results;
+				results = (Q.typeOf(state.onResults) === "function" && state.onResults(results)) || results;
+				Q.handle(callback, tool, [results]);
 			}, {
 				fields: {
 					query: query,
