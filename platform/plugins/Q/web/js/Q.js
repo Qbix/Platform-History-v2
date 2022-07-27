@@ -3644,7 +3644,6 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
- * @param {Boolean} [options.firstParameterIsNotError] pass true here to not reject the promise just because the first parameter in first callback is truthy
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
@@ -3701,12 +3700,8 @@ Q.getter = function _Q_getter(original, options) {
 					_reject(err);
 					throw err;
 				}
-				if (params[0] && !gw.firstParameterIsNotError) {
-					// assume first parameter is error
-					_reject(params[0]);
-				} else {
-					_resolve(subject);
-				}
+
+				_resolve(subject);
 			}
 		}
 
