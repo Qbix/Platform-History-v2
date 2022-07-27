@@ -5749,6 +5749,7 @@ var Cp = Q.Cache.prototype;
  * @param {Array} params The parameters for the callback
  * @param {Object} options  supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
+ * @param {function} [options.beforeEvict] Method which allow to cancel stream remove from cache
  * @return {boolean} whether there was an existing entry under that key
  */
 Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
@@ -5784,8 +5785,11 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		}
 	}
 
+	var earliest = this.earliest();
 	if (count > this.max) {
-		this.remove(this.earliest());
+		if (false !== Q.handle(Q.getObject("beforeEvict", options), this, [earliest])) {
+			this.remove(earliest);
+		}
 	}
 
 	if (parameters) {
