@@ -583,12 +583,12 @@
 				"Streams/contacts",
 				"Streams/labels",
 				"Streams/user/username",
-				"Streams/participating"
+				"Streams/participating",
+				"Streams/user/icon"
 			],
 			"person": [
 				"Streams/invited",
 				"Streams/mentioned",
-				"Streams/user/icon",
 				"Streams/user/firstName",
 				"Streams/user/lastName",
 				"Streams/user/emailAddress",

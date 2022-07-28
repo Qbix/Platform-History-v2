@@ -3644,7 +3644,6 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
- * @param {Boolean} [options.firstParameterIsNotError] pass true here to not reject the promise just because the first parameter in first callback is truthy
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
@@ -3701,12 +3700,8 @@ Q.getter = function _Q_getter(original, options) {
 					_reject(err);
 					throw err;
 				}
-				if (params[0] && !gw.firstParameterIsNotError) {
-					// assume first parameter is error
-					_reject(params[0]);
-				} else {
-					_resolve(subject);
-				}
+
+				_resolve(subject);
 			}
 		}
 
@@ -5754,6 +5749,7 @@ var Cp = Q.Cache.prototype;
  * @param {Array} params The parameters for the callback
  * @param {Object} options  supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
+ * @param {function} [options.beforeEvict] Method which allow to cancel stream remove from cache
  * @return {boolean} whether there was an existing entry under that key
  */
 Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
@@ -5789,8 +5785,11 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		}
 	}
 
+	var earliest = this.earliest();
 	if (count > this.max) {
-		this.remove(this.earliest());
+		if (false !== Q.handle(Q.getObject("beforeEvict", options), this, [earliest])) {
+			this.remove(earliest);
+		}
 	}
 
 	if (parameters) {

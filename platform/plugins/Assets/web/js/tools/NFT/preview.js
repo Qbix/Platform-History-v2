@@ -391,7 +391,7 @@
                 var audioUrl = state.audio || stream.getAttribute("audioUrl");
                 var videoProvider = stream.getAttribute("videoProvider");
                 var videoId = stream.getAttribute("videoId");
-                var imageUrl = state.image || stream.iconUrl("x");
+                var imageUrl = state.image || stream.iconUrl(state.imagepicker.showSize);
                 var $container = $(".video-container", tool.element);
                 var $previewIcon = $("img.NFT_preview_icon", tool.element);
 

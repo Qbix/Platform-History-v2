@@ -4421,37 +4421,42 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		if (ordinal < 0) {
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
-		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
-			function (err, messages) {
-				if (err) {
-					return Q.handle(callback, this, [null, err]);
-				}
-				// Go through the messages and simulate the posting
-				// NOTE: the messages will arrive a lot quicker than they were posted,
-				// and moreover without browser refresh cycles in between,
-				// which may cause confusion in some visual representations
-				// until things settle down on the screen
-				ordinal = parseInt(ordinal);
-				Q.each(messages, function (ordinal, message) {
-					Users.Socket.onEvent('Streams/post').handle(message, messages);
-				}, {ascending: true, numeric: true});
 
-				// if any new messages were encountered, updateMessageCache removed all the cached
-				// results where max < 0, so future calls to Streams.Message.get with max < 0 will
-				// make a request to the server
+		// check if stream cached and if not cache it
+		if (!Streams.get.cache.get([publisherId, streamName])) {
+			Streams.get(publisherId, streamName);
+		}
 
-				// Do we have this message now?
-				if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
-					// remove any event handlers still waiting for the event to be posted
-					Q.each(waiting, function (i, w) {
-						w[0].remove(w[1]);
-					});
-					if (!alreadyCalled) {
-						Q.handle(callback, this, [Object.keys(messages)]);
-					}
-					alreadyCalled = true;
+		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal}, function (err, messages) {
+			if (err) {
+				return Q.handle(callback, this, [null, err]);
+			}
+			// Go through the messages and simulate the posting
+			// NOTE: the messages will arrive a lot quicker than they were posted,
+			// and moreover without browser refresh cycles in between,
+			// which may cause confusion in some visual representations
+			// until things settle down on the screen
+			ordinal = parseInt(ordinal);
+			Q.each(messages, function (ordinal, message) {
+				Users.Socket.onEvent('Streams/post').handle(message, messages);
+			}, {ascending: true, numeric: true});
+
+			// if any new messages were encountered, updateMessageCache removed all the cached
+			// results where max < 0, so future calls to Streams.Message.get with max < 0 will
+			// make a request to the server
+
+			// Do we have this message now?
+			if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
+				// remove any event handlers still waiting for the event to be posted
+				Q.each(waiting, function (i, w) {
+					w[0].remove(w[1]);
+				});
+				if (!alreadyCalled) {
+					Q.handle(callback, this, [Object.keys(messages)]);
 				}
-			});
+				alreadyCalled = true;
+			}
+		});
 	}
 };
 Message.wait.options = {

@@ -60,7 +60,7 @@
 			},
 			"NFT/icon": {
 				"sizes": ["300x","500x","700x","x"],
-				"defaultSize": "x",
+				"defaultSize": "300x",
 				"defaultCacheBust": 1000,
 				"maxStretch": 2
 			},
