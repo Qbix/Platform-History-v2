@@ -1870,6 +1870,7 @@
 				var tool = this;
 
                 tool.settingsPopup = (function () {
+                	var _popUpResizeobserver;
                 	var _videoinputListEl;
 
 					var videoInputListSection = (function () {
@@ -3180,10 +3181,13 @@
                     function createSettingsPopUp() {
                         var settingsPopup = document.createElement('DIV');
                         settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
-                        if(!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopup.appendChild(videoInputListSection.createVideoInputList());
-                        settingsPopup.appendChild(streamingAndRecordingSection.createSection());
+                        var settingsPopupInner = document.createElement('DIV');
+                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
+                        if(!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopupInner.appendChild(videoInputListSection.createVideoInputList());
+                        settingsPopupInner.appendChild(streamingAndRecordingSection.createSection());
 
                         tool.settingsPopupEl = settingsPopup;
+                        settingsPopup.appendChild(settingsPopupInner);
                         tool.cameraBtn.parentNode.appendChild(settingsPopup);
 
                         videoInputListSection.loadCamerasList();
@@ -3221,6 +3225,25 @@
                                 }, 600)
 
                             });
+
+                            _popUpResizeobserver = new ResizeObserver(function(entries) {
+
+                            	let popupRect = settingsPopup.getBoundingClientRect();
+                            	let maxHeight = popupRect.bottom;
+                                for(let entry of entries){
+                                    let width = entry.contentRect.width;
+                                    let height = entry.contentRect.height;
+                                    if(height > maxHeight) {
+                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
+                                        settingsPopupInner.style.overflowY = 'auto';
+									} else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
+                                        settingsPopupInner.style.maxHeight = '';
+                                        settingsPopupInner.style.overflowY = '';
+									}
+                                }
+                            })
+
+                            _popUpResizeobserver.observe(settingsPopup)
                         }
 
                     }
