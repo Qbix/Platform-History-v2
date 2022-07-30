@@ -1064,7 +1064,7 @@ Streams.Dialogs = {
                             		value = value[0];
 								}
 
-                            	if (key === 'icon') {
+                            	if (key === 'icon' && value) {
 									var reader = new FileReader();
 									reader.readAsDataURL(value);
 									reader.onloadend = function() {
@@ -1304,14 +1304,13 @@ Streams.Dialogs = {
                                     + '</div>',
                                     onActivate: function (dialog) {
                                         var $dialogContent = $(".Streams_invite_contacts_content", dialog);
-
                                         var $eContacts = $(".Streams_invite_contacts", dialog);
                                         var $selectContactBtn = $('<button></button>').text(text.chooseFromContacts);
                                         $selectContactBtn.addClass('Q_button');
                                         $selectContactBtn.addClass('Streams_invite_choose_contact');
                                         $dialogContent.append($selectContactBtn);
-                                        $selectContactBtn.on(Q.Pointer.fastclick, function () {
-                                            var $this = $(this);
+
+                                        function selectContacts() {
                                             $eContacts.empty();
 
                                             var params = {
@@ -1320,10 +1319,10 @@ Streams.Dialogs = {
                                                 identifierTypes: Streams.invite.options.identifierTypes
                                             };
 
-                                            $this.addClass('loading');
+                                            $selectContactBtn.addClass('loading');
 
                                             Users.Dialogs.contacts(params, function (contacts) {
-                                                $this.removeClass('loading');
+                                                $selectContactBtn.removeClass('loading');
                                                 $eContacts.data("contacts", contacts);
 
                                                 if (!contacts || Object.keys(contacts).length <= 0) {
@@ -1332,9 +1331,12 @@ Streams.Dialogs = {
 
                                                 _renderInviteList(contacts, $eContacts);
 
-                                                $this.text(text.chooseAgainFromContacts).addClass("");
+                                                $selectContactBtn.text(text.chooseAgainFromContacts).addClass("");
                                             })
-                                        });
+                                        }
+
+                                        selectContacts();
+                                        $selectContactBtn.on(Q.Pointer.fastclick, selectContacts);
                                     }
                                 });
                             } else {
