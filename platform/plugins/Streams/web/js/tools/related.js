@@ -124,7 +124,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 								infiniteTool.setLoading(false);
 							});
 						}
-					}).activate(function () {
+					}, null, this.prefix).activate(function () {
 						tool.infinitescrollApplied = true;
 					});
 				}
