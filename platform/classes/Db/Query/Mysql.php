@@ -572,7 +572,11 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			if (is_string($shards)) {
 				$shards = array($shards);
 			}
-			$queries = array_fill_keys($shards, $this);
+			if (Q::isAssociative($shards)) {
+				$queries = $shards;
+			} else {
+				$queries = array_fill_keys($shards, $this);
+			}
 		} else {
 			$queries = $this->shard();
 		}
