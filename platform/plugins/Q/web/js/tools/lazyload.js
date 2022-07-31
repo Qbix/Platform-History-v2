@@ -137,6 +137,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 						}
 						img.addEventListener('load', _loaded);
 					}
+					clearTimeout(img.Q_lazyload_timeout);
 				}, this.state.debounce.milliseconds);
 				return true;
 			},
@@ -180,6 +181,7 @@ Q.Tool.define('Q/lazyload', function (options) {
 						}, {}, true);
 						delete element.Q_lazyload_timeout;
 					}
+					clearTimeout(element.Q_lazyload_timeout);
 				}, this.state.debounce.milliseconds);
 				return true;
 			},
