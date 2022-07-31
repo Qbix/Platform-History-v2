@@ -141,9 +141,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 				return true;
 			},
 			exiting: function (img) {
-				if (element.Q_lazyload_timeout) {
-					clearTimeout(element.Q_lazyload_timeout);
-					delete element.Q_lazyload_timeout;
+				if (img.Q_lazyload_timeout) {
+					clearTimeout(img.Q_lazyload_timeout);
+					delete img.Q_lazyload_timeout;
 				}
 				return true; // no need to do anything else
 			},
