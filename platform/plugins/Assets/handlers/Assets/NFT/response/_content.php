@@ -113,21 +113,21 @@ function Assets_NFT_response_content ($params) {
 
 	$keywords = Q::ifset($texts, 'profile', 'Keywords', null);
 	Q_Response::setMeta(array(
-		array('attrName' => 'name', 'attrValue' => 'title', 'content' => $nftInfo["data"]["name"]),
-		array('attrName' => 'property', 'attrValue' => 'og:title', 'content' => $nftInfo["data"]["name"]),
-		array('attrName' => 'property', 'attrValue' => 'twitter:title', 'content' => $nftInfo["data"]["name"]),
-		array('attrName' => 'name', 'attrValue' => 'description', 'content' => $nftInfo["data"]["description"]),
-		array('attrName' => 'property', 'attrValue' => 'og:description', 'content' => $nftInfo["data"]["description"]),
-		array('attrName' => 'property', 'attrValue' => 'twitter:description', 'content' => $nftInfo["data"]["description"]),
-		array('attrName' => 'name', 'attrValue' => 'keywords', 'content' => $keywords),
-		array('attrName' => 'property', 'attrValue' => 'og:keywords', 'content' => $keywords),
-		array('attrName' => 'property', 'attrValue' => 'twitter:keywords', 'content' => $keywords),
-		array('attrName' => 'name', 'attrValue' => 'image', 'content' => $nftInfo["data"]["image"]),
-		array('attrName' => 'property', 'attrValue' => 'og:image', 'content' => $nftInfo["data"]["image"]),
-		array('attrName' => 'property', 'attrValue' => 'twitter:image', 'content' => $nftInfo["data"]["image"]),
-		array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $url),
-		array('attrName' => 'property', 'attrValue' => 'twitter:url', 'content' => $url),
-		array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary')
+		array('name' => 'name', 'value' => 'title', 'content' => $nftInfo["data"]["name"]),
+		array('name' => 'property', 'value' => 'og:title', 'content' => $nftInfo["data"]["name"]),
+		array('name' => 'property', 'value' => 'twitter:title', 'content' => $nftInfo["data"]["name"]),
+		array('name' => 'name', 'value' => 'description', 'content' => $nftInfo["data"]["description"]),
+		array('name' => 'property', 'value' => 'og:description', 'content' => $nftInfo["data"]["description"]),
+		array('name' => 'property', 'value' => 'twitter:description', 'content' => $nftInfo["data"]["description"]),
+		array('name' => 'name', 'value' => 'keywords', 'content' => $keywords),
+		array('name' => 'property', 'value' => 'og:keywords', 'content' => $keywords),
+		array('name' => 'property', 'value' => 'twitter:keywords', 'content' => $keywords),
+		array('name' => 'name', 'value' => 'image', 'content' => $nftInfo["data"]["image"]),
+		array('name' => 'property', 'value' => 'og:image', 'content' => $nftInfo["data"]["image"]),
+		array('name' => 'property', 'value' => 'twitter:image', 'content' => $nftInfo["data"]["image"]),
+		array('name' => 'property', 'value' => 'og:url', 'content' => $url),
+		array('name' => 'property', 'value' => 'twitter:url', 'content' => $url),
+		array('name' => 'property', 'value' => 'twitter:card', 'content' => 'summary')
 	));
 
 	return Q::view('Assets/content/NFT.php', compact("texts", "defaultIconSize", "maxSize", "tokenId", "chainId", "nftInfo", "ownerId"));
