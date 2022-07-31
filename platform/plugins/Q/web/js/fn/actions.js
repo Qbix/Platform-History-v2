@@ -15,7 +15,7 @@
  * @param {Number} [options.zIndex=null] zIndex z-index from style
  * @param {String} [options.position='mr'] position one of 't', 'm', 'b' followed by one of 'l', 'c', 'r'
  * @param {Number} [options.size=32] size number for css class basic , example 32 for basic32 class
- * @param {Boolean} [options.alwaysShow=Q.info.isTouchscreen] alwaysShow
+ * @param {Boolean} [options.alwaysShow=Q.info.isTouchscreen] if false, shows the actions on mouseover, otherwise always shows
  * @param {Boolean} [options.horizontal=true] horizontal if true, show actions horizontally
  * @param {Boolean} [options.reverse=false] reverse if true, show in reverse order
  * @param {Boolean} [options.clickable=true] clickable use clickable plugin
