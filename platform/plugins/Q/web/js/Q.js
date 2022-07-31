@@ -9532,19 +9532,23 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			for (var slotName in response.metas) {
 				Q.each(response.metas[slotName], function (i) {
 					var metaData = this;
-					var metas = document.querySelectorAll("meta[" + metaData.attrName + "='" + metaData.attrValue + "']");
-					if (!metas.length) {
+					var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
+					var found = false;
+					Q.each(metas, function (j) {
+						if (this.getAttribute(metaData.name) === metaData.value) {
+							this.setAttribute(metaData.name, metaData.value);
+							this.setAttribute("content", metaData.content);
+							found = true;
+							return false;
+						}
+					});
+					if (!found) {
 						var meta = document.createElement("meta");
-						meta.setAttribute(this.attrName, metaData.attrValue);
+						meta.setAttribute(this.name, metaData.value);
 						meta.setAttribute("content", metaData.content);
 						elHead.appendChild(meta);
 						return;
 					}
-
-					Q.each(metas, function (j) {
-						this.setAttribute(metaData.attrName, metaData.attrValue);
-						this.setAttribute("content", metaData.content);
-					});
 				});
 			}
 		}
