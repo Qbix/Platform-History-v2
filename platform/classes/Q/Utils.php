@@ -952,9 +952,9 @@ class Q_Utils
 		$callback = null)
 	{
 		$method = strtoupper($method);
-		if (!isset($user_agent))
-			$user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (K HTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
-
+		if (!isset($user_agent)) {
+			$user_agent = Q_Config::expect('Q', 'curl', 'userAgent');
+		}
 		$ip = null;
 		if (is_array($uri)) {
 			$url = $uri[0];
@@ -984,7 +984,7 @@ class Q_Utils
 		$headers = array("Host: ".$host);
 
 		if (is_array($data)) {
-			$data = http_build_query($data, null, '&');
+			$data = http_build_query($data, '', '&');
 		}
 		if (!is_string($data)) {
 			$data = '';
@@ -1020,6 +1020,13 @@ class Q_Utils
 				}
 			}
 			if ($header) {
+				if (Q::isAssociative($header)) {
+					$h = array();
+					foreach ($header as $k => $v) {
+						$h[] = "$k: $v";
+					}
+					$header = $h;
+				}
 				$headers = array_merge($headers, $header);
 			}
 			$header = implode("\r\n", $headers);
