@@ -94,13 +94,14 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			};
 		}
 		Q.Users.getLabels(state.userId, state.prefix, function (err, labels) {
+			console.log('aaaaaaaaaaaaaa',state)
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
 				canAdd: Q.Users.loggedInUser && state.canAdd,
 				canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
-				phoneBookIcon: Q.url('{{Q}}/img/actions/add.png'),
-                addToPhonebook: state.addToPhonebook && Q.text.Users.labels.addToPhonebook
+				phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
+                addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
 				tool.element.innerHTML = html;
@@ -164,6 +165,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
 Q.Template.set('Users/labels', ''
 + '<ul>'
++ '{{#if addToPhonebook}}'
++ '<li class="Users_labels_action Users_labels_add_phonebook">'
++   '<img class="Users_labels_icon" src="{{phoneBookIcon}}">'
++   '<div class="Users_labels_title">{{addToPhonebook}}</div>'
++ '</li>'
++ '{{/if}}'
 + '{{#if all}}'
 + '<li class="Users_labels_label" data-label="*">'
 +   '<img class="Users_labels_icon" src="{{all.icon}}" alt="all">'
@@ -180,12 +187,6 @@ Q.Template.set('Users/labels', ''
 + '<li class="Users_labels_action Users_labels_add">'
 +   '<img class="Users_labels_icon" src="{{canAddIcon}}">'
 +   '<div class="Users_labels_title">{{canAdd}}</div>'
-+ '</li>'
-+ '{{/if}}'
-+ '{{#if addToPhonebook}}'
-+ '<li class="Users_labels_action Users_labels_add_phonebook">'
-+   '<img class="Users_labels_icon" src="{{phoneBookIcon}}">'
-+   '<div class="Users_labels_title">{{addToPhonebook}}</div>'
 + '</li>'
 + '{{/if}}'
 + '</ul>');

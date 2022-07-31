@@ -2999,36 +2999,38 @@
 
 		// method to get contacts for browser Picker Contacts API (if exists)
 		function _getPickerContacts () {
-			navigator.contacts.select(['name', 'email', 'tel', 'icon'], {multiple: true})
-			.then(function (results) {
-				Q.each(results, function (i, obj) {
-					obj.displayName = obj.name[0];
+            navigator.contacts.getProperties().then(function (supportedProperties) {
+                navigator.contacts.select(supportedProperties)
+                    .then(function (results) {
+                        Q.each(results, function (i, obj) {
+                            obj.displayName = obj.name[0];
 
-					if (!obj.displayName) {
-						return;
-					}
+                            if (!obj.displayName) {
+                                return;
+                            }
 
-					obj.emails = Array.from(new Set(obj.email));
-					obj.icons = Array.from(new Set(obj.icon));
+                            obj.emails = Array.from(new Set(obj.email));
+                            obj.icons = Array.from(new Set(obj.icon));
 
-					obj.phoneNumbers = Array.from(new Set(obj.tel));
-					obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
-						return e.replace(/\D/g, '');
-					});
+                            obj.phoneNumbers = Array.from(new Set(obj.tel));
+                            obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
+                                return e.replace(/\D/g, '');
+                            });
 
-					obj.id = obj.emails.join() + obj.phoneNumbers.join();
+                            obj.id = obj.emails.join() + obj.phoneNumbers.join();
 
-					obj.emails = obj.emails.length ? obj.emails : null;
-					obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
-					obj.icons = obj.icons.length ? obj.icons : null;
+                            obj.emails = obj.emails.length ? obj.emails : null;
+                            obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
+                            obj.icons = obj.icons.length ? obj.icons : null;
 
-					contacts.push(obj);
-				});
+                            contacts.push(obj);
+                        });
 
-				Q.handle(callback, contacts, ["browser"]);	
-			}).catch(function (ex) {
-				throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
-			});
+                        Q.handle(callback, contacts, ["browser"]);
+                    }).catch(function (ex) {
+                    throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
+                });
+            })
 		};
 
 		if (Q.info.isCordova) { // if cordova use navigator.contacts plugin

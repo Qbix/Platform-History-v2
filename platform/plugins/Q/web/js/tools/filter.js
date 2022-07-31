@@ -106,7 +106,6 @@ Q.Tool.define('Q/filter', function (options) {
 			tool.$input.addClass('Q_nonempty');
 		} else {
 			tool.$input.removeClass('Q_nonempty');
-			tool.$results.empty();
 		}
 		lastVal = val;
 	}

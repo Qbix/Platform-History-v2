@@ -121,7 +121,6 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 			);
 			$result = array_merge($result, $relations);
 		}
-		uasort($result, array('Streams_RelatedTo', '_compareByWeight'));
 		return $result;
 	}
 
@@ -338,13 +337,6 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		return reset($streams);
 	}
 	
-	static function _compareByWeight($a, $b)
-	{
-		return ($a->weight !== $b->weight)
-			? ($a->weight > $b->weight ? 1 : -1)
-			: 0;
-	}
-
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.
