@@ -21,6 +21,8 @@
  *    Function "preparing" receives (element) and is used the first time to prepare the element
  *    Both functions must return true if the element was modified.
  * @param {Element} [root=tool.element] The container inside which to watch for intesections
+ * @param {Object} [debounce]
+ * @param {Number} [debounce.milliseconds] How many milliseconds to wait before starting the lazyload, to avoid loading during fast scrolling
  * @param {Object} [observerOptions] Override any options to pass to IntersectionObserver
  * @param {Element} [observerOptions.root=tool.element.scrollingParent(true)]
  * @param {String} [observerOptions.rootMargin='0px']
@@ -124,21 +126,29 @@ Q.Tool.define('Q/lazyload', function (options) {
 				function _loaded() {
 					img.addClass('Q_lazy_loaded');
 				}
-				var src = img.getAttribute('data-lazyload-src');
-				if (src) {
-					img.setAttribute('src', Q.url(src));
-					img.removeAttribute('data-lazyload-src');
-					img.addClass('Q_lazy_load');
-					if (img.complete) {
-						_loaded();
+				element.Q_lazyload_timeout = setTimeout(function () {
+					if (element.hasAttribute('data-q-lazyload')
+					&& (!element.Q || !element.Q.tool)) {
+						var src = img.getAttribute('data-lazyload-src');
+						if (src) {
+							img.setAttribute('src', Q.url(src));
+							img.removeAttribute('data-lazyload-src');
+							img.addClass('Q_lazy_load');
+							if (img.complete) {
+								_loaded();
+							}
+							img.addEventListener('load', _loaded);
+						}
 					}
-					img.addEventListener('load', _loaded);
-				}
+				}, state.debounce.milliseconds);
 				return true;
 			},
 			exiting: function (img) {
-				// no need to do anything
-				return true;
+				if (element.Q_lazyload_timeout) {
+					clearTimeout(element.Q_lazyload_timeout);
+					delete element.Q_lazyload_timeout;
+				}
+				return true; // no need to do anything else
 			},
 			preparing: function (img, beingInsertedIntoDOM) {
 				if (!beingInsertedIntoDOM) {
@@ -162,16 +172,19 @@ Q.Tool.define('Q/lazyload', function (options) {
 		tool: {
 			selector: '.Q_tool',
 			entering: function (element, entry) {
-				if (element.hasAttribute('data-q-lazyload')
-				&& (!element.Q || !element.Q.tool)) {
-					element.addClass('Q_lazy_load');
-					element.setAttribute('data-q-lazyload', 'activating');
-					Q.activate(element, function () {
-						element.setAttribute('data-q-lazyload', 'activated');
-						element.addClass('Q_lazy_loaded');
-					}, {}, true);
-					return true;
-				}
+				element.Q_lazyload_timeout = setTimeout(function () {
+					if (element.hasAttribute('data-q-lazyload')
+					&& (!element.Q || !element.Q.tool)) {
+						element.addClass('Q_lazy_load');
+						element.setAttribute('data-q-lazyload', 'activating');
+						Q.activate(element, function () {
+							element.setAttribute('data-q-lazyload', 'activated');
+							element.addClass('Q_lazy_loaded');
+						}, {}, true);
+						delete element.Q_lazyload_timeout;
+					}
+				}, state.debounce.milliseconds);
+				return true;
 			},
 			exiting: function (element, entry) {
 				if (element.hasAttribute('data-q-lazyload')
@@ -183,6 +196,10 @@ Q.Tool.define('Q/lazyload', function (options) {
 					if (this.state.handlers.tool.exitingRemoveHTML) {
 						element.innerHTML = '';
 					}
+				}
+				if (element.Q_lazyload_timeout) {
+					clearTimeout(element.Q_lazyload_timeout);
+					delete element.Q_lazyload_timeout;
 				}
 				return true;
 			},
@@ -197,6 +214,9 @@ Q.Tool.define('Q/lazyload', function (options) {
 		root: undefined,
 		rootMargin: '0px',
 		threshold: 0
+	},
+	debounce: {
+		milliseconds: 300
 	}
 }, 
 
