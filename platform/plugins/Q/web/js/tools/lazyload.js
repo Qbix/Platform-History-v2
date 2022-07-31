@@ -126,19 +126,16 @@ Q.Tool.define('Q/lazyload', function (options) {
 				function _loaded() {
 					img.addClass('Q_lazy_loaded');
 				}
-				element.Q_lazyload_timeout = setTimeout(function () {
-					if (element.hasAttribute('data-q-lazyload')
-					&& (!element.Q || !element.Q.tool)) {
-						var src = img.getAttribute('data-lazyload-src');
-						if (src) {
-							img.setAttribute('src', Q.url(src));
-							img.removeAttribute('data-lazyload-src');
-							img.addClass('Q_lazy_load');
-							if (img.complete) {
-								_loaded();
-							}
-							img.addEventListener('load', _loaded);
+				img.Q_lazyload_timeout = setTimeout(function () {
+					var src = img.getAttribute('data-lazyload-src');
+					if (src) {
+						img.setAttribute('src', Q.url(src));
+						img.removeAttribute('data-lazyload-src');
+						img.addClass('Q_lazy_load');
+						if (img.complete) {
+							_loaded();
 						}
+						img.addEventListener('load', _loaded);
 					}
 				}, this.state.debounce.milliseconds);
 				return true;
