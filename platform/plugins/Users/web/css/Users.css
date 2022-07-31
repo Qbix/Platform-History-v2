@@ -460,9 +460,9 @@ a.Users_activation_resend:active {
 	cursor: pointer;
 }
 .Users_labels_add_phonebook {
-	box-shadow: 2px 2px 2px rgb(0 0 0 / 20%);
+	box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
     border-radius: 5px;
-	background: #eeeeee;
+	background: rgb(128 128 128 / 20%);
 }
 
 .Users_pile_tool {
