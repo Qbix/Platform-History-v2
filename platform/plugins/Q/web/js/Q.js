@@ -3644,6 +3644,7 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
+ * @param {Q.Cache} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
@@ -5498,6 +5499,7 @@ Q.Request.getUrlStatus = function(url, callback) {
  * @param {String} [options.name] the name of the cache, not really used for now
  * @param {Integer} [options.max=100] the maximum number of items the cache should hold. Defaults to 100
  * @param {Q.Cache} [options.after] pass an existing cache with max > this cache's max, to look in first
+ * @param {Q.Event} [options.beforeEvict] you can pass a handler here that returns false to prevent cache eviction of certain elements
  */
 Q.Cache = function _Q_Cache(options) {
 	if (this === Q) {
@@ -5510,6 +5512,10 @@ Q.Cache = function _Q_Cache(options) {
 	this.name = options.name;
 	this.data = {};
 	this.special = {};
+	this.beforeEvict = new Q.Event();
+	if (options.beforeEvict) {
+		Q.extend(this.beforeEvict, options.beforeEvict);
+	}
 	var _earliest, _latest, _count;
 	if (options.localStorage) {
 		this.localStorage = true;
@@ -5651,7 +5657,7 @@ function Q_Cache_set(cache, key, obj, special) {
 				for (var i=0; i<10; ++i) {
 					try {
 						// try to remove up to 10 items it may be a problem with space
-						if (cache.remove(cache.earliest())) {
+						if (cache.removeEarliest()) {
 							storage.setItem(id, serialized);
 						}
 						break;
@@ -5749,7 +5755,6 @@ var Cp = Q.Cache.prototype;
  * @param {Array} params The parameters for the callback
  * @param {Object} options  supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
- * @param {function} [options.beforeEvict] Method which allow to cancel stream remove from cache
  * @return {boolean} whether there was an existing entry under that key
  */
 Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
@@ -5785,11 +5790,8 @@ Cp.set = function _Q_Cache_prototype_set(key, cbpos, subject, params, options) {
 		}
 	}
 
-	var earliest = this.earliest();
 	if (count > this.max) {
-		if (false !== Q.handle(Q.getObject("beforeEvict", options), this, [earliest])) {
-			this.remove(earliest);
-		}
+		this.removeEarliest();
 	}
 
 	if (parameters) {
@@ -5877,6 +5879,22 @@ Cp.remove = function _Q_Cache_prototype_remove(key) {
 	Q_Cache_removeFromIndex(this, parameters, key);
 
 	return true;
+};
+/**
+ * Accesses the cache and removes the earliest entry from it that it can
+ * @static
+ * @method removeEarliest
+ * @return {Object|null} the item that was removed, otherwise null
+ */
+Cp.removeEarliest = function _Q_Cache_prototype_removeEarliest () {
+	var current, currentKey = this.earliest();
+	while (current = Q_Cache_get(this, currentKey)) {
+		if (false !== Q.handle(this.beforeEvict, this, [current])) {
+			this.remove(currentKey);
+			return current;
+		}
+		currentKey = current.next;
+	}
 };
 /**
  * Accesses the cache and clears all entries from it
@@ -5997,31 +6015,31 @@ Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
 	}, options);
 	return this;
 };
-Q.Cache.document = function _Q_Cache_document(name, max) {
+Q.Cache.document = function _Q_Cache_document(name, max, options) {
 	if (!Q.Cache.document.caches[name]) {
-		var cache = Q.Cache.document.caches[name] = new Q.Cache({
+		var cache = Q.Cache.document.caches[name] = new Q.Cache(Q.extend({
 			max: max
-		});
+		}, options));
 		cache.name = name;
 	}
 	return Q.Cache.document.caches[name];
 };
-Q.Cache.local = function _Q_Cache_local(name, max) {
+Q.Cache.local = function _Q_Cache_local(name, max, options) {
 	if (!Q.Cache.local.caches[name]) {
-		var cache = Q.Cache.local.caches[name] = new Q.Cache({
+		var cache = Q.Cache.local.caches[name] = new Q.Cache(Q.extend({
 			localStorage: true,
 			max: max
-		});
+		}, options));
 		cache.name = name;
 	}
 	return Q.Cache.local.caches[name];
 };
-Q.Cache.session = function _Q_Cache_session(name, max) {
+Q.Cache.session = function _Q_Cache_session(name, max, options) {
 	if (!Q.Cache.session.caches[name]) {
-		var cache = Q.Cache.session.caches[name] = new Q.Cache({
+		var cache = Q.Cache.session.caches[name] = new Q.Cache(Q.extend({
 			sessionStorage: true,
 			max: max
-		});
+		}, options));
 		cache.name = name;
 	}
 	return Q.Cache.session.caches[name];
