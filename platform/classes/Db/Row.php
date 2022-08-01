@@ -2102,7 +2102,7 @@ class Db_Row
 		} else {
 			if (!empty($modifyQuery['begin'])
 			and !empty($modifyQuery['rollbackIfMissing'])) {
-				$this->doRollback();
+				$this->executeRollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
 				try {
@@ -2179,7 +2179,7 @@ class Db_Row
 			return $this;
 		} else {
 			if (!empty($modifyQuery['begin']) and !empty($modifyQuery['rollbackIfMissing'])) {
-				$this->doRollback();
+				$this->executeRollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
 				throw new Q_Exception_MissingRow(array(
@@ -2212,21 +2212,42 @@ class Db_Row
 		$this->save();
 		return true;
 	}
-	
-	/**
-	 * Rolls back the latest transaction that was started with
-	 * code that looks like $query->begin()->execute().
-	 * @method doRollback
-	 */
-	function doRollback()
+
+	protected function _shardedQuery(&$where)
 	{
-		$class_name = get_class($this);
+		$table = $this->getTable();
+		$where = $this->getPkValue();
+		if (!$where) {
+			throw new Exception("The primary key is not specified for $table");
+		}
 		$db = $this->getDb();
-		if (empty($db))
-			throw new Exception("The database was not specified!");
-		$query = $db->rollback($this->calculatePkValue());
-		$query->className = $class_name;
-		$query->execute();
+		return $query = $db->rawQuery('');
+	}
+
+	/**
+	 * Commits latest transaction that was started with
+	 * code that looks like $query->begin()->execute().
+	 * Only executes the query on the appropriate shard.
+	 * @method executeCommit
+	 */
+	function executeCommit()
+	{
+		$query = $this->_shardedQuery($where);
+		$query = $query->commit();
+		$query->execute(false, $query->shard(null, $where));
+	}
+
+	/**
+	 * Rolls back the whole stack of transations that were started with
+	 * code that looks like $query->begin()->execute().
+	 * Only executes the query on the appropriate shard.
+	 * @method executeRollback
+	 */
+	function executeRollback()
+	{
+		$query = $this->_shardedQuery($where);
+		$query = $query->rollback();
+		$query->execute(false, $query->shard(null, $where));
 	}
 
 	/**

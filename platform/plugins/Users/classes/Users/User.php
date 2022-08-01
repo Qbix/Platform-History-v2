@@ -1105,7 +1105,7 @@ class Users_User extends Base_Users_User
 	 * @return {string}
 	 */
 	private static function _getId ($u) {
-		return $u->id;
+		return isset($u) && isset($u->id) ? $u->id : null;
 	}
 	
 	/**
@@ -1136,7 +1136,57 @@ class Users_User extends Base_Users_User
 	}
 
 	/**
-	 * Check identifier or array of identifiers and return users - existing or future
+	 * Returns Users_User object that correspond to the identifier in the database, if any.
+	 * @method from
+	 * @static
+	 * @param {string|array} $type can be "username", "email", "mobile", or $platform."_".$appId",
+	 *  or any of the above with optional "_hashed" suffix to indicate
+	 *  that the value has already been hashed.
+	 *  It could also be an array of ($type => $value) pairs.
+	 *  Then the second parameter should be null.
+	 * @param {string} $value The value corresponding to the type. If $type is
+	 *
+	 * * "username" - this is the user's username, if any
+	 * * "email" - this is one of the user's email addresses
+	 * * "mobile" - this is one of the user's mobile numbers
+	 * * "email_hashed" - this is the standard hash of the user's email address
+	 * * "mobile_hashed" - this is the standard hash of the user's mobile number
+	 * * $platformApp - a string of the form $platform."_".$appId"
+	 *
+	 * @param {string} [$state='verified'] The state of the identifier => userId mapping.
+	 *  Could also be 'future' to find identifiers attached to a "future user",
+	 *  and can also be null (in which case we find mappings in all states)
+	 * @param {&string} [$normalized=null]
+	 * @return {Users_Identify|null}
+	 *  The row corresponding to this type and value, otherwise null
+	 */
+	static function from($type, $value, $state = 'verified', &$normalized = null)
+	{
+		if ($type === 'none') {
+			return null;
+		}
+		$ui = Users::identify($type, $value, null);
+		if (!$ui || empty($ui->userId)) {
+			return null;
+		}
+		$user = new Users_User();
+		$user->id = $ui->userId;
+		if (!$user->retrieve()) {
+			$userId = $ui->userId;
+			throw new Q_Exception_MissingRow(array(
+				'table' => 'user',
+				'criteria' => 'that id'
+			), 'userId');
+		}
+		$state = $ui->state;
+		return $user;
+	}
+
+	/**
+	 * Loop through identifiers and return list of Users_User objects.
+	 * Unless $dontInsertFutureUsers parameter is true, this function
+	 * will create a future user whenever a user doesn't already exist
+	 * corresponding to that identifier.
 	 * @method idsFromIdentifiers
 	 * @static
 	 * @param $asUserId {string} The user id of inviting user
@@ -1144,13 +1194,15 @@ class Users_User extends Base_Users_User
 	 *  passed either as an array or separated by "\t"
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers
-	 * @return {array} The array of user ids, in the same order as the $identifiers.
+	 * @param {boolean} [$dontInsertFutureUsers=false] Pass true to skip inserting future users.
+	 * @return {array} The array of user ids, with the same indexes as the $identifiers.
 	 */
 	static function idsFromIdentifiers (
 		$identifiers, 
+		$dontInsertFutureUsers = false,
 		&$statuses = array(), 
-		&$identifierTypes = array())
-	{
+		&$identifierTypes = array()
+	) {
 		if (empty($identifiers)) {
 			return array();
 		}
@@ -1167,7 +1219,11 @@ class Users_User extends Base_Users_User
 				), array('identifier', 'emailAddress', 'mobileNumber'));
 			}
 			$status = null;
-			$users[] = $user = Users::futureUser($identifierType, $ui_identifier, $status);
+			if (!$dontInsertFutureUsers) {
+				$users[] = Users::futureUser($identifierType, $ui_identifier, $status);
+			} else {
+				$users[] = null;
+			}
 			$statuses[] = $status;
 			$identifierTypes[] = $identifierType;
 		}
@@ -1182,12 +1238,14 @@ class Users_User extends Base_Users_User
 	 * @param {string} $appId The id of an app on the platform
 	 * @param {array|string} $xids An array of facebook user ids, or a comma-delimited string
 	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
+	 * @param {boolean} [$dontInsertFutureUsers=false] Pass true to skip inserting future users.
 	 * @return {array} The array of user ids
 	 */
 	static function idsFromPlatformXids (
 		$platform,
 		$appId,
 		$xids, 
+		$dontInsertFutureUsers = false,
 		&$statuses = array()
 	) {
 		if (empty($xids)) {
@@ -1199,7 +1257,11 @@ class Users_User extends Base_Users_User
 		$platformApp = $platform . '_' . $appId;
 		$users = array();
 		foreach ($xids as $xid) {
-			$users[] = Users::futureUser($platformApp, $xid, $status);
+			if (!$dontInsertFutureUsers) {
+				$users[] = Users::futureUser($platformApp, $xid, $status);
+			} else {
+				$users[] = Users_User::from($platformApp, $xid);
+			}
 			$statuses[] = $status;
 		}
 		return array_map(array('Users_User', '_getId'), $users);

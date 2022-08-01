@@ -37,7 +37,7 @@ class Q
 	
 	/**
 	 * Used for shorthand for avoiding when you don't want to write
-	 * (isset($some_long_expression) ? $some_long_expression: null)
+	 * (isset($some_long_expression) ? $some_long_expression : null)
 	 * when you want to avoid possible "undefined variable" errors.
 	 * @method ifset
 	 * @param {&mixed} $ref

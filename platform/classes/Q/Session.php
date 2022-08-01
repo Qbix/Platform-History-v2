@@ -721,6 +721,7 @@ class Q_Session
 						Q::log("$sess_file is not writable", 'fatal');
 						die("$sess_file is not writable");
 					}
+					
 					if (file_exists($sess_file)) {
 						$file = fopen($sess_file, "r+");
 						flock($file, LOCK_EX);
@@ -731,47 +732,56 @@ class Q_Session
 						flock($file, LOCK_EX);
 						$existing_data = '';
 					}
+					if (!$file) {
+						throw new Q_Exception_MissingFile(array(
+							'filename' => $sess_file
+						));
+					}
 				}
 				$t = new Q_Tree($_SESSION);
 				$t->merge($our_SESSION);
 				$_SESSION = $t->getAll();
 				$params['existing_data'] = $existing_data;
 				$params['merged_data'] = $merged_data = session_id() ? session_encode() : '';
-				if ($params['existing_data'] !== $params['merged_data']) {
-					
-				}
-				/**
-				 * @event Q/session/save {before}
-				 * @param {string} sess_data
-				 * @param {string} old_data
-				 * @param {string} existing_data
-				 * @param {string} merged_data
-				 * @param {boolean} changed
-				 * @param {Db_Row} row
-				 * @return {boolean}
-				 */
-				Q::event('Q/session/save', $params, 'before');
-				if (! empty(self::$session_db_connection)) {
-					$row->$data_field = $merged_data ? $merged_data : '';
-					$row->$duration_field = Q_Config::get(
-						'Q', 'session', 'durations', Q_Request::formFactor(),
-						Q_Config::expect('Q', 'session', 'durations', 'session')
-					);
-					if ($platform_field) {
-						$platform = Q_Request::platform();
-						$row->$platform_field = $platform ? $platform : null;
+				if ($params['existing_data'] === $params['merged_data']) {
+					// nothing changed after all
+					if (! empty(self::$session_db_connection)) {
+						$row->executeCommit();
+					} else {
+						flock($file, LOCK_UN);
+						fclose($file);
 					}
-					$row->save(false, true);
-					$result = true;
 				} else {
-					if (!$file) {
-						throw new Q_Exception_MissingFile(array('filename' => $sess_file));
-					}
-					ftruncate($file, 0);
-					rewind($file);
-					$result = fwrite($file, $merged_data);
-					flock($file, LOCK_UN);
-					fclose($file);
+					/**
+					 * @event Q/session/save {before}
+					 * @param {string} sess_data
+					 * @param {string} old_data
+					 * @param {string} existing_data
+					 * @param {string} merged_data
+					 * @param {boolean} changed
+					 * @param {Db_Row} row
+					 * @return {boolean}
+					 */
+					Q::event('Q/session/save', $params, 'before');
+					if (! empty(self::$session_db_connection)) {
+						$row->$data_field = $merged_data ? $merged_data : '';
+						$row->$duration_field = Q_Config::get(
+							'Q', 'session', 'durations', Q_Request::formFactor(),
+							Q_Config::expect('Q', 'session', 'durations', 'session')
+						);
+						if ($platform_field) {
+							$platform = Q_Request::platform();
+							$row->$platform_field = $platform ? $platform : null;
+						}
+						$row->save(false, true);
+						$result = true;
+					} else {
+						ftruncate($file, 0);
+						rewind($file);
+						$result = fwrite($file, $merged_data);
+						flock($file, LOCK_UN);
+						fclose($file);
+					}	
 				}
 			} else {
 				$result = true;

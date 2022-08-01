@@ -459,6 +459,11 @@ a.Users_activation_resend:active {
 .Q_dialog_slot .Users_contacts_tool .Users_labels_label {
 	cursor: pointer;
 }
+.Users_labels_add_phonebook {
+	box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
+    border-radius: 5px;
+	background: rgb(128 128 128 / 20%);
+}
 
 .Users_pile_tool {
     width: 40px;

@@ -444,7 +444,7 @@ box-shadow:0 0 10px #000; }
 .Q_big_prompt input.tel,
 .Q_big_prompt input.password,
 .Q_big_prompt input.number,
-.Q_big_prompt textarea { font-size: 18px; border-radius:3px; }
+.Q_big_prompt textarea { font-size: 18px; border-radius:3px; padding: 7px; }
 .Q_big_prompt select { font-size: 18px; border-radius: 3px; vertical-align: middle; }
 .Q_big_prompt .Q_field_title { vertical-align: middle; text-align: right; padding-right: 10px; box-sizing: content-box; }
 

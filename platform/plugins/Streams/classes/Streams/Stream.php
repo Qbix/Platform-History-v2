@@ -2292,15 +2292,15 @@ class Streams_Stream extends Base_Streams_Stream
 		$description = Q::ifset($options, 'description', $description);
 		$keywords = $this->getAttribute('keywords') ?: Q::ifset($this, 'keywords', null);
 		$metas = array(
-			array('attrName' => 'name', 'attrValue' => 'title', 'content' => $title),
-			array('attrName' => 'name', 'attrValue' => 'image', 'content' => $image),
-			array('attrName' => 'name', 'attrValue' => 'description', 'content' => $description),
-			array('attrName' => 'name', 'attrValue' => 'keywords', 'content' => $keywords)
+			array('name' => 'name', 'value' => 'title', 'content' => $title),
+			array('name' => 'name', 'value' => 'image', 'content' => $image),
+			array('name' => 'name', 'value' => 'description', 'content' => $description),
+			array('name' => 'name', 'value' => 'keywords', 'content' => $keywords)
 		);
 		$url = Q::ifset($options, 'url', $this->url());
 		foreach (array('og', 'twitter') as $prefix) {
 			foreach (array('title', 'image', 'description', 'keywords', 'url') as $prop) {
-				$metas[] = array('attrName' => 'property', 'attrValue' => $prefix.':'.$prop, 'content' => $$prop);
+				$metas[] = array('name' => 'property', 'value' => $prefix.':'.$prop, 'content' => $$prop);
 			}
 		}
 
@@ -2309,17 +2309,17 @@ class Streams_Stream extends Base_Streams_Stream
 			$parsedUrl = parse_url($attrUrl);
 			parse_str($parsedUrl['query'], $parsedQuery);
 			if (Q::ifset($parsedQuery, 'v', null)) {
-				$metas[] = array('attrName' => 'property', 'attrValue' => 'og:video', 'content' => $parsedUrl['scheme'].'://'.$parsedUrl['host'].'/v/'.$parsedQuery['v']);
+				$metas[] = array('name' => 'property', 'value' => 'og:video', 'content' => $parsedUrl['scheme'].'://'.$parsedUrl['host'].'/v/'.$parsedQuery['v']);
 			} else {
-				$metas[] = array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $attrUrl);
+				$metas[] = array('name' => 'property', 'value' => 'og:url', 'content' => $attrUrl);
 			}
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'og:type', 'content' => 'video');
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'player');
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player', 'content' => $attrUrl);
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player:width', 'content' => "360");
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:player:height', 'content' => "200");
+			$metas[] = array('name' => 'property', 'value' => 'og:type', 'content' => 'video');
+			$metas[] = array('name' => 'property', 'value' => 'twitter:card', 'content' => 'player');
+			$metas[] = array('name' => 'property', 'value' => 'twitter:player', 'content' => $attrUrl);
+			$metas[] = array('name' => 'property', 'value' => 'twitter:player:width', 'content' => "360");
+			$metas[] = array('name' => 'property', 'value' => 'twitter:player:height', 'content' => "200");
 		} else {
-			$metas[] = array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary');
+			$metas[] = array('name' => 'property', 'value' => 'twitter:card', 'content' => 'summary');
 		}
 		return $metas;
 	}

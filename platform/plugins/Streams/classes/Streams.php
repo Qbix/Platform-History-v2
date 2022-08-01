@@ -3658,6 +3658,7 @@ abstract class Streams extends Base_Streams
 			if (is_string($identifiers)) {
 				$identifiers = array_map('trim', explode("\t", $identifiers)) ;
 			}
+			$statuses1 = array();
 			$identifier_ids = Users_User::idsFromIdentifiers(
 				$identifiers, $statuses1, $identifierTypes1
 			);
@@ -3676,7 +3677,7 @@ abstract class Streams extends Base_Streams
 			$statuses2 = array();
 			$raw_userIds = array_merge(
 				$raw_userIds, 
-				Users_User::idsFromPlatformXids($platform, $appId, $xids, $statuses2)
+				Users_User::idsFromPlatformXids($platform, $appId, $xids, false, $statuses2)
 			);
 			$statuses = array_merge($statuses, $statuses2);
 			$identifiers = array_merge($identifiers, $xids);

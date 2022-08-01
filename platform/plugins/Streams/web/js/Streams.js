@@ -4424,7 +4424,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
 
-		// check if stream cached and if not cache it
+		// check if stream cached and if not then retrieve and it for next time
 		if (!Streams.get.cache.get([publisherId, streamName])) {
 			Streams.get(publisherId, streamName);
 		}
@@ -5805,7 +5805,20 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
-		cache: Q.Cache[where]("Streams.get", 100),
+		cache: Q.Cache[where]("Streams.get", 100, {
+			beforeEvict: {
+				Streams: function (item) {
+					var publisherId = Q.getObject('subject.fields.publisherId', item);
+					var streamName = Q.getObject('subject.fields.name', item);
+					if (publisherId && streamName) {
+						var ps = Streams.key(publisherId, streamName);
+						if (_retainedByStream[ps]) {
+							return false; // don't evict retained streams from cache
+						}
+					}
+				}
+			}
+		}),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Streams.isStream(subject)) {
