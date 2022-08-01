@@ -1639,6 +1639,7 @@
     padding-top: 20px;
 }
 .Streams_webrtc_desktop-screen ul.Streams_webrtc_participants-list {
+    flex: 1;
     padding: 0;
     margin: 0;
     min-width: 400px;
@@ -1695,7 +1696,8 @@
     width:400px;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 .Streams_webrtc_desktop-screen .Streams_webrtc_conference-control .Streams_webrtc_hover .Streams_webrtc_popup-box::after{
     content: "";
