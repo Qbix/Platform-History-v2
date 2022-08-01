@@ -382,7 +382,8 @@ Q.Tool.define("Q/video", function (options) {
 	onLoad: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
-		this.setCurrentPosition(this.calculateStartPosition(), !state.skipPauseOnload, !state.skipPauseOnload);
+		var skipPauseOnload = !state.skipPauseOnload && !state.autoplay;
+		this.setCurrentPosition(this.calculateStartPosition(), skipPauseOnload, skipPauseOnload);
 		this.addAdvertising();
 
 		// preload next clip
@@ -421,7 +422,7 @@ Q.Tool.define("Q/video", function (options) {
 		}
 	}),
 	onCanPlay: new Q.Event(function () {
-		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
+		// don't call calculateStartPosition here! Because onCanPlay event can be called each seeking.
 	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
@@ -597,6 +598,7 @@ Q.Tool.define("Q/video", function (options) {
 
 			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
 				var player = this;
+				tool.player = this;
 
 				videojs.log('Your player is ready!');
 
@@ -1012,7 +1014,7 @@ Q.Tool.define("Q/video", function (options) {
 	 * @param {boolean} [silent=false] whether to mute sound while setting position
 	 * @param {boolean} [pause=false] whether to pause video after position changed
 	 */
-	setCurrentPosition: function (position, silent, pause) {
+	setCurrentPosition: Q.debounce(function (position, silent, pause) {
 		var tool = this;
 		var state = this.state;
 		var player = state.player;
@@ -1031,6 +1033,7 @@ Q.Tool.define("Q/video", function (options) {
 			player.waiting(true);
 		}
 
+		console.log(player.currentTime() + " : " + position/1000 + " : " + new Date().getTime());
 		player.currentTime(position/1000);
 
 		// this event need to show videojs control bar
@@ -1064,7 +1067,7 @@ Q.Tool.define("Q/video", function (options) {
 				counter++;
 			}, 200);
 		}
-	},
+	}, 200),
 	/**
 	 * @method getCurrentPosition
 	 */
