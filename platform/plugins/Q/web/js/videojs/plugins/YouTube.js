@@ -431,7 +431,7 @@ THE SOFTWARE. */
         }
       }
 
-      if (this.options_.autoplay) {
+      if (this.options_.autoplay && !_isOnMobile) {
         if (this.isReady_) {
           this.play();
         } else {
