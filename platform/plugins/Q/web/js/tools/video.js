@@ -1020,10 +1020,6 @@ Q.Tool.define("Q/video", function (options) {
 		var player = state.player;
 		var currentPosition = tool.getCurrentPosition();
 
-		if (position === 0) {
-			position = 1;
-		}
-
 		if (currentPosition === position) {
 			return;
 		}
@@ -1033,8 +1029,7 @@ Q.Tool.define("Q/video", function (options) {
 			player.waiting(true);
 		}
 
-		console.log(player.currentTime() + " : " + position/1000 + " : " + new Date().getTime());
-		player.currentTime(position/1000);
+		player.currentTime(position ? position/1000 : 0);
 
 		// this event need to show videojs control bar
 		player.hasStarted && player.hasStarted(true);
@@ -1061,11 +1056,11 @@ Q.Tool.define("Q/video", function (options) {
 						}
 					}
 
-					clearInterval(intervalId);
+					intervalId && clearInterval(intervalId);
 				}
 
 				counter++;
-			}, 200);
+			}(), 200);
 		}
 	}, 200),
 	/**
