@@ -34,7 +34,7 @@
 			"Users/setMobileNumber": ["Users/after/Users_setMobileNumber"],
 			"Users/addIdentifier": ["Users/after/Users_addIdentifier"],
 			"Q/request/languages": ["Users/after/Q_request_languages"],
-			"Q/response": ["Users/after/Q_analytics"]
+			"Q/analytics": ["Users/after/Q_analytics"]
 		},
 		"routes@start": {
 			"login/facebook": {"module": "Users", "action": "facebook"},
