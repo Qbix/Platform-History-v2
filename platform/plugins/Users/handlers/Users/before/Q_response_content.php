@@ -1,6 +1,6 @@
 <?php
 
-function Users_after_Q_response_content()
+function Users_before_Q_response_content()
 {
 	$url = Q_Request::url();
 
