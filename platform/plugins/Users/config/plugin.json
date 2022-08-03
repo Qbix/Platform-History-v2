@@ -23,7 +23,7 @@
 			"Q/response/notices": ["Users/before/Q_response_notices"],
 			"Q/session/save": ["Users/before/Q_session_save"],
 			"Q/Utils/canWriteToPath": ["Users/before/Q_Utils_canWriteToPath"],
-			"Q/response/content": ["Users/before/Q_response_content"]
+			"Q/response": ["Users/before/Q_response"]
 		},
 		"handlersAfterEvent": {
 			"Q/session/write": ["Users/after/Q_session_write"],
