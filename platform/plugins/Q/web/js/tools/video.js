@@ -1029,7 +1029,9 @@ Q.Tool.define("Q/video", function (options) {
 			player.waiting(true);
 		}
 
-		player.currentTime(position ? position/1000 : 0);
+		// convert to seconds
+		position = position > 0 ? position/1000 : 0;
+		player.currentTime(position);
 
 		// this event need to show videojs control bar
 		player.hasStarted && player.hasStarted(true);
@@ -1060,7 +1062,7 @@ Q.Tool.define("Q/video", function (options) {
 				}
 
 				counter++;
-			}(), 200);
+			}, 500);
 		}
 	}, 200),
 	/**
