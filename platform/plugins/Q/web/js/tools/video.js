@@ -232,7 +232,7 @@ Q.Tool.define("Q/video", function (options) {
 
 				// skip using overlay buton for ios, because of weird behavior
 				// some times called event onPause but video doens't paused and play further
-				if (!$overlayPlay.length && !state.isIos) {
+				if (!$overlayPlay.length) {
 					$overlayPlay = $("<img>")
 						.prop("src", Q.url(state.overlay.play.src))
 						.addClass("Q_video_overlay_play")
@@ -395,9 +395,7 @@ Q.Tool.define("Q/video", function (options) {
 		var tool = this;
 		var state = this.state;
 		var skipPauseOnload = !state.skipPauseOnload && !state.autoplay;
-		if (!state.skipPositionOnLoad) {
-			this.setCurrentPosition(this.calculateStartPosition(), skipPauseOnload, skipPauseOnload);
-		}
+		this.setCurrentPosition(this.calculateStartPosition(), skipPauseOnload, skipPauseOnload);
 		this.addAdvertising();
 
 		// preload next clip
@@ -1044,8 +1042,7 @@ Q.Tool.define("Q/video", function (options) {
 		}
 
 		// convert to seconds
-		position = position > 0 ? position/1000 : 0;
-		player.currentTime(position);
+		player.currentTime(position > 0 ? position/1000 : 0);
 
 		// this event need to show videojs control bar
 		player.hasStarted && player.hasStarted(true);
