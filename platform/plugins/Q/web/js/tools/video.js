@@ -232,7 +232,7 @@ Q.Tool.define("Q/video", function (options) {
 
 				// skip using overlay buton for ios, because of weird behavior
 				// some times called event onPause but video doens't paused and play further
-				if (!$overlayPlay.length) {
+				if (!$overlayPlay.length && !state.isIos) {
 					$overlayPlay = $("<img>")
 						.prop("src", Q.url(state.overlay.play.src))
 						.addClass("Q_video_overlay_play")
