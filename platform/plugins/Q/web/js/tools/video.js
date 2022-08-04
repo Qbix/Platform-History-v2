@@ -35,6 +35,7 @@ Q.Tool.define("Q/video", function (options) {
 	var tool = this;
 	var state = tool.state;
 	var $toolElement = $(tool.element);
+	state.isIos = Q.info.platform === "ios";
 
 	if (state.url) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
@@ -228,7 +229,10 @@ Q.Tool.define("Q/video", function (options) {
 
 				// place play button above the player
 				var $overlayPlay = $("img.Q_video_overlay_play", tool.element);
-				if (!$overlayPlay.length) {
+
+				// skip using overlay buton for ios, because of weird behavior
+				// some times called event onPause but video doens't paused and play further
+				if (!$overlayPlay.length && !state.isIos) {
 					$overlayPlay = $("<img>")
 						.prop("src", Q.url(state.overlay.play.src))
 						.addClass("Q_video_overlay_play")
