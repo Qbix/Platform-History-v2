@@ -28,6 +28,7 @@
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  *  @param {boolean} [options.loop=false] 
  *  @param {array} [options.ads] Array of ads in format [{position:<minutes>, url:<string>}, ...]
+ *  @param {array} [options.skipPositionOnLoad=false] It true skip setCurrentPosition on video loaded. Because start position can be defined in request.
  *  @param {boolean} [options.skipPauseOnload=false] If true, skip pause when player reach start position.
  */
 Q.Tool.define("Q/video", function (options) {
@@ -190,7 +191,6 @@ Q.Tool.define("Q/video", function (options) {
 			var host = newA.hostname;
 
 			element.classList.add("Q_video_twitch");
-
 			var options = {
 				autoplay: state.autoplay,
 				loop: state.loop,
@@ -201,8 +201,15 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			// convert start time to pass as option
-			var start = state.start || state.clipStart || 0;
-			options.time = Q.displayDuration(start).replace(/:/, 'h').replace(/:/, 'm') + 's';
+			var startTime = tool.calculateStartPosition();
+			if (startTime) {
+				startTime = Q.displayDuration(startTime, {hours:true}).split(':');
+				startTime = startTime[0] + 'h' + startTime[1] + 'm' + startTime[2] + 's';
+				options.time = startTime;
+			}
+
+			// skip setting start position on load because we set this time in options.time
+			state.skipPositionOnLoad = true;
 
 			var videoId = state.url.match(/\/videos?\/([0-9]+).*$/);
 			var channel = state.url.match(new RegExp(host + "/(\\w+)"));
@@ -327,6 +334,7 @@ Q.Tool.define("Q/video", function (options) {
 	currentPosition: 0,
 	className: null,
 	image: null,
+	skipPositionOnLoad: false,
 	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
@@ -383,7 +391,9 @@ Q.Tool.define("Q/video", function (options) {
 		var tool = this;
 		var state = this.state;
 		var skipPauseOnload = !state.skipPauseOnload && !state.autoplay;
-		this.setCurrentPosition(this.calculateStartPosition(), skipPauseOnload, skipPauseOnload);
+		if (!state.skipPositionOnLoad) {
+			this.setCurrentPosition(this.calculateStartPosition(), skipPauseOnload, skipPauseOnload);
+		}
 		this.addAdvertising();
 
 		// preload next clip
@@ -1042,7 +1052,7 @@ Q.Tool.define("Q/video", function (options) {
 			var intervalId = setInterval(function() {
 				var currentPosition = tool.getCurrentPosition();
 
-				if (currentPosition === position || counter > 10) {
+				if (currentPosition === position || counter > 20) {
 					if (silent) {
 						player.muted(!!state.videojsOptions.muted);
 						player.waiting(false);
