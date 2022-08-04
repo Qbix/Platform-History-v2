@@ -15,13 +15,29 @@ function Streams_vcard_response ($params) {
     $lastNameStream = Streams::fetchOne(null, $user->id, "Streams/user/lastName");
     $firstName = $firstNameStream->fields['content'];
     $lastName = $lastNameStream->fields['content'];
+
+    $name = '';
     if(!empty($firstName) && !empty($lastName) ){
         $firstNameStream->calculateAccess($user->id);
         $lastNameStream->calculateAccess($user->id);
         if ($lastNameStream->testReadLevel('content') && $firstNameStream->testReadLevel('content')) {
-            $vcr .= "N:$lastName;$firstName;;;\n";
+            $name = "N:$lastName;$firstName;;;\n";
         }
-
+    } else if(!empty($firstName) && empty($lastName) ){
+        $firstNameStream->calculateAccess($user->id);
+        if ($firstNameStream->testReadLevel('content')) {
+            $name = "N:;$firstName;;;\n";
+        }
+    } else if(empty($firstName) && !empty($lastName) ){
+        $lastNameStream->calculateAccess($user->id);
+        if ($lastNameStream->testReadLevel('content')) {
+            $name = "N:$lastName;;;;\n";
+        }
+    }
+    if(!empty($name)) {
+        $vcr .= $name;
+    } else if(!empty($fn)) {
+        $vcr .= "N:;$fn;;;\n";
     }
 
     $userUrl = Q_Uri::interpolateUrl("{{baseUrl}}/profile/$user->id");
