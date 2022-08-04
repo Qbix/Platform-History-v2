@@ -12168,6 +12168,7 @@ Q.Pointer = {
 	 * @return {HTMLElement} img1 - Hint image element
 	 */
 	hint: function (targets, options) {
+
 		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		var img, img1, i, l;
 		var qphi = Q.Pointer.hint.imgs;
@@ -12199,127 +12200,130 @@ Q.Pointer = {
 		img1.style.opacity = 0;
 		img1.hide = options.hide;
 		img1.dontStopBeforeShown = options.dontStopBeforeShown;
-		qphi.push(img1);
-		img1.style.visibility = 'hidden';
-		document.body.appendChild(img1);
-		hintEvent.add(Q.once(function _hintReady() {
-			img1.timeout = setTimeout(function () {
-				var i, l;
-				var imgs = [img1];
-				if (typeof targets === 'string') {
-					targets = document.querySelectorAll(targets);
-				}
-				if (Q.isEmpty(targets)) {
-					return;
-				}
-				img1.style.visibility = 'visible';
-				if (Q.isArrayLike(targets)) {
-					img1.target = targets[0];
-					for (i=1, l=targets.length; i<l; ++i) {
-						if (!(targets[i] instanceof Element) || !targets[i].exists()) {
-							continue;
-						}
-						var img2 = img1.cloneNode(false);
-						img2.hide = img1.hide;
-						img2.dontStopBeforeShown = img1.dontStopBeforeShown;
-						img2.target = targets[i];
-						img2.timeout = false;
-						imgs.push(img2);
-						Q.Pointer.hint.imgs.push(img2);
-						document.body.appendChild(img2);
-					}
-				} else {
-					img1.target = targets;
-					if (!targets.exists()) {
-						img1.remove();
-					}
-				}
-				Q.each(imgs, function (i, img) {
-					if (typeof img.target === 'string') {
-						img.target = document.querySelector(img.target);
-					}
-					img1.timeout = options.neverRemove;
-					var point;
-					var target = img.target;
-					if (Q.instanceOf(target, Element)) {
-						if (!target.isVisible()) {
-							if (img.parentNode) {
-								img.parentNode.removeChild(img);
-							}
-							return; // perhaps it disappeared
-						}
-						var offset = target.getBoundingClientRect();
-						point = {
-							x: Q.Pointer.positionLeft() + offset.left + target.offsetWidth / 2,
-							y: Q.Pointer.positionTop() + offset.top + target.offsetHeight / 2
-						};
-					} else {
-						point = target;
-					}
-					img.style.display = 'block';
-					img.style.left = point.x - img.offsetWidth * options.hotspot.x + 'px';
-					img.style.top = point.y - img.offsetHeight * options.hotspot.y + 'px';
-					img.style.zIndex = options.zIndex;
-					var width = parseInt(img.style.width);
-					var height = parseInt(img.style.height);
-					Q.Animation.play(function (x, y) {
-						if (options.styles) {
-							Q.extend(img.style, options.styles);
-						}
-						if (!options.styles || !options.styles.opacity) {
-							img.style.opacity = y;
-						}
-						if (options.show.initialScale !== 1) {
-							var z = 1 + (options.show.initialScale - 1) * (1 - y);
-							var w = width * z;
-							var h = height * z;
-							img.style.width = w + 'px';
-							img.style.height = h + 'px';
-							img.style.left = point.x - w * options.hotspot.x + 'px';
-							img.style.top = point.y - h * options.hotspot.y + 'px';
-						}
-					}, options.show.duration, options.show.ease);
-					if (options.hide && options.hide.after) {
-						setTimeout(function () {
-							_stopHint(img);
-						}, options.hide.after);
-					}
-				});
-			}, options.show.delay);
-		}));
-		if (!Q.Pointer.hint.addedListeners) {
-			Q.Pointer.stopHintsIgnore = true;
-			Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
-			Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
-			Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
-			Q.Pointer.hint.addedListeners = true;
-			setTimeout(function () {
-				delete Q.Pointer.stopHintsIgnore;
-			}, 0);
-		}
-		if (options.waitForEvents) {
-			return;
-		}
-		if (img1.complete) {
-			imageEvent.handle();
-		} else {
-			img1.onload = imageEvent.handle;
-		}
-		var a = options.audio || {};
-		if (a.src) {
-			Q.Audio.load(a.src, function () {
-				img1.audio = this;
-				this.hint = [targets, options];
-				this.play(a.from || 0, a.until, a.removeAfterPlaying);
-				audioEvent.handle();
-			});
-		} else if (options.speak) {
-			Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
-				onSpeak: audioEvent.handle
-			}));
-		} else {
-			audioEvent.handle();
-		}
+        setTimeout(function(){
+            qphi.push(img1);
+            img1.style.visibility = 'hidden';
+            document.body.appendChild(img1);
+            hintEvent.add(Q.once(function _hintReady() {
+                img1.timeout = setTimeout(function () {
+                    var i, l;
+                    var imgs = [img1];
+                    if (typeof targets === 'string') {
+                        targets = document.querySelectorAll(targets);
+                    }
+                    if (Q.isEmpty(targets)) {
+                        return;
+                    }
+                    img1.style.visibility = 'visible';
+                    if (Q.isArrayLike(targets)) {
+                        img1.target = targets[0];
+                        for (i=1, l=targets.length; i<l; ++i) {
+                            if (!(targets[i] instanceof Element) || !targets[i].exists()) {
+                                continue;
+                            }
+                            var img2 = img1.cloneNode(false);
+                            img2.hide = img1.hide;
+                            img2.dontStopBeforeShown = img1.dontStopBeforeShown;
+                            img2.target = targets[i];
+                            img2.timeout = false;
+                            imgs.push(img2);
+                            Q.Pointer.hint.imgs.push(img2);
+                            document.body.appendChild(img2);
+                        }
+                    } else {
+                        img1.target = targets;
+                        if (!targets.exists()) {
+                            img1.remove();
+                        }
+                    }
+                    Q.each(imgs, function (i, img) {
+                        if (typeof img.target === 'string') {
+                            img.target = document.querySelector(img.target);
+                        }
+                        img1.timeout = options.neverRemove;
+                        var point;
+                        var target = img.target;
+                        if (Q.instanceOf(target, Element)) {
+                            if (!target.isVisible()) {
+                                if (img.parentNode) {
+                                    img.parentNode.removeChild(img);
+                                }
+                                return; // perhaps it disappeared
+                            }
+                            var offset = target.getBoundingClientRect();
+                            point = {
+                                x: Q.Pointer.positionLeft() + offset.left + target.offsetWidth / 2,
+                                y: Q.Pointer.positionTop() + offset.top + target.offsetHeight / 2
+                            };
+                        } else {
+                            point = target;
+                        }
+                        img.style.display = 'block';
+                        img.style.left = point.x - img.offsetWidth * options.hotspot.x + 'px';
+                        img.style.top = point.y - img.offsetHeight * options.hotspot.y + 'px';
+                        img.style.zIndex = options.zIndex;
+                        var width = parseInt(img.style.width);
+                        var height = parseInt(img.style.height);
+                        Q.Animation.play(function (x, y) {
+                            if (options.styles) {
+                                Q.extend(img.style, options.styles);
+                            }
+                            if (!options.styles || !options.styles.opacity) {
+                                img.style.opacity = y;
+                            }
+                            if (options.show.initialScale !== 1) {
+                                var z = 1 + (options.show.initialScale - 1) * (1 - y);
+                                var w = width * z;
+                                var h = height * z;
+                                img.style.width = w + 'px';
+                                img.style.height = h + 'px';
+                                img.style.left = point.x - w * options.hotspot.x + 'px';
+                                img.style.top = point.y - h * options.hotspot.y + 'px';
+                            }
+                        }, options.show.duration, options.show.ease);
+                        if (options.hide && options.hide.after) {
+                            setTimeout(function () {
+                                _stopHint(img);
+                            }, options.hide.after);
+                        }
+                    });
+                }, options.show.delay);
+            }));
+            if (!Q.Pointer.hint.addedListeners) {
+                Q.Pointer.stopHintsIgnore = true;
+                Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
+                Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
+                Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
+                Q.Pointer.hint.addedListeners = true;
+                setTimeout(function () {
+                    delete Q.Pointer.stopHintsIgnore;
+                }, 0);
+            }
+            if (options.waitForEvents) {
+                return;
+            }
+            if (img1.complete) {
+                imageEvent.handle();
+            } else {
+                img1.onload = imageEvent.handle;
+            }
+            var a = options.audio || {};
+            if (a.src) {
+                Q.Audio.load(a.src, function () {
+                    img1.audio = this;
+                    this.hint = [targets, options];
+                    this.play(a.from || 0, a.until, a.removeAfterPlaying);
+                    audioEvent.handle();
+                });
+            } else if (options.speak) {
+                Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
+                    onSpeak: audioEvent.handle
+                }));
+            } else {
+                audioEvent.handle();
+            }
+
+        }, 0);
 
 		return img1;
 	},
