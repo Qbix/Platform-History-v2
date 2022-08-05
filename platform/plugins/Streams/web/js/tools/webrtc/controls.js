@@ -3229,9 +3229,16 @@
                             _popUpResizeobserver = new ResizeObserver(function(entries) {
 
                             	let popupRect = settingsPopup.getBoundingClientRect();
-                            	let maxHeight = popupRect.bottom;
+                                let windowHeight = window.innerHeight;
+
+                                let maxHeight;
+                                if(popupRect.top < 0) {
+                                    maxHeight = popupRect.bottom;
+								} else if (popupRect.bottom > windowHeight) {
+                                    maxHeight = popupRect.bottom - windowHeight - popupRect.top;
+								}
+
                                 for(let entry of entries){
-                                    let width = entry.contentRect.width;
                                     let height = entry.contentRect.height;
                                     if(height > maxHeight) {
                                         settingsPopupInner.style.maxHeight = maxHeight + 'px';
@@ -3272,6 +3279,7 @@
                 tool.audioSettingsPopup = (function () {
                 	var _audioinputListEl;
                 	var _audioOutputListEl;
+                	var _popUpResizeobserver;
 
 					var audioOutputListSection = (function () {
                         var _turnOffAudioOutputBtn;
@@ -3678,11 +3686,14 @@
                     function createSettingsPopUp() {
                         var settingsPopup = document.createElement('DIV');
                         settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
-                        settingsPopup.appendChild(audioOutputListSection.createAudioOutputList());
-                        settingsPopup.appendChild(audioInputListSection.createAudioInputList());
+                        var settingsPopupInner = document.createElement('DIV');
+                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
+                        settingsPopupInner.appendChild(audioOutputListSection.createAudioOutputList());
+                        settingsPopupInner.appendChild(audioInputListSection.createAudioInputList());
 
                         tool.audioSettingsPopupEl = settingsPopup;
                         console.log('audioSettingsPopupElv',settingsPopup)
+                        settingsPopup.appendChild(settingsPopupInner);
                         tool.microphoneBtn.parentNode.appendChild(settingsPopup);
 
                         audioOutputListSection.loadAudioOutputList();
@@ -3722,6 +3733,31 @@
                                 }, 600)
 
                             });
+
+
+                            _popUpResizeobserver = new ResizeObserver(function(entries) {
+
+                                let popupRect = settingsPopup.getBoundingClientRect();
+                                let windowHeight = window.innerHeight;
+                                let maxHeight;
+                                if(popupRect.top < 0) {
+                                    maxHeight = popupRect.bottom;
+                                } else if (popupRect.bottom > windowHeight) {
+                                    maxHeight = popupRect.bottom - windowHeight - popupRect.top;
+                                }
+                                for(let entry of entries){
+                                    let height = entry.contentRect.height;
+                                    if(height > maxHeight) {
+                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
+                                        settingsPopupInner.style.overflowY = 'auto';
+                                    } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
+                                        settingsPopupInner.style.maxHeight = '';
+                                        settingsPopupInner.style.overflowY = '';
+                                    }
+                                }
+                            })
+
+                            _popUpResizeobserver.observe(settingsPopup)
                         }
 
                     }
@@ -3743,6 +3779,7 @@
 			 */
 			participantsPopup:function() {
 				var tool = this;
+				var _popUpResizeobserver;
 
 				var localParticipant = tool.WebRTCLib.localParticipant();
 				var roomParticipants = tool.WebRTCLib.roomParticipants();
@@ -4693,6 +4730,28 @@
 							}, 400)
 
 						});
+
+                        _popUpResizeobserver = new ResizeObserver(function(entries) {
+
+                            let popupRect = participantsListCon.getBoundingClientRect();
+                            let windowHeight = window.innerHeight;
+                            let maxHeight;
+                            if(popupRect.top < 0) {
+                                maxHeight = popupRect.bottom;
+                            } else if (popupRect.bottom > windowHeight) {
+                                maxHeight = popupRect.bottom - windowHeight - popupRect.top;
+                            }
+                            for(let entry of entries){
+                                let height = entry.contentRect.height;
+                                if(height >= maxHeight) {
+                                    participantsListCon.style.maxHeight = maxHeight + 'px';
+                                } else if (height < maxHeight && participantsListCon.style.maxHeight != '' && participantsListCon.style.maxHeight != null) {
+                                    participantsListCon.style.maxHeight = '';
+                                }
+                            }
+                        })
+
+                        _popUpResizeobserver.observe(participantsListCon)
 
 						$(disconnectBtn).plugin('Q/clickable', {
 							press: {size: 1.2},
