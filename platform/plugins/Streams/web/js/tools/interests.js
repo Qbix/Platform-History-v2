@@ -76,7 +76,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			}
 
 			function addExpandable(category, interests) {
-				var info = Q.getObject([state.communityId, category], Streams.Interests.info);
+				var info = Q.getObject([state.communityId, category], Streams.Interests.info) || {};
 				var content = '';
 				var count = 0;
 				Q.each(interests, function (subcategory, interests) {
