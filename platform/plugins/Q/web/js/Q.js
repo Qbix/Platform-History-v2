@@ -12307,23 +12307,23 @@ Q.Pointer = {
             } else {
                 img1.onload = imageEvent.handle;
             }
-            var a = options.audio || {};
-            if (a.src) {
-                Q.Audio.load(a.src, function () {
-                    img1.audio = this;
-                    this.hint = [targets, options];
-                    this.play(a.from || 0, a.until, a.removeAfterPlaying);
-                    audioEvent.handle();
-                });
-            } else if (options.speak) {
-                Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
-                    onSpeak: audioEvent.handle
-                }));
-            } else {
-                audioEvent.handle();
-            }
-
         }, 0);
+
+		var a = options.audio || {};
+		if (a.src) {
+			Q.Audio.load(a.src, function () {
+				img1.audio = this;
+				this.hint = [targets, options];
+				this.play(a.from || 0, a.until, a.removeAfterPlaying);
+				audioEvent.handle();
+			});
+		} else if (options.speak) {
+			Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
+				onSpeak: audioEvent.handle
+			}));
+		} else {
+			audioEvent.handle();
+		}
 
 		return img1;
 	},
