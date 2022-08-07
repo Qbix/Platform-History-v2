@@ -12171,18 +12171,17 @@ Q.Pointer = {
 
 		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		var img, img1, i, l;
-		var qphi = Q.Pointer.hint.imgs;
 		var imageEvent = options.imageEvent || new Q.Event();
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
 		if (!options.dontRemove && !options.waitForEvents) {
-			for (i=0, l=qphi.length; i<l; ++i) {
-				img = qphi[i];
+			for (i=0, l=Q.Pointer.hint.imgs.length; i<l; ++i) {
+				img = Q.Pointer.hint.imgs[i];
 				if (img.parentNode) {
 					img.parentNode.removeChild(img);
 				}
 			}
-			qphi = Q.Pointer.hint.imgs = [];
+			Q.Pointer.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
 		img1.setAttribute('src', Q.url(options.src));
@@ -12201,7 +12200,7 @@ Q.Pointer = {
 		img1.hide = options.hide;
 		img1.dontStopBeforeShown = options.dontStopBeforeShown;
         setTimeout(function(){
-            qphi.push(img1);
+            Q.Pointer.hint.imgs.push(img1);
             img1.style.visibility = 'hidden';
             document.body.appendChild(img1);
             hintEvent.add(Q.once(function _hintReady() {
