@@ -4213,7 +4213,8 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * Call this function to define a tool
  * @static
  * @method define
- * @param {String|Object} name The name of the tool, e.g. "Q/foo". Also you can pass an object containing {name: filename} pairs instead.
+ * @param {String|Object} name The name of the tool, e.g. "Q/foo".
+ *   Also you can pass an object containing {name: filename} pairs instead.
  * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
  * @param {Object|Function} ctor Your tool's constructor information. You can also pass a filename here, in which case the other parameters are ignored.
  *   If you pass a function, then it will be used as a constructor for the tool. You can also pass an object with the following properties
@@ -4226,10 +4227,10 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @param {String} [ctor.placeholder.template] the name of a template to insert
  * @param {Object} [defaultOptions] An optional hash of default options for the tool
  * @param {Array} [stateKeys] An optional array of key names to copy from options to state
- * @param{Object} [methods] An optional hash of method functions to assign to the prototype
+ * @param {Object} [methods] An optional hash of method functions to assign to the prototype
  * @return {Function} The tool's constructor function
  */
-Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods) {
+Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods, overwrite) {
 	var ctors = {};
 	if (typeof name === 'object') {
 		ctors = name;
@@ -4247,6 +4248,9 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	for (name in ctors) {
 		ctor = ctors[name];
 		var n = Q.normalize(name);
+		if (!overwrite && typeof _qtc[n] === 'function') {
+			continue;
+		}
 		if (ctor == null) {
 			ctor = function _Q_Tool_default_constructor() {
 				// this constructor is just a stub and does nothing
@@ -4336,7 +4340,7 @@ var _qtdo = {};
  * @param {Array} stateKeys An optional array of key names to copy from options to state
  * @param {Object} methods An optional hash of method functions to assign to the prototype
  */
-Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
+Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods, overwrite) {
 	var n;
 	if (typeof name === 'object') {
 		for (n in name) {
@@ -4350,7 +4354,10 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		if (root.jQuery
 		&& typeof jQuery.fn.plugin[n] !== 'function') {
 			_qtjo[n] = _qtjo[n] || {};
-			jQuery.fn.plugin[n] = _qtc[n] = ctor;
+			if (overwrite || typeof _qtc[n] !== 'function') {
+				_qtc[n] = ctor;
+			}
+			jQuery.fn.plugin[n] = _qtc[n];
 		}
 		return ctor;
 	}
