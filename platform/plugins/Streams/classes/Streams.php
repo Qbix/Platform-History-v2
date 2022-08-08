@@ -4840,7 +4840,7 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream}
 	 */
 	static function getInterest ($title, $publisherId = null) {
-		$streamName = 'Streams/interest/' . Q_Utils::normalize(trim($title));
+		$streamName = 'Streams/interest/' . Q_Utils::normalize(str_replace(array("'", '"'), '', trim($title)));
 		$publisherId = $publisherId ?: Users::communityId();
 
 		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
