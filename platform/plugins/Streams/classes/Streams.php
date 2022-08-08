@@ -4845,7 +4845,7 @@ abstract class Streams extends Base_Streams
 
 		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
-			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
+			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
 				'title' => $title
 			));
