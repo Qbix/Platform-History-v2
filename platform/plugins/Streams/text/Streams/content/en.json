@@ -13,7 +13,7 @@
         "No": "No"
     },
     "interests": {
-        "Filter": "What are your interests?",
+        "Filter": "Search interests",
         "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
         "TrySynonyms": "Don't see it? Try some synonyms.",
         "AddUnderCategory": "Add under category...",
