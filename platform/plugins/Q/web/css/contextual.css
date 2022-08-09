@@ -68,13 +68,13 @@
 .Q_selectable_listing .Q_current
 {
 	background: #eee;
-	background: -moz-linear-gradient(top,  #aaa 0%, #eee 100%);
+	background: -moz-linear-gradient(top,  #aae 0%, #eee 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aaa), color-stop(100%,#eee));
-	background: -webkit-linear-gradient(top,  #aaa 0%,#eee 100%);
-	background: -o-linear-gradient(top,  #aaa 0%,#eee 100%);
-	background: -ms-linear-gradient(top,  #aaa 0%,#eee 100%);
-	background: linear-gradient(top,  #aaa 0%,#eee 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#eeeeee',GradientType=0 );
+	background: -webkit-linear-gradient(top,  #aae 0%,#eee 100%);
+	background: -o-linear-gradient(top,  #aae 0%,#eee 100%);
+	background: -ms-linear-gradient(top,  #aae 0%,#eee 100%);
+	background: linear-gradient(top,  #aae 0%,#eee 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaee', endColorstr='#eeeeee',GradientType=0 );
 	border-top: solid 1px #999;
 	box-sizing: border-box;
 }
@@ -82,7 +82,7 @@
 .Q_contextual .Q_listing .Q_current *,
 .Q_selectable_listing .Q_current * {
 	color: black;
-	font-weight: 400;
+	font-weight: bold;
 	text-shadow: #ccc 0 1px 0;
 }
 

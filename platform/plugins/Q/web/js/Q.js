@@ -1002,16 +1002,6 @@ Elp.addClass = function (className) {
 };
 
 /**
- * Check if element instance od HTML.Element and exists in DOM.
- * @method exists
- * @chainable
- * @return {Boolean}
- */
-Elp.exists = function () {
-	return (this instanceof Element) && this.offsetParent;
-};
-
-/**
  * Adds or removes an element according to whether a condition is truthy
  * @method setClass
  * @chainable
@@ -1049,7 +1039,7 @@ Elp.isOverflowed = function() {
 };
 
 /**
- * Returns whether the element's is visible
+ * Returns whether the element is visible
  * @method isVisible
  * @return {boolean}
  */
@@ -1117,6 +1107,17 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 			Q.handle(callback, this);
 		}
 	}, key);
+};
+
+/**
+ * Check if element instance od HTML.Element and exists in DOM.
+ * @method exists
+ * @chainable
+ * @param {Element} element
+ * @return {Boolean}
+ */
+Q.elementIsInDOM = function (element) {
+	return (element instanceof Element) && element.offsetParent;
 };
 
 if (!Elp.getElementsByClassName) {
@@ -4213,7 +4214,8 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * Call this function to define a tool
  * @static
  * @method define
- * @param {String|Object} name The name of the tool, e.g. "Q/foo". Also you can pass an object containing {name: filename} pairs instead.
+ * @param {String|Object} name The name of the tool, e.g. "Q/foo".
+ *   Also you can pass an object containing {name: filename} pairs instead.
  * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
  * @param {Object|Function} ctor Your tool's constructor information. You can also pass a filename here, in which case the other parameters are ignored.
  *   If you pass a function, then it will be used as a constructor for the tool. You can also pass an object with the following properties
@@ -4226,10 +4228,10 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @param {String} [ctor.placeholder.template] the name of a template to insert
  * @param {Object} [defaultOptions] An optional hash of default options for the tool
  * @param {Array} [stateKeys] An optional array of key names to copy from options to state
- * @param{Object} [methods] An optional hash of method functions to assign to the prototype
+ * @param {Object} [methods] An optional hash of method functions to assign to the prototype
  * @return {Function} The tool's constructor function
  */
-Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods) {
+Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, methods, overwrite) {
 	var ctors = {};
 	if (typeof name === 'object') {
 		ctors = name;
@@ -4247,6 +4249,9 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 	for (name in ctors) {
 		ctor = ctors[name];
 		var n = Q.normalize(name);
+		if (!overwrite && typeof _qtc[n] === 'function') {
+			continue;
+		}
 		if (ctor == null) {
 			ctor = function _Q_Tool_default_constructor() {
 				// this constructor is just a stub and does nothing
@@ -4336,7 +4341,7 @@ var _qtdo = {};
  * @param {Array} stateKeys An optional array of key names to copy from options to state
  * @param {Object} methods An optional hash of method functions to assign to the prototype
  */
-Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
+Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods, overwrite) {
 	var n;
 	if (typeof name === 'object') {
 		for (n in name) {
@@ -4350,7 +4355,10 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods) {
 		if (root.jQuery
 		&& typeof jQuery.fn.plugin[n] !== 'function') {
 			_qtjo[n] = _qtjo[n] || {};
-			jQuery.fn.plugin[n] = _qtc[n] = ctor;
+			if (overwrite || typeof _qtc[n] !== 'function') {
+				_qtc[n] = ctor;
+			}
+			jQuery.fn.plugin[n] = _qtc[n];
 		}
 		return ctor;
 	}
@@ -12151,6 +12159,12 @@ Q.Pointer = {
 	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
+	 * @param {boolean} [options.tooltip] Can be used to show a tooltip with some html
+	 * @param {boolean} [options.tooltip.text] Use to put text in the tooltip
+	 * @param {boolean} [options.tooltip.html] Use to put text in the tooltip (overrides text)
+	 * @param {boolean} [options.tooltip.index=0] The index of the image to which to attach the tooltip
+	 * @param {boolean} [options.tooltip.className='Q_pulsate'] You can override the additional class name / animation effect
+	 * @param {boolean} [options.tooltip.margin=10] The margin to put around the tooltip if it gets too close to the edges
 	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
 	 *  function for options you can pass in this object
 	 * @param {String} [options.speak.text] The text to speak.
@@ -12171,28 +12185,32 @@ Q.Pointer = {
 
 		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
 		var img, img1, i, l;
-		var qphi = Q.Pointer.hint.imgs;
 		var imageEvent = options.imageEvent || new Q.Event();
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
 		if (!options.dontRemove && !options.waitForEvents) {
-			for (i=0, l=qphi.length; i<l; ++i) {
-				img = qphi[i];
+			for (i=0, l=Q.Pointer.hint.imgs.length; i<l; ++i) {
+				img = Q.Pointer.hint.imgs[i];
 				if (img.parentNode) {
 					img.parentNode.removeChild(img);
 				}
+				if (img.tooltip && img.tooltip.parentNode) {
+					img.tooltip.parentNode.removeChild(img.tooltip);
+				}
 			}
-			qphi = Q.Pointer.hint.imgs = [];
+			Q.Pointer.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
 		img1.setAttribute('src', Q.url(options.src));
-		img1.style.position = 'absolute';
-		img1.style.width = options.width;
-		img1.style.height = options.height;
-		img1.style.left = 0;
-		img1.style.top = 0;
-		img1.style.display = 'block';
-		img1.style.pointerEvents = 'none';
+		Q.extend(img1.style, {
+			position: 'absolute',
+			width: options.width,
+			height: options.height,
+			left: 0,
+			top: 0,
+			display: 'block',
+			pointerEvents: 'none'
+		});
 		img1.setAttribute('class', 'Q_hint');
 		if (options.classes) {
 			img1.addClass(options.classes);
@@ -12201,7 +12219,7 @@ Q.Pointer = {
 		img1.hide = options.hide;
 		img1.dontStopBeforeShown = options.dontStopBeforeShown;
         setTimeout(function(){
-            qphi.push(img1);
+            Q.Pointer.hint.imgs.push(img1);
             img1.style.visibility = 'hidden';
             document.body.appendChild(img1);
             hintEvent.add(Q.once(function _hintReady() {
@@ -12218,7 +12236,7 @@ Q.Pointer = {
                     if (Q.isArrayLike(targets)) {
                         img1.target = targets[0];
                         for (i=1, l=targets.length; i<l; ++i) {
-                            if (!(targets[i] instanceof Element) || !targets[i].exists()) {
+                            if (!Q.elementIsInDOM(targets[i])) {
                                 continue;
                             }
                             var img2 = img1.cloneNode(false);
@@ -12232,7 +12250,7 @@ Q.Pointer = {
                         }
                     } else {
                         img1.target = targets;
-                        if (!targets.exists()) {
+                        if (!Q.elementIsInDOM(targets)) {
                             img1.remove();
                         }
                     }
@@ -12247,6 +12265,9 @@ Q.Pointer = {
                             if (!target.isVisible()) {
                                 if (img.parentNode) {
                                     img.parentNode.removeChild(img);
+									if (img.tooltip && img.tooltip.parentNode) {
+										img.tooltip.parentNode.removeChild(img.tooltip);
+									}
                                 }
                                 return; // perhaps it disappeared
                             }
@@ -12258,18 +12279,66 @@ Q.Pointer = {
                         } else {
                             point = target;
                         }
-                        img.style.display = 'block';
-                        img.style.left = point.x - img.offsetWidth * options.hotspot.x + 'px';
-                        img.style.top = point.y - img.offsetHeight * options.hotspot.y + 'px';
-                        img.style.zIndex = options.zIndex;
+						var zIndex = (zIndex in options) ? options.zIndex : 99999;
+						var x = point.x - img.offsetWidth * options.hotspot.x;
+						var y = point.y - img.offsetHeight * options.hotspot.y;
+						Q.extend(img.style, {
+							display: 'block',
+							left: x + 'px',
+							top: y + 'px',
+							zIndex: zIndex,
+							pointerEvents: 'none'
+						});
                         var width = parseInt(img.style.width);
                         var height = parseInt(img.style.height);
+						var tooltip = null;
+						if (options.tooltip
+						&& (options.tooltip.index || 0) == i
+						&& !img.tooltip) {
+							tooltip = img.tooltip = img.tooltip || document.createElement('div');
+							var className = ('className' in options.tooltip) ? options.tooltip.className : 'Q_pulsate';
+							tooltip.setAttribute('class', 'Q_hint_tooltip'
+								+ (className ? ' ' + className : '')
+							);
+							if (img.parentNode) {
+								img.parentNode.insertBefore(tooltip, img);
+							}
+							if (options.tooltip.html) {
+								tool.innerHTML = options.tooltip.html;
+							} else if (options.tooltip.text) {
+								tooltip.innerHTML = options.tooltip.text.encodeHTML();
+							}
+							Q.extend(tooltip.style, {
+								display: 'inline-block',
+								position: 'absolute',
+								zIndex: (zIndex in options.tooltip) ? options.tooltip.zIndex : zIndex,
+								pointerEvents: 'none'
+							});
+							var irect = img.getBoundingClientRect();
+							var rect = tooltip.getBoundingClientRect();
+							var tleft = point.x - rect.width / 2;
+							var ttop = irect.bottom;
+							var m = ('margin' in options.tooltip) ? options.tooltip.margin : 10;
+							if (ttop + rect.height > window.innerHeight) {
+								ttop = point.y - rect.height - m;
+							}
+							if (tleft + rect.width > window.innerWidth) {
+								tleft = window.innerWidth - rect.width - m;
+							} else if (tleft < 0) {
+								tleft = m;
+							}
+							tooltip.style.left = tleft + 'px';
+							tooltip.style.top = ttop + 'px';
+						}
                         Q.Animation.play(function (x, y) {
                             if (options.styles) {
                                 Q.extend(img.style, options.styles);
                             }
                             if (!options.styles || !options.styles.opacity) {
                                 img.style.opacity = y;
+								if (tooltip) {
+									tooltip.style.opacity = y;
+								}
                             }
                             if (options.show.initialScale !== 1) {
                                 var z = 1 + (options.show.initialScale - 1) * (1 - y);
@@ -12307,23 +12376,23 @@ Q.Pointer = {
             } else {
                 img1.onload = imageEvent.handle;
             }
-            var a = options.audio || {};
-            if (a.src) {
-                Q.Audio.load(a.src, function () {
-                    img1.audio = this;
-                    this.hint = [targets, options];
-                    this.play(a.from || 0, a.until, a.removeAfterPlaying);
-                    audioEvent.handle();
-                });
-            } else if (options.speak) {
-                Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
-                    onSpeak: audioEvent.handle
-                }));
-            } else {
-                audioEvent.handle();
-            }
-
         }, 0);
+
+		var a = options.audio || {};
+		if (a.src) {
+			Q.Audio.load(a.src, function () {
+				img1.audio = this;
+				this.hint = [targets, options];
+				this.play(a.from || 0, a.until, a.removeAfterPlaying);
+				audioEvent.handle();
+			});
+		} else if (options.speak) {
+			Q.Audio.speak(options.speak.text, Q.extend({}, 10, options.speak, {
+				onSpeak: audioEvent.handle
+			}));
+		} else {
+			audioEvent.handle();
+		}
 
 		return img1;
 	},
@@ -12630,10 +12699,16 @@ function _stopHint(img, container) {
 	var initialOpacity = parseFloat(img.style.opacity);
 	Q.Animation.play(function (x, y) {
 		img.style.opacity = initialOpacity * (1-y);
+		if (img.tooltip) {
+			img.tooltip.style.opacity = initialOpacity * (1-y);
+		}
 	}, img.hide.duration, img.hide.ease)
 	.onComplete.set(function () {
 		if (img.parentNode) {
 			img.parentNode.removeChild(img);
+			if (img.tooltip) {
+				img.tooltip.parentNode.removeChild(img.tooltip);
+			}
 		}
 	});
 	return null;
