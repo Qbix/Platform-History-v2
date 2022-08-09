@@ -873,6 +873,7 @@ input[type=password] {
 .Q_hint {
 	border-radius: 50%;
 	box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.35);
+	text-align: center;
 }
 .Q_hint_tooltip {
 	border-radius: 10px;

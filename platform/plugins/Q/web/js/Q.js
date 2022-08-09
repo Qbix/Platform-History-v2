@@ -12163,7 +12163,7 @@ Q.Pointer = {
 	 * @param {boolean} [options.tooltip.text] Use to put text in the tooltip
 	 * @param {boolean} [options.tooltip.html] Use to put text in the tooltip (overrides text)
 	 * @param {boolean} [options.tooltip.index=0] The index of the image to which to attach the tooltip
-	 * @param {boolean} [options.tooltip.className='Q_wiggle'] You can override the additional class name / animation effect
+	 * @param {boolean} [options.tooltip.className='Q_pulsate'] You can override the additional class name / animation effect
 	 * @param {boolean} [options.tooltip.margin=10] The margin to put around the tooltip if it gets too close to the edges
 	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
 	 *  function for options you can pass in this object
@@ -12296,7 +12296,7 @@ Q.Pointer = {
 						&& (options.tooltip.index || 0) == i
 						&& !img.tooltip) {
 							tooltip = img.tooltip = img.tooltip || document.createElement('div');
-							var className = ('className' in options.tooltip) ? options.tooltip.className : 'Q_wiggle';
+							var className = ('className' in options.tooltip) ? options.tooltip.className : 'Q_pulsate';
 							tooltip.setAttribute('class', 'Q_hint_tooltip'
 								+ (className ? ' ' + className : '')
 							);
