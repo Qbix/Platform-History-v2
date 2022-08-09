@@ -1002,16 +1002,6 @@ Elp.addClass = function (className) {
 };
 
 /**
- * Check if element instance od HTML.Element and exists in DOM.
- * @method exists
- * @chainable
- * @return {Boolean}
- */
-Elp.exists = function () {
-	return (this instanceof Element) && this.offsetParent;
-};
-
-/**
  * Adds or removes an element according to whether a condition is truthy
  * @method setClass
  * @chainable
@@ -1049,7 +1039,7 @@ Elp.isOverflowed = function() {
 };
 
 /**
- * Returns whether the element's is visible
+ * Returns whether the element is visible
  * @method isVisible
  * @return {boolean}
  */
@@ -1117,6 +1107,17 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 			Q.handle(callback, this);
 		}
 	}, key);
+};
+
+/**
+ * Check if element instance od HTML.Element and exists in DOM.
+ * @method exists
+ * @chainable
+ * @param {Element} element
+ * @return {Boolean}
+ */
+Q.elementIsInDOM = function (element) {
+	return (element instanceof Element) && element.offsetParent;
 };
 
 if (!Elp.getElementsByClassName) {
@@ -12158,6 +12159,12 @@ Q.Pointer = {
 	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
+	 * @param {boolean} [options.tooltip] Can be used to show a tooltip with some html
+	 * @param {boolean} [options.tooltip.text] Use to put text in the tooltip
+	 * @param {boolean} [options.tooltip.html] Use to put text in the tooltip (overrides text)
+	 * @param {boolean} [options.tooltip.index=0] The index of the image to which to attach the tooltip
+	 * @param {boolean} [options.tooltip.className='Q_wiggle'] You can override the additional class name / animation effect
+	 * @param {boolean} [options.tooltip.margin=10] The margin to put around the tooltip if it gets too close to the edges
 	 * @param {Object} [options.speak] Can be used to speak some text. See Q.Audio.speak()
 	 *  function for options you can pass in this object
 	 * @param {String} [options.speak.text] The text to speak.
@@ -12187,18 +12194,23 @@ Q.Pointer = {
 				if (img.parentNode) {
 					img.parentNode.removeChild(img);
 				}
+				if (img.tooltip && img.tooltip.parentNode) {
+					img.tooltip.parentNode.removeChild(img.tooltip);
+				}
 			}
 			Q.Pointer.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
 		img1.setAttribute('src', Q.url(options.src));
-		img1.style.position = 'absolute';
-		img1.style.width = options.width;
-		img1.style.height = options.height;
-		img1.style.left = 0;
-		img1.style.top = 0;
-		img1.style.display = 'block';
-		img1.style.pointerEvents = 'none';
+		Q.extend(img1.style, {
+			position: 'absolute',
+			width: options.width,
+			height: options.height,
+			left: 0,
+			top: 0,
+			display: 'block',
+			pointerEvents: 'none'
+		});
 		img1.setAttribute('class', 'Q_hint');
 		if (options.classes) {
 			img1.addClass(options.classes);
@@ -12224,7 +12236,7 @@ Q.Pointer = {
                     if (Q.isArrayLike(targets)) {
                         img1.target = targets[0];
                         for (i=1, l=targets.length; i<l; ++i) {
-                            if (!(targets[i] instanceof Element) || !targets[i].exists()) {
+                            if (!Q.elementIsInDOM(targets[i])) {
                                 continue;
                             }
                             var img2 = img1.cloneNode(false);
@@ -12238,7 +12250,7 @@ Q.Pointer = {
                         }
                     } else {
                         img1.target = targets;
-                        if (!targets.exists()) {
+                        if (!Q.elementIsInDOM(targets)) {
                             img1.remove();
                         }
                     }
@@ -12253,6 +12265,9 @@ Q.Pointer = {
                             if (!target.isVisible()) {
                                 if (img.parentNode) {
                                     img.parentNode.removeChild(img);
+									if (img.tooltip && img.tooltip.parentNode) {
+										img.tooltip.parentNode.removeChild(img.tooltip);
+									}
                                 }
                                 return; // perhaps it disappeared
                             }
@@ -12264,18 +12279,66 @@ Q.Pointer = {
                         } else {
                             point = target;
                         }
-                        img.style.display = 'block';
-                        img.style.left = point.x - img.offsetWidth * options.hotspot.x + 'px';
-                        img.style.top = point.y - img.offsetHeight * options.hotspot.y + 'px';
-                        img.style.zIndex = options.zIndex;
+						var zIndex = (zIndex in options) ? options.zIndex : 99999;
+						var x = point.x - img.offsetWidth * options.hotspot.x;
+						var y = point.y - img.offsetHeight * options.hotspot.y;
+						Q.extend(img.style, {
+							display: 'block',
+							left: x + 'px',
+							top: y + 'px',
+							zIndex: zIndex,
+							pointerEvents: 'none'
+						});
                         var width = parseInt(img.style.width);
                         var height = parseInt(img.style.height);
+						var tooltip = null;
+						if (options.tooltip
+						&& (options.tooltip.index || 0) == i
+						&& !img.tooltip) {
+							tooltip = img.tooltip = img.tooltip || document.createElement('div');
+							var className = ('className' in options.tooltip) ? options.tooltip.className : 'Q_wiggle';
+							tooltip.setAttribute('class', 'Q_hint_tooltip'
+								+ (className ? ' ' + className : '')
+							);
+							if (img.parentNode) {
+								img.parentNode.insertBefore(tooltip, img);
+							}
+							if (options.tooltip.html) {
+								tool.innerHTML = options.tooltip.html;
+							} else if (options.tooltip.text) {
+								tooltip.innerHTML = options.tooltip.text.encodeHTML();
+							}
+							Q.extend(tooltip.style, {
+								display: 'inline-block',
+								position: 'absolute',
+								zIndex: (zIndex in options.tooltip) ? options.tooltip.zIndex : zIndex,
+								pointerEvents: 'none'
+							});
+							var irect = img.getBoundingClientRect();
+							var rect = tooltip.getBoundingClientRect();
+							var tleft = point.x - rect.width / 2;
+							var ttop = irect.bottom;
+							var m = ('margin' in options.tooltip) ? options.tooltip.margin : 10;
+							if (ttop + rect.height > window.innerHeight) {
+								ttop = point.y - rect.height - m;
+							}
+							if (tleft + rect.width > window.innerWidth) {
+								tleft = window.innerWidth - rect.width - m;
+							} else if (tleft < 0) {
+								tleft = m;
+							}
+							tooltip.style.left = tleft + 'px';
+							tooltip.style.top = ttop + 'px';
+						}
                         Q.Animation.play(function (x, y) {
                             if (options.styles) {
                                 Q.extend(img.style, options.styles);
                             }
                             if (!options.styles || !options.styles.opacity) {
                                 img.style.opacity = y;
+								if (tooltip) {
+									tooltip.style.opacity = y;
+								}
                             }
                             if (options.show.initialScale !== 1) {
                                 var z = 1 + (options.show.initialScale - 1) * (1 - y);
@@ -12636,10 +12699,16 @@ function _stopHint(img, container) {
 	var initialOpacity = parseFloat(img.style.opacity);
 	Q.Animation.play(function (x, y) {
 		img.style.opacity = initialOpacity * (1-y);
+		if (img.tooltip) {
+			img.tooltip.style.opacity = initialOpacity * (1-y);
+		}
 	}, img.hide.duration, img.hide.ease)
 	.onComplete.set(function () {
 		if (img.parentNode) {
 			img.parentNode.removeChild(img);
+			if (img.tooltip) {
+				img.tooltip.parentNode.removeChild(img.tooltip);
+			}
 		}
 	});
 	return null;
