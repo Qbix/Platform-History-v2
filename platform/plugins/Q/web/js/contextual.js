@@ -408,7 +408,7 @@
 					}
 				};
 				$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);
-				$(document.body).on(Q.Pointer.leave, Q.Contextual.leaveEventHandler);
+				$(document.body).on('mouseout', Q.Contextual.leaveEventHandler);
 			
 				Q.Contextual.endEventHandler = function(e)
 				{
