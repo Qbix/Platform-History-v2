@@ -94,7 +94,6 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 			};
 		}
 		Q.Users.getLabels(state.userId, state.prefix, function (err, labels) {
-			console.log('aaaaaaaaaaaaaa',state)
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,
@@ -147,16 +146,41 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 					$add.plugin('Q/clickable');
 				}, 0);
 			}
-			if (state.addToPhonebook ) {
+			if (state.addToPhonebook) {
 				var $addToPhonebook = tool.$('.Users_labels_add_phonebook')
 				.on(Q.Pointer.fastclick, function () {
 					location.href = Q.url("{{baseUrl}}/Users/" + state.contactUserId + ".vcf");
 				});
+
 				setTimeout(function () {
 					// add clickable after the sizing has been done
                     $addToPhonebook.plugin('Q/clickable');
 				}, 0);
 			}
+
+            let elems = $('.Users_labels_title');
+            let length = elems.length;
+            $('.Users_labels_title', $(tool.element)).each(function(i){
+                if(i == 0) {
+                    Q.Users.hint('Communities/profile/addContact', $addToPhonebook, {
+                        dontStopBeforeShown: true,
+                        show: { delay: 500 }
+                    });
+                } else if (i == length -1){
+                    return;
+                } else {
+                    Q.Pointer.hint(this, {
+                        hotspot: {x: i % 2 ? 0 : 0.3, y: 0},
+                        dontStopBeforeShown: true,
+                        dontRemove: true,
+                        show: {delay: 1000 + (100 * i)},
+                        hide: {after: 1000},
+                        styles: {
+                            opacity: 1 - (i / length / 2)
+                        }
+                    })
+                }
+            })
 		});
 	}
 }
