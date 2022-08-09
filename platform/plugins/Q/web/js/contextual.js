@@ -402,7 +402,13 @@
 						Q.Contextual.hide();
 					}
 				};
+				Q.Contextual.leaveEventHandler = function (e) {
+					if (e.target.className.split(' ').indexOf('Q_contextual') >= 0) {
+						Q.Contextual.hide();
+					}
+				};
 				$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);
+				$(document.body).on(Q.Pointer.leave, Q.Contextual.leaveEventHandler);
 			
 				Q.Contextual.endEventHandler = function(e)
 				{
