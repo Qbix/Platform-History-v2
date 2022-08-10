@@ -381,6 +381,8 @@
 			}
 
 			var web3Modal = Users.Web3.getWeb3Modal();
+			Users.prevDocumentTitle = document.title;
+			document.title = Users.communityName;
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return _cancel();
@@ -450,20 +452,18 @@
 						.catch(_cancel);
 					}
 					function _proceed(signature) {
-						var _authenticate = function () {
-							_doAuthenticate({
-								xid: accounts[0],
-								payload: payload,
-								signature: signature,
-								platform: 'web3',
-								chainId: provider.chainId
-							}, platform, platformAppId, onSuccess, onCancel, options);
-						};
-						_authenticate();
+						_doAuthenticate({
+							xid: accounts[0],
+							payload: payload,
+							signature: signature,
+							platform: 'web3',
+							chainId: provider.chainId
+						}, platform, platformAppId, onSuccess, onCancel, options);
 					}
 				}).catch(_cancel);
 			});
 			function _cancel() {
+				document.title = prevDocumentTitle;
 				Q.handle(onCancel, Users, [options]);
 			}
 		});
@@ -478,6 +478,7 @@
 		Users.authenticate(platform, function (user) {
 			priv.login_onConnect(user);
 		}, function () {
+
 			priv.login_onCancel();
 		}, {"prompt": false});
 	}
@@ -573,6 +574,10 @@
 	
 	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
 		Q.req('Users/authenticate', 'data', function (err, response) {
+			if ('prevDocumentTitle' in Users) {
+				document.title = Users.prevDocumentTitle;
+				delete Users.prevDocumentTitle;
+			}
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
