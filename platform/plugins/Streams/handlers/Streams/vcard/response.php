@@ -38,6 +38,8 @@ function Streams_vcard_response ($params) {
         $vcr .= $name;
     } else if(!empty($fn)) {
         $vcr .= "N:;$fn;;;\n";
+    } else {
+        $vcr .= "N:;;;;\n";
     }
 
     $userUrl = Q_Uri::interpolateUrl("{{baseUrl}}/profile/$user->id");
