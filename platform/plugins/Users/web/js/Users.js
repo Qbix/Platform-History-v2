@@ -463,7 +463,10 @@
 				}).catch(_cancel);
 			});
 			function _cancel() {
-				document.title = prevDocumentTitle;
+				if ('prevDocumentTitle' in Users) {
+					document.title = Users.prevDocumentTitle;
+					delete Users.prevDocumentTitle;
+				}
 				Q.handle(onCancel, Users, [options]);
 			}
 		});
