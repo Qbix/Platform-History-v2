@@ -41,4 +41,7 @@ function Streams_before_Q_responseExtras()
 
 	// allowed related streams
 	Q_Response::setScriptData('Q.plugins.Streams.chat.allowedRelatedStreams', Q_Config::get("Streams", "chat", "allowedRelatedStreams", null));
+
+	// min amount of interests needed to show "Search interests"
+	Q_Response::setScriptData('Q.plugins.Streams.interests.minInterests', Q_Config::get("Streams", "interests", "minInterests", null));
 }
