@@ -4353,7 +4353,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
 	}
-	if (ordinal >= 0 &&  ordinal <= latest) {
+	if (ordinal >= 0 &&  ordinal <= latest && latest > 0) {
 		// The cached stream already got this message
 		Q.handle(callback, this, [[]]);
 		return false;
