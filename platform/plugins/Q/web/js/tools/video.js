@@ -28,12 +28,14 @@
  *  @param {boolean} [options.autoplay=false] If true - start play on load
  *  @param {boolean} [options.loop=false] 
  *  @param {array} [options.ads] Array of ads in format [{position:<minutes>, url:<string>}, ...]
+ *  @param {array} [options.skipPositionOnLoad=false] It true skip setCurrentPosition on video loaded. Because start position can be defined in request.
  *  @param {boolean} [options.skipPauseOnload=false] If true, skip pause when player reach start position.
  */
 Q.Tool.define("Q/video", function (options) {
 	var tool = this;
 	var state = tool.state;
 	var $toolElement = $(tool.element);
+	state.isIos = Q.info.platform === "ios";
 
 	if (state.url) {
 		state.url = state.url.interpolate({ "baseUrl": Q.info.baseUrl });
@@ -190,7 +192,6 @@ Q.Tool.define("Q/video", function (options) {
 			var host = newA.hostname;
 
 			element.classList.add("Q_video_twitch");
-
 			var options = {
 				autoplay: state.autoplay,
 				loop: state.loop,
@@ -201,8 +202,15 @@ Q.Tool.define("Q/video", function (options) {
 			};
 
 			// convert start time to pass as option
-			var start = state.start || state.clipStart || 0;
-			options.time = Q.displayDuration(start).replace(/:/, 'h').replace(/:/, 'm') + 's';
+			var startTime = tool.calculateStartPosition();
+			if (startTime) {
+				startTime = Q.displayDuration(startTime, {hours:true}).split(':');
+				startTime = startTime[0] + 'h' + startTime[1] + 'm' + startTime[2] + 's';
+				options.time = startTime;
+			}
+
+			// skip setting start position on load because we set this time in options.time
+			state.skipPositionOnLoad = true;
 
 			var videoId = state.url.match(/\/videos?\/([0-9]+).*$/);
 			var channel = state.url.match(new RegExp(host + "/(\\w+)"));
@@ -221,7 +229,10 @@ Q.Tool.define("Q/video", function (options) {
 
 				// place play button above the player
 				var $overlayPlay = $("img.Q_video_overlay_play", tool.element);
-				if (!$overlayPlay.length) {
+
+				// skip using overlay buton for ios, because of weird behavior
+				// some times called event onPause but video doens't paused and play further
+				if (!$overlayPlay.length && !state.isIos) {
 					$overlayPlay = $("<img>")
 						.prop("src", Q.url(state.overlay.play.src))
 						.addClass("Q_video_overlay_play")
@@ -327,6 +338,7 @@ Q.Tool.define("Q/video", function (options) {
 	currentPosition: 0,
 	className: null,
 	image: null,
+	skipPositionOnLoad: false,
 	positionUpdatePeriod: 1, // seconds
 	start: null,
 	clipStart: null,
@@ -382,7 +394,8 @@ Q.Tool.define("Q/video", function (options) {
 	onLoad: new Q.Event(function () {
 		var tool = this;
 		var state = this.state;
-		this.setCurrentPosition(this.calculateStartPosition(), !state.skipPauseOnload, !state.skipPauseOnload);
+		var skipPauseOnload = !state.skipPauseOnload && !state.autoplay;
+		this.setCurrentPosition(this.calculateStartPosition(), skipPauseOnload, skipPauseOnload);
 		this.addAdvertising();
 
 		// preload next clip
@@ -421,7 +434,7 @@ Q.Tool.define("Q/video", function (options) {
 		}
 	}),
 	onCanPlay: new Q.Event(function () {
-		this.setCurrentPosition(this.calculateStartPosition(), !this.state.skipPauseOnload, !this.state.skipPauseOnload);
+		// don't call calculateStartPosition here! Because onCanPlay event can be called each seeking.
 	}),
 	onPlay: new Q.Event(function () {
 		var tool = this;
@@ -597,6 +610,7 @@ Q.Tool.define("Q/video", function (options) {
 
 			state.player = videojs($("video", tool.element)[0], options, function onPlayerReady() {
 				var player = this;
+				tool.player = this;
 
 				videojs.log('Your player is ready!');
 
@@ -1012,15 +1026,11 @@ Q.Tool.define("Q/video", function (options) {
 	 * @param {boolean} [silent=false] whether to mute sound while setting position
 	 * @param {boolean} [pause=false] whether to pause video after position changed
 	 */
-	setCurrentPosition: function (position, silent, pause) {
+	setCurrentPosition: Q.debounce(function (position, silent, pause) {
 		var tool = this;
 		var state = this.state;
 		var player = state.player;
 		var currentPosition = tool.getCurrentPosition();
-
-		if (position === 0) {
-			position = 1;
-		}
 
 		if (currentPosition === position) {
 			return;
@@ -1031,7 +1041,8 @@ Q.Tool.define("Q/video", function (options) {
 			player.waiting(true);
 		}
 
-		player.currentTime(position/1000);
+		// convert to seconds
+		player.currentTime(position > 0 ? position/1000 : 0);
 
 		// this event need to show videojs control bar
 		player.hasStarted && player.hasStarted(true);
@@ -1042,7 +1053,7 @@ Q.Tool.define("Q/video", function (options) {
 			var intervalId = setInterval(function() {
 				var currentPosition = tool.getCurrentPosition();
 
-				if (currentPosition === position || counter > 10) {
+				if (currentPosition === position || counter > 20) {
 					if (silent) {
 						player.muted(!!state.videojsOptions.muted);
 						player.waiting(false);
@@ -1058,13 +1069,13 @@ Q.Tool.define("Q/video", function (options) {
 						}
 					}
 
-					clearInterval(intervalId);
+					intervalId && clearInterval(intervalId);
 				}
 
 				counter++;
-			}, 200);
+			}, 500);
 		}
-	},
+	}, 200),
 	/**
 	 * @method getCurrentPosition
 	 */

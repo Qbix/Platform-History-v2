@@ -123,6 +123,7 @@ THE SOFTWARE. */
         rel: 0,
         showinfo: 0,
         loop: this.options_.loop ? 1 : 0,
+        autoplay: this.options_.autoplay ? 1 : 0,
         origin: location.protocol+'//'+location.hostname,
         enablejsapi: 1
       };
@@ -431,7 +432,7 @@ THE SOFTWARE. */
         }
       }
 
-      if (this.options_.autoplay && !_isOnMobile) {
+      if (this.options_.autoplay) {
         if (this.isReady_) {
           this.play();
         } else {
