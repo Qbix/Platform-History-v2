@@ -549,7 +549,8 @@
 			"sort": {}
 		},
 		"interests": {
-			"allowClientQueries": false
+			"allowClientQueries": false,
+			"minInterests": 10 /* min amount of interests needed to show "Search interests" */
 		},
 		"db": {
 			"limits": {
