@@ -4357,7 +4357,23 @@ abstract class Streams extends Base_Streams
 		$basename = Q_Text::basename();
 		$tree->load("files/Streams/interests/$communityId/$basename.json");
 		$interests = $tree->getAll();
+		$interestsStreams = Streams_Stream::select()->where(array(
+			"publisherId" => $communityId,
+			"type" => "Streams/interest"
+		))->fetchDbRows();
 		foreach ($interests as $category => &$v1) {
+			// add interests from streams
+			foreach ($interestsStreams as $interestsStream) {
+				$prefix = "Streams/interest/".$category."_";
+				if (stripos($interestsStream->name, $prefix) !== 0) {
+					continue;
+				}
+				$interestIndex = preg_replace("/".$category.":\s?/i", "", $interestsStream->title);
+				if (!array_key_exists($interestIndex, $v1[""])) {
+					$v1[""][$interestIndex] = array();
+				}
+			}
+
 			foreach ($v1 as $k2 => &$v2) {
 				if (!Q::isAssociative($v2)) {
 					ksort($v1);
@@ -4840,12 +4856,12 @@ abstract class Streams extends Base_Streams
 	 * @return {Streams_Stream}
 	 */
 	static function getInterest ($title, $publisherId = null) {
-		$streamName = 'Streams/interest/' . Q_Utils::normalize(trim($title));
+		$streamName = 'Streams/interest/' . Q_Utils::normalize(str_replace(array("'", '"'), '', trim($title)));
 		$publisherId = $publisherId ?: Users::communityId();
 
 		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
-			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
+			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
 				'title' => $title
 			));

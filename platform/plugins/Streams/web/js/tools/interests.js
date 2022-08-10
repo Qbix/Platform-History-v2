@@ -76,7 +76,7 @@ Q.Tool.define("Streams/interests", function (options) {
 			}
 
 			function addExpandable(category, interests) {
-				var info = Q.getObject([state.communityId, category], Streams.Interests.info);
+				var info = Q.getObject([state.communityId, category], Streams.Interests.info) || {};
 				var content = '';
 				var count = 0;
 				Q.each(interests, function (subcategory, interests) {
@@ -146,15 +146,14 @@ Q.Tool.define("Streams/interests", function (options) {
 						tool.$('.Streams_interest_title').removeClass('Q_selected');
 						var $jq;
 						var otherInterests = {};
+						var totalInterests = [];
 						var normalized, expandable;
 						var myInterests = state.dontAllowSelecting ? [] : Q.getObject(["my", 0], params) || [];
 						var interests = anotherUser ? Q.getObject(["anotherUser", 0], params) : myInterests;
-						if (Q.isEmpty(interests)) {
-							$(".Streams_interests_filter", tool.element).hide();
-						} else {
-							$(".Streams_interests_filter", tool.element).show();
-						}
 						for (normalized in interests) {
+							if (/_\w+/.test(normalized)) {
+								totalInterests.push(normalized);
+							}
 							$jq = tool.$('#Streams_interest_title_' + normalized)
 								.addClass('Streams_interests_anotherUser');
 							if ($jq.length) {
@@ -169,6 +168,11 @@ Q.Tool.define("Streams/interests", function (options) {
 							} else {
 								otherInterests[normalized] = interests[normalized];
 							}
+						}
+						if (totalInterests.length < parseInt(Q.getObject("interests.minInterests", Streams) || 0)) {
+							$(".Streams_interests_filter", tool.element).hide();
+						} else {
+							$(".Streams_interests_filter", tool.element).show();
 						}
 						if (!Q.isEmpty(otherInterests)) {
 							for (normalized in otherInterests ) {

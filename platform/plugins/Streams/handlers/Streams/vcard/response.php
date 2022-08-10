@@ -1,27 +1,28 @@
 <?php
 function Streams_vcard_response ($params) {
-    $uesrId = Q_Dispatcher::uri()->userId;
+    $userId = Q_Dispatcher::uri()->userId;
     $communityName = Users::communityName();
     $communityId = Users::communityId();
 
     $vcr = "BEGIN:VCARD\n";
     $vcr .= "VERSION:3.0\n";
 
-    $user = Users::fetch($uesrId, true);
+    $user = Users::fetch($userId, true);
     $fn = $user->displayName();
     $vcr .= "FN:$fn\n";
 
     $firstNameStream = Streams::fetchOne(null, $user->id, "Streams/user/firstName");
     $lastNameStream = Streams::fetchOne(null, $user->id, "Streams/user/lastName");
-    $firstName = $firstNameStream->fields['content'];
-    $lastName = $lastNameStream->fields['content'];
-    if(!empty($firstName) && !empty($lastName) ){
-        $firstNameStream->calculateAccess($user->id);
-        $lastNameStream->calculateAccess($user->id);
-        if ($lastNameStream->testReadLevel('content') && $firstNameStream->testReadLevel('content')) {
-            $vcr .= "N:$lastName;$firstName;;;\n";
-        }
+    $firstName = $firstNameStream->testReadLevel('content') ? $firstNameStream->content : '';
+    $lastName = $lastNameStream->testReadLevel('content') ? $lastNameStream->content : '';
 
+    if ($firstName or $lastName) {
+        $name = "N:$lastName;$firstName;;;\n";
+        $vcr .= $name;
+    } else if (!empty($fn)) {
+        $vcr .= "N:;$fn;;;\n";
+    } else {
+        $vcr .= "N:;;;;\n";
     }
 
     $userUrl = Q_Uri::interpolateUrl("{{baseUrl}}/profile/$user->id");
@@ -195,7 +196,7 @@ function Streams_vcard_response ($params) {
 
 
     header('Content-type: text/vcard; charset=utf-8');
-    header('Content-Disposition: inline; filename=' . $uesrId . '.vcf');
+    header('Content-Disposition: inline; filename=' . $userId . '.vcf');
     echo Q_Utils::lineBreaks($vcr);
     exit;
 
