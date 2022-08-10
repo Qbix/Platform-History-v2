@@ -441,6 +441,7 @@ a.Users_activation_resend:active {
 .Users_labels_icon { width: 40px; height: 40px; }
 .Q_dialog_content .Users_labels_icon { display: inline-block; }
 .Users_labels_active .Users_labels_label,
+.Users_labels_active .Users_labels_action.Users_labels_add,
 .Users_labels_action button { margin-top: 10px; width: 100%; }
 .Users_labels_tool .Users_labels_title,
 .Users_contacts_tool .Users_labels_title {
