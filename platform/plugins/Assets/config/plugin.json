@@ -2,10 +2,10 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.9",
+				"version": "1.0.10",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
-				"connections": ["Assets"]
+				"connections": ["Assets", "Streams"]
 			}
 		},
 		"handlersBeforeEvent": {
