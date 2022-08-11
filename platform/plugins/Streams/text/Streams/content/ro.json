@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Stare de nervozitate"
+            "byTwitter": "Stare de nervozitate",
+            "title2": "Invita persoane",
+            "chooseMethod": "Alegeți o metodă:",
+            "selectContacts": "Selectați Contacte",
+            "scanQRCode": "Scanați codul QR",
+            "shareLink": "Distribuie un link",
+            "chooseFromRegistered": "Alegeți dintre utilizatorii înregistrați",
+            "inviteViaEmailOrSms": "Invitați prin e-mail sau SMS"
         },
         "email": {
             "subject": "Hei, verifică asta",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Ai fost invitat. {{ClickOrTap}} aici pentru a accepta și a vă alătura."
-        }
+        },
+        "Invite": "A invita",
+        "Share": "Acțiune"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Link copiat în clipboard",
             "codeCopiedToCb": "Cod copiat în clipboard",
             "userHasNoVideo": "Participantul nu are videoclip",
-            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a participa la conferință."
+            "openInBrowserAlert": "Deschideți linkul în browserul Safari pentru a participa la conferință.",
+            "allowedVideoLimit": "Numai {{limit}} videoclipuri permise în această sală",
+            "allowedAudioLimit": "Numai {{limit}} microfoane sunt permise în această cameră"
         },
         "settingsPopup": {
             "dialogTitle": "Setari video",
@@ -256,7 +267,8 @@
             "copy": "Copie",
             "streamToRTMP": "Transmiteți în flux la RTMP personalizat",
             "startBroadcasting": "Începeți să difuzați",
-            "broadcastingInProgress": "Difuzarea este în curs"
+            "broadcastingInProgress": "Difuzarea este în curs",
+            "manageStream": "Gestionați fluxul live"
         },
         "audioSettings": {
             "dialogTitle": "Setari audio",
@@ -284,8 +296,8 @@
             "title": "Setări de streaming"
         },
         "preview": {
-            "Meeting": "Întâlnire",
-            "MeetingEnded": "Întâlnirea sa încheiat"
+            "Meeting": "Apel live",
+            "MeetingEnded": "Apel terminat"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "o conversație între utilizatori, cu istoric"
         },
         "Streams\/webrtc": {
-            "displayType": "Apel în timp real",
+            "displayType": "Apel live",
             "description": "un apel video\/audio în timp real"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Actualizați",
         "NoCallsYet": "Nu există apeluri încă",
         "CallReasonTitle": "Despre ce este acest apel?",
-        "WaitingRoom": "Sală de așteptare"
+        "WaitingRoom": "Sală de așteptare",
+        "LiveRoom": "Sala Live",
+        "interviewedByAnotherHost": "În prezent este intervievat de o altă gazdă",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Pus în așteptare",
+        "endCall": "Terminare apel",
+        "interview": "Interviu",
+        "markApproved": "Marcați aprobat"
     }
 }

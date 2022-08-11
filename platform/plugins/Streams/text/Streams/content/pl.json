@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Świergot"
+            "byTwitter": "Świergot",
+            "title2": "Zaproś ludzi",
+            "chooseMethod": "Wybierz metodę:",
+            "selectContacts": "Wybierz kontakty",
+            "scanQRCode": "Skanowania QR code",
+            "shareLink": "Udostępnij link",
+            "chooseFromRegistered": "Wybierz spośród zarejestrowanych użytkowników",
+            "inviteViaEmailOrSms": "Zaproś e-mailem lub SMS-em"
         },
         "email": {
             "subject": "Hej, sprawdź to",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
-        }
+        },
+        "Invite": "Zapraszać",
+        "Share": "Dzielić"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Link skopiowany do schowka",
             "codeCopiedToCb": "Kod skopiowany do schowka",
             "userHasNoVideo": "Uczestnik nie ma wideo",
-            "openInBrowserAlert": "Otwórz link w przeglądarce Safari, aby dołączyć do konferencji."
+            "openInBrowserAlert": "Otwórz link w przeglądarce Safari, aby dołączyć do konferencji.",
+            "allowedVideoLimit": "W tym pokoju dozwolone jest tylko {{limit}} wideo",
+            "allowedAudioLimit": "W tym pokoju dozwolonych jest tylko {{limit}} mikrofonów"
         },
         "settingsPopup": {
             "dialogTitle": "Ustawienia wideo",
@@ -256,7 +267,8 @@
             "copy": "Kopiuj",
             "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego protokołu RTMP",
             "startBroadcasting": "Rozpocząć nadawanie",
-            "broadcastingInProgress": "Trwa nadawanie"
+            "broadcastingInProgress": "Trwa nadawanie",
+            "manageStream": "Zarządzaj transmisją na żywo"
         },
         "audioSettings": {
             "dialogTitle": "Ustawienia dźwięku",
@@ -284,8 +296,8 @@
             "title": "Ustawienia przesyłania strumieniowego"
         },
         "preview": {
-            "Meeting": "Spotkanie",
-            "MeetingEnded": "Spotkanie zakończone"
+            "Meeting": "Połączenie na żywo",
+            "MeetingEnded": "Połączenie zakończone"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "rozmowa między użytkownikami, z historią"
         },
         "Streams\/webrtc": {
-            "displayType": "Połączenie w czasie rzeczywistym",
+            "displayType": "Połączenie na żywo",
             "description": "połączenie wideo\/audio w czasie rzeczywistym"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Aktualizacja",
         "NoCallsYet": "Brak połączeń",
         "CallReasonTitle": "O co chodzi w tym telefonie?",
-        "WaitingRoom": "Poczekalnia"
+        "WaitingRoom": "Poczekalnia",
+        "LiveRoom": "Pokój na żywo",
+        "interviewedByAnotherHost": "Obecnie przeprowadza wywiad z innym gospodarzem",
+        "bringToLive": "Przynieś na żywo",
+        "putOnHold": "Zawieszone",
+        "endCall": "Zakończ rozmowę",
+        "interview": "Wywiad",
+        "markApproved": "Oznaczenie zatwierdzone"
     }
 }

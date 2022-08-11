@@ -89,7 +89,14 @@
             "byEmail": "Електронна пошта",
             "byText": "Текст",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Запросити людей",
+            "chooseMethod": "Виберіть спосіб:",
+            "selectContacts": "Виберіть Контакти",
+            "scanQRCode": "Відскануйте QR-код",
+            "shareLink": "Поділіться посиланням",
+            "chooseFromRegistered": "Виберіть із зареєстрованих користувачів",
+            "inviteViaEmailOrSms": "Запрошення електронною поштою або SMS"
         },
         "email": {
             "subject": "Гей, перевір це",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Вас запросили. {{ClickOrTap}} тут, щоб прийняти та приєднатися."
-        }
+        },
+        "Invite": "запросити",
+        "Share": "Поділіться"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Посилання скопійовано в буфер обміну",
             "codeCopiedToCb": "Код скопійовано в буфер обміну",
             "userHasNoVideo": "У учасника немає відео",
-            "openInBrowserAlert": "Відкрийте посилання у браузері Safari, щоб приєднатися до конференції."
+            "openInBrowserAlert": "Відкрийте посилання у браузері Safari, щоб приєднатися до конференції.",
+            "allowedVideoLimit": "У цій кімнаті дозволено лише {{limit}} відео",
+            "allowedAudioLimit": "У цій кімнаті дозволено лише {{limit}} мікрофонів"
         },
         "settingsPopup": {
             "dialogTitle": "Налаштування відео",
@@ -256,7 +267,8 @@
             "copy": "Копія",
             "streamToRTMP": "Потік у користувацький RTMP",
             "startBroadcasting": "Почніть трансляцію",
-            "broadcastingInProgress": "Трансляція триває"
+            "broadcastingInProgress": "Трансляція триває",
+            "manageStream": "Керувати прямою трансляцією"
         },
         "audioSettings": {
             "dialogTitle": "Налаштування звуку",
@@ -284,8 +296,8 @@
             "title": "Налаштування потокового передавання"
         },
         "preview": {
-            "Meeting": "Зустріч",
-            "MeetingEnded": "Зустріч закінчилася"
+            "Meeting": "Живий дзвінок",
+            "MeetingEnded": "Дзвінок завершено"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "розмова між користувачами з історією"
         },
         "Streams\/webrtc": {
-            "displayType": "Дзвінок у режимі реального часу",
+            "displayType": "Живий дзвінок",
             "description": "відео\/аудіодзвінок у реальному часі"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Оновлення",
         "NoCallsYet": "Поки що немає дзвінків",
         "CallReasonTitle": "Про що цей дзвінок?",
-        "WaitingRoom": "Зал очікування"
+        "WaitingRoom": "Зал очікування",
+        "LiveRoom": "Жива кімната",
+        "interviewedByAnotherHost": "Зараз інтерв&#39;ю дає інший ведучий",
+        "bringToLive": "Принесіть на живе шоу",
+        "putOnHold": "Призупинити, відкласти, поставити на режим очікування",
+        "endCall": "Завершити виклик",
+        "interview": "Інтерв&#39;ю",
+        "markApproved": "Позначте як схвалено"
     }
 }

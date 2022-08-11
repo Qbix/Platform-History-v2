@@ -296,8 +296,8 @@
             "title": "Streaming Settings"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Live Call",
+            "MeetingEnded": "Call ended"
         }
     },
     "types": {
@@ -415,8 +415,8 @@
             "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Live Call",
+            "description": "a real-time video\/audio call"
         },
         "Streams\/question": {
             "displayType": "Question",

@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} jika kode telah dipindai",
             "copyLink": "{{ClickOrTap}} untuk menyalin tautan undangan",
             "userChooserPlaceholder": "Cari berdasarkan nama",
-            "shareOrCopyLink": "{{ClickOrTap}} untuk membagikan atau menyalin tautan undangan"
+            "shareOrCopyLink": "{{ClickOrTap}} untuk membagikan atau menyalin tautan undangan",
+            "title2": "Mengundang orang",
+            "chooseMethod": "Pilih metode:",
+            "selectContacts": "Pilih Kontak",
+            "scanQRCode": "Pindai kode QR",
+            "shareLink": "Bagikan tautan",
+            "chooseFromRegistered": "Pilih dari pengguna terdaftar",
+            "inviteViaEmailOrSms": "Undang melalui email atau SMS"
         },
         "email": {
             "subject": "Hei, lihat ini",
@@ -104,7 +111,9 @@
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
         },
         "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang",
-        "command": "Undang"
+        "command": "Undang",
+        "Invite": "Mengundang",
+        "Share": "Membagikan"
     },
     "followup": {
         "mobile": {
@@ -191,7 +200,9 @@
             "sbStartedLiveStreaming": "{{userName}} mulai siaran langsung",
             "sbStoppedLiveStreaming": "{{userName}} berakhir secara langsung",
             "liveStopped": "Terjadi kesalahan saat mengirim video ke titik akhir",
-            "forceDisconnectingImmediately": "Anda terputus oleh tuan rumah"
+            "forceDisconnectingImmediately": "Anda terputus oleh tuan rumah",
+            "allowedVideoLimit": "Hanya {{limit}} video yang diizinkan di ruangan ini",
+            "allowedAudioLimit": "Hanya {{limit}} mikrofon yang diizinkan di ruangan ini"
         },
         "settingsPopup": {
             "webCamera": "Kamera web",
@@ -225,7 +236,8 @@
             "streamingSettings": "Pengaturan",
             "streamToRTMP": "Streaming ke RTMP khusus",
             "startBroadcasting": "Mulai siaran",
-            "broadcastingInProgress": "Penyiaran sedang berlangsung"
+            "broadcastingInProgress": "Penyiaran sedang berlangsung",
+            "manageStream": "Kelola Streaming Langsung"
         },
         "participantsPopup": {
             "disconnect": "Memutuskan",
@@ -248,8 +260,8 @@
         "streamTitle": "{{1}} panggilan langsung",
         "preview": {
             "preamble": "Pertemuan:",
-            "Meeting": "Pertemuan",
-            "MeetingEnded": "Rapat berakhir"
+            "Meeting": "Panggilan Langsung",
+            "MeetingEnded": "Panggilan berakhir"
         },
         "preparing": {
             "micIsOff": "Mikrofon mati",
@@ -367,8 +379,8 @@
             "description": "percakapan antara pengguna, dengan riwayat"
         },
         "Streams\/webrtc": {
-            "displayType": "Panggilan Real-Time",
-            "description": "panggilan video \/ audio real time"
+            "displayType": "Panggilan Langsung",
+            "description": "panggilan video\/audio waktu nyata"
         },
         "Streams\/tasks": {
             "description": "kategori untuk tugas",
@@ -530,6 +542,13 @@
         "Update": "Memperbarui",
         "NoCallsYet": "Belum ada panggilan",
         "CallReasonTitle": "Tentang apa panggilan ini?",
-        "WaitingRoom": "Ruang tunggu"
+        "WaitingRoom": "Ruang tunggu",
+        "LiveRoom": "Ruang Langsung",
+        "interviewedByAnotherHost": "Saat ini sedang diwawancarai oleh pembawa acara lain",
+        "bringToLive": "Bawa Ke Pertunjukan Langsung",
+        "putOnHold": "Tertunda",
+        "endCall": "Akhiri panggilan",
+        "interview": "Wawancara",
+        "markApproved": "Tandai Disetujui"
     }
 }

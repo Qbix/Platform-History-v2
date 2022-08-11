@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} ako je kod skeniran",
             "copyLink": "{{ClickOrTap}} za kopiranje veze s pozivnicom",
             "userChooserPlaceholder": "Traži po imenu",
-            "shareOrCopyLink": "{{ClickOrTap}} za dijeljenje ili kopiranje veze s pozivnicom"
+            "shareOrCopyLink": "{{ClickOrTap}} za dijeljenje ili kopiranje veze s pozivnicom",
+            "title2": "Pozovite ljude",
+            "chooseMethod": "Odaberite način:",
+            "selectContacts": "Odaberite Kontakti",
+            "scanQRCode": "Skeniraj QR kod",
+            "shareLink": "Podijelite vezu",
+            "chooseFromRegistered": "Odaberite među registriranim korisnicima",
+            "inviteViaEmailOrSms": "Pozovite putem e-maila ili SMS-a"
         },
         "email": {
             "subject": "Hej, pogledaj ovo",
@@ -104,7 +111,9 @@
             "text": "Pozvani ste. {{ClickOrTap}} ovdje za prihvaćanje i pridruživanje."
         },
         "youCanNowPaste": "Sada možete zalijepiti ovu vezu negdje da pozovete ljude",
-        "command": "Pozvati"
+        "command": "Pozvati",
+        "Invite": "Pozvati",
+        "Share": "Udio"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} je počeo uživo",
             "sbStoppedLiveStreaming": "{{userName}} završio je uživo",
             "liveStopped": "Došlo je do pogreške prilikom slanja videa na krajnju točku",
-            "forceDisconnectingImmediately": "Host vam je prekinuo vezu"
+            "forceDisconnectingImmediately": "Host vam je prekinuo vezu",
+            "allowedVideoLimit": "U ovoj sobi dopušteno je samo {{limit}} videozapisa",
+            "allowedAudioLimit": "U ovoj sobi dopušteno je samo {{limit}} mikrofona"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Stream na prilagođeni RTMP",
             "dialogTitle": "Video postavke",
             "startBroadcasting": "Počni emitirati",
-            "broadcastingInProgress": "Emitiranje je u tijeku"
+            "broadcastingInProgress": "Emitiranje je u tijeku",
+            "manageStream": "Upravljanje prijenosom uživo"
         },
         "participantsPopup": {
             "disconnect": "Odspojite se",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} je započeo poziv uživo",
         "preview": {
             "preamble": "Sastanak:",
-            "Meeting": "Sastanak",
-            "MeetingEnded": "Sastanak je završio"
+            "Meeting": "Poziv uživo",
+            "MeetingEnded": "Poziv završio"
         },
         "preparing": {
             "micIsOff": "Mikrofon je isključen",
@@ -370,7 +382,7 @@
             "description": "razgovor između korisnika, s poviješću"
         },
         "Streams\/webrtc": {
-            "displayType": "Poziv u stvarnom vremenu",
+            "displayType": "Poziv uživo",
             "description": "video\/audio poziv u stvarnom vremenu"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "ažuriranje",
         "NoCallsYet": "Još nema poziva",
         "CallReasonTitle": "O čemu se radi u ovom pozivu?",
-        "WaitingRoom": "Čekaonica"
+        "WaitingRoom": "Čekaonica",
+        "LiveRoom": "Soba uživo",
+        "interviewedByAnotherHost": "Trenutačno intervjuira drugi voditelj",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Staviti na čekanje",
+        "endCall": "Završi poziv",
+        "interview": "Intervju",
+        "markApproved": "Označi Odobreno"
     }
 }

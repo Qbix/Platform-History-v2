@@ -89,7 +89,14 @@
             "byEmail": "E-mel",
             "byText": "Teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Jemput Orang",
+            "chooseMethod": "Pilih kaedah:",
+            "selectContacts": "Pilih Kenalan",
+            "scanQRCode": "Imbas Kod QR",
+            "shareLink": "Kongsi pautan",
+            "chooseFromRegistered": "Pilih daripada pengguna berdaftar",
+            "inviteViaEmailOrSms": "Jemput melalui e-mel atau SMS"
         },
         "email": {
             "subject": "Hei, semak ini",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
-        }
+        },
+        "Invite": "Jemput",
+        "Share": "Kongsi"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Pautan disalin ke papan keratan",
             "codeCopiedToCb": "Kod disalin ke papan keratan",
             "userHasNoVideo": "Peserta tidak mempunyai video",
-            "openInBrowserAlert": "Buka pautan dalam penyemak imbas Safari untuk menyertai persidangan."
+            "openInBrowserAlert": "Buka pautan dalam penyemak imbas Safari untuk menyertai persidangan.",
+            "allowedVideoLimit": "Hanya {{limit}} video dibenarkan di dalam bilik ini",
+            "allowedAudioLimit": "Hanya {{limit}} mikrofon dibenarkan di dalam bilik ini"
         },
         "settingsPopup": {
             "dialogTitle": "Tetapan Video",
@@ -256,7 +267,8 @@
             "copy": "Salinan",
             "streamToRTMP": "Strim ke RTMP tersuai",
             "startBroadcasting": "Mulakan penyiaran",
-            "broadcastingInProgress": "Penyiaran sedang dijalankan"
+            "broadcastingInProgress": "Penyiaran sedang dijalankan",
+            "manageStream": "Urus Strim Langsung"
         },
         "audioSettings": {
             "dialogTitle": "Tetapan Audio",
@@ -284,8 +296,8 @@
             "title": "Tetapan Penstriman"
         },
         "preview": {
-            "Meeting": "mesyuarat",
-            "MeetingEnded": "Mesyuarat tamat"
+            "Meeting": "Panggilan Langsung",
+            "MeetingEnded": "Panggilan ditamatkan"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "perbualan antara pengguna, dengan sejarah"
         },
         "Streams\/webrtc": {
-            "displayType": "Panggilan Masa Nyata",
+            "displayType": "Panggilan Langsung",
             "description": "panggilan video\/audio masa nyata"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Kemas kini",
         "NoCallsYet": "Tiada panggilan lagi",
         "CallReasonTitle": "Apakah panggilan ini?",
-        "WaitingRoom": "Bilik menunggu"
+        "WaitingRoom": "Bilik menunggu",
+        "LiveRoom": "Bilik Langsung",
+        "interviewedByAnotherHost": "Pada masa ini ditemu bual oleh hos lain",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Berhenti",
+        "endCall": "Tamat panggilan",
+        "interview": "Temuduga",
+        "markApproved": "Tandakan Diluluskan"
     }
 }

@@ -89,7 +89,14 @@
             "byEmail": "E-post",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Bjuda folk",
+            "chooseMethod": "Välj en metod:",
+            "selectContacts": "Välj Kontakter",
+            "scanQRCode": "Skanna QR kod",
+            "shareLink": "Dela en länk",
+            "chooseFromRegistered": "Välj bland registrerade användare",
+            "inviteViaEmailOrSms": "Bjud in via e-post eller SMS"
         },
         "email": {
             "subject": "Hej, kolla in det här",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Du har blivit inbjuden. {{ClickOrTap}} här för att acceptera och gå med."
-        }
+        },
+        "Invite": "Inbjudan",
+        "Share": "Dela med sig"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Länken har kopierats till urklipp",
             "codeCopiedToCb": "Koden har kopierats till urklipp",
             "userHasNoVideo": "Deltagaren har ingen video",
-            "openInBrowserAlert": "Öppna länken i webbläsaren Safari för att gå med i konferensen."
+            "openInBrowserAlert": "Öppna länken i webbläsaren Safari för att gå med i konferensen.",
+            "allowedVideoLimit": "Endast {{limit}} video tillåts i det här rummet",
+            "allowedAudioLimit": "Endast {{limit}} mikrofoner tillåtna i det här rummet"
         },
         "settingsPopup": {
             "dialogTitle": "Videoinställningar",
@@ -256,7 +267,8 @@
             "copy": "Kopiera",
             "streamToRTMP": "Streama till anpassad RTMP",
             "startBroadcasting": "Börja sända",
-            "broadcastingInProgress": "Sändning pågår"
+            "broadcastingInProgress": "Sändning pågår",
+            "manageStream": "Hantera livestream"
         },
         "audioSettings": {
             "dialogTitle": "Ljudinställningar",
@@ -284,8 +296,8 @@
             "title": "Streaminginställningar"
         },
         "preview": {
-            "Meeting": "Möte",
-            "MeetingEnded": "Mötet avslutat"
+            "Meeting": "Live Call",
+            "MeetingEnded": "Samtalet avslutades"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "en konversation mellan användare, med historik"
         },
         "Streams\/webrtc": {
-            "displayType": "Realtidssamtal",
+            "displayType": "Live Call",
             "description": "ett video-\/ljudsamtal i realtid"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Uppdatering",
         "NoCallsYet": "Inga samtal än",
         "CallReasonTitle": "Vad handlar det här samtalet om?",
-        "WaitingRoom": "Väntrum"
+        "WaitingRoom": "Väntrum",
+        "LiveRoom": "Live Room",
+        "interviewedByAnotherHost": "Är för närvarande intervjuad av en annan värd",
+        "bringToLive": "Ta med till Live Show",
+        "putOnHold": "Sätt på is",
+        "endCall": "Avsluta samtal",
+        "interview": "Intervju",
+        "markApproved": "Markera godkänd"
     }
 }

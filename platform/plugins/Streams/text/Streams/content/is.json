@@ -89,7 +89,14 @@
             "byEmail": "Tölvupóstur",
             "byText": "Texti",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Bjóddu fólki",
+            "chooseMethod": "Veldu aðferð:",
+            "selectContacts": "Veldu Tengiliðir",
+            "scanQRCode": "Skannaðu QR kóða",
+            "shareLink": "Deildu tengli",
+            "chooseFromRegistered": "Veldu úr skráðum notendum",
+            "inviteViaEmailOrSms": "Boðið með tölvupósti eða SMS"
         },
         "email": {
             "subject": "Hey, athugaðu þetta",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Þér hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
-        }
+        },
+        "Invite": "Bjóða",
+        "Share": "Deila"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Tengill afritaður á klippiborð",
             "codeCopiedToCb": "Kóði afritaður á klemmuspjald",
             "userHasNoVideo": "Þátttakandi hefur ekkert myndband",
-            "openInBrowserAlert": "Opnaðu tengil í Safari vafra til að taka þátt í ráðstefnunni."
+            "openInBrowserAlert": "Opnaðu tengil í Safari vafra til að taka þátt í ráðstefnunni.",
+            "allowedVideoLimit": "Aðeins {{limit}} myndskeið leyft í þessu herbergi",
+            "allowedAudioLimit": "Aðeins {{limit}} hljóðnemar leyfðir í þessu herbergi"
         },
         "settingsPopup": {
             "dialogTitle": "Myndskeiðsstillingar",
@@ -256,7 +267,8 @@
             "copy": "Afrita",
             "streamToRTMP": "Straumaðu í sérsniðið RTMP",
             "startBroadcasting": "Byrjaðu að senda út",
-            "broadcastingInProgress": "Útsending stendur yfir"
+            "broadcastingInProgress": "Útsending stendur yfir",
+            "manageStream": "Stjórna straumi í beinni"
         },
         "audioSettings": {
             "dialogTitle": "Hljóðstillingar",
@@ -284,8 +296,8 @@
             "title": "Straumstillingar"
         },
         "preview": {
-            "Meeting": "Fundur",
-            "MeetingEnded": "Fundi slitið"
+            "Meeting": "Lifandi símtal",
+            "MeetingEnded": "Símtali slitið"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "samtal á milli notenda, með sögu"
         },
         "Streams\/webrtc": {
-            "displayType": "Rauntímasímtal",
+            "displayType": "Lifandi símtal",
             "description": "mynd-\/hljóðsímtal í rauntíma"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Uppfærsla",
         "NoCallsYet": "Engin símtöl ennþá",
         "CallReasonTitle": "Um hvað snýst þetta símtal?",
-        "WaitingRoom": "Biðstofa"
+        "WaitingRoom": "Biðstofa",
+        "LiveRoom": "Live herbergi",
+        "interviewedByAnotherHost": "Eins og er er í viðtali við annan gestgjafa",
+        "bringToLive": "Komdu með í lifandi sýningu",
+        "putOnHold": "Setja á bið",
+        "endCall": "Ljúka símtali",
+        "interview": "Viðtal",
+        "markApproved": "Mark samþykkt"
     }
 }

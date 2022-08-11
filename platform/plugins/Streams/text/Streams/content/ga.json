@@ -89,7 +89,14 @@
             "byEmail": "Ríomhphost",
             "byText": "Téacs",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Tabhair cuireadh do Dhaoine",
+            "chooseMethod": "Roghnaigh modh:",
+            "selectContacts": "Roghnaigh Teagmhálacha",
+            "scanQRCode": "Scan an Cód QR",
+            "shareLink": "Roinn nasc",
+            "chooseFromRegistered": "Roghnaigh ó úsáideoirí cláraithe",
+            "inviteViaEmailOrSms": "Tabhair cuireadh trí ríomhphost nó SMS"
         },
         "email": {
             "subject": "Hey, seiceáil seo amach",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Tugadh cuireadh duit. {{ClickOrTap}} anseo chun glacadh leis agus páirt a ghlacadh ann."
-        }
+        },
+        "Invite": "cuireadh",
+        "Share": "Comhroinn"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Cóipeáladh an nasc chuig an ngearrthaisce",
             "codeCopiedToCb": "Cóipeáladh an cód chuig an ngearrthaisce",
             "userHasNoVideo": "Níl físeán ar bith ag an rannpháirtí",
-            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun páirt a ghlacadh sa chomhdháil."
+            "openInBrowserAlert": "Oscail nasc i mbrabhsálaí Safari chun páirt a ghlacadh sa chomhdháil.",
+            "allowedVideoLimit": "Ní cheadaítear ach {{limit}} fhíseán sa seomra seo",
+            "allowedAudioLimit": "Ní cheadaítear ach {{limit}} micreafóin sa seomra seo"
         },
         "settingsPopup": {
             "dialogTitle": "Socruithe Físeáin",
@@ -256,7 +267,8 @@
             "copy": "Cóipeáil",
             "streamToRTMP": "Sruth go RTMP saincheaptha",
             "startBroadcasting": "Tosaigh ag craoladh",
-            "broadcastingInProgress": "Tá an craoladh ar siúl"
+            "broadcastingInProgress": "Tá an craoladh ar siúl",
+            "manageStream": "Bainistigh Livestream"
         },
         "audioSettings": {
             "dialogTitle": "Socruithe Fuaime",
@@ -284,8 +296,8 @@
             "title": "Socruithe Sruthaithe"
         },
         "preview": {
-            "Meeting": "Cruinniú",
-            "MeetingEnded": "Tháinig deireadh leis an gcruinniú"
+            "Meeting": "Glao Beo",
+            "MeetingEnded": "Cuireadh deireadh leis an nglao"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "comhrá idir úsáideoirí, leis an stair"
         },
         "Streams\/webrtc": {
-            "displayType": "Glao Fíor-Ama",
+            "displayType": "Glao Beo",
             "description": "glao físe\/fuaime fíor-ama"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Nuashonrú",
         "NoCallsYet": "Níl aon ghlaonna fós",
         "CallReasonTitle": "Cad atá i gceist leis an nglao seo?",
-        "WaitingRoom": "Seomra feithimh"
+        "WaitingRoom": "Seomra feithimh",
+        "LiveRoom": "Seomra Beo",
+        "interviewedByAnotherHost": "Faoi láthair tá agallamh ag óstach eile",
+        "bringToLive": "Seó Beir Chun Beo",
+        "putOnHold": "Cuir ar Coinnigh",
+        "endCall": "Glao Deiridh",
+        "interview": "Agallamh",
+        "markApproved": "Marcáil Ceadaithe"
     }
 }

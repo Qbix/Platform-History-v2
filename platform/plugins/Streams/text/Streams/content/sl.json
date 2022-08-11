@@ -89,7 +89,14 @@
             "byEmail": "E-naslov",
             "byText": "Besedilo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Povabi ljudi",
+            "chooseMethod": "Izberite način:",
+            "selectContacts": "Izberite Imenik",
+            "scanQRCode": "Skenirajte kodo QR",
+            "shareLink": "Delite povezavo",
+            "chooseFromRegistered": "Izbirajte med registriranimi uporabniki",
+            "inviteViaEmailOrSms": "Povabite preko elektronske pošte ali SMS-a"
         },
         "email": {
             "subject": "Hej, poglej tole",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Povabljeni ste. {{ClickOrTap}} tukaj, da sprejmete in se pridružite."
-        }
+        },
+        "Invite": "Povabi",
+        "Share": "Deliti"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Povezava je kopirana v odložišče",
             "codeCopiedToCb": "Koda je kopirana v odložišče",
             "userHasNoVideo": "Udeleženec nima videoposnetka",
-            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci."
+            "openInBrowserAlert": "Odprite povezavo v brskalniku Safari, da se pridružite konferenci.",
+            "allowedVideoLimit": "V tej sobi je dovoljen samo {{limit}} videoposnetek",
+            "allowedAudioLimit": "V tej sobi je dovoljenih samo {{limit}} mikrofonov"
         },
         "settingsPopup": {
             "dialogTitle": "Nastavitve videa",
@@ -256,7 +267,8 @@
             "copy": "Kopirati",
             "streamToRTMP": "Pretok v RTMP po meri",
             "startBroadcasting": "Začnite oddajati",
-            "broadcastingInProgress": "Oddajanje je v teku"
+            "broadcastingInProgress": "Oddajanje je v teku",
+            "manageStream": "Upravljanje prenosa v živo"
         },
         "audioSettings": {
             "dialogTitle": "Nastavitve zvoka",
@@ -284,8 +296,8 @@
             "title": "Nastavitve pretakanja"
         },
         "preview": {
-            "Meeting": "Srečanje",
-            "MeetingEnded": "Sestanek se je končal"
+            "Meeting": "Klic v živo",
+            "MeetingEnded": "Klic končan"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "pogovor med uporabniki z zgodovino"
         },
         "Streams\/webrtc": {
-            "displayType": "Klic v realnem času",
-            "description": "video\/avdio klic v realnem času"
+            "displayType": "Klic v živo",
+            "description": "video\/zvočni klic v realnem času"
         },
         "Streams\/question": {
             "displayType": "vprašanje",
@@ -527,6 +539,13 @@
         "Update": "Nadgradnja",
         "NoCallsYet": "Ni še klicev",
         "CallReasonTitle": "O čem je ta klic?",
-        "WaitingRoom": "Čakalnica"
+        "WaitingRoom": "Čakalnica",
+        "LiveRoom": "Soba v živo",
+        "interviewedByAnotherHost": "Trenutno intervjuva drugi gostitelj",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Dati na čakanje",
+        "endCall": "Končaj klic",
+        "interview": "Intervju",
+        "markApproved": "Označi odobreno"
     }
 }

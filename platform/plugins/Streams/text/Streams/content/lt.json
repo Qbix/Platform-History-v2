@@ -89,7 +89,14 @@
             "byEmail": "El. paštas",
             "byText": "Tekstas",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Pakvieskite žmones",
+            "chooseMethod": "Pasirinkite metodą:",
+            "selectContacts": "Pasirinkite Kontaktai",
+            "scanQRCode": "Nuskaityti QR kodą",
+            "shareLink": "Bendrinkite nuorodą",
+            "chooseFromRegistered": "Pasirinkite iš registruotų vartotojų",
+            "inviteViaEmailOrSms": "Pakviesti el. paštu arba SMS"
         },
         "email": {
             "subject": "Ei, patikrink tai",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Jus pakvietė. {{ClickOrTap}} čia, kad priimtumėte ir prisijungtumėte."
-        }
+        },
+        "Invite": "Pakviesti",
+        "Share": "Dalintis"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Nuoroda nukopijuota į mainų sritį",
             "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
             "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
-            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje."
+            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje.",
+            "allowedVideoLimit": "Šiame kambaryje leidžiamas tik {{limit}} vaizdo įrašas",
+            "allowedAudioLimit": "Šioje patalpoje leidžiama naudoti tik {{limit}} mikrofoną"
         },
         "settingsPopup": {
             "dialogTitle": "Vaizdo įrašo nustatymai",
@@ -256,7 +267,8 @@
             "copy": "Kopijuoti",
             "streamToRTMP": "Perduokite srautu į tinkintą RTMP",
             "startBroadcasting": "Pradėkite transliuoti",
-            "broadcastingInProgress": "Transliacija vyksta"
+            "broadcastingInProgress": "Transliacija vyksta",
+            "manageStream": "Tvarkyti tiesioginę transliaciją"
         },
         "audioSettings": {
             "dialogTitle": "Garso nustatymai",
@@ -284,8 +296,8 @@
             "title": "Srautinio perdavimo nustatymai"
         },
         "preview": {
-            "Meeting": "Susitikimas",
-            "MeetingEnded": "Susirinkimas baigėsi"
+            "Meeting": "Tiesioginis skambutis",
+            "MeetingEnded": "Skambutis baigtas"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "pokalbis tarp vartotojų su istorija"
         },
         "Streams\/webrtc": {
-            "displayType": "Skambutis realiuoju laiku",
+            "displayType": "Tiesioginis skambutis",
             "description": "vaizdo \/ garso skambutis realiuoju laiku"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Atnaujinti",
         "NoCallsYet": "Kol kas jokių skambučių",
         "CallReasonTitle": "Apie ką šis skambutis?",
-        "WaitingRoom": "Laukiamasis"
+        "WaitingRoom": "Laukiamasis",
+        "LiveRoom": "Tiesioginis kambarys",
+        "interviewedByAnotherHost": "Šiuo metu kalbina kitas laidos vedėjas",
+        "bringToLive": "Pateikite tiesioginį pasirodymą",
+        "putOnHold": "Sulaikyti",
+        "endCall": "Baigti skambutį",
+        "interview": "Interviu",
+        "markApproved": "Pažymėti patvirtintą"
     }
 }

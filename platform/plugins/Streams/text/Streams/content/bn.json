@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} যদি কোডটি স্ক্যান করা হয়",
             "copyLink": "আমন্ত্রণ লিঙ্ক কপি করতে {{ClickOrTap}}",
             "userChooserPlaceholder": "নাম দ্বারা অনুসন্ধান",
-            "shareOrCopyLink": "আমন্ত্রণ লিঙ্ক শেয়ার বা কপি করতে {{ClickOrTap}}"
+            "shareOrCopyLink": "আমন্ত্রণ লিঙ্ক শেয়ার বা কপি করতে {{ClickOrTap}}",
+            "title2": "লোকেদের নিমন্ত্রণ",
+            "chooseMethod": "একটি পদ্ধতি চয়ন করুন:",
+            "selectContacts": "পরিচিতি নির্বাচন করুন",
+            "scanQRCode": "QR কোড স্ক্যান করুন",
+            "shareLink": "একটি লিঙ্ক শেয়ার করুন",
+            "chooseFromRegistered": "নিবন্ধিত ব্যবহারকারীদের থেকে চয়ন করুন",
+            "inviteViaEmailOrSms": "ইমেল বা SMS এর মাধ্যমে আমন্ত্রণ জানান"
         },
         "email": {
             "subject": "আরে, এই চেক আউট",
@@ -104,7 +111,9 @@
             "text": "আপনাকে আমন্ত্রণ জানানো হয়েছে। {{ClickOrTap}} এখানে স্বীকার করতে এবং যোগ দিতে।"
         },
         "youCanNowPaste": "আপনি এখন লোকেদের আমন্ত্রণ জানাতে এই লিঙ্কটি কোথাও পেস্ট করতে পারেন৷",
-        "command": "আমন্ত্রণ"
+        "command": "আমন্ত্রণ",
+        "Invite": "আমন্ত্রণ জানান",
+        "Share": "শেয়ার করুন"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} লাইভ শুরু হয়েছে৷",
             "sbStoppedLiveStreaming": "{{userName}} লাইভ শেষ হয়েছে৷",
             "liveStopped": "এন্ডপয়েন্টে ভিডিও পাঠানোর সময় ত্রুটি ঘটেছে৷",
-            "forceDisconnectingImmediately": "আপনি একটি হোস্ট দ্বারা সংযোগ বিচ্ছিন্ন করা হয়েছে"
+            "forceDisconnectingImmediately": "আপনি একটি হোস্ট দ্বারা সংযোগ বিচ্ছিন্ন করা হয়েছে",
+            "allowedVideoLimit": "এই ঘরে শুধুমাত্র {{limit}}টি ভিডিও অনুমোদিত",
+            "allowedAudioLimit": "এই রুমে শুধুমাত্র {{limit}}টি মাইক্রোফোন ব্যবহার করা যাবে"
         },
         "settingsPopup": {
             "webCamera": "ওয়েব ক্যামেরা",
@@ -228,7 +239,8 @@
             "streamToRTMP": "কাস্টম RTMP-তে স্ট্রিম করুন",
             "dialogTitle": "ভিডিও সেটিংস",
             "startBroadcasting": "সম্প্রচার শুরু করুন",
-            "broadcastingInProgress": "সম্প্রচার চলছে"
+            "broadcastingInProgress": "সম্প্রচার চলছে",
+            "manageStream": "লাইভস্ট্রিম পরিচালনা করুন"
         },
         "participantsPopup": {
             "disconnect": "সংযোগ বিচ্ছিন্ন করুন",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} একটি লাইভ কল শুরু করেছে৷",
         "preview": {
             "preamble": "সভা:",
-            "Meeting": "মিটিং",
-            "MeetingEnded": "মিটিং শেষ হল"
+            "Meeting": "লাইভ কল",
+            "MeetingEnded": "সংযোগ বিচ্ছিন্ন"
         },
         "preparing": {
             "micIsOff": "মাইক বন্ধ",
@@ -370,8 +382,8 @@
             "description": "ইতিহাস সহ ব্যবহারকারীদের মধ্যে একটি কথোপকথন"
         },
         "Streams\/webrtc": {
-            "displayType": "রিয়েল-টাইম কল",
-            "description": "একটি রিয়েল টাইম ভিডিও\/অডিও কল"
+            "displayType": "লাইভ কল",
+            "description": "একটি রিয়েল-টাইম ভিডিও\/অডিও কল"
         },
         "Streams\/tasks": {
             "description": "কাজের জন্য বিভাগ",
@@ -533,6 +545,13 @@
         "Update": "হালনাগাদ",
         "NoCallsYet": "এখনো কোনো কল আসেনি",
         "CallReasonTitle": "এই কল সম্পর্কে কি?",
-        "WaitingRoom": "বিশ্রামাগার"
+        "WaitingRoom": "বিশ্রামাগার",
+        "LiveRoom": "বৈঠক খানা",
+        "interviewedByAnotherHost": "বর্তমানে অন্য হোস্ট দ্বারা সাক্ষাত্কার করা হয়",
+        "bringToLive": "লাইভ শোতে আনুন",
+        "putOnHold": "আটকে রাখুন",
+        "endCall": "কল শেষ",
+        "interview": "সাক্ষাৎকার",
+        "markApproved": "অনুমোদিত চিহ্নিত করুন"
     }
 }

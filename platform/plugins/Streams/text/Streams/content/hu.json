@@ -89,7 +89,14 @@
             "byEmail": "Email",
             "byText": "Szöveg",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Emberek meghívása",
+            "chooseMethod": "Válasszon egy módszert:",
+            "selectContacts": "Válassza a Névjegyek lehetőséget",
+            "scanQRCode": "QR kód beolvasása",
+            "shareLink": "Link megosztása",
+            "chooseFromRegistered": "Válasszon a regisztrált felhasználók közül",
+            "inviteViaEmailOrSms": "Meghívás e-mailben vagy SMS-ben"
         },
         "email": {
             "subject": "Hé, ezt nézd meg",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Meghívták. {{ClickOrTap}} itt az elfogadáshoz és a csatlakozáshoz."
-        }
+        },
+        "Invite": "Meghívás",
+        "Share": "Részvény"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "A hivatkozás a vágólapra másolva",
             "codeCopiedToCb": "A kód a vágólapra másolva",
             "userHasNoVideo": "A résztvevőnek nincs videója",
-            "openInBrowserAlert": "A konferenciához való csatlakozáshoz nyissa meg a hivatkozást a Safari böngészőben."
+            "openInBrowserAlert": "A konferenciához való csatlakozáshoz nyissa meg a hivatkozást a Safari böngészőben.",
+            "allowedVideoLimit": "Csak {{limit}} videó engedélyezett ebben a szobában",
+            "allowedAudioLimit": "Csak {{limit}} mikrofon engedélyezett ebben a szobában"
         },
         "settingsPopup": {
             "dialogTitle": "Videó beállítások",
@@ -256,7 +267,8 @@
             "copy": "Másolat",
             "streamToRTMP": "Adatfolyam egyéni RTMP-re",
             "startBroadcasting": "Indítsa el a közvetítést",
-            "broadcastingInProgress": "A közvetítés folyamatban van"
+            "broadcastingInProgress": "A közvetítés folyamatban van",
+            "manageStream": "Élő közvetítés kezelése"
         },
         "audioSettings": {
             "dialogTitle": "Hangbeállítások",
@@ -284,8 +296,8 @@
             "title": "Streaming beállítások"
         },
         "preview": {
-            "Meeting": "Találkozó",
-            "MeetingEnded": "A találkozó véget ért"
+            "Meeting": "Élő hívás",
+            "MeetingEnded": "Hívás vége"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "a felhasználók közötti beszélgetés előzményekkel"
         },
         "Streams\/webrtc": {
-            "displayType": "Valós idejű hívás",
+            "displayType": "Élő hívás",
             "description": "valós idejű video-\/audiohívás"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Frissítés",
         "NoCallsYet": "Még nincsenek hívások",
         "CallReasonTitle": "Miről szól ez a hívás?",
-        "WaitingRoom": "Várószoba"
+        "WaitingRoom": "Várószoba",
+        "LiveRoom": "Élőszoba",
+        "interviewedByAnotherHost": "Jelenleg egy másik műsorvezető interjúztatja",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Félretesz",
+        "endCall": "Hívás befejezése",
+        "interview": "Interjú",
+        "markApproved": "Jelölje meg jóváhagyva"
     }
 }

@@ -89,7 +89,14 @@
             "byEmail": "이메일",
             "byText": "텍스트",
             "byFacebook": "페이스북",
-            "byTwitter": "트위터"
+            "byTwitter": "트위터",
+            "title2": "사람들을 초대",
+            "chooseMethod": "방법 선택:",
+            "selectContacts": "연락처 선택",
+            "scanQRCode": "QR 코드 스캔",
+            "shareLink": "링크 공유",
+            "chooseFromRegistered": "등록된 사용자 중에서 선택",
+            "inviteViaEmailOrSms": "이메일 또는 SMS로 초대"
         },
         "email": {
             "subject": "이봐, 이것 좀 봐",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "당신은 초대되었습니다. {{ClickOrTap}} 여기에서 수락하고 가입하세요."
-        }
+        },
+        "Invite": "초대",
+        "Share": "공유하다"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "클립보드에 링크 복사",
             "codeCopiedToCb": "클립보드에 복사된 코드",
             "userHasNoVideo": "참가자에게 동영상이 없습니다.",
-            "openInBrowserAlert": "회의에 참가하려면 Safari 브라우저에서 링크를 엽니다."
+            "openInBrowserAlert": "회의에 참가하려면 Safari 브라우저에서 링크를 엽니다.",
+            "allowedVideoLimit": "이 방에는 {{limit}}개의 동영상만 허용됩니다.",
+            "allowedAudioLimit": "이 방에는 {{limit}}개의 마이크만 허용됩니다."
         },
         "settingsPopup": {
             "dialogTitle": "비디오 설정",
@@ -256,7 +267,8 @@
             "copy": "복사",
             "streamToRTMP": "사용자 지정 RTMP로 스트리밍",
             "startBroadcasting": "방송 시작",
-            "broadcastingInProgress": "방송중입니다"
+            "broadcastingInProgress": "방송중입니다",
+            "manageStream": "라이브스트림 관리"
         },
         "audioSettings": {
             "dialogTitle": "오디오 설정",
@@ -284,8 +296,8 @@
             "title": "스트리밍 설정"
         },
         "preview": {
-            "Meeting": "회의",
-            "MeetingEnded": "회의 종료"
+            "Meeting": "라이브 콜",
+            "MeetingEnded": "통화 종료"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "사용자 간의 대화, 역사"
         },
         "Streams\/webrtc": {
-            "displayType": "실시간 통화",
+            "displayType": "라이브 콜",
             "description": "실시간 영상\/음성 통화"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "업데이트",
         "NoCallsYet": "아직 통화 없음",
         "CallReasonTitle": "이 전화는 무엇에 대한 것입니까?",
-        "WaitingRoom": "대기실"
+        "WaitingRoom": "대기실",
+        "LiveRoom": "라이브 룸",
+        "interviewedByAnotherHost": "현재 다른 호스트가 인터뷰 중입니다.",
+        "bringToLive": "라이브 쇼 가져오기",
+        "putOnHold": "보류",
+        "endCall": "통화 종료",
+        "interview": "회견",
+        "markApproved": "승인 표시"
     }
 }

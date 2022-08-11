@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} nëse kodi është skanuar",
             "copyLink": "{{ClickOrTap}} për të kopjuar lidhjen e ftesës",
             "userChooserPlaceholder": "Kërko sipas emrit",
-            "shareOrCopyLink": "{{ClickOrTap}} për të ndarë ose kopjuar lidhjen e ftesës"
+            "shareOrCopyLink": "{{ClickOrTap}} për të ndarë ose kopjuar lidhjen e ftesës",
+            "title2": "Ftoni njerëzit",
+            "chooseMethod": "Zgjidhni një metodë:",
+            "selectContacts": "Zgjidhni Kontaktet",
+            "scanQRCode": "Skanoni kodin QR",
+            "shareLink": "Ndani një lidhje",
+            "chooseFromRegistered": "Zgjidhni nga përdoruesit e regjistruar",
+            "inviteViaEmailOrSms": "Fto me email ose SMS"
         },
         "email": {
             "subject": "Hej, shikoni këtë",
@@ -104,7 +111,9 @@
             "text": "Ju jeni ftuar. {{ClickOrTap}} këtu për të pranuar dhe për t&#39;u bashkuar."
         },
         "youCanNowPaste": "Tani mund ta ngjitësh këtë lidhje diku për të ftuar njerëzit",
-        "command": "Fto"
+        "command": "Fto",
+        "Invite": "Fto",
+        "Share": "Shpërndaje"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} filloi drejtpërdrejt",
             "sbStoppedLiveStreaming": "{{userName}} përfundoi drejtpërdrejt",
             "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare",
-            "forceDisconnectingImmediately": "Je shkëputur nga një host"
+            "forceDisconnectingImmediately": "Je shkëputur nga një host",
+            "allowedVideoLimit": "Lejohet vetëm {{limit}} video në këtë dhomë",
+            "allowedAudioLimit": "Në këtë dhomë lejohen vetëm {{limit}} mikrofona"
         },
         "settingsPopup": {
             "webCamera": "Kamera në internet",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Transmetoni në RTMP të personalizuar",
             "dialogTitle": "Cilësimet e videos",
             "startBroadcasting": "Filloni transmetimin",
-            "broadcastingInProgress": "Transmetimi është në vazhdim"
+            "broadcastingInProgress": "Transmetimi është në vazhdim",
+            "manageStream": "Menaxho Livestream"
         },
         "participantsPopup": {
             "disconnect": "Shkëputeni",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} filloi një telefonatë drejtpërdrejt",
         "preview": {
             "preamble": "Takimi:",
-            "Meeting": "Takimi",
-            "MeetingEnded": "Takimi përfundoi"
+            "Meeting": "Thirrje e drejtpërdrejtë",
+            "MeetingEnded": "Telefonata përfundoi"
         },
         "preparing": {
             "micIsOff": "Mikrofoni është i fikur",
@@ -370,7 +382,7 @@
             "description": "një bisedë midis përdoruesve, me historinë"
         },
         "Streams\/webrtc": {
-            "displayType": "Thirrje në kohë reale",
+            "displayType": "Thirrje e drejtpërdrejtë",
             "description": "një telefonatë video\/audio në kohë reale"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Përditëso",
         "NoCallsYet": "Ende nuk ka telefonata",
         "CallReasonTitle": "Për çfarë bëhet fjalë kjo thirrje?",
-        "WaitingRoom": "Dhome pritje"
+        "WaitingRoom": "Dhome pritje",
+        "LiveRoom": "Dhomë e gjallë",
+        "interviewedByAnotherHost": "Aktualisht është intervistuar nga një mikpritës tjetër",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Vendos në pritje",
+        "endCall": "Fundi i telefonatës",
+        "interview": "Intervistë",
+        "markApproved": "Mark i miratuar"
     }
 }

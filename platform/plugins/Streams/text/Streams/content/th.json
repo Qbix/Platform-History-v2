@@ -89,7 +89,14 @@
             "byEmail": "อีเมล",
             "byText": "ข้อความ",
             "byFacebook": "เฟสบุ๊ค",
-            "byTwitter": "ทวิตเตอร์"
+            "byTwitter": "ทวิตเตอร์",
+            "title2": "เชิญคน",
+            "chooseMethod": "เลือกวิธีการ:",
+            "selectContacts": "เลือกผู้ติดต่อ",
+            "scanQRCode": "สแกน QR Code",
+            "shareLink": "แชร์ลิงก์",
+            "chooseFromRegistered": "เลือกจากผู้ใช้ที่ลงทะเบียน",
+            "inviteViaEmailOrSms": "เชิญทางอีเมลหรือ SMS"
         },
         "email": {
             "subject": "เฮ้ ลองดูสิ",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "คุณได้รับเชิญ {{ClickOrTap}} ที่นี่เพื่อยอมรับและเข้าร่วม"
-        }
+        },
+        "Invite": "เชิญชวน",
+        "Share": "แบ่งปัน"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว",
             "codeCopiedToCb": "คัดลอกรหัสไปยังคลิปบอร์ดแล้ว",
             "userHasNoVideo": "ผู้เข้าร่วมไม่มีวิดีโอ",
-            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม"
+            "openInBrowserAlert": "เปิดลิงก์ในเบราว์เซอร์ Safari เพื่อเข้าร่วมการประชุม",
+            "allowedVideoLimit": "อนุญาตให้ใช้วิดีโอ {{limit}} รายการในห้องนี้เท่านั้น",
+            "allowedAudioLimit": "อนุญาตให้ใช้ไมโครโฟนเพียง {{limit}} ตัวในห้องนี้"
         },
         "settingsPopup": {
             "dialogTitle": "การตั้งค่าวิดีโอ",
@@ -256,7 +267,8 @@
             "copy": "สำเนา",
             "streamToRTMP": "สตรีมไปยัง RTMP . ที่กำหนดเอง",
             "startBroadcasting": "เริ่มออกอากาศ",
-            "broadcastingInProgress": "กำลังออกอากาศ"
+            "broadcastingInProgress": "กำลังออกอากาศ",
+            "manageStream": "จัดการสตรีมสด"
         },
         "audioSettings": {
             "dialogTitle": "การตั้งค่าเสียง",
@@ -284,8 +296,8 @@
             "title": "การตั้งค่าสตรีมมิ่ง"
         },
         "preview": {
-            "Meeting": "การประชุม",
-            "MeetingEnded": "สิ้นสุดการประชุม"
+            "Meeting": "โทรสด",
+            "MeetingEnded": "จบการสนทนา"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "การสนทนาระหว่างผู้ใช้กับประวัติ"
         },
         "Streams\/webrtc": {
-            "displayType": "โทรตามเวลาจริง",
+            "displayType": "โทรสด",
             "description": "การโทรวิดีโอ\/เสียงแบบเรียลไทม์"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "อัปเดต",
         "NoCallsYet": "ยังไม่มีการโทร",
         "CallReasonTitle": "นี่โทรมาเรื่องอะไร?",
-        "WaitingRoom": "ห้องรอ"
+        "WaitingRoom": "ห้องรอ",
+        "LiveRoom": "ไลฟ์รูม",
+        "interviewedByAnotherHost": "กำลังถูกสัมภาษณ์โดยโฮสต์อื่น",
+        "bringToLive": "นำมาแสดงสด",
+        "putOnHold": "พักไว้",
+        "endCall": "วางสาย",
+        "interview": "สัมภาษณ์",
+        "markApproved": "มาร์คอนุมัติ"
     }
 }

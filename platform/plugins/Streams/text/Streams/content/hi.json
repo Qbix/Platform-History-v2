@@ -89,7 +89,14 @@
             "byEmail": "ईमेल",
             "byText": "मूलपाठ",
             "byFacebook": "फेसबुक",
-            "byTwitter": "ट्विटर"
+            "byTwitter": "ट्विटर",
+            "title2": "लोगों को आमंत्रित करो",
+            "chooseMethod": "एक विधि चुनें:",
+            "selectContacts": "संपर्क चुनें",
+            "scanQRCode": "क्यू आर कोड स्कैन करें",
+            "shareLink": "एक लिंक साझा करें",
+            "chooseFromRegistered": "पंजीकृत उपयोगकर्ताओं में से चुनें",
+            "inviteViaEmailOrSms": "ईमेल या एसएमएस के माध्यम से आमंत्रित करें"
         },
         "email": {
             "subject": "अरे, इसे देखें",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "आपको आमंत्रित किया गया है। {{ClickOrTap}} यहां स्वीकार करने और शामिल होने के लिए।"
-        }
+        },
+        "Invite": "आमंत्रित करना",
+        "Share": "शेयर करना"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "लिंक को क्लिपबोर्ड पर कॉपी किया गया",
             "codeCopiedToCb": "कोड को क्लिपबोर्ड पर कॉपी किया गया",
             "userHasNoVideo": "प्रतिभागी के पास कोई वीडियो नहीं है",
-            "openInBrowserAlert": "सम्मेलन में शामिल होने के लिए सफारी ब्राउज़र में लिंक खोलें।"
+            "openInBrowserAlert": "सम्मेलन में शामिल होने के लिए सफारी ब्राउज़र में लिंक खोलें।",
+            "allowedVideoLimit": "इस कमरे में केवल {{limit}} वीडियो की अनुमति है",
+            "allowedAudioLimit": "इस कमरे में केवल {{limit}} माइक्रोफ़ोन की अनुमति है"
         },
         "settingsPopup": {
             "dialogTitle": "वीडियो सेटिंग्स",
@@ -256,7 +267,8 @@
             "copy": "प्रतिलिपि",
             "streamToRTMP": "कस्टम RTMP पर स्ट्रीम करें",
             "startBroadcasting": "प्रसारण शुरू करें",
-            "broadcastingInProgress": "प्रसारण जारी है"
+            "broadcastingInProgress": "प्रसारण जारी है",
+            "manageStream": "लाइवस्ट्रीम प्रबंधित करें"
         },
         "audioSettings": {
             "dialogTitle": "श्रव्य विन्यास",
@@ -284,8 +296,8 @@
             "title": "स्ट्रीमिंग सेटिंग्स"
         },
         "preview": {
-            "Meeting": "मुलाकात",
-            "MeetingEnded": "बैठक समाप्त"
+            "Meeting": "लाइव कॉल",
+            "MeetingEnded": "कॉल समाप्त"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "इतिहास के साथ उपयोगकर्ताओं के बीच बातचीत"
         },
         "Streams\/webrtc": {
-            "displayType": "रीयल-टाइम कॉल",
-            "description": "एक रीयल टाइम वीडियो\/ऑडियो कॉल"
+            "displayType": "लाइव कॉल",
+            "description": "एक रीयल-टाइम वीडियो\/ऑडियो कॉल"
         },
         "Streams\/question": {
             "displayType": "प्रश्न",
@@ -527,6 +539,13 @@
         "Update": "अद्यतन",
         "NoCallsYet": "अभी तक कोई कॉल नहीं",
         "CallReasonTitle": "यह कॉल किस बारे में है?",
-        "WaitingRoom": "प्रतीक्षालय"
+        "WaitingRoom": "प्रतीक्षालय",
+        "LiveRoom": "कमरा जिएं",
+        "interviewedByAnotherHost": "वर्तमान में किसी अन्य होस्ट द्वारा साक्षात्कार लिया गया है",
+        "bringToLive": "लाइव शो में लाओ",
+        "putOnHold": "ठंडे बस्ते में डालो",
+        "endCall": "कॉल समाप्त करें",
+        "interview": "साक्षात्कार",
+        "markApproved": "मार्क स्वीकृत"
     }
 }

@@ -89,7 +89,14 @@
             "byEmail": "ઈમેલ",
             "byText": "ટેક્સ્ટ",
             "byFacebook": "ફેસબુક",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "લોકોને આમંત્રિત કરો",
+            "chooseMethod": "એક પદ્ધતિ પસંદ કરો:",
+            "selectContacts": "સંપર્કો પસંદ કરો",
+            "scanQRCode": "QR કોડ સ્કેન કરો",
+            "shareLink": "એક લિંક શેર કરો",
+            "chooseFromRegistered": "નોંધાયેલા વપરાશકર્તાઓમાંથી પસંદ કરો",
+            "inviteViaEmailOrSms": "ઇમેઇલ અથવા SMS દ્વારા આમંત્રિત કરો"
         },
         "email": {
             "subject": "અરે, આ તપાસો",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "તમને આમંત્રણ આપવામાં આવ્યું છે. સ્વીકારવા અને જોડાવા માટે અહીં {{ClickOrTap}}."
-        }
+        },
+        "Invite": "આમંત્રિત",
+        "Share": "શેર કરો"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "લિંક ક્લિપબોર્ડ પર કૉપિ કરી",
             "codeCopiedToCb": "કોડ ક્લિપબોર્ડ પર કૉપિ કર્યો",
             "userHasNoVideo": "સહભાગી પાસે કોઈ વિડિઓ નથી",
-            "openInBrowserAlert": "કોન્ફરન્સમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો."
+            "openInBrowserAlert": "કોન્ફરન્સમાં જોડાવા માટે સફારી બ્રાઉઝરમાં લિંક ખોલો.",
+            "allowedVideoLimit": "આ રૂમમાં માત્ર {{limit}} વિડિયોની મંજૂરી છે",
+            "allowedAudioLimit": "આ રૂમમાં માત્ર {{limit}} માઇક્રોફોનની મંજૂરી છે"
         },
         "settingsPopup": {
             "dialogTitle": "વિડિઓ સેટિંગ્સ",
@@ -256,7 +267,8 @@
             "copy": "નકલ કરો",
             "streamToRTMP": "કસ્ટમ RTMP પર સ્ટ્રીમ કરો",
             "startBroadcasting": "પ્રસારણ શરૂ કરો",
-            "broadcastingInProgress": "પ્રસારણ ચાલુ છે"
+            "broadcastingInProgress": "પ્રસારણ ચાલુ છે",
+            "manageStream": "લાઇવસ્ટ્રીમ મેનેજ કરો"
         },
         "audioSettings": {
             "dialogTitle": "ઑડિઓ સેટિંગ્સ",
@@ -284,8 +296,8 @@
             "title": "સ્ટ્રીમિંગ સેટિંગ્સ"
         },
         "preview": {
-            "Meeting": "બેઠક",
-            "MeetingEnded": "મીટીંગ પૂરી થઈ"
+            "Meeting": "લાઈવ કોલ",
+            "MeetingEnded": "કૉલ સમાપ્ત થયો"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "ઇતિહાસ સાથે વપરાશકર્તાઓ વચ્ચે વાતચીત"
         },
         "Streams\/webrtc": {
-            "displayType": "રીઅલ-ટાઇમ કૉલ",
-            "description": "વાસ્તવિક સમયનો વિડિયો\/ઑડિઓ કૉલ"
+            "displayType": "લાઈવ કોલ",
+            "description": "રીઅલ-ટાઇમ વિડિયો\/ઑડિઓ કૉલ"
         },
         "Streams\/question": {
             "displayType": "પ્રશ્ન",
@@ -527,6 +539,13 @@
         "Update": "અપડેટ કરો",
         "NoCallsYet": "હજુ સુધી કોઈ કૉલ નથી",
         "CallReasonTitle": "આ કૉલ શેના વિશે છે?",
-        "WaitingRoom": "પ્રતિક્ષા ખંડ"
+        "WaitingRoom": "પ્રતિક્ષા ખંડ",
+        "LiveRoom": "લાઈવ રૂમ",
+        "interviewedByAnotherHost": "હાલમાં અન્ય હોસ્ટ દ્વારા ઇન્ટરવ્યુ લેવામાં આવે છે",
+        "bringToLive": "લાઈવ શોમાં લાવો",
+        "putOnHold": "સ્થગિત કરો",
+        "endCall": "કૉલ સમાપ્ત કરો",
+        "interview": "ઈન્ટરવ્યુ",
+        "markApproved": "માર્ક મંજૂર"
     }
 }

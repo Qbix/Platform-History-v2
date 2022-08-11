@@ -89,7 +89,14 @@
             "byEmail": "Correo electrónico",
             "byText": "Texto",
             "byFacebook": "Facebook",
-            "byTwitter": "Gorjeo"
+            "byTwitter": "Gorjeo",
+            "title2": "Invitar a la gente",
+            "chooseMethod": "Elija un método:",
+            "selectContacts": "Seleccione Contactos",
+            "scanQRCode": "Escanear código QR",
+            "shareLink": "compartir un enlace",
+            "chooseFromRegistered": "Elige entre los usuarios registrados",
+            "inviteViaEmailOrSms": "Invitar por correo electrónico o SMS"
         },
         "email": {
             "subject": "Oye mira esto",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Has sido invitado. {{ClickOrTap}} aquí para aceptar y unirse."
-        }
+        },
+        "Invite": "Invitar",
+        "Share": "Cuota"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Enlace copiado al portapapeles",
             "codeCopiedToCb": "Código copiado al portapapeles",
             "userHasNoVideo": "El participante no tiene video.",
-            "openInBrowserAlert": "Abra el enlace en el navegador Safari para unirse a la conferencia."
+            "openInBrowserAlert": "Abra el enlace en el navegador Safari para unirse a la conferencia.",
+            "allowedVideoLimit": "Solo {{limit}} video permitido en esta sala",
+            "allowedAudioLimit": "Solo {{limit}} micrófonos permitidos en esta sala"
         },
         "settingsPopup": {
             "dialogTitle": "Ajustes de video",
@@ -256,7 +267,8 @@
             "copy": "Dupdo",
             "streamToRTMP": "Transmitir a RTMP personalizado",
             "startBroadcasting": "Comenzar a emitir",
-            "broadcastingInProgress": "La transmisión está en progreso"
+            "broadcastingInProgress": "La transmisión está en progreso",
+            "manageStream": "Administrar transmisión en vivo"
         },
         "audioSettings": {
             "dialogTitle": "Configuraciones de audio",
@@ -284,8 +296,8 @@
             "title": "Configuración de transmisión"
         },
         "preview": {
-            "Meeting": "Reunión",
-            "MeetingEnded": "Reunión finalizada"
+            "Meeting": "Llamada en vivo",
+            "MeetingEnded": "Llamada terminada"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "una conversación entre usuarios, con historial"
         },
         "Streams\/webrtc": {
-            "displayType": "Llamada en tiempo real",
+            "displayType": "Llamada en vivo",
             "description": "una llamada de video\/audio en tiempo real"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Actualizar",
         "NoCallsYet": "No hay llamadas todavía",
         "CallReasonTitle": "¿De qué se trata esta convocatoria?",
-        "WaitingRoom": "Sala de espera"
+        "WaitingRoom": "Sala de espera",
+        "LiveRoom": "Sala en vivo",
+        "interviewedByAnotherHost": "Actualmente es entrevistado por otro presentador.",
+        "bringToLive": "Traer al espectáculo en vivo",
+        "putOnHold": "Poner en espera",
+        "endCall": "Finalizar llamada",
+        "interview": "Entrevista",
+        "markApproved": "Marcar Aprobado"
     }
 }

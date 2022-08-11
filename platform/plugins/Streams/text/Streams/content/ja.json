@@ -89,7 +89,14 @@
             "byEmail": "Eメール",
             "byText": "文章",
             "byFacebook": "フェイスブック",
-            "byTwitter": "ツイッター"
+            "byTwitter": "ツイッター",
+            "title2": "人を招待する",
+            "chooseMethod": "方法を選択してください:",
+            "selectContacts": "連絡先を選択",
+            "scanQRCode": "QRコードをスキャン",
+            "shareLink": "リンクを共有する",
+            "chooseFromRegistered": "登録ユーザーから選ぶ",
+            "inviteViaEmailOrSms": "メールまたは SMS で招待する"
         },
         "email": {
             "subject": "ねえ、これをチェックしてください",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "あなたは招待されました。 {{ClickOrTap}}ここで受け入れて参加します。"
-        }
+        },
+        "Invite": "招待",
+        "Share": "シェア"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "リンクがクリップボードにコピーされました",
             "codeCopiedToCb": "クリップボードにコピーされたコード",
             "userHasNoVideo": "参加者にはビデオがありません",
-            "openInBrowserAlert": "Safariブラウザでリンクを開いて会議に参加します。"
+            "openInBrowserAlert": "Safariブラウザでリンクを開いて会議に参加します。",
+            "allowedVideoLimit": "この部屋では{{limit}}の動画のみ許可されています",
+            "allowedAudioLimit": "この部屋では {{limit}} 個のマイクのみ許可されています"
         },
         "settingsPopup": {
             "dialogTitle": "ビデオ設定",
@@ -256,7 +267,8 @@
             "copy": "コピー",
             "streamToRTMP": "カスタムRTMPにストリーミング",
             "startBroadcasting": "放送開始",
-            "broadcastingInProgress": "放送中です"
+            "broadcastingInProgress": "放送中です",
+            "manageStream": "ライブストリームの管理"
         },
         "audioSettings": {
             "dialogTitle": "オーディオ設定",
@@ -284,8 +296,8 @@
             "title": "ストリーミング設定"
         },
         "preview": {
-            "Meeting": "ミーティング",
-            "MeetingEnded": "会議は終了しました"
+            "Meeting": "ライブコール",
+            "MeetingEnded": "通話終了"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "歴史のあるユーザー間の会話"
         },
         "Streams\/webrtc": {
-            "displayType": "リアルタイム通話",
-            "description": "リアルタイムのビデオ\/オーディオ通話"
+            "displayType": "ライブコール",
+            "description": "リアルタイムのビデオ\/音声通話"
         },
         "Streams\/question": {
             "displayType": "質問",
@@ -527,6 +539,13 @@
         "Update": "アップデート",
         "NoCallsYet": "まだ電話はありません",
         "CallReasonTitle": "この呼びかけは何ですか？",
-        "WaitingRoom": "待合室"
+        "WaitingRoom": "待合室",
+        "LiveRoom": "ライブルーム",
+        "interviewedByAnotherHost": "現在、別のホストからインタビューを受けています",
+        "bringToLive": "ライブショーに持ち込む",
+        "putOnHold": "保留にする",
+        "endCall": "通話終了",
+        "interview": "インタビュー",
+        "markApproved": "承認済みとしてマーク"
     }
 }

@@ -89,7 +89,14 @@
             "byEmail": "ఇమెయిల్",
             "byText": "వచనం",
             "byFacebook": "ఫేస్బుక్",
-            "byTwitter": "ట్విట్టర్"
+            "byTwitter": "ట్విట్టర్",
+            "title2": "వ్యక్తులను ఆహ్వానించండి",
+            "chooseMethod": "ఒక పద్ధతిని ఎంచుకోండి:",
+            "selectContacts": "పరిచయాలను ఎంచుకోండి",
+            "scanQRCode": "QR కోడ్‌ని స్కాన్ చేయండి",
+            "shareLink": "లింక్‌ను భాగస్వామ్యం చేయండి",
+            "chooseFromRegistered": "నమోదిత వినియోగదారుల నుండి ఎంచుకోండి",
+            "inviteViaEmailOrSms": "ఇమెయిల్ లేదా SMS ద్వారా ఆహ్వానించండి"
         },
         "email": {
             "subject": "హే, దీన్ని తనిఖీ చేయండి",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "మీరు ఆహ్వానించబడ్డారు. అంగీకరించడానికి మరియు చేరడానికి {{ClickOrTap}} ఇక్కడ ఉంది."
-        }
+        },
+        "Invite": "ఆహ్వానించండి",
+        "Share": "షేర్ చేయండి"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "లింక్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది",
             "codeCopiedToCb": "కోడ్ క్లిప్‌బోర్డ్‌కి కాపీ చేయబడింది",
             "userHasNoVideo": "పాల్గొనేవారి వద్ద వీడియో లేదు",
-            "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ని తెరవండి."
+            "openInBrowserAlert": "సమావేశంలో చేరడానికి సఫారి బ్రౌజర్‌లో లింక్‌ని తెరవండి.",
+            "allowedVideoLimit": "ఈ గదిలో కేవలం {{limit}} వీడియో మాత్రమే అనుమతించబడుతుంది",
+            "allowedAudioLimit": "ఈ గదిలో {{limit}} మైక్రోఫోన్‌లు మాత్రమే అనుమతించబడతాయి"
         },
         "settingsPopup": {
             "dialogTitle": "వీడియో సెట్టింగ్‌లు",
@@ -256,7 +267,8 @@
             "copy": "కాపీ చేయండి",
             "streamToRTMP": "అనుకూల RTMPకి ప్రసారం చేయండి",
             "startBroadcasting": "ప్రసారాన్ని ప్రారంభించండి",
-            "broadcastingInProgress": "ప్రసారం జరుగుతోంది"
+            "broadcastingInProgress": "ప్రసారం జరుగుతోంది",
+            "manageStream": "ప్రత్యక్ష ప్రసారాన్ని నిర్వహించండి"
         },
         "audioSettings": {
             "dialogTitle": "ఆడియో సెట్టింగ్‌లు",
@@ -284,8 +296,8 @@
             "title": "స్ట్రీమింగ్ సెట్టింగ్‌లు"
         },
         "preview": {
-            "Meeting": "సమావేశం",
-            "MeetingEnded": "సమావేశం ముగిసింది"
+            "Meeting": "ప్రత్యక్ష కాల్",
+            "MeetingEnded": "కాల్ ముగిసింది"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "చరిత్రతో వినియోగదారుల మధ్య సంభాషణ"
         },
         "Streams\/webrtc": {
-            "displayType": "నిజ-సమయ కాల్",
-            "description": "నిజ సమయ వీడియో\/ఆడియో కాల్"
+            "displayType": "ప్రత్యక్ష కాల్",
+            "description": "నిజ-సమయ వీడియో\/ఆడియో కాల్"
         },
         "Streams\/question": {
             "displayType": "ప్రశ్న",
@@ -527,6 +539,13 @@
         "Update": "నవీకరించు",
         "NoCallsYet": "ఇంకా కాల్‌లు లేవు",
         "CallReasonTitle": "ఈ కాల్ దేని గురించి?",
-        "WaitingRoom": "వేచివుండు గది"
+        "WaitingRoom": "వేచివుండు గది",
+        "LiveRoom": "ప్రత్యక్ష గది",
+        "interviewedByAnotherHost": "ప్రస్తుతం మరో హోస్ట్‌తో ఇంటర్వ్యూ చేస్తున్నారు",
+        "bringToLive": "ప్రత్యక్ష ప్రదర్శనకు తీసుకురండి",
+        "putOnHold": "ఆపి ఉంచు",
+        "endCall": "కాల్ ముగించు",
+        "interview": "ఇంటర్వ్యూ",
+        "markApproved": "మార్క్ ఆమోదించబడింది"
     }
 }

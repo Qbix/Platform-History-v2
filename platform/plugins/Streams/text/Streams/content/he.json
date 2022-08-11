@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} אם הקוד נסרק",
             "copyLink": "{{ClickOrTap}} כדי להעתיק את קישור ההזמנה",
             "userChooserPlaceholder": "חפש לפי שם",
-            "shareOrCopyLink": "{{ClickOrTap}} כדי לשתף או להעתיק את קישור ההזמנה"
+            "shareOrCopyLink": "{{ClickOrTap}} כדי לשתף או להעתיק את קישור ההזמנה",
+            "title2": "להזמין אנשים",
+            "chooseMethod": "בחר שיטה:",
+            "selectContacts": "בחר אנשי קשר",
+            "scanQRCode": "סרוק קוד QR",
+            "shareLink": "שתף קישור",
+            "chooseFromRegistered": "בחר מבין משתמשים רשומים",
+            "inviteViaEmailOrSms": "הזמינו במייל או ב-SMS"
         },
         "email": {
             "subject": "ללא שם: היי, לבדוק את זה",
@@ -104,7 +111,9 @@
             "text": "הוזמנת. {{ClickOrTap}} כאן כדי לקבל ולהצטרף."
         },
         "youCanNowPaste": "כעת תוכלו להדביק את הקישור הזה במקום כלשהו כדי להזמין אנשים",
-        "command": "להזמין"
+        "command": "להזמין",
+        "Invite": "להזמין",
+        "Share": "לַחֲלוֹק"
     },
     "followup": {
         "mobile": {
@@ -191,7 +200,9 @@
             "sbStartedLiveStreaming": "{{userName}} התחיל בשידור חי",
             "sbStoppedLiveStreaming": "{{userName}} הסתיים בשידור חי",
             "liveStopped": "אירעה שגיאה בעת שליחת וידאו לנקודת הקצה",
-            "forceDisconnectingImmediately": "ניתקת על ידי מארח"
+            "forceDisconnectingImmediately": "ניתקת על ידי מארח",
+            "allowedVideoLimit": "רק סרטון {{limit}} מותר בחדר הזה",
+            "allowedAudioLimit": "רק {{limit}} מיקרופונים מותרים בחדר הזה"
         },
         "settingsPopup": {
             "webCamera": "מצלמת רשת",
@@ -225,7 +236,8 @@
             "streamingSettings": "הגדרות",
             "streamToRTMP": "הזרם ל-RTMP מותאם אישית",
             "startBroadcasting": "התחל לשדר",
-            "broadcastingInProgress": "השידור בעיצומו"
+            "broadcastingInProgress": "השידור בעיצומו",
+            "manageStream": "נהל שידור חי"
         },
         "participantsPopup": {
             "disconnect": "נתק",
@@ -248,8 +260,8 @@
         "streamTitle": "{{1}} שיחה חיה",
         "preview": {
             "preamble": "פְּגִישָׁה:",
-            "Meeting": "פְּגִישָׁה",
-            "MeetingEnded": "הפגישה הסתיימה"
+            "Meeting": "שיחה חיה",
+            "MeetingEnded": "השיחה הסתיימה"
         },
         "preparing": {
             "micIsOff": "המיקרופון כבוי",
@@ -367,8 +379,8 @@
             "description": "שיחה בין משתמשים, עם היסטוריה"
         },
         "Streams\/webrtc": {
-            "displayType": "שיחה בזמן אמת",
-            "description": "שיחת וידאו \/ שמע בזמן אמת"
+            "displayType": "שיחה חיה",
+            "description": "שיחת וידאו\/שמע בזמן אמת"
         },
         "Streams\/tasks": {
             "description": "קטגוריה למשימות",
@@ -530,6 +542,13 @@
         "Update": "עדכון",
         "NoCallsYet": "עדיין אין שיחות",
         "CallReasonTitle": "על מה השיחה הזו?",
-        "WaitingRoom": "חדר המתנה"
+        "WaitingRoom": "חדר המתנה",
+        "LiveRoom": "חדר חי",
+        "interviewedByAnotherHost": "כרגע מתראיין על ידי מארח אחר",
+        "bringToLive": "תביא למופע חי",
+        "putOnHold": "לשים בהמתנה",
+        "endCall": "סיום שיחה",
+        "interview": "רֵאָיוֹן",
+        "markApproved": "סמן אושר"
     }
 }

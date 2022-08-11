@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} kod skan edilibsə",
             "copyLink": "Dəvət linkini kopyalamaq üçün {{ClickOrTap}}",
             "userChooserPlaceholder": "Ada görə axtarın",
-            "shareOrCopyLink": "Dəvət linkini paylaşmaq və ya kopyalamaq üçün {{ClickOrTap}}"
+            "shareOrCopyLink": "Dəvət linkini paylaşmaq və ya kopyalamaq üçün {{ClickOrTap}}",
+            "title2": "İnsanları dəvət edin",
+            "chooseMethod": "Bir üsul seçin:",
+            "selectContacts": "Kontaktlar seçin",
+            "scanQRCode": "QR kodunu skan edin",
+            "shareLink": "Link paylaşın",
+            "chooseFromRegistered": "Qeydiyyatdan keçmiş istifadəçilərdən seçin",
+            "inviteViaEmailOrSms": "E-poçt və ya SMS vasitəsilə dəvət edin"
         },
         "email": {
             "subject": "Hey, bunu yoxlayın",
@@ -104,7 +111,9 @@
             "text": "Siz dəvət olundunuz. {{ClickOrTap}} qəbul etmək və qoşulmaq üçün burada."
         },
         "youCanNowPaste": "İndi insanları dəvət etmək üçün bu linki harasa yerləşdirə bilərsiniz",
-        "command": "dəvət et"
+        "command": "dəvət et",
+        "Invite": "dəvət et",
+        "Share": "Paylaşın"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} canlı yayıma başladı",
             "sbStoppedLiveStreaming": "{{userName}} canlı yayımı bitirdi",
             "liveStopped": "Videonu son nöqtəyə göndərərkən xəta baş verdi",
-            "forceDisconnectingImmediately": "Ev sahibi tərəfindən əlaqəniz kəsildi"
+            "forceDisconnectingImmediately": "Ev sahibi tərəfindən əlaqəniz kəsildi",
+            "allowedVideoLimit": "Bu otaqda yalnız {{limit}} videoya icazə verilir",
+            "allowedAudioLimit": "Bu otaqda yalnız {{limit}} mikrofona icazə verilir"
         },
         "settingsPopup": {
             "webCamera": "Veb kamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Fərdi RTMP-yə yayım",
             "dialogTitle": "Video Parametrləri",
             "startBroadcasting": "Yayımlamağa başlayın",
-            "broadcastingInProgress": "Yayım davam edir"
+            "broadcastingInProgress": "Yayım davam edir",
+            "manageStream": "Canlı yayımı idarə edin"
         },
         "participantsPopup": {
             "disconnect": "Bağlantını kəsin",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} canlı zəngə başladı",
         "preview": {
             "preamble": "İclas:",
-            "Meeting": "Görüş",
-            "MeetingEnded": "Görüş başa çatdı"
+            "Meeting": "Canlı Zəng",
+            "MeetingEnded": "Zəng bitdi"
         },
         "preparing": {
             "micIsOff": "Mikrofon söndürülüb",
@@ -370,8 +382,8 @@
             "description": "istifadəçilər arasında tarixlə söhbət"
         },
         "Streams\/webrtc": {
-            "displayType": "Real Zamanlı Zəng",
-            "description": "real vaxt video\/audio zəng"
+            "displayType": "Canlı Zəng",
+            "description": "real vaxt rejimində video\/audio zəng"
         },
         "Streams\/tasks": {
             "description": "tapşırıqlar üçün kateqoriya",
@@ -533,6 +545,13 @@
         "Update": "Yeniləyin",
         "NoCallsYet": "Hələ zəng yoxdur",
         "CallReasonTitle": "Bu zəng nə ilə bağlıdır?",
-        "WaitingRoom": "Gözləmə otağı"
+        "WaitingRoom": "Gözləmə otağı",
+        "LiveRoom": "Canlı otaq",
+        "interviewedByAnotherHost": "Hazırda başqa aparıcı ilə müsahibə verilir",
+        "bringToLive": "Canlı Şouya gətirin",
+        "putOnHold": "Gözləyin",
+        "endCall": "Zəngi bitir",
+        "interview": "Müsahibə",
+        "markApproved": "Təsdiqlə işarələyin"
     }
 }

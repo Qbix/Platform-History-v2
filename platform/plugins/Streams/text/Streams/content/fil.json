@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} kung na-scan ang code",
             "copyLink": "{{ClickOrTap}} upang kopyahin ang link ng imbitasyon",
             "userChooserPlaceholder": "Maghanap ayon sa pangalan",
-            "shareOrCopyLink": "{{ClickOrTap}} para ibahagi o kopyahin ang link ng imbitasyon"
+            "shareOrCopyLink": "{{ClickOrTap}} para ibahagi o kopyahin ang link ng imbitasyon",
+            "title2": "Mag-imbita ng mga tao",
+            "chooseMethod": "Pumili ng paraan:",
+            "selectContacts": "Piliin ang Mga Contact",
+            "scanQRCode": "I-scan ang QR Code",
+            "shareLink": "Magbahagi ng link",
+            "chooseFromRegistered": "Pumili mula sa mga rehistradong user",
+            "inviteViaEmailOrSms": "Mag-imbita sa pamamagitan ng email o SMS"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -104,7 +111,9 @@
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
         },
         "youCanNowPaste": "Maaari mo na ngayong i-paste ang link na ito sa isang lugar upang anyayahan ang mga tao",
-        "command": "Mag-anyaya"
+        "command": "Mag-anyaya",
+        "Invite": "Mag-anyaya",
+        "Share": "Ibahagi"
     },
     "followup": {
         "mobile": {
@@ -191,7 +200,9 @@
             "sbStartedLiveStreaming": "{{userName}} nagsimula nang live",
             "sbStoppedLiveStreaming": "{{userName}} ay natapos nang live",
             "liveStopped": "Nagkaroon ng error habang nagpapadala ng video sa endpoint",
-            "forceDisconnectingImmediately": "Nadiskonekta ka ng isang host"
+            "forceDisconnectingImmediately": "Nadiskonekta ka ng isang host",
+            "allowedVideoLimit": "Tanging {{limit}} video lang ang pinapayagan sa kwartong ito",
+            "allowedAudioLimit": "Tanging {{limit}} mga mikropono ang pinapayagan sa kwartong ito"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -225,7 +236,8 @@
             "streamingSettings": "Mga setting",
             "streamToRTMP": "Stream sa custom na RTMP",
             "startBroadcasting": "Simulan ang pagsasahimpapawid",
-            "broadcastingInProgress": "Ang pagsasahimpapawid ay isinasagawa"
+            "broadcastingInProgress": "Ang pagsasahimpapawid ay isinasagawa",
+            "manageStream": "Pamahalaan ang Livestream"
         },
         "participantsPopup": {
             "disconnect": "Idiskonekta",
@@ -248,8 +260,8 @@
         "streamTitle": "Live na tawag ng {{1}}",
         "preview": {
             "preamble": "Pagpupulong:",
-            "Meeting": "Pagpupulong",
-            "MeetingEnded": "Natapos ang pagpupulong"
+            "Meeting": "Live na Tawag",
+            "MeetingEnded": "Natapos ang tawag"
         },
         "preparing": {
             "micIsOff": "Naka-off ang Mic",
@@ -367,8 +379,8 @@
             "description": "isang pag-uusap sa pagitan ng mga gumagamit, na may kasaysayan"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "isang real time na tawag sa video \/ audio"
+            "displayType": "Live na Tawag",
+            "description": "isang real-time na video\/audio call"
         },
         "Streams\/tasks": {
             "description": "kategorya para sa mga gawain",
@@ -530,6 +542,13 @@
         "Update": "Update",
         "NoCallsYet": "Wala pang tawag",
         "CallReasonTitle": "Tungkol saan ang tawag na ito?",
-        "WaitingRoom": "Silidhintayan"
+        "WaitingRoom": "Silidhintayan",
+        "LiveRoom": "Live Room",
+        "interviewedByAnotherHost": "Kasalukuyang kinakapanayam ng isa pang host",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Itigil",
+        "endCall": "Tapusin ang Tawag",
+        "interview": "Panayam",
+        "markApproved": "Naaprubahan si Mark"
     }
 }

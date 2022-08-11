@@ -89,7 +89,14 @@
             "byEmail": "E-pasts",
             "byText": "Teksts",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Uzaiciniet cilvēkus",
+            "chooseMethod": "Izvēlieties metodi:",
+            "selectContacts": "Izvēlieties Kontakti",
+            "scanQRCode": "Skenējiet QR kodu",
+            "shareLink": "Kopīgojiet saiti",
+            "chooseFromRegistered": "Izvēlieties no reģistrētajiem lietotājiem",
+            "inviteViaEmailOrSms": "Uzaicināt pa e-pastu vai SMS"
         },
         "email": {
             "subject": "Hei, pārbaudiet šo",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
-        }
+        },
+        "Invite": "Uzaicināt",
+        "Share": "Dalīties"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Saite ir kopēta starpliktuvē",
             "codeCopiedToCb": "Kods ir kopēts starpliktuvē",
             "userHasNoVideo": "Dalībniekam nav video",
-            "openInBrowserAlert": "Atveriet saiti pārlūkprogrammā Safari, lai pievienotos konferencei."
+            "openInBrowserAlert": "Atveriet saiti pārlūkprogrammā Safari, lai pievienotos konferencei.",
+            "allowedVideoLimit": "Šajā telpā atļauts tikai {{limit}} video",
+            "allowedAudioLimit": "Šajā telpā atļauts izmantot tikai {{limit}} mikrofonus"
         },
         "settingsPopup": {
             "dialogTitle": "Video iestatījumi",
@@ -256,7 +267,8 @@
             "copy": "Kopēt",
             "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
             "startBroadcasting": "Sāciet apraidi",
-            "broadcastingInProgress": "Notiek apraide"
+            "broadcastingInProgress": "Notiek apraide",
+            "manageStream": "Pārvaldīt tiešraidi"
         },
         "audioSettings": {
             "dialogTitle": "Audio iestatījumi",
@@ -284,8 +296,8 @@
             "title": "Straumēšanas iestatījumi"
         },
         "preview": {
-            "Meeting": "Tikšanās",
-            "MeetingEnded": "Sanāksme beigusies"
+            "Meeting": "Tiešraides zvans",
+            "MeetingEnded": "Zvans beidzās"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "saruna starp lietotājiem ar vēsturi"
         },
         "Streams\/webrtc": {
-            "displayType": "Reāllaika zvans",
+            "displayType": "Tiešraides zvans",
             "description": "reāllaika video\/audiozvans"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Atjaunināt",
         "NoCallsYet": "Vēl nav zvanu",
         "CallReasonTitle": "Par ko ir šis zvans?",
-        "WaitingRoom": "Uzgaidāmā telpa"
+        "WaitingRoom": "Uzgaidāmā telpa",
+        "LiveRoom": "Tiešraides telpa",
+        "interviewedByAnotherHost": "Pašlaik intervē cits vadītājs",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Aizturēt",
+        "endCall": "Beigt zvanu",
+        "interview": "Intervija",
+        "markApproved": "Atzīmēt kā apstiprinātu"
     }
 }

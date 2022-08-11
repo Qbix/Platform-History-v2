@@ -89,7 +89,14 @@
             "byEmail": "Email",
             "byText": "Text",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Pozvať ľudí",
+            "chooseMethod": "Vyberte metódu:",
+            "selectContacts": "Vyberte Kontakty",
+            "scanQRCode": "Naskenujte QR kód",
+            "shareLink": "Zdieľajte odkaz",
+            "chooseFromRegistered": "Vyberte si z registrovaných užívateľov",
+            "inviteViaEmailOrSms": "Pozvite e-mailom alebo SMS"
         },
         "email": {
             "subject": "Hej, skontroluj toto",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Boli ste pozvaní. {{ClickOrTap}} tu môžete prijať a pripojiť sa."
-        }
+        },
+        "Invite": "Pozvať",
+        "Share": "zdieľam"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Odkaz bol skopírovaný do schránky",
             "codeCopiedToCb": "Kód bol skopírovaný do schránky",
             "userHasNoVideo": "Účastník nemá žiadne video",
-            "openInBrowserAlert": "Otvorte odkaz v prehliadači Safari a pripojte sa ku konferencii."
+            "openInBrowserAlert": "Otvorte odkaz v prehliadači Safari a pripojte sa ku konferencii.",
+            "allowedVideoLimit": "V tejto miestnosti je povolené iba {{limit}} video",
+            "allowedAudioLimit": "V tejto miestnosti je povolených iba {{limit}} mikrofónov"
         },
         "settingsPopup": {
             "dialogTitle": "Nastavenia videa",
@@ -256,7 +267,8 @@
             "copy": "Kopírovať",
             "streamToRTMP": "Streamujte do vlastného RTMP",
             "startBroadcasting": "Začnite vysielať",
-            "broadcastingInProgress": "Prebieha vysielanie"
+            "broadcastingInProgress": "Prebieha vysielanie",
+            "manageStream": "Spravovať priamy prenos"
         },
         "audioSettings": {
             "dialogTitle": "Nastavenia zvuku",
@@ -284,8 +296,8 @@
             "title": "Nastavenia streamovania"
         },
         "preview": {
-            "Meeting": "Stretnutie",
-            "MeetingEnded": "Stretnutie sa skončilo"
+            "Meeting": "Živý hovor",
+            "MeetingEnded": "Hovor bol ukončený"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "konverzácia medzi používateľmi s históriou"
         },
         "Streams\/webrtc": {
-            "displayType": "Hovor v reálnom čase",
+            "displayType": "Živý hovor",
             "description": "video\/audio hovor v reálnom čase"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Aktualizovať",
         "NoCallsYet": "Zatiaľ žiadne hovory",
         "CallReasonTitle": "O čom je tento hovor?",
-        "WaitingRoom": "Čakáreň"
+        "WaitingRoom": "Čakáreň",
+        "LiveRoom": "Obývacia izba",
+        "interviewedByAnotherHost": "V súčasnosti s ním robí rozhovor iný hostiteľ",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Podržať",
+        "endCall": "Ukončiť hovor",
+        "interview": "Rozhovor",
+        "markApproved": "Označiť ako schválené"
     }
 }

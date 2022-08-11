@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}}, калі код быў адсканаваны",
             "copyLink": "{{ClickOrTap}}, каб скапіяваць спасылку на запрашэнне",
             "userChooserPlaceholder": "Шукаць па назве",
-            "shareOrCopyLink": "{{ClickOrTap}}, каб падзяліцца або скапіяваць спасылку на запрашэнне"
+            "shareOrCopyLink": "{{ClickOrTap}}, каб падзяліцца або скапіяваць спасылку на запрашэнне",
+            "title2": "Запрасіць людзей",
+            "chooseMethod": "Выберыце спосаб:",
+            "selectContacts": "Выберыце Кантакты",
+            "scanQRCode": "Сканіруйце QR-код",
+            "shareLink": "Падзяліцеся спасылкай",
+            "chooseFromRegistered": "Выбірайце з зарэгістраваных карыстальнікаў",
+            "inviteViaEmailOrSms": "Запрасіць па электроннай пошце або SMS"
         },
         "email": {
             "subject": "Гэй, праверце гэта",
@@ -104,7 +111,9 @@
             "text": "Вас запрасілі. {{ClickOrTap}} тут, каб прыняць і далучыцца."
         },
         "youCanNowPaste": "Цяпер вы можаце ўставіць гэтую спасылку куды-небудзь, каб запрасіць людзей",
-        "command": "Запрасіць"
+        "command": "Запрасіць",
+        "Invite": "Запрасіць",
+        "Share": "падзяліцца"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} пачаў жывы эфір",
             "sbStoppedLiveStreaming": "{{userName}} скончыўся ў прамым эфіры",
             "liveStopped": "Адбылася памылка пры адпраўцы відэа ў канчатковую кропку",
-            "forceDisconnectingImmediately": "Вас адключыў хост"
+            "forceDisconnectingImmediately": "Вас адключыў хост",
+            "allowedVideoLimit": "У гэтым пакоі дазволена толькі {{limit}} відэа",
+            "allowedAudioLimit": "У гэтым пакоі дазволена выкарыстоўваць толькі {{limit}} мікрафонаў"
         },
         "settingsPopup": {
             "webCamera": "Вэб-камера",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Паток у карыстальніцкі RTMP",
             "dialogTitle": "Налады відэа",
             "startBroadcasting": "Пачаць трансляцыю",
-            "broadcastingInProgress": "Працягваецца трансляцыя"
+            "broadcastingInProgress": "Працягваецца трансляцыя",
+            "manageStream": "Кіраванне жывой трансляцыяй"
         },
         "participantsPopup": {
             "disconnect": "Адключыце",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} пачаў жывы званок",
         "preview": {
             "preamble": "Сустрэча:",
-            "Meeting": "Сустрэча",
-            "MeetingEnded": "Сустрэча скончылася"
+            "Meeting": "Жывы званок",
+            "MeetingEnded": "Выклік завершаны"
         },
         "preparing": {
             "micIsOff": "Мікрафон выключаны",
@@ -370,8 +382,8 @@
             "description": "размова паміж карыстальнікамі з гісторыяй"
         },
         "Streams\/webrtc": {
-            "displayType": "Выклік у рэжыме рэальнага часу",
-            "description": "відэа\/аўдыявыклік у рэжыме рэальнага часу"
+            "displayType": "Жывы званок",
+            "description": "відэа\/аўдыёвыклік у рэжыме рэальнага часу"
         },
         "Streams\/tasks": {
             "description": "катэгорыя для заданняў",
@@ -533,6 +545,13 @@
         "Update": "Абнаўленне",
         "NoCallsYet": "Званкоў пакуль няма",
         "CallReasonTitle": "Пра што гэты званок?",
-        "WaitingRoom": "Зала чакання"
+        "WaitingRoom": "Зала чакання",
+        "LiveRoom": "Жывая пакой",
+        "interviewedByAnotherHost": "У цяперашні час бярэ інтэрв&#39;ю іншы вядучы",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Пакласці на ўтрыманне",
+        "endCall": "Завяршыць выклік",
+        "interview": "Інтэрв&#39;ю",
+        "markApproved": "Пазначыць зацверджана"
     }
 }

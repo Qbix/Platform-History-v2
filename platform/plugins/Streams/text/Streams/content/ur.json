@@ -89,7 +89,14 @@
             "byEmail": "ای میل",
             "byText": "متن",
             "byFacebook": "فیس بک",
-            "byTwitter": "ٹویٹر"
+            "byTwitter": "ٹویٹر",
+            "title2": "لوگوں کو مدعو کریں۔",
+            "chooseMethod": "ایک طریقہ منتخب کریں:",
+            "selectContacts": "رابطے منتخب کریں۔",
+            "scanQRCode": "کیو آر کوڈ اسکین کریں۔",
+            "shareLink": "ایک لنک شیئر کریں۔",
+            "chooseFromRegistered": "رجسٹرڈ صارفین میں سے انتخاب کریں۔",
+            "inviteViaEmailOrSms": "ای میل یا ایس ایم ایس کے ذریعے مدعو کریں۔"
         },
         "email": {
             "subject": "ارے، یہ چیک کریں",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "آپ کو مدعو کیا گیا ہے۔ قبول کرنے اور شامل ہونے کے لیے یہاں {{ClickOrTap}}۔"
-        }
+        },
+        "Invite": "دعوت دیں۔",
+        "Share": "بانٹیں"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "لنک کلپ بورڈ پر کاپی ہو گیا۔",
             "codeCopiedToCb": "کوڈ کلپ بورڈ پر کاپی ہو گیا۔",
             "userHasNoVideo": "شریک کے پاس کوئی ویڈیو نہیں ہے۔",
-            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لیے سفاری براؤزر میں لنک کھولیں۔"
+            "openInBrowserAlert": "کانفرنس میں شامل ہونے کے لیے سفاری براؤزر میں لنک کھولیں۔",
+            "allowedVideoLimit": "اس کمرے میں صرف {{limit}} ویڈیو کی اجازت ہے۔",
+            "allowedAudioLimit": "اس کمرے میں صرف {{limit}} مائکروفون کی اجازت ہے۔"
         },
         "settingsPopup": {
             "dialogTitle": "ویڈیو کی ترتیبات",
@@ -256,7 +267,8 @@
             "copy": "کاپی کریں۔",
             "streamToRTMP": "حسب ضرورت RTMP پر سلسلہ بندی کریں۔",
             "startBroadcasting": "نشریات شروع کریں۔",
-            "broadcastingInProgress": "نشریات جاری ہیں۔"
+            "broadcastingInProgress": "نشریات جاری ہیں۔",
+            "manageStream": "لائیو اسٹریم کا نظم کریں۔"
         },
         "audioSettings": {
             "dialogTitle": "آڈیو کی ترتیبات",
@@ -284,8 +296,8 @@
             "title": "سلسلہ بندی کی ترتیبات"
         },
         "preview": {
-            "Meeting": "ملاقات",
-            "MeetingEnded": "میٹنگ ختم ہوئی۔"
+            "Meeting": "لائیو کال",
+            "MeetingEnded": "کال ختم ہو گئی۔"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "تاریخ کے ساتھ صارفین کے درمیان گفتگو"
         },
         "Streams\/webrtc": {
-            "displayType": "ریئل ٹائم کال",
-            "description": "ایک حقیقی وقت کی ویڈیو\/آڈیو کال"
+            "displayType": "لائیو کال",
+            "description": "ریئل ٹائم ویڈیو\/آڈیو کال"
         },
         "Streams\/question": {
             "displayType": "سوال",
@@ -527,6 +539,13 @@
         "Update": "اپ ڈیٹ",
         "NoCallsYet": "ابھی تک کوئی کال نہیں آئی",
         "CallReasonTitle": "یہ کال کس بارے میں ہے؟",
-        "WaitingRoom": "انتظار گاہ"
+        "WaitingRoom": "انتظار گاہ",
+        "LiveRoom": "لائیو روم",
+        "interviewedByAnotherHost": "فی الحال ایک اور میزبان کا انٹرویو ہے۔",
+        "bringToLive": "لائیو شو میں لائیں۔",
+        "putOnHold": "ہولڈ پر رکھو",
+        "endCall": "کال ختم",
+        "interview": "انٹرویو",
+        "markApproved": "مارک منظور شدہ"
     }
 }

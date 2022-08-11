@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován",
             "copyLink": "{{ClickOrTap}} zkopírujte odkaz s pozvánkou",
             "userChooserPlaceholder": "Hledejte podle jména",
-            "shareOrCopyLink": "{{ClickOrTap}} pro sdílení nebo zkopírování odkazu s pozvánkou"
+            "shareOrCopyLink": "{{ClickOrTap}} pro sdílení nebo zkopírování odkazu s pozvánkou",
+            "title2": "Pozvat lidi",
+            "chooseMethod": "Vyberte metodu:",
+            "selectContacts": "Vyberte Kontakty",
+            "scanQRCode": "Naskenujte QR kód",
+            "shareLink": "Sdílejte odkaz",
+            "chooseFromRegistered": "Vyberte si z registrovaných uživatelů",
+            "inviteViaEmailOrSms": "Pozvěte e-mailem nebo SMS"
         },
         "email": {
             "subject": "Hej, podívej se na tohle",
@@ -104,7 +111,9 @@
             "text": "Byli jste pozváni. {{ClickOrTap}} zde pro přijetí a připojení."
         },
         "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi",
-        "command": "Pozvat"
+        "command": "Pozvat",
+        "Invite": "Pozvat",
+        "Share": "Podíl"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} začalo živě",
             "sbStoppedLiveStreaming": "{{userName}} skončilo živě",
             "liveStopped": "Při odesílání videa do koncového bodu došlo k chybě",
-            "forceDisconnectingImmediately": "Byli jste odpojeni hostitelem"
+            "forceDisconnectingImmediately": "Byli jste odpojeni hostitelem",
+            "allowedVideoLimit": "V této místnosti je povoleno pouze {{limit}} video",
+            "allowedAudioLimit": "V této místnosti je povoleno pouze {{limit}} mikrofonů"
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Streamujte do vlastního RTMP",
             "dialogTitle": "Nastavení videa",
             "startBroadcasting": "Začněte vysílat",
-            "broadcastingInProgress": "Probíhá vysílání"
+            "broadcastingInProgress": "Probíhá vysílání",
+            "manageStream": "Správa živého přenosu"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} zahájil(a) živý hovor",
         "preview": {
             "preamble": "Setkání:",
-            "Meeting": "Setkání",
-            "MeetingEnded": "Setkání ukončeno"
+            "Meeting": "Živý hovor",
+            "MeetingEnded": "Hovor byl ukončen"
         },
         "preparing": {
             "micIsOff": "Mikrofon je vypnutý",
@@ -370,7 +382,7 @@
             "description": "konverzace mezi uživateli s historií"
         },
         "Streams\/webrtc": {
-            "displayType": "Hovor v reálném čase",
+            "displayType": "Živý hovor",
             "description": "video\/audio hovor v reálném čase"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Aktualizace",
         "NoCallsYet": "Zatím žádné hovory",
         "CallReasonTitle": "O čem je tento hovor?",
-        "WaitingRoom": "Čekárna"
+        "WaitingRoom": "Čekárna",
+        "LiveRoom": "Obývací pokoj",
+        "interviewedByAnotherHost": "V současné době je dotazován jiným hostitelem",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Podržte",
+        "endCall": "Ukončit hovor",
+        "interview": "Rozhovor",
+        "markApproved": "Označit schváleno"
     }
 }

@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} إذا تم مسح الرمز ضوئيًا",
             "copyLink": "{{ClickOrTap}} لنسخ رابط الدعوة",
             "userChooserPlaceholder": "البحث عن طريق الإسم",
-            "shareOrCopyLink": "{{ClickOrTap}} لمشاركة أو نسخ رابط الدعوة"
+            "shareOrCopyLink": "{{ClickOrTap}} لمشاركة أو نسخ رابط الدعوة",
+            "title2": "ادعو الناس",
+            "chooseMethod": "اختر طريقة:",
+            "selectContacts": "حدد جهات الاتصال",
+            "scanQRCode": "مسح رمز الاستجابة السريعة",
+            "shareLink": "مشاركة ارتباط",
+            "chooseFromRegistered": "اختر من بين المستخدمين المسجلين",
+            "inviteViaEmailOrSms": "دعوة عبر البريد الإلكتروني أو الرسائل القصيرة"
         },
         "email": {
             "subject": "مرحبًا ، تحقق من هذا",
@@ -104,7 +111,9 @@
             "text": "لقد تمت دعوتك. {{ClickOrTap}} هنا للقبول والانضمام."
         },
         "youCanNowPaste": "يمكنك الآن لصق هذا الرابط في مكان ما لدعوة الأشخاص",
-        "command": "يدعو"
+        "command": "يدعو",
+        "Invite": "يدعو",
+        "Share": "يشارك"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} بدأ البث المباشر",
             "sbStoppedLiveStreaming": "انتهى البث المباشر {{userName}}",
             "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية",
-            "forceDisconnectingImmediately": "تم قطع اتصالك من قبل مضيف"
+            "forceDisconnectingImmediately": "تم قطع اتصالك من قبل مضيف",
+            "allowedVideoLimit": "يُسمح فقط بـ {{limit}} مقطع فيديو في هذه الغرفة",
+            "allowedAudioLimit": "يُسمح فقط بـ {{limit}} ميكروفون في هذه الغرفة"
         },
         "settingsPopup": {
             "webCamera": "كاميرا ويب",
@@ -228,7 +239,8 @@
             "streamToRTMP": "دفق إلى RTMP المخصص",
             "dialogTitle": "اعدادات الفيديو",
             "startBroadcasting": "بدء البث",
-            "broadcastingInProgress": "البث قيد التقدم"
+            "broadcastingInProgress": "البث قيد التقدم",
+            "manageStream": "إدارة البث المباشر"
         },
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
@@ -251,8 +263,8 @@
         "streamTitle": "بدأ {{1}} مكالمة مباشرة",
         "preview": {
             "preamble": "لقاء:",
-            "Meeting": "لقاء",
-            "MeetingEnded": "انتهى الاجتماع"
+            "Meeting": "مكالمة مباشرة",
+            "MeetingEnded": "المكالمة انتهت"
         },
         "preparing": {
             "micIsOff": "الميكروفون متوقف",
@@ -370,8 +382,8 @@
             "description": "محادثة بين المستخدمين ، مع التاريخ"
         },
         "Streams\/webrtc": {
-            "displayType": "مكالمة في الوقت الفعلي",
-            "description": "مكالمة فيديو \/ صوتية في الوقت الحقيقي"
+            "displayType": "مكالمة مباشرة",
+            "description": "مكالمة فيديو \/ صوت في الوقت الحقيقي"
         },
         "Streams\/tasks": {
             "description": "فئة المهام",
@@ -533,6 +545,13 @@
         "Update": "تحديث",
         "NoCallsYet": "لا توجد مكالمات حتى الآن",
         "CallReasonTitle": "عن ماذا تتحدث هذه المكالمة؟",
-        "WaitingRoom": "غرفة الانتظار"
+        "WaitingRoom": "غرفة الانتظار",
+        "LiveRoom": "غرفة المعيشة",
+        "interviewedByAnotherHost": "حاليا تمت مقابلته من قبل مضيف آخر",
+        "bringToLive": "إحضار للعرض الحي",
+        "putOnHold": "ضعه على الانتظار",
+        "endCall": "إنهاء المكالمة",
+        "interview": "مقابلة",
+        "markApproved": "علامة موافق عليها"
     }
 }

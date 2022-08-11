@@ -89,7 +89,14 @@
             "byEmail": "Email",
             "byText": "Test",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Stieden nies",
+            "chooseMethod": "Agħżel metodu:",
+            "selectContacts": "Agħżel Kuntatti",
+            "scanQRCode": "Skennja l-Kodiċi QR",
+            "shareLink": "Aqsam link",
+            "chooseFromRegistered": "Agħżel minn utenti reġistrati",
+            "inviteViaEmailOrSms": "Stieden permezz ta&#39; email jew SMS"
         },
         "email": {
             "subject": "Ħej, iċċekkja dan",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Ġejt mistieden. {{ClickOrTap}} hawn biex taċċetta u tissieħeb."
-        }
+        },
+        "Invite": "Stieden",
+        "Share": "Aqsam"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Link ikkupjat mal-clipboard",
             "codeCopiedToCb": "Kodiċi kkupjat fil-clipboard",
             "userHasNoVideo": "Parteċipant m&#39;għandux vidjo",
-            "openInBrowserAlert": "Iftaħ il-link fil-browser Safari biex tingħaqad mal-konferenza."
+            "openInBrowserAlert": "Iftaħ il-link fil-browser Safari biex tingħaqad mal-konferenza.",
+            "allowedVideoLimit": "{{limit}} vidjo biss permess f&#39;din il-kamra",
+            "allowedAudioLimit": "{{limit}} mikrofoni biss permessi f&#39;din il-kamra"
         },
         "settingsPopup": {
             "dialogTitle": "Settings tal-Vidjo",
@@ -256,7 +267,8 @@
             "copy": "Kopja",
             "streamToRTMP": "Stream għal RTMP tad-dwana",
             "startBroadcasting": "Ibda x-xandir",
-            "broadcastingInProgress": "Ix-xandir għadu għaddej"
+            "broadcastingInProgress": "Ix-xandir għadu għaddej",
+            "manageStream": "Immaniġġja Livestream"
         },
         "audioSettings": {
             "dialogTitle": "Settings tal-awdjo",
@@ -284,8 +296,8 @@
             "title": "Streaming Settings"
         },
         "preview": {
-            "Meeting": "Laqgħa",
-            "MeetingEnded": "Il-laqgħa spiċċat"
+            "Meeting": "Sejħa Live",
+            "MeetingEnded": "Sejħa ntemmet"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "konverżazzjoni bejn l-utenti, bl-istorja"
         },
         "Streams\/webrtc": {
-            "displayType": "Sejħa f&#39;ħin reali",
-            "description": "sejħa bil-vidjo\/awdjo f&#39;ħin reali"
+            "displayType": "Sejħa Live",
+            "description": "sejħa vidjo\/awdjo f&#39;ħin reali"
         },
         "Streams\/question": {
             "displayType": "Mistoqsija",
@@ -527,6 +539,13 @@
         "Update": "Aġġornament",
         "NoCallsYet": "L-ebda telefonata għadha",
         "CallReasonTitle": "Din is-sejħa dwar xiex?",
-        "WaitingRoom": "Waiting Room"
+        "WaitingRoom": "Waiting Room",
+        "LiveRoom": "Kamra Ħaj",
+        "interviewedByAnotherHost": "Bħalissa huwa intervistat minn host ieħor",
+        "bringToLive": "Wassal To Live Show",
+        "putOnHold": "Poġġi fuq Żamma",
+        "endCall": "Tmiem Sejħa",
+        "interview": "Intervista",
+        "markApproved": "Mark Approvat"
     }
 }

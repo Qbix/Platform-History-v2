@@ -89,7 +89,14 @@
             "byEmail": "Barua pepe",
             "byText": "Maandishi",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Alika Watu",
+            "chooseMethod": "Chagua mbinu:",
+            "selectContacts": "Chagua Anwani",
+            "scanQRCode": "Changanua Msimbo wa QR",
+            "shareLink": "Shiriki kiungo",
+            "chooseFromRegistered": "Chagua kutoka kwa watumiaji waliosajiliwa",
+            "inviteViaEmailOrSms": "Alika kupitia barua pepe au SMS"
         },
         "email": {
             "subject": "Haya, angalia hii",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
-        }
+        },
+        "Invite": "Alika",
+        "Share": "Shiriki"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Kiungo kimenakiliwa kwenye ubao wa kunakili",
             "codeCopiedToCb": "Msimbo umenakiliwa kwenye ubao wa kunakili",
             "userHasNoVideo": "Mshiriki hana video",
-            "openInBrowserAlert": "Fungua kiungo kwenye kivinjari cha Safari ili ujiunge na mkutano."
+            "openInBrowserAlert": "Fungua kiungo kwenye kivinjari cha Safari ili ujiunge na mkutano.",
+            "allowedVideoLimit": "Video {{limit}} pekee inaruhusiwa kwenye chumba hiki",
+            "allowedAudioLimit": "Maikrofoni {{limit}} pekee ndizo zinazoruhusiwa kwenye chumba hiki"
         },
         "settingsPopup": {
             "dialogTitle": "Mipangilio ya Video",
@@ -256,7 +267,8 @@
             "copy": "Nakili",
             "streamToRTMP": "Tiririsha hadi RTMP maalum",
             "startBroadcasting": "Anza kutangaza",
-            "broadcastingInProgress": "Utangazaji unaendelea"
+            "broadcastingInProgress": "Utangazaji unaendelea",
+            "manageStream": "Dhibiti Mtiririko wa moja kwa moja"
         },
         "audioSettings": {
             "dialogTitle": "Mipangilio ya Sauti",
@@ -284,8 +296,8 @@
             "title": "Mipangilio ya Kutiririsha"
         },
         "preview": {
-            "Meeting": "Mkutano",
-            "MeetingEnded": "Mkutano umeisha"
+            "Meeting": "Simu ya Moja kwa Moja",
+            "MeetingEnded": "Simu imekatika"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "mazungumzo kati ya watumiaji, na historia"
         },
         "Streams\/webrtc": {
-            "displayType": "Simu ya Wakati Halisi",
+            "displayType": "Simu ya Moja kwa Moja",
             "description": "simu ya video\/sauti ya wakati halisi"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Sasisha",
         "NoCallsYet": "Hakuna simu bado",
         "CallReasonTitle": "Simu hii inahusu nini?",
-        "WaitingRoom": "Chumba cha kusubiri"
+        "WaitingRoom": "Chumba cha kusubiri",
+        "LiveRoom": "Chumba cha moja kwa moja",
+        "interviewedByAnotherHost": "Hivi sasa anahojiwa na mwenyeji mwingine",
+        "bringToLive": "Leta Kwa Onyesho Moja kwa Moja",
+        "putOnHold": "Weka Shikilia",
+        "endCall": "Maliza Simu",
+        "interview": "Mahojiano",
+        "markApproved": "Alama Imeidhinishwa"
     }
 }

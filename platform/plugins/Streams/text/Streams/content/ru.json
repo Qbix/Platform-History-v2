@@ -89,7 +89,14 @@
             "byEmail": "Электронное письмо",
             "byText": "Текст",
             "byFacebook": "Фейсбук",
-            "byTwitter": "Твиттер"
+            "byTwitter": "Твиттер",
+            "title2": "Пригласить людей",
+            "chooseMethod": "Выберите метод:",
+            "selectContacts": "Выберите контакты",
+            "scanQRCode": "Сканировать QR-код",
+            "shareLink": "Поделитесь ссылкой",
+            "chooseFromRegistered": "Выбирайте из зарегистрированных пользователей",
+            "inviteViaEmailOrSms": "Пригласить по электронной почте или SMS"
         },
         "email": {
             "subject": "Эй, проверьте это",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Вы были приглашены. {{ClickOrTap}} здесь, чтобы принять и присоединиться."
-        }
+        },
+        "Invite": "Приглашать",
+        "Share": "Делиться"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Ссылка скопирована в буфер обмена",
             "codeCopiedToCb": "Код скопирован в буфер обмена",
             "userHasNoVideo": "У участника нет видео",
-            "openInBrowserAlert": "Откройте ссылку в браузере Safari, чтобы присоединиться к конференции."
+            "openInBrowserAlert": "Откройте ссылку в браузере Safari, чтобы присоединиться к конференции.",
+            "allowedVideoLimit": "В этой комнате разрешено только {{limit}} видео",
+            "allowedAudioLimit": "В этой комнате разрешено использовать только {{limit}} микрофонов."
         },
         "settingsPopup": {
             "dialogTitle": "Настройки видео",
@@ -256,7 +267,8 @@
             "copy": "Копировать",
             "streamToRTMP": "Поток в пользовательский RTMP",
             "startBroadcasting": "Начать трансляцию",
-            "broadcastingInProgress": "Идет трансляция"
+            "broadcastingInProgress": "Идет трансляция",
+            "manageStream": "Управление прямой трансляцией"
         },
         "audioSettings": {
             "dialogTitle": "Настройки звука",
@@ -284,8 +296,8 @@
             "title": "Настройки потоковой передачи"
         },
         "preview": {
-            "Meeting": "Встреча",
-            "MeetingEnded": "Встреча завершена"
+            "Meeting": "Живой вызов",
+            "MeetingEnded": "Звонок окончен"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "разговор между пользователями, с историей"
         },
         "Streams\/webrtc": {
-            "displayType": "Звонок в реальном времени",
+            "displayType": "Живой вызов",
             "description": "видео\/аудиозвонок в реальном времени"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Обновлять",
         "NoCallsYet": "Звонков пока нет",
         "CallReasonTitle": "О чем этот звонок?",
-        "WaitingRoom": "Комната ожидания"
+        "WaitingRoom": "Комната ожидания",
+        "LiveRoom": "Живая комната",
+        "interviewedByAnotherHost": "В настоящее время дает интервью другому ведущему",
+        "bringToLive": "Привести к живому шоу",
+        "putOnHold": "На удержание",
+        "endCall": "Завершить вызов",
+        "interview": "Интервью",
+        "markApproved": "Отметить как одобренное"
     }
 }

@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}}, ако кодът е сканиран",
             "copyLink": "{{ClickOrTap}}, за да копирате връзката за покана",
             "userChooserPlaceholder": "Търсене по име",
-            "shareOrCopyLink": "{{ClickOrTap}} за споделяне или копиране на връзка за покана"
+            "shareOrCopyLink": "{{ClickOrTap}} за споделяне или копиране на връзка за покана",
+            "title2": "Поканете хора",
+            "chooseMethod": "Изберете метод:",
+            "selectContacts": "Изберете Контакти",
+            "scanQRCode": "Сканирайте QR код",
+            "shareLink": "Споделете връзка",
+            "chooseFromRegistered": "Изберете от регистрирани потребители",
+            "inviteViaEmailOrSms": "Поканете чрез имейл или SMS"
         },
         "email": {
             "subject": "Хей, виж това",
@@ -104,7 +111,9 @@
             "text": "Вие сте поканени. {{ClickOrTap}} тук, за да приемете и да се присъедините."
         },
         "youCanNowPaste": "Вече можете да поставите тази връзка някъде, за да поканите хора",
-        "command": "покани"
+        "command": "покани",
+        "Invite": "Покани",
+        "Share": "Дял"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} започна на живо",
             "sbStoppedLiveStreaming": "{{userName}} завърши на живо",
             "liveStopped": "Възникна грешка при изпращане на видео към крайната точка",
-            "forceDisconnectingImmediately": "Бяхте прекъснати от хост"
+            "forceDisconnectingImmediately": "Бяхте прекъснати от хост",
+            "allowedVideoLimit": "В тази стая е разрешено само {{limit}} видео",
+            "allowedAudioLimit": "В тази стая са разрешени само {{limit}} микрофона"
         },
         "settingsPopup": {
             "webCamera": "Уеб камера",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Поточно предаване към персонализиран RTMP",
             "dialogTitle": "Видео настройки",
             "startBroadcasting": "Започнете излъчване",
-            "broadcastingInProgress": "Излъчването е в ход"
+            "broadcastingInProgress": "Излъчването е в ход",
+            "manageStream": "Управление на потока на живо"
         },
         "participantsPopup": {
             "disconnect": "Прекъснете връзката",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} започна разговор на живо",
         "preview": {
             "preamble": "Среща:",
-            "Meeting": "Среща",
-            "MeetingEnded": "Срещата приключи"
+            "Meeting": "Обаждане на живо",
+            "MeetingEnded": "Обаждането приключи"
         },
         "preparing": {
             "micIsOff": "Микрофонът е изключен",
@@ -370,7 +382,7 @@
             "description": "разговор между потребители с история"
         },
         "Streams\/webrtc": {
-            "displayType": "Обаждане в реално време",
+            "displayType": "Обаждане на живо",
             "description": "видео\/аудио разговор в реално време"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Актуализация",
         "NoCallsYet": "Все още няма обаждания",
         "CallReasonTitle": "За какво е това обаждане?",
-        "WaitingRoom": "Чакалня"
+        "WaitingRoom": "Чакалня",
+        "LiveRoom": "Жива стая",
+        "interviewedByAnotherHost": "В момента е интервюиран от друг домакин",
+        "bringToLive": "Донесете шоуто на живо",
+        "putOnHold": "На изчакване",
+        "endCall": "Край на обаждането",
+        "interview": "Интервю",
+        "markApproved": "Маркирайте одобрено"
     }
 }

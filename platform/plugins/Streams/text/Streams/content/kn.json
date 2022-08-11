@@ -89,7 +89,14 @@
             "byEmail": "ಇಮೇಲ್",
             "byText": "ಪಠ್ಯ",
             "byFacebook": "ಫೇಸ್ಬುಕ್",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "ಜನರನ್ನು ಆಹ್ವಾನಿಸಿ",
+            "chooseMethod": "ವಿಧಾನವನ್ನು ಆರಿಸಿ:",
+            "selectContacts": "ಸಂಪರ್ಕಗಳನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "scanQRCode": "QR ಕೋಡ್ ಅನ್ನು ಸ್ಕ್ಯಾನ್ ಮಾಡಿ",
+            "shareLink": "ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ",
+            "chooseFromRegistered": "ನೋಂದಾಯಿತ ಬಳಕೆದಾರರಿಂದ ಆಯ್ಕೆಮಾಡಿ",
+            "inviteViaEmailOrSms": "ಇಮೇಲ್ ಅಥವಾ SMS ಮೂಲಕ ಆಹ್ವಾನಿಸಿ"
         },
         "email": {
             "subject": "ಹೇ, ಇದನ್ನು ಪರಿಶೀಲಿಸಿ",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "ನಿಮ್ಮನ್ನು ಆಹ್ವಾನಿಸಲಾಗಿದೆ. {{ClickOrTap}} ಸ್ವೀಕರಿಸಲು ಮತ್ತು ಸೇರಲು ಇಲ್ಲಿದೆ."
-        }
+        },
+        "Invite": "ಆಹ್ವಾನಿಸಿ",
+        "Share": "ಹಂಚಿಕೊಳ್ಳಿ"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "ಲಿಂಕ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ",
             "codeCopiedToCb": "ಕೋಡ್ ಅನ್ನು ಕ್ಲಿಪ್‌ಬೋರ್ಡ್‌ಗೆ ನಕಲಿಸಲಾಗಿದೆ",
             "userHasNoVideo": "ಭಾಗವಹಿಸುವವರು ಯಾವುದೇ ವೀಡಿಯೊವನ್ನು ಹೊಂದಿಲ್ಲ",
-            "openInBrowserAlert": "ಸಮ್ಮೇಳನಕ್ಕೆ ಸೇರಲು ಸಫಾರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಲಿಂಕ್ ತೆರೆಯಿರಿ."
+            "openInBrowserAlert": "ಸಮ್ಮೇಳನಕ್ಕೆ ಸೇರಲು ಸಫಾರಿ ಬ್ರೌಸರ್‌ನಲ್ಲಿ ಲಿಂಕ್ ತೆರೆಯಿರಿ.",
+            "allowedVideoLimit": "ಈ ಕೋಣೆಯಲ್ಲಿ {{limit}} ವೀಡಿಯೊವನ್ನು ಮಾತ್ರ ಅನುಮತಿಸಲಾಗಿದೆ",
+            "allowedAudioLimit": "ಈ ಕೋಣೆಯಲ್ಲಿ {{limit}} ಮೈಕ್ರೊಫೋನ್‌ಗಳನ್ನು ಮಾತ್ರ ಅನುಮತಿಸಲಾಗಿದೆ"
         },
         "settingsPopup": {
             "dialogTitle": "ವೀಡಿಯೊ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
@@ -256,7 +267,8 @@
             "copy": "ನಕಲು ಮಾಡಿ",
             "streamToRTMP": "ಕಸ್ಟಮ್ RTMP ಗೆ ಸ್ಟ್ರೀಮ್ ಮಾಡಿ",
             "startBroadcasting": "ಪ್ರಸಾರವನ್ನು ಪ್ರಾರಂಭಿಸಿ",
-            "broadcastingInProgress": "ಪ್ರಸಾರ ಪ್ರಗತಿಯಲ್ಲಿದೆ"
+            "broadcastingInProgress": "ಪ್ರಸಾರ ಪ್ರಗತಿಯಲ್ಲಿದೆ",
+            "manageStream": "ಲೈವ್‌ಸ್ಟ್ರೀಮ್ ನಿರ್ವಹಿಸಿ"
         },
         "audioSettings": {
             "dialogTitle": "ಆಡಿಯೋ ಸೆಟ್ಟಿಂಗ್‌ಗಳು",
@@ -284,8 +296,8 @@
             "title": "ಸ್ಟ್ರೀಮಿಂಗ್ ಸೆಟ್ಟಿಂಗ್‌ಗಳು"
         },
         "preview": {
-            "Meeting": "ಸಭೆಯಲ್ಲಿ",
-            "MeetingEnded": "ಸಭೆ ಮುಕ್ತಾಯವಾಯಿತು"
+            "Meeting": "ಲೈವ್ ಕರೆ",
+            "MeetingEnded": "ಕರೆ ಕೊನೆಗೊಂಡಿದೆ"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "ಇತಿಹಾಸದೊಂದಿಗೆ ಬಳಕೆದಾರರ ನಡುವಿನ ಸಂಭಾಷಣೆ"
         },
         "Streams\/webrtc": {
-            "displayType": "ನೈಜ-ಸಮಯದ ಕರೆ",
-            "description": "ನೈಜ ಸಮಯದ ವೀಡಿಯೊ\/ಆಡಿಯೋ ಕರೆ"
+            "displayType": "ಲೈವ್ ಕರೆ",
+            "description": "ನೈಜ-ಸಮಯದ ವೀಡಿಯೊ\/ಆಡಿಯೋ ಕರೆ"
         },
         "Streams\/question": {
             "displayType": "ಪ್ರಶ್ನೆ",
@@ -527,6 +539,13 @@
         "Update": "ನವೀಕರಿಸಿ",
         "NoCallsYet": "ಇನ್ನೂ ಯಾವುದೇ ಕರೆಗಳಿಲ್ಲ",
         "CallReasonTitle": "ಈ ಕರೆ ಯಾವುದರ ಬಗ್ಗೆ?",
-        "WaitingRoom": "ನಿರೀಕ್ಷಣಾ ಕೋಣೆ"
+        "WaitingRoom": "ನಿರೀಕ್ಷಣಾ ಕೋಣೆ",
+        "LiveRoom": "ಲೈವ್ ರೂಮ್",
+        "interviewedByAnotherHost": "ಪ್ರಸ್ತುತ ಇನ್ನೊಬ್ಬ ಹೋಸ್ಟ್‌ನಿಂದ ಸಂದರ್ಶನ ನಡೆಯುತ್ತಿದೆ",
+        "bringToLive": "ಲೈವ್ ಶೋಗೆ ತನ್ನಿ",
+        "putOnHold": "ತಡೆಹಿಡಿಯಿರಿ",
+        "endCall": "ಕರೆಯನ್ನು ಕೊನೆಗೊಳಿಸಿ",
+        "interview": "ಸಂದರ್ಶನ",
+        "markApproved": "ಮಾರ್ಕ್ ಅನುಮೋದಿಸಲಾಗಿದೆ"
     }
 }

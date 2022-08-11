@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} kodea eskaneatu bada",
             "copyLink": "{{ClickOrTap}} gonbidapen-esteka kopiatzeko",
             "userChooserPlaceholder": "Bilatu izenaren arabera",
-            "shareOrCopyLink": "{{ClickOrTap}} gonbidapen-esteka partekatzeko edo kopiatzeko"
+            "shareOrCopyLink": "{{ClickOrTap}} gonbidapen-esteka partekatzeko edo kopiatzeko",
+            "title2": "Gonbidatu jendea",
+            "chooseMethod": "Aukeratu metodo bat:",
+            "selectContacts": "Hautatu Kontaktuak",
+            "scanQRCode": "Eskaneatu QR kodea",
+            "shareLink": "Partekatu esteka bat",
+            "chooseFromRegistered": "Aukeratu erregistratutako erabiltzaileen artean",
+            "inviteViaEmailOrSms": "Gonbidatu posta elektronikoz edo SMS bidez"
         },
         "email": {
             "subject": "Aizu, begiratu hau",
@@ -104,7 +111,9 @@
             "text": "Gonbidatu zaituzte. {{ClickOrTap}} hemen onartzeko eta sartzeko."
         },
         "youCanNowPaste": "Orain esteka hau nonbait itsats dezakezu jendea gonbidatzeko",
-        "command": "Gonbidatu"
+        "command": "Gonbidatu",
+        "Invite": "Gonbidatu",
+        "Share": "Partekatu"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} zuzenean hasi zen",
             "sbStoppedLiveStreaming": "{{userName}} zuzenean amaitu da",
             "liveStopped": "Errore bat gertatu da bideoa amaiera puntura bidaltzean",
-            "forceDisconnectingImmediately": "Ostalari batek deskonektatu zaitu"
+            "forceDisconnectingImmediately": "Ostalari batek deskonektatu zaitu",
+            "allowedVideoLimit": "{{limit}} bideo bakarrik onartzen dira areto honetan",
+            "allowedAudioLimit": "{{limit}} mikrofono soilik onartzen dira gela honetan"
         },
         "settingsPopup": {
             "webCamera": "Web Kamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Igorri RTMP pertsonalizatura",
             "dialogTitle": "Bideo ezarpenak",
             "startBroadcasting": "Hasi emititzen",
-            "broadcastingInProgress": "Emisioa abian da"
+            "broadcastingInProgress": "Emisioa abian da",
+            "manageStream": "Kudeatu zuzeneko igorpena"
         },
         "participantsPopup": {
             "disconnect": "Deskonektatu",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}}-k zuzeneko dei bat hasi zuen",
         "preview": {
             "preamble": "Bilera:",
-            "Meeting": "Bilera",
-            "MeetingEnded": "Bilera amaitu zen"
+            "Meeting": "Zuzeneko Deia",
+            "MeetingEnded": "Deia amaitu da"
         },
         "preparing": {
             "micIsOff": "Mikrofonoa itzalita dago",
@@ -370,7 +382,7 @@
             "description": "erabiltzaileen arteko elkarrizketa, historiarekin"
         },
         "Streams\/webrtc": {
-            "displayType": "Denbora errealeko deia",
+            "displayType": "Zuzeneko Deia",
             "description": "denbora errealeko bideo\/audio-deia"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Eguneratu",
         "NoCallsYet": "Oraindik ez dago deirik",
         "CallReasonTitle": "Zertan datza deialdi hau?",
-        "WaitingRoom": "Itxarongela"
+        "WaitingRoom": "Itxarongela",
+        "LiveRoom": "Zuzeneko Aretoa",
+        "interviewedByAnotherHost": "Une honetan beste ostalari batek elkarrizketatzen du",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Eutsi",
+        "endCall": "Amaitu deia",
+        "interview": "Elkarrizketa",
+        "markApproved": "Markatu Onartuta"
     }
 }

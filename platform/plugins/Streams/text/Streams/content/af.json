@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} as die kode geskandeer is",
             "copyLink": "{{ClickOrTap}} om uitnodigingskakel te kopieer",
             "userChooserPlaceholder": "Soek op naam",
-            "shareOrCopyLink": "{{ClickOrTap}} om uitnodigingskakel te deel of te kopieer"
+            "shareOrCopyLink": "{{ClickOrTap}} om uitnodigingskakel te deel of te kopieer",
+            "title2": "Nooi mense",
+            "chooseMethod": "Kies &#39;n metode:",
+            "selectContacts": "Kies Kontakte",
+            "scanQRCode": "Skandeer QR-kode",
+            "shareLink": "Deel &#39;n skakel",
+            "chooseFromRegistered": "Kies uit geregistreerde gebruikers",
+            "inviteViaEmailOrSms": "Nooi per e-pos of SMS"
         },
         "email": {
             "subject": "Haai, kyk hierna",
@@ -104,7 +111,9 @@
             "text": "Jy is genooi. {{ClickOrTap}} hier om te aanvaar en aan te sluit."
         },
         "youCanNowPaste": "Jy kan nou hierdie skakel iewers plak om mense uit te nooi",
-        "command": "Nooi"
+        "command": "Nooi",
+        "Invite": "Nooi",
+        "Share": "Deel"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} het regstreeks begin",
             "sbStoppedLiveStreaming": "{{userName}} het regstreeks geëindig",
             "liveStopped": "Kon nie video na eindpunt stuur nie",
-            "forceDisconnectingImmediately": "Jy is deur &#39;n gasheer ontkoppel"
+            "forceDisconnectingImmediately": "Jy is deur &#39;n gasheer ontkoppel",
+            "allowedVideoLimit": "Slegs {{limit}} video word in hierdie kamer toegelaat",
+            "allowedAudioLimit": "Slegs {{limit}} mikrofone word in hierdie kamer toegelaat"
         },
         "settingsPopup": {
             "webCamera": "Webkamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Stroom na pasgemaakte RTMP",
             "dialogTitle": "Video-instellings",
             "startBroadcasting": "Begin uitsaai",
-            "broadcastingInProgress": "Uitsaai is aan die gang"
+            "broadcastingInProgress": "Uitsaai is aan die gang",
+            "manageStream": "Bestuur regstreekse stroom"
         },
         "participantsPopup": {
             "disconnect": "Ontkoppel",
@@ -251,8 +263,8 @@
         "streamTitle": "{{1}} het &#39;n regstreekse oproep begin",
         "preview": {
             "preamble": "Vergadering:",
-            "Meeting": "Vergadering",
-            "MeetingEnded": "Vergadering geëindig"
+            "Meeting": "Regstreekse oproep",
+            "MeetingEnded": "Oproep beëindig"
         },
         "preparing": {
             "micIsOff": "Mikrofoon is af",
@@ -370,7 +382,7 @@
             "description": "&#39;n gesprek tussen gebruikers, met geskiedenis"
         },
         "Streams\/webrtc": {
-            "displayType": "Intydse oproep",
+            "displayType": "Regstreekse oproep",
             "description": "&#39;n intydse video-\/klankoproep"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Opdateer",
         "NoCallsYet": "Nog geen oproepe nie",
         "CallReasonTitle": "Waaroor gaan hierdie oproep?",
-        "WaitingRoom": "Wagkamer"
+        "WaitingRoom": "Wagkamer",
+        "LiveRoom": "Leefkamer",
+        "interviewedByAnotherHost": "Word tans deur &#39;n ander gasheer ondervra",
+        "bringToLive": "Bring na regstreekse vertoning",
+        "putOnHold": "Sit Op Hou",
+        "endCall": "Beëindig oproep",
+        "interview": "Onderhoud",
+        "markApproved": "Merk Goedgekeur"
     }
 }

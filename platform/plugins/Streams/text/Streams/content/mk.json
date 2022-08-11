@@ -89,7 +89,14 @@
             "byEmail": "Е-пошта",
             "byText": "Текст",
             "byFacebook": "Фејсбук",
-            "byTwitter": "Твитер"
+            "byTwitter": "Твитер",
+            "title2": "Поканете луѓе",
+            "chooseMethod": "Изберете метод:",
+            "selectContacts": "Изберете Контакти",
+            "scanQRCode": "Скенирајте QR-код",
+            "shareLink": "Споделете врска",
+            "chooseFromRegistered": "Изберете од регистрираните корисници",
+            "inviteViaEmailOrSms": "Поканете преку е-пошта или СМС"
         },
         "email": {
             "subject": "Еј, проверете го ова",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Вие сте поканети. {{ClickOrTap}} тука за прифаќање и придружување."
-        }
+        },
+        "Invite": "Покани",
+        "Share": "Споделете"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Врската е копирана во таблата со исечоци",
             "codeCopiedToCb": "Кодот е копиран во таблата со исечоци",
             "userHasNoVideo": "Учесникот нема видео",
-            "openInBrowserAlert": "Отворете ја врската во прелистувачот Safari за да се приклучите на конференцијата."
+            "openInBrowserAlert": "Отворете ја врската во прелистувачот Safari за да се приклучите на конференцијата.",
+            "allowedVideoLimit": "Дозволено е само {{limit}} видео во оваа соба",
+            "allowedAudioLimit": "Дозволени се само {{limit}} микрофони во оваа соба"
         },
         "settingsPopup": {
             "dialogTitle": "Видео поставки",
@@ -256,7 +267,8 @@
             "copy": "Копирај",
             "streamToRTMP": "Пренесувајте до приспособено RTMP",
             "startBroadcasting": "Започнете со емитување",
-            "broadcastingInProgress": "Емитувањето е во тек"
+            "broadcastingInProgress": "Емитувањето е во тек",
+            "manageStream": "Управувајте со пренос во живо"
         },
         "audioSettings": {
             "dialogTitle": "Аудио поставки",
@@ -284,8 +296,8 @@
             "title": "Поставки за стриминг"
         },
         "preview": {
-            "Meeting": "Состанок",
-            "MeetingEnded": "Состанокот заврши"
+            "Meeting": "Повик во живо",
+            "MeetingEnded": "Повикот заврши"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "разговор помеѓу корисници, со историја"
         },
         "Streams\/webrtc": {
-            "displayType": "Повик во реално време",
+            "displayType": "Повик во живо",
             "description": "видео\/аудио повик во реално време"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Ажурирање",
         "NoCallsYet": "Сè уште нема повици",
         "CallReasonTitle": "За што е овој повик?",
-        "WaitingRoom": "Чекална"
+        "WaitingRoom": "Чекална",
+        "LiveRoom": "Дневна соба",
+        "interviewedByAnotherHost": "Во моментов е интервјуиран од друг водител",
+        "bringToLive": "Донесете во живо шоу",
+        "putOnHold": "Стави на чекање",
+        "endCall": "Заврши повик",
+        "interview": "Интервју",
+        "markApproved": "Означи одобрено"
     }
 }

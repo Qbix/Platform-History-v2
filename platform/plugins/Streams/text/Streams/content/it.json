@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Testo",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Invita persone",
+            "chooseMethod": "Scegli un metodo:",
+            "selectContacts": "Seleziona Contatti",
+            "scanQRCode": "Scansiona il codice QR",
+            "shareLink": "Condividi un collegamento",
+            "chooseFromRegistered": "Scegli tra gli utenti registrati",
+            "inviteViaEmailOrSms": "Invito via e-mail o SMS"
         },
         "email": {
             "subject": "Ehi, dai un&#39;occhiata",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Sei stato invitato. {{ClickOrTap}} qui per accettare e partecipare."
-        }
+        },
+        "Invite": "Invitare",
+        "Share": "Condividere"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Link copiato negli appunti",
             "codeCopiedToCb": "Codice copiato negli appunti",
             "userHasNoVideo": "Il partecipante non ha video",
-            "openInBrowserAlert": "Apri il collegamento nel browser Safari per partecipare alla conferenza."
+            "openInBrowserAlert": "Apri il collegamento nel browser Safari per partecipare alla conferenza.",
+            "allowedVideoLimit": "Solo {{limit}} video consentito in questa stanza",
+            "allowedAudioLimit": "Solo {{limit}} microfoni consentiti in questa stanza"
         },
         "settingsPopup": {
             "dialogTitle": "Impostazioni video",
@@ -256,7 +267,8 @@
             "copy": "copia",
             "streamToRTMP": "Streaming su RTMP personalizzato",
             "startBroadcasting": "Inizia a trasmettere",
-            "broadcastingInProgress": "La trasmissione è in corso"
+            "broadcastingInProgress": "La trasmissione è in corso",
+            "manageStream": "Gestisci la diretta"
         },
         "audioSettings": {
             "dialogTitle": "Impostazioni audio",
@@ -284,8 +296,8 @@
             "title": "Impostazioni di streaming"
         },
         "preview": {
-            "Meeting": "Incontro",
-            "MeetingEnded": "Riunione conclusa"
+            "Meeting": "Chiamata dal vivo",
+            "MeetingEnded": "Chiamata terminata"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "una conversazione tra utenti, con cronologia"
         },
         "Streams\/webrtc": {
-            "displayType": "Chiamata in tempo reale",
+            "displayType": "Chiamata dal vivo",
             "description": "una chiamata video\/audio in tempo reale"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Aggiornare",
         "NoCallsYet": "Ancora nessuna chiamata",
         "CallReasonTitle": "Di cosa tratta questa chiamata?",
-        "WaitingRoom": "Sala D&#39;Attesa"
+        "WaitingRoom": "Sala D&#39;Attesa",
+        "LiveRoom": "Sala dal vivo",
+        "interviewedByAnotherHost": "Attualmente è intervistato da un altro host",
+        "bringToLive": "Porta allo spettacolo dal vivo",
+        "putOnHold": "Messo in attesa",
+        "endCall": "Fine chiamata",
+        "interview": "Colloquio",
+        "markApproved": "Marco approvato"
     }
 }

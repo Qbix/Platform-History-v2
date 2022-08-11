@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Chữ",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Mời mọi người",
+            "chooseMethod": "Chọn một phương pháp:",
+            "selectContacts": "Chọn liên hệ",
+            "scanQRCode": "Quét mã QR",
+            "shareLink": "Chia sẻ một liên kết",
+            "chooseFromRegistered": "Chọn từ những người dùng đã đăng ký",
+            "inviteViaEmailOrSms": "Mời qua email hoặc SMS"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
-        }
+        },
+        "Invite": "Mời",
+        "Share": "Đăng lại"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
             "codeCopiedToCb": "Đã sao chép mã vào khay nhớ tạm",
             "userHasNoVideo": "Người tham gia không có video",
-            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị."
+            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị.",
+            "allowedVideoLimit": "Chỉ cho phép {{limit}} video trong phòng này",
+            "allowedAudioLimit": "Chỉ cho phép {{limit}} micrô trong phòng này"
         },
         "settingsPopup": {
             "dialogTitle": "Cài đặt video",
@@ -256,7 +267,8 @@
             "copy": "Sao chép",
             "streamToRTMP": "Truyền tới RTMP tùy chỉnh",
             "startBroadcasting": "Bắt đầu phát sóng",
-            "broadcastingInProgress": "Đang phát sóng"
+            "broadcastingInProgress": "Đang phát sóng",
+            "manageStream": "Quản lý phát trực tiếp"
         },
         "audioSettings": {
             "dialogTitle": "Cài đặt âm thanh",
@@ -284,8 +296,8 @@
             "title": "Cài đặt phát trực tuyến"
         },
         "preview": {
-            "Meeting": "Gặp gỡ",
-            "MeetingEnded": "Cuộc họp kết thúc"
+            "Meeting": "Cuộc gọi trực tiếp",
+            "MeetingEnded": "Cuộc gọi kết thúc"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "cuộc trò chuyện giữa những người dùng với lịch sử"
         },
         "Streams\/webrtc": {
-            "displayType": "Cuộc gọi thời gian thực",
-            "description": "một cuộc gọi video \/ âm thanh thời gian thực"
+            "displayType": "Cuộc gọi trực tiếp",
+            "description": "một cuộc gọi video \/ âm thanh trong thời gian thực"
         },
         "Streams\/question": {
             "displayType": "Câu hỏi",
@@ -527,6 +539,13 @@
         "Update": "Cập nhật",
         "NoCallsYet": "Chưa có cuộc gọi nào",
         "CallReasonTitle": "Cuộc gọi này là gì?",
-        "WaitingRoom": "Phòng chờ"
+        "WaitingRoom": "Phòng chờ",
+        "LiveRoom": "Phòng trực",
+        "interviewedByAnotherHost": "Hiện đang được phỏng vấn bởi một người dẫn chương trình khác",
+        "bringToLive": "Mang đến chương trình trực tiếp",
+        "putOnHold": "Hoãn lại",
+        "endCall": "Kết thúc cuộc gọi",
+        "interview": "Phỏng vấn",
+        "markApproved": "Đánh dấu là đã chấp thuận"
     }
 }

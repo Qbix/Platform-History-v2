@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Texte",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Inviter des gens",
+            "chooseMethod": "Choisissez une méthode :",
+            "selectContacts": "Sélectionnez Contacts",
+            "scanQRCode": "Scanner le code QR",
+            "shareLink": "Partager un lien",
+            "chooseFromRegistered": "Choisissez parmi les utilisateurs enregistrés",
+            "inviteViaEmailOrSms": "Inviter par e-mail ou SMS"
         },
         "email": {
             "subject": "Hé, regarde ça",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
-        }
+        },
+        "Invite": "Inviter",
+        "Share": "Partager"
     },
     "messages": {
         "html": {
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Lien copié dans le presse-papiers",
             "codeCopiedToCb": "Code copié dans le presse-papiers",
             "userHasNoVideo": "Le participant n&#39;a pas de vidéo",
-            "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence."
+            "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence.",
+            "allowedVideoLimit": "Seules {{limit}} vidéos sont autorisées dans cette salle",
+            "allowedAudioLimit": "Seuls {{limit}} microphones sont autorisés dans cette salle"
         },
         "settingsPopup": {
             "dialogTitle": "Paramètres vidéo",
@@ -256,7 +267,8 @@
             "copy": "Copie",
             "streamToRTMP": "Diffuser vers RTMP personnalisé",
             "startBroadcasting": "Commencer à diffuser",
-            "broadcastingInProgress": "La diffusion est en cours"
+            "broadcastingInProgress": "La diffusion est en cours",
+            "manageStream": "Gérer la diffusion en direct"
         },
         "audioSettings": {
             "dialogTitle": "Les paramètres audio",
@@ -284,8 +296,8 @@
             "title": "Paramètres de diffusion"
         },
         "preview": {
-            "Meeting": "Réunion",
-            "MeetingEnded": "Réunion terminée"
+            "Meeting": "Appel en direct",
+            "MeetingEnded": "Appel terminé"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "une conversation entre utilisateurs, avec historique"
         },
         "Streams\/webrtc": {
-            "displayType": "Appel en temps réel",
+            "displayType": "Appel en direct",
             "description": "un appel vidéo\/audio en temps réel"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Mettre à jour",
         "NoCallsYet": "Pas encore d&#39;appels",
         "CallReasonTitle": "De quoi parle cet appel ?",
-        "WaitingRoom": "Salle d&#39;attente"
+        "WaitingRoom": "Salle d&#39;attente",
+        "LiveRoom": "Salon",
+        "interviewedByAnotherHost": "Est actuellement interviewé par un autre hôte",
+        "bringToLive": "Apporter au spectacle en direct",
+        "putOnHold": "Mettre en attente",
+        "endCall": "Fin d&#39;appel",
+        "interview": "Interview",
+        "markApproved": "Marquer approuvé"
     }
 }
