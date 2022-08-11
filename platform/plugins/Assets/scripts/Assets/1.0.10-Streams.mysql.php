@@ -1,6 +1,6 @@
 <?php
 
-function Assets_1_0_3()
+function Streams_1_0_10()
 {
 	$communityId = Users::communityId();
 	$streamName = "Assets/services";
@@ -32,4 +32,4 @@ function Assets_1_0_3()
 	}
 }
 
-Assets_1_0_3();
+Streams_1_0_10();
