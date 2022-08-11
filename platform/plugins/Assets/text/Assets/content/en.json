@@ -180,6 +180,9 @@
             "SaveService": "Save Service",
             "SelectRequiredParticipants": "Required Participants"
         },
+        "EditServiceTemplate": {
+            "Title": "Edit Service"
+        },
         "ManageServiceTemplates": "Manage Service Templates",
         "ManageServices": "Manage Services",
         "Free": "Free",
