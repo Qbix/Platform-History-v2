@@ -2410,6 +2410,7 @@ Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseU
 		publisherId: publisherId,
 		streamName: streamName.split('/'),
 		name: streamName,
+		nameNormalized: Q.normalize(streamName),
 		baseUrl: baseUrl || Q.baseUrl()
 	}, function (err, html) {
 		if (err) return;
