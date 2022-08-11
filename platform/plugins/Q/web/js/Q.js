@@ -14070,8 +14070,8 @@ Q.onInit.add(function () {
 	}, 'Q.Socket');
 
 	var QtQw = Q.text.Q.words;
-	QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-	QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
+	Q.Pointer.clickOrTap = QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
