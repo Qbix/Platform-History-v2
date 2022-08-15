@@ -583,30 +583,30 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		$connection = $this->db->connectionName();
 
 		if (!empty($queries["*"])) {
-			$shard_names = Q_Config::get(
+			$shardNames = Q_Config::get(
 				'Db', 'connections', $connection, 'shards', array('' => '')
 			);
 			$q = $queries["*"];
-			foreach ($shard_names as $k => $v) {
+			foreach ($shardNames as $k => $v) {
 				$queries[$k] = $q;
 			}
 			unset($queries['*']);
 		}
 
-		foreach ($queries as $shard_name => $query) {
+		foreach ($queries as $shardName => $query) {
 
 			$upcoming = Q_Config::get('Db', 'upcoming', $connection, false);
 			if ($query->type !== Db_Query::TYPE_SELECT && $query->type !== Db_Query::TYPE_RAW) {
-				if (!empty($upcoming['block']) && $shard_name === $upcoming['shard']) {
-					throw new Db_Exception_Blocked(@compact('shard_name', 'connection'));
+				if (!empty($upcoming['block']) && $shardName === $upcoming['shard']) {
+					throw new Db_Exception_Blocked(@compact('shardName', 'connection'));
 				}
 			}
 			
 			$query->startedTime = Q::milliseconds(true);
 
-			$pdo = $query->reallyConnect($shard_name);
-			$connInfo = Db::getConnection($connection);
-			$dsn = $connInfo['dsn'];
+			$shardInfo = null;
+			$pdo = $query->reallyConnect($shardName, $shardInfo);
+			$dsn = $shardInfo['dsn'];
 			$nt = & self::$nestedTransactions[$dsn];
 			if (!isset($nt)) {
 				$nt = & self::$nestedTransactions[$dsn];
@@ -704,20 +704,20 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				}
 				break;
 			}
-			$this->nestedTransactionCount = $ntc;
+			$query->nestedTransactionCount = $ntc;
 			if (class_exists('Q') && isset($sql)) {
 				// log query if shard split process is active
 				// all activities will be done by node.js
-				switch ($this->type) {
+				switch ($query->type) {
 				case Db_Query::TYPE_SELECT:
 					// SELECT queries don't need to be logged
 					break;
 				default:
-					if (!$upcoming or $shard_name !== $upcoming['shard']) {
+					if (!$upcoming or $shardName !== $upcoming['shard']) {
 						break;
 					}
-					$table = $this->table;
-					foreach ($this->replacements as $k => $v) {
+					$table = $query->table;
+					foreach ($query->replacements as $k => $v) {
 						$table = str_replace($k, $v, $table);
 					}
 					if ($table !== $upcoming['dbTable']) break;
@@ -733,13 +733,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					$sql_template = str_replace('CURRENT_TIMESTAMP', "'$timestamp'", $sql_template);
 
 					$transaction =
-						(!empty($this->clauses['COMMIT']) ? 'COMMIT' :
-						(!empty($this->clauses['BEGIN']) ? 'START TRANSACTION' :
-						(!empty($this->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
+						(!empty($query->clauses['COMMIT']) ? 'COMMIT' :
+						(!empty($query->clauses['BEGIN']) ? 'START TRANSACTION' :
+						(!empty($query->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
 
 					$utable = $upcoming['table'];
 					if (isset($shards)) {
-						$queries = is_string($shards) ? array($shards => $this) : $shards;
+						$queries = is_string($shards) ? array($shards => $query) : $shards;
 					} else {
 						$sharded = $query->shard($upcoming['indexes'][$utable]);
 					}
@@ -1953,22 +1953,22 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Connects to database
 	 * @method reallyConnect
 	 * @private
-	 * @param {string} [$shard_name=null]
+	 * @param {string} [$shardName=null]
 	 * @return {PDO} The PDO object for connection
 	 */
-	private function reallyConnect($shard_name = null)
+	private function reallyConnect($shardName = null, &$shardInfo = null)
 	{
 		/**
 		 * @event Db/reallyConnect {before}
 		 * @param {Db_Query_Mysql} query
-		 * @param {string} 'shard_name'
+		 * @param {string} 'shardName'
 		 */
 		Q::event(
 			'Db/query/route',
-			array('query' => $this, 'shard_name' => $shard_name),
+			array('query' => $this, 'shardName' => $shardName),
 			'before'
 		);
-		return $this->db->reallyConnect($shard_name);
+		return $this->db->reallyConnect($shardName, $shardInfo);
 	}
 	
 	public $startedTime = null;

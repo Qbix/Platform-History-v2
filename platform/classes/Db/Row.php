@@ -894,14 +894,16 @@ class Db_Row
 	 * This can be called even if the Db_Row was not retrieved,
 	 * and typically is used for caching purposes.
 	 * @method calculatePKValue
+	 * @param {boolean|array} [$useIndex=true] If there is no primary key on this table,
+	 *  then pass an array of field names to use, corresponding to a key.
 	 * @return {array|false} An associative array naming all the fields that comprise the
 	 *  primary key index, in the order they appear in the key.<br/>
 	 *	Returns false if even one of the fields comprising the primary key is not set.
 	 */
-	function calculatePKValue ()
+	function calculatePKValue ($useIndex = false)
 	{
 		$return = array();
-		$pk = $this->getPrimaryKey();
+		$pk = $useIndex ? $useIndex : $this->getPrimaryKey();
 		foreach ($pk as $fieldName) {
 			if (!array_key_exists($fieldName, $this->fields)) {
 				return false;
@@ -1947,8 +1949,9 @@ class Db_Row
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
 	 *  Pass true here to fetch all fields or throw an exception if the row is missing.
-	 * @param {boolean} [$useIndex=false] If true, the primary key is used in searching. 
-	 *  An exception is thrown when some fields of the primary key are not specified
+	 * @param {boolean|array} [$useIndex=false] If true, the primary key is used in searching. 
+	 *  An exception is thrown when some fields of the primary key are not specified.
+	 *  If there is no primary key on this table, then pass an array of field names to use, corresponding to a key.
 	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query.
 	 *   You can call more methods, like limit, offset, where, orderBy,
 	 *   and so forth, on that Db_Query. After you have modified it sufficiently,
@@ -1979,7 +1982,7 @@ class Db_Row
 		$modifyQuery = false,
 		$options = array())
 	{
-		if (is_array($useIndex)) {
+		if (Q::isAssociative($useIndex)) {
 			$modifyQuery = $useIndex;
 			$useIndex = $options = null;
 		}
@@ -2005,9 +2008,13 @@ class Db_Row
 		$search_criteria = null;
 		$class_name = get_class($this);
 		// Check if we have specified all the primary key fields.
-		if ($useIndex === true) {
+		if (is_array($useIndex)) {
+			$primaryKey = $useIndex;
+		} else if ($useIndex === true) {
 			$primaryKey = $this->getPrimaryKey();
-			$primaryKeyValue = $this->calculatePKValue();
+		}
+		if ($primaryKey) {
+			$primaryKeyValue = $this->calculatePKValue($primaryKey);
 			if (!is_array($primaryKeyValue)) {
 				throw new Exception("No fields of the primary key were specified for $class_name.");
 			}
@@ -2088,6 +2095,7 @@ class Db_Row
 			// Return the result
 			$resume_args[] = $query;
 			$resume_args[] = $throwIfMissing;
+			$resume_args[] = $primaryKey;
 			return call_user_func_array(array($this, 'retrieve_resume'), $resume_args);
 		}
 		
@@ -2129,7 +2137,8 @@ class Db_Row
 		$options = array(),
 		$preserved_vars = array(),
 		$query = null,
-		$throwIfMissing = false)
+		$throwIfMissing = false,
+		$primaryKey = null)
 	{
 		$class_name = get_class($this);
 		if (class_exists('Q')) {
@@ -2158,6 +2167,9 @@ class Db_Row
 		// Return one db row, as per function description
 		if (!empty($rows)) {
 			$this->copyFromRow(reset($rows), '', true);
+			if ($primaryKey) {
+				$this->setPkValue($this->calculatePKValue($primaryKey));
+			}
 			if (class_exists('Q')) {
 				$params = array(
 					'row' => $this,
@@ -2194,22 +2206,51 @@ class Db_Row
 	/**
 	 * Retrieves the row in the database, or if it doesn't exist, saves it.
 	 * @method retrieveOrSave
+	 * @param {Db_Row} [&$retrieved] If a row already exists, it is filled here
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
-	 * @param {array|boolean} [$modifyQuery=false] Array of options to pass to beforeRetrieve and afterFetch functions.
+	 * @param {boolean|array} [$useIndex=true] If there is no primary key on this table,
+	 *  then pass an array of field names to use, corresponding to a key.
+	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query.
+	 *   You can call more methods, like limit, offset, where, orderBy,
+	 *   and so forth, on that Db_Query. After you have modified it sufficiently,
+	 *   get the ultimate result of this function, by calling the resume() method on 
+	 *   the Db_Query object (via the chainable interface).
+	 *   You can also pass true in place of the modifyQuery field to achieve
+	 *   the same effect as array("query" => true)
+	 * @param {boolean|string} [$modifyQuery.begin] this will cause the query 
+	 *   to have .begin() a transaction which locks the row for update. 
+	 *   You should call .save(..., true) to commit the transaction, or else
+	 *   other database connections trying to access the row will be blocked.
+	 * @param {boolean} [$modifyQuery.rollbackIfMissing=false]
+	 *   If begin is true, this option determines whether to immediately
+	 *   rollback the transaction if the row we're trying to retrieve is missing.
+	 * @param {boolean} [$modifyQuery.ignoreCache]
+	 *   If true, then call ignoreCache on the query
+	 * @param {boolean} [$modifyQuery.caching]
+	 *   If provided, then call caching() on the query, passing this value
+	 * @param {boolean} [$modifyQuery.query]
+	 *   If true, it will return a Db_Query that can be modified, rather than the result. 
 	 * @param {array} [$options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
-	 * @return {boolean} returns whether the record was saved (i.e. false means retrieved)
+	 * @return {Db_Row} returns this row it was saved, otherwise it returns
 	 */
 	function retrieveOrSave (
+		&$retrieved = null,
+		$useIndex = true,
 		$fields = '*', 
-		$modifyQuery = false,
+		$modifyQuery = array(),
 		$options = array())
 	{
-		if ($this->retrieve($fields, true, $modifyQuery, $options)) {
+		if ($modifyQuery === false) {
+			$modifyQuery = array();
+		}
+		$modifyQuery['begin'] = 'FOR UPDATE';
+		if ($this->retrieve($fields, $useIndex, $modifyQuery, $options)) {
+			$retrieved = $this;
+			$this->executeCommit();
 			return false;
 		}
-
-		$this->save();
+		$this->save(false, true); // commit the transaction
 		return true;
 	}
 

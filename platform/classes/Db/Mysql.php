@@ -35,6 +35,13 @@ class Db_Mysql implements Db_Interface
 	 * @type PDO
 	 */
 	public $pdo;
+
+	/**
+	 * The shard info after calling reallyConnect
+	 * @property $shardInfo
+	 * @type array
+	 */
+	public $shardInfo;
 	
 	/**
 	 * The name of the connection
@@ -80,9 +87,10 @@ class Db_Mysql implements Db_Interface
 	 * This modifies how we connect to the database.
 	 * @return {PDO} The PDO object for connection
 	 */
-	function reallyConnect($shardName = null)
+	function reallyConnect($shardName = null, &$shardInfo = null)
 	{
 		if ($this->pdo) {
+			$shardInfo = $this->shardInfo;
 			return $this->pdo;
 		}
 		$connectionName = $this->connectionName;
@@ -125,6 +133,8 @@ class Db_Mysql implements Db_Interface
 		$driver_options = isset($modifications['driver_options']) 
 			? $modifications['driver_options'] 
 			: (isset($connectionInfo['driver_options']) ? $connectionInfo['driver_options'] : null);
+
+		$this->shardInfo = $shardInfo = compact('dsn', 'prefix', 'username', 'password', 'driver_options');
 
 		// More dsn changes
 		$dsn_fields = array();
