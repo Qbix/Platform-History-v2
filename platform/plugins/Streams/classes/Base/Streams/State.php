@@ -17,7 +17,7 @@
  * @param {array} [$fields=array()] The fields values to initialize table row as 
  * an associative array of $column => $value pairs
  * @param {string} [$fields.hash] defaults to ""
- * @param {string} [$fields.format] defaults to "sha256"
+ * @param {string} [$fields.algorithm] defaults to "sha256"
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
  * @param {string} [$fields.extra] defaults to ""
@@ -32,10 +32,10 @@ abstract class Base_Streams_State extends Db_Row
 	 * typically this is hexadecimal format
 	 */
 	/**
-	 * @property $format
+	 * @property $algorithm
 	 * @type string
 	 * @default "sha256"
-	 * 
+	 * the HMAC uses a secret key not storeed in this table
 	 */
 	/**
 	 * @property $insertedTime
@@ -59,7 +59,7 @@ abstract class Base_Streams_State extends Db_Row
 	 * @property $URI
 	 * @type string
 	 * @default ""
-	 * 
+	 * prefixes can be file:/// or https:// or stream://publisherId/streamName
 	 */
 	/**
 	 * The setUp() method is called the first time
@@ -342,34 +342,34 @@ return array (
 
 	/**
 	 * Method is called before setting the field and verifies if value belongs to enum values list
-	 * @method beforeSet_format
+	 * @method beforeSet_algorithm
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
 	 * @throws {Exception} An exception is thrown if $value does not belong to enum values list
 	 */
-	function beforeSet_format($value)
+	function beforeSet_algorithm($value)
 	{
 		if ($value instanceof Db_Expression
                or $value instanceof Db_Range) {
-			return array('format', $value);
+			return array('algorithm', $value);
 		}
-		if (!in_array($value, array('sha1','sha256','sha512')))
-			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".format");
-		return array('format', $value);			
+		if (!in_array($value, array('sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512')))
+			throw new Exception("Out-of-range value '$value' being assigned to ".$this->getTable().".algorithm");
+		return array('algorithm', $value);			
 	}
 
 	/**
-	 * Returns schema information for format column
+	 * Returns schema information for algorithm column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-	static function column_format()
+	static function column_algorithm()
 	{
 
 return array (
   0 => 
   array (
     0 => 'enum',
-    1 => '\'sha1\',\'sha256\',\'sha512\'',
+    1 => '\'sha1\',\'sha256\',\'sha512\',\'hmac-sha1\',\'hmac-sha256\',\'hmac-sha512\'',
     2 => '',
     3 => false,
   ),
@@ -416,7 +416,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'sha1\',\'sha256\',\'sha512\'',
+    1 => '\'sha1\',\'sha256\',\'sha512\',\'hmac-sha1\',\'hmac-sha256\',\'hmac-sha512\'',
     2 => '',
     3 => false,
   ),
@@ -463,7 +463,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '\'sha1\',\'sha256\',\'sha512\'',
+    1 => '\'sha1\',\'sha256\',\'sha512\',\'hmac-sha1\',\'hmac-sha256\',\'hmac-sha512\'',
     2 => '',
     3 => false,
   ),
@@ -601,7 +601,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('hash', 'format', 'insertedTime', 'updatedTime', 'extra', 'URI');
+		$field_names = array('hash', 'algorithm', 'insertedTime', 'updatedTime', 'extra', 'URI');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();

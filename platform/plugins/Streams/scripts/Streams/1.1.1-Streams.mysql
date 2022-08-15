@@ -12,4 +12,5 @@ CREATE TABLE `{{prefix}}metrics` (
   PRIMARY KEY (`publisherId`,`streamName`,`userId`),
   KEY `userId` (`userId`),
   KEY `stream` (`publisherId`, `streamName`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT='metrics about how a given stream is being accessed';

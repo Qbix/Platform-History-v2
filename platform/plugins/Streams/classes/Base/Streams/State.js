@@ -22,7 +22,7 @@ var Row = Q.require('Db/Row');
  * @param {Object} [fields={}] The fields values to initialize table row as 
  * an associative array of {column: value} pairs
  * @param {String} [fields.hash] defaults to ""
- * @param {String} [fields.format] defaults to "sha256"
+ * @param {String} [fields.algorithm] defaults to "sha256"
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to "0000-00-00 00:00:00"
  * @param {String|Buffer} [fields.extra] defaults to ""
@@ -41,10 +41,10 @@ Q.mixin(Base, Row);
  * typically this is hexadecimal format
  */
 /**
- * @property format
+ * @property algorithm
  * @type String
  * @default "sha256"
- * 
+ * the HMAC uses a secret key not storeed in this table
  */
 /**
  * @property insertedTime
@@ -68,7 +68,7 @@ Q.mixin(Base, Row);
  * @property URI
  * @type String|Buffer
  * @default ""
- * 
+ * prefixes can be file:/// or https:// or stream://publisherId/streamName
  */
 
 /**
@@ -279,7 +279,7 @@ Base.prototype.fieldNames = function () {
 Base.fieldNames = function () {
 	return [
 		"hash",
-		"format",
+		"algorithm",
 		"insertedTime",
 		"updatedTime",
 		"extra",
@@ -327,25 +327,25 @@ return [["varchar","255","",false],false,"MUL",""];
 
 /**
  * Method is called before setting the field and verifies if value belongs to enum values list
- * @method beforeSet_format
+ * @method beforeSet_algorithm
  * @param {string} value
  * @return {string} The value
  * @throws {Error} An exception is thrown if 'value' does not belong to enum values list
  */
-Base.prototype.beforeSet_format = function (value) {
+Base.prototype.beforeSet_algorithm = function (value) {
 		if (value instanceof Db.Expression) return value;
-		if (['sha1','sha256','sha512'].indexOf(value) < 0)
-			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".format");
+		if (['sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'].indexOf(value) < 0)
+			throw new Error("Out-of-range value "+JSON.stringify(value)+" being assigned to "+this.table()+".algorithm");
 		return value;
 };
 
 	/**
-	 * Returns schema information for format column
+	 * Returns schema information for algorithm column
 	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
 	 */
-Base.column_format = function () {
+Base.column_algorithm = function () {
 
-return [["enum","'sha1','sha256','sha512'","",false],false,"","sha256"];
+return [["enum","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],false,"","sha256"];
 };
 
 /**
@@ -370,7 +370,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","'sha1','sha256','sha512'","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -395,7 +395,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","'sha1','sha256','sha512'","",false],false,"","0000-00-00 00:00:00"];
+return [["timestamp","'sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512'","",false],false,"","0000-00-00 00:00:00"];
 };
 
 /**
