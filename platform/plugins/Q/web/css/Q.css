@@ -491,6 +491,9 @@ div.Q_placeholder { pointer-events: none; }
 	white-space: normal !important;
 }
 .Q_textfill_resizing {
+	width: auto !important;
+}
+.Q_textfill_resizing {
 	transform: none !important;
 	max-width: none !important;
 	max-height: none !important;
