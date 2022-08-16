@@ -13393,7 +13393,7 @@ Q.invoke = function (options) {
 Q.invoke.handlers = [
 	function (options) {
 		Q.Dialogs.push(Q.extend({}, options, {
-			onActivate: options.callback || function () { }
+			onActivate: options.onActivate || function () { }
 		}));
 	}
 ];
