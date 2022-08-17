@@ -1184,7 +1184,7 @@ Q.invoke.handlers.unshift(function (options, callback) {
 		columns.close({min: index+1}, null, {animation: {duration: 0}});
 		columns.open(Q.extend({}, options, {
 			column: options.content,
-			onActivate: options.callback
+			onActivate: options.onActivate || function () {}
 		}));
 		return false;
 	}

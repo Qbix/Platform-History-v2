@@ -1029,6 +1029,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			return false;
 		}
 
+		var tool = this;
 		// TODO - when user scrolled in message container not running this function
 		var isScrollNow = false,
 			startY      = null;
