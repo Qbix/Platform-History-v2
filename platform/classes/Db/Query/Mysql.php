@@ -1400,13 +1400,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * @method limit
 	 * @param {integer} $limit A non-negative integer showing how many rows to return
 	 * @param {integer} [$offset=null] A non-negative integer showing what row to start the result set with.
-	 * @param {integer} [$useDeferredJoin=true] If the offset is not empty and this parameter is true, uses the Deferred JOIN technique to massively speed up queries with large offsets
+	 * @param {integer} [$useDeferredJoin=false] If the offset is not empty and this parameter is true, uses the Deferred JOIN technique to massively speed up queries with large offsets. But it only works if the WHERE clause criteria doesn't use joined tables.
 	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If limit/offset are negative, OFFSET is not alowed in context, LIMIT clause was
 	 * specified or clause does not belong to context
 	 * @chainable
 	 */
-	function limit ($limit, $offset = null, $useDeferredJoin = true)
+	function limit ($limit, $offset = null, $useDeferredJoin = false)
 	{
 		if (!isset($limit)) {
 			return $this;
