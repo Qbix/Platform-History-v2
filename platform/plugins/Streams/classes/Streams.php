@@ -4861,6 +4861,10 @@ abstract class Streams extends Base_Streams
 
 		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
+			$parts = array_map('trim', explode(":", $title));
+			if (sizeof($parts) > 1) {
+				$title = $parts[0].": ".$parts[1];
+			}
 			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
 				'title' => $title
@@ -4870,7 +4874,7 @@ abstract class Streams extends Base_Streams
 			} else {
 				// if char colon exists, remove from title colon and all before
 				if (strstr($title, ':')) {
-					$title = preg_replace("/.+:\s/", '', $title);
+					$title = preg_replace("/.+:\s*/", '', $title);
 				}
 				$keywords = explode(' ', $title);
 				$data = null;
