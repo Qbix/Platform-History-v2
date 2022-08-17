@@ -100,7 +100,7 @@ class Db_Result
 				}
 			}
 		} else {
-			$rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$rows = $this->stmt->fetchAll(PDO::FETCH_ASSOC);
 		}
 		if (!empty($fields_prefix)) {
 			$prefix_len = strlen($fields_prefix);

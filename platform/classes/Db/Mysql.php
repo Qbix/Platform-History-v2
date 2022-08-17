@@ -81,6 +81,14 @@ class Db_Mysql implements Db_Interface
 	public $maxCheckStrlen = 1000000;
 
 	/**
+	 * Record whether we already set the timezone
+	 * @property $setTimezoneDone
+	 * @type string
+	 * @protected
+	 */
+	protected static $setTimezoneDone;
+
+	/**
 	 * Actually makes a connection to the database (by creating a PDO instance)
 	 * @method reallyConnect
 	 * @param {array} [$shardName=null] A shard name that was added using Db::setShard.
@@ -174,7 +182,10 @@ class Db_Mysql implements Db_Interface
 		}
 		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-		$this->setTimezone();
+		if (empty(self::$setTimezoneDone[$dsn])) {
+			$this->setTimezone();
+			self::$setTimezoneDone[$dsn] = true;
+		}
 		return $this->pdo;
 	}
 	
