@@ -163,7 +163,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		}
 		$weight = $total + 1;
 		$relations = $category->related($category->publisherId, true, array(
-			$relationType,
+			'type' => $relationType,
 			'orderBy' => 'random',
 			'limit' => 1,
 			'where' => array(
