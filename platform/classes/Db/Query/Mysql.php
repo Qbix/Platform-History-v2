@@ -626,7 +626,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$ntct = & $nt['connections'];
 			$ntbt = & $nt['backtraces'];
 
-			$sql = ($query === $this ? $sql_template : $query->getSQL());
+			$sql = $query->getSQL(); // depends on shard, possibly
+			// TODO: implement caching sql until query changes
 
 			try {
 				if (!empty($query->clauses["BEGIN"])) {
