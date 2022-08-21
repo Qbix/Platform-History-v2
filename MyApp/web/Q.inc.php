@@ -28,9 +28,11 @@ if (!defined('Q_DIR')) {
 	define('Q_DIR', isset($paths['platform']) ? $paths['platform'] : '');
 }
 
-$Q_filename = realpath(Q_DIR.'/Q.php');
+$Q_filename = realpath(Q_DIR.DS.'Q.php');
 if (!file_exists($Q_filename)) {
-	die("$header\nPlease edit $basename/local/paths.php and $basename/local/paths.js to indicate the location of the Q/platform directory\n$footer");
+	die("Please edit $basename/local/paths.json to look like " .
+		'{"platform": "path/to/Q/platform"}' .
+		"then run configure.php again\n");
 }
 
 include($Q_filename);

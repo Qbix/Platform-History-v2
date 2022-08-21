@@ -33,10 +33,10 @@ if (!defined('Q_DIR')) {
 
 include($paths_filename);
 
-$realpath = realpath(Q_DIR.'/Q.php');
-if (!$realpath) {
+$Q_filename = realpath(Q_DIR.DS.'Q.php');
+if (!$Q_filename) {
 	die("Please edit $basename/local/paths.json to look like " .
 		'{"platform": "path/to/Q/platform"}' .
 		"then run configure.php again\n");
 }
-include($realpath);
+include($Q_filename);
