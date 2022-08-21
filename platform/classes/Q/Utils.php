@@ -1623,10 +1623,25 @@ class Q_Utils
 	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
 	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
 	 * @param {string} [$internalDelimiter='/'] the internal delimiter, if it is set then only the last part is split, and instances of internalDelimiter are replaced by delimiter
+	 * @param {string} [$checkRegEx] The RegEx to check and throw an exception if id doesn't match. Pass null here to skip the RegEx check.
 	 * @return {string} the segments, delimited by the delimiter
+	 * @throw {Q_Exception_WrongValue} 
 	 */
-	static function splitId($id, $lengths = 3, $delimiter = DIRECTORY_SEPARATOR, $internalDelimiter = '/')
-	{
+	static function splitId(
+		$id,
+		$lengths = 3,
+		$delimiter = DIRECTORY_SEPARATOR,
+		$internalDelimiter = '/',
+		$checkRegEx = '/^[a-zA-Z0-9\.\-\_]{3,31}$/'
+	) {
+		if (isset($checkRegEx)) {
+			if (!preg_match($checkRegEx, $id)) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'id',
+					'range' => $checkRegEx
+				));
+			}
+		}
 		if (!$internalDelimiter) {
 			return implode($delimiter, str_split($id, $lengths));
 		}

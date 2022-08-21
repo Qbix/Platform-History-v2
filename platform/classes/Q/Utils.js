@@ -1074,9 +1074,25 @@ function _dump_log (phase, onsuccess) {
  * @param {integer} [lengths=3] the lengths of each segment (the last one can be smaller)
  * @param {string} [delimiter=path.sep] the delimiter to put between segments
  * @param {string} [internalDelimiter='/'] the internal delimiter, if it is set then only the last part is split, and instances of internalDelimiter are replaced by delimiter
+ * @param {string} [checkRegEx] The RegEx to check and throw an exception if id doesn't match. Pass null here to skip the RegEx check.
  * @return {string} the segments, delimited by the delimiter
  */
-Utils.splitId = function(id, lengths, delimiter, internalDelimiter) {
+Utils.splitId = function(id, lengths, delimiter, internalDelimiter, checkRegEx) {
+	if (checkRegEx === undefined) {
+		checkRegEx = new RegExp('^[a-zA-Z0-9\\.\\-\\_]{3,31}$');
+	}
+	if (checkRegEx) {
+		if (!id || !id.match(checkRegEx)) {
+			throw new Q.Exception(
+				"Wrong value for {{id}}. Expected {{range}}",
+				{
+					field: 'id', 
+					id: id, 
+					range: checkRegEx
+				}
+			);
+		}
+	}
 	lengths = lengths || 3;
 	delimiter = delimiter || path.sep;
 	if (internalDelimiter === undefined) {
