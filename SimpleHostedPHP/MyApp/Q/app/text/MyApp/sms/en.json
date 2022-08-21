@@ -1,0 +1,20 @@
+{
+	"activation": {
+		"Thanks": "Welcome to {{1}}.",
+		"ClickHere": "Click here to activate your account: {{1}}"
+	},
+	"addMobile": {
+		"ClickHere": "Click here to verify your mobile number: {{1}}"
+	},
+	"SeeHistory": "See payment history for {{1}}",
+	"charge": {
+		"HasBeenCharged": "{{1}} has been charged {{2}} for {{3}} by {{4}}"
+	},
+	"charged": {
+		"HavePaid": "Hey {{1}}, this is just a quick confirmation that you've successfully paid {{2}} to {{3}} for {{4}}"
+	},
+	"subscription": {
+		"YouHaveStarted": "You've subscribed to {{2}} with {{3}} at {{4}} for {{5}} months.",
+		"HasStarted": "{{1}} has subscribed to {{2}} with {{3}} at {{4}} for {{5}} months."
+	}
+}

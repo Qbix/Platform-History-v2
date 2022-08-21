@@ -1,0 +1,312 @@
+
+/**
+ * This CSS is just to get you started.
+ * Feel free to modify any of it for your own app.
+ */
+
+* { 
+	font-family: 'Anton', sans-serif;
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-tap-highlight-color: transparent;
+	box-sizing: border-box;
+}
+a { text-decoration: none; color: #0055ff; }
+a:visited { color: #aa88cc; }
+html { background: #f2f2f2; height: 100%; box-sizing: border-box; }
+body { height: 100%; overflow: auto; touch-action: none; }
+h2 { margin: 0; }
+*, *::before, *::after { box-sizing: inherit; }
+table { table-layout: fixed; }
+
+:root {
+	--dashboard-main-color: rgba(255, 255, 255, 1.0);
+}
+
+/* The various slot containers */
+#notices_slot {
+	position: fixed;
+	text-align: center;
+}
+#content_slot {
+	position: relative;
+	padding: 10px;
+	overflow-x: auto;
+	background: #fff;
+	box-shadow: #aaa 0 0 4px;
+	-webkit-box-shadow: #aaa 0 0 4px;
+	-moz-box-shadow: #aaa 0 0 4px;
+}
+#dashboard_slot {
+	position: fixed;
+	width: 100%;
+	margin: 0;
+	border: solid 0 #555; 
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	z-index: 900;
+	text-align: left;
+	cursor: default; 
+	touch-action: manipulation;
+    box-shadow: #555 0 0 4px; -webkit-box-shadow: #555 0 0 4px; -moz-box-shadow: #555 0 0 4px;
+    background: #555; /* for non-css3 browsers */
+    background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#444)); /* for webkit browsers */
+    background: -moz-linear-gradient(top,  #555,  #444); /* for firefox 3.6+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#444444'); /* for IE */;
+}
+#dashboard_slot * { color: white; font-size: 24px; font-family: Arial, sans-serif; }
+#dashboard_slot input,
+#dashboard_slot textarea { color: black; }
+.Q_layout_widebar #page { position: absolute; width: 100%; top:50px; bottom: 0; left: 50%; transform: translate(-50%, 0); }
+.Q_mobile #page { overflow: auto; -webkit-overflow-scrolling: touch; z-index: 0; }
+#dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_static,
+#dashboard_slot .Q_inplace_tool .Q_hover .Q_inplace_tool_blockstatic { 
+	background: white;
+	color: #333;
+}
+.Q_mobile #dashboard .Users_avatar_icon { margin: 0; border-radius: 4px; }
+.Q_mobile #dashboard .Users_avatar_name { display: none; }
+.Q_mobile #page { position: absolute; }
+.Q_mobile #content_slot { height: 100%; }
+.Q_notMobile .Users_avatar_icon { margin-right: 5px; }
+
+#dashboard, #notices, #content { margin: auto; text-align: left; }
+#content { position: relative; }
+#dashboard h1 { text-align: left }
+
+.Q_mobile #dashboard_slot,
+.Q_mobile #notices_slot {
+	position: absolute;
+}
+
+#dashboard { display: flex; width: 100%; }
+.Q_layout_widebar #dashboard { display: flex; justify-content: space-between; }
+.Q_notMobile #dashboard { padding: 5px; }
+
+.Q_notMobile #dashboard_slot .MyApp_dashboard_logo {
+	overflow: hidden;
+	background: url(../img/icon/310.png) no-repeat;
+	background-size: contain;
+}
+.Q_mobile #dashboard_slot .MyApp_dashboard_logo {
+	display: inline-block; width: 40px; height: 40px; float: left;
+	background: url(../img/icon/40.png) no-repeat;
+}
+.Q_mobile #dashboard_slot .MyApp_dashboard_logo h1 {
+	display: none;
+}
+.Q_layout_sidebar #dashboard_slot .MyApp_dashboard_logo {
+	width: 100%;
+}
+
+/* Notices contents */
+#notices_slot { text-align: center; margin: auto; padding: 0; z-index: 5000; }
+#notices { margin: auto; }
+#notices_slot div.container { overflow: hidden; overflow-y: auto; }
+#notices_slot ul { list-style-type: none; padding: 0; margin: auto; width: 700px; max-width: 100%; border: solid 1px #555; border-top: solid 1px #aaa; box-shadow: 0 0 5px #222; -moz-box-shadow: 0 0 5px #222; -webkit-box-shadow: 0 0 5px #222; cursor: pointer; }
+#notices_slot li { list-style-type: none; padding: 0; margin: 0; text-align: center; background: #ffd4aa; border: 0; border-bottom: solid 1px #aaa; line-height: 30px; min-height: 30px; }
+#notices_slot ul.Q_errors * { background-color: #ebb; color: #500; }
+#notices_slot ul.Q_errors li { text-align: left; padding: 0 10px 0 10px; }
+#notices_slot .Q_field_name { float: right; font-size: 12px; padding-right: 10px; }
+#notices_slot button
+{
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 5px;
+	padding: 2px 10px;
+	color: #69552e;
+	background: #F1E2C6;
+	box-shadow: 1px 1px 1px 0 #CCC;
+	border: none;
+}
+.Q_notTouchscreen #notices_slot button:active
+{
+	background: #f0d298;
+	margin-left: 6px;
+	box-shadow: none;
+}
+#notices_slot ul li span {
+	font-size: 12px;
+	line-height: 26px;
+}
+
+.Q_columns_tool {
+	z-index: 99999;
+}
+
+/* Dashboard contents */
+#dashboard>* { margin: 0; padding: 0; line-height: 40px; text-align: center; }
+#dashboard>h1 { float: left; padding: 5px; width: auto; }
+#dashboard>h2 { float: left; }
+#dashboard_user { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; float: right; }
+.Q_mobile #dashboard_user { max-width: 40%; }
+.Q_mobile.Users_loggedIn #dashboard_user { margin: 0; }
+.Q_mobile.Users_loggedOut #dashboard_user { line-height: 40px; }
+#dashboard .Q_contextual * { color: black; }
+#dashboard_user_contextual { display: none; }
+#dashboard td { vertical-align: middle; }
+#dashboard table { width: 100%; padding: 0; margin: 0; }
+#dashboard .Q_dashboard_logo { padding: 0; }
+#dashboard .Q_dashboard_logo a { padding: 5px; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; }
+#dashboard .Q_dashboard_logo img { height: 40px; border-radius: 5px; }
+#dashboard .Q_dashboard_search { padding: 8px 10px 8px 10px; font-weight: bold; text-align: left; }
+#dashboard .Q_dashboard_search input {
+	width: 104px;
+	margin-right: 4px;
+	border-radius: 2em;
+	-moz-border-radius: 2em;
+	padding-left: 27px;
+	padding-right: 17px;
+	border: none;
+	border-top: 1px solid #CCC;
+	background: white url(../{{Q}}/img/search_icon.png) no-repeat;
+	color: #444;
+}
+
+/* Dashboard tabs */
+#dashboard .Q_tabs_tabs { border: 0; width: 100%; margin: auto; text-align: left; }
+#dashboard .Q_tabs_tab { margin: 0px; cursor: pointer; width: auto; border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; background-color: #f8f8f8; background: none; text-align: left; max-width: 100%; overflow: hidden; text-overflow: ellipsis; text-align: left; }
+#dashboard .Q_tabs_tab.Streams_preview_tool { padding-left: 10px; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal { margin: 0; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab { padding: 5px 10px; background-color: #222; color: white; width: 100%; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab::before,
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab * { color: white; vertical-align: bottom; }
+#dashboard .Q_tabs_compact.Q_tabs_horizontal .Q_tabs_tab svg.Q_overflow_glyph_svg { fill: white; }
+#dashboard .Q_tabs_tab * { white-space: nowrap; overflow-x: hidden; overflow-y: visible; text-overflow: ellipsis; vertical-align: top; }
+#dashboard .Q_tabs_vertical .Q_tabs_tab { background: transparent; }
+#dashboard .Q_tabs_tab,
+#dashboard .Q_tabs_tab>* { cursor: pointer; }
+#dashboard .Q_tabs_tab { text-decoration: none; color: white; }
+.Q_notTouchscreen #dashboard .Q_tabs_tab:not(.Q_current):hover { background: rgba(100, 100, 100, 0.5); }
+#dashboard .Q_tabs_tab img { margin-right: 10px; width: 30px; }
+#dashboard .Q_tabs_tab span { display: inline; text-align: left; }
+.Q_notMobile #dashboard .Q_tabs_tab.Q_current { background-color: #eeeeee; background-image: url(../Q/plugins/Q/img/bg/stucco.png); color: black !important; }
+#dashboard .Q_tabs_tab.Q_current * { color: black; }
+#dashboard .Q_tabs_tab svg.Q_overflow_glyph_svg { fill: white; width: 28px; height: 28px; }
+.Q_mobile #dashboard .Q_tabs_tool { height: 40px; max-width: 80%; overflow: hidden; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tool { height: 40px; display: inherit; }
+.Q_layout_sidebar #dashboard .Q_tabs_tab { padding: 5px; }
+body .Q_tabs_contextual .Q_listing li { text-align: left; }
+html .Q_listing img { height: 30px; }
+
+/* inputs */
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password],
+input[type=number],
+input.text,
+input.email,
+input.tel,
+input.password,
+input.number,
+textarea { border: 1px solid #ccc; border-bottom: 1px solid #aaa; background-color: #fefefe; cursor: text; font-family: "Trebuchet MS"; }
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=tel]:focus,
+input[type=password]:focus,
+input[type=number]:focus,
+input.text:focus,
+input.email:focus,
+input.tell:focus,
+input.password:focus,
+input.number:focus,
+textarea:focus { background: white; box-shadow: 0 1px 10px rgba(0,0,0,.15); -webkit-box-shadow: 0 1px 4px rgba(0,0,100,.15); -moz-box-shadow: 0 1px 4px rgba(0,0,100,.15); }
+input.placeholder,
+textarea.placeholder { color: #aaa; font-style: italic; }
+select:focus { outline: dotted 1px #779; }
+/* select { margin-top: 0.75em; } */
+input[type=text],
+input[type=password],
+input[type=tel],
+input[type=password],
+input[type=number],
+input.text,
+input.email,
+input.tel,
+input.password,
+input.number,
+textarea { border-radius: 3px; -moz-border-radius:3px; -webkit-border-radius:3px; padding: 0px 4px 0px 4px; }
+input[type=checkbox],
+input[type=radio] { margin-right: 5px; }
+html .Q_inplace_tool_fieldinput { padding: 0px; }
+
+#notices_slot { position: fixed; }
+.Q_mobile #dashboard_slot,
+.Q_mobile #notices_slot { width: 100%; left: 0; }
+.Q_mobile #dashboard>h2 { display: none; }
+.Q_mobile #dashboard .Q_tabs_tab {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+}
+.Q_mobile .Q_overlay { width: 90%; }
+
+/* The following lines are for cordova on iOS */
+.Q_notCordova .Q_top_background,
+.Q_notCordova .Q_bottom_background { display: none; }
+.Q_cordova .Q_top_background {
+	background: #f2f2f2;
+}
+.Q_cordova .Q_bottom_background {
+	background: #f2f2f2;
+}
+.Q_cordova.Q_notch .Q_top_background {
+	background: black;
+}
+.Q_cordova.Q_ios.Q_mobile #dashboard_slot { height: 50px; }
+.Q_cordova.Q_ios.Q_mobile #page { top: 50px; }
+.Q_cordova.Q_ios.Q_mobile.Q_notch #dashboard_slot {
+	top: env(safe-area-inset-top);
+	height: 50px;
+}
+.Q_cordova.Q_ios.Q_mobile.Q_notch #page { 
+	top: calc(env(safe-area-inset-top) + 50px);
+	height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 50px);
+}
+.Q_cordova.Q_ios.Q_mobile.Q_notch .Q_top_background {
+	background: black;
+    height: constant(safe-area-inset-top);
+    height: env(safe-area-inset-top);
+}
+
+/* The following lines are for a flatter look */
+html .Q_listing li { font-size: 18px; padding: 0 10px; line-height: 40px; text-align: left; border-top: solid 1px white; border-bottom: solid 1px #CCC; background: #f2f2f2; -webkit-touch-callout: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; white-space: nowrap; overflow: hidden;
+}
+.Q_dialog_title { background: #444; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111'); background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#333)); background: -moz-linear-gradient(top, #444, #333);
+}
+.Q_button { background: #555; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#555555', endColorstr='#444444'); background: -webkit-gradient(linear, left top, left bottom, from(#555), to(#444)); background: -moz-linear-gradient(top, #555, #444);
+}
+
+html.MyApp_notFound #content,
+html.MyApp_errors #content { padding: 30px; text-align: center; overflow: hidden; text-overflow: ellipsis; }
+html.MyApp_notFound .url,
+html.MyApp_errors .url { font-weight: bold; text-decoration: underline; }
+
+span.c3 { font-weight: bold; }
+
+.Q_notMobile .MyApp_dashboard_logo { float: left; padding: 0; margin: 5px 0 0 10px; background-position: left top; }
+.Q_notMobile .MyApp_dashboard_logo h1 { padding: 0; margin: 0; padding: 0 0 0 50px; line-height: 40px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tabs { text-align: center; max-height: 40px; }
+.Q_notMobile.Q_layout_widebar #dashboard .Q_tabs_tab { margin: 0 10px; }
+
+/* The following lines override default styles for a sidebar-style website */
+/* You can remove them or set the config Q/response/layout/sidebar = true */
+html.Q_notMobile { height: 100%; }
+.Q_layout_sidebar.Q_notMobile .UVSpinner_dashboard_logo { float: none; background-position: center top; background-repeat: no-repeat; padding-top: 100px; text-align: center; }
+.Q_layout_sidebar.Q_notMobile body { height: 100%; }
+.Q_layout_sidebar.Q_notMobile #dashboard .UVSpinner_dashboard_logo { background-position: center top; padding-top: 250px; }
+.Q_layout_sidebar.Q_notMobile #dashboard .UVSpinner_dashboard_logo h1 { padding: 0; display: none; max-height: none; }
+.Q_notMobile #dashboard .Q_tabs_horizontal a { display: inline-block; }
+.Q_notMobile #dashboard>h1,
+.Q_layout_sidebar.Q_notMobile #dashboard>h2 { float: none; }
+.Q_layout_sidebar.Q_notMobile #dashboard .Q_tabs_tabs { text-align: left; }
+.Q_layout_sidebar.Q_notMobile #dashboard .Q_tabs_tab { display: block; margin: 0; }
+.Q_layout_sidebar.Q_notMobile #notices_slot { left: 0; top: 0; width: 100%; }
+.Q_layout_sidebar.Q_notMobile #dashboard_slot { position: fixed; left: 5%; width: 20%; height: 90%; top: 5%; transform: none; }
+.Q_layout_sidebar.Q_notMobile #page { position: absolute; padding: 0; left: 25%; width: 70%; height: 90%; top: 5%; }
+.Q_layout_sidebar.Q_notMobile #content_slot { min-height: 100%; padding: 0; }
+.Q_layout_sidebar.Q_notMobile #content { padding: 20px; }
+.Q_layout_sidebar.Q_notMobile #Users_avatar_tool { width: 100%; background: #222; background: rgba(255,255,255,.05); }
+.Q_layout_sidebar.Q_notMobile #dashboard_user { float: none; position: absolute; width: 90%; left: 50%; transform: translate(-50%, 0); margin: 10px 0 10px 0;  text-align: center;  bottom: 0; }
+.Q_mobile #dashboard_user .Users_avatar_name { display: none; }
