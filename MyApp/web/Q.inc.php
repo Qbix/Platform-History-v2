@@ -17,7 +17,9 @@ if (!is_dir(APP_DIR)) {
 }
 
 if (!defined('Q_DIR')) {
-	$paths_filename = realpath(APP_DIR . '/local/paths.json');
+	$paths_filename = realpath(implode(DIRECTORY_SEPARATOR, array(
+		APP_DIR, 'local', 'paths.json'
+	)));
 	if (file_exists($paths_filename)) {
 		$paths = json_decode(file_get_contents($paths_filename), true);
 		define('Q_DIR', $paths['platform']);
