@@ -45,7 +45,7 @@ EOT;
 		} else {
 			$trace_string = $exception->getTraceAsString();
 		}
-		if (($exception instanceof Q_Exception_PhpError)
+		if (($exception instanceof Q_Exception_PHPError)
 		or !empty($exception->messageIsHtml)) {
 			// do not sanitize $message
 		} else {

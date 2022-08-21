@@ -156,7 +156,7 @@ class Q_Exception extends Exception
 			self::$headers[$className] = $header;
 		}
 		$p1 = explode('_', $className);
-		if (count($p1) >= 3) {
+		if (count($p1) >= 3 and $className !== 'Q_Exception_PHPError') {
 			$Module = $p1[0];
 			$text = Q_Text::get("$Module/exceptions", array(
 				'dontThrow' => true
