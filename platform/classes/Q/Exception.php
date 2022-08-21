@@ -155,6 +155,23 @@ class Q_Exception extends Exception
 		if (isset($header)) {
 			self::$headers[$className] = $header;
 		}
+		$p1 = explode('_', $className);
+		if (count($p1) >= 3) {
+			$Module = $p1[0];
+			$text = Q_Text::get("$Module/exceptions", array(
+				'dontThrow' => true
+			)); // Search text
+			if ($text) {
+				$p2 = array_slice($p1, 2);
+				foreach ($p2 as $p) {
+					$text = !empty($text[$p]) ? $text[$p] : null;
+				}
+				if ($text and is_string($text)) {
+					$message = $text;
+				}
+			}
+		}
+		$message = Q::interpolate($message); // loads Q_Text if needed
 		static $exception_code = 10000;
 		++$exception_code; // TODO: improve this somehow
 		self::$codes[$className] = $exception_code;

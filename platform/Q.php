@@ -90,6 +90,7 @@ require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Cache.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Bootstrap.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Tree.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Config.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Text.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PhpError.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Uri.php');
