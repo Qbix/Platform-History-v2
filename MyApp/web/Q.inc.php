@@ -16,13 +16,22 @@ if (!is_dir(APP_DIR)) {
 	die("$header\nPlease edit index.php and change APP_DIR to point to your app's directory.\n$footer");
 }
 
-$paths_filename = realpath(APP_DIR . '/local/paths.php');
-if (!file_exists($paths_filename)) {
-	$basename = basename(APP_DIR);
-	die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n$footer");
+if (!defined('Q_DIR')) {
+	$paths_filename = realpath(APP_DIR . '/local/paths.json');
+	if (file_exists($paths_filename)) {
+		$paths = json_decode(file_get_contents($paths_filename), true);
+		define('Q_DIR', $paths['platform']);
+	} else {
+		$paths_filename = realpath(APP_DIR . '/local/paths.php');
+		if (file_exists($paths_filename)) {
+			include($paths_filename); // for backward compatibility
+		} else {
+			$basename = basename(APP_DIR);
+			die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n$footer");
+		}
+	}
 }
 
-include($paths_filename);
 $Q_filename = realpath(Q_DIR.'/Q.php');
 if (!file_exists($Q_filename)) {
 	$basename = basename(APP_DIR);

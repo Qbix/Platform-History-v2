@@ -1,7 +1,7 @@
 /**
  * For including Qbix in your scripts
  */
-module.exports = function (callback) {
+ module.exports = function (callback) {
 
 	//
 	// Constants -- you might have to change these
@@ -13,21 +13,25 @@ module.exports = function (callback) {
 	//
 	// Include Q
 	//
-	var header = "This is a Node On Qbix project...\n";
+	var header = "This is a Qbix Node script...\n";
 
 	var paths_filename = app_dir + '/local/paths';
-	fs.exists(paths_filename+'.js', function (exists) {
-		if (!exists) {
-			var basename = path.basename(app_dir);
+	var paths;
+	if (fs.existsSync(paths_filename+'.json')) {
+		var json = fs.readFileSync(paths_filename+'.json', 'utf8');
+		paths = {Q_DIR: JSON.parse(json).platform};
+	} else if (fs.existsSync(paths_filename+'.js')) {
+		// for backward compatibility
+		var paths = require(paths_filename);
+	} else {
+		var basename = path.basename(app_dir);
 			throw header+"please copy "+basename+"/local.sample to "
 				+basename+"/local, and edit local/paths.js";
-		}
-		var paths = require(paths_filename);
-		var Q = require(paths.Q_DIR+'/classes/Q');
-		if (callback) {
-			Q.on('init', callback);
-		}
-		Q.init({DIR: path.dirname(__dirname)});
-	});
+	}
 
+	var Q = require(paths.Q_DIR+'/classes/Q');
+	if (callback) {
+		Q.on('init', callback);
+	}
+	Q.init({DIR: path.dirname(__dirname)});
 };
