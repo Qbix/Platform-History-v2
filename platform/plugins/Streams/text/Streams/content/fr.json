@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "gérer vos abonnements aux e-mails",
         "IfUnsubscribe": "Si vous souhaitez vous désinscrire",
         "*": "Message {{& message.fields.type}} à {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} a dit : {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a dit : {{& message.content}}",
         "Streams\/changed": "Changements dans {{stream.fields.title}}",
         "Streams\/invite": "Vous avez été invité à {{& stream.fields.title}}",
         "Streams\/announcement": "Annonce en {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
-        "streamTitle": "{{1}} a démarré un appel en direct",
+        "streamTitle": "{{1}} a démarré une téléconférence",
         "allow": {
             "dialogTitle": "De liaison",
             "microphoneBtn": "Activer le microphone",
@@ -182,17 +182,17 @@
             "joinNow": "Rejoignez l&#39;appel"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Allez dans &quot;Paramètres&quot; -&gt; &quot;Avancé&quot; -&gt; &quot;Confidentialité et sécurité&quot; -&gt; &quot;Paramètres du site&quot; -&gt; &quot;Appareil photo&quot; ou &quot;Paramètres du site&quot; -&gt; &quot;Microphone&quot;",
             "point2": "Supprimer {{hostname}} de la liste &quot;Bloquer&quot;"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Veuillez actualiser cette page et confirmer l&#39;accès à {{kind}} pour rejoindre la conférence."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Accédez à vos paramètres Android",
             "point2": "Ouvrez &quot;Applications et notifications&quot;",
@@ -201,7 +201,7 @@
             "point5": "Activer {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Accédez à vos paramètres iOS",
             "point2": "Ouvrez &quot;Confidentialité&quot;",
@@ -250,14 +250,14 @@
             "stopFBLive": "Arrêter Facebook Livestream",
             "startRecording": "Commencer l&#39;enregistrement",
             "stopRecording": "Arrête d&#39;enregistrer",
-            "start": "Démarrer",
-            "stop": "Arrêter",
+            "start": "Commencer",
+            "stop": "Arrêt",
             "recordingInProgress": "L&#39;enregistrement est en cours...",
             "fbLiveTitle": "Titre du flux en direct",
             "fbLiveDescription": "Décrivez votre diffusion en direct. De quoi s&#39;agit-il?",
             "fbOnlyMeLiveAccess": "Seulement moi",
             "fbFriendsAccess": "Amis",
-            "fbPublicAccess": "Publique",
+            "fbPublicAccess": "Public",
             "publishOnTimeline": "Publier sur la chronologie",
             "publishToGroup": "Publier dans le groupe",
             "fbStartLive": "Passez en direct",
@@ -296,8 +296,8 @@
             "title": "Paramètres de diffusion"
         },
         "preview": {
-            "Meeting": "Appel en direct",
-            "MeetingEnded": "Appel terminé"
+            "Meeting": "Téléconférence",
+            "MeetingEnded": "Téléconférence terminée"
         }
     },
     "types": {

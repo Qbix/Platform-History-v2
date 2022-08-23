@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "dhibiti usajili wako wa barua pepe",
         "IfUnsubscribe": "Ukitaka kujiondoa",
         "*": "Tuma ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} alisema: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} alisema: {{& message.content}}",
         "Streams\/changed": "Mabadiliko katika {{stream.fields.title}}",
         "Streams\/invite": "Ulialikwa {{& stream.fields.title}}",
         "Streams\/announcement": "Tangazo katika {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
-        "streamTitle": "{{1}} alipiga simu ya moja kwa moja",
+        "streamTitle": "{{1}} alianzisha Kongamano la Televisheni",
         "allow": {
             "dialogTitle": "Inaunganisha",
             "microphoneBtn": "Washa Maikrofoni",
@@ -194,7 +194,7 @@
         "androidInstructionsDialog": {
             "dialogTitle": "Maagizo",
             "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwa Mipangilio yako ya Android",
+            "point1": "Nenda kwenye Mipangilio yako ya Android",
             "point2": "Fungua &quot;Programu na arifa&quot;",
             "point3": "Tafuta &quot;{999}}&quot; na uifungue",
             "point4": "Gonga kwenye Ruhusa",
@@ -203,7 +203,7 @@
         "iosInstructionsDialog": {
             "dialogTitle": "Maagizo",
             "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwa Mipangilio yako ya iOS",
+            "point1": "Nenda kwenye Mipangilio yako ya iOS",
             "point2": "Fungua &quot;Faragha&quot;",
             "point3": "Tafuta {{kind}} na uifungue",
             "point4": "Tafuta &quot;{999}}&quot; na uwashe"
@@ -212,7 +212,7 @@
             "youJoinedRoom": "Umejiunga kwenye chumba",
             "joining": "Kujiunga: {{userName}}",
             "sbLeftRoom": "{{userName}} aliondoka kwenye chumba",
-            "switchingRoom": "Chumba cha kubadilisha...",
+            "switchingRoom": "Inabadilisha chumba...",
             "forceDisconnecting": "Utatenganishwa ndani ya sekunde 5",
             "forceDisconnectingImmediately": "Ulitenganishwa na mwenyeji",
             "youLeftRoom": "Uliondoka kwenye chumba",
@@ -232,8 +232,8 @@
             "codeCopiedToCb": "Msimbo umenakiliwa kwenye ubao wa kunakili",
             "userHasNoVideo": "Mshiriki hana video",
             "openInBrowserAlert": "Fungua kiungo kwenye kivinjari cha Safari ili ujiunge na mkutano.",
-            "allowedVideoLimit": "Video {{limit}} pekee inaruhusiwa kwenye chumba hiki",
-            "allowedAudioLimit": "Maikrofoni {{limit}} pekee ndizo zinazoruhusiwa kwenye chumba hiki"
+            "allowedVideoLimit": "Video {{limit}} pekee ndiyo inayoruhusiwa kwenye chumba hiki",
+            "allowedAudioLimit": "Ni maikrofoni {{limit}} pekee zinazoruhusiwa kwenye chumba hiki"
         },
         "settingsPopup": {
             "dialogTitle": "Mipangilio ya Video",
@@ -258,7 +258,7 @@
             "fbOnlyMeLiveAccess": "Mimi Pekee",
             "fbFriendsAccess": "Marafiki",
             "fbPublicAccess": "Hadharani",
-            "publishOnTimeline": "Chapisha kwa kalenda ya matukio",
+            "publishOnTimeline": "Chapisha kwenye kalenda ya matukio",
             "publishToGroup": "Chapisha kwa kikundi",
             "fbStartLive": "Nenda Moja kwa Moja",
             "fbStopLive": "Komesha Mtiririko wa moja kwa moja",
@@ -296,8 +296,8 @@
             "title": "Mipangilio ya Kutiririsha"
         },
         "preview": {
-            "Meeting": "Simu ya Moja kwa Moja",
-            "MeetingEnded": "Simu imekatika"
+            "Meeting": "Teleconference",
+            "MeetingEnded": "Teleconference imekamilika"
         }
     },
     "types": {

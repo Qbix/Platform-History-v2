@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "управлять подписками на электронную почту",
         "IfUnsubscribe": "Если вы хотите отписаться",
         "*": "Сообщение {{& message.fields.type}} для {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} сказал: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} сказал: {{& message.content}}",
         "Streams\/changed": "Изменения в {{stream.fields.title}}",
         "Streams\/invite": "Вас пригласили на {{& stream.fields.title}}",
         "Streams\/announcement": "Объявление в {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "У вас нет разрешения присоединиться к этому потоку.",
-        "streamTitle": "{{1}} начал разговор в реальном времени",
+        "streamTitle": "{{1}} начал телеконференцию",
         "allow": {
             "dialogTitle": "Подключение",
             "microphoneBtn": "Включить микрофон",
@@ -296,8 +296,8 @@
             "title": "Настройки потоковой передачи"
         },
         "preview": {
-            "Meeting": "Живой вызов",
-            "MeetingEnded": "Звонок окончен"
+            "Meeting": "Телеконференция",
+            "MeetingEnded": "Телеконференция завершена"
         }
     },
     "types": {

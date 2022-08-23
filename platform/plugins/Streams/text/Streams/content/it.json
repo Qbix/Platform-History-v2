@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "gestisci le tue iscrizioni e-mail",
         "IfUnsubscribe": "Se vuoi cancellarti",
         "*": "Messaggio {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ha detto: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ha detto: {{& message.content}}",
         "Streams\/changed": "Modifiche in {{stream.fields.title}}",
         "Streams\/invite": "Sei stato invitato a {{& stream.fields.title}}",
         "Streams\/announcement": "Annuncio in {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Non hai l&#39;autorizzazione per unirti a questo stream.",
-        "streamTitle": "{{1}} ha avviato una chiamata dal vivo",
+        "streamTitle": "{{1}} ha avviato una teleconferenza",
         "allow": {
             "dialogTitle": "Collegamento",
             "microphoneBtn": "Abilita microfono",
@@ -178,7 +178,7 @@
             "cameraIsOff": "La fotocamera è spenta",
             "cameraIsOn": "La fotocamera è accesa",
             "screenSharingIsOn": "La condivisione dello schermo è attiva",
-            "screenSharingIsOff": "Condividere lo schermo",
+            "screenSharingIsOff": "Condividi schermo",
             "joinNow": "Partecipa alla chiamata"
         },
         "webInstructionsDialog": {
@@ -296,8 +296,8 @@
             "title": "Impostazioni di streaming"
         },
         "preview": {
-            "Meeting": "Chiamata dal vivo",
-            "MeetingEnded": "Chiamata terminata"
+            "Meeting": "Teleconferenza",
+            "MeetingEnded": "La teleconferenza è terminata"
         }
     },
     "types": {

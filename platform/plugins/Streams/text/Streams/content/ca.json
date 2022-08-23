@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} va dir: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} va dir: {{& message.content}}",
         "Streams\/changed": "Canvis a {{stream.fields.title}}",
         "Streams\/invite": "T&#39;han convidat a {{& stream.fields.title}}",
         "Streams\/announcement": "Anunci a {{& stream.fields.title}}",
@@ -260,11 +260,11 @@
             "dialogTitle": "Configuració dels participants"
         },
         "notAllowedToJoinCall": "No tens permís per unir-te a aquest flux.",
-        "streamTitle": "{{1}} va iniciar una trucada en directe",
+        "streamTitle": "{{1}} va iniciar una teleconferència",
         "preview": {
             "preamble": "Reunió:",
-            "Meeting": "Trucada en directe",
-            "MeetingEnded": "La trucada ha finalitzat"
+            "Meeting": "Teleconferència",
+            "MeetingEnded": "S&#39;ha acabat la teleconferència"
         },
         "preparing": {
             "micIsOff": "El micròfon està apagat",

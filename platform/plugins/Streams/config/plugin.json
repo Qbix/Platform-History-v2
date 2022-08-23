@@ -502,7 +502,7 @@
 			},
 			"Streams/webrtc": {
 				"defaults": {
-					"title": "Live Call",
+					"title": "Teleconference",
 					"icon": "Streams/webrtc"
 				},
 				"edit": ["title"],

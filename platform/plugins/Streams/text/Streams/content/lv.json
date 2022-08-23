@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "pārvaldīt savus e-pasta abonementus",
         "IfUnsubscribe": "Ja vēlaties anulēt abonementu",
         "*": "Ziņa {{& message.fields.type}} uz {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} teica: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} teica: {{& message.content}}",
         "Streams\/changed": "Izmaiņas {{stream.fields.title}}",
         "Streams\/invite": "Jūs tikāt uzaicināts uz {{& stream.fields.title}}",
         "Streams\/announcement": "Paziņojums {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
-        "streamTitle": "{{1}} sāka tiešraides zvanu",
+        "streamTitle": "{{1}} sāka telekonferenci",
         "allow": {
             "dialogTitle": "Savienojuma izveide",
             "microphoneBtn": "Iespējot mikrofonu",
@@ -184,7 +184,7 @@
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
             "permissionDenied": "{{kind}} atļauja liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
-            "point1": "Dodieties uz &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Privātums un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
+            "point1": "Dodieties uz &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Konfidencialitāte un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
             "point2": "Noņemiet {{hostname}} no &quot;Bloķēšanas&quot; saraksta"
         },
         "webIosInstructionsDialog": {
@@ -212,7 +212,7 @@
             "youJoinedRoom": "Jūs pievienojāties telpai",
             "joining": "Pievienošanās: {{userName}}",
             "sbLeftRoom": "{{userName}} izgāja no telpas",
-            "switchingRoom": "Pārslēgšanās istaba...",
+            "switchingRoom": "Pārslēgšanās telpa...",
             "forceDisconnecting": "Jūs tiksit atvienots 5 sekunžu laikā",
             "forceDisconnectingImmediately": "Jūs atvienoja saimnieks",
             "youLeftRoom": "Jūs izgājāt no istabas",
@@ -233,7 +233,7 @@
             "userHasNoVideo": "Dalībniekam nav video",
             "openInBrowserAlert": "Atveriet saiti pārlūkprogrammā Safari, lai pievienotos konferencei.",
             "allowedVideoLimit": "Šajā telpā atļauts tikai {{limit}} video",
-            "allowedAudioLimit": "Šajā telpā atļauts izmantot tikai {{limit}} mikrofonus"
+            "allowedAudioLimit": "Šajā telpā ir atļauti tikai {{limit}} mikrofoni"
         },
         "settingsPopup": {
             "dialogTitle": "Video iestatījumi",
@@ -279,7 +279,7 @@
             "dialogTitle": "Dalībnieka iestatījumi",
             "disconnect": "Atvienot",
             "floatingScreens": "Peldošie ekrāni",
-            "tiledScreens": "Flīžu ekrāni",
+            "tiledScreens": "Flīzēti ekrāni",
             "loudestExceptMe": "Skaļākais, izņemot mani",
             "maximizeLoudest": "Maksimizēt skaļāko",
             "staticMaximized": "Maksimizēts statiskais",
@@ -296,8 +296,8 @@
             "title": "Straumēšanas iestatījumi"
         },
         "preview": {
-            "Meeting": "Tiešraides zvans",
-            "MeetingEnded": "Zvans beidzās"
+            "Meeting": "Telekonference",
+            "MeetingEnded": "Telekonference beidzās"
         }
     },
     "types": {

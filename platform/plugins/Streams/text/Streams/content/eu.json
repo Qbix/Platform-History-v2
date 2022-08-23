@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Mezua {{& message.fields.type}}-ri {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} esan zuen: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}}-k esan zuen: {{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}}-n aldaketak",
         "Streams\/invite": "{{& stream.fields.title}}-ra gonbidatu zaituzte",
         "Streams\/announcement": "Iragarkia {{& stream.fields.title}}-n",
@@ -231,7 +231,7 @@
             "recordingInProgress": "Grabatzen ari da...",
             "publishOnTimeline": "Argitaratu denbora-lerroan",
             "publishToGroup": "Argitaratu taldean",
-            "turnOffAudioInput": "Isilarazi mikrofonoa",
+            "turnOffAudioInput": "Ezkutatu mikrofonoa",
             "micIsTurnedOff": "Mikrofonoa itzalita dago",
             "start": "Hasi",
             "stop": "Gelditu",
@@ -260,11 +260,11 @@
             "dialogTitle": "Parte-hartzaileen ezarpenak"
         },
         "notAllowedToJoinCall": "Ez duzu korrontean sartzeko baimenik.",
-        "streamTitle": "{{1}}-k zuzeneko dei bat hasi zuen",
+        "streamTitle": "{{1}} Telekonferentzia bat hasi zen",
         "preview": {
             "preamble": "Bilera:",
-            "Meeting": "Zuzeneko Deia",
-            "MeetingEnded": "Deia amaitu da"
+            "Meeting": "Telekonferentzia",
+            "MeetingEnded": "Telekonferentzia amaitu zen"
         },
         "preparing": {
             "micIsOff": "Mikrofonoa itzalita dago",

@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "이메일 구독 관리",
         "IfUnsubscribe": "구독을 취소하려면",
         "*": "메시지 {{& message.fields.type}}: {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} 말했다: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}}이(가) 말했습니다: {{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}}의 변경 사항",
         "Streams\/invite": "{{& stream.fields.title}}에 초대되었습니다.",
         "Streams\/announcement": "{{& stream.fields.title}} 발표",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "이 스트림에 참여할 수 있는 권한이 없습니다.",
-        "streamTitle": "{{1}}이(가) 실시간 통화를 시작했습니다.",
+        "streamTitle": "{{1}}이(가) 원격 회의를 시작했습니다.",
         "allow": {
             "dialogTitle": "연결 중",
             "microphoneBtn": "마이크 활성화",
@@ -176,8 +176,8 @@
             "micIsOff": "마이크가 꺼져 있습니다",
             "micIsOn": "마이크가 켜져 있습니다",
             "cameraIsOff": "카메라가 꺼져 있습니다",
-            "cameraIsOn": "카메라가 켜져 있습니다",
-            "screenSharingIsOn": "화면 공유가 켜져 있습니다.",
+            "cameraIsOn": "카메라가 켜져 있습니다.",
+            "screenSharingIsOn": "화면 공유 사용 중",
             "screenSharingIsOff": "화면 공유",
             "joinNow": "통화 참여"
         },
@@ -189,13 +189,13 @@
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "지침",
-            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 회의에 참여하려면 이 페이지를 새로고침하고 {{kind}}에 대한 액세스를 확인하세요."
+            "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 회의에 참가하려면 이 페이지를 새로고침하고 {{kind}}에 대한 액세스를 확인하세요."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "지침",
             "permissionDenied": "{{kind}}에 대한 권한이 거부되었습니다. 사용하려면 다음 단계를 따르십시오.",
             "point1": "Android 설정으로 이동",
-            "point2": "&quot;앱 및 알림&quot;을 엽니다.",
+            "point2": "&quot;앱 및 알림&quot; 열기",
             "point3": "&quot;{{communityName}}&quot;을(를) 찾아 엽니다.",
             "point4": "권한을 탭하십시오",
             "point5": "활성화 {{kind}}"
@@ -211,24 +211,24 @@
         "notices": {
             "youJoinedRoom": "당신은 방에 합류했습니다",
             "joining": "합류: {{userName}}",
-            "sbLeftRoom": "{{userName}}은(는) 방을 나갔습니다.",
+            "sbLeftRoom": "{{userName}}이(가) 방을 나갔습니다.",
             "switchingRoom": "탈의실...",
             "forceDisconnecting": "5초 이내에 연결이 끊어집니다.",
             "forceDisconnectingImmediately": "호스트에 의해 연결이 끊어졌습니다.",
             "youLeftRoom": "당신은 방을 떠났다",
             "codeCopied": "당신은 방을 떠났다",
-            "sbBeganFbLive": "{{userName}}은(는) Facebook에서 이 통화를 방송하기 시작했습니다.",
-            "sbStoppedFbLive": "{{userName}}은(는) Facebook에서 이 통화 방송을 중단했습니다.",
-            "youBeganFbLive": "이 통화를 Facebook에서 브로드캐스트하기 시작했습니다.",
+            "sbBeganFbLive": "{{userName}}이(가) Facebook에서 이 통화를 방송하기 시작했습니다.",
+            "sbStoppedFbLive": "{{userName}}이(가) Facebook에서 이 통화 방송을 중단했습니다.",
+            "youBeganFbLive": "Facebook에서 이 통화를 방송하기 시작했습니다.",
             "youStoppedFbLive": "Facebook에서 이 통화 방송을 중단했습니다.",
             "youStartedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하기 시작했습니다.",
             "youStoppedLive": "이 통화를 사용자 지정 RTMP로 브로드캐스트하는 것을 중지했습니다.",
             "sbStartedLiveStreaming": "{{userName}} 라이브 시작",
             "sbStoppedLiveStreaming": "{{userName}} 라이브 종료",
-            "liveStopped": "엔드포인트에 비디오를 보내는 동안 오류가 발생했습니다.",
+            "liveStopped": "엔드포인트로 비디오를 보내는 동안 오류가 발생했습니다.",
             "youBeganVideoRecording": "이 회의를 녹화하기 시작했습니다.",
             "youStoppedVideoRecording": "이 회의 녹화를 중지했습니다.",
-            "linkCopiedToCb": "클립보드에 링크 복사",
+            "linkCopiedToCb": "클립보드에 복사된 링크",
             "codeCopiedToCb": "클립보드에 복사된 코드",
             "userHasNoVideo": "참가자에게 동영상이 없습니다.",
             "openInBrowserAlert": "회의에 참가하려면 Safari 브라우저에서 링크를 엽니다.",
@@ -247,16 +247,16 @@
             "cameraIsTurnedOff": "카메라가 꺼져 있습니다",
             "micIsTurnedOff": "마이크가 꺼져 있습니다",
             "startFBLive": "페이스북 라이브스트림 시작",
-            "stopFBLive": "페이스북 라이브스트림 중지",
+            "stopFBLive": "Facebook 실시간 스트리밍 중지",
             "startRecording": "녹음 시작",
             "stopRecording": "녹음 중지",
             "start": "시작",
             "stop": "중지",
             "recordingInProgress": "녹음이 진행 중입니다...",
             "fbLiveTitle": "실시간 스트리밍 제목",
-            "fbLiveDescription": "라이브스트림을 설명하세요. 그것은 무엇에 관한 것입니까?",
+            "fbLiveDescription": "라이브스트림에 대해 설명하세요. 그것은 무엇에 관한 것입니까?",
             "fbOnlyMeLiveAccess": "나만",
-            "fbFriendsAccess": "친구",
+            "fbFriendsAccess": "친구들",
             "fbPublicAccess": "공공의",
             "publishOnTimeline": "타임라인에 게시",
             "publishToGroup": "그룹에 게시",
@@ -281,7 +281,7 @@
             "floatingScreens": "플로팅 스크린",
             "tiledScreens": "타일 스크린",
             "loudestExceptMe": "나를 제외하고 가장 시끄러운",
-            "maximizeLoudest": "가장 크게 최대화",
+            "maximizeLoudest": "가장 큰 소리로 최대화",
             "staticMaximized": "정적 최대화",
             "fullScreen": "전체 화면",
             "manual": "수동",
@@ -296,8 +296,8 @@
             "title": "스트리밍 설정"
         },
         "preview": {
-            "Meeting": "라이브 콜",
-            "MeetingEnded": "통화 종료"
+            "Meeting": "원격 회의",
+            "MeetingEnded": "원격 회의 종료"
         }
     },
     "types": {

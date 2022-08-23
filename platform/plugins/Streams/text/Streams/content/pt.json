@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "gerenciar suas assinaturas de e-mail",
         "IfUnsubscribe": "Se você deseja cancelar a inscrição",
         "*": "Mensagem {{& message.fields.type}} para {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} disse: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} disse: {{& message.content}}",
         "Streams\/changed": "Mudanças em {{stream.fields.title}}",
         "Streams\/invite": "Você foi convidado para {{& stream.fields.title}}",
         "Streams\/announcement": "Anúncio em {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Você não tem permissão para participar deste stream.",
-        "streamTitle": "{{1}} iniciou uma chamada ao vivo",
+        "streamTitle": "{{1}} iniciou uma teleconferência",
         "allow": {
             "dialogTitle": "Conectando",
             "microphoneBtn": "Ativar microfone",
@@ -262,7 +262,7 @@
             "publishToGroup": "Publicar no grupo",
             "fbStartLive": "Ativar",
             "fbStopLive": "Finalizar transmissão ao vivo",
-            "streamingSettings": "Configurações",
+            "streamingSettings": "Definições",
             "fbEmbedCode": "Embutir",
             "copy": "cópia de",
             "streamToRTMP": "Transmita para RTMP personalizado",
@@ -296,8 +296,8 @@
             "title": "Configurações de transmissão"
         },
         "preview": {
-            "Meeting": "Chamada ao vivo",
-            "MeetingEnded": "Chamada finalizada"
+            "Meeting": "Teleconferência",
+            "MeetingEnded": "Teleconferência encerrada"
         }
     },
     "types": {

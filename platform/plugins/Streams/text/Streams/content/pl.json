@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "zarządzaj swoimi subskrypcjami e-mail",
         "IfUnsubscribe": "Jeśli chcesz zrezygnować z subskrypcji",
         "*": "Wyślij wiadomość {{& message.fields.type}} do {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} powiedział: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} powiedział: {{& message.content}}",
         "Streams\/changed": "Zmiany w {{stream.fields.title}}",
         "Streams\/invite": "Zostałeś zaproszony do {{& stream.fields.title}}",
         "Streams\/announcement": "Ogłoszenie za {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
-        "streamTitle": "{{1}} rozpoczął rozmowę na żywo",
+        "streamTitle": "{{1}} rozpoczął telekonferencję",
         "allow": {
             "dialogTitle": "Złączony",
             "microphoneBtn": "Włącz mikrofon",
@@ -219,7 +219,7 @@
             "codeCopied": "Wyszedłeś z pokoju",
             "sbBeganFbLive": "{{userName}} zaczął transmitować tę rozmowę na Facebooku",
             "sbStoppedFbLive": "{{userName}} przestał nadawać tę rozmowę na Facebooku",
-            "youBeganFbLive": "Rozpocząłeś nadawanie tej rozmowy na Facebooku",
+            "youBeganFbLive": "Rozpocząłeś transmisję tej rozmowy na Facebooku",
             "youStoppedFbLive": "Przestałeś nadawać tę rozmowę na Facebooku",
             "youStartedLive": "Rozpocząłeś transmisję tego połączenia do niestandardowego protokołu RTMP",
             "youStoppedLive": "Zatrzymałeś transmisję tego połączenia do niestandardowego protokołu RTMP",
@@ -227,7 +227,7 @@
             "sbStoppedLiveStreaming": "{{userName}} zakończyło się na żywo",
             "liveStopped": "Wystąpił błąd podczas wysyłania wideo do punktu końcowego",
             "youBeganVideoRecording": "Rozpocząłeś nagrywanie tej konferencji",
-            "youStoppedVideoRecording": "Przestałeś nagrywać tę konferencję",
+            "youStoppedVideoRecording": "Zatrzymałeś nagrywanie tej konferencji",
             "linkCopiedToCb": "Link skopiowany do schowka",
             "codeCopiedToCb": "Kod skopiowany do schowka",
             "userHasNoVideo": "Uczestnik nie ma wideo",
@@ -251,7 +251,7 @@
             "startRecording": "Rozpocznij nagrywanie",
             "stopRecording": "Zatrzymaj nagrywanie",
             "start": "Początek",
-            "stop": "Zatrzymać",
+            "stop": "Zatrzymaj się",
             "recordingInProgress": "Trwa nagrywanie...",
             "fbLiveTitle": "Tytuł transmisji na żywo",
             "fbLiveDescription": "Opisz swoją transmisję na żywo. O czym to jest?",
@@ -267,7 +267,7 @@
             "copy": "Kopiuj",
             "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego protokołu RTMP",
             "startBroadcasting": "Rozpocząć nadawanie",
-            "broadcastingInProgress": "Trwa nadawanie",
+            "broadcastingInProgress": "Trwa transmisja",
             "manageStream": "Zarządzaj transmisją na żywo"
         },
         "audioSettings": {
@@ -296,8 +296,8 @@
             "title": "Ustawienia przesyłania strumieniowego"
         },
         "preview": {
-            "Meeting": "Połączenie na żywo",
-            "MeetingEnded": "Połączenie zakończone"
+            "Meeting": "Konferencja telefoniczna",
+            "MeetingEnded": "Telekonferencja zakończona"
         }
     },
     "types": {

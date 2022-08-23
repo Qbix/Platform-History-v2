@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "stjórna tölvupóstáskriftum þínum",
         "IfUnsubscribe": "Ef þú vilt segja upp áskrift",
         "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sagði: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sagði: {{& message.content}}",
         "Streams\/changed": "Breytingar á {{stream.fields.title}}",
         "Streams\/invite": "Þér var boðið í {{& stream.fields.title}}",
         "Streams\/announcement": "Tilkynning í {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að tengjast þessum straumi.",
-        "streamTitle": "{{1}} hóf símtal í beinni",
+        "streamTitle": "{{1}} hóf símafund",
         "allow": {
             "dialogTitle": "Tengist",
             "microphoneBtn": "Virkja hljóðnema",
@@ -219,9 +219,9 @@
             "codeCopied": "Þú fórst út úr herberginu",
             "sbBeganFbLive": "{{userName}} byrjaði að senda þetta símtal á Facebook",
             "sbStoppedFbLive": "{{userName}} hætti að senda þetta símtal á Facebook",
-            "youBeganFbLive": "Þú byrjaðir að senda þetta símtal á Facebook",
+            "youBeganFbLive": "Þú byrjaðir að senda út þetta símtal á Facebook",
             "youStoppedFbLive": "Þú hættir að senda þetta símtal á Facebook",
-            "youStartedLive": "Þú byrjaðir að senda þetta símtal í sérsniðið RTMP",
+            "youStartedLive": "Þú byrjaðir að senda þetta símtal til sérsniðinnar RTMP",
             "youStoppedLive": "Þú hættir að senda þetta símtal í sérsniðið RTMP",
             "sbStartedLiveStreaming": "{{userName}} byrjaði í beinni",
             "sbStoppedLiveStreaming": "{{userName}} lauk í beinni",
@@ -296,8 +296,8 @@
             "title": "Straumstillingar"
         },
         "preview": {
-            "Meeting": "Lifandi símtal",
-            "MeetingEnded": "Símtali slitið"
+            "Meeting": "Fjarfundur",
+            "MeetingEnded": "Símafundi lokið"
         }
     },
     "types": {

@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Mesazh {{& message.fields.type}} te {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} tha: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} tha: {{& message.content}}",
         "Streams\/changed": "Ndryshimet në {{stream.fields.title}}",
         "Streams\/invite": "Jeni të ftuar në {{& stream.fields.title}}",
         "Streams\/announcement": "Njoftim në {{& stream.fields.title}}",
@@ -154,26 +154,26 @@
             "cameraAndMicrophoneBtn": "Aktivizo kamerën dhe mikrofonin"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "udhëzime",
+            "dialogTitle": "Udhëzimet",
             "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
-            "point1": "Shkoni te &quot;Cilësimet&quot; -&gt; &quot;Të avancuara&quot; -&gt; &quot;Privatësia dhe siguria&quot; -&gt; &quot;Cilësimet e sitit&quot; -&gt; &quot;Kamera&quot; ose &quot;Cilësimet e faqes&quot; -&gt; &quot;Mikrofoni&quot;",
+            "point1": "Shkoni te &quot;Cilësimet&quot; -&gt; &quot;Të avancuara&quot; -&gt; &quot;Privatësia dhe siguria&quot; -&gt; &quot;Cilësimet e sitit&quot; -&gt; &quot;Kamera&quot; ose &quot;Cilësimet e sitit&quot; -&gt; &quot;Mikrofoni&quot;",
             "point2": "Hiq {{hostname}} nga lista &quot;Blloko&quot;."
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "udhëzime",
+            "dialogTitle": "Udhëzimet",
             "permissionDenied": "Leja për {{kind}} u refuzua. Ju lutemi ringarkoni këtë faqe dhe konfirmoni hyrjen në {{kind}} për t&#39;u bashkuar me konferencën."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "udhëzime",
+            "dialogTitle": "Udhëzimet",
             "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
             "point1": "Shkoni te cilësimet tuaja të Android",
             "point2": "Hapni &quot;Aplikacionet dhe njoftimet&quot;",
             "point3": "Gjeni &quot;{{communityName}}&quot; dhe hapeni atë",
-            "point4": "Prekni te Lejet",
+            "point4": "Klikoni te Lejet",
             "point5": "Aktivizo {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "udhëzime",
+            "dialogTitle": "Udhëzimet",
             "permissionDenied": "Leja për {{kind}} u refuzua. Për ta përdorur atë, ndiqni këto hapa:",
             "point1": "Shkoni te cilësimet tuaja iOS",
             "point2": "Hapni &quot;Privatësia&quot;",
@@ -181,7 +181,7 @@
             "point4": "Gjeni &quot;{{communityName}}&quot; dhe aktivizoni"
         },
         "notices": {
-            "youJoinedRoom": "Ju u bashkuat me dhomën",
+            "youJoinedRoom": "Ju u bashkuat në dhomë",
             "joining": "Duke u bashkuar: {{userName}}",
             "sbLeftRoom": "{{userName}} u largua nga dhoma",
             "youLeftRoom": "Dole nga dhoma",
@@ -194,7 +194,7 @@
             "codeCopiedToCb": "Kodi u kopjua në kujtesën e fragmenteve",
             "userHasNoVideo": "Pjesëmarrësi nuk ka video",
             "openInBrowserAlert": "Hapni lidhjen në shfletuesin Safari për t&#39;u bashkuar me konferencën.",
-            "youBeganVideoRecording": "Filluat të regjistroni këtë konferencë",
+            "youBeganVideoRecording": "Ju filluat të regjistroni këtë konferencë",
             "youStoppedVideoRecording": "Ju ndaluat regjistrimin e kësaj konference",
             "switchingRoom": "Dhomë ndërrimi...",
             "forceDisconnecting": "Do të shkëputeni brenda 5 sekondave",
@@ -205,19 +205,19 @@
             "liveStopped": "Ndodhi një gabim gjatë dërgimit të videos në pikën përfundimtare",
             "forceDisconnectingImmediately": "Je shkëputur nga një host",
             "allowedVideoLimit": "Lejohet vetëm {{limit}} video në këtë dhomë",
-            "allowedAudioLimit": "Në këtë dhomë lejohen vetëm {{limit}} mikrofona"
+            "allowedAudioLimit": "Lejohen vetëm {{limit}} mikrofona në këtë dhomë"
         },
         "settingsPopup": {
             "webCamera": "Kamera në internet",
             "screenSharing": "Ndarja e ekranit",
             "shareAnotherScreen": "Ndani një ekran tjetër",
             "turnOffCameras": "Fik kamerën",
-            "startFBLive": "Nisni Facebook Livestream",
+            "startFBLive": "Filloni transmetimin e drejtpërdrejtë të Facebook",
             "stopFBLive": "Ndalo transmetimin e drejtpërdrejtë të Facebook",
             "fbLiveTitle": "Titulli i Livestream",
             "fbLiveDescription": "Përshkruani transmetimin tuaj të drejtpërdrejtë. Për çfarë bëhet fjalë?",
             "fbOnlyMeLiveAccess": "Vetëm unë",
-            "fbFriendsAccess": "miq",
+            "fbFriendsAccess": "Miqtë",
             "fbPublicAccess": "Publike",
             "fbStartLive": "Shko jeto",
             "fbStopLive": "Përfundo transmetimin e drejtpërdrejtë",
@@ -254,17 +254,17 @@
             "turnOffAudio": "Çaktivizo audion",
             "turnOffScreenSharing": "Fshih ndarjen e ekranit",
             "turnOnCamera": "Shfaq video",
-            "turnOnAudio": "Çaktivizo audion",
+            "turnOnAudio": "Hiq zërin e audios",
             "turnOnScreenSharing": "Shfaq ndarjen e ekranit",
             "fullScreen": "Ekran i plotë",
             "dialogTitle": "Cilësimet e pjesëmarrësve"
         },
         "notAllowedToJoinCall": "Nuk ke leje për t&#39;u bashkuar me këtë transmetim.",
-        "streamTitle": "{{1}} filloi një telefonatë drejtpërdrejt",
+        "streamTitle": "{{1}} filloi një telekonferencë",
         "preview": {
             "preamble": "Takimi:",
-            "Meeting": "Thirrje e drejtpërdrejtë",
-            "MeetingEnded": "Telefonata përfundoi"
+            "Meeting": "Telekonferencë",
+            "MeetingEnded": "Përfundoi telekonferenca"
         },
         "preparing": {
             "micIsOff": "Mikrofoni është i fikur",

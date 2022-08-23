@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "xestiona as túas subscricións de correo electrónico",
         "IfUnsubscribe": "Se queres darte de baixa",
         "*": "Mensaxe {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dixo: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dixo: {{& message.content}}",
         "Streams\/changed": "Cambios en {{stream.fields.title}}",
         "Streams\/invite": "Convidáronte a {{& stream.fields.title}}",
         "Streams\/announcement": "Anuncio en {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Non tes permiso para unirte a esta emisión.",
-        "streamTitle": "{{1}} iniciou unha chamada en directo",
+        "streamTitle": "{{1}} iniciou unha teleconferencia",
         "allow": {
             "dialogTitle": "Conectando",
             "microphoneBtn": "Activa o micrófono",
@@ -276,12 +276,12 @@
             "microphone": "Micrófono"
         },
         "participantsPopup": {
-            "dialogTitle": "Configuración dos participantes",
+            "dialogTitle": "Configuración do participante",
             "disconnect": "Desconectar",
             "floatingScreens": "Pantallas flotantes",
             "tiledScreens": "Pantallas de mosaico",
             "loudestExceptMe": "O máis alto excepto eu",
-            "maximizeLoudest": "Maximizar o máis alto",
+            "maximizeLoudest": "Maximiza o máis alto",
             "staticMaximized": "Maximizado estático",
             "fullScreen": "Pantalla completa",
             "manual": "Manual",
@@ -296,8 +296,8 @@
             "title": "Configuración de transmisión"
         },
         "preview": {
-            "Meeting": "Chamada en directo",
-            "MeetingEnded": "A chamada rematou"
+            "Meeting": "Teleconferencia",
+            "MeetingEnded": "Rematou a teleconferencia"
         }
     },
     "types": {

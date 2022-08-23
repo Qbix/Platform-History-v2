@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} aan {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} het gesê: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} het gesê: {{& message.content}}",
         "Streams\/changed": "Veranderinge in {{stream.fields.title}}",
         "Streams\/invite": "Jy is genooi na {{& stream.fields.title}}",
         "Streams\/announcement": "Aankondiging in {{& stream.fields.title}}",
@@ -246,7 +246,7 @@
             "disconnect": "Ontkoppel",
             "floatingScreens": "Swaai skerms",
             "tiledScreens": "Betegelde skerms",
-            "loudestExceptMe": "Hardste Behalwe Ek",
+            "loudestExceptMe": "Die hardste behalwe ek",
             "maximizeLoudest": "Maksimeer die hardste",
             "staticMaximized": "Staties gemaksimeer",
             "manual": "Handleiding",
@@ -260,11 +260,11 @@
             "dialogTitle": "Deelnemer instellings"
         },
         "notAllowedToJoinCall": "Jy het nie toestemming om by hierdie stroom aan te sluit nie.",
-        "streamTitle": "{{1}} het &#39;n regstreekse oproep begin",
+        "streamTitle": "{{1}} het &#39;n Telekonferensie begin",
         "preview": {
             "preamble": "Vergadering:",
-            "Meeting": "Regstreekse oproep",
-            "MeetingEnded": "Oproep beëindig"
+            "Meeting": "Telekonferensie",
+            "MeetingEnded": "Telekonferensie geëindig"
         },
         "preparing": {
             "micIsOff": "Mikrofoon is af",

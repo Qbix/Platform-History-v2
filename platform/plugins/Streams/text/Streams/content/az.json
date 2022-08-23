@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dedi: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dedi: {{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}} dəyişiklikləri",
         "Streams\/invite": "Siz {{& stream.fields.title}} dəvət olundunuz",
         "Streams\/announcement": "{{& stream.fields.title}}-da elan",
@@ -195,11 +195,11 @@
             "userHasNoVideo": "İştirakçının videosu yoxdur",
             "openInBrowserAlert": "Konfransa qoşulmaq üçün Safari brauzerində linki açın.",
             "youBeganVideoRecording": "Siz bu konfransı yazmağa başladınız",
-            "youStoppedVideoRecording": "Siz bu konfransı yazmağı dayandırdınız",
+            "youStoppedVideoRecording": "Bu konfransı yazmağı dayandırdınız",
             "switchingRoom": "Otağın dəyişdirilməsi...",
             "forceDisconnecting": "5 saniyə ərzində əlaqəniz kəsiləcək",
             "youStartedLive": "Siz bu zəngi fərdi RTMP-yə yayımlamağa başladınız",
-            "youStoppedLive": "Bu zəngi fərdi RTMP-yə yayımlamağı dayandırdınız",
+            "youStoppedLive": "Siz bu zəngi fərdi RTMP-yə yayımlamağı dayandırdınız",
             "sbStartedLiveStreaming": "{{userName}} canlı yayıma başladı",
             "sbStoppedLiveStreaming": "{{userName}} canlı yayımı bitirdi",
             "liveStopped": "Videonu son nöqtəyə göndərərkən xəta baş verdi",
@@ -220,7 +220,7 @@
             "fbFriendsAccess": "Dostlar",
             "fbPublicAccess": "İctimai",
             "fbStartLive": "Canlı keçin",
-            "fbStopLive": "Canlı Yayımı bitirin",
+            "fbStopLive": "Canlı Yayımı bitir",
             "fbEmbedCode": "Yerləşdirin",
             "copy": "Kopyalayın",
             "turnOffVideo": "Kamera\/ekran paylaşımını söndürün",
@@ -236,9 +236,9 @@
             "start": "Başlamaq",
             "stop": "Dayan",
             "streamingSettings": "Parametrlər",
-            "streamToRTMP": "Fərdi RTMP-yə yayım",
+            "streamToRTMP": "Fərdi RTMP-yə yayımlayın",
             "dialogTitle": "Video Parametrləri",
-            "startBroadcasting": "Yayımlamağa başlayın",
+            "startBroadcasting": "Yayımlanmağa başlayın",
             "broadcastingInProgress": "Yayım davam edir",
             "manageStream": "Canlı yayımı idarə edin"
         },
@@ -248,23 +248,23 @@
             "tiledScreens": "Kirəmitli Ekranlar",
             "loudestExceptMe": "Məndən başqa ən səsli",
             "maximizeLoudest": "Ən Güclü",
-            "staticMaximized": "Statik Maksimallaşdırılmışdır",
+            "staticMaximized": "Statik Maksimum",
             "manual": "Manual",
             "turnOffCamera": "Videonu gizlədin",
             "turnOffAudio": "Audionu söndürün",
             "turnOffScreenSharing": "Ekran paylaşımını gizlədin",
             "turnOnCamera": "Videonu göstərin",
-            "turnOnAudio": "Audionu söndürün",
+            "turnOnAudio": "Audionun səsini söndürün",
             "turnOnScreenSharing": "Ekran paylaşımını göstərin",
             "fullScreen": "Tam ekran",
             "dialogTitle": "İştirakçı Parametrləri"
         },
         "notAllowedToJoinCall": "Bu yayıma qoşulmaq icazəniz yoxdur.",
-        "streamTitle": "{{1}} canlı zəngə başladı",
+        "streamTitle": "{{1}} Telekonfransa başladı",
         "preview": {
             "preamble": "İclas:",
-            "Meeting": "Canlı Zəng",
-            "MeetingEnded": "Zəng bitdi"
+            "Meeting": "Telekonfrans",
+            "MeetingEnded": "Telekonfrans başa çatıb"
         },
         "preparing": {
             "micIsOff": "Mikrofon söndürülüb",
@@ -277,7 +277,7 @@
         },
         "audioSettings": {
             "dialogTitle": "Audio Parametrlər",
-            "speakers": "Natiqlər",
+            "speakers": "Dinamiklər",
             "microphone": "Mikrofon"
         },
         "streamingSettings": {

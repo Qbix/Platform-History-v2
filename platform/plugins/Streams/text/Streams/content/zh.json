@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "向 {{& stream.fields.title}} 发送消息 {{& message.fields.type}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}说：{{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} 说：{{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}} 的变化",
         "Streams\/invite": "您被邀请到 {{& stream.fields.title}}",
         "Streams\/announcement": "{{& stream.fields.title}} 中的公告",
@@ -260,11 +260,11 @@
             "dialogTitle": "参与者设置"
         },
         "notAllowedToJoinCall": "您无权加入此信息流。",
-        "streamTitle": "{{1}} 发起了实时通话",
+        "streamTitle": "{{1}} 开始电话会议",
         "preview": {
             "preamble": "会议：",
-            "Meeting": "实时通话",
-            "MeetingEnded": "通话结束"
+            "Meeting": "电话会议",
+            "MeetingEnded": "电话会议结束"
         },
         "preparing": {
             "micIsOff": "麦克风已关闭",

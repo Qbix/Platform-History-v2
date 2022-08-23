@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "gestionați-vă abonamentele de e-mail",
         "IfUnsubscribe": "Dacă doriți să vă dezabonați",
         "*": "Mesaj {{& message.fields.type}} către {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} a spus: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a spus: {{& message.content}}",
         "Streams\/changed": "Modificări în {{stream.fields.title}}",
         "Streams\/invite": "Ai fost invitat la {{& stream.fields.title}}",
         "Streams\/announcement": "Anunț în {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Nu aveți permisiunea de a vă alătura acestui flux.",
-        "streamTitle": "{{1}} a început un apel live",
+        "streamTitle": "{{1}} a început o teleconferință",
         "allow": {
             "dialogTitle": "Conectare",
             "microphoneBtn": "Activați microfonul",
@@ -183,17 +183,17 @@
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiune pentru {{kind}} refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
+            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
             "point1": "Accesați „Setări” -&gt; „Avansat” -&gt; „Confidențialitate și securitate” -&gt; „Setări site” -&gt; „Cameră” sau „Setări site” -&gt; „Microfon”",
             "point2": "Eliminați {{hostname}} din lista „Blocați”."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiune pentru {{kind}} refuzată. Vă rugăm să reîncărcați această pagină și să confirmați accesul la {{kind}} pentru a vă alătura conferinței."
+            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Vă rugăm să reîncărcați această pagină și să confirmați accesul la {{kind}} pentru a vă alătura conferinței."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiune pentru {{kind}} refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
+            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
             "point1": "Accesați Setările Android",
             "point2": "Deschideți „Aplicații și notificări”",
             "point3": "Găsiți „{{communityName}}” și deschideți-l",
@@ -202,7 +202,7 @@
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Instrucțiuni",
-            "permissionDenied": "Permisiune pentru {{kind}} refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
+            "permissionDenied": "Permisiunea pentru {{kind}} a fost refuzată. Pentru a-l folosi vă rugăm să urmați acești pași:",
             "point1": "Accesați Setările iOS",
             "point2": "Deschideți „Confidențialitate”",
             "point3": "Găsiți {{kind}} și deschideți-l",
@@ -222,10 +222,10 @@
             "youBeganFbLive": "Ați început să difuzați acest apel pe Facebook",
             "youStoppedFbLive": "Ai încetat să mai difuzezi acest apel pe Facebook",
             "youStartedLive": "Ați început să difuzați acest apel către RTMP personalizat",
-            "youStoppedLive": "Ați oprit difuzarea acestui apel către RTMP personalizat",
+            "youStoppedLive": "Ați oprit difuzarea acestui apel la RTMP personalizat",
             "sbStartedLiveStreaming": "{{userName}} a început live",
-            "sbStoppedLiveStreaming": "{{userName}} sa încheiat live",
-            "liveStopped": "A apărut o eroare la trimiterea videoclipului către punctul final",
+            "sbStoppedLiveStreaming": "{{userName}} sa încheiat în direct",
+            "liveStopped": "A apărut o eroare la trimiterea videoclipului la punctul final",
             "youBeganVideoRecording": "Ați început să înregistrați această conferință",
             "youStoppedVideoRecording": "Ai oprit înregistrarea acestei conferințe",
             "linkCopiedToCb": "Link copiat în clipboard",
@@ -248,12 +248,12 @@
             "micIsTurnedOff": "Microfonul este oprit",
             "startFBLive": "Porniți Facebook Livestream",
             "stopFBLive": "Opriți fluxul live Facebook",
-            "startRecording": "Începe să înregistrezi",
+            "startRecording": "Începe înregistrarea",
             "stopRecording": "Opriți înregistrarea",
             "start": "start",
             "stop": "Stop",
             "recordingInProgress": "Înregistrarea este în curs...",
-            "fbLiveTitle": "Titlul livestreamului",
+            "fbLiveTitle": "Titlul streamului live",
             "fbLiveDescription": "Descrieți fluxul dvs. live. Despre ce e vorba?",
             "fbOnlyMeLiveAccess": "Doar eu",
             "fbFriendsAccess": "Prieteni",
@@ -288,7 +288,7 @@
             "turnOffCamera": "Ascunde videoclipul",
             "turnOffAudio": "Dezactivați sunetul",
             "turnOffScreenSharing": "Ascunde partajarea ecranului",
-            "turnOnCamera": "Afișați videoclipul",
+            "turnOnCamera": "Afișează videoclipul",
             "turnOnAudio": "Activați sunetul",
             "turnOnScreenSharing": "Afișează partajarea ecranului"
         },
@@ -296,8 +296,8 @@
             "title": "Setări de streaming"
         },
         "preview": {
-            "Meeting": "Apel live",
-            "MeetingEnded": "Apel terminat"
+            "Meeting": "Teleconferinta",
+            "MeetingEnded": "Teleconferința s-a încheiat"
         }
     },
     "types": {

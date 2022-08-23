@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Besked {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sagde: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sagde: {{& message.content}}",
         "Streams\/changed": "Ændringer i {{stream.fields.title}}",
         "Streams\/invite": "Du blev inviteret til {{& stream.fields.title}}",
         "Streams\/announcement": "Annoncering i {{& stream.fields.title}}",
@@ -251,7 +251,7 @@
             "staticMaximized": "Statisk maksimeret",
             "manual": "brugervejledning",
             "turnOffCamera": "Skjul video",
-            "turnOffAudio": "Slå lyden fra",
+            "turnOffAudio": "Slå lyd fra",
             "turnOffScreenSharing": "Skjul skærmdeling",
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Slå lyden til",
@@ -260,11 +260,11 @@
             "dialogTitle": "Deltagerindstillinger"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
-        "streamTitle": "{{1}} startede et liveopkald",
+        "streamTitle": "{{1}} startede en telekonference",
         "preview": {
             "preamble": "Møde:",
-            "Meeting": "Live opkald",
-            "MeetingEnded": "Opkaldet afsluttet"
+            "Meeting": "Telekonference",
+            "MeetingEnded": "Telekonference afsluttet"
         },
         "preparing": {
             "micIsOff": "Mikrofonen er slukket",

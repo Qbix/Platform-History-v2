@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "أرسل {{& message.fields.type}} إلى {{& stream.fields.title}}",
-        "Streams\/chat\/message": "قال {{&call 'avatar.displayName'}}: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} قال: {{& message.content}}",
         "Streams\/changed": "التغييرات في {{stream.fields.title}}",
         "Streams\/invite": "لقد تمت دعوتك إلى {{& stream.fields.title}}",
         "Streams\/announcement": "إعلان في {{& stream.fields.title}}",
@@ -188,7 +188,7 @@
             "codeCopied": "لقد غادرت الغرفة",
             "sbBeganFbLive": "بدأ {{userName}} بث هذه المكالمة في Facebook",
             "sbStoppedFbLive": "توقف {{userName}} عن بث هذه المكالمة في Facebook",
-            "youBeganFbLive": "لقد بدأت في بث هذه المكالمة على Facebook",
+            "youBeganFbLive": "لقد بدأت ببث هذه المكالمة على Facebook",
             "youStoppedFbLive": "لقد توقفت عن بث هذه المكالمة في Facebook",
             "linkCopiedToCb": "تم نسخ الرابط إلى الحافظة",
             "codeCopiedToCb": "تم نسخ الرمز إلى الحافظة",
@@ -201,7 +201,7 @@
             "youStartedLive": "لقد بدأت في بث هذه المكالمة إلى RTMP المخصص",
             "youStoppedLive": "لقد توقفت عن بث هذه المكالمة إلى RTMP المخصص",
             "sbStartedLiveStreaming": "{{userName}} بدأ البث المباشر",
-            "sbStoppedLiveStreaming": "انتهى البث المباشر {{userName}}",
+            "sbStoppedLiveStreaming": "انتهى {{userName}} مباشرة",
             "liveStopped": "حدث خطأ أثناء إرسال الفيديو إلى نقطة النهاية",
             "forceDisconnectingImmediately": "تم قطع اتصالك من قبل مضيف",
             "allowedVideoLimit": "يُسمح فقط بـ {{limit}} مقطع فيديو في هذه الغرفة",
@@ -233,10 +233,10 @@
             "publishToGroup": "انشر في المجموعة",
             "turnOffAudioInput": "كتم صوت الميكروفون",
             "micIsTurnedOff": "تم إيقاف تشغيل الميكروفون",
-            "start": "يبدأ",
+            "start": "بداية",
             "stop": "قف",
             "streamingSettings": "إعدادات",
-            "streamToRTMP": "دفق إلى RTMP المخصص",
+            "streamToRTMP": "دفق إلى RTMP مخصص",
             "dialogTitle": "اعدادات الفيديو",
             "startBroadcasting": "بدء البث",
             "broadcastingInProgress": "البث قيد التقدم",
@@ -245,11 +245,11 @@
         "participantsPopup": {
             "disconnect": "قطع الاتصال",
             "floatingScreens": "الشاشات العائمة",
-            "tiledScreens": "شاشات القرميد",
-            "loudestExceptMe": "بصوت عالٍ ما عدا أنا",
+            "tiledScreens": "شاشات مبلطة",
+            "loudestExceptMe": "بأعلى صوت ما عدا أنا",
             "maximizeLoudest": "تعظيم بصوت عال",
             "staticMaximized": "تكبير ثابت",
-            "manual": "كتيب",
+            "manual": "يدوي",
             "turnOffCamera": "إخفاء الفيديو",
             "turnOffAudio": "كتم الصوت",
             "turnOffScreenSharing": "إخفاء مشاركة الشاشة",
@@ -257,14 +257,14 @@
             "turnOnAudio": "إعادة الصوت",
             "turnOnScreenSharing": "عرض مشاركة الشاشة",
             "fullScreen": "شاشة كاملة",
-            "dialogTitle": "إعدادات المشتركين"
+            "dialogTitle": "إعدادات المشاركين"
         },
         "notAllowedToJoinCall": "ليس لديك إذن للانضمام إلى هذا التدفق.",
-        "streamTitle": "بدأ {{1}} مكالمة مباشرة",
+        "streamTitle": "بدأ {{1}} مؤتمرًا عبر الهاتف",
         "preview": {
             "preamble": "لقاء:",
-            "Meeting": "مكالمة مباشرة",
-            "MeetingEnded": "المكالمة انتهت"
+            "Meeting": "مؤتمر عبر الهاتف",
+            "MeetingEnded": "انتهى المؤتمر الهاتفي"
         },
         "preparing": {
             "micIsOff": "الميكروفون متوقف",

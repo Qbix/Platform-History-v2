@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Zpráva {{& message.fields.type}} uživateli {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} řekl: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} řekl: {{& message.content}}",
         "Streams\/changed": "Změny v {{stream.fields.title}}",
         "Streams\/invite": "Byli jste pozváni do {{& stream.fields.title}}",
         "Streams\/announcement": "Oznámení v {{& stream.fields.title}}",
@@ -156,7 +156,7 @@
         "webInstructionsDialog": {
             "dialogTitle": "Instrukce",
             "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
-            "point1": "Přejděte na „Nastavení“ -&gt; „Pokročilé“ -&gt; „Ochrana osobních údajů a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
+            "point1": "Přejděte na „Nastavení“ -&gt; „Pokročilé“ -&gt; „Ochrana soukromí a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
             "point2": "Odebrat {{hostname}} ze seznamu „Blokovat“."
         },
         "webIosInstructionsDialog": {
@@ -176,7 +176,7 @@
             "dialogTitle": "Instrukce",
             "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
             "point1": "Přejděte do Nastavení iOS",
-            "point2": "Otevřete &quot;Ochrana osobních údajů&quot;",
+            "point2": "Otevřete &quot;Soukromí&quot;",
             "point3": "Najděte {{kind}} a otevřete jej",
             "point4": "Najděte „{{communityName}}“ a povolte"
         },
@@ -191,7 +191,7 @@
             "youBeganFbLive": "Tuto výzvu jste začali vysílat na Facebooku",
             "youStoppedFbLive": "Přestali jste tento hovor vysílat na Facebooku",
             "linkCopiedToCb": "Odkaz zkopírován do schránky",
-            "codeCopiedToCb": "Kód zkopírován do schránky",
+            "codeCopiedToCb": "Kód byl zkopírován do schránky",
             "userHasNoVideo": "Účastník nemá žádné video",
             "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci.",
             "youBeganVideoRecording": "Začal jste nahrávat tuto konferenci",
@@ -260,11 +260,11 @@
             "dialogTitle": "Nastavení účastníka"
         },
         "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto streamu.",
-        "streamTitle": "{{1}} zahájil(a) živý hovor",
+        "streamTitle": "{{1}} zahájil(a) telekonferenci",
         "preview": {
             "preamble": "Setkání:",
-            "Meeting": "Živý hovor",
-            "MeetingEnded": "Hovor byl ukončen"
+            "Meeting": "Telekonference",
+            "MeetingEnded": "Telekonference skončila"
         },
         "preparing": {
             "micIsOff": "Mikrofon je vypnutý",

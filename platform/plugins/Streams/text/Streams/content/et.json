@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "hallata oma e-posti tellimusi",
         "IfUnsubscribe": "Kui soovite tellimusest loobuda",
         "*": "Sõnum {{& message.fields.type}} numbrile {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ütles: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ütles: {{& message.content}}",
         "Streams\/changed": "Muudatused {{stream.fields.title}}",
         "Streams\/invite": "Teid kutsuti {{& stream.fields.title}}",
         "Streams\/announcement": "Teadaanne: {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Teil pole selle vooga liitumiseks luba.",
-        "streamTitle": "{{1}} alustas otsekõnet",
+        "streamTitle": "{{1}} alustas telekonverentsi",
         "allow": {
             "dialogTitle": "Ühendamine",
             "microphoneBtn": "Mikrofoni lubamine",
@@ -217,7 +217,7 @@
             "forceDisconnectingImmediately": "Host katkestas teie ühenduse",
             "youLeftRoom": "Sa lahkusid toast",
             "codeCopied": "Sa lahkusid toast",
-            "sbBeganFbLive": "{{userName}} alustas selle kõne edastamist Facebookis",
+            "sbBeganFbLive": "{{userName}} hakkas seda kõnet Facebookis edastama",
             "sbStoppedFbLive": "{{userName}} lõpetas selle kõne edastamise Facebookis",
             "youBeganFbLive": "Hakkasite seda kõnet Facebookis edastama",
             "youStoppedFbLive": "Lõpetasite selle kõne edastamise Facebookis",
@@ -258,7 +258,7 @@
             "fbOnlyMeLiveAccess": "Ainult mina",
             "fbFriendsAccess": "Sõbrad",
             "fbPublicAccess": "Avalik",
-            "publishOnTimeline": "Avalda ajateljel",
+            "publishOnTimeline": "Avalda ajajoonel",
             "publishToGroup": "Avalda rühmas",
             "fbStartLive": "Minge otseülekandesse",
             "fbStopLive": "Lõpeta otseülekanne",
@@ -296,8 +296,8 @@
             "title": "Voogesituse seaded"
         },
         "preview": {
-            "Meeting": "Otsekõne",
-            "MeetingEnded": "Kõne lõppes"
+            "Meeting": "Telekonverents",
+            "MeetingEnded": "Telekonverents lõppes"
         }
     },
     "types": {

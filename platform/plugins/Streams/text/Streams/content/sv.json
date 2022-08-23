@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "hantera dina e-postprenumerationer",
         "IfUnsubscribe": "Om du vill avsluta prenumerationen",
         "*": "Meddelande {{& message.fields.type}} till {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sa: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sa: {{& message.content}}",
         "Streams\/changed": "Ändringar i {{stream.fields.title}}",
         "Streams\/invite": "Du blev inbjuden till {{& stream.fields.title}}",
         "Streams\/announcement": "Tillkännagivande i {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Du har inte behörighet att gå med i denna stream.",
-        "streamTitle": "{{1}} startade ett livesamtal",
+        "streamTitle": "{{1}} startade en telefonkonferens",
         "allow": {
             "dialogTitle": "Ansluter",
             "microphoneBtn": "Aktivera mikrofon",
@@ -185,11 +185,11 @@
             "dialogTitle": "Instruktioner",
             "permissionDenied": "Tillstånd för {{kind}} nekades. Följ dessa steg för att använda den:",
             "point1": "Gå till &quot;Inställningar&quot; -&gt; &quot;Avancerat&quot; -&gt; &quot;Sekretess och säkerhet&quot; -&gt; &quot;Webbplatsinställningar&quot; -&gt; &quot;Kamera&quot; eller &quot;Webbplatsinställningar&quot; -&gt; &quot;Mikrofon&quot;",
-            "point2": "Ta bort {{hostname}} från &quot;Blockera&quot;-listan"
+            "point2": "Ta bort {{hostname}} från listan &quot;Blockera&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Instruktioner",
-            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomst till {{kind}} för att gå med i konferensen."
+            "permissionDenied": "Tillstånd för {{kind}} nekades. Ladda om den här sidan och bekräfta åtkomsten till {{kind}} för att gå med i konferensen."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Instruktioner",
@@ -221,7 +221,7 @@
             "sbStoppedFbLive": "{{userName}} slutade sända det här samtalet på Facebook",
             "youBeganFbLive": "Du började sända det här samtalet på Facebook",
             "youStoppedFbLive": "Du slutade sända det här samtalet på Facebook",
-            "youStartedLive": "Du började sända det här samtalet till anpassad RTMP",
+            "youStartedLive": "Du började sända detta samtal till anpassad RTMP",
             "youStoppedLive": "Du slutade sända det här samtalet till anpassad RTMP",
             "sbStartedLiveStreaming": "{{userName}} började live",
             "sbStoppedLiveStreaming": "{{userName}} slutade live",
@@ -248,7 +248,7 @@
             "micIsTurnedOff": "Mikrofonen är avstängd",
             "startFBLive": "Starta Facebook Livestream",
             "stopFBLive": "Stoppa Facebook Livestream",
-            "startRecording": "Börja spela in",
+            "startRecording": "Börja filma",
             "stopRecording": "Stoppa inspelning",
             "start": "Start",
             "stop": "Sluta",
@@ -296,8 +296,8 @@
             "title": "Streaminginställningar"
         },
         "preview": {
-            "Meeting": "Live Call",
-            "MeetingEnded": "Samtalet avslutades"
+            "Meeting": "Telefonkonferens",
+            "MeetingEnded": "Telefonkonferensen avslutades"
         }
     },
     "types": {
@@ -415,7 +415,7 @@
             "description": "en konversation mellan användare, med historik"
         },
         "Streams\/webrtc": {
-            "displayType": "Live Call",
+            "displayType": "Meeting",
             "description": "ett video-\/ljudsamtal i realtid"
         },
         "Streams\/question": {

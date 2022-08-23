@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "administrar sus suscripciones de correo electrónico",
         "IfUnsubscribe": "Si quieres darte de baja",
         "*": "Mensaje {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dijo: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dijo: {{& message.content}}",
         "Streams\/changed": "Cambios en {{stream.fields.title}}",
         "Streams\/invite": "Fuiste invitado a {{& stream.fields.title}}",
         "Streams\/announcement": "Anuncio en {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "No tienes permiso para unirte a esta transmisión.",
-        "streamTitle": "{{1}} comenzó una llamada en vivo",
+        "streamTitle": "{{1}} comenzó una teleconferencia",
         "allow": {
             "dialogTitle": "Conectando",
             "microphoneBtn": "Habilitar micrófono",
@@ -228,7 +228,7 @@
             "liveStopped": "Se produjo un error al enviar el video al punto final",
             "youBeganVideoRecording": "Comenzaste a grabar esta conferencia.",
             "youStoppedVideoRecording": "Dejaste de grabar esta conferencia",
-            "linkCopiedToCb": "Enlace copiado al portapapeles",
+            "linkCopiedToCb": "link copiado al portapapeles",
             "codeCopiedToCb": "Código copiado al portapapeles",
             "userHasNoVideo": "El participante no tiene video.",
             "openInBrowserAlert": "Abra el enlace en el navegador Safari para unirse a la conferencia.",
@@ -248,14 +248,14 @@
             "micIsTurnedOff": "El micrófono está apagado",
             "startFBLive": "Iniciar transmisión en vivo de Facebook",
             "stopFBLive": "Detener la transmisión en vivo de Facebook",
-            "startRecording": "Iniciar la grabación",
+            "startRecording": "Empezar a grabar",
             "stopRecording": "Para de grabar",
-            "start": "Comienzo",
-            "stop": "Detener",
+            "start": "comienzo",
+            "stop": "Deténgase",
             "recordingInProgress": "La grabación está en curso...",
             "fbLiveTitle": "Título de la transmisión en vivo",
             "fbLiveDescription": "Describa su transmisión en vivo. ¿De qué se trata?",
-            "fbOnlyMeLiveAccess": "Sólo yo",
+            "fbOnlyMeLiveAccess": "Solo yo",
             "fbFriendsAccess": "Amigos",
             "fbPublicAccess": "Público",
             "publishOnTimeline": "Publicar en la línea de tiempo",
@@ -264,7 +264,7 @@
             "fbStopLive": "Finalizar transmisión en vivo",
             "streamingSettings": "Ajustes",
             "fbEmbedCode": "Empotrar",
-            "copy": "Dupdo",
+            "copy": "Copiar",
             "streamToRTMP": "Transmitir a RTMP personalizado",
             "startBroadcasting": "Comenzar a emitir",
             "broadcastingInProgress": "La transmisión está en progreso",
@@ -281,7 +281,7 @@
             "floatingScreens": "Pantallas flotantes",
             "tiledScreens": "Pantallas en mosaico",
             "loudestExceptMe": "Más fuerte excepto yo",
-            "maximizeLoudest": "Maximizar más alto",
+            "maximizeLoudest": "Maximizar más fuerte",
             "staticMaximized": "estático maximizado",
             "fullScreen": "Pantalla completa",
             "manual": "Manual",
@@ -296,8 +296,8 @@
             "title": "Configuración de transmisión"
         },
         "preview": {
-            "Meeting": "Llamada en vivo",
-            "MeetingEnded": "Llamada terminada"
+            "Meeting": "Teleconferencia",
+            "MeetingEnded": "Teleconferencia finalizada"
         }
     },
     "types": {

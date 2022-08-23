@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "bainistigh do shíntiúis ríomhphoist",
         "IfUnsubscribe": "Más mian leat díliostáil",
         "*": "Seol teachtaireacht chuig {{& message.fields.type}} chuig {{& stream.fields.title}}",
-        "Streams\/chat\/message": "Dúirt {{&call 'avatar.displayName'}}: {{& message.content}}",
+        "Streams\/chat\/message": "💬 dúirt {{&call 'avatar.displayName'}}: {{& message.content}}",
         "Streams\/changed": "Athruithe i {{stream.fields.title}}",
         "Streams\/invite": "Tugadh cuireadh duit chuig {{& stream.fields.title}}",
         "Streams\/announcement": "Fógra i {{& stream.fields.title}}",
@@ -164,8 +164,8 @@
         "Streams": "Sruthanna"
     },
     "webrtc": {
-        "notAllowedToJoinCall": "Níl cead agat dul isteach sa sruth seo.",
-        "streamTitle": "Chuir {{1}} tús le glao beo",
+        "notAllowedToJoinCall": "Níl cead agat páirt a ghlacadh sa sruth seo.",
+        "streamTitle": "Chuir {{1}} tús le Teilechomhdháil",
         "allow": {
             "dialogTitle": "Ag nascadh",
             "microphoneBtn": "Cumasaigh Micreafón",
@@ -243,7 +243,7 @@
             "turnOffCameras": "Múch an ceamara",
             "turnOffVideo": "Cas as comhroinnt ceamara\/scáileáin",
             "turnOffAudioInput": "Balbhaigh micreafón",
-            "turnOffScreenSharing": "Múch an comhroinnt scáileáin",
+            "turnOffScreenSharing": "Múch comhroinnt scáileáin",
             "cameraIsTurnedOff": "Tá an ceamara múchta",
             "micIsTurnedOff": "Tá an micreafón múchta",
             "startFBLive": "Tosaigh Facebook Livestream",
@@ -264,7 +264,7 @@
             "fbStopLive": "Cuir deireadh le sruth beo",
             "streamingSettings": "Socruithe",
             "fbEmbedCode": "Leabú",
-            "copy": "Cóipeáil",
+            "copy": "Cóip",
             "streamToRTMP": "Sruth go RTMP saincheaptha",
             "startBroadcasting": "Tosaigh ag craoladh",
             "broadcastingInProgress": "Tá an craoladh ar siúl",
@@ -296,8 +296,8 @@
             "title": "Socruithe Sruthaithe"
         },
         "preview": {
-            "Meeting": "Glao Beo",
-            "MeetingEnded": "Cuireadh deireadh leis an nglao"
+            "Meeting": "Teileachomhdháil",
+            "MeetingEnded": "Tháinig deireadh le teileachomhdháil"
         }
     },
     "types": {
