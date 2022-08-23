@@ -2184,25 +2184,6 @@ Streams.related.options = {
 Streams.related.onError = new Q.Event();
 
 /**
- * Detect whether stream retained
- * @static
- * @method retainedByKey
- * @param {String} publisherId
- * @param {String} streamName
- * @return {Boolean} Whether stream retained (true) or not (false)
- */
-Streams.retainedByKey = function (publisherId, streamName) {
-	var ps = Streams.key(publisherId, streamName);
-	for (var i in _retainedByKey) {
-		if (Q.getObject([ps], _retainedByKey[i]) === true) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-/**
  * @class Streams.Stream
  */
 
@@ -3474,15 +3455,6 @@ Sp.invite = function (options, callback) {
  */
 Sp.refresh = function _Stream_prototype_refresh (callback, options) {
 	return Stream.refresh(this.fields.publisherId, this.fields.name, callback, options);
-};
-
-/**
- * Whether stream retained
- * @method retainedByKey
- * @return {Boolean}
- */
-Sp.retainedByKey = function () {
-	return Streams.retainedByKey(this.fields.publisherId, this.fields.name);
 };
 
 /**
@@ -5397,7 +5369,8 @@ Streams.showNoticeIfSubscribed = function (options) {
 		}
 
 		// if stream retained - don't show notice
-		if (this.retainedByKey()) {
+		var ps = Streams.key(publisherId, streamName);
+		if (_retainedByStream[ps]) {
 			return;
 		}
 
