@@ -296,8 +296,8 @@
             "title": "Streaming Settings"
         },
         "preview": {
-            "Meeting": "Live Call",
-            "MeetingEnded": "Call ended"
+            "Meeting": "Meeting",
+            "MeetingEnded": "Meeting ended"
         }
     },
     "types": {

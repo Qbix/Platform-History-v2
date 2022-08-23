@@ -55,14 +55,14 @@
                 // retain with stream
                 Q.Streams.retainWith(tool).get(stream.fields.publisherId, stream.fields.name);
 
-                var preamble = Q.getObject('webtc.preview.Meeting', tool.text) || 'Meeting';
+                var preamble = Q.getObject('webrtc.preview.Meeting', tool.text) || 'Meeting';
                 var duration = "";
                 if (stream.getAttribute("endTime")) {
                     var durationArr = Q.displayDuration(parseInt(stream.getAttribute("endTime")) - parseInt(stream.getAttribute("startTime"))).split(":");
                     for (var i=durationArr.length-1; i>=0; i--) {
                         duration = durationArr[i] + " " + (["sec", "min", "h"][durationArr.length - (i + 1)]) + " " + duration;
                     }
-                    preamble = Q.getObject('webtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
+                    preamble = Q.getObject('webrtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
                 }
 
                 var fields = Q.extend({}, state.templates.view.fields, {
