@@ -460,7 +460,7 @@ Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
 Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
 
 /**
- * Returns Q.Event that occurs when a stream is retained
+ * Returns Q.Event that occurs when a stream is first retained by the client
  * @event onRetain
  * @param {String} type type of the stream being retained on the client side
  * @return {Q.Event}
@@ -468,7 +468,7 @@ Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
  Streams.onRetain = Q.Event.factory(_refreshHandlers, [""]);
 
  /**
- * Returns Q.Event that occurs when a stream is released
+ * Returns Q.Event that occurs when a stream is finally released on the client
  * @event onRelease
  * @param {String} type type of the stream being released on the client side
  * @return {Q.Event}
@@ -1577,12 +1577,18 @@ Streams.release = function (key) {
 			if (!_retainedByStream[ps]) {
 				continue;
 			}
+			var parts = ps.split("\t");
 			delete _retainedByStream[ps][key];
 			if (Q.isEmpty(_retainedByStream[ps])) {
 				delete(_retainedByStream[ps]);
 				delete(_retainedStreams[ps]);
+				var stream = _retainedStreams[ps];
+				Q.handle([
+					Stream.onRelease.ifAny(parts[0], ""),
+					Stream.onRelease.ifAny(parts[0], parts[1]),
+					Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
+				], stream, [key]);
 			}
-			var parts = ps.split("\t");
 			var nodeUrl = Q.nodeUrl({
 				publisherId: parts[0],
 				streamName: parts[1]
@@ -1594,12 +1600,6 @@ Streams.release = function (key) {
 				var socket = Users.Socket.get(nodeUrl);
 				socket && socket.disconnect();
 			}
-			var stream = _retainedStreams[ps];
-			Q.handle([
-				Stream.onRelease.ifAny(parts[0], ""),
-				Stream.onRelease.ifAny(parts[0], parts[1]),
-				Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
-			], stream, [key]);
 		}
 	}
 	delete _retainedByKey[key];
@@ -2922,6 +2922,7 @@ Sp.retain = function _Stream_prototype_retain (key) {
 	var streamName = this.fields.name;
 	var ps = Streams.key(publisherId, streamName);
 	key = Q.calculateKey(key);
+	var wasRetained = !!_retainedStreams[ps];
 	_retainedStreams[ps] = this;
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
@@ -2935,11 +2936,13 @@ Sp.retain = function _Stream_prototype_retain (key) {
 	}
 	Q.setObject([ps, key], true, _retainedByStream);
 	Q.setObject([key, ps], true, _retainedByKey);
-	Q.handle([
-		Stream.onRetain.ifAny(publisherId, ""),
-		Stream.onRetain.ifAny(publisherId, streamName),
-		Streams.onRetain.ifAny(Q.getObject('fields.type', this))
-	], this, [key]);
+	if (!wasRetained) {
+		Q.handle([
+			Stream.onRetain.ifAny(publisherId, ""),
+			Stream.onRetain.ifAny(publisherId, streamName),
+			Streams.onRetain.ifAny(Q.getObject('fields.type', this))
+		], this, [key]);
+	}
 	return this;
 };
 
@@ -3154,7 +3157,7 @@ Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
 Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
 
 /**
- * Returns Q.Event that you can use to react to when a stream is retained
+ * Returns Q.Event that occurs when a stream is first retained by the client
  * @event onRetain
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which is being retained
@@ -3163,7 +3166,7 @@ Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
  Stream.onRetain = Q.Event.factory(_streamRetainHandlers, ["", ""]);
 
  /**
- * Returns Q.Event that you can use to react to when a stream is retained
+ * Returns Q.Event that occurs when a stream is finally released by the client
  * @event onRelease
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which is being retained
