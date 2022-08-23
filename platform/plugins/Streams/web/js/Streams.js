@@ -368,6 +368,8 @@ var _streamUpdatedRelateFromHandlers = {};
 var _streamUpdatedRelateToHandlers = {};
 var _streamConstructHandlers = {};
 var _streamRefreshHandlers = {};
+var _streamRetainHandlers = {};
+var _streamReleaseHandlers = {};
 var _retain = undefined;
 var _retainedByKey = {};
 var _retainedByStream = {};
@@ -456,6 +458,22 @@ Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
  * @return {Q.Event}
  */
 Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
+
+/**
+ * Returns Q.Event that occurs when a stream is retained
+ * @event onRetain
+ * @param {String} type type of the stream being retained on the client side
+ * @return {Q.Event}
+ */
+ Streams.onRetain = Q.Event.factory(_refreshHandlers, [""]);
+
+ /**
+ * Returns Q.Event that occurs when a stream is released
+ * @event onRelease
+ * @param {String} type type of the stream being released on the client side
+ * @return {Q.Event}
+ */
+Streams.onRelease = Q.Event.factory(_refreshHandlers, [""]);
 
 /**
  * Returns Q.Event that occurs when an avatar has been returned, possibly
@@ -1559,10 +1577,6 @@ Streams.release = function (key) {
 			if (!_retainedByStream[ps]) {
 				continue;
 			}
-			Q.handle(Streams.onRelease.ifAny(key, ps))
-			Streams.onRelease(key, ps).function () {
-				_retainedStreams
-			});
 			delete _retainedByStream[ps][key];
 			if (Q.isEmpty(_retainedByStream[ps])) {
 				delete(_retainedByStream[ps]);
@@ -1580,6 +1594,12 @@ Streams.release = function (key) {
 				var socket = Users.Socket.get(nodeUrl);
 				socket && socket.disconnect();
 			}
+			var stream = _retainedStreams[ps];
+			Q.handle([
+				Stream.onRelease.ifAny(parts[0], ""),
+				Stream.onRelease.ifAny(parts[0], parts[1]),
+				Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
+			], stream, [key]);
 		}
 	}
 	delete _retainedByKey[key];
@@ -2915,6 +2935,11 @@ Sp.retain = function _Stream_prototype_retain (key) {
 	}
 	Q.setObject([ps, key], true, _retainedByStream);
 	Q.setObject([key, ps], true, _retainedByKey);
+	Q.handle([
+		Stream.onRetain.ifAny(publisherId, ""),
+		Stream.onRetain.ifAny(publisherId, streamName),
+		Streams.onRetain.ifAny(Q.getObject('fields.type', this))
+	], this, [key]);
 	return this;
 };
 
@@ -3121,12 +3146,30 @@ Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
  * If you are already handling the Streams.Stream.onFieldChanged
  * and Streams.Stream.onAttribute events, however, then you don't need to
  * also add a handler to this event, because they are called during the refresh anyway.
- * @event onConstruct
+ * @event onRefresh
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which is being refreshed
  * @return {Q.Event}
  */
 Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event that you can use to react to when a stream is retained
+ * @event onRetain
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being retained
+ * @return {Q.Event}
+ */
+ Stream.onRetain = Q.Event.factory(_streamRetainHandlers, ["", ""]);
+
+ /**
+ * Returns Q.Event that you can use to react to when a stream is retained
+ * @event onRelease
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being retained
+ * @return {Q.Event}
+ */
+Stream.onRelease = Q.Event.factory(_streamReleaseHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
