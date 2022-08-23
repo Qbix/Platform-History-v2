@@ -1559,6 +1559,10 @@ Streams.release = function (key) {
 			if (!_retainedByStream[ps]) {
 				continue;
 			}
+			Q.handle(Streams.onRelease.ifAny(key, ps))
+			Streams.onRelease(key, ps).function () {
+				_retainedStreams
+			});
 			delete _retainedByStream[ps][key];
 			if (Q.isEmpty(_retainedByStream[ps])) {
 				delete(_retainedByStream[ps]);
@@ -5370,7 +5374,7 @@ Streams.showNoticeIfSubscribed = function (options) {
 
 		// if stream retained - don't show notice
 		var ps = Streams.key(publisherId, streamName);
-		if (_retainedByStream[ps]) {
+		if (_retainedStreams[ps]) {
 			return;
 		}
 

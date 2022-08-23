@@ -3035,36 +3035,43 @@ Q.Event.factory = function (collection, defaults, callback, removeOnEmpty) {
 			}
 		}
 	}
+	var _args;
 	var _Q_Event_factory = function _Q_Event_factory_function() {
-		var args = Array.prototype.slice.call(arguments, 0);
-		var len = defaults.length;
-		var f = (typeof(defaults[len-1]) === 'function')
-			? defaults[defaults.length-1] : null;
-		if (f) --len;
-		for (var i=args.length; i<len; ++i) {
-			args[i] = defaults[i];
+		var existing = _Q_Event_factory.ifAny.apply(this, arguments);
+		if (existing) {
+			return existing;
 		}
-		args = (f && f.apply(this, args)) || args;
 		var delimiter = "\t";
-		var name = args.join(delimiter);
-		var e = Q.getObject(name, collection, delimiter);
-		if (e) {
-			return e;
-		}
+		var name = _args.join(delimiter);
 		var e = new Q.Event();
 		e.factory = _Q_Event_factory;
 		e.name = name;
 		if (callback) {
-			callback.apply(e, args);
+			callback.apply(e, _args);
 		}
-		_Q_Event_factory.onNewEvent.handle.apply(e, args);
+		_Q_Event_factory.onNewEvent.handle.apply(e, _args);
 		Q.setObject(name, e, collection, delimiter);
 		if (removeOnEmpty) {
 			e.onEmpty().set(_remove);
 		}
 		e.indexes = name;
 		return e;
-	}
+	};
+	_Q_Event_factory.ifAny = function _Q_Event_factory_ifAny() {
+		_args = Array.prototype.slice.call(arguments, 0);
+		var len = defaults.length;
+		var f = (typeof(defaults[len-1]) === 'function')
+			? defaults[defaults.length-1] : null;
+		if (f) --len;
+		for (var i=_args.length; i<len; ++i) {
+			_args[i] = defaults[i];
+		}
+		_args = (f && f.apply(this, _args)) || _args;
+		var delimiter = "\t";
+		var name = _args.join(delimiter);
+		var existing = Q.getObject(name, collection, delimiter);
+		return existing || null;
+	};
 	_Q_Event_factory.collection = collection;
 	_Q_Event_factory.onNewEvent = new Q.Event();
 	return _Q_Event_factory;
