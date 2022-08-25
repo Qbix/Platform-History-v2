@@ -136,6 +136,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	 * @param {Streams_Stream} $stream
 	 * @param {string} [$consumedAttribute] name of attribute holding the highest weight of already-consumed related streams, if any
 	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @return {integer} Returns the weight of the relation to the category where the stream was inserted
 	 */
 	static function insertRandomly(
 		$category,
@@ -205,6 +206,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		}
 		$category->setAttribute($totalAttribute, $weight);
 		$category->save(); // we added another randomized relation
+		return $weight;
 	}
 
 	/**
