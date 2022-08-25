@@ -193,6 +193,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 					'weight' => $r->weight
 				)
 			);
+			$resultingWeight = $r->weight;
 		} else {
 			// just insert a new relation
 			$stream->relateTo(
@@ -203,10 +204,11 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 					'weight' => $weight
 				)
 			);
+			$resultingWeight = $weight;
 		}
 		$category->setAttribute($totalAttribute, $weight);
 		$category->save(); // we added another randomized relation
-		return $weight;
+		return $resultingWeight;
 	}
 
 	/**
