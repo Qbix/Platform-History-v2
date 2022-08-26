@@ -45,7 +45,7 @@ function _Streams_participants(options) {
 	}
 	
 	tool.Q.onStateChanged('count').set(function (name) {
-		var c = state.count;
+		var c = state.count || 0;
 		tool.$count.text(c >= 100 ? '99+' : c.toString());
 		if (state.showSummary) {
 			tool.$summary.show().plugin('Q/textfill', 'refresh');
