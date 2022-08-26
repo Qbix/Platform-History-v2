@@ -2012,6 +2012,8 @@ class Db_Row
 			$primaryKey = $useIndex;
 		} else if ($useIndex === true) {
 			$primaryKey = $this->getPrimaryKey();
+		} else {
+			$primaryKey = null;
 		}
 		if ($primaryKey) {
 			$primaryKeyValue = $this->calculatePKValue($primaryKey);

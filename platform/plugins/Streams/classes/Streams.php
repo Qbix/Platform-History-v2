@@ -2098,9 +2098,14 @@ abstract class Streams extends Base_Streams
 	 * @param {boolean} [$options.skipAccess=false] If true, skips the access checks and just unrelates the stream from the category
 	 * @param {boolean} [$options.skipMessageTo=false] If true, skips posting the Streams/unrelatedTo message to the "to" streams
 	 * @param {boolean} [$options.skipMessageFrom=false] If true, skips posting the Streams/unrelatedFrom message to the "from" streams
-	 * @param {boolean} [$options.adjustWeights=false] If true, also decrements all following relations' weights by one.
-	 * @return {boolean}
-	 *  Whether the relation was removed
+	 * @param {double} [$options.adjustWeights=0]
+	 *  The amount to move the other weights by, to make room for this one.
+	 *  The direction of the shift is determined by the sign of this number.
+	 *  If it's negative, weights drop down by this amount.
+	 *  If it's positive, weights are moved up by this amount.
+	 * @return {false|array}
+	 *  Returns false if the relation was not removed.
+	 *  Otherwise, returns an array of (RelatedTo, RelatedFrom) that was just removed
 	 */
 	static function unrelate(
 		$asUserId,
@@ -2153,7 +2158,7 @@ abstract class Streams extends Base_Streams
 			@compact('relatedTo', 'relatedFrom', 'asUserId'),
 			'before') === false
 		) {
-			return;
+			return false;
 		}
 
 		/**
@@ -2168,7 +2173,7 @@ abstract class Streams extends Base_Streams
 			@compact('relatedTo', 'relatedFrom', 'asUserId'),
 			'before') === false
 		) {
-			return;
+			return false;
 		}
 
 		/*
@@ -2179,15 +2184,23 @@ abstract class Streams extends Base_Streams
 		$weight = isset($relatedTo->weight) ? $relatedTo->weight : null;
 		if ($relatedTo && $relatedTo->remove()) {
 			if (isset($weight) and !empty($options['adjustWeights'])) {
+				$adjustWeights = $options['adjustWeights'] === true
+					? -1 // backward compatibility
+					: floatval($options['adjustWeights']);
 				$criteria = array(
 					'toPublisherId' => $toPublisherId,
 					'toStreamName' => $category->name,
-					'type' => $type,
-					'weight' => new Db_Range($weight, false, false, null)
+					'type' => $type
 				);
+				if ($options['adjustWeights'] > 0) {
+					$criteria['weight'] = new Db_Range(null, false, false, $weight);
+				} else {
+					$criteria['weight'] = new Db_Range($weight, false, false, null);
+				}
 				Streams_RelatedTo::update()->set(array(
-					'weight' => new Db_Expression("weight - 1")
-				))->where($criteria)->execute();
+					'weight' => new Db_Expression("weight + ($adjustWeights)")
+				))->where($criteria)
+				->execute();
 			}
 			
 			Streams_RelatedToTotal::update()->set(array(
@@ -2257,7 +2270,7 @@ abstract class Streams extends Base_Streams
 			'after'
 		);
 
-		return true;
+		return array($relatedTo, $relatedFrom);
 	}
 
 	/**
@@ -3086,7 +3099,7 @@ abstract class Streams extends Base_Streams
 					array(
 						'skipMessageFrom' => Q::ifset($options, 'skipRelationMessages', true),
 						'skipAccess' => true,
-						'weight' => time()
+						'adjustWeights' => 0
 					)
 				);
 			}
@@ -4024,16 +4037,18 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Closes a stream, which prevents anyone from posting messages to it
-	 * unless they have WRITE_LEVEL >= "close", as well as attempting to remove
-	 * all relations to other streams. A "cron job" can later go and delete
-	 * closed streams. The reason you should avoid deleting streams right away
+	 * unless they have WRITE_LEVEL >= "close". Also attempts to remove
+	 * all relations to other streams, moving the higher weights down by one.
+	 * A "cron job" can later go and delete closed streams. The reason you should avoid deleting streams right away
 	 * is that other subscribers may still want to receive the last messages
 	 * posted to the stream.
 	 * @method close
 	 * @param {string} $asUserId The id of the user who would be closing the stream
 	 * @param {string} $publisherId The id of the user publishing the stream
 	 * @param {string} $streamName The name of the stream
-	 * @param {array} [$options=array()] Can include "skipAccess"
+	 * @param {array} [$options=array()] Can include "skipAccess",
+	 * @param {boolean} [$options.skipAccess] Don't check access before closing the stream
+	 * @param {boolean|array} [$options.unrelate=false] Pass true here, or options that will be passed to Streams::unrelate()
 	 * @static
 	 */
 	static function close($asUserId, $publisherId, $streamName, $options = array())
@@ -4085,7 +4100,8 @@ abstract class Streams extends Base_Streams
 					$r->fromStreamName, 
 					$r->type, 
 					$stream->publisherId, 
-					$stream->name
+					$stream->name,
+					isset($options['unrelate']) ? $options['unrelate'] : array()
 				);
 			} catch (Exception $e) {}
 		}
@@ -4097,8 +4113,14 @@ abstract class Streams extends Base_Streams
 			$stream->name,
 			false
 		);
+		if (empty($options['unrelate']) or $options['unrelate'] === true) {
+			$options['unrelate'] = array(
+				'skipAccess' => true
+			);
+		}
 		foreach ($relations as $r) {
 			try {
+				// ACCESS: remove the "relatedTo" even if we didn't have access
 				Streams::unrelate(
 					$asUserId, 
 					$r->toPublisherId,
@@ -4106,9 +4128,7 @@ abstract class Streams extends Base_Streams
 					$r->type,
 					$stream->publisherId,
 					$stream->name,
-					array(
-						'skipAccess' => true
-					)
+					$options['unrelate'],
 				);
 			} catch (Exception $e) {}
 		}

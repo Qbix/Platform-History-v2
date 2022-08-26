@@ -213,8 +213,8 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 
 	/**
 	 * Call this function to unrelate a stream whose weight was inserted
-	 * randomly among other weights, and swap in the relation with the highets
-	 * weight.
+	 * randomly among other weights, and swap in a random relation 
+	 * which was not consumed yet.
 	 * @method removeInsertedRandomly
 	 * @static
 	 * @param {Streams_Stream} $category
@@ -241,8 +241,11 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		if (!$rt) {
 			return false; // nothing to remove
 		}
+		$consumedWeight = $consumedAttribute
+			? $category->getAttribute($consumedAttribute, 0)
+			: 0;
 		// remove current relation
-		$stream->unrelateTo($category, $relationType, $category->publisherId);
+		$weight = $stream->unrelateTo($category, $relationType, $category->publisherId);
 		if ($totalAttribute) {
 			$total = $category->getAttribute($totalAttribute, 0);
 		} else {
@@ -256,14 +259,16 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				? $rtt->relationCount
 				: 0;
 		}
+		$lowerBound = max($consumedWeight, $weight ? $weight : 0);
 		$relatedStreams = $category->related(
 			$category->publisherId, true,
 			array(
 				$relationType,
 				'limit' => 1,
 				'where' => array(
-					'weight' => $total
+					'weight >' => $lowerBound
 				),
+				'orderBy' => 'random',
 				'streamsOnly' => true
 			)
 		);
@@ -281,9 +286,6 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				0
 			);
 		}
-		$consumedWeight = $consumedAttribute
-			? $category->getAttribute($consumedAttribute, 0)
-			: 0;
 		if ($consumedAttribute and $rt->weight <= $consumedWeight) {
 			// it was already consumed
 			$category->setAttribute($consumedAttribute, $consumedWeight - 1);
@@ -302,6 +304,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	 * @param {string} $relationType
 	 * @param {string} $consumedAttribute name of attribute holding the highest weight of already-consumed related streams, if any
 	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @param {string} [$maxAttribute] name of attribute holding max number of related streams allowed to consume.
 	 * @return {Streams_Stream|null} The related stream, or null
 	 * @throw {Q_Exception_MissingObject} 
 	 */
@@ -309,12 +312,19 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		$category,
 		$relationType,
 		$consumedAttribute,
-		$totalAttribute = null)
+		$totalAttribute = null,
+		$maxAttribute = null)
 	{
 		$consumedWeight = $category->getAttribute($consumedAttribute, 0);
 		if ($totalAttribute) {
 			$total = $category->getAttribute($totalAttribute, 0);
 			if ($consumedWeight + 1 > $total) {
+				return false; // there are no more to consume
+			}
+		}
+		if ($maxAttribute) {
+			$max = $category->getAttribute($maxAttribute, null);
+			if ($max !== null and $consumedWeight + 1 > $max) {
 				return false; // there are no more to consume
 			}
 		}
@@ -325,9 +335,8 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 			true,
 			array(
 				'weight' => new Db_Range($consumedWeight, false, true, null),
-				'orderBy' => false,
+				'orderBy' => true,
 				'limit' => 1,
-				'streamsOnly' => true,
 				'type' => $relationType
 			)
 		);

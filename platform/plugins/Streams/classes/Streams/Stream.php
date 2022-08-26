@@ -1657,8 +1657,9 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {string} $type The type of relation
 	 * @param {string} [$asUserId=null] Override the user id to perform this action as
 	 * @param {array} [$options=array()] Any options to pass to Streams:unrelate
-	 * @return {boolean}
-	 *  Whether the relation was removed
+	 * @return {false|array}
+	 *  Returns false if the relation was not removed.
+	 *  Otherwise, returns an array of (RelatedTo, RelatedFrom) that was just removed
 	 */
 	function unrelateTo($toStream, $type, $asUserId = null, $options = array())
 	{
