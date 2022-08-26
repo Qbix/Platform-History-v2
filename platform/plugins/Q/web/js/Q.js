@@ -5263,13 +5263,16 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			// Usually it's a .Q_placeholder_shimmer class div container with a bunch of children
 			var tool = Q.getObject(['Q', 'tools', toolName], toolElement);
 			if (!tool && !toolElement.innerHTML) {
+				function _insertHTML(err, html) {
+					toolElement.innerHTML = html;
+				}
 				if (toolPlaceholder.html) {
-					toolElement.innerHTML = toolPlaceholder.html;
+					_insertHTML(null, toolPlaceholder.html);
 				} else if (toolPlaceholder.template) {
 					if (Q.isPlainObject(toolPlaceholder.template)) {
-						Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields);
+						Q.Template.render(toolPlaceholder.template.name, toolPlaceholder.template.fields, _insertHTML);
 					} else {
-						Q.Template.render(toolPlaceholder.template);
+						Q.Template.render(toolPlaceholder.template, _insertHTML);
 					}
 				}
 			}
