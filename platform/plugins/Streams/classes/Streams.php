@@ -2655,8 +2655,9 @@ abstract class Streams extends Base_Streams
 		$stream = reset($streams);
 
 		if (!$relatedTo) {
+			$names = is_array($toStreamName) ? '['.implode(', ', $toStreamName).']' : $toStreamName;
 			throw new Q_Exception_MissingRow(
-				array('table' => 'relatedTo', 'criteria' => 'with those fields'),
+				array('table' => 'relatedTo', 'criteria' => "with $toPublisherId, $names, $type, $fromPublisherId, $fromStreamName"),
 				array('publisherId', 'name', 'type', 'toPublisherId', 'to_name')
 			);			
 		}

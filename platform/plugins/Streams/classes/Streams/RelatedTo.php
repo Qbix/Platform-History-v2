@@ -213,8 +213,16 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 
 	/**
 	 * Call this function to unrelate a stream whose weight was inserted
-	 * randomly among other weights, and swap in a random relation 
-	 * which was not consumed yet.
+	 * randomly among other weights, and update the relation with the largest
+	 * weight into having this weight instead.
+	 * If all items were inserted using insertRandomly() then the relations
+	 * will continue to be sorted randomly by weight.
+	 * You should typically call this on relations that were not already
+	 * consumed, meaning their weight is higher than $consumedAttribute's value.
+	 * Note that if you call this function on a relation that was already
+	 * consumed, the relation whose weight replaces it will be considered "consumed"
+	 * in its place, even though it was not. In any case, we are reducing by 1 the
+	 * eventual number of streams that will be marked as consumed.
 	 * @method removeInsertedRandomly
 	 * @static
 	 * @param {Streams_Stream} $category
@@ -245,7 +253,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 			? $category->getAttribute($consumedAttribute, 0)
 			: 0;
 		// remove current relation
-		$weight = $stream->unrelateTo($category, $relationType, $category->publisherId);
+		list($relatedTo, $relatedFrom) = $stream->unrelateTo($category, $relationType, $category->publisherId);
 		if ($totalAttribute) {
 			$total = $category->getAttribute($totalAttribute, 0);
 		} else {
@@ -259,16 +267,14 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				? $rtt->relationCount
 				: 0;
 		}
-		$lowerBound = max($consumedWeight, $weight ? $weight : 0);
 		$relatedStreams = $category->related(
 			$category->publisherId, true,
 			array(
 				$relationType,
+				'ignoreCache' => true,
 				'limit' => 1,
-				'where' => array(
-					'weight >' => $lowerBound
-				),
-				'orderBy' => 'random',
+				'max' => $total,
+				'orderBy' => false,
 				'streamsOnly' => true
 			)
 		);
@@ -282,13 +288,9 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				$relationType,
 				$rs->publisherId,
 				$rs->name,
-				$rt->weight,
+				$relatedTo->weight,
 				0
 			);
-		}
-		if ($consumedAttribute and $rt->weight <= $consumedWeight) {
-			// it was already consumed
-			$category->setAttribute($consumedAttribute, $consumedWeight - 1);
 		}
 		$category->setAttribute($totalAttribute, $total - 1);
 		$category->save(); // we added another randomized relation
