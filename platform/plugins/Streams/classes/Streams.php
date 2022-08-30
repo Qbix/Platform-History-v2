@@ -4129,7 +4129,7 @@ abstract class Streams extends Base_Streams
 					$r->type,
 					$stream->publisherId,
 					$stream->name,
-					$options['unrelate'],
+					$options['unrelate']
 				);
 			} catch (Exception $e) {}
 		}
