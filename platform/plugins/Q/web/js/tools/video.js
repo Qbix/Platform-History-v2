@@ -224,23 +224,32 @@ Q.Tool.define("Q/video", function (options) {
 
 			$toolElement.append($("<div class='Q_video_close'>"));
 
+			Q.Template.set("Q/video/twitch/overplay", `<div class="Q_video_overlay_play" style="background-image: url({{poster}})"><img src="{{src}}" /></div>`);
+
 			Q.addScript("{{Q}}/js/twitch/lib.js", function () {
 				state.player = new Twitch.Player(element, options);
 
 				// place play button above the player
-				var $overlayPlay = $("img.Q_video_overlay_play", tool.element);
+				var $overlayPlay = $(".Q_video_overlay_play", tool.element);
 
-				// skip using overlay buton for ios, because of weird behavior
+				// skip using overlay button for ios, because of weird behavior
 				// some times called event onPause but video doens't paused and play further
 				if (!$overlayPlay.length && !state.isIos) {
-					$overlayPlay = $("<img>")
-						.prop("src", Q.url(state.overlay.play.src))
-						.addClass("Q_video_overlay_play")
-						.on(Q.Pointer.fastclick, function () {
+					Q.Template.render("Q/video/twitch/overplay", {
+						src: Q.url(state.overlay.play.src),
+						poster: state.image
+					}, function (err, html) {
+						if (err) {
+							return;
+						}
+
+						$overlayPlay = $(html);
+						$overlayPlay.appendTo(tool.element);
+						$("img", $overlayPlay).on(Q.Pointer.fastclick, function () {
 							$overlayPlay.hide();
 							state.player.play();
 						})
-						.appendTo(tool.element);
+					});
 				}
 
 				/**
