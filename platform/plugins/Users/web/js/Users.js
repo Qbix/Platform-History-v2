@@ -3008,7 +3008,7 @@
 		// method to get contacts for browser Picker Contacts API (if exists)
 		function _getPickerContacts () {
             navigator.contacts.getProperties().then(function (supportedProperties) {
-                navigator.contacts.select(supportedProperties)
+                navigator.contacts.select(supportedProperties, {multiple:true})
                     .then(function (results) {
                         Q.each(results, function (i, obj) {
                             obj.displayName = obj.name[0];
