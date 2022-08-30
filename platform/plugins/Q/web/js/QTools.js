@@ -263,7 +263,7 @@
 								var element = Q.Pointer.elementFromPoint(
 									Q.Pointer.getX(e), Q.Pointer.getY(e)
 								);
-								if (!latest.trigger.contains(element)) {
+								if (!latest.trigger[0].contains(element)) {
 									$this.data('Q/contextual clickedTriggerAndDidntLeave', false);
 									$this.off('mouseleave.Q_contextual');
 									clearTimeout(tmt);
