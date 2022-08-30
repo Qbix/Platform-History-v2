@@ -10596,7 +10596,7 @@ window.WebRTCRoomClient = function app(options){
         } else if(2>1) {
             log('initWithNodeJs: add socket.io');
 
-            var url = 'https://demoproject.co.ua:10595/socket.io/socket.io.js'
+            var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js'
             /*var xhr = new XMLHttpRequest();
 
             xhr.open('GET', url, true);

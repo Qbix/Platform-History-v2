@@ -131,7 +131,6 @@
 
 			this.state.onCreate.handle.call(this);
 
-			//location.href = 'https://ftl.demoproject.co.ua/Q/plugins/Streams/js/tools/webrtc/livestreamingEditor.js'
 		},
 
 		{
@@ -5328,9 +5327,9 @@
 			initAdvancedLiveStreaming: function() {
 				var tool = this;
                 var roomStream = tool.WebRTCClass.roomStream();
-                var videoBgLink;// = 'https://ftl.demoproject.co.ua/Q/uploads/Streams/yve/ael/ev/Streams/video/Qsmicxscc/file/1650541514/world_5097.mp4';
-                var imageBgLink; //https://ftl.demoproject.co.ua/Q/uploads/Streams/yve/ael/ev/Streams/image/Qagafxjmi/file/1650541108/original.jpg
-                var watermarkImageLink = 'https://ftl.demoproject.co.ua/Q/uploads/Streams/yve/ael/ev/Streams/image/Qfeohrssn/file/1650489319/original.png';
+                var videoBgLink;
+                var imageBgLink;
+                var watermarkImageLink;
                 var watermarkVideoLink;
                 var watermarkOpacity = 0.7;
 
