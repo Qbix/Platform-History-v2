@@ -1110,8 +1110,8 @@
 
 					return;
 				}
-				if(document.querySelector('.dialog-box.select-camera') == null) {
-					tool.selectCameraDialogue();
+				if(document.querySelector('.Streams_webrtc_dialog-box.Streams_webrtc_dialog-box-select-camera') == null) {
+					tool.selectCameraDialogue().show();
 				}
 			},
 
@@ -1119,7 +1119,7 @@
 				var tool = this;
 				if(!Q.info.isMobile && !Q.info.isTablet) return;
 
-				if(document.querySelector('.dialog-box.select-audio') == null) {
+				if(document.querySelector('.Streams_webrtc_dialog-box.select-audio') == null) {
 					tool.selectAudioDialogue();
 				}
 			},
@@ -1290,27 +1290,23 @@
 				var tool = this;
 				function createPopup() {
 					var dialogue=document.createElement('DIV');
-					dialogue.className = 'dialog-box text-chat Streams_webrtc_hidden';
+					dialogue.className = 'Streams_webrtc_dialog-box text-chat Streams_webrtc_hidden';
 
 					var dialogTitle=document.createElement('H3');
 					dialogTitle.innerHTML = 'Conference chat';
-					dialogTitle.className = 'dialog-header Q_dialog_title';
+					dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
 					var dialogInner=document.createElement('DIV');
-					dialogInner.className = 'dialog-inner';
+					dialogInner.className = 'Streams_webrtc_dialog-inner';
 					var chatBox=document.createElement('DIV');
 					chatBox.className = 'Streams_webrtc_popup-chat-box  Streams_webrtc_popup-box';
 
 
 					var close=document.createElement('div');
-					close.className = 'close-dialog-sign';
+					close.className = 'Streams_webrtc_close-dialog-sign';
 					close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
 					close.style.backgroundRepeat = 'no-repeat';
 					close.style.backgroundSize = 'cover';
-
-
-					var chooseCameraList = document.createElement('DIV');
-					chooseCameraList.className = 'choose-device';
 
 					dialogInner.appendChild(dialogTitle);
 					dialogInner.appendChild(chatBox);
@@ -1738,92 +1734,102 @@
 
 			selectCameraDialogue: function(){
 				var tool = this;
-				//self.closeAllDialogues();
+				
+                function show() {
+                    var bg = document.createElement('DIV');
+                    bg.className = 'Streams_webrtc_dialog-bg Streams_webrtc_select-camera-bg';
 
-				var bg=document.createElement('DIV');
-				bg.className = 'dialog-bg';
+                    var dialogCon = document.createElement('DIV');
+                    dialogCon.className = 'Streams_webrtc_dialog-con';
+                    dialogCon.addEventListener('click', function (e) {
+                        e.stopPropagation();
+                        //if(e.currentTarget == e.target) self.closeAllDialogues();
+                    });
 
-				var dialogCon=document.createElement('DIV');
-				dialogCon.className = 'dialog-con';
-				dialogCon.addEventListener('click', function (e){
-					e.stopPropagation();
-					//if(e.currentTarget == e.target) self.closeAllDialogues();
-				});
+                    var dialogue = document.createElement('DIV');
+                    dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-select-camera';
 
-				var dialogue=document.createElement('DIV');
-				dialogue.className = 'dialog-box select-camera';
+                    var dialogTitle = document.createElement('H3');
+                    dialogTitle.innerHTML = Q.getObject("webrtc.settingsPopup.dialogTitle", tool.textes);
+                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
-				var dialogTitle=document.createElement('H3');
-				dialogTitle.innerHTML = Q.getObject("webrtc.settingsPopup.dialogTitle", tool.textes);
-				dialogTitle.className = 'dialog-header Q_dialog_title';
-
-				var dialogInner=document.createElement('DIV');
-				dialogInner.className = 'dialog-inner';
-
-
-				var close=document.createElement('div');
-				close.className = 'close-dialog-sign';
-				close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
+                    var dialogInner = document.createElement('DIV');
+                    dialogInner.className = 'Streams_webrtc_dialog-inner';
 
 
-				var chooseCameraList = document.createElement('DIV');
-				chooseCameraList.className = 'choose-device';
+                    var close = document.createElement('div');
+                    close.className = 'Streams_webrtc_close-dialog-sign';
+                    close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
 
-				close.addEventListener('click', function () {
-					if(bg.parentNode != null) bg.parentNode.removeChild(bg);
-					if(dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
-					tool.state.dialogIsOpened = false;
-				});
+                    close.addEventListener('click', function () { if (bg.parentNode != null) bg.parentNode.removeChild(bg);
+                        if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
+                        tool.state.dialogIsOpened = false;
+                       
+                    });
 
-				dialogInner.appendChild(dialogTitle);
-				dialogInner.appendChild(tool.settingsPopupEl);
+                    dialogInner.appendChild(dialogTitle);
+                    dialogInner.appendChild(tool.settingsPopupEl);
 
-				dialogue.appendChild(close);
-				dialogue.appendChild(dialogInner);
-				dialogCon.appendChild(dialogue)
-				document.body.appendChild(dialogCon);
-				document.body.appendChild(bg);
+                    dialogue.appendChild(close);
+                    dialogue.appendChild(dialogInner);
+                    dialogCon.appendChild(dialogue)
+                    document.body.appendChild(dialogCon);
+                    document.body.appendChild(bg);
 
 
-                var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
-                var contentHeight = tool.settingsPopupEl.scrollHeight;
-                var windowWidth =  window.innerWidth;
-                var windowHeight =  window.innerHeight;
+                    var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
+                    var contentHeight = tool.settingsPopupEl.scrollHeight;
+                    var windowWidth = window.innerWidth;
+                    var windowHeight = window.innerHeight;
 
-                var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
+                    var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
 
-                tool.settingsPopupEl.style.maxHeight = maxHeight + 'px';
-                dialogue.style.minWidth = contentWidth + 'px';
+                    tool.settingsPopupEl.style.maxHeight = maxHeight + 'px';
+                    dialogue.style.minWidth = contentWidth + 'px';
 
-				tool.state.dialogIsOpened = true;
+                    tool.state.dialogIsOpened = true;
+                }
+
+                function hide() {
+                    let dialogue = document.querySelector('.Streams_webrtc_dialog-box.Streams_webrtc_dialog-box-select-camera');
+                    let dialogueBg = document.querySelector('.Streams_webrtc_dialog-bg.Streams_webrtc_select-camera-bg');
+                    if (dialogue && dialogue.parentNode != null) dialogue.parentNode.removeChild(dialogue);
+                    if (dialogueBg && dialogueBg.parentNode != null) dialogueBg.parentNode.removeChild(dialogueBg);
+                    tool.state.dialogIsOpened = false;
+                }
+
+                return {
+                    show:show,
+                    hide:hide
+                }
 			},
 			selectAudioDialogue: function(){
 				var tool = this;
 				//self.closeAllDialogues();
 
 				var bg=document.createElement('DIV');
-				bg.className = 'dialog-bg';
+				bg.className = 'Streams_webrtc_dialog-bg';
 
 				var dialogCon=document.createElement('DIV');
-				dialogCon.className = 'dialog-con';
+				dialogCon.className = 'Streams_webrtc_dialog-con';
 				dialogCon.addEventListener('click', function (e){
 					e.stopPropagation();
 					//if(e.currentTarget == e.target) self.closeAllDialogues();
 				});
 
 				var dialogue=document.createElement('DIV');
-				dialogue.className = 'dialog-box select-audio';
+				dialogue.className = 'Streams_webrtc_dialog-box select-audio';
 
 				var dialogTitle=document.createElement('H3');
 				dialogTitle.innerHTML = Q.getObject("webrtc.audioSettings.dialogTitle", tool.textes);
-				dialogTitle.className = 'dialog-header Q_dialog_title';
+				dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
 				var dialogInner=document.createElement('DIV');
-				dialogInner.className = 'dialog-inner';
+				dialogInner.className = 'Streams_webrtc_dialog-inner';
 
 
 				var close=document.createElement('div');
-				close.className = 'close-dialog-sign';
+				close.className = 'Streams_webrtc_close-dialog-sign';
 				close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
 
 
@@ -3174,7 +3180,12 @@
                     }
 
 					function hide() {
-                        tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                        if(Q.info.isMobile) {
+                            tool.selectCameraDialogue().hide();
+                        } else {
+                            tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                        }
+
                     }
 
                     function createSettingsPopUp() {
@@ -5218,10 +5229,10 @@
 						var embedCode = iFrame != null ? iFrame : (_liveInfo ? _liveInfo['embed_html'] : testFrame);
 
 						var bg=document.createElement('DIV');
-						bg.className = 'dialog-bg';
+						bg.className = 'Streams_webrtc_dialog-bg';
 
 						var dialogCon = document.createElement('DIV');
-						dialogCon.className = 'dialog-con';
+						dialogCon.className = 'Streams_webrtc_dialog-con';
 						dialogCon.addEventListener('click', function (e){
 							e.stopPropagation();
 							//if(e.currentTarget == e.target) self.closeAllDialogues();
@@ -5229,17 +5240,17 @@
 
 						var dialogTitle=document.createElement('H3');
 						dialogTitle.innerHTML = 'Embed';
-						dialogTitle.className = 'dialog-header Q_dialog_title';
+						dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
 						var close=document.createElement('div');
-						close.className = 'close-dialog-sign';
+						close.className = 'Streams_webrtc_close-dialog-sign';
 						close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
 
 						var dialogue=document.createElement('DIV');
-						dialogue.className = 'dialog-box Streams_webrtc_live-preview';
+						dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_live-preview';
 
 						var dialogInner=document.createElement('DIV');
-						dialogInner.className = 'dialog-inner';
+						dialogInner.className = 'Streams_webrtc_dialog-inner';
 
 						var iframeCodeCon = document.createElement('DIV');
 						iframeCodeCon.className = 'Streams_webrtc_live_embed_code';
@@ -5395,7 +5406,7 @@
 
 			closeAllDialogues: function () {
 				var tool = this;
-				var elems=[].slice.call(document.getElementsByClassName('dialog-con')).concat([].slice.call(document.getElementsByClassName('dialog-bg')));
+				var elems=[].slice.call(document.getElementsByClassName('Streams_webrtc_dialog-con')).concat([].slice.call(document.getElementsByClassName('Streams_webrtc_dialog-bg')));
 				for(var i=0;i<elems.length;i++) {
 					elems[i].parentNode.removeChild(elems[i]);
 				}
