@@ -199,7 +199,7 @@ class Users_Vote extends Base_Users_Vote
 			if (!$usersVote->retrieve(null, false, array("ignoreCache" => true))) {
 				$usersVote->value = 1;
 				try {
-					$usersVote->save();
+					$usersVote->save(true);
 				} catch (Exception $e) {}
 			}
 		}

@@ -269,6 +269,14 @@
 }
 /* </Streams_question_preview> */
 
+.Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
+.Streams_preview_tool .Streams_preview_container.Streams_preview_view {
+	display: block;
+	overflow: hidden;
+	text-align: left;
+	white-space: nowrap;
+}
+
 /* <Streams_webrtc_preview> */
 .Streams_webrtc_preview_tool .Streams_webrtc_duration {
 	float: right;
@@ -280,25 +288,16 @@
 	margin: 0;
 }
 
-
-.Streams_chat_tool .Streams_preview_tool .Streams_preview_container,
-.Streams_preview_tool .Streams_preview_container.Streams_preview_view {
-	display: block;
-	overflow: hidden;
-	text-align: left;
-	white-space: nowrap;
-}
-
-.Streams_preview_call_control {
+.Streams_webrtc_preview_tool .Streams_preview_call_control {
 	display: flex;
 	padding: 10px 5px 5px 5px;
 }
-.Streams_preview_accept_button,
-.Streams_preview_disconnect_button,
-.Streams_preview_call_button,
-.Streams_preview_switch_back_button,
-.Streams_preview_hold_button,
-.Streams_preview_approve_button {
+.Streams_webrtc_preview_tool .Streams_preview_accept_button,
+.Streams_webrtc_preview_tool .Streams_preview_disconnect_button,
+.Streams_webrtc_preview_tool .Streams_preview_call_button,
+.Streams_webrtc_preview_tool .Streams_preview_switch_back_button,
+.Streams_webrtc_preview_tool .Streams_preview_hold_button,
+.Streams_webrtc_preview_tool .Streams_preview_approve_button {
 	/*width: 100px;*/
 	height: 40px;
 	display: flex;
@@ -307,27 +306,27 @@
 	padding: 5px;
 	border-radius: 4px;
 }
-.Streams_preview_accept_button {
+.Streams_webrtc_preview_tool .Streams_preview_accept_button {
 	background: #37c837;
 	/*width:80px;*/
 	height:40px;
 }
-.Streams_preview_disconnect_button, .Streams_preview_switch_back_button {
+.Streams_webrtc_preview_tool .Streams_preview_disconnect_button, .Streams_preview_switch_back_button {
 	display: none;
 	background: #f93b2f;
 	/*width:100px;*/
 	height:40px;
 }
-.Streams_preview_call_control_call {
+.Streams_webrtc_preview_tool .Streams_preview_call_control_call {
 	margin-right: 10px;
 	display: flex;
 }
-.Streams_preview_call_button {
+.Streams_webrtc_preview_tool .Streams_preview_call_button {
 	background: #007bff;
 	/*width:60px;*/
 	height:40px;
 }
-.Streams_preview_hold_button {
+.Streams_webrtc_preview_tool .Streams_preview_hold_button {
 	display: none;
 	background: #17a2b8;
 	/*width:60px;*/
@@ -335,36 +334,36 @@
 	margin-left: 10px;
 
 }
-.Streams_preview_approve_button {
+.Streams_webrtc_preview_tool .Streams_preview_approve_button {
 	background: #ffc107;
 	/*width:60px;*/
 	height:40px;
 	margin-right: 10px;
 }
-.Streams_preview_approve_button.Streams_preview_approve_button_approved {
+.Streams_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved {
 	background: #007bff;
 }
-.Streams_preview_approve_button.Streams_preview_approve_button_approved:before {
+.Streams_webrtc_preview_tool .Streams_preview_approve_button.Streams_preview_approve_button_approved:before {
 	display: inline-block;
 	content: '\2713';
 	color:white;
 	padding:0 2px 0 0;
 }
 
-.Streams_preview_contents {
+.Streams_webrtc_preview_tool .Streams_preview_contents {
 	padding:0 0 5px 0;
 }
-.Streams_preview_container .Streams_preview_title{
+.Streams_webrtc_preview_tool .Streams_preview_container .Streams_preview_title{
 	display: flex;
 	justify-content: space-between;
 }
-.Streams_preview_container .Streams_preview_contents {
+.Streams_webrtc_preview_tool .Streams_preview_container .Streams_preview_contents {
 	width: 100%;
 }
-.Streams_preview_container .Streams_preview_about {
+.Streams_webrtc_preview_tool .Streams_preview_container .Streams_preview_about {
 	display: flex;
 }
-.Streams_preview_container .Streams_chat_bubble {
+.Streams_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble {
 	-webkit-border-radius: 13px;
 	-moz-border-radius: 13px;
 	border-radius: 13px;
@@ -377,21 +376,14 @@
 	flex: 1;
 	align-self:center;
 }
-.Streams_preview_container .Streams_chat_bubble .Streams_chat_tick{
+.Streams_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_tick{
 	float:left;
 	margin: 0 0 0 -19px;
 	width:9px;
 	height: 13px;
 }
-.Streams_preview_container .Streams_chat_bubble .Streams_chat_message{
+.Streams_webrtc_preview_tool .Streams_preview_container .Streams_chat_bubble .Streams_chat_message{
 	color:#222;
 	overflow: hidden;
-}
-.Streams_preview_container .Users_avatar_tool{
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	font-size: 10px;
 }
 /* </Streams_webrtc_preview> */
