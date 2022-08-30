@@ -1713,15 +1713,6 @@ window.WebRTCRoomClient = function app(options){
                 var _isActive = null;
                 var _currentLayout = null;
 
-                var _background = new Image();
-                _background.src = "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1950&q=80";
-
-                var _backgroundVideo = document.createElement('VIDEO');
-                _backgroundVideo.src = 'https://www.w3schools.com/html/mov_bbb.mp4';
-                _backgroundVideo.muted = true;
-                _backgroundVideo.loop = true;
-
-
                 function createCanvas() {
                     var videoCanvas = document.createElement("CANVAS");
                     videoCanvas.className = "Streams_webrtc_video-stream-canvas";
