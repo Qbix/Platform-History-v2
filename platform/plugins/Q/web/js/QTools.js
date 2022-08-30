@@ -265,7 +265,7 @@
 								);
 								if (!latest.trigger[0].contains(element)) {
 									$this.data('Q/contextual clickedTriggerAndDidntLeave', false);
-									$this.off('mouseleave.Q_contextual');
+									$this.off('mousemove.Q_contextual');
 									clearTimeout(tmt);
 								}
 							});
