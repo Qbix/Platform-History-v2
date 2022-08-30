@@ -35,6 +35,7 @@ function _Streams_participants(options) {
 	var tool = this;
 	var state = tool.state;
 	var $toolElement = $(tool.element);
+	tool.$elements = {};
 
 	if (!state.publisherId) {
 		throw new Q.Error("Streams/chat: missing publisherId option");
@@ -44,7 +45,7 @@ function _Streams_participants(options) {
 	}
 	
 	tool.Q.onStateChanged('count').set(function (name) {
-		var c = state.count;
+		var c = state.count || 0;
 		tool.$count.text(c >= 100 ? '99+' : c.toString());
 		if (state.showSummary) {
 			tool.$summary.show().plugin('Q/textfill', 'refresh');
@@ -57,18 +58,18 @@ function _Streams_participants(options) {
 				tool.cssDisplay = $toolElement.css("display");
 				$toolElement.css("display", "none");
 			} else {
-				$toolElement.css("display", tool.cssDisplay);
+				$toolElement.css("display", tool.cssDisplay || "block");
 			}
 		}
 	}, tool);
 
 	tool.Q.onStateChanged('ordering').set(this.orderAvatars.bind(this));
 
-	tool.refresh(function () {
-		tool.forEachChild('Users/avatar', function () {
-			tool.$elements[this.state.userId] = $(this.element);
-		});
+	tool.element.forEachTool('Users/avatar', function () {
+		tool.$elements[this.state.userId] = $(this.element);
 	});
+
+	tool.refresh();
 },
 
 {
@@ -116,7 +117,7 @@ function _Streams_participants(options) {
 {
 	Q: {
 		beforeRemove: function () {
-			clearInterval(this.adjustInterval);
+
 		}
 	},
 	/**
@@ -128,7 +129,6 @@ function _Streams_participants(options) {
 		var tool = this;
 		var state = tool.state;
 		var $te = $(tool.element);
-		tool.$elements = {};
 
 		if (state.rendered) {
 			tool.$count = $('.Streams_participants_count', $te);
@@ -214,24 +214,21 @@ function _Streams_participants(options) {
 				}
 				++c;
 				if (!state.maxShow || ++i <= state.maxShow) {
-					_addAvatar(userId);
+					tool.addAvatar(userId);
 				}
 			}, { sort: 'insertedTime', ascending: false });
 			state.count = c;
 			if (state.showBlanks) {
 				Q.each(c, state.maxShow-1, 1, function () {
-					_addAvatar('');
+					tool.addAvatar('');
 				});
 			}
 			_continue();
 
 		}, {participants: state.maxLoad});
-		return true;
-		
+
 		function _continue() {
 			tool.stateChanged('count');
-
-			tool.adjustInterval = setInterval(_adjustInterval, 500);
 
 			if (state.max) {
 				tool.$max.text('/' + state.max);
@@ -241,13 +238,21 @@ function _Streams_participants(options) {
 				var stream = this;
 				stream.onMessage("Streams/join")
 				.set(function (stream, message, messages) {
-					_addAvatar(message.byUserId, true);
+					if (tool.avatarExists(message.byUserId)) {
+						return;
+					}
+
+					tool.addAvatar(message.byUserId, true);
 					++tool.state.count;
 					tool.stateChanged('count');
 				}, tool);
 				stream.onMessage("Streams/leave")
 				.set(function (stream, message, messages) {
-					_removeAvatar(message.byUserId);
+					if (!tool.avatarExists(message.byUserId)) {
+						return;
+					}
+
+					tool.removeAvatar(message.byUserId);
 					--tool.state.count;
 					tool.stateChanged('count');
 				}, tool);
@@ -319,38 +324,8 @@ function _Streams_participants(options) {
 			});
 		}
 
-		function _addAvatar(userId, prepend) {
-			var $e = userId ? tool.$avatars : tool.$blanks;
-			if (userId && $(".Users_avatar_tool[id*=" + userId + "]", $e).length) {
-				return;
-			}
-
-			var $element = $(Q.Tool.setUpElement(
-				'div', 
-				'Users/avatar',
-				Q.extend({}, state.avatar, {
-					userId: userId,
-				}),
-				userId || null, 
-				tool.prefix)
-			);
-			if (false === Q.handle(state.filter, tool, [userId, $element[0]])) {
-				return;
-			}
-
-			$element[prepend?'prependTo':'appendTo']($e).activate(function () {
-				tool.orderAvatars();
-			});
-		}
-		
-		function _removeAvatar(userId) {
-			var $element = tool.$elements[userId];
-			if ($element) {
-				Q.removeElement($element[0], true);
-			}
-		}
-
-		function _adjustInterval() {
+		// adjust Streams_participants_container on tool width changed
+		Q.onLayout(tool.element).set(function () {
 			var w = $te.width();
 			var pm = tool.$pc.outerWidth(true) - tool.$pc.width();
 			if (state.showSummary) {
@@ -376,6 +351,58 @@ function _Streams_participants(options) {
 			}
 
 			tool.$pc.width(w - pm);
+		}, tool);
+	},
+	/**
+	 * Check if avatar exists
+	 * @method avatarExists
+	 * @param {string} userId
+	 */
+	avatarExists: function (userId) {
+		return this.$elements[userId];
+	},
+	/**
+	 * Add avatar to participants list
+	 * @method addAvatar
+	 * @param {string} userId
+	 * @param {boolean} prepend - if true, prepend avatar, otherwise append
+	 */
+	addAvatar: function (userId, prepend) {
+		var tool = this;
+		var state = this.state;
+		var $e = userId ? tool.$avatars : tool.$blanks;
+		if (userId && tool.avatarExists(userId)) {
+			return;
+		}
+
+		var $element = $(Q.Tool.setUpElement(
+			'div',
+			'Users/avatar',
+			Q.extend({}, state.avatar, {
+				userId: userId,
+			}),
+			userId || null,
+			tool.prefix)
+		);
+		if (false === Q.handle(state.filter, tool, [userId, $element[0]])) {
+			return;
+		}
+
+		$element[prepend ? 'prependTo' : 'appendTo']($e).activate(function () {
+			tool.orderAvatars();
+		});
+	},
+	/**
+	 * Remove avatar from participants list
+	 * @method removeAvatar
+	 * @param {string} userId
+	 */
+	removeAvatar: function (userId) {
+		var tool = this;
+		var $element = tool.$elements[userId];
+		if ($element) {
+			Q.removeElement($element[0], true);
+			delete tool.$elements[userId];
 		}
 	},
 	/**
