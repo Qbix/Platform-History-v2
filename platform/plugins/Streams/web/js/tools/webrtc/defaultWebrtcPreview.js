@@ -85,15 +85,12 @@
                             var jq = tool.$('img.Streams_preview_icon');
                             tool.preview.icon(jq[0], null);
                             var $pc = tool.$('.Streams_preview_contents');
-                            if ($pc.parent().is(":visible")) {
-                                $pc.width(0).width($pc[0].remainingWidth());
-                            }
-                            Q.onLayout(tool.element).set(function () {
-                                var $pc = tool.$('.Streams_preview_contents');
+                            var _adjustWidth = function () {
                                 if ($pc.parent().is(':visible')) {
-                                    $pc.width(0).width($pc[0].remainingWidth());
+                                    $pc.width($pc[0].remainingWidth());
                                 }
-                            }, tool);
+                            }();
+                            Q.onLayout(tool.element).set(_adjustWidth, tool);
                             Q.handle(state.onRender, tool);
                         });
                     },

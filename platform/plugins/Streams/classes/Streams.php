@@ -3058,6 +3058,7 @@ abstract class Streams extends Base_Streams
 			}
 			Streams_Participant::insertManyAndExecute($rows);
 		}
+		$messages = empty($streamNames) ? null : array();
 		foreach ($streamNames as $sn) {
 			$stream = $streams2[$sn];
 			$participant = Q::ifset($participants, $sn, null);
@@ -4129,7 +4130,7 @@ abstract class Streams extends Base_Streams
 					$r->type,
 					$stream->publisherId,
 					$stream->name,
-					$options['unrelate'],
+					$options['unrelate']
 				);
 			} catch (Exception $e) {}
 		}

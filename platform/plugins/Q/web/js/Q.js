@@ -12038,6 +12038,27 @@ Q.Pointer = {
 		return rect;
 	},
 	/**
+	 * Sets an observer to wait for an element become visible
+	 * @static
+	 * @method waitUntilVisible
+	 * @param {Element} element the element to watch
+	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer)
+	 * @param {Object|Number} options The options to pass to the observer
+	 * @return {IntersectionObserver}
+	 */
+	waitUntilVisible: function (element, callback, options) {
+		var o = Q.extend({}, Q.Pointer.waitUntilVisible, options);
+		var observer = new IntersectionObserver(function (entries, observer) {
+			if (entries[0] && entries[0].isIntersecting) {
+				observer.unobserve(element);
+			}
+			callback && callback.apply(this, arguments);
+		}, o);
+		var target = element;
+		observer.observe(element);
+		return observer;
+	},
+	/**
 	 * Returns the x coordinate of an event relative to the document
 	 * @static
 	 * @method getX
@@ -12166,6 +12187,7 @@ Q.Pointer = {
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
+	 * @param {Boolean|Object} [options.waitUntilVisible=false] Wait until it's visible, then show hint right away. You can also pass an options here for Q.Pointer.waitUntilVisible(). Typically used together with dontStopBeforeShown.
 	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
@@ -12189,11 +12211,31 @@ Q.Pointer = {
 	 * @param {Integer} [options.hide.after=null] Set an integer here to hide the hint animation after the specified number of milliseconds
 	 * @param {Integer} [options.hide.duration=500] The duration of the hint hide animation
 	 * @param {Function} [options.hide.ease=Q.Animation.ease.smooth]
-	 * @return {HTMLElement} img1 - Hint image element
+	 * @return {HTMLElement|IntersectionObserver} img1 - Hint image element, or an intersection observer if waitUntilVisible is true
 	 */
 	hint: function (targets, options) {
 
 		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
+		if (options.waitUntilVisible) {
+			return Q.Pointer.waitUntilVisible(targets[0], function (entries, observer) {
+				if (entries[0].isIntersecting) {
+					var sp = entries[0].target.scrollingParent();
+					var st = sp.scrollTop;
+					var ival = setInterval(function () {
+						if (st === sp.scrollTop) {
+							// scrolling paused for a little bit
+							clearInterval(ival);
+							options.waitUntilVisible = false;
+							options.dontStopBeforeShown = true;
+							Q.Pointer.hint(targets, options);
+						}
+						st = sp.scrollTop;
+					}, 300);
+				}
+			}, options.waitUntilVisible === true ? {} : options.waitUntilVisible);
+		}
+
+		var args = Array.prototype.slice.call(arguments, 0);
 		var img, img1, i, l;
 		var imageEvent = options.imageEvent || new Q.Event();
 		var audioEvent = options.audioEvent || new Q.Event();
@@ -12268,7 +12310,6 @@ Q.Pointer = {
                         if (typeof img.target === 'string') {
                             img.target = document.querySelector(img.target);
                         }
-                        img1.timeout = options.neverRemove;
                         var point;
                         var target = img.target;
                         if (Q.instanceOf(target, Element)) {
@@ -12359,6 +12400,9 @@ Q.Pointer = {
                                 img.style.left = point.x - w * options.hotspot.x + 'px';
                                 img.style.top = point.y - h * options.hotspot.y + 'px';
                             }
+							if (y === 1 && img === img1) {
+								img1.timeout = options.neverRemove;
+							}
                         }, options.show.duration, options.show.ease);
                         if (options.hide && options.hide.after) {
                             setTimeout(function () {
@@ -12550,7 +12594,8 @@ Q.Pointer = {
 	 * Consistently obtains the element under pageX and pageY relative to document
 	 * @static
 	 * @method elementFromPoint
-	 * @param {Q.Event} e Some mouse or touch event from the DOM
+	 * @param {Number} pageX horizontal coordinates relative to the page
+	 * @param {Number} pageY vertical coordinates relative to the page
 	 * @return {HTMLElement}
 	 */
 	elementFromPoint: function (pageX, pageY) {
@@ -12739,6 +12784,12 @@ Q.Pointer.touchclick.duration = 400;
 Q.Pointer.latest = {
 	which: Q.Pointer.which.NONE,
 	touches: []
+};
+
+Q.Pointer.waitUntilVisible.options = {
+	root: null,
+	rootMargin: '0px',
+	threshold: 1.0
 };
 
 Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
