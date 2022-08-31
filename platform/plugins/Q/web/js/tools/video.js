@@ -234,7 +234,7 @@ Q.Tool.define("Q/video", function (options) {
 
 				// skip using overlay button for ios, because of weird behavior
 				// some times called event onPause but video doens't paused and play further
-				if (!$overlayPlay.length && !state.isIos) {
+				if (!$overlayPlay.length) {
 					Q.Template.render("Q/video/twitch/overplay", {
 						src: Q.url(state.overlay.play.src),
 						poster: state.image
@@ -302,13 +302,13 @@ Q.Tool.define("Q/video", function (options) {
 					var position = tool.getCurrentPosition();
 					//console.log("Paused at position " + position + " milliseconds");
 					Q.handle(state.onPause, tool);
-					$overlayPlay.show();
+					//$overlayPlay.show();
 				}, throttle);
 				var onEnded = Q.throttle(function () {
 					var position = tool.getCurrentPosition();
 					//console.log("Seeked at position " + position + " milliseconds");
 					Q.handle(state.onEnded, tool);
-					$overlayPlay.show();
+					//$overlayPlay.show();
 				}, throttle);
 
 				state.player.addEventListener(Twitch.Player.PLAY, onPlay);
