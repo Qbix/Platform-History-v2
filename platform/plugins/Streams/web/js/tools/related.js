@@ -75,6 +75,18 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		this.element.classList.add("Streams_related_participant");
 	}
 
+	tool.Q.onStateChanged('relationType').set(function () {
+		if (Q.isEmpty(tool.state.result)) {
+			return;
+		}
+
+		// remove all old previews and clear cache
+		Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
+		tool.state.result= {};
+		tool.previewElements = {};
+		tool.refresh();
+	}, tool);
+
 	var pipe = new Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
 
 	// render the tool
@@ -512,13 +524,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var state = tool.state;
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
 		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
-
-		// remove all old previews
-		if (!Q.isEmpty(tool.state.result)) {
-			Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
-			tool.state.result= {};
-			tool.previewElements = {};
-		}
 
 		Streams.retainWith(tool).related.force(
 			publisherId, 
