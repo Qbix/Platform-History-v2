@@ -294,7 +294,7 @@
                             }
                         },
                         trigger: $toolElement[0],
-                        callback: function () {
+                        onActivate: function () {
                             // max calls select element
                             var $select = $("select[name=maxCalls]", parentElement);
                             for (var i = 1; i <= 100; i++) {
