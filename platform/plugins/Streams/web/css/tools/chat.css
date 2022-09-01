@@ -157,6 +157,7 @@
 }
 .Streams_chat_addons .Streams_chat_addon_icon,
 .Streams_chat_addons .Streams_chat_addon_icon img {
+	margin-right: 10px;
 	width: 40px;
 }
 .Streams_chat_addons .Streams_chat_subscription .Streams_chat_addon_icon img {
