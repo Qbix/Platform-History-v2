@@ -2117,6 +2117,27 @@ abstract class Users extends Base_Users
 	}
 
 	/**
+	 * Verifies a signed payload
+	 * @param {array} $payload Can be a multidimensional array
+	 * @param {string} [$sigField='Q.sig'] Where to find signature. For now, this is always "r, s" from ECDSA signature
+	 * @param {string} [$algorithm='sha256'] Indicates the hash algorithm. Later may also allow user to change the ECDSA curve, etc.
+	 * @return {boolean|null} Returns null if sigField is null or has no publicKey.
+	 *  Otherwise returns boolean for whether the payload was signed successfully.
+	 */
+	static function verify($payload, $signature, $algorithm = 'sha256')
+	{
+		$sigField = Q_Config::get('Users', 'signatures', 'sigField', null);
+		$sigField = str_replace('.', '_', $sigField);
+		unset($payload[$sigField]);
+		if (!$sigField or empty($_SESSION['Users']['publicKey'])) {
+			return null;
+		}
+		$publicKey = $_SESSION['Users']['publicKey'];
+		$serialized = Q_Utils::serialize($payload);
+		return Q_Crypto::verify($serialized, $signature, $publicKey);
+	}
+
+	/**
 	 * @property $loggedOut
 	 * @type boolean
 	 */

@@ -194,6 +194,15 @@
 }
 .Q_video_tool .Q_video_overlay_play {
     position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.Q_video_tool .Q_video_overlay_play img {
+    position: absolute;
     height: 100%;
     top: 0;
     left: 50%;

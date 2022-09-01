@@ -631,14 +631,22 @@ Q.Tool.define({
 	"Streams/calls/call": "{{Streams}}/js/tools/call.js"
 });
 
+Streams.Chat = {
+	extensions: [
+		'Streams/mentions/chat',
+		'Streams/audio/chat',
+		'Streams/video/chat',
+		'Streams/pdf/chat',
+		'Streams/image/chat'
+	]
+};
+
 Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element)
-	.tool('Streams/mentions/chat')
-	.tool('Streams/audio/chat')
-	.tool('Streams/video/chat')
-	.tool('Streams/pdf/chat')
-	.tool('Streams/image/chat')
-	.activate();
+	var $e = $(this.element);
+	Q.each(Streams.Chat.extensions, function (i, name) {
+		$e.tool(name);
+	});
+	$e.activate();
 }, 'Streams');
 
 /**
@@ -5634,7 +5642,7 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 					result[type] = messageTotals[type];
 				}
 			}, {
-				throwIfNoIndex: false
+				evenIfNoIndex: true
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]

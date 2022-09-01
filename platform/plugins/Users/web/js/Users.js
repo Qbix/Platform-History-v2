@@ -16,6 +16,14 @@
 		connected: {}, // check this to see if you are connected to a platform
 		icon: {
 			defaultSize: 40 // might be overridden, but is required by some tools
+		},
+		Session: {
+			key: {
+				generateOnLogin: true,
+				name: 'ECDSA', 
+				namedCurve: 'P-384',
+				hash: 'SHA-256'
+			}
 		}
 	};
 
@@ -602,6 +610,88 @@
 		});
 	}
 
+	Q.request.options.beforeRequest.push(
+	function (url, slotNames, options, callback) {
+		var fields = options.fields || {};
+		var found = false;
+		Q.each(Users.requireLogin, function (u, v) {
+			if (url.split('?')[0] != u) {
+				return;
+			}
+			var nonce = Date.now();
+			fields[Users.signatures.nonceField] = nonce;
+			found = true;
+			var fieldNames = Q.isArrayLike(v) ? v : Object.keys(fields);
+			Users.sign(fields,
+			function (err, signature) {
+				if (err) {
+					callback(url, slotNames, options);
+				}
+				fields[Users.signatures.sigField] = {
+					signature: signature,
+					fieldNames: fieldNames
+				}
+				callback(url, slotNames, options);
+			}, fieldNames);
+		});
+		if (!found) {
+			return callback(url, slotNames, options);
+		}
+	});
+
+	/**
+	 * Sign a specific payload with the user's private key, if it has been saved in IndexedDB.
+	 * Gets canonical serialization of the payload with Q.serialize(),
+	 * then gets the key from IndexedDB and signs the serialization.
+	 * It can be verified with Users.verify() or Q_Users::verify()
+	 * @method sign
+	 * @static
+	 * @param {Object} payload The payload to sign. It will be serialized with Q.serialize()
+	 * @param {Function} callback Receives the signature, if one was computed
+	 * @param {Array} [fieldNames] The names of the fields from the payload to sign, otherwise signs all.
+	 */
+	Users.sign = function (payload, callback, fieldNames) {
+		if (fieldNames && fieldNames.indexOf(Users.signatures.nonceField) < 0) {
+			fieldNames.push(Users.signatures.nonceField);
+		}
+		var serialized = Q.serialize(
+			fieldNames ? Q.take(payload, fieldNames) : payload
+		);
+		var key = Users.Session.key.loaded;
+		if (key) {
+			_sign(key);
+		} else {
+			Q.IndexedDB.open('Q.Users', 'keys', 'id',
+			function (err, store) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+				var request = store.get('Users.Session');
+				request.onsuccess = function (event) {
+					_sign(Users.Session.key.loaded = event.target.result.key);
+				};
+				request.onerror = function (event) {
+					Q.handle(callback, null, [event]);
+				};
+			});
+		}
+		function _sign(key) {
+			crypto.subtle.sign(
+				{
+					name: 'ECDSA',
+					hash: 'SHA-256'
+				}, 
+				key.privateKey,
+				new TextEncoder().encode(serialized)
+			).then(function (arrayBuffer) {
+				var signature = Array.prototype.slice.call(
+					new Uint8Array(arrayBuffer), 0
+				).toHex();
+				Q.handle(callback, null, [signature]);
+			});
+		}
+	}
+
 	/**
 	 * Used when platform user is logged in to platform but not to app.
 	 * Shows prompt asking if user wants to log in to the app as platform user.
@@ -756,7 +846,7 @@
 			FB.api('/me/permissions', function (response) {
 				if (response && response.data) {
 					var checked = [];
-					Q.each(options && options.check, function (i, s) {
+					Q.each(options && options.check, function (a, s) {
 						var granted = false;
 						for (var i = 0, l = response.data.length; i < l; ++i) {
 							if (response.data[i].permission === s
@@ -2898,6 +2988,7 @@
 		if (lost) {
 			Q.Users.onLoginLost.handle();
 			Q.Users.loggedInUser = null;
+			Users.Session.key.loaded = null;
 			Q.Users.roles = {};
 			Q.Session.clear();
 			Q.Users.hinted = [];
@@ -2916,8 +3007,52 @@
 			Q.Text.setLanguage.apply(Q.Text, info);
 		}
 
+		// generate a new session key, and tell the server
+		var keyConfig = Q.Users.Session.key;
+		if (!Q.Users.Session.key.generateOnLogin) {
+			return;
+		}
+		crypto.subtle.generateKey({
+			name: keyConfig.name,
+			namedCurve: keyConfig.namedCurve
+		}, false, ['sign', 'verify'])
+		.then(function (key) {
+			var dbName = 'Q.Users';
+			var storeName = 'keys';
+			Q.IndexedDB.open(dbName, storeName, 'id', function (err, store) {
+				// try to store non-extractable private key in IndexedDB
+				store.put({
+					id: 'Users.Session',
+					key: key
+				}).onsuccess = function (event) {
+					// if successfully saved on the client,
+					// then tell the server the exported public key
+					crypto.subtle.exportKey('spki', key.publicKey)
+					.then(function (pk) {
+						var key_hex = Array.prototype.slice.call(
+							new Uint8Array(pk), 0
+						).toHex();
+						Q.req('Users/key', ['saved'], function () {
+							// now server will require it
+						}, {
+							method: 'post',
+							fields: {
+								publicKey: key_hex,
+								info: Users.Session.key
+							}
+						});
+					});
+				}
+			});
+		});
+
+
 	}, 'Users');
 	Users.onLogout = new Q.Event(function () {
+		Users.Session.key.loaded = null;
+		Q.Users.loggedInUser = null;
+		Q.Users.roles = {};
+		Q.Users.hinted = [];
 		Q.Session.clear();
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 	});

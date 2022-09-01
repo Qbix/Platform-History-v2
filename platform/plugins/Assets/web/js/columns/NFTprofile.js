@@ -11,7 +11,7 @@ Q.exports(function (options, index, column, data) {
 
 	Q.Text.get('Assets/content', function (err, content) {
 		$(".Assets_NFTprofile_logout").on(Q.Pointer.fastclick, function () {
-			Q.confirm(content.profile.SureLogOut, function(result) {
+			Q.confirm(content.NFT.profile.SureLogOut, function(result) {
 				if (!result) {
 					return;
 				}

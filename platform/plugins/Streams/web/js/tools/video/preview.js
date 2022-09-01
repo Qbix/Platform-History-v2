@@ -395,7 +395,7 @@
 				fullscreen: Q.info.isMobile,
 				destroyOnClose: true,
 				trigger: Q.info.isMobile ? tool.element : null,
-				callback: function () {
+				onActivate: function () {
 					// if opened in columns - third argument is a column element,
 					// if opened dialog - first argument is dialog element
 					state.mainDialog = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];

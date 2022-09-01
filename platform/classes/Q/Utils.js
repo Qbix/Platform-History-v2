@@ -1079,7 +1079,7 @@ function _dump_log (phase, onsuccess) {
  */
 Utils.splitId = function(id, lengths, delimiter, internalDelimiter, checkRegEx) {
 	if (checkRegEx === undefined) {
-		checkRegEx = new RegExp('^[a-zA-Z0-9\\.\\-\\_]{3,31}$');
+		checkRegEx = new RegExp('^[a-zA-Z0-9\\.\\-\\_]{1,31}$');
 	}
 	if (checkRegEx) {
 		if (!id || !id.match(checkRegEx)) {
