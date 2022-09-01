@@ -932,7 +932,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
 				$call.removeClass('Q_disappear').addClass('Q_appear');
 			}
-		}, state.debounce || 100, true));
+		}, state.debounce || 100));
 
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
