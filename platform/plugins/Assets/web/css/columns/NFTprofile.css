@@ -111,6 +111,7 @@
 .Assets_NFTprofile_column .Users_avatar_tool .Users_avatar_icon_200 {
     height: 150px !important;
     width: 150px !important;
+    margin: 0;
 }
 .Q_notMobile .Q_columns_stretchFirstColumn .Q_columns_column .Assets_NFT_series_preview_tool {
     width: auto;
