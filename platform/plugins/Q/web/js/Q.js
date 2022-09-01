@@ -6036,9 +6036,9 @@ Cp.removeEach = function _Q_Cache_prototype_each(args, options) {
 Q.Cache.document = function _Q_Cache_document(name, max, options) {
 	if (!Q.Cache.document.caches[name]) {
 		var cache = Q.Cache.document.caches[name] = new Q.Cache(Q.extend({
-			max: max
+			max: max,
+			name: name
 		}, options));
-		cache.name = name;
 	}
 	return Q.Cache.document.caches[name];
 };
@@ -6046,9 +6046,9 @@ Q.Cache.local = function _Q_Cache_local(name, max, options) {
 	if (!Q.Cache.local.caches[name]) {
 		var cache = Q.Cache.local.caches[name] = new Q.Cache(Q.extend({
 			localStorage: true,
-			max: max
+			max: max,
+			name: name
 		}, options));
-		cache.name = name;
 	}
 	return Q.Cache.local.caches[name];
 };
@@ -6056,9 +6056,9 @@ Q.Cache.session = function _Q_Cache_session(name, max, options) {
 	if (!Q.Cache.session.caches[name]) {
 		var cache = Q.Cache.session.caches[name] = new Q.Cache(Q.extend({
 			sessionStorage: true,
-			max: max
+			max: max,
+			name: name
 		}, options));
-		cache.name = name;
 	}
 	return Q.Cache.session.caches[name];
 };

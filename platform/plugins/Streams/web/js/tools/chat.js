@@ -14,7 +14,8 @@
  *   @param {String} [options.streamName] Required if stream option is empty. The stream's name.
  *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
  *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
- *   @param {Stream} [options.inputType="text"] Can be either "text" or "textarea"
+ *   @param {String} [options.inputType="text"] Can be either "text" or "textarea"
+ *   @param {String} [options.drafts="Streams/chat"] Name of the local cache to save drafts in. Set to false to skip saving drafts.
  *   @param {String} [options.messagesToLoad] The number of "Streams/chat" messages to load at a time.
  *   @param {String} [options.messageMaxHeight] The maximum height, in pixels, of a rendered message
  *   @param {Stream} [options.seen] Whether the tool should mark rendered chat messages as seen
@@ -68,6 +69,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.vote[k].src = Q.url(state.vote[k].src);
 			state.vote[k].activeSrc = Q.url(state.vote[k].activeSrc);
 		}
+	}
+
+	if (state.drafts) {
+		tool.cache = Q.Cache.local('Streams/chat');
 	}
 
 	var pipe = new Q.Pipe(["text", "styles"], function () {
@@ -132,6 +137,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	animations: {
 		duration: 300
 	},
+	drafts: true,
 	vote: {
 		up: {
 			src: '{{Streams}}/img/chat/vote-up.png',
@@ -324,6 +330,15 @@ Q.Tool.define('Streams/chat', function(options) {
 			function(error, html){
 				if (error) { return error; }
 				$te.html(html, true).activate(function () {
+					if (tool.cache) {
+						var data = tool.cache.get(Q.Streams.key(
+							state.publisherId, state.streamName
+						));
+						if (data) {
+							$te.find('.Streams_chat_composer input')
+							.val(data.params[0]); // restore any draft
+						}
+					}
 					Q.handle(state.onRender, tool);
 				});
 
@@ -885,16 +900,28 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (!Q.info.isTouchscreen) {
 				this.plugin('Q/clickfocus');
 			}
-		}).on('keypress change input focus paste blur Q_refresh', function(event) {
+		}).on('keypress change input focus paste blur Q_refresh', Q.debounce(function(event) {
 			var $this = $(this);
 			var $form = $this.closest('form');
 			var $submit = $form.find('.Streams_chat_submit');
 			var $call = $form.find('.Streams_chat_call');
 			var content = $this.val().trim();
+			var key = Q.Streams.key(
+				state.publisherId, state.streamName
+			);
+
+			if (tool.cache) {
+				if (content) {
+					tool.cache.set(key, 0, null, [content]);
+				} else {
+					tool.cache.remove(key);
+				}
+			}
 
 			// 'enter' key handler
+			// TODO: perhaps better to just handle form submit?
 			if (event.keyCode === 13) {
-				Q.handle(_submit, this, [$this]);
+				Q.handle(_submit, this, [$this, key]);
 				return false;
 			}
 
@@ -905,7 +932,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
 				$call.removeClass('Q_disappear').addClass('Q_appear');
 			}
-		});
+		}, state.debounce || 100, true));
 
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {
@@ -930,7 +957,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			tool.startWebRTC();
 		});
 
-		function _submit ($this) {
+		function _submit ($this, key) {
 			if (blocked) {
 				return false;
 			}
@@ -982,6 +1009,10 @@ Q.Tool.define('Streams/chat', function(options) {
 						tool.renderError(err, args[0], args[1]);
 						tool.scrollToBottom();
 						return;
+					}
+
+					if (tool.cache && key) { // remove draft after successful post
+						tool.cache.remove(key);
 					}
 
 					Q.handle(state.afterPost, tool, [fields, args]);
@@ -1347,5 +1378,7 @@ Q.Template.set('Streams/chat/main',
 	'{{/if}}' +
 	'<div class="Q_clear"></div>'
 );
+
+Q.Cache.local('Streams/chat', 100); // create a cache
 
 })(Q, jQuery);
