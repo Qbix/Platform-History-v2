@@ -4,7 +4,7 @@ function Q_nonce_response_data()
 {
 	$method = Q_Request::method();
 	if ($method !== 'POST') {
-		throw new Q_Exception_MethodNotSupported($method);
+		throw new Q_Exception_MethodNotSupported(compact('method'));
 	}
 
 	// we could technically return the nonce in the response,

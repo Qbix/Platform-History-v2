@@ -88,7 +88,9 @@
         },
 
         {
-
+            managingScenes: true,
+            managingVisualSources: true,
+            managingAudioSources: true
         },
 
         {
@@ -96,6 +98,7 @@
                 if(this.advancedLiveStreamingBox != null) return this.advancedLiveStreamingBox;
                 var tool = this;
                 var controlsTool = this.state.controlsTool;
+                var roomStream = controlsTool.WebRTCClass.roomStream();
                 var desktopDialogueEl = null;
                 var mobileHorizontaldialogueEl = null;
                 var mobileVerticaldialogueEl = null;
@@ -331,10 +334,10 @@
 
                         console.log('addNewScenePopup')
                         var dialogue = document.createElement('DIV');
-                        dialogue.className = 'Streams_webrtc_dialog-box dialog-box Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
+                        dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
                         _dialogueEl = dialogue;
                         var close = document.createElement('div');
-                        close.className = 'close-dialog-sign';
+                        close.className = 'Streams_webrtc_close-dialog-sign';
                         close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                         close.style.backgroundRepeat = 'no-repeat';
                         close.style.backgroundSize = 'cover';
@@ -508,6 +511,7 @@
 
                         var scenesColumnControlAddBtn = document.createElement('DIV');
                         scenesColumnControlAddBtn.className = 'Streams_webrtc_popup-scenes-control-btn Streams_webrtc_popup-scenes-control-btn-add';
+                        if(!tool.state.managingScenes) scenesColumnControlAddBtn.classList.add('Streams_webrtc_inactive');
                         scenesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
 
                         scenesColumnControlAddBtn.addEventListener('click', function (event) {
@@ -518,11 +522,13 @@
 
                         var scenesColumnControlBtn = document.createElement('DIV');
                         scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn Streams_webrtc_popup-scenes-control-btn-remove';
+                        if(!tool.state.managingScenes) scenesColumnControlBtn.classList.add('Streams_webrtc_inactive');
                         scenesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
                         scenesColumnControlBtn.addEventListener('click', function () {
                             removeScene();
                         })
                         scenesColumnControl.appendChild(scenesColumnControlBtn);
+
                         var scenesColumnControlBtn = document.createElement('DIV');
                         scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn';
                         scenesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
@@ -839,10 +845,107 @@
                             }
                         }
 
+                        function addWatermark(e, options) {
+                            console.log('addWatermark');
+                            if(options.type == 'image') {
+                                if (typeof e == 'string') {
+                                    var pathhInfo = e.split('/');
+                                    var title = pathhInfo[pathhInfo.length - 1];
+
+                                    var img = new Image();
+                                    img.src = e;
+                                    img.onload = function () {
+                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                            sourceType: 'imageOverlay',
+                                            imageInstance: img,
+                                            position: options.position,
+                                            opacity: options.opacity
+                                        });
+                                    };
+                                } else {
+                                    var tgt = e.target || window.event.srcElement,
+                                        files = tgt.files;
+
+                                    function loadImage(fileReader) {
+                                        var img = new Image();
+                                        img.src = fileReader.result;
+                                        img.onload = function () {
+                                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                                sourceType: 'imageOverlay',
+                                                title: files[0].name,
+                                                imageInstance: img,
+                                            });
+                                        };
+
+                                    }
+
+                                    if (FileReader && files && files.length) {
+                                        var fr = new FileReader();
+                                        fr.onload = () => loadImage(fr);
+                                        fr.readAsDataURL(files[0]);
+                                    }
+                                }
+                            } else {
+
+                            }
+                        }
+
+                        function addBackground(e, options) {
+                            console.log('addBackground');
+                            if(options.type == 'image') {
+                                if (typeof e == 'string') {
+                                    var img = new Image();
+                                    img.src = e;
+                                    img.onload = function () {
+                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                            sourceType: 'imageBackground',
+                                            imageInstance: img
+                                        });
+                                    };
+                                } else {
+                                    var tgt = e.target || window.event.srcElement,
+                                        files = tgt.files;
+
+                                    function loadImage(fileReader) {
+                                        var img = new Image();
+                                        img.src = fileReader.result;
+                                        img.onload = function () {
+                                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                                sourceType: 'img',
+                                                title: files[0].name,
+                                                imageInstance: img,
+                                            });
+                                        };
+
+                                    }
+
+                                    if (FileReader && files && files.length) {
+                                        var fr = new FileReader();
+                                        fr.onload = () => loadImage(fr);
+                                        fr.readAsDataURL(files[0]);
+                                    }
+                                }
+                            } else {
+                                if(typeof e == 'string') {
+
+                                    var pathhInfo = e.split('/');
+                                    var title = pathhInfo[pathhInfo.length - 1];
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                        sourceType: 'videoBackground',
+                                        title: title,
+                                        url: e,
+                                    });
+                                } else {
+
+
+                                }
+                            }
+                        }
+
                         function addImageSource(e) {
                             if(typeof e == 'string') {
                                 var pathhInfo = e.split('/');
-                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
+                                var title = pathhInfo[pathhInfo.length - 1];
 
                                 var img = new Image();
                                 img.src = e;
@@ -882,7 +985,7 @@
                             if(typeof e == 'string') {
 
                                 var pathhInfo = e.split('/');
-                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
+                                var title = pathhInfo[pathhInfo.length - 1];
                                 controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                     sourceType: 'video',
                                     title: title,
@@ -1004,7 +1107,7 @@
                                         boxContent.appendChild(progressBar);
 
                                         var close=document.createElement('div');
-                                        close.className = 'Streams_webrtc_popup-close-dialog-sign';
+                                        close.className = 'Streams_webrtc_close-dialog-sign';
                                         close.innerHTML = '&#10005;';
                                         var popupinstance = this;
                                         close.addEventListener('click', function() {
@@ -1244,12 +1347,16 @@
 
                                 _fileManagerTool.state.onSelect.set(function (stream) {
                                     console.log('Streams/fileManager onSelect', stream)
+                                    if(stream.fields.attributes == '') {
+                                        console.error('Q.file.url is missing')
+                                        return;
+                                    }
                                     var attributes = JSON.parse(stream.fields.attributes);
                                     var link = Q.url(attributes['Q.file.url']);
                                     console.log('Streams/fileManager attributes', link)
-                                    if(stream['type'] == 'Streams/video') {
+                                    if(stream.fields.type == 'Streams/video') {
                                         addVideoSource(link);
-                                    } else if(stream['type'] == 'Streams/image') {
+                                    } else if(stream.fields.type == 'Streams/image') {
                                         addImageSource(link);
                                     } else {
                                         alert('Wrong type of file')
@@ -1283,6 +1390,7 @@
 
                             var sourcesColumnControlAddBtn = document.createElement('DIV');
                             sourcesColumnControlAddBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-add';
+                            if(!tool.state.managingVisualSources) sourcesColumnControlAddBtn.classList.add('Streams_webrtc_inactive');
                             sourcesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
                             sourcesColumnControlAddBtn.appendChild(dropUpMenu);
 
@@ -1312,6 +1420,7 @@
 
                             var sourcesColumnControlBtn = document.createElement('DIV');
                             sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-remove';
+                            if(!tool.state.managingVisualSources) sourcesColumnControlBtn.classList.add('Streams_webrtc_inactive');
                             sourcesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
                             sourcesColumnControlBtn.addEventListener('click', function () {
                                 removeSource();
@@ -1348,14 +1457,14 @@
 
                             console.log('addVideoPopup')
                             var dialogue=document.createElement('DIV');
-                            dialogue.className = 'dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-video Streams_webrtc_hidden';
+                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-video Streams_webrtc_hidden';
                             _dialogueEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add video';
-                            dialogTitle.className = 'dialog-header Q_dialog_title';
+                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'dialog-inner';
+                            dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
                             boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
                             var boxContentText=document.createElement('DIV');
@@ -1384,7 +1493,7 @@
                             boxContent.appendChild(imageItemLinkInput);
 
                             var close=document.createElement('div');
-                            close.className = 'close-dialog-sign';
+                            close.className = 'Streams_webrtc_close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
@@ -1498,14 +1607,14 @@
 
                             console.log('addImagePopup')
                             var dialogue=document.createElement('DIV');
-                            dialogue.className = 'dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-image Streams_webrtc_hidden';
+                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-image Streams_webrtc_hidden';
                             _dialogueEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add image';
-                            dialogTitle.className = 'dialog-header Q_dialog_title';
+                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'dialog-inner';
+                            dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
                             boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
                             var boxContentText=document.createElement('DIV');
@@ -1534,7 +1643,7 @@
                             boxContent.appendChild(imageItemLinkInput);
 
                             var close=document.createElement('div');
-                            close.className = 'close-dialog-sign';
+                            close.className = 'Streams_webrtc_close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
@@ -1649,6 +1758,8 @@
                             moveBackward: moveBackward,
                             removeSource: removeSource,
                             addImageSource: addImageSource,
+                            addWatermark: addWatermark,
+                            addBackground: addBackground,
                             addVideoSource: addVideoSource,
                             getSelectedSource: getSelectedSource,
                             getSourcesList: getSourcesList,
@@ -1917,10 +2028,14 @@
 
                                 _fileManagerTool.state.onSelect.set(function (stream) {
                                     console.log('Streams/fileManager onSelect', stream)
-                                    var attributes = JSON.parse(stream['attributes']);
+                                    if(stream.fields.attributes == '') {
+                                        console.error('Q.file.url is missing')
+                                        return;
+                                    }
+                                    var attributes = JSON.parse(stream.fields.attributes);
                                     var link = Q.url(attributes['Q.file.url']);
                                     console.log('Streams/fileManager attributes', link)
-                                    if(stream['type'] == 'Streams/audio') {
+                                    if(stream.fields.type == 'Streams/audio') {
                                         addAudioSource(link);
                                     } else {
                                         alert('Wrong file type')
@@ -1955,6 +2070,7 @@
 
                             var sourcesColumnControlAddBtn = document.createElement('DIV');
                             sourcesColumnControlAddBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-add';
+                            if(!tool.state.managingAudioSources) sourcesColumnControlAddBtn.classList.add('Streams_webrtc_inactive');
                             sourcesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
                             sourcesColumnControlAddBtn.appendChild(dropUpMenu);
 
@@ -1982,6 +2098,7 @@
 
                             var sourcesColumnControlBtn = document.createElement('DIV');
                             sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-remove';
+                            if(!tool.state.managingAudioSources) sourcesColumnControlBtn.classList.add('Streams_webrtc_inactive');
                             sourcesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
                             sourcesColumnControlBtn.addEventListener('click', function () {
                                 removeAudioSource(_selectedSource);
@@ -2069,14 +2186,14 @@
 
                             console.log('addVideoPopup')
                             var dialogue=document.createElement('DIV');
-                            dialogue.className = 'dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
+                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
                             _dialogueEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add audio';
-                            dialogTitle.className = 'dialog-header Q_dialog_title';
+                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'dialog-inner';
+                            dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
                             boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
                             var boxContentText=document.createElement('DIV');
@@ -2105,7 +2222,7 @@
                             boxContent.appendChild(imageItemLinkInput);
 
                             var close=document.createElement('div');
-                            close.className = 'close-dialog-sign';
+                            close.className = 'Streams_webrtc_close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
@@ -3884,14 +4001,14 @@
                 function createPopup() {
                     console.log('createPopup 00', scenesInterface)
                     var dialogue=document.createElement('DIV');
-                    dialogue.className = 'dialog-box advanced-streaming Streams_webrtc_hidden';
+                    dialogue.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden';
                     _dialogueEl = dialogue;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.textes);
-                    dialogTitle.className = 'dialog-header Q_dialog_title';
+                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
-                    dialogInner.className = 'dialog-inner';
+                    dialogInner.className = 'Streams_webrtc_dialog-inner';
                     var boxContent=document.createElement('DIV');
                     boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
 
@@ -3935,7 +4052,7 @@
                     streamingControls.appendChild(optionsColumn);
 
                     var close=document.createElement('div');
-                    close.className = 'close-dialog-sign';
+                    close.className = 'Streams_webrtc_close-dialog-sign';
                     close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                     close.style.backgroundRepeat = 'no-repeat';
                     close.style.backgroundSize = 'cover';
@@ -4034,14 +4151,14 @@
                 function createPopupHorizontalMobile() {
                     console.log('createPopupHorizontalMobile 00', scenesInterface)
                     var dialogue=document.createElement('DIV');
-                    dialogue.className = 'dialog-box advanced-streaming Streams_webrtc_hidden Q_orientHorizontally';
+                    dialogue.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden Q_orientHorizontally';
                     _dialogueEl = dialogue;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = 'Streaming settings';
-                    dialogTitle.className = 'dialog-header Q_dialog_title';
+                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
-                    dialogInner.className = 'dialog-inner';
+                    dialogInner.className = 'Streams_webrtc_dialog-inner';
                     var boxContent=document.createElement('DIV');
                     boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
 
@@ -4091,7 +4208,7 @@
                     streamingControls.appendChild(optionsColumn);
 
                     var close=document.createElement('div');
-                    close.className = 'close-dialog-sign';
+                    close.className = 'Streams_webrtc_close-dialog-sign';
                     close.innerHTML = '';
                     /* close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                         close.style.backgroundRepeat = 'no-repeat';

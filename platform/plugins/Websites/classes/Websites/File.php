@@ -411,7 +411,7 @@ class Websites_File extends Base_Websites_Webpage
 			if (!$publisherId || !$streamName) {
 				throw new Exception("Invalid stream");
 			}
-			$stream = Streams::fetchOne(null, $publisherId, $streamName);
+			$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 			if (!($stream instanceof Streams_Stream)) {
 				throw new Exception("Invalid stream");
 			}

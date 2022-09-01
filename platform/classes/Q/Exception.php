@@ -27,6 +27,9 @@ class Q_Exception extends Exception
 	  $trace = null,
 	  $traceAsString = null)
 	{
+		if (!$inputFields) {
+			$inputFields = array();
+		}
 		if (is_string($inputFields)) {
 			$inputFields = array($inputFields);
 		}
@@ -44,6 +47,11 @@ class Q_Exception extends Exception
 			$this->traceAsString = $traceAsString;
 		}
 		
+		$className = get_class($this);
+		$this->header = isset(self::$headers[$className])
+			? self::$headers[$className]
+			: 412; // our catch-all HTTP error code
+
 		if (is_string($params)) {
 			parent::__construct($params, is_numeric($code) ? $code : -1);
 			if (isset($code)) {
@@ -53,15 +61,11 @@ class Q_Exception extends Exception
 		}
 		$this->params = is_array($params) ? $params : array();
 
-		$className = get_class($this);
 		$message = isset(self::$messages[$className])
 			? Q::interpolate(self::$messages[$className], $this->params)
 			: $className;
 		$code = isset($code) ? $code : 
 			(isset(self::$codes[$className]) ? self::$codes[$className] : 1);
-		$this->header = isset(self::$headers[$className])
-			? self::$headers[$className]
-			: 412; // our catch-all HTTP error code
 		parent::__construct($message, $code);
 	}
 	
@@ -119,7 +123,7 @@ class Q_Exception extends Exception
 	 */
 	function inputFields()
 	{
-		return $this->inputFields;
+		return $this->inputFields ? $this->inputFields : array();
 	}
 	
 	/**
@@ -151,6 +155,23 @@ class Q_Exception extends Exception
 		if (isset($header)) {
 			self::$headers[$className] = $header;
 		}
+		$p1 = explode('_', $className);
+		if (count($p1) >= 3 and $className !== 'Q_Exception_PHPError') {
+			$Module = $p1[0];
+			$text = Q_Text::get("$Module/exceptions", array(
+				'dontThrow' => true
+			)); // Search text
+			if ($text) {
+				$p2 = array_slice($p1, 2);
+				foreach ($p2 as $p) {
+					$text = !empty($text[$p]) ? $text[$p] : null;
+				}
+				if ($text and is_string($text)) {
+					$message = $text;
+				}
+			}
+		}
+		$message = Q::interpolate($message); // loads Q_Text if needed
 		static $exception_code = 10000;
 		++$exception_code; // TODO: improve this somehow
 		self::$codes[$className] = $exception_code;
@@ -234,12 +255,12 @@ class Q_Exception extends Exception
 	
 	/**
 	 * Converts an exception or array of exceptions to an array
-	 * @method toArray
+	 * @method buildArray
 	 * @static
 	 * @param {Exception|array} $exceptions The exception object or array of exceptions to convert
 	 * @return {array}
 	 */
-	static function toArray($exceptions)
+	static function buildArray($exceptions)
 	{
 		if (empty($exceptions)) {
 			return array();

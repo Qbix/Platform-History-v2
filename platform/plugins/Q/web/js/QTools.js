@@ -255,15 +255,33 @@
 				{
 					var latestId = Q.Contextual.collection.length - 1;
 					var latest = Q.Contextual.collection[latestId];
+					latest.trigger.on('click.Q_contextual', function () {
+						var $this = $(this);
+						$this.data('Q/contextual clickedTriggerAndDidntLeave', true);
+						var tmt = setTimeout(function () {
+							$(document.body).on('mousemove.Q_contextual', function (e) {
+								var element = Q.Pointer.elementFromPoint(
+									Q.Pointer.getX(e), Q.Pointer.getY(e)
+								);
+								if (!latest.trigger[0].contains(element)) {
+									$this.data('Q/contextual clickedTriggerAndDidntLeave', false);
+									$this.off('mousemove.Q_contextual');
+									clearTimeout(tmt);
+								}
+							});
+						});
+					});
 					latest.trigger.bind('mouseenter.Q_contextual', function()
 					{
-						if (Q.Contextual.current !== -1)
-							Q.Contextual.hide();
-				 
-						if (!Q.Contextual.triggeringDisabled)
-						{
-							Q.Contextual.current = latestId;
-							Q.Contextual.show();
+						if (!latest.trigger.data('Q/contextual clickedTriggerAndDidntLeave')){
+							if (Q.Contextual.current !== -1)
+								Q.Contextual.hide();
+					
+							if (!Q.Contextual.triggeringDisabled)
+							{
+								Q.Contextual.current = latestId;
+								Q.Contextual.show();
+							}
 						}
 					});
 				})();
@@ -420,7 +438,15 @@
 						Q.Contextual.hide();
 					}
 				};
+				Q.Contextual.leaveEventHandler = function (e) {
+					if (e.target.className.split(' ').indexOf('Q_contextual') >= 0) {
+						if (!e.target.contains(e.relatedTarget)) {
+							Q.Contextual.hide();
+						}
+					}
+				};
 				$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);
+				$(document.body).on('mouseout', Q.Contextual.leaveEventHandler);
 			
 				Q.Contextual.endEventHandler = function(e)
 				{
@@ -469,9 +495,8 @@
 
 					// if it was mouseup / touchend on the triggering element, then use it to switch to iScroll instead of $.fn.scroller
 					if (info.curScroll !== 'iScroll' && info.curScroll !== 'touchscroll' &&
-							px >= offset.left && px <= offset.left + trigger.outerWidth() &&
-							py >= offset.top && py <= offset.top + trigger.outerHeight())
-					{
+						trigger[0] && trigger[0].contains(document.elementFromPoint(event.clientX, event.clientY))
+					) {
 						Q.Contextual.toDismiss ?  Q.Contextual.hide() : Q.Contextual.applyScrolling();
 					}
 					else
@@ -569,14 +594,6 @@
 					var listing = scrollerWrapper.children('.Q_listing');
 					if (info.inBottomHalf && listing.height() > listingWrapperHeight)
 						scrollTop = listingWrapperHeight - listing.height();
-					if (Q.info.platform === 'android')
-					{
-						scrollerWrapper.plugin('Q/touchscroll', { 'y': scrollTop });
-					}
-					else
-					{
-						scrollerWrapper.plugin('Q/iScroll', { 'y': scrollTop });
-					}
 				}
 				info.curScroll = scrollerWrapper.data('Q/iScroll') ? 'iScroll' : 'touchscroll';
 			
@@ -704,14 +721,14 @@
 				if (info.coords.x < 5)
 				{
 					x = 5;
-					arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - 10);
+					arrowLeft = (leftOffset + info.coords.x - 10);
 					arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
 					arrow.css({ 'left': arrowLeft + 'px' });
 				}
 				else if (info.coords.x + contextual.outerWidth() + 5 > $body.width())
 				{
 					x = $body.width() - contextual.outerWidth() - 10;
-					arrowLeft = (leftOffset + trigger.outerWidth()/2 + info.coords.x - x);
+					arrowLeft = (leftOffset + info.coords.x - x);
 					arrowLeft = arrowLeft < minArrowLeft ? minArrowLeft : arrowLeft;
 					arrow.css({ 'left': arrowLeft + 'px' });
 				}
@@ -775,9 +792,6 @@
 			var listingWrapper = contextual.children('.Q_listing_wrapper');
 			listingWrapper.plugin('Q/scroller', 'remove');
 			listingWrapper.plugin('Q/iScroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
-			listingWrapper.plugin('Q/touchscroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
 			if (Q.Contextual.fadeTime > 0) {

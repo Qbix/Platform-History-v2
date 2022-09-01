@@ -12,7 +12,7 @@
  
 // Enforce PHP version to be > 5.0
 if (version_compare(PHP_VERSION, '5.0.0', '<')) {
-	die("Q requires PHP version 5.0 or higher. It works even better with PHP 5.4 and above.");
+	die("Q requires PHP version 5.0 or higher. It works even better with PHP 7 and above.");
 }
 
 // Was this loaded? In that case, do nothing.
@@ -90,8 +90,9 @@ require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Cache.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Bootstrap.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Tree.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Config.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Text.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception.php');
-require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PhpError.php');
+require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Exception'.DS.'PHPError.php');
 require_once(Q_CLASSES_DIR.DS.'Q'.DS.'Uri.php');
 require_once(Q_CLASSES_DIR.DS.'Db.php');
 require_once(Q_CLASSES_DIR.DS.'Db'.DS.'Expression.php');

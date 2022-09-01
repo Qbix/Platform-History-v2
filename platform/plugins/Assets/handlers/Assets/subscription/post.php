@@ -21,7 +21,7 @@ function Assets_subscription_post($params = array())
 	
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'planPublisherId', Users::communityId());
-	$plan = Streams::fetchOne($planPublisherId, $planPublisherId, $req['planStreamName'], true);
+	$plan = Streams_Stream::fetch($planPublisherId, $planPublisherId, $req['planStreamName'], true);
 	
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now

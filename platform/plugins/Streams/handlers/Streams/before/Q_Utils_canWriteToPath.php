@@ -40,12 +40,12 @@ function Streams_before_Q_Utils_canWriteToPath($params, &$result)
 					$l = $j;
 					for ($i=$c-1; $i>$j; --$i) {
 						$l = $i;
-						if (in_array($parts[$i], array('icon', 'file'))) {
+						if (in_array($parts[$i], array('icon', 'file', 'video', 'audio'))) {
 							break;
 						}
 					}
                     $streamName = implode('/', array_slice($parts, $j+1, $l-$j-1));
-					if ($streamName && $stream = Streams::fetchOne($userId, $publisherId, $streamName)) {
+					if ($streamName && $stream = Streams_Stream::fetch($userId, $publisherId, $streamName)) {
 						$result = $stream->testWriteLevel('edit');
 						Streams::$cache['canWriteToStream'] = $stream;
 						break;

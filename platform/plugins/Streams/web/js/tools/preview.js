@@ -355,7 +355,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	/**
 	 * @method icon
 	 * @param {HTMLElement} element
-	 * @param {Function} onLoad 
+	 * @param {Function} onLoad  
 	 * @param {Object} [options]
 	 * @param {String} [options.defaultIcon='default']
 	 * @param {String} [options.cacheBust=null]
@@ -364,6 +364,9 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 	icon: function _icon (element, onLoad, options) {
 		var tool = this;
 		var state = tool.state;
+		if (!element) {
+			return onLoad(false);
+		}
 		options = options || {};
 		Q.Streams.get(state.publisherId, state.streamName, function () {
 			// icon and imagepicker
@@ -396,7 +399,7 @@ Q.Tool.define("Streams/preview", function _Streams_preview(options) {
 
 			// if icon url already valid, set it and src
 			if (icon.match(/\.[a-z]{3,4}$/i)) {
-				element.src = icon;
+				element.src = Q.url(icon);
 			} else {
 				element.src = Q.url(
 					Q.Streams.iconUrl(icon, file), null,

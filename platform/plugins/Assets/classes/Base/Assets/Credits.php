@@ -27,7 +27,7 @@
  * @param {integer} [$fields.credits] defaults to 0
  * @param {string} [$fields.attributes] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
- * @param {string|Db_Expression} [$fields.updatedTime] defaults to "0000-00-00 00:00:00"
+ * @param {string|Db_Expression} [$fields.updatedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  */
 abstract class Base_Assets_Credits extends Db_Row
 {
@@ -100,7 +100,7 @@ abstract class Base_Assets_Credits extends Db_Row
 	/**
 	 * @property $updatedTime
 	 * @type string|Db_Expression
-	 * @default "0000-00-00 00:00:00"
+	 * @default new Db_Expression("CURRENT_TIMESTAMP")
 	 * 
 	 */
 	/**
@@ -255,6 +255,17 @@ abstract class Base_Assets_Credits extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Assets_Credits($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Assets_Credits'))
@@ -330,7 +341,8 @@ abstract class Base_Assets_Credits extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('id', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -384,7 +396,8 @@ return array (
 		if (!isset($value)) {
 			return array('fromUserId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('fromUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -438,7 +451,8 @@ return array (
 		if (!isset($value)) {
 			return array('toUserId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('toUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -492,7 +506,8 @@ return array (
 		if (!isset($value)) {
 			return array('fromPublisherId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('fromPublisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -546,7 +561,8 @@ return array (
 		if (!isset($value)) {
 			return array('fromStreamName', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('fromStreamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -600,7 +616,8 @@ return array (
 		if (!isset($value)) {
 			return array('toPublisherId', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('toPublisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -654,7 +671,8 @@ return array (
 		if (!isset($value)) {
 			return array('toStreamName', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('toStreamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -708,7 +726,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('reason', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -758,7 +777,8 @@ return array (
 	 */
 	function beforeSet_credits($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('credits', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -816,7 +836,8 @@ return array (
 		if (!isset($value)) {
 			return array('attributes', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('attributes', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -866,7 +887,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -912,7 +934,8 @@ return array (
 	 */
 	function beforeSet_updatedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -945,7 +968,7 @@ return array (
   ),
   1 => false,
   2 => '',
-  3 => '0000-00-00 00:00:00',
+  3 => 'CURRENT_TIMESTAMP',
 );			
 	}
 

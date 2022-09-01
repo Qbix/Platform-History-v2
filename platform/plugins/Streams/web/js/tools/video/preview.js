@@ -395,7 +395,7 @@
 				fullscreen: Q.info.isMobile,
 				destroyOnClose: true,
 				trigger: Q.info.isMobile ? tool.element : null,
-				callback: function () {
+				onActivate: function () {
 					// if opened in columns - third argument is a column element,
 					// if opened dialog - first argument is dialog element
 					state.mainDialog = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
@@ -520,6 +520,9 @@
 
 					// set clip start/end for upload
 					$("input[type=file]", state.mainDialog).on('change', function () {
+						if (!this.files.length) {
+							return;
+						}
 						var $videoElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_preview", state.mainDialog);
 						var $clipElement = $(".Q_tabbing_container .Q_tabbing_item[data-content=upload] .Streams_video_composer_clip", state.mainDialog);
 						var url = URL.createObjectURL(this.files[0]);

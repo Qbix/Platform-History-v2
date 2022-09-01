@@ -227,6 +227,17 @@ abstract class Base_Users_Email extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Email($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Email'))
@@ -303,7 +314,7 @@ abstract class Base_Users_Email extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('address', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -354,7 +365,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -404,7 +415,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -455,7 +466,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -506,7 +517,7 @@ return array (
 	function beforeSet_state($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('unverified','active','suspended','unsubscribed')))
@@ -549,7 +560,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('activationCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -603,7 +614,7 @@ return array (
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('activationCodeExpires', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -654,7 +665,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('authCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

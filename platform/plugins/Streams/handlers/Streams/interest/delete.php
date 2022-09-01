@@ -17,7 +17,7 @@ function Streams_interest_delete()
 	}
 	$publisherId = Q::ifset($_REQUEST, 'publisherId', Users::communityId());
 	$name = 'Streams/interest/' . Q_Utils::normalize($title);
-	$stream = Streams::fetchOne(null, $publisherId, $name);
+	$stream = Streams_Stream::fetch(null, $publisherId, $name);
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'stream', 
@@ -26,7 +26,7 @@ function Streams_interest_delete()
 	}
 	$miPublisherId = $user->id;
 	$miName = 'Streams/user/interests';
-	$myInterests = Streams::fetchOne($user->id, $miPublisherId, $miName);
+	$myInterests = Streams_Stream::fetch($user->id, $miPublisherId, $miName);
 	if (!$myInterests) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'stream', 

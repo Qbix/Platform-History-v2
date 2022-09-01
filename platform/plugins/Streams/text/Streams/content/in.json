@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Pesan {{& message.fields.type}} ke {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} mengatakan:",
+        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} berkata: {{& message.content}}",
         "Streams\/changed": "Perubahan {{stream.fields.title}}",
         "Streams\/invite": "Anda diundang ke {{& stream.fields.title}}",
         "Streams\/announcement": "Pengumuman di {{& streams.fields.title}}",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} jika kode telah dipindai",
             "copyLink": "{{ClickOrTap}} untuk menyalin tautan undangan",
             "userChooserPlaceholder": "Cari berdasarkan nama",
-            "shareOrCopyLink": "{{ClickOrTap}} untuk membagikan atau menyalin tautan undangan"
+            "shareOrCopyLink": "{{ClickOrTap}} untuk membagikan atau menyalin tautan undangan",
+            "title2": "Mengundang orang",
+            "chooseMethod": "Pilih metode:",
+            "selectContacts": "Pilih Kontak",
+            "scanQRCode": "Pindai kode QR",
+            "shareLink": "Bagikan tautan",
+            "chooseFromRegistered": "Pilih dari pengguna terdaftar",
+            "inviteViaEmailOrSms": "Undang melalui email atau SMS"
         },
         "email": {
             "subject": "Hei, lihat ini",
@@ -104,7 +111,9 @@
             "text": "Anda telah diundang. {{ClickOrTap}} di sini untuk menerima dan bergabung."
         },
         "youCanNowPaste": "Anda sekarang dapat menempelkan tautan ini di suatu tempat untuk mengundang orang",
-        "command": "Undang"
+        "command": "Undang",
+        "Invite": "Mengundang",
+        "Share": "Membagikan"
     },
     "followup": {
         "mobile": {
@@ -136,33 +145,33 @@
     },
     "webrtc": {
         "allow": {
-            "dialogTitle": "Dialog yang Diaktifkan",
+            "dialogTitle": "Menghubungkan",
             "microphoneBtn": "Aktifkan Mikrofon",
             "cameraBtn": "Aktifkan Kamera",
             "cameraAndMicrophoneBtn": "Aktifkan Kamera dan Mikrofon"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instruksi",
-            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya silakan ikuti langkah-langkah ini:",
-            "point1": "Buka &quot;Pengaturan&quot; -&gt; &quot;Lanjut&quot; -&gt; &quot;Privasi dan keamanan&quot; -&gt; &quot;Pengaturan Situs&quot; -&gt; &quot;Kamera&quot; atau &quot;Pengaturan Situs&quot; -&gt; &quot;Mikrofon&quot;",
+            "dialogTitle": "instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya, ikuti langkah-langkah berikut:",
+            "point1": "Buka &quot;Pengaturan&quot; -&gt; &quot;Lanjutan&quot; -&gt; &quot;Privasi dan keamanan&quot; -&gt; &quot;Pengaturan Situs&quot; -&gt; &quot;Kamera&quot; atau &quot;Pengaturan Situs&quot; -&gt; &quot;Mikrofon&quot;",
             "point2": "Hapus {{hostname}} dari daftar &quot;Blokir&quot;"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instruksi",
-            "permissionDenied": "Izin untuk {{kind}} ditolak. Silakan muat ulang halaman ini dan konfirmasikan akses ke {{kind}} untuk bergabung dengan konferensi."
+            "dialogTitle": "instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Muat ulang halaman ini dan konfirmasikan akses ke {{kind}} untuk bergabung dengan konferensi."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instruksi",
-            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya silakan ikuti langkah-langkah ini:",
+            "dialogTitle": "instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya, ikuti langkah-langkah berikut:",
             "point1": "Buka Pengaturan Android Anda",
-            "point2": "Buka &quot;Aplikasi &amp; pemberitahuan&quot;",
+            "point2": "Buka &quot;Aplikasi &amp; notifikasi&quot;",
             "point3": "Temukan &quot;{{communityName}}&quot; dan buka",
             "point4": "Ketuk Izin",
             "point5": "Aktifkan {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instruksi",
-            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya silakan ikuti langkah-langkah ini:",
+            "dialogTitle": "instruksi",
+            "permissionDenied": "Izin untuk {{kind}} ditolak. Untuk menggunakannya, ikuti langkah-langkah berikut:",
             "point1": "Buka Pengaturan iOS Anda",
             "point2": "Buka &quot;Privasi&quot;",
             "point3": "Temukan {{kind}} dan buka",
@@ -181,7 +190,7 @@
             "linkCopiedToCb": "Tautan disalin ke papan klip",
             "codeCopiedToCb": "Kode disalin ke papan klip",
             "userHasNoVideo": "Peserta tidak memiliki video",
-            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dengan konferensi.",
+            "openInBrowserAlert": "Buka tautan di browser Safari untuk bergabung dalam konferensi.",
             "youBeganVideoRecording": "Anda mulai merekam konferensi ini",
             "youStoppedVideoRecording": "Anda berhenti merekam konferensi ini",
             "switchingRoom": "pindah kamar...",
@@ -191,32 +200,34 @@
             "sbStartedLiveStreaming": "{{userName}} mulai siaran langsung",
             "sbStoppedLiveStreaming": "{{userName}} berakhir secara langsung",
             "liveStopped": "Terjadi kesalahan saat mengirim video ke titik akhir",
-            "forceDisconnectingImmediately": "Anda terputus oleh tuan rumah"
+            "forceDisconnectingImmediately": "Anda diputus oleh tuan rumah",
+            "allowedVideoLimit": "Hanya {{limit}} video yang diizinkan di ruangan ini",
+            "allowedAudioLimit": "Hanya {{limit}} mikrofon yang diizinkan di ruangan ini"
         },
         "settingsPopup": {
             "webCamera": "Kamera web",
             "screenSharing": "Berbagi layar",
             "shareAnotherScreen": "Bagikan layar lain",
-            "turnOffCameras": "Matikan semua kamera",
-            "startFBLive": "Mulai Facebook Livestream",
-            "stopFBLive": "Hentikan Facebook Livestream",
-            "fbLiveTitle": "Judul Langsung",
-            "fbLiveDescription": "Deskripsi Langsung",
+            "turnOffCameras": "Matikan kamera",
+            "startFBLive": "Mulai Livestream Facebook",
+            "stopFBLive": "Hentikan Livestream Facebook",
+            "fbLiveTitle": "Judul Siaran Langsung",
+            "fbLiveDescription": "Jelaskan Streaming Langsung Anda. Tentang apa ini?",
             "fbOnlyMeLiveAccess": "Hanya saya",
-            "fbFriendsAccess": "Teman",
+            "fbFriendsAccess": "Teman-teman",
             "fbPublicAccess": "Publik",
             "fbStartLive": "Hiduplah",
-            "fbStopLive": "Akhiri Langsung",
+            "fbStopLive": "Akhiri Siaran Langsung",
             "fbEmbedCode": "Menanamkan",
             "copy": "Salinan",
-            "turnOffVideo": "Nonaktifkan berbagi kamera \/ layar",
+            "turnOffVideo": "Matikan kamera\/berbagi layar",
             "turnOffScreenSharing": "Matikan berbagi layar",
             "cameraIsTurnedOff": "Kamera dimatikan",
             "startRecording": "Mulai merekam",
-            "stopRecording": "Hentikan rekaman",
-            "recordingInProgress": "Rekaman sedang berlangsung ...",
-            "publishOnTimeline": "Terbitkan pada timeline",
-            "publishToGroup": "Terbitkan ke grup",
+            "stopRecording": "Berhenti Merekam",
+            "recordingInProgress": "Perekaman sedang berlangsung...",
+            "publishOnTimeline": "Publikasikan di timeline",
+            "publishToGroup": "Publikasikan ke grup",
             "dialogTitle": "Pengaturan video",
             "turnOffAudioInput": "Bisukan mikrofon",
             "micIsTurnedOff": "Mikrofon dimatikan",
@@ -225,18 +236,19 @@
             "streamingSettings": "Pengaturan",
             "streamToRTMP": "Streaming ke RTMP khusus",
             "startBroadcasting": "Mulai siaran",
-            "broadcastingInProgress": "Penyiaran sedang berlangsung"
+            "broadcastingInProgress": "Penyiaran sedang berlangsung",
+            "manageStream": "Kelola Streaming Langsung"
         },
         "participantsPopup": {
             "disconnect": "Memutuskan",
-            "floatingScreens": "Layar Apung",
+            "floatingScreens": "Layar Mengambang",
             "tiledScreens": "Layar Ubin",
             "loudestExceptMe": "Paling Keras Kecuali Aku",
             "maximizeLoudest": "Maksimalkan Paling Keras",
             "staticMaximized": "Dimaksimalkan Statis",
-            "manual": "Manual",
+            "manual": "manual",
             "turnOffCamera": "Sembunyikan video",
-            "turnOffAudio": "Membisukan audio",
+            "turnOffAudio": "Bisukan audio",
             "turnOffScreenSharing": "Sembunyikan berbagi layar",
             "turnOnCamera": "Tampilkan video",
             "turnOnAudio": "Suarakan audio",
@@ -245,11 +257,11 @@
             "dialogTitle": "Pengaturan Peserta"
         },
         "notAllowedToJoinCall": "Anda tidak memiliki izin untuk bergabung dengan aliran ini.",
-        "streamTitle": "{{1}} panggilan langsung",
+        "streamTitle": "{{1}} memulai Telekonferensi",
         "preview": {
             "preamble": "Pertemuan:",
-            "Meeting": "Pertemuan",
-            "MeetingEnded": "Rapat berakhir"
+            "Meeting": "Telekonferensi",
+            "MeetingEnded": "Telekonferensi berakhir"
         },
         "preparing": {
             "micIsOff": "Mikrofon mati",
@@ -367,8 +379,8 @@
             "description": "percakapan antara pengguna, dengan riwayat"
         },
         "Streams\/webrtc": {
-            "displayType": "Panggilan Real-Time",
-            "description": "panggilan video \/ audio real time"
+            "displayType": "Panggilan Langsung",
+            "description": "panggilan video\/audio waktu nyata"
         },
         "Streams\/tasks": {
             "description": "kategori untuk tugas",
@@ -530,6 +542,13 @@
         "Update": "Memperbarui",
         "NoCallsYet": "Belum ada panggilan",
         "CallReasonTitle": "Tentang apa panggilan ini?",
-        "WaitingRoom": "Ruang tunggu"
+        "WaitingRoom": "Ruang tunggu",
+        "LiveRoom": "Ruang Langsung",
+        "interviewedByAnotherHost": "Saat ini sedang diwawancarai oleh pembawa acara lain",
+        "bringToLive": "Bawa Ke Pertunjukan Langsung",
+        "putOnHold": "Tertunda",
+        "endCall": "Akhiri panggilan",
+        "interview": "Wawancara",
+        "markApproved": "Tandai Disetujui"
     }
 }

@@ -225,6 +225,29 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 */
 	function build ()
 	{
+		if ($this->type !== Db_Query::TYPE_RAW) {
+			// WHERE
+			$where = empty($this->clauses['WHERE']) ? '' : "\nWHERE ".$this->clauses['WHERE'];
+			$where .= !isset($this->after['WHERE']) ? '' : "\n".$this->after['WHERE'];
+			// ORDER BY
+			$orderBy = empty($this->clauses['ORDER BY']) ? '' : "\nORDER BY " . $this->clauses['ORDER BY'];
+			$orderBy .= !isset($this->after['ORDER BY']) ? '' : "\n".$this->after['ORDER BY'];
+			// LIMIT and OFFSET
+			$limit = empty($this->clauses['LIMIT']) ? '' : "\n LIMIT ".$this->clauses['LIMIT'];
+			$limit .= !isset($this->after['LIMIT']) ? '' : "\n".$this->after['LIMIT'];
+		}
+		
+		$joinClauses = isset($this->clauses['JOIN']) ? $this->clauses['JOIN'] : '';
+		if ($this->useDeferredJoin and $this->className) {
+			$className = $this->className;
+			$row = new $className();
+			$table = call_user_func(array($className, 'table'));
+			$pk = implode(', ', $row->getPrimaryKey());
+			$subquery = "  SELECT $pk FROM $table$where$orderBy$limit";
+			$joinClauses = "INNER JOIN (\n$subquery\n) Db_deferredJoinDerivedTable USING($pk)" . $joinClauses;
+			$where = ''; // because we already did it in the INNER JOIN, and the subquery will be executed first
+			$limit = ''; // we don't need it in the outer query for the same reason, but we still want orderBy clause
+		}
 		$q = '';
 		switch ($this->type) {
 			case Db_Query::TYPE_RAW:
@@ -242,24 +265,15 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				$from = empty($this->clauses['FROM']) ? '' : "\nFROM ". $this->clauses['FROM'];
 				$from .= !isset($this->after['FROM']) ? '' : "\n".$this->after['FROM'];
 				// JOIN
-				$join = empty($this->clauses['JOIN']) ? '' : "\n".$this->clauses['JOIN'];
+				$join = empty($joinClauses) ? '' : "\n".$joinClauses;
 				$join .= !isset($this->after['JOIN']) ? '' : "\n".$this->after['JOIN'];
-				// WHERE
-				$where = empty($this->clauses['WHERE']) ? '' : "\nWHERE ".$this->clauses['WHERE'];
-				$where .= !isset($this->after['WHERE']) ? '' : "\n".$this->after['WHERE'];
 				// GROUP BY
 				$groupBy = empty($this->clauses['GROUP BY']) ? '' : "\nGROUP BY " . $this->clauses['GROUP BY'];
 				$groupBy .= !isset($this->after['GROUP BY']) ? '' : "\n".$this->after['GROUP BY'];
 				// HAVING
 				$having = empty($this->clauses['HAVING']) ? '' : "\nHAVING " . $this->clauses['HAVING'];
 				$having .= !isset($this->after['HAVING']) ? '' : "\n".$this->after['HAVING'];
-				// ORDER BY
-				$orderBy = empty($this->clauses['ORDER BY']) ? '' : "\nORDER BY " . $this->clauses['ORDER BY'];
-				$orderBy .= !isset($this->after['ORDER BY']) ? '' : "\n".$this->after['ORDER BY'];
-				// LIMIT
-				$limit = empty($this->clauses['LIMIT']) ? '' : "\n LIMIT ".$this->clauses['LIMIT'];
-				$limit .= !isset($this->after['LIMIT']) ? '' : "\n".$this->after['LIMIT'];
-				// LIMIT
+				// LOCK
 				$lock = empty($this->clauses['LOCK']) ? '' : "\n".$this->clauses['LOCK'];
 				$lock .= !isset($this->after['LOCK']) ? '' : "\n".$this->after['LOCK'];
 				$q = "SELECT $select$from$join$where $groupBy $having $orderBy $limit $lock";
@@ -271,8 +285,8 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				$into = empty($this->clauses['INTO']) ? '' : $this->clauses['INTO'];
 				$into .= !isset($this->after['INTO']) ? '' : $this->after['INTO'];
 				// VALUES
-				//if (empty($this->clauses['VALUES']))
-				//    throw new Exception("Missing VALUES clause in DB query.", -3);
+				if (!isset($this->clauses['VALUES']))
+				   throw new Exception("Missing VALUES clause in DB query.", -3);
 				$values = $this->clauses['VALUES'];
 				$afterValues = !isset($this->after['VALUES']) ? '' : "\n".$this->after['VALUES'];
 				if (empty($this->clauses['ON DUPLICATE KEY UPDATE']))
@@ -290,7 +304,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				if (empty($this->clauses['SET']))
 					throw new Exception("missing SET clause in DB query.", -3);
 				// JOIN
-				$join = empty($this->clauses['JOIN']) ? '' : "\n".$this->clauses['JOIN'];
+				$join = empty($joinClauses) ? '' : "\n".$joinClauses;
 				$join .= !isset($this->after['JOIN']) ? '' : "\n".$this->after['JOIN'];
 				// SET
 				$set = empty($this->clauses['SET']) ? '' : "\nSET ".$this->clauses['SET'];
@@ -309,22 +323,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			case Db_Query::TYPE_DELETE:
 				// DELETE
 				if (empty($this->clauses['FROM']))
-					throw new Exception("missing FROM clause in DB query.",
-						- 2);
+					throw new Exception("missing FROM clause in DB query.", -2);
 				$from = "FROM ".$this->clauses['FROM'];
 				$from .= !isset($this->after['FROM']) ? '' : $this->after['FROM'];
 				// JOIN
-				$join = empty($this->clauses['JOIN']) ? '' : "\n".$this->clauses['JOIN'];
+				$join = empty($joinClauses) ? '' : "\n".$joinClauses;
 				$join .= !isset($this->after['JOIN']) ? '' : "\n".$this->after['JOIN'];
-				// WHERE
-				if (empty($this->clauses['WHERE']))
-					$where = '';
-				else
-					$where = "\nWHERE " . $this->clauses['WHERE'];
-				$where .= !isset($this->after['WHERE']) ? '' : "\n".$this->after['WHERE'];
-				// LIMIT
-				$limit = empty($this->clauses['LIMIT']) ? '' : "\n LIMIT ".$this->clauses['LIMIT'];
-				$limit .= !isset($this->after['LIMIT']) ? '' : "\n".$this->after['LIMIT'];
 				$q = "DELETE $from$join$where$limit";
 				break;
 		}
@@ -572,37 +576,41 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			if (is_string($shards)) {
 				$shards = array($shards);
 			}
-			$queries = array_fill_keys($shards, $this);
+			if (Q::isAssociative($shards)) {
+				$queries = $shards;
+			} else {
+				$queries = array_fill_keys($shards, $this);
+			}
 		} else {
 			$queries = $this->shard();
 		}
 		$connection = $this->db->connectionName();
 
 		if (!empty($queries["*"])) {
-			$shard_names = Q_Config::get(
+			$shardNames = Q_Config::get(
 				'Db', 'connections', $connection, 'shards', array('' => '')
 			);
 			$q = $queries["*"];
-			foreach ($shard_names as $k => $v) {
+			foreach ($shardNames as $k => $v) {
 				$queries[$k] = $q;
 			}
 			unset($queries['*']);
 		}
 
-		foreach ($queries as $shard_name => $query) {
+		foreach ($queries as $shardName => $query) {
 
 			$upcoming = Q_Config::get('Db', 'upcoming', $connection, false);
 			if ($query->type !== Db_Query::TYPE_SELECT && $query->type !== Db_Query::TYPE_RAW) {
-				if (!empty($upcoming['block']) && $shard_name === $upcoming['shard']) {
-					throw new Db_Exception_Blocked(@compact('shard_name', 'connection'));
+				if (!empty($upcoming['block']) && $shardName === $upcoming['shard']) {
+					throw new Db_Exception_Blocked(@compact('shardName', 'connection'));
 				}
 			}
 			
 			$query->startedTime = Q::milliseconds(true);
 
-			$pdo = $query->reallyConnect($shard_name);
-			$connInfo = Db::getConnection($connection);
-			$dsn = $connInfo['dsn'];
+			$shardInfo = null;
+			$pdo = $query->reallyConnect($shardName, $shardInfo);
+			$dsn = $shardInfo['dsn'];
 			$nt = & self::$nestedTransactions[$dsn];
 			if (!isset($nt)) {
 				$nt = & self::$nestedTransactions[$dsn];
@@ -618,13 +626,14 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			$ntct = & $nt['connections'];
 			$ntbt = & $nt['backtraces'];
 
-			$sql = $query->getSQL();
+			$sql = $query->getSQL(); // depends on shard, possibly
+			// TODO: implement caching sql until query changes
 
 			try {
 				if (!empty($query->clauses["BEGIN"])) {
 					$ntk[] = Q::ifset($query, 'transactionKey', null);
 					$ntct[] = $connection;
-					$ntbt[] = Q::b();
+					//$ntbt[] = Q::b();
 					if (++$ntc == 1) {
 						$pdo->beginTransaction();
 					}
@@ -676,7 +685,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 						if ($lastTransactionKey
 						and $query->transactionKey !== $lastTransactionKey
 						and $query->transactionKey !== '*') {
-							Q::log("WARNING: Forgot to resolve transactions on $connections connections");
+							Q::log("WARNING: Forgot to resolve transactions via commit or rollback");
 							foreach (self::$nestedTransactions as $t) {
 								Q::log($t['connections']);
 								Q::log($t['backtraces']);
@@ -700,20 +709,20 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				}
 				break;
 			}
-			$this->nestedTransactionCount = $ntc;
+			$query->nestedTransactionCount = $ntc;
 			if (class_exists('Q') && isset($sql)) {
 				// log query if shard split process is active
 				// all activities will be done by node.js
-				switch ($this->type) {
+				switch ($query->type) {
 				case Db_Query::TYPE_SELECT:
 					// SELECT queries don't need to be logged
 					break;
 				default:
-					if (!$upcoming or $shard_name !== $upcoming['shard']) {
+					if (!$upcoming or $shardName !== $upcoming['shard']) {
 						break;
 					}
-					$table = $this->table;
-					foreach ($this->replacements as $k => $v) {
+					$table = $query->table;
+					foreach ($query->replacements as $k => $v) {
 						$table = str_replace($k, $v, $table);
 					}
 					if ($table !== $upcoming['dbTable']) break;
@@ -729,13 +738,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 					$sql_template = str_replace('CURRENT_TIMESTAMP', "'$timestamp'", $sql_template);
 
 					$transaction =
-						(!empty($this->clauses['COMMIT']) ? 'COMMIT' :
-						(!empty($this->clauses['BEGIN']) ? 'START TRANSACTION' :
-						(!empty($this->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
+						(!empty($query->clauses['COMMIT']) ? 'COMMIT' :
+						(!empty($query->clauses['BEGIN']) ? 'START TRANSACTION' :
+						(!empty($query->clauses['ROLLBACK']) ? 'ROLLBACK' : '')));
 
 					$utable = $upcoming['table'];
 					if (isset($shards)) {
-						$queries = is_string($shards) ? array($shards => $this) : $shards;
+						$queries = is_string($shards) ? array($shards => $query) : $shards;
 					} else {
 						$sharded = $query->shard($upcoming['indexes'][$utable]);
 					}
@@ -781,7 +790,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 				'after'
 			);
 			if (!class_exists('Q_Exception_DbQuery')) {
-				throw new Exception($e->getMessage() . " [query was: $sql]", -1);
+				throw new Exception($exception->getMessage() . " [query was: $sql]", -1);
 			}
 			// See http://php.net/manual/en/class.pdoexception.php#95812
 			throw new Q_Exception_DbQuery(array(
@@ -1336,6 +1345,7 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Adds an ORDER BY clause to the query
 	 * @method orderBy
 	 * @param {Db_Expression|string} $expression A string or Db_Expression with the expression to order the results by.
+	 *  Can also be "random", in which case you are highly encouraged to call ->ignoreCache() as well to get a new random result every time!
 	 * @param {boolean} $ascending=true If false, sorts results as descending, otherwise ascending.
 	 * @return {Db_Query_Mysql}  The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If ORDER BY clause does not belong to context
@@ -1362,7 +1372,12 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 		if (! is_string($expression))
 			throw new Exception("The ORDER BY expression has to be specified correctly.",-1);
 
-		if (is_bool($ascending)) {
+		if (is_string($expression) and (
+			strtoupper($expression) === 'RANDOM'
+			or strtoupper($expression) === 'RAND()'
+		)) {
+			$expression = 'RAND()';
+		} else if (is_bool($ascending)) {
 			$expression .= $ascending ? ' ASC' : ' DESC';
 		} else if (is_string($ascending)) {
 			if (strtoupper($ascending) == 'ASC') {
@@ -1386,12 +1401,13 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * @method limit
 	 * @param {integer} $limit A non-negative integer showing how many rows to return
 	 * @param {integer} [$offset=null] A non-negative integer showing what row to start the result set with.
+	 * @param {integer} [$useDeferredJoin=false] If the offset is not empty and this parameter is true, uses the Deferred JOIN technique to massively speed up queries with large offsets. But it only works if the WHERE clause criteria doesn't use joined tables.
 	 * @return {Db_Query_Mysql} The resulting object implementing Db_Query_Interface
 	 * @throws {Exception} If limit/offset are negative, OFFSET is not alowed in context, LIMIT clause was
 	 * specified or clause does not belong to context
 	 * @chainable
 	 */
-	function limit ($limit, $offset = null)
+	function limit ($limit, $offset = null, $useDeferredJoin = false)
 	{
 		if (!isset($limit)) {
 			return $this;
@@ -1421,8 +1437,10 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 			throw new Exception("The LIMIT clause has already been specified.");
 
 		$this->clauses['LIMIT'] = "$limit";
-		if (isset($offset))
+		if (isset($offset)) {
 			$this->clauses['LIMIT'] .= " OFFSET $offset";
+			$this->useDeferredJoin = $useDeferredJoin;
+		}
 
 		return $this;
 	}
@@ -1943,26 +1961,27 @@ class Db_Query_Mysql extends Db_Query implements Db_Query_Interface
 	 * Connects to database
 	 * @method reallyConnect
 	 * @private
-	 * @param {string} [$shard_name=null]
+	 * @param {string} [$shardName=null]
 	 * @return {PDO} The PDO object for connection
 	 */
-	private function reallyConnect($shard_name = null)
+	private function reallyConnect($shardName = null, &$shardInfo = null)
 	{
 		/**
 		 * @event Db/reallyConnect {before}
 		 * @param {Db_Query_Mysql} query
-		 * @param {string} 'shard_name'
+		 * @param {string} 'shardName'
 		 */
 		Q::event(
 			'Db/query/route',
-			array('query' => $this, 'shard_name' => $shard_name),
+			array('query' => $this, 'shardName' => $shardName),
 			'before'
 		);
-		return $this->db->reallyConnect($shard_name);
+		return $this->db->reallyConnect($shardName, $shardInfo);
 	}
 	
 	public $startedTime = null;
 	public $endedTime = null;
+	public $useDeferredJoin = false;
 	protected $transactionKey = null;
 
 	protected static $nestedTransactions = array();

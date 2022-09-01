@@ -35,6 +35,13 @@ class Db_Mysql implements Db_Interface
 	 * @type PDO
 	 */
 	public $pdo;
+
+	/**
+	 * The shard info after calling reallyConnect
+	 * @property $shardInfo
+	 * @type array
+	 */
+	public $shardInfo;
 	
 	/**
 	 * The name of the connection
@@ -74,15 +81,24 @@ class Db_Mysql implements Db_Interface
 	public $maxCheckStrlen = 1000000;
 
 	/**
+	 * Record whether we already set the timezone
+	 * @property $setTimezoneDone
+	 * @type string
+	 * @protected
+	 */
+	protected static $setTimezoneDone;
+
+	/**
 	 * Actually makes a connection to the database (by creating a PDO instance)
 	 * @method reallyConnect
 	 * @param {array} [$shardName=null] A shard name that was added using Db::setShard.
 	 * This modifies how we connect to the database.
 	 * @return {PDO} The PDO object for connection
 	 */
-	function reallyConnect($shardName = null)
+	function reallyConnect($shardName = null, &$shardInfo = null)
 	{
 		if ($this->pdo) {
+			$shardInfo = $this->shardInfo;
 			return $this->pdo;
 		}
 		$connectionName = $this->connectionName;
@@ -126,6 +142,8 @@ class Db_Mysql implements Db_Interface
 			? $modifications['driver_options'] 
 			: (isset($connectionInfo['driver_options']) ? $connectionInfo['driver_options'] : null);
 
+		$this->shardInfo = $shardInfo = compact('dsn', 'prefix', 'username', 'password', 'driver_options');
+
 		// More dsn changes
 		$dsn_fields = array();
 		foreach (array('host', 'port', 'dbname', 'unix_socket', 'charset') as $f) {
@@ -164,7 +182,10 @@ class Db_Mysql implements Db_Interface
 		}
 		$this->pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
 		$this->pdo->setAttribute(PDO::MYSQL_ATTR_USE_BUFFERED_QUERY, true);
-		$this->setTimezone();
+		if (empty(self::$setTimezoneDone[$dsn])) {
+			$this->setTimezone();
+			self::$setTimezoneDone[$dsn] = true;
+		}
 		return $this->pdo;
 	}
 	
@@ -414,7 +435,13 @@ class Db_Mysql implements Db_Interface
 				if (class_exists('Q') and class_exists($className)) {
 					Q::event("Db/Row/$className/save", array(
 						'row' => $row
-					), 'before');
+					), 'before'); 
+				}
+				$callback = array($row, "beforeSave");
+				if (is_callable($callback)) {
+					call_user_func(
+						$callback, $row->fields, false, false
+					);
 				}
 				$fieldNames = method_exists($row, 'fieldNames')
 					? $row->fieldNames()
@@ -1625,7 +1652,8 @@ EOT;
 			if ($table_col['Key'] == 'PRI') {
 				$pk[] = $table_col['Field'];
 			}
-			if (strtolower($table_col['Default']) === 'current_timestamp()') {
+			if (!empty($table_col['Default'])
+			and strtolower($table_col['Default']) === 'current_timestamp()') {
 				$table_cols[$k]['Default'] = 'CURRENT_TIMESTAMP';
 			}
 		}
@@ -2023,7 +2051,7 @@ EOT;
 						: ($field_null ? null : '');
 					$isExpression = (
 						$default === 'CURRENT_TIMESTAMP'
-						or strpos($default, '(') !== false
+						or ($default and strpos($default, '(') !== false)
 					);
 					$defaults[] = $isExpression
 						? 'new Db_Expression(' . json_encode($default) . ')'
@@ -2556,6 +2584,17 @@ $field_hints
 	 */
 	static function insertManyAndExecute(\$rows = array(), \$options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach (\$rows as \$row) {
+			if (is_array(\$row)) {
+				\$rowObject = new $class_name(\$row);
+			} else {
+				\$rowObject = \$row;
+				\$row = \$row->fields;
+			}
+			\$rowObject->beforeSave(\$row);
+			\$row = \$rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), \$rows,
 			array_merge(\$options, array('className' => $class_name_var))

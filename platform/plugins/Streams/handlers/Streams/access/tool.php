@@ -42,7 +42,7 @@ function Streams_access_tool($options)
 	reset($tabs);
 	$tab = Q::ifset($_REQUEST, 'tab', key($tabs));
 
-	$stream = Streams::fetchOne($user->id, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
     if (!$stream) {
         throw new Q_Exception_MissingRow(array(
             'table' => 'stream',

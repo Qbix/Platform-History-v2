@@ -1,0 +1,24 @@
+<div class="Streams_invitation">
+{{#with flyer1}}
+	<div class="{{app}}_invitation_header">
+		<img src="{{toUrl '{{Streams}}/img/invitations/header.png'}}" alt="{{YouAreInvited}}">
+	</div>
+	<div class="{{app}}_invitation_member">
+		{{interpolate Member stream.fields.title}}
+	</div>
+	<div class="Streams_explanation">
+		{{interpolate Explanation (toCapitalized communityName)}}
+	</div>
+	<ul>
+		<li>{{Accessibility}}</li>
+		<li>{{interpolate Public (toCapitalized communityName)}}</li>
+		<li>{{Private}}</li>
+		<li>{{Notifications}}</li>
+	</ul>
+	<div class="Streams_callToAction">
+		{{GetStarted}}
+		<h2><a href="{{link}}">{{link}}</a></h2>
+		{{IssuedToYou}}
+	</div>
+{{/with}}
+</div>

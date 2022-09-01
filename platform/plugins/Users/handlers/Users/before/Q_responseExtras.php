@@ -75,19 +75,4 @@ function Users_before_Q_responseExtras()
 
 	// fetch labels info
 	Q_Response::setScriptData("Q.plugins.Users.labels", Users_Label::getLabels());
-
-	// load ethers js libs if web3 config defined
-	if ($config = Q_Config::get("Users", "apps", "web3", null)) {
-		Q_Response::addScript('{{Users}}/js/web3/ethers-5.2.umd.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/web3/evm-chains.min.js', 'Users');
-		if (Q::ifset($config, Users::communityId(), "providers", "fortmatic", null)) {
-			Q_Response::addScript('{{Users}}/js/web3/fortmatic.js', 'Users');
-		}
-		if (Q::ifset($config, Users::communityId(), "providers", "portis", null)) {
-			Q_Response::addScript('{{Users}}/js/web3/portis.js', 'Users');
-		}
-		Q_Response::addScript('{{Users}}/js/web3/walletconnect.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/web3/web3.min.js', 'Users');
-		Q_Response::addScript('{{Users}}/js/web3/web3modal.js', 'Users');
-	}
 }

@@ -47,9 +47,6 @@ function Q_tabs_tool($options)
 	$attributes = array();
 	$defaultTabName = $loader = $beforeSwitch = $beforeScripts = null;
 	extract($options);
-	if (!isset($tabs)) {
-		return '';
-	}
 	if (isset($overflow) and is_string($overflow)) {
 		$overflow = array('content' => $overflow);
 	}

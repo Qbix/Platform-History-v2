@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "hallata oma e-posti tellimusi",
         "IfUnsubscribe": "Kui soovite tellimusest loobuda",
         "*": "Sõnum {{& message.fields.type}} numbrile {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} ütles: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ütles: {{& message.content}}",
         "Streams\/changed": "Muudatused {{stream.fields.title}}",
         "Streams\/invite": "Teid kutsuti {{& stream.fields.title}}",
         "Streams\/announcement": "Teadaanne: {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "Meil",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Kutsuge inimesi",
+            "chooseMethod": "Valige meetod:",
+            "selectContacts": "Valige Kontaktid",
+            "scanQRCode": "QR-koodi skannimine",
+            "shareLink": "Jaga linki",
+            "chooseFromRegistered": "Valige registreeritud kasutajate hulgast",
+            "inviteViaEmailOrSms": "Kutsuge e-posti või SMS-i teel"
         },
         "email": {
             "subject": "Hei, vaata seda",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Sind on kutsutud. {{ClickOrTap}} siin, et nõustuda ja liituda."
-        }
+        },
+        "Invite": "Kutsu",
+        "Share": "Jaga"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Teil pole selle vooga liitumiseks luba.",
-        "streamTitle": "{{1}} alustas otsekõnet",
+        "streamTitle": "{{1}} alustas telekonverentsi",
         "allow": {
             "dialogTitle": "Ühendamine",
             "microphoneBtn": "Mikrofoni lubamine",
@@ -208,7 +217,7 @@
             "forceDisconnectingImmediately": "Host katkestas teie ühenduse",
             "youLeftRoom": "Sa lahkusid toast",
             "codeCopied": "Sa lahkusid toast",
-            "sbBeganFbLive": "{{userName}} alustas selle kõne edastamist Facebookis",
+            "sbBeganFbLive": "{{userName}} hakkas seda kõnet Facebookis edastama",
             "sbStoppedFbLive": "{{userName}} lõpetas selle kõne edastamise Facebookis",
             "youBeganFbLive": "Hakkasite seda kõnet Facebookis edastama",
             "youStoppedFbLive": "Lõpetasite selle kõne edastamise Facebookis",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Link on lõikelauale kopeeritud",
             "codeCopiedToCb": "Kood kopeeriti lõikelauale",
             "userHasNoVideo": "Osalejal pole videot",
-            "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris."
+            "openInBrowserAlert": "Konverentsiga liitumiseks avage link Safari brauseris.",
+            "allowedVideoLimit": "Selles ruumis on lubatud ainult {{limit}} videot",
+            "allowedAudioLimit": "Selles ruumis on lubatud ainult {{limit}} mikrofoni"
         },
         "settingsPopup": {
             "dialogTitle": "Video seaded",
@@ -247,7 +258,7 @@
             "fbOnlyMeLiveAccess": "Ainult mina",
             "fbFriendsAccess": "Sõbrad",
             "fbPublicAccess": "Avalik",
-            "publishOnTimeline": "Avalda ajateljel",
+            "publishOnTimeline": "Avalda ajajoonel",
             "publishToGroup": "Avalda rühmas",
             "fbStartLive": "Minge otseülekandesse",
             "fbStopLive": "Lõpeta otseülekanne",
@@ -256,7 +267,8 @@
             "copy": "Kopeeri",
             "streamToRTMP": "Voogesitage kohandatud RTMP-le",
             "startBroadcasting": "Alustage saateid",
-            "broadcastingInProgress": "Ringhääling on pooleli"
+            "broadcastingInProgress": "Ringhääling on pooleli",
+            "manageStream": "Otseülekannete haldamine"
         },
         "audioSettings": {
             "dialogTitle": "Helisätted",
@@ -284,8 +296,8 @@
             "title": "Voogesituse seaded"
         },
         "preview": {
-            "Meeting": "Koosolek",
-            "MeetingEnded": "Koosolek lõppes"
+            "Meeting": "Telekonverents",
+            "MeetingEnded": "Telekonverents lõppes"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "kasutajatevaheline vestlus ajalooga"
         },
         "Streams\/webrtc": {
-            "displayType": "Reaalajas kõne",
+            "displayType": "Otsekõne",
             "description": "reaalajas video-\/helikõne"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Värskenda",
         "NoCallsYet": "Kõnesid veel pole",
         "CallReasonTitle": "Millest see kõne räägib?",
-        "WaitingRoom": "Ooteruum"
+        "WaitingRoom": "Ooteruum",
+        "LiveRoom": "Live tuba",
+        "interviewedByAnotherHost": "Hetkel intervjueerib teine saatejuht",
+        "bringToLive": "Too otsesaatesse",
+        "putOnHold": "Pane ootele",
+        "endCall": "Lõpeta kõne",
+        "interview": "Intervjuu",
+        "markApproved": "Märgi heaks kiidetud"
     }
 }

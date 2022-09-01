@@ -1,134 +1,100 @@
 <?php
 function Assets_NFT_response_content ($params) {
-	$uri = Q_Dispatcher::uri();
 	$request = array_merge($_REQUEST, $params);
+	$uri = Q_Dispatcher::uri();
+	$publisherId = Q::ifset($request, 'publisherId', Q::ifset($uri, 'publisherId', null));
+	$streamId = Q::ifset($request, 'streamId', Q::ifset($uri, 'streamId', null));
 	$tokenId = Q::ifset($request, 'tokenId', Q::ifset($uri, 'tokenId', null));
-	$chainId = Q::ifset($request, 'chainId', Q::ifset($uri, 'chainId', null));
-	if (!$chainId) {
-		$chain = Assets_NFT::getDefaultChain();
-		if (!$chain) {
-			throw new Exception("Default chain not found");
+	$isJson = preg_match("/\.json$/", $_SERVER["REQUEST_URI"]);
+	if ($isJson) {
+		$publisherId = str_replace(".json", "", $publisherId);
+		$tokenId = str_replace(".json", "", $tokenId);
+		$streamId = str_replace(".json", "", $streamId);
+	}
+
+	if (empty($tokenId) && empty($publisherId)) {
+		throw new Exception("NFT::view publisherId required!");
+	}
+	if (empty($tokenId) && empty($streamId)) {
+		throw new Exception("NFT::view streamId required!");
+	}
+	if (empty($tokenId) && empty($publisherId) && empty($streamId)) {
+		throw new Exception("NFT::view tokenId required!");
+	}
+
+	if ($tokenId) {
+		$decodedToken = Streams::fromHexString($tokenId);
+		if (!is_array($decodedToken) || sizeof($decodedToken) != 2) {
+			throw new Exception("Invalid token Id");
 		}
 
-		$chainId = $chain["chainId"];
-	}
-
-	$url = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"];
-	$needle = ".json";
-	$isJson = substr_compare($url, $needle, -strlen($needle)) === 0;
-	if ($isJson) {
-		$chainId = str_replace($needle, "", $chainId);
-		$tokenId = str_replace($needle, "", $tokenId);
-	}
-
-	if ($tokenId === null) {
-		throw new Exception("tokenId required!");
-	}
-	if (empty($chainId)) {
-		throw new Exception("chainId required!");
-	}
-
-    $texts = Q_Text::get('Assets/content');
-
-	// try to get stream
-	$stream = Streams::fetchOne(null, $tokenId, "Assets/NFT/".$chainId);
-	if ($stream) {
-		if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
-			$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
+		$publisherId = $decodedToken[0];
+		if (stristr($decodedToken[1], '/') === false) {
+			$streamName = "Assets/NFT/".$decodedToken[1];
 		} else {
-			foreach (array("original", "x", "2048", "700x", "700x980") as $size) {
-				$image = $stream->iconUrl($size.'.png');
-				if (is_file(Q_Uri::filenameFromUrl($image))) {
-					break;
+			$temp = explode('/', $decodedToken[1]);
+			$seriesStreamName = "Assets/NFT/series/".$temp[0];
+			$streamName = "Assets/NFT/".$temp[1];
+		}
+	} else {
+		$streamName = "Assets/NFT/".$streamId;
+	}
+
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
+	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
+	if ($stream->icon === '{{Assets}}/img/empty_white.png') {
+		$image = null;
+	} else if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
+		$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
+		$defaultIconSize = '2048';
+	} else {
+		foreach (array("original", "x") as $size) {
+			$image = $stream->iconUrl($size.'.png');
+			$defaultIconSize = $size;
+			if (is_file(Q_Uri::filenameFromUrl($image))) {
+				break;
+			}
+		}
+	}
+
+	if ($isJson) {
+		if ($assetsNFTAttributes) {
+			foreach ($assetsNFTAttributes as &$arr) {
+				if (Q::ifset($arr, 'display_type', null) == 'string') {
+					unset($arr['display_type']);
 				}
 			}
 		}
-		$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
-		if ($isJson) {
-			header("Content-type: application/json");
-			echo Q::json_encode(array(
-				"name" => $stream->title,
-				"description" => $stream->content,
-				"external_url" => $url,
-				"image" => $image,
-				"animation_url" => $stream->getAttribute('animation_url'),
-				"attributes" => $assetsNFTAttributes,
-			), JSON_PRETTY_PRINT);
-			exit;
-		}
 
-		$tokenId = $stream->getAttribute("tokenId");
-		$chainId = $stream->getAttribute("chainId");
-	}
-
-	$nftInfo = Q::event("Assets/NFT/response/getInfo", compact("tokenId", "chainId"));
-	if ($isJson) {
 		header("Content-type: application/json");
 		echo Q::json_encode(array(
-			"name" => $nftInfo["data"]["name"],
-			"description" => $nftInfo["data"]["description"],
-			"external_url" => $nftInfo["tokenURI"],
-			"image" => $nftInfo["data"]["image"],
-			"animation_url" => $nftInfo["data"]["animation_url"],
-			"attributes" => $nftInfo["data"]["attributes"]
+			"name" => $stream->title,
+			"description" => $stream->content,
+			// "external_url" => $url,
+			"image" => $image,
+			"animation_url" => $stream->getAttribute("videoUrl"),
+			"attributes" => $assetsNFTAttributes,
+			"background_color" => '000000',
 		), JSON_PRETTY_PRINT);
-		exit;
+		Q_Response::layoutView('Q/layout/json.php');
+		return '';
 	}
 
-	$title = $stream->title;
-	$description = $stream->content;
-	$icon = $stream->iconUrl('700x980.png');
-	$royalty = $stream->getAttribute("royalty");
-	$relations = Streams_RelatedTo::select()->where(array(
-		"fromPublisherId" => $stream->publisherId,
-		"fromStreamName" => $stream->name,
-		"type" => "NFT/interest"
-	))->fetchDbRows();
-	$collections = array();
-	foreach ($relations as $relation) {
-		$interest = Streams::fetchOne(null, $relation->toPublisherId, $relation->toStreamName);
-		$collections[] = $interest->title;
-	}
-
-	// get likes
-	$res = false;
-	if ($loggedInUserId) {
-		$res = (boolean)Streams_Stream::countLikes($publisherId, $stream->name, $loggedInUserId);
-	}
-	$likes = array(
-		"res" => $res,
-		"likes" => Streams_Stream::countLikes($publisherId, $stream->name)
-	);
-	$user = Users_ExternalTo::select()->where(array(
-		"xid" => $nftInfo["owner"]
-	))->fetchDbRow();
-	$ownerId = Q::ifset($user, "userId", null);
-
-	$defaultIconSize = Q_Config::expect("Q", "images", "NFT/icon", "defaultSize");
-	$sizes = Q_Config::expect("Q", "images", "NFT/icon", "sizes");
-	$maxSize = end($sizes);
-
-	Q_Response::addScript("{{Assets}}/js/pages/NFT.js");
-	Q_Response::addStylesheet("{{Assets}}/css/pages/NFT.css");
-
-	$keywords = Q::ifset($texts, 'profile', 'Keywords', null);
-	Q_Response::setMeta(array(
-		array('attrName' => 'name', 'attrValue' => 'title', 'content' => $nftInfo["data"]["name"]),
-		array('attrName' => 'property', 'attrValue' => 'og:title', 'content' => $nftInfo["data"]["name"]),
-		array('attrName' => 'property', 'attrValue' => 'twitter:title', 'content' => $nftInfo["data"]["name"]),
-		array('attrName' => 'name', 'attrValue' => 'description', 'content' => $nftInfo["data"]["description"]),
-		array('attrName' => 'property', 'attrValue' => 'og:description', 'content' => $nftInfo["data"]["description"]),
-		array('attrName' => 'property', 'attrValue' => 'twitter:description', 'content' => $nftInfo["data"]["description"]),
-		array('attrName' => 'name', 'attrValue' => 'keywords', 'content' => $keywords),
-		array('attrName' => 'property', 'attrValue' => 'og:keywords', 'content' => $keywords),
-		array('attrName' => 'property', 'attrValue' => 'twitter:keywords', 'content' => $keywords),
-		array('attrName' => 'name', 'attrValue' => 'image', 'content' => $nftInfo["data"]["image"]),
-		array('attrName' => 'property', 'attrValue' => 'og:image', 'content' => $nftInfo["data"]["image"]),
-		array('attrName' => 'property', 'attrValue' => 'twitter:image', 'content' => $nftInfo["data"]["image"]),
-		array('attrName' => 'property', 'attrValue' => 'og:url', 'content' => $url),
-		array('attrName' => 'property', 'attrValue' => 'twitter:url', 'content' => $url),
-		array('attrName' => 'property', 'attrValue' => 'twitter:card', 'content' => 'summary')
+	$series = Streams::related(null, $publisherId, $streamName, false, array(
+		"type" => Assets_NFT::$relationType,
+		"streamsOnly" => true,
+		"prefix" => "Assets/NFT/series/"
 	));
+	if ($series) {
+		$lastPart = explode("/", reset($series)->name);
+		$lastPart = end($lastPart);
+		$params["selectedSeriesId"] = $lastPart;
+	}
+	$params["stream"] = $stream;
+	$params["userId"] = $publisherId;
+	Q::event('Assets/NFTprofile/response/column', $params);
 
-	return Q::view('Assets/content/NFT.php', compact("texts", "defaultIconSize", "maxSize", "tokenId", "chainId", "nftInfo", "ownerId"));
+	Q::event('Assets/NFT/response/column', $params);
+
+	return Q::view('Assets/content/columns.php');
 }

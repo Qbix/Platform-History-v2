@@ -12,7 +12,7 @@ function Q_exception_native($params)
 	}
 	if ($is_ajax = Q_Request::isAjax()) {
 		$json = @Q::json_encode(array(
-			'errors' => Q_Exception::toArray(array($exception))
+			'errors' => Q_Exception::buildArray(array($exception))
 		));
 		$callback = Q_Request::callback();
 		switch (strtolower($is_ajax)) {
@@ -45,7 +45,7 @@ EOT;
 		} else {
 			$trace_string = $exception->getTraceAsString();
 		}
-		if (($exception instanceof Q_Exception_PhpError)
+		if (($exception instanceof Q_Exception_PHPError)
 		or !empty($exception->messageIsHtml)) {
 			// do not sanitize $message
 		} else {

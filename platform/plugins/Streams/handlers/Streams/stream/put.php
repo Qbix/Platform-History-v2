@@ -34,7 +34,7 @@ function Streams_stream_put($params) {
 	}
 
 	// do not set stream name
-	$stream = Streams::fetchOne($user->id, $publisherId, $name);	
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $name);	
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'stream',

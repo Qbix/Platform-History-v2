@@ -18,7 +18,7 @@ var Streams = Q.Streams;
  *   @param {String} [options.streamName] Either this or "stream" is required. Name of the stream to which the others are related
  *   @param {String} [options.tag="div"] The type of element to contain the preview tool for each related stream.
  *   @param {Q.Streams.Stream} [options.stream] You can pass a Streams.Stream object here instead of "publisherId" and "streamName"
- *   @param {String} options.relationType=null The type of the relation.
+ *   @param {String} [options.relationType=null] The type of the relation. If empty, will try to show all relations.
  *   @param {Boolean} [options.isCategory=true] Whether to show the streams related TO this stream, or the ones it is related to.
  *   @param {Object} [options.relatedOptions] Can include options like 'limit', 'offset', 'ascending', 'min', 'max', 'prefix' and 'fields'
  *   @param {Boolean} [options.editable] Set to false to avoid showing even authorized users an interface to replace the image or text of related streams
@@ -30,10 +30,13 @@ var Streams = Q.Streams;
  *   The params typically include at least a "title" field which you can fill with values such as "New" or "New ..."
  *   @param {Function} [options.toolName] Function that takes (streamType, options) and returns the name of the tool to render (and then activate) for that stream. That tool should reqire the "Streams/preview" tool, and work with it as documented in "Streams/preview".
  *   @param {Boolean} [options.realtime=false] Whether to refresh every time a relation is added, removed or updated by anyone
- *   @param {Object|Boolean} [options.sortable] Options for "Q/sortable" jQuery plugin. Pass false here to disable sorting interface. If streamName is not a String, this interface is not shown.
+ *   @param {Object|Boolean} [options.sortable=false] Options for "Q/sortable" jQuery plugin. Pass true here to disable sorting interface, or an object of custom options for Q/sortable tool. If streamName is not a String, this interface is not shown.
  *   @param {Function} [options.tabs] Function for interacting with any parent "Q/tabs" tool. Format is function (previewTool, tabsTool) { return urlOrTabKey; }
+ *   @param {Object} [options.tabsOptions] Options for the tabs function
+ *   @param {Boolean} [options.tabsOptions.useStreamURLs] Whether to use the stream URLs instead of Streams.key() and tab names
+ *   @param {String} [options.tabsOptions.streamType] You can manually enter the type of all related streams, to be used with Streams.Stream.url()
  *   @param {Object} [options.activate] Options for activating the preview tools that are loaded inside
- *   @param {Boolean|Object} [infinitescroll=false] If true or object, activate Q/infinitescroll tool on closer scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params.
+ *   @param {Boolean|Object} [infinitescroll=false] If true or object, enables loading more related streams on demand, by activate Q/infinitescroll tool on closest scrolling ancestor (if tool.element non scrollable). If object, set it as Q/infinitescroll params. 
  *   @param {Object} [options.updateOptions] Options for onUpdate such as duration of the animation, etc.
  *   @param {Object} [options.beforeRenderPreview] Event occur before Streams/preview tool rendered inside related tool.
  *   If executing result of this handler===false, skip adding this preview tool to the related list.
@@ -50,10 +53,13 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		throw new Q.Error("Streams/related tool: missing publisherId or streamName");
 	}
 	if (!state.relationType) {
-		throw new Q.Error("Streams/related tool: missing relationType");
+		// throw new Q.Error("Streams/related tool: missing relationType");
 	}
 	if (state.sortable === true) {
-		state.sortable = Q.Tool.define.options('Streams/related').sortable;
+		state.sortable = Q.extend({
+			draggable: '.Streams_related_stream',
+			droppable: '.Streams_related_stream'
+		}, Q.Tool.define.options('Streams/related').sortable);
 	} else if (state.sortable && typeof state.sortable !== 'object') {
 		throw new Q.Error("Streams/related tool: sortable must be an object or boolean");
 	}
@@ -68,6 +74,18 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 	} else if (state.mode === "participant" && !this.element.classList.contains("Streams_related_participant")) {
 		this.element.classList.add("Streams_related_participant");
 	}
+
+	tool.Q.onStateChanged('relationType').set(function () {
+		if (Q.isEmpty(tool.state.result)) {
+			return;
+		}
+
+		// remove all old previews and clear cache
+		Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
+		tool.state.result= {};
+		tool.previewElements = {};
+		tool.refresh();
+	}, tool);
 
 	var pipe = new Q.pipe(['styles', 'texts'], tool.refresh.bind(tool));
 
@@ -118,7 +136,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 								infiniteTool.setLoading(false);
 							});
 						}
-					}).activate(function () {
+					}, null, this.prefix).activate(function () {
 						tool.infinitescrollApplied = true;
 					});
 				}
@@ -176,13 +194,35 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		limit: 50,
 		offset: 0
 	},
-	sortable: {
-		draggable: '.Streams_related_stream',
-		droppable: '.Streams_related_stream'
-	},
+	sortable: false,
 	previewOptions: {},
 	tabs: function (previewTool, tabsTool) {
+		var ps = previewTool.state;
+		if (this.state.tabsOptions.useStreamURLs) {
+			var streamType = this.state.previewOptions.streamType;
+			if (!streamType) {
+				var cached = Streams.get.cache.get([
+					ps.publisherId,
+					ps.streamName
+				]);
+				if (cached && cached.subject) {
+					streamType = cached.subject.fields.type;
+				}
+			}
+			var url = Streams.Stream.url(
+				previewTool.state.publisherId,
+				previewTool.state.streamName,
+				streamType
+			);
+			if (url) {
+				return url;
+			}
+		}
 		return Streams.key(previewTool.state.publisherId, previewTool.state.streamName);
+	},
+	tabsOptions: {
+		useStreamURLs: true,
+		streamType: null
 	},
 	toolName: function (streamType) {
 		return streamType+'/preview';
@@ -303,8 +343,9 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 					// set data-streamName attribute to mark tool as not composer
 					element.setAttribute("data-streamName", stream.fields.name);
 
-					// set weight to element
+					// set weight to preview tool and to element
 					Q.setObject("options.streams_preview.related.weight", this.state.related.weight, element);
+					element.setAttribute('data-weight', this.state.related.weight);
 
 					// place new preview to the valid place in the list
 					_placeRelatedTool(element);
@@ -390,7 +431,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 
 			var tff = this.from.fields;
 
-			// if element exists - do nothing
+			// skip if stream exists in exiting
+			if (Q.getObject(tff.publisherId+"\t"+tff.name, exiting)) {
+				return;
+			}
+
+			// skip if element exists
 			if (Q.getObject([tff.publisherId, tff.name], tool.previewElements)) {
 				return;
 			}
@@ -479,14 +525,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		var publisherId = state.publisherId || Q.getObject("stream.fields.publisherId", state);
 		var streamName = state.streamName || Q.getObject("stream.fields.name", state);
 
-		// remove all old previews
-		if (!Q.isEmpty(tool.state.result)) {
-			Q.handle(state.onUpdate, tool, [tool.state.result, {}, tool.state.result.relatedStreams, {}]);
-			tool.state.result= {};
-			tool.previewElements = {};
-		}
-
-		Streams.retainWith(tool).related(
+		Streams.retainWith(tool).related.force(
 			publisherId, 
 			streamName, 
 			state.relationType, 
@@ -674,7 +713,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		}, previewOptions);
 		var f = state.toolName;
 		if (typeof f === 'string') {
-			f = Q.getObject(state.toolName) || f;
+			f = Q.getObject(f) || f;
 		}
 		var toolName = (typeof f === 'function') ? f(streamType, o) : f;
 		var toolNames = ['Streams/preview', toolName];
@@ -727,6 +766,7 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		e.setAttribute('data-publisherId', publisherId);
 		e.setAttribute('data-streamName', streamName);
 		e.setAttribute('data-streamType', streamType);
+		e.setAttribute('data-weight', weight);
  		return e;
 	},
 
@@ -805,8 +845,6 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 			this.intersectionObserver.disconnect();
 		}
 	}
-}
-
-);
+});
 
 })(Q, jQuery);

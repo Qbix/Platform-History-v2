@@ -23,11 +23,13 @@
             console.log('center: Streams/calls', state);
 
             var pipe = new Q.pipe(["style", "text", "stream"], function () {
+                //if user is host, init main room and show settings button (gear)
                 if (tool.stream.testWriteLevel("edit")) {
                     state.isAdmin = true;
                     tool.initMainRoom();
                     tool.settings();
                 } else {
+                    //if it's regular user, listen event
                     tool.state.eventsStream.onMessage("Media/webrtc/guest").set(function (stream, message) {
                         let instructions = JSON.parse(message.instructions);
 
@@ -151,12 +153,14 @@
             initMainRoom: function() {
                 var tool = this;
                 var mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
+                console.log('calls: initMainRoom mainRoomStream', mainRoomStream.fields.publisherId, mainRoomStream.fields.name);
+                console.log('calls: initMainRoom eventsStream', tool.state.eventsStream.fields.publisherId, tool.state.eventsStream.fields.name);
                 var WebRTCClientUI = tool.state.mainWebrtcRoom = Streams.WebRTC.start({
                     element: tool.state.mainRoomConfig.mainRoomContainer,
                     audioOnlyMode: true,
                     roomPublisherId: mainRoomStream ? mainRoomStream.fields.publisherId : null,
                     roomId: mainRoomStream ? mainRoomStream.fields.name : null,
-                    publisherId: tool.state.eventsStream.fields.publisherId,
+                    publisherId: tool.state.eventsStream.fields.publisherId, //get stream related to eventsStream.fields.publisherId
                     streamName: tool.state.eventsStream.fields.name, /*"Streams/webrtc/live"*/
                     relationType: tool.state.eventsStreamRelationType,
                     resumeClosed: true,
@@ -290,7 +294,7 @@
                             }
                         },
                         trigger: $toolElement[0],
-                        callback: function () {
+                        onActivate: function () {
                             // max calls select element
                             var $select = $("select[name=maxCalls]", parentElement);
                             for (var i = 1; i <= 100; i++) {
@@ -303,7 +307,10 @@
                             var parentElement = arguments[2] instanceof HTMLElement ? arguments[2] : arguments[0];
                             tool.callPreviewsElement = parentElement;
                             var $callsRelated = $(".Streams_calls_related", parentElement);
+
+                            console.log('calls: settings', state.publisherId, state.streamName)
                             var prevTool = $callsRelated.tool("Streams/related", {
+                                templates: { view:{ name: 'Streams/calls/preview'} },
                                 publisherId: state.publisherId,
                                 streamName: state.streamName,
                                 relationType: state.relationType,
@@ -311,58 +318,50 @@
                                 closeable: true,
                                 sortable: false,
                                 realtime: true,
-                                foo:'bar'
-                            }).activate();
-                            console.log('previewTool', $callsRelated, Q.Tool.from(prevTool))
-                            var relatedTool = Q.Tool.from(prevTool);
-                            relatedTool.state.onUpdate.add(function () {
+                                specificOptions: {
+                                    previewType: 'Streams/webrtc/preview/call'
+                                }
+                            }).activate(function () {
+                                console.log('previewTool', $callsRelated, Q.Tool.from(prevTool))
+                                var relatedTool = this;
+                                relatedTool.state.onUpdate.add(function () {
+                                    updateCallInfoForPreviews();
+                                });
+
+                                $("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
+                                    var maxCalls = parseInt($select.val());
+                                    var maxRelations = tool.stream.getAttribute("Streams/maxRelations") || {};
+                                    var oldMaxCalls = parseInt(Q.getObject(state.relationType, maxRelations));
+
+                                    if (maxCalls !== oldMaxCalls) {
+                                        maxRelations[state.relationType] = maxCalls;
+                                        tool.stream.setAttribute("Streams/maxRelations", maxRelations).save();
+                                    }
+                                });
+
+                                function updateCallInfoForPreviews() {
+                                    console.log('updateCallInfoForPreviews')
+
+                                    parentElement.forEachTool("Streams/webrtc/preview/call", function () {
+                                        console.log('updateCallInfoForPreviews for', this)
+
+                                        var previewTool = this;
+                                        this.state.mainWebrtcRoom = tool.state.mainWebrtcRoom;
+                                        this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
+                                        this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
+                                        this.state.screenersUsers = tool.state.mainRoomConfig.screenersUsers;
+                                        this.state.eventsStream = tool.state.eventsStream;
+                                        this.state.onRoomSwitch = function (roomType) {
+                                            console.log('onRoomSwitch', this, roomType)
+                                            tool.state.activeRoom = roomType == 'none' ? null : roomType;
+                                            tool.state.activePreview = roomType == 'none' ? null : this;
+                                        };
+
+                                    }, tool);
+                                }
                                 updateCallInfoForPreviews();
                             });
 
-                            $("button[name=update]", parentElement).on(Q.Pointer.fastclick, function () {
-                                var maxCalls = parseInt($select.val());
-                                var maxRelations = tool.stream.getAttribute("Streams/maxRelations") || {};
-                                var oldMaxCalls = parseInt(Q.getObject(state.relationType, maxRelations));
-
-                                if (maxCalls !== oldMaxCalls) {
-                                    maxRelations[state.relationType] = maxCalls;
-                                    tool.stream.setAttribute("Streams/maxRelations", maxRelations).save();
-                                }
-                            });
-
-                            function updateCallInfoForPreviews() {
-                                console.log('updateCallInfoForPreviews')
-
-                                parentElement.forEachTool("Streams/webrtc/preview", function () {
-                                    console.log('updateCallInfoForPreviews for', this)
-
-                                    var previewTool = this;
-                                    this.state.mainWebrtcRoom = tool.state.mainWebrtcRoom;
-                                    this.state.mainRoomStream = tool.state.mainRoomConfig.mainRoomStream;
-                                    this.state.hostsUsers = tool.state.mainRoomConfig.hostsUsers;
-                                    this.state.screenersUsers = tool.state.mainRoomConfig.screenersUsers;
-                                    this.state.eventsStream = tool.state.eventsStream;
-                                    this.state.onRoomSwitch = function (roomType) {
-                                        console.log('onRoomSwitch', this, roomType)
-                                        tool.state.activeRoom = roomType == 'none' ? null : roomType;
-                                        tool.state.activePreview = roomType == 'none' ? null : this;
-                                    };
-                                    /*this.state.onWebRTCRoomEnded.set(function () {
-                                        if (!state.isAdmin) {
-                                            return;
-                                        }
-
-                                        Q.Streams.unrelate(
-                                            state.publisherId,
-                                            state.streamName,
-                                            state.relationType,
-                                            this.stream.fields.publisherId,
-                                            this.stream.fields.name
-                                        );
-                                    }, tool);*/
-                                }, tool);
-                            }
-                            updateCallInfoForPreviews();
                         }
                     });
                 });
@@ -437,5 +436,6 @@
         '<label>{{text.MaxCalls}}</label><select name="maxCalls"></select>' +
         '<button class="Q_button" name="update">{{text.Update}}</button>'
     );
+
 
 })(Q, Q.$, window);

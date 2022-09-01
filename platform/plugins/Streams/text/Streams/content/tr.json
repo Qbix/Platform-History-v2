@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "e-posta aboneliklerinizi yönetin",
         "IfUnsubscribe": "Aboneliğinizi iptal etmek istiyorsanız",
         "*": "{{& message.fields.type}}&#39;dan {{& stream.fields.title}}&#39;e mesaj",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dedi ki: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dedi ki: {{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}}&#39;daki Değişiklikler",
         "Streams\/invite": "{{& stream.fields.title}} için davet edildiniz",
         "Streams\/announcement": "{{& stream.fields.title}} içinde duyuru",
@@ -89,7 +89,14 @@
             "byEmail": "E-posta",
             "byText": "Metin",
             "byFacebook": "Facebook",
-            "byTwitter": "heyecan"
+            "byTwitter": "heyecan",
+            "title2": "İnsanları davet et",
+            "chooseMethod": "Bir yöntem seçin:",
+            "selectContacts": "Kişileri Seçin",
+            "scanQRCode": "QR Kodunu Tara",
+            "shareLink": "Bağlantı paylaş",
+            "chooseFromRegistered": "Kayıtlı kullanıcılar arasından seçim yapın",
+            "inviteViaEmailOrSms": "E-posta veya SMS yoluyla davet edin"
         },
         "email": {
             "subject": "Şuna bir bak",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Davet edildiniz. {{ClickOrTap}} kabul etmek ve katılmak için buraya."
-        }
+        },
+        "Invite": "Davet etmek",
+        "Share": "Paylaşmak"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Bu akışa katılma izniniz yok.",
-        "streamTitle": "{{1}} canlı arama başlattı",
+        "streamTitle": "{{1}} bir Telekonferans başlattı",
         "allow": {
             "dialogTitle": "Bağlanıyor",
             "microphoneBtn": "Mikrofonu Etkinleştir",
@@ -208,21 +217,23 @@
             "forceDisconnectingImmediately": "Bir ev sahibi tarafından bağlantınız kesildi",
             "youLeftRoom": "odayı terk ettin",
             "codeCopied": "odayı terk ettin",
-            "sbBeganFbLive": "{{userName}} bu aramayı Facebook&#39;ta yayınlamaya başladı",
+            "sbBeganFbLive": "{{userName}} bu çağrıyı Facebook&#39;ta yayınlamaya başladı",
             "sbStoppedFbLive": "{{userName}} bu aramayı Facebook&#39;ta yayınlamayı durdurdu",
             "youBeganFbLive": "Bu aramayı Facebook&#39;ta yayınlamaya başladınız",
             "youStoppedFbLive": "Bu aramayı Facebook&#39;ta yayınlamayı durdurdunuz",
             "youStartedLive": "Bu çağrıyı özel RTMP&#39;ye yayınlamaya başladınız",
             "youStoppedLive": "Bu çağrıyı özel RTMP&#39;ye yayınlamayı durdurdunuz",
             "sbStartedLiveStreaming": "{{userName}} canlı yayına başladı",
-            "sbStoppedLiveStreaming": "{{userName}} canlı yayında sona erdi",
+            "sbStoppedLiveStreaming": "{{userName}} canlı olarak sona erdi",
             "liveStopped": "Videoyu uç noktaya gönderirken hata oluştu",
             "youBeganVideoRecording": "Bu konferansı kaydetmeye başladınız",
             "youStoppedVideoRecording": "Bu konferansı kaydetmeyi durdurdunuz",
             "linkCopiedToCb": "link kopyalandı",
             "codeCopiedToCb": "Kod panoya kopyalandı",
             "userHasNoVideo": "Katılımcının videosu yok",
-            "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın."
+            "openInBrowserAlert": "Konferansa katılmak için bağlantıyı Safari tarayıcısında açın.",
+            "allowedVideoLimit": "Bu odada yalnızca {{limit}} videoya izin verilir",
+            "allowedAudioLimit": "Bu odada yalnızca {{limit}} mikrofona izin verilir"
         },
         "settingsPopup": {
             "dialogTitle": "Video ayarları",
@@ -239,7 +250,7 @@
             "stopFBLive": "Facebook Canlı Yayınını Durdur",
             "startRecording": "Kayda başla",
             "stopRecording": "Kaydetmeyi bırak",
-            "start": "Başlangıç",
+            "start": "Başlama",
             "stop": "Durmak",
             "recordingInProgress": "Kayıt devam ediyor...",
             "fbLiveTitle": "Canlı Yayının Başlığı",
@@ -249,14 +260,15 @@
             "fbPublicAccess": "Halk",
             "publishOnTimeline": "Zaman çizelgesinde yayınla",
             "publishToGroup": "Gruba yayınla",
-            "fbStartLive": "Canlı Yayına Geçin",
+            "fbStartLive": "Canlı Yayına Geç",
             "fbStopLive": "Canlı Yayını Bitir",
             "streamingSettings": "Ayarlar",
             "fbEmbedCode": "Göm",
             "copy": "kopyala",
             "streamToRTMP": "Özel RTMP&#39;ye akış",
             "startBroadcasting": "Yayına başla",
-            "broadcastingInProgress": "Yayın devam ediyor"
+            "broadcastingInProgress": "Yayın devam ediyor",
+            "manageStream": "Canlı Yayını Yönet"
         },
         "audioSettings": {
             "dialogTitle": "Ses ayarları",
@@ -269,7 +281,7 @@
             "floatingScreens": "Yüzer Ekranlar",
             "tiledScreens": "Çinili Ekranlar",
             "loudestExceptMe": "Ben hariç en gürültülü",
-            "maximizeLoudest": "En Yüksek Ses Seviyesini Azalt",
+            "maximizeLoudest": "En Yüksek Ses Seviyesini En Üst Düzeye Çıkar",
             "staticMaximized": "Statik Maksimize Edilmiş",
             "fullScreen": "Tam ekran",
             "manual": "Manuel",
@@ -284,8 +296,8 @@
             "title": "Akış Ayarları"
         },
         "preview": {
-            "Meeting": "Toplantı",
-            "MeetingEnded": "Toplantı sona erdi"
+            "Meeting": "Tele konferans",
+            "MeetingEnded": "telekonferans sona erdi"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "geçmişi olan kullanıcılar arasında bir konuşma"
         },
         "Streams\/webrtc": {
-            "displayType": "Gerçek Zamanlı Çağrı",
+            "displayType": "Canlı Çağrı",
             "description": "gerçek zamanlı görüntülü\/sesli arama"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Güncelleme",
         "NoCallsYet": "Henüz arama yok",
         "CallReasonTitle": "Bu çağrı ne hakkında?",
-        "WaitingRoom": "Bekleme odası"
+        "WaitingRoom": "Bekleme odası",
+        "LiveRoom": "Canlı Oda",
+        "interviewedByAnotherHost": "Şu anda başka bir ev sahibi tarafından röportaj yapılıyor",
+        "bringToLive": "Canlı Gösteriye Getir",
+        "putOnHold": "Beklemeye Al",
+        "endCall": "Son Arama",
+        "interview": "Röportaj yapmak",
+        "markApproved": "Onaylandı Olarak İşaretle"
     }
 }

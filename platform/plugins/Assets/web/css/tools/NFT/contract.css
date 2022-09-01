@@ -11,10 +11,6 @@
 .Assets_NFT_contract_tool[data-customContracts=false] .Assets_NFT_contract[data-type=custom] {
     display: none;
 }
-.NFTRemix_profile #content .Streams_related_tool.Assets_NFT_contract_series {
-    text-align: left;
-    margin-left: 10%;
-}
 .Assets_NFT_contract_create .Q_dialog_content,
 .Assets_NFT_contract_select .Q_dialog_content {
     padding: 10px;
@@ -30,7 +26,8 @@
     margin: 10px 0 0 0;
 }
 .Assets_NFT_contract_select .Assets_NFT_contract {
-    padding: 5px;
+    position: relative;
+    padding: 5px 50px 5px 5px;
     border-radius: 5px;
     border: 1px solid silver;
 }
@@ -63,6 +60,12 @@
     height: 40px;
 }
 .Assets_NFT_contract_tool[data-canManage=false] select[name=chains],
-.Assets_NFT_contract_tool[data-canManage=false] .Assets_NFT_contract_composer {
-    display: none;
+.Assets_NFT_contract_tool[data-canManage=false] .Assets_NFT_contract_composer,
+.Assets_NFT_contract_tool .Assets_NFT_contract[data-isOwner=false] .Q_actions_container,
+.Assets_NFT_contract_tool .Assets_NFT_contract_series[data-isOwner=false] .Assets_NFT_series_new {
+    display: none !important;
+}
+
+.Assets_NFT_contract_tool[data-canManage=false] .Assets_NFT_contract {
+    pointer-events: none;
 }

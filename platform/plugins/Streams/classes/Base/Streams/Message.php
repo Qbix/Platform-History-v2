@@ -250,6 +250,17 @@ abstract class Base_Streams_Message extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Streams_Message($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Message'))
@@ -325,7 +336,8 @@ abstract class Base_Streams_Message extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('publisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -379,7 +391,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('streamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -429,7 +442,8 @@ return array (
 	 */
 	function beforeSet_ordinal($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('ordinal', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -483,7 +497,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -515,7 +530,7 @@ return array (
     3 => true,
   ),
   1 => false,
-  2 => '',
+  2 => 'MUL',
   3 => 'CURRENT_TIMESTAMP',
 );			
 	}
@@ -532,7 +547,8 @@ return array (
 		if (!isset($value)) {
 			return array('sentTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('sentTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -582,7 +598,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('byUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -636,7 +653,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('byClientId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -690,7 +708,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('type', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -744,7 +763,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('content', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -798,7 +818,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('instructions', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -841,7 +862,8 @@ return array (
 
 	function beforeSet_weight($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('weight', $value);
 		}
 		if (!is_numeric($value))

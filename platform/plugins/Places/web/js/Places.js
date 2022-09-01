@@ -533,7 +533,7 @@ Cp.geocode = function (callback, options) {
 			return callback && callback.call(c, p + "wrong location format");
 		}
 		var key, cached;
-		if (cached = _geocodeCache.get(param)) {
+		if (cached = _geocodeCache.get([param])) {
 			return Q.handle(callback, cached.subject, cached.params);
 		}
 		if (param) {
@@ -559,7 +559,7 @@ Cp.geocode = function (callback, options) {
 						c.latitude = loc.lat();
 						c.longitude = loc.lng();
 					}
-					_geocodeCache.set(param, 0, c, [err, results]);
+					_geocodeCache.set([param], 0, c, [err, results]);
 				}
 				Q.handle(callback, c, [err, results]);
 			});

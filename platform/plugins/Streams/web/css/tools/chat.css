@@ -157,6 +157,7 @@
 }
 .Streams_chat_addons .Streams_chat_addon_icon,
 .Streams_chat_addons .Streams_chat_addon_icon img {
+	margin-right: 10px;
 	width: 40px;
 }
 .Streams_chat_addons .Streams_chat_subscription .Streams_chat_addon_icon img {
@@ -250,6 +251,9 @@
 .Streams_chat_item.Streams_chat_message_skipOverflowed .Streams_chat_message_content {
 	display: block;
 }
+.Streams_chat_item .Streams_chat_message_content .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
+	white-space: unset;
+}
 .Streams_chat_noMessages {
 	color: gray;
 	font-size: 12pt;
@@ -275,9 +279,9 @@
 	margin: 0 auto;
 	display: block;
 	padding: 6px;
-	margin-left: 35px;
+	margin-left: 45px;
 	height: 40px;
-	width: calc(100% - 35px);
+	width: calc(100% - 45px);
 	color: black;
 	padding-right: 40px;
 }
@@ -286,12 +290,12 @@
 .Streams_chat_composer .Streams_calls_tool {
 	cursor: pointer;
 	position: absolute;
-	right: 1px;
-	top: 2px;
+	right: 2px;
+	top: 3px;
 	background-size: contain;
 	background-repeat: no-repeat;
-	width: 27px;
-	height: 27px;
+	width: 35px;
+	height: 35px;
 	border: none;
 	margin: 0;
 	padding: 0;

@@ -213,6 +213,17 @@ abstract class Base_Websites_Webpage extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Websites_Webpage($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Websites_Webpage'))
@@ -288,7 +299,8 @@ abstract class Base_Websites_Webpage extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('url', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -342,7 +354,8 @@ return array (
 		if (!isset($value)) {
 			return array('cache', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('cache', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -392,7 +405,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -441,7 +455,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -491,7 +506,8 @@ return array (
 		if (!isset($value)) {
 			return array('results', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('results', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -541,7 +557,8 @@ return array (
 	 */
 	function beforeSet_duration($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('duration', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)

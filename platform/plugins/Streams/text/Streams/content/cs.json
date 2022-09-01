@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Zpráva {{& message.fields.type}} uživateli {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} řekl: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} řekl: {{& message.content}}",
         "Streams\/changed": "Změny v {{stream.fields.title}}",
         "Streams\/invite": "Byli jste pozváni do {{& stream.fields.title}}",
         "Streams\/announcement": "Oznámení v {{& stream.fields.title}}",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}}, pokud byl kód naskenován",
             "copyLink": "{{ClickOrTap}} zkopírujte odkaz s pozvánkou",
             "userChooserPlaceholder": "Hledejte podle jména",
-            "shareOrCopyLink": "{{ClickOrTap}} pro sdílení nebo zkopírování odkazu s pozvánkou"
+            "shareOrCopyLink": "{{ClickOrTap}} pro sdílení nebo zkopírování odkazu s pozvánkou",
+            "title2": "Pozvat lidi",
+            "chooseMethod": "Vyberte metodu:",
+            "selectContacts": "Vyberte Kontakty",
+            "scanQRCode": "Naskenujte QR kód",
+            "shareLink": "Sdílejte odkaz",
+            "chooseFromRegistered": "Vyberte si z registrovaných uživatelů",
+            "inviteViaEmailOrSms": "Pozvěte e-mailem nebo SMS"
         },
         "email": {
             "subject": "Hej, podívej se na tohle",
@@ -104,7 +111,9 @@
             "text": "Byli jste pozváni. {{ClickOrTap}} zde pro přijetí a připojení."
         },
         "youCanNowPaste": "Nyní můžete tento odkaz někam vložit a pozvat lidi",
-        "command": "Pozvat"
+        "command": "Pozvat",
+        "Invite": "Pozvat",
+        "Share": "Podíl"
     },
     "followup": {
         "mobile": {
@@ -147,7 +156,7 @@
         "webInstructionsDialog": {
             "dialogTitle": "Instrukce",
             "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
-            "point1": "Přejděte na „Nastavení“ -&gt; „Pokročilé“ -&gt; „Ochrana osobních údajů a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
+            "point1": "Přejděte na „Nastavení“ -&gt; „Pokročilé“ -&gt; „Ochrana soukromí a zabezpečení“ -&gt; „Nastavení webu“ -&gt; „Fotoaparát“ nebo „Nastavení webu“ -&gt; „Mikrofon“",
             "point2": "Odebrat {{hostname}} ze seznamu „Blokovat“."
         },
         "webIosInstructionsDialog": {
@@ -167,7 +176,7 @@
             "dialogTitle": "Instrukce",
             "permissionDenied": "Oprávnění pro {{kind}} odepřeno. Chcete-li jej použít, postupujte takto:",
             "point1": "Přejděte do Nastavení iOS",
-            "point2": "Otevřete &quot;Ochrana osobních údajů&quot;",
+            "point2": "Otevřete &quot;Soukromí&quot;",
             "point3": "Najděte {{kind}} a otevřete jej",
             "point4": "Najděte „{{communityName}}“ a povolte"
         },
@@ -182,7 +191,7 @@
             "youBeganFbLive": "Tuto výzvu jste začali vysílat na Facebooku",
             "youStoppedFbLive": "Přestali jste tento hovor vysílat na Facebooku",
             "linkCopiedToCb": "Odkaz zkopírován do schránky",
-            "codeCopiedToCb": "Kód zkopírován do schránky",
+            "codeCopiedToCb": "Kód byl zkopírován do schránky",
             "userHasNoVideo": "Účastník nemá žádné video",
             "openInBrowserAlert": "Otevřete odkaz v prohlížeči Safari a připojte se ke konferenci.",
             "youBeganVideoRecording": "Začal jste nahrávat tuto konferenci",
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} začalo živě",
             "sbStoppedLiveStreaming": "{{userName}} skončilo živě",
             "liveStopped": "Při odesílání videa do koncového bodu došlo k chybě",
-            "forceDisconnectingImmediately": "Byli jste odpojeni hostitelem"
+            "forceDisconnectingImmediately": "Byli jste odpojeni hostitelem",
+            "allowedVideoLimit": "V této místnosti je povoleno pouze {{limit}} video",
+            "allowedAudioLimit": "V této místnosti je povoleno pouze {{limit}} mikrofonů"
         },
         "settingsPopup": {
             "webCamera": "Webová kamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Streamujte do vlastního RTMP",
             "dialogTitle": "Nastavení videa",
             "startBroadcasting": "Začněte vysílat",
-            "broadcastingInProgress": "Probíhá vysílání"
+            "broadcastingInProgress": "Probíhá vysílání",
+            "manageStream": "Správa živého přenosu"
         },
         "participantsPopup": {
             "disconnect": "Odpojit",
@@ -248,11 +260,11 @@
             "dialogTitle": "Nastavení účastníka"
         },
         "notAllowedToJoinCall": "Nemáte oprávnění připojit se k tomuto streamu.",
-        "streamTitle": "{{1}} zahájil(a) živý hovor",
+        "streamTitle": "{{1}} zahájil(a) telekonferenci",
         "preview": {
             "preamble": "Setkání:",
-            "Meeting": "Setkání",
-            "MeetingEnded": "Setkání ukončeno"
+            "Meeting": "Telekonference",
+            "MeetingEnded": "Telekonference skončila"
         },
         "preparing": {
             "micIsOff": "Mikrofon je vypnutý",
@@ -370,7 +382,7 @@
             "description": "konverzace mezi uživateli s historií"
         },
         "Streams\/webrtc": {
-            "displayType": "Hovor v reálném čase",
+            "displayType": "Živý hovor",
             "description": "video\/audio hovor v reálném čase"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Aktualizace",
         "NoCallsYet": "Zatím žádné hovory",
         "CallReasonTitle": "O čem je tento hovor?",
-        "WaitingRoom": "Čekárna"
+        "WaitingRoom": "Čekárna",
+        "LiveRoom": "Obývací pokoj",
+        "interviewedByAnotherHost": "V současné době je dotazován jiným hostitelem",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Podržte",
+        "endCall": "Ukončit hovor",
+        "interview": "Rozhovor",
+        "markApproved": "Označit schváleno"
     }
 }

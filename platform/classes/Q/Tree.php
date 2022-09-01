@@ -27,17 +27,19 @@ class Q_Tree
 	 *  Defaults to false. If true, then this function ignores
 	 *  the cached value, if any, and attempts to search
 	 *  for the file. It will cache the new value.
+	 * @param {boolean} [$dontThrow=false] Set to true to skip throwing an exception on invalid input
 	 * @return {Q_Tree} Returns the Q_Tree if everything succeeded
-	 * @throws {Q_Exception_InvalidInput} if tree was not loaded
+	 * @throws {Q_Exception_InvalidInput} if tree was not loaded, unless $dontThrow is true
 	 */
 	static function createAndLoad(
 	 $filename,
 	 $ignoreCache = false,
-	 &$linkedArray = null)
+	 &$linkedArray = null,
+	 $dontThrow = false)
 	{
 		$tree = new Q_Tree($linkedArray);
 		$result = $tree->load($filename, $ignoreCache);
-		if (!$result) {
+		if (!$result and !$dontThrow) {
 			throw new Q_Exception_InvalidInput(array('source' => $filename));
 		}
 		return $tree;
@@ -325,7 +327,7 @@ class Q_Tree
 	 * @param {boolean} $ignoreCache=false
 	 *  Defaults to false. If true, then this function ignores
 	 *  the cached value, if any, and attempts to search
-	 *  for the file. It will cache the new value.
+	 *  for the file. It will cache the new value unless it is null.
 	 * @return {Q_Tree|null} Returns $this if loaded, otherwise null.
 	 * @throws {Q_Exception_InvalidInput}
 	 */
@@ -369,13 +371,13 @@ class Q_Tree
 					$json = include($filename2);
 				} else {
 					$json = Q::readFile($filename2, Q::take($config, array(
-						'ignoreCache' => true,
+						'ignoreCache' => $ignoreCache,
 						'dontCache' => true,
 						'duration' => 3600
 					)));
 				}
-				// TODO: also replace ", }" to avoid typical errors in JSON
 				$json = preg_replace('/\s*(?!<\")\/\*[^\*]+\*\/(?!\")\s*/', '', $json);
+				$json = preg_replace('/\,\s*\}/', '}', $json);
 				$arr = Q::json_decode($json, true);
 			} catch (Exception $e) {
 				$arr = null;

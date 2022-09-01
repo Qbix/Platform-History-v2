@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} naar {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} zei: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} zei: {{& message.content}}",
         "Streams\/changed": "Wijzigingen in {{stream.fields.title}}",
         "Streams\/invite": "Je bent uitgenodigd voor {{& stream.fields.title}}",
         "Streams\/announcement": "Aankondiging in {{& stream.fields.title}}",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} als de code is gescand",
             "copyLink": "{{ClickOrTap}} om de uitnodigingslink te kopiëren",
             "userChooserPlaceholder": "Zoek op naam",
-            "shareOrCopyLink": "{{ClickOrTap}} om de uitnodigingslink te delen of te kopiëren"
+            "shareOrCopyLink": "{{ClickOrTap}} om de uitnodigingslink te delen of te kopiëren",
+            "title2": "Mensen uitnodigen",
+            "chooseMethod": "Kies een methode:",
+            "selectContacts": "Selecteer Contacten",
+            "scanQRCode": "Scan QR-code",
+            "shareLink": "Deel een link",
+            "chooseFromRegistered": "Kies uit geregistreerde gebruikers",
+            "inviteViaEmailOrSms": "Uitnodigen via e-mail of sms"
         },
         "email": {
             "subject": "Hé, check dit eens",
@@ -104,7 +111,9 @@
             "text": "Je bent uitgenodigd. {{ClickOrTap}} hier om te accepteren en lid te worden."
         },
         "youCanNowPaste": "Je kunt deze link nu ergens plakken om mensen uit te nodigen",
-        "command": "Uitnodiging"
+        "command": "Uitnodiging",
+        "Invite": "Nodig uit",
+        "Share": "Deel"
     },
     "followup": {
         "mobile": {
@@ -187,14 +196,16 @@
             "openInBrowserAlert": "Open de link in de Safari-browser om deel te nemen aan de conferentie.",
             "youBeganVideoRecording": "Je bent begonnen met het opnemen van deze conferentie",
             "youStoppedVideoRecording": "Je bent gestopt met het opnemen van deze conferentie",
-            "switchingRoom": "Schakelkamer...",
+            "switchingRoom": "Kamer wisselen...",
             "forceDisconnecting": "Binnen 5 seconden wordt de verbinding verbroken",
             "youStartedLive": "Je bent begonnen met het uitzenden van deze oproep naar aangepaste RTMP",
             "youStoppedLive": "Je bent gestopt met het uitzenden van deze oproep naar aangepaste RTMP",
             "sbStartedLiveStreaming": "{{userName}} live gestart",
             "sbStoppedLiveStreaming": "{{userName}} live geëindigd",
             "liveStopped": "Er is een fout opgetreden bij het verzenden van video naar het eindpunt",
-            "forceDisconnectingImmediately": "Verbinding verbroken door een host"
+            "forceDisconnectingImmediately": "Verbinding verbroken door een host",
+            "allowedVideoLimit": "Slechts {{limit}} video toegestaan in deze ruimte",
+            "allowedAudioLimit": "Alleen {{limit}} microfoons toegestaan in deze ruimte"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
@@ -215,7 +226,7 @@
             "turnOffVideo": "Camera\/scherm delen uitschakelen",
             "turnOffScreenSharing": "Scherm delen uitschakelen",
             "cameraIsTurnedOff": "Camera is uitgeschakeld",
-            "startRecording": "Start met opnemen",
+            "startRecording": "Begin met opnemen",
             "stopRecording": "Stop met opnemen",
             "recordingInProgress": "De opname is bezig...",
             "publishOnTimeline": "Publiceren op tijdlijn",
@@ -223,15 +234,16 @@
             "turnOffAudioInput": "Microfoon dempen",
             "micIsTurnedOff": "Microfoon is uitgeschakeld",
             "start": "Begin",
-            "stop": "Stoppen",
+            "stop": "Hou op",
             "streamingSettings": "Instellingen",
             "streamToRTMP": "Stream naar aangepaste RTMP",
             "dialogTitle": "Beeldinstellingen",
             "startBroadcasting": "Begin met uitzenden",
-            "broadcastingInProgress": "Uitzending is bezig"
+            "broadcastingInProgress": "Uitzending is bezig",
+            "manageStream": "Livestream beheren"
         },
         "participantsPopup": {
-            "disconnect": "Loskoppelen",
+            "disconnect": "verbinding verbreken",
             "floatingScreens": "Zwevende schermen",
             "tiledScreens": "Betegelde schermen",
             "loudestExceptMe": "Luidste behalve ik",
@@ -248,17 +260,17 @@
             "dialogTitle": "Deelnemersinstellingen"
         },
         "notAllowedToJoinCall": "Je hebt geen toestemming om deel te nemen aan deze stream.",
-        "streamTitle": "{{1}} heeft een live gesprek gestart",
+        "streamTitle": "{{1}} heeft een teleconferentie gestart",
         "preview": {
             "preamble": "Vergadering:",
-            "Meeting": "Ontmoeting",
-            "MeetingEnded": "Vergadering beëindigd"
+            "Meeting": "Teleconferentie",
+            "MeetingEnded": "Teleconferentie beëindigd"
         },
         "preparing": {
             "micIsOff": "Microfoon staat uit",
             "micIsOn": "Microfoon staat aan",
             "cameraIsOff": "Camera staat uit",
-            "cameraIsOn": "Camera staat aan",
+            "cameraIsOn": "Camera is aan",
             "screenSharingIsOn": "Scherm delen is ingeschakeld",
             "screenSharingIsOff": "Scherm delen",
             "joinNow": "Doe mee aan de oproep"
@@ -370,7 +382,7 @@
             "description": "een gesprek tussen gebruikers, met geschiedenis"
         },
         "Streams\/webrtc": {
-            "displayType": "Realtime oproep",
+            "displayType": "Live-oproep",
             "description": "een realtime video-\/audiogesprek"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Bijwerken",
         "NoCallsYet": "Nog geen oproepen",
         "CallReasonTitle": "Waar gaat deze oproep over?",
-        "WaitingRoom": "Wachtkamer"
+        "WaitingRoom": "Wachtkamer",
+        "LiveRoom": "Woonkamer",
+        "interviewedByAnotherHost": "Wordt momenteel geïnterviewd door een andere host",
+        "bringToLive": "Breng tot leven Show",
+        "putOnHold": "In de wacht gezet",
+        "endCall": "Ophangen",
+        "interview": "Interview",
+        "markApproved": "Markeren als goedgekeurd"
     }
 }

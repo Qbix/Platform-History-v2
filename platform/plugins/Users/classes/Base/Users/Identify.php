@@ -206,6 +206,17 @@ abstract class Base_Users_Identify extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Identify($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Identify'))
@@ -282,7 +293,7 @@ abstract class Base_Users_Identify extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('identifier', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -333,7 +344,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -383,7 +394,7 @@ return array (
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -430,7 +441,7 @@ return array (
 	function beforeSet_state($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('verified','future')))
@@ -473,7 +484,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

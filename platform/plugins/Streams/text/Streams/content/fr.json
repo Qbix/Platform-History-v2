@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "gérer vos abonnements aux e-mails",
         "IfUnsubscribe": "Si vous souhaitez vous désinscrire",
         "*": "Message {{& message.fields.type}} à {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} a dit : {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} a dit : {{& message.content}}",
         "Streams\/changed": "Changements dans {{stream.fields.title}}",
         "Streams\/invite": "Vous avez été invité à {{& stream.fields.title}}",
         "Streams\/announcement": "Annonce en {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Texte",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Inviter des gens",
+            "chooseMethod": "Choisissez une méthode :",
+            "selectContacts": "Sélectionnez Contacts",
+            "scanQRCode": "Scanner le code QR",
+            "shareLink": "Partager un lien",
+            "chooseFromRegistered": "Choisissez parmi les utilisateurs enregistrés",
+            "inviteViaEmailOrSms": "Inviter par e-mail ou SMS"
         },
         "email": {
             "subject": "Hé, regarde ça",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Vous avez été invité. {{ClickOrTap}} ici pour accepter et rejoindre."
-        }
+        },
+        "Invite": "Inviter",
+        "Share": "Partager"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Vous n&#39;êtes pas autorisé à rejoindre ce flux.",
-        "streamTitle": "{{1}} a démarré un appel en direct",
+        "streamTitle": "{{1}} a démarré une téléconférence",
         "allow": {
             "dialogTitle": "De liaison",
             "microphoneBtn": "Activer le microphone",
@@ -173,17 +182,17 @@
             "joinNow": "Rejoignez l&#39;appel"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Allez dans &quot;Paramètres&quot; -&gt; &quot;Avancé&quot; -&gt; &quot;Confidentialité et sécurité&quot; -&gt; &quot;Paramètres du site&quot; -&gt; &quot;Appareil photo&quot; ou &quot;Paramètres du site&quot; -&gt; &quot;Microphone&quot;",
             "point2": "Supprimer {{hostname}} de la liste &quot;Bloquer&quot;"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Veuillez actualiser cette page et confirmer l&#39;accès à {{kind}} pour rejoindre la conférence."
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Accédez à vos paramètres Android",
             "point2": "Ouvrez &quot;Applications et notifications&quot;",
@@ -192,7 +201,7 @@
             "point5": "Activer {{kind}}"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "Instructions",
+            "dialogTitle": "Des instructions",
             "permissionDenied": "Autorisation pour {{kind}} refusée. Pour l&#39;utiliser, veuillez suivre ces étapes :",
             "point1": "Accédez à vos paramètres iOS",
             "point2": "Ouvrez &quot;Confidentialité&quot;",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Lien copié dans le presse-papiers",
             "codeCopiedToCb": "Code copié dans le presse-papiers",
             "userHasNoVideo": "Le participant n&#39;a pas de vidéo",
-            "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence."
+            "openInBrowserAlert": "Ouvrez le lien dans le navigateur Safari pour rejoindre la conférence.",
+            "allowedVideoLimit": "Seules {{limit}} vidéos sont autorisées dans cette salle",
+            "allowedAudioLimit": "Seuls {{limit}} microphones sont autorisés dans cette salle"
         },
         "settingsPopup": {
             "dialogTitle": "Paramètres vidéo",
@@ -239,14 +250,14 @@
             "stopFBLive": "Arrêter Facebook Livestream",
             "startRecording": "Commencer l&#39;enregistrement",
             "stopRecording": "Arrête d&#39;enregistrer",
-            "start": "Démarrer",
-            "stop": "Arrêter",
+            "start": "Commencer",
+            "stop": "Arrêt",
             "recordingInProgress": "L&#39;enregistrement est en cours...",
             "fbLiveTitle": "Titre du flux en direct",
             "fbLiveDescription": "Décrivez votre diffusion en direct. De quoi s&#39;agit-il?",
             "fbOnlyMeLiveAccess": "Seulement moi",
             "fbFriendsAccess": "Amis",
-            "fbPublicAccess": "Publique",
+            "fbPublicAccess": "Public",
             "publishOnTimeline": "Publier sur la chronologie",
             "publishToGroup": "Publier dans le groupe",
             "fbStartLive": "Passez en direct",
@@ -256,7 +267,8 @@
             "copy": "Copie",
             "streamToRTMP": "Diffuser vers RTMP personnalisé",
             "startBroadcasting": "Commencer à diffuser",
-            "broadcastingInProgress": "La diffusion est en cours"
+            "broadcastingInProgress": "La diffusion est en cours",
+            "manageStream": "Gérer la diffusion en direct"
         },
         "audioSettings": {
             "dialogTitle": "Les paramètres audio",
@@ -284,8 +296,8 @@
             "title": "Paramètres de diffusion"
         },
         "preview": {
-            "Meeting": "Réunion",
-            "MeetingEnded": "Réunion terminée"
+            "Meeting": "Téléconférence",
+            "MeetingEnded": "Téléconférence terminée"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "une conversation entre utilisateurs, avec historique"
         },
         "Streams\/webrtc": {
-            "displayType": "Appel en temps réel",
+            "displayType": "Appel en direct",
             "description": "un appel vidéo\/audio en temps réel"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Mettre à jour",
         "NoCallsYet": "Pas encore d&#39;appels",
         "CallReasonTitle": "De quoi parle cet appel ?",
-        "WaitingRoom": "Salle d&#39;attente"
+        "WaitingRoom": "Salle d&#39;attente",
+        "LiveRoom": "Salon",
+        "interviewedByAnotherHost": "Est actuellement interviewé par un autre hôte",
+        "bringToLive": "Apporter au spectacle en direct",
+        "putOnHold": "Mettre en attente",
+        "endCall": "Fin d&#39;appel",
+        "interview": "Interview",
+        "markApproved": "Marquer approuvé"
     }
 }

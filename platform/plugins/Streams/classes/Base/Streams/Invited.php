@@ -212,6 +212,17 @@ abstract class Base_Streams_Invited extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Streams_Invited($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Invited'))
@@ -287,7 +298,8 @@ abstract class Base_Streams_Invited extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -341,7 +353,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('token', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -391,7 +404,8 @@ return array (
 	 */
 	function beforeSet_state($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('pending','accepted','declined','forwarded','expired','claimed')))
@@ -429,7 +443,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -478,7 +493,8 @@ return array (
 		if (!isset($value)) {
 			return array('updatedTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('updatedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -527,7 +543,8 @@ return array (
 		if (!isset($value)) {
 			return array('expireTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('expireTime', $value);
 		}
 		if ($value instanceof DateTime) {

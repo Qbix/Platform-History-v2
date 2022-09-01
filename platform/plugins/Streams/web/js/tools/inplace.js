@@ -105,10 +105,10 @@ Q.Tool.define("Streams/inplace", function (options) {
 						}
 					}
 				}
-				var toSet = html.replaceAll(convert);
+				html.replaceAll(convert);
 			}
-			if (tool.inplace) {
-				var $input = tool.inplace.$input;
+			var $input = Q.getObject("inplace.$input", tool);
+			if ($input) {
 				if (currentContent !== content) {
 					$input.val(currentContent = content);
 				}
@@ -117,10 +117,10 @@ Q.Tool.define("Streams/inplace", function (options) {
 					tool.$('.Q_inplace_tool_editbuttons').css('margin-top', margin+'px');
 				}
 			}
-			if (currentHtml !== html) {
+			if (tool.$static && currentHtml !== html) {
 				tool.$static.html(currentHtml = html);
 			}
-		};
+		}
 
 		if (state.attribute) {
 			state.field = 'attributes['+encodeURIComponent(state.attribute)+']';

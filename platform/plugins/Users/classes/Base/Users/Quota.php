@@ -205,6 +205,17 @@ abstract class Base_Users_Quota extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Quota($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Quota'))
@@ -281,7 +292,7 @@ abstract class Base_Users_Quota extends Db_Row
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -336,7 +347,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('resourceId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -391,7 +402,7 @@ return array (
 			$value='';
 		}
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('name', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -442,7 +453,7 @@ return array (
 	function beforeSet_units($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('units', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -497,7 +508,7 @@ return array (
 	function beforeSet_insertedTime($value)
 	{
 		if ($value instanceof Db_Expression
-       or $value instanceof Db_Range) {
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {

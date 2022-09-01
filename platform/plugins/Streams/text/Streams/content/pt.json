@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "gerenciar suas assinaturas de e-mail",
         "IfUnsubscribe": "Se você deseja cancelar a inscrição",
         "*": "Mensagem {{& message.fields.type}} para {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} disse: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} disse: {{& message.content}}",
         "Streams\/changed": "Mudanças em {{stream.fields.title}}",
         "Streams\/invite": "Você foi convidado para {{& stream.fields.title}}",
         "Streams\/announcement": "Anúncio em {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Texto",
             "byFacebook": "o Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Convidar pessoas",
+            "chooseMethod": "Escolha um método:",
+            "selectContacts": "Selecionar contatos",
+            "scanQRCode": "Digitalizar código QR",
+            "shareLink": "Compartilhar um link",
+            "chooseFromRegistered": "Escolha entre usuários registrados",
+            "inviteViaEmailOrSms": "Convidar por e-mail ou SMS"
         },
         "email": {
             "subject": "Ei, verifique isso",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Você foi convidado. {{ClickOrTap}} aqui para aceitar e participar."
-        }
+        },
+        "Invite": "Convidar",
+        "Share": "Compartilhar"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Você não tem permissão para participar deste stream.",
-        "streamTitle": "{{1}} iniciou uma chamada ao vivo",
+        "streamTitle": "{{1}} iniciou uma teleconferência",
         "allow": {
             "dialogTitle": "Conectando",
             "microphoneBtn": "Ativar microfone",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Link copiado para a área de transferência",
             "codeCopiedToCb": "Código copiado para a área de transferência",
             "userHasNoVideo": "O participante não tem vídeo",
-            "openInBrowserAlert": "Abra o link no navegador Safari para participar da conferência."
+            "openInBrowserAlert": "Abra o link no navegador Safari para participar da conferência.",
+            "allowedVideoLimit": "Apenas {{limit}} vídeo permitido nesta sala",
+            "allowedAudioLimit": "Apenas {{limit}} microfones permitidos nesta sala"
         },
         "settingsPopup": {
             "dialogTitle": "Configurações de vídeo",
@@ -251,12 +262,13 @@
             "publishToGroup": "Publicar no grupo",
             "fbStartLive": "Ativar",
             "fbStopLive": "Finalizar transmissão ao vivo",
-            "streamingSettings": "Configurações",
+            "streamingSettings": "Definições",
             "fbEmbedCode": "Embutir",
             "copy": "cópia de",
             "streamToRTMP": "Transmita para RTMP personalizado",
             "startBroadcasting": "Começar a transmissão",
-            "broadcastingInProgress": "A transmissão está em andamento"
+            "broadcastingInProgress": "A transmissão está em andamento",
+            "manageStream": "Gerenciar transmissão ao vivo"
         },
         "audioSettings": {
             "dialogTitle": "Configurações de áudio",
@@ -284,8 +296,8 @@
             "title": "Configurações de transmissão"
         },
         "preview": {
-            "Meeting": "Reunião",
-            "MeetingEnded": "Reunião encerrada"
+            "Meeting": "Teleconferência",
+            "MeetingEnded": "Teleconferência encerrada"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "uma conversa entre usuários, com histórico"
         },
         "Streams\/webrtc": {
-            "displayType": "Chamada em tempo real",
+            "displayType": "Chamada ao vivo",
             "description": "uma chamada de vídeo\/áudio em tempo real"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Atualizar",
         "NoCallsYet": "Nenhuma chamada ainda",
         "CallReasonTitle": "Do que se trata esta chamada?",
-        "WaitingRoom": "Sala de espera"
+        "WaitingRoom": "Sala de espera",
+        "LiveRoom": "Sala ao vivo",
+        "interviewedByAnotherHost": "Atualmente é entrevistado por outro apresentador",
+        "bringToLive": "Mostrar ao vivo",
+        "putOnHold": "Colocada em espera",
+        "endCall": "Terminar chamada",
+        "interview": "Entrevista",
+        "markApproved": "Marca aprovada"
     }
 }

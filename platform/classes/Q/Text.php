@@ -106,6 +106,7 @@ class Q_Text
 	 * @param {string} [$options.language=null] Override language
 	 * @param {string} [$options.locale=null] Override locale
 	 * @param {boolean} [$options.reload=false] Whether to reload the files even if they was already loaded before
+	 * @param {boolean} [$options.dontThrow=false] Pass true here to skip throwing an exception if the text file couldn't be loaded
 	 * @return {array} Returns the (merged) content of the text source(s)
 	 */
 	static function get($name, $options = array())
@@ -126,16 +127,12 @@ class Q_Text
 		$filename = "text/$name/$basename.json";
 
 		if (!file_exists(Q::realPath($filename))) {
-			$filename = "text/$name/en.json";
+			$filename = "text/$name/en.json"; // English by default
 		}
 		$config = Q_Config::get('Q', 'text', '*', array());
-        $json = Q::readFile($filename, Q::take($config, array(
-			'ignoreCache' => true,
-			'dontCache' => true,
-			'duration' => 60
-		)));
-		if ($json) {
-			$content = Q::json_decode($json, true);
+		$tree = Q_Tree::createAndLoad($filename, !empty($options['ignoreCache']), $linkedArray, !empty($options['dontThrow']));
+		$content = $tree ? $tree->getAll() : null;
+		if ($content) {
 			return self::set($name, $content, Q::ifset($options, 'merge', false));
 		}
 		return array();

@@ -25,6 +25,7 @@ var Row = Q.require('Db/Row');
  * @param {String} [fields.contract] defaults to ""
  * @param {String} [fields.methodName] defaults to ""
  * @param {String} [fields.params] defaults to ""
+ * @param {String} [fields.fromAddress] defaults to ""
  * @param {String} [fields.result] defaults to null
  * @param {String|Db.Expression} [fields.insertedTime] defaults to new Db.Expression("CURRENT_TIMESTAMP")
  * @param {String|Db.Expression} [fields.updatedTime] defaults to null
@@ -55,6 +56,12 @@ Q.mixin(Base, Row);
  */
 /**
  * @property params
+ * @type String
+ * @default ""
+ * 
+ */
+/**
+ * @property fromAddress
  * @type String
  * @default ""
  * 
@@ -267,7 +274,8 @@ Base.prototype.primaryKey = function () {
 		"chainId",
 		"contract",
 		"methodName",
-		"params"
+		"params",
+		"fromAddress"
 	];
 };
 
@@ -292,6 +300,7 @@ Base.fieldNames = function () {
 		"contract",
 		"methodName",
 		"params",
+		"fromAddress",
 		"result",
 		"insertedTime",
 		"updatedTime"
@@ -453,6 +462,44 @@ return [["varchar","1023","",false],false,"PRI",""];
 /**
  * Method is called before setting the field and verifies if value is string of length within acceptable limit.
  * Optionally accept numeric value which is converted to string
+ * @method beforeSet_fromAddress
+ * @param {string} value
+ * @return {string} The value
+ * @throws {Error} An exception is thrown if 'value' is not string or is exceedingly long
+ */
+Base.prototype.beforeSet_fromAddress = function (value) {
+		if (value == null) {
+			value='';
+		}
+		if (value instanceof Db.Expression) return value;
+		if (typeof value !== "string" && typeof value !== "number")
+			throw new Error('Must pass a String to '+this.table()+".fromAddress");
+		if (typeof value === "string" && value.length > 42)
+			throw new Error('Exceedingly long value being assigned to '+this.table()+".fromAddress");
+		return value;
+};
+
+	/**
+	 * Returns the maximum string length that can be assigned to the fromAddress field
+	 * @return {integer}
+	 */
+Base.prototype.maxSize_fromAddress = function () {
+
+		return 42;
+};
+
+	/**
+	 * Returns schema information for fromAddress column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+Base.column_fromAddress = function () {
+
+return [["varchar","42","",false],false,"PRI",""];
+};
+
+/**
+ * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+ * Optionally accept numeric value which is converted to string
  * @method beforeSet_result
  * @param {string} value
  * @return {string} The value
@@ -508,7 +555,7 @@ Base.prototype.beforeSet_insertedTime = function (value) {
 	 */
 Base.column_insertedTime = function () {
 
-return [["timestamp","1023","",false],false,"","CURRENT_TIMESTAMP"];
+return [["timestamp","42","",false],false,"","CURRENT_TIMESTAMP"];
 };
 
 /**
@@ -534,7 +581,7 @@ Base.prototype.beforeSet_updatedTime = function (value) {
 	 */
 Base.column_updatedTime = function () {
 
-return [["timestamp","1023","",false],true,"",null];
+return [["timestamp","42","",false],true,"",null];
 };
 
 /**

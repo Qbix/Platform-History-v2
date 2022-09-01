@@ -247,6 +247,17 @@ abstract class Base_Places_Postcode extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Places_Postcode($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Places_Postcode'))
@@ -322,7 +333,8 @@ abstract class Base_Places_Postcode extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('countryCode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -376,7 +388,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('postcode', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -430,7 +443,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('placeName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -484,7 +498,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('stateName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -538,7 +553,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -592,7 +608,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('regionName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -646,7 +663,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('region', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -700,7 +718,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('community', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -743,7 +762,8 @@ return array (
 
 	function beforeSet_latitude($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('latitude', $value);
 		}
 		if (!is_numeric($value))
@@ -775,7 +795,8 @@ return array (
 
 	function beforeSet_longitude($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('longitude', $value);
 		}
 		if (!is_numeric($value))
@@ -814,7 +835,8 @@ return array (
 	 */
 	function beforeSet_accuracy($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('accuracy', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)

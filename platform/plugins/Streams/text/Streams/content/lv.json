@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "pārvaldīt savus e-pasta abonementus",
         "IfUnsubscribe": "Ja vēlaties anulēt abonementu",
         "*": "Ziņa {{& message.fields.type}} uz {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} teica: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} teica: {{& message.content}}",
         "Streams\/changed": "Izmaiņas {{stream.fields.title}}",
         "Streams\/invite": "Jūs tikāt uzaicināts uz {{& stream.fields.title}}",
         "Streams\/announcement": "Paziņojums {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "E-pasts",
             "byText": "Teksts",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Uzaiciniet cilvēkus",
+            "chooseMethod": "Izvēlieties metodi:",
+            "selectContacts": "Izvēlieties Kontakti",
+            "scanQRCode": "Skenējiet QR kodu",
+            "shareLink": "Kopīgojiet saiti",
+            "chooseFromRegistered": "Izvēlieties no reģistrētajiem lietotājiem",
+            "inviteViaEmailOrSms": "Uzaicināt pa e-pastu vai SMS"
         },
         "email": {
             "subject": "Hei, pārbaudiet šo",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Jūs esat uzaicināts. {{ClickOrTap}} šeit, lai pieņemtu un pievienotos."
-        }
+        },
+        "Invite": "Uzaicināt",
+        "Share": "Dalīties"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Jums nav atļaujas pievienoties šai straumei.",
-        "streamTitle": "{{1}} sāka tiešraides zvanu",
+        "streamTitle": "{{1}} sāka telekonferenci",
         "allow": {
             "dialogTitle": "Savienojuma izveide",
             "microphoneBtn": "Iespējot mikrofonu",
@@ -175,7 +184,7 @@
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
             "permissionDenied": "{{kind}} atļauja liegta. Lai to izmantotu, lūdzu, veiciet šīs darbības:",
-            "point1": "Dodieties uz &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Privātums un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
+            "point1": "Dodieties uz &quot;Iestatījumi&quot; -&gt; &quot;Papildu&quot; -&gt; &quot;Konfidencialitāte un drošība&quot; -&gt; &quot;Vietnes iestatījumi&quot; -&gt; &quot;Kamera&quot; vai &quot;Vietnes iestatījumi&quot; -&gt; &quot;Mikrofons&quot;",
             "point2": "Noņemiet {{hostname}} no &quot;Bloķēšanas&quot; saraksta"
         },
         "webIosInstructionsDialog": {
@@ -203,7 +212,7 @@
             "youJoinedRoom": "Jūs pievienojāties telpai",
             "joining": "Pievienošanās: {{userName}}",
             "sbLeftRoom": "{{userName}} izgāja no telpas",
-            "switchingRoom": "Pārslēgšanās istaba...",
+            "switchingRoom": "Pārslēgšanās telpa...",
             "forceDisconnecting": "Jūs tiksit atvienots 5 sekunžu laikā",
             "forceDisconnectingImmediately": "Jūs atvienoja saimnieks",
             "youLeftRoom": "Jūs izgājāt no istabas",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Saite ir kopēta starpliktuvē",
             "codeCopiedToCb": "Kods ir kopēts starpliktuvē",
             "userHasNoVideo": "Dalībniekam nav video",
-            "openInBrowserAlert": "Atveriet saiti pārlūkprogrammā Safari, lai pievienotos konferencei."
+            "openInBrowserAlert": "Atveriet saiti pārlūkprogrammā Safari, lai pievienotos konferencei.",
+            "allowedVideoLimit": "Šajā telpā atļauts tikai {{limit}} video",
+            "allowedAudioLimit": "Šajā telpā ir atļauti tikai {{limit}} mikrofoni"
         },
         "settingsPopup": {
             "dialogTitle": "Video iestatījumi",
@@ -256,7 +267,8 @@
             "copy": "Kopēt",
             "streamToRTMP": "Straumējiet uz pielāgotu RTMP",
             "startBroadcasting": "Sāciet apraidi",
-            "broadcastingInProgress": "Notiek apraide"
+            "broadcastingInProgress": "Notiek apraide",
+            "manageStream": "Pārvaldīt tiešraidi"
         },
         "audioSettings": {
             "dialogTitle": "Audio iestatījumi",
@@ -267,7 +279,7 @@
             "dialogTitle": "Dalībnieka iestatījumi",
             "disconnect": "Atvienot",
             "floatingScreens": "Peldošie ekrāni",
-            "tiledScreens": "Flīžu ekrāni",
+            "tiledScreens": "Flīzēti ekrāni",
             "loudestExceptMe": "Skaļākais, izņemot mani",
             "maximizeLoudest": "Maksimizēt skaļāko",
             "staticMaximized": "Maksimizēts statiskais",
@@ -284,8 +296,8 @@
             "title": "Straumēšanas iestatījumi"
         },
         "preview": {
-            "Meeting": "Tikšanās",
-            "MeetingEnded": "Sanāksme beigusies"
+            "Meeting": "Telekonference",
+            "MeetingEnded": "Telekonference beidzās"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "saruna starp lietotājiem ar vēsturi"
         },
         "Streams\/webrtc": {
-            "displayType": "Reāllaika zvans",
+            "displayType": "Tiešraides zvans",
             "description": "reāllaika video\/audiozvans"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Atjaunināt",
         "NoCallsYet": "Vēl nav zvanu",
         "CallReasonTitle": "Par ko ir šis zvans?",
-        "WaitingRoom": "Uzgaidāmā telpa"
+        "WaitingRoom": "Uzgaidāmā telpa",
+        "LiveRoom": "Tiešraides telpa",
+        "interviewedByAnotherHost": "Pašlaik intervē cits vadītājs",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Aizturēt",
+        "endCall": "Beigt zvanu",
+        "interview": "Intervija",
+        "markApproved": "Atzīmēt kā apstiprinātu"
     }
 }

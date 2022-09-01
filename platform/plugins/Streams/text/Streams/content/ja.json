@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "メール購読を管理する",
         "IfUnsubscribe": "退会したい場合",
         "*": "{{& message.fields.type}}から{{& stream.fields.title}}へのメッセージ",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}は言った：{{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} の発言: {{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}}の変更",
         "Streams\/invite": "{{& stream.fields.title}}に招待されました",
         "Streams\/announcement": "{{& stream.fields.title}}での発表",
@@ -89,7 +89,14 @@
             "byEmail": "Eメール",
             "byText": "文章",
             "byFacebook": "フェイスブック",
-            "byTwitter": "ツイッター"
+            "byTwitter": "ツイッター",
+            "title2": "人を招待する",
+            "chooseMethod": "方法を選択してください:",
+            "selectContacts": "連絡先を選択",
+            "scanQRCode": "QRコードをスキャン",
+            "shareLink": "リンクを共有する",
+            "chooseFromRegistered": "登録ユーザーから選ぶ",
+            "inviteViaEmailOrSms": "メールまたは SMS で招待する"
         },
         "email": {
             "subject": "ねえ、これをチェックしてください",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "あなたは招待されました。 {{ClickOrTap}}ここで受け入れて参加します。"
-        }
+        },
+        "Invite": "招待",
+        "Share": "シェア"
     },
     "messages": {
         "html": {
@@ -156,92 +165,94 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "このストリームに参加する権限がありません。",
-        "streamTitle": "{{1}}がライブ通話を開始しました",
+        "streamTitle": "{{1}} が電話会議を開始しました",
         "allow": {
-            "dialogTitle": "接続する",
+            "dialogTitle": "接続中",
             "microphoneBtn": "マイクを有効にする",
             "cameraBtn": "カメラを有効にする",
             "cameraAndMicrophoneBtn": "カメラとマイクを有効にする"
         },
         "preparing": {
-            "micIsOff": "マイクがオフになっています",
-            "micIsOn": "マイクがオンになっています",
-            "cameraIsOff": "カメラがオフになっています",
+            "micIsOff": "マイクがオフです",
+            "micIsOn": "マイクはオンです",
+            "cameraIsOff": "カメラがオフです",
             "cameraIsOn": "カメラがオンになっています",
-            "screenSharingIsOn": "画面共有がオンになっています",
+            "screenSharingIsOn": "画面共有はオンです",
             "screenSharingIsOff": "画面を共有する",
-            "joinNow": "通話に参加する"
+            "joinNow": "通話に参加"
         },
         "webInstructionsDialog": {
-            "dialogTitle": "手順",
-            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
-            "point1": "[設定]-&gt; [詳細設定]-&gt; [プライバシーとセキュリティ]-&gt; [サイト設定]-&gt; [カメラ]または[サイト設定]-&gt; [マイク]に移動します",
-            "point2": "「ブロック」リストから{{hostname}}を削除します"
+            "dialogTitle": "指示",
+            "permissionDenied": "{{kind}} の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "point1": "「設定」 -&gt; 「詳細」 -&gt; 「プライバシーとセキュリティ」 -&gt; 「サイトの設定」 -&gt; 「カメラ」または「サイトの設定」 -&gt; 「マイク」に移動します",
+            "point2": "「ブロック」リストから{{hostname}}を削除"
         },
         "webIosInstructionsDialog": {
-            "dialogTitle": "手順",
-            "permissionDenied": "{{kind}}の許可が拒否されました。このページをリロードし、{{kind}}へのアクセスを確認して会議に参加してください。"
+            "dialogTitle": "指示",
+            "permissionDenied": "{{kind}} の許可が拒否されました。会議に参加するには、このページをリロードして {{kind}} へのアクセスを確認してください。"
         },
         "androidInstructionsDialog": {
-            "dialogTitle": "手順",
-            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
-            "point1": "Androidの設定に移動します",
+            "dialogTitle": "指示",
+            "permissionDenied": "{{kind}} の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "point1": "Android の設定に移動します",
             "point2": "「アプリと通知」を開く",
-            "point3": "「{{communityName}}」を見つけて開きます",
+            "point3": "「{{communityName}}」を見つけて開く",
             "point4": "権限をタップします",
             "point5": "{{kind}}を有効にする"
         },
         "iosInstructionsDialog": {
-            "dialogTitle": "手順",
-            "permissionDenied": "{{kind}}の許可が拒否されました。使用するには、次の手順に従ってください。",
-            "point1": "iOS設定に移動します",
+            "dialogTitle": "指示",
+            "permissionDenied": "{{kind}} の許可が拒否されました。使用するには、次の手順に従ってください。",
+            "point1": "iOS の設定に移動します",
             "point2": "「プライバシー」を開く",
-            "point3": "{{kind}}を見つけて開きます",
-            "point4": "「{{communityName}}」を見つけて有効にします"
+            "point3": "{{kind}}を見つけて開く",
+            "point4": "「{{communityName}}」を見つけて有効にする"
         },
         "notices": {
-            "youJoinedRoom": "あなたは部屋に加わりました",
-            "joining": "参加：{{userName}}",
-            "sbLeftRoom": "{{userName}}が部屋を出た",
+            "youJoinedRoom": "ルームに参加しました",
+            "joining": "参加中: {{userName}}",
+            "sbLeftRoom": "{{userName}}が部屋を出ました",
             "switchingRoom": "スイッチングルーム...",
             "forceDisconnecting": "5秒以内に切断されます",
             "forceDisconnectingImmediately": "ホストによって切断されました",
             "youLeftRoom": "あなたは部屋を出ました",
             "codeCopied": "あなたは部屋を出ました",
-            "sbBeganFbLive": "{{userName}}はFacebookでこの通話のブロードキャストを開始しました",
-            "sbStoppedFbLive": "{{userName}}はFacebookでこの通話のブロードキャストを停止しました",
-            "youBeganFbLive": "あなたはFacebookでこの通話を放送し始めました",
-            "youStoppedFbLive": "Facebookでこの通話のブロードキャストを停止しました",
-            "youStartedLive": "この通話をカスタムRTMPにブロードキャストし始めました",
-            "youStoppedLive": "この通話のカスタムRTMPへのブロードキャストを停止しました",
+            "sbBeganFbLive": "{{userName}}がFacebookでこの通話のブロードキャストを開始しました",
+            "sbStoppedFbLive": "{{userName}} は Facebook でのこの通話の配信を停止しました",
+            "youBeganFbLive": "Facebook でこの通話のブロードキャストを開始しました",
+            "youStoppedFbLive": "この通話の Facebook での配信を停止しました",
+            "youStartedLive": "この呼び出しをカスタム RTMP にブロードキャストし始めました",
+            "youStoppedLive": "カスタム RTMP へのこの呼び出しのブロードキャストを停止しました",
             "sbStartedLiveStreaming": "{{userName}}がライブを開始しました",
-            "sbStoppedLiveStreaming": "{{userName}}はライブで終了しました",
-            "liveStopped": "エンドポイントへのビデオの送信中にエラーが発生しました",
-            "youBeganVideoRecording": "この会議の録音を開始しました",
-            "youStoppedVideoRecording": "この会議の録音を停止しました",
-            "linkCopiedToCb": "リンクがクリップボードにコピーされました",
+            "sbStoppedLiveStreaming": "{{userName}} ライブ終了",
+            "liveStopped": "ビデオをエンドポイントに送信中にエラーが発生しました",
+            "youBeganVideoRecording": "この会議の記録を開始しました",
+            "youStoppedVideoRecording": "この会議の記録を停止しました",
+            "linkCopiedToCb": "リンクをクリップボードにコピーしました",
             "codeCopiedToCb": "クリップボードにコピーされたコード",
             "userHasNoVideo": "参加者にはビデオがありません",
-            "openInBrowserAlert": "Safariブラウザでリンクを開いて会議に参加します。"
+            "openInBrowserAlert": "リンクを Safari ブラウザーで開き、会議に参加します。",
+            "allowedVideoLimit": "この部屋では{{limit}}の動画のみ許可されています",
+            "allowedAudioLimit": "この部屋では {{limit}} 個のマイクのみ許可されています"
         },
         "settingsPopup": {
             "dialogTitle": "ビデオ設定",
             "webCamera": "ウェブカメラ",
             "screenSharing": "画面共有",
             "shareAnotherScreen": "別の画面を共有する",
-            "turnOffCameras": "カメラの電源を切ります",
+            "turnOffCameras": "カメラをオフにする",
             "turnOffVideo": "カメラ\/画面共有をオフにする",
             "turnOffAudioInput": "マイクをミュート",
             "turnOffScreenSharing": "画面共有をオフにする",
             "cameraIsTurnedOff": "カメラがオフになっています",
-            "micIsTurnedOff": "マイクがオフになっている",
-            "startFBLive": "Facebookライブストリームを開始する",
-            "stopFBLive": "Facebookライブストリームを停止します",
+            "micIsTurnedOff": "マイクがオフになっています",
+            "startFBLive": "Facebookライブストリームを開始",
+            "stopFBLive": "Facebook ライブストリームを停止する",
             "startRecording": "録音開始",
-            "stopRecording": "録音を停止します",
+            "stopRecording": "記録を停止",
             "start": "始める",
-            "stop": "やめる",
-            "recordingInProgress": "録音中です...",
+            "stop": "止まる",
+            "recordingInProgress": "レコーディング中…",
             "fbLiveTitle": "ライブストリームのタイトル",
             "fbLiveDescription": "ライブストリームについて説明してください。どんな内容ですか？",
             "fbOnlyMeLiveAccess": "私だけ",
@@ -249,14 +260,15 @@
             "fbPublicAccess": "公衆",
             "publishOnTimeline": "タイムラインで公開",
             "publishToGroup": "グループに公開",
-            "fbStartLive": "ライブ配信",
-            "fbStopLive": "ライブストリームを終了する",
+            "fbStartLive": "ライブに行く",
+            "fbStopLive": "ライブ配信を終了",
             "streamingSettings": "設定",
             "fbEmbedCode": "埋め込む",
             "copy": "コピー",
-            "streamToRTMP": "カスタムRTMPにストリーミング",
+            "streamToRTMP": "カスタム RTMP にストリーミング",
             "startBroadcasting": "放送開始",
-            "broadcastingInProgress": "放送中です"
+            "broadcastingInProgress": "放送中です",
+            "manageStream": "ライブストリームの管理"
         },
         "audioSettings": {
             "dialogTitle": "オーディオ設定",
@@ -268,24 +280,24 @@
             "disconnect": "切断する",
             "floatingScreens": "フローティングスクリーン",
             "tiledScreens": "タイル張りの画面",
-            "loudestExceptMe": "私を除いて最も騒々しい",
-            "maximizeLoudest": "最も大きな音を最大化する",
+            "loudestExceptMe": "私を除いて最もうるさい",
+            "maximizeLoudest": "最も大きな音を最大化",
             "staticMaximized": "静的最大化",
             "fullScreen": "全画面表示",
             "manual": "マニュアル",
-            "turnOffCamera": "ビデオを隠す",
-            "turnOffAudio": "音声をミュート",
-            "turnOffScreenSharing": "画面共有を非表示にする",
-            "turnOnCamera": "ビデオを見る",
-            "turnOnAudio": "音声のミュートを解除する",
-            "turnOnScreenSharing": "画面共有を表示する"
+            "turnOffCamera": "ビデオを非表示",
+            "turnOffAudio": "音声をミュートする",
+            "turnOffScreenSharing": "画面共有を非表示",
+            "turnOnCamera": "ビデオを表示",
+            "turnOnAudio": "オーディオのミュートを解除",
+            "turnOnScreenSharing": "画面共有を表示"
         },
         "streamingSettings": {
             "title": "ストリーミング設定"
         },
         "preview": {
-            "Meeting": "ミーティング",
-            "MeetingEnded": "会議は終了しました"
+            "Meeting": "電話会議",
+            "MeetingEnded": "電話会議終了"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "歴史のあるユーザー間の会話"
         },
         "Streams\/webrtc": {
-            "displayType": "リアルタイム通話",
-            "description": "リアルタイムのビデオ\/オーディオ通話"
+            "displayType": "ライブコール",
+            "description": "リアルタイムのビデオ\/音声通話"
         },
         "Streams\/question": {
             "displayType": "質問",
@@ -527,6 +539,13 @@
         "Update": "アップデート",
         "NoCallsYet": "まだ電話はありません",
         "CallReasonTitle": "この呼びかけは何ですか？",
-        "WaitingRoom": "待合室"
+        "WaitingRoom": "待合室",
+        "LiveRoom": "ライブルーム",
+        "interviewedByAnotherHost": "現在、別のホストからインタビューを受けています",
+        "bringToLive": "ライブショーに持ち込む",
+        "putOnHold": "保留にする",
+        "endCall": "通話終了",
+        "interview": "インタビュー",
+        "markApproved": "承認済みとしてマーク"
     }
 }

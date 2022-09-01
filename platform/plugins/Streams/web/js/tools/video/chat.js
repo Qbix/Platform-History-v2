@@ -50,21 +50,15 @@
 					$("<div>").tool("Streams/preview", {
 						publisherId: userId
 					}).tool("Streams/video/preview").activate(function () {
-                        console.log('Streams/video/preview this.element', this.element);
-
                         var videoPreview = Q.Tool.from(this.element, "Streams/video/preview");
 
 						videoPreview.composer(function (params) {
-                            console.log('Streams/video/preview', params);
-
                             var fields = Q.extend({
 								publisherId: userId,
 								type: "Streams/video"
 							}, 10, params);
 
 							var $dummy = $("<div class='Streams_preview_dummy'>").appendTo(tool.chatTool.$('.Streams_chat_messages'));
-                            console.log('Streams/video/preview $dummy', $dummy.get());
-
 							Q.Streams.create(fields, function Streams_preview_afterCreate(err, stream, extra) {
 								$dummy.remove();
 

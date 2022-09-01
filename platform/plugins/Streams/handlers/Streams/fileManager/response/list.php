@@ -10,7 +10,7 @@ function Streams_fileManager_response_list($params = array()) {
 
     if(!is_null($currentDirStreamName) && $currentDirStreamName != 'Streams/fileManager/main'){
 
-        $parentStream = Streams::fetchOne($loggedUserId, $loggedUserId, $currentDirStreamName);
+        $parentStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, $currentDirStreamName);
 
         if(is_null($parentStream)) {
             $fields = array(
@@ -25,7 +25,7 @@ function Streams_fileManager_response_list($params = array()) {
 
         $browsePathOfStream = $rootStream;
     } else {
-        $rootStream = Streams::fetchOne($loggedUserId, $loggedUserId, 'Streams/fileManager/main');
+        $rootStream = Streams_Stream::fetch($loggedUserId, $loggedUserId, 'Streams/fileManager/main');
 
         if(is_null($rootStream)) {
             $fields = array(

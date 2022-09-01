@@ -506,8 +506,17 @@
 				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
 					Assets.Payments.applePayCordova(options, function (err, res) {
 						if (err) {
-							return Assets.Payments.standardStripe(options, callback);
+							Assets.Payments.applePayStripe(options, function (err, res) {
+								if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
+									Assets.Payments.standardStripe(options, callback);
+									return;
+								}
+
+								Q.handle(callback, null, [err, res]);
+							});
+							return;
 						}
+
 						Q.handle(callback, null, [err, res]);
 					});
 				} else if (!Q.info.isCordova && window.PaymentRequest) {
@@ -707,57 +716,46 @@
 			paymentRequestStripe: function (options, callback) {
 				Assets.Payments.checkLoaded();
 
+				// while "basic-card" payment method refused and GooglePay not adjusted yet
+				return Q.handle(callback, null, [{code: 9}]);
+
 				var currency = options.currency || 'USD';
 
-				var supportedInstruments = [
-					{
-						supportedMethods: 'basic-card',
-						data: {
-							supportedNetworks: ['amex', 'discover', 'mastercard', 'visa'],
-							supportedTypes: ['credit']
+				if (!Assets.Payments.googlePay) {
+					return Q.handle(callback, null, {code: 9});
+				}
+
+				var supportedInstruments = [{
+					supportedMethods: 'https://google.com/pay',
+					data: {
+						environment: Assets.Payments.googlePay.environment,
+						apiVersion: 2,
+						apiVersionMinor: 0,
+						allowedPaymentMethods: [{
+							type: 'CARD',
+							parameters: {
+								allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
+								allowedCardNetworks: ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "MIR", "VISA"]
+							},
+							tokenizationSpecification: {
+								type: 'PAYMENT_GATEWAY',
+								// Check with your payment gateway on the parameters to pass.
+								// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
+								parameters: {
+									"gateway": Assets.Payments.googlePay.gateway,
+									"stripe:version": Assets.Payments.stripe.version,
+									"stripe:publishableKey": Assets.Payments.stripe.publishableKey
+								}
+							}
+						}],
+						transactionInfo: {
+							totalPriceStatus: "FINAL",
+							totalPrice: options.amount.toString(10),
+							currencyCode: currency
 						}
 					}
-				];
-				if (Assets.Payments.googlePay) {
-					supportedInstruments.push({
-						supportedMethods: 'https://google.com/pay',
-						data: {
-							environment: Assets.Payments.googlePay.environment,
-							apiVersion: 2,
-							apiVersionMinor: 0,
-							merchantInfo: {
-								// A merchant ID is available after approval by Google.
-								// @see {@link https://developers.google.com/pay/api/web/guides/test-and-deploy/integration-checklist}
-								//merchantId: Assets.Payments.googlePay.merchantId,
-								//merchantName: Assets.Payments.googlePay.merchantName
-								merchantName: 'Example Merchant'
-							},
-							allowedPaymentMethods: [{
-								type: 'CARD',
-								parameters: {
-									allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-									allowedCardNetworks: ["AMEX", "DISCOVER", "JCB", "MASTERCARD", "VISA"]
-								},
-								tokenizationSpecification: {
-									type: 'PAYMENT_GATEWAY',
-									// Check with your payment gateway on the parameters to pass.
-									// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
-									parameters: {
-										//'gateway': Assets.Payments.googlePay.gateway,
-										//'gatewayMerchantId': Assets.Payments.stripe.publishableKey
-										'gateway': 'example',
-										'gatewayMerchantId': 'exampleGatewayMerchantId'
-									}
-								}
-							}],
-							transactionInfo: {
-								totalPriceStatus: "FINAL",
-								totalPrice: options.amount.toString(10),
-								currencyCode: currency
-							}
-						}
-					})
-				}
+				}];
+
 				var globalShippingOptions = [
 					{
 						id: 'economy',
@@ -816,28 +814,7 @@
 				});
 				paymentRequest.show().then(function (result) {
 					var promise;
-					if (result.methodName === 'basic-card') {
-						promise = new Q.Promise(function (resolve, reject) {
-							Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-							Stripe.card.createToken({
-								number: result.details.cardNumber,
-								cvc: result.details.cardSecurityCode,
-								exp_month: result.details.expiryMonth,
-								exp_year: result.details.expiryYear
-							}, function (res, token) {
-								if (res !== 200) {
-									return reject({result: result, err: new Error('Stripe gateway error')});
-								}
-								options.token = token;
-								return Assets.Payments.pay('stripe', options, function (err) {
-									if (err) {
-										return reject({result: result, err: err});
-									}
-									return resolve(result);
-								});
-							});
-						});
-					} else if (result.methodName === 'https://google.com/pay') {
+					if (result.methodName === 'https://google.com/pay' && !Q.getObject("details.errorCode", result)) {
 						promise = new Q.Promise(function (resolve, reject) {
 							options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
 							return Assets.Payments.pay('stripe', options, function (err) {
@@ -851,12 +828,15 @@
 					return promise ? promise : Q.Promise.reject({result: result, err: new Error('Unsupported method')});
 				}).then(function (result) {
 					result.complete('success');
-					callback(null, result);
+					Q.handle(callback, null, [null, result]);
+				}, function (reject) {
+					console.warn(reject.result);
+					reject.result.complete("fail");
 				}).catch(function (err) {
 					if (Q.getObject("result.complete", err)) {
 						return err.result.complete('fail');
 					}
-					callback(err);
+					Q.handle(callback, null, [err]);
 				});
 			},
 			/**
@@ -1188,7 +1168,7 @@
 							Q.each(ABI, function (index, obj) {
 								Q.each(events, function (event1, event2) {
 									if (obj.type === "event" && obj.name === event1) {
-										contract.on(event1, function () {
+										factory.on(event1, function () {
 											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
 										});
 									}
@@ -1233,52 +1213,66 @@
 						Q.handle(callback, null, [null, contract]);
 					};
 
-					var address = Q.getObject("contractAddress", options) || chain.contract;
-					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTContractTemplate.json")];
-					var pipe = new Q.pipe(urls, function (params) {
-						var contractURL = null;
-						Q.each(urls, function (i, url) {
-							if (contractURL || params[url][0] !== 200) {
-								return;
-							}
+					var contractAddress = Q.getObject("contractAddress", options) || chain.contract;
 
-							contractURL = url;
+					Assets.NFT.Web3.fetchABI(chain.chainId, contractAddress, function (err, ABI) {
+						var provider = new ethers.providers.Web3Provider(window.ethereum);
+						var contract = new ethers.Contract(contractAddress, ABI, provider.getSigner());
+
+						var events = {
+							TokenRemovedFromSale: "onTokenRemovedFromSale",
+							TokenPutOnSale: "onTokenAddedToSale",
+							Transfer: "onTransfer",
+							OwnershipTransferred: "onTransferOwnership",
+							TokenBought: "onTokenBought",
+							SeriesPutOnSale: "onSeriesPutOnSale",
+							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+						};
+						Q.each(ABI, function (index, obj) {
+							Q.each(events, function (event1, event2) {
+								if (obj.type === "event" && obj.name === event1) {
+									contract.on(event1, function () {
+										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+									});
+								}
+							});
 						});
 
-						if (!contractURL) {
-							throw new Q.Exception("contract ABI url invalid");
+						_subMethod(contract);
+					});
+				},
+				/**
+				 * Get ABI by chainId and contractAddress
+				 * @method fetchABI
+				 * @params {String} chainId
+				 * @params {String} contractAddress
+				 * @params {function} callback
+				 */
+				fetchABI: function (chainId, contractAddress, callback) {
+					Q.handle(Assets.batchFunction(), null, ["NFT", "getABI", chainId, contractAddress, function (err) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
 						}
 
-						// loading ABI json
-						$.getJSON(contractURL, function (ABI) {
-							var provider = new ethers.providers.Web3Provider(window.ethereum);
-							var contract = new ethers.Contract(address, ABI, provider.getSigner());
+						Q.handle(callback, null, [null, this]);
+					}]);
+				},
+				/**
+				 * Get metadata
+				 * @method metadata
+				 * @params {String} tokenId - NFT tokenId
+				 * @params {String} chainId
+				 * @params {String} contractAddress
+				 * @params {function} callback
+				 */
+				metadata: function (tokenId, chainId, contractAddress, callback) {
+					Q.handle(Assets.batchFunction(), null, ["NFT", "getRemoteJSON", tokenId, chainId, contractAddress, function (err) {
+						if (err) {
+							return Q.handle(callback, null, [err]);
+						}
 
-							var events = {
-								TokenRemovedFromSale: "onTokenRemovedFromSale",
-								TokenPutOnSale: "onTokenAddedToSale",
-								Transfer: "onTransfer",
-								OwnershipTransferred: "onTransferOwnership",
-								TokenBought: "onTokenBought",
-								SeriesPutOnSale: "onSeriesPutOnSale",
-								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-							};
-							Q.each(ABI, function (index, obj) {
-								Q.each(events, function (event1, event2) {
-									if (obj.type === "event" && obj.name === event1) {
-										contract.on(event1, function () {
-											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-										});
-									}
-								});
-							});
-
-							_subMethod(contract);
-						});
-					});
-					Q.each(urls, function (i, url) {
-						Q.Request.getUrlStatus(url, pipe.fill(url));
-					});
+						Q.handle(callback, null, [null, this]);
+					}]);
 				},
 				/**
 				 * Get amount of tokens by wallet and chain
@@ -1613,7 +1607,8 @@
 		"Assets/history": "{{Assets}}/js/tools/history.js",
 		"Assets/service/preview": "{{Assets}}/js/tools/servicePreview.js",
 		"Assets/NFT/preview": "{{Assets}}/js/tools/NFT/preview.js",
-		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/series.js",
+		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
+		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
@@ -1815,4 +1810,18 @@
 			return false;
 		}, 'Assets');
 	}, 'Assets');
+
+	var co = {
+		scrollbarsAutoHide: false,
+		handlers: {
+			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
+			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
+			NFT: "{{Assets}}/js/columns/NFT.js"
+		}
+	};
+	if (Q.info.isMobile) {
+		co.back = {src: "Q/plugins/Q/img/x.png"};
+	}
+	Q.Tool.define.options('Q/columns', co);
+
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

@@ -7,7 +7,7 @@ function Streams_access_put($params)
 
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
-	$stream = Streams::fetchOne($user->id, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table'    => 'stream',

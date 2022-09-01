@@ -444,7 +444,7 @@
 				}
 				if (!href && state.field && name) {
 					href = window.location.href.split('?')[0]
-						+ '?' + window.location.search.queryField(state.field, name);
+						+ window.location.search.queryField(state.field, name);
 				}
 				return href;
 			},
@@ -488,10 +488,10 @@
 					}
 					$o.remove();
 				}
-				tool.element.addClass('Q_tabs_arranged');
 				var $tabs = tool.$tabs = $('.Q_tabs_tab', $te);
 				var $overflow, $lastVisibleTab, tabAlreadyVisible = false;
 				if (state.vertical) {
+					tool.element.addClass('Q_tabs_arranged');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(this);
 				}
@@ -556,9 +556,13 @@
 						$overflow.addClass(values.classes); // copy its style
 					}
 					if (state.overflow.glyph) {
-						$('<span class="Q_tabs_overflowGlyph" />')
-						.html(state.overflow.glyph.interpolate(values))
-						.appendTo($overflow);
+						var $glyph = $('<span class="Q_tabs_overflowGlyph" />')
+						.html(state.overflow.glyph.interpolate(values));
+						if (Q.info.isMobile) {
+							$overflow.append($glyph);
+						} else {
+							$overflow.prepend($glyph);
+						}
 					}
 					$lastVisibleTab = $tabs.eq(index);
 					var oneLess = !!state.compact;
@@ -588,6 +592,7 @@
 				}
 				if (!$overflow) {
 					tool.$overflow = null;
+					tool.element.addClass('Q_tabs_arranged');
 					Q.handle(state.onRefresh, this);
 					return callback && callback.call(tool);
 				}

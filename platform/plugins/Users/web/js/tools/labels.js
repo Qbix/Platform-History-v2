@@ -3,6 +3,7 @@
 var Users = Q.Users;
 
 Q.setObject({
+	'Q.text.Users.labels.addToPhonebook': 'Add to My Phone Contacts',
 	'Q.text.Users.labels.addLabel': 'New Label',
 	'Q.text.Users.labels.prompt': 'Give it a name'
 });
@@ -71,6 +72,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 	prefix: 'Users/',
 	contactUserId: null,
 	canAdd: false,
+	addToPhonebook: true,
 	onRefresh: new Q.Event(),
 	onClick: new Q.Event()
 },
@@ -96,7 +98,9 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				labels: labels,
 				all: all,
 				canAdd: Q.Users.loggedInUser && state.canAdd,
-				canAddIcon: Q.url('{{Q}}/img/actions/add.png')
+				canAddIcon: Q.url('{{Q}}/img/actions/add.png'),
+				phoneBookIcon: Q.url('{{Q}}/img/actions/add_to_phonebook.png'),
+                addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
 				tool.element.innerHTML = html;
@@ -142,6 +146,41 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 					$add.plugin('Q/clickable');
 				}, 0);
 			}
+			if (state.addToPhonebook) {
+				var $addToPhonebook = tool.$('.Users_labels_add_phonebook')
+				.on(Q.Pointer.fastclick, function () {
+					location.href = Q.url("{{baseUrl}}/Users/" + state.contactUserId + ".vcf");
+				});
+
+				setTimeout(function () {
+					// add clickable after the sizing has been done
+                    $addToPhonebook.plugin('Q/clickable');
+				}, 0);
+			}
+
+            let elems = $('.Users_labels_title');
+            let length = elems.length;
+            $('.Users_labels_title', $(tool.element)).each(function(i){
+                if(i == 0) {
+                    Q.Users.hint('Communities/profile/addContact', $addToPhonebook, {
+                        dontStopBeforeShown: true,
+                        show: { delay: 500 }
+                    });
+                } else if (i == length -1){
+                    return;
+                } else {
+                    Q.Pointer.hint(this, {
+                        hotspot: {x: i % 2 ? 0 : 0.3, y: 0},
+                        dontStopBeforeShown: true,
+                        dontRemove: true,
+                        show: {delay: 1000 + (100 * i)},
+                        hide: {after: 1000},
+                        styles: {
+                            opacity: 1 - (i / length / 2)
+                        }
+                    })
+                }
+            })
 		});
 	}
 }
@@ -150,6 +189,12 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
 Q.Template.set('Users/labels', ''
 + '<ul>'
++ '{{#if addToPhonebook}}'
++ '<li class="Users_labels_action Users_labels_add_phonebook">'
++   '<img class="Users_labels_icon" src="{{phoneBookIcon}}">'
++   '<div class="Users_labels_title">{{addToPhonebook}}</div>'
++ '</li>'
++ '{{/if}}'
 + '{{#if all}}'
 + '<li class="Users_labels_label" data-label="*">'
 +   '<img class="Users_labels_icon" src="{{all.icon}}" alt="all">'

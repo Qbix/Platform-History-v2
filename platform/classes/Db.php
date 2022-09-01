@@ -45,7 +45,7 @@ interface Db_Interface
 	 * This modifies how we connect to the database.
 	 * @return {PDO} The PDO object for connection
 	 */
-	function reallyConnect($shardName = null);
+	function reallyConnect($shardName = null, &$shardInfo = null);
 	
 	/**
 	 * If connected, sets the timezone in the database to match the one in PHP.
@@ -550,6 +550,11 @@ abstract class Db
 			throw new Exception("Database connection \"$conn_name\" wasn't registered with Db.", -1);
 		if (isset(self::$dbs[$conn_name]) and self::$dbs[$conn_name] instanceof Db_Interface) {
 			return self::$dbs[$conn_name];
+		}
+		if (empty($conn_info['dsn'])) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Db/connections/$conn_name/dsn"
+			));
 		}
 		$dsn_array = Db::parseDsnString($conn_info['dsn']);
 		$class_name = 'Db_' . ucfirst($dsn_array['dbms']);

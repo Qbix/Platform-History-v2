@@ -984,9 +984,9 @@ class Q_Utils
 		$callback = null)
 	{
 		$method = strtoupper($method);
-		if (!isset($user_agent))
-			$user_agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_1) AppleWebKit/537.36 (K HTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36";
-
+		if (!isset($user_agent)) {
+			$user_agent = Q_Config::expect('Q', 'curl', 'userAgent');
+		}
 		$ip = null;
 		if (is_array($uri)) {
 			$url = $uri[0];
@@ -1016,7 +1016,7 @@ class Q_Utils
 		$headers = array("Host: ".$host);
 
 		if (is_array($data)) {
-			$data = http_build_query($data, null, '&');
+			$data = http_build_query($data, '', '&');
 		}
 		if (!is_string($data)) {
 			$data = '';
@@ -1052,6 +1052,13 @@ class Q_Utils
 				}
 			}
 			if ($header) {
+				if (Q::isAssociative($header)) {
+					$h = array();
+					foreach ($header as $k => $v) {
+						$h[] = "$k: $v";
+					}
+					$header = $h;
+				}
 				$headers = array_merge($headers, $header);
 			}
 			$header = implode("\r\n", $headers);
@@ -1630,7 +1637,7 @@ class Q_Utils
 			if ($item == '.' || $item == '..') {
 				continue;
 			}
-			if (!deleteDirectory($dir . DIRECTORY_SEPARATOR . $item)) {
+			if (!self::rmdir($dir . DIRECTORY_SEPARATOR . $item)) {
 				return false;
 			}
 		}
@@ -1648,10 +1655,25 @@ class Q_Utils
 	 * @param {integer} [$lengths=3] the lengths of each segment (the last one can be smaller)
 	 * @param {string} [$delimiter=DIRECTORY_SEPARATOR] the delimiter to put between segments
 	 * @param {string} [$internalDelimiter='/'] the internal delimiter, if it is set then only the last part is split, and instances of internalDelimiter are replaced by delimiter
+	 * @param {string} [$checkRegEx] The RegEx to check and throw an exception if id doesn't match. Pass null here to skip the RegEx check.
 	 * @return {string} the segments, delimited by the delimiter
+	 * @throw {Q_Exception_WrongValue} 
 	 */
-	static function splitId($id, $lengths = 3, $delimiter = DIRECTORY_SEPARATOR, $internalDelimiter = '/')
-	{
+	static function splitId(
+		$id,
+		$lengths = 3,
+		$delimiter = DIRECTORY_SEPARATOR,
+		$internalDelimiter = '/',
+		$checkRegEx = '/^[a-zA-Z0-9\.\-\_]{3,31}$/'
+	) {
+		if (isset($checkRegEx)) {
+			if (!preg_match($checkRegEx, $id)) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'id',
+					'range' => $checkRegEx
+				));
+			}
+		}
 		if (!$internalDelimiter) {
 			return implode($delimiter, str_split($id, $lengths));
 		}

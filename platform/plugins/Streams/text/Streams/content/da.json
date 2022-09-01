@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Besked {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sagde: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sagde: {{& message.content}}",
         "Streams\/changed": "Ændringer i {{stream.fields.title}}",
         "Streams\/invite": "Du blev inviteret til {{& stream.fields.title}}",
         "Streams\/announcement": "Annoncering i {{& stream.fields.title}}",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} hvis koden blev scannet",
             "copyLink": "{{ClickOrTap}} for at kopiere invitationslinket",
             "userChooserPlaceholder": "Søg på navn",
-            "shareOrCopyLink": "{{ClickOrTap}} for at dele eller kopiere invitationslinket"
+            "shareOrCopyLink": "{{ClickOrTap}} for at dele eller kopiere invitationslinket",
+            "title2": "Inviter folk",
+            "chooseMethod": "Vælg en metode:",
+            "selectContacts": "Vælg Kontakter",
+            "scanQRCode": "Scan QR-kode",
+            "shareLink": "Del et link",
+            "chooseFromRegistered": "Vælg blandt registrerede brugere",
+            "inviteViaEmailOrSms": "Inviter via e-mail eller SMS"
         },
         "email": {
             "subject": "Hej, tjek det her ud",
@@ -104,7 +111,9 @@
             "text": "Du er blevet inviteret. {{ClickOrTap}} her for at acceptere og deltage."
         },
         "youCanNowPaste": "Du kan nu indsætte dette link et sted for at invitere folk",
-        "command": "Invitere"
+        "command": "Invitere",
+        "Invite": "Invitere",
+        "Share": "Del"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} startede live",
             "sbStoppedLiveStreaming": "{{userName}} sluttede live",
             "liveStopped": "Der opstod en fejl under afsendelse af video til slutpunktet",
-            "forceDisconnectingImmediately": "Du blev afbrudt af en vært"
+            "forceDisconnectingImmediately": "Du blev afbrudt af en vært",
+            "allowedVideoLimit": "Kun {{limit}} video er tilladt i dette rum",
+            "allowedAudioLimit": "Kun {{limit}} mikrofoner er tilladt i dette rum"
         },
         "settingsPopup": {
             "webCamera": "Web kamera",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Stream til brugerdefineret RTMP",
             "dialogTitle": "Videoindstillinger",
             "startBroadcasting": "Begynd at udsende",
-            "broadcastingInProgress": "Udsendelsen er i gang"
+            "broadcastingInProgress": "Udsendelsen er i gang",
+            "manageStream": "Administrer livestream"
         },
         "participantsPopup": {
             "disconnect": "Koble fra",
@@ -239,7 +251,7 @@
             "staticMaximized": "Statisk maksimeret",
             "manual": "brugervejledning",
             "turnOffCamera": "Skjul video",
-            "turnOffAudio": "Slå lyden fra",
+            "turnOffAudio": "Slå lyd fra",
             "turnOffScreenSharing": "Skjul skærmdeling",
             "turnOnCamera": "Vis video",
             "turnOnAudio": "Slå lyden til",
@@ -248,11 +260,11 @@
             "dialogTitle": "Deltagerindstillinger"
         },
         "notAllowedToJoinCall": "Du har ikke tilladelse til at deltage i denne strøm.",
-        "streamTitle": "{{1}} startede et liveopkald",
+        "streamTitle": "{{1}} startede en telekonference",
         "preview": {
             "preamble": "Møde:",
-            "Meeting": "Møde",
-            "MeetingEnded": "Mødet sluttede"
+            "Meeting": "Telekonference",
+            "MeetingEnded": "Telekonference afsluttet"
         },
         "preparing": {
             "micIsOff": "Mikrofonen er slukket",
@@ -370,7 +382,7 @@
             "description": "en samtale mellem brugere, med historie"
         },
         "Streams\/webrtc": {
-            "displayType": "Realtidsopkald",
+            "displayType": "Live opkald",
             "description": "et video-\/lydopkald i realtid"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Opdatering",
         "NoCallsYet": "Ingen opkald endnu",
         "CallReasonTitle": "Hvad handler dette opkald om?",
-        "WaitingRoom": "Venteværelse"
+        "WaitingRoom": "Venteværelse",
+        "LiveRoom": "Live Room",
+        "interviewedByAnotherHost": "Er i øjeblikket interviewet af en anden vært",
+        "bringToLive": "Bring til Live Show",
+        "putOnHold": "Sæt på hold",
+        "endCall": "Afslut opkald",
+        "interview": "Interview",
+        "markApproved": "Mærke godkendt"
     }
 }

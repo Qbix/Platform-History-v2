@@ -309,7 +309,11 @@ Q.Tool.define("Streams/html", function (options) {
 	Q: {
 		beforeRemove: function () {
 			if (this.state.froalaEditor) {
-				$(this.element).froalaEditor('destroy');
+				try {
+					$(this.element).froalaEditor('destroy');
+				} catch (e) {
+					console.warn(e);
+				}
 			}
 		}
 	},

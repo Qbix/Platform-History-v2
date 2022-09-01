@@ -201,6 +201,17 @@ abstract class Base_Streams_MessageTotal extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Streams_MessageTotal($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_MessageTotal'))
@@ -276,7 +287,8 @@ abstract class Base_Streams_MessageTotal extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('publisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -330,7 +342,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('streamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -384,7 +397,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('messageType', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -434,7 +448,8 @@ return array (
 	 */
 	function beforeSet_messageCount($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('messageCount', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)

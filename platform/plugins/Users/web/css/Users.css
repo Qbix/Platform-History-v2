@@ -231,7 +231,7 @@
 	text-align: center;
 }
 
-.Q_admin_pane #activate_passphrase {
+.Q_admin_pane #new-password {
 	width: 100%;
 	margin-bottom: 10px;
 }
@@ -303,7 +303,7 @@
 #Users_login_identifierExists { font-size: 12px; color: green; text-align: center; font-weight: bold; }
 #Users_login_explanation { font-size: 13px; color: #779; text-indent: 5px; }
 #Users_login_usingPlatforms { padding: 10px; font-size: 13px; color: #779; text-indent: 5px; text-align: center; }
-#Users_form_passphrase { width: 100%; padding: 2%; }
+#Users_login_passphrase_div #current-password { width: 100%; padding: 2%; }
 .Users_login_get_started { text-align: center; margin-top: 10px; }
 
 #Users_login_passphrase_div { position: relative; }
@@ -441,6 +441,7 @@ a.Users_activation_resend:active {
 .Users_labels_icon { width: 40px; height: 40px; }
 .Q_dialog_content .Users_labels_icon { display: inline-block; }
 .Users_labels_active .Users_labels_label,
+.Users_labels_active .Users_labels_action.Users_labels_add,
 .Users_labels_action button { margin-top: 10px; width: 100%; }
 .Users_labels_tool .Users_labels_title,
 .Users_contacts_tool .Users_labels_title {
@@ -458,6 +459,11 @@ a.Users_activation_resend:active {
 .Q_dialog_slot .Users_labels_tool .Users_labels_label,
 .Q_dialog_slot .Users_contacts_tool .Users_labels_label {
 	cursor: pointer;
+}
+.Users_labels_add_phonebook {
+	box-shadow: 2px 2px 2px rgb(128 128 128 / 50%);
+    border-radius: 5px;
+	background: rgb(128 128 128 / 20%);
 }
 
 .Users_pile_tool {

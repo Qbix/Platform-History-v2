@@ -1,0 +1,19 @@
+#common ignores
+.DS_Store 
+.hg/
+.idea/
+local/*
+files/*
+!files/MyApp
+files/MyApp/uploads/*/*
+!files/MyApp/uploads/Users/.dir
+!files/MyApp/uploads/Streams/.dir
+text/*
+!text/MyApp
+web/Q/plugins/*
+web/Q/uploads
+web/Q/text
+web/Q/views
+vendor/
+npm_modules/
+!*.dir

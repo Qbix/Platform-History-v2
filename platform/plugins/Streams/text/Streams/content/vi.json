@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",
         "IfUnsubscribe": "Nếu bạn muốn hủy đăng ký",
         "*": "Nhắn tin cho {{& message.fields.type}} tới {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} đã nói: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} đã nói: {{& message.content}}",
         "Streams\/changed": "Các thay đổi trong {{stream.fields.title}}",
         "Streams\/invite": "Bạn đã được mời tham gia {{& stream.fields.title}}",
         "Streams\/announcement": "Thông báo trong {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Chữ",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Mời mọi người",
+            "chooseMethod": "Chọn một phương pháp:",
+            "selectContacts": "Chọn liên hệ",
+            "scanQRCode": "Quét mã QR",
+            "shareLink": "Chia sẻ một liên kết",
+            "chooseFromRegistered": "Chọn từ những người dùng đã đăng ký",
+            "inviteViaEmailOrSms": "Mời qua email hoặc SMS"
         },
         "email": {
             "subject": "Này, kiểm tra cái này",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Bạn đã được mời. {{ClickOrTap}} tại đây để chấp nhận và tham gia."
-        }
+        },
+        "Invite": "Mời",
+        "Share": "Đăng lại"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Bạn không có quyền tham gia luồng này.",
-        "streamTitle": "{{1}} đã bắt đầu một cuộc gọi trực tiếp",
+        "streamTitle": "{{1}} đã bắt đầu Hội nghị từ xa",
         "allow": {
             "dialogTitle": "Đang kết nối",
             "microphoneBtn": "Bật micrô",
@@ -218,11 +227,13 @@
             "sbStoppedLiveStreaming": "{{userName}} đã kết thúc trực tiếp",
             "liveStopped": "Đã xảy ra lỗi khi gửi video đến điểm cuối",
             "youBeganVideoRecording": "Bạn đã bắt đầu ghi lại hội nghị này",
-            "youStoppedVideoRecording": "Bạn đã dừng ghi hội nghị này",
+            "youStoppedVideoRecording": "Bạn đã dừng ghi lại hội nghị này",
             "linkCopiedToCb": "Liên kết được sao chép vào khay nhớ tạm",
             "codeCopiedToCb": "Đã sao chép mã vào khay nhớ tạm",
             "userHasNoVideo": "Người tham gia không có video",
-            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị."
+            "openInBrowserAlert": "Mở liên kết trong trình duyệt Safari để tham gia hội nghị.",
+            "allowedVideoLimit": "Chỉ {{limit}} video được phép trong phòng này",
+            "allowedAudioLimit": "Chỉ cho phép {{limit}} micrô trong phòng này"
         },
         "settingsPopup": {
             "dialogTitle": "Cài đặt video",
@@ -233,19 +244,19 @@
             "turnOffVideo": "Tắt chia sẻ máy ảnh \/ màn hình",
             "turnOffAudioInput": "Tắt tiếng micrô",
             "turnOffScreenSharing": "Tắt chia sẻ màn hình",
-            "cameraIsTurnedOff": "Máy ảnh bị tắt",
+            "cameraIsTurnedOff": "Máy ảnh đã tắt",
             "micIsTurnedOff": "Micrô bị tắt",
             "startFBLive": "Bắt đầu phát trực tiếp trên Facebook",
             "stopFBLive": "Ngừng phát trực tiếp Facebook",
             "startRecording": "Bắt đầu ghi âm",
             "stopRecording": "Dừng ghi",
-            "start": "Khởi đầu",
+            "start": "Bắt đầu",
             "stop": "Dừng lại",
             "recordingInProgress": "Đang ghi ...",
             "fbLiveTitle": "Tiêu đề của buổi phát trực tiếp",
             "fbLiveDescription": "Mô tả Livestream của bạn. Nó nói về cái gì?",
             "fbOnlyMeLiveAccess": "Chỉ có tôi",
-            "fbFriendsAccess": "Nhưng ngươi bạn",
+            "fbFriendsAccess": "Bạn bè",
             "fbPublicAccess": "Công cộng",
             "publishOnTimeline": "Xuất bản trên dòng thời gian",
             "publishToGroup": "Xuất bản lên nhóm",
@@ -254,9 +265,10 @@
             "streamingSettings": "Cài đặt",
             "fbEmbedCode": "Nhúng",
             "copy": "Sao chép",
-            "streamToRTMP": "Truyền tới RTMP tùy chỉnh",
+            "streamToRTMP": "Truyền đến RTMP tùy chỉnh",
             "startBroadcasting": "Bắt đầu phát sóng",
-            "broadcastingInProgress": "Đang phát sóng"
+            "broadcastingInProgress": "Đang phát sóng",
+            "manageStream": "Quản lý phát trực tiếp"
         },
         "audioSettings": {
             "dialogTitle": "Cài đặt âm thanh",
@@ -284,8 +296,8 @@
             "title": "Cài đặt phát trực tuyến"
         },
         "preview": {
-            "Meeting": "Gặp gỡ",
-            "MeetingEnded": "Cuộc họp kết thúc"
+            "Meeting": "Hội nghị từ xa",
+            "MeetingEnded": "Hội nghị từ xa đã kết thúc"
         }
     },
     "types": {
@@ -403,8 +415,8 @@
             "description": "cuộc trò chuyện giữa những người dùng với lịch sử"
         },
         "Streams\/webrtc": {
-            "displayType": "Cuộc gọi thời gian thực",
-            "description": "một cuộc gọi video \/ âm thanh thời gian thực"
+            "displayType": "Cuộc gọi trực tiếp",
+            "description": "một cuộc gọi video \/ âm thanh trong thời gian thực"
         },
         "Streams\/question": {
             "displayType": "Câu hỏi",
@@ -527,6 +539,13 @@
         "Update": "Cập nhật",
         "NoCallsYet": "Chưa có cuộc gọi nào",
         "CallReasonTitle": "Cuộc gọi này là gì?",
-        "WaitingRoom": "Phòng chờ"
+        "WaitingRoom": "Phòng chờ",
+        "LiveRoom": "Phòng trực",
+        "interviewedByAnotherHost": "Hiện đang được phỏng vấn bởi một người dẫn chương trình khác",
+        "bringToLive": "Mang đến chương trình trực tiếp",
+        "putOnHold": "Hoãn lại",
+        "endCall": "Kết thúc cuộc gọi",
+        "interview": "Phỏng vấn",
+        "markApproved": "Đánh dấu là đã chấp thuận"
     }
 }

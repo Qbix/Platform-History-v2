@@ -2,10 +2,10 @@
 	"Q": {
 		"pluginInfo": {
 			"Assets": {
-				"version": "1.0.8",
+				"version": "1.0.10",
 				"compatible": "0.7",
 				"requires": {"Q": "0.9", "Streams": "0.9"},
-				"connections": ["Assets"]
+				"connections": ["Assets", "Streams"]
 			}
 		},
 		"handlersBeforeEvent": {
@@ -21,11 +21,16 @@
 			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
 		},
 		"routes@start": {
-			"Assets/NFT/:tokenId/:chainId": {"module": "Assets", "action": "NFT"},
+			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
 			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },
+			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
+			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
+			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
+			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
+			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"}
 		},
 		"web": {
@@ -55,7 +60,13 @@
 			},
 			"NFT/icon": {
 				"sizes": ["300x","500x","700x","x"],
-				"defaultSize": "x",
+				"defaultSize": "300x",
+				"defaultCacheBust": 1000,
+				"maxStretch": 2
+			},
+			"NFT/series/icon": {
+				"sizes": ["300x","500x","700x","x"],
+				"defaultSize": "300x",
 				"defaultCacheBust": 1000,
 				"maxStretch": 2
 			}
@@ -119,6 +130,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
+					"title": "",
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
@@ -127,6 +139,7 @@
 				"close": true,
 				"edit": true,
 				"defaults": {
+					"title": "",
 					"icon": "{{Assets}}/img/empty_white.png"
 				}
 			},
@@ -150,11 +163,35 @@
 					"title": "NFT Pointer",
 					"icon": "Streams/file"
 				}
+			},
+			"Assets/contest": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "",
+					"icon": "Streams/category"
+				}
+			},
+			"Assets/contest/round": {
+				"create": true,
+				"close": true,
+				"edit": true,
+				"defaults": {
+					"title": "",
+					"icon": "Streams/category"
+				}
 			}
 		},
+		"possibleUserStreams": {
+			"Assets/user/NFTs": true,
+			"Assets/NFT/contracts": true,
+			"Assets/NFT/series": true,
+			"Assets/contests": true
+		},
 		"onInsert": {
-			"community": ["Assets/NFTs"],
-			"person": ["Assets/user/NFTs", "Assets/NFT/contracts"]
+			"community": ["Assets/NFTs", "Assets/NFT/contracts", "Assets/contests"],
+			"person": ["Assets/user/NFTs", "Assets/NFT/contracts", "Assets/NFT/series"]
 		}
 	},
 	"Assets": {
@@ -276,8 +313,7 @@
 					"0x4": "0x5eD8BD53B0c3fa3dEaBd345430B1A3a6A4e8BD7C",
 					"0x1": "0xB8c77482e45F1F44dE1745F52C74426C631bDD52",
 					"0x61": "0x0000000000000000000000000000000000000000",
-					"0x38": "0x0000000000000000000000000000000000000000",
-					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					"0x38": "0x0000000000000000000000000000000000000000"
 				},
 				{
 					"symbol": "USDC",
@@ -286,8 +322,7 @@
 					"0x4": "0xbaAeF3b2756F35F933A55EDcCd27338F74F18f9c",
 					"0x1": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
 					"0x38": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
-					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
-					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
 				},
 				{
 					"symbol": "BUSD",
@@ -296,8 +331,7 @@
 					"0x4": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x1": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x38": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
-					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49",
-					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49"
 				},
 				{
 					"symbol": "ETH",
@@ -306,8 +340,7 @@
 					"0x4": "0x0000000000000000000000000000000000000000",
 					"0x1": "0x0000000000000000000000000000000000000000",
 					"0x38": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
-					"0x61": "0xBa0fc9605D1c71ABFCEa8b93E4CC5619c4a03606",
-					"commissionToken": "0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2"
+					"0x61": "0xBa0fc9605D1c71ABFCEa8b93E4CC5619c4a03606"
 				},
 				{
 					"symbol": "DAI",
@@ -316,14 +349,12 @@
 					"0x4": "0x73f0415F66dd4F7a20e6e9bB658Ff02bD358D6fD",
 					"0x1": "0x6b175474e89094c44da98b954eedeac495271d0f",
 					"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
-					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA",
-					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA"
 				},
 				{
 					"symbol": "MATIC",
 					"name": "MATIC",
 					"decimals": 18,
-					"commissionToken": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
 					"0x89": "0x0000000000000000000000000000000000000000"
 				}
 			]

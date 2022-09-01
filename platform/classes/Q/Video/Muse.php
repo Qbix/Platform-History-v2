@@ -15,14 +15,8 @@ class Q_Video_Muse {
 	 */
 	static function upload($filePath)
 	{
-		$uploadEndPoint = Q_Config::get("Q", "video", "muse", "uploadEndPoint", null);
-		$museApiKey = Q_Config::get("Q", "video", "muse", "key", null);
-		if (!$museApiKey) {
-			throw new Exception("Muse API key not found");
-		}
-		if (!$uploadEndPoint) {
-			throw new Exception("Muse end point url not found");
-		}
+		$uploadEndPoint = Q_Config::expect("Q", "video", "cloudUpload", "muse", "uploadEndPoint");
+		$museApiKey = Q_Config::expect("Q", "video", "cloudUpload", "muse", "key");
 
 		$fileName = basename($filePath);
 		$mimeType = finfo_file(finfo_open(FILEINFO_MIME_TYPE), $filePath);
@@ -54,6 +48,10 @@ class Q_Video_Muse {
 
 		$result["videoId"] = $result["svid"];
 		$result["videoUrl"] = Q::ifset($result, "mp4", preg_replace("/\/data$/", "/videos/video.mp4", $result["url"]));
+
+		if (!$result["videoUrl"]) {
+			return null;
+		}
 
 		return $result;
 	}

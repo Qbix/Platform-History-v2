@@ -81,8 +81,8 @@ function Q_before_Q_responseExtras()
 	
 	// Language and texts
 	Q_Response::setMeta(array(
-		'attrName' => 'http-equiv',
-		'attrValue' => 'Content-Language',
+		'name' => 'http-equiv',
+		'value' => 'Content-Language',
 		'content' => Q_Text::basename()
 	));
 	Q_Response::setScriptData('Q.info.text', Q_Config::get('Q', 'text', array()));
@@ -118,10 +118,10 @@ function Q_before_Q_responseExtras()
 	Q_Response::setScriptData('Q.images.lazyload', $lazyload);
 
 	// pass videos data to client
-	$videoConfig = Q_Config::get("Q", "video", array());
+	$videoConfig = Q_Config::get("Q", "video", "cloudUpload", array());
 	foreach ($videoConfig as $provider => $data) {
 		if (!empty($data['url'])) {
-			Q_Response::setScriptData('Q.video.'.$provider.'.url', $data["url"]);
+			Q_Response::setScriptData('Q.video.cloudUpload.'.$provider.'.url', $data["url"]);
 		}
 	}
 }

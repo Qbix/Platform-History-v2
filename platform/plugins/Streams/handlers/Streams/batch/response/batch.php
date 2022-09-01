@@ -20,7 +20,7 @@ function Streams_batch_response_batch()
 	}
 
 	// Gather the publisher ids and stream names to fetch
-	$toFetch = array();
+	$toFetch = $toFetchPublic = array();
 	$withExtra = array();
 	$wNames = array('withMessageTotals', 'withRelatedToTotals', 'withRelatedFromTotals');
 	foreach ($batch['args'] as $args) {
@@ -28,7 +28,11 @@ function Streams_batch_response_batch()
 			continue;
 		}
 		list($action, $slots, $publisherId, $name) = $args;
-		$toFetch[$publisherId][] = $name;
+		if (!empty($args[4]['public'])) {
+			$toFetchPublic[$publisherId][] = $name;
+		} else {
+			$toFetch[$publisherId][] = $name;
+		}
 		foreach ($wNames as $wn) {
 			if (($args[0] === 'stream' and isset($args[4][$wn]))
 			or ($args[0] === 'message' and isset($args[4][$wn]))) {
@@ -43,16 +47,18 @@ function Streams_batch_response_batch()
 	$userId = $user ? $user->id : "";
 	
 	// Fetch the actual streams
-	$streams = array();
+	$streams = $toFetchPublic
+		? Streams::fetchPublicStreams($toFetchPublic)
+		: array();
 	foreach ($toFetch as $publisherId => $names) {
-		if (empty($streams[$publisherId])) {
-			$streams[$publisherId] = array();
-		}
 		$options = array('withParticipant' => true);
 		foreach ($wNames as $wn) {
 			if (!empty($withExtra[$wn][$publisherId])) {
 				$options[$wn] = $withExtra[$wn][$publisherId];
 			}
+		}
+		if (empty($streams[$publisherId])) {
+			$streams[$publisherId] = array();
 		}
 		$streams[$publisherId] = array_merge(
 			$streams[$publisherId],
@@ -118,7 +124,7 @@ function Streams_batch_response_batch()
 				Q_Response::clearSlot($k);
 			}
 		} catch (Exception $e) {
-			$result[] = array('errors' => Q_Exception::toArray(array($e)));
+			$result[] = array('errors' => Q_Exception::buildArray(array($e)));
 		}
 		$_REQUEST = $prev_request;
 		Q_Request::$slotNames_override = null;

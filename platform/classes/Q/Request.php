@@ -441,6 +441,9 @@ class Q_Request
 			return $result;
 		}
 		$loadExtras = Q_Request::special('loadExtras', false);
+		if (filter_var($loadExtras, FILTER_VALIDATE_BOOLEAN)) {
+			$loadExtras = 'all';
+		}
 		if (!$loadExtras) {
 			if (!Q_Request::isAjax()) {
 				// SECURITY: Should load all types of extras, but make sure
@@ -467,9 +470,11 @@ class Q_Request
 	 * Detects whether the request is coming from a mobile browser
 	 * @method isMobile
 	 * @static
+	 * @param {boolean} [$ignoreCookie=false]
+	 *  Set to true, to ignore Q_formFactor cookie
 	 * @return {boolean}
 	 */
-	static function isMobile()
+	static function isMobile($ignoreCookie = false)
 	{
 		static $result;
 		if (isset($result)) {
@@ -483,9 +488,11 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
-		$form = Q_Request::special('formFactor');
-		if (isset($form)) {
-			return ($form === 'tablet');
+		if (empty($ignoreCookie)) {
+			$form = Q_Request::special('formFactor');
+			if (isset($form)) {
+				return (strtolower($form) === 'mobile');
+			}
 		}
 		return (Q_Request::isTouchscreen() and !Q_Request::isTablet());
 	}
@@ -494,9 +501,11 @@ class Q_Request
 	 * Detects whether the request is coming from a tablet browser
 	 * @method isTablet
 	 * @static
+	 * @param {boolean} [$ignoreCookie=false]
+	 *  Set to true, to ignore Q_formFactor cookie
 	 * @return {boolean}
 	 */
-	static function isTablet()
+	static function isTablet($ignoreCookie = false)
 	{
 		static $result;
 		if (isset($result)) {
@@ -510,9 +519,11 @@ class Q_Request
 		if (isset($result)) {
 			return $result;
 		}
-		$form = Q_Request::special('formFactor');
-		if (isset($form)) {
-			return ($form === 'tablet');
+		if (empty($ignoreCookie)) {
+			$form = Q_Request::special('formFactor');
+			if (isset($form)) {
+				return strtolower($form) === 'tablet';
+			}
 		}
 		if (!isset($_SERVER['HTTP_USER_AGENT'])) {
 			return null;

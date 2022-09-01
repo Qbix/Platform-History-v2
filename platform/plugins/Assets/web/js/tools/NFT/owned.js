@@ -13,6 +13,10 @@ var NFT = Web3.NFT;
  * @class Assets NFT/owned
  * @constructor
  * @param {Object} options Override various options for this tool
+ * @param {string} [options.userId] - registered in app user id
+ * @param {string} [options.walletAddress] - override users wallet address
+ * @param {string} [options.chainId] - override chain id
+ * @param {string} [options.contractAddress] - override contract address
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
@@ -41,6 +45,9 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 
 { // default options here
 	userId: null,
+	walletAddress: null,
+	chainId: null,
+	contractAddress: null,
 	limit: 10
 },
 
@@ -50,7 +57,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var state = this.state;
 
 		// add composer
-		tool.createComposer();
+		//tool.createComposer();
 
 		var _onInvoke = function () {
 			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
@@ -94,9 +101,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var $loading = $("<img src='" + Q.url("{{Q}}/img/throbbers/loading.gif") + "' />").appendTo(tool.element);
 
 		Q.req("Assets/NFT", "owned", function (err, response) {
-
 			$loading.remove();
-
 			if (err) {
 				return console.warn(err);
 			}
@@ -104,13 +109,16 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			var NFTResults = response.slots.owned;
 
 			Q.each(NFTResults, function (index, result) {
-				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", result, result.tokenId + "-" + result.chainId).activate();
+				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", result).activate();
 			});
 
 			Q.handle(callback);
 		}, {
 			fields: {
 				userId: state.userId,
+				walletAddress: state.walletAddress,
+				chainId: state.chainId,
+				contractAddress: state.contractAddress,
 				offset: offset,
 				limit: state.limit
 			}

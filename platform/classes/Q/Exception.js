@@ -11,7 +11,7 @@
  */
 var Exception = function (message, fields) {
 	this.fields = fields || {};
-	this.message = message || "";
+	this.message = message.interpolate(fields) || "";
 };
 Exception.prototype = Error.prototype;
 

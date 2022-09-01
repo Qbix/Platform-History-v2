@@ -13,7 +13,7 @@
         "No": "No"
     },
     "interests": {
-        "Filter": "What are your interests?",
+        "Filter": "Search interests",
         "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",
         "TrySynonyms": "Don't see it? Try some synonyms.",
         "AddUnderCategory": "Add under category...",
@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "manage your email subscriptions",
         "IfUnsubscribe": "If you want to unsubscribe",
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} said: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} said: {{& message.content}}",
         "Streams\/changed": "Changes in {{stream.fields.title}}",
         "Streams\/invite": "You were invited to {{& stream.fields.title}}",
         "Streams\/announcement": "Announcement in {{& stream.fields.title}}",
@@ -165,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "You don't have permission to join this stream.",
-        "streamTitle": "{{1}} started a live call",
+        "streamTitle": "{{1}} started a Teleconference",
         "allow": {
             "dialogTitle": "Connecting",
             "microphoneBtn": "Enable Microphone",
@@ -231,7 +231,9 @@
             "linkCopiedToCb": "Link copied to clipboard",
             "codeCopiedToCb": "Code copied to clipboard",
             "userHasNoVideo": "Participant has no video",
-            "openInBrowserAlert": "Open link in Safari browser to join the conference."
+            "openInBrowserAlert": "Open link in Safari browser to join the conference.",
+            "allowedVideoLimit": "Only {{limit}} video allowed in this room",
+            "allowedAudioLimit": "Only {{limit}} microphones allowed in this room"
         },
         "settingsPopup": {
             "dialogTitle": "Video Settings",
@@ -294,8 +296,8 @@
             "title": "Streaming Settings"
         },
         "preview": {
-            "Meeting": "Meeting",
-            "MeetingEnded": "Meeting ended"
+            "Meeting": "Teleconference",
+            "MeetingEnded": "Teleconference ended"
         }
     },
     "types": {
@@ -413,8 +415,8 @@
             "description": "a conversation between users, with history"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "a real time video\/audio call"
+            "displayType": "Teleconference",
+            "description": "an online video\/audio conference"
         },
         "Streams\/question": {
             "displayType": "Question",

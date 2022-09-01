@@ -13,20 +13,26 @@ if (!defined('APP_DIR')) {
 $header = "<html><body style='padding: 10px;'><h1>This is a Qbix project...</h1>\n";
 $footer = "</body></html>";
 if (!is_dir(APP_DIR)) {
-	die("$header\nPlease edit index.php and change APP_DIR to point to your app's directory.\n$footer");
+	die("$header\nPlease edit index.php and define APP_DIR to point to your app's directory.\n$footer");
 }
 
-$paths_filename = realpath(APP_DIR . '/local/paths.php');
-if (!file_exists($paths_filename)) {
-	$basename = basename(APP_DIR);
-	die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n$footer");
+$basename = basename(APP_DIR);
+if (!defined('Q_DIR')) {
+	$paths_filename = realpath(implode(DIRECTORY_SEPARATOR, array(
+		APP_DIR, 'local', 'paths.json'
+	)));
+	if (!file_exists($paths_filename)) {
+		die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n$footer");
+	}
+	$paths = json_decode(file_get_contents($paths_filename), true);
+	define('Q_DIR', isset($paths['platform']) ? $paths['platform'] : '');
 }
 
-include($paths_filename);
-$Q_filename = realpath(Q_DIR.'/Q.php');
+$Q_filename = realpath(Q_DIR.DS.'Q.php');
 if (!file_exists($Q_filename)) {
-	$basename = basename(APP_DIR);
-	die("$header\nPlease edit $basename/local/paths.php and $basename/local/paths.js to indicate the location of the Q/platform directory\n$footer");
+	die("Please edit $basename/local/paths.json to look like " .
+		'{"platform": "path/to/Q/platform"}' .
+		"then run configure.php again\n");
 }
 
 include($Q_filename);

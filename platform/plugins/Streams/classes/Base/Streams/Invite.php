@@ -276,6 +276,17 @@ abstract class Base_Streams_Invite extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Streams_Invite($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Streams_Invite'))
@@ -351,7 +362,8 @@ abstract class Base_Streams_Invite extends Db_Row
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('token', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -405,7 +417,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('userId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -459,7 +472,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('publisherId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -513,7 +527,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('streamName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -567,7 +582,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('invitingUserId', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -621,7 +637,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('displayName', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -675,7 +692,8 @@ return array (
 		if (!isset($value)) {
 			$value='';
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('appUrl', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -728,7 +746,8 @@ return array (
 		if (!isset($value)) {
 			return array('readLevel', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('readLevel', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -785,7 +804,8 @@ return array (
 		if (!isset($value)) {
 			return array('writeLevel', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('writeLevel', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -842,7 +862,8 @@ return array (
 		if (!isset($value)) {
 			return array('adminLevel', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('adminLevel', $value);
 		}
 		if (!is_numeric($value) or floor($value) != $value)
@@ -900,7 +921,8 @@ return array (
 		if (!isset($value)) {
 			return array('permissions', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('permissions', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))
@@ -950,7 +972,8 @@ return array (
 	 */
 	function beforeSet_state($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('state', $value);
 		}
 		if (!in_array($value, array('pending','accepted','declined','forwarded','expired','claimed')))
@@ -988,7 +1011,8 @@ return array (
 	 */
 	function beforeSet_insertedTime($value)
 	{
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('insertedTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -1037,7 +1061,8 @@ return array (
 		if (!isset($value)) {
 			return array('expireTime', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('expireTime', $value);
 		}
 		if ($value instanceof DateTime) {
@@ -1087,7 +1112,8 @@ return array (
 		if (!isset($value)) {
 			return array('extra', $value);
 		}
-		if ($value instanceof Db_Expression) {
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
 			return array('extra', $value);
 		}
 		if (!is_string($value) and !is_numeric($value))

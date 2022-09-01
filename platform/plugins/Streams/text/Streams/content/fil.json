@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "Sinabi ni {{&call 'avatar.displayName'}}:",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} ay nagsabi: {{& message.content}}",
         "Streams\/changed": "Ang mga pagbabago sa {{stream.fields.title}}",
         "Streams\/invite": "Inanyayahan ka sa {{& stream.fields.title}}",
         "Streams\/announcement": "Anunsyo sa {{& streams.fields.title}}",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} kung na-scan ang code",
             "copyLink": "{{ClickOrTap}} upang kopyahin ang link ng imbitasyon",
             "userChooserPlaceholder": "Maghanap ayon sa pangalan",
-            "shareOrCopyLink": "{{ClickOrTap}} para ibahagi o kopyahin ang link ng imbitasyon"
+            "shareOrCopyLink": "{{ClickOrTap}} para ibahagi o kopyahin ang link ng imbitasyon",
+            "title2": "Mag-imbita ng mga tao",
+            "chooseMethod": "Pumili ng paraan:",
+            "selectContacts": "Piliin ang Mga Contact",
+            "scanQRCode": "I-scan ang QR Code",
+            "shareLink": "Magbahagi ng link",
+            "chooseFromRegistered": "Pumili mula sa mga rehistradong user",
+            "inviteViaEmailOrSms": "Mag-imbita sa pamamagitan ng email o SMS"
         },
         "email": {
             "subject": "Uy, tingnan mo ito",
@@ -104,7 +111,9 @@
             "text": "Inanyayahan ka. {{ClickOrTap}} dito upang tanggapin at sumali."
         },
         "youCanNowPaste": "Maaari mo na ngayong i-paste ang link na ito sa isang lugar upang anyayahan ang mga tao",
-        "command": "Mag-anyaya"
+        "command": "Mag-anyaya",
+        "Invite": "Mag-anyaya",
+        "Share": "Ibahagi"
     },
     "followup": {
         "mobile": {
@@ -136,54 +145,54 @@
     },
     "webrtc": {
         "allow": {
-            "dialogTitle": "Paganahin ang Dialog",
+            "dialogTitle": "Kumokonekta",
             "microphoneBtn": "Paganahin ang Mikropono",
             "cameraBtn": "Paganahin ang Camera",
             "cameraAndMicrophoneBtn": "Paganahin ang Camera at Mikropono"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Mga tagubilin",
-            "permissionDenied": "Hindi tinanggihan ang pahintulot para sa {{kind}}. Upang magamit ito mangyaring sundin ang mga hakbang na ito:",
-            "point1": "Pumunta sa &quot;Mga Setting&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Pagkapribado at seguridad&quot; -&gt; &quot;Mga Setting ng Site&quot; -&gt; &quot;Camera&quot; o &quot;Mga Setting ng Site&quot; -&gt; &quot;Mikropono&quot;",
-            "point2": "Alisin ang {{hostname}} mula sa &quot;I-block&quot; na listahan"
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Upang gamitin ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa &quot;Mga Setting&quot; -&gt; &quot;Advanced&quot; -&gt; &quot;Privacy at seguridad&quot; -&gt; &quot;Mga Setting ng Site&quot; -&gt; &quot;Camera&quot; o &quot;Mga Setting ng Site&quot; -&gt; &quot;Mikropono&quot;",
+            "point2": "Alisin ang {{hostname}} mula sa listahan ng &quot;I-block.&quot;"
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Mga tagubilin",
-            "permissionDenied": "Hindi tinanggihan ang pahintulot para sa {{kind}}. Mangyaring i-reload ang pahinang ito at kumpirmahin ang pag-access sa {{kind}} upang sumali sa komperensya."
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Mangyaring i-reload ang pahinang ito at kumpirmahin ang pag-access sa {{kind}} upang sumali sa kumperensya."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Mga tagubilin",
-            "permissionDenied": "Itinanggi ang pahintulot para sa {{kind}}. Upang magamit ito mangyaring sundin ang mga hakbang na ito:",
-            "point1": "Pumunta sa iyong Mga Setting sa Android",
-            "point2": "Buksan ang &quot;Apps &amp; notification&quot;",
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Upang gamitin ito mangyaring sundin ang mga hakbang na ito:",
+            "point1": "Pumunta sa iyong Mga Setting ng Android",
+            "point2": "Buksan ang &quot;Mga app at notification&quot;",
             "point3": "Hanapin ang &quot;{{communityName}}&quot; at buksan ito",
-            "point4": "Tapikin ang Mga Pahintulot",
+            "point4": "I-tap ang Mga Pahintulot",
             "point5": "Paganahin ang {{kind}}"
         },
         "iosInstructionsDialog": {
             "dialogTitle": "Mga tagubilin",
-            "permissionDenied": "Hindi tinanggihan ang pahintulot para sa {{kind}}. Upang magamit ito mangyaring sundin ang mga hakbang na ito:",
+            "permissionDenied": "Tinanggihan ang pahintulot para sa {{kind}}. Upang gamitin ito mangyaring sundin ang mga hakbang na ito:",
             "point1": "Pumunta sa iyong Mga Setting ng iOS",
-            "point2": "Buksan ang &quot;Pagkapribado&quot;",
+            "point2": "Buksan ang &quot;Privacy&quot;",
             "point3": "Hanapin ang {{kind}} at buksan ito",
             "point4": "Hanapin ang &quot;{{communityName}}&quot; at paganahin"
         },
         "notices": {
-            "youJoinedRoom": "Sumali ka sa silid",
-            "joining": "Pagsali: {{userName}}",
-            "sbLeftRoom": "{{userName}} umalis sa silid",
-            "youLeftRoom": "Umalis ka sa silid",
-            "codeCopied": "Umalis ka sa silid",
-            "sbBeganFbLive": "Nagsimula ang pag-broadcast ng {{userName}} sa tawag na ito sa Facebook",
-            "sbStoppedFbLive": "Tumigil ang {{userName}} sa pagsasahimpapawid ng tawag na ito sa Facebook",
+            "youJoinedRoom": "Sumama ka sa kwarto",
+            "joining": "Sumasali: {{userName}}",
+            "sbLeftRoom": "{{userName}} umalis ng kwarto",
+            "youLeftRoom": "Lumabas ka ng kwarto",
+            "codeCopied": "Lumabas ka ng kwarto",
+            "sbBeganFbLive": "Sinimulan ni {{userName}} na i-broadcast ang tawag na ito sa Facebook",
+            "sbStoppedFbLive": "Huminto si {{userName}} sa pag-broadcast ng tawag na ito sa Facebook",
             "youBeganFbLive": "Sinimulan mong i-broadcast ang tawag na ito sa Facebook",
-            "youStoppedFbLive": "Tumigil ka sa pag-broadcast ng tawag na ito sa Facebook",
-            "linkCopiedToCb": "Link na kinopya sa clipboard",
+            "youStoppedFbLive": "Itinigil mo ang pagsasahimpapawid ng tawag na ito sa Facebook",
+            "linkCopiedToCb": "Nakopya ang link sa clipboard",
             "codeCopiedToCb": "Nakopya ang code sa clipboard",
-            "userHasNoVideo": "Ang kalahok ay walang video",
-            "openInBrowserAlert": "Buksan ang link sa Safari browser upang sumali sa kumperensya.",
-            "youBeganVideoRecording": "Sinimulan mo ang pagrekord sa kumperensya na ito",
-            "youStoppedVideoRecording": "Tumigil ka sa pag-record ng kumperensya na ito",
+            "userHasNoVideo": "Walang video ang kalahok",
+            "openInBrowserAlert": "Buksan ang link sa Safari browser para sumali sa conference.",
+            "youBeganVideoRecording": "Sinimulan mong i-record ang kumperensyang ito",
+            "youStoppedVideoRecording": "Huminto ka sa pagre-record sa kumperensyang ito",
             "switchingRoom": "Lumipat ng kwarto...",
             "forceDisconnecting": "Madidiskonekta ka sa loob ng 5 segundo",
             "youStartedLive": "Sinimulan mong i-broadcast ang tawag na ito sa custom na RTMP",
@@ -191,31 +200,33 @@
             "sbStartedLiveStreaming": "{{userName}} nagsimula nang live",
             "sbStoppedLiveStreaming": "{{userName}} ay natapos nang live",
             "liveStopped": "Nagkaroon ng error habang nagpapadala ng video sa endpoint",
-            "forceDisconnectingImmediately": "Nadiskonekta ka ng isang host"
+            "forceDisconnectingImmediately": "Nadiskonekta ka ng isang host",
+            "allowedVideoLimit": "Tanging {{limit}} video lang ang pinapayagan sa kwartong ito",
+            "allowedAudioLimit": "Tanging {{limit}} mga mikropono ang pinapayagan sa kwartong ito"
         },
         "settingsPopup": {
             "webCamera": "Web Camera",
             "screenSharing": "Pagbabahagi ng Screen",
-            "shareAnotherScreen": "Ibahagi ang isa pang screen",
-            "turnOffCameras": "I-off ang lahat ng mga camera",
+            "shareAnotherScreen": "Magbahagi ng isa pang screen",
+            "turnOffCameras": "I-off ang camera",
             "startFBLive": "Simulan ang Facebook Livestream",
             "stopFBLive": "Itigil ang Facebook Livestream",
-            "fbLiveTitle": "Live na Pamagat",
-            "fbLiveDescription": "Live na paglalarawan",
+            "fbLiveTitle": "Pamagat ng Livestream",
+            "fbLiveDescription": "Ilarawan ang iyong Livestream. Tungkol Saan iyan?",
             "fbOnlyMeLiveAccess": "Ako lang",
-            "fbFriendsAccess": "Mga Kaibigan",
+            "fbFriendsAccess": "Mga kaibigan",
             "fbPublicAccess": "Pampubliko",
-            "fbStartLive": "Go Live",
-            "fbStopLive": "Tapusin ang Live",
+            "fbStartLive": "Mag-live",
+            "fbStopLive": "Tapusin ang Livestream",
             "fbEmbedCode": "I-embed",
             "copy": "Kopya",
-            "turnOffVideo": "I-off ang pagbabahagi ng camera \/ screen",
-            "turnOffScreenSharing": "Patayin ang pagbabahagi ng screen",
+            "turnOffVideo": "I-off ang pagbabahagi ng camera\/screen",
+            "turnOffScreenSharing": "I-off ang pagbabahagi ng screen",
             "cameraIsTurnedOff": "Naka-off ang camera",
             "startRecording": "Simulan ang recording",
-            "stopRecording": "Itigil ang Pag-record",
-            "recordingInProgress": "Natapos ang pagrekord ...",
-            "publishOnTimeline": "I-publish sa takdang oras",
+            "stopRecording": "Ihinto ang Pagre-record",
+            "recordingInProgress": "Kasalukuyang isinasagawa ang pagre-record...",
+            "publishOnTimeline": "I-publish sa timeline",
             "publishToGroup": "I-publish sa pangkat",
             "dialogTitle": "Mga setting ng video",
             "turnOffAudioInput": "I-mute ang mikropono",
@@ -225,31 +236,32 @@
             "streamingSettings": "Mga setting",
             "streamToRTMP": "Stream sa custom na RTMP",
             "startBroadcasting": "Simulan ang pagsasahimpapawid",
-            "broadcastingInProgress": "Ang pagsasahimpapawid ay isinasagawa"
+            "broadcastingInProgress": "Ang pagsasahimpapawid ay isinasagawa",
+            "manageStream": "Pamahalaan ang Livestream"
         },
         "participantsPopup": {
             "disconnect": "Idiskonekta",
-            "floatingScreens": "Lumulutang na Mga screenshot",
-            "tiledScreens": "Naka-tile na Mga screenshot",
-            "loudestExceptMe": "Loudest Maliban sa Akin",
-            "maximizeLoudest": "I-maximize ang Loudest",
-            "staticMaximized": "Static na Na-maximize",
+            "floatingScreens": "Mga Lumulutang na Screen",
+            "tiledScreens": "Mga Tiled na Screen",
+            "loudestExceptMe": "Pinakamalakas Maliban sa Akin",
+            "maximizeLoudest": "I-maximize ang Pinakamalakas",
+            "staticMaximized": "Static Maximized",
             "manual": "Manwal",
             "turnOffCamera": "Itago ang video",
             "turnOffAudio": "I-mute ang audio",
             "turnOffScreenSharing": "Itago ang pagbabahagi ng screen",
             "turnOnCamera": "Ipakita ang video",
-            "turnOnAudio": "I-unute ang audio",
+            "turnOnAudio": "I-unmute ang audio",
             "turnOnScreenSharing": "Ipakita ang pagbabahagi ng screen",
             "fullScreen": "Buong Screen",
             "dialogTitle": "Mga Setting ng Kalahok"
         },
         "notAllowedToJoinCall": "Wala kang pahintulot na sumali sa stream na ito.",
-        "streamTitle": "Live na tawag ng {{1}}",
+        "streamTitle": "{{1}} nagsimula ng Teleconference",
         "preview": {
             "preamble": "Pagpupulong:",
-            "Meeting": "Pagpupulong",
-            "MeetingEnded": "Natapos ang pagpupulong"
+            "Meeting": "Teleconference",
+            "MeetingEnded": "Natapos ang teleconference"
         },
         "preparing": {
             "micIsOff": "Naka-off ang Mic",
@@ -367,8 +379,8 @@
             "description": "isang pag-uusap sa pagitan ng mga gumagamit, na may kasaysayan"
         },
         "Streams\/webrtc": {
-            "displayType": "Real-Time Call",
-            "description": "isang real time na tawag sa video \/ audio"
+            "displayType": "Live na Tawag",
+            "description": "isang real-time na video\/audio call"
         },
         "Streams\/tasks": {
             "description": "kategorya para sa mga gawain",
@@ -530,6 +542,13 @@
         "Update": "Update",
         "NoCallsYet": "Wala pang tawag",
         "CallReasonTitle": "Tungkol saan ang tawag na ito?",
-        "WaitingRoom": "Silidhintayan"
+        "WaitingRoom": "Silidhintayan",
+        "LiveRoom": "Live Room",
+        "interviewedByAnotherHost": "Kasalukuyang kinakapanayam ng isa pang host",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Itigil",
+        "endCall": "Tapusin ang Tawag",
+        "interview": "Panayam",
+        "markApproved": "Naaprubahan si Mark"
     }
 }

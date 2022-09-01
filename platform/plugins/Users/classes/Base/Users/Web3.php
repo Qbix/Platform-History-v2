@@ -20,6 +20,7 @@
  * @param {string} [$fields.contract] defaults to ""
  * @param {string} [$fields.methodName] defaults to ""
  * @param {string} [$fields.params] defaults to ""
+ * @param {string} [$fields.fromAddress] defaults to ""
  * @param {string} [$fields.result] defaults to null
  * @param {string|Db_Expression} [$fields.insertedTime] defaults to new Db_Expression("CURRENT_TIMESTAMP")
  * @param {string|Db_Expression} [$fields.updatedTime] defaults to null
@@ -46,6 +47,12 @@ abstract class Base_Users_Web3 extends Db_Row
 	 */
 	/**
 	 * @property $params
+	 * @type string
+	 * @default ""
+	 * 
+	 */
+	/**
+	 * @property $fromAddress
 	 * @type string
 	 * @default ""
 	 * 
@@ -83,6 +90,7 @@ abstract class Base_Users_Web3 extends Db_Row
 			  1 => 'contract',
 			  2 => 'methodName',
 			  3 => 'params',
+			  4 => 'fromAddress',
 			)
 		);
 	}
@@ -223,6 +231,17 @@ abstract class Base_Users_Web3 extends Db_Row
 	 */
 	static function insertManyAndExecute($rows = array(), $options = array())
 	{
+		// simulate beforeSave on all rows
+		foreach ($rows as $row) {
+			if (is_array($row)) {
+				$rowObject = new Users_Web3($row);
+			} else {
+				$rowObject = $row;
+				$row = $row->fields;
+			}
+			$rowObject->beforeSave($row);
+			$row = $rowObject->fields;
+		}
 		self::db()->insertManyAndExecute(
 			self::table(), $rows,
 			array_merge($options, array('className' => 'Users_Web3'))
@@ -508,6 +527,61 @@ return array (
 	/**
 	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
 	 * Optionally accept numeric value which is converted to string
+	 * @method beforeSet_fromAddress
+	 * @param {string} $value
+	 * @return {array} An array of field name and value
+	 * @throws {Exception} An exception is thrown if $value is not string or is exceedingly long
+	 */
+	function beforeSet_fromAddress($value)
+	{
+		if (!isset($value)) {
+			$value='';
+		}
+		if ($value instanceof Db_Expression
+               or $value instanceof Db_Range) {
+			return array('fromAddress', $value);
+		}
+		if (!is_string($value) and !is_numeric($value))
+			throw new Exception('Must pass a string to '.$this->getTable().".fromAddress");
+		if (strlen($value) > 42)
+			throw new Exception('Exceedingly long value being assigned to '.$this->getTable().".fromAddress");
+		return array('fromAddress', $value);			
+	}
+
+	/**
+	 * Returns the maximum string length that can be assigned to the fromAddress field
+	 * @return {integer}
+	 */
+	function maxSize_fromAddress()
+	{
+
+		return 42;			
+	}
+
+	/**
+	 * Returns schema information for fromAddress column
+	 * @return {array} [[typeName, displayRange, modifiers, unsigned], isNull, key, default]
+	 */
+	static function column_fromAddress()
+	{
+
+return array (
+  0 => 
+  array (
+    0 => 'varchar',
+    1 => '42',
+    2 => '',
+    3 => false,
+  ),
+  1 => false,
+  2 => 'PRI',
+  3 => '',
+);			
+	}
+
+	/**
+	 * Method is called before setting the field and verifies if value is string of length within acceptable limit.
+	 * Optionally accept numeric value which is converted to string
 	 * @method beforeSet_result
 	 * @param {string} $value
 	 * @return {array} An array of field name and value
@@ -597,7 +671,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1023',
+    1 => '42',
     2 => '',
     3 => false,
   ),
@@ -647,7 +721,7 @@ return array (
   0 => 
   array (
     0 => 'timestamp',
-    1 => '1023',
+    1 => '42',
     2 => '',
     3 => false,
   ),
@@ -689,7 +763,7 @@ return array (
 	 */
 	static function fieldNames($table_alias = null, $field_alias_prefix = null)
 	{
-		$field_names = array('chainId', 'contract', 'methodName', 'params', 'result', 'insertedTime', 'updatedTime');
+		$field_names = array('chainId', 'contract', 'methodName', 'params', 'fromAddress', 'result', 'insertedTime', 'updatedTime');
 		$result = $field_names;
 		if (!empty($table_alias)) {
 			$temp = array();
