@@ -1632,7 +1632,7 @@ class Q_Utils
 		$lengths = 3,
 		$delimiter = DIRECTORY_SEPARATOR,
 		$internalDelimiter = '/',
-		$checkRegEx = '/^[a-zA-Z0-9\.\-\_]{3,31}$/'
+		$checkRegEx = '/^[a-zA-Z0-9\.\-\_]{1,31}$/'
 	) {
 		if (isset($checkRegEx)) {
 			if (!preg_match($checkRegEx, $id)) {

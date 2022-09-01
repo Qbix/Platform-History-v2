@@ -14,4 +14,4 @@ class Q_Exception_WrongValue extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_WrongValue', 'wrong value for {{field}} -- expected {{range}}', 400);
+Q_Exception::add('Q_Exception_WrongValue', 'wrong value for {{field}} -- expected {{range}} instead of {{value}}', 400);
