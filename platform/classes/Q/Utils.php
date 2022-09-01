@@ -1572,9 +1572,9 @@ class Q_Utils
 			}
 		}
 
-		if (!self::isWindows()) {
+		@symlink($target, $link);
+		if (self::isWindows() and !file_exists($link)) {
 			symlink($target, $link);
-		} else {
 			$pswitch = is_dir($target) ? '/d' : '';
 			$target = str_replace('/', DS, $target);
 			$link = str_replace('/', DS, $link);
