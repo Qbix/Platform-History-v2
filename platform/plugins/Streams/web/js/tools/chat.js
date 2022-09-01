@@ -282,6 +282,8 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 	prepareMessages: function(messages, action){
 		var res  = {};
+		var tool = this;
+		var state = tool.state;
 		if (Q.isEmpty(messages)) {
 			return res;
 		}

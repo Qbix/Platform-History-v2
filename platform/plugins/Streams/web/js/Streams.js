@@ -5642,7 +5642,7 @@ function updateMessageTotalsCache(publisherId, streamName, messageTotals) {
 					result[type] = messageTotals[type];
 				}
 			}, {
-				throwIfNoIndex: false
+				evenIfNoIndex: true
 			});
 		MTotal.get.cache.set([publisherId, streamName, type],
 			0, MTotal, [null, messageTotals[type]]
