@@ -27,15 +27,13 @@ Q.Tool.jQuery('Q/textfill',
 		if (options.refreshOnLayout) {
 			$this.state('Q/textfill').layoutEventKey
 			= Q.onLayout(this[0]).set(function () {
-				$this.plugin('Q/textfill', 'refresh', options);
+				$this.plugin('Q/textfill', 'refresh');
 			});
 		}
 
 	},
 
-{
-		maxFontSize: 30,
-		minFontSize: 10,
+	{
 		refreshOnLayout: true
 	},
 
@@ -57,36 +55,36 @@ Q.Tool.jQuery('Q/textfill',
 			}
 			var $this = $(this);
 			var fontSize = o.maxFontPixels || ($this.height() + 10);
+			var lastGoodFontSize = 0, lastBadFontSize = fontSize, jump;
 			var maxHeight = Math.round(o.fillPadding ? $this.innerHeight() : $this.height());
 			var maxWidth = Math.round(o.fillPadding ? $this.innerWidth() : $this.width());
 			var textHeight, textWidth, lines, tooBig;
 			ourElement.addClass('Q_textfill_resizing');
-			while (fontSize > options.minFontSize) {
+			for (var i=0; i<100; ++i) {
 				ourElement.css('font-size', fontSize + 'px');
 				textHeight = Math.round(ourElement.outerHeight(true));
 				textWidth = Math.round(ourElement.outerWidth(true));
 				if (o.maxLines) {
 					lines = textHeight / Math.floor(fontSize * 1.5);
 				}
-
-				if (textHeight <= maxHeight && textWidth <= maxWidth) {
-					if (o.maxLines) {
-						if (lines <= o.maxLines) {
-							break;
-						}
-					} else {
-						break;
-					}
+				if (tooBig = (textHeight > maxHeight || textWidth > maxWidth
+				|| (o.maxLines && lines > o.maxLines))) {
+					lastBadFontSize = fontSize;
+					jump = (lastGoodFontSize - fontSize) / 2;
+				} else {
+					lastGoodFontSize = fontSize;
+					jump = (lastBadFontSize - fontSize) / 2
 				}
-
-				fontSize = Math.floor(--fontSize);
-			}
-			if (fontSize > options.maxFontSize) {
-				fontSize = options.maxFontSize;
-			} else if (fontSize < options.minFontSize) {
-				fontSize = options.minFontSize;
-			}
-			ourElement.add(this).css('font-size', fontSize + 'px');
+				if (Math.abs(jump) < 1) {
+					break;
+				}
+				fontSize = Math.floor(fontSize + jump);
+				if (fontSize < 3) {
+					lastGoodFontSize = 3;
+					break; // container is super small
+				}
+			};
+			ourElement.add(this).css('font-size', lastGoodFontSize + 'px');
 			ourElement.removeClass('Q_textfill_resizing').addClass('Q_textfill_resized');
 			return this;
 		},
