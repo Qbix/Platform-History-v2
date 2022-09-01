@@ -157,12 +157,10 @@ function _Q_actions(options) {
 			}
 		
 			_position($this, state.position, container);
-			interval = setInterval(function () {
-				if (!$this.closest('html').length) {
-					clearInterval(interval);
-				}
+			Q.onLayout($this[0]).set(function () {
 				_position($this, state.position, container);
-			}, state.repositionMs);
+			}, Math.random().toString(36));
+
 			state.onShow.handle.apply($this, [state, container]);
 		}
 	
