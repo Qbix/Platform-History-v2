@@ -12330,7 +12330,7 @@ Q.Pointer = {
                         } else {
                             point = target;
                         }
-						var zIndex = (zIndex in options) ? options.zIndex : 99999;
+						var zIndex = ('zIndex' in options) ? options.zIndex : 99999;
 						var x = point.x - img.offsetWidth * options.hotspot.x;
 						var y = point.y - img.offsetHeight * options.hotspot.y;
 						Q.extend(img.style, {

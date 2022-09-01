@@ -5784,6 +5784,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     var lastName;
                     var fullName = '';
                     Q.Streams.get(userId, 'Streams/user/firstName', function () {
+                        if(!this || !this.fields) {
+                            console.warn('Error while getting Streams/user/firstName');
+                            return;
+                        }
                         firstName = this.fields.content;
                         if(firstName != null) {
                             fullName += firstName;
@@ -5885,6 +5889,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(userId != null){
                     Q.Streams.get(userId, 'Streams/user/firstName', function () {
+                        if(!this || !this.fields) {
+                            console.warn('Error while getting Streams/user/firstName');
+                            return;
+                        }
                         var firstName = this.fields.content;
                         notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
 
@@ -6242,7 +6250,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(Q.info.isMobile){
                     var close=document.createElement('div');
-                    close.className = 'Streams_webrtc_popup-close-dialog-sign';
+                    close.className = 'Streams_webrtc_close-dialog-sign';
                     close.innerHTML = '&#10005;';
                     close.addEventListener('click', function() {
                         let preparingScreen = document.querySelector('.Streams_webrtc_preparing_screen');
