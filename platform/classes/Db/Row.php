@@ -720,9 +720,10 @@ class Db_Row
 	 * @method wasModified
 	 * @param {string} [$fieldName=null] The name of the field.
 	 *  You can also pass false here to mark the whole row unmodified.
+	 * @param {boolean} [$evenIfValuesDidntChange=false]
 	 * @return {boolean} Whether the field with that name was modified in the first place.
 	 */
-	function wasModified ($fieldName = null)
+	function wasModified ($fieldName = null, $evenIfValuesDidntChange = false)
 	{
 		if ($fieldName === false) {
 			if (is_array($this->fields)) {
@@ -735,8 +736,11 @@ class Db_Row
 		}
 		if (!isset($fieldName)) {
 			foreach ($this->fieldsModified as $key => $value) {
-				if (! empty($value)) {
-					return true;
+				if (!empty($value)) {
+					if ($evenIfValuesDidntChange
+					or $this->fieldsOriginal[$key] !== $this->fields[$key]) {
+						return true;
+					}
 				}
 			}
 			return false;
@@ -890,14 +894,16 @@ class Db_Row
 	 * This can be called even if the Db_Row was not retrieved,
 	 * and typically is used for caching purposes.
 	 * @method calculatePKValue
+	 * @param {boolean|array} [$useIndex=true] If there is no primary key on this table,
+	 *  then pass an array of field names to use, corresponding to a key.
 	 * @return {array|false} An associative array naming all the fields that comprise the
 	 *  primary key index, in the order they appear in the key.<br/>
 	 *	Returns false if even one of the fields comprising the primary key is not set.
 	 */
-	function calculatePKValue ()
+	function calculatePKValue ($useIndex = false)
 	{
 		$return = array();
-		$pk = $this->getPrimaryKey();
+		$pk = $useIndex ? $useIndex : $this->getPrimaryKey();
 		foreach ($pk as $fieldName) {
 			if (!array_key_exists($fieldName, $this->fields)) {
 				return false;
@@ -1701,10 +1707,11 @@ class Db_Row
 	 *  or set it to an array to override specific fields with your own Db_Expressions
 	 * @param {boolean} [$commit=false] If this is TRUE, then the current transaction is committed right after the save.
 	 *  Use this only if you started a transaction before. 
+	 * @param {boolean} [$evenIfNotModified=false] If no fields changed, don't execute any query (but still possibly commit)
 	 * @return {boolean|Db_Query} If successful, returns the Db_Query that was executed.
 	 *  Otherwise, returns false.
 	 */
-	function save ($onDuplicateKeyUpdate = false, $commit = false)
+	function save ($onDuplicateKeyUpdate = false, $commit = false, $evenIfNotModified = false)
 	{
 		$this_class = get_class($this);
 		if ($this_class == 'Db_Row') {
@@ -1737,17 +1744,23 @@ class Db_Row
 			}
 		}
 
-		$modifiedFields = array();
+		$modifiedFields = $reallyModifiedFields = array();
 		foreach ($this->fields as $name => $value) {
 			if ($this->fieldsModified[$name]) {
 				$modifiedFields[$name] = $value;
+				if ($evenIfNotModified
+				or !array_key_exists($name, $this->fieldsOriginal)
+				or $value !== $this->fieldsOriginal[$name]) {
+					$reallyModifiedFields[$name] = $value;
+				}
 			}
 		}
 		
 		$callback = array($this, "beforeSave");
 		if (is_callable($callback)) {
 			$modifiedFields = call_user_func(
-				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit
+				$callback, $modifiedFields, $onDuplicateKeyUpdate, $commit,
+				$reallyModifiedFields
 			);
 		}
 		if (! isset($modifiedFields) or $modifiedFields === false) {
@@ -1799,8 +1812,16 @@ class Db_Row
 			if (!$where) {
 				throw new Exception("The primary key is not specified for $table");
 			}
-			if (empty($fieldsToSave)) {
+			if (empty($fieldsToSave)
+			or (!$evenIfNotModified and empty($reallyModifiedFields))) {
 				$this->wasModified(false);
+				if ($commit) {
+					$class = get_class($this);
+					$db = call_user_func(array($class, 'db'));
+					$query = $db->rawQuery('')->commit();
+					$query->className = get_class($this);
+					$query->execute(false, $query->shard(null, $where));
+				}
 				return false;
             }
 			$query = $db->update($table)
@@ -1928,8 +1949,9 @@ class Db_Row
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
 	 *  Pass true here to fetch all fields or throw an exception if the row is missing.
-	 * @param {boolean} [$useIndex=false] If true, the primary key is used in searching. 
-	 *  An exception is thrown when some fields of the primary key are not specified
+	 * @param {boolean|array} [$useIndex=false] If true, the primary key is used in searching. 
+	 *  An exception is thrown when some fields of the primary key are not specified.
+	 *  If there is no primary key on this table, then pass an array of field names to use, corresponding to a key.
 	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query.
 	 *   You can call more methods, like limit, offset, where, orderBy,
 	 *   and so forth, on that Db_Query. After you have modified it sufficiently,
@@ -1960,7 +1982,7 @@ class Db_Row
 		$modifyQuery = false,
 		$options = array())
 	{
-		if (is_array($useIndex)) {
+		if (Q::isAssociative($useIndex)) {
 			$modifyQuery = $useIndex;
 			$useIndex = $options = null;
 		}
@@ -1986,9 +2008,15 @@ class Db_Row
 		$search_criteria = null;
 		$class_name = get_class($this);
 		// Check if we have specified all the primary key fields.
-		if ($useIndex === true) {
+		if (is_array($useIndex)) {
+			$primaryKey = $useIndex;
+		} else if ($useIndex === true) {
 			$primaryKey = $this->getPrimaryKey();
-			$primaryKeyValue = $this->calculatePKValue();
+		} else {
+			$primaryKey = null;
+		}
+		if ($primaryKey) {
+			$primaryKeyValue = $this->calculatePKValue($primaryKey);
 			if (!is_array($primaryKeyValue)) {
 				throw new Exception("No fields of the primary key were specified for $class_name.");
 			}
@@ -2069,6 +2097,7 @@ class Db_Row
 			// Return the result
 			$resume_args[] = $query;
 			$resume_args[] = $throwIfMissing;
+			$resume_args[] = $primaryKey;
 			return call_user_func_array(array($this, 'retrieve_resume'), $resume_args);
 		}
 		
@@ -2083,7 +2112,7 @@ class Db_Row
 		} else {
 			if (!empty($modifyQuery['begin'])
 			and !empty($modifyQuery['rollbackIfMissing'])) {
-				$this->doRollback();
+				$this->executeRollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
 				try {
@@ -2110,7 +2139,8 @@ class Db_Row
 		$options = array(),
 		$preserved_vars = array(),
 		$query = null,
-		$throwIfMissing = false)
+		$throwIfMissing = false,
+		$primaryKey = null)
 	{
 		$class_name = get_class($this);
 		if (class_exists('Q')) {
@@ -2139,6 +2169,9 @@ class Db_Row
 		// Return one db row, as per function description
 		if (!empty($rows)) {
 			$this->copyFromRow(reset($rows), '', true);
+			if ($primaryKey) {
+				$this->setPkValue($this->calculatePKValue($primaryKey));
+			}
 			if (class_exists('Q')) {
 				$params = array(
 					'row' => $this,
@@ -2160,7 +2193,7 @@ class Db_Row
 			return $this;
 		} else {
 			if (!empty($modifyQuery['begin']) and !empty($modifyQuery['rollbackIfMissing'])) {
-				$this->doRollback();
+				$this->executeRollback();
 			}
 			if ($throwIfMissing and class_exists('Q_Exception_MissingRow')) {
 				throw new Q_Exception_MissingRow(array(
@@ -2175,39 +2208,89 @@ class Db_Row
 	/**
 	 * Retrieves the row in the database, or if it doesn't exist, saves it.
 	 * @method retrieveOrSave
+	 * @param {Db_Row} [&$retrieved] If a row already exists, it is filled here
 	 * @param {string} [$fields='*'] The fields to retrieve and set in the Db_Row.
 	 *  This gets used if we make a query to the database.
-	 * @param {array|boolean} [$modifyQuery=false] Array of options to pass to beforeRetrieve and afterFetch functions.
+	 * @param {boolean|array} [$useIndex=true] If there is no primary key on this table,
+	 *  then pass an array of field names to use, corresponding to a key.
+	 * @param {array|boolean} [$modifyQuery=false] If an array, the following keys are options for modifying the query.
+	 *   You can call more methods, like limit, offset, where, orderBy,
+	 *   and so forth, on that Db_Query. After you have modified it sufficiently,
+	 *   get the ultimate result of this function, by calling the resume() method on 
+	 *   the Db_Query object (via the chainable interface).
+	 *   You can also pass true in place of the modifyQuery field to achieve
+	 *   the same effect as array("query" => true)
+	 * @param {boolean|string} [$modifyQuery.begin] this will cause the query 
+	 *   to have .begin() a transaction which locks the row for update. 
+	 *   You should call .save(..., true) to commit the transaction, or else
+	 *   other database connections trying to access the row will be blocked.
+	 * @param {boolean} [$modifyQuery.rollbackIfMissing=false]
+	 *   If begin is true, this option determines whether to immediately
+	 *   rollback the transaction if the row we're trying to retrieve is missing.
+	 * @param {boolean} [$modifyQuery.ignoreCache]
+	 *   If true, then call ignoreCache on the query
+	 * @param {boolean} [$modifyQuery.caching]
+	 *   If provided, then call caching() on the query, passing this value
+	 * @param {boolean} [$modifyQuery.query]
+	 *   If true, it will return a Db_Query that can be modified, rather than the result. 
 	 * @param {array} [$options=array()] Array of options to pass to beforeRetrieve and afterFetch functions.
-	 * @return {boolean} returns whether the record was saved (i.e. false means retrieved)
+	 * @return {Db_Row} returns this row it was saved, otherwise it returns
 	 */
 	function retrieveOrSave (
+		&$retrieved = null,
+		$useIndex = true,
 		$fields = '*', 
-		$modifyQuery = false,
+		$modifyQuery = array(),
 		$options = array())
 	{
-		if ($this->retrieve($fields, true, $modifyQuery, $options)) {
+		if ($modifyQuery === false) {
+			$modifyQuery = array();
+		}
+		$modifyQuery['begin'] = 'FOR UPDATE';
+		if ($this->retrieve($fields, $useIndex, $modifyQuery, $options)) {
+			$retrieved = $this;
+			$this->executeCommit();
 			return false;
 		}
-
-		$this->save();
+		$this->save(false, true); // commit the transaction
 		return true;
 	}
-	
-	/**
-	 * Rolls back the latest transaction that was started with
-	 * code that looks like $query->begin()->execute().
-	 * @method doRollback
-	 */
-	function doRollback()
+
+	protected function _shardedQuery(&$where)
 	{
-		$class_name = get_class($this);
+		$table = $this->getTable();
+		$where = $this->getPkValue();
+		if (!$where) {
+			throw new Exception("The primary key is not specified for $table");
+		}
 		$db = $this->getDb();
-		if (empty($db))
-			throw new Exception("The database was not specified!");
-		$query = $db->rollback($this->calculatePkValue());
-		$query->className = $class_name;
-		$query->execute();
+		return $query = $db->rawQuery('');
+	}
+
+	/**
+	 * Commits latest transaction that was started with
+	 * code that looks like $query->begin()->execute().
+	 * Only executes the query on the appropriate shard.
+	 * @method executeCommit
+	 */
+	function executeCommit()
+	{
+		$query = $this->_shardedQuery($where);
+		$query = $query->commit();
+		$query->execute(false, $query->shard(null, $where));
+	}
+
+	/**
+	 * Rolls back the whole stack of transations that were started with
+	 * code that looks like $query->begin()->execute().
+	 * Only executes the query on the appropriate shard.
+	 * @method executeRollback
+	 */
+	function executeRollback()
+	{
+		$query = $this->_shardedQuery($where);
+		$query = $query->rollback();
+		$query->execute(false, $query->shard(null, $where));
 	}
 
 	/**

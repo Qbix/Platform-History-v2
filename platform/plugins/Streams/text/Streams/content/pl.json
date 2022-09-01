@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "zarządzaj swoimi subskrypcjami e-mail",
         "IfUnsubscribe": "Jeśli chcesz zrezygnować z subskrypcji",
         "*": "Wyślij wiadomość {{& message.fields.type}} do {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} powiedział: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} powiedział: {{& message.content}}",
         "Streams\/changed": "Zmiany w {{stream.fields.title}}",
         "Streams\/invite": "Zostałeś zaproszony do {{& stream.fields.title}}",
         "Streams\/announcement": "Ogłoszenie za {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "E-mail",
             "byText": "Tekst",
             "byFacebook": "Facebook",
-            "byTwitter": "Świergot"
+            "byTwitter": "Świergot",
+            "title2": "Zaproś ludzi",
+            "chooseMethod": "Wybierz metodę:",
+            "selectContacts": "Wybierz kontakty",
+            "scanQRCode": "Skanowania QR code",
+            "shareLink": "Udostępnij link",
+            "chooseFromRegistered": "Wybierz spośród zarejestrowanych użytkowników",
+            "inviteViaEmailOrSms": "Zaproś e-mailem lub SMS-em"
         },
         "email": {
             "subject": "Hej, sprawdź to",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Zostałeś zaproszony. {{ClickOrTap}} tutaj, aby zaakceptować i dołączyć."
-        }
+        },
+        "Invite": "Zapraszać",
+        "Share": "Dzielić"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Nie masz uprawnień, aby dołączyć do tego strumienia.",
-        "streamTitle": "{{1}} rozpoczął rozmowę na żywo",
+        "streamTitle": "{{1}} rozpoczął telekonferencję",
         "allow": {
             "dialogTitle": "Złączony",
             "microphoneBtn": "Włącz mikrofon",
@@ -210,7 +219,7 @@
             "codeCopied": "Wyszedłeś z pokoju",
             "sbBeganFbLive": "{{userName}} zaczął transmitować tę rozmowę na Facebooku",
             "sbStoppedFbLive": "{{userName}} przestał nadawać tę rozmowę na Facebooku",
-            "youBeganFbLive": "Rozpocząłeś nadawanie tej rozmowy na Facebooku",
+            "youBeganFbLive": "Rozpocząłeś transmisję tej rozmowy na Facebooku",
             "youStoppedFbLive": "Przestałeś nadawać tę rozmowę na Facebooku",
             "youStartedLive": "Rozpocząłeś transmisję tego połączenia do niestandardowego protokołu RTMP",
             "youStoppedLive": "Zatrzymałeś transmisję tego połączenia do niestandardowego protokołu RTMP",
@@ -218,11 +227,13 @@
             "sbStoppedLiveStreaming": "{{userName}} zakończyło się na żywo",
             "liveStopped": "Wystąpił błąd podczas wysyłania wideo do punktu końcowego",
             "youBeganVideoRecording": "Rozpocząłeś nagrywanie tej konferencji",
-            "youStoppedVideoRecording": "Przestałeś nagrywać tę konferencję",
+            "youStoppedVideoRecording": "Zatrzymałeś nagrywanie tej konferencji",
             "linkCopiedToCb": "Link skopiowany do schowka",
             "codeCopiedToCb": "Kod skopiowany do schowka",
             "userHasNoVideo": "Uczestnik nie ma wideo",
-            "openInBrowserAlert": "Otwórz link w przeglądarce Safari, aby dołączyć do konferencji."
+            "openInBrowserAlert": "Otwórz link w przeglądarce Safari, aby dołączyć do konferencji.",
+            "allowedVideoLimit": "W tym pokoju dozwolone jest tylko {{limit}} wideo",
+            "allowedAudioLimit": "W tym pokoju dozwolonych jest tylko {{limit}} mikrofonów"
         },
         "settingsPopup": {
             "dialogTitle": "Ustawienia wideo",
@@ -240,7 +251,7 @@
             "startRecording": "Rozpocznij nagrywanie",
             "stopRecording": "Zatrzymaj nagrywanie",
             "start": "Początek",
-            "stop": "Zatrzymać",
+            "stop": "Zatrzymaj się",
             "recordingInProgress": "Trwa nagrywanie...",
             "fbLiveTitle": "Tytuł transmisji na żywo",
             "fbLiveDescription": "Opisz swoją transmisję na żywo. O czym to jest?",
@@ -256,7 +267,8 @@
             "copy": "Kopiuj",
             "streamToRTMP": "Przesyłaj strumieniowo do niestandardowego protokołu RTMP",
             "startBroadcasting": "Rozpocząć nadawanie",
-            "broadcastingInProgress": "Trwa nadawanie"
+            "broadcastingInProgress": "Trwa transmisja",
+            "manageStream": "Zarządzaj transmisją na żywo"
         },
         "audioSettings": {
             "dialogTitle": "Ustawienia dźwięku",
@@ -284,8 +296,8 @@
             "title": "Ustawienia przesyłania strumieniowego"
         },
         "preview": {
-            "Meeting": "Spotkanie",
-            "MeetingEnded": "Spotkanie zakończone"
+            "Meeting": "Konferencja telefoniczna",
+            "MeetingEnded": "Telekonferencja zakończona"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "rozmowa między użytkownikami, z historią"
         },
         "Streams\/webrtc": {
-            "displayType": "Połączenie w czasie rzeczywistym",
+            "displayType": "Połączenie na żywo",
             "description": "połączenie wideo\/audio w czasie rzeczywistym"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Aktualizacja",
         "NoCallsYet": "Brak połączeń",
         "CallReasonTitle": "O co chodzi w tym telefonie?",
-        "WaitingRoom": "Poczekalnia"
+        "WaitingRoom": "Poczekalnia",
+        "LiveRoom": "Pokój na żywo",
+        "interviewedByAnotherHost": "Obecnie przeprowadza wywiad z innym gospodarzem",
+        "bringToLive": "Przynieś na żywo",
+        "putOnHold": "Zawieszone",
+        "endCall": "Zakończ rozmowę",
+        "interview": "Wywiad",
+        "markApproved": "Oznaczenie zatwierdzone"
     }
 }

@@ -30,7 +30,7 @@ class Assets_NFT_Series
 
 		if (!empty($relations)) {
 			$relation = reset($relations);
-			$stream = Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName);
+			$stream = Streams_Stream::fetch($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName);
 			return $stream;
 		}
 
@@ -107,7 +107,7 @@ class Assets_NFT_Series
 			"toStreamName" => self::$categoryStreamName
 		))->fetchDbRow();
 		if ($relation) {
-			$category = Streams::fetchOne($relation->toPublisherId, $relation->toPublisherId, $relation->toStreamName, true);
+			$category = Streams_Stream::fetch($relation->toPublisherId, $relation->toPublisherId, $relation->toStreamName, true);
 
 			// change stream relation
 			Streams::unrelate($userId, $category->publisherId, $category->name, "new", $stream->publisherId, $stream->name);

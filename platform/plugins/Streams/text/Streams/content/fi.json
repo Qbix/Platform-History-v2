@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "hallita sähköpostitilauksiasi",
         "IfUnsubscribe": "Jos haluat peruuttaa tilauksen",
         "*": "Viesti {{& message.fields.type}} vastaanottajalle {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sanoi: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sanoi: {{& message.content}}",
         "Streams\/changed": "Muutoksia {{stream.fields.title}}",
         "Streams\/invite": "Sinut kutsuttiin tapahtumaan {{& stream.fields.title}}",
         "Streams\/announcement": "Ilmoitus {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "Sähköposti",
             "byText": "Teksti",
             "byFacebook": "Facebook",
-            "byTwitter": "Viserrys"
+            "byTwitter": "Viserrys",
+            "title2": "Kutsu ihmisiä",
+            "chooseMethod": "Valitse menetelmä:",
+            "selectContacts": "Valitse Yhteystiedot",
+            "scanQRCode": "Skannaa QR-koodi",
+            "shareLink": "Jaa linkki",
+            "chooseFromRegistered": "Valitse rekisteröityneistä käyttäjistä",
+            "inviteViaEmailOrSms": "Kutsu sähköpostilla tai tekstiviestillä"
         },
         "email": {
             "subject": "Hei, tarkista tämä",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Sinut on kutsuttu. {{ClickOrTap}} täällä hyväksyäksesi ja liittyäksesi."
-        }
+        },
+        "Invite": "Kutsu",
+        "Share": "Jaa"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Sinulla ei ole lupaa liittyä tähän streamiin.",
-        "streamTitle": "{{1}} aloitti suoran puhelun",
+        "streamTitle": "{{1}} aloitti puhelinkonferenssin",
         "allow": {
             "dialogTitle": "Yhdistetään",
             "microphoneBtn": "Ota mikrofoni käyttöön",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Linkki kopioitu leikepöydälle",
             "codeCopiedToCb": "Koodi kopioitu leikepöydälle",
             "userHasNoVideo": "Osallistujalla ei ole videota",
-            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin."
+            "openInBrowserAlert": "Avaa linkki Safari-selaimessa liittyäksesi konferenssiin.",
+            "allowedVideoLimit": "Vain {{limit}} videota sallitaan tässä huoneessa",
+            "allowedAudioLimit": "Vain {{limit}} mikrofonia sallitaan tässä huoneessa"
         },
         "settingsPopup": {
             "dialogTitle": "Videoasetukset",
@@ -250,13 +261,14 @@
             "publishOnTimeline": "Julkaise aikajanalla",
             "publishToGroup": "Julkaise ryhmässä",
             "fbStartLive": "Elä",
-            "fbStopLive": "Lopeta suora lähetys",
+            "fbStopLive": "Lopeta suoratoisto",
             "streamingSettings": "asetukset",
             "fbEmbedCode": "Upottaa",
             "copy": "Kopio",
             "streamToRTMP": "Striimaa muokattuun RTMP:hen",
             "startBroadcasting": "Aloita lähetys",
-            "broadcastingInProgress": "Lähetys on käynnissä"
+            "broadcastingInProgress": "Lähetys on käynnissä",
+            "manageStream": "Hallinnoi suoratoistoa"
         },
         "audioSettings": {
             "dialogTitle": "Ääniasetukset",
@@ -284,8 +296,8 @@
             "title": "Suoratoistoasetukset"
         },
         "preview": {
-            "Meeting": "Tapaaminen",
-            "MeetingEnded": "Kokous päättyi"
+            "Meeting": "Puhelinkonferenssi",
+            "MeetingEnded": "Puhelinkonferenssi päättyi"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "keskustelu käyttäjien välillä historian kera"
         },
         "Streams\/webrtc": {
-            "displayType": "Reaaliaikainen puhelu",
+            "displayType": "Live-puhelu",
             "description": "reaaliaikainen video\/äänipuhelu"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Päivittää",
         "NoCallsYet": "Ei puheluita vielä",
         "CallReasonTitle": "Mistä tässä puhelussa on kyse?",
-        "WaitingRoom": "Odotushuone"
+        "WaitingRoom": "Odotushuone",
+        "LiveRoom": "Live-huone",
+        "interviewedByAnotherHost": "Tällä hetkellä haastattelee toinen isäntä",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Pitoon",
+        "endCall": "Lopeta puhelu",
+        "interview": "Haastatella",
+        "markApproved": "Merkitse Hyväksytty"
     }
 }

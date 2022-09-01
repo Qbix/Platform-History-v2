@@ -63,7 +63,7 @@ function Streams_form_tool($options)
 		if (!isset($r['type'])) {
 			var_dump($r['type']);exit;
 		}
-		$stream = Streams::fetchOne(null, $r['publisherId'], $r['streamName']);
+		$stream = Streams_Stream::fetch(null, $r['publisherId'], $r['streamName']);
 		if ($stream) {
 			if (substr($r['field'], 0, 10) === 'attribute:') {
 				$attribute = trim(substr($r['field'], 10));

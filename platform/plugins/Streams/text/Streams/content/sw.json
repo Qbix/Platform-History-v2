@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "dhibiti usajili wako wa barua pepe",
         "IfUnsubscribe": "Ukitaka kujiondoa",
         "*": "Tuma ujumbe {{& message.fields.type}} kwa {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} alisema: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} alisema: {{& message.content}}",
         "Streams\/changed": "Mabadiliko katika {{stream.fields.title}}",
         "Streams\/invite": "Ulialikwa {{& stream.fields.title}}",
         "Streams\/announcement": "Tangazo katika {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "Barua pepe",
             "byText": "Maandishi",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Alika Watu",
+            "chooseMethod": "Chagua mbinu:",
+            "selectContacts": "Chagua Anwani",
+            "scanQRCode": "Changanua Msimbo wa QR",
+            "shareLink": "Shiriki kiungo",
+            "chooseFromRegistered": "Chagua kutoka kwa watumiaji waliosajiliwa",
+            "inviteViaEmailOrSms": "Alika kupitia barua pepe au SMS"
         },
         "email": {
             "subject": "Haya, angalia hii",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Umealikwa. {{ClickOrTap}} hapa kukubali na kujiunga."
-        }
+        },
+        "Invite": "Alika",
+        "Share": "Shiriki"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Huna ruhusa ya kujiunga na mkondo huu.",
-        "streamTitle": "{{1}} alipiga simu ya moja kwa moja",
+        "streamTitle": "{{1}} alianzisha Kongamano la Televisheni",
         "allow": {
             "dialogTitle": "Inaunganisha",
             "microphoneBtn": "Washa Maikrofoni",
@@ -185,7 +194,7 @@
         "androidInstructionsDialog": {
             "dialogTitle": "Maagizo",
             "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwa Mipangilio yako ya Android",
+            "point1": "Nenda kwenye Mipangilio yako ya Android",
             "point2": "Fungua &quot;Programu na arifa&quot;",
             "point3": "Tafuta &quot;{999}}&quot; na uifungue",
             "point4": "Gonga kwenye Ruhusa",
@@ -194,7 +203,7 @@
         "iosInstructionsDialog": {
             "dialogTitle": "Maagizo",
             "permissionDenied": "Ruhusa ya {{kind}} imekataliwa. Ili kuitumia tafadhali fuata hatua hizi:",
-            "point1": "Nenda kwa Mipangilio yako ya iOS",
+            "point1": "Nenda kwenye Mipangilio yako ya iOS",
             "point2": "Fungua &quot;Faragha&quot;",
             "point3": "Tafuta {{kind}} na uifungue",
             "point4": "Tafuta &quot;{999}}&quot; na uwashe"
@@ -203,7 +212,7 @@
             "youJoinedRoom": "Umejiunga kwenye chumba",
             "joining": "Kujiunga: {{userName}}",
             "sbLeftRoom": "{{userName}} aliondoka kwenye chumba",
-            "switchingRoom": "Chumba cha kubadilisha...",
+            "switchingRoom": "Inabadilisha chumba...",
             "forceDisconnecting": "Utatenganishwa ndani ya sekunde 5",
             "forceDisconnectingImmediately": "Ulitenganishwa na mwenyeji",
             "youLeftRoom": "Uliondoka kwenye chumba",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Kiungo kimenakiliwa kwenye ubao wa kunakili",
             "codeCopiedToCb": "Msimbo umenakiliwa kwenye ubao wa kunakili",
             "userHasNoVideo": "Mshiriki hana video",
-            "openInBrowserAlert": "Fungua kiungo kwenye kivinjari cha Safari ili ujiunge na mkutano."
+            "openInBrowserAlert": "Fungua kiungo kwenye kivinjari cha Safari ili ujiunge na mkutano.",
+            "allowedVideoLimit": "Video {{limit}} pekee ndiyo inayoruhusiwa kwenye chumba hiki",
+            "allowedAudioLimit": "Ni maikrofoni {{limit}} pekee zinazoruhusiwa kwenye chumba hiki"
         },
         "settingsPopup": {
             "dialogTitle": "Mipangilio ya Video",
@@ -247,7 +258,7 @@
             "fbOnlyMeLiveAccess": "Mimi Pekee",
             "fbFriendsAccess": "Marafiki",
             "fbPublicAccess": "Hadharani",
-            "publishOnTimeline": "Chapisha kwa kalenda ya matukio",
+            "publishOnTimeline": "Chapisha kwenye kalenda ya matukio",
             "publishToGroup": "Chapisha kwa kikundi",
             "fbStartLive": "Nenda Moja kwa Moja",
             "fbStopLive": "Komesha Mtiririko wa moja kwa moja",
@@ -256,7 +267,8 @@
             "copy": "Nakili",
             "streamToRTMP": "Tiririsha hadi RTMP maalum",
             "startBroadcasting": "Anza kutangaza",
-            "broadcastingInProgress": "Utangazaji unaendelea"
+            "broadcastingInProgress": "Utangazaji unaendelea",
+            "manageStream": "Dhibiti Mtiririko wa moja kwa moja"
         },
         "audioSettings": {
             "dialogTitle": "Mipangilio ya Sauti",
@@ -284,8 +296,8 @@
             "title": "Mipangilio ya Kutiririsha"
         },
         "preview": {
-            "Meeting": "Mkutano",
-            "MeetingEnded": "Mkutano umeisha"
+            "Meeting": "Teleconference",
+            "MeetingEnded": "Teleconference imekamilika"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "mazungumzo kati ya watumiaji, na historia"
         },
         "Streams\/webrtc": {
-            "displayType": "Simu ya Wakati Halisi",
+            "displayType": "Simu ya Moja kwa Moja",
             "description": "simu ya video\/sauti ya wakati halisi"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Sasisha",
         "NoCallsYet": "Hakuna simu bado",
         "CallReasonTitle": "Simu hii inahusu nini?",
-        "WaitingRoom": "Chumba cha kusubiri"
+        "WaitingRoom": "Chumba cha kusubiri",
+        "LiveRoom": "Chumba cha moja kwa moja",
+        "interviewedByAnotherHost": "Hivi sasa anahojiwa na mwenyeji mwingine",
+        "bringToLive": "Leta Kwa Onyesho Moja kwa Moja",
+        "putOnHold": "Weka Shikilia",
+        "endCall": "Maliza Simu",
+        "interview": "Mahojiano",
+        "markApproved": "Alama Imeidhinishwa"
     }
 }

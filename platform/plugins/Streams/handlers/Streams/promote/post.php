@@ -24,7 +24,7 @@ function Streams_promote_post()
 	$communityId = $_REQUEST['communityId'];
 	$relationType = $_REQUEST['relationType'];
 	$experienceId = Q::ifset($_REQUEST, 'experienceId', 'main');
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 
 	$roles = Users::roles($communityId, Q_Config::get('Communities', 'promote', 'labels', 'none'));
 	if (empty($roles)) {
@@ -41,7 +41,7 @@ function Streams_promote_post()
 	// NOTE: we need a way to add interests automatically
 	$interests = Calendars_Event::getInterests($stream);
 
-	$experience = Streams::fetchOne(
+	$experience = Streams_Stream::fetch(
 		null, $communityId, "Streams/experience/$experienceId", true
 	);
 	$co = array('experienceId' => $experienceId);

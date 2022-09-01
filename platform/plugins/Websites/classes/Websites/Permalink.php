@@ -36,7 +36,7 @@ class Websites_Permalink extends Base_Websites_Permalink
 		if ($uri->module === 'Streams' and $uri->action === 'stream') {
 			$publisherId = Streams::requestedPublisherId(false, $uri);
 			$streamName = Streams::requestedName(false, 'original', $uri);
-			$stream = Streams::fetchOne(null, $publisherId, $streamName);
+			$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		}
 		Q::event('Websites/permalink', array(
 			'permalink' => $this,

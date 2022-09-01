@@ -4,7 +4,7 @@ function Streams_invite_response_suggestion()
 {
 	$publisherId = Streams::requestedPublisherId(true);
 	$streamName = Streams::requestedName(true);
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	
 	if (!empty($_REQUEST['token'])) {
 		$roles = Q_Config::get('Streams', 'invites', 'canSetInviteTokens', array());

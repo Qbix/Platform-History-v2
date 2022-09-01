@@ -119,7 +119,7 @@ function Streams_stream_post($params = array())
 
 	// if stream named defined - check whether this stream already exist
 	if (Q::ifset($fields, 'name', null)) {
-		$stream = Streams::fetchOne($user->id, $publisherId, $fields['name']);
+		$stream = Streams_Stream::fetch($user->id, $publisherId, $fields['name']);
 
 		// if stream exist - clear closedTime (resurrection)
 		if ($stream instanceof Streams_Stream) {
@@ -179,7 +179,7 @@ function Streams_stream_post($params = array())
 	// since it might have been retrieved and modified to be different
 	// from what is currently in $stream.
 	// This also calculates the access levels on the stream.
-	$stream = Streams::fetchOne($user->id, $publisherId, $stream->name, '*', array(
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $stream->name, '*', array(
 		'refetch' => true
 	));
 	

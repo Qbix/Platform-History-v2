@@ -9,7 +9,7 @@ function Streams_after_Streams_updateAvatars ($params) {
 			continue;
 		}
 
-		$stream = Streams::fetchOne($avatar->publisherId, $avatar->publisherId, "Streams/user/profile");
+		$stream = Streams_Stream::fetch($avatar->publisherId, $avatar->publisherId, "Streams/user/profile");
 		$stream->title = Streams::displayName($stream->publisherId, array('asUserId' => ''));
 		$stream->icon = $avatar->icon;
 		$stream->save();

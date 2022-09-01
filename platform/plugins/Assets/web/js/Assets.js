@@ -506,8 +506,17 @@
 				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
 					Assets.Payments.applePayCordova(options, function (err, res) {
 						if (err) {
-							return Assets.Payments.standardStripe(options, callback);
+							Assets.Payments.applePayStripe(options, function (err, res) {
+								if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
+									Assets.Payments.standardStripe(options, callback);
+									return;
+								}
+
+								Q.handle(callback, null, [err, res]);
+							});
+							return;
 						}
+
 						Q.handle(callback, null, [err, res]);
 					});
 				} else if (!Q.info.isCordova && window.PaymentRequest) {
@@ -707,10 +716,13 @@
 			paymentRequestStripe: function (options, callback) {
 				Assets.Payments.checkLoaded();
 
+				// while "basic-card" payment method refused and GooglePay not adjusted yet
+				return Q.handle(callback, null, [{code: 9}]);
+
 				var currency = options.currency || 'USD';
 
 				if (!Assets.Payments.googlePay) {
-					return callback({code: 9});
+					return Q.handle(callback, null, {code: 9});
 				}
 
 				var supportedInstruments = [{
@@ -816,7 +828,7 @@
 					return promise ? promise : Q.Promise.reject({result: result, err: new Error('Unsupported method')});
 				}).then(function (result) {
 					result.complete('success');
-					callback(null, result);
+					Q.handle(callback, null, [null, result]);
 				}, function (reject) {
 					console.warn(reject.result);
 					reject.result.complete("fail");
@@ -824,7 +836,7 @@
 					if (Q.getObject("result.complete", err)) {
 						return err.result.complete('fail');
 					}
-					callback(err);
+					Q.handle(callback, null, [err]);
 				});
 			},
 			/**
@@ -1803,6 +1815,7 @@
 		scrollbarsAutoHide: false,
 		handlers: {
 			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
+			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
 			NFT: "{{Assets}}/js/columns/NFT.js"
 		}
 	};

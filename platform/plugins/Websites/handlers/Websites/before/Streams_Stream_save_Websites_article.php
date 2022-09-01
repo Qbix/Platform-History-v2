@@ -30,7 +30,7 @@ function Websites_before_Streams_Stream_save_Websites_article($params)
 		$stream->icon = $user->iconUrl(false);
 	}
 
-	$s = Streams::fetchOne($user->id, $user->id, "Streams/user/icon");
+	$s = Streams_Stream::fetch($user->id, $user->id, "Streams/user/icon");
 	if (!$s or !$sizes = $s->getAttribute('sizes', null)) {
 		$sizes = Q_Image::getSizes('Users/icon');
 		ksort($sizes);

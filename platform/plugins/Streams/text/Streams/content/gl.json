@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "xestiona as túas subscricións de correo electrónico",
         "IfUnsubscribe": "Se queres darte de baixa",
         "*": "Mensaxe {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} dixo: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} dixo: {{& message.content}}",
         "Streams\/changed": "Cambios en {{stream.fields.title}}",
         "Streams\/invite": "Convidáronte a {{& stream.fields.title}}",
         "Streams\/announcement": "Anuncio en {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "Correo electrónico",
             "byText": "Texto",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Invitar persoas",
+            "chooseMethod": "Escolle un método:",
+            "selectContacts": "Seleccione Contactos",
+            "scanQRCode": "Escanear código QR",
+            "shareLink": "Comparte unha ligazón",
+            "chooseFromRegistered": "Escolla entre os usuarios rexistrados",
+            "inviteViaEmailOrSms": "Invitar por correo electrónico ou SMS"
         },
         "email": {
             "subject": "Ei, mira isto",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Estás convidado. {{ClickOrTap}} aquí para aceptar e unirse."
-        }
+        },
+        "Invite": "Invitar",
+        "Share": "Compartir"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Non tes permiso para unirte a esta emisión.",
-        "streamTitle": "{{1}} iniciou unha chamada en directo",
+        "streamTitle": "{{1}} iniciou unha teleconferencia",
         "allow": {
             "dialogTitle": "Conectando",
             "microphoneBtn": "Activa o micrófono",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "A ligazón copiouse no portapapeis",
             "codeCopiedToCb": "Copiouse o código no portapapeis",
             "userHasNoVideo": "O participante non ten ningún vídeo",
-            "openInBrowserAlert": "Abre a ligazón no navegador Safari para unirte á conferencia."
+            "openInBrowserAlert": "Abre a ligazón no navegador Safari para unirte á conferencia.",
+            "allowedVideoLimit": "Só se permiten {{limit}} vídeos nesta sala",
+            "allowedAudioLimit": "Só se permiten {{limit}} micrófonos nesta sala"
         },
         "settingsPopup": {
             "dialogTitle": "Configuración de vídeo",
@@ -256,7 +267,8 @@
             "copy": "Copiar",
             "streamToRTMP": "Transmitir a RTMP personalizado",
             "startBroadcasting": "Comeza a transmitir",
-            "broadcastingInProgress": "A emisión está en curso"
+            "broadcastingInProgress": "A emisión está en curso",
+            "manageStream": "Xestionar a transmisión en directo"
         },
         "audioSettings": {
             "dialogTitle": "Configuración de audio",
@@ -264,12 +276,12 @@
             "microphone": "Micrófono"
         },
         "participantsPopup": {
-            "dialogTitle": "Configuración dos participantes",
+            "dialogTitle": "Configuración do participante",
             "disconnect": "Desconectar",
             "floatingScreens": "Pantallas flotantes",
             "tiledScreens": "Pantallas de mosaico",
             "loudestExceptMe": "O máis alto excepto eu",
-            "maximizeLoudest": "Maximizar o máis alto",
+            "maximizeLoudest": "Maximiza o máis alto",
             "staticMaximized": "Maximizado estático",
             "fullScreen": "Pantalla completa",
             "manual": "Manual",
@@ -284,8 +296,8 @@
             "title": "Configuración de transmisión"
         },
         "preview": {
-            "Meeting": "Reunión",
-            "MeetingEnded": "Rematou a reunión"
+            "Meeting": "Teleconferencia",
+            "MeetingEnded": "Rematou a teleconferencia"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "unha conversa entre usuarios, con historia"
         },
         "Streams\/webrtc": {
-            "displayType": "Chamada en tempo real",
+            "displayType": "Chamada en directo",
             "description": "unha videochamada\/audio en tempo real"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Actualizar",
         "NoCallsYet": "Aínda non hai chamadas",
         "CallReasonTitle": "De que trata esta chamada?",
-        "WaitingRoom": "Sala de espera"
+        "WaitingRoom": "Sala de espera",
+        "LiveRoom": "Sala de Vivo",
+        "interviewedByAnotherHost": "Actualmente é entrevistado por outro anfitrión",
+        "bringToLive": "Show Bring To Live",
+        "putOnHold": "Poñer en espera",
+        "endCall": "Finalizar chamada",
+        "interview": "Entrevista",
+        "markApproved": "Marcar Aprobado"
     }
 }

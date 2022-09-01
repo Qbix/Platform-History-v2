@@ -180,7 +180,7 @@ Q.Tool.jQuery('Q/gallery', function _Q_gallery(o) {
 			top: '0px', 
 			left: '0px'
 		}).appendTo($this)
-		.load(onLoad);
+		.on('load', onLoad);
 		if (name) {
 			img.addClass('Q_gallery_caption_' + name);
 		}

@@ -1,7 +1,4 @@
 <?php
-require_once USERS_PLUGIN_DIR.'/vendor/autoload.php';
-use phpseclib\Math\BigInteger;
-
 function Assets_NFT_response_content ($params) {
 	$request = array_merge($_REQUEST, $params);
 	$uri = Q_Dispatcher::uri();
@@ -9,6 +6,11 @@ function Assets_NFT_response_content ($params) {
 	$streamId = Q::ifset($request, 'streamId', Q::ifset($uri, 'streamId', null));
 	$tokenId = Q::ifset($request, 'tokenId', Q::ifset($uri, 'tokenId', null));
 	$isJson = preg_match("/\.json$/", $_SERVER["REQUEST_URI"]);
+	if ($isJson) {
+		$publisherId = str_replace(".json", "", $publisherId);
+		$tokenId = str_replace(".json", "", $tokenId);
+		$streamId = str_replace(".json", "", $streamId);
+	}
 
 	if (empty($tokenId) && empty($publisherId)) {
 		throw new Exception("NFT::view publisherId required!");
@@ -21,10 +23,6 @@ function Assets_NFT_response_content ($params) {
 	}
 
 	if ($tokenId) {
-		if ($isJson) {
-			$tokenId = str_replace(".json", "", $tokenId);
-		}
-
 		$decodedToken = Streams::fromHexString($tokenId);
 		if (!is_array($decodedToken) || sizeof($decodedToken) != 2) {
 			throw new Exception("Invalid token Id");
@@ -42,9 +40,11 @@ function Assets_NFT_response_content ($params) {
 		$streamName = "Assets/NFT/".$streamId;
 	}
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	$assetsNFTAttributes = $stream->getAttribute('Assets/NFT/attributes', array());
-	if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
+	if ($stream->icon === '{{Assets}}/img/empty_white.png') {
+		$image = null;
+	} else if (preg_match("/\.\w{3,4}$/", $stream->icon)) {
 		$image = Q::interpolate($stream->icon, array("baseUrl" => Q_Request::baseUrl()));
 		$defaultIconSize = '2048';
 	} else {

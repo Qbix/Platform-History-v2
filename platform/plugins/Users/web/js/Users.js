@@ -175,7 +175,7 @@
 				Users.init.facebook.onInit.handle(Users, window.FB, [appId]);
 			}
 			Users.init.facebook.completed[appId] = true;
-			callback && callback();
+			Q.handle(callback);
 		}
 
 		if (!$('#fb-root').length) {
@@ -186,6 +186,7 @@
 			_init,
 			{
 				onError: function () {
+					Q.handle(callback, null, [true]);
 					console.log("Couldn't load script:", this, arguments);
 				}
 			}
@@ -388,6 +389,8 @@
 			}
 
 			var web3Modal = Users.Web3.getWeb3Modal();
+			Users.prevDocumentTitle = document.title;
+			document.title = Users.communityName;
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return _cancel();
@@ -468,6 +471,10 @@
 				}).catch(_cancel);
 			});
 			function _cancel() {
+				if ('prevDocumentTitle' in Users) {
+					document.title = Users.prevDocumentTitle;
+					delete Users.prevDocumentTitle;
+				}
 				Q.handle(onCancel, Users, [options]);
 			}
 		});
@@ -482,6 +489,7 @@
 		Users.authenticate(platform, function (user) {
 			priv.login_onConnect(user);
 		}, function () {
+
 			priv.login_onCancel();
 		}, {"prompt": false});
 	}
@@ -577,6 +585,10 @@
 	
 	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
 		Q.req('Users/authenticate', 'data', function (err, response) {
+			if ('prevDocumentTitle' in Users) {
+				document.title = Users.prevDocumentTitle;
+				delete Users.prevDocumentTitle;
+			}
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
@@ -1045,12 +1057,12 @@
 
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
-			Users.onLogin.handle(user);
 			var pn = priv.used || 'native';
 			var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
 			if (false !== ret) {
 				Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
 			}
+			Users.onLogin.handle(user);
 			Users.login.occurring = false;
 		}
 	};
@@ -1423,7 +1435,7 @@
 				'background-position': 'right center'
 			});
 			if (window.CryptoJS) {
-				var p = $('#Users_form_passphrase');
+				var p = $('#current-password');
 				var v = p.val();
 				if (v) {
 					if (!/^[0-9a-f]{40}$/i.test(v)) {
@@ -1437,7 +1449,7 @@
 			var url = $this.attr('action') + '?' + $this.serialize();
 			Q.request(url, 'data', function (err, response) {
 
-				$('#Users_form_passphrase').attr('value', '').trigger('change');
+				$('#current-password').attr('value', '').trigger('change');
 
 				$('input', $this).css('background-image', 'none');
 				if (err || (response && response.errors)) {
@@ -1483,7 +1495,7 @@
 		}
 
 		function setupLoginForm() {
-			var passphrase_input = $('<input type="password" name="passphrase" id="Users_form_passphrase" class="Q_password" />')
+			var passphrase_input = $('<input type="password" name="passphrase" id="current-password" class="Q_password" />')
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('autocomplete', 'current-password')
@@ -3130,34 +3142,38 @@
 
 		// method to get contacts for browser Picker Contacts API (if exists)
 		function _getPickerContacts () {
-			navigator.contacts.select(['name', 'email', 'tel'], {multiple: true})
-			.then(function (results) {
-				Q.each(results, function (i, obj) {
-					obj.displayName = obj.name[0];
+            navigator.contacts.getProperties().then(function (supportedProperties) {
+                navigator.contacts.select(supportedProperties, {multiple:true})
+                    .then(function (results) {
+                        Q.each(results, function (i, obj) {
+                            obj.displayName = obj.name[0];
 
-					if (!obj.displayName) {
-						return;
-					}
+                            if (!obj.displayName) {
+                                return;
+                            }
 
-					obj.emails = Array.from(new Set(obj.email));
+                            obj.emails = Array.from(new Set(obj.email));
+                            obj.icons = Array.from(new Set(obj.icon));
 
-					obj.phoneNumbers = Array.from(new Set(obj.tel));
-					obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
-						return e.replace(/\D/g, '');
-					});
+                            obj.phoneNumbers = Array.from(new Set(obj.tel));
+                            obj.phoneNumbers = obj.phoneNumbers.map(function(e) {
+                                return e.replace(/\D/g, '');
+                            });
 
-					obj.id = obj.emails.join() + obj.phoneNumbers.join();
+                            obj.id = obj.emails.join() + obj.phoneNumbers.join();
 
-					obj.emails = obj.emails.length ? obj.emails : null;
-					obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
+                            obj.emails = obj.emails.length ? obj.emails : null;
+                            obj.phoneNumbers = obj.phoneNumbers.length ? obj.phoneNumbers : null;
+                            obj.icons = obj.icons.length ? obj.icons : null;
 
-					contacts.push(obj);
-				});
+                            contacts.push(obj);
+                        });
 
-				Q.handle(callback, contacts, ["browser"]);	
-			}).catch(function (ex) {
-				throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
-			});
+                        Q.handle(callback, contacts, ["browser"]);
+                    }).catch(function (ex) {
+                    throw new Error("Users.chooseContacts._getPickerContacts: " + ex);
+                });
+            })
 		};
 
 		if (Q.info.isCordova) { // if cordova use navigator.contacts plugin
@@ -3187,14 +3203,15 @@
 
 			Q.addStylesheet('{{Users}}/css/Users/contacts.css', {slotName: 'Users'});
 
-			var _addContact = function (id, name, contact, contactType) {
+			var _addContact = function (options) {
 				var c = {
-					id: id,
-					name: name,
-					prefix: contactType
+					id: options.id,
+					name: options.name,
+					icon: options.icon,
+					prefix: options.contactType
 				};
-				c[contactType] = contact;
-				selectedContacts[id] = c;
+				c[options.contactType] = options.contact;
+				selectedContacts[options.id] = c;
 			};
 			var _removeContact = function (id, dialog) {
 				$('.tr[data-rawid="'+ id +'"] .Users_contacts_dialog_' + selectedContacts[id].prefix, dialog)
@@ -3259,11 +3276,11 @@
 								return;
 							}
 							$email.addClass("checked");
-							_addContact(rawid, name, data, "email");
+							_addContact({id: rawid, name: name, icon: icon, contact: data, contactType:"email"});
 						})
 					} else if (emailContact.length === 1) {
 						$email.addClass("checked");
-						_addContact(rawid, name, emailContact[0], "email");
+						_addContact({id: rawid, name: name, icon: icon, contact: emailContact[0], contactType:"email"});
 					}
 				} else if (Q.getObject('length', phoneContact)) {
 					if (phoneContact.length > 1) {
@@ -3277,11 +3294,11 @@
 								return;
 							}
 							$phone.addClass("checked");
-							_addContact(rawid, name, data, "phone");
+							_addContact({id: rawid, name: name, icon: icon, contact: data, contactType: "phone"});
 						})
 					} else if (phoneContact.length === 1) {
 						$phone.addClass("checked");
-						_addContact(rawid, name, phoneContact[0], "phone");
+						_addContact({id: rawid, name: name, icon: icon, contact: phoneContact[0], contactType: "phone"});
 					}
 				}
 			};
@@ -3359,10 +3376,10 @@
 										$this.removeClass("checked");
 										return;
 									}
-									_addContact(rawid, name, data, contactType);
+									_addContact({id: rawid, name: name, contact: data, contactType: contactType});
 								})
 							} else {
-								_addContact(rawid, name, contact[0], contactType);
+								_addContact({id: rawid, name: name, contact: contact[0], contactType: contactType});
 							}
 
 							return false;
@@ -3500,12 +3517,24 @@
 
 							if (type === 'email' && !Q.isEmpty(contact.emails)) {
 								added = true;
-								return _addContact(contact.id, contact.displayName, contact.emails[0], 'email');
+								return _addContact({
+									id: contact.id,
+									name: contact.displayName,
+									icon: contact.icon,
+									contact: contact.emails[0],
+									contactType:'email'
+								});
 							}
 
 							if (type === 'mobile' && !Q.isEmpty(contact.phoneNumbers)) {
 								added = true;
-								return _addContact(contact.id, contact.displayName, contact.phoneNumbers[0], 'phone');
+								return _addContact({
+									id: contact.id,
+									name: contact.displayName,
+									icon: contact.icon,
+									contact: contact.phoneNumbers[0],
+									contactType:'phone'
+								});
 							}
 						});
 					});
@@ -3653,17 +3682,21 @@
 			}
 			Q.cookie('fbs_' + platformAppId, null, {path: '/'});
 			Q.cookie('fbsr_' + platformAppId, null, {path: '/'});
-			Users.init.facebook(function logoutCallback() {
+			Users.init.facebook(function logoutCallback(err) {
+				if (err) {
+					return Q.handle(callback);
+				}
+
 				Users.Facebook.getLoginStatus(function (response) {
 					setTimeout(function () {
 						Users.logout.occurring = false;
 					}, 0);
 					if (!response.authResponse) {
-						return callback();
+						return Q.handle(callback);
 					}
 					return FB.logout(function () {
 						delete Users.connected.facebook;
-						callback();
+						Q.handle(callback);
 					});
 				}, true);
 			}, {

@@ -368,6 +368,8 @@ var _streamUpdatedRelateFromHandlers = {};
 var _streamUpdatedRelateToHandlers = {};
 var _streamConstructHandlers = {};
 var _streamRefreshHandlers = {};
+var _streamRetainHandlers = {};
+var _streamReleaseHandlers = {};
 var _retain = undefined;
 var _retainedByKey = {};
 var _retainedByStream = {};
@@ -456,6 +458,22 @@ Streams.onConstruct = Q.Event.factory(_constructHandlers, [""]);
  * @return {Q.Event}
  */
 Streams.onRefresh = Q.Event.factory(_refreshHandlers, [""]);
+
+/**
+ * Returns Q.Event that occurs when a stream is first retained by the client
+ * @event onRetain
+ * @param {String} type type of the stream being retained on the client side
+ * @return {Q.Event}
+ */
+ Streams.onRetain = Q.Event.factory(_refreshHandlers, [""]);
+
+ /**
+ * Returns Q.Event that occurs when a stream is finally released on the client
+ * @event onRelease
+ * @param {String} type type of the stream being released on the client side
+ * @return {Q.Event}
+ */
+Streams.onRelease = Q.Event.factory(_refreshHandlers, [""]);
 
 /**
  * Returns Q.Event that occurs when an avatar has been returned, possibly
@@ -613,15 +631,46 @@ Q.Tool.define({
 	"Streams/calls/call": "{{Streams}}/js/tools/call.js"
 });
 
+Streams.Chat = {
+	extensions: [
+		'Streams/mentions/chat',
+		'Streams/audio/chat',
+		'Streams/video/chat',
+		'Streams/pdf/chat',
+		'Streams/image/chat'
+	]
+};
+
 Q.Tool.onActivate("Streams/chat").set(function () {
-	$(this.element)
-	.tool('Streams/mentions/chat')
-	.tool('Streams/audio/chat')
-	.tool('Streams/video/chat')
-	.tool('Streams/pdf/chat')
-	.tool('Streams/image/chat')
-	.activate();
+	var $e = $(this.element);
+	Q.each(Streams.Chat.extensions, function (i, name) {
+		$e.tool(name);
+	});
+	$e.activate();
 }, 'Streams');
+
+/**
+ * Used to mark some streams as public, so that Streams.get()
+ * will initiate public batch fetching of these streams.
+ * This results in much faster fetching of streams across
+ * multiple publishers in a batch, but doesn't support getting
+ * related participants, messages, templates, mutable, etc.
+ * @method arePublic
+ * @static
+ * @param {Object} publishersAndNames Should be a structure containing { publisherId: { name: true } } pairs
+ */
+Streams.arePublic = function _Streams_Stream_isPublic (
+	publishersAndNames	
+) {
+	for (var publisherId in publishersAndNames) {
+		for (var name in publishersAndNames[publisherId]) {
+			_publicStreams[publisherId] = _publicStreams[publisherId] || {};
+			_publicStreams[publisherId][name] = true;
+		}
+	}
+};
+
+var _publicStreams = Streams.arePublic.collection = {};
 
 /**
  * Streams batch getter.
@@ -655,6 +704,10 @@ Streams.get = function _Streams_get(publisherId, streamName, callback, extra) {
 	}
 	if (!streamName) {
 		throw new Q.Error("Streams.get: streamName is empty");
+	}
+	if (Q.getObject([publisherId, streamName], _publicStreams)) {
+		extra = extra || {};
+		extra.public = 1;
 	}
 	if (extra) {
 		if (extra.participants) {
@@ -1016,20 +1069,41 @@ Streams.Dialogs = {
                     $eContacts.html(html).activate();
 
                     $("button.Streams_invite_submit_contact", $eContacts).on(Q.Pointer.fastclick, function () {
-                        var inviteParams;
-                        for(var i in contacts) {
-                            inviteParams = {
-                                stream: stream,
-                                data: data
-                            };
+						Q.each(contacts, function (identifier, obj) {
+							var inviteParams = {
+								stream: stream,
+								data: data
+							};
 
-                            if (contacts[i].prefix === "user") {
-                                inviteParams.userId = contacts[i]["id"];
-                            } else {
-                                inviteParams.identifier = contacts[i][contacts[i].prefix];
-                            }
-                            Q.handle(callback, Streams, [inviteParams]);
-                        }
+							if (obj.prefix === "user") {
+								inviteParams.userId = obj["id"];
+							} else {
+								inviteParams.identifier = obj[obj.prefix];
+							}
+
+							var pipe = new Q.pipe(Object.keys(obj), function (params) {
+								Q.handle(callback, Streams, [inviteParams]);
+							});
+
+							Q.each(obj, function (key, value) {
+                            	if (Q.isArrayLike(value)) {
+                            		value = value[0];
+								}
+
+                            	if (key === 'icon' && value) {
+									var reader = new FileReader();
+									reader.readAsDataURL(value);
+									reader.onloadend = function() {
+										inviteParams[key] = reader.result;
+										pipe.fill(key)();
+									}
+									return;
+								}
+
+								inviteParams[key] = value;
+								pipe.fill(key)();
+							});
+                        });
                         Q.Dialogs.pop();
                         Q.Dialogs.pop();
                     });
@@ -1243,8 +1317,6 @@ Streams.Dialogs = {
                             dialog.addClass('Streams_suggestion_ready');
                         }
 
-                        var $eContacts = $(".Streams_invite_contacts", dialog);
-
                         // handle "choose from contacts" button
                         $('.Streams_invite_select_contacts', dialog).on(Q.Pointer.fastclick, function () {
                             var isContactsPicker = Q.info.isCordova || ('contacts' in navigator && 'ContactsManager' in window);
@@ -1258,14 +1330,13 @@ Streams.Dialogs = {
                                     + '</div>',
                                     onActivate: function (dialog) {
                                         var $dialogContent = $(".Streams_invite_contacts_content", dialog);
-
                                         var $eContacts = $(".Streams_invite_contacts", dialog);
                                         var $selectContactBtn = $('<button></button>').text(text.chooseFromContacts);
                                         $selectContactBtn.addClass('Q_button');
                                         $selectContactBtn.addClass('Streams_invite_choose_contact');
                                         $dialogContent.append($selectContactBtn);
-                                        $selectContactBtn.on(Q.Pointer.fastclick, function () {
-                                            var $this = $(this);
+
+                                        function selectContacts() {
                                             $eContacts.empty();
 
                                             var params = {
@@ -1274,10 +1345,10 @@ Streams.Dialogs = {
                                                 identifierTypes: Streams.invite.options.identifierTypes
                                             };
 
-                                            $this.addClass('loading');
+                                            $selectContactBtn.addClass('loading');
 
                                             Users.Dialogs.contacts(params, function (contacts) {
-                                                $this.removeClass('loading');
+                                                $selectContactBtn.removeClass('loading');
                                                 $eContacts.data("contacts", contacts);
 
                                                 if (!contacts || Object.keys(contacts).length <= 0) {
@@ -1286,10 +1357,12 @@ Streams.Dialogs = {
 
                                                 _renderInviteList(contacts, $eContacts);
 
-                                                $this.text(text.chooseAgainFromContacts).addClass("");
+                                                $selectContactBtn.text(text.chooseAgainFromContacts).addClass("");
                                             })
-                                        });
+                                        }
 
+                                        selectContacts();
+                                        $selectContactBtn.on(Q.Pointer.fastclick, selectContacts);
                                     }
                                 });
                             } else {
@@ -1512,12 +1585,18 @@ Streams.release = function (key) {
 			if (!_retainedByStream[ps]) {
 				continue;
 			}
+			var parts = ps.split("\t");
 			delete _retainedByStream[ps][key];
 			if (Q.isEmpty(_retainedByStream[ps])) {
 				delete(_retainedByStream[ps]);
 				delete(_retainedStreams[ps]);
+				var stream = _retainedStreams[ps];
+				Q.handle([
+					Stream.onRelease.ifAny(parts[0], ""),
+					Stream.onRelease.ifAny(parts[0], parts[1]),
+					Streams.onRelease.ifAny(Q.getObject('fields.type', stream))
+				], stream, [key]);
 			}
-			var parts = ps.split("\t");
 			var nodeUrl = Q.nodeUrl({
 				publisherId: parts[0],
 				streamName: parts[1]
@@ -1755,39 +1834,46 @@ Streams.invite = function (publisherId, streamName, options, callback) {
                                 colorLight : "#ffffff",
                                 correctLevel : QRCode.CorrectLevel.H
                             });
-                            $('.Q_button', dialog).plugin('Q/clickable')
-                                .on(Q.Pointer.click, function () {
-                                    Q.Dialogs.push({
-                                        title: Q.getObject(['invite', 'dialog', 'photo'], text),
-                                        apply: true,
-                                        className: "Dialog_invite_photo_camera",
-                                        content:
-                                        '<div class="Streams_invite_photo_dialog">' +
-                                        '<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
-                                        '<div class="Streams_invite_photo_camera">' +
-                                        '<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
-                                        '</div>' +
-                                        '</div>',
-                                        onActivate: function (dialog) {
-                                            // handle "photo" button
-                                            var photo = null;
-                                            var saveSizeName = {};
-                                            Q.each(Users.icon.sizes, function (k, v) {
-                                                saveSizeName[k] = v;
-                                            });
-                                            var o = {
-                                                path: 'Q/uploads/Users',
-                                                save: 'Users/icon',
-                                                subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
-                                                saveSizeName: saveSizeName,
-                                                onFinish: function () {
-                                                    Q.Dialogs.pop();
-                                                }
-                                            };
-                                            $('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
-                                        }
-                                    });
-                                });
+                            var _setPhoto = function (message) {
+                            	Q.Dialogs.pop();
+								Q.Dialogs.push({
+									title: Q.getObject(['invite', 'dialog', 'photo'], text),
+									apply: true,
+									className: "Dialog_invite_photo_camera",
+									content:
+										'<div class="Streams_invite_photo_dialog">' +
+										'<p>'+ Q.getObject(['invite', 'dialog', 'photoInstruction'], text) +'</p>' +
+										'<div class="Streams_invite_photo_camera">' +
+										'<img src="' + Q.url('{{Streams}}/img/invitations/camera.svg') + '" class="Streams_invite_photo Streams_invite_photo_pulsate"></img>' +
+										'</div>' +
+										'</div>',
+									onActivate: function (dialog) {
+										// handle "photo" button
+										var saveSizeName = {};
+										Q.each(Users.icon.sizes, function (k, v) {
+											saveSizeName[k] = v;
+										});
+										var o = {
+											path: 'Q/uploads/Users',
+											save: 'Users/icon',
+											subpath: loggedUserId.splitId() + '/invited/' + rsd.invite.token,
+											saveSizeName: saveSizeName,
+											onFinish: function () {
+												Q.Dialogs.pop();
+											}
+										};
+										$('.Streams_invite_photo', dialog).plugin('Q/imagepicker', o);
+									}
+								});
+							};
+                            $('.Q_button', dialog).plugin('Q/clickable').on(Q.Pointer.click, _setPhoto);
+							rss.onMessage('Streams/invite/accept').set(function (stream, message) {
+								if (message.getInstruction('token') !== Q.getObject("invite.token", rsd)) {
+									return;
+								}
+
+								_setPhoto();
+							}, 'Streams_invite_QR_content');
                         });
                     }
                 });
@@ -1809,7 +1895,9 @@ Streams.invite = function (publisherId, streamName, options, callback) {
             options.templateName = o.templateName;
         }
         Streams.Dialogs.invite(publisherId, streamName, function (r) {
-            if (!r) return;
+            if (Q.isEmpty(r)) {
+				return;
+			}
             for (var option in r) {
                 o[option] = r[option];
             }
@@ -2128,25 +2216,6 @@ Streams.related.options = {
 Streams.related.onError = new Q.Event();
 
 /**
- * Detect whether stream retained
- * @static
- * @method retainedByKey
- * @param {String} publisherId
- * @param {String} streamName
- * @return {Boolean} Whether stream retained (true) or not (false)
- */
-Streams.retainedByKey = function (publisherId, streamName) {
-	var ps = Streams.key(publisherId, streamName);
-	for (var i in _retainedByKey) {
-		if (Q.getObject([ps], _retainedByKey[i]) === true) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-/**
  * @class Streams.Stream
  */
 
@@ -2354,6 +2423,7 @@ Stream.url = function(publisherId, streamName, streamType, messageOrdinal, baseU
 		publisherId: publisherId,
 		streamName: streamName.split('/'),
 		name: streamName,
+		nameNormalized: Q.normalize(streamName),
 		baseUrl: baseUrl || Q.baseUrl()
 	}, function (err, html) {
 		if (err) return;
@@ -2860,6 +2930,7 @@ Sp.retain = function _Stream_prototype_retain (key) {
 	var streamName = this.fields.name;
 	var ps = Streams.key(publisherId, streamName);
 	key = Q.calculateKey(key);
+	var wasRetained = !!_retainedStreams[ps];
 	_retainedStreams[ps] = this;
 	var nodeUrl = Q.nodeUrl({
 		publisherId: publisherId,
@@ -2873,6 +2944,13 @@ Sp.retain = function _Stream_prototype_retain (key) {
 	}
 	Q.setObject([ps, key], true, _retainedByStream);
 	Q.setObject([key, ps], true, _retainedByKey);
+	if (!wasRetained) {
+		Q.handle([
+			Stream.onRetain.ifAny(publisherId, ""),
+			Stream.onRetain.ifAny(publisherId, streamName),
+			Streams.onRetain.ifAny(Q.getObject('fields.type', this))
+		], this, [key]);
+	}
 	return this;
 };
 
@@ -3079,12 +3157,30 @@ Stream.onConstruct = Q.Event.factory(_streamConstructHandlers, ["", ""]);
  * If you are already handling the Streams.Stream.onFieldChanged
  * and Streams.Stream.onAttribute events, however, then you don't need to
  * also add a handler to this event, because they are called during the refresh anyway.
- * @event onConstruct
+ * @event onRefresh
  * @param {String} publisherId id of publisher which is publishing the stream
  * @param {String} [streamName] name of stream which is being refreshed
  * @return {Q.Event}
  */
 Stream.onRefresh = Q.Event.factory(_streamRefreshHandlers, ["", ""]);
+
+/**
+ * Returns Q.Event that occurs when a stream is first retained by the client
+ * @event onRetain
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being retained
+ * @return {Q.Event}
+ */
+ Stream.onRetain = Q.Event.factory(_streamRetainHandlers, ["", ""]);
+
+ /**
+ * Returns Q.Event that occurs when a stream is finally released by the client
+ * @event onRelease
+ * @param {String} publisherId id of publisher which is publishing the stream
+ * @param {String} [streamName] name of stream which is being retained
+ * @return {Q.Event}
+ */
+Stream.onRelease = Q.Event.factory(_streamReleaseHandlers, ["", ""]);
 
 /**
  * Returns Q.Event that occurs after the system learns of a new message that was posted.
@@ -3417,15 +3513,6 @@ Sp.invite = function (options, callback) {
  */
 Sp.refresh = function _Stream_prototype_refresh (callback, options) {
 	return Stream.refresh(this.fields.publisherId, this.fields.name, callback, options);
-};
-
-/**
- * Whether stream retained
- * @method retainedByKey
- * @return {Boolean}
- */
-Sp.retainedByKey = function () {
-	return Streams.retainedByKey(this.fields.publisherId, this.fields.name);
 };
 
 /**
@@ -3992,6 +4079,8 @@ var Message = Streams.Message = function Streams_Message(fields) {
 	this.typename = 'Q.Streams.Message';
 };
 
+Message.latest = {}; // for helping not create old messages
+
 /**
  * Constructs a Streams.Message from fields.
  * If the Streams.Message.define() function was not called,
@@ -4295,7 +4384,7 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		// There is no cache for this stream, so we won't wait for previous messages.
 		return null;
 	}
-	if (ordinal >= 0 &&  ordinal <= latest) {
+	if (ordinal >= 0 &&  ordinal <= latest && latest > 0) {
 		// The cached stream already got this message
 		Q.handle(callback, this, [[]]);
 		return false;
@@ -4342,14 +4431,16 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		});
 		waiting[ord] = [event, handlerKey];
 	});
-	p.add(ordinals, 1, function () {
-		if (!alreadyCalled) {
-			Q.handle(callback, this, [true, ordinals]);
-		}
-		clearTimeout(t);
-		alreadyCalled = true;
-		return true;
-	}).run();
+	if (latest < ordinal) {
+		p.add(ordinals, 1, function () {
+			if (!alreadyCalled) {
+				Q.handle(callback, this, [true, ordinals]);
+			}
+			clearTimeout(t);
+			alreadyCalled = true;
+			return true;
+		}).run();
+	}
 	return p;
 
 	function _tryLoading() {
@@ -4363,37 +4454,42 @@ Message.wait = function _Message_wait (publisherId, streamName, ordinal, callbac
 		if (ordinal < 0) {
 			Message.get.forget(publisherId, streamName, {min: latest+1, max: ordinal});
 		}
-		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal},
-			function (err, messages) {
-				if (err) {
-					return Q.handle(callback, this, [null, err]);
-				}
-				// Go through the messages and simulate the posting
-				// NOTE: the messages will arrive a lot quicker than they were posted,
-				// and moreover without browser refresh cycles in between,
-				// which may cause confusion in some visual representations
-				// until things settle down on the screen
-				ordinal = parseInt(ordinal);
-				Q.each(messages, function (ordinal, message) {
-					Users.Socket.onEvent('Streams/post').handle(message, messages);
-				}, {ascending: true, numeric: true});
 
-				// if any new messages were encountered, updateMessageCache removed all the cached
-				// results where max < 0, so future calls to Streams.Message.get with max < 0 will
-				// make a request to the server
+		// check if stream cached and if not then retrieve and it for next time
+		if (!Streams.get.cache.get([publisherId, streamName])) {
+			Streams.get(publisherId, streamName);
+		}
 
-				// Do we have this message now?
-				if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
-					// remove any event handlers still waiting for the event to be posted
-					Q.each(waiting, function (i, w) {
-						w[0].remove(w[1]);
-					});
-					if (!alreadyCalled) {
-						Q.handle(callback, this, [Object.keys(messages)]);
-					}
-					alreadyCalled = true;
+		return Message.get(publisherId, streamName, {min: latest+1, max: ordinal}, function (err, messages) {
+			if (err) {
+				return Q.handle(callback, this, [null, err]);
+			}
+			// Go through the messages and simulate the posting
+			// NOTE: the messages will arrive a lot quicker than they were posted,
+			// and moreover without browser refresh cycles in between,
+			// which may cause confusion in some visual representations
+			// until things settle down on the screen
+			ordinal = parseInt(ordinal);
+			Q.each(messages, function (ordinal, message) {
+				Users.Socket.onEvent('Streams/post').handle(message, messages);
+			}, {ascending: true, numeric: true});
+
+			// if any new messages were encountered, updateMessageCache removed all the cached
+			// results where max < 0, so future calls to Streams.Message.get with max < 0 will
+			// make a request to the server
+
+			// Do we have this message now?
+			if (ordinal < 0 || Message.get.cache.get([publisherId, streamName, ordinal])) {
+				// remove any event handlers still waiting for the event to be posted
+				Q.each(waiting, function (i, w) {
+					w[0].remove(w[1]);
+				});
+				if (!alreadyCalled) {
+					Q.handle(callback, this, [Object.keys(messages)]);
 				}
-			});
+				alreadyCalled = true;
+			}
+		});
 	}
 };
 Message.wait.options = {
@@ -5331,7 +5427,8 @@ Streams.showNoticeIfSubscribed = function (options) {
 		}
 
 		// if stream retained - don't show notice
-		if (this.retainedByKey()) {
+		var ps = Streams.key(publisherId, streamName);
+		if (_retainedStreams[ps]) {
 			return;
 		}
 
@@ -5438,15 +5535,22 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 
 	var authResponse;
 	if (Users.apps.facebook && Users.apps.facebook[Q.info.app]) {
-		Users.init.facebook(function() {
-			if ((authResponse = FB.getAuthResponse())) {
-				for (var k in authResponse) {
-					register_form.append(
-						$('<input type="hidden" />')
-							.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
-							.attr('value', authResponse[k])
-					);
-				}
+		Users.init.facebook(function(err) {
+			if (err) {
+				return;
+			}
+
+			authResponse = FB.getAuthResponse();
+			if (!authResponse) {
+				return;
+			}
+
+			for (var k in authResponse) {
+				register_form.append(
+					$('<input type="hidden" />')
+						.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
+						.attr('value', authResponse[k])
+				);
 			}
 		});
 	}
@@ -5733,7 +5837,20 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	var where = Streams.cache.where || 'document';
 
 	Stream.get = Streams.get = Q.getter(Streams.get, {
-		cache: Q.Cache[where]("Streams.get", 100),
+		cache: Q.Cache[where]("Streams.get", 100, {
+			beforeEvict: {
+				Streams: function (item) {
+					var publisherId = Q.getObject('subject.fields.publisherId', item);
+					var streamName = Q.getObject('subject.fields.name', item);
+					if (publisherId && streamName) {
+						var ps = Streams.key(publisherId, streamName);
+						if (_retainedByStream[ps]) {
+							return false; // don't evict retained streams from cache
+						}
+					}
+				}
+			}
+		}),
 		throttle: 'Streams.get',
 		prepare: function (subject, params, callback) {
 			if (Streams.isStream(subject)) {
@@ -6146,7 +6263,7 @@ Q.onInit.add(function _Streams_onInit() {
 					});
 			}, true);
 		}
-	}, "Streams");
+	}, "Streams.invited");
 
 	Users.Socket.onEvent('Streams/debug').set(function _Streams_debug_handler (msg) {
 		console.log('DEBUG:', msg);
@@ -6209,15 +6326,26 @@ Q.onInit.add(function _Streams_onInit() {
 		// (e.g. from a post or retrieving a stream, or because there was no cache yet)
 		var ret = Message.wait(msg.publisherId, msg.streamName, msg.ordinal-1, _message);
 		function _message() {
+			var ptn = msg.publisherId+"\t"+msg.streamName;
+			if (Message.latest[ptn] >= parseInt(msg.ordinal)) {
+				return; // it was already processed
+			}
+
 			// TODO: if a message was simulated with this ordinal, and this message
 			// was expected (e.g. it returns the same id that the simulated message had)
 			// then you can skip processing this message.
 
+			
 			// Otherwise, we have a new message posted - update cache
 			console.log('Users.Socket.onEvent("Streams/post")', msg);
 			var message = (msg instanceof Message)
 				? msg
 				: Message.construct(msg, true);
+
+			Message.latest[ptn] = parseInt(msg.ordinal);
+			var cached = Streams.get.cache.get(
+				[msg.publisherId, msg.streamName]
+			);
 
 			// update fields.messageCount of cached stream
 			Streams.get.cache.each([msg.publisherId, msg.streamName], function (k, cached) {
@@ -6405,8 +6533,7 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
-	Q.beforeActivate.add(_preloaded, 'Streams');
-	Q.loadUrl.options.onResponse.add(_preloaded, 'Streams');
+	Q.request.options.onResponse.add(_preloaded, 'Streams.preloaded');
 
 	Q.addEventListener(window, Streams.refresh.options.duringEvents, Streams.refresh);
 	_scheduleUpdate();
@@ -6438,15 +6565,19 @@ Q.Page.beforeUnload("").set(function () {
 function _preloaded(elem) {
 	// Every time before anything is activated,
 	// process any preloaded streams and avatars data we find
-	Q.each(Stream.preloaded, function (i, fields) {
+	Q.each(Stream._preloaded, function (i, fields) {
 		Stream.construct(fields, {}, null, true);
 	});
-	Stream.preloaded = null;
-	Q.each(Avatar.preloaded, function (i, fields) {
+	Stream._preloaded = null;
+	Q.each(Avatar._preloaded, function (i, fields) {
 		var avatar = new Avatar(fields);
 		Avatar.get.cache.set([fields.publisherId], 0, avatar, [null, avatar]);
 	});
-	Avatar.preloaded = null;
+	Avatar._preloaded = null;
+	if (Streams._public) {
+		Streams.arePublic(Streams._public);
+	}
+	Streams._public = null;
 }
 
 function _updateMessageCache(msg) {
@@ -6514,7 +6645,7 @@ function _updateMessageTotalsCache(msg) {
 				++result[type];
 			}
 		}, {
-			evenIfNoIndex: true
+			throwIfNoIndex: false
 		});
 }
 

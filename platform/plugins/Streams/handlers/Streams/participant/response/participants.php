@@ -15,7 +15,7 @@ function Streams_participant_response_participants()
 
 	$user = Users::loggedInUser();
 	$userId = $user ? $user->id : "";
-	$stream = Streams::fetchOne($userId, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch($userId, $publisherId, $streamName);
 	if (empty($stream)) {
 		throw new Q_Exception_MissingRow(array(
 			'table' => 'Stream', 

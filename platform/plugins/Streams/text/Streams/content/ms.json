@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "menguruskan langganan e-mel anda",
         "IfUnsubscribe": "Jika anda ingin berhenti melanggan",
         "*": "Mesej {{& message.fields.type}} kepada {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} berkata: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} berkata: {{& message.content}}",
         "Streams\/changed": "Perubahan dalam {{stream.fields.title}}",
         "Streams\/invite": "Anda telah dijemput ke {{& stream.fields.title}}",
         "Streams\/announcement": "Pengumuman dalam {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "E-mel",
             "byText": "Teks",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Jemput Orang",
+            "chooseMethod": "Pilih kaedah:",
+            "selectContacts": "Pilih Kenalan",
+            "scanQRCode": "Imbas Kod QR",
+            "shareLink": "Kongsi pautan",
+            "chooseFromRegistered": "Pilih daripada pengguna berdaftar",
+            "inviteViaEmailOrSms": "Jemput melalui e-mel atau SMS"
         },
         "email": {
             "subject": "Hei, semak ini",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Anda telah dijemput. {{ClickOrTap}} di sini untuk menerima dan menyertai."
-        }
+        },
+        "Invite": "Jemput",
+        "Share": "Kongsi"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Anda tidak mempunyai kebenaran untuk menyertai strim ini.",
-        "streamTitle": "{{1}} memulakan panggilan langsung",
+        "streamTitle": "{{1}} memulakan Telesidang",
         "allow": {
             "dialogTitle": "Menyambung",
             "microphoneBtn": "Dayakan Mikrofon",
@@ -174,13 +183,13 @@
         },
         "webInstructionsDialog": {
             "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} dinafikan. Untuk menggunakannya sila ikuti langkah berikut:",
+            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Untuk menggunakannya sila ikuti langkah berikut:",
             "point1": "Pergi ke &quot;Tetapan&quot; -&gt; &quot;Lanjutan&quot; -&gt; &quot;Privasi dan keselamatan&quot; -&gt; &quot;Tetapan Tapak&quot; -&gt; &quot;Kamera&quot; atau &quot;Tetapan Tapak&quot; -&gt; &quot;Mikrofon&quot;",
             "point2": "Alih keluar {{hostname}} daripada senarai &quot;Sekat&quot;."
         },
         "webIosInstructionsDialog": {
             "dialogTitle": "Arahan",
-            "permissionDenied": "Kebenaran untuk {{kind}} dinafikan. Sila muatkan semula halaman ini dan sahkan akses kepada {{kind}} untuk menyertai persidangan."
+            "permissionDenied": "Kebenaran untuk {{kind}} ditolak. Sila muatkan semula halaman ini dan sahkan akses kepada {{kind}} untuk menyertai persidangan."
         },
         "androidInstructionsDialog": {
             "dialogTitle": "Arahan",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Pautan disalin ke papan keratan",
             "codeCopiedToCb": "Kod disalin ke papan keratan",
             "userHasNoVideo": "Peserta tidak mempunyai video",
-            "openInBrowserAlert": "Buka pautan dalam penyemak imbas Safari untuk menyertai persidangan."
+            "openInBrowserAlert": "Buka pautan dalam penyemak imbas Safari untuk menyertai persidangan.",
+            "allowedVideoLimit": "Hanya {{limit}} video dibenarkan di dalam bilik ini",
+            "allowedAudioLimit": "Hanya {{limit}} mikrofon dibenarkan di dalam bilik ini"
         },
         "settingsPopup": {
             "dialogTitle": "Tetapan Video",
@@ -256,7 +267,8 @@
             "copy": "Salinan",
             "streamToRTMP": "Strim ke RTMP tersuai",
             "startBroadcasting": "Mulakan penyiaran",
-            "broadcastingInProgress": "Penyiaran sedang dijalankan"
+            "broadcastingInProgress": "Penyiaran sedang dijalankan",
+            "manageStream": "Urus Strim Langsung"
         },
         "audioSettings": {
             "dialogTitle": "Tetapan Audio",
@@ -284,8 +296,8 @@
             "title": "Tetapan Penstriman"
         },
         "preview": {
-            "Meeting": "mesyuarat",
-            "MeetingEnded": "Mesyuarat tamat"
+            "Meeting": "Telesidang",
+            "MeetingEnded": "Telesidang tamat"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "perbualan antara pengguna, dengan sejarah"
         },
         "Streams\/webrtc": {
-            "displayType": "Panggilan Masa Nyata",
+            "displayType": "Panggilan Langsung",
             "description": "panggilan video\/audio masa nyata"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Kemas kini",
         "NoCallsYet": "Tiada panggilan lagi",
         "CallReasonTitle": "Apakah panggilan ini?",
-        "WaitingRoom": "Bilik menunggu"
+        "WaitingRoom": "Bilik menunggu",
+        "LiveRoom": "Bilik Langsung",
+        "interviewedByAnotherHost": "Pada masa ini ditemu bual oleh hos lain",
+        "bringToLive": "Bring To Live Show",
+        "putOnHold": "Berhenti",
+        "endCall": "Tamat panggilan",
+        "interview": "Temuduga",
+        "markApproved": "Tandakan Diluluskan"
     }
 }

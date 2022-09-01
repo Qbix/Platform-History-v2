@@ -149,7 +149,7 @@
 
 					Q.req('Websites/scrape', ['result'], function (err, response) {
 						var msg = Q.firstErrorMessage(err, response && response.errors);
-						if (msg) {
+						if (msg || !response.slots) {
 							return _close();
 						}
 

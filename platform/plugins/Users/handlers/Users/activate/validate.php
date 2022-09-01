@@ -19,10 +19,10 @@ function Users_activate_validate()
 	}
 	if ($emailAddress or $mobileNumber) {
 		if (empty($_REQUEST['code'])) {
-			throw new Q_Exception("The activation code is missing");
+			throw new Q_Exception("The activation code is required");
 		}
 	} else {
-		throw new Q_Exception("The contact information is missing");
+		throw new Q_Exception("The email address or mobile number is required");
 	}
 	if (!empty($e_normalized)) {
 		Users::$cache['emailAddress'] = $e_normalized;

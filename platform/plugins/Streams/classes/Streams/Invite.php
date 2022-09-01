@@ -166,12 +166,13 @@ class Streams_Invite extends Base_Streams_Invite
 			return false;
 		}
 
+		$this->userId = $userId;
 		$this->state = 'accepted';
 		if (!$this->save()) {
 			return false;
 		}
 		
-		$stream = Streams::fetchOne(
+		$stream = Streams_Stream::fetch(
 			$this->userId, $this->publisherId, $this->streamName, true
 		);
 		
@@ -189,7 +190,7 @@ class Streams_Invite extends Base_Streams_Invite
 			$invitedUser = Users_User::fetch($userId, true);
 			$byUser = Users_User::fetch($this->invitingUserId, true);
 			// Set up the objects
-			$toStream = Streams::fetchOne(
+			$toStream = Streams_Stream::fetch(
 				$this->invitingUserId, $this->publisherId, $this->streamName, true
 			);
 			$access = new Streams_Access();

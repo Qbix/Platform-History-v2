@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "向 {{& stream.fields.title}} 发送消息 {{& message.fields.type}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}}说：{{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} 说：{{& message.content}}",
         "Streams\/changed": "{{stream.fields.title}} 的变化",
         "Streams\/invite": "您被邀请到 {{& stream.fields.title}}",
         "Streams\/announcement": "{{& stream.fields.title}} 中的公告",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} 如果代码已被扫描",
             "copyLink": "{{ClickOrTap}} 复制邀请链接",
             "userChooserPlaceholder": "按名称搜索",
-            "shareOrCopyLink": "{{ClickOrTap}} 分享或复制邀请链接"
+            "shareOrCopyLink": "{{ClickOrTap}} 分享或复制邀请链接",
+            "title2": "邀请人",
+            "chooseMethod": "选择一种方法：",
+            "selectContacts": "选择联系人",
+            "scanQRCode": "扫描二维码",
+            "shareLink": "分享链接",
+            "chooseFromRegistered": "从注册用户中选择",
+            "inviteViaEmailOrSms": "通过电子邮件或短信邀请"
         },
         "email": {
             "subject": "嘿，看看这个",
@@ -104,7 +111,9 @@
             "text": "你被邀请了。 {{ClickOrTap}} 在此处接受并加入。"
         },
         "youCanNowPaste": "您现在可以将此链接粘贴到某处以邀请他人",
-        "command": "邀请"
+        "command": "邀请",
+        "Invite": "邀请",
+        "Share": "分享"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} 开始直播",
             "sbStoppedLiveStreaming": "{{userName}} 直播结束",
             "liveStopped": "向端点发送视频时出错",
-            "forceDisconnectingImmediately": "您已被主机断开连接"
+            "forceDisconnectingImmediately": "您已被主机断开连接",
+            "allowedVideoLimit": "此房间仅允许 {{limit}} 个视频",
+            "allowedAudioLimit": "此房间仅允许使用 {{limit}} 个麦克风"
         },
         "settingsPopup": {
             "webCamera": "网络摄像头",
@@ -228,7 +239,8 @@
             "streamToRTMP": "流式传输到自定义 RTMP",
             "dialogTitle": "视频设置",
             "startBroadcasting": "开始广播",
-            "broadcastingInProgress": "广播正在进行中"
+            "broadcastingInProgress": "广播正在进行中",
+            "manageStream": "管理直播"
         },
         "participantsPopup": {
             "disconnect": "断开",
@@ -248,11 +260,11 @@
             "dialogTitle": "参与者设置"
         },
         "notAllowedToJoinCall": "您无权加入此信息流。",
-        "streamTitle": "{{1}} 发起了实时通话",
+        "streamTitle": "{{1}} 开始电话会议",
         "preview": {
             "preamble": "会议：",
-            "Meeting": "会议",
-            "MeetingEnded": "会议结束"
+            "Meeting": "电话会议",
+            "MeetingEnded": "电话会议结束"
         },
         "preparing": {
             "micIsOff": "麦克风已关闭",
@@ -534,6 +546,13 @@
         "Update": "更新",
         "NoCallsYet": "还没有来电",
         "CallReasonTitle": "这个电话是关于什么的？",
-        "WaitingRoom": "等候室"
+        "WaitingRoom": "等候室",
+        "LiveRoom": "直播间",
+        "interviewedByAnotherHost": "目前正在接受另一位主持人的采访",
+        "bringToLive": "带来现场表演",
+        "putOnHold": "搁置",
+        "endCall": "结束通话",
+        "interview": "面试",
+        "markApproved": "标记已批准"
     }
 }

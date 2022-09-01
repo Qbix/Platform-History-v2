@@ -35,10 +35,11 @@ abstract class Base_Streams
   12 => 'Streams_RelatedTo',
   13 => 'Streams_RelatedToTotal',
   14 => 'Streams_Request',
-  15 => 'Streams_Stream',
-  16 => 'Streams_Subscription',
-  17 => 'Streams_SubscriptionRule',
-  18 => 'Streams_Task',
+  15 => 'Streams_State',
+  16 => 'Streams_Stream',
+  17 => 'Streams_Subscription',
+  18 => 'Streams_SubscriptionRule',
+  19 => 'Streams_Task',
 );
 
 	/**

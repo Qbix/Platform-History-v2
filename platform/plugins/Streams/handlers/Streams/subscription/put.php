@@ -14,7 +14,7 @@ function Streams_subscription_put($params) {
 	extract($_REQUEST);
 
 	$items  = json_decode($items, true);
-	$stream = Streams::fetchOne($user->id, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch($user->id, $publisherId, $streamName);
 	if (!$stream) {
 		throw new Q_Exception_MissingRow(array(
 			'table'    => 'stream',

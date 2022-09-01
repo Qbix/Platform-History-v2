@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "stjórna tölvupóstáskriftum þínum",
         "IfUnsubscribe": "Ef þú vilt segja upp áskrift",
         "*": "Skilaboð {{& message.fields.type}} til {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} sagði: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} sagði: {{& message.content}}",
         "Streams\/changed": "Breytingar á {{stream.fields.title}}",
         "Streams\/invite": "Þér var boðið í {{& stream.fields.title}}",
         "Streams\/announcement": "Tilkynning í {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "Tölvupóstur",
             "byText": "Texti",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Bjóddu fólki",
+            "chooseMethod": "Veldu aðferð:",
+            "selectContacts": "Veldu Tengiliðir",
+            "scanQRCode": "Skannaðu QR kóða",
+            "shareLink": "Deildu tengli",
+            "chooseFromRegistered": "Veldu úr skráðum notendum",
+            "inviteViaEmailOrSms": "Boðið með tölvupósti eða SMS"
         },
         "email": {
             "subject": "Hey, athugaðu þetta",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Þér hefur verið boðið. {{ClickOrTap}} hér til að samþykkja og taka þátt."
-        }
+        },
+        "Invite": "Bjóða",
+        "Share": "Deila"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Þú hefur ekki leyfi til að tengjast þessum straumi.",
-        "streamTitle": "{{1}} hóf símtal í beinni",
+        "streamTitle": "{{1}} hóf símafund",
         "allow": {
             "dialogTitle": "Tengist",
             "microphoneBtn": "Virkja hljóðnema",
@@ -210,9 +219,9 @@
             "codeCopied": "Þú fórst út úr herberginu",
             "sbBeganFbLive": "{{userName}} byrjaði að senda þetta símtal á Facebook",
             "sbStoppedFbLive": "{{userName}} hætti að senda þetta símtal á Facebook",
-            "youBeganFbLive": "Þú byrjaðir að senda þetta símtal á Facebook",
+            "youBeganFbLive": "Þú byrjaðir að senda út þetta símtal á Facebook",
             "youStoppedFbLive": "Þú hættir að senda þetta símtal á Facebook",
-            "youStartedLive": "Þú byrjaðir að senda þetta símtal í sérsniðið RTMP",
+            "youStartedLive": "Þú byrjaðir að senda þetta símtal til sérsniðinnar RTMP",
             "youStoppedLive": "Þú hættir að senda þetta símtal í sérsniðið RTMP",
             "sbStartedLiveStreaming": "{{userName}} byrjaði í beinni",
             "sbStoppedLiveStreaming": "{{userName}} lauk í beinni",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Tengill afritaður á klippiborð",
             "codeCopiedToCb": "Kóði afritaður á klemmuspjald",
             "userHasNoVideo": "Þátttakandi hefur ekkert myndband",
-            "openInBrowserAlert": "Opnaðu tengil í Safari vafra til að taka þátt í ráðstefnunni."
+            "openInBrowserAlert": "Opnaðu tengil í Safari vafra til að taka þátt í ráðstefnunni.",
+            "allowedVideoLimit": "Aðeins {{limit}} myndskeið leyft í þessu herbergi",
+            "allowedAudioLimit": "Aðeins {{limit}} hljóðnemar leyfðir í þessu herbergi"
         },
         "settingsPopup": {
             "dialogTitle": "Myndskeiðsstillingar",
@@ -256,7 +267,8 @@
             "copy": "Afrita",
             "streamToRTMP": "Straumaðu í sérsniðið RTMP",
             "startBroadcasting": "Byrjaðu að senda út",
-            "broadcastingInProgress": "Útsending stendur yfir"
+            "broadcastingInProgress": "Útsending stendur yfir",
+            "manageStream": "Stjórna straumi í beinni"
         },
         "audioSettings": {
             "dialogTitle": "Hljóðstillingar",
@@ -284,8 +296,8 @@
             "title": "Straumstillingar"
         },
         "preview": {
-            "Meeting": "Fundur",
-            "MeetingEnded": "Fundi slitið"
+            "Meeting": "Fjarfundur",
+            "MeetingEnded": "Símafundi lokið"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "samtal á milli notenda, með sögu"
         },
         "Streams\/webrtc": {
-            "displayType": "Rauntímasímtal",
+            "displayType": "Lifandi símtal",
             "description": "mynd-\/hljóðsímtal í rauntíma"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Uppfærsla",
         "NoCallsYet": "Engin símtöl ennþá",
         "CallReasonTitle": "Um hvað snýst þetta símtal?",
-        "WaitingRoom": "Biðstofa"
+        "WaitingRoom": "Biðstofa",
+        "LiveRoom": "Live herbergi",
+        "interviewedByAnotherHost": "Eins og er er í viðtali við annan gestgjafa",
+        "bringToLive": "Komdu með í lifandi sýningu",
+        "putOnHold": "Setja á bið",
+        "endCall": "Ljúka símtali",
+        "interview": "Viðtal",
+        "markApproved": "Mark samþykkt"
     }
 }

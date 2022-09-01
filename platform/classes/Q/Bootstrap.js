@@ -69,7 +69,9 @@ Bootstrap.configure = function (callback, reload) {
 				if (reload) {
 					callback && callback(params[k][0]);
 					return;
-				} else throw params[k][0];
+				} else {
+					throw params[k][0];
+				}
 			}
 		}
 		var app_merged = params.app_merged[1];
@@ -200,7 +202,8 @@ Bootstrap.configure = function (callback, reload) {
 	var app_merged = new Q.Tree();
 	app_merged.load([
 		Q.app.CONFIG_DIR+'/app.json',
-		Q.app.LOCAL_DIR+'/app.json'
+		Q.app.LOCAL_DIR+'/app.json',
+		Q.app.LOCAL_DIR+'/app.json.php'
 	], p.fill('app_merged'));
 };
 

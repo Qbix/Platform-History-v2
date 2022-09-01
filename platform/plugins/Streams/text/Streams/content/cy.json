@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "rheoli eich tanysgrifiadau e-bost",
         "IfUnsubscribe": "Os ydych am ddad-danysgrifio",
         "*": "Anfon neges at {{& message.fields.type}} i {{& stream.fields.title}}",
-        "Streams\/chat\/message": "Dywedodd {{&call 'avatar.displayName'}}: {{& message.content}}",
+        "Streams\/chat\/message": "💬 Dywedodd {{&call 'avatar.displayName'}}: {{& message.content}}",
         "Streams\/changed": "Newidiadau yn {{stream.fields.title}}",
         "Streams\/invite": "Fe&#39;ch gwahoddwyd i {{& stream.fields.title}}",
         "Streams\/announcement": "Cyhoeddiad yn {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "Ebost",
             "byText": "Testun",
             "byFacebook": "Facebook",
-            "byTwitter": "Trydar"
+            "byTwitter": "Trydar",
+            "title2": "Gwahodd Pobl",
+            "chooseMethod": "Dewiswch ddull:",
+            "selectContacts": "Dewiswch Cysylltiadau",
+            "scanQRCode": "Sganiwch y Cod QR",
+            "shareLink": "Rhannwch ddolen",
+            "chooseFromRegistered": "Dewiswch o blith defnyddwyr cofrestredig",
+            "inviteViaEmailOrSms": "Gwahodd trwy e-bost neu SMS"
         },
         "email": {
             "subject": "Hei, edrychwch ar hyn",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Rydych chi wedi cael gwahoddiad. {{ClickOrTap}} yma i dderbyn ac ymuno."
-        }
+        },
+        "Invite": "Gwahodd",
+        "Share": "Rhannu"
     },
     "messages": {
         "html": {
@@ -156,7 +165,7 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Nid oes gennych ganiatâd i ymuno â&#39;r ffrwd hon.",
-        "streamTitle": "Dechreuodd {{1}} alwad fyw",
+        "streamTitle": "Dechreuodd {{1}} Telegynhadledd",
         "allow": {
             "dialogTitle": "Cysylltu",
             "microphoneBtn": "Galluogi Meicroffon",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Dolen wedi&#39;i chopïo i&#39;r clipfwrdd",
             "codeCopiedToCb": "Cod wedi&#39;i gopïo i&#39;r clipfwrdd",
             "userHasNoVideo": "Nid oes gan y cyfranogwr unrhyw fideo",
-            "openInBrowserAlert": "Agorwch y ddolen ym mhorwr Safari i ymuno â&#39;r gynhadledd."
+            "openInBrowserAlert": "Agorwch y ddolen ym mhorwr Safari i ymuno â&#39;r gynhadledd.",
+            "allowedVideoLimit": "Dim ond {{limit}} fideo a ganiateir yn yr ystafell hon",
+            "allowedAudioLimit": "Dim ond {{limit}} meicroffon a ganiateir yn yr ystafell hon"
         },
         "settingsPopup": {
             "dialogTitle": "Gosodiadau Fideo",
@@ -243,7 +254,7 @@
             "stop": "Stopio",
             "recordingInProgress": "Mae recordio ar y gweill...",
             "fbLiveTitle": "Teitl Livestream",
-            "fbLiveDescription": "Disgrifiwch eich Livestream. Am beth mae o?",
+            "fbLiveDescription": "Disgrifiwch eich Livestream. Am beth mae&#39;n sôn?",
             "fbOnlyMeLiveAccess": "Dim ond fi",
             "fbFriendsAccess": "Ffrindiau",
             "fbPublicAccess": "Cyhoeddus",
@@ -256,7 +267,8 @@
             "copy": "Copi",
             "streamToRTMP": "Ffrydio i RTMP personol",
             "startBroadcasting": "Dechrau darlledu",
-            "broadcastingInProgress": "Mae darlledu ar y gweill"
+            "broadcastingInProgress": "Mae darlledu ar y gweill",
+            "manageStream": "Rheoli Livestream"
         },
         "audioSettings": {
             "dialogTitle": "Gosodiadau Sain",
@@ -284,8 +296,8 @@
             "title": "Gosodiadau Ffrydio"
         },
         "preview": {
-            "Meeting": "Cyfarfod",
-            "MeetingEnded": "Daeth y cyfarfod i ben"
+            "Meeting": "Telegynhadledd",
+            "MeetingEnded": "Daeth telegynhadledd i ben"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "sgwrs rhwng defnyddwyr, gyda hanes"
         },
         "Streams\/webrtc": {
-            "displayType": "Galwad Amser Real",
+            "displayType": "Galwad Byw",
             "description": "galwad fideo\/sain amser real"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Diweddariad",
         "NoCallsYet": "Dim galwadau eto",
         "CallReasonTitle": "Am beth mae&#39;r alwad hon?",
-        "WaitingRoom": "Ystafell aros"
+        "WaitingRoom": "Ystafell aros",
+        "LiveRoom": "Ystafell Fyw",
+        "interviewedByAnotherHost": "Ar hyn o bryd yn cael ei gyfweld gan westeiwr arall",
+        "bringToLive": "Sioe Dewch I Fyw",
+        "putOnHold": "Rhoi Ar Dal",
+        "endCall": "Galwad Diwedd",
+        "interview": "Cyfweliad",
+        "markApproved": "Marc wedi&#39;i Gymeradwyo"
     }
 }

@@ -472,18 +472,24 @@ class Q_Response
 	 * @method setMeta
 	 * @static
 	 * @param {array} $params
-	 * @param {string} [$params.attrName=name] Attribute name of the meta tag
-	 * @param {string} $params.attrValue Attribute value of the meta tag
+	 * @param {string} [$params.name=name] Attribute name of the meta tag
+	 * @param {string} $params.value Attribute value of the meta tag
 	 * @param {mixed} [$params.content=null] The content of the meta tag
 	 * @param {string} [$slotName=null]
 	 */
 	static function setMeta($params, $slotName = null)
 	{
+		if (isset($params['attrName'])) { // backward compatibility
+			$params['name'] = $params['attrName'];
+		}
+		if (isset($params['attrValue'])) { // backward compatibility
+			$params['value'] = $params['attrValue'];
+		}
 		$argList = func_get_args();
 		if (count($argList) > 1) { // backward compatibility
 			$params = array(
-				'attrName' => 'name',
-				'attrValue' => Q::ifset($argList, 0, ''),
+				'name' => 'name',
+				'value' => Q::ifset($argList, 0, ''),
 				'content' => Q::ifset($argList, 1, '')
 			);
 		} elseif (isset($params[0]) and is_array($params[0])) {
@@ -496,7 +502,7 @@ class Q_Response
 		}
 
 		$params = array_merge(array(
-			'attrName' => 'name',
+			'name' => 'name',
 			'content' => ''
 		), $params);
 
@@ -506,7 +512,7 @@ class Q_Response
 		}
 		$params['content'] = preg_replace("/\r|\n/", "", strip_tags($params['content']));
 
-		if ($params['attrValue'] == 'og:image') {
+		if ($params['value'] == 'og:image') {
 			$filename = Q_Uri::filenameFromUrl($params['content']);
 			$size = $filename ? getimagesize($filename) : null;
 
@@ -517,15 +523,15 @@ class Q_Response
 
 			if (is_array($size) && !empty($size[0]) && !empty($size[1])) {
 				self::setMeta(array(
-					array('attrName' => 'property', 'attrValue' => 'og:image:width', 'content' => $size[0]),
-					array('attrName' => 'property', 'attrValue' => 'og:image:height', 'content' => $size[1]),
-					array('attrName' => 'property', 'attrValue' => 'og:image:secure_url', 'content' => $params['content']),
-					array('attrName' => 'property', 'attrValue' => 'og:image:type', 'content' => $size['mime'])
+					array('name' => 'property', 'value' => 'og:image:width', 'content' => $size[0]),
+					array('name' => 'property', 'value' => 'og:image:height', 'content' => $size[1]),
+					array('name' => 'property', 'value' => 'og:image:secure_url', 'content' => $params['content']),
+					array('name' => 'property', 'value' => 'og:image:type', 'content' => $size['mime'])
 				));
 			}
 		}
 
-		$key = $params['attrName'].':'.$params['attrValue'];
+		$key = $params['name'].':'.$params['value'];
 		self::$metas[$key] = $params;
 
 		// Now, for the slot
@@ -586,7 +592,7 @@ class Q_Response
 		foreach ($metas as $sn => $m) {
 			foreach ($m as $meta) {
 				$tags[] = Q_Html::tag('meta', array(
-					$meta['attrName'] => $meta['attrValue'],
+					$meta['name'] => $meta['value'],
 					'content' => $meta['content'],
 					'data-slot' => $sn
 				));
@@ -1786,6 +1792,25 @@ class Q_Response
 	}
 
 	/**
+	 * Get the value for a cookie that will be sent to the client.
+	 * This is different than the value of the cookie that was sent
+	 * from the client, which is stored in $_COOKIE[$name].
+	 * Use this for session IDs and other things.
+	 * @method cookie
+	 * @static
+	 * @param {string} $name The name of the cookie
+	 * @return {string} The value of the cookie
+	 */
+	static function cookie($name)
+	{
+		return isset(self::$cookies[$name][0])
+			? self::$cookies[$name][0]
+			: (
+				isset($_COOKIE[$name]) ? $_COOKIE[$name] : null
+			);
+	}
+
+	/**
 	 * @method setCookie
 	 * @static
 	 * @param {string} $name The name of the cookie
@@ -1809,7 +1834,7 @@ class Q_Response
 			return false;
 		}
 		if (isset($_COOKIE[$name]) and $_COOKIE[$name] === $value) {
-			return;
+			return; // it is already set
 		}
 		if (Q_Dispatcher::$startedResponse) {
 			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
@@ -1818,15 +1843,14 @@ class Q_Response
 		if (!isset($path)) {
 			$path = parse_url($baseUrl, PHP_URL_PATH);
 		}
-		if ($domain === null) {
-			// remove any possibly conflicting cookies from .hostname, with same path
-			$host = parse_url($baseUrl, PHP_URL_HOST);
-			$d = (strpos($host, '.') !== false ? '.' : '').$host;
-			self::$cookiesToRemove[$name] = array($path, $d, $secure, $httponly);
-		}
+		// if ($domain === null) {
+		// 	// remove any possibly conflicting cookies from .hostname, with same path
+		// 	$host = parse_url($baseUrl, PHP_URL_HOST);
+		// 	$d = (strpos($host, '.') !== false ? '.' : '').$host;
+		// 	self::$cookiesToRemove[$name] = array($path, $d, $secure, $httponly);
+		// }
 		// see https://bugs.php.net/bug.php?id=38104
 		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly);
-		$_COOKIE[$name] = $value;
 		return $value;
 	}
 	
@@ -1865,7 +1889,7 @@ class Q_Response
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
-			@compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
+			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
 			'after', false, $header
 		);
 		if ($header) {

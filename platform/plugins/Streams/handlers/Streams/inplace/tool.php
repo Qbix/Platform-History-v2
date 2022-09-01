@@ -27,7 +27,7 @@ function Streams_inplace_tool($options)
 		}
 		$publisherId = $options['publisherId'];
 		$streamName = $options['streamName'];
-		$stream = Streams::fetchOne(null, $publisherId, $streamName);
+		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
 			throw new Q_Exception_MissingRow(array(
 				'table' => 'stream',

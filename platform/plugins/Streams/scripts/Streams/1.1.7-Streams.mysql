@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS `{{prefix}}state`;
+CREATE TABLE `{{prefix}}state` (
+  `hash` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'typically this is hexadecimal format',
+  `algorithm` enum('sha1','sha256','sha512','hmac-sha1','hmac-sha256','hmac-sha512') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'sha256' COMMENT 'the HMAC versions should use a secret key not storeed in this table',
+  `insertedTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updatedTime` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `extra` varbinary(1023) DEFAULT '',
+  `URI` varbinary(1023) NOT NULL DEFAULT '' COMMENT 'prefixes can be file:/// or https:// or stream://publisherId/streamName',
+  KEY `hash` (`hash`,`algorithm`),
+  KEY `URI` (`URI`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+COMMENT='information about the latest state of a resource, such as a stream';

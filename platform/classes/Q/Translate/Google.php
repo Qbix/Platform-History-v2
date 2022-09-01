@@ -22,7 +22,9 @@ class   Q_Translate_Google {
 				echo "Processing $fromLang->$toLang".PHP_EOL;
 				$res = $this->translate($fromLang, $toLang, $in, $out);
 			}
-			$this->saveJson($toLang, $res, $jsonFiles);
+			if (isset($res) and is_array($res)) {
+				$this->saveJson($toLang, $res, $jsonFiles);
+			}
 			if (!empty($this->parent->options['in']) && !empty($this->parent->options['out'])) {
 				if (($fromLang == $toLang)
 					&& ($this->parent->options['in'] === $this->parent->options['out'])) {
@@ -133,7 +135,7 @@ class   Q_Translate_Google {
 					$parts = Q_Utils::explodeEscaped('/', $v2);
 					foreach ($parts as $i => $p) {
 						if ($v['key'][$i] !== $p) {
-							break 2;
+							continue 2;
 						}
 					}
 					$doIt = true;
@@ -164,9 +166,14 @@ class   Q_Translate_Google {
 			if (!$response) {
 				throw new Q_Exception ("Bad translation response");
 			}
-			if (!empty($response['error'])) {
-				$more = "Make sure you have Q/translate/google/key specified.";
-				throw new Q_Exception($response['error']['message'] . ' ' . $more);
+			if (!empty($response['error']['message'])) {
+				if (Q::startsWith($response['error']['message'], 'Bad language pair')) {
+					echo "Skipping: " . $response['error']['message'] . PHP_EOL;
+					return false;
+				} else {
+					$more = "Make sure you have Q/translate/google/key specified.";
+					throw new Q_Exception($response['error']['message'] . PHP_EOL . $more);
+				}
 			}
 			$count += sizeof($chunk);
 			echo "Translated " . $count . " queries of " . $toLang . "\n";

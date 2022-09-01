@@ -45,7 +45,9 @@ function Users_after_Q_image_save($params, &$return)
                 $user = Users::fetch($invites[0]->userId);
                 if ($user and $user->icon != $subpath
                     and !Users::isCustomIcon($user->icon)) {
-                    $user->icon = Q_Html::themedUrl("$path/$subpath");
+                    $user->icon = Q_Html::themedUrl("$path/$subpath", array(
+						'baseUrlPlaceholder' => true
+					));
                     $user->save();
                 }
             }
@@ -62,19 +64,22 @@ function Users_after_Q_image_save($params, &$return)
             return;
         }
 
+        $userIdentity = Users_Identify::select()->where(array("userId" => $anotherUserId))->fetchDbRow();
+
         // label can manage icons of other users
         $labelsCanManage = Q_Config::get("Users", "icon", "canManage", array());
 
         // whether logged user assigned as one of $labelsCanManage to $anotherUser
-        $permitted = Users_Contact::select()->where(array(
-            'userId' => $anotherUserId,
-            'label' => $labelsCanManage,
-            'contactUserId' => $user->id
-        ))->fetchDbRows();
+		$permitted = (bool)Users::roles($anotherUserId, $labelsCanManage, array(), $user->id);
+		if (!$permitted && $userIdentity->state == "future") {
+			$permitted = (bool)Users::roles($anotherUserId, array("Streams/invitedMe"), array(), $user->id);
+		}
 
         if ($permitted) {
             if ($anotherUser->icon != $subpath) {
-                $anotherUser->icon = Q_Html::themedUrl("$path/$subpath");
+                $anotherUser->icon = Q_Html::themedUrl("$path/$subpath", array(
+					'baseUrlPlaceholder' => true
+				));
                 $anotherUser->save(); // triggers any registered hooks
                 Users::$cache['iconUrlWasChanged'] = true;
             } else {

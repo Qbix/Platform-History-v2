@@ -29,7 +29,7 @@
 .Q_listing li:first-child { border-top: none !important; }
 .Q_listing li:last-child { border-bottom: none; }
 .Q_listing li .Q_listing_item_text { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.Q_contextual { position: fixed; z-index: 10000; transform: translateZ(100em); -webkit-transform: translateZ(100em); display: none; top: 0; left: 0; width: 250px; padding: 7px; background-color: black; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; box-shadow: black 0 0 4px; -webkit-box-shadow: black 0 0 4px; -moz-box-shadow: black 0 0 4px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; filter: none !important; }
+.Q_contextual { position: fixed; z-index: 10000; transform: translateZ(100em); -webkit-transform: translateZ(100em); display: none; top: 0; left: 0; min-width: 250px; max-width: 90vw; padding: 7px; background-color: black; border-radius: 5px 5px 5px 5px; -moz-border-radius: 5px 5px 5px 5px; -webkit-border-radius: 5px 5px 5px 5px; box-shadow: black 0 0 4px; -webkit-box-shadow: black 0 0 4px; -moz-box-shadow: black 0 0 4px; -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; -o-user-select: none; user-select: none; filter: none !important; }
 
 .Q_contextual_preview
 {
@@ -68,13 +68,13 @@
 .Q_selectable_listing .Q_current
 {
 	background: #eee;
-	background: -moz-linear-gradient(top,  #aaa 0%, #eee 100%);
+	background: -moz-linear-gradient(top,  #aae 0%, #eee 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#aaa), color-stop(100%,#eee));
-	background: -webkit-linear-gradient(top,  #aaa 0%,#eee 100%);
-	background: -o-linear-gradient(top,  #aaa 0%,#eee 100%);
-	background: -ms-linear-gradient(top,  #aaa 0%,#eee 100%);
-	background: linear-gradient(top,  #aaa 0%,#eee 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaaa', endColorstr='#eeeeee',GradientType=0 );
+	background: -webkit-linear-gradient(top,  #aae 0%,#eee 100%);
+	background: -o-linear-gradient(top,  #aae 0%,#eee 100%);
+	background: -ms-linear-gradient(top,  #aae 0%,#eee 100%);
+	background: linear-gradient(top,  #aae 0%,#eee 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaee', endColorstr='#eeeeee',GradientType=0 );
 	border-top: solid 1px #999;
 	box-sizing: border-box;
 }
@@ -82,7 +82,7 @@
 .Q_contextual .Q_listing .Q_current *,
 .Q_selectable_listing .Q_current * {
 	color: black;
-	font-weight: 400;
+	font-weight: bold;
 	text-shadow: #ccc 0 1px 0;
 }
 

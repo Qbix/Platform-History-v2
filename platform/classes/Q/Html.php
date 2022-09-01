@@ -1447,7 +1447,6 @@ class Q_Html
 		}
 
 		if (!empty($options['baseUrlPlaceholder'])) {
-			$baseUrl = Q_Request::baseUrl();
 			if (Q::startsWith($url, $baseUrl)) {
 				$url = '{{baseUrl}}' . substr($url, strlen($baseUrl));
 			}

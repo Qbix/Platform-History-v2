@@ -76,7 +76,7 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		$userId = $user->id;
 		$streamName = 'Assets/user/credits';
-		$stream = Streams::fetchOne($asUserId, $userId, $streamName, "*", array("refetch" => true));
+		$stream = Streams_Stream::fetch($asUserId, $userId, $streamName, "*", array("refetch" => true));
 		if (!$stream) {
 			$stream = Streams::create($userId, $userId, 'Assets/credits', array(
 				'name' => 'Assets/user/credits',
@@ -473,14 +473,14 @@ class Assets_Credits extends Base_Assets_Credits
 		unset($more['toStreamName']);
 
 		if ($toPublisherId && $toStreamName) {
-			$more['toStreamTitle'] = Streams::fetchOne($toPublisherId, $toPublisherId, $toStreamName)->title;
+			$more['toStreamTitle'] = Streams_Stream::fetch($toPublisherId, $toPublisherId, $toStreamName)->title;
 			$more['toUserName'] = Users::fetch($toPublisherId, true)->displayName();
 		} elseif ($toUserId) {
 			$more['toUserName'] = Users::fetch($toUserId, true)->displayName();
 		}
 
 		if ($fromPublisherId && $fromStreamName) {
-			$more['fromStreamTitle'] = Streams::fetchOne($fromPublisherId, $fromPublisherId, $fromStreamName, true)->title;
+			$more['fromStreamTitle'] = Streams_Stream::fetch($fromPublisherId, $fromPublisherId, $fromStreamName, true)->title;
 		}
 
 		$assets_credits = new Assets_Credits();

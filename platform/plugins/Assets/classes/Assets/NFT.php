@@ -29,7 +29,7 @@ class Assets_NFT
 			));
 		}
 
-		$stream = Streams::fetchOne($publisherId, $publisherId, self::$categoryStreamName);
+		$stream = Streams_Stream::fetch($publisherId, $publisherId, self::$categoryStreamName);
 		if (!$stream) {
 			$stream = Streams::create(null, $publisherId, 'Streams/category', array('name' => self::$categoryStreamName));
 		}
@@ -54,7 +54,7 @@ class Assets_NFT
 		$publisherId = $publisherId ?: Users::loggedInUser(true)->id;
 		if ($category) {
 			if (!($category instanceof Streams_Stream)) {
-				$category = Streams::fetchOne(null, $category["publisherId"], $category["streamName"], true);
+				$category = Streams_Stream::fetch(null, $category["publisherId"], $category["streamName"], true);
 			}
 		} else {
 			$category = self::category($publisherId);
@@ -101,6 +101,11 @@ class Assets_NFT
 		}
 		$stream->title = $title;
 		$stream->content = Q::ifset($fields, "content", null);
+
+		$icon = Q::ifset($fields, "icon", null);
+		if ($icon) {
+			$stream->icon = $icon;
+		}
 
 		// update Assets/NFT/attributes attribute
 		$newNFTattributes = Q::ifset($fields, "attributes", "Assets/NFT/attributes", array());
@@ -149,10 +154,10 @@ class Assets_NFT
 		Streams::relate($userId, $stream->publisherId, self::$categoryStreamName, self::$relationType, $stream->publisherId, $stream->name, array("weight" => time()));
 
 		//$onMarketPlace = Q::ifset($fields, "attributes", "onMarketPlace", null);
-		//if ($onMarketPlace == "true") {
+		//if (filter_var($onMarketPlace, FILTER_VALIDATE_BOOLEAN)) {
 		// relate to main category
 		Streams::relate(null, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name, array("weight" => time()));
-		//} elseif ($onMarketPlace == "false") {
+		//} else {
 		// unrelate from main category
 		//	Streams::unrelate($userId, $communityId, "Assets/NFTs", "NFT", $stream->publisherId, $stream->name);
 		//}
@@ -268,8 +273,8 @@ class Assets_NFT
 			return Q::json_decode($cache->result, true);
 		}
 
-		$response = self::fetchMetadata($tokenURI);
-		$cache->result = $response;
+		$response = self::fetchMetadata(Q_Uri::interpolateUrl($tokenURI));
+		$cache->result = gettype($response) == "string" ? $response : Q::json_encode($response);
 		$cache->save();
 
 		return Q::json_decode($response, true);
@@ -298,7 +303,7 @@ class Assets_NFT
 			CURLOPT_SSL_VERIFYHOST => false
 		));
 
-		$cache->result = $response;
+		$cache->result = gettype($response) == "string" ? $response : Q::json_encode($response);
 		$cache->save();
 
 		return $response;

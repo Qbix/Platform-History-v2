@@ -42,7 +42,7 @@
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} va dir: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} va dir: {{& message.content}}",
         "Streams\/changed": "Canvis a {{stream.fields.title}}",
         "Streams\/invite": "T&#39;han convidat a {{& stream.fields.title}}",
         "Streams\/announcement": "Anunci a {{& stream.fields.title}}",
@@ -86,7 +86,14 @@
             "scannedQR": "{{ClickOrTap}} si el codi s&#39;ha escanejat",
             "copyLink": "{{ClickOrTap}} per copiar l&#39;enllaç d&#39;invitació",
             "userChooserPlaceholder": "Cerca per nom",
-            "shareOrCopyLink": "{{ClickOrTap}} per compartir o copiar l&#39;enllaç d&#39;invitació"
+            "shareOrCopyLink": "{{ClickOrTap}} per compartir o copiar l&#39;enllaç d&#39;invitació",
+            "title2": "Convida gent",
+            "chooseMethod": "Trieu un mètode:",
+            "selectContacts": "Seleccioneu Contactes",
+            "scanQRCode": "Escaneja el codi QR",
+            "shareLink": "Comparteix un enllaç",
+            "chooseFromRegistered": "Trieu entre els usuaris registrats",
+            "inviteViaEmailOrSms": "Convida per correu electrònic o SMS"
         },
         "email": {
             "subject": "Ei, comproveu això",
@@ -104,7 +111,9 @@
             "text": "Has estat convidat. {{ClickOrTap}} aquí per acceptar i unir-se."
         },
         "youCanNowPaste": "Ara pots enganxar aquest enllaç en algun lloc per convidar persones",
-        "command": "Convidar"
+        "command": "Convidar",
+        "Invite": "Convidar",
+        "Share": "Compartir"
     },
     "followup": {
         "mobile": {
@@ -194,7 +203,9 @@
             "sbStartedLiveStreaming": "{{userName}} va començar en directe",
             "sbStoppedLiveStreaming": "{{userName}} ha acabat en directe",
             "liveStopped": "S&#39;ha produït un error en enviar el vídeo al punt final",
-            "forceDisconnectingImmediately": "Un amfitrió t&#39;ha desconnectat"
+            "forceDisconnectingImmediately": "Un amfitrió t&#39;ha desconnectat",
+            "allowedVideoLimit": "Només es permet {{limit}} vídeo en aquesta sala",
+            "allowedAudioLimit": "Només es permeten {{limit}} micròfons en aquesta sala"
         },
         "settingsPopup": {
             "webCamera": "Càmera web",
@@ -228,7 +239,8 @@
             "streamToRTMP": "Transmet a RTMP personalitzat",
             "dialogTitle": "Configuració de vídeo",
             "startBroadcasting": "Comença a emetre",
-            "broadcastingInProgress": "L&#39;emissió està en curs"
+            "broadcastingInProgress": "L&#39;emissió està en curs",
+            "manageStream": "Gestiona la transmissió en directe"
         },
         "participantsPopup": {
             "disconnect": "Desconnecta",
@@ -248,11 +260,11 @@
             "dialogTitle": "Configuració dels participants"
         },
         "notAllowedToJoinCall": "No tens permís per unir-te a aquest flux.",
-        "streamTitle": "{{1}} va iniciar una trucada en directe",
+        "streamTitle": "{{1}} va iniciar una teleconferència",
         "preview": {
             "preamble": "Reunió:",
-            "Meeting": "Reunió",
-            "MeetingEnded": "La reunió va acabar"
+            "Meeting": "Teleconferència",
+            "MeetingEnded": "S&#39;ha acabat la teleconferència"
         },
         "preparing": {
             "micIsOff": "El micròfon està apagat",
@@ -370,7 +382,7 @@
             "description": "una conversa entre usuaris, amb història"
         },
         "Streams\/webrtc": {
-            "displayType": "Trucada en temps real",
+            "displayType": "Trucada en directe",
             "description": "una trucada de vídeo\/àudio en temps real"
         },
         "Streams\/tasks": {
@@ -533,6 +545,13 @@
         "Update": "Actualització",
         "NoCallsYet": "Encara no hi ha trucades",
         "CallReasonTitle": "De què tracta aquesta trucada?",
-        "WaitingRoom": "Sala d&#39;espera"
+        "WaitingRoom": "Sala d&#39;espera",
+        "LiveRoom": "Sala en viu",
+        "interviewedByAnotherHost": "Actualment està entrevistat per un altre amfitrió",
+        "bringToLive": "Espectacle Bring To Live",
+        "putOnHold": "Posar en espera",
+        "endCall": "Finalitzar la trucada",
+        "interview": "Entrevista",
+        "markApproved": "Marcar aprovat"
     }
 }

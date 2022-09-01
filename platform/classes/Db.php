@@ -45,7 +45,7 @@ interface Db_Interface
 	 * This modifies how we connect to the database.
 	 * @return {PDO} The PDO object for connection
 	 */
-	function reallyConnect($shardName = null);
+	function reallyConnect($shardName = null, &$shardInfo = null);
 	
 	/**
 	 * If connected, sets the timezone in the database to match the one in PHP.

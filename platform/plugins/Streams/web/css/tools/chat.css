@@ -157,6 +157,7 @@
 }
 .Streams_chat_addons .Streams_chat_addon_icon,
 .Streams_chat_addons .Streams_chat_addon_icon img {
+	margin-right: 10px;
 	width: 40px;
 }
 .Streams_chat_addons .Streams_chat_subscription .Streams_chat_addon_icon img {
@@ -249,6 +250,9 @@
 }
 .Streams_chat_item.Streams_chat_message_skipOverflowed .Streams_chat_message_content {
 	display: block;
+}
+.Streams_chat_item .Streams_chat_message_content .Streams_preview_tool .Streams_preview_container.Streams_preview_view {
+	white-space: unset;
 }
 .Streams_chat_noMessages {
 	color: gray;

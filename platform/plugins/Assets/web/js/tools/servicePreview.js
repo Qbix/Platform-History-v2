@@ -192,7 +192,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 		}
 
 		Q.Dialogs.push({
-			title: Q.getObject("services.NewServiceTemplate.Title", tool.text) || "New Service Template",
+			title: Q.getObject("services." + (tool.stream ? "Edit" : "New") + "ServiceTemplate.Title", tool.text) || "New Service",
 			template: {
 				name: "Assets/service/composer",
 				fields: Q.extend({

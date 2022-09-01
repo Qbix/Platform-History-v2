@@ -255,15 +255,33 @@
 				{
 					var latestId = Q.Contextual.collection.length - 1;
 					var latest = Q.Contextual.collection[latestId];
+					latest.trigger.on('click.Q_contextual', function () {
+						var $this = $(this);
+						$this.data('Q/contextual clickedTriggerAndDidntLeave', true);
+						var tmt = setTimeout(function () {
+							$(document.body).on('mousemove.Q_contextual', function (e) {
+								var element = Q.Pointer.elementFromPoint(
+									Q.Pointer.getX(e), Q.Pointer.getY(e)
+								);
+								if (!latest.trigger[0].contains(element)) {
+									$this.data('Q/contextual clickedTriggerAndDidntLeave', false);
+									$this.off('mousemove.Q_contextual');
+									clearTimeout(tmt);
+								}
+							});
+						});
+					});
 					latest.trigger.bind('mouseenter.Q_contextual', function()
 					{
-						if (Q.Contextual.current !== -1)
-							Q.Contextual.hide();
-				 
-						if (!Q.Contextual.triggeringDisabled)
-						{
-							Q.Contextual.current = latestId;
-							Q.Contextual.show();
+						if (!latest.trigger.data('Q/contextual clickedTriggerAndDidntLeave')){
+							if (Q.Contextual.current !== -1)
+								Q.Contextual.hide();
+					
+							if (!Q.Contextual.triggeringDisabled)
+							{
+								Q.Contextual.current = latestId;
+								Q.Contextual.show();
+							}
 						}
 					});
 				})();
@@ -420,7 +438,15 @@
 						Q.Contextual.hide();
 					}
 				};
+				Q.Contextual.leaveEventHandler = function (e) {
+					if (e.target.className.split(' ').indexOf('Q_contextual') >= 0) {
+						if (!e.target.contains(e.relatedTarget)) {
+							Q.Contextual.hide();
+						}
+					}
+				};
 				$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);
+				$(document.body).on('mouseout', Q.Contextual.leaveEventHandler);
 			
 				Q.Contextual.endEventHandler = function(e)
 				{

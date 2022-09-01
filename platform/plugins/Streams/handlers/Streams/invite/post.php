@@ -33,11 +33,11 @@ function Streams_invite_post()
 	
 	$r = Q::take($_REQUEST, array(
 		'readLevel', 'writeLevel', 'adminLevel', 'permissions',
-		'addLabel', 'addMyLabel', 'appUrl', 'alwaysSend',
+		'addLabel', 'addMyLabel', 'appUrl', 'alwaysSend', 'name', 'icon',
 		'userId', 'xid', 'platform', 'label', 'identifier', 'token'
 	));
 
-	$stream = Streams::fetchOne(null, $publisherId, $streamName, true);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName, true);
 	Streams::$cache['invite'] = $data = Streams::invite($publisherId, $streamName, $r, $r);
 	
 	// do not give the clients an easy to way to find userIds by identifiers and xids

@@ -402,7 +402,14 @@
 						Q.Contextual.hide();
 					}
 				};
+				Q.Contextual.leaveEventHandler = function (e) {
+					var className = e.target.className;
+					if (typeof className === "string" && className.split(' ').indexOf('Q_contextual') >= 0) {
+						Q.Contextual.hide();
+					}
+				};
 				$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);
+				$(document.body).on('mouseout', Q.Contextual.leaveEventHandler);
 			
 				Q.Contextual.endEventHandler = function(e)
 				{
@@ -760,8 +767,6 @@
 			listingWrapper.plugin('Q/scroller', 'remove');
 			listingWrapper.plugin('Q/iScroll', 'remove');
 			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/iScroll', 'remove');
-			listingWrapper.plugin('Q/touchscroll', 'remove');
-			listingWrapper.children('.Q_scroller_wrapper').plugin('Q/touchscroll', 'remove');
 			listingWrapper.css({ 'max-height': '' });
 
 			var fadeTime = contextual.data("fadeTime") || Q.Contextual.fadeTime;

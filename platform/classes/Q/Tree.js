@@ -58,11 +58,22 @@ module.exports = function (linked) {
 		});
 		for (var i=0; i<filenames.length; ++i) {
 			(function (i) {
+				var isPHP = (filenames[i].substr(-4).toLowerCase() === '.php');
 				fs.readFile(filenames[i].replace('/', Q.DS), 'utf-8', function (err, data) {
 					if (err) {
-						callback && callback.call(that, err);
+						if (err.code == 'ENOENT') {
+							p.fill(filenames[i])(null); // just keep going
+						} else {
+							callback && callback.call(that, err);
+						}
 					} else {
 						try {
+							if (isPHP) {
+								data = data.substring(
+									data.indexOf("\n") + 1,
+									data.lastIndexOf("\n")
+								);
+							}
 							data = data.replace(/\s*(?!<")\/\*[^\*]+\*\/(?!")\s*/gi, '');
 							data = JSON.parse(data);
 						} catch (e) {

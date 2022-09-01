@@ -556,9 +556,13 @@
 						$overflow.addClass(values.classes); // copy its style
 					}
 					if (state.overflow.glyph) {
-						$('<span class="Q_tabs_overflowGlyph" />')
-						.html(state.overflow.glyph.interpolate(values))
-						.appendTo($overflow);
+						var $glyph = $('<span class="Q_tabs_overflowGlyph" />')
+						.html(state.overflow.glyph.interpolate(values));
+						if (Q.info.isMobile) {
+							$overflow.append($glyph);
+						} else {
+							$overflow.prepend($glyph);
+						}
 					}
 					$lastVisibleTab = $tabs.eq(index);
 					var oneLess = !!state.compact;

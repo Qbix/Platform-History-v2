@@ -107,7 +107,7 @@ class Streams_Message extends Base_Streams_Message
 	 *  or arrays containing all the fields of messages that will need to be posted.
 	 * @param {booleam} $skipAccess=false
 	 *  If true, skips the access checks and just posts the message.
-	 * @return {array}
+	 * @return {array|null}
 	 *  Returns an array(array(Streams_Message), array(Streams_Stream))
 	 */
 	static function postMessages(

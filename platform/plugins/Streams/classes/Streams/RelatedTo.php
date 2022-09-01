@@ -121,7 +121,6 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 			);
 			$result = array_merge($result, $relations);
 		}
-		uasort($result, array('Streams_RelatedTo', '_compareByWeight'));
 		return $result;
 	}
 
@@ -137,6 +136,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	 * @param {Streams_Stream} $stream
 	 * @param {string} [$consumedAttribute] name of attribute holding the highest weight of already-consumed related streams, if any
 	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @return {integer} Returns the weight of the relation to the category where the stream was inserted
 	 */
 	static function insertRandomly(
 		$category,
@@ -163,26 +163,27 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 				: 0;
 		}
 		$weight = $total + 1;
-		list($relations, $relatedStreams) = $category->related($category->publisherId, true, array(
-			$relationType,
-			'orderBy' => 'RAND()',
+		$relations = $category->related($category->publisherId, true, array(
+			'type' => $relationType,
+			'orderBy' => 'random',
 			'limit' => 1,
 			'where' => array(
 				'weight >' => $consumedWeight
-			)
+			),
+			'relationsOnly' => true
 		));
 		$r = reset($relations);
-		$rs = reset($relatedStreams);
-		if ($rs) {
+		if ($r and $r->fromStreamName) {
 			// swap weights with a previous relation
 			Streams::updateRelation(
 				$category->publisherId,
 				$category->publisherId,
 				$category->name,
 				$relationType,
-				$rs->publisherId,
-				$rs->name,
-				$weight
+				$r->fromPublisherId,
+				$r->fromStreamName,
+				$weight,
+				0
 			);
 			$stream->relateTo(
 				$category, 
@@ -192,6 +193,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 					'weight' => $r->weight
 				)
 			);
+			$resultingWeight = $r->weight;
 		} else {
 			// just insert a new relation
 			$stream->relateTo(
@@ -202,9 +204,97 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 					'weight' => $weight
 				)
 			);
+			$resultingWeight = $weight;
 		}
 		$category->setAttribute($totalAttribute, $weight);
 		$category->save(); // we added another randomized relation
+		return $resultingWeight;
+	}
+
+	/**
+	 * Call this function to unrelate a stream whose weight was inserted
+	 * randomly among other weights, and update the relation with the largest
+	 * weight into having this weight instead.
+	 * If all items were inserted using insertRandomly() then the relations
+	 * will continue to be sorted randomly by weight.
+	 * You should typically call this on relations that were not already
+	 * consumed, meaning their weight is higher than $consumedAttribute's value.
+	 * Note that if you call this function on a relation that was already
+	 * consumed, the relation whose weight replaces it will be considered "consumed"
+	 * in its place, even though it was not. In any case, we are reducing by 1 the
+	 * eventual number of streams that will be marked as consumed.
+	 * @method removeInsertedRandomly
+	 * @static
+	 * @param {Streams_Stream} $category
+	 * @param {string} $relationType
+	 * @param {Streams_Stream} $stream
+	 * @param {string} [$consumedAttribute] name of attribute holding the highest weight of already-consumed related streams, if any
+	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @return {boolean} whether it was removed
+	 */
+	static function removeInsertedRandomly(
+		$category,
+		$relationType,
+		$stream,
+		$consumedAttribute = null,
+		$totalAttribute = null
+	) {
+		$rt = (new Streams_RelatedTo(array(
+			'toPublisherId' => $category->publisherId,
+			'toStreamName' => $category->name,
+			'type' => $relationType,
+			'fromPublisherId' => $stream->publisherId,
+			'fromStreamName' => $stream->name
+		)))->retrieve();
+		if (!$rt) {
+			return false; // nothing to remove
+		}
+		$consumedWeight = $consumedAttribute
+			? $category->getAttribute($consumedAttribute, 0)
+			: 0;
+		// remove current relation
+		list($relatedTo, $relatedFrom) = $stream->unrelateTo($category, $relationType, $category->publisherId);
+		if ($totalAttribute) {
+			$total = $category->getAttribute($totalAttribute, 0);
+		} else {
+			$rtt = new Streams_RelatedToTotal(array(
+				'toPublisherId' => $category->publisherId,
+				'toStreamName' => $category->name,
+				'relationType' => $relationType,
+				'fromStreamType' => $stream->type
+			));
+			$total = $rtt->retrieve()
+				? $rtt->relationCount
+				: 0;
+		}
+		$relatedStreams = $category->related(
+			$category->publisherId, true,
+			array(
+				$relationType,
+				'ignoreCache' => true,
+				'limit' => 1,
+				'max' => $total,
+				'orderBy' => false,
+				'streamsOnly' => true
+			)
+		);
+		$rs = reset($relatedStreams);
+		if ($rs) {
+			// fill weight hole with relation that has largest weight
+			Streams::updateRelation(
+				$category->publisherId,
+				$category->publisherId,
+				$category->name,
+				$relationType,
+				$rs->publisherId,
+				$rs->name,
+				$relatedTo->weight,
+				0
+			);
+		}
+		$category->setAttribute($totalAttribute, $total - 1);
+		$category->save(); // we added another randomized relation
+		return $rt;
 	}
 
 	/**
@@ -216,6 +306,7 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 	 * @param {string} $relationType
 	 * @param {string} $consumedAttribute name of attribute holding the highest weight of already-consumed related streams, if any
 	 * @param {string} [$totalAttribute] name of attribute holding total number of related streams. By default, uses the Streams_RelatedToTotal for that stream type
+	 * @param {string} [$maxAttribute] name of attribute holding max number of related streams allowed to consume.
 	 * @return {Streams_Stream|null} The related stream, or null
 	 * @throw {Q_Exception_MissingObject} 
 	 */
@@ -223,43 +314,44 @@ class Streams_RelatedTo extends Base_Streams_RelatedTo
 		$category,
 		$relationType,
 		$consumedAttribute,
-		$totalAttribute = null)
+		$totalAttribute = null,
+		$maxAttribute = null)
 	{
-		$consumed = $category->getAttribute($consumedAttribute, 0);
-		$weight = $consumed + 1;
+		$consumedWeight = $category->getAttribute($consumedAttribute, 0);
 		if ($totalAttribute) {
 			$total = $category->getAttribute($totalAttribute, 0);
-			if ($weight > $total) {
-				return false;
+			if ($consumedWeight + 1 > $total) {
+				return false; // there are no more to consume
 			}
 		}
-		$streams = Streams::related(
+		if ($maxAttribute) {
+			$max = $category->getAttribute($maxAttribute, null);
+			if ($max !== null and $consumedWeight + 1 > $max) {
+				return false; // there are no more to consume
+			}
+		}
+		list($relations, $streams, $stream) = Streams::related(
 			Q::ifset($options, 'asUserId', null),
 			$category->publisherId,
 			$category->name,
 			true,
 			array(
-				'weight' => $weight,
+				'weight' => new Db_Range($consumedWeight, false, true, null),
+				'orderBy' => true,
 				'limit' => 1,
-				'streamsOnly' => true,
 				'type' => $relationType
 			)
 		);
-		if (!$streams) {
+		$stream = reset($streams);
+		if (!$stream) {
 			return null;
 		}
-		$category->setAttribute($consumedAttribute, $weight);
+		$relation = reset($relations);
+		$category->setAttribute($consumedAttribute, $relation->weight);
 		$category->save();
 		return reset($streams);
 	}
 	
-	static function _compareByWeight($a, $b)
-	{
-		return ($a->weight !== $b->weight)
-			? ($a->weight > $b->weight ? 1 : -1)
-			: 0;
-	}
-
 	/**
 	 * Implements the __set_state method, so it can work with
 	 * with var_export and be re-imported successfully.

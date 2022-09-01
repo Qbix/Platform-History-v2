@@ -641,6 +641,7 @@ Q.batcher.options = {
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
+ * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
@@ -670,6 +671,9 @@ Q.getter = function _Q_getter(original, options) {
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
+			if (!gw.cacheErrorMessages && Q.firstErrorMessage(params[0], params[1])) {
+				ret.dontCache = true;
+			}
 			if (gw.prepare) {
 				gw.prepare.call(gw, subject, params, _result, arguments2);
 			} else {
@@ -1225,7 +1229,7 @@ Q.Cache.prototype.set = function _Q_Cache_prototype_set(key, cbpos, subject, par
 /**
  * Accesses the cache and gets an entry from it
  * @method get
- * @param {String} key
+ * @param {String|Array} key
  * @param {Object} options supports the following options:
  * @param {boolean} [options.dontTouch=false] if true, then doesn't mark item as most recently used
  * @return {mixed} whatever is stored there, or else returns undefined
@@ -1282,8 +1286,8 @@ Q.Cache.prototype.remove = function _Q_Cache_prototype_remove(key) {
 			var obj = this.special[k] || {};
 			if (key in obj) {
 				delete obj[key];
+				this.special[k] = obj;
 			}
-			this.special[k] = obj;
 		}
 	}
 	return true;
@@ -1304,7 +1308,7 @@ Q.Cache.prototype.clear = function _Q_Cache_prototype_clear(key) {
  * @param {Array} args An array consisting of some or all the arguments that form the key
  * @param {Function} callback Is passed two parameters: key, value, with this = the cache
  * @param {Object} [options]
- * @param {Boolean} [options.evenIfNoIndex] pass true to suppress an exception that would be thrown if an index doesn't exist
+ * @param {Boolean} [options.throwIfNoIndex] pass true to trigger an exception if an index doesn't exist
  */
 Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, options) {
 	var cache = this;
@@ -1330,7 +1334,9 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 			if (result === undefined) {
 				continue;
 			}
-			callback.call(this, k, this.get(k));
+			if (false === callback.call(this, k, this.get(k))) {
+				continue;
+			}
 		}
 		// also the key itself
 		var item = this.special[rawKey];
@@ -1340,7 +1346,7 @@ Q.Cache.prototype.each = function _Q_Cache_prototype_clear(args, callback, optio
 		return;
 	}
 	// key doesn't exist
-	if (!options.evenIfNoIndex) {
+	if (!options.throwIfNoIndex) {
 		throw new Q.Exception('Cache.prototype.each: no index for ' + this.name + ' ' + localStorageIndexInfoKey);
 	}
 	return Q.each(this.data, function (k, v) {
@@ -3563,8 +3569,19 @@ Sp.matchTypes = function (types) {
 };
 
 Sp.matchTypes.adapters = {
-	url: function () {
-		return this.match(/(?:(?:https?|ftp):\/\/)?[\w/\-?=%.]+\.[\w/\-?=%.]+/gi) || [];
+	url: function (options) {
+		var parts = this.split(' ');
+		var res = [];
+		var regexp = (options && options.requireScheme)
+			? /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim
+			: /^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?(localhost|[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,50}|[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3})(:[0-9]{1,5})?([\/|\?].*)?$/gim;
+		for (var i=0; i<parts.length; i++) {
+			if (!parts[i].match(regexp)) {
+				continue;
+			}
+			res.push(parts[i]);
+		}
+		return res;
 	},
 	email: function () {
 		return this.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9._-]+)/gi) || [];

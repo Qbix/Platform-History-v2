@@ -27,7 +27,7 @@ function Assets_NFT_put ($params) {
 	}
 
 	//$stream = Assets_NFT::getComposerStream($publisherId);
-	$stream = Streams::fetchOne(null, $publisherId, $streamName);
+	$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 	$fields = Q::take($request, array("title", "content", "attributes"));
 	Assets_NFT::updateNFT($stream, $fields);
 

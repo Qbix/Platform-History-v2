@@ -45,7 +45,7 @@
         "ManageEmailSubscriptions": "tvarkyti savo el. pašto prenumeratas",
         "IfUnsubscribe": "Jei norite atsisakyti prenumeratos",
         "*": "Siųsti pranešimą {{& message.fields.type}} adresu {{& stream.fields.title}}",
-        "Streams\/chat\/message": "{{&call 'avatar.displayName'}} pasakė: {{& message.content}}",
+        "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} pasakė: {{& message.content}}",
         "Streams\/changed": "Pakeitimai {{stream.fields.title}}",
         "Streams\/invite": "Buvote pakviesti į {{& stream.fields.title}}",
         "Streams\/announcement": "Skelbimas {{& stream.fields.title}}",
@@ -89,7 +89,14 @@
             "byEmail": "El. paštas",
             "byText": "Tekstas",
             "byFacebook": "Facebook",
-            "byTwitter": "Twitter"
+            "byTwitter": "Twitter",
+            "title2": "Pakvieskite žmones",
+            "chooseMethod": "Pasirinkite metodą:",
+            "selectContacts": "Pasirinkite Kontaktai",
+            "scanQRCode": "Nuskaityti QR kodą",
+            "shareLink": "Bendrinkite nuorodą",
+            "chooseFromRegistered": "Pasirinkite iš registruotų vartotojų",
+            "inviteViaEmailOrSms": "Pakviesti el. paštu arba SMS"
         },
         "email": {
             "subject": "Ei, patikrink tai",
@@ -105,7 +112,9 @@
         },
         "notice": {
             "text": "Jus pakvietė. {{ClickOrTap}} čia, kad priimtumėte ir prisijungtumėte."
-        }
+        },
+        "Invite": "Pakviesti",
+        "Share": "Dalintis"
     },
     "messages": {
         "html": {
@@ -156,11 +165,11 @@
     },
     "webrtc": {
         "notAllowedToJoinCall": "Neturite leidimo prisijungti prie šio srauto.",
-        "streamTitle": "{{1}} pradėjo tiesioginį skambutį",
+        "streamTitle": "{{1}} pradėjo telekonferenciją",
         "allow": {
-            "dialogTitle": "Jungiamasi",
+            "dialogTitle": "Prisijungimas",
             "microphoneBtn": "Įjungti mikrofoną",
-            "cameraBtn": "Įjungti fotoaparatą",
+            "cameraBtn": "Įgalinti fotoaparatą",
             "cameraAndMicrophoneBtn": "Įjungti kamerą ir mikrofoną"
         },
         "preparing": {
@@ -204,7 +213,7 @@
             "joining": "Prisijungimas: {{userName}}",
             "sbLeftRoom": "{{userName}} išėjo iš kambario",
             "switchingRoom": "Persijungimo kambarys...",
-            "forceDisconnecting": "Jūs būsite atjungtas per 5 sekundes",
+            "forceDisconnecting": "Būsite atjungti per 5 sekundes",
             "forceDisconnectingImmediately": "Jus atjungė šeimininkas",
             "youLeftRoom": "Tu išėjai iš kambario",
             "codeCopied": "Tu išėjai iš kambario",
@@ -222,7 +231,9 @@
             "linkCopiedToCb": "Nuoroda nukopijuota į mainų sritį",
             "codeCopiedToCb": "Kodas nukopijuotas į mainų sritį",
             "userHasNoVideo": "Dalyvis neturi vaizdo įrašo",
-            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje."
+            "openInBrowserAlert": "Norėdami prisijungti prie konferencijos, atidarykite nuorodą „Safari“ naršyklėje.",
+            "allowedVideoLimit": "Šioje patalpoje leidžiamas tik {{limit}} vaizdo įrašas",
+            "allowedAudioLimit": "Šioje patalpoje leidžiama naudoti tik {{limit}} mikrofoną"
         },
         "settingsPopup": {
             "dialogTitle": "Vaizdo įrašo nustatymai",
@@ -238,12 +249,12 @@
             "startFBLive": "Pradėkite „Facebook“ tiesioginę transliaciją",
             "stopFBLive": "Sustabdykite „Facebook“ tiesioginę transliaciją",
             "startRecording": "Pradėti įrašymą",
-            "stopRecording": "Sustabdyti įrašymą",
+            "stopRecording": "Sustabdykite įrašymą",
             "start": "Pradėti",
             "stop": "Sustabdyti",
             "recordingInProgress": "Įrašymas vyksta...",
             "fbLiveTitle": "Tiesioginės transliacijos pavadinimas",
-            "fbLiveDescription": "Apibūdinkite savo tiesioginę transliaciją. Apie ką tai?",
+            "fbLiveDescription": "Aprašykite savo tiesioginį srautą. Apie ką tai?",
             "fbOnlyMeLiveAccess": "Tik aš",
             "fbFriendsAccess": "Draugai",
             "fbPublicAccess": "Viešas",
@@ -252,11 +263,12 @@
             "fbStartLive": "Tiesiogiai",
             "fbStopLive": "Baigti tiesioginę transliaciją",
             "streamingSettings": "Nustatymai",
-            "fbEmbedCode": "Įdėti",
+            "fbEmbedCode": "Įterpti",
             "copy": "Kopijuoti",
             "streamToRTMP": "Perduokite srautu į tinkintą RTMP",
             "startBroadcasting": "Pradėkite transliuoti",
-            "broadcastingInProgress": "Transliacija vyksta"
+            "broadcastingInProgress": "Transliacija vyksta",
+            "manageStream": "Tvarkyti tiesioginę transliaciją"
         },
         "audioSettings": {
             "dialogTitle": "Garso nustatymai",
@@ -284,8 +296,8 @@
             "title": "Srautinio perdavimo nustatymai"
         },
         "preview": {
-            "Meeting": "Susitikimas",
-            "MeetingEnded": "Susirinkimas baigėsi"
+            "Meeting": "Telekonferencija",
+            "MeetingEnded": "Telekonferencija baigėsi"
         }
     },
     "types": {
@@ -403,7 +415,7 @@
             "description": "pokalbis tarp vartotojų su istorija"
         },
         "Streams\/webrtc": {
-            "displayType": "Skambutis realiuoju laiku",
+            "displayType": "Tiesioginis skambutis",
             "description": "vaizdo \/ garso skambutis realiuoju laiku"
         },
         "Streams\/question": {
@@ -527,6 +539,13 @@
         "Update": "Atnaujinti",
         "NoCallsYet": "Kol kas jokių skambučių",
         "CallReasonTitle": "Apie ką šis skambutis?",
-        "WaitingRoom": "Laukiamasis"
+        "WaitingRoom": "Laukiamasis",
+        "LiveRoom": "Tiesioginis kambarys",
+        "interviewedByAnotherHost": "Šiuo metu kalbina kitas laidos vedėjas",
+        "bringToLive": "Pateikite tiesioginį pasirodymą",
+        "putOnHold": "Sulaikyti",
+        "endCall": "Baigti skambutį",
+        "interview": "Interviu",
+        "markApproved": "Pažymėti patvirtintą"
     }
 }
