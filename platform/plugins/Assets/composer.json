@@ -1,0 +1,11 @@
+{
+	"name": "qbix/assets",
+	"authors": [
+		{
+			"name": "Qbix"
+		}
+	],
+	"require": {
+		"stripe/stripe-php": "9.4.0"
+	}
+}
