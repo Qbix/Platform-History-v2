@@ -175,11 +175,14 @@ Object.getPrototypeOf = function (obj) {
 
 var Ap = Array.prototype;
 
-Ap.toHex = function () {
-	return this.map(function (x) { 
-		return x.toString(16).padStart(2, '0');
-	}).join('');
-};
+Object.defineProperty(Ap, "toHex", {
+	enumerable: false,
+	value: function () {
+		return this.map(function (x) { 
+			return x.toString(16).padStart(2, '0');
+		}).join('');
+	}
+  });
 
 /**
  * @class String

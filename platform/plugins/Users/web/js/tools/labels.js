@@ -169,7 +169,13 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                 } else if (i == length -1){
                     return;
                 } else {
-                    Q.Pointer.hint(this, {
+					let labelName = i;
+					let label = this.dataset.label;
+					if(label) {
+						labelNameArr = label.split('/');
+						if(labelNameArr.length > 1) labelName = labelNameArr[1];
+					}
+                    Q.Users.hint('Users/labels/' + labelName, this, {
                         hotspot: {x: i % 2 ? 0 : 0.3, y: 0},
                         dontStopBeforeShown: true,
                         dontRemove: true,
