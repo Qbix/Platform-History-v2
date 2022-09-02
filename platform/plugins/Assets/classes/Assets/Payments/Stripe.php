@@ -1,4 +1,6 @@
 <?php
+require ASSETS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
+
 /**
  * @module Assets
  */
@@ -119,7 +121,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		Q_Valid::requireFields(array('secret', 'user'), $options, true);
 		\Stripe\Stripe::setApiKey($options['secret']);
 		$params = array(
-			'payment_method_types' => ['card'],
+			'automatic_payment_methods' => array('enabled' => true),
 			'amount' => $amount,
 			'currency' => $currency,
 			'metadata' => !empty($options['metadata']) ? $options['metadata'] : null
