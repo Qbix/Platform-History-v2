@@ -494,6 +494,9 @@
 				options.userId = options.userId || Q.Users.loggedInUserId();
 				options.currency = (options.currency || 'USD').toUpperCase();
 
+				Assets.Payments.standardStripe(options, callback);
+				return;
+
 				if (!Q.info.isCordova && Q.info.platform === 'ios' && Q.info.browser.name === 'safari') { // It's considered that ApplePay is supported in IOS Safari
 					Assets.Payments.applePayStripe(options, function (err, res) {
 						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
@@ -544,12 +547,12 @@
 			 */
 			load: Q.getter(function (callback) {
 				Q.addScript(Assets.Payments.stripe.jsLibrary, function () {
-					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-					Stripe.applePay.checkAvailability(function (available) {
-						Assets.Payments.stripe.applePayAvailable = available;
-						Assets.Payments.loaded = true;
-						Q.handle(callback);
-					});
+					if (Assets.Payments.loaded) {
+						return;
+					}
+
+					Assets.Payments.stripeObject = Stripe(Assets.Payments.stripe.publishableKey);
+					Assets.Payments.loaded = true;
 				});
 			}),
 			/**
@@ -844,41 +847,68 @@
 			 * @method standardStripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
-			 *  @param {String} options.email payer email. Logged user email by default.
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
-			 *  @param {Boolean} [options.shippingAddress=false] Whether shipping address required.
-			 *  @param {string} options.name
-			 *  @param {Boolean} [options.allowRememberMe=true] Whether shipping address required.
-			 *  @param {string} [options.shippingType=service] Can be shipping, delivery, store, service
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
 			 *  @param {Function} [callback]
 			 */
 			standardStripe: function (options, callback) {
 				Assets.Payments.checkLoaded();
 
-				Q.addScript(Assets.Payments.stripe.options.javascript, function () {
-					var token_triggered = false;
-					StripeCheckout.configure({
-						key: Assets.Payments.stripe.publishableKey,
-						name: options.name,
-						email: options.email,
-						description: options.description,
-						amount: options.amount * 100,
-						allowRememberMe: options.allowRememberMe,
-						shippingAddress: options.shippingAddress,
-						billingAddress: options.shippingAddress,
-						closed: function() {
-							if (!token_triggered) {
-								callback(_error("Request cancelled", 20));
-							}
-						},
-						token: function (token) {
-							token_triggered = true;
-							options.token = token;
-							Assets.Payments.pay('stripe', options, callback);
+				Q.Template.set('Assets/stripe/payment',
+					'<div class="Assets_Stripe_elements"></div><button class="Q_button" name="pay">{{text.payment.Pay}}</button>'
+				);
+
+				Q.Dialogs.push({
+					title: options.description,
+					className: "Assets_stripe_payment Assets_stripe_payment_loading",
+					template: {
+						name: 'Assets/stripe/payment',
+						fields: {
+							text: Assets.texts
 						}
-					}).open();
+					},
+					onActivate: function ($dialog) {
+						Q.req("Assets/payment", "intent", function (err, response) {
+							$dialog.removeClass("Assets_stripe_payment_loading");
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+							if (msg) {
+								Q.Dialogs.pop();
+								return Q.alert(msg);
+							}
+
+							var clientSecret = response.slots.intent;
+							var elements = Assets.Payments.stripeObject.elements({ clientSecret });
+							var paymentElement = elements.create("payment");
+							paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
+
+							$("button[name=pay]", $dialog).on(Q.Pointer.fastclick, function () {
+								var $this = $(this);
+								$this.addClass("Q_working");
+								Assets.Payments.stripeObject.confirmPayment({
+									elements,
+									confirmParams: {
+										return_url: "http://localhost:4242/public/checkout.html"
+									},
+								}).then(function () {
+									$this.removeClass("Q_working");
+								}).catch(function (error) {
+									$this.removeClass("Q_working");
+
+									if (error.type === "card_error" || error.type === "validation_error") {
+										Q.alert(error.message);
+									} else {
+										Q.alert("An unexpected error occurred.");
+									}
+								});
+							});
+						}, {
+							fields: {
+								amount: options.amount,
+								currency: options.currency
+							}
+						});
+					}
 				});
 			},
 			/**

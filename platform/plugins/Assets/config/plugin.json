@@ -198,7 +198,7 @@
 		"payments": {
 			"stripe": {
 				"preloadAPI": true,
-				"jsLibrary": "https://js.stripe.com/v2/"
+				"jsLibrary": "https://js.stripe.com/v3/"
 			}
 		},
 		"credits": {
