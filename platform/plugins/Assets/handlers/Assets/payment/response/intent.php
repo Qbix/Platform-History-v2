@@ -19,5 +19,5 @@ function Assets_payment_response_intent($options)
 	$stripe = new Assets_Payments_Stripe();
 	$paymentIntent = $stripe->createPaymentIntent($options['amount'], $options['currency']);
 
-	return array('id' => $paymentIntent->client_secret);
+	return $paymentIntent->client_secret;
 };
