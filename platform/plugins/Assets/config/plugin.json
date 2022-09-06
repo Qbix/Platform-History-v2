@@ -196,7 +196,6 @@
 	"Assets": {
 		"payments": {
 			"stripe": {
-				"preloadAPI": true,
 				"jsLibrary": "https://js.stripe.com/v3/"
 			}
 		},
