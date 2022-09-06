@@ -1,10 +1,8 @@
 <?php
-
 /**
  * Stripe webhook https://stripe.com/docs/webhooks
  */
-function Assets_stripeWebhook_post()
-{
+function Assets_stripe_post() {
 	$secretKey = Q_Config::get('Assets', 'payments', 'stripe', 'secret', null);
 	if (!$secretKey) {
 		return;
