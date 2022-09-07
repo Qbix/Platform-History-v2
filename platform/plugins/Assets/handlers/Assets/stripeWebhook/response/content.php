@@ -4,7 +4,7 @@ require ASSETS_PLUGIN_DIR.DS.'vendor'.DS.'autoload.php';
 /**
  * Stripe webhook https://stripe.com/docs/webhooks
  */
-function Assets_stripe_post() {
+function Assets_stripeWebhook_response_content ($params) {
 	$payload = @file_get_contents('php://input');
 	$event = null;
 	$endpoint_secret = Q_Config::expect("Assets", "payments", "stripe", "webhookSecret");
