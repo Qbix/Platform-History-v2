@@ -493,7 +493,11 @@
 				options.userId = options.userId || Q.Users.loggedInUserId();
 				options.currency = (options.currency || 'USD').toUpperCase();
 
-				Assets.Payments.standardStripe(options, callback);
+				Assets.Currencies.getSymbol(options.currency, function (symbol) {
+					options.symbol = symbol;
+
+					Assets.Payments.standardStripe(options, callback);
+				});
 			},
 			/**
 			 * Load js libs and do some needed actions.
@@ -559,7 +563,9 @@
 				Assets.Payments.checkLoaded();
 
 				Q.Template.set('Assets/stripe/payment',
-					'<div class="Assets_Stripe_elements"></div><button class="Q_button" name="pay">{{text.payment.Pay}}</button>'
+					`<div class="Assets_Stripe_requestButton"></div>
+					<div class="Assets_Stripe_elements"></div>
+					<button class="Q_button" name="pay">{{text.payment.Pay}} {{symbol}}{{amount}}</button>`
 				);
 
 				Q.Dialogs.push({
@@ -568,17 +574,15 @@
 					template: {
 						name: 'Assets/stripe/payment',
 						fields: {
+							amount: options.amount.toFixed(2),
+							symbol: options.symbol,
 							text: Assets.texts
 						}
 					},
 					onActivate: function ($dialog) {
-						var $dialogContent = $(".Q_dialog_content", $dialog);
-						var _showMessage = function (msg) {
-							$dialogContent.html(msg);
-						};
-
 						Q.req("Assets/payment", "intent", function (err, response) {
 							$dialog.removeClass("Assets_stripe_payment_loading");
+
 							var msg = Q.firstErrorMessage(err, response && response.errors);
 							if (msg) {
 								Q.Dialogs.pop();
@@ -586,6 +590,80 @@
 							}
 
 							var clientSecret = response.slots.intent;
+
+							// create payment request button
+							var paymentRequest = Assets.Payments.stripeObject.paymentRequest({
+								country: 'US',
+								currency: options.currency.toLowerCase(),
+								total: {
+									label: options.description,
+									amount: options.amount * 100, // stripe need amount in minimum units (cents)
+								},
+								requestPayerName: true,
+								requestPayerEmail: true
+							});
+							paymentRequest.on('paymentmethod', function(ev) {
+								// Confirm the PaymentIntent without handling potential next actions (yet).
+								Assets.Payments.stripeObject.confirmCardPayment(
+									clientSecret,
+									{payment_method: ev.paymentMethod.id},
+									{handleActions: false}
+								).then(function(confirmResult) {
+									console.log(confirmResult);
+									if (confirmResult.error) {
+										// Report to the browser that the payment failed, prompting it to
+										// re-show the payment interface, or show an error message and close
+										// the payment interface.
+										ev.complete('fail');
+
+										console.error(confirmResult.error);
+										Q.alert("Payment failed");
+										return;
+									}
+
+									// Report to the browser that the confirmation was successful, prompting
+									// it to close the browser payment method collection interface.
+									ev.complete('success');
+
+									Q.Dialogs.pop();
+									Q.Dialogs.push({
+										title: "Payment status",
+										content: "Success"
+									});
+
+									// Check if the PaymentIntent requires any actions and if so let Stripe.js
+									// handle the flow. If using an API version older than "2019-02-11"
+									// instead check for: `paymentIntent.status === "requires_source_action"`.
+									if (confirmResult.paymentIntent.status === "requires_action") {
+										// Let Stripe.js handle the rest of the payment flow.
+										Assets.Payments.stripeObject.confirmCardPayment(clientSecret).then(function(result) {
+											if (result.error) {
+												// The payment failed -- ask your customer for a new payment method.
+											} else {
+												// The payment has succeeded.
+											}
+										});
+									} else {
+										// The payment has succeeded.
+									}
+								});
+							});
+							var prButton = Assets.Payments.stripeObject.elements().create('paymentRequestButton', {
+								paymentRequest: paymentRequest,
+							});
+
+							// Check the availability of the Payment Request API first.
+							paymentRequest.canMakePayment().then(function(result) {
+								var $paymentRequestButton = $(".Assets_Stripe_requestButton", $dialog);
+
+								if (result) {
+									prButton.mount($paymentRequestButton[0]);
+								} else {
+									$paymentRequestButton.hide();
+								}
+							});
+
+							// create stripe "payment" element
 							var elements = Assets.Payments.stripeObject.elements({clientSecret});
 							var paymentElement = elements.create("payment");
 							paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
@@ -598,10 +676,14 @@
 									confirmParams: {
 										return_url: Q.url("{{baseUrl}}/me/credits")
 									}
-								}).then(function ({paymentIntent}) {
-									$this.remove();
+								}).then(function (response) {
+									if (response.error) {
+										$this.removeClass("Q_working");
+									}
+
+									// the page should be redirected to return_url
 								}).catch(function (error) {
-									$this.removeClass("Q_working");
+									Q.Dialogs.pop();
 
 									if (error.type === "card_error" || error.type === "validation_error") {
 										Q.alert(error.message);

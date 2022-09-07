@@ -15,7 +15,7 @@
 }
 
 .Assets_stripe_payment .Q_dialog_content {
-	width: 300px;
+	min-width: 300px;
 	min-height: 200px;
 	padding: 10px;
 }
@@ -32,6 +32,9 @@
 	display: block;
 	margin: 10px auto 0;
 	width: 100%;
+}
+.Assets_stripe_payment .Assets_Stripe_requestButton {
+	margin-bottom: 15px;
 }
 
 .Assets_pay_confirm {
