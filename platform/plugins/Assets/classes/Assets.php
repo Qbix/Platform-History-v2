@@ -106,22 +106,17 @@ abstract class Assets extends Base_Assets
 	{
 		$currency = strtoupper($currency);
 		$user = Q::ifset($options, 'user', Users::loggedInUser(false));
-		$className = 'Assets_Payments_' . ucfirst($payments);
-		$adapter = new $className($options);
 		$communityId = Users::communityId();
 		/**
 		 * @event Assets/charge {before}
 		 * @param {Assets_Payments} adapter
 		 * @param {array} options
 		 */
-		Q::event('Assets/charge', @compact('adapter', 'options'), 'before');
-		$customerId = $adapter->charge($amount, $currency, $options);
 		$charge = new Assets_Charge();
 		$charge->userId = $user->id;
 		$charge->description = 'BoughtCredits';
 		$attributes = array(
 			"payments" => $payments,
-			"customerId" => $customerId,
 			"amount" => sprintf("%0.2f", $amount),
 			"currency" => $currency,
 			"communityId" => $communityId,
@@ -140,7 +135,7 @@ abstract class Assets extends Base_Assets
 		 * @param {array} options
 		 */
 		Q::event('Assets/charge', @compact(
-			'payments', 'amount', 'currency', 'user', 'charge', 'adapter', 'options'
+			'payments', 'amount', 'currency', 'user', 'charge', 'options'
 		), 'after');
 
 		return $charge;
