@@ -91,6 +91,7 @@ abstract class Assets extends Base_Assets
 	 * @param {string} $amount specify the amount
 	 * @param {string} [$currency='USD'] set the currency, which will affect the amount
 	 * @param {array} [$options=array()] Any additional options
+	 * @param {string} [$options.chargeId] Payment id to set as id field of Assets_Charge table
  	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to charge
 	 * @param {Streams_Stream} [$options.stream=null] if this charge is related to an Assets/product, Assets/service or Assets/subscription stream
 	 * @param {string} [$options.token=null] required for stripe unless the user is an existing customer
@@ -107,6 +108,8 @@ abstract class Assets extends Base_Assets
 		$currency = strtoupper($currency);
 		$user = Q::ifset($options, 'user', Users::loggedInUser(false));
 		$communityId = Users::communityId();
+		$chargeId = Q::ifset($options, "chargeId", null);
+
 		/**
 		 * @event Assets/charge {before}
 		 * @param {Assets_Payments} adapter
@@ -114,6 +117,13 @@ abstract class Assets extends Base_Assets
 		 */
 		$charge = new Assets_Charge();
 		$charge->userId = $user->id;
+		if ($chargeId) {
+			$charge->id = $chargeId;
+			// check if charge with this id already exists
+			if ($charge->retrieve()) {
+				return null;
+			}
+		}
 		$charge->description = 'BoughtCredits';
 		$attributes = array(
 			"payments" => $payments,
