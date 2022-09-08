@@ -14,9 +14,7 @@ function Assets_stripeWebhook_response_content ($params) {
 	} catch(\UnexpectedValueException $e) {
 		// Invalid payload
 
-		Q::log('Webhook error while parsing basic request.', "Stripe.webhook");
-		Q::log($e, "Stripe.webhook");
-
+		Assets_stripeWebhook_log('Webhook error while parsing basic request.', $e);
 		http_response_code(400);
 		exit();
 	}
@@ -28,9 +26,7 @@ function Assets_stripeWebhook_response_content ($params) {
 		$event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
 	} catch(\Stripe\Exception\SignatureVerificationException $e) {
 		// Invalid signature
-		Q::log('Webhook error while validating signature.', "Stripe.webhook");
-		Q::log($e, "Stripe.webhook");
-
+		Assets_stripeWebhook_log('Webhook error while validating signature.', $e);
 		http_response_code(400);
 		exit();
 	}
@@ -42,10 +38,10 @@ function Assets_stripeWebhook_response_content ($params) {
 			// Then define and call a method to handle the successful payment intent.
 			// handlePaymentIntentSucceeded($paymentIntent);
 
-			Q::log('Payment success!', "Stripe.webhook");
-			Q::log($paymentIntent, "Stripe.webhook");
+			Assets_stripeWebhook_log('Payment success!', $paymentIntent);
 
-			$amount = Q::ifset($paymentIntent, "amount", null);
+			$amount = (int)Q::ifset($paymentIntent, "amount", null);
+			$amount /= 100; // amount in cents, need to convert to dollars
 			$currency = Q::ifset($paymentIntent, "currency", null);
 			$metadata = (array)Q::ifset($paymentIntent, "metadata", array());
 			$userId = Q::ifset($paymentIntent, "metadata", "userId", null);
@@ -63,9 +59,17 @@ function Assets_stripeWebhook_response_content ($params) {
 
 			break;
 		default:
-			echo 'Received unknown event type ' . $event->type;
+			Assets_stripeWebhook_log('Received unknown event type ' . $event->type);
 	}
 
 	http_response_code(200); // PHP 5.4 or greater
 	exit;
+}
+
+function Assets_stripeWebhook_log ($title, $message=null) {
+	Q::log('______________________________________________', "Stripe.webhook");
+	Q::log($title, "Stripe.webhook");
+	if ($message) {
+		Q::log($message, "Stripe.webhook");
+	}
 }
