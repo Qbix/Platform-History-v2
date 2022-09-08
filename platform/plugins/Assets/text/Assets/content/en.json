@@ -35,7 +35,12 @@
         "AboutOrder": "Info about order",
         "PaymentMethod": "Payment method",
         "ContactInfo": "Contact info",
-        "Pay": "Pay"
+        "Pay": "Pay",
+        "PaymentSucceeded": "Payment succeeded",
+        "PaymentProcessing.": "Your payment is processing",
+        "FailTryAgain": "Your payment was not successful, please try again",
+        "SomethingWrong": "Something went wrong",
+        "PaymentStatus": "Payment status"
     },
     "credits": {
         "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
