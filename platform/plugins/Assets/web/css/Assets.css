@@ -14,6 +14,7 @@
     margin: 10px;
 }
 
+/* <Test assets strip payment> */
 .Assets_stripe_payment .Q_dialog_content {
 	min-width: 300px;
 	min-height: 200px;
@@ -25,6 +26,7 @@
 	background-repeat: no-repeat;
 	background-position: center;
 }
+.Assets_stripe_payment.Assets_stripe_payment_loading .Q_dialog_content *,
 .Assets_stripe_payment.Assets_stripe_payment_loading .Q_dialog_content button[name=pay] {
 	display: none;
 }
@@ -36,6 +38,21 @@
 .Assets_stripe_payment .Assets_Stripe_requestButton {
 	margin-bottom: 15px;
 }
+.Assets_Payment_status .Q_dialog_content {
+	padding: 10px;
+	font-size: 20px;
+	min-width: 300px;
+	min-height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: red;
+	font-weight: bold;
+}
+.Assets_Payment_status[data-status=succeeded] .Q_dialog_content {
+	color: green;
+}
+/* </Test assets strip payment> */
 
 .Assets_pay_confirm {
     text-align: center;

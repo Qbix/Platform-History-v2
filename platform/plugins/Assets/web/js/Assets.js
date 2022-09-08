@@ -492,12 +492,7 @@
 
 				options.userId = options.userId || Q.Users.loggedInUserId();
 				options.currency = (options.currency || 'USD').toUpperCase();
-
-				Assets.Currencies.getSymbol(options.currency, function (symbol) {
-					options.symbol = symbol;
-
-					Assets.Payments.standardStripe(options, callback);
-				});
+				Assets.Payments.standardStripe(options, callback);
 			},
 			/**
 			 * Load js libs and do some needed actions.
@@ -520,26 +515,7 @@
 					var clientSecret = new URLSearchParams(window.location.search).get("payment_intent_client_secret");
 					if (clientSecret) {
 						Assets.Payments.stripeObject.retrievePaymentIntent(clientSecret).then(function ({paymentIntent}) {
-							var message = "";
-							switch (paymentIntent.status) {
-								case "succeeded":
-									message= "Payment succeeded!";
-									break;
-								case "processing":
-									message = "Your payment is processing.";
-									break;
-								case "requires_payment_method":
-									message = "Your payment was not successful, please try again.";
-									break;
-								default:
-									message = "Something went wrong.";
-									break;
-							}
-
-							Q.Dialogs.push({
-								title: "Payment status",
-								content: message
-							});
+							Assets.Payments.stripePaymentResult(paymentIntent);
 
 							// push url without query string
 							Q.Page.push(window.location.href.split('?')[0], document.title);
@@ -565,8 +541,10 @@
 				Q.Template.set('Assets/stripe/payment',
 					`<div class="Assets_Stripe_requestButton"></div>
 					<div class="Assets_Stripe_elements"></div>
-					<button class="Q_button" name="pay">{{text.payment.Pay}} {{symbol}}{{amount}}</button>`
+					<button class="Q_button" name="pay"></button>`
 				);
+
+				var paymentRequestButton, paymentElement;
 
 				Q.Dialogs.push({
 					title: options.description,
@@ -574,24 +552,23 @@
 					template: {
 						name: 'Assets/stripe/payment',
 						fields: {
-							amount: options.amount.toFixed(2),
-							symbol: options.symbol,
 							text: Assets.texts
 						}
 					},
 					onActivate: function ($dialog) {
-						Q.req("Assets/payment", "intent", function (err, response) {
-							$dialog.removeClass("Assets_stripe_payment_loading");
+						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
+							var currencySymbol = params.currencySymbol[0];
+							var paymentIntent = params.paymentIntent[0];
 
-							var msg = Q.firstErrorMessage(err, response && response.errors);
-							if (msg) {
-								Q.Dialogs.pop();
-								return Q.alert(msg);
-							}
+							$("button[name=pay]", $dialog).text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
 
-							var clientSecret = response.slots.intent;
+							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
+								$dialog.removeClass("Assets_stripe_payment_loading");
+							});
 
-							// create payment request button
+							var clientSecret = paymentIntent.slots.intent;
+
+							// <create payment request button>
 							var paymentRequest = Assets.Payments.stripeObject.paymentRequest({
 								country: 'US',
 								currency: options.currency.toLowerCase(),
@@ -626,10 +603,7 @@
 									ev.complete('success');
 
 									Q.Dialogs.pop();
-									Q.Dialogs.push({
-										title: "Payment status",
-										content: "Success"
-									});
+									//Assets.Payments.stripePaymentResult({status: 'succeeded'})
 
 									// Check if the PaymentIntent requires any actions and if so let Stripe.js
 									// handle the flow. If using an API version older than "2019-02-11"
@@ -648,24 +622,28 @@
 									}
 								});
 							});
-							var prButton = Assets.Payments.stripeObject.elements().create('paymentRequestButton', {
+							paymentRequestButton = Assets.Payments.stripeObject.elements().create('paymentRequestButton', {
 								paymentRequest: paymentRequest,
 							});
+							paymentRequestButton.on('ready', pipeElements.fill('paymentRequest'));
 
 							// Check the availability of the Payment Request API first.
 							paymentRequest.canMakePayment().then(function(result) {
 								var $paymentRequestButton = $(".Assets_Stripe_requestButton", $dialog);
 
 								if (result) {
-									prButton.mount($paymentRequestButton[0]);
+									paymentRequestButton.mount($paymentRequestButton[0]);
 								} else {
 									$paymentRequestButton.hide();
+									pipeElements.fill('paymentRequest')();
 								}
 							});
+							// </create payment request button>
 
-							// create stripe "payment" element
+							// <create stripe "payment" element>
 							var elements = Assets.Payments.stripeObject.elements({clientSecret});
-							var paymentElement = elements.create("payment");
+							paymentElement = elements.create('payment');
+							paymentElement.on('ready', pipeElements.fill('payment'));
 							paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
 
 							$("button[name=pay]", $dialog).on(Q.Pointer.fastclick, function () {
@@ -675,13 +653,15 @@
 									elements,
 									confirmParams: {
 										return_url: Q.url("{{baseUrl}}/me/credits")
-									}
-								}).then(function (response) {
-									if (response.error) {
+									},
+									redirect: 'if_required'
+								}).then(function ({paymentIntent}) {
+									if (paymentIntent.error) {
 										$this.removeClass("Q_working");
 									}
 
-									// the page should be redirected to return_url
+									Q.Dialogs.pop();
+									//Assets.Payments.stripePaymentResult(paymentIntent);
 								}).catch(function (error) {
 									Q.Dialogs.pop();
 
@@ -692,12 +672,65 @@
 									}
 								});
 							});
+							// </create stripe "payment" element>
+						});
+
+						// get currency symbol
+						Assets.Currencies.getSymbol(options.currency, function (symbol) {
+							pipeDialog.fill("currencySymbol")(symbol);
+						});
+
+						// get payment intent
+						Q.req("Assets/payment", "intent", function (err, response) {
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+							if (msg) {
+								Q.Dialogs.pop();
+								return Q.alert(msg);
+							}
+
+							pipeDialog.fill("paymentIntent")(response);
 						}, {
 							fields: {
 								amount: options.amount,
 								currency: options.currency
 							}
 						});
+					},
+					onClose: function () {
+						paymentRequestButton && paymentRequestButton.destroy();
+						paymentElement && paymentElement.destroy();
+					}
+				});
+			},
+			/**
+			 * Show message with payment status
+			 * @method stripePaymentResult
+			 * @static
+			 *  @param {Object} paymentIntent - stripe payment intent object
+			 */
+			stripePaymentResult: function (paymentIntent) {
+				var message = "";
+				switch (paymentIntent.status) {
+					case "succeeded":
+						message = Assets.texts.payment.PaymentSucceeded;
+						break;
+					case "processing":
+						message = Assets.texts.payment.PaymentProcessing;
+						break;
+					case "requires_payment_method":
+						message = Assets.texts.payment.FailTryAgain;
+						break;
+					default:
+						message = Assets.texts.payment.SomethingWrong;
+						break;
+				}
+
+				Q.Dialogs.push({
+					title: Assets.texts.payment.PaymentStatus,
+					className: "Assets_Payment_status",
+					content: message,
+					onActivate: function ($dialog) {
+						$dialog.attr('data-status', paymentIntent.status);
 					}
 				});
 			}
