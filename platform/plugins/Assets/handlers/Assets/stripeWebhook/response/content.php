@@ -35,27 +35,42 @@ function Assets_stripeWebhook_response_content ($params) {
 	switch ($event->type) {
 		case 'payment_intent.succeeded':
 			$paymentIntent = $event->data->object; // contains a \Stripe\PaymentIntent
-			// Then define and call a method to handle the successful payment intent.
-			// handlePaymentIntentSucceeded($paymentIntent);
 
-			Assets_stripeWebhook_log('Payment success!', $paymentIntent);
+			// need to response http code 200 to stripe endpoint regardless of processing our engine
+			// because regardless of our exceptions we got payment_intent.succeeded event
+			// otherwise stripe will block our webhook
+			try {
+				Assets_stripeWebhook_log('Payment success!', $paymentIntent);
 
-			$amount = (int)Q::ifset($paymentIntent, "amount", null);
-			$amount /= 100; // amount in cents, need to convert to dollars
-			$currency = Q::ifset($paymentIntent, "currency", null);
-			$metadata = (array)Q::ifset($paymentIntent, "metadata", array());
-			$userId = Q::ifset($paymentIntent, "metadata", "userId", null);
-			if ($userId) {
-				$user = Users::fetch($userId, true);
-				$metadata["user"] = $user;
+				$amount = (int)Q::ifset($paymentIntent, "amount", null);
+				$amount /= 100; // amount in cents, need to convert to dollars
+				$currency = Q::ifset($paymentIntent, "currency", null);
+				$metadata = (array)Q::ifset($paymentIntent, "metadata", array());
+
+				// set user to metadata
+				$userId = Q::ifset($paymentIntent, "metadata", "userId", null);
+				if ($userId) {
+					$user = Users::fetch($userId, true);
+					$metadata["user"] = $user;
+				}
+
+				// set payment id to metadata
+				$chargeId = Q::ifset($paymentIntent, "id", null);
+				if ($chargeId) {
+					$metadata["chargeId"] = $chargeId;
+				}
+
+				// set stream to metadata
+				$publisherId = Q::ifset($paymentIntent, "metadata", "publisherId", null);
+				$streamName = Q::ifset($paymentIntent, "metadata", "streamName", null);
+				if ($publisherId && $streamName) {
+					$metadata["stream"] = Streams::fetchOne($publisherId, $publisherId, $streamName);
+				}
+
+				Assets::charge("stripe", $amount, $currency, $metadata);
+			} catch (Exception $e) {
+				Assets_stripeWebhook_log("Exception occur during process payment intent", $e);
 			}
-			$publisherId = Q::ifset($paymentIntent, "metadata", "publisherId", null);
-			$streamName = Q::ifset($paymentIntent, "metadata", "streamName", null);
-			if ($publisherId && $streamName) {
-				$metadata["stream"] = Streams::fetchOne($publisherId, $publisherId, $streamName);
-			}
-
-			Assets::charge("stripe", $amount, $currency, $metadata);
 
 			break;
 		default:
