@@ -642,7 +642,12 @@
 
 							// <create stripe "payment" element>
 							var elements = Assets.Payments.stripeObject.elements({clientSecret});
-							paymentElement = elements.create('payment');
+							paymentElement = elements.create('payment', {
+								wallets: {
+									applePay: 'never',
+									googlePay: 'never'
+								}
+							});
 							paymentElement.on('ready', pipeElements.fill('payment'));
 							paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
 
