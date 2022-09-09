@@ -313,7 +313,6 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} [$fromUserId=null] null = logged user
 	 * @param {array} [$more] An array supplying more information
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
-	 * @param {array} [$more.forcePayment=false] If true and not enough credits, try to charge credits
 	 */
 	static function send($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
@@ -340,14 +339,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
-			// if forcePayment true, try to change funds for credits
-			if (Q::ifset($more, "forcePayment", false)) {
-				Assets::charge("stripe", Assets_Credits::convert($amount, "credits", "USD"));
-				// if charge success, turn off forcePayment and try again
-				$more["forcePayment"] = false;
-				return self::send($amount, $reason, $toUserId, $fromUserId, $more);
-			}
-
 			throw new Assets_Exception_NotEnoughCredits(array(
 				'missing' => $amount - $existing_amount
 			));

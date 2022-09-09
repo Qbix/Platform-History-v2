@@ -109,14 +109,12 @@
 							Assets.Payments.stripe({
 								amount: amount,
 								currency: currency,
-								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits}),
-								onSuccess: options.onSuccess,
-								onFailure: options.onFailure
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
 								}
-								return Q.handle(options.onSuccess, null, [data]);
+								return Q.handle(options.onSuccess, null, [null, data]);
 							});
 						});
 					},
@@ -478,7 +476,7 @@
 					options
 				);
 				if (!options.amount) {
-					err = _error("Assets.Payments.stripe: amount is required");
+					var err = _error("Assets.Payments.stripe: amount is required");
 					return Q.handle(callback, null, [err]);
 				}
 
@@ -490,51 +488,9 @@
 					});
 				}
 
-				options.email = options.email || Q.getObject("loggedInUser.email", Users);
 				options.userId = options.userId || Q.Users.loggedInUserId();
 				options.currency = (options.currency || 'USD').toUpperCase();
-
-				if (!Q.info.isCordova && Q.info.platform === 'ios' && Q.info.browser.name === 'safari') { // It's considered that ApplePay is supported in IOS Safari
-					Assets.Payments.applePayStripe(options, function (err, res) {
-						if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-							Assets.Payments.standardStripe(options, callback);
-							return;
-						}
-
-						Q.handle(callback, null, [err, res]);
-					});
-				} else if (Q.info.isCordova && window.ApplePay) { // check for payment request
-					Assets.Payments.applePayCordova(options, function (err, res) {
-						if (err) {
-							Assets.Payments.applePayStripe(options, function (err, res) {
-								if (err && (err.code === 21)) { // code 21 means that this type of payment is not supported in some reason
-									Assets.Payments.standardStripe(options, callback);
-									return;
-								}
-
-								Q.handle(callback, null, [err, res]);
-							});
-							return;
-						}
-
-						Q.handle(callback, null, [err, res]);
-					});
-				} else if (!Q.info.isCordova && window.PaymentRequest) {
-					// check for payment request
-					Assets.Payments.paymentRequestStripe(options, function (err, res) {
-						if (err && (err.code === 9)) {
-							Assets.Payments.standardStripe(options, callback);
-							return;
-						}
-						Q.handle(callback, null, [err, res]);
-					});
-				} else {
-					if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
-						_redirectToBrowserTab(options);
-					} else {
-						Assets.Payments.standardStripe(options, callback);
-					}
-				}
+				Assets.Payments.standardStripe(options, callback);
 			},
 			/**
 			 * Load js libs and do some needed actions.
@@ -544,381 +500,251 @@
 			 */
 			load: Q.getter(function (callback) {
 				Q.addScript(Assets.Payments.stripe.jsLibrary, function () {
-					Stripe.setPublishableKey(Assets.Payments.stripe.publishableKey);
-					Stripe.applePay.checkAvailability(function (available) {
-						Assets.Payments.stripe.applePayAvailable = available;
-						Assets.Payments.loaded = true;
-						Q.handle(callback);
-					});
+					if (Assets.Payments.loaded) {
+						return Q.handle(callback);
+					}
+
+					Assets.Payments.stripeObject = Stripe(Assets.Payments.stripe.publishableKey);
+					Assets.Payments.loaded = true;
+
+					Q.handle(callback);
+
+					// check payment intent
+					var clientSecret = new URLSearchParams(window.location.search).get("payment_intent_client_secret");
+					if (clientSecret) {
+						Assets.Payments.stripeObject.retrievePaymentIntent(clientSecret).then(function ({paymentIntent}) {
+							Assets.Payments.stripePaymentResult(paymentIntent);
+
+							// push url without query string
+							Q.Page.push(window.location.href.split('?')[0], document.title);
+						}).catch(function (err) {
+							console.error(err);
+						});
+					}
 				});
 			}),
-			/**
-			 * This method use googlePay
-			 * and then charge that payment profile.
-			 * @method googlepay
-			 * @static
-			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
-			 *  @param {Number} options.amount the amount to pay.
-			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {Function} [callback]
-			 */
-			googlepay: function (options, callback) {
-				Assets.Payments.checkLoaded();
-
-				var googlePayConfig = Q.getObject("Q.Assets.Payments.googlePay");
-				if (!googlePayConfig) {
-					return _redirectToBrowserTab(options);
-				}
-
-				sgap.setKey(Assets.Payments.stripe.publishableKey).then(function () {
-					sgap.isReadyToPay()
-				}).then(function () {
-					sgap.requestPayment(options.amount, options.currency).then(function (token) {
-						options.token = token;
-						Assets.Payments.pay('stripe', options, callback);
-					});
-				}).catch(function (err) {
-					Q.handle(callback, this, [err])
-				});
-			},
-			/**
-			 * This method use to pay on iOS cordova. Using cordova-plugin-applepay inside.
-			 * @method applePayCordova
-			 * @static
-			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
-			 *  @param {String} options.email users email.
-			 *  @param {Float} options.amount the amount to pay.
-			 *  @param {String} options.description Payment description.
-			 *  @param {Boolean} options.shippingAddress Whether shipping address required.
-			 *  @param {string} [options.shippingType=service] Can be shipping, delivery, store, service
-			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {Function} [callback]
-			 */
-			applePayCordova: function (options, callback) {
-				Assets.Payments.checkLoaded();
-
-				var merchantIdentifier = Q.getObject("Assets.Payments.applePay.merchantIdentifier", Q);
-				if (!merchantIdentifier) {
-					return _redirectToBrowserTab(options);
-				}
-
-				var supportedNetworks = ['amex', 'discover', 'masterCard', 'visa'];
-				var merchantCapabilities = ['3ds', 'debit', 'credit'];
-
-				ApplePay.canMakePayments({
-					// supportedNetworks should not be an empty array. The supported networks currently are: amex, discover, masterCard, visa
-					supportedNetworks: supportedNetworks,
-
-					// when merchantCapabilities is passed in, supportedNetworks must also be provided. Valid values: 3ds, debit, credit, emv
-					merchantCapabilities: merchantCapabilities
-				}).then((message) => {
-					ApplePay.makePaymentRequest({
-						email: options.email,
-						items: [{
-							label: options.description,
-							amount: options.amount
-						}],
-						supportedNetworks: supportedNetworks,
-						merchantCapabilities: merchantCapabilities,
-						merchantIdentifier: merchantIdentifier,
-						currencyCode: options.currency,
-						countryCode: 'US',
-						billingAddressRequirement: options.shippingAddress ? 'all' : 'none',
-						shippingAddressRequirement: options.shippingAddress ? 'all' : 'none',
-						shippingType: options.shippingType || 'service'
-					}).then((paymentResponse) => {
-						paymentResponse.id = JSON.parse(atob(paymentResponse.paymentData)); //paymentResponse.paymentData - base64 encoded token
-						options.token = paymentResponse;
-						Assets.Payments.pay('stripe', options, function (err) {
-							if (err) {
-								ApplePay.completeLastTransaction('failure');
-								Q.handle(callback, null, [err]);
-								return console.error(err);
-							}
-							ApplePay.completeLastTransaction('success');
-							Q.handle(callback, null, [null, true]);
-						});
-					});
-				}).catch((err) => {
-					Q.handle(callback, null, [err]);
-					ApplePay.completeLastTransaction('failure');
-				});
-			},
-			/**
-			 * This method use to pay on iOS browsers.
-			 * @method applePayStripe
-			 * @static
-			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
-			 *  @param {String} options.email users email.
-			 *  @param {Float} options.amount the amount to pay.
-			 *  @param {String} options.description Payment description.
-			 *  @param {Boolean} options.shippingAddress Whether shipping address required.
-			 *  @param {string} [options.shippingType=service] Can be shipping, delivery, store, service
-			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {Function} [callback]
-			 */
-			applePayStripe: function (options, callback) {
-				Assets.Payments.checkLoaded();
-
-				if (!Q.getObject("Payments.stripe.applePayAvailable", Assets)) {
-					return callback(_error('Apple pay is not available', 21));
-				}
-				var request = {
-					email: options.email,
-					currencyCode: options.currency,
-					countryCode: options.countryCode ? options.countryCode : 'US',
-					total: {
-						label: options.description,
-						amount: options.amount
-					}
-				};
-
-				// add shipping option
-				if (options.shippingAddress) {
-					request.requiredBillingContactFields = true;
-					request.requiredShippingContactFields = true;
-					request.shippingType = options.shippingType || 'shipping';
-				}
-
-				var session = Stripe && Stripe.applePay.buildSession(request,
-					function (result, completion) {
-						options.token = result.token;
-						Assets.Payments.pay('stripe', options, function (err) {
-							if (err) {
-								completion(ApplePaySession.STATUS_FAILURE);
-								callback(err);
-							} else {
-								completion(ApplePaySession.STATUS_SUCCESS);
-								callback(null, true);
-							}
-						});
-					}, function (err) {
-						callback(err);
-					});
-				session.oncancel = function () {
-					callback(_error("Request cancelled", 20));
-				};
-				session.begin();
-			},
-			/**
-			 * This method use to pay on browsers with object window.PaymentRequest
-			 * @method paymentRequestStripe
-			 * @static
-			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
-			 *  @param {String} options.email users email.
-			 *  @param {Float} options.amount the amount to pay.
-			 *  @param {String} options.description Payment description.
-			 *  @param {Boolean} options.shippingAddress Whether shipping address required.
-			 *  @param {string} [options.shippingType=service] Can be shipping, delivery, store, service
-			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {Function} [callback]
-			 */
-			paymentRequestStripe: function (options, callback) {
-				Assets.Payments.checkLoaded();
-
-				// while "basic-card" payment method refused and GooglePay not adjusted yet
-				return Q.handle(callback, null, [{code: 9}]);
-
-				var currency = options.currency || 'USD';
-
-				if (!Assets.Payments.googlePay) {
-					return Q.handle(callback, null, {code: 9});
-				}
-
-				var supportedInstruments = [{
-					supportedMethods: 'https://google.com/pay',
-					data: {
-						environment: Assets.Payments.googlePay.environment,
-						apiVersion: 2,
-						apiVersionMinor: 0,
-						allowedPaymentMethods: [{
-							type: 'CARD',
-							parameters: {
-								allowedAuthMethods: ["PAN_ONLY", "CRYPTOGRAM_3DS"],
-								allowedCardNetworks: ["AMEX", "DISCOVER", "INTERAC", "JCB", "MASTERCARD", "MIR", "VISA"]
-							},
-							tokenizationSpecification: {
-								type: 'PAYMENT_GATEWAY',
-								// Check with your payment gateway on the parameters to pass.
-								// @see {@link https://developers.google.com/pay/api/web/reference/object#Gateway}
-								parameters: {
-									"gateway": Assets.Payments.googlePay.gateway,
-									"stripe:version": Assets.Payments.stripe.version,
-									"stripe:publishableKey": Assets.Payments.stripe.publishableKey
-								}
-							}
-						}],
-						transactionInfo: {
-							totalPriceStatus: "FINAL",
-							totalPrice: options.amount.toString(10),
-							currencyCode: currency
-						}
-					}
-				}];
-
-				var globalShippingOptions = [
-					{
-						id: 'economy',
-						label: 'Economy Shipping (5-7 Days)',
-						amount: {
-							currency: 'USD',
-							value: '0',
-						},
-					}, {
-						id: 'express',
-						label: 'Express Shipping (2-3 Days)',
-						amount: {
-							currency: 'USD',
-							value: '5',
-						},
-					}, {
-						id: 'next-day',
-						label: 'Next Day Delivery',
-						amount: {
-							currency: 'USD',
-							value: '12',
-						},
-					}
-				];
-				var details = {
-					email: options.email,
-					total: {
-						label: options.description ? options.description : 'Total due',
-						amount: {currency: currency, value: options.amount}
-					},
-					shippingOptions: globalShippingOptions
-				};
-				var paymentRequest = new PaymentRequest(supportedInstruments, details, {
-					requestPayerEmail: true,
-					requestShipping: options.shippingAddress
-				});
-
-				paymentRequest.addEventListener('shippingaddresschange', (event) => {
-					const prInstance = event.target;
-					event.updateWith(details);
-				});
-				paymentRequest.addEventListener('shippingoptionchange', (event) => {
-					// Step 1: Get the payment request object.
-					const prInstance = event.target;
-
-					// Step 2: Get the ID of the selected shipping option.
-					const selectedId = prInstance.shippingOption;
-
-					// Step 3: Mark selected option
-					globalShippingOptions.forEach((option) => {
-						option.selected = option.id === selectedId;
-					});
-
-					details.shippingOptions = globalShippingOptions;
-					event.updateWith(details);
-				});
-				paymentRequest.show().then(function (result) {
-					var promise;
-					if (result.methodName === 'https://google.com/pay' && !Q.getObject("details.errorCode", result)) {
-						promise = new Q.Promise(function (resolve, reject) {
-							options.token = Q.getObject("details.paymentMethodData.tokenizationData", result);
-							return Assets.Payments.pay('stripe', options, function (err) {
-								if (err) {
-									return reject({result: result, err: err});
-								}
-								return resolve(result);
-							});
-						});
-					}
-					return promise ? promise : Q.Promise.reject({result: result, err: new Error('Unsupported method')});
-				}).then(function (result) {
-					result.complete('success');
-					Q.handle(callback, null, [null, result]);
-				}, function (reject) {
-					console.warn(reject.result);
-					reject.result.complete("fail");
-				}).catch(function (err) {
-					if (Q.getObject("result.complete", err)) {
-						return err.result.complete('fail');
-					}
-					Q.handle(callback, null, [err]);
-				});
-			},
 			/**
 			 * This method use to pay with standard stripe payment
 			 * @method standardStripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
-			 *  @param {String} options.email payer email. Logged user email by default.
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
-			 *  @param {Boolean} [options.shippingAddress=false] Whether shipping address required.
-			 *  @param {string} options.name
-			 *  @param {Boolean} [options.allowRememberMe=true] Whether shipping address required.
-			 *  @param {string} [options.shippingType=service] Can be shipping, delivery, store, service
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
 			 *  @param {Function} [callback]
 			 */
 			standardStripe: function (options, callback) {
 				Assets.Payments.checkLoaded();
 
-				Q.addScript(Assets.Payments.stripe.options.javascript, function () {
-					var token_triggered = false;
-					StripeCheckout.configure({
-						key: Assets.Payments.stripe.publishableKey,
-						name: options.name,
-						email: options.email,
-						description: options.description,
-						amount: options.amount * 100,
-						allowRememberMe: options.allowRememberMe,
-						shippingAddress: options.shippingAddress,
-						billingAddress: options.shippingAddress,
-						closed: function() {
-							if (!token_triggered) {
-								callback(_error("Request cancelled", 20));
-							}
-						},
-						token: function (token) {
-							token_triggered = true;
-							options.token = token;
-							Assets.Payments.pay('stripe', options, callback);
+				Q.Template.set('Assets/stripe/payment',
+					`<div class="Assets_Stripe_requestButton"></div>
+					<div class="Assets_Stripe_elements"></div>
+					<button class="Q_button" name="pay"></button>`
+				);
+
+				var paymentRequestButton, paymentElement;
+
+				Q.Dialogs.push({
+					title: options.description,
+					className: "Assets_stripe_payment Assets_stripe_payment_loading",
+					template: {
+						name: 'Assets/stripe/payment',
+						fields: {
+							text: Assets.texts
 						}
-					}).open();
+					},
+					onActivate: function ($dialog) {
+						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
+							var currencySymbol = params.currencySymbol[0];
+							var paymentIntent = params.paymentIntent[0];
+							var $payButton = $("button[name=pay]", $dialog);
+
+							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
+
+							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
+								$dialog.removeClass("Assets_stripe_payment_loading");
+							});
+
+							var clientSecret = paymentIntent.slots.intent;
+
+							// <create payment request button>
+							var paymentRequest = Assets.Payments.stripeObject.paymentRequest({
+								country: 'US',
+								currency: options.currency.toLowerCase(),
+								total: {
+									label: options.description,
+									amount: options.amount * 100, // stripe need amount in minimum units (cents)
+								},
+								requestPayerName: true,
+								requestPayerEmail: true
+							});
+							paymentRequest.on('paymentmethod', function(ev) {
+								// Confirm the PaymentIntent without handling potential next actions (yet).
+								Assets.Payments.stripeObject.confirmCardPayment(
+									clientSecret,
+									{payment_method: ev.paymentMethod.id},
+									{handleActions: false}
+								).then(function(confirmResult) {
+									if (confirmResult.error) {
+										// Report to the browser that the payment failed, prompting it to
+										// re-show the payment interface, or show an error message and close
+										// the payment interface.
+										ev.complete('fail');
+
+										console.error(confirmResult.error);
+										Q.alert("Payment failed");
+										return;
+									}
+
+									// Report to the browser that the confirmation was successful, prompting
+									// it to close the browser payment method collection interface.
+									ev.complete('success');
+
+									Q.Dialogs.pop();
+
+									// Check if the PaymentIntent requires any actions and if so let Stripe.js
+									// handle the flow. If using an API version older than "2019-02-11"
+									// instead check for: `paymentIntent.status === "requires_source_action"`.
+									if (confirmResult.paymentIntent.status === "requires_action") {
+										// Let Stripe.js handle the rest of the payment flow.
+										Assets.Payments.stripeObject.confirmCardPayment(clientSecret).then(function(result) {
+											if (result.error) {
+												// The payment failed -- ask your customer for a new payment method.
+											} else {
+												// The payment has succeeded.
+												//Assets.Payments.stripePaymentResult({status: 'succeeded'})
+												setTimeout(function () {
+													Q.handle(callback)
+												}, 3000);
+											}
+										});
+									} else {
+										// The payment has succeeded.
+										//Assets.Payments.stripePaymentResult({status: 'succeeded'})
+										setTimeout(function () {
+											Q.handle(callback)
+										}, 3000);
+									}
+								});
+							});
+							paymentRequestButton = Assets.Payments.stripeObject.elements().create('paymentRequestButton', {
+								paymentRequest: paymentRequest,
+							});
+							paymentRequestButton.on('ready', pipeElements.fill('paymentRequest'));
+
+							// Check the availability of the Payment Request API first.
+							paymentRequest.canMakePayment().then(function(result) {
+								var $paymentRequestButton = $(".Assets_Stripe_requestButton", $dialog);
+
+								if (result) {
+									paymentRequestButton.mount($paymentRequestButton[0]);
+								} else {
+									$paymentRequestButton.hide();
+									pipeElements.fill('paymentRequest')();
+								}
+							});
+							// </create payment request button>
+
+							// <create stripe "payment" element>
+							var elements = Assets.Payments.stripeObject.elements({clientSecret});
+							paymentElement = elements.create('payment', {
+								wallets: {
+									applePay: 'never',
+									googlePay: 'never'
+								}
+							});
+							paymentElement.on('ready', pipeElements.fill('payment'));
+							paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
+
+							$payButton.on(Q.Pointer.fastclick, function () {
+								var $this = $(this);
+								$this.addClass("Q_working");
+								Assets.Payments.stripeObject.confirmPayment({
+									elements,
+									confirmParams: {
+										return_url: Q.url("{{baseUrl}}/me/credits")
+									},
+									redirect: 'if_required'
+								}).then(function ({paymentIntent}) {
+									if (paymentIntent.error) {
+										$this.removeClass("Q_working");
+									}
+
+									Q.Dialogs.pop();
+									//Assets.Payments.stripePaymentResult(paymentIntent);
+									setTimeout(function () {
+										Q.handle(callback)
+									}, 3000);
+								}).catch(function (error) {
+									Q.Dialogs.pop();
+
+									if (error.type === "card_error" || error.type === "validation_error") {
+										Q.alert(error.message);
+									} else {
+										Q.alert("An unexpected error occurred.");
+									}
+								});
+							});
+							// </create stripe "payment" element>
+						});
+
+						// get currency symbol
+						Assets.Currencies.getSymbol(options.currency, function (symbol) {
+							pipeDialog.fill("currencySymbol")(symbol);
+						});
+
+						// get payment intent
+						Q.req("Assets/payment", "intent", function (err, response) {
+							var msg = Q.firstErrorMessage(err, response && response.errors);
+							if (msg) {
+								Q.Dialogs.pop();
+								return Q.alert(msg);
+							}
+
+							pipeDialog.fill("paymentIntent")(response);
+						}, {
+							fields: {
+								amount: options.amount,
+								currency: options.currency
+							}
+						});
+					},
+					onClose: function () {
+						paymentRequestButton && paymentRequestButton.destroy();
+						paymentElement && paymentElement.destroy();
+					}
 				});
 			},
 			/**
-			 * Charge the user once you've obtained a token
-			 * @method pay
-			 *  @param {String} payments can be "authnet" or "stripe"
-			 *  @param {Object} options Any additional options, which include:
-			 *  @param {String} [options.publisherId=Q.Users.communityId] The publisherId of the Assets/product or Assets/service stream
-			 *  @param {String} [options.streamName] The name of the Assets/product or Assets/service stream
-			 *  @param {Number} options.description A short name or description of the product or service being purchased.
-			 *  @param {Number} options.amount the amount to pay.
-			 *  @param {String} [options.currency="usd"] the currency to pay in. (authnet supports only "usd")
-			 *  @param {String} [options.token] the token obtained from the hosted forms
-			 *  @param {String} [options.userId] logged in userId, needed for cordova ios / android payments
-			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
+			 * Show message with payment status
+			 * @method stripePaymentResult
+			 * @static
+			 *  @param {Object} paymentIntent - stripe payment intent object
 			 */
-			pay: function (payments, options, callback) {
-				Assets.Payments.checkLoaded();
+			stripePaymentResult: function (paymentIntent) {
+				var message = "";
+				switch (paymentIntent.status) {
+					case "succeeded":
+						message = Assets.texts.payment.PaymentSucceeded;
+						break;
+					case "processing":
+						message = Assets.texts.payment.PaymentProcessing;
+						break;
+					case "requires_payment_method":
+						message = Assets.texts.payment.FailTryAgain;
+						break;
+					default:
+						message = Assets.texts.payment.SomethingWrong;
+						break;
+				}
 
-				var fields = {
-					payments: payments,
-					publisherId: options.publisherId,
-					streamName: options.streamName,
-					token: options.token,
-					amount: options.amount,
-					currency: options.currency,
-					description: options.description,
-					userId: options.userId
-
-				};
-				Q.req('Assets/payment', 'charge', function (err, response) {
-					var msg;
-					if (msg = Q.firstErrorMessage(err, response && response.errors)) {
-						return callback(msg, null);
+				Q.Dialogs.push({
+					title: Assets.texts.payment.PaymentStatus,
+					className: "Assets_Payment_status",
+					content: message,
+					onActivate: function ($dialog) {
+						$dialog.attr('data-status', paymentIntent.status);
 					}
-					Q.handle(callback, this, [null, response.slots.charge]);
-					Assets.onPaymentSuccess.handle(response);
-				}, {
-					method: 'post',
-					fields: fields
 				});
 			}
 		},
@@ -1823,5 +1649,4 @@
 		co.back = {src: "Q/plugins/Q/img/x.png"};
 	}
 	Q.Tool.define.options('Q/columns', co);
-
 })(Q, Q.plugins.Assets, Q.plugins.Streams, jQuery);

@@ -23,15 +23,14 @@
 		"routes@start": {
 			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
-			"Q/plugins/Assets/stripe/webhook": {"module": "Assets", "action": "stripeWebhook"},
-			"Q/plugins/Assets/:action": {"module": "Assets"},
 			"Assets/services": { "module": "Assets", "action": "services" },
 			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
 			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
 			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
-			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"}
+			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
+			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
 			"requireValidNonce": ["Assets"]
@@ -197,8 +196,7 @@
 	"Assets": {
 		"payments": {
 			"stripe": {
-				"preloadAPI": true,
-				"jsLibrary": "https://js.stripe.com/v2/"
+				"jsLibrary": "https://js.stripe.com/v3/"
 			}
 		},
 		"credits": {

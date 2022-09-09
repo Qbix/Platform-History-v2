@@ -12,19 +12,11 @@ function Assets_credits_post($params = array(), $securedParams = array())
 	$needCredits = $currency == "credits" ? $amount : (int)Assets_Credits::convert($amount, $currency, "credits");
 
 	if ($credits < $needCredits) {
-		$needCredits = $needCredits - $credits;
-
-		// if forcePayment defined, try to charge funds
-		if ($params["forcePayment"]) {
-			$toCurrency = $currency == "credits" ? "USD" : $currency;
-			Assets::charge("stripe", Assets_Credits::convert($needCredits, "credits", $toCurrency), $toCurrency, @compact('user'));
-			// if charge success, turn off forcePayment and try again
-			$params["forcePayment"] = false;
-			return Q::event("Assets/credits/post", $params, $securedParams);
-		}
-
 		Q_response::setSlot('status', false);
-		Q_response::setSlot('details', @compact("credits", "needCredits"));
+		Q_response::setSlot('details', array(
+			"credits" => $credits,
+			"needCredits" => $needCredits - $credits
+		));
 		return;
 	}
 
