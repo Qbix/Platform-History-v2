@@ -478,7 +478,7 @@
 					options
 				);
 				if (!options.amount) {
-					err = _error("Assets.Payments.stripe: amount is required");
+					var err = _error("Assets.Payments.stripe: amount is required");
 					return Q.handle(callback, null, [err]);
 				}
 
