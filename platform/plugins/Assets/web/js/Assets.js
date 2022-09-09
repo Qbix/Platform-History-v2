@@ -114,7 +114,7 @@
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
 								}
-								return Q.handle(options.onSuccess, null, [data]);
+								return Q.handle(options.onSuccess, null, [null, data]);
 							});
 						});
 					},
@@ -518,7 +518,7 @@
 							// push url without query string
 							Q.Page.push(window.location.href.split('?')[0], document.title);
 						}).catch(function (err) {
-							console.log(err);
+							console.error(err);
 						});
 					}
 				});
@@ -557,8 +557,9 @@
 						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
 							var currencySymbol = params.currencySymbol[0];
 							var paymentIntent = params.paymentIntent[0];
+							var $payButton = $("button[name=pay]", $dialog);
 
-							$("button[name=pay]", $dialog).text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
+							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
 
 							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
 								$dialog.removeClass("Assets_stripe_payment_loading");
@@ -584,7 +585,6 @@
 									{payment_method: ev.paymentMethod.id},
 									{handleActions: false}
 								).then(function(confirmResult) {
-									console.log(confirmResult);
 									if (confirmResult.error) {
 										// Report to the browser that the payment failed, prompting it to
 										// re-show the payment interface, or show an error message and close
@@ -601,7 +601,6 @@
 									ev.complete('success');
 
 									Q.Dialogs.pop();
-									//Assets.Payments.stripePaymentResult({status: 'succeeded'})
 
 									// Check if the PaymentIntent requires any actions and if so let Stripe.js
 									// handle the flow. If using an API version older than "2019-02-11"
@@ -613,10 +612,18 @@
 												// The payment failed -- ask your customer for a new payment method.
 											} else {
 												// The payment has succeeded.
+												//Assets.Payments.stripePaymentResult({status: 'succeeded'})
+												setTimeout(function () {
+													Q.handle(callback)
+												}, 3000);
 											}
 										});
 									} else {
 										// The payment has succeeded.
+										//Assets.Payments.stripePaymentResult({status: 'succeeded'})
+										setTimeout(function () {
+											Q.handle(callback)
+										}, 3000);
 									}
 								});
 							});
@@ -649,7 +656,7 @@
 							paymentElement.on('ready', pipeElements.fill('payment'));
 							paymentElement.mount($(".Assets_Stripe_elements", $dialog)[0]);
 
-							$("button[name=pay]", $dialog).on(Q.Pointer.fastclick, function () {
+							$payButton.on(Q.Pointer.fastclick, function () {
 								var $this = $(this);
 								$this.addClass("Q_working");
 								Assets.Payments.stripeObject.confirmPayment({
@@ -665,6 +672,9 @@
 
 									Q.Dialogs.pop();
 									//Assets.Payments.stripePaymentResult(paymentIntent);
+									setTimeout(function () {
+										Q.handle(callback)
+									}, 3000);
 								}).catch(function (error) {
 									Q.Dialogs.pop();
 
