@@ -109,9 +109,7 @@
 							Assets.Payments.stripe({
 								amount: amount,
 								currency: currency,
-								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits}),
-								onSuccess: options.onSuccess,
-								onFailure: options.onFailure
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
