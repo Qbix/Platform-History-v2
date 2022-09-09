@@ -17,7 +17,9 @@ function Assets_payment_response_intent($options)
 	$options['currency'] = Q::ifset($options, 'currency', 'usd');
 
 	$stripe = new Assets_Payments_Stripe();
-	$paymentIntent = $stripe->createPaymentIntent($options['amount'], $options['currency']);
+	$paymentIntent = $stripe->createPaymentIntent($options['amount'], $options['currency'], array(
+		"metadata" => Q::ifset($options, 'metadata', array())
+	));
 
-	return array('id' => $paymentIntent->client_secret);
+	return $paymentIntent->client_secret;
 };
