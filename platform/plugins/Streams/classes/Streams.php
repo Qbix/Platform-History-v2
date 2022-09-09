@@ -590,6 +590,55 @@ abstract class Streams extends Base_Streams
 	}
 
 	/**
+	 * Fetch and return a stream if it is already in the database,
+	 * otherwise create it in the database and then return it.
+	 * May throw Users_Exception_NotAuthorized if stream doesn't exist
+	 * and asUserId is not authorized to create this stream.
+	 * @method fetchOneOrCreate
+	 * @static
+	 * @param {string} $asUserId used for fetchOne and create functions
+	 * @param {string} $publisherId used for fetchOne and create functions
+	 * @param {string} $name used for fetchOne and create functions
+	 * @param {string} $type used for create function
+	 * @param {array} [$options] to pass to fetchOne. Also the following will be passed to create:
+	 * @param {array} [$options.fields] to pass to create function,
+	 *   if you want to set some fields besides "name"
+	 * @param {array} [$options.relate] to pass to create function,
+	 *   if you want to relate the newly created stream to a category
+	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
+	 * @return {Streams_Stream}
+	 * @throws {Users_Exception_NotAuthorized}
+	 */
+	static function fetchOneOrCreate(
+		$asUserId,
+		$publisherId,
+		$name,
+		$type,
+		$options = array(),
+		&$results = array())
+	{
+		$stream = Streams::fetchOne($asUserId, $publisherId, $name, $fields, $options, $results);
+		if ($stream) {
+			return $stream;
+		}
+		$fields = Q::ifset($options, 'fields', array());
+		$fields['name'] = $name;
+		$stream = Streams::create($asUserId, 
+			$publisherId, 
+			$type,
+			$fields, 
+			Q::ifset($options, 'relate', null),
+			$relateResults
+		);
+		if (is_array($results)) {
+			$results['relate'] = $relateResults;
+		}
+		if ($stream) {
+			return $stream;
+		}
+	}
+
+	/**
 	 * Tell the client using scriptData to call Q.Streams.arePublic()
 	 * and mark some streams as public
 	 * @method arePublic
@@ -4248,8 +4297,9 @@ abstract class Streams extends Base_Streams
 	 *  generate an icon instead of using the default icon.
 	 *  If $identifier['app']['platform'] is specified, and $icon==true, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
-	 * @param {array} [$options=array()] An array of options that could include:
+	 * @param {array} [$options=array()] An array of options to Users::register() and also options that could include:
 	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.username] You can use this to set a custom username
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not a valid email address or mobile number
 	 * @throws {Q_Exception} If identifier was already verified for someone else
@@ -4264,9 +4314,10 @@ abstract class Streams extends Base_Streams
 	{	
 		/**
 		 * @event Streams/register {before}
-		 * @param {string} username
-		 * @param {string|array} identifier
-		 * @param {string} icon
+		 * @param {string} $fullName
+		 * @param {string|array} $identifier
+		 * @param {string} $icon
+		 * @param {array} $options
 		 * @return {Users_User}
 		 */
 		$return = Q::event('Streams/register', @compact(
@@ -4285,18 +4336,19 @@ abstract class Streams extends Base_Streams
 			'last' => ''
 		);
 
-		$user = Users::register("", $identifier, $icon, $options);
+		$username = Q::ifset($options, 'username', '');
+		$user = Users::register($username, $identifier, $icon, $options);
 
 		/**
 		 * @event Streams/register {after}
-		 * @param {string} username
-		 * @param {string|array} identifier
-		 * @param {string} icon
-		 * @param {Users_User} 'user'
+		 * @param {string|array} $identifier
+		 * @param {string} $icon
+		 * @param {Users_User} $user
+		 * @param {Users_User} $options
 		 * @return {Users_User}
 		 */
 		Q::event('Streams/register', @compact(
-			'register', 'identifier', 'icon', 'user', 'options'
+			'identifier', 'icon', 'user', 'options'
 		), 'after');
 
 		return $user;
@@ -4572,6 +4624,13 @@ abstract class Streams extends Base_Streams
 			.DS.Q_Utils::splitId($invitingUserId);
 	}
 	
+	/**
+	 * Use this function to merge all the files under Streams/userStreams config,
+	 * and get a descriptions of all potential user streams, indexed by their name
+	 * @method userStreamsTree
+	 * @static
+	 * 
+	 */
 	static function userStreamsTree()
 	{
 		$p = new Q_Tree();
