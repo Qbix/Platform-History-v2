@@ -213,7 +213,15 @@
 		"passphrase": {
 			"hashFunction": "sha1",
 			"hashIterations": 1103,
-			"saltLength": 10
+			"saltLength": 10,
+			"algorithms": {
+				"password_hash": {
+					"algorithm": "default"
+				},
+				"hash_pbkdf2": {
+					"iterations": 64000
+				}
+			}
 		},
 		"displayName": {
 			"default": "Someone"
