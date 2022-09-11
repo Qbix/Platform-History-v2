@@ -371,7 +371,7 @@
 		options = Q.extend(Users.authenticate.web3.options, options);
 		Users.init.web3(function () {
 			try {
-				var wsr_json = Q.cookie('Q_Users_wsr_' + platformAppId);
+				var wsr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
 				if (wsr_json) {
 					var wsr = JSON.parse(wsr_json);	
 					var hash = ethers.utils.hashMessage(wsr[0]);

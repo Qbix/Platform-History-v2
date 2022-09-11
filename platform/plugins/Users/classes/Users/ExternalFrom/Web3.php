@@ -49,9 +49,9 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		$payload = Q::ifset($_REQUEST, 'payload', null);
 		$signature = Q::ifset($_REQUEST, 'signature', null);
 		if (!$payload or $signature) {
-			$cookieName = "Users_wsr_$platformAppId";
+			$cookieName = "Users_w3sr_$platformAppId";
 			if (isset($_COOKIE[$cookieName])) {
-				// A previous request has set the wsr cookie
+				// A previous request has set the w3sr cookie
 				$wsr_json = Q_Request::special($cookieName, null, $_COOKIE);
 				if ($wsr = Q::json_decode($wsr_json, true)) {
 					list($payload, $signature) = $wsr;
@@ -71,7 +71,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		}
 		$xid = $recoveredXid;
 		$expires = time() + Q::ifset($appInfo, 'expires', 60*60);
-		$cookieNames = array("Q_Users_wsr_$appIdForAuth", "Q_Users_wsr_$appIdForAuth".'_expires');
+		$cookieNames = array("Q_Users_w3sr_$appIdForAuth", "Q_Users_w3sr_$appIdForAuth".'_expires');
 		if ($xid and $setCookie) {
 			$parts = array($payload, $signature);
 			Q_Response::setCookie($cookieNames[0], Q::json_encode($parts), $expires);
