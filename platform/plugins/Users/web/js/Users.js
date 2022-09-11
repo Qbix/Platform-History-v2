@@ -1437,7 +1437,7 @@
 			if (window.CryptoJS) {
 				var p = $('#current-password');
 				var v = p.val();
-				if (v) {
+				if (v && location.protocol !== 'https:') {
 					if (!/^[0-9a-f]{40}$/i.test(v)) {
 						p.val(CryptoJS.SHA1(p.val() + "\t" + salt));
 					}
