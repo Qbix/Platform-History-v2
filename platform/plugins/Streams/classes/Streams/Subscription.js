@@ -49,7 +49,11 @@ Streams_Subscription.test = function _Subscription_test(userId, stream, msgType,
 		if (err) return callback(err);
 		if (!sub.length) return callback(null, []); // no active subscriptions
 		sub = sub[0];
-		if (sub.fields.untilTime && sub.fields.untilTime > new Date()) return callback(null, []); // date passed
+		var time = (new Date()).getTime();
+		if ((sub.fields.untilTime && sub.fields.untilTime < time
+		|| (sub.fields.duration && sub.fields.insertedTime + sub.fields.duration * 1000 < time))) {
+			return callback(null, []); // date passed
+		}
 		var filter;
 		try {
 			if (sub.fields.filter) {
