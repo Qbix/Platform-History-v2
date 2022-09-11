@@ -92,13 +92,15 @@ foreach ($rows as $r) {
 		$userInfos[$email] = $r;
 	}
 }
+$communityId = Users::communityId();
+$experience = Streams::fetchOne($communityId, $communityId, 'Streams/experience/main');
 foreach ($userInfos as $email => $userInfo) {
 	$user = Users_User::from('email', $email, null);
 	if ($user) {
 		echo "User for email $email exists with ID $user->id" . PHP_EOL;
 	} else {
 		$nameIndex = $columnsFlipped['name'];
-		Streams::register(
+		$user = Streams::register(
 			$userInfo[ $columnsFlipped['name'] ],
 			$email,
 			$discourseUrl . $userInfo[ $columnsFlipped['url'] ],
@@ -110,6 +112,9 @@ foreach ($userInfos as $email => $userInfo) {
 			)
 		);
 		echo "Created user for $email" . PHP_EOL;
+	}
+	if (!$experience->subscription($user->id)) {
+		$experience->subscribe(array('userId' => $user->id));
 	}
 }
 

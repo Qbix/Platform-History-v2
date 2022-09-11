@@ -42,7 +42,7 @@ class Streams_Message extends Base_Streams_Message
  	 * @method post
 	 * @static
 	 * @param {string} $asUserId
-	 *  The user to post the message as
+	 *  The user to post the message as. If no specific user, put Q::app() here
 	 * @param {string} $publisherId
 	 *  The publisher of the stream
 	 * @param {string|array} $streamName
@@ -261,7 +261,8 @@ class Streams_Message extends Base_Streams_Message
 						continue;
 					}
 				
-					if (!$skipAccess && !$stream->testWriteLevel('post')) {
+					if (!$skipAccess && $asUserId != Q::app()
+					&& !$stream->testWriteLevel('post')) {
 						$p[] = new Users_Exception_NotAuthorized();
 						/**
 						 * @event Streams/notAuthorized {before}
