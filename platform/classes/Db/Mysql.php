@@ -449,7 +449,9 @@ class Db_Mysql implements Db_Interface
 				$record = array();
 				if (is_array($fieldNames)) {
 					foreach ($fieldNames as $name) {
-						$record[$name] = $row->fields[$name];
+						if (array_key_exists($name, $row->fields)) {
+							$record[$name] = $row->fields[$name];
+						}
 					}
 				} else {
 					foreach ($row->fields as $name => $value) {
@@ -726,7 +728,8 @@ class Db_Mysql implements Db_Interface
 	 * @param {callable} [$options.filter]
 	 *     The name of a function that will take the generated string and
 	 *     check it. The filter function can modify the string by returning another string,
-	 *     or simply reject the string by returning false, in which another string will be
+	 *     or simply reject the string by returning false, in which case another string
+	 *     will be generated and run through the filter. Make sure the filter doesn't always return false.
 	 */
 	function uniqueId(
 		$table, 
@@ -739,6 +742,7 @@ class Db_Mysql implements Db_Interface
 		$prefix = '';
 		extract($options);
 		$count = strlen($characters);
+		$attempts = 0;
 		do {
 			$id = $prefix;
 			for ($i=0; $i<$length; ++$i) {
@@ -747,6 +751,12 @@ class Db_Mysql implements Db_Interface
 			if (!empty($options['filter'])) {
 				$ret = Q::call($options['filter'], array(@compact('id', 'table', 'field', 'where', 'options')));
 				if ($ret === false) {
+					if (++$attempts > 100) {
+						throw new Q_Exception_BadValue(array(
+							'internal' => "uniqueId options[filter]",
+							'problem' => "it always returns false"
+						));
+					}
 					continue;
 				} else if ($ret) {
 					$id = $ret;

@@ -39,7 +39,8 @@
             "Join": "{{displayName}} sa pripojil k rozhovoru",
             "Leave": "{{displayName}} opustil(a) čet",
             "RelatedTo": "{{displayName}} začal {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferencia"
     },
     "notifications": {
         "ManageEmailSubscriptions": "spravujte svoje odbery e-mailov",

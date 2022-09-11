@@ -46,11 +46,14 @@ module.exports = function (linked) {
 				throw new Q.Exception("Q.Tree.load: filename has to be a string or array");
 		}
 		var p = new Q.Pipe(filenames, function (params) {
-			// All the files were loaded, time to merge them in the right order
+			// All the files were requested, time to merge them in the right order
 			for (var i=0; i<filenames.length; ++i) {
 				var k = filenames[i];
-				if (params[k][0]) {
-					that.merge(params[k][0]);
+				// if (params[k][0] && params[k][0].code === 'ENOENT') {
+				// 	// file doesn't exist, it's OK, keep going
+				// }
+				if (params[k][1]) {
+					that.merge(params[k][1]);
 				}
 			}
 			this.filename = filename;
@@ -61,26 +64,23 @@ module.exports = function (linked) {
 				var isPHP = (filenames[i].substr(-4).toLowerCase() === '.php');
 				fs.readFile(filenames[i].replace('/', Q.DS), 'utf-8', function (err, data) {
 					if (err) {
-						if (err.code == 'ENOENT') {
-							p.fill(filenames[i])(null); // just keep going
-						} else {
-							callback && callback.call(that, err);
-						}
-					} else {
-						try {
-							if (isPHP) {
-								data = data.substring(
-									data.indexOf("\n") + 1,
-									data.lastIndexOf("\n")
-								);
-							}
-							data = data.replace(/\s*(?!<")\/\*[^\*]+\*\/(?!")\s*/gi, '');
-							data = JSON.parse(data);
-						} catch (e) {
-							callback && callback.call(that, e);
-						}
-						p.fill(filenames[i])(data);
+						p.fill(filenames[i])(err, null);
+						return;
 					}
+					try {
+						if (isPHP) {
+							data = data.substring(
+								data.indexOf("\n") + 1,
+								data.lastIndexOf("\n")
+							);
+						}
+						data = data.replace(/\s*(?!<")\/\*[^\*]+\*\/(?!")\s*/gi, '');
+						data = data.replace(/\,\s*\}/, '}');
+						data = JSON.parse(data);
+					} catch (e) {
+						p.fill(filenames[i])(e, null);
+					}
+					p.fill(filenames[i])(null, data);
 				});
 			})(i);
 		}

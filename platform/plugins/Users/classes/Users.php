@@ -753,15 +753,11 @@ abstract class Users extends Base_Users
 		}
 
 		// User exists in database. Now check the passphrase.
-		if (!$user->passphraseHash or $user->passphraseHash[0] !== '$') {
+		if (!$isHashed) {
+			$passphrase = sha1($passphrase . "\t" . $user->id);
+		}
+		if (!$user->verifyPassphrase($passphrase, $user->passphraseHash)) {
 			throw new Users_Exception_WrongPassphrase(@compact('identifier'), 'passphrase');
-		} else {
-			if (!$isHashed) {
-				$passphrase = sha1($passphrase . "\t" . $user->id);
-			}
-			if (!Users::verifyPassphrase($passphrase, $user->passphraseHash)) {
-				throw new Users_Exception_WrongPassphrase(@compact('identifier'), 'passphrase');
-			}
 		}
 
 		// Now save this user in the session as the logged-in user
@@ -1012,13 +1008,17 @@ abstract class Users extends Base_Users
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
 	 * @param {array|string|true} [$icon=array()] By default, the user icon would be "default".
 	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
-	 *  download the various sizes from gravatar. Finally, you can pass true to
-	 *  generate an icon instead of using the default icon.
-	 *  If $identifier['app']['platform'] is specified, and $icon is empty, then
+	 *  download the various sizes from gravatar. 
+	 *  If $identifier['app']['platform'] is specified, and $icon array is empty, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
+	 *  Finally, you can pass true to generate an icon instead of using the default icon.
 	 * @param {array} [$options=array()] An array of options that could include:
-	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message.
+	 *   Set to false to skip sending the activation message and automatically set the email or phone number as confirmed.
 	 * @param {string} [$options.skipIdentifier=false] Whether skip empty identifier
+	 * @param {boolean} [$options.leaveDefault=null] Set to true or false, to override what's in the config
+	 * @param {string} [$options.passphraseHash] Set a custom passphrase hash, such as with hash_pbkdf2, but be careful where it comes from, as it could let someone impersonate this user
+	 * @param {string} [$options.salt] Set a custom passphrase salt, such as from other platforms, but be careful where it comes from, as it could let someone impersonate this user
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not e-mail or modile
 	 * @throws {Q_Exception} If user was already verified for someone else
@@ -1141,7 +1141,10 @@ abstract class Users extends Base_Users
 				));
 			}
 		}
-		$leaveDefaultIcon = Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false);
+		$leaveDefaultIcon = Q::ifset(
+			$options, 'leaveDefaultIcon', 
+			Q_Config::get('Users', 'register', 'icon', 'leaveDefault', false)
+		);
 		$user->set('leaveDefaultIcon', $leaveDefaultIcon);
 		$usersRegisterIcon = Q::ifset($_SESSION, 'Users', 'register', 'icon', null);
 		if (!is_array($icon) and $usersRegisterIcon) {
@@ -1149,7 +1152,7 @@ abstract class Users extends Base_Users
 			unset($_SESSION['Users']['register']['icon']);
 			$user->set('skipIconSearch', $icon);
 		}
-		if (is_array($icon)) {
+		if (is_array($icon) or is_string($icon)) {
 			$user->set('skipIconSearch', $icon);
 		}
 
@@ -1173,11 +1176,12 @@ abstract class Users extends Base_Users
 			$user->signedUpWith = $signedUpWith;
 		}
 		$user->icon = is_string($icon) ? $icon : '{{Users}}/img/icons/default';
-		$user->passphraseHash = '';
+		$user->passphraseHash = Q::ifset($options, 'passphraseHash', '');
+		$user->salt = Q::ifset($options, 'salt', null);
 		$url_parts = parse_url(Q_Request::baseUrl());
 		if (isset($url_parts['host'])) {
 			// By default, the user's url would be this:
-			$user->url = "http://".$user->id.'.'.$url_parts['host'];
+			$user->url = "https://".$user->id.'.'.$url_parts['host'];
 		}
 		/**
 		 * @event Users/insertUser {before}
@@ -1192,20 +1196,24 @@ abstract class Users extends Base_Users
 			// Add an email address or mobile number to the user, that they'll have to verify
 			$activation = Q::ifset($options, 'activation', 'activation');
 			if ($activation) {
-				$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
-				$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
-			} else {
-				$subject = $body = null;
-			}
-			if ($signedUpWith === 'email') {
-				$user->addEmail($identifier, $subject, $body, array(), $options);
-			} else if ($signedUpWith === 'mobile') {
-				$p = $options;
-				if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
-					$p['delay'] = $delay;
+				if ($signedUpWith === 'email') {
+					$subject = Q_Config::get('Users', 'transactional', $activation, "subject", null);
+					$body = Q_Config::get('Users', 'transactional', $activation, "body", null);
+					$user->addEmail($identifier, $subject, $body, array(), $options);
+				} else if ($signedUpWith === 'mobile') {
+					$p = $options;
+					if ($delay = Q_Config::get('Users', 'register', 'delaySms', 0)) {
+						$p['delay'] = $delay;
+					}
+					$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
+					$user->addMobile($mobileNumber, $sms, array(), $p);
 				}
-				$sms = Q_Config::get('Users', 'transactional', $activation, "sms", null);
-				$user->addMobile($mobileNumber, $sms, array(), $p);
+			} else {
+				if ($signedUpWith === 'email') {
+					$user->setEmailAddress($identifier, true);
+				} else if ($signedUpWith === 'mobile') {
+					$user->setMobileNumber($identifier, true);
+				}
 			}
 		}
 		if (!empty($device)) {
@@ -1232,11 +1240,11 @@ abstract class Users extends Base_Users
 		} else {
 			// Import the user's icon and save it
 			if (is_string($icon)) {
-				// assume it's from gravatar
+				// download it from a URL, try to append gravatar-like querystrings for size hints
 				$iconString = $icon;
 				$icon = array();
 				foreach ($sizes as $size) {
-					$icon["$size.png"] = "$iconString&s=$size";
+					$icon["$size.png"] = Q_Uri::fixUrl("$iconString?s=$size");
 				}
 			} else if ($icon === true) {				
 				// locally generated icons
@@ -1480,7 +1488,7 @@ abstract class Users extends Base_Users
 	 * Imports an icon and sets $user->icon to the url.
 	 * @method importIcon
 	 * @static
-	 * @param {object} $obj An object with "icon" property, for whom the icon should be downloaded
+	 * @param {Users_User|object} $obj An object on which this function will set ->icon field.
 	 * @param {array} [$urls=array()] Array of $basename => $url to download from, or
 	 *   of $basename => arrays("hash"=>..., "size"=>...) for gravatar icons.
 	 * @param {string} [$directory=null] Set this unless $obj is a Users_User, in which case it will
@@ -1491,7 +1499,7 @@ abstract class Users extends Base_Users
 	static function importIcon($obj, $urls = array(), $directory = null, $cookies = null)
 	{
 		$app = Q::app();
-		if (empty($directory)) {
+		if (empty($directory) and !empty($obj->id)) {
 			$directory = APP_FILES_DIR.DS.$app.DS.'uploads'.DS.'Users'
 				.DS.Q_Utils::splitId($obj->id).DS.'icon'.DS.'imported';
 		}
@@ -1548,7 +1556,7 @@ abstract class Users extends Base_Users
 		}
 		foreach ($urls as $basename => $url) {
 			$filename = $directory.DS.$basename;
-			if (is_string($url)) {
+			if (is_string($url)) { // url is where we download the file from
 				$info = pathinfo($filename);
 				if ($largestImage) {
 					$source = $largestImage;
@@ -1613,7 +1621,7 @@ abstract class Users extends Base_Users
 						break;
 				}
 				call_user_func($func, $image, $directory.DS.$info['filename'].'.png');
-			} else {
+			} else { // url is an array with "size" and "hash" for avatar generator
 				$type = Q_Config::get('Users', 'login', 'iconType', 'wavatar');
 				$gravatar = Q_Config::get('Users', 'login', 'gravatar', false);
 				$data = Q_Image::avatar($url['hash'], $url['size'], $type, $gravatar);
@@ -1631,72 +1639,6 @@ abstract class Users extends Base_Users
 		$tail = str_replace(DS, '/', substr($directory, strlen($head)));
 		$obj->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
-	}
-
-	/**
-	 * Hashes a passphrase
-	 * @method hashPassphrase
-	 * @static
-	 * @param {string} $passphrase the passphrase to hash
-	 * @return {string} the hashed passphrase, or "" if the passphrase was ""
-	 */
-	static function hashPassphrase ($passphrase)
-	{
-		if ($passphrase === '') {
-			return '';
-		}
-		return password_hash($passphrase, PASSWORD_DEFAULT);
-
-		// $hash_function = Q_Config::get(
-		// 	'Users', 'passphrase', 'hashFunction', 'sha1'
-		// );
-		// $passphraseHash_iterations = Q_Config::get(
-		// 	'Users', 'passphrase', 'hashIterations', 1103
-		// );
-		// $salt_length = Q_Config::set('Users', 'passphrase', 'saltLength', 0);
-		//
-		// if ($salt_length > 0) {
-		// 	if (empty($existing_hash)) {
-		// 		$salt = substr(sha1(uniqid(mt_rand(), true)), 0,
-		// 			$salt_length);
-		// 	} else {
-		// 		$salt = substr($existing_hash, - $salt_length);
-		// 	}
-		// }
-		//
-		// $salt2 = isset($salt) ? '_'.$salt : '';
-		// $result = $passphrase;
-		//
-		// // custom hash function
-		// if (!is_callable($hash_function)) {
-		// 	throw new Q_Exception_MissingFunction(array(
-		// 		'function_name' => $hash_function
-		// 	));
-		// }
-		// $confounder = $passphrase . $salt2;
-		// $confounder_len = strlen($confounder);
-		// for ($i = 0; $i < $passphraseHash_iterations; ++$i) {
-		// 	$result = call_user_func(
-		// 		$hash_function,
-		// 		$result . $confounder[$i % $confounder_len]
-		// 	);
-		// }
-		// $result .= $salt2;
-		//
-		// return $result;
-	}
-	
-	/**
-	 * Verifies a passphrase against a hash generated previously
-	 * @method hashPassphrase
-	 * @static
-	 * @param {string} $passphrase the passphrase to hash
-	 * @param {string} $existing_hash the hash that is was previously generated
-	 * @return {boolean} whether the password is verified to be correct, or not
-	 */
-	static function verifyPassphrase ($passphrase, $existing_hash)
-	{
-		return password_verify($passphrase, $existing_hash);
 	}
 	
 	/**

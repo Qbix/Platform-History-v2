@@ -39,7 +39,8 @@
             "Join": "Tháinig {{displayName}} isteach sa chomhrá",
             "Leave": "D&#39;fhág {{displayName}} an comhrá",
             "RelatedTo": "chuir {{displayName}} tús le {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Teileachomhdháil"
     },
     "notifications": {
         "ManageEmailSubscriptions": "bainistigh do shíntiúis ríomhphoist",

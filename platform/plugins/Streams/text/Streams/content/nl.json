@@ -38,7 +38,8 @@
             "Join": "{{displayName}} is lid geworden van de chat",
             "Leave": "{{displayName}} heeft de chat verlaten",
             "RelatedTo": "{{displayName}} begon een {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Teleconferentie"
     },
     "notifications": {
         "*": "Bericht {{& message.fields.type}} naar {{& stream.fields.title}}",

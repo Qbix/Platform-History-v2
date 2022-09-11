@@ -38,7 +38,8 @@
             "Join": "{{displayName}} deltog i chatten",
             "Leave": "{{displayName}} forlod chatten",
             "RelatedTo": "{{displayName}} startede en {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonference"
     },
     "notifications": {
         "*": "Besked {{& message.fields.type}} til {{& stream.fields.title}}",

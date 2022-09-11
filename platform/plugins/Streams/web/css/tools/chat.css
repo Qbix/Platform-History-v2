@@ -409,6 +409,10 @@
 .Streams_chat_message .Streams_chat_avatar_name {
 	margin-right: .4em;
 }
+.Streams_chat_message_content a {
+	cursor: pointer;
+}
+
 /* phones */
 @media (min-width: 320px) and (max-width: 580px) {
 	.Streams_chat_date {

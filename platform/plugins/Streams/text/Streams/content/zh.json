@@ -38,7 +38,8 @@
             "Join": "{{displayName}} 加入了聊天",
             "Leave": "{{displayName}} 退出聊天",
             "RelatedTo": "{{displayName}} 开始了 {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "电话会议"
     },
     "notifications": {
         "*": "向 {{& stream.fields.title}} 发送消息 {{& message.fields.type}}",

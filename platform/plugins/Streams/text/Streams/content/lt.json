@@ -39,7 +39,8 @@
             "Join": "{{displayName}} prisijungė prie pokalbio",
             "Leave": "{{displayName}} išėjo iš pokalbio",
             "RelatedTo": "{{displayName}} pradėjo {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferencija"
     },
     "notifications": {
         "ManageEmailSubscriptions": "tvarkyti savo el. pašto prenumeratas",

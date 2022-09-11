@@ -39,7 +39,8 @@
             "Join": "{{displayName}} se je pridružil klepetu",
             "Leave": "{{displayName}} je zapustil klepet",
             "RelatedTo": "{{displayName}} je začel {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferenca"
     },
     "notifications": {
         "ManageEmailSubscriptions": "upravljajte svoje e-poštne naročnine",

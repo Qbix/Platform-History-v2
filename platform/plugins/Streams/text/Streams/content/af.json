@@ -38,7 +38,8 @@
             "Join": "{{displayName}} het by die klets aangesluit",
             "Leave": "{{displayName}} het die klets verlaat",
             "RelatedTo": "{{displayName}} het &#39;n {{stream.displayType}} begin"
-        }
+        },
+        "JoinWebRTC": "Telekonferensie"
     },
     "notifications": {
         "*": "Boodskap {{& message.fields.type}} aan {{& stream.fields.title}}",

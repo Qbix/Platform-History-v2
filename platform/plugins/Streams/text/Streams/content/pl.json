@@ -39,7 +39,8 @@
             "Join": "{{displayName}} dołączył do czatu",
             "Leave": "{{displayName}} opuścił czat",
             "RelatedTo": "{{displayName}} rozpoczął {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Konferencja telefoniczna"
     },
     "notifications": {
         "ManageEmailSubscriptions": "zarządzaj swoimi subskrypcjami e-mail",

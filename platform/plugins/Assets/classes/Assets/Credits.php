@@ -9,7 +9,7 @@
  */
 class Assets_Credits extends Base_Assets_Credits
 {
-	const DEFAULT_AMOUNT = 20;
+	const DEFAULT_AMOUNT = 0;
 
 	/**
 	 * @method getAllAttributes
@@ -76,16 +76,10 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		$userId = $user->id;
 		$streamName = 'Assets/user/credits';
-		$stream = Streams_Stream::fetch($asUserId, $userId, $streamName, "*", array("refetch" => true));
-		if (!$stream) {
-			$stream = Streams::create($userId, $userId, 'Assets/credits', array(
-				'name' => 'Assets/user/credits',
-				'title' => "Credits",
-				'icon' => '{{Assets}}/img/credits.png',
-				'content' => '',
-				'attributes' => Q::json_encode(array('amount' => 0))
-			));
-
+		$stream = Streams::fetchOneOrCreate($asUserId, $userId, $streamName, array(
+			'subscribe' => true
+		), $results);
+		if ($results['created']) {
 			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			if ($amount > 0) {
 				self::grant($amount, 'YouHaveCreditsToStart', $userId, array(
@@ -313,7 +307,6 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} [$fromUserId=null] null = logged user
 	 * @param {array} [$more] An array supplying more information
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
-	 * @param {array} [$more.forcePayment=false] If true and not enough credits, try to charge credits
 	 */
 	static function send($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
@@ -340,14 +333,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
-			// if forcePayment true, try to change funds for credits
-			if (Q::ifset($more, "forcePayment", false)) {
-				Assets::charge("stripe", Assets_Credits::convert($amount, "credits", "USD"));
-				// if charge success, turn off forcePayment and try again
-				$more["forcePayment"] = false;
-				return self::send($amount, $reason, $toUserId, $fromUserId, $more);
-			}
-
 			throw new Assets_Exception_NotEnoughCredits(array(
 				'missing' => $amount - $existing_amount
 			));

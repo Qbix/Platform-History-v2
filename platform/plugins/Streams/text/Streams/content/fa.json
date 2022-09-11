@@ -39,7 +39,8 @@
             "Join": "{{displayName}} به چت پیوست",
             "Leave": "{{displayName}} گپ را ترک کرد",
             "RelatedTo": "{{displayName}} یک {{stream.displayType}} را شروع کرد"
-        }
+        },
+        "JoinWebRTC": "کنفرانس تلفنی"
     },
     "notifications": {
         "ManageEmailSubscriptions": "اشتراک های ایمیل خود را مدیریت کنید",

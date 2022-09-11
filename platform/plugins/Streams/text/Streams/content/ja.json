@@ -39,7 +39,8 @@
             "Join": "{{displayName}}がチャットに参加しました",
             "Leave": "{{displayName}}がチャットから退出しました",
             "RelatedTo": "{{displayName}}は{{stream.displayType}}を開始しました"
-        }
+        },
+        "JoinWebRTC": "電話会議"
     },
     "notifications": {
         "ManageEmailSubscriptions": "メール購読を管理する",

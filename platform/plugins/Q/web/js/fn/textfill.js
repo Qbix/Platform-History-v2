@@ -12,6 +12,7 @@
  * @param {Object} [options] options object that contains function parameters
  *   @param {Number} [options.maxFontPixels] Maximum size of text font,
  *   set this if your text container is large and you don't want to have extra large text on page
+ *   @param {Number} [options.minFontPixels] Minimum size of text font,
  *   @param {Number} [options.maxLines=null] Maximum number of lines,
  *   set this if you'd like to have a maximum number of lines.
  *   @param {boolean} [options.refreshOnLayout=true] Whether to refresh the textfill on any layout change that affects its container
@@ -34,6 +35,8 @@ Q.Tool.jQuery('Q/textfill',
 	},
 
 	{
+		maxFontPixels: 30,
+		minFontPixels: 10,
 		refreshOnLayout: true
 	},
 
@@ -84,6 +87,7 @@ Q.Tool.jQuery('Q/textfill',
 					break; // container is super small
 				}
 			};
+			lastGoodFontSize = Math.max(o.minFontPixels, lastGoodFontSize);
 			ourElement.add(this).css('font-size', lastGoodFontSize + 'px');
 			ourElement.removeClass('Q_textfill_resizing').addClass('Q_textfill_resized');
 			return this;

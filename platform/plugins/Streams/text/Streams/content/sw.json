@@ -39,7 +39,8 @@
             "Join": "{{displayName}} alijiunga na gumzo",
             "Leave": "{{displayName}} aliacha gumzo",
             "RelatedTo": "{{displayName}} alianzisha {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Teleconference"
     },
     "notifications": {
         "ManageEmailSubscriptions": "dhibiti usajili wako wa barua pepe",

@@ -39,7 +39,8 @@
             "Join": "Ο {{displayName}} συμμετείχε στη συζήτηση",
             "Leave": "Ο {{displayName}} αποχώρησε από τη συζήτηση",
             "RelatedTo": "Ο {{displayName}} ξεκίνησε ένα {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Τηλεδιάσκεψη"
     },
     "notifications": {
         "ManageEmailSubscriptions": "διαχειριστείτε τις συνδρομές email σας",

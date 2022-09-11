@@ -39,7 +39,8 @@
             "Join": "{{displayName}} присоединился к чату",
             "Leave": "{{displayName}} покинул чат",
             "RelatedTo": "{{displayName}} начал {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Телеконференция"
     },
     "notifications": {
         "ManageEmailSubscriptions": "управлять подписками на электронную почту",

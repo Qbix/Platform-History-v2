@@ -39,7 +39,8 @@
             "Join": "{{displayName}} gick med i chatten",
             "Leave": "{{displayName}} lämnade chatten",
             "RelatedTo": "{{displayName}} startade en {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telefonkonferens"
     },
     "notifications": {
         "ManageEmailSubscriptions": "hantera dina e-postprenumerationer",

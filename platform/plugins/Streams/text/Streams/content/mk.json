@@ -39,7 +39,8 @@
             "Join": "{{displayName}} се приклучи на разговорот",
             "Leave": "{{displayName}} го напушти разговорот",
             "RelatedTo": "{{displayName}} започна {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Телеконференција"
     },
     "notifications": {
         "ManageEmailSubscriptions": "управувајте со вашите претплати за е-пошта",

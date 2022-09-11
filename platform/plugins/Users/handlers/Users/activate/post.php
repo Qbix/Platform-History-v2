@@ -26,7 +26,7 @@ function Users_activate_post()
 		// Save the pass phrase even if there may be a problem adding an email later.
 		// At least the user will be able to log in.
 		$passphrase = $user->preparePassphrase($_REQUEST['passphrase'], $isHashed);
-		$user->passphraseHash = Users::hashPassphrase($passphrase, $user->passphraseHash);
+		$user->passphraseHash = $user->hashPassphrase($passphrase, $user->passphraseHash);
 		Q_Response::setNotice("Users/activate/passphrase",  $text['notifications']['PassphraseSaved'], array(
 			'timeout' => Q_Config::get('Users', 'notices', 'timeout', 5)
 		));

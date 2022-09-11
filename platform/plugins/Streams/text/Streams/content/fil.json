@@ -38,7 +38,8 @@
             "Join": "Ang {{displayName}} ay sumali sa chat",
             "Leave": "Iniwan ng {{displayName}} ang chat",
             "RelatedTo": "Nagsimula ang {{displayName}} isang {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Teleconference"
     },
     "notifications": {
         "*": "Mensahe {{& message.fields.type}} sa {{& stream.fields.title}}",

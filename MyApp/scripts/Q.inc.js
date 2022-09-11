@@ -22,7 +22,7 @@
 		paths = {Q_DIR: JSON.parse(json).platform};
 	} else if (fs.existsSync(paths_filename+'.js')) {
 		// for backward compatibility
-		var paths = require(paths_filename);
+		paths = require(paths_filename);
 	} else {
 		var basename = path.basename(app_dir);
 			throw header+"please copy "+basename+"/local.sample to "

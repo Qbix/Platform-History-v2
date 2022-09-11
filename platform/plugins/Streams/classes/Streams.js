@@ -1175,7 +1175,7 @@ Streams.invitationsPath = function _Streams_invitationsPath(userId) {
 	}) + '/' + Q.Utils.splitId(userId);
 };
 /**
- * Use this to check whether variable is a Q.Streams.Stream object
+ * Use this to check whether variable is a Q.plugins.Streams.Stream object
  * @static
  * @method isStream
  * @param {mixed} testing

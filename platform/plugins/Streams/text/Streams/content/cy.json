@@ -39,7 +39,8 @@
             "Join": "Ymunodd {{displayName}} â&#39;r sgwrs",
             "Leave": "Gadawodd {{displayName}} y sgwrs",
             "RelatedTo": "Dechreuodd {{displayName}} {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telegynhadledd"
     },
     "notifications": {
         "ManageEmailSubscriptions": "rheoli eich tanysgrifiadau e-bost",

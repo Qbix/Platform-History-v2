@@ -156,7 +156,7 @@ class Users_User extends Base_Users_User
 
 	/**
 	 * Call this to prepare the passphrase before passing it to
-	 * Users::hashPassphrase() and Users::verifyPassphrase()
+	 * $user->hashPassphrase() and $user->verifyPassphrase()
 	 * @param {array} $passphrase The value to be checked depends on value of isHashed.
 	 * @param {integer} $isHashed You can pass 0 if this is actually the passphrase,
 	 *   1 if it has been hashed using sha1("$realPassphrase\t$userId")
@@ -172,6 +172,93 @@ class Users_User extends Base_Users_User
 			$passphrase = sha1($passphrase . "\t" . $this->salt);
 		}
 		return $passphrase;
+	}
+
+	/**
+	 * Hashes a passphrase for this user
+	 * @method hashPassphrase
+	 * @param {string} $passphrase the passphrase to hash
+	 * @param {string} [$algorithm='password_hash'] Can be 'hash_pbkdf2'
+	 * @return {string} the hashed passphrase, or "" if the passphrase was ""
+	 */
+	function hashPassphrase ($passphrase, $algorithm = 'password_hash', $options = array())
+	{
+		if ($passphrase === '') {
+			return '';
+		}
+		if ($algorithm === 'hash_pbkdf2') {
+			$iterations = Q::ifset($options, 'iterations', 64000);
+			return hash_pbkdf2('sha256', $passphrase, $this->salt, $iterations, 64, false);
+		}
+		return password_hash($passphrase, PASSWORD_DEFAULT);
+
+		// $hash_function = Q_Config::get(
+		// 	'Users', 'passphrase', 'hashFunction', 'sha1'
+		// );
+		// $passphraseHash_iterations = Q_Config::get(
+		// 	'Users', 'passphrase', 'hashIterations', 1103
+		// );
+		// $salt_length = Q_Config::set('Users', 'passphrase', 'saltLength', 0);
+		//
+		// if ($salt_length > 0) {
+		// 	if (empty($existing_hash)) {
+		// 		$salt = substr(sha1(uniqid(mt_rand(), true)), 0,
+		// 			$salt_length);
+		// 	} else {
+		// 		$salt = substr($existing_hash, - $salt_length);
+		// 	}
+		// }
+		//
+		// $salt2 = isset($salt) ? '_'.$salt : '';
+		// $result = $passphrase;
+		//
+		// // custom hash function
+		// if (!is_callable($hash_function)) {
+		// 	throw new Q_Exception_MissingFunction(array(
+		// 		'function_name' => $hash_function
+		// 	));
+		// }
+		// $confounder = $passphrase . $salt2;
+		// $confounder_len = strlen($confounder);
+		// for ($i = 0; $i < $passphraseHash_iterations; ++$i) {
+		// 	$result = call_user_func(
+		// 		$hash_function,
+		// 		$result . $confounder[$i % $confounder_len]
+		// 	);
+		// }
+		// $result .= $salt2;
+		//
+		// return $result;
+	}
+
+	/**
+	 * Verifies a passphrase against a hash generated previously
+	 * @method verifyPassphrase
+	 * @param {string} $passphrase the passphrase to hash
+	 * @param {string} $existing_hash the hash that is was previously generated
+	 * @return {boolean} whether the password is verified to be correct, or not
+	 */
+	function verifyPassphrase ($passphrase, $existing_hash)
+	{
+		if (empty($existing_hash)) {
+			return false;
+		}
+		// Try using various algorithms
+		$algorithms = Q_Config::expect('Users', 'passphrase', 'algorithms');
+		foreach ($algorithms as $algorithm => $options) {
+			if ($algorithm === 'password_hash') {
+				if ($existing_hash[0] === '$'
+				and password_verify($passphrase, $existing_hash)) {
+					return true;
+				}
+			} else if ($algorithm === 'hash_pbkdf2') {
+				$iterations = Q::ifset($options, 'iterations', 64000);
+				if ($existing_hash === hash_pbkdf2('sha256', $passphrase, $this->salt, $iterations, 64, false)) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 	
 	/**
@@ -1192,9 +1279,9 @@ class Users_User extends Base_Users_User
 	 * @param $asUserId {string} The user id of inviting user
 	 * @param {string|array} $identifiers Can be email addresses or mobile numbers,
 	 *  passed either as an array or separated by "\t"
-	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
-	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers
 	 * @param {boolean} [$dontInsertFutureUsers=false] Pass true to skip inserting future users.
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
+	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers	
 	 * @return {array} The array of user ids, with the same indexes as the $identifiers.
 	 */
 	static function idsFromIdentifiers (

@@ -84,6 +84,9 @@ function Streams_import_post()
 	$lineCount = substr_count($instructions, PHP_EOL);
 	$task->setAttribute('items', $lineCount);
 
+	// declare some variables, they will be set on the first iteration
+	$fields = $processed = $emailAddressKey = $mobileNumberKey = null;
+
 	// start parsing the rows
 	$j = 0;
 	foreach (Q_Utils::csv($instructions) as $row) {
@@ -118,7 +121,7 @@ function Streams_import_post()
 		// get the data from the row
 		$data = array();
 		$importUserData = array();
-		$streamNames = array();
+		$experienceStreamNames = array();
 		foreach ($row as $i => $value) {
 			$field = $fields[$i];
 			$fn = Q_Utils::normalize($field);
@@ -138,7 +141,7 @@ function Streams_import_post()
 							));
 						}
 					}
-					$streamNames[] = $stream->name;
+					$experienceStreamNames[] = $stream->name;
 				}
 				continue;
 			}
@@ -156,9 +159,9 @@ function Streams_import_post()
 		}
 
 		try {
-			$streams = Streams::fetch($luid, $communityId, $streamNames);
-			foreach ($streams as $stream) {
-				if (!$stream->testAdminLevel('manage')) {
+			$experiences = Streams::fetch($luid, $communityId, $experienceStreamNames);
+			foreach ($experiences as $experience) {
+				if (!$experience->testAdminLevel('manage')) {
 					throw new Users_Exception_NotAuthorized();
 				}
 			}
@@ -205,7 +208,7 @@ function Streams_import_post()
 				'type' => 'Streams/task/progress',
 				'instructions' => @compact('mobileNumber', 'emailAddress', 'user', 'processed', 'progress'),
 			), true);
-			foreach ($streamNames as $sn) {
+			foreach ($experienceStreamNames as $sn) {
 				// the following sends an invite message and link by email or mobile
 				Streams::invite($communityId, $sn, @compact('identifier'));
 			}

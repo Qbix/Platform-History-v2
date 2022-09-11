@@ -39,7 +39,8 @@
             "Join": "{{displayName}} შეუერთდა ჩეთს",
             "Leave": "{{displayName}} დატოვა ჩატი",
             "RelatedTo": "{{displayName}} დაიწყო {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "ტელეკონფერენცია"
     },
     "notifications": {
         "ManageEmailSubscriptions": "მართეთ თქვენი ელ.ფოსტის გამოწერები",

@@ -38,7 +38,8 @@
             "Join": "{{displayName}} se pridružio chatu",
             "Leave": "{{displayName}} je napustio chat",
             "RelatedTo": "{{displayName}} započeo je {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferencija"
     },
     "notifications": {
         "*": "Poruka {{& message.fields.type}} za {{& stream.fields.title}}",

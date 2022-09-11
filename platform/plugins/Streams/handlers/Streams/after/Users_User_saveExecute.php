@@ -53,11 +53,11 @@ function Streams_after_Users_User_saveExecute($params)
 	if (!empty($updates['icon'])) {
 		$values['Streams/user/icon'] = $modifiedFields['icon'] = $updates['icon'];
 	}
-	if (!$user->get('leaveDefaultIcon', false)
+	if (!Users::isCustomIcon($user->icon) // latest icon of saved user row
+	and !$user->get('leaveDefaultIcon', false)
 	and !$user->get('skipIconSearch', false)
-	and $search = Q_Config::get('Users', 'register', 'icon', 'search', array())
-	and !Users::isCustomIcon($user->icon)) {
-		if ($search) foreach ($search as $service) {
+	and $search = Q_Config::get('Users', 'register', 'icon', 'search', array())) {
+		foreach ($search as $service) {
 			try {
 				$fullName = Q::ifset(Streams::$cache, 'fullName', null);
 

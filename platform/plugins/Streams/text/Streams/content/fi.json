@@ -39,7 +39,8 @@
             "Join": "{{displayName}} liittyi keskusteluun",
             "Leave": "{{displayName}} poistui keskustelusta",
             "RelatedTo": "{{displayName}} aloitti {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Puhelinkonferenssi"
     },
     "notifications": {
         "ManageEmailSubscriptions": "hallita sähköpostitilauksiasi",

@@ -39,7 +39,8 @@
             "Join": "{{displayName}} liitus vestlusega",
             "Leave": "{{displayName}} lahkus vestlusest",
             "RelatedTo": "{{displayName}} alustas {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonverents"
     },
     "notifications": {
         "ManageEmailSubscriptions": "hallata oma e-posti tellimusi",

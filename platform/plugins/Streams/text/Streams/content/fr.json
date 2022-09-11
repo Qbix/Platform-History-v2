@@ -39,7 +39,8 @@
             "Join": "{{displayName}} a rejoint le chat",
             "Leave": "{{displayName}} a quitté le chat",
             "RelatedTo": "{{displayName}} a commencé un {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Téléconférence"
     },
     "notifications": {
         "ManageEmailSubscriptions": "gérer vos abonnements aux e-mails",

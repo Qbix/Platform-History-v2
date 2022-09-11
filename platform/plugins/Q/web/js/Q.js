@@ -12640,9 +12640,10 @@ Q.Pointer = {
 					x - rect.width / 2,
 					erect.left + erect.width - rect.width
 				);
-				var top1 = Q.info.isTouchscreen
-					? y - r - rect.height
-					: trect.bottom;
+				var above = Q.info.isTouchscreen || (trect.bottom + rect.height >= erect.bottom);
+				var top1 = above
+					? y - r - rect.height // above
+					: trect.bottom; // below
 				div.style.left = Math.max(erect.left, left1) + 'px';
 				div.style.top = Math.max(erect.top, top1) + 'px';
 				div.addClass('Q_touchlabel_show');

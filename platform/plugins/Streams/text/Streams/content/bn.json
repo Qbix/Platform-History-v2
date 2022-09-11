@@ -38,7 +38,8 @@
             "Join": "{{displayName}} চ্যাটে যোগ দিয়েছেন৷",
             "Leave": "{{displayName}} চ্যাট ত্যাগ করেছেন৷",
             "RelatedTo": "{{displayName}} একটি {{stream.displayType}} শুরু করেছে"
-        }
+        },
+        "JoinWebRTC": "টেলিকনফারেন্স"
     },
     "notifications": {
         "*": "{{& message.fields.type}}-কে {{& stream.fields.title}} মেসেজ করুন",

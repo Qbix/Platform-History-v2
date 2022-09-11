@@ -39,7 +39,8 @@
             "Join": "{{displayName}} เข้าร่วมแชท",
             "Leave": "{{displayName}} ออกจากแชท",
             "RelatedTo": "{{displayName}} เริ่มต้น {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "การประชุมทางไกล"
     },
     "notifications": {
         "ManageEmailSubscriptions": "จัดการการสมัครรับอีเมลของคุณ",
