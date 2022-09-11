@@ -1,4 +1,13 @@
 {
+  "Assets/user/credits": {
+    "type": "Assets/credits",
+    "title": "Credits",
+    "icon": "{{Assets}}/img/credits.png",
+    "content": "",
+    "attributes": {
+      "amount": 0
+    }
+  },
   "Assets/user/NFTs": {
     "type": "Streams/category",
     "title": "Users NFT's",

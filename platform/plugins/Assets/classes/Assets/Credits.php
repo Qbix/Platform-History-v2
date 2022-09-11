@@ -9,7 +9,7 @@
  */
 class Assets_Credits extends Base_Assets_Credits
 {
-	const DEFAULT_AMOUNT = 20;
+	const DEFAULT_AMOUNT = 0;
 
 	/**
 	 * @method getAllAttributes
@@ -76,16 +76,10 @@ class Assets_Credits extends Base_Assets_Credits
 		}
 		$userId = $user->id;
 		$streamName = 'Assets/user/credits';
-		$stream = Streams_Stream::fetch($asUserId, $userId, $streamName, "*", array("refetch" => true));
-		if (!$stream) {
-			$stream = Streams::create($userId, $userId, 'Assets/credits', array(
-				'name' => 'Assets/user/credits',
-				'title' => "Credits",
-				'icon' => '{{Assets}}/img/credits.png',
-				'content' => '',
-				'attributes' => Q::json_encode(array('amount' => 0))
-			));
-
+		$stream = Streams::fetchOneOrCreate($asUserId, $userId, $streamName, array(
+			'subscribe' => true
+		), $results);
+		if ($results['created']) {
 			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			if ($amount > 0) {
 				self::grant($amount, 'YouHaveCreditsToStart', $userId, array(

@@ -599,25 +599,30 @@ abstract class Streams extends Base_Streams
 	 * @param {string} $asUserId used for fetchOne and create functions
 	 * @param {string} $publisherId used for fetchOne and create functions
 	 * @param {string} $name used for fetchOne and create functions
-	 * @param {string} $type used for create function
-	 * @param {array} [$options] to pass to fetchOne. Also the following will be passed to create:
+	 * @param {array} [$options] to pass to fetchOne. Also the following options to be used with stream creation:
+	 * @param {boolean|array} [$options.subscribe] pass true to autosubscribe 
+	 *   to the stream right after creating it. You can also pass an array of options 
+	 *   that will be passed to the subscribe function.
 	 * @param {array} [$options.fields] to pass to create function,
 	 *   if you want to set some fields besides "name"
 	 * @param {array} [$options.relate] to pass to create function,
 	 *   if you want to relate the newly created stream to a category
+	 * @param {array} [$options.type] to pass to create function,
+	 *   not required if the stream is described in Streams::userStreams (streams.json files)
 	 * @param {reference} [$results=array()] pass an array to fill with intermediate results
-	 * @return {Streams_Stream}
+	 *   such as "created" => boolean
+	 * @return {Streams_Stream|null} Returns the created stream, if any
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
 	static function fetchOneOrCreate(
 		$asUserId,
 		$publisherId,
 		$name,
-		$type,
 		$options = array(),
 		&$results = array())
 	{
-		$stream = Streams::fetchOne($asUserId, $publisherId, $name, $fields, $options, $results);
+		$stream = Streams::fetchOne($asUserId, $publisherId, $name, '*', $options, $results);
+		$results['created'] = false;
 		if ($stream) {
 			return $stream;
 		}
@@ -625,17 +630,26 @@ abstract class Streams extends Base_Streams
 		$fields['name'] = $name;
 		$stream = Streams::create($asUserId, 
 			$publisherId, 
-			$type,
+			Q::ifset($options, 'type', null),
 			$fields, 
 			Q::ifset($options, 'relate', null),
 			$relateResults
 		);
+		if (!$stream) {
+			return null;
+		}
 		if (is_array($results)) {
-			$results['relate'] = $relateResults;
+			$results['related'] = $relateResults;
 		}
-		if ($stream) {
-			return $stream;
+		if (!empty($options['subscribe'])) {
+			$so = is_array($options['subscribe'])
+				? $options['subscribe']
+				: array('skipAccess' => true);
+			$so['userId'] = $asUserId;
+			$results['participant'] = $stream->subscribe($so);
 		}
+		$results['created'] = true;
+		return $stream;
 	}
 
 	/**
@@ -4291,14 +4305,15 @@ abstract class Streams extends Base_Streams
 	 *   "deviceId", "platform", "appId", "version", "formFactor"
 	 *   to store in the Users_Device table for sending notifications
 	 * @param {array} [$identifier.app] an array with "platform" key, and optional "appId"
-	 * @param {array|string|true} [$icon=true] By default, the user icon is "default".
+	 * @param {array|string|true} [$icon=array()] By default, the user icon would be "default".
 	 *  But you can pass here an array of filename => url pairs, or a gravatar url to
-	 *  download the various sizes from gravatar. Finally, you can pass true to
-	 *  generate an icon instead of using the default icon.
-	 *  If $identifier['app']['platform'] is specified, and $icon==true, then
+	 *  download the various sizes from gravatar. 
+	 *  If $identifier['app']['platform'] is specified, and $icon array is empty, then
 	 *  an attempt will be made to download the icon from the user's account on the platform.
+	 *  Finally, you can pass true to generate an icon instead of using the default icon.
 	 * @param {array} [$options=array()] An array of options to Users::register() and also options that could include:
-	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message. Set to false to skip sending the activation message for some reason.
+	 * @param {string} [$options.activation] The key under "Users"/"transactional" config to use for sending an activation message.
+	 *   Set to false to skip sending the activation message and automatically set the email or phone number as confirmed.
 	 * @param {string} [$options.username] You can use this to set a custom username
 	 * @return {Users_User}
 	 * @throws {Q_Exception_WrongType} If identifier is not a valid email address or mobile number
@@ -4309,7 +4324,7 @@ abstract class Streams extends Base_Streams
 	static function register(
 		$fullName, 
 		$identifier, 
-		$icon = array(),  
+		$icon = true,  
 		$options = array())
 	{	
 		/**
