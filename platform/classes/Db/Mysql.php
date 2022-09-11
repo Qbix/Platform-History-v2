@@ -449,7 +449,7 @@ class Db_Mysql implements Db_Interface
 				$record = array();
 				if (is_array($fieldNames)) {
 					foreach ($fieldNames as $name) {
-						if (array_key_exists($name, $row->fields))) {
+						if (array_key_exists($name, $row->fields)) {
 							$record[$name] = $row->fields[$name];
 						}
 					}
