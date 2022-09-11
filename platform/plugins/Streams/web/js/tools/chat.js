@@ -386,7 +386,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					});
 				});
 
-				$te.find('.Streams_chat_call').attr('data-touchlabel', tool.text.RealTimeCall);
+				$te.find('.Streams_chat_call').attr('data-touchlabel', tool.text.JoinWebRTC);
 
 				if (Q.Users.loggedInUser
 				&& !state.stream.testWriteLevel('post')) {
