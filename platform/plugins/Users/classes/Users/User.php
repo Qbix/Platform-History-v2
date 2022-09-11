@@ -1279,9 +1279,9 @@ class Users_User extends Base_Users_User
 	 * @param $asUserId {string} The user id of inviting user
 	 * @param {string|array} $identifiers Can be email addresses or mobile numbers,
 	 *  passed either as an array or separated by "\t"
-	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
-	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers
 	 * @param {boolean} [$dontInsertFutureUsers=false] Pass true to skip inserting future users.
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
+	 * @param {array} $identifierTypes Optional reference to an array to populate with $identifierTypes values in the same order as $identifiers	
 	 * @return {array} The array of user ids, with the same indexes as the $identifiers.
 	 */
 	static function idsFromIdentifiers (

@@ -88,7 +88,10 @@ function Streams_before_Q_objects()
 		$pathToToken = APP_DIR.'/web/'.$path.'/'.$subpath;
 		Q_Utils::normalizePath($pathToToken);
 		if (file_exists($pathToToken)) {
-			$_SESSION['Users']['register']['icon'] = Q_Html::themedUrl("$path/$subpath", array("baseUrlPlaceholder" => true));
+			$_SESSION['Users']['register']['icon'] = Q_Html::themedUrl(
+				$path.DS.$subpath,
+				array("baseUrlPlaceholder" => true)
+			);
 		}
 		return;
 	}

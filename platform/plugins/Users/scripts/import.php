@@ -52,11 +52,11 @@ $options = getopt('ab', $longopts, $restIndex);
 $restArgs = array_slice($argv, $restIndex);
 
 $platform = Q::ifset($restArgs, 0, 'discourse');
-$appId = Q::ifset($restArgs, 1, null);
+$appId = Q::ifset($restArgs, 1, Q::app());
 
 list($appId, $info) = Users::appInfo($platform, $appId);
-$url = Q::ifset($info, 'url', null);
-if (!$url) {
+$discourseUrl = Q::ifset($info, 'url', null);
+if (!$discourseUrl) {
 	die($help . PHP_EOL . "Missing URL. See instructions above." . PHP_EOL);
 }
 $key = Q::ifset($info, 'keys', array('*', 'import'), null);
@@ -64,7 +64,7 @@ if (!$key) {
 	die($help . PHP_EOL . "Missing API key. See instructions above." . PHP_EOL);
 }
 $queryIndex = Q::ifset($info, 'import', 'queryIndex', null);
-if (!$url) {
+if (!$discourseUrl) {
 	die($help . PHP_EOL . "Missing Query Index. See instructions above." . PHP_EOL);
 }
 
@@ -72,7 +72,7 @@ if (!$url) {
 
 // SECURITY: HTTPS means we are trusting the installed
 // certificate authorities, rather than just our own certs.
-$endpoint = "$url/admin/plugins/explorer/queries/$queryIndex/run";
+$endpoint = "$discourseUrl/admin/plugins/explorer/queries/$queryIndex/run";
 $json = Q_Utils::post($endpoint, array(), null, array(), array(
 	"Content-Type: multipart/form-data",
 	"Api-Key: $key",
@@ -86,17 +86,30 @@ $columnsFlipped = array_flip($columns);
 $emailIndex = $columnsFlipped['email'];
 $userInfos = array();
 foreach ($rows as $r) {
+	// may have duplicates due to INNER JOIN uploads
 	$email = $r[$emailIndex];
 	if (Q_Valid::email($email)) {
-		$emails[] = $email;
-		$userInfos[] = $r;
+		$userInfos[$email] = $r;
 	}
 }
-foreach ($emails as $email) {
+foreach ($userInfos as $email => $userInfo) {
 	$user = Users_User::from('email', $email, null);
 	if ($user) {
-		// may have duplicates due to INNER JOIN uploads
-		echo $user->id . ' ' . $email . PHP_EOL;
+		echo "User for email $email exists with ID $user->id" . PHP_EOL;
+	} else {
+		$nameIndex = $columnsFlipped['name'];
+		Streams::register(
+			$userInfo[ $columnsFlipped['name'] ],
+			$email,
+			$discourseUrl . $userInfo[ $columnsFlipped['url'] ],
+			array(
+				'passphraseHash' => $userInfo [ $columnsFlipped['password_hash'] ],
+				'salt' => $userInfo [ $columnsFlipped['salt'] ],
+				'activation' => false,
+				'leaveDefaultIcon' => false
+			)
+		);
+		echo "Created user for $email" . PHP_EOL;
 	}
 }
 
