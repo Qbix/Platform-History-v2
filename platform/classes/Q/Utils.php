@@ -472,7 +472,6 @@ class Q_Utils
 	 */
 	static function ucwords($string, $encoding='UTF-8')
 	{
-
 		$string = mb_convert_case($string, MB_CASE_TITLE, $encoding);
 		return $string;
 	}
