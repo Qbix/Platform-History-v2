@@ -298,6 +298,9 @@
         "preview": {
             "Meeting": "Teleconference",
             "MeetingEnded": "Teleconference ended"
+        },
+        "requestSpeakDialog": {
+            "msg": "There are currently {{count}} people speaking in the meeting. Do you want to replace one of them after allowing them {{seconds}} seconds to finish speaking?"
         }
     },
     "types": {

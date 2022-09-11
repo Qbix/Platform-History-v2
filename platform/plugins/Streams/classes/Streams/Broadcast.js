@@ -242,7 +242,7 @@ Broadcast.listen = function () {
         return null;
     }
 
-    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
+    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], {});
 
     var io = socket.io;
     var nspName = '/broadcast';

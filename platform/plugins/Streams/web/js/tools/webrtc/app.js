@@ -50,7 +50,7 @@ window.WebRTCRoomClient = function app(options){
 
     if(typeof options === 'object') {
         var mergedOptions = {};
-        for (var key in defaultOptions) {
+        for (let key in defaultOptions) {
             if (defaultOptions.hasOwnProperty(key)) {
                 mergedOptions[key] = options.hasOwnProperty(key) && typeof options[key] !== 'undefined' ? options[key] : defaultOptions[key];
             }
@@ -125,7 +125,7 @@ window.WebRTCRoomClient = function app(options){
         }
         if(testPeerConnection != null) testPeerConnection.close();
 
-        for(var t in options.turnCredentials) {
+        for(let t in options.turnCredentials) {
             var turn = options.turnCredentials[t];
             pc_config['iceServers'].push(turn)
 
@@ -252,7 +252,7 @@ window.WebRTCRoomClient = function app(options){
             });
         }
         this.muteAudio = function () {
-            for(var i in this.tracks) {
+            for(let i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
                 track.trackEl.muted = true;
@@ -263,7 +263,7 @@ window.WebRTCRoomClient = function app(options){
         };
         this.unmuteAudio = function () {
             if(this.isAudioMuted == false) return;
-            for(var i in this.tracks) {
+            for(let i in this.tracks) {
                 var track = this.tracks[i];
                 if(track.kind != 'audio') continue;
                 track.trackEl.muted = false;
@@ -281,7 +281,7 @@ window.WebRTCRoomClient = function app(options){
 
             app.event.dispatch('participantRemoved', this);
 
-            for(var t = this.tracks.length - 1; t >= 0; t--){
+            for(let t = this.tracks.length - 1; t >= 0; t--){
 
                 if(this.tracks[t].mediaStreamTrack != null) {
                     this.tracks[t].mediaStreamTrack.stop();
@@ -294,7 +294,7 @@ window.WebRTCRoomClient = function app(options){
             if(this.RTCPeerConnection != null) this.RTCPeerConnection.close();
 
             if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS) iosrtcLocalPeerConnection.removeLocalNativeStreams();
-            for(var p = roomParticipants.length - 1; p >= 0; p--){
+            for(let p = roomParticipants.length - 1; p >= 0; p--){
                 if(roomParticipants[p].sid == this.sid) {
                     roomParticipants.splice(p, 1);
                     break;
@@ -633,7 +633,7 @@ window.WebRTCRoomClient = function app(options){
                         var average = participant.soundMeter.average = getAverage(freqData);
 
 
-                        for (var key in participant.soundMeter.visualizations) {
+                        for (let key in participant.soundMeter.visualizations) {
                             if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
                                 var visualization = participant.soundMeter.visualizations[key];
 
@@ -715,7 +715,7 @@ window.WebRTCRoomClient = function app(options){
 
                         if(participant.soundMeter.source.mediaStream != null && participant.soundMeter.source.mediaStream.active == false || participant.soundMeter.audioTrack.readyState == 'ended') {
                             var maxVolume;
-                            for (var key in participant.soundMeter.visualizations) {
+                            for (let key in participant.soundMeter.visualizations) {
                                 if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
                                     var visualization = participant.soundMeter.visualizations[key];
                                     if(visualization.type == 'border-color') continue;
@@ -733,7 +733,7 @@ window.WebRTCRoomClient = function app(options){
                             }
 
                             if(maxVolume <= 0) {
-                                for (var key in participant.soundMeter.visualizations) {
+                                for (let key in participant.soundMeter.visualizations) {
                                     if (participant.soundMeter.visualizations.hasOwnProperty(key)) {
                                         var visualization = participant.soundMeter.visualizations[key];
 
@@ -1203,7 +1203,7 @@ window.WebRTCRoomClient = function app(options){
              */
             function stopAllVisualizations(isRoomSwitch) {
                 removeCommonVisualization();
-                for(var p = roomParticipants.length - 1; p >= 0; p--){
+                for(let p = roomParticipants.length - 1; p >= 0; p--){
                     if(roomParticipants[p] == localParticipant) {
                         if(!isRoomSwitch && roomParticipants[p].soundMeter.source != null) roomParticipants[p].soundMeter.source.disconnect();
 
@@ -1792,7 +1792,7 @@ window.WebRTCRoomClient = function app(options){
                             if(this._color != null) return this._color;
                             var letters = '0123456789ABCDEF';
                             var color = '#';
-                            for (var i = 0; i < 6; i++) {
+                            for (let i = 0; i < 6; i++) {
                                 color += letters[Math.floor(Math.random() * 16)];
                             }
                             this._color = color;
@@ -2081,7 +2081,7 @@ window.WebRTCRoomClient = function app(options){
                             if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
 
                                 var childItems = 0;
-                                for(var i in _activeScene.sources) {
+                                for(let i in _activeScene.sources) {
                                     if(_activeScene.sources[i].parentGroup == _activeScene.sources[j]) {
                                         childItems++;
                                     }
@@ -2338,7 +2338,7 @@ window.WebRTCRoomClient = function app(options){
 
                         return;
                     }
-                    for(var i in _activeScene.sources) {
+                    for(let i in _activeScene.sources) {
                         if(_activeScene.sources[i] == source) {
                             console.log('moveForward ==', i);
                             console.log('moveSourceBackward for', _activeScene.sources[i], source);
@@ -2420,7 +2420,7 @@ window.WebRTCRoomClient = function app(options){
                 function showSource(source, excludeFromLayout) {
                     console.log('showSource', source);
                     if(source.sourceType == 'group') {
-                        for(var i in _activeScene.sources) {
+                        for(let i in _activeScene.sources) {
                             if(_activeScene.sources[i].parentGroup == source) {
                                 _activeScene.sources[i].active = true;
                                 if(_activeScene.sources[i].sourceType == 'webrtc') {
@@ -2475,7 +2475,7 @@ window.WebRTCRoomClient = function app(options){
                 function hideSource(source) {
                     console.log('hideSource', source);
                     if(source.sourceType == 'group') {
-                        for(var i in _activeScene.sources) {
+                        for(let i in _activeScene.sources) {
                             if(_activeScene.sources[i].parentGroup == source) {
                                 _activeScene.sources[i].active = false;
                             }
@@ -2539,7 +2539,7 @@ window.WebRTCRoomClient = function app(options){
                     log('updateWebRTCCanvasLayout currentWebRTCSources',  currentWebRTCSources)
 
                     var renderScreenSharingLayout = false;
-                    for(var v in participants) {
+                    for(let v in participants) {
                         log('updateWebRTCCanvasLayout participant', participants[v].online, participants[v])
 
                         let renderedTracks = [];
@@ -4018,7 +4018,7 @@ window.WebRTCRoomClient = function app(options){
 
                     //go over each bin
                     var x = x;
-                    for ( var i = 0; i < maxBinCount; i++ ){
+                    for ( let i = 0; i < maxBinCount; i++ ){
 
                         var value = dataArray[i];
                         var barHeight = value / 2;
@@ -4034,7 +4034,7 @@ window.WebRTCRoomClient = function app(options){
                         }
                     }
 
-                    /*for ( var i = 0; i < maxBinCount; i++ ){
+                    /*for ( let i = 0; i < maxBinCount; i++ ){
 
 						var value = dataArray[i];
 						if (value >= threshold) {
@@ -4043,7 +4043,7 @@ window.WebRTCRoomClient = function app(options){
 						}
 					}
 
-					for ( var i = 0; i < maxBinCount; i++ ){
+					for ( let i = 0; i < maxBinCount; i++ ){
 
 						var value = dataArray[i];
 						if (value >= threshold) {
@@ -4074,7 +4074,7 @@ window.WebRTCRoomClient = function app(options){
                     var x = ((data.rect.x + data.rect.width - data.rect.x) / 2) - barWidth + data.rect.x;
 
                     var lastRightX = x, lastLeftX = x, side = 'l';
-                    for (var i = 0; i < bufferLength; i++) {
+                    for (let i = 0; i < bufferLength; i++) {
                         barHeight = dataArray[i] * 0.2;
 
                         //var r = barHeight + (25 * (i/bufferLength));
@@ -4442,7 +4442,7 @@ window.WebRTCRoomClient = function app(options){
                             }
 
                             var rowsArray = [];
-                            for (var property in rows) {
+                            for (let property in rows) {
                                 if (rows.hasOwnProperty(property)) {
                                     rowsArray.push(rows[property]);
                                 }
@@ -4909,7 +4909,7 @@ window.WebRTCRoomClient = function app(options){
                         if (_activeScene.audioSources[j].sourceType == 'group' && _activeScene.audioSources[j].groupType == 'webrtc') {
 
                             var childItems = 0;
-                            for(var i in _activeScene.audioSources) {
+                            for(let i in _activeScene.audioSources) {
                                 if(_activeScene.audioSources[i].parentGroup == _activeScene.audioSources[j]) {
                                     childItems++;
                                 }
@@ -5037,7 +5037,7 @@ window.WebRTCRoomClient = function app(options){
 
                     var participants = _roomInstance.roomParticipants(true);
 
-                    for(var v in participants) {
+                    for(let v in participants) {
                         log('updateWebRTCAudioSources participant', participants[v].online, participants[v])
                         log('updateWebRTCAudioSources _activeScene.audioSources', _activeScene.audioSources)
 
@@ -6088,7 +6088,7 @@ window.WebRTCRoomClient = function app(options){
                     // write the PCM samples
                     var index = 44;
                     var volume = 1;
-                    for (var i = 0; i < interleaved.length; i++) {
+                    for (let i = 0; i < interleaved.length; i++) {
                         view.setInt16(index, interleaved[i] * (0x7FFF * volume), true);
                         index += 2;
                     }
@@ -6103,7 +6103,7 @@ window.WebRTCRoomClient = function app(options){
                 function flattenArray(channelBuffer, recordingLength) {
                     var result = new Float32Array(recordingLength);
                     var offset = 0;
-                    for (var i = 0; i < channelBuffer.length; i++) {
+                    for (let i = 0; i < channelBuffer.length; i++) {
                         var buffer = channelBuffer[i];
                         result.set(buffer, offset);
                         offset += buffer.length;
@@ -6117,7 +6117,7 @@ window.WebRTCRoomClient = function app(options){
 
                     var inputIndex = 0;
 
-                    for (var index = 0; index < length;) {
+                    for (let index = 0; index < length;) {
                         result[index++] = leftChannel[inputIndex];
                         result[index++] = rightChannel[inputIndex];
                         inputIndex++;
@@ -6126,7 +6126,7 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 function writeUTFBytes(view, offset, string) {
-                    for (var i = 0; i < string.length; i++) {
+                    for (let i = 0; i < string.length; i++) {
                         view.setUint8(offset + i, string.charCodeAt(i));
                     }
                 }
@@ -6827,7 +6827,7 @@ window.WebRTCRoomClient = function app(options){
                 type: parts[7]
             };
 
-            for (var i = 8; i < parts.length; i += 2) {
+            for (let i = 8; i < parts.length; i += 2) {
                 switch (parts[i]) {
                     case 'raddr':
                         candidate.relatedAddress = parts[i + 1];
@@ -6900,7 +6900,7 @@ window.WebRTCRoomClient = function app(options){
             var tracks = stream.getTracks();
             log('rawStreamSubscribed: tracks num: ' + tracks);
 
-            for (var t in tracks){
+            for (let t in tracks){
                 var track = tracks[t];
                 var trackToAttach = new Track();
                 trackToAttach.sid = track.sid;
@@ -7062,6 +7062,13 @@ window.WebRTCRoomClient = function app(options){
                 log('got canITurnMicOn ANSWER', message);
 
                 app.event.dispatch('canITurnMicOn', message);
+            });
+
+            socket.on('Streams/webrtc/canITurnCameraAndMicOn', function (message){
+
+                log('got canITurnCameraAndMicOn ANSWER', message);
+
+                app.event.dispatch('canITurnCameraAndMicOn', message);
             });
 
             socket.on('Streams/webrtc/getLimitsInfo', function (message){
@@ -7482,7 +7489,7 @@ window.WebRTCRoomClient = function app(options){
 
                     //we can eliminate checking whether .cameraIsEnabled() as all video tracks are stopped when user switches camera or screensharing off.
                     if('ontrack' in newPeerConnection){
-                        for (var t in localTracks) {
+                        for (let t in localTracks) {
                             log('createPeerConnection: add track ' + localTracks[t].kind)
 
                             if (localTracks[t].kind == 'video') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
@@ -7498,7 +7505,7 @@ window.WebRTCRoomClient = function app(options){
                     if(app.localMediaControls.micIsEnabled()){
 
                         if('ontrack' in newPeerConnection){
-                            for (var t in localTracks) {
+                            for (let t in localTracks) {
                                 log('createPeerConnection: add track ' + localTracks[t].kind)
 
                                 if(localTracks[t].kind == 'audio') newPeerConnection.addTrack(localTracks[t].mediaStreamTrack, localTracks[t].stream);
@@ -7750,7 +7757,7 @@ window.WebRTCRoomClient = function app(options){
             var tracksKind;
             var startLineOfVideoSection;
             var tracks = [];
-            for(var i = 0; i < sdpLines.length - 1; i++) {
+            for(let i = 0; i < sdpLines.length - 1; i++) {
                 let line = sdpLines[i];
                 if(line.indexOf('m=audio') != -1) tracksKind = 'audio';
                 if(line.indexOf('m=video') != -1) {
@@ -7789,9 +7796,9 @@ window.WebRTCRoomClient = function app(options){
             if(tracks.length == tracksToRemove.length) {
                 sdpLines.splice(startLineOfVideoSection, tracksToRemove[tracksToRemove.length - 1].endLine)
             } else {
-                for(var r in tracksToRemove) {
+                for(let r in tracksToRemove) {
                     var ttr = tracksToRemove[r];
-                    for(var i = ttr.startLine; i <= ttr.endLine; i++){
+                    for(let i = ttr.startLine; i <= ttr.endLine; i++){
                         sdpLines[i] = null;
                     }
                 }
@@ -7983,7 +7990,7 @@ window.WebRTCRoomClient = function app(options){
                             }
                         }
 
-                        for(var i = senderParticipant.iceCandidatesQueue.length - 1; i >= 0 ; i--){
+                        for(let i = senderParticipant.iceCandidatesQueue.length - 1; i >= 0 ; i--){
                             if(senderParticipant.iceCandidatesQueue[i] != null) {
                                 newPeerConnection.addIceCandidate(senderParticipant.iceCandidatesQueue[i].candidate);
                                 senderParticipant.iceCandidatesQueue[i] = null;
@@ -8036,7 +8043,7 @@ window.WebRTCRoomClient = function app(options){
                     });
 
                     var cancel = false;
-                    for(var s = audioSenders.length - 1; s >= 0 ; s--){
+                    for(let s = audioSenders.length - 1; s >= 0 ; s--){
 
                         for(let i = localParticipant.tracks.length - 1; i >= 0 ; i--){
                             if(localParticipant.tracks[i].mediaStreamTrack.id == audioSenders[s].track.id) {
@@ -8396,11 +8403,11 @@ window.WebRTCRoomClient = function app(options){
                 var videoTracks = [];
                 var audioTracks = [];
 
-                for (var s in streams) {
+                for (let s in streams) {
                     if(streams[s] == null) continue;
                     var localTracks = streams[s].getTracks();
 
-                    for (var i in localTracks) {
+                    for (let i in localTracks) {
                         if(!options.startWith[localTracks[i].kind]) {
                             log('socketRoomJoined skip track of kind ' + localTracks[i].kind);
                             localParticipant.notForUsingTracks.push(localTracks[i]);
@@ -8455,11 +8462,12 @@ window.WebRTCRoomClient = function app(options){
                 }
 
             } else {
-                for (var s in streams) {
+                for (let s in streams) {
                     if(streams[s] == null) continue;
+                    console.log('streams[s]', s, streams, streams[s])
                     var localTracks = streams[s].getTracks();
 
-                    for (var i in localTracks) {
+                    for (let i in localTracks) {
                         if(!options.startWith[localTracks[i].kind]) {
                             log('socketRoomJoined skip track of kind ' + localTracks[i].kind);
                             localParticipant.notForUsingTracks.push(localTracks[i]);
@@ -8535,7 +8543,7 @@ window.WebRTCRoomClient = function app(options){
                     log('loadDevicesList: ', device);
                     if (device.kind.indexOf('video') != -1) {
                         videoInputDevices.push(device);
-                        for (var x in localParticipant.tracks) {
+                        for (let x in localParticipant.tracks) {
                             var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
 
                             if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
@@ -8549,7 +8557,7 @@ window.WebRTCRoomClient = function app(options){
                         audioInputDevices.push(device);
                         log('loadDevicesList: tracks', localParticipant.tracks.length);
 
-                        for (var x in localParticipant.tracks) {
+                        for (let x in localParticipant.tracks) {
                             var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
 
                             log('loadDevicesList: audio: mediaStreamTrack', mediaStreamTrack);
@@ -8567,7 +8575,7 @@ window.WebRTCRoomClient = function app(options){
                         audioOutputDevices.push(device);
                     } else if (device.kind.indexOf('audio') != -1) {
                         audioInputDevices.push(device);
-                        for (var x in localParticipant.tracks) {
+                        for (let x in localParticipant.tracks) {
                             var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
 
                             if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
@@ -8622,6 +8630,7 @@ window.WebRTCRoomClient = function app(options){
         }
 
         function canITurnCameraOn() {
+            log('canITurnCameraOn');
             return new Promise((resolve, reject) => {
 
                 if (!socket) {
@@ -8644,6 +8653,35 @@ window.WebRTCRoomClient = function app(options){
                         app.event.off('canITurnCameraOn', reseivedAnswer);
                     }
                     app.event.on('canITurnCameraOn', reseivedAnswer);
+                }
+
+            });
+        }
+
+        function canITurnCameraAndMicOn() {
+            log('canITurnCameraAndMicOn');
+            return new Promise((resolve, reject) => {
+
+                if (!socket) {
+                    reject('No socket connection.');
+                } else {
+                    socket.emit('Streams/webrtc/canITurnCameraAndMicOn', {
+                        type: "request",
+                    });
+                    log('canITurnCameraAndMicOn sent')
+
+                    var reseivedAnswer = function (e) {
+                        log('canITurnCameraAndMicOn reseivedAnswer', e)
+
+                        if(e.answerValue === true) {
+                            resolve({answer: true, fromSid: e.fromSid, limit: e.limit});
+                        } else {
+                            resolve({answer: false, limit: e.limit});
+                        }
+
+                        app.event.off('canITurnCameraAndMicOn', reseivedAnswer);
+                    }
+                    app.event.on('canITurnCameraAndMicOn', reseivedAnswer);
                 }
 
             });
@@ -9259,7 +9297,7 @@ window.WebRTCRoomClient = function app(options){
             var i, participant;
             for(i = 0; participant = roomParticipants[i]; i++) {
                 if(participant.isLocal) continue;
-                for (var x in participant.tracks) {
+                for (let x in participant.tracks) {
                     var track = participant.tracks[x];
                     if (track.kind == 'audio') {
                         track.mediaStreamTrack.enabled = state;
@@ -9329,7 +9367,7 @@ window.WebRTCRoomClient = function app(options){
         function replaceTrack(track) {
             log('replaceTrack');
 
-            for (var p in roomParticipants) {
+            for (let p in roomParticipants) {
 
                 if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
                     if('ontrack' in roomParticipants[p].RTCPeerConnection){
@@ -9375,14 +9413,14 @@ window.WebRTCRoomClient = function app(options){
             //TODO: make camera request if no video
 
             var videoTracks = localParticipant.videoTracks();
-            for (var p in roomParticipants) {
+            for (let p in roomParticipants) {
 
                 if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
                     if('ontrack' in roomParticipants[p].RTCPeerConnection) {
 
                         log('enableVideoTracks: local videoTracks num = ' + videoTracks.length);
 
-                        for (var t in videoTracks) {
+                        for (let t in videoTracks) {
                             log('enableVideoTracks: addTrack: id = ' + (videoTracks[t].mediaStreamTrack.id), videoTracks[t].stream.id);
                             let videoSenderExist = roomParticipants[p].RTCPeerConnection.getSenders().filter(function (sender) {
                                 return sender.track != null && sender.track.kind == 'video' && sender.track.id == videoTracks[t].mediaStreamTrack.id;
@@ -9391,7 +9429,7 @@ window.WebRTCRoomClient = function app(options){
                             if(!videoSenderExist) roomParticipants[p].RTCPeerConnection.addTrack(videoTracks[t].mediaStreamTrack, videoTracks[t].stream);
                             /*var params = sender.getParameters();
 
-                            for (var i = 0; i < params.codecs.length; i++) {
+                            for (let i = 0; i < params.codecs.length; i++) {
                                 if (params.codecs[i].mimeType == "video/rtx") {
 
                                     var codecToApply = params.codecs[i];
@@ -9501,7 +9539,7 @@ window.WebRTCRoomClient = function app(options){
                         }
                         log('disableVideoTracks: videoSenders', videoSenders);
 
-                        for(var s = videoSenders.length - 1; s >= 0 ; s--){
+                        for(let s = videoSenders.length - 1; s >= 0 ; s--){
 
                             let skip = false;
                             for(let i = localParticipant.tracks.length - 1; i >= 0; i--){
@@ -9531,12 +9569,12 @@ window.WebRTCRoomClient = function app(options){
                                 return false;
                             });
                         }
-                        for (var s in RTCLocalStreams) {
+                        for (let s in RTCLocalStreams) {
                             log('disableVideoTracks: remove stream from PC')
 
                             let skip = false;
                             let videoTracks = RTCLocalStreams[s].getVideoTracks();
-                            for(var v in videoTracks) {
+                            for(let v in videoTracks) {
                                 for(let i = localParticipant.tracks.length - 1; i >= 0 ; i--){
                                     if(localParticipant.tracks[i].mediaStreamTrack.id == videoTracks[v].id) {
                                         log('disableVideoTracks: remove track from list');
@@ -9639,7 +9677,7 @@ window.WebRTCRoomClient = function app(options){
                     });
 
                     var trackExists = false;
-                    for(var s = audioSenders.length - 1; s >= 0 ; s--){
+                    for(let s = audioSenders.length - 1; s >= 0 ; s--){
 
                         for(let i = localParticipant.tracks.length - 1; i >= 0 ; i--){
 
@@ -9653,7 +9691,7 @@ window.WebRTCRoomClient = function app(options){
                     //if(trackExists) continue;
 
                     if(_isiOS && typeof cordova == 'undefined') {
-                        for (var t in audioTracks) {
+                        for (let t in audioTracks) {
                             log('enableAudioTracks: add track: enabled = ' + audioTracks[t].mediaStreamTrack.enabled);
                             log('enableAudioTracks: add track: muted = ' + audioTracks[t].mediaStreamTrack.muted);
                             if(trackExists) {
@@ -9666,7 +9704,7 @@ window.WebRTCRoomClient = function app(options){
                             }
                         }
                     } else {
-                        for (var t in audioTracks) {
+                        for (let t in audioTracks) {
                             log('enableAudioTracks: add track: enabled = ' + audioTracks[t].mediaStreamTrack.enabled);
                             log('enableAudioTracks: add track: muted = ' + audioTracks[t].mediaStreamTrack.muted);
                             roomParticipants[p].RTCPeerConnection.addTrack(audioTracks[t].mediaStreamTrack);
@@ -9677,9 +9715,9 @@ window.WebRTCRoomClient = function app(options){
                     log('enableAudioTracks: enable tracks of stream')
 
                     var RTCLocalStreams = roomParticipants[p].RTCPeerConnection.getLocalStreams();
-                    for (var s in RTCLocalStreams) {
+                    for (let s in RTCLocalStreams) {
                         var audioTracks = RTCLocalStreams[s].getAudioTracks();
-                        for(var v in audioTracks) {
+                        for(let v in audioTracks) {
                             audioTracks[v].enabled = true;
                         }
 
@@ -9699,7 +9737,7 @@ window.WebRTCRoomClient = function app(options){
             log('disableAudioTracks')
             if(micIsDisabled) return;
 
-            for (var p in roomParticipants) {
+            for (let p in roomParticipants) {
 
                 if (roomParticipants[p].RTCPeerConnection && 'ontrack' in roomParticipants[p].RTCPeerConnection) {
                     if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
@@ -9707,7 +9745,7 @@ window.WebRTCRoomClient = function app(options){
                             return sender.track && sender.track.kind == 'audio';
                         });
 
-                        for(var s = audioSenders.length - 1; s >= 0 ; s--){
+                        for(let s = audioSenders.length - 1; s >= 0 ; s--){
                             roomParticipants[p].RTCPeerConnection.removeTrack(audioSenders[s]);
                         }
                     }
@@ -9717,9 +9755,9 @@ window.WebRTCRoomClient = function app(options){
 
                     if (!roomParticipants[p].isLocal && roomParticipants[p].RTCPeerConnection != null && roomParticipants[p].RTCPeerConnection.connectionState != 'closed') {
                         var RTCLocalStreams = roomParticipants[p].RTCPeerConnection.getLocalStreams();
-                        for (var s in RTCLocalStreams) {
+                        for (let s in RTCLocalStreams) {
                             var audioTracks = RTCLocalStreams[s].getAudioTracks();
-                            for(var v in audioTracks) {
+                            for(let v in audioTracks) {
                                 log('disableAudioTracks: disable track of stream');
                                 audioTracks[v].enabled = false;
                             }
@@ -9771,7 +9809,8 @@ window.WebRTCRoomClient = function app(options){
             currentAudioOutputDevice: getCurrentAudioOutputDevice,
             getRoomLimitsInfo: getRoomLimitsInfo,
             canITurnCameraOn: canITurnCameraOn,
-            canITurnMicOn: canITurnMicOn
+            canITurnMicOn: canITurnMicOn,
+            canITurnCameraAndMicOn: canITurnCameraAndMicOn
         }
     }())
 
@@ -9813,7 +9852,7 @@ window.WebRTCRoomClient = function app(options){
 
             var videoDevices = 0;
             var audioDevices = 0;
-            for(var i in mediaDevices) {
+            for(let i in mediaDevices) {
                 log('initOrConnectWithNodeJs: enumerateDevices: device: ', mediaDevices[i]);
                 if (mediaDevices[i].kind === 'videoinput' || mediaDevices[i].kind === 'video') {
                     videoDevices++;
@@ -9882,7 +9921,7 @@ window.WebRTCRoomClient = function app(options){
 
             var videoDevices = 0;
             var audioDevices = 0;
-            for(var i in mediaDevices) {
+            for(let i in mediaDevices) {
                 if (mediaDevices[i].kind.indexOf('video') != -1) {
                     videoDevices++;
                 } else if (mediaDevices[i].kind.indexOf('audio') != -1) {
@@ -9983,7 +10022,7 @@ window.WebRTCRoomClient = function app(options){
                                 };
                                 return iosrtcLocalPeerConnection.setAnswer(message).then(function () {
 
-                                    for (var i in iceQueue) {
+                                    for (let i in iceQueue) {
                                         if(iceQueue[i] != null) iosrtcLocalPeerConnection.addIceCandidate(iceQueue[i]);
                                         iceQueue[i] = null;
                                     }
@@ -10121,7 +10160,7 @@ window.WebRTCRoomClient = function app(options){
 
             function removeRemoteStreams() {
                 var localTracks = localParticipant.tracks;
-                for (var t in localTracks) {
+                for (let t in localTracks) {
                     if(localTracks[t].stream != null) {
                         localTracks[t].mediaStreamTrack.stop();
                         localParticipant.RTCPeerConnection.removeStream(localTracks[t].stream);
@@ -10153,7 +10192,7 @@ window.WebRTCRoomClient = function app(options){
                 var description = new iosrtcRTCSessionDescription(message.sdp);
 
                 return localParticipant.iosrtcRTCPeerConnection.setRemoteDescription(description).then(function () {
-                    for (var i in iceQueue) {
+                    for (let i in iceQueue) {
                         if(iceQueue[i] != null) nativeLocalWebRTCPeerConnection.addIceCandidate(iceQueue[i]);
                         iceQueue[i] = null;
                     }
@@ -10283,7 +10322,7 @@ window.WebRTCRoomClient = function app(options){
 
             function removeLocalNativeStreams(kind) {
                 var RTCLocalStreams = localParticipant.iosrtcRTCPeerConnection.getLocalStreams();
-                for (var t in RTCLocalStreams) {
+                for (let t in RTCLocalStreams) {
                     if(kind != null) {
                         let videoTracks = RTCLocalStreams[t].getVideoTracks();
                         let audioTracks = RTCLocalStreams[t].getAudioTracks();
@@ -10441,7 +10480,7 @@ window.WebRTCRoomClient = function app(options){
 
         var findScript = function (src) {
             var scripts = document.getElementsByTagName('script');
-            for (var i=0; i<scripts.length; ++i) {
+            for (let i=0; i<scripts.length; ++i) {
                 var srcTag = scripts[i].getAttribute('src');
                 if (srcTag && srcTag.indexOf(src) != -1) {
                     return true;
@@ -10720,7 +10759,7 @@ window.WebRTCRoomClient = function app(options){
             localParticipant.notForUsingTracks[t].stop();
         }
 
-        for(var p = roomParticipants.length - 1; p >= 0; p--){
+        for(let p = roomParticipants.length - 1; p >= 0; p--){
 
             if(!roomParticipants[p].isLocal) {
                 if (roomParticipants[p].RTCPeerConnection != null) roomParticipants[p].RTCPeerConnection.close();

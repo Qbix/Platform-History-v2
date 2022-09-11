@@ -66,7 +66,7 @@ WebRTC.listen = function () {
 
     var WebcastServer = require('./WebRTC/WebcastServer')(config);
 
-    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
+    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], {});
     var io = socket.io;
     var webrtcNamespace = io.of('/webrtc');
 
