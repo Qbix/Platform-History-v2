@@ -39,7 +39,8 @@
             "Join": "{{displayName}} csatlakozott a csevegéshez",
             "Leave": "{{displayName}} kilépett a csevegésből",
             "RelatedTo": "{{displayName}} elindított egy {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferencia"
     },
     "notifications": {
         "ManageEmailSubscriptions": "kezelheti e-mail-feliratkozásait",

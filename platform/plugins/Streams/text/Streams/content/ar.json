@@ -38,7 +38,8 @@
             "Join": "انضم {{displayName}} إلى الدردشة",
             "Leave": "غادر {{displayName}} المحادثة",
             "RelatedTo": "بدأ {{displayName}} {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "مؤتمر عبر الهاتف"
     },
     "notifications": {
         "*": "أرسل {{& message.fields.type}} إلى {{& stream.fields.title}}",

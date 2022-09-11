@@ -38,7 +38,8 @@
             "Join": "{{displayName}} txatean sartu da",
             "Leave": "{{displayName}} txatetik irten da",
             "RelatedTo": "{{displayName}} bat hasi zuen {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferentzia"
     },
     "notifications": {
         "*": "Mezua {{& message.fields.type}}-ri {{& stream.fields.title}}",

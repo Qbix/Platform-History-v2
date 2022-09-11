@@ -38,7 +38,8 @@
             "Join": "{{displayName}} çata qoşuldu",
             "Leave": "{{displayName}} söhbəti tərk etdi",
             "RelatedTo": "{{displayName}} {{stream.displayType}} başladı"
-        }
+        },
+        "JoinWebRTC": "Telekonfrans"
     },
     "notifications": {
         "*": "Mesaj {{& message.fields.type}} {{& stream.fields.title}}",

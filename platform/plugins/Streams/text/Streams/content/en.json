@@ -33,6 +33,7 @@
         "earlierComments": "earlier comments",
         "startedConversation": "started a conversation",
         "RealTimeCall": "Real Time Call",
+        "JoinWebRTC": "Teleconference",
         "SearchByName": "Search by name",
         "Notifications": {
             "Visit": "{{displayName}} is visiting the chat",

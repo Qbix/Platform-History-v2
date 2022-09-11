@@ -39,7 +39,8 @@
             "Join": "{{displayName}} menyertai sembang",
             "Leave": "{{displayName}} meninggalkan sembang",
             "RelatedTo": "{{displayName}} memulakan {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telesidang"
     },
     "notifications": {
         "ManageEmailSubscriptions": "menguruskan langganan e-mel anda",

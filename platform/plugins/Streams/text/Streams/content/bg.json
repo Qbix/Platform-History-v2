@@ -38,7 +38,8 @@
             "Join": "{{displayName}} се присъедини към чата",
             "Leave": "{{displayName}} напусна чата",
             "RelatedTo": "{{displayName}} започна {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Телеконференция"
     },
     "notifications": {
         "*": "Съобщение {{& message.fields.type}} до {{& stream.fields.title}}",

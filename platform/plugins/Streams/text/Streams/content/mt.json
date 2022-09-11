@@ -39,7 +39,8 @@
             "Join": "{{displayName}} ingħaqad maċ-chat",
             "Leave": "{{displayName}} ħalla ċ-chat",
             "RelatedTo": "{{displayName}} beda {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferenza"
     },
     "notifications": {
         "ManageEmailSubscriptions": "immaniġġja l-abbonamenti tal-email tiegħek",

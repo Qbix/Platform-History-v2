@@ -38,7 +38,8 @@
             "Join": "{{displayName}} bergabung dengan obrolan",
             "Leave": "{{displayName}} meninggalkan obrolan",
             "RelatedTo": "{{displayName}} memulai {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferensi"
     },
     "notifications": {
         "*": "Pesan {{& message.fields.type}} ke {{& stream.fields.title}}",

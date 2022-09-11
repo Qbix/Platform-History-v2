@@ -39,7 +39,8 @@
             "Join": "{{displayName}} pievienojās tērzēšanai",
             "Leave": "{{displayName}} pameta tērzēšanu",
             "RelatedTo": "{{displayName}} uzsāka {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonference"
     },
     "notifications": {
         "ManageEmailSubscriptions": "pārvaldīt savus e-pasta abonementus",

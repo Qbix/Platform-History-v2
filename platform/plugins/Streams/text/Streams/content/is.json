@@ -39,7 +39,8 @@
             "Join": "{{displayName}} tengdist spjallinu",
             "Leave": "{{displayName}} yfirgaf spjallið",
             "RelatedTo": "{{displayName}} hóf {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Fjarfundur"
     },
     "notifications": {
         "ManageEmailSubscriptions": "stjórna tölvupóstáskriftum þínum",

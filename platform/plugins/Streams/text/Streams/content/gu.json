@@ -39,7 +39,8 @@
             "Join": "{{displayName}} ચેટમાં જોડાયા",
             "Leave": "{{displayName}} એ ચેટ છોડી દીધી",
             "RelatedTo": "{{displayName}} એ {{stream.displayType}} શરૂ કર્યું"
-        }
+        },
+        "JoinWebRTC": "ટેલિકોન્ફરન્સ"
     },
     "notifications": {
         "ManageEmailSubscriptions": "તમારા ઇમેઇલ સબ્સ્ક્રિપ્શન્સનું સંચાલન કરો",

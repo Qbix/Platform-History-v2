@@ -38,7 +38,8 @@
             "Join": "{{displayName}} הצטרפו לצ&#39;אט",
             "Leave": "{{displayName}} עזב את הצ&#39;אט",
             "RelatedTo": "{{displayName}} הקים {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "ועידה טלפונית"
     },
     "notifications": {
         "*": "הודעה {{& message.fields.type}} ל {{& stream.fields.title}}",

@@ -39,7 +39,8 @@
             "Join": "{{displayName}}이(가) 채팅에 참여했습니다.",
             "Leave": "{{displayName}}이(가) 채팅을 떠났습니다.",
             "RelatedTo": "{{displayName}}이(가) {{stream.displayType}}을(를) 시작했습니다."
-        }
+        },
+        "JoinWebRTC": "원격 회의"
     },
     "notifications": {
         "ManageEmailSubscriptions": "이메일 구독 관리",

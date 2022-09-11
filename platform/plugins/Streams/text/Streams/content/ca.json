@@ -38,7 +38,8 @@
             "Join": "{{displayName}} s&#39;ha unit al xat",
             "Leave": "{{displayName}} va sortir del xat",
             "RelatedTo": "{{displayName}} va iniciar un {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Teleconferència"
     },
     "notifications": {
         "*": "Missatge {{& message.fields.type}} a {{& stream.fields.title}}",

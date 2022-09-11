@@ -38,7 +38,8 @@
             "Join": "{{displayName}} iu bashkua bisedës",
             "Leave": "{{displayName}} u largua nga biseda",
             "RelatedTo": "{{displayName}} filloi një {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Telekonferencë"
     },
     "notifications": {
         "*": "Mesazh {{& message.fields.type}} te {{& stream.fields.title}}",

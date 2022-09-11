@@ -39,7 +39,8 @@
             "Join": "{{displayName}} चैट में शामिल हुए",
             "Leave": "{{displayName}} ने चैट छोड़ दी",
             "RelatedTo": "{{displayName}} ने एक {{stream.displayType}} प्रारंभ किया"
-        }
+        },
+        "JoinWebRTC": "दूर संवाद"
     },
     "notifications": {
         "ManageEmailSubscriptions": "अपनी ईमेल सदस्यता प्रबंधित करें",

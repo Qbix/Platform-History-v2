@@ -39,7 +39,8 @@
             "Join": "{{displayName}} அரட்டையில் சேர்ந்தார்",
             "Leave": "{{displayName}} அரட்டையிலிருந்து வெளியேறினார்",
             "RelatedTo": "{{displayName}} ஒரு {{stream.displayType}} தொடங்கினார்"
-        }
+        },
+        "JoinWebRTC": "தொலைதொடர்பு"
     },
     "notifications": {
         "ManageEmailSubscriptions": "உங்கள் மின்னஞ்சல் சந்தாக்களை நிர்வகிக்கவும்",

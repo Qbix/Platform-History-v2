@@ -39,7 +39,8 @@
             "Join": "{{displayName}} چیٹ میں شامل ہوئے۔",
             "Leave": "{{displayName}} نے چیٹ چھوڑ دیا۔",
             "RelatedTo": "{{displayName}} نے ایک {{stream.displayType}} شروع کیا"
-        }
+        },
+        "JoinWebRTC": "ٹیلی کانفرنس"
     },
     "notifications": {
         "ManageEmailSubscriptions": "اپنی ای میل سبسکرپشنز کا نظم کریں۔",

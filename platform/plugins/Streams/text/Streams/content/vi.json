@@ -39,7 +39,8 @@
             "Join": "{{displayName}} đã tham gia cuộc trò chuyện",
             "Leave": "{{displayName}} đã rời khỏi cuộc trò chuyện",
             "RelatedTo": "{{displayName}} đã bắt đầu một {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Hội nghị từ xa"
     },
     "notifications": {
         "ManageEmailSubscriptions": "quản lý đăng ký email của bạn",

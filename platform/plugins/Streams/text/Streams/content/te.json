@@ -39,7 +39,8 @@
             "Join": "{{displayName}} చాట్‌లో చేరారు",
             "Leave": "{{displayName}} చాట్ నుండి నిష్క్రమించారు",
             "RelatedTo": "{{displayName}} {{stream.displayType}}ని ప్రారంభించింది"
-        }
+        },
+        "JoinWebRTC": "టెలికాన్ఫరెన్స్"
     },
     "notifications": {
         "ManageEmailSubscriptions": "మీ ఇమెయిల్ సభ్యత్వాలను నిర్వహించండి",

@@ -39,7 +39,8 @@
             "Join": "{{displayName}} sohbete katıldı",
             "Leave": "{{displayName}} sohbetten ayrıldı",
             "RelatedTo": "{{displayName}} bir {{stream.displayType}} başlattı"
-        }
+        },
+        "JoinWebRTC": "Tele konferans"
     },
     "notifications": {
         "ManageEmailSubscriptions": "e-posta aboneliklerinizi yönetin",

@@ -39,7 +39,8 @@
             "Join": "{{displayName}} s-a alăturat chatului",
             "Leave": "{{displayName}} a părăsit chatul",
             "RelatedTo": "{{displayName}} a început un {{stream.displayType}}"
-        }
+        },
+        "JoinWebRTC": "Teleconferinta"
     },
     "notifications": {
         "ManageEmailSubscriptions": "gestionați-vă abonamentele de e-mail",
