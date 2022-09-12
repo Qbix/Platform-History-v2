@@ -257,15 +257,31 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		$baseUrl = Q_Request::baseUrl();
 		$config = Q_Config::get(
-			'Users', 'web3', 'contracts', $contractAddress, array()
+			'Users', 'web3', 'contracts', array()
 		);
-		$contracts = Q_Config::get("Users", "web3", "contracts", array());
+		$ca = strtolower($contractAddress);
+		$found = true;
+		foreach ($config as $a => $info) {
+			if (strtolower($a) === $ca) {
+				$found = $info;
+				break;
+			}
+		}
+		if (!$found) {
+			if ($throwIfNotFound) {
+				if ($throwIfNotFound) {
+					throw new Q_Exception_MissingConfig(array(
+						'fieldpath' => "Users/web3/contracts/$ca"
+					));
+				}
+			}
+		}
 		$filename = $ABI = $content = $cache = null;
-		if (!empty($config['filename'])) {
-			$filename = Q::interpolate($config['filename'], compact("contractAddress"));
+		if (!empty($found['filename'])) {
+			$filename = Q::interpolate($found['filename'], compact("contractAddress"));
 			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $filename));
-		} else if (!empty($config['dir'])) {
-			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $config['dir']))
+		} else if (!empty($found['dir'])) {
+			$filename = APP_WEB_DIR . DS . implode(DS, explode('/', $found['dir']))
 				. DS . "$contractAddress.json";
 		}
 		if ($filename) {
@@ -278,33 +294,37 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 			$content = file_get_contents($filename);
 		}
-		if (!$content and !empty($config['url'])) {
-			$url = Q_Uri::interpolateUrl($config['url'], compact("baseUrl", "contractAddress"));
+		if (!$content and !empty($found['url'])) {
+			$url = Q_Uri::interpolateUrl($found['url'], compact("baseUrl", "contractAddress"));
 			$methodName = "Q.Users.Web3.getABI";
 			$cache = self::getCache('0x1', $contractAddress, $methodName, array($url));
 			if ($caching && $cache->wasRetrieved()) {
 				$content = $cache->result;
-			} else if ($filename = Q_Uri::filenameFromUrl($url)) {
-				$content = file_get_contents($filename);
 			} else {
-				$content = Q_Utils::get($url);
-				$ABI = Q::json_decode($content, true);
-				if (!empty($ABI['result'])) {
-					$ABI = $ABI["result"]; // from etherscan-like endpoint
-					if (is_string($ABI)) {
-						try {
-							$ABI = Q::json_decode($ABI, true);
-						} catch (Exception $e) {
-							if ($throwIfNotFound) {
-								throw new Q_Exception_BadValue(array(
-									'internal' => 'ABI file content',
-									'problem' => 'Invalid JSON'
-								));
+				if ($filename = Q_Uri::filenameFromUrl($url)) {
+					$content = file_get_contents($filename);
+				} else {
+					$content = Q_Utils::get($url);
+					$ABI = Q::json_decode($content, true);
+					if (!empty($ABI['result'])) {
+						$ABI = $ABI["result"]; // from etherscan-like endpoint
+						if (is_string($ABI)) {
+							try {
+								$ABI = Q::json_decode($ABI, true);
+							} catch (Exception $e) {
+								if ($throwIfNotFound) {
+									throw new Q_Exception_BadValue(array(
+										'internal' => 'ABI file content',
+										'problem' => 'Invalid JSON'
+									));
+								}
+								return null;
 							}
-							return null;
 						}
 					}
 				}
+				$cache->result = $content;
+				$cache->save(true);
 			}
 		}
 		if (empty($ABI)) {
@@ -319,10 +339,6 @@ class Users_Web3 extends Base_Users_Web3 {
 				}
 				return null;
 			}
-		}
-		if ($cache) {
-			$cache->result = $content;
-			$cache->save(true);
 		}
 		return $ABI;
 	}
