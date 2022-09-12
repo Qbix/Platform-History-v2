@@ -1,4 +1,4 @@
-(function (Q, Assets, Streams, $) {
+(function (Q) {
 
 	/**
 	 * Various front-end functionality dealing with awards, badges, credits, etc.
@@ -6,8 +6,8 @@
 	 */
 
 	var Users = Q.Users;
-	Streams = Q.Streams;
-	Assets = Q.Assets = Q.plugins.Assets = {
+	var Streams = Q.Streams;
+	var Assets = Q.Assets = Q.plugins.Assets = {
 
 		/**
 		 * Operates with credits.
@@ -33,6 +33,7 @@
 			 *  @param {number} [options.amount=100] Default amount of credits to buy.
 			 *  @param {string} [options.currency=USD] Currency ISO 4217 code (USD, EUR etc)
 			 *  @param {string} [options.missing=false] Whether to show text about credits missing.
+			 *  @param {object} [options.metadata] Data to pass to payment gateway to get them back and save to message instructions
 			 *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
 			 *  @param {function} [options.onFailure] Callback to run when payment failed.
 			 */
@@ -109,7 +110,8 @@
 							Assets.Payments.stripe({
 								amount: amount,
 								currency: currency,
-								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits}),
+								metadata: options.metadata
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
@@ -170,13 +172,21 @@
 					if (!response.slots.status) {
 						var details = response.slots.details;
 
+						var metadata = {};
+						// some payment gateways require metadata values only strings
+						if (!Q.isEmpty(options.toStream)) {
+							metadata.publisherId = options.toStream.publisherId;
+							metadata.streamName = options.toStream.streamName;
+						}
+
 						Assets.Credits.buy({
 							missing: true,
 							amount: details.needCredits,
 							onSuccess: function () {
 								Assets.Credits.pay(options);
 							},
-							onFailure: options.onFailure
+							onFailure: options.onFailure,
+							metadata: metadata
 						});
 						return;
 					}
@@ -457,6 +467,7 @@
 			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
 			 *  @param {String} [options.description] Operation code which detailed text can be fetch from lang json (Assets/content/payments).
 			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
+			 *  @param {object} [options.metadata] Data to pass to payment gateway to get them back and save to message instructions
 			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
 			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
 			 *  @param {Boolean} [options.shippingAddress] Specify whether Checkout should collect the user's shipping address (true or false). The default is false.
@@ -530,6 +541,7 @@
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
+			 *  @param {Object} options.metadata Data to pass to payment gateway to get them back and save to message instructions
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
 			 *  @param {Function} [callback]
 			 */
@@ -614,7 +626,7 @@
 												// The payment has succeeded.
 												//Assets.Payments.stripePaymentResult({status: 'succeeded'})
 												setTimeout(function () {
-													Q.handle(callback)
+													Q.handle(callback, null, [null, confirmResult.paymentIntent]);
 												}, 3000);
 											}
 										});
@@ -622,7 +634,7 @@
 										// The payment has succeeded.
 										//Assets.Payments.stripePaymentResult({status: 'succeeded'})
 										setTimeout(function () {
-											Q.handle(callback)
+											Q.handle(callback, null, [null, confirmResult.paymentIntent]);
 										}, 3000);
 									}
 								});
@@ -673,7 +685,7 @@
 									Q.Dialogs.pop();
 									//Assets.Payments.stripePaymentResult(paymentIntent);
 									setTimeout(function () {
-										Q.handle(callback)
+										Q.handle(callback, null, [null, paymentIntent]);
 									}, 3000);
 								}).catch(function (error) {
 									Q.Dialogs.pop();
@@ -701,11 +713,35 @@
 								return Q.alert(msg);
 							}
 
-							pipeDialog.fill("paymentIntent")(response);
+							var paymentIntent = Q.getObject(["slots", "intent"], response);
+							var clientSecret = paymentIntent.client_secret;
+							if (!clientSecret) {
+								Q.handle(callback, null, [true]);
+								Q.Dialogs.pop();
+								throw new Exception('clientSecret empty');
+							}
+							var token = paymentIntent.token;
+							if (!token) {
+								Q.handle(callback, null, [true]);
+								Q.Dialogs.pop();
+								throw new Exception('token empty');
+							}
+
+							// listen Assets/user/credits stream for message
+							Streams.Stream.onMessage(Users.loggedInUser.id, 'Assets/user/credits', 'Assets/credits/bought').set(function(stream, message) {
+								if (token !== message.getInstruction('token')) {
+									return;
+								}
+
+								Q.handle(callback, null, [null]);
+							}, token);
+
+							pipeDialog.fill("paymentIntent")(clientSecret);
 						}, {
 							fields: {
 								amount: options.amount,
-								currency: options.currency
+								currency: options.currency,
+								metadata: options.metadata
 							}
 						});
 					},

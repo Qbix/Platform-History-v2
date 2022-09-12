@@ -48,7 +48,7 @@ function Assets_stripeWebhook_response_content ($params) {
 				$metadata = (array)Q::ifset($paymentIntent, "metadata", array());
 
 				// set user to metadata
-				$userId = Q::ifset($paymentIntent, "metadata", "userId", null);
+				$userId = Q::ifset($metadata, "userId", null);
 				if ($userId) {
 					$user = Users::fetch($userId, true);
 					$metadata["user"] = $user;
@@ -61,8 +61,8 @@ function Assets_stripeWebhook_response_content ($params) {
 				}
 
 				// set stream to metadata
-				$publisherId = Q::ifset($paymentIntent, "metadata", "publisherId", null);
-				$streamName = Q::ifset($paymentIntent, "metadata", "streamName", null);
+				$publisherId = Q::ifset($metadata, "publisherId", null);
+				$streamName = Q::ifset($metadata, "streamName", null);
 				if ($publisherId && $streamName) {
 					$metadata["stream"] = Streams::fetchOne($publisherId, $publisherId, $streamName);
 				}

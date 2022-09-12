@@ -15,11 +15,16 @@ function Assets_payment_response_intent($options)
 	Q_Valid::requireFields(array('amount'), $options, true);
 
 	$options['currency'] = Q::ifset($options, 'currency', 'usd');
+	$metadata = Q::ifset($options, 'metadata', array());
+	$metadata['token'] = uniqid();
 
 	$stripe = new Assets_Payments_Stripe();
 	$paymentIntent = $stripe->createPaymentIntent($options['amount'], $options['currency'], array(
-		"metadata" => Q::ifset($options, 'metadata', array())
+		"metadata" => $metadata
 	));
 
-	return $paymentIntent->client_secret;
+	return array(
+		'client_secret' => $paymentIntent->client_secret,
+		'token' => $paymentIntent->metadata->token
+	);
 };
