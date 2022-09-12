@@ -873,7 +873,7 @@
 				 * @param {String} [info.suffix] to override global suffix, if necessary
 				 * @return {Promise} promise from ethers.Contract call transaction
 				 */
-				setSeriesInfo: function (contractAddress, seriesId, info, callback) {
+				 setSeriesInfo: function (contractAddress, seriesId, info, callback) {
 					if (typeof contractAddress !== 'string'
 					&& !(contractAddress instanceof String)) {
 						throw new Q.Error("contractAddress must be a string");
@@ -888,7 +888,9 @@
 					var onSaleUntil = info.onSaleUntil
 						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
-					var price = String(info.fixedPointPrice || ethers.utils.parseEther(info.price));
+					var price = info.fixedPointPrice
+						? String(info.fixedPointPrice)
+						: ethers.utils.parseEther(String(info.price));
 					info.commission = info.commission || {};
 					var commissionFraction = Math.floor((info.commission.fraction || 0) * FRACTION);
 					var commissionAddress = info.commission.address || authorAddress;
