@@ -234,13 +234,12 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @static
 	 * @param {string} $contractAddress - The address of the contract. The chain doesn't matter
 	 *  because we assume all contracts with same address have same code on all chains.
-	 *  If you 
-	 * @param {string} $chainId
-	 * @param {string} [$caching=true] - Set false to ignore cache and request blockchain every time.
+	 * @param {string} [$appId=Q::app()] Indicate the appId anyway, we need it to get config
 	 * @param {Boolean} [$throwIfNotFound=true] - If true, throw exception if ABI file not found.
-	 * @return {string|null} Tries filename, then $dir/$contractAddress.json, then url from config
+	 * @param {string} [$caching=true] - Set false to ignore cache and request URL every time.
+	 * @return {array|null} Tries filename, then $dir/$contractAddress.json, then url from config
 	 */
-	static function getABI ($contractAddress, $chainId, $caching=true, $throwIfNotFound=true)
+	static function getABI ($contractAddress, $appId, $throwIfNotFound=true, $caching=true)
 	{
 		/**
 		 * @event Users/Web3/getABI {before}
@@ -260,6 +259,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$config = Q_Config::get(
 			'Users', 'web3', 'contracts', $contractAddress, array()
 		);
+		$contracts = Q_Config::get("Users", "web3", "contracts", array());
 		$filename = $ABI = $content = $cache = null;
 		if (!empty($config['filename'])) {
 			$filename = Q::interpolate($config['filename'], compact("contractAddress"));
@@ -281,7 +281,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		if (!$content and !empty($config['url'])) {
 			$url = Q_Uri::interpolateUrl($config['url'], compact("baseUrl", "contractAddress"));
 			$methodName = "Q.Users.Web3.getABI";
-			$cache = self::getCache($chainId, $contractAddress, $methodName, array($url));
+			$cache = self::getCache('0x1', $contractAddress, $methodName, array($url));
 			if ($caching && $cache->wasRetrieved()) {
 				$content = $cache->result;
 			} else if ($filename = Q_Uri::filenameFromUrl($url)) {
