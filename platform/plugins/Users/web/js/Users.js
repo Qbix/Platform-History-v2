@@ -4124,6 +4124,14 @@
 		 * @method switchChain
 		 * @static
 		 * @param {Object} info
+		 * @param {String} info.chainId
+		 * @param {String} info.name
+		 * @param {String} info.currency
+		 * @param {String} info.currency.name
+		 * @param {String} info.currency.symbol
+		 * @param {Number} info.currency.decimals
+		 * @param {Array} info.rpcUrls
+		 * @param {Array} info.blockExplorerUrls
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
 		 */
