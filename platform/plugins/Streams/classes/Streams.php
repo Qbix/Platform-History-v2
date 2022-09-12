@@ -3186,7 +3186,7 @@ abstract class Streams extends Base_Streams
 	 * subscription - change type(s) or modify notifications
 	 * @method subscribe
 	 * @static
-	 * @param {string} $asUserId The id of the user that is joining. Pass null here to use the logged-in user's id.
+	 * @param {string} $asUserId The id of the user that is joining and subscribing. Pass null here to use the logged-in user's id.
 	 * @param {string} $publisherId The id of the user publishing all the streams
 	 * @param {array} $streams An array of Streams_Stream objects or stream names
 	 * @param {array} [$options=array()] Options for the subscribe() and join() methods

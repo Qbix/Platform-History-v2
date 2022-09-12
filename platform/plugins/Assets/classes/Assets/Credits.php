@@ -236,6 +236,7 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {array} [$more=array()] An array supplying more optional info, including
 	 * @param {string} [$more.publisherId] The publisher of the stream representing the purchase
 	 * @param {string} [$more.streamName] The name of the stream representing the purchase
+	 * @param {string} [$more.fromUserId=Q::app()] Consider passing Users::communityId() here instead
 	 * @throws
 	 */
 	static function grant($amount, $reason, $userId = null, $more = array())
@@ -260,9 +261,11 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$stream = self::userStream($userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
-		$stream->changed();
+		$stream->changed(Q::app());
 
-		$assets_credits = self::createRow($amount, $reason, $userId, null, $more);
+		$fromUserId = Q::ifset($more, 'fromUserId', Q::app());
+
+		$assets_credits = self::createRow($amount, $reason, $userId, $fromUserId, $more);
 		$more = self::fillInstructions($assets_credits, $more);
 
 		// Post that this user granted $amount credits by $reason
@@ -428,10 +431,10 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @param {string} $toUserId User id who gets the credits.
 	 * @param {string} $fromUserId User id who sends the credits.
 	 * @param {array} [$more] An array supplying more optional info, including things like
-	 * @param {string} [$more.toPublisherId] The publisher of the valuable stream for which the payment is made
-	 * @param {string} [$more.toStreamName] The name of the stream valuable for which the payment is made
-	 * @param {string} [$more.fromPublisherId] The publisher of the value-receiving stream on whose behalf the payment is made
-	 * @param {string} [$more.fromStreamName] The name of the value-receiving stream on whose behalf the payment is made
+	 * @param {string} [$more.toPublisherId] The publisher of the value-producing stream for which the payment is made
+	 * @param {string} [$more.toStreamName] The name of the stream value-producing for which the payment is made
+	 * @param {string} [$more.fromPublisherId] The publisher of the value-consuming stream on whose behalf the payment is made
+	 * @param {string} [$more.fromStreamName] The name of the value-consuming stream on whose behalf the payment is made
 	 * @return {Assets_Credits} Assets_Credits row
 	 */
 	private static function createRow ($amount, $reason, $toUserId = null, $fromUserId = null, $more = array()) {
@@ -459,9 +462,9 @@ class Assets_Credits extends Base_Assets_Credits
 
 		if ($toPublisherId && $toStreamName) {
 			$more['toStreamTitle'] = Streams_Stream::fetch($toPublisherId, $toPublisherId, $toStreamName)->title;
-			$more['toUserName'] = Users::fetch($toPublisherId, true)->displayName();
+			$more['toUserName'] = Users::fetch($toPublisherId, true)->displayName(array('asUserId' => $fromUserId));
 		} elseif ($toUserId) {
-			$more['toUserName'] = Users::fetch($toUserId, true)->displayName();
+			$more['toUserName'] = Users::fetch($toUserId, true)->displayName(array('asUserId' => $fromUserId));
 		}
 
 		if ($fromPublisherId && $fromStreamName) {

@@ -13,7 +13,7 @@ function Assets_NFT_response_getRemoteJSON ($params) {
 	if ($tokenURI) {
 		$dataJson = Assets_NFT::fetchMetadata($tokenURI);
 	} elseif ($tokenId && $chainId && $contractAddress) {
-		$ABI = Q::ifset($ABI, Users_Web3::getABIFileContent($contractAddress, $chainId));
+		$ABI = Q::ifset($ABI, Users_Web3::getABI($contractAddress, $chainId));
 
 		// execute tokenURI if exists
 		if (Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {

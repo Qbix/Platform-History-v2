@@ -38,18 +38,17 @@
 		});
 
 		// watch for tool.element scrollHeight change
-		Q.onLayout(tool.element).set(function () {
+		var ival = setInterval(function () {
 			if (state.lastScrollHeight < tool.element.scrollHeight) {
 				// if flipped, scroll down to the value of scrollHeight diff
 				if (state.flipped) {
 					tool.element.scrollTop += tool.element.scrollHeight - state.lastScrollHeight;
 				}
-
 				state.waiting = false;
+				clearInterval(ival);
 			}
-
 			state.lastScrollHeight = tool.element.scrollHeight;
-		}, tool);
+		}, 300);
 
 		// listen for included tools rendered
 		var includedTools = [];

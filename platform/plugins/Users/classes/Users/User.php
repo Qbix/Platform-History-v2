@@ -234,26 +234,31 @@ class Users_User extends Base_Users_User
 	/**
 	 * Verifies a passphrase against a hash generated previously
 	 * @method verifyPassphrase
+* @param {string} $existingHash the hash that is was previously generated
 	 * @param {string} $passphrase the passphrase to hash
-	 * @param {string} $existing_hash the hash that is was previously generated
+	 * @param {boolean} $isHashed whether the passphrase was already hashed on the client
 	 * @return {boolean} whether the password is verified to be correct, or not
 	 */
-	function verifyPassphrase ($passphrase, $existing_hash)
+	function verifyPassphrase ($existingHash, $passphrase, $isHashed)
 	{
-		if (empty($existing_hash)) {
+		if (empty($existingHash)) {
 			return false;
 		}
 		// Try using various algorithms
 		$algorithms = Q_Config::expect('Users', 'passphrase', 'algorithms');
 		foreach ($algorithms as $algorithm => $options) {
 			if ($algorithm === 'password_hash') {
-				if ($existing_hash[0] === '$'
-				and password_verify($passphrase, $existing_hash)) {
+				$p = $isHashed ? $passphrase : sha1($passphrase . "\t" . $this->id);
+				if ($existingHash[0] === '$'
+				and password_verify($p, $existingHash)) {
 					return true;
 				}
 			} else if ($algorithm === 'hash_pbkdf2') {
+				if ($isHashed) {
+					return false; // TODO: support doing some iterations on the client in JS first
+				}
 				$iterations = Q::ifset($options, 'iterations', 64000);
-				if ($existing_hash === hash_pbkdf2('sha256', $passphrase, $this->salt, $iterations, 64, false)) {
+				if ($existingHash === hash_pbkdf2('sha256', $passphrase, $this->salt, $iterations, 64, false)) {
 					return true;
 				}
 			}

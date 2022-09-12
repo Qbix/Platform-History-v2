@@ -792,9 +792,9 @@
 		 * Create batcher
 		 * @method batchFunction
 		 */
-		butchFunctions: {},
+		batchFunctions: {},
 		batchFunction: function Assets_batchFunction() {
-			return Q.batcher.factory(this.butchFunctions, Q.info.baseUrl,"/action.php/Assets/batch", "batch", "batch");
+			return Q.batcher.factory(this.batchFunctions, Q.info.baseUrl,"/action.php/Assets/batch", "batch", "batch");
 		},
 
 		NFT: {
@@ -856,7 +856,7 @@
 				/**
 				 * Set the info for a series
 				 * @method setSeriesInfo
-				 * @param {String} chainId
+				 * @param {String} contractAddress
 				 * @param {String} seriesId
 				 * @param {Object} info Only info.price is really required
 				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
@@ -871,13 +871,12 @@
 				 * @param {Address} [info.commission.address] where to send commissions to
 				 * @param {String} [info.baseURI] to override global baseURI, if necessary
 				 * @param {String} [info.suffix] to override global suffix, if necessary
-				 * @param {String} [info.contractAddress] to override global contract address for this chainId
-				 * @param {function} callback - called when transaction failed (with err true) or success (with err null)
+				 * @return {Promise} promise from ethers.Contract call transaction
 				 */
-				setSeriesInfo: function (chainId, seriesId, info, callback) {
-					if (typeof chainId !== 'string'
-						&& !(chainId instanceof String)) {
-						throw new Q.Error("chainId must be a string");
+				 setSeriesInfo: function (contractAddress, seriesId, info, callback) {
+					if (typeof contractAddress !== 'string'
+					&& !(contractAddress instanceof String)) {
+						throw new Q.Error("contractAddress must be a string");
 					}
 					if (seriesId.toString().substr(0, 2) !== '0x') {
 						throw new Q.Error("seriesId must be a string starting with 0x");
@@ -887,7 +886,7 @@
 					var authorAddress = info.authorAddress || Q.Users.Web3.getSelectedXid();
 					var limit = info.limit || 0;
 					var onSaleUntil = info.onSaleUntil
-						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*365));
+						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
 					var price = info.fixedPointPrice
 						? String(info.fixedPointPrice)
@@ -897,43 +896,16 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-
-					Q.Assets.NFT.Web3.checkProvider(chainId, function (err, contract) {
-						if (err) {
-							return Q.handle(callback, null, [true]);
-						}
-
-						var _waitTransaction = function (transactionRequest) {
-							if (!Q.getObject("wait", transactionRequest)) {
-								Q.handle(callback, null, [true])
-								return Q.alert("Transaction request invalid!");
-							}
-
-							transactionRequest.wait(1).then(function (TransactionReceipt) {
-								if (Assets.NFT.Web3.isSuccessfulTransaction(TransactionReceipt)) {
-									Q.handle(callback, TransactionReceipt, [null, seriesId]);
-								} else {
-									Q.handle(callback, TransactionReceipt, ["transaction failed", seriesId]);
-								}
-							}, function (err) {
-								Q.alert(err.reason, {
-									title: "Error"
-								});
-								Q.handle(callback, null, [err.reason]);
-							});
-						};
-
-						contract.setSeriesInfo(seriesId,
-							[authorAddress, limit,
+					return Q.Users.Web3.getContract(contractAddress)
+					.then(function (contract) {
+						return contract.setSeriesInfo(seriesId, 
+							[authorAddress, limit, 
 								[onSaleUntil, currency, price],
 								[commissionFraction, commissionAddress], baseURI, suffix
 							]
-						).then(_waitTransaction).catch(function (err) {
-							Q.handle(callback, this, [err]);
-							Q.alert(Q.getObject("data.message", err) || Q.firstErrorMessage(err));
-						});
-					}, {
-						contractAddress: info.contractAddress
+						);
+					}).catch(function (err) {
+						Q.alert(err);
 					});
 				},
 				/**

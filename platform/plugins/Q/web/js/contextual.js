@@ -405,7 +405,10 @@
 				Q.Contextual.leaveEventHandler = function (e) {
 					var className = e.target.className;
 					if (typeof className === "string" && className.split(' ').indexOf('Q_contextual') >= 0) {
-						Q.Contextual.hide();
+						var element = Q.Pointer.elementFromPoint(Q.Pointer.getX(e), Q.Pointer.getY(e));
+						if (!e.target.contains(element)) {
+							Q.Contextual.hide();
+						}
 					}
 				};
 				$(document.body).on(Q.Pointer.enter, Q.Contextual.enterEventHandler);

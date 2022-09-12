@@ -6,7 +6,7 @@ function Assets_NFT_response_getABI ($params) {
 	$chainId = Q::ifset($request, "chainId", null);
 	$contractAddress = Q::ifset($request, "contractAddress", null);
 
-	$ABI = Users_Web3::getABIFileContent($contractAddress, $chainId);
+	$ABI = Users_Web3::getABI($contractAddress, $chainId);
 
 	return $ABI;
 }

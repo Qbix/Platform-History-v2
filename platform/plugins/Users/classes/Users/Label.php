@@ -33,7 +33,7 @@ class Users_Label extends Base_Users_Label
 	 * @param {string} [$title=''] specify the title, otherwise a default one is generated
 	 * @param {string} [$icon='labels/default']
 	 * @param {string|false} [$asUserId=null] The user to do this operation as.
-	 *   Defaults to the logged-in user. Pass false to skip access checks.
+	 *   Defaults to the logged-in user. Pass false to skip access checks and set Q::app() as the user.
 	 * @param boolean [$unlessExists=false] If true, skips adding label if it already exists
 	 *   in the database.
 	 * @return {Users_Label}

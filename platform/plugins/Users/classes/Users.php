@@ -62,12 +62,11 @@ abstract class Users extends Base_Users
 		return $communityId ? $communityId : Q::app();
 	}
 	/**
-	 * Get the id of a currently selected community, if one was set in the session.
-	 * The default return value is the id of the main community, Users::communityId()
+	 * Get the id of the currently selected community, if one was set in the session.
 	 * @method currentCommunityId
 	 * @static
-	 * @param {bool} $defaultMainCommunity If true and communityId from session empty, use main community id.
-	 * @return {string} The id of the current community
+	 * @param {bool} $defaultMainCommunity If true and communityId from session empty, return the main community id.
+	 * @return {string} The id of the current community, or null if none and defaultMainCommunity = fale
 	 */
 	static function currentCommunityId($defaultMainCommunity = false)
 	{
@@ -753,10 +752,7 @@ abstract class Users extends Base_Users
 		}
 
 		// User exists in database. Now check the passphrase.
-		if (!$isHashed) {
-			$passphrase = sha1($passphrase . "\t" . $user->id);
-		}
-		if (!$user->verifyPassphrase($passphrase, $user->passphraseHash)) {
+		if (!$user->verifyPassphrase($user->passphraseHash, $passphrase, $isHashed)) {
 			throw new Users_Exception_WrongPassphrase(@compact('identifier'), 'passphrase');
 		}
 
@@ -1949,7 +1945,8 @@ abstract class Users extends Base_Users
 	/**
 	 * Checks whether one user can manage contact labels of another user
 	 * @static
-	 * @param {string} $asUserId The user who would be doing the managing
+	 * @param {string|false} $asUserId The user who would be doing the managing.
+	 *   If it equals false or Q::app() then the function always returns true.
 	 * @param {string} $userId The user whose contact labels they are
 	 * @param {string} $label The label that will be managed
 	 * @param {boolean} $throwIfNotAuthorized Throw an exception if not authorized
@@ -1964,7 +1961,7 @@ abstract class Users extends Base_Users
 		$throwIfNotAuthorized = false,
 		$readOnly = false
 	) {
-		if ($asUserId === false) {
+		if ($asUserId === false || $asUserId === Q::app()) {
 			return true;
 		}
 		$authorized = false;
