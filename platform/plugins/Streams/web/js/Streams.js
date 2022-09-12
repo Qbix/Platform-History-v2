@@ -2230,32 +2230,7 @@ var Stream = Streams.Stream = function (fields) {
 		return;
 	}
 	this.constructed = true;
-	this.fields = Q.copy(fields, [
-		'publisherId',
-		'name',
-		'type',
-		'title',
-		'content',
-		'attributes',
-		'icon',
-		'messageCount',
-		'invitedCount',
-		'participatingCount',
-		'leftCount',
-		'insertedTime',
-		'updatedTime',
-		'readLevel',
-		'writeLevel',
-		'adminLevel',
-		'inheritAccess',
-		'closedTime',
-		'access',
-		'messageTotals',
-		'relatedToTotals',
-		'relatedFromTotals',
-		'isRequired',
-		'participant'
-	]);
+	this.fields = Q.copy(fields);
 	this.typename = 'Q.Streams.Stream';
 	prepareStream(this, fields);
 };
@@ -2302,18 +2277,6 @@ Stream.construct = function _Stream_construct(fields, extra, callback, updateCac
 	if (!streamFunc) {
 		streamFunc = Streams.defined[type] = function StreamConstructor(fields) {
 			streamFunc.constructors.apply(this, arguments);
-			// Default constructor. Copy any additional fields.
-			if (!fields) return;
-			for (var k in fields) {
-				if ((k in this.fields)
-					|| k === 'messageTotals'
-					|| k === 'relatedToTotals'
-					|| k === 'relatedFromTotals'
-					|| k === 'participant'
-					|| k === 'access'
-					|| k === 'isRequired') continue;
-				this.fields[k] = Q.copy(fields[k]);
-			}
 		};
 	}
 	if (typeof streamFunc === 'function') {
