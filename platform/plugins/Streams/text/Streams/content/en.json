@@ -151,6 +151,10 @@
             "CheckYourEmail": "Please check your email and follow instructions!"
         }
     },
+    "identifier": {
+        "privateAccess": "Private",
+        "publicAccess": "Public"
+    },
     "participating": {
         "Title": "Title",
         "Subscribed": "Subscribed",
