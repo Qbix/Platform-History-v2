@@ -6068,10 +6068,16 @@ Q.onInit.add(function _Streams_onInit() {
 							return Q.alert(fem);
 						}
 	
-						if (Q.getObject("slots.result", response) == true) {
-							console.log('changed1 true')
+						if (Q.getObject("slots.result", response) != false) {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.configurationSaved != null ? Q.text.Streams.identifier.configurationSaved : 'Configuration saved',
+								timeout: 5
+							});
 						} else {
-
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.error != null ? Q.text.Streams.identifier.error : 'Something went wrong',
+								timeout: 5
+							});
 						}
 					}, {
 						method: "post",
@@ -6091,9 +6097,16 @@ Q.onInit.add(function _Streams_onInit() {
 							return Q.alert(fem);
 						}
 	
-						if (Q.getObject("slots.result", response) == true) {
-							
-							console.log('changed1 true')
+						if (Q.getObject("slots.result", response) != false) {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.configurationSaved != null ? Q.text.Streams.identifier.configurationSaved : 'Configuration saved',
+								timeout: 5
+							});
+						} else {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.error != null ? Q.text.Streams.identifier.error : 'Something went wrong',
+								timeout: 5
+							});
 						}
 					}, {
 						method: "post",

@@ -153,7 +153,9 @@
     },
     "identifier": {
         "privateAccess": "Private",
-        "publicAccess": "Public"
+        "publicAccess": "Public",
+        "configurationSaved": "Configuration saved",
+        "error": "Something went wrong"
     },
     "participating": {
         "Title": "Title",
