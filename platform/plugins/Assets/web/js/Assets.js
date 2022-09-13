@@ -716,13 +716,13 @@
 							if (!clientSecret) {
 								Q.handle(callback, null, [true]);
 								Q.Dialogs.pop();
-								throw new Exception('clientSecret empty');
+								throw new Q.Exception('clientSecret empty');
 							}
 							var token = paymentIntent.token;
 							if (!token) {
 								Q.handle(callback, null, [true]);
 								Q.Dialogs.pop();
-								throw new Exception('token empty');
+								throw new Q.Exception('token empty');
 							}
 
 							// listen Assets/user/credits stream for message
