@@ -296,8 +296,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		if (!$content and !empty($found['url'])) {
 			$url = Q_Uri::interpolateUrl($found['url'], compact("baseUrl", "contractAddress"));
-			$methodName = "Q.Users.Web3.getABI";
-			$cache = self::getCache('0x1', $contractAddress, $methodName, array($url));
+			$methodName = "Users_Web3::getABI";
+			$cacheDuration = 300000000;
+			$cache = self::getCache('0x1', $contractAddress, $methodName, array($url), $cacheDuration);
 			if ($caching && $cache->wasRetrieved()) {
 				$content = $cache->result;
 			} else {
