@@ -31,7 +31,7 @@ function Streams_identifierAccess_post($params = array())
         $stream->readLevel = 0;
         $changed = $stream->changed();
     } else if($access == 'public') {
-       $stream->readLevel = 10;
+       $stream->readLevel = 40;
        $changed = $stream->changed();
     }
 
