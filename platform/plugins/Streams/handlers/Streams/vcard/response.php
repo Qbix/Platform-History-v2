@@ -3,6 +3,7 @@ function Streams_vcard_response ($params) {
     $userId = Q_Dispatcher::uri()->userId;
     $communityName = Users::communityName();
     $communityId = Users::communityId();
+    $loggedInUserId = Users::loggedInUser()->id;
 
     $vcr = "BEGIN:VCARD\n";
     $vcr .= "VERSION:3.0\n";
@@ -44,20 +45,32 @@ function Streams_vcard_response ($params) {
         $vcr .= "NICKNAME:$nickname\n";
     }
 
-    $emailAddress = !empty($user->emailAddress) ? $user->emailAddress : $user->emailAddressPending;
-    if(!empty($emailAddress)){
-        $vcr .= "EMAIL:$emailAddress\n";
+    $emailStream = Streams::fetchOneOrCreate($loggedInUserId, $user->id, "Streams/user/emailAddress");
+    if($emailStream) {
+        $emailStream->calculateAccess($loggedInUserId);
+        if ($emailStream->testReadLevel('content')) {
+            $email = $emailStream->fields['content'];
+            if(!empty($email)){
+                $vcr .= "EMAIL:$email\n";
+            }
+        }
     }
 
-    $telNumber = $user->mobileNumber;
-    if(!empty($telNumber)){
-        $vcr .= "TEL;TYPE=cell:$telNumber\n";
+    $numberStream = Streams::fetchOneOrCreate($loggedInUserId, $user->id, "Streams/user/mobileNumber");
+    if($numberStream) {
+        $numberStream->calculateAccess($loggedInUserId);
+        if ($numberStream->testReadLevel('content')) {
+            $number = $numberStream->fields['content'];
+            if(!empty($number)){
+                $vcr .= "TEL;TYPE=cell:$number\n";
+            }
+        }
     }
 
     $greetingStream = Streams::fetchOne(null, $user->id, "Streams/greeting/" . $communityName);
     if($greetingStream) {
 
-        $greetingStream->calculateAccess($user->id);
+        $greetingStream->calculateAccess($loggedInUserId);
         if ($greetingStream->testReadLevel('content')) {
             $note = preg_replace("/\n/m", "\\n", $greetingStream->fields['content']);
 
@@ -69,7 +82,7 @@ function Streams_vcard_response ($params) {
 
     $genderStream = Streams::fetchOne(null, $user->id, "Streams/user/gender");
     if($genderStream) {
-        $genderStream->calculateAccess($user->id);
+        $genderStream->calculateAccess($loggedInUserId);
         if ($genderStream->testReadLevel('content')) {
             $gender = $genderStream->fields['content'];
             if(!empty($gender)){
@@ -80,7 +93,7 @@ function Streams_vcard_response ($params) {
 
     $birthdayStream = Streams::fetchOne(null, $user->id, "Streams/user/birthday");
     if($birthdayStream) {
-        $birthdayStream->calculateAccess($user->id);
+        $birthdayStream->calculateAccess($loggedInUserId);
         if ($birthdayStream->testReadLevel('content')) {
             $birthday = $birthdayStream->fields['content'];
             if(!empty($birthday)){
@@ -105,7 +118,7 @@ function Streams_vcard_response ($params) {
 
     $adrStream = Streams::fetchOne(null, $user->id, "Places/user/location/home");
     if($adrStream) {
-        $adrStream->calculateAccess($user->id);
+        $adrStream->calculateAccess($loggedInUserId);
         if ($adrStream->testReadLevel('content')) {
             $adress = $adrStream->getAttribute('address');
             if(!empty($adress)){
@@ -116,7 +129,7 @@ function Streams_vcard_response ($params) {
 
     $locationStream = Streams::fetchOne(null, $user->id, "Places/user/location");
     if($locationStream) {
-        $locationStream->calculateAccess($user->id);
+        $locationStream->calculateAccess($loggedInUserId);
         if ($locationStream->testReadLevel('content')) {
             $geolocLatitude = $locationStream->getAttribute('latitude');
             $geolocLongitude = $locationStream->getAttribute('longitude');
@@ -128,7 +141,7 @@ function Streams_vcard_response ($params) {
 
     $linkedinStream = Streams::fetchOne(null, $user->id, "Streams/user/linkedin");
     if($linkedinStream) {
-        $linkedinStream->calculateAccess($user->id);
+        $linkedinStream->calculateAccess($loggedInUserId);
         if ($linkedinStream->testReadLevel('content')) {
             $linkedinName = $linkedinStream->fields['content'];
             if(!empty($linkedinName)){
@@ -140,7 +153,7 @@ function Streams_vcard_response ($params) {
 
     $facebookStream = Streams::fetchOne(null, $user->id, "Streams/user/facebook");
     if($facebookStream) {
-        $facebookStream->calculateAccess($user->id);
+        $facebookStream->calculateAccess($loggedInUserId);
         if ($facebookStream->testReadLevel('content')) {
             $fbProfile = $facebookStream->fields['content'];
             if(!empty($fbProfile)){
@@ -152,7 +165,7 @@ function Streams_vcard_response ($params) {
 
     $twitterStream = Streams::fetchOne(null, $user->id, "Streams/user/twitter");
     if($twitterStream) {
-        $twitterStream->calculateAccess($user->id);
+        $twitterStream->calculateAccess($loggedInUserId);
         if ($twitterStream->testReadLevel('content')) {
             $twitterName = $twitterStream->fields['content'];
             if(!empty($twitterName)){
@@ -164,7 +177,7 @@ function Streams_vcard_response ($params) {
 
     $instagramStream = Streams::fetchOne(null, $user->id, "Streams/user/instagram");
     if($instagramStream) {
-        $instagramStream->calculateAccess($user->id);
+        $instagramStream->calculateAccess($loggedInUserId);
         if ($instagramStream->testReadLevel('content')) {
             $instagramName = $instagramStream->fields['content'];
             if(!empty($instagramName)){
@@ -175,7 +188,7 @@ function Streams_vcard_response ($params) {
     }
     $githubStream = Streams::fetchOne(null, $user->id, "Streams/user/github");
     if($githubStream) {
-        $githubStream->calculateAccess($user->id);
+        $githubStream->calculateAccess($loggedInUserId);
         if ($githubStream->testReadLevel('content')) {
             $githubName = $githubStream->fields['content'];
             if(!empty($githubName)){
