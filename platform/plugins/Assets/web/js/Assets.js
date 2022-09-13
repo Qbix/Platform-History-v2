@@ -623,17 +623,11 @@
 											} else {
 												// The payment has succeeded.
 												//Assets.Payments.stripePaymentResult({status: 'succeeded'})
-												setTimeout(function () {
-													Q.handle(callback, null, [null, confirmResult.paymentIntent]);
-												}, 3000);
 											}
 										});
 									} else {
 										// The payment has succeeded.
 										//Assets.Payments.stripePaymentResult({status: 'succeeded'})
-										setTimeout(function () {
-											Q.handle(callback, null, [null, confirmResult.paymentIntent]);
-										}, 3000);
 									}
 								});
 							});
@@ -682,9 +676,6 @@
 
 									Q.Dialogs.pop();
 									//Assets.Payments.stripePaymentResult(paymentIntent);
-									setTimeout(function () {
-										Q.handle(callback, null, [null, paymentIntent]);
-									}, 3000);
 								}).catch(function (error) {
 									Q.Dialogs.pop();
 
