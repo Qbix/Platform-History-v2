@@ -15,7 +15,7 @@ function Assets_after_Assets_charge($params)
 
 	Assets_Credits::grant($credits, 'BoughtCredits', $user->id, array(
 		"charge" => @compact("amount", "currency"),
-		"token" => $options["token"]
+		"token" => Q::ifset($options, 'token', null)
 	));
 
 	//TODO: as we come to use credits system, need to change this to send email with amount of credits bought
@@ -38,9 +38,7 @@ function Assets_after_Assets_charge($params)
 		$publisherId = Users::communityId();
 		$publisher = Users_User::fetch($publisherId, true);
 	}
-	if (isset($options['description'])) {
-		$description = $options['description'];
-	}
+	$description = Q::ifset($options, 'description', null);
 	list($currencyName, $symbol) = Assets::currency($currency);
 	$displayAmount = Assets::display($currency, $amount);
 	$communityId = Users::communityId();
