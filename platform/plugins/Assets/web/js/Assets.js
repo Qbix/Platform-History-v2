@@ -1470,7 +1470,7 @@
 
 				var _createNotice = function (stream, message) {
 					// check if message already displayed
-					var messageId = message.getInstruction('messageId');
+					var messageId = message.getInstruction('messageId') || message.getInstruction('token');
 					if (Q.isEmpty(this.usedIds)) {
 						this.usedIds = [messageId];
 					} else if (this.usedIds.includes(messageId)) {
