@@ -841,6 +841,8 @@
 #Users_setIdentifier_dialog .Users_setIdentifier_access {
 	display: flex;
 	margin: 5px 0;
+	justify-content: center;
+	align-items: center;
 }
 
 #Users_setIdentifier_dialog .Users_setIdentifier_access .Users_setIdentifier_access_label:last-child {
