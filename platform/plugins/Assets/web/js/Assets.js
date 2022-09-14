@@ -896,7 +896,7 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract(contractAddress)
+					return Q.Users.Web3.getContract('Assets/templates/NFT', contractAddress)
 					.then(function (contract) {
 						return contract.setSeriesInfo(seriesId, 
 							[authorAddress, limit, 
@@ -917,143 +917,59 @@
 				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
 				 */
 				getFactory: function (chain, callback, options) {
-					if (Q.isEmpty(window.ethereum)) {
-						return Q.handle(callback, null, ["Ethereum provider not found", null]);
-					}
-
-					// if chain is a chainId, convert to chain
-					if (Q.typeOf(chain) === "string") {
-						chain = Assets.NFT.chains[chain];
-					}
-
-					var _subMethod = function (factory) {
-						// if option checkWeb3 defined, check if web3 wallet connected
-						if (Q.getObject("checkWeb3", options) === true) {
-							return Q.Users.Web3.connect(function (err, provider) {
-								Q.handle(callback, null, [err, factory]);
-							});
-						}
-
-						// else just return factory
-						Q.handle(callback, null, [null, factory]);
-					};
-
-					var address = chain.factory;
-					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTFactoryTemplate.json")];
-					var pipe = new Q.pipe(urls, function (params) {
-						var contractURL = null;
-						Q.each(urls, function (i, url) {
-							if (contractURL || params[url][0] !== 200) {
-								return;
-							}
-
-							contractURL = url;
-						});
-
-						if (!contractURL) {
-							throw new Q.Exception("contract ABI url invalid");
-						}
-
-						// loading ABI json
-						$.getJSON(contractURL, function (ABI) {
-							var provider = new ethers.providers.Web3Provider(window.ethereum);
-							var factory = new ethers.Contract(address, ABI, provider.getSigner());
-
+					Q.Users.Web3.getContract(
+						'Assets/templates/NFTFactory', 
+						chain.contract,
+						function (err, contract) {
 							var events = {
 								InstanceCreated: "onInstanceCreated",
 								OwnershipTransferred: "onInstanceOwnershipTransferred"
 							};
-							Q.each(ABI, function (index, obj) {
+							Q.each(contract.ABI, function (index, obj) {
 								Q.each(events, function (event1, event2) {
 									if (obj.type === "event" && obj.name === event1) {
-										factory.on(event1, function () {
+										contract.on(event1, function () {
 											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
 										});
 									}
 								});
 							});
-
-							_subMethod(factory);
-						});
-					});
-					Q.each(urls, function (i, url) {
-						Q.Request.getUrlStatus(url, pipe.fill(url));
-					});
+							Q.handle(callback, null, [err, contract]);
+						}
+					);
 				},
 				/**
 				 * Create contract for user
 				 * @method getContract
 				 * @params {Object} chain
 				 * @params {function} callback
-				 * @params {object} [options]
-				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
-				 * @params {boolean} [options.contractAddress] If defined, used instead default contract address
 				 */
-				getContract: function (chain, callback, options) {
-					if (Q.isEmpty(window.ethereum)) {
-						return Q.handle(callback, null, ["Ethereum provider not found", null]);
-					}
-
-					// if chain is a chainId, convert to chain
-					if (Q.typeOf(chain) === "string") {
-						chain = Assets.NFT.chains[chain];
-					}
-
-					var _subMethod = function (contract) {
-						// if option checkWeb3 defined, check if web3 wallet connected
-						if (Q.getObject("checkWeb3", options) === true) {
-							return Q.Users.Web3.connect(function (err, provider) {
-								Q.handle(callback, null, [err, contract]);
+				getContract: function (chain, callback) {
+					Q.Users.Web3.getContract(
+						'Assets/templates/NFT', 
+						chain.contract,
+						function (err, contract) {
+							var events = {
+								TokenRemovedFromSale: "onTokenRemovedFromSale",
+								TokenPutOnSale: "onTokenAddedToSale",
+								Transfer: "onTransfer",
+								OwnershipTransferred: "onTransferOwnership",
+								TokenBought: "onTokenBought",
+								SeriesPutOnSale: "onSeriesPutOnSale",
+								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+							};
+							Q.each(contract.ABI, function (index, obj) {
+								Q.each(events, function (event1, event2) {
+									if (obj.type === "event" && obj.name === event1) {
+										contract.on(event1, function () {
+											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										});
+									}
+								});
 							});
+							Q.handle(callback, null, [err, contract]);
 						}
-
-						// else just return contract
-						Q.handle(callback, null, [null, contract]);
-					};
-
-					var contractAddress = Q.getObject("contractAddress", options) || chain.contract;
-
-					Assets.NFT.Web3.fetchABI(chain.chainId, contractAddress, function (err, ABI) {
-						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						var contract = new ethers.Contract(contractAddress, ABI, provider.getSigner());
-
-						var events = {
-							TokenRemovedFromSale: "onTokenRemovedFromSale",
-							TokenPutOnSale: "onTokenAddedToSale",
-							Transfer: "onTransfer",
-							OwnershipTransferred: "onTransferOwnership",
-							TokenBought: "onTokenBought",
-							SeriesPutOnSale: "onSeriesPutOnSale",
-							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-						};
-						Q.each(ABI, function (index, obj) {
-							Q.each(events, function (event1, event2) {
-								if (obj.type === "event" && obj.name === event1) {
-									contract.on(event1, function () {
-										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-									});
-								}
-							});
-						});
-
-						_subMethod(contract);
-					});
-				},
-				/**
-				 * Get ABI by chainId and contractAddress
-				 * @method fetchABI
-				 * @params {String} chainId
-				 * @params {String} contractAddress
-				 * @params {function} callback
-				 */
-				fetchABI: function (chainId, contractAddress, callback) {
-					Q.handle(Assets.batchFunction(), null, ["NFT", "getABI", chainId, contractAddress, function (err) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-
-						Q.handle(callback, null, [null, this]);
-					}]);
+					);
 				},
 				/**
 				 * Get metadata
@@ -1075,17 +991,17 @@
 				/**
 				 * Get amount of tokens by wallet and chain
 				 * @method balanceOf
-				 * @params {String} tokenId NFT tokenId
+				 * @params {String} address
 				 * @params {Object} chain
 				 * @params {function} callback
 				 */
-				balanceOf: function (wallet, chain, callback) {
+				balanceOf: function (address, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
 
-						contract.balanceOf(wallet).then(function (tokensAmount) {
+						contract.balanceOf(address).then(function (tokensAmount) {
 							Q.handle(callback, null, [null, tokensAmount]);
 						}, function (err) {
 							Q.handle(callback, null, [err.reason]);
@@ -1183,20 +1099,20 @@
 					});
 				},
 				/**
-				 * Transfer NFT from one wallet to another.
+				 * Transfer NFT from one address to another.
 				 * @method transferFrom
 				 * @params {String} tokenId NFT tokenId
 				 * @params {Object} chain
-				 * @params {String} newAddress wallet address to transfer to
+				 * @params {String} recipient address to transfer to
 				 * @params {function} callback
 				 */
-				transferFrom: function (tokenId, chain, newAddress, callback) {
+				transferFrom: function (tokenId, chain, recipient, callback) {
 					Q.handle(Assets.NFT.Web3.getOwner, this, [tokenId, chain, function (err, owner, contract) {
 						if (err) {
 							return Q.alert(err);
 						}
 
-						contract.transferFrom(owner, newAddress, tokenId).then(function (info) {
+						contract.transferFrom(owner, recipient, tokenId).then(function (info) {
 							Q.handle(callback, null, [null, info]);
 						}, function (err) {
 							Q.handle(callback, null, [err.reason]);

@@ -17,7 +17,7 @@ function Assets_NFT_response_getRemoteJSON ($params) {
 
 		// execute tokenURI if exists
 		if (Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
-			$tokenURI = Users_Web3::execute($contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
+			$tokenURI = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
 		} else {
 			throw new Exception("not found tokenURI method in ABI of contract ".$contractAddress);
 		}

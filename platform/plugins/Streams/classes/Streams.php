@@ -1069,6 +1069,9 @@ abstract class Streams extends Base_Streams
 			}
 		}
 		if (!isset($stream->type)) {
+			if (empty($type)) {
+				throw new Q_Exception_RequiredField(array('field' => 'type'));
+			}
 			$stream->type = $type;
 		}
 		$authorized = self::canCreateStreamType(
