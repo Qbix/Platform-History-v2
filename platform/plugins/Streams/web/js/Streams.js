@@ -6035,7 +6035,7 @@ Q.onInit.add(function _Streams_onInit() {
 						checked: readLevel == 0 ? true : false
 					}),
 					$('<span />').html(
-						Q.text.Streams.identifier.privateAccess ? Q.text.Streams.identifier.privateAccess : 'Private'
+						Q.text.Streams.identifier.private ? Q.text.Streams.identifier.private : 'Private'
 					)
 				]).attr('for', 'Users_setIdentifier_access_private'),
 	
@@ -6048,7 +6048,7 @@ Q.onInit.add(function _Streams_onInit() {
 						checked: readLevel > 0 ? true : false
 					}),
 					$('<span />').html(
-						Q.text.Streams.identifier.publicAccess ? Q.text.Streams.identifier.publicAccess : 'Public'
+						Q.text.Streams.identifier.public ? Q.text.Streams.identifier.public : 'Public'
 					)
 				]).attr('for', 'Users_setIdentifier_access_public')
 			]).insertBefore(".Q_buttons", dialog);

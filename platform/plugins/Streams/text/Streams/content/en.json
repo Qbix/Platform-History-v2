@@ -152,8 +152,8 @@
         }
     },
     "identifier": {
-        "privateAccess": "Private",
-        "publicAccess": "Public",
+        "private": "Private",
+        "public": "Public",
         "configurationSaved": "Configuration saved",
         "error": "Something went wrong"
     },
