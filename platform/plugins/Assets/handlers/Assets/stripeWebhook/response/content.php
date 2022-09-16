@@ -47,6 +47,11 @@ function Assets_stripeWebhook_response_content ($params) {
 				$currency = Q::ifset($paymentIntent, "currency", null);
 				$metadata = Q::ifset($paymentIntent, "metadata", array());
 
+				// check app
+				if (Q::app() != Q::ifset($metadata, "app", null)) {
+					break;
+				}
+
 				// set user to metadata
 				$userId = Q::ifset($metadata, "userId", null);
 				if ($userId) {
