@@ -132,7 +132,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		};
 
-		$contract = (new Contract($rpcUrl, $abi, $defaultBlock))
+		$contract = (new Contract($rpcUrl, $contractABI, $defaultBlock))
 			->at($contractAddress);
 		if ($privateKey) {
 			if (empty($transaction['from'])) {
