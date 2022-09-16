@@ -3722,7 +3722,7 @@ Q.getter = function _Q_getter(original, options) {
 					// it should throw an exception if it encounters any errors
 					err = e;
 				}
-				if (!err && !options.nonStandardErrorConvention) {
+				if (!err && !gw.nonStandardErrorConvention) {
 					err = Q.firstErrorMessage(params[0], params[1]);
 				}
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
@@ -5758,10 +5758,12 @@ Q.Cache.key = function _Cache_key(args, functions) {
 	}
 
 	for (i=0; i<args.length; ++i) {
-		if (typeof args[i] !== 'function') {
+		if (typeof(args[i]) === 'function') {
+			if (functions && functions.push) {
+				functions.push(args[i]);
+			}
+		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i])) {
 			keys.push(args[i]);
-		} else if (functions && functions.push) {
-			functions.push(args[i]);
 		}
 	}
 	return JSON.stringify(keys);

@@ -2798,9 +2798,9 @@
 			}
 		});
 
-		// Users.Web3.getContract = Q.getter(Users.Web3.getContract, {
-		// 	cache: Q.Cache.document("Users.Web3.getContract")
-		// });
+		Users.Web3.getContract = Q.getter(Users.Web3.getContract, {
+			cache: Q.Cache.document("Users.Web3.getContract")
+		});
 
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
