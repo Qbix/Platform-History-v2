@@ -937,10 +937,10 @@
 				/**
 				 * Get or create factory
 				 * @method getFactory
-				 * @params {Object} chain
-				 * @params {function} callback
-				 * @params {object} [options]
-				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 * @param {Object} chain
+				 * @param {function} callback
+				 * @param {object} [options]
+				 * @param {boolean} [options.checkWeb3=false] If true, check wallet before create factory
 				 */
 				getFactory: function (chain, callback, options) {
 					Q.Users.Web3.getContract(
@@ -967,8 +967,8 @@
 				/**
 				 * Create contract for user
 				 * @method getContract
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				getContract: function (chain, callback) {
 					Q.Users.Web3.getContract(
@@ -1000,10 +1000,10 @@
 				/**
 				 * Get metadata
 				 * @method metadata
-				 * @params {String} tokenId - NFT tokenId
-				 * @params {String} chainId
-				 * @params {String} contractAddress
-				 * @params {function} callback
+				 * @param {String} tokenId - NFT tokenId
+				 * @param {String} chainId
+				 * @param {String} contractAddress
+				 * @param {function} callback
 				 */
 				metadata: function (tokenId, chainId, contractAddress, callback) {
 					Q.handle(Assets.batchFunction(), null, ["NFT", "fetchMetadata", tokenId, chainId, contractAddress, function (err) {
@@ -1017,9 +1017,9 @@
 				/**
 				 * Get amount of tokens by wallet and chain
 				 * @method balanceOf
-				 * @params {String} address
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} address
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				balanceOf: function (address, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1038,9 +1038,9 @@
 				 * Get author of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method getAuthor
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				getAuthor: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1059,9 +1059,9 @@
 				 * Get owner of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method getOwner
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				getOwner: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1080,9 +1080,9 @@
 				 * Get commissionInfo of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method commissionInfo
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				commissionInfo: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1101,9 +1101,9 @@
 				 * Get saleInfo of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method saleInfo
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				saleInfo: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1127,10 +1127,10 @@
 				/**
 				 * Transfer NFT from one address to another.
 				 * @method transferFrom
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {String} recipient address to transfer to
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {String} recipient address to transfer to
+				 * @param {function} callback
 				 */
 				transferFrom: function (tokenId, chain, recipient, callback) {
 					Q.handle(Assets.NFT.Web3.getOwner, this, [tokenId, chain, function (err, owner, contract) {
@@ -1149,10 +1149,10 @@
 				 * Buy NFT.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method buy
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain Blockchain chain where the tokenId was created
-				 * @params {String} currency currency of NFT
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain Blockchain chain where the tokenId was created
+				 * @param {String} currency currency of NFT
+				 * @param {function} callback
 				 */
 				buy: function (tokenId, chain, currency, callback) {
 					if (window.ethereum.chainId !== chain.chainId) {

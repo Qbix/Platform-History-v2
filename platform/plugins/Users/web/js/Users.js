@@ -4060,11 +4060,11 @@
 		 * @method execute
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
 		 * @param {string} contractAddress Starts with "0x"
-		 * @params {String} contractABIName
-		 * @params {String} contractAddress
-		 * @params {String} methodName
-		 * @params {Array} params
-		 * @params {function} callback Called from the ethers.js contract method with the results
+		 * @param {String} contractABIName
+		 * @param {String} contractAddress
+		 * @param {String} methodName
+		 * @param {Array} params
+		 * @param {function} callback Called from the ethers.js contract method with the results
 		 */
 		execute: function (contractABIName, contractAddress, methodName, params, callback) {
 			Users.Web3.getContract(
@@ -4085,10 +4085,10 @@
 		/**
 		 * Get currently selected wallet address
 		 * @method execute
-		 * @params {string} methodName
-		 * @params {mixed} params
-		 * @params {string|object} contract
-		 * @params {function} callback
+		 * @param {string} methodName
+		 * @param {mixed} params
+		 * @param {string|object} contract
+		 * @param {function} callback
 		 */
 		getWallet: function (callback) {
 			Users.Web3.connect(function (err, provider) {

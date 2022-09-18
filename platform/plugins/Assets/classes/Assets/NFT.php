@@ -241,7 +241,7 @@ class Assets_NFT
 	/**
 	 * Get default chain
 	 * @method getDefaultChain
-	 * @params {array} [$chains]
+	 * @param {array} [$chains]
 	 * @static
 	 * @return array
 	 */
