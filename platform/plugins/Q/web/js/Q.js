@@ -10367,12 +10367,15 @@ Q.Template.remove = function (name) {
  */
 Q.Template.compile = function _Q_Template_compile (content, type) {
 	type = type || 'handlebars';
-	if (type !== 'handlebars') {
-		throw new Q.Error("Q.Template.compile: only supports Handlebars for now");
-	}
 	var r = Q.Template.compile.results;
 	if (!r[content]) {
-		r[content] = Handlebars.compile(content, Q.Template.compile.options);
+		if (type === 'handlebars') {
+			r[content] = Handlebars.compile(content, Q.Template.compile.options);
+		} else {
+			r[content] = function (fields, options) {
+				return content;
+			};
+		}
 	}
 	return r[content];
 };
@@ -10452,6 +10455,10 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 		if (err) {
 			Q.Template.onError.handle(err);
 			return callback(err, null);
+		}
+		if (info) {
+			info.dir = dir;
+			info.type = type;
 		}
 		tpl[n] = content.trim();
 		callback(null, tpl[n]);
@@ -10542,12 +10549,8 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			Q.Page.beingActivated = pba;
 			try {
 				var type = (info && info.type) || (options && options.type);
-				if (type === 'handlebars' || type === 'mustache') {
-					var compiled = Q.Template.compile(params.template[1], type);
-					callback(null, compiled(fields, options));
-				} else {
-					callback(null, params.template[1]);
-				}
+				var compiled = Q.Template.compile(params.template[1], type);
+				callback(null, compiled(fields, options));
 			} catch (e) {
 				console.warn(e);
 			}
