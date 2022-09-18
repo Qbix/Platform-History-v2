@@ -115,7 +115,7 @@
 		}
 		var p = $("#new-password");
 		var v = p.val();
-		if (v && location.protocol !== 'https:') {
+		if (v && location.protocol !== "https:") {
 			if (!/^[0-9a-f]{40}$/i.test(v)) {
 				p.val(CryptoJS.SHA1(p.val() + "\t" + salt));
 			}
