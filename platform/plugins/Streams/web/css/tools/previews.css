@@ -279,7 +279,6 @@
 
 /* <Streams_webrtc_preview> */
 .Streams_webrtc_preview_tool .Streams_webrtc_duration {
-	float: right;
 	font-weight: normal;
 	font-size: .8em;
 }
