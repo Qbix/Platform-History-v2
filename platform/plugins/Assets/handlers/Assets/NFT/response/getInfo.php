@@ -59,7 +59,7 @@ function Assets_NFT_response_getInfo ($params) {
 		$tokenURI = Q_Uri::interpolateUrl($tokenURI);
 	}
 
-	$metadata = Q::event('Assets/NFT/response/getRemoteJSON', compact("tokenId","chainId", "contractAddress", "ABI"));
+	$metadata = Q::event('Assets/NFT/response/fetchMetadata', compact("tokenId","chainId", "contractAddress", "ABI"));
 
 	return compact("author", "owner", "saleInfo", "commissionInfo", "metadata", "authorUserId", "ownerUserId", "tokenURI");
 }

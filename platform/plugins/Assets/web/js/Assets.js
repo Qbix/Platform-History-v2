@@ -1006,7 +1006,7 @@
 				 * @params {function} callback
 				 */
 				metadata: function (tokenId, chainId, contractAddress, callback) {
-					Q.handle(Assets.batchFunction(), null, ["NFT", "getRemoteJSON", tokenId, chainId, contractAddress, function (err) {
+					Q.handle(Assets.batchFunction(), null, ["NFT", "fetchMetadata", tokenId, chainId, contractAddress, function (err) {
 						if (err) {
 							return Q.handle(callback, null, [err]);
 						}

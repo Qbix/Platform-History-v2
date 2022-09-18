@@ -1,5 +1,5 @@
 <?php
-function Assets_NFT_response_getRemoteJSON ($params) {
+function Assets_NFT_response_fetchMetadata ($params) {
 	Q_Valid::nonce(true);
 
 	$request = array_merge($_REQUEST, $params);
