@@ -3,8 +3,8 @@
 var Users = Q.Users;
 
 /**
- * Users Tools
- * @module Users-labels
+ * Users Contacts
+ * @module Users-contacts
  * @main
  */
 
