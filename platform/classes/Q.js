@@ -58,7 +58,7 @@ Q.assert = function (condition, complaint) {
  * before including Q.js, to ensure Promises are used by Q.getter and other functions.
  * @property {Function} Promise
  */
-Q.Promise = root.Promise;
+Q.Promise = Promise;
 
 /**
  * Returns the type of a value
@@ -72,9 +72,7 @@ Q.typeOf = function _Q_typeOf(value) {
 		if (value === null) {
 			return 'null';
 		}
-		if (root.Element && value instanceof root.Element) {
-			return 'Element';
-		} else if (value instanceof Array
+		if (value instanceof Array
 		|| (value.constructor && value.constructor.name === 'Array')) {
 			s = 'array';
 		} else if (typeof(value.typename) != 'undefined' ) {
@@ -3662,7 +3660,7 @@ if (!Array.prototype.indexOf) {
 			n = Number(arguments[1]);
 			if (n !== n) { // shortcut for verifying if it's NaN
 				n = 0;
-			} else if (n !== 0 && n !== root.Infinity && n !== -root.Infinity) {
+			} else if (n !== 0 && n !== Infinity && n !== -Infinity) {
 				n = (n > 0 || -1) * Math.floor(Math.abs(n));
 			}
 		}
