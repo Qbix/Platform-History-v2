@@ -797,7 +797,7 @@
 					Assets.Currencies.symbols = data.slots.load.symbols;
 					Assets.Currencies.names = data.slots.load.names;
 
-					Q.handle(callback, Assets.Currencies, [Assets.Currencies.symbols, Assets.Currencies.names]);
+					Q.handle(callback, Assets.Currencies, [null, Assets.Currencies.symbols, Assets.Currencies.names]);
 				});
 			}),
 			/**
@@ -808,7 +808,10 @@
 			 * @param {Function} callback
 			 */
 			getSymbol: function (currency, callback) {
-				Assets.Currencies.load(function (symbols, names) {
+				Assets.Currencies.load(function (err, symbols, names) {
+					if (err) {
+						return;
+					}
 					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
 				});
 			}
