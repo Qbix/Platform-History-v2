@@ -87,10 +87,10 @@ function Assets_stripeWebhook_response_content ($params) {
 
 function Assets_stripeWebhook_log ($title, $message=null) {
 	Q::log('______________________________________________', "Stripe.webhook");
-	Q::log($title, "Stripe.webhook", array(
-		"maxLength" => 2048
-	));
+	Q::log($title, "Stripe.webhook");
 	if ($message) {
-		Q::log($message, "Stripe.webhook");
+		Q::log($message, "Stripe.webhook", array(
+			"maxLength" => 10000
+		));
 	}
 }
