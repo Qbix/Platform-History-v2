@@ -191,12 +191,12 @@ class Assets_NFT
 	 */
 	static function getChains ($needChainId=null) {
 		$chains = Q_Config::get("Users", "apps", "web3", array());
-		$currencies = Q_Config::get("Assets", "NFT", "currencies", array());
-		$chainsClient = array();
+		$currencies = Q_Config::get("Assets", "currencies", "tokens", array());
+		$result = array();
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
-			$chainId = Q::ifset($chain, "appId", null);
-			if (!$chainId) {
+			$chainId = Q::ifset($chain, 'chainId', Q::ifset($chain, 'appId', null));
+			if (!$chainId or ($needChainId && $chainId == $needChainId)) {
 				continue;
 			}
 
@@ -205,7 +205,6 @@ class Assets_NFT
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
 			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
-			$factoryPath = null;
 			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
@@ -233,16 +232,16 @@ class Assets_NFT
 				return $temp;
 			}
 
-			$chainsClient[$chainId] = $temp;
+			$result[$chainId] = $temp;
 		}
 
-		return $chainsClient;
+		return $result;
 	}
 
 	/**
 	 * Get default chain
 	 * @method getDefaultChain
-	 * @params {array} [$chains]
+	 * @param {array} [$chains]
 	 * @static
 	 * @return array
 	 */

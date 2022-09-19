@@ -33,6 +33,7 @@ function Q_inplace_tool($options)
 	$type = 'textarea';
 	$editOnClick = true;
 	$selectOnEdit = true;
+	$placeholder = 'Type something...';
 	extract($options);
 	if (isset($inplace)) {
 		extract($inplace);

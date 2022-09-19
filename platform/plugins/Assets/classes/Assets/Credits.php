@@ -278,6 +278,7 @@ class Assets_Credits extends Base_Assets_Credits
 		if ($reason == 'BoughtCredits') {
 			$type = 'Assets/credits/bought';
 			$instructions['charge'] = $more["charge"];
+			$instructions['token'] = $more["token"];
 		} elseif ($reason == 'BonusCredits') {
 			$type = 'Assets/credits/bonus';
 		} else {

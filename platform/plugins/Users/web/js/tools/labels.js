@@ -9,7 +9,7 @@ Q.setObject({
 });
 
 /**
- * Users Tools
+ * Users Labels
  * @module Users-labels
  * @main
  */

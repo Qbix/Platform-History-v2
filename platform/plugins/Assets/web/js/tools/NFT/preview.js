@@ -150,12 +150,12 @@
             if (metadata) {
                 return tool.renderFromMetadata({metadata: metadata});
             } else if (tokenURI) {
-                Q.req("Assets/NFT", "getRemoteJSON", function (err, response) {
+                Q.req("Assets/NFT", "fetchMetadata", function (err, response) {
                     if (err) {
                         return;
                     }
 
-                    var metadata = response.slots.getRemoteJSON;
+                    var metadata = response.slots.fetchMetadata;
                     tool.renderFromMetadata({metadata: metadata});
                 }, {
                     fields: {

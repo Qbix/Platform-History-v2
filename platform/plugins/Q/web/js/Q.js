@@ -3667,11 +3667,11 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
- * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
+ * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @param {Q.Cache} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
- *  The wrapper function, which returns an object with a property called "result"
+ *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
  *  This function also contains Q.Events called onCalled, onResult and onExecuted.
  */
@@ -3703,7 +3703,7 @@ Q.getter = function _Q_getter(original, options) {
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
-			if (!gw.cacheErrorMessages && Q.firstErrorMessage(params[0], params[1])) {
+			if (!gw.nonStandardErrorConvention && Q.firstErrorMessage(params[0], params[1])) {
 				ret.dontCache = true;
 			}
 			if (gw.prepare) {
@@ -3716,9 +3716,14 @@ Q.getter = function _Q_getter(original, options) {
 				Q.getter.usingCached = cached;
 				var err = null;
 				try {
+					// let the callback check params
 					callback.apply(subject, params);
 				} catch (e) {
+					// it should throw an exception if it encounters any errors
 					err = e;
+				}
+				if (!err && !gw.nonStandardErrorConvention) {
+					err = Q.firstErrorMessage(params[0], params[1]);
 				}
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
@@ -3726,7 +3731,6 @@ Q.getter = function _Q_getter(original, options) {
 					_reject(err);
 					throw err;
 				}
-
 				_resolve(subject);
 			}
 		}
@@ -5509,22 +5513,6 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 };
 
 /**
- * Return URL http code
- * @method getUrlStatus
- * @param {string} url
- * @param {function} callback - get http.status as argument
- * @return {string}
- */
-Q.Request.getUrlStatus = function(url, callback) {
-	var http = new XMLHttpRequest();
-	http.addEventListener("load", function () {
-		Q.handle(callback, http, [this.status]);
-	});
-	http.open('HEAD', url);
-	http.send();
-};
-
-/**
  * A Q.Cache object stores items in a cache and throws out least-recently-used ones.
  * @class Q.Cache
  * @constructor
@@ -5688,7 +5676,7 @@ function Q_Cache_set(cache, key, obj, special) {
 			var serialized = JSON.stringify(obj);
 			storage.setItem(id, serialized);
 		} catch (e) {
-			if (!special) {
+			if (!special && e.name !== 'TypeError') {
 				for (var i=0; i<10; ++i) {
 					try {
 						// try to remove up to 10 items it may be a problem with space
@@ -5770,10 +5758,12 @@ Q.Cache.key = function _Cache_key(args, functions) {
 	}
 
 	for (i=0; i<args.length; ++i) {
-		if (typeof args[i] !== 'function') {
+		if (typeof(args[i]) === 'function') {
+			if (functions && functions.push) {
+				functions.push(args[i]);
+			}
+		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i])) {
 			keys.push(args[i]);
-		} else if (functions && functions.push) {
-			functions.push(args[i]);
 		}
 	}
 	return JSON.stringify(keys);
@@ -10328,11 +10318,16 @@ Q.Template.info = {};
  * @param {Array} [info.partials] Relative urls of .js scripts for registering partials.
  *   Can also be names of templates for partials (in which case they shouldn't end in .js)
  * @param {Array} [info.helpers] Relative urls of .js scripts for registering helpers
+ * @param {String} [info.dir] The directory in which the template would be located. The URL would be Q.url(dir/name.type)
+ * @return {Boolean} Returns false if template info with this name was already set before
  */
-Q.Template.set = function (name, content, info) {
+Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	var T = Q.Template;
-	T.remove(name);
 	var n = Q.normalize(name);
+	if (!overwriteEvenIfAlreadySet && T.info[n]) {
+		return false;
+	}
+	T.remove(name);
 	if (content !== undefined) {
 		T.collection[n] = content;
 	}
@@ -10372,12 +10367,15 @@ Q.Template.remove = function (name) {
  */
 Q.Template.compile = function _Q_Template_compile (content, type) {
 	type = type || 'handlebars';
-	if (type !== 'handlebars') {
-		throw new Q.Error("Q.Template.compile: only supports Handlebars for now");
-	}
 	var r = Q.Template.compile.results;
 	if (!r[content]) {
-		r[content] = Handlebars.compile(content, Q.Template.compile.options);
+		if (type === 'handlebars') {
+			r[content] = Handlebars.compile(content, Q.Template.compile.options);
+		} else {
+			r[content] = function (fields, options) {
+				return content;
+			};
+		}
 	}
 	return r[content];
 };
@@ -10446,6 +10444,7 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 
 	// check if template is cached
 	var n = Q.normalize(name);
+	var info = Q.Template.info[n];
 	if (tpl && typeof tpl[n] === 'string') {
 		var result = tpl[n];
 		Q.handle(callback, this, [null, result]);
@@ -10457,6 +10456,10 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 			Q.Template.onError.handle(err);
 			return callback(err, null);
 		}
+		if (info) {
+			info.dir = dir;
+			info.type = type;
+		}
 		tpl[n] = content.trim();
 		callback(null, tpl[n]);
 	}
@@ -10465,7 +10468,9 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 		Q.Template.onError.handle(err);
 		callback(err);
 	}
-	var url = Q.url(o.dir+'/'+name+'.'+ o.type);
+	var dir = (info && info.dir) || o.dir;
+	var type = (info && info.type) || o.type;
+	var url = Q.url(dir + '/' + name + '.' + type);
 
 	Q.request(url, _callback, {parse: false, extend: false});
 	return true;
@@ -10476,7 +10481,12 @@ Q.Template.load = Q.getter(function _Q_Template_load(name, callback, options) {
 
 Q.Template.load.options = {
 	type: "handlebars",
-	types: { "handlebars": true, "php": true },
+	types: {
+		"handlebars": true,
+		"php": true,
+		"json": true,
+		"abi.json": true
+	},
 	dir: "Q/views"
 };
 
@@ -10497,7 +10507,7 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.type='handlebars'] the type and extension of the template
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
- * @param {String} [options.tool] if the rendered html will be placed inside a tool, pass it here so that its prefix will be used
+ * @param {String} [options.tool] if the rendered HTML will be placed inside a tool, pass it here so that its prefix will be used
  */
 Q.Template.render = function _Q_Template_render(name, fields, callback, options) {
 	if (typeof fields === "function") {

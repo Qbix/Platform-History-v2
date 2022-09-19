@@ -641,7 +641,7 @@ Q.batcher.options = {
  * @param {Function} [options.throttleTry] function(subject, getter, args) - applies or throttles getter with subject, args
  * @param {Function} [options.throttleNext] function (subject) - applies next getter with subject
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
- * @param {Boolean} [options.cacheErrorMessages=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
+ * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns an object with a property called "result"
@@ -664,14 +664,19 @@ Q.getter = function _Q_getter(original, options) {
 			callbacks.push(noop);
 		}
 		
-		var ret = { dontCache: false };
+		var _resolve, _reject;
+		var ret = new Q.Promise(function (resolve, reject) {
+			_resolve = resolve;
+			_reject = reject;
+		});
+		ret.dontCache = false;
 		gw.emit('called', this, arguments2, ret);
 
 		var cached, cbpos, cbi;
 		Q.getter.usingCached = false;
 		
 		function _prepare(subject, params, callback, ret, cached) {
-			if (!gw.cacheErrorMessages && Q.firstErrorMessage(params[0], params[1])) {
+			if (!gw.nonStandardErrorConvention && Q.firstErrorMessage(params[0], params[1])) {
 				ret.dontCache = true;
 			}
 			if (gw.prepare) {
@@ -684,15 +689,22 @@ Q.getter = function _Q_getter(original, options) {
 				Q.getter.usingCached = cached;
 				var err = null;
 				try {
+					// let the callback check params
 					callback.apply(subject, params);
 				} catch (e) {
+					// it should throw an exception if it encounters any errors
 					err = e;
+				}
+				if (!err && !gw.nonStandardErrorConvention) {
+					err = Q.firstErrorMessage(params[0], params[1]);
 				}
 				gw.emit('executed', subject, subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
+					_reject(err);
 					throw err;
 				}
+				_resolve(subject);
 			}
 		}
 
@@ -1155,10 +1167,12 @@ Q.Cache.key = function _Cache_key(args, functions) {
 	}
 
 	for (i=0; i<args.length; ++i) {
-		if (typeof args[i] !== 'function') {
+		if (typeof(args[i]) === 'function') {
+			if (functions && functions.push) {
+				functions.push(args[i]);
+			}
+		} else if (typeof args[i] !== 'object' || Q.isPlainObject(args[i])) {
 			keys.push(args[i]);
-		} else if (functions && functions.push) {
-			functions.push(args[i]);
 		}
 	}
 

@@ -2801,6 +2801,10 @@
 			}
 		});
 
+		Users.Web3.getContract = Q.getter(Users.Web3.getContract, {
+			cache: Q.Cache.document("Users.Web3.getContract")
+		});
+
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
 		Q.Users.login.options = Q.extend({
@@ -4057,43 +4061,37 @@
 		/**
 		 * Execute method on contract
 		 * @method execute
-		 * @params {string} methodName
-		 * @params {mixed} params
-		 * @params {string|object} contract
-		 * @params {function} callback
+		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
+		 * @param {string} contractAddress Starts with "0x"
+		 * @param {String} contractABIName
+		 * @param {String} contractAddress
+		 * @param {String} methodName
+		 * @param {Array} params
+		 * @param {function} callback Called from the ethers.js contract method with the results
 		 */
-		execute: function (methodName, params, contract, callback) {
-			if (Q.typeOf(contract) === "string") {
-				return Users.Web3.getContract(contract, function (err, contract) {
-					if (err) {
-						Q.handle(callback, null, [err]);
+		execute: function (contractABIName, contractAddress, methodName, params, callback) {
+			Users.Web3.getContract(
+				contractABIName, 
+				contractAddress, 
+				function (err, contract) {
+					if (!contract[methodName]) {
+						return Q.handle(callback, null, ["WrongMethod"]);
 					}
-
-					Users.Web3.execute(methodName, params, contract, callback);
-				});
-			}
-
-			if (!contract[methodName]) {
-				return Q.handle(callback, null, ["WrongMethod"]);
-			}
-
-			if (Q.typeOf(params) !== "array") {
-				params = [params];
-			}
-
-			contract[methodName].apply(null, params).then(function (result) {
-				Q.handle(callback, null, [null, result]);
-			}, function (err) {
-				Q.handle(callback, null, [err]);
-			});
+					contract[methodName].apply(null, params).then(function (result) {
+						Q.handle(callback, null, [null, result]);
+					}, function (err) {
+						Q.handle(callback, null, [err]);
+					});
+				}
+			);
 		},
 		/**
-		 * Get currently wallet address
+		 * Get currently selected wallet address
 		 * @method execute
-		 * @params {string} methodName
-		 * @params {mixed} params
-		 * @params {string|object} contract
-		 * @params {function} callback
+		 * @param {string} methodName
+		 * @param {mixed} params
+		 * @param {string|object} contract
+		 * @param {function} callback
 		 */
 		getWallet: function (callback) {
 			Users.Web3.connect(function (err, provider) {
@@ -4107,7 +4105,7 @@
 			});
 		},
 		/**
-		 * Get currently chain id
+		 * Get currently selected chain id
 		 * @method getChainId
 		 * @param {Function} callback
 		 */
@@ -4213,17 +4211,19 @@
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
 		 * @method getContract
 		 * @static
-		 * @param {string} contractAddress
-		 * @param {Object} [options]
-		 * @param {Object} [options.abiFileName] - the exact name of ABI json file
+		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
+		 * @param {string} contractAddress Starts with "0x"
 		 * @param {Function} [callback] receives (err, contract)
-		 * @return {Promise} that returns the ethers.Contract
+		 * @return {Promise} that would resolve with the ethers.Contract
 		 */
-		getContract: function(contractAddress, options, callback) {
-			if (Q.typeOf(options) === "function") {
-				callback = options;
-			}
-			return new Q.Promise(function (resolve, reject) {
+		getContract: function(contractABIName, contractAddress, callback) {
+			Q.Template.set(contractABIName, undefined, "abi.json");
+			Q.Template.render(contractABIName, function (err, json) {
+				try {
+					var ABI = JSON.parse(json);
+				} catch (e) {
+					return Q.handle(callback, null, [e]);
+				}
 				if (window.ethereum
 				&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
 					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
@@ -4232,27 +4232,20 @@
 				} else {
 					Q.Users.Web3.connect(function (err, provider) {
 						if (err) {
-							Q.handle(callback, null, [err]);
-							reject(err);
-						} else {
-							_continue(provider);
+							return Q.handle(callback, null, [err]);
 						}
+						_continue(provider);
 					});
 				}
 				function _continue(provider) {
-					var abiURL = Q.url('{{baseUrl}}/ABI/' + (Q.getObject("abiFileName", options) || contractAddress) + '.json');
-					fetch(abiURL)
-					.then(function (response) {
-						return response.json();
-					}).then(function (ABI) {
+					try {
 						var signer = new ethers.providers.Web3Provider(provider).getSigner();
 						var contract = new ethers.Contract(contractAddress, ABI, signer);
-						Q.handle(callback, null, [null, contract]);
-						Q.handle(resolve, null, [contract]);
-					}).catch(function (err) {
+						contract.ABI = ABI;
+						Q.handle(callback, contract, [null, contract]);
+					} catch (err) {
 						Q.handle(callback, null, [err]);
-						Q.handle(reject, null, [err]);
-					});
+					};
 				}
 			});
 		}

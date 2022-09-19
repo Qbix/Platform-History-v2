@@ -122,7 +122,7 @@
             /**
              * Set tool status to available/unavailable
              * @method available
-             * @params {boolean} state
+             * @param {boolean} state
              */
             available: function (state) {
                 var $toolElement = $(this.element);
@@ -143,7 +143,7 @@
             /**
              * Get current max calls from stream attributes
              * @method getMaxCalls
-             * @params {boolean} state
+             * @param {boolean} state
              */
             getMaxCalls: function () {
                 console.log('getMaxCalls', this.stream);

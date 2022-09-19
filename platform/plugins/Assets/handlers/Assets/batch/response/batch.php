@@ -48,7 +48,7 @@ function Assets_batch_response_batch () {
 						'chainId' => $args[2],
 						'contractAddress' => $args[3]
 					);
-				} elseif ($action == "NFT" && $slot == "getRemoteJSON") {
+				} elseif ($action == "NFT" && $slot == "fetchMetadata") {
 					$params = array(
 						'tokenId' => $args[2],
 						'chainId' => $args[3],

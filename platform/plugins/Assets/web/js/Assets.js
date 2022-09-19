@@ -1,4 +1,4 @@
-(function (Q, Assets, Streams, $) {
+(function (Q) {
 
 	/**
 	 * Various front-end functionality dealing with awards, badges, credits, etc.
@@ -6,8 +6,8 @@
 	 */
 
 	var Users = Q.Users;
-	Streams = Q.Streams;
-	Assets = Q.Assets = Q.plugins.Assets = {
+	var Streams = Q.Streams;
+	var Assets = Q.Assets = Q.plugins.Assets = {
 
 		/**
 		 * Operates with credits.
@@ -33,6 +33,7 @@
 			 *  @param {number} [options.amount=100] Default amount of credits to buy.
 			 *  @param {string} [options.currency=USD] Currency ISO 4217 code (USD, EUR etc)
 			 *  @param {string} [options.missing=false] Whether to show text about credits missing.
+			 *  @param {object} [options.metadata] Data to pass to payment gateway to get them back and save to message instructions
 			 *  @param {function} [options.onSuccess] Callback to run when payment has completed successfully.
 			 *  @param {function} [options.onFailure] Callback to run when payment failed.
 			 */
@@ -109,7 +110,8 @@
 							Assets.Payments.stripe({
 								amount: amount,
 								currency: currency,
-								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits})
+								description: Assets.texts.credits.BuyAmountCredits.interpolate({amount: credits}),
+								metadata: options.metadata
 							}, function(err, data) {
 								if (err) {
 									return Q.handle(options.onFailure, null, [err]);
@@ -170,13 +172,21 @@
 					if (!response.slots.status) {
 						var details = response.slots.details;
 
+						var metadata = {};
+						// some payment gateways require metadata values only strings
+						if (!Q.isEmpty(options.toStream)) {
+							metadata.publisherId = options.toStream.publisherId;
+							metadata.streamName = options.toStream.streamName;
+						}
+
 						Assets.Credits.buy({
 							missing: true,
 							amount: details.needCredits,
 							onSuccess: function () {
 								Assets.Credits.pay(options);
 							},
-							onFailure: options.onFailure
+							onFailure: options.onFailure,
+							metadata: metadata
 						});
 						return;
 					}
@@ -457,6 +467,7 @@
 			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
 			 *  @param {String} [options.description] Operation code which detailed text can be fetch from lang json (Assets/content/payments).
 			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
+			 *  @param {object} [options.metadata] Data to pass to payment gateway to get them back and save to message instructions
 			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
 			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
 			 *  @param {Boolean} [options.shippingAddress] Specify whether Checkout should collect the user's shipping address (true or false). The default is false.
@@ -530,6 +541,7 @@
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Float} options.amount the amount to pay.
 			 *  @param {String} options.description Payment description.
+			 *  @param {Object} options.metadata Data to pass to payment gateway to get them back and save to message instructions
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
 			 *  @param {Function} [callback]
 			 */
@@ -556,7 +568,7 @@
 					onActivate: function ($dialog) {
 						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
 							var currencySymbol = params.currencySymbol[0];
-							var paymentIntent = params.paymentIntent[0];
+							var clientSecret = params.paymentIntent[0];
 							var $payButton = $("button[name=pay]", $dialog);
 
 							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
@@ -564,8 +576,6 @@
 							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
 								$dialog.removeClass("Assets_stripe_payment_loading");
 							});
-
-							var clientSecret = paymentIntent.slots.intent;
 
 							// <create payment request button>
 							var paymentRequest = Assets.Payments.stripeObject.paymentRequest({
@@ -613,17 +623,11 @@
 											} else {
 												// The payment has succeeded.
 												//Assets.Payments.stripePaymentResult({status: 'succeeded'})
-												setTimeout(function () {
-													Q.handle(callback)
-												}, 3000);
 											}
 										});
 									} else {
 										// The payment has succeeded.
 										//Assets.Payments.stripePaymentResult({status: 'succeeded'})
-										setTimeout(function () {
-											Q.handle(callback)
-										}, 3000);
 									}
 								});
 							});
@@ -672,9 +676,6 @@
 
 									Q.Dialogs.pop();
 									//Assets.Payments.stripePaymentResult(paymentIntent);
-									setTimeout(function () {
-										Q.handle(callback)
-									}, 3000);
 								}).catch(function (error) {
 									Q.Dialogs.pop();
 
@@ -701,15 +702,40 @@
 								return Q.alert(msg);
 							}
 
-							pipeDialog.fill("paymentIntent")(response);
+							var paymentIntent = Q.getObject(["slots", "intent"], response);
+							var clientSecret = paymentIntent.client_secret;
+							if (!clientSecret) {
+								Q.handle(callback, null, [true]);
+								Q.Dialogs.pop();
+								throw new Q.Exception('clientSecret empty');
+							}
+							var token = paymentIntent.token;
+							if (!token) {
+								Q.handle(callback, null, [true]);
+								Q.Dialogs.pop();
+								throw new Q.Exception('token empty');
+							}
+
+							// listen Assets/user/credits stream for message
+							Streams.Stream.onMessage(Users.loggedInUser.id, 'Assets/user/credits', 'Assets/credits/bought').set(function(stream, message) {
+								if (token !== message.getInstruction('token')) {
+									return;
+								}
+
+								Q.handle(callback, null, [null]);
+							}, token);
+
+							pipeDialog.fill("paymentIntent")(clientSecret);
 						}, {
 							fields: {
 								amount: options.amount,
-								currency: options.currency
+								currency: options.currency,
+								metadata: options.metadata
 							}
 						});
 					},
 					onClose: function () {
+						Q.handle(callback, null, [true]);
 						paymentRequestButton && paymentRequestButton.destroy();
 						paymentElement && paymentElement.destroy();
 					}
@@ -896,7 +922,7 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract(contractAddress)
+					return Q.Users.Web3.getContract('Assets/templates/NFT', contractAddress)
 					.then(function (contract) {
 						return contract.setSeriesInfo(seriesId, 
 							[authorAddress, limit, 
@@ -911,160 +937,76 @@
 				/**
 				 * Get or create factory
 				 * @method getFactory
-				 * @params {Object} chain
-				 * @params {function} callback
-				 * @params {object} [options]
-				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 * @param {Object} chain
+				 * @param {function} callback
+				 * @param {object} [options]
+				 * @param {boolean} [options.checkWeb3=false] If true, check wallet before create factory
 				 */
 				getFactory: function (chain, callback, options) {
-					if (Q.isEmpty(window.ethereum)) {
-						return Q.handle(callback, null, ["Ethereum provider not found", null]);
-					}
-
-					// if chain is a chainId, convert to chain
-					if (Q.typeOf(chain) === "string") {
-						chain = Assets.NFT.chains[chain];
-					}
-
-					var _subMethod = function (factory) {
-						// if option checkWeb3 defined, check if web3 wallet connected
-						if (Q.getObject("checkWeb3", options) === true) {
-							return Q.Users.Web3.connect(function (err, provider) {
-								Q.handle(callback, null, [err, factory]);
-							});
-						}
-
-						// else just return factory
-						Q.handle(callback, null, [null, factory]);
-					};
-
-					var address = chain.factory;
-					var urls = [Q.url("{{baseUrl}}/ABI/" + address + ".json"), Q.url("{{baseUrl}}/ABI/userNFTFactoryTemplate.json")];
-					var pipe = new Q.pipe(urls, function (params) {
-						var contractURL = null;
-						Q.each(urls, function (i, url) {
-							if (contractURL || params[url][0] !== 200) {
-								return;
-							}
-
-							contractURL = url;
-						});
-
-						if (!contractURL) {
-							throw new Q.Exception("contract ABI url invalid");
-						}
-
-						// loading ABI json
-						$.getJSON(contractURL, function (ABI) {
-							var provider = new ethers.providers.Web3Provider(window.ethereum);
-							var factory = new ethers.Contract(address, ABI, provider.getSigner());
-
+					Q.Users.Web3.getContract(
+						'Assets/templates/NFTFactory', 
+						chain.contract,
+						function (err, contract) {
 							var events = {
 								InstanceCreated: "onInstanceCreated",
 								OwnershipTransferred: "onInstanceOwnershipTransferred"
 							};
-							Q.each(ABI, function (index, obj) {
+							Q.each(contract.ABI, function (index, obj) {
 								Q.each(events, function (event1, event2) {
 									if (obj.type === "event" && obj.name === event1) {
-										factory.on(event1, function () {
+										contract.on(event1, function () {
 											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
 										});
 									}
 								});
 							});
-
-							_subMethod(factory);
-						});
-					});
-					Q.each(urls, function (i, url) {
-						Q.Request.getUrlStatus(url, pipe.fill(url));
-					});
+							Q.handle(callback, null, [err, contract]);
+						}
+					);
 				},
 				/**
 				 * Create contract for user
 				 * @method getContract
-				 * @params {Object} chain
-				 * @params {function} callback
-				 * @params {object} [options]
-				 * @params {boolean} [options.checkWeb3=false] If true, check wallet before create contract
-				 * @params {boolean} [options.contractAddress] If defined, used instead default contract address
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
-				getContract: function (chain, callback, options) {
-					if (Q.isEmpty(window.ethereum)) {
-						return Q.handle(callback, null, ["Ethereum provider not found", null]);
-					}
-
-					// if chain is a chainId, convert to chain
-					if (Q.typeOf(chain) === "string") {
-						chain = Assets.NFT.chains[chain];
-					}
-
-					var _subMethod = function (contract) {
-						// if option checkWeb3 defined, check if web3 wallet connected
-						if (Q.getObject("checkWeb3", options) === true) {
-							return Q.Users.Web3.connect(function (err, provider) {
-								Q.handle(callback, null, [err, contract]);
+				getContract: function (chain, callback) {
+					Q.Users.Web3.getContract(
+						'Assets/templates/NFT', 
+						chain.contract,
+						function (err, contract) {
+							var events = {
+								TokenRemovedFromSale: "onTokenRemovedFromSale",
+								TokenPutOnSale: "onTokenAddedToSale",
+								Transfer: "onTransfer",
+								OwnershipTransferred: "onTransferOwnership",
+								TokenBought: "onTokenBought",
+								SeriesPutOnSale: "onSeriesPutOnSale",
+								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+							};
+							Q.each(contract.ABI, function (index, obj) {
+								Q.each(events, function (event1, event2) {
+									if (obj.type === "event" && obj.name === event1) {
+										contract.on(event1, function () {
+											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+										});
+									}
+								});
 							});
+							Q.handle(callback, null, [err, contract]);
 						}
-
-						// else just return contract
-						Q.handle(callback, null, [null, contract]);
-					};
-
-					var contractAddress = Q.getObject("contractAddress", options) || chain.contract;
-
-					Assets.NFT.Web3.fetchABI(chain.chainId, contractAddress, function (err, ABI) {
-						var provider = new ethers.providers.Web3Provider(window.ethereum);
-						var contract = new ethers.Contract(contractAddress, ABI, provider.getSigner());
-
-						var events = {
-							TokenRemovedFromSale: "onTokenRemovedFromSale",
-							TokenPutOnSale: "onTokenAddedToSale",
-							Transfer: "onTransfer",
-							OwnershipTransferred: "onTransferOwnership",
-							TokenBought: "onTokenBought",
-							SeriesPutOnSale: "onSeriesPutOnSale",
-							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-						};
-						Q.each(ABI, function (index, obj) {
-							Q.each(events, function (event1, event2) {
-								if (obj.type === "event" && obj.name === event1) {
-									contract.on(event1, function () {
-										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-									});
-								}
-							});
-						});
-
-						_subMethod(contract);
-					});
-				},
-				/**
-				 * Get ABI by chainId and contractAddress
-				 * @method fetchABI
-				 * @params {String} chainId
-				 * @params {String} contractAddress
-				 * @params {function} callback
-				 */
-				fetchABI: function (chainId, contractAddress, callback) {
-					Q.handle(Assets.batchFunction(), null, ["NFT", "getABI", chainId, contractAddress, function (err) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-
-						Q.handle(callback, null, [null, this]);
-					}]);
+					);
 				},
 				/**
 				 * Get metadata
 				 * @method metadata
-				 * @params {String} tokenId - NFT tokenId
-				 * @params {String} chainId
-				 * @params {String} contractAddress
-				 * @params {function} callback
+				 * @param {String} tokenId - NFT tokenId
+				 * @param {String} chainId
+				 * @param {String} contractAddress
+				 * @param {function} callback
 				 */
 				metadata: function (tokenId, chainId, contractAddress, callback) {
-					Q.handle(Assets.batchFunction(), null, ["NFT", "getRemoteJSON", tokenId, chainId, contractAddress, function (err) {
+					Q.handle(Assets.batchFunction(), null, ["NFT", "fetchMetadata", tokenId, chainId, contractAddress, function (err) {
 						if (err) {
 							return Q.handle(callback, null, [err]);
 						}
@@ -1075,17 +1017,17 @@
 				/**
 				 * Get amount of tokens by wallet and chain
 				 * @method balanceOf
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} address
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
-				balanceOf: function (wallet, chain, callback) {
+				balanceOf: function (address, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
 						if (err) {
 							Q.handle(callback, null, [err]);
 						}
 
-						contract.balanceOf(wallet).then(function (tokensAmount) {
+						contract.balanceOf(address).then(function (tokensAmount) {
 							Q.handle(callback, null, [null, tokensAmount]);
 						}, function (err) {
 							Q.handle(callback, null, [err.reason]);
@@ -1096,9 +1038,9 @@
 				 * Get author of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method getAuthor
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				getAuthor: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1117,9 +1059,9 @@
 				 * Get owner of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method getOwner
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				getOwner: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1138,9 +1080,9 @@
 				 * Get commissionInfo of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method commissionInfo
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				commissionInfo: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1159,9 +1101,9 @@
 				 * Get saleInfo of NFT by tokenId and chain.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method saleInfo
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {function} callback
 				 */
 				saleInfo: function (tokenId, chain, callback) {
 					Assets.NFT.Web3.getContract(chain, function (err, contract) {
@@ -1183,20 +1125,20 @@
 					});
 				},
 				/**
-				 * Transfer NFT from one wallet to another.
+				 * Transfer NFT from one address to another.
 				 * @method transferFrom
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain
-				 * @params {String} newAddress wallet address to transfer to
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain
+				 * @param {String} recipient address to transfer to
+				 * @param {function} callback
 				 */
-				transferFrom: function (tokenId, chain, newAddress, callback) {
+				transferFrom: function (tokenId, chain, recipient, callback) {
 					Q.handle(Assets.NFT.Web3.getOwner, this, [tokenId, chain, function (err, owner, contract) {
 						if (err) {
 							return Q.alert(err);
 						}
 
-						contract.transferFrom(owner, newAddress, tokenId).then(function (info) {
+						contract.transferFrom(owner, recipient, tokenId).then(function (info) {
 							Q.handle(callback, null, [null, info]);
 						}, function (err) {
 							Q.handle(callback, null, [err.reason]);
@@ -1207,10 +1149,10 @@
 				 * Buy NFT.
 				 * If wrong chain selected, suggest to switch chain.
 				 * @method buy
-				 * @params {String} tokenId NFT tokenId
-				 * @params {Object} chain Blockchain chain where the tokenId was created
-				 * @params {String} currency currency of NFT
-				 * @params {function} callback
+				 * @param {String} tokenId NFT tokenId
+				 * @param {Object} chain Blockchain chain where the tokenId was created
+				 * @param {String} currency currency of NFT
+				 * @param {function} callback
 				 */
 				buy: function (tokenId, chain, currency, callback) {
 					if (window.ethereum.chainId !== chain.chainId) {
@@ -1444,7 +1386,7 @@
 
 				var _createNotice = function (stream, message) {
 					// check if message already displayed
-					var messageId = message.getInstruction('messageId');
+					var messageId = message.getInstruction('messageId') || message.getInstruction('token');
 					if (Q.isEmpty(this.usedIds)) {
 						this.usedIds = [messageId];
 					} else if (this.usedIds.includes(messageId)) {

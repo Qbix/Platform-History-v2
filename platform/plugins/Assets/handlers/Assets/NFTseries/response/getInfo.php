@@ -24,8 +24,8 @@ function Assets_NFTseries_response_getInfo ($params) {
 	$abi = Q::json_decode(file_get_contents($abiFileName), true);
 	$contractAddress = array($contractAddress, $abi);
 
-	//$owner = Users_Web3::execute($contractAddress, "owner", array(), $chainId, false);
-	$info = Users_Web3::execute($contractAddress, "seriesInfo", $seriesId, $chainId, false);
+	//$owner = Users_Web3::execute('Assets/NFT', $contractAddress, "owner", array(), $chainId, false);
+	$info = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "seriesInfo", $seriesId, $chainId, false);
 
 	return compact("info");
 }
