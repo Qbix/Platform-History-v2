@@ -116,13 +116,9 @@
         this.advancedLiveStreamingBox = null;
 
         $(this.element).addClass('Q_floatAboveDocument');
-        console.log('controls: before create1', options.webrtcClass)
-
         if (!options.webRTClibraryInstance || !options.webrtcClass) {
             throw "Video room should be created";
         }
-        console.log('controls: before create2')
-
         this.state = Q.extend({}, this.state, options);
 
         this.icons = icons;
@@ -139,13 +135,14 @@
             onUpdate: new Q.Event(),
             onRefresh: new Q.Event(),
             dialogIsOpened: false,
-            loudestMode: false
+            loudestMode: false,
+            debug: {}
         },
 
         {
             create: function () {
-                console.log('controls: create')
                 var tool = this;
+                tool.log('controls: create')
                 this.WebRTCLib = this.state.webRTClibraryInstance;
                 this.WebRTCClass = this.state.webrtcClass;
 
@@ -164,12 +161,6 @@
                 tool.initFbLiveInterface();
                 tool.initAdvancedLiveStreaming();
                 tool.initMediaLimits();
-
-                /*Q.require(src, function (livestreamingDialog) {
-
-                    console.log('livestreamingDialog', this)
-                    //livestreamingDialog.init(tool);
-                });*/
 
                 var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
                 if (activeViewMode == 'maximized' || activeViewMode == 'maximizedMobile') {
@@ -265,8 +256,8 @@
              * @method bindRTCEvents
              */
             bindRTCEvents: function () {
-                console.log('bindRTCEvents');
                 var tool = this;
+                tool.log('controls: bindRTCEvents');
 
                 function setRealName(participant, callback) {
                     var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
@@ -318,12 +309,12 @@
                     if (participant.sid == 'recording') return;
 
                     var participantsCount = tool.WebRTCLib.roomParticipants().length;
-                    console.log('controls:participantConnected ', participantsCount)
+                    tool.log('controls: local participantConnected; participants num:', participantsCount)
                     tool.usersCounter.innerHTML = participantsCount;
 
                 });
                 tool.WebRTCLib.event.on('participantConnected', function (participant) {
-                    console.log('controls:participantConnected ')
+                    tool.log('controls: participantConnected')
 
                     if (participant.sid == 'recording') return;
                     setRealName(participant, function (name) {
@@ -336,14 +327,14 @@
                     }
 
                     var participantsCount = tool.WebRTCLib.roomParticipants().length;
-                    console.log('controls:participantConnected ', participantsCount)
+                    tool.log('controls: participantConnected; participants num:', participantsCount)
                     tool.usersCounter.innerHTML = participantsCount;
 
                 });
                 tool.WebRTCLib.event.on('participantDisconnected', function (participant) {
                     tool.participantsPopup().removeItem(participant);
                     var participantsCount = tool.WebRTCLib.roomParticipants().length;
-                    console.log('controls:participantDisconnected ', participantsCount)
+                    tool.log('controls: participantDisconnected; participants num:', participantsCount)
 
                     tool.usersCounter.innerHTML = participantsCount;
                 });
@@ -432,7 +423,7 @@
                     tool.participantsPopup().showLiveIndicator(e.participant, e.platform.content);
                 });
                 tool.WebRTCLib.event.on('liveStreamingEnded', function (e) {
-                    console.log('event: liveStreamingEnded', e);
+                    tool.log('controls: liveStreamingEnded', e);
                     if (document.querySelector('.Streams_webrtc_fblive_dialog_inner') != null) {
                         Q.Dialogs.pop();
                     }
@@ -449,8 +440,6 @@
                     } else {
                         if (e.participant.isLocal) {
                             tool.cameraBtn.classList.remove('isRecording');
-                            console.log('event: liveStreamingEnded: remove class');
-
                             tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.youStoppedLive", tool.textes));
                         } else {
                             tool.usersBtn.classList.remove('isRecording');
@@ -463,7 +452,7 @@
                     tool.event().dispatch('liveStreamingEnded');
                 });
                 tool.WebRTCLib.event.on('liveStreamingStopped', function (e) {
-                    console.log('event: liveStreamingStopped', e);
+                    tool.log('controls: liveStreamingStopped', e);
                     tool.event().dispatch('liveStreamingStopped');
                 });
 
@@ -473,9 +462,9 @@
                 });
 
                 tool.WebRTCLib.event.on('webcastStarted', function (e) {
-                    console.log('EVENT: webcastStarted', e, tool.broadcastClient);
+                    tool.log('controls: webcastStarted', e, tool.broadcastClient);
                     if (tool.broadcastClient != null) {
-                        console.log('EVENT: webcastStarted emit parallelWebcastStarted');
+                        tool.log('controls: webcastStarted: emit parallelWebcastStarted');
                         tool.WebRTCLib.signalingDispatcher.sendDataTrackMessage('parallelWebcastExists', tool.broadcastClient.getOptions().roomName, e.participant)
                         //tool.broadcastClient.socket().emit('parallelWebcastStarted', {roomId:e.data});
                         tool.broadcastClient.socket().emit('parallelWebcastExists', e.data);
@@ -489,7 +478,7 @@
                 });
 
                 tool.WebRTCLib.event.on('parallelWebcastExists', function (e) {
-                    console.log('EVENT: parallelWebcastExists', e);
+                    tool.log('controls: parallelWebcastExists', e);
 
                     if (tool.broadcastClient != null) {
                         tool.broadcastClient.socket().emit('parallelWebcastExists', e.data);
@@ -498,7 +487,7 @@
                 });
 
                 tool.WebRTCLib.event.on('switchRoom', function (e) {
-                    console.log('EVENT: switchRoom', e);
+                    tool.log('controls: switchRoom', e);
                     var options = tool.WebRTCClass.getOptions();
                     if (tool.broadcastClient != null && options.webcastSettings.disconnectOnRoomSwitch) {
                         tool.broadcastClient.disconnect();
@@ -555,10 +544,10 @@
 
                 tool.WebRTCLib.event.on('canITurnCameraOn', function (e) {
                     if (e.answerValue !== true) return;
-                    console.log('canITurnCameraOn', e)
+                    tool.log('controls: canITurnCameraOn answer', e)
 
                     if (e.timeProvided != null) {
-                        console.log('canITurnCameraOn e.timeProvided', e.timeProvided)
+                        tool.log('controls: canITurnCameraOn: e.timeProvided', e.timeProvided)
                         function cntDown() {
                             if (tool.giveCameraTimer) {
                                 clearInterval(tool.giveCameraTimer);
@@ -586,7 +575,7 @@
                     }
                 });
 
-                console.log('controls events loaded');
+                tool.log('controls: events loaded');
                 //someone or me requested a camera slot
                 tool.WebRTCLib.event.on('cameraRequested', function (e) {
                     tool.limits.onCameraRequestedHandler(e);
@@ -636,10 +625,10 @@
 
                 tool.WebRTCLib.event.on('canITurnMicOn', function (e) {
                     if (e.answerValue !== true) return;
-                    console.log('canITurnMicOn START', e)
+                    tool.log('controls: canITurnMicOn START', e)
 
                     if (e.timeProvided != null) {
-                        console.log('canITurnMicOn e.timeProvided', e.timeProvided)
+                        tool.log('controls: canITurnMicOn: e.timeProvided', e.timeProvided)
                         function cntDown() {
                             if (tool.giveMicTimer) {
                                 clearInterval(tool.giveMicTimer);
@@ -668,8 +657,6 @@
                 });
                 //someone or me requested a mic slot
                 tool.WebRTCLib.event.on('micRequested', function (e) {
-
-                    console.log('micRequested', e);
                     tool.limits.onMicRequestedHandler(e);
                 });
 
@@ -1323,13 +1310,13 @@
                 }).length;
 
                 if (tool.WebRTCLib.localMediaControls.micIsEnabled() && (enabledAudioTracks != 0 || localParticipant.audioStream != null)) {
-                    console.log('toggleAudio disable audio')
+                    tool.log('controls: toggleAudio: disable audio')
                     tool.WebRTCLib.localMediaControls.disableAudio();
                 } else {
-                    console.log('toggleAudio enable audio')
+                    tool.log('controls: toggleAudio: enable audio')
 
                     tool.WebRTCLib.localMediaControls.enableAudio(function (e) {
-                        console.log('toggleAudio enable audio callback')
+                        tool.log('controls: toggleAudio: enable audio callback')
 
                         if (_isiOSCordova)
                             tool.showIosPermissionsInstructions('Microphone');
@@ -1383,31 +1370,28 @@
              * @method updateControlBar
              */
             updateControlBar: function () {
-                console.log('updateControlBar')
                 var tool = this;
+                tool.log('controls: updateControlBar')
                 if (tool.controlBar == null) return;
                 var localParticipant = tool.WebRTCLib.localParticipant();
                 var localMediaControls = tool.WebRTCLib.localMediaControls;
-                console.log('updateControlBar localParticipant', localParticipant)
 
                 var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
                     return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                 }).length;
 
-                console.log('updateControlBar enabledVideoTracks', enabledVideoTracks, tool.WebRTCLib.localParticipant().videoStream)
-
                 if (tool.WebRTCClass.getOptions().audioOnlyMode) {
-                    console.log('updateControlBar 0')
+                    tool.log('controls: updateControlBar 0')
                     tool.cameraBtnIcon.innerHTML = icons.moreOptions;
                 } else if (enabledVideoTracks == 0 && tool.WebRTCLib.localParticipant().videoStream == null) {
-                    console.log('updateControlBar 1')
+                    tool.log('controls: updateControlBar 1')
 
                     tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
                 } else if (!localMediaControls.cameraIsEnabled()) {
-                    console.log('updateControlBar 2')
+                    tool.log('controls: updateControlBar 2')
                     tool.cameraBtnIcon.innerHTML = icons.disabledCamera;
                 } else if (localMediaControls.cameraIsEnabled()) {
-                    console.log('updateControlBar 3')
+                    tool.log('controls: updateControlBar 3')
                     tool.cameraBtnIcon.innerHTML = icons.camera;
                 }
 
@@ -1422,8 +1406,8 @@
                 var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
                     return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                 }).length;
-                console.log('updateControlBar enabledAudioTracks', enabledAudioTracks, tool.WebRTCLib.localParticipant().audioStream)
-                console.log('updateControlBar !localMediaControls.micIsEnabled()', !localMediaControls.micIsEnabled())
+                tool.log('controls: updateControlBar enabledAudioTracks', enabledAudioTracks, tool.WebRTCLib.localParticipant().audioStream)
+                tool.log('controls: updateControlBar !localMediaControls.micIsEnabled()', !localMediaControls.micIsEnabled())
 
                 if (enabledAudioTracks == 0 && tool.WebRTCLib.localParticipant().audioStream == null) {
                     tool.microphoneBtn.innerHTML = icons.disabledMicrophone;
@@ -1646,7 +1630,6 @@
                             this.deviceId = data.deviceId;
                             this.handler = data.handler.bind(this);
                             this.makeActive = function () {
-                                console.log('makeActive', this)
                                 if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
                                 if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
                                 this.isActive = true;
@@ -1676,13 +1659,8 @@
                                 }
                             }
 
-                            console.log('toggleRadioButton', buttonObj);
-                            try {
-                                var err = (new Error);
-                                console.log(err.stack);
-                            } catch (e) {
-
-                            }
+                            tool.log('controls: toggleRadioButton', buttonObj);
+                           
                             if (buttonObj.type == 'camera') {
                                 deselectCameraButtons();
                                 if (!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
@@ -1736,7 +1714,7 @@
                         }
 
                         function loadCamerasList() {
-                            console.log('loadCamerasList')
+                            tool.log('contros: loadCamerasList')
                             if (tool.WebRTCClass.getOptions().audioOnlyMode) return;
                             //location.reload();
                             var count = 1;
@@ -1778,7 +1756,7 @@
                                                 for (i = 0; screen = localScreens[i]; i++) {
                                                     tool.state.webrtcClass.screenRendering.updateLocalScreenClasses(screen);
                                                 }
-                                                console.log('toggleRadioButton', cameraItem)
+                                                tool.log('controls: toggleRadioButton', cameraItem)
                                                 toggleRadioButton(cameraItem);
 
                                                 tool.updateControlBar();
@@ -1820,19 +1798,19 @@
                         tool.loadCamerasList = loadCamerasList;
 
                         function updateCamerasList() {
-                            console.log('updateCamerasList');
+                            tool.log('controls: updateCamerasList');
                             let cameraIsActive = false;
                             _cameraListButtons.forEach(function (cameraItem) {
 
                                 if (tool.WebRTCLib.localMediaControls.currentCameraDevice() != null && tool.WebRTCLib.localMediaControls.currentCameraDevice().deviceId == cameraItem.deviceId) {
-                                    console.log('updateCamerasList: toggleRadioButton', cameraItem);
+                                    tool.log('controls: updateCamerasList: toggleRadioButton (active)', cameraItem);
                                     toggleRadioButton(cameraItem);
                                     cameraIsActive = true
                                 }
 
                             });
                             if (!cameraIsActive) {
-                                console.log('updateCamerasList: _turnOffCameraBtn');
+                                tool.log('controls: updateCamerasList: make active _turnOffCameraBtn');
                                 toggleRadioButton(_turnOffCameraBtn);
                             }
                         }
@@ -2129,7 +2107,6 @@
                             var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
                                 return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                             }).length;
-                            console.log('_turnOffCameraBtn', enabledVideoTracks, localParticipant.videoStream)
                             if (enabledVideoTracks == 0 && localParticipant.videoStream == null) {
                                 toggleRadioButton(_turnOffCameraBtn);
                             }
@@ -2637,7 +2614,7 @@
                                 tool.WebRTCLib.mediaManager.fbLive.endStreaming('custom');
                             })
 
-                            console.log('tool.event', tool.event);
+                            tool.log('controls: tool.event', tool.event);
                             tool.event().on('liveStreamingEnded', function () {
                                 onStop();
                             });
@@ -2839,7 +2816,7 @@
                                         var turnCredentials = response.slots.room.turnCredentials;
                                         var socketServer = response.slots.room.socketServer;
 
-                                        console.log('Streams/webcast', response, socketServer);
+                                        tool.log('controls: Streams/webcast', response, socketServer);
                                         broadcastClient = window.WebRTCWebcastClient({
                                             mode: 'node',
                                             role: 'publisher',
@@ -2853,7 +2830,7 @@
                                         activeRecordingSection.style.display = 'block';
 
                                         broadcastClient.init(function () {
-                                            console.log('initWithNodeServer: initConference: inited');
+                                            tool.log('controls: init webcast: initConference: inited');
 
                                             tool.WebRTCLib.mediaManager.canvasComposer.captureStream();
                                             var stream = tool.WebRTCLib.mediaManager.canvasComposer.getMediaStream();
@@ -3117,7 +3094,7 @@
                         }
 
                         function loadAudioOutputList() {
-                            console.log('loadAudioOutputList');
+                            tool.log('controls: loadAudioOutputList');
                             _audioOutputListEl.innerHTML = '';
                             if (!checkIfSetSinkIdIsSupported()) {
                                 var alertNoticeCon = document.createElement('DIV');
@@ -3132,7 +3109,7 @@
                             clearAudioOutputList();
 
                             tool.WebRTCLib.localMediaControls.audioOutputDevices().forEach(function (mediaDevice) {
-                                console.log('loadAudioOutputList', mediaDevice);
+                                tool.log('controls: loadAudioOutputList', mediaDevice);
                                 var radioBtnItem = document.createElement('DIV');
                                 radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
                                 radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
@@ -3276,7 +3253,7 @@
                             clearAudioInputList();
 
                             tool.WebRTCLib.localMediaControls.audioInputDevices().forEach(function (mediaDevice) {
-                                console.log('loadAudioInputList', mediaDevice);
+                                tool.log('controls: loadAudioInputList', mediaDevice);
                                 var radioBtnItem = document.createElement('DIV');
                                 radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
                                 radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
@@ -3314,8 +3291,6 @@
                                                 if (_isiOSCordova) tool.showIosPermissionsInstructions('Audio');
                                             })
                                         }
-
-                                        console.log('canITurnMicOn: before');
 
                                         if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
                                             if (tool.WebRTCLib.localMediaControls.cameraIsEnabled() || tool.giveCameraTimer != null) {
@@ -3365,20 +3340,19 @@
                         tool.loadAudioInputList = loadAudioInputList;
 
                         function updateAudioInputList() {
-                            console.log('updateAudioInputList START', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
+                            tool.log('controls: updateAudioInputList START', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
                             let audioInputIsActive = false;
-                            _audioInputListButtons.forEach(function (audioInputItem) {
-                                console.log('updateAudioInputList', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
+                            tool.log('controls: updateAudioInputList: current ai device', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
 
+                            _audioInputListButtons.forEach(function (audioInputItem) {
                                 if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == audioInputItem.deviceId) {
-                                    console.log('updateAudioInputList: toggleRadioButton', tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId, audioInputItem.deviceId);
                                     toggleRadioButton(audioInputItem);
                                     audioInputIsActive = true
                                 }
 
                             });
                             if (!audioInputIsActive) {
-                                console.log('updateAudioInputList: _turnOffAudioInputBtn');
+                                tool.log('controls: updateAudioInputList: _turnOffAudioInputBtn');
                                 toggleRadioButton(_turnOffAudioInputBtn);
                             }
                         }
@@ -3426,7 +3400,6 @@
                             var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
                                 return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
                             }).length;
-                            console.log('_turnOffAudioInputBtn', enabledAudioTracks, localParticipant.audioStream)
                             if (enabledAudioTracks == 0 && localParticipant.audioStream == null) {
                                 toggleRadioButton(_turnOffAudioInputBtn);
                             }
@@ -3456,7 +3429,6 @@
                         settingsPopupInner.appendChild(audioInputListSection.createAudioInputList());
 
                         tool.audioSettingsPopupEl = settingsPopup;
-                        console.log('audioSettingsPopupElv', settingsPopup)
                         settingsPopup.appendChild(settingsPopupInner);
                         tool.microphoneBtn.parentNode.appendChild(settingsPopup);
 
@@ -3682,7 +3654,6 @@
 
                         this.manuallyToggled = manually;
                         var activeViewMode = tool.state.webrtcClass.screenRendering.getActiveViewMode();
-                        console.log('isActive', this.isActive)
                         if (this.isActive == false) {
                             for (let s in screens) {
                                 if (screens[s].screensharing || (screens[s].trackEl && !screens[s].trackEl.srcObject.active)) continue;
@@ -3777,7 +3748,7 @@
                     };
                     this.showMediaRequestIcon = function (type, waitingTime) {
                         var participantListItem = this;
-                        console.log('showMediaRequestIcon');
+                        tool.log('controls: showMediaRequestIcon');
                         if (type == 'camera') {
                             let cameraRequestCon = document.createElement('DIV');
                             cameraRequestCon.className = 'Streams_webrtc_camera_request_con';
@@ -3854,7 +3825,7 @@
 
                     };
                     this.hideMediaRequestIcon = function (type) {
-                        console.log('hideMediaRequestIcon', type);
+                        tool.log('controls: hideMediaRequestIcon', type);
                         let camIcon = this.mediaRequestStatusEl.querySelector('.Streams_webrtc_camera_request_con');
                         let micIcon = this.mediaRequestStatusEl.querySelector('.Streams_webrtc_mic_request_con');
                         if (type == 'camera') {
@@ -3945,12 +3916,11 @@
                 }
 
                 function hideLiveIndicator(participant, platform) {
-                    console.log('hideLiveIndicator');
+                    tool.log('controls: hideLiveIndicator');
 
                     for (let i in tool.participantsList) {
                         let item = tool.participantsList[i];
                         if (participant != item.participant) continue;
-                        console.log('hideLiveIndicator: hide', participant);
 
                         item.hideLiveIcon(platform);
                         break;
@@ -3959,7 +3929,7 @@
 
                 function showMediaRequestIndicator(e, type) {
                     let participant = e.participant;
-                    console.log('showMediaRequestIndicator', participant);
+                    tool.log('controls: showMediaRequestIndicator', participant);
                     for (let i in tool.participantsList) {
                         let item = tool.participantsList[i];
                         if (participant != item.participant) continue;
@@ -3970,11 +3940,10 @@
 
                 function hideMediaRequestIndicator(e, type) {
                     let participant = e.participant;
-                    console.log('hideMediaRequestIndicator', participant);
+                    tool.log('controls: hideMediaRequestIndicator', participant);
                     for (let i in tool.participantsList) {
                         let item = tool.participantsList[i];
                         if (participant != item.participant) continue;
-                        console.log('hideLiveIndicator: hide', participant);
 
                         item.hideMediaRequestIcon(type);
                         break;
@@ -3995,7 +3964,7 @@
                  * @method addItem
                  */
                 function addItem(roomParticipant) {
-                    console.log('controls: addItem');
+                    tool.log('controls: addItem');
                     var isLocal = roomParticipant == localParticipant;
                     var participantItem = document.createElement('LI');
                     var tracksControlBtns = document.createElement('DIV');
@@ -4079,7 +4048,6 @@
                     participantItem.appendChild(participantIdentity);
 
                     tool.participantListEl.appendChild(participantItem);
-                    console.log('controls: addItem: tool.participantListEl', tool.participantListEl);
 
                     var listItem = new ListItem();
                     listItem.participant = roomParticipant;
@@ -4663,11 +4631,8 @@
                                 }
 
                                 let mostLowTimer = allMediaRequests.reduce(function (prev, curr) {
-                                    console.log('showMostLowTimer reduce', prev.mediaRequestsCountdown.currentSec, curr.mediaRequestsCountdown.currentSec)
                                     return prev.mediaRequestsCountdown.currentSec < curr.mediaRequestsCountdown.currentSec ? prev : curr;
                                 });
-
-                                console.log('showMostLowTimer: mostLowTimer', mostLowTimer, mostLowTimer.mediaRequestsCountdown.timer, mostLowTimer.mediaRequestsCountdown.currentSec);
 
                                 for (let m in allMediaRequests) {
                                     allMediaRequests[m].mediaRequestsCountdown.callback = null;
@@ -4895,7 +4860,6 @@
                                 tool.limits.cameraRequestsQueue[i].mediaRequestsCountdown.timer = null;
                                 tool.limits.cameraRequestsQueue[i].mediaRequestsCountdown.callback = null;
                                 tool.limits.cameraRequestsQueue.splice(i, 1);
-                                console.log('removeCameraRequestFromQueue')
                             }
                         }
                         tool.limits.timersManager.generalTimerNearParticipantsIscon.showMostLowTimer();
@@ -4911,7 +4875,6 @@
                                 tool.limits.micRequestsQueue[i].mediaRequestsCountdown.timer = null;
                                 tool.limits.micRequestsQueue[i].mediaRequestsCountdown.callback = null;
                                 tool.limits.micRequestsQueue.splice(i, 1);
-                                console.log('removeMicRequestFromQueue')
                             }
                         }
                         tool.limits.timersManager.generalTimerNearParticipantsIscon.showMostLowTimer();
@@ -4928,7 +4891,6 @@
                             let dialogMsg = document.createElement('DIV');
                             dialogMsg.className = 'Streams_webrtc_request_speak_msg';
                             dialogInner.appendChild(dialogMsg);
-                            console.log('selectMediaDialog: getRoomLimitsInfo', tool.textes.webrtc);
                             if (result.activeAudios != 0) {
                                 let text = tool.textes.webrtc.requestSpeakDialog;
                                 if (text != null) {
@@ -4969,7 +4931,7 @@
                         });
                     },
                     onCameraRequestedHandler: function (e) {
-                        console.log('cameraRequested', e);
+                        tool.log('controls: cameraRequested', e);
                         //show indicator near participant in participant popup
                         tool.participantsPopup().hideMediaRequestIndicator(e, 'camera');
                         tool.participantsPopup().showMediaRequestIndicator(e, 'camera');
@@ -5389,9 +5351,8 @@
                     ),
                     {},
                     function () {
-                        console.log('Streams/webrtc/streamingEditor', this)
                         tool.advancedLiveStreaming = this.get();
-                        console.log('Streams/webrtc/streamingEditor', tool.advancedLiveStreaming)
+                        tool.log('controls: Streams/webrtc/streamingEditor', tool.advancedLiveStreaming)
 
 
                         if (imageBgLink) {
@@ -5419,6 +5380,25 @@
                     elems[i].parentNode.removeChild(elems[i]);
                 }
                 tool.state.dialogIsOpened = false;
+            },
+            log: function log(text) {
+                var tool = this;
+                if(!tool.state.debug.controls) return;
+                var args = Array.prototype.slice.call(arguments);
+                var params = [];
+        
+                if (window.performance) {
+                    var now = (window.performance.now() / 1000).toFixed(3);
+                    params.push(now + ": " + args.splice(0, 1));
+                    params = params.concat(args);
+                    console.log.apply(console, params);
+                } else {
+                    params.push(text);
+                    params = params.concat(args);
+                    console.log.apply(console, params);
+                }
+        
+                if(tool.WebRTCLib) tool.WebRTCLib.event.dispatch('log', params);
             }
         }
 

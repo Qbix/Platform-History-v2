@@ -5415,6 +5415,12 @@ window.WebRTCRoomClient = function app(options){
                 audioComposer.stop();
             }
 
+            function log(text) {
+                if(!options.debug.liveStreaming) return;
+                var args = Array.prototype.slice.call(arguments);
+                appLog.apply(null, args);
+            }
+
             return {
                 videoComposer: videoComposer,
                 audioComposer: audioComposer,
@@ -5653,6 +5659,12 @@ window.WebRTCRoomClient = function app(options){
 
             function switchRoom(roomInstance, roomParticipants) {
 
+            }
+
+            function log(text) {
+                if(!options.debug.liveStreaming) return;
+                var args = Array.prototype.slice.call(arguments);
+                appLog.apply(null, args);
             }
 
             return {
@@ -8497,6 +8509,13 @@ window.WebRTCRoomClient = function app(options){
                 app.localMediaControls.enableAudio();
                 app.localMediaControls.loadDevicesList();
             }
+
+
+            function log(text) {
+                if(!options.debug.signaling) return;
+                var args = Array.prototype.slice.call(arguments);
+                appLog.apply(null, args);
+            }
         }
 
         return {
@@ -9779,6 +9798,12 @@ window.WebRTCRoomClient = function app(options){
             app.signalingDispatcher.sendDataTrackMessage('online', info);
         }
 
+        function log(text) {
+            if(!options.debug.controls) return;
+            var args = Array.prototype.slice.call(arguments);
+            appLog.apply(null, args);
+        }
+
         return {
             enableVideo: enableVideoTracks,
             disableVideo: disableVideoTracks,
@@ -10886,6 +10911,11 @@ window.WebRTCRoomClient = function app(options){
 
         app.event.dispatch('log', params);
 
+    }
+
+    function appLog(){
+        var args = Array.prototype.slice.call(arguments);
+        log.apply(null, args);
     }
 
     return app;

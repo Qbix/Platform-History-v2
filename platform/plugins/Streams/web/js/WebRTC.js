@@ -3939,10 +3939,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             var createNewRowOnRight = false;
                             var i, x, y, prevRect, latestLeftRect, latestRightRect;
                             for (i = 0; i < totalRectsOnSides; i++) {
-                                console.log('build totalRectsOnSides for')
+                                log('build totalRectsOnSides for')
 
                                 if (side == "right") {
-                                    console.log('build totalRectsOnSides for right')
+                                    log('build totalRectsOnSides for right')
 
                                     if (latestRightRect) prevRect = latestRightRect
                                     if (rightSideCounter >= 1) {
@@ -3991,28 +3991,28 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     rightSideCounter++;
 
                                     if (rightSideCounter == rectsOnRightSide) {
-                                        console.log('build totalRectsOnSides for createNewRowOnRight')
+                                        log('build totalRectsOnSides for createNewRowOnRight')
 
                                         createNewRowOnRight = true;
                                         rightSideCounter = 0;
                                     }
                                     if (rectsOnLeftSide != 0) {
-                                        console.log('build totalRectsOnSides for right next', rightSideCounter, createNewRowOnRight, (createNewRowOnLeft && createNewRowOnRight), (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight))
+                                        log('build totalRectsOnSides for right next', rightSideCounter, createNewRowOnRight, (createNewRowOnLeft && createNewRowOnRight), (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight))
 
                                         if (rectsOnLeftSide == rectsOnRightSide) {
                                             side = 'left';
-                                            console.log('build totalRectsOnSides for left next 0')
+                                            log('build totalRectsOnSides for left next 0')
 
                                         } else if (rectsOnLeftSide != rectsOnRightSide) {
                                             if ((!createNewRowOnLeft && !createNewRowOnRight)
                                                 || (createNewRowOnRight && !createNewRowOnLeft)
                                                 || (createNewRowOnLeft && createNewRowOnRight && (rectsOnRightSide == 1 || rectsOnLeftSide == 1))) {
                                                 side = 'left';
-                                                console.log('build totalRectsOnSides for left next 1')
+                                                log('build totalRectsOnSides for left next 1')
 
                                             } else if ((createNewRowOnLeft && createNewRowOnRight) || (createNewRowOnLeft && rightSideCounter > 1 && !createNewRowOnRight)) {
                                                 side = 'right';
-                                                console.log('build totalRectsOnSides for left next 2')
+                                                log('build totalRectsOnSides for left next 2')
                                             }
                                         }
                                     }
@@ -4020,7 +4020,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     var rect = latestRightRect = new DOMRect(x, y, rectWidth, rectHeight);
                                     currentRowRects.push({side: 'right', rect: rect});
                                 } else if (side == "left") {
-                                    console.log('build totalRectsOnSides for left')
+                                    log('build totalRectsOnSides for left')
                                     if (latestLeftRect) prevRect = latestLeftRect;
 
                                     if (leftSideCounter >= 1) {
@@ -5598,10 +5598,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(track.trackEl) {
                     fitScreenToVideo(track.trackEl, track.parentScreen);
                     track.trackEl.play().then((e) => {
-                        console.log('videoTrackLoaded: trackEl play func success')
+                        log('videoTrackLoaded: trackEl play func success')
                     }).catch((e) => {
                         console.error(e)
-                        console.log('videoTrackLoaded: trackEl play func error')
+                        log('videoTrackLoaded: trackEl play func error')
 
                     });
                 }
@@ -5669,6 +5669,12 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 return layoutEvents;
             }
 
+            function log(text) {
+                if(!_debug.layouts) return;
+                var args = Array.prototype.slice.call(arguments);
+                appLog.apply(null, args);
+            }
+
             return {
                 setViewMode:setViewMode,
                 updateLayout:updateLayout,
@@ -5730,7 +5736,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
 
             stream.onMessage("Streams/webrtc/forceDisconnect").set(function (stream, message) {
-                console.log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
+                log('bindStreamsEvents: Streams/webrtc/forceDisconnect add', stream, message);
                 if(!isActive()) return;
                 var message = JSON.parse(message.content);
                 var roomParticipants = WebRTCconference.roomParticipants();
@@ -6383,7 +6389,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 });
 
                 var setVideoPreview = function(stream) {
-                    console.log('setVideoPreview', stream);
+                    log('setVideoPreview', stream);
                     let videoPreview = document.createElement('video');
                     let screenVideo = cameraPreview.querySelector('video');
                     try {
@@ -6409,10 +6415,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                     videoPreview.play().then((e) => {
-                        console.log('camera: play func success')
+                        log('camera: play func success')
                     }).catch((e) => {
                         console.error(e)
-                        console.log('camera: play func error')
+                        log('camera: play func error')
                     });
                 }
 
@@ -6539,10 +6545,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             switchScreenSharingBtn.innerHTML = screenSharingSVG;
                             screenPreview.play().then((e) => {
-                                console.log('screen: play func success')
+                                log('screen: play func success')
                             }).catch((e) => {
                                 console.error(e)
-                                console.log('screen: play func error')
+                                log('screen: play func error')
 
                             });
 
@@ -6914,6 +6920,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 {
                                     webRTClibraryInstance: WebRTCconference,
                                     webrtcClass: publicAppInterface,
+                                    debug: _debug,
                                     onCreate: function () {
                                         Q.handle(_options.onWebrtcControlsCreated, this);
                                     }
@@ -7848,6 +7855,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 console.log.apply(console, params);
             }
             appDebug.logInfo(params);
+        }
+
+        function appLog() {
+            var args = Array.prototype.slice.call(arguments);
+            log.apply(null, args);
         }
 
         function determineBrowser(ua) {
