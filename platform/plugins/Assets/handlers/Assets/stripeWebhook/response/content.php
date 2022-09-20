@@ -54,15 +54,17 @@ function Assets_stripeWebhook_response_content ($params) {
 
 				// set user to metadata
 				$userId = Q::ifset($metadata, "userId", null);
-				if ($userId) {
-					$metadata["user"] = Users::fetch($userId, true);
+				if (!$userId) {
+					throw new Exception("user id not found");
 				}
+				$metadata["user"] = Users::fetch($userId, true);
 
 				// set payment id to metadata
 				$chargeId = Q::ifset($paymentIntent, "id", null);
-				if ($chargeId) {
-					$metadata["chargeId"] = $chargeId;
+				if (!$chargeId) {
+					throw new Exception("payment intent id not found");
 				}
+				$metadata["chargeId"] = $chargeId;
 
 				// set stream to metadata
 				$publisherId = Q::ifset($metadata, "publisherId", null);
