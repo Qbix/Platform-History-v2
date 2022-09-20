@@ -21,7 +21,6 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	 * @param {array} $options=array() Any initial options
 	 * @param {string} $options.secret
 	 * @param {string} $options.publishableKey
-	 * @param {string} $options.token If provided, allows us to create a customer and charge them
  	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to charge
 	 */
 	function __construct($options = array())
@@ -41,7 +40,6 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	 * @param {double} $amount specify the amount (optional cents after the decimal point)
 	 * @param {string} [$currency='USD'] set the currency, which will affect the amount
 	 * @param {array} [$options=array()] Any additional options
-	 * @param {string} [$options.token=null] required unless the user is an existing customer
 	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
 	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
 	 * @param {string} [$options.subscription=null] if this charge is related to a subscription stream
@@ -56,17 +54,17 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		Q_Valid::requireFields(array('secret', 'user'), $options, true);
 		\Stripe\Stripe::setApiKey($options['secret']);
 		$user = $options['user'];
+
+		// get or create stripe customer
 		$customer = new Assets_Customer();
 		$customer->userId = $user->id;
 		$customer->payments = 'stripe';
 		if (!$customer->retrieve()) {
-			Q_Valid::requireFields(array('token'), $options, true);
-			$stripeCustomer = self::createCustomer($user, array(
-				"source" => $options['token']["id"]
-			));
+			$stripeCustomer = self::createCustomer($user);
 			$customer->customerId = $stripeCustomer->id;
 			$customer->save();
 		}
+
 		$params = array(
 			"amount" => $amount * 100, // in cents
 			"currency" => $currency,
@@ -82,7 +80,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	 * Allow you to perform recurring charges, and to track multiple charges, that are associated with the same customer
 	 * @method createCustomer
 	 * @param {Users_User} $user
-	 * @param {array} [$params] Additional params. For example 'source' passed with token id.
+	 * @param {array} [$params] Additional params.
 	 * @return {object} The customer object
 	 */
 	function createCustomer($user, $params = array())
@@ -118,9 +116,21 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 
 		$amount = $amount * 100; // in cents
 
+		// get or create stripe customer
+		$customer = new Assets_Customer();
+		$customer->userId = $options['user']->id;
+		$customer->payments = 'stripe';
+		if (!$customer->retrieve()) {
+			$stripeCustomer = self::createCustomer($options['user']);
+			$customer->customerId = $stripeCustomer->id;
+			$customer->save();
+		}
+
 		Q_Valid::requireFields(array('secret', 'user'), $options, true);
 		\Stripe\Stripe::setApiKey($options['secret']);
 		$params = array(
+			'customer' => $customer->customerId,
+			'setup_future_usage' => 'off_session',
 			'automatic_payment_methods' => array('enabled' => true),
 			'amount' => $amount,
 			'currency' => $currency,
