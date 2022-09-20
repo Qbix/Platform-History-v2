@@ -669,21 +669,19 @@
 										return_url: Q.url("{{baseUrl}}/me/credits")
 									},
 									redirect: 'if_required'
-								}).then(function ({paymentIntent}) {
-									if (paymentIntent.error) {
-										$this.removeClass("Q_working");
+								}).then(function (response) {
+									Q.Dialogs.pop();
+
+									if (response.error) {
+										if (response.error.type === "card_error" || response.error.type === "validation_error") {
+											Q.alert(response.error.message);
+										} else {
+											Q.alert("An unexpected error occurred.");
+										}
+										return;
 									}
 
-									Q.Dialogs.pop();
 									//Assets.Payments.stripePaymentResult(paymentIntent);
-								}).catch(function (error) {
-									Q.Dialogs.pop();
-
-									if (error.type === "card_error" || error.type === "validation_error") {
-										Q.alert(error.message);
-									} else {
-										Q.alert("An unexpected error occurred.");
-									}
 								});
 							});
 							// </create stripe "payment" element>
