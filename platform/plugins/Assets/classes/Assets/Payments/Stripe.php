@@ -32,6 +32,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			'secret' => Q_Config::expect('Assets', 'payments', 'stripe', 'secret'),
 			'publishableKey' => Q_Config::expect('Assets', 'payments', 'stripe', 'publishableKey'),
 		), $options);
+		\Stripe\Stripe::setApiKey($this->options['secret']);
 	}
 	
 	/**
@@ -51,8 +52,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 	function charge($amount, $currency = 'USD', $options = array())
 	{
 		$options = array_merge($this->options, $options);
-		Q_Valid::requireFields(array('secret', 'user'), $options, true);
-		\Stripe\Stripe::setApiKey($options['secret']);
+		Q_Valid::requireFields(array('user'), $options, true);
 		$user = $options['user'];
 
 		// get or create stripe customer
@@ -126,8 +126,7 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			$customer->save();
 		}
 
-		Q_Valid::requireFields(array('secret', 'user'), $options, true);
-		\Stripe\Stripe::setApiKey($options['secret']);
+		Q_Valid::requireFields(array('user'), $options, true);
 		$params = array(
 			'customer' => $customer->customerId,
 			'setup_future_usage' => 'off_session',
