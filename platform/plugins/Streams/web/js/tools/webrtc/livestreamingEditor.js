@@ -2846,6 +2846,11 @@
                             _layoutList.push(fullScreenLayout);
                             dialogBodyInner.appendChild(fullScreenLayout.itemEl);
 
+                            var sideScreensharing = new LayoutListItem('Side screen sharing');
+                            sideScreensharing.key = 'sideScreenSharing';
+                            _layoutList.push(sideScreensharing);
+                            dialogBodyInner.appendChild(sideScreensharing.itemEl);
+
                             var audioOnlyLayout = new LayoutListItem('Audio only');
                             audioOnlyLayout.key = 'audioOnly';
                             _layoutList.push(audioOnlyLayout);

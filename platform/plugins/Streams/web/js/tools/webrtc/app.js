@@ -4235,6 +4235,11 @@ window.WebRTCRoomClient = function app(options){
 
                             return screenSharingLayout(count, size, true);
                         },
+                        sideScreenSharing: function (container, count) {
+                            var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
+
+                            return sideScreenSharingLayout(count, size);
+                        },
                         audioScreenSharing: function (container, count) {
                             var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
 
@@ -4245,6 +4250,7 @@ window.WebRTCRoomClient = function app(options){
                     function tiledStreamingLayout(container, count) {
                         console.log('tiledStreamingLayout', container, count)
                         var containerRect = container;
+                        _layoutTool.state.currentGenerator = 'tiledStreamingLayout';
 
                         if(_layoutTool.currentRects.length == 0) {
                             console.log('tiledStreamingLayout 0')
@@ -4494,6 +4500,7 @@ window.WebRTCRoomClient = function app(options){
 
                     function screenSharingLayout(count, size, maximized) {
                         console.log('screenSharingLayout START')
+                        _layoutTool.state.currentGenerator = 'screenSharingLayout';
                         var rects = [];
 
                         if(maximized) {
@@ -4593,7 +4600,8 @@ window.WebRTCRoomClient = function app(options){
 
                     function audioScreenSharingLayout(count, size, maximized) {
                         var initCount = count;
-                        console.log('screenSharingLayout START', count)
+                        console.log('audioScreenSharingLayout START', count)
+                        _layoutTool.state.currentGenerator = 'audioScreenSharingLayout';
                         var rects = [];
 
                         if(maximized) {
@@ -4686,6 +4694,327 @@ window.WebRTCRoomClient = function app(options){
                     }
 
                     return layouts[layoutName](new DOMRect(0, 0, _size.width, _size.height), numberOfRects);
+                }
+
+                function sideScreenSharingLayout(count, size) { 
+                    console.log('sideScreenSharingLayout START', count)      
+                    var spaceBetween = 22;
+        
+                    if(_layoutTool.state.currentGenerator != 'sideScreenSharingLayout') {
+                        _layoutTool.currentRects = [];
+                    }
+                    _layoutTool.state.currentGenerator = 'sideScreenSharingLayout';
+        
+                    if (_layoutTool.currentRects.length == 0) {
+                        
+                        console.log('sideScreenSharingLayout if0') 
+                        _layoutTool.currentRects = build();
+                    } else {
+         
+                        console.log('sideScreenSharingLayout if1.0') 
+                        if (count > _layoutTool.currentRects.length) {                   
+                            console.log('sideScreenSharingLayout if1.2')      
+
+                            _layoutTool.basicGridRects = build();
+                            let numOfEls = _layoutTool.basicGridRects.length - _layoutTool.currentRects.length;
+                            let last = _layoutTool.basicGridRects.slice(Math.max(_layoutTool.basicGridRects.length - numOfEls, 0))
+        
+                            let updatedRects = updateRealToBasicGrid();
+                            _layoutTool.currentRects = updatedRects.concat(last);
+        
+                        } else if (count < _layoutTool.currentRects.length) {                  
+                            console.log('sideScreenSharingLayout if')  
+                            _layoutTool.basicGridRects = build();
+                            _layoutTool.currentRects = updateRealToBasicGrid();
+                        }
+                    }
+        
+                    return _layoutTool.currentRects;
+        
+                    function build() {
+
+                        console.log('build')
+                        let innerContainerWidth = size.parentWidth - spaceBetween * 2;
+                        let innerContainerHeight = innerContainerWidth / 16 * 8;
+        
+                        let sideWidth = size.parentWidth / 100 * (count == 5 ? 45 : 40);
+                        let sideSize = { parentWidth: sideWidth, parentHeight: innerContainerHeight + (spaceBetween * 2)};
+                        let rects = [];
+                        if (count - 1 == 1) {
+                            rects = simpleGrid(count - 1, sideSize, 1, 1);
+                        } else if (count - 1 == 2) {
+                            rects = simpleGrid(count - 1, sideSize, 1, 2, true);
+                        } else if (count - 1 == 3) {
+                            rects = simpleGrid(count - 1, sideSize, 1, 3, true);
+                        } else if (count - 1 == 4) {
+                            rects = simpleGrid(count - 1, sideSize, 2, 2);
+                        } else if (count - 1 == 5) {
+                            rects = simpleGrid(count - 1, sideSize, 2, null, true);
+                        } else if (count - 1 >= 6 && count - 1 <= 9) {
+                            console.log('build 4')
+                            rects = simpleGrid(count - 1, sideSize, 2, null, true);
+                        } else if (count - 1 > 9 && count - 1 < 11) {
+                            console.log('build 5')
+                            rects = simpleGrid(count - 1, sideSize, 2, null, true);
+                        } else {
+                            console.log('build 6')
+                            rects = simpleGrid(count - 1, sideSize, 3, null, true);
+                        }
+        
+                        console.log('innerContainerHeight', innerContainerHeight, size.parentHeight - (spaceBetween * 2))
+        
+                        if (innerContainerHeight > size.parentHeight - (spaceBetween * 2)) innerContainerHeight = size.parentHeight - (spaceBetween * 2);
+        
+                        if (count == 1) {
+                            var mainScreen = new DOMRect(spaceBetween, spaceBetween, innerContainerWidth, innerContainerHeight);
+                            rects.unshift(mainScreen);
+                        } else {
+                            var minX = Math.min.apply(Math, rects.map(function (rect) { return rect.x; }));
+                            var maxX = Math.max.apply(Math, rects.map(function (rect) { return rect.x + rect.width; }));
+                            console.log('maxX', rects, maxX)
+                            var mainScreen = new DOMRect(maxX + spaceBetween, spaceBetween, innerContainerWidth - maxX, innerContainerHeight);
+                            rects.unshift(mainScreen);
+                        }
+                       
+                        return centralizeRectsVertically(rects);
+                    }
+        
+                    function updateRealToBasicGrid() {
+                        console.log('updateRealToBasicGrid')
+                        var actualLayoutRects = [];
+                        for(let i in _activeScene.sources) {
+                            if(_activeScene.sources[i].sourceType != 'webrtc') continue;
+                            actualLayoutRects.push({
+                                key: actualLayoutRects.length,
+                                rect: _activeScene.sources[i].rect
+                            });
+                        }
+                        var actualLayoutRectsClone = [...actualLayoutRects];
+                        console.log('updateRealToBasicGrid actualLayoutRects', actualLayoutRects);
+
+                        // for(let r = _layoutTool.basicGridRects.length - 1; r >= 0 ; r--){ryb
+                        for(let r in _layoutTool.basicGridRects) {
+                            let rect = _layoutTool.basicGridRects[r];
+
+                            let closestIndex = closest(rect, actualLayoutRectsClone);
+
+                            console.log('updateRealToBasicGrid closestIndex', r, closestIndex);
+                            console.log('updateRealToBasicGrid closestIndex', rect.x, rect.y, rect.width, rect.height);
+                            if(actualLayoutRects[closestIndex]) {
+                                console.log('updateRealToBasicGrid closestIndex2', actualLayoutRects[closestIndex].x, actualLayoutRects[closestIndex].y, actualLayoutRects[closestIndex].width, actualLayoutRects[closestIndex].height);
+                            }
+
+                            if(closestIndex == null) continue;
+
+                            actualLayoutRects[closestIndex].x = rect.x;
+                            actualLayoutRects[closestIndex].y = rect.y;
+                            actualLayoutRects[closestIndex].width = rect.width;
+                            actualLayoutRects[closestIndex].height = rect.height;
+                            //rectsToSkip.push(closestIndex);
+
+                            for(let c in actualLayoutRectsClone) {
+                                if(actualLayoutRectsClone[c].key == closestIndex) {
+                                    actualLayoutRectsClone.splice(c, 1);
+                                }
+
+                            }
+                        }
+
+                        return actualLayoutRects;
+
+                        function closest(rect, rects) {
+                            var distance = function (x1,y1,x2,y2) {
+                                return Math.sqrt(Math.pow(x2-x1,2)+Math.pow(y2-y1,2));
+                            }
+
+                            if(rects.length != 0) {
+
+                                let closestRect = rects.reduce(function (prev, current, index) {
+                                    return (distance(current.left + (current.width / 2), current.top + (current.height / 2), rect.left + (rect.width / 2), rect.top + (rect.height / 2)) < distance(prev.left + (prev.width / 2), prev.top + (prev.height / 2), rect.left + (rect.width / 2), rect.top + (rect.height / 2))) ? current : prev;
+                                })
+
+                                return closestRect.key;
+
+                            } else {
+                                return null;
+                            }
+                        }
+                    }
+        
+                    function simpleGrid(count, size, perRow, rowsNum, asSquares) {
+                        console.log('simpleGrid', perRow, rowsNum);
+                        console.log('simpleGrid container size', size.parentWidth, size.parentHeight);
+                        var rects = [];
+                        var spaceBetween = 22;
+                        var rectHeight;
+                        var rectWidth = (size.parentWidth / perRow) - (spaceBetween * (perRow));
+        
+                        //console.log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
+                        // if(((rectWidth * perRow) / size.parentWidth) * 100 > 24 ) rectWidth = size.parentWidth / 100 * 24;
+        
+                        if (rowsNum == null) {
+                            console.log('simpleGrid if1');
+        
+                            let primaryRectHeight = size.parentHeight / Math.ceil(count / perRow)
+                            rowsNum = Math.floor(size.parentHeight / (primaryRectHeight));
+                            if (rowsNum == 0) rowsNum = 1;
+                            console.log('simpleGrid if1 primaryRectHeight', primaryRectHeight, rowsNum);
+                            rectHeight = (size.parentHeight - (spaceBetween * rowsNum) - spaceBetween) / rowsNum;
+                        } else {
+                            console.log('simpleGrid if2');
+                            rectHeight = (size.parentHeight - (spaceBetween * rowsNum) - spaceBetween) / rowsNum;
+                        }
+                        console.log('simpleGrid rect size0', rectWidth, rectHeight);
+        
+                        console.log('simpleGrid (rectWidth * perRow', rectWidth, perRow, size.parentWidth, ((rectWidth * perRow) / size.parentWidth) * 100);
+                        let rectSize = Math.min(rectWidth, rectHeight);
+                        //if(((rectSize * perRow) / size.parentWidth) * 100 > 40 ) rectSize = (size.parentWidth / 100 * 40) / perRow;
+        
+                        if (asSquares) {
+                            var newRectSize = getElementSizeKeepingRatio({
+                                width: 500,
+                                height: 500
+                            }, { width: rectSize, height: rectSize })
+        
+                            rectWidth = newRectSize.width;
+                            rectHeight = newRectSize.height;
+                        }
+                    
+        
+                        console.log('simpleGrid rect size1', rectWidth, rectHeight);
+        
+                        if (rowsNum == null) rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
+                        console.log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
+        
+        
+        
+                        var isNextNewLast = false;
+                        var rowItemCounter = 1;
+                        var i;
+                        for (i = 1; i <= count; i++) {
+                            console.log('simpleGrid for', currentRow, rowsNum);
+        
+                            var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0);
+                            var currentRow = isNextNewLast ? rowsNum : Math.ceil(i / perRow);
+                            var isNextNewRow = rowItemCounter == perRow;
+                            isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
+        
+                            if (rowItemCounter == 1) {
+                                var y = (prevRect.y + prevRect.height) + spaceBetween;
+                                var x = spaceBetween;
+                            } else {
+                                var y = prevRect.y;
+                                var x = prevRect.x + prevRect.width + spaceBetween;
+                            }
+        
+                            var rect = new DOMRect(x, y, rectWidth, rectHeight);
+        
+                            rects.push(rect);
+        
+                            if (rowItemCounter == perRow) {
+                                rowItemCounter = 1;
+                            } else rowItemCounter++;
+                        }
+        
+        
+                        console.log('simpleGrid rects', rects);
+        
+        
+        
+                        //return centralizeRects(rects);
+                        return rects;
+                    }
+        
+                    function getRectsRows(rects) {
+                        var rows = {};
+                        var i, count = rects.length;
+                        for (i = 0; i < count; i++) {
+                            var rect = rects[i];
+        
+                            if (rows[rect.top] == null) rows[rect.top] = [];
+        
+                            rows[rect.top].push({ indx: i, top: rect.top, rect: rect, side: 'none' });
+        
+                        }
+        
+                        var rowsArray = [];
+                        for (var property in rows) {
+                            if (rows.hasOwnProperty(property)) {
+                                rowsArray.push(rows[property]);
+                            }
+                        }
+        
+                        return rowsArray;
+                    }
+        
+                    function centralizeRects(rects) {
+        
+                        var centerX = size.parentWidth / 2;
+                        var centerY = size.parentHeight / 2;
+        
+                        var minY = Math.min.apply(Math, rects.map(function (r) { return r.y; }));
+                        var maxY = Math.max.apply(Math, rects.map(function (r) { return r.y + r.height; }));
+        
+                        var sortedRows = getRectsRows(rects);
+                        console.log('centralizeRects sortedRows', sortedRows)
+        
+                        var alignedRects = []
+                        for (let r in sortedRows) {
+                            let row = sortedRows[r].map(function (r) { return r.rect; });
+                            var rowMinX = Math.min.apply(Math, row.map(function (r) { return r.x; }));
+                            var rowMaxX = Math.max.apply(Math, row.map(function (r) { return r.x + r.width; }));
+                            var rowTotalWidth = rowMaxX - rowMinX;
+                            console.log('centralizeRects rowTotalWidth', rowMinX, rowMaxX, rowTotalWidth)
+                            console.log('centralizeRects centerX', centerX)
+                            var newXPosition = centerX - (rowTotalWidth / 2);
+                            console.log('centralizeRects newXPosition', newXPosition)
+        
+                            var moveAllRectsOn = newXPosition - rowMinX;
+        
+                            for (let s = 0; s < row.length; s++) {
+                                alignedRects.push(new DOMRect(row[s].left + moveAllRectsOn, row[s].top, row[s].width, row[s].height));
+                            }
+                        }
+        
+                        var totalHeight = maxY - minY;
+        
+                        var newTopPosition = centerY - (totalHeight / 2);
+                        var moveAllRectsOn = newTopPosition - minY;
+                        for (let s = 0; s < alignedRects.length; s++) {
+                            alignedRects[s] = new DOMRect(alignedRects[s].left, alignedRects[s].top + moveAllRectsOn, alignedRects[s].width, alignedRects[s].height);
+                        }
+        
+                        return alignedRects;
+                    }
+        
+                    function centralizeRectsVertically(rects) {
+        
+                        var centerX = size.parentWidth / 2;
+                        var centerY = size.parentHeight / 2;
+        
+                        var minY = Math.min.apply(Math, rects.map(function (r) { return r.y; }));
+                        var maxY = Math.max.apply(Math, rects.map(function (r) { return r.y + r.height; }));
+        
+                        var sortedRows = getRectsRows(rects);
+                        console.log('centralizeRects sortedRows', sortedRows)
+        
+                        var totalHeight = maxY - minY;
+        
+                        var newTopPosition = centerY - (totalHeight / 2);
+                        var moveAllRectsOn = newTopPosition - minY;
+                        for (let s = 0; s < rects.length; s++) {
+                            rects[s] = new DOMRect(rects[s].left, rects[s].top + moveAllRectsOn, rects[s].width, rects[s].height);
+                        }
+        
+                        return rects;
+                    }
+
+                    function getElementSizeKeepingRatio(initSize, baseSize) {
+                        console.log('getElementSizeKeepingRatio', baseSize.width, initSize.width, baseSize.height, initSize.height)
+                        var ratio = Math.min(baseSize.width / initSize.width, baseSize.height / initSize.height);
+
+                        return { width: Math.floor(initSize.width*ratio), height: Math.floor(initSize.height*ratio)};
+                    }
                 }
 
                 function stopAndRemove() {
@@ -7140,6 +7469,7 @@ window.WebRTCRoomClient = function app(options){
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
 
+                if(!participant) return; 
                 message.participant = participant;
 
                 participant.localMediaControlsState.camera = true;
@@ -7153,6 +7483,7 @@ window.WebRTCRoomClient = function app(options){
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
 
+                if(!participant) return; 
                 message.participant = participant;
 
                 participant.localMediaControlsState.camera = false;
@@ -7166,6 +7497,7 @@ window.WebRTCRoomClient = function app(options){
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
 
+                if(!participant) return; 
                 message.participant = participant;
 
                 participant.localMediaControlsState.mic = true;
@@ -7179,6 +7511,7 @@ window.WebRTCRoomClient = function app(options){
                     return roomParticipant.sid == message.fromSid || roomParticipant.sid == '/webrtc#' + message.fromSid;
                 })[0];
 
+                if(!participant) return; 
                 message.participant = participant;
 
                 participant.localMediaControlsState.mic = false;
