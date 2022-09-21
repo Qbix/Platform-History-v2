@@ -66,6 +66,10 @@ function Assets_stripeWebhook_response_content ($params) {
 				}
 				$metadata["chargeId"] = $chargeId;
 
+				// set customer id to metadata
+				$customerId = Q::ifset($paymentIntent, "customer", null);
+				$metadata["customerId"] = $customerId;
+
 				// set stream to metadata
 				$publisherId = Q::ifset($metadata, "publisherId", null);
 				$streamName = Q::ifset($metadata, "streamName", null);
