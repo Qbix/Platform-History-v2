@@ -24,6 +24,7 @@
 			"Assets/NFT/:publisherId/:streamId": {"module": "Assets", "action": "NFT"},
 			"Assets/NFT/:tokenId": {"module": "Assets", "action": "NFT"},
 			"Assets/services": { "module": "Assets", "action": "services" },
+			"Assets/billing": { "module": "Assets", "action": "billing" },
 			"Assets/NFTprofile/:userId": {"module": "Assets", "action": "NFTprofile"},
 			"Assets/NFTprofile": {"module": "Assets", "action": "NFTprofile"},
 			"Assets/NFTcontests": {"module": "Assets", "action": "NFTcontests"},
@@ -77,6 +78,8 @@
 		},
 		"types": {
 			"Assets/credits": {
+				"create": false,
+				"edit": false,
 				"defaults": {
 					"title": "Subscription plan",
 					"readLevel": 0,
