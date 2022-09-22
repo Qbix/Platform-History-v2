@@ -1440,7 +1440,7 @@
 				var h = $('#hashed-password');
 				if (h.length) {
 					h.val(CryptoJS.SHA1(p.val() + "\t" + salt));
-					if (!Users.login.options.alsoSendUnhashedPassword) {
+					if (!Users.login.options.alsoSendUnhashedPassphrase) {
 						p.val('');
 					}
 				}
