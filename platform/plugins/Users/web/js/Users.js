@@ -1437,19 +1437,19 @@
 			if (window.CryptoJS) {
 				var p = $('#current-password');
 				var v = p.val();
-				if (v && location.protocol !== 'https:') {
-					if (!/^[0-9a-f]{40}$/i.test(v)) {
-						p.val(CryptoJS.SHA1(p.val() + "\t" + salt));
+				var h = $('#hashed-password');
+				if (h.length) {
+					h.val(CryptoJS.SHA1(p.val() + "\t" + salt));
+					if (!Users.login.options.alsoSendUnhashedPassword) {
+						p.val('');
 					}
-					$('#Users_login_isHashed').attr('value', 1);
-				} else {
-					$('#Users_login_isHashed').attr('value', 0);
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
 			Q.request(url, 'data', function (err, response) {
 
 				$('#current-password').attr('value', '').trigger('change');
+				$('#hashed-password').attr('value', '');
 
 				$('input', $this).css('background-image', 'none');
 				if (err || (response && response.errors)) {
@@ -1503,6 +1503,7 @@
 					$('#Users_login_passphrase_forgot')
 						.css('display', $(this).val() ? 'none' : 'inline');
 				});
+			var passphrase_hashed_input = $('<input type="hidden" name="passphrase_hashed" id="hashed-password" />');
 			var $b = $('<a class="Q_button Users_login_start Q_main_button" />')
 				.html(Q.text.Users.login.loginButton)
 				.on(Q.Pointer.start, function () {
@@ -1517,6 +1518,7 @@
 				)).append(
 					$("<div id='Users_login_passphrase_div' >").append(
 						passphrase_input,
+						passphrase_hashed_input,
 						$('<a id="Users_login_passphrase_forgot" href="#forgot"/>')
 							.html(Q.text.Users.login.forgot)
 							.on(Q.Pointer.touchclick, function () {
@@ -1557,7 +1559,7 @@
 					$('<input type="hidden" name="identifier" />').val(identifier_input.val())
 				).append(
 					$('<div class="Q_buttons"></div>').append($b)
-				).append($('<input type="hidden" name="isHashed" id="Users_login_isHashed" value="0" />'));
+				); // .append($('<input type="hidden" name="isHashed" id="Users_login_isHashed" value="0" />'));
 			return login_form;
 		}
 

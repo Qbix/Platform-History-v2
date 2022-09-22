@@ -248,7 +248,7 @@ class Users_User extends Base_Users_User
 		$algorithms = Q_Config::expect('Users', 'passphrase', 'algorithms');
 		foreach ($algorithms as $algorithm => $options) {
 			if ($algorithm === 'password_hash') {
-				$p = $isHashed ? $passphrase : sha1($passphrase . "\t" . $this->id);
+				$p = $isHashed ? $passphrase : sha1($passphrase . "\t" . $this->salt);
 				if ($existingHash[0] === '$'
 				and password_verify($p, $existingHash)) {
 					return true;
