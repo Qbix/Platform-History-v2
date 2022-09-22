@@ -69,10 +69,31 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			"amount" => $amount * 100, // in cents
 			"currency" => $currency,
 			"customer" => $customer->customerId,
-			"metadata" => !empty($options['metadata']) ? $options['metadata'] : null
+			"metadata" => !empty($options['metadata']) ? $options['metadata'] : null,
+			'off_session' => true,
+			'confirm' => true,
 		);
 		Q::take($options, array('description', 'metadata'), $params);
-		$res = \Stripe\Charge::create($params); // can throw some exception
+
+		$stripeClient = new \Stripe\StripeClient($this->options['secret']);
+		$paymentMethods = $stripeClient->paymentMethods->all(['customer' => $customer->customerId, 'type' => 'card']);
+		if (empty($paymentMethods->data)) {
+			$err_mesage = "Offline payment methods not found for userId=".$user->id." with customerId=".$customer->customerId;
+			self::log('Stripe.charges', $err_mesage);
+			throw new Exception($err_mesage);
+		}
+		$params['payment_method'] = end($paymentMethods->data)->id;
+
+		try {
+			\Stripe\PaymentIntent::create($params);
+		} catch (\Stripe\Exception\CardException $e) {
+			// Error code will be authentication_required if authentication is needed
+			$payment_intent_id = $e->getError()->payment_intent->id;
+			$payment_intent = \Stripe\PaymentIntent::retrieve($payment_intent_id);
+			self::log('Stripe.charges', 'Failed charge for userId='.$user->id.' customerId='.$customer->customerId.' with error code:' . $e->getError()->code, $payment_intent);
+			exit;
+		}
+
 		return $customer->customerId;
 	}
 	/**
@@ -153,5 +174,15 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		$intent = \Stripe\PaymentIntent::create($params); // can throw some exception
 
 		return $intent;
+	}
+
+	static function log ($key, $title, $message=null) {
+		Q::log('______________________________________________', $key);
+		Q::log(date('Y-m-d H:i:s').': '.$title, $key);
+		if ($message) {
+			Q::log($message, $key, array(
+				"maxLength" => 10000
+			));
+		}
 	}
 }
