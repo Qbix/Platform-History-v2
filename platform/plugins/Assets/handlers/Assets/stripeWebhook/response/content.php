@@ -47,6 +47,11 @@ function Assets_stripeWebhook_response_content ($params) {
 				$currency = Q::ifset($paymentIntent, "currency", null);
 				$metadata = Q::ifset($paymentIntent, "metadata", array());
 
+				// check app
+				if (Q::app() != Q::ifset($metadata, "app", null)) {
+					break;
+				}
+
 				// set user to metadata
 				$userId = Q::ifset($metadata, "userId", null);
 				if ($userId) {
@@ -84,6 +89,8 @@ function Assets_stripeWebhook_log ($title, $message=null) {
 	Q::log('______________________________________________', "Stripe.webhook");
 	Q::log($title, "Stripe.webhook");
 	if ($message) {
-		Q::log($message, "Stripe.webhook");
+		Q::log($message, "Stripe.webhook", array(
+			"maxLength" => 10000
+		));
 	}
 }
