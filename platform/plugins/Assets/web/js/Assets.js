@@ -615,11 +615,12 @@
 									// Check if the PaymentIntent requires any actions and if so let Stripe.js
 									// handle the flow. If using an API version older than "2019-02-11"
 									// instead check for: `paymentIntent.status === "requires_source_action"`.
-									if (confirmResult.paymentIntent.status === "requires_action") {
+									if (confirmResult.paymentIntent.status === "requires_source_action" || confirmResult.paymentIntent.status === "requires_action") {
 										// Let Stripe.js handle the rest of the payment flow.
 										Assets.Payments.stripeObject.confirmCardPayment(clientSecret).then(function(result) {
 											if (result.error) {
 												// The payment failed -- ask your customer for a new payment method.
+												Q.alert(result.error.message);
 											} else {
 												// The payment has succeeded.
 												//Assets.Payments.stripePaymentResult({status: 'succeeded'})
@@ -669,21 +670,19 @@
 										return_url: Q.url("{{baseUrl}}/me/credits")
 									},
 									redirect: 'if_required'
-								}).then(function ({paymentIntent}) {
-									if (paymentIntent.error) {
-										$this.removeClass("Q_working");
+								}).then(function (response) {
+									Q.Dialogs.pop();
+
+									if (response.error) {
+										if (response.error.type === "card_error" || response.error.type === "validation_error") {
+											Q.alert(response.error.message);
+										} else {
+											Q.alert("An unexpected error occurred.");
+										}
+										return;
 									}
 
-									Q.Dialogs.pop();
 									//Assets.Payments.stripePaymentResult(paymentIntent);
-								}).catch(function (error) {
-									Q.Dialogs.pop();
-
-									if (error.type === "card_error" || error.type === "validation_error") {
-										Q.alert(error.message);
-									} else {
-										Q.alert("An unexpected error occurred.");
-									}
 								});
 							});
 							// </create stripe "payment" element>

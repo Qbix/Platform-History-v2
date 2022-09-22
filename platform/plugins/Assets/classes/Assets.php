@@ -91,10 +91,10 @@ abstract class Assets extends Base_Assets
 	 * @param {string} $amount specify the amount
 	 * @param {string} [$currency='USD'] set the currency, which will affect the amount
 	 * @param {array} [$options=array()] Any additional options
-	 * @param {string} [$options.chargeId] Payment id to set as id field of Assets_Charge table
+	 * @param {string} [$options.chargeId] Payment id to set as id field of Assets_Charge table, If this defined it means
+	 * that payment already processed and hence no need to call $adapter->charge
  	 * @param {Users_User} [$options.user=Users::loggedInUser()] Allows us to set the user to charge
 	 * @param {Streams_Stream} [$options.stream=null] if this charge is related to an Assets/product, Assets/service or Assets/subscription stream
-	 * @param {string} [$options.token=null] required for stripe unless the user is an existing customer
 	 * @param {string} [$options.description=null] description of the charge, to be sent to customer
 	 * @param {string} [$options.metadata=null] any additional metadata to store with the charge
 	 * @throws \Stripe\Error\Card
@@ -109,12 +109,23 @@ abstract class Assets extends Base_Assets
 		$user = Q::ifset($options, 'user', Users::loggedInUser(false));
 		$communityId = Users::communityId();
 		$chargeId = Q::ifset($options, "chargeId", null);
+		$className = 'Assets_Payments_' . ucfirst($payments);
+		$adapter = new $className($options);
 
 		/**
 		 * @event Assets/charge {before}
 		 * @param {Assets_Payments} adapter
 		 * @param {array} options
 		 */
+		Q::event('Assets/charge', @compact('adapter', 'options'), 'before');
+
+		// if charge id defined it means already paid, for example from webhook
+		if ($chargeId) {
+			$customerId = Q::ifset($options, "customerId", null);
+		} else {
+			$customerId = $adapter->charge($amount, $currency, $options);
+		}
+
 		$charge = new Assets_Charge();
 		$charge->userId = $user->id;
 		if ($chargeId) {
@@ -127,6 +138,7 @@ abstract class Assets extends Base_Assets
 		$charge->description = 'BoughtCredits';
 		$attributes = array(
 			"payments" => $payments,
+			"customerId" => $customerId,
 			"amount" => sprintf("%0.2f", $amount),
 			"currency" => $currency,
 			"communityId" => $communityId,
@@ -145,7 +157,7 @@ abstract class Assets extends Base_Assets
 		 * @param {array} options
 		 */
 		Q::event('Assets/charge', @compact(
-			'payments', 'amount', 'currency', 'user', 'charge', 'options'
+			'payments', 'amount', 'currency', 'user', 'charge', 'options', 'adapter'
 		), 'after');
 
 		return $charge;
