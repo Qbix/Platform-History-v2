@@ -4,7 +4,6 @@ function Users_key_post()
 {
     $fieldNames = array('publicKey', 'info');
     Q_Request::requireFields($fieldNames, true);
-    $request = Q::take($_REQUEST, $fieldNames);
     $publicKey = $_REQUEST['publicKey'];
     $info = $_REQUEST['info'];
     if ($info['name'] === 'ECDSA'

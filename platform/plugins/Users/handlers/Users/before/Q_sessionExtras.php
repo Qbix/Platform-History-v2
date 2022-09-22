@@ -19,4 +19,8 @@ function Users_before_Q_sessionExtras()
 		'Q.plugins.Users.hinted',
 		Q::ifset($_SESSION, 'Users', 'hinted', array())
 	);
+	Q_Response::setScriptData(
+		'Q.plugins.Users.Session.publicKey',
+		Q::ifset($_SESSION, 'Users', 'publicKey', null)
+	);
 }

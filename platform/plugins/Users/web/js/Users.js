@@ -16,14 +16,6 @@
 		connected: {}, // check this to see if you are connected to a platform
 		icon: {
 			defaultSize: 40 // might be overridden, but is required by some tools
-		},
-		Session: {
-			key: {
-				generateOnLogin: true,
-				name: 'ECDSA', 
-				namedCurve: 'P-384',
-				hash: 'SHA-256'
-			}
 		}
 	};
 
@@ -659,23 +651,11 @@
 		);
 		var key = Users.Session.key.loaded;
 		if (key) {
-			_sign(key);
+			_sign(null, key);
 		} else {
-			Q.IndexedDB.open('Q.Users', 'keys', 'id',
-			function (err, store) {
-				if (err) {
-					return Q.handle(callback, null, [err]);
-				}
-				var request = store.get('Users.Session');
-				request.onsuccess = function (event) {
-					_sign(Users.Session.key.loaded = event.target.result.key);
-				};
-				request.onerror = function (event) {
-					Q.handle(callback, null, [event]);
-				};
-			});
+			Users.Session.getKey(_sign);
 		}
-		function _sign(key) {
+		function _sign(err, key) {
 			crypto.subtle.sign(
 				{
 					name: 'ECDSA',
@@ -2402,6 +2382,93 @@
 			method: 'post'
 		});
 	};
+
+	/**
+	 * Methods for user sessions
+	 * @class Users.Session
+	 */
+	var Session = Users.Session = {
+		key: {
+			generateOnLogin: true,
+			name: 'ECDSA', 
+			namedCurve: 'P-384',
+			hash: 'SHA-256'
+		},
+		/**
+		 * Get (or get again) the (non-extractable) cryptographic key from IndexedDB.
+		 * Saves this key also as Users.Session.key.loaded and then calls the callback.
+		 * @method getKey
+		 * @static
+		 * @param {Function} callback Receives (err, key)
+		 */
+		getKey: function (callback) {
+			Q.IndexedDB.open('Q.Users', 'keys', 'id', function (err, store) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+				var request = store.get('Users.Session');
+				request.onsuccess = function (event) {
+					var key = Users.Session.key.loaded = event.target.result.key;
+					Q.handle(callback, null, [null, key]);
+				};
+				request.onerror = function (event) {
+					Q.handle(callback, null, [event]);
+				};
+			});
+		},
+		/**
+		 * Generates a non-extractable private key, saves it in IndexedDB.
+		 * Then tells the server to save it.
+		 * @method generateKey
+		 * @static
+		 * @param {Function} callback Receives (err, event)
+		 * @return {Boolean} returns false if the key is already set
+		 */
+		generateKey: function (callback) {
+			if (Users.Session.publicKey) {
+				Q.handle(callback, null, ["Users.Session.publicKey was already set"]);
+				return false;
+			}
+			var info = Users.Session.key;
+			return crypto.subtle.generateKey({
+				name: info.name,
+				namedCurve: info.namedCurve
+			}, false, ['sign', 'verify'])
+			.then(function (key) {
+				Q.IndexedDB.open('Q.Users', 'keys', 'id', function (err, store) {
+					var request = store.put({
+						id: 'Users.Session',
+						key: key
+					});
+					request.onsuccess = function (event) {
+						// if successfully saved on the client,
+						// then tell the server the exported public key
+						Q.handle(callback, null, [null, event, key]);
+					};
+					request.onerror = function (event) {
+						Q.handle(callback, null, [null, event, key]);
+					}
+				});
+				function _save (key) {
+					crypto.subtle.exportKey('spki', key.publicKey)
+					.then(function (pk) {
+						var key_hex = Array.prototype.slice.call(
+							new Uint8Array(pk), 0
+						).toHex();
+						Q.req('Users/key', ['saved'], function () {
+							// now server will require it
+						}, {
+							method: 'post',
+							fields: {
+								publicKey: key_hex,
+								info: info
+							}
+						});
+					});
+				}
+			});
+		}
+	};
 	
 	/**
 	 * Methods for OAuth
@@ -3014,48 +3081,13 @@
 		}
 
 		// generate a new session key, and tell the server
-		var keyConfig = Q.Users.Session.key;
-		if (!Q.Users.Session.key.generateOnLogin) {
-			return;
+		if (keyConfig.generateOnLogin) {
+			Users.Session.generateKey();
 		}
-		crypto.subtle.generateKey({
-			name: keyConfig.name,
-			namedCurve: keyConfig.namedCurve
-		}, false, ['sign', 'verify'])
-		.then(function (key) {
-			var dbName = 'Q.Users';
-			var storeName = 'keys';
-			Q.IndexedDB.open(dbName, storeName, 'id', function (err, store) {
-				// try to store non-extractable private key in IndexedDB
-				store.put({
-					id: 'Users.Session',
-					key: key
-				}).onsuccess = function (event) {
-					// if successfully saved on the client,
-					// then tell the server the exported public key
-					crypto.subtle.exportKey('spki', key.publicKey)
-					.then(function (pk) {
-						var key_hex = Array.prototype.slice.call(
-							new Uint8Array(pk), 0
-						).toHex();
-						Q.req('Users/key', ['saved'], function () {
-							// now server will require it
-						}, {
-							method: 'post',
-							fields: {
-								publicKey: key_hex,
-								info: Users.Session.key
-							}
-						});
-					});
-				}
-			});
-		});
-
-
 	}, 'Users');
 	Users.onLogout = new Q.Event(function () {
 		Users.Session.key.loaded = null;
+		Users.Session.key.publicKey = null;
 		Q.Users.loggedInUser = null;
 		Q.Users.roles = {};
 		Q.Users.hinted = [];
