@@ -2126,6 +2126,7 @@ class Streams_Stream extends Base_Streams_Stream
 			'publisherId' => $this->publisherId,
 			'streamName' => $streamNameParts,
 			'name' => $this->name,
+			'nameNormalized' => Q_Utils::normalize($this->name),
 			'baseUrl' => $baseUrl ? $baseUrl : Q_Request::baseUrl()
 		));
 		$qs = $messageOrdinal ? "?$messageOrdinal" : "";
