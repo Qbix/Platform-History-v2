@@ -2196,6 +2196,7 @@ Q.listen = function _Q_listen(options, callback) {
 	var port = options.port || internalPort;
 	var host = options.host || internalHost;
 	var info;
+	var sslCertsDirTimeout;
 
 	if (port === null)
 		throw new Q.Exception("Q.listen: Missing config field: Q/nodeInternal/port");
@@ -2218,6 +2219,10 @@ Q.listen = function _Q_listen(options, callback) {
 		if (!Q.isEmpty(options.https)) {
 			var h = Q.Config.get(['Q', 'node', 'https'], false) || {};
 			var keys = ['key', 'cert', 'ca', 'dhparam'];
+			var certFolder = path.dirname(h.cert)
+			var privatKeyPath = h.key;
+			var certPath = h.cert;
+			var caPath = h.ca;
 			keys.forEach(function (k) {
 				if (h[k]) {
 					h[k] = fs.readFileSync(h[k]).toString();
@@ -2227,6 +2232,23 @@ Q.listen = function _Q_listen(options, callback) {
 				Q.extend(h, options.https);
 			}
 			server = https.createServer(h, _express);
+
+			fs.watch(certFolder, function (event, filename) {
+				clearTimeout(sslCertsDirTimeout);
+				sslCertsDirTimeout = setTimeout(function() {
+					if(!fs.existsSync(privatKeyPath) || !fs.existsSync(certPath) || !fs.existsSync(caPath)) return;
+					try {
+						server.setSecureContext({
+							key: fs.readFileSync(privatKeyPath).toString(),
+							cert: fs.readFileSync(certPath).toString(),
+							ca: fs.readFileSync(caPath).toString()
+						});
+						console.log('Secure context updated.');
+					} catch (error) {
+						console.log('Error while updating secure context: ' + error.message);
+					}
+				}, 5000);
+			 });
 		} else {
 			server = http.createServer(_express);
 		}
