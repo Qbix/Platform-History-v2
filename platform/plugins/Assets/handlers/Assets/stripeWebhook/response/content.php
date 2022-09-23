@@ -14,7 +14,7 @@ function Assets_stripeWebhook_response_content ($params) {
 	} catch(\UnexpectedValueException $e) {
 		// Invalid payload
 
-		Assets_stripeWebhook_log('Webhook error while parsing basic request.', $e);
+		Assets_Payments_Stripe::log('Stripe.webhook', 'Webhook error while parsing basic request.', $e);
 		http_response_code(400);
 		exit();
 	}
@@ -26,7 +26,7 @@ function Assets_stripeWebhook_response_content ($params) {
 		$event = \Stripe\Webhook::constructEvent($payload, $sig_header, $endpoint_secret);
 	} catch(\Stripe\Exception\SignatureVerificationException $e) {
 		// Invalid signature
-		Assets_stripeWebhook_log('Webhook error while validating signature.', $e);
+		Assets_Payments_Stripe::log('Stripe.webhook', 'Webhook error while validating signature.', $e);
 		http_response_code(400);
 		exit();
 	}
@@ -40,7 +40,7 @@ function Assets_stripeWebhook_response_content ($params) {
 			// because regardless of our exceptions we got payment_intent.succeeded event
 			// otherwise stripe will block our webhook
 			try {
-				Assets_stripeWebhook_log('Payment success!', $paymentIntent);
+				//Assets_Payments_Stripe::log('Stripe.webhook', 'Payment success!', $paymentIntent);
 
 				$amount = (int)Q::ifset($paymentIntent, "amount", null);
 				$amount /= 100; // amount in cents, need to convert to dollars
@@ -54,15 +54,21 @@ function Assets_stripeWebhook_response_content ($params) {
 
 				// set user to metadata
 				$userId = Q::ifset($metadata, "userId", null);
-				if ($userId) {
-					$metadata["user"] = Users::fetch($userId, true);
+				if (!$userId) {
+					throw new Exception("user id not found");
 				}
+				$metadata["user"] = Users::fetch($userId, true);
 
 				// set payment id to metadata
 				$chargeId = Q::ifset($paymentIntent, "id", null);
-				if ($chargeId) {
-					$metadata["chargeId"] = $chargeId;
+				if (!$chargeId) {
+					throw new Exception("payment intent id not found");
 				}
+				$metadata["chargeId"] = $chargeId;
+
+				// set customer id to metadata
+				$customerId = Q::ifset($paymentIntent, "customer", null);
+				$metadata["customerId"] = $customerId;
 
 				// set stream to metadata
 				$publisherId = Q::ifset($metadata, "publisherId", null);
@@ -73,24 +79,14 @@ function Assets_stripeWebhook_response_content ($params) {
 
 				Assets::charge("stripe", $amount, $currency, $metadata);
 			} catch (Exception $e) {
-				Assets_stripeWebhook_log("Exception occur during process payment intent", $e);
+				Assets_Payments_Stripe::log('Stripe.webhook', 'Exception occur during process payment intent', $e);
 			}
 
 			break;
 		default:
-			Assets_stripeWebhook_log('Received unknown event type ' . $event->type);
+			Assets_Payments_Stripe::log('Stripe.webhook', 'Received unknown event type', $event->type);
 	}
 
 	http_response_code(200); // PHP 5.4 or greater
 	exit;
-}
-
-function Assets_stripeWebhook_log ($title, $message=null) {
-	Q::log('______________________________________________', "Stripe.webhook");
-	Q::log($title, "Stripe.webhook");
-	if ($message) {
-		Q::log($message, "Stripe.webhook", array(
-			"maxLength" => 10000
-		));
-	}
 }

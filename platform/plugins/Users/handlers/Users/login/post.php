@@ -2,12 +2,16 @@
 
 function Users_login_post()
 {
-	$passphrase = $_REQUEST['passphrase'];
-	if (empty($passphrase)) {
+	$identifier = Users::requestedIdentifier();
+	if (!empty($_REQUEST['passphrase'])) {
+		$passphrase = $_REQUEST['passphrase'];
+		$isHashed = !empty($_REQUEST['isHashed']) ? $_REQUEST['isHashed'] : false;
+	} else if (!empty($_REQUEST['passphrase_hashed'])) {
+		$passphrase = $_REQUEST['passphrase_hashed'];
+		$isHashed = true;
+	} else {
 		throw new Q_Exception("Please enter your pass phrase", 'passphrase');
 	}
-	$identifier = Users::requestedIdentifier();
-	$isHashed = !empty($_REQUEST['isHashed']) ? $_REQUEST['isHashed'] : false;
 	$user = Users::login($identifier, $passphrase, $isHashed);
 	Users::$cache['user'] = $user;
 }

@@ -175,6 +175,9 @@
             "content": "Received {{amount}} credits from {{fromUserName}}"
         }
     },
+    "billing": {
+        "Title": "Assets billing"
+    },
     "services": {
         "NewServiceTemplate": {
             "Title": "New Service",
