@@ -3007,7 +3007,7 @@
                                 controlsTool.WebRTCLib.getOptions().liveStreaming.showLayoutBorders = showBorders.checked;
                             })
 
-                            marginsInput.addEventListener('change', function () {
+                            marginsInput.addEventListener('input', function () {
                                 controlsTool.WebRTCLib.getOptions().liveStreaming.tiledLayoutMargins = marginsInput.value;
                             })
 
@@ -3031,7 +3031,7 @@
                                 let y = topPos.value;
                                 controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
                             }
-                            marginsInput.addEventListener('blur', updateWebrtcRect)
+                            marginsInput.addEventListener('input', updateWebrtcRect)
                             width.addEventListener('blur', updateWebrtcRect)
                             height.addEventListener('blur', updateWebrtcRect)
                             topPos.addEventListener('blur', updateWebrtcRect)

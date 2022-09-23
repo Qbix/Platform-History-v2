@@ -2542,21 +2542,17 @@ window.WebRTCRoomClient = function app(options){
                     for(let v in participants) {
                         log('updateWebRTCCanvasLayout participant', participants[v].online, participants[v])
 
+                        //get those tracks of participant that are rendered currently on canvas
                         let renderedTracks = [];
                         for (let j in currentWebRTCSources) {
-                            log('updateWebRTCCanvasLayout rendered for', currentWebRTCSources[j], currentWebRTCSources[j].participant == participants[v])
-                            log('updateWebRTCCanvasLayout rendered for2', currentWebRTCSources[j].participant.sid, participants[v].sid)
-
                             if(currentWebRTCSources[j].participant == participants[v]) {
-                                log('updateWebRTCCanvasLayout rendered for', currentWebRTCSources[j])
-
                                 renderedTracks.push(currentWebRTCSources[j])
                             }
                         }
 
                         log('updateWebRTCCanvasLayout renderedTracks', renderedTracks)
 
-
+                        //if participant is offline, remove those track from canvas
                         if(participants[v].online == false) {
                             log('updateWebRTCCanvasLayout participants[v].online == false: REMOVE TRACK')
 
@@ -2567,6 +2563,7 @@ window.WebRTCRoomClient = function app(options){
 
                         let vTracks = participants[v].videoTracks(true);
                         let aTracks = participants[v].audioTracks();
+                        
                         log('updateWebRTCCanvasLayout p tracks', vTracks, aTracks)
 
                         log('updateWebRTCCanvasLayout rendered currentWebRTCSources', currentWebRTCSources)
@@ -2580,64 +2577,37 @@ window.WebRTCRoomClient = function app(options){
 
                         log('updateWebRTCCanvasLayout audioIsEnabled', audioIsEnabled)
 
-                        if(options.liveStreaming.audioOnlyLayout) {
-
-                        }
-
                         if(vTracks.length != 0) {
                             log('updateWebRTCCanvasLayout vTracks != 0')
 
                             for (let s in vTracks) {
                                 log('updateWebRTCCanvasLayout track', vTracks[s])
 
+                                //get rendered tracks EXEPT current one vTracks[s]
+                                let currentlyRenderedAudioTracks = renderedTracks.filter(function (t) {
+                                    return t.kind == 'audio' ? true : false;
+                                })
+                                let currentlyRenderedVideoTracks = renderedTracks.filter(function (t) {
+                                    return t.kind == 'video' && t.track != vTracks[s] && t.screenSharing == false ? true : false;
+                                })
+                                let currentlyRenderedScreensharingTracks = renderedTracks.filter(function (t) {
+                                    return t.kind == 'video' && t.track != vTracks[s] && t.screensharing == true ? true : false;
+                                })
+
                                 let trackCurrentlyRendered = false;
                                 for (let c in renderedTracks) {
-                                    log('updateWebRTCCanvasLayout trackCurrentlyRendered', vTracks[s], renderedTracks[c].track)
-
                                     if(vTracks[s] == renderedTracks[c].track)  {
                                         trackCurrentlyRendered = renderedTracks[c];
                                         break;
                                     }
                                 }
 
-                                if(vTracks[s].screensharing) {
-                                    renderScreenSharingLayout = true;
-
-                                    if(!_isActive && vTracks[s].trackEl.videoWidth !== 0 && vTracks[s].trackEl.videoHeight !== 0) {
-                                        setCanvasSize(vTracks[s].trackEl.videoWidth, vTracks[s].trackEl.videoHeight)
-                                    } else if (!_isActive) {
-                                        vTracks[s].trackEl.addEventListener('loadedmetadata', function (e) {
-                                            setCanvasSize(e.target.videoWidth, e.target.videoHeight)
-                                        });
-                                    }
-                                }
-
                                 log('updateWebRTCCanvasLayout trackCurrentlyRendered', trackCurrentlyRendered)
 
                                 if(!trackCurrentlyRendered) {
-                                    log('updateWebRTCCanvasLayout !trackCurrentlyRendered')
-                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
-                                    let notScreensharingVideo = !audioOnly && (layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing')) && !vTracks[s].screensharing;
-                                    if(audioOnly || notScreensharingVideo) {
-                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered if1')
+                                    //track is not rendered on canvas yet, i. e. this is new track
 
-                                        let canvasStream = new WebRTCStreamSource(participants[v]);
-                                        canvasStream.kind = 'audio';
-                                        canvasStream.parentGroup = _webrtcGroup;
-                                        canvasStream.track = vTracks[s];
-                                        tracksToAdd.push(canvasStream);
-                                    } else if(vTracks.length > 1) {
-                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered if2 ADD VIDEO RECT')
-
-                                        /*let z;
-                                        for(z = renderedTracks.length - 1; z >= 0 ; z--){
-                                            if(renderedTracks[z].kind == 'video') {
-                                                let currentTracks = renderedTracks.splice(z, 1);
-                                                tracksToRemove = tracksToRemove.concat(currentTracks);
-                                                tracksToAdd = tracksToAdd.concat(currentTracks);
-                                            }
-                                        }*/
-
+                                    var addNewVideoCanvasStream = function () {
                                         let canvasStream = new WebRTCStreamSource(participants[v]);
                                         canvasStream.kind = 'video';
                                         canvasStream.track = vTracks[s];
@@ -2647,64 +2617,81 @@ window.WebRTCRoomClient = function app(options){
                                         if (vTracks[s].screensharing == true) {
                                             canvasStream.screenSharing = true;
                                             canvasStream.name = canvasStream.name + ' (screen)';
+                                            log('updateWebRTCCanvasLayout currentlyRendered', currentlyRenderedAudioTracks.length, currentlyRenderedVideoTracks.length)
+
+                                            if(currentlyRenderedAudioTracks.length == 0 && currentlyRenderedVideoTracks.length == 0) {
+                                                let audioCanvasStream = new WebRTCStreamSource(participants[v]);
+                                                audioCanvasStream.kind = 'audio';
+                                                audioCanvasStream.parentGroup = _webrtcGroup;
+                                                tracksToAdd.push(audioCanvasStream);
+                                            }
+                                        
                                         } else {
                                             canvasStream.screenSharing = false;
                                             canvasStream.name = canvasStream.name.replace(' (screen)', '');
                                         }
                                         tracksToAdd.push(canvasStream)
+                                    }
 
-                                    } else {
+                                    log('updateWebRTCCanvasLayout !trackCurrentlyRendered')
+                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
+                                    let notScreensharingVideo = !audioOnly && (layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing')) && !vTracks[s].screensharing;
+                                    if((audioOnly || notScreensharingVideo) && currentlyRenderedAudioTracks.length == 0 && currentlyRenderedVideoTracks.length == 0) {
+                                        //if audioOnly layout is active currently, we should show all videos as avatar+audio visualization. So we should add new canvas stream of audio type
+                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered if1')
+
+                                        let canvasStream = new WebRTCStreamSource(participants[v]);
+                                        canvasStream.kind = 'audio';
+                                        canvasStream.parentGroup = _webrtcGroup;
+                                        canvasStream.track = vTracks[s];
+                                        tracksToAdd.push(canvasStream);
+                                    } /*else if(vTracks.length > 1) {
+                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered if2 ADD VIDEO RECT')
+                                        addNewVideoCanvasStream();
+
+                                    } */ else {
+                                        //if participant already has audio track (he uses only mic, for example) and turns his camera on (not screensharing), then we should replace audio track with video.
+                                        //if screensharing track will be added, just add new video track to existing audio track (there should be screensharing the avatar of user who shares screen on canvas)
                                         log('updateWebRTCCanvasLayout !trackCurrentlyRendered else')
 
-                                        let z, replacedAudioTrack = false;
-                                        for(z = renderedTracks.length - 1; z >= 0 ; z--){
-                                            log('updateWebRTCCanvasLayout !trackCurrentlyRendered renderedTracks[z]', renderedTracks[z])
-
-                                            if(renderedTracks[z].kind == 'audio') {
-                                                log('updateWebRTCCanvasLayout else REPLACE VIDEO TRACK')
-
-                                                renderedTracks[z].kind = 'video';
-                                                renderedTracks[z].track = vTracks[s];
-                                                renderedTracks[z].mediaStream = vTracks[s].stream;
-                                                renderedTracks[z].htmlVideoEl = vTracks[s].trackEl;
-                                                if (vTracks[s].screensharing == true) {
-                                                    renderedTracks[z].screenSharing = true;
-                                                    renderedTracks[z].name = renderedTracks[z].name + ' (screen)';
-                                                } else {
+                                        let replacedAudioTrack = false;
+                                        if(!vTracks[s].screensharing || (vTracks[s].screensharing && currentlyRenderedVideoTracks.length != 0 && currentlyRenderedAudioTracks.length != 0)) {
+                                            for(let  z = renderedTracks.length - 1; z >= 0 ; z--){
+                                                log('updateWebRTCCanvasLayout !trackCurrentlyRendered renderedTracks[z]', renderedTracks[z])
+    
+                                                if(renderedTracks[z].kind == 'audio' && !vTracks[s].screensharing) {
+                                                    log('updateWebRTCCanvasLayout else REPLACE VIDEO TRACK')
+    
+                                                    renderedTracks[z].kind = 'video';
+                                                    renderedTracks[z].track = vTracks[s];
+                                                    renderedTracks[z].mediaStream = vTracks[s].stream;
+                                                    renderedTracks[z].htmlVideoEl = vTracks[s].trackEl;
                                                     renderedTracks[z].screenSharing = false;
                                                     renderedTracks[z].name = renderedTracks[z].name.replace(' (screen)', '');
+                                                    
+                                                    replacedAudioTrack = true;
+                                                    break;
                                                 }
-                                                replacedAudioTrack = true;
-                                                break;
                                             }
                                         }
+                                       
+                                        
 
                                         log('updateWebRTCCanvasLayout replacedAudioTrack', replacedAudioTrack)
-
+                                        //if we didn't find audio stream to replace, just add new video stream
                                         if(!replacedAudioTrack) {
                                             log('updateWebRTCCanvasLayout else ADD VIDEO TRACK')
 
-                                            let canvasStream = new WebRTCStreamSource(participants[v]);
-                                            canvasStream.kind = 'video';
-                                            canvasStream.track = vTracks[s];
-                                            canvasStream.mediaStream = vTracks[s].stream;
-                                            canvasStream.htmlVideoEl = vTracks[s].trackEl;
-                                            canvasStream.parentGroup = _webrtcGroup;
-                                            if (vTracks[s].screensharing == true) {
-                                                canvasStream.screenSharing = true;
-                                                canvasStream.name = canvasStream.name + ' (screen)';
-                                            } else {
-                                                canvasStream.screenSharing = false;
-                                                canvasStream.name = canvasStream.name.replace(' (screen)', '');
-                                            }
-                                            tracksToAdd.push(canvasStream)
+                                            addNewVideoCanvasStream();
                                         }
                                     }
                                 } else {
+                                    //if this video track is rendered on canvas
                                     log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false')
-
                                     let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
                                     let audioScreenSharing =  layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing');
+                                    //if previous layout was audio only or audio+screensharing, but current layout is some of regular, we should show those video tracks, which was shown as avatar+audiovisualization previously in audio only layout
+                                    //OR if previous layout was audio only, bu currently it's audio+screensharing layout we should show only screensharing track and leave rest as avatar+audio visualization
                                     if((!audioOnly && !audioScreenSharing) || (!audioOnly && audioScreenSharing && trackCurrentlyRendered.screenSharing)) {
                                         log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false if1')
 
@@ -2713,6 +2700,17 @@ window.WebRTCRoomClient = function app(options){
 
                                             trackCurrentlyRendered.kind = 'video';
                                         }
+                                    } else if(audioOnly && trackCurrentlyRendered.screenSharing && currentlyRenderedAudioTracks.length != 0) {
+                                        //
+                                        log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false else1')
+                                        for(let h in renderedTracks) {
+                                            if(renderedTracks[h] == trackCurrentlyRendered) {
+                                                tracksToRemove.push(renderedTracks.splice(h, 1)[0])
+                                                break;
+                                            }
+                                        }
+                                       
+
                                     } else {
                                         log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false else')
 
@@ -2724,6 +2722,7 @@ window.WebRTCRoomClient = function app(options){
                             }
 
                         } else if (aTracks.length != 0 && audioIsEnabled) {
+                            //if participant has no video tracks, but has audi tracks
                             log('updateWebRTCCanvasLayout aTracks != 0')
 
                             let audioCurrentlyRendered = false;
@@ -2733,48 +2732,73 @@ window.WebRTCRoomClient = function app(options){
                                     break;
                                 }
                             }
-                            if(audioCurrentlyRendered) continue;
+                            if (!audioCurrentlyRendered) {
+                                //check if participant had rendered video tracks that became inactive
+                                let renderedVideoTracks = renderedTracks.filter(function (o) {
+                                    return o.kind == 'video';
+                                })
 
-                            let renderedVideoTracks = renderedTracks.filter(function (o) {
-                                return o.kind == 'video';
-                            })
+                                //if so, remove them or make them avatar+visualization
+                                if (renderedVideoTracks.length != 0) {
+                                    log('updateWebRTCCanvasLayout aTracks: if1', renderedVideoTracks.length)
 
-                            if(renderedVideoTracks.length != 0) {
-                                log('updateWebRTCCanvasLayout aTracks: if1', renderedVideoTracks.length)
+                                    var newAudioTrack = renderedVideoTracks.splice(0, 1)[0];
+                                    log('updateWebRTCCanvasLayout aTracks: if1 splice', renderedVideoTracks.length, tracksToRemove.length)
+                                    log('updateWebRTCCanvasLayout aTracks: REMOVE TRACK')
 
-                                var newAudioTrack = renderedVideoTracks.splice(0, 1)[0];
-                                log('updateWebRTCCanvasLayout aTracks: if1 splice', renderedVideoTracks.length, tracksToRemove.length)
-                                log('updateWebRTCCanvasLayout aTracks: REMOVE TRACK')
+                                    if (currentlyRenderedAudioTracks.length == 0) {
+                                        newAudioTrack.kind = 'audio';
+                                        newAudioTrack.track = null;
+                                        newAudioTrack.mediaStream = null;
+                                        newAudioTrack.htmlVideoEl = null;
+                                        if (newAudioTrack.screenSharing == true) {
+                                            newAudioTrack.screenSharing = false;
+                                            newAudioTrack.name = newAudioTrack.name.replace(' (screen)', '');
+                                        }
+                                    }
 
-                                newAudioTrack.kind = 'audio';
-                                newAudioTrack.track = null;
-                                newAudioTrack.mediaStream = null;
-                                newAudioTrack.htmlVideoEl = null;
-                                if (newAudioTrack.screenSharing == true) {
-                                    newAudioTrack.screenSharing = false;
-                                    newAudioTrack.name = newAudioTrack.name.replace(' (screen)', '');
+                                    for (let b in renderedVideoTracks) {
+                                        for (let x = renderedTracks.length - 1; x >= 0; x--) {
+                                            if (renderedTracks[x] == renderedVideoTracks[b]) {
+                                                tracksToRemove.push(renderedTracks.splice(x, 1)[0]);
+                                            }
+                                        }
+                                    }
+
+                                } else {
+                                    log('updateWebRTCCanvasLayout aTracks: if2')
+                                    log('updateWebRTCCanvasLayout aTracks: ADD AUDIO TRACK')
+
+                                    let canvasStream = new WebRTCStreamSource(participants[v]);
+                                    canvasStream.kind = 'audio';
+                                    canvasStream.parentGroup = _webrtcGroup;
+                                    tracksToAdd.push(canvasStream);
                                 }
-
-                                tracksToRemove = tracksToRemove.concat(renderedVideoTracks);
-                            } else {
-                                log('updateWebRTCCanvasLayout aTracks: if2')
-                                log('updateWebRTCCanvasLayout aTracks: ADD AUDIO TRACK')
-
-                                let canvasStream = new WebRTCStreamSource(participants[v]);
-                                canvasStream.kind = 'audio';
-                                canvasStream.parentGroup = _webrtcGroup;
-                                tracksToAdd.push(canvasStream);
                             }
+
+                            
                         }
 
+                        let currentlyRenderedAudioTracks = renderedTracks.filter(function (t) {
+                            return t.kind == 'audio' ? true : false;
+                        })
+                        let currentlyRenderedVideoTracks = renderedTracks.filter(function (t) {
+                            return t.kind == 'video' && t.screenSharing == false ? true : false;
+                        })
+                        let currentlyRenderedScreensharingTracks = renderedTracks.filter(function (t) {
+                            return t.kind == 'video' && t.screenSharing == true ? true : false;
+                        })
+                        log('updateWebRTCCanvasLayout: BEFORE REMOVE INACTIVE', renderedTracks.length)
+
                         for (let x in renderedTracks) {
+                            log('updateWebRTCCanvasLayout: REMOVE INACTIVE', renderedTracks[x].kind)
 
                             let trackIsLive = false;
 
                             if(renderedTracks[x].kind == 'video') {
                                 for (let m in vTracks) {
                                     if(renderedTracks[x].track == vTracks[m] && vTracks[m].parentScreen && vTracks[m].parentScreen.isActive) {
-                                        log('updateWebRTCCanvasLayout remove not active', vTracks[m].parentScreen.isActive)
+                                        log('updateWebRTCCanvasLayout do not remove active', vTracks[m].parentScreen.isActive)
 
                                         trackIsLive = true;
                                     }
@@ -2785,9 +2809,23 @@ window.WebRTCRoomClient = function app(options){
 
 
                             if(!trackIsLive) {
-                                log('updateWebRTCCanvasLayout aTracks: REMOVE AUDIO TRACK')
+                                let currentlyRenderedVideoTracks = renderedTracks.filter(function (t) {
+                                    return t.kind == 'video' && t != renderedTracks[x] && t.screenSharing == false ? true : false;
+                                })
+                                log('updateWebRTCCanvasLayout: TRACK IS INACTIVE', currentlyRenderedAudioTracks.length, currentlyRenderedVideoTracks.length)
+                                if(renderedTracks[x].kind == 'video' && currentlyRenderedAudioTracks.length == 0 && currentlyRenderedVideoTracks.length == 0) {
+                                    log('updateWebRTCCanvasLayout: REPLACE TRACK')
 
-                                tracksToRemove.push(renderedTracks[x]);
+                                    renderedTracks[x].kind = 'audio';
+                                    renderedTracks[x].track = null;
+                                    renderedTracks[x].mediaStream = null;
+                                    renderedTracks[x].htmlVideoEl = null;
+                                    renderedTracks[x].screenSharing = false;
+                                } else {
+                                    log('updateWebRTCCanvasLayout: REMOVE TRACK')
+
+                                    tracksToRemove.push(renderedTracks[x]);
+                                }
                             }
                         }
 
@@ -2915,7 +2953,7 @@ window.WebRTCRoomClient = function app(options){
                     var videoTracksOfUserWhoShares = [];
                     var screenSharingIsNew = false;
 
-                    if(renderScreenSharingLayout) {
+                    if(/*renderScreenSharingLayout*/_currentLayout == 'screenSharing' || _currentLayout == 'audioScreenSharing' || _currentLayout == 'sideScreenSharing') {
                         log('updateWebRTCCanvasLayout: renderScreenSharingLayout: sdaraort streams')
 
                         var getUsersTracks = function(participant, screenSharingStream) {
