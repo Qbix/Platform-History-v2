@@ -1558,7 +1558,8 @@
 		handlers: {
 			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
 			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
-			NFT: "{{Assets}}/js/columns/NFT.js"
+			NFT: "{{Assets}}/js/columns/NFT.js",
+			billing: "{{Assets}}/js/columns/billing.js"
 		}
 	};
 	if (Q.info.isMobile) {

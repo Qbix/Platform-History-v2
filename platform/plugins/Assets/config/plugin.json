@@ -226,7 +226,12 @@
 					"500": 50, /* if user bought 500 credits at once, he will get 50 credits bonus */
 					"1000": 150 /* if user bought 1000 credits at once, he will get 150 credits bonus */
 				}
-			}
+			},
+			"amount": {
+				"min": 10, /* when users credits amount less or equal this, auto charge with "additional" credits or send alert */
+				"add": 100 /* when users credits amount less or equal "min", auto charge with this credits amount */
+			},
+			"buyLink": "Communities/me"
 		},
 		"currencies": {
 			"ignoreCache": false,

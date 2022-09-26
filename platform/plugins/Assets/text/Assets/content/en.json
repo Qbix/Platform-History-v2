@@ -173,10 +173,20 @@
         },
         "Assets\/credits\/received": {
             "content": "Received {{amount}} credits from {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "You have little credits on your account. Please visit {{link}} to buy more credits."
         }
     },
     "billing": {
-        "Title": "Assets billing"
+        "Title": "Assets billing",
+        "CreditsMinimum": "Minimum credits",
+        "CreditsToAdd": "Credits to add",
+        "Save": "Save",
+        "errors": {
+            "CreditsMinimumNegative": "Credits minimum can't be negative",
+            "CreditsToAddNegative": "Credits to add can't be negative"
+        }
     },
     "services": {
         "NewServiceTemplate": {
