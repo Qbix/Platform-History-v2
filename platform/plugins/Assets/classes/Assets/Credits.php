@@ -80,7 +80,7 @@ class Assets_Credits extends Base_Assets_Credits
 			'subscribe' => true
 		), $results);
 		if ($results['created']) {
-			$amount = Q_Config::get('Assets', 'credits', 'amounts', 'Users/insertUser', self::DEFAULT_AMOUNT);
+			$amount = Q_Config::get('Assets', 'credits', 'grant', 'Users/insertUser', self::DEFAULT_AMOUNT);
 			if ($amount > 0) {
 				self::grant($amount, 'YouHaveCreditsToStart', $userId, array(
 					'communityId' => Users::communityId()

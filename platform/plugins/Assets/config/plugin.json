@@ -203,11 +203,11 @@
 			}
 		},
 		"credits": {
-			"amounts": {
-				"Users/insertUser": 20,
+			"spend": {
 				"Communities/create": 20
 			},
-			"granted": {
+			"grant": {
+				"Users/insertUser": 20,
 				"acceptedInvite": 10,
 				"invitedUserEntered": {
 					"Streams/user/firstName": 1,

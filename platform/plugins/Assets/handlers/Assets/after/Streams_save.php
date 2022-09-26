@@ -50,7 +50,7 @@ function Assets_after_Streams_save($params) {
 		return;
 	}
 
-	$invitedUserEntered = Q_Config::get('Assets', 'credits', 'granted', 'invitedUserEntered', array());
+	$invitedUserEntered = Q_Config::get('Assets', 'credits', 'grant', 'invitedUserEntered', array());
 	$credits = null;
 	foreach ($invitedUserEntered as $streamName => $credit) {
 		if (strpos($stream->name, $streamName) === false) {
