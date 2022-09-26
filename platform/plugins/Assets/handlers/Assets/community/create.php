@@ -3,7 +3,7 @@
 function Assets_community_create($params)
 {
 	$myCredits = Assets_Credits::amount();
-	$needCredits = (int)Q_Config::expect('Assets', 'credits', 'amounts', 'createCommunity');
+	$needCredits = (int)Q_Config::expect('Assets', 'credits', 'amounts', 'Communities/create');
 	$authorized = $myCredits >= $needCredits;
 
 	$res = @compact('authorized', 'myCredits', 'needCredits');

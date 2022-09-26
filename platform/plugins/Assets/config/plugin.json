@@ -205,7 +205,7 @@
 		"credits": {
 			"amounts": {
 				"Users/insertUser": 20,
-				"createCommunity": 20
+				"Communities/create": 20
 			},
 			"granted": {
 				"acceptedInvite": 10,
