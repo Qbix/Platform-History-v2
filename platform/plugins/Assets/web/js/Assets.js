@@ -1403,9 +1403,11 @@
 						content += '<br>' + reason;
 					}
 
+					var timeout = message.getInstruction('timeout') || 5;
+
 					var options = {
 						content: content,
-						timeout: 5,
+						timeout: timeout,
 						group: reason || null,
 						handler: function () {
 							if (content.includes("credit") || reason.includes("credit")) {
@@ -1424,6 +1426,7 @@
 				this.onMessage('Assets/credits/granted').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bonus').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/alert').set(_createNotice, 'Assets');
 			});
 		};
 
