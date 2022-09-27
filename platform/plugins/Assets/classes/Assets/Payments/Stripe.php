@@ -90,8 +90,10 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			// Error code will be authentication_required if authentication is needed
 			$payment_intent_id = $e->getError()->payment_intent->id;
 			$payment_intent = \Stripe\PaymentIntent::retrieve($payment_intent_id);
-			self::log('Stripe.charges', 'Failed charge for userId='.$user->id.' customerId='.$customer->customerId.' with error code:' . $e->getError()->code, $payment_intent);
-			exit;
+
+			$err_mesage = 'Failed charge for userId='.$user->id.' customerId='.$customer->customerId.' with error code:' . $e->getError()->code;
+			self::log('Stripe.charges', $err_mesage, $payment_intent);
+			throw new Exception($err_mesage);
 		}
 
 		return $customer->customerId;
