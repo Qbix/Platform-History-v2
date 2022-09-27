@@ -8,39 +8,56 @@ if(!$FROM_APP) {
 	die(PHP_EOL.PHP_EOL.'this script should be called from application');
 }
 
-$creditsStreams = Streams_Stream::select()->where(array(
-	"name" => "Assets/user/credits"
-))->fetchDbRows();
+$offset = 0;
+$limit = 10;
+$i = 0;
+while (1) {
+	$creditsStreams = Streams_Stream::select()->where(array(
+		"name" => "Assets/user/credits"
+	))->limit($limit, $offset)->fetchDbRows();
 
-foreach ($creditsStreams as $creditsStream) {
-	if (Users::isCommunityId($creditsStream->publisherId)) {
-		continue;
+	if (!$creditsStreams) {
+		break;
 	}
 
-	echo "Processing user: ".$creditsStream->publisherId."\n";
+	foreach ($creditsStreams as $creditsStream) {
+		if (Users::isCommunityId($creditsStream->publisherId)) {
+			continue;
+		}
 
-	$user = Users::fetch($creditsStream->publisherId);
-	$creditsAmount = $creditsStream->getAttribute("amount");
-	$creditsMin = (int)$creditsStream->getAttribute("creditsMin") ?: Q_Config::expect("Assets", "credits", "amount", "min");
-	$creditsAdd = (int)$creditsStream->getAttribute("creditsAdd") ?: Q_Config::expect("Assets", "credits", "amount", "add");
+		echo ++$i.". Processing user: ".$creditsStream->publisherId."\n";
 
-	if ($creditsAmount > $creditsMin) {
-		continue;
+		$user = Users::fetch($creditsStream->publisherId);
+		$communityId = Users::communityId();
+		$creditsAmount = $creditsStream->getAttribute("amount");
+		$creditsMin = (int)$creditsStream->getAttribute("creditsMin") ?: Q_Config::expect("Assets", "credits", "amount", "min");
+		$creditsAdd = (int)$creditsStream->getAttribute("creditsAdd") ?: Q_Config::expect("Assets", "credits", "amount", "add");
+
+		if ($creditsAmount > $creditsMin) {
+			continue;
+		}
+
+		try {
+			Assets::charge("stripe", Assets_Credits::convert($creditsAmount + $creditsAdd, 'credits', 'USD'), 'USD', array(
+				'user' => $user,
+				'description' => 'check min credits'
+			));
+		} catch(Exception $e) {
+			$link = Q_Uri::url(Q_Config::expect("Assets", "credits", "buyLink"));
+			$text = Q_Text::get("Assets/content");
+			$messageType = 'Assets/credits/alert';
+			$creditsStream->post($communityId, array(
+				'type' => $messageType,
+				'content' => Q::interpolate($text["messages"][$messageType]['content'], @compact("link")),
+				'instructions' => array(
+					'messageId' => uniqid(),
+					'userId' => $user->id,
+					'displayName' => $user->displayName(),
+					'link' => $link,
+					'timeout' => Q_Config::expect("Streams", "types", "Assets/credits", "messages", $messageType, "Q/notice", "timeout")
+				)
+			), true);
+		}
 	}
-
-	try {
-		Assets::charge("stripe", Assets_Credits::convert($creditsAmount + $creditsAdd, 'credits', 'USD'), 'USD', array(
-			'user' => $user,
-			'description' => 'check min credits'
-		));
-	} catch(Exception $e) {
-		$creditsStream->post($asUserId, array(
-			'type' => 'Assets/credits/alert',
-			'instructions' => array(
-				'userId' => $user->id,
-				'displayName' => $user->displayName(),
-				'link' => Q_Uri::url(Q_Config::get("Assets", "credits", "buyLink", "Communities/me"))
-			)
-		), true);
-	}
-}
+	$offset += $limit;
+};
