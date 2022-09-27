@@ -21,7 +21,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}",
+        "Assets/credits/alert": "You have alert related to your account"
     },
     "charge": {
         "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
@@ -175,7 +176,7 @@
             "content": "Received {{amount}} credits from {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "You have little credits on your account. Please visit {{link}} to buy more credits."
+            "content": "You have little credits on your account. Please visit <a href='{{link}}'>this link</a> to buy more credits."
         }
     },
     "billing": {
@@ -183,6 +184,7 @@
         "CreditsMinimum": "Minimum credits",
         "CreditsToAdd": "Credits to add",
         "Save": "Save",
+        "ThisLink": "this link",
         "errors": {
             "CreditsMinimumNegative": "Credits minimum can't be negative",
             "CreditsToAddNegative": "Credits to add can't be negative"

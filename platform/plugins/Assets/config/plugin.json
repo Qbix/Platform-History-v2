@@ -85,6 +85,14 @@
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0
+				},
+				"messages": {
+					"Assets/credits/alert": {
+						"subject": ["Assets/content", ["notifications", "Assets/credits/alert"]],
+						"Q/notice": {
+							"timeout": 60
+						}
+					}
 				}
 			},
 			"Assets/plan": {
@@ -231,7 +239,7 @@
 				"min": 10, /* when users credits amount less or equal this, auto charge with "additional" credits or send alert */
 				"add": 100 /* when users credits amount less or equal "min", auto charge with this credits amount */
 			},
-			"buyLink": "Communities/me"
+			"buyLink": "Communities/me tab=credits"
 		},
 		"currencies": {
 			"ignoreCache": false,
