@@ -31,6 +31,7 @@
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
+			"Assets/subscription/:method": {"module": "Assets", "action": "subscription"},
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
@@ -98,10 +99,11 @@
 			"Assets/plan": {
 				"create": true, 
 				"edit": true,
+				"canCreate": ["Users/admins", "Users/owners", "Assets/admins"],
 				"defaults": {
 					"title": "Subscription plan",
-					"readLevel": 0,
-					"writeLevel": 0,
+					"readLevel": 40,
+					"writeLevel": 10,
 					"adminLevel": 0
 				}
 			},
