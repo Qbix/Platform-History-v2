@@ -120,7 +120,7 @@
         "infoTitle": "Set Payment Information",
         "confirm": {
             "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "message": "Would you like to subscribe to \"{{title}}\"?",
             "ok": "OK",
             "cancel": "Cancel"
         },
@@ -131,7 +131,8 @@
             "TitlePlaceholder": "plan title",
             "PricePlaceholder": "price",
             "DescriptionPlaceholder": "subscription plan description",
-            "SavePlan": "Save Plan"
+            "SavePlan": "Save Plan",
+            "NewPlan": "New Plan"
         }
     },
     "payments": {
