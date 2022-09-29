@@ -303,36 +303,77 @@
 			 * @method stripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, which include things like:
-			 *  @param {String} [options.planPublisherId=Q.Users.communityId] The publisherId of the subscription plan
-			 *  @param {String} [options.planStreamName="Assets/plan/main"] The name of the subscription plan's stream
-			 *  @param {String} [options.action] Required. Should be generated with Assets/subscription tool.
-			 *  @param {String} [options.token] Required. Should be generated with Assets/subscription tool.
+			 *  @param {String} [options.planPublisherId=Q.Users.communityId] - The publisherId of the subscription plan
+			 *  @param {String} options.planStreamName - The name of the subscription plan's stream
+			 *  @param {Boolean} [option.immediatePayment=false] - If true, try to charge funds using stripe customer id.
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				var o = Q.extend({
-					confirm: Assets.texts.subscriptions.confirm
-				}, Assets.Subscriptions.stripe.options, options);
+				// load payment lib and set required params
+				Assets.Payments.load(function () {
+					Streams.get(options.planPublisherId, options.planStreamName, function (err) {
+						if (err) {
+							return callback && callback(err);
+						}
 
-				Streams.get(o.planPublisherId, o.planStreamName, function (err) {
-					if (err) {
-						return callback && callback(err);
-					}
-					var plan = this;
-					Q.addScript(o.javascript, function () {
-						var params = Q.extend({
-							name: o.name,
-							description: plan.fields.title,
-							amount: plan.getAttribute('amount')
-						}, o);
-						params.amount *= 100;
-						StripeCheckout.configure(Q.extend({
-							key: Assets.Payments.stripe.publishableKey,
-							token: function (token) {
-								o.token = token;
-								Assets.Subscriptions.subscribe('stripe', o, callback);
-							}
-						}, params)).open();
+						options = Q.extend(Assets.Subscriptions.stripe.options, options);
+
+						var plan = this;
+						var amount = parseInt(plan.getAttribute('price'));
+						var _payment = function () {
+							Assets.Payments.stripe({
+								amount: amount,
+								currency: options.currency,
+								description: plan.fields.title,
+								metadata: {
+									publisherId: options.planPublisherId,
+									streamName: options.planStreamName
+								}
+							}, function(err, data) {
+								if (err) {
+									return Q.handle(callback, null, [err]);
+								}
+								return Q.handle(callback, null, [null, data]);
+							});
+						};
+
+						if (options.immediatePayment) {
+							// just dummy dialog with throbber to show user that payment processing
+							Q.Dialogs.push({
+								title: Assets.texts.subscriptions.ImmediatePayment,
+								className: "Assets_stripe_payment Assets_stripe_payment_loading",
+								content: null
+							});
+							Q.req("Assets/payment", ["charge"], function (err, response) {
+								// close dummy dialog
+								Q.Dialogs.pop();
+
+								var msg = Q.firstErrorMessage(err, response && response.errors);
+								if (msg) {
+									return console.warn(msg);
+								}
+
+								var charge = response.slots.charge;
+
+								if (charge) {
+									return Q.handle(callback, null, [null, charge]);
+								} else {
+									_payment();
+								}
+							}, {
+								method: "post",
+								fields: {
+									payments: "stripe",
+									amount: amount,
+									currency: options.currency,
+									description: plan.fields.title,
+									publisherId: options.planPublisherId,
+									streamName: options.planStreamName
+								}
+							});
+						} else {
+							_payment();
+						}
 					});
 				});
 			},
@@ -734,7 +775,6 @@
 						});
 					},
 					onClose: function () {
-						Q.handle(callback, null, [true]);
 						paymentRequestButton && paymentRequestButton.destroy();
 						paymentElement && paymentElement.destroy();
 					}
@@ -1329,9 +1369,9 @@
 		name: Users.communityName
 	};
 	Assets.Subscriptions.stripe.options = {
-		javascript: 'https://checkout.stripe.com/checkout.js',
 		name: Users.communityName,
-		email: Q.getObject("loggedInUser.email", Users)
+		email: Q.getObject("loggedInUser.email", Users),
+		currency: 'USD'
 	};
 	Assets.Payments.authnet.options = {
 		name: Users.communityName,
