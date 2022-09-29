@@ -70,8 +70,9 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			"currency" => $currency,
 			"customer" => $customer->customerId,
 			"metadata" => !empty($options['metadata']) ? $options['metadata'] : null,
-			'off_session' => true,
-			'confirm' => true,
+			"description" => Q::ifset($options, 'description', null),
+			"off_session" => true,
+			"confirm" => true,
 		);
 		Q::take($options, array('description', 'metadata'), $params);
 
