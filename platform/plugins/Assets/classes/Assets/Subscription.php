@@ -148,9 +148,9 @@ abstract class Assets_Subscription
 	static function getPlan($subscriptionStream)
 	{
 		return Streams_Stream::fetch(
-			$stream->getAttribute('planPublisherId'),
-			$stream->getAttribute('planPublisherId'),
-			$stream->getAttribute('planStreamName'),
+			$subscriptionStream->getAttribute('planPublisherId'),
+			$subscriptionStream->getAttribute('planPublisherId'),
+			$subscriptionStream->getAttribute('planStreamName'),
 			true
 		);
 	}
