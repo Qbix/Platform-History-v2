@@ -10,7 +10,11 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 	var tool = this;
 	tool.preview = preview;
 
-	Q.addStylesheet('{{Assets}}/css/tools/PlanPreview.css', { slotName: 'Assets' });
+	var pipe = new Q.pipe(["style", "text", "stream"], function () {
+		preview.state.onRefresh.add(tool.refresh.bind(tool));
+	});
+
+	Q.addStylesheet('{{Assets}}/css/tools/PlanPreview.css', { slotName: 'Assets' }, pipe.fill("style"));
 
 	preview.state.creatable.preprocess = function (_proceed) {
 		tool.openDialog(function (dialog) {
@@ -18,7 +22,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				title: $("input[name=title]", dialog).val(),
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
-					price: $("input[name=price]", dialog).val()
+					price: $("input[name=price]", dialog).val(),
+					period: $("select[name=period]", dialog).val()
 				}
 			}]);
 		}, function () {
@@ -37,30 +42,22 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		}
 
 		tool.text = text;
-
-		preview.state.onRefresh.add(tool.refresh.bind(tool));
+		pipe.fill("text")();
 	});
+
+	if (preview.state.streamName) {
+		Q.Streams.get(preview.state.publisherId, preview.state.streamName, function (err) {
+			tool.stream = this;
+			pipe.fill("stream")();
+		});
+	} else {
+		pipe.fill("stream")();
+	}
 },
 
 {
 	editable: true,
-	onInvoke: new Q.Event(function () {
-		var tool = this;
-		var state = this.state;
-		var previewState = tool.preview.state;
-
-		if (!previewState.publisherId || !previewState.streamName || !state.editable) {
-			return;
-		}
-
-		Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
-			if (!this.testWriteLevel('edit')) {
-				return;
-			}
-
-			tool.edit();
-		});
-	})
+	onInvoke: new Q.Event()
 },
 
 {
@@ -71,11 +68,11 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 		var tool = this;
 		tool.stream = stream;
 		var ps = tool.preview.state;
-		var price = stream.getAttribute('price');
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
-			price: price ? '($' + parseFloat(price).toFixed(2) + ')' : '',
+			price: '$' + parseFloat(stream.getAttribute('price')).toFixed(2),
+			period: stream.getAttribute('period')
 		}, function (err, html) {
 			if (err) return;
 			tool.element.innerHTML = html;
@@ -96,32 +93,6 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			price = price ? "($" + price.toFixed(2) + ")" : '';
 			$("span.Assets_plan_preview_price", tool.element).html(price);
 		}, tool);
-	},
-	edit: function () {
-		var tool = this;
-		var previewState = this.preview.state;
-
-		Q.Streams.get(previewState.publisherId, previewState.streamName, function () {
-			var stream = this;
-			if (!stream.testWriteLevel('edit')) {
-				return;
-			}
-
-			tool.openDialog(function (dialog) {
-				stream.pendingFields.title = $("input[name=title]", dialog).val();
-				stream.pendingFields.content = $("textarea[name=description]", dialog).val();
-				stream.setAttribute('price', $("input[name=price]", dialog).val());
-				stream.save({
-					onSave: function () {
-						stream.refresh();
-					}
-				});
-			}, null, {
-				title: stream.fields.title,
-				price: stream.getAttribute('price'),
-				description: stream.fields.content
-			});
-		});
 	},
 	openDialog: function (saveCallback, closeCallback, fields) {
 		var tool = this;
@@ -179,21 +150,23 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 });
 
 Q.Template.set('Assets/plan/preview',
-	'<div class="Streams_preview_container Streams_preview_view Q_clearfix">'
-	+ '<img class="Streams_preview_icon">'
-	+ '<div class="Streams_preview_contents">'
-	+ '<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>'
-	+ '<span class="Assets_plan_preview_price">{{price}}</span>'
-	+ '</div></div>'
+`<div class="Streams_preview_container Streams_preview_view Q_clearfix">
+	<img class="Streams_preview_icon">
+	<div class="Streams_preview_contents">
+		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
+		<span class="Assets_plan_preview_price">({{period}} {{price}})</span>
+	</div>
+</div>`
 );
 
 Q.Template.set("Assets/plan/composer",
-	'<form>' +
-	'	<input type="text" name="title" required placeholder="{{text.subscriptions.plan.TitlePlaceholder}}" value="{{title}}">' +
-	'	<label for="price"><input type="text" name="price" required placeholder="{{text.subscriptions.plan.PricePlaceholder}}" value="{{price}}"></label>' +
-	'	<textarea name="description" placeholder="{{text.subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>' +
-	'	<button name="save" class="Q_button">{{text.subscriptions.plan.SavePlan}}</button>' +
-	'</form>'
+`<form>
+	<input type="text" name="title" required placeholder="{{text.subscriptions.plan.TitlePlaceholder}}" value="{{title}}">
+	<label for="price"><input type="text" name="price" required placeholder="{{text.subscriptions.plan.PricePlaceholder}}" value="{{price}}"></label>
+	<select name="period"><option>daily</option><option>weekly</option><option>monthly</option></select>
+	<textarea name="description" placeholder="{{text.subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
+	<button name="save" class="Q_button">{{text.subscriptions.plan.SavePlan}}</button>
+</form>`
 );
 
 })(Q, Q.$, window);
