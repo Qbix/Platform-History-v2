@@ -31,7 +31,7 @@
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
-			"Assets/subscription/:method": {"module": "Assets", "action": "subscription"},
+			"Assets/subscription": {"module": "Assets", "action": "subscription"},
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
