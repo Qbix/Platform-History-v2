@@ -23,4 +23,8 @@ function Users_before_Q_sessionExtras()
 		'Q.plugins.Users.Session.publicKey',
 		Q::ifset($_SESSION, 'Users', 'publicKey', null)
 	);
+	Q_Response::setScriptData(
+		'Q.plugins.Users.authenticate.expires',
+		Q_Config::get('Users', 'authenticate', 'expires', null)
+	);
 }

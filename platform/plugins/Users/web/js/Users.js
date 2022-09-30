@@ -281,11 +281,12 @@
 	/**
 	 * Authenticates this session with a given platform,
 	 * if the user was already connected to it.
+	 * It tries to do so by checking a cookie that would have been set by the server.
 	 * @method authenticate
 	 * @param {String} platform Currently only supports "facebook", "ios" or "android"
 	 * @param {Function} onSuccess Called if the user successfully authenticates with the platform, or was already authenticated.
 	 *  It is passed the user information if the user changed.
-	 * @param {Function} onCancel Called if the authentication was canceled.
+	 * @param {Function} onCancel Called if the authentication was canceled. Receives err, options
 	 * @param {Object} [options] object of parameters for authentication function
 	 *   @param {Function|Boolean} [options.prompt=null] which shows the usual prompt unless it was already rejected once.
 	 *     Can be false, in which case the user is never prompted and the authentication just happens.
@@ -363,113 +364,39 @@
 		options = Q.extend(Users.authenticate.web3.options, options);
 		Users.init.web3(function () {
 			try {
-				var wsr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
-				if (wsr_json) {
-					var wsr = JSON.parse(wsr_json);	
-					var hash = ethers.utils.hashMessage(wsr[0]);
-					var xid = ethers.utils.recoverAddress(hash, wsr[1]);
+				var xid, w3sr_json = Q.cookie('Q_Users_w3sr_' + platformAppId);
+				if (w3sr_json) {
+					var w3sr = JSON.parse(w3sr_json);	
+					var hash = ethers.utils.hashMessage(w3sr[0]);
+					xid = ethers.utils.recoverAddress(hash, w3sr[1]);
 					if (xid) {
-						return _handleXid(
-							platform, platformAppId, xid,
-							onSuccess, onCancel, options
-						);	
+						var matches = w3sr[0].match(/[\d]{8,12}/);
+						if (!matches) {
+							throw new Q.Exception("Users.authenticate: w3sr cookie missing timestamp");
+						}
+						if (Users.authenticate.expires
+						&& matches[0] < Date.now() / 1000 - Users.authenticate.expires) {
+							throw new Q.Exception("Users.authenticate: web3 token expired");
+						}
 					}
+				}
+				if (xid || Users.Web3.authResponse) {
+					return _handleXid(
+						platform, platformAppId, xid,
+						onSuccess, onCancel, options
+					);
 				}
 			} catch (e) {
 				console.warn(e);
 				// wasn't able to get the current authenticated xid from cookie
-			}
-
-			var web3Modal = Users.Web3.getWeb3Modal();
-			Users.prevDocumentTitle = document.title;
-			document.title = Users.communityName;
-			Users.Web3.connect(function (err, provider) {
-				if (err) {
-					return _cancel();
-				}
-				Users.Web3.provider = provider;
-
-				// Subscribe to accounts change
-				provider.on("accountsChanged", function (accounts) {
-					console.log('provider.accountsChanged', accounts);
-				});
-
-				// Subscribe to chainId change
-				provider.on("chainChanged", function (chainId) {
-					console.log('provider.chainChanged', chainId);
-				});
-				// Subscribe to provider disconnection
-				provider.on("connect", function (info) {
-					console.log('provider.connect', info);
-				});
-				// Subscribe to provider disconnection
-				provider.on("disconnect", function (error) {
-					console.log("provider.disconnect: ", error);
-
-					if (Users.logout.occurring || Users.Web3.switchChainOccuring) {
-						if (Users.Web3.switchChainOccuring === true) {
-							Users.Web3.switchChainOccuring = false;
-						}
-
-						return;
-					}
-
-					Q.Users.logout({using: 'web3', url: ''});
-				});
-				var payload = Q.text.Users.login.web3.payload.interpolate({
-					host: location.host,
-					timestamp: Math.floor(Date.now() / 1000)
-				});
-				var w3 = new Web3(provider);
-				w3.eth.getAccounts().then(function (accounts) {
-					var web3Address = Q.cookie('Q_Users_web3_address') || '';
-					if (web3Address && accounts.includes(web3Address)) {
-						var loginExpires = Q.cookie('Q_Users_web3_login_expires');
-						if (loginExpires > Date.now() / 1000) {
-							_proceed();
-						}
-					}
-					if (provider.wc) {
-						Q.alert(Q.text.Users.login.web3.alert.content, {
-							title: Q.text.Users.login.web3.alert.title,
-							onClose: function () {
-								var web3 = new Web3();
-								var address = accounts[0];
-								const res = provider.request({
-									method: 'personal_sign',
-									params: [ 
-										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
-										address.toLowerCase()
-									]
-								}).then(_proceed)
-								.catch(_cancel);	
-							}
-						});
-					} else {
-						var signer = new ethers.providers.Web3Provider(provider).getSigner();
-						  signer.signMessage(payload)
-						.then(_proceed)
-						.catch(_cancel);
-					}
-					function _proceed(signature) {
-						_doAuthenticate({
-							xid: accounts[0],
-							payload: payload,
-							signature: signature,
-							platform: 'web3',
-							chainId: provider.chainId
-						}, platform, platformAppId, onSuccess, onCancel, options);
-					}
-				}).catch(_cancel);
-			});
-			function _cancel() {
-				if ('prevDocumentTitle' in Users) {
-					document.title = Users.prevDocumentTitle;
-					delete Users.prevDocumentTitle;
-				}
-				Q.handle(onCancel, Users, [options]);
+				// so let's sign another authenticated message
 			}
 		});
+		// let's delete any stale facebook cookies there might be
+		// otherwise they might confuse our server-side authentication.
+		Q.cookie('w3sr_' + platformAppId, null, {path: '/'});
+		_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
+		Users.Web3.authResponse = null;
 	};
 	
 	Users.authenticate.web3.options = {
@@ -481,7 +408,6 @@
 		Users.authenticate(platform, function (user) {
 			priv.login_onConnect(user);
 		}, function () {
-
 			priv.login_onCancel();
 		}, {"prompt": false});
 	}
@@ -544,6 +470,8 @@
 				ar.fbAppId = platformAppId;
 				ar.appId = appId;
 				fields['Q.Users.facebook.authResponse'] = ar;
+			} else if (platform === 'web3') {
+				Q.extend(fields, Users.Web3.authResponse);
 			}
 			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
 		}
@@ -577,10 +505,6 @@
 	
 	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
 		Q.req('Users/authenticate', 'data', function (err, response) {
-			if ('prevDocumentTitle' in Users) {
-				document.title = Users.prevDocumentTitle;
-				delete Users.prevDocumentTitle;
-			}
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
@@ -984,7 +908,13 @@
 					appId: appId
 				});
 			} else if (o.using[0] === 'web3') { // only web3 used. Open web3 login right away
-				_authenticate('web3');
+				Users.Web3.login(function (result) {
+					if (!result) {
+						_onCancel();
+					} else {
+						_authenticate('web3');
+					}
+				});
 			}
 
 			delete priv.login_connected; // if we connect, it will be filled
@@ -3081,7 +3011,7 @@
 		}
 
 		// generate a new session key, and tell the server
-		if (keyConfig.generateOnLogin) {
+		if (Users.Session.key.generateOnLogin) {
 			Users.Session.generateKey();
 		}
 	}, 'Users');
@@ -3092,6 +3022,7 @@
 		Q.Users.roles = {};
 		Q.Users.hinted = [];
 		Q.Session.clear();
+		Users.Web3.authResponse = null;
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 	});
 	Users.onLoginLost = new Q.Event(function () {
@@ -4089,6 +4020,107 @@
 				throw new Error(ex);
 			});
 		},
+
+		login: function (callback) {
+			var web3Modal = Users.Web3.getWeb3Modal();
+			Users.prevDocumentTitle = document.title;
+			document.title = Users.communityName;
+			Users.Web3.connect(function (err, provider) {
+				if (Users.prevDocumentTitle) {
+					document.title = Users.prevDocumentTitle;
+					delete Users.prevDocumentTitle;
+				}
+				if (err) {
+					return _cancel();
+				}
+				Users.Web3.provider = provider;
+
+				// Subscribe to accounts change
+				provider.on("accountsChanged", function (accounts) {
+					console.log('provider.accountsChanged', accounts);
+				});
+
+				// Subscribe to chainId change
+				provider.on("chainChanged", function (chainId) {
+					console.log('provider.chainChanged', chainId);
+				});
+				// Subscribe to provider disconnection
+				provider.on("connect", function (info) {
+					console.log('provider.connect', info);
+				});
+				// Subscribe to provider disconnection
+				provider.on("disconnect", function (error) {
+					console.log("provider.disconnect: ", error);
+
+					if (Users.logout.occurring || Users.Web3.switchChainOccuring) {
+						if (Users.Web3.switchChainOccuring === true) {
+							Users.Web3.switchChainOccuring = false;
+						}
+
+						return;
+					}
+
+					Q.Users.logout({using: 'web3', url: ''});
+				});
+				var payload = Q.text.Users.login.web3.payload.interpolate({
+					host: location.host,
+					timestamp: Math.floor(Date.now() / 1000)
+				});
+				var w3 = new Web3(provider);
+				w3.eth.getAccounts().then(function (accounts) {
+					var web3Address = Q.cookie('Q_Users_web3_address') || '';
+					if (web3Address && accounts.includes(web3Address)) {
+						var loginExpires = Q.cookie('Q_Users_web3_login_expires');
+						if (loginExpires > Date.now() / 1000) {
+							_proceed();
+						}
+					}
+					if (provider.wc) {
+						Q.alert(Q.text.Users.login.web3.alert.content, {
+							title: Q.text.Users.login.web3.alert.title,
+							onClose: function () {
+								var web3 = new Web3();
+								var address = accounts[0];
+								const res = provider.request({
+									method: 'personal_sign',
+									params: [ 
+										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
+										address.toLowerCase()
+									]
+								}).then(_proceed)
+								.catch(_cancel);	
+							}
+						});
+					} else {
+						var signer = new ethers.providers.Web3Provider(provider).getSigner();
+						  signer.signMessage(payload)
+						.then(_proceed)
+						.catch(_cancel);
+					}
+					function _proceed(signature) {
+						Users.Web3.authResponse = {
+							xid: accounts[0],
+							payload: payload,
+							signature: signature,
+							platform: 'web3',
+							chainId: provider.chainId
+						}
+						callback && callback(Users.Web3.authResponse);
+						// auto-login by authenticating with facebook
+						Users.authenticate('web3', function (user) {
+							priv.login_connected = true;
+							priv.login_onConnect && priv.login_onConnect(user);
+						}, function () {
+							priv.login_onCancel && priv.login_onCancel();
+						}, {"prompt": false});
+					}
+				}).catch(_cancel);
+			});
+			function _cancel() {
+				Q.handle(callback, Users, [null, options]);
+			}
+		},
+		
 		/**
 		 * Execute method on contract
 		 * @method execute

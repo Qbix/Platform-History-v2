@@ -5,6 +5,7 @@
 	padding: 0 10px;
 	line-height: 40px;
 	text-align: left;
+	max-width: 300px;
 	border-top: solid 1px white;
 	border-bottom: solid 1px #CCC;
 	background: #ffffff;
@@ -76,7 +77,6 @@
 	background: linear-gradient(top,  #aae 0%,#eee 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#aaaaee', endColorstr='#eeeeee',GradientType=0 );
 	border-top: solid 1px #999;
-	box-sizing: border-box;
 }
 
 .Q_contextual .Q_listing .Q_current *,

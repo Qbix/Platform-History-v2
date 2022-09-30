@@ -150,6 +150,9 @@
 				"body": false
 			}
 		},
+		"authenticate": {
+			"expires": 86400
+		},
 		"activation": {
 			"expires": 10080
 		},
