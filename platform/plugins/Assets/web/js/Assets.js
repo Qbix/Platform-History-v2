@@ -344,19 +344,19 @@
 								className: "Assets_stripe_payment Assets_stripe_payment_loading",
 								content: null
 							});
-							Q.req("Assets/payment", ["charge"], function (err, response) {
+							Q.req("Assets/subscription", ["subscription"], function (err, response) {
 								// close dummy dialog
 								Q.Dialogs.pop();
 
 								var msg = Q.firstErrorMessage(err, response && response.errors);
 								if (msg) {
-									return console.warn(msg);
+									return Q.alert(msg);
 								}
 
-								var charge = response.slots.charge;
+								var subscription = response.slots.subscription;
 
-								if (charge) {
-									return Q.handle(callback, null, [null, charge]);
+								if (subscription) {
+									return Q.handle(callback, null, [null, subscription]);
 								} else {
 									_payment();
 								}
@@ -364,11 +364,8 @@
 								method: "post",
 								fields: {
 									payments: "stripe",
-									amount: amount,
-									currency: options.currency,
-									description: plan.fields.title,
-									publisherId: options.planPublisherId,
-									streamName: options.planStreamName
+									planPublisherId: options.planPublisherId,
+									planStreamName: options.planStreamName
 								}
 							});
 						} else {
