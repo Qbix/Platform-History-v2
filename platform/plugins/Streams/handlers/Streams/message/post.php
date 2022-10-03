@@ -15,6 +15,7 @@
  *   @param {string} [$_REQUEST.content=''] Optional human-readable content of the message
  *   @param {string} [$_REQUEST.instructions=''] Optional JSON instructions of the message
  *   @param {string} [$_REQUEST.weight=1] Optional weight of the message
+ *   @param {string} [$_REQUEST.dontSubscribe=false] pass true to skip autosubsribing
  * @return {void}
  */
 
@@ -56,7 +57,9 @@ function Streams_message_post () {
 		throw new Q_Exception("This app doesn't support directly posting messages of type '$type' for streams of type '{$stream->type}'");
 	}
 	
-	$stream->subscribe();
+	if (!empty($_REQUEST['dontSubscribe'])) {
+		$stream->subscribe();	
+	}
 
 	$result = Streams_Message::post(
 		$user->id,
