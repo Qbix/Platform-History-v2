@@ -22,7 +22,8 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 				title: $("input[name=title]", dialog).val(),
 				content: $("textarea[name=description]", dialog).val(),
 				attributes: {
-					price: $("input[name=price]", dialog).val(),
+					amount: $("input[name=amount]", dialog).val(),
+					currency: 'USD',
 					period: $("select[name=period]", dialog).val()
 				}
 			}]);
@@ -71,7 +72,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
-			price: '$' + parseFloat(stream.getAttribute('price')).toFixed(2),
+			price: '$' + parseFloat(stream.getAttribute('amount')).toFixed(2),
 			period: stream.getAttribute('period')
 		}, function (err, html) {
 			if (err) return;
@@ -87,7 +88,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			}
 		}, tool);
 
-		Q.Streams.Stream.onAttribute(ps.publisherId, ps.streamName, "price")
+		Q.Streams.Stream.onAttribute(ps.publisherId, ps.streamName, "amount")
 		.set(function (attributes, k) {
 			var price = parseFloat(attributes[k]);
 			price = price ? "($" + price.toFixed(2) + ")" : '';
@@ -109,13 +110,13 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			onActivate: function (dialog) {
 				$("input,textarea", dialog).plugin('Q/placeholders');
 
-				var $price = $("label[for=price]", dialog);
+				var $price = $("label[for=amount]", dialog);
 
 				$("button[name=save]", dialog).on(Q.Pointer.fastclick, function () {
 					var $form = $(this).closest("form");
 					var valid = true;
 
-					Q.each(['title', 'price', 'description'], function (i, value) {
+					Q.each(['title', 'amount', 'description'], function (i, value) {
 						var $item = $("input[name=" + value + "]", $form);
 
 						if ($item.is(":visible") && $item.attr('required') && !$item.val()) {
@@ -162,7 +163,7 @@ Q.Template.set('Assets/plan/preview',
 Q.Template.set("Assets/plan/composer",
 `<form>
 	<input type="text" name="title" required placeholder="{{text.subscriptions.plan.TitlePlaceholder}}" value="{{title}}">
-	<label for="price"><input type="text" name="price" required placeholder="{{text.subscriptions.plan.PricePlaceholder}}" value="{{price}}"></label>
+	<label for="price"><input type="text" name="amount" required placeholder="{{text.subscriptions.plan.PricePlaceholder}}" value="{{amount}}"></label>
 	<select name="period"><option>daily</option><option>weekly</option><option>monthly</option></select>
 	<textarea name="description" placeholder="{{text.subscriptions.plan.DescriptionPlaceholder}}">{{description}}</textarea>
 	<button name="save" class="Q_button">{{text.subscriptions.plan.SavePlan}}</button>

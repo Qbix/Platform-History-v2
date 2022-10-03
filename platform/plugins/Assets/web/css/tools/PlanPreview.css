@@ -19,7 +19,7 @@
 .Assets_plan_composer .Q_dialog_content select[multiple] {
 	height: 80px;
 }
-.Assets_plan_composer .Q_dialog_content input[name=price] {
+.Assets_plan_composer .Q_dialog_content input[name=amount] {
 	padding-left: 20px;
 }
 .Assets_plan_composer .Q_dialog_content label[for=price] {
