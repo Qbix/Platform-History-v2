@@ -46,10 +46,10 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		if (!is_callable('gmp_add') or !is_callable('gmp_mod')) {
 			throw new Q_Exception('Web3 authentication requires installing PHP gmp extensions');
 		}
+		$cookieName = "Q_Users_w3sr_$appIdForAuth";
 		$payload = Q::ifset($_REQUEST, 'payload', null);
 		$signature = Q::ifset($_REQUEST, 'signature', null);
-		if (!$payload or $signature) {
-			$cookieName = "Users_w3sr_$platformAppId";
+		if (!$payload or !$signature) {
 			if (isset($_COOKIE[$cookieName])) {
 				// A previous request has set the w3sr cookie
 				$wsr_json = Q_Request::special($cookieName, null, $_COOKIE);
@@ -69,9 +69,22 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 				'range' => $xid
 			));
 		}
+		$matches = array();
+		preg_match("/[\d]{8,12}/", $payload, $matches);
+		if (empty($matches)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'payload',
+				'range' => 'should contain a timestamp'
+			));
+		}
+		$timestamp = $matches[0];
+		$duration = Q_Config::get('Users', 'authenticate', 'expires', 60*60*24);
+		if ($timestamp < time() - $duration) {
+			throw new Users_Exception_AuthenticationExpired();
+		}
 		$xid = $recoveredXid;
-		$expires = time() + Q::ifset($appInfo, 'expires', 60*60);
-		$cookieNames = array("Q_Users_w3sr_$appIdForAuth", "Q_Users_w3sr_$appIdForAuth".'_expires');
+		$expires = time() + $duration;
+		$cookieNames = array($cookieName, $cookieName.'_expires');
 		if ($xid and $setCookie) {
 			$parts = array($payload, $signature);
 			Q_Response::setCookie($cookieNames[0], Q::json_encode($parts), $expires);
