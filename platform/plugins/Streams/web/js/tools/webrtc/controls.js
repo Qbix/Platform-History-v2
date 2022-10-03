@@ -1474,7 +1474,7 @@
                     bg.className = 'Streams_webrtc_dialog-bg Streams_webrtc_select-camera-bg';
 
                     var dialogCon = document.createElement('DIV');
-                    dialogCon.className = 'Streams_webrtc_dialog-con';
+                    dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-select-camera';
                     dialogCon.addEventListener('click', function (e) {
                         e.stopPropagation();
                         //if(e.currentTarget == e.target) self.closeAllDialogues();
@@ -1526,7 +1526,7 @@
                 }
 
                 function hide() {
-                    let dialogue = document.querySelector('.Streams_webrtc_dialog-box.Streams_webrtc_dialog-box-select-camera');
+                    let dialogue = document.querySelector('.Streams_webrtc_dialog-con.Streams_webrtc_dialog-con-select-camera');
                     let dialogueBg = document.querySelector('.Streams_webrtc_dialog-bg.Streams_webrtc_select-camera-bg');
                     if (dialogue && dialogue.parentNode != null) dialogue.parentNode.removeChild(dialogue);
                     if (dialogueBg && dialogueBg.parentNode != null) dialogueBg.parentNode.removeChild(dialogueBg);
@@ -1546,7 +1546,7 @@
                 bg.className = 'Streams_webrtc_dialog-bg';
 
                 var dialogCon = document.createElement('DIV');
-                dialogCon.className = 'Streams_webrtc_dialog-con';
+                dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-select-audio';
                 dialogCon.addEventListener('click', function (e) {
                     e.stopPropagation();
                     //if(e.currentTarget == e.target) self.closeAllDialogues();
