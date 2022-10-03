@@ -20,7 +20,7 @@ Q.Tool.define("Assets/subscription", function (options) {
 	var tool = this;
 	var state = tool.state;
 
-	var pipe = Q.pipe(['styles', 'texts'], function () {
+	var pipe = Q.pipe(['styles', 'texts', 'data'], function () {
 		tool.refresh();
 	});
 
@@ -33,6 +33,16 @@ Q.Tool.define("Assets/subscription", function (options) {
 
 		tool.text = text.subscriptions;
 		pipe.fill('texts')();
+	});
+	Q.req('Assets/subscription', 'data', function (err, response) {
+		if (err) {
+			return;
+		}
+
+		tool.subscriptionData = response.slots.data;
+		pipe.fill('data')();
+	}, {
+
 	});
 },
 
@@ -50,38 +60,60 @@ Q.Tool.define("Assets/subscription", function (options) {
 
 		this.element.forEachTool("Assets/plan/preview", function () {
 			var planPreview = this;
+			var $planPreviewElement = $(planPreview.element);
+			var publisherId = planPreview.preview.state.publisherId;
+			var streamName = planPreview.preview.state.streamName;
 
-			planPreview.state.onInvoke.set(function () {
-				if (!Q.Users.loggedInUser) {
-					return Q.Users.login({
-						onSuccess: function () {
-							Q.handle(window.location.href);
-						}
-					});
+			// if composer
+			if (!streamName) {
+				return;
+			}
+
+			// get subscription plan stream
+			Q.Streams.get(publisherId, streamName, function (err) {
+				if (err) {
+					return;
 				}
 
-				Q.confirm(tool.text.confirm.message.interpolate({ "title": planPreview.stream.fields.title }), function (response) {
-					if (!response) {
-						return;
+				var stream = this;
+
+				// mark subscribed plans
+				if (Q.getObject(["subscribed", stream.fields.publisherId, stream.fields.name], tool.subscriptionData)) {
+					$planPreviewElement.addClass("Q_selected");
+				}
+
+				planPreview.state.onInvoke.set(function () {
+					if (!Q.Users.loggedInUser) {
+						return Q.Users.login({
+							onSuccess: function () {
+								Q.handle(window.location.href);
+							}
+						});
 					}
 
-					Q.Assets.Subscriptions[state.payments]({
-						planPublisherId: planPreview.stream.fields.publisherId,
-						planStreamName: planPreview.stream.fields.name,
-						immediatePayment: state.immediatePayment
-					}, function (err, data) {
-						if (err) {
+					Q.confirm(tool.text.confirm.message.interpolate({ "title": stream.fields.title }), function (response) {
+						if (!response) {
 							return;
 						}
 
-						$(planPreview.element).addClass("Q_selected");
+						Q.Assets.Subscriptions[state.payments]({
+							planPublisherId: stream.fields.publisherId,
+							planStreamName: stream.fields.name,
+							immediatePayment: state.immediatePayment
+						}, function (err, data) {
+							if (err) {
+								return;
+							}
 
-						Q.handle(state.onSubscribe, tool, data);
-					});
-				}, {
-					title: tool.text.confirm.title
-				})
-			}, true);
+							$planPreviewElement.addClass("Q_selected");
+
+							Q.handle(state.onSubscribe, tool, data);
+						});
+					}, {
+						title: tool.text.confirm.title
+					})
+				}, true);
+			});
 		});
 
 		$toolElement.tool("Streams/related", {
