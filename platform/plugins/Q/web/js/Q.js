@@ -10216,37 +10216,42 @@ function _initTools(toolElement, options, shared) {
 		_initToolHandlers[normalizedName].handle.call(tool, tool.options);
 		_initToolHandlers["id:"+normalizedId] &&
 		_initToolHandlers["id:"+normalizedId].handle.call(tool, tool.options);
-		// Initialize parent tools which are ready to be initialized
-		var toInit = _toolsToInit[tool.id];
-		for (var parentId in toInit) {
-			if (!Q.Tool.active[parentId]) {
-				return;
-			}
-			var allInitialized = true;
-			var childIds = _toolsWaitingForInit[parentId];
-			for (var childId in childIds) {
-				var a = Q.Tool.active[childId];
-				if (!a) {
-					allInitialized = false;
-					break;
+		setTimeout(function () {
+			// Let Q.find traverse the rest of the tree first,
+			// to make sure that it finds and constructs all the tools,
+			// putting them on the list of toolsWaitingForInit.
+			var toInit = _toolsToInit[tool.id];
+			for (var parentId in toInit) {
+				if (!Q.Tool.active[parentId]) {
+					return;
 				}
-				for (var childName in a) {
-					var c = a[childName];
-					if (!c || !c.initialized) {
+				var allInitialized = true;
+				var childIds = _toolsWaitingForInit[parentId];
+				for (var childId in childIds) {
+					var a = Q.Tool.active[childId];
+					if (!a) {
 						allInitialized = false;
 						break;
 					}
+					for (var childName in a) {
+						var c = a[childName];
+						if (!c || !c.initialized) {
+							allInitialized = false;
+							break;
+						}
+					}
+				}
+				if (allInitialized) {
+					// Initialize parent tools which are ready to be initialized
+					delete _toolsWaitingForInit[parentId];
+					for (var parentName in Q.Tool.active[parentId]) {
+						var p = Q.Tool.active[parentId][parentName];
+						_doInit.call(p);
+					}
 				}
 			}
-			if (allInitialized) {
-				delete _toolsWaitingForInit[parentId];
-				for (var parentName in Q.Tool.active[parentId]) {
-					var p = Q.Tool.active[parentId][parentName];
-					_doInit.call(p);
-				}
-			}
-		}
-		delete _toolsToInit[tool.id];
+			delete _toolsToInit[tool.id]; 
+		}, 0);
 	}
 }
 
