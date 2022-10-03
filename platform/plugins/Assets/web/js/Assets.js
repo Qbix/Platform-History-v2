@@ -319,7 +319,7 @@
 						options = Q.extend(Assets.Subscriptions.stripe.options, options);
 
 						var plan = this;
-						var amount = parseInt(plan.getAttribute('price'));
+						var amount = parseInt(plan.getAttribute('amount'));
 						var _payment = function () {
 							Assets.Payments.stripe({
 								amount: amount,
