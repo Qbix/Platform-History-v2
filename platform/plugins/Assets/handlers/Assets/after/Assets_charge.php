@@ -20,19 +20,14 @@ function Assets_after_Assets_charge($params)
 
 	$text = Q_Text::get('Assets/content', array('language' => Users::getLanguage($user->id)));
 	$description = Q::interpolate(Q::ifset($text, 'credits', 'forMessages', 'BoughtCredits', Q::ifset($text, 'credits', 'BoughtCredits', 'Bought {{amount}} credits')), array('amount' => $credits));
+
 	$stream = Q::ifset($options, 'stream', null);
 	if ($stream) {
-		$publisherId = $stream->publisherId;
-		$publisher = Users_User::fetch($publisherId, true);
-		if ($stream->type === 'Assets/subscription') {
-			$plan = Assets_Subscription::getPlan($stream);
-			$months = $plan->getAttribute('months');
-			$weeks = $plan->getAttribute('weeks');
-			$days = $plan->getAttribute('days');
-			$startDate = $stream->getAttribute('startDate');
-			$endDate = $stream->getAttribute('endDate');
+		if ($stream->type === 'Assets/plan') {
+			Assets_Subscription::start($stream, $user);
 		}
 		$description = $stream->title;
+		$publisher = Users_User::fetch($stream->publisherId, true);
 	} else {
 		$publisherId = Users::communityId();
 		$publisher = Users_User::fetch($publisherId, true);

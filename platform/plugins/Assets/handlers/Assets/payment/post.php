@@ -19,34 +19,31 @@ function Assets_payment_post($params = array())
 	$publisherId = Q::ifset($req, 'publisherId', null);
 	$streamName = Q::ifset($req, 'streamName', null);
 	$stream = null;
-	if ($publisherId and $streamName) {
-		$stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName, true);
+	if ($publisherId && $streamName) {
+		$stream = Streams::fetchOne(null, $publisherId, $streamName);
 	}
-	$userId = Users::loggedInUser(true)->id;
+	$user = Users::loggedInUser(true);
 
 	// the currency will always be assumed to be "USD" for now
 	// and the amount will always be assumed to be in dollars, for now
 	$currency = Q::ifset($req, 'currency', 'USD');
-	$user = Users::fetch($userId, true);
+	$user = Users::fetch($user->id, true);
 	$description = Q::ifset($req, 'description', null);
 	$metadata = array(
 		'streamName' => $streamName,
 		'publisherId' => $publisherId,
-		'userId' => $userId
+		'userId' => $user->id
 	);
 
 	// need to set false because null will lead to unset slot because isset(null)=false
 	$charge = false;
 	try {
-		$charge = Assets::charge($req['payments'], $req['amount'], $currency, @compact('user', 'description', 'metadata'));
+		$charge = Assets::charge($req['payments'], $req['amount'], $currency, @compact('user', 'description', 'stream', 'metadata'));
 	} catch (Exception $e) {
 
 	}
 
-	if ($charge && $stream && $stream->type === 'Assets/subscription') {
-		$stream->setAttribute('lastChargeTime', time());
-		$stream->changed();
-	}
-
 	Q_Response::setSlot('charge', $charge);
+
+	return $charge;
 }
