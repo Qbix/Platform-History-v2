@@ -127,6 +127,13 @@
         "CreditOrDebitCard": "Credit or debit card",
         "SubscribePayment": "Subscribe Payment",
         "ImmediatePayment": "Immediate Payment",
+        "Unsubscribe": "Unsubscribe",
+        "Started": "Started",
+        "EndsIn": "Ends in",
+        "Period": "Period",
+        "Price": "Price",
+        "AreYouSureUnsubscribe": "Are you sure you want to unsubscribe this plan?",
+        "YouUnsubscribedFromPlan": "You unsubscribed from plan \"{{planTitle}}\". You will not charged, but your subscription will continue until {{endsIn}}",
         "plan": {
             "TitlePlaceholder": "plan title",
             "PricePlaceholder": "price",

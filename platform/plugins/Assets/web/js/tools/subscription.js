@@ -91,6 +91,19 @@ Q.Tool.define("Assets/subscription", function (options) {
 						});
 					}
 
+					if ($planPreviewElement.hasClass("Q_selected")) {
+						Q.invoke({
+							title: stream.fields.title,
+							trigger: tool.element,
+							content: Q.Tool.setUpElement('div', 'Assets/plan', {
+								publisherId: publisherId,
+								streamName: streamName
+							}),
+							className: 'Assets_subscription_plan'
+						});
+						return;
+					}
+
 					Q.confirm(tool.text.confirm.message.interpolate({ "title": stream.fields.title }), function (response) {
 						if (!response) {
 							return;
@@ -112,7 +125,7 @@ Q.Tool.define("Assets/subscription", function (options) {
 					}, {
 						title: tool.text.confirm.title
 					})
-				}, true);
+				}, tool);
 			});
 		});
 
