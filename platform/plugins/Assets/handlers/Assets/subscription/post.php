@@ -29,7 +29,8 @@ function Assets_subscription_post($params = array())
 		throw new Exception("This subscription already paid");
 	}
 
-	// try to charge
+	// try to charge funds
+	// if charge fail it will lead to start payment flow on client
 	$subscription = Q::event('Assets/payment/post', array(
 		'payments' => $req['payments'],
 		'amount' => $plan->getAttribute('amount'),

@@ -21,7 +21,10 @@ function Assets_subscription_response_data ($params) {
 			continue;
 		}
 
-		$subscribed[$item->toPublisherId][$item->toStreamName] = true;
+		$subscribed[$item->toPublisherId][$item->toStreamName] = array(
+			'publisherId' => $subscriptionStream->publisherId,
+			'streamName' => $subscriptionStream->name
+		);
 	}
 
 	return @compact("subscribed");
