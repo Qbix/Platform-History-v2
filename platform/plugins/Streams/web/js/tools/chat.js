@@ -920,13 +920,6 @@ Q.Tool.define('Streams/chat', function(options) {
 				}
 			}
 
-			// 'enter' key handler
-			// TODO: perhaps better to just handle form submit?
-			if (event.keyCode === 13) {
-				Q.handle(_submit, this, [$this, key]);
-				return false;
-			}
-
 			if (content) {
 				$submit.removeClass('Q_disappear').addClass('Q_appear');
 				$call.removeClass('Q_appear').addClass('Q_disappear');
@@ -934,7 +927,17 @@ Q.Tool.define('Streams/chat', function(options) {
 				$submit.removeClass('Q_appear').addClass('Q_disappear');
 				$call.removeClass('Q_disappear').addClass('Q_appear');
 			}
-		}, state.debounce || 100));
+		}, state.debounce || 100)).on('keypress', function () {
+			// 'enter' key handler
+			// TODO: perhaps better to just handle form submit?
+			if (event.keyCode === 13) {
+				var key = Q.Streams.key(
+					state.publisherId, state.streamName
+				)
+				Q.handle(_submit, this, [$(this), key]);
+				return false;
+			}
+		});
 
 		// when virtual keyboard appear, trying to scroll body to input element position
 		$input.on('focus', function () {

@@ -140,7 +140,6 @@
 .Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon.Q_selected {
 	overflow: hidden;
 	cursor: pointer;
-	background-color: #fff;
 	padding: 5px 5px 0 5px;
 }
 .Streams_chat_addons .Q_listing_wrapper .Streams_chat_addon:last-child,

@@ -8350,8 +8350,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 		} else if (onload2.executed) {
 			return;
 		}
-		Q.addScript.loaded[src] = true;
-		while ((cb = Q.addScript.onLoadCallbacks[src].shift())) {
+		var targetsrc = e.target.getAttribute('src');
+		Q.addScript.loaded[targetsrc] = true;
+		while ((cb = Q.addScript.onLoadCallbacks[targetsrc].shift())) {
 			Q.nonce = Q.nonce || Q.cookie('Q_nonce');
 			cb.call(this);
 		}
@@ -8492,11 +8493,11 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 			if (o.onError) {
 				Q.addScript.onErrorCallbacks[src].push(o.onError);
 			}
-			if (!scripts[i].wasProcessedByQ) {
-				scripts[i].onload = onload2;
-				scripts[i].onreadystatechange = onload2; // for IE
+			if (!script.wasProcessedByQ) {
+				script.onload = onload2;
+				script.onreadystatechange = onload2; // for IE
 				Q.addEventListener(script, 'error', onerror2);
-				scripts[i].wasProcessedByQ = true;
+				script.wasProcessedByQ = true;
 			}
 			return o.returnAll ? script : false; // don't add this script to the DOM
 		}
@@ -8516,9 +8517,9 @@ Q.addScript = function _Q_addScript(src, onload, options) {
 	if (o.onError) {
 		Q.addScript.onErrorCallbacks[src].push(o.onError);
 	}
-	script.onload = onload2;
-	script.wasProcessedByQ = true;
+	Q.addEventListener(script, 'load', onload2);
 	Q.addEventListener(script, 'error', onerror2);
+	script.wasProcessedByQ = true;
 	
 	if ('async' in script) { // modern browsers
 		script.setAttribute('src', src);
