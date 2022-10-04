@@ -77,6 +77,7 @@ abstract class Assets_Subscription
 
 		}
 
+		$stream->clearAttribute('stopped');
 		$stream->setAttribute('lastChargeTime', time());
 		$stream->changed();
 
@@ -191,7 +192,7 @@ abstract class Assets_Subscription
 			if ($stream->getAttribute('stopped')) {
 				return false;
 			}
-			
+
 			return ($lastChargeTime >= $earliestTime and $time <= $endTime);
 		}
 	}
