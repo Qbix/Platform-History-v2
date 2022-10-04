@@ -57,7 +57,7 @@ function Streams_message_post () {
 		throw new Q_Exception("This app doesn't support directly posting messages of type '$type' for streams of type '{$stream->type}'");
 	}
 	
-	if (!empty($_REQUEST['dontSubscribe'])) {
+	if (empty($_REQUEST['dontSubscribe'])) {
 		$stream->subscribe();	
 	}
 
