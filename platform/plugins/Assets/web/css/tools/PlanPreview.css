@@ -1,3 +1,19 @@
+.Assets_plan_preview_tool {
+	cursor: pointer;
+	max-width: 200px;
+}
+.Assets_plan_preview_tool:not(.Streams_preview_composer) {
+	border: 1px solid silver;
+	border-radius: 5px;
+}
+.Assets_plan_preview_tool .Streams_preview_icon {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+.Assets_plan_preview_tool .Streams_preview_contents {
+	text-align: center;
+}
 .Assets_plan_composer .Q_dialog_content {
 	padding: 5px;
 }
@@ -41,10 +57,6 @@
 }
 .Assets_plan_composer .Q_dialog_content button {
 	margin: 0 auto;
-}
-.Assets_plan_preview_tool {
-	cursor: pointer;
-	margin-bottom: 5px;
 }
 .Assets_plan_preview_tool .Streams_preview_title {
 	display: inline-block;

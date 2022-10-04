@@ -58,6 +58,9 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 {
 	editable: true,
+	icon: {
+		defaultSize: 200
+	},
 	onInvoke: new Q.Event()
 },
 
@@ -68,6 +71,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 		var tool = this;
 		tool.stream = stream;
+		var state = this.state;
 		var ps = tool.preview.state;
 
 		Q.Template.render('Assets/plan/preview', {
@@ -78,7 +82,11 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			if (err) return;
 			tool.element.innerHTML = html;
 
-			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0]);
+			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0], null, {
+				overrideShowSize: {
+					'': state.icon.defaultSize
+				}
+			});
 		});
 
 		Q.Streams.Stream.onFieldChanged(ps.publisherId, ps.streamName)
