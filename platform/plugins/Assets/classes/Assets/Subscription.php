@@ -188,6 +188,10 @@ abstract class Assets_Subscription
 			return (date("Y-m-d", $lastChargeTime) >= date("Y-m-d", $earliestTime))
 			and (date("Y-m-d", $time) <= $endDate);
 		} else {
+			if ($stream->getAttribute('stopped')) {
+				return false;
+			}
+			
 			return ($lastChargeTime >= $earliestTime and $time <= $endTime);
 		}
 	}
