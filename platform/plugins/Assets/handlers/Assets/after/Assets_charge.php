@@ -27,11 +27,12 @@ function Assets_after_Assets_charge($params)
 			Assets_Subscription::start($stream, $user);
 		}
 		$description = $stream->title;
-		$publisher = Users_User::fetch($stream->publisherId, true);
+		$publisherId = $stream->publisherId;
 	} else {
 		$publisherId = Users::communityId();
-		$publisher = Users_User::fetch($publisherId, true);
 	}
+	$publisher = Users_User::fetch($publisherId, true);
+
 	list($currencyName, $symbol) = Assets::currency($currency);
 	$displayAmount = Assets::display($currency, $amount);
 	$communityId = Users::communityId();
