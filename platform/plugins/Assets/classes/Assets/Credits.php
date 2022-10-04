@@ -174,6 +174,14 @@ class Assets_Credits extends Base_Assets_Credits
 		// if user spend credits to stream, make it send credits to stream publisher
 		if ($toPublisherId && $toStreamName) {
 			self::send($amount, $reason, $toPublisherId, $userId, $more);
+
+			/**
+			 * @event Assets/credits/spend {after}
+			 */
+			Q::event('Assets/credits/spent', @compact(
+				'toPublisherId', 'toStreamName', 'amount', 'userId'
+			), 'after');
+
 			return;
 		}
 
@@ -335,12 +343,18 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$more['amount'] = $amount;
 
+		$payments = Q::ifset($more, "payments", "stripe");
 		$from_stream = self::userStream($fromUserId, $fromUserId);
 		$existing_amount = $from_stream->getAttribute('amount');
 		if ($existing_amount < $amount) {
 			// if forcePayment true, try to change funds for credits
 			if (Q::ifset($more, "forcePayment", false)) {
-				Assets::charge("stripe", Assets_Credits::convert($amount, "credits", "USD"));
+				try {
+					Assets::charge($payments, Assets_Credits::convert($amount, "credits", "USD"));
+				} catch (Exception $e) {
+
+				}
+
 				// if charge success, turn off forcePayment and try again
 				$more["forcePayment"] = false;
 				return self::send($amount, $reason, $toUserId, $fromUserId, $more);
