@@ -16,7 +16,9 @@ function Assets_subscription_put($params = array())
 {
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('publisherId', 'streamName'), $req, true);
-	
+
+	$text = Q_Text::get("Assets/content");
+
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'publisherId', Users::communityId());
 	$plan = Streams::fetchOne(null, $planPublisherId, $req['streamName'], true);
@@ -25,7 +27,7 @@ function Assets_subscription_put($params = array())
 
 	// check if subscription already paid
 	if (!($subscriptionStream instanceof Streams_Stream) || !Assets_Subscription::isCurrent($subscriptionStream)) {
-		throw new Exception("This subscription is not active");
+		throw new Exception($text["subscriptions"]["SubscriptionNotActive"]);
 	}
 
 	// unsubscribe from assets plan
