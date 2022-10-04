@@ -15,6 +15,7 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
+			"Assets/credits/spent": ["Assets/after/Assets_credits_spent"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
