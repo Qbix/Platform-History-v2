@@ -23,9 +23,6 @@ function Assets_after_Assets_charge($params)
 
 	$stream = Q::ifset($options, 'stream', null);
 	if ($stream) {
-		if ($stream->type === 'Assets/plan') {
-			Assets_Subscription::start($stream, $user);
-		}
 		$description = $stream->title;
 		$publisherId = $stream->publisherId;
 	} else {

@@ -109,7 +109,7 @@ Q.Tool.define("Assets/subscription", function (options) {
 							return;
 						}
 
-						Q.Assets.Subscriptions[state.payments]({
+						Q.Assets.Subscriptions.subscribe(state.payments, {
 							planPublisherId: stream.fields.publisherId,
 							planStreamName: stream.fields.name,
 							immediatePayment: state.immediatePayment
@@ -122,6 +122,20 @@ Q.Tool.define("Assets/subscription", function (options) {
 
 							Q.handle(state.onSubscribe, tool, data);
 						});
+
+						/*Q.Assets.Subscriptions[state.payments]({
+							planPublisherId: stream.fields.publisherId,
+							planStreamName: stream.fields.name,
+							immediatePayment: state.immediatePayment
+						}, function (err, data) {
+							if (err) {
+								return;
+							}
+
+							$planPreviewElement.addClass("Q_selected");
+
+							Q.handle(state.onSubscribe, tool, data);
+						});*/
 					}, {
 						title: tool.text.confirm.title
 					})

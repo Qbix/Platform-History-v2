@@ -390,14 +390,46 @@
 					payments: payments,
 					planPublisherId: options.planPublisherId,
 					planStreamName: options.planStreamName,
+					immediatePayment: options.immediatePayment,
 					token: options.token
 				};
-				Q.req('Assets/subscription', 'subscription', function (err, response) {
-					var msg;
-					if (msg = Q.firstErrorMessage(err, response && response.errors)) {
+
+				// just dummy dialog with throbber to show user that payment processing
+				Q.Dialogs.push({
+					title: Assets.texts.subscriptions.ProcessingPayment,
+					className: "Assets_stripe_payment Assets_stripe_payment_loading",
+					content: null
+				});
+
+				Q.req('Assets/subscription', ['status', 'details'], function (err, response) {
+					Q.Dialogs.pop();
+					var msg = Q.firstErrorMessage(err, response && response.errors);
+					if (msg) {
 						return callback(msg, null);
 					}
-					Q.handle(callback, this, [null, response.slots.payment]);
+
+					// payment fail for some reason
+					if (!response.slots.status) {
+						var details = response.slots.details;
+
+						var metadata = {
+							publisherId: options.planPublisherId,
+							streamName: options.planStreamName
+						};
+
+						Assets.Credits.buy({
+							missing: true,
+							amount: details.needCredits,
+							onSuccess: function () {
+								Assets.Subscriptions.subscribe(payments, options, callback);
+							},
+							onFailure: options.onFailure,
+							metadata: metadata
+						});
+						return;
+					}
+
+					Q.handle(callback, this, [null, response.slots.details]);
 				}, {
 					method: 'post',
 					fields: fields

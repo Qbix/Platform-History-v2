@@ -17,7 +17,9 @@ function Assets_subscription_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('payments', 'planStreamName'), $req, true);
-	
+
+	$text = Q_Text::get("Assets/content");
+
 	// to be safe, we only start subscriptions from existing plans
 	$planPublisherId = Q::ifset($req, 'planPublisherId', Users::communityId());
 	$plan = Streams::fetchOne($planPublisherId, $planPublisherId, $req['planStreamName'], true);
@@ -26,21 +28,25 @@ function Assets_subscription_post($params = array())
 
 	// check if subscription already paid
 	if ($subscriptionStream && Assets_Subscription::isCurrent($subscriptionStream)) {
-		throw new Exception("This subscription already paid");
+		throw new Exception($text["subscriptions"]["SubscriptionAlreadyPaid"]);
 	}
+
+	$forcePayment = filter_var(Q::ifset($req, "immediatePayment", false), FILTER_VALIDATE_BOOLEAN);
+	Q::event("Assets/credits/post", array(
+		"amount" => $plan->getAttribute('amount'),
+		"currency" => $plan->getAttribute('currency', 'USD'),
+		"toStream" => $plan,
+		"forcePayment" => $forcePayment
+	));
 
 	// try to charge funds
 	// if charge fail it will lead to start payment flow on client
-	$subscription = Q::event('Assets/payment/post', array(
+	/*$subscription = Q::event('Assets/payment/post', array(
 		'payments' => $req['payments'],
 		'amount' => $plan->getAttribute('amount'),
 		'currency' => $plan->getAttribute('currency', 'USD'),
 		'description' => $plan->title,
 		'publisherId' => $planPublisherId,
 		'streamName' => $req['planStreamName']
-	));
-
-	// the currency will always be assumed to be "USD" for now
-	// and the amount will always be assumed to be in dollars, for now
-	Q_Response::setSlot('subscription', $subscription);
+	));*/
 }
