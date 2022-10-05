@@ -5,13 +5,15 @@
 .Assets_plan_preview_tool:not(.Streams_preview_composer) {
 	border: 1px solid silver;
 	border-radius: 5px;
+	padding: 5px;
 }
-.Assets_plan_preview_tool .Streams_preview_icon {
+.Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_icon {
 	width: 100%;
 	height: auto;
 	margin: 0 auto;
 }
-.Assets_plan_preview_tool .Streams_preview_contents {
+.Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_contents {
+	display: block;
 	text-align: center;
 }
 .Assets_plan_composer .Q_dialog_content {
@@ -58,6 +60,21 @@
 .Assets_plan_composer .Q_dialog_content button {
 	margin: 0 auto;
 }
-.Assets_plan_preview_tool .Streams_preview_title {
-	display: inline-block;
+.Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_title {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 5px 0;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_price,
+.Assets_plan_preview_tool .Assets_plan_preview_period,
+.Assets_plan_preview_tool .Assets_plan_preview_description {
+	display: block;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_price {
+	font-size: 2em;
+	margin: 10px 0;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_description {
+	border-top: 1px solid silver;
+	margin-top: 10px;
 }

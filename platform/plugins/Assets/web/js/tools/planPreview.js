@@ -76,6 +76,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 
 		Q.Template.render('Assets/plan/preview', {
 			title: stream.fields.title,
+			description: stream.fields.content,
 			price: '$' + parseFloat(stream.getAttribute('amount')).toFixed(2),
 			period: stream.getAttribute('period')
 		}, function (err, html) {
@@ -163,7 +164,9 @@ Q.Template.set('Assets/plan/preview',
 	<img class="Streams_preview_icon">
 	<div class="Streams_preview_contents">
 		<h3 class="Streams_preview_title Streams_preview_view">{{title}}</h3>
-		<span class="Assets_plan_preview_price">({{period}} {{price}})</span>
+		<span class="Assets_plan_preview_price">{{price}}</span>
+		<span class="Assets_plan_preview_period">{{period}}</span>
+		<div class="Assets_plan_preview_description">{{description}}</div>
 	</div>
 </div>`
 );
