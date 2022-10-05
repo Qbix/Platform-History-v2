@@ -66,6 +66,7 @@ Q.Tool.define("Assets/plan", function(options) {
 	refresh: function () {
 		var tool = this;
 		var state = this.state;
+		var $toolElement = $(tool.element);
 
 		var period = tool.subscriptionStream.getAttribute("period");
 		var lastChargeTime = parseInt(tool.subscriptionStream.getAttribute("lastChargeTime"));
@@ -82,10 +83,16 @@ Q.Tool.define("Assets/plan", function(options) {
 				break;
 		}
 
+		var subscribed = !tool.subscriptionStream.getAttribute("stopped");
+		$toolElement.attr("data-status", subscribed);
 		Q.Template.render('Assets/plan', {
 			text: tool.text,
+			status: subscribed ? tool.text.subscriptions.Subscribed : tool.text.subscriptions.Unsubscribed,
 			started: tool.subscriptionStream.getAttribute("startDate"),
-			endsIn: endsIn,
+			endsIn: {
+				text: subscribed ? tool.text.subscriptions.NextPay : tool.text.subscriptions.EndsIn,
+				date: endsIn
+			},
 			period: tool.subscriptionStream.getAttribute("period"),
 			price: '$' + parseFloat(tool.subscriptionStream.getAttribute('amount')).toFixed(2),
 			iconUrl: tool.planStream.iconUrl(state.icon.defaultSize)
@@ -95,8 +102,31 @@ Q.Tool.define("Assets/plan", function(options) {
 			}
 
 			tool.element.innerHTML = html;
-			$(tool.element).activate();
+			$toolElement.activate();
 
+			$("button[name=subscribe]", tool.element).on(Q.Pointer.fastclick, function () {
+				Q.req("Assets/subscription", ["subscribe"], function (err, response) {
+					var msg = Q.firstErrorMessage(err);
+					if (msg) {
+						return Q.alert(msg);
+					}
+
+					Q.Streams.get.force(tool.subscriptionStream.fields.publisherId, tool.subscriptionStream.fields.name, function (err) {
+						if (err) {
+							return;
+						}
+
+						tool.subscriptionStream = this;
+						tool.refresh();
+					});
+				}, {
+					method: "put",
+					fields: {
+						publisherId: tool.planStream.fields.publisherId,
+						streamName: tool.planStream.fields.name
+					}
+				});
+			});
 			$("button[name=unsubscribe]", tool.element).on(Q.Pointer.fastclick, function () {
 				Q.confirm(tool.text.subscriptions.AreYouSureUnsubscribe, function (result) {
 					if (!result) {
@@ -116,6 +146,15 @@ Q.Tool.define("Assets/plan", function(options) {
 								time: endsIn
 							}, 'Q_timestamp', tool.prefix)
 						}));
+
+						Q.Streams.get.force(tool.subscriptionStream.fields.publisherId, tool.subscriptionStream.fields.name, function (err) {
+							if (err) {
+								return;
+							}
+
+							tool.subscriptionStream = this;
+							tool.refresh();
+						});
 					}, {
 						method: "put",
 						fields: {
@@ -131,11 +170,13 @@ Q.Tool.define("Assets/plan", function(options) {
 
 Q.Template.set('Assets/plan',
 `<img class="Streams_preview_icon" src="{{iconUrl}}">
+	<h2 class="Assets_plan_status">{{status}}</h2>
 	<div class="Assets_plan_period">{{text.subscriptions.Period}}: {{period}}</div>
 	<div class="Assets_plan_price">{{text.subscriptions.Price}}: {{price}}</div>
 	<div class="Assets_plan_started">{{text.subscriptions.Started}}: {{started}}</div>
-	<div class="Assets_plan_endsIn">{{text.subscriptions.EndsIn}}: {{&tool "Q/timestamp" "endsIn" capitalized=true time=endsIn}}</div>
-	<button class="Q_button" name="unsubscribe">{{text.subscriptions.Unsubscribe}}</button>`
+	<div class="Assets_plan_endsIn">{{endsIn.text}}: {{&tool "Q/timestamp" "endsIn" capitalized=true time=endsIn.date}}</div>
+	<button class="Q_button" name="unsubscribe">{{text.subscriptions.Unsubscribe}}</button>
+	<button class="Q_button" name="subscribe">{{text.subscriptions.Subscribe}}</button>`
 );
 
 })(Q, Q.$, window);
