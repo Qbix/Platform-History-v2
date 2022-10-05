@@ -1,10 +1,10 @@
 <?php
-function Assets_credits_post($params = array(), $securedParams = array())
+function Assets_credits_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('amount', 'currency'), $req, true);
 
-	$loggedUserId = Q::ifset($securedParams, "loggedUserId", Users::loggedInUser(true)->id);
+	$loggedUserId = Users::loggedInUser(true)->id;
 	$user = Users::fetch($loggedUserId);
 	$amount = (float)$req['amount'];
 	$credits = (int)Assets_Credits::amount($loggedUserId);
@@ -26,7 +26,7 @@ function Assets_credits_post($params = array(), $securedParams = array())
 
 			// if charge success, turn off forcePayment and try again
 			$params["forcePayment"] = false;
-			return Q::event("Assets/credits/post", $params, $securedParams);
+			return Q::event("Assets/credits/post", $params);
 		}
 
 		Q_response::setSlot('status', false);
