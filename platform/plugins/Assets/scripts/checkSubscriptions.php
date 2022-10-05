@@ -13,7 +13,8 @@ $limit = 10;
 $i = 0;
 while (1) {
 	$subscriptionStreams = Streams_Stream::select()->where(array(
-		"type" => "Assets/subscription"
+		"type" => "Assets/subscription",
+		"closedTime" => null
 	))->limit($limit, $offset)->fetchDbRows();
 
 	if (!$subscriptionStreams) {
@@ -39,6 +40,11 @@ while (1) {
 
 			$user = Users::fetch($subscriptionStream->publisherId, true);
 			$plan = Assets_Subscription::getPlan($subscriptionStream);
+
+			if ($plan->closedTime) {
+				echo $plan->title." subscription plan closed ".PHP_EOL;
+				continue;
+			}
 
 			Users::setLoggedInUser($user);
 			Q::event("Assets/credits/post", array(
