@@ -77,7 +77,7 @@ abstract class Assets_Subscription
 
 		}
 
-		$stream->clearAttribute('stopped');
+		$stream->setAttribute('stopped', false);
 		$stream->setAttribute('lastChargeTime', time());
 		$stream->changed();
 
@@ -101,14 +101,24 @@ abstract class Assets_Subscription
 	 * @method stop
 	 * @static
 	 * @param {Streams_Stream} $stream
-	 * @param {array} [$options=array()]
 	 */
-	static function stop($stream, $options = array())
+	static function stop($stream)
 	{
 		// call this if we learn that a subscription has stopped, so we mark it as inactive.
 		// the customer could use the credit card info to start a new subscription.
 		$stream->setAttribute('stopped', true);
 		$stream->changed();
+	}
+
+	/**
+	 * Check if subscription stopped
+	 * @method isStopped
+	 * @static
+	 * @param {Streams_Stream} $stream
+	 */
+	static function isStopped($stream)
+	{
+		return $stream->getAttribute('stopped');
 	}
 
 	/**
@@ -189,10 +199,6 @@ abstract class Assets_Subscription
 			return (date("Y-m-d", $lastChargeTime) >= date("Y-m-d", $earliestTime))
 			and (date("Y-m-d", $time) <= $endDate);
 		} else {
-			if ($stream->getAttribute('stopped')) {
-				return false;
-			}
-
 			return ($lastChargeTime >= $earliestTime and $time <= $endTime);
 		}
 	}
