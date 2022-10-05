@@ -58,7 +58,7 @@ Q.Tool.define("Assets/subscription", function (options) {
 		var state = this.state;
 		var $toolElement = $(this.element);
 
-		this.element.forEachTool("Assets/plan/preview", function () {
+		var _renderPlanPreview = function () {
 			var planPreview = this;
 			var $planPreviewElement = $(planPreview.element);
 			var publisherId = planPreview.preview.state.publisherId;
@@ -66,6 +66,9 @@ Q.Tool.define("Assets/subscription", function (options) {
 
 			// if composer
 			if (!streamName) {
+				planPreview.preview.state.onRefresh.set(function (stream) {
+					Q.handle(_renderPlanPreview, planPreview);
+				}, tool);
 				return;
 			}
 
@@ -141,7 +144,9 @@ Q.Tool.define("Assets/subscription", function (options) {
 					})
 				}, tool);
 			});
-		});
+		};
+
+		this.element.forEachTool("Assets/plan/preview", _renderPlanPreview);
 
 		$toolElement.tool("Streams/related", {
 			publisherId: Q.Users.currentCommunityId,
