@@ -104,7 +104,7 @@
 				"defaults": {
 					"title": "Subscription plan",
 					"readLevel": 40,
-					"writeLevel": 10,
+					"writeLevel": 23,
 					"adminLevel": 0
 				}
 			},
