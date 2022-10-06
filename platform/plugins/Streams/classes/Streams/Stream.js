@@ -1425,6 +1425,7 @@ Sp.url = function (messageOrdinal, baseUrl)
 		publisherId: this.fields.publisherId,
 		streamName: this.fields.name.split('/'),
 		name: this.fields.name,
+		nameNormalized: Q.Utils.normalize(this.fields.name),
 		baseUrl: baseUrl || Q.Request.baseUrl()
 	});
 	var sep = urlString.indexOf('?') >= 0 ? '&' : '?';
