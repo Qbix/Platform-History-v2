@@ -173,6 +173,34 @@ abstract class Assets_Subscription
 	}
 
 	/**
+	 * Check if user subscribed to plan
+	 * @method getStream
+	 * @static
+	 * @param {array|Streams_Stream} $plan - The subscription plan stream. Can be array with "publisherId", "streamsName" indexes.
+	 * @param {String|Users_User} [$user] - User or user id. Null - means currently logged in user.
+	 */
+	static function isSubscribed ($plan, $user=null) {
+		if (!($plan instanceof Streams_Stream)) {
+			$plan = Streams::fetchOne(null, $plan["publisherId"], $plan["streamName"], true);
+		}
+
+		if (empty($user)) {
+			$user = Users::loggedInUser(true);
+		}
+
+		$subscriptionStream = self::getStream($plan, $user);
+		if (!($subscriptionStream instanceof Streams_Stream)) {
+			return false;
+		}
+
+		if (!self::isCurrent($subscriptionStream)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	/**
 	 * Check if subscription is currently valid
 	 * @method isCurrent
 	 * @param {Streams_Stream} $stream The subscription stream
