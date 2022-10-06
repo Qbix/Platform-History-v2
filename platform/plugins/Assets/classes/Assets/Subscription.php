@@ -154,15 +154,19 @@ abstract class Assets_Subscription
 			$user = Users::loggedInUser(true);
 		}
 
-		$relation = Streams_RelatedTo::select()->where(array(
-			'toPublisherId' => $plan->publisherId,
-			'toStreamName' => $plan->name,
-			'type' => self::$streamType,
-			'fromPublisherId' => $user->id
-		))->fetchDbRow();
+		$relation = Streams_RelatedTo::select("srt.*, ss.*", "srt")->where(array(
+			'srt.toPublisherId' => $plan->publisherId,
+			'srt.toStreamName' => $plan->name,
+			'srt.type' => self::$streamType,
+			'srt.fromPublisherId' => $user->id,
+			'ss.type' => self::$streamType
+		))->join(Streams_Stream::table(true, "ss"), array(
+			"srt.fromPublisherId" => "ss.publisherId",
+			"srt.fromStreamName" => "ss.name"
+		), "LEFT")->fetchDbRow();
 
 		if ($relation) {
-			return Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName);
+			return Streams::fetchOne($relation->fromPublisherId, $relation->fromPublisherId, $relation->fromStreamName, true);
 		}
 
 		return null;
