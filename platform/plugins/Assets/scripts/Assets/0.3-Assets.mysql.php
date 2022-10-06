@@ -6,13 +6,11 @@ function Assets_0_3()
 	$streamName = "Assets/plans";
 
 	// if stream already exist - exit
-	if (Streams_Stream::fetch($app, $app, $streamName)) {
-		return;
+	if (!Streams_Stream::fetch($app, $app, $streamName)) {
+		Streams::create($app, $app, 'Streams/category',
+			array('name' => $streamName)
+		);
 	}
-
-	Streams::create($app, $app, 'Streams/category',
-		array('name' => $streamName)
-	);
 
 	$adminLabels = array("Users/owners", "Users/admins", "Assets/admins");
 	foreach ($adminLabels as $adminLabel) {
