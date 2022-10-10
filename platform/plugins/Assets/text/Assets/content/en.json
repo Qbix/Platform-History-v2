@@ -120,7 +120,7 @@
         "infoTitle": "Set Payment Information",
         "confirm": {
             "title": "Start Subscription",
-            "message": "Would you like to subscribe to \"{{title}}\"?",
+            "message": "Start a recurring subscription to \"{{title}}\"?",
             "ok": "OK",
             "cancel": "Cancel"
         },
@@ -136,7 +136,7 @@
         "Subscribe": "Subscribe",
         "Started": "Started",
         "EndsIn": "Ends in",
-        "NextPay": "Next pay",
+        "NextPay": "Next payment",
         "Period": "Period",
         "Price": "Price",
         "AreYouSureUnsubscribe": "Are you sure you want to unsubscribe this plan?",
