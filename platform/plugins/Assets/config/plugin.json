@@ -15,6 +15,7 @@
 		"handlersAfterEvent": {
 			"Users/insertUser": ["Assets/after/Users_insertUser"],
 			"Assets/charge": ["Assets/after/Assets_charge"],
+			"Assets/credits/spent": ["Assets/after/Assets_credits_spent"],
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
@@ -31,6 +32,7 @@
 			"Assets/NFTowned": {"module": "Assets", "action": "NFTowned"},
 			"Assets/NFTcontract": {"module": "Assets", "action": "NFTcontract"},
 			"Q/plugins/Assets/webhooks/:serviceName": {"module": "Assets", "action": "blockchainWebhook"},
+			"Assets/subscription": {"module": "Assets", "action": "subscription"},
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
@@ -85,15 +87,24 @@
 					"readLevel": 0,
 					"writeLevel": 0,
 					"adminLevel": 0
+				},
+				"messages": {
+					"Assets/credits/alert": {
+						"subject": ["Assets/content", ["notifications", "Assets/credits/alert"]],
+						"Q/notice": {
+							"timeout": 60
+						}
+					}
 				}
 			},
 			"Assets/plan": {
 				"create": true, 
 				"edit": true,
+				"canCreate": ["Users/admins", "Users/owners", "Assets/admins"],
 				"defaults": {
 					"title": "Subscription plan",
-					"readLevel": 0,
-					"writeLevel": 0,
+					"readLevel": 40,
+					"writeLevel": 23,
 					"adminLevel": 0
 				}
 			},
@@ -203,11 +214,11 @@
 			}
 		},
 		"credits": {
-			"amounts": {
-				"Users/insertUser": 20,
-				"createCommunity": 20
+			"spend": {
+				"Communities/create": 20
 			},
-			"granted": {
+			"grant": {
+				"Users/insertUser": 20,
 				"acceptedInvite": 10,
 				"invitedUserEntered": {
 					"Streams/user/firstName": 1,
@@ -226,7 +237,12 @@
 					"500": 50, /* if user bought 500 credits at once, he will get 50 credits bonus */
 					"1000": 150 /* if user bought 1000 credits at once, he will get 150 credits bonus */
 				}
-			}
+			},
+			"amount": {
+				"min": 10, /* when users credits amount less or equal this, auto charge with "additional" credits or send alert */
+				"add": 100 /* when users credits amount less or equal "min", auto charge with this credits amount */
+			},
+			"buyLink": "Communities/me tab=credits"
 		},
 		"currencies": {
 			"ignoreCache": false,

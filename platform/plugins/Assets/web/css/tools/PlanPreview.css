@@ -1,0 +1,80 @@
+.Assets_plan_preview_tool {
+	cursor: pointer;
+	max-width: 200px;
+}
+.Assets_plan_preview_tool:not(.Streams_preview_composer) {
+	border: 1px solid silver;
+	border-radius: 5px;
+	padding: 5px;
+}
+.Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_icon {
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+.Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_contents {
+	display: block;
+	text-align: center;
+}
+.Assets_plan_composer .Q_dialog_content {
+	padding: 5px;
+}
+.Assets_plan_composer .Q_dialog_content form > * {
+	display: block;
+	font-size: 20px;
+}
+.Assets_plan_composer .Q_dialog_content form .Q_error {
+	border-bottom: 1px solid red;
+}
+.Assets_plan_composer .Q_dialog_content input,
+.Assets_plan_composer .Q_dialog_content select {
+	font-size: 1em;
+	width: 100%;
+	height: 40px;
+	margin-bottom: 10px;
+	border-radius: 5px;
+}
+.Assets_plan_composer .Q_dialog_content select[multiple] {
+	height: 80px;
+}
+.Assets_plan_composer .Q_dialog_content input[name=amount] {
+	padding-left: 20px;
+}
+.Assets_plan_composer .Q_dialog_content label[for=price] {
+	position: relative;
+}
+.Assets_plan_composer .Q_dialog_content label[for=price]:after {
+	display: block;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	content: '$';
+	left: 5px;
+	top: 10px;
+	line-height: 20px;
+}
+.Assets_plan_composer .Q_dialog_content textarea {
+	height: 80px;
+	margin-bottom: 10px;
+}
+.Assets_plan_composer .Q_dialog_content button {
+	margin: 0 auto;
+}
+.Assets_plan_preview_tool:not(.Streams_preview_composer) .Streams_preview_title {
+	font-size: 1.2em;
+	font-weight: bold;
+	margin: 5px 0;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_price,
+.Assets_plan_preview_tool .Assets_plan_preview_period,
+.Assets_plan_preview_tool .Assets_plan_preview_description {
+	display: block;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_price {
+	font-size: 2em;
+	margin: 10px 0;
+}
+.Assets_plan_preview_tool .Assets_plan_preview_description {
+	border-top: 1px solid silver;
+	margin-top: 10px;
+}

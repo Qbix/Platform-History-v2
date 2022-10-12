@@ -59,10 +59,10 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 		$customer = new Assets_Customer();
 		$customer->userId = $user->id;
 		$customer->payments = 'stripe';
-		if (!$customer->retrieve()) {
-			$stripeCustomer = self::createCustomer($user);
-			$customer->customerId = $stripeCustomer->id;
-			$customer->save();
+		if (!$customer->retrieve() || !$customer->customerId) {
+			$err_mesage = "Invalid stripe customer id for userId=".$user->id;
+			self::log('Stripe.charges', $err_mesage);
+			throw new Exception($err_mesage);
 		}
 
 		$params = array(
@@ -70,8 +70,9 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			"currency" => $currency,
 			"customer" => $customer->customerId,
 			"metadata" => !empty($options['metadata']) ? $options['metadata'] : null,
-			'off_session' => true,
-			'confirm' => true,
+			"description" => Q::ifset($options, 'description', null),
+			"off_session" => true,
+			"confirm" => true,
 		);
 		Q::take($options, array('description', 'metadata'), $params);
 
@@ -90,8 +91,10 @@ class Assets_Payments_Stripe extends Assets_Payments implements Assets_Payments_
 			// Error code will be authentication_required if authentication is needed
 			$payment_intent_id = $e->getError()->payment_intent->id;
 			$payment_intent = \Stripe\PaymentIntent::retrieve($payment_intent_id);
-			self::log('Stripe.charges', 'Failed charge for userId='.$user->id.' customerId='.$customer->customerId.' with error code:' . $e->getError()->code, $payment_intent);
-			exit;
+
+			$err_mesage = 'Failed charge for userId='.$user->id.' customerId='.$customer->customerId.' with error code:' . $e->getError()->code;
+			self::log('Stripe.charges', $err_mesage, $payment_intent);
+			throw new Exception($err_mesage);
 		}
 
 		return $customer->customerId;

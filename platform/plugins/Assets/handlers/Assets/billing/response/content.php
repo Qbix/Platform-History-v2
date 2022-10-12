@@ -1,8 +1,6 @@
 <?php
-function Assets_billing_response_content() {
-	$communityId = Users::currentCommunityId(true);
+function Assets_billing_response_content($params) {
+	Q::event('Assets/billing/response/column', $params);
 
-	Q_Response::addStylesheet("{{Assets}}/css/pages/billing.css");
-
-	return Q::view('Assets/content/billing.php', @compact("communityId"));
+	return Q::view('Assets/content/columns.php');
 }

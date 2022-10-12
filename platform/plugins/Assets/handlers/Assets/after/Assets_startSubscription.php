@@ -22,6 +22,10 @@ function Assets_after_Assets_startSubscription($params)
 	$communityId = Users::communityId();
 	$communityName = Users::communityName();
 	$communitySuffix = Users::communitySuffix();
+
+	return;
+	//TODO: need to fix below code
+
 	$amount = $stream->getAttribute('amount');
 	$months = $stream->getAttribute('months');
 	$weeks = $stream->getAttribute('weeks');

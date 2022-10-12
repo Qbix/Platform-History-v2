@@ -1,7 +1,8 @@
 <?php
 	
-function Assets_subscription_response_content()
+function Assets_subscription_response_content($params)
 {
-	Q_Request::requireFields(array('publisherId', 'userId'), true);
-	// TODO: implement listing of all payments by the user to this publisher
+	Q::event('Assets/subscription/response/column', $params);
+
+	return Q::view('Assets/content/columns.php');
 }
