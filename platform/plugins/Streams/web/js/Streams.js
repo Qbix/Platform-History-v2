@@ -6004,6 +6004,124 @@ Q.onInit.add(function _Streams_onInit() {
 		});
 	}
 
+	//add private|public toggle to dialog for changing email/mobile
+	Q.Users.setIdentifier.options.onActivate = function (dialog) {
+		let userIdInput = $('input[name=userId]', dialog)
+		let identifierTypeInput = $('input[name=identifierType]', dialog)
+		if(!identifierTypeInput) {
+			return;
+		}
+
+		let fields = {
+			identifierType: identifierTypeInput.val()
+		};
+		if(userIdInput) {
+			fields.userId = userIdInput.val();
+		}
+		
+		Q.req("Streams/identifierAccess", "readLevel", function (err, response) {
+			if (err) {
+				return console.warn(err);
+			}
+			let readLevel = Q.getObject("slots.readLevel", response);
+			let stream = this;					
+			$('<div class="Users_setIdentifier_access"/>').html([
+				$('<label class="Users_setIdentifier_access_label"/>').html([
+					$('<input class="Users_setIdentifier_access_type" />').attr({
+						id: 'Users_setIdentifier_access_private',
+						name: 'identifier_access',
+						type: 'radio',
+						value: 'private',
+						checked: readLevel == 0 ? true : false
+					}),
+					$('<span />').html(
+						Q.text.Streams.identifier.private ? Q.text.Streams.identifier.private : 'Private'
+					)
+				]).attr('for', 'Users_setIdentifier_access_private'),
+	
+				$('<label class="Users_setIdentifier_access_label"/>').html([
+					$('<input class="Users_setIdentifier_access_type" />').attr({
+						id: 'Users_setIdentifier_access_public',
+						name: 'identifier_access',
+						value: 'public',
+						type: 'radio',
+						checked: readLevel > 0 ? true : false
+					}),
+					$('<span />').html(
+						Q.text.Streams.identifier.public ? Q.text.Streams.identifier.public : 'Public'
+					)
+				]).attr('for', 'Users_setIdentifier_access_public')
+			]).insertBefore(".Q_buttons", dialog);
+	
+			$('input[type=radio][name=identifier_access]').change(function() {
+				if (this.value == 'private') {
+					let fields = {
+						accessValue: 'private',
+						identifierType: identifierTypeInput.val()
+					}
+					if(userIdInput) {
+						fields.userId = userIdInput.val()
+					}
+					Q.req("Streams/identifierAccess", ["result"], function (err, response) {
+						var fem = Q.firstErrorMessage(err, response);
+						if (fem) {
+							return Q.alert(fem);
+						}
+	
+						if (Q.getObject("slots.result", response) != false) {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.configurationSaved != null ? Q.text.Streams.identifier.configurationSaved : 'Configuration saved',
+								timeout: 5
+							});
+						} else {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.error != null ? Q.text.Streams.identifier.error : 'Something went wrong',
+								timeout: 5
+							});
+						}
+					}, {
+						method: "post",
+						fields: fields
+					});
+				} else if (this.value == 'public') {
+					let fields = {
+						accessValue: 'public',
+						identifierType: identifierTypeInput.val()
+					}
+					if(userIdInput) {
+						fields.userId = userIdInput.val()
+					}
+					Q.req("Streams/identifierAccess", ["result"], function (err, response) {
+						var fem = Q.firstErrorMessage(err, response);
+						if (fem) {
+							return Q.alert(fem);
+						}
+	
+						if (Q.getObject("slots.result", response) != false) {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.configurationSaved != null ? Q.text.Streams.identifier.configurationSaved : 'Configuration saved',
+								timeout: 5
+							});
+						} else {
+							Q.Notices.add({
+								content: Q.text.Streams.identifier.error != null ? Q.text.Streams.identifier.error : 'Something went wrong',
+								timeout: 5
+							});
+						}
+					}, {
+						method: "post",
+						fields: fields
+					});
+				}
+			});
+			
+		},
+		{
+			fields:fields
+		});
+		
+	}
+
 	/**
 	 * Listen for messages and show them as notices
 	 */

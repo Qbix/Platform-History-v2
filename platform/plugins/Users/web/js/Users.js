@@ -1220,6 +1220,7 @@
 	 *  It is passed the user information if the user changed.
 	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
 	 *  @param {String} [options.userId] You can set this to the id of a user in the database who doesn't have any email or mobile number set yet. This can happen if the user was e.g. invited via a printed invitation and lost it, and allows someone to help set up the first identifier for that user.
+	 *  @param {Q.Event} [options.onActivate] event that occurs right after dialog is shown
 	 *  @param {Q.Event} [options.onSuccess] event that occurs on success
 	 *  @param {Q.Event} [options.onCancel] event that occurs if the dialog is canceled
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess or onCancel
@@ -1244,6 +1245,7 @@
 		priv.setIdentifier_onSuccess = onSuccess;
 		priv.setIdentifier_onCancel = onCancel;
 
+		let onDialogActivate = options.onActivate;
 		options.onActivate = function () {
 			var d = this;
 			if (d.css('display') === 'none') {
@@ -1251,6 +1253,7 @@
 			}
 			$('input[name="identifierType"]', d).val(identifierType);
 			$('input[name="identifier"]', d).val(identifier);
+			Q.handle(onDialogActivate, d);
 		};
 
 		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
