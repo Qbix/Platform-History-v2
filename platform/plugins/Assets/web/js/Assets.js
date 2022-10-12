@@ -639,9 +639,10 @@
 						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
 							var currencySymbol = params.currencySymbol[0];
 							var clientSecret = params.paymentIntent[0];
+							var amount = parseInt(options.amount);
 							var $payButton = $("button[name=pay]", $dialog);
 
-							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
+							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + amount.toFixed(2));
 
 							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
 								$dialog.removeClass("Assets_stripe_payment_loading");
@@ -653,7 +654,7 @@
 								currency: options.currency.toLowerCase(),
 								total: {
 									label: options.description,
-									amount: options.amount * 100, // stripe need amount in minimum units (cents)
+									amount: amount * 100, // stripe need amount in minimum units (cents)
 								},
 								requestPayerName: true,
 								requestPayerEmail: true
