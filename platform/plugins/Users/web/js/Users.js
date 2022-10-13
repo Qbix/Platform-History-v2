@@ -1827,7 +1827,13 @@
 						if (login_setupDialog.dialog) {
 							login_setupDialog.dialog.data('Q/dialog').close();
 						}
-						_authenticate('web3');
+						Users.Web3.login(function (result) {
+							if (!result) {
+								_onCancel();
+							} else {
+								_authenticate('web3');
+							}
+						});
 						return false;
 					});
 					break;
