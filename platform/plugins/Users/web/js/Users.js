@@ -1576,7 +1576,7 @@
 			if ($form.data('used') === 'facebook') {
 				var platforms = $form.data('platforms');
 				var appId = platforms.facebook || Q.info.app;
-				var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+				var platformAppId = Users.getPlatformAppId('facebook', appId);
 				if (!platformAppId) {
 					console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook." + appId + ".appId");
 				}
@@ -1782,11 +1782,10 @@
 		var $buttons = $([]);
 		for (var platform in usingPlatforms) {
 			var appId = usingPlatforms[platform];
+			var platformAppId = Users.getPlatformAppId(platform, appId);
 			var $button = null;
 			switch (platform) {
 				case 'facebook':
-					var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps)
-						|| Q.getObject([platform, Q.info.app, 'appId'], Users.apps);
 					if (!platformAppId) {
 						console.warn("Users.login: missing Users.apps.facebook." + appId + ".appId");
 						break;
@@ -3656,7 +3655,7 @@
 		scope: 'email',
 
 		disconnect: function (appId, callback) {
-			var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+			var platformAppId = Users.getPlatformAppId('facebook', appId);
 			if (!platformAppId) {
 				console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
 			}
