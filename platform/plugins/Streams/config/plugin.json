@@ -595,6 +595,8 @@
 				"Streams/user/emailAddress",
 				"Streams/user/mobileNumber",
 				"Streams/user/birthday",
+				"Streams/user/gender",
+				"Streams/user/height",
 				"Streams/user/interests",
 				"Streams/image/album"
 			],
