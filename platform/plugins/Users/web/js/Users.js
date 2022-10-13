@@ -856,9 +856,9 @@
 
 			// perform actual login
 			if (o.using.indexOf('native') >= 0) {
-				var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
 				var usingPlatforms = {};
 				Q.each(['web3', 'facebook'], function (i, platform) {
+					var appId = (o.appIds && o.appIds[platform]) || Q.info.app;
 					if ((o.using.indexOf('facebook') >= 0)) {
 						usingPlatforms[platform] = appId;	
 					}
@@ -877,6 +877,7 @@
 				$('#Users_login_step1_form *').removeAttr('disabled');
 				$('#Users_login_identifierType').val(o.identifierType);
 			} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
+				var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
 				Users.init.facebook(function () {
 					Users.Facebook.login(function (response) {
 						if (!response.authResponse) {
@@ -1784,7 +1785,8 @@
 			var $button = null;
 			switch (platform) {
 				case 'facebook':
-					var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
+					var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps)
+						|| Q.getObject([platform, Q.info.app, 'appId'], Users.apps);
 					if (!platformAppId) {
 						console.warn("Users.login: missing Users.apps.facebook." + appId + ".appId");
 						break;
