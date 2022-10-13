@@ -1,6 +1,7 @@
 const Q = require('Q');
 module.exports = function(socket,io) {
-    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], false);
+    var _debug = Q.Config.get(['Streams', 'webrtc', 'debug'], {});
+    var _debug = _debug.signalling;
     var WebRTC =  Q.plugins.Streams.WebRTC;
     var nspName = '/webrtc';
     var webrtcNamespace = io.of(nspName);

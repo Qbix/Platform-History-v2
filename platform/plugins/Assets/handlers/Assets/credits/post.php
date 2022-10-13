@@ -1,15 +1,16 @@
 <?php
-function Assets_credits_post($params = array(), $securedParams = array())
+function Assets_credits_post($params = array())
 {
     $req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array('amount', 'currency'), $req, true);
 
-	$loggedUserId = Q::ifset($securedParams, "loggedUserId", Users::loggedInUser(true)->id);
+	$loggedUserId = Users::loggedInUser(true)->id;
 	$user = Users::fetch($loggedUserId);
 	$amount = (float)$req['amount'];
 	$credits = (int)Assets_Credits::amount($loggedUserId);
 	$currency = $req['currency'];
-	$needCredits = $currency == "credits" ? $amount : (int)Assets_Credits::convert($amount, $currency, "credits");
+	$needCredits = (int)Assets_Credits::convert($amount, $currency, "credits");
+	$payments = Q::ifset($req, "payments", "stripe");
 
 	if ($credits < $needCredits) {
 		$needCredits = $needCredits - $credits;
@@ -17,10 +18,15 @@ function Assets_credits_post($params = array(), $securedParams = array())
 		// if forcePayment defined, try to charge funds
 		if ($params["forcePayment"]) {
 			$toCurrency = $currency == "credits" ? "USD" : $currency;
-			Assets::charge("stripe", Assets_Credits::convert($needCredits, "credits", $toCurrency), $toCurrency, @compact('user'));
+			try {
+				Assets::charge($payments, Assets_Credits::convert($needCredits, "credits", $toCurrency), $toCurrency, @compact('user'));
+			} catch (Exception $e) {
+
+			}
+
 			// if charge success, turn off forcePayment and try again
 			$params["forcePayment"] = false;
-			return Q::event("Assets/credits/post", $params, $securedParams);
+			return Q::event("Assets/credits/post", $params);
 		}
 
 		Q_response::setSlot('status', false);

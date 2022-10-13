@@ -13,6 +13,10 @@
         "CurrencyNotFound": "Currency not found",
         "WrongChain": "This NFT created under \"{{chain}}\". Please use this chain."
     },
+    "admin": {
+        "Title": "Assets administrative",
+        "SubscriptionTitle": "Subscription plans"
+    },
     "browsertab": {
         "html": "{{button}}",
         "button": "Tap to pay"
@@ -21,7 +25,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: charge processed for {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
-        "YouSubscribedTo": "You have been subscribed to {{plan.title}}"
+        "YouSubscribedTo": "You have been subscribed to {{plan.title}}",
+        "Assets/credits/alert": "You have alert related to your account"
     },
     "charge": {
         "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
@@ -115,13 +120,34 @@
         "infoTitle": "Set Payment Information",
         "confirm": {
             "title": "Start Subscription",
-            "message": "Would you like to subscribe to {{title}}?",
+            "message": "Start a recurring subscription to \"{{title}}\"?",
             "ok": "OK",
             "cancel": "Cancel"
         },
         "CreditOrDebitCard": "Credit or debit card",
         "SubscribePayment": "Subscribe Payment",
-        "ImmediatePayment": "Immediate Payment"
+        "ImmediatePayment": "Immediate Payment",
+        "ProcessingPayment": "Processing Payment",
+        "SubscriptionAlreadyPaid": "This subscription already paid",
+        "SubscriptionNotActive": "This subscription is not active",
+        "Subscribed": "Subscribed",
+        "Unsubscribed": "Unsubscribed",
+        "Unsubscribe": "Unsubscribe",
+        "Subscribe": "Subscribe",
+        "Started": "Started",
+        "EndsIn": "Ends in",
+        "NextPay": "Next payment",
+        "Period": "Period",
+        "Price": "Price",
+        "AreYouSureUnsubscribe": "Are you sure you want to unsubscribe this plan?",
+        "YouUnsubscribedFromPlan": "You unsubscribed from plan \"{{planTitle}}\". You will not charged, but your subscription will continue until {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "plan title",
+            "PricePlaceholder": "price",
+            "DescriptionPlaceholder": "subscription plan description",
+            "SavePlan": "Save Plan",
+            "NewPlan": "New Plan"
+        }
     },
     "payments": {
         "infoTitle": "Set Payment Information",
@@ -173,10 +199,21 @@
         },
         "Assets\/credits\/received": {
             "content": "Received {{amount}} credits from {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "You have little credits on your account. Please visit <a href='{{link}}'>this link</a> to buy more credits."
         }
     },
     "billing": {
-        "Title": "Assets billing"
+        "Title": "Assets billing",
+        "CreditsMinimum": "Minimum credits",
+        "CreditsToAdd": "Credits to add",
+        "Save": "Save",
+        "ThisLink": "this link",
+        "errors": {
+            "CreditsMinimumNegative": "Credits minimum can't be negative",
+            "CreditsToAddNegative": "Credits to add can't be negative"
+        }
     },
     "services": {
         "NewServiceTemplate": {

@@ -769,6 +769,12 @@ html.Q_scanning body > .Q_scanning_code {
 	background: url('../img/icons/basic16.png') 5px -477px no-repeat;
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
+#notices_slot ul li a:link,
+#notices_slot ul li a:visited,
+#notices_slot ul li a:hover,
+#notices_slot ul li a:active {
+	color: #00f;
+}
 
 .Q_appear {
 	transition: transform .25s!important;

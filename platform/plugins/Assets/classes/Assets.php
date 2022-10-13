@@ -146,10 +146,7 @@ abstract class Assets extends Base_Assets
 		);
 		$charge->attributes = Q::json_encode($attributes);
 		$charge->save();
-		if ($stream = Q::ifset($options, 'stream', null) and $stream->type === 'Assets/subscription') {
-			$stream->setAttribute('lastChargeTime', time());
-			$stream->changed();
-		}
+
 		/**
 		 * @event Assets/charge {after}
 		 * @param {Assets_charge} charge

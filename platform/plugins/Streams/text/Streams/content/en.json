@@ -151,6 +151,12 @@
             "CheckYourEmail": "Please check your email and follow instructions!"
         }
     },
+    "identifier": {
+        "private": "Private",
+        "public": "Public",
+        "configurationSaved": "Configuration saved",
+        "error": "Something went wrong"
+    },
     "participating": {
         "Title": "Title",
         "Subscribed": "Subscribed",
@@ -299,6 +305,9 @@
         "preview": {
             "Meeting": "Teleconference",
             "MeetingEnded": "Teleconference ended"
+        },
+        "requestSpeakDialog": {
+            "msg": "There are currently {{count}} people speaking in the meeting. Do you want to replace one of them after allowing them {{seconds}} seconds to finish speaking?"
         }
     },
     "types": {

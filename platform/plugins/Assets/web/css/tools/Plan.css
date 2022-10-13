@@ -1,0 +1,38 @@
+.Assets_plan_tool .Streams_preview_icon {
+    width: 100%;
+    height: auto;
+}
+.Assets_plan_tool .Assets_plan_period,
+.Assets_plan_tool .Assets_plan_price,
+.Assets_plan_tool .Streams_preview_icon,
+.Assets_plan_tool .Assets_plan_started,
+.Assets_plan_tool .Assets_plan_endsIn {
+    margin: 0 0 10px 0;
+}
+.Assets_plan_tool .Q_timestamp_tool {
+    display: inline-block;
+}
+.Assets_plan_tool button {
+    margin: 0 auto;
+    display: block;
+}
+.Assets_plan_tool .Assets_plan_status {
+    text-align: center;
+    margin: 10px 0;
+}
+.Assets_plan_tool[data-status=true] .Assets_plan_status {
+    color: green;
+}
+.Assets_plan_tool[data-status=false] .Assets_plan_status {
+    color: red;
+}
+.Assets_plan_tool button[name=subscribe],
+.Assets_plan_tool button[name=unsubscribe] {
+    display: none;
+}
+.Assets_plan_tool[data-status=true] button[name=unsubscribe] {
+    display: block;
+}
+.Assets_plan_tool[data-status=false] button[name=subscribe] {
+    display: block;
+}
