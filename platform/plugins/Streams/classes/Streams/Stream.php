@@ -456,8 +456,8 @@ class Streams_Stream extends Base_Streams_Stream
 		 */
 		$params = array('stream' => $this, 'modifiedFields' => &$modifiedFields);
 		if (false === Q::event(
-				"Streams/Stream/save/{$this->type}", $params, 'before'
-			)) {
+			"Streams/Stream/save/{$this->type}", $params, 'before'
+		)) {
 			return false;
 		}
 
@@ -573,54 +573,7 @@ class Streams_Stream extends Base_Streams_Stream
 		}
 
 		$this->beforeSaveExtended($modifiedFields);
-		$result = parent::beforeSave($modifiedFields);
-		
-		// Assume that the stream's name is not being changed
-		$fields = array(
-			'Streams/user/firstName' => false,
-			'Streams/user/lastName' => false,
-			'Streams/user/gender' => false,
-			'Streams/user/username' => 'username',
-			'Streams/user/icon' => 'icon'
-		);
-		if (!isset($fields[$this->name])) {
-			return $result;
-		}
-		$field = ($this->name === 'Streams/user/icon')
-			? 'icon'
-			: 'content';
-		$wasModified = !empty($this->fieldsModified[$field])
-			or !empty($this->fieldsModified['readLevel']);
-		if (!$wasModified) {
-			return $result;
-		}
-		
-		if ($publicField = $fields[$this->name]
-		and !Q::eventStack('Db/Row/Users_User/saveExecute')) {
-			Streams::$beingSaved[$publicField] = $this;
-			try {
-				$user = Users_User::fetch($this->publisherId, true);
-				$user->$publicField = $modifiedFields[$field];
-				$user->save();
-			} catch (Exception $e) {
-				Streams::$beingSaved[$publicField] = array();
-				throw $e;
-			}
-			Streams::$beingSaved[$publicField] = array();
-			return Streams::$beingSavedQuery;
-		}
-
-		if ($this->retrieved and !$publicField) {
-			// Update all avatars corresponding to access rows for this stream
-			$taintedAccess = Streams_Access::select()
-				->where(array(
-					'publisherId' => $this->publisherId,
-					'streamName' => $this->name
-				))->fetchDbRows();
-			Streams_Avatar::updateAvatars($this->publisherId, $taintedAccess, $this, true);
-		}
-
-		return $result;
+		return parent::beforeSave($modifiedFields);
 	}
 
 	function afterFetch($result)
@@ -680,6 +633,52 @@ class Streams_Stream extends Base_Streams_Stream
 		$params = array('stream' => $this);
 		Q::event("Streams/Stream/save/{$this->type}", $params, 'after');
 		
+		// Assume that the stream's name is not being changed
+		$fields = array(
+			'Streams/user/firstName' => false,
+			'Streams/user/lastName' => false,
+			'Streams/user/gender' => false,
+			'Streams/user/username' => 'username',
+			'Streams/user/icon' => 'icon'
+		);
+		if (!isset($fields[$this->name])) {
+			return $result;
+		}
+		$field = ($this->name === 'Streams/user/icon')
+			? 'icon'
+			: 'content';
+		$wasModified = !empty($this->fieldsModified[$field])
+			or !empty($this->fieldsModified['readLevel']);
+		if (!$wasModified) {
+			return $result;
+		}
+		
+		$publicField = $fields[$this->name];
+		if ($publicField = $fields[$this->name]
+		and !Q::eventStack('Db/Row/Users_User/saveExecute')) {
+			Streams::$beingSaved[$publicField] = $this;
+			try {
+				$user = Users_User::fetch($this->publisherId, true);
+				$user->$publicField = $modifiedFields[$field];
+				$user->save(false, false, true);
+			} catch (Exception $e) {
+				Streams::$beingSaved[$publicField] = array();
+				throw $e;
+			}
+			Streams::$beingSaved[$publicField] = array();
+			return Streams::$beingSavedQuery;
+		}
+
+		if ($this->retrieved and !$publicField) {
+			// Update all avatars corresponding to access rows for this stream
+			$taintedAccess = Streams_Access::select()
+				->where(array(
+					'publisherId' => $this->publisherId,
+					'streamName' => $this->name
+				))->fetchDbRows();
+			Streams_Avatar::updateAvatars($this->publisherId, $taintedAccess, $this, true);
+		}
+
 		return $result;
 	}
 	
@@ -1165,8 +1164,8 @@ class Streams_Stream extends Base_Streams_Stream
 	 * @param {array} [$fieldNames=null]
 	 *  The names of the fields to check for changes.
 	 *  By default, checks all the standard stream fields.
-	 * @return {array}
-	 *  The array of results - successfully posted messages or false if post failed
+	 * @return {false|Db_Query}
+	 *  Returns false if nothing changed, otherwise the Db_Query
 	 */
 	function changed(
 		$asUserId=null,

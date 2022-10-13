@@ -1856,6 +1856,8 @@ class Db_Row
 		}
 		$query->className = $this_class;
 
+		$inserted = ($query->type === Db_Query::TYPE_INSERT);
+
 		if (class_exists('Q')) {
 			/**
 			 * @event {before} Db/Row/$class_name/saveExecute
@@ -1869,7 +1871,7 @@ class Db_Row
 			$temp = Q::event("Db/Row/$this_class/saveExecute", array(
 				'row' => $this,
 				'query' => $query,
-				'inserted' => ($query->type === Db_Query::TYPE_INSERT),
+				'inserted' => $inserted,
 				'modifiedFields' => $fieldsToSave,
 				'where' => $where
 			), 'before');
@@ -1912,8 +1914,6 @@ class Db_Row
 				}
 			}
 		}
-		
-		$inserted = ($query->type === Db_Query::TYPE_INSERT);
 
 		$callback = array($this, "afterSaveExecute");
 		if (is_callable($callback)) {
