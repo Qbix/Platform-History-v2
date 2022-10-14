@@ -1,14 +1,67 @@
 <?php
 function Assets_after_Streams_save($params) {
+	nft_update_attributes_relations($params);
+	grant_credits_for_filling_personal_streams($params);
+	grant_credits_for_invited_users($params);
+}
+
+function nft_update_attributes_relations ($params) {
 	$stream = $params['row'];
 
-	if (in_array($stream->type, array("Assets/NFT", "TokenSociety/NFT"))) {
-		if (Q::ifset($params, "modifiedFields", "attributes", null)) {
-			Assets_NFT::updateAttributesRelations($stream);
-		}
-
+	if (!in_array($stream->type, array("Assets/NFT", "TokenSociety/NFT"))) {
 		return;
 	}
+
+	if (Q::ifset($params, "modifiedFields", "attributes", null)) {
+		Assets_NFT::updateAttributesRelations($stream);
+	}
+}
+function grant_credits_for_filling_personal_streams($params) {
+	$stream = $params['row'];
+
+	$allowedNames = Q_Config::get("Assets", "credits", "grant", "forStreams", null);
+	$specialFields = array(
+		"Streams/user/icon" => "icon",
+		"Places/user/location" => "attributes"
+	);
+
+	$appropriateName = null;
+	foreach ($allowedNames as $allowedName => $credits) {
+		if ($stream->name == $allowedName || $stream->type == $allowedName) {
+			$appropriateName = $allowedName;
+			break;
+		}
+	}
+	if (!$appropriateName) {
+		return;
+	}
+
+	$streamField = 'content';
+	foreach ($specialFields as $k => $v) {
+		if ($stream->name == $k) {
+			$streamField = $v;
+		}
+	}
+
+	if (!Q::ifset($stream, $streamField, null)) {
+		return;
+	}
+
+	$originalContent = Q::ifset($stream, "fieldsOriginal", $streamField, null);
+	if (
+		($stream->name != "Streams/user/icon" && !empty($originalContent))
+		|| ($stream->name == "Streams/user/icon" && Users::isCustomIcon($originalContent, false))
+	) {
+		return;
+	}
+
+	Assets_Credits::grant($credits, "ForFillingStream", $stream->publisherId, array(
+		'FilledStreamTitle' => $stream->title
+	));
+}
+
+function grant_credits_for_invited_users ($params) {
+	$stream = $params['row'];
 
 	$allowedNames = array(
 		array("name" => "Streams/user/firstName", "field" => "content"),
@@ -63,10 +116,8 @@ function Assets_after_Streams_save($params) {
 		return;
 	}
 
-	$streamName = strpos($stream->name, "Streams/greeting/") === false ? $stream->name : "Streams/greeting";
-	Assets_Credits::grant($credits, Q_Utils::ucfirst(Q_Utils::normalize($streamName)), $inviteRow->invitingUserId, array(
-		'publisherId' => $stream->publisherId,
-		'streamName' => $stream->name,
-		'invitedUserName' => $invitedUser->displayName(array('asUserId' => $inviteRow->invitingUserId))
+	Assets_Credits::grant($credits, "IvitedUserFilledStream", $inviteRow->invitingUserId, array(
+		'invitedUserName' => $invitedUser->displayName(array('asUserId' => $inviteRow->invitingUserId)),
+		'FilledStreamTitle' => $stream->title
 	));
 }
