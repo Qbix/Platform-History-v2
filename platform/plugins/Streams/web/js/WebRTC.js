@@ -6897,7 +6897,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     liveStreaming: _options.liveStreaming,
                     showScreenSharingInSeparateScreen: _options.showScreenSharingInSeparateScreen,
                     turnCredentials: turnCredentials,
-                    livestreamingWorkerUrl: Q.url('{{Streams}}/js/tools/webrtc/livestreamingWorker.js'),
                     debug: _debug,
                     useCordovaPlugins: _options.useCordovaPlugins
                 });

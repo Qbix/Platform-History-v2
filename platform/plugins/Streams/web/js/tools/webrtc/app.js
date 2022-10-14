@@ -1557,10 +1557,6 @@ window.WebRTCRoomClient = function app(options){
                     participant:participant
                 });
             });
-
-            /*setInterval(function(){
-                log('mediaStreamTrack', track.mediaStreamTrack.muted, track.mediaStreamTrack.enabled);
-            }, 1000)*/
             
             return remoteStreamEl;
         }
@@ -1716,14 +1712,6 @@ window.WebRTCRoomClient = function app(options){
                 var _inputCtx = null;
                 var _isActive = null;
                 var _currentLayout = null;
-
-                let drawTime = performance.now();
-                let frameCounter = 0;
-               
-                setInterval(function() {
-                    //console.log('FPS', frameCounter);
-                    frameCounter = 0;
-                }, 1000)
 
                 function createCanvas() {
                     var videoCanvas = document.createElement("CANVAS");
@@ -5690,7 +5678,7 @@ window.WebRTCRoomClient = function app(options){
                     }
 
                     _mediaRecorder.addEventListener('dataavailable', function(e) {
-                        log('dataavailable', e.data.size);
+                        //log('dataavailable', e.data.size);
                         trigerDataListeners(e.data);
                     });
 
@@ -6773,11 +6761,6 @@ window.WebRTCRoomClient = function app(options){
                     var stream = e.streams[0]
                     var videoTrack = e.track;
 
-                    /*setInterval(function () {
-                         log('screen sharing track : mediaStreamTrack.readyState ' + videoTrack.readyState)
-                         log('screen sharing track : loadedmetadata: mediaStreamTrack.enabled ' + videoTrack.enabled)
-                         log('screen sharing track : loadedmetadata: mediaStreamTrack.muted ' + videoTrack.muted)
-                     }, 3000)*/
                     if(!options.showScreenSharingInSeparateScreen) app.localMediaControls.disableVideo();
 
                     var trackToAttach = new Track();
@@ -11282,14 +11265,6 @@ window.WebRTCRoomClient = function app(options){
         if((tem= ua.match(/version\/(\d+)/i))!= null) M.splice(1, 1, tem[1]);
         return M;
     }
-
-    document.addEventListener("visibilitychange", function() {
-        if (document.hidden){
-            log("Browser tab is hidden")
-        } else {
-            log("Browser tab is visible")
-        }
-    });
 
     function log(text) {
         if(options.debug === false) return;
