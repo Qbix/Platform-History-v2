@@ -6960,13 +6960,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                                 var moveWithinArea;
                                 if(Object.keys(columnsTools).length == 0 && dashboard) {
-                                    log('initWithNodeServer: initConference: activate controls: no columns');
                                     var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
 
                                     var windowWidth =  window.innerWidth;
                                     var windowHeight =  window.innerHeight;
                                     var dashboardHeight =  dashboard.offsetHeight;
-                                    log('initWithNodeServer: initConference: activate controls: no columns', windowWidth, windowHeight, dashboardHeight);
 
                                     if(dashboardPos == 'bottom') {
                                         moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
@@ -6974,7 +6972,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                         moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
                                     }
                                 } else {
-                                    log('initWithNodeServer: initConference: activate controls: columns != 0');
 
                                     var currentColumn = columnsTool.state.$currentColumn.get()[0];
                                     moveWithinArea = currentColumn.getBoundingClientRect();

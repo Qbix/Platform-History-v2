@@ -1557,7 +1557,7 @@ window.WebRTCRoomClient = function app(options){
                     participant:participant
                 });
             });
-
+            
             return remoteStreamEl;
         }
 
@@ -2738,6 +2738,10 @@ window.WebRTCRoomClient = function app(options){
                                     return o.kind == 'video';
                                 })
 
+                                let currentlyRenderedAudioTracks = renderedTracks.filter(function (t) {
+                                    return t.kind == 'audio' ? true : false;
+                                })
+
                                 //if so, remove them or make them avatar+visualization
                                 if (renderedVideoTracks.length != 0) {
                                     log('updateWebRTCCanvasLayout aTracks: if1', renderedVideoTracks.length)
@@ -2779,13 +2783,13 @@ window.WebRTCRoomClient = function app(options){
                             
                         }
 
-                        let currentlyRenderedAudioTracks = renderedTracks.filter(function (t) {
+                        var currentlyRenderedAudioTracks = renderedTracks.filter(function (t) {
                             return t.kind == 'audio' ? true : false;
                         })
-                        let currentlyRenderedVideoTracks = renderedTracks.filter(function (t) {
+                        var currentlyRenderedVideoTracks = renderedTracks.filter(function (t) {
                             return t.kind == 'video' && t.screenSharing == false ? true : false;
                         })
-                        let currentlyRenderedScreensharingTracks = renderedTracks.filter(function (t) {
+                        var currentlyRenderedScreensharingTracks = renderedTracks.filter(function (t) {
                             return t.kind == 'video' && t.screenSharing == true ? true : false;
                         })
                         log('updateWebRTCCanvasLayout: BEFORE REMOVE INACTIVE', renderedTracks.length)
@@ -3320,9 +3324,9 @@ window.WebRTCRoomClient = function app(options){
                         }
                     }
 
-                    requestAnimationFrame(function(){
+                    requestAnimationFrame(function() {
                         drawVideosOnCanvas();
-                    })
+                    });
                 }
 
                 function drawImage(imageSource) {
@@ -5674,7 +5678,7 @@ window.WebRTCRoomClient = function app(options){
                     }
 
                     _mediaRecorder.addEventListener('dataavailable', function(e) {
-                        console.log('dataavailable',e);
+                        //log('dataavailable', e.data.size);
                         trigerDataListeners(e.data);
                     });
 
@@ -6757,11 +6761,6 @@ window.WebRTCRoomClient = function app(options){
                     var stream = e.streams[0]
                     var videoTrack = e.track;
 
-                    /*setInterval(function () {
-                         log('screen sharing track : mediaStreamTrack.readyState ' + videoTrack.readyState)
-                         log('screen sharing track : loadedmetadata: mediaStreamTrack.enabled ' + videoTrack.enabled)
-                         log('screen sharing track : loadedmetadata: mediaStreamTrack.muted ' + videoTrack.muted)
-                     }, 3000)*/
                     if(!options.showScreenSharingInSeparateScreen) app.localMediaControls.disableVideo();
 
                     var trackToAttach = new Track();
@@ -10975,6 +10974,9 @@ window.WebRTCRoomClient = function app(options){
                 log('initWithNodeJs: connect new');
 
                 socket = io.connect(options.nodeServer + '/webrtc', {
+                    query: {
+                        limitsEnabled: options.limits && (options.limits.video || options.limits.audio)
+                    },
                     transports: ['websocket'],
                     // path: options.roomName,
                     'force new connection': true,
@@ -11019,7 +11021,7 @@ window.WebRTCRoomClient = function app(options){
         } else if(findScript('socket.io.js') && typeof io != 'undefined') {
             log('initWithNodeJs: use existing');
             connect(io);
-        } else if(2>1) {
+        } else {
             log('initWithNodeJs: add socket.io');
 
             var url = 'https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.5.1/socket.io.js'

@@ -117,6 +117,7 @@ function Streams_access_tool($options)
 	if (empty($controls)) {
 		Q_Response::addScript("{{Streams}}/js/Streams.js", 'Streams');
 		Q_Response::addScript("{{Streams}}/js/tools/access.js", 'Streams');
+		Q_Response::addStylesheet("{{Streams}}/css/tools/access.css", 'Streams');
 		Q_Response::setToolOptions(@compact(
 			'accessArray', 'avatarArray', 'labels', 
 			'icons', 'tab', 'publisherId', 
@@ -131,7 +132,7 @@ function Streams_access_tool($options)
 			'icons' => $icons
 		));
 	}
-
+	
 	return Q::view('Streams/tool/access.php', @compact(
 		'stream', 'tabs', 'tab', 'labels', 'icons',
 		'levels', 'dir', 'publisherId', 'streamName', 'accessActionUrl',

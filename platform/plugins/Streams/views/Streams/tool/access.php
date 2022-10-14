@@ -16,33 +16,45 @@
 	)) ?> 
 	<div class="Streams_access_controls Q_tabbed Q_document_surface">
 <?php endif; ?>
-		<div>
+		<div class="Streams_access_controls_item Streams_access_general">
 			<?php if ($tab === 'read'): ?>
-				The general public can see
+				<div class="Streams_access_controls_caption">The general public can see</div>
 			<?php else: ?>
-				The general public can
+				<div class="Streams_access_controls_caption">The general public can</div>
 			<?php endif; ?>
-
-			<select name="levelForEveryone" class="Streams_access_levelForEveryone">
-				<?php echo Q_Html::options($levels, '') ?> 
-			</select>
+			<div class="Streams_access_controls_config">
+				<select name="levelForEveryone" class="Streams_access_levelForEveryone">
+					<?php echo Q_Html::options($levels, '') ?> 
+				</select>
+			</div>
 		</div>
 
 		<?php if (count($labels) != 0): ?>
-			<div>
-				Grant additional access to
+		<div class="Streams_access_controls_section">
+			<div class="Streams_access_controls_item Streams_access_by_label">
+			<div class="Streams_access_controls_caption">Grant additional access to</div>
+			<div class="Streams_access_controls_config">
 				<select name="levelAddLabel" class="Streams_access_levelAddLabel">
 					<?php echo Q_Html::options($labels, '', null, true) ?>
 				</select>
 			</div>
-			<table class="Streams_access_label_array"></table>
+			</div>
+
+			<div class="Streams_access_controls_subconfig">
+				<div class="Streams_access_by_table Streams_access_label_array"></div>
+			</div>
+		</div>
 		<?php endif ?>
 
-		<div>Custom access for individual users:</div>
-		<div class="Q_big_prompt">
-			<?php echo Q::tool('Streams/userChooser') ?>
+		<div class="Streams_access_controls_section Streams_access_by_user">
+			<div class="Streams_access_controls_scaption">Custom access for individual users:</div>
+			<div class="Streams_access_controls_sconfig">
+				<?php echo Q::tool('Streams/userChooser') ?>
+			</div>
+			<div class="Streams_access_controls_subconfig">
+				<div class="Streams_access_by_table Streams_access_user_array"></div>
+			</div>
 		</div>
-		<table class="Streams_access_user_array"></table>
 <?php if (!$controls): ?>
 	</div>
 <?php endif; ?>
