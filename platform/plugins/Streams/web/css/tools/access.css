@@ -47,11 +47,14 @@
 	text-align: center;
 	margin-bottom: 10px;
 }
-.Streams_access_tool .Streams_access_controls_subconfig {
+.Streams_access_tool .Streams_access_controls_subconfig .Streams_access_by_table{
 	margin-top: 10px;
     padding: 10px;
     background: #e4e4e4;
     border-radius: 5px;
+}
+.Streams_access_tool .Streams_access_controls_subconfig .Streams_access_by_table:empty {
+	display: none;
 }
 
 .Streams_access_tool .Streams_access_by_table {
@@ -106,4 +109,32 @@
 }
 .Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_remove a:before {
     content: '\2715';
+}
+
+.Streams_access_tool input[name=query].Streams_userChooser_input, 
+.Streams_access_tool input[name=query].Communities_conversationChooser_input, 
+.Streams_access_tool input[name=query].Communities_eventChooser_input, 
+.Streams_access_tool input[name=query].Communities_eventChooser_input:focus {
+    width: 100%;
+    background: transparent;
+    border: 0;
+    border-bottom: solid 1px #394ad5;
+    border-radius: 3px;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    padding: 0 4px 0 4px;
+    margin-bottom: 10px;
+    color: black;
+    font-size: 16px;
+    height: 40px;
+}
+
+body:has(.Streams_access_tool_dialog_container) .Streams_userChooser_results {
+    background: white !important;
+}
+body:has(.Streams_access_tool_dialog_container) .Streams_userChooser_results .Q_selectable {
+    color: black;
+}
+body:has(.Streams_access_tool_dialog_container) .Streams_userChooser_results .Q_selectable.Q_selected {
+    background: #d6ecff;
 }

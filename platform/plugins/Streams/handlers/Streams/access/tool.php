@@ -132,7 +132,7 @@ function Streams_access_tool($options)
 			'icons' => $icons
 		));
 	}
-
+	
 	return Q::view('Streams/tool/access.php', @compact(
 		'stream', 'tabs', 'tab', 'labels', 'icons',
 		'levels', 'dir', 'publisherId', 'streamName', 'accessActionUrl',

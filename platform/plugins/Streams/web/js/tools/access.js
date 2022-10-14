@@ -33,11 +33,8 @@ Q.Tool.define("Streams/access", function(options) {
 		if (!action) {
 			action = 'access';
 		}
-		console.log('prepareSelect', $select, criteria, value, action)
 
 		if (typeof value !== 'undefined') {
-			console.log('prepareSelect if1')
-
 			$select.find('option').removeAttr('selected');
 			$select.attr(
 				'selectedIndex',
@@ -46,7 +43,6 @@ Q.Tool.define("Streams/access", function(options) {
 			$select.attr('name', 'cloned');
 
 			$select.change(function () {
-				console.log('changed')
 				var fields = {
 					publisherId: state.stream.fields.publisherId,
 					streamName: state.stream.fields.name
@@ -180,25 +176,19 @@ Q.Tool.define("Streams/access", function(options) {
 	}
 	
 	function _initialize() {
-		console.log('access _initialize', this)
-		if(!tool) tool = this;
 		var tabsTool = tool.child("Q_tabs");
 		var ts = tabsTool.state;
 
 		tabsTool.indicateCurrent = function(tab) {
-			console.log('access indicateCurrent:', tab, ts.tab)
-			if(!tab && ts.tab != null) {
-				console.log('access indicateCurrent: if1')
+			if(!tab && ts.tab != null && ts.tab.length != 0) {
 				$tab = ts.tab;
 				tab = $tab.data('name');
-			} else {
-				console.log('access indicateCurrent: if2')
-
+			} else if(tab) {
 				$tab = $('[data-name="'+tab+'"]', $(tabsTool.element));
+			} else {
+				$tab = $('[data-name="'+ts.defaultTabName+'"]', $(tabsTool.element));
 			}
 			
-			console.log('access indicateCurrent: tab', $tab.get())
-
 			tabsTool.$tabs.removeClass('Q_current Q_tabs_switchingTo Q_tabs_switchingFrom');
 			$tab.addClass('Q_current');
 
@@ -213,27 +203,19 @@ Q.Tool.define("Streams/access", function(options) {
 			ignorePage: true,
 			ignoreDialogs: true,
 			slotNames: {replace: ['control', 'extra']},
-			onActivate: ts.onActivate.handlers[onActivateHandler],
 			loader: null,
 			slotContainer: function (name, response) {
-				console.log('TABS: switchTo access0', tabsTool.state.onActivate.keys.length)
-
 				if (name === 'control') {
-					console.log('tool', tool.$('.Streams_access_controls')[0])
 					return tool.$('.Streams_access_controls')[0];
 				}
 				if (!response) return;
-				console.log('TABS: switchTo access1', tabsTool.state.onActivate.keys.length)
 
-				console.log('access: response.slots', response.slots.extra)
 				var extra = response.slots.extra;
 				Q.Streams.Stream.construct(extra.stream, {}, null);
 				state.avatarArray = extra.avatarArray;
 				state.accessArray = extra.accessArray;
 				state.labels = extra.labels;
 				state.icons = extra.icons;
-				console.log('TABS: switchTo access2', tabsTool.state.onActivate.keys.length)
-
 			}
 		});
 		
@@ -243,7 +225,6 @@ Q.Tool.define("Streams/access", function(options) {
 		fieldName          = (tabName != null ? tabName : 'read')+'Level',
 		actionText         = (tabName === 'read' || tabName == null) ? 'can see' : 'can',
 		tempSelect         = $('<select />');
-		console.log('access element', ts.tabName, fieldName)
 		tool.child('Streams_userChooser').exclude = state.avatarArray;
 		Q.Streams.retainWith(tool)
 		.get(tool.state.publisherId, tool.state.streamName, function (err, data) {
@@ -254,9 +235,7 @@ Q.Tool.define("Streams/access", function(options) {
 			if (!data) return;
 			state.stream = this;
 
-			console.log('ACCESS: fieldName', fieldName, state.stream)
 			var i, userId, access;
-
 			prepareSelect(levelForEveryone, {ofUserId: ''}, state.stream.fields[fieldName], 'stream');
 
 			for (i=0; i<state.accessArray.length; ++i) {
@@ -310,19 +289,8 @@ Q.Tool.define("Streams/access", function(options) {
 	}
 
 	this.Q.onInit.set(function () {
-		console.log('ACCES: ON INIT')
 		_initialize();
 		onActivateHandler = this.child('Q_tabs').state.onActivate.set(_initialize, this);
 	}, this);
-}, {
-	beforeRemove: function () {
-		console.log("ACCCESS: BEFORE REMOVE")
-		try {
-			var err = (new Error);
-			console.log(err.stack);
-		} catch (e) {
-
-		}
-	}
 });
 })(Q, jQuery);
