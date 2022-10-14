@@ -1793,9 +1793,7 @@ Q.instanceOf = function (testing, Constructor) {
  */
 Q.copy = function _Q_copy(x, fields, levels) {
 	if (Buffer && (x instanceof Buffer)) {
-		var v = process.version.substr(1).split('.')
-		.map(function (x) { return parseInt(x) });
-		return v < [5, 10] ? new Buffer(x) : Buffer.from(x);
+		return Buffer.from(x);
 	}
 	if (Q.isArrayLike(x)) {
 		var result = Array.prototype.slice.call(x, 0);
@@ -3658,14 +3656,6 @@ Function.prototype.bind = function _Function_prototype_bind(obj, options) {
 // Backward compatibility with older versions of Node.js
 fs.exists = fs.exists || function(uri, callback){return path.exists.call(path, uri, callback);};
 fs.existsSync = fs.existsSync || function(uri){return path.existsSync.call(path, uri);};
-if (!Buffer.from) {
-	Buffer.from = function (x, y, z) {
-	    if (typeof x === 'number') {
-			throw new TypeError('Buffer.from: first argument must not be a number');
-	    }
-		return new Buffer(x, y, z);
-	};
-}
 
 if (!Array.prototype.indexOf) {
 	Array.prototype.indexOf = function _Array_prototype_indexOf(searchElement /*, fromIndex */ ) {

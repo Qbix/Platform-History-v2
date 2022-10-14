@@ -1,3 +1,8 @@
+.Assets_subscription_tool {
+	display: flex;
+	gap: 20px;
+	flex-wrap: wrap;
+}
 .Assets_subscription_stripe {
 	width: 337px;
 }

@@ -8,6 +8,14 @@
       "amount": 0
     }
   },
+  "Assets/plans": {
+    "type": "Streams/category",
+    "title": "Assets subscription plans",
+    "icon": "Streams/category",
+    "readLevel": 40,
+    "writeLevel": 10,
+    "adminLevel": 0
+  },
   "Assets/user/NFTs": {
     "type": "Streams/category",
     "title": "Users NFT's",

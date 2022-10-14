@@ -4719,7 +4719,7 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 		if ('userId' in userId) criteria.userId = userId.userId;
 	} else {
 		slotName = 'participant';
-		criteria.userId = userId;
+		criteria = userId;
 	}
 	var func = Streams.batchFunction(Q.baseUrl({
 		publisherId: publisherId,

@@ -303,36 +303,74 @@
 			 * @method stripe
 			 * @static
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, which include things like:
-			 *  @param {String} [options.planPublisherId=Q.Users.communityId] The publisherId of the subscription plan
-			 *  @param {String} [options.planStreamName="Assets/plan/main"] The name of the subscription plan's stream
-			 *  @param {String} [options.action] Required. Should be generated with Assets/subscription tool.
-			 *  @param {String} [options.token] Required. Should be generated with Assets/subscription tool.
+			 *  @param {String} [options.planPublisherId=Q.Users.communityId] - The publisherId of the subscription plan
+			 *  @param {String} options.planStreamName - The name of the subscription plan's stream
+			 *  @param {Boolean} [option.immediatePayment=false] - If true, try to charge funds using stripe customer id.
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
-				var o = Q.extend({
-					confirm: Assets.texts.subscriptions.confirm
-				}, Assets.Subscriptions.stripe.options, options);
+				// load payment lib and set required params
+				Assets.Payments.load(function () {
+					Streams.get(options.planPublisherId, options.planStreamName, function (err) {
+						if (err) {
+							return callback && callback(err);
+						}
 
-				Streams.get(o.planPublisherId, o.planStreamName, function (err) {
-					if (err) {
-						return callback && callback(err);
-					}
-					var plan = this;
-					Q.addScript(o.javascript, function () {
-						var params = Q.extend({
-							name: o.name,
-							description: plan.fields.title,
-							amount: plan.getAttribute('amount')
-						}, o);
-						params.amount *= 100;
-						StripeCheckout.configure(Q.extend({
-							key: Assets.Payments.stripe.publishableKey,
-							token: function (token) {
-								o.token = token;
-								Assets.Subscriptions.subscribe('stripe', o, callback);
-							}
-						}, params)).open();
+						options = Q.extend(Assets.Subscriptions.stripe.options, options);
+
+						var plan = this;
+						var amount = parseInt(plan.getAttribute('amount'));
+						var _payment = function () {
+							Assets.Payments.stripe({
+								amount: amount,
+								currency: options.currency,
+								description: plan.fields.title,
+								metadata: {
+									publisherId: options.planPublisherId,
+									streamName: options.planStreamName
+								}
+							}, function(err, data) {
+								if (err) {
+									return Q.handle(callback, null, [err]);
+								}
+								return Q.handle(callback, null, [null, data]);
+							});
+						};
+
+						if (options.immediatePayment) {
+							// just dummy dialog with throbber to show user that payment processing
+							Q.Dialogs.push({
+								title: Assets.texts.subscriptions.ImmediatePayment,
+								className: "Assets_stripe_payment Assets_stripe_payment_loading",
+								content: null
+							});
+							Q.req("Assets/subscription", ["subscription"], function (err, response) {
+								// close dummy dialog
+								Q.Dialogs.pop();
+
+								var msg = Q.firstErrorMessage(err, response && response.errors);
+								if (msg) {
+									return Q.alert(msg);
+								}
+
+								var subscription = response.slots.subscription;
+
+								if (subscription) {
+									return Q.handle(callback, null, [null, subscription]);
+								} else {
+									_payment();
+								}
+							}, {
+								method: "post",
+								fields: {
+									payments: "stripe",
+									planPublisherId: options.planPublisherId,
+									planStreamName: options.planStreamName
+								}
+							});
+						} else {
+							_payment();
+						}
 					});
 				});
 			},
@@ -352,14 +390,46 @@
 					payments: payments,
 					planPublisherId: options.planPublisherId,
 					planStreamName: options.planStreamName,
+					immediatePayment: options.immediatePayment,
 					token: options.token
 				};
-				Q.req('Assets/subscription', 'subscription', function (err, response) {
-					var msg;
-					if (msg = Q.firstErrorMessage(err, response && response.errors)) {
+
+				// just dummy dialog with throbber to show user that payment processing
+				Q.Dialogs.push({
+					title: Assets.texts.subscriptions.ProcessingPayment,
+					className: "Assets_stripe_payment Assets_stripe_payment_loading",
+					content: null
+				});
+
+				Q.req('Assets/subscription', ['status', 'details'], function (err, response) {
+					Q.Dialogs.pop();
+					var msg = Q.firstErrorMessage(err, response && response.errors);
+					if (msg) {
 						return callback(msg, null);
 					}
-					Q.handle(callback, this, [null, response.slots.payment]);
+
+					// payment fail for some reason
+					if (!response.slots.status) {
+						var details = response.slots.details;
+
+						var metadata = {
+							publisherId: options.planPublisherId,
+							streamName: options.planStreamName
+						};
+
+						Assets.Credits.buy({
+							missing: true,
+							amount: details.needCredits,
+							onSuccess: function () {
+								Assets.Subscriptions.subscribe(payments, options, callback);
+							},
+							onFailure: options.onFailure,
+							metadata: metadata
+						});
+						return;
+					}
+
+					Q.handle(callback, this, [null, response.slots.details]);
 				}, {
 					method: 'post',
 					fields: fields
@@ -569,9 +639,10 @@
 						var pipeDialog = new Q.pipe(["currencySymbol", "paymentIntent"], function (params) {
 							var currencySymbol = params.currencySymbol[0];
 							var clientSecret = params.paymentIntent[0];
+							var amount = parseInt(options.amount);
 							var $payButton = $("button[name=pay]", $dialog);
 
-							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + options.amount.toFixed(2));
+							$payButton.text(Assets.texts.payment.Pay + ' ' + currencySymbol + amount.toFixed(2));
 
 							var pipeElements = new Q.pipe(['paymentRequest', 'payment'], function (params) {
 								$dialog.removeClass("Assets_stripe_payment_loading");
@@ -583,7 +654,7 @@
 								currency: options.currency.toLowerCase(),
 								total: {
 									label: options.description,
-									amount: options.amount * 100, // stripe need amount in minimum units (cents)
+									amount: amount * 100, // stripe need amount in minimum units (cents)
 								},
 								requestPayerName: true,
 								requestPayerEmail: true
@@ -734,7 +805,6 @@
 						});
 					},
 					onClose: function () {
-						Q.handle(callback, null, [true]);
 						paymentRequestButton && paymentRequestButton.destroy();
 						paymentElement && paymentElement.destroy();
 					}
@@ -1329,9 +1399,9 @@
 		name: Users.communityName
 	};
 	Assets.Subscriptions.stripe.options = {
-		javascript: 'https://checkout.stripe.com/checkout.js',
 		name: Users.communityName,
-		email: Q.getObject("loggedInUser.email", Users)
+		email: Q.getObject("loggedInUser.email", Users),
+		currency: 'USD'
 	};
 	Assets.Payments.authnet.options = {
 		name: Users.communityName,
@@ -1353,7 +1423,9 @@
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
-		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js"
+		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
+		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
+		"Assets/plan": "{{Assets}}/js/tools/plan.js"
 	});
 
 	Q.onInit.add(function () {
@@ -1403,9 +1475,11 @@
 						content += '<br>' + reason;
 					}
 
+					var timeout = message.getInstruction('timeout') || 5;
+
 					var options = {
 						content: content,
-						timeout: 5,
+						timeout: timeout,
 						group: reason || null,
 						handler: function () {
 							if (content.includes("credit") || reason.includes("credit")) {
@@ -1424,6 +1498,7 @@
 				this.onMessage('Assets/credits/granted').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bonus').set(_createNotice, 'Assets');
+				this.onMessage('Assets/credits/alert').set(_createNotice, 'Assets');
 			});
 		};
 
@@ -1558,7 +1633,9 @@
 		handlers: {
 			NFTprofile: "{{Assets}}/js/columns/NFTprofile.js",
 			NFTowned: "{{Assets}}/js/columns/NFTowned.js",
-			NFT: "{{Assets}}/js/columns/NFT.js"
+			NFT: "{{Assets}}/js/columns/NFT.js",
+			billing: "{{Assets}}/js/columns/billing.js",
+			subscription: "{{Assets}}/js/columns/subscription.js"
 		}
 	};
 	if (Q.info.isMobile) {

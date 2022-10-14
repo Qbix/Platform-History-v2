@@ -1053,6 +1053,10 @@ abstract class Streams extends Base_Streams
 		$stream = new Streams_Stream;
 		$stream->publisherId = $publisherId;
 		if (!empty($fields['name'])) {
+			$stream->name = $fields['name'];
+			if ($stream->retrieve()) {
+				throw new Q_Exception_AlreadyExists(array('source' => 'stream'));
+			}
 			$p = Streams::userStreamsTree();
 			if ($info = $p->get($fields['name'], array())) {
 				foreach (Base_Streams_Stream::fieldNames() as $f) {

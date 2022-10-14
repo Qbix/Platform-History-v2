@@ -856,9 +856,9 @@
 
 			// perform actual login
 			if (o.using.indexOf('native') >= 0) {
-				var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
 				var usingPlatforms = {};
 				Q.each(['web3', 'facebook'], function (i, platform) {
+					var appId = (o.appIds && o.appIds[platform]) || Q.info.app;
 					if ((o.using.indexOf('facebook') >= 0)) {
 						usingPlatforms[platform] = appId;	
 					}
@@ -877,6 +877,7 @@
 				$('#Users_login_step1_form *').removeAttr('disabled');
 				$('#Users_login_identifierType').val(o.identifierType);
 			} else if (o.using[0] === 'facebook') { // only facebook used. Open facebook login right away
+				var appId = (o.appIds && o.appIds.facebook) || Q.info.app;
 				Users.init.facebook(function () {
 					Users.Facebook.login(function (response) {
 						if (!response.authResponse) {
@@ -1575,7 +1576,7 @@
 			if ($form.data('used') === 'facebook') {
 				var platforms = $form.data('platforms');
 				var appId = platforms.facebook || Q.info.app;
-				var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+				var platformAppId = Users.getPlatformAppId('facebook', appId);
 				if (!platformAppId) {
 					console.warn("Users.defaultSetupRegisterForm: missing Users.apps.facebook." + appId + ".appId");
 				}
@@ -1781,10 +1782,10 @@
 		var $buttons = $([]);
 		for (var platform in usingPlatforms) {
 			var appId = usingPlatforms[platform];
+			var platformAppId = Users.getPlatformAppId(platform, appId);
 			var $button = null;
 			switch (platform) {
 				case 'facebook':
-					var platformAppId = Q.getObject([platform, appId, 'appId'], Users.apps);
 					if (!platformAppId) {
 						console.warn("Users.login: missing Users.apps.facebook." + appId + ".appId");
 						break;
@@ -1825,7 +1826,13 @@
 						if (login_setupDialog.dialog) {
 							login_setupDialog.dialog.data('Q/dialog').close();
 						}
-						_authenticate('web3');
+						Users.Web3.login(function (result) {
+							if (!result) {
+								_onCancel();
+							} else {
+								_authenticate('web3');
+							}
+						});
 						return false;
 					});
 					break;
@@ -3648,7 +3655,7 @@
 		scope: 'email',
 
 		disconnect: function (appId, callback) {
-			var platformAppId = Q.getObject(['facebook', appId, 'appId'], Users.apps);
+			var platformAppId = Users.getPlatformAppId('facebook', appId);
 			if (!platformAppId) {
 				console.warn("Users.logout: missing Users.apps.facebook." + appId + ".appId");
 			}
