@@ -15,20 +15,29 @@ Q.Tool.define("Streams/access", function(options) {
 	if (!options) {
 		throw new Q.Exception("options required");
 	}
+	Q.addStylesheet('{{Streams}}/css/tools/access.css');
+
+    /*Q.Text.get('Assets/content', function (err, text) {
+
+    });*/
+
 	if (!options.tab) {
 		options.tab = 'read';
 	}
 	var tool = this, state = this.state,
 		element, levelForEveryone, fieldName,
-		actionText, tempSelect;
+		actionText, tempSelect, onActivateHandler;
 
 	function prepareSelect($select, criteria, value, action) {
 		if (!state.stream) return;
 		if (!action) {
 			action = 'access';
 		}
+		console.log('prepareSelect', $select, criteria, value, action)
 
 		if (typeof value !== 'undefined') {
+			console.log('prepareSelect if1')
+
 			$select.find('option').removeAttr('selected');
 			$select.attr(
 				'selectedIndex',
@@ -37,19 +46,22 @@ Q.Tool.define("Streams/access", function(options) {
 			$select.attr('name', 'cloned');
 
 			$select.change(function () {
+				console.log('changed')
 				var fields = {
 					publisherId: state.stream.fields.publisherId,
-					streamName: state.stream.fields.name,
-					'Q.method': 'put'
+					streamName: state.stream.fields.name
 				};
 				fields[fieldName] = $(this).val();
 				Q.extend(fields, criteria);
-				Q.req(fields, "Streams/access", ['data'], function (err, data) {
+				Q.req('Streams/access', ['data'], function (err, response) {
 					var msg;
-					if (msg = Q.firstErrorMessage(err, data && data.errors)) {
+					if (msg = Q.firstErrorMessage(err, response && response.errors)) {
 						alert(msg);
 					}
 					state.stream.refresh();
+				}, {
+					method: 'put',
+					fields: fields
 				});
 			});
 		}
@@ -63,16 +75,16 @@ Q.Tool.define("Streams/access", function(options) {
 			var fields = {
 				publisherId: state.stream.fields.publisherId,
 				streamName: state.stream.fields.name,
-				'Q.method': 'put'
 			};
 			fields[fieldName] = -1;
 			Q.extend(fields, criteria);
-			Q.req(fields, "Streams/access", ['data'], function (err, data) {
+			
+			Q.req('Streams/access', ['data'], function (err, response) {
 				var msg;
-				if (msg = Q.firstErrorMessage(err, data && data.errors)) {
+				if (msg = Q.firstErrorMessage(err, response && response.errors)) {
 					alert(msg);
 				}
-				$this.closest('tr').remove();
+				$this.closest('.Streams_access_for_item').remove();
 				if (criteria.ofUserId) {
 					delete tool.child('Streams_userChooser').exclude[criteria.ofUserId];
 				} else if (criteria.ofContactLabel) {
@@ -83,9 +95,12 @@ Q.Tool.define("Streams/access", function(options) {
 						}
 					});
 				}
+			}, {
+				method: 'put',
+				fields: fields
 			});
 			return false;
-		}).html('x');
+		})
 
 		for (var k in criteria) {
 			link.data(k, criteria[k]);
@@ -127,32 +142,34 @@ Q.Tool.define("Streams/access", function(options) {
 		}
 
 		prepareSelect(clonedSelect, criteria, access[fieldName]);
-		var tr = $('<tr />');
+		var labelAccessDiv = $('<div class="Streams_access_for_item"/>');
 		if (userId !== "") {
-			tr.append(
-				$('<td style="vertical-align: middle;" />').append(
-					$('<img />').attr('src', avatar.iconUrl(true)).css('width', 20)
-				)
+			var label = state.labels[contactLabel];
+			var icon = $('<img />').attr('src', avatar.iconUrl(true)).css('width', 20)
+
+			labelAccessDiv.append(
+				$('<div class="Streams_access_for_text"/>')
+				.append($('<div class="Streams_access_for_icon"/>').append(icon))
+				.append($('<div class="Streams_access_for_name"/>').append(label).append(avatar.displayName() + ' ' + actionText + ' '))
 			).append(
-				$('<td style="vertical-align: middle;" />')
-				.append(
-					$('<span class="access-tool-username">')
-					.text(avatar.displayName() + ' ' + actionText + ' ')
-				).append(clonedSelect).append($('<div class="clear">'))
+				$('<div class="Streams_access_for_select"/>').append(clonedSelect)
 			).append(
-				$('<td style="vertical-align: middle;" />').append(newRemoveLink(criteria))
+				$('<div class="Streams_access_for_remove"/>').append(newRemoveLink(criteria))
 			).appendTo($('.Streams_access_user_array', element));
+
 		} else {
 			var label = state.labels[contactLabel];
 			var icon = $('<img />').attr('src', 
 				Q.Streams.iconUrl(state.icons[contactLabel], true)
 			);
-			tr.append(
-				$('<td style="vertical-align: middle;" />')
-				.text(label).prepend(icon).append(' ' + actionText + ' ')
-				.append(clonedSelect)
+			labelAccessDiv.append(
+				$('<div class="Streams_access_for_text"/>')
+				.append($('<div class="Streams_access_for_icon"/>').append(icon))
+				.append($('<div class="Streams_access_for_name"/>').append(label).append(' ' + actionText + ' '))
 			).append(
-				$('<td style="vertical-align: middle;" />').append(newRemoveLink(criteria))
+				$('<div class="Streams_access_for_select"/>').append(clonedSelect)
+			).append(
+				$('<div class="Streams_access_for_remove"/>').append(newRemoveLink(criteria))
 			).appendTo($('.Streams_access_label_array', element));
 		}
 		clonedSelect.focus();
@@ -163,33 +180,70 @@ Q.Tool.define("Streams/access", function(options) {
 	}
 	
 	function _initialize() {
-		
-		var ts = tool.child("Q_tabs").state;
+		console.log('access _initialize', this)
+		if(!tool) tool = this;
+		var tabsTool = tool.child("Q_tabs");
+		var ts = tabsTool.state;
+
+		tabsTool.indicateCurrent = function(tab) {
+			console.log('access indicateCurrent:', tab, ts.tab)
+			if(!tab && ts.tab != null) {
+				console.log('access indicateCurrent: if1')
+				$tab = ts.tab;
+				tab = $tab.data('name');
+			} else {
+				console.log('access indicateCurrent: if2')
+
+				$tab = $('[data-name="'+tab+'"]', $(tabsTool.element));
+			}
+			
+			console.log('access indicateCurrent: tab', $tab.get())
+
+			tabsTool.$tabs.removeClass('Q_current Q_tabs_switchingTo Q_tabs_switchingFrom');
+			$tab.addClass('Q_current');
+
+			ts.tab = $tab;
+			ts.tabName = tab;
+			Q.handle(ts.onCurrent, tabsTool, [$tab, state.tabName]);
+		}
+
 		ts.loaderOptions = Q.extend({}, 10, Q.loadUrl.options, 10, ts.loaderOptions, {
 			quiet: true,
 			loadExtras: false,
 			ignorePage: true,
-			slotNames: {replace: ['controls', 'extra']},
+			ignoreDialogs: true,
+			slotNames: {replace: ['control', 'extra']},
+			onActivate: ts.onActivate.handlers[onActivateHandler],
+			loader: null,
 			slotContainer: function (name, response) {
-				if (name === 'controls') {
+				console.log('TABS: switchTo access0', tabsTool.state.onActivate.keys.length)
+
+				if (name === 'control') {
+					console.log('tool', tool.$('.Streams_access_controls')[0])
 					return tool.$('.Streams_access_controls')[0];
 				}
 				if (!response) return;
+				console.log('TABS: switchTo access1', tabsTool.state.onActivate.keys.length)
+
+				console.log('access: response.slots', response.slots.extra)
 				var extra = response.slots.extra;
 				Q.Streams.Stream.construct(extra.stream, {}, null);
 				state.avatarArray = extra.avatarArray;
 				state.accessArray = extra.accessArray;
 				state.labels = extra.labels;
 				state.icons = extra.icons;
+				console.log('TABS: switchTo access2', tabsTool.state.onActivate.keys.length)
+
 			}
 		});
 		
 		var tabName = ts.tabName;
 		element            = tool.element,
 		levelForEveryone   = $('.Streams_access_levelForEveryone', element),
-		fieldName          = tabName+'Level',
-		actionText         = (tabName === 'read') ? 'can see' : 'can',
+		fieldName          = (tabName != null ? tabName : 'read')+'Level',
+		actionText         = (tabName === 'read' || tabName == null) ? 'can see' : 'can',
 		tempSelect         = $('<select />');
+		console.log('access element', ts.tabName, fieldName)
 		tool.child('Streams_userChooser').exclude = state.avatarArray;
 		Q.Streams.retainWith(tool)
 		.get(tool.state.publisherId, tool.state.streamName, function (err, data) {
@@ -200,6 +254,7 @@ Q.Tool.define("Streams/access", function(options) {
 			if (!data) return;
 			state.stream = this;
 
+			console.log('ACCESS: fieldName', fieldName, state.stream)
 			var i, userId, access;
 
 			prepareSelect(levelForEveryone, {ofUserId: ''}, state.stream.fields[fieldName], 'stream');
@@ -214,16 +269,20 @@ Q.Tool.define("Streams/access", function(options) {
 					publisherId: state.stream.fields.publisherId,
 					streamName: state.stream.fields.name,
 					ofUserId: userId,
-					'Q.method': 'put'
 				};
 				fields[fieldName] = levelForEveryone.val();
-				Q.req(fields, "Streams/access", ['data'], function (err, data) {
+
+				Q.req('Streams/access', ['data'], function (err, response) {
 					var msg;
-					if (msg = Q.firstErrorMessage(err, data && data.errors)) {
+					if (msg = Q.firstErrorMessage(err, response && response.errors)) {
 						alert(msg);
 					}
-					addAccessRow(data.slots.data.access, avatar);
+					addAccessRow(response.slots.data.access.fields, avatar);
+				}, {
+					method: 'put',
+					fields: fields
 				});
+				
 			};
 
 			$('.Streams_access_levelAddLabel', element).change(function () {
@@ -234,21 +293,36 @@ Q.Tool.define("Streams/access", function(options) {
 					'Q.method': 'put'
 				};
 				fields[fieldName] = levelForEveryone.val();
-				Q.req(fields, "Streams/access", ['data'], function (err, data) {
+
+				Q.req('Streams/access', ['data'], function (err, response) {
 					var msg;
-					if (msg = Q.firstErrorMessage(err, data && data.errors)) {
+					if (msg = Q.firstErrorMessage(err, response && response.errors)) {
 						alert(msg);
 					}
-					addAccessRow(data.slots.data.access);
+					addAccessRow(response.slots.data.access.fields);
 					state.stream.refresh();
+				}, {
+					method: 'put',
+					fields: fields
 				});
 			});
 		});
 	}
 
 	this.Q.onInit.set(function () {
+		console.log('ACCES: ON INIT')
 		_initialize();
-		this.child('Q_tabs').state.onActivate.set(_initialize, this);
+		onActivateHandler = this.child('Q_tabs').state.onActivate.set(_initialize, this);
 	}, this);
+}, {
+	beforeRemove: function () {
+		console.log("ACCCESS: BEFORE REMOVE")
+		try {
+			var err = (new Error);
+			console.log(err.stack);
+		} catch (e) {
+
+		}
+	}
 });
 })(Q, jQuery);

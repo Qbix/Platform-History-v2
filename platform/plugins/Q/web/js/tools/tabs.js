@@ -56,7 +56,11 @@
 			if (state.contextualHandler == null) {
 				state.contextualHandler = function ($jq) {
 					var element = $jq[0];
+					console.log('TABS: switchTo  before', tool.state.onActivate.keys.length)
+
 					tool.switchTo([element.getAttribute('data-name'), element]);
+					console.log('TABS: switchTo  after346', tool.state.onActivate.keys.length)
+
 				}
 			}
 
@@ -184,6 +188,10 @@
 				var fromTabName = state.tabName;
 				var fromUrl = window.location.href;
 
+				console.log('TABS: switchTo onactivete', state.onActivate.keys.length)
+				console.log('TABS: switchTo onactivete lo', state.loaderOptions.onActivate)
+				console.log('TABS: switchTo onactivete',loaderOptions.onActivate)
+				var onActivate = state.onActivate
 				var o = Q.extend({
 					slotNames: slots,
 					onError: new Q.Event(function (msg) {
@@ -193,9 +201,15 @@
 						tool.$tabs.removeClass('Q_tabs_switchingTo');
 					}, "Q/tabs"),
 					onActivate: new Q.Event(function () {
+						console.log('TABS: switchTo onActivate1', state.onActivate.keys.length)
 						tool.indicateCurrent(tool.getName(tab));
 						tool.refresh();
+						console.log('TABS: switchTo onActivate2', state.onActivate.keys.length)
+
 						Q.handle(state.onActivate, tool, [tab, name]);
+						console.log('TABS: switchTo onActivate3', state.onActivate.keys.length)
+						console.log('TABS: switchTo onActivate4', onActivate.keys.length)
+
 					}, "Q/tabs"),
 					loadExtras: true,
 					ignorePage: tool.isInDialog(),
@@ -207,7 +221,8 @@
 				}, 10, state.loaderOptions, 10, loaderOptions);
 
 				Q.handle(href, o);
-				
+				console.log('TABS: switchTo onactivete AFTER', state.onActivate.keys.length)
+
 				function slotContainer(slotName) {
 					var container = null;
 					var selector = state.selectors[slotName];
@@ -262,12 +277,14 @@
 				}
 				
 				function loader(urlToLoad, slotNames, callback, options) {
+					console.log('TABS: loader', callback)
 					if (!(state.retain === true
 					|| (state.retain && tool.retained[name]))
 					|| !Q.getObject([name, 'url'], tool.retained)) {
 						// use default loader
 						var _loader = loaderOptions.loader || state.loader 
 							|| Q.loadUrl.options.loader || Q.request;
+							console.log('TABS: loader: return', _loader)
 						return _loader.apply(this, arguments);
 					}
 					
@@ -314,6 +331,8 @@
 					// use default handler
 					var _handler = loaderOptions.handler || state.handler
 						|| Q.loadUrl.options.handler;
+						console.log('TABS: switchTo onactivete AFTER2', state.onActivate.keys.length)
+
 					return _handler.apply(this, arguments);
 				}
 			},
@@ -333,9 +352,17 @@
 			 * @param {String} [tab] a possible tab the caller requested to indicate as current
 			 */
 			indicateCurrent: function (tab) {
+				/*try {
+                    var err = (new Error);
+                    console.log(err.stack);
+                } catch (e) {
+
+                }*/
 				var name;
 				var tool = this;
 				var state = tool.state;
+				console.log('TABS: indicateCurrent START', tab, state.tabName);
+
 				if (typeof tab === 'string') {
 					name = tab;
 					var slashed = (name + '')
@@ -344,26 +371,36 @@
 					tab = tool.$tabs.filter('[data-name="'+slashed+'"]')[0];
 				}
 				if (!$(tool.element).closest('body').length) {
+					console.log('TABS: indicateCurrent remove onActivate');
+
 					// the replaced html probably included the tool's own element,
 					// so let's find something with the same id on the page
 					var key = Q.Tool.onActivate(tool.id).set(function () {
 						this.indicateCurrent();
+						console.log('TABS: indicateCurrent onActivate', key);
+
 						Q.Tool.onActivate(tool.id).remove(key);
 					});
 					return;
 				}
 
+				console.log('TABS: indicateCurrent 1');
 				if (state.defaultTabName != null) {
+					console.log('TABS: indicateCurrent if1');
+
 					tool.$tabs.each(function (k, t) {
 						var tdn = tool.getName(t);
 						if (state.defaultTabName === tdn) {
 							state.defaultTab = t;
+
+							console.log('TABS: indicateCurrent if1.1', state.defaultTab );
 							return false;
 						}
 					});
 				}
 
 				tab = tool.getCurrentTab(tab);
+				console.log('TABS: indicateCurrent: getCurrentTab', tab);
 
 				var $tab = $(tab);
 				tool.$tabs.removeClass('Q_current Q_tabs_switchingTo Q_tabs_switchingFrom');
@@ -384,11 +421,17 @@
 			 * @return {Element} The current tab element.
 			 */
 			getCurrentTab: function (tab) {
+				console.log('TABS: getCurrentTab START')
 				var tool = this;
 				var state = tool.state;
 				var $tabs = tool.$tabs;
 				var name = tool.getName(tab);
+				console.log('TABS: getCurrentTab name0', name)
+				console.log('TABS: getCurrentTab state.tabName', state.tabName)
+				console.log('TABS: getCurrentTab tab', tab)
 				name = name || state.tabName;
+				console.log('TABS: getCurrentTab name1', name)
+
 				var url = location.hash.queryField('url');
 				if (url === undefined) {
 					url = window.location.href.split('#')[0];
@@ -400,19 +443,29 @@
 				}
 				var defaultTab = null;
 				if (!tab) {
+					console.log('TABS: getCurrentTab if1')
+
 					$tabs.each(function (k, t) {
 						var tdn = tool.getName(t);
 						var tu = tool.getUrl(t);
+						console.log('TABS: getCurrentTab if1 for', tu, tdn)
+						console.log('TABS: getCurrentTab if1 url split', url.split('?')[0])
+
 						if ((tdn && tdn === name)
 						|| (!name && tu === url)
 						|| (!name && !state.field && tu === url.split('?')[0])) {
 							tab = t;
+							console.log('TABS: getCurrentTab if1 for tab', tab)
+
 							return false;
 						}
 						if (state.defaultTabName === tdn) {
 							defaultTab = t;
+							console.log('TABS: getCurrentTab if1 for defaultTab', defaultTab)
 						}
 					});
+
+					console.log('TABS: getCurrentTab if1 defaultTab', defaultTab)
 				}
 				if (!tab) {
 					tab = defaultTab;
@@ -456,6 +509,7 @@
 			refresh: Q.preventRecursion('Q/tabs refresh', function (callback) {
 				var tool = this;
 				var state = tool.state;
+				console.log('TABS: REFRESH')
 				var $te = $(tool.element);
 				var html, $copied;
 				var w = Math.ceil(Math.min(
@@ -466,6 +520,7 @@
 				var $o = $('.Q_tabs_overflow', $te);
 				state.tabName = null;
 				Q.handle(state.beforeRefresh, tool, [function (tabName) {
+					console.log('BEFORE REFRESH', tabName)
 					var found = false;
 					tool.$tabs.each(function () {
 						var name = $(this).attr('data-name');
@@ -648,7 +703,19 @@
 						Q.Contextual.show(Q.Contextual.current);
 					}
 				});
-			})
+			}),
+			
+	Q: {
+		beforeRemove: function () {
+			console.log("BEFORE REMOVE")
+			try {
+				var err = (new Error);
+				console.log(err.stack);
+			} catch (e) {
+
+			}
+		}
+	}
 		}
 	);
 
@@ -685,7 +752,11 @@
 			Q.Pointer.cancelClick(true, event, {});
 			var element = this;
 			setTimeout(function () {
+				console.log('TABS: switchTo  before', tool.state.onActivate.keys.length)
+
 				tool.switchTo([element.getAttribute('data-name'), element]);
+				console.log('TABS: switchTo  AFTER623',  tool.state.onActivate, tool.state.onActivate.keys.length)
+
 			}, 0);
 		}).off('click.Q_tabs_preventDefault')
 		.on('click.Q_tabs_preventDefault', function (event) {

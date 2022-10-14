@@ -1,0 +1,109 @@
+.Streams_access_tool .Q_tabs_tabs {
+	padding: 0;
+    background-color: #f8f8f8;
+}
+.Streams_access_tool .Q_tabs_tabs li.Q_tabs_tab {
+	width: auto;
+    height: auto;
+    padding: 5px 10px;
+    margin: 0;
+    background-color: none;
+}
+.Streams_access_tool .Q_tabs_tabs li.Q_tabs_tab.Q_current {
+	background-color: #e4e4e4;
+}
+.Streams_access_tool .Q_tabs_tabs li.Q_tabs_tab a {
+	color: black;
+}
+.Streams_access_tool .Q_tabs_tabs li.Q_tabs_tab a div{
+	display: flex;
+    align-items: center;
+}
+.Streams_access_tool .Q_tabbed {
+	border:0;
+}
+.Streams_access_tool .Streams_access_controls_item {
+	display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.Streams_access_tool .Streams_access_controls_item .Streams_access_controls_caption {
+	width: 55%;
+    text-align: right;
+    padding-right: 10px;
+}
+.Streams_access_tool .Streams_access_controls_item .Streams_access_controls_config {
+	flex: 1;
+}
+.Streams_access_tool .Streams_access_controls_item .Streams_access_controls_config select{
+	width: 100%;
+}
+.Streams_access_tool .Streams_access_controls_section {
+	border-top: 1px solid #ccc;
+    margin-top: 15px;
+    padding: 10px 0;
+}
+.Streams_access_tool .Streams_access_controls_section .Streams_access_controls_scaption {
+	text-align: center;
+	margin-bottom: 10px;
+}
+.Streams_access_tool .Streams_access_controls_subconfig {
+	margin-top: 10px;
+    padding: 10px;
+    background: #e4e4e4;
+    border-radius: 5px;
+}
+
+.Streams_access_tool .Streams_access_by_table {
+
+}
+.Streams_access_tool .Streams_access_by_table {
+
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item:first-child {
+    margin-top: 0;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_icon {
+    margin-right: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_text {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-basis: 45%;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_name {
+    text-align: left;
+    font-size: 13px;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_select {
+    flex: 1;
+    padding: 0 10px;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_select select{
+    width: 100%;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_remove a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_remove a {
+    color: #787777;
+    font-size: 25px;
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_remove a:hover {
+    color: #4b4b4b;
+
+}
+.Streams_access_tool .Streams_access_by_table .Streams_access_for_item .Streams_access_for_remove a:before {
+    content: '\2715';
+}
