@@ -116,7 +116,7 @@ function Assets_grant_credits_for_invited_users ($params) {
 		return;
 	}
 
-	Assets_Credits::grant($credits, "IvitedUserFilledStream", $inviteRow->invitingUserId, array(
+	Assets_Credits::grant($credits, "InvitedUserFilledStream", $inviteRow->invitingUserId, array(
 		'invitedUserName' => $invitedUser->displayName(array('asUserId' => $inviteRow->invitingUserId)),
 		'FilledStreamTitle' => $stream->title
 	));
