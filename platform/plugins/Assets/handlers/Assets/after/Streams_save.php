@@ -6,7 +6,10 @@ function Assets_after_Streams_save($params) {
 }
 
 function Assets_NF_update_attributes_relations ($params) {
-	$stream = $params['row'];
+	$stream = Q::ifset($params, 'row', null);
+	if (!$stream) {
+		return;
+	}
 
 	if (!in_array($stream->type, array("Assets/NFT", "TokenSociety/NFT"))) {
 		return;
@@ -17,7 +20,11 @@ function Assets_NF_update_attributes_relations ($params) {
 	}
 }
 function Assets_grant_credits_for_filling_personal_streams($params) {
-	$stream = $params['row'];
+	$reason = "ForFillingStream";
+	$stream = Q::ifset($params, 'row', Q::ifset($params, 'stream', null));
+	if (!$stream) {
+		return;
+	}
 
 	$allowedNames = Q_Config::get("Assets", "credits", "grant", "forStreams", null);
 	$specialFields = array(
@@ -55,13 +62,27 @@ function Assets_grant_credits_for_filling_personal_streams($params) {
 		return;
 	}
 
-	Assets_Credits::grant($credits, "ForFillingStream", $stream->publisherId, array(
+	// check if this stream already paid
+	$alreadyPaid = Assets_Credits::select()->where(array(
+		"toUserId" => $stream->publisherId,
+		"toStreamName" => $stream->name,
+		"reason" => $reason
+	))->fetchDbRow();
+	if ($alreadyPaid) {
+		return;
+	}
+
+	Assets_Credits::grant($credits, $reason, $stream->publisherId, array(
+		'toStreamName' => $stream->name,
 		'FilledStreamTitle' => $stream->title
 	));
 }
 
 function Assets_grant_credits_for_invited_users ($params) {
-	$stream = $params['row'];
+	$stream = Q::ifset($params, 'row', null);
+	if (!$stream) {
+		return;
+	}
 
 	$allowedNames = array(
 		array("name" => "Streams/user/firstName", "field" => "content"),
