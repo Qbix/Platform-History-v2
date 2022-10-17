@@ -1,11 +1,11 @@
 <?php
 function Assets_after_Streams_save($params) {
-	nft_update_attributes_relations($params);
-	grant_credits_for_filling_personal_streams($params);
-	grant_credits_for_invited_users($params);
+	Assets_NF_update_attributes_relations($params);
+	Assets_grant_credits_for_filling_personal_streams($params);
+	Assets_grant_credits_for_invited_users($params);
 }
 
-function nft_update_attributes_relations ($params) {
+function Assets_NF_update_attributes_relations ($params) {
 	$stream = $params['row'];
 
 	if (!in_array($stream->type, array("Assets/NFT", "TokenSociety/NFT"))) {
@@ -16,7 +16,7 @@ function nft_update_attributes_relations ($params) {
 		Assets_NFT::updateAttributesRelations($stream);
 	}
 }
-function grant_credits_for_filling_personal_streams($params) {
+function Assets_grant_credits_for_filling_personal_streams($params) {
 	$stream = $params['row'];
 
 	$allowedNames = Q_Config::get("Assets", "credits", "grant", "forStreams", null);
@@ -60,7 +60,7 @@ function grant_credits_for_filling_personal_streams($params) {
 	));
 }
 
-function grant_credits_for_invited_users ($params) {
+function Assets_grant_credits_for_invited_users ($params) {
 	$stream = $params['row'];
 
 	$allowedNames = array(
