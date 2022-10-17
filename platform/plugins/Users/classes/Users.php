@@ -42,11 +42,11 @@ abstract class Users extends Base_Users
 	 * @param {Boolean} [$imported=true] - If false, don't mean imported icon as custom
 	 * @return {boolean}
 	 */
-	static function isCustomIcon ($icon, $imported=true) {
+	static function isCustomIcon ($icon, $unlessImported=false) {
 		if (!$icon) {
 			return false;
 		}
-		return ($imported && strpos($icon, 'imported') !== false)
+		return (!$unlessImported && strpos($icon, 'imported') !== false)
 		|| preg_match("/\/icon\/[0-9]+/", $icon)
 		|| strpos($icon, 'invited') !== false;
 	}

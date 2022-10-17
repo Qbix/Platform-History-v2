@@ -50,7 +50,7 @@ function Assets_grant_credits_for_filling_personal_streams($params) {
 	$originalContent = Q::ifset($stream, "fieldsOriginal", $streamField, null);
 	if (
 		($stream->name != "Streams/user/icon" && !empty($originalContent))
-		|| ($stream->name == "Streams/user/icon" && Users::isCustomIcon($originalContent, false))
+		|| ($stream->name == "Streams/user/icon" && Users::isCustomIcon($originalContent, true))
 	) {
 		return;
 	}
