@@ -228,6 +228,8 @@
 					"Streams/greeting/": 10
 				},
 				"forStreams": {
+					"Streams/user/firstName": 5,
+					"Streams/user/lastName": 5,
 					"Streams/user/birthday": 1,
 					"Streams/user/icon": 5,
 					"Streams/user/gender": 1,
