@@ -602,7 +602,6 @@
 				"Streams/user/lastName",
 				"Streams/user/emailAddress",
 				"Streams/user/mobileNumber",
-				"Streams/user/birthday",
 				"Streams/user/interests",
 				"Streams/image/album"
 			],
