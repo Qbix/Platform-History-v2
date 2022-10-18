@@ -10,7 +10,7 @@
  * @method post
  * @param {array} [$params] Parameters that can come from the request
  *   @param {string} $params.publisherId  Required. The id of the user to publish the stream.
- *   @param {string} $params.type Required. The type of the stream.
+ *   @param {string} [$params.type] The type of the stream. If stream name defined will try to get type from config, otherwise type should be in request.
  *   @param {string} [$params.name] Optionally set the exact name of the stream to be created. This only works if the name of the stream is in Streams/possibleUserStreams config array, and the logged-inuser has adminLevel >= "own".
  *   @param {string} [$params.Q_Streams_related_publisherId] Optionally indicate the publisher of the stream to relate the newly created to. Used together with the related.streamName option.
  *   @param {string} [$params.Q_Streams_related_streamName] Optionally indicate the name of a stream to relate the newly crated stream to. This is often necessary in order to obtain permissions to create the stream.
@@ -37,7 +37,20 @@ function Streams_stream_post($params = array())
 		$publisherId = $_REQUEST['publisherId'] = $user->id;
 	}
 	$req = array_merge($_REQUEST, $params);
-	$type = Streams::requestedType(true);
+	$type = null;
+
+	// try to get stream type by name from config
+	if ($req['name']) {
+		$p = Streams::userStreamsTree();
+		$info = $p->get($req['name'], array());
+		$type = Q::ifset($info, "type", null);
+	}
+
+	// if type not found try to get it from $_REQUEST
+	if (!$type) {
+		$type = Streams::requestedType(true);
+	}
+
     $types = Q_Config::expect('Streams', 'types');
     if (!array_key_exists($type, $types)) {
         throw new Q_Exception("This app doesn't support streams of type $type", 'type');
@@ -81,17 +94,6 @@ function Streams_stream_post($params = array())
 		$possible = Q_Config::get('Streams', 'possibleUserStreams', $req['name'], false);
 		if (!$asOwner or !$possible) {
 			throw new Users_Exception_NotAuthorized();
-		}
-		$p = Streams::userStreamsTree();
-		if ($info = $p->get($fields['name'], array())) {
-			foreach (Base_Streams_Stream::fieldNames() as $f) {
-				if (isset($info[$f])) {
-					$stream->$f = $info[$f];
-				}
-			}
-			if (isset($info['type']) and $info['type'] !== $type) {
-				throw new Streams_Exception_Type(array('type' => $info['type']));
-			}
 		}
 	}
 	
