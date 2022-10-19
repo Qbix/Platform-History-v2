@@ -82,6 +82,7 @@
         "Amount": "Amount",
         "Description": "Description",
         "Client": "Client",
+        "User": "User",
         "To": "to",
         "From": "from",
         "SeeHistory": "See payment history for {{1}}",
