@@ -243,7 +243,7 @@ WebRTC.listen = function () {
 
         //console.log('rtmpUrl', rtmpUrl)
         //require('./WebRTC/server2clientWebRTC')(socket, io, rtmpUrl);
-        require('./WebRTC/roomManager')(socket, io);
+        if( socket.handshake.query.limitsEnabled) require('./WebRTC/roomManager')(socket, io);
 
         function processChunk(data, infoData, chunkNum, end, callback) {
             var parallelRecordings = infoData.parallelRecordings;

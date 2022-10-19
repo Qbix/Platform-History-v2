@@ -183,7 +183,7 @@
 				
 				var fromTabName = state.tabName;
 				var fromUrl = window.location.href;
-
+				var onActivate = state.onActivate
 				var o = Q.extend({
 					slotNames: slots,
 					onError: new Q.Event(function (msg) {
@@ -195,6 +195,7 @@
 					onActivate: new Q.Event(function () {
 						tool.indicateCurrent(tool.getName(tab));
 						tool.refresh();
+
 						Q.handle(state.onActivate, tool, [tab, name]);
 					}, "Q/tabs"),
 					loadExtras: true,
@@ -207,7 +208,7 @@
 				}, 10, state.loaderOptions, 10, loaderOptions);
 
 				Q.handle(href, o);
-				
+
 				function slotContainer(slotName) {
 					var container = null;
 					var selector = state.selectors[slotName];
@@ -314,6 +315,7 @@
 					// use default handler
 					var _handler = loaderOptions.handler || state.handler
 						|| Q.loadUrl.options.handler;
+
 					return _handler.apply(this, arguments);
 				}
 			},
@@ -336,6 +338,7 @@
 				var name;
 				var tool = this;
 				var state = tool.state;
+
 				if (typeof tab === 'string') {
 					name = tab;
 					var slashed = (name + '')
@@ -364,7 +367,6 @@
 				}
 
 				tab = tool.getCurrentTab(tab);
-
 				var $tab = $(tab);
 				tool.$tabs.removeClass('Q_current Q_tabs_switchingTo Q_tabs_switchingFrom');
 				$tab.addClass('Q_current');
@@ -389,6 +391,7 @@
 				var $tabs = tool.$tabs;
 				var name = tool.getName(tab);
 				name = name || state.tabName;
+
 				var url = location.hash.queryField('url');
 				if (url === undefined) {
 					url = window.location.href.split('#')[0];
@@ -403,6 +406,7 @@
 					$tabs.each(function (k, t) {
 						var tdn = tool.getName(t);
 						var tu = tool.getUrl(t);
+
 						if ((tdn && tdn === name)
 						|| (!name && tu === url)
 						|| (!name && !state.field && tu === url.split('?')[0])) {
@@ -648,7 +652,7 @@
 						Q.Contextual.show(Q.Contextual.current);
 					}
 				});
-			})
+			}),
 		}
 	);
 

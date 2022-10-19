@@ -838,6 +838,7 @@
 }
 
 /*setIdentifier dialog: set access toggle (private|public)*/
+
 #Users_setIdentifier_dialog .Users_setIdentifier_access {
 	display: flex;
 	margin: 5px 0;
@@ -845,10 +846,7 @@
 	align-items: center;
 }
 
-#Users_setIdentifier_dialog .Users_setIdentifier_access .Users_setIdentifier_access_label:last-child {
-	margin-left: 10px;
-}
-
-#Users_setIdentifier_dialog .Users_setIdentifier_access .Users_setIdentifier_access_label input[type=radio] {
-	margin-right: 5px;
+#Users_setIdentifier_dialog .Users_setIdentifier_access .Users_setIdentifier_privacy_btn {
+	display: block;
+	text-transform: capitalize;
 }

@@ -33,6 +33,10 @@ function Streams_access_put($params)
 		$stream->save();
 		return;
 	}
+	//remove fields from where clause
+	unset($access->readLevel);
+	unset($access->writeLevel);
+	unset($access->adminLevel);
 	$access->retrieve();
 	$fields = array('grantedByUserId', 'filter', 'readLevel', 'writeLevel', 'adminLevel', 'permissions');
 	foreach ($fields as $field) {
