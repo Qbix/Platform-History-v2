@@ -269,7 +269,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 		$stream = self::userStream($userId, $userId);
 		$stream->setAttribute('amount', $stream->getAttribute('amount') + $amount);
-		$stream->changed(Q::app());
+		$stream->changed(Users::currentCommunityId(true));
 
 		$fromUserId = Q::ifset($more, 'fromUserId', Q::app());
 
