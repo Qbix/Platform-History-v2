@@ -40,7 +40,7 @@ function Streams_stream_post($params = array())
 	$type = null;
 
 	// try to get stream type by name from config
-	if ($req['name']) {
+	if (!empty($req['name'])) {
 		$p = Streams::userStreamsTree();
 		$info = $p->get($req['name'], array());
 		$type = Q::ifset($info, "type", null);
