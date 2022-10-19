@@ -1,11 +1,11 @@
 <?php
 function Assets_after_Streams_save($params) {
-	Assets_NF_update_attributes_relations($params);
+	Assets_NFT_update_attributes_relations($params);
 	Assets_grant_credits_for_filling_personal_streams($params);
 	Assets_grant_credits_for_invited_users($params);
 }
 
-function Assets_NF_update_attributes_relations ($params) {
+function Assets_NFT_update_attributes_relations ($params) {
 	$stream = Q::ifset($params, 'row', null);
 	if (!$stream) {
 		return;
