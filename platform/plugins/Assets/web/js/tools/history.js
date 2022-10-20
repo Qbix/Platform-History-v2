@@ -170,7 +170,7 @@ Q.Tool.define("Assets/history", function (options) {
 
 Q.Template.set('Assets/history/credits',
 	'<table class="Assets_history" data-type="credits">' +
-	'	<thead><tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.Client}}</th><th>{{text.Description}}</th><th></th></tr></thead>' +
+	'	<thead><tr><th>{{text.Date}}</th><th>{{text.Amount}}</th><th>{{text.User}}</th><th>{{text.Description}}</th><th></th></tr></thead>' +
 	'	<tbody></tbody>' +
 	'</table>'
 );

@@ -71,7 +71,7 @@ function Assets_history_response_tool($options)
 			if ($operation) {
 				$operation = Q::interpolate($operation, @compact("amount"));
 			} else {
-				$operation = $row->reason;
+				$operation = $amount;
 			}
 
 			if ($reason = Q::ifset($texts, 'credits', $row->reason, null)) {
