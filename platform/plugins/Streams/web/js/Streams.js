@@ -1731,6 +1731,7 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         }, { method: 'post', fields: o, baseUrl: baseUrl });
     }
     function _sendBy(r, text) {
+		console.log('invite 2', o, r, text)
         // Send a request to create the actual invite
         Q.req(o.uri, ['data', 'stream'], function (err, response) {
             var msg = Q.firstErrorMessage(err, response && response.errors);
@@ -1885,28 +1886,76 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         return _request();
     }
     Q.Text.get('Streams/content', function (err, text) {
-        var options = {
-            title: o.title,
-            identifierTypes: o.identifierTypes,
-            userChooser: o.userChooser,
-            appUrl: o.appUrl
-        };
-        if(o.templateName) {
-            options.templateName = o.templateName;
-        }
-        Streams.Dialogs.invite(publisherId, streamName, function (r) {
-            if (Q.isEmpty(r)) {
-				return;
+		var showInviteDialog = function() {
+			var options = {
+				title: o.title,
+				identifierTypes: o.identifierTypes,
+				userChooser: o.userChooser,
+				appUrl: o.appUrl
+			};
+			if(o.templateName) {
+				options.templateName = o.templateName;
 			}
-            for (var option in r) {
-                o[option] = r[option];
-            }
-            if (r.sendBy) {
-                _sendBy(r, text);
-            } else {
-                _request();
-            }
-        }, options);
+			Streams.Dialogs.invite(publisherId, streamName, function (r) {
+				if (Q.isEmpty(r)) {
+					return;
+				}
+				for (var option in r) {
+					o[option] = r[option];
+				}
+				if (r.sendBy) {
+					_sendBy(r, text);
+				} else {
+					_request();
+				}
+			}, options);
+		}
+
+		if(!o.addLabel) {
+			var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
+			var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
+			var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+
+			Q.Dialogs.push({
+					title: 'Invited user will have next role(s)',
+					content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+						userId: Q.Users.communityId,
+						prefix: 'Users/'
+					}),
+					apply: true,
+					onActivate: function (dialog) {
+						var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+
+						if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+							return;
+						}
+
+						labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+							if ((wasSelected && !canRemoveRoles.includes(label)) || (!wasSelected && !canAddRoles.includes(label))) {
+								Q.alert('You don\'t have permissions to add users with such roles');
+								return false;
+							} 
+
+							if(!wasSelected) {
+								if(o.addLabel == null) o.addLabel = [];
+							
+								o.addLabel.push(label);
+							} else {
+								var index = o.addLabel.indexOf(label);
+								if(index != -1) {
+									o.addLabel.splice(index, 1)
+								}
+							}
+						});
+					},
+					onClose: function () {
+						showInviteDialog();
+					}
+				});
+		} else {
+			showInviteDialog();
+		}
+        
     });
     return null;
 };
@@ -4719,7 +4768,7 @@ Participant.get = function _Participant_get(publisherId, streamName, userId, cal
 		if ('userId' in userId) criteria.userId = userId.userId;
 	} else {
 		slotName = 'participant';
-		criteria = userId;
+		criteria.userId = userId;
 	}
 	var func = Streams.batchFunction(Q.baseUrl({
 		publisherId: publisherId,
