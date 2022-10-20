@@ -37,21 +37,35 @@ function Streams_stream_post($params = array())
 		$publisherId = $_REQUEST['publisherId'] = $user->id;
 	}
 	$req = array_merge($_REQUEST, $params);
-	$type = null;
+
+	// if type not found try to get it from $_REQUEST
+	$type = Streams::requestedType();
 
 	// try to get stream type by name from config
 	if (!empty($req['name'])) {
 		$p = Streams::userStreamsTree();
 		$info = $p->get($req['name'], array());
-		$type = Q::ifset($info, "type", null);
+		$mentionedType = Q::ifset($info, "type", null);
+		if (!empty($mentionedType)) {
+			if (!empty($type) and $mentionedType !== $type) {
+				throw new Streams_Exception_Type(array(
+					'expectedType' => $mentionedType,
+					'type' => $type
+				));
+			}
+
+			$type = $mentionedType;
+		}
 	}
 
-	// if type not found try to get it from $_REQUEST
-	if (!$type) {
-		$type = Streams::requestedType(true);
+	if (empty($type)) {
+		throw new Q_Exception_RequiredField(
+			array('field' => 'stream type'),
+			'streamType'
+		);
 	}
 
-    $types = Q_Config::expect('Streams', 'types');
+	$types = Q_Config::expect('Streams', 'types');
     if (!array_key_exists($type, $types)) {
         throw new Q_Exception("This app doesn't support streams of type $type", 'type');
     }
