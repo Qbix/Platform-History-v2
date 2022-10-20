@@ -92,6 +92,13 @@
                 "title": "Wallet-era birbideratzen",
                 "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
             }
+        },
+        "web3": {
+            "payload": "Hasi saioa {{host}}-n {{timestamp}} unean",
+            "alert": {
+                "title": "Wallet-era birbideratzen",
+                "content": "Elkarrizketa hau ixten duzunean, zure zorrora eramango zaitugu. Saioa hasi ondoren, itzuli orri honetara."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Zerbitzuak",
         "Faq": "Ohiko galderak",
         "WeekDays": "Aste Egunak"
+    },
+    "avatar": {
+        "Someone": "Norbait"
+    },
+    "web3": {
+        "WrongMethod": "Kontratu-metodo okerra {{methodName}}"
     }
 }

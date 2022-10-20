@@ -103,6 +103,13 @@
                 "title": "Peradresuojama į Piniginę",
                 "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
             }
+        },
+        "web3": {
+            "payload": "Prisijunkite prie {{host}} laiku {{timestamp}}",
+            "alert": {
+                "title": "Peradresuojama į Piniginę",
+                "content": "Kai uždarysite šį dialogo langą, būsite nukreipti į savo piniginę. Prisijungę grįžkite į šį puslapį."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "narys",
         "Guest": "Svečias",
         "Host": "Šeimininkas"
+    },
+    "avatar": {
+        "Someone": "kažkas"
+    },
+    "web3": {
+        "WrongMethod": "Netinkamas sutarties metodas {{methodName}}"
     }
 }

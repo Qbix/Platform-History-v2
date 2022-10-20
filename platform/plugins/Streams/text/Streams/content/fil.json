@@ -280,6 +280,9 @@
         },
         "streamingSettings": {
             "title": "Mga Setting ng Streaming"
+        },
+        "requestSpeakDialog": {
+            "msg": "Kasalukuyang {{count}} ang mga taong nagsasalita sa pulong. Gusto mo bang palitan ang isa sa mga ito pagkatapos payagan silang {{seconds}} (na) segundo na matapos magsalita?"
         }
     },
     "types": {
@@ -551,5 +554,11 @@
         "endCall": "Tapusin ang Tawag",
         "interview": "Panayam",
         "markApproved": "Naaprubahan si Mark"
+    },
+    "identifier": {
+        "private": "Pribado",
+        "public": "Pampubliko",
+        "configurationSaved": "Na-save ang configuration",
+        "error": "Nagkaproblema"
     }
 }

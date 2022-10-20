@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: هزینه پردازش شده برای {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "از پرداخت شما به {{call 'publisher.displayName'}} سپاسگزاریم",
         "SubscribedTo": "{{call 'user.displayName'}} مشترک {{plan.title}}",
-        "YouSubscribedTo": "شما مشترک {{plan.title}} شده اید"
+        "YouSubscribedTo": "شما مشترک {{plan.title}} شده اید",
+        "Assets\/credits\/alert": "شما هشدار مربوط به حساب خود را دارید"
     },
     "charge": {
         "Subject": "شما مبلغ {{displayAmount}} را از {{call 'publisher.displayName'}} توسط &quot;{1001}}&quot; دریافت می‌کنید",
@@ -21,7 +22,12 @@
         "AboutOrder": "اطلاعات در مورد سفارش",
         "PaymentMethod": "روش پرداخت",
         "ContactInfo": "اطلاعات تماس",
-        "Pay": "پرداخت"
+        "Pay": "پرداخت",
+        "PaymentSucceeded": "پرداخت با موفقیت انجام شد",
+        "PaymentProcessing.": "پرداخت شما در حال پردازش است",
+        "FailTryAgain": "پرداخت شما با موفقیت انجام نشد، لطفا دوباره امتحان کنید",
+        "SomethingWrong": "مشکلی پیش آمد",
+        "PaymentStatus": "وضعیت پرداخت"
     },
     "credits": {
         "InviteAcceptedBy": "دعوت توسط {{invitedUserName}} پذیرفته شد",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "کارت اعتباری",
         "SubscribePayment": "اشتراک پرداخت",
-        "ImmediatePayment": "پرداخت فوری"
+        "ImmediatePayment": "پرداخت فوری",
+        "ProcessingPayment": "پردازش پرداخت",
+        "SubscriptionAlreadyPaid": "این اشتراک قبلاً پرداخت شده است",
+        "SubscriptionNotActive": "این اشتراک فعال نیست",
+        "Subscribed": "مشترک شد",
+        "Unsubscribed": "لغو اشتراک",
+        "Unsubscribe": "لغو اشتراک",
+        "Subscribe": "اشتراک در",
+        "Started": "آغاز شده",
+        "EndsIn": "به پایان می رسد در",
+        "NextPay": "پرداخت بعدی",
+        "Period": "عادت زنانه",
+        "Price": "قیمت",
+        "AreYouSureUnsubscribe": "آیا مطمئنید که می خواهید اشتراک این طرح را لغو کنید؟",
+        "YouUnsubscribedFromPlan": "شما اشتراک طرح &quot;{{planTitle}}&quot; را لغو کردید. هزینه ای از شما کسر نمی شود، اما اشتراک شما تا {{endsIn}} ادامه خواهد داشت",
+        "plan": {
+            "TitlePlaceholder": "عنوان طرح",
+            "PricePlaceholder": "قیمت",
+            "DescriptionPlaceholder": "شرح طرح اشتراک",
+            "SavePlan": "ذخیره طرح",
+            "NewPlan": "طرح جدید"
+        }
     },
     "payments": {
         "infoTitle": "تنظیم اطلاعات پرداخت",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "دریافت {{amount}} اعتبار از {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "شما اعتبار کمی در حساب خود دارید. لطفا برای خرید اعتبار بیشتر به <a href='{{link}}'>این لینک<\/a> مراجعه کنید."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "مشارکت اختیاری",
         "RequiredPayment": "پرداخت مورد نیاز",
         "AreYouSureDelete": "آیا مطمئن هستید که می خواهید این سرویس را حذف کنید؟",
-        "AmountServicesRelated": "{{amount}} امکانات مربوط به این سرویس وجود دارد. آنها نیز حذف خواهند شد."
+        "AmountServicesRelated": "{{amount}} امکانات مربوط به این سرویس وجود دارد. آنها نیز حذف خواهند شد.",
+        "EditServiceTemplate": {
+            "Title": "سرویس ویرایش"
+        }
     },
     "NFT": {
         "Title": "اطلاعاتی درباره {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "گزینه ها",
             "sampleCSV": "دانلود نمونه CSV",
             "fileLabel": "آپلود صفحه گسترده:",
-            "errorsTitle": "خطاهایی رخ داده است"
+            "errorsTitle": "خطاهایی رخ داده است",
+            "importAttributes": "ویژگی های NFT را وارد کنید",
+            "displayTypeEmpty": "نوع نمایش برای &quot;{{1}}&quot; یافت نشد"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "فیلتر بر اساس نویسندگان"
             }
         },
-        "Back": "بازگشت به مجموعه"
+        "Back": "بازگشت به مجموعه",
+        "Name": "نام",
+        "EnterName": "نام را وارد کنید",
+        "EnterAuthorWallet": "کیف پول نویسنده را وارد کنید",
+        "InformationAboutTitle": "اطلاعاتی درباره {{title}} NFT",
+        "DetailedInformationAboutNFT": "اطلاعات دقیق در مورد NFT",
+        "PresaleStarts": "شروع پیش فروش 23 دسامبر",
+        "OwnerUserNotFound": "مالک این NFT در برنامه ما ثبت نشده است.",
+        "BuyNow": "هم اکنون خریداری کنید",
+        "Buy": "خرید کنید",
+        "Conversation": "گفتگو",
+        "Create": "ایجاد کردن",
+        "Author": "نویسنده",
+        "Commission": "کمیسیون",
+        "EnterCommission": "کمیسیون را وارد کنید",
+        "Actions": "اقدامات",
+        "UpdateNFT": "NFT را به روز کنید",
+        "NotOnSale": "در فروش نیست",
+        "MovieURL": "آدرس فیلم",
+        "EnterPrice": "قیمت را وارد کنید",
+        "Currency": "واحد پول",
+        "AreYouSureDeleteImage": "آیا مطمئن هستید که می خواهید تصویر را حذف کنید؟",
+        "AreYouSureDeleteVideo": "آیا مطمئن هستید که می خواهید ویدیو را حذف کنید؟",
+        "series": {
+            "Name": "نام",
+            "Icon": "آیکون",
+            "Description": "شرح",
+            "Author": "نویسنده",
+            "SelectSeries": "سریال را انتخاب کنید",
+            "Value": "ارزش",
+            "AreYouSure": "مطمئنی؟",
+            "AuthorInvalid": "آدرس نویسنده نامعتبر است!",
+            "Address": "نشانی",
+            "CoverImage": "تصویر روی جلد",
+            "UploadCoverImage": "آپلود تصویر جلد",
+            "CommissionAddressInvalid": "آدرس کمیسیون نامعتبر است",
+            "OnSale": "حراج",
+            "OffSale": "حراج",
+            "CreateSeries": "ایجاد سری",
+            "UpdateSeries": "به روز رسانی سری",
+            "SeriesInfo": "اطلاعات سری",
+            "SelectAuthor": "نویسنده را انتخاب کنید",
+            "NewItem": "سری جدید NFT",
+            "NamePlaceholder": "نام سریال را وارد کنید",
+            "DescPlaceholder": "توضیحات سری را وارد کنید",
+            "EndingIn": "پایان در"
+        },
+        "contract": {
+            "CreateContract": "قرارداد ایجاد کنید",
+            "SelectContract": "قرارداد را انتخاب کنید",
+            "CreateContractFor": "ایجاد قرارداد برای {{userName}}",
+            "ContractFor": "قرارداد برای {{userName}}",
+            "UpdateContract": "به روز رسانی قرارداد",
+            "TransferOwnership": "انتقال مالکیت",
+            "SetBaseURI": "URI پایه را تنظیم کنید",
+            "SetSuffix": "تنظیم پسوند",
+            "CurrentOwner": "صاحب فعلی",
+            "CurrentBaseURL": "BaseURL فعلی",
+            "ContractAddressAbsent": "آدرس قرارداد وجود ندارد",
+            "FactoryAddressAbsent": "آدرس کارخانه وجود ندارد",
+            "ContractName": "{{contractName}} - {{contractSymbol}} {{chainNetwork}})",
+            "TitleRequired": "عنوان مورد نیاز",
+            "SymbolRequired": "نماد مورد نیاز است",
+            "TypeContractName": "نام قرارداد",
+            "TypeContractSymbol": "نماد قرارداد (حداکثر 10 کاراکتر)"
+        },
+        "contests": {
+            "Title": "مسابقات",
+            "NewContest": "مسابقه جدید"
+        },
+        "attributes": {
+            "Title": "مدیریت ویژگی ها",
+            "Attributes": "ویژگی های",
+            "DisplayTitle": "نوع نمایش",
+            "AddDisplayType": "افزودن نوع نمایشگر جدید",
+            "NewDisplay": "نمایشگر جدید",
+            "TraitTitle": "نوع صفت",
+            "AddTraitTitle": "نوع صفت جدید را اضافه کنید",
+            "NewTrait": "نوع صفت جدید",
+            "ValueTitle": "ارزش",
+            "AddValueTitle": "ارزش جدید اضافه کنید",
+            "NewValue": "ارزش جدید",
+            "NewAttribute": "ویژگی جدید",
+            "UpdateAttributes": "به روز رسانی ویژگی ها",
+            "SaveAttributes": "ذخیره ویژگی ها"
+        },
+        "profile": {
+            "LogOut": "خروج",
+            "Title": "نمایه برای {{userName}}",
+            "Description": "جزئیات کاربر",
+            "aboutPlaceholder": "ویرایش بیو",
+            "SureLogOut": "آیا برای خارج شدن مطمئن هستید؟"
+        }
+    },
+    "errors": {
+        "Error": "خطا",
+        "WalletAbsent": "کیف پول وصل نیست",
+        "Rendering": "هنگام رندر کردن <span class='url'>{{1}}<\/span> خطاهایی وجود داشت",
+        "PriceRequired": "قیمت مورد نیاز!",
+        "NameRequired": "نام لازم است!",
+        "PriceInvalid": "قیمت نامعتبر است!",
+        "TransactionFailed": "تراکنش ناموفق بود",
+        "ChainNotSupported": "زنجیره انتخاب شده پشتیبانی نمی شود. زنجیره پشتیبانی شده: {{supportedChain}}",
+        "NeedMetaMaskConnected": "برای کار با برنامه به MetaMask متصل است",
+        "UserNotLoggedInMetaMask": "کاربر به MetaMask وارد نشده است",
+        "CurrencyNotFound": "ارز پیدا نشد",
+        "WrongChain": "این NFT تحت &quot;{{chain}}&quot; ایجاد شده است. لطفا از این زنجیره استفاده کنید"
+    },
+    "admin": {
+        "Title": "اداری دارایی ها",
+        "SubscriptionTitle": "طرح های اشتراک"
+    },
+    "billing": {
+        "Title": "صورتحساب دارایی ها",
+        "CreditsMinimum": "حداقل اعتبار",
+        "CreditsToAdd": "اعتبار برای افزودن",
+        "Save": "صرفه جویی",
+        "ThisLink": "این لینک",
+        "errors": {
+            "CreditsMinimumNegative": "حداقل اعتبار نمی تواند منفی باشد",
+            "CreditsToAddNegative": "اعتبار برای افزودن نمی تواند منفی باشد"
+        }
     }
 }

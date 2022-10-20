@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Configuració de transmissió"
+        },
+        "requestSpeakDialog": {
+            "msg": "Actualment hi ha {{count}} persones que parlen a la reunió. Vols substituir-ne un després de deixar-los {{seconds}} segons per acabar de parlar?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Finalitzar la trucada",
         "interview": "Entrevista",
         "markApproved": "Marcar aprovat"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "Públic",
+        "configurationSaved": "S&#39;ha desat la configuració",
+        "error": "Alguna cosa ha anat malament"
     }
 }

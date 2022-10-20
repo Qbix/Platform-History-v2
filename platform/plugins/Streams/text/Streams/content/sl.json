@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonferenca",
             "MeetingEnded": "Telekonferenca je končana"
+        },
+        "requestSpeakDialog": {
+            "msg": "Trenutno na sestanku govori {{count}} oseb. Ali želite zamenjati enega od njih, potem ko jim dovolite {{seconds}} sekund, da nehajo govoriti?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Končaj klic",
         "interview": "Intervju",
         "markApproved": "Označi odobreno"
+    },
+    "identifier": {
+        "private": "Zasebno",
+        "public": "Javno",
+        "configurationSaved": "Konfiguracija shranjena",
+        "error": "Nekaj je šlo narobe"
     }
 }

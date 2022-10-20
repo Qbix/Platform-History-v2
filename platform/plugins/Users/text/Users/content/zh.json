@@ -92,6 +92,13 @@
                 "title": "重定向到钱包",
                 "content": "关闭此对话框后，您将被带到您的钱包。登录后，返回此页面。"
             }
+        },
+        "web3": {
+            "payload": "在 {{timestamp}} 时间登录 {{host}}",
+            "alert": {
+                "title": "重定向到钱包",
+                "content": "关闭此对话框后，您将被带到您的钱包。登录后，返回此页面。"
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "服务",
         "Faq": "常问问题",
         "WeekDays": "工作日"
+    },
+    "avatar": {
+        "Someone": "某人"
+    },
+    "web3": {
+        "WrongMethod": "错误的合约方法 {{methodName}}"
     }
 }

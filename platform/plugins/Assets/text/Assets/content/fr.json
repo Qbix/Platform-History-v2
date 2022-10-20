@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}} : débit traité pour {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Merci pour votre paiement à {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abonné à {{plan.title}}",
-        "YouSubscribedTo": "Vous avez été abonné à {{plan.title}}"
+        "YouSubscribedTo": "Vous avez été abonné à {{plan.title}}",
+        "Assets\/credits\/alert": "Vous avez une alerte liée à votre compte"
     },
     "charge": {
         "Subject": "Vous recevez un paiement de {{displayAmount}} de {{call 'publisher.displayName'}} par &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Infos sur la commande",
         "PaymentMethod": "Mode de paiement",
         "ContactInfo": "Informations de contact",
-        "Pay": "Payer"
+        "Pay": "Payer",
+        "PaymentSucceeded": "Paiement réussi",
+        "PaymentProcessing.": "Votre paiement est en cours de traitement",
+        "FailTryAgain": "Votre paiement n&#39;a pas abouti, veuillez réessayer",
+        "SomethingWrong": "Quelque chose s&#39;est mal passé",
+        "PaymentStatus": "Statut de paiement"
     },
     "credits": {
         "InviteAcceptedBy": "Invitation acceptée par {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "carte de crédit ou de débit",
         "SubscribePayment": "S&#39;abonner Paiement",
-        "ImmediatePayment": "Paiement immédiat"
+        "ImmediatePayment": "Paiement immédiat",
+        "ProcessingPayment": "Traitement du paiement",
+        "SubscriptionAlreadyPaid": "Cet abonnement déjà payé",
+        "SubscriptionNotActive": "Cet abonnement n&#39;est pas actif",
+        "Subscribed": "Abonné",
+        "Unsubscribed": "Désabonné",
+        "Unsubscribe": "Se désabonner",
+        "Subscribe": "S&#39;abonner",
+        "Started": "A débuté",
+        "EndsIn": "Fini dans",
+        "NextPay": "Prochain paiement",
+        "Period": "Période",
+        "Price": "Prix",
+        "AreYouSureUnsubscribe": "Êtes-vous sûr de vouloir vous désabonner de ce forfait ?",
+        "YouUnsubscribedFromPlan": "Vous vous êtes désabonné du forfait &quot;{{planTitle}}&quot;. Vous ne serez pas facturé, mais votre abonnement se poursuivra jusqu&#39;au {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "titre du plan",
+            "PricePlaceholder": "le prix",
+            "DescriptionPlaceholder": "descriptif de l&#39;abonnement",
+            "SavePlan": "Enregistrer le forfait",
+            "NewPlan": "Nouveau plan"
+        }
     },
     "payments": {
         "infoTitle": "Définir les informations de paiement",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "A reçu {{amount}} crédits de {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Vous avez peu de crédits sur votre compte. Veuillez visiter <a href='{{link}}'>ce lien<\/a> pour acheter plus de crédits."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Cotisation facultative",
         "RequiredPayment": "Paiement requis",
         "AreYouSureDelete": "Voulez-vous vraiment supprimer ce service ?",
-        "AmountServicesRelated": "Il y a {{amount}} disponibilités liées à ce service. Ils seront également supprimés."
+        "AmountServicesRelated": "Il y a {{amount}} disponibilités liées à ce service. Ils seront également supprimés.",
+        "EditServiceTemplate": {
+            "Title": "Modifier le service"
+        }
     },
     "NFT": {
         "Title": "Informations sur {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Choix",
             "sampleCSV": "Télécharger un exemple de CSV",
             "fileLabel": "Télécharger la feuille de calcul :",
-            "errorsTitle": "Des erreurs se sont produites"
+            "errorsTitle": "Des erreurs se sont produites",
+            "importAttributes": "Importer des attributs NFT",
+            "displayTypeEmpty": "Type d&#39;affichage pour &quot;{{1}}&quot; introuvable"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Filtrer par auteurs"
             }
         },
-        "Back": "Retour à Collection"
+        "Back": "Retour à Collection",
+        "Name": "Nom",
+        "EnterName": "Entrez le nom",
+        "EnterAuthorWallet": "Entrez le portefeuille de l&#39;auteur",
+        "InformationAboutTitle": "Informations sur {{title}} NFT",
+        "DetailedInformationAboutNFT": "Informations détaillées sur NFT",
+        "PresaleStarts": "La prévente commence le 23 décembre",
+        "OwnerUserNotFound": "Le propriétaire de ce NFT n&#39;est pas enregistré dans notre application.",
+        "BuyNow": "Acheter maintenant",
+        "Buy": "Acheter",
+        "Conversation": "Conversation",
+        "Create": "Créer",
+        "Author": "Auteur",
+        "Commission": "Commission",
+        "EnterCommission": "Entrez la commission",
+        "Actions": "Actions",
+        "UpdateNFT": "Mettre à jour NFT",
+        "NotOnSale": "Pas en vente",
+        "MovieURL": "URL du film",
+        "EnterPrice": "Entrez le prix",
+        "Currency": "Devise",
+        "AreYouSureDeleteImage": "Voulez-vous vraiment supprimer l&#39;image ?",
+        "AreYouSureDeleteVideo": "Voulez-vous vraiment supprimer la vidéo ?",
+        "series": {
+            "Name": "Nom",
+            "Icon": "Icône",
+            "Description": "La description",
+            "Author": "Auteur",
+            "SelectSeries": "Sélectionnez la série",
+            "Value": "Évaluer",
+            "AreYouSure": "Êtes-vous sûr?",
+            "AuthorInvalid": "Adresse de l&#39;auteur invalide !",
+            "Address": "Adresse",
+            "CoverImage": "Image de couverture",
+            "UploadCoverImage": "Télécharger l&#39;image de couverture",
+            "CommissionAddressInvalid": "Adresse de commission invalide",
+            "OnSale": "en soldes",
+            "OffSale": "hors vente",
+            "CreateSeries": "Créer une série",
+            "UpdateSeries": "Mettre à jour la série",
+            "SeriesInfo": "Informations sur la série",
+            "SelectAuthor": "Sélectionnez l&#39;auteur",
+            "NewItem": "Nouvelle série NFT",
+            "NamePlaceholder": "Entrez le nom de la série",
+            "DescPlaceholder": "Entrez la description de la série",
+            "EndingIn": "Se terminant en"
+        },
+        "contract": {
+            "CreateContract": "Créer un contrat",
+            "SelectContract": "Sélectionnez un contrat",
+            "CreateContractFor": "Créer un contrat pour {{userName}}",
+            "ContractFor": "Contrat pour {{userName}}",
+            "UpdateContract": "Mettre à jour le contrat",
+            "TransferOwnership": "Transfert de propriété",
+            "SetBaseURI": "Définir l&#39;URI de base",
+            "SetSuffix": "Définir le suffixe",
+            "CurrentOwner": "Propriétaire actuel",
+            "CurrentBaseURL": "URL de base actuelle",
+            "ContractAddressAbsent": "Adresse du contrat absente",
+            "FactoryAddressAbsent": "Adresse d&#39;usine absente",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Titre requis",
+            "SymbolRequired": "Symbole requis",
+            "TypeContractName": "nom du contrat",
+            "TypeContractSymbol": "symbole du contrat (max 10 caractères)"
+        },
+        "contests": {
+            "Title": "Concours",
+            "NewContest": "Nouveau Concours"
+        },
+        "attributes": {
+            "Title": "Gérer les attributs",
+            "Attributes": "Les attributs",
+            "DisplayTitle": "Type d&#39;affichage",
+            "AddDisplayType": "Ajouter un nouveau type d&#39;affichage",
+            "NewDisplay": "Nouvel affichage",
+            "TraitTitle": "Type de trait",
+            "AddTraitTitle": "Ajouter un nouveau type de trait",
+            "NewTrait": "Nouveau type de trait",
+            "ValueTitle": "Évaluer",
+            "AddValueTitle": "Ajouter une nouvelle valeur",
+            "NewValue": "Nouvelle valeur",
+            "NewAttribute": "Nouvel attribut",
+            "UpdateAttributes": "Mettre à jour les attributs",
+            "SaveAttributes": "Enregistrer les attributs"
+        },
+        "profile": {
+            "LogOut": "Se déconnecter",
+            "Title": "Profil de {{userName}}",
+            "Description": "Détails de l&#39;utilisateur",
+            "aboutPlaceholder": "Modifier la biographie",
+            "SureLogOut": "Êtes-vous sûr de vouloir vous déconnecter?"
+        }
+    },
+    "errors": {
+        "Error": "Erreur",
+        "WalletAbsent": "Le portefeuille non connecté.",
+        "Rendering": "Des erreurs se sont produites lors du rendu de <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Prix exigé !",
+        "NameRequired": "Nom (obligatoire!",
+        "PriceInvalid": "Prix invalide !",
+        "TransactionFailed": "La transaction a échoué",
+        "ChainNotSupported": "La chaîne sélectionnée n&#39;est pas prise en charge. Chaîne prise en charge : {{supportedChain}}",
+        "NeedMetaMaskConnected": "Besoin de MetaMask connecté pour travailler avec l&#39;application",
+        "UserNotLoggedInMetaMask": "L&#39;utilisateur n&#39;est pas connecté à MetaMask",
+        "CurrencyNotFound": "Devise introuvable",
+        "WrongChain": "Ce NFT créé sous &quot;{{chain}}&quot;. Veuillez utiliser cette chaîne."
+    },
+    "admin": {
+        "Title": "Actifs administratifs",
+        "SubscriptionTitle": "Formules d&#39;abonnement"
+    },
+    "billing": {
+        "Title": "Facturation des actifs",
+        "CreditsMinimum": "Crédits minimaux",
+        "CreditsToAdd": "Crédits à ajouter",
+        "Save": "sauvegarder",
+        "ThisLink": "ce lien",
+        "errors": {
+            "CreditsMinimumNegative": "Le minimum de crédits ne peut pas être négatif",
+            "CreditsToAddNegative": "Les crédits à ajouter ne peuvent pas être négatifs"
+        }
     }
 }

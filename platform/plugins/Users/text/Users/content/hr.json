@@ -92,6 +92,13 @@
                 "title": "Preusmjeravanje na Novčanik",
                 "content": "Nakon što zatvorite ovaj dijaloški okvir, bit ćete prebačeni u svoj novčanik. Nakon što se prijavite, vratite se na ovu stranicu."
             }
+        },
+        "web3": {
+            "payload": "Prijavite se u {{host}} u vrijeme {{timestamp}}",
+            "alert": {
+                "title": "Preusmjeravanje na Novčanik",
+                "content": "Nakon što zatvorite ovaj dijaloški okvir, bit ćete preusmjereni u svoj novčanik. Nakon što se prijavite, vratite se na ovu stranicu."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Usluge",
         "Faq": "Pitanja",
         "WeekDays": "Dani u tjednu"
+    },
+    "avatar": {
+        "Someone": "netko"
+    },
+    "web3": {
+        "WrongMethod": "Pogrešna metoda ugovora {{methodName}}"
     }
 }

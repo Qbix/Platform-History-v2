@@ -92,6 +92,13 @@
                 "title": "Omleiden naar Wallet",
                 "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Nadat u zich heeft aangemeld, keert u terug naar deze pagina."
             }
+        },
+        "web3": {
+            "payload": "Log in op {{host}} op tijdstip {{timestamp}}",
+            "alert": {
+                "title": "Omleiden naar Wallet",
+                "content": "Zodra u dit dialoogvenster sluit, wordt u naar uw portemonnee geleid. Ga na het inloggen terug naar deze pagina."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Diensten",
         "Faq": "FAQ",
         "WeekDays": "Doordeweekse dagen"
+    },
+    "avatar": {
+        "Someone": "Iemand"
+    },
+    "web3": {
+        "WrongMethod": "Verkeerde contractmethode {{methodName}}"
     }
 }

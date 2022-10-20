@@ -103,6 +103,13 @@
                 "title": "Redirecionando para a carteira",
                 "content": "Depois de fechar esta caixa de diálogo, você será levado para sua carteira. Depois de fazer login, retorne a esta página."
             }
+        },
+        "web3": {
+            "payload": "Faça login em {{host}} no horário {{timestamp}}",
+            "alert": {
+                "title": "Redirecionando para a carteira",
+                "content": "Depois de fechar esta caixa de diálogo, você será levado para sua carteira. Depois de fazer login, retorne a esta página."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Membro",
         "Guest": "Hóspede",
         "Host": "Hospedeiro"
+    },
+    "avatar": {
+        "Someone": "Alguém"
+    },
+    "web3": {
+        "WrongMethod": "Método de contrato incorreto {{methodName}}"
     }
 }

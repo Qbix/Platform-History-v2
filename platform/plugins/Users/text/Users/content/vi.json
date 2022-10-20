@@ -103,6 +103,13 @@
                 "title": "Chuyển hướng đến Wallet",
                 "content": "Sau khi đóng hộp thoại này, bạn sẽ được chuyển đến ví của mình. Sau khi bạn đăng nhập, hãy quay lại trang này."
             }
+        },
+        "web3": {
+            "payload": "Đăng nhập vào {{host}} cùng lúc {{timestamp}}",
+            "alert": {
+                "title": "Chuyển hướng đến Wallet",
+                "content": "Sau khi đóng hộp thoại này, bạn sẽ được chuyển đến ví của mình. Sau khi bạn đăng nhập, hãy quay lại trang này."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Thành viên",
         "Guest": "Khách mời",
         "Host": "Tổ chức"
+    },
+    "avatar": {
+        "Someone": "Người nào"
+    },
+    "web3": {
+        "WrongMethod": "Phương thức hợp đồng sai {{methodName}}"
     }
 }

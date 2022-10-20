@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: החיוב בוצע עבור {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "תודה על התשלום שלך ל- {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} נרשם ל- {{plan.title}}",
-        "YouSubscribedTo": "נרשמת ל- {{plan.title}}"
+        "YouSubscribedTo": "נרשמת ל- {{plan.title}}",
+        "Assets\/credits\/alert": "יש לך התראה הקשורה לחשבון שלך"
     },
     "payment": {
         "AboutOrder": "מידע על הזמנה",
         "PaymentMethod": "אמצעי תשלום",
         "ContactInfo": "פרטים ליצירת קשר",
-        "Pay": "שלם"
+        "Pay": "שלם",
+        "PaymentSucceeded": "התשלום הצליח",
+        "PaymentProcessing.": "התשלום שלך בעיבוד",
+        "FailTryAgain": "התשלום שלך לא הצליח, אנא נסה שוב",
+        "SomethingWrong": "משהו השתבש",
+        "PaymentStatus": "מצב תשלום"
     },
     "credits": {
         "InviteAcceptedBy": "הזמן את ההזמנה על ידי {{1}}",
@@ -36,8 +42,17 @@
         "WatchClip": "הרוויחו נקודות זכות של {{amount}} לצפייה {{fromStreamTitle}}",
         "PurchaseCredits": "זיכויים לרכישה",
         "forMessages": {
-            "BoughtCredits": "זיכויים {{amount}}"
-        }
+            "BoughtCredits": "זיכויים {{amount}}",
+            "BonusCredits": "{{amount}} זיכויים"
+        },
+        "Streams_user_firstname": "{{invitedUserName}} הזין שם פרטי",
+        "Streams_user_lastname": "{{invitedUserName}} הזין שם משפחה",
+        "Streams_user_icon": "{{invitedUserName}} הוזן סמל",
+        "Places_user_location": "{{invitedUserName}} הזין מיקום",
+        "Streams_greeting": "{{invitedUserName}} הזין ברכה",
+        "CreatePaidStream": "ליצירת {{toStreamName}}",
+        "BonusCredits": "בונוס {{amount}} זיכויים",
+        "BuyBonus": "קנייה של {{amount}} זיכויים בבת אחת, תוביל לבונוס של {{bonus}} זיכויים."
     },
     "history": {
         "Date": "תאריך",
@@ -62,7 +77,18 @@
         "CreatedCommunity": "הוצא קרדיט {{amount}}",
         "BoughtCredits": "קניתי קרדיטים {{amount}}",
         "InviteAcceptedBy": "הרוויח קרדיטים {{amount}}",
-        "YouHaveCreditsToStart": "הרוויח קרדיטים {{amount}}"
+        "YouHaveCreditsToStart": "הרוויח קרדיטים {{amount}}",
+        "CreatePaidStream": "בזבז {{amount}} זיכויים",
+        "WatchClip": {
+            "+": "הרווח {{amount}} זיכויים",
+            "-": "בזבז {{amount}} זיכויים"
+        },
+        "BonusCredits": "קיבלת זיכויים של {{amount}} בונוס",
+        "Streams_user_firstname": "הרווח {{amount}} זיכויים",
+        "Streams_user_lastname": "הרווח {{amount}} זיכויים",
+        "Streams_user_icon": "הרווח {{amount}} זיכויים",
+        "Places_user_location": "הרווח {{amount}} זיכויים",
+        "Streams_greeting": "הרווח {{amount}} זיכויים"
     },
     "subscriptions": {
         "infoTitle": "הגדר פרטי תשלום",
@@ -74,7 +100,28 @@
         },
         "CreditOrDebitCard": "כרטיס אשראי או חיוב",
         "SubscribePayment": "הרשמו לתשלום",
-        "ImmediatePayment": "תשלום מיידי"
+        "ImmediatePayment": "תשלום מיידי",
+        "ProcessingPayment": "מעבד תשלום",
+        "SubscriptionAlreadyPaid": "המנוי הזה כבר שולם",
+        "SubscriptionNotActive": "מנוי זה אינו פעיל",
+        "Subscribed": "נרשם",
+        "Unsubscribed": "בוטל מנוי",
+        "Unsubscribe": "בטל את המנוי",
+        "Subscribe": "הירשם",
+        "Started": "התחיל",
+        "EndsIn": "נגמר ב",
+        "NextPay": "התשלום הבא",
+        "Period": "פרק זמן",
+        "Price": "מחיר",
+        "AreYouSureUnsubscribe": "האם אתה בטוח שברצונך לבטל את הרישום לתוכנית זו?",
+        "YouUnsubscribedFromPlan": "ביטלת את המנוי לתוכנית &quot;{{planTitle}}&quot;. לא תחויב, אבל המנוי שלך יימשך עד {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "כותרת התוכנית",
+            "PricePlaceholder": "מחיר",
+            "DescriptionPlaceholder": "תיאור תוכנית המנוי",
+            "SavePlan": "שמור תוכנית",
+            "NewPlan": "תכנית חדשה"
+        }
     },
     "payments": {
         "infoTitle": "הגדר פרטי תשלום",
@@ -123,6 +170,12 @@
         },
         "Assets\/credits\/bought": {
             "content": "קניתי קרדיטים {{amount}}"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "בונוס {{amount}} זיכויים"
+        },
+        "Assets\/credits\/alert": {
+            "content": "יש לך מעט זיכויים בחשבונך. אנא בקר <a href='{{link}}'>בקישור זה<\/a> כדי לקנות זיכויים נוספים."
         }
     },
     "charge": {
@@ -140,7 +193,8 @@
             "PricePlaceholder": "קבע מחיר",
             "LinkPlaceholder": "הגדר קישור מידע נוסף",
             "DescriptionPlaceholder": "תיאור השירות",
-            "SaveService": "שמור שירות"
+            "SaveService": "שמור שירות",
+            "SelectRequiredParticipants": "משתתפים נדרשים"
         },
         "ManageServiceTemplates": "נהל תבניות שירות",
         "ManageServices": "ניהול שירותים",
@@ -149,6 +203,218 @@
         "RequiredPayment": "תשלום נדרש",
         "AreYouSureDelete": "האם אתה בטוח שברצונך למחוק שירות זה?",
         "AmountServicesRelated": "יש {{amount}} זמינות הקשורות לשירות זה. הם גם יוסרו.",
-        "Free": "חינם"
+        "Free": "חינם",
+        "EditServiceTemplate": {
+            "Title": "ערוך שירות"
+        }
+    },
+    "errors": {
+        "Error": "שְׁגִיאָה",
+        "WalletAbsent": "הארנק לא מחובר.",
+        "Rendering": "היו שגיאות במהלך העיבוד של <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "מחיר חובה!",
+        "NameRequired": "שם (חובה!",
+        "PriceInvalid": "המחיר לא חוקי!",
+        "TransactionFailed": "העסקה נכשלה",
+        "ChainNotSupported": "השרשרת שנבחרה אינה נתמכת. שרשרת נתמכת: {{supportedChain}}",
+        "NeedMetaMaskConnected": "צריך MetaMask מחובר כדי לעבוד עם אפליקציה",
+        "UserNotLoggedInMetaMask": "המשתמש אינו מחובר ל- MetaMask",
+        "CurrencyNotFound": "המטבע לא נמצא",
+        "WrongChain": "NFT זה נוצר תחת &quot;{{chain}}&quot;. אנא השתמש בשרשרת זו."
+    },
+    "admin": {
+        "Title": "ניהול נכסים",
+        "SubscriptionTitle": "תוכניות מנוי"
+    },
+    "billing": {
+        "Title": "חיוב נכסים",
+        "CreditsMinimum": "מינימום זיכויים",
+        "CreditsToAdd": "קרדיטים להוסיף",
+        "Save": "להציל",
+        "ThisLink": "הקישור הזה",
+        "errors": {
+            "CreditsMinimumNegative": "מינימום אשראי לא יכול להיות שלילי",
+            "CreditsToAddNegative": "קרדיטים להוספה אינם יכולים להיות שליליים"
+        }
+    },
+    "NFT": {
+        "Title": "כותרת",
+        "Name": "שֵׁם",
+        "EnterName": "הכנס שם",
+        "EnterAuthorWallet": "הכנס לארנק המחבר",
+        "InformationAboutTitle": "מידע על {{title}} NFT",
+        "Description": "תיאור",
+        "DetailedInformationAboutNFT": "מידע מפורט על NFT",
+        "PresaleStarts": "המכירה המוקדמת מתחילה ב-23 בדצמבר",
+        "OwnerUserNotFound": "הבעלים של NFT זה אינו רשום באפליקציה שלנו.",
+        "BuyNow": "קנה עכשיו",
+        "Buy": "לִקְנוֹת",
+        "Conversation": "שִׂיחָה",
+        "Create": "לִיצוֹר",
+        "CurrentBid": "הצעת מחיר נוכחית",
+        "StartingIn": "מתחיל ב",
+        "EndingIn": "מסתיים ב",
+        "CreateNFT": "צור NFT",
+        "TitlePlaceholder": "תן ל-NFT שלך כותרת",
+        "DescriptionPlaceholder": "תן ל-NFT שלך תיאור",
+        "CreateYourNFT": "צור את ה-NFT שלך",
+        "Royalties": "תמלוגים",
+        "RoyaltyPlaceholder": "אופציונאלי. הסכום ששולם ליוצר לפני ההעברה.",
+        "ExpirationDate": "תאריך תפוגה",
+        "StartingDate": "תאריך התחלה",
+        "BidsBelowThisAmount": "לא תתאפשר הצעות מתחת לסכום זה",
+        "MinimumBid": "הצעת מינימום",
+        "Author": "מְחַבֵּר",
+        "Price": "מחיר",
+        "Commission": "עמלה",
+        "EnterCommission": "הזן עמלה",
+        "Owner": "בעלים",
+        "SelectCategory": "בחר קטגוריה",
+        "Day": "יְוֹם",
+        "Days": "ימים",
+        "Hour": "שָׁעָה",
+        "Hours": "שעה (ות",
+        "Minute": "דַקָה",
+        "Minutes": "דקות",
+        "Second": "שְׁנִיָה",
+        "Seconds": "שניות",
+        "SalesCreator": "מהמכירות יעברו ליוצר",
+        "Details": "פרטים",
+        "Bids": "הצעות מחיר",
+        "History": "הִיסטוֹרִיָה",
+        "LoremIpsum": "Lorem Ipsum הוא פשוט טקסט דמה של תעשיית הדפוס והקביעה.",
+        "PutOnSale": "שים למכירה",
+        "PutOffSale": "לסגת ממכירה",
+        "Transfer": "לְהַעֲבִיר",
+        "Actions": "פעולות",
+        "Update": "עדכון",
+        "UpdateToken": "עדכן אסימון",
+        "UpdateNFT": "עדכן NFT",
+        "CreateToken": "צור אסימון",
+        "PlaceBid": "הצע הצעה",
+        "SoldOut": "נמכר",
+        "NotOnSale": "לא במבצע",
+        "NftName": "שם NFT",
+        "DescribeYourNFT": "אנא תאר את ה-NFT שלך",
+        "NftPicture": "תמונה לייצג NFT",
+        "NftMovie": "סרט לייצג NFT",
+        "UploadMovie": "העלה סרט",
+        "MovieSource": "מקור הסרט",
+        "MovieURL": "כתובת האתר של הסרט",
+        "UploadFile": "לעלות קובץ",
+        "PutOnMarketplace": "שים בשוק",
+        "InstantPurchase": "הזן מחיר כדי לאפשר למשתמשים לרכוש את ה-NFT שלך באופן מיידי",
+        "FixedPrice": "מחיר קבוע",
+        "TimedAuction": "מכירה פומבית מתוזמנת",
+        "OpenForBids": "פתוח להצעות",
+        "PriceOnePiece": "הזן מחיר עבור חתיכה אחת",
+        "EnterPrice": "הזן מחיר",
+        "EnterMinimumBid": "הזן הצעת מינימום",
+        "SelectChain": "בחר שרשרת",
+        "Currency": "מַטְבֵּעַ",
+        "AreYouSureDeleteImage": "האם אתה בטוח שברצונך להסיר תמונה?",
+        "AreYouSureDeleteVideo": "האם אתה בטוח שברצונך להסיר את הסרטון?",
+        "series": {
+            "Name": "שֵׁם",
+            "Icon": "סמל",
+            "Description": "תיאור",
+            "Author": "מְחַבֵּר",
+            "SelectSeries": "בחר סדרה",
+            "Value": "ערך",
+            "AreYouSure": "האם אתה בטוח?",
+            "AuthorInvalid": "כתובת המחבר לא חוקית!",
+            "Address": "כתובת",
+            "CoverImage": "תמונת שער",
+            "UploadCoverImage": "העלה תמונת שער",
+            "CommissionAddressInvalid": "כתובת הוועדה לא חוקית",
+            "OnSale": "במבצע",
+            "OffSale": "מחוץ למכירה",
+            "CreateSeries": "צור סדרות",
+            "UpdateSeries": "עדכון סדרה",
+            "SeriesInfo": "מידע על הסדרה",
+            "SelectAuthor": "בחר מחבר",
+            "NewItem": "סדרת NFT חדשה",
+            "NamePlaceholder": "הזן את שם הסדרה",
+            "DescPlaceholder": "הזן את תיאור הסדרה",
+            "EndingIn": "מסתיים ב"
+        },
+        "contract": {
+            "CreateContract": "צור חוזה",
+            "SelectContract": "בחר חוזה",
+            "CreateContractFor": "צור חוזה עבור {{userName}}",
+            "ContractFor": "חוזה עבור {{userName}}",
+            "UpdateContract": "עדכון חוזה",
+            "TransferOwnership": "העברת בעלות",
+            "SetBaseURI": "הגדר את ה-URI הבסיסי",
+            "SetSuffix": "הגדר סיומת",
+            "CurrentOwner": "בעלים נוכחי",
+            "CurrentBaseURL": "BaseURL נוכחי",
+            "ContractAddressAbsent": "כתובת החוזה נעדרת",
+            "FactoryAddressAbsent": "כתובת המפעל נעדרת",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "נדרשת כותרת",
+            "SymbolRequired": "נדרש סמל",
+            "TypeContractName": "שם החוזה",
+            "TypeContractSymbol": "סמל חוזה (מקסימום 10 תווים)"
+        },
+        "contests": {
+            "Title": "תחרויות",
+            "NewContest": "תחרות חדשה"
+        },
+        "import": {
+            "importNFT": "ייבוא של NFT",
+            "importAttributes": "ייבוא תכונות NFT",
+            "fileNotFound": "מצטערים, קובץ CSV לא נמצא.",
+            "fileEmpty": "מצטערים, קובץ ה-CSV ריק.",
+            "userIdNotFound": "המשתמש קיים אך המזהה ריק",
+            "errorLine": "שורה {{1}}",
+            "fieldNotFound": "השדה הנדרש &quot;{{1}}&quot; לא נמצא",
+            "displayTypeEmpty": "סוג התצוגה עבור &quot;{{1}}&quot; לא נמצא",
+            "taskStreamInvalid": "זרם המשימות אינו חוקי",
+            "instructionsEmpty": "הוראות זרם המשימות ריקות",
+            "complete": "לְהַשְׁלִים",
+            "activateUsers": "לשלוח הודעת הפעלה למשתמשים?",
+            "importProgress": "התקדמות",
+            "importOptions": "אפשרויות",
+            "sampleCSV": "הורד CSV לדוגמה",
+            "fileLabel": "העלה גיליון אלקטרוני:",
+            "errorsTitle": "אירעו שגיאות"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "סינון לפי אוספי NFT",
+                "ShowNFTCollection": "הצג את אוסף NFT ב...",
+                "AllCollections": "כל האוספים"
+            },
+            "ByUser": {
+                "AllAuthors": "כל המחברים",
+                "AllUsers": "כל אחד",
+                "FilterByAuthors": "סנן לפי מחברים"
+            }
+        },
+        "Back": "חזרה לאוסף",
+        "attributes": {
+            "Title": "נהל תכונות",
+            "Attributes": "תכונות",
+            "DisplayTitle": "סוג תצוגה",
+            "AddDisplayType": "הוסף סוג תצוגה חדש",
+            "NewDisplay": "תצוגה חדשה",
+            "TraitTitle": "סוג תכונה",
+            "AddTraitTitle": "הוסף סוג תכונה חדש",
+            "NewTrait": "סוג תכונה חדש",
+            "ValueTitle": "ערך",
+            "AddValueTitle": "הוסף ערך חדש",
+            "NewValue": "ערך חדש",
+            "NewAttribute": "תכונה חדשה",
+            "UpdateAttributes": "עדכן תכונות",
+            "SaveAttributes": "שמור תכונות"
+        },
+        "profile": {
+            "LogOut": "להתנתק",
+            "Title": "פרופיל עבור {{userName}}",
+            "Description": "פרטי המשתמש",
+            "aboutPlaceholder": "ערוך ביוגרפיה",
+            "SureLogOut": "האם אתה בטוח שאתה רוצה להתנתק?"
+        }
     }
 }

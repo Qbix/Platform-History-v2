@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: تمت معالجة الرسوم بمبلغ {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "شكرًا لك على الدفع لـ {{call 'publisher.displayName'}}",
         "SubscribedTo": "اشترك {{call 'user.displayName'}} في {{plan.title}}",
-        "YouSubscribedTo": "لقد تم اشتراكك في {{plan.title}}"
+        "YouSubscribedTo": "لقد تم اشتراكك في {{plan.title}}",
+        "Assets\/credits\/alert": "لديك تنبيه متعلق بحسابك"
     },
     "payment": {
         "AboutOrder": "معلومات حول الطلب",
         "PaymentMethod": "طريقة الدفع او السداد",
         "ContactInfo": "معلومات الاتصال",
-        "Pay": "دفع"
+        "Pay": "دفع",
+        "PaymentSucceeded": "نجح الدفع",
+        "PaymentProcessing.": "دفعتك قيد المعالجة",
+        "FailTryAgain": "لم تكن عملية الدفع الخاصة بك ناجحة ، يرجى المحاولة مرة أخرى",
+        "SomethingWrong": "هناك خطأ ما",
+        "PaymentStatus": "حالة السداد"
     },
     "credits": {
         "InviteAcceptedBy": "تم قبول الدعوة بواسطة {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "بطاقة الائتمان أو الخصم",
         "SubscribePayment": "اشتراك الدفع",
-        "ImmediatePayment": "الدفع الفوري"
+        "ImmediatePayment": "الدفع الفوري",
+        "ProcessingPayment": "معالجة الدفع",
+        "SubscriptionAlreadyPaid": "هذا الاشتراك دفع بالفعل",
+        "SubscriptionNotActive": "هذا الاشتراك غير نشط",
+        "Subscribed": "مشترك",
+        "Unsubscribed": "غير مشترك",
+        "Unsubscribe": "إلغاء الاشتراك",
+        "Subscribe": "الإشتراك",
+        "Started": "بدأت",
+        "EndsIn": "ينتهي بـ",
+        "NextPay": "الدفعة التالية",
+        "Period": "فترة",
+        "Price": "سعر",
+        "AreYouSureUnsubscribe": "هل أنت متأكد أنك تريد إلغاء الاشتراك في هذه الخطة؟",
+        "YouUnsubscribedFromPlan": "لقد ألغيت اشتراكك في خطة &quot;{{planTitle}}&quot;. لن يتم تحصيل الرسوم منك ، ولكن اشتراكك سيستمر حتى {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "عنوان الخطة",
+            "PricePlaceholder": "سعر",
+            "DescriptionPlaceholder": "وصف خطة الاشتراك",
+            "SavePlan": "حفظ الخطة",
+            "NewPlan": "خطة جديدة"
+        }
     },
     "payments": {
         "infoTitle": "تعيين معلومات الدفع",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "ائتمانات منحة {{amount}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "لديك ائتمانات قليلة في حسابك. يرجى زيارة <a href='{{link}}'>هذا الرابط<\/a> لشراء المزيد من الاعتمادات."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "الدفع المطلوب",
         "AreYouSureDelete": "هل أنت متأكد أنك تريد حذف هذه الخدمة؟",
         "AmountServicesRelated": "هناك {{amount}} توافر متعلق بهذه الخدمة. هم أيضا سيتم إزالتها.",
-        "Free": "حر"
+        "Free": "حر",
+        "EditServiceTemplate": {
+            "Title": "تحرير الخدمة"
+        }
     },
     "NFT": {
         "Title": "معلومات حول {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "خيارات",
             "sampleCSV": "تنزيل نموذج CSV",
             "fileLabel": "تحميل جدول البيانات:",
-            "errorsTitle": "حدثت أخطاء"
+            "errorsTitle": "حدثت أخطاء",
+            "importAttributes": "سمات استيراد NFT",
+            "displayTypeEmpty": "نوع العرض لـ &quot;{{1}}&quot; غير موجود"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "تصفية حسب المؤلفين"
             }
         },
-        "Back": "رجوع إلى المجموعة"
+        "Back": "رجوع إلى المجموعة",
+        "Name": "اسم",
+        "EnterName": "أدخل الاسم",
+        "EnterAuthorWallet": "أدخل محفظة المؤلف",
+        "InformationAboutTitle": "معلومات حول {{title}} NFT",
+        "DetailedInformationAboutNFT": "معلومات مفصلة حول NFT",
+        "PresaleStarts": "يبدأ البيع المسبق في 23 ديسمبر",
+        "OwnerUserNotFound": "لم يتم تسجيل مالك NFT هذا في تطبيقنا.",
+        "BuyNow": "اشتري الآن",
+        "Buy": "يشتري",
+        "Conversation": "محادثة",
+        "Create": "خلق",
+        "Author": "مؤلف",
+        "Commission": "عمولة",
+        "EnterCommission": "أدخل العمولة",
+        "Actions": "أجراءات",
+        "UpdateNFT": "تحديث NFT",
+        "NotOnSale": "ليس للبيع",
+        "MovieURL": "رابط الفيلم",
+        "EnterPrice": "أدخل السعر",
+        "Currency": "عملة",
+        "AreYouSureDeleteImage": "هل أنت متأكد أنك تريد إزالة الصورة؟",
+        "AreYouSureDeleteVideo": "هل أنت متأكد أنك تريد إزالة الفيديو؟",
+        "series": {
+            "Name": "اسم",
+            "Icon": "أيقونة",
+            "Description": "وصف",
+            "Author": "مؤلف",
+            "SelectSeries": "حدد سلسلة",
+            "Value": "قيمة",
+            "AreYouSure": "هل أنت واثق؟",
+            "AuthorInvalid": "عنوان المؤلف غير صحيح!",
+            "Address": "تبوك",
+            "CoverImage": "صورة الغلاف",
+            "UploadCoverImage": "تحميل صورة الغلاف",
+            "CommissionAddressInvalid": "عنوان العمولة غير صحيح",
+            "OnSale": "للبيع",
+            "OffSale": "بيع",
+            "CreateSeries": "إنشاء سلسلة",
+            "UpdateSeries": "سلسلة التحديث",
+            "SeriesInfo": "معلومات السلسلة",
+            "SelectAuthor": "حدد المؤلف",
+            "NewItem": "سلسلة NFT الجديدة",
+            "NamePlaceholder": "أدخل اسم السلسلة",
+            "DescPlaceholder": "أدخل وصف المسلسل",
+            "EndingIn": "تنتهي في"
+        },
+        "contract": {
+            "CreateContract": "إنشاء عقد",
+            "SelectContract": "حدد العقد",
+            "CreateContractFor": "إنشاء عقد لـ {{userName}}",
+            "ContractFor": "عقد بقيمة {{userName}}",
+            "UpdateContract": "تحديث العقد",
+            "TransferOwnership": "نقل الملكية",
+            "SetBaseURI": "تعيين Base URI",
+            "SetSuffix": "تعيين اللاحقة",
+            "CurrentOwner": "المالك الحالي",
+            "CurrentBaseURL": "BaseURL الحالي",
+            "ContractAddressAbsent": "عنوان العقد غائب",
+            "FactoryAddressAbsent": "عنوان المصنع غائب",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "العنوان مطلوب",
+            "SymbolRequired": "الرمز مطلوب",
+            "TypeContractName": "اسم العقد",
+            "TypeContractSymbol": "رمز العقد (بحد أقصى 10 أحرف)"
+        },
+        "contests": {
+            "Title": "مسابقات",
+            "NewContest": "مسابقة جديدة"
+        },
+        "attributes": {
+            "Title": "إدارة السمات",
+            "Attributes": "صفات",
+            "DisplayTitle": "نوع العرض",
+            "AddDisplayType": "أضف نوع عرض جديد",
+            "NewDisplay": "شاشة جديدة",
+            "TraitTitle": "نوع السمة",
+            "AddTraitTitle": "أضف نوع سمة جديدًا",
+            "NewTrait": "نوع سمة جديد",
+            "ValueTitle": "قيمة",
+            "AddValueTitle": "أضف قيمة جديدة",
+            "NewValue": "قيمة جديدة",
+            "NewAttribute": "السمة الجديدة",
+            "UpdateAttributes": "تحديث السمات",
+            "SaveAttributes": "حفظ السمات"
+        },
+        "profile": {
+            "LogOut": "تسجيل خروج",
+            "Title": "ملف تعريف لـ {{userName}}",
+            "Description": "بيانات المستخدم",
+            "aboutPlaceholder": "تحرير السيرة الذاتية",
+            "SureLogOut": "هل أنت متأكد أنك تريد تسجيل الخروج؟"
+        }
+    },
+    "errors": {
+        "Error": "خطأ",
+        "WalletAbsent": "المحفظة غير متصلة.",
+        "Rendering": "حدثت أخطاء أثناء عرض <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "السعر مطلوب!",
+        "NameRequired": "الاسم مطلوب!",
+        "PriceInvalid": "السعر غير صالح!",
+        "TransactionFailed": "فشل الاجراء",
+        "ChainNotSupported": "السلسلة المحددة غير مدعومة. السلسلة المدعومة: {{supportedChain}}",
+        "NeedMetaMaskConnected": "تحتاج إلى توصيل MetaMask للعمل مع التطبيق",
+        "UserNotLoggedInMetaMask": "لم يقم المستخدم بتسجيل الدخول إلى MetaMask",
+        "CurrencyNotFound": "العملة غير موجودة",
+        "WrongChain": "تم إنشاء NFT هذا تحت عنوان &quot;{{chain}}&quot;. الرجاء استخدام هذه السلسلة."
+    },
+    "admin": {
+        "Title": "الأصول الإدارية",
+        "SubscriptionTitle": "خطط الاشتراك"
+    },
+    "billing": {
+        "Title": "فواتير الأصول",
+        "CreditsMinimum": "الحد الأدنى من الاعتمادات",
+        "CreditsToAdd": "الاعتمادات لإضافتها",
+        "Save": "يحفظ",
+        "ThisLink": "هذا الرابط",
+        "errors": {
+            "CreditsMinimumNegative": "لا يمكن أن يكون الحد الأدنى للاعتمادات سالبًا",
+            "CreditsToAddNegative": "لا يمكن أن تكون الائتمانات المراد إضافتها سالبة"
+        }
     }
 }

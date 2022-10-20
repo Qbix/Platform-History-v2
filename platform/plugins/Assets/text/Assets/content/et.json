@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tasu töödeldud summas {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Täname teid makse eest: {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} tellis {{plan.title}}",
-        "YouSubscribedTo": "Olete tellinud {{plan.title}}"
+        "YouSubscribedTo": "Olete tellinud {{plan.title}}",
+        "Assets\/credits\/alert": "Teil on teie kontoga seotud hoiatus"
     },
     "charge": {
         "Subject": "Saate makse summas {{displayAmount}} kasutajalt {{call 'publisher.displayName'}}, saatja &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Info tellimuse kohta",
         "PaymentMethod": "Makseviis",
         "ContactInfo": "Kontaktinfo",
-        "Pay": "Maksma"
+        "Pay": "Maksma",
+        "PaymentSucceeded": "Maksmine õnnestus",
+        "PaymentProcessing.": "Teie makset töödeldakse",
+        "FailTryAgain": "Teie makse ei õnnestunud, proovige uuesti",
+        "SomethingWrong": "Midagi läks valesti",
+        "PaymentStatus": "Makse staatus"
     },
     "credits": {
         "InviteAcceptedBy": "Kutse võttis vastu {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Krediit- või deebetkaart",
         "SubscribePayment": "Telli makse",
-        "ImmediatePayment": "Kohene makse"
+        "ImmediatePayment": "Kohene makse",
+        "ProcessingPayment": "Makse töötlemine",
+        "SubscriptionAlreadyPaid": "See tellimus on juba tasutud",
+        "SubscriptionNotActive": "See tellimus ei ole aktiivne",
+        "Subscribed": "Tellitud",
+        "Unsubscribed": "Tellimus on tühistatud",
+        "Unsubscribe": "Loobu tellimusest",
+        "Subscribe": "Telli",
+        "Started": "Alustatud",
+        "EndsIn": "Lõpeb sisse",
+        "NextPay": "Järgmine makse",
+        "Period": "Periood",
+        "Price": "Hind",
+        "AreYouSureUnsubscribe": "Kas olete kindel, et soovite selle plaani tellimusest loobuda?",
+        "YouUnsubscribedFromPlan": "Tühistasite plaani &quot;{{planTitle}}&quot; tellimuse. Teilt ei võeta tasu, kuid teie tellimus kehtib kuni {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "plaani pealkiri",
+            "PricePlaceholder": "hind",
+            "DescriptionPlaceholder": "liitumisplaani kirjeldus",
+            "SavePlan": "Salvesta plaan",
+            "NewPlan": "Uus plaan"
+        }
     },
     "payments": {
         "infoTitle": "Määra makseteave",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Sai {{amount}} krediiti kasutajalt {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Teie kontol on vähe krediiti. Lisakrediidi ostmiseks külastage <a href='{{link}}'>seda linki<\/a> ."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Valikuline panus",
         "RequiredPayment": "Nõutav makse",
         "AreYouSureDelete": "Kas olete kindel, et soovite selle teenuse kustutada?",
-        "AmountServicesRelated": "Selle teenusega on seotud {{amount}} saadavust. Samuti eemaldatakse need."
+        "AmountServicesRelated": "Selle teenusega on seotud {{amount}} saadavust. Samuti eemaldatakse need.",
+        "EditServiceTemplate": {
+            "Title": "Muuda teenust"
+        }
     },
     "NFT": {
         "Title": "Teave {{title}} NFT kohta",
@@ -246,7 +279,9 @@
             "importOptions": "Valikud",
             "sampleCSV": "Laadige alla CSV näidis",
             "fileLabel": "Laadi üles arvutustabel:",
-            "errorsTitle": "Tekkisid vead"
+            "errorsTitle": "Tekkisid vead",
+            "importAttributes": "Importige NFT atribuudid",
+            "displayTypeEmpty": "„{{1}}” kuvatüüpi ei leitud"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Filtreeri autorite järgi"
             }
         },
-        "Back": "Tagasi kollektsiooni"
+        "Back": "Tagasi kollektsiooni",
+        "Name": "Nimi",
+        "EnterName": "Sisestage nimi",
+        "EnterAuthorWallet": "Sisesta autori rahakott",
+        "InformationAboutTitle": "Teave {{title}} NFT kohta",
+        "DetailedInformationAboutNFT": "Üksikasjalik teave NFT kohta",
+        "PresaleStarts": "Eelmüük algab 23. detsembril",
+        "OwnerUserNotFound": "Selle NFT omanik ei ole meie rakenduses registreeritud.",
+        "BuyNow": "Osta kohe",
+        "Buy": "Osta",
+        "Conversation": "Vestlus",
+        "Create": "Loo",
+        "Author": "Autor",
+        "Commission": "komisjon",
+        "EnterCommission": "Sisesta komisjonitasu",
+        "Actions": "Tegevused",
+        "UpdateNFT": "Värskendage NFT-d",
+        "NotOnSale": "Ei ole müügil",
+        "MovieURL": "Filmi URL",
+        "EnterPrice": "Sisesta hind",
+        "Currency": "Valuuta",
+        "AreYouSureDeleteImage": "Kas olete kindel, et soovite pildi eemaldada?",
+        "AreYouSureDeleteVideo": "Kas soovite kindlasti video eemaldada?",
+        "series": {
+            "Name": "Nimi",
+            "Icon": "Ikoon",
+            "Description": "Kirjeldus",
+            "Author": "Autor",
+            "SelectSeries": "Valige seeria",
+            "Value": "Väärtus",
+            "AreYouSure": "Oled sa kindel?",
+            "AuthorInvalid": "Autori aadress on kehtetu!",
+            "Address": "Aadress",
+            "CoverImage": "Kaanepilt",
+            "UploadCoverImage": "Laadi üles kaanepilt",
+            "CommissionAddressInvalid": "Komisjoni aadress on kehtetu",
+            "OnSale": "müügil",
+            "OffSale": "müügist maha",
+            "CreateSeries": "Loo seeria",
+            "UpdateSeries": "Värskenda seeriat",
+            "SeriesInfo": "Seeria info",
+            "SelectAuthor": "Valige autor",
+            "NewItem": "Uus NFT seeria",
+            "NamePlaceholder": "Sisestage seeria nimi",
+            "DescPlaceholder": "Sisestage seeria kirjeldus",
+            "EndingIn": "Lõpetades"
+        },
+        "contract": {
+            "CreateContract": "Loo leping",
+            "SelectContract": "Valige leping",
+            "CreateContractFor": "Loo leping {{userName}}",
+            "ContractFor": "Leping {{userName}}",
+            "UpdateContract": "Uuenda lepingut",
+            "TransferOwnership": "Omandiõiguse üleandmine",
+            "SetBaseURI": "Seadke baas-URI",
+            "SetSuffix": "Määra sufiks",
+            "CurrentOwner": "Praegune omanik",
+            "CurrentBaseURL": "Praegune BaseURL",
+            "ContractAddressAbsent": "Lepingu aadress puudub",
+            "FactoryAddressAbsent": "Tehase aadress puudub",
+            "ContractName": "{{contractName}} – {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Pealkiri on nõutav",
+            "SymbolRequired": "Nõutav sümbol",
+            "TypeContractName": "lepingu nimi",
+            "TypeContractSymbol": "lepingu sümbol (max 10 tähemärki)"
+        },
+        "contests": {
+            "Title": "Võistlused",
+            "NewContest": "Uus konkurss"
+        },
+        "attributes": {
+            "Title": "Atribuutide haldamine",
+            "Attributes": "Atribuudid",
+            "DisplayTitle": "Kuva tüüp",
+            "AddDisplayType": "Lisage uus kuvatüüp",
+            "NewDisplay": "Uus ekraan",
+            "TraitTitle": "Tunnuse tüüp",
+            "AddTraitTitle": "Lisage uus tunnuse tüüp",
+            "NewTrait": "Uus tunnuse tüüp",
+            "ValueTitle": "Väärtus",
+            "AddValueTitle": "Lisage uus väärtus",
+            "NewValue": "Uus väärtus",
+            "NewAttribute": "Uus atribuut",
+            "UpdateAttributes": "Värskenda atribuute",
+            "SaveAttributes": "Salvesta atribuudid"
+        },
+        "profile": {
+            "LogOut": "Logi välja",
+            "Title": "Profiil kasutajale {{userName}}",
+            "Description": "Kasutaja andmed",
+            "aboutPlaceholder": "Muuda Bio",
+            "SureLogOut": "Kas soovite kindlasti välja logida?"
+        }
+    },
+    "errors": {
+        "Error": "Viga",
+        "WalletAbsent": "Rahakott pole ühendatud.",
+        "Rendering": "Renderdamisel ilmnes vigu <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Hind nõutav!",
+        "NameRequired": "Nimi nõutav!",
+        "PriceInvalid": "Hind kehtetu!",
+        "TransactionFailed": "Tehing ebaõnnestus",
+        "ChainNotSupported": "Valitud ketti ei toetata. Toetatud kett: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Rakendusega töötamiseks on vaja MetaMaski ühendatud",
+        "UserNotLoggedInMetaMask": "Kasutaja ei ole MetaMaski sisse logitud",
+        "CurrencyNotFound": "Valuutat ei leitud",
+        "WrongChain": "See NFT loodi &quot;{{chain}}&quot; all. Palun kasutage seda ketti."
+    },
+    "admin": {
+        "Title": "Varade haldus",
+        "SubscriptionTitle": "Tellimisplaanid"
+    },
+    "billing": {
+        "Title": "Varade arveldamine",
+        "CreditsMinimum": "Minimaalne krediit",
+        "CreditsToAdd": "Krediidid lisada",
+        "Save": "Salvesta",
+        "ThisLink": "see link",
+        "errors": {
+            "CreditsMinimumNegative": "Krediidi miinimum ei saa olla negatiivne",
+            "CreditsToAddNegative": "Lisatavad krediitid ei saa olla negatiivsed"
+        }
     }
 }

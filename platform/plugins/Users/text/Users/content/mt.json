@@ -103,6 +103,13 @@
                 "title": "Direzzjoni mill-ġdid lejn Wallet",
                 "content": "Ladarba tagħlaq dan id-djalogu, tittieħed fil-kartiera tiegħek. Wara li tidħol, erġa&#39; lura għal din il-paġna."
             }
+        },
+        "web3": {
+            "payload": "Idħol f&#39;{{host}} fil-ħin {{timestamp}}",
+            "alert": {
+                "title": "Direzzjoni mill-ġdid lejn Wallet",
+                "content": "Ladarba tagħlaq dan id-djalogu, tittieħed fil-kartiera tiegħek. Wara li tidħol, erġa&#39; lura għal din il-paġna."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Membru",
         "Guest": "Mistieden",
         "Host": "Ospitanti"
+    },
+    "avatar": {
+        "Someone": "Xi ħadd"
+    },
+    "web3": {
+        "WrongMethod": "Metodu ta&#39; kuntratt ħażin {{methodName}}"
     }
 }

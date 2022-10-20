@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telefonkonferens",
             "MeetingEnded": "Telefonkonferensen avslutades"
+        },
+        "requestSpeakDialog": {
+            "msg": "Det är för närvarande {{count}} personer som talar i mötet. Vill du byta ut en av dem efter att ha tillåtit dem {{seconds}} sekunder att prata klart?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Avsluta samtal",
         "interview": "Intervju",
         "markApproved": "Markera godkänd"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "offentlig",
+        "configurationSaved": "Konfigurationen har sparats",
+        "error": "Något gick fel"
     }
 }

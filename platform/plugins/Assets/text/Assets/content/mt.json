@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: ħlas ipproċessat għal {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Grazzi tal-ħlas tiegħek lil {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abbonat għal {{plan.title}}",
-        "YouSubscribedTo": "Inti ġejt abbonat għal {{plan.title}}"
+        "YouSubscribedTo": "Inti ġejt abbonat għal {{plan.title}}",
+        "Assets\/credits\/alert": "Għandek twissija relatata mal-kont tiegħek"
     },
     "charge": {
         "Subject": "Ikollok ħlas ta&#39; {{displayAmount}} minn {{call 'publisher.displayName'}} minn &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Informazzjoni dwar l-ordni",
         "PaymentMethod": "Metodu ta &#39;ħlas",
         "ContactInfo": "Informazzjoni ta&#39; kuntatt",
-        "Pay": "Ħlas"
+        "Pay": "Ħlas",
+        "PaymentSucceeded": "Il-ħlas irnexxielu",
+        "PaymentProcessing.": "Il-ħlas tiegħek qed jipproċessa",
+        "FailTryAgain": "Il-ħlas tiegħek ma rnexxiex, jekk jogħġbok erġa&#39; pprova",
+        "SomethingWrong": "Xi ħaġa marret ħażin",
+        "PaymentStatus": "Status tal-ħlas"
     },
     "credits": {
         "InviteAcceptedBy": "Stedina aċċettata minn {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Karta ta&#39; kreditu jew debitu",
         "SubscribePayment": "Abbona Ħlas",
-        "ImmediatePayment": "Ħlas Immedjat"
+        "ImmediatePayment": "Ħlas Immedjat",
+        "ProcessingPayment": "Ipproċessar Ħlas",
+        "SubscriptionAlreadyPaid": "Dan l-abbonament diġà ħallas",
+        "SubscriptionNotActive": "Dan l-abbonament mhuwiex attiv",
+        "Subscribed": "Abbonat",
+        "Unsubscribed": "Mhux abbonat",
+        "Unsubscribe": "Unsubscribe",
+        "Subscribe": "Abbona",
+        "Started": "Bdiet",
+        "EndsIn": "Tispiċċa fi",
+        "NextPay": "Ħlas li jmiss",
+        "Period": "Perjodu",
+        "Price": "Prezz",
+        "AreYouSureUnsubscribe": "Int żgur li trid tneħħi l-abbonament għal dan il-pjan?",
+        "YouUnsubscribedFromPlan": "Tneħħijt l-abbonament mill-pjan &quot;{{planTitle}}&quot;. Mhux se tiċċarġja, iżda l-abbonament tiegħek se jkompli sa {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "titolu tal-pjan",
+            "PricePlaceholder": "prezz",
+            "DescriptionPlaceholder": "deskrizzjoni tal-pjan ta&#39; abbonament",
+            "SavePlan": "Ħlief Pjan",
+            "NewPlan": "Pjan Ġdid"
+        }
     },
     "payments": {
         "infoTitle": "Issettja l-Informazzjoni dwar il-Ħlas",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Irċevejt {{amount}} krediti minn {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Għandek ftit krediti fuq il-kont tiegħek. Jekk jogħġbok żur <a href='{{link}}'>din il-link<\/a> biex tixtri aktar krediti."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Kontribuzzjoni fakultattiva",
         "RequiredPayment": "Ħlas meħtieġ",
         "AreYouSureDelete": "Int żgur li trid tħassar dan is-servizz?",
-        "AmountServicesRelated": "Hemm {{amount}} disponibbiltà relatati ma&#39; dan is-servizz. Huma wkoll se jitneħħew."
+        "AmountServicesRelated": "Hemm {{amount}} disponibbiltà relatati ma&#39; dan is-servizz. Huma wkoll se jitneħħew.",
+        "EditServiceTemplate": {
+            "Title": "Editja Servizz"
+        }
     },
     "NFT": {
         "Title": "Informazzjoni dwar {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Għażliet",
             "sampleCSV": "Niżżel il-kampjun CSV",
             "fileLabel": "Ittella Spreadsheet:",
-            "errorsTitle": "Żbalji seħħew"
+            "errorsTitle": "Żbalji seħħew",
+            "importAttributes": "Importa attributi NFT",
+            "displayTypeEmpty": "Tip ta&#39; wiri għal &quot;{{1}}&quot; ma nstabx"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Iffiltra mill-Awturi"
             }
         },
-        "Back": "Lura għall-Ġbir"
+        "Back": "Lura għall-Ġbir",
+        "Name": "Isem",
+        "EnterName": "Daħħal l-isem",
+        "EnterAuthorWallet": "Daħħal il-kartiera tal-awtur",
+        "InformationAboutTitle": "Informazzjoni dwar {{title}} NFT",
+        "DetailedInformationAboutNFT": "Informazzjoni dettaljata dwar NFT",
+        "PresaleStarts": "Bejgħ minn qabel Jibda fit-23 ta’ Diċembru",
+        "OwnerUserNotFound": "Is-sid ta&#39; dan l-NFT mhuwiex irreġistrat fl-applikazzjoni tagħna.",
+        "BuyNow": "Ixtri issa",
+        "Buy": "Ixtri",
+        "Conversation": "Konversazzjoni",
+        "Create": "Oħloq",
+        "Author": "Awtur",
+        "Commission": "Kummissjoni",
+        "EnterCommission": "Daħħal kummissjoni",
+        "Actions": "Azzjonijiet",
+        "UpdateNFT": "Aġġorna l-NFT",
+        "NotOnSale": "Mhux Fuq Bejgħ",
+        "MovieURL": "URL tal-film",
+        "EnterPrice": "Daħħal il-prezz",
+        "Currency": "Munita",
+        "AreYouSureDeleteImage": "Int żgur li trid tneħħi l-immaġni?",
+        "AreYouSureDeleteVideo": "Int żgur li trid tneħħi l-vidjo?",
+        "series": {
+            "Name": "Isem",
+            "Icon": "Ikona",
+            "Description": "Deskrizzjoni",
+            "Author": "Awtur",
+            "SelectSeries": "Agħżel serje",
+            "Value": "Valur",
+            "AreYouSure": "Żgur?",
+            "AuthorInvalid": "Indirizz tal-awtur mhux validu!",
+            "Address": "Indirizz",
+            "CoverImage": "Dehra tal-qoxra",
+            "UploadCoverImage": "Ittella immaġni tal-qoxra",
+            "CommissionAddressInvalid": "Indirizz tal-Kummissjoni mhux validu",
+            "OnSale": "għall-bejgħ",
+            "OffSale": "barra mill-bejgħ",
+            "CreateSeries": "Oħloq Serje",
+            "UpdateSeries": "Serje ta&#39; Aġġornament",
+            "SeriesInfo": "Serje Info",
+            "SelectAuthor": "Agħżel l-awtur",
+            "NewItem": "Serje NFT ġdida",
+            "NamePlaceholder": "Daħħal l-isem tas-serje",
+            "DescPlaceholder": "Daħħal id-deskrizzjoni tas-serje",
+            "EndingIn": "Tispiċċa Fi"
+        },
+        "contract": {
+            "CreateContract": "Oħloq kuntratt",
+            "SelectContract": "Agħżel il-kuntratt",
+            "CreateContractFor": "Oħloq kuntratt għal {{userName}}",
+            "ContractFor": "Kuntratt għal {{userName}}",
+            "UpdateContract": "Aġġorna l-Kuntratt",
+            "TransferOwnership": "Trasferiment ta&#39; Sjieda",
+            "SetBaseURI": "Issettja l-URI tal-Bażi",
+            "SetSuffix": "Issettja Suffiss",
+            "CurrentOwner": "Sid kurrenti",
+            "CurrentBaseURL": "BaseURL kurrenti",
+            "ContractAddressAbsent": "Indirizz tal-kuntratt nieqes",
+            "FactoryAddressAbsent": "Indirizz tal-fabbrika assenti",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Titolu meħtieġ",
+            "SymbolRequired": "Simbolu meħtieġ",
+            "TypeContractName": "isem tal-kuntratt",
+            "TypeContractSymbol": "simbolu tal-kuntratt (massimu 10 karattri)"
+        },
+        "contests": {
+            "Title": "Konkorsi",
+            "NewContest": "Konkors Ġdid"
+        },
+        "attributes": {
+            "Title": "Immaniġġja Attributi",
+            "Attributes": "Attributi",
+            "DisplayTitle": "Tip ta &#39;Wiri",
+            "AddDisplayType": "Żid tip ta &#39;display ġdid",
+            "NewDisplay": "Wiri Ġdid",
+            "TraitTitle": "Tip ta&#39; Karatteristika",
+            "AddTraitTitle": "Żid tip ta&#39; karatteristika ġdida",
+            "NewTrait": "Tip ta&#39; Karatteristika Ġdid",
+            "ValueTitle": "Valur",
+            "AddValueTitle": "Żid valur ġdid",
+            "NewValue": "Valur Ġdid",
+            "NewAttribute": "Attribut Ġdid",
+            "UpdateAttributes": "Aġġorna l-Attributi",
+            "SaveAttributes": "Ħlief Attributi"
+        },
+        "profile": {
+            "LogOut": "Oħroġ",
+            "Title": "Profil għal {{userName}}",
+            "Description": "Dettalji tal-utent",
+            "aboutPlaceholder": "Edit Bio",
+            "SureLogOut": "Int żgur li trid toħroġ?"
+        }
+    },
+    "errors": {
+        "Error": "Żball",
+        "WalletAbsent": "Il-kartiera mhux konnessa.",
+        "Rendering": "Kien hemm żbalji waqt l-għoti ta&#39; <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Prezz meħtieġ!",
+        "NameRequired": "Isem meħtieġ!",
+        "PriceInvalid": "Prezz invalidu!",
+        "TransactionFailed": "Transazzjoni Falliet",
+        "ChainNotSupported": "Il-katina magħżula mhix appoġġjata. Katina appoġġjata: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Ħtieġa MetaMask konness biex taħdem ma &#39;applikazzjoni",
+        "UserNotLoggedInMetaMask": "L-utent mhux illoggjat fil-MetaMask",
+        "CurrencyNotFound": "Munita ma nstabitx",
+        "WrongChain": "Dan l-NFT maħluq taħt &quot;{{chain}}&quot;. Jekk jogħġbok uża din il-katina."
+    },
+    "admin": {
+        "Title": "Assi amministrattivi",
+        "SubscriptionTitle": "Pjanijiet ta&#39; abbonament"
+    },
+    "billing": {
+        "Title": "Kontijiet tal-assi",
+        "CreditsMinimum": "Krediti minimi",
+        "CreditsToAdd": "Krediti li jiżdiedu",
+        "Save": "Ħlief",
+        "ThisLink": "din il-link",
+        "errors": {
+            "CreditsMinimumNegative": "Krediti minimi ma jistgħux ikunu negattivi",
+            "CreditsToAddNegative": "Krediti li żżid ma jistgħux ikunu negattivi"
+        }
     }
 }

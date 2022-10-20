@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Tele konferans",
             "MeetingEnded": "telekonferans sona erdi"
+        },
+        "requestSpeakDialog": {
+            "msg": "Şu anda toplantıda konuşan {{count}} kişi var. Konuşmasını bitirmeleri için {{seconds}} saniye bekledikten sonra bunlardan birini değiştirmek istiyor musunuz?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Son Arama",
         "interview": "Röportaj yapmak",
         "markApproved": "Onaylandı Olarak İşaretle"
+    },
+    "identifier": {
+        "private": "Özel",
+        "public": "Halk",
+        "configurationSaved": "Yapılandırma kaydedildi",
+        "error": "Bir şeyler yanlış gitti"
     }
 }

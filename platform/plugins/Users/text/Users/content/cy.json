@@ -103,6 +103,13 @@
                 "title": "Ailgyfeirio i Wallet",
                 "content": "Unwaith y byddwch chi&#39;n cau&#39;r ymgom hwn, fe&#39;ch cymerir i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
             }
+        },
+        "web3": {
+            "payload": "Mewngofnodwch i {{host}} ar amser {{timestamp}}",
+            "alert": {
+                "title": "Ailgyfeirio i Wallet",
+                "content": "Unwaith y byddwch chi&#39;n cau&#39;r deialog hwn, byddwch chi&#39;n cael eich tywys i&#39;ch waled. Ar ôl i chi fewngofnodi, dychwelwch i&#39;r dudalen hon."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Aelod",
         "Guest": "Gwestai",
         "Host": "Gwesteiwr"
+    },
+    "avatar": {
+        "Someone": "Rhywun"
+    },
+    "web3": {
+        "WrongMethod": "Dull contract anghywir {{methodName}}"
     }
 }

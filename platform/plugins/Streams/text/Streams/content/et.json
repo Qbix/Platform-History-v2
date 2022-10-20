@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonverents",
             "MeetingEnded": "Telekonverents lõppes"
+        },
+        "requestSpeakDialog": {
+            "msg": "Praegu räägib koosolekul {{count}} inimest. Kas soovite ühe neist asendada pärast seda, kui olete lubanud neil {{seconds}} sekundit kõne lõpetada?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Lõpeta kõne",
         "interview": "Intervjuu",
         "markApproved": "Märgi heaks kiidetud"
+    },
+    "identifier": {
+        "private": "Privaatne",
+        "public": "Avalik",
+        "configurationSaved": "Konfiguratsioon salvestatud",
+        "error": "Midagi läks valesti"
     }
 }

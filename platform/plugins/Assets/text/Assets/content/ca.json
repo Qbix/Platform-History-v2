@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: càrrec processat per {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Gràcies pel pagament a {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} s&#39;ha subscrit a {{plan.title}}",
-        "YouSubscribedTo": "T&#39;has subscrit a {{plan.title}}"
+        "YouSubscribedTo": "T&#39;has subscrit a {{plan.title}}",
+        "Assets\/credits\/alert": "Teniu una alerta relacionada amb el vostre compte"
     },
     "payment": {
         "AboutOrder": "Informació sobre la comanda",
         "PaymentMethod": "Mètode de pagament",
         "ContactInfo": "Dades de contacte",
-        "Pay": "Pagar"
+        "Pay": "Pagar",
+        "PaymentSucceeded": "El pagament s&#39;ha realitzat correctament",
+        "PaymentProcessing.": "El teu pagament s&#39;està processant",
+        "FailTryAgain": "El vostre pagament no s&#39;ha realitzat correctament, torneu-ho a provar",
+        "SomethingWrong": "Alguna cosa ha anat malament",
+        "PaymentStatus": "Estat de pagament"
     },
     "credits": {
         "InviteAcceptedBy": "Invitació acceptada per {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Targeta de crèdit o dèbit",
         "SubscribePayment": "Pagament de subscripció",
-        "ImmediatePayment": "Pagament Immediat"
+        "ImmediatePayment": "Pagament Immediat",
+        "ProcessingPayment": "Processament de pagament",
+        "SubscriptionAlreadyPaid": "Aquesta subscripció ja s&#39;ha pagat",
+        "SubscriptionNotActive": "Aquesta subscripció no està activa",
+        "Subscribed": "Subscrit",
+        "Unsubscribed": "S&#39;ha cancel·lat la subscripció",
+        "Unsubscribe": "Cancel·la la subscripció",
+        "Subscribe": "Subscriu-te",
+        "Started": "Començat",
+        "EndsIn": "Acaba en",
+        "NextPay": "Següent pagament",
+        "Period": "Període",
+        "Price": "Preu",
+        "AreYouSureUnsubscribe": "Esteu segur que voleu cancel·lar la subscripció a aquest pla?",
+        "YouUnsubscribedFromPlan": "T&#39;has cancel·lat la subscripció al pla &quot;{{planTitle}}&quot;. No se us cobrarà, però la vostra subscripció continuarà fins al {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "títol del pla",
+            "PricePlaceholder": "preu",
+            "DescriptionPlaceholder": "descripció del pla de subscripció",
+            "SavePlan": "Desa el pla",
+            "NewPlan": "Nou Pla"
+        }
     },
     "payments": {
         "infoTitle": "Estableix la informació de pagament",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "{{amount}} crèdits addicionals"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Tens pocs crèdits al teu compte. Visiteu <a href='{{link}}'>aquest enllaç<\/a> per comprar més crèdits."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Pagament obligatori",
         "AreYouSureDelete": "Esteu segur que voleu suprimir aquest servei?",
         "AmountServicesRelated": "Hi ha {{amount}} disponibilitats relacionades amb aquest servei. També s&#39;eliminaran.",
-        "Free": "Gratuït"
+        "Free": "Gratuït",
+        "EditServiceTemplate": {
+            "Title": "Servei d&#39;edició"
+        }
     },
     "NFT": {
         "Title": "Informació sobre {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "Opcions",
             "sampleCSV": "Baixeu CSV de mostra",
             "fileLabel": "Carregueu el full de càlcul:",
-            "errorsTitle": "S&#39;han produït errors"
+            "errorsTitle": "S&#39;han produït errors",
+            "importAttributes": "Importa els atributs NFT",
+            "displayTypeEmpty": "No s&#39;ha trobat el tipus de visualització de &quot;{{1}}&quot;."
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Filtra per Autors"
             }
         },
-        "Back": "Tornar a la col·lecció"
+        "Back": "Tornar a la col·lecció",
+        "Name": "Nom",
+        "EnterName": "Introduïu el nom",
+        "EnterAuthorWallet": "Introduïu la cartera de l&#39;autor",
+        "InformationAboutTitle": "Informació sobre {{title}} NFT",
+        "DetailedInformationAboutNFT": "Informació detallada sobre NFT",
+        "PresaleStarts": "La venda anticipada comença el 23 de desembre",
+        "OwnerUserNotFound": "El propietari d&#39;aquest NFT no està registrat a la nostra aplicació.",
+        "BuyNow": "Compra ara",
+        "Buy": "Compra",
+        "Conversation": "Conversa",
+        "Create": "Crear",
+        "Author": "Autor",
+        "Commission": "Comissió",
+        "EnterCommission": "Entra comissió",
+        "Actions": "Accions",
+        "UpdateNFT": "Actualitza NFT",
+        "NotOnSale": "No a la venda",
+        "MovieURL": "URL de la pel·lícula",
+        "EnterPrice": "Introduïu el preu",
+        "Currency": "Moneda",
+        "AreYouSureDeleteImage": "Esteu segur que voleu eliminar la imatge?",
+        "AreYouSureDeleteVideo": "Confirmes que vols eliminar el vídeo?",
+        "series": {
+            "Name": "Nom",
+            "Icon": "Icona",
+            "Description": "Descripció",
+            "Author": "Autor",
+            "SelectSeries": "Seleccioneu la sèrie",
+            "Value": "Valor",
+            "AreYouSure": "Estàs segur?",
+            "AuthorInvalid": "L&#39;adreça de l&#39;autor no és vàlida!",
+            "Address": "adreça",
+            "CoverImage": "Imatge de portada",
+            "UploadCoverImage": "Carregueu la imatge de la portada",
+            "CommissionAddressInvalid": "L&#39;adreça de la comissió no és vàlida",
+            "OnSale": "en venda",
+            "OffSale": "fora de venda",
+            "CreateSeries": "Crea una sèrie",
+            "UpdateSeries": "Sèrie d&#39;actualització",
+            "SeriesInfo": "Informació de la sèrie",
+            "SelectAuthor": "Seleccioneu l&#39;autor",
+            "NewItem": "Nova sèrie NFT",
+            "NamePlaceholder": "Introduïu el nom de la sèrie",
+            "DescPlaceholder": "Introduïu la descripció de la sèrie",
+            "EndingIn": "Acaba en"
+        },
+        "contract": {
+            "CreateContract": "Crear contracte",
+            "SelectContract": "Seleccioneu contracte",
+            "CreateContractFor": "Crea un contracte per a {{userName}}",
+            "ContractFor": "Contracte per a {{userName}}",
+            "UpdateContract": "Actualització del contracte",
+            "TransferOwnership": "Transferència de la propietat",
+            "SetBaseURI": "Estableix l&#39;URI base",
+            "SetSuffix": "Estableix el sufix",
+            "CurrentOwner": "Propietari actual",
+            "CurrentBaseURL": "BaseURL actual",
+            "ContractAddressAbsent": "Adreça del contracte absent",
+            "FactoryAddressAbsent": "No hi ha adreça de fàbrica",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Títol obligatori",
+            "SymbolRequired": "Símbol obligatori",
+            "TypeContractName": "nom del contracte",
+            "TypeContractSymbol": "símbol del contracte (màxim 10 caràcters)"
+        },
+        "contests": {
+            "Title": "Concursos",
+            "NewContest": "Nou Concurs"
+        },
+        "attributes": {
+            "Title": "Gestionar els atributs",
+            "Attributes": "Atributs",
+            "DisplayTitle": "Tipus de visualització",
+            "AddDisplayType": "Afegeix un tipus de pantalla nou",
+            "NewDisplay": "Pantalla nova",
+            "TraitTitle": "Tipus de tret",
+            "AddTraitTitle": "Afegeix un tipus de tret nou",
+            "NewTrait": "Nou tipus de tret",
+            "ValueTitle": "Valor",
+            "AddValueTitle": "Afegeix un nou valor",
+            "NewValue": "Nou valor",
+            "NewAttribute": "Nou atribut",
+            "UpdateAttributes": "Actualitzar els atributs",
+            "SaveAttributes": "Guarda els atributs"
+        },
+        "profile": {
+            "LogOut": "Tancar sessió",
+            "Title": "Perfil de {{userName}}",
+            "Description": "Dades de l&#39;usuari",
+            "aboutPlaceholder": "Edita la biografia",
+            "SureLogOut": "Esteu segur que voleu tancar la sessió?"
+        }
+    },
+    "errors": {
+        "Error": "Error",
+        "WalletAbsent": "La cartera no està connectada.",
+        "Rendering": "Hi ha hagut errors en renderitzar <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Preu obligatori!",
+        "NameRequired": "Nom obligatori!",
+        "PriceInvalid": "Preu no vàlid!",
+        "TransactionFailed": "La transacció ha fallat",
+        "ChainNotSupported": "La cadena seleccionada no és compatible. Cadena compatible: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Necessites MetaMask connectat per treballar amb l&#39;aplicació",
+        "UserNotLoggedInMetaMask": "L&#39;usuari no ha iniciat sessió a MetaMask",
+        "CurrencyNotFound": "No s&#39;ha trobat la moneda",
+        "WrongChain": "Aquesta NFT creada sota &quot;{{chain}}&quot;. Si us plau, utilitzeu aquesta cadena."
+    },
+    "admin": {
+        "Title": "Administratiu patrimonial",
+        "SubscriptionTitle": "Plans de subscripció"
+    },
+    "billing": {
+        "Title": "Facturació d&#39;actius",
+        "CreditsMinimum": "Crèdits mínims",
+        "CreditsToAdd": "Crèdits per afegir",
+        "Save": "Desa",
+        "ThisLink": "aquest enllaç",
+        "errors": {
+            "CreditsMinimumNegative": "Els crèdits mínims no poden ser negatius",
+            "CreditsToAddNegative": "Els crèdits per afegir no poden ser negatius"
+        }
     }
 }

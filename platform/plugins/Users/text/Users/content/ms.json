@@ -103,6 +103,13 @@
                 "title": "Mengubah hala ke Wallet",
                 "content": "Sebaik sahaja anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
             }
+        },
+        "web3": {
+            "payload": "Log masuk ke {{host}} pada masa {{timestamp}}",
+            "alert": {
+                "title": "Mengubah hala ke Wallet",
+                "content": "Sebaik sahaja anda menutup dialog ini, anda akan dibawa ke dompet anda. Selepas anda log masuk, kembali ke halaman ini."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Ahli",
         "Guest": "tetamu",
         "Host": "hos"
+    },
+    "avatar": {
+        "Someone": "Seseorang"
+    },
+    "web3": {
+        "WrongMethod": "Kaedah kontrak yang salah {{methodName}}"
     }
 }

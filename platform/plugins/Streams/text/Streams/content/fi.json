@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Puhelinkonferenssi",
             "MeetingEnded": "Puhelinkonferenssi päättyi"
+        },
+        "requestSpeakDialog": {
+            "msg": "Tällä hetkellä kokouksessa puhuu {{count}} henkilöä. Haluatko korvata yhden niistä, kun olet antanut heille {{seconds}} sekuntia puhua loppuun?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Lopeta puhelu",
         "interview": "Haastatella",
         "markApproved": "Merkitse Hyväksytty"
+    },
+    "identifier": {
+        "private": "Yksityinen",
+        "public": "Julkinen",
+        "configurationSaved": "Kokoonpano tallennettu",
+        "error": "Jotain meni pieleen"
     }
 }

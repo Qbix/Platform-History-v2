@@ -3065,10 +3065,8 @@ Q.firstErrorMessage = function _Q_firstErrorMessage(data /*, data2, ... */) {
 			error = d.errors[0];
 		} else if (d.error) {
 			error = d.error;
-		} else if (Q.isArrayLike(d)) {
-			error = d[0];
 		} else if (!i) {
-			error = d;
+			error = Q.isArrayLike(d) ? d[0] : d;
 		}
 		if (error) {
 			break;

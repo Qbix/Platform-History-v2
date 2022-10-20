@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Teleconferência",
             "MeetingEnded": "Teleconferência encerrada"
+        },
+        "requestSpeakDialog": {
+            "msg": "Atualmente, há {{count}} pessoas falando na reunião. Você quer substituir um deles depois de permitir que ele {{seconds}} segundos para terminar de falar?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Terminar chamada",
         "interview": "Entrevista",
         "markApproved": "Marca aprovada"
+    },
+    "identifier": {
+        "private": "Privado",
+        "public": "Público",
+        "configurationSaved": "Configuração salva",
+        "error": "Algo deu errado"
     }
 }

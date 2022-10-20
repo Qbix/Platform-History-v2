@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tagihan diproses untuk {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Terima kasih atas pembayaran Anda ke {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} berlangganan {{plan.title}}",
-        "YouSubscribedTo": "Anda telah berlangganan {{plan.title}}"
+        "YouSubscribedTo": "Anda telah berlangganan {{plan.title}}",
+        "Assets\/credits\/alert": "Anda memiliki peringatan yang terkait dengan akun Anda"
     },
     "payment": {
         "AboutOrder": "Info tentang pesanan",
         "PaymentMethod": "Cara Pembayaran",
         "ContactInfo": "Info kontak",
-        "Pay": "Membayar"
+        "Pay": "Membayar",
+        "PaymentSucceeded": "Pembayaran berhasil",
+        "PaymentProcessing.": "Pembayaran Anda sedang diproses",
+        "FailTryAgain": "Pembayaran Anda tidak berhasil, silakan coba lagi",
+        "SomethingWrong": "Ada yang salah",
+        "PaymentStatus": "Status pembayaran"
     },
     "credits": {
         "InviteAcceptedBy": "Undangan diterima oleh {{1}}",
@@ -36,8 +42,17 @@
         "WatchClip": "Memperoleh kredit {{amount}} karena menonton {{fromStreamTitle}}",
         "PurchaseCredits": "Beli Kredit",
         "forMessages": {
-            "BoughtCredits": "{{amount}} kredit"
-        }
+            "BoughtCredits": "{{amount}} kredit",
+            "BonusCredits": "{{amount}} kredit"
+        },
+        "Streams_user_firstname": "{{invitedUserName}} memasukkan nama depan",
+        "Streams_user_lastname": "{{invitedUserName}} memasukkan nama belakang",
+        "Streams_user_icon": "{{invitedUserName}} memasukkan ikon",
+        "Places_user_location": "{{invitedUserName}} memasukkan lokasi",
+        "Streams_greeting": "{{invitedUserName}} memasukkan salam",
+        "CreatePaidStream": "untuk membuat {{toStreamName}}",
+        "BonusCredits": "Bonus {{amount}} kredit",
+        "BuyBonus": "Membeli {{amount}} kredit sekaligus, akan menghasilkan {{bonus}} bonus kredit."
     },
     "history": {
         "Date": "Tanggal",
@@ -62,7 +77,18 @@
         "CreatedCommunity": "Menghabiskan {{amount}} kredit",
         "BoughtCredits": "Membeli {{amount}} kredit",
         "InviteAcceptedBy": "Kredit {{amount}} yang diperoleh",
-        "YouHaveCreditsToStart": "Kredit {{amount}} yang diperoleh"
+        "YouHaveCreditsToStart": "Kredit {{amount}} yang diperoleh",
+        "CreatePaidStream": "Menghabiskan {{amount}} kredit",
+        "WatchClip": {
+            "+": "Memperoleh {{amount}} kredit",
+            "-": "Menghabiskan {{amount}} kredit"
+        },
+        "BonusCredits": "Mendapat bonus {{amount}} kredit",
+        "Streams_user_firstname": "Memperoleh {{amount}} kredit",
+        "Streams_user_lastname": "Memperoleh {{amount}} kredit",
+        "Streams_user_icon": "Memperoleh {{amount}} kredit",
+        "Places_user_location": "Memperoleh {{amount}} kredit",
+        "Streams_greeting": "Memperoleh {{amount}} kredit"
     },
     "subscriptions": {
         "infoTitle": "Tetapkan Informasi Pembayaran",
@@ -74,7 +100,28 @@
         },
         "CreditOrDebitCard": "Kartu kredit atau debit",
         "SubscribePayment": "Berlangganan Pembayaran",
-        "ImmediatePayment": "Pembayaran langsung"
+        "ImmediatePayment": "Pembayaran langsung",
+        "ProcessingPayment": "Memproses Pembayaran",
+        "SubscriptionAlreadyPaid": "Langganan ini sudah dibayar",
+        "SubscriptionNotActive": "Langganan ini tidak aktif",
+        "Subscribed": "Berlangganan",
+        "Unsubscribed": "Tidak berlangganan",
+        "Unsubscribe": "Berhenti berlangganan",
+        "Subscribe": "Langganan",
+        "Started": "Dimulai",
+        "EndsIn": "Berakhir di",
+        "NextPay": "Pembayaran selanjutnya",
+        "Period": "Periode",
+        "Price": "Harga",
+        "AreYouSureUnsubscribe": "Yakin ingin berhenti berlangganan paket ini?",
+        "YouUnsubscribedFromPlan": "Anda berhenti berlangganan paket &quot;{{planTitle}}&quot;. Anda tidak akan dikenakan biaya, tetapi langganan Anda akan berlanjut hingga {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "judul rencana",
+            "PricePlaceholder": "harga",
+            "DescriptionPlaceholder": "deskripsi paket berlangganan",
+            "SavePlan": "Simpan Paket",
+            "NewPlan": "Paket Baru"
+        }
     },
     "payments": {
         "infoTitle": "Tetapkan Informasi Pembayaran",
@@ -123,6 +170,12 @@
         },
         "Assets\/credits\/bought": {
             "content": "Membeli {{amount}} kredit"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Bonus {{amount}} kredit"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Anda memiliki sedikit kredit di akun Anda. Silakan kunjungi <a href='{{link}}'>tautan ini<\/a> untuk membeli lebih banyak kredit."
         }
     },
     "charge": {
@@ -140,7 +193,8 @@
             "PricePlaceholder": "Tetapkan harga",
             "LinkPlaceholder": "atur tautan info tambahan",
             "DescriptionPlaceholder": "Deskripsi layanan",
-            "SaveService": "Simpan Layanan"
+            "SaveService": "Simpan Layanan",
+            "SelectRequiredParticipants": "Wajib Peserta"
         },
         "ManageServiceTemplates": "Kelola Template Layanan",
         "ManageServices": "Kelola Layanan",
@@ -149,6 +203,218 @@
         "RequiredPayment": "Pembayaran wajib",
         "AreYouSureDelete": "Anda yakin ingin menghapus layanan ini?",
         "AmountServicesRelated": "Ada {{amount}} ketersediaan yang terkait dengan layanan ini. Mereka juga akan dihapus.",
-        "Free": "Gratis"
+        "Free": "Gratis",
+        "EditServiceTemplate": {
+            "Title": "Edit Layanan"
+        }
+    },
+    "errors": {
+        "Error": "Kesalahan",
+        "WalletAbsent": "Dompet tidak terhubung.",
+        "Rendering": "Ada kesalahan saat merender <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Harga diperlukan!",
+        "NameRequired": "Nama (wajib!",
+        "PriceInvalid": "Harga tidak valid!",
+        "TransactionFailed": "Transaksi gagal",
+        "ChainNotSupported": "Rantai yang dipilih tidak didukung. Rantai yang didukung: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Perlu MetaMask terhubung untuk bekerja dengan aplikasi",
+        "UserNotLoggedInMetaMask": "Pengguna tidak masuk ke MetaMask",
+        "CurrencyNotFound": "Mata uang tidak ditemukan",
+        "WrongChain": "NFT ini dibuat di bawah &quot;{{chain}}&quot;. Silakan gunakan rantai ini."
+    },
+    "admin": {
+        "Title": "Administrasi aset",
+        "SubscriptionTitle": "Paket berlangganan"
+    },
+    "billing": {
+        "Title": "Penagihan aset",
+        "CreditsMinimum": "Kredit minimal",
+        "CreditsToAdd": "Kredit untuk ditambahkan",
+        "Save": "Menyimpan",
+        "ThisLink": "Link ini",
+        "errors": {
+            "CreditsMinimumNegative": "Kredit minimum tidak boleh negatif",
+            "CreditsToAddNegative": "Kredit untuk ditambahkan tidak boleh negatif"
+        }
+    },
+    "NFT": {
+        "Title": "Judul",
+        "Name": "Nama",
+        "EnterName": "Masukkan nama",
+        "EnterAuthorWallet": "Masukkan dompet penulis",
+        "InformationAboutTitle": "Informasi tentang {{title}} NFT",
+        "Description": "Keterangan",
+        "DetailedInformationAboutNFT": "Informasi terperinci tentang NFT",
+        "PresaleStarts": "Presale Mulai 23 Des",
+        "OwnerUserNotFound": "Pemilik NFT ini tidak terdaftar di aplikasi kami.",
+        "BuyNow": "Beli sekarang",
+        "Buy": "Membeli",
+        "Conversation": "Percakapan",
+        "Create": "Membuat",
+        "CurrentBid": "Tawaran saat ini",
+        "StartingIn": "Mulai di",
+        "EndingIn": "Berakhir di",
+        "CreateNFT": "Buat NFT",
+        "TitlePlaceholder": "Beri judul NFT Anda",
+        "DescriptionPlaceholder": "Berikan deskripsi NFT Anda",
+        "CreateYourNFT": "Buat NFT Anda",
+        "Royalties": "Royalti",
+        "RoyaltyPlaceholder": "Opsional. Jumlah yang dibayarkan kepada pencipta sebelum transfer.",
+        "ExpirationDate": "Tanggal habis tempo",
+        "StartingDate": "Mulai tanggal",
+        "BidsBelowThisAmount": "Tawaran di bawah jumlah ini tidak akan diizinkan",
+        "MinimumBid": "Tawaran minimum",
+        "Author": "Pengarang",
+        "Price": "Harga",
+        "Commission": "Komisi",
+        "EnterCommission": "Masukkan komisi",
+        "Owner": "Pemilik",
+        "SelectCategory": "Pilih Kategori",
+        "Day": "Hari",
+        "Days": "hari",
+        "Hour": "Jam",
+        "Hours": "Jam",
+        "Minute": "Menit",
+        "Minutes": "Menit",
+        "Second": "Kedua",
+        "Seconds": "Detik",
+        "SalesCreator": "penjualan akan diberikan kepada pencipta",
+        "Details": "rincian",
+        "Bids": "Tawaran",
+        "History": "Sejarah",
+        "LoremIpsum": "Lorem Ipsum hanyalah teks tiruan dari industri percetakan dan penyusunan huruf.",
+        "PutOnSale": "Di jual",
+        "PutOffSale": "Tarik dari penjualan",
+        "Transfer": "Transfer",
+        "Actions": "tindakan",
+        "Update": "Memperbarui",
+        "UpdateToken": "Perbarui Token",
+        "UpdateNFT": "Perbarui NFT",
+        "CreateToken": "Buat Token",
+        "PlaceBid": "Tempatkan Tawaran",
+        "SoldOut": "Terjual",
+        "NotOnSale": "Tidak Dijual",
+        "NftName": "Nama NFT",
+        "DescribeYourNFT": "Tolong jelaskan NFT Anda",
+        "NftPicture": "Gambar untuk mewakili NFT",
+        "NftMovie": "Film untuk mewakili NFT",
+        "UploadMovie": "Unggah film",
+        "MovieSource": "Sumber Film",
+        "MovieURL": "URL film",
+        "UploadFile": "Unggah file",
+        "PutOnMarketplace": "Pasang di pasar",
+        "InstantPurchase": "Masukkan harga untuk memungkinkan pengguna langsung membeli NFT Anda",
+        "FixedPrice": "Harga tetap",
+        "TimedAuction": "Lelang berjangka waktu",
+        "OpenForBids": "Terbuka untuk tawaran",
+        "PriceOnePiece": "Masukkan harga untuk satu potong",
+        "EnterPrice": "Masukkan harga",
+        "EnterMinimumBid": "Masukkan tawaran Minimum",
+        "SelectChain": "Pilih rantai",
+        "Currency": "Mata uang",
+        "AreYouSureDeleteImage": "Anda yakin ingin menghapus gambar?",
+        "AreYouSureDeleteVideo": "Anda yakin ingin menghapus video?",
+        "series": {
+            "Name": "Nama",
+            "Icon": "ikon",
+            "Description": "Keterangan",
+            "Author": "Pengarang",
+            "SelectSeries": "Pilih seri",
+            "Value": "Nilai",
+            "AreYouSure": "Apa kamu yakin?",
+            "AuthorInvalid": "Alamat penulis tidak valid!",
+            "Address": "Alamat",
+            "CoverImage": "Gambar sampul",
+            "UploadCoverImage": "Unggah gambar sampul",
+            "CommissionAddressInvalid": "Alamat komisi tidak valid",
+            "OnSale": "dijual",
+            "OffSale": "diskon",
+            "CreateSeries": "Buat Seri",
+            "UpdateSeries": "Perbarui Seri",
+            "SeriesInfo": "Info Seri",
+            "SelectAuthor": "Pilih penulis",
+            "NewItem": "Seri NFT baru",
+            "NamePlaceholder": "Masukkan nama seri",
+            "DescPlaceholder": "Masukkan deskripsi seri",
+            "EndingIn": "Berakhir di"
+        },
+        "contract": {
+            "CreateContract": "Buat kontrak",
+            "SelectContract": "Pilih kontrak",
+            "CreateContractFor": "Buat kontrak untuk {{userName}}",
+            "ContractFor": "Kontrak untuk {{userName}}",
+            "UpdateContract": "Perbarui Kontrak",
+            "TransferOwnership": "Transfer Kepemilikan",
+            "SetBaseURI": "Setel URI Dasar",
+            "SetSuffix": "Tetapkan Sufiks",
+            "CurrentOwner": "Pemilik saat ini",
+            "CurrentBaseURL": "URL Dasar Saat Ini",
+            "ContractAddressAbsent": "Alamat kontrak tidak ada",
+            "FactoryAddressAbsent": "Alamat pabrik tidak ada",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Judul diperlukan",
+            "SymbolRequired": "Simbol diperlukan",
+            "TypeContractName": "nama kontrak",
+            "TypeContractSymbol": "simbol kontrak (maks 10 karakter)"
+        },
+        "contests": {
+            "Title": "Kontes",
+            "NewContest": "Kontes Baru"
+        },
+        "import": {
+            "importNFT": "Mengimpor NFT",
+            "importAttributes": "Impor atribut NFT",
+            "fileNotFound": "Maaf, file CSV tidak ditemukan.",
+            "fileEmpty": "Maaf, file CSV kosong.",
+            "userIdNotFound": "pengguna ada tetapi id kosong",
+            "errorLine": "baris {{1}}",
+            "fieldNotFound": "Bidang wajib &quot;{{1}}&quot; tidak ditemukan",
+            "displayTypeEmpty": "Jenis tampilan untuk &quot;{{1}}&quot; tidak ditemukan",
+            "taskStreamInvalid": "aliran tugas tidak valid",
+            "instructionsEmpty": "instruksi aliran tugas kosong",
+            "complete": "Menyelesaikan",
+            "activateUsers": "kirim pesan aktivasi ke pengguna?",
+            "importProgress": "Kemajuan",
+            "importOptions": "Pilihan",
+            "sampleCSV": "Unduh Contoh CSV",
+            "fileLabel": "Unggah Spreadsheet:",
+            "errorsTitle": "Terjadi kesalahan"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "Filter menurut Koleksi NFT",
+                "ShowNFTCollection": "Tampilkan koleksi NFT di ...",
+                "AllCollections": "Semua Koleksi"
+            },
+            "ByUser": {
+                "AllAuthors": "Semua Penulis",
+                "AllUsers": "Setiap orang",
+                "FilterByAuthors": "Filter menurut Penulis"
+            }
+        },
+        "Back": "Kembali ke Koleksi",
+        "attributes": {
+            "Title": "Kelola Atribut",
+            "Attributes": "Atribut",
+            "DisplayTitle": "Tipe tampilan",
+            "AddDisplayType": "Tambahkan jenis tampilan baru",
+            "NewDisplay": "Tampilan Baru",
+            "TraitTitle": "Tipe Sifat",
+            "AddTraitTitle": "Tambahkan tipe sifat baru",
+            "NewTrait": "Tipe Sifat Baru",
+            "ValueTitle": "Nilai",
+            "AddValueTitle": "Tambahkan nilai baru",
+            "NewValue": "Nilai baru",
+            "NewAttribute": "Atribut Baru",
+            "UpdateAttributes": "Perbarui Atribut",
+            "SaveAttributes": "Simpan Atribut"
+        },
+        "profile": {
+            "LogOut": "Keluar",
+            "Title": "Profil untuk {{userName}}",
+            "Description": "Detail pengguna",
+            "aboutPlaceholder": "Sunting Bio",
+            "SureLogOut": "Apakah Anda yakin ingin keluar?"
+        }
     }
 }

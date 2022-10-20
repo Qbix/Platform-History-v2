@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: платіж оброблено на {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Дякуємо за платіж на адресу {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} підписався на {{plan.title}}",
-        "YouSubscribedTo": "Ви підписалися на {{plan.title}}"
+        "YouSubscribedTo": "Ви підписалися на {{plan.title}}",
+        "Assets\/credits\/alert": "У вас є сповіщення, пов’язане з вашим обліковим записом"
     },
     "charge": {
         "Subject": "Ви отримуєте оплату {{displayAmount}} від {{call 'publisher.displayName'}} від &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Інформація про замовлення",
         "PaymentMethod": "Спосіб оплати",
         "ContactInfo": "Контактна інформація",
-        "Pay": "Платити"
+        "Pay": "Платити",
+        "PaymentSucceeded": "Платіж здійснено",
+        "PaymentProcessing.": "Ваш платіж обробляється",
+        "FailTryAgain": "Ваш платіж не був успішним, спробуйте ще раз",
+        "SomethingWrong": "Щось пішло не так",
+        "PaymentStatus": "Статус платежу"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} прийняв запрошення",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Кредитна або дебетова картка",
         "SubscribePayment": "Оплата підписки",
-        "ImmediatePayment": "Негайна оплата"
+        "ImmediatePayment": "Негайна оплата",
+        "ProcessingPayment": "Обробка платежу",
+        "SubscriptionAlreadyPaid": "Ця підписка вже оплачена",
+        "SubscriptionNotActive": "Ця підписка неактивна",
+        "Subscribed": "Підписався",
+        "Unsubscribed": "Скасував підписку",
+        "Unsubscribe": "Відписатися",
+        "Subscribe": "Підпишіться",
+        "Started": "розпочато",
+        "EndsIn": "Закінчується в",
+        "NextPay": "Наступний платіж",
+        "Period": "Крапка",
+        "Price": "Ціна",
+        "AreYouSureUnsubscribe": "Ви впевнені, що бажаєте скасувати підписку на цей план?",
+        "YouUnsubscribedFromPlan": "Ви скасували підписку на план &quot;{{planTitle}}&quot;. Плата з вас не стягуватиметься, але ваша підписка триватиме до {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "назва плану",
+            "PricePlaceholder": "ціна",
+            "DescriptionPlaceholder": "опис тарифного плану",
+            "SavePlan": "Зберегти план",
+            "NewPlan": "Новий план"
+        }
     },
     "payments": {
         "infoTitle": "Встановити платіжну інформацію",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Отримано {{amount}} кредитів від {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "На вашому рахунку невеликі кредити. Перейдіть за <a href='{{link}}'>цим посиланням<\/a> , щоб придбати більше кредитів."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Додатковий внесок",
         "RequiredPayment": "Обов&#39;язкова оплата",
         "AreYouSureDelete": "Ви впевнені, що хочете видалити цю службу?",
-        "AmountServicesRelated": "Є {{amount}} доступності, пов’язані з цією послугою. Вони також будуть видалені."
+        "AmountServicesRelated": "Є {{amount}} доступності, пов’язані з цією послугою. Вони також будуть видалені.",
+        "EditServiceTemplate": {
+            "Title": "Редагувати службу"
+        }
     },
     "NFT": {
         "Title": "Інформація про {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Параметри",
             "sampleCSV": "Завантажте зразок CSV",
             "fileLabel": "Завантажити електронну таблицю:",
-            "errorsTitle": "Сталися помилки"
+            "errorsTitle": "Сталися помилки",
+            "importAttributes": "Імпорт атрибутів NFT",
+            "displayTypeEmpty": "Тип відображення для &quot;{{1}}&quot; не знайдено"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Фільтр за авторами"
             }
         },
-        "Back": "Назад до колекції"
+        "Back": "Назад до колекції",
+        "Name": "Ім&#39;я",
+        "EnterName": "Введіть ім&#39;я",
+        "EnterAuthorWallet": "Введіть авторський гаманець",
+        "InformationAboutTitle": "Інформація про {{title}} NFT",
+        "DetailedInformationAboutNFT": "Детальна інформація про NFT",
+        "PresaleStarts": "Передпродаж стартує 23 грудня",
+        "OwnerUserNotFound": "Власник цього NFT не зареєстрований у нашому додатку.",
+        "BuyNow": "Купити зараз",
+        "Buy": "купити",
+        "Conversation": "Розмова",
+        "Create": "Створити",
+        "Author": "Автор",
+        "Commission": "Комісія",
+        "EnterCommission": "Введіть комісію",
+        "Actions": "Дії",
+        "UpdateNFT": "Оновіть NFT",
+        "NotOnSale": "Не продається",
+        "MovieURL": "URL-адреса фільму",
+        "EnterPrice": "Введіть ціну",
+        "Currency": "Валюта",
+        "AreYouSureDeleteImage": "Ви впевнені, що хочете видалити зображення?",
+        "AreYouSureDeleteVideo": "Ви впевнені, що хочете видалити відео?",
+        "series": {
+            "Name": "Ім&#39;я",
+            "Icon": "значок",
+            "Description": "опис",
+            "Author": "Автор",
+            "SelectSeries": "Виберіть серію",
+            "Value": "Значення",
+            "AreYouSure": "Ти впевнений?",
+            "AuthorInvalid": "Адреса автора недійсна!",
+            "Address": "Адреса",
+            "CoverImage": "Зображення обкладинки",
+            "UploadCoverImage": "Завантажити обкладинку",
+            "CommissionAddressInvalid": "Адреса комісії недійсна",
+            "OnSale": "продається",
+            "OffSale": "з продажу",
+            "CreateSeries": "Створити серію",
+            "UpdateSeries": "Серія оновлення",
+            "SeriesInfo": "Інформація про серію",
+            "SelectAuthor": "Виберіть автора",
+            "NewItem": "Нова серія NFT",
+            "NamePlaceholder": "Введіть назву серії",
+            "DescPlaceholder": "Введіть опис серії",
+            "EndingIn": "Закінчується на"
+        },
+        "contract": {
+            "CreateContract": "Створіть договір",
+            "SelectContract": "Виберіть договір",
+            "CreateContractFor": "Створити договір для {{userName}}",
+            "ContractFor": "Контракт на {{userName}}",
+            "UpdateContract": "Оновити договір",
+            "TransferOwnership": "Передача права власності",
+            "SetBaseURI": "Установити базовий URI",
+            "SetSuffix": "Встановити суфікс",
+            "CurrentOwner": "Нинішній власник",
+            "CurrentBaseURL": "Поточна базова URL-адреса",
+            "ContractAddressAbsent": "Адреса договору відсутня",
+            "FactoryAddressAbsent": "Адреса заводу відсутня",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Потрібна назва",
+            "SymbolRequired": "Необхідний символ",
+            "TypeContractName": "назва договору",
+            "TypeContractSymbol": "символ контракту (макс. 10 символів)"
+        },
+        "contests": {
+            "Title": "Конкурси",
+            "NewContest": "Новий конкурс"
+        },
+        "attributes": {
+            "Title": "Керування атрибутами",
+            "Attributes": "Атрибути",
+            "DisplayTitle": "Тип дисплея",
+            "AddDisplayType": "Додайте новий тип дисплея",
+            "NewDisplay": "Новий дисплей",
+            "TraitTitle": "Тип риси",
+            "AddTraitTitle": "Додати новий тип риси",
+            "NewTrait": "Новий тип ознаки",
+            "ValueTitle": "Значення",
+            "AddValueTitle": "Додати нове значення",
+            "NewValue": "Нове значення",
+            "NewAttribute": "Новий атрибут",
+            "UpdateAttributes": "Оновити атрибути",
+            "SaveAttributes": "Зберегти атрибути"
+        },
+        "profile": {
+            "LogOut": "Вийти",
+            "Title": "Профіль для {{userName}}",
+            "Description": "Інформація про користувача",
+            "aboutPlaceholder": "Редагувати біографію",
+            "SureLogOut": "Ви впевнені, що бажаєте вийти?"
+        }
+    },
+    "errors": {
+        "Error": "Помилка",
+        "WalletAbsent": "Гаманець не підключений.",
+        "Rendering": "Під час візуалізації виникли помилки <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Ціна потрібна!",
+        "NameRequired": "Потрібне ім&#39;я!",
+        "PriceInvalid": "Ціна недійсна!",
+        "TransactionFailed": "Помилка транзакції",
+        "ChainNotSupported": "Вибраний ланцюжок не підтримується. Підтримувана мережа: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Для роботи з програмою потрібно підключити MetaMask",
+        "UserNotLoggedInMetaMask": "Користувач не ввійшов у систему MetaMask",
+        "CurrencyNotFound": "Валюта не знайдена",
+        "WrongChain": "Цей NFT створено під назвою &quot;{{chain}}&quot;. Будь ласка, використовуйте цей ланцюжок."
+    },
+    "admin": {
+        "Title": "Активи адміністративні",
+        "SubscriptionTitle": "Плани передплати"
+    },
+    "billing": {
+        "Title": "Оплата активів",
+        "CreditsMinimum": "Мінімум кредитів",
+        "CreditsToAdd": "Кредити для додавання",
+        "Save": "зберегти",
+        "ThisLink": "це посилання",
+        "errors": {
+            "CreditsMinimumNegative": "Мінімальна кількість кредитів не може бути від’ємною",
+            "CreditsToAddNegative": "Кредити для додавання не можуть бути від’ємними"
+        }
     }
 }

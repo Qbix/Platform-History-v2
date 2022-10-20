@@ -72,7 +72,8 @@
             "title": "Ayusin ang laki at posisyon",
             "touchscreen": "Gamitin ang iyong mga daliri upang mag-zoom at i-drag",
             "notTouchscreen": "Gamitin ang iyong mouse &amp; wheel upang mag-zoom at i-drag"
-        }
+        },
+        "errorType": "Paumanhin, ngunit ang uri ng file na ito ay hindi suportado"
     },
     "timestamp": {
         "lastNight": "kagabi",
@@ -117,6 +118,28 @@
         "SetClipStart": "Itakda ang Start ng Clip",
         "ClipStart": "Magsimula sa Clip",
         "SetClipEnd": "Itakda ang Clip End",
-        "ClipEnd": "Pagtatapos ng Clip"
+        "ClipEnd": "Pagtatapos ng Clip",
+        "StartMoreEnd": "Ang panimulang posisyon ay hindi maaaring higit sa dulong posisyon",
+        "EndLessStart": "Ang posisyon ng pagtatapos ay hindi maaaring mas mababa sa panimulang posisyon",
+        "WhichInvalid": "Hindi wasto ang argumentong &#39;alin&#39;"
+    },
+    "durations": {
+        "second": "pangalawa",
+        "seconds": "segundo",
+        "minute": "minuto",
+        "minutes": "minuto",
+        "hour": "oras",
+        "day": "araw",
+        "days": "araw",
+        "week": "linggo",
+        "weeks": "linggo",
+        "month": "buwan",
+        "months": "buwan",
+        "year": "taon",
+        "years": "taon",
+        "decade": "dekada",
+        "decades": "mga dekada",
+        "century": "siglo",
+        "centuries": "mga siglo"
     }
 }

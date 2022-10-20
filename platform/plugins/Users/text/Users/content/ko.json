@@ -103,6 +103,13 @@
                 "title": "지갑으로 리디렉션",
                 "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
             }
+        },
+        "web3": {
+            "payload": "{{host}} 시간에 {{timestamp}}에 로그인합니다.",
+            "alert": {
+                "title": "지갑으로 리디렉션",
+                "content": "이 대화 상자를 닫으면 지갑으로 이동합니다. 로그인한 후 이 페이지로 돌아오세요."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "회원",
         "Guest": "손님",
         "Host": "주최자"
+    },
+    "avatar": {
+        "Someone": "누구"
+    },
+    "web3": {
+        "WrongMethod": "잘못된 계약 방법 {{methodName}}"
     }
 }

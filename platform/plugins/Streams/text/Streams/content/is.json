@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Fjarfundur",
             "MeetingEnded": "Símafundi lokið"
+        },
+        "requestSpeakDialog": {
+            "msg": "Eins og er eru {{count}} aðilar að tala á fundinum. Viltu skipta út einum þeirra eftir að hafa leyft þeim {{seconds}} sekúndur að klára að tala?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Ljúka símtali",
         "interview": "Viðtal",
         "markApproved": "Mark samþykkt"
+    },
+    "identifier": {
+        "private": "Einkamál",
+        "public": "Opinber",
+        "configurationSaved": "Stilling vistuð",
+        "error": "Eitthvað fór úrskeiðis"
     }
 }

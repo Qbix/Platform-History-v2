@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telesidang",
             "MeetingEnded": "Telesidang tamat"
+        },
+        "requestSpeakDialog": {
+            "msg": "Pada masa ini terdapat {{count}} orang bercakap dalam mesyuarat. Adakah anda mahu menggantikan salah satu daripadanya selepas membenarkan mereka {{seconds}} saat untuk selesai bercakap?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Tamat panggilan",
         "interview": "Temuduga",
         "markApproved": "Tandakan Diluluskan"
+    },
+    "identifier": {
+        "private": "Persendirian",
+        "public": "Awam",
+        "configurationSaved": "Konfigurasi disimpan",
+        "error": "Sesuatu telah berlaku"
     }
 }

@@ -103,6 +103,13 @@
                 "title": "Redirecționare către Wallet",
                 "content": "După ce închideți acest dialog, veți fi dus la portofel. După ce vă conectați, reveniți la această pagină."
             }
+        },
+        "web3": {
+            "payload": "Conectați-vă la {{host}} la ora {{timestamp}}",
+            "alert": {
+                "title": "Redirecționare către Wallet",
+                "content": "După ce închideți acest dialog, veți fi dus la portofel. După ce vă conectați, reveniți la această pagină."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Membru",
         "Guest": "Oaspete",
         "Host": "Gazdă"
+    },
+    "avatar": {
+        "Someone": "Cineva"
+    },
+    "web3": {
+        "WrongMethod": "Metodă de contract greșită {{methodName}}"
     }
 }

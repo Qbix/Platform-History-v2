@@ -280,6 +280,9 @@
         },
         "streamingSettings": {
             "title": "הגדרות סטרימינג"
+        },
+        "requestSpeakDialog": {
+            "msg": "יש כרגע {{count}} אנשים מדברים בפגישה. האם אתה רוצה להחליף אחד מהם לאחר שתאפשר להם {{seconds}} שניות לסיים את הדיבור?"
         }
     },
     "types": {
@@ -551,5 +554,11 @@
         "endCall": "סיום שיחה",
         "interview": "רֵאָיוֹן",
         "markApproved": "סמן אושר"
+    },
+    "identifier": {
+        "private": "פְּרָטִי",
+        "public": "פּוּמְבֵּי",
+        "configurationSaved": "התצורה נשמרה",
+        "error": "משהו השתבש"
     }
 }

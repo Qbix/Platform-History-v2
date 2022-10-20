@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: การเรียกเก็บเงินที่ดำเนินการสำหรับ {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "ขอขอบคุณสำหรับการชำระเงินของคุณไปที่ {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} สมัครรับข้อมูล {{plan.title}}",
-        "YouSubscribedTo": "คุณได้สมัครรับข้อมูลจาก {{plan.title}}"
+        "YouSubscribedTo": "คุณได้สมัครรับข้อมูลจาก {{plan.title}}",
+        "Assets\/credits\/alert": "คุณมีการแจ้งเตือนที่เกี่ยวข้องกับบัญชีของคุณ"
     },
     "charge": {
         "Subject": "คุณได้รับการชำระเงินจำนวน {{displayAmount}} จาก {{call 'publisher.displayName'}} โดย &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "ข้อมูลการสั่งซื้อ",
         "PaymentMethod": "วิธีการชำระเงิน",
         "ContactInfo": "ข้อมูลติดต่อ",
-        "Pay": "จ่าย"
+        "Pay": "จ่าย",
+        "PaymentSucceeded": "ชำระเงินสำเร็จ",
+        "PaymentProcessing.": "กำลังดำเนินการชำระเงินของคุณ",
+        "FailTryAgain": "การชำระเงินของคุณไม่สำเร็จ โปรดลองอีกครั้ง",
+        "SomethingWrong": "บางอย่างผิดพลาด",
+        "PaymentStatus": "สถานะการชำระเงิน"
     },
     "credits": {
         "InviteAcceptedBy": "ตอบรับคำเชิญโดย {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "บัตรเครดิตหรือบัตรเดบิต",
         "SubscribePayment": "สมัครสมาชิกชำระเงิน",
-        "ImmediatePayment": "ชำระเงินทันที"
+        "ImmediatePayment": "ชำระเงินทันที",
+        "ProcessingPayment": "กำลังดำเนินการชำระเงิน",
+        "SubscriptionAlreadyPaid": "สมัครสมาชิกนี้ชำระเงินแล้ว",
+        "SubscriptionNotActive": "การสมัครนี้ไม่ทำงาน",
+        "Subscribed": "สมัครแล้ว",
+        "Unsubscribed": "Unsubscribed",
+        "Unsubscribe": "ยกเลิกการสมัคร",
+        "Subscribe": "ติดตาม",
+        "Started": "เริ่ม",
+        "EndsIn": "สิ้นสุดใน",
+        "NextPay": "การชำระเงินครั้งต่อไป",
+        "Period": "ระยะเวลา",
+        "Price": "ราคา",
+        "AreYouSureUnsubscribe": "คุณแน่ใจหรือไม่ว่าต้องการยกเลิกการสมัครแผนนี้",
+        "YouUnsubscribedFromPlan": "คุณยกเลิกการสมัครแผน &quot;{{planTitle}}&quot; คุณจะไม่ถูกเรียกเก็บเงิน แต่การสมัครของคุณจะดำเนินต่อไปจนถึง {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "ชื่อแผน",
+            "PricePlaceholder": "ราคา",
+            "DescriptionPlaceholder": "คำอธิบายแผนการสมัครสมาชิก",
+            "SavePlan": "บันทึกแผน",
+            "NewPlan": "แผนใหม่"
+        }
     },
     "payments": {
         "infoTitle": "ตั้งค่าข้อมูลการชำระเงิน",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "ได้รับ {{amount}} หน่วยกิตจาก {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "คุณมีเครดิตน้อยในบัญชีของคุณ โปรดไปที่ <a href='{{link}}'>ลิงก์นี้<\/a> เพื่อซื้อเครดิตเพิ่มเติม"
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "ผลงานเสริม",
         "RequiredPayment": "การชำระเงินที่จำเป็น",
         "AreYouSureDelete": "คุณแน่ใจหรือไม่ว่าต้องการลบบริการนี้",
-        "AmountServicesRelated": "มี {{amount}} ความพร้อมใช้งานที่เกี่ยวข้องกับบริการนี้ พวกมันจะถูกลบออกด้วย"
+        "AmountServicesRelated": "มี {{amount}} ความพร้อมใช้งานที่เกี่ยวข้องกับบริการนี้ พวกมันจะถูกลบออกด้วย",
+        "EditServiceTemplate": {
+            "Title": "แก้ไขบริการ"
+        }
     },
     "NFT": {
         "Title": "ข้อมูลเกี่ยวกับ {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "ตัวเลือก",
             "sampleCSV": "ดาวน์โหลดตัวอย่าง CSV",
             "fileLabel": "อัปโหลดสเปรดชีต:",
-            "errorsTitle": "เกิดข้อผิดพลาด"
+            "errorsTitle": "เกิดข้อผิดพลาด",
+            "importAttributes": "นำเข้าแอตทริบิวต์ NFT",
+            "displayTypeEmpty": "ไม่พบประเภทการแสดงผลสำหรับ &quot;{{1}}&quot;"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "กรองตามผู้เขียน"
             }
         },
-        "Back": "กลับไปที่คอลเลกชัน"
+        "Back": "กลับไปที่คอลเลกชัน",
+        "Name": "ชื่อ",
+        "EnterName": "ใส่ชื่อ",
+        "EnterAuthorWallet": "ใส่กระเป๋าสตางค์ของผู้เขียน",
+        "InformationAboutTitle": "ข้อมูลเกี่ยวกับ {{title}} NFT",
+        "DetailedInformationAboutNFT": "ข้อมูลโดยละเอียดเกี่ยวกับ NFT",
+        "PresaleStarts": "เปิดพรีเซลล์วันที่ 23 ธ.ค",
+        "OwnerUserNotFound": "เจ้าของ NFT นี้ไม่ได้ลงทะเบียนในแอปพลิเคชันของเรา",
+        "BuyNow": "ซื้อเลย",
+        "Buy": "ซื้อ",
+        "Conversation": "การสนทนา",
+        "Create": "สร้าง",
+        "Author": "ผู้เขียน",
+        "Commission": "คณะกรรมการ",
+        "EnterCommission": "ป้อนค่าคอมมิชชั่น",
+        "Actions": "การกระทำ",
+        "UpdateNFT": "อัปเดต NFT",
+        "NotOnSale": "ไม่ขาย",
+        "MovieURL": "URL ภาพยนตร์",
+        "EnterPrice": "ใส่ราคา",
+        "Currency": "สกุลเงิน",
+        "AreYouSureDeleteImage": "คุณแน่ใจหรือไม่ว่าต้องการลบภาพ",
+        "AreYouSureDeleteVideo": "คุณแน่ใจหรือไม่ว่าต้องการนำวิดีโอออก",
+        "series": {
+            "Name": "ชื่อ",
+            "Icon": "ไอคอน",
+            "Description": "คำอธิบาย",
+            "Author": "ผู้เขียน",
+            "SelectSeries": "เลือกซีรีส์",
+            "Value": "ค่า",
+            "AreYouSure": "คุณแน่ใจไหม?",
+            "AuthorInvalid": "ที่อยู่ผู้เขียนไม่ถูกต้อง!",
+            "Address": "ที่อยู่",
+            "CoverImage": "ภาพหน้าปก",
+            "UploadCoverImage": "อัพโหลดภาพหน้าปก",
+            "CommissionAddressInvalid": "ที่อยู่ของคอมมิชชันไม่ถูกต้อง",
+            "OnSale": "ลดราคา",
+            "OffSale": "ปิดการขาย",
+            "CreateSeries": "สร้างซีรีส์",
+            "UpdateSeries": "อัพเดทซีรี่ย์",
+            "SeriesInfo": "ข้อมูลซีรีส์",
+            "SelectAuthor": "เลือกผู้เขียน",
+            "NewItem": "ซีรีส์ NFT ใหม่",
+            "NamePlaceholder": "ใส่ชื่อซีรีส์",
+            "DescPlaceholder": "ป้อนคำอธิบายซีรีส์",
+            "EndingIn": "สิ้นสุดใน"
+        },
+        "contract": {
+            "CreateContract": "สร้างสัญญา",
+            "SelectContract": "เลือกสัญญา",
+            "CreateContractFor": "สร้างสัญญาสำหรับ {{userName}}",
+            "ContractFor": "สัญญาสำหรับ {{userName}}",
+            "UpdateContract": "อัพเดทสัญญา",
+            "TransferOwnership": "โอนกรรมสิทธิ์",
+            "SetBaseURI": "ตั้งค่า URI ฐาน",
+            "SetSuffix": "ตั้งค่าคำต่อท้าย",
+            "CurrentOwner": "เจ้าของปัจจุบัน",
+            "CurrentBaseURL": "URL ฐานปัจจุบัน",
+            "ContractAddressAbsent": "ไม่มีที่อยู่สัญญา",
+            "FactoryAddressAbsent": "ไม่มีที่อยู่โรงงาน",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "ต้องการชื่อเรื่อง",
+            "SymbolRequired": "สัญลักษณ์ที่จำเป็น",
+            "TypeContractName": "ชื่อสัญญา",
+            "TypeContractSymbol": "สัญลักษณ์สัญญา (สูงสุด 10 ตัวอักษร)"
+        },
+        "contests": {
+            "Title": "การแข่งขัน",
+            "NewContest": "การแข่งขันใหม่"
+        },
+        "attributes": {
+            "Title": "จัดการคุณสมบัติ",
+            "Attributes": "คุณลักษณะ",
+            "DisplayTitle": "ประเภทการแสดงผล",
+            "AddDisplayType": "เพิ่มประเภทการแสดงผลใหม่",
+            "NewDisplay": "จอแสดงผลใหม่",
+            "TraitTitle": "ลักษณะนิสัย",
+            "AddTraitTitle": "เพิ่มประเภทลักษณะใหม่",
+            "NewTrait": "ลักษณะนิสัยใหม่",
+            "ValueTitle": "ค่า",
+            "AddValueTitle": "เพิ่มมูลค่าใหม่",
+            "NewValue": "ค่าใหม่",
+            "NewAttribute": "คุณสมบัติใหม่",
+            "UpdateAttributes": "อัพเดทคุณสมบัติ",
+            "SaveAttributes": "บันทึกคุณสมบัติ"
+        },
+        "profile": {
+            "LogOut": "ออกจากระบบ",
+            "Title": "โปรไฟล์สำหรับ {{userName}}",
+            "Description": "รายละเอียดผู้ใช้",
+            "aboutPlaceholder": "แก้ไขชีวประวัติ",
+            "SureLogOut": "คุณแน่ใจว่าคุณต้องการที่จะออกจากระบบ?"
+        }
+    },
+    "errors": {
+        "Error": "ข้อผิดพลาด",
+        "WalletAbsent": "ไม่ได้เชื่อมต่อกระเป๋าเงิน",
+        "Rendering": "มีข้อผิดพลาดขณะแสดงผล <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "ต้องการราคา!",
+        "NameRequired": "ต้องระบุชื่อ!",
+        "PriceInvalid": "ราคาไม่ถูกต้อง!",
+        "TransactionFailed": "การทำธุรกรรมล้มเหลว",
+        "ChainNotSupported": "ไม่รองรับเชนที่เลือก ห่วงโซ่ที่รองรับ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "ต้องการ MetaMask ที่เชื่อมต่อกับแอพพลิเคชั่น",
+        "UserNotLoggedInMetaMask": "ผู้ใช้ไม่ได้เข้าสู่ระบบ MetaMask",
+        "CurrencyNotFound": "ไม่พบสกุลเงิน",
+        "WrongChain": "NFT นี้สร้างขึ้นภายใต้ &quot;{{chain}}&quot; โปรดใช้โซ่นี้"
+    },
+    "admin": {
+        "Title": "การบริหารสินทรัพย์",
+        "SubscriptionTitle": "แผนการสมัครสมาชิก"
+    },
+    "billing": {
+        "Title": "การเรียกเก็บเงินสินทรัพย์",
+        "CreditsMinimum": "เครดิตขั้นต่ำ",
+        "CreditsToAdd": "เครดิตเพิ่ม",
+        "Save": "บันทึก",
+        "ThisLink": "ลิงค์นี้",
+        "errors": {
+            "CreditsMinimumNegative": "เครดิตขั้นต่ำไม่สามารถติดลบได้",
+            "CreditsToAddNegative": "เครดิตที่จะเพิ่มไม่สามารถติดลบได้"
+        }
     }
 }

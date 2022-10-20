@@ -92,6 +92,13 @@
                 "title": "Redirecció a Wallet",
                 "content": "Un cop tanqueu aquest diàleg, se us dirigirà a la vostra cartera. Després d&#39;iniciar la sessió, torneu a aquesta pàgina."
             }
+        },
+        "web3": {
+            "payload": "Inicieu sessió a {{host}} a l&#39;hora {{timestamp}}",
+            "alert": {
+                "title": "S&#39;està redirigint a Wallet",
+                "content": "Un cop tanqueu aquest diàleg, se us dirigirà a la vostra cartera. Després d&#39;iniciar la sessió, torneu a aquesta pàgina."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Serveis",
         "Faq": "Faq",
         "WeekDays": "Dies de la setmana"
+    },
+    "avatar": {
+        "Someone": "Algú"
+    },
+    "web3": {
+        "WrongMethod": "Mètode de contracte incorrecte {{methodName}}"
     }
 }

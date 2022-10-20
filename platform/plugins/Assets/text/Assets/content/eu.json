@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: karga prozesatu da {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Eskerrik asko {{call 'publisher.displayName'}}-ri egindako ordainketagatik",
         "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}}-ra harpidetu da",
-        "YouSubscribedTo": "{{plan.title}}-ra harpidetuta zaude"
+        "YouSubscribedTo": "{{plan.title}}-ra harpidetuta zaude",
+        "Assets\/credits\/alert": "Zure kontuarekin lotutako alerta duzu"
     },
     "payment": {
         "AboutOrder": "Eskaerari buruzko informazioa",
         "PaymentMethod": "Ordainketa modua",
         "ContactInfo": "Harremanetarako informazioa",
-        "Pay": "Ordaindu"
+        "Pay": "Ordaindu",
+        "PaymentSucceeded": "Ordainketa arrakastatsua izan da",
+        "PaymentProcessing.": "Ordainketa prozesatzen ari da",
+        "FailTryAgain": "Ordainketa ez da arrakasta izan. Saiatu berriro",
+        "SomethingWrong": "Zerbait gaizki joan da",
+        "PaymentStatus": "Ordainketa egoera"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}}-k onartu du gonbidapena",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Kreditu edo zordunketa txartela",
         "SubscribePayment": "Harpidetza Ordainketa",
-        "ImmediatePayment": "Berehalako Ordainketa"
+        "ImmediatePayment": "Berehalako Ordainketa",
+        "ProcessingPayment": "Ordainketa tramitatzea",
+        "SubscriptionAlreadyPaid": "Harpidetza hau jada ordainduta dago",
+        "SubscriptionNotActive": "Harpidetza hau ez dago aktibo",
+        "Subscribed": "Harpidetuta",
+        "Unsubscribed": "Harpidetza kendu da",
+        "Unsubscribe": "Harpidetza kendu",
+        "Subscribe": "Harpidetu",
+        "Started": "Hasi da",
+        "EndsIn": "urtean amaitzen da",
+        "NextPay": "Hurrengo ordainketa",
+        "Period": "Aldia",
+        "Price": "Prezioa",
+        "AreYouSureUnsubscribe": "Ziur plan honen harpidetza kendu nahi duzula?",
+        "YouUnsubscribedFromPlan": "&quot;{{planTitle}}&quot; planaren harpidetza kendu duzu. Ez duzu kobratuko, baina harpidetzak {{endsIn}} arte jarraituko du",
+        "plan": {
+            "TitlePlaceholder": "planaren izenburua",
+            "PricePlaceholder": "prezioa",
+            "DescriptionPlaceholder": "harpidetza planaren deskribapena",
+            "SavePlan": "Gorde plana",
+            "NewPlan": "Plan Berria"
+        }
     },
     "payments": {
         "infoTitle": "Ezarri ordainketa-informazioa",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "{{amount}} kreditu gehigarriak"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Kreditu gutxi dituzu zure kontuan. Mesedez, bisitatu <a href='{{link}}'>esteka hau<\/a> kreditu gehiago erosteko."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Beharrezko ordainketa",
         "AreYouSureDelete": "Ziur zerbitzu hau ezabatu nahi duzula?",
         "AmountServicesRelated": "Zerbitzu honekin erlazionatutako {{amount}} erabilgarritasun daude. Horiek ere kenduko dira.",
-        "Free": "Doan"
+        "Free": "Doan",
+        "EditServiceTemplate": {
+            "Title": "Editatu Zerbitzua"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFTri buruzko informazioa",
@@ -247,7 +280,9 @@
             "importOptions": "Aukerak",
             "sampleCSV": "Deskargatu Sample CSV",
             "fileLabel": "Kargatu kalkulu-orria:",
-            "errorsTitle": "Erroreak gertatu dira"
+            "errorsTitle": "Erroreak gertatu dira",
+            "importAttributes": "Inportatu NFT atributuak",
+            "displayTypeEmpty": "Ez da aurkitu &quot;{{1}}&quot; bistaratzeko mota"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Iragazi egileen arabera"
             }
         },
-        "Back": "Bildumara itzuli"
+        "Back": "Bildumara itzuli",
+        "Name": "Izena",
+        "EnterName": "Sartu izena",
+        "EnterAuthorWallet": "Sartu egilearen zorroa",
+        "InformationAboutTitle": "{{title}} NFTri buruzko informazioa",
+        "DetailedInformationAboutNFT": "NFTri buruzko informazio zehatza",
+        "PresaleStarts": "Aurresalmenta abenduaren 23an hasiko da",
+        "OwnerUserNotFound": "NFT honen jabea ez dago gure aplikazioan erregistratuta.",
+        "BuyNow": "Erosi orain",
+        "Buy": "Erosi",
+        "Conversation": "Elkarrizketa",
+        "Create": "Sortu",
+        "Author": "Egilea",
+        "Commission": "Batzordea",
+        "EnterCommission": "Sartu komisioa",
+        "Actions": "Ekintzak",
+        "UpdateNFT": "Eguneratu NFT",
+        "NotOnSale": "Ez Salgai",
+        "MovieURL": "Filmaren URLa",
+        "EnterPrice": "Sartu prezioa",
+        "Currency": "Moneta",
+        "AreYouSureDeleteImage": "Ziur irudia kendu nahi duzula?",
+        "AreYouSureDeleteVideo": "Ziur bideoa kendu nahi duzula?",
+        "series": {
+            "Name": "Izena",
+            "Icon": "Ikonoa",
+            "Description": "Deskribapena",
+            "Author": "Egilea",
+            "SelectSeries": "Hautatu seriea",
+            "Value": "Balioa",
+            "AreYouSure": "Ziur zaude?",
+            "AuthorInvalid": "Egilearen helbidea baliogabea!",
+            "Address": "Helbidea",
+            "CoverImage": "Azaleko irudia",
+            "UploadCoverImage": "Kargatu azaleko irudia",
+            "CommissionAddressInvalid": "Batzordearen helbidea baliogabea",
+            "OnSale": "salgai",
+            "OffSale": "salmentatik kanpo",
+            "CreateSeries": "Sortu Seriea",
+            "UpdateSeries": "Eguneratu seriea",
+            "SeriesInfo": "Serieari buruzko informazioa",
+            "SelectAuthor": "Hautatu egilea",
+            "NewItem": "NFT serie berria",
+            "NamePlaceholder": "Sartu seriearen izena",
+            "DescPlaceholder": "Sartu seriearen deskribapena",
+            "EndingIn": "Amaitzen"
+        },
+        "contract": {
+            "CreateContract": "Kontratua sortu",
+            "SelectContract": "Aukeratu kontratua",
+            "CreateContractFor": "Sortu kontratua {{userName}}",
+            "ContractFor": "{{userName}}-rako kontratua",
+            "UpdateContract": "Kontratua eguneratzea",
+            "TransferOwnership": "Jabetza transferitzea",
+            "SetBaseURI": "Ezarri Oinarrizko URIa",
+            "SetSuffix": "Ezarri atzizkia",
+            "CurrentOwner": "Egungo jabea",
+            "CurrentBaseURL": "Uneko BaseURLa",
+            "ContractAddressAbsent": "Kontratuaren helbidea falta da",
+            "FactoryAddressAbsent": "Fabrikaren helbidea ez dago",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Izenburua beharrezkoa",
+            "SymbolRequired": "Sinboloa behar da",
+            "TypeContractName": "kontratuaren izena",
+            "TypeContractSymbol": "kontratuaren ikurra (gehienez 10 karaktere)"
+        },
+        "contests": {
+            "Title": "Lehiaketak",
+            "NewContest": "Lehiaketa Berria"
+        },
+        "attributes": {
+            "Title": "Kudeatu Atributuak",
+            "Attributes": "Atributuak",
+            "DisplayTitle": "Bistaratzeko mota",
+            "AddDisplayType": "Gehitu pantaila mota berria",
+            "NewDisplay": "Pantaila berria",
+            "TraitTitle": "Ezaugarri Mota",
+            "AddTraitTitle": "Gehitu ezaugarri mota berria",
+            "NewTrait": "Ezaugarri mota berria",
+            "ValueTitle": "Balioa",
+            "AddValueTitle": "Gehitu balio berria",
+            "NewValue": "Balio Berria",
+            "NewAttribute": "Atributu berria",
+            "UpdateAttributes": "Eguneratu atributuak",
+            "SaveAttributes": "Gorde atributuak"
+        },
+        "profile": {
+            "LogOut": "Saioa amaitu",
+            "Title": "{{userName}}-ren profila",
+            "Description": "Erabiltzailearen datuak",
+            "aboutPlaceholder": "Editatu biografia",
+            "SureLogOut": "Ziur saioa amaitu nahi duzula?"
+        }
+    },
+    "errors": {
+        "Error": "Errorea",
+        "WalletAbsent": "Diru-zorroa ez dago konektatuta.",
+        "Rendering": "Erroreak izan dira <span class='url'>{{1}}<\/span> errendatzean",
+        "PriceRequired": "Prezioa beharrezkoa!",
+        "NameRequired": "Izena behar da!",
+        "PriceInvalid": "Prezioa baliogabea!",
+        "TransactionFailed": "Transakzioak huts egin du",
+        "ChainNotSupported": "Hautatutako katea ez da onartzen. Onartutako katea: {{supportedChain}}",
+        "NeedMetaMaskConnected": "MetaMask konektatuta behar da aplikazioarekin lan egiteko",
+        "UserNotLoggedInMetaMask": "Erabiltzailea ez dago MetaMask-en saioa hasita",
+        "CurrencyNotFound": "Ez da moneta aurkitu",
+        "WrongChain": "NFT hau &quot;{{chain}}&quot; azpian sortu da. Mesedez, erabili kate hau."
+    },
+    "admin": {
+        "Title": "Ondasunen administrazioa",
+        "SubscriptionTitle": "Harpidetza planak"
+    },
+    "billing": {
+        "Title": "Aktiboen fakturazioa",
+        "CreditsMinimum": "Gutxieneko kredituak",
+        "CreditsToAdd": "Gehitzeko kredituak",
+        "Save": "Gorde",
+        "ThisLink": "esteka hau",
+        "errors": {
+            "CreditsMinimumNegative": "Gutxieneko kredituak ezin dira negatiboak izan",
+            "CreditsToAddNegative": "Gehitzeko kredituak ezin dira negatiboak izan"
+        }
     }
 }

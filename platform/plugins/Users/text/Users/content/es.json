@@ -103,6 +103,13 @@
                 "title": "Redirigir a Wallet",
                 "content": "Una vez que cierre este cuadro de diálogo, será llevado a su billetera. Después de iniciar sesión, regrese a esta página."
             }
+        },
+        "web3": {
+            "payload": "Inicie sesión en {{host}} a las {{timestamp}}",
+            "alert": {
+                "title": "Redirigir a Wallet",
+                "content": "Una vez que cierre este cuadro de diálogo, será llevado a su billetera. Después de iniciar sesión, regrese a esta página."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Miembro",
         "Guest": "Invitado",
         "Host": "Anfitrión"
+    },
+    "avatar": {
+        "Someone": "Alguien"
+    },
+    "web3": {
+        "WrongMethod": "Método de contrato incorrecto {{methodName}}"
     }
 }

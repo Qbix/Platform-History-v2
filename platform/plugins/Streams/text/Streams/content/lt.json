@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonferencija",
             "MeetingEnded": "Telekonferencija baigėsi"
+        },
+        "requestSpeakDialog": {
+            "msg": "Šiuo metu susitikime kalba {{count}} žmonės. Ar norite pakeisti vieną iš jų po to, kai leisite jiems {{seconds}} sek. baigti kalbėti?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Baigti skambutį",
         "interview": "Interviu",
         "markApproved": "Pažymėti patvirtintą"
+    },
+    "identifier": {
+        "private": "Privatus",
+        "public": "Viešas",
+        "configurationSaved": "Konfigūracija išsaugota",
+        "error": "Kažkas nutiko"
     }
 }

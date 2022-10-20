@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "إعدادات البث"
+        },
+        "requestSpeakDialog": {
+            "msg": "يوجد حاليًا {{count}} شخصًا يتحدثون في الاجتماع. هل تريد استبدال أحدهما بعد السماح لهما {{seconds}} ثانية بإنهاء التحدث؟"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "إنهاء المكالمة",
         "interview": "مقابلة",
         "markApproved": "علامة موافق عليها"
+    },
+    "identifier": {
+        "private": "خاص",
+        "public": "عام",
+        "configurationSaved": "تم حفظ التكوين",
+        "error": "هناك خطأ ما"
     }
 }

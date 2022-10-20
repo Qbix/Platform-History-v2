@@ -19,6 +19,7 @@
 			"Assets/startSubscription": ["Assets/after/Assets_startSubscription"],
 			"Streams/invite/accept": ["Assets/after/Streams_inviteAccept"],
 			"Db/Row/Streams_Stream/saveExecute": ["Assets/after/Streams_save"],
+			"Streams/Stream/save/Streams/text/name": ["Assets/after/Streams_save"],
 			"Streams/fetch/Assets/NFT/contract": ["Assets/after/Streams_fetch_Assets_NFT_contract"]
 		},
 		"routes@start": {
@@ -218,7 +219,7 @@
 				"Communities/create": 20
 			},
 			"grant": {
-				"Users/insertUser": 20,
+				"Users/insertUser": 0,
 				"acceptedInvite": 10,
 				"invitedUserEntered": {
 					"Streams/user/firstName": 1,
@@ -226,6 +227,24 @@
 					"Streams/user/icon": 10,
 					"Places/user/location": 10,
 					"Streams/greeting/": 10
+				},
+				"forStreams": {
+					"Streams/user/firstName": 5,
+					"Streams/user/lastName": 5,
+					"Streams/user/birthday": 1,
+					"Streams/user/icon": 5,
+					"Streams/user/gender": 1,
+					"Streams/user/height": 1,
+					"Streams/user/affiliation": 1,
+					"Places/user/location": 5,
+					"Streams/greeting": 5,
+					"Streams/user/dating": 1,
+					"Streams/user/jobs": 1,
+					"Streams/user/education": 1,
+					"Streams/user/twitter": 1,
+					"Streams/user/github": 1,
+					"Streams/user/facebook": 1,
+					"Streams/user/instagram": 1
 				}
 			},
 			"exchange": {

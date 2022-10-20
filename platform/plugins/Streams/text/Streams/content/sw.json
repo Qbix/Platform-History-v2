@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Teleconference",
             "MeetingEnded": "Teleconference imekamilika"
+        },
+        "requestSpeakDialog": {
+            "msg": "Kwa sasa kuna watu {{count}} wanaozungumza kwenye mkutano. Je, ungependa kubadilisha mojawapo baada ya kuwaruhusu sekunde {100}} kumaliza kuzungumza?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Maliza Simu",
         "interview": "Mahojiano",
         "markApproved": "Alama Imeidhinishwa"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "Hadharani",
+        "configurationSaved": "Usanidi umehifadhiwa",
+        "error": "Hitilafu fulani imetokea"
     }
 }

@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Postavke strujanja"
+        },
+        "requestSpeakDialog": {
+            "msg": "Trenutno na sastanku govori {{count}} osoba. Želite li zamijeniti jednog od njih nakon {{seconds}} sekundi da završe s govorom?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Završi poziv",
         "interview": "Intervju",
         "markApproved": "Označi Odobreno"
+    },
+    "identifier": {
+        "private": "Privatni",
+        "public": "Javnost",
+        "configurationSaved": "Konfiguracija je spremljena",
+        "error": "Nešto je pošlo po zlu"
     }
 }

@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Streaming ezarpenak"
+        },
+        "requestSpeakDialog": {
+            "msg": "Une honetan {{count}} pertsona daude bileran hitz egiten. Horietako bat ordezkatu nahi duzu hitz egiten amaitzeko {{seconds}} segundo utzi ondoren?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Amaitu deia",
         "interview": "Elkarrizketa",
         "markApproved": "Markatu Onartuta"
+    },
+    "identifier": {
+        "private": "Pribatua",
+        "public": "Publiko",
+        "configurationSaved": "Konfigurazioa gorde da",
+        "error": "Zerbait gaizki joan da"
     }
 }

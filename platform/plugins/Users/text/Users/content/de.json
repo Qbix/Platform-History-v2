@@ -103,6 +103,13 @@
                 "title": "Weiterleitung an Wallet",
                 "content": "Sobald Sie diesen Dialog schließen, werden Sie zu Ihrer Brieftasche weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
             }
+        },
+        "web3": {
+            "payload": "Melden Sie sich um {{timestamp}} bei {{host}} an",
+            "alert": {
+                "title": "Umleitung zu Wallet",
+                "content": "Sobald Sie diesen Dialog schließen, werden Sie zu Ihrer Brieftasche weitergeleitet. Kehren Sie nach der Anmeldung zu dieser Seite zurück."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Mitglied",
         "Guest": "Gast",
         "Host": "Gastgeber"
+    },
+    "avatar": {
+        "Someone": "Jemand"
+    },
+    "web3": {
+        "WrongMethod": "Falsche Vertragsmethode {{methodName}}"
     }
 }

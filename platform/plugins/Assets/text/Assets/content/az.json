@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} üçün ödəniş işlənib",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ödədiyiniz üçün təşəkkür edirik",
         "SubscribedTo": "{{call 'user.displayName'}} abunə oldu {{plan.title}}",
-        "YouSubscribedTo": "Siz {{plan.title}} kanalına abunə olmusunuz"
+        "YouSubscribedTo": "Siz {{plan.title}} kanalına abunə olmusunuz",
+        "Assets\/credits\/alert": "Hesabınızla bağlı xəbərdarlıq aldınız"
     },
     "payment": {
         "AboutOrder": "Sifariş haqqında məlumat",
         "PaymentMethod": "Ödəniş üsulu",
         "ContactInfo": "Əlaqə məlumatı",
-        "Pay": "Ödəmək"
+        "Pay": "Ödəmək",
+        "PaymentSucceeded": "Ödəniş həyata keçirildi",
+        "PaymentProcessing.": "Ödənişiniz emal olunur",
+        "FailTryAgain": "Ödənişiniz uğursuz oldu, yenidən cəhd edin",
+        "SomethingWrong": "Nəsə xəta baş verdi",
+        "PaymentStatus": "Ödəniş statusu"
     },
     "credits": {
         "InviteAcceptedBy": "Dəvət {{invitedUserName}} tərəfindən qəbul edildi",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Kredit və ya debet kartı",
         "SubscribePayment": "Abunə Ödəniş",
-        "ImmediatePayment": "Dərhal Ödəniş"
+        "ImmediatePayment": "Dərhal Ödəniş",
+        "ProcessingPayment": "Ödəniş emal olunur",
+        "SubscriptionAlreadyPaid": "Bu abunəlik artıq ödənilib",
+        "SubscriptionNotActive": "Bu abunəlik aktiv deyil",
+        "Subscribed": "Abunə oldu",
+        "Unsubscribed": "Abunəlik ləğv edildi",
+        "Unsubscribe": "Abunəni dayandırın",
+        "Subscribe": "Abunə ol",
+        "Started": "başladı",
+        "EndsIn": "bitir",
+        "NextPay": "Növbəti ödəniş",
+        "Period": "Dövr",
+        "Price": "Qiymət",
+        "AreYouSureUnsubscribe": "Bu planın abunəliyini ləğv etmək istədiyinizə əminsiniz?",
+        "YouUnsubscribedFromPlan": "Siz &quot;{{planTitle}}&quot; planının abunəliyini ləğv etdiniz. Sizdən ödəniş tutulmayacaq, lakin abunəliyiniz {{endsIn}} tarixinə qədər davam edəcək",
+        "plan": {
+            "TitlePlaceholder": "plan başlığı",
+            "PricePlaceholder": "qiymət",
+            "DescriptionPlaceholder": "abunə planının təsviri",
+            "SavePlan": "Planı Saxla",
+            "NewPlan": "Yeni Plan"
+        }
     },
     "payments": {
         "infoTitle": "Ödəniş məlumatını təyin edin",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} kredit"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Hesabınızda kiçik kreditlər var. Daha çox kredit almaq üçün <a href='{{link}}'>bu linkə<\/a> daxil olun."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Tələb olunan ödəniş",
         "AreYouSureDelete": "Bu xidməti silmək istədiyinizə əminsiniz?",
         "AmountServicesRelated": "Bu xidmətlə bağlı {{amount}} əlçatanlıq var. Onlar da silinəcək.",
-        "Free": "Pulsuz"
+        "Free": "Pulsuz",
+        "EditServiceTemplate": {
+            "Title": "Redaktə Xidməti"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFT haqqında məlumat",
@@ -247,7 +280,9 @@
             "importOptions": "Seçimlər",
             "sampleCSV": "Nümunə CSV yükləyin",
             "fileLabel": "Cədvəl yükləyin:",
-            "errorsTitle": "Səhvlər baş verdi"
+            "errorsTitle": "Səhvlər baş verdi",
+            "importAttributes": "NFT atributlarını idxal edin",
+            "displayTypeEmpty": "&quot;{{1}}&quot; üçün displey növü tapılmadı"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Müəlliflərə görə süzün"
             }
         },
-        "Back": "Kolleksiyaya qayıt"
+        "Back": "Kolleksiyaya qayıt",
+        "Name": "ad",
+        "EnterName": "Ad daxil edin",
+        "EnterAuthorWallet": "Müəllif cüzdanını daxil edin",
+        "InformationAboutTitle": "{{title}} NFT haqqında məlumat",
+        "DetailedInformationAboutNFT": "NFT haqqında ətraflı məlumat",
+        "PresaleStarts": "Ön satış 23 dekabrda başlayır",
+        "OwnerUserNotFound": "Bu NFT-nin sahibi tətbiqimizdə qeydiyyatdan keçməyib.",
+        "BuyNow": "İndi al",
+        "Buy": "al",
+        "Conversation": "Söhbət",
+        "Create": "Yaradın",
+        "Author": "Müəllif",
+        "Commission": "komissiya",
+        "EnterCommission": "Komissiya daxil edin",
+        "Actions": "Tədbirlər",
+        "UpdateNFT": "NFT-ni yeniləyin",
+        "NotOnSale": "Satışda Yoxdur",
+        "MovieURL": "Film URL",
+        "EnterPrice": "Qiyməti daxil edin",
+        "Currency": "Valyuta",
+        "AreYouSureDeleteImage": "Şəkli silmək istədiyinizə əminsiniz?",
+        "AreYouSureDeleteVideo": "Videonu silmək istədiyinizə əminsiniz?",
+        "series": {
+            "Name": "ad",
+            "Icon": "İkon",
+            "Description": "Təsvir",
+            "Author": "Müəllif",
+            "SelectSeries": "Seriya seçin",
+            "Value": "Dəyər",
+            "AreYouSure": "Sən əminsən?",
+            "AuthorInvalid": "Müəllif ünvanı etibarsızdır!",
+            "Address": "Ünvan",
+            "CoverImage": "Qapaq şəkli",
+            "UploadCoverImage": "Qapaq şəklini yükləyin",
+            "CommissionAddressInvalid": "Komissiya ünvanı etibarsızdır",
+            "OnSale": "Endirimdə",
+            "OffSale": "satışdan kənar",
+            "CreateSeries": "Seriya yaradın",
+            "UpdateSeries": "Yeniləmə seriyası",
+            "SeriesInfo": "Seriya məlumatı",
+            "SelectAuthor": "Müəllif seçin",
+            "NewItem": "Yeni NFT seriyası",
+            "NamePlaceholder": "Seriyanın adını daxil edin",
+            "DescPlaceholder": "Seriyanın təsvirini daxil edin",
+            "EndingIn": "Sonda"
+        },
+        "contract": {
+            "CreateContract": "Müqavilə yaradın",
+            "SelectContract": "Müqavilə seçin",
+            "CreateContractFor": "{{userName}} üçün müqavilə yaradın",
+            "ContractFor": "{{userName}} üçün müqavilə",
+            "UpdateContract": "Müqaviləni yeniləyin",
+            "TransferOwnership": "Mülkiyyətin ötürülməsi",
+            "SetBaseURI": "Əsas URI təyin edin",
+            "SetSuffix": "Suffiksi təyin edin",
+            "CurrentOwner": "Hazırkı Sahibi",
+            "CurrentBaseURL": "Cari BaseURL",
+            "ContractAddressAbsent": "Müqavilə ünvanı yoxdur",
+            "FactoryAddressAbsent": "Zavod ünvanı yoxdur",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Başlıq tələb olunur",
+            "SymbolRequired": "Simvol tələb olunur",
+            "TypeContractName": "müqavilənin adı",
+            "TypeContractSymbol": "müqavilə simvolu (maksimum 10 simvol)"
+        },
+        "contests": {
+            "Title": "Yarışmalar",
+            "NewContest": "Yeni Müsabiqə"
+        },
+        "attributes": {
+            "Title": "Atributları idarə edin",
+            "Attributes": "Atributlar",
+            "DisplayTitle": "Ekran növü",
+            "AddDisplayType": "Yeni ekran növü əlavə edin",
+            "NewDisplay": "Yeni Ekran",
+            "TraitTitle": "Xüsusiyyət növü",
+            "AddTraitTitle": "Yeni xüsusiyyət növü əlavə edin",
+            "NewTrait": "Yeni Xüsusiyyət Tipi",
+            "ValueTitle": "Dəyər",
+            "AddValueTitle": "Yeni dəyər əlavə edin",
+            "NewValue": "Yeni Dəyər",
+            "NewAttribute": "Yeni Atribut",
+            "UpdateAttributes": "Atributları yeniləyin",
+            "SaveAttributes": "Atributları yadda saxlayın"
+        },
+        "profile": {
+            "LogOut": "Çıxış",
+            "Title": "{{userName}} üçün profil",
+            "Description": "İstifadəçi təfərrüatları",
+            "aboutPlaceholder": "Bio-nu redaktə et",
+            "SureLogOut": "Çıxmaq istədiyinizə əminsiniz?"
+        }
+    },
+    "errors": {
+        "Error": "Xəta",
+        "WalletAbsent": "Pul kisəsi qoşulmayıb.",
+        "Rendering": "<span class='url'>{{1}}<\/span> göstərilərkən xətalar baş verdi",
+        "PriceRequired": "Qiymət tələb olunur!",
+        "NameRequired": "Ad tələb olunur!",
+        "PriceInvalid": "Qiymət etibarsızdır!",
+        "TransactionFailed": "Əməliyyat uğursuz oldu",
+        "ChainNotSupported": "Seçilmiş zəncir dəstəklənmir. Dəstəklənən zəncir: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Tətbiqlə işləmək üçün MetaMask qoşulmalıdır",
+        "UserNotLoggedInMetaMask": "İstifadəçi MetaMask-a daxil deyil",
+        "CurrencyNotFound": "Valyuta tapılmadı",
+        "WrongChain": "Bu NFT &quot;{{chain}}&quot; altında yaradılmışdır. Zəhmət olmasa bu zəncirdən istifadə edin."
+    },
+    "admin": {
+        "Title": "İnzibati aktivlər",
+        "SubscriptionTitle": "Abunə planları"
+    },
+    "billing": {
+        "Title": "Aktivlərin hesablanması",
+        "CreditsMinimum": "Minimum kreditlər",
+        "CreditsToAdd": "Əlavə etmək üçün kreditlər",
+        "Save": "Yadda saxla",
+        "ThisLink": "bu link",
+        "errors": {
+            "CreditsMinimumNegative": "Kredit minimumu mənfi ola bilməz",
+            "CreditsToAddNegative": "Əlavə ediləcək kreditlər mənfi ola bilməz"
+        }
     }
 }

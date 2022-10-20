@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonferenza",
             "MeetingEnded": "Telekonferenza ntemmet"
+        },
+        "requestSpeakDialog": {
+            "msg": "Bħalissa hemm {{count}} nies jitkellmu fil-laqgħa. Trid tissostitwixxi waħda minnhom wara li tħallihom {{seconds}} sekondi biex jispiċċaw jitkellmu?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Tmiem Sejħa",
         "interview": "Intervista",
         "markApproved": "Mark Approvat"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "Pubbliku",
+        "configurationSaved": "Konfigurazzjoni salvata",
+        "error": "Xi ħaġa marret ħażin"
     }
 }

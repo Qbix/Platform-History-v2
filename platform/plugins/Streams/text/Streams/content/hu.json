@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonferencia",
             "MeetingEnded": "A telekonferencia véget ért"
+        },
+        "requestSpeakDialog": {
+            "msg": "Jelenleg {{count}} személy beszél a megbeszélésen. Le szeretné cserélni az egyiket, miután {{seconds}} másodpercet hagyott a beszéd befejezésére?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Hívás befejezése",
         "interview": "Interjú",
         "markApproved": "Jelölje meg jóváhagyva"
+    },
+    "identifier": {
+        "private": "Magán",
+        "public": "Nyilvános",
+        "configurationSaved": "A konfiguráció mentve",
+        "error": "Valami elromlott"
     }
 }

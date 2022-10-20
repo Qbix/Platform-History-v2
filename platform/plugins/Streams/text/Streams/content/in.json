@@ -280,6 +280,9 @@
         },
         "streamingSettings": {
             "title": "Pengaturan Streaming"
+        },
+        "requestSpeakDialog": {
+            "msg": "Saat ini ada {{count}} orang yang berbicara dalam rapat. Apakah Anda ingin mengganti salah satu dari mereka setelah mengizinkan mereka {{seconds}} detik untuk selesai berbicara?"
         }
     },
     "types": {
@@ -551,5 +554,11 @@
         "endCall": "Akhiri panggilan",
         "interview": "Wawancara",
         "markApproved": "Tandai Disetujui"
+    },
+    "identifier": {
+        "private": "Pribadi",
+        "public": "Publik",
+        "configurationSaved": "Konfigurasi disimpan",
+        "error": "Ada yang salah"
     }
 }
