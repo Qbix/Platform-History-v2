@@ -103,6 +103,13 @@
                 "title": "Beinir áfram í veski",
                 "content": "Þegar þú lokar þessum glugga verðurðu færður í veskið þitt. Eftir að þú hefur skráð þig inn skaltu fara aftur á þessa síðu."
             }
+        },
+        "web3": {
+            "payload": "Skráðu þig inn á {{host}} klukkan {{timestamp}}",
+            "alert": {
+                "title": "Beinir áfram í veski",
+                "content": "Þegar þú lokar þessum glugga verðurðu færður í veskið þitt. Eftir að þú hefur skráð þig inn skaltu fara aftur á þessa síðu."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Meðlimur",
         "Guest": "Gestur",
         "Host": "Gestgjafi"
+    },
+    "avatar": {
+        "Someone": "Einhver"
+    },
+    "web3": {
+        "WrongMethod": "Röng samningsaðferð {{methodName}}"
     }
 }

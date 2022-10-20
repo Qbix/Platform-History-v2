@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: opkrævning behandlet for {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Tak for din betaling til {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abonnerede på {{plan.title}}",
-        "YouSubscribedTo": "Du er blevet abonneret på {{plan.title}}"
+        "YouSubscribedTo": "Du er blevet abonneret på {{plan.title}}",
+        "Assets\/credits\/alert": "Du har en advarsel relateret til din konto"
     },
     "payment": {
         "AboutOrder": "Info om bestilling",
         "PaymentMethod": "Betalingsmetode",
         "ContactInfo": "Kontaktoplysninger",
-        "Pay": "Betale"
+        "Pay": "Betale",
+        "PaymentSucceeded": "Betaling lykkedes",
+        "PaymentProcessing.": "Din betaling behandles",
+        "FailTryAgain": "Din betaling lykkedes ikke. Prøv venligst igen",
+        "SomethingWrong": "Noget gik galt",
+        "PaymentStatus": "Betalingsstatus"
     },
     "credits": {
         "InviteAcceptedBy": "Invitation accepteret af {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Kredit- eller betalingskort",
         "SubscribePayment": "Abonner Betaling",
-        "ImmediatePayment": "Øjeblikkelig betaling"
+        "ImmediatePayment": "Øjeblikkelig betaling",
+        "ProcessingPayment": "Behandling af betaling",
+        "SubscriptionAlreadyPaid": "Dette abonnement er allerede betalt",
+        "SubscriptionNotActive": "Dette abonnement er ikke aktivt",
+        "Subscribed": "Abonneret",
+        "Unsubscribed": "Afmeldt",
+        "Unsubscribe": "Opsige abonnement",
+        "Subscribe": "Abonner",
+        "Started": "Startede",
+        "EndsIn": "Ender i",
+        "NextPay": "Næste betaling",
+        "Period": "Periode",
+        "Price": "Pris",
+        "AreYouSureUnsubscribe": "Er du sikker på, at du vil afmelde denne plan?",
+        "YouUnsubscribedFromPlan": "Du afmeldte abonnementet &quot;{{planTitle}}&quot;. Du debiteres ikke, men dit abonnement fortsætter indtil {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "planens titel",
+            "PricePlaceholder": "pris",
+            "DescriptionPlaceholder": "beskrivelse af abonnementsplanen",
+            "SavePlan": "Gem plan",
+            "NewPlan": "Ny plan"
+        }
     },
     "payments": {
         "infoTitle": "Indstil betalingsoplysninger",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} kreditter"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Du har få kreditter på din konto. Besøg venligst <a href='{{link}}'>dette link<\/a> for at købe flere kreditter."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Påkrævet betaling",
         "AreYouSureDelete": "Er du sikker på, at du vil slette denne tjeneste?",
         "AmountServicesRelated": "Der er {{amount}} tilgængeligheder relateret til denne tjeneste. De vil også blive fjernet.",
-        "Free": "Gratis"
+        "Free": "Gratis",
+        "EditServiceTemplate": {
+            "Title": "Rediger tjeneste"
+        }
     },
     "NFT": {
         "Title": "Oplysninger om {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "Muligheder",
             "sampleCSV": "Download eksempel på CSV",
             "fileLabel": "Upload regneark:",
-            "errorsTitle": "Der opstod fejl"
+            "errorsTitle": "Der opstod fejl",
+            "importAttributes": "Importer NFT-attributter",
+            "displayTypeEmpty": "Visningstype for &quot;{{1}}&quot; blev ikke fundet"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Filtrer efter forfattere"
             }
         },
-        "Back": "Tilbage til samling"
+        "Back": "Tilbage til samling",
+        "Name": "Navn",
+        "EnterName": "Indtast navn",
+        "EnterAuthorWallet": "Indtast forfatterens tegnebog",
+        "InformationAboutTitle": "Oplysninger om {{title}} NFT",
+        "DetailedInformationAboutNFT": "Detaljeret information om NFT",
+        "PresaleStarts": "Forsalg starter 23. december",
+        "OwnerUserNotFound": "Ejer af denne NFT er ikke registreret i vores applikation.",
+        "BuyNow": "Køb nu",
+        "Buy": "Købe",
+        "Conversation": "Samtale",
+        "Create": "skab",
+        "Author": "Forfatter",
+        "Commission": "Provision",
+        "EnterCommission": "Indtast provision",
+        "Actions": "Handlinger",
+        "UpdateNFT": "Opdater NFT",
+        "NotOnSale": "Ikke til salg",
+        "MovieURL": "Filmens URL",
+        "EnterPrice": "Indtast pris",
+        "Currency": "betalingsmiddel",
+        "AreYouSureDeleteImage": "Er du sikker på, at du vil fjerne billedet?",
+        "AreYouSureDeleteVideo": "Er du sikker på, at du vil fjerne videoen?",
+        "series": {
+            "Name": "Navn",
+            "Icon": "Ikon",
+            "Description": "Beskrivelse",
+            "Author": "Forfatter",
+            "SelectSeries": "Vælg serie",
+            "Value": "Værdi",
+            "AreYouSure": "Er du sikker?",
+            "AuthorInvalid": "Forfatteradressen er ugyldig!",
+            "Address": "Adresse",
+            "CoverImage": "Forsidebillede",
+            "UploadCoverImage": "Upload forsidebillede",
+            "CommissionAddressInvalid": "Kommissionens adresse er ugyldig",
+            "OnSale": "på udsalg",
+            "OffSale": "udsalg",
+            "CreateSeries": "Opret serie",
+            "UpdateSeries": "Opdater serie",
+            "SeriesInfo": "Serie info",
+            "SelectAuthor": "Vælg forfatter",
+            "NewItem": "Ny NFT-serie",
+            "NamePlaceholder": "Indtast serienavn",
+            "DescPlaceholder": "Indtast seriebeskrivelse",
+            "EndingIn": "Ender i"
+        },
+        "contract": {
+            "CreateContract": "Opret kontrakt",
+            "SelectContract": "Vælg kontrakt",
+            "CreateContractFor": "Opret kontrakt for {{userName}}",
+            "ContractFor": "Kontrakt for {{userName}}",
+            "UpdateContract": "Opdater kontrakt",
+            "TransferOwnership": "Overdrage ejerskab",
+            "SetBaseURI": "Indstil base-URI",
+            "SetSuffix": "Indstil suffiks",
+            "CurrentOwner": "Nuværende ejer",
+            "CurrentBaseURL": "Nuværende BaseURL",
+            "ContractAddressAbsent": "Kontraktadresse mangler",
+            "FactoryAddressAbsent": "Fabriksadresse mangler",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Titel påkrævet",
+            "SymbolRequired": "Symbol påkrævet",
+            "TypeContractName": "kontraktens navn",
+            "TypeContractSymbol": "kontraktsymbol (max 10 tegn)"
+        },
+        "contests": {
+            "Title": "Konkurrencer",
+            "NewContest": "Ny konkurrence"
+        },
+        "attributes": {
+            "Title": "Administrer attributter",
+            "Attributes": "Egenskaber",
+            "DisplayTitle": "Display Type",
+            "AddDisplayType": "Tilføj ny skærmtype",
+            "NewDisplay": "Ny skærm",
+            "TraitTitle": "Egenskabstype",
+            "AddTraitTitle": "Tilføj ny egenskabstype",
+            "NewTrait": "Ny egenskabstype",
+            "ValueTitle": "Værdi",
+            "AddValueTitle": "Tilføj ny værdi",
+            "NewValue": "Ny værdi",
+            "NewAttribute": "Ny egenskab",
+            "UpdateAttributes": "Opdater attributter",
+            "SaveAttributes": "Gem attributter"
+        },
+        "profile": {
+            "LogOut": "Log ud",
+            "Title": "Profil for {{userName}}",
+            "Description": "Brugeroplysninger",
+            "aboutPlaceholder": "Rediger bio",
+            "SureLogOut": "Er du sikker på, at du vil logge ud?"
+        }
+    },
+    "errors": {
+        "Error": "Fejl",
+        "WalletAbsent": "Pungen er ikke tilsluttet.",
+        "Rendering": "Der opstod fejl under gengivelsen af <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Pris påkrævet!",
+        "NameRequired": "Navn påkrævet!",
+        "PriceInvalid": "Pris ugyldig!",
+        "TransactionFailed": "Transaktion mislykkedes",
+        "ChainNotSupported": "Den valgte kæde understøttes ikke. Understøttet kæde: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Behøver MetaMask forbundet for at arbejde med applikationen",
+        "UserNotLoggedInMetaMask": "Brugeren er ikke logget ind på MetaMask",
+        "CurrencyNotFound": "Valuta ikke fundet",
+        "WrongChain": "Denne NFT oprettet under &quot;{{chain}}&quot;. Brug venligst denne kæde."
+    },
+    "admin": {
+        "Title": "Administrative aktiver",
+        "SubscriptionTitle": "Abonnementsplaner"
+    },
+    "billing": {
+        "Title": "Fakturering af aktiver",
+        "CreditsMinimum": "Minimumskreditter",
+        "CreditsToAdd": "Credits at tilføje",
+        "Save": "Gemme",
+        "ThisLink": "dette link",
+        "errors": {
+            "CreditsMinimumNegative": "Kredittminimum kan ikke være negativt",
+            "CreditsToAddNegative": "Krediteringer, der skal tilføjes, kan ikke være negative"
+        }
     }
 }

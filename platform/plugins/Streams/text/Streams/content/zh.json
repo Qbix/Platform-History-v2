@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "流媒体设置"
+        },
+        "requestSpeakDialog": {
+            "msg": "目前有 {{count}} 人在会议中发言。您想在他们 {{seconds}} 秒说完话后替换其中一个吗？"
         }
     },
     "types": {
@@ -555,5 +558,11 @@
         "endCall": "结束通话",
         "interview": "面试",
         "markApproved": "标记已批准"
+    },
+    "identifier": {
+        "private": "私人的",
+        "public": "上市",
+        "configurationSaved": "配置已保存",
+        "error": "出问题了"
     }
 }

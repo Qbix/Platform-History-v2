@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Indstillinger for streaming"
+        },
+        "requestSpeakDialog": {
+            "msg": "Der er i øjeblikket {{count}} personer, der taler i mødet. Vil du erstatte en af dem, efter du har givet dem {{seconds}} sekunder til at tale færdig?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Afslut opkald",
         "interview": "Interview",
         "markApproved": "Mærke godkendt"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "Offentlig",
+        "configurationSaved": "Konfiguration gemt",
+        "error": "Noget gik galt"
     }
 }

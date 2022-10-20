@@ -103,6 +103,13 @@
                 "title": "Reindirizzamento a Wallet",
                 "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
             }
+        },
+        "web3": {
+            "payload": "Accedi a {{host}} alle ore {{timestamp}}",
+            "alert": {
+                "title": "Reindirizzamento a Wallet",
+                "content": "Una volta chiusa questa finestra di dialogo, verrai indirizzato al tuo portafoglio. Dopo aver effettuato l&#39;accesso, torna a questa pagina."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Membro",
         "Guest": "Ospite",
         "Host": "Ospite"
+    },
+    "avatar": {
+        "Someone": "Qualcuno"
+    },
+    "web3": {
+        "WrongMethod": "Metodo di contratto errato {{methodName}}"
     }
 }

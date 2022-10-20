@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} এর জন্য চার্জ প্রক্রিয়া করা হয়েছে",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} এ আপনার অর্থপ্রদানের জন্য আপনাকে ধন্যবাদ",
         "SubscribedTo": "{{call 'user.displayName'}} সদস্যতা নিয়েছে {{plan.title}}",
-        "YouSubscribedTo": "আপনি {{plan.title}} এ সদস্যতা নিয়েছেন"
+        "YouSubscribedTo": "আপনি {{plan.title}} এ সদস্যতা নিয়েছেন",
+        "Assets\/credits\/alert": "আপনি আপনার অ্যাকাউন্ট সম্পর্কিত সতর্কতা আছে"
     },
     "payment": {
         "AboutOrder": "অর্ডার সম্পর্কে তথ্য",
         "PaymentMethod": "মূল্যপরিশোধ পদ্ধতি",
         "ContactInfo": "যোগাযোগের তথ্য",
-        "Pay": "বেতন"
+        "Pay": "বেতন",
+        "PaymentSucceeded": "পেমেন্ট সফল",
+        "PaymentProcessing.": "আপনার পেমেন্ট প্রক্রিয়া করা হচ্ছে",
+        "FailTryAgain": "আপনার পেমেন্ট সফল হয়নি, আবার চেষ্টা করুন",
+        "SomethingWrong": "কিছু ভুল হয়েছে",
+        "PaymentStatus": "লেনদেনের অবস্থা"
     },
     "credits": {
         "InviteAcceptedBy": "আমন্ত্রণ গৃহীত হয়েছে {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "ক্রেডিট বা ডেবিট কার্ড",
         "SubscribePayment": "পেমেন্ট সদস্যতা",
-        "ImmediatePayment": "জরুরী টাকা প্রদান"
+        "ImmediatePayment": "জরুরী টাকা প্রদান",
+        "ProcessingPayment": "পেমেন্ট প্রক্রিয়াকরণ",
+        "SubscriptionAlreadyPaid": "এই সদস্যতা ইতিমধ্যে প্রদান করা হয়েছে",
+        "SubscriptionNotActive": "এই সদস্যতা সক্রিয় নয়",
+        "Subscribed": "সদস্যতা",
+        "Unsubscribed": "আনসাবস্ক্রাইব",
+        "Unsubscribe": "সদস্যতা ত্যাগ করুন",
+        "Subscribe": "সাবস্ক্রাইব",
+        "Started": "শুরু হয়েছে",
+        "EndsIn": "শেষ হয়",
+        "NextPay": "পরবর্তী পেমেন্ট",
+        "Period": "সময়কাল",
+        "Price": "দাম",
+        "AreYouSureUnsubscribe": "আপনি কি নিশ্চিত যে আপনি এই প্ল্যানটি আনসাবস্ক্রাইব করতে চান?",
+        "YouUnsubscribedFromPlan": "আপনি প্ল্যান &quot;{{planTitle}}&quot; থেকে সদস্যতা ত্যাগ করেছেন। আপনাকে চার্জ করা হবে না, তবে আপনার সদস্যতা {{endsIn}} পর্যন্ত চলবে",
+        "plan": {
+            "TitlePlaceholder": "পরিকল্পনা শিরোনাম",
+            "PricePlaceholder": "মূল্য",
+            "DescriptionPlaceholder": "সাবস্ক্রিপশন প্ল্যানের বিবরণ",
+            "SavePlan": "পরিকল্পনা সংরক্ষণ করুন",
+            "NewPlan": "নতুন পরিকল্পনা"
+        }
     },
     "payments": {
         "infoTitle": "পেমেন্ট তথ্য সেট করুন",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "বোনাস {{amount}} ক্রেডিট"
+        },
+        "Assets\/credits\/alert": {
+            "content": "আপনার অ্যাকাউন্টে সামান্য ক্রেডিট আছে। আরো ক্রেডিট কিনতে <a href='{{link}}'>এই লিঙ্ক<\/a> দেখুন."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "প্রয়োজনীয় অর্থপ্রদান",
         "AreYouSureDelete": "আপনি কি এই পরিষেবাটি মুছে দেওয়ার বিষয়ে নিশ্চিত?",
         "AmountServicesRelated": "এই পরিষেবার সাথে সম্পর্কিত {{amount}} উপলব্ধতা রয়েছে৷ সেগুলোও সরানো হবে।",
-        "Free": "বিনামূল্যে"
+        "Free": "বিনামূল্যে",
+        "EditServiceTemplate": {
+            "Title": "পরিষেবা সম্পাদনা করুন"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFT সম্পর্কে তথ্য",
@@ -247,7 +280,9 @@
             "importOptions": "অপশন",
             "sampleCSV": "নমুনা CSV ডাউনলোড করুন",
             "fileLabel": "স্প্রেডশীট আপলোড করুন:",
-            "errorsTitle": "ত্রুটি ঘটেছে"
+            "errorsTitle": "ত্রুটি ঘটেছে",
+            "importAttributes": "এনএফটি বৈশিষ্ট্য আমদানি করুন",
+            "displayTypeEmpty": "&quot;{{1}}&quot;-এর জন্য প্রদর্শনের ধরন পাওয়া যায়নি"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "লেখক দ্বারা ফিল্টার"
             }
         },
-        "Back": "সংগ্রহে ফিরে যান"
+        "Back": "সংগ্রহে ফিরে যান",
+        "Name": "নাম",
+        "EnterName": "রত",
+        "EnterAuthorWallet": "লেখক ওয়ালেট লিখুন",
+        "InformationAboutTitle": "{{title}} NFT সম্পর্কে তথ্য",
+        "DetailedInformationAboutNFT": "NFT সম্পর্কে বিস্তারিত তথ্য",
+        "PresaleStarts": "প্রিসেল 23 ডিসেম্বর থেকে শুরু হবে",
+        "OwnerUserNotFound": "এই NFT এর মালিক আমাদের আবেদনে নিবন্ধিত নন।",
+        "BuyNow": "এখন কেন",
+        "Buy": "কেনা",
+        "Conversation": "কথোপকথন",
+        "Create": "সৃষ্টি",
+        "Author": "লেখক",
+        "Commission": "কমিশন",
+        "EnterCommission": "কমিশন লিখুন",
+        "Actions": "কর্ম",
+        "UpdateNFT": "NFT আপডেট করুন",
+        "NotOnSale": "বিক্রি না",
+        "MovieURL": "মুভি URL",
+        "EnterPrice": "মূল্য লিখুন",
+        "Currency": "মুদ্রা",
+        "AreYouSureDeleteImage": "আপনি কি ছবিটি সরানোর বিষয়ে নিশ্চিত?",
+        "AreYouSureDeleteVideo": "আপনি কি ভিডিও সরানোর বিষয়ে নিশ্চিত?",
+        "series": {
+            "Name": "নাম",
+            "Icon": "আইকন",
+            "Description": "বর্ণনা",
+            "Author": "লেখক",
+            "SelectSeries": "সিরিজ নির্বাচন করুন",
+            "Value": "মান",
+            "AreYouSure": "তুমি কি নিশ্চিত?",
+            "AuthorInvalid": "লেখকের ঠিকানা অবৈধ!",
+            "Address": "ঠিকানা",
+            "CoverImage": "কভার ইমেজ",
+            "UploadCoverImage": "কভার ইমেজ আপলোড করুন",
+            "CommissionAddressInvalid": "কমিশন ঠিকানা অবৈধ",
+            "OnSale": "বিক্রিতে",
+            "OffSale": "বিক্রয় বন্ধ",
+            "CreateSeries": "সিরিজ তৈরি করুন",
+            "UpdateSeries": "আপডেট সিরিজ",
+            "SeriesInfo": "সিরিজ তথ্য",
+            "SelectAuthor": "লেখক নির্বাচন করুন",
+            "NewItem": "নতুন NFT সিরিজ",
+            "NamePlaceholder": "সিরিজের নাম লিখুন",
+            "DescPlaceholder": "সিরিজের বিবরণ লিখুন",
+            "EndingIn": "শেষ"
+        },
+        "contract": {
+            "CreateContract": "চুক্তি তৈরি করুন",
+            "SelectContract": "চুক্তি নির্বাচন করুন",
+            "CreateContractFor": "{{userName}}-এর জন্য চুক্তি তৈরি করুন",
+            "ContractFor": "{{userName}} এর জন্য চুক্তি",
+            "UpdateContract": "চুক্তি আপডেট করুন",
+            "TransferOwnership": "মালিকানা হস্তান্তর",
+            "SetBaseURI": "বেস ইউআরআই সেট করুন",
+            "SetSuffix": "প্রত্যয় সেট করুন",
+            "CurrentOwner": "বর্তমান মালিক",
+            "CurrentBaseURL": "বর্তমান বেসইউআরএল",
+            "ContractAddressAbsent": "চুক্তির ঠিকানা অনুপস্থিত",
+            "FactoryAddressAbsent": "কারখানার ঠিকানা অনুপস্থিত",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "শিরোনাম প্রয়োজন",
+            "SymbolRequired": "প্রতীক প্রয়োজন",
+            "TypeContractName": "চুক্তির নাম",
+            "TypeContractSymbol": "চুক্তি প্রতীক (সর্বোচ্চ 10 অক্ষর)"
+        },
+        "contests": {
+            "Title": "প্রতিযোগিতা",
+            "NewContest": "নতুন প্রতিযোগিতা"
+        },
+        "attributes": {
+            "Title": "গুণাবলী পরিচালনা করুন",
+            "Attributes": "গুণাবলী",
+            "DisplayTitle": "প্রদর্শনের ধরন",
+            "AddDisplayType": "নতুন ডিসপ্লে টাইপ যোগ করুন",
+            "NewDisplay": "নতুন ডিসপ্লে",
+            "TraitTitle": "বৈশিষ্ট্যের ধরন",
+            "AddTraitTitle": "নতুন বৈশিষ্ট্যের ধরন যোগ করুন",
+            "NewTrait": "নতুন বৈশিষ্ট্যের ধরন",
+            "ValueTitle": "মান",
+            "AddValueTitle": "নতুন মান যোগ করুন",
+            "NewValue": "নতুন মান",
+            "NewAttribute": "নতুন বৈশিষ্ট্য",
+            "UpdateAttributes": "বৈশিষ্ট্য আপডেট করুন",
+            "SaveAttributes": "গুণাবলী সংরক্ষণ করুন"
+        },
+        "profile": {
+            "LogOut": "প্রস্থান",
+            "Title": "{{userName}}-এর প্রোফাইল",
+            "Description": "ব্যবহারকারীর বৃত্যান্ত",
+            "aboutPlaceholder": "বায়ো সম্পাদনা করুন",
+            "SureLogOut": "আপনি লগ আউট করতে চান?"
+        }
+    },
+    "errors": {
+        "Error": "ত্রুটি",
+        "WalletAbsent": "মানিব্যাগটি সংযুক্ত নয়।",
+        "Rendering": "রেন্ডার করার সময় ত্রুটি ছিল <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "মূল্য প্রয়োজন!",
+        "NameRequired": "নাম (প্রয়োজন!",
+        "PriceInvalid": "মূল্য অবৈধ!",
+        "TransactionFailed": "লেনদেনটি ব্যর্থ",
+        "ChainNotSupported": "নির্বাচিত চেইন সমর্থিত নয়। সমর্থিত চেইন: {{supportedChain}}",
+        "NeedMetaMaskConnected": "অ্যাপ্লিকেশনের সাথে কাজ করার জন্য মেটামাস্ক সংযুক্ত করা দরকার",
+        "UserNotLoggedInMetaMask": "ব্যবহারকারী মেটামাস্কে লগ ইন করেননি",
+        "CurrencyNotFound": "মুদ্রা পাওয়া যায়নি",
+        "WrongChain": "এই NFT &quot;{{chain}}&quot; এর অধীনে তৈরি করা হয়েছে। এই চেইন ব্যবহার করুন."
+    },
+    "admin": {
+        "Title": "সম্পদ প্রশাসনিক",
+        "SubscriptionTitle": "সদস্যতা পরিকল্পনা"
+    },
+    "billing": {
+        "Title": "সম্পদ বিলিং",
+        "CreditsMinimum": "ন্যূনতম ক্রেডিট",
+        "CreditsToAdd": "ক্রেডিট যোগ করার জন্য",
+        "Save": "সংরক্ষণ",
+        "ThisLink": "এই লিঙ্ক",
+        "errors": {
+            "CreditsMinimumNegative": "সর্বনিম্ন ক্রেডিট নেতিবাচক হতে পারে না",
+            "CreditsToAddNegative": "যোগ করার জন্য ক্রেডিট নেতিবাচক হতে পারে না"
+        }
     }
 }

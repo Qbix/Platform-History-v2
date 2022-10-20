@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} ಗೆ ಶುಲ್ಕವನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗಿದೆ",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} ಗೆ ನಿಮ್ಮ ಪಾವತಿಗಾಗಿ ಧನ್ಯವಾದಗಳು",
         "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
-        "YouSubscribedTo": "ನೀವು {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿರುವಿರಿ"
+        "YouSubscribedTo": "ನೀವು {{plan.title}} ಗೆ ಚಂದಾದಾರರಾಗಿರುವಿರಿ",
+        "Assets\/credits\/alert": "ನಿಮ್ಮ ಖಾತೆಗೆ ಸಂಬಂಧಿಸಿದ ಎಚ್ಚರಿಕೆಯನ್ನು ನೀವು ಹೊಂದಿದ್ದೀರಿ"
     },
     "charge": {
         "Subject": "ನೀವು &quot;{{description}}&quot; ಮೂಲಕ {{call 'publisher.displayName'}} ನಿಂದ {{displayAmount}} ಪಾವತಿಯನ್ನು ಪಡೆಯುತ್ತೀರಿ",
@@ -21,7 +22,12 @@
         "AboutOrder": "ಆದೇಶದ ಬಗ್ಗೆ ಮಾಹಿತಿ",
         "PaymentMethod": "ಪಾವತಿ ವಿಧಾನ",
         "ContactInfo": "ಸಂಪರ್ಕ ಮಾಹಿತಿ",
-        "Pay": "ಪಾವತಿ"
+        "Pay": "ಪಾವತಿ",
+        "PaymentSucceeded": "ಪಾವತಿ ಯಶಸ್ವಿಯಾಗಿದೆ",
+        "PaymentProcessing.": "ನಿಮ್ಮ ಪಾವತಿಯನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ",
+        "FailTryAgain": "ನಿಮ್ಮ ಪಾವತಿ ಯಶಸ್ವಿಯಾಗಲಿಲ್ಲ, ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
+        "SomethingWrong": "ಏನೋ ತಪ್ಪಾಗಿದೆ",
+        "PaymentStatus": "ಪಾವತಿ ಸ್ಥಿತಿ"
     },
     "credits": {
         "InviteAcceptedBy": "ಆಹ್ವಾನವನ್ನು {{invitedUserName}} ಸ್ವೀಕರಿಸಿದ್ದಾರೆ",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "ಕ್ರೆಡಿಟ್ ಅಥವಾ ಡೆಬಿಟ್ ಕಾರ್ಡ್",
         "SubscribePayment": "ಪಾವತಿಗೆ ಚಂದಾದಾರರಾಗಿ",
-        "ImmediatePayment": "ತಕ್ಷಣದ ಪಾವತಿ"
+        "ImmediatePayment": "ತಕ್ಷಣದ ಪಾವತಿ",
+        "ProcessingPayment": "ಪಾವತಿಯನ್ನು ಪ್ರಕ್ರಿಯೆಗೊಳಿಸಲಾಗುತ್ತಿದೆ",
+        "SubscriptionAlreadyPaid": "ಈ ಚಂದಾದಾರಿಕೆಯನ್ನು ಈಗಾಗಲೇ ಪಾವತಿಸಲಾಗಿದೆ",
+        "SubscriptionNotActive": "ಈ ಚಂದಾದಾರಿಕೆಯು ಸಕ್ರಿಯವಾಗಿಲ್ಲ",
+        "Subscribed": "ಚಂದಾದಾರರಾಗಿದ್ದಾರೆ",
+        "Unsubscribed": "ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡಲಾಗಿದೆ",
+        "Unsubscribe": "ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡಿ",
+        "Subscribe": "ಚಂದಾದಾರರಾಗಿ",
+        "Started": "ಪ್ರಾರಂಭಿಸಲಾಗಿದೆ",
+        "EndsIn": "ಅಂತ್ಯಗೊಳ್ಳುತ್ತದೆ",
+        "NextPay": "ಮುಂದಿನ ಪಾವತಿ",
+        "Period": "ಅವಧಿ",
+        "Price": "ಬೆಲೆ",
+        "AreYouSureUnsubscribe": "ಈ ಯೋಜನೆಯನ್ನು ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+        "YouUnsubscribedFromPlan": "ನೀವು &quot;{{planTitle}}&quot; ಯೋಜನೆಯಿಂದ ಅನ್‌ಸಬ್‌ಸ್ಕ್ರೈಬ್ ಮಾಡಿರುವಿರಿ. ನಿಮಗೆ ಶುಲ್ಕ ವಿಧಿಸಲಾಗುವುದಿಲ್ಲ, ಆದರೆ ನಿಮ್ಮ ಚಂದಾದಾರಿಕೆಯು {{endsIn}} ವರೆಗೆ ಮುಂದುವರಿಯುತ್ತದೆ",
+        "plan": {
+            "TitlePlaceholder": "ಯೋಜನೆ ಶೀರ್ಷಿಕೆ",
+            "PricePlaceholder": "ಬೆಲೆ",
+            "DescriptionPlaceholder": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆ ವಿವರಣೆ",
+            "SavePlan": "ಯೋಜನೆಯನ್ನು ಉಳಿಸಿ",
+            "NewPlan": "ಹೊಸ ಯೋಜನೆ"
+        }
     },
     "payments": {
         "infoTitle": "ಪಾವತಿ ಮಾಹಿತಿಯನ್ನು ಹೊಂದಿಸಿ",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{fromUserName}} ನಿಂದ {{amount}} ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಸ್ವೀಕರಿಸಲಾಗಿದೆ"
+        },
+        "Assets\/credits\/alert": {
+            "content": "ನಿಮ್ಮ ಖಾತೆಯಲ್ಲಿ ನೀವು ಕಡಿಮೆ ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಹೊಂದಿದ್ದೀರಿ. ಹೆಚ್ಚಿನ ಕ್ರೆಡಿಟ್‌ಗಳನ್ನು ಖರೀದಿಸಲು ದಯವಿಟ್ಟು <a href='{{link}}'>ಈ ಲಿಂಕ್‌ಗೆ<\/a> ಭೇಟಿ ನೀಡಿ."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "ಐಚ್ಛಿಕ ಕೊಡುಗೆ",
         "RequiredPayment": "ಅಗತ್ಯವಿರುವ ಪಾವತಿ",
         "AreYouSureDelete": "ಈ ಸೇವೆಯನ್ನು ಅಳಿಸಲು ನೀವು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
-        "AmountServicesRelated": "ಈ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ {{amount}} ಲಭ್ಯತೆಗಳಿವೆ. ಅವುಗಳನ್ನು ಸಹ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ."
+        "AmountServicesRelated": "ಈ ಸೇವೆಗೆ ಸಂಬಂಧಿಸಿದ {{amount}} ಲಭ್ಯತೆಗಳಿವೆ. ಅವುಗಳನ್ನು ಸಹ ತೆಗೆದುಹಾಕಲಾಗುತ್ತದೆ.",
+        "EditServiceTemplate": {
+            "Title": "ಸೇವೆಯನ್ನು ಸಂಪಾದಿಸಿ"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFT ಕುರಿತು ಮಾಹಿತಿ",
@@ -246,7 +279,9 @@
             "importOptions": "ಆಯ್ಕೆಗಳು",
             "sampleCSV": "ಮಾದರಿ CSV ಡೌನ್‌ಲೋಡ್ ಮಾಡಿ",
             "fileLabel": "ಸ್ಪ್ರೆಡ್‌ಶೀಟ್ ಅಪ್‌ಲೋಡ್ ಮಾಡಿ:",
-            "errorsTitle": "ದೋಷಗಳು ಸಂಭವಿಸಿವೆ"
+            "errorsTitle": "ದೋಷಗಳು ಸಂಭವಿಸಿವೆ",
+            "importAttributes": "NFT ಗುಣಲಕ್ಷಣಗಳನ್ನು ಆಮದು ಮಾಡಿ",
+            "displayTypeEmpty": "&quot;{{1}}&quot; ಗಾಗಿ ಪ್ರದರ್ಶನ ಪ್ರಕಾರ ಕಂಡುಬಂದಿಲ್ಲ"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "ಲೇಖಕರಿಂದ ಫಿಲ್ಟರ್ ಮಾಡಿ"
             }
         },
-        "Back": "ಸಂಗ್ರಹಕ್ಕೆ ಹಿಂತಿರುಗಿ"
+        "Back": "ಸಂಗ್ರಹಕ್ಕೆ ಹಿಂತಿರುಗಿ",
+        "Name": "ಹೆಸರು",
+        "EnterName": "ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+        "EnterAuthorWallet": "ಲೇಖಕರ ಕೈಚೀಲವನ್ನು ನಮೂದಿಸಿ",
+        "InformationAboutTitle": "{{title}} NFT ಕುರಿತು ಮಾಹಿತಿ",
+        "DetailedInformationAboutNFT": "NFT ಬಗ್ಗೆ ವಿವರವಾದ ಮಾಹಿತಿ",
+        "PresaleStarts": "ಪ್ರಿಸೇಲ್ ಡಿಸೆಂಬರ್ 23 ರಿಂದ ಪ್ರಾರಂಭವಾಗುತ್ತದೆ",
+        "OwnerUserNotFound": "ಈ NFT ಯ ಮಾಲೀಕರು ನಮ್ಮ ಅಪ್ಲಿಕೇಶನ್‌ನಲ್ಲಿ ನೋಂದಾಯಿಸಲ್ಪಟ್ಟಿಲ್ಲ.",
+        "BuyNow": "ಈಗ ಖರೀದಿಸು",
+        "Buy": "ಖರೀದಿಸಿ",
+        "Conversation": "ಸಂಭಾಷಣೆ",
+        "Create": "ರಚಿಸಿ",
+        "Author": "ಲೇಖಕ",
+        "Commission": "ಆಯೋಗ",
+        "EnterCommission": "ಆಯೋಗವನ್ನು ನಮೂದಿಸಿ",
+        "Actions": "ಕ್ರಿಯೆಗಳು",
+        "UpdateNFT": "NFT ಅನ್ನು ನವೀಕರಿಸಿ",
+        "NotOnSale": "ಮಾರಾಟದಲ್ಲಿಲ್ಲ",
+        "MovieURL": "ಚಲನಚಿತ್ರ URL",
+        "EnterPrice": "ಬೆಲೆ ನಮೂದಿಸಿ",
+        "Currency": "ಕರೆನ್ಸಿ",
+        "AreYouSureDeleteImage": "ನೀವು ಚಿತ್ರವನ್ನು ತೆಗೆದುಹಾಕಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+        "AreYouSureDeleteVideo": "ನೀವು ವೀಡಿಯೊವನ್ನು ತೆಗೆದುಹಾಕಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?",
+        "series": {
+            "Name": "ಹೆಸರು",
+            "Icon": "ಐಕಾನ್",
+            "Description": "ವಿವರಣೆ",
+            "Author": "ಲೇಖಕ",
+            "SelectSeries": "ಸರಣಿಯನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "Value": "ಮೌಲ್ಯ",
+            "AreYouSure": "ನೀವು ಖಚಿತವಾಗಿರುವಿರಾ?",
+            "AuthorInvalid": "ಲೇಖಕರ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ!",
+            "Address": "ವಿಳಾಸ",
+            "CoverImage": "ಕವರ್ ಚಿತ್ರ",
+            "UploadCoverImage": "ಕವರ್ ಚಿತ್ರವನ್ನು ಅಪ್ಲೋಡ್ ಮಾಡಿ",
+            "CommissionAddressInvalid": "ಆಯೋಗದ ವಿಳಾಸ ಅಮಾನ್ಯವಾಗಿದೆ",
+            "OnSale": "ಮಾರಾಟಕ್ಕೆ",
+            "OffSale": "ಮಾರಾಟವಿಲ್ಲ",
+            "CreateSeries": "ಸರಣಿಯನ್ನು ರಚಿಸಿ",
+            "UpdateSeries": "ಸರಣಿಯನ್ನು ನವೀಕರಿಸಿ",
+            "SeriesInfo": "ಸರಣಿ ಮಾಹಿತಿ",
+            "SelectAuthor": "ಲೇಖಕರನ್ನು ಆಯ್ಕೆ ಮಾಡಿ",
+            "NewItem": "ಹೊಸ NFT ಸರಣಿ",
+            "NamePlaceholder": "ಸರಣಿಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ",
+            "DescPlaceholder": "ಸರಣಿ ವಿವರಣೆಯನ್ನು ನಮೂದಿಸಿ",
+            "EndingIn": "ಅಂತ್ಯಗೊಳ್ಳುತ್ತಿದೆ"
+        },
+        "contract": {
+            "CreateContract": "ಒಪ್ಪಂದವನ್ನು ರಚಿಸಿ",
+            "SelectContract": "ಒಪ್ಪಂದವನ್ನು ಆಯ್ಕೆಮಾಡಿ",
+            "CreateContractFor": "{{userName}} ಗಾಗಿ ಒಪ್ಪಂದವನ್ನು ರಚಿಸಿ",
+            "ContractFor": "{{userName}} ಗಾಗಿ ಒಪ್ಪಂದ",
+            "UpdateContract": "ಒಪ್ಪಂದವನ್ನು ನವೀಕರಿಸಿ",
+            "TransferOwnership": "ಮಾಲೀಕತ್ವವನ್ನು ವರ್ಗಾಯಿಸಿ",
+            "SetBaseURI": "ಬೇಸ್ URI ಅನ್ನು ಹೊಂದಿಸಿ",
+            "SetSuffix": "ಪ್ರತ್ಯಯವನ್ನು ಹೊಂದಿಸಿ",
+            "CurrentOwner": "ಪ್ರಸ್ತುತ ಮಾಲೀಕರು",
+            "CurrentBaseURL": "ಪ್ರಸ್ತುತ BaseURL",
+            "ContractAddressAbsent": "ಒಪ್ಪಂದದ ವಿಳಾಸವಿಲ್ಲ",
+            "FactoryAddressAbsent": "ಫ್ಯಾಕ್ಟರಿ ವಿಳಾಸ ಇಲ್ಲ",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "ಶೀರ್ಷಿಕೆ ಅಗತ್ಯವಿದೆ",
+            "SymbolRequired": "ಚಿಹ್ನೆ ಅಗತ್ಯವಿದೆ",
+            "TypeContractName": "ಒಪ್ಪಂದದ ಹೆಸರು",
+            "TypeContractSymbol": "ಒಪ್ಪಂದದ ಚಿಹ್ನೆ (ಗರಿಷ್ಠ 10 ಅಕ್ಷರಗಳು)"
+        },
+        "contests": {
+            "Title": "ಸ್ಪರ್ಧೆಗಳು",
+            "NewContest": "ಹೊಸ ಸ್ಪರ್ಧೆ"
+        },
+        "attributes": {
+            "Title": "ಗುಣಲಕ್ಷಣಗಳನ್ನು ನಿರ್ವಹಿಸಿ",
+            "Attributes": "ಗುಣಲಕ್ಷಣಗಳು",
+            "DisplayTitle": "ಪ್ರದರ್ಶನ ಪ್ರಕಾರ",
+            "AddDisplayType": "ಹೊಸ ಪ್ರದರ್ಶನ ಪ್ರಕಾರವನ್ನು ಸೇರಿಸಿ",
+            "NewDisplay": "ಹೊಸ ಪ್ರದರ್ಶನ",
+            "TraitTitle": "ಗುಣಲಕ್ಷಣದ ಪ್ರಕಾರ",
+            "AddTraitTitle": "ಹೊಸ ಲಕ್ಷಣ ಪ್ರಕಾರವನ್ನು ಸೇರಿಸಿ",
+            "NewTrait": "ಹೊಸ ಲಕ್ಷಣ ಪ್ರಕಾರ",
+            "ValueTitle": "ಮೌಲ್ಯ",
+            "AddValueTitle": "ಹೊಸ ಮೌಲ್ಯವನ್ನು ಸೇರಿಸಿ",
+            "NewValue": "ಹೊಸ ಮೌಲ್ಯ",
+            "NewAttribute": "ಹೊಸ ಗುಣಲಕ್ಷಣ",
+            "UpdateAttributes": "ಗುಣಲಕ್ಷಣಗಳನ್ನು ನವೀಕರಿಸಿ",
+            "SaveAttributes": "ಗುಣಲಕ್ಷಣಗಳನ್ನು ಉಳಿಸಿ"
+        },
+        "profile": {
+            "LogOut": "ಲಾಗ್ ಔಟ್",
+            "Title": "{{userName}} ಗಾಗಿ ಪ್ರೊಫೈಲ್",
+            "Description": "ಬಳಕೆದಾರರ ವಿವರಗಳು",
+            "aboutPlaceholder": "ಬಯೋ ಸಂಪಾದಿಸಿ",
+            "SureLogOut": "ನೀವು ಲಾಗ್ ಔಟ್ ಮಾಡಲು ಖಚಿತವಾಗಿ ಬಯಸುವಿರಾ?"
+        }
+    },
+    "errors": {
+        "Error": "ದೋಷ",
+        "WalletAbsent": "ವಾಲೆಟ್ ಸಂಪರ್ಕಗೊಂಡಿಲ್ಲ.",
+        "Rendering": "ರೆಂಡರಿಂಗ್ ಮಾಡುವಾಗ ದೋಷಗಳಿವೆ <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "ಬೆಲೆ ಅಗತ್ಯವಿದೆ!",
+        "NameRequired": "ಹೆಸರು ಅಗತ್ಯವಿದೆ!",
+        "PriceInvalid": "ಬೆಲೆ ಅಮಾನ್ಯವಾಗಿದೆ!",
+        "TransactionFailed": "ವಹಿವಾಟು ವಿಫಲವಾಗಿದೆ",
+        "ChainNotSupported": "ಆಯ್ಕೆಮಾಡಿದ ಸರಣಿಯು ಬೆಂಬಲಿತವಾಗಿಲ್ಲ. ಬೆಂಬಲಿತ ಸರಣಿ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "ಅಪ್ಲಿಕೇಶನ್‌ನೊಂದಿಗೆ ಕೆಲಸ ಮಾಡಲು ಮೆಟಾಮಾಸ್ಕ್ ಸಂಪರ್ಕದ ಅಗತ್ಯವಿದೆ",
+        "UserNotLoggedInMetaMask": "ಬಳಕೆದಾರರು ಮೆಟಾಮಾಸ್ಕ್‌ಗೆ ಲಾಗ್ ಇನ್ ಆಗಿಲ್ಲ",
+        "CurrencyNotFound": "ಕರೆನ್ಸಿ ಕಂಡುಬಂದಿಲ್ಲ",
+        "WrongChain": "ಈ NFT ಅನ್ನು &quot;{{chain}}&quot; ಅಡಿಯಲ್ಲಿ ರಚಿಸಲಾಗಿದೆ. ದಯವಿಟ್ಟು ಈ ಸರಪಳಿಯನ್ನು ಬಳಸಿ."
+    },
+    "admin": {
+        "Title": "ಸ್ವತ್ತುಗಳು ಆಡಳಿತಾತ್ಮಕ",
+        "SubscriptionTitle": "ಚಂದಾದಾರಿಕೆ ಯೋಜನೆಗಳು"
+    },
+    "billing": {
+        "Title": "ಸ್ವತ್ತುಗಳ ಬಿಲ್ಲಿಂಗ್",
+        "CreditsMinimum": "ಕನಿಷ್ಠ ಕ್ರೆಡಿಟ್‌ಗಳು",
+        "CreditsToAdd": "ಸೇರಿಸಲು ಕ್ರೆಡಿಟ್‌ಗಳು",
+        "Save": "ಉಳಿಸಿ",
+        "ThisLink": "ಈ ಲಿಂಕ್",
+        "errors": {
+            "CreditsMinimumNegative": "ಕನಿಷ್ಠ ಕ್ರೆಡಿಟ್‌ಗಳು ಋಣಾತ್ಮಕವಾಗಿರಬಾರದು",
+            "CreditsToAddNegative": "ಸೇರಿಸಲು ಕ್ರೆಡಿಟ್‌ಗಳು ಋಣಾತ್ಮಕವಾಗಿರಬಾರದು"
+        }
     }
 }

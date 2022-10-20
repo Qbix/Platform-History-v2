@@ -103,6 +103,13 @@
                 "title": "Omdirigerar till Wallet",
                 "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
             }
+        },
+        "web3": {
+            "payload": "Logga in på {{host}} vid tidpunkten {{timestamp}}",
+            "alert": {
+                "title": "Omdirigerar till Wallet",
+                "content": "När du stänger den här dialogrutan tas du till din plånbok. När du har loggat in går du tillbaka till den här sidan."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Medlem",
         "Guest": "Gäst",
         "Host": "Värd"
+    },
+    "avatar": {
+        "Someone": "Någon"
+    },
+    "web3": {
+        "WrongMethod": "Fel kontraktsmetod {{methodName}}"
     }
 }

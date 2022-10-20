@@ -103,6 +103,13 @@
                 "title": "Prebieha presmerovanie do Peňaženky",
                 "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
             }
+        },
+        "web3": {
+            "payload": "Prihláste sa do {{host}} v čase {{timestamp}}",
+            "alert": {
+                "title": "Prebieha presmerovanie do Peňaženky",
+                "content": "Po zatvorení tohto dialógového okna sa dostanete do svojej peňaženky. Po prihlásení sa vráťte na túto stránku."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "člen",
         "Guest": "Hosť",
         "Host": "Hostiteľ"
+    },
+    "avatar": {
+        "Someone": "Niekto"
+    },
+    "web3": {
+        "WrongMethod": "Nesprávna metóda zmluvy {{methodName}}"
     }
 }

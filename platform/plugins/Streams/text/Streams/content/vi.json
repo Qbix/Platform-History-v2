@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Hội nghị từ xa",
             "MeetingEnded": "Hội nghị từ xa đã kết thúc"
+        },
+        "requestSpeakDialog": {
+            "msg": "Hiện có {{count}} người đang phát biểu trong cuộc họp. Bạn có muốn thay thế một trong số họ sau khi cho phép họ nói xong {{seconds}} giây không?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Kết thúc cuộc gọi",
         "interview": "Phỏng vấn",
         "markApproved": "Đánh dấu là đã chấp thuận"
+    },
+    "identifier": {
+        "private": "Riêng tư",
+        "public": "Công cộng",
+        "configurationSaved": "Đã lưu cấu hình",
+        "error": "Đã xảy ra sự cố"
     }
 }

@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Nastavení streamování"
+        },
+        "requestSpeakDialog": {
+            "msg": "Na schůzce aktuálně mluví {{count}} lidí. Chcete jednoho z nich nahradit poté, co mu necháte {{seconds}} sekund domluvit?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Ukončit hovor",
         "interview": "Rozhovor",
         "markApproved": "Označit schváleno"
+    },
+    "identifier": {
+        "private": "Soukromé",
+        "public": "Veřejnost",
+        "configurationSaved": "Konfigurace uložena",
+        "error": "Něco se pokazilo"
     }
 }

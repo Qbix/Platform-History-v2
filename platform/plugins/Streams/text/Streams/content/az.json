@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Yayım Parametrləri"
+        },
+        "requestSpeakDialog": {
+            "msg": "Hazırda görüşdə {{count}} nəfər danışır. Danışmağı bitirmək üçün {{seconds}} saniyə icazə verdikdən sonra onlardan birini əvəz etmək istəyirsiniz?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Zəngi bitir",
         "interview": "Müsahibə",
         "markApproved": "Təsdiqlə işarələyin"
+    },
+    "identifier": {
+        "private": "Şəxsi",
+        "public": "İctimai",
+        "configurationSaved": "Konfiqurasiya yadda saxlandı",
+        "error": "Nəsə xəta baş verdi"
     }
 }

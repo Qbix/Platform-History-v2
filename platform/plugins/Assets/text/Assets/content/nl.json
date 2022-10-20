@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: afschrijving verwerkt voor {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Bedankt voor uw betaling aan {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} geabonneerd op {{plan.title}}",
-        "YouSubscribedTo": "Je bent geabonneerd op {{plan.title}}"
+        "YouSubscribedTo": "Je bent geabonneerd op {{plan.title}}",
+        "Assets\/credits\/alert": "U heeft een melding met betrekking tot uw account"
     },
     "payment": {
         "AboutOrder": "Info over bestelling",
         "PaymentMethod": "Betalingsmiddel",
         "ContactInfo": "Contact informatie",
-        "Pay": "Betalen"
+        "Pay": "Betalen",
+        "PaymentSucceeded": "Betaling geslaagd",
+        "PaymentProcessing.": "Uw betaling wordt verwerkt",
+        "FailTryAgain": "Uw betaling is niet gelukt, probeer het opnieuw",
+        "SomethingWrong": "Er is iets fout gegaan",
+        "PaymentStatus": "Betalingsstatus"
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging geaccepteerd door {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Creditcard of bankpas",
         "SubscribePayment": "Abonneren Betaling",
-        "ImmediatePayment": "Onmiddellijke betaling"
+        "ImmediatePayment": "Onmiddellijke betaling",
+        "ProcessingPayment": "Betaling verwerken",
+        "SubscriptionAlreadyPaid": "Dit abonnement is al betaald",
+        "SubscriptionNotActive": "Dit abonnement is niet actief",
+        "Subscribed": "Geabonneerd",
+        "Unsubscribed": "Uitgeschreven",
+        "Unsubscribe": "Afmelden",
+        "Subscribe": "Abonneren",
+        "Started": "Begonnen",
+        "EndsIn": "Eindigt in",
+        "NextPay": "Volgende betaling",
+        "Period": "Periode",
+        "Price": "Prijs",
+        "AreYouSureUnsubscribe": "Weet je zeker dat je dit abonnement wilt opzeggen?",
+        "YouUnsubscribedFromPlan": "Je hebt je afgemeld voor abonnement &quot;{{planTitle}}&quot;. Er worden geen kosten in rekening gebracht, maar uw abonnement loopt door tot {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "titel van het plan",
+            "PricePlaceholder": "prijs",
+            "DescriptionPlaceholder": "beschrijving abonnement",
+            "SavePlan": "Plan opslaan",
+            "NewPlan": "Nieuw plan"
+        }
     },
     "payments": {
         "infoTitle": "Betalingsinformatie instellen",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} tegoeden"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Je hebt weinig tegoed op je account. Ga naar <a href='{{link}}'>deze link<\/a> om meer credits te kopen."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Vereiste betaling",
         "AreYouSureDelete": "Weet u zeker dat u deze service wilt verwijderen?",
         "AmountServicesRelated": "Er zijn {{amount}} beschikbaarheden met betrekking tot deze service. Ze worden ook verwijderd.",
-        "Free": "Vrij"
+        "Free": "Vrij",
+        "EditServiceTemplate": {
+            "Title": "Dienst bewerken"
+        }
     },
     "NFT": {
         "Title": "Informatie over {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "Opties",
             "sampleCSV": "Download voorbeeld CSV",
             "fileLabel": "Werkblad uploaden:",
-            "errorsTitle": "Er zijn fouten opgetreden"
+            "errorsTitle": "Er zijn fouten opgetreden",
+            "importAttributes": "NFT-kenmerken importeren",
+            "displayTypeEmpty": "Weergavetype voor &quot;{{1}}&quot; niet gevonden"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Filteren op Auteurs"
             }
         },
-        "Back": "Terug naar collectie"
+        "Back": "Terug naar collectie",
+        "Name": "Naam",
+        "EnterName": "Voer naam in",
+        "EnterAuthorWallet": "Voer auteursportemonnee in",
+        "InformationAboutTitle": "Informatie over {{title}} NFT",
+        "DetailedInformationAboutNFT": "Gedetailleerde informatie over NFT",
+        "PresaleStarts": "Voorverkoop start 23 december",
+        "OwnerUserNotFound": "Eigenaar van deze NFT is niet geregistreerd in onze applicatie.",
+        "BuyNow": "Nu kopen",
+        "Buy": "Kopen",
+        "Conversation": "Gesprek",
+        "Create": "Creëren",
+        "Author": "Auteur",
+        "Commission": "Commissie",
+        "EnterCommission": "Voer commissie in",
+        "Actions": "Acties",
+        "UpdateNFT": "NFT bijwerken",
+        "NotOnSale": "Niet in de uitverkoop",
+        "MovieURL": "Film-URL",
+        "EnterPrice": "Voer prijs in",
+        "Currency": "Munteenheid",
+        "AreYouSureDeleteImage": "Weet je zeker dat je de afbeelding wilt verwijderen?",
+        "AreYouSureDeleteVideo": "Weet je zeker dat je de video wilt verwijderen?",
+        "series": {
+            "Name": "Naam",
+            "Icon": "Icoon",
+            "Description": "Beschrijving",
+            "Author": "Auteur",
+            "SelectSeries": "Selecteer serie",
+            "Value": "Waarde",
+            "AreYouSure": "Weet je het zeker?",
+            "AuthorInvalid": "Auteursadres ongeldig!",
+            "Address": "Adres",
+            "CoverImage": "Omslagfoto",
+            "UploadCoverImage": "Omslagafbeelding uploaden",
+            "CommissionAddressInvalid": "Commissie adres ongeldig",
+            "OnSale": "te koop",
+            "OffSale": "uitverkoop",
+            "CreateSeries": "Serie maken",
+            "UpdateSeries": "Update serie",
+            "SeriesInfo": "Serie-info",
+            "SelectAuthor": "Selecteer auteur",
+            "NewItem": "Nieuwe NFT-serie",
+            "NamePlaceholder": "Voer de naam van de serie in",
+            "DescPlaceholder": "Voer een seriebeschrijving in",
+            "EndingIn": "Eindigend in"
+        },
+        "contract": {
+            "CreateContract": "Contract maken",
+            "SelectContract": "Selecteer contract",
+            "CreateContractFor": "Contract maken voor {{userName}}",
+            "ContractFor": "Contract voor {{userName}}",
+            "UpdateContract": "Contract bijwerken",
+            "TransferOwnership": "Eigendom overdragen",
+            "SetBaseURI": "Basis-URI instellen",
+            "SetSuffix": "Achtervoegsel instellen",
+            "CurrentOwner": "Huidige eigenaar",
+            "CurrentBaseURL": "Huidige basis-URL",
+            "ContractAddressAbsent": "Contractadres afwezig",
+            "FactoryAddressAbsent": "Fabrieksadres afwezig",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Titel vereist",
+            "SymbolRequired": "Symbool vereist",
+            "TypeContractName": "contractnaam:",
+            "TypeContractSymbol": "contractsymbool (max. 10 tekens)"
+        },
+        "contests": {
+            "Title": "wedstrijden",
+            "NewContest": "Nieuwe wedstrijd"
+        },
+        "attributes": {
+            "Title": "Attributen beheren",
+            "Attributes": "attributen",
+            "DisplayTitle": "Weergavetype",
+            "AddDisplayType": "Nieuw weergavetype toevoegen",
+            "NewDisplay": "Nieuw scherm",
+            "TraitTitle": "Type eigenschap",
+            "AddTraitTitle": "Nieuw kenmerktype toevoegen",
+            "NewTrait": "Nieuw eigenschapstype",
+            "ValueTitle": "Waarde",
+            "AddValueTitle": "Nieuwe waarde toevoegen",
+            "NewValue": "Nieuwe waarde",
+            "NewAttribute": "Nieuw kenmerk",
+            "UpdateAttributes": "Attributen bijwerken",
+            "SaveAttributes": "Attributen opslaan"
+        },
+        "profile": {
+            "LogOut": "Uitloggen",
+            "Title": "Profiel voor {{userName}}",
+            "Description": "Gebruikersdetails",
+            "aboutPlaceholder": "Bio bewerken",
+            "SureLogOut": "Weet u zeker dat u wilt uitloggen?"
+        }
+    },
+    "errors": {
+        "Error": "Fout",
+        "WalletAbsent": "De portemonnee is niet aangesloten.",
+        "Rendering": "Er zijn fouten opgetreden bij het weergeven van <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Prijs vereist!",
+        "NameRequired": "Naam (vereist!",
+        "PriceInvalid": "Prijs ongeldig!",
+        "TransactionFailed": "Transactie mislukt",
+        "ChainNotSupported": "De geselecteerde keten wordt niet ondersteund. Ondersteunde keten: {{supportedChain}}",
+        "NeedMetaMaskConnected": "MetaMask verbonden nodig om met de applicatie te werken",
+        "UserNotLoggedInMetaMask": "Gebruiker is niet ingelogd op MetaMask",
+        "CurrencyNotFound": "Valuta niet gevonden",
+        "WrongChain": "Deze NFT is gemaakt onder &quot;{{chain}}&quot;. Gebruik deze ketting."
+    },
+    "admin": {
+        "Title": "Activa administratief",
+        "SubscriptionTitle": "Abonnementen"
+    },
+    "billing": {
+        "Title": "Activa facturering",
+        "CreditsMinimum": "Minimale tegoeden",
+        "CreditsToAdd": "Tegoeden om toe te voegen",
+        "Save": "Opslaan",
+        "ThisLink": "deze link",
+        "errors": {
+            "CreditsMinimumNegative": "Minimum credits kan niet negatief zijn",
+            "CreditsToAddNegative": "Tegoeden om toe te voegen kunnen niet negatief zijn"
+        }
     }
 }

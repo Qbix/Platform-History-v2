@@ -103,6 +103,13 @@
                 "title": "Przekierowanie do Portfela",
                 "content": "Gdy zamkniesz to okno, zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
             }
+        },
+        "web3": {
+            "payload": "Zaloguj się do {{host}} o godzinie {{timestamp}}",
+            "alert": {
+                "title": "Przekierowanie do Portfela",
+                "content": "Gdy zamkniesz to okno, zostaniesz przeniesiony do swojego portfela. Po zalogowaniu wróć na tę stronę."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Członek",
         "Guest": "Gość",
         "Host": "Gospodarz"
+    },
+    "avatar": {
+        "Someone": "Ktoś"
+    },
+    "web3": {
+        "WrongMethod": "Niewłaściwa metoda umowy {{methodName}}"
     }
 }

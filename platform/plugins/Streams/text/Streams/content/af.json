@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Stroominstellings"
+        },
+        "requestSpeakDialog": {
+            "msg": "Daar is tans {{count}} mense wat in die vergadering praat. Wil jy een van hulle vervang nadat jy hulle {{seconds}} sekondes toegelaat het om klaar te praat?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Beëindig oproep",
         "interview": "Onderhoud",
         "markApproved": "Merk Goedgekeur"
+    },
+    "identifier": {
+        "private": "Privaat",
+        "public": "Publiek",
+        "configurationSaved": "Opstelling gestoor",
+        "error": "Iets het verkeerd geloop"
     }
 }

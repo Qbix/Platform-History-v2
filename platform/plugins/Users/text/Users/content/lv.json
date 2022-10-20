@@ -103,6 +103,13 @@
                 "title": "Notiek novirzīšana uz maku",
                 "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
             }
+        },
+        "web3": {
+            "payload": "Piesakieties {{host}} laikā {{timestamp}}",
+            "alert": {
+                "title": "Notiek novirzīšana uz maku",
+                "content": "Kad aizvērsit šo dialoglodziņu, tiksit novirzīts uz maku. Pēc pierakstīšanās atgriezieties šajā lapā."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Biedrs",
         "Guest": "Viesis",
         "Host": "Uzņēmēja"
+    },
+    "avatar": {
+        "Someone": "kāds"
+    },
+    "web3": {
+        "WrongMethod": "Nepareiza līguma metode {{methodName}}"
     }
 }

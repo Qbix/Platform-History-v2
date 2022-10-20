@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tâl wedi&#39;i brosesu ar gyfer {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Diolch am eich taliad i {{call 'publisher.displayName'}}",
         "SubscribedTo": "Mae {{call 'user.displayName'}} wedi tanysgrifio i {{plan.title}}",
-        "YouSubscribedTo": "Rydych wedi cael eich tanysgrifio i {{plan.title}}"
+        "YouSubscribedTo": "Rydych wedi cael eich tanysgrifio i {{plan.title}}",
+        "Assets\/credits\/alert": "Mae gennych rybudd sy&#39;n gysylltiedig â&#39;ch cyfrif"
     },
     "charge": {
         "Subject": "Rydych yn cael taliad o {{displayAmount}} gan {{call 'publisher.displayName'}} gan &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Gwybodaeth am drefn",
         "PaymentMethod": "Dull talu",
         "ContactInfo": "Gwybodaeth cyswllt",
-        "Pay": "Talu"
+        "Pay": "Talu",
+        "PaymentSucceeded": "Llwyddwyd i dalu",
+        "PaymentProcessing.": "Mae eich taliad yn cael ei brosesu",
+        "FailTryAgain": "Nid oedd eich taliad yn llwyddiannus, ceisiwch eto",
+        "SomethingWrong": "Aeth rhywbeth o&#39;i le",
+        "PaymentStatus": "Statws talu"
     },
     "credits": {
         "InviteAcceptedBy": "Gwahoddiad wedi&#39;i dderbyn gan {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Cerdyn credyd neu ddebyd",
         "SubscribePayment": "Tanysgrifio Taliad",
-        "ImmediatePayment": "Taliad Ar Unwaith"
+        "ImmediatePayment": "Taliad Ar Unwaith",
+        "ProcessingPayment": "Taliad Prosesu",
+        "SubscriptionAlreadyPaid": "Mae&#39;r tanysgrifiad hwn eisoes wedi&#39;i dalu",
+        "SubscriptionNotActive": "Nid yw&#39;r tanysgrifiad hwn yn weithredol",
+        "Subscribed": "Tanysgrifio",
+        "Unsubscribed": "Heb danysgrifio",
+        "Unsubscribe": "Dad-danysgrifio",
+        "Subscribe": "Tanysgrifio",
+        "Started": "Dechreuwyd",
+        "EndsIn": "Yn gorffen yn",
+        "NextPay": "Taliad nesaf",
+        "Period": "Cyfnod",
+        "Price": "Pris",
+        "AreYouSureUnsubscribe": "Ydych chi&#39;n siŵr eich bod am ddad-danysgrifio&#39;r cynllun hwn?",
+        "YouUnsubscribedFromPlan": "Rydych wedi dad-danysgrifio o gynllun &quot;{{planTitle}}&quot;. Ni chodir tâl arnoch, ond bydd eich tanysgrifiad yn parhau tan {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "teitl y cynllun",
+            "PricePlaceholder": "pris",
+            "DescriptionPlaceholder": "disgrifiad cynllun tanysgrifio",
+            "SavePlan": "Cynllun Arbed",
+            "NewPlan": "Cynllun Newydd"
+        }
     },
     "payments": {
         "infoTitle": "Gosod Gwybodaeth Taliad",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Wedi derbyn {{amount}} credyd gan {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Ychydig o gredydau sydd gennych ar eich cyfrif. Ewch <a href='{{link}}'>i&#39;r ddolen hon<\/a> i brynu mwy o gredydau."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Cyfraniad dewisol",
         "RequiredPayment": "Taliad gofynnol",
         "AreYouSureDelete": "Ydych chi&#39;n siŵr eich bod am ddileu&#39;r gwasanaeth hwn?",
-        "AmountServicesRelated": "Mae {{amount}} ar gael sy&#39;n gysylltiedig â&#39;r gwasanaeth hwn. Maent hefyd yn cael eu dileu."
+        "AmountServicesRelated": "Mae {{amount}} ar gael sy&#39;n gysylltiedig â&#39;r gwasanaeth hwn. Maent hefyd yn cael eu dileu.",
+        "EditServiceTemplate": {
+            "Title": "Gwasanaeth Golygu"
+        }
     },
     "NFT": {
         "Title": "Gwybodaeth am {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Opsiynau",
             "sampleCSV": "Lawrlwythwch Sampl CSV",
             "fileLabel": "Uwchlwytho Taenlen:",
-            "errorsTitle": "Digwyddodd gwallau"
+            "errorsTitle": "Digwyddodd gwallau",
+            "importAttributes": "Mewnforio priodoleddau NFT",
+            "displayTypeEmpty": "Ni chanfuwyd y math arddangos ar gyfer &quot;{{1}}&quot;."
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Hidlo yn ôl Awduron"
             }
         },
-        "Back": "Yn ôl i&#39;r Casgliad"
+        "Back": "Yn ôl i&#39;r Casgliad",
+        "Name": "Enw",
+        "EnterName": "Rhowch enw",
+        "EnterAuthorWallet": "Rhowch waled yr awdur",
+        "InformationAboutTitle": "Gwybodaeth am {{title}} NFT",
+        "DetailedInformationAboutNFT": "Gwybodaeth fanwl am NFT",
+        "PresaleStarts": "Presale yn dechrau Rhagfyr 23",
+        "OwnerUserNotFound": "Nid yw perchennog yr NFT hwn wedi&#39;i gofrestru yn ein cais.",
+        "BuyNow": "Prynwch nawr",
+        "Buy": "Prynwch",
+        "Conversation": "Sgwrs",
+        "Create": "Creu",
+        "Author": "Awdur",
+        "Commission": "Comisiwn",
+        "EnterCommission": "Rhowch gomisiwn",
+        "Actions": "Gweithredoedd",
+        "UpdateNFT": "Diweddaru NFT",
+        "NotOnSale": "Ddim ar Werth",
+        "MovieURL": "URL ffilm",
+        "EnterPrice": "Nodwch y pris",
+        "Currency": "Arian cyfred",
+        "AreYouSureDeleteImage": "Ydych chi&#39;n siŵr eich bod am ddileu delwedd?",
+        "AreYouSureDeleteVideo": "Ydych chi&#39;n siŵr eich bod am dynnu fideo?",
+        "series": {
+            "Name": "Enw",
+            "Icon": "Eicon",
+            "Description": "Disgrifiad",
+            "Author": "Awdur",
+            "SelectSeries": "Dewiswch gyfres",
+            "Value": "Gwerth",
+            "AreYouSure": "Wyt ti&#39;n siwr?",
+            "AuthorInvalid": "Cyfeiriad yr awdur yn annilys!",
+            "Address": "Cyfeiriad",
+            "CoverImage": "Delwedd clawr",
+            "UploadCoverImage": "Uwchlwythwch y llun clawr",
+            "CommissionAddressInvalid": "Cyfeiriad y Comisiwn yn annilys",
+            "OnSale": "ar Werth",
+            "OffSale": "oddi ar werth",
+            "CreateSeries": "Creu Cyfres",
+            "UpdateSeries": "Cyfres Diweddaru",
+            "SeriesInfo": "Gwybodaeth Cyfres",
+            "SelectAuthor": "Dewiswch awdur",
+            "NewItem": "Cyfres newydd NFT",
+            "NamePlaceholder": "Rhowch enw&#39;r gyfres",
+            "DescPlaceholder": "Rhowch ddisgrifiad o&#39;r gyfres",
+            "EndingIn": "Yn Diweddu Mewn"
+        },
+        "contract": {
+            "CreateContract": "Creu contract",
+            "SelectContract": "Dewiswch gontract",
+            "CreateContractFor": "Creu contract ar gyfer {{userName}}",
+            "ContractFor": "Cytundeb ar gyfer {{userName}}",
+            "UpdateContract": "Diweddaru Cytundeb",
+            "TransferOwnership": "Trosglwyddo Perchnogaeth",
+            "SetBaseURI": "Gosod URI Sylfaen",
+            "SetSuffix": "Ôl-ddodiad Gosod",
+            "CurrentOwner": "Perchennog Presennol",
+            "CurrentBaseURL": "BaseURL cyfredol",
+            "ContractAddressAbsent": "Cyfeiriad contract yn absennol",
+            "FactoryAddressAbsent": "Cyfeiriad ffatri yn absennol",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Angen teitl",
+            "SymbolRequired": "Angen symbol",
+            "TypeContractName": "enw contract",
+            "TypeContractSymbol": "symbol contract (uchafswm o 10 nod)"
+        },
+        "contests": {
+            "Title": "Cystadlaethau",
+            "NewContest": "Cystadleuaeth Newydd"
+        },
+        "attributes": {
+            "Title": "Rheoli Nodweddion",
+            "Attributes": "Rhinweddau",
+            "DisplayTitle": "Math Arddangos",
+            "AddDisplayType": "Ychwanegu math arddangos newydd",
+            "NewDisplay": "Arddangosfa Newydd",
+            "TraitTitle": "Math o Nodwedd",
+            "AddTraitTitle": "Ychwanegu math nodwedd newydd",
+            "NewTrait": "Math o Nodwedd Newydd",
+            "ValueTitle": "Gwerth",
+            "AddValueTitle": "Ychwanegu gwerth newydd",
+            "NewValue": "Gwerth Newydd",
+            "NewAttribute": "Priodoledd Newydd",
+            "UpdateAttributes": "Diweddaru Priodweddau",
+            "SaveAttributes": "Cadw Priodweddau"
+        },
+        "profile": {
+            "LogOut": "Allgofnodi",
+            "Title": "Proffil ar gyfer {{userName}}",
+            "Description": "Manylion defnyddiwr",
+            "aboutPlaceholder": "Golygu Bio",
+            "SureLogOut": "Ydych chi&#39;n siŵr eich bod am allgofnodi?"
+        }
+    },
+    "errors": {
+        "Error": "Gwall",
+        "WalletAbsent": "Nid yw&#39;r waled yn gysylltiedig.",
+        "Rendering": "Bu gwallau wrth rendro <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Angen pris!",
+        "NameRequired": "Angen enw!",
+        "PriceInvalid": "Pris annilys!",
+        "TransactionFailed": "Methwyd y Trafodiad",
+        "ChainNotSupported": "Ni chefnogir y gadwyn a ddewiswyd. Cadwyn a gefnogir: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Angen MetaMask wedi&#39;i gysylltu i weithio gyda&#39;r cymhwysiad",
+        "UserNotLoggedInMetaMask": "Nid yw&#39;r defnyddiwr wedi mewngofnodi i MetaMask",
+        "CurrencyNotFound": "Arian heb ei ganfod",
+        "WrongChain": "Creodd yr NFT hwn o dan &quot;{{chain}}&quot;. Defnyddiwch y gadwyn hon."
+    },
+    "admin": {
+        "Title": "Gweinyddol asedau",
+        "SubscriptionTitle": "Cynlluniau tanysgrifio"
+    },
+    "billing": {
+        "Title": "Bilio asedau",
+        "CreditsMinimum": "Credydau lleiaf",
+        "CreditsToAdd": "Credydau i&#39;w hychwanegu",
+        "Save": "Arbed",
+        "ThisLink": "y ddolen hon",
+        "errors": {
+            "CreditsMinimumNegative": "Ni all isafswm credydau fod yn negyddol",
+            "CreditsToAddNegative": "Ni all credydau i&#39;w hychwanegu fod yn negyddol"
+        }
     }
 }

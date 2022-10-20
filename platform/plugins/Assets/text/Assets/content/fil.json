@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: pinoproseso ang singil para sa {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Salamat sa iyong pagbabayad sa {{call 'publisher.displayName'}}",
         "SubscribedTo": "Nag-subscribe ang {{call 'user.displayName'}} sa {{plan.title}}",
-        "YouSubscribedTo": "Nag-subscribe ka sa {{plan.title}}"
+        "YouSubscribedTo": "Nag-subscribe ka sa {{plan.title}}",
+        "Assets\/credits\/alert": "Mayroon kang alerto na nauugnay sa iyong account"
     },
     "payment": {
         "AboutOrder": "Impormasyon tungkol sa pagkakasunud-sunod",
         "PaymentMethod": "Paraan ng Pagbayad",
         "ContactInfo": "Impormasyon sa pakikipag-ugnay",
-        "Pay": "Magbayad"
+        "Pay": "Magbayad",
+        "PaymentSucceeded": "Nagtagumpay ang pagbabayad",
+        "PaymentProcessing.": "Pinoproseso ang iyong bayad",
+        "FailTryAgain": "Hindi matagumpay ang iyong pagbabayad, pakisubukang muli",
+        "SomethingWrong": "Nagkaproblema",
+        "PaymentStatus": "Katayuan ng pagbabayad"
     },
     "credits": {
         "InviteAcceptedBy": "Imbitasyon na tinanggap ng {{1}}",
@@ -36,8 +42,17 @@
         "WatchClip": "Kumita ng mga kredito sa {{amount}} para sa panonood ng {{fromStreamTitle}}",
         "PurchaseCredits": "Bumili ng Mga Kredito",
         "forMessages": {
-            "BoughtCredits": "Mga kredito ng {{amount}}"
-        }
+            "BoughtCredits": "Mga kredito ng {{amount}}",
+            "BonusCredits": "{{amount}} na mga kredito"
+        },
+        "Streams_user_firstname": "{{invitedUserName}} naglagay ng unang pangalan",
+        "Streams_user_lastname": "Ipinasok ni {{invitedUserName}} ang apelyido",
+        "Streams_user_icon": "{{invitedUserName}} nagpasok ng icon",
+        "Places_user_location": "{{invitedUserName}} ipinasok ang lokasyon",
+        "Streams_greeting": "{{invitedUserName}} nagpasok ng pagbati",
+        "CreatePaidStream": "para sa paglikha ng {{toStreamName}}",
+        "BonusCredits": "Mga kredito ng bonus {{amount}}.",
+        "BuyBonus": "Ang pagbili ng {{amount}} na credit nang sabay-sabay, ay hahantong sa {{bonus}} credits bonus."
     },
     "history": {
         "Date": "Petsa",
@@ -62,7 +77,18 @@
         "CreatedCommunity": "Gumastos ng {{amount}} credits",
         "BoughtCredits": "Binili {{amount}} kredito",
         "InviteAcceptedBy": "Nakakuha ng mga kredito {{amount}}",
-        "YouHaveCreditsToStart": "Nakakuha ng mga kredito {{amount}}"
+        "YouHaveCreditsToStart": "Nakakuha ng mga kredito {{amount}}",
+        "CreatePaidStream": "Gumastos ng {{amount}} na mga kredito",
+        "WatchClip": {
+            "+": "Nakakuha ng {{amount}} na mga kredito",
+            "-": "Gumastos ng {{amount}} na mga kredito"
+        },
+        "BonusCredits": "Nakakuha ng bonus na {{amount}} na mga kredito",
+        "Streams_user_firstname": "Nakakuha ng {{amount}} na mga kredito",
+        "Streams_user_lastname": "Nakakuha ng {{amount}} na mga kredito",
+        "Streams_user_icon": "Nakakuha ng {{amount}} na mga kredito",
+        "Places_user_location": "Nakakuha ng {{amount}} na mga kredito",
+        "Streams_greeting": "Nakakuha ng {{amount}} na mga kredito"
     },
     "subscriptions": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
@@ -74,7 +100,28 @@
         },
         "CreditOrDebitCard": "Credit o debit card",
         "SubscribePayment": "Mag-subscribe sa Pagbabayad",
-        "ImmediatePayment": "Agarang Pagbabayad"
+        "ImmediatePayment": "Agarang Pagbabayad",
+        "ProcessingPayment": "Pinoproseso ang Pagbabayad",
+        "SubscriptionAlreadyPaid": "Nagbayad na ang subscription na ito",
+        "SubscriptionNotActive": "Hindi aktibo ang subscription na ito",
+        "Subscribed": "Naka-subscribe",
+        "Unsubscribed": "Nag-unsubscribe",
+        "Unsubscribe": "Mag-unsubscribe",
+        "Subscribe": "Mag-subscribe",
+        "Started": "Nagsimula",
+        "EndsIn": "Nagtatapos sa",
+        "NextPay": "Susunod na bayad",
+        "Period": "Panahon",
+        "Price": "Presyo",
+        "AreYouSureUnsubscribe": "Sigurado ka bang gusto mong i-unsubscribe ang planong ito?",
+        "YouUnsubscribedFromPlan": "Nag-unsubscribe ka sa plan na &quot;{{planTitle}}&quot;. Hindi ka sisingilin, ngunit magpapatuloy ang iyong subscription hanggang {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "pamagat ng plano",
+            "PricePlaceholder": "presyo",
+            "DescriptionPlaceholder": "paglalarawan ng plano ng subscription",
+            "SavePlan": "I-save ang Plano",
+            "NewPlan": "Bagong Plano"
+        }
     },
     "payments": {
         "infoTitle": "Itakda ang Impormasyon sa Pagbabayad",
@@ -123,6 +170,12 @@
         },
         "Assets\/credits\/bought": {
             "content": "Binili {{amount}} kredito"
+        },
+        "Assets\/credits\/bonus": {
+            "content": "Mga kredito ng bonus {{amount}}."
+        },
+        "Assets\/credits\/alert": {
+            "content": "Mayroon kang maliit na mga kredito sa iyong account. Mangyaring bisitahin <a href='{{link}}'>ang link<\/a> na ito upang bumili ng higit pang mga kredito."
         }
     },
     "charge": {
@@ -140,7 +193,8 @@
             "PricePlaceholder": "Itakda ang presyo",
             "LinkPlaceholder": "itakda ang karagdagang link sa impormasyon",
             "DescriptionPlaceholder": "Paglalarawan ng serbisyo",
-            "SaveService": "I-save ang Serbisyo"
+            "SaveService": "I-save ang Serbisyo",
+            "SelectRequiredParticipants": "Mga Kinakailangang Kalahok"
         },
         "ManageServiceTemplates": "Pamahalaan ang Mga template ng Serbisyo",
         "ManageServices": "Pamahalaan ang mga Serbisyo",
@@ -149,6 +203,218 @@
         "RequiredPayment": "Kinakailangan na pagbabayad",
         "AreYouSureDelete": "Sigurado ka bang gusto mong tanggalin ang serbisyong ito?",
         "AmountServicesRelated": "Mayroong mga {{amount}} availability na may kaugnayan sa serbisyong ito. Aalisin din sila.",
-        "Free": "Libre"
+        "Free": "Libre",
+        "EditServiceTemplate": {
+            "Title": "I-edit ang Serbisyo"
+        }
+    },
+    "errors": {
+        "Error": "Error",
+        "WalletAbsent": "Hindi konektado ang wallet.",
+        "Rendering": "May mga error habang nagre-render <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Kinakailangan ang presyo!",
+        "NameRequired": "Pangalan ang kailangan!",
+        "PriceInvalid": "Di-wasto ang presyo!",
+        "TransactionFailed": "Nabigo ang Transaksyon",
+        "ChainNotSupported": "Ang napiling chain ay hindi suportado. Sinusuportahang chain: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Kailangan ng MetaMask konektado upang gumana sa application",
+        "UserNotLoggedInMetaMask": "Ang user ay hindi naka-log in sa MetaMask",
+        "CurrencyNotFound": "Hindi nahanap ang currency",
+        "WrongChain": "Nilikha ang NFT na ito sa ilalim ng &quot;{{chain}}&quot;. Mangyaring gamitin ang chain na ito."
+    },
+    "admin": {
+        "Title": "Administratibo ng mga asset",
+        "SubscriptionTitle": "Mga plano sa subscription"
+    },
+    "billing": {
+        "Title": "Pagsingil sa mga asset",
+        "CreditsMinimum": "Pinakamababang mga kredito",
+        "CreditsToAdd": "Mga kredito upang idagdag",
+        "Save": "I-save",
+        "ThisLink": "ang link na ito",
+        "errors": {
+            "CreditsMinimumNegative": "Ang minimum na mga kredito ay hindi maaaring negatibo",
+            "CreditsToAddNegative": "Ang mga credit na idaragdag ay hindi maaaring negatibo"
+        }
+    },
+    "NFT": {
+        "Title": "Pamagat",
+        "Name": "Pangalan",
+        "EnterName": "Ilagay ang pangalan",
+        "EnterAuthorWallet": "Ipasok ang wallet ng may-akda",
+        "InformationAboutTitle": "Impormasyon tungkol sa {{title}} NFT",
+        "Description": "Paglalarawan",
+        "DetailedInformationAboutNFT": "Detalyadong impormasyon tungkol sa NFT",
+        "PresaleStarts": "Magsisimula ang Presale sa Dis 23",
+        "OwnerUserNotFound": "Ang may-ari ng NFT na ito ay hindi nakarehistro sa aming aplikasyon.",
+        "BuyNow": "Bumili ka na ngayon",
+        "Buy": "Bumili",
+        "Conversation": "Pag-uusap",
+        "Create": "Lumikha",
+        "CurrentBid": "Kasalukuyang bid",
+        "StartingIn": "Nagsisimula sa",
+        "EndingIn": "Nagtatapos sa",
+        "CreateNFT": "Lumikha ng isang NFT",
+        "TitlePlaceholder": "Bigyan ng pamagat ang iyong NFT",
+        "DescriptionPlaceholder": "Bigyan ang iyong NFT ng paglalarawan",
+        "CreateYourNFT": "Lumikha ng iyong NFT",
+        "Royalties": "Royalties",
+        "RoyaltyPlaceholder": "Opsyonal. Halagang binayaran sa creator bago ilipat.",
+        "ExpirationDate": "Petsa ng pagkawalang bisa",
+        "StartingDate": "Petsa ng Pagsisimula",
+        "BidsBelowThisAmount": "Ang mga bid na mas mababa sa halagang ito ay hindi papayagan",
+        "MinimumBid": "Minimum na bid",
+        "Author": "May-akda",
+        "Price": "Presyo",
+        "Commission": "Komisyon",
+        "EnterCommission": "Ipasok ang komisyon",
+        "Owner": "May-ari",
+        "SelectCategory": "Pumili ng Kategorya",
+        "Day": "Araw",
+        "Days": "Mga araw",
+        "Hour": "Oras",
+        "Hours": "Oras",
+        "Minute": "minuto",
+        "Minutes": "Mga minuto",
+        "Second": "Pangalawa",
+        "Seconds": "Mga segundo",
+        "SalesCreator": "ng mga benta ay mapupunta sa creator",
+        "Details": "Mga Detalye",
+        "Bids": "Mga bid",
+        "History": "Kasaysayan",
+        "LoremIpsum": "Ang Lorem Ipsum ay simpleng dummy na teksto ng industriya ng pag-print at pag-type.",
+        "PutOnSale": "Ilagay sa pagbebenta",
+        "PutOffSale": "Mag-withdraw mula sa pagbebenta",
+        "Transfer": "Paglipat",
+        "Actions": "Mga aksyon",
+        "Update": "Update",
+        "UpdateToken": "I-update ang Token",
+        "UpdateNFT": "I-update ang NFT",
+        "CreateToken": "Lumikha ng Token",
+        "PlaceBid": "Ilagay ang Bid",
+        "SoldOut": "Nabenta",
+        "NotOnSale": "Hindi Binebenta",
+        "NftName": "Pangalan ng NFT",
+        "DescribeYourNFT": "Pakilarawan ang iyong NFT",
+        "NftPicture": "Larawan upang kumatawan sa NFT",
+        "NftMovie": "Pelikula upang kumatawan sa NFT",
+        "UploadMovie": "Mag-upload ng pelikula",
+        "MovieSource": "Pinagmulan ng Pelikula",
+        "MovieURL": "URL ng pelikula",
+        "UploadFile": "Mag-upload ng file",
+        "PutOnMarketplace": "Ilagay sa palengke",
+        "InstantPurchase": "Maglagay ng presyo upang payagan ang mga user na bumili ng iyong NFT kaagad",
+        "FixedPrice": "Nakapirming presyo",
+        "TimedAuction": "Naka-time na auction",
+        "OpenForBids": "Bukas para sa mga bid",
+        "PriceOnePiece": "Ilagay ang presyo para sa isang piraso",
+        "EnterPrice": "Ilagay ang presyo",
+        "EnterMinimumBid": "Ilagay ang Minimum na bid",
+        "SelectChain": "Pumili ng chain",
+        "Currency": "Pera",
+        "AreYouSureDeleteImage": "Sigurado ka bang gusto mong alisin ang larawan?",
+        "AreYouSureDeleteVideo": "Sigurado ka bang gusto mong alisin ang video?",
+        "series": {
+            "Name": "Pangalan",
+            "Icon": "Icon",
+            "Description": "Paglalarawan",
+            "Author": "May-akda",
+            "SelectSeries": "Pumili ng serye",
+            "Value": "Halaga",
+            "AreYouSure": "Sigurado ka ba?",
+            "AuthorInvalid": "Di-wasto ang address ng may-akda!",
+            "Address": "Address",
+            "CoverImage": "Larawan sa pabalat",
+            "UploadCoverImage": "Mag-upload ng larawan sa pabalat",
+            "CommissionAddressInvalid": "Di-wasto ang address ng komisyon",
+            "OnSale": "sa pagbebenta",
+            "OffSale": "off sale",
+            "CreateSeries": "Gumawa ng Serye",
+            "UpdateSeries": "I-update ang Serye",
+            "SeriesInfo": "Impormasyon ng Serye",
+            "SelectAuthor": "Pumili ng may-akda",
+            "NewItem": "Bagong serye ng NFT",
+            "NamePlaceholder": "Ilagay ang pangalan ng serye",
+            "DescPlaceholder": "Ipasok ang paglalarawan ng serye",
+            "EndingIn": "Nagtatapos Sa"
+        },
+        "contract": {
+            "CreateContract": "Lumikha ng kontrata",
+            "SelectContract": "Pumili ng kontrata",
+            "CreateContractFor": "Lumikha ng kontrata para sa {{userName}}",
+            "ContractFor": "Kontrata para sa {{userName}}",
+            "UpdateContract": "I-update ang Kontrata",
+            "TransferOwnership": "Ilipat ang Pagmamay-ari",
+            "SetBaseURI": "Itakda ang Base URI",
+            "SetSuffix": "Itakda ang Suffix",
+            "CurrentOwner": "Kasalukuyang May-ari",
+            "CurrentBaseURL": "Kasalukuyang BaseURL",
+            "ContractAddressAbsent": "Wala ang address ng kontrata",
+            "FactoryAddressAbsent": "Wala ang factory address",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Kinakailangan ang pamagat",
+            "SymbolRequired": "Kinakailangan ang simbolo",
+            "TypeContractName": "pangalan ng kontrata",
+            "TypeContractSymbol": "simbolo ng kontrata (max 10 chars)"
+        },
+        "contests": {
+            "Title": "Mga paligsahan",
+            "NewContest": "Bagong Paligsahan"
+        },
+        "import": {
+            "importNFT": "Pag-import ng mga NFT",
+            "importAttributes": "Mag-import ng mga katangian ng NFT",
+            "fileNotFound": "Paumanhin, hindi nahanap ang CSV file.",
+            "fileEmpty": "Paumanhin, walang laman ang CSV file.",
+            "userIdNotFound": "umiiral ang user ngunit walang laman ang id",
+            "errorLine": "linya {{1}}",
+            "fieldNotFound": "Hindi nahanap ang kinakailangang field na &quot;{{1}}&quot;.",
+            "displayTypeEmpty": "Hindi nakita ang uri ng display para sa &quot;{{1}}&quot;.",
+            "taskStreamInvalid": "di-wasto ang stream ng gawain",
+            "instructionsEmpty": "walang laman ang mga tagubilin sa stream ng gawain",
+            "complete": "Kumpleto",
+            "activateUsers": "magpadala ng activation message sa mga user?",
+            "importProgress": "Pag-unlad",
+            "importOptions": "Mga pagpipilian",
+            "sampleCSV": "I-download ang Sample CSV",
+            "fileLabel": "Mag-upload ng Spreadsheet:",
+            "errorsTitle": "Nagkaroon ng mga error"
+        },
+        "filter": {
+            "ByCategory": {
+                "FilterByNFTCollections": "I-filter ayon sa NFT Collections",
+                "ShowNFTCollection": "Ipakita ang koleksyon ng NFT sa ...",
+                "AllCollections": "Lahat ng Koleksyon"
+            },
+            "ByUser": {
+                "AllAuthors": "Lahat ng May-akda",
+                "AllUsers": "lahat",
+                "FilterByAuthors": "I-filter ayon sa Mga May-akda"
+            }
+        },
+        "Back": "Bumalik sa Koleksyon",
+        "attributes": {
+            "Title": "Pamahalaan ang Mga Katangian",
+            "Attributes": "Mga Katangian",
+            "DisplayTitle": "Uri ng display",
+            "AddDisplayType": "Magdagdag ng bagong uri ng display",
+            "NewDisplay": "Bagong Display",
+            "TraitTitle": "Uri ng ugali",
+            "AddTraitTitle": "Magdagdag ng bagong uri ng katangian",
+            "NewTrait": "Bagong Uri ng Trait",
+            "ValueTitle": "Halaga",
+            "AddValueTitle": "Magdagdag ng bagong halaga",
+            "NewValue": "Bagong Halaga",
+            "NewAttribute": "Bagong Katangian",
+            "UpdateAttributes": "I-update ang Mga Katangian",
+            "SaveAttributes": "I-save ang Mga Katangian"
+        },
+        "profile": {
+            "LogOut": "Log out",
+            "Title": "Profile para sa {{userName}}",
+            "Description": "Mga detalye ng user",
+            "aboutPlaceholder": "I-edit ang Bio",
+            "SureLogOut": "Sigurado ka bang gusto mong mag-log out?"
+        }
     }
 }

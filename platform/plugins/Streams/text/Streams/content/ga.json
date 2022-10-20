@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Teileachomhdháil",
             "MeetingEnded": "Tháinig deireadh le teileachomhdháil"
+        },
+        "requestSpeakDialog": {
+            "msg": "Tá {{count}} duine ag labhairt sa chruinniú faoi láthair. Ar mhaith leat ceann amháin acu a chur ina ionad tar éis {{seconds}} soicind a cheadú dóibh críochnú ag labhairt?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Glao Deiridh",
         "interview": "Agallamh",
         "markApproved": "Marcáil Ceadaithe"
+    },
+    "identifier": {
+        "private": "Príobháideach",
+        "public": "Poiblí",
+        "configurationSaved": "Sábháladh an chumraíocht",
+        "error": "Chuaigh rud eigin mícheart"
     }
 }

@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}}க்கான கட்டணம் செயலாக்கப்பட்டது",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}}க்கு பணம் செலுத்தியதற்கு நன்றி",
         "SubscribedTo": "{{plan.title}}க்கு {{call 'user.displayName'}} குழுசேர்ந்தார்",
-        "YouSubscribedTo": "நீங்கள் {{plan.title}} இல் குழுசேர்ந்துள்ளீர்கள்"
+        "YouSubscribedTo": "நீங்கள் {{plan.title}} இல் குழுசேர்ந்துள்ளீர்கள்",
+        "Assets\/credits\/alert": "உங்கள் கணக்கு தொடர்பான விழிப்பூட்டல் உங்களிடம் உள்ளது"
     },
     "charge": {
         "Subject": "&quot;{{description}}&quot; மூலம் {{call 'publisher.displayName'}} இலிருந்து {{displayAmount}} கட்டணத்தைப் பெறுவீர்கள்",
@@ -21,7 +22,12 @@
         "AboutOrder": "ஆர்டர் பற்றிய தகவல்",
         "PaymentMethod": "பணம் செலுத்தும் முறை",
         "ContactInfo": "தொடர்பு தகவல்",
-        "Pay": "செலுத்து"
+        "Pay": "செலுத்து",
+        "PaymentSucceeded": "பணம் செலுத்தியது",
+        "PaymentProcessing.": "உங்கள் கட்டணம் செயலாக்கப்படுகிறது",
+        "FailTryAgain": "உங்கள் பணம் செலுத்த முடியவில்லை, மீண்டும் முயற்சிக்கவும்",
+        "SomethingWrong": "ஏதோ தவறு நடைபெற்றிருக்கிறது",
+        "PaymentStatus": "கட்டண நிலை"
     },
     "credits": {
         "InviteAcceptedBy": "அழைப்பை {{invitedUserName}} ஏற்றுக்கொண்டார்",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "கிரெடிட் அல்லது டெபிட் கார்டு",
         "SubscribePayment": "கட்டணத்திற்கு குழுசேரவும்",
-        "ImmediatePayment": "உடனடி கட்டணம்"
+        "ImmediatePayment": "உடனடி கட்டணம்",
+        "ProcessingPayment": "செலுத்துதல் செயலாக்கம்",
+        "SubscriptionAlreadyPaid": "இந்த சந்தா ஏற்கனவே செலுத்தப்பட்டது",
+        "SubscriptionNotActive": "இந்த சந்தா செயலில் இல்லை",
+        "Subscribed": "குழுசேர்ந்தார்",
+        "Unsubscribed": "குழுவிலகப்பட்டது",
+        "Unsubscribe": "குழுவிலகவும்",
+        "Subscribe": "பதிவு",
+        "Started": "தொடங்கப்பட்டது",
+        "EndsIn": "முடிவடைகிறது",
+        "NextPay": "அடுத்த கட்டணம்",
+        "Period": "காலம்",
+        "Price": "விலை",
+        "AreYouSureUnsubscribe": "இந்தத் திட்டத்தில் நிச்சயமாக குழுவிலக விரும்புகிறீர்களா?",
+        "YouUnsubscribedFromPlan": "&quot;{{planTitle}}&quot; திட்டத்திலிருந்து நீங்கள் குழுவிலகியுள்ளீர்கள். உங்களிடம் கட்டணம் விதிக்கப்படாது, ஆனால் உங்கள் சந்தா {{endsIn}} வரை தொடரும்",
+        "plan": {
+            "TitlePlaceholder": "திட்டத்தின் தலைப்பு",
+            "PricePlaceholder": "விலை",
+            "DescriptionPlaceholder": "சந்தா திட்ட விளக்கம்",
+            "SavePlan": "திட்டத்தை சேமிக்கவும்",
+            "NewPlan": "புதிய திட்டம்"
+        }
     },
     "payments": {
         "infoTitle": "கட்டணத் தகவலை அமைக்கவும்",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{fromUserName}} இடமிருந்து {{amount}} வரவுகளைப் பெற்றுள்ளது"
+        },
+        "Assets\/credits\/alert": {
+            "content": "உங்கள் கணக்கில் சிறிய வரவுகள் உள்ளன. மேலும் கிரெடிட்களை வாங்க <a href='{{link}}'>இந்த இணைப்பைப்<\/a> பார்வையிடவும்."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "விருப்ப பங்களிப்பு",
         "RequiredPayment": "தேவையான கட்டணம்",
         "AreYouSureDelete": "இந்தச் சேவையை நிச்சயமாக நீக்க விரும்புகிறீர்களா?",
-        "AmountServicesRelated": "இந்தச் சேவையுடன் தொடர்புடைய {{amount}} வசதிகள் உள்ளன. அவையும் அகற்றப்படும்."
+        "AmountServicesRelated": "இந்தச் சேவையுடன் தொடர்புடைய {{amount}} வசதிகள் உள்ளன. அவையும் அகற்றப்படும்.",
+        "EditServiceTemplate": {
+            "Title": "திருத்த சேவை"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFT பற்றிய தகவல்",
@@ -246,7 +279,9 @@
             "importOptions": "விருப்பங்கள்",
             "sampleCSV": "மாதிரி CSV ஐப் பதிவிறக்கவும்",
             "fileLabel": "விரிதாளைப் பதிவேற்றவும்:",
-            "errorsTitle": "பிழைகள் ஏற்பட்டன"
+            "errorsTitle": "பிழைகள் ஏற்பட்டன",
+            "importAttributes": "NFT பண்புகளை இறக்குமதி செய்யவும்",
+            "displayTypeEmpty": "&quot;{{1}}&quot;க்கான காட்சி வகை காணப்படவில்லை"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "ஆசிரியர்களால் வடிகட்டவும்"
             }
         },
-        "Back": "தொகுப்புக்குத் திரும்பு"
+        "Back": "தொகுப்புக்குத் திரும்பு",
+        "Name": "பெயர்",
+        "EnterName": "பெயரை உள்ளிடுக",
+        "EnterAuthorWallet": "ஆசிரியர் பணப்பையை உள்ளிடவும்",
+        "InformationAboutTitle": "{{title}} NFT பற்றிய தகவல்",
+        "DetailedInformationAboutNFT": "NFT பற்றிய விரிவான தகவல்கள்",
+        "PresaleStarts": "முன்விற்பனை டிசம்பர் 23 ஆம் தேதி தொடங்குகிறது",
+        "OwnerUserNotFound": "இந்த NFT இன் உரிமையாளர் எங்கள் விண்ணப்பத்தில் பதிவு செய்யப்படவில்லை.",
+        "BuyNow": "இப்போது வாங்க",
+        "Buy": "வாங்க",
+        "Conversation": "உரையாடல்",
+        "Create": "உருவாக்கு",
+        "Author": "நூலாசிரியர்",
+        "Commission": "தரகு",
+        "EnterCommission": "கமிஷனை உள்ளிடவும்",
+        "Actions": "செயல்கள்",
+        "UpdateNFT": "NFTஐப் புதுப்பிக்கவும்",
+        "NotOnSale": "விற்பனையில் இல்லை",
+        "MovieURL": "திரைப்பட URL",
+        "EnterPrice": "விலையை உள்ளிடவும்",
+        "Currency": "நாணய",
+        "AreYouSureDeleteImage": "படத்தை நிச்சயமாக அகற்ற விரும்புகிறீர்களா?",
+        "AreYouSureDeleteVideo": "வீடியோவை நிச்சயமாக அகற்ற விரும்புகிறீர்களா?",
+        "series": {
+            "Name": "பெயர்",
+            "Icon": "ஐகான்",
+            "Description": "விளக்கம்",
+            "Author": "நூலாசிரியர்",
+            "SelectSeries": "தொடரைத் தேர்ந்தெடுக்கவும்",
+            "Value": "மதிப்பு",
+            "AreYouSure": "நீ சொல்வது உறுதியா?",
+            "AuthorInvalid": "ஆசிரியர் முகவரி தவறானது!",
+            "Address": "முகவரி",
+            "CoverImage": "அட்டைப் படம்",
+            "UploadCoverImage": "அட்டைப் படத்தைப் பதிவேற்றவும்",
+            "CommissionAddressInvalid": "கமிஷன் முகவரி தவறானது",
+            "OnSale": "விற்பனைக்கு",
+            "OffSale": "விற்பனையிலிருந்து",
+            "CreateSeries": "தொடரை உருவாக்கவும்",
+            "UpdateSeries": "புதுப்பிப்பு தொடர்",
+            "SeriesInfo": "தொடர் தகவல்",
+            "SelectAuthor": "ஆசிரியரைத் தேர்ந்தெடுக்கவும்",
+            "NewItem": "புதிய NFT தொடர்",
+            "NamePlaceholder": "தொடரின் பெயரை உள்ளிடவும்",
+            "DescPlaceholder": "தொடர் விளக்கத்தை உள்ளிடவும்",
+            "EndingIn": "முடிவடைகிறது"
+        },
+        "contract": {
+            "CreateContract": "ஒப்பந்தத்தை உருவாக்கவும்",
+            "SelectContract": "ஒப்பந்தத்தைத் தேர்ந்தெடுக்கவும்",
+            "CreateContractFor": "{{userName}}க்கான ஒப்பந்தத்தை உருவாக்கவும்",
+            "ContractFor": "{{userName}}க்கான ஒப்பந்தம்",
+            "UpdateContract": "ஒப்பந்தத்தைப் புதுப்பிக்கவும்",
+            "TransferOwnership": "உரிமையை மாற்றவும்",
+            "SetBaseURI": "அடிப்படை URI ஐ அமைக்கவும்",
+            "SetSuffix": "பின்னொட்டு அமை",
+            "CurrentOwner": "தற்போதைய உரிமையாளர்",
+            "CurrentBaseURL": "தற்போதைய அடிப்படைURL",
+            "ContractAddressAbsent": "ஒப்பந்த முகவரி இல்லை",
+            "FactoryAddressAbsent": "தொழிற்சாலை முகவரி இல்லை",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "தலைப்பு தேவை",
+            "SymbolRequired": "சின்னம் தேவை",
+            "TypeContractName": "ஒப்பந்தத்தின் பெயர்",
+            "TypeContractSymbol": "ஒப்பந்த சின்னம் (அதிகபட்சம் 10 எழுத்துகள்)"
+        },
+        "contests": {
+            "Title": "போட்டிகள்",
+            "NewContest": "புதிய போட்டி"
+        },
+        "attributes": {
+            "Title": "பண்புகளை நிர்வகிக்கவும்",
+            "Attributes": "பண்புக்கூறுகள்",
+            "DisplayTitle": "காட்சி வகை",
+            "AddDisplayType": "புதிய காட்சி வகையைச் சேர்க்கவும்",
+            "NewDisplay": "புதிய காட்சி",
+            "TraitTitle": "பண்பு வகை",
+            "AddTraitTitle": "புதிய பண்பு வகையைச் சேர்க்கவும்",
+            "NewTrait": "புதிய பண்பு வகை",
+            "ValueTitle": "மதிப்பு",
+            "AddValueTitle": "புதிய மதிப்பைச் சேர்க்கவும்",
+            "NewValue": "புதிய மதிப்பு",
+            "NewAttribute": "புதிய பண்பு",
+            "UpdateAttributes": "பண்புகளை புதுப்பிக்கவும்",
+            "SaveAttributes": "பண்புகளைச் சேமிக்கவும்"
+        },
+        "profile": {
+            "LogOut": "வெளியேறு",
+            "Title": "{{userName}} க்கான சுயவிவரம்",
+            "Description": "பயனர் விவரங்கள்",
+            "aboutPlaceholder": "பயோவை திருத்து",
+            "SureLogOut": "நிச்சயமாக வெளியேற விரும்புகிறீர்களா?"
+        }
+    },
+    "errors": {
+        "Error": "பிழை",
+        "WalletAbsent": "பணப்பை இணைக்கப்படவில்லை.",
+        "Rendering": "ரெண்டரிங் செய்யும் போது பிழைகள் ஏற்பட்டன <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "விலை தேவை!",
+        "NameRequired": "பெயர் தேவை!",
+        "PriceInvalid": "விலை செல்லாது!",
+        "TransactionFailed": "பரிவர்த்தனை தோல்வியடைந்தது",
+        "ChainNotSupported": "தேர்ந்தெடுக்கப்பட்ட சங்கிலி ஆதரிக்கப்படவில்லை. ஆதரிக்கப்படும் சங்கிலி: {{supportedChain}}",
+        "NeedMetaMaskConnected": "பயன்பாட்டுடன் வேலை செய்ய MetaMask இணைக்கப்பட வேண்டும்",
+        "UserNotLoggedInMetaMask": "பயனர் MetaMask இல் உள்நுழையவில்லை",
+        "CurrencyNotFound": "நாணயம் கிடைக்கவில்லை",
+        "WrongChain": "இந்த NFT &quot;{{chain}}&quot; இன் கீழ் உருவாக்கப்பட்டது. தயவுசெய்து இந்த சங்கிலியைப் பயன்படுத்தவும்."
+    },
+    "admin": {
+        "Title": "சொத்துக்கள் நிர்வாக",
+        "SubscriptionTitle": "சந்தா திட்டங்கள்"
+    },
+    "billing": {
+        "Title": "சொத்துகளின் பில்லிங்",
+        "CreditsMinimum": "குறைந்தபட்ச வரவுகள்",
+        "CreditsToAdd": "சேர்க்க வேண்டிய கடன்கள்",
+        "Save": "சேமிக்கவும்",
+        "ThisLink": "இந்த இணைப்பு",
+        "errors": {
+            "CreditsMinimumNegative": "குறைந்தபட்ச வரவுகள் எதிர்மறையாக இருக்கக்கூடாது",
+            "CreditsToAddNegative": "சேர்க்க வேண்டிய கிரெடிட்கள் எதிர்மறையாக இருக்கக்கூடாது"
+        }
     }
 }

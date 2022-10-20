@@ -92,6 +92,13 @@
                 "title": "Přesměrování do Peněženky",
                 "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
             }
+        },
+        "web3": {
+            "payload": "Přihlaste se do {{host}} v čase {{timestamp}}",
+            "alert": {
+                "title": "Přesměrování do Peněženky",
+                "content": "Jakmile tento dialog zavřete, budete přesměrováni do své peněženky. Po přihlášení se vraťte na tuto stránku."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Služby",
         "Faq": "Faq",
         "WeekDays": "Týdenní dny"
+    },
+    "avatar": {
+        "Someone": "Někdo"
+    },
+    "web3": {
+        "WrongMethod": "Nesprávná metoda smlouvy {{methodName}}"
     }
 }

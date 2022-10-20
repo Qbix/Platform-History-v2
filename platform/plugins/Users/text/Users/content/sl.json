@@ -103,6 +103,13 @@
                 "title": "Preusmeritev v Denarnico",
                 "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v svojo denarnico. Ko se prijavite, se vrnite na to stran."
             }
+        },
+        "web3": {
+            "payload": "Prijavite se v {{host}} ob času {{timestamp}}",
+            "alert": {
+                "title": "Preusmerjanje v denarnico",
+                "content": "Ko zaprete to pogovorno okno, boste preusmerjeni v svojo denarnico. Ko se prijavite, se vrnite na to stran."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "član",
         "Guest": "Gost",
         "Host": "Gostitelj"
+    },
+    "avatar": {
+        "Someone": "Nekdo"
+    },
+    "web3": {
+        "WrongMethod": "Napačen način pogodbe {{methodName}}"
     }
 }

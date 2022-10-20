@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "ٹیلی کانفرنس",
             "MeetingEnded": "ٹیلی کانفرنس ختم ہوئی۔"
+        },
+        "requestSpeakDialog": {
+            "msg": "میٹنگ میں فی الحال {{count}} لوگ بول رہے ہیں۔ کیا آپ ان میں سے کسی کو {{seconds}} سیکنڈ بولنے کے بعد تبدیل کرنا چاہتے ہیں؟"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "کال ختم",
         "interview": "انٹرویو",
         "markApproved": "مارک منظور شدہ"
+    },
+    "identifier": {
+        "private": "نجی",
+        "public": "عوام",
+        "configurationSaved": "کنفیگریشن محفوظ ہو گئی۔",
+        "error": "کچھ غلط ہو گیا"
     }
 }

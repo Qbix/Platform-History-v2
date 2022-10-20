@@ -92,6 +92,13 @@
                 "title": "Pulqabıya yönləndirilir",
                 "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
             }
+        },
+        "web3": {
+            "payload": "{{timestamp}} vaxtında {{host}} daxil olun",
+            "alert": {
+                "title": "Pulqabıya yönləndirilir",
+                "content": "Bu dialoqu bağladıqdan sonra cüzdanınıza aparılacaqsınız. Daxil olduqdan sonra bu səhifəyə qayıdın."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Xidmətlər",
         "Faq": "Faq",
         "WeekDays": "Həftə içi"
+    },
+    "avatar": {
+        "Someone": "Kimsə"
+    },
+    "web3": {
+        "WrongMethod": "Yanlış müqavilə üsulu {{methodName}}"
     }
 }

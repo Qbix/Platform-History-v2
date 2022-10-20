@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: обработена наплата за {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Ви благодариме за уплатата на {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} се претплатени на {{plan.title}}",
-        "YouSubscribedTo": "Вие сте претплатени на {{plan.title}}"
+        "YouSubscribedTo": "Вие сте претплатени на {{plan.title}}",
+        "Assets\/credits\/alert": "Имате предупредување поврзано со вашата сметка"
     },
     "charge": {
         "Subject": "Добивате исплата од {{displayAmount}} од {{call 'publisher.displayName'}} од „{{description}}“",
@@ -21,7 +22,12 @@
         "AboutOrder": "Информации за нарачката",
         "PaymentMethod": "Метод за плаќање",
         "ContactInfo": "Контакт Инфо",
-        "Pay": "Плати"
+        "Pay": "Плати",
+        "PaymentSucceeded": "Плаќањето беше успешно",
+        "PaymentProcessing.": "Вашето плаќање се обработува",
+        "FailTryAgain": "Плаќањето не беше успешно, обидете се повторно",
+        "SomethingWrong": "Нешто тргна наопаку",
+        "PaymentStatus": "Статус на плаќање"
     },
     "credits": {
         "InviteAcceptedBy": "Поканата е прифатена од {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Кредитна или дебитна картичка",
         "SubscribePayment": "Претплатете се за плаќање",
-        "ImmediatePayment": "Итно плаќање"
+        "ImmediatePayment": "Итно плаќање",
+        "ProcessingPayment": "Обработка на плаќање",
+        "SubscriptionAlreadyPaid": "Оваа претплата е веќе платена",
+        "SubscriptionNotActive": "Оваа претплата не е активна",
+        "Subscribed": "Претплатен",
+        "Unsubscribed": "Отпишана",
+        "Unsubscribe": "Отпишете се",
+        "Subscribe": "Претплатете се",
+        "Started": "Почна",
+        "EndsIn": "Завршува во",
+        "NextPay": "Следна исплата",
+        "Period": "Период",
+        "Price": "Цена",
+        "AreYouSureUnsubscribe": "Дали сте сигурни дека сакате да се отпишете на овој план?",
+        "YouUnsubscribedFromPlan": "Се откажавте од планот „{{planTitle}}“. Нема да наплаќате, но вашата претплата ќе продолжи до {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "наслов на планот",
+            "PricePlaceholder": "цена",
+            "DescriptionPlaceholder": "опис на претплатен план",
+            "SavePlan": "Зачувај план",
+            "NewPlan": "Нов план"
+        }
     },
     "payments": {
         "infoTitle": "Поставете информации за плаќање",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Доби {{amount}} кредити од {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Имате малку кредити на вашата сметка. Ве молиме посетете ја <a href='{{link}}'>оваа врска<\/a> за да купите повеќе кредити."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Факултативен придонес",
         "RequiredPayment": "Потребно плаќање",
         "AreYouSureDelete": "Дали сте сигурни дека сакате да ја избришете оваа услуга?",
-        "AmountServicesRelated": "Има {{amount}} достапности поврзани со оваа услуга. Тие исто така ќе бидат отстранети."
+        "AmountServicesRelated": "Има {{amount}} достапности поврзани со оваа услуга. Тие исто така ќе бидат отстранети.",
+        "EditServiceTemplate": {
+            "Title": "Услуга за уредување"
+        }
     },
     "NFT": {
         "Title": "Информации за {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Опции",
             "sampleCSV": "Преземете примерок CSV",
             "fileLabel": "Поставете табела:",
-            "errorsTitle": "Се појавија грешки"
+            "errorsTitle": "Се појавија грешки",
+            "importAttributes": "Увезете NFT атрибути",
+            "displayTypeEmpty": "Типот на екранот за „{{1}}“ не е пронајден"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Филтрирај по автори"
             }
         },
-        "Back": "Назад кон колекцијата"
+        "Back": "Назад кон колекцијата",
+        "Name": "Име",
+        "EnterName": "Внесете име",
+        "EnterAuthorWallet": "Внесете го паричникот на авторот",
+        "InformationAboutTitle": "Информации за {{title}} NFT",
+        "DetailedInformationAboutNFT": "Детални информации за NFT",
+        "PresaleStarts": "Претпродажбата започнува на 23 декември",
+        "OwnerUserNotFound": "Сопственикот на овој NFT не е регистриран во нашата апликација.",
+        "BuyNow": "Купи сега",
+        "Buy": "Купи",
+        "Conversation": "Разговор",
+        "Create": "Креирај",
+        "Author": "Автор",
+        "Commission": "Комисијата",
+        "EnterCommission": "Внесете комисија",
+        "Actions": "Акции",
+        "UpdateNFT": "Ажурирајте го NFT",
+        "NotOnSale": "Не е на продажба",
+        "MovieURL": "URL на филмот",
+        "EnterPrice": "Внесете цена",
+        "Currency": "Валута",
+        "AreYouSureDeleteImage": "Дали сте сигурни дека сакате да ја отстраните сликата?",
+        "AreYouSureDeleteVideo": "Дали сте сигурни дека сакате да го отстраните видеото?",
+        "series": {
+            "Name": "Име",
+            "Icon": "Икона",
+            "Description": "Опис",
+            "Author": "Автор",
+            "SelectSeries": "Изберете серија",
+            "Value": "Вредност",
+            "AreYouSure": "Дали си сигурен?",
+            "AuthorInvalid": "Адресата на авторот е неважечка!",
+            "Address": "Адреса",
+            "CoverImage": "Насловна слика",
+            "UploadCoverImage": "Поставете насловна слика",
+            "CommissionAddressInvalid": "Адресата на комисијата е неважечка",
+            "OnSale": "на распродажба",
+            "OffSale": "надвор од продажба",
+            "CreateSeries": "Креирај серии",
+            "UpdateSeries": "Ажурирајте ја серијата",
+            "SeriesInfo": "Информации за серијата",
+            "SelectAuthor": "Изберете автор",
+            "NewItem": "Нова NFT серија",
+            "NamePlaceholder": "Внесете име на серијата",
+            "DescPlaceholder": "Внесете опис на серијата",
+            "EndingIn": "Завршува во"
+        },
+        "contract": {
+            "CreateContract": "Создадете договор",
+            "SelectContract": "Изберете договор",
+            "CreateContractFor": "Создајте договор за {{userName}}",
+            "ContractFor": "Договор за {{userName}}",
+            "UpdateContract": "Ажурирајте го договорот",
+            "TransferOwnership": "Пренесување на сопственоста",
+            "SetBaseURI": "Поставете Base URI",
+            "SetSuffix": "Поставете наставка",
+            "CurrentOwner": "Тековен сопственик",
+            "CurrentBaseURL": "Тековен BaseURL",
+            "ContractAddressAbsent": "Адреса на договорот отсуствува",
+            "FactoryAddressAbsent": "Адреса на фабриката отсуствува",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Потребен е наслов",
+            "SymbolRequired": "Потребен е симбол",
+            "TypeContractName": "име на договорот",
+            "TypeContractSymbol": "симбол на договор (максимум 10 знаци)"
+        },
+        "contests": {
+            "Title": "Натпревари",
+            "NewContest": "Нов натпревар"
+        },
+        "attributes": {
+            "Title": "Управувајте со атрибути",
+            "Attributes": "Атрибути",
+            "DisplayTitle": "Тип на дисплеј",
+            "AddDisplayType": "Додадете нов тип на екран",
+            "NewDisplay": "Нов приказ",
+            "TraitTitle": "Тип на особина",
+            "AddTraitTitle": "Додадете нов тип на особина",
+            "NewTrait": "Нов тип на особина",
+            "ValueTitle": "Вредност",
+            "AddValueTitle": "Додадете нова вредност",
+            "NewValue": "Нова вредност",
+            "NewAttribute": "Нов атрибут",
+            "UpdateAttributes": "Ажурирајте ги атрибутите",
+            "SaveAttributes": "Зачувај атрибути"
+        },
+        "profile": {
+            "LogOut": "Одјави се",
+            "Title": "Профил за {{userName}}",
+            "Description": "Кориснички детали",
+            "aboutPlaceholder": "Уреди био",
+            "SureLogOut": "Дали сте сигурни дека сакате да се одјавите?"
+        }
+    },
+    "errors": {
+        "Error": "Грешка",
+        "WalletAbsent": "Паричникот не е поврзан.",
+        "Rendering": "Имаше грешки при рендерирање <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Потребна е цена!",
+        "NameRequired": "Потребно е име!",
+        "PriceInvalid": "Цената е неважечка!",
+        "TransactionFailed": "Трансакцијата не успеа",
+        "ChainNotSupported": "Избраниот синџир не е поддржан. Поддржан синџир: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Потребна е поврзана MetaMask за работа со апликацијата",
+        "UserNotLoggedInMetaMask": "Корисникот не е најавен на MetaMask",
+        "CurrencyNotFound": "Валутата не е пронајдена",
+        "WrongChain": "Овој NFT создаден под „{{chain}}“. Ве молиме користете го овој синџир."
+    },
+    "admin": {
+        "Title": "Административни средства",
+        "SubscriptionTitle": "Планови за претплата"
+    },
+    "billing": {
+        "Title": "Фактурирање на средства",
+        "CreditsMinimum": "Минимални кредити",
+        "CreditsToAdd": "Кредити за додавање",
+        "Save": "Зачувај",
+        "ThisLink": "оваа врска",
+        "errors": {
+            "CreditsMinimumNegative": "Минимумот на кредити не може да биде негативен",
+            "CreditsToAddNegative": "Кредитите за додавање не може да бидат негативни"
+        }
     }
 }

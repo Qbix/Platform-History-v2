@@ -92,6 +92,13 @@
                 "title": "Omdirigerer til Wallet",
                 "content": "Når du lukker denne dialog, vil du blive ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
             }
+        },
+        "web3": {
+            "payload": "Log ind på {{host}} på tidspunktet {{timestamp}}",
+            "alert": {
+                "title": "Omdirigerer til Wallet",
+                "content": "Når du lukker denne dialogboks, bliver du ført til din tegnebog. Når du har logget ind, skal du vende tilbage til denne side."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Tjenester",
         "Faq": "Faq",
         "WeekDays": "Ugedage"
+    },
+    "avatar": {
+        "Someone": "Nogen"
+    },
+    "web3": {
+        "WrongMethod": "Forkert kontraktmetode {{methodName}}"
     }
 }

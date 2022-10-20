@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: επεξεργασία χρέωσης για {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Σας ευχαριστούμε για την πληρωμή σας στο {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} εγγεγραμμένος στο {{plan.title}}",
-        "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}"
+        "YouSubscribedTo": "Έχετε εγγραφεί στο {{plan.title}}",
+        "Assets\/credits\/alert": "Έχετε ειδοποίηση που σχετίζεται με τον λογαριασμό σας"
     },
     "charge": {
         "Subject": "Λαμβάνετε πληρωμή {{displayAmount}} από {{call 'publisher.displayName'}} από το &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Πληροφορίες για την παραγγελία",
         "PaymentMethod": "Μέθοδος πληρωμής",
         "ContactInfo": "Πληροφορίες επαφής",
-        "Pay": "Πληρωμή"
+        "Pay": "Πληρωμή",
+        "PaymentSucceeded": "Η πληρωμή ολοκληρώθηκε",
+        "PaymentProcessing.": "Η πληρωμή σας είναι υπό επεξεργασία",
+        "FailTryAgain": "Η πληρωμή σας δεν ήταν επιτυχής, δοκιμάστε ξανά",
+        "SomethingWrong": "Κάτι πήγε στραβά",
+        "PaymentStatus": "Κατάσταση πληρωμής"
     },
     "credits": {
         "InviteAcceptedBy": "Η πρόσκληση έγινε αποδεκτή από {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Πιστωτική ή χρεωστική κάρτα",
         "SubscribePayment": "Εγγραφή πληρωμής",
-        "ImmediatePayment": "Άμεση Πληρωμή"
+        "ImmediatePayment": "Άμεση Πληρωμή",
+        "ProcessingPayment": "Επεξεργασία πληρωμής",
+        "SubscriptionAlreadyPaid": "Αυτή η συνδρομή έχει ήδη πληρωθεί",
+        "SubscriptionNotActive": "Αυτή η συνδρομή δεν είναι ενεργή",
+        "Subscribed": "Εγγεγραμμένος",
+        "Unsubscribed": "Καταργήθηκε η εγγραφή",
+        "Unsubscribe": "Απεγγραφή",
+        "Subscribe": "Εγγραφείτε",
+        "Started": "Ξεκίνησε",
+        "EndsIn": "Τελειώνει σε",
+        "NextPay": "Επόμενη πληρωμή",
+        "Period": "Περίοδος",
+        "Price": "Τιμή",
+        "AreYouSureUnsubscribe": "Είστε βέβαιοι ότι θέλετε να καταργήσετε την εγγραφή αυτού του προγράμματος;",
+        "YouUnsubscribedFromPlan": "Καταργήσατε την εγγραφή σας από το πρόγραμμα &quot;{{planTitle}}&quot;. Δεν θα χρεωθείτε, αλλά η συνδρομή σας θα συνεχιστεί έως τις {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "τίτλος σχεδίου",
+            "PricePlaceholder": "τιμή",
+            "DescriptionPlaceholder": "περιγραφή του προγράμματος συνδρομής",
+            "SavePlan": "Αποθήκευση σχεδίου",
+            "NewPlan": "Νέο Σχέδιο"
+        }
     },
     "payments": {
         "infoTitle": "Ορισμός πληροφοριών πληρωμής",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Έλαβε {{amount}} πιστώσεις από {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Έχετε μικρές πιστώσεις στον λογαριασμό σας. Επισκεφτείτε <a href='{{link}}'>αυτόν τον σύνδεσμο<\/a> για να αγοράσετε περισσότερες πιστώσεις."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Προαιρετική συνεισφορά",
         "RequiredPayment": "Απαιτούμενη πληρωμή",
         "AreYouSureDelete": "Είστε βέβαιοι ότι θέλετε να διαγράψετε αυτήν την υπηρεσία;",
-        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητες που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης."
+        "AmountServicesRelated": "Υπάρχουν {{amount}} διαθεσιμότητες που σχετίζονται με αυτήν την υπηρεσία. Θα αφαιρεθούν επίσης.",
+        "EditServiceTemplate": {
+            "Title": "Υπηρεσία επεξεργασίας"
+        }
     },
     "NFT": {
         "Title": "Πληροφορίες σχετικά με το {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Επιλογές",
             "sampleCSV": "Λήψη δείγματος CSV",
             "fileLabel": "Μεταφόρτωση υπολογιστικού φύλλου:",
-            "errorsTitle": "Παρουσιάστηκαν σφάλματα"
+            "errorsTitle": "Παρουσιάστηκαν σφάλματα",
+            "importAttributes": "Εισαγωγή χαρακτηριστικών NFT",
+            "displayTypeEmpty": "Ο τύπος εμφάνισης για το &quot;{{1}}&quot; δεν βρέθηκε"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Φιλτράρισμα κατά συγγραφείς"
             }
         },
-        "Back": "Επιστροφή στη Συλλογή"
+        "Back": "Επιστροφή στη Συλλογή",
+        "Name": "Ονομα",
+        "EnterName": "Εισαγάγετε όνομα",
+        "EnterAuthorWallet": "Εισαγάγετε το πορτοφόλι του συγγραφέα",
+        "InformationAboutTitle": "Πληροφορίες σχετικά με το {{title}} NFT",
+        "DetailedInformationAboutNFT": "Αναλυτικές πληροφορίες για το NFT",
+        "PresaleStarts": "Η προπώληση ξεκινά στις 23 Δεκεμβρίου",
+        "OwnerUserNotFound": "Ο κάτοχος αυτού του NFT δεν είναι εγγεγραμμένος στην αίτησή μας.",
+        "BuyNow": "Αγορασε τωρα",
+        "Buy": "Αγορά",
+        "Conversation": "Συνομιλία",
+        "Create": "Δημιουργώ",
+        "Author": "Συγγραφέας",
+        "Commission": "Επιτροπή",
+        "EnterCommission": "Εισαγάγετε την προμήθεια",
+        "Actions": "Ενέργειες",
+        "UpdateNFT": "Ενημέρωση NFT",
+        "NotOnSale": "Δεν πωλείται",
+        "MovieURL": "URL ταινίας",
+        "EnterPrice": "Εισαγάγετε τιμή",
+        "Currency": "Νόμισμα",
+        "AreYouSureDeleteImage": "Είστε βέβαιοι ότι θέλετε να αφαιρέσετε την εικόνα;",
+        "AreYouSureDeleteVideo": "Είστε βέβαιοι ότι θέλετε να καταργήσετε το βίντεο;",
+        "series": {
+            "Name": "Ονομα",
+            "Icon": "Εικόνισμα",
+            "Description": "Περιγραφή",
+            "Author": "Συγγραφέας",
+            "SelectSeries": "Επιλέξτε σειρά",
+            "Value": "αξία",
+            "AreYouSure": "Είσαι σίγουρος?",
+            "AuthorInvalid": "Μη έγκυρη διεύθυνση συντάκτη!",
+            "Address": "Διεύθυνση",
+            "CoverImage": "Εικόνα εξωφύλλου",
+            "UploadCoverImage": "Μεταφόρτωση εικόνας εξωφύλλου",
+            "CommissionAddressInvalid": "Η διεύθυνση της Επιτροπής δεν είναι έγκυρη",
+            "OnSale": "σε έκπτωση",
+            "OffSale": "εκτός πώλησης",
+            "CreateSeries": "Δημιουργία σειράς",
+            "UpdateSeries": "Ενημέρωση σειράς",
+            "SeriesInfo": "Πληροφορίες σειράς",
+            "SelectAuthor": "Επιλέξτε συγγραφέα",
+            "NewItem": "Νέα σειρά NFT",
+            "NamePlaceholder": "Εισαγάγετε το όνομα της σειράς",
+            "DescPlaceholder": "Εισαγάγετε την περιγραφή της σειράς",
+            "EndingIn": "Τελειωνει σε"
+        },
+        "contract": {
+            "CreateContract": "Δημιουργία συμβολαίου",
+            "SelectContract": "Επιλέξτε σύμβαση",
+            "CreateContractFor": "Δημιουργία σύμβασης για {{userName}}",
+            "ContractFor": "Συμβόλαιο για {{userName}}",
+            "UpdateContract": "Ενημέρωση σύμβασης",
+            "TransferOwnership": "Μεταβίβαση ιδιοκτησίας",
+            "SetBaseURI": "Ορισμός URI βάσης",
+            "SetSuffix": "Σύνολο επίθημα",
+            "CurrentOwner": "Τρέχων Ιδιοκτήτης",
+            "CurrentBaseURL": "Τρέχον BaseURL",
+            "ContractAddressAbsent": "Η διεύθυνση σύμβασης απουσιάζει",
+            "FactoryAddressAbsent": "Η διεύθυνση εργοστασίου απουσιάζει",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Απαιτείται τίτλος",
+            "SymbolRequired": "Απαιτείται σύμβολο",
+            "TypeContractName": "όνομα της σύμβασης",
+            "TypeContractSymbol": "σύμβολο συμβολαίου (μέγιστο 10 χαρακτήρες)"
+        },
+        "contests": {
+            "Title": "Διαγωνισμοί",
+            "NewContest": "Νέος Διαγωνισμός"
+        },
+        "attributes": {
+            "Title": "Διαχείριση χαρακτηριστικών",
+            "Attributes": "Γνωρίσματα",
+            "DisplayTitle": "Τύπος οθόνης",
+            "AddDisplayType": "Προσθήκη νέου τύπου εμφάνισης",
+            "NewDisplay": "Νέα οθόνη",
+            "TraitTitle": "Τύπος χαρακτηριστικού",
+            "AddTraitTitle": "Προσθήκη νέου τύπου χαρακτηριστικού",
+            "NewTrait": "Νέος τύπος χαρακτηριστικού",
+            "ValueTitle": "αξία",
+            "AddValueTitle": "Προσθέστε νέα αξία",
+            "NewValue": "Νέα Αξία",
+            "NewAttribute": "Νέα Ιδιότητα",
+            "UpdateAttributes": "Ενημέρωση χαρακτηριστικών",
+            "SaveAttributes": "Αποθήκευση χαρακτηριστικών"
+        },
+        "profile": {
+            "LogOut": "Αποσύνδεση",
+            "Title": "Προφίλ για {{userName}}",
+            "Description": "Στοιχεία χρήστη",
+            "aboutPlaceholder": "Επεξεργασία βιογραφικού",
+            "SureLogOut": "Είστε βέβαιοι ότι θέλετε να αποσυνδεθείτε;"
+        }
+    },
+    "errors": {
+        "Error": "Λάθος",
+        "WalletAbsent": "Το πορτοφόλι δεν είναι συνδεδεμένο.",
+        "Rendering": "Παρουσιάστηκαν σφάλματα κατά την απόδοση του <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Απαιτείται τιμή!",
+        "NameRequired": "Ονομα (απαιτείται!",
+        "PriceInvalid": "Άκυρη τιμή!",
+        "TransactionFailed": "Η συναλλαγή απέτυχε",
+        "ChainNotSupported": "Η επιλεγμένη αλυσίδα δεν υποστηρίζεται. Υποστηριζόμενη αλυσίδα: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Χρειάζεστε MetaMask συνδεδεμένο για να εργαστείτε με την εφαρμογή",
+        "UserNotLoggedInMetaMask": "Ο χρήστης δεν είναι συνδεδεμένος στο MetaMask",
+        "CurrencyNotFound": "Το νόμισμα δεν βρέθηκε",
+        "WrongChain": "Αυτό το NFT δημιουργήθηκε στο &quot;{{chain}}&quot;. Χρησιμοποιήστε αυτήν την αλυσίδα."
+    },
+    "admin": {
+        "Title": "Περιουσιακά στοιχεία διοικητικά",
+        "SubscriptionTitle": "Σχέδια συνδρομής"
+    },
+    "billing": {
+        "Title": "Τιμολόγηση περιουσιακών στοιχείων",
+        "CreditsMinimum": "Ελάχιστες πιστώσεις",
+        "CreditsToAdd": "Πιστώσεις για προσθήκη",
+        "Save": "Αποθηκεύσετε",
+        "ThisLink": "αυτός ο σύνδεσμος",
+        "errors": {
+            "CreditsMinimumNegative": "Οι ελάχιστες πιστώσεις δεν μπορούν να είναι αρνητικές",
+            "CreditsToAddNegative": "Οι πιστώσεις προς προσθήκη δεν μπορούν να είναι αρνητικές"
+        }
     }
 }

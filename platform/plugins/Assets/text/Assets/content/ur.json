@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} کے لیے چارج پر کارروائی کی گئی",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} کو آپ کی ادائیگی کا شکریہ",
         "SubscribedTo": "{{call 'user.displayName'}} نے {{plan.title}} کو سبسکرائب کیا",
-        "YouSubscribedTo": "آپ کو {{plan.title}} میں سبسکرائب کیا گیا ہے"
+        "YouSubscribedTo": "آپ کو {{plan.title}} میں سبسکرائب کیا گیا ہے",
+        "Assets\/credits\/alert": "آپ کے پاس اپنے اکاؤنٹ سے متعلق الرٹ ہے۔"
     },
     "charge": {
         "Subject": "آپ کو &quot;{1001}}&quot; کے ذریعے {{call 'publisher.displayName'}} سے {{displayAmount}} کی ادائیگی ملتی ہے",
@@ -21,7 +22,12 @@
         "AboutOrder": "آرڈر کے بارے میں معلومات",
         "PaymentMethod": "ادائیگی کا طریقہ",
         "ContactInfo": "رابطہ کی معلومات",
-        "Pay": "ادا کریں۔"
+        "Pay": "ادا کریں۔",
+        "PaymentSucceeded": "ادائیگی کامیاب ہو گئی۔",
+        "PaymentProcessing.": "آپ کی ادائیگی پر کارروائی ہو رہی ہے۔",
+        "FailTryAgain": "آپ کی ادائیگی کامیاب نہیں ہوئی، براہ کرم دوبارہ کوشش کریں۔",
+        "SomethingWrong": "کچھ غلط ہو گیا",
+        "PaymentStatus": "ادائیگی کی حیثیت"
     },
     "credits": {
         "InviteAcceptedBy": "دعوت قبول کی گئی بذریعہ {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "کریڈٹ یا ڈیبٹ کارڈ",
         "SubscribePayment": "ادائیگی کو سبسکرائب کریں۔",
-        "ImmediatePayment": "فوری ادائیگی"
+        "ImmediatePayment": "فوری ادائیگی",
+        "ProcessingPayment": "ادائیگی پر کارروائی ہو رہی ہے۔",
+        "SubscriptionAlreadyPaid": "یہ سبسکرپشن پہلے ہی ادا کر دی گئی ہے۔",
+        "SubscriptionNotActive": "یہ رکنیت فعال نہیں ہے۔",
+        "Subscribed": "سبسکرائب کیا",
+        "Unsubscribed": "ان سبسکرائب شدہ",
+        "Unsubscribe": "ان سبسکرائب کریں۔",
+        "Subscribe": "سبسکرائب",
+        "Started": "شروع",
+        "EndsIn": "میں ختم ہوتا ہے۔",
+        "NextPay": "اگلی ادائیگی",
+        "Period": "مدت",
+        "Price": "قیمت",
+        "AreYouSureUnsubscribe": "کیا آپ واقعی اس پلان کو اَن سبسکرائب کرنا چاہتے ہیں؟",
+        "YouUnsubscribedFromPlan": "آپ نے پلان &quot;{{planTitle}}&quot; سے ان سبسکرائب کر دیا ہے۔ آپ سے چارج نہیں لیا جائے گا، لیکن آپ کی رکنیت {{endsIn}} تک جاری رہے گی۔",
+        "plan": {
+            "TitlePlaceholder": "منصوبہ کا عنوان",
+            "PricePlaceholder": "قیمت",
+            "DescriptionPlaceholder": "سبسکرپشن پلان کی تفصیل",
+            "SavePlan": "منصوبہ محفوظ کریں۔",
+            "NewPlan": "نیا منصوبہ"
+        }
     },
     "payments": {
         "infoTitle": "ادائیگی کی معلومات سیٹ کریں۔",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{fromUserName}} سے {{999} کریڈٹس موصول ہوئے"
+        },
+        "Assets\/credits\/alert": {
+            "content": "آپ کے اکاؤنٹ میں بہت کم کریڈٹ ہیں۔ مزید کریڈٹ خریدنے کے لیے براہ کرم <a href='{{link}}'>اس لنک<\/a> پر جائیں۔"
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "اختیاری شراکت",
         "RequiredPayment": "مطلوبہ ادائیگی",
         "AreYouSureDelete": "کیا آپ واقعی اس سروس کو حذف کرنا چاہتے ہیں؟",
-        "AmountServicesRelated": "اس سروس سے متعلق {{amount}} دستیابیاں ہیں۔ وہ بھی ہٹا دیے جائیں گے۔"
+        "AmountServicesRelated": "اس سروس سے متعلق {{amount}} دستیابیاں ہیں۔ وہ بھی ہٹا دیے جائیں گے۔",
+        "EditServiceTemplate": {
+            "Title": "سروس میں ترمیم کریں۔"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFT کے بارے میں معلومات",
@@ -246,7 +279,9 @@
             "importOptions": "اختیارات",
             "sampleCSV": "نمونہ CSV ڈاؤن لوڈ کریں۔",
             "fileLabel": "سپریڈ شیٹ اپ لوڈ کریں:",
-            "errorsTitle": "غلطیاں ہوئیں"
+            "errorsTitle": "غلطیاں ہوئیں",
+            "importAttributes": "NFT اوصاف درآمد کریں۔",
+            "displayTypeEmpty": "&quot;{{1}}&quot; کے لیے ڈسپلے کی قسم نہیں ملی"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "مصنفین کے لحاظ سے فلٹر کریں۔"
             }
         },
-        "Back": "واپس مجموعہ پر"
+        "Back": "واپس مجموعہ پر",
+        "Name": "نام",
+        "EnterName": "نام درج کریں",
+        "EnterAuthorWallet": "مصنف کا پرس درج کریں۔",
+        "InformationAboutTitle": "{{title}} NFT کے بارے میں معلومات",
+        "DetailedInformationAboutNFT": "NFT کے بارے میں تفصیلی معلومات",
+        "PresaleStarts": "پری سیل 23 دسمبر سے شروع ہوگا۔",
+        "OwnerUserNotFound": "اس NFT کا مالک ہماری درخواست میں رجسٹرڈ نہیں ہے۔",
+        "BuyNow": "ابھی خریدیں",
+        "Buy": "خریدنے",
+        "Conversation": "بات چیت",
+        "Create": "بنانا",
+        "Author": "مصنف",
+        "Commission": "کمیشن",
+        "EnterCommission": "کمیشن درج کریں۔",
+        "Actions": "اعمال",
+        "UpdateNFT": "NFT کو اپ ڈیٹ کریں۔",
+        "NotOnSale": "فروخت پر نہیں",
+        "MovieURL": "مووی یو آر ایل",
+        "EnterPrice": "قیمت درج کریں۔",
+        "Currency": "کرنسی",
+        "AreYouSureDeleteImage": "کیا آپ واقعی تصویر ہٹانا چاہتے ہیں؟",
+        "AreYouSureDeleteVideo": "کیا آپ واقعی ویڈیو ہٹانا چاہتے ہیں؟",
+        "series": {
+            "Name": "نام",
+            "Icon": "آئیکن",
+            "Description": "تفصیل",
+            "Author": "مصنف",
+            "SelectSeries": "سیریز منتخب کریں۔",
+            "Value": "قدر",
+            "AreYouSure": "کیا تمہیں یقین ہے؟",
+            "AuthorInvalid": "مصنف کا پتہ غلط ہے!",
+            "Address": "پتہ",
+            "CoverImage": "کور تصویر",
+            "UploadCoverImage": "سرورق کی تصویر اپ لوڈ کریں۔",
+            "CommissionAddressInvalid": "کمیشن کا پتہ غلط ہے۔",
+            "OnSale": "برائے فروخت",
+            "OffSale": "فروخت سے دور",
+            "CreateSeries": "سیریز بنائیں",
+            "UpdateSeries": "اپ ڈیٹ سیریز",
+            "SeriesInfo": "سیریز کی معلومات",
+            "SelectAuthor": "مصنف کا انتخاب کریں۔",
+            "NewItem": "نئی NFT سیریز",
+            "NamePlaceholder": "سیریز کا نام درج کریں۔",
+            "DescPlaceholder": "سیریز کی تفصیل درج کریں۔",
+            "EndingIn": "میں ختم ہو رہا ہے۔"
+        },
+        "contract": {
+            "CreateContract": "معاہدہ بنائیں",
+            "SelectContract": "معاہدہ منتخب کریں۔",
+            "CreateContractFor": "{{userName}} کے لیے معاہدہ بنائیں",
+            "ContractFor": "معاہدہ برائے {{userName}}",
+            "UpdateContract": "معاہدہ اپ ڈیٹ کریں۔",
+            "TransferOwnership": "ملکیت منتقل کریں۔",
+            "SetBaseURI": "بیس URI سیٹ کریں۔",
+            "SetSuffix": "لاحقہ سیٹ کریں۔",
+            "CurrentOwner": "موجودہ مالک",
+            "CurrentBaseURL": "موجودہ بیس یو آر ایل",
+            "ContractAddressAbsent": "معاہدہ کا پتہ غائب",
+            "FactoryAddressAbsent": "فیکٹری کا پتہ غائب ہے۔",
+            "ContractName": "{{contractName}} - {{contractSymbol}} {{chainNetwork}})",
+            "TitleRequired": "عنوان درکار ہے۔",
+            "SymbolRequired": "علامت درکار ہے۔",
+            "TypeContractName": "معاہدہ کا نام",
+            "TypeContractSymbol": "معاہدے کی علامت (زیادہ سے زیادہ 10 حروف)"
+        },
+        "contests": {
+            "Title": "مقابلے",
+            "NewContest": "نیا مقابلہ"
+        },
+        "attributes": {
+            "Title": "صفات کا نظم کریں۔",
+            "Attributes": "صفات",
+            "DisplayTitle": "ڈسپلے کی قسم",
+            "AddDisplayType": "ڈسپلے کی نئی قسم شامل کریں۔",
+            "NewDisplay": "نیا ڈسپلے",
+            "TraitTitle": "خاصیت کی قسم",
+            "AddTraitTitle": "نئی خصوصیت کی قسم شامل کریں۔",
+            "NewTrait": "نئی خصوصیت کی قسم",
+            "ValueTitle": "قدر",
+            "AddValueTitle": "نئی قدر شامل کریں۔",
+            "NewValue": "نئی قدر",
+            "NewAttribute": "نئی صفت",
+            "UpdateAttributes": "اوصاف کو اپ ڈیٹ کریں۔",
+            "SaveAttributes": "صفات کو محفوظ کریں۔"
+        },
+        "profile": {
+            "LogOut": "لاگ آوٹ",
+            "Title": "پروفائل برائے {{userName}}",
+            "Description": "صارف کی تفصیلات",
+            "aboutPlaceholder": "بائیو میں ترمیم کریں۔",
+            "SureLogOut": "کیا آپ واقعی لاگ آؤٹ کرنا چاہتے ہیں؟"
+        }
+    },
+    "errors": {
+        "Error": "خرابی",
+        "WalletAbsent": "پرس منسلک نہیں ہے۔",
+        "Rendering": "رینڈرنگ کے دوران غلطیاں تھیں <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "قیمت درکار ہے!",
+        "NameRequired": "نام درکار ہے!",
+        "PriceInvalid": "قیمت غلط ہے!",
+        "TransactionFailed": "لین دین ناکام ہو گیا۔",
+        "ChainNotSupported": "منتخب کردہ سلسلہ تعاون یافتہ نہیں ہے۔ تعاون یافتہ سلسلہ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "ایپلیکیشن کے ساتھ کام کرنے کے لیے میٹا ماسک کی ضرورت ہے۔",
+        "UserNotLoggedInMetaMask": "صارف MetaMask میں لاگ ان نہیں ہے۔",
+        "CurrencyNotFound": "کرنسی نہیں ملی",
+        "WrongChain": "یہ NFT &quot;{{chain}}&quot; کے تحت بنایا گیا ہے۔ براہ کرم یہ سلسلہ استعمال کریں۔"
+    },
+    "admin": {
+        "Title": "انتظامی اثاثے۔",
+        "SubscriptionTitle": "سبسکرپشن پلانز"
+    },
+    "billing": {
+        "Title": "اثاثوں کی بلنگ",
+        "CreditsMinimum": "کم سے کم کریڈٹس",
+        "CreditsToAdd": "شامل کرنے کے لیے کریڈٹس",
+        "Save": "محفوظ کریں۔",
+        "ThisLink": "یہ لنک",
+        "errors": {
+            "CreditsMinimumNegative": "کریڈٹ کم از کم منفی نہیں ہو سکتا",
+            "CreditsToAddNegative": "شامل کرنے کے لیے کریڈٹ منفی نہیں ہو سکتے"
+        }
     }
 }

@@ -103,6 +103,13 @@
                 "title": "Cüzdan&#39;a Yönlendirme",
                 "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
             }
+        },
+        "web3": {
+            "payload": "{{host}}&#39;da {{timestamp}} zamanında oturum açın",
+            "alert": {
+                "title": "Cüzdan&#39;a Yönlendirme",
+                "content": "Bu iletişim kutusunu kapattığınızda, cüzdanınıza yönlendirileceksiniz. Giriş yaptıktan sonra bu sayfaya geri dönün."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Üye",
         "Guest": "Misafir",
         "Host": "Ev sahibi"
+    },
+    "avatar": {
+        "Someone": "Birisi"
+    },
+    "web3": {
+        "WrongMethod": "Yanlış sözleşme yöntemi {{methodName}}"
     }
 }

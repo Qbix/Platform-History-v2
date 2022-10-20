@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "दूर संवाद",
             "MeetingEnded": "टेलीकांफ्रेंस समाप्त"
+        },
+        "requestSpeakDialog": {
+            "msg": "इस समय मीटिंग में {{count}} लोग बोल रहे हैं। क्या आप उनमें से एक को {{seconds}} सेकंड बोलने की अनुमति देने के बाद बदलना चाहते हैं?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "कॉल समाप्त करें",
         "interview": "साक्षात्कार",
         "markApproved": "मार्क स्वीकृत"
+    },
+    "identifier": {
+        "private": "निजी",
+        "public": "जनता",
+        "configurationSaved": "कॉन्फ़िगरेशन सहेजा गया",
+        "error": "कुछ गलत हो गया"
     }
 }

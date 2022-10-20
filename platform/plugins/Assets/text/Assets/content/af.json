@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: heffing verwerk vir {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Dankie vir jou betaling aan {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} het ingeteken op {{plan.title}}",
-        "YouSubscribedTo": "Jy is ingeteken op {{plan.title}}"
+        "YouSubscribedTo": "Jy is ingeteken op {{plan.title}}",
+        "Assets\/credits\/alert": "Jy het &#39;n waarskuwing wat verband hou met jou rekening"
     },
     "payment": {
         "AboutOrder": "Inligting oor bestelling",
         "PaymentMethod": "Betalings metode",
         "ContactInfo": "Kontakbesonderhede",
-        "Pay": "Betaal"
+        "Pay": "Betaal",
+        "PaymentSucceeded": "Betaling het geslaag",
+        "PaymentProcessing.": "Jou betaling word tans verwerk",
+        "FailTryAgain": "Jou betaling was nie suksesvol nie, probeer asseblief weer",
+        "SomethingWrong": "Iets het verkeerd geloop",
+        "PaymentStatus": "Betalingstatus"
     },
     "credits": {
         "InviteAcceptedBy": "Uitnodiging aanvaar deur {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Krediet- of debietkaart",
         "SubscribePayment": "Teken in Betaling",
-        "ImmediatePayment": "Onmiddellike betaling"
+        "ImmediatePayment": "Onmiddellike betaling",
+        "ProcessingPayment": "Verwerking van betaling",
+        "SubscriptionAlreadyPaid": "Hierdie intekening is reeds betaal",
+        "SubscriptionNotActive": "Hierdie intekening is nie aktief nie",
+        "Subscribed": "Ingeteken",
+        "Unsubscribed": "Uitgeteken",
+        "Unsubscribe": "Teken uit",
+        "Subscribe": "Teken in",
+        "Started": "Het begin",
+        "EndsIn": "Eindig in",
+        "NextPay": "Volgende betaling",
+        "Period": "Tydperk",
+        "Price": "Prys",
+        "AreYouSureUnsubscribe": "Is jy seker jy wil hierdie plan uitteken?",
+        "YouUnsubscribedFromPlan": "Jy het by plan &quot;{{planTitle}}&quot; uitgeteken. Jy sal nie hef nie, maar jou intekening sal voortduur tot {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "plan titel",
+            "PricePlaceholder": "prys",
+            "DescriptionPlaceholder": "intekening plan beskrywing",
+            "SavePlan": "Stoor plan",
+            "NewPlan": "Nuwe Plan"
+        }
     },
     "payments": {
         "infoTitle": "Stel betalingsinligting",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} krediete"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Jy het min krediete op jou rekening. Besoek asseblief <a href='{{link}}'>hierdie skakel<\/a> om meer krediete te koop."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Vereiste betaling",
         "AreYouSureDelete": "Is jy seker jy wil hierdie diens uitvee?",
         "AmountServicesRelated": "Daar is {{amount}} beskikbaarheid wat met hierdie diens verband hou. Hulle sal ook verwyder word.",
-        "Free": "Vry"
+        "Free": "Vry",
+        "EditServiceTemplate": {
+            "Title": "Wysig diens"
+        }
     },
     "NFT": {
         "Title": "Inligting oor {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "Opsies",
             "sampleCSV": "Laai voorbeeld CSV af",
             "fileLabel": "Laai sigblad op:",
-            "errorsTitle": "Foute het voorgekom"
+            "errorsTitle": "Foute het voorgekom",
+            "importAttributes": "Voer NFT-kenmerke in",
+            "displayTypeEmpty": "Vertoontipe vir &quot;{{1}}&quot; nie gevind nie"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Filter volgens skrywers"
             }
         },
-        "Back": "Terug na versameling"
+        "Back": "Terug na versameling",
+        "Name": "Naam",
+        "EnterName": "Voer naam in",
+        "EnterAuthorWallet": "Voer skrywersbeursie in",
+        "InformationAboutTitle": "Inligting oor {{title}} NFT",
+        "DetailedInformationAboutNFT": "Gedetailleerde inligting oor NFT",
+        "PresaleStarts": "Voorverkoop begin 23 Des",
+        "OwnerUserNotFound": "Eienaar van hierdie NFT is nie in ons aansoek geregistreer nie.",
+        "BuyNow": "Koop nou",
+        "Buy": "Koop",
+        "Conversation": "Gesprek",
+        "Create": "Skep",
+        "Author": "Skrywer",
+        "Commission": "Kommissie",
+        "EnterCommission": "Voer kommissie in",
+        "Actions": "Aksies",
+        "UpdateNFT": "Dateer NFT op",
+        "NotOnSale": "Nie te koop nie",
+        "MovieURL": "Fliek URL",
+        "EnterPrice": "Voer prys in",
+        "Currency": "Geldeenheid",
+        "AreYouSureDeleteImage": "Is jy seker jy wil prent verwyder?",
+        "AreYouSureDeleteVideo": "Is jy seker jy wil video verwyder?",
+        "series": {
+            "Name": "Naam",
+            "Icon": "Ikoon",
+            "Description": "Beskrywing",
+            "Author": "Skrywer",
+            "SelectSeries": "Kies reeks",
+            "Value": "Waarde",
+            "AreYouSure": "Is jy seker?",
+            "AuthorInvalid": "Skryweradres ongeldig!",
+            "Address": "Adres",
+            "CoverImage": "Omslagprent",
+            "UploadCoverImage": "Laai omslagprent op",
+            "CommissionAddressInvalid": "Kommissieadres ongeldig",
+            "OnSale": "te koop",
+            "OffSale": "uitverkoping",
+            "CreateSeries": "Skep reeks",
+            "UpdateSeries": "Dateer reeks op",
+            "SeriesInfo": "Reeks inligting",
+            "SelectAuthor": "Kies skrywer",
+            "NewItem": "Nuwe NFT-reeks",
+            "NamePlaceholder": "Voer reeksnaam in",
+            "DescPlaceholder": "Voer reeksbeskrywing in",
+            "EndingIn": "Eindig in"
+        },
+        "contract": {
+            "CreateContract": "Skep kontrak",
+            "SelectContract": "Kies kontrak",
+            "CreateContractFor": "Skep kontrak vir {{userName}}",
+            "ContractFor": "Kontrak vir {{userName}}",
+            "UpdateContract": "Dateer kontrak op",
+            "TransferOwnership": "Oordrag eienaarskap",
+            "SetBaseURI": "Stel basis-URI",
+            "SetSuffix": "Stel agtervoegsel",
+            "CurrentOwner": "Huidige Eienaar",
+            "CurrentBaseURL": "Huidige basis-URL",
+            "ContractAddressAbsent": "Kontrakadres afwesig",
+            "FactoryAddressAbsent": "Fabrieksadres afwesig",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Titel vereis",
+            "SymbolRequired": "Simbool word vereis",
+            "TypeContractName": "kontrak naam",
+            "TypeContractSymbol": "kontraksimbool (maksimum 10 tekens)"
+        },
+        "contests": {
+            "Title": "Wedstryde",
+            "NewContest": "Nuwe kompetisie"
+        },
+        "attributes": {
+            "Title": "Bestuur eienskappe",
+            "Attributes": "Eienskappe",
+            "DisplayTitle": "Tipe vertoon",
+            "AddDisplayType": "Voeg nuwe vertoontipe by",
+            "NewDisplay": "Nuwe skerm",
+            "TraitTitle": "Tipe eienskap",
+            "AddTraitTitle": "Voeg nuwe eienskaptipe by",
+            "NewTrait": "Nuwe tipe eienskap",
+            "ValueTitle": "Waarde",
+            "AddValueTitle": "Voeg nuwe waarde by",
+            "NewValue": "Nuwe Waarde",
+            "NewAttribute": "Nuwe kenmerk",
+            "UpdateAttributes": "Dateer eienskappe op",
+            "SaveAttributes": "Stoor eienskappe"
+        },
+        "profile": {
+            "LogOut": "Teken uit",
+            "Title": "Profiel vir {{userName}}",
+            "Description": "Gebruiker besonderhede",
+            "aboutPlaceholder": "Wysig Bio",
+            "SureLogOut": "Is jy seker jy wil afmeld?"
+        }
+    },
+    "errors": {
+        "Error": "Fout",
+        "WalletAbsent": "Die beursie nie gekoppel nie.",
+        "Rendering": "Daar was foute tydens die lewering van <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Prys vereis!",
+        "NameRequired": "Naam vereis!",
+        "PriceInvalid": "Prys ongeldig!",
+        "TransactionFailed": "Transaksie het misluk",
+        "ChainNotSupported": "Die geselekteerde ketting word nie ondersteun nie. Ondersteunde ketting: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Benodig MetaMask gekoppel om met toepassing te werk",
+        "UserNotLoggedInMetaMask": "Gebruiker is nie by MetaMask aangemeld nie",
+        "CurrencyNotFound": "Geldeenheid nie gevind nie",
+        "WrongChain": "Hierdie NFT geskep onder &quot;{{chain}}&quot;. Gebruik asseblief hierdie ketting."
+    },
+    "admin": {
+        "Title": "Bates administratief",
+        "SubscriptionTitle": "Intekenplanne"
+    },
+    "billing": {
+        "Title": "Batefakturering",
+        "CreditsMinimum": "Minimum krediete",
+        "CreditsToAdd": "Krediete om by te voeg",
+        "Save": "Stoor",
+        "ThisLink": "hierdie skakel",
+        "errors": {
+            "CreditsMinimumNegative": "Krediete minimum kan nie negatief wees nie",
+            "CreditsToAddNegative": "Krediete om by te voeg, kan nie negatief wees nie"
+        }
     }
 }

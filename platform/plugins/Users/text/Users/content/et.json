@@ -103,6 +103,13 @@
                 "title": "Ümbersuunamine Walletisse",
                 "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
             }
+        },
+        "web3": {
+            "payload": "Logige sisse {{host}} kell {{timestamp}}",
+            "alert": {
+                "title": "Ümbersuunamine Walletisse",
+                "content": "Kui olete selle dialoogi sulgenud, suunatakse teid oma rahakotti. Pärast sisselogimist naaske sellele lehele."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "liige",
         "Guest": "Külaline",
         "Host": "Host"
+    },
+    "avatar": {
+        "Someone": "keegi"
+    },
+    "web3": {
+        "WrongMethod": "Vale lepingumeetod {{methodName}}"
     }
 }

@@ -2,7 +2,7 @@
     "errors": {
         "Error": "Error",
         "WalletAbsent": "The wallet not connected.",
-        "Rendering": "There were errors while rendering <span class='url'>{{1}}</span>",
+        "Rendering": "There were errors while rendering <span class='url'>{{1}}<\/span>",
         "PriceRequired": "Price required!",
         "NameRequired": "Name required!",
         "PriceInvalid": "Price invalid!",
@@ -26,7 +26,7 @@
         "ThankYouForYourPayment": "Thank you for your payment to {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} subscribed to {{plan.title}}",
         "YouSubscribedTo": "You have been subscribed to {{plan.title}}",
-        "Assets/credits/alert": "You have alert related to your account"
+        "Assets\/credits\/alert": "You have alert related to your account"
     },
     "charge": {
         "Subject": "You get payment of {{displayAmount}} from {{call 'publisher.displayName'}} by \"{{description}}\"",
@@ -201,7 +201,7 @@
             "content": "Received {{amount}} credits from {{fromUserName}}"
         },
         "Assets\/credits\/alert": {
-            "content": "You have little credits on your account. Please visit <a href='{{link}}'>this link</a> to buy more credits."
+            "content": "You have little credits on your account. Please visit <a href='{{link}}'>this link<\/a> to buy more credits."
         }
     },
     "billing": {
@@ -380,7 +380,7 @@
             "errorsTitle": "Errors occurred"
         },
         "filter": {
-            "ByCategory" : {
+            "ByCategory": {
                 "FilterByNFTCollections": "Filter by NFT Collections",
                 "ShowNFTCollection": "Show NFT collection in ...",
                 "AllCollections": "All Collections"
@@ -390,7 +390,6 @@
                 "AllUsers": "Everyone",
                 "FilterByAuthors": "Filter by Authors"
             }
-
         },
         "Back": "Back to Collection",
         "attributes": {

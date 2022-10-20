@@ -103,6 +103,13 @@
                 "title": "Uudelleenohjataan Walletiin",
                 "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Palaa tälle sivulle kirjautumisen jälkeen."
             }
+        },
+        "web3": {
+            "payload": "Kirjaudu sisään {{host}} aikaan {{timestamp}}",
+            "alert": {
+                "title": "Uudelleenohjataan Walletiin",
+                "content": "Kun suljet tämän valintaikkunan, sinut ohjataan lompakkoosi. Kun olet kirjautunut sisään, palaa tälle sivulle."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Jäsen",
         "Guest": "Vieras",
         "Host": "Isäntä"
+    },
+    "avatar": {
+        "Someone": "Joku"
+    },
+    "web3": {
+        "WrongMethod": "Väärä sopimustapa {{methodName}}"
     }
 }

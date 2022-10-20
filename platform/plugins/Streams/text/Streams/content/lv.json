@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonference",
             "MeetingEnded": "Telekonference beidzās"
+        },
+        "requestSpeakDialog": {
+            "msg": "Pašlaik sapulcē runā {{count}} personas. Vai vēlaties aizstāt vienu no tiem pēc tam, kad būsiet atļāvis {{seconds}} sekundes beigt runāt?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Beigt zvanu",
         "interview": "Intervija",
         "markApproved": "Atzīmēt kā apstiprinātu"
+    },
+    "identifier": {
+        "private": "Privāts",
+        "public": "Publisks",
+        "configurationSaved": "Konfigurācija saglabāta",
+        "error": "Kaut kas nogāja greizi"
     }
 }

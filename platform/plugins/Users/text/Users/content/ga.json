@@ -103,6 +103,13 @@
                 "title": "Atreorú chuig Sparán",
                 "content": "Nuair a dhúnann tú an dialóg seo, tógfar chuig do sparán thú. Tar éis duit síniú isteach, fill ar an leathanach seo."
             }
+        },
+        "web3": {
+            "payload": "Logáil isteach i {{host}} ag am {{timestamp}}",
+            "alert": {
+                "title": "Atreorú chuig Sparán",
+                "content": "Nuair a dhúnann tú an dialóg seo, tógfar chuig do sparán thú. Tar éis duit síniú isteach, fill ar an leathanach seo."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Ball",
         "Guest": "Aoi",
         "Host": "Óstach"
+    },
+    "avatar": {
+        "Someone": "Duine éigin"
+    },
+    "web3": {
+        "WrongMethod": "Modh conartha mícheart {{methodName}}"
     }
 }

@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: debitering behandlas för {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Tack för din betalning till {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} prenumererade på {{plan.title}}",
-        "YouSubscribedTo": "Du har prenumererat på {{plan.title}}"
+        "YouSubscribedTo": "Du har prenumererat på {{plan.title}}",
+        "Assets\/credits\/alert": "Du har en varning relaterad till ditt konto"
     },
     "charge": {
         "Subject": "Du får betalning på {{displayAmount}} från {{call 'publisher.displayName'}} av &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Info om beställning",
         "PaymentMethod": "Betalningsmetod",
         "ContactInfo": "Kontaktinformation",
-        "Pay": "Betala"
+        "Pay": "Betala",
+        "PaymentSucceeded": "Betalningen lyckades",
+        "PaymentProcessing.": "Din betalning behandlas",
+        "FailTryAgain": "Din betalning misslyckades, försök igen",
+        "SomethingWrong": "Något gick fel",
+        "PaymentStatus": "Betalningsstatus"
     },
     "credits": {
         "InviteAcceptedBy": "Inbjudan accepteras av {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Kredit-eller betalkort",
         "SubscribePayment": "Prenumerera Betalning",
-        "ImmediatePayment": "Omedelbar betalning"
+        "ImmediatePayment": "Omedelbar betalning",
+        "ProcessingPayment": "Bearbetar betalning",
+        "SubscriptionAlreadyPaid": "Denna prenumeration har redan betalats",
+        "SubscriptionNotActive": "Denna prenumeration är inte aktiv",
+        "Subscribed": "Prenumererade",
+        "Unsubscribed": "Avslutad prenumeration",
+        "Unsubscribe": "Säga upp",
+        "Subscribe": "Prenumerera",
+        "Started": "Satte igång",
+        "EndsIn": "Slutar i",
+        "NextPay": "Nästa betalning",
+        "Period": "Period",
+        "Price": "Pris",
+        "AreYouSureUnsubscribe": "Är du säker på att du vill avsluta prenumerationen på den här planen?",
+        "YouUnsubscribedFromPlan": "Du avslutade prenumerationen på planen &quot;{{planTitle}}&quot;. Du kommer inte att debiteras, men din prenumeration fortsätter till {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "planens titel",
+            "PricePlaceholder": "pris",
+            "DescriptionPlaceholder": "beskrivning av prenumerationsplanen",
+            "SavePlan": "Spara plan",
+            "NewPlan": "Ny plan"
+        }
     },
     "payments": {
         "infoTitle": "Ställ in betalningsinformation",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Fick {{amount}} krediter från {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Du har lite krediter på ditt konto. Besök <a href='{{link}}'>den här länken<\/a> för att köpa fler krediter."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Valfritt bidrag",
         "RequiredPayment": "Krävs betalning",
         "AreYouSureDelete": "Är du säker på att du vill ta bort den här tjänsten?",
-        "AmountServicesRelated": "Det finns {{amount}} tillgänglighet relaterade till den här tjänsten. De kommer också att tas bort."
+        "AmountServicesRelated": "Det finns {{amount}} tillgänglighet relaterade till den här tjänsten. De kommer också att tas bort.",
+        "EditServiceTemplate": {
+            "Title": "Redigera tjänst"
+        }
     },
     "NFT": {
         "Title": "Information om {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "alternativ",
             "sampleCSV": "Ladda ner exempel på CSV",
             "fileLabel": "Ladda upp kalkylblad:",
-            "errorsTitle": "Fel uppstod"
+            "errorsTitle": "Fel uppstod",
+            "importAttributes": "Importera NFT-attribut",
+            "displayTypeEmpty": "Visningstyp för &quot;{{1}}&quot; hittades inte"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Filtrera efter författare"
             }
         },
-        "Back": "Tillbaka till samlingen"
+        "Back": "Tillbaka till samlingen",
+        "Name": "namn",
+        "EnterName": "Skriv namn",
+        "EnterAuthorWallet": "Ange författarplånbok",
+        "InformationAboutTitle": "Information om {{title}} NFT",
+        "DetailedInformationAboutNFT": "Detaljerad information om NFT",
+        "PresaleStarts": "Förköpet startar 23 december",
+        "OwnerUserNotFound": "Ägaren till denna NFT är inte registrerad i vår applikation.",
+        "BuyNow": "Köp nu",
+        "Buy": "köpa",
+        "Conversation": "Konversation",
+        "Create": "Skapa",
+        "Author": "Författare",
+        "Commission": "Provision",
+        "EnterCommission": "Ange provision",
+        "Actions": "Åtgärder",
+        "UpdateNFT": "Uppdatera NFT",
+        "NotOnSale": "Inte till rea",
+        "MovieURL": "Filmens URL",
+        "EnterPrice": "Ange pris",
+        "Currency": "Valuta",
+        "AreYouSureDeleteImage": "Är du säker på att du vill ta bort bilden?",
+        "AreYouSureDeleteVideo": "Är du säker på att du vill ta bort videon?",
+        "series": {
+            "Name": "namn",
+            "Icon": "Ikon",
+            "Description": "Beskrivning",
+            "Author": "Författare",
+            "SelectSeries": "Välj serie",
+            "Value": "Värde",
+            "AreYouSure": "Är du säker?",
+            "AuthorInvalid": "Författaradress ogiltig!",
+            "Address": "Adress",
+            "CoverImage": "Omslagsbild",
+            "UploadCoverImage": "Ladda upp omslagsbild",
+            "CommissionAddressInvalid": "Kommissionens adress ogiltig",
+            "OnSale": "till salu",
+            "OffSale": "på rea",
+            "CreateSeries": "Skapa serier",
+            "UpdateSeries": "Uppdatera serien",
+            "SeriesInfo": "Serie info",
+            "SelectAuthor": "Välj författare",
+            "NewItem": "Ny NFT-serie",
+            "NamePlaceholder": "Ange serienamn",
+            "DescPlaceholder": "Ange seriebeskrivning",
+            "EndingIn": "Slutar i"
+        },
+        "contract": {
+            "CreateContract": "Skapa kontrakt",
+            "SelectContract": "Välj kontrakt",
+            "CreateContractFor": "Skapa kontrakt för {{userName}}",
+            "ContractFor": "Kontrakt för {{userName}}",
+            "UpdateContract": "Uppdatera kontrakt",
+            "TransferOwnership": "Överlåta ägande",
+            "SetBaseURI": "Ställ in bas-URI",
+            "SetSuffix": "Ställ in suffix",
+            "CurrentOwner": "Nuvarande ägare",
+            "CurrentBaseURL": "Nuvarande BaseURL",
+            "ContractAddressAbsent": "Avtalsadress saknas",
+            "FactoryAddressAbsent": "Fabriksadress saknas",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Titel krävs",
+            "SymbolRequired": "Symbol krävs",
+            "TypeContractName": "kontraktsnamn",
+            "TypeContractSymbol": "kontraktssymbol (max 10 tecken)"
+        },
+        "contests": {
+            "Title": "Tävlingar",
+            "NewContest": "Ny tävling"
+        },
+        "attributes": {
+            "Title": "Hantera attribut",
+            "Attributes": "Attribut",
+            "DisplayTitle": "Bildskärmstyp",
+            "AddDisplayType": "Lägg till ny visningstyp",
+            "NewDisplay": "Ny display",
+            "TraitTitle": "Egenskapstyp",
+            "AddTraitTitle": "Lägg till ny egenskapstyp",
+            "NewTrait": "Ny egenskapstyp",
+            "ValueTitle": "Värde",
+            "AddValueTitle": "Lägg till nytt värde",
+            "NewValue": "Nytt värde",
+            "NewAttribute": "Nytt attribut",
+            "UpdateAttributes": "Uppdatera attribut",
+            "SaveAttributes": "Spara attribut"
+        },
+        "profile": {
+            "LogOut": "Logga ut",
+            "Title": "Profil för {{userName}}",
+            "Description": "Användarinformation",
+            "aboutPlaceholder": "Redigera bio",
+            "SureLogOut": "Är du säker på att du vill logga ut?"
+        }
+    },
+    "errors": {
+        "Error": "Fel",
+        "WalletAbsent": "Plånboken inte ansluten.",
+        "Rendering": "Det uppstod fel vid renderingen av <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Pris krävs!",
+        "NameRequired": "Namn (krävs!",
+        "PriceInvalid": "Priset är ogiltigt!",
+        "TransactionFailed": "Transaktionen misslyckades",
+        "ChainNotSupported": "Den valda kedjan stöds inte. Kedja som stöds: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Behöver MetaMask ansluten för att arbeta med applikation",
+        "UserNotLoggedInMetaMask": "Användaren är inte inloggad på MetaMask",
+        "CurrencyNotFound": "Valutan hittades inte",
+        "WrongChain": "Denna NFT skapades under &quot;{{chain}}&quot;. Använd denna kedja."
+    },
+    "admin": {
+        "Title": "Tillgångar administrativa",
+        "SubscriptionTitle": "Prenumerationsplaner"
+    },
+    "billing": {
+        "Title": "Debitering av tillgångar",
+        "CreditsMinimum": "Minsta poäng",
+        "CreditsToAdd": "Krediter att lägga till",
+        "Save": "Spara",
+        "ThisLink": "den här länken",
+        "errors": {
+            "CreditsMinimumNegative": "Minsta poäng får inte vara negativ",
+            "CreditsToAddNegative": "Krediter att lägga till får inte vara negativa"
+        }
     }
 }

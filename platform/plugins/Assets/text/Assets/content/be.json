@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: плата апрацавана на {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Дзякуй за ваш плацёж на адрас {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} падпісаўся на {{plan.title}}",
-        "YouSubscribedTo": "Вы былі падпісаныя на {{plan.title}}"
+        "YouSubscribedTo": "Вы былі падпісаныя на {{plan.title}}",
+        "Assets\/credits\/alert": "У вас ёсць абвестка, звязаная з вашым уліковым запісам"
     },
     "payment": {
         "AboutOrder": "Інфармацыя пра заказ",
         "PaymentMethod": "Спосаб аплаты",
         "ContactInfo": "Кантактная інфармацыя",
-        "Pay": "Плаціць"
+        "Pay": "Плаціць",
+        "PaymentSucceeded": "Аплата ўдалася",
+        "PaymentProcessing.": "Ваш плацеж апрацоўваецца",
+        "FailTryAgain": "Ваш плацёж не прайшоў, паспрабуйце яшчэ раз",
+        "SomethingWrong": "Нешта пайшло не так",
+        "PaymentStatus": "Статус аплаты"
     },
     "credits": {
         "InviteAcceptedBy": "Запрашэнне прынята {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Крэдытная або дэбетавая карта",
         "SubscribePayment": "Аплата падпіскі",
-        "ImmediatePayment": "Неадкладная аплата"
+        "ImmediatePayment": "Неадкладная аплата",
+        "ProcessingPayment": "Апрацоўка плацяжу",
+        "SubscriptionAlreadyPaid": "Гэтая падпіска ўжо аплачана",
+        "SubscriptionNotActive": "Гэтая падпіска неактыўная",
+        "Subscribed": "Падпісаўся",
+        "Unsubscribed": "Адпісаўся",
+        "Unsubscribe": "Адпісацца",
+        "Subscribe": "Падпісвайцеся",
+        "Started": "Пачалі",
+        "EndsIn": "Заканчваецца ў",
+        "NextPay": "Наступны плацеж",
+        "Period": "Кропка",
+        "Price": "Кошт",
+        "AreYouSureUnsubscribe": "Вы ўпэўнены, што хочаце адмовіцца ад падпіскі на гэты план?",
+        "YouUnsubscribedFromPlan": "Вы адмовіліся ад падпіскі на план &quot;{{planTitle}}&quot;. З вас не спаганяецца плата, але ваша падпіска працягнецца да {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "назва плана",
+            "PricePlaceholder": "цана",
+            "DescriptionPlaceholder": "апісанне плана падпіскі",
+            "SavePlan": "План захавання",
+            "NewPlan": "Новы план"
+        }
     },
     "payments": {
         "infoTitle": "Усталюйце інфармацыю аб аплаце",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "Бонусныя {{amount}} крэдыты"
+        },
+        "Assets\/credits\/alert": {
+            "content": "На вашым рахунку мала крэдытаў. Перайдзіце па <a href='{{link}}'>гэтай спасылцы<\/a> , каб купіць дадатковыя крэдыты."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Абавязковая аплата",
         "AreYouSureDelete": "Вы ўпэўнены, што жадаеце выдаліць гэты сэрвіс?",
         "AmountServicesRelated": "Ёсць {{amount}} даступнасці, звязаныя з гэтай паслугай. Яны таксама будуць выдаленыя.",
-        "Free": "Бясплатна"
+        "Free": "Бясплатна",
+        "EditServiceTemplate": {
+            "Title": "Служба рэдагавання"
+        }
     },
     "NFT": {
         "Title": "Інфармацыя аб {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "Параметры",
             "sampleCSV": "Спампаваць узор CSV",
             "fileLabel": "Запампаваць табліцу:",
-            "errorsTitle": "Адбыліся памылкі"
+            "errorsTitle": "Адбыліся памылкі",
+            "importAttributes": "Імпартаваць атрыбуты NFT",
+            "displayTypeEmpty": "Тып адлюстравання для &quot;{{1}}&quot; не знойдзены"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Фільтр па аўтарах"
             }
         },
-        "Back": "Вярнуцца да калекцыі"
+        "Back": "Вярнуцца да калекцыі",
+        "Name": "Імя",
+        "EnterName": "Увядзіце імя",
+        "EnterAuthorWallet": "Увядзіце аўтарскі кашалёк",
+        "InformationAboutTitle": "Інфармацыя пра {{title}} NFT",
+        "DetailedInformationAboutNFT": "Падрабязная інфармацыя аб NFT",
+        "PresaleStarts": "Перадпродаж стартуе 23 снежня",
+        "OwnerUserNotFound": "Уладальнік гэтага NFT не зарэгістраваны ў нашым дадатку.",
+        "BuyNow": "Купіць зараз",
+        "Buy": "Купіць",
+        "Conversation": "Гутарка",
+        "Create": "Ствараць",
+        "Author": "Аўтар",
+        "Commission": "Камісія",
+        "EnterCommission": "Увядзіце камісію",
+        "Actions": "Дзеянні",
+        "UpdateNFT": "Абнавіць NFT",
+        "NotOnSale": "Няма ў продажы",
+        "MovieURL": "URL фільма",
+        "EnterPrice": "Увядзіце цану",
+        "Currency": "Валюта",
+        "AreYouSureDeleteImage": "Вы ўпэўнены, што хочаце выдаліць выяву?",
+        "AreYouSureDeleteVideo": "Вы ўпэўнены, што хочаце выдаліць відэа?",
+        "series": {
+            "Name": "Імя",
+            "Icon": "Значок",
+            "Description": "Апісанне",
+            "Author": "Аўтар",
+            "SelectSeries": "Выберыце серыю",
+            "Value": "Каштоўнасць",
+            "AreYouSure": "Вы ўпэўнены?",
+            "AuthorInvalid": "Адрас аўтара няправільны!",
+            "Address": "Адрас",
+            "CoverImage": "Малюнак вокладкі",
+            "UploadCoverImage": "Загрузіць вокладку",
+            "CommissionAddressInvalid": "Несапраўдны адрас камісіі",
+            "OnSale": "у продажы",
+            "OffSale": "з продажу",
+            "CreateSeries": "Стварыць серыю",
+            "UpdateSeries": "Абнаўленне серыі",
+            "SeriesInfo": "Інфармацыя аб серыі",
+            "SelectAuthor": "Выберыце аўтара",
+            "NewItem": "Новая серыя NFT",
+            "NamePlaceholder": "Увядзіце назву серыі",
+            "DescPlaceholder": "Увядзіце апісанне серыі",
+            "EndingIn": "Канчатак на"
+        },
+        "contract": {
+            "CreateContract": "Стварыць кантракт",
+            "SelectContract": "Выберыце кантракт",
+            "CreateContractFor": "Стварыце кантракт на {{userName}}",
+            "ContractFor": "Кантракт на {{userName}}",
+            "UpdateContract": "Абнавіць кантракт",
+            "TransferOwnership": "Перадаць права ўласнасці",
+            "SetBaseURI": "Задаць базавы URI",
+            "SetSuffix": "Усталяваць суфікс",
+            "CurrentOwner": "Цяперашні ўладальнік",
+            "CurrentBaseURL": "Бягучы базавы URL",
+            "ContractAddressAbsent": "Дагаворны адрас адсутнічае",
+            "FactoryAddressAbsent": "Адрас завода адсутнічае",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Патрабуецца назва",
+            "SymbolRequired": "Патрабуецца сімвал",
+            "TypeContractName": "назва дагавора",
+            "TypeContractSymbol": "сімвал кантракту (максімум 10 знакаў)"
+        },
+        "contests": {
+            "Title": "Конкурсы",
+            "NewContest": "Новы конкурс"
+        },
+        "attributes": {
+            "Title": "Кіраванне атрыбутамі",
+            "Attributes": "Атрыбуты",
+            "DisplayTitle": "Тып дысплея",
+            "AddDisplayType": "Дадайце новы тып адлюстравання",
+            "NewDisplay": "Новы дысплей",
+            "TraitTitle": "Тып прыкметы",
+            "AddTraitTitle": "Дадайце новы тып рысы",
+            "NewTrait": "Новы тып рысы",
+            "ValueTitle": "Каштоўнасць",
+            "AddValueTitle": "Дадайце новае значэнне",
+            "NewValue": "Новае значэнне",
+            "NewAttribute": "Новы атрыбут",
+            "UpdateAttributes": "Абнавіць атрыбуты",
+            "SaveAttributes": "Захаваць атрыбуты"
+        },
+        "profile": {
+            "LogOut": "Выйсці",
+            "Title": "Профіль для {{userName}}",
+            "Description": "Падрабязнасці карыстальніка",
+            "aboutPlaceholder": "Рэдагаваць біяграфію",
+            "SureLogOut": "Вы ўпэўнены, што хочаце выйсці?"
+        }
+    },
+    "errors": {
+        "Error": "Памылка",
+        "WalletAbsent": "Кашалёк не падключаны.",
+        "Rendering": "Былі памылкі падчас рэндэрынгу <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Патрабуецца цана!",
+        "NameRequired": "Патрабуецца імя!",
+        "PriceInvalid": "Цана несапраўдная!",
+        "TransactionFailed": "Збой транзакцыі",
+        "ChainNotSupported": "Выбраны ланцужок не падтрымліваецца. Ланцуг, які падтрымліваецца: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Для працы з дадаткам неабходна падключыць MetaMask",
+        "UserNotLoggedInMetaMask": "Карыстальнік не ўвайшоў у MetaMask",
+        "CurrencyNotFound": "Валюта не знойдзена",
+        "WrongChain": "Гэты NFT створаны пад &quot;{{chain}}&quot;. Калі ласка, выкарыстоўвайце гэты ланцужок."
+    },
+    "admin": {
+        "Title": "Актывы адміністрацыйныя",
+        "SubscriptionTitle": "Планы падпіскі"
+    },
+    "billing": {
+        "Title": "Разлік актываў",
+        "CreditsMinimum": "Мінімальныя крэдыты",
+        "CreditsToAdd": "Крэдыты для дадання",
+        "Save": "Захаваць",
+        "ThisLink": "гэтая спасылка",
+        "errors": {
+            "CreditsMinimumNegative": "Мінімум крэдытаў не можа быць адмоўным",
+            "CreditsToAddNegative": "Крэдыты для дадання не могуць быць адмоўнымі"
+        }
     }
 }

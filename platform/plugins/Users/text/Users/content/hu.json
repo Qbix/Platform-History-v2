@@ -103,6 +103,13 @@
                 "title": "Átirányítás a Walletba",
                 "content": "A párbeszédpanel bezárása után a pénztárcájához kerül. Bejelentkezés után térjen vissza erre az oldalra."
             }
+        },
+        "web3": {
+            "payload": "Jelentkezzen be a(z) {{host}} fiókba a következő időpontban: {{timestamp}}",
+            "alert": {
+                "title": "Átirányítás a Walletba",
+                "content": "A párbeszédpanel bezárása után a pénztárcájához kerül. Bejelentkezés után térjen vissza erre az oldalra."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Tag",
         "Guest": "Vendég",
         "Host": "Házigazda"
+    },
+    "avatar": {
+        "Someone": "Valaki"
+    },
+    "web3": {
+        "WrongMethod": "Rossz szerződésmódszer {{methodName}}"
     }
 }

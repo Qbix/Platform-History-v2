@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Teleconferinta",
             "MeetingEnded": "Teleconferința s-a încheiat"
+        },
+        "requestSpeakDialog": {
+            "msg": "În prezent, sunt {{count}} persoane care vorbesc în întâlnire. Doriți să înlocuiți unul dintre ele după ce le-ați lăsat {{seconds}} secunde pentru a termina de vorbit?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Terminare apel",
         "interview": "Interviu",
         "markApproved": "Marcați aprobat"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "Public",
+        "configurationSaved": "Configurație salvată",
+        "error": "Ceva n-a mers bine"
     }
 }

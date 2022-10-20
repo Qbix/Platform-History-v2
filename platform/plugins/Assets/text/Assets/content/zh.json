@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}：为 {{call 'user.displayName'}} 处理的费用",
         "ThankYouForYourPayment": "感谢您向 {{call 'publisher.displayName'}} 付款",
         "SubscribedTo": "{{call 'user.displayName'}} 订阅了 {{plan.title}}",
-        "YouSubscribedTo": "您已订阅 {{plan.title}}"
+        "YouSubscribedTo": "您已订阅 {{plan.title}}",
+        "Assets\/credits\/alert": "您有与您的帐户相关的警报"
     },
     "payment": {
         "AboutOrder": "订单信息",
         "PaymentMethod": "付款方式",
         "ContactInfo": "联系方式",
-        "Pay": "支付"
+        "Pay": "支付",
+        "PaymentSucceeded": "付款成功",
+        "PaymentProcessing.": "您的付款正在处理中",
+        "FailTryAgain": "您的付款未成功，请重试",
+        "SomethingWrong": "出问题了",
+        "PaymentStatus": "支付状态"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} 接受邀请",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "信用卡或借记卡",
         "SubscribePayment": "订阅付款",
-        "ImmediatePayment": "立即付款"
+        "ImmediatePayment": "立即付款",
+        "ProcessingPayment": "处理付款",
+        "SubscriptionAlreadyPaid": "此订阅已付款",
+        "SubscriptionNotActive": "此订阅无效",
+        "Subscribed": "订阅",
+        "Unsubscribed": "退订",
+        "Unsubscribe": "退订",
+        "Subscribe": "订阅",
+        "Started": "开始",
+        "EndsIn": "结束于",
+        "NextPay": "下次付款",
+        "Period": "时期",
+        "Price": "价格",
+        "AreYouSureUnsubscribe": "您确定要取消订阅此计划吗？",
+        "YouUnsubscribedFromPlan": "您已取消订阅计划“{{planTitle}}”。您不会向您收费，但您的订阅将持续到 {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "计划标题",
+            "PricePlaceholder": "价格",
+            "DescriptionPlaceholder": "订阅计划说明",
+            "SavePlan": "保存计划",
+            "NewPlan": "新计划"
+        }
     },
     "payments": {
         "infoTitle": "设置付款信息",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "奖励 {{amount}} 积分"
+        },
+        "Assets\/credits\/alert": {
+            "content": "您的帐户上的信用额度很少。请访问<a href='{{link}}'>此链接<\/a>以购买更多积分。"
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "所需付款",
         "AreYouSureDelete": "您确定要删除此服务吗？",
         "AmountServicesRelated": "有 {{amount}} 项与此服务相关的可用性。它们也将被删除。",
-        "Free": "自由"
+        "Free": "自由",
+        "EditServiceTemplate": {
+            "Title": "编辑服务"
+        }
     },
     "NFT": {
         "Title": "关于 {{title}} NFT 的信息",
@@ -247,7 +280,9 @@
             "importOptions": "选项",
             "sampleCSV": "下载示例 CSV",
             "fileLabel": "上传电子表格：",
-            "errorsTitle": "发生错误"
+            "errorsTitle": "发生错误",
+            "importAttributes": "导入 NFT 属性",
+            "displayTypeEmpty": "找不到“{{1}}”的显示类型"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "按作者筛选"
             }
         },
-        "Back": "返回收藏"
+        "Back": "返回收藏",
+        "Name": "姓名",
+        "EnterName": "输入名字",
+        "EnterAuthorWallet": "进入作者钱包",
+        "InformationAboutTitle": "关于 {{title}} NFT 的信息",
+        "DetailedInformationAboutNFT": "关于 NFT 的详细信息",
+        "PresaleStarts": "预售将于 12 月 23 日开始",
+        "OwnerUserNotFound": "此 NFT 的所有者未在我们的应用程序中注册。",
+        "BuyNow": "立即购买",
+        "Buy": "买",
+        "Conversation": "对话",
+        "Create": "创造",
+        "Author": "作者",
+        "Commission": "委员会",
+        "EnterCommission": "输入佣金",
+        "Actions": "行动",
+        "UpdateNFT": "更新 NFT",
+        "NotOnSale": "不出售",
+        "MovieURL": "电影网址",
+        "EnterPrice": "输入价格",
+        "Currency": "货币",
+        "AreYouSureDeleteImage": "您确定要删除图片吗？",
+        "AreYouSureDeleteVideo": "确定要删除视频吗？",
+        "series": {
+            "Name": "姓名",
+            "Icon": "图标",
+            "Description": "描述",
+            "Author": "作者",
+            "SelectSeries": "选择系列",
+            "Value": "价值",
+            "AreYouSure": "你确定吗？",
+            "AuthorInvalid": "作者地址无效！",
+            "Address": "地址",
+            "CoverImage": "封面图片",
+            "UploadCoverImage": "上传封面图片",
+            "CommissionAddressInvalid": "佣金地址无效",
+            "OnSale": "出售",
+            "OffSale": "下架",
+            "CreateSeries": "创建系列",
+            "UpdateSeries": "更新系列",
+            "SeriesInfo": "系列信息",
+            "SelectAuthor": "选择作者",
+            "NewItem": "新NFT系列",
+            "NamePlaceholder": "输入系列名称",
+            "DescPlaceholder": "输入系列说明",
+            "EndingIn": "结束于"
+        },
+        "contract": {
+            "CreateContract": "创建合同",
+            "SelectContract": "选择合约",
+            "CreateContractFor": "为 {{userName}} 创建合同",
+            "ContractFor": "{{userName}} 的合同",
+            "UpdateContract": "更新合同",
+            "TransferOwnership": "所有权转让",
+            "SetBaseURI": "设置基础 URI",
+            "SetSuffix": "设置后缀",
+            "CurrentOwner": "当前所有者",
+            "CurrentBaseURL": "当前基本 URL",
+            "ContractAddressAbsent": "合约地址缺失",
+            "FactoryAddressAbsent": "工厂地址不存在",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "需要标题",
+            "SymbolRequired": "需要符号",
+            "TypeContractName": "合同名称",
+            "TypeContractSymbol": "合约代码（最多 10 个字符）"
+        },
+        "contests": {
+            "Title": "比赛",
+            "NewContest": "新竞赛"
+        },
+        "attributes": {
+            "Title": "管理属性",
+            "Attributes": "属性",
+            "DisplayTitle": "显示类型",
+            "AddDisplayType": "添加新的显示类型",
+            "NewDisplay": "新显示器",
+            "TraitTitle": "特质类型",
+            "AddTraitTitle": "添加新的特征类型",
+            "NewTrait": "新特质类型",
+            "ValueTitle": "价值",
+            "AddValueTitle": "添加新价值",
+            "NewValue": "新价值",
+            "NewAttribute": "新属性",
+            "UpdateAttributes": "更新属性",
+            "SaveAttributes": "保存属性"
+        },
+        "profile": {
+            "LogOut": "登出",
+            "Title": "{{userName}} 的个人资料",
+            "Description": "用户详情",
+            "aboutPlaceholder": "编辑简历",
+            "SureLogOut": "您确定要退出吗？"
+        }
+    },
+    "errors": {
+        "Error": "错误",
+        "WalletAbsent": "钱包未连接。",
+        "Rendering": "呈现<span class='url'>{{1}}<\/span>时出错",
+        "PriceRequired": "需要价格！",
+        "NameRequired": "姓名必填！",
+        "PriceInvalid": "价格无效！",
+        "TransactionFailed": "交易失败",
+        "ChainNotSupported": "不支持所选链。支持的链：{{supportedChain}}",
+        "NeedMetaMaskConnected": "需要连接 MetaMask 才能使用应用程序",
+        "UserNotLoggedInMetaMask": "用户未登录 MetaMask",
+        "CurrencyNotFound": "未找到货币",
+        "WrongChain": "此 NFT 在“{{chain}}”下创建。请使用此链。"
+    },
+    "admin": {
+        "Title": "资产管理",
+        "SubscriptionTitle": "订阅计划"
+    },
+    "billing": {
+        "Title": "资产计费",
+        "CreditsMinimum": "最低学分",
+        "CreditsToAdd": "要添加的学分",
+        "Save": "节省",
+        "ThisLink": "这个链接",
+        "errors": {
+            "CreditsMinimumNegative": "Credits minimum 不能为负数",
+            "CreditsToAddNegative": "要添加的积分不能为负数"
+        }
     }
 }

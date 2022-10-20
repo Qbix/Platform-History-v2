@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: muirear próiseáilte le haghaidh {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Go raibh maith agat as d&#39;íocaíocht chuig {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} sínithe le {{plan.title}}",
-        "YouSubscribedTo": "Tá tú sínithe le {{plan.title}}"
+        "YouSubscribedTo": "Tá tú sínithe le {{plan.title}}",
+        "Assets\/credits\/alert": "Tá foláireamh agat a bhaineann le do chuntas"
     },
     "charge": {
         "Subject": "Faigheann tú íocaíocht de {{displayAmount}} ó {{call 'publisher.displayName'}} trí &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Eolas faoi ordú",
         "PaymentMethod": "Modh íocaíochta",
         "ContactInfo": "Eolas teagmhála",
-        "Pay": "Pá"
+        "Pay": "Pá",
+        "PaymentSucceeded": "D&#39;éirigh leis an íocaíocht",
+        "PaymentProcessing.": "Tá d&#39;íocaíocht á próiseáil",
+        "FailTryAgain": "Níor éirigh le d&#39;íocaíocht, bain triail eile as",
+        "SomethingWrong": "Chuaigh rud eigin mícheart",
+        "PaymentStatus": "Stádas íocaíochta"
     },
     "credits": {
         "InviteAcceptedBy": "Ghlac {{invitedUserName}} le cuireadh",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Cárta creidmheasa nó dochair",
         "SubscribePayment": "Liostáil Íocaíocht",
-        "ImmediatePayment": "Íocaíocht Láithreach"
+        "ImmediatePayment": "Íocaíocht Láithreach",
+        "ProcessingPayment": "Íocaíocht Próiseála",
+        "SubscriptionAlreadyPaid": "Tá an síntiús seo íoctha cheana féin",
+        "SubscriptionNotActive": "Níl an síntiús seo gníomhach",
+        "Subscribed": "suibscríofa",
+        "Unsubscribed": "Gan liostáil",
+        "Unsubscribe": "Díliostáil",
+        "Subscribe": "Liostáil",
+        "Started": "Thosaigh",
+        "EndsIn": "Críochnaíonn i",
+        "NextPay": "An chéad íocaíocht eile",
+        "Period": "Tréimhse",
+        "Price": "Praghas",
+        "AreYouSureUnsubscribe": "An bhfuil tú cinnte gur mhaith leat an plean seo a dhíliostáil?",
+        "YouUnsubscribedFromPlan": "Rinne tú díliostáil ó phlean &quot;{{planTitle}}&quot;. Ní ghearrfar aon táille ort, ach leanfaidh do shíntiús ar aghaidh go dtí {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "teideal plean",
+            "PricePlaceholder": "praghas",
+            "DescriptionPlaceholder": "cur síos ar phlean síntiús",
+            "SavePlan": "Sábháil Plean",
+            "NewPlan": "Plean Nua"
+        }
     },
     "payments": {
         "infoTitle": "Socraigh Faisnéis Íocaíochta",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Fuarthas {{amount}} creidmheas ó {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Is beag creidmheasanna atá agat ar do chuntas. Tabhair cuairt <a href='{{link}}'>ar an nasc seo<\/a> le do thoil chun tuilleadh creidmheasanna a cheannach."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Ranníocaíocht roghnach",
         "RequiredPayment": "Íocaíocht riachtanach",
         "AreYouSureDelete": "An bhfuil tú cinnte gur mhaith leat an tseirbhís seo a scriosadh?",
-        "AmountServicesRelated": "Tá {{amount}} infhaighteacht a bhaineann leis an tseirbhís seo. Tá siad Beidh a chur as oifig freisin."
+        "AmountServicesRelated": "Tá {{amount}} infhaighteacht a bhaineann leis an tseirbhís seo. Tá siad Beidh a chur as oifig freisin.",
+        "EditServiceTemplate": {
+            "Title": "Cuir Seirbhís in Eagar"
+        }
     },
     "NFT": {
         "Title": "Eolas faoi {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Roghanna",
             "sampleCSV": "Íosluchtaigh sampla CSV",
             "fileLabel": "Uaslódáil Scarbhileog:",
-            "errorsTitle": "Tharla earráidí"
+            "errorsTitle": "Tharla earráidí",
+            "importAttributes": "Iompórtáil tréithe NFT",
+            "displayTypeEmpty": "Ní bhfuarthas cineál taispeána le haghaidh &quot;{{1}}&quot;."
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Scag de réir Údair"
             }
         },
-        "Back": "Ar ais go Bailiúchán"
+        "Back": "Ar ais go Bailiúchán",
+        "Name": "Ainm",
+        "EnterName": "Cuir isteach ainm",
+        "EnterAuthorWallet": "Cuir isteach sparán an údair",
+        "InformationAboutTitle": "Eolas faoi {{title}} NFT",
+        "DetailedInformationAboutNFT": "Faisnéis mhionsonraithe faoi NFT",
+        "PresaleStarts": "Presale ag tosú 23 Nollaig",
+        "OwnerUserNotFound": "Níl úinéir an NFT seo cláraithe inár n-iarratas.",
+        "BuyNow": "Ceannaigh Anois",
+        "Buy": "Ceannaigh",
+        "Conversation": "Comhrá",
+        "Create": "Cruthaigh",
+        "Author": "Údar",
+        "Commission": "Coimisiún",
+        "EnterCommission": "Cuir isteach coimisiún",
+        "Actions": "Gníomhartha",
+        "UpdateNFT": "Íosluchtaigh cothrom le dáta NFT",
+        "NotOnSale": "Ní Ar Díol",
+        "MovieURL": "URL scannáin",
+        "EnterPrice": "Cuir isteach praghas",
+        "Currency": "Airgeadra",
+        "AreYouSureDeleteImage": "An bhfuil tú cinnte gur mhaith leat an íomhá a bhaint?",
+        "AreYouSureDeleteVideo": "An bhfuil tú cinnte gur mhaith leat an físeán a bhaint?",
+        "series": {
+            "Name": "Ainm",
+            "Icon": "Deilbhín",
+            "Description": "Cur síos",
+            "Author": "Údar",
+            "SelectSeries": "Roghnaigh sraith",
+            "Value": "Luach",
+            "AreYouSure": "An bhfuil tú cinnte?",
+            "AuthorInvalid": "Seoladh an údair neamhbhailí!",
+            "Address": "Seoladh",
+            "CoverImage": "Íomhá chlúdaigh",
+            "UploadCoverImage": "Íosluchtaigh íomhá clúdach",
+            "CommissionAddressInvalid": "Seoladh an Choimisiúin neamhbhailí",
+            "OnSale": "Ar díol",
+            "OffSale": "as díol",
+            "CreateSeries": "Cruthaigh Sraith",
+            "UpdateSeries": "Sraith Nuashonraithe",
+            "SeriesInfo": "Faisnéise sraith",
+            "SelectAuthor": "Roghnaigh údar",
+            "NewItem": "Sraith nua de NFT saor in aisce,",
+            "NamePlaceholder": "Iontráil ainm an tsraith",
+            "DescPlaceholder": "Iontráil cur síos ar an tsraith",
+            "EndingIn": "Ag críochnú I"
+        },
+        "contract": {
+            "CreateContract": "Cruthaigh conradh",
+            "SelectContract": "Roghnaigh conradh",
+            "CreateContractFor": "Cruthaigh conradh le haghaidh {{userName}}",
+            "ContractFor": "Conradh le haghaidh {{userName}}",
+            "UpdateContract": "Conradh a thabhairt cothrom le dáta",
+            "TransferOwnership": "Úinéireacht Aistrithe",
+            "SetBaseURI": "Socraigh Bonn URI",
+            "SetSuffix": "Socraigh Iarmhír",
+            "CurrentOwner": "Úinéir Reatha",
+            "CurrentBaseURL": "BaseURL Reatha",
+            "ContractAddressAbsent": "Seoladh conartha as láthair",
+            "FactoryAddressAbsent": "Seoladh monarchan as láthair",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Teideal ag teastáil",
+            "SymbolRequired": "Siombail ag teastáil",
+            "TypeContractName": "ainm conartha",
+            "TypeContractSymbol": "siombail an chonartha (uasmhéid 10 gcarr)"
+        },
+        "contests": {
+            "Title": "Comórtais",
+            "NewContest": "Comórtas Nua"
+        },
+        "attributes": {
+            "Title": "Bainistigh Tréithe",
+            "Attributes": "Tréithe",
+            "DisplayTitle": "Cineál Taispeána",
+            "AddDisplayType": "Cuir cineál taispeána nua leis",
+            "NewDisplay": "Taispeáint Nua",
+            "TraitTitle": "Cineál Trait",
+            "AddTraitTitle": "Cuir cineál tréithe nua leis",
+            "NewTrait": "Cineál Tréith Nua",
+            "ValueTitle": "Luach",
+            "AddValueTitle": "Cuir luach nua leis",
+            "NewValue": "Luach Nua",
+            "NewAttribute": "Tréith Nua",
+            "UpdateAttributes": "Tréithe Nuashonraithe",
+            "SaveAttributes": "Sábháil Tréithe"
+        },
+        "profile": {
+            "LogOut": "Logáil Amach",
+            "Title": "Próifíl le haghaidh {{userName}}",
+            "Description": "Sonraí úsáideora",
+            "aboutPlaceholder": "Cuir Bitheolaíocht in Eagar",
+            "SureLogOut": "An bhfuil tú cinnte gur mhaith leat logáil amach?"
+        }
+    },
+    "errors": {
+        "Error": "Earráid",
+        "WalletAbsent": "Níl an sparán ceangailte.",
+        "Rendering": "Tharla earráidí agus <span class='url'>{{1}}<\/span> á rindreáil",
+        "PriceRequired": "Praghas ag teastáil!",
+        "NameRequired": "Ainm ag teastáil!",
+        "PriceInvalid": "Praghas neamhbhailí!",
+        "TransactionFailed": "Theip ar Idirbheart",
+        "ChainNotSupported": "Ní thacaítear leis an slabhra roghnaithe. Slabhra tacaithe: {{supportedChain}}",
+        "NeedMetaMaskConnected": "An riachtanas is gá MetaMask ceangailte a bheith ag obair leis an bhfeidhmchlár",
+        "UserNotLoggedInMetaMask": "Níl an t-úsáideoir logáilte isteach i MetaMask",
+        "CurrencyNotFound": "Airgeadra gan aimsiú",
+        "WrongChain": "Cruthaíodh an NFT seo faoi &quot;{{chain}}&quot;. Bain úsáid as an slabhra seo le do thoil."
+    },
+    "admin": {
+        "Title": "Sócmhainní riaracháin",
+        "SubscriptionTitle": "Pleananna síntiús"
+    },
+    "billing": {
+        "Title": "Billeáil sócmhainní",
+        "CreditsMinimum": "Creidmheasanna íosta",
+        "CreditsToAdd": "Creidmheasanna le cur leis",
+        "Save": "Sábháil",
+        "ThisLink": "an nasc seo",
+        "errors": {
+            "CreditsMinimumNegative": "Ní féidir íosmhéid creidmheasanna a bheith diúltach",
+            "CreditsToAddNegative": "Ní féidir le creidmheasanna le cur leis a bheith diúltach"
+        }
     }
 }

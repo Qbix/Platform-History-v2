@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telekonferencia",
             "MeetingEnded": "Telekonferencia sa skončila"
+        },
+        "requestSpeakDialog": {
+            "msg": "Na schôdzi momentálne hovorí {{count}} ľudí. Chcete jedného z nich nahradiť po tom, čo mu umožníte {{seconds}} sekúnd dopovedať?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Ukončiť hovor",
         "interview": "Rozhovor",
         "markApproved": "Označiť ako schválené"
+    },
+    "identifier": {
+        "private": "Súkromné",
+        "public": "Verejné",
+        "configurationSaved": "Konfigurácia bola uložená",
+        "error": "Niečo sa pokazilo"
     }
 }

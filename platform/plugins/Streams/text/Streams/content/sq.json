@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Cilësimet e transmetimit"
+        },
+        "requestSpeakDialog": {
+            "msg": "Aktualisht janë {{count}} persona që flasin në takim. Dëshiron të zëvendësosh njërën prej tyre pasi t&#39;i lejosh {{seconds}} sekonda të mbarojnë së foluri?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Fundi i telefonatës",
         "interview": "Intervistë",
         "markApproved": "Mark i miratuar"
+    },
+    "identifier": {
+        "private": "Privat",
+        "public": "Publike",
+        "configurationSaved": "Konfigurimi u ruajt",
+        "error": "Dicka shkoi keq"
     }
 }

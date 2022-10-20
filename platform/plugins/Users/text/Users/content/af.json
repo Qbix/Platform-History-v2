@@ -92,6 +92,13 @@
                 "title": "Herlei tans na Wallet",
                 "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
             }
+        },
+        "web3": {
+            "payload": "Meld aan by {{host}} op tyd {{timestamp}}",
+            "alert": {
+                "title": "Herlei tans na Wallet",
+                "content": "Sodra jy hierdie dialoog toegemaak het, sal jy na jou beursie geneem word. Nadat jy aangemeld het, keer terug na hierdie bladsy."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Dienste",
         "Faq": "Gereelde vrae",
         "WeekDays": "Weekdae"
+    },
+    "avatar": {
+        "Someone": "Iemand"
+    },
+    "web3": {
+        "WrongMethod": "Verkeerde kontrakmetode {{methodName}}"
     }
 }

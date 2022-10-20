@@ -103,6 +103,13 @@
                 "title": "Redirixindo a Wallet",
                 "content": "Unha vez que peches este diálogo, dirixirase á túa carteira. Despois de iniciar sesión, volve a esta páxina."
             }
+        },
+        "web3": {
+            "payload": "Inicia sesión en {{host}} á hora {{timestamp}}",
+            "alert": {
+                "title": "Redirixindo a Wallet",
+                "content": "Unha vez que peches este diálogo, dirixirase á túa carteira. Despois de iniciar sesión, volve a esta páxina."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Membro",
         "Guest": "Invitado",
         "Host": "Anfitrión"
+    },
+    "avatar": {
+        "Someone": "Alguén"
+    },
+    "web3": {
+        "WrongMethod": "Método de contrato incorrecto {{methodName}}"
     }
 }

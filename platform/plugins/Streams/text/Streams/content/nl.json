@@ -283,6 +283,9 @@
         },
         "streamingSettings": {
             "title": "Streaminginstellingen"
+        },
+        "requestSpeakDialog": {
+            "msg": "Er zijn momenteel {{count}} mensen aan het woord in de vergadering. Wil je een van hen vervangen nadat je ze {{seconds}} seconden de tijd hebt gegeven om uit te spreken?"
         }
     },
     "types": {
@@ -554,5 +557,11 @@
         "endCall": "Ophangen",
         "interview": "Interview",
         "markApproved": "Markeren als goedgekeurd"
+    },
+    "identifier": {
+        "private": "Privaat",
+        "public": "Openbaar",
+        "configurationSaved": "Configuratie opgeslagen",
+        "error": "Er is iets fout gegaan"
     }
 }

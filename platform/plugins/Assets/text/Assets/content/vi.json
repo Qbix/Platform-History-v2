@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: khoản phí được xử lý cho {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Cảm ơn bạn đã thanh toán cho {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} đã đăng ký với {{plan.title}}",
-        "YouSubscribedTo": "Bạn đã được đăng ký với {{plan.title}}"
+        "YouSubscribedTo": "Bạn đã được đăng ký với {{plan.title}}",
+        "Assets\/credits\/alert": "Bạn có cảnh báo liên quan đến tài khoản của mình"
     },
     "charge": {
         "Subject": "Bạn nhận được khoản thanh toán {{displayAmount}} từ {{call 'publisher.displayName'}} bằng &quot;{{description}}&quot;",
@@ -21,7 +22,12 @@
         "AboutOrder": "Thông tin về đơn đặt hàng",
         "PaymentMethod": "Phương thức thanh toán",
         "ContactInfo": "Thông tin liên lạc",
-        "Pay": "Trả"
+        "Pay": "Trả",
+        "PaymentSucceeded": "Thanh toán thành công",
+        "PaymentProcessing.": "Thanh toán của bạn đang được xử lý",
+        "FailTryAgain": "Thanh toán của bạn không thành công, vui lòng thử lại",
+        "SomethingWrong": "Đã xảy ra sự cố",
+        "PaymentStatus": "Tình trạng thanh toán"
     },
     "credits": {
         "InviteAcceptedBy": "Lời mời được chấp nhận bởi {{invitedUserName}}",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "Thẻ tín dụng hoặc thẻ ghi nợ",
         "SubscribePayment": "Đăng ký thanh toán",
-        "ImmediatePayment": "Thanh toán ngay lập tức"
+        "ImmediatePayment": "Thanh toán ngay lập tức",
+        "ProcessingPayment": "Xử lý thanh toán",
+        "SubscriptionAlreadyPaid": "Đăng ký này đã được thanh toán",
+        "SubscriptionNotActive": "Đăng ký này không hoạt động",
+        "Subscribed": "Đã đăng ký",
+        "Unsubscribed": "Đã hủy đăng ký",
+        "Unsubscribe": "Hủy đăng ký",
+        "Subscribe": "Đặt mua",
+        "Started": "Đã bắt đầu",
+        "EndsIn": "Kết thúc ở",
+        "NextPay": "Thanh toán tiếp theo",
+        "Period": "Giai đoạn = Stage",
+        "Price": "Giá bán",
+        "AreYouSureUnsubscribe": "Bạn có chắc chắn muốn hủy đăng ký kế hoạch này không?",
+        "YouUnsubscribedFromPlan": "Bạn đã hủy đăng ký gói &quot;{{planTitle}}&quot;. Bạn sẽ không bị tính phí, nhưng đăng ký của bạn sẽ tiếp tục cho đến {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "tiêu đề kế hoạch",
+            "PricePlaceholder": "giá bán",
+            "DescriptionPlaceholder": "mô tả gói đăng ký",
+            "SavePlan": "Lưu kế hoạch",
+            "NewPlan": "Kế hoạch mới"
+        }
     },
     "payments": {
         "infoTitle": "Đặt thông tin thanh toán",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "Đã nhận được {{amount}} tín dụng từ {{fromUserName}}"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Bạn có ít tín dụng trong tài khoản của mình. Vui lòng truy cập <a href='{{link}}'>liên kết này<\/a> để mua thêm các khoản tín dụng."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "Đóng góp tùy chọn",
         "RequiredPayment": "Thanh toán bắt buộc",
         "AreYouSureDelete": "Bạn có chắc chắn muốn xóa dịch vụ này không?",
-        "AmountServicesRelated": "Có {{amount}} tính khả dụng liên quan đến dịch vụ này. Chúng cũng sẽ bị xóa."
+        "AmountServicesRelated": "Có {{amount}} tính khả dụng liên quan đến dịch vụ này. Chúng cũng sẽ bị xóa.",
+        "EditServiceTemplate": {
+            "Title": "Chỉnh sửa dịch vụ"
+        }
     },
     "NFT": {
         "Title": "Thông tin về {{title}} NFT",
@@ -246,7 +279,9 @@
             "importOptions": "Tùy chọn",
             "sampleCSV": "Tải xuống CSV mẫu",
             "fileLabel": "Tải lên bảng tính:",
-            "errorsTitle": "Đã xảy ra lỗi"
+            "errorsTitle": "Đã xảy ra lỗi",
+            "importAttributes": "Nhập thuộc tính NFT",
+            "displayTypeEmpty": "Không tìm thấy loại hiển thị cho &quot;{{1}}&quot;"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "Lọc theo tác giả"
             }
         },
-        "Back": "Quay lại Bộ sưu tập"
+        "Back": "Quay lại Bộ sưu tập",
+        "Name": "Tên",
+        "EnterName": "Nhập tên",
+        "EnterAuthorWallet": "Nhập ví của tác giả",
+        "InformationAboutTitle": "Thông tin về {{title}} NFT",
+        "DetailedInformationAboutNFT": "Thông tin chi tiết về NFT",
+        "PresaleStarts": "Bán trước bắt đầu vào ngày 23 tháng 12",
+        "OwnerUserNotFound": "Chủ sở hữu của NFT này chưa được đăng ký trong ứng dụng của chúng tôi.",
+        "BuyNow": "Mua ngay",
+        "Buy": "Mua",
+        "Conversation": "Cuộc hội thoại",
+        "Create": "Tạo ra",
+        "Author": "Tác giả",
+        "Commission": "Nhiệm vụ",
+        "EnterCommission": "Nhập hoa hồng",
+        "Actions": "Hành động",
+        "UpdateNFT": "Cập nhật NFT",
+        "NotOnSale": "Không giảm giá",
+        "MovieURL": "URL phim",
+        "EnterPrice": "Nhập giá",
+        "Currency": "Tiền tệ",
+        "AreYouSureDeleteImage": "Bạn có chắc chắn muốn xóa hình ảnh không?",
+        "AreYouSureDeleteVideo": "Bạn có chắc chắn muốn xóa video không?",
+        "series": {
+            "Name": "Tên",
+            "Icon": "Biểu tượng",
+            "Description": "Sự mô tả",
+            "Author": "Tác giả",
+            "SelectSeries": "Chọn chuỗi",
+            "Value": "Giá trị",
+            "AreYouSure": "Bạn có chắc không?",
+            "AuthorInvalid": "Địa chỉ tác giả không hợp lệ!",
+            "Address": "Địa chỉ nhà",
+            "CoverImage": "Ảnh bìa",
+            "UploadCoverImage": "Tải lên ảnh bìa",
+            "CommissionAddressInvalid": "Địa chỉ hoa hồng không hợp lệ",
+            "OnSale": "giảm giá",
+            "OffSale": "giảm giá",
+            "CreateSeries": "Tạo chuỗi",
+            "UpdateSeries": "Cập nhật chuỗi",
+            "SeriesInfo": "Thông tin sê-ri",
+            "SelectAuthor": "Chọn tác giả",
+            "NewItem": "Dòng NFT mới",
+            "NamePlaceholder": "Nhập tên sê-ri",
+            "DescPlaceholder": "Nhập mô tả chuỗi",
+            "EndingIn": "Kết thúc trong"
+        },
+        "contract": {
+            "CreateContract": "Tạo hợp đồng",
+            "SelectContract": "Chọn hợp đồng",
+            "CreateContractFor": "Tạo hợp đồng cho {{userName}}",
+            "ContractFor": "Hợp đồng cho {{userName}}",
+            "UpdateContract": "Cập nhật hợp đồng",
+            "TransferOwnership": "Chuyển nhượng quyền sở hữu",
+            "SetBaseURI": "Đặt URI cơ sở",
+            "SetSuffix": "Đặt hậu tố",
+            "CurrentOwner": "Người chủ hiện tại",
+            "CurrentBaseURL": "BaseURL hiện tại",
+            "ContractAddressAbsent": "Địa chỉ hợp đồng vắng mặt",
+            "FactoryAddressAbsent": "Địa chỉ nhà máy vắng mặt",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Tiêu đề bắt buộc",
+            "SymbolRequired": "Biểu tượng bắt buộc",
+            "TypeContractName": "tên hợp đồng",
+            "TypeContractSymbol": "ký hiệu hợp đồng (tối đa 10 ký tự)"
+        },
+        "contests": {
+            "Title": "Các cuộc thi",
+            "NewContest": "Cuộc thi mới"
+        },
+        "attributes": {
+            "Title": "Quản lý các thuộc tính",
+            "Attributes": "Thuộc tính",
+            "DisplayTitle": "Loại màn hình",
+            "AddDisplayType": "Thêm kiểu hiển thị mới",
+            "NewDisplay": "Màn hình mới",
+            "TraitTitle": "Loại đặc điểm",
+            "AddTraitTitle": "Thêm loại đặc điểm mới",
+            "NewTrait": "Loại đặc điểm mới",
+            "ValueTitle": "Giá trị",
+            "AddValueTitle": "Thêm giá trị mới",
+            "NewValue": "Giá trị mới",
+            "NewAttribute": "Thuộc tính mới",
+            "UpdateAttributes": "Cập nhật các thuộc tính",
+            "SaveAttributes": "Lưu các thuộc tính"
+        },
+        "profile": {
+            "LogOut": "Đăng xuất",
+            "Title": "Hồ sơ cho {{userName}}",
+            "Description": "Chi tiết người dùng",
+            "aboutPlaceholder": "Chỉnh sửa tiểu sử",
+            "SureLogOut": "Bạn có chắc chắn bạn muốn thoát?"
+        }
+    },
+    "errors": {
+        "Error": "Lỗi",
+        "WalletAbsent": "Ví không được kết nối.",
+        "Rendering": "Đã xảy ra lỗi khi hiển thị <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Giá yêu cầu!",
+        "NameRequired": "Tên yêu cầu!",
+        "PriceInvalid": "Giá không hợp lệ!",
+        "TransactionFailed": "Giao dịch không thành công",
+        "ChainNotSupported": "Chuỗi đã chọn không được hỗ trợ. Chuỗi được hỗ trợ: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Cần kết nối MetaMask để làm việc với ứng dụng",
+        "UserNotLoggedInMetaMask": "Người dùng chưa đăng nhập vào MetaMask",
+        "CurrencyNotFound": "Không tìm thấy đơn vị tiền tệ",
+        "WrongChain": "NFT này được tạo trong &quot;{{chain}}&quot;. Hãy sử dụng chuỗi này."
+    },
+    "admin": {
+        "Title": "Quản trị nội dung",
+        "SubscriptionTitle": "Gói đăng ký"
+    },
+    "billing": {
+        "Title": "Thanh toán tài sản",
+        "CreditsMinimum": "Các khoản tín dụng tối thiểu",
+        "CreditsToAdd": "Tín dụng để thêm",
+        "Save": "Tiết kiệm",
+        "ThisLink": "liên kết này",
+        "errors": {
+            "CreditsMinimumNegative": "Tín dụng tối thiểu không được âm",
+            "CreditsToAddNegative": "Tín dụng để thêm không được âm"
+        }
     }
 }

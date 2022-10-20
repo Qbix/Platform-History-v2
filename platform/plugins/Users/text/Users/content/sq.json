@@ -92,6 +92,13 @@
                 "title": "Ridrejtimi te Portofoli",
                 "content": "Pasi të mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të identifikoheni, kthehuni në këtë faqe."
             }
+        },
+        "web3": {
+            "payload": "Hyni në {{host}} në kohën {{timestamp}}",
+            "alert": {
+                "title": "Po ridrejtohet te Portofoli",
+                "content": "Pasi të mbyllni këtë dialog, do të çoheni në portofolin tuaj. Pasi të identifikoheni, kthehuni në këtë faqe."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Shërbimet",
         "Faq": "Fak",
         "WeekDays": "Ditët e javës"
+    },
+    "avatar": {
+        "Someone": "Dikush"
+    },
+    "web3": {
+        "WrongMethod": "Metoda e gabuar e kontratës {{methodName}}"
     }
 }

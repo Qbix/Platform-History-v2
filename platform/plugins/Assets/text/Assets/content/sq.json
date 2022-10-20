@@ -7,13 +7,19 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: tarifa e përpunuar për {{call 'user.displayName'}}",
         "ThankYouForYourPayment": "Faleminderit për pagesën në {{call 'publisher.displayName'}}",
         "SubscribedTo": "{{call 'user.displayName'}} abonuar në {{plan.title}}",
-        "YouSubscribedTo": "Ju jeni abonuar në {{plan.title}}"
+        "YouSubscribedTo": "Ju jeni abonuar në {{plan.title}}",
+        "Assets\/credits\/alert": "Ju keni një sinjalizim në lidhje me llogarinë tuaj"
     },
     "payment": {
         "AboutOrder": "Informacion rreth porosisë",
         "PaymentMethod": "Metoda e pagesës",
         "ContactInfo": "Informacioni i kontaktit",
-        "Pay": "Paguaj"
+        "Pay": "Paguaj",
+        "PaymentSucceeded": "Pagesa u krye me sukses",
+        "PaymentProcessing.": "Pagesa juaj po përpunohet",
+        "FailTryAgain": "Pagesa juaj nuk ishte e suksesshme, ju lutemi provoni përsëri",
+        "SomethingWrong": "Dicka shkoi keq",
+        "PaymentStatus": "Statusi i pagesës"
     },
     "credits": {
         "InviteAcceptedBy": "Ftesa u pranua nga {{invitedUserName}}",
@@ -94,7 +100,28 @@
         },
         "CreditOrDebitCard": "Kartë krediti ose debiti",
         "SubscribePayment": "Regjistrohu për pagesën",
-        "ImmediatePayment": "Pagesa e menjëhershme"
+        "ImmediatePayment": "Pagesa e menjëhershme",
+        "ProcessingPayment": "Përpunimi i pagesës",
+        "SubscriptionAlreadyPaid": "Ky abonim tashmë është paguar",
+        "SubscriptionNotActive": "Ky abonim nuk është aktiv",
+        "Subscribed": "Abonuar",
+        "Unsubscribed": "I çabonuar",
+        "Unsubscribe": "Çregjistrohu",
+        "Subscribe": "Abonohu",
+        "Started": "Filloi",
+        "EndsIn": "Përfundon në",
+        "NextPay": "Pagesa e radhës",
+        "Period": "Periudha",
+        "Price": "Çmimi",
+        "AreYouSureUnsubscribe": "Je i sigurt që dëshiron ta çabonosh këtë plan?",
+        "YouUnsubscribedFromPlan": "Je çabonuar nga plani &quot;{{planTitle}}&quot;. Nuk do të tarifohesh, por abonimi yt do të vazhdojë deri në {{endsIn}}",
+        "plan": {
+            "TitlePlaceholder": "titulli i planit",
+            "PricePlaceholder": "çmimi",
+            "DescriptionPlaceholder": "përshkrimi i planit të abonimit",
+            "SavePlan": "Ruaj planin",
+            "NewPlan": "Plani i ri"
+        }
     },
     "payments": {
         "infoTitle": "Vendosni informacionin e pagesës",
@@ -146,6 +173,9 @@
         },
         "Assets\/credits\/bonus": {
             "content": "Bonus {{amount}} kredite"
+        },
+        "Assets\/credits\/alert": {
+            "content": "Ju keni pak kredi në llogarinë tuaj. Ju lutemi vizitoni <a href='{{link}}'>këtë lidhje<\/a> për të blerë më shumë kredite."
         }
     },
     "charge": {
@@ -173,7 +203,10 @@
         "RequiredPayment": "Pagesa e nevojshme",
         "AreYouSureDelete": "Jeni i sigurt që dëshironi ta fshini këtë shërbim?",
         "AmountServicesRelated": "Ka {{amount}} disponueshmëri në lidhje me këtë shërbim. Ata gjithashtu do të hiqen.",
-        "Free": "Falas"
+        "Free": "Falas",
+        "EditServiceTemplate": {
+            "Title": "Redakto shërbimin"
+        }
     },
     "NFT": {
         "Title": "Informacion rreth {{title}} NFT",
@@ -247,7 +280,9 @@
             "importOptions": "Opsione",
             "sampleCSV": "Shkarkoni shembullin CSV",
             "fileLabel": "Ngarko fletëllogaritëse:",
-            "errorsTitle": "Ndodhën gabime"
+            "errorsTitle": "Ndodhën gabime",
+            "importAttributes": "Importoni atributet NFT",
+            "displayTypeEmpty": "Lloji i ekranit për &quot;{{1}}&quot; nuk u gjet"
         },
         "filter": {
             "ByCategory": {
@@ -261,6 +296,127 @@
                 "FilterByAuthors": "Filtro sipas autorëve"
             }
         },
-        "Back": "Kthehu te Koleksioni"
+        "Back": "Kthehu te Koleksioni",
+        "Name": "Emri",
+        "EnterName": "Fut emrin",
+        "EnterAuthorWallet": "Fut portofolin e autorit",
+        "InformationAboutTitle": "Informacion rreth {{title}} NFT",
+        "DetailedInformationAboutNFT": "Informacione të hollësishme rreth NFT",
+        "PresaleStarts": "Parashitja fillon me 23 Dhjetor",
+        "OwnerUserNotFound": "Pronari i kësaj NFT nuk është i regjistruar në aplikacionin tonë.",
+        "BuyNow": "Bli tani",
+        "Buy": "Blej",
+        "Conversation": "bashkëbisedim",
+        "Create": "Krijo",
+        "Author": "Autori",
+        "Commission": "Komisioni",
+        "EnterCommission": "Hyni në komision",
+        "Actions": "Veprimet",
+        "UpdateNFT": "Përditëso NFT",
+        "NotOnSale": "Jo Në shitje",
+        "MovieURL": "URL e filmit",
+        "EnterPrice": "Shkruani çmimin",
+        "Currency": "Monedha",
+        "AreYouSureDeleteImage": "Jeni i sigurt që dëshironi të hiqni imazhin?",
+        "AreYouSureDeleteVideo": "Je i sigurt që dëshiron ta heqësh videon?",
+        "series": {
+            "Name": "Emri",
+            "Icon": "Ikona",
+            "Description": "Përshkrim",
+            "Author": "Autori",
+            "SelectSeries": "Zgjidhni seritë",
+            "Value": "Vlera",
+            "AreYouSure": "A je i sigurt?",
+            "AuthorInvalid": "Adresa e autorit është e pavlefshme!",
+            "Address": "Adresë",
+            "CoverImage": "Imazhi i kopertinës",
+            "UploadCoverImage": "Ngarko imazhin e kopertinës",
+            "CommissionAddressInvalid": "Adresa e komisionit është e pavlefshme",
+            "OnSale": "ne shitje",
+            "OffSale": "jashtë shitjes",
+            "CreateSeries": "Krijo seri",
+            "UpdateSeries": "Përditëso serinë",
+            "SeriesInfo": "Informacioni i Serisë",
+            "SelectAuthor": "Zgjidhni autorin",
+            "NewItem": "Seria e re NFT",
+            "NamePlaceholder": "Fut emrin e serisë",
+            "DescPlaceholder": "Fut përshkrimin e serisë",
+            "EndingIn": "Duke përfunduar në"
+        },
+        "contract": {
+            "CreateContract": "Krijo kontratë",
+            "SelectContract": "Zgjidh kontratën",
+            "CreateContractFor": "Krijo kontratë për {{userName}}",
+            "ContractFor": "Kontrata për {{userName}}",
+            "UpdateContract": "Përditëso kontratën",
+            "TransferOwnership": "Transferimi i pronësisë",
+            "SetBaseURI": "Cakto URI bazë",
+            "SetSuffix": "Vendos prapashtesë",
+            "CurrentOwner": "Pronari aktual",
+            "CurrentBaseURL": "BaseURL aktuale",
+            "ContractAddressAbsent": "Adresa e kontratës mungon",
+            "FactoryAddressAbsent": "Adresa e fabrikës mungon",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "Kërkohet titulli",
+            "SymbolRequired": "Kërkohet simbol",
+            "TypeContractName": "emri i kontratës",
+            "TypeContractSymbol": "simboli i kontratës (maksimumi 10 karaktere)"
+        },
+        "contests": {
+            "Title": "Konkurse",
+            "NewContest": "Konkurs i ri"
+        },
+        "attributes": {
+            "Title": "Menaxho atributet",
+            "Attributes": "Atributet",
+            "DisplayTitle": "Lloji i ekranit",
+            "AddDisplayType": "Shto llojin e ri të ekranit",
+            "NewDisplay": "Ekran i ri",
+            "TraitTitle": "Lloji i tipareve",
+            "AddTraitTitle": "Shto lloj të ri tipar",
+            "NewTrait": "Lloji i ri i tipareve",
+            "ValueTitle": "Vlera",
+            "AddValueTitle": "Shto vlerë të re",
+            "NewValue": "Vlera e re",
+            "NewAttribute": "Atribut i ri",
+            "UpdateAttributes": "Përditëso atributet",
+            "SaveAttributes": "Ruaj atributet"
+        },
+        "profile": {
+            "LogOut": "Shkyç",
+            "Title": "Profili për {{userName}}",
+            "Description": "Detajet e përdoruesit",
+            "aboutPlaceholder": "Edit Bio",
+            "SureLogOut": "Jeni i sigurt që dëshironi të dilni?"
+        }
+    },
+    "errors": {
+        "Error": "Gabim",
+        "WalletAbsent": "Portofoli nuk është i lidhur.",
+        "Rendering": "Pati gabime gjatë paraqitjes së <span class='url'>{{1}}<\/span>",
+        "PriceRequired": "Çmimi i kërkuar!",
+        "NameRequired": "Kërkohet emri!",
+        "PriceInvalid": "Çmimi i pavlefshëm!",
+        "TransactionFailed": "Transaksioni dështoi",
+        "ChainNotSupported": "Zinxhiri i zgjedhur nuk mbështetet. Zinxhiri i mbështetur: {{supportedChain}}",
+        "NeedMetaMaskConnected": "Duhet MetaMask i lidhur për të punuar me aplikacionin",
+        "UserNotLoggedInMetaMask": "Përdoruesi nuk është i identifikuar në MetaMask",
+        "CurrencyNotFound": "Valuta nuk u gjet",
+        "WrongChain": "Ky NFT u krijua nën &quot;{{chain}}&quot;. Ju lutemi përdorni këtë zinxhir."
+    },
+    "admin": {
+        "Title": "Asetet administrative",
+        "SubscriptionTitle": "Planet e abonimit"
+    },
+    "billing": {
+        "Title": "Faturimi i aseteve",
+        "CreditsMinimum": "Kredite minimale",
+        "CreditsToAdd": "Kredite për të shtuar",
+        "Save": "Ruaj",
+        "ThisLink": "kjo lidhje",
+        "errors": {
+            "CreditsMinimumNegative": "Minimumi i kredive nuk mund të jetë negativ",
+            "CreditsToAddNegative": "Kreditet për të shtuar nuk mund të jenë negative"
+        }
     }
 }

@@ -92,6 +92,13 @@
                 "title": "Pag-redirect sa Wallet",
                 "content": "Kapag naisara mo na ang dayalogo na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa pahinang ito."
             }
+        },
+        "web3": {
+            "payload": "Mag-log in sa {{host}} sa oras {{timestamp}}",
+            "alert": {
+                "title": "Nagre-redirect sa Wallet",
+                "content": "Sa sandaling isara mo ang dialog na ito, dadalhin ka sa iyong wallet. Pagkatapos mong mag-sign in, bumalik sa page na ito."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Services": "Mga serbisyo",
         "Faq": "Faq",
         "WeekDays": "Mga Araw ng Linggo"
+    },
+    "avatar": {
+        "Someone": "isang tao"
+    },
+    "web3": {
+        "WrongMethod": "Maling paraan ng kontrata {{methodName}}"
     }
 }

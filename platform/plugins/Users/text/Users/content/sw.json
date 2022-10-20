@@ -103,6 +103,13 @@
                 "title": "Inaelekeza kwenye Wallet",
                 "content": "Mara tu ukifunga kidirisha hiki, utachukuliwa hadi kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
             }
+        },
+        "web3": {
+            "payload": "Ingia katika {{host}} kwa wakati {{timestamp}}",
+            "alert": {
+                "title": "Inaelekeza kwenye Wallet",
+                "content": "Mara tu ukifunga kidirisha hiki, utachukuliwa hadi kwenye mkoba wako. Baada ya kuingia, rudi kwenye ukurasa huu."
+            }
         }
     },
     "setIdentifier": {
@@ -128,5 +135,11 @@
         "Member": "Mwanachama",
         "Guest": "Mgeni",
         "Host": "Mwenyeji"
+    },
+    "avatar": {
+        "Someone": "Mtu fulani"
+    },
+    "web3": {
+        "WrongMethod": "Mbinu mbaya ya mkataba {{methodName}}"
     }
 }

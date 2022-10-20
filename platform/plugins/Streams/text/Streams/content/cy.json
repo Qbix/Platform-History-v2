@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "Telegynhadledd",
             "MeetingEnded": "Daeth telegynhadledd i ben"
+        },
+        "requestSpeakDialog": {
+            "msg": "Ar hyn o bryd mae {{count}} o bobl yn siarad yn y cyfarfod. Ydych chi am ddisodli un ohonyn nhw ar ôl caniatáu {{seconds}} eiliad iddyn nhw orffen siarad?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "Galwad Diwedd",
         "interview": "Cyfweliad",
         "markApproved": "Marc wedi&#39;i Gymeradwyo"
+    },
+    "identifier": {
+        "private": "Preifat",
+        "public": "Cyhoeddus",
+        "configurationSaved": "Cyfluniad wedi&#39;i gadw",
+        "error": "Aeth rhywbeth o&#39;i le"
     }
 }

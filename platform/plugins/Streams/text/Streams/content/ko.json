@@ -299,6 +299,9 @@
         "preview": {
             "Meeting": "원격 회의",
             "MeetingEnded": "원격 회의 종료"
+        },
+        "requestSpeakDialog": {
+            "msg": "현재 {{count}}명이 회의에서 말하고 있습니다. {{seconds}}초 동안 말을 마친 후 그 중 하나를 교체하시겠습니까?"
         }
     },
     "types": {
@@ -548,5 +551,11 @@
         "endCall": "통화 종료",
         "interview": "회견",
         "markApproved": "승인 표시"
+    },
+    "identifier": {
+        "private": "사적인",
+        "public": "공공의",
+        "configurationSaved": "구성 저장됨",
+        "error": "문제가 발생했습니다."
     }
 }

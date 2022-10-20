@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}} के लिए शुल्क संसाधित किया गया",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}} को आपके भुगतान के लिए धन्यवाद",
         "SubscribedTo": "{{call 'user.displayName'}} ने {{plan.title}} की सदस्यता ली",
-        "YouSubscribedTo": "आपने {{plan.title}} की सदस्यता ले ली है"
+        "YouSubscribedTo": "आपने {{plan.title}} की सदस्यता ले ली है",
+        "Assets\/credits\/alert": "आपके पास अपने खाते से संबंधित अलर्ट है"
     },
     "charge": {
         "Subject": "आपको {{displayAmount}} का भुगतान {{call 'publisher.displayName'}} से &quot;{{description}}&quot; द्वारा किया जाता है",
@@ -21,7 +22,12 @@
         "AboutOrder": "आदेश के बारे में जानकारी",
         "PaymentMethod": "भुगतान का तरीका",
         "ContactInfo": "संपर्क जानकारी",
-        "Pay": "वेतन"
+        "Pay": "वेतन",
+        "PaymentSucceeded": "भुगतान सफल रहा",
+        "PaymentProcessing.": "आपका भुगतान संसाधित हो रहा है",
+        "FailTryAgain": "आपका भुगतान सफल नहीं हुआ, कृपया पुनः प्रयास करें",
+        "SomethingWrong": "कुछ गलत हो गया",
+        "PaymentStatus": "भुगतान की स्थिति"
     },
     "credits": {
         "InviteAcceptedBy": "{{invitedUserName}} ने आमंत्रण स्वीकार किया",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "क्रेडिट या डेबिट कार्ड",
         "SubscribePayment": "सदस्यता लें भुगतान",
-        "ImmediatePayment": "त्वरित भुगतान"
+        "ImmediatePayment": "त्वरित भुगतान",
+        "ProcessingPayment": "संसाधन संबंधी भुगतान",
+        "SubscriptionAlreadyPaid": "यह सदस्यता पहले ही भुगतान की जा चुकी है",
+        "SubscriptionNotActive": "यह सदस्यता सक्रिय नहीं है",
+        "Subscribed": "सदस्यता लिया",
+        "Unsubscribed": "सदस्यता छोड़ दी गई",
+        "Unsubscribe": "सदस्यता रद्द",
+        "Subscribe": "सदस्यता लेने के",
+        "Started": "शुरू किया गया",
+        "EndsIn": "में समाप्त",
+        "NextPay": "अगला भुगतान",
+        "Period": "अवधि",
+        "Price": "कीमत",
+        "AreYouSureUnsubscribe": "क्या आप वाकई इस योजना की सदस्यता समाप्त करना चाहते हैं?",
+        "YouUnsubscribedFromPlan": "आपने योजना &quot;{{planTitle}}&quot; से सदस्यता छोड़ दी है। आपसे शुल्क नहीं लिया जाएगा, लेकिन आपकी सदस्यता {{endsIn}} तक जारी रहेगी",
+        "plan": {
+            "TitlePlaceholder": "योजना शीर्षक",
+            "PricePlaceholder": "कीमत",
+            "DescriptionPlaceholder": "सदस्यता योजना विवरण",
+            "SavePlan": "योजना सहेजें",
+            "NewPlan": "नई योजना"
+        }
     },
     "payments": {
         "infoTitle": "भुगतान जानकारी सेट करें",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{fromUserName}} से {{amount}} क्रेडिट प्राप्त किया"
+        },
+        "Assets\/credits\/alert": {
+            "content": "आपके खाते में बहुत कम क्रेडिट हैं। अधिक क्रेडिट खरीदने के लिए कृपया <a href='{{link}}'>इस लिंक<\/a> पर जाएं।"
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "वैकल्पिक योगदान",
         "RequiredPayment": "आवश्यक भुगतान",
         "AreYouSureDelete": "क्या आप वाकई इस सेवा को हटाना चाहते हैं?",
-        "AmountServicesRelated": "इस सेवा से संबंधित {{amount}} उपलब्धियां हैं। उन्हें भी हटा दिया जाएगा।"
+        "AmountServicesRelated": "इस सेवा से संबंधित {{amount}} उपलब्धियां हैं। उन्हें भी हटा दिया जाएगा।",
+        "EditServiceTemplate": {
+            "Title": "सेवा संपादित करें"
+        }
     },
     "NFT": {
         "Title": "{{title}} एनएफटी के बारे में जानकारी",
@@ -246,7 +279,9 @@
             "importOptions": "विकल्प",
             "sampleCSV": "नमूना सीएसवी डाउनलोड करें",
             "fileLabel": "स्प्रेडशीट अपलोड करें:",
-            "errorsTitle": "त्रुटियां हुईं"
+            "errorsTitle": "त्रुटियां हुईं",
+            "importAttributes": "NFT विशेषताएँ आयात करें",
+            "displayTypeEmpty": "&quot;{{1}}&quot; के लिए प्रदर्शन प्रकार नहीं मिला"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "लेखकों द्वारा फ़िल्टर करें"
             }
         },
-        "Back": "संग्रह पर वापस जाएं"
+        "Back": "संग्रह पर वापस जाएं",
+        "Name": "नाम",
+        "EnterName": "नाम दर्ज",
+        "EnterAuthorWallet": "लेखक बटुआ दर्ज करें",
+        "InformationAboutTitle": "{{title}} एनएफटी . के बारे में जानकारी",
+        "DetailedInformationAboutNFT": "एनएफटी के बारे में विस्तृत जानकारी",
+        "PresaleStarts": "प्रीसेल 23 दिसंबर से शुरू होता है",
+        "OwnerUserNotFound": "इस एनएफटी का स्वामी हमारे आवेदन में पंजीकृत नहीं है।",
+        "BuyNow": "अभी खरीदें",
+        "Buy": "खरीदना",
+        "Conversation": "बातचीत",
+        "Create": "सृजन करना",
+        "Author": "लेखक",
+        "Commission": "आयोग",
+        "EnterCommission": "कमीशन दर्ज करें",
+        "Actions": "कार्रवाई",
+        "UpdateNFT": "एनएफटी अपडेट करें",
+        "NotOnSale": "बिक्री पर नहीं",
+        "MovieURL": "मूवी यूआरएल",
+        "EnterPrice": "कीमत दर्ज करें",
+        "Currency": "मुद्रा",
+        "AreYouSureDeleteImage": "क्या आप वाकई छवि निकालना चाहते हैं?",
+        "AreYouSureDeleteVideo": "क्या आप वाकई वीडियो हटाना चाहते हैं?",
+        "series": {
+            "Name": "नाम",
+            "Icon": "आइकन",
+            "Description": "विवरण",
+            "Author": "लेखक",
+            "SelectSeries": "श्रृंखला का चयन करें",
+            "Value": "मूल्य",
+            "AreYouSure": "क्या आपको यकीन है?",
+            "AuthorInvalid": "लेखक का पता अमान्य है!",
+            "Address": "पता",
+            "CoverImage": "कवर छवि",
+            "UploadCoverImage": "कवर छवि अपलोड करें",
+            "CommissionAddressInvalid": "आयोग का पता अमान्य",
+            "OnSale": "बिक्री पर",
+            "OffSale": "बिक्री पर नहीं है",
+            "CreateSeries": "सीरीज बनाएं",
+            "UpdateSeries": "अद्यतन श्रृंखला",
+            "SeriesInfo": "श्रृंखला की जानकारी",
+            "SelectAuthor": "लेखक का चयन करें",
+            "NewItem": "नई एनएफटी श्रृंखला",
+            "NamePlaceholder": "श्रृंखला का नाम दर्ज करें",
+            "DescPlaceholder": "श्रृंखला विवरण दर्ज करें",
+            "EndingIn": "समाप्त हो रहा है"
+        },
+        "contract": {
+            "CreateContract": "अनुबंध बनाएं",
+            "SelectContract": "अनुबंध चुनें",
+            "CreateContractFor": "{{userName}} के लिए अनुबंध बनाएं",
+            "ContractFor": "{{userName}} के लिए अनुबंध",
+            "UpdateContract": "अद्यतन अनुबंध",
+            "TransferOwnership": "स्थानांतरण स्वामित्व",
+            "SetBaseURI": "बेस यूआरआई सेट करें",
+            "SetSuffix": "प्रत्यय सेट करें",
+            "CurrentOwner": "वर्तमान मालिक",
+            "CurrentBaseURL": "वर्तमान बेसयूआरएल",
+            "ContractAddressAbsent": "अनुबंध का पता अनुपस्थित",
+            "FactoryAddressAbsent": "कारखाने का पता अनुपस्थित",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "शीर्षक आवश्यक",
+            "SymbolRequired": "प्रतीक आवश्यक",
+            "TypeContractName": "अनुबंध का नाम",
+            "TypeContractSymbol": "अनुबंध प्रतीक (अधिकतम 10 वर्ण)"
+        },
+        "contests": {
+            "Title": "प्रतियोगिता",
+            "NewContest": "नई प्रतियोगिता"
+        },
+        "attributes": {
+            "Title": "गुण प्रबंधित करें",
+            "Attributes": "गुण",
+            "DisplayTitle": "डिस्प्ले प्रकार",
+            "AddDisplayType": "नया प्रदर्शन प्रकार जोड़ें",
+            "NewDisplay": "नया प्रदर्शन",
+            "TraitTitle": "विशेषता प्रकार",
+            "AddTraitTitle": "नई विशेषता प्रकार जोड़ें",
+            "NewTrait": "नई विशेषता प्रकार",
+            "ValueTitle": "मूल्य",
+            "AddValueTitle": "नया मान जोड़ें",
+            "NewValue": "नया मूल्य",
+            "NewAttribute": "नई विशेषता",
+            "UpdateAttributes": "अद्यतन गुण",
+            "SaveAttributes": "गुण सहेजें"
+        },
+        "profile": {
+            "LogOut": "लॉग आउट",
+            "Title": "{{userName}} के लिए प्रोफ़ाइल",
+            "Description": "उपयोगकर्ता की जानकारी",
+            "aboutPlaceholder": "जैव संपादित करें",
+            "SureLogOut": "क्या आप लॉग आउट करना चाहते हैं?"
+        }
+    },
+    "errors": {
+        "Error": "गलती",
+        "WalletAbsent": "बटुआ जुड़ा नहीं है।",
+        "Rendering": "<span class='url'>{{1}}<\/span> रेंडर करते समय त्रुटियां थीं",
+        "PriceRequired": "कीमत चाहिए!",
+        "NameRequired": "नाम (जरूरी!",
+        "PriceInvalid": "कीमत अमान्य!",
+        "TransactionFailed": "लेन - देन विफल",
+        "ChainNotSupported": "चयनित श्रृंखला समर्थित नहीं है। समर्थित श्रृंखला: {{supportedChain}}",
+        "NeedMetaMaskConnected": "एप्लिकेशन के साथ काम करने के लिए जुड़े मेटामास्क की आवश्यकता है",
+        "UserNotLoggedInMetaMask": "उपयोगकर्ता मेटामास्क में लॉग इन नहीं है",
+        "CurrencyNotFound": "मुद्रा नहीं मिली",
+        "WrongChain": "यह एनएफटी &quot;{{chain}}&quot; के तहत बनाया गया है। कृपया इस श्रृंखला का उपयोग करें।"
+    },
+    "admin": {
+        "Title": "संपत्ति प्रशासनिक",
+        "SubscriptionTitle": "सदस्यता योजना"
+    },
+    "billing": {
+        "Title": "संपत्ति बिलिंग",
+        "CreditsMinimum": "न्यूनतम क्रेडिट",
+        "CreditsToAdd": "जोड़ने के लिए क्रेडिट",
+        "Save": "बचाना",
+        "ThisLink": "इस लिंक",
+        "errors": {
+            "CreditsMinimumNegative": "न्यूनतम क्रेडिट ऋणात्मक नहीं हो सकता",
+            "CreditsToAddNegative": "जोड़ने के लिए क्रेडिट नकारात्मक नहीं हो सकते"
+        }
     }
 }

@@ -7,7 +7,8 @@
         "ChargeProcessedFor": "{{call 'publisher.displayName'}}: {{call 'user.displayName'}}కి ఛార్జ్ ప్రాసెస్ చేయబడింది",
         "ThankYouForYourPayment": "{{call 'publisher.displayName'}}కి మీరు చెల్లించినందుకు ధన్యవాదాలు",
         "SubscribedTo": "{{call 'user.displayName'}} {{plan.title}}కి సభ్యత్వం పొందారు",
-        "YouSubscribedTo": "మీరు {{plan.title}}కి సభ్యత్వం పొందారు"
+        "YouSubscribedTo": "మీరు {{plan.title}}కి సభ్యత్వం పొందారు",
+        "Assets\/credits\/alert": "మీ ఖాతాకు సంబంధించి మీకు హెచ్చరిక ఉంది"
     },
     "charge": {
         "Subject": "మీరు &quot;{{description}}&quot; ద్వారా {{call 'publisher.displayName'}} నుండి {{displayAmount}} చెల్లింపును పొందుతారు",
@@ -21,7 +22,12 @@
         "AboutOrder": "ఆర్డర్ గురించి సమాచారం",
         "PaymentMethod": "చెల్లింపు పద్ధతి",
         "ContactInfo": "సంప్రదింపు సమాచారం",
-        "Pay": "చెల్లించండి"
+        "Pay": "చెల్లించండి",
+        "PaymentSucceeded": "చెల్లింపు విజయవంతమైంది",
+        "PaymentProcessing.": "మీ చెల్లింపు ప్రాసెస్ చేయబడుతోంది",
+        "FailTryAgain": "మీ చెల్లింపు విజయవంతం కాలేదు, దయచేసి మళ్లీ ప్రయత్నించండి",
+        "SomethingWrong": "ఏదో తప్పు జరిగింది",
+        "PaymentStatus": "చెల్లింపు స్థితి"
     },
     "credits": {
         "InviteAcceptedBy": "ఆహ్వానం {{invitedUserName}} ద్వారా ఆమోదించబడింది",
@@ -102,7 +108,28 @@
         },
         "CreditOrDebitCard": "క్రెడిట్ లేదా డెబిట్ కార్డ్",
         "SubscribePayment": "చెల్లింపు సభ్యత్వం పొందండి",
-        "ImmediatePayment": "తక్షణ చెల్లింపు"
+        "ImmediatePayment": "తక్షణ చెల్లింపు",
+        "ProcessingPayment": "చెల్లింపును ప్రాసెస్ చేస్తోంది",
+        "SubscriptionAlreadyPaid": "ఈ సభ్యత్వం ఇప్పటికే చెల్లించబడింది",
+        "SubscriptionNotActive": "ఈ సబ్‌స్క్రిప్షన్ సక్రియంగా లేదు",
+        "Subscribed": "సభ్యత్వం పొందారు",
+        "Unsubscribed": "చందాను తొలగించారు",
+        "Unsubscribe": "చందాను తీసివేయండి",
+        "Subscribe": "సభ్యత్వం పొందండి",
+        "Started": "ప్రారంభించారు",
+        "EndsIn": "లో ముగుస్తుంది",
+        "NextPay": "తదుపరి చెల్లింపు",
+        "Period": "కాలం",
+        "Price": "ధర",
+        "AreYouSureUnsubscribe": "మీరు ఖచ్చితంగా ఈ ప్లాన్‌ని అన్‌సబ్‌స్క్రైబ్ చేయాలనుకుంటున్నారా?",
+        "YouUnsubscribedFromPlan": "మీరు ప్లాన్ &quot;{{planTitle}}&quot; నుండి చందాను తొలగించారు. మీకు ఛార్జీ విధించబడదు, కానీ మీ సభ్యత్వం {{endsIn}} వరకు కొనసాగుతుంది",
+        "plan": {
+            "TitlePlaceholder": "ప్రణాళిక శీర్షిక",
+            "PricePlaceholder": "ధర",
+            "DescriptionPlaceholder": "సబ్‌స్క్రిప్షన్ ప్లాన్ వివరణ",
+            "SavePlan": "ప్లాన్‌ను సేవ్ చేయండి",
+            "NewPlan": "కొత్త ప్లాన్"
+        }
     },
     "payments": {
         "infoTitle": "చెల్లింపు సమాచారాన్ని సెట్ చేయండి",
@@ -154,6 +181,9 @@
         },
         "Assets\/credits\/received": {
             "content": "{{fromUserName}} నుండి {{amount}} క్రెడిట్‌లను పొందారు"
+        },
+        "Assets\/credits\/alert": {
+            "content": "మీ ఖాతాలో మీకు తక్కువ క్రెడిట్‌లు ఉన్నాయి. మరిన్ని క్రెడిట్‌లను కొనుగోలు చేయడానికి దయచేసి <a href='{{link}}'>ఈ లింక్‌ని<\/a> సందర్శించండి."
         }
     },
     "services": {
@@ -172,7 +202,10 @@
         "OptionalContribution": "ఐచ్ఛిక సహకారం",
         "RequiredPayment": "అవసరమైన చెల్లింపు",
         "AreYouSureDelete": "మీరు ఖచ్చితంగా ఈ సేవను తొలగించాలనుకుంటున్నారా?",
-        "AmountServicesRelated": "ఈ సేవకు సంబంధించి {{amount}} లభ్యతలు ఉన్నాయి. అవి కూడా తీసివేయబడతాయి."
+        "AmountServicesRelated": "ఈ సేవకు సంబంధించి {{amount}} లభ్యతలు ఉన్నాయి. అవి కూడా తీసివేయబడతాయి.",
+        "EditServiceTemplate": {
+            "Title": "సేవను సవరించండి"
+        }
     },
     "NFT": {
         "Title": "{{title}} NFT గురించి సమాచారం",
@@ -246,7 +279,9 @@
             "importOptions": "ఎంపికలు",
             "sampleCSV": "నమూనా CSVని డౌన్‌లోడ్ చేయండి",
             "fileLabel": "స్ప్రెడ్‌షీట్‌ని అప్‌లోడ్ చేయండి:",
-            "errorsTitle": "లోపాలు సంభవించాయి"
+            "errorsTitle": "లోపాలు సంభవించాయి",
+            "importAttributes": "NFT లక్షణాలను దిగుమతి చేయండి",
+            "displayTypeEmpty": "&quot;{{1}}&quot; కోసం ప్రదర్శన రకం కనుగొనబడలేదు"
         },
         "filter": {
             "ByCategory": {
@@ -260,6 +295,127 @@
                 "FilterByAuthors": "రచయితల వారీగా ఫిల్టర్ చేయండి"
             }
         },
-        "Back": "తిరిగి సేకరణకి"
+        "Back": "తిరిగి సేకరణకి",
+        "Name": "పేరు",
+        "EnterName": "పేరు నమోదు చేయండి",
+        "EnterAuthorWallet": "రచయిత వాలెట్‌ని నమోదు చేయండి",
+        "InformationAboutTitle": "{{title}} NFT గురించి సమాచారం",
+        "DetailedInformationAboutNFT": "NFT గురించి వివరణాత్మక సమాచారం",
+        "PresaleStarts": "ప్రీసేల్ డిసెంబర్ 23న ప్రారంభమవుతుంది",
+        "OwnerUserNotFound": "ఈ NFT యజమాని మా దరఖాస్తులో నమోదు చేయబడలేదు.",
+        "BuyNow": "ఇప్పుడే కొనండి",
+        "Buy": "కొనుగోలు",
+        "Conversation": "సంభాషణ",
+        "Create": "సృష్టించు",
+        "Author": "రచయిత",
+        "Commission": "కమిషన్",
+        "EnterCommission": "కమీషన్ నమోదు చేయండి",
+        "Actions": "చర్యలు",
+        "UpdateNFT": "NFTని నవీకరించండి",
+        "NotOnSale": "అమ్మకానికి లేదు",
+        "MovieURL": "సినిమా URL",
+        "EnterPrice": "ధరను నమోదు చేయండి",
+        "Currency": "కరెన్సీ",
+        "AreYouSureDeleteImage": "మీరు ఖచ్చితంగా చిత్రాన్ని తీసివేయాలనుకుంటున్నారా?",
+        "AreYouSureDeleteVideo": "మీరు ఖచ్చితంగా వీడియోను తీసివేయాలనుకుంటున్నారా?",
+        "series": {
+            "Name": "పేరు",
+            "Icon": "చిహ్నం",
+            "Description": "వివరణ",
+            "Author": "రచయిత",
+            "SelectSeries": "సిరీస్‌ని ఎంచుకోండి",
+            "Value": "విలువ",
+            "AreYouSure": "మీరు చెప్పేది నిజమా?",
+            "AuthorInvalid": "రచయిత చిరునామా చెల్లదు!",
+            "Address": "చిరునామా",
+            "CoverImage": "కవర్ చిత్రం",
+            "UploadCoverImage": "కవర్ చిత్రాన్ని అప్‌లోడ్ చేయండి",
+            "CommissionAddressInvalid": "కమిషన్ చిరునామా చెల్లదు",
+            "OnSale": "అమ్మకానికి",
+            "OffSale": "ఆఫ్ సేల్",
+            "CreateSeries": "శ్రేణిని సృష్టించండి",
+            "UpdateSeries": "నవీకరణ సిరీస్",
+            "SeriesInfo": "సిరీస్ సమాచారం",
+            "SelectAuthor": "రచయితను ఎంచుకోండి",
+            "NewItem": "కొత్త NFT సిరీస్",
+            "NamePlaceholder": "సిరీస్ పేరును నమోదు చేయండి",
+            "DescPlaceholder": "సిరీస్ వివరణను నమోదు చేయండి",
+            "EndingIn": "ముగుస్తుంది"
+        },
+        "contract": {
+            "CreateContract": "ఒప్పందాన్ని సృష్టించండి",
+            "SelectContract": "ఒప్పందాన్ని ఎంచుకోండి",
+            "CreateContractFor": "{{userName}} కోసం ఒప్పందాన్ని సృష్టించండి",
+            "ContractFor": "{{userName}} కోసం ఒప్పందం",
+            "UpdateContract": "ఒప్పందాన్ని నవీకరించండి",
+            "TransferOwnership": "యాజమాన్యాన్ని బదిలీ చేయండి",
+            "SetBaseURI": "బేస్ URIని సెట్ చేయండి",
+            "SetSuffix": "ప్రత్యయం సెట్ చేయండి",
+            "CurrentOwner": "ప్రస్తుత యజమాని",
+            "CurrentBaseURL": "ప్రస్తుత BaseURL",
+            "ContractAddressAbsent": "కాంట్రాక్ట్ చిరునామా లేదు",
+            "FactoryAddressAbsent": "ఫ్యాక్టరీ చిరునామా లేదు",
+            "ContractName": "{{contractName}} - {{contractSymbol}} ({{chainNetwork}})",
+            "TitleRequired": "శీర్షిక అవసరం",
+            "SymbolRequired": "చిహ్నం అవసరం",
+            "TypeContractName": "ఒప్పందం పేరు",
+            "TypeContractSymbol": "ఒప్పంద చిహ్నం (గరిష్టంగా 10 అక్షరాలు)"
+        },
+        "contests": {
+            "Title": "పోటీలు",
+            "NewContest": "కొత్త పోటీ"
+        },
+        "attributes": {
+            "Title": "లక్షణాలను నిర్వహించండి",
+            "Attributes": "గుణాలు",
+            "DisplayTitle": "ప్రదర్శన రకం",
+            "AddDisplayType": "కొత్త ప్రదర్శన రకాన్ని జోడించండి",
+            "NewDisplay": "కొత్త డిస్ప్లే",
+            "TraitTitle": "లక్షణ రకం",
+            "AddTraitTitle": "కొత్త లక్షణ రకాన్ని జోడించండి",
+            "NewTrait": "కొత్త లక్షణ రకం",
+            "ValueTitle": "విలువ",
+            "AddValueTitle": "కొత్త విలువను జోడించండి",
+            "NewValue": "కొత్త విలువ",
+            "NewAttribute": "కొత్త లక్షణం",
+            "UpdateAttributes": "లక్షణాలను నవీకరించండి",
+            "SaveAttributes": "లక్షణాలను సేవ్ చేయండి"
+        },
+        "profile": {
+            "LogOut": "లాగ్ అవుట్ చేయండి",
+            "Title": "{{userName}} కోసం ప్రొఫైల్",
+            "Description": "వినియోగదారు వివరాలు",
+            "aboutPlaceholder": "బయోని సవరించండి",
+            "SureLogOut": "మీరు ఖచ్చితంగా లాగ్ అవుట్ చేయాలనుకుంటున్నారా?"
+        }
+    },
+    "errors": {
+        "Error": "లోపం",
+        "WalletAbsent": "వాలెట్ కనెక్ట్ కాలేదు.",
+        "Rendering": "<span class='url'>{{1}}<\/span> ని రెండరింగ్ చేస్తున్నప్పుడు లోపాలు ఉన్నాయి",
+        "PriceRequired": "ధర అవసరం!",
+        "NameRequired": "పేరు అవసరం!",
+        "PriceInvalid": "ధర చెల్లదు!",
+        "TransactionFailed": "లావాదేవీ విఫలమైంది",
+        "ChainNotSupported": "ఎంచుకున్న గొలుసుకు మద్దతు లేదు. మద్దతు ఉన్న గొలుసు: {{supportedChain}}",
+        "NeedMetaMaskConnected": "అప్లికేషన్‌తో పని చేయడానికి MetaMask కనెక్ట్ కావాలి",
+        "UserNotLoggedInMetaMask": "వినియోగదారు MetaMaskకి లాగిన్ చేయబడలేదు",
+        "CurrencyNotFound": "కరెన్సీ దొరకలేదు",
+        "WrongChain": "ఈ NFT &quot;{{chain}}&quot; కింద సృష్టించబడింది. దయచేసి ఈ గొలుసును ఉపయోగించండి."
+    },
+    "admin": {
+        "Title": "ఆస్తులు అడ్మినిస్ట్రేటివ్",
+        "SubscriptionTitle": "సబ్‌స్క్రిప్షన్ ప్లాన్‌లు"
+    },
+    "billing": {
+        "Title": "ఆస్తుల బిల్లింగ్",
+        "CreditsMinimum": "కనీస క్రెడిట్‌లు",
+        "CreditsToAdd": "జోడించడానికి క్రెడిట్‌లు",
+        "Save": "సేవ్ చేయండి",
+        "ThisLink": "ఈ లింక్",
+        "errors": {
+            "CreditsMinimumNegative": "క్రెడిట్‌లు కనిష్టంగా ప్రతికూలంగా ఉండకూడదు",
+            "CreditsToAddNegative": "జోడించాల్సిన క్రెడిట్‌లు ప్రతికూలంగా ఉండకూడదు"
+        }
     }
 }
