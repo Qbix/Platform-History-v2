@@ -532,20 +532,8 @@
 			 *  @param {Object} [options] Any additional options to pass to the stripe checkout config, and also:
 			 *  @param {Number} options.amount the amount to pay.
 			 *  @param {String} [options.currency="usd"] the currency to pay in.
-			 *  @param {String} [options.name=Users::communityName()] The name of the organization the user will be paying
-			 *  @param {String} [options.email] Email of user paying. Logged in user email by default.
-			 *  @param {String} [options.image] The url pointing to a square image of your brand or product. The recommended minimum size is 128x128px.
 			 *  @param {String} [options.description] Operation code which detailed text can be fetch from lang json (Assets/content/payments).
-			 *  @param {String} [options.panelLabel] The label of the payment button in the Stripe Checkout form (e.g. "Pay {{amount}}", etc.). If you include {{amount}}, it will be replaced by the provided amount. Otherwise, the amount will be appended to the end of your label.
 			 *  @param {object} [options.metadata] Data to pass to payment gateway to get them back and save to message instructions
-			 *  @param {String} [options.zipCode] Specify whether Stripe Checkout should validate the billing ZIP code (true or false). The default is false.
-			 *  @param {Boolean} [options.billingAddress] Specify whether Stripe Checkout should collect the user's billing address (true or false). The default is false.
-			 *  @param {Boolean} [options.shippingAddress] Specify whether Checkout should collect the user's shipping address (true or false). The default is false.
-			 *  @param {String} [options.email] Set the email address, if any, provided to Stripe Checkout to be pre-filled.
-			 *  @param {Boolean} [options.allowRememberMe=true] Specify whether to include the option to "Remember Me" for future purchases (true or false).
-			 *  @param {Boolean} [options.bitcoin=false] Specify whether to accept Bitcoin (true or false).
-			 *  @param {Boolean} [options.alipay=false] Specify whether to accept Alipay ('auto', true, or false).
-			 *  @param {Boolean} [options.alipayReusable=false] Specify if you need reusable access to the customer's Alipay account (true or false).
 			 *  @param {Function} [callback] The function to call, receives (err, paymentSlot)
 			 */
 			stripe: function (options, callback) {
@@ -571,7 +559,12 @@
 
 				options.userId = options.userId || Q.Users.loggedInUserId();
 				options.currency = (options.currency || 'USD').toUpperCase();
-				Assets.Payments.standardStripe(options, callback);
+
+				if (Q.info.isCordova && (window.location.href.indexOf('browsertab=yes') === -1)) {
+					_redirectToBrowserTab(options);
+				} else {
+					Assets.Payments.standardStripe(options, callback);
+				}
 			},
 			/**
 			 * Load js libs and do some needed actions.
@@ -807,6 +800,7 @@
 					onClose: function () {
 						paymentRequestButton && paymentRequestButton.destroy();
 						paymentElement && paymentElement.destroy();
+						Q.handle(callback, null, [true]);
 					}
 				});
 			},
@@ -1531,7 +1525,9 @@
 			amount: options.amount,
 			email: options.email,
 			userId: Q.Users.loggedInUserId(),
-			currency: options.currency
+			currency: options.currency,
+			description: options.description,
+			metadata: options.metadata
 		}));
 		cordova.plugins.browsertabs.openUrl(url.toString(), {
 			scheme: Q.info.scheme
@@ -1560,35 +1556,13 @@
 
 			// need Stripe lib for safari browserTab
 			Assets.Payments.load(function () {
-				if ((Q.info.platform === 'ios') && (Q.info.browser.name === 'safari')) { // It's considered that ApplePay is supported in IOS Safari
-					var $button = $('#browsertab_pay');
-					var $info = $('#browsertab_pay_info');
-					var $cancel = $('#browsertab_pay_cancel');
-					var $error = $('#browsertab_pay_error');
-					$button.show();
-					$button.on('click', function() {
-						Assets.Payments.stripe(paymentOptions, function(err, res) {
-							$button.hide();
-							if (err && err.code === 20) {
-								$cancel.show();
-							} else if (err) {
-								$error.show();
-							} else {
-								// if scheme defined, redirect to scheme to close browsertab
-								scheme && (location.href = scheme);
-								$info.show();
-							}
-						});
-					});
-				} else {
-					Assets.Payments.stripe(paymentOptions, function () {
-						if (scheme) {
-							location.href = scheme;
-						} else {
-							window.close();
-						}
-					});
-				}
+				Assets.Payments.stripe(paymentOptions, function () {
+					if (scheme) {
+						location.href = scheme;
+					} else {
+						window.close();
+					}
+				});
 			});
 		};
 	}
