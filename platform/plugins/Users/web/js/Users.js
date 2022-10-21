@@ -859,7 +859,7 @@
 				var usingPlatforms = {};
 				Q.each(['web3', 'facebook'], function (i, platform) {
 					var appId = (o.appIds && o.appIds[platform]) || Q.info.app;
-					if ((o.using.indexOf('facebook') >= 0)) {
+					if ((o.using.indexOf(platform) >= 0)) {
 						usingPlatforms[platform] = appId;	
 					}
 				});
