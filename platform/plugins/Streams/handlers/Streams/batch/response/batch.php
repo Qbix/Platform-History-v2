@@ -105,13 +105,24 @@ function Streams_batch_response_batch()
 			if (count($args) >= 4) {
 				Streams::$requestedPublisherId_override = $publisherId = $args[2];
 				Streams::$requestedName_override = $name = $args[3];
+				Streams::$cache['stream'] = null;
 				if (empty($streams[$publisherId][$name])) {
-					throw new Q_Exception_MissingRow(array(
-						'table' => 'Stream', 
-						'criteria' => "{publisherId: '$publisherId', name: '$name'}"
+					// try to create stream if possible
+					Q::event('Streams/stream/post', array(
+						"publisherId" => $publisherId,
+						"name" => $name,
+						"dontSubscribe" => true
 					));
+
+					if (empty(Streams::$cache['stream'])) {
+						throw new Q_Exception_MissingRow(array(
+							'table' => 'Stream',
+							'criteria' => "{publisherId: '$publisherId', name: '$name'}"
+						));
+					}
+				} else {
+					Streams::$cache['stream'] = $streams[$publisherId][$name];
 				}
-				Streams::$cache['stream'] = $streams[$publisherId][$name];
 			}
 			Q::event(
 				"Streams/$action/response", 
