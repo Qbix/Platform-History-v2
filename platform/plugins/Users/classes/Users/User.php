@@ -651,7 +651,7 @@ class Users_User extends Base_Users_User
 				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
 				'link' => $link,
-				'code' => $this->activationCode,
+				'code' => $email->activationCode,
 				'domain' => parse_url($baseUrl, PHP_URL_HOST),
 				'unsubscribe' => $unsubscribe
 			));
