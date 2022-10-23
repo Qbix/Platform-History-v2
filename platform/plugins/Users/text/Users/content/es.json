@@ -74,7 +74,7 @@
         "title": "Bienvenidos",
         "directions": "Cree una cuenta o inicie sesión.",
         "directionsNoRegister": "Inicie sesión si tiene una cuenta.",
-        "goButton": "Vamos",
+        "goButton": "⮕",
         "passphrase": "Ingrese su frase de contraseña:",
         "loginButton": "Empezar",
         "registerButton": "Empezar",

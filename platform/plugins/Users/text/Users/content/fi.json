@@ -74,7 +74,7 @@
         "title": "Tervetuloa",
         "directions": "Luo tili tai kirjaudu sisään.",
         "directionsNoRegister": "Kirjaudu sisään, jos sinulla on tili.",
-        "goButton": "Mennä",
+        "goButton": "⮕",
         "passphrase": "Kirjoita salasanasi:",
         "loginButton": "Aloittaa",
         "registerButton": "Aloittaa",

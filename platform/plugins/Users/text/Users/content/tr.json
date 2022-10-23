@@ -74,7 +74,7 @@
         "title": "Hoş geldin",
         "directions": "Bir hesap oluşturun veya giriş yapın.",
         "directionsNoRegister": "Hesabınız varsa giriş yapın.",
-        "goButton": "Gitmek",
+        "goButton": "⮕",
         "passphrase": "Parola ifadenizi girin:",
         "loginButton": "Başlamak",
         "registerButton": "Başlamak",

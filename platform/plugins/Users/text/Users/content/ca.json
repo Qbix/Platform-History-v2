@@ -63,7 +63,7 @@
         "title": "Benvingut",
         "directions": "Creeu un compte o inicieu sessió.",
         "directionsNoRegister": "Inicieu sessió si teniu un compte.",
-        "goButton": "Vés",
+        "goButton": "⮕",
         "passphrase": "Introduïu la vostra frase de pas:",
         "loginButton": "Començar",
         "registerButton": "Començar",

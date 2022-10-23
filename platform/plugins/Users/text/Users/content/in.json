@@ -63,7 +63,7 @@
         "title": "Selamat datang",
         "directions": "Buat akun, atau masuk.",
         "directionsNoRegister": "Masuk jika Anda memiliki akun.",
-        "goButton": "Pergi",
+        "goButton": "",
         "passphrase": "Masukkan frasa sandi Anda:",
         "loginButton": "Memulai",
         "registerButton": "Memulai",

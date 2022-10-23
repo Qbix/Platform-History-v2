@@ -74,7 +74,7 @@
         "title": "Tere tulemast",
         "directions": "Looge konto või logige sisse.",
         "directionsNoRegister": "Logige sisse, kui teil on konto.",
-        "goButton": "Mine",
+        "goButton": "⮕",
         "passphrase": "Sisestage oma paroolifraas:",
         "loginButton": "Alustama",
         "registerButton": "Alustama",

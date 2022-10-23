@@ -74,7 +74,7 @@
         "title": "Croeso",
         "directions": "Creu cyfrif, neu fewngofnodi.",
         "directionsNoRegister": "Mewngofnodwch os oes gennych gyfrif.",
-        "goButton": "Ewch",
+        "goButton": "⮕",
         "passphrase": "Rhowch eich ymadrodd pasio:",
         "loginButton": "Dechrau",
         "registerButton": "Dechrau",

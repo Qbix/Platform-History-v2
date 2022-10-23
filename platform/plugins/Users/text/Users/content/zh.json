@@ -63,7 +63,7 @@
         "title": "欢迎",
         "directions": "创建一个帐户，或登录。",
         "directionsNoRegister": "如果您有帐户，请登录。",
-        "goButton": "去",
+        "goButton": "⮕",
         "passphrase": "输入您的密码：",
         "loginButton": "开始使用",
         "registerButton": "开始使用",

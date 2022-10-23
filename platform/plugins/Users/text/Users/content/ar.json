@@ -63,7 +63,7 @@
         "title": "مرحبا",
         "directions": "إنشاء حساب أو تسجيل الدخول.",
         "directionsNoRegister": "تسجيل الدخول إذا كان لديك حساب.",
-        "goButton": "يذهب",
+        "goButton": "⮕",
         "passphrase": "أدخل عبارة المرور الخاصة بك:",
         "loginButton": "البدء",
         "registerButton": "البدء",

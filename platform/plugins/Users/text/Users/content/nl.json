@@ -63,7 +63,7 @@
         "title": "Welkom",
         "directions": "Maak een account aan, of log in.",
         "directionsNoRegister": "Log in als je een account hebt.",
-        "goButton": "Gaan",
+        "goButton": "",
         "passphrase": "Voer uw wachtwoordzin in:",
         "loginButton": "Begin",
         "registerButton": "Begin",

@@ -74,7 +74,7 @@
         "title": "Witamy",
         "directions": "Utwórz konto lub zaloguj się.",
         "directionsNoRegister": "Zaloguj się, jeśli masz konto.",
-        "goButton": "Iść",
+        "goButton": "",
         "passphrase": "Wpisz swoje hasło:",
         "loginButton": "Zaczynaj",
         "registerButton": "Zaczynaj",

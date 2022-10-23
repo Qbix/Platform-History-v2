@@ -74,7 +74,7 @@
         "title": "어서 오십시오",
         "directions": "계정을 만들거나 로그인하세요.",
         "directionsNoRegister": "계정이 있으면 로그인하세요.",
-        "goButton": "가다",
+        "goButton": "⮕",
         "passphrase": "암호를 입력하십시오:",
         "loginButton": "시작하다",
         "registerButton": "시작하다",

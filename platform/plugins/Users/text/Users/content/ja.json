@@ -74,7 +74,7 @@
         "title": "いらっしゃいませ",
         "directions": "アカウントを作成するか、ログインします。",
         "directionsNoRegister": "アカウントをお持ちの場合はログインしてください。",
-        "goButton": "行け",
+        "goButton": "⮕",
         "passphrase": "パスフレーズを入力してください：",
         "loginButton": "はじめに",
         "registerButton": "はじめに",

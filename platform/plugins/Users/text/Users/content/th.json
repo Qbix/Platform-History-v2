@@ -74,7 +74,7 @@
         "title": "ยินดีต้อนรับ",
         "directions": "สร้างบัญชีหรือเข้าสู่ระบบ",
         "directionsNoRegister": "เข้าสู่ระบบถ้าคุณมีบัญชี",
-        "goButton": "ไป",
+        "goButton": ".",
         "passphrase": "ป้อนวลีรหัสผ่านของคุณ:",
         "loginButton": "เริ่ม",
         "registerButton": "เริ่ม",

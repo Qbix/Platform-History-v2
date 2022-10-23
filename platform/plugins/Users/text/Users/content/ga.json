@@ -74,7 +74,7 @@
         "title": "Fáilte",
         "directions": "Cruthaigh cuntas, nó logáil isteach.",
         "directionsNoRegister": "Logáil isteach má tá cuntas agat.",
-        "goButton": "Téigh",
+        "goButton": "⮕",
         "passphrase": "Cuir isteach do pasfhocal:",
         "loginButton": "Tosaigh",
         "registerButton": "Tosaigh",

@@ -74,7 +74,7 @@
         "title": "Добро пожаловать",
         "directions": "Создайте учетную запись или войдите в систему.",
         "directionsNoRegister": "Войдите, если у вас есть учетная запись.",
-        "goButton": "Идти",
+        "goButton": "⮕",
         "passphrase": "Введите парольную фразу:",
         "loginButton": "Начать",
         "registerButton": "Начать",

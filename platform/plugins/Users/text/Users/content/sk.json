@@ -74,7 +74,7 @@
         "title": "Vitajte",
         "directions": "Vytvorte si účet alebo sa prihláste.",
         "directionsNoRegister": "Prihláste sa, ak máte účet.",
-        "goButton": "Choď",
+        "goButton": "⮕",
         "passphrase": "Zadajte svoju prístupovú frázu:",
         "loginButton": "Začať",
         "registerButton": "Začať",
