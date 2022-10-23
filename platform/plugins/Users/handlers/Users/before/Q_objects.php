@@ -1,7 +1,5 @@
 <?php
 
-use Google\Service\TrafficDirectorService\NullMatch;
-
 function Users_before_Q_objects(&$params)
 {
 	$app = Q::app();
@@ -22,10 +20,6 @@ function Users_before_Q_objects(&$params)
 	
 	// Fire an event for hooking into, if necessary
 	Q::event('Users/objects', array(), 'after');
-	
-	if (Q_Dispatcher::uri()->facebook) {
-		Q_Dispatcher::skip('Q/post');
-	}
 	
 	if ($user = Users::loggedInUser(false, false)
 	and $user->preferredLanguage

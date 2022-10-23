@@ -18,7 +18,9 @@ function Users_activate_validate()
 		), 'mobileNumber');
 	}
 	if (Q_Request::method() === 'POST' and empty($_REQUEST['code'])) {
-		throw new Q_Exception("The activation code is required");
+		Q_Response::addError(
+			new Q_Exception("The activation code is required")
+		);
 	}
 	if (!$emailAddress and !$mobileNumber) {
 		throw new Q_Exception("The email address or mobile number is required");
