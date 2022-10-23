@@ -1465,7 +1465,7 @@
 																$(this).plugin('Q/validator', 'reset');
 															});
 														login_setupDialog.dialog.data('Q/dialog').close();
-														_redirectToActivationPage();
+														Q.handle(Q.getObject('slots.data.activationLink', response));
 													})
 											)
 										);
