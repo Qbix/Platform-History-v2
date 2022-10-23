@@ -11,8 +11,9 @@ function Streams_register_response_data()
 		} else {
 			$fields = array();
 		}
+		$displayName = Streams::displayName($user);
 		$user = $user->exportArray();
-		$user['displayName'] = Streams::displayName($user);
+		$user['displayName'] = $displayName;
 		if ($fields) {
 			$activationLink = Q_Uri::url("Users/activate?")
 			. '?' . http_build_query($fields);
