@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Vitajte! Overte svoju e-mailovú adresu.",
+        "Thanks": "Vitajte v {{1}}",
+        "ReallyYourEmail": "Je toto naozaj vaša e-mailová adresa, {{1}}? Ak áno, kliknite <a href='{{2}}'>sem<\/a> a nastavte si prístupovú frázu a aktivujte svoj účet.",
+        "SeeYou": "Uvidíme sa na <a href='{{1}}'>{{100}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Vitajte! Overte svoju e-mailovú adresu."
+    },
+    "resend": {
+        "Subject": "Hej, zabudli ste svoju prístupovú frázu?",
+        "Thanks": "Ďakujeme za návštevu {{1}}",
+        "YouAreReceiving": "Tento e-mail ste dostali, pretože niekto zadal vašu e-mailovú adresu a klikol na „zabudol som heslo“. Ak ste to neboli vy, jednoducho túto správu ignorujte.",
+        "Reset": "Ak chcete obnoviť prístupovú frázu, kliknite na {{1}}",
+        "SetUpPassphrase": "Nastavte prístupovú frázu"
+    },
+    "SeeYou": "Uvidíme sa na {{1}}!",
+    "LinkToUnsubscribe": "Tu je odkaz na <a href='{{1}}'>odhlásenie<\/a> , ak si neželáte dostávať ďalšie e-maily."
+}

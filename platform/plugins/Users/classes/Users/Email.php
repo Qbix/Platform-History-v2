@@ -243,20 +243,22 @@ class Users_Email extends Base_Users_Email
 		$this->authCode = sha1(microtime() . mt_rand());
 		$link = Q_Uri::url('Users/activate?p=1&code='.urlencode($this->activationCode)
 			. ' emailAddress='.urlencode($this->address));
+		Users::$cache['Users/activate link'] = $link;
 		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $this->authCode, 
 			'emailAddress' => $this->address
 		)));
 		$communityName = Users::communityName();
 		$communitySuffix = Users::communitySuffix();
+		$email = $this;
 		/**
 		 * @event Users/resend {before}
-		 * @param {string} user
-		 * @param {string} email
+		 * @param {Users_User} user
+		 * @param {Users_Email} email
 		 */
 		Q::event('Users/resend', @compact('user', 'email', 'link', 'unsubscribe'), 'before');
 		$this->save();
-		$email = $this;
+		$baseUrl = Q_Request::baseUrl();
 		$fields2 = array_merge($fields, array(
 			'user' => $user,
 			'email' => $this,
@@ -265,6 +267,8 @@ class Users_Email extends Base_Users_Email
 			'communitySuffix' => $communitySuffix,
 			'baseUrl' => Q_Request::baseUrl(),
 			'link' => $link,
+			'code' => $this->activationCode,
+			'domain' => parse_url($baseUrl, PHP_URL_HOST),
 			'unsubscribe' => $unsubscribe
 		));
 		$this->sendMessage(

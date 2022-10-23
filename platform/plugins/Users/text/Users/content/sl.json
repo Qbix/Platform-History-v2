@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Izberite dobro <strong>geslo<\/strong> , da zaščitite svoj račun. Oglejte si predloge za nekaj idej.",
         "LogOutAndTryAgain": "Odjavite se in poskusite znova",
         "IfYouFeel": "Če menite, da je šlo nekaj narobe, lahko",
-        "SetIdentifierButtonTitle": "začeti znova"
+        "SetIdentifierButtonTitle": "začeti znova",
+        "OneTimeCode": "Vnesite kodo, ki ste jo prejeli:",
+        "ActivateMyAccount": "Aktiviraj moj račun"
     },
     "session": {
         "GetStarted": "Začeti"

@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Каб абараніць свой уліковы запіс, выберыце добрую <strong>парольную фразу<\/strong> . Глядзіце прапановы для некаторых ідэй.",
         "LogOutAndTryAgain": "Выйдзіце і паспрабуйце яшчэ раз",
         "IfYouFeel": "Калі вы адчуваеце, што нешта пайшло не так, вы можаце",
-        "SetIdentifierButtonTitle": "пачаць спачатку"
+        "SetIdentifierButtonTitle": "пачаць спачатку",
+        "OneTimeCode": "Увядзіце код, які вы атрымалі:",
+        "ActivateMyAccount": "Актываваць мой уліковы запіс"
     },
     "session": {
         "GetStarted": "Пачаць"

@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Aukeratu <strong>pasaesaldi<\/strong> on bat zure kontua babesteko. Ikusi ideia batzuen iradokizunak.",
         "LogOutAndTryAgain": "Amaitu saioa eta saiatu berriro",
         "IfYouFeel": "Zerbait gaizki joan dela sentitzen baduzu, egin dezakezu",
-        "SetIdentifierButtonTitle": "berriro hasi"
+        "SetIdentifierButtonTitle": "berriro hasi",
+        "OneTimeCode": "Sartu jaso duzun kodea:",
+        "ActivateMyAccount": "Aktibatu Nire kontua"
     },
     "session": {
         "GetStarted": "Hasi"

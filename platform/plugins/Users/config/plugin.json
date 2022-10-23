@@ -41,6 +41,7 @@
 			"Users/session": {"module": "Users", "action": "session"},
 			"Users/analytics": {"module": "Users", "action": "analytics"},
 			"Users/authorize": {"module": "Users", "action": "authorize"},
+			"Users/unsubscribe": {"module": "Users", "action": "unsubscribe"},
 			"appleLogin": {"module": "Users", "action": "appleLogin"},
 			"Q/uploads/Users/:userId/icon/:timestamp/:size.png": {"mobile": "Users", "action": "missingIcon"},
 			"Q/plugins/Users/:action": {"module": "Users"},
@@ -66,7 +67,9 @@
 		},
 		"text": {
 			"Users": {
-				"*": ["Users/content"]
+				"*": ["Users/content"],
+				"email": ["Users/email"],
+				"sms": ["Users/sms"]
 			}
 		},
 		"views": {

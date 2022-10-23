@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "เลือก <strong>วลีรหัสผ่าน<\/strong> ที่ดีเพื่อปกป้องบัญชีของคุณ ดูคำแนะนำสำหรับแนวคิดบางอย่าง",
         "LogOutAndTryAgain": "ออกจากระบบแล้วลองอีกครั้ง",
         "IfYouFeel": "หากคุณรู้สึกว่ามีบางอย่างผิดพลาด คุณสามารถ",
-        "SetIdentifierButtonTitle": "เริ่มต้นใหม่"
+        "SetIdentifierButtonTitle": "เริ่มต้นใหม่",
+        "OneTimeCode": "ป้อนรหัสที่คุณได้รับ:",
+        "ActivateMyAccount": "เปิดใช้งานบัญชีของฉัน"
     },
     "session": {
         "GetStarted": "เริ่ม"

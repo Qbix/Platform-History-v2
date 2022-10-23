@@ -3433,7 +3433,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Unsubscribe from one or more streams, to stop receiving notifications.
-	 * Pooststs "Streams/unsubscribe" message to the streams.
+	 * Posts "Streams/unsubscribe" message to the streams.
 	 * Also posts "Streams/unsubscribed" messages to user's "Streams/participating" stream.
 	 * Does not change the actual subscription, but only the participant row.
 	 * (When subscribing again, the existing subscription will be used.)

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Roghnaigh <strong>pasfhrása<\/strong> maith chun do chuntas a chosaint. Féach ar na moltaí le haghaidh roinnt smaointe.",
         "LogOutAndTryAgain": "Logáil Amach agus Bain triail eile as",
         "IfYouFeel": "Má bhraitheann tú go ndeachaigh rud éigin mícheart, is féidir leat",
-        "SetIdentifierButtonTitle": "thosaigh arís"
+        "SetIdentifierButtonTitle": "thosaigh arís",
+        "OneTimeCode": "Cuir isteach an cód a fuair tú:",
+        "ActivateMyAccount": "Gníomhachtaigh Mo Chuntas"
     },
     "session": {
         "GetStarted": "Tosaigh"

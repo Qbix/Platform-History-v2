@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Ongi etorri {{1}}-ra.",
+        "ClickHere": "Egin klik hemen zure kontua aktibatzeko: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Egin klik hemen zure mugikorraren zenbakia egiaztatzeko: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Pasaesaldia {{1}}-n berrezarri nahi al duzu?",
+        "ClickHere": "Ondoren, egin klik hemen: {{1}}"
+    }
+}

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa laluan<\/strong> yang baik untuk melindungi akaun anda. Lihat cadangan untuk beberapa idea.",
         "LogOutAndTryAgain": "Log Keluar dan Cuba Lagi",
         "IfYouFeel": "Jika anda rasa sesuatu telah berlaku, anda boleh",
-        "SetIdentifierButtonTitle": "mula semula"
+        "SetIdentifierButtonTitle": "mula semula",
+        "OneTimeCode": "Masukkan kod yang anda terima:",
+        "ActivateMyAccount": "Aktifkan Akaun Saya"
     },
     "session": {
         "GetStarted": "Mulakan"

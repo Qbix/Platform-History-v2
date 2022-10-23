@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "欢迎使用 {{1}}。",
+        "ClickHere": "单击此处激活您的帐户：{{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "点击此处验证您的手机号码：{{1}}"
+    },
+    "resend": {
+        "DidYouWant": "您想在 {{1}} 中重置您的密码吗？",
+        "ClickHere": "然后点击这里：{{1}}"
+    }
+}

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "アカウントを保護するための適切な<strong>パスフレーズ<\/strong>を選択してください。いくつかのアイデアの提案を参照してください。",
         "LogOutAndTryAgain": "ログアウトして再試行してください",
         "IfYouFeel": "何かがうまくいかなかったと感じたら、",
-        "SetIdentifierButtonTitle": "最初からやり直す"
+        "SetIdentifierButtonTitle": "最初からやり直す",
+        "OneTimeCode": "受け取ったコードを入力してください:",
+        "ActivateMyAccount": "マイアカウントを有効にする"
     },
     "session": {
         "GetStarted": "はじめに"

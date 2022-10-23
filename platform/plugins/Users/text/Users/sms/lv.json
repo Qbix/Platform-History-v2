@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Laipni lūdzam pakalpojumā {{1}}.",
+        "ClickHere": "Noklikšķiniet šeit, lai aktivizētu savu kontu: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Noklikšķiniet šeit, lai verificētu savu mobilā tālruņa numuru: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Vai vēlējāties atiestatīt ieejas frāzi šādā valodā: {{1}}?",
+        "ClickHere": "Pēc tam noklikšķiniet šeit: {{1}}"
+    }
+}

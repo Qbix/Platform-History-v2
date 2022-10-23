@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Welkom! Verifieer asseblief jou e-posadres.",
+        "Thanks": "Welkom by {{1}}",
+        "ReallyYourEmail": "Is dit regtig jou e-posadres, {{1}}? Indien wel, klik <a href='{{2}}'>hier<\/a> om jou wagwoordfrase te stel en jou rekening te aktiveer.",
+        "SeeYou": "Sien jou op <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Welkom! Bevestig jou e-pos adres."
+    },
+    "resend": {
+        "Subject": "Haai, het jy jou wagwoordfrase vergeet?",
+        "Thanks": "Dankie vir jou besoek {{1}}",
+        "YouAreReceiving": "Jy ontvang hierdie e-pos omdat iemand jou e-posadres ingevoer het en &quot;wagfrase vergeet&quot; geklik het. As dit nie jy was nie, ignoreer eenvoudig hierdie boodskap.",
+        "Reset": "Om jou wagfrase terug te stel, klik {{1}}",
+        "SetUpPassphrase": "Stel wagfrase op"
+    },
+    "SeeYou": "Sien jou op {{1}}!",
+    "LinkToUnsubscribe": "Hier is &#39;n skakel om uit te <a href='{{1}}'>teken<\/a> as jy nie meer e-posse wil kry nie."
+}

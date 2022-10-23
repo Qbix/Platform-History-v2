@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Hesabınızı korumak için iyi bir <strong>parola<\/strong> seçin. Bazı fikirler için önerilere bakın.",
         "LogOutAndTryAgain": "Oturumu Kapatın ve Tekrar Deneyin",
         "IfYouFeel": "Bir şeylerin ters gittiğini hissederseniz, şunları yapabilirsiniz:",
-        "SetIdentifierButtonTitle": "baştan başlamak"
+        "SetIdentifierButtonTitle": "baştan başlamak",
+        "OneTimeCode": "Aldığınız kodu girin:",
+        "ActivateMyAccount": "Hesabımı Etkinleştir"
     },
     "session": {
         "GetStarted": "Başlamak"

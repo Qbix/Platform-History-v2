@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Fáilte go {{1}}.",
+        "ClickHere": "Cliceáil anseo chun do chuntas a ghníomhachtú: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Cliceáil anseo chun d&#39;uimhir ghutháin phóca a fhíorú: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "An raibh tú ag iarraidh do phasfhrása a athshocrú in {{1}}?",
+        "ClickHere": "Ansin cliceáil anseo: {{1}}"
+    }
+}

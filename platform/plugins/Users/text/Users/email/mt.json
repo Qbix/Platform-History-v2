@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Merħba! Jekk jogħġbok ivverifika l-indirizz elettroniku tiegħek.",
+        "Thanks": "Merħba għal {{1}}",
+        "ReallyYourEmail": "Dan huwa verament l-indirizz elettroniku tiegħek, {{1}}? Jekk iva, ikklikkja <a href='{{2}}'>hawn<\/a> biex issettja l-passphrase tiegħek u tattiva l-kont tiegħek.",
+        "SeeYou": "Narawkom fuq <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Merħba! Ivverifika l-indirizz elettroniku tiegħek."
+    },
+    "resend": {
+        "Subject": "Ħej, insejt il-passphrase tiegħek?",
+        "Thanks": "Grazzi talli żort {{1}}",
+        "YouAreReceiving": "Qed tirċievi din l-email għax xi ħadd daħħal l-indirizz tal-email tiegħek u kklikkja &quot;forgot passphrase&quot;. Jekk ma kontx int, sempliċement injora dan il-messaġġ.",
+        "Reset": "Biex tirrisettja l-passphrase tiegħek, ikklikkja {{1}}",
+        "SetUpPassphrase": "Stabbilixxi passphrase"
+    },
+    "SeeYou": "Narawkom fuq {{1}}!",
+    "LinkToUnsubscribe": "Hawnhekk hawn link biex tneħħi l- <a href='{{1}}'>abbonament<\/a> jekk ma tridx tirċievi aktar emails."
+}

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Valitse hyvä <strong>tunnuslause<\/strong> tilisi suojaamiseksi. Katso ehdotuksista joitain ideoita.",
         "LogOutAndTryAgain": "Kirjaudu ulos ja yritä uudelleen",
         "IfYouFeel": "Jos sinusta tuntuu, että jokin meni pieleen, voit",
-        "SetIdentifierButtonTitle": "aloittaa alusta"
+        "SetIdentifierButtonTitle": "aloittaa alusta",
+        "OneTimeCode": "Syötä saamasi koodi:",
+        "ActivateMyAccount": "Aktivoi Oma tili"
     },
     "session": {
         "GetStarted": "Aloittaa"

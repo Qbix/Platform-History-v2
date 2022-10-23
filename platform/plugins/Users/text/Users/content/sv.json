@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Välj en bra <strong>lösenordsfras<\/strong> för att skydda ditt konto. Se förslagen för några idéer.",
         "LogOutAndTryAgain": "Logga ut och försök igen",
         "IfYouFeel": "Om du känner att något gick fel kan du",
-        "SetIdentifierButtonTitle": "börja om"
+        "SetIdentifierButtonTitle": "börja om",
+        "OneTimeCode": "Ange koden du fick:",
+        "ActivateMyAccount": "Aktivera Mitt konto"
     },
     "session": {
         "GetStarted": "Komma igång"

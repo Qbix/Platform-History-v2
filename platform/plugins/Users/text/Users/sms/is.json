@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Velkomin í {{1}}.",
+        "ClickHere": "Smelltu hér til að virkja reikninginn þinn: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Smelltu hér til að staðfesta farsímanúmerið þitt: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Vildirðu endurstilla aðgangsorðið þitt í {{1}}?",
+        "ClickHere": "Smelltu síðan hér: {{1}}"
+    }
+}

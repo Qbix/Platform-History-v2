@@ -1,5 +1,5 @@
 <h1>
-	Thanks for signing up with <?php echo $communityName ?>,
+	<?php echo Q::text($activation['Thanks'], array($communityName)) ?>,
 	<?php echo $user->username ?>
 </h1>
 

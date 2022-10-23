@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Velkominn! Vinsamlegast staðfestu netfangið þitt.",
+        "Thanks": "Velkomin(n) til {{1}}",
+        "ReallyYourEmail": "Er þetta virkilega netfangið þitt, {{1}}? Ef svo er, smelltu <a href='{{2}}'>hér<\/a> til að stilla lykilorðið þitt og virkja reikninginn þinn.",
+        "SeeYou": "Sjáumst á <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Velkominn! Staðfestu netfangið þitt."
+    },
+    "resend": {
+        "Subject": "Hæ, gleymdirðu lykilorðinu þínu?",
+        "Thanks": "Takk fyrir að heimsækja {{1}}",
+        "YouAreReceiving": "Þú færð þennan tölvupóst vegna þess að einhver sló inn netfangið þitt og smellti á „gleymdi aðgangsorð“. Ef það varst ekki þú skaltu einfaldlega hunsa þessi skilaboð.",
+        "Reset": "Til að endurstilla aðgangsorðið þitt skaltu smella á {{1}}",
+        "SetUpPassphrase": "Settu upp lykilorð"
+    },
+    "SeeYou": "Sjáumst á {{1}}!",
+    "LinkToUnsubscribe": "Hér er hlekkur til að segja upp <a href='{{1}}'>áskrift<\/a> ef þú vilt ekki fá fleiri tölvupósta."
+}

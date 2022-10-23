@@ -55,7 +55,7 @@ function Users_activate_response_content()
 	}
 	$verb_ue = urlencode($arr['verbs'][random_int(0, count($arr['verbs']) - 1)]);
 	$noun_ue = urlencode($arr['nouns'][random_int(0, count($arr['nouns']) - 1)]);
-	$code = Q::ifset($_REQUEST['code']);
+	$code = Q::ifset($_REQUEST, 'code', null);
 	
 	if ($key = Q_Config::get('Users', 'newsapi', 'key', null)) {
 		$words = 3;
@@ -89,7 +89,7 @@ function Users_activate_response_content()
 					'sortBy' => 'latest',
 					'apiKey' => $key
 				));
-				$json = file_get_contents($url);
+				$json = Q_Utils::get($url);
 				$result = Q::json_decode($json, true);
 				if (isset($result['articles'])) {
 					foreach ($result['articles'] as $article) {

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "اپنے اکاؤنٹ کی حفاظت کے لیے ایک اچھا <strong>پاس جملہ<\/strong> منتخب کریں۔ کچھ خیالات کے لیے تجاویز دیکھیں۔",
         "LogOutAndTryAgain": "لاگ آؤٹ کریں اور دوبارہ کوشش کریں۔",
         "IfYouFeel": "اگر آپ کو لگتا ہے کہ کچھ غلط ہو گیا ہے، تو آپ کر سکتے ہیں۔",
-        "SetIdentifierButtonTitle": "پھر سے شروع"
+        "SetIdentifierButtonTitle": "پھر سے شروع",
+        "OneTimeCode": "آپ کو موصول ہونے والا کوڈ درج کریں:",
+        "ActivateMyAccount": "میرا اکاؤنٹ ایکٹیویٹ کریں۔"
     },
     "session": {
         "GetStarted": "شروع کرنے کے"

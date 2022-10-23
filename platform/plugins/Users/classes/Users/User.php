@@ -612,6 +612,7 @@ class Users_User extends Base_Users_User
 		}
 		$querystring = http_build_query($arr);
 		$link = Q_Uri::url("Users/activate?$querystring");
+		Users::$cache['Users/activate link'] = $link;
 		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $email->authCode, 
 			'e' => $email->address
@@ -649,6 +650,8 @@ class Users_User extends Base_Users_User
 				'communitySuffix' => $communitySuffix,
 				'baseUrl' => Q_Request::baseUrl(),
 				'link' => $link,
+				'code' => $mobile->activationCode,
+				'domain' => parse_url($baseUrl, PHP_URL_HOST),
 				'unsubscribe' => $unsubscribe
 			));
 			$email->sendMessage(
@@ -921,6 +924,7 @@ class Users_User extends Base_Users_User
 		}
 		$querystring = http_build_query($arr);
 		$link = Q_Uri::url("Users/activate?$querystring");
+		Users::$cache['Users/activate link'] = $link;
 		$unsubscribe = Q_Uri::url('Users/unsubscribe?' . http_build_query(array(
 			'authCode' =>  $mobile->authCode, 
 			'm' => $mobile->number
@@ -944,13 +948,16 @@ class Users_User extends Base_Users_User
 					'Users', 'transactional', $activation, 'sms', 'Users/sms/activation.php'
 				);
 			}
+			$baseUrl = Q_Request::baseUrl();
 			$fields2 = array_merge($fields, array(
 				'user' => $this,
 				'mobile' => $mobile,
 				'app' => Q::app(),
 				'communityName' => $communityName,
 				'communitySuffix' => $communitySuffix,
-				'baseUrl' => Q_Request::baseUrl(),
+				'baseUrl' => $baseUrl,
+				'code' => $mobile->activationCode,
+				'domain' => parse_url($baseUrl, PHP_URL_HOST),
 				'link' => $link
 			));
 			$mobile->sendMessage(

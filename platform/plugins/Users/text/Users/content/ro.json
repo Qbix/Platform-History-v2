@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Alegeți o <strong>expresie<\/strong> de acces bună pentru a vă proteja contul. Vedeți sugestiile pentru câteva idei.",
         "LogOutAndTryAgain": "Deconectați-vă și încercați din nou",
         "IfYouFeel": "Dacă simți că ceva nu a mers prost, poți",
-        "SetIdentifierButtonTitle": "ia de la capăt"
+        "SetIdentifierButtonTitle": "ia de la capăt",
+        "OneTimeCode": "Introdu codul primit:",
+        "ActivateMyAccount": "Activați contul meu"
     },
     "session": {
         "GetStarted": "Incepe"

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Chọn một <strong>cụm từ<\/strong> tốt để bảo vệ tài khoản của bạn. Xem các gợi ý để biết một số ý tưởng.",
         "LogOutAndTryAgain": "Đăng xuất và thử lại",
         "IfYouFeel": "Nếu bạn cảm thấy có điều gì đó không ổn, bạn có thể",
-        "SetIdentifierButtonTitle": "bắt đầu lại"
+        "SetIdentifierButtonTitle": "bắt đầu lại",
+        "OneTimeCode": "Nhập mã bạn nhận được:",
+        "ActivateMyAccount": "Kích hoạt tài khoản của tôi"
     },
     "session": {
         "GetStarted": "Bắt đầu"

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Изаберите добру <strong>лозинку<\/strong> да бисте заштитили свој налог. Погледајте предлоге за неке идеје.",
         "LogOutAndTryAgain": "Одјавите се и покушајте поново",
         "IfYouFeel": "Ако осећате да је нешто пошло наопако, можете",
-        "SetIdentifierButtonTitle": "почети испочетка"
+        "SetIdentifierButtonTitle": "почети испочетка",
+        "OneTimeCode": "Унесите код који сте добили:",
+        "ActivateMyAccount": "Активирајте мој налог"
     },
     "session": {
         "GetStarted": "Почети"

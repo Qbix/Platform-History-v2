@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "აირჩიეთ კარგი <strong>საპასუხო ფრაზა<\/strong> თქვენი ანგარიშის დასაცავად. იხილეთ წინადადებები რამდენიმე იდეისთვის.",
         "LogOutAndTryAgain": "გამოდით და სცადეთ ხელახლა",
         "IfYouFeel": "თუ გრძნობთ, რომ რაღაც არასწორედ მოხდა, შეგიძლიათ",
-        "SetIdentifierButtonTitle": "თავიდან დაწყება"
+        "SetIdentifierButtonTitle": "თავიდან დაწყება",
+        "OneTimeCode": "შეიყვანეთ მიღებული კოდი:",
+        "ActivateMyAccount": "გააქტიურეთ ჩემი ანგარიში"
     },
     "session": {
         "GetStarted": "Დაიწყე"

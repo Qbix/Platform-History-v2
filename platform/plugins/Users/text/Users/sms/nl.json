@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Welkom bij {{1}}.",
+        "ClickHere": "Klik hier om uw account te activeren: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Klik hier om uw mobiele nummer te verifiëren: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Wilt u uw wachtwoordzin opnieuw instellen in {{1}}?",
+        "ClickHere": "Klik dan hier: {{1}}"
+    }
+}

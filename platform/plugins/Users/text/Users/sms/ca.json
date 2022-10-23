@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Benvingut a {{1}}.",
+        "ClickHere": "Feu clic aquí per activar el vostre compte: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Feu clic aquí per verificar el vostre número de mòbil: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Voleu restablir la vostra frase de contrasenya a {{1}}?",
+        "ClickHere": "A continuació, feu clic aquí: {{1}}"
+    }
+}

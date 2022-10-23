@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Изберете добра <strong>парола,<\/strong> за да защитите акаунта си. Вижте предложенията за някои идеи.",
         "LogOutAndTryAgain": "Излезте и опитайте отново",
         "IfYouFeel": "Ако чувствате, че нещо се е объркало, можете",
-        "SetIdentifierButtonTitle": "Започни отначало"
+        "SetIdentifierButtonTitle": "Започни отначало",
+        "OneTimeCode": "Въведете кода, който сте получили:",
+        "ActivateMyAccount": "Активиране на моя акаунт"
     },
     "session": {
         "GetStarted": "Първи стъпки"

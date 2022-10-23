@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Karibu kwenye {{1}}.",
+        "ClickHere": "Bofya hapa ili kuwezesha akaunti yako: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Bofya hapa ili kuthibitisha nambari yako ya simu: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Je, ulitaka kuweka upya neno lako la siri katika {{1}}?",
+        "ClickHere": "Kisha bofya hapa: {{1}}"
+    }
+}

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Izvēlieties labu <strong>ieejas frāzi<\/strong> , lai aizsargātu savu kontu. Skatiet ieteikumus dažām idejām.",
         "LogOutAndTryAgain": "Izejiet un mēģiniet vēlreiz",
         "IfYouFeel": "Ja jūtat, ka kaut kas nogāja greizi, varat",
-        "SetIdentifierButtonTitle": "sākt no jauna"
+        "SetIdentifierButtonTitle": "sākt no jauna",
+        "OneTimeCode": "Ievadiet saņemto kodu:",
+        "ActivateMyAccount": "Aktivizējiet Manu kontu"
     },
     "session": {
         "GetStarted": "Sāc"

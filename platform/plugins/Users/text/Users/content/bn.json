@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "আপনার অ্যাকাউন্ট রক্ষা করার জন্য একটি ভাল <strong>পাস বাক্যাংশ<\/strong> চয়ন করুন। কিছু ধারণা জন্য পরামর্শ দেখুন.",
         "LogOutAndTryAgain": "লগ আউট এবং আবার চেষ্টা করুন",
         "IfYouFeel": "আপনি যদি মনে করেন কিছু ভুল হয়েছে, আপনি করতে পারেন",
-        "SetIdentifierButtonTitle": "নতুন করে শুরু কর"
+        "SetIdentifierButtonTitle": "নতুন করে শুরু কর",
+        "OneTimeCode": "আপনি যে কোডটি পেয়েছেন তা লিখুন:",
+        "ActivateMyAccount": "আমার অ্যাকাউন্ট সক্রিয় করুন"
     },
     "session": {
         "GetStarted": "এবার শুরু করা যাক"

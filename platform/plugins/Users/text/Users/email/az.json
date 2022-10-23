@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Xoş gəldiniz! Zəhmət olmasa e-poçt ünvanınızı yoxlayın.",
+        "Thanks": "{{1}}-a xoş gəlmisiniz",
+        "ReallyYourEmail": "Bu həqiqətən sizin e-poçt ünvanınızdır, {{1}}? Əgər belədirsə, parolunuzu təyin etmək və hesabınızı aktivləşdirmək üçün <a href='{{2}}'>bura<\/a> klikləyin.",
+        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> ilə görüşənədək!"
+    },
+    "identifier": {
+        "Subject": "Xoş gəldiniz! E-poçt ünvanınızı doğrulayın."
+    },
+    "resend": {
+        "Subject": "Hey, parol sözünü unutmusan?",
+        "Thanks": "Ziyarət etdiyiniz üçün təşəkkür edirik {{1}}",
+        "YouAreReceiving": "Kimsə e-poçt ünvanınızı daxil edib &quot;parol sözünü unutdum&quot; kliklədiyi üçün bu e-məktubu alırsınız. Əgər siz deyildinizsə, sadəcə olaraq bu mesaja məhəl qoymayın.",
+        "Reset": "Parol ifadənizi sıfırlamaq üçün {{1}} üzərinə klikləyin",
+        "SetUpPassphrase": "Parol sözünü quraşdırın"
+    },
+    "SeeYou": "{{1}}-da görüşənədək!",
+    "LinkToUnsubscribe": "Budur, daha çox e-poçt almaq <a href='{{1}}'>istəmirsinizsə<\/a> , abunəni ləğv etmək üçün bir keçid."
+}

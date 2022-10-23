@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Vælg en god <strong>adgangssætning<\/strong> for at beskytte din konto. Se forslagene til nogle ideer.",
         "LogOutAndTryAgain": "Log ud og prøv igen",
         "IfYouFeel": "Hvis du føler noget gik galt, kan du det",
-        "SetIdentifierButtonTitle": "start forfra"
+        "SetIdentifierButtonTitle": "start forfra",
+        "OneTimeCode": "Indtast koden du har modtaget:",
+        "ActivateMyAccount": "Aktiver Min konto"
     },
     "session": {
         "GetStarted": "Kom igang"

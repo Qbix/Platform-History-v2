@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Velkommen til {{1}}.",
+        "ClickHere": "Klik her for at aktivere din konto: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Klik her for at bekræfte dit mobilnummer: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Ville du nulstille din adgangssætning i {{1}}?",
+        "ClickHere": "Klik derefter her: {{1}}"
+    }
+}

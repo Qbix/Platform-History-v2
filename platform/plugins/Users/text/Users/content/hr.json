@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Odaberite dobar <strong>zaporni izraz<\/strong> kako biste zaštitili svoj račun. Pogledajte prijedloge za neke ideje.",
         "LogOutAndTryAgain": "Odjavite se i pokušajte ponovno",
         "IfYouFeel": "Ako osjećate da je nešto pošlo po zlu, možete",
-        "SetIdentifierButtonTitle": "početi ispočetka"
+        "SetIdentifierButtonTitle": "početi ispočetka",
+        "OneTimeCode": "Unesite kod koji ste primili:",
+        "ActivateMyAccount": "Aktiviraj moj račun"
     },
     "session": {
         "GetStarted": "Započnite"

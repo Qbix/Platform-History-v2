@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Pilih <strong>frasa sandi yang baik<\/strong> untuk melindungi akun Anda. Lihat saran untuk beberapa ide.",
         "LogOutAndTryAgain": "Logout dan Coba Lagi",
         "IfYouFeel": "Jika Anda merasa ada yang salah, Anda bisa",
-        "SetIdentifierButtonTitle": "mulai lagi dari awal"
+        "SetIdentifierButtonTitle": "mulai lagi dari awal",
+        "OneTimeCode": "Masukkan kode yang Anda terima:",
+        "ActivateMyAccount": "Aktifkan Akun Saya"
     },
     "session": {
         "GetStarted": "Memulai"

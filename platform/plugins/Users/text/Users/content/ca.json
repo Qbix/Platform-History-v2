@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Trieu una bona <strong>frase<\/strong> de contrasenya per protegir el vostre compte. Consulteu els suggeriments per a algunes idees.",
         "LogOutAndTryAgain": "Tanca la sessió i torna-ho a provar",
         "IfYouFeel": "Si creus que alguna cosa ha anat malament, pots",
-        "SetIdentifierButtonTitle": "comença de nou"
+        "SetIdentifierButtonTitle": "comença de nou",
+        "OneTimeCode": "Introdueix el codi que has rebut:",
+        "ActivateMyAccount": "Activa el meu compte"
     },
     "session": {
         "GetStarted": "Començar"

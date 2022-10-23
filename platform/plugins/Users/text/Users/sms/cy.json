@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Croeso i {{1}}.",
+        "ClickHere": "Cliciwch yma i actifadu eich cyfrif: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Cliciwch yma i wirio eich rhif ffôn symudol: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Oeddech chi am ailosod eich cyfrinair yn {{1}}?",
+        "ClickHere": "Yna cliciwch yma: {{1}}"
+    }
+}

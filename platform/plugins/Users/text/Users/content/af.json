@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Kies &#39;n goeie <strong>wagwoordfrase<\/strong> om jou rekening te beskerm. Sien die voorstelle vir &#39;n paar idees.",
         "LogOutAndTryAgain": "Meld af en probeer weer",
         "IfYouFeel": "As jy voel iets het verkeerd geloop, kan jy",
-        "SetIdentifierButtonTitle": "oorbegin"
+        "SetIdentifierButtonTitle": "oorbegin",
+        "OneTimeCode": "Voer die kode in wat jy ontvang het:",
+        "ActivateMyAccount": "Aktiveer my rekening"
     },
     "session": {
         "GetStarted": "Begin"

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Escolle unha boa <strong>frase de paso<\/strong> para protexer a túa conta. Consulta as suxestións para algunhas ideas.",
         "LogOutAndTryAgain": "Pecha sesión e téntao de novo",
         "IfYouFeel": "Se cres que algo saíu mal, podes",
-        "SetIdentifierButtonTitle": "comezar de novo"
+        "SetIdentifierButtonTitle": "comezar de novo",
+        "OneTimeCode": "Introduza o código que recibiu:",
+        "ActivateMyAccount": "Activa a miña conta"
     },
     "session": {
         "GetStarted": "Comezar"

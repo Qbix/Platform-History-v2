@@ -1,2 +1,2 @@
-Did you want to reset your passphrase in <?php echo $communityName ?>? Then click here:
-<?php echo Q_Uri::url($link) ?>
+<?php echo Q::text($resend['DidYouWant'], array($communityName)) ?>
+<?php echo $resend['ClickHere'], array(Q_Uri::url($link)) ?>

@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "¡Bienvenidos! Por favor verifique su dirección de correo electrónico.",
+        "Thanks": "Bienvenido a {{1}}",
+        "ReallyYourEmail": "¿Es esta realmente tu dirección de correo electrónico, {{1}}? Si es así, haga clic <a href='{{2}}'>aquí<\/a> para configurar su contraseña y activar su cuenta.",
+        "SeeYou": "¡Nos vemos el <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "¡Bienvenidos! Verifique su dirección de correo electrónico."
+    },
+    "resend": {
+        "Subject": "Oye, ¿olvidaste tu contraseña?",
+        "Thanks": "Gracias por visitar {{1}}",
+        "YouAreReceiving": "Está recibiendo este correo electrónico porque alguien ingresó su dirección de correo electrónico e hizo clic en &quot;Olvidé mi contraseña&quot;. Si no fuiste tú, simplemente ignora este mensaje.",
+        "Reset": "Para restablecer su frase de contraseña, haga clic en {{1}}",
+        "SetUpPassphrase": "Configurar frase de contraseña"
+    },
+    "SeeYou": "¡Nos vemos el {{1}}!",
+    "LinkToUnsubscribe": "Aquí hay un enlace para <a href='{{1}}'>darse<\/a> de baja si no desea recibir más correos electrónicos."
+}

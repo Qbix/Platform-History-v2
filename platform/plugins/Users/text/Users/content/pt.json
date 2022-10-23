@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Escolha uma boa <strong>senha<\/strong> para proteger sua conta. Veja as sugestões para algumas ideias.",
         "LogOutAndTryAgain": "Saia e tente novamente",
         "IfYouFeel": "Se você sentir que algo deu errado, você pode",
-        "SetIdentifierButtonTitle": "recomeçar"
+        "SetIdentifierButtonTitle": "recomeçar",
+        "OneTimeCode": "Digite o código que você recebeu:",
+        "ActivateMyAccount": "Ativar minha conta"
     },
     "session": {
         "GetStarted": "Iniciar"

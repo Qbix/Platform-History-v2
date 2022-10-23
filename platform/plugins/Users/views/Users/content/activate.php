@@ -9,7 +9,12 @@
 			<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
 				<?php echo Q_Html::formInfo(null) ?>
 				<div class='Q_big_prompt'>
-					<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
+					<?php if ($code): ?>
+						<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
+					<?php else: ?>
+						<?php echo Q::text($activate['OneTimeCode']) ?>
+						<input id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code">
+					<?php endif; ?>
 					<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
 						value="<?php echo Q_Html::text($identifier) ?>"
 						autocomplete="username">
@@ -41,12 +46,19 @@
 					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
 						<?php echo Q_Html::formInfo(null) ?>
 						<input type="password" id='new-password' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
-						<button type="submit" class="Q_button">Activate My Account</button>
 						<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
 							value="<?php echo Q_Html::text($identifier) ?>"
 							autocomplete="username">
-						<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
 						<input type="hidden" name="isHashed" value="0" id="Users_login_isHashed">
+						<?php if ($code): ?>
+							<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
+						<?php else: ?>
+							<?php echo Q::text($activate['OneTimeCode']) ?>
+							<input id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code"><br>
+						<?php endif; ?>
+						<div class="Q_buttons">
+							<button type="submit" class="Q_button"><?php echo Q_Html::text($activate['ActivateMyAccount']) ?></button>
+						</div>
 						<?php if (!empty($_REQUEST['p'])): ?>
 							<input type="hidden" name="p" value="1">
 						<?php endif; ?>

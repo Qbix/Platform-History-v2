@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Valige oma konto kaitsmiseks hea <strong>parool<\/strong> . Vaadake mõnede ideede soovitusi.",
         "LogOutAndTryAgain": "Logige välja ja proovige uuesti",
         "IfYouFeel": "Kui tunnete, et midagi läks valesti, saate seda teha",
-        "SetIdentifierButtonTitle": "Alusta uuesti"
+        "SetIdentifierButtonTitle": "Alusta uuesti",
+        "OneTimeCode": "Sisesta saadud kood:",
+        "ActivateMyAccount": "Aktiveeri Minu konto"
     },
     "session": {
         "GetStarted": "Alustama"

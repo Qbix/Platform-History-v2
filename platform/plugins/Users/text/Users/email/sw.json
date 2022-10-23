@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Karibu! Tafadhali thibitisha anwani yako ya barua pepe.",
+        "Thanks": "Karibu kwenye {{1}}",
+        "ReallyYourEmail": "Je, hii kweli ni anwani yako ya barua pepe, {{1}}? Ikiwa ndivyo, bofya <a href='{{2}}'>hapa<\/a> ili kuweka kaulisiri yako na kuamilisha akaunti yako.",
+        "SeeYou": "Tuonane kwenye <a href='{{1}}'>{{100}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Karibu! Thibitisha anwani yako ya barua pepe."
+    },
+    "resend": {
+        "Subject": "Hujambo, umesahau neno lako la siri?",
+        "Thanks": "Asante kwa kutembelea {{1}}",
+        "YouAreReceiving": "Unapokea barua pepe hii kwa sababu mtu fulani aliingia barua pepe yako na kubofya &quot;umesahau neno la siri&quot;. Ikiwa si wewe, puuza tu ujumbe huu.",
+        "Reset": "Ili kuweka upya kauli yako ya siri, bofya {{1}}",
+        "SetUpPassphrase": "Sanidi kaulisiri"
+    },
+    "SeeYou": "Tuonane kwenye {{1}}!",
+    "LinkToUnsubscribe": "Hapa kuna kiungo cha <a href='{{1}}'>kujiondoa<\/a> ikiwa hutaki kupata barua pepe nyingine."
+}

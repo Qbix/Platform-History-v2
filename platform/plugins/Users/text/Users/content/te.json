@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "మీ ఖాతాను రక్షించడానికి మంచి <strong>పాస్ పదబంధాన్ని<\/strong> ఎంచుకోండి. కొన్ని ఆలోచనల కోసం సూచనలను చూడండి.",
         "LogOutAndTryAgain": "లాగ్ అవుట్ చేసి మళ్లీ ప్రయత్నించండి",
         "IfYouFeel": "ఏదైనా తప్పు జరిగిందని మీకు అనిపిస్తే, మీరు చేయవచ్చు",
-        "SetIdentifierButtonTitle": "మళ్లీ మొదలెట్టు"
+        "SetIdentifierButtonTitle": "మళ్లీ మొదలెట్టు",
+        "OneTimeCode": "మీరు అందుకున్న కోడ్‌ను నమోదు చేయండి:",
+        "ActivateMyAccount": "నా ఖాతాను సక్రియం చేయండి"
     },
     "session": {
         "GetStarted": "ప్రారంభించడానికి"

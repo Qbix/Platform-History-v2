@@ -48,7 +48,7 @@ function Users_activate_objects_email($emailAddress, &$email)
 			throw new Q_Exception("Missing user corresponding to this email address.", "emailAddress");
 		}
 	}
-	if ($email->activationCode != $_REQUEST['code']) {
+	if (!empty($_REQUEST['code']) and $email->activationCode != $_REQUEST['code']) {
 		throw new Q_Exception("The activation code does not match. Did you get a newer email?", 'code');
 	}
 	$timestamp = Users_Email::db()->getCurrentTimestamp();
@@ -95,7 +95,7 @@ function Users_activate_objects_mobile($mobileNumber, &$mobile)
 			));
 		}
 	}
-	if ($mobile->activationCode != $_REQUEST['code']) {
+	if (!empty($_REQUEST['code']) and $mobile->activationCode != $_REQUEST['code']) {
 		throw new Q_Exception("The activation code does not match. Did you get a newer message?", 'code');
 	}
 	$timestamp = Users_Mobile::db()->getCurrentTimestamp();

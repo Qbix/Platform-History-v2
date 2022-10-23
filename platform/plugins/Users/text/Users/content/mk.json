@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Изберете добра <strong>фраза за лозинка<\/strong> за да ја заштитите вашата сметка. Погледнете ги предлозите за некои идеи.",
         "LogOutAndTryAgain": "Одјавете се и обидете се повторно",
         "IfYouFeel": "Ако чувствувате дека нешто тргна наопаку, можете",
-        "SetIdentifierButtonTitle": "започнете одново"
+        "SetIdentifierButtonTitle": "започнете одново",
+        "OneTimeCode": "Внесете го кодот што го добивте:",
+        "ActivateMyAccount": "Активирајте ја мојата сметка"
     },
     "session": {
         "GetStarted": "Почни"

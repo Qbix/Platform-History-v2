@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Merħba għal {{1}}.",
+        "ClickHere": "Ikklikkja hawn biex tattiva l-kont tiegħek: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Ikklikkja hawn biex tivverifika n-numru tal-mowbajl tiegħek: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Ridt tirrisettja l-passphrase tiegħek fi {{1}}?",
+        "ClickHere": "Imbagħad ikklikkja hawn: {{1}}"
+    }
+}

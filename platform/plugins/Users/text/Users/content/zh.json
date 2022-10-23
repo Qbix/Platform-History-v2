@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "选择一个好的<strong>密码<\/strong>来保护您的帐户。查看一些想法的建议。",
         "LogOutAndTryAgain": "注销并重试",
         "IfYouFeel": "如果您觉得有问题，您可以",
-        "SetIdentifierButtonTitle": "重来"
+        "SetIdentifierButtonTitle": "重来",
+        "OneTimeCode": "输入您收到的代码：",
+        "ActivateMyAccount": "激活我的帐户"
     },
     "session": {
         "GetStarted": "开始使用"

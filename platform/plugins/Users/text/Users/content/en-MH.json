@@ -19,11 +19,13 @@
     },
     "activate": {
         "SetAsPrimary": "Set {{1}} as my primary {{2}}",
-        "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
-        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
+        "ChoosePassPhrase": "Choose a <strong>pass phrase</strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
+        "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase</strong> to protect your account. See the suggestions for some ideas.",
         "LogOutAndTryAgain": "Log Out and Try Again",
         "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetIdentifierButtonTitle": "start over",
+        "OneTimeCode": "Enter the code you received:",
+        "ActivateMyAccount": "Activate My Account"
     },
     "session": {
         "GetStarted": "Get Started"
@@ -86,8 +88,8 @@
         "resendClose": "Close",
         "noPassphrase": "Before you can log in, you must set a pass phrase by clicking the link in your activation message.",
         "notVerified": "You must send yourself an activation message in order to log in.",
-        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
-        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message<\/a>",
+        "emailExists": "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
+        "mobileExists": "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
         "usingOther": "or you can ",
         "prompt": "Choose a username:",
         "newUser": "or create a new account below",
