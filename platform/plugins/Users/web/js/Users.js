@@ -518,7 +518,7 @@
 			user.result = user.authenticated;
 			user.used = platform;
 			Users.loggedInUser = new Users.User(user);
-			Q.nonce = Q.cookie('Q_nonce');
+			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			_doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
 		}, {
 			method: "post",
@@ -927,7 +927,7 @@
 				user.result = priv.result;
 				user.used = priv.used;
 				Users.loggedInUser = new Users.User(user);
-				Q.nonce = Q.cookie('Q_nonce');
+				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			}
 			if (!o.accountStatusUrl) {
 				_onComplete(user);
@@ -1041,7 +1041,7 @@
 					}, 0);
 				}
 				Users.loggedInUser = null;
-				Q.nonce = Q.cookie('Q_nonce');
+				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				loggedOutOf.native = true;
 				p.fill('native')();
 			}
@@ -2876,7 +2876,7 @@
 		if (Q.Users.loggedInUser
 		&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
 			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
-			Q.nonce = Q.cookie('Q_nonce');
+			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		}
 		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
 
@@ -2959,14 +2959,14 @@
 	}, 'Users');
 
 	Q.request.options.onProcessed.set(function (err, response) {
-		Q.nonce = Q.cookie('Q_nonce');
+		Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		if (Users.lastSeenNonce !== Q.nonce
 		&& !Users.login.occurring
 		&& !Users.authenticate.occurring
 		&& !Users.logout.occurring) {
-			Q.nonce = Q.cookie('Q_nonce');
+			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			Q.req("Users/login", 'data', function (err, res) {
-				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce');
+				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				var msg = Q.firstErrorMessage(err, res && res.errors);
 				if (msg) {
 					return Users.onError.handle(msg, err);
