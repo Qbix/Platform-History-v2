@@ -34,7 +34,7 @@
 			directions: 'Create an account, or log in.',
 			directionsNoRegister: 'Log in if you have an account.',
 			explanation: null,
-			goButton: "Go",
+			goButton: "&#11157",
 			passphrase: 'Enter your pass phrase:',
 			loginButton: "Get Started",
 			registerButton: "Get Started",
@@ -1452,7 +1452,7 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', 'data', function (err) {
+									Q.req('Users/resend', 'data', function (err, response) {
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
