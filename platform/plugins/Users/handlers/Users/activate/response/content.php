@@ -14,26 +14,25 @@ function Users_activate_response_content()
 		}
 	}
 	
-	if (!empty(Users::$cache['success'])) {
-		$app = Q::app();
-		$successUrl = Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home");
-		if (Q_Request::method() === 'POST') {
-			if ($qs = $_SERVER['QUERY_STRING']) {
-				$qs = "&$qs";
-			}
-			if (!empty($_REQUEST['redirect'])) {
-				$url = $_REQUEST['redirect'];
-			} else {
-				$url = Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl)
-					.'?Q.fromSuccess=Users/activate'.$qs;
-				$url = Q_Uri::fixUrl(Q::interpolate($url, array(
-					'email' => $emailAddress ? urlencode($emailAddress) : '',
-					'mobile' => $mobileNumber ? urlencode($mobileNumber) : ''
-				)));
-			}
-			Q_Response::redirect($url);
-			return true;
-		}
+	$app = Q::app();
+	$successUrl = Q::ifset($_REQUEST, 'successUrl',
+		Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home")
+	);
+	if ($qs = $_SERVER['QUERY_STRING']) {
+		$qs = "&$qs";
+	}
+	$afterActivate = Q::ifset($_REQUEST, 'afterActivate',
+		Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl)
+	) .'?Q.fromSuccess=Users/activate'.$qs;
+
+	if (!empty(Users::$cache['success'])
+	and Q_Request::method() === 'POST') {
+		$afterActivate = Q_Uri::fixUrl(Q::interpolate($afterActivate, array(
+			'email' => $emailAddress ? urlencode($emailAddress) : '',
+			'mobile' => $mobileNumber ? urlencode($mobileNumber) : ''
+		)));
+		Q_Response::redirect($afterActivate);
+		return true;
 	}
 	
 	$view = Q_Config::get('Users', 'activateView', 'Users/content/activate.php');
@@ -121,7 +120,7 @@ function Users_activate_response_content()
 	$salt_json = Q::json_encode($user ? $user->salt : '');
 
 	return Q::view($view, @compact(
-		'identifier', 'type', 'user', 'code',
+		'identifier', 'type', 'user', 'code', 'afterActivate',
 		'suggestions', 'verb_ue', 'noun_ue', 't', 'app', 'home', 'complete', 'salt_json'
 	));
 }

@@ -926,11 +926,9 @@
 			if (user) {
 				user.result = priv.result;
 				user.used = priv.used;
+				user.activationLink = priv.activationLink;
 				Users.loggedInUser = new Users.User(user);
 				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-			}
-			if (priv.result === 'register') {
-				Q.handle(o.onRegisterSuccess, [priv.activationLink]);
 			}
 			if (!o.accountStatusUrl) {
 				_onComplete(user, Q.copy(priv));
@@ -972,9 +970,9 @@
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
 			var pn = priv.used || 'native';
-			var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
+			var ret = Q.handle(o.onResult, this, [user, o, priv, pn]);
 			if (false !== ret) {
-				Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
+				Q.handle(o.onSuccess, this, [user, o, priv, pn]);
 			}
 			Users.onLogin.handle(user);
 			Users.login.occurring = false;
@@ -2824,23 +2822,25 @@
 
 		Q.Users.login.options = Q.extend({
 			onCancel: new Q.Event(),
-			onSuccess: new Q.Event(function Users_login_onSuccess(user, options) {
+			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
 				// default implementation
 				if (user) {
 					// the user changed, redirect to their home page
 					var urls = Q.urls || {};
-					var nextUrl = user.result === 'registered'
-						? options.onboardingUrl
-						: options.successUrl;
+					var nextUrl = options.successUrl;
+					if (priv.result === 'register') {
+						if (options.onboardingUrl) {
+							nextUrl = options.onboardingUrl;
+						}
+						if (Q.info.isTouchscreen && user.signedUpWith === 'mobile') {
+							nextUrl = Q.url(
+								user.activationLink + '?afterActivate=' + encodeURIComponent(nextUrl)
+							);
+						}
+					}
 					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
 					Q.handle(url);
 				}
-			}, 'Users'),
-			onRegisterSuccess: new Q.Event(function Users_login_onRegisterSuccess (activationLink) {
-				Q.handle(activationLink);
-			}, 'Users'),
-			onResendSuccess: new Q.Event(function Users_login_onResendSuccess (activationLink) {
-				Q.handle(activationLink);
 			}, 'Users'),
 			onResult: new Q.Event(),
 			onRequireComplete: new Q.Event(),

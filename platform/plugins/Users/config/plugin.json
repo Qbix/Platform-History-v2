@@ -68,8 +68,12 @@
 		"text": {
 			"Users": {
 				"*": ["Users/content"],
-				"email": ["Users/email"],
-				"sms": ["Users/sms"]
+				"email": {
+					"*": ["Users/email"]
+				},
+				"sms": {
+					"*": ["Users/sms"]
+				}
 			}
 		},
 		"views": {

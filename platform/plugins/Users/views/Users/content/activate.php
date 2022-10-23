@@ -9,11 +9,12 @@
 			<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
 				<?php echo Q_Html::formInfo(null) ?>
 				<div class='Q_big_prompt'>
+					<input type="hidden" name="afterActivate" value="<?php echo $afterActivate ?>">
 					<?php if ($code): ?>
 						<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
 					<?php else: ?>
 						<?php echo Q::text($activate['OneTimeCode']) ?>
-						<input id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code">
+						<input name="code" id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code">
 					<?php endif; ?>
 					<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
 						value="<?php echo Q_Html::text($identifier) ?>"
@@ -46,6 +47,7 @@
 					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
 						<?php echo Q_Html::formInfo(null) ?>
 						<input type="password" id='new-password' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
+						<input type="hidden" name="afterActivate" value="<?php echo $afterActivate ?>">
 						<input type="hidden" id="activate_identifier" name="<?php echo $t ?>"
 							value="<?php echo Q_Html::text($identifier) ?>"
 							autocomplete="username">
@@ -54,7 +56,7 @@
 							<input type="hidden" name="code" value="<?php echo Q_Html::text($code) ?>">
 						<?php else: ?>
 							<?php echo Q::text($activate['OneTimeCode']) ?>
-							<input id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code"><br>
+							<input name="code" id="single-factor-code-text-field" type="text" autofocus="autofocus" autocomplete="one-time-code"><br>
 						<?php endif; ?>
 						<div class="Q_buttons">
 							<button type="submit" class="Q_button"><?php echo Q_Html::text($activate['ActivateMyAccount']) ?></button>
