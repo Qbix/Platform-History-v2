@@ -24,7 +24,7 @@
 					callback(new Q.Error("Credits/userStream: not logged in"), null);
 					return false;
 				}
-				Streams.get(Users.loggedInUser.id, "Assets/user/credits", callback);
+				Streams.retainWith(true).get(Users.loggedInUser.id, "Assets/user/credits", callback);
 			},
 			/**
 			 * Buy credits
