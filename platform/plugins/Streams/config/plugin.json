@@ -372,6 +372,14 @@
 			"Streams/text/url": {"create": true, "edit": true},
 			"Streams/text/emailAddress": {"create": true, "edit": true},
 			"Streams/text/mobileNumber": {"create": true, "edit": true},
+			"Streams/enum/gender": {"create": true, "edit": true},
+			"Streams/enum/presence": {"create": true, "edit": true},
+			"Streams/number/timezone": {"create": true, "edit": true},
+			"Streams/date/height": {"create": true, "edit": true},
+			"Streams/date/birthday": {"create": true, "edit": true},
+			"Streams/number/age": {"create": true, "edit": true},
+			"Streams/text/affiliation": {"create": true, "edit": true},
+			"Streams/enum/dating": {"create": true, "edit": true},
 			"Streams/date": {"create": true, "edit": true},
 			"Streams/number": {"create": true, "edit": true},
 			"Streams/image": {
@@ -594,7 +602,6 @@
 				"Streams/user/lastName",
 				"Streams/user/emailAddress",
 				"Streams/user/mobileNumber",
-				"Streams/user/birthday",
 				"Streams/user/interests",
 				"Streams/image/album"
 			],
@@ -645,7 +652,19 @@
 		"possibleUserStreams": {
 			"Streams/questions": true,
 			"Streams/answer": true,
-			"Streams/topic": true
+			"Streams/topic": true,
+			"Streams/user/birthday": true,
+			"Streams/user/gender": true,
+			"Streams/user/height": true,
+			"Streams/user/dating": true,
+			"Streams/user/affiliation": true,
+			"Streams/user/age": true,
+			"Streams/user/political": true,
+			"Streams/user/music":  true,
+			"Streams/user/tv": true,
+			"Streams/user/movies": true,
+			"Streams/user/books": true,
+			"Streams/user/urls": true
 		},
 		"calls": {
 			"answered": ["Users/owners", "Users/admins"]

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "계정을 보호하기 위해 좋은 <strong>암호<\/strong> 를 선택하십시오. 몇 가지 아이디어에 대한 제안을 참조하십시오.",
         "LogOutAndTryAgain": "로그아웃하고 다시 시도",
         "IfYouFeel": "문제가 발생했다고 생각되면 다음을 수행할 수 있습니다.",
-        "SetIdentifierButtonTitle": "다시 시작하다"
+        "SetIdentifierButtonTitle": "다시 시작하다",
+        "OneTimeCode": "받은 코드를 입력하세요.",
+        "ActivateMyAccount": "내 계정 활성화"
     },
     "session": {
         "GetStarted": "시작하다"
@@ -72,7 +74,7 @@
         "title": "어서 오십시오",
         "directions": "계정을 만들거나 로그인하세요.",
         "directionsNoRegister": "계정이 있으면 로그인하세요.",
-        "goButton": "가다",
+        "goButton": "⮕",
         "passphrase": "암호를 입력하십시오:",
         "loginButton": "시작하다",
         "registerButton": "시작하다",

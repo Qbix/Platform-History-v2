@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Chagua neno zuri la <strong>pasi<\/strong> ili kulinda akaunti yako. Tazama mapendekezo kwa baadhi ya mawazo.",
         "LogOutAndTryAgain": "Toka na Ujaribu Tena",
         "IfYouFeel": "Ikiwa unahisi kuwa kuna kitu kimeenda vibaya, unaweza",
-        "SetIdentifierButtonTitle": "anza tena"
+        "SetIdentifierButtonTitle": "anza tena",
+        "OneTimeCode": "Weka msimbo uliopokea:",
+        "ActivateMyAccount": "Washa Akaunti Yangu"
     },
     "session": {
         "GetStarted": "Anza"
@@ -72,7 +74,7 @@
         "title": "Karibu",
         "directions": "Unda akaunti, au ingia.",
         "directionsNoRegister": "Ingia ikiwa una akaunti.",
-        "goButton": "Nenda",
+        "goButton": "⮕",
         "passphrase": "Weka maneno yako ya pasi:",
         "loginButton": "Anza",
         "registerButton": "Anza",

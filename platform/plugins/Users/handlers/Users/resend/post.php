@@ -37,8 +37,10 @@ function Users_resend_post()
 	}
 	if ($type === 'email') {
 		$existing = $user->addEmail($identifier);
+		Users::$cache['email'] = $identifier;
 	} else {
 		$existing = $user->addMobile($identifier);
+		Users::$cache['mobile'] = $identifier;
 	}
 	if ($existing) {
 		$existing->resendActivationMessage();

@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
+        "Thanks": "Maligayang pagdating sa {{1}}",
+        "ReallyYourEmail": "Ito ba talaga ang iyong email address, {{1}}? Kung gayon, mag-click <a href='{{2}}'>dito<\/a> upang itakda ang iyong passphrase at i-activate ang iyong account.",
+        "SeeYou": "Magkita-kita tayo sa <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Maligayang pagdating! I-verify ang iyong email address."
+    },
+    "resend": {
+        "Subject": "Uy, nakalimutan mo ba ang iyong passphrase?",
+        "Thanks": "Salamat sa pagbisita {{1}}",
+        "YouAreReceiving": "Natanggap mo ang email na ito dahil may nagpasok ng iyong email address at nag-click sa &quot;nakalimutan ang passphrase&quot;. Kung hindi ikaw, huwag pansinin ang mensaheng ito.",
+        "Reset": "Upang i-reset ang iyong passphrase, i-click ang {{1}}",
+        "SetUpPassphrase": "I-set up ang passphrase"
+    },
+    "SeeYou": "Magkita-kita tayo sa {{1}}!",
+    "LinkToUnsubscribe": "Narito ang isang link upang mag- <a href='{{1}}'>unsubscribe<\/a> kung ayaw mong makakuha ng higit pang mga email."
+}

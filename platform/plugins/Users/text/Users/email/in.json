@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Selamat datang! Harap verifikasi alamat email Anda.",
+        "Thanks": "Selamat datang di {{1}}",
+        "ReallyYourEmail": "Apakah ini benar-benar alamat email Anda, {{1}}? Jika demikian, klik <a href='{{2}}'>di sini<\/a> untuk mengatur frasa sandi Anda dan mengaktifkan akun Anda.",
+        "SeeYou": "Sampai jumpa di <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Selamat datang! Verifikasi alamat email Anda."
+    },
+    "resend": {
+        "Subject": "Hei, apakah Anda lupa kata sandi Anda?",
+        "Thanks": "Terima kasih telah mengunjungi {{1}}",
+        "YouAreReceiving": "Anda menerima email ini karena seseorang memasukkan alamat email Anda dan mengklik &quot;lupa kata sandi&quot;. Jika bukan Anda, abaikan saja pesan ini.",
+        "Reset": "Untuk menyetel ulang frasa sandi Anda, klik {{1}}",
+        "SetUpPassphrase": "Siapkan frasa sandi"
+    },
+    "SeeYou": "Sampai jumpa di {{1}}!",
+    "LinkToUnsubscribe": "Berikut ini tautan untuk <a href='{{1}}'>berhenti berlangganan<\/a> jika Anda tidak ingin menerima email lagi."
+}

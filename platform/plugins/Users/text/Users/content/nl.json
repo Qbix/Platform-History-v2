@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Kies een goede <strong>wachtwoordzin<\/strong> om uw account te beschermen. Zie de suggesties voor enkele ideeën.",
         "LogOutAndTryAgain": "Log uit en probeer het opnieuw",
         "IfYouFeel": "Als u denkt dat er iets mis is gegaan, kunt u",
-        "SetIdentifierButtonTitle": "begin opnieuw"
+        "SetIdentifierButtonTitle": "begin opnieuw",
+        "OneTimeCode": "Vul de code in die je hebt ontvangen:",
+        "ActivateMyAccount": "Activeer mijn account"
     },
     "session": {
         "GetStarted": "Begin"
@@ -61,7 +63,7 @@
         "title": "Welkom",
         "directions": "Maak een account aan, of log in.",
         "directionsNoRegister": "Log in als je een account hebt.",
-        "goButton": "Gaan",
+        "goButton": "",
         "passphrase": "Voer uw wachtwoordzin in:",
         "loginButton": "Begin",
         "registerButton": "Begin",

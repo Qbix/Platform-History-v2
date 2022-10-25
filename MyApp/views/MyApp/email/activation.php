@@ -7,6 +7,11 @@
 		array($user->displayName(), $link)) ?>
 </p>
 
+<p>
+ 	(<?php echo Q::interpolate($resend['DomainCode'], compact('domain', 
+'code')) ?>)
+</p>
+
 <p> 
 	<?php echo Q::interpolate($activation['SeeYou'],
 		array(Q_Request::baseUrl(), $communityName)) ?>

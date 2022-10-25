@@ -273,29 +273,8 @@ class Q_Dispatcher
 					 * @param {array} $routed
 					 */
 					Q::event('Q/validate', self::$routed);
-				
-					if (!isset(self::$skip['Q/errors'])) {
-						// Check if any errors accumulated
-						if (Q_Response::getErrors()) {
-							// There were validation errors -- render a response
-							self::result('Validation errors');
-							self::errors(null, $module, null);
-							return false;
-						}
-					}
 				}
-				
-				// Time to instantiate some app objects from the request
-				if (!isset(self::$skip['Q/objects'])) {
-					/**
-					 * Gives the app a chance to fetch objects needed for handling
-					 * the request.
-					 * @event Q/objects
-					 * @param {array} $routed
-					 */
-					Q::event('Q/objects', self::$routed, true);
-				}
-				
+
 				// We might want to reroute the request
 				if (!isset(self::$skip['Q/reroute'])) {
 					/**
@@ -310,6 +289,28 @@ class Q_Dispatcher
 						return false;
 					}
 				}
+				
+				// Time to instantiate some app objects from the request
+				if (!isset(self::$skip['Q/objects'])) {
+					/**
+					 * Gives the app a chance to fetch objects needed for handling
+					 * the request.
+					 * @event Q/objects
+					 * @param {array} $routed
+					 */
+					Q::event('Q/objects', self::$routed, true);
+				}
+
+				if (!isset(self::$skip['Q/errors'])) {
+					// Check if any errors accumulated
+					if (Q_Response::getErrors()) {
+						// There were validation errors -- render a response
+						self::result('Validation errors');
+						self::errors(null, $module, null);
+						return false;
+					}
+				}
+				
 				// Make some changes to server state, possibly
 				$method = Q_Request::method();
 				if ($method != 'GET') {

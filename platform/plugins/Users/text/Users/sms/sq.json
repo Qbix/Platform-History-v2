@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Mirë se vini në {{1}}.",
+        "ClickHere": "Klikoni këtu për të aktivizuar llogarinë tuaj: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Klikoni këtu për të verifikuar numrin tuaj celular: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Dëshironi të rivendosni frazën tuaj të kalimit në {{1}}?",
+        "ClickHere": "Pastaj klikoni këtu: {{1}}"
+    }
+}

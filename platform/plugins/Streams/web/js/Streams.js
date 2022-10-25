@@ -5553,7 +5553,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 					}
 				}, 300);
 			}
-		}, 300))
+			return false;
+		}, 1000, false, false))
 		.on('keydown', function (e) {
 			if ((e.keyCode || e.which) === 13) {
 				$(this).submit();
@@ -5635,9 +5636,11 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			.html(json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists);
 		$('a', $p).click(function () {
 			$(this).addClass('Q_working');
-			$.post(Q.ajaxExtend(Q.action("Users/resend"), 'data'), 'identifier='+encodeURIComponent(identifier), function () {
+			Q.request({identifier: identifier}, Q.action("Users/resend"), 'data',
+			function (err, response) {
 				overlay.close();
-			});
+				Q.handle(Q.getObject('slots.data.activationLink', response));
+			}, {"method": "post"});
 			return false;
 		});
 		register_form.prepend($p);

@@ -196,6 +196,7 @@ class Q_Text
 		$count = count($try);
 		$tree = new Q_Tree();
 		$sources = array();
+		$options2 = array();
 		for ($j=0; $j<$count; ++$j) {
 			$p = array_merge(array('Q', 'text'), $try[$j], array(null));
 			if ($text = call_user_func_array(array('Q_Config', 'get'), $p)) {

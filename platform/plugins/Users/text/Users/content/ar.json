@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "اختر <strong>عبارة مرور<\/strong> جيدة لحماية حسابك. انظر إلى الاقتراحات لبعض الأفكار.",
         "LogOutAndTryAgain": "سجل الخروج وحاول مرة أخرى",
         "IfYouFeel": "إذا شعرت أن شيئًا ما قد حدث خطأ ، يمكنك ذلك",
-        "SetIdentifierButtonTitle": "ابدأ من جديد"
+        "SetIdentifierButtonTitle": "ابدأ من جديد",
+        "OneTimeCode": "أدخل الرمز الذي تلقيته:",
+        "ActivateMyAccount": "تفعيل حسابي"
     },
     "session": {
         "GetStarted": "البدء"
@@ -61,7 +63,7 @@
         "title": "مرحبا",
         "directions": "إنشاء حساب أو تسجيل الدخول.",
         "directionsNoRegister": "تسجيل الدخول إذا كان لديك حساب.",
-        "goButton": "يذهب",
+        "goButton": "⮕",
         "passphrase": "أدخل عبارة المرور الخاصة بك:",
         "loginButton": "البدء",
         "registerButton": "البدء",

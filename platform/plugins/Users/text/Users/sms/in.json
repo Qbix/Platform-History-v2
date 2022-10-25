@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Selamat datang di {{1}}.",
+        "ClickHere": "Klik di sini untuk mengaktifkan akun Anda: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Klik di sini untuk memverifikasi nomor ponsel Anda: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Apakah Anda ingin menyetel ulang frasa sandi Anda di {{1}}?",
+        "ClickHere": "Kemudian klik di sini: {{1}}"
+    }
+}

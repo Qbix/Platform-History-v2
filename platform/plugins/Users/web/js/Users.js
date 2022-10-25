@@ -34,7 +34,7 @@
 			directions: 'Create an account, or log in.',
 			directionsNoRegister: 'Log in if you have an account.',
 			explanation: null,
-			goButton: "Go",
+			goButton: "&#11157",
 			passphrase: 'Enter your pass phrase:',
 			loginButton: "Get Started",
 			registerButton: "Get Started",
@@ -518,7 +518,7 @@
 			user.result = user.authenticated;
 			user.used = platform;
 			Users.loggedInUser = new Users.User(user);
-			Q.nonce = Q.cookie('Q_nonce');
+			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			_doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
 		}, {
 			method: "post",
@@ -859,7 +859,7 @@
 				var usingPlatforms = {};
 				Q.each(['web3', 'facebook'], function (i, platform) {
 					var appId = (o.appIds && o.appIds[platform]) || Q.info.app;
-					if ((o.using.indexOf('facebook') >= 0)) {
+					if ((o.using.indexOf(platform) >= 0)) {
 						usingPlatforms[platform] = appId;	
 					}
 				});
@@ -926,11 +926,12 @@
 			if (user) {
 				user.result = priv.result;
 				user.used = priv.used;
+				user.activationLink = priv.activationLink;
 				Users.loggedInUser = new Users.User(user);
-				Q.nonce = Q.cookie('Q_nonce');
+				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			}
 			if (!o.accountStatusUrl) {
-				_onComplete(user);
+				_onComplete(user, Q.copy(priv));
 				return;
 			}
 			Q.request(o.accountStatusUrl, 'accountStatus', function (err, response2) {
@@ -941,11 +942,11 @@
 				// DEBUGGING: For debugging purposes
 				Users.login.occurring = false;
 				if (!o.onRequireComplete
-					|| response2.slots.accountStatus === 'complete') {
-					_onComplete(user);
+				|| response2.slots.accountStatus === 'complete') {
+					_onComplete(user, Q.copy(priv));
 				} else if (response2.slots.accountStatus === 'refresh') {
 					// we are logged in, refresh the page
-					Q.handle(window.location);
+					Q.handle(window.location.href);
 					return;
 				} else {
 					// take the user to the profile page which will ask
@@ -969,9 +970,9 @@
 		// login complete - run onSuccess handler
 		function _onComplete(user) {
 			var pn = priv.used || 'native';
-			var ret = Q.handle(o.onResult, this, [user, o, priv.result, pn]);
+			var ret = Q.handle(o.onResult, this, [user, o, priv, pn]);
 			if (false !== ret) {
-				Q.handle(o.onSuccess, this, [user, o, priv.result, pn]);
+				Q.handle(o.onSuccess, this, [user, o, priv, pn]);
 			}
 			Users.onLogin.handle(user);
 			Users.login.occurring = false;
@@ -1041,7 +1042,7 @@
 					}, 0);
 				}
 				Users.loggedInUser = null;
-				Q.nonce = Q.cookie('Q_nonce');
+				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				loggedOutOf.native = true;
 				p.fill('native')();
 			}
@@ -1383,11 +1384,13 @@
 				Users.roles = response.slots.data.roles || {};
 				switch ($this.data('form-type')) {
 					case 'resend':
+						priv.result = 'resend';
 						$('button', $this).html('Sent').attr('disabled', 'disabled');
 						login_setupDialog.dialog.data('Q/dialog').close();
+						Q.handle(Q.getObject('slots.data.activationLink', response));
 						return;
 					case 'register':
-						priv.result = 'registered';
+						priv.result = 'register';
 						break;
 				}
 				priv.used = $('#Users_login_step1_form').data('used');
@@ -1403,9 +1406,11 @@
 					if (login_setupDialog.dialog) {
 						login_setupDialog.dialog.data('Q/dialog').close();
 					}
-					priv.login_onConnect(response.slots.data.user);
+					priv.activationLink = response.slots.data.activationLink;
+					priv.login_onConnect(u);
 				}
 			}, {"method": "post"});
+			return false;
 		}
 
 		function setupLoginForm() {
@@ -1445,7 +1450,7 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', 'data', function (err) {
+									Q.req('Users/resend', 'data', function (err, response) {
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
@@ -1458,6 +1463,7 @@
 																$(this).plugin('Q/validator', 'reset');
 															});
 														login_setupDialog.dialog.data('Q/dialog').close();
+														Q.handle(Q.getObject('slots.data.activationLink', response));
 													})
 											)
 										);
@@ -1538,7 +1544,7 @@
 				.append(
 					$('<div class="Users_login_get_started"></div>')
 					.append($b)
-				).submit(function () {
+				).submit(Q.throttle(function () {
 					if (_registering) {
 						return false;
 					}
@@ -1557,7 +1563,8 @@
 							}
 						}, 300);
 					}
-				});
+					return false;
+				}, 1000, false, false));
 
 			if (priv.activation) {
 				register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
@@ -1653,7 +1660,7 @@
 		if (!autologin) {
 			step2_form.plugin('Q/validator').submit(function (e) {
 				e.preventDefault();
-			}).submit(Q.throttle(onFormSubmit, 300));
+			}).submit(Q.throttle(onFormSubmit, 1000, false, false));
 			$('input', step2_form).add('select', step2_form).on('input', function () {
 				step2_form.plugin('Q/validator', 'reset', this);
 			});
@@ -2815,14 +2822,22 @@
 
 		Q.Users.login.options = Q.extend({
 			onCancel: new Q.Event(),
-			onSuccess: new Q.Event(function Users_login_onSuccess(user, options) {
+			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
 				// default implementation
 				if (user) {
 					// the user changed, redirect to their home page
 					var urls = Q.urls || {};
-					var nextUrl = user.result === 'registered'
-						? options.onboardingUrl
-						: options.successUrl;
+					var nextUrl = options.successUrl;
+					if (priv.result === 'register') {
+						if (options.onboardingUrl) {
+							nextUrl = options.onboardingUrl;
+						}
+						if (Q.info.isTouchscreen && user.signedUpWith === 'mobile') {
+							nextUrl = Q.url(
+								user.activationLink + '?afterActivate=' + encodeURIComponent(nextUrl)
+							);
+						}
+					}
 					var url = nextUrl || urls[Q.info.app + '/home'] || Q.url('');
 					Q.handle(url);
 				}
@@ -2876,7 +2891,7 @@
 		if (Q.Users.loggedInUser
 		&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
 			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
-			Q.nonce = Q.cookie('Q_nonce');
+			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		}
 		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
 
@@ -2959,14 +2974,14 @@
 	}, 'Users');
 
 	Q.request.options.onProcessed.set(function (err, response) {
-		Q.nonce = Q.cookie('Q_nonce');
+		Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		if (Users.lastSeenNonce !== Q.nonce
 		&& !Users.login.occurring
 		&& !Users.authenticate.occurring
 		&& !Users.logout.occurring) {
-			Q.nonce = Q.cookie('Q_nonce');
+			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			Q.req("Users/login", 'data', function (err, res) {
-				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce');
+				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				var msg = Q.firstErrorMessage(err, res && res.errors);
 				if (msg) {
 					return Users.onError.handle(msg, err);

@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Zgjidhni një <strong>frazë të mirë kalimi<\/strong> për të mbrojtur llogarinë tuaj. Shihni sugjerimet për disa ide.",
         "LogOutAndTryAgain": "Dilni dhe provoni përsëri",
         "IfYouFeel": "Nëse mendoni se diçka shkoi keq, mundeni",
-        "SetIdentifierButtonTitle": "filloje nga e para"
+        "SetIdentifierButtonTitle": "filloje nga e para",
+        "OneTimeCode": "Futni kodin që keni marrë:",
+        "ActivateMyAccount": "Aktivizo llogarinë time"
     },
     "session": {
         "GetStarted": "Fillo"
@@ -61,7 +63,7 @@
         "title": "Mirë se vini",
         "directions": "Krijo një llogari, ose identifikohu.",
         "directionsNoRegister": "Hyni nëse keni një llogari.",
-        "goButton": "Shkoni",
+        "goButton": "⮕",
         "passphrase": "Shkruani frazën tuaj të kalimit:",
         "loginButton": "Fillo",
         "registerButton": "Fillo",

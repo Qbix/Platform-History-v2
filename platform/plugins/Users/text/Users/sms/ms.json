@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Selamat datang ke {{1}}.",
+        "ClickHere": "Klik di sini untuk mengaktifkan akaun anda: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Klik di sini untuk mengesahkan nombor mudah alih anda: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Adakah anda mahu menetapkan semula frasa laluan anda dalam {{1}}?",
+        "ClickHere": "Kemudian klik di sini: {{1}}"
+    }
+}

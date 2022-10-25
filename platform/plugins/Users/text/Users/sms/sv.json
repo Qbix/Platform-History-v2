@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Välkommen till {{1}}.",
+        "ClickHere": "Klicka här för att aktivera ditt konto: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Klicka här för att verifiera ditt mobilnummer: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Ville du återställa din lösenfras i {{1}}?",
+        "ClickHere": "Klicka sedan här: {{1}}"
+    }
+}

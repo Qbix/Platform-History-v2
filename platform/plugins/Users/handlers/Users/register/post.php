@@ -41,4 +41,6 @@ function Users_register_post()
 	
 	// this also logs the user in
 	Users::$cache['user'] = $user;
+
+	Q_Response::setSlot('activateLink', Users::$cache['Users/activate link']);
 }

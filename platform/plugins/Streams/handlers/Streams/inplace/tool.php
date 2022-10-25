@@ -29,6 +29,19 @@ function Streams_inplace_tool($options)
 		$streamName = $options['streamName'];
 		$stream = Streams_Stream::fetch(null, $publisherId, $streamName);
 		if (!$stream) {
+			Streams::$cache['stream'] = null;
+
+			// try to create stream
+			Q::event('Streams/stream/post', array(
+				"publisherId" => $publisherId,
+				"name" => $streamName,
+				"dontSubscribe" => true
+			));
+
+			$stream = Streams::$cache['stream'];
+		}
+
+		if (!$stream) {
 			throw new Q_Exception_MissingRow(array(
 				'table' => 'stream',
 				'criteria' => "publisherId=$publisherId, name=$streamName"

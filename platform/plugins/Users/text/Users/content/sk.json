@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Zvoľte si dobrú <strong>prístupovú frázu<\/strong> na ochranu svojho účtu. Pozrite si návrhy niektorých nápadov.",
         "LogOutAndTryAgain": "Odhláste sa a skúste to znova",
         "IfYouFeel": "Ak máte pocit, že sa niečo pokazilo, môžete",
-        "SetIdentifierButtonTitle": "začať odznova"
+        "SetIdentifierButtonTitle": "začať odznova",
+        "OneTimeCode": "Zadajte kód, ktorý ste dostali:",
+        "ActivateMyAccount": "Aktivovať môj účet"
     },
     "session": {
         "GetStarted": "Začať"
@@ -72,7 +74,7 @@
         "title": "Vitajte",
         "directions": "Vytvorte si účet alebo sa prihláste.",
         "directionsNoRegister": "Prihláste sa, ak máte účet.",
-        "goButton": "Choď",
+        "goButton": "⮕",
         "passphrase": "Zadajte svoju prístupovú frázu:",
         "loginButton": "Začať",
         "registerButton": "Začať",

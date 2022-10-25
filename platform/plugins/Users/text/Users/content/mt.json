@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Agħżel <strong>pass phrase<\/strong> tajba biex tipproteġi l-kont tiegħek. Ara s-suġġerimenti għal xi ideat.",
         "LogOutAndTryAgain": "Log Out u Erġa Ipprova",
         "IfYouFeel": "Jekk tħoss li xi ħaġa marret ħażin, tista’",
-        "SetIdentifierButtonTitle": "Ibda mill-bidu"
+        "SetIdentifierButtonTitle": "Ibda mill-bidu",
+        "OneTimeCode": "Daħħal il-kodiċi li rċevejt:",
+        "ActivateMyAccount": "Attiva l-Kont Tiegħi"
     },
     "session": {
         "GetStarted": "Ibda"
@@ -72,7 +74,7 @@
         "title": "Merħba",
         "directions": "Oħloq kont, jew idħol.",
         "directionsNoRegister": "Idħol jekk għandek kont.",
-        "goButton": "Mur",
+        "goButton": "⮕",
         "passphrase": "Daħħal il-frażi tal-pass tiegħek:",
         "loginButton": "Ibda",
         "registerButton": "Ibda",

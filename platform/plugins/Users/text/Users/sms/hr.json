@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Dobro došli u {{1}}.",
+        "ClickHere": "Kliknite ovdje da aktivirate svoj račun: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Kliknite ovdje da potvrdite svoj broj mobitela: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Jeste li htjeli poništiti svoju zaporku u {{1}}?",
+        "ClickHere": "Zatim kliknite ovdje: {{1}}"
+    }
+}

@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Επιλέξτε μια καλή <strong>φράση<\/strong> πρόσβασης για την προστασία του λογαριασμού σας. Δείτε τις προτάσεις για μερικές ιδέες.",
         "LogOutAndTryAgain": "Αποσυνδεθείτε και δοκιμάστε ξανά",
         "IfYouFeel": "Εάν αισθάνεστε ότι κάτι πήγε στραβά, μπορείτε",
-        "SetIdentifierButtonTitle": "ξεκίνα από την αρχή"
+        "SetIdentifierButtonTitle": "ξεκίνα από την αρχή",
+        "OneTimeCode": "Εισαγάγετε τον κωδικό που λάβατε:",
+        "ActivateMyAccount": "Ενεργοποίηση του λογαριασμού μου"
     },
     "session": {
         "GetStarted": "Ξεκίνα"
@@ -72,7 +74,7 @@
         "title": "καλως ΗΡΘΑΤΕ",
         "directions": "Δημιουργήστε έναν λογαριασμό ή συνδεθείτε.",
         "directionsNoRegister": "Συνδεθείτε εάν έχετε λογαριασμό.",
-        "goButton": "Πηγαίνω",
+        "goButton": "⮕",
         "passphrase": "Εισαγάγετε τη φράση πρόσβασής σας:",
         "loginButton": "Ξεκίνα",
         "registerButton": "Ξεκίνα",

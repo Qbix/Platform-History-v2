@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "{{1}}&#39;a hoş geldiniz.",
+        "ClickHere": "Hesabınızı etkinleştirmek için burayı tıklayın: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Cep telefonu numaranızı doğrulamak için burayı tıklayın: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "{{1}} için parolanızı sıfırlamak mı istediniz?",
+        "ClickHere": "Ardından burayı tıklayın: {{1}}"
+    }
+}

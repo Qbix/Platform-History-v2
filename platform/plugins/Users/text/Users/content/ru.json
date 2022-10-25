@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Выберите хорошую <strong>фразу-пароль<\/strong> , чтобы защитить свою учетную запись. См. предложения для некоторых идей.",
         "LogOutAndTryAgain": "Выйдите из системы и повторите попытку",
         "IfYouFeel": "Если вы чувствуете, что что-то пошло не так, вы можете",
-        "SetIdentifierButtonTitle": "начать сначала"
+        "SetIdentifierButtonTitle": "начать сначала",
+        "OneTimeCode": "Введите полученный код:",
+        "ActivateMyAccount": "Активировать мою учетную запись"
     },
     "session": {
         "GetStarted": "Начать"
@@ -72,7 +74,7 @@
         "title": "Добро пожаловать",
         "directions": "Создайте учетную запись или войдите в систему.",
         "directionsNoRegister": "Войдите, если у вас есть учетная запись.",
-        "goButton": "Идти",
+        "goButton": "⮕",
         "passphrase": "Введите парольную фразу:",
         "loginButton": "Начать",
         "registerButton": "Начать",

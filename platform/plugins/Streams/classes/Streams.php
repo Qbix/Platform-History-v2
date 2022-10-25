@@ -3433,7 +3433,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * Unsubscribe from one or more streams, to stop receiving notifications.
-	 * Pooststs "Streams/unsubscribe" message to the streams.
+	 * Posts "Streams/unsubscribe" message to the streams.
 	 * Also posts "Streams/unsubscribed" messages to user's "Streams/participating" stream.
 	 * Does not change the actual subscription, but only the participant row.
 	 * (When subscribing again, the existing subscription will be used.)
@@ -4968,9 +4968,17 @@ abstract class Streams extends Base_Streams
 			if (sizeof($parts) > 1) {
 				$title = $parts[0].": ".$parts[1];
 			}
+
+			// Check if interest in the list of interests defined in app by file files/Streams/interests/<communityId>/en.json and allow to create this stream for common user
+			// doesn't listed interests can be created by admins
+			$tree = new Q_Tree();
+			$tree->load("files/Streams/interests/".Users::communityId()."/".Q_Text::basename().".json");
+			$interests = $tree->getAll();
+			$skipAccess = Q::ifset($interests, $parts[0], "", $parts[1], null) === null ? false : true;
 			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
-				'title' => $title
+				'title' => $title,
+				'skipAccess' => $skipAccess
 			));
 			if (is_dir(APP_WEB_DIR.DS."plugins".DS."Streams".DS."img".DS."icons".DS.$streamName)) {
 				$stream->icon = $streamName;

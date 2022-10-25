@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "选择一个好的<strong>密码<\/strong>来保护您的帐户。查看一些想法的建议。",
         "LogOutAndTryAgain": "注销并重试",
         "IfYouFeel": "如果您觉得有问题，您可以",
-        "SetIdentifierButtonTitle": "重来"
+        "SetIdentifierButtonTitle": "重来",
+        "OneTimeCode": "输入您收到的代码：",
+        "ActivateMyAccount": "激活我的帐户"
     },
     "session": {
         "GetStarted": "开始使用"
@@ -61,7 +63,7 @@
         "title": "欢迎",
         "directions": "创建一个帐户，或登录。",
         "directionsNoRegister": "如果您有帐户，请登录。",
-        "goButton": "去",
+        "goButton": "⮕",
         "passphrase": "输入您的密码：",
         "loginButton": "开始使用",
         "registerButton": "开始使用",

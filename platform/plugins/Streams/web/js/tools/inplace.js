@@ -10,10 +10,10 @@
  * @class Streams inplace
  * @constructor
  * @param {Object} [options] used to pass options
- *   @param {String} options.inplaceType Required. The type of the fieldInput. Can be "textarea", "text" or "select"
+ *   @param {String} options.publisherId Required if stream option is empty. The publisher's user id.
+ *   @param {String} options.streamName Required if stream option is empty. The stream's name.
+ *   @param {String} [options.inplaceType=textarea] The type of the fieldInput. Can be "textarea", "text" or "select"
  *   @param {Array} [options.convert] The characters to convert to HTML. Pass an array containing zero or more of "\n", " "
- *   @param {String} [options.publisherId] Required if stream option is empty. The publisher's user id.
- *   @param {String} [options.streamName] Required if stream option is empty. The stream's name.
  *   @param {Stream} [options.stream] Optionally pass a Streams.Stream object here if you have it already
  *   @param {String} [options.field] Optional, name of a field to change instead of the content of the stream
  *   @param {String} [options.attribute] Optional, name of an attribute to change instead of a field.

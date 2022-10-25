@@ -13481,6 +13481,8 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  * @param {String} [options.initialText=null] to set any initial text
  * @param {Number} [options.maxlength=1000] the maximum length of the input
  * @param {String} [options.className] additional class name added to dialog element
+ * @param {String} [options.autocomplete] the input autocomplete attribute
+ * @param {String} [options.type] the input type attribute
  * @param {String} [options.ok='OK'] to override prompt dialog 'Ok' button label, e.g. 'Post'.
  * @param {boolean} [options.noClose=true] set to false to show a close button
  * @param {Q.Event} [options.onClose] Optional, occurs when dialog is closed
@@ -13499,9 +13501,9 @@ Q.prompt = function(message, callback, options) {
 		'placeholder': o.placeholder,
 		'maxlength': o.maxLength
 	};
-	if (o.initialText) {
-		attr.value = o.initialText;
-	}
+	o.initialText && (attr.value = o.initialText);
+	o.autocomplete && (attr.autocomplete = o.autocomplete);
+	o.type && (attr.type = o.type);
 
 	options.className = 'Q_prompt ' + (options.className || '');
 	var dialog = Q.Dialogs.push(Q.extend({
@@ -14269,6 +14271,7 @@ Q.onInit.add(function () {
 	var QtQw = Q.text.Q.words;
 	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
 	Q.Pointer.clickOrTap = QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+	Q.Pointer.CLICKORTAP = QtQw.CLICKORTAP = QtQw.clickOrTap.toUpperCase();
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);

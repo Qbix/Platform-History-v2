@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Tere tulemast teenusesse {{1}}.",
+        "ClickHere": "Konto aktiveerimiseks klõpsake siin: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Mobiilinumbri kinnitamiseks klõpsake siin: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Kas tahtsite oma parooli lähtestada keeles {{1}}?",
+        "ClickHere": "Seejärel klõpsake siin: {{1}}"
+    }
+}

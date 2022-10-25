@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "یک <strong>عبارت عبور<\/strong> خوب برای محافظت از حساب خود انتخاب کنید. پیشنهادات برای برخی از ایده ها را ببینید.",
         "LogOutAndTryAgain": "از سیستم خارج شوید و دوباره امتحان کنید",
         "IfYouFeel": "اگر احساس می کنید مشکلی پیش آمده است، می توانید",
-        "SetIdentifierButtonTitle": "از نو شروع کن"
+        "SetIdentifierButtonTitle": "از نو شروع کن",
+        "OneTimeCode": "کد دریافتی خود را وارد کنید:",
+        "ActivateMyAccount": "اکانت من را فعال کنید"
     },
     "session": {
         "GetStarted": "شروع کنید"
@@ -72,7 +74,7 @@
         "title": "خوش آمدی",
         "directions": "یک حساب کاربری ایجاد کنید، یا وارد شوید.",
         "directionsNoRegister": "اگر حساب کاربری دارید وارد شوید.",
-        "goButton": "برو",
+        "goButton": "⮕",
         "passphrase": "عبارت عبور خود را وارد کنید:",
         "loginButton": "شروع کنید",
         "registerButton": "شروع کنید",

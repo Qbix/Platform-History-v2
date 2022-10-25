@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "अपने खाते की सुरक्षा के लिए एक अच्छा <strong>पास वाक्यांश<\/strong> चुनें। कुछ विचारों के लिए सुझाव देखें।",
         "LogOutAndTryAgain": "लॉग आउट करें और पुन: प्रयास करें",
         "IfYouFeel": "अगर आपको लगता है कि कुछ गलत हुआ है, तो आप कर सकते हैं",
-        "SetIdentifierButtonTitle": "प्रारंभ करें"
+        "SetIdentifierButtonTitle": "प्रारंभ करें",
+        "OneTimeCode": "आपको प्राप्त कोड दर्ज करें:",
+        "ActivateMyAccount": "मेरा खाता सक्रिय करें"
     },
     "session": {
         "GetStarted": "शुरू हो जाओ"
@@ -72,7 +74,7 @@
         "title": "स्वागत",
         "directions": "एक खाता बनाएं या लॉग - इन करें।",
         "directionsNoRegister": "अगर आपका खाता है तो लॉग इन करें।",
-        "goButton": "जाओ",
+        "goButton": "मैं",
         "passphrase": "अपना पास वाक्यांश दर्ज करें:",
         "loginButton": "शुरू हो जाओ",
         "registerButton": "शुरू हो जाओ",

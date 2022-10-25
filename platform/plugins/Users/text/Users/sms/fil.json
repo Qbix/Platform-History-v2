@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Maligayang pagdating sa {{1}}.",
+        "ClickHere": "Mag-click dito upang i-activate ang iyong account: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Mag-click dito upang i-verify ang iyong mobile number: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Nais mo bang i-reset ang iyong passphrase sa {{1}}?",
+        "ClickHere": "Pagkatapos ay mag-click dito: {{1}}"
+    }
+}

@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Vítejte v {{1}}.",
+        "ClickHere": "Kliknutím sem aktivujte svůj účet: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Kliknutím sem ověřte své mobilní číslo: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Chtěli jste resetovat svou přístupovou frázi v {{1}}?",
+        "ClickHere": "Pak klikněte sem: {{1}}"
+    }
+}

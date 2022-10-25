@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Dewiswch <strong>ymadrodd pasio<\/strong> da i amddiffyn eich cyfrif. Gweler yr awgrymiadau am rai syniadau.",
         "LogOutAndTryAgain": "Allgofnodi a Ceisiwch Eto",
         "IfYouFeel": "Os ydych chi&#39;n teimlo bod rhywbeth wedi mynd o&#39;i le, fe allwch chi",
-        "SetIdentifierButtonTitle": "dechrau eto"
+        "SetIdentifierButtonTitle": "dechrau eto",
+        "OneTimeCode": "Rhowch y cod a gawsoch:",
+        "ActivateMyAccount": "Ysgogi Fy Nghyfrif"
     },
     "session": {
         "GetStarted": "Dechrau"
@@ -72,7 +74,7 @@
         "title": "Croeso",
         "directions": "Creu cyfrif, neu fewngofnodi.",
         "directionsNoRegister": "Mewngofnodwch os oes gennych gyfrif.",
-        "goButton": "Ewch",
+        "goButton": "⮕",
         "passphrase": "Rhowch eich ymadrodd pasio:",
         "loginButton": "Dechrau",
         "registerButton": "Dechrau",

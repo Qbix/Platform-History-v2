@@ -8,6 +8,11 @@
 </p>
 
 <p>
+	(<?php echo Q::interpolate($resend['DomainCode'], compact('domain', 
+'code')) ?>)
+</p>
+
+<p>
 	<?php echo Q::interpolate($SeeYou, array(Q_Html::a(Q_Html::themedUrl(''), $communityName))) ?>
 </p>
 

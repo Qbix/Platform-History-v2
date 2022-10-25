@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Selamat datang! Sila sahkan alamat e-mel anda.",
+        "Thanks": "Selamat datang ke {{1}}",
+        "ReallyYourEmail": "Adakah ini benar-benar alamat e-mel anda, {{1}}? Jika ya, klik <a href='{{2}}'>di sini<\/a> untuk menetapkan frasa laluan anda dan mengaktifkan akaun anda.",
+        "SeeYou": "Jumpa anda di <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Selamat datang! Mengesahkan alamat e-mel anda."
+    },
+    "resend": {
+        "Subject": "Hei, adakah anda terlupa frasa laluan anda?",
+        "Thanks": "Terima kasih kerana melawat {{1}}",
+        "YouAreReceiving": "Anda menerima e-mel ini kerana seseorang memasukkan alamat e-mel anda dan mengklik &quot;terlupa frasa laluan&quot;. Jika bukan anda, abaikan sahaja mesej ini.",
+        "Reset": "Untuk menetapkan semula frasa laluan anda, klik {{1}}",
+        "SetUpPassphrase": "Sediakan frasa laluan"
+    },
+    "SeeYou": "Jumpa anda di {{1}}!",
+    "LinkToUnsubscribe": "Berikut ialah pautan untuk <a href='{{1}}'>berhenti melanggan<\/a> jika anda tidak mahu mendapatkan e-mel lagi."
+}

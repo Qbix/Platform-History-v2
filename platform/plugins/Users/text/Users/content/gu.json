@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "તમારા એકાઉન્ટને સુરક્ષિત રાખવા માટે સારો <strong>પાસ શબ્દસમૂહ<\/strong> પસંદ કરો. કેટલાક વિચારો માટે સૂચનો જુઓ.",
         "LogOutAndTryAgain": "લૉગ આઉટ કરો અને ફરી પ્રયાસ કરો",
         "IfYouFeel": "જો તમને લાગે કે કંઈક ખોટું થયું છે, તો તમે કરી શકો છો",
-        "SetIdentifierButtonTitle": "પ્રારંભ"
+        "SetIdentifierButtonTitle": "પ્રારંભ",
+        "OneTimeCode": "તમને પ્રાપ્ત થયેલ કોડ દાખલ કરો:",
+        "ActivateMyAccount": "મારું એકાઉન્ટ સક્રિય કરો"
     },
     "session": {
         "GetStarted": "શરૂ કરો"
@@ -72,7 +74,7 @@
         "title": "સ્વાગત છે",
         "directions": "એક એકાઉન્ટ બનાવો, અથવા લૉગ ઇન કરો.",
         "directionsNoRegister": "જો તમારી પાસે ખાતું હોય તો લોગ ઇન કરો.",
-        "goButton": "જાઓ",
+        "goButton": "⮕",
         "passphrase": "તમારો પાસ શબ્દસમૂહ દાખલ કરો:",
         "loginButton": "શરૂ કરો",
         "registerButton": "શરૂ કરો",

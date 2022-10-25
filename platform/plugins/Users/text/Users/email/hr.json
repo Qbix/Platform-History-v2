@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Dobrodošli! Molimo potvrdite svoju adresu e-pošte.",
+        "Thanks": "Dobro došli u {{1}}",
+        "ReallyYourEmail": "Je li ovo stvarno vaša adresa e-pošte, {{1}}? Ako je tako, kliknite <a href='{{2}}'>ovdje<\/a> kako biste postavili lozinku i aktivirali svoj račun.",
+        "SeeYou": "Vidimo se na <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Dobrodošli! Potvrdite svoju email adresu."
+    },
+    "resend": {
+        "Subject": "Hej, jesi li zaboravio svoju šifru?",
+        "Thanks": "Hvala na posjeti {{1}}",
+        "YouAreReceiving": "Primili ste ovu e-poruku jer je netko unio vašu adresu e-pošte i kliknuo &quot;zaboravljena šifra&quot;. Ako to niste bili vi, jednostavno ignorirajte ovu poruku.",
+        "Reset": "Za ponovno postavljanje zaporke kliknite {{1}}",
+        "SetUpPassphrase": "Postavite lozinku"
+    },
+    "SeeYou": "Vidimo se na {{1}}!",
+    "LinkToUnsubscribe": "Ovdje je poveznica za <a href='{{1}}'>otkazivanje pretplate<\/a> ako više ne želite primati e-poruke."
+}

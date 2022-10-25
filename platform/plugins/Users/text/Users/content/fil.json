@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Pumili ng isang mahusay na <strong>pass phrase<\/strong> upang protektahan ang iyong account. Tingnan ang mga mungkahi para sa ilang mga ideya.",
         "LogOutAndTryAgain": "Mag-log Out at Subukan muli",
         "IfYouFeel": "Kung sa tingin mo may nangyaring mali, maaari mo",
-        "SetIdentifierButtonTitle": "magsimula"
+        "SetIdentifierButtonTitle": "magsimula",
+        "OneTimeCode": "Ilagay ang code na iyong natanggap:",
+        "ActivateMyAccount": "I-activate ang Aking Account"
     },
     "session": {
         "GetStarted": "Magsimula"
@@ -61,7 +63,7 @@
         "title": "Maligayang pagdating",
         "directions": "Lumikha ng isang account, o mag-log in.",
         "directionsNoRegister": "Mag-log in kung mayroon kang isang account.",
-        "goButton": "Pumunta",
+        "goButton": "⮕",
         "passphrase": "Ipasok ang iyong pariralang pass:",
         "loginButton": "Magsimula",
         "registerButton": "Magsimula",

@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Hesabınızı qorumaq üçün yaxşı <strong>keçid ifadəsi<\/strong> seçin. Bəzi ideyalar üçün təkliflərə baxın.",
         "LogOutAndTryAgain": "Çıxın və Yenidən cəhd edin",
         "IfYouFeel": "Bir şeyin səhv getdiyini hiss edirsinizsə, edə bilərsiniz",
-        "SetIdentifierButtonTitle": "yenidən başlamaq"
+        "SetIdentifierButtonTitle": "yenidən başlamaq",
+        "OneTimeCode": "Aldığınız kodu daxil edin:",
+        "ActivateMyAccount": "Hesabımı Aktivləşdirin"
     },
     "session": {
         "GetStarted": "Başlamaq"
@@ -61,7 +63,7 @@
         "title": "Xoş gəldiniz",
         "directions": "Hesab yaradın və ya daxil olun.",
         "directionsNoRegister": "Hesabınız varsa daxil olun.",
-        "goButton": "Get",
+        "goButton": "⮕",
         "passphrase": "Keçid ifadənizi daxil edin:",
         "loginButton": "Başlamaq",
         "registerButton": "Başlamaq",

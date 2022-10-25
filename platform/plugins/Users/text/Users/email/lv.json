@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Laipni lūdzam! Lūdzu, apstipriniet savu e-pasta adresi.",
+        "Thanks": "Laipni lūdzam {{1}}",
+        "ReallyYourEmail": "Vai šī tiešām ir jūsu e-pasta adrese, {{1}}? Ja tā, noklikšķiniet <a href='{{2}}'>šeit<\/a> , lai iestatītu ieejas frāzi un aktivizētu savu kontu.",
+        "SeeYou": "Tiekamies <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Laipni lūdzam! Pārbaudiet savu e-pasta adresi."
+    },
+    "resend": {
+        "Subject": "Sveiki, vai aizmirsāt savu ieejas frāzi?",
+        "Thanks": "Paldies, ka apmeklējāt {{1}}",
+        "YouAreReceiving": "Jūs saņēmāt šo e-pasta ziņojumu, jo kāds ievadīja jūsu e-pasta adresi un noklikšķināja uz &quot;aizmirsu ieejas frāzi&quot;. Ja tas nebijāt jūs, vienkārši ignorējiet šo ziņojumu.",
+        "Reset": "Lai atiestatītu ieejas frāzi, noklikšķiniet uz {{1}}",
+        "SetUpPassphrase": "Iestatiet ieejas frāzi"
+    },
+    "SeeYou": "Tiekamies {{1}}!",
+    "LinkToUnsubscribe": "Šeit ir saite, lai <a href='{{1}}'>anulētu abonementu<\/a> , ja vairs nevēlaties saņemt e-pasta ziņojumus."
+}

@@ -13,7 +13,9 @@
 		"Thanks": "Thanks for visiting {{1}}",
 		"YouAreReceiving": "You are receiving this email because someone entered your email address and clicked \"forgot passphrase\". If it wasn't you, simply ignore this message.",
 		"Reset": "To reset your passphrase, click {{1}}",
-		"SetUpPassphrase": "Set up passphrase"
+		"SetUpPassphrase": "Set up passphrase",
+		"DomainCode": "If the webpage is already open in your browser, you can 
+enter the code <strong>{{code}}</strong>"
 	},
 	"SeeYou": "See you on {{1}}!",
 	"LinkToUnsubscribe": "Here is a link to <a href='{{1}}'>unsubscribe</a> if you don't want to get any more emails.",

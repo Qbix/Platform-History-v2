@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "ನಿಮ್ಮ ಖಾತೆಯನ್ನು ರಕ್ಷಿಸಲು ಉತ್ತಮ <strong>ಪಾಸ್ ಪದಗುಚ್ಛವನ್ನು<\/strong> ಆಯ್ಕೆಮಾಡಿ. ಕೆಲವು ವಿಚಾರಗಳಿಗಾಗಿ ಸಲಹೆಗಳನ್ನು ನೋಡಿ.",
         "LogOutAndTryAgain": "ಲಾಗ್ ಔಟ್ ಮಾಡಿ ಮತ್ತು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ",
         "IfYouFeel": "ಏನಾದರೂ ತಪ್ಪಾಗಿದೆ ಎಂದು ನೀವು ಭಾವಿಸಿದರೆ, ನೀವು ಮಾಡಬಹುದು",
-        "SetIdentifierButtonTitle": "ಆರಂಭಿಸು"
+        "SetIdentifierButtonTitle": "ಆರಂಭಿಸು",
+        "OneTimeCode": "ನೀವು ಸ್ವೀಕರಿಸಿದ ಕೋಡ್ ಅನ್ನು ನಮೂದಿಸಿ:",
+        "ActivateMyAccount": "ನನ್ನ ಖಾತೆಯನ್ನು ಸಕ್ರಿಯಗೊಳಿಸಿ"
     },
     "session": {
         "GetStarted": "ಪ್ರಾರಂಭಿಸಿ"
@@ -72,7 +74,7 @@
         "title": "ಸ್ವಾಗತ",
         "directions": "ಖಾತೆಯನ್ನು ರಚಿಸಿ, ಅಥವಾ ಲಾಗ್ ಇನ್ ಮಾಡಿ.",
         "directionsNoRegister": "ನೀವು ಖಾತೆಯನ್ನು ಹೊಂದಿದ್ದರೆ ಲಾಗ್ ಇನ್ ಮಾಡಿ.",
-        "goButton": "ಹೋಗು",
+        "goButton": "⮕",
         "passphrase": "ನಿಮ್ಮ ಪಾಸ್ ಪದಗುಚ್ಛವನ್ನು ನಮೂದಿಸಿ:",
         "loginButton": "ಪ್ರಾರಂಭಿಸಿ",
         "registerButton": "ಪ್ರಾರಂಭಿಸಿ",

@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Herzlich willkommen! Bitte bestätigen sie ihre E-Mail Adresse.",
+        "Thanks": "Willkommen bei {{1}}",
+        "ReallyYourEmail": "Ist das wirklich Ihre E-Mail-Adresse, {{1}}? Klicken Sie in diesem Fall <a href='{{2}}'>hier<\/a> , um Ihre Passphrase festzulegen und Ihr Konto zu aktivieren.",
+        "SeeYou": "Wir sehen uns auf <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Herzlich willkommen! Bestätige deine Email-Adresse."
+    },
+    "resend": {
+        "Subject": "Hey, hast du deine Passphrase vergessen?",
+        "Thanks": "Vielen Dank für Ihren Besuch auf {{1}}",
+        "YouAreReceiving": "Sie erhalten diese E-Mail, weil jemand Ihre E-Mail-Adresse eingegeben und auf „Passphrase vergessen“ geklickt hat. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht einfach.",
+        "Reset": "Um Ihre Passphrase zurückzusetzen, klicken Sie auf {{1}}",
+        "SetUpPassphrase": "Passphrase einrichten"
+    },
+    "SeeYou": "Wir sehen uns auf {{1}}!",
+    "LinkToUnsubscribe": "Hier ist ein Link zum <a href='{{1}}'>Abbestellen<\/a> , wenn Sie keine E-Mails mehr erhalten möchten."
+}

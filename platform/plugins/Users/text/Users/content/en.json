@@ -18,12 +18,14 @@
         "LogOut": "log out"
     },
     "activate": {
+        "OneTimeCode": "Enter the code you received:",
         "SetAsPrimary": "Set {{1}} as my primary {{2}}",
         "ChoosePassPhrase": "Choose a <strong>pass phrase<\/strong> to log in with.<br>A simple phrase consisting of a few words that you will easily remember.",
         "ChoosePassPhraseSeeSuggestions": "Choose a good <strong>pass phrase<\/strong> to protect your account. See the suggestions for some ideas.",
         "LogOutAndTryAgain": "Log Out and Try Again",
         "IfYouFeel": "If you feel something went wrong, you can ",
-        "SetIdentifierButtonTitle": "start over"
+        "SetIdentifierButtonTitle": "start over",
+        "ActivateMyAccount": "Activate My Account"
     },
     "session": {
         "GetStarted": "Get Started"
@@ -75,7 +77,7 @@
         "title": "Welcome",
         "directions": "Create an account, or log in.",
         "directionsNoRegister": "Log in if you have an account.",
-        "goButton": "Go",
+        "goButton": "&#11157",
         "passphrase": "Enter your pass phrase:",
         "loginButton": "Get Started",
         "registerButton": "Get Started",

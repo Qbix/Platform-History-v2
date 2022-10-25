@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Elija una buena <strong>frase<\/strong> de contraseña para proteger su cuenta. Vea las sugerencias para algunas ideas.",
         "LogOutAndTryAgain": "Cerrar sesión e intentarlo de nuevo",
         "IfYouFeel": "Si siente que algo salió mal, puede",
-        "SetIdentifierButtonTitle": "comenzar de nuevo"
+        "SetIdentifierButtonTitle": "comenzar de nuevo",
+        "OneTimeCode": "Ingresa el código que recibiste:",
+        "ActivateMyAccount": "Activar mi cuenta"
     },
     "session": {
         "GetStarted": "Empezar"
@@ -72,7 +74,7 @@
         "title": "Bienvenidos",
         "directions": "Cree una cuenta o inicie sesión.",
         "directionsNoRegister": "Inicie sesión si tiene una cuenta.",
-        "goButton": "Vamos",
+        "goButton": "⮕",
         "passphrase": "Ingrese su frase de contraseña:",
         "loginButton": "Empezar",
         "registerButton": "Empezar",

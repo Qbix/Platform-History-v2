@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Welcome to {{1}}.",
+        "ClickHere": "Click here to activate your account: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Did you want to reset your passphrase in {{1}}?",
+        "ClickHere": "Then click here: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Click here to verify your mobile number: {{1}}"
+    }
+}

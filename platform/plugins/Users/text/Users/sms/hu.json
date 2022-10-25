@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Üdvözli a {{1}}.",
+        "ClickHere": "Kattintson ide fiókja aktiválásához: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Kattintson ide mobilszámának igazolásához: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Vissza akarta állítani összetett jelszavát itt: {{1}}?",
+        "ClickHere": "Akkor kattintson ide: {{1}}"
+    }
+}

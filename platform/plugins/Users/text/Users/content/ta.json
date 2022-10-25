@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "உங்கள் கணக்கைப் பாதுகாக்க நல்ல <strong>பாஸ் சொற்றொடரைத்<\/strong> தேர்வு செய்யவும். சில யோசனைகளுக்கான பரிந்துரைகளைப் பார்க்கவும்.",
         "LogOutAndTryAgain": "வெளியேறி மீண்டும் முயற்சிக்கவும்",
         "IfYouFeel": "ஏதேனும் தவறு நடந்ததாக நீங்கள் உணர்ந்தால், உங்களால் முடியும்",
-        "SetIdentifierButtonTitle": "மீண்டும் ஆரம்பி"
+        "SetIdentifierButtonTitle": "மீண்டும் ஆரம்பி",
+        "OneTimeCode": "நீங்கள் பெற்ற குறியீட்டை உள்ளிடவும்:",
+        "ActivateMyAccount": "எனது கணக்கை இயக்கு"
     },
     "session": {
         "GetStarted": "தொடங்குங்கள்"
@@ -72,7 +74,7 @@
         "title": "வரவேற்பு",
         "directions": "கணக்கை உருவாக்கவும் அல்லது உள்நுழையவும்.",
         "directionsNoRegister": "உங்களிடம் கணக்கு இருந்தால் உள்நுழையவும்.",
-        "goButton": "போ",
+        "goButton": "⮕",
         "passphrase": "உங்கள் பாஸ் சொற்றொடரை உள்ளிடவும்:",
         "loginButton": "தொடங்குங்கள்",
         "registerButton": "தொடங்குங்கள்",

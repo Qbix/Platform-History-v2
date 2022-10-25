@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "Vælg en god <strong>adgangssætning<\/strong> for at beskytte din konto. Se forslagene til nogle ideer.",
         "LogOutAndTryAgain": "Log ud og prøv igen",
         "IfYouFeel": "Hvis du føler noget gik galt, kan du det",
-        "SetIdentifierButtonTitle": "start forfra"
+        "SetIdentifierButtonTitle": "start forfra",
+        "OneTimeCode": "Indtast koden du har modtaget:",
+        "ActivateMyAccount": "Aktiver Min konto"
     },
     "session": {
         "GetStarted": "Kom igang"
@@ -61,7 +63,7 @@
         "title": "Velkommen",
         "directions": "Opret en konto, eller log ind.",
         "directionsNoRegister": "Log ind, hvis du har en konto.",
-        "goButton": "Gå",
+        "goButton": "⮕",
         "passphrase": "Indtast din adgangssætning:",
         "loginButton": "Kom igang",
         "registerButton": "Kom igang",

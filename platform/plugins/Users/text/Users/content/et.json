@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Valige oma konto kaitsmiseks hea <strong>parool<\/strong> . Vaadake mõnede ideede soovitusi.",
         "LogOutAndTryAgain": "Logige välja ja proovige uuesti",
         "IfYouFeel": "Kui tunnete, et midagi läks valesti, saate seda teha",
-        "SetIdentifierButtonTitle": "Alusta uuesti"
+        "SetIdentifierButtonTitle": "Alusta uuesti",
+        "OneTimeCode": "Sisesta saadud kood:",
+        "ActivateMyAccount": "Aktiveeri Minu konto"
     },
     "session": {
         "GetStarted": "Alustama"
@@ -72,7 +74,7 @@
         "title": "Tere tulemast",
         "directions": "Looge konto või logige sisse.",
         "directionsNoRegister": "Logige sisse, kui teil on konto.",
-        "goButton": "Mine",
+        "goButton": "⮕",
         "passphrase": "Sisestage oma paroolifraas:",
         "loginButton": "Alustama",
         "registerButton": "Alustama",

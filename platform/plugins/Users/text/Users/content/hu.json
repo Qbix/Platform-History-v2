@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Válasszon egy jó <strong>jelszót<\/strong> fiókja védelméhez. Nézze meg a javaslatokat néhány ötletért.",
         "LogOutAndTryAgain": "Jelentkezzen ki, és próbálja újra",
         "IfYouFeel": "Ha úgy érzi, hogy valami elromlott, megteheti",
-        "SetIdentifierButtonTitle": "elölről kezdeni"
+        "SetIdentifierButtonTitle": "elölről kezdeni",
+        "OneTimeCode": "Írja be a kapott kódot:",
+        "ActivateMyAccount": "Aktiválja a Saját fiókot"
     },
     "session": {
         "GetStarted": "Fogj neki"
@@ -72,7 +74,7 @@
         "title": "Üdvözöljük",
         "directions": "Hozzon létre egy fiókot, vagy jelentkezzen be.",
         "directionsNoRegister": "Jelentkezzen be, ha van fiókja.",
-        "goButton": "Megy",
+        "goButton": "⮕",
         "passphrase": "Írja be jelmondatát:",
         "loginButton": "Fogj neki",
         "registerButton": "Fogj neki",

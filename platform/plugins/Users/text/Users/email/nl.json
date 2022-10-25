@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Welkom! Verifieer uw email adres alstublieft.",
+        "Thanks": "Welkom bij {{1}}",
+        "ReallyYourEmail": "Is dit echt uw e-mailadres, {{1}}? Zo ja, klik <a href='{{2}}'>dan hier<\/a> om uw wachtwoordzin in te stellen en uw account te activeren.",
+        "SeeYou": "Tot ziens op <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Welkom! Verifieer je e-mailadres."
+    },
+    "resend": {
+        "Subject": "Hé, ben je je wachtwoordzin vergeten?",
+        "Thanks": "Bedankt voor uw bezoek {{1}}",
+        "YouAreReceiving": "U ontvangt deze e-mail omdat iemand uw e-mailadres heeft ingevoerd en op &quot;wachtwoordzin vergeten&quot; heeft geklikt. Als jij het niet was, negeer dan dit bericht.",
+        "Reset": "Klik op {{1}} om uw wachtwoordzin opnieuw in te stellen",
+        "SetUpPassphrase": "Wachtwoordzin instellen"
+    },
+    "SeeYou": "Tot ziens op {{1}}!",
+    "LinkToUnsubscribe": "Hier is een link om u af te <a href='{{1}}'>melden<\/a> als u geen e-mails meer wilt ontvangen."
+}

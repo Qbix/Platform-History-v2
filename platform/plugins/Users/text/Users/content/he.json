@@ -9,7 +9,9 @@
         "ChoosePassPhraseSeeSuggestions": "בחר <strong>ביטוי ביטוי<\/strong> טוב כדי להגן על החשבון שלך. ראה את ההצעות עבור כמה רעיונות.",
         "LogOutAndTryAgain": "צא ונסה שוב",
         "IfYouFeel": "אם אתה מרגיש שמשהו השתבש, אתה יכול",
-        "SetIdentifierButtonTitle": "להתחיל מחדש"
+        "SetIdentifierButtonTitle": "להתחיל מחדש",
+        "OneTimeCode": "הכנס את הקוד שקיבלת:",
+        "ActivateMyAccount": "הפעל את החשבון שלי"
     },
     "session": {
         "GetStarted": "להתחיל"
@@ -61,7 +63,7 @@
         "title": "ברוך הבא",
         "directions": "צור חשבון, או התחבר.",
         "directionsNoRegister": "התחבר אם יש לך חשבון.",
-        "goButton": "ללכת",
+        "goButton": "⮕",
         "passphrase": "הזן את ביטוי הסיסמה שלך:",
         "loginButton": "להתחיל",
         "registerButton": "להתחיל",

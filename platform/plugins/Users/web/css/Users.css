@@ -593,6 +593,18 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	vertical-align: baseline;
 }
 
+#Users_activate_set_emailAddress {
+	white-space: normal;
+}
+
+.Users_activate #content {
+	padding-top: 50px;
+}
+
+.Users_activate .Q_buttons {
+	padding: 10px;
+}
+
 #WEB3_CONNECT_MODAL_ID {
 	position: absolute;
 	z-index: 99999999;

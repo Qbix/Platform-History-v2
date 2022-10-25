@@ -1,0 +1,20 @@
+{
+    "activation": {
+        "Subject": "Välkommen! Vänligen verifiera din email adress.",
+        "Thanks": "Välkommen till {{1}}",
+        "ReallyYourEmail": "Är det här verkligen din e-postadress, {{1}}? Om så är fallet, klicka <a href='{{2}}'>här<\/a> för att ställa in din lösenfras och aktivera ditt konto.",
+        "SeeYou": "Vi ses på <a href='{{1}}'>{{2}}<\/a> !"
+    },
+    "identifier": {
+        "Subject": "Välkommen! Verifiera din e-postadress."
+    },
+    "resend": {
+        "Subject": "Hej, har du glömt din lösenfras?",
+        "Thanks": "Tack för ditt besök {{1}}",
+        "YouAreReceiving": "Du får det här e-postmeddelandet för att någon skrev in din e-postadress och klickade på &quot;glömt lösenordsfras&quot;. Om det inte var du, ignorera helt enkelt det här meddelandet.",
+        "Reset": "Om du vill återställa lösenfrasen klickar du på {{1}}",
+        "SetUpPassphrase": "Ställ in lösenordsfras"
+    },
+    "SeeYou": "Vi ses på {{1}}!",
+    "LinkToUnsubscribe": "Här är en länk för att <a href='{{1}}'>avsluta prenumerationen<\/a> om du inte vill få fler mejl."
+}

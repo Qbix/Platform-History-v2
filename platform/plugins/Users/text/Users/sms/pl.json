@@ -1,0 +1,13 @@
+{
+    "activation": {
+        "Thanks": "Witamy w {{1}}.",
+        "ClickHere": "Kliknij tutaj, aby aktywować swoje konto: {{1}}"
+    },
+    "addMobile": {
+        "ClickHere": "Kliknij tutaj, aby zweryfikować swój numer telefonu komórkowego: {{1}}"
+    },
+    "resend": {
+        "DidYouWant": "Czy chcesz zresetować hasło za {{1}}?",
+        "ClickHere": "Następnie kliknij tutaj: {{1}}"
+    }
+}

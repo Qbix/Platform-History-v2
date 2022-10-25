@@ -17,11 +17,12 @@ function Users_activate_validate()
 			'range'	=> 'a valid phone number'
 		), 'mobileNumber');
 	}
-	if ($emailAddress or $mobileNumber) {
-		if (empty($_REQUEST['code'])) {
-			throw new Q_Exception("The activation code is required");
-		}
-	} else {
+	if (Q_Request::method() === 'POST' and empty($_REQUEST['code'])) {
+		Q_Response::addError(
+			new Q_Exception("The activation code is required")
+		);
+	}
+	if (!$emailAddress and !$mobileNumber) {
 		throw new Q_Exception("The email address or mobile number is required");
 	}
 	if (!empty($e_normalized)) {

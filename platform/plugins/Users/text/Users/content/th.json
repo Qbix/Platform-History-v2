@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "เลือก <strong>วลีรหัสผ่าน<\/strong> ที่ดีเพื่อปกป้องบัญชีของคุณ ดูคำแนะนำสำหรับแนวคิดบางอย่าง",
         "LogOutAndTryAgain": "ออกจากระบบแล้วลองอีกครั้ง",
         "IfYouFeel": "หากคุณรู้สึกว่ามีบางอย่างผิดพลาด คุณสามารถ",
-        "SetIdentifierButtonTitle": "เริ่มต้นใหม่"
+        "SetIdentifierButtonTitle": "เริ่มต้นใหม่",
+        "OneTimeCode": "ป้อนรหัสที่คุณได้รับ:",
+        "ActivateMyAccount": "เปิดใช้งานบัญชีของฉัน"
     },
     "session": {
         "GetStarted": "เริ่ม"
@@ -72,7 +74,7 @@
         "title": "ยินดีต้อนรับ",
         "directions": "สร้างบัญชีหรือเข้าสู่ระบบ",
         "directionsNoRegister": "เข้าสู่ระบบถ้าคุณมีบัญชี",
-        "goButton": "ไป",
+        "goButton": ".",
         "passphrase": "ป้อนวลีรหัสผ่านของคุณ:",
         "loginButton": "เริ่ม",
         "registerButton": "เริ่ม",

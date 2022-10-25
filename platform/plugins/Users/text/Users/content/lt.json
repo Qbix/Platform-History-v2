@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Pasirinkite gerą <strong>slaptažodžio frazę<\/strong> , kad apsaugotumėte savo paskyrą. Peržiūrėkite kai kurių idėjų pasiūlymus.",
         "LogOutAndTryAgain": "Atsijunkite ir bandykite dar kartą",
         "IfYouFeel": "Jei jaučiate, kad kažkas nutiko ne taip, galite",
-        "SetIdentifierButtonTitle": "pradėti iš naujo"
+        "SetIdentifierButtonTitle": "pradėti iš naujo",
+        "OneTimeCode": "Įveskite gautą kodą:",
+        "ActivateMyAccount": "Suaktyvinkite Mano paskyrą"
     },
     "session": {
         "GetStarted": "Pradėti"
@@ -72,7 +74,7 @@
         "title": "Sveiki",
         "directions": "Susikurkite paskyrą arba prisijunkite.",
         "directionsNoRegister": "Prisijunkite, jei turite paskyrą.",
-        "goButton": "Eik",
+        "goButton": "⮕",
         "passphrase": "Įveskite slaptažodžio frazę:",
         "loginButton": "Pradėti",
         "registerButton": "Pradėti",

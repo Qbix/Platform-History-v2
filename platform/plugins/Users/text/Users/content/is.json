@@ -20,7 +20,9 @@
         "ChoosePassPhraseSeeSuggestions": "Veldu góða <strong>aðgangsorð<\/strong> til að vernda reikninginn þinn. Sjáðu tillögurnar um nokkrar hugmyndir.",
         "LogOutAndTryAgain": "Skráðu þig út og reyndu aftur",
         "IfYouFeel": "Ef þér finnst eitthvað hafa farið úrskeiðis geturðu það",
-        "SetIdentifierButtonTitle": "byrja aftur"
+        "SetIdentifierButtonTitle": "byrja aftur",
+        "OneTimeCode": "Sláðu inn kóðann sem þú fékkst:",
+        "ActivateMyAccount": "Virkjaðu reikninginn minn"
     },
     "session": {
         "GetStarted": "Byrja"
@@ -72,7 +74,7 @@
         "title": "Velkominn",
         "directions": "Búðu til reikning eða skráðu þig inn.",
         "directionsNoRegister": "Skráðu þig inn ef þú ert með reikning.",
-        "goButton": "Farðu",
+        "goButton": "⮕",
         "passphrase": "Sláðu inn lykilorðið þitt:",
         "loginButton": "Byrja",
         "registerButton": "Byrja",
