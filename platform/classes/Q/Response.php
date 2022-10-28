@@ -1843,6 +1843,10 @@ class Q_Response
 		if (!isset($path)) {
 			$path = parse_url($baseUrl, PHP_URL_PATH);
 		}
+		if (!isset($domain)) {
+			$sessionCookieParams = session_get_cookie_params();
+			$domain = Q::ifset($sessionCookieParams, "domain", null);
+		}
 		// if ($domain === null) {
 		// 	// remove any possibly conflicting cookies from .hostname, with same path
 		// 	$host = parse_url($baseUrl, PHP_URL_HOST);
