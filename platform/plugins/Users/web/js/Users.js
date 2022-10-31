@@ -4151,8 +4151,6 @@
 		 * @method execute
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
 		 * @param {string} contractAddress Starts with "0x"
-		 * @param {String} contractABIName
-		 * @param {String} contractAddress
 		 * @param {String} methodName
 		 * @param {Array} params
 		 * @param {function} callback Called from the ethers.js contract method with the results

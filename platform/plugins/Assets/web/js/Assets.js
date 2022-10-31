@@ -1041,9 +1041,14 @@
 				 * Create contract for user
 				 * @method getContract
 				 * @param {Object} chain
-				 * @param {function} callback
+				 * @param {function} callback,
+				 * @param {object} [options]
+				 * @param {string} [options.contractAddress] - if defined override default chain contract address
 				 */
-				getContract: function (chain, callback) {
+				getContract: function (chain, callback, options) {
+					// if contractAddress defined in options, override
+					chain.contract = Q.getObject("contractAddress", options) || chain.contract;
+
 					Q.Users.Web3.getContract(
 						'Assets/templates/NFT', 
 						chain.contract,
