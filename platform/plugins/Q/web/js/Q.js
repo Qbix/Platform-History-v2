@@ -2245,12 +2245,12 @@ Q.humanReadable = function (value, params) {
  * These keys can be used in methods of Q.Event, Q.Masks etc.
  * @static
  * @method calculateKey
- * @param {String|Q.Tool} key
+ * @param {String|Q.Tool|true} key
  * @param {Object} container in which the key will be used
  * @param {number} number at which to start the loop for the default key generation
  * @return {String}
  */
-Q.calculateKey = function _Q_Event_calculateKey(key, container, start) {
+Q.calculateKey = function _Q_calculateKey(key, container, start) {
 	if (key === true) {
 		return "PAGE: CURRENT";
 	}

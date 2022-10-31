@@ -17,14 +17,21 @@
 			/**
 			 * Get the Assets/user/credits stream published by the logged-in user, if any
 			 * @method userStream
-			 *  @param {Function} [callback] The function to call, receives (err, stream)
+			 * @static
+			 * @param {Function} [callback] The function to call, receives (err, stream)
+			 * @param {Object} [options]
+			 * @param {String|true} [options.retainWith] key to retain the stream with, if any
 			 */
-			userStream: function (callback) {
+			userStream: function (callback, options) {
 				if (!Users.loggedInUser) {
 					callback(new Q.Error("Credits/userStream: not logged in"), null);
 					return false;
 				}
-				Streams.get(Users.loggedInUser.id, "Assets/user/credits", callback);
+				var S = Streams;
+				if (options && options.retainWith) {
+					S = S.retainWith(options.retainWith);
+				}
+				S.get(Users.loggedInUser.id, "Assets/user/credits", callback);
 			},
 			/**
 			 * Buy credits
@@ -1493,6 +1500,8 @@
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bonus').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/alert').set(_createNotice, 'Assets');
+			}, {
+				retainWith: true
 			});
 		};
 
