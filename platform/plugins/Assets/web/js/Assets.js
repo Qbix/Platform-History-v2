@@ -1041,34 +1041,35 @@
 				 * Create contract for user
 				 * @method getContract
 				 * @param {Object} chain
-				 * @param {function} callback
+				 * @param {function} callback,
+				 * @param {object} [options]
+				 * @param {string} [options.contractAddress] - if defined override default chain contract address
+				 * @param {string} [options.abiPath] - if defined override default abi path
 				 */
-				getContract: function (chain, callback) {
-					Q.Users.Web3.getContract(
-						'Assets/templates/NFT', 
-						chain.contract,
-						function (err, contract) {
-							var events = {
-								TokenRemovedFromSale: "onTokenRemovedFromSale",
-								TokenPutOnSale: "onTokenAddedToSale",
-								Transfer: "onTransfer",
-								OwnershipTransferred: "onTransferOwnership",
-								TokenBought: "onTokenBought",
-								SeriesPutOnSale: "onSeriesPutOnSale",
-								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-							};
-							Q.each(contract.ABI, function (index, obj) {
-								Q.each(events, function (event1, event2) {
-									if (obj.type === "event" && obj.name === event1) {
-										contract.on(event1, function () {
-											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-										});
-									}
-								});
+				getContract: function (chain, callback, options) {
+					var contract = Q.getObject("contractAddress", options) || chain.contract;
+					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/NFT';
+					Q.Users.Web3.getContract(abiPath, contract, function (err, contract) {
+						var events = {
+							TokenRemovedFromSale: "onTokenRemovedFromSale",
+							TokenPutOnSale: "onTokenAddedToSale",
+							Transfer: "onTransfer",
+							OwnershipTransferred: "onTransferOwnership",
+							TokenBought: "onTokenBought",
+							SeriesPutOnSale: "onSeriesPutOnSale",
+							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+						};
+						Q.each(contract.ABI, function (index, obj) {
+							Q.each(events, function (event1, event2) {
+								if (obj.type === "event" && obj.name === event1) {
+									contract.on(event1, function () {
+										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+									});
+								}
 							});
-							Q.handle(callback, null, [err, contract]);
-						}
-					);
+						});
+						Q.handle(callback, null, [err, contract]);
+					});
 				},
 				/**
 				 * Get metadata
