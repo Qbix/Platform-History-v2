@@ -57,7 +57,7 @@ Q.Tool.define("Places/location", function (options) {
 					Q.Tool.remove(placesAreas.element, true, true);
 				}
 
-				return false;
+				return true;
 			}
 
 			if (!placesAreas) {
@@ -396,11 +396,14 @@ Q.Tool.define("Places/location", function (options) {
 		var $te = $(tool.element);
 		var $this = $(elem);
 
+
+		// toggle Q_selected class
 		if ($this.hasClass('Q_selected')) {
+			$this.removeClass('Q_selected');
+			Q.handle(state.onChoose, tool, [null, null]);
 			return false;
 		}
 
-		// toggle Q_selected class
 		$te.find(".Q_selected").removeClass("Q_selected");
 		$this.addClass('Q_selected');
 
