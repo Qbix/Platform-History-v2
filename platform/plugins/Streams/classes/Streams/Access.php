@@ -13,17 +13,6 @@
  */
 class Streams_Access extends Base_Streams_Access
 {
-	function __construct ($fields = array(), $doInit = true)
-	{
-		parent::__construct($fields, $doInit);
-		// set safe defaults
-		foreach (array('readLevel', 'writeLevel',  'adminLevel') as $f) {
-			if (!isset($fields[$f])) {
-				$this->$f = -1;
-			}
-		}
-	}
-
 	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
