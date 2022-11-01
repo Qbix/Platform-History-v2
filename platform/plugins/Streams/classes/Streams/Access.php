@@ -197,6 +197,12 @@ class Streams_Access extends Base_Streams_Access
 				throw new Q_Exception_WrongValue(array('field' => $f, 'range' => 'no change'));
 			}
 		}
+		// set safe defaults
+		foreach (array('readLevel', 'writeLevel',  'adminLevel') as $f) {
+			if (!isset($value[$f])) {
+				$this->$f = -1;
+			}
+		}
 		return parent::beforeSave($value);			
 	}
 	/* * * */
