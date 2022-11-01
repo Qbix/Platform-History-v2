@@ -140,7 +140,7 @@ class Users_Web3 extends Base_Users_Web3 {
 					'name' => 'transaction.from'
 				));
 			}
-			$eth = $contract->eth;
+			$eth = $contract->getEth();
 			$rawTransactionData = '0x' . 
 				call_user_func_array([$contract, "getData"], $arguments);
 			$transactionCount = null;

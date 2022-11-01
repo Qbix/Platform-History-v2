@@ -17,8 +17,9 @@ function Assets_NFT_response_getInfo ($params) {
 	$chain = Assets_NFT::getChains($chainId);
 	$contractAddress = Q::ifset($request, "contractAddress", $chain["contract"]);
 	$tokenURI = Q::ifset($request, "tokenURI", null);
+	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
 
-	$ABI = Q::ifset($request, "ABI", Users_Web3::getABI($contractAddress, $chainId));
+	$ABI = Q::ifset($request, "ABI", Users_Web3::getABI($pathABI));
 
 	// execute authorOf if exists
 	if (Users_Web3::existsInABI("authorOf", $ABI, "function", false)) {
