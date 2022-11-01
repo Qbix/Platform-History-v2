@@ -8,12 +8,13 @@ function Assets_NFT_response_fetchMetadata ($params) {
 	$contractAddress = Q::ifset($request, "contractAddress", null);
 	$tokenURI = Q::ifset($request, "tokenURI", null);
 	$ABI = Q::ifset($request, "ABI", null);
+	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
 	$longDuration = 31104000;
 
 	if ($tokenURI) {
 		$dataJson = Assets_NFT::fetchMetadata($tokenURI);
 	} elseif ($tokenId && $chainId && $contractAddress) {
-		$ABI = Q::ifset($ABI, Users_Web3::getABI($contractAddress, $chainId));
+		$ABI = Q::ifset($ABI, Users_Web3::getABI($pathABI));
 
 		// execute tokenURI if exists
 		if (Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
