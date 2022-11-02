@@ -1427,7 +1427,8 @@
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
-		"Assets/plan": "{{Assets}}/js/tools/plan.js"
+		"Assets/plan": "{{Assets}}/js/tools/plan.js",
+		"Assets/NFT/currencies": "{{Assets}}/js/tools/NFT/currencies.js"
 	});
 
 	Q.onInit.add(function () {
