@@ -9,14 +9,14 @@ var NFT = Assets.NFT;
 
 /**
  * Return currencies available for chain.
- * @class Assets NFT/currencies
+ * @class Assets crypto/currencies
  * @constructor
  * @param {Object} options Override various options for this tool
  * @param {string} [options.chainId] - chain id
  * @param {Q.Event} [options.onChoose] - event occur when currency selected
  */
 
-Q.Tool.define("Assets/NFT/currencies", function (options) {
+Q.Tool.define("Assets/crypto/currencies", function (options) {
 	var tool = this;
 	var state = this.state;
 
@@ -28,7 +28,7 @@ Q.Tool.define("Assets/NFT/currencies", function (options) {
 		tool.refresh();
 	});
 
-	Q.addStylesheet('{{Assets}}/css/tools/NFT/currencies.css', pipe.fill("styles"), { slotName: 'Assets' });
+	Q.addStylesheet('{{Assets}}/css/tools/crypto/currencies.css', pipe.fill("styles"), { slotName: 'Assets' });
 },
 
 { // default options here
@@ -55,7 +55,7 @@ Q.Tool.define("Assets/NFT/currencies", function (options) {
 			};
 		});
 
-		Q.Template.render("Assets/NFT/currencies", {
+		Q.Template.render("Assets/crypto/currencies", {
 			currencies: currencies
 		}, function (err, html) {
 			tool.element.innerHTML = html;
@@ -69,7 +69,7 @@ Q.Tool.define("Assets/NFT/currencies", function (options) {
 	}
 });
 
-Q.Template.set("Assets/NFT/currencies",
+Q.Template.set("Assets/crypto/currencies",
 `<select name="currency">
 		{{#each currencies}}
 			<option value="{{@key}}">{{@key}}</option>

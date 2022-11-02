@@ -1428,7 +1428,7 @@
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
 		"Assets/plan": "{{Assets}}/js/tools/plan.js",
-		"Assets/NFT/currencies": "{{Assets}}/js/tools/NFT/currencies.js"
+		"Assets/crypto/currencies": "{{Assets}}/js/tools/crypto/currencies.js"
 	});
 
 	Q.onInit.add(function () {
