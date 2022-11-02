@@ -987,7 +987,7 @@
 					var onSaleUntil = info.onSaleUntil
 						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
-					var price = info.fixedPointPrice
+					var price = ("fixedPointPrice" in info)
 						? String(info.fixedPointPrice)
 						: ethers.utils.parseEther(String(info.price));
 					info.commission = info.commission || {};
@@ -995,17 +995,20 @@
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract('Assets/templates/NFT', contractAddress)
-					.then(function (contract) {
-						return contract.setSeriesInfo(seriesId, 
-							[authorAddress, limit, 
-								[onSaleUntil, currency, price],
-								[commissionFraction, commissionAddress], baseURI, suffix
-							]
-						);
-					}).catch(function (err) {
-						Q.alert(err);
-					});
+                                        return Q.Users.Web3.execute(
+                                            'Assets/templates/NFT',
+                                            contractAddress, 
+                                            "setSeriesInfo", 
+                                            [
+                                                authorAddress, 
+                                                limit, 
+                                                [onSaleUntil, currency, price], 
+                                                [commissionFraction, commissionAddress], 
+                                                baseURI, 
+                                                suffix
+                                            ], 
+                                            callback
+                                        );
 				},
 				/**
 				 * Get or create factory
