@@ -412,6 +412,53 @@
             "Description": "User details",
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Are you sure you want to log out?"
+        },
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "owner": "Owner",
+                        "currency": "Сurrency",
+                        "price": "Price",
+                        "beneficiary": "Beneficiary",
+                        "autoindex": "Autoindex",
+                        "duration": "Duration",
+                        "rateInterval": "Rate interval",
+                        "rateAmount": "Rate amount"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "owner": "owner of instance, otherwise will be sender",
+                        "currency": "Currency for purchased tokens, if zero - for native coins",
+                        "price": "Price",
+                        "beneficiary": "Beneficiary of selling tokens, otherwise will be sender",
+                        "autoindex": "Autoindex",
+                        "duration": "Duration",
+                        "rateInterval": "Rate interval",
+                        "rateAmount": "Rate amount"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(optional)",
+                    "address": "address",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+
+
+                "produce":"produce",
+                "placeholder":"[placeholder]"
+            },
+            "instance": {
+                
+            }
         }
+    },
+    "currencies": {
+        "choose": "Choose a currency"
     }
 }

@@ -9,14 +9,15 @@ var NFT = Assets.NFT;
 
 /**
  * Return currencies available for chain.
- * @class Assets crypto/currencies
+ * @class Assets web3/currencies
  * @constructor
  * @param {Object} options Override various options for this tool
+ * @param {string} [options.currency] -initial selected currency
  * @param {string} [options.chainId] - chain id
  * @param {Q.Event} [options.onChoose] - event occur when currency selected
  */
 
-Q.Tool.define("Assets/crypto/currencies", function (options) {
+Q.Tool.define("Assets/web3/currencies", function (options) {
 	var tool = this;
 	var state = this.state;
 
@@ -24,15 +25,14 @@ Q.Tool.define("Assets/crypto/currencies", function (options) {
 		throw new Q.Exception("chainId required");
 	}
 
-	var pipe = Q.pipe(['styles'], function () {
-		tool.refresh();
-	});
+        tool.refresh();
 
-	Q.addStylesheet('{{Assets}}/css/tools/crypto/currencies.css', pipe.fill("styles"), { slotName: 'Assets' });
 },
 
 { // default options here
+        currency: null,
 	chainId: null,
+        fieldName: "currency",
 	onChoose: new Q.Event()
 },
 
@@ -40,14 +40,14 @@ Q.Tool.define("Assets/crypto/currencies", function (options) {
 	refresh: function () {
 		var tool = this;
 		var state = this.state;
-		var currencies = {};
-		Q.each(NFT.currencies, function (i, obj) {
+		var tokens = {};
+		Q.each(Assets.currencies.tokens, function (i, obj) {
 			var token = Q.getObject(state.chainId, obj);
 			if (!token) {
 				return;
 			}
 
-			currencies[obj.symbol] = {
+			tokens[obj.symbol] = {
 				symbol: obj.symbol,
 				name: obj.name,
 				decimals: obj.decimals,
@@ -55,24 +55,31 @@ Q.Tool.define("Assets/crypto/currencies", function (options) {
 			};
 		});
 
-		Q.Template.render("Assets/crypto/currencies", {
-			currencies: currencies
+		Q.Template.render("Assets/web3/currencies", {
+			tokens: tokens,
+                        fieldName: state.fieldName
 		}, function (err, html) {
 			tool.element.innerHTML = html;
 
 			var $select = $("select[name=currency]", tool.element);
+                        if (tool.currency) {
+                            $select.val(tool.currency);
+                        }
+                        
 			$select.on("change", function () {
-				Q.handle(state.onChoose, tool, [null, currencies[$select.val()]]);
+                                state.currency = tokens[$select.val()];
+				Q.handle(state.onChoose, tool, [null, state.currency]);
 			});
-			Q.handle(state.onChoose, tool, [null, currencies[$select.val()]]);
+			Q.handle(state.onChoose, tool, [null, tokens[$select.val()]]);
 		});
 	}
 });
 
-Q.Template.set("Assets/crypto/currencies",
-`<select name="currency">
-		{{#each currencies}}
-			<option value="{{@key}}">{{@key}}</option>
+Q.Template.set("Assets/web3/currencies",
+            `<select name="{{fieldName}}">
+                <option disabled selected value="">{{currencies.choose}}</option>
+		{{#each tokens}}
+			<option value="{{token}}">{{@key}}</option>
 		{{/each}}
 		</select>`,
 	{text: ['Assets/content']}
