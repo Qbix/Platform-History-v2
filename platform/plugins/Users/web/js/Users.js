@@ -380,7 +380,9 @@
 						}
 					}
 				}
-				if (xid || Users.Web3.authResponse) {
+
+				xid = xid || Q.getObject("Web3.authResponse.xid", Users);
+				if (xid) {
 					return _handleXid(
 						platform, platformAppId, xid,
 						onSuccess, onCancel, options
