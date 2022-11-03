@@ -317,7 +317,10 @@
 					"symbol": "MATIC",
 					"name": "MATIC",
 					"decimals": 18,
-					"0x89": "0x0000000000000000000000000000000000000000"
+                                        "0x1": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+                                        "0x38": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+					"0x89": "0x0000000000000000000000000000000000000000",
+                                        "0x13881": "0x0000000000000000000000000000000000000000"
 				}
 			]
 		},
@@ -393,7 +396,12 @@
 			"URI": {
 				"base": "{{baseUrl}}/Assets/NFT/{{contractId}}/{{tokenId}}",
 				"suffix": ".json"
-			}
+			},
+                        "sales": {
+                            "factory": {
+                                "0x13881": "0xCA28f8902EcA5D40a32cc0fc7eDa315a8c7b6299" /* mumbai*/
+                            }
+                        }
 		}
 	}
 }

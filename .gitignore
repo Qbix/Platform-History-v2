@@ -64,3 +64,5 @@ composer.lock
 platform/plugins/Streams/files/Streams/icons.tar.gz
 
 platform/files/Q/logs/
+nbproject
+package-lock.json

@@ -37,7 +37,7 @@ function Assets_before_Q_responseExtras() {
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.chains', Assets_NFT::getChains());
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.defaultChain', Assets_NFT::getDefaultChain());
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.relationType', Assets_NFT::$relationType);
-	Q_Response::setScriptData('Q.plugins.Assets.NFT.currencies', Q_Config::get("Assets", "currencies", "tokens", array()));
+	Q_Response::setScriptData('Q.plugins.Assets.currencies.tokens', Q_Config::get("Assets", "currencies", "tokens", array()));
 
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.icon', Q_Config::expect("Q", "images", "NFT/icon"));
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.series.icon', Q_Config::expect("Q", "images", "NFT/series/icon"));
@@ -45,4 +45,7 @@ function Assets_before_Q_responseExtras() {
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.contract.allow.author', Q_Config::get("Assets", "NFT", "contract", "allow", "author", true));
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.base', Q_Config::get("Assets", "NFT", "URI", "base", array()));
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.suffix', Q_Config::get("Assets", "NFT", "URI", "suffix", array()));
+        
+        Q_Response::setScriptData('Q.Assets.NFT.sales.factory', Q_Config::get("Assets", "NFT", "sales", "factory", array()));
+        
 }
