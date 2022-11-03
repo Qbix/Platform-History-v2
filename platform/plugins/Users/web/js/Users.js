@@ -199,11 +199,7 @@
 	 */
 	Users.init.web3 = function (callback, options) {
 		if (!Q.getObject('web3', Users.apps)) {
-			return false;
-		}
-		if (Users.init.web3.complete) {
-			callback && callback();
-			return true;
+			return;
 		}
 
 		var scriptsToLoad = [
@@ -225,8 +221,9 @@
 			Users.init.web3.complete = true;
 			callback && callback();
 		}, options);
-		return true;
 	};
+
+	Users.init.web3 = Q.getter(Users.init.web3);
 
 	/**
 	 * Check whether string is community id
