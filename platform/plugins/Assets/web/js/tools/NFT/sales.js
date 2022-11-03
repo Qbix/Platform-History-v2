@@ -14,7 +14,7 @@
  *  @param {String} [options.streamName] the stream's name
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
-
+//   Assets/sales/whitelist
 Q.Tool.define("Assets/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
@@ -177,7 +177,7 @@ Q.Template.set("Assets/sales",
             </div>
     
             <button class="jsProduce Q_button">{{NFT.sales.form.qq}}</button>
-            <button class="jsProduce Q_button">{{NFT.sales.factory.produce}}</button>
+            <button class="jsProduce2 Q_button">{{NFT.sales.factory.produce}}</button>
             <button class="jsInstancesList Q_button">[instances list]</button>
             <div class="list row">
             </div>

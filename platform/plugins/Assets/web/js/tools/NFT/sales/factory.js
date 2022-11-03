@@ -33,6 +33,17 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
 { // default options here
     abiPath: "",
+    fields: {
+        NFTContract: null,
+        owner: null,
+        currency: null,
+        price: null,
+        beneficiary: null,
+        autoindex: null,
+        duration: null,
+        rateInterval: null,
+        rateAmount: null
+    },
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -133,7 +144,8 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 "Assets/NFT/sales/factory", 
                 {
                     TestParam: "Lorem ipsum dolor sit amet",
-                    chainId: Q.Assets.NFT.defaultChain.chainId
+                    chainId: Q.Assets.NFT.defaultChain.chainId,
+                    fields: state.fields
                 },
                 function(err, html){
                     
@@ -158,19 +170,21 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                     //var $form = $("form[name=whiteList]");
                     
                     $('.jsProduce', tool.element).on(Q.Pointer.fastclick, function(){
-                        
+                        alert(Q.Users.Web3.getSelectedXid());
+                        return;
                         //alert(tool.currency);
                         
                         //collect form
                         let NFTContract = $(tool.element).find("[name='NFTContract']").val();
-                        NFTContract = NFTContract ? NFTContract : TokenSociety.NFT.contract.address;
+                        NFTContract = NFTContract || TokenSociety.NFT.contract.address;
                         
-                        let owner = $(tool.element).find("[name='owner']").val();
-                        owner = owner ? owner : Q.Users.Web3.getLoggedInUserXid();
+                        let owner = $(tool.element).find("[name='owner']").val() 
+                                || Q.Users.Web3.getSelectedXid();
                         
                         let currency = $(tool.element).find("[name='currency']").val();
-                        let price = ethers.utils.parseEther(
-                            $(tool.element).find("[name='price']").val()
+                        let price = ethers.utils.parseUnits(
+                            $(tool.element).find("[name='price']").val(),
+                            18
                         );
                         let beneficiary = $(tool.element).find("[name='beneficiary']").val();
                         let autoindex = $(tool.element).find("[name='autoindex']").val();
@@ -231,7 +245,7 @@ Q.Template.set("Assets/NFT/sales/factory",
             <!-- address NFTContract, -->
             <div class="form-group">
                 <label>{{NFT.sales.factory.form.labels.NFTContract}}</label>
-                <input name="NFTContract" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
+                <input name="NFTContract" type="text" class="form-control" value="{{fields.NFTContract}}" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
                 <small class="form-text text-muted">{{NFT.sales.factory.form.small.NFTContract}}</small>
             </div>
             <!-- address owner, -->
@@ -240,25 +254,19 @@ Q.Template.set("Assets/NFT/sales/factory",
                 <input name="owner" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
                 <small class="form-text text-muted">{{NFT.sales.factory.form.small.owner}}</small>
             </div>
-            <!-- address currency, -->
-            <div class="form-group" id="q1" data-smth="5">
-                <label>{{NFT.sales.factory.form.labels.currency}}</label>
-                <input name="currency" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.address}}">
-                <small class="form-text text-muted">{{NFT.sales.factory.form.small.currency}}</small>
-            </div>
             <!-- uint256 price, -->
             <div class="row">
+                <div class="col-sm-6">
+                    <label>{{NFT.sales.factory.form.labels.currency}}</label>
+                    <div class="form-group">
+                    {{&tool "Assets/web3/currencies" chainId=chainId }}
+                    </div>
+                </div>
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.price}}</label>
                         <input name="price" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.uint256}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.price}}</small>
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <label>{{NFT.sales.factory.form.labels.currency}}</label>
-                    <div class="form-group">
-                    {{&tool "Assets/web3/currencies" chainId=chainId }}
                     </div>
                 </div>
             </div>

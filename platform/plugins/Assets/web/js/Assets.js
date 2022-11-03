@@ -961,6 +961,7 @@
 				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
 				 * @param {String} info.fixedPointPrice The fixed-point large integer price (in currency) that minting the NFTs would cost.
 				 * @param {String} [info.currency] Set the ERC20 contract address, otherwise price would be in the native coin (ETH, BNB, MATIC, etc.)
+                                 * @param {String} [info.decimals=18] set number of decimals for currencies
 				 * @param {String} [info.authorAddress] Give rights to this address to mintAndDistribute
 				 * @param {String} [info.limit] maximum number that can be minted
 				 * @param {String} [info.onSaleUntil] timestamp in seconds since Unix epoch
@@ -987,9 +988,10 @@
 					var onSaleUntil = info.onSaleUntil
 						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
+                                        var decimals = ("decimals" in info) ? info.decimals : 18;
 					var price = ("fixedPointPrice" in info)
 						? String(info.fixedPointPrice)
-						: ethers.utils.parseEther(String(info.price));
+						: ethers.utils.parseUnits(String(info.price), decimals);
 					info.commission = info.commission || {};
 					var commissionFraction = Math.floor((info.commission.fraction || 0) * FRACTION);
 					var commissionAddress = info.commission.address || authorAddress;

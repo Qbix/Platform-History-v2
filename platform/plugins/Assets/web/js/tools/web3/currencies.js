@@ -37,6 +37,11 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 },
 
 { // methods go here
+	/**
+	 * Refresh tool
+	 * @static
+	 * @method refresh
+	 */
 	refresh: function () {
 		var tool = this;
 		var state = this.state;
@@ -55,6 +60,7 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 			};
 		});
 
+
 		Q.Template.render("Assets/web3/currencies", {
 			tokens: tokens,
                         fieldName: state.fieldName
@@ -71,7 +77,17 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 				Q.handle(state.onChoose, tool, [null, state.currency]);
 			});
 			Q.handle(state.onChoose, tool, [null, tokens[$select.val()]]);
+
 		});
+	},
+	/**
+	 * Get currently selected currency
+	 * @static
+	 * @method getValue
+	 * @return {Object}
+	 */
+	getValue: function () {
+		return this.currencies[$("select[name=currency]", this.element).val()];
 	}
 });
 
