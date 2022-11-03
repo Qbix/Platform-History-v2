@@ -199,9 +199,13 @@
 	 */
 	Users.init.web3 = function (callback, options) {
 		if (!Q.getObject('web3', Users.apps)) {
-			return;
-			
+			return false;
 		}
+		if (Users.init.web3.complete) {
+			callback && callback();
+			return true;
+		}
+
 		var scriptsToLoad = [
 			'{{Users}}/js/web3/ethers-5.2.umd.min.js',
 			'{{Users}}/js/web3/evm-chains.min.js',
@@ -217,7 +221,11 @@
 		if (Q.getObject(['web3', appId, 'providers', 'portis'], Users.apps)) {
 			scriptsToLoad.push('{{Users}}/js/web3/portis.js');
 		}
-		Q.addScript(scriptsToLoad, callback, options);
+		Q.addScript(scriptsToLoad, function () {
+			Users.init.web3.complete = true;
+			callback && callback();
+		}, options);
+		return true;
 	};
 
 	/**
