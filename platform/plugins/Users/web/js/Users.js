@@ -4036,20 +4036,22 @@
 				});
 			}
 
-			var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
-			web3Modal.clearCachedProvider();
-			web3Modal.resetState();
-			web3Modal.connect().then(function (provider) {
-				Users.Web3.provider = provider;
-				Q.handle(callback, null, [null, provider]);
-			}).catch(function (ex) {
-				Q.handle(callback, null, [ex]);
-				throw new Error(ex);
+
+			Users.init.web3(function () {
+				var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
+				web3Modal.clearCachedProvider();
+				web3Modal.resetState();
+				web3Modal.connect().then(function (provider) {
+					Users.Web3.provider = provider;
+					Q.handle(callback, null, [null, provider]);
+				}).catch(function (ex) {
+					Q.handle(callback, null, [ex]);
+					throw new Error(ex);
+				});
 			});
 		},
 
 		login: function (callback) {
-			var web3Modal = Users.Web3.getWeb3Modal();
 			Users.prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			Users.Web3.connect(function (err, provider) {
