@@ -14,10 +14,28 @@
  *  @param {String} [options.streamName] the stream's name
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
-//   Assets/sales/whitelist
+
 Q.Tool.define("Assets/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
+
+        // fill missed attr fields
+        for (var i in state.fields) {
+            
+            if (typeof(state.fields[i]) === "string") {
+                state.fields[i] = {
+                    value: state.fields[i],
+                    hide: false
+                }
+            } else if (typeof(state.fields[i]) === "object") {
+                if (Q.isEmpty(state.fields[i]["value"])) {
+                    state.fields[i]["value"] = "";
+                }
+                if (Q.isEmpty(state.fields[i]["hide"])) {
+                    state.fields[i]["hide"] = false;
+                }
+            }
+        }
         
         if (Q.isEmpty(state.abiPath)) {
             return console.warn("abiPath required!");
@@ -36,6 +54,10 @@ Q.Tool.define("Assets/sales", function (options) {
 },
 
 { // default options here
+    fields: {
+        account: {value: "", hide: false},
+        amount: {value: "", hide: false}
+    },
     nftSaleAddress: '',
     abiPath: '',    
     onMove: new Q.Event() // an event that the tool might trigger
@@ -43,36 +65,67 @@ Q.Tool.define("Assets/sales", function (options) {
 
 { // methods go here
     specialPurchase: function(
-        seriesId,
         account,
         amount
     ) {
+        var state = this.state;
+
+        Q.Assets.NFT.Web3.checkProvider(
+            Q.Assets.NFT.defaultChain, 
+            function (err, contract) { 
+
+                if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
+                    Q.alert("not supported yet");
+                    // need approve before.  we can do it here 
+                }
+
+                let calculateTotalAmount = (state.paymentPrice).mul(amount);
+
+                //ethers.utils.parseEther("0.1")
+                contract.specialPurchase(account,amount, {value: calculateTotalAmount}).then(function () {
+
+                    //Q.handle(callback, null, [null, tokensAmount]);
+                }, function (err) {
+                    console.log("err", err.reason);
+                    Q.handle(null, null, [err.reason]);
+                });
+            }, 
+            {
+                contractAddress: state.nftSaleAddress, 
+                abiPath: state.abiPath
+            }
+        );
     },
 
     purchase: function(
-        seriesId, // uint64
         account, // address
         amount // uint256
     ) {
-          /*  
-            Q.Assets.NFT.Web3.checkProvider(
-                Q.Assets.NFT.defaultChain, 
-                function (err, contract) { 
-                    contract.produce(NFTContract, owner, currency, price, beneficiary, autoindex, duration, rateInterval, rateAmount).then(function () {
-                        console.log("#2"); 
-                        //Q.handle(callback, null, [null, tokensAmount]);
-                    }, function (err) {
-                        console.log("#2-err", err); 
-                        //Q.handle(callback, null, [err.reason]);
-                    });
-                }, 
-                {
-                    contractAddress: Q.Assets.NFT.sales.factory[Q.Assets.NFT.defaultChain.chainId], 
-                    abiPath: "TokenSociety/templates/NFTSales"
-                }
-            );
-             */          
+
+        var state = this.state;
+
+        Q.Assets.NFT.Web3.checkProvider(
+            Q.Assets.NFT.defaultChain, 
+            function (err, contract) { 
+                
+                contract.purchase(account,amount).then(function () {
+
+                    //Q.handle(callback, null, [null, tokensAmount]);
+                }, function (err) {
+                    console.log("err", err.reason);
+                    Q.handle(null, null, [err.reason]);
+                });
+            }, 
+            {
+                contractAddress: state.nftSaleAddress, 
+                abiPath: state.abiPath
+            }
+        );
+            
     },
+    
+    //isInWhitelist: function(account) {},
+
     /**
      * Refreshes the appearance of the tool completely
      * @method getMyStream
@@ -92,77 +145,116 @@ Q.Tool.define("Assets/sales", function (options) {
             "Assets/sales", 
             {
                 TestParam: "Lorem ipsum dolor sit amet",
-                test: state.a
+
+                fields:state.fields,
+                nftSaleAddress: state.nftSaleAddress, 
+                abiPath: state.abiPath
             },
             function(err, html){
                 
                 tool.element.innerHTML = html;
 
-                //var $form = $("form[name=whiteList]");
-                /*
-                $('.jsProduce', tool.element).on(Q.Pointer.fastclick, function(){
+                var state = tool.state;
+                
+                Q.activate(tool.element, function(){
+                    
+                });
+                    
+                // check is in whitelist
+                Q.Assets.NFT.Web3.checkProvider(
+                    Q.Assets.NFT.defaultChain, 
+                    function (err, contract) { 
+                        contract.isWhitelisted(Q.Users.Web3.getSelectedXid()).then(function (isInWhitelist) {
+                            if (isInWhitelist) {
+                                $(tool.element).find(".jsSpecialPurchase").removeClass("Q_disabled");
+                            } else {
+                                $(tool.element).find(".jsSpecialPurchase").addClass("Q_disabled");
+                            }
+                            
+                            //Q.handle(callback, null, [null, tokensAmount]);
+                        }, function (err) {
+                            
+                            Q.handle(null, null, [err.reason]);
+                        });
+                    }, 
+                    {
+                        contractAddress: state.nftSaleAddress, 
+                        abiPath: state.abiPath
+                    }
+                );
+                
+                //check if current user is owner
+                Q.Assets.NFT.Web3.checkProvider(
+                    Q.Assets.NFT.defaultChain, 
+                    function (err, contract) { 
+                        contract.owner().then(function (ownerAddress) {
+   
+                            if (Q.Users.Web3.getSelectedXid() == ownerAddress) {
+                                Q.Template.render(
+                                    "Assets/sales/whitelist", 
+                                {
+                                    TestParam: "Lorem ipsum dolor sit amet",
+                                },
+                                function(err, html){
+
+                                }
+                                );
+                            }
+                            
+                            //Q.handle(callback, null, [null, tokensAmount]);
+                        }, function (err) {
+                            
+                            Q.handle(null, null, [err.reason]);
+                        });
+                        
+                        // get specialPrice
+                        contract.price().then(function (currency) {
+                           state.paymentPrice = currency;
+                        }, function (err) {
+                            Q.handle(null, null, [err.reason]);
+                        });
+                        // 
+                        // get paymentToken
+                        contract.currency().then(function (currency) {
+                           state.paymentCurrency = currency;
+                        }, function (err) {
+                            Q.handle(null, null, [err.reason]);
+                        });
+                    }, 
+                    {
+                        contractAddress: state.nftSaleAddress, 
+                        abiPath: state.abiPath
+                    }
+                );
+                        
+                $('.jsPurchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
-                    let NFTContract = $(tool.element).find("[name='NFTContract']").val();
-                    NFTContract = NFTContract ? NFTContract : TokenSociety.NFT.contract.address;
-
-                    let owner = $(tool.element).find("[name='owner']").val();
-                    owner = owner ? owner : Q.Users.Web3.getLoggedInUserXid();
-
-                    let currency = $(tool.element).find("[name='currency']").val();
-                    let price = ethers.utils.parseEther(
-                        $(tool.element).find("[name='price']").val()
-                    );
-                    let beneficiary = $(tool.element).find("[name='beneficiary']").val();
-                    let autoindex = $(tool.element).find("[name='autoindex']").val();
-                    let duration = $(tool.element).find("[name='duration']").val();
-                    let rateInterval = $(tool.element).find("[name='rateInterval']").val();
-                    let rateAmount = $(tool.element).find("[name='rateAmount']").val();
-                    // call produce
-                    tool.produce(NFTContract, owner, currency, price, beneficiary, autoindex, duration, rateInterval, rateAmount);
+                    let account = $(tool.element).find("[name='account']").val();
+                    account = account || state.fields.account.value || Q.Users.Web3.getLoggedInUserXid();
+                    
+                    let amount = $(tool.element).find("[name='amount']").val();
+                   
+                    // call 
+                    tool.purchase(account, amount);
 
                 });
+                
+                $('.jsSpecialPurchase', tool.element).on(Q.Pointer.fastclick, function(){
 
-                $('.jsTestFill', tool.element).on(Q.Pointer.fastclick, function(){
-                    $(tool.element).find("[name='NFTContract']").val('0x7AfF6E4A3B7071E17F5dFe9883c1511d22127B7A');
-                    $(tool.element).find("[name='owner']").val('0x4aC71bd9f784fA6090E9dC3EE0e61dC085e22Ef4');
-                    //$(tool.element).find("[name='owner']").val('0xb2dC1610f021E2a92d531fd6e60f1E01b372eC36');
-
-                    $(tool.element).find("[name='currency']").val('0x0000000000000000000000000000000000000000');
-                    $(tool.element).find("[name='price']").val("1");
-                    $(tool.element).find("[name='beneficiary']").val('0x4aC71bd9f784fA6090E9dC3EE0e61dC085e22Ef4');
-                    $(tool.element).find("[name='autoindex']").val(3);
-                    $(tool.element).find("[name='duration']").val(4);
-                    $(tool.element).find("[name='rateInterval']").val(0);
-                    $(tool.element).find("[name='rateAmount']").val(0);
-                });
-
-                $('.jsInstancesList', tool.element).on(Q.Pointer.fastclick, function(){
-                    //owner = owner ? owner : Q.Users.Web3.getLoggedInUserXid();
-                    tool.whitelistByNFT(TokenSociety.NFT.contract.address, function(err, data){
-
-                        let obj = $(tool.element).find(".list");
-                        obj.html('');
-                        obj.append("<h3>List by NFT</h3>");
-
-                        for (var i in data.list) {
-                            obj.append(`<div class="col-sm-12"><a href="/test2/${data.list[i]}">${data.list[i]}</a></div>`);
-                        }
-
-                    });
+                    //collect form
+                    let account = $(tool.element).find("[name='account']").val();
+                    account = account || state.fields.account.value || Q.Users.Web3.getLoggedInUserXid();
+                    
+                    let amount = $(tool.element).find("[name='amount']").val();
+                   
+                    // call 
+                    tool.specialPurchase(account, amount);
 
                 });
-                */
             }
         );
 
-
-            // if not 
-            // Q.Template.render("error template");
-//            
-//           factoryaddress
-//           nft contract
-//           
 	}
 	
 });
@@ -171,15 +263,25 @@ Q.Template.set("Assets/sales",
     `<div>
         <div class="form">
             <div class="form-group">
-                <label>{{NFT.sales.factory.form.labels.duration}}</label>
-                <input name="amount" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.uint64}}">
-                <small class="form-text text-muted">{{NFT.sales.factory.form.small.duration}}</small>
+                <label>{{NFT.sales.instance.form.labels.account}}</label>
+                <input name="account" type="text" class="form-control" placeholder="{{NFT.sales.instance.placeholders.account}} {{NFT.sales.instance.placeholders.optional}}">
+                <small class="form-text text-muted">{{NFT.sales.instance.form.small.account}}</small>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>{{NFT.sales.instance.form.labels.amount}}</label>
+                        <input name="amount" type="text" class="form-control" placeholder="{{NFT.sales.instance.placeholders.amount}}">
+                        <small class="form-text text-muted">{{NFT.sales.instance.form.small.amount}}</small>
+                    </div>
+                </div>
             </div>
     
-            <button class="jsProduce Q_button">{{NFT.sales.form.qq}}</button>
-            <button class="jsProduce2 Q_button">{{NFT.sales.factory.produce}}</button>
-            <button class="jsInstancesList Q_button">[instances list]</button>
-            <div class="list row">
+            <button class="jsPurchase Q_button">{{NFT.sales.instance.btn.Purchase}}</button>
+            <button class="jsSpecialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
+            
+            <div class="form-group">
+                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiPath }}
             </div>
         </div>
     
