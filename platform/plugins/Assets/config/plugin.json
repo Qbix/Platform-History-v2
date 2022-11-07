@@ -399,7 +399,8 @@
 			},
                         "sales": {
                             "factory": {
-                                "0x13881": "0xCA28f8902EcA5D40a32cc0fc7eDa315a8c7b6299" /* mumbai*/
+                                "0x89": "0x958A00B7fa173C5803b1cbb7f8662E1EC7862177", /* matic main */
+                                "0x13881": "0x3e45e16e403656fb17faa576206db4b8aa249ab1" /* matic test mumbai*/
                             }
                         }
 		}
