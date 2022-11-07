@@ -445,6 +445,7 @@
                     "optional": "(optional)",
                     "number": "number",
                     "address": "address",
+                    "fraction": "fraction",
                     "uint256": "uint256",
                     "uint192": "uint192",
                     "uint64": "uint64",
@@ -472,7 +473,9 @@
                     "optional": "(optional)",
                     "seriesId": "id",
                     "account": "account",
-                    "amount": "amount"
+                    "amount": "amount",
+                    "integer": "integer"
+                    
                 },
                 "btn": {
                     "Purchase": "Purchase",

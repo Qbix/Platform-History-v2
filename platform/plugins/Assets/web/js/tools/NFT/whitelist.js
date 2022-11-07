@@ -18,7 +18,7 @@
 Q.Tool.define("Assets/sales/whitelist", function (options) {
 	var tool = this;
 	var state = tool.state;
-     
+        var $toolElement = $(this.element);
         if (Q.isEmpty(state.nftSaleAddress)) {
             return console.warn("nftSaleAddress required!");
         }
@@ -45,39 +45,15 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 },
 
 { // methods go here
-    addToWhitelist: function(account) {},
-    removeFromWhitelist: function(account) {},
-//
-//    purchase: function(
-//        seriesId, // uint64
-//        account, // address
-//        amount // uint256
-//    ) {
-//
-//        var state = this.state;
-//
-//        Q.Assets.NFT.Web3.checkProvider(
-//            Q.Assets.NFT.defaultChain, 
-//            function (err, contract) { 
-//                console.log(seriesId,account,amount);
-//                console.log(contract);
-//                contract.purchase(seriesId,account,amount).then(function () {
-//console.log("ok");
-//                    //Q.handle(callback, null, [null, tokensAmount]);
-//                }, function (err) {
-//console.log("err", err.reason);
-//                    Q.handle(null, null, [err.reason]);
-//                });
-//            }, 
-//            {
-//                contractAddress: state.nftSaleAddress, 
-//                abiPath: state.abiPath
-//            }
-//        );
-//            
-//    },
-//    
-  
+//    addToWhitelist: function(account) {},
+//    removeFromWhitelist: function(account) {},
+    relatedToolRefresh: function() {
+        var relatedTool = Q.Tool.from($(this.element).closest(".Assets_sales_tool")[0], "Assets/sales");
+        if (relatedTool) {
+            relatedTool.refresh();
+        }
+    },
+    
     /**
      * Refreshes the appearance of the tool completely
      * @method getMyStream
@@ -88,13 +64,11 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
         var tool = this;
         var state = tool.state;
 
-
         // if user login then 
         Q.Template.render(
             "Assets/sales/whitelist", 
             {
                 //TestParam: "Lorem ipsum dolor sit amet",
-                
             },
             function(err, html){
                 
@@ -108,11 +82,15 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                 Q.Assets.NFT.Web3.checkProvider(
                     Q.Assets.NFT.defaultChain, 
                     function (err, contract) { 
+
                         contract.owner().then(function(account) {
+                            let objContainer = $(tool.element).find(".Assets_sales_whitelist_сontainer");
                             if (Q.Users.Web3.getSelectedXid().toLowerCase() == account.toLowerCase()) {
-                                $(tool.element).find(".jsToolContainer").show();
+
+                                objContainer.show();
                             } else {
-                                $(tool.element).find(".jsToolContainer").hide();
+
+                                objContainer.hide();
                             }
                             
                             //Q.handle(callback, null, [null, tokensAmount]);
@@ -146,7 +124,8 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                             content: contentManageWhitelist("jsDialogAdd", "Add"),
                             onActivate: function ($dialog) {
                                 $(".jsDialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
-
+                                    $(this).addClass('Q_loading');
+                                    
                                     Q.Assets.NFT.Web3.checkProvider(
                                         Q.Assets.NFT.defaultChain, 
                                         function (err, contract) { 
@@ -156,8 +135,15 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                                 return Q.alert("Invalid Address");
                                             }
                                                                         
-                                            contract.specialPurchasesListAdd([acc]).then(function() {
-                                                Q.Dialogs.pop();
+                                            contract.specialPurchasesListAdd([acc]).then(function(txResponce) {
+                                                txResponce.wait().then(function(){
+                                                    Q.Dialogs.pop();
+                                                    tool.relatedToolRefresh();
+                                                },function(){
+                                                    Q.Dialogs.pop();
+                                                    Q.handle(null, null, [err.reason]);
+                                                });
+                                                
                                                 //Q.handle(callback, null, [null, tokensAmount]);
                                             }, function (err) {
                                                 Q.Dialogs.pop();
@@ -172,7 +158,6 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                 });
                             }
                     });
-         
                 });
                 
                 $('.jsRemove', tool.element).on(Q.Pointer.fastclick, function(){
@@ -181,7 +166,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                             content: contentManageWhitelist("jsDialogRemove", "Remove"),
                             onActivate: function ($dialog) {
                                 $(".jsDialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
-
+                                    $(this).addClass('Q_loading');
                                     Q.Assets.NFT.Web3.checkProvider(
                                         Q.Assets.NFT.defaultChain, 
                                         function (err, contract) { 
@@ -191,8 +176,15 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                                 return Q.alert("Invalid Address");
                                             }
                                                                         
-                                            contract.specialPurchasesListRemove([acc]).then(function() {
-                                                Q.Dialogs.pop();
+                                            contract.specialPurchasesListRemove([acc]).then(function(txResponce) {
+                                                txResponce.wait().then(function(){
+                                                    Q.Dialogs.pop();
+                                                    tool.relatedToolRefresh();
+                                                },function(){
+                                                    Q.Dialogs.pop();
+                                                    Q.handle(null, null, [err.reason]);
+                                                });
+                                                
                                                 //Q.handle(callback, null, [null, tokensAmount]);
                                             }, function (err) {
                                                 Q.Dialogs.pop();
@@ -207,7 +199,6 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                 });
                             }
                     });
-         
                 });
 
             }
@@ -226,7 +217,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 
 Q.Template.set("Assets/sales/whitelist", 
     `<div>
-        <div class="jsToolContainer">
+        <div class="Assets_sales_whitelist_сontainer">
             <h3>Manage Whitelist</h3>
             <button class="jsAdd Q_button">Add</button>
             <button class="jsRemove Q_button">Remove</button>

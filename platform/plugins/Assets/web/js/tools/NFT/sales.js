@@ -47,6 +47,10 @@ Q.Tool.define("Assets/sales", function (options) {
 	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 		tool.text = params.text[1];
                 
+                Q.Users.Web3.onAccountsChanged.set(function () {
+                    tool.refresh();
+                }, tool);
+                
 		tool.refresh();
 	});
         Q.addStylesheet("{{Assets}}/css/tools/NFT/sales.css", p.fill('stylesheet'), { slotName: 'Assets' });
@@ -271,7 +275,7 @@ Q.Template.set("Assets/sales",
                 <div class="col-sm-6">
                     <div class="form-group">
                         <label>{{NFT.sales.instance.form.labels.amount}}</label>
-                        <input name="amount" type="text" class="form-control" placeholder="{{NFT.sales.instance.placeholders.amount}}">
+                        <input name="amount" type="text" class="form-control" placeholder="{{NFT.sales.instance.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.instance.form.small.amount}}</small>
                     </div>
                 </div>
@@ -281,7 +285,7 @@ Q.Template.set("Assets/sales",
             <button class="jsSpecialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
             
             <div class="form-group">
-                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiPath }}
+                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiPath q=3 }}
             </div>
         </div>
     
