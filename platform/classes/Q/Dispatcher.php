@@ -165,6 +165,13 @@ class Q_Dispatcher
 		}
 		Q_Text::setLanguage($l_chosen[0], Q::ifset($l_chosen, 1, null));
 
+		// if the Q service worker is requested, generate and serve it
+		if (Q_Request::isServiceWorker()) {
+			Q::event('Q/serviceWorker/response/js');
+			return true;
+		}
+		Q_Request::mergeCookieJS();
+
 		// if file or dir is requested, try to serve it
 		$served = false;
 		$skip = Q_Config::get('Q', 'dispatcherSkipFilename', false);

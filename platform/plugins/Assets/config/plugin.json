@@ -37,7 +37,9 @@
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
-			"requireValidNonce": ["Assets"]
+			"requireValidNonce": {
+				"include": ["Assets"]
+			}
 		},
 		"bundle": {
 			"exclude": {

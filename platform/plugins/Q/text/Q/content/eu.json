@@ -4,7 +4,9 @@
         "canceled": "Eskaera bertan behera utzi da",
         "500": "Barneko zerbitzari-errorea",
         "404": "Ez da aurkitu: {{url}}",
-        "501": "Eskaera eten da"
+        "501": "Eskaera eten da",
+        "401": "Baimenik gabe",
+        "403": "Debekatuta"
     },
     "nonce": {
         "sameDomain": "Saioa iraungi da. Freskatu orria eta saiatu berriro.",

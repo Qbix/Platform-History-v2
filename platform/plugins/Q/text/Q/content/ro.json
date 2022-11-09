@@ -4,7 +4,9 @@
         "canceled": "Solicitare anulată",
         "500": "Internal Server Error",
         "404": "Nu a fost găsit: {{url}}",
-        "501": "Solicitarea a fost întreruptă"
+        "501": "Solicitarea a fost întreruptă",
+        "401": "Neautorizat",
+        "403": "Interzis"
     },
     "nonce": {
         "sameDomain": "Sesiunea a expirat. Actualizați pagina și încercați din nou.",

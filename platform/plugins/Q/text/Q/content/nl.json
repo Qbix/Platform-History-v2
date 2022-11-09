@@ -4,7 +4,9 @@
         "canceled": "Verzoek geannuleerd",
         "500": "Interne Server Fout",
         "404": "Niet gevonden: {{url}}",
-        "501": "Verzoek onderbroken"
+        "501": "Verzoek onderbroken",
+        "401": "Onbevoegd",
+        "403": "Verboden"
     },
     "nonce": {
         "sameDomain": "Sessie verlopen. Vernieuw de pagina en probeer het opnieuw.",

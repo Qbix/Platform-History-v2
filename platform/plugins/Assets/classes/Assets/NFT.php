@@ -197,7 +197,7 @@ class Assets_NFT
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
 			$chainId = Q::ifset($chain, 'chainId', Q::ifset($chain, 'appId', null));
-			if (!$chainId or ($needChainId && $chainId == $needChainId)) {
+			if (!$chainId or ($needChainId && $chainId != $needChainId)) {
 				continue;
 			}
 

@@ -4,7 +4,9 @@
         "canceled": "Cais wedi&#39;i ganslo",
         "500": "Gwall gweinydd mewnol",
         "404": "Heb ei ganfod: {{url}}",
-        "501": "Torrwyd ar draws y cais"
+        "501": "Torrwyd ar draws y cais",
+        "401": "Anawdurdodedig",
+        "403": "Gwaherddir"
     },
     "nonce": {
         "sameDomain": "Sesiwn wedi dod i ben. Adnewyddwch y dudalen a cheisiwch eto.",

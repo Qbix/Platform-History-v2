@@ -29,7 +29,9 @@
 			}
 		},
 		"web": {
-			"requireValidNonce": ["Websites"]
+			"requireValidNonce": {
+				"include": ["Websites"]
+			}
 		},
 		"routes@start": {
 			"Websites/:action/:articleId": {"module": "Websites"}

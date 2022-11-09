@@ -5,7 +5,6 @@ function Q_file($params)
 	$filename = Q::ifset($params, 'filename', Q_Request::filename());
 	$parts = explode('.', $filename);
 	$ext = end($parts);
-	$intercept = true;
 	switch ($ext) {
 		case 'png':
 		case 'jpeg':
@@ -40,7 +39,21 @@ function Q_file($params)
 		default:
 			break;
 	}
-	header("HTTP/1.0 404 Not Found");
+	if (!file_exists($filename)) {
+		header("HTTP/1.0 404 Not Found");
+		$filename = Q_PLUGIN_WEB_DIR.DS.'img'.DS.'404'.DS."404.$ext";
+		readfile($filename);
+		return false;
+	}
+	if (false === Q::event("Q/file/authorize", compact(
+		'filename', 'ext',
+	), 'before') {
+		header("HTTP/1.0 403 Forbidden");
+		$filename = Q_PLUGIN_WEB_DIR.DS.'img'.DS.'403'.DS."403.$ext";
+		readfile($filename);
+		return false;
+	}
+	// if no hooks returned false, then just output the file to the client
 	readfile($filename);
 	return true;
 }

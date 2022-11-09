@@ -4,7 +4,9 @@
         "canceled": "Pyyntö peruttu",
         "500": "Sisäinen palvelinvirhe",
         "404": "Ei löydy: {{url}}",
-        "501": "Pyyntö keskeytetty"
+        "501": "Pyyntö keskeytetty",
+        "401": "Luvaton",
+        "403": "Kielletty"
     },
     "nonce": {
         "sameDomain": "Istunto päättyi. Päivitä sivu ja yritä uudelleen.",

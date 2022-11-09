@@ -10,23 +10,6 @@ function Assets_NFTcontract_response_getInfo ($params) {
 	$texts = Q_Text::get('Assets/content')['NFT']['contract'];
 	$chain = Assets_NFT::getChains($chainId);
 
-	$abiFileNames = array(
-		implode(DS, [APP_WEB_DIR, "ABI", $contractAddress.".json"]),
-		implode(DS, [APP_WEB_DIR, "ABI", "userNFTContractTemplate.json"])
-	);
-	$abiFileCorrect = false;
-	foreach ($abiFileNames as $abiFileName) {
-		if (is_file($abiFileName)) {
-			$abiFileCorrect = true;
-			break;
-		}
-	}
-	if (!$abiFileCorrect) {
-		throw new Exception("ABI file not found");
-	}
-	$abi = Q::json_decode(file_get_contents($abiFileName), true);
-	$contractAddress = array($contractAddress, $abi);
-
 	$name = $symbol = null;
 	if (!$title || $title == "false") {
 		$name = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "name", array(), $chainId);

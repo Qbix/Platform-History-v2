@@ -282,12 +282,20 @@ class Q_Request
 		$result = substr($url, $base_url_len + 1);
 		return $result ? $result : '';
 	}
+
+	static function isServiceWorker()
+	{
+		$url = Q_Request::url();
+		return ($url === Q_Request::baseUrl() . '/Q-ServiceWorker.js');
+	}
 	
 	/**
 	 * @method filename
-	 * @beta
 	 * @static
-	 * @return {string}
+	 * @return {string|false} Returns false if extension doesn't match.
+	 *   Otherwise returns full filename of potentially requested file.
+	 *   This tends to return a filename of an existing file, but if none
+	 *   exists, it would iterate aliases and return the first potential filename.
 	 */
 	static function filename()
 	{
@@ -302,8 +310,10 @@ class Q_Request
 			$ext = '';
 		}
 		$extensions = Q_Config::expect("Q", "filename", "extensions");
-		$filename = Q_PLUGIN_WEB_DIR.DS.'img'.DS.'404'.DS."404.$ext";
-		return in_array($ext, $extensions) ? $filename : null;
+		if (!in_array($ext, $extensions)) {
+			return false;
+		}
+		$filename = Q_Uri::filenameFromUrl($url);
 	}
 	
 	/**
@@ -385,6 +395,33 @@ class Q_Request
 	{
 		return Q_Request::special('echo', null);
 	}
+
+	/**
+	 * Use this to determine whether or not the request is being made
+	 * to fill a frame or iframe.
+	 * @method isFrame
+	 * @static
+	 * @return {string} The contents of `Q.frame` if it is present.
+	 */
+	static function isFrame()
+	{
+		static $result;
+		if (isset($result)) {
+			return $result;
+		}
+		/**
+		 * @event Q/request/isFrame {before}
+		 * @return {string}
+		 */
+		$result = Q::event('Q/request/isFrame', array(), 'before');
+		if (isset($result)) {
+			return $result;
+		}
+		$result = (Q::$controller === 'Q_FrameController')
+			|| Q_Request::special('frame', false);
+		return $result;
+	}
+	
 	
 	/**
 	 * Use this to determine whether or not it the request is an "AJAX"
@@ -409,6 +446,55 @@ class Q_Request
 		}
 		$result = Q_Request::special('ajax', false);
 		return $result;
+	}
+
+	/**
+	 * Use this to determine whether or not we should work with
+	 * "Q-Cookie-JS" request headers, and "Set-Cookie-JS" response headers.
+	 * @method shouldUseCookieJS
+	 * @static
+	 * @return {boolean}
+	 */
+	static function shouldUseCookieJS()
+	{
+		return Q_Request::isFrame() or self::cookieJS();
+	}
+
+	/**
+	 * Get the Cookie-JS request header, if any
+	 * @method cookieJS
+	 * @static
+	 * @return {string} Returns the header, or an empty string
+	 */
+	static function cookieJS()
+	{
+		return Q::ifset($_SERVER, 'HTTP_Q_COOKIE_JS', '');
+	}
+
+	/**
+	 * Called by dispatcher to merge the cookies
+	 * @method mergeCookieJS
+	 * @static
+	 * @return {boolean} Whether anything was merged
+	 */
+	static function mergeCookieJS()
+	{
+		if (!self::shouldUseCookieJS()) {
+			return false;
+		}
+		$cookieJS = self::cookieJS();
+		if (!$cookieJS) {
+			return false;
+		}
+		$parts = explode(';', $cookieJS);
+		foreach ($parts as $p) {
+			$parts2 = explode('=', $p, 2);
+			if (count($parts2) === 1) {
+				continue;
+			}
+			$_COOKIE[$parts2[0]] = $parts2[1];
+		}
+		return true;
 	}
 	
 	/**
@@ -736,7 +822,7 @@ class Q_Request
 		
 		return $default;
 	}
-	
+
 	/**
 	 * Returns a string identifying user browser's platform.
 	 * @method platform
@@ -1075,12 +1161,25 @@ class Q_Request
 	 * @method requireValidNonce
 	 * @static
 	 * @throws {Q_Exception_FailedValidation}
+	 * @return {boolean} Whether Q_Valid::nonce() was called
 	 */
 	static function requireValidNonce()
 	{
 		$list = Q_Config::get('Q', 'web', 'requireValidNonce', array());
+		$exclude = Q::ifset($list, 'exclude', array());
+		$include = Q::ifset($list, 'include', array());
 		$uri = Q_Dispatcher::uri();
-		foreach ($list as $l) {
+		foreach ($exclude as $x) {
+			$parts = explode('/', $x);
+			if ($uri->module !== $parts[0]) {
+				continue;
+			}
+			if (isset($parts[1]) and $uri->action !== $parts[1]) {
+				continue;
+			}
+			return false;
+		}
+		foreach ($include as $l) {
 			$parts = explode('/', $l);
 			if ($uri->module !== $parts[0]) {
 				continue;
@@ -1088,8 +1187,10 @@ class Q_Request
 			if (isset($parts[1]) and $uri->action !== $parts[1]) {
 				continue;
 			}
-			return Q_Valid::nonce(true);
+			Q_Valid::nonce(true);
+			return true;
 		}
+		return false;
 	}
 	
 	/**

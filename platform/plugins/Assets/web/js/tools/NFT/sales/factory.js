@@ -102,7 +102,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
             obj.find('tr.jsLoading').hide();    
             obj.find('tr').not('.jsLoading').remove();    
-            if (Q.isEmpty(data.list)) {
+            if (!data || Q.isEmpty(data.list)) {
 
                 obj.append(`<tr>There are no instances</tr>`);
             } else {

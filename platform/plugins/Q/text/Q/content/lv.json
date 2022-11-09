@@ -4,7 +4,9 @@
         "canceled": "Pieprasījums atcelts",
         "500": "Iekšējā servera kļūda",
         "404": "Nav atrasts: {{url}}",
-        "501": "Pieprasījums pārtraukts"
+        "501": "Pieprasījums pārtraukts",
+        "401": "Nesankcionēti",
+        "403": "Aizliegts"
     },
     "nonce": {
         "sameDomain": "Sesija ir beigusies. Atsvaidziniet lapu un mēģiniet vēlreiz.",

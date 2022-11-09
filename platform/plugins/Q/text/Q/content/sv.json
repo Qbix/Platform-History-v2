@@ -4,7 +4,9 @@
         "canceled": "Begäran avbröts",
         "500": "Internt serverfel",
         "404": "Hittade inte: {{url}}",
-        "501": "Begäran avbröts"
+        "501": "Begäran avbröts",
+        "401": "Obehörig",
+        "403": "Förbjuden"
     },
     "nonce": {
         "sameDomain": "Sessionen löpte. Uppdatera sidan och försök igen.",

@@ -313,7 +313,7 @@ class Q_Session
 					$sessionCookieParams = session_get_cookie_params();
 					Q_Response::setCookie(
 						self::name(), $id, $duration ? time()+$duration : 0, 
-						null, Q::ifset($sessionCookieParams, "domain", null), $secure, true
+						null, Q::ifset($sessionCookieParams, "domain", null), $secure, true, 'Lax'
 					);
 				}
 			}
@@ -987,7 +987,7 @@ class Q_Session
 			$secure = Q_Config::get('Q', 'session', 'cookie', 'secure', true);
 			Q_Response::setCookie(
 				'Q_nonce', $nonce, $duration ? time()+$duration : 0,
-				null, null, $secure, false
+				null, null, $secure, false, 'Lax'
 			);
 		}
 		$_SESSION['Q']['nonce'] = $nonce;

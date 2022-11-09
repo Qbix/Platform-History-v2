@@ -4,7 +4,9 @@
         "canceled": "Iarratas cealaithe",
         "500": "Earráid Freastalaí Inmheánach",
         "404": "Gan aimsiú: {{url}}",
-        "501": "Cuireadh isteach ar an iarratas"
+        "501": "Cuireadh isteach ar an iarratas",
+        "401": "Neamhúdaraithe",
+        "403": "Toirmiscthe"
     },
     "nonce": {
         "sameDomain": "Chuaigh an seisiún in éag. Athnuaigh an leathanach agus bain triail eile as.",

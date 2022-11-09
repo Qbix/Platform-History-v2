@@ -397,13 +397,11 @@
 				console.warn(e);
 				// wasn't able to get the current authenticated xid from cookie
 				// so let's sign another authenticated message
+				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
+				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
+				Users.Web3.authResponse = null;
 			}
 		});
-		// let's delete any stale facebook cookies there might be
-		// otherwise they might confuse our server-side authentication.
-		Q.cookie('w3sr_' + platformAppId, null, {path: '/'});
-		_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-		Users.Web3.authResponse = null;
 	};
 	
 	Users.authenticate.web3.options = {
@@ -572,8 +570,12 @@
 	 * @param {Object} payload The payload to sign. It will be serialized with Q.serialize()
 	 * @param {Function} callback Receives the signature, if one was computed
 	 * @param {Array} [fieldNames] The names of the fields from the payload to sign, otherwise signs all.
+	 * @return {Boolean} Returns true unless crypt.subtle is undefined because the page is in insecure context
 	 */
 	Users.sign = function (payload, callback, fieldNames) {
+		if (!crypto || !crypto.subtle) {
+			return false;
+		}
 		if (fieldNames && fieldNames.indexOf(Users.signatures.nonceField) < 0) {
 			fieldNames.push(Users.signatures.nonceField);
 		}
@@ -920,7 +922,8 @@
 					if (!result) {
 						_onCancel();
 					} else {
-						_authenticate('web3');
+						// do nothing, since we already executed this:
+						// _authenticate('web3');
 					}
 				});
 			}
@@ -2356,7 +2359,7 @@
 		 * @param {Function} callback Receives (err, key)
 		 */
 		getKey: function (callback) {
-			Q.IndexedDB.open('Q.Users', 'keys', 'id', function (err, store) {
+			Q.IndexedDB.open('Q.Users.keys', Q.info.baseUrl, 'id', function (err, store) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
@@ -2376,9 +2379,13 @@
 		 * @method generateKey
 		 * @static
 		 * @param {Function} callback Receives (err, event)
-		 * @return {Boolean} returns false if the key is already set
+		 * @return {Boolean} returns false if the key is already set or
+		 *  crypt.subtle is undefined because the page is in insecure context
 		 */
 		generateKey: function (callback) {
+			if (!crypto || !crypto.subtle) {
+				return false;
+			}
 			if (Users.Session.publicKey) {
 				Q.handle(callback, null, ["Users.Session.publicKey was already set"]);
 				return false;
@@ -2389,7 +2396,7 @@
 				namedCurve: info.namedCurve
 			}, false, ['sign', 'verify'])
 			.then(function (key) {
-				Q.IndexedDB.open('Q.Users', 'keys', 'id', function (err, store) {
+				Q.IndexedDB.open('Q.Users.keys', Q.info.baseUrl, 'id', function (err, store) {
 					var request = store.put({
 						id: 'Users.Session',
 						key: key
@@ -3913,6 +3920,7 @@
 	};
 	
 	Users.Web3 = {
+		chains: {},
 		provider: null,
 		web3Modal: null,
 		onAccountsChanged: new Q.Event(),
@@ -4140,7 +4148,6 @@
 							chainId: provider.chainId
 						}
 						callback && callback(Users.Web3.authResponse);
-						// auto-login by authenticating with facebook
 						Users.authenticate('web3', function (user) {
 							priv.login_connected = true;
 							priv.login_onConnect && priv.login_onConnect(user);
@@ -4159,15 +4166,24 @@
 		 * Execute method on contract
 		 * @method execute
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {string} contractAddress Starts with "0x"
+		 * @param {string|Object} contractAddress Can be a string starts with "0x".
+		 *   Or an object with "chainId" and "address", which makes the wallet switch to this chainId
+		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
 		 * @param {String} methodName
 		 * @param {Array} params
 		 * @param {function} callback Called from the ethers.js contract method with the results
 		 */
 		execute: function (contractABIName, contractAddress, methodName, params, callback) {
+			var chainId, address;
+			if (Q.isPlainObject(contractAddress)) {
+				chainId = contractAddress.chainId;
+				address = contractAddress.address;
+			} else {
+				address = contractAddress;
+			}
 			Users.Web3.getContract(
 				contractABIName, 
-				contractAddress, 
+				address, 
 				function (err, contract) {
 					if (!contract[methodName]) {
 						return Q.handle(callback, null, ["WrongMethod"]);
@@ -4181,14 +4197,11 @@
 			);
 		},
 		/**
-		 * Get currently selected wallet address
-		 * @method execute
-		 * @param {string} methodName
-		 * @param {mixed} params
-		 * @param {string|object} contract
-		 * @param {function} callback
+		 * Get currently selected wallet address asynchronously
+		 * @method getWalletAddress
+		 * @param {function} callback receives (err, address)
 		 */
-		getWallet: function (callback) {
+		getWalletAddress: function (callback) {
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
@@ -4200,9 +4213,9 @@
 			});
 		},
 		/**
-		 * Get currently selected chain id
+		 * Get currently selected chain id asynchronously
 		 * @method getChainId
-		 * @param {Function} callback
+		 * @param {Function} callback receives (err, chainId)
 		 */
 		getChainId: function (callback) {
 			Users.Web3.connect(function (err, provider) {
@@ -4215,6 +4228,37 @@
 				});
 			});
 		},
+
+
+		/**
+		 * Synchronously get the currently selected address on current provider
+		 * @method getSelectedXid
+		 * @static
+		 * @return {string} the currently selected address of the user in web3
+		 */
+		 getSelectedXid: function () {
+			var result, provider;
+			provider = Q.Users.Web3.provider || window.ethereum;
+			result = provider.selectedAddress || provider.accounts[0];
+			if (result) {
+				return result;
+			}
+		},
+
+		/**
+		 * Synchronously get the logged-in user's ID on any chain
+		 * @method getLoggedInUserXid
+		 * @static
+		 * @return {string} the currently selected address of the user in web3
+		 */
+		getLoggedInUserXid: function () {
+			var xids = Q.getObject('Q.Users.loggedInUser.xids');
+			var key = 'web3_all';
+			if (xids && xids[key]) {
+				return xids[key];
+			}
+		},
+
 		/**
 		 * Switch provider to a different Web3 chain
 		 * @method switchChain
@@ -4226,12 +4270,17 @@
 		 * @param {String} info.currency.name
 		 * @param {String} info.currency.symbol
 		 * @param {Number} info.currency.decimals
-		 * @param {Array} info.rpcUrls
-		 * @param {Array} info.blockExplorerUrls
+		 * @param {String} [info.rpcUrl] or rpcUrls
+		 * @param {Array} [info.rpcUrls] or rpcUrl
+		 * @param {String} [info.blockExplorerUrl] or blockExplorerUrls
+		 * @param {Array} [info.blockExplorerUrls] or blockExplorerUrl
 		 * @param {Function} onSuccess
 		 * @param {Function} onError
 		 */
 		switchChain: function (info, onSuccess, onError) {
+			if (!info || !info.chainId) {
+				return Q.handle(onError, null, ["Q.Users.Web3.switchChain: chainId missing"]);
+			}
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(onError, null, [err]);
@@ -4245,9 +4294,12 @@
 				}).then(_continue)
 				.catch(function (switchError) {
 					// This error code indicates that the chain has not been added to MetaMask.
-					if (switchError.code !== 4902) {
+					if (switchError.code !== 4902
+					&& switchError.code !== -32603) {
 						return Q.handle(onError, null, [switchError]);
 					}
+					var rpcUrls = info.rpcUrls || [info.rpcUrl];
+					var blockExplorerUrls = info.blockExplorerUrls || [info.blockExplorerUrl];
 					provider.request({
 						method: 'wallet_addEthereumChain',
 						params: [{
@@ -4258,8 +4310,8 @@
 								symbol: info.currency.symbol,
 								decimals: info.currency.decimals
 							},
-							rpcUrls: info.rpcUrls,
-							blockExplorerUrls: info.blockExplorerUrls
+							rpcUrls: rpcUrls,
+							blockExplorerUrls: blockExplorerUrls
 						}]
 					}).then(_continue)
 					.catch(function (error) {
@@ -4274,44 +4326,22 @@
 		},
 
 		/**
-		 * Used get the currently selected address on current ethereum chain
-		 * @method getSelectedXid
-		 * @static
-		 * @return {string} the currently selected address of the user in web3
-		 */
-		getSelectedXid: function () {
-			var result, provider
-			provider = Q.Users.Web3.provider || window.ethereum;
-			result = provider.selectedAddress || provider.accounts[0];
-			if (result) {
-				return result;
-			}
-		},
-
-		/**
-		 * Used to get the logged-in user's ID on any chain
-		 * @method getLoggedInUserXid
-		 * @static
-		 * @return {string} the currently selected address of the user in web3
-		 */
-		getLoggedInUserXid: function () {
-			var xids = Q.getObject('Q.Users.loggedInUser.xids');
-			var key = 'web3_all';
-			if (xids && xids[key]) {
-				return xids[key];
-			}
-		},
-
-		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
 		 * @method getContract
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {string} contractAddress Starts with "0x"
+		 * @param {string|Object} contractAddress Can be a string starts with "0x".
+		 *   Or an object with "chainId" and "address", which makes the wallet switch to this chainId
+		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
 		 * @param {Function} [callback] receives (err, contract)
 		 * @return {Promise} that would resolve with the ethers.Contract
 		 */
 		getContract: function(contractABIName, contractAddress, callback) {
+			var chainId, address;
+			if (Q.isPlainObject(contractAddress)) {
+				chainId = contractAddress.chainId;
+				address = contractAddress.contractAddress;
+			}
 			Q.Template.set(contractABIName, undefined, "abi.json");
 			Q.Template.render(contractABIName, function (err, json) {
 				try {
@@ -4329,7 +4359,16 @@
 						if (err) {
 							return Q.handle(callback, null, [err]);
 						}
-						_continue(provider);
+						if (!chainId || provider.chainId === chainId) {
+							_continue(provider);
+						} else {
+							var chain = Users.Web3.chains[chainId];
+							Q.Users.Web3.switchChain(chain, function () {
+								_continue(provider);
+							}, function (err) {
+								Q.handle(callback, null, [err]);
+							});
+						}
 					});
 				}
 				function _continue(provider) {
@@ -4345,6 +4384,10 @@
 			});
 		}
 	};
+
+	Users.Web3.switchChain = Q.promisify(Users.Web3.switchChain);
+	Users.Web3.getContract = Q.promisify(Users.Web3.getContract);
+	Users.Web3.execute = Q.promisify(Users.Web3.execute);
 
 	/**
 	 * Disconnect external platforms

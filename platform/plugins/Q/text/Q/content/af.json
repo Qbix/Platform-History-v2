@@ -4,7 +4,9 @@
         "canceled": "Versoek gekanselleer",
         "500": "Interne bedienerfout",
         "404": "Nie gevind nie: {{url}}",
-        "501": "Versoek onderbreek"
+        "501": "Versoek onderbreek",
+        "401": "Ongemagtig",
+        "403": "Verbode"
     },
     "nonce": {
         "sameDomain": "Sessie het verval. Herlaai die bladsy en probeer weer.",

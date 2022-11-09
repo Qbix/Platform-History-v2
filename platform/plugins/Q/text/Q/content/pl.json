@@ -4,7 +4,9 @@
         "canceled": "Prośba anulowana",
         "500": "Wewnętrzny błąd serwera",
         "404": "Nie znaleziono: {{url}}",
-        "501": "Żądanie przerwane"
+        "501": "Żądanie przerwane",
+        "401": "Nieautoryzowany",
+        "403": "Zabroniony"
     },
     "nonce": {
         "sameDomain": "Sesja wygasła. Odśwież stronę i spróbuj ponownie.",

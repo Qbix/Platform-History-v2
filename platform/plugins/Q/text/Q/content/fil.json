@@ -4,7 +4,9 @@
         "canceled": "Ang kahilingan ay nakansela",
         "500": "Error sa panloob na server",
         "404": "Hindi natagpuan: {{url}}",
-        "501": "Ang kahilingan ay nagambala"
+        "501": "Ang kahilingan ay nagambala",
+        "401": "Hindi awtorisado",
+        "403": "Bawal"
     },
     "nonce": {
         "sameDomain": "Nag-expire na ang sesyon. I-refresh ang pahina at subukang muli.",

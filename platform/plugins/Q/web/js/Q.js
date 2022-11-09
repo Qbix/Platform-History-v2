@@ -2132,23 +2132,9 @@ Q.ensure = function _Q_ensure(property, callback) {
  *  The loader must call the callback and pass the property as the first parameter.
  */
 Q.ensure.loaders = {
-	'JSON': "{{Q}}/js/json3-3.2.4.min.js",
 	'Handlebars': '{{Q}}/js/handlebars-v4.0.10.min.js',
 	'jQuery': '{{Q}}/js/jquery-3.2.1.min.js',
 	'Q.PHPJS': "{{Q}}/js/phpjs.js",
-	'Promise': function (property, callback) {
-		// This loads a Promise library for browsers which do not
-		// support Promise natively. For example: IE, Opera Mini.
-		// WARN: Could have race conditions:
-		if (Q.Promise || typeof Promise !== "undefined"
-		&& Promise.toString().indexOf("[native code]") !== -1) {
-			return callback && callback(property); // already loaded some other library
-		}
-		Q.addScript('{{Q}}/js/bluebird.min.js', function() {
-			Q.Promise = Promise;
-			callback && callback(property);
-		});
-	},
 	'IntersectionObserver': function (property, callback) {
 		if ('IntersectionObserver' in window
 		&& 'IntersectionObserverEntry' in window
@@ -2302,11 +2288,11 @@ Q.chain = function (callbacks, callback) {
  * Takes a function and returns a version that returns a promise
  * @method promisify
  * @static
- * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
- * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
+ * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
+ * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
-Q.promisify = function (getter, useSecondArgument) {
+Q.promisify = function (getter, useThis) {
 	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
@@ -2314,9 +2300,11 @@ Q.promisify = function (getter, useSecondArgument) {
 		var args = [], resolve, reject, found = false;
 		for (var i=0, l=arguments.length; i<l; ++i) {
 			var ai = arguments[i];
-			if (typeof ai === 'function') {
+			if (typeof ai !== 'function') {
+				args.push(ai);
+			} else {
 				found = true;
-				ai = function _promisified(err, second) {
+				args.push(function _promisified(err, second) {
 					if (err) {
 						return reject(err);
 					}
@@ -2328,18 +2316,16 @@ Q.promisify = function (getter, useSecondArgument) {
 					if (err) {
 						return reject(err);
 					}
-					resolve(useSecondArgument ? second : this);
-				}
+					resolve(useThis ? this : second);
+				});
 			}
-			args.push(ai);
-			break; // only one callback, expect err as first argument
 		}
 		if (!found) {
 			args.push(function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
-				resolve(useSecondArgument ? second : this);
+				resolve(useThis ? this : second);
 			});
 		}
 		var promise = new Q.Promise(function (r1, r2) {
@@ -6089,6 +6075,7 @@ Q.IndexedDB = {
 	 * @param {String} keyPath The key path inside the object store
 	 * @param {Function} callback Receives (error, ObjectStore)
 	 * @param {Number} [version=1] The version of the database to open
+	 * @return {Q.Promise}
 	 */
 	open: function (dbName, storeName, keyPath, callback, version) {
 		if (!root.indexedDB) {
@@ -6099,8 +6086,8 @@ Q.IndexedDB = {
 			var db = open.result;
 			var store = db.createObjectStore(storeName, {keyPath: keyPath});
 		};
-		open.onerror = function (event) {
-			callback && callback(event);
+		open.onerror = function (error) {
+			callback && callback(error);
 		};
 		open.onsuccess = function() {
 			// Start a new transaction
@@ -6137,6 +6124,7 @@ Q.IndexedDB = {
 		request.onError = onError;
 	}
 };
+Q.IndexedDB.open = Q.promisify(Q.IndexedDB.open);
 
 /**
  * A constructor to create Q.Page objects
@@ -6318,6 +6306,9 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
 	var checks = ["ready"];
+	if (Q.ServiceWorker.started) {
+		checks.push("serviceWorker");
+	}
 	if (_isCordova) {
 		checks.push("device");
 	}
@@ -6337,10 +6328,6 @@ Q.init = function _Q_init(options) {
 			Q.ready();
 		}
 
-		function _getJSON() {
-			Q.ensure('JSON', _ready);
-		}
-
 		var baseUrl = Q.baseUrl();
 		if (options && options.isLocalFile) {
 			Q.loadUrl(baseUrl, {
@@ -6351,7 +6338,7 @@ Q.init = function _Q_init(options) {
 				slotNames: ["cordova"]
 			});
 		} else {
-			_getJSON();
+			_ready();
 		}
 	});
 
@@ -6386,6 +6373,10 @@ Q.init = function _Q_init(options) {
 		}
 	}
 
+	function _waitForServiceWorker() {
+		Q.ServiceWorker.onActive.addOnce(p.fill('serviceWorker'), 'Q');
+	}
+
 	// Bind document ready event
 	if (root.jQuery) {
 		Q.jQueryPluginPlugin();
@@ -6401,7 +6392,12 @@ Q.init = function _Q_init(options) {
 		}, 10);
 	}
 	
-	_waitForDeviceReady();
+	if (_isCordova) {
+		_waitForDeviceReady();
+	}
+	if (Q.ServiceWorker.started) {
+		_waitForServiceWorker();
+	}
 	Q.handle(Q.beforeInit);
 	
 	// Time to call all the onInit handlers
@@ -6555,7 +6551,7 @@ var _loadNonceReq = Q.getter(function (callback, context, args) {
 		if (msg) {
 			throw new Q.Error(msg);
 		}
-		Q.nonce = Q.cookie('Q_nonce');
+		Q.nonce = Q.nonce || Q.cookie('Q_nonce');
 		if (Q.nonce) {
 			Q.handle(callback, context, args);
 		} else {
@@ -6698,7 +6694,7 @@ Q.removeElement = function _Q_removeElement(element, removeTools) {
 };
 
 /**
- * A tool for detecting user browser parameters.
+ * A class for detecting user browser parameters.
  * @class Q.Browser
  */
 Q.Browser = {
@@ -8803,6 +8799,42 @@ Q.findStylesheet = function (href) {
 };
 
 /**
+ * A class for working with service workers
+ * @class
+ */
+Q.ServiceWorker = {
+	start: function(cookieJarId, callback) {
+		if (!'serviceWorker' in navigator) {
+			Q.handle(callback, null, [false]);
+			Q.ServiceWorker.onActive.handle(false);
+			return console.warn('Q.ServiceWorker.start: Service workers are not supported.');
+		}
+		Q.ServiceWorker.started = true;
+		var src = Q.url('Q-ServiceWorker.js');
+		navigator.serviceWorker.register(src)
+		.then(function (registration) {
+			console.log("Q.ServiceWorker.register", registration);
+			var worker;
+			if (registration.active) {
+				worker = registration.active;
+			} else if (registration.waiting) {
+				worker = registration.waiting;
+			} else if (registration.installing) {
+				worker = registration.installing;
+			} 
+			if (worker) {
+				Q.handle(callback);
+				Q.handle(Q.ServiceWorker.onActive);
+			}
+		}).catch(function (error) {
+			debugger;
+			console.warn("Q.ServiceWorker.start error", error);
+		});
+	}
+}
+Q.ServiceWorker.onActive = new Q.Event();
+
+/**
  * Gets, sets or a deletes a cookie
  * @static
  * @method cookie
@@ -9328,7 +9360,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				+ ' (' + sn1.join(',') + ') '
 				+ ' was initiated after ' 
 				+ ' current one to ' + _loadUrlObject.url
-				+ ' (' + _loadUrlObject.options.slotNames.join(',') + ')';
+				+ ' (' + sn2.join(',') + ')';
 			_reject && _reject(e);
 			return; // a newer request was sent
 		}
@@ -15235,6 +15267,19 @@ Q.stackTrace = function() {
 		obj = new Error();
 	}
 	return obj.stack;
+};
+
+/**
+ * Call this inside a script element in the HTML when you don't want
+ * some other scripts on the page to get its contents.
+ * SECURITY: Watch out. If your website allows scripts to be loaded synchronously
+ * before the script which calls this method, then they can register a
+ * MutationObserver to get at the textContent of the script before it's executed.
+ */
+Q.removeCurrentScript = function() {
+	var cs;
+	cs = document.currentScript || document.scripts[document.scripts.length - 1];
+	cs.parentNode.removeChild(cs);
 };
 
 var _udid = location.search.queryField('Q.udid');

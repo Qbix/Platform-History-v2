@@ -473,7 +473,7 @@ class Q_Response
 	 * @static
 	 * @param {array} $params
 	 * @param {string} [$params.name=name] Attribute name of the meta tag
-	 * @param {string} $params.value Attribute value of the meta tag
+	 * @param {string} [$params.value] Attribute value of the meta tag
 	 * @param {mixed} [$params.content=null] The content of the meta tag
 	 * @param {string} [$slotName=null]
 	 */
@@ -609,7 +609,7 @@ class Q_Response
 	 * @param {array} [$replace=array()] Keys in this array are globally replaced in the $line
 	 *  with the json_encoded values, before the line is added.
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
-	 *  have the script lines be returned first by Q_Response::scriptLines.
+	 *  have the script lines be returned nearly last by Q_Response::scriptLines.
 	 *  The other special value, "Q", is intended for internal use.
 	 */
 	static function addScriptLine($line, $replace = array(), $slotName = null)
@@ -658,7 +658,7 @@ class Q_Response
 	 * Return the array of script lines added so far
 	 * @method scriptLinesArray
 	 * @static
-	 * @param {string} [$slotName=null] Pass a slot name here to return only the script lines added while filling this slot.
+	 * @param {string|array} [$slotName=null] Pass a slot name here to return only the script lines added while filling this slot.
 	 *  You can also pass an array of slot names here.
 	 *  Pass false here to return the script lines in the order they were added.
 	 * @param {boolean} [$without_script_data=false] By default, a few script lines are prepended
@@ -680,7 +680,10 @@ class Q_Response
 				$scriptLines[$sn] = self::scriptLinesArray($sn, $without_script_data);
 			}
 			$json = Q::json_encode(self::$sessionDataPaths);
-			$scriptLines[] = "Q.Session.paths = $json;";
+			array_unshift(
+				$scriptLines['@end'],
+				"Q.Session.paths = $json;"
+			);
 			return $scriptLines;
 		}
 		$scriptLines = isset(self::$scriptLinesForSlot[$slotName])
@@ -688,7 +691,6 @@ class Q_Response
 			: array();
 		$scriptDataLines = array();
 		if (!$without_script_data) {
-			$tested = array();
 			if ($data = self::scriptData($slotName)) {
 				$extend = array();
 				foreach ($data as $k => $v) {
@@ -714,6 +716,9 @@ class Q_Response
 			}
 		}
 		$scriptLines = array_merge($scriptDataLines, $scriptLines);
+		if ($scriptLines) {
+			$scriptLines[] = "Q.removeCurrentScript();";
+		}
 		return is_array($scriptLines) ? $scriptLines : array();
 	}
 
@@ -899,7 +904,7 @@ class Q_Response
 	 * The names of all the slot names for scripts, stylesheets, etc. to load in order.
 	 * You can use any of these names in your addScript(), addStylesheet(),
 	 * setStyle(), setScriptData(), addTemplate(), etc.
-	 * They are "@start", "", "Q", then the plugin names, the app name, then the slot names and finally '@end'
+	 * They are "@start", "Q", then the plugin names, the app name, then the slot names and finally "" and '@end'
 	 * @return {array}
 	 */
 	static function allSlotNames()
@@ -966,7 +971,7 @@ class Q_Response
 	 * @static
 	 * @param {string} $name The location of the template file relative to the "views" folder
 	 * @param {array} [$slotName=null] A way to override the slot name. Pass "" here to
-	 *  have the script lines be returned first by Q_Response::scriptLines.
+	 *  have the script lines be returned nearly last by Q_Response::scriptLines.
 	 *  The other special value, "Q", is intended for internal use.
 	 * @param {string} [$type="handlebars"] The type of the template, such as "php" or "handlebars".
 	 * @param {array} [$params=array()] Optional array of parameters to pass to PHP
@@ -1682,7 +1687,8 @@ class Q_Response
 			return false;
 		}
 		if (Q_Request::isAjax()) {
-			Q_Valid::nonce((bool)Users::loggedInUser(false, false)); // SECURITY: prevent CSRF attacks
+			$throwIfInvalid = (bool)Users::loggedInUser(false, false);
+			Q_Request::requireValidNonce($throwIfInvalid); // SECURITY: prevent CSRF attacks
 		}
 		Q::event('Q/sessionExtras', array(), $hookType);
 		return true;
@@ -1822,19 +1828,22 @@ class Q_Response
 	 *  that subdomains won't get it.
 	 * @param {boolean} [$secure=false] Making the cookie secure
 	 * @param {boolean} [$httponly=false] Make the cookie http only
+	 * @param {string} [$samesite=null] Can be None, Lax, or Strict
 	 * @return {string}
 	 */
 	static function setCookie(
 		$name, $value, $expires = 0,
 		$path = null, $domain = null,
-		$secure = false, $httponly = false
+		$secure = false, $httponly = false,
+		$samesite = null
 	) {
 		if (empty($_SERVER['HTTP_HOST'])) {
 			Q::log('Warning: Ignoring call to Q_Response::setCookie() without $_SERVER["HTTP_HOST"]'.PHP_EOL);
 			return false;
 		}
-		if (isset($_COOKIE[$name]) and $_COOKIE[$name] === $value) {
-			return; // it is already set
+		if (isset($_COOKIE[$name]) and $_COOKIE[$name] === $value
+		and !$expires) { // it is already set and is a session cookie
+			return; // otherwise we might want to update the expiration time
 		}
 		if (Q_Dispatcher::$startedResponse) {
 			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
@@ -1850,7 +1859,7 @@ class Q_Response
 		// 	self::$cookiesToRemove[$name] = array($path, $d, $secure, $httponly);
 		// }
 		// see https://bugs.php.net/bug.php?id=38104
-		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly);
+		self::$cookies[$name] = array($value, $expires, $path, $domain, $secure, $httponly, $samesite);
 		return $value;
 	}
 	
@@ -1875,17 +1884,17 @@ class Q_Response
 	 */
 	static function sendCookieHeaders()
 	{
-		if (empty(self::$cookies)) {
-			return;
+		if (empty(self::$cookies) and empty(self::$cookiesToRemove)) {
+			// return false;
 		}
 
 		foreach (self::$cookiesToRemove as $name => $args) {
-			list($path, $domain, $secure, $httponly) = $args;
-			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly);
+			list($path, $domain, $secure, $httponly, $samesite) = $args;
+			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly, $samesite);
 		}
 		foreach (self::$cookies as $name => $args) {
-			list($value, $expires, $path, $domain, $secure, $httponly) = $args;
-			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly);
+			list($value, $expires, $path, $domain, $secure, $httponly, $samesite) = $args;
+			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite);
 		}
 		$header = '';
 		$header = Q::event('Q/Response/sendCookieHeaders',
@@ -1894,6 +1903,16 @@ class Q_Response
 		);
 		if ($header) {
 			header($header);
+		}
+		$cookieJS = Q_Request::shouldUseCookieJS();
+		if ($cookieJS) {
+			$headers = headers_list();
+			foreach ($headers as $header) {
+				if (Q::startsWith($header, 'Set-Cookie:')) {
+					$headerValue = ltrim(substr($header, 12));
+					header("Set-Cookie-JS: $headerValue", false);
+				}
+			}
 		}
 		self::$cookies = array();
 		self::$cookiesToRemove = array();
@@ -1914,16 +1933,20 @@ class Q_Response
 		flush();
 	}
 	
-	protected static function _cookie($name, $value, $expires, $path, $domain, $secure, $httponly)
+	protected static function _cookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite = null)
 	{
 		$parts = parse_url(Q_Request::baseUrl());
 		$path = $path ? $path : (!empty($parts['path']) ? $parts['path'] : '/');
 		if ($domain === true) {
-			$domain2 = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
+			$domain = (strpos($parts['host'], '.') !== false ? '.' : '').$parts['host'];
 		} else {
-			$domain2 = $domain ? $domain : '';
+			$domain = $domain ? $domain : '';
 		}
-		setcookie($name, $value, $expires, $path, $domain2, $secure, $httponly);
+		if ($samesite) {
+			setcookie($name, $value, compact('expires', 'path', 'domain', 'secure', 'httponly', 'samesite'));
+		} else {
+			setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);
+		}
 	}
 
 	/**

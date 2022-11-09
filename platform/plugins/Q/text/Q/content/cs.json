@@ -4,7 +4,9 @@
         "canceled": "Žádost byla zrušena",
         "500": "Interní chyba serveru",
         "404": "Nenalezeno: {{url}}",
-        "501": "Žádost byla přerušena"
+        "501": "Žádost byla přerušena",
+        "401": "Neoprávněný",
+        "403": "Zakázáno"
     },
     "nonce": {
         "sameDomain": "Relace vypršela. Obnovte stránku a zkuste to znovu.",

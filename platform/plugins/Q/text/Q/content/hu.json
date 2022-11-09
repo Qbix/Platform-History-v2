@@ -4,7 +4,9 @@
         "canceled": "A kérés törölve",
         "500": "Belső Szerverhiba",
         "404": "Nem található: {{url}}",
-        "501": "A kérés megszakadt"
+        "501": "A kérés megszakadt",
+        "401": "Jogosulatlan",
+        "403": "Tiltott"
     },
     "nonce": {
         "sameDomain": "A munkamenet ideje lejárt. Frissítse az oldalt, és próbálja újra.",

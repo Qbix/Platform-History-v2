@@ -4,7 +4,9 @@
         "canceled": "Žiadosť bola zrušená",
         "500": "Interná chyba servera",
         "404": "Nenájdené: {{url}}",
-        "501": "Žiadosť bola prerušená"
+        "501": "Žiadosť bola prerušená",
+        "401": "Neoprávnené",
+        "403": "Zakázané"
     },
     "nonce": {
         "sameDomain": "Platnosť relácie vypršala. Obnovte stránku a skúste to znova.",
