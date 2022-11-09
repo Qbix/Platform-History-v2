@@ -754,11 +754,11 @@
                                     this._sourceInstance = instance;
                                     //if(instance == null) return;
                                     var sourceItem = this;
-                                    sourceItem.title = instance.name;
+                                    sourceItem.title = instance.name.toLowerCase();
                                     instance.on('nameChanged', function (newName) {
                                         console.log('nameChanged set', instance)
 
-                                        sourceItem.title = newName;
+                                        sourceItem.title = newName.toLowerCase();
                                     })
                                 },
                                 'get': function() {
@@ -1147,6 +1147,16 @@
                             }
                         }
 
+                        function addTeleconferenceSource(name) {
+                            var webrtcGroup = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                sourceType: 'webrtcGroup',
+                                title: name,
+                            });
+
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup);
+
+                        }
+
                         function selectSource(sourceItem) {
                             console.log('selectSource', _visualList)
                             console.log('selectSource sourceItem', sourceItem)
@@ -1183,7 +1193,7 @@
                                 _resizingElementTool.state.onResizing.removeAllHandlers();
                             }
                             if(_selectedSource.sourceInstance.sourceType == 'group' && _selectedSource.sourceInstance.groupType == 'webrtc') {
-                                var webrtcLayoutRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                                var webrtcLayoutRect = _selectedSource.sourceInstance.rect;
                                 console.log('selectSource if1')
 
 
@@ -1193,16 +1203,18 @@
                                 _resizingElement.style.left = left + webrtcLayoutRect.x / timesBigger + 'px';
                                 _resizingElement.style.border = '1px solid ' + _selectedSource.sourceInstance.color;
                                 _resizingElementTool.state.onMoving.set(function (x, y) {
-                                    let currentRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect();
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(currentRect.width, currentRect.height, (x - left) * timesBigger, (y - top)  * timesBigger);
+                                    //let currentRect = _selectedSource.sourceInstance.rect;
+                                    //controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(currentRect.width, currentRect.height, (x - left) * timesBigger, (y - top)  * timesBigger);
+                                    _selectedSource.sourceInstance.rect.x = (x - left) * timesBigger;
+                                    _selectedSource.sourceInstance.rect.y = (y - top)  * timesBigger;
                                 });
                                 _resizingElementTool.state.onResizing.set(function (width, height, x, y) {
-                                    let currentRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect()
-                                    let outWidth = width != null ? width * timesBigger : currentRect.width;
-                                    let outHeight = height != null ? height * timesBigger : currentRect.height;
-                                    let outLeft = x != null ? (x - left) * timesBigger : currentRect.x;
-                                    let outTop = y != null ? (y - top) * timesBigger : currentRect.y;
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(outWidth, outHeight, outLeft, outTop);
+                                    let currentRect = _selectedSource.sourceInstance.rect;
+                                    _selectedSource.sourceInstance.rect.width = width != null ? width * timesBigger : currentRect.width;
+                                    _selectedSource.sourceInstance.rect.height = height != null ? height * timesBigger : currentRect.height;
+                                    _selectedSource.sourceInstance.rect.x = x != null ? (x - left) * timesBigger : currentRect.x;
+                                    _selectedSource.sourceInstance.rect.y = y != null ? (y - top) * timesBigger : currentRect.y;
+                                    //controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(outWidth, outHeight, outLeft, outTop);
                                 });
                             } else if(_selectedSource.sourceInstance.sourceType == 'image' || _selectedSource.sourceInstance.sourceType == 'video') {
                                 console.log('selectSource if2')
@@ -1287,6 +1299,20 @@
                         function createAddSourceMenu() {
                             var dropUp = document.createElement('DIV');
                             dropUp.className = 'Streams_webrtc_popup-sources-add-menu';
+                            var conferenceItem = document.createElement('DIV');
+                            conferenceItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-conference';
+                            var conferenceItemIcon = document.createElement('DIV');
+                            conferenceItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            var conferenceItemIconText = document.createElement('DIV');
+                            conferenceItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            conferenceItemIconText.innerHTML = 'Teleconference';
+                            conferenceItem.addEventListener('click', function (e) {
+                                addTeleconferencePopup.showDialog(e);
+                            })
+                            conferenceItem.appendChild(conferenceItemIcon);
+                            conferenceItem.appendChild(conferenceItemIconText);
+                            dropUp.appendChild(conferenceItem);
+
                             var imageItem = document.createElement('DIV');
                             imageItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-image';
                             var imageItemIcon = document.createElement('DIV');
@@ -1297,19 +1323,10 @@
                             imageItem.addEventListener('click', function (e) {
                                 addImagePopup.showDialog(e);
                             })
-                            /*var imageItemInput = document.createElement('INPUT');
-                                imageItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
-                                imageItemInput.type = 'file';
-                                imageItemInput.name = 'fileImageSource';
-                                imageItemInput.accept = 'image/png, image/jpeg'
-                                imageItemInput.addEventListener('change', function (e) {
-                                    addImagePopup.showDialog();
-                                    //addImageSource(e);
-                                })*/
                             imageItem.appendChild(imageItemIcon);
                             imageItem.appendChild(imageItemIconText);
-                            //imageItem.appendChild(imageItemInput);
                             dropUp.appendChild(imageItem);
+
                             var videoItem = document.createElement('DIV');
                             videoItem.className = 'Streams_webrtc_popup-sources-add-menu-item';
                             var videoItemIcon = document.createElement('DIV');
@@ -1711,6 +1728,140 @@
 
                             function showDialog(e) {
                                 imageItemInput.value = '';
+                                if(_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
+                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                    var _clientX = e.clientX;
+                                    var _clientY = e.clientY;
+
+                                    _isHidden = false;
+
+                                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                                    if(Q.info.isMobile) {
+                                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                        dialogue.style.top = (controlsRect.height + 10) + 'px';
+                                    } else {
+                                        dialogue.style.left = (_clientX + 50) + 'px';
+                                        dialogue.style.top = (_clientY - 200) + 'px';
+                                    }
+                                    window.removeEventListener('click', closeOnWindowClick)
+
+                                }
+                            }
+
+                            function hideDialog() {
+                                if(!_dialogueEl.classList.contains('Streams_webrtc_hidden')){
+                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                    _isHidden = true;
+                                }
+                            }
+
+                            function toggle(e) {
+                                if(_isHidden) {
+                                    showDialog(e);
+                                } else hideDialog(e);
+                            }
+
+                            return {
+                                hideDialog: hideDialog,
+                                showDialog: showDialog,
+                                toggle: toggle
+                            }
+                        }())
+
+                        var addTeleconferencePopup = (function () {
+                            var _dialogueEl = null;
+                            var _isHidden = true;
+
+                            console.log('addTeleconferencePopup')
+                            var dialogue=document.createElement('DIV');
+                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
+                            _dialogueEl = dialogue;
+                            var dialogTitle=document.createElement('H3');
+                            dialogTitle.innerHTML = 'Add teleconference';
+                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+
+                            var dialogInner=document.createElement('DIV');
+                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            var boxContent=document.createElement('DIV');
+                            boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+
+                            var sourceName = document.createElement('INPUT');
+                            sourceName.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            sourceName.type = 'text';
+                            sourceName.placeholder = 'Teleconference Source Name';
+                            sourceName.name = 'sourceName';
+
+                            boxContent.appendChild(sourceName);
+
+                            var close=document.createElement('div');
+                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '"';
+                            close.style.backgroundRepeat = 'no-repeat';
+                            close.style.backgroundSize = 'cover';
+                            close.addEventListener('click', function() {
+                                if(sourceName.value != '') {
+                                    var val = sourceName.value;
+                                    addTeleconferenceSource(val);
+                                    hideDialog();
+                                    sourceName.value = '';
+                                }
+                            });
+                            dialogInner.appendChild(dialogTitle);
+
+                            dialogue.appendChild(close);
+                            dialogInner.appendChild(boxContent);
+                            dialogue.appendChild(dialogInner);
+
+                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            setTimeout(function () {
+                                Q.activate(
+                                    Q.Tool.setUpElement(
+                                        dialogue, // or pass an existing element
+                                        "Q/resize",
+                                        {
+                                            move: true,
+                                            activateOnElement: dialogTitle,
+                                            resize: false,
+                                            active: true,
+                                            moveWithinArea: 'window',
+                                        }
+                                    ),
+                                    {},
+                                    function () {
+
+                                    }
+                                );
+                            }, 3000)
+
+                            var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                            var dialogWidth = 400;
+                            dialogue.style.width = dialogWidth + 'px';
+                            console.log('dialogWidth', dialogWidth);
+                            if(Q.info.isMobile) {
+                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                            } else {
+                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialogue.style.top = (window.innerHeight/ 2 - 100) + 'px';
+                            }
+
+
+                            close.addEventListener('click', function () {
+                                hideDialog();
+                            });
+
+                            function closeOnWindowClick(e) {
+                                if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                                    && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
+                                    dropUpMenu.classList.add('Streams_webrtc_hidden');
+                                    window.removeEventListener('click', closeOnWindowClick)
+                                    e.preventDefault();
+                                    e.stopPropagation();
+                                }
+                            }
+
+                            function showDialog(e) {
+                                sourceName.value = '';
                                 if(_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
                                     _dialogueEl.classList.remove('Streams_webrtc_hidden');
                                     var _clientX = e.clientX;
@@ -2772,19 +2923,20 @@
                     }
 
                     var canvasLayoutOptions = (function () {
+                        let _selectedSource = null;
                         var _dialogueEl = null;
                         var _layoutTabs = null;
+                        var _activeTabName = null;
                         var _dialogueBody = null;
-                        var _layoutList = [];
-                        var _selectedLayout = null;
-                        var _layoutListEl = null;
-                        var _layoutParamsEl = null;
+                        var _generatedLayoutsListDialogs = {};
+                        var _generatedLayoutsParamsDialogs = {};
 
                         function LayoutListItem(name) {
                             var listInstance = this;
                             this.active = true;
                             this.title = name != null ? name : null;
                             this.itemEl = null;
+                            this.key = null;
                             this.handler = function () {
 
                             }
@@ -2812,62 +2964,84 @@
 
                         function selectLayout(layoutItem) {
                             console.log('selectLayout', layoutItem)
+                            let layoutList;
+                            if(_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] != null) {
+                                layoutList = _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].layoutList;
+                            } else {
+                                return;
+                            }
+                            if(typeof layoutItem == 'string') {
+                                for(let i in layoutList) {
+                                    if(layoutList[i].key == layoutItem) {
+                                        layoutItem = layoutList[i];
+                                    }
+                                }
+                            }
+
                             if(layoutItem.itemEl && !layoutItem.itemEl.classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
                                 (layoutItem.itemEl).classList.add('Streams_webrtc_canvas-popup-list-item-active');
                             }
 
-                            _selectedLayout = layoutItem;
-                            for(let i in _layoutList) {
-                                console.log('selectLayout for', _layoutList[i], _selectedLayout)
-                                if(_layoutList[i] == _selectedLayout) continue;
+                            _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].selectedLayout = layoutItem;
+                            for(let i in layoutList) {
+                                if(layoutList[i] == layoutItem) continue;
                                 console.log('selectLayout for --', layoutItem.itemEl, (layoutItem.itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active'))
 
-                                if((_layoutList[i].itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
+                                if((layoutList[i].itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
                                     console.log('selectLayout remove');
-                                    (_layoutList[i].itemEl).classList.remove('Streams_webrtc_canvas-popup-list-item-active');
+                                    (layoutList[i].itemEl).classList.remove('Streams_webrtc_canvas-popup-list-item-active');
                                 }
                             }
 
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCCanvasLayout(layoutItem.key);
+                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCLayout(_selectedSource.sourceInstance, layoutItem.key);
                         }
 
                         function createLayoutList() {
-                            if(_layoutListEl != null) return _layoutListEl;
+                            if(_generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] != null) {
+                                return _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].dialog;
+                            }
                             var dialogBodyInner = document.createElement('DIV');
                             dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-layouts-body';
 
+                            let layoutList = [];
                             var tiledLayout = new LayoutListItem('Tiled');
                             tiledLayout.key = 'tiledStreamingLayout';
-                            _layoutList.push(tiledLayout);
+                            layoutList.push(tiledLayout);
                             dialogBodyInner.appendChild(tiledLayout.itemEl);
 
                             var fullScreenLayout = new LayoutListItem('Screen sharing');
                             fullScreenLayout.key = 'screenSharing';
-                            _layoutList.push(fullScreenLayout);
+                            layoutList.push(fullScreenLayout);
                             dialogBodyInner.appendChild(fullScreenLayout.itemEl);
 
                             var sideScreensharing = new LayoutListItem('Side screen sharing');
                             sideScreensharing.key = 'sideScreenSharing';
-                            _layoutList.push(sideScreensharing);
+                            layoutList.push(sideScreensharing);
                             dialogBodyInner.appendChild(sideScreensharing.itemEl);
 
                             var audioOnlyLayout = new LayoutListItem('Audio only');
                             audioOnlyLayout.key = 'audioOnly';
-                            _layoutList.push(audioOnlyLayout);
+                            layoutList.push(audioOnlyLayout);
                             dialogBodyInner.appendChild(audioOnlyLayout.itemEl);
 
                             var audioScreenLayout = new LayoutListItem('Audio only + screen sharing');
                             audioScreenLayout.key = 'audioScreenSharing';
-                            _layoutList.push(audioScreenLayout);
+                            layoutList.push(audioScreenLayout);
                             dialogBodyInner.appendChild(audioScreenLayout.itemEl);
 
-                            _layoutListEl = dialogBodyInner;
+
+                            _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id] = {
+                                dialog: dialogBodyInner,
+                                layoutList: layoutList
+                            };
 
                             return dialogBodyInner;
                         }
 
                         function createParamsList() {
-                            if(_layoutParamsEl != null) return _layoutParamsEl;
+                            if(_generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id] != null) {
+                                return _generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id];
+                            }
                             var dialogBodyInner = document.createElement('DIV');
                             dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
 
@@ -2876,7 +3050,7 @@
                             showName.type = 'checkbox';
                             showName.id = 'showNames';
                             showName.name = 'showNames';
-                            showName.checked = controlsTool.WebRTCLib.getOptions().liveStreaming.showLabelWithNames;
+                            showName.checked = _selectedSource.sourceInstance.params.showLabelWithNames;
                             var showNameLabel = document.createElement('Label');
                             showNameLabel.appendChild(showName);
                             showNameLabel.appendChild(document.createTextNode("Show participants' name"));
@@ -2887,7 +3061,7 @@
                             showBorders.type = 'checkbox';
                             showBorders.id = 'showBorders';
                             showBorders.name = 'showBorders';
-                            showBorders.checked = controlsTool.WebRTCLib.getOptions().liveStreaming.showLayoutBorders;
+                            showBorders.checked = _selectedSource.sourceInstance.params.showLayoutBorders;
                             var showBordersLabel = document.createElement('Label');
                             showBordersLabel.appendChild(showBorders);
                             showBordersLabel.appendChild(document.createTextNode("Show layout borders"));
@@ -2899,24 +3073,13 @@
                             marginsInput.type = 'number';
                             marginsInput.id = 'layoutMargins';
                             marginsInput.name = 'layoutMargins';
-                            marginsInput.value = controlsTool.WebRTCLib.getOptions().liveStreaming.tiledLayoutMargins;
+                            marginsInput.value = _selectedSource.sourceInstance.params.tiledLayoutMargins;
                             var marginsInputLabel = document.createElement('Label');
                             marginsInputLabel.appendChild(document.createTextNode("Layout margins:"));
                             marginsCon.appendChild(marginsInputLabel);
                             marginsCon.appendChild(marginsInput);
 
-                            /*var audioOnlyCon = document.createElement('DIV');
-                                var audioOnly = document.createElement('INPUT');
-                                audioOnly.type = 'checkbox';
-                                audioOnly.id = 'audioOnly';
-                                audioOnly.name = 'audioOnly';
-                                audioOnly.checked = controlsTool.WebRTCLib.getOptions().liveStreaming.audioOnlyLayout;
-                                var audioOnlyLabel = document.createElement('Label');
-                                audioOnlyLabel.appendChild(audioOnly);
-                                audioOnlyLabel.appendChild(document.createTextNode("Audio-only layout"));
-                                audioOnlyCon.appendChild(audioOnlyLabel);*/
-
-                            var webrtcLayoutRect = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getWebrtcLayoutRect();
+                            var webrtcLayoutRect = _selectedSource.sourceInstance.rect;
 
                             //size
                             var sizeAndPositionCon = document.createElement('DIV');
@@ -2982,7 +3145,7 @@
                             audioBg.type = 'color';
                             audioBg.id = 'audioBgColor';
                             audioBg.name = 'audioBgColor';
-                            audioBg.value = controlsTool.WebRTCLib.getOptions().liveStreaming.audioLayoutBgColor;
+                            audioBg.value = _selectedSource.sourceInstance.params.audioLayoutBgColor;
                             var removeBg = document.createElement('DIV');
                             removeBg.className = 'Streams_webrtc_popup-options-params-position-audio-res'
                             removeBg.innerHTML = '&#10060;'
@@ -2990,52 +3153,54 @@
                             audioBgCon.appendChild(audioBg);
                             audioBgCon.appendChild(removeBg);
 
-                            //dialogBodyInner.appendChild(showNameCon);
-                            //dialogBodyInner.appendChild(showBordersCon);
+                           
                             dialogBodyInner.appendChild(marginsCon);
-                            //dialogBodyInner.appendChild(audioOnlyCon);
                             dialogBodyInner.appendChild(sizeAndPositionCon);
                             dialogBodyInner.appendChild(audioBgCon);
 
                             _layoutParamsEl = dialogBodyInner;
 
                             showNameLabel.addEventListener('click', function (e) {
-                                controlsTool.WebRTCLib.getOptions().liveStreaming.showLabelWithNames = showName.checked;
+                                _selectedSource.sourceInstance.params.showLabelWithNames = showName.checked;
                             })
 
                             showBorders.addEventListener('change', function () {
-                                controlsTool.WebRTCLib.getOptions().liveStreaming.showLayoutBorders = showBorders.checked;
+                                _selectedSource.sourceInstance.params.showLayoutBorders = showBorders.checked;
                             })
 
                             marginsInput.addEventListener('input', function () {
-                                controlsTool.WebRTCLib.getOptions().liveStreaming.tiledLayoutMargins = marginsInput.value;
+                                _selectedSource.sourceInstance.params.tiledLayoutMargins = marginsInput.value;
                             })
 
-                            /*audioOnly.addEventListener('change', function () {
-                                    controlsTool.WebRTCLib.getOptions().liveStreaming.audioOnlyLayout = audioOnly.checked;
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCCanvasLayout();
-                                })*/
-
                             audioBg.addEventListener('change', function () {
-                                controlsTool.WebRTCLib.getOptions().liveStreaming.audioLayoutBgColor = audioBg.value;
+                                _selectedSource.sourceInstance.params.audioLayoutBgColor = audioBg.value;
                             })
 
                             removeBg.addEventListener('click', function () {
-                                controlsTool.WebRTCLib.getOptions().liveStreaming.audioLayoutBgColor = 'rgba(0, 0, 0, 0)';
+                                _selectedSource.sourceInstance.params.audioLayoutBgColor = 'rgba(0, 0, 0, 0)';
                             })
 
                             function updateWebrtcRect (e) {
-                                let layoutWidth = width.value;
-                                let layoutHeight = height.value;
-                                let x = leftPos.value;
-                                let y = topPos.value;
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
+                                _selectedSource.sourceInstance.rect.width = width.value;
+                                _selectedSource.sourceInstance.rect.height = height.value;
+                                _selectedSource.sourceInstance.rect.x = leftPos.value;
+                                _selectedSource.sourceInstance.rect.y = topPos.value;
+                                //controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
                             }
-                            marginsInput.addEventListener('input', updateWebrtcRect)
-                            width.addEventListener('blur', updateWebrtcRect)
-                            height.addEventListener('blur', updateWebrtcRect)
-                            topPos.addEventListener('blur', updateWebrtcRect)
-                            leftPos.addEventListener('blur', updateWebrtcRect)
+                            marginsInput.addEventListener('input', updateWebrtcRect);
+                            width.addEventListener('blur', updateWebrtcRect);
+                            height.addEventListener('blur', updateWebrtcRect);
+                            topPos.addEventListener('blur', updateWebrtcRect);
+                            leftPos.addEventListener('blur', updateWebrtcRect);
+
+                            _selectedSource.sourceInstance.eventDispatcher.on('rectChanged', function () {
+                                width.value = webrtcLayoutRect._width;
+                                height.value = webrtcLayoutRect._height;
+                                leftPos.value = webrtcLayoutRect._x;
+                                topPos.value = webrtcLayoutRect._y;
+                            });
+
+                            _generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id] = dialogBodyInner;
 
                             return dialogBodyInner;
                         }
@@ -3050,9 +3215,15 @@
                             _dialogueBody.appendChild(createParamsList());
                         }
 
-                        function showDialog() {
-                            console.log('showDialog', this, _activeView)
+                        function showDialog(source) {
+                            _selectedSource = source;
+                            console.log('showDialog', _selectedSource.sourceInstance.id)
                             hideActiveView();
+                            if(_activeTabName == 'layouts' || _activeTabName == null) {
+                                showLayoutList();
+                            } else if(_activeTabName == 'params') {
+                                showLayoutParams();
+                            }
                             _optionsEl.appendChild(_dialogueEl);
                             _activeView = this;
                         }
@@ -3073,8 +3244,10 @@
                             if(!tabName) return;
                             if(tabName == 'layouts') {
                                 showLayoutList();
+                                _activeTabName = 'layouts';
                             } else if(tabName == 'params') {
                                 showLayoutParams();
+                                _activeTabName = 'params';
                             }
 
                             for(let e in _layoutTabs.children) {
@@ -3121,7 +3294,7 @@
                         var dialogBody = _dialogueBody = document.createElement('DIV');
                         dialogBody.className = 'Streams_webrtc_popup-options-body';
 
-                        dialogBody.appendChild(createLayoutList());
+                        //dialogBody.appendChild(createLayoutList());
                         _dialogueEl.appendChild(dialogBody);
 
                         layoutsTab.addEventListener('click', tabHandler);
@@ -3246,9 +3419,9 @@
 
                             showName.addEventListener('change', function () {
                                 if( showName.checked) {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance.participant);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance);
                                 } else {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance.participant);
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance);
 
                                 }
                             })
@@ -3261,19 +3434,19 @@
                                 }
                             })
                             nameInput.addEventListener('blur', function () {
-                                _selectedSource.sourceInstance.participant.username = nameInput.value;
+                                _selectedSource.sourceInstance.name = nameInput.value.toUpperCase();
                             })
                             captionInput.addEventListener('blur', function () {
                                 _selectedSource.sourceInstance.caption = captionInput.value;
 
                             })
-                            bgColorInput.addEventListener('change', function () {
+                            bgColorInput.addEventListener('input', function () {
                                 _selectedSource.sourceInstance.params.captionBgColor = bgColorInput.value;
                             })
                             removeBg.addEventListener('click', function () {
                                 _selectedSource.sourceInstance.params.captionBgColor = bgColorInput.value = 'rgba(0, 0, 0, 0)';
                             })
-                            fontColorInput.addEventListener('change', function () {
+                            fontColorInput.addEventListener('input', function () {
                                 _selectedSource.sourceInstance.params.captionFontColor = fontColorInput.value;
                             })
 
@@ -3978,7 +4151,7 @@
                     function update() {
                         var selectedSource = sourcesInterface.getSelectedSource();
                         if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'group' && selectedSource.sourceInstance.groupType == 'webrtc') {
-                            optionsColumn.canvasLayoutOptions.show();
+                            optionsColumn.canvasLayoutOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.listType != 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
                             optionsColumn.webrtcParticipantOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'image') {
@@ -4080,6 +4253,7 @@
                                 resize: true,
                                 active: true,
                                 //elementPosition: 'fixed',
+                                showResizeHandles: true,
                                 moveWithinArea: 'parent',
                                 negativeMoving: true,
                                 onMoving: function () {
@@ -4131,6 +4305,7 @@
                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;
                     dialogue.style.width = dialogWidth + 'px';
+                    dialogue.style.height = (dialogWidth / 1.4) + 'px';
                     console.log('dialogWidth', dialogWidth);
                     if(Q.info.isMobile) {
                         //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
@@ -4278,6 +4453,7 @@
                                 resize: true,
                                 active: true,
                                 //elementPosition: 'fixed',
+                                showResizeHandles: true,
                                 moveWithinArea: 'parent',
                                 negativeMoving: true,
                                 onMoving: function () {

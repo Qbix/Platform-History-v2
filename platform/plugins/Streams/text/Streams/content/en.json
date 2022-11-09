@@ -152,10 +152,7 @@
         }
     },
     "identifier": {
-        "private": "Private",
-        "public": "Public",
-        "configurationSaved": "Configuration saved",
-        "error": "Something went wrong"
+        "privacySettings": "Privacy Settings"
     },
     "participating": {
         "Title": "Title",
