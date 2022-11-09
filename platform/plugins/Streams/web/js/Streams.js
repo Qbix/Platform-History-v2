@@ -6008,36 +6008,37 @@ Q.onInit.add(function _Streams_onInit() {
 	}
 
 	//add private|public toggle to dialog for changing email/mobile
-	Q.Users.setIdentifier.options.onActivate = function (dialog) {
-		let userIdInput = $('input[name=userId]', dialog)
-		let identifierTypeInput = $('input[name=identifierType]', dialog)
+	Q.Users.setIdentifier.options.onActivate = function () {
+		var userIdInput = $('input[name=userId]', this);
+		var identifierTypeInput = $('input[name=identifierType]', this);
 		if(!identifierTypeInput) {
 			return;
 		}
 
-		let identifierTypeVal = identifierTypeInput.val();
+		var identifierTypeVal = identifierTypeInput.val();
 
-		let fields = {
+		var fields = {
 			identifierType: identifierTypeVal
 		};
 		if(userIdInput) {
 			fields.userId = userIdInput.val();
 		}
-		
-		$('<div class="Users_setIdentifier_access"/>').html([
-			$('<button class="Q_button Users_setIdentifier_privacy_btn"/>').html(identifierTypeVal + ' ' + (Q.text.Streams.identifier.privacySettings != null ? Q.text.Streams.identifier.privacySettings : 'Privacy Settings')),
-		]).insertBefore(".Q_buttons", dialog);
 
-		$('.Q_button.Users_setIdentifier_privacy_btn').click(function () {
-			if(identifierTypeVal == 'email') {
-				Q.Streams.Dialogs.access(Q.Users.loggedInUserId(), 'Streams/user/emailAddress');
-			} else if(identifierTypeVal == 'mobile') {
-				Q.Streams.Dialogs.access(Q.Users.loggedInUserId(), 'Streams/user/mobileNumber');
-			} else {
-				throw new Q.Error("Wrong identifierType");
-			}
-		});	
-		
+		var userId = Q.Users.loggedInUserId();
+		$('<button class="Q_button Users_setIdentifier_privacy_btn"/>')
+			.on(Q.Pointer.fastclick, function () {
+				if(identifierTypeVal === 'email') {
+					Q.Streams.Dialogs.access(userId, 'Streams/user/emailAddress');
+				} else if(identifierTypeVal === 'mobile') {
+					Q.Streams.Dialogs.access(userId, 'Streams/user/mobileNumber');
+				} else if(identifierTypeVal.toLowerCase() === 'web3') {
+					Q.Streams.Dialogs.access(userId, 'Streams/user/xid/web3');
+				} else {
+					throw new Q.Error("Wrong identifierType");
+				}
+			})
+			.html(identifierTypeVal + ' ' + (Q.text.Streams.identifier.privacySettings != null ? Q.text.Streams.identifier.privacySettings : 'Privacy Settings'))
+			.insertBefore(".Users_setIdentifier_go", this);
 	}
 
 	/**

@@ -477,6 +477,9 @@
 				fields['Q.Users.facebook.authResponse'] = ar;
 			} else if (platform === 'web3') {
 				Q.extend(fields, Users.Web3.authResponse);
+				if (Q.getObject(options, "updateXid")) {
+					fields.updateXid = options.updateXid;
+				}
 			}
 			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
 		}
@@ -1241,6 +1244,9 @@
 		options = Q.extend({}, Users.setIdentifier.options, options);
 		var identifierType = Q.getObject("identifierType", options);
 		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
+		if (identifierType.toLowerCase() === "web3") {
+			identifier = Users.Web3.getLoggedInUserXid();
+		}
 
 		function onSuccess(user) {
 			if (false !== Q.handle(options.onResult, this, [user])) {
@@ -1991,19 +1997,18 @@
 
 		var autocomplete = (type === 'text') ? 'on' : type;
 		step1_form.empty().append(
-			$('<input id="Users_setIdentifier_identifier" />').attr({
+			$('<input id="Users_setIdentifier_identifier" />').prop({
 				name: 'identifier',
 				autocomplete: autocomplete,
-				type: type
-			}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
-				.attr('placeholder', placeholder)
+				type: type,
+				maxlength: Q.text.Users.login.maxlengths.identifier,
+				placeholder: placeholder
+			})
 		).append(
 			$('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />').val(identifierType)
 		).append(
-			$('<div class="Q_buttons"/>').html(
-				$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />').html(
-					Q.text.Users.setIdentifier.sendMessage
-				)
+			$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />').html(
+				Q.text.Users.setIdentifier.sendMessage
 			)
 		).submit(function (event) {
 			var $identifier = $('#Users_setIdentifier_identifier');
@@ -2019,11 +2024,10 @@
 			event.preventDefault();
 		});
 		if (options.userId) {
-			step1_form.append($('<input />').attr({
+			step1_form.append($('<input />').prop({
 				type: "hidden",
-				name: "userId",
-				value: options.userId
-			}));
+				name: "userId"
+			})).val(options.userId);
 		}
 		step1_form.plugin('Q/validator');
 
@@ -2037,6 +2041,7 @@
 		dialog.plugin('Q/dialog', {
 			alignByParent: false,
 			fullscreen: false,
+			className: options.className,
 			beforeLoad: function () {
 				setTimeout(function () {
 					$('input[type!=hidden]', dialog).val('').trigger('change');
