@@ -418,7 +418,7 @@
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
                                 Users.Web3.execute(
-                                    'Assets/templates/NFT',
+                                    'Assets/templates/R1/NFT/contract',
                                     {
                                         chainId: state.chainId,
                                         address: NFT.Web3.chains[state.chainId].contract
@@ -437,7 +437,7 @@
                             // Put NFT off sale
                             $("button[name=offSale]", dialog).on("click", function () {
                                 Users.Web3.execute(
-                                    'Assets/templates/NFT',
+                                    'Assets/templates/R1/NFT/contract',
                                     {
                                         chainId: state.chainId,
                                         address: NFT.Web3.chains[state.chainId].contract
@@ -460,7 +460,7 @@
                                         return;
                                     }
                                     Users.Web3.execute(
-                                        'Assets/templates/NFT',
+                                        'Assets/templates/R1/NFT/contract',
                                         {
                                             chainId: state.chainId,
                                             address: NFT.Web3.chains[state.chainId].contract

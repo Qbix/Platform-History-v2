@@ -4392,7 +4392,7 @@
 		 * @param {Function} [callback] receives (err, contract)
 		 * @return {Promise} that would resolve with the ethers.Contract
 		 */
-		getFactory: function(contractABIName, callback) {
+		getFactory: function(contractABIName, contractAddress, callback) {
 			Users.Web3.getChainId(function (err, chainId) {
 				var factories = Users.Web3.factories[contractABIName];
 				var contractAddress = factories[chainId] || factories['all'];

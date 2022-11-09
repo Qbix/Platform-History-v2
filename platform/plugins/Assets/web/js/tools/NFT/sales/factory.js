@@ -62,11 +62,13 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
 { // methods go here
     whitelistByNFT: function(NFTContract, callback){
-
+        let contract;
         return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
-        .then(function (contract) {
-            return contract.whitelistByNFT(NFTContract);
+        .then(function(_contract){
+            contract = _contract;
+            return contract.whitelistByNFTContract(NFTContract);
         }).then(function (instancesList) {
+            console.log(contract);
             Q.handle(callback, null, [null, {list: instancesList}, contract])
         }).catch(function (err) {
             Q.handle(callback, null, [err.reason || err]);
@@ -79,9 +81,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         if (obj.find('tr.Assets_NFT_sales_factory_item').length == 0) {
             obj.find('tr').hide();    // all defaults  like "there are no data  etc"
         }
-        
         obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="/test2/${item}">${item}</a></td></tr>`);
-        
     },
     _whitelistRefresh: function(){
         var tool = this;
@@ -89,6 +89,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         obj.find('tr').hide();
         obj.find('tr.Assets_NFT_sales_factory_loading').show();
         tool.whitelistByNFT(TokenSociety.NFT.contract.address, function(err, data){
+
             obj.find('tr.Assets_NFT_sales_factory_loading').hide();    
             obj.find('tr').not('.Assets_NFT_sales_factory_loading').remove();    
             if (!data || Q.isEmpty(data.list)) {
@@ -124,12 +125,23 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         autoindex, //uint192 
         duration, //uint64 
         rateInterval, //uint32 
-        rateAmount //uint16 
+        rateAmount, //uint16 
+        callback
     ) {
         var tool = this;
         var state = this.state;
-
-        return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales')
+//
+//        Q.Users.NFT.Web3.getFactory()
+//            .then(function (factory) {
+//                method = factory["produce(string,string,string,string,string)"];
+//                return method(name, symbol, "", NFT.URI.base, NFT.URI.suffix);
+//            }).then(function (result) {
+//                return Q.handle(callback, tool, [null, result]);
+//            }).catch(function (err) {
+//                return Q.handle(callback, tool, [err]);
+//            });
+            
+        return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
         .then(function (contract) {
             return contract.produce(
                 NFTContract, 
@@ -151,12 +163,12 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                         timeout: 5
                     });
                     tool._whitelistPush(instance);
+                    Q.handle(callback, null, [null, instance]);
                 }, function(err){
                     console.log("err::txResponce.wait()");
+                    Q.handle(callback, null, [err.reason || err]);
                 });
             });
-        }).then(function (instancesList) {
-            Q.handle(callback, null, [null, {list: instancesList}, contract])
         }).catch(function (err) {
             console.warn(err);
             Q.handle(callback, null, [err.reason || err]);
@@ -230,7 +242,11 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                     let rateInterval= state.fields.rateInterval.value || $(tool.element).find("[name='rateInterval']").val();
                     let rateAmount  = state.fields.rateAmount.value || $(tool.element).find("[name='rateAmount']").val();
                     // call produce
-                    tool.produce(NFTContract, seriesId, owner, currency, price, beneficiary, autoindex, duration, rateInterval, rateAmount);
+                    tool.produce(NFTContract, seriesId, owner, currency, price, beneficiary, autoindex, duration, rateInterval, rateAmount,
+                    function(err, obj, contract){
+                        console.log(arguments)
+                    }
+                    );
 
                 });
                 

@@ -1025,7 +1025,7 @@
 				 */
 				getContract: function (chainId, callback, options) {
 					var address = Q.getObject("contractAddress", options) || chain.contract;
-					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/NFT';
+					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
 					return Q.Users.Web3.getContract(
 						abiPath, 
 						{

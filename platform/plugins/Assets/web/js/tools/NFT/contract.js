@@ -476,7 +476,7 @@
                                     return;
                                 }
 
-                                Users.Web3.getContract('Assets/templates/NFT', {
+                                Users.Web3.getContract('Assets/templates/R1/NFT/contract', {
                                     chainId: chainId,
                                     address: contractAddress
                                 }, function (err, contract) {

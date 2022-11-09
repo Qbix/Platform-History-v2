@@ -65,61 +65,53 @@ Q.Tool.define("Assets/sales", function (options) {
 { // methods go here
     specialPurchase: function(
         account,
-        amount
+        amount,
+        callback
     ) {
-        var state = this.state;
-
-        Q.Assets.NFT.Web3.checkProvider(
-            Q.Assets.NFT.defaultChain, 
-            function (err, contract) { 
-
-                if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
-                    Q.alert("not supported yet");
-                    // need approve before.  we can do it here 
-                }
-
-                let calculateTotalAmount = (state.paymentPrice).mul(amount);
-
-                //ethers.utils.parseEther("0.1")
-                contract.specialPurchase(account,amount, {value: calculateTotalAmount}).then(function () {
-
-                    //Q.handle(callback, null, [null, tokensAmount]);
-                }, function (err) {
-                    console.log("err", err.reason);
-                    Q.handle(null, null, [err.reason]);
-                });
-            }, 
-            {
-                contractAddress: state.nftSaleAddress, 
-                abiPath: state.abiPath
+        let contract;
+        Q.Users.Web3.getContract(state.abiPath, this.state.nftSaleAddress)
+        .then(function (_contract) {
+            contract = _contract;
+            if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
+                Q.alert("not supported yet");
+                // need approve before.  we can do it here 
             }
-        );
+            let calculateTotalAmount = (state.paymentPrice).mul(amount);
+            //ethers.utils.parseEther("0.1")
+            return contract.specialPurchase(account,amount, {value: calculateTotalAmount});
+        }).then(function () {
+            //                        err,  data, contract
+            Q.handle(callback, null, [null, null, contract])
+        }).catch(function (err) {
+            console.warn(err);
+            Q.handle(callback, null, [err.reason || err]);
+        });
     },
 
     purchase: function(
         account, // address
         amount // uint256
     ) {
-
-        var state = this.state;
-
-        Q.Assets.NFT.Web3.checkProvider(
-            Q.Assets.NFT.defaultChain, 
-            function (err, contract) { 
-                
-                contract.purchase(account,amount).then(function () {
-
-                    //Q.handle(callback, null, [null, tokensAmount]);
-                }, function (err) {
-                    console.log("err", err.reason);
-                    Q.handle(null, null, [err.reason]);
-                });
-            }, 
-            {
-                contractAddress: state.nftSaleAddress, 
-                abiPath: state.abiPath
+    
+        let contract;
+        
+        Q.Users.Web3.getContract(state.abiPath, this.state.nftSaleAddress)
+        .then(function (_contract) {
+            contract = _contract;
+            if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
+                Q.alert("not supported yet");
+                // need approve before.  we can do it here 
             }
-        );
+            let calculateTotalAmount = (state.paymentPrice).mul(amount);
+            //ethers.utils.parseEther("0.1")
+            return contract.purchase(account,amount, {value: calculateTotalAmount});
+        }).then(function () {
+            //                        err,  data, contract
+            Q.handle(callback, null, [null, null, contract])
+        }).catch(function (err) {
+            console.warn(err);
+            Q.handle(callback, null, [err.reason || err]);
+        });
             
     },
     
