@@ -8810,7 +8810,7 @@ Q.ServiceWorker = {
 			return console.warn('Q.ServiceWorker.start: Service workers are not supported.');
 		}
 		Q.ServiceWorker.started = true;
-		var src = Q.url('Q-ServiceWorker.js');
+		var src = Q.url('Q-ServiceWorker');
 		navigator.serviceWorker.register(src)
 		.then(function (registration) {
 			console.log("Q.ServiceWorker.register", registration);
