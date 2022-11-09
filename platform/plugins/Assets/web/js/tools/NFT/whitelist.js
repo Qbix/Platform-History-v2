@@ -18,8 +18,6 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
     var tool = this;
     var state = tool.state;
     
-    tool.abiPath = "Assets/templates/R1/NFT/sales/contract";
-    
     if (Q.isEmpty(state.nftSaleAddress)) {
         return console.warn("nftSaleAddress required!");
     }
@@ -41,7 +39,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 },
 
 { // default options here
-    
+    abiPath: "Assets/templates/R1/NFT/sales/contract",
     nftSaleAddress: '',
     onMove: new Q.Event() // an event that the tool might trigger
 },
@@ -76,29 +74,22 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                 tool.element.innerHTML = html;
                 Q.activate(tool.element, function(){});
                 var state = tool.state;
-                
-                // check is in whitelist
-                Q.Assets.NFT.Web3.checkProvider(
-                    Q.Assets.NFT.defaultChain, 
-                    function (err, contract) { 
-                        contract.owner().then(function(account) {
-                            let objContainer = $(tool.element).find(".Assets_sales_whitelist_сontainer");
-                            if (Q.Users.Web3.getSelectedXid().toLowerCase() == account.toLowerCase()) {
-                                objContainer.show();
-                            } else {
-                                objContainer.hide();
-                            }
-                            //Q.handle(callback, null, [null, tokensAmount]);
-                        }, function (err) {
-                            Q.handle(null, null, [err.reason]);
-                        });
-                    }, 
-                    {
-                        contractAddress: state.nftSaleAddress, 
-                        abiPath: state.abiPath
-                    }
-                );
 
+                // check is in whitelist
+                Q.Users.Web3.getContract(
+                    state.abiPath, 
+                    state.nftSaleAddress
+                ).then(function (contract) {
+                    return contract.owner();
+                }).then(function (account) {
+                    let objContainer = $(tool.element).find(".Assets_sales_whitelist_сontainer");
+                    if (Q.Users.Web3.getSelectedXid().toLowerCase() == account.toLowerCase()) {
+                        objContainer.show();
+                    } else {
+                        objContainer.hide();
+                    }
+                });
+                
                 var contentManageWhitelist = function(btnClassname, btnTitle){
                     return `
                         <div class="Assets_sales_whitelist_form">
@@ -119,36 +110,30 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                             onActivate: function ($dialog) {
                                 $(".Assets_sales_whitelist_dialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
-                                    
-                                    Q.Assets.NFT.Web3.checkProvider(
-                                        Q.Assets.NFT.defaultChain, 
-                                        function (err, contract) { 
-                                            var acc = $($dialog).find("[name='account']").val();
-                                            if (!acc) {
-                                                Q.Dialogs.pop();
-                                                return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
-                                            }
-                                                                        
-                                            contract.specialPurchasesListAdd([acc]).then(function(txResponce) {
-                                                txResponce.wait().then(function(){
-                                                    Q.Dialogs.pop();
-                                                    tool.relatedToolRefresh();
-                                                },function(){
-                                                    Q.Dialogs.pop();
-                                                    Q.handle(null, null, [err.reason]);
-                                                });
-                                                
-                                                //Q.handle(callback, null, [null, tokensAmount]);
-                                            }, function (err) {
-                                                Q.Dialogs.pop();
-                                                Q.handle(null, null, [err.reason]);
-                                            });
-                                        }, 
-                                        {
-                                            contractAddress: state.nftSaleAddress, 
-                                            abiPath: state.abiPath
+                                    let account = $($dialog).find("[name='account']").val();
+                                    if (!account) {
+                                            Q.Dialogs.pop();
+                                            return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
                                         }
-                                    );
+                                    Q.Users.Web3.getContract(
+                                        state.abiPath, 
+                                        state.nftSaleAddress
+                                    ).then(function (contract) {
+                                        return contract.specialPurchasesListAdd([account]);
+                                    }).then(function (txResponce) {
+                                        txResponce.wait().then(function(){
+                                            Q.Dialogs.pop();
+                                            Q.Notices.add({
+                                                content: `Account "${account}" was added into whitelist successfully`,
+                                                timeout: 5
+                                            });
+                                            tool.relatedToolRefresh();
+                                        },function(){
+                                            Q.Dialogs.pop();
+                                            Q.handle(null, null, [err.reason]);
+                                        });
+                                    });
+                            
                                 });
                             }
                     });
@@ -161,35 +146,30 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                             onActivate: function ($dialog) {
                                 $(".Assets_sales_whitelist_dialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
-                                    Q.Assets.NFT.Web3.checkProvider(
-                                        Q.Assets.NFT.defaultChain, 
-                                        function (err, contract) { 
-                                            var acc = $($dialog).find("[name='account']").val();
-                                            if (!acc) {
-                                                Q.Dialogs.pop();
-                                                return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
-                                            }
-                                                                        
-                                            contract.specialPurchasesListRemove([acc]).then(function(txResponce) {
-                                                txResponce.wait().then(function(){
-                                                    Q.Dialogs.pop();
-                                                    tool.relatedToolRefresh();
-                                                },function(){
-                                                    Q.Dialogs.pop();
-                                                    Q.handle(null, null, [err.reason]);
-                                                });
-                                                
-                                                //Q.handle(callback, null, [null, tokensAmount]);
-                                            }, function (err) {
-                                                Q.Dialogs.pop();
-                                                Q.handle(null, null, [err.reason]);
-                                            });
-                                        }, 
-                                        {
-                                            contractAddress: state.nftSaleAddress, 
-                                            abiPath: state.abiPath
+                                    let account = $($dialog).find("[name='account']").val();
+                                    if (!account) {
+                                            Q.Dialogs.pop();
+                                            return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
                                         }
-                                    );
+                                    Q.Users.Web3.getContract(
+                                        state.abiPath, 
+                                        state.nftSaleAddress
+                                    ).then(function (contract) {
+                                        return contract.specialPurchasesListRemove([account]);
+                                    }).then(function (txResponce) {
+                                        txResponce.wait().then(function(){
+                                            Q.Dialogs.pop();
+                                            Q.Notices.add({
+                                                content: `Account "${account}" was removed from whitelist successfully`,
+                                                timeout: 5
+                                            });
+                                            tool.relatedToolRefresh();
+                                        },function(){
+                                            Q.Dialogs.pop();
+                                            Q.handle(null, null, [err.reason]);
+                                        });
+                                    });
+                            
                                 });
                             }
                     });

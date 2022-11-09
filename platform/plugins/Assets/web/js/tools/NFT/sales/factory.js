@@ -34,7 +34,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 }
             }
         }
-
+        
 	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 		tool.text = params.text[1];
 		tool.refresh();
@@ -63,14 +63,19 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 { // methods go here
     whitelistByNFT: function(NFTContract, callback){
         let contract;
-        return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
+        Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
         .then(function(_contract){
             contract = _contract;
-            return contract.whitelistByNFTContract(NFTContract);
+console.log(contract);
+let r = contract.whitelistByNFTContract(NFTContract).then(function(res){return res});
+console.log(r);
+            return r;
         }).then(function (instancesList) {
             console.log(contract);
+            console.log(instancesList);
             Q.handle(callback, null, [null, {list: instancesList}, contract])
         }).catch(function (err) {
+console.log("}).catch(function (err) {");
             Q.handle(callback, null, [err.reason || err]);
         })
 
@@ -84,12 +89,14 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="/test2/${item}">${item}</a></td></tr>`);
     },
     _whitelistRefresh: function(){
+console.log("_whitelistRefresh: function(){");
         var tool = this;
         let obj = $(tool.element).find(".Assets_NFT_sales_factory_instancesTableList");
         obj.find('tr').hide();
         obj.find('tr.Assets_NFT_sales_factory_loading').show();
+console.log(TokenSociety.NFT.contract.address);
         tool.whitelistByNFT(TokenSociety.NFT.contract.address, function(err, data){
-
+console.log(arguments);
             obj.find('tr.Assets_NFT_sales_factory_loading').hide();    
             obj.find('tr').not('.Assets_NFT_sales_factory_loading').remove();    
             if (!data || Q.isEmpty(data.list)) {
@@ -250,7 +257,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
                 });
                 
-                $('.Assets_NFT_sales_factory_instancesList', tool.element).on(Q.Pointer.fastclick, function(){
+                $(".Assets_NFT_sales_factory_instancesList", tool.element).on(Q.Pointer.fastclick, function(){
                     tool._whitelistRefresh();
                 });
                 tool._whitelistRefresh();
