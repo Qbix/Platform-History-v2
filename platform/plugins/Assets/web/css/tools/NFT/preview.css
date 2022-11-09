@@ -306,7 +306,7 @@
     border-bottom-color: rgba(4, 4, 5, 0.07);
 }
 
-.Assets_NFT_preview_composer input[type="datetime-local"] {
+.Assets_NFT_preview_composer input[type="datetime-local"i] {
     background: transparent;
     padding: 0;
     color: rgba(4, 4, 5, 0.8);

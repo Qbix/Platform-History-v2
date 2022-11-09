@@ -178,14 +178,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
             }
         );
 
-
-            // if not 
-            // Q.Template.render("error template");
-//            
-//           factoryaddress
-//           nft contract
-//           
-	}
+    }
 	
 });
 

@@ -43,8 +43,6 @@ Q.Tool.define("Assets/sales", function (options) {
             return console.warn("contractAddress required!");
         }
         
-        
-        
 	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 		tool.text = params.text[1];
                 
@@ -113,16 +111,7 @@ Q.Tool.define("Assets/sales", function (options) {
 
         return Q.Users.Web3.getContract(state.abiNft, state.contractAddress)
         .then(function (contract) {
-
-            //(, , saleInfo, , , ) = INFT(NFTContract).seriesInfo(seriesId);
-    
-    // mapping (uint256 => SeriesInfo) public seriesInfo;  // seriesId => SeriesInfo
-    //function seriesInfo(uint256 seriesId) external view returns(address, uint32, INFT.SaleInfo memory, INFT.CommissionData memory, string memory, string memory);
-            //let data = contract.seriesInfo(seriesId).wait(1);
-            
-
             return contract.seriesInfo(seriesId);
-          // return contract.seriesInfo();
         }).catch(function(err) {
             console.warn(err);
             Q.handle(callback, null, [err.reason || err]);
@@ -188,10 +177,6 @@ Q.Tool.define("Assets/sales", function (options) {
         
         var tool = this;
         var state = tool.state;
-
-        state.a = Date.now();
-
-        //var t = tool.getMultiple(3,5);
 
         // if user login then 
         Q.Template.render(
