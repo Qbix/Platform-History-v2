@@ -49,7 +49,7 @@
 
         var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
             $toolElement.addClass("Q_working");
-            state.chain = NFT.chains[state.chainId];
+            state.chain = NFT.Web3.chains[state.chainId];
             $toolElement.attr("data-tokenId", state.tokenId);
             $toolElement.attr("data-chainId", state.chainId);
 
@@ -423,6 +423,19 @@
                         onActivate: function (dialog) {
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
+                                Users.Web3.execute(
+                                    
+                                    {
+                                        chainId: state.chainId,
+                                        address: NFT.Web3.chains[state.chainId].contract
+                                    },
+                                    "listForSale(uint256,uint256,address)",
+                                    [state.tokenId.toString(), saleInfo.price.toString(), saleInfo.currencyToken],
+                                    function (e) {
+                                        console.error(e);
+                                        $toolElement.removeClass("Q_working");
+                                    }
+                                )
                                 Web3.checkProvider(state.chain, function (err, contract) {
                                     if (err) {
                                         return $toolElement.removeClass("Q_working");
@@ -737,7 +750,7 @@
                             var price = parseFloat($("input[name=fixedPrice]:visible", dialog).val() || $("input[name=minBid]:visible", dialog).val()) || 0;
                             var onMarketPlace = $onMarketPlace.prop("checked");
                             var chainId = $("select[name=chain]", dialog).val();
-                            var chain = NFT.chains[chainId];
+                            var chain = NFT.Web3.chains[chainId];
                             var currencySymbol = $("select[name=currency]", dialog).val();
                             var currency = {};
                             Q.each(NFT.currencies, function (i, c) {

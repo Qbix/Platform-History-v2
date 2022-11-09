@@ -4171,22 +4171,15 @@
 		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
 		 * @param {String} methodName
 		 * @param {Array} params
-		 * @param {function} callback Called from the ethers.js contract method with the results
+		 * @param {function} callback receives (err, result) with result from the ethers.js contract method
 		 */
 		execute: function (contractABIName, contractAddress, methodName, params, callback) {
-			var chainId, address;
-			if (Q.isPlainObject(contractAddress)) {
-				chainId = contractAddress.chainId;
-				address = contractAddress.address;
-			} else {
-				address = contractAddress;
-			}
 			Users.Web3.getContract(
 				contractABIName, 
-				address, 
+				contractAddress, 
 				function (err, contract) {
 					if (!contract[methodName]) {
-						return Q.handle(callback, null, ["WrongMethod"]);
+						return Q.handle(callback, null, ["Q.Users.Web3.execute: missing method " + methodName]);
 					}
 					contract[methodName].apply(null, params).then(function (result) {
 						Q.handle(callback, null, [null, result]);

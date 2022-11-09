@@ -55,7 +55,8 @@
 		},
 		"web": {
 			"requireValidNonce": {
-				"include": ["Streams"]
+				"include": ["Streams"],
+				"exclude": ["Streams/batch", "Streams/avatar"]
 			}
 		},
 		"bundle": {

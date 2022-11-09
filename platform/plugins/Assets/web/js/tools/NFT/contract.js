@@ -344,7 +344,7 @@
                 });
             };
 
-            var chains = Object.values(NFT.chains);
+            var chains = Object.values(Assets.Web3.chains);
             if (state.onlyDefaultChain) {
                 chains = chains.filter(function(value, index, arr){
                     return value.default;
@@ -407,7 +407,7 @@
             var publisherId = options.publisherId;
             var streamName = options.streamName;
             var chainId = streamName.split("/").pop();
-            var chain = NFT.chains[chainId];
+            var chain = Users.Web3.chains[chainId];
             var relationType = NFT.series.relationType.interpolate({contract: contractAddress});
 
             $element.attr("data-contract", contractAddress);
@@ -476,7 +476,10 @@
                                     return;
                                 }
 
-                                Web3.checkProvider(chain, function (err, contract) {
+                                Users.Web3.getContract('Assets/templates/NFT', {
+                                    chainId: chainId,
+                                    address: contractAddress
+                                }, function (err, contract) {
                                     if (err) {
                                         return;
                                     }
@@ -613,7 +616,7 @@
             });
         },
         /**
-         * Create NFT
+         * Create a new NFT contract
          * @method createContract
          * @param {String} chainId
          * @param {String} name - contract name
@@ -623,24 +626,38 @@
         createContract: function (chainId, name, symbol, callback) {
             var tool = this;
             var state = this.state;
-            var chain = NFT.chains[chainId];
             state.onInstanceCreatedCalled = false;
+
+            Web3.onInstanceCreated.set(function (name, symbol, address) {
+                if (state.onInstanceCreatedCalled) {
+                    return;
+                }
+
+                state.onInstanceCreatedCalled = true;
+
+                Q.handle(callback, tool, [null, name, symbol, address]);
+                Q.handle(state.onCreated, tool, [name, symbol, address]);
+            }, tool);
+
+            Users.Web3.execute(
+                'Assets/templates/NFTFactory', 
+                {
+                    chainId: chainId,
+                    address: NFT.Web3.chains[chainId].factory
+                },
+                "produce(string,string,string,string,string)",
+                [ name, symbol, "", NFT.URI.base, NFT.URI.suffix ],
+                function (err) {
+                    if (err) {
+                        return Q.handle(callback, tool, [err]);
+                    }
+                }
+            );
 
             Web3.checkProvider(chain, function (err, factory) {
                 if (err) {
                     return Q.handle(callback, tool, [err]);
                 }
-
-                Web3.onInstanceCreated.set(function (name, symbol, address) {
-                    if (state.onInstanceCreatedCalled) {
-                        return;
-                    }
-
-                    state.onInstanceCreatedCalled = true;
-
-                    Q.handle(callback, tool, [null, name, symbol, address]);
-                    Q.handle(state.onCreated, tool, [name, symbol, address]);
-                }, tool);
 
                 try {
                     factory["produce(string,string,string,string,string)"](name, symbol, "", NFT.URI.base, NFT.URI.suffix).catch(function (err) {
