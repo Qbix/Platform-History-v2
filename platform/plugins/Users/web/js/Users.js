@@ -4263,7 +4263,8 @@
 		 * Switch provider to a different Web3 chain
 		 * @method switchChain
 		 * @static
-		 * @param {Object} info
+		 * @param {String|Object} info Can be the chainId (e.g. "0x1")
+		 *   or an object with chain info to pass to the wwallet
 		 * @param {String} info.chainId
 		 * @param {String} info.name
 		 * @param {String} info.currency
@@ -4274,16 +4275,18 @@
 		 * @param {Array} [info.rpcUrls] or rpcUrl
 		 * @param {String} [info.blockExplorerUrl] or blockExplorerUrls
 		 * @param {Array} [info.blockExplorerUrls] or blockExplorerUrl
-		 * @param {Function} onSuccess
-		 * @param {Function} onError
+		 * @param {Function} callback receives (error, chainId)
 		 */
-		switchChain: function (info, onSuccess, onError) {
+		switchChain: function (info, callback) {
+			if (typeof info === 'string') {
+				info = Users.Web3.chains[info];
+			}
 			if (!info || !info.chainId) {
-				return Q.handle(onError, null, ["Q.Users.Web3.switchChain: chainId missing"]);
+				return Q.handle(callback, null, ["Q.Users.Web3.switchChain: chainId missing"]);
 			}
 			Users.Web3.connect(function (err, provider) {
 				if (err) {
-					return Q.handle(onError, null, [err]);
+					return Q.handle(callback, null, [err]);
 				}
 
 				Users.Web3.switchChainOccuring = true;
@@ -4296,7 +4299,7 @@
 					// This error code indicates that the chain has not been added to MetaMask.
 					if (switchError.code !== 4902
 					&& switchError.code !== -32603) {
-						return Q.handle(onError, null, [switchError]);
+						return Q.handle(callback, null, [switchError]);
 					}
 					var rpcUrls = info.rpcUrls || [info.rpcUrl];
 					var blockExplorerUrls = info.blockExplorerUrls || [info.blockExplorerUrl];
@@ -4315,12 +4318,14 @@
 						}]
 					}).then(_continue)
 					.catch(function (error) {
-						Q.handle(onError, null, [error]);
+						Q.handle(callback, null, [error]);
 					});
 				});
 
 				function _continue() {
-					provider.once("chainChanged", onSuccess);
+					provider.once("chainChanged", function (chainId) {
+						Q.handle(callback, null, [null, chainId]);
+					});
 				}
 			});
 		},
@@ -4363,10 +4368,11 @@
 							_continue(provider);
 						} else {
 							var chain = Users.Web3.chains[chainId];
-							Q.Users.Web3.switchChain(chain, function () {
+							Q.Users.Web3.switchChain(chain, function (err) {
+								if (Q.firstErrorMessage(err)) {
+									return Q.handle(callback, null, [err]);
+								}
 								_continue(provider);
-							}, function (err) {
-								Q.handle(callback, null, [err]);
 							});
 						}
 					});

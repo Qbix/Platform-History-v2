@@ -944,10 +944,11 @@
 						if (window.ethereum.chainId === chain.chainId) {
 							_process();
 						} else { // if no, lead to switch chain
-							Q.Users.Web3.switchChain(chain, function () {
+							Q.Users.Web3.switchChain(chain, function (err) {
+								if (Q.firstErrorMessage(err)) {
+									return Q.handle(callback, null, [err]);
+								}
 								_process();
-							}, function (err) {
-								Q.handle(callback, null, [err]);
 							});
 						}
 					});
