@@ -4152,7 +4152,9 @@
 							platform: 'web3',
 							chainId: provider.chainId
 						}
-						callback && callback(Users.Web3.authResponse);
+						if (Q.handle(callback, null, [Users.Web3.authResponse]) === false) {
+							return;
+						}
 						Users.authenticate('web3', function (user) {
 							priv.login_connected = true;
 							priv.login_onConnect && priv.login_onConnect(user);
