@@ -1,4 +1,3 @@
-
 (function (window, Q, $, undefined) {
 	
 /**
@@ -18,7 +17,7 @@
 Q.Tool.define("Assets/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
-
+        state.abiPath = "Assets/templates/R1/NFT/sales/contract";
         // fill missed attr fields
         for (var i in state.fields) {
             
@@ -37,9 +36,6 @@ Q.Tool.define("Assets/sales", function (options) {
             }
         }
         
-        if (Q.isEmpty(state.abiPath)) {
-            return console.warn("abiPath required!");
-        }
         if (Q.isEmpty(state.nftSaleAddress)) {
             return console.warn("nftSaleAddress required!");
         }
@@ -63,7 +59,6 @@ Q.Tool.define("Assets/sales", function (options) {
         amount: {value: "", hide: false}
     },
     nftSaleAddress: '',
-    abiPath: '',    
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -148,11 +143,8 @@ Q.Tool.define("Assets/sales", function (options) {
         Q.Template.render(
             "Assets/sales", 
             {
-                TestParam: "Lorem ipsum dolor sit amet",
-
                 fields:state.fields,
-                nftSaleAddress: state.nftSaleAddress, 
-                abiPath: state.abiPath
+                nftSaleAddress: state.nftSaleAddress
             },
             function(err, html){
                 
@@ -169,10 +161,11 @@ Q.Tool.define("Assets/sales", function (options) {
                     Q.Assets.NFT.defaultChain, 
                     function (err, contract) { 
                         contract.isWhitelisted(Q.Users.Web3.getSelectedXid()).then(function (isInWhitelist) {
+                            let specialPurchaseBtn = $(tool.element).find(".Assets_sales_specialPurchase");
                             if (isInWhitelist) {
-                                $(tool.element).find(".jsSpecialPurchase").removeClass("Q_disabled");
+                                specialPurchaseBtn.removeClass("Q_disabled");
                             } else {
-                                $(tool.element).find(".jsSpecialPurchase").addClass("Q_disabled");
+                                specialPurchaseBtn.addClass("Q_disabled");
                             }
                             
                             //Q.handle(callback, null, [null, tokensAmount]);
@@ -196,12 +189,8 @@ Q.Tool.define("Assets/sales", function (options) {
                             if (Q.Users.Web3.getSelectedXid() == ownerAddress) {
                                 Q.Template.render(
                                     "Assets/sales/whitelist", 
-                                {
-                                    TestParam: "Lorem ipsum dolor sit amet",
-                                },
-                                function(err, html){
-
-                                }
+                                    {},
+                                    function(err, html){}
                                 );
                             }
                             
@@ -231,7 +220,7 @@ Q.Tool.define("Assets/sales", function (options) {
                     }
                 );
                         
-                $('.jsPurchase', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_sales_purchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
                     let account = $(tool.element).find("[name='account']").val();
@@ -244,7 +233,7 @@ Q.Tool.define("Assets/sales", function (options) {
 
                 });
                 
-                $('.jsSpecialPurchase', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_sales_specialPurchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
                     let account = $(tool.element).find("[name='account']").val();
@@ -281,11 +270,11 @@ Q.Template.set("Assets/sales",
                 </div>
             </div>
     
-            <button class="jsPurchase Q_button">{{NFT.sales.instance.btn.Purchase}}</button>
-            <button class="jsSpecialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
+            <button class="Assets_sales_purchase Q_button">{{NFT.sales.instance.btn.Purchase}}</button>
+            <button class="Assets_sales_specialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
             
             <div class="form-group">
-                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiPath q=3 }}
+                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiPath}}
             </div>
         </div>
     

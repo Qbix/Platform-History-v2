@@ -17,13 +17,13 @@ function Assets_NFT_response_getInfo ($params) {
 	$chain = Assets_NFT::getChains($chainId);
 	$contractAddress = Q::ifset($request, "contractAddress", $chain["contract"]);
 	$tokenURI = Q::ifset($request, "tokenURI", null);
-	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
+	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/R1/NFT/contract");
 
 	$ABI = Q::ifset($request, "ABI", Users_Web3::getABI($pathABI));
 
 	// execute authorOf if exists
 	if (Users_Web3::existsInABI("authorOf", $ABI, "function", false)) {
-		$author = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "authorOf", $tokenId, $chainId, $caching, $longDuration);
+		$author = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "authorOf", $tokenId, $chainId, $caching, $longDuration);
 		$userAuthor = Users_ExternalTo::select()->where(array(
 			"xid" => $author
 		))->fetchDbRow();
@@ -33,7 +33,7 @@ function Assets_NFT_response_getInfo ($params) {
 	// execute ownerOf if exists
 	if (Users_Web3::existsInABI("ownerOf", $ABI, "function", false)) {
 		$cachedOwnerOf = Users_Web3::getCache($chainId, $contractAddress, "ownerOf", $tokenId, $longDuration);
-		$owner = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "ownerOf", $tokenId, $chainId, $caching, $cacheDuration);
+		$owner = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "ownerOf", $tokenId, $chainId, $caching, $cacheDuration);
 		$userOwner = Users_ExternalTo::select()->where(array(
 			"xid" => $owner
 		))->fetchDbRow();
@@ -47,16 +47,16 @@ function Assets_NFT_response_getInfo ($params) {
 
 	// execute saleInfo if exists
 	if (Users_Web3::existsInABI("saleInfo", $ABI, "function", false)) {
-		$saleInfo = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "saleInfo", $tokenId, $chainId, $caching, $cacheDuration);
+		$saleInfo = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "saleInfo", $tokenId, $chainId, $caching, $cacheDuration);
 	}
 
 	// execute getCommission if exists
 	if (Users_Web3::existsInABI("getCommission", $ABI, "function", false)) {
-		$commissionInfo = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "getCommission", $tokenId, $chainId, $caching, $longDuration);
+		$commissionInfo = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "getCommission", $tokenId, $chainId, $caching, $longDuration);
 	}
 
 	if (!$tokenURI && Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
-		$tokenURI = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
+		$tokenURI = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
 		$tokenURI = Q_Uri::interpolateUrl($tokenURI);
 	}
 

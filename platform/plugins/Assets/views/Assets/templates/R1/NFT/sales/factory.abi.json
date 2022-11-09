@@ -1,0 +1,256 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "implementation",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "constructor"
+	},
+	{
+		"inputs": [],
+		"name": "InstancesOnly",
+		"type": "error"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "currentNFTOwner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "NFTOwner",
+				"type": "address"
+			}
+		],
+		"name": "OwnerOfNFTContractOnly",
+		"type": "error"
+	},
+	{
+		"inputs": [],
+		"name": "UnknownInstance",
+		"type": "error"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "address",
+				"name": "instance",
+				"type": "address"
+			}
+		],
+		"name": "InstanceCreated",
+		"type": "event"
+	},
+	{
+		"inputs": [],
+		"name": "_doGetInstanceNFTcontract",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256[]",
+				"name": "tokenIds",
+				"type": "uint256[]"
+			},
+			{
+				"internalType": "address[]",
+				"name": "addresses",
+				"type": "address[]"
+			}
+		],
+		"name": "_doMintAndDistribute",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "implementationNFTSale",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"name": "instancesInfo",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "NFTContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint64",
+				"name": "seriesId",
+				"type": "uint64"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "uint64",
+				"name": "duration",
+				"type": "uint64"
+			},
+			{
+				"internalType": "address",
+				"name": "currency",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "beneficiary",
+				"type": "address"
+			},
+			{
+				"internalType": "uint192",
+				"name": "autoIndex",
+				"type": "uint192"
+			},
+			{
+				"internalType": "uint32",
+				"name": "rateInterval",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint16",
+				"name": "rateAmount",
+				"type": "uint16"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "NFTContract",
+				"type": "address"
+			},
+			{
+				"internalType": "uint64",
+				"name": "seriesId",
+				"type": "uint64"
+			},
+			{
+				"internalType": "address",
+				"name": "owner",
+				"type": "address"
+			},
+			{
+				"internalType": "address",
+				"name": "currency",
+				"type": "address"
+			},
+			{
+				"internalType": "uint256",
+				"name": "price",
+				"type": "uint256"
+			},
+			{
+				"internalType": "address",
+				"name": "beneficiary",
+				"type": "address"
+			},
+			{
+				"internalType": "uint192",
+				"name": "autoIndex",
+				"type": "uint192"
+			},
+			{
+				"internalType": "uint64",
+				"name": "duration",
+				"type": "uint64"
+			},
+			{
+				"internalType": "uint32",
+				"name": "rateInterval",
+				"type": "uint32"
+			},
+			{
+				"internalType": "uint16",
+				"name": "rateAmount",
+				"type": "uint16"
+			}
+		],
+		"name": "produce",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "instance",
+				"type": "address"
+			}
+		],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "instance",
+				"type": "address"
+			}
+		],
+		"name": "removeFromWhiteList",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "NFTContract",
+				"type": "address"
+			}
+		],
+		"name": "whitelistByNFTContract",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "instances",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]

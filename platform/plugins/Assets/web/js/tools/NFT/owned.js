@@ -49,7 +49,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	walletAddress: null,
 	chainId: null,
 	contractAddress: null,
-	pathABI: "Assets/templates/NFT",
+	pathABI: "Assets/templates/R1/NFT/contract",
 	limit: 10
 },
 

@@ -1,6 +1,5 @@
-
 (function (window, Q, $, undefined) {
-	
+
 /**
  * @module Assets
  */
@@ -16,31 +15,34 @@
  */
 
 Q.Tool.define("Assets/sales/whitelist", function (options) {
-	var tool = this;
-	var state = tool.state;
-        var $toolElement = $(this.element);
-        if (Q.isEmpty(state.nftSaleAddress)) {
-            return console.warn("nftSaleAddress required!");
-        }
-        if (Q.isEmpty(state.abiPath)) {
-            return console.warn("abiPath required!");
-        }
+    var tool = this;
+    var state = tool.state;
+    
+    tool.abiPath = "Assets/templates/R1/NFT/sales/contract";
+    
+    if (Q.isEmpty(state.nftSaleAddress)) {
+        return console.warn("nftSaleAddress required!");
+    }
+    
+    tool.refresh();
+    
+    var pipe = Q.pipe(["stylesheet","text"], function (params, subjects) {
+    });
+    
+    Q.addStylesheet("{{Assets}}/css/tools/NFT/sales/whitelist.css", pipe.fill('stylesheet'), { slotName: 'Assets' });
+
+    Q.Text.get('Assets/content', function(err, text) {
+        tool.text = text;
+        pipe.fill('text')();
+    }, {
+        ignoreCache: true
+    });
         
-        tool.refresh();
-//        
-//	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
-//		tool.text = params.text[1];
-//                
-//		tool.refresh();
-//	});
-//        Q.addStylesheet("{{Assets}}/css/tools/NFT/sales.css", p.fill('stylesheet'), { slotName: 'Assets' });
-//	Q.Text.get('Assets/content', p.fill('text'));
 },
 
 { // default options here
     
     nftSaleAddress: '',
-    abiPath: '',    
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -71,31 +73,23 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                 //TestParam: "Lorem ipsum dolor sit amet",
             },
             function(err, html){
-                
                 tool.element.innerHTML = html;
-                Q.activate(tool.element, function(){
-                   
-                });
+                Q.activate(tool.element, function(){});
                 var state = tool.state;
                 
                 // check is in whitelist
                 Q.Assets.NFT.Web3.checkProvider(
                     Q.Assets.NFT.defaultChain, 
                     function (err, contract) { 
-
                         contract.owner().then(function(account) {
                             let objContainer = $(tool.element).find(".Assets_sales_whitelist_сontainer");
                             if (Q.Users.Web3.getSelectedXid().toLowerCase() == account.toLowerCase()) {
-
                                 objContainer.show();
                             } else {
-
                                 objContainer.hide();
                             }
-                            
                             //Q.handle(callback, null, [null, tokensAmount]);
                         }, function (err) {
-                            
                             Q.handle(null, null, [err.reason]);
                         });
                     }, 
@@ -107,23 +101,23 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 
                 var contentManageWhitelist = function(btnClassname, btnTitle){
                     return `
-                        <div class="form">
+                        <div class="Assets_sales_whitelist_form">
                             <div class="form-group">
-                                <label>Address</label>
-                                <input name="account" type="text" class="form-control" placeholder="Address">
-                                <small class="form-text text-muted">Address</small>
+                                <label>${tool.text.NFT.sales.whitelist.form.labels.account}</label>
+                                <input name="account" type="text" class="form-control" placeholder="${tool.text.NFT.sales.whitelist.placeholders.account}">
+                                <small class="form-text text-muted">${tool.text.NFT.sales.whitelist.form.small.account}</small>
                             </div>
                             <button class="${btnClassname} Q_button">${btnTitle}</button>
                         </div>
                     `;
                 }
                 
-                $('.jsAdd', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_sales_whitelist_add', tool.element).on(Q.Pointer.fastclick, function(){
                     Q.Dialogs.push({    
-                            title: "Add To Whitelist",
-                            content: contentManageWhitelist("jsDialogAdd", "Add"),
+                            title: tool.text.NFT.sales.whitelist.addToWhitelist,
+                            content: contentManageWhitelist("Assets_sales_whitelist_dialogAdd", "Add"),
                             onActivate: function ($dialog) {
-                                $(".jsDialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
+                                $(".Assets_sales_whitelist_dialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
                                     
                                     Q.Assets.NFT.Web3.checkProvider(
@@ -132,7 +126,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                             var acc = $($dialog).find("[name='account']").val();
                                             if (!acc) {
                                                 Q.Dialogs.pop();
-                                                return Q.alert("Invalid Address");
+                                                return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
                                             }
                                                                         
                                             contract.specialPurchasesListAdd([acc]).then(function(txResponce) {
@@ -160,12 +154,12 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                     });
                 });
                 
-                $('.jsRemove', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_sales_whitelist_remove', tool.element).on(Q.Pointer.fastclick, function(){
                     Q.Dialogs.push({    
-                            title: "Remove from Whitelist",
-                            content: contentManageWhitelist("jsDialogRemove", "Remove"),
+                            title: tool.text.NFT.sales.whitelist.removeFromWhitelist,
+                            content: contentManageWhitelist("Assets_sales_whitelist_dialogRemove", "Remove"),
                             onActivate: function ($dialog) {
-                                $(".jsDialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
+                                $(".Assets_sales_whitelist_dialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
                                     Q.Assets.NFT.Web3.checkProvider(
                                         Q.Assets.NFT.defaultChain, 
@@ -173,7 +167,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                             var acc = $($dialog).find("[name='account']").val();
                                             if (!acc) {
                                                 Q.Dialogs.pop();
-                                                return Q.alert("Invalid Address");
+                                                return Q.alert(tool.text.NFT.sales.whitelist.errors.invalidAddress);
                                             }
                                                                         
                                             contract.specialPurchasesListRemove([acc]).then(function(txResponce) {
@@ -219,8 +213,8 @@ Q.Template.set("Assets/sales/whitelist",
     `<div>
         <div class="Assets_sales_whitelist_сontainer">
             <h3>Manage Whitelist</h3>
-            <button class="jsAdd Q_button">Add</button>
-            <button class="jsRemove Q_button">Remove</button>
+            <button class="Assets_sales_whitelist_add Q_button">Add</button>
+            <button class="Assets_sales_whitelist_remove Q_button">Remove</button>
         </div>
     </div>
     

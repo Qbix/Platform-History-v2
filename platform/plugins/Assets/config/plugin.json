@@ -84,8 +84,8 @@
 					"all": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
 				},
 				"Assets/templates/R1/NFT/sales/factory": {
-					"0x89": "0x958A00B7fa173C5803b1cbb7f8662E1EC7862177", /* matic main */
-					"0x13881": "0x3e45e16e403656fb17faa576206db4b8aa249ab1" /* matic test mumbai*/
+                                        "0x89": "0x5d4B73E1B92784B26e429B44FB5392283D5c972E", /* matic main */
+                                        "0x13881": "0x75e2ceDbFDbc7fa8119e6f435861c3A13577834C" /* matic test mumbai*/
 				}
 			}
 		}

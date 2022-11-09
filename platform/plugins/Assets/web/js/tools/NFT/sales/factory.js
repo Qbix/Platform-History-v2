@@ -10,7 +10,6 @@
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.fields] array of values by default. 
- *  @param {String} [options.abiPath] ABI for NFTSalesFactory
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
 
@@ -36,10 +35,6 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             }
         }
 
-        if (Q.isEmpty(state.abiPath)) {
-            return console.warn("abiPath required!");
-        }
-        
 	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
 		tool.text = params.text[1];
 		tool.refresh();
@@ -62,12 +57,12 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         rateInterval: {value: "", hide: false},
         rateAmount: {value: "", hide: false}
     },
-    abiPath: "",
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
 { // methods go here
     whitelistByNFT: function(NFTContract, callback){
+
         return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
         .then(function (contract) {
             return contract.whitelistByNFT(NFTContract);
@@ -76,37 +71,33 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         }).catch(function (err) {
             Q.handle(callback, null, [err.reason || err]);
         })
+
     },
     _whitelistPush: function(item){
         var tool = this;
-        let obj = $(tool.element).find(".instancesTableList");
-        if (obj.find('tr.jsItem').length == 0) {
+        let obj = $(tool.element).find(".Assets_NFT_sales_factory_instancesTableList");
+        if (obj.find('tr.Assets_NFT_sales_factory_item').length == 0) {
             obj.find('tr').hide();    // all defaults  like "there are no data  etc"
         }
         
-        obj.prepend(`<tr class="jsItem"><td><a href="/test2/${item}">${item}</a></td></tr>`);
+        obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="/test2/${item}">${item}</a></td></tr>`);
         
     },
     _whitelistRefresh: function(){
         var tool = this;
-        let obj = $(tool.element).find(".instancesTableList");
+        let obj = $(tool.element).find(".Assets_NFT_sales_factory_instancesTableList");
         obj.find('tr').hide();
-        obj.find('tr.jsLoading').show();
+        obj.find('tr.Assets_NFT_sales_factory_loading').show();
         tool.whitelistByNFT(TokenSociety.NFT.contract.address, function(err, data){
-
-            obj.find('tr.jsLoading').hide();    
-            obj.find('tr').not('.jsLoading').remove();    
+            obj.find('tr.Assets_NFT_sales_factory_loading').hide();    
+            obj.find('tr').not('.Assets_NFT_sales_factory_loading').remove();    
             if (!data || Q.isEmpty(data.list)) {
-
-                obj.append(`<tr>There are no instances</tr>`);
+                obj.append(`<tr><td>There are no instances</td></tr>`);
             } else {
-
                 for (var i in data.list) {
-                    obj.prepend(`<tr class="jsItem"><td><a href="/test2/${data.list[i]}">${data.list[i]}</a></td></tr>`);
+                    obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="/test2/${data.list[i]}">${data.list[i]}</a></td></tr>`);
                 }
-
             }
-
         });
     },
     /**
@@ -210,7 +201,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 */
                 //var $form = $("form[name=whiteList]");
 
-                $('.jsProduce', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_NFT_sales_factory_produce', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
                     let NFTContract = $(tool.element).find("[name='NFTContract']").val();
@@ -242,26 +233,8 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                     tool.produce(NFTContract, seriesId, owner, currency, price, beneficiary, autoindex, duration, rateInterval, rateAmount);
 
                 });
-
-                $('.jsTestFill', tool.element).on(Q.Pointer.fastclick, function(){
-
-                    
-
-                    $(tool.element).find("[name='NFTContract']").val('0x7AfF6E4A3B7071E17F5dFe9883c1511d22127B7A');
-                    $(tool.element).find("[name='owner']").val('0x4aC71bd9f784fA6090E9dC3EE0e61dC085e22Ef4');
-                    $(tool.element).find("[name='seriesId']").val('3');
-
-                    $(tool.element).find("[name='currency']").val('0x0000000000000000000000000000000000000000');
-                    $(tool.element).find("[name='price']").val("1");
-                    $(tool.element).find("[name='beneficiary']").val('0x4aC71bd9f784fA6090E9dC3EE0e61dC085e22Ef4');
-                    $(tool.element).find("[name='autoindex']").val(3);
-                    $(tool.element).find("[name='duration']").val(4);
-                    $(tool.element).find("[name='rateInterval']").val(0);
-                    $(tool.element).find("[name='rateAmount']").val(0);
-
-                });
                 
-                $('.jsInstancesList', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_NFT_sales_factory_instancesList', tool.element).on(Q.Pointer.fastclick, function(){
                     tool._whitelistRefresh();
                 });
                 tool._whitelistRefresh();
@@ -368,13 +341,12 @@ Q.Template.set("Assets/NFT/sales/factory",
                 </div>
             </div>
     
-            <a class="jsTestFill" href="javascript:void(0)">[test fill]</a>
-            <button class="jsProduce Q_button">{{NFT.sales.factory.produce}}</button>
-            <button class="jsInstancesList Q_button">{{NFT.sales.factory.viewInstancesList}}</button>
+            <button class="Assets_NFT_sales_factory_produce Q_button">{{NFT.sales.factory.produce}}</button>
+            <button class="Assets_NFT_sales_factory_instancesList Q_button">{{NFT.sales.factory.viewInstancesList}}</button>
             <div>
                 <h3>List by NFT</h3>
-                <table class="instancesTableList">
-                <tr class="jsLoading" style="display:none"><td>Loading ...</td></tr>
+                <table class="Assets_NFT_sales_factory_instancesTableList">
+                <tr class="Assets_NFT_sales_factory_loading" style="display:none"><td>Loading ...</td></tr>
                 </table>
             </div>
         </div>

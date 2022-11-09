@@ -12,8 +12,8 @@ function Assets_NFTcontract_response_getInfo ($params) {
 
 	$name = $symbol = null;
 	if (!$title || $title == "false") {
-		$name = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "name", array(), $chainId);
-		$symbol = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "symbol", array(), $chainId);
+		$name = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "name", array(), $chainId);
+		$symbol = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "symbol", array(), $chainId);
 		if ($publisherId && $streamName) {
 			$stream = Streams_Stream::fetch($publisherId, $publisherId, $streamName);
 			$stream->title = Q::interpolate($texts["ContractName"], array(
@@ -24,7 +24,7 @@ function Assets_NFTcontract_response_getInfo ($params) {
 			$stream->save();
 		}
 	}
-	$owner = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "owner", array(), $chainId);
+	$owner = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "owner", array(), $chainId);
 
 	return compact("name", "symbol", "owner");
 }
