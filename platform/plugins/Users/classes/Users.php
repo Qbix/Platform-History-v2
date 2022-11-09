@@ -342,13 +342,15 @@ abstract class Users extends Base_Users
 	 *  "email", "first_name", "last_name", "gender" etc.
 	 *  If the email address is imported, it is set without requiring verification, and
 	 *  any email under Users/transactional/authenticated is sent.
+	 * @param {boolean} [$updateXid=false] If true and xid defined for logged in user, update xid for this user.
 	 * @return {Users_User}
 	 */
 	static function authenticate(
 		$platform,
 		$appId = null,
 		&$authenticated = null,
-		$import = null)
+		$import = null,
+		$updateXid = false)
 	{
 		$platforms = Q_Config::get('Users', 'apps', 'platforms', array());
 		if (!in_array($platform, $platforms)) {
@@ -415,7 +417,7 @@ abstract class Users extends Base_Users
 		$platformApp = $platform . '_' . $appIdForAuth;
 		if ($retrieved) {
 			$user_xid = $user->getXid($platformApp);
-			if (!$user_xid) {
+			if (!$user_xid || $updateXid) {
 				// this is a logged-in user who was never authenticated with this platform.
 				// First, let's find any other user who has authenticated with the
 				// authenticated xid, and set their $field to 0.
@@ -1834,10 +1836,12 @@ abstract class Users extends Base_Users
 			if (isset($identifier['app']['platform'])) {
 				$type = $identifier['app']['platform'];
 				$identifier = Q::ifset($identifier, 'identifier', null);
-			} else if (Q_Valid::email($identifier, $normalized)) {
+			} elseif (Q_Valid::email($identifier, $normalized)) {
 				$type = 'email';
-			} else if (Q_Valid::phone($identifier, $normalized)) {
+			} elseif (Q_Valid::phone($identifier, $normalized)) {
 				$type = 'mobile';
+			} elseif (Users_Web3::isValidAddress($identifier)) {
+				$type = 'web3';
 			}
 		}
 		if (!empty($_REQUEST['emailAddress'])) {
@@ -1849,6 +1853,11 @@ abstract class Users extends Base_Users
 			$identifier = $_REQUEST['mobileNumber'];
 			Q_Valid::phone($identifier, $normalized);
 			$type = 'mobile';
+		}
+		if (!empty($_REQUEST['walletAddress'])) {
+			$identifier = $_REQUEST['walletAddress'];
+			Users_Web3::isValidAddress($identifier, $normalized);
+			$type = 'web3';
 		}
 		return isset($normalized) ? $normalized : $identifier;
 	}

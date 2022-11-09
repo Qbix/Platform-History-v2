@@ -10,7 +10,8 @@ function Users_authenticate_post()
 	// It will try to important set an email address for the user if one isn't set yet
 	Q_Request::requireFields(array('platform'), true);
 	$platform = $_REQUEST['platform'];
-	$user = Users::authenticate($platform, null, $authenticated);
+	$updateXid = filter_var(Q::ifset($_REQUEST, "updateXid", false), FILTER_VALIDATE_BOOLEAN);
+	$user = Users::authenticate($platform, null, $authenticated, null, $updateXid);
 	if (!$user) {
 		throw new Users_Exception_NotLoggedIn();
 	}
