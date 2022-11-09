@@ -13,7 +13,7 @@
 function Users_device_response_subscribed($params = array())
 {
 	$userId = Q::ifset($options, 'userId', null);
-	$userId = $userId ?: Users::loggedInUser(true)->id;
+	$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 
 	try {
 		$info = Q_Request::browscap()->getBrowser();

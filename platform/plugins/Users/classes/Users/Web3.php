@@ -23,9 +23,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {string|array} $contractABI if an array, it is used as the ABI directly.
 	 *  If it is a string under 100 characters, Users_Web3::getABI() is called to look
 	 *  for the file (typically with extension abi.json) containing the JSON for the ABI.
-	 * @param {string|array} $contractAddress the contract address to call the method on,
-	 *  or array($contractAddress, $abiContent) to specify custom ABI content (JSON),
-	 *  useful for when you have many contracts with the same ABI produced by a 
+	 * @param {string} $contractAddress the contract address to call the method on,
 	 * @param {string} $methodName in the contract
 	 * @param {string|array} [$params=array()] - params sent to contract method
 	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
@@ -140,7 +138,7 @@ class Users_Web3 extends Base_Users_Web3 {
 					'name' => 'transaction.from'
 				));
 			}
-			$eth = $contract->eth;
+			$eth = $contract->getEth();
 			$rawTransactionData = '0x' . 
 				call_user_func_array([$contract, "getData"], $arguments);
 			$transactionCount = null;
@@ -218,6 +216,60 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Get available Web3 chains information (contact address, currency, rpcUrl, blockExplorerUrl)
+	 * for functions like Q.Users.Web3.switchChain().
+	 * @method getChains
+	 * @param {string} [$needChainId] if defined return only this chain info
+	 * @static
+	 * @return array
+	 */
+	static function getChains($needChainId = null)
+	{
+		$chains = Q_Config::get("Users", "apps", "web3", array());
+		$result = array();
+		$defaultAppId = Q_Config::get('Users', 'apps', 'defaultApps', 'web3', Q::app());
+		foreach ($chains as $i => $chain) {
+			$chainId = Q::ifset($chain, 'chainId', Q::ifset($chain, 'appId', null));
+			if (!$chainId or ($needChainId && $chainId != $needChainId)) {
+				continue;
+			}
+
+			$name = Q::ifset($chain, "name", null);
+			$default = ($i == $defaultAppId);
+			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
+			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
+			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
+			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", Q::ifset($usersWeb3Config, "blockExplorerUrl", null));
+			$abiUrl = Q::ifset($chain, "abiUrl", Q::ifset($usersWeb3Config, "abiUrl", null));
+
+			if (!$rpcUrl) {
+				continue;
+			}
+			$rpcUrl = Q::interpolate($rpcUrl, compact("infuraId"));
+			$rpcUrls = array($rpcUrl);
+			$blockExplorerUrls = array($blockExplorerUrl);
+			$temp = compact("name", "chainId", "default", "rpcUrls", "blockExplorerUrls", "abiUrl");
+			if ($needChainId && $chainId == $needChainId) {
+				return $temp;
+			}
+			$result[$chainId] = $temp;
+		}
+		return $result;
+	}
+
+	/**
+	 * Get available Web3 factories information
+	 * @method getChains
+	 * @param {string} [$needChainId] if defined return only this chain info
+	 * @static
+	 * @return array
+	 */
+	static function getFactories()
+	{
+		return Q_Config::get('Users', 'Web3', 'factories', array());
 	}
 
 	/**
@@ -325,55 +377,49 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
-	 * Get wallet address by user id
-	 * @method getWalletById
+	 * Get wallet address by user ID
+	 * @method getWalletByUserId
 	 * @static
 	 * @param {String} [$userId] - If empty, logged in userId used
 	 * @param {Boolean} [$throwIfNotFound=false] - If true, throw exception if wallet addres not found
 	 * @return {String|null}
 	 */
-	static function getWalletById ($userId=null, $throwIfNotFound=false) {
-		$userId = $userId ?: Users::loggedInUser(true)->id;
+	static function getWalletByUserId ($userId=null, $throwIfNotFound=false) {
+		$userId = $userId ? $userId : Users::loggedInUser(true)->id;
 		$usersExternalTo = Users_ExternalTo::select()->where(array(
 			"platform" => "web3",
 			"appId" => "all",
-			"userId" => strtolower($userId)
+			"userId" => $userId
 		))->fetchDbRow();
-
 		if ($usersExternalTo) {
 			return $usersExternalTo->xid;
 		}
-
 		if ($throwIfNotFound) {
 			throw new Exception("Wallet address not found");
 		}
-
 		return null;
 	}
 
 	/**
-	 * Get user id by wallet address
-	 * @method getIdByWallet
+	 * Get user ID by wallet address
+	 * @method getUserIdByWallet
 	 * @static
 	 * @param {String} $wallet - wallet address
 	 * @param {Boolean} [$throwIfNotFound=false] If true, throw exception if wallet addres not found
 	 * @return {String|null}
 	 */
-	static function getIdByWallet ($wallet, $throwIfNotFound=false) {
+	static function getUserIdByWallet ($wallet, $throwIfNotFound=false) {
 		$usersExternalFrom = Users_ExternalFrom::select()->where(array(
 			"platform" => "web3",
 			"appId" => "all",
 			"xid" => strtolower($wallet)
 		))->fetchDbRow();
-
 		if ($usersExternalFrom) {
 			return $usersExternalFrom->userId;
 		}
-
 		if ($throwIfNotFound) {
-			throw new Exception("User id not found");
+			throw new Exception("Users::getUserIdByWallet: User ID not found");
 		}
-
 		return null;
 	}
 

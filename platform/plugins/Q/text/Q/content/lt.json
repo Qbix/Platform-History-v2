@@ -4,7 +4,9 @@
         "canceled": "Užklausa atšaukta",
         "500": "Vidinė serverio klaida",
         "404": "Nerasta: {{url}}",
-        "501": "Prašymas nutrauktas"
+        "501": "Prašymas nutrauktas",
+        "401": "Neleistina",
+        "403": "Draudžiama"
     },
     "nonce": {
         "sameDomain": "Sesija pasibaigė. Atnaujinkite puslapį ir bandykite dar kartą.",

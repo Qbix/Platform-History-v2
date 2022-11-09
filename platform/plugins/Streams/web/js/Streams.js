@@ -1562,7 +1562,7 @@ Streams.refresh.beforeRequest = new Q.Event();
  * in order to set the key for retaining the streams those functions obtain.
  * @static
  * @method retainWith
- * @param {String} key
+ * @param {String|true} key 
  * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Streams.retainWith = function (key) {
@@ -1576,7 +1576,7 @@ Streams.retainWith = function (key) {
  * if they were the last streams to be retained on their respective nodes.
  * @static
  * @method release
- * @param {String} key
+ * @param {String|true} key
  */
 Streams.release = function (key) {
 	key = Q.calculateKey(key);
@@ -2657,7 +2657,7 @@ var Sp = Stream.prototype;
  * in order to set the key for retaining the streams those functions obtain.
  *
  * @method retainWith
- * @param {String} key
+ * @param {String|true} key
  * @return {Object} returns Streams object for chaining with .get() or .related()
  */
 Sp.retainWith = Streams.retainWith;

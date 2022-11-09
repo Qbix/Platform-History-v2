@@ -5,4 +5,5 @@
 	background-repeat: no-repeat;
 	background-size: contain;
 	text-align: center;
+	pointer-events: none;
 }

@@ -920,11 +920,11 @@ Q.chain = function (callbacks, callback) {
  * Takes a function and returns a version that returns a promise
  * @method promisify
  * @static
- * @param  {Function} getter A function that takes one callback and passes err as the first parameter to it
- * @param {Boolean} useSecondArgument whether to resolve the promise with the second argument instead of with "this"
+ * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
+ * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
-Q.promisify = function (getter, useSecondArgument) {
+ Q.promisify = function (getter, useThis) {
 	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
@@ -932,9 +932,11 @@ Q.promisify = function (getter, useSecondArgument) {
 		var args = [], resolve, reject, found = false;
 		for (var i=0, l=arguments.length; i<l; ++i) {
 			var ai = arguments[i];
-			if (typeof ai === 'function') {
+			if (typeof ai !== 'function') {
+				args.push(ai);
+			} else {
 				found = true;
-				ai = function _promisified(err, second) {
+				args.push(function _promisified(err, second) {
 					if (err) {
 						return reject(err);
 					}
@@ -946,18 +948,16 @@ Q.promisify = function (getter, useSecondArgument) {
 					if (err) {
 						return reject(err);
 					}
-					resolve(useSecondArgument ? second : this);
-				}
+					resolve(useThis ? this : second);
+				});
 			}
-			args.push(ai);
-			break; // only one callback, expect err as first argument
 		}
 		if (!found) {
 			args.push(function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
-				resolve(useSecondArgument ? second : this);
+				resolve(useThis ? this : second);
 			});
 		}
 		var promise = new Q.Promise(function (r1, r2) {

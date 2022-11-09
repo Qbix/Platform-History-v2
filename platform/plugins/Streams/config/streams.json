@@ -135,6 +135,17 @@
 		"writeLevel": 0,
 		"adminLevel": 0
 	},
+	"Streams/user/xid/web3": {
+		"type": "Streams/xid/web3",
+		"title": "Web3 Address",
+		"icon": "",
+		"readLevel": 0,
+		"writeLevel": 0,
+		"adminLevel": 0,
+		"platforms": {
+			"web3": "email"
+		}
+	},
 	"Streams/user/status": {
 		"type": "Streams/text/small",
 		"title": "Status",

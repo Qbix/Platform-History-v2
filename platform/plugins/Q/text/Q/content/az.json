@@ -4,7 +4,9 @@
         "canceled": "Sorğu ləğv edildi",
         "500": "Daxili server xətası",
         "404": "Tapılmadı: {{url}}",
-        "501": "Sorğu kəsildi"
+        "501": "Sorğu kəsildi",
+        "401": "İcazəsiz",
+        "403": "Qadağan"
     },
     "nonce": {
         "sameDomain": "Sessiya başa çatıb. Səhifəni yeniləyin və yenidən cəhd edin.",

@@ -4,7 +4,9 @@
         "canceled": "Taotlus tühistati",
         "500": "Siseserveri viga",
         "404": "Ei leitud: {{url}}",
-        "501": "Taotlus katkestati"
+        "501": "Taotlus katkestati",
+        "401": "Volitamata",
+        "403": "Keelatud"
     },
     "nonce": {
         "sameDomain": "Seanss aegus. Värskendage lehte ja proovige uuesti.",

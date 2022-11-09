@@ -42,7 +42,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 		$appIdForAuth = !empty($appInfo['appIdForAuth'])
 			? $appInfo['appIdForAuth']
 			: $appInfo['appId'];
-		$xid = strtolower(Q::ifset($_REQUEST, 'xid', null));
+		$xid = strtolower(Q::ifset($_REQUEST, 'xid', ''));
 		if (!is_callable('gmp_add') or !is_callable('gmp_mod')) {
 			throw new Q_Exception('Web3 authentication requires installing PHP gmp extensions');
 		}
@@ -53,13 +53,13 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 			if (isset($_COOKIE[$cookieName])) {
 				// A previous request has set the w3sr cookie
 				$wsr_json = Q_Request::special($cookieName, null, $_COOKIE);
-				if ($wsr = Q::json_decode($wsr_json, true)) {
+				if ($wsr_json and $wsr = Q::json_decode($wsr_json, true)) {
 					list($payload, $signature) = $wsr;
 				}
 			}
 		}
 		Q_Valid::requireFields(array('payload', 'signature'), @compact('payload', 'signature'),true);
-		$e = new Crypto\EthSigRecover();
+	$e = new Crypto\EthSigRecover();
 		$recoveredXid = strtolower(
 			$e->personal_ecRecover($payload, $signature)
 		);

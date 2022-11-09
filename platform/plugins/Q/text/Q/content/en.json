@@ -4,6 +4,8 @@
         "canceled": "Request canceled",
         "500": "Internal server error",
         "404": "Not found: {{url}}",
+        "401": "Unauthorized",
+        "403": "Forbidden",
         "501": "Request interrupted"
     },
     "nonce": {

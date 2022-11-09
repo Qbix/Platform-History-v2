@@ -51,7 +51,7 @@ class Assets_NFT
 	 * @return {Streams_Stream}
 	 */
 	static function getComposerStream ($publisherId = null, $category = null) {
-		$publisherId = $publisherId ?: Users::loggedInUser(true)->id;
+		$publisherId = $publisherId ? $publisherId : Users::loggedInUser(true)->id;
 		if ($category) {
 			if (!($category instanceof Streams_Stream)) {
 				$category = Streams_Stream::fetch(null, $category["publisherId"], $category["streamName"], true);
@@ -193,18 +193,19 @@ class Assets_NFT
 		$chains = Q_Config::get("Users", "apps", "web3", array());
 		$currencies = Q_Config::get("Assets", "currencies", "tokens", array());
 		$result = array();
+		$defaultAppId = Q_Config::get('Users', 'apps', 'defaultApps', 'web3', Q::app());
 		foreach ($chains as $i => $chain) {
 			// if contract or rpcUrls undefined, skip this chain
 			$chainId = Q::ifset($chain, 'chainId', Q::ifset($chain, 'appId', null));
-			if (!$chainId or ($needChainId && $chainId == $needChainId)) {
+			if (!$chainId or ($needChainId && $chainId != $needChainId)) {
 				continue;
 			}
 
 			$name = Q::ifset($chain, "name", null);
-			$default = $i == Q::app();
+			$default = ($i == $defaultAppId);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
-			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
+			$factory = Q_Config::get('Assets', 'NFT', 'web3', 'factory', 'all');
 			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
@@ -246,7 +247,7 @@ class Assets_NFT
 	 * @return array
 	 */
 	static function getDefaultChain ($chains = null) {
-		$chains = $chains ?: self::getChains();
+		$chains = $chains ? $chains : self::getChains();
 		foreach ($chains as $chain) {
 			if ($chain["default"]) {
 				return $chain;

@@ -4,7 +4,9 @@
         "canceled": "istek iptal edildi",
         "500": "İç Sunucu Hatası",
         "404": "Bulunamadı: {{url}}",
-        "501": "istek kesintiye uğradı"
+        "501": "istek kesintiye uğradı",
+        "401": "Yetkisiz",
+        "403": "Yasaklı"
     },
     "nonce": {
         "sameDomain": "Oturum süresi doldu. Sayfayı yenileyin ve tekrar deneyin.",

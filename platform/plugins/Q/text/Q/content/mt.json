@@ -4,7 +4,9 @@
         "canceled": "Talba kkanċellata",
         "500": "Żball intern tas-server",
         "404": "Mhux misjub: {{url}}",
-        "501": "Talba interrotta"
+        "501": "Talba interrotta",
+        "401": "Mhux awtorizzat",
+        "403": "Projbit"
     },
     "nonce": {
         "sameDomain": "Is-sessjoni skadiet. Aġġorna l-paġna u erġa&#39; pprova.",

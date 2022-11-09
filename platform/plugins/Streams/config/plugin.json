@@ -54,7 +54,10 @@
 			"Users/:userId.vcf": { "module": "Streams", "action": "vcard" }
 		},
 		"web": {
-			"requireValidNonce": ["Streams"]
+			"requireValidNonce": {
+				"include": ["Streams"],
+				"exclude": ["Streams/batch", "Streams/avatar"]
+			}
 		},
 		"bundle": {
 			"exclude": {
@@ -372,6 +375,9 @@
 			"Streams/text/url": {"create": true, "edit": true},
 			"Streams/text/emailAddress": {"create": true, "edit": true},
 			"Streams/text/mobileNumber": {"create": true, "edit": true},
+			"Streams/date": {"create": true, "edit": true},
+			"Streams/number": {"create": true, "edit": true},
+			"Streams/xid/web3": {"create": true, "edit": true},
 			"Streams/enum/gender": {"create": true, "edit": true},
 			"Streams/enum/presence": {"create": true, "edit": true},
 			"Streams/number/timezone": {"create": true, "edit": true},
@@ -380,8 +386,6 @@
 			"Streams/number/age": {"create": true, "edit": true},
 			"Streams/text/affiliation": {"create": true, "edit": true},
 			"Streams/enum/dating": {"create": true, "edit": true},
-			"Streams/date": {"create": true, "edit": true},
-			"Streams/number": {"create": true, "edit": true},
 			"Streams/image": {
 				"create": true,
 				"edit": true,

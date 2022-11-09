@@ -4,7 +4,9 @@
         "canceled": "Solicitude cancelada",
         "500": "Error interno do servidor",
         "404": "Non atopado: {{url}}",
-        "501": "Solicitude interrompida"
+        "501": "Solicitude interrompida",
+        "401": "Non autorizado",
+        "403": "Prohibido"
     },
     "nonce": {
         "sameDomain": "A sesión caducou. Actualiza a páxina e téntao de novo.",

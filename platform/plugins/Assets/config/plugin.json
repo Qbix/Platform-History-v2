@@ -37,7 +37,9 @@
 			"Q/plugins/Assets/:action": {"module": "Assets"}
 		},
 		"web": {
-			"requireValidNonce": ["Assets"]
+			"requireValidNonce": {
+				"include": ["Assets"]
+			}
 		},
 		"bundle": {
 			"exclude": {
@@ -72,6 +74,19 @@
 				"defaultSize": "300x",
 				"defaultCacheBust": 1000,
 				"maxStretch": 2
+			}
+		}
+	},
+	"Users": {
+		"Web3": {
+			"factories": {
+				"Assets/templates/R1/NFT/factory": {
+					"all": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
+				},
+				"Assets/templates/R1/NFT/sales/factory": {
+					"0x89": "0x958A00B7fa173C5803b1cbb7f8662E1EC7862177", /* matic main */
+					"0x13881": "0x3e45e16e403656fb17faa576206db4b8aa249ab1" /* matic test mumbai*/
+				}
 			}
 		}
 	},
@@ -317,7 +332,10 @@
 					"symbol": "MATIC",
 					"name": "MATIC",
 					"decimals": 18,
-					"0x89": "0x0000000000000000000000000000000000000000"
+                                        "0x1": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+                                        "0x38": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+					"0x89": "0x0000000000000000000000000000000000000000",
+                                        "0x13881": "0x0000000000000000000000000000000000000000"
 				}
 			]
 		},

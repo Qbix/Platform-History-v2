@@ -17,14 +17,21 @@
 			/**
 			 * Get the Assets/user/credits stream published by the logged-in user, if any
 			 * @method userStream
-			 *  @param {Function} [callback] The function to call, receives (err, stream)
+			 * @static
+			 * @param {Function} [callback] The function to call, receives (err, stream)
+			 * @param {Object} [options]
+			 * @param {String|true} [options.retainWith] key to retain the stream with, if any
 			 */
-			userStream: function (callback) {
+			userStream: function (callback, options) {
 				if (!Users.loggedInUser) {
 					callback(new Q.Error("Credits/userStream: not logged in"), null);
 					return false;
 				}
-				Streams.get(Users.loggedInUser.id, "Assets/user/credits", callback);
+				var S = Streams;
+				if (options && options.retainWith) {
+					S = S.retainWith(options.retainWith);
+				}
+				S.get(Users.loggedInUser.id, "Assets/user/credits", callback);
 			},
 			/**
 			 * Buy credits
@@ -903,48 +910,14 @@
 				onSeriesPutOnSale: new Q.Event(),
 				onSeriesRemovedFromSale: new Q.Event(),
 
-				/**
-				 * Check web3 provider (MetaMask) connected, and switch to valid chain
-				 * @method checkProvider
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} [options]
-				 * @param {object} [options.mode="contract"] - What to create "contract" or "factory"
-				 */
-				checkProvider: function (chain, callback, options) {
-					var mode = Q.getObject("mode", options) || "contract";
+				instance: function (chainId, callback) {
 
-					// if chain is a chainId, convert to chain
-					if (Q.typeOf(chain) === "string") {
-						chain = Assets.NFT.chains[chain];
-					}
-
-					Q.Users.Web3.connect(function (err, provider) {
-						if (err) {
-							Q.handle(callback, null, [err]);
-						}
-
-						var _process = function () {
-							if (mode === "contract") {
-								Assets.NFT.Web3.getContract(chain, callback, options);
-							} else if (mode === "factory") {
-								Assets.NFT.Web3.getFactory(chain, callback, options);
-							} else {
-								throw new Q.Exception("mode " + mode + " is not supported in Assets.NFT.Web3.checkProvider");
-							}
-						};
-						// check valid chain selected
-						if (window.ethereum.chainId === chain.chainId) {
-							_process();
-						} else { // if no, lead to switch chain
-							Q.Users.Web3.switchChain(chain, function () {
-								_process();
-							}, function (err) {
-								Q.handle(callback, null, [err]);
-							});
-						}
-					});
 				},
+
+				factory: function (chainId, callback) {
+
+				},
+
 				/**
 				 * Set the info for a series
 				 * @method setSeriesInfo
@@ -954,6 +927,7 @@
 				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
 				 * @param {String} info.fixedPointPrice The fixed-point large integer price (in currency) that minting the NFTs would cost.
 				 * @param {String} [info.currency] Set the ERC20 contract address, otherwise price would be in the native coin (ETH, BNB, MATIC, etc.)
+				 * @param {String} [info.decimals=18] set number of decimals for currencies
 				 * @param {String} [info.authorAddress] Give rights to this address to mintAndDistribute
 				 * @param {String} [info.limit] maximum number that can be minted
 				 * @param {String} [info.onSaleUntil] timestamp in seconds since Unix epoch
@@ -980,38 +954,46 @@
 					var onSaleUntil = info.onSaleUntil
 						|| (Math.floor(Date.now()/1000) + (info.duration || 60*60*24*30));
 					var currency = info.currency || "0x0000000000000000000000000000000000000000";
-					var price = info.fixedPointPrice
+                                        var decimals = ("decimals" in info) ? info.decimals : 18;
+					var price = ("fixedPointPrice" in info)
 						? String(info.fixedPointPrice)
-						: ethers.utils.parseEther(String(info.price));
+						: ethers.utils.parseUnits(String(info.price), decimals);
 					info.commission = info.commission || {};
 					var commissionFraction = Math.floor((info.commission.fraction || 0) * FRACTION);
 					var commissionAddress = info.commission.address || authorAddress;
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
-					return Q.Users.Web3.getContract('Assets/templates/NFT', contractAddress)
-					.then(function (contract) {
-						return contract.setSeriesInfo(seriesId, 
-							[authorAddress, limit, 
-								[onSaleUntil, currency, price],
-								[commissionFraction, commissionAddress], baseURI, suffix
-							]
-						);
-					}).catch(function (err) {
-						Q.alert(err);
-					});
+					return Q.Users.Web3.execute(
+						'Assets/templates/NFT',
+						contractAddress, 
+						"setSeriesInfo", 
+						[
+							authorAddress, 
+							limit, 
+							[onSaleUntil, currency, price], 
+							[commissionFraction, commissionAddress], 
+							baseURI, 
+							suffix
+						], 
+						callback
+					);
 				},
 				/**
-				 * Get or create factory
+				 * Get NFT contract factory
 				 * @method getFactory
-				 * @param {Object} chain
+				 * @param {Object} chainId
 				 * @param {function} callback
 				 * @param {object} [options]
 				 * @param {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 * @return {Q.Promise}
 				 */
-				getFactory: function (chain, callback, options) {
-					Q.Users.Web3.getContract(
+				getFactory: function (chainId, callback, options) {
+					return Q.Users.Web3.getContract(
 						'Assets/templates/NFTFactory', 
-						chain.contract,
+						{
+							chainId: chainId,
+							address: Assets.NFT.Web3.chains[chainId].factory
+						},
 						function (err, contract) {
 							var events = {
 								InstanceCreated: "onInstanceCreated",
@@ -1031,15 +1013,24 @@
 					);
 				},
 				/**
-				 * Create contract for user
+				 * Get NFT contract instance
 				 * @method getContract
-				 * @param {Object} chain
-				 * @param {function} callback
+				 * @param {Object} chainId
+				 * @param {function} callback,
+				 * @param {object} [options]
+				 * @param {string} [options.contractAddress] - if defined override default chain contract address
+				 * @param {string} [options.abiPath] - if defined override default abi path
+				 * @return {Q.Promise}
 				 */
-				getContract: function (chain, callback) {
-					Q.Users.Web3.getContract(
-						'Assets/templates/NFT', 
-						chain.contract,
+				getContract: function (chainId, callback, options) {
+					var address = Q.getObject("contractAddress", options) || chain.contract;
+					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/NFT';
+					return Q.Users.Web3.getContract(
+						abiPath, 
+						{
+							chainId: chainId,
+							address: address
+						},
 						function (err, contract) {
 							var events = {
 								TokenRemovedFromSale: "onTokenRemovedFromSale",
@@ -1419,7 +1410,11 @@
 		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
-		"Assets/plan": "{{Assets}}/js/tools/plan.js"
+		"Assets/plan": "{{Assets}}/js/tools/plan.js",
+                "Assets/NFT/sales/factory": "{{Assets}}/js/tools/NFT/sales/factory.js",
+                "Assets/sales": "{{Assets}}/js/tools/NFT/sales.js",
+                "Assets/sales/whitelist": "{{Assets}}/js/tools/NFT/whitelist.js",
+		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js"
 	});
 
 	Q.onInit.add(function () {
@@ -1493,6 +1488,8 @@
 				this.onMessage('Assets/credits/bought').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/bonus').set(_createNotice, 'Assets');
 				this.onMessage('Assets/credits/alert').set(_createNotice, 'Assets');
+			}, {
+				retainWith: true
 			});
 		};
 

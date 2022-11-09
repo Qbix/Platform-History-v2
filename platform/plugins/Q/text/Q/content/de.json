@@ -4,7 +4,9 @@
         "canceled": "Anfrage abgebrochen",
         "500": "Interner Serverfehler",
         "404": "Nicht gefunden: {{url}}",
-        "501": "Anfrage unterbrochen"
+        "501": "Anfrage unterbrochen",
+        "401": "Unbefugt",
+        "403": "Verboten"
     },
     "nonce": {
         "sameDomain": "Sitzung abgelaufen. Aktualisieren Sie die Seite und versuchen Sie es erneut.",

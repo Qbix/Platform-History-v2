@@ -13,17 +13,6 @@
  */
 class Streams_Access extends Base_Streams_Access
 {
-	function __construct ($fields = array(), $doInit = true)
-	{
-		parent::__construct($fields, $doInit);
-		// set safe defaults
-		foreach (array('readLevel', 'writeLevel',  'adminLevel') as $f) {
-			if (!isset($fields[$f])) {
-				$this->$f = -1;
-			}
-		}
-	}
-
 	/**
 	 * The setUp() method is called the first time
 	 * an object of this class is constructed.
@@ -206,6 +195,12 @@ class Streams_Access extends Base_Streams_Access
 		foreach (array('ofUserId', 'ofContactLabel') as $f) {
 			if (isset($value[$f]) and $value[$f] != $this->fields[$f]) {
 				throw new Q_Exception_WrongValue(array('field' => $f, 'range' => 'no change'));
+			}
+		}
+		// set safe defaults
+		foreach (array('readLevel', 'writeLevel',  'adminLevel') as $f) {
+			if (!isset($value[$f])) {
+				$this->$f = -1;
 			}
 		}
 		return parent::beforeSave($value);			

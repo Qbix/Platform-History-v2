@@ -4,7 +4,9 @@
         "canceled": "Zahteva preklicana",
         "500": "Napaka notranjega strežnika",
         "404": "Ni bilo mogoče najti: {{url}}",
-        "501": "Zahteva je prekinjena"
+        "501": "Zahteva je prekinjena",
+        "401": "Nepooblaščeno",
+        "403": "Prepovedano"
     },
     "nonce": {
         "sameDomain": "Seja je potekla. Osvežite stran in poskusite znova.",

@@ -185,6 +185,23 @@ EOT;
 
 	static $added_Q_init = false;
 	
+	if (Q_Request::isFrame()) {
+		// $headers = headers_list();
+		// $setCookieJS = array();
+		// foreach ($headers as $header) {
+		// 	if (Q::startsWith($header, 'Set-Cookie-JS:')) {
+		// 		$headerValue = ltrim(substr($header, 14));
+		// 		$setCookieJS[] = $headerValue;
+		// 	}
+		// }
+		// $setCookieJSON = Q::json_encode($setCookieJS, JSON_PRETTY_PRINT);
+		$cookieJarId = Q::json_encode('abc');
+		Q_Response::setScriptData("Q.info.startServiceWorker", true);
+		Q_Response::addScriptLine("
+// Start a service worker
+Q.ServiceWorker.start($cookieJarId);", null, '@end');	
+	}
+
 	if (!$added_Q_init) {
 		Q_Response::addScriptLine("
 // Now, initialize Q

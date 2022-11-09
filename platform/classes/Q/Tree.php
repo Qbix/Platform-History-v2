@@ -376,7 +376,9 @@ class Q_Tree
 						'duration' => 3600
 					)));
 				}
+				// strip comments
 				$json = preg_replace('/\s*(?!<\")\/\*[^\*]+\*\/(?!\")\s*/', '', $json);
+				// strip stray commas
 				$json = preg_replace('/\,\s*\}/', '}', $json);
 				$arr = Q::json_decode($json, true);
 			} catch (Exception $e) {

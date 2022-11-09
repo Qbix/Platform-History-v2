@@ -38,7 +38,7 @@
             return console.warn("user id required!");
         }
 
-        state.chain = NFT.chains[state.chainId];
+        state.chain = NFT.Web3.chains[state.chainId];
 
         // <set Streams/preview imagepicker settings>
         previewState.imagepicker.showSize = state.imagepicker.showSize;

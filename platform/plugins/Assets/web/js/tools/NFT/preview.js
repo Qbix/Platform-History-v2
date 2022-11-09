@@ -871,7 +871,7 @@
                         var onMarketPlace = $onMarketPlace.prop("checked");
                         var chainId = $("select[name=chain]", dialog).val();
                         var currencySymbol = $("select[name=currency]", dialog).val();
-                        var chain = NFT.chains[chainId];
+                        var chain = NFT.Web3.chains[chainId];
                         var currency = {};
                         Q.each(NFT.currencies, function (i, c) {
                             if (c.symbol !== currencySymbol) {

@@ -4,7 +4,9 @@
         "canceled": "Yêu cầu đã bị hủy",
         "500": "Lỗi máy chủ nội bộ",
         "404": "Không tìm thấy: {{url}}",
-        "501": "Yêu cầu bị gián đoạn"
+        "501": "Yêu cầu bị gián đoạn",
+        "401": "Không được phép",
+        "403": "Cấm"
     },
     "nonce": {
         "sameDomain": "Phiên hết hạn. Làm mới trang và thử lại.",

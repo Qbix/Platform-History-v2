@@ -4,7 +4,9 @@
         "canceled": "Ombi limeghairiwa",
         "500": "Hitilafu ya seva ya ndani",
         "404": "Haijapatikana: {{url}}",
-        "501": "Ombi limekatizwa"
+        "501": "Ombi limekatizwa",
+        "401": "Haijaidhinishwa",
+        "403": "Haramu"
     },
     "nonce": {
         "sameDomain": "Kipindi kimekwisha. Onyesha upya ukurasa na ujaribu tena.",

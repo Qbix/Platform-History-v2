@@ -412,6 +412,79 @@
             "Description": "User details",
             "aboutPlaceholder": "Edit Bio",
             "SureLogOut": "Are you sure you want to log out?"
+        },
+        "sales": {
+            "factory": {
+                "form": {
+                    "labels": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "series Id",
+                        "owner": "Owner",
+                        "currency": "Сurrency",
+                        "price": "Price",
+                        "beneficiary": "Beneficiary",
+                        "autoindex": "Autoindex",
+                        "duration": "Duration",
+                        "rateInterval": "Rate interval",
+                        "rateAmount": "Rate amount"
+                    },
+                    "small": {
+                        "NFTContract": "NFTContract",
+                        "seriesId": "tokens will be minted in this series",
+                        "owner": "owner of instance, otherwise will be sender",
+                        "currency": "Currency for purchased tokens, if zero - for native coins",
+                        "price": "Price",
+                        "beneficiary": "Beneficiary of selling tokens, otherwise will be sender",
+                        "autoindex": "Autoindex",
+                        "duration": "locked time after minting. can be zero",
+                        "rateInterval": "bucket interval for special purchase",
+                        "rateAmount": "bucket amount for special purchase"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(optional)",
+                    "number": "number",
+                    "address": "address",
+                    "fraction": "fraction",
+                    "uint256": "uint256",
+                    "uint192": "uint192",
+                    "uint64": "uint64",
+                    "uint32": "uint32",
+                    "uint16": "uint16"
+                },
+                "produce":"produce",
+                "viewInstancesList":"List",
+                "placeholder":"[placeholder]"
+            },
+            "instance": {
+                "form": {
+                    "labels": {
+                        "seriesId": "Series ID",
+                        "account": "Account",
+                        "amount": "Amount"
+                    },
+                    "small": {
+                        "seriesId": "new token will belong in series with such ID",
+                        "account": "owner of newly created NFT. if not set - will use current wallet",
+                        "amount": "amount NFT to mint"
+                    }
+                },
+                "placeholders": {
+                    "optional": "(optional)",
+                    "seriesId": "id",
+                    "account": "account",
+                    "amount": "amount",
+                    "integer": "integer"
+                    
+                },
+                "btn": {
+                    "Purchase": "Purchase",
+                    "SpecialPurchase": "Special purchase"
+                }
+            }
         }
+    },
+    "currencies": {
+        "choose": "Choose a currency"
     }
 }

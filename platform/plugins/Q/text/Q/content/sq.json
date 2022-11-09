@@ -4,7 +4,9 @@
         "canceled": "Kërkesa u anulua",
         "500": "Gabim i brendshëm i serverit",
         "404": "Nuk u gjet: {{url}}",
-        "501": "Kërkesa u ndërpre"
+        "501": "Kërkesa u ndërpre",
+        "401": "I paautorizuar",
+        "403": "e ndaluar"
     },
     "nonce": {
         "sameDomain": "Seanca skadoi. Rifresko faqen dhe provo sërish.",

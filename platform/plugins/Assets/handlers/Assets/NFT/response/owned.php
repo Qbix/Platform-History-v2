@@ -21,9 +21,10 @@ function Assets_NFT_response_owned ($params) {
 	$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
 
 	$chains = Assets_NFT::getChains();
-	$walletAddress = Q::ifset($request, 'walletAddress', Users_Web3::getWalletById($userId, true));
+	$walletAddress = Q::ifset($request, 'walletAddress', Users_Web3::getWalletByUserId($userId));
 	$chainId = Q::ifset($request, 'chainId', null);
 	$contractAddress = Q::ifset($request, 'contractAddress', null);
+	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
 
 	$tokenJSON = array();
 
@@ -68,7 +69,7 @@ function Assets_NFT_response_owned ($params) {
 			continue;
 		}
 
-		$ABI = Users_Web3::getABI($chain["contract"], $chain["chainId"]);
+		$ABI = Users_Web3::getABI($pathABI);
 		$tokensByOwner = Users_Web3::existsInABI("tokensByOwner", $ABI, "function", false);
 		$balanceOf = Users_Web3::existsInABI("balanceOf", $ABI, "function", false);
 		$getNftsByOwner = Users_Web3::existsInABI("getNftsByOwner", $ABI, "function", false);

@@ -4,7 +4,9 @@
         "canceled": "Hætt við beiðni",
         "500": "Innri netþjónsvilla",
         "404": "Fannst ekki: {{url}}",
-        "501": "Beiðni rofin"
+        "501": "Beiðni rofin",
+        "401": "Óviðkomandi",
+        "403": "Bannað"
     },
     "nonce": {
         "sameDomain": "Fundur rann út. Endurnýjaðu síðuna og reyndu aftur.",

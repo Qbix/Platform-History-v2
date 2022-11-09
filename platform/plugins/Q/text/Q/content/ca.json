@@ -4,7 +4,9 @@
         "canceled": "Sol·licitud cancel·lada",
         "500": "Error del servidor intern",
         "404": "No s&#39;ha trobat: {{url}}",
-        "501": "La sol·licitud s&#39;ha interromput"
+        "501": "La sol·licitud s&#39;ha interromput",
+        "401": "No autoritzat",
+        "403": "Prohibit"
     },
     "nonce": {
         "sameDomain": "Sessió expirada. Actualitza la pàgina i torna-ho a provar.",

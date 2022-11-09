@@ -68,6 +68,10 @@ function Users_before_Q_responseExtras()
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
 
+	Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
+
+	Q_Response::setScriptData('Q.plugins.Users.Web3.factories', Users_Web3::getFactories());
+
 	// add apple signIn js lib
 	if (Q_Request::platform() === 'ios') {
 		Q_Response::addScript('https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js', 'Users');

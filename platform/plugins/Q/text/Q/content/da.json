@@ -4,7 +4,9 @@
         "canceled": "Anmodning annulleret",
         "500": "Intern serverfejl",
         "404": "Ikke fundet: {{url}}",
-        "501": "Anmodning afbrudt"
+        "501": "Anmodning afbrudt",
+        "401": "Uberettiget",
+        "403": "Forbudt"
     },
     "nonce": {
         "sameDomain": "Sessionen er udløbet. Opdater siden, og prøv igen.",

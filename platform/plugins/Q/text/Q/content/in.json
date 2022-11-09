@@ -4,7 +4,9 @@
         "canceled": "Permintaan dibatalkan",
         "500": "Kesalahan server dari dalam",
         "404": "Tidak ditemukan: {{url}}",
-        "501": "Permintaan terputus"
+        "501": "Permintaan terputus",
+        "401": "Tidak sah",
+        "403": "Terlarang"
     },
     "nonce": {
         "sameDomain": "Sesi berakhir. Refresh halaman dan coba lagi.",

@@ -49,7 +49,9 @@
 		},
 		"web": {
 			"ignoreUserAbort": true,
-			"requireValidNonce": [],
+			"requireValidNonce": {
+				"include": []
+			},
 			"statusBarOverlapped": false
 		},
 		"response": {

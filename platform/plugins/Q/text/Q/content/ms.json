@@ -4,7 +4,9 @@
         "canceled": "Permintaan dibatalkan",
         "500": "Ralat pelayan dalaman",
         "404": "Tidak ditemui: {{url}}",
-        "501": "Permintaan terganggu"
+        "501": "Permintaan terganggu",
+        "401": "tanpa kebenaran",
+        "403": "Dilarang"
     },
     "nonce": {
         "sameDomain": "Sesi tamat tempoh. Muat semula halaman dan cuba lagi.",

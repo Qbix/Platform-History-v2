@@ -10,7 +10,7 @@ function Users_external_response_data($params) {
 		throw new Users_Exception_NotAuthorized();
 	}
 
-	$wallet = Users_Web3::getWalletById($userId);
+	$wallet = Users_Web3::getWalletByUserId($userId);
 
 	return compact("wallet");
 }

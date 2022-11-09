@@ -60,7 +60,10 @@
 			}
 		},
 		"web": {
-			"requireValidNonce": ["Users"]
+			"requireValidNonce": {
+				"include": ["Users"],
+				"exclude": ["Users/login", "Users/authenticate"]
+			}
 		},
 		"socket": {
 			"disconnectTimeout": 1500
@@ -156,6 +159,9 @@
 				"subject": false,
 				"body": false
 			}
+		},
+		"cookie": {
+			"names": ["Q_sessionId"]
 		},
 		"authenticate": {
 			"expires": 86400
@@ -299,7 +305,12 @@
 					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
 					"blockExplorerUrl": "https://etherscan.io/",
 					"rpcUrl": "https://mainnet.infura.io/v3/{{infuraId}}",
-					"abiUrl": "https://api.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}"
+					"abiUrl": "https://api.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}",
+					"currency": {
+						"name": "Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
 				},
 				"0x3": {
 					"name": "Ropsten"
@@ -310,12 +321,22 @@
 					"publicWebsocket": "wss://main-light.eth.linkpool.io/ws",
 					"rpcUrl": "https://rinkeby.infura.io/v3/{{infuraId}}",
 					"blockExplorerUrl": "https://rinkeby.etherscan.io/",
-					"abiUrl": "https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}"
+					"abiUrl": "https://api-rinkeby.etherscan.io/api?module=contract&action=getabi&address={{contractAddress}}",
+					"currency": {
+						"name": "Rinkeby Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
 				},
 				"0x5": {
 					"name": "Goerli",
 					"publicRPC": "https://goerli-light.eth.linkpool.io/",
-					"publicWebsocket": "wss://goerli-light.eth.linkpool.io/ws"
+					"publicWebsocket": "wss://goerli-light.eth.linkpool.io/ws",
+					"currency": {
+						"name": "Goerli Ethereum",
+						"symbol": "ETH",
+						"decimals": 18
+					}
 				},
 				"0x38": {
 					"name": "Binance SmartChain",
@@ -323,21 +344,36 @@
 					"publicWebsocket": "wss://bsc-ws-node.nariox.org:443",
 					"blockExplorerUrl": "https://bscscan.com",
 					"rpcUrl": "https://bsc-dataseed.binance.org/",
-					"abiUrl": "https://api.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}"
+					"abiUrl": "https://api.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
+					"currency": {
+						"name": "Binance Coin",
+						"symbol": "BNB",
+						"decimals": 18
+					}
 				},
 				"0x61": {
 					"name": "Binance Smart Chain Testnet",
 					"publicRPC": "https://data-seed-prebsc-1-s1.binance.org:8545",
 					"rpcUrl": "https://data-seed-prebsc-1-s1.binance.org:8545/",
 					"blockExplorerUrl": "https://testnet.bscscan.com",
-					"abiUrl": "https://api-testnet.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}"
+					"abiUrl": "https://api-testnet.bscscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
+					"currency": {
+						"name": "Binance Coin",
+						"symbol": "BNB",
+						"decimals": 18
+					}
 				},
 				"0x89": {
 					"name": "Polygon Mainnet",
 					"publicRPC": "https://polygon-rpc.com/",
 					"rpcUrl": "https://polygon-rpc.com/",
 					"blockExplorerUrl": "https://polygonscan.com/",
-					"abiUrl": "https://api.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}"
+					"abiUrl": "https://api.polygonscan.com/api?module=contract&action=getabi&address={{contractAddress}}",
+					"currency": {
+						"name": "Polygon",
+						"symbol": "MATIC",
+						"decimals": 18
+					}
 				}
 			}
 		}

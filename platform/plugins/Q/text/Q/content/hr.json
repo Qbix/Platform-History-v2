@@ -4,7 +4,9 @@
         "canceled": "Zahtjev je otkazan",
         "500": "Interna pogreška poslužitelja",
         "404": "Nije pronađeno: {{url}}",
-        "501": "Zahtjev je prekinut"
+        "501": "Zahtjev je prekinut",
+        "401": "Neovlašteno",
+        "403": "Zabranjeno"
     },
     "nonce": {
         "sameDomain": "Vrijeme isteklo. Osvježite stranicu i pokušajte ponovno.",

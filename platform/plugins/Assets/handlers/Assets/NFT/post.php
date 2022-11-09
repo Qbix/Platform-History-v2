@@ -21,7 +21,7 @@ function Assets_NFT_post ($params) {
 	if ($tokenId) {
 		$chainId = $fields["attributes"]["chainId"];
 		$chain = Assets_NFT::getChains($chainId);
-		$wallet = Users_Web3::getWalletById($publisherId);
+		$wallet = Users_Web3::getWalletByUserId($publisherId);
 
 		Assets_NFT::clearContractCache($chainId, $chain["contract"], $wallet);
 	}*/

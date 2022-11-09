@@ -49,7 +49,7 @@
 
         var pipe = Q.pipe(["stylesheet", "text"], function (params, subjects) {
             $toolElement.addClass("Q_working");
-            state.chain = NFT.chains[state.chainId];
+            state.chain = NFT.Web3.chains[state.chainId];
             $toolElement.attr("data-tokenId", state.tokenId);
             $toolElement.attr("data-chainId", state.chainId);
 
@@ -169,7 +169,7 @@
                 }]);
 
                 // get smart contract just to set contract events to update preview
-                Web3.getContract(state.chain);
+                NFT.Web3.getContract(state.chain);
             } else {
                 if (state.chainId !== Q.getObject("ethereum.chainId", window)) {
                     return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
@@ -390,15 +390,9 @@
                     e.stopPropagation();
                     e.preventDefault();
 
-                    Web3.checkProvider(state.chain, function (err) {
-                        if (err) {
-                            return;
-                        }
-
-                        Web3.buy(state.tokenId, state.chain, currency, function (err, transaction) {
-                            state.updateCache = true;
-                            tool.init();
-                        });
+                    NFT.Web3.buy(state.tokenId, state.chain, currency, function (err, transaction) {
+                        state.updateCache = true;
+                        tool.init();
                     });
                 });
 
@@ -423,34 +417,38 @@
                         onActivate: function (dialog) {
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
-                                Web3.checkProvider(state.chain, function (err, contract) {
-                                    if (err) {
-                                        return $toolElement.removeClass("Q_working");
-                                    }
-
-                                    contract["listForSale(uint256,uint256,address)"](state.tokenId.toString(), saleInfo.price.toString(), saleInfo.currencyToken).catch(function (e) {
+                                Users.Web3.execute(
+                                    'Assets/templates/NFT',
+                                    {
+                                        chainId: state.chainId,
+                                        address: NFT.Web3.chains[state.chainId].contract
+                                    },
+                                    "listForSale(uint256,uint256,address)",
+                                    [state.tokenId.toString(), saleInfo.price.toString(), saleInfo.currencyToken],
+                                    function (e) {
                                         console.error(e);
                                         $toolElement.removeClass("Q_working");
-                                    });
-                                });
-
+                                    }
+                                );
                                 Q.Dialogs.pop();
                                 $toolElement.addClass("Q_working");
                             });
 
                             // Put NFT off sale
                             $("button[name=offSale]", dialog).on("click", function () {
-                                Web3.checkProvider(state.chain, function (err, contract) {
-                                    if (err) {
-                                        return $toolElement.removeClass("Q_working");
-                                    }
-
-                                    contract.removeFromSale(state.tokenId).catch(function (e) {
+                                Users.Web3.execute(
+                                    'Assets/templates/NFT',
+                                    {
+                                        chainId: state.chainId,
+                                        address: NFT.Web3.chains[state.chainId].contract
+                                    },
+                                    "removeFromSale",
+                                    [state.tokenId],
+                                    function (e) {
                                         console.error(e);
                                         $toolElement.removeClass("Q_working");
-                                    });
-                                });
-
+                                    }
+                                );
                                 Q.Dialogs.pop();
                                 $toolElement.addClass("Q_working");
                             });
@@ -461,18 +459,19 @@
                                     if (!address) {
                                         return;
                                     }
-
-                                    Web3.checkProvider(state.chain, function (err, contract) {
-                                        if (err) {
-                                            return $toolElement.removeClass("Q_working");
-                                        }
-
-                                        contract.transferFrom(owner, address, state.tokenId).catch(function (e) {
+                                    Users.Web3.execute(
+                                        'Assets/templates/NFT',
+                                        {
+                                            chainId: state.chainId,
+                                            address: NFT.Web3.chains[state.chainId].contract
+                                        },
+                                        "transferFrom",
+                                        [owner, address, state.tokenId],
+                                        function (e) {
                                             console.error(e);
                                             $toolElement.removeClass("Q_working");
-                                        });
-                                    });
-
+                                        }
+                                    );
                                     Q.Dialogs.pop();
                                     $toolElement.addClass("Q_working");
                                 },{
@@ -737,7 +736,7 @@
                             var price = parseFloat($("input[name=fixedPrice]:visible", dialog).val() || $("input[name=minBid]:visible", dialog).val()) || 0;
                             var onMarketPlace = $onMarketPlace.prop("checked");
                             var chainId = $("select[name=chain]", dialog).val();
-                            var chain = NFT.chains[chainId];
+                            var chain = NFT.Web3.chains[chainId];
                             var currencySymbol = $("select[name=currency]", dialog).val();
                             var currency = {};
                             Q.each(NFT.currencies, function (i, c) {
@@ -889,7 +888,7 @@
             var previewState = tool.preview.state;
             var streamId = tool.preview.state.streamName.split("/").pop();
 
-            Web3.checkProvider(chain, function (err, contract) {
+            NFT.Web3.getContract(chain, function (err, contract) {
                 if (err) {
                     return Q.handle(callback, tool, [err]);
                 }
