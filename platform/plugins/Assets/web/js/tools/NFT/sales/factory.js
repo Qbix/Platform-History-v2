@@ -68,20 +68,14 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
 { // methods go here
     whitelistByNFT: function(NFTContract, callback){
-        Q.Assets.NFT.Web3.checkProvider(
-                Q.Assets.NFT.defaultChain, 
-                function (err, contract) { 
-                    contract.whitelistByNFT(NFTContract).then(function (instancesList) {
-                        Q.handle(callback, null, [null, {list: instancesList}, contract]);
-                    }, function (err) {
-                        Q.handle(callback, null, [err.reason]);
-                    });
-                }, 
-                {
-                    contractAddress: Q.Assets.NFT.sales.factory[Q.Assets.NFT.defaultChain.chainId], 
-                    abiPath: "TokenSociety/templates/NFTSalesFactory"
-                }
-            );
+        return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
+        .then(function (contract) {
+            return contract.whitelistByNFT(NFTContract);
+        }).then(function (instancesList) {
+            Q.handle(callback, null, [null, {list: instancesList}, contract])
+        }).catch(function (err) {
+            Q.handle(callback, null, [err.reason || err]);
+        })
     },
     _whitelistPush: function(item){
         var tool = this;
@@ -144,62 +138,38 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         var tool = this;
         var state = this.state;
 
-        Q.Assets.NFT.Web3.checkProvider(
-            Q.Assets.NFT.defaultChain, 
-            function (err, contract) {
-
-                contract.produce(
-                    NFTContract, 
-                    seriesId, 
-                    owner, 
-                    currency, 
-                    price, 
-                    beneficiary, 
-                    autoindex, 
-                    duration, 
-                    rateInterval, 
-                    rateAmount
-                ).then(
-                    function(txResponce){
-
-                        txResponce.wait().then(
-                            function(receipt){
-                                
-                                let event = receipt.events.find(event => event.event === 'InstanceCreated');
-                                [instance] = event.args;
-                                Q.Notices.add({
-                                    content: `Instance "${instance}" was created successfully`,
-                                    timeout: 5
-                                });
-                                tool._whitelistPush(instance);
-                            },
-                            function(err){
-                                console.log("err::txResponce.wait()");
-                            },
-                        );
-
-                    }, 
-                    function (err) {
-                        console.log(err); 
-                        //Q.handle(callback, null, [err.reason]);
-                    }
-                ).then(
-                    function () {
-
-                    //console.log("#2"); 
-                    //Q.handle(callback, null, [null, tokensAmount]);
-                    }, 
-                    function (err) {
-                        console.log(err); 
-                    //Q.handle(callback, null, [err.reason]);
-                    }
-                );
-            }, 
-            {
-                contractAddress: Q.Assets.NFT.sales.factory[Q.Assets.NFT.defaultChain.chainId], 
-                abiPath: state.abiPath
-            }
-        );
+        return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales')
+        .then(function (contract) {
+            return contract.produce(
+                NFTContract, 
+                seriesId, 
+                owner, 
+                currency, 
+                price, 
+                beneficiary, 
+                autoindex, 
+                duration, 
+                rateInterval, 
+                rateAmount
+            ).then(function(txResponse){
+                txResponse.wait().then(function(receipt){
+                    let event = receipt.events.find(event => event.event === 'InstanceCreated');
+                    [instance] = event.args;
+                    Q.Notices.add({
+                        content: `Instance "${instance}" was created successfully`,
+                        timeout: 5
+                    });
+                    tool._whitelistPush(instance);
+                }, function(err){
+                    console.log("err::txResponce.wait()");
+                });
+            });
+        }).then(function (instancesList) {
+            Q.handle(callback, null, [null, {list: instancesList}, contract])
+        }).catch(function (err) {
+            console.warn(err);
+            Q.handle(callback, null, [err.reason || err]);
+        });
     },
     /**
      * Refreshes the appearance of the tool completely

@@ -46,6 +46,8 @@ function Assets_before_Q_responseExtras() {
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.base', Q_Config::get("Assets", "NFT", "URI", "base", array()));
 	Q_Response::setScriptData('Q.plugins.Assets.NFT.URI.suffix', Q_Config::get("Assets", "NFT", "URI", "suffix", array()));
         
-        Q_Response::setScriptData('Q.Assets.NFT.sales.factory', Q_Config::get("Assets", "NFT", "sales", "factory", array()));
+        Q_Response::setScriptData('Q.Assets.Web3.factories', Q_Config::get("Assets", "NFT", "sales", "factory", array()));
         
+		Q_Response::setScriptData('Q.plugins.Assets.Web3.factories', Q_Config::get('Assets', 'Web3', 'factories'));
+
 }

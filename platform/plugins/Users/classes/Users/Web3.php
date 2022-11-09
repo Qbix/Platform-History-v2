@@ -261,6 +261,18 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
+	 * Get available Web3 factories information
+	 * @method getChains
+	 * @param {string} [$needChainId] if defined return only this chain info
+	 * @static
+	 * @return array
+	 */
+	static function getFactories()
+	{
+		return Q_Config::get('Users', 'Web3', 'factories', array());
+	}
+
+	/**
 	 * Get content of the ABI file for a contract.
 	 * Taken from config Users/web3/contracts/$contractName/filename.
 	 * As a fallback tries config Users/web3/contracts/$contractName/dir and if found,

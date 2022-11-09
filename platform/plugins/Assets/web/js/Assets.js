@@ -919,27 +919,6 @@
 				},
 
 				/**
-				 * Check web3 provider (MetaMask) connected, and switch to valid chain
-				 * @method checkProvider
-				 * @param {Object} chain
-				 * @param {function} callback
-				 * @param {object} [options]
-				 * @param {object} [options.mode="contract"] - What to create "contract" or "factory"
-				 */
-				checkProvider: function (chain, callback, options) {
-					var mode = Q.getObject("mode", options) || "contract";
-					if (Q.typeOf(chain) === "string") {
-						chain = NFT.Web3.chains[chain];
-					}
-					if (mode === "contract") {
-						Assets.NFT.Web3.getContract(chain, callback, options);
-					} else if (mode === "factory") {
-						Assets.NFT.Web3.getFactory(chain, callback, options);
-					} else {
-						throw new Q.Exception("mode " + mode + " is not supported in Assets.NFT.Web3.checkProvider");
-					}
-				},
-				/**
 				 * Set the info for a series
 				 * @method setSeriesInfo
 				 * @param {String} contractAddress
@@ -948,7 +927,7 @@
 				 * @param {String} info.price The price (in currency) that minting the NFTs would cost.
 				 * @param {String} info.fixedPointPrice The fixed-point large integer price (in currency) that minting the NFTs would cost.
 				 * @param {String} [info.currency] Set the ERC20 contract address, otherwise price would be in the native coin (ETH, BNB, MATIC, etc.)
-                                 * @param {String} [info.decimals=18] set number of decimals for currencies
+				 * @param {String} [info.decimals=18] set number of decimals for currencies
 				 * @param {String} [info.authorAddress] Give rights to this address to mintAndDistribute
 				 * @param {String} [info.limit] maximum number that can be minted
 				 * @param {String} [info.onSaleUntil] timestamp in seconds since Unix epoch
@@ -1000,15 +979,16 @@
 					);
 				},
 				/**
-				 * Get or create factory
+				 * Get NFT contract factory
 				 * @method getFactory
-				 * @param {Object} chain
+				 * @param {Object} chainId
 				 * @param {function} callback
 				 * @param {object} [options]
 				 * @param {boolean} [options.checkWeb3=false] If true, check wallet before create factory
+				 * @return {Q.Promise}
 				 */
 				getFactory: function (chainId, callback, options) {
-					Q.Users.Web3.getContract(
+					return Q.Users.Web3.getContract(
 						'Assets/templates/NFTFactory', 
 						{
 							chainId: chainId,
@@ -1033,18 +1013,19 @@
 					);
 				},
 				/**
-				 * Create contract for user
+				 * Get NFT contract instance
 				 * @method getContract
-				 * @param {Object} chain
+				 * @param {Object} chainId
 				 * @param {function} callback,
 				 * @param {object} [options]
 				 * @param {string} [options.contractAddress] - if defined override default chain contract address
 				 * @param {string} [options.abiPath] - if defined override default abi path
+				 * @return {Q.Promise}
 				 */
-				getContract: function (chain, callback, options) {
+				getContract: function (chainId, callback, options) {
 					var address = Q.getObject("contractAddress", options) || chain.contract;
 					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/NFT';
-					Q.Users.Web3.getContract(
+					return Q.Users.Web3.getContract(
 						abiPath, 
 						{
 							chainId: chainId,

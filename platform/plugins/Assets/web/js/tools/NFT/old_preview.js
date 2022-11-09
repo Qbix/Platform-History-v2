@@ -169,7 +169,7 @@
                 }]);
 
                 // get smart contract just to set contract events to update preview
-                Web3.getContract(state.chain);
+                NFT.Web3.getContract(state.chain);
             } else {
                 if (state.chainId !== Q.getObject("ethereum.chainId", window)) {
                     return console.warn("Chain id selected is not appropriate to NFT chain id " + state.chainId);
@@ -390,15 +390,9 @@
                     e.stopPropagation();
                     e.preventDefault();
 
-                    Web3.checkProvider(state.chain, function (err) {
-                        if (err) {
-                            return;
-                        }
-
-                        Web3.buy(state.tokenId, state.chain, currency, function (err, transaction) {
-                            state.updateCache = true;
-                            tool.init();
-                        });
+                    NFT.Web3.buy(state.tokenId, state.chain, currency, function (err, transaction) {
+                        state.updateCache = true;
+                        tool.init();
                     });
                 });
 
@@ -424,7 +418,7 @@
                             // Put NFT on sale
                             $("button[name=onSale]", dialog).on("click", function () {
                                 Users.Web3.execute(
-                                    
+                                    'Assets/templates/NFT',
                                     {
                                         chainId: state.chainId,
                                         address: NFT.Web3.chains[state.chainId].contract
@@ -435,35 +429,26 @@
                                         console.error(e);
                                         $toolElement.removeClass("Q_working");
                                     }
-                                )
-                                Web3.checkProvider(state.chain, function (err, contract) {
-                                    if (err) {
-                                        return $toolElement.removeClass("Q_working");
-                                    }
-
-                                    contract["listForSale(uint256,uint256,address)"](state.tokenId.toString(), saleInfo.price.toString(), saleInfo.currencyToken).catch(function (e) {
-                                        console.error(e);
-                                        $toolElement.removeClass("Q_working");
-                                    });
-                                });
-
+                                );
                                 Q.Dialogs.pop();
                                 $toolElement.addClass("Q_working");
                             });
 
                             // Put NFT off sale
                             $("button[name=offSale]", dialog).on("click", function () {
-                                Web3.checkProvider(state.chain, function (err, contract) {
-                                    if (err) {
-                                        return $toolElement.removeClass("Q_working");
-                                    }
-
-                                    contract.removeFromSale(state.tokenId).catch(function (e) {
+                                Users.Web3.execute(
+                                    'Assets/templates/NFT',
+                                    {
+                                        chainId: state.chainId,
+                                        address: NFT.Web3.chains[state.chainId].contract
+                                    },
+                                    "removeFromSale",
+                                    [state.tokenId],
+                                    function (e) {
                                         console.error(e);
                                         $toolElement.removeClass("Q_working");
-                                    });
-                                });
-
+                                    }
+                                );
                                 Q.Dialogs.pop();
                                 $toolElement.addClass("Q_working");
                             });
@@ -474,18 +459,19 @@
                                     if (!address) {
                                         return;
                                     }
-
-                                    Web3.checkProvider(state.chain, function (err, contract) {
-                                        if (err) {
-                                            return $toolElement.removeClass("Q_working");
-                                        }
-
-                                        contract.transferFrom(owner, address, state.tokenId).catch(function (e) {
+                                    Users.Web3.execute(
+                                        'Assets/templates/NFT',
+                                        {
+                                            chainId: state.chainId,
+                                            address: NFT.Web3.chains[state.chainId].contract
+                                        },
+                                        "transferFrom",
+                                        [owner, address, state.tokenId],
+                                        function (e) {
                                             console.error(e);
                                             $toolElement.removeClass("Q_working");
-                                        });
-                                    });
-
+                                        }
+                                    );
                                     Q.Dialogs.pop();
                                     $toolElement.addClass("Q_working");
                                 },{
@@ -902,7 +888,7 @@
             var previewState = tool.preview.state;
             var streamId = tool.preview.state.streamName.split("/").pop();
 
-            Web3.checkProvider(chain, function (err, contract) {
+            NFT.Web3.getContract(chain, function (err, contract) {
                 if (err) {
                     return Q.handle(callback, tool, [err]);
                 }

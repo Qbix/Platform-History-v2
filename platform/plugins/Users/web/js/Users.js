@@ -4208,7 +4208,7 @@
 		/**
 		 * Get currently selected chain id asynchronously
 		 * @method getChainId
-		 * @param {Function} callback receives (err, chainId)
+		 * @param {Function} callback receives (err, chainId) where chainId is in hexadecimal
 		 */
 		getChainId: function (callback) {
 			Users.Web3.connect(function (err, provider) {
@@ -4217,7 +4217,7 @@
 				}
 
 				(new Web3(provider)).eth.net.getId().then(function (chainId) {
-					return Q.handle(callback, null, [null, chainId]);
+					return Q.handle(callback, null, [null, '0x' + Number(chainId).toString(16)]);
 				});
 			});
 		},
@@ -4381,11 +4381,29 @@
 					};
 				}
 			});
+		},
+
+		/**
+		 * Used to fetch the ethers.Contract object to use with a smart contract.
+		 * Looks up the factory address using the chainId that is currently selected in the wallet.
+		 * @method getFactory
+		 * @static
+		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
+		 * @param {Function} [callback] receives (err, contract)
+		 * @return {Promise} that would resolve with the ethers.Contract
+		 */
+		getFactory: function(contractABIName, callback) {
+			Users.Web3.getChainId(function (err, chainId) {
+				var factories = Users.Web3.factories[contractABIName];
+				var contractAddress = factories[chainId] || factories['all'];
+				return Users.Web3.getContract(contractABIName, contractAddress, callback);
+			});
 		}
 	};
 
 	Users.Web3.switchChain = Q.promisify(Users.Web3.switchChain);
 	Users.Web3.getContract = Q.promisify(Users.Web3.getContract);
+	Users.Web3.getFactory = Q.promisify(Users.Web3.getFactory);
 	Users.Web3.execute = Q.promisify(Users.Web3.execute);
 
 	/**

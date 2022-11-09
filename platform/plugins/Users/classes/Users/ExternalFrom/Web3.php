@@ -59,7 +59,7 @@ class Users_ExternalFrom_Web3 extends Users_ExternalFrom implements Users_Extern
 			}
 		}
 		Q_Valid::requireFields(array('payload', 'signature'), @compact('payload', 'signature'),true);
-		$e = new Crypto\EthSigRecover();
+	$e = new Crypto\EthSigRecover();
 		$recoveredXid = strtolower(
 			$e->personal_ecRecover($payload, $signature)
 		);

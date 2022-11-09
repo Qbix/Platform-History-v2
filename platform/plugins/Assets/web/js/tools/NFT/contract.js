@@ -639,38 +639,14 @@
                 Q.handle(state.onCreated, tool, [name, symbol, address]);
             }, tool);
 
-            Users.Web3.execute(
-                'Assets/templates/NFTFactory', 
-                {
-                    chainId: chainId,
-                    address: NFT.Web3.chains[chainId].factory
-                },
-                "produce(string,string,string,string,string)",
-                [ name, symbol, "", NFT.URI.base, NFT.URI.suffix ],
-                function (err) {
-                    if (err) {
-                        return Q.handle(callback, tool, [err]);
-                    }
-                }
-            );
-
-            Web3.checkProvider(chain, function (err, factory) {
-                if (err) {
-                    return Q.handle(callback, tool, [err]);
-                }
-
-                try {
-                    factory["produce(string,string,string,string,string)"](name, symbol, "", NFT.URI.base, NFT.URI.suffix).catch(function (err) {
-                        if (err) {
-                            return Q.handle(callback, tool, [err]);
-                        }
-
-                    });
-                } catch (err) {
-                    Q.handle(callback, tool, [err]);
-                }
-            }, {
-                mode: "factory"
+            NFT.Web3.getFactory(chainId)
+            .then(function (factory) {
+                method = factory["produce(string,string,string,string,string)"];
+                return method(name, symbol, "", NFT.URI.base, NFT.URI.suffix);
+            }).then(function (result) {
+                return Q.handle(callback, tool, [null, result]);
+            }).catch(function (err) {
+                return Q.handle(callback, tool, [err]);
             });
         }
     });

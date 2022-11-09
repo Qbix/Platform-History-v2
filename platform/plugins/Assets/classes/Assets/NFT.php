@@ -205,7 +205,7 @@ class Assets_NFT
 			$default = ($i == $defaultAppId);
 			$contract = Q::ifset($chain, "contracts", "NFT", "address", null);
 			$bulkContract = Q::ifset($chain, "contracts", "bulkContract", "address", null);
-			$factory = Q::ifset($chain, "contracts", "NFT", "factory", null);
+			$factory = Q_Config::get('Assets', 'NFT', 'web3', 'factory', 'all');
 			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
 			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
