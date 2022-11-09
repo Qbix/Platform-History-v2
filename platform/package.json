@@ -19,7 +19,7 @@
 		"html-entities": "^1.2.1",
 		"moment-timezone": "0.5.x",
 		"mysql": "2.14.x",
-		"nodemailer": "^4.4.2",
+		"nodemailer": "^6.6.1",
 		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
 		"socket.io": "2.4.1",
