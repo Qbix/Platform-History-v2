@@ -23,11 +23,11 @@ function Q_serviceWorker_response_js()
 	self.addEventListener('fetch', function (event) {
 		// if request is not for same origin, then just send it
 		var url = new URL(event.request.url);
-		if (url.origin === self.location.origin) {
+		if (url.origin !== self.location.origin) {
 			return event.respondWith(fetch(event.request));
 		}
 		// otherwise, attach some headers
-
+		console.log(event.request.url);
 	});
 })();
 
