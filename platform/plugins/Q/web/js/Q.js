@@ -2481,6 +2481,27 @@ Q.preventRecursion = function (name, original, defaultValue) {
 };
 
 /**
+ * @static
+ * @method digest
+ * @param {String} algorithm 
+ * @param {String} payload 
+ * @param {Function} callback receives (err, result)
+ * @return {Q.Promise}
+ */
+Q.digest = function (algorithm, payload, callback) {
+	var encoded = new TextEncoder().encode(payload);
+	return crypto.subtle.digest(algorithm, encoded)
+	.then(function (buffer) {
+		var result = Array.from(new Uint8Array(buffer))
+		.map(function (b) {
+			return b.toString(16).padStart(2, '0');
+		}).join('');
+		callback && callback(null, result);
+		return result;
+	});
+};
+
+/**
  * Open url in new tab if cordova browsertabs plugin exist or new window otherwise.
  * @static
  * @method openUrl
