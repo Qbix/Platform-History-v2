@@ -8,7 +8,7 @@ function Assets_NFTseries_response_getInfo ($params) {
 	$contractAddress = Assets_NFT::getChains($chainId)["contract"];
 
 	//$owner = Users_Web3::execute('Assets/NFT', $contractAddress, "owner", array(), $chainId, false);
-	$info = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "seriesInfo", $seriesId, $chainId, false);
+	$info = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "seriesInfo", $seriesId, $chainId, false);
 
 	return compact("info");
 }

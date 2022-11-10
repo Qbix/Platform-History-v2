@@ -964,7 +964,7 @@
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
 					return Q.Users.Web3.execute(
-						'Assets/templates/NFT',
+						'Assets/templates/R1/NFT/contract',
 						contractAddress, 
 						"setSeriesInfo", 
 						[
@@ -987,9 +987,10 @@
 				 * @param {boolean} [options.checkWeb3=false] If true, check wallet before create factory
 				 * @return {Q.Promise}
 				 */
+
 				getFactory: function (chainId, callback, options) {
 					return Q.Users.Web3.getContract(
-						'Assets/templates/NFTFactory', 
+						'Assets/templates/R1/NFT/factory',
 						{
 							chainId: chainId,
 							address: Assets.NFT.Web3.chains[chainId].factory
@@ -1024,7 +1025,7 @@
 				 */
 				getContract: function (chainId, callback, options) {
 					var address = Q.getObject("contractAddress", options) || chain.contract;
-					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/NFT';
+					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
 					return Q.Users.Web3.getContract(
 						abiPath, 
 						{

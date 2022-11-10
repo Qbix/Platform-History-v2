@@ -1,4 +1,3 @@
-
 (function (window, Q, $, undefined) {
 	
 /**
@@ -18,7 +17,7 @@
 Q.Tool.define("Assets/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
-
+        
         // fill missed attr fields
         for (var i in state.fields) {
             
@@ -37,11 +36,11 @@ Q.Tool.define("Assets/sales", function (options) {
             }
         }
         
-        if (Q.isEmpty(state.abiPath)) {
-            return console.warn("abiPath required!");
-        }
         if (Q.isEmpty(state.nftSaleAddress)) {
             return console.warn("nftSaleAddress required!");
+        }
+        if (Q.isEmpty(state.contractAddress)) {
+            return console.warn("contractAddress required!");
         }
         
 	var p = Q.pipe(['stylesheet', 'text'], function (params, subjects) {
@@ -63,68 +62,107 @@ Q.Tool.define("Assets/sales", function (options) {
         amount: {value: "", hide: false}
     },
     nftSaleAddress: '',
-    abiPath: '',    
+    contractAddress: '',
+    abiNftSales: "Assets/templates/R1/NFT/sales/contract",
+    abiNft: "Assets/templates/R1/NFT/contract",
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
 { // methods go here
     specialPurchase: function(
         account,
-        amount
+        amount,
+        callback
     ) {
+        let contract;
+        Q.Users.Web3.getContract(state.abiNftSales, this.state.nftSaleAddress)
+        .then(function (_contract) {
+            contract = _contract;
+            if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
+                Q.alert("not supported yet");
+                // need approve before.  we can do it here 
+            }
+            let calculateTotalAmount = (state.paymentPrice).mul(amount);
+            //ethers.utils.parseEther("0.1")
+            return contract.specialPurchase(account,amount, {value: calculateTotalAmount});
+        }).then(function () {
+            //                        err,  data, contract
+            Q.handle(callback, null, [null, null, contract])
+        }).catch(function (err) {
+            console.warn(err);
+            Q.handle(callback, null, [err.reason || err]);
+        });
+    },
+    getSeriesId: function (callback) {
+        
+        var state = this.state;
+        
+        return Q.Users.Web3.getContract(state.abiNftSales, state.nftSaleAddress)
+        .then(function (contract) {
+           return contract.seriesId();
+        }).catch(function(err) {
+            console.warn(err);
+            Q.handle(callback, null, [err.reason || err]);
+        });
+    },
+    getSeriesPrice: function (seriesId, callback) {
+        
         var state = this.state;
 
-        Q.Assets.NFT.Web3.checkProvider(
-            Q.Assets.NFT.defaultChain, 
-            function (err, contract) { 
-
-                if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
-                    Q.alert("not supported yet");
-                    // need approve before.  we can do it here 
-                }
-
-                let calculateTotalAmount = (state.paymentPrice).mul(amount);
-
-                //ethers.utils.parseEther("0.1")
-                contract.specialPurchase(account,amount, {value: calculateTotalAmount}).then(function () {
-
-                    //Q.handle(callback, null, [null, tokensAmount]);
-                }, function (err) {
-                    console.log("err", err.reason);
-                    Q.handle(null, null, [err.reason]);
-                });
-            }, 
-            {
-                contractAddress: state.nftSaleAddress, 
-                abiPath: state.abiPath
-            }
-        );
+        return Q.Users.Web3.getContract(state.abiNft, state.contractAddress)
+        .then(function (contract) {
+            return contract.seriesInfo(seriesId);
+        }).catch(function(err) {
+            console.warn(err);
+            Q.handle(callback, null, [err.reason || err]);
+        });
     },
-
     purchase: function(
         account, // address
-        amount // uint256
+        amount, // uint256
+        callback
     ) {
-
+        var tool = this;
         var state = this.state;
+        
+       
+        tool.getSeriesId().then((seriesId) => {
+            return tool.getSeriesPrice(seriesId).then((data) => {
+                if (data.saleInfo.currency != "0x0000000000000000000000000000000000000000") {
+                    Q.alert("not supported yet");    
+                    return;
+                } else {
+                    let calculateTotalAmount = (data.saleInfo.price).mul(amount);
+                    
+                    let contract;
+                    return Q.Users.Web3.getContract(state.abiNftSales, state.nftSaleAddress)
+                    .then(function (_contract) {
+                        contract = _contract;
+                        //ethers.utils.parseEther("0.1")
+                        return contract.purchase(account,amount, {value: calculateTotalAmount});
+                    }).then(function () {
+                        //                        err,  data, contract
+                        Q.handle(callback, null, [null, null, contract])
+                    }).catch(function (err) {
+                        
+                        Q.Notices.add({
+                            content: `SeriesID #${seriesId}" is not on sale. Or Metamask error happens`,
+                            timeout: 5
+                        });
+                        console.warn(err);
+                        Q.handle(callback, null, [err.reason || err]);
+                    });
 
-        Q.Assets.NFT.Web3.checkProvider(
-            Q.Assets.NFT.defaultChain, 
-            function (err, contract) { 
-                
-                contract.purchase(account,amount).then(function () {
+                }
+            }).catch(function (err) {
+                console.warn(err);
+                Q.handle(callback, null, [err.reason || err]);
+            });
+        })
 
-                    //Q.handle(callback, null, [null, tokensAmount]);
-                }, function (err) {
-                    console.log("err", err.reason);
-                    Q.handle(null, null, [err.reason]);
-                });
-            }, 
-            {
-                contractAddress: state.nftSaleAddress, 
-                abiPath: state.abiPath
-            }
-        );
+        
+        
+        
             
     },
     
@@ -140,19 +178,12 @@ Q.Tool.define("Assets/sales", function (options) {
         var tool = this;
         var state = tool.state;
 
-        state.a = Date.now();
-
-        //var t = tool.getMultiple(3,5);
-
         // if user login then 
         Q.Template.render(
             "Assets/sales", 
             {
-                TestParam: "Lorem ipsum dolor sit amet",
-
                 fields:state.fields,
-                nftSaleAddress: state.nftSaleAddress, 
-                abiPath: state.abiPath
+                nftSaleAddress: state.nftSaleAddress
             },
             function(err, html){
                 
@@ -164,74 +195,55 @@ Q.Tool.define("Assets/sales", function (options) {
                     
                 });
                     
-                // check is in whitelist
-                Q.Assets.NFT.Web3.checkProvider(
-                    Q.Assets.NFT.defaultChain, 
-                    function (err, contract) { 
-                        contract.isWhitelisted(Q.Users.Web3.getSelectedXid()).then(function (isInWhitelist) {
-                            if (isInWhitelist) {
-                                $(tool.element).find(".jsSpecialPurchase").removeClass("Q_disabled");
-                            } else {
-                                $(tool.element).find(".jsSpecialPurchase").addClass("Q_disabled");
-                            }
-                            
-                            //Q.handle(callback, null, [null, tokensAmount]);
-                        }, function (err) {
-                            
-                            Q.handle(null, null, [err.reason]);
-                        });
-                    }, 
-                    {
-                        contractAddress: state.nftSaleAddress, 
-                        abiPath: state.abiPath
-                    }
-                );
-                
-                //check if current user is owner
-                Q.Assets.NFT.Web3.checkProvider(
-                    Q.Assets.NFT.defaultChain, 
-                    function (err, contract) { 
-                        contract.owner().then(function (ownerAddress) {
-   
-                            if (Q.Users.Web3.getSelectedXid() == ownerAddress) {
-                                Q.Template.render(
-                                    "Assets/sales/whitelist", 
-                                {
-                                    TestParam: "Lorem ipsum dolor sit amet",
-                                },
-                                function(err, html){
+                Q.Users.Web3.getContract(state.abiNftSales, state.nftSaleAddress)
+                .then(function (contract) {
+                    contract.isWhitelisted(Q.Users.Web3.getSelectedXid()).then(function (isInWhitelist) {
+                        let specialPurchaseBtn = $(tool.element).find(".Assets_sales_specialPurchase");
+                        if (isInWhitelist) {
+                            specialPurchaseBtn.removeClass("Q_disabled");
+                        } else {
+                            specialPurchaseBtn.addClass("Q_disabled");
+                        }
 
-                                }
-                                );
-                            }
-                            
-                            //Q.handle(callback, null, [null, tokensAmount]);
-                        }, function (err) {
-                            
-                            Q.handle(null, null, [err.reason]);
-                        });
+                        //Q.handle(callback, null, [null, tokensAmount]);
+                    }, function (err) {
+
+                        Q.handle(null, null, [err.reason]);
+                    });
+                    
+                    contract.owner().then(function (ownerAddress) {
+   
+                        if (Q.Users.Web3.getSelectedXid() == ownerAddress) {
+                            Q.Template.render(
+                                "Assets/sales/whitelist", 
+                                {},
+                                function(err, html){}
+                            );
+                        }
+
+                        //Q.handle(callback, null, [null, tokensAmount]);
+                    }, function (err) {
+
+                        Q.handle(null, null, [err.reason]);
+                    });
+
+                    // get specialPrice
+                    contract.price().then(function (currency) {
+                       state.paymentPrice = currency;
+                    }, function (err) {
+                        Q.handle(null, null, [err.reason]);
+                    });
+                    // 
+                    // get paymentToken
+                    contract.currency().then(function (currency) {
+                       state.paymentCurrency = currency;
+                    }, function (err) {
+                        Q.handle(null, null, [err.reason]);
+                    });
+                });
+                
                         
-                        // get specialPrice
-                        contract.price().then(function (currency) {
-                           state.paymentPrice = currency;
-                        }, function (err) {
-                            Q.handle(null, null, [err.reason]);
-                        });
-                        // 
-                        // get paymentToken
-                        contract.currency().then(function (currency) {
-                           state.paymentCurrency = currency;
-                        }, function (err) {
-                            Q.handle(null, null, [err.reason]);
-                        });
-                    }, 
-                    {
-                        contractAddress: state.nftSaleAddress, 
-                        abiPath: state.abiPath
-                    }
-                );
-                        
-                $('.jsPurchase', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_sales_purchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
                     let account = $(tool.element).find("[name='account']").val();
@@ -244,7 +256,7 @@ Q.Tool.define("Assets/sales", function (options) {
 
                 });
                 
-                $('.jsSpecialPurchase', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_sales_specialPurchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
                     let account = $(tool.element).find("[name='account']").val();
@@ -281,11 +293,11 @@ Q.Template.set("Assets/sales",
                 </div>
             </div>
     
-            <button class="jsPurchase Q_button">{{NFT.sales.instance.btn.Purchase}}</button>
-            <button class="jsSpecialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
+            <button class="Assets_sales_purchase Q_button">{{NFT.sales.instance.btn.Purchase}}</button>
+            <button class="Assets_sales_specialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
             
             <div class="form-group">
-                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiPath q=3 }}
+                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiNftSales}}
             </div>
         </div>
     

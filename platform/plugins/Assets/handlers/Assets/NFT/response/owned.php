@@ -24,7 +24,7 @@ function Assets_NFT_response_owned ($params) {
 	$walletAddress = Q::ifset($request, 'walletAddress', Users_Web3::getWalletByUserId($userId));
 	$chainId = Q::ifset($request, 'chainId', null);
 	$contractAddress = Q::ifset($request, 'contractAddress', null);
-	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
+	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/R1/NFT/contract");
 
 	$tokenJSON = array();
 
@@ -81,7 +81,7 @@ function Assets_NFT_response_owned ($params) {
 				$methodName = "getNftsByOwner";
 			}
 
-			$tokens = Users_Web3::execute('Assets/templates/NFT', $chain["contract"], $methodName, [$walletAddress, $tokensByOwnerLimit], $chain["chainId"]);
+			$tokens = Users_Web3::execute('Assets/templates/R1/NFT/contract', $chain["contract"], $methodName, [$walletAddress, $tokensByOwnerLimit], $chain["chainId"]);
 			if (empty($tokens)) {
 				continue;
 			}
@@ -92,9 +92,9 @@ function Assets_NFT_response_owned ($params) {
 				}
 			}
 		} elseif ($balanceOf && $tokenOfOwnerByIndex) {
-			$tokens = (int)Users_Web3::execute('Assets/templates/NFT', $chain["contract"], "balanceOf", $walletAddress, $chain["chainId"]);
+			$tokens = (int)Users_Web3::execute('Assets/templates/R1/NFT/contract', $chain["contract"], "balanceOf", $walletAddress, $chain["chainId"]);
 			for ($i = 0; $i < $tokens; $i++) {
-				$tokenId = (int)Users_Web3::execute('Assets/templates/NFT', $chain["contract"], "tokenOfOwnerByIndex", array($walletAddress, $i), $chain["chainId"], true, $glob["Assets_NFT_response_owned"]["secondsInYear"]);
+				$tokenId = (int)Users_Web3::execute('Assets/templates/R1/NFT/contract', $chain["contract"], "tokenOfOwnerByIndex", array($walletAddress, $i), $chain["chainId"], true, $glob["Assets_NFT_response_owned"]["secondsInYear"]);
 				if ($_Assets_NFT_response_owned_json($tokenId, $chain, $ABI, $tokenJSON, $countNFTs) === false) {
 					break;
 				}

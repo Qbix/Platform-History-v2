@@ -8,7 +8,7 @@ function Assets_NFT_response_fetchMetadata ($params) {
 	$contractAddress = Q::ifset($request, "contractAddress", null);
 	$tokenURI = Q::ifset($request, "tokenURI", null);
 	$ABI = Q::ifset($request, "ABI", null);
-	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
+	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/R1/NFT/contract");
 	$longDuration = 31104000;
 
 	if ($tokenURI) {
@@ -18,7 +18,7 @@ function Assets_NFT_response_fetchMetadata ($params) {
 
 		// execute tokenURI if exists
 		if (Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
-			$tokenURI = Users_Web3::execute('Assets/templates/NFT', $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
+			$tokenURI = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
 		} else {
 			throw new Exception("not found tokenURI method in ABI of contract ".$contractAddress);
 		}

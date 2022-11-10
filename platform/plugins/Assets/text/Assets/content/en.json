@@ -452,9 +452,8 @@
                     "uint32": "uint32",
                     "uint16": "uint16"
                 },
-                "produce":"produce",
-                "viewInstancesList":"List",
-                "placeholder":"[placeholder]"
+                "produce":"Produce",
+                "viewInstancesList":"List"
             },
             "instance": {
                 "form": {
@@ -481,6 +480,24 @@
                     "Purchase": "Purchase",
                     "SpecialPurchase": "Special purchase"
                 }
+            },
+            "whitelist":{
+                "form": {
+                    "labels":{
+                        "account": "Address"
+                    },
+                    "small":{
+                        "account": "Address"
+                    }
+                },
+                "errors": {
+                    "invalidAddress": "Invalid Address"
+                },
+                "placeholders":{
+                    "account": "Address"
+                },
+                "addToWhitelist": "Add To Whitelist",
+                "removeFromWhitelist": "Remove From Whitelist"
             }
         }
     },
