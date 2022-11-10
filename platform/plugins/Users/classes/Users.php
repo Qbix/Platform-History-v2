@@ -424,7 +424,7 @@ abstract class Users extends Base_Users
 				$authenticated = 'connected';
 				$ui = Users::identify($platformApp, $xid);
 				if ($ui) {
-					$u = new Users_User();
+					$u = $ui->userId == $user->id ? $user : new Users_User();
 					$u->id = $ui->userId;
 					if ($u->retrieve()) {
 						$u->clearXid($platformApp);
