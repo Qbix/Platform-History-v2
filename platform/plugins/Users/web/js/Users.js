@@ -4038,29 +4038,29 @@
 				return Q.handle(callback, null, [null, Users.Web3.provider]);
 			}
 
-			// Try with MetaMask-type connection first
-			if (window.ethereum && ethereum.request) {
-				return ethereum.request({ method: 'eth_requestAccounts' })
-				.then(function (accounts) {
-					Users.Web3.provider = ethereum;
-					return Q.handle(callback, null, [null, Users.Web3.provider]);
-				}).catch(function (e) {
-					Q.handle(callback, null, [e]);
-				});
-			}
-
-
 			Users.init.web3(function () {
-				var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
-				web3Modal.clearCachedProvider();
-				web3Modal.resetState();
-				web3Modal.connect().then(function (provider) {
-					Users.Web3.provider = provider;
-					Q.handle(callback, null, [null, provider]);
-				}).catch(function (ex) {
-					Q.handle(callback, null, [ex]);
-					throw new Error(ex);
-				});
+				// Try with MetaMask-type connection first
+				if (window.ethereum && ethereum.request) {
+					return ethereum.request({ method: 'eth_requestAccounts' })
+					.then(function (accounts) {
+						Users.Web3.provider = ethereum;
+						return Q.handle(callback, null, [null, Users.Web3.provider]);
+					}).catch(function (e) {
+						Q.handle(callback, null, [e]);
+					});
+				} else {
+					// TODO: have direct deeplinks into wallet browsers
+					var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
+					web3Modal.clearCachedProvider();
+					web3Modal.resetState();
+					web3Modal.connect().then(function (provider) {
+						Users.Web3.provider = provider;
+						Q.handle(callback, null, [null, provider]);
+					}).catch(function (ex) {
+						Q.handle(callback, null, [ex]);
+						throw new Error(ex);
+					});
+				}
 			});
 		},
 
@@ -4215,8 +4215,8 @@
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
-
-				(new Web3(provider)).eth.net.getId().then(function (chainId) {
+				(new Web3(provider)).eth.net.getId()
+				.then(function (chainId) {
 					return Q.handle(callback, null, [null, '0x' + Number(chainId).toString(16)]);
 				});
 			});
@@ -4393,7 +4393,8 @@
 		 * @return {Promise} that would resolve with the ethers.Contract
 		 */
 		getFactory: function(contractABIName, callback) {
-			Users.Web3.getChainId(function (err, chainId) {
+			return Users.Web3.getChainId()
+			.then(function (chainId) {
 				var factories = Users.Web3.factories[contractABIName];
 				var contractAddress = factories[chainId] || factories['all'];
 				return Users.Web3.getContract(contractABIName, contractAddress, callback);
@@ -4401,6 +4402,7 @@
 		}
 	};
 
+	Users.Web3.getChainId = Q.promisify(Users.Web3.getChainId);
 	Users.Web3.switchChain = Q.promisify(Users.Web3.switchChain);
 	Users.Web3.getContract = Q.promisify(Users.Web3.getContract);
 	Users.Web3.getFactory = Q.promisify(Users.Web3.getFactory);
