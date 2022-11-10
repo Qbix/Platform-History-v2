@@ -991,7 +991,7 @@ Elp.removeClass = function (className) {
 };
 
 /**
- * Restore ability to select text in an element 
+ * Add a CSS class to an element
  * @method addClass
  * @chainable
  * @param {String} className
@@ -9408,6 +9408,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		Q.Page.beingProcessed = true;
 
+		loadHtmlCssClasses();
 		loadMetas();
 		loadTemplates();
 
@@ -9720,6 +9721,12 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				newStyles[slotName] = [style];
 			});
 			return newStyles;
+		}
+
+		function loadHtmlCssClasses() {
+			Q.each(response.htmlCssClasses, function (i, c) {
+				document.documentElement.addClass(c);
+			});
 		}
 
 		function loadMetas() {

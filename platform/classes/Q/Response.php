@@ -1540,6 +1540,29 @@ class Q_Response
 	{
 		self::$htmlCssClasses[$className] = true;
 	}
+
+	/**
+	 * Get all the HTML CSS classes that were added, as an array
+	 * @method htmlCssClassesArray
+	 * @static
+	 * @return {array}
+	 */
+	static function htmlCssClassesArray()
+	{
+		return array_keys(self::$htmlCssClasses);
+	}
+
+	/**
+	 * Get all the HTML CSS classes that were added, as a space-separated string
+	 * @method htmlCssClasses
+	 * @static
+	 * @return {string}
+	 */
+	static function htmlCssClasses()
+	{
+		return implode(' ', self::htmlCssClassesArray());
+	}
+
 	/**
 	 * Call this method to add attribute to the HTML element in the layout
 	 * @method addHtmlAttribute
@@ -1551,6 +1574,18 @@ class Q_Response
 	{
 		self::$htmlAttributes[$name] = $value;
 	}
+
+	/**
+	 * Get all the attributes added to HTML element, as an array
+	 * @method htmlCssClassesArray
+	 * @static
+	 * @return {array}
+	 */
+	static function htmlAttributesArray()
+	{
+		return array_keys(self::$htmlAttributes);
+	}
+
 	/**
 	 * Used to get or set the language (two-letter lowercase ISO code)
 	 * of the output page. Defaults to "en". It is used in htmlAttributes method.

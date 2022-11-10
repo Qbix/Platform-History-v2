@@ -16,7 +16,8 @@
 		connected: {}, // check this to see if you are connected to a platform
 		icon: {
 			defaultSize: 40 // might be overridden, but is required by some tools
-		}
+		},
+		roles: {}
 	};
 
 	var dc = Q.extend.dontCopy;
@@ -3040,6 +3041,9 @@
 	Users.init.facebook.onInit = new Q.Event();
 	var ddc = document.documentElement;
 	Users.onLogin = new Q.Event(function () {
+		for (var role in Users.roles) {
+			ddc.addClass('Users_role-' + Q.normalize(role).toCapitalized());
+		}
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
@@ -3063,7 +3067,8 @@
 		Q.Session.clear();
 		Users.Web3.authResponse = null;
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
-	});
+		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
+	}, 'Users');
 	Users.onLoginLost = new Q.Event(function () {
 		console.warn("Call to server was made which normally requires user login.");
 	});
