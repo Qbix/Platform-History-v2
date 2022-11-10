@@ -446,4 +446,49 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		return false;
 	}
+
+	/**
+	 * Check if string is valid Ethereum address
+	 * this method created on the basis https://stackoverflow.com/questions/44990408/how-to-validate-ethereum-addresses-in-php
+	 * @method isValidAddress
+	 * @static
+	 * @param {String} $address
+	 * @param {string} [$normalized=null] Will be filled with the address string if valid.
+	 * This var need for compatibility with Q_Valid methods.
+	 * @return {Boolean}
+	 */
+	static function isValidAddress ($address, &$normalized=null) {
+		// check if matches pattern
+		if (!preg_match('/^(0x)?[0-9a-f]{40}$/i', $address)) {
+			return false;
+		}
+
+		// check if all same caps
+		if (preg_match('/^(0x)?[0-9a-f]{40}$/', $address) || preg_match('/^(0x)?[0-9A-F]{40}$/', $address)) {
+			$normalized = $address;
+			return true;
+		}
+
+		// check valid valid checksum
+		$address = str_replace('0x', '', $address);
+		$addressArray = str_split($address);
+		$hash = Keccak::hash(strtolower($address), 256);
+		$hashArray = str_split($hash);
+
+		// See: https://github.com/web3j/web3j/pull/134/files#diff-db8702981afff54d3de6a913f13b7be4R42
+		for ($i = 0; $i < 40; $i++ ) {
+			if (ctype_alpha($addressArray[$i])) {
+				// Each uppercase letter should correlate with a first bit of 1 in the hash char with the same index,
+				// and each lowercase letter with a 0 bit.
+				$charInt = intval($hashArray[$i], 16);
+
+				if ((ctype_upper($addressArray[$i]) && $charInt <= 7) || (ctype_lower($addressArray[$i]) && $charInt > 7)) {
+					return false;
+				}
+			}
+		}
+
+		$normalized = $address;
+		return true;
+	}
 };

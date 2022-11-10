@@ -845,7 +845,8 @@
 	align-items: center;
 }
 
-#Users_setIdentifier_dialog .Users_setIdentifier_access .Users_setIdentifier_privacy_btn {
+#Users_setIdentifier_dialog button {
 	display: block;
 	text-transform: capitalize;
+	margin: 5px auto 0;
 }
