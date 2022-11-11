@@ -134,6 +134,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         rateInterval: {value: "", hide: false, validate: ["notEmpty", "integer"]},
         rateAmount: {value: "", hide: false, validate: ["notEmpty", "integer"]}
     },
+    salesLinkPattern: "/test2/{{address}}",
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -171,7 +172,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 obj.append(`<tr><td>There are no instances</td></tr>`);
             } else {
                 for (var i in data.list) {
-                    obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="/test2/${data.list[i]}">${data.list[i]}</a></td></tr>`);
+                    obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="${tool.state.salesLinkPattern.replace('{{address}}', data.list[i])}">${data.list[i]}</a></td></tr>`);
                 }
             }
         });
