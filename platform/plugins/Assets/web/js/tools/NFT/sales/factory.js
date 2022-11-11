@@ -1,3 +1,42 @@
+if (Q.isEmpty(Q["isAddress"])) {
+    Q.isAddress = function _Q_isAddress(address) {
+        // https://github.com/ethereum/go-ethereum/blob/aa9fff3e68b1def0a9a22009c233150bf9ba481f/jsre/ethereum_js.go#L2295-L2329
+        if (!/^(0x)?[0-9a-f]{40}$/i.test(address)) {
+            // check if it has the basic requirements of an address
+            return false;
+        } else if (/^(0x)?[0-9a-f]{40}$/.test(address) || /^(0x)?[0-9A-F]{40}$/.test(address)) {
+            // If it's all small caps or all all caps, return true
+            return true;
+        } else {
+            // Otherwise check each case
+//            address = address.replace('0x','');
+//            var addressHash = Web3.utils.sha3(address.toLowerCase());
+//            for (var i = 0; i < 40; i++ ) {
+//                // the nth letter should be uppercase if the nth digit of casemap is 1
+//                if ((parseInt(addressHash[i], 16) > 7 && address[i].toUpperCase() !== address[i]) || (parseInt(addressHash[i], 16) <= 7 && address[i].toLowerCase() !== address[i])) {
+//                    return false;
+//                }
+//            }
+            return true;
+        }
+        
+    }
+}
+
+if (Q.isEmpty(Q["validate"])) {
+    Q.validate = function _Q_validate(address) {
+    
+    }
+    Q.validate.notEmpty = function _Q_validate_notEmpty(input) {
+        return !Q.isEmpty(input)
+    }
+    Q.validate.integer = function _Q_validate_integer(input) {
+        return Q.isInteger(input)
+    }
+    Q.validate.address = function _Q_validate_address(input) {
+        return Q.isAddress(input)
+    }
+}
 (function (window, Q, $, undefined) {
 	
 /**
@@ -16,7 +55,13 @@
 Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 	var tool = this;
 	var state = tool.state;
-
+        
+        var defaultsValidate = {
+            notEmpty: "<b>%key%</b> is not be empty", 
+            integer: "<b>%key%</b> is not a number", 
+            address: "<b>%key%</b> invalid"
+        };
+        
         // fill missed attr fields
         for (var i in state.fields) {
             
@@ -26,11 +71,37 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                     hide: false
                 }
             } else if (typeof(state.fields[i]) === "object") {
+                let arr;
                 if (Q.isEmpty(state.fields[i]["value"])) {
                     state.fields[i]["value"] = "";
                 }
                 if (Q.isEmpty(state.fields[i]["hide"])) {
                     state.fields[i]["hide"] = false;
+                }
+                
+                if (Q.isEmpty(state.fields[i]["validate"])) {
+                    state.fields[i]["validate"] = {};
+                } else if (Array.isArray(state.fields[i]["validate"])) {
+                    
+                    arr = {};
+                    for (var j in state.fields[i]["validate"]) {
+                        let k = state.fields[i]["validate"][j];
+                        if (Q.isEmpty(defaultsValidate[k])) {
+                            console.warn(`validate expr "${k}" have not supported yet`);
+                        } else {
+                            arr[k] = defaultsValidate[k];
+                        }
+                    }
+                    state.fields[i]["validate"] = Object.assign({}, arr);
+                    
+                } else if (typeof(state.fields[i]["validate"]) === "object") {
+                    for (var j in state.fields[i]["validate"]) {
+                        if (Q.isEmpty(defaultsValidate[j])) {
+                            console.warn(`validate expr "${j}" have not supported yet`);
+                        } else {
+                            state.fields[i]["validate"][j] = state.fields[i]["validate"][j];
+                        }
+                    }
                 }
             }
         }
@@ -46,16 +117,22 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
 { // default options here
     fields: {
-        NFTContract: {value: "", hide: false},
-        seriesId: {value: "", hide: false},
-        owner: {value: "", hide: false},
-        currency: {value: "", hide: false},
-        price: {value: "", hide: false},
-        beneficiary: {value: "", hide: false},
-        autoindex: {value: "", hide: false},
-        duration: {value: "", hide: false},
-        rateInterval: {value: "", hide: false},
-        rateAmount: {value: "", hide: false}
+        // key validate is optional
+        // value can be :
+        // - plain array
+        //  validate: ["isEmpty", "isInteger", ...] and try to call Q methods: Q.isEmpty, Q.isInteger ...
+        // - object  like {key => errormessage}
+        //  validate: {"isEmpty": "err msg here to key %key%, "isInteger": "invalid key %key%, ...} and try to call Q methods: Q.isEmpty, Q.isInteger ...
+        NFTContract: {value: "", hide: false, validate: ["notEmpty", "address"]},
+        seriesId: {value: "", hide: false, validate: ["notEmpty", "integer"]},
+        owner: {value: "", hide: false, validate: ["notEmpty", "address"]},
+        currency: {value: "", hide: false, validate: ["notEmpty", "address"]},
+        price: {value: "", hide: false, validate: ["notEmpty"]},
+        beneficiary: {value: "", hide: false, validate: ["notEmpty", "address"]},
+        autoindex: {value: "", hide: false, validate: ["notEmpty", "integer"]},
+        duration: {value: "", hide: false, validate: ["notEmpty", "integer"]},
+        rateInterval: {value: "", hide: false, validate: ["notEmpty", "integer"]},
+        rateAmount: {value: "", hide: false, validate: ["notEmpty", "integer"]}
     },
     onMove: new Q.Event() // an event that the tool might trigger
 },
@@ -68,8 +145,6 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             contract = _contract;
             return  contract.whitelistByNFTContract(NFTContract).then(function(res){return res});
         }).then(function (instancesList) {
-            console.log(contract);
-            console.log(instancesList);
             Q.handle(callback, null, [null, {list: instancesList}, contract])
         }).catch(function (err) {
             Q.handle(callback, null, [err.reason || err]);
@@ -178,7 +253,6 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         Q.Template.render(
             "Assets/NFT/sales/factory", 
             {
-                TestParam: "Lorem ipsum dolor sit amet",
                 fields:state.fields,
                 chainId: Q.Assets.NFT.defaultChain.chainId
             },
@@ -193,38 +267,58 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 
                 $('.Assets_NFT_sales_factory_produce', tool.element).on(Q.Pointer.fastclick, function(){
 
+                    
+                    let objToolElement = $(tool.element);
+                    // clone state fields
+                    let fields = Object.assign({}, state.fields);
                     //collect form
-                    let NFTContract = $(tool.element).find("[name='NFTContract']").val();
-
-                    NFTContract = state.fields.NFTContract.value || NFTContract;// || TokenSociety.NFT.contract.address;
-
-                    let owner = $(tool.element).find("[name='owner']").val();
-                    owner = owner || state.fields.owner.value || Q.Users.Web3.getSelectedXid();
-
-                    let seriesId   = state.fields.seriesId.value || $(tool.element).find("[name='seriesId']").val();
-
-                    let currency = state.fields.currency.value || $(tool.element).find("[name='currency']").val();
-                    let price = $(tool.element).find("[name='price']").val()
-                    price = 
-                            price 
-                            ? 
-                            ethers.utils.parseUnits(price,18)
-                            :
-                            state.fields.price.value
-                            ;
-                    let beneficiary = $(tool.element).find("[name='beneficiary']").val();
-                    beneficiary = beneficiary || state.fields.beneficiary.value || Q.Users.Web3.getSelectedXid();
-
-                    let autoindex   = state.fields.autoindex.value || $(tool.element).find("[name='autoindex']").val();
-                    let duration    = state.fields.duration.value || $(tool.element).find("[name='duration']").val();
-                    let rateInterval= state.fields.rateInterval.value || $(tool.element).find("[name='rateInterval']").val();
-                    let rateAmount  = state.fields.rateAmount.value || $(tool.element).find("[name='rateAmount']").val();
-                    // call produce
-                    tool.produce(NFTContract, seriesId, owner, currency, price, beneficiary, autoindex, duration, rateInterval, rateAmount,
-                    function(err, obj, contract){
-                        console.log(arguments)
+                    for (let key in fields) {
+                        // get field values
+                        fields[key].userValue = objToolElement.find(`[name='${key}']`).val();
+                        // use default values if present
+                        fields[key].userValue = fields[key].userValue || fields[key].value;
                     }
-                    );
+                    fields.owner.userValue = fields.owner.userValue || Q.Users.Web3.getSelectedXid();
+                    
+                    fields.beneficiary.userValue = fields.beneficiary.userValue || Q.Users.Web3.getSelectedXid();
+
+                    // validate (after user input and applied defaults value)
+                    var validated = true;
+                    for (let key in fields) {
+                        for (let validateMethod in fields[key].validate) {
+                            if (!Q.validate[validateMethod](fields[key].userValue)) {
+                                validated = false;
+                                Q.Notices.add({
+                                    content: fields[key].validate[validateMethod].replace('%key%', key),
+                                    timeout: 5
+                                });
+                                break;
+                            }
+                        }
+                    }
+
+                    // call produce
+                    if (validated) {
+                        // adjust values
+                        
+                        fields.price.userValue = ethers.utils.parseUnits(fields.price.userValue,18);
+                        
+                        tool.produce(
+                            fields.NFTContract.userValue,
+                            fields.seriesId.userValue,
+                            fields.owner.userValue,
+                            fields.currency.userValue,
+                            fields.price.userValue,
+                            fields.beneficiary.userValue,
+                            fields.autoindex.userValue,
+                            fields.duration.userValue,
+                            fields.rateInterval.userValue,
+                            fields.rateAmount.userValue,
+                            function(err, obj, contract){
+                                //console.log("tool.produce callback [arguments]= ",arguments)
+                            }
+                        );
+                    }
 
                 });
                 
