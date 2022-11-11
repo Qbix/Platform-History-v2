@@ -446,11 +446,13 @@
                     "number": "number",
                     "address": "address",
                     "fraction": "fraction",
+                    "integer": "integer",
                     "uint256": "uint256",
                     "uint192": "uint192",
                     "uint64": "uint64",
                     "uint32": "uint32",
                     "uint16": "uint16"
+                    
                 },
                 "produce":"Produce",
                 "viewInstancesList":"List"

@@ -396,7 +396,7 @@ Q.Template.set("Assets/NFT/sales/factory",
                     <!-- uint192 autoindex, -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.autoindex}}</label>
-                        <input name="autoindex" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.uint192}}">
+                        <input name="autoindex" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.autoindex}}</small>
                     </div>
                     {{/unless}}
@@ -404,7 +404,7 @@ Q.Template.set("Assets/NFT/sales/factory",
                     <!-- uint64 duration, -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.duration}}</label>
-                        <input name="duration" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.uint64}}">
+                        <input name="duration" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.duration}}</small>
                     </div>
                     {{/unless}}
@@ -414,7 +414,7 @@ Q.Template.set("Assets/NFT/sales/factory",
                     <!-- uint32 rateInterval, -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.rateInterval}}</label>
-                        <input name="rateInterval" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.uint32}}">
+                        <input name="rateInterval" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.rateInterval}}</small>
                     </div>
                     {{/unless}}
@@ -422,7 +422,7 @@ Q.Template.set("Assets/NFT/sales/factory",
                     <!-- uint16 rateAmount -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.rateAmount}}</label>
-                        <input name="rateAmount" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.uint16}}">
+                        <input name="rateAmount" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.rateAmount}}</small>
                     </div>
                     {{/unless}}
