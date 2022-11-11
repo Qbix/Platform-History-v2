@@ -2149,13 +2149,13 @@
 	 */
 	Users.nextHint = function (eventName) {
 		var key, info, index, targets, options;
-		info = Q.Users.nextHint.hints[eventName];
+		info = Users.nextHint.hints[eventName];
 		if (!info || !Q.isArrayLike(info)) {
 			return false;
 		}
 		Q.each(info, function (hintIndex) {
 			var k = [eventName, hintIndex].join('/');
-			if (Q.Users.hinted.indexOf(k) < 0) {
+			if (Users.hinted.indexOf(k) < 0) {
 				index = hintIndex;
 				key = k;
 				return false;
@@ -2170,7 +2170,7 @@
 		return true;
 	};
 	
-	Q.Users.nextHint.hints = {};
+	Users.nextHint.hints = {};
 	
 	/**
 	 * Adds the hint information for use with Q.Users.nextHint() function.
@@ -2184,7 +2184,7 @@
 	 *  otherwise it just adds this hint as the next in the queue.
 	 */
 	Users.addHint = function (eventName, targets, options, hintIndex) {
-		var h = Q.Users.nextHint.hints[eventName] = Q.Users.nextHint.hints[eventName] || [];
+		var h = Users.nextHint.hints[eventName] = Users.nextHint.hints[eventName] || [];
 		if (hintIndex >= 0) {
 			h[hintIndex] = [targets, options];
 		} else {
@@ -2840,7 +2840,7 @@
 
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
-		Q.Users.login.options = Q.extend({
+		Users.login.options = Q.extend({
 			onCancel: new Q.Event(),
 			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
 				// default implementation
@@ -2875,9 +2875,9 @@
 			setupRegisterForm: null,
 			identifierType: 'email,mobile',
 			activation: 'activation'
-		}, Q.Users.login.options, Q.Users.login.serverOptions);
+		}, Users.login.options, Users.login.serverOptions);
 
-		Q.Users.logout.options = Q.extend({
+		Users.logout.options = Q.extend({
 			url: Q.action('Users/logout'),
 			using: '*',
 			onSuccess: new Q.Event(function (options) {
@@ -2886,18 +2886,18 @@
 					|| urls[Q.info.app + '/welcome']
 					|| Q.url(''));
 			}, 'Users')
-		}, Q.Users.logout.options, Q.Users.logout.serverOptions);
+		}, Users.logout.options, Users.logout.serverOptions);
 
-		Q.Users.setIdentifier.options = Q.extend({
+		Users.setIdentifier.options = Q.extend({
 			onCancel: null,
 			onSuccess: null, // gets passed session
 			identifierType: 'email,mobile',
 			dialogContainer: 'body'
-		}, Q.Users.setIdentifier.options, Q.Users.setIdentifier.serverOptions);
+		}, Users.setIdentifier.options, Users.setIdentifier.serverOptions);
 
-		Q.Users.prompt.options = Q.extend({
+		Users.prompt.options = Q.extend({
 			dialogContainer: 'body'
-		}, Q.Users.prompt.options, Q.Users.prompt.serverOptions);
+		}, Users.prompt.options, Users.prompt.serverOptions);
 
 	}, 'Users');
 
@@ -2908,9 +2908,9 @@
 			}
 			Q.extend(Q.text.Users, 10, text);
 		});
-		if (Q.Users.loggedInUser
-		&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
-			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
+		if (Users.loggedInUser
+		&& Q.typeOf(Users.loggedInUser) !== 'Q.Users.User') {
+			Users.loggedInUser = new Users.User(Users.loggedInUser);
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		}
 		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
@@ -3034,12 +3034,12 @@
 			}
 		}
 		if (lost) {
-			Q.Users.onLoginLost.handle();
-			Q.Users.loggedInUser = null;
+			Users.onLoginLost.handle();
+			Users.loggedInUser = null;
 			Users.Session.key.loaded = null;
-			Q.Users.roles = {};
+			Users.roles = {};
 			Q.Session.clear();
-			Q.Users.hinted = [];
+			Users.hinted = [];
 		}
 	}, 'Users');
 
@@ -3052,7 +3052,7 @@
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
-		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Users);
 		var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 		if (info) {
 			Q.Text.setLanguage.apply(Q.Text, info);
@@ -3066,9 +3066,9 @@
 	Users.onLogout = new Q.Event(function () {
 		Users.Session.key.loaded = null;
 		Users.Session.key.publicKey = null;
-		Q.Users.loggedInUser = null;
-		Q.Users.roles = {};
-		Q.Users.hinted = [];
+		Users.loggedInUser = null;
+		Users.roles = {};
+		Users.hinted = [];
 		Q.Session.clear();
 		Users.Web3.authResponse = null;
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
@@ -3082,7 +3082,7 @@
 	
 	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
 		Q.loadNonce(function () {
-			socket.emit('Users/user', Q.Users.capability, Q.clientId(),
+			socket.emit('Users/user', Users.capability, Q.clientId(),
 			function () {
 				Q.handle(Users.Socket.onSession);
 			});
@@ -4112,7 +4112,7 @@
 						return;
 					}
 
-					Q.Users.logout({using: 'web3', url: ''});
+					Users.logout({using: 'web3', url: ''});
 				});
 				var payload = Q.text.Users.login.web3.payload.interpolate({
 					host: location.host,
@@ -4243,7 +4243,7 @@
 		 */
 		 getSelectedXid: function () {
 			var result, provider;
-			provider = Q.Users.Web3.provider || window.ethereum;
+			provider = Users.Web3.provider || window.ethereum;
 			result = provider.selectedAddress || provider.accounts[0];
 			if (result) {
 				return result;
@@ -4365,7 +4365,7 @@
 				]))) {
 					_continue(ethereum);
 				} else {
-					Q.Users.Web3.connect(function (err, provider) {
+					Users.Web3.connect(function (err, provider) {
 						if (err) {
 							return Q.handle(callback, null, [err]);
 						}
@@ -4373,7 +4373,7 @@
 							_continue(provider);
 						} else {
 							var chain = Users.Web3.chains[chainId];
-							Q.Users.Web3.switchChain(chain, function (err) {
+							Users.Web3.switchChain(chain, function (err) {
 								if (Q.firstErrorMessage(err)) {
 									return Q.handle(callback, null, [err]);
 								}
@@ -4402,15 +4402,23 @@
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
 		 * @param {Function} [callback] receives (err, contract)
+		 * @param {String} [chainId] optional, pass this here to switch to the indicated chain first
 		 * @return {Promise} that would resolve with the ethers.Contract
 		 */
-		getFactory: function(contractABIName, callback) {
-			return Users.Web3.getChainId()
-			.then(function (chainId) {
-				var factories = Users.Web3.factories[contractABIName];
-				var contractAddress = factories[chainId] || factories['all'];
-				return Users.Web3.getContract(contractABIName, contractAddress, callback);
-			});
+		getFactory: function(contractABIName, callback, chainId) {
+			if (!chainId || provider.chainId === chainId) {
+				return _continue();
+			} else {
+				var chain = Users.Web3.chains[chainId];
+				return Users.Web3.switchChain(chain).then(_continue);
+			}
+			function _continue() {
+				return Users.Web3.getChainId().then(function (chainId) {
+					var factories = Users.Web3.factories[contractABIName];
+					var contractAddress = factories[chainId] || factories['all'];
+					return Users.Web3.getContract(contractABIName, contractAddress, callback);
+				});
+			}
 		}
 	};
 
@@ -4451,7 +4459,7 @@
 		});
 	}, 'Users.dialogCloseHint');
 	
-	Q.Users.cache = Q.Users.cache || {};
+	Users.cache = Users.cache || {};
 	
 	Q.ensure.loaders['Q.Users.Faces'] = '{{Users}}/js/Faces.js';
 
