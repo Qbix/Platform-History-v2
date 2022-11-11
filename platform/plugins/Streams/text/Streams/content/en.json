@@ -1,6 +1,9 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "This content is hidden from you.",
+        "StreamDoesntExists": "stream don't exists",
+        "NotEnoughPermissionsHandleStream": "not enough permissions to handle stream",
+        "InplaceTypeMustBe": "inplaceType must be 'textarea' or 'text'"
     },
     "preview": {
         "NewItemTitle": "New Item"

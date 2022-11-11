@@ -21,6 +21,7 @@
  */
 function Streams_inplace_tool($options)
 {
+	$texts = Q_Text::get("Streams/content");
 	if (empty($options['stream'])) {
 		if (empty($options['publisherId']) or empty($options['streamName'])) {
 			throw new Q_Exception_RequiredField(array('field' => 'stream'));
@@ -31,28 +32,22 @@ function Streams_inplace_tool($options)
 		if (!$stream) {
 			Streams::$cache['stream'] = null;
 
-			// try to create stream
-			Q::event('Streams/stream/post', array(
-				"publisherId" => $publisherId,
-				"name" => $streamName,
-				"dontSubscribe" => true
-			));
+			try {
+				// try to create stream
+				Q::event('Streams/stream/post', array(
+					"publisherId" => $publisherId,
+					"name" => $streamName,
+					"dontSubscribe" => true
+				));
+			} catch (Exception $e) {}
 
 			$stream = Streams::$cache['stream'];
-		}
-
-		if (!$stream) {
-			throw new Q_Exception_MissingRow(array(
-				'table' => 'stream',
-				'criteria' => "publisherId=$publisherId, name=$streamName"
-			));
 		}
 	} else {
 		$stream = $options['stream'];
 	}
 	$inplaceType = Q::ifset($options, 'inplaceType', 'textarea');
 	$inplace = array(
-		'action' => $stream->actionUrl(),
 		'method' => 'PUT',
 		'type' => $inplaceType
 	);
@@ -61,42 +56,61 @@ function Streams_inplace_tool($options)
 	}
 	$convert = Q::ifset($options, 'convert', array("\n"));
 	$inplace['hidden']['convert'] = json_encode($convert);
-	if (!empty($options['attribute'])) {
-		$field = 'attributes['.urlencode($options['attribute']).']';
-		$content = $stream->get($options['attribute'], '');
-		$maxlength = $stream->maxSize_attributes() - strlen($stream->maxSize_attributes()) - 10;
+	if ($stream) {
+		$inplace['action'] = $stream->actionUrl();
+		$toolOptions = array(
+			'publisherId' => $stream->publisherId,
+			'streamName' => $stream->name
+		);
+
+		if (!empty($options['attribute'])) {
+			$field = 'attributes['.urlencode($options['attribute']).']';
+			$content = $stream->get($options['attribute'], '');
+			$maxlength = $stream->maxSize_attributes() - strlen($stream->maxSize_attributes()) - 10;
+		} else {
+			$field = !empty($options['field']) ? $options['field'] : 'content';
+			$content = $stream->$field;
+			$maxlength = $stream->maxSizeExtended($field);
+		}
+		switch ($inplaceType) {
+			case 'text':
+				$inplace['fieldInput'] = Q_Html::input($field, $content, array(
+					'placeholder' => Q::ifset($inplace, 'placeholder', null),
+					'maxlength' => $maxlength
+				));
+				$inplace['staticHtml'] = Q_Html::text($content);
+				break;
+			case 'textarea':
+				$inplace['fieldInput'] = Q_Html::textarea($field, 5, 80, array(
+					'placeholder' => Q::ifset($inplace, 'placeholder', null),
+					'maxlength' => $maxlength
+				), $content);
+				$inplace['staticHtml'] = Q_Html::text($content, $convert);
+				break;
+			default:
+				$toolOptions = array(
+					'fallback' => $texts["errors"]["InplaceTypeMustBe"]
+				);
+		}
+		if (!$stream->testWriteLevel('suggest')) {
+			$toolOptions = array(
+				'fallback' => $texts["errors"]["NotEnoughPermissionsHandleStream"]
+			);
+		}
 	} else {
-		$field = !empty($options['field']) ? $options['field'] : 'content';
-		$content = $stream->$field;
-		$maxlength = $stream->maxSizeExtended($field);
+		$exception = new Q_Exception_MissingRow(array(
+			'table' => 'stream',
+			'criteria' => Q::json_encode(array(
+				'publisherId' => $publisherId,
+				'name' => $streamName
+			))
+		));
+		$toolOptions = array(
+			'fallback' => $exception->getMessage()
+		);
 	}
-	switch ($inplaceType) {
-		case 'text':
-			$inplace['fieldInput'] = Q_Html::input($field, $content, array(
-				'placeholder' => Q::ifset($inplace, 'placeholder', null),
-				'maxlength' => $maxlength
-			));
-			$inplace['staticHtml'] = Q_Html::text($content);
-			break;
-		case 'textarea':
-			$inplace['fieldInput'] = Q_Html::textarea($field, 5, 80, array(
-				'placeholder' => Q::ifset($inplace, 'placeholder', null),
-				'maxlength' => $maxlength
-			), $content);
-			$inplace['staticHtml'] = Q_Html::text($content, $convert);
-			break;
-		default:
-			return "inplaceType must be 'textarea' or 'text'";
-	}
-	$toolOptions = array(
-		'publisherId' => $stream->publisherId,
-		'streamName' => $stream->name
-	);
 	Q::take($options, array('attribute', 'field', 'convert'), $toolOptions);
 	Q_Response::setToolOptions($toolOptions);
-	if (!$stream->testWriteLevel('suggest')) {
-		return "";
-	}
 	$toolOptions['inplace'] = $inplace;
 	$toolOptions['inplaceType'] = $inplaceType;
 	Q_Response::addScript('{{Streams}}/js/tools/inplace.js', 'Streams');
