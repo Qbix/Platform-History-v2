@@ -4401,11 +4401,16 @@
 		 * @method getFactory
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {Function} [callback] receives (err, contract)
 		 * @param {String} [chainId] optional, pass this here to switch to the indicated chain first
+		 * @param {Function} [callback] receives (err, contract)
 		 * @return {Promise} that would resolve with the ethers.Contract
 		 */
-		getFactory: function(contractABIName, callback, chainId) {
+		getFactory: function(contractABIName, chainId, callback) {
+			if (typeof chainId !== 'string'
+			|| chainId.substr(0, 2) !== '0x') {
+				callback = chainId;
+				chainId = null;
+			}
 			if (!chainId || provider.chainId === chainId) {
 				return _continue();
 			} else {
