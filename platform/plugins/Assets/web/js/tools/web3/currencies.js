@@ -47,19 +47,7 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 			
 		function _doRender(chainId) {
 			state.chainId = chainId;
-			Q.each(Assets.currencies.tokens, function (i, obj) {
-				var token = Q.getObject(state.chainId, obj);
-				if (!token) {
-					return;
-				}
-	
-				tokens[obj.symbol] = {
-					symbol: obj.symbol,
-					name: obj.name,
-					decimals: obj.decimals,
-					token: token
-				};
-			});
+			var tokens = Assets.Currencies.Web3.getTokens(chainId);
 	
 			Q.Template.render("Assets/web3/currencies", {
 				tokens: tokens,
@@ -86,12 +74,12 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 });
 
 Q.Template.set("Assets/web3/currencies",
-            `<select name="{{fieldName}}">
-                <option disabled selected value="">{{currencies.choose}}</option>
+	`<select name="{{fieldName}}">
+		<option disabled selected value="">{{currencies.choose}}</option>
 		{{#each tokens}}
 			<option value="{{token}}">{{@key}}</option>
 		{{/each}}
-		</select>`,
+	</select>`,
 	{text: ['Assets/content']}
 );
 

@@ -228,8 +228,8 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
                     });
 
                     // get specialPrice
-                    contract.price().then(function (currency) {
-                       state.paymentPrice = currency;
+                    contract.price().then(function (price) {
+                       state.paymentPrice = price;
                     }, function (err) {
                         Q.handle(null, null, [err.reason]);
                     });

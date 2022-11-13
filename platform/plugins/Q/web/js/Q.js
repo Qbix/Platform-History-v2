@@ -2290,9 +2290,10 @@ Q.chain = function (callbacks, callback) {
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
  * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
+ * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
-Q.promisify = function (getter, useThis) {
+Q.promisify = function (getter, useThis, callbackIndex) {
 	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
@@ -2320,12 +2321,15 @@ Q.promisify = function (getter, useThis) {
 			}
 		});
 		if (!found) {
-			args.push(function _defaultCallback(err, second) {
+			if (callbackIndex === undefined) {
+				callbackIndex = args.length;
+			}
+			args[callbackIndex] = function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
 				resolve(useThis ? this : second);
-			});
+			};
 		}
 		var promise = new Q.Promise(function (r1, r2) {
 			resolve = r1;
@@ -10661,7 +10665,7 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 			}
 		});
 	});
-});
+}, false, 2);
 
 /**
  * Module for loading text from files.

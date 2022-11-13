@@ -79,14 +79,17 @@
 	},
 	"Users": {
 		"Web3": {
-			"factories": {
+			"contracts": {
 				"Assets/templates/R1/NFT/factory": {
 					"all": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
 				},
 				"Assets/templates/R1/NFT/sales/factory": {
-                                        "0x1": "0x6c24d7e534907d53565ee18afdbb2e001f20e4c2",/* ethereum main */
-                                        "0x89": "0x5d4B73E1B92784B26e429B44FB5392283D5c972E", /* matic main */
-                                        "0x13881": "0x75e2ceDbFDbc7fa8119e6f435861c3A13577834C" /* matic test mumbai*/
+					"0x1": "0x6c24d7e534907d53565ee18afdbb2e001f20e4c2",/* ethereum main */
+					"0x89": "0x5d4B73E1B92784B26e429B44FB5392283D5c972E", /* matic main */
+					"0x13881": "0x75e2ceDbFDbc7fa8119e6f435861c3A13577834C" /* matic test mumbai*/
+				},
+				"Assets/templates/R1/NFT/locked": {
+					"all": "0x9aab1c84F429c5617DFCd8BB49bCD0e1f58D84F7"
 				}
 			}
 		}
@@ -283,8 +286,8 @@
 			"ignoreCache": false,
 			"dontCache": false,
 			"duration": 3600,
-			"tokens": [
-				{
+			"tokens": {
+				"BNB": {
 					"symbol": "BNB",
 					"name": "Binance Coin",
 					"decimals": 18,
@@ -293,7 +296,7 @@
 					"0x61": "0x0000000000000000000000000000000000000000",
 					"0x38": "0x0000000000000000000000000000000000000000"
 				},
-				{
+				"USDC": {
 					"symbol": "USDC",
 					"name": "USD Coin",
 					"decimals": 18,
@@ -302,7 +305,7 @@
 					"0x38": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
 					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
 				},
-				{
+				"BUSD": {
 					"symbol": "BUSD",
 					"name": "Binance USD",
 					"decimals": 18,
@@ -311,7 +314,7 @@
 					"0x38": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
 					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49"
 				},
-				{
+				"ETH": {
 					"symbol": "ETH",
 					"name": "Ethereum",
 					"decimals": 18,
@@ -320,7 +323,7 @@
 					"0x38": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
 					"0x61": "0xBa0fc9605D1c71ABFCEa8b93E4CC5619c4a03606"
 				},
-				{
+				"DAI": {
 					"symbol": "DAI",
 					"name": "DAI",
 					"decimals": 18,
@@ -329,16 +332,16 @@
 					"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA"
 				},
-				{
+				"MATIC": {
 					"symbol": "MATIC",
 					"name": "MATIC",
 					"decimals": 18,
-                                        "0x1": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
-                                        "0x38": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+					"0x1": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+					"0x38": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
 					"0x89": "0x0000000000000000000000000000000000000000",
-                                        "0x13881": "0x0000000000000000000000000000000000000000"
+					"0x13881": "0x0000000000000000000000000000000000000000"
 				}
-			]
+			}
 		},
 		"reasons": {
 			"Assets/purchased": {

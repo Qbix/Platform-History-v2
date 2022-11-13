@@ -436,7 +436,7 @@
                         "price": "Price",
                         "beneficiary": "Beneficiary of selling tokens, otherwise will be sender",
                         "autoindex": "Autoindex",
-                        "duration": "locked time after minting. can be zero",
+                        "duration": "Lock after minting. Zero means get it immediately.",
                         "rateInterval": "bucket interval for special purchase",
                         "rateAmount": "bucket amount for special purchase"
                     }
@@ -447,15 +447,15 @@
                     "address": "address",
                     "fraction": "fraction",
                     "integer": "integer",
+                    "seconds": "seconds",
                     "uint256": "uint256",
                     "uint192": "uint192",
                     "uint64": "uint64",
                     "uint32": "uint32",
                     "uint16": "uint16"
-                    
                 },
-                "produce":"Produce",
-                "viewInstancesList":"List"
+                "produce": "Produce",
+                "viewInstancesList":"Refresh List"
             },
             "instance": {
                 "form": {

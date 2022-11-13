@@ -1155,7 +1155,14 @@ class Users_User extends Base_Users_User
 	function getXid($platformApp, $default = null)
 	{
 		$xids = $this->getAllXids();
-		return isset($xids[$platformApp]) ? $xids[$platformApp] : $default;
+		if (isset($xids[$platformApp])) {
+			return $xids[$platformApp];
+		}
+		$platformApp2 = str_replace("_", "\t", $platformApp);
+		if (isset($xids[$platformApp2])) {
+			return $xids[$platformApp2];
+		}
+		return $default;
 	}
 	
 	/**

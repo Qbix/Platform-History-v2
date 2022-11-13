@@ -26,7 +26,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {string} $contractAddress the contract address to call the method on,
 	 * @param {string} $methodName in the contract
 	 * @param {string|array} [$params=array()] - params sent to contract method
-	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
+	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
 	 * @param {boolean|null|callable} [$caching=true] Set false to ignore cache and request blockchain every time.
 	 *  Set to null to cache any truthy result while not caching falsy results.
 	 *  Or set to a callable function, to be passed the data as JSON, and return boolean indicating whether to cache or not.
@@ -262,14 +262,14 @@ class Users_Web3 extends Base_Users_Web3 {
 
 	/**
 	 * Get available Web3 factories information
-	 * @method getChains
+	 * @method getContracts
 	 * @param {string} [$needChainId] if defined return only this chain info
 	 * @static
 	 * @return array
 	 */
-	static function getFactories()
+	static function getContracts()
 	{
-		return Q_Config::get('Users', 'Web3', 'factories', array());
+		return Q_Config::get('Users', 'Web3', 'contracts', array());
 	}
 
 	/**

@@ -2834,10 +2834,6 @@
 			}
 		});
 
-		Web3.getContract = Q.getter(Web3.getContract, {
-			cache: Q.Cache.document("Users.Web3.getContract")
-		});
-
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
 		Users.login.options = Q.extend({
@@ -4184,8 +4180,9 @@
 		 * @param {String} methodName
 		 * @param {Array} params
 		 * @param {function} callback receives (err, result) with result from the ethers.js contract method
+		 * @return {Promise} to be used instead of callback
 		 */
-		execute: function (contractABIName, contractAddress, methodName, params, callback) {
+		execute: Q.promisify(function (contractABIName, contractAddress, methodName, params, callback) {
 			Web3.getContract(
 				contractABIName, 
 				contractAddress, 
@@ -4200,7 +4197,7 @@
 					});
 				}
 			);
-		},
+		}),
 		/**
 		 * Get currently selected wallet address asynchronously
 		 * @method getWalletAddress
@@ -4221,8 +4218,9 @@
 		 * Get currently selected chain id asynchronously
 		 * @method getChainId
 		 * @param {Function} callback receives (err, chainId) where chainId is in hexadecimal
+		 * @return {Promise} to be used instead of callback
 		 */
-		getChainId: function (callback) {
+		getChainId: Q.promisify(function (callback) {
 			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
@@ -4232,7 +4230,7 @@
 					return Q.handle(callback, null, [null, '0x' + Number(chainId).toString(16)]);
 				});
 			});
-		},
+		}),
 
 
 		/**
@@ -4281,8 +4279,9 @@
 		 * @param {String} [info.blockExplorerUrl] or blockExplorerUrls
 		 * @param {Array} [info.blockExplorerUrls] or blockExplorerUrl
 		 * @param {Function} callback receives (error, chainId)
+		 * @return {Promise} to be used instead of callback
 		 */
-		switchChain: function (info, callback) {
+		switchChain: Q.promisify(function (info, callback) {
 			if (typeof info === 'string') {
 				info = Web3.chains[info];
 			}
@@ -4333,7 +4332,7 @@
 					});
 				}
 			});
-		},
+		}),
 
 		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
@@ -4341,12 +4340,13 @@
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
 		 * @param {string|Object} contractAddress Can be a string starts with "0x".
-		 *   Or an object with "chainId" and "address", which makes the wallet switch to this chainId
+		 *   Or an object with "chainId" and "contractAddress", which makes the wallet switch to this chainId
 		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
 		 * @param {Function} [callback] receives (err, contract)
-		 * @return {Promise} that would resolve with the ethers.Contract
+		 * @return {Promise} to be used instead of callback
 		 */
-		getContract: function(contractABIName, contractAddress, callback) {
+		getContract: Q.promisify(Q.getter(
+		function(contractABIName, contractAddress, callback) {
 			var chainId, address;
 			if (Q.isPlainObject(contractAddress)) {
 				chainId = contractAddress.chainId;
@@ -4395,7 +4395,9 @@
 					};
 				}
 			});
-		},
+		}, {
+			cache: Q.Cache.document("Users.Web3.getContract")
+		})),
 
 		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
@@ -4405,12 +4407,14 @@
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
 		 * @param {String} [chainId] optional, pass this here to switch to the indicated chain first
 		 * @param {Function} [callback] receives (err, contract)
-		 * @return {Promise} that would resolve with the ethers.Contract
+		 * @return {Promise} to be used instead of callback
 		 */
-		getFactory: function(contractABIName, chainId, callback) {
+		getFactory: Q.promisify(function(contractABIName, chainId, callback) {
 			if (typeof chainId !== 'string'
 			|| chainId.substr(0, 2) !== '0x') {
-				callback = chainId;
+				if (!callback) {
+					callback = chainId;
+				}
 				chainId = null;
 			}
 			if (!chainId || provider.chainId === chainId) {
@@ -4421,19 +4425,13 @@
 			}
 			function _continue() {
 				return Web3.getChainId().then(function (chainId) {
-					var factories = Web3.factories[contractABIName];
-					var contractAddress = factories[chainId] || factories['all'];
+					var contracts = Web3.contracts[contractABIName];
+					var contractAddress = contracts[chainId] || contracts['all'];
 					return Web3.getContract(contractABIName, contractAddress, callback);
 				});
 			}
-		}
+		})
 	};
-
-	Web3.getChainId = Q.promisify(Web3.getChainId);
-	Web3.switchChain = Q.promisify(Web3.switchChain);
-	Web3.getContract = Q.promisify(Web3.getContract);
-	Web3.getFactory = Q.promisify(Web3.getFactory);
-	Web3.execute = Q.promisify(Web3.execute);
 
 	/**
 	 * Disconnect external platforms

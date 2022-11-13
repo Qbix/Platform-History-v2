@@ -40,25 +40,27 @@ if (Q.isEmpty(Q["validate"])) {
 (function (window, Q, $, undefined) {
 	
 /**
- * @module TokenSociety
+ * @module Assets
  */
 	
 /**
- * YUIDoc description goes here
- * @class TokenSociety cool
+ * Interface for working with Assets.NFT.Web3.Sales factories
+ * and producing instances of Assets.NFT.Web3.Sales contracts.
+ * @class Assets factory
  * @constructor
  * @param {Object} [options] Override various options for this tool
- *  @param {String} [options.fields] array of values by default. 
- *  @param {String} [NFTcontract.value]
- *  @param {String} [seriesId.value]
- *  @param {String} [currency.value]
- *  @param {Number} [price.value]
- *  @param {String} [beneficiary.value]
- *  @param {Integer} [autoindex.value]
- *  @param {String} [duration.value]
- *  @param {String} [rateInterval.value]
- *  @param {Integer} [rateAmount.value]
- *  @param {Function} [options.salesLinkTitle] Receives address and callacbk, and should call the callback with the title
+ *  @param {String} [options.fields] array of defaults for the values
+ *  @param {String} [options.NFTcontract] pass the address of the NFT contract, to get the list of instances
+ *  @param {String} [options.fields.NFTcontract.value] only if options.NFTcontract is not set
+ *  @param {String} [options.fields.seriesId.value]
+ *  @param {String} [options.fields.currency.value]
+ *  @param {Number} [options.fields.price.value]
+ *  @param {String} [options.fields.beneficiary.value]
+ *  @param {Integer} [options.fields.autoindex.value]
+ *  @param {String} [options.fields.duration.value]
+ *  @param {String} [options.fields.rateInterval.value]
+ *  @param {Integer} [options.fields.rateAmount.value]
+ *  @param {Function} [options.fields.salesLinkTitle] Receives address and callacbk, and should call the callback with the title
  */
 
 Q.Tool.define("Assets/NFT/sales/factory", function (options) {
@@ -66,8 +68,8 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 	var state = tool.state;
         
         var defaultsValidate = {
-            notEmpty: "<b>%key%</b> is not be empty", 
-            integer: "<b>%key%</b> is not a number", 
+            notEmpty: "<b>%key%</b> cannot be empty", 
+            integer: "<b>%key%</b> must be an integer", 
             address: "<b>%key%</b> invalid"
         };
         
@@ -82,10 +84,13 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             } else if (typeof(state.fields[i]) === "object") {
                 let arr;
                 if (Q.isEmpty(state.fields[i]["value"])) {
-                    state.fields[i]["value"] = "";
+                    state.fields[i].value = "";
                 }
                 if (Q.isEmpty(state.fields[i]["hide"])) {
-                    state.fields[i]["hide"] = false;
+                    state.fields[i].hide = false;
+                }
+                if (i === 'NFTcontract' && state.NFTcontract) {
+                    state.fields[i].value = NFTcontract;
                 }
                 
                 if (Q.isEmpty(state.fields[i]["validate"])) {
@@ -153,7 +158,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 { // methods go here
     whitelistByNFT: function(NFTContract, callback){
         let contract;
-        Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
+        Q.Assets.NFT.Web3.Sales.getFactory()
         .then(function(_contract){
             contract = _contract;
             return  contract.whitelistByNFTContract(NFTContract).then(function(res){return res});
@@ -178,7 +183,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         let obj = $(tool.element).find(".Assets_NFT_sales_factory_instancesTableList");
         obj.find('tr').hide();
         obj.find('tr.Assets_NFT_sales_factory_loading').show();
-        tool.whitelistByNFT(TokenSociety.NFT.contract.address, function(err, data){
+        tool.whitelistByNFT(state.NFTcontract, function(err, data){
             obj.find('tr.Assets_NFT_sales_factory_loading').hide();    
             obj.find('tr').not('.Assets_NFT_sales_factory_loading').remove();    
             if (!data || Q.isEmpty(data.list)) {
@@ -275,16 +280,27 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         Q.Template.render(
             "Assets/NFT/sales/factory", 
             {
-                fields:state.fields,
+                fields: state.fields,
                 chainId: Q.Assets.NFT.defaultChain.chainId
             },
             function(err, html){
 
                 tool.element.innerHTML = html;
-                Q.activate(tool.element, function(){
-                    $(tool.element).find("select").addClass("form-control");
-                });
 
+                for (var fieldName in state.fields) {
+                    var $input = tool.$('input[name='+fieldName+']');
+                    if (state.fields[fieldName].hide) {
+                        var $formGroup = $input.closest('.form-group');
+                        $formGroup.add($formGroup.prev('label'))
+                            .remove();
+                    } else {
+                        $input.val(
+                            state.fields[fieldName].value
+                        );
+                    }
+                }
+
+                Q.activate(tool.element);
                 tool.currency = null;
                 
                 $('.Assets_NFT_sales_factory_produce', tool.element).on(Q.Pointer.fastclick, function(){
@@ -359,95 +375,75 @@ Q.Template.set("Assets/NFT/sales/factory",
     `<div>
         <div class="form">
 
-            {{#unless fields.NFTContract.hide}}
             <!-- address NFTContract, -->
             <div class="form-group">
                 <label>{{NFT.sales.factory.form.labels.NFTContract}}</label>
                 <input name="NFTContract" type="text" class="form-control" value="{{fields.NFTContract.value}}" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
                 <small class="form-text text-muted">{{NFT.sales.factory.form.small.NFTContract}}</small>
             </div>
-            {{/unless}}
     
-            {{#unless fields.owner.hide}}
             <div class="form-group">
                 <label>{{NFT.sales.factory.form.labels.owner}}</label>
                 <input name="owner" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
                 <small class="form-text text-muted">{{NFT.sales.factory.form.small.owner}}</small>
             </div>
-            {{/unless}}
             
-            {{#unless fields.seriesId.hide}}
             <div class="form-group">
                 <label>{{NFT.sales.factory.form.labels.seriesId}}</label>
                 <input name="seriesId" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.number}}">
                 <small class="form-text text-muted">{{NFT.sales.factory.form.small.seriesId}}</small>
             </div>
-            {{/unless}}
     
             <!-- uint256 price, -->
             <div class="row">
                 <div class="col-sm-6">
-                    {{#unless fields.price.hide}}
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.price}}</label>
                         <input name="price" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.fraction}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.price}}</small>
                     </div>
-                    {{/unless}}
                 </div>
                 <div class="col-sm-6">
-                    {{#unless fields.currency.hide}}
                     <label>{{NFT.sales.factory.form.labels.currency}}</label>
                     <div class="form-group">
-                    {{&tool "Assets/web3/currencies" chainId=chainId }}
+                    {{&tool "Assets/web3/currencies" className="form-control" }}
                     </div>
-                    {{/unless}}
                 </div>
             </div>
-            {{#unless fields.beneficiary.hide}}
             <!-- address beneficiary, -->
             <div class="form-group">
                 <label>{{NFT.sales.factory.form.labels.beneficiary}}</label>
                 <input name="beneficiary" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
                 <small class="form-text text-muted">{{NFT.sales.factory.form.small.beneficiary}}</small>
             </div>
-            {{/unless}}
             <div class="row">
                 <div class="col-sm-6">
-                    {{#unless fields.autoindex.hide}}
                     <!-- uint192 autoindex, -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.autoindex}}</label>
                         <input name="autoindex" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.autoindex}}</small>
                     </div>
-                    {{/unless}}
-                    {{#unless fields.duration.hide}}
                     <!-- uint64 duration, -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.duration}}</label>
-                        <input name="duration" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
+                        <input name="duration" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.seconds}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.duration}}</small>
                     </div>
-                    {{/unless}}
                 </div>
                 <div class="col-sm-6">
-                    {{#unless fields.rateInterval.hide}}
                     <!-- uint32 rateInterval, -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.rateInterval}}</label>
-                        <input name="rateInterval" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
+                        <input name="rateInterval" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.seconds}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.rateInterval}}</small>
                     </div>
-                    {{/unless}}
-                    {{#unless fields.rateAmount.hide}}
                     <!-- uint16 rateAmount -->
                     <div class="form-group">
                         <label>{{NFT.sales.factory.form.labels.rateAmount}}</label>
                         <input name="rateAmount" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.integer}}">
                         <small class="form-text text-muted">{{NFT.sales.factory.form.small.rateAmount}}</small>
                     </div>
-                    {{/unless}}
                 </div>
             </div>
     

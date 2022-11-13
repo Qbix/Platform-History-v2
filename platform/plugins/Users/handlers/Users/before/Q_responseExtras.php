@@ -70,7 +70,7 @@ function Users_before_Q_responseExtras()
 
 	Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
 
-	Q_Response::setScriptData('Q.plugins.Users.Web3.factories', Users_Web3::getFactories());
+	Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', Users_Web3::getContracts());
 
 	// add apple signIn js lib
 	if (Q_Request::platform() === 'ios') {
