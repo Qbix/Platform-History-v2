@@ -10572,8 +10572,9 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
  * @param {String} [options.tool] if the rendered HTML will be placed inside a tool, pass it here so that its prefix will be used
+ * @return {Promise} can use this instead of callback
  */
-Q.Template.render = function _Q_Template_render(name, fields, callback, options) {
+Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callback, options) {
 	if (typeof fields === "function") {
 		options = callback;
 		callback = fields;
@@ -10664,7 +10665,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			}
 		});
 	});
-};
+});
 
 /**
  * Module for loading text from files.
