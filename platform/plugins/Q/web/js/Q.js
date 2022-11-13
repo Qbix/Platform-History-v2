@@ -2298,7 +2298,7 @@ Q.promisify = function (getter, useThis) {
 			return getter.apply(this, args);
 		}
 		var args = [], resolve, reject, found = false;
-		Q.each(0, arguments.length-1, function (i, ai) {
+		Q.each(arguments, function (i, ai) {
 			if (typeof ai !== 'function') {
 				args.push(ai);
 			} else {
