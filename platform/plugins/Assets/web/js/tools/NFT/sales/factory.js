@@ -49,7 +49,16 @@ if (Q.isEmpty(Q["validate"])) {
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.fields] array of values by default. 
- *  @param {Q.Event} [options.onMove] Event that fires after a move
+ *  @param {String} [NFTcontract.value]
+ *  @param {String} [seriesId.value]
+ *  @param {String} [currency.value]
+ *  @param {Number} [price.value]
+ *  @param {String} [beneficiary.value]
+ *  @param {Integer} [autoindex.value]
+ *  @param {String} [duration.value]
+ *  @param {String} [rateInterval.value]
+ *  @param {Integer} [rateAmount.value]
+ *  @param {Function} [options.salesLinkTitle] Receives address and callacbk, and should call the callback with the title
  */
 
 Q.Tool.define("Assets/NFT/sales/factory", function (options) {
@@ -134,6 +143,9 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         rateInterval: {value: "", hide: false, validate: ["notEmpty", "integer"]},
         rateAmount: {value: "", hide: false, validate: ["notEmpty", "integer"]}
     },
+    salesLinkTitle: function (address, callback) {
+        return address;
+    },
     salesLinkPattern: "sales/{{address}}",
     onMove: new Q.Event() // an event that the tool might trigger
 },
@@ -172,14 +184,15 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 obj.append(`<tr><td>There are no instances</td></tr>`);
             } else {
                 for (var i in data.list) {
-                    var link = $('<a />', {
-                        href: Q.url(tool.state.salesLinkPattern.interpolate({
+                    state.salesLinkTitle(data.list[i], function (title) {
+                        var href = Q.url(tool.state.salesLinkPattern.interpolate({
                             address: data.list[i]
-                        }))
+                        }));
+                        var link = $('<a />', {href: href}).html(title);
+                        var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
+                            .append(link);
+                        obj.prepend(tr);
                     });
-                    var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
-                        .append(link);
-                    obj.prepend(tr);
                 }
             }
         });
