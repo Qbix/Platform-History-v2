@@ -4118,7 +4118,7 @@
 					host: location.host,
 					timestamp: Math.floor(Date.now() / 1000)
 				});
-				var w3 = new Web3(provider);
+				var w3 = new window.Web3(provider);
 				w3.eth.getAccounts().then(function (accounts) {
 					var web3Address = Q.cookie('Q_Users_web3_address') || '';
 					if (web3Address && accounts.includes(web3Address)) {
@@ -4131,7 +4131,7 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
-								var web3 = new Web3();
+								var web3 = new window.Web3();
 								var address = accounts[0];
 								const res = provider.request({
 									method: 'personal_sign',
@@ -4212,7 +4212,7 @@
 					return Q.handle(callback, null, [err]);
 				}
 
-				(new Web3(provider)).eth.getAccounts().then(function (accounts) {
+				(new window.Web3(provider)).eth.getAccounts().then(function (accounts) {
 					return Q.handle(callback, null, [null, accounts[0]]);
 				});
 			});
@@ -4227,7 +4227,7 @@
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
-				(new Web3(provider)).eth.net.getId()
+				(new window.Web3(provider)).eth.net.getId()
 				.then(function (chainId) {
 					return Q.handle(callback, null, [null, '0x' + Number(chainId).toString(16)]);
 				});
