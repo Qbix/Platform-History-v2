@@ -1414,7 +1414,7 @@
 		"Assets/plan": "{{Assets}}/js/tools/plan.js",
 		"Assets/NFT/sales/factory": "{{Assets}}/js/tools/NFT/sales/factory.js",
 		"Assets/NFT/sales": "{{Assets}}/js/tools/NFT/sales.js",
-		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/whitelist.js",
+		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js"
 	});
 
