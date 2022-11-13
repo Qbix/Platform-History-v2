@@ -2298,8 +2298,7 @@ Q.promisify = function (getter, useThis) {
 			return getter.apply(this, args);
 		}
 		var args = [], resolve, reject, found = false;
-		for (var i=0, l=arguments.length; i<l; ++i) {
-			var ai = arguments[i];
+		Q.each(0, arguments.length-1, function (i, ai) {
 			if (typeof ai !== 'function') {
 				args.push(ai);
 			} else {
@@ -2319,7 +2318,7 @@ Q.promisify = function (getter, useThis) {
 					resolve(useThis ? this : second);
 				});
 			}
-		}
+		});
 		if (!found) {
 			args.push(function _defaultCallback(err, second) {
 				if (err) {
@@ -10579,9 +10578,6 @@ Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callba
 		options = callback;
 		callback = fields;
 		fields = {};
-	}
-	if (!callback) {
-		throw new Q.Error("Q.Template.render: callback is missing");
 	}
 	var isArray = Q.isArrayLike(name);
 	if (isArray || Q.isPlainObject(name)) {
