@@ -174,6 +174,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
     },
     _whitelistRefresh: function(){
         var tool = this;
+        var state = this.state;
         let obj = $(tool.element).find(".Assets_NFT_sales_factory_instancesTableList");
         obj.find('tr').hide();
         obj.find('tr.Assets_NFT_sales_factory_loading').show();
