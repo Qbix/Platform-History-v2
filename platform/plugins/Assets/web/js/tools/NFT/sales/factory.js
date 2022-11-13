@@ -144,7 +144,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         rateAmount: {value: "", hide: false, validate: ["notEmpty", "integer"]}
     },
     salesLinkTitle: function (address, callback) {
-        return address;
+        callback && callback(address);
     },
     salesLinkPattern: "sales/{{address}}",
     onMove: new Q.Event() // an event that the tool might trigger
