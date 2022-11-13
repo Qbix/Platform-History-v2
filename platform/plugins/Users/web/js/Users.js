@@ -4351,6 +4351,8 @@
 			if (Q.isPlainObject(contractAddress)) {
 				chainId = contractAddress.chainId;
 				address = contractAddress.contractAddress;
+			} else {
+				address = contractAddress;
 			}
 			Q.Template.set(contractABIName, undefined, "abi.json");
 			Q.Template.render(contractABIName, function (err, json) {
@@ -4385,7 +4387,7 @@
 				function _continue(provider) {
 					try {
 						var signer = new ethers.providers.Web3Provider(provider).getSigner();
-						var contract = new ethers.Contract(contractAddress, ABI, signer);
+						var contract = new ethers.Contract(address, ABI, signer);
 						contract.ABI = ABI;
 						Q.handle(callback, contract, [null, contract]);
 					} catch (err) {
