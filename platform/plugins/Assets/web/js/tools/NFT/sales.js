@@ -14,7 +14,7 @@
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
 
-Q.Tool.define("Assets/sales", function (options) {
+Q.Tool.define("Assets/NFT/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
         
@@ -180,7 +180,7 @@ Q.Tool.define("Assets/sales", function (options) {
 
         // if user login then 
         Q.Template.render(
-            "Assets/sales", 
+            "Assets/NFT/sales", 
             {
                 fields:state.fields,
                 nftSaleAddress: state.nftSaleAddress
@@ -215,7 +215,7 @@ Q.Tool.define("Assets/sales", function (options) {
    
                         if (Q.Users.Web3.getSelectedXid() == ownerAddress) {
                             Q.Template.render(
-                                "Assets/sales/whitelist", 
+                                "Assets/NFT/sales/whitelist", 
                                 {},
                                 function(err, html){}
                             );
@@ -275,7 +275,7 @@ Q.Tool.define("Assets/sales", function (options) {
 	
 });
 
-Q.Template.set("Assets/sales", 
+Q.Template.set("Assets/NFT/sales", 
     `<div>
         <div class="form">
             <div class="form-group">
@@ -297,7 +297,7 @@ Q.Template.set("Assets/sales",
             <button class="Assets_sales_specialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
             
             <div class="form-group">
-                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiNftSales}}
+                {{&tool "Assets/NFT/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiNftSales}}
             </div>
         </div>
     
