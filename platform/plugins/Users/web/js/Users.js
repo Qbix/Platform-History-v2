@@ -400,7 +400,7 @@
 				// so let's sign another authenticated message
 				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
 				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				Users.Web3.authResponse = null;
+				Web3.authResponse = null;
 			}
 		});
 	};
@@ -477,7 +477,7 @@
 				ar.appId = appId;
 				fields['Q.Users.facebook.authResponse'] = ar;
 			} else if (platform === 'web3') {
-				Q.extend(fields, Users.Web3.authResponse);
+				Q.extend(fields, Web3.authResponse);
 				if (Q.getObject(options, "updateXid")) {
 					fields.updateXid = options.updateXid;
 				}
@@ -922,7 +922,7 @@
 					appId: appId
 				});
 			} else if (o.using[0] === 'web3') { // only web3 used. Open web3 login right away
-				Users.Web3.login(function (result) {
+				Web3.login(function (result) {
 					if (!result) {
 						_onCancel();
 					} else {
@@ -1246,7 +1246,7 @@
 		var identifierType = Q.getObject("identifierType", options);
 		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
 		if (identifierType.toLowerCase() === "web3") {
-			identifier = Users.Web3.getLoggedInUserXid();
+			identifier = Web3.getLoggedInUserXid();
 		}
 
 		function onSuccess(user) {
@@ -1850,7 +1850,7 @@
 						if (login_setupDialog.dialog) {
 							login_setupDialog.dialog.data('Q/dialog').close();
 						}
-						Users.Web3.login(function (result) {
+						Web3.login(function (result) {
 							if (!result) {
 								_onCancel();
 							} else {
@@ -2834,7 +2834,7 @@
 			}
 		});
 
-		Users.Web3.getContract = Q.getter(Users.Web3.getContract, {
+		Web3.getContract = Q.getter(Web3.getContract, {
 			cache: Q.Cache.document("Users.Web3.getContract")
 		});
 
@@ -3070,7 +3070,7 @@
 		Users.roles = {};
 		Users.hinted = [];
 		Q.Session.clear();
-		Users.Web3.authResponse = null;
+		Web3.authResponse = null;
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
 		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
 	}, 'Users');
@@ -3929,7 +3929,7 @@
 
 	};
 	
-	Users.Web3 = {
+	var Web3 = Users.Web3 = {
 		chains: {},
 		provider: null,
 		web3Modal: null,
@@ -3945,7 +3945,7 @@
 			localStorage.removeItem('walletconnect');
 			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			Users.disconnect.web3.occurring = true;
-			var p = Users.Web3.provider;
+			var p = Web3.provider;
 			if (window.Web3Modal && Web3Modal.default) {
 				var w = new window.Web3Modal.default;
 				if (w.clearCachedProvider) {
@@ -3960,7 +3960,7 @@
 			if (p.close) {
 				p.close().then(function (result) {
 					delete Users.connected.web3;
-					Users.Web3.provider = null;
+					Web3.provider = null;
 					setTimeout(function () {
 						Users.disconnect.web3.occurring = false;
 						Q.handle(callback);
@@ -3978,7 +3978,7 @@
 					p._handleDisconnect();
 				}
 				delete Users.connected.web3;
-				Users.Web3.provider = null;
+				Web3.provider = null;
 				Q.handle(callback);
 				Users.disconnect.web3.occurring = false;
 			}
@@ -4028,14 +4028,14 @@
 			}
 
 			var disableInjectedProvider = Q.getObject(['web3', appId, 'disableInjectedProvider'], Users.apps);
-			Users.Web3.web3Modal = new window.Web3Modal.default({
+			Web3.web3Modal = new window.Web3Modal.default({
 				// chain: options.chain,
 				cacheProvider: false, // optional
 				providerOptions: providerOptions, // required
 				disableInjectedProvider: disableInjectedProvider // optional. For MetaMask / Brave / Opera.
 			});
 
-			return Users.Web3.web3Modal;
+			return Web3.web3Modal;
 		},
 
 		/**
@@ -4044,8 +4044,8 @@
 		 * @param {Function} callback
 		 */
 		connect: function (callback) {
-			if (Users.Web3.provider) {
-				return Q.handle(callback, null, [null, Users.Web3.provider]);
+			if (Web3.provider) {
+				return Q.handle(callback, null, [null, Web3.provider]);
 			}
 
 			Users.init.web3(function () {
@@ -4053,18 +4053,18 @@
 				if (window.ethereum && ethereum.request) {
 					return ethereum.request({ method: 'eth_requestAccounts' })
 					.then(function (accounts) {
-						Users.Web3.provider = ethereum;
-						return Q.handle(callback, null, [null, Users.Web3.provider]);
+						Web3.provider = ethereum;
+						return Q.handle(callback, null, [null, Web3.provider]);
 					}).catch(function (e) {
 						Q.handle(callback, null, [e]);
 					});
 				} else {
 					// TODO: have direct deeplinks into wallet browsers
-					var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
+					var web3Modal = Web3.web3Modal || Web3.getWeb3Modal();
 					web3Modal.clearCachedProvider();
 					web3Modal.resetState();
 					web3Modal.connect().then(function (provider) {
-						Users.Web3.provider = provider;
+						Web3.provider = provider;
 						Q.handle(callback, null, [null, provider]);
 					}).catch(function (ex) {
 						Q.handle(callback, null, [ex]);
@@ -4077,7 +4077,7 @@
 		login: function (callback) {
 			Users.prevDocumentTitle = document.title;
 			document.title = Users.communityName;
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (Users.prevDocumentTitle) {
 					document.title = Users.prevDocumentTitle;
 					delete Users.prevDocumentTitle;
@@ -4085,7 +4085,7 @@
 				if (err) {
 					return _cancel();
 				}
-				Users.Web3.provider = provider;
+				Web3.provider = provider;
 
 				// Subscribe to accounts change
 				provider.on("accountsChanged", function (accounts) {
@@ -4104,9 +4104,9 @@
 				provider.on("disconnect", function (error) {
 					console.log("provider.disconnect: ", error);
 
-					if (Users.logout.occurring || Users.Web3.switchChainOccuring) {
-						if (Users.Web3.switchChainOccuring === true) {
-							Users.Web3.switchChainOccuring = false;
+					if (Users.logout.occurring || Web3.switchChainOccuring) {
+						if (Web3.switchChainOccuring === true) {
+							Web3.switchChainOccuring = false;
 						}
 
 						return;
@@ -4150,14 +4150,14 @@
 						.catch(_cancel);
 					}
 					function _proceed(signature) {
-						Users.Web3.authResponse = {
+						Web3.authResponse = {
 							xid: accounts[0],
 							payload: payload,
 							signature: signature,
 							platform: 'web3',
 							chainId: provider.chainId
 						}
-						if (Q.handle(callback, null, [Users.Web3.authResponse]) === false) {
+						if (Q.handle(callback, null, [Web3.authResponse]) === false) {
 							return;
 						}
 						Users.authenticate('web3', function (user) {
@@ -4186,7 +4186,7 @@
 		 * @param {function} callback receives (err, result) with result from the ethers.js contract method
 		 */
 		execute: function (contractABIName, contractAddress, methodName, params, callback) {
-			Users.Web3.getContract(
+			Web3.getContract(
 				contractABIName, 
 				contractAddress, 
 				function (err, contract) {
@@ -4207,7 +4207,7 @@
 		 * @param {function} callback receives (err, address)
 		 */
 		getWalletAddress: function (callback) {
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
@@ -4223,7 +4223,7 @@
 		 * @param {Function} callback receives (err, chainId) where chainId is in hexadecimal
 		 */
 		getChainId: function (callback) {
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
@@ -4243,7 +4243,7 @@
 		 */
 		 getSelectedXid: function () {
 			var result, provider;
-			provider = Users.Web3.provider || window.ethereum;
+			provider = Web3.provider || window.ethereum;
 			result = provider.selectedAddress || provider.accounts[0];
 			if (result) {
 				return result;
@@ -4284,17 +4284,17 @@
 		 */
 		switchChain: function (info, callback) {
 			if (typeof info === 'string') {
-				info = Users.Web3.chains[info];
+				info = Web3.chains[info];
 			}
 			if (!info || !info.chainId) {
 				return Q.handle(callback, null, ["Q.Users.Web3.switchChain: chainId missing"]);
 			}
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
 
-				Users.Web3.switchChainOccuring = true;
+				Web3.switchChainOccuring = true;
 				
 				provider.request({
 					method: 'wallet_switchEthereumChain',
@@ -4365,15 +4365,15 @@
 				]))) {
 					_continue(ethereum);
 				} else {
-					Users.Web3.connect(function (err, provider) {
+					Web3.connect(function (err, provider) {
 						if (err) {
 							return Q.handle(callback, null, [err]);
 						}
 						if (!chainId || provider.chainId === chainId) {
 							_continue(provider);
 						} else {
-							var chain = Users.Web3.chains[chainId];
-							Users.Web3.switchChain(chain, function (err) {
+							var chain = Web3.chains[chainId];
+							Web3.switchChain(chain, function (err) {
 								if (Q.firstErrorMessage(err)) {
 									return Q.handle(callback, null, [err]);
 								}
@@ -4414,44 +4414,44 @@
 			if (!chainId || provider.chainId === chainId) {
 				return _continue();
 			} else {
-				var chain = Users.Web3.chains[chainId];
-				return Users.Web3.switchChain(chain).then(_continue);
+				var chain = Web3.chains[chainId];
+				return Web3.switchChain(chain).then(_continue);
 			}
 			function _continue() {
-				return Users.Web3.getChainId().then(function (chainId) {
-					var factories = Users.Web3.factories[contractABIName];
+				return Web3.getChainId().then(function (chainId) {
+					var factories = Web3.factories[contractABIName];
 					var contractAddress = factories[chainId] || factories['all'];
-					return Users.Web3.getContract(contractABIName, contractAddress, callback);
+					return Web3.getContract(contractABIName, contractAddress, callback);
 				});
 			}
 		}
 	};
 
-	Users.Web3.getChainId = Q.promisify(Users.Web3.getChainId);
-	Users.Web3.switchChain = Q.promisify(Users.Web3.switchChain);
-	Users.Web3.getContract = Q.promisify(Users.Web3.getContract);
-	Users.Web3.getFactory = Q.promisify(Users.Web3.getFactory);
-	Users.Web3.execute = Q.promisify(Users.Web3.execute);
+	Web3.getChainId = Q.promisify(Web3.getChainId);
+	Web3.switchChain = Q.promisify(Web3.switchChain);
+	Web3.getContract = Q.promisify(Web3.getContract);
+	Web3.getFactory = Q.promisify(Web3.getFactory);
+	Web3.execute = Q.promisify(Web3.execute);
 
 	/**
 	 * Disconnect external platforms
 	 */
 	Users.disconnect = {};
 	Users.disconnect.facebook = Users.Facebook.disconnect;
-	Users.disconnect.web3 = Users.Web3.disconnect;
+	Users.disconnect.web3 = Web3.disconnect;
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
 
 		if (window.ethereum) {
 			window.ethereum.on("accountsChanged", function (accounts) {
-				Q.handle(Users.Web3.onAccountsChanged, this, [accounts]);
+				Q.handle(Web3.onAccountsChanged, this, [accounts]);
 			});
 			window.ethereum.on("chainChanged", function (chainId) {
-				Q.handle(Users.Web3.onChainChanged, this, [chainId]);
+				Q.handle(Web3.onChainChanged, this, [chainId]);
 			});
 			window.ethereum.on("connect", function (info) {
-				Q.handle(Users.Web3.onConnect, this, [info]);
+				Q.handle(Web3.onConnect, this, [info]);
 			});
 		}
 	}, 'Users');
