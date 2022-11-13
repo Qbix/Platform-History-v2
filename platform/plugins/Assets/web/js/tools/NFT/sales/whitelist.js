@@ -18,8 +18,8 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
     var tool = this;
     var state = tool.state;
     
-    if (Q.isEmpty(state.nftSaleAddress)) {
-        return console.warn("nftSaleAddress required!");
+    if (Q.isEmpty(state.salesAddress)) {
+        return console.warn("salesAddress required!");
     }
     
     tool.refresh();
@@ -40,7 +40,7 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
 
 { // default options here
     abiPath: "Assets/templates/R1/NFT/sales/contract",
-    nftSaleAddress: '',
+    salesAddress: '',
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -78,7 +78,7 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                 // check is in whitelist
                 Q.Users.Web3.getContract(
                     state.abiPath, 
-                    state.nftSaleAddress
+                    state.salesAddress
                 ).then(function (contract) {
                     return contract.owner();
                 }).then(function (account) {
@@ -117,7 +117,7 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                                         }
                                     Q.Users.Web3.getContract(
                                         state.abiPath, 
-                                        state.nftSaleAddress
+                                        state.salesAddress
                                     ).then(function (contract) {
                                         return contract.specialPurchasesListAdd([account]);
                                     }).then(function (txResponce) {
@@ -153,7 +153,7 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                                         }
                                     Q.Users.Web3.getContract(
                                         state.abiPath, 
-                                        state.nftSaleAddress
+                                        state.salesAddress
                                     ).then(function (contract) {
                                         return contract.specialPurchasesListRemove([account]);
                                     }).then(function (txResponce) {
