@@ -12,27 +12,25 @@ var NFT = Assets.NFT;
  * @class Assets web3/currencies
  * @constructor
  * @param {Object} options Override various options for this tool
- * @param {string} [options.currency] -initial selected currency
- * @param {string} [options.chainId] - chain id
+ * @param {String} [options.currency] -initial selected currency
+ * @param {String} [options.chainId] - chain id
  * @param {Q.Event} [options.onChoose] - event occur when currency selected
+ * @param {String} [options.className] - optional class name to add to select
  */
 
 Q.Tool.define("Assets/web3/currencies", function (options) {
 	var tool = this;
 	var state = this.state;
 
-	if (!state.chainId) {
-		throw new Q.Exception("chainId required");
-	}
-
-        tool.refresh();
+	tool.refresh();
 
 },
 
 { // default options here
-        currency: null,
+	currency: null,
 	chainId: null,
-        fieldName: "currency",
+	fieldName: "currency",
+	className: null,
 	onChoose: new Q.Event()
 },
 
@@ -41,37 +39,49 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 		var tool = this;
 		var state = this.state;
 		var tokens = {};
-		Q.each(Assets.currencies.tokens, function (i, obj) {
-			var token = Q.getObject(state.chainId, obj);
-			if (!token) {
-				return;
-			}
-
-			tokens[obj.symbol] = {
-				symbol: obj.symbol,
-				name: obj.name,
-				decimals: obj.decimals,
-				token: token
-			};
-		});
-
-		Q.Template.render("Assets/web3/currencies", {
-			tokens: tokens,
-                        fieldName: state.fieldName
-		}, function (err, html) {
-			tool.element.innerHTML = html;
-
-			var $select = $("select[name=currency]", tool.element);
-                        if (tool.currency) {
-                            $select.val(tool.currency);
-                        }
-                        
-			$select.on("change", function () {
-                                state.currency = tokens[$select.val()];
-				Q.handle(state.onChoose, tool, [null, state.currency]);
+		if (state.chainId) {
+			_doRender(state.chainId);
+		} else {
+			Q.Users.Web3.getChainId().then(_doRender);
+		}
+			
+		function _doRender(chainId) {
+			state.chainId = chainId;
+			Q.each(Assets.currencies.tokens, function (i, obj) {
+				var token = Q.getObject(state.chainId, obj);
+				if (!token) {
+					return;
+				}
+	
+				tokens[obj.symbol] = {
+					symbol: obj.symbol,
+					name: obj.name,
+					decimals: obj.decimals,
+					token: token
+				};
 			});
-			Q.handle(state.onChoose, tool, [null, tokens[$select.val()]]);
-		});
+	
+			Q.Template.render("Assets/web3/currencies", {
+				tokens: tokens,
+				fieldName: state.fieldName
+			}, function (err, html) {
+				tool.element.innerHTML = html;
+	
+				var $select = $("select[name=currency]", tool.element);
+				if (tool.currency) {
+					$select.val(tool.currency);
+				}
+				if (state.className) {
+					$select.addClass(state.className);
+				}
+							
+				$select.on("change", function () {
+					state.currency = tokens[$select.val()];
+					Q.handle(state.onChoose, tool, [null, state.currency]);
+				});
+				Q.handle(state.onChoose, tool, [null, tokens[$select.val()]]);
+			});
+		}
 	}
 });
 
