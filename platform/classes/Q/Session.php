@@ -962,7 +962,6 @@ class Q_Session
 		if (!isset($secret)) {
 			$secret = Q::app();
 		}
-		$a = hash_hmac('sha256', $sessionId, $secret);
 		return hash_hmac('sha256', $sessionId, $secret);
 	}
 
@@ -1111,11 +1110,14 @@ class Q_Session
 	/**
 	 * Generates a session id, signed with "Q"/"external"/"secret"
 	 * so that the web server won't have to deal with session ids we haven't issued.
+	 * @param {string} [$seed] This can be the hash of a public key, for instance.
+	 *   Otherwise, the seed will be a string of 32 random bytes.
 	 * @return {string}
 	 */
-	static function generateId()
+	static function generateId($seed = null)
 	{
-		$id = Q_Utils::randomHexString(32);
+		$seed = Q_Utils::randomHexString(32);
+		$id = substr(hash('sha256', $seed), 32);
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (isset($secret)) {
 			$sig = Q_Utils::signature($id, "$secret");
@@ -1147,6 +1149,7 @@ class Q_Session
 	/**
 	 * Verifies a session id, that it was correctly signed with "Q"/"external"/"secret"
 	 * so that the web server won't have to deal with session ids we haven't issued.
+	 * This verification can also be done at the edge (e.g. CDN) without bothering our network.
 	 * @param {string} $id
 	 * @return {boolean}
 	 */

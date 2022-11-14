@@ -1931,16 +1931,13 @@ class Q_Response
 			list($value, $expires, $path, $domain, $secure, $httponly, $samesite) = $args;
 			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite);
 		}
-		$header = '';
-		$header = Q::event('Q/Response/sendCookieHeaders',
-			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
-			'after', false, $header
-		);
-		if ($header) {
-			header($header);
-		}
+		$cookiesToRemove = self::$cookiesToRemove;
+		$cookies = self::$cookies;
 		$cookieJS = Q_Request::shouldUseCookieJS();
-		if ($cookieJS) {
+		if (false !== Q::event('Q/Response/sendCookieHeaders',
+			compact('cookiesToRemove', 'cookies', 'cookieJS'),
+			'after', false
+		) and $cookieJS) {
 			$headers = headers_list();
 			foreach ($headers as $header) {
 				if (Q::startsWith($header, 'Set-Cookie:')) {
