@@ -217,8 +217,8 @@
                         evt = evt || window.event;
                         evt.preventDefault();
 
-                        posX = Q.info.isTouchscreen ? evt.changedTouches[0].clientX : evt.clientX;
-                        posY = Q.info.isTouchscreen ? evt.changedTouches[0].clientY : evt.clientY;
+                        posX = Q.info.useTouchEvents ? evt.changedTouches[0].clientX : evt.clientX;
+                        posY = Q.info.useTouchEvents ? evt.changedTouches[0].clientY : evt.clientY;
 
                         var aX, aY;
 
@@ -354,8 +354,8 @@
 
                         //var moveWithinEl = tool.state.moveWithinArea == 'parent' ? elementToMove.parentElement : window;
 
-                        posX = Q.info.isTouchscreen ? evt.touches[0].clientX : evt.clientX,
-                            posY = Q.info.isTouchscreen ? evt.touches[0].clientY : evt.clientY,
+                        posX = Q.info.useTouchEvents ? evt.touches[0].clientX : evt.clientX,
+                            posY = Q.info.useTouchEvents ? evt.touches[0].clientY : evt.clientY,
                             divTop = elementToMove.offsetTop,
                             divLeft = elementToMove.offsetLeft,
                             eWi = parseInt(elementToMove.offsetWidth),
@@ -921,21 +921,21 @@
                 function capturePointer(e) {
                     if (e.type == 'touchstart' || e.type == 'mousedown') {
                         tool.pointerInfo.mouseIsPressed = true;
-                        tool.pointerInfo.startX = Q.info.isTouchscreen ? e.touches[0].clientX : e.clientX;
-                        tool.pointerInfo.startY = Q.info.isTouchscreen ? e.touches[0].clientY : e.clientY;
+                        tool.pointerInfo.startX = Q.info.useTouchEvents ? e.touches[0].clientX : e.clientX;
+                        tool.pointerInfo.startY = Q.info.useTouchEvents ? e.touches[0].clientY : e.clientY;
                         return;
                     }
 
                     if (e.type == 'touchmove' || e.type == 'mousemove') {
-                        tool.pointerInfo.prevX = Q.info.isTouchscreen ? e.changedTouches[0].clientX : e.clientX;
-                        tool.pointerInfo.prevY = Q.info.isTouchscreen ? e.changedTouches[0].clientY : e.clientY;
+                        tool.pointerInfo.prevX = Q.info.useTouchEvents ? e.changedTouches[0].clientX : e.clientX;
+                        tool.pointerInfo.prevY = Q.info.useTouchEvents ? e.changedTouches[0].clientY : e.clientY;
                         return;
                     }
 
                     if (e.type == 'touchend' || e.type == 'mouseup') {
                         tool.pointerInfo.mouseIsPressed = false;
-                        tool.pointerInfo.endX = Q.info.isTouchscreen ? e.changedTouches[0].clientX : e.clientX;
-                        tool.pointerInfo.endY = Q.info.isTouchscreen ? e.changedTouches[0].clientY : e.clientY;
+                        tool.pointerInfo.endX = Q.info.useTouchEvents ? e.changedTouches[0].clientX : e.clientX;
+                        tool.pointerInfo.endY = Q.info.useTouchEvents ? e.changedTouches[0].clientY : e.clientY;
                         return;
                     }
 

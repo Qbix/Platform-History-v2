@@ -11640,14 +11640,17 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 var detected = Q.Browser.detect();
 var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
 var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
+var hasNoMouse = root.matchMedia ? !!root.matchMedia('(any-hover: none)') : null;
+var useTouchEvents = isTouchscreen && (hasNoMouse === false);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
-	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
+	|| (useTouchEvents && !navigator.userAgent.match(/mobi/i));
 /**
  * Useful info about the page and environment
  * @property {Object} info
  */
 Q.info = {
-	isTouchscreen: isTouchscreen, // works on ie10
+	useTouchEvents: useTouchEvents,
+	isTouchscreen: isTouchscreen,
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
 	isStandalone: detected.isStandalone,
@@ -11895,7 +11898,7 @@ Q.Pointer = {
 	 * @method start
 	 */
 	start: function _Q_Pointer_start(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function (e) {
 			Q.Pointer.movedTooMuchForClickLastTime = false;
 			if (Q.Pointer.recentlyScrolled) {
@@ -11915,7 +11918,7 @@ Q.Pointer = {
 	 * @method end
 	 */
 	end: function _Q_Pointer_end(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'mouseup';
+		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'mouseup';
 		return params.original;
 	},
 	/**
@@ -11924,7 +11927,7 @@ Q.Pointer = {
 	 * @method move
 	 */
 	move: function _Q_Pointer_move(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchmove' : 'mousemove';
+		params.eventName = Q.info.useTouchEvents ? 'touchmove' : 'mousemove';
 		return params.original;
 	},
 	/**
@@ -11933,7 +11936,7 @@ Q.Pointer = {
 	 * @method enter
 	 */
 	enter: function _Q_Pointer_enter(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchenter' : 'mouseenter';
+		params.eventName = Q.info.useTouchEvents ? 'touchenter' : 'mouseenter';
 		return params.original;
 	},
 	/**
@@ -11942,7 +11945,7 @@ Q.Pointer = {
 	 * @method leave
 	 */
 	leave: function _Q_Pointer_leave(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchleave' : 'mouseleave';
+		params.eventName = Q.info.useTouchEvents ? 'touchleave' : 'mouseleave';
 		return params.original;
 	},
 	/**
@@ -11951,7 +11954,7 @@ Q.Pointer = {
 	 * @method cancel
 	 */
 	cancel: function _Q_Pointer_cancel(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
+		params.eventName = Q.info.useTouchEvents ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
 		return params.original;
 	},
 	/**
@@ -12013,7 +12016,7 @@ Q.Pointer = {
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
+		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'click';
 		return function _Q_fastclick_on_wrapper (e) {
 			var oe = e.originalEvent || e;
 			if (oe.type === 'touchend') {
@@ -12048,7 +12051,7 @@ Q.Pointer = {
 		if (!Q.info.isTouchscreen) {
 			return Q.Pointer.click(params);
 		}
-		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function _Q_touchclick_on_wrapper (e) {
 			var _relevantClick = true;
 			var t = this, a = arguments;
@@ -12966,11 +12969,11 @@ function _stopHint(img, container) {
 	return null;
 }
 
-var _isTouchscreen = Q.info.isTouchscreen;
-Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
-Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
-Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
-Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
+var _useTouchEvents = Q.info.useTouchEvents;
+Q.Pointer.start.eventName = _useTouchEvents ? 'touchstart' : 'mousedown';
+Q.Pointer.move.eventName = _useTouchEvents ? 'touchmove' : 'mousemove';
+Q.Pointer.end.eventName = _useTouchEvents ? 'touchend' : 'mouseup';
+Q.Pointer.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'mousecancel';
 
 Q.Pointer.which.NONE = 0;
 Q.Pointer.which.LEFT = 1;
@@ -14295,6 +14298,7 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
+	console.log("%c"+Q.info.app+" - powered by Qbix", "color: blue; font-size: 20px");
 	de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
 	de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 	de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
@@ -14330,8 +14334,8 @@ Q.onInit.add(function () {
 	}, 'Q.Socket');
 
 	var QtQw = Q.text.Q.words;
-	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-	Q.Pointer.clickOrTap = QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
+	Q.Pointer.clickOrTap = QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
 	Q.Pointer.CLICKORTAP = QtQw.CLICKORTAP = QtQw.clickOrTap.toUpperCase();
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
@@ -14348,8 +14352,8 @@ Q.onInit.add(function () {
 			Q.extend(Q.prompt.options, 10, Q.text.prompt);
 			Q.extend(Q.alert.options, 10, Q.text.alert);
 			var QtQw = Q.text.Q.words;
-			QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-			QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+			QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
+			QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
 			Q.layout(null, true);
 		});
 	}

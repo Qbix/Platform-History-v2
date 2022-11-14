@@ -1707,7 +1707,7 @@
 		var step2_div = $('<div id="Users_login_step2" class="Q_big_prompt" />');
 		// step1_form request identifier
 		var placeholder = Q.text.Users.login.placeholders.identifier;
-		var type = Q.info.isTouchscreen ? 'email' : 'text';
+		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = options.identifierType ? options.identifierType.split(',') : [];
 		if (parts.length === 1) {
 			if (parts[0] == 'email') {
@@ -1772,7 +1772,7 @@
 			}).trigger('Q_refresh');
 			var url = Q.action(Users.login.options.userQueryUri) + '?' + $(this).serialize();
 			Q.request(url, ['data'], login_callback, {
-				xhr: Q.info.isTouchscreen ? 'sync' : {}
+				xhr: Q.info.useTouchEvents ? 'sync' : {}
 			});
 			event.preventDefault();
 			return;
@@ -1981,7 +1981,7 @@
 	function setIdentifier_setupDialog(identifierType, options) {
 		options = options || {};
 		var placeholder = Q.text.Users.setIdentifier.placeholders.identifier;
-		var type = Q.info.isTouchscreen ? 'email' : 'text';
+		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = identifierType ? identifierType.split(',') : [];
 		if (parts.length === 1) {
 			if (parts[0] === 'email') {
@@ -3840,7 +3840,7 @@
 							priv.login_onCancel && priv.login_onCancel();
 						}, {"prompt": false});
 
-					}, {xhr: Q.info.isTouchscreen ? 'sync' : {}});
+					}, {xhr: Q.info.useTouchEvents ? 'sync' : {}});
 				}
 			});
 			var paramsPicture = {

@@ -25,7 +25,7 @@
 		currentMousePosition: [0, 0],
 
 		// timeout before react on mousemove event on desktop
-		mousemoveTimeout: Q.info.isTouchscreen ? 0 : 300,
+		mousemoveTimeout: Q.info.useTouchEvents ? 0 : 300,
 
 		// indicates if contextual show() has just been called, need to prevent contextual hiding in 'start' lifecycle handler
 		justShown: false,
@@ -191,7 +191,7 @@
 					}
 					var col = Q.Contextual.collection;
 					var trigger = null, contextual = null, triggerTarget = null;
-					var event = (Q.info.isTouchscreen ? e.touches[0] : e);
+					var event = (Q.info.useTouchEvents ? e.touches[0] : e);
 					var px = Q.Pointer.getX(e), py = Q.Pointer.getY(e), offset = null;
 					for (var i = 0; i < col.length; i++)
 					{
@@ -284,7 +284,7 @@
 					var offset = contextual.offset();
 					var info = Q.Contextual.collection[Q.Contextual.current].info;
 
-					var event = (Q.info.isTouchscreen ? e.originalEvent.touches[0] : e);
+					var event = (Q.info.useTouchEvents ? e.originalEvent.touches[0] : e);
 					var px = Q.Pointer.getX(event), py = Q.Pointer.getY(event);
 					info.startY = info.moveY = py;
 					if (px >= offset.left && px <= offset.left + contextual.outerWidth() &&
@@ -322,7 +322,7 @@
 					var trigger = current.trigger;
 					var triggerOffset = (trigger.length !== 0 ? trigger.offset() : { 'top': -1000, 'left': -1000 });
 					var info = current.info;
-					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
+					var event = (Q.info.useTouchEvents ? e.originalEvent.changedTouches[0] : e);
 					var px = Q.Contextual.currentMousePosition[0];
 					var py = Q.Contextual.currentMousePosition[1];
 
@@ -435,7 +435,7 @@
 					else
 						listingWrapper = contextual.children('.Q_listing_wrapper');
 
-					var event = (Q.info.isTouchscreen ? e.originalEvent.changedTouches[0] : e);
+					var event = (Q.info.useTouchEvents ? e.originalEvent.changedTouches[0] : e);
 					var target = (info.curScroll === 'iScroll' || info.curScroll === 'touchscroll'
 							? event.target
 							: Q.getObject("moveTarget.0", info) || event.target);
@@ -654,7 +654,7 @@
 			listingWrapper.plugin('Q/scroller', {
 				'height': height,
 				'startBottom': info.inBottomHalf,
-				'eventDelegate': Q.info.isTouchscreen ? document.body : null
+				'eventDelegate': Q.info.useTouchEvents ? document.body : null
 			});
 			info.curScroll = 'scroller';
 

@@ -128,7 +128,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 				return;
 			}
 			lift.call(element, event);
-		}, Q.info.isTouchscreen ? state.lift.delayTouchscreen : state.lift.delay);
+		}, Q.info.useTouchEvents ? state.lift.delayTouchscreen : state.lift.delay);
 		state.moveHandler = moveHandler;
 		state.dropHandler = dropHandler;
 	}
@@ -460,7 +460,7 @@ Q.Tool.jQuery('Q/sortable', function _Q_sortable(options) {
 			scrolling.accel = 0;
 			return;
 		}
-		var delay = Q.info.isTouchscreen ? state.scroll.delayTouchscreen : state.scroll.delay;
+		var delay = Q.info.useTouchEvents ? state.scroll.delayTouchscreen : state.scroll.delay;
 		tScroll = setTimeout(function () {
 			var draggable;
 			if (iScroll) clearInterval(iScroll);
