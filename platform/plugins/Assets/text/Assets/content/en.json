@@ -45,7 +45,12 @@
         "PaymentProcessing.": "Your payment is processing",
         "FailTryAgain": "Your payment was not successful, please try again",
         "SomethingWrong": "Something went wrong",
-        "PaymentStatus": "Payment status"
+        "PaymentStatus": "Payment status",
+        "PayTo": "Pay {{displayName}}",
+        "ChooseCurrency": "Choose a currency",
+        "YouCanSendUpTo": "You can send up to {{amount}} {{symbol}}",
+        "Send": "Send",
+        "EnterAmount": "enter amount"
     },
     "credits": {
         "InviteAcceptedBy": "Invite accepted by {{invitedUserName}}",
