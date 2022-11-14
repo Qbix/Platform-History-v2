@@ -1,7 +1,6 @@
 {
     "errors": {
         "HiddenFromYou": "This content is hidden from you.",
-        "NotEnoughPermissionsHandleStream": "not enough permissions to handle stream",
         "InplaceTypeMustBe": "inplaceType must be 'textarea' or 'text'"
     },
     "preview": {

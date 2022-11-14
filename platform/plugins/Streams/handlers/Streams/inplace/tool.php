@@ -92,11 +92,6 @@ function Streams_inplace_tool($options)
 					'fallback' => $texts["errors"]["InplaceTypeMustBe"]
 				);
 		}
-		if (!$stream->testWriteLevel('suggest')) {
-			$toolOptions = array(
-				'fallback' => $texts["errors"]["NotEnoughPermissionsHandleStream"]
-			);
-		}
 	} else {
 		$exception = new Q_Exception_MissingRow(array(
 			'table' => 'stream',
