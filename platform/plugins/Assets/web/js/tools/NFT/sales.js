@@ -14,7 +14,7 @@
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
 
-Q.Tool.define("Assets/sales", function (options) {
+Q.Tool.define("Assets/NFT/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
         
@@ -36,8 +36,8 @@ Q.Tool.define("Assets/sales", function (options) {
             }
         }
         
-        if (Q.isEmpty(state.nftSaleAddress)) {
-            return console.warn("nftSaleAddress required!");
+        if (Q.isEmpty(state.salesAddress)) {
+            return console.warn("salesAddress required!");
         }
         if (Q.isEmpty(state.contractAddress)) {
             return console.warn("contractAddress required!");
@@ -61,10 +61,10 @@ Q.Tool.define("Assets/sales", function (options) {
         account: {value: "", hide: false},
         amount: {value: "", hide: false}
     },
-    nftSaleAddress: '',
+    salesAddress: '',
     contractAddress: '',
-    abiNftSales: "Assets/templates/R1/NFT/sales/contract",
-    abiNft: "Assets/templates/R1/NFT/contract",
+    abiNFTSales: "Assets/templates/R1/NFT/sales/contract",
+    abiNFT: "Assets/templates/R1/NFT/contract",
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -75,7 +75,7 @@ Q.Tool.define("Assets/sales", function (options) {
         callback
     ) {
         let contract;
-        Q.Users.Web3.getContract(state.abiNftSales, this.state.nftSaleAddress)
+        Q.Users.Web3.getContract(state.abiNFTSales, this.state.salesAddress)
         .then(function (_contract) {
             contract = _contract;
             if (state.paymentCurrency != "0x0000000000000000000000000000000000000000") {
@@ -97,7 +97,7 @@ Q.Tool.define("Assets/sales", function (options) {
         
         var state = this.state;
         
-        return Q.Users.Web3.getContract(state.abiNftSales, state.nftSaleAddress)
+        return Q.Users.Web3.getContract(state.abiNFTSales, state.salesAddress)
         .then(function (contract) {
            return contract.seriesId();
         }).catch(function(err) {
@@ -109,7 +109,7 @@ Q.Tool.define("Assets/sales", function (options) {
         
         var state = this.state;
 
-        return Q.Users.Web3.getContract(state.abiNft, state.contractAddress)
+        return Q.Users.Web3.getContract(state.abiNFT, state.contractAddress)
         .then(function (contract) {
             return contract.seriesInfo(seriesId);
         }).catch(function(err) {
@@ -135,7 +135,7 @@ Q.Tool.define("Assets/sales", function (options) {
                     let calculateTotalAmount = (data.saleInfo.price).mul(amount);
                     
                     let contract;
-                    return Q.Users.Web3.getContract(state.abiNftSales, state.nftSaleAddress)
+                    return Q.Users.Web3.getContract(state.abiNFTSales, state.salesAddress)
                     .then(function (_contract) {
                         contract = _contract;
                         //ethers.utils.parseEther("0.1")
@@ -180,10 +180,10 @@ Q.Tool.define("Assets/sales", function (options) {
 
         // if user login then 
         Q.Template.render(
-            "Assets/sales", 
+            "Assets/NFT/sales", 
             {
                 fields:state.fields,
-                nftSaleAddress: state.nftSaleAddress
+                salesAddress: state.salesAddress
             },
             function(err, html){
                 
@@ -195,7 +195,7 @@ Q.Tool.define("Assets/sales", function (options) {
                     
                 });
                     
-                Q.Users.Web3.getContract(state.abiNftSales, state.nftSaleAddress)
+                Q.Users.Web3.getContract(state.abiNFTSales, state.salesAddress)
                 .then(function (contract) {
                     contract.isWhitelisted(Q.Users.Web3.getSelectedXid()).then(function (isInWhitelist) {
                         let specialPurchaseBtn = $(tool.element).find(".Assets_sales_specialPurchase");
@@ -215,7 +215,7 @@ Q.Tool.define("Assets/sales", function (options) {
    
                         if (Q.Users.Web3.getSelectedXid() == ownerAddress) {
                             Q.Template.render(
-                                "Assets/sales/whitelist", 
+                                "Assets/NFT/sales/whitelist", 
                                 {},
                                 function(err, html){}
                             );
@@ -228,8 +228,8 @@ Q.Tool.define("Assets/sales", function (options) {
                     });
 
                     // get specialPrice
-                    contract.price().then(function (currency) {
-                       state.paymentPrice = currency;
+                    contract.price().then(function (price) {
+                       state.paymentPrice = price;
                     }, function (err) {
                         Q.handle(null, null, [err.reason]);
                     });
@@ -275,7 +275,7 @@ Q.Tool.define("Assets/sales", function (options) {
 	
 });
 
-Q.Template.set("Assets/sales", 
+Q.Template.set("Assets/NFT/sales", 
     `<div>
         <div class="form">
             <div class="form-group">
@@ -297,7 +297,7 @@ Q.Template.set("Assets/sales",
             <button class="Assets_sales_specialPurchase Q_button">{{NFT.sales.instance.btn.SpecialPurchase}}</button>
             
             <div class="form-group">
-                {{&tool "Assets/sales/whitelist" nftSaleAddress=nftSaleAddress abiPath=abiNftSales}}
+                {{&tool "Assets/NFT/sales/whitelist" salesAddress=salesAddress abiPath=abiNFTSales}}
             </div>
         </div>
     

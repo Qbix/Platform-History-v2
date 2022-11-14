@@ -6,7 +6,7 @@
 	
 /**
  * YUIDoc description goes here
- * @class Assets cool
+ * @class Assets sales whitelist
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.publisherId] user id of the publisher of the stream
@@ -14,12 +14,12 @@
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
 
-Q.Tool.define("Assets/sales/whitelist", function (options) {
+Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
     var tool = this;
     var state = tool.state;
     
-    if (Q.isEmpty(state.nftSaleAddress)) {
-        return console.warn("nftSaleAddress required!");
+    if (Q.isEmpty(state.salesAddress)) {
+        return console.warn("salesAddress required!");
     }
     
     tool.refresh();
@@ -40,7 +40,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 
 { // default options here
     abiPath: "Assets/templates/R1/NFT/sales/contract",
-    nftSaleAddress: '',
+    salesAddress: '',
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -48,7 +48,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 //    addToWhitelist: function(account) {},
 //    removeFromWhitelist: function(account) {},
     relatedToolRefresh: function() {
-        var relatedTool = Q.Tool.from($(this.element).closest(".Assets_sales_tool")[0], "Assets/sales");
+        var relatedTool = Q.Tool.from($(this.element).closest(".Assets_sales_tool")[0], "Assets/NFT/sales");
         if (relatedTool) {
             relatedTool.refresh();
         }
@@ -66,7 +66,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 
         // if user login then 
         Q.Template.render(
-            "Assets/sales/whitelist", 
+            "Assets/NFT/sales/whitelist", 
             {
                 //TestParam: "Lorem ipsum dolor sit amet",
             },
@@ -78,11 +78,11 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                 // check is in whitelist
                 Q.Users.Web3.getContract(
                     state.abiPath, 
-                    state.nftSaleAddress
+                    state.salesAddress
                 ).then(function (contract) {
                     return contract.owner();
                 }).then(function (account) {
-                    let objContainer = $(tool.element).find(".Assets_sales_whitelist_сontainer");
+                    let objContainer = $(tool.element).find(".Assets_NFT_sales_whitelist_сontainer");
                     if (Q.Users.Web3.getSelectedXid().toLowerCase() == account.toLowerCase()) {
                         objContainer.show();
                     } else {
@@ -92,7 +92,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                 
                 var contentManageWhitelist = function(btnClassname, btnTitle){
                     return `
-                        <div class="Assets_sales_whitelist_form">
+                        <div class="Assets_NFT_sales_whitelist_form">
                             <div class="form-group">
                                 <label>${tool.text.NFT.sales.whitelist.form.labels.account}</label>
                                 <input name="account" type="text" class="form-control" placeholder="${tool.text.NFT.sales.whitelist.placeholders.account}">
@@ -103,12 +103,12 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                     `;
                 }
                 
-                $('.Assets_sales_whitelist_add', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_NFT_sales_whitelist_add', tool.element).on(Q.Pointer.fastclick, function(){
                     Q.Dialogs.push({    
                             title: tool.text.NFT.sales.whitelist.addToWhitelist,
-                            content: contentManageWhitelist("Assets_sales_whitelist_dialogAdd", "Add"),
+                            content: contentManageWhitelist("Assets_NFT_sales_whitelist_dialogAdd", "Add"),
                             onActivate: function ($dialog) {
-                                $(".Assets_sales_whitelist_dialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
+                                $(".Assets_NFT_sales_whitelist_dialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
                                     let account = $($dialog).find("[name='account']").val();
                                     if (!account) {
@@ -117,7 +117,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                         }
                                     Q.Users.Web3.getContract(
                                         state.abiPath, 
-                                        state.nftSaleAddress
+                                        state.salesAddress
                                     ).then(function (contract) {
                                         return contract.specialPurchasesListAdd([account]);
                                     }).then(function (txResponce) {
@@ -139,12 +139,12 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                     });
                 });
                 
-                $('.Assets_sales_whitelist_remove', tool.element).on(Q.Pointer.fastclick, function(){
+                $('.Assets_NFT_sales_whitelist_remove', tool.element).on(Q.Pointer.fastclick, function(){
                     Q.Dialogs.push({    
                             title: tool.text.NFT.sales.whitelist.removeFromWhitelist,
-                            content: contentManageWhitelist("Assets_sales_whitelist_dialogRemove", "Remove"),
+                            content: contentManageWhitelist("Assets_NFT_sales_whitelist_dialogRemove", "Remove"),
                             onActivate: function ($dialog) {
-                                $(".Assets_sales_whitelist_dialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
+                                $(".Assets_NFT_sales_whitelist_dialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
                                     let account = $($dialog).find("[name='account']").val();
                                     if (!account) {
@@ -153,7 +153,7 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
                                         }
                                     Q.Users.Web3.getContract(
                                         state.abiPath, 
-                                        state.nftSaleAddress
+                                        state.salesAddress
                                     ).then(function (contract) {
                                         return contract.specialPurchasesListRemove([account]);
                                     }).then(function (txResponce) {
@@ -182,12 +182,12 @@ Q.Tool.define("Assets/sales/whitelist", function (options) {
 	
 });
 
-Q.Template.set("Assets/sales/whitelist", 
+Q.Template.set("Assets/NFT/sales/whitelist", 
     `<div>
-        <div class="Assets_sales_whitelist_сontainer">
+        <div class="Assets_NFT_sales_whitelist_сontainer">
             <h3>Manage Whitelist</h3>
-            <button class="Assets_sales_whitelist_add Q_button">Add</button>
-            <button class="Assets_sales_whitelist_remove Q_button">Remove</button>
+            <button class="Assets_NFT_sales_whitelist_add Q_button">Add</button>
+            <button class="Assets_NFT_sales_whitelist_remove Q_button">Remove</button>
         </div>
     </div>
     

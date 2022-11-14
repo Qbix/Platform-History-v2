@@ -2290,16 +2290,16 @@ Q.chain = function (callbacks, callback) {
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
  * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
+ * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
-Q.promisify = function (getter, useThis) {
+Q.promisify = function (getter, useThis, callbackIndex) {
 	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
 		}
 		var args = [], resolve, reject, found = false;
-		for (var i=0, l=arguments.length; i<l; ++i) {
-			var ai = arguments[i];
+		Q.each(arguments, function (i, ai) {
 			if (typeof ai !== 'function') {
 				args.push(ai);
 			} else {
@@ -2319,14 +2319,17 @@ Q.promisify = function (getter, useThis) {
 					resolve(useThis ? this : second);
 				});
 			}
-		}
+		});
 		if (!found) {
-			args.push(function _defaultCallback(err, second) {
+			if (callbackIndex === undefined) {
+				callbackIndex = args.length;
+			}
+			args[callbackIndex] = function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
 				resolve(useThis ? this : second);
-			});
+			};
 		}
 		var promise = new Q.Promise(function (r1, r2) {
 			resolve = r1;
@@ -10574,15 +10577,13 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
  * @param {String} [options.tool] if the rendered HTML will be placed inside a tool, pass it here so that its prefix will be used
+ * @return {Promise} can use this instead of callback
  */
-Q.Template.render = function _Q_Template_render(name, fields, callback, options) {
+Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callback, options) {
 	if (typeof fields === "function") {
 		options = callback;
 		callback = fields;
 		fields = {};
-	}
-	if (!callback) {
-		throw new Q.Error("Q.Template.render: callback is missing");
 	}
 	var isArray = Q.isArrayLike(name);
 	if (isArray || Q.isPlainObject(name)) {
@@ -10666,7 +10667,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			}
 		});
 	});
-};
+}, false, 2);
 
 /**
  * Module for loading text from files.
