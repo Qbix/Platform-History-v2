@@ -233,7 +233,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 		};
 	}
 	
-	if (state.stream) {
+	if (Q.Streams.isStream(state.stream)) {
 		state.publisherId = state.stream.fields.publisherId;
 		state.streamName = state.stream.fields.name;
 		delete state.stream;
@@ -241,13 +241,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 	if (state.fallback) {
 		Q.handle(_construct, null, [state.fallback]);
 	} else if (!state.publisherId || !state.streamName) {
-		Q.Text.get('Streams/content', function (err, texts) {
-			if (err) {
-				return;
-			}
-
-			Q.handle(_construct, null, [texts.errors.StreamDoesntExists]);
-		});
+		Q.handle(_construct, tool, ["Streams/inplace tool: stream is undefined"]);
 	} else {
 		Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, _construct);
 	}
