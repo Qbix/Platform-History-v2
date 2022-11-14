@@ -76,7 +76,8 @@ Q.Tool.define("Streams/inplace", function (options) {
 		}
 
 		function _setContent(content) {
-			if (tool.inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace')) {
+			tool.inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace');
+			if (tool.inplace) {
 				tool.$static = tool.inplace.$static;
 				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
 			} else if (!tool.$static) {
@@ -160,7 +161,7 @@ Q.Tool.define("Streams/inplace", function (options) {
 			field: state.field,
 			type: state.inplaceType
 		});
-		var value = state.fallback || (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field]) || "";
+		var value = (stream && (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field])) || state.fallback || "";
 		switch (state.inplaceType) {
 			case 'text':
 				ipo.staticHtml = String(value).encodeHTML();
