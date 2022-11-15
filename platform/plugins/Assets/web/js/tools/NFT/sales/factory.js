@@ -90,9 +90,9 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                     state.fields[i].hide = false;
                 }
                 if (i === 'NFTcontract' && state.NFTcontract) {
-                    state.fields[i].value = NFTcontract;
+                    state.fields[i].value = state.NFTcontract;
                 }
-                
+
                 if (Q.isEmpty(state.fields[i]["validate"])) {
                     state.fields[i]["validate"] = {};
                 } else if (Array.isArray(state.fields[i]["validate"])) {
@@ -130,6 +130,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 },
 
 { // default options here
+    NFTcontract: null,
     fields: {
         // key validate is optional
         // value can be :
