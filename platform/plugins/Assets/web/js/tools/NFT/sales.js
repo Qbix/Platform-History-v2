@@ -75,6 +75,7 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
         callback
     ) {
         let contract;
+        var state = this.state;
         Q.Users.Web3.getContract(state.abiNFTSales, this.state.salesAddress)
         .then(function (_contract) {
             contract = _contract;
