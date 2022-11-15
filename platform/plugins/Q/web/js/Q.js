@@ -3739,7 +3739,7 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
-					if (!resCallback.skipException) {
+					if (!Q.getObject("skipException", resCallback)) {
 						_reject(err);
 					}
 					throw err;
