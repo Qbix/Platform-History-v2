@@ -14,7 +14,7 @@ var NFT = Web3.NFT;
  * @constructor
  * @param {Object} options Override various options for this tool
  * @param {string} [options.userId] - registered in app user id
- * @param {string} [options.walletAddress] - override users wallet address
+ * @param {string} [options.accountAddress] - override users wallet address
  * @param {string} [options.chainId] - override chain id
  * @param {string} [options.contractAddress] - override contract address
  * @param {string} [options.pathABI] - path to ABI template.
@@ -46,7 +46,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 
 { // default options here
 	userId: null,
-	walletAddress: null,
+	accountAddress: null,
 	chainId: null,
 	contractAddress: null,
 	pathABI: "Assets/templates/R1/NFT/contract",
@@ -118,7 +118,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		}, {
 			fields: {
 				userId: state.userId,
-				walletAddress: state.walletAddress,
+				accountAddress: state.accountAddress,
 				chainId: state.chainId,
 				contractAddress: state.contractAddress,
 				pathABI: state.pathABI,
