@@ -84,9 +84,10 @@
 					"all": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
 				},
 				"Assets/templates/R1/NFT/sales/factory": {
-					"0x1": "0x6c24d7e534907d53565ee18afdbb2e001f20e4c2",/* ethereum main */
-					"0x89": "0x5d4B73E1B92784B26e429B44FB5392283D5c972E", /* matic main */
-					"0x13881": "0x75e2ceDbFDbc7fa8119e6f435861c3A13577834C" /* matic test mumbai*/
+					"0x1": "0xaafB54B6Cd1f5D36e29931Be58AFeaE848b953B1",/* ethereum main */
+					"0x89": "0xa2BA48F62301a104C891808f595ED449DD367e7D", /* matic main */
+					"0x38": "0xd0b63cdB328F313060c2d022603Edde429f5AdeD", /* binance main */
+					"0x13881": "0x4B1619Ec9DA4191AcD5429A89d6ee991a13079c3" /* matic test mumbai*/
 				},
 				"Assets/templates/R1/NFT/locked": {
 					"all": "0x9aab1c84F429c5617DFCd8BB49bCD0e1f58D84F7"

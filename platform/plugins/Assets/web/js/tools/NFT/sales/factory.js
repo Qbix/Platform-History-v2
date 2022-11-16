@@ -73,6 +73,10 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             address: "<b>%key%</b> invalid"
         };
         
+	if (Q.isEmpty(state.NFTContract)) {
+	    return console.warn("NFTContract required!");
+	}
+    
         // fill missed attr fields
         for (var i in state.fields) {
             
@@ -88,9 +92,6 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 }
                 if (Q.isEmpty(state.fields[i]["hide"])) {
                     state.fields[i].hide = false;
-                }
-                if (i === 'NFTcontract' && state.NFTcontract) {
-                    state.fields[i].value = NFTcontract;
                 }
                 
                 if (Q.isEmpty(state.fields[i]["validate"])) {
@@ -130,6 +131,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 },
 
 { // default options here
+    NFTContract: "",
     fields: {
         // key validate is optional
         // value can be :
@@ -137,7 +139,6 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         //  validate: ["isEmpty", "isInteger", ...] and try to call Q methods: Q.isEmpty, Q.isInteger ...
         // - object  like {key => errormessage}
         //  validate: {"isEmpty": "err msg here to key %key%, "isInteger": "invalid key %key%, ...} and try to call Q methods: Q.isEmpty, Q.isInteger ...
-        NFTContract: {value: "", hide: false, validate: ["notEmpty", "address"]},
         seriesId: {value: "", hide: false, validate: ["notEmpty", "integer"]},
         owner: {value: "", hide: false, validate: ["notEmpty", "address"]},
         currency: {value: "", hide: false, validate: ["notEmpty", "address"]},
@@ -183,7 +184,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         let obj = $(tool.element).find(".Assets_NFT_sales_factory_instancesTableList");
         obj.find('tr').hide();
         obj.find('tr.Assets_NFT_sales_factory_loading').show();
-        tool.whitelistByNFT(state.NFTcontract, function(err, data){
+        tool.whitelistByNFT(state.NFTContract, function(err, data){
             obj.find('tr.Assets_NFT_sales_factory_loading').hide();    
             obj.find('tr').not('.Assets_NFT_sales_factory_loading').remove();    
             if (!data || Q.isEmpty(data.list)) {
@@ -342,7 +343,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                         fields.price.userValue = ethers.utils.parseUnits(fields.price.userValue,18);
                         
                         tool.produce(
-                            fields.NFTContract.userValue,
+                            state.NFTContract,
                             fields.seriesId.userValue,
                             fields.owner.userValue,
                             fields.currency.userValue,
@@ -375,13 +376,6 @@ Q.Template.set("Assets/NFT/sales/factory",
     `<div>
         <div class="form">
 
-            <!-- address NFTContract, -->
-            <div class="form-group">
-                <label>{{NFT.sales.factory.form.labels.NFTContract}}</label>
-                <input name="NFTContract" type="text" class="form-control" value="{{fields.NFTContract.value}}" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
-                <small class="form-text text-muted">{{NFT.sales.factory.form.small.NFTContract}}</small>
-            </div>
-    
             <div class="form-group">
                 <label>{{NFT.sales.factory.form.labels.owner}}</label>
                 <input name="owner" type="text" class="form-control" placeholder="{{NFT.sales.factory.placeholders.address}} {{NFT.sales.factory.placeholders.optional}}">
