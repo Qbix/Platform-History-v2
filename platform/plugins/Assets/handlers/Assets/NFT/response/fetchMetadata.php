@@ -18,7 +18,7 @@ function Assets_NFT_response_fetchMetadata ($params) {
 
 		// execute tokenURI if exists
 		if (Users_Web3::existsInABI("tokenURI", $ABI, "function", false)) {
-			$tokenURI = Users_Web3::execute('Assets/templates/R1/NFT/contract', $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
+			$tokenURI = Users_Web3::execute($pathABI, $contractAddress, "tokenURI", $tokenId, $chainId, true, $longDuration);
 		} else {
 			throw new Exception("not found tokenURI method in ABI of contract ".$contractAddress);
 		}
