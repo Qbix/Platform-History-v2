@@ -24,10 +24,6 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	var tool = this;
 	var state = this.state;
 
-	if (!state.userId) {
-		return console.warn("user id required");
-	}
-
 	var pipe = Q.pipe(['styles', 'texts'], function () {
 		tool.refresh();
 	});
@@ -45,8 +41,14 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 },
 
 { // default options here
-	userId: null,
-	accountAddress: null,
+	owner: {
+		userId: null,
+		accountAddress: null,
+	},
+	holder: {
+		contractAddress: null,
+		pathABI: "Assets/templates/R1/NFT/sales/contract"
+	},
 	chainId: null,
 	contractAddress: null,
 	pathABI: "Assets/templates/R1/NFT/contract",
@@ -117,8 +119,8 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			Q.handle(callback);
 		}, {
 			fields: {
-				userId: state.userId,
-				accountAddress: state.accountAddress,
+				owner: state.owner,
+				holder: state.holder,
 				chainId: state.chainId,
 				contractAddress: state.contractAddress,
 				pathABI: state.pathABI,
