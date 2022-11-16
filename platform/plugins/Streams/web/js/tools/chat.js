@@ -1202,8 +1202,12 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.$scrolling = $($scm[0].scrollingParent());
 		}
 		if (state.$scrolling.length) {
+			var $s = state.$scrolling[0];
+			$s.addClass('Q_forceDisplayBlock');
+			var scrollHeight = $s.scrollHeight;
+			$s.removeClass('Q_forceDisplayBlock');
 			state.$scrolling.animate({
-				scrollTop: state.$scrolling[0].scrollHeight
+				scrollTop: scrollHeight
 			}, this.state.animations.duration, callback);
 		}
 	},
