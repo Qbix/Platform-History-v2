@@ -3725,9 +3725,10 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
 				var err = null;
+				var resCallback = {};
 				try {
 					// let the callback check params
-					callback.apply(subject, params);
+					resCallback = callback.apply(subject, params);
 				} catch (e) {
 					// it should throw an exception if it encounters any errors
 					err = e;
@@ -3738,7 +3739,9 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
-					_reject(err);
+					if (!Q.getObject("skipException", resCallback)) {
+						_reject(err);
+					}
 					throw err;
 				}
 				_resolve(subject);
@@ -3794,7 +3797,6 @@ Q.getter = function _Q_getter(original, options) {
 							try {
 								_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, true);
 							} catch (e) {
-								debugger;
 								console.warn(e);
 							}
 						}

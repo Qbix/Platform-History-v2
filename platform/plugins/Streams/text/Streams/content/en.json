@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "This content is hidden from you.",
+        "InplaceTypeMustBe": "inplaceType must be 'textarea' or 'text'"
     },
     "preview": {
         "NewItemTitle": "New Item"
