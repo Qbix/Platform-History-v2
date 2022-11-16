@@ -407,7 +407,7 @@ Streams.onError = new Q.Event(function (err, data) {
 
 /**
  * Returns Q.Event that occurs after the system learns of a new ephemeral payload came in on a stream.
- * @event onMessage
+ * @event onEphemeral
  * @static
  * @param {String} [streamType] id of publisher which is publishing the stream
  * @param {String} [payloadType] type of the message, or its ordinal, pass "" for all types
