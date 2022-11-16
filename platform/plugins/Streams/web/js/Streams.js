@@ -677,7 +677,7 @@ var _publicStreams = Streams.arePublic.collection = {};
  * @static
  * @method get
  * @param {String} publisherId Publisher's user id
- * @param {String} name Name of the stream published by this publisher
+ * @param {String} streamName Name of the stream published by this publisher
  * @param {Function} callback
  *	If there were errors, first parameter is an array of errors.
  *  Otherwise, first parameter is null and second parameter is a Streams.Stream object

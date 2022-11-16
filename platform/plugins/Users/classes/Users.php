@@ -430,7 +430,36 @@ abstract class Users extends Base_Users
 						$u->clearXid($platformApp);
 						$u->save();
 					};
+
 					$ui->remove();
+				}
+
+				// clear users_external_from for xid and for userId, because than we will add row for current user with current xid
+				$userExternalFroms = Users_ExternalFrom::select()->where(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"xid" => $xid
+				))->orWhere(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"userId" => $user->id
+				))->fetchDbRows();
+				foreach ($userExternalFroms as $userExternalFrom) {
+					$userExternalFrom->remove();
+				}
+
+				// clear users_external_to for xid and for userId, because than we will add row for current user with current xid
+				$userExternalTos = Users_ExternalTo::select()->where(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"xid" => $xid
+				))->orWhere(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"userId" => $user->id
+				))->fetchDbRows();
+				foreach ($userExternalTos as $userExternalTo) {
+					$userExternalTo->remove();
 				}
 
 				// Now, let's associate the current user's account with this platform xid.
@@ -611,13 +640,13 @@ abstract class Users extends Base_Users
 		if (isset($_SESSION['Users']['appUsers'][$platformApp])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$platformApp];
-			$ef = Users_ExternalFrom::select()->where($pk)->fetchDbRow();
-			if (empty($ef)) {
-				// somehow this externalFrom disappeared from the database
-				throw new Q_Exception_MissingRow(array(
-					'table' => 'ExternalFrom',
-					'criteria' => http_build_query($pk, '', ' & ')
-				));
+			$ef = new Users_ExternalFrom($pk);
+
+			if (!$ef->retrieve()) {
+				Q::event('Users/insertExternalFrom', @compact('user', 'during'), 'before');
+				$ef->userId = $externalFrom->userId;
+				$ef->save();
+				Q::event('Users/authenticate/insertExternalFrom', @compact('user'), 'after');
 			}
 
 			if (!isset($ef->accessToken)
