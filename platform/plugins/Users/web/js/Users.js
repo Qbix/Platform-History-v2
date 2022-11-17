@@ -547,15 +547,8 @@
 			fields[Users.signatures.nonceField] = nonce;
 			found = true;
 			var fieldNames = Q.isArrayLike(v) ? v : Object.keys(fields);
-			Users.sign(fields,
-			function (err, signature) {
-				if (err) {
-					callback(url, slotNames, options);
-				}
-				fields[Users.signatures.sigField] = {
-					signature: signature,
-					fieldNames: fieldNames
-				}
+			Users.sign(fields, function (err, fields) {
+				options.fields = fields;
 				callback(url, slotNames, options);
 			}, fieldNames);
 		});
@@ -565,28 +558,31 @@
 	});
 
 	/**
-	 * Sign a specific payload with the user's private key, if it has been saved in IndexedDB.
+	 * Generates a signature for a specific payload with the user's private key, if it has been saved in IndexedDB.
 	 * Gets canonical serialization of the payload with Q.serialize(),
 	 * then gets the key from IndexedDB and signs the serialization.
-	 * It can be verified with Users.verify() or Q_Users::verify()
-	 * @method sign
+	 * It can be verified with Users.verify() in JS or Q_Users::verify() in PHP.
+	 * @method signature
 	 * @static
 	 * @param {Object} payload The payload to sign. It will be serialized with Q.serialize()
-	 * @param {Function} callback Receives the signature, if one was computed
-	 * @param {Array} [fieldNames] The names of the fields from the payload to sign, otherwise signs all.
+	 * @param {Function} callback Receives err and then the signature, if one was computed
+	 * @param {Object} options
+	 * @param {Object} [options.key] Set the key to use, to sign the payload with
+	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
 	 * @return {Boolean} Returns true unless crypt.subtle is undefined because the page is in insecure context
 	 */
-	Users.sign = function (payload, callback, fieldNames) {
+	Users.signature = function (payload, callback, options) {
 		if (!crypto || !crypto.subtle) {
 			return false;
 		}
-		if (fieldNames && fieldNames.indexOf(Users.signatures.nonceField) < 0) {
-			fieldNames.push(Users.signatures.nonceField);
-		}
+		var fieldNames = options && options.fieldNames;
+		// if (fieldNames && fieldNames.indexOf(Users.signatures.nonceField) < 0) {
+		// 	fieldNames.push(Users.signatures.nonceField);
+		// }
 		var serialized = Q.serialize(
 			fieldNames ? Q.take(payload, fieldNames) : payload
 		);
-		var key = Users.Session.key.loaded;
+		var key = (options && options.key) || Users.Session.key.loaded;
 		if (key) {
 			_sign(null, key);
 		} else {
@@ -604,10 +600,54 @@
 				var signature = Array.prototype.slice.call(
 					new Uint8Array(arrayBuffer), 0
 				).toHex();
-				Q.handle(callback, null, [signature]);
+				Q.handle(callback, null, [null, signature, key]);
+			}).catch(function (e) {
+				Q.handle(callback, null, [e]);
 			});
 		}
-	}
+	};
+
+	/**
+	 * Copies and signs a given payload using Users.signature (see that function).
+	 * Inserts the signature, publilc key and field under the field whose name is
+	 * stored in Users.signatures.sigField
+	 * @param {Object} payload 
+	 * @param {Function} callback Receives err, fields with the signed payload,
+	 *  expanded with a field named after Users.signature.sigField, containing the keys
+	 *  "signature", "publicKey" and "fieldNames".
+	 * @param {Object} options
+	 * @param {Object} [options.key] Set the key to use, to sign the payload with
+	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
+	 */
+	Users.sign = function (payload, callback, options) {
+		var fields = Q.copy(payload);
+		Users.signature(fields, function (err, signature, key) {
+			if (err) {
+				return callback && callback(err);
+			}
+			if (options.key) {
+				crypto.subtle.exportKey('spki', key.publicKey)
+				.then(function (pk) {
+					var key_hex = Array.prototype.slice.call(
+						new Uint8Array(pk), 0
+					).toHex();
+					_proceed(key_hex);
+				});
+			} else if (Users.Session.publicKey) {
+				_proceed(Users.Session.publicKey);
+			} else {
+				return callback("Users.sign: User.Session.publicKey missing");
+			}
+			function _proceed(publicKeyString) {
+				fields[Users.signatures.sigField] = {
+					signature: signature,
+					publicKey: publicKeyString,
+					fieldNames: options.fieldNames || null
+				};
+				return callback && callback(null, fields);
+			}
+		}, options);
+	};
 
 	/**
 	 * Used when platform user is logged in to platform but not to app.
@@ -2410,27 +2450,30 @@
 					request.onsuccess = function (event) {
 						// if successfully saved on the client,
 						// then tell the server the exported public key
-						Q.handle(callback, null, [null, event, key]);
+						_save(key, function () {
+							Q.handle(callback, null, [null, event, key]);
+						});
 					};
 					request.onerror = function (event) {
 						Q.handle(callback, null, [null, event, key]);
 					}
 				});
-				function _save (key) {
-					crypto.subtle.exportKey('spki', key.publicKey)
-					.then(function (pk) {
-						var key_hex = Array.prototype.slice.call(
-							new Uint8Array(pk), 0
-						).toHex();
-						Q.req('Users/key', ['saved'], function () {
-							// now server will require it
+				function _save (key, callback) {
+					var fields =  {
+						info: info
+					};
+					Q.Users.sign(fields, function (err, fields) {
+						Q.req('Users/key', ['saved'], function (err) {
+							// from now on, the server will use it
+							// for validating requests in this session
+							Q.handle(this, arguments);
 						}, {
 							method: 'post',
-							fields: {
-								publicKey: key_hex,
-								info: info
-							}
+							fields: fields
 						});
+					}, {
+						key: key,
+						fieldNames: ['info']
 					});
 				}
 			});

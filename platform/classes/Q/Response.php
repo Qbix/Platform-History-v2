@@ -1833,9 +1833,9 @@ class Q_Response
 	}
 
 	/**
-	 * Get the value for a cookie that will be sent to the client.
-	 * This is different than the value of the cookie that was sent
-	 * from the client, which is stored in $_COOKIE[$name].
+	 * Get the value for a cookie that will be sent to the client,
+	 * and if that's missing, then fall back to $_COOKIE['name']
+	 * that was sent from the client.
 	 * Use this for session IDs and other things.
 	 * @method cookie
 	 * @static

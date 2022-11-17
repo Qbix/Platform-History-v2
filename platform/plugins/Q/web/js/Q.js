@@ -8142,13 +8142,13 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject, options) {
 
 /**
  * Serialize objects in a canonical way, to match Q_Utils::serialize().
- * Sorts the keys recursively inside the object, and 
+ * Sorts the keys recursively inside the object, then http-encodes it all.
  * @param {Object} data
  * @returns {String}
  */
 Q.serialize = function _Q_serialize(data) {
 	return Q.queryString(data, true, false, {
-		convertBooleanToInteger: true
+		convertBooleanToInteger: false
 	}).replace('+', '%20');
 };
 

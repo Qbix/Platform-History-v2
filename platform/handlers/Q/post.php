@@ -23,6 +23,9 @@ function Q_post($params)
 			}
 		}
 	}
-	Q_Request::requireValidNonce();
+	if (!Q_Session::$nonceWasSet) {
+		// only if we didn't set a new nonce (e.g. for a new session)
+		Q_Request::requireValidNonce();
+	}
 	return Q::event("$module/$action/post", $params);
 }

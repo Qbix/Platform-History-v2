@@ -2097,22 +2097,52 @@ abstract class Users extends Base_Users
 	/**
 	 * Verifies a signed payload
 	 * @param {array} $payload Can be a multidimensional array
-	 * @param {string} [$sigField='Q.sig'] Where to find signature. For now, this is always "r, s" from ECDSA signature
-	 * @param {string} [$algorithm='sha256'] Indicates the hash algorithm. Later may also allow user to change the ECDSA curve, etc.
-	 * @return {boolean|null} Returns null if sigField is null or has no publicKey.
-	 *  Otherwise returns boolean for whether the payload was signed successfully.
+	 * @param {boolean} [$options.lookInSession=false]
+	 * @param {array} [$options]
+	 * @param {string} [$options.sigField] By default, uses config Users/signatures/sigField
+	 * @param {string} [$options.algorithm='sha256'] Indicates the hash algorithm. Later may also allow user to change the ECDSA curve, etc.
+	 * @return {string|false|null} Returns null if sigField is null, or if lookInSession is true and $_SESSION['Users']['publicKey'] is missing.
+	 *  Otherwise returns false if payload was not signed successfully,
+	 *  If signed successfully, returns the public key used.
 	 */
-	static function verify($payload, $signature, $algorithm = 'sha256')
+	static function verify($payload, $lookInSession = false, $options = array())
 	{
-		$sigField = Q_Config::get('Users', 'signatures', 'sigField', null);
-		$sigField = str_replace('.', '_', $sigField);
-		unset($payload[$sigField]);
-		if (!$sigField or empty($_SESSION['Users']['publicKey'])) {
+		$sigField = Q::ifset($options, 'sigField', str_replace('.', '_', 
+			Q_Config::get('Users', 'signatures', 'sigField', null)
+		));
+		if (!$sigField) {
 			return null;
 		}
-		$publicKey = $_SESSION['Users']['publicKey'];
-		$serialized = Q_Utils::serialize($payload);
-		return Q_Crypto::verify($serialized, $signature, $publicKey);
+		$publicKey = null;
+		if ($lookInSession) {
+			if (empty($_SESSION['Users']['publicKey'])) {
+				return null;
+			}
+			$publicKey = $_SESSION['Users']['publicKey'];
+		}
+		if (empty($payload[$sigField])) {
+			return false;
+		}
+		$sig = $payload[$sigField];
+		unset($payload[$sigField]);
+		
+		if (empty($sig['signature'])) {
+			return false;
+		}
+		if (!empty($sig['publicKey'])) {
+			if ($publicKey && $publicKey !== $sig['publicKey']) {
+				return false; // public key doesn't match
+			}
+			$publicKey = $sig['publicKey'];
+		}
+		$fields = empty($sig['fieldNames'])
+			? $payload
+			: Q::take($payload, $sig['fieldNames']);
+		$serialized = Q_Utils::serialize($fields);
+		if (!Q_Crypto::verify($serialized, $sig['signature'], $publicKey)) {
+			return false;
+		}
+		return $publicKey;
 	}
 
 	/**
