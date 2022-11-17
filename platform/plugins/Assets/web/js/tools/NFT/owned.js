@@ -18,6 +18,7 @@ var NFT = Web3.NFT;
  * @param {string} [options.chainId] - override chain id
  * @param {string} [options.contractAddress] - override contract address
  * @param {string} [options.pathABI] - path to ABI template.
+ * @param {boolean} [options.caching=true] - whether to use cache for Web3 requests
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
@@ -52,6 +53,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	chainId: null,
 	contractAddress: null,
 	pathABI: "Assets/templates/R1/NFT/contract",
+	caching: true,
 	limit: 10
 },
 
@@ -124,6 +126,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 				chainId: state.chainId,
 				contractAddress: state.contractAddress,
 				pathABI: state.pathABI,
+				caching: state.caching,
 				offset: offset,
 				limit: state.limit
 			}

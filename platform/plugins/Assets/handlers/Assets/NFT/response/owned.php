@@ -36,6 +36,7 @@ function Assets_NFT_response_owned ($params) {
 	$contractAddress = Q::ifset($request, "contractAddress", null);
 	$glob["skipInfo"] = Q::ifset($request, "skipInfo", false);
 	$glob["skipException"] = Q::ifset($request, "skipException", false);
+	$caching = filter_var(Q::ifset($request, "caching", true), FILTER_VALIDATE_BOOLEAN);
 
 	$tokenJSON = array();
 
@@ -105,7 +106,7 @@ function Assets_NFT_response_owned ($params) {
 					$methodName = "getNftsByOwner";
 				}
 
-				$tokens = Users_Web3::execute($pathABI, $chain["contract"], $methodName, [$source["address"], $tokensByOwnerLimit], $chain["chainId"]);
+				$tokens = Users_Web3::execute($pathABI, $chain["contract"], $methodName, [$source["address"], $tokensByOwnerLimit], $chain["chainId"], $caching);
 				if (empty($tokens)) {
 					continue;
 				}
@@ -116,7 +117,7 @@ function Assets_NFT_response_owned ($params) {
 					$tokenInfo = Users_Web3::existsInABI("tokenInfo", $sourceABI, "function", false);
 					if ($tokenInfo) {
 						foreach ($dirtyTokens as $tokenId) {
-							$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"]);
+							$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"], $caching);
 							if (Q::ifset($tokenInfo, "custodian", null) == $source["custodian"]) {
 								$tokens[] = array(
 									"tokenId" => $tokenId,
@@ -140,9 +141,9 @@ function Assets_NFT_response_owned ($params) {
 					}
 				}
 			} elseif ($balanceOf && $tokenOfOwnerByIndex) {
-				$tokens = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "balanceOf", $source["address"], $chain["chainId"]);
+				$tokens = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "balanceOf", $source["address"], $chain["chainId"], $caching);
 				for ($i = 0; $i < $tokens; $i++) {
-					$tokenId = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "tokenOfOwnerByIndex", array($source["address"], $i), $chain["chainId"], true, $glob["secondsInYear"]);
+					$tokenId = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "tokenOfOwnerByIndex", array($source["address"], $i), $chain["chainId"], true, $glob["secondsInYear"], $caching);
 					if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI"), $tokenJSON, $countNFTs) === false) {
 						break;
 					}
