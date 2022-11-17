@@ -60,6 +60,10 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
+    word-wrap: break-word;
+}
+.Assets_NFT_preview_tool .video-container.fallback {
+    line-height: unset;
 }
 .Assets_NFT_preview_tool .video-container .Q_video_tool {
     top: 50%;
