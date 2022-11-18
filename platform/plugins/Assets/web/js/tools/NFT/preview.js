@@ -39,6 +39,14 @@
         tool.isPublisher = (loggedInUserId && loggedInUserId === previewState.publisherId);
         $toolElement.attr("data-publisher", tool.isPublisher);
 
+        // is claim
+        state.secondsLeft = parseInt(state.secondsLeft);
+        if (state.secondsLeft > 0) {
+            $toolElement.attr("data-claim",  false);
+        } else if (state.secondsLeft <= 0) {
+            $toolElement.attr("data-claim",  true);
+        }
+
         if (!Q.isEmpty(previewState)) {
             // <set Streams/preview imagepicker settings>
             previewState.imagepicker.showSize = state.imagepicker.showSize;
@@ -126,6 +134,7 @@
         },
         movie: null,
         imageSrc: null,
+        secondsLeft: null,
         fallback: null,
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
@@ -579,6 +588,20 @@
                 } else if (imageUrl) {
                     tool.renderImage($container, imageUrl);
                 }
+
+                if (state.secondsLeft > 0) {
+                    $(".Assets_NFT_timeout_tool", tool.element).tool("Q/timestamp", {
+                        time: Date.now()/1000 + state.secondsLeft,
+                        beforeRefresh: function (result, diff) {
+                            if (diff <= 0) {
+                                $toolElement.attr("data-claim", true);
+                            }
+                        }
+                    }).activate();
+                }
+                $("button[name=claim]", tool.element).on(Q.Pointer.fastclick, function () {
+                    Q.alert("claim");
+                });
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
@@ -1314,8 +1337,10 @@
                     <button name="buy" class="Q_button">{{NFT.Buy}}</button>
                     <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
                     <button name="update" class="Q_button">{{NFT.Actions}}</button>
+                    <button name="claim" class="Q_button">{{NFT.Claim}}</button>
                 </li>
             </ul>
+            <div class="Assets_NFT_claim_timeout"><span>{{NFT.Claim}}</span> <span class="Assets_NFT_timeout_tool"></span></div>
         {{/if}}
     </div>`,
         {text: ['Assets/content']}
