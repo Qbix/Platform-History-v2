@@ -49,7 +49,6 @@ function Assets_NFT_response_owned ($params) {
 		$chain = $params["chain"];
 		$ABI = $params["ABI"];
 		$secondsLeft = Q::ifset($params, "secondsLeft", null);
-		$secondsLeft = 10;
 		$dataJson = compact("tokenId", "secondsLeft");
 		if ($glob["skipInfo"]) {
 			$tokenJSON[] = $dataJson;
