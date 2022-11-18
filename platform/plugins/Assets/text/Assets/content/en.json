@@ -290,6 +290,8 @@
         "Transfer": "Transfer",
         "Actions": "Actions",
         "Claim": "Claim",
+        "Unlocking": "Unlocking",
+        "Unlock": "Unlock",
         "Update": "Update",
         "UpdateToken": "Update Token",
         "UpdateNFT": "Update NFT",

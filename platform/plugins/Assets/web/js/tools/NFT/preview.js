@@ -19,6 +19,7 @@
      *  @param {string} [options.fallback] Error message need to display in tool as content.
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
+     *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
      *  @param {Q.Event} [options.onCreated] Event occur when NFT created.
      */
     Q.Tool.define("Assets/NFT/preview", function(options) {
@@ -136,6 +137,7 @@
         imageSrc: null,
         secondsLeft: null,
         fallback: null,
+        onClaim: new Q.Event(),
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event()
@@ -599,8 +601,9 @@
                         }
                     }).activate();
                 }
-                $("button[name=claim]", tool.element).on(Q.Pointer.fastclick, function () {
-                    Q.alert("claim");
+                $("button[name=unlock]", tool.element).on(Q.Pointer.fastclick, function () {
+                    Q.handle(state.onClaim, tool);
+                    return false;
                 });
 
                 // set onInvoke event
@@ -1337,10 +1340,10 @@
                     <button name="buy" class="Q_button">{{NFT.Buy}}</button>
                     <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
                     <button name="update" class="Q_button">{{NFT.Actions}}</button>
-                    <button name="claim" class="Q_button">{{NFT.Claim}}</button>
+                    <button name="unlock" class="Q_button">{{NFT.Unlock}}</button>
                 </li>
             </ul>
-            <div class="Assets_NFT_claim_timeout"><span>{{NFT.Claim}}</span> <span class="Assets_NFT_timeout_tool"></span></div>
+            <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>
         {{/if}}
     </div>`,
         {text: ['Assets/content']}
