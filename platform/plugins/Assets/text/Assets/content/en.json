@@ -506,7 +506,34 @@
                 "addToWhitelist": "Add To Whitelist",
                 "removeFromWhitelist": "Remove From Whitelist"
             }
-        }
+        },
+	"locked": {
+	    "form": {
+		"labels": {
+		    "tokenId": "Token ID",
+		    "custodian": "Custodian"
+		},
+		"small": {
+		    "tokenId": "token id what need to lock or unlock",
+		    "custodian": "address that can be able to unlock"
+		}
+	    },
+	    "errors": {
+		"invalidTokenId": "Invalid tokenId",
+		"invalidCustodian": "Invalid Custodian"
+	    },
+	    "placeholders": {
+		"optional": "(optional)",
+		"tokenId": "id",
+		"custodian": "address"
+	    },
+	    "btn": {
+		"Lock": "Lock",
+		"Unlock": "Unlock"
+	    },
+	    "Lock": "Lock",
+	    "Unlock": "Unlock"
+	}
     },
     "currencies": {
         "choose": "Choose a currency"
