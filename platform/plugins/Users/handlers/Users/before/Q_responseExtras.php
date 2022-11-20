@@ -8,6 +8,10 @@ function Users_before_Q_responseExtras()
 	Q_Response::setScriptData("Q.plugins.Users.signatures", 
 		Q_Config::get('Users', 'signatures', array())
 	);
+	Q_Response::setScriptData(
+		'Q.plugins.Users.authenticate.expires',
+		Q_Config::get('Users', 'authenticate', 'expires', null)
+	);
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
 	foreach ($requireLogin as $rl => $value) {
