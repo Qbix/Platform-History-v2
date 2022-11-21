@@ -114,9 +114,6 @@ Q.Tool.define("Assets/payment", function (options) {
 					state.userId = Q.Users.loggedInUserId();
 					Q.Assets.Payments[payments.toLowerCase()](state, function (err) {
 						if (err) {
-							if (err.code !== 20) {
-								alert(Q.firstErrorMessage(err));
-							}
 							return;
 						}
 						Q.handle(state.onPay, tool, arguments);
