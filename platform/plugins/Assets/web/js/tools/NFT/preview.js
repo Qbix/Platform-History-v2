@@ -21,6 +21,7 @@
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
      *  @param {Q.Event} [options.onCreated] Event occur when NFT created.
+     *  @param {Q.Event} [options.onRender] Event occur after tool content rendered.
      */
     Q.Tool.define("Assets/NFT/preview", function(options) {
         var tool = this;
@@ -140,7 +141,8 @@
         onClaim: new Q.Event(),
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
-        onCreated: new Q.Event()
+        onCreated: new Q.Event(),
+        onRender: new Q.Event()
     },
 
 {
@@ -444,6 +446,8 @@
                 stream.onMessage("Streams/changed").set(function (updatedStream, message) {
                     tool.renderFromStream(updatedStream);
                 }, [tool.id, Q.normalize(publisherId), Q.normalize(streamName.split("/").pop())].join("_"));
+
+                Q.handle(state.onRender, tool);
             });
         },
         /**
@@ -481,6 +485,8 @@
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick);
+
+                Q.handle(state.onRender, tool);
             });
         },
         /**
@@ -610,6 +616,8 @@
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onInvoke, tool, [metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId]);
                 });
+
+                Q.handle(state.onRender, tool);
             });
         },
         /**
