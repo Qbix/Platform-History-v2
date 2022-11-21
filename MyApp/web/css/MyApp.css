@@ -2,7 +2,14 @@
 /**
  * This CSS is just to get you started.
  * Feel free to modify any of it for your own app.
+ * Include @font-face with an inline font here
+ * to prevent Flash of Unstyled Content.
  */
+
+
+html.Q_hideUntilLoaded {
+	display: block;
+}
 
 * { 
 	font-family: 'Anton', sans-serif;
