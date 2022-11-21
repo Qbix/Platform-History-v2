@@ -121,6 +121,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
     //lockedAddress: '',
     NFTAddress: '',
     abiNFT: "Assets/templates/R1/NFT/contract",
+    tokenId: null,
     seriesIdSource: {
 	seriesId: null,
 	salesAddress: '',
@@ -173,7 +174,11 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 tool.element.innerHTML = html;
                 Q.activate(tool.element, function(){});
                 var state = tool.state;
-		                
+		              
+		if (!Q.isEmpty(state.tokenID)) {
+		    
+		}
+			      
                 $('.Assets_NFT_locked_lockBtn', tool.element).on(Q.Pointer.fastclick, function(){
 
                     Q.Dialogs.push({    
