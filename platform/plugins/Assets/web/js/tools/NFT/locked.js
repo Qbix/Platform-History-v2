@@ -62,6 +62,7 @@ if (Q.isEmpty(Q["grabMetamaskError"])) {
  * @param {String} [options.abiPath] ABI path for LockedHook contract
  * @param {String} [options.NFTAddress] NFTAddress address
  * @param {String} [options.abiNFT] ABI path for NFT contract
+ * @param {String} [options.tokenId] tokenId(optional) if specify then tool will work in single mode. remove input with tokenId from popups. and hided btn lock/unlock if can not be proceeded
  * @param {Object} [seriesIdSource] Datasource for getting seriesId. it can be series number or sales address where script try to get series id from public state
  * @param {String} [options.seriesId] series ID 
  * @param {String} [options.salesAddress] address of NFTsales contract
@@ -175,21 +176,57 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 Q.activate(tool.element, function(){});
                 var state = tool.state;
 		              
-		if (!Q.isEmpty(state.tokenID)) {
+		if (!Q.isEmpty(state.tokenId)) {
+		  // check current  
+		  
+		  
+		    Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()]).then(function (_ref) {
+			var nftContract = _ref[0];
+			var lockedContract = _ref[1];
+			
+			$('.Assets_NFT_locked_lockBtn', tool.element).hide();
+			$('.Assets_NFT_locked_unlockBtn', tool.element).hide();
+			
+			tool.lockedContractPromise().then(function(lockedContract){
+			    return lockedContract.isLocked(state.NFTAddress, state.tokenId);
+			}).then(function([locked, custodian]){  
+			    if (locked) {
+				if (custodian.toLowerCase() == Q.Users.Web3.getSelectedXid().toLowerCase()) {
+				    $('.Assets_NFT_locked_unlockBtn', tool.element).show();
+				}
+			    } else {
+				nftContract.ownerOf(state.tokenId).then(function(owner){
+				    if (owner.toLowerCase() == Q.Users.Web3.getSelectedXid().toLowerCase()) {
+					$('.Assets_NFT_locked_lockBtn', tool.element).show();
+				    }
+				});
+			    }
+			});
+		    
+		    });			
 		    
 		}
 			      
                 $('.Assets_NFT_locked_lockBtn', tool.element).on(Q.Pointer.fastclick, function(){
-
+		    
+		    var state = tool.state;
                     Q.Dialogs.push({    
                             title: tool.text.NFT.locked.Lock,
                             content:`
-				    <div class="Assets_NFT_locked_form">
+				    <div class="Assets_NFT_locked_form"> 
+					`+(
+					Q.isEmpty(state.tokenId) 
+					? 
+					`
 					<div class="form-group">
 					    <label>${tool.text.NFT.locked.form.labels.tokenId}</label>
 					    <input name="tokenId" type="text" class="form-control" placeholder="${tool.text.NFT.locked.placeholders.tokenId}">
 					    <small class="form-text text-muted">${tool.text.NFT.locked.form.small.tokenId}</small>
 					</div>
+					`
+					:
+					``
+					)+`
 					<div class="form-group">
 					    <label>${tool.text.NFT.locked.form.labels.custodian}</label>
 					    <input name="custodian" type="text" class="form-control" placeholder="${tool.text.NFT.locked.placeholders.custodian}">
@@ -201,7 +238,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                             onActivate: function ($dialog) {
                                 $(".Assets_NFT_locked_dialogLock", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
-                                    let tokenId = $($dialog).find("[name='tokenId']").val();
+                                    let tokenId = $($dialog).find("[name='tokenId']").val() || state.tokenId;
 				    let custodian = $($dialog).find("[name='custodian']").val();
                                     if (!tokenId) {
 					Q.Dialogs.pop();
