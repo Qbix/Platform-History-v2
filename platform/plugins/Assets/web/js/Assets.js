@@ -1467,8 +1467,13 @@
 		"Assets/NFT/sales/factory": "{{Assets}}/js/tools/NFT/sales/factory.js",
 		"Assets/NFT/sales": "{{Assets}}/js/tools/NFT/sales.js",
 		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
+		"Assets/NFT/locked": {
+		    js: "{{Assets}}/js/tools/NFT/locked.js",
+		    css: "{{Assets}}/css/tools/NFT/locked.css"
+		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
 		"Assets/web3/pay": "{{Assets}}/js/tools/web3/pay.js"
+
 	});
     
 	Q.onInit.add(function () {
