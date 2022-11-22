@@ -8,7 +8,7 @@
 
 
 html.Q_hideUntilLoaded {
-	display: block;
+	opacity: 1;
 }
 
 * { 
