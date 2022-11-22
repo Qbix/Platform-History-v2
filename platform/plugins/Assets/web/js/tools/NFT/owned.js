@@ -115,7 +115,17 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			var NFTResults = response.slots.owned;
 
 			Q.each(NFTResults, function (index, result) {
-				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", result).activate();
+				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", {
+					tokenId: result.tokenId,
+					tokenURI: result.tokenURI,
+					secondsLeft: result.secondsLeft,
+					owner: result.owner,
+					ownerUserId: result.ownerUserId,
+					metadata: result.metadata,
+					chainId: state.chainId,
+					contractAddress: state.contractAddress,
+					holder: state.holder
+				}).activate();
 			});
 
 			Q.handle(callback);

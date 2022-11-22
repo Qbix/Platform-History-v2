@@ -30,9 +30,9 @@
         tool.preview = Q.Tool.from(this.element, "Streams/preview");
         var previewState = Q.getObject("preview.state", tool) || {};
         var loggedInUserId = Q.Users.loggedInUserId();
-        var tokenId = Q.getObject("token.id", state);
-        var chainId = Q.getObject("token.chainId", state);
-        var contractAddress = Q.getObject("token.contractAddress", state);
+        var tokenId = Q.getObject("tokenId", state);
+        var chainId = Q.getObject("chainId", state);
+        var contractAddress = Q.getObject("contractAddress", state);
 
         // is admin
         var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
@@ -111,12 +111,12 @@
     { // default options here
         useWeb3: true,
         metadata: null,
+        tokenId: null,
         tokenURI: null,
-        token: {
-            id: null,
-            contractAddress: null,
-            chainId: null
-        },
+        chainId: null,
+        contractAddress: null,
+        owner: null,
+        ownerUserId: null,
         imagepicker: {
             showSize: NFT.icon.defaultSize,
             save: "NFT/icon"
@@ -159,9 +159,9 @@
             var tool = this;
             var state = this.state;
             var $toolElement = $(this.element);
-            var tokenId = Q.getObject("token.id", state);
-            var chainId = Q.getObject("token.chainId", state);
-            var contractAddress = Q.getObject("token.contractAddress", state);
+            var tokenId = Q.getObject("tokenId", state);
+            var chainId = Q.getObject("chainId", state);
+            var contractAddress = Q.getObject("contractAddress", state);
             var tokenURI = state.tokenURI;
             var metadata = state.metadata;
 
@@ -607,7 +607,7 @@
                         }
                     }).activate();
                 }
-                $("button[name=unlock]", tool.element).on(Q.Pointer.fastclick, function () {
+                $("button[name=claim]", tool.element).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onClaim, tool);
                     return false;
                 });
@@ -616,6 +616,22 @@
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onInvoke, tool, [metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId]);
                 });
+
+                var $assetsNFTlocked = $(".Assets_NFT_locked", tool.element);
+                var holderContractAddress = Q.getObject("holder.contractAddress", state);
+                var holderPathABI = Q.getObject("holder.pathABI", state);
+                /*if (holderContractAddress.length) {
+                    $assetsNFTlocked.tool("Assets/NFT/locked", {
+                        tokenId: state.tokenId,
+                        seriesIdSource: {
+                            salesAddress: holderContractAddress,
+                        },
+                        NFTAddress: NFT.Web3.chains[state.chainId],
+                        //abiNFT: TokenSociety.NFT.abiNFT
+                    }).activate();
+                } else {
+                    $assetsNFTlocked.remove();
+                }*/
 
                 Q.handle(state.onRender, tool);
             });
@@ -1348,7 +1364,8 @@
                     <button name="buy" class="Q_button">{{NFT.Buy}}</button>
                     <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
                     <button name="update" class="Q_button">{{NFT.Actions}}</button>
-                    <button name="unlock" class="Q_button">{{NFT.Unlock}}</button>
+                    <button name="claim" class="Q_button">{{NFT.Claim}}</button>
+                    <div class="Assets_NFT_locked"></div>
                 </li>
             </ul>
             <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>
