@@ -13,4 +13,4 @@ class Q_Exception_MissingPHPVersion extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Q_Exception_MissingPHPVersion', 'PHP version should be at least $version', 501);
+Q_Exception::add('Q_Exception_MissingPHPVersion', 'PHP version should be at least {{version}}', 501);
