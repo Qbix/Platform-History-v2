@@ -1167,6 +1167,7 @@ class Q_Session
 		$result = bin2hex($data);
 		$a = substr($result, 0, 32);
 		$b = substr($result, 32, 32);
+		$b = $b ? $b : ''; // for older PHP
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		$c = isset($secret)
 			? Q_Utils::hashEquals($b, substr(Q_Utils::signature($a, $secret), 0, 32))
