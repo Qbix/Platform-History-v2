@@ -48,11 +48,11 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	},
 	holder: {
 		contractAddress: null,
-		pathABI: "Assets/templates/R1/NFT/sales/contract"
+		pathABI: Q.Users.Web3.pathABI.sales
 	},
 	chainId: null,
 	contractAddress: null,
-	pathABI: "Assets/templates/R1/NFT/contract",
+	pathABI: Q.Users.Web3.pathABI.contract,
 	skipCache: false,
 	limit: 10
 },

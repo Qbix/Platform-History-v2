@@ -8,7 +8,7 @@ function Assets_NFT_response_fetchMetadata ($params) {
 	$contractAddress = Q::ifset($request, "contractAddress", null);
 	$tokenURI = Q::ifset($request, "tokenURI", null);
 	$ABI = Q::ifset($request, "ABI", null);
-	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/R1/NFT/contract");
+	$pathABI = Q::ifset($request, 'pathABI', Users_Web3::getDefaultABIpath("contract"));
 	$throwException = Q::ifset($request, 'throwException', false);
 	$longDuration = 31104000;
 

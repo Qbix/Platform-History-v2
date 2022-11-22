@@ -121,12 +121,12 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
     abiPath: "Assets/templates/R1/NFT/locked",
     //lockedAddress: '',
     NFTAddress: '',
-    abiNFT: "Assets/templates/R1/NFT/contract",
+    abiNFT: Q.Users.Web3.pathABI.contract,
     tokenId: null,
     seriesIdSource: {
 	seriesId: null,
 	salesAddress: '',
-	abiNFTSales: "Assets/templates/R1/NFT/sales/contract"
+	abiNFTSales: Q.Users.Web3.pathABI.sales
     },
     onMove: new Q.Event() // an event that the tool might trigger
 },
