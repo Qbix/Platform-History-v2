@@ -1974,7 +1974,7 @@ class Q_Response
 		} else {
 			$domain = $domain ? $domain : '';
 		}
-		if ($samesite) {
+		if ($samesite and version_compare(PHP_VERSION, '7.3.0', '<')) {
 			setcookie($name, $value, compact('expires', 'path', 'domain', 'secure', 'httponly', 'samesite'));
 		} else {
 			setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);

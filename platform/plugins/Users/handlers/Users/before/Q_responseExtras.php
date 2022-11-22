@@ -73,8 +73,10 @@ function Users_before_Q_responseExtras()
 	}
 
 	try {
-		Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
-		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', Users_Web3::getContracts());
+		if (class_exists('Users_Web3')) {
+			Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
+			Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', Users_Web3::getContracts());
+		}
 	} catch (Q_Exception_MissingPHPVersion $e) {
 		Q_Response::setScriptData('Q.plugins.Users.Web3.chains', array());
 		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', array());
