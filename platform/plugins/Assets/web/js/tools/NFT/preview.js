@@ -16,9 +16,12 @@
      *  @param {boolean} [movie] Movie URL. If no image defined during NFT creation, this movie will be used instead.
      *  On NFT/view the movie will display instead image (event if image defined).
      *  @param {boolean} [src] URL of additional image which will use instead default image.
+     *  @param {string} [options.fallback] Error message need to display in tool as content.
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
+     *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
      *  @param {Q.Event} [options.onCreated] Event occur when NFT created.
+     *  @param {Q.Event} [options.onRender] Event occur after tool content rendered.
      */
     Q.Tool.define("Assets/NFT/preview", function(options) {
         var tool = this;
@@ -38,6 +41,14 @@
         tool.isPublisher = (loggedInUserId && loggedInUserId === previewState.publisherId);
         $toolElement.attr("data-publisher", tool.isPublisher);
 
+        // is claim
+        state.secondsLeft = parseInt(state.secondsLeft);
+        if (state.secondsLeft > 0) {
+            $toolElement.attr("data-claim",  false);
+        } else if (state.secondsLeft <= 0) {
+            $toolElement.attr("data-claim",  true);
+        }
+
         if (!Q.isEmpty(previewState)) {
             // <set Streams/preview imagepicker settings>
             previewState.imagepicker.showSize = state.imagepicker.showSize;
@@ -56,22 +67,26 @@
             // get all data from blockchain and refresh
             if (state.metadata) {
                 if (typeof state.metadata !== "object") {
-                    throw new Error("metadata is not a valid object");
+                    //throw new Error("metadata is not a valid object");
+                    state.fallback = "metadata is not a valid object";
                 }
 
                 tool.refresh();
             } else if (state.tokenURI) {
                 if (!state.tokenURI.matchTypes('url').length) {
-                    throw new Error("tokenURI is not a valid URL");
+                    //throw new Error("tokenURI is not a valid URL");
+                    state.fallback = "tokenURI is not a valid URL";
                 }
 
                 tool.refresh();
             } else if (tokenId) {
                 if (!chainId) {
-                    throw new Error("chain id required");
+                    //throw new Error("chain id required");
+                    state.fallback = "chain id required";
                 }
                 if (!contractAddress) {
-                    throw new Error("contract address required");
+                    //throw new Error("contract address required");
+                    state.fallback = "contract address required";
                 }
 
                 tool.refresh();
@@ -110,7 +125,8 @@
             avatar: true,
             title: true,
             description: false,
-            participants: false
+            participants: false,
+            bidInfo: true
         },
         templates: {
             view: {
@@ -120,9 +136,13 @@
         },
         movie: null,
         imageSrc: null,
+        secondsLeft: null,
+        fallback: null,
+        onClaim: new Q.Event(),
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
-        onCreated: new Q.Event()
+        onCreated: new Q.Event(),
+        onRender: new Q.Event()
     },
 
 {
@@ -144,6 +164,10 @@
             var contractAddress = Q.getObject("token.contractAddress", state);
             var tokenURI = state.tokenURI;
             var metadata = state.metadata;
+
+            if (state.fallback) {
+                return tool.renderFallBack();
+            }
 
             $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
 
@@ -422,6 +446,47 @@
                 stream.onMessage("Streams/changed").set(function (updatedStream, message) {
                     tool.renderFromStream(updatedStream);
                 }, [tool.id, Q.normalize(publisherId), Q.normalize(streamName.split("/").pop())].join("_"));
+
+                Q.handle(state.onRender, tool);
+            });
+        },
+        /**
+         * Render preview from metadata object
+         * @method renderFallBack
+         */
+        renderFallBack: function () {
+            var tool = this;
+            var state = tool.state;
+            var $toolElement = $(this.element);
+
+            var templateName = state.templates.view.name;
+            var templateFields = Q.extend({
+                show: {
+                    avatar: true,
+                    title: false,
+                    description: false,
+                    participants: false,
+                    bidInfo: false
+                }
+            }, state.templates.view.fields);
+
+            Q.Template.render(templateName, templateFields, (err, html) => {
+                tool.element.innerHTML = html;
+
+                $(".Assets_NFT_author", tool.element).addClass("Q_error").html(state.fallback);
+                $(".video-container", tool.element).addClass("fallback").html(JSON.stringify({
+                    tokenURI: state.tokenURI,
+                    tokenId: state.tokenId,
+                    metadata: state.metadata,
+                    owner: state.owner,
+                    ownerUserId: state.ownerUserId,
+                    secondsLeft: state.secondsLeft
+                }));
+
+                // set onInvoke event
+                $toolElement.off(Q.Pointer.fastclick);
+
+                Q.handle(state.onRender, tool);
             });
         },
         /**
@@ -532,10 +597,27 @@
                     tool.renderImage($container, imageUrl);
                 }
 
+                if (state.secondsLeft > 0) {
+                    $(".Assets_NFT_timeout_tool", tool.element).tool("Q/timestamp", {
+                        time: Date.now()/1000 + state.secondsLeft,
+                        beforeRefresh: function (result, diff) {
+                            if (diff <= 0) {
+                                $toolElement.attr("data-claim", true);
+                            }
+                        }
+                    }).activate();
+                }
+                $("button[name=unlock]", tool.element).on(Q.Pointer.fastclick, function () {
+                    Q.handle(state.onClaim, tool);
+                    return false;
+                });
+
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onInvoke, tool, [metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId]);
                 });
+
+                Q.handle(state.onRender, tool);
             });
         },
         /**
@@ -1256,17 +1338,21 @@
         {{#if show.participants}}
             <div class="Assets_NFT_participants"></div>
         {{/if}}
-        <ul class="bid-info">
-            <li class="Assets_NFT_price">
-                <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
-                <span class="Assets_NFT_comingsoon">Coming Soon</span>
-            </li>
-            <li class="action-block">
-                <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
-                <button name="update" class="Q_button">{{NFT.Actions}}</button>
-            </li>
-        </ul>
+        {{#if show.bidInfo}}
+            <ul class="bid-info">
+                <li class="Assets_NFT_price">
+                    <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
+                    <span class="Assets_NFT_comingsoon">Coming Soon</span>
+                </li>
+                <li class="action-block">
+                    <button name="buy" class="Q_button">{{NFT.Buy}}</button>
+                    <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
+                    <button name="update" class="Q_button">{{NFT.Actions}}</button>
+                    <button name="unlock" class="Q_button">{{NFT.Unlock}}</button>
+                </li>
+            </ul>
+            <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>
+        {{/if}}
     </div>`,
         {text: ['Assets/content']}
     );

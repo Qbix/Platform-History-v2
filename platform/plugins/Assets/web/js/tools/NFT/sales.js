@@ -1,5 +1,5 @@
 (function (window, Q, $, undefined) {
-	
+
 /**
  * @module Assets
  */
@@ -17,7 +17,7 @@
 Q.Tool.define("Assets/NFT/sales", function (options) {
 	var tool = this;
 	var state = tool.state;
-        
+
         // fill missed attr fields
         for (var i in state.fields) {
             
