@@ -5,7 +5,7 @@ function Users_before_Q_responseExtras()
 	Q_Response::addScript('{{Users}}/js/Users.js', 'Users');
 	Q_Response::addScript('{{Users}}/js/UsersDevice.js', 'Users');
 	$app = Q::app();
-	Q_Response::setScriptData("Q.plugins.Users.signatures", 
+	Q_Response::setScriptData("Q.plugins.Users.signatures",
 		Q_Config::get('Users', 'signatures', array())
 	);
 	Q_Response::setScriptData(
@@ -22,7 +22,7 @@ function Users_before_Q_responseExtras()
 		$successUrl = Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home");
 		$afterActivate = Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl);
 		$loginOptions = Q_Config::get('Users', 'login', array(
-			"identifierType" => 'email,mobile', 
+			"identifierType" => 'email,mobile',
 			"userQueryUri" => 'Users/user',
 			"using" => "native,web3,facebook",
 			"noRegister" => false
@@ -74,11 +74,13 @@ function Users_before_Q_responseExtras()
 
 	if (Q::autoloadRequirementsMet('Users_Web3')) {
 		Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
-		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', Users_Web3::getContracts());
+		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', Q_Config::get("Users", "Web3", "contracts"));
 	} else {
 		Q_Response::setScriptData('Q.plugins.Users.Web3.chains', array());
 		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', array());
 	}
+
+	Q_Response::setScriptData('Q.plugins.Users.Web3.pathABI', Q_Config::get('Users', 'Web3', 'pathABI', array()));
 
 	// add apple signIn js lib
 	if (Q_Request::platform() === 'ios') {
