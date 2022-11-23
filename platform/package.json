@@ -22,7 +22,7 @@
 		"nodemailer": "^4.4.2",
 		"nodemailer-smtp-transport": "^2.7.4",
 		"request": "2.x.x",
-		"socket.io": "2.4.1",
+		"socket.io": "2.5.0",
 		"yuidocjs": "^0.10.2"
 	},
 	"repository": {
