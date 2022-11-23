@@ -1158,7 +1158,7 @@ class Users_User extends Base_Users_User
 		if (isset($xids[$platformApp])) {
 			return $xids[$platformApp];
 		}
-		$platformApp2 = str_replace("_", "\t", $platformApp);
+		$platformApp2 = str_replace("_", "\t", $platformApp); // for backward compatibility
 		if (isset($xids[$platformApp2])) {
 			return $xids[$platformApp2];
 		}
@@ -1174,6 +1174,7 @@ class Users_User extends Base_Users_User
 	function setXid($platformApp, $xid = null)
 	{
 		$xids = $this->getAllXids();
+		$platformApp = str_replace($platformApp, "\t", "_"); // backwards compatibility
 		if (is_array($platformApp)) {
 			foreach ($platformApp as $k => $v) {
 				$xids[$k] = $v;
@@ -1344,8 +1345,8 @@ class Users_User extends Base_Users_User
 	 * @param {string} $platform The name of the platform
 	 * @param {string} $appId The id of an app on the platform
 	 * @param {array|string} $xids An array of facebook user ids, or a comma-delimited string
-	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @param {boolean} [$dontInsertFutureUsers=false] Pass true to skip inserting future users.
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
 	static function idsFromPlatformXids (

@@ -186,7 +186,7 @@ class Users_Contact extends Base_Users_Contact
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
 	 * @param {string} [$options.asUserId] the user to do access checks as
 	 * @param {string|array} [$options.contactUserId=null] Optionally filter by contactUserId
-	 * @return {array}
+	 * @return {array} array of Users_Contact rows
 	 */
 	static function fetch($userId, $label = null, $options = array())
 	{
@@ -212,10 +212,39 @@ class Users_Contact extends Base_Users_Contact
 			if (is_string($label) and substr($label, -1) === '/') {
 				$label = new Db_Range($label, true, false, true);
 			}
-			if (is_string($label)) {
-				$label = explode("\t", $label);
+			$criteria['label'] = $label; // can be array, string, or range
+		}
+
+		$pathABI = Q::ifset($options, 'pathABI', 'Users/templates/R1/Community/contract');
+		if ($label instanceof Db_Range and
+		Q::startsWith($label->min, Users_Label::$externalPrefix . 'web3')) {
+			$strlen = strlen(Users_Label::$externalPrefix);
+			$tail = substr($label->min, $strlen);
+			$parts = explode('/', $tail);
+			$platformApp = $parts[0];
+			list($platform, $appId) = Users::platformApp($platformApp);
+			$user = Users_User::fetch($userId, true);
+			$xid = $user->getXid($platformApp);
+			$results = Users_Web3::execute($pathABI, $xid, 'getAddresses');
+			// todo: construct artificial Users_Contact rows
+		}
+		if (!empty($results)) {
+			foreach ($results as $roleIndex => $xids) {
+				$contactUserIds = Users_User::idsFromPlatformXids(
+					$platform,
+					$appId,
+					$xids,
+					true
+				);
+				$contacts = array();
+				foreach ($contactUserIds as $contactUserId) {
+					$label = Users_Label::external($platform, $appId, $roleIndex);
+					$contacts[] = new Users_Contact(compact(
+						'userId', 'label', 'contactUserId'
+					));
+				}
 			}
-			$criteria['label'] = $label;
+			return $contacts;
 		}
 
 		$query = Users_Contact::select()->where($criteria);

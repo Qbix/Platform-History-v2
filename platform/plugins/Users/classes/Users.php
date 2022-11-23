@@ -1668,6 +1668,21 @@ abstract class Users extends Base_Users
 		$obj->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
 	}
+
+	/**
+	 * Tries to parse a platformApp string into an array of (platform, appId)
+	 * @static
+	 * @param {string} $platformApp in the form of {{platform}}_{{appId}}
+	 * @return {array} of platform, appId when possible
+	 */
+	static function platformApp($platformApp)
+	{
+		$parts = explode("\t", $platformApp);
+		if (count($parts) > 1) {
+			return $parts; // for backward compatibility
+		}
+		return explode('_', $platformApp);
+	}
 	
 	/**
 	 * Get the internal app id and info
@@ -1944,7 +1959,7 @@ abstract class Users extends Base_Users
 	 * @param {string} $userId The user whose contacts they are
 	 * @param {string} $label The label of the contacts that will be managed
 	 * @param {boolean} [$throwIfNotAuthorized=false] Throw an exception if not authorized
-	 * @param {boolean} [$readOnly=false] Whether we just want to know if the user can view the labels
+	 * @param {boolean} [$readOnly=false] Whether we just want to know if the user can view the contacts
 	 * @return {boolean} Whether a contact with this label is allowed to be managed
 	 * @throws {Users_Exception_NotAuthorized}
 	 */

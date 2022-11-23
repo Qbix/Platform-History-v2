@@ -84,6 +84,17 @@ class Users_ExternalFrom extends Base_Users_ExternalFrom
 		}
 		return call_user_func(array($className, 'authenticate'), $appId);
 	}
+
+	/**
+	 * Return a label for Users_Label row, from a suffix.
+	 * @return {string} of the form {{platform}}_{{app}}/{{suffix}}
+	 */
+	function label($suffix)
+	{
+		return Users_Label::external(
+			$this->platform, $this->appId, $suffix
+		);
+	}
 	
 	/**
 	 * @method getAllExtras

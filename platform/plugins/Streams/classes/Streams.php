@@ -794,12 +794,10 @@ abstract class Streams extends Base_Streams
 		}
 		if (!empty($labels)) {
 			$labels = array_unique($labels);
-			$contacts = Users_Contact::select()
-				->where(array(
-					'userId' => $actualPublisherId,
-					'label' => $labels,
-					'contactUserId' => $asUserId
-				))->fetchDbRows();
+			$contacts = Users_Contact::fetch($actualPublisherId, $labels, array(
+				'contactUserId' => $asUserId,
+				'skipAccess' => true
+			));
 			foreach ($contacts as $contact) {
 				foreach ($accesses as $access) {
 					if ($access->ofContactLabel !== $contact->label) {

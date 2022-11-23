@@ -24,6 +24,15 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
+	 * Return a label for Users_Label row, from a suffix.
+	 * @return {string} of the form {{platform}}_{{app}}/{{suffix}}
+	 */
+	static function external($platform, $appId, $suffix)
+	{
+		return self::$externalPrefix . $platform . '_' . $appId . '/' . $suffix;
+	}
+
+	/**
 	 * Add a contact label
 	 * @method {boolean} addLabel
 	 * @static
@@ -165,6 +174,7 @@ class Users_Label extends Base_Users_Label
 		$label->label = $label;
 		$label->remove();
 	}
+
 	/**
 	 * Whether $label_1 can add $label_2
 	 * @method canAddLabel
@@ -197,6 +207,7 @@ class Users_Label extends Base_Users_Label
 
 		return true;
 	}
+
 	/**
 	 * Get information as to which community roles a user can add, remove or see.
 	 * @method can
@@ -244,6 +255,7 @@ class Users_Label extends Base_Users_Label
 
 		return $result;
 	}
+
 	/**
 	 * Whether $label_1 can remove $label_2
 	 * @method canRemoveLabel
@@ -276,6 +288,7 @@ class Users_Label extends Base_Users_Label
 
 		return true;
 	}
+
 	/**
 	 * Whether $label_1 can see $label_2
 	 * @method canSeeLabel
@@ -308,6 +321,7 @@ class Users_Label extends Base_Users_Label
 
 		return true;
 	}
+
 	/**
 	 * Get labels related to communities
 	 * @method ofCommunities
@@ -318,6 +332,7 @@ class Users_Label extends Base_Users_Label
 		$roles = Q_Config::expect("Users", "communities", "roles");
 		return array_keys($roles);
 	}
+
 	/**
 	 * Fetch an array of labels. By default, returns all the labels.
 	 * @method fetch
@@ -428,6 +443,8 @@ class Users_Label extends Base_Users_Label
 		Q_Response::setSlot('icon', $data);
 		$l->icon = '{{baseUrl}}/'.$data[''];
 	}
+
+	public static $externalPrefix = '<<< ';
 
 	/* * * */
 	/**
