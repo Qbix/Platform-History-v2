@@ -269,7 +269,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 */
 	static function getContracts()
 	{
-		return Q_Config::get('Users', 'Web3', 'contracts', array());
+		return Q_Config::get('Users', 'web3', 'contracts', array());
 	}
 
 	/**
