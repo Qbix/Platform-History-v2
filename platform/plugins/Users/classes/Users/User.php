@@ -1174,7 +1174,7 @@ class Users_User extends Base_Users_User
 	function setXid($platformApp, $xid = null)
 	{
 		$xids = $this->getAllXids();
-		$platformApp = str_replace($platformApp, "\t", "_"); // backwards compatibility
+		$platformApp = str_replace("\t", "_", $platformApp); // backwards compatibility
 		if (is_array($platformApp)) {
 			foreach ($platformApp as $k => $v) {
 				$xids[$k] = $v;
