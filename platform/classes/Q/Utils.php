@@ -926,7 +926,7 @@ class Q_Utils
 	 * Issues a GET request, and returns the response
 	 * @method get
 	 * @static
-	 * @param {string|array} $url The URL to post to
+	 * @param {string|array} $url The URL to get
 	 *  This can also be an array of ($url, $ip) to send the request
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
@@ -946,6 +946,37 @@ class Q_Utils
 	{
 		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $timeout);
 	}
+	/**
+	 * Issues multiple GET requests via HTTP/2, and returns the response
+	 * @method getMulti
+	 * @static
+	 * @param {array} $paramsArray An array where each each entry is an array of parameters to ::request
+	 * @return {string|false} The response, or false if not received
+	 * **NOTE:** *The function waits for it, which might take a while!*
+	 */
+	static function requestMulti($paramsArray)
+	{
+		$mh = curl_multi_init();
+		curl_multi_setopt($mh, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
+		$handles = array();
+		foreach ($paramsArray as $params) {
+			$params[] = $mh;
+			$handles[] = $ch = call_user_func_array(array('Q_Utils', 'request'), $params);
+			curl_multi_add_handle($mh, $ch);
+		}
+		//execute the multi handle
+		do {
+			$status = curl_multi_exec($mh, $active);
+			if ($active) {
+				// Wait a short time for more activity
+				curl_multi_select($mh);
+			}
+		} while ($active && $status == CURLM_OK);
+		foreach ($handles as $ch) {
+			curl_multi_remove_handle($mh, $ch);
+		}
+		curl_multi_close($mh);
+	}
 
 	/**
 	 * Issues an http request, and returns the response
@@ -963,6 +994,7 @@ class Q_Utils
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
 	 *  called with the CURL handle before it's closed, if CURL was used.
+	 * @param {boolean} [$returnHandle=false] Set to true to return the curl handle instead of executing it
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
@@ -975,7 +1007,8 @@ class Q_Utils
 		$curl_opts = array(),
 		$header = null,
 		$timeout = Q_UTILS_CONNECTION_TIMEOUT,
-		$callback = null)
+		$callback = null,
+		$returnHandle = false)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent)) {
@@ -1100,6 +1133,9 @@ class Q_Utils
 			}
 			if (!empty($headers)) {
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			}
+			if ($returnHandle) {
+				return $ch;
 			}
 			$result = curl_exec($ch);
 
