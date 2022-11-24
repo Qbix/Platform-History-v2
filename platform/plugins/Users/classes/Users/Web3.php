@@ -231,7 +231,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param
 	 * @return {array} array($appInfo, $provider)
 	 */
-	function objects($appId = null)
+	static function objects($appId = null)
 	{
 		if (!isset($appId)) {
 			$appId = Q::app();
