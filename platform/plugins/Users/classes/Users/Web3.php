@@ -4,6 +4,8 @@ use Web3\Web3;
 use Web3\Contract;
 use Crypto\Keccak;
 use Web3p\EthereumTx\Transaction;
+use Web3\Providers\HttpProvider;
+use Web3\RequestManagers\HttpRequestManager;
 
 /**
  * @module Users
@@ -50,50 +52,27 @@ class Users_Web3 extends Base_Users_Web3 {
 		$transaction = array(),
 		$privateKey = null)
 	{
-		if (!isset($appId)) {
-			$appId = Q::app();
-		}
-
-		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
-		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
-		$appInfo = array_merge($usersWeb3Config, $appInfo);
+		list($appInfo, $provider) = self::objects($appId);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
-
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
 		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "'Users/apps/$appId/chainId'"
 			));
 		}
-
 		if (!is_array($params)) {
 			$params = array($params);
 		}
-
 		$from = Q::ifset($transaction, 'from', null);
 		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
 		if ($caching !== false && $cacheDuration && $cache->wasRetrieved()) {
 			return Q::json_decode($cache->result);
 		}
-
 		if ($delay) {
 			usleep($delay);
 		}
-
-		if (empty($appInfo['rpcUrl'])) {
-			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Users/apps/$appId/rpcUrl"
-			));
-		}
-		$infuraId = Q::ifset(
-			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId', null
-		);
-		$rpcUrl = Q::interpolate(
-			$appInfo['rpcUrl'],
-			compact('infuraId')
-		);
 
 		$contractABI = self::getABI($contractABI, $chainId);
 		$data = array();
@@ -130,7 +109,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		};
 
-		$contract = (new Contract($rpcUrl, $contractABI, $defaultBlock))
+		$contract = (new Contract($provider, $contractABI, $defaultBlock))
 			->at($contractAddress);
 		if ($privateKey) {
 			if (empty($transaction['from'])) {
@@ -216,6 +195,72 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 
 		return $data;
+	}
+
+	/**
+	 * Start a batch, then call execute() method multiple times with same $appId,
+	 * and finally call batchExecute($callback, $appId)
+	 * @method batchStart
+	 * @static
+	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
+	 */
+	static function batchStart($appId = null)
+	{
+		list($appInfo, $provider) = self::objects($appId);
+		$provider->batch(true);
+	}
+
+	/**
+	 * Start a batch, then call execute() method multiple times with same $appId,
+	 * and finally call batchExecute($appId)
+	 * @method batchExecute
+	 * @static
+	 * @param {callable} $callback
+	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
+	 */
+	static function batchExecute($callback, $appId = null)
+	{
+		list($appInfo, $provider) = self::objects($appId);
+		$provider->execute($callback);
+	}
+
+	/**
+	 * Get existing provider object, or create a new one
+	 * @method objects
+	 * @static
+	 * @param
+	 * @return {array} array($appInfo, $provider)
+	 */
+	function objects($appId = null)
+	{
+		if (!isset($appId)) {
+			$appId = Q::app();
+		}
+		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
+		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
+		$appInfo = array_merge($usersWeb3Config, $appInfo);
+		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
+		if (!$chainId) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "'Users/apps/$appId/chainId'"
+			));
+		}
+		if (empty($appInfo['rpcUrl'])) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Users/apps/$appId/rpcUrl"
+			));
+		}
+		$infuraId = Q::ifset(
+			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId', null
+		);
+		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId'));
+		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
+			$requestManager = new HttpRequestManager($rpcUrl);
+			$provider = new HttpProvider($requestManager);
+		} else {
+			$provider = null;
+		}
+		return array($appInfo, $provider);
 	}
 
 	/**
