@@ -21,7 +21,7 @@
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
      *  @param {Q.Event} [options.onCreated] Event occur when NFT created.
-     *  @param {Q.Event} [options.onRender] Event occur after tool content rendered.
+     *  @param {Q.Event} [options.onRefresh] Event occur after tool content rendered.
      */
     Q.Tool.define("Assets/NFT/preview", function(options) {
         var tool = this;
@@ -142,7 +142,7 @@
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
-        onRender: new Q.Event()
+        onRefresh: new Q.Event()
     },
 
 {
@@ -447,7 +447,7 @@
                     tool.renderFromStream(updatedStream);
                 }, [tool.id, Q.normalize(publisherId), Q.normalize(streamName.split("/").pop())].join("_"));
 
-                Q.handle(state.onRender, tool);
+                Q.handle(state.onRefresh, tool);
             });
         },
         /**
@@ -486,7 +486,7 @@
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick);
 
-                Q.handle(state.onRender, tool);
+                Q.handle(state.onRefresh, tool);
             });
         },
         /**
@@ -617,23 +617,7 @@
                     Q.handle(state.onInvoke, tool, [metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId]);
                 });
 
-                var $assetsNFTlocked = $(".Assets_NFT_locked", tool.element);
-                var holderContractAddress = Q.getObject("holder.contractAddress", state);
-                var holderPathABI = Q.getObject("holder.pathABI", state);
-                /*if (holderContractAddress.length) {
-                    $assetsNFTlocked.tool("Assets/NFT/locked", {
-                        tokenId: state.tokenId,
-                        seriesIdSource: {
-                            salesAddress: holderContractAddress,
-                        },
-                        NFTAddress: NFT.Web3.chains[state.chainId],
-                        //abiNFT: TokenSociety.NFT.abiNFT
-                    }).activate();
-                } else {
-                    $assetsNFTlocked.remove();
-                }*/
-
-                Q.handle(state.onRender, tool);
+                Q.handle(state.onRefresh, tool);
             });
         },
         /**
@@ -1365,7 +1349,6 @@
                     <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
                     <button name="update" class="Q_button">{{NFT.Actions}}</button>
                     <button name="claim" class="Q_button">{{NFT.Claim}}</button>
-                    <div class="Assets_NFT_locked"></div>
                 </li>
             </ul>
             <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>

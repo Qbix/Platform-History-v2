@@ -5,8 +5,6 @@
  */
 
 var Assets = Q.Assets;
-var Web3 = Assets.Web3;
-var NFT = Web3.NFT;
 
 /**
  * List of owned NFTs
@@ -123,8 +121,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 					ownerUserId: result.ownerUserId,
 					metadata: result.metadata,
 					chainId: state.chainId,
-					contractAddress: state.contractAddress,
-					holder: state.holder
+					contractAddress: state.contractAddress
 				}).activate();
 			});
 
