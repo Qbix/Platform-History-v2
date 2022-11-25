@@ -1194,7 +1194,9 @@ class Q_Session
 			$id = $parts[1];
 		} else {
 			$prefix = Q_Config::get('Q', 'session', 'id', 'prefix', '');
-			$id = substr($id, strlen($prefix));
+			if (Q::startsWith($id, $prefix)) {
+				$id = substr($id, strlen($prefix));
+			}
 		}
 		$results = self::decodeId($id);
 		return $results[0];

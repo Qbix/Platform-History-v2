@@ -1852,6 +1852,7 @@ class Q_Response
 	}
 
 	/**
+	 * Set a cookie in a way that works around PHP's quirks
 	 * @method setCookie
 	 * @static
 	 * @param {string} $name The name of the cookie
@@ -1907,8 +1908,8 @@ class Q_Response
 	 */
 	static function clearCookie($name, $path = null)
 	{
-		self::setCookie($name, '', 1, $path);
-		unset($_COOKIE[$name]);
+		self::setCookie($name, '', 1, $path, null);
+		self::setCookie($name, '', 1, $path, true);
 	}
 	
 	/**
