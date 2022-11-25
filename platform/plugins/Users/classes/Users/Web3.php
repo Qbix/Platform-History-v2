@@ -255,8 +255,12 @@ class Users_Web3 extends Base_Users_Web3 {
 		);
 		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId'));
 		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
-			$requestManager = new HttpRequestManager($rpcUrl);
-			$provider = new HttpProvider($requestManager);
+			if (!empty(self::$providers[$rpcUrl])) {
+				$provider = self::$providers[$rpcUrl];
+			} else {
+				$requestManager = new HttpRequestManager($rpcUrl);
+				$provider = new HttpProvider($requestManager);
+			}
 		} else {
 			$provider = null;
 		}
@@ -536,4 +540,6 @@ class Users_Web3 extends Base_Users_Web3 {
 		$normalized = $address;
 		return true;
 	}
+
+	public static $providers = array();
 };
