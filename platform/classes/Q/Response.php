@@ -1910,6 +1910,15 @@ class Q_Response
 	{
 		self::setCookie($name, '', 1, $path, null);
 		self::setCookie($name, '', 1, $path, true);
+		if (Q_Dispatcher::$startedResponse) {
+			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
+		}
+		$baseUrl = Q_Request::baseUrl();
+		if (!isset($path)) {
+			$path = parse_url($baseUrl, PHP_URL_PATH);
+		}
+		// see https://bugs.php.net/bug.php?id=38104
+		self::$cookiesToRemove[$name] = array('', 1, $path, array(true, null), false, false, null);
 	}
 	
 	/**
@@ -1926,7 +1935,12 @@ class Q_Response
 
 		foreach (self::$cookiesToRemove as $name => $args) {
 			list($path, $domain, $secure, $httponly, $samesite) = $args;
-			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly, $samesite);
+			if (!is_array($domain)) {
+				$domain = array($domain);
+			}
+			foreach ($domain as $d) {
+				self::_cookie($name, '', 1, $path, $d, $secure, $httponly, $samesite);
+			}
 		}
 		foreach (self::$cookies as $name => $args) {
 			list($value, $expires, $path, $domain, $secure, $httponly, $samesite) = $args;
