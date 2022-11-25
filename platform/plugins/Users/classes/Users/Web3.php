@@ -222,6 +222,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	{
 		list($appInfo, $provider) = self::objects($appId);
 		$provider->execute($callback);
+		$provider->batch(false);
 	}
 
 	/**
@@ -231,7 +232,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param
 	 * @return {array} array($appInfo, $provider)
 	 */
-	function objects($appId = null)
+	static function objects($appId = null)
 	{
 		if (!isset($appId)) {
 			$appId = Q::app();
@@ -255,11 +256,12 @@ class Users_Web3 extends Base_Users_Web3 {
 		);
 		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId'));
 		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
-			if (!empty(self::$providers[$rpcUrl])) {
-				$provider = self::$providers[$rpcUrl];
-			} else {
+			if (empty(self::$providers[$rpcUrl])) {
 				$requestManager = new HttpRequestManager($rpcUrl);
 				$provider = new HttpProvider($requestManager);
+				self::$providers[$rpcUrl] = $provider;
+			} else {
+				$provider = self::$providers[$rpcUrl];
 			}
 		} else {
 			$provider = null;
