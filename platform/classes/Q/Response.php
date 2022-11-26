@@ -1916,7 +1916,7 @@ class Q_Response
 			$path = parse_url($baseUrl, PHP_URL_PATH);
 		}
 		// see https://bugs.php.net/bug.php?id=38104
-		self::$cookiesToRemove[$name] = array('', 1, $path, array(true, null), false, false, null);
+		self::$cookiesToRemove[$name] = array($path, array(true, null), false, false);
 	}
 	
 	/**
