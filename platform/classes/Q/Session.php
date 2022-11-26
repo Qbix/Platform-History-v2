@@ -425,6 +425,7 @@ class Q_Session
 		if (ini_get("session.use_cookies")) {
 		    // note - we no use session_get_cookie_params();
 		    Q_Response::clearCookie(self::name());
+			Q_Response::clearCookie('Q_nonce');
 		}
 	}
 

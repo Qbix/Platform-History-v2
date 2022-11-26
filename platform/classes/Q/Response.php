@@ -1917,6 +1917,7 @@ class Q_Response
 		}
 		// see https://bugs.php.net/bug.php?id=38104
 		self::$cookiesToRemove[$name] = array($path, array(true, null), false, false);
+		unset(self::$cookies[$name]);
 	}
 	
 	/**
