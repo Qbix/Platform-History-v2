@@ -166,7 +166,7 @@ class Users_Vote extends Base_Users_Vote
 	 * @param {String} $name
 	 */
 	static function saveActivity ($type, $name) {
-		$user = Users::loggedInUser();
+		$user = Users::loggedInUser(false, false);
 		if (!$user) {
 			return;
 		}

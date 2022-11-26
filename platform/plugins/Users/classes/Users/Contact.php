@@ -225,6 +225,7 @@ class Users_Contact extends Base_Users_Contact
 			list($platform, $appId) = Users::platformApp($platformApp);
 			$user = Users_User::fetch($userId, true);
 			$xid = $user->getXid($platformApp);
+			$results = Users_ExternalFrom_Web3::
 			$results = Users_Web3::execute($pathABI, $xid, 'getAddresses');
 			// todo: construct artificial Users_Contact rows
 		}

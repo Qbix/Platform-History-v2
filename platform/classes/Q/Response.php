@@ -1908,8 +1908,6 @@ class Q_Response
 	 */
 	static function clearCookie($name, $path = null)
 	{
-		self::setCookie($name, '', 1, $path, null);
-		self::setCookie($name, '', 1, $path, true);
 		if (Q_Dispatcher::$startedResponse) {
 			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
 		}
