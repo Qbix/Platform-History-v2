@@ -305,7 +305,6 @@ class Q_Session
 				self::processDbInfo();
 				self::id($id);
 				self::savePath();
-				ini_set('session.use_cookies', 0);
 				session_start();
 				header_remove("Set-Cookie"); // we will set it ourselves, thank you
 				$started = true;
