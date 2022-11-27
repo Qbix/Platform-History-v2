@@ -150,7 +150,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         rateAmount: {value: "", hide: false, validate: ["notEmpty", "integer"]}
     },
     salesLinkTitle: function (address, callback) {
-        callback && callback(address);
+        Q.handle(callback, null, [address]);
     },
     salesLinkPattern: "sales/{{address}}",
     onMove: new Q.Event() // an event that the tool might trigger
@@ -198,7 +198,9 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                         var href = Q.url(tool.state.salesLinkPattern.interpolate({
                             address: data.list[i]
                         }));
-                        var link = $('<a />', {href: href}).html(title);
+                        var link = $('<a />', {href: href})
+                            .html(title)
+                            .activate();
                         var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
                             .append(link);
                         obj.prepend(tr);
