@@ -176,7 +176,10 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         if (obj.find('tr.Assets_NFT_sales_factory_item').length == 0) {
             obj.find('tr').hide();    // all defaults  like "there are no data  etc"
         }
-        obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="/test2/${item}">${item}</a></td></tr>`);
+        var href = Q.url(tool.state.salesLinkPattern.interpolate({
+            address: item
+        }));
+        obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="${href}">${item}</a></td></tr>`);
     },
     _whitelistRefresh: function(){
         var tool = this;
