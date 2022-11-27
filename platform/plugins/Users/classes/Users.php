@@ -435,7 +435,8 @@ abstract class Users extends Base_Users
 				}
 
 				// clear users_external_from for xid and for userId, because than we will add row for current user with current xid
-				$userExternalFroms = Users_ExternalFrom::select()->where(array(
+				$userExternalFroms = Users_ExternalFrom::select()
+				->where(array(
 					"platform" => $platform,
 					"appId" => $appIdForAuth,
 					"xid" => $xid
@@ -446,10 +447,14 @@ abstract class Users extends Base_Users
 				))->fetchDbRows();
 				foreach ($userExternalFroms as $userExternalFrom) {
 					$userExternalFrom->remove();
+					$otherUser = Users_User::fetch($userExternalFrom->userId);
+					$otherUser->clearXid($platformApp);
+					$otherUser->save();
 				}
 
 				// clear users_external_to for xid and for userId, because than we will add row for current user with current xid
-				$userExternalTos = Users_ExternalTo::select()->where(array(
+				$userExternalTos = Users_ExternalTo::delete()
+				->where(array(
 					"platform" => $platform,
 					"appId" => $appIdForAuth,
 					"xid" => $xid
@@ -457,7 +462,7 @@ abstract class Users extends Base_Users
 					"platform" => $platform,
 					"appId" => $appIdForAuth,
 					"userId" => $user->id
-				))->fetchDbRows();
+				))->execute();
 				foreach ($userExternalTos as $userExternalTo) {
 					$userExternalTo->remove();
 				}
