@@ -280,7 +280,7 @@ class Q_Utils
 		if (is_array($data)) {
 			$data = self::serialize($data);
 		}
-		return substr(self::hmac('sha256', $data, $secret), 0, 40);
+		return self::hmac('sha1', $data, $secret);
 	}
 
 	/**
