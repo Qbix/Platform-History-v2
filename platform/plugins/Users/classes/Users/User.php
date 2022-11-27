@@ -1370,7 +1370,8 @@ class Users_User extends Base_Users_User
 			if (!$dontInsertFutureUsers) {
 				$users[] = Users::futureUser($platformApp, $xid, $status);
 			} else {
-				$users[] = Users_User::from($platformApp, $xid);
+				$users[] = $user = Users_User::from($platformApp, $xid);
+				$status = $user ? 'verified' : 'missing';
 			}
 			$statuses[] = $status;
 		}

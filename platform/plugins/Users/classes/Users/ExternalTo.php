@@ -125,10 +125,12 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 	 */
 	static function fetchXidsByLabels($userId, $labels)
 	{
-		if (!is_string($labels) && !($labels instanceof Db_Range)) {
-			return new Q_Exception_WrongValue(array(
+		if (!is_string($labels)
+		&& !is_array($labels)
+		&& !($labels instanceof Db_Range)) {
+			throw new Q_Exception_WrongValue(array(
 				'field' => 'label',
-				'range' => 'string or Db_Range',
+				'range' => 'string, array or Db_Range',
 				'value' => $labels
 			));
 		}

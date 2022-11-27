@@ -223,7 +223,7 @@ class Users_Contact extends Base_Users_Contact
 		$nativeContacts = $query->fetchDbRows();
 
 		$results = Users_ExternalTo::fetchXidsByLabels($userId, $label);
-		$contacts = array();
+		$externalContacts = array();
 		foreach ($results as $platform => $platformResults) {
 			foreach ($platformResults as $appId => $xidsByLabels) {
 				foreach ($xidsByLabels as $label => $xids) {
