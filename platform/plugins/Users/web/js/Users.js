@@ -4390,53 +4390,55 @@
 		 */
 		getContract: Q.promisify(Q.getter(
 		function(contractABIName, contractAddress, callback) {
-			var chainId, address;
-			if (Q.isPlainObject(contractAddress)) {
-				chainId = contractAddress.chainId;
-				address = contractAddress.contractAddress;
-			} else {
-				address = contractAddress;
-			}
-			Q.Template.set(contractABIName, undefined, "abi.json");
-			Q.Template.render(contractABIName, function (err, json) {
-				try {
-					var ABI = JSON.parse(json);
-				} catch (e) {
-					return Q.handle(callback, null, [e]);
-				}
-				if (window.ethereum
-				&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
-					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
-				]))) {
-					_continue(ethereum);
+			Users.init.web3(function () {
+				var chainId, address;
+				if (Q.isPlainObject(contractAddress)) {
+					chainId = contractAddress.chainId;
+					address = contractAddress.contractAddress;
 				} else {
-					Web3.connect(function (err, provider) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-						if (!chainId || provider.chainId === chainId) {
-							_continue(provider);
-						} else {
-							var chain = Web3.chains[chainId];
-							Web3.switchChain(chain, function (err) {
-								if (Q.firstErrorMessage(err)) {
-									return Q.handle(callback, null, [err]);
-								}
-								_continue(provider);
-							});
-						}
-					});
+					address = contractAddress;
 				}
-				function _continue(provider) {
+				Q.Template.set(contractABIName, undefined, "abi.json");
+				Q.Template.render(contractABIName, function (err, json) {
 					try {
-						var signer = new ethers.providers.Web3Provider(provider).getSigner();
-						var contract = new ethers.Contract(address, ABI, signer);
-						contract.ABI = ABI;
-						Q.handle(callback, contract, [null, contract]);
-					} catch (err) {
-						Q.handle(callback, null, [err]);
-					};
-				}
+						var ABI = JSON.parse(json);
+					} catch (e) {
+						return Q.handle(callback, null, [e]);
+					}
+					if (window.ethereum
+					&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
+						'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
+					]))) {
+						_continue(ethereum);
+					} else {
+						Web3.connect(function (err, provider) {
+							if (err) {
+								return Q.handle(callback, null, [err]);
+							}
+							if (!chainId || provider.chainId === chainId) {
+								_continue(provider);
+							} else {
+								var chain = Web3.chains[chainId];
+								Web3.switchChain(chain, function (err) {
+									if (Q.firstErrorMessage(err)) {
+										return Q.handle(callback, null, [err]);
+									}
+									_continue(provider);
+								});
+							}
+						});
+					}
+					function _continue(provider) {
+						try {
+							var signer = new ethers.providers.Web3Provider(provider).getSigner();
+							var contract = new ethers.Contract(address, ABI, signer);
+							contract.ABI = ABI;
+							Q.handle(callback, contract, [null, contract]);
+						} catch (err) {
+							Q.handle(callback, null, [err]);
+						};
+					}
+				});
 			});
 		}, {
 			cache: Q.Cache.document("Users.Web3.getContract")
