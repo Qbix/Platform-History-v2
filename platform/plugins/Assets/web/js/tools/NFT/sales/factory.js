@@ -179,7 +179,9 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         var href = Q.url(tool.state.salesLinkPattern.interpolate({
             address: item
         }));
-        obj.prepend(`<tr class="Assets_NFT_sales_factory_item"><td><a href="${href}">${item}</a></td></tr>`);
+        $element = $(`<tr class="Assets_NFT_sales_factory_item"><td><a href="${href}">${item}</a></td></tr>`)
+            .prependTo(obj)
+            .activate();
     },
     _whitelistRefresh: function(){
         var tool = this;
