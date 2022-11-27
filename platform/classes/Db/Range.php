@@ -38,18 +38,9 @@ class Db_Range
 		$max = $this->max;
 		$includeMin = $this->includeMin;
 		$includeMax = $this->includeMax;
-		if ($includeMin and $includeMax) {
-			return "Db_Range($min <= ... <= $max)";
-		}
-		if (!$includeMin and $includeMax) {
-			return "Db_Range($min < ... <= $max)";
-		}
-		if ($includeMin and !$includeMax) {
-			return "Db_Range($min <= ... < $max)";
-		}
-		if (!$includeMin and !$includeMax) {
-			return "Db_Range($min < ... < $max)";
-		}	
+		$firstPart = isset($min) ? ($includeMin ? "$min <=" : "$min <") : '';
+		$secondPart = isset($max) ? ($includeMax ? "<= $max" : "< $max") : '';
+		return "$firstPart ... $secondPart";
 	}
 	/**
 	 * Minimal value of the range
