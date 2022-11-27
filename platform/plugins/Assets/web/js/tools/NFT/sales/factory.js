@@ -150,7 +150,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         rateAmount: {value: "", hide: false, validate: ["notEmpty", "integer"]}
     },
     salesLinkTitle: function (address, callback) {
-        Q.handle(callback, null, [address]);
+        Q.handle(callback, this, [address]);
     },
     salesLinkPattern: "sales/{{address}}",
     onMove: new Q.Event() // an event that the tool might trigger
@@ -176,13 +176,13 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         if (obj.find('tr.Assets_NFT_sales_factory_item').length == 0) {
             obj.find('tr').hide();    // all defaults  like "there are no data  etc"
         }
-        Q.handle(state.salesLinkTitle, null,
+        Q.handle(state.salesLinkTitle, tool,
         [item, function (title) {
             var href = Q.url(tool.state.salesLinkPattern.interpolate({
                 address: item
             }));
             var link = $('<a />', {href: href})
-                .html(title);
+                .append(title);
             var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
                 .append(link);
             obj.prepend(tr);
@@ -202,13 +202,13 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 obj.append(`<tr><td>There are no instances</td></tr>`);
             } else {
                 for (var i in data.list) {
-                    Q.handle(state.salesLinkTitle, null,
+                    Q.handle(state.salesLinkTitle, tool,
                     [data.list[i], function (title) {
                         var href = Q.url(tool.state.salesLinkPattern.interpolate({
                             address: data.list[i]
                         }));
                         var link = $('<a />', {href: href})
-                            .html(title);
+                            .append(title);
                         var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
                             .append(link);
                         obj.prepend(tr);
@@ -270,15 +270,15 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                         timeout: 5
                     });
                     tool._whitelistPush(instance);
-                    Q.handle(callback, null, [null, instance]);
+                    Q.handle(callback, tool, [null, instance]);
                 }, function(err){
                     console.log("err::txResponce.wait()");
-                    Q.handle(callback, null, [err.reason || err]);
+                    Q.handle(callback, tool, [err.reason || err]);
                 });
             });
         }).catch(function (err) {
             console.warn(err);
-            Q.handle(callback, null, [err.reason || err]);
+            Q.handle(callback, tool, [err.reason || err]);
         });
     },
     /**
