@@ -5234,7 +5234,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
 		var toolPlaceholder = _qtp[toolName];
-		function _loadToolScript_loaded(params, subjects) {
+		function _loadToolScript_loaded(params) {
 			// in this function, toolConstructor starts as a string
 			// and we expect the script to call Q.Tool.define()
 			if (params.html && !params.html[0] && params.html[1]
@@ -5263,7 +5263,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 					toolConstructor = function () { console.log("Missing tool constructor for " + toolName); }; 
 				}
 			}
-			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
+			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);
 		}
 		if (toolConstructor === undefined) {
 			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
@@ -5323,37 +5323,36 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				toolConstructor = { html: toolConstructor };
 			}
 		}
-		if (Q.isPlainObject(toolConstructor)) {
-			var toolConstructorSrc = toolConstructor.js || toolConstructor.html;
-			if (!toolConstructorSrc) {
-				throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
-			}
-			if (Q.Tool.latestNames[toolConstructorSrc]) {
-				Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
-				return _loadToolScript_loaded();
-			}
-			Q.Tool.latestName = null;
-			var pipe = Q.pipe(), waitFor = [];
-			if (toolConstructor.js) {
-				waitFor.push('js');
-				Q.addScript(toolConstructor.js, pipe.fill('js'));
-			}
-			if (toolConstructor.css) {
-				waitFor.push('css');
-				Q.addStylesheet(toolConstructor.css, pipe.fill('css'));
-			}
-			if (toolConstructor.html) {
-				waitFor.push('html');
-				Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
-			}
-			if (toolConstructor.text) {
-				waitFor.push('text');
-				Q.request.once(toolConstructor.text, pipe.fill('text'), { extend: false, parse: false });
-			}
-			pipe.add(waitFor, 1, _loadToolScript_loaded).run();
-		} else {
+		if (!Q.isPlainObject(toolConstructor)) {
 			throw new Q.Error("Q.Tool.loadScript: toolConstructor cannot be " + Q.typeOf(toolConstructor));
 		}
+		var toolConstructorSrc = toolConstructor.js || toolConstructor.html;
+		if (!toolConstructorSrc) {
+			throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
+		}
+		if (Q.Tool.latestNames[toolConstructorSrc]) {
+			Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
+			return _loadToolScript_loaded();
+		}
+		Q.Tool.latestName = null;
+		var pipe = Q.pipe(), waitFor = [];
+		if (toolConstructor.js) {
+			waitFor.push('js');
+			Q.addScript(toolConstructor.js, pipe.fill('js'));
+		}
+		if (toolConstructor.css) {
+			waitFor.push('css');
+			Q.addStylesheet(toolConstructor.css, pipe.fill('css'));
+		}
+		if (toolConstructor.html) {
+			waitFor.push('html');
+			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
+		}
+		if (toolConstructor.text) {
+			waitFor.push('text');
+			Q.Text.get(toolConstructor.text, pipe.fill('text'));
+		}
+		pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 	});
 }
 
@@ -10127,7 +10126,7 @@ function _activateTools(toolElement, options, shared) {
 	var toolId = Q.Tool.calculateId(toolElement.id);
 	_waitingParentStack.push(toolId); // wait for init of child tools
 	_loadToolScript(toolElement,
-	function _activateTools_doConstruct(toolElement, toolConstructor, toolName, uniqueToolId) {
+	function _activateTools_doConstruct(toolElement, toolConstructor, toolName, uniqueToolId, params) {
 		if (!_constructors[toolName]) {
 			_constructors[toolName] = function Q_Tool(element, options) {
 				// support re-entrancy of Q.activate
@@ -10154,6 +10153,9 @@ function _activateTools(toolElement, options, shared) {
 					this.constructor = toolConstructor;
 					Q.Tool.call(this, element, options);
 					this.state = Q.copy(this.options, toolConstructor.stateKeys);
+					if (params && params.text) {
+						this.text = params.text[1];
+					}
 					var prevTool = Q.Tool.beingActivated;
 					Q.Tool.beingActivated = this;
 					// Trigger events in some global event factories
