@@ -4462,12 +4462,20 @@
 				}
 				chainId = null;
 			}
-			if (!chainId || provider.chainId === chainId) {
+			if (!chainId) {
 				return _continue();
-			} else {
-				var chain = Web3.chains[chainId];
-				return Web3.switchChain(chain).then(_continue);
 			}
+			Web3.connect(function (err, provider) {
+				if (err) {
+					return Q.handle(callback, null, [err]);
+				}
+				if (provider.chainId === chainId) {
+					return _continue();
+				} else {
+					var chain = Web3.chains[chainId];
+					return Web3.switchChain(chain).then(_continue);
+				}
+			});
 			function _continue() {
 				return Web3.getChainId().then(function (chainId) {
 					var contracts = Web3.contracts[contractABIName];
