@@ -176,12 +176,18 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         if (obj.find('tr.Assets_NFT_sales_factory_item').length == 0) {
             obj.find('tr').hide();    // all defaults  like "there are no data  etc"
         }
-        var href = Q.url(tool.state.salesLinkPattern.interpolate({
-            address: item
-        }));
-        $element = $(`<tr class="Assets_NFT_sales_factory_item"><td><a href="${href}">${item}</a></td></tr>`)
-            .prependTo(obj)
-            .activate();
+        Q.handle(state.salesLinkTitle, null,
+        [item, function (title) {
+            var href = Q.url(tool.state.salesLinkPattern.interpolate({
+                address: item
+            }));
+            var link = $('<a />', {href: href})
+                .html(title);
+            var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
+                .append(link);
+            obj.prepend(tr);
+            link.activate();
+        }]);
     },
     _whitelistRefresh: function(){
         var tool = this;
@@ -196,17 +202,18 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 obj.append(`<tr><td>There are no instances</td></tr>`);
             } else {
                 for (var i in data.list) {
-                    state.salesLinkTitle(data.list[i], function (title) {
+                    Q.handle(state.salesLinkTitle, null,
+                    [data.list[i], function (title) {
                         var href = Q.url(tool.state.salesLinkPattern.interpolate({
                             address: data.list[i]
                         }));
                         var link = $('<a />', {href: href})
-                            .html(title)
-                            .activate();
+                            .html(title);
                         var tr = $('<tr class="Assets_NFT_sales_factory_item" />')
                             .append(link);
                         obj.prepend(tr);
-                    });
+                        link.activate();
+                    }]);
                 }
             }
         });
