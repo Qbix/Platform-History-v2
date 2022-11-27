@@ -1460,7 +1460,11 @@
 		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
-		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
+		"Assets/NFT/owned": {
+			js: "{{Assets}}/js/tools/NFT/owned.js",
+			css: "{{Assets}}/css/tools/NFT/owned.css",
+			text: "Assets/content"
+		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
 		"Assets/plan": "{{Assets}}/js/tools/plan.js",

@@ -20,23 +20,7 @@ var Assets = Q.Assets;
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
-	var tool = this;
-	var state = this.state;
-
-	var pipe = Q.pipe(['styles', 'texts'], function () {
-		tool.refresh();
-	});
-
-	Q.addStylesheet('{{Assets}}/css/tools/NFT/owned.css', pipe.fill("styles"), { slotName: 'Assets' });
-	Q.Text.get('Assets/content', function (err, text) {
-		var msg = Q.firstErrorMessage(err);
-		if (msg) {
-			return console.warn(msg);
-		}
-
-		tool.text = text.NFT;
-		pipe.fill("texts")();
-	});
+	this.refresh();
 },
 
 { // default options here
