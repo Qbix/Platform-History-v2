@@ -12,7 +12,17 @@
 
 interface Users_ExternalTo_Interface
 {
-
+	/**
+	 * Takes an array of suffixes in externalLabels,
+	 * and queries the external platform or cache.
+	 * Returns an array of (externalLabel => xids) pairs.
+	 * @method fetchXids
+	 * @param {array} $suffixes
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.pathABI] optionally override the default ABI
+	 * @return {array} externalLabel => array(xid, xid, ...)
+	 */
+	function fetchXids(array $suffixes, array $options = array());
 }
 
 /**
@@ -103,6 +113,68 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		$className = "Users_ExternalTo_$platform";
 		$row = new $className();
 		return $row->copyFrom($fields, $stripPrefix, false, false);
+	}
+
+	/**
+	 * Fetch xids from external platforms, 
+	 * @method fetchXidsByLabels
+	 * @static
+	 * @param {string} $userId
+	 * @param {string|array|Db_Range} $labels
+	 * @return {array} An array of (label => array(xid, xid, ...)) pairs
+	 */
+	static function fetchXidsByLabels($userId, $labels)
+	{
+		if (!is_string($labels) && !($labels instanceof Db_Range)) {
+			return new Q_Exception_WrongValue(array(
+				'field' => 'label',
+				'range' => 'string or Db_Range',
+				'value' => $labels
+			));
+		}
+		// $user = Users_User::fetch($userId, true);
+		// $xid = $user->getXid($platformApp);
+		$queries = array();
+		if ($labels instanceof Db_Range) {
+			list($platform, $appId, $min) = Users_Label::parseExternalLabel($labels->min);
+			list($p2, $a2, $max) = Users_Label::parseExternalLabel($labels->max);
+			if ($platform !== $p2 or $appId !== $a2) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'labels',
+					'range' => 'min and max have same prefix',
+					'value' => (string)$labels
+				));
+			}
+			if ($min and $max
+			and is_numeric($min) and is_numeric($max)) {
+				$min = $labels->includeMin ? $min : $min + 1;
+				$max = $labels->includeMax ? $max : $max - 1;;
+				for ($i = $min; $i <= $max; ++$i) {
+					$queries[$platform][$appId][] = $i;
+				}
+			}
+		}
+		if (is_string($labels)) {
+			$labels = array($labels);
+		}
+		if (is_array($labels)) {
+			foreach ($labels as $label) {
+				list($platform, $appId, $suffix) = Users_Label::parseExternalLabel($label);
+				if (isset($suffix)) {
+					$queries[$platform][$appId][] = $suffix;
+				}
+			}
+		}
+		$results = array();
+		foreach ($queries as $platformId => $platformQueries) {
+			foreach ($platformQueries as $appId => $suffixes) {
+				$externalTo = self::newRow(compact('userId', 'platform', 'appId'));
+				if (!isset($results[$platformId][$appId])) {
+					$results[$platformId][$appId] = $externalTo->fetchXids($suffixes);
+				}
+			}
+		}
+		return $results;
 	}
 	
 	/**

@@ -175,7 +175,8 @@ class Users_Contact extends Base_Users_Contact
 	}
 
 	/**
-	 * Retrieve array of contacts belonging to label
+	 * Retrieve array of contacts of userId under a label.
+	 * Now supports externalLabels of the form "<<< {{platform}}_{{appId}}/{{suffix}}"
 	 * @method fetch
 	 * @static
 	 * @param {string} $userId The user whose contacts to fetch
@@ -215,44 +216,32 @@ class Users_Contact extends Base_Users_Contact
 			$criteria['label'] = $label; // can be array, string, or range
 		}
 
-		$pathABI = Q::ifset($options, 'pathABI', 'Users/templates/R1/Community/contract');
-		if ($label instanceof Db_Range and
-		Q::startsWith($label->min, Users_Label::$externalPrefix . 'web3')) {
-			$strlen = strlen(Users_Label::$externalPrefix);
-			$tail = substr($label->min, $strlen);
-			$parts = explode('/', $tail);
-			$platformApp = $parts[0];
-			list($platform, $appId) = Users::platformApp($platformApp);
-			$user = Users_User::fetch($userId, true);
-			$xid = $user->getXid($platformApp);
-			$results = Users_ExternalFrom_Web3::
-			$results = Users_Web3::execute($pathABI, $xid, 'getAddresses');
-			// todo: construct artificial Users_Contact rows
-		}
-		if (!empty($results)) {
-			foreach ($results as $roleIndex => $xids) {
-				$contactUserIds = Users_User::idsFromPlatformXids(
-					$platform,
-					$appId,
-					$xids,
-					true
-				);
-				$contacts = array();
-				foreach ($contactUserIds as $contactUserId) {
-					$label = Users_Label::external($platform, $appId, $roleIndex);
-					$contacts[] = new Users_Contact(compact(
-						'userId', 'label', 'contactUserId'
-					));
-				}
-			}
-			return $contacts;
-		}
-
 		$query = Users_Contact::select()->where($criteria);
 		if ($limit) {
 			$query = $query->limit($limit, $offset);
 		}
-		return $query->fetchDbRows();
+		$nativeContacts = $query->fetchDbRows();
+
+		$results = Users_ExternalTo::fetchXidsByLabels($userId, $label);
+		$contacts = array();
+		foreach ($results as $platform => $platformResults) {
+			foreach ($platformResults as $appId => $xidsByLabels) {
+				foreach ($xidsByLabels as $label => $xids) {
+					$contactUserIds = Users_User::idsFromPlatformXids(
+						$platform,
+						$appId,
+						$xids,
+						true
+					);
+					foreach ($contactUserIds as $contactUserId) {
+						$externalContacts[] = new Users_Contact(compact(
+							'userId', 'label', 'contactUserId'
+						));
+					}
+				}
+			}
+		}
+		return array_merge($nativeContacts, $externalContacts);
 	}
 	
 	/**

@@ -1193,6 +1193,8 @@ class Users_User extends Base_Users_User
 	{
 		$xids = $this->getAllXids();
 		unset($xids[$platformApp]);
+		$platformApp = str_replace("\t", "_", $platformApp); // backwards compatibility
+		unset($xids[$platformApp]);
 		$this->xids = Q::json_encode($xids);
 	}
 	

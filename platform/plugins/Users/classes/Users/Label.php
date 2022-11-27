@@ -25,11 +25,40 @@ class Users_Label extends Base_Users_Label
 
 	/**
 	 * Return a label for Users_Label row, from a suffix.
+	 * @static
+	 * @param {string} $platform
+	 * @param {string} [$appId=null]
+	 * @param {string} [$suffix=null]
 	 * @return {string} of the form {{platform}}_{{app}}/{{suffix}}
 	 */
-	static function external($platform, $appId, $suffix)
+	static function external($platform, $appId = null, $suffix = null)
 	{
-		return self::$externalPrefix . $platform . '_' . $appId . '/' . $suffix;
+		$result = self::$externalPrefix . $platform;
+		if ($appId) {
+			$result .= '_' . $appId;
+		}
+		if ($suffix) {
+			$result .= '/' . $suffix;
+		}
+		return $result;
+	}
+
+	/**
+	 * Parse an external label into platform, appId, label
+	 * @method parseExternalLabel
+	 * @static
+	 * @param {string} $externalLabel must start with externalPrefix "<<<"
+	 * @return {array} of platform, appId, label
+	 */
+	static function parseExternalLabel($externalLabel)
+	{
+		if (!Q::startsWith($externalLabel, self::$externalPrefix)) {
+			return array(null, null, null);
+		}
+		$externalLabel = substr($externalLabel, strlen(self::$externalPrefix));
+		$parts1 = explode('_', $externalLabel);
+		$parts2 = explode('/', $parts1[1]);
+		return array($parts1[0], $parts2[0], $parts2[1]);
 	}
 
 	/**
