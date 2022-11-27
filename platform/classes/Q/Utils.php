@@ -252,9 +252,10 @@ class Q_Utils
 	 * Like regular ksort, but in-place sorts nested arrays recursively too
 	 * @param {&$array} The array to be sorted in-place
 	 * @param {integer} [$flags] like in ksort
-	 * @return 
+	 * @return {boolean} always returns true
 	 */
-	static function ksort(&$array, $flags = SORT_REGULAR) {
+	static function ksort(&$array, $flags = SORT_REGULAR)
+	{
 		foreach ($array as &$value) {
 			if (is_array($value)) {
 				self::ksort($value, $flags);
@@ -277,9 +278,9 @@ class Q_Utils
 			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
 		if (is_array($data)) {
-			$serialized = self::serialize($data);
+			$data = self::serialize($data);
 		}
-		return self::hmac('sha1', $data, $secret);
+		return substr(self::hmac('sha256', $data, $secret), 0, 40);
 	}
 
 	/**
