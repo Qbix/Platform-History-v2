@@ -108,6 +108,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 console.log("lockedContract=", lockedContract.address);
                 console.log("seriesId=", seriesId);
                 console.groupEnd();
+		$(tool.element).remove();
                 return;
             }
 
