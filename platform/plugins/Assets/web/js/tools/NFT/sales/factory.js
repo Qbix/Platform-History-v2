@@ -201,7 +201,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             if (!data || Q.isEmpty(data.list)) {
                 obj.append(`<tr><td>There are no instances</td></tr>`);
             } else {
-                Q.each(data.list, function (item) {
+                Q.each(data.list, function (i, item) {
                     Q.handle(state.salesLinkTitle, tool,
                     [item, function (title) {
                         var href = Q.url(tool.state.salesLinkPattern.interpolate({
