@@ -214,7 +214,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                         obj.prepend(tr);
                         link.activate();
                     }]);
-                }
+                });
             }
         });
     },
