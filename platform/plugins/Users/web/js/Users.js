@@ -4483,7 +4483,40 @@
 					return Web3.getContract(contractABIName, contractAddress, callback);
 				});
 			}
-		})
+		}),
+		parseMetamaskError: function (err, contracts) {
+            if (err.code != '-32603' || Q.isEmpty(err.data)) {
+				return err.message;
+			}
+			if (err.data.code != 3) {
+				// handle "Internal JSON-RPC error."
+				return (err.data.message);
+			}
+			//'execution reverted'
+			var str = '';
+			Q.each(contracts, function (i, contract) {
+				try {
+					let customErrorDescription = contract.interface.getError(
+						ethers.utils.hexDataSlice(err.data.data, 0, 4)
+					); // parsed
+					if (customErrorDescription) {
+						let decodedStr = ethers.utils.defaultAbiCoder.decode(
+							customErrorDescription.inputs.map(obj => obj.type),
+							ethers.utils.hexDataSlice(err.data.data, 4)
+						);
+						str = customErrorDescription.name +'('
+							+(decodedStr.length > 0 ? '"' + decodedStr.join('","') + '"' : '')
+							+')';
+						return false;
+					}
+				} catch (e) {}
+			});
+			if (Q.isEmpty(str)) {
+				// handle: revert("here string message")
+				return (err.data.message)
+			}
+			return (str);
+        }
 	};
 
 	/**
