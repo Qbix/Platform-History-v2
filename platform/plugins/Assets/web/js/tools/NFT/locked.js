@@ -76,6 +76,11 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
             $(tool.element).remove();
             return console.warn("Assets/NFT/locked", "NFTAddress required!");
         }
+	 
+	if (Q.isEmpty(state.seriesIdSource.seriesId) && Q.isEmpty(state.seriesIdSource.salesAddress)) {
+            $(tool.element).remove();
+            return console.warn("Assets/NFT/locked", "at least one of seriesIdSource option required!");
+        }
 
         Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()])
             .then(function (_ref) {
