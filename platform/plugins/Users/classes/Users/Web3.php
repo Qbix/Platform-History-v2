@@ -166,7 +166,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		$arguments[] = $transaction;
 		$arguments[] = $defaultBlock;
-		$arguments[] = $callback;
+		if (!$provider->isBatch) {
+			$arguments[] = $callback;
+		}
 		// call contract function
 		
 		call_user_func_array([$contract, "call"], $arguments);
