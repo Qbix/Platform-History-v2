@@ -50,19 +50,6 @@
 		"type": "event"
 	},
 	{
-		"inputs": [],
-		"name": "_doGetInstanceNFTcontract",
-		"outputs": [
-			{
-				"internalType": "address",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [
 			{
 				"internalType": "uint256[]",
@@ -83,6 +70,25 @@
 	{
 		"inputs": [],
 		"name": "implementationNFTSale",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "",
+				"type": "address"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "instanceAddress",
+				"type": "address"
+			}
+		],
+		"name": "instanceToNFTContract",
 		"outputs": [
 			{
 				"internalType": "address",
