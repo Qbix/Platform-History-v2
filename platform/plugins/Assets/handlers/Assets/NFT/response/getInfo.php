@@ -1,7 +1,7 @@
 <?php
 function Assets_NFT_response_getInfo ($params) {
 	$request = array_merge($_REQUEST, $params);
-	Q_Valid::requireFields(array('tokenId', 'chainId'), $request, true);
+	Q_Valid::requireFields(array('tokenId'), $request, true);
 
 	$tokenId = $request["tokenId"];
 	$chainId = $request["chainId"];
@@ -14,7 +14,7 @@ function Assets_NFT_response_getInfo ($params) {
 		$cacheDuration = null;
 	}
 	$longDuration = 31104000;
-	$chain = Assets_NFT::getChains($chainId);
+	$chain = $chainId ? Assets_NFT::getChains($chainId) : Assets_NFT::getDefaultChain();
 	$contractAddress = Q::ifset($request, "contractAddress", $chain["contract"]);
 	$tokenURI = Q::ifset($request, "tokenURI", null);
 	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/R1/NFT/contract");

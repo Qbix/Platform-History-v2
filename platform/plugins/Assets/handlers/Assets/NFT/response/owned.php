@@ -21,7 +21,7 @@ function Assets_NFT_response_owned ($params) {
 	$sources[] = array(
 		"address" => Q::ifset($request,"holder", "contractAddress", null),
 		"pathABI" => Q::ifset($request,"holder", "pathABI", "Assets/templates/R1/NFT/sales/contract"),
-		"custodian" => $accountAddress
+		"recipient" => $accountAddress
 	);
 	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
 	$glob = array();
@@ -114,7 +114,7 @@ function Assets_NFT_response_owned ($params) {
 				if (empty($tokens)) {
 					continue;
 				}
-				if ($source["custodian"]) {
+				if ($source["recipient"]) {
 					$dirtyTokens = $tokens;
 					$tokens = array();
 					$sourceABI = Users_Web3::getABI($source["pathABI"]);
@@ -122,7 +122,7 @@ function Assets_NFT_response_owned ($params) {
 					if ($tokenInfo) {
 						foreach ($dirtyTokens as $tokenId) {
 							$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"], true, $cacheDuration);
-							if (Q::ifset($tokenInfo, "custodian", null) == $source["custodian"]) {
+							if (Q::ifset($tokenInfo, "recipient", null) == $source["recipient"]) {
 								$tokens[] = array(
 									"tokenId" => $tokenId,
 									"secondsLeft" => Q::ifset($tokenInfo, "secondsLeft", null)
