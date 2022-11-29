@@ -114,7 +114,7 @@
 				"type": "uint64"
 			}
 		],
-		"name": "StillLocked",
+		"name": "StillPending",
 		"type": "error"
 	},
 	{
@@ -405,6 +405,30 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"name": "pending",
+		"outputs": [
+			{
+				"internalType": "address",
+				"name": "recipient",
+				"type": "address"
+			},
+			{
+				"internalType": "uint64",
+				"name": "untilTimestamp",
+				"type": "uint64"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "price",
 		"outputs": [
@@ -475,6 +499,19 @@
 				"internalType": "uint64",
 				"name": "",
 				"type": "uint64"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "remainingToBuyInCurrentInterval",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
@@ -582,7 +619,7 @@
 		"outputs": [
 			{
 				"internalType": "address",
-				"name": "custodian",
+				"name": "recipient",
 				"type": "address"
 			},
 			{
