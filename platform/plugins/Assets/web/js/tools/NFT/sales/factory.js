@@ -176,7 +176,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
         if (obj.find('tr.Assets_NFT_sales_factory_item').length == 0) {
             obj.find('tr').hide();    // all defaults  like "there are no data  etc"
         }
-        Q.handle(state.salesLinkTitle, tool,
+        Q.handle(tool.state.salesLinkTitle, tool,
         [item, function (title) {
             var href = Q.url(tool.state.salesLinkPattern.interpolate({
                 address: item
@@ -262,7 +262,10 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 autoindex, 
                 duration, 
                 rateInterval, 
-                rateAmount
+                rateAmount,
+                {
+                    gasLimit: 700000 // recent produce() transaction rounded up
+                }
             ).then(function(txResponse){
                 txResponse.wait().then(function(receipt){
                     let event = receipt.events.find(event => event.event === 'InstanceCreated');
@@ -279,7 +282,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 });
             });
         }).catch(function (err) {
-            var err = Q.Users.Web3.parseMetamaskError(err, [factoryContract])
+            err = Q.Users.Web3.parseMetamaskError(err, [factoryContract])
             console.warn(err);
             Q.handle(callback, tool, [err.reason || err]);
         });
