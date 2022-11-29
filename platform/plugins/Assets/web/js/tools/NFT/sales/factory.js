@@ -247,9 +247,11 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
     ) {
         var tool = this;
         var state = this.state;
+        var factoryContract = null;
             
         return Q.Users.Web3.getFactory('Assets/templates/R1/NFT/sales/factory')
         .then(function (contract) {
+            factoryContract = contract;
             return contract.produce(
                 NFTContract, 
                 seriesId, 
@@ -277,6 +279,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                 });
             });
         }).catch(function (err) {
+            var err = Q.Users.Web3.parseMetamaskError(err, [factoryContract])
             console.warn(err);
             Q.handle(callback, tool, [err.reason || err]);
         });
