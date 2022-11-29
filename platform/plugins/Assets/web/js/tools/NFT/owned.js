@@ -11,11 +11,12 @@ var Assets = Q.Assets;
  * @class Assets NFT/owned
  * @constructor
  * @param {Object} options Override various options for this tool
- * @param {string} [options.userId] - registered in app user id
- * @param {string} [options.accountAddress] - override users wallet address
- * @param {string} [options.chainId] - override chain id
- * @param {string} [options.contractAddress] - override contract address
- * @param {string} [options.pathABI] - path to ABI template.
+ * @param {string} options.accountAddress - either this or userId is required
+ * @param {string} options.userId - either this or accountAddress is required
+ * @param {string} [options.contractAddress] - Can override address of the NFT contract.
+ *    By default takes it from Q.Assets.NFT.Web3.chains[currentChainId].contract
+ * @param {string} [options.chainId] - by default, it will use the currently selected chain in the client
+ * @param {string} [options.pathABI] - override NFT contract ABI template, if necessary
  * @param {boolean} [options.skipCache=false] - whether to use cache for Web3 requests
  */
 
@@ -44,36 +45,53 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		var tool = this;
 		var state = this.state;
 
-		// add composer
-		//tool.createComposer();
+		new Promise(function (resolve, reject) {
+			if (state.chainId) {
+				resolve(state.chainId);
+			} else {
+				resolve(Q.Users.Web3.getChainId());
+			}
+		}).then(function (chainId) {
+			state.chainId = chainId;
+			var chains = Q.Assets.NFT.Web3.chains;
+			if (!chains[chainId] || !chains[chainId].contract) {
+				throw new Q.Exception("Assets/NFTowned: missing Q.Assets.NFT.Web3.chains[" + currentChainId + '].contract');
+			}
+			return chains[chainId].contract;
+		}).then(function (contractAddress) {
+			state.contractAddress = contractAddress;
 
-		var _onInvoke = function () {
-			var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
-			var infiniteTool = this;
+			// add composer
+			//tool.createComposer();
 
-			// skip duplicated (same offsets) requests
-			if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+			var _onInvoke = function () {
+				var offset = $(">.Assets_NFT_preview_tool:not(.Assets_NFT_composer):visible", tool.element).length;
+				var infiniteTool = this;
+
+				// skip duplicated (same offsets) requests
+				if (!isNaN(infiniteTool.state.offset) && infiniteTool.state.offset >= offset) {
+					return;
+				}
+
+				infiniteTool.setLoading(true);
+				infiniteTool.state.offset = offset;
+				tool.loadMore(offset, function () {
+					infiniteTool.setLoading(false);
+				});
+			};
+			var $scrollingParent = $(tool.element.scrollingParent());
+			var infiniteTool = Q.Tool.from($scrollingParent, "Q/infinitescroll");
+			if (infiniteTool) {
+				infiniteTool.state.offset = undefined;
+				infiniteTool.state.onInvoke.set(_onInvoke, tool);
+				$scrollingParent.trigger("scroll");
 				return;
 			}
 
-			infiniteTool.setLoading(true);
-			infiniteTool.state.offset = offset;
-			tool.loadMore(offset, function () {
-				infiniteTool.setLoading(false);
+			$scrollingParent.tool('Q/infinitescroll').activate(function () {
+				this.state.onInvoke.set(_onInvoke, tool);
+				$scrollingParent.trigger("scroll");
 			});
-		};
-		var $scrollingParent = $(tool.element.scrollingParent());
-		var infiniteTool = Q.Tool.from($scrollingParent, "Q/infinitescroll");
-		if (infiniteTool) {
-			infiniteTool.state.offset = undefined;
-			infiniteTool.state.onInvoke.set(_onInvoke, tool);
-			$scrollingParent.trigger("scroll");
-			return;
-		}
-
-		$scrollingParent.tool('Q/infinitescroll').activate(function () {
-			this.state.onInvoke.set(_onInvoke, tool);
-			$scrollingParent.trigger("scroll");
 		});
 	},
 	/**
