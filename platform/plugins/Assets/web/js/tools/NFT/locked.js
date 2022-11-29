@@ -166,6 +166,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
         refresh: function () {
             var tool = this;
             var state = tool.state;
+            var $toolElement = $(this.element);
 
             // if user login then
             Q.Template.render("Assets/NFT/locked", {}, function (err, html) {
@@ -178,20 +179,17 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         var nftContract = _ref[0];
                         var lockedContract = _ref[1];
 
-                        $('.Assets_NFT_locked_lockBtn', tool.element).hide();
-                        $('.Assets_NFT_locked_unlockBtn', tool.element).hide();
-
                         tool.lockedContractPromise().then(function (lockedContract) {
                             return lockedContract.isLocked(state.NFTAddress, state.tokenId);
                         }).then(function ([locked, custodian]) {
                             if (locked) {
                                 if (custodian.toLowerCase() == Q.Users.Web3.getSelectedXid().toLowerCase()) {
-                                    $('.Assets_NFT_locked_unlockBtn', tool.element).show();
+                                    $toolElement.attr("data-enabledLock", true);
                                 }
                             } else {
                                 nftContract.ownerOf(state.tokenId).then(function (owner) {
                                     if (owner.toLowerCase() == Q.Users.Web3.getSelectedXid().toLowerCase()) {
-                                        $('.Assets_NFT_locked_lockBtn', tool.element).show();
+                                        $toolElement.attr("data-enabledUnlock", true);
                                     }
                                 });
                             }

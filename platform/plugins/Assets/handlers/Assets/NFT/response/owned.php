@@ -15,9 +15,11 @@ function Assets_NFT_response_owned ($params) {
 	$sources = array();
 	$userId = Q::ifset($request, "owner", "userId", $loggedInUser->id);
 	$accountAddress = Q::ifset($request, "owner", "accountAddress", Users_Web3::getWalletByUserId($userId));
-	$sources[] = array(
-		"address" => $accountAddress,
-	);
+	if (!filter_var(Q::ifset($request, "onlyPending", false), FILTER_VALIDATE_BOOLEAN)) {
+		$sources[] = array(
+			"address" => $accountAddress,
+		);
+	}
 	$sources[] = array(
 		"address" => Q::ifset($request,"holder", "contractAddress", null),
 		"pathABI" => Q::ifset($request,"holder", "pathABI", "Assets/templates/R1/NFT/sales/contract"),

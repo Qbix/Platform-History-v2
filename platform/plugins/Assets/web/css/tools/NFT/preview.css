@@ -785,13 +785,11 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 .Assets_NFT_preview_tool .Assets_NFT_owner {
     height: 40px;
     position: relative;
-    top: -50px;
     overflow: unset;
 }
 .Assets_NFT_preview_tool .Assets_NFT_owner .Users_avatar_icon {
     border-radius: 50%;
     background-color: #fff;
-    display: block;
     margin: 0 auto;
 }
 .Assets_NFT_preview_tool .Assets_NFT_role .Users_avatar_icon {

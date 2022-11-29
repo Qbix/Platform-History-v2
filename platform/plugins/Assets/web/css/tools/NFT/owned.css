@@ -8,3 +8,8 @@
     width: 40px;
     height: 40px;
 }
+.Assets_NFT_owned_tool[data-empty=true] {
+    font-size: 1em;
+    font-style: italic;
+    opacity: .5;
+}
