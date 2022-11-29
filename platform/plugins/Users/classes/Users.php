@@ -453,7 +453,7 @@ abstract class Users extends Base_Users
 				}
 
 				// clear users_external_to for xid and for userId, because than we will add row for current user with current xid
-				$userExternalTos = Users_ExternalTo::delete()
+				Users_ExternalTo::delete()
 				->where(array(
 					"platform" => $platform,
 					"appId" => $appIdForAuth,
@@ -463,9 +463,6 @@ abstract class Users extends Base_Users
 					"appId" => $appIdForAuth,
 					"userId" => $user->id
 				))->execute();
-				foreach ($userExternalTos as $userExternalTo) {
-					$userExternalTo->remove();
-				}
 
 				// Now, let's associate the current user's account with this platform xid.
 				if (!$user->displayName()) {
