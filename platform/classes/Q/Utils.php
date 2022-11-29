@@ -126,6 +126,22 @@ class Q_Utils
 		return $result;
 	 }
 
+	 /**
+	 * Converts hex to ASCII
+	 * @method hex2urlencoded
+	 * @static
+	 * @param {string} $hex
+	 * @return {string}
+	 */
+	 static function hex2urlencoded($hex) {
+		$result = '';
+		$len = strlen($hex);
+		for ($i=0;$i<$len;$i+=2) {
+			$result .= '%'.substr($hex,$i,2);
+		}
+		return $result;
+	 }
+
 	/**
 	 * Converts arbitrary-precision decimal number to hex (without '0x')
 	 * @method dec2hex
