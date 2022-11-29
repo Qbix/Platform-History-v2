@@ -15,7 +15,7 @@ function Assets_NFT_response_owned ($params) {
 	$sources = array();
 	$userId = Q::ifset($request, "owner", "userId", $loggedInUser->id);
 	$accountAddress = Q::ifset($request, "owner", "accountAddress", Users_Web3::getWalletByUserId($userId));
-	if (!Q::ifset($request, "onlyPending", false)) {
+	if (!filter_var(Q::ifset($request, "onlyPending", false), FILTER_VALIDATE_BOOLEAN)) {
 		$sources[] = array(
 			"address" => $accountAddress,
 		);
