@@ -114,6 +114,10 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 
 			var NFTResults = response.slots.owned;
 
+			if (!offset && Q.isEmpty(NFTResults)) {
+				$(tool.element).attr("data-empty", true).html(tool.text.NFT.NoNFTyet);
+			}
+
 			Q.each(NFTResults, function (index, result) {
 				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", {
 					tokenId: result.tokenId,
