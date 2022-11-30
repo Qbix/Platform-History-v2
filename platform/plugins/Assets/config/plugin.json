@@ -298,6 +298,13 @@
 					"0x61": "0x0000000000000000000000000000000000000000",
 					"0x38": "0x0000000000000000000000000000000000000000"
 				},
+				"USDT": {
+					"symbol": "USDT",
+					"name": "Tether",
+					"decimals": 6,
+					"0x1": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+					"0x89": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"
+				},
 				"USDC": {
 					"symbol": "USDC",
 					"name": "USD Coin",
@@ -305,7 +312,8 @@
 					"0x4": "0xbaAeF3b2756F35F933A55EDcCd27338F74F18f9c",
 					"0x1": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
 					"0x38": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
-					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+					"0x89": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
 				},
 				"BUSD": {
 					"symbol": "BUSD",
@@ -314,7 +322,8 @@
 					"0x4": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x1": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x38": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
-					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49"
+					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49",
+					"0x89": "0xdab529f40e671a1d4bf91361c21bf9f0c9712ab7"
 				},
 				"ETH": {
 					"symbol": "ETH",
