@@ -1484,7 +1484,8 @@
 		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
 		"Assets/NFT/locked": {
 		    js: "{{Assets}}/js/tools/NFT/locked.js",
-		    css: "{{Assets}}/css/tools/NFT/locked.css"
+		    css: "{{Assets}}/css/tools/NFT/locked.css",
+			text: "Assets/content"
 		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
 		"Assets/web3/pay": "{{Assets}}/js/tools/web3/pay.js"

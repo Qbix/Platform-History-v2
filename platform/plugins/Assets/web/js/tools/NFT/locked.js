@@ -71,6 +71,7 @@
 Q.Tool.define("Assets/NFT/locked", function (options) {
         var tool = this;
         var state = tool.state;
+        tool.NFTpreview = Q.Tool.from($(this.element).closest(".Assets_NFT_preview_tool")[0], "Assets/NFT/preview");
 
         if (Q.isEmpty(state.NFTAddress)) {
             $(tool.element).remove();
@@ -236,7 +237,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                         txResponce.wait().then(function () {
                                             Q.Dialogs.pop();
                                             Q.Notices.add({
-                                                content: `Token with ID "${tokenId}" was locked successfully`,
+                                                content: tool.text.NFT.locked.TokenWasLocked.interpolate({"title": $(".Assets_NFT_title", tool.NFTpreview.element).html()}),
                                                 timeout: 5
                                             });
 
@@ -283,7 +284,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                         txResponce.wait().then(function () {
                                             Q.Dialogs.pop();
                                             Q.Notices.add({
-                                                content: `Token with ID "${tokenId}" was unlocked successfully`,
+                                                content: tool.text.NFT.locked.TokenWasUnlocked.interpolate({"title": $(".Assets_NFT_title", tool.NFTpreview.element).html()}),
                                                 timeout: 5
                                             });
 

@@ -512,36 +512,39 @@
 				"removeFromWhitelist": "Remove From Whitelist"
 			}
 		},
-	"locked": {
-		"form": {
-		"labels": {
-			"tokenId": "Token ID",
-			"custodian": "Custodian",
-			"recipient": "Recipient"
-		},
-		"small": {
-			"tokenId": "token id what need to lock or unlock",
-			"custodian": "address that can be able to unlock",
-			"recipient": "address that will receive the tokens"
-		}
-		},
-		"errors": {
-			"invalidTokenId": "Invalid tokenId",
-			"invalidCustodian": "Invalid Custodian",
-			"invalidRecipient": "Invalid Recipient"
-		},
-		"placeholders": {
-			"optional": "(optional)",
-			"tokenId": "id",
-			"custodian": "address"
-		},
-		"btn": {
+		"locked": {
+			"form": {
+				"labels": {
+					"tokenId": "Token ID",
+					"custodian": "Custodian",
+					"recipient": "Recipient"
+				},
+				"small": {
+					"tokenId": "token id what need to lock or unlock",
+					"custodian": "address that can be able to unlock",
+					"recipient": "address that will receive the tokens"
+				}
+			},
+			"errors": {
+				"invalidTokenId": "Invalid tokenId",
+				"invalidCustodian": "Invalid Custodian",
+				"invalidRecipient": "Invalid Recipient"
+			},
+			"placeholders": {
+				"optional": "(optional)",
+				"tokenId": "id",
+				"custodian": "address"
+			},
+			"btn": {
+				"Lock": "Lock",
+				"Unlock": "Unlock"
+			},
 			"Lock": "Lock",
-			"Unlock": "Unlock"
-		},
-		"Lock": "Lock",
-		"Unlock": "Unlock"
-	}
+			"Unlock": "Unlock",
+			"TokenWasClaimed": "Token \"{{title}}\" was claimed",
+			"TokenWasLocked": "Token \"{{title}}\" was locked",
+			"TokenWasUnlocked": "Token \"{{title}}\" was unlocked"
+		}
 	},
 	"currencies": {
 		"choose": "Choose a currency"
