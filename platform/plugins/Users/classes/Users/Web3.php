@@ -245,12 +245,12 @@ class Users_Web3 extends Base_Users_Web3 {
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
 		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "'Users/apps/$appId/chainId'"
+				'fieldpath' => "'Users/apps/web3/$appId/chainId'"
 			));
 		}
 		if (empty($appInfo['rpcUrl'])) {
 			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Users/apps/$appId/rpcUrl"
+				'fieldpath' => "Users/apps/web3/$appId/rpcUrl"
 			));
 		}
 		$infuraId = Q::ifset(

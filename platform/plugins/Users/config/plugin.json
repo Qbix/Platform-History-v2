@@ -113,7 +113,8 @@
 			"ios": ["token", "device", "logging", "secret", "ssl"],
 			"android": ["key", "secret"],
 			"amazon": ["key", "secret"],
-			"windows": ["key", "secret"]
+			"windows": ["key", "secret"],
+			"discourse": ["secret"]
 		},
 		"import": {
 			"facebook": [

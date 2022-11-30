@@ -1342,6 +1342,17 @@ class Q_Utils
 //			throw new Q_Exception_SendingToNode(array('method' => $data['Q/method']));
 //		}
 	}
+
+	/**
+	 * Like array_unique but handles an array of arrays
+	 * @method arrayUnique
+	 * @static
+	 * @param {array} $arr The input array
+	 * @return {array} An array with only unique elements, preserving the order of the input array
+	 */
+	static function arrayUnique($arr) {
+		return array_intersect_key($arr, array_unique(array_map('serialize', $arr)));
+	}
 	
 	/**
 	 * Unserializes session stored in PHP 5.2 and 5.3 format

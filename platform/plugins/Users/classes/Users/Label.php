@@ -24,21 +24,21 @@ class Users_Label extends Base_Users_Label
 	}
 
 	/**
-	 * Return a label for Users_Label row, from a suffix.
+	 * Return a label for Users_Label row, from a roleId.
 	 * @static
 	 * @param {string} $platform
 	 * @param {string} [$appId=null]
-	 * @param {string} [$suffix=null]
-	 * @return {string} of the form {{platform}}_{{app}}/{{suffix}}
+	 * @param {string} [$roleId=null]
+	 * @return {string} of the form {{platform}}_{{app}}/{{roleId}}
 	 */
-	static function external($platform, $appId = null, $suffix = null)
+	static function external($platform, $appId = null, $roleId = null)
 	{
 		$result = self::$externalPrefix . $platform;
 		if ($appId) {
 			$result .= '_' . $appId;
 		}
-		if ($suffix) {
-			$result .= '/' . $suffix;
+		if ($roleId) {
+			$result .= '/' . $roleId;
 		}
 		return $result;
 	}
@@ -57,8 +57,12 @@ class Users_Label extends Base_Users_Label
 		}
 		$externalLabel = substr($externalLabel, strlen(self::$externalPrefix));
 		$parts1 = explode('_', $externalLabel);
+		if (!isset($parts1[1])) {
+			return array($parts1[0], null, null);
+		}
 		$parts2 = explode('/', $parts1[1]);
-		return array($parts1[0], $parts2[0], $parts2[1]);
+		$roleId = isset($parts2[1]) ? $parts2[1] : null;
+		return array($parts1[0], $parts2[0], $roleId);
 	}
 
 	/**
