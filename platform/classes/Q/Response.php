@@ -1933,12 +1933,12 @@ class Q_Response
 		}
 
 		foreach (self::$cookiesToRemove as $name => $args) {
-			list($path, $domain, $secure, $httponly, $samesite) = $args;
+			list($path, $domain, $secure, $httponly) = $args;
 			if (!is_array($domain)) {
 				$domain = array($domain);
 			}
 			foreach ($domain as $d) {
-				self::_cookie($name, '', 1, $path, $d, $secure, $httponly, $samesite);
+				self::_cookie($name, '', 1, $path, $d, $secure, $httponly);
 			}
 		}
 		foreach (self::$cookies as $name => $args) {
