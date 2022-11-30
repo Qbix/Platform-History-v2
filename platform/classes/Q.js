@@ -748,12 +748,6 @@ Q.getter = function _Q_getter(original, options) {
 				// callbacks in position pos, and then decrement
 				// the throttle
 				return function _Q_getter_callback() {
-
-					// save the results in the cache
-					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(arguments2, cbpos, this, arguments);
-					}
-
 					// process waiting callbacks
 					var wk = _waiting[key];
 					delete _waiting[key];
@@ -768,6 +762,10 @@ Q.getter = function _Q_getter(original, options) {
 						}
 					}
 
+					// save the results in the cache
+					if (gw.cache && !ret.dontCache) {
+						gw.cache.set(arguments2, cbpos, this, arguments);
+					}
 					// tell throttle to execute the next function, if any
 					if (gw.throttle && gw.throttle.throttleNext) {
 						gw.throttle.throttleNext(this);
@@ -925,9 +923,10 @@ Q.chain = function (callbacks, callback) {
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
  * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
+ * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
- Q.promisify = function (getter, useThis) {
+ Q.promisify = function (getter, useThis, callbackIndex) {
 	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
@@ -940,9 +939,6 @@ Q.chain = function (callbacks, callback) {
 			} else {
 				found = true;
 				args.push(function _promisified(err, second) {
-					if (err) {
-						return reject(err);
-					}
 					try {
 						ai.apply(this, arguments);
 					} catch (e) {
@@ -956,12 +952,13 @@ Q.chain = function (callbacks, callback) {
 			}
 		}
 		if (!found) {
-			args.push(function _defaultCallback(err, second) {
+			var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
+			args[ci] = function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
 				resolve(useThis ? this : second);
-			});
+			};
 		}
 		var promise = new Q.Promise(function (r1, r2) {
 			resolve = r1;

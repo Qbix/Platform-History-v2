@@ -2305,9 +2305,6 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 			} else {
 				found = true;
 				args.push(function _promisified(err, second) {
-					if (err) {
-						return reject(err);
-					}
 					try {
 						ai.apply(this, arguments);
 					} catch (e) {
@@ -2321,10 +2318,8 @@ Q.promisify = function (getter, useThis, callbackIndex) {
 			}
 		});
 		if (!found) {
-			if (callbackIndex === undefined) {
-				callbackIndex = args.length;
-			}
-			args[callbackIndex] = function _defaultCallback(err, second) {
+			var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
+			args[ci] = function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
@@ -3679,7 +3674,6 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
- * @param {Q.Cache} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
@@ -3785,10 +3779,6 @@ Q.getter = function _Q_getter(original, options) {
 				// callbacks in position pos, and then decrement
 				// the throttle
 				return function _Q_getter_callback() {
-					// save the results in the cache
-					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(arguments2, cbpos, this, arguments);
-					}
 					// process waiting callbacks
 					var wk = _waiting[key];
 					delete _waiting[key];
@@ -3800,6 +3790,10 @@ Q.getter = function _Q_getter(original, options) {
 								console.warn(e);
 							}
 						}
+					}
+					// save the results in the cache
+					if (gw.cache && !ret.dontCache) {
+						gw.cache.set(arguments2, cbpos, this, arguments);
 					}
 					// tell throttle to execute the next function, if any
 					if (gw.throttle && gw.throttle.throttleNext) {
