@@ -215,16 +215,32 @@
 
 
                 var _dragElementTool = (function () {
-                    var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, maxX, maxY, diffX, diffY;
+                    var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, maxX, maxY, diffX, diffY, snappedTo;
                     var moveWithinRect;
             
                     function move(xpos, ypos) {
                         var currentTop = parseInt(_elementToMove.style.top, 10)
                         var currentLeft = parseInt(_elementToMove.style.left, 10)
-            
-                        _elementToMove.style.left = xpos + 'px';
-                        _elementToMove.style.top = ypos + 'px';
-            
+
+                        if(tool.state.snapToSidesOnly){
+                            if(snappedTo == 'right') {
+                                _elementToMove.style.top = ypos + 'px';
+                                _elementToMove.style.left = ((moveWithinRect.x + moveWithinRect.width) - eWi) + 'px';
+                                _elementToMove.style.left = ((moveWithinRect.x + moveWithinRect.width) - eWi) + 'px';
+                            } else if(snappedTo == 'bottom') {
+                                _elementToMove.style.top = ((moveWithinRect.y + moveWithinRect.height) - eHe) + 'px';
+                                _elementToMove.style.left = xpos + 'px';
+                            } else if(snappedTo == 'left') {
+                                _elementToMove.style.top = ypos + 'px';
+                                _elementToMove.style.left = moveWithinRect.x + 'px';
+                            } else if(snappedTo == 'top') {
+                                _elementToMove.style.left = xpos + 'px';
+                                _elementToMove.style.top = moveWithinRect.y + 'px';
+                            }
+                        } else {
+                            _elementToMove.style.left = xpos + 'px';
+                            _elementToMove.style.top = ypos + 'px';
+                        }
             
                         if (currentTop != parseInt(ypos, 10) || currentLeft != parseInt(xpos, 10)) tool.state.appliedRecently = true;
                         tool.events.dispatch('moving', { x: xpos, y: ypos });
@@ -235,12 +251,17 @@
                         if (tool.state.isResizing || (_isTouchScreen && (tool.state.isResizing || evt.touches.length != 1 || evt.changedTouches.length != 1 || evt.targetTouches.length != 1))) return;
                         evt = evt || window.event;
                         evt.preventDefault();
+                        //evt.stopPropagation();
             
                         posX = _isTouchScreen ? evt.changedTouches[0].clientX : evt.clientX;
                         posY = _isTouchScreen ? evt.changedTouches[0].clientY : evt.clientY;
             
                         var aX, aY;
             
+                        if(tool.state.snapToSidesOnly){
+                            snapToSides();
+                        }
+
                         aX = posX - diffX;
                         aY = posY - diffY;
             
@@ -297,6 +318,70 @@
                         }
             
                         move(aX, aY);
+                    }
+
+                    var snapToSides = function () {
+                        var toggleClass = function (className) {
+                            var classesArr = ['Q_resize_snapped_left', 'Q_resize_snapped_top', 'Q_resize_snapped_right', 'Q_resize_snapped_bottom'];
+                            for (var c in classesArr) {
+                                if(classesArr[c] != className && _elementToMove.classList.contains(classesArr[c])) _elementToMove.classList.remove(classesArr[c]);
+                            }
+
+                            if(className == 'Q_resize_snapped_bottom') {
+                                _elementToMove.style.top = '';
+                                _elementToMove.style.bottom = '';
+                            } else if(className == 'Q_resize_snapped_right') {
+                                _elementToMove.style.left = '';
+                                _elementToMove.style.right = '';
+                            } else if(className == 'Q_resize_snapped_top') {
+                                _elementToMove.style.bottom = '';
+                                _elementToMove.style.top = '';
+                            } else if(className == 'Q_resize_snapped_left') {
+                                _elementToMove.style.right = '';
+                                _elementToMove.style.left = '';
+                            }
+
+                            _elementToMove.style.height = '';
+                            _elementToMove.style.width = '';
+
+                            _elementToMove.classList.add(className);
+                            diffY = 0;
+
+                            eWi = parseInt(_elementToMove.offsetWidth);
+                            eHe = parseInt(_elementToMove.offsetHeight);
+
+                        }
+
+                        if(((maxX - posX) < (maxY - posY)) && ((maxX - posX) < posY) && ((maxX - posX) < posX)) {
+
+                            if(snappedTo != 'right') {
+                                toggleClass('Q_resize_snapped_right');
+                            }
+                            snappedTo = 'right';
+
+                        } else if(((maxY - posY) < (maxX - posX)) && ((maxY - posY) < posY) && ((maxY - posY) < posX)) {
+                            if(snappedTo != 'bottom') {
+                                toggleClass('Q_resize_snapped_bottom');
+                            }
+                            snappedTo = 'bottom';
+
+                        } else if((posX < (maxX - posX)) && (posX < posY) && (posX < (maxY - posY))) {
+
+                            if(snappedTo != 'left') {
+                                toggleClass('Q_resize_snapped_left');
+                            }
+                            snappedTo = 'left';
+
+                        } else if((posY < (maxX - posX)) && (posY < posX) && (posY < (maxY - posY))) {
+
+                            if(snappedTo != 'top') {
+                                toggleClass('Q_resize_snapped_top');
+                            }
+                            snappedTo = 'top';
+
+                        }
+
+                        tool.snappedTo = snappedTo;
                     }
             
                     function initMoving(evt) {
@@ -413,13 +498,25 @@
             
                     function initDragTool() {
                         var activateOnElement = tool.state.activateOnElement != null ? tool.state.activateOnElement : _elementToMove;
-                        activateOnElement.addEventListener('mousemove', function (e) {
-                            if (!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10) {
-                                console.log('befrore initMoving', !tool.state.isMoving, tool.pointerInfo.mouseIsPressed, distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10, tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY);
-                                initMoving(e);
+                        
+                        function prepareMoving() {
+                            var checkIfShouldInitMoving = function (e) {
+                                if (!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10) {
+                                    initMoving(e);
+                                }
                             }
-                        }, false);
-                        window.addEventListener('mouseup', stopMoving, true, true);
+                            var removeCheckIfShouldInitMovingListener = function () {
+                                activateOnElement.removeEventListener('mousemove', checkIfShouldInitMoving, false);
+                                window.removeEventListener('mouseup', removeCheckIfShouldInitMovingListener, true);
+                            }
+
+                            activateOnElement.addEventListener('mousemove', checkIfShouldInitMoving, false);
+                            window.addEventListener('mouseup', removeCheckIfShouldInitMovingListener, true);
+                        }
+                        
+                        activateOnElement.addEventListener('mousedown', prepareMoving)
+
+                        window.addEventListener('mouseup', stopMoving, true);
                     }
             
                     return {
@@ -482,9 +579,7 @@
                                 height: elementRect.height
                             };
                         }
-            
-                        console.log('elementRect', elementRect)
-            
+                        
                         _handle = e.target;
             
                         originalWidth = parseFloat(getComputedStyle(_elementToResize, null).getPropertyValue('width').replace('px', ''));
@@ -515,13 +610,10 @@
                                 ratio = srcWidth / srcHeight;
                             }
             
-                            console.log('keepRatioBasedOnElement', srcWidth, srcHeight)
                             if ((ratio < 1 || priorityParam == 'height') && priorityParam != 'width') {
-                                console.log('keepRatioBasedOnElement if1')
             
                                 width = (height * ratio);
                             } else {
-                                console.log('keepRatioBasedOnElement if2')
                                 height = (width / ratio);
                             }
                         } else {
@@ -544,7 +636,6 @@
             
                         let width, height;
                         if (!e.altKey && !e.shiftKey) {
-                            console.log('startResizing:', _handlePosition)
                             if (_handlePosition == 'topleft') {
                                 let distToRightBorder = parseFloat(distance(elementRect.x, elementRect.y + (elementRect.height / 2), e.clientX, e.clientY).toFixed(0));
                                 let distToTopBorder = parseFloat(distance(elementRect.x + (elementRect.width / 2), elementRect.y, e.clientX, e.clientY).toFixed(0));
@@ -637,7 +728,6 @@
                                 } else {
                                     resizeBasedOn = resizeBasedOn;
                                 }
-                              console.log('resizeBasedOn', resizeBasedOn)
                                 width = originalWidth + (e.clientX - originalMouseX);
                                 height = originalHeight + (e.clientY - originalMouseY);
             
@@ -789,7 +879,6 @@
             
                         } else {
                             if (_handlePosition == 'middleright') {
-                                console.log('startResizing: alt:', _handlePosition)
                                 width = originalWidth + (e.clientX - originalMouseX);
             
                                 let snappedToRight = false;
@@ -801,21 +890,14 @@
                                 if (containerRect.right - elementRect.right < 10 && containerRect.right - e.clientX < 10 && containerRect.right - e.clientX > -10) {
                                     width = elementRect.width + (containerRect.right - elementRect.right);
                                     snappedToRight = true;
-                                }
-            
-                                //console.log(width, height);
-                                // console.log('e.clientX', e.clientX);
-            
+                                }            
             
                                 let fullWidth = tool.state.initialSize.width;
-                                console.log('tool.state.rightCrop aaa', tool.state.leftCrop)
             
                                 let currentLeftCrop = tool.state.leftCrop != null ? tool.state.leftCrop : 0;
                                 let currentWidthOfFullWidth = (width * 100 / fullWidth)
                                 tool.state.rightCrop = 100 - (currentWidthOfFullWidth + currentLeftCrop);
-            
-                                console.log('tool.state.rightCrop', tool.state.rightCrop, tool.state.leftCrop, currentLeftCrop)
-            
+                        
                                 if (Math.sign(tool.state.rightCrop) === -1) {
                                     tool.state.rightCrop = 0;
                                     return
@@ -835,7 +917,6 @@
                                 });
             
                             } else if (_handlePosition == 'middleleft') {
-                                console.log('startResizing: alt:', _handlePosition)
                                 height = originalHeight + (e.clientY - originalMouseY);
                                 width = originalWidth - (e.clientX - originalMouseX);
             
@@ -858,9 +939,6 @@
                                 let currentWidthOfFullWidth = (width * 100 / fullWidth)
                                 tool.state.leftCrop = 100 - (currentWidthOfFullWidth + currentRightCrop);
             
-                                console.log('tool.state.leftCrop aaa', currentWidthOfFullWidth, tool.state.leftCrop, currentRightCrop, (currentWidthOfFullWidth + tool.state.leftCrop + currentRightCrop))
-                                console.log('tool.state.leftCrop', tool.state.leftCrop)
-            
                                 if (Math.sign(tool.state.leftCrop) === -1) {
                                     tool.state.leftCrop = 0;
                                     return
@@ -880,7 +958,6 @@
                                 });
             
                             } else if (_handlePosition == 'middletop') {
-                                console.log('startResizing: alt', _handlePosition)
                                 height = originalHeight - (e.clientY - originalMouseY)
             
                                 let snapToLeft = elementRect.left - containerRect.left < 10 && e.clientX - containerRect.left < 10 && e.clientX - containerRect.left > -10;
@@ -911,7 +988,6 @@
                                     shiftKey: e.shiftKey
                                 });
                             } else if (_handlePosition == 'middlebottom') {
-                                console.log('startResizing: alt', _handlePosition)
                                 height = originalHeight + (e.clientY - originalMouseY)
             
                                 if (containerRect.bottom - elementRect.bottom < 10 && containerRect.bottom - e.clientY < 10 && containerRect.bottom - e.clientY > -10) {
@@ -935,7 +1011,6 @@
                                     shiftKey: e.shiftKey
                                 });
                             } else if (_handlePosition == 'bottomright') {
-                                console.log('startResizing: alt', _handlePosition)
                                 width = originalWidth + (e.clientX - originalMouseX);
                                 height = originalHeight + (e.clientY - originalMouseY)
             
@@ -967,7 +1042,6 @@
                                 });
             
                             } else if (_handlePosition == 'topright') {
-                                console.log('startResizing: alt', _handlePosition)
                                 width = originalWidth + (e.clientX - originalMouseX)
                                 height = originalHeight - (e.clientY - originalMouseY)
             
@@ -1007,7 +1081,6 @@
             
             
                             } else if (_handlePosition == 'topleft') {
-                                console.log('startResizing: alt', _handlePosition)
                                 width = originalWidth - (e.clientX - originalMouseX)
                                 height = originalHeight - (e.clientY - originalMouseY)
             
@@ -1050,7 +1123,6 @@
                                     shiftKey: e.shiftKey
                                 });
                             } else if (_handlePosition == 'bottomleft') {
-                                console.log('startResizing: alt', _handlePosition)
                                 height = originalHeight + (e.clientY - originalMouseY)
                                 width = originalWidth - (e.clientX - originalMouseX)
             
@@ -1246,33 +1318,26 @@
                         var elementPosition = _elementToResize.style.position;
                         if (_centerPosition == null) {
                             if (elementPosition == 'fixed') {
-                                console.log('onWheel 1')
                                 _centerPosition = elRect.left + elRect.width / 2;
                             } else if (elementPosition == 'absolute') {
-                                console.log('onWheel 2')
                                 _centerPosition = _elementToResize.offsetLeft + elRect.width / 2;
                             }
                         }
                         if (_centerPositionFromTop == null) {
                             if (elementPosition == 'fixed') {
-                                console.log('onWheel 3')
                                 _centerPositionFromTop = elRect.top + elRect.height / 2;
                             } else if (elementPosition == 'absolute') {
-                                console.log('onWheel 4')
                                 _centerPositionFromTop = _elementToResize.offsetTop + elRect.height / 2;
                             }
             
                         }
-            
-                        console.log('onWheel', _centerPosition, _centerPositionFromTop)
-            
+                        
                         //e = e || window.event;
                         //var currentTarget = document.elementFromPoint(e.clientX, e.clientY);
                         //if(__elementToResize == null) __elementToResize = e.target;
                         var elRect = _elementToResize.getBoundingClientRect();
                         //if(elRect.height >= window.innerHeight || elRect.width >= window.innerWidth) return;
                         var delta = e.deltaY || e.detail || e.wheelDelta;
-                        console.log('delta', delta);
                         //if (delta < 0) return
             
                         if (_latestScaleValue == null) _latestScaleValue = 1;
@@ -1287,7 +1352,6 @@
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
             
                         /*if (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth) {
-                            console.log('onWheel return 1')
             
                             _elementToResize.style.width = oldWidth + 'px';
                             _elementToResize.style.height = oldHeight + 'px';
@@ -1299,9 +1363,7 @@
                         var elRect = _elementToResize.getBoundingClientRect();
                         if (elementPosition == 'fixed' || elementPosition == 'absolute') {
                             _elementToResize.style.left = _centerPosition - (elRect.width / 2) + 'px';
-                            _elementToResize.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';
-                            console.log('onWheel letf top', _centerPosition - (elRect.width / 2), _centerPositionFromTop - (elRect.height / 2))
-            
+                            _elementToResize.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';            
                         }
             
                         var elementWidth = elRect.width;
@@ -1501,7 +1563,6 @@
                     }
             
                     if (e.type == 'touchmove' || e.type == 'mousemove') {
-                        //console.log('CAPTURE TOUCH MOVE',  e.clientY)
                         tool.pointerInfo.prevX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
                         tool.pointerInfo.prevY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
                         return;

@@ -5818,6 +5818,18 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     });
                 }
             }
+            function setUserGreeting(participant, callback) {
+                var userId = participant.identity != null ? participant.identity.split('\t')[0] : null;
+                if(userId != null){
+                    Q.Streams.get(userId, 'Streams/greeting/' + Q.Users.communityId, function () {
+                        if(!this || !this.fields) {
+                            console.warn('Error while getting Streams/user/firstName');
+                            return;
+                        }
+                        participant.greeting = this.fields.content;
+                    });
+                }
+            }
 
             function setUserAvatar(participant) {
                 log('setUserAvatar', participant);
@@ -5852,6 +5864,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 if(participant.sid == 'recording') return;
                 setRealName(participant);
                 setUserAvatar(participant);
+                setUserGreeting(participant);
                 screensRendering.onParticipantConnected(participant);
             });
 
@@ -5862,6 +5875,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
                 setUserAvatar(participant);
+                setUserGreeting(participant);
                 screensRendering.onParticipantConnected(participant);
 
                 if(WebRTCconference.initNegotiationState == 'ended') {
