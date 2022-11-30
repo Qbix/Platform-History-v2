@@ -9,6 +9,7 @@
         microphoneTransparent: '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>',
         disabledMicrophone: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>',
         microphoneRequest: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="67px" height="120px" viewBox="-0.508 0 67 120" enable-background="new -0.508 0 67 120" xml:space="preserve"> <defs> </defs> <path fill="#C12236" d="M33.201,0L33.201,0C43.911,0,52.59,8.681,52.59,19.39v45.68c0,10.707-8.679,19.389-19.389,19.389l0,0 c-10.708,0-19.39-8.682-19.39-19.389V19.39C13.812,8.682,22.493,0,33.201,0z"/> <path fill="#C12236" d="M58.67,42.229v23.289c0,14.063-11.402,25.467-25.469,25.467l0,0c-14.065,0-25.467-11.402-25.467-25.467l0,0 V42.229H0v23.759c0.002,16.838,12.61,31.01,29.334,32.973V111.4H13.812v7.733h38.78V111.4H37.071V98.96 c16.726-1.963,29.333-16.135,29.333-32.974V42.229H58.67z"/> </svg>',
+        broadcastIcon: '<svg version="1.1" id="Слой_1" x="0px" y="0px" width="100px" height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve" sodipodi:docname="live_controls.svg" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><defs id="defs5332" /><sodipodi:namedview id="namedview5330" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" showgrid="false" inkscape:zoom="4.13" inkscape:cx="25.786925" inkscape:cy="57.627119" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="Слой_1" /> <path opacity="0.2" d="m 49.834,0.755 c -27.018,0 -49,21.981 -49,49 0,27.019 21.98,48.999 49,48.999 27.018,0 49,-21.98 49,-48.999 10e-4,-27.018 -21.981,-49 -49,-49 z" id="path5325" style="display:inline;fill:#000000;fill-opacity:1" inkscape:label="path5325" /> <path id="path5327" style="display:inline;fill:#ffffff;fill-opacity:1" d="M 49.833985,-0.24414056 C 29.961494,-0.51707024 10.846836,12.428643 3.5353898,30.874613 -3.9535128,48.621333 0.18103675,70.465675 13.656255,84.23485 26.759913,98.339887 48.34947,103.52758 66.432231,96.922362 85.382298,90.471908 99.29856,71.726025 99.797245,51.685678 100.80835,32.216189 89.112873,12.96008 71.491929,4.694123 64.767472,1.4393628 57.303565,-0.25399325 49.833985,-0.24414056 Z M 49.152345,18.06836 c 5.356713,-0.148635 11.197873,1.929284 14.422069,6.321406 -1.270889,6.113602 -6.402739,-2.166034 -10.004286,-1.948224 -5.252898,-1.459697 -10.98386,0.410826 -14.802549,4.189318 -6.033589,0.240325 -0.07362,-6.467201 3.146466,-6.863392 2.272638,-1.027299 4.745159,-1.612658 7.2383,-1.699108 z m 0.628906,8.359375 c 3.604132,-1.153715 11.950685,5.223543 5.273438,6.162109 -3.243435,-3.525095 -8.080274,-2.105572 -11.421876,0.134766 -5.835524,-2.321006 3.597859,-7.016146 6.148438,-6.296875 z m 0.05469,7.896484 c 5.506084,0.798251 -0.500447,8.183301 -2.38086,2.96289 -0.420292,-1.467792 0.890976,-3.004586 2.38086,-2.96289 z m -29.369142,8.705079 c 19.578125,0 39.156251,0 58.734376,0 3.115058,0.82756 1.693244,4.455306 2.017579,6.82781 0,7.192163 0,14.384325 0,21.576487 -0.824546,3.11744 -4.453667,1.695245 -6.825858,2.019531 -17.975367,0 -35.950733,0 -53.926099,0 -3.115057,-0.827561 -1.693243,-4.455306 -2.017578,-6.82781 0,-7.192163 0,-14.384325 0,-21.576487 l 0.590937,-1.427213 1.426641,-0.592318 z m 2.021485,4.041015 c 0,7.447266 0,14.894532 0,22.341798 18.230468,0 36.460937,0 54.691405,0 0,-7.447266 0,-14.894532 0,-22.341798 -18.230468,0 -36.460937,0 -54.691405,0 z m 6.726562,2.44336 c 3.694915,1.239075 1.31116,6.59178 1.929692,9.725611 0.375651,1.32776 -0.991631,4.395577 1.210937,3.899436 3.181218,-1.380825 7.964894,2.642618 3.054015,3.851245 -3.058064,-0.04917 -9.168491,1.305878 -8.128233,-3.557634 0.09802,-4.303861 -0.258603,-8.667966 0.251957,-12.922464 0.339823,-0.589296 0.988236,-0.985016 1.681632,-0.996194 z m 12.38086,0.0098 c 3.776458,1.56531 1.384949,7.100387 2.036853,10.544311 -0.06225,1.961798 0.169314,3.955297 -0.09935,5.895143 -4.199347,3.606685 -4.05913,-3.345855 -3.804641,-6.233423 0.09188,-2.997799 -0.179777,-6.093193 0.138718,-9.030249 0.326999,-0.645073 0.946976,-1.214657 1.728416,-1.175782 z m 7.119141,0.0039 c 3.423796,0.859043 2.840718,7.403865 4.634298,8.7546 1.030292,-2.760347 2.837462,-12.325813 6.240702,-6.91085 C 58.206405,56.456813 56.57079,61.4925 54.669925,66.408232 50.039139,68.647011 50.4524,60.327903 48.7194,57.675478 48.521756,55.255806 44.709201,50.32393 48.714847,49.527373 Z m 18.416016,0.002 c 3.869357,-1.879423 7.570767,3.984178 2.074792,3.797324 -1.810089,-0.04731 -4.030947,-0.510697 -3.240808,2.039842 0.09501,1.876226 6.892646,0.596493 3.573682,4.483234 -2.277523,0.282471 -4.352289,-0.08693 -3.573682,2.821863 1.218702,1.463774 6.5719,-1.052135 6.242049,2.843224 -1.717327,2.304197 -10.727841,3.205318 -10.096713,-1.53576 0.0831,-4.512343 -0.327082,-9.095948 0.175018,-13.562959 1.069691,-1.485743 3.299722,-0.661366 4.845662,-0.886768 z" /></svg>',
         endCall: '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" viewBox="-0.291 -0.433 230 230" enable-background="new -0.291 -0.433 230 230"    xml:space="preserve">  <defs>  </defs>  <path fill="#FFFFFF" d="M114.422,228.845C51.33,228.845,0,177.514,0,114.422C0,51.33,51.33,0,114.422,0   s114.423,51.33,114.423,114.422C228.845,177.514,177.515,228.845,114.422,228.845z M114.422,9.315   C56.466,9.315,9.315,56.466,9.315,114.422s47.151,105.107,105.107,105.107c57.957,0,105.107-47.151,105.107-105.107   S172.379,9.315,114.422,9.315z"/>  <path fill-rule="evenodd" clip-rule="evenodd" fill="#FFFFFF" d="M48.375,111.046c-0.664,1.316-1.611,2.92-2.065,4.541   c-1.356,4.839-2.112,14.78,2.549,17.842c2.607,1.713,5.979,1.069,8.826,1.111c3.344,0.049,5.93,0.229,8.771,0.217   c4.818-0.021,13.588,1.619,16.644-2.956c3.33-4.986-0.959-9.42,2.013-14.331c2.396-3.958,9.311-5.427,13.066-6.184   c10.175-2.051,18.202-2.478,29.615-0.585c4.551,0.755,12.535,2.3,15.838,6.334c3.666,4.476-1.481,12.21,3.761,16.249   c2.694,2.077,6.099,1.577,9.13,1.575c3.183-0.003,5.826-0.139,8.682-0.122c5.307,0.032,13.455,2.128,16.858-2.832   c2.741-3.994,0.906-11.205,0.905-14.399c-0.158-1.169-0.457-2.3-0.898-3.393c-2.855-11.688-20.192-19.097-33.174-22.435   c-22.619-5.815-46.142-4.622-64.881-0.965c-1.395,0.218-2.752,0.578-4.071,1.079c-0.491-0.026-0.944,0.094-1.357,0.359   c-1.281,0.188-2.526,0.517-3.732,0.989c-8.698,3.484-17.809,5.413-24.858,15.118C49.383,108.49,48.274,110.399,48.375,111.046z"/> </svg>',
         dots: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">  <circle fill="#FFFFFF" cx="50.804" cy="16.167" r="10"/>  <circle fill="#FFFFFF" cx="50.804" cy="51.166" r="10"/>  <circle fill="#FFFFFF" cx="50.804" cy="86.166" r="10"/>  </svg>',
         screen: '<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.074 0.053 99.499 99.498" enable-background="new 0.074 0.053 99.499 99.498"    xml:space="preserve">  <rect x="27.102" y="34.876" fill="#FFFFFF" width="45.375" height="24.868"/>  <path fill="#FFFFFF" d="M49.822,0.053c-27.432,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.433,0,49.75-22.317,49.75-49.749C99.572,22.371,77.255,0.053,49.822,0.053z M76.494,63.377H53.436v5.196h5.43v3.75H40.782v-3.75   h5.43v-5.196h-23.06V31.281h53.343V63.377z"/>  </svg>',
@@ -157,6 +158,7 @@
                 tool.textChat().init();
                 tool.createSettingsPopup();
                 tool.createAudioSettingsPopup();
+                tool.createBroadcastPopup();
                 tool.participantsPopup().createList();
                 tool.initFbLiveInterface();
                 tool.initAdvancedLiveStreaming();
@@ -387,16 +389,32 @@
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
                 });
                 tool.WebRTCLib.event.on('videoTrackLoaded', function (e) {
-                    if (tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.sourcesInterface.update();
+                    console.log('tool.advancedLiveStreaming', tool.advancedLiveStreaming)
+                    if (tool.advancedLiveStreaming != null && tool.advancedLiveStreaming.scenesInterface) {
+                        let activeScene = tool.advancedLiveStreaming.scenesInterface.getActive()
+                        if(activeScene) activeScene.sourcesInterface.update();
+                    }
                 });
                 tool.WebRTCLib.event.on('audioTrackLoaded', function (e) {
-                    if (tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.sourcesInterface.update();
+                    console.log('tool.advancedLiveStreaming', tool.advancedLiveStreaming)
+                    if (tool.advancedLiveStreaming != null && tool.advancedLiveStreaming.scenesInterface) {
+                        let activeScene = tool.advancedLiveStreaming.scenesInterface.getActive()
+                        if(activeScene) activeScene.sourcesInterface.update();
+                    }
                 });
                 tool.WebRTCLib.event.on('participantConnected', function (e) {
-                    if (tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.sourcesInterface.update();
+                    console.log('tool.advancedLiveStreaming', tool.advancedLiveStreaming)
+                    if (tool.advancedLiveStreaming != null && tool.advancedLiveStreaming.scenesInterface) {
+                        let activeScene = tool.advancedLiveStreaming.scenesInterface.getActive()
+                        if(activeScene) activeScene.sourcesInterface.update();
+                    }
                 });
                 tool.WebRTCLib.event.on('participantDisconnected', function (e) {
-                    if (tool.advancedLiveStreaming != null) tool.advancedLiveStreaming.sourcesInterface.update();
+                    console.log('tool.advancedLiveStreaming', tool.advancedLiveStreaming)
+                    if (tool.advancedLiveStreaming != null && tool.advancedLiveStreaming.scenesInterface) {
+                        let activeScene = tool.advancedLiveStreaming.scenesInterface.getActive()
+                        if(activeScene) activeScene.sourcesInterface.update();
+                    }
                 });
 
                 tool.WebRTCLib.event.on('liveStreamingStarted', function (e) {
@@ -930,6 +948,17 @@
                 textChatBtnCon.appendChild(textChatCounterBadge);
                 controlBarCon.appendChild(textChatBtnCon);
 
+                var broadcastBtnCon = document.createElement('DIV');
+                broadcastBtnCon.className = 'Streams_webrtc_broadcast-control';
+                var broadcastBtn = document.createElement('DIV');
+                broadcastBtn.className = 'Streams_webrtc_broadcast-control-btn';
+                var broadcastBtnIcon = document.createElement('DIV');
+                broadcastBtnIcon.className = 'Streams_webrtc_broadcast-control-icon';
+                broadcastBtnIcon.innerHTML = icons.broadcastIcon;
+                broadcastBtnCon.appendChild(broadcastBtn);
+                broadcastBtnCon.appendChild(broadcastBtnIcon);
+                controlBarCon.appendChild(broadcastBtnCon);
+
                 var usersBtnCon = document.createElement('DIV');
                 usersBtnCon.className = 'Streams_webrtc_manage-users-btn';
                 var usersBtn = document.createElement('DIV');
@@ -974,6 +1003,7 @@
                 tool.speakerBtn = speakerBtn;
                 tool.microphoneBtn = microphoneBtn;
                 tool.textChatBtn = textChatBtn;
+                tool.broadcastBtn = broadcastBtn;
                 tool.usersBtn = usersBtn;
                 tool.usersBtnIcon = usersBtnIcon;
                 tool.usersCounter = counterBadge;
@@ -2142,6 +2172,621 @@
                         }
                     }());
 
+                    function show() {
+                        tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
+                    }
+
+                    function hide() {
+                        if (Q.info.isMobile) {
+                            tool.selectCameraDialogue().hide();
+                        } else {
+                            tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                        }
+
+                    }
+
+                    function createSettingsPopUp() {
+                        var settingsPopup = document.createElement('DIV');
+                        settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
+                        var settingsPopupInner = document.createElement('DIV');
+                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
+                        if (!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopupInner.appendChild(videoInputListSection.createVideoInputList());
+
+                        tool.settingsPopupEl = settingsPopup;
+                        settingsPopup.appendChild(settingsPopupInner);
+                        tool.cameraBtn.parentNode.appendChild(settingsPopup);
+
+                        videoInputListSection.loadCamerasList();
+
+                        if (!Q.info.isMobile && !Q.info.isTablet) {
+                            tool.cameraBtn.addEventListener('mouseenter', function (e) {
+                                tool.hideAllPopups();
+                                if (tool.hoverTimeout.settingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.settingsPopup);
+                                    tool.hoverTimeout.settingsPopup = null;
+                                }
+                                show();
+                            });
+
+                            tool.cameraBtn.addEventListener('mouseleave', function (e) {
+                                if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                }
+                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                    hide();
+                                }, 600)
+                            });
+
+                            settingsPopup.addEventListener('mouseenter', function (e) {
+
+                                if (tool.hoverTimeout.settingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.settingsPopup);
+                                    tool.hoverTimeout.settingsPopup = null;
+                                }
+                            })
+                            settingsPopup.addEventListener('mouseleave', function (e) {
+                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                    hide();
+                                }, 600)
+
+                            });
+
+                            _popUpResizeobserver = new ResizeObserver(function (entries) {
+
+                                let popupRect = settingsPopup.getBoundingClientRect();
+                                let windowHeight = window.innerHeight;
+
+                                let maxHeight;
+                                if (popupRect.top < 0) {
+                                    maxHeight = popupRect.bottom;
+                                } else if (popupRect.bottom > windowHeight) {
+                                    maxHeight = popupRect.bottom - windowHeight - popupRect.top;
+                                }
+
+                                for (let entry of entries) {
+                                    let height = entry.contentRect.height;
+                                    if (height > maxHeight) {
+                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
+                                        settingsPopupInner.style.overflowY = 'auto';
+                                    } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
+                                        settingsPopupInner.style.maxHeight = '';
+                                        settingsPopupInner.style.overflowY = '';
+                                    }
+                                }
+                            })
+
+                            _popUpResizeobserver.observe(settingsPopup)
+                        }
+
+                    }
+
+                    return {
+                        createSettingsPopUp: createSettingsPopUp,
+                        videoInputListSection: videoInputListSection,
+                        show: show,
+                        hide: hide
+                    }
+                }());
+
+                tool.settingsPopup.createSettingsPopUp();
+
+
+            },
+
+
+            /**
+             * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
+             * @method createSettingsPopup
+             */
+            createAudioSettingsPopup: function () {
+                var tool = this;
+
+                tool.audioSettingsPopup = (function () {
+                    var _audioinputListEl;
+                    var _audioOutputListEl;
+                    var _popUpResizeobserver;
+
+                    var audioOutputListSection = (function () {
+                        var _turnOffAudioOutputBtn;
+                        var _audioOutputListButtons = [];
+
+                        var ButtonInstance = function (data) {
+                            this.buttonEl = data.buttonEl;
+                            this.textEl = data.textEl;
+                            this.type = data.type;
+                            this.isActive = false;
+                            this.deviceId = data.deviceId;
+                            this.handler = data.handler.bind(this);
+                            this.makeActive = function () {
+                                if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
+                                if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
+                                this.isActive = true;
+                            };
+                            this.switchToRegularState = function () {
+                                if (this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.remove('Streams_webrtc_settings_popup_active');
+                                if (this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.remove('Streams_webrtc_disabled-radio');
+                                this.isActive = false;
+                            };
+                            this.show = function () {
+                                if (this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.remove('Streams_webrtc_hidden');
+                                this.switchToRegularState();
+                            };
+                            this.hide = function () {
+                                if (!this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.add('Streams_webrtc_hidden');
+                            };
+                            this.remove = function () {
+                                if (this.buttonEl.parentNode != null) this.buttonEl.parentNode.removeChild(this.buttonEl);
+                            };
+                        }
+
+                        function toggleRadioButton(buttonObj) {
+                            var deselectAudioInButtons = function () {
+                                for (var i in _audioOutputListButtons) {
+                                    if (_audioOutputListButtons[i] == buttonObj) continue;
+                                    _audioOutputListButtons[i].switchToRegularState();
+                                }
+                            }
+
+                            if (buttonObj.type == 'audio') {
+                                deselectAudioInButtons();
+                                if (_turnOffAudioOutputBtn) {
+                                    _turnOffAudioOutputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffAudioInput", tool.textes);
+                                    _turnOffAudioOutputBtn.switchToRegularState();
+                                }
+                            } else if (buttonObj.type == 'off') {
+                                deselectAudioInButtons();
+                                if (_turnOffAudioOutputBtn) {
+                                    _turnOffAudioOutputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.textes);
+                                }
+                            }
+
+                            if (typeof buttonObj == "undefined") return;
+
+                            buttonObj.makeActive();
+                        }
+                        tool.toggleAudioInputButtons = toggleRadioButton;
+
+                        function clearAudioOutputList() {
+                            for (var c in _audioOutputListButtons) {
+                                _audioOutputListButtons[c].remove();
+                            }
+                        }
+
+                        function checkIfSetSinkIdIsSupported() {
+                            var mediaElement = document.createElement('VIDEO');
+                            if ('setSinkId' in mediaElement) {
+                                return true;
+                            }
+                            return false;
+                        }
+
+                        function loadAudioOutputList() {
+                            tool.log('controls: loadAudioOutputList');
+                            _audioOutputListEl.innerHTML = '';
+                            if (!checkIfSetSinkIdIsSupported()) {
+                                var alertNoticeCon = document.createElement('DIV');
+                                alertNoticeCon.className = 'Streams_webrtc_notice_alert';
+                                alertNoticeCon.innerHTML = "Selecting output device is not supported in your browser";
+                                _audioOutputListEl.appendChild(alertNoticeCon);
+                                return;
+                            }
+
+                            var count = 1;
+
+                            clearAudioOutputList();
+
+                            tool.WebRTCLib.localMediaControls.audioOutputDevices().forEach(function (mediaDevice) {
+                                tool.log('controls: loadAudioOutputList', mediaDevice);
+                                var radioBtnItem = document.createElement('DIV');
+                                radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
+                                radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
+
+                                var textLabelCon = document.createElement('SPAN');
+                                textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
+                                var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count}`);
+                                var checkmark = document.createElement('SPAN');
+                                checkmark.className = 'Streams_webrtc_radio-checkmark';
+                                checkmark.innerHTML = icons.enabledSpeaker;
+                                textLabelCon.appendChild(textLabel);
+                                radioBtnItem.appendChild(textLabelCon);
+                                radioBtnItem.appendChild(checkmark);
+                                _audioOutputListEl.insertBefore(radioBtnItem, _audioOutputListEl.firstChild);
+
+                                var audioOutputItem = new ButtonInstance({
+                                    buttonEl: radioBtnItem,
+                                    textEl: textLabelCon,
+                                    type: 'audio',
+                                    deviceId: mediaDevice.deviceId,
+                                    handler: function (e) {
+                                        toggleRadioButton(audioOutputItem);
+
+                                        Q.Dialogs.pop();
+                                        tool.closeAllDialogues();
+
+                                        tool.WebRTCLib.localMediaControls.toggleAudioOutputs(mediaDevice, function () {
+                                            tool.updateControlBar();
+                                        }, function (e) {
+                                            if (_isiOSCordova) tool.showIosPermissionsInstructions('Audio');
+                                        })
+
+                                    }
+                                });
+
+                                _audioOutputListButtons.push(audioOutputItem);
+
+                                if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == mediaDevice.deviceId) {
+                                    toggleRadioButton(audioOutputItem);
+                                }
+
+                                radioBtnItem.addEventListener('mouseup', audioOutputItem.handler)
+                                count++;
+                            });
+
+                            //if(turnOnCameraItem.parentNode != null) turnOnCameraItem.parentNode.removeChild(turnOnCameraItem);
+                        }
+                        tool.loadAudioOutputList = loadAudioOutputList;
+
+                        function createAudioOutputList() {
+
+                            var audioOutputListCon = document.createElement('DIV');
+                            audioOutputListCon.className = 'Streams_webrtc_choose-output-device-con';
+
+                            let outputListTilte = document.createElement('DIV');
+                            outputListTilte.className = 'Streams_webrtc_choose-device-title';
+                            outputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.speakers", tool.textes);
+
+                            var audioOutputList = document.createElement('DIV');
+                            audioOutputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-output-audio';
+
+                            audioOutputListCon.appendChild(outputListTilte);
+                            audioOutputListCon.appendChild(audioOutputList);
+
+
+                            _audioOutputListEl = audioOutputList;
+                            return audioOutputListCon;
+                        }
+
+                        return {
+                            createAudioOutputList: createAudioOutputList,
+                            loadAudioOutputList: loadAudioOutputList
+                        }
+                    }());
+
+                    var audioInputListSection = (function () {
+                        var _turnOffAudioInputBtn;
+                        var _audioInputListButtons = [];
+
+                        var ButtonInstance = function (data) {
+                            this.buttonEl = data.buttonEl;
+                            this.textEl = data.textEl;
+                            this.type = data.type;
+                            this.isActive = false;
+                            this.deviceId = data.deviceId;
+                            this.handler = data.handler.bind(this);
+                            this.makeActive = function () {
+                                if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
+                                if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
+                                this.isActive = true;
+                            };
+                            this.switchToRegularState = function () {
+                                if (this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.remove('Streams_webrtc_settings_popup_active');
+                                if (this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.remove('Streams_webrtc_disabled-radio');
+                                this.isActive = false;
+                            };
+                            this.show = function () {
+                                if (this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.remove('Streams_webrtc_hidden');
+                                this.switchToRegularState();
+                            };
+                            this.hide = function () {
+                                if (!this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.add('Streams_webrtc_hidden');
+                            };
+                            this.remove = function () {
+                                if (this.buttonEl.parentNode != null) this.buttonEl.parentNode.removeChild(this.buttonEl);
+                            };
+                        }
+
+                        function toggleRadioButton(buttonObj) {
+                            var deselectAudioInButtons = function () {
+                                for (var i in _audioInputListButtons) {
+                                    if (_audioInputListButtons[i] == buttonObj) continue;
+                                    _audioInputListButtons[i].switchToRegularState();
+                                }
+                            }
+
+                            if (buttonObj.type == 'audio') {
+                                deselectAudioInButtons();
+                                _turnOffAudioInputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffAudioInput", tool.textes);
+                                _turnOffAudioInputBtn.switchToRegularState();
+                            } else if (buttonObj.type == 'off') {
+                                deselectAudioInButtons();
+                                _turnOffAudioInputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.textes);
+                            }
+
+                            if (typeof buttonObj == "undefined") return;
+
+                            buttonObj.makeActive();
+                        }
+                        tool.toggleAudioInputButtons = toggleRadioButton;
+
+                        function clearAudioInputList() {
+                            for (var c in _audioInputListButtons) {
+                                _audioInputListButtons[c].remove();
+                            }
+                        }
+
+                        function loadAudioInputList() {
+                            var count = 1;
+
+                            clearAudioInputList();
+
+                            tool.WebRTCLib.localMediaControls.audioInputDevices().forEach(function (mediaDevice) {
+                                tool.log('controls: loadAudioInputList', mediaDevice);
+                                var radioBtnItem = document.createElement('DIV');
+                                radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
+                                radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
+
+                                var textLabelCon = document.createElement('SPAN');
+                                textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
+                                var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count}`);
+                                var checkmark = document.createElement('SPAN');
+                                checkmark.className = 'Streams_webrtc_radio-checkmark';
+                                checkmark.innerHTML = icons.microphoneTransparent;
+                                textLabelCon.appendChild(textLabel);
+                                radioBtnItem.appendChild(textLabelCon);
+                                radioBtnItem.appendChild(checkmark);
+                                _audioinputListEl.insertBefore(radioBtnItem, _audioinputListEl.firstChild);
+
+                                var audioInputItem = new ButtonInstance({
+                                    buttonEl: radioBtnItem,
+                                    textEl: textLabelCon,
+                                    type: 'audio',
+                                    deviceId: mediaDevice.deviceId,
+                                    handler: function (e) {
+                                        if (!radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.add('Q_working');
+
+                                        var toggle = function () {
+                                            toggleRadioButton(audioInputItem);
+
+                                            Q.Dialogs.pop();
+                                            tool.closeAllDialogues();
+
+                                            tool.WebRTCLib.localMediaControls.toggleAudioInputs({ deviceId: mediaDevice.deviceId, groupId: mediaDevice.groupId }, function () {
+                                                if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
+                                                tool.updateControlBar();
+                                            }, function (e) {
+                                                if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
+                                                if (_isiOSCordova) tool.showIosPermissionsInstructions('Audio');
+                                            })
+                                        }
+
+                                        if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
+                                            if (tool.WebRTCLib.localMediaControls.cameraIsEnabled() || tool.giveCameraTimer != null) {
+                                                tool.WebRTCLib.localMediaControls.canITurnMicOn().then(function (result) {
+                                                    toggle();
+                                                });
+                                            } else {
+                                                tool.limits.selectMediaDialog(function (result) {
+                                                    if (result.audio && result.video) {
+                                                        tool.WebRTCLib.localMediaControls.canITurnCameraAndMicOn().then(function (result) {
+                                                            tool.settingsPopup.videoInputListSection.turnOnCamera();
+                                                            toggle();
+                                                        });
+
+                                                        /*tool.WebRTCLib.localMediaControls.canITurnMicOn().then(function(result) {
+                                                            toggle();
+                                                        });*/
+                                                    } else if (result.audio) {
+                                                        tool.WebRTCLib.localMediaControls.canITurnMicOn().then(function (result) {
+                                                            toggle();
+                                                        });
+                                                    }
+                                                }, function () {
+                                                    //if(radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
+                                                });
+                                            }
+
+                                        } else {
+                                            toggle();
+                                        }
+
+                                    }
+                                });
+
+                                _audioInputListButtons.push(audioInputItem);
+
+                                if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == mediaDevice.deviceId) {
+                                    toggleRadioButton(audioInputItem);
+                                }
+
+                                radioBtnItem.addEventListener('mouseup', audioInputItem.handler)
+                                count++;
+                            });
+
+                            //if(turnOnCameraItem.parentNode != null) turnOnCameraItem.parentNode.removeChild(turnOnCameraItem);
+                        }
+                        tool.loadAudioInputList = loadAudioInputList;
+
+                        function updateAudioInputList() {
+                            tool.log('controls: updateAudioInputList START', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
+                            let audioInputIsActive = false;
+                            tool.log('controls: updateAudioInputList: current ai device', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
+
+                            _audioInputListButtons.forEach(function (audioInputItem) {
+                                if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == audioInputItem.deviceId) {
+                                    toggleRadioButton(audioInputItem);
+                                    audioInputIsActive = true
+                                }
+
+                            });
+                            if (!audioInputIsActive) {
+                                tool.log('controls: updateAudioInputList: _turnOffAudioInputBtn');
+                                toggleRadioButton(_turnOffAudioInputBtn);
+                            }
+                        }
+                        tool.updateAudioInputList = updateAudioInputList;
+
+
+                        function createAudioInputList() {
+                            let audioinputListCon = document.createElement('DIV');
+                            audioinputListCon.className = 'Streams_webrtc_choose-input-audio-con';
+
+                            let inputListTilte = document.createElement('DIV');
+                            inputListTilte.className = 'Streams_webrtc_choose-device-title';
+                            inputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.microphone", tool.textes);;
+
+                            var audioinputList = document.createElement('DIV');
+                            audioinputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-audio-device';
+
+                            var turnOffradioBtnItem = document.createElement('DIV');
+                            turnOffradioBtnItem.className = 'Streams_webrtc_settings_popup_item Streams_webrtc_turn_video_off';
+                            turnOffradioBtnItem.dataset.deviceId = 'off';
+                            var textLabelCon = document.createElement('SPAN');
+                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text Streams_webrtc_turn_video_off_text';
+                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.textes));
+                            var checkmark = document.createElement('SPAN');
+                            checkmark.className = 'Streams_webrtc_radio-checkmark';
+                            checkmark.innerHTML = icons.switchOffCameras;
+                            textLabelCon.appendChild(textLabel);
+                            turnOffradioBtnItem.appendChild(textLabelCon);
+                            turnOffradioBtnItem.appendChild(checkmark);
+
+                            _turnOffAudioInputBtn = new ButtonInstance({
+                                buttonEl: turnOffradioBtnItem,
+                                textEl: textLabelCon,
+                                type: 'off',
+                                handler: function (e) {
+                                    toggleRadioButton(_turnOffAudioInputBtn);
+                                    tool.WebRTCLib.localMediaControls.disableAudio();
+                                    Q.Dialogs.pop();
+                                    tool.closeAllDialogues();
+                                    tool.updateControlBar();
+                                }
+                            });
+
+                            var localParticipant = tool.WebRTCLib.localParticipant();
+                            var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
+                                return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+                            }).length;
+                            if (enabledAudioTracks == 0 && localParticipant.audioStream == null) {
+                                toggleRadioButton(_turnOffAudioInputBtn);
+                            }
+
+                            audioinputList.appendChild(turnOffradioBtnItem);
+                            audioinputListCon.appendChild(inputListTilte);
+                            audioinputListCon.appendChild(audioinputList);
+
+                            turnOffradioBtnItem.addEventListener('mouseup', _turnOffAudioInputBtn.handler)
+
+                            _audioinputListEl = audioinputList;
+                            return audioinputListCon;
+                        }
+
+                        return {
+                            createAudioInputList: createAudioInputList,
+                            loadAudioInputList: loadAudioInputList
+                        }
+                    }());
+
+                    function createSettingsPopUp() {
+                        var settingsPopup = document.createElement('DIV');
+                        settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
+                        var settingsPopupInner = document.createElement('DIV');
+                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
+                        settingsPopupInner.appendChild(audioOutputListSection.createAudioOutputList());
+                        settingsPopupInner.appendChild(audioInputListSection.createAudioInputList());
+
+                        tool.audioSettingsPopupEl = settingsPopup;
+                        settingsPopup.appendChild(settingsPopupInner);
+                        tool.microphoneBtn.parentNode.appendChild(settingsPopup);
+
+                        audioOutputListSection.loadAudioOutputList();
+                        audioInputListSection.loadAudioInputList();
+
+                        tool.hoverTimeout = { settingsPopup: null, audioSettingsPopup: null, participantsPopup: null };
+                        if (!Q.info.isMobile && !Q.info.isTablet) {
+                            tool.microphoneBtn.addEventListener('mouseenter', function (e) {
+                                tool.hideAllPopups();
+                                if (tool.hoverTimeout.audioSettingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.audioSettingsPopup);
+                                    tool.hoverTimeout.audioSettingsPopup = null;
+                                }
+                                tool.microphoneBtn.parentNode.classList.add('Streams_webrtc_hover');
+                            });
+
+                            tool.microphoneBtn.addEventListener('mouseleave', function (e) {
+                                if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                }
+                                tool.hoverTimeout.audioSettingsPopup = setTimeout(function () {
+                                    tool.microphoneBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                                }, 600)
+                            });
+
+                            settingsPopup.addEventListener('mouseenter', function (e) {
+
+                                if (tool.hoverTimeout.audioSettingsPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.audioSettingsPopup);
+                                    tool.hoverTimeout.audioSettingsPopup = null;
+                                }
+                            })
+                            settingsPopup.addEventListener('mouseleave', function (e) {
+                                setTimeout(function () {
+                                    tool.microphoneBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                                }, 600)
+
+                            });
+
+
+                            _popUpResizeobserver = new ResizeObserver(function (entries) {
+
+                                let popupRect = settingsPopup.getBoundingClientRect();
+                                let windowHeight = window.innerHeight;
+                                let maxHeight;
+                                if (popupRect.top < 0) {
+                                    maxHeight = popupRect.bottom;
+                                } else if (popupRect.bottom > windowHeight) {
+                                    maxHeight = popupRect.bottom - windowHeight - popupRect.top;
+                                }
+                                for (let entry of entries) {
+                                    let height = entry.contentRect.height;
+                                    if (height > maxHeight) {
+                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
+                                        settingsPopupInner.style.overflowY = 'auto';
+                                    } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
+                                        settingsPopupInner.style.maxHeight = '';
+                                        settingsPopupInner.style.overflowY = '';
+                                    }
+                                }
+                            })
+
+                            _popUpResizeobserver.observe(settingsPopup)
+                        }
+
+                    }
+
+                    return {
+                        createSettingsPopUp: createSettingsPopUp,
+                        audioInputListSection: audioInputListSection
+                    }
+                }());
+
+                tool.audioSettingsPopup.createSettingsPopUp();
+
+
+            },
+
+            /**
+             * Create broadcast popup that appears while pointer hovers broadcast button on desktop/in modal box on mobile
+             * @method createBroadcastPopup
+             */
+             createBroadcastPopup: function () {
+                var tool = this;
+
+                tool.broadcastPopup = (function () {
+                    var _popUpResizeobserver;
+
                     var streamingAndRecordingSection = (function () {
                         var _streamingAndRecordingEl;
 
@@ -2890,11 +3535,11 @@
                                 if (tool.settingsPopup != null) tool.settingsPopup.hide();
                             })
                             manageStreamBtnCon.appendChild(manageStreamBtn);
-                            _streamingAndRecordingEl.appendChild(manageStreamBtnCon);
                             _streamingAndRecordingEl.appendChild(createStreamingLink());
                             _streamingAndRecordingEl.appendChild(createCustomRTMPlink());
                             _streamingAndRecordingEl.appendChild(createBroadcastingLink());
                             //_streamingAndRecordingEl.appendChild(createRecordingLink());
+                            _streamingAndRecordingEl.appendChild(manageStreamBtnCon);
 
                             return _streamingAndRecordingEl;
                         }
@@ -2904,61 +3549,59 @@
                     }());
 
                     function show() {
-                        tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
+                        console.log('show', tool.broadcastBtn.parentNode)
+                        tool.broadcastBtn.parentNode.classList.add('Streams_webrtc_hover');
                     }
 
                     function hide() {
                         if (Q.info.isMobile) {
                             tool.selectCameraDialogue().hide();
                         } else {
-                            tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
+                            tool.broadcastBtn.parentNode.classList.remove('Streams_webrtc_hover');
                         }
 
                     }
 
-                    function createSettingsPopUp() {
-                        var settingsPopup = document.createElement('DIV');
-                        settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
-                        var settingsPopupInner = document.createElement('DIV');
-                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
-                        if (!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopupInner.appendChild(videoInputListSection.createVideoInputList());
-                        settingsPopupInner.appendChild(streamingAndRecordingSection.createSection());
+                    function createPopUp() {
+                        var broadcastPopup = document.createElement('DIV');
+                        broadcastPopup.className = 'Streams_webrtc_popup-broadcast Streams_webrtc_popup-box';
+                        var broadcastPopupInner = document.createElement('DIV');
+                        broadcastPopupInner.className = 'Streams_webrtc_popup-broadcast-inner';
+                        broadcastPopupInner.appendChild(streamingAndRecordingSection.createSection());
 
-                        tool.settingsPopupEl = settingsPopup;
-                        settingsPopup.appendChild(settingsPopupInner);
-                        tool.cameraBtn.parentNode.appendChild(settingsPopup);
-
-                        videoInputListSection.loadCamerasList();
+                        tool.broadcastPopupEl = broadcastPopup;
+                        broadcastPopup.appendChild(broadcastPopupInner);
+                        tool.broadcastBtn.parentNode.appendChild(broadcastPopup);
 
                         if (!Q.info.isMobile && !Q.info.isTablet) {
-                            tool.cameraBtn.addEventListener('mouseenter', function (e) {
+                            tool.broadcastBtn.addEventListener('mouseenter', function (e) {
                                 tool.hideAllPopups();
-                                if (tool.hoverTimeout.settingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.settingsPopup);
-                                    tool.hoverTimeout.settingsPopup = null;
+                                if (tool.hoverTimeout.broadcastPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.broadcastPopup);
+                                    tool.hoverTimeout.broadcastPopup = null;
                                 }
                                 show();
                             });
 
-                            tool.cameraBtn.addEventListener('mouseleave', function (e) {
+                            tool.broadcastBtn.addEventListener('mouseleave', function (e) {
                                 if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
                                     e.stopPropagation();
                                     e.preventDefault();
                                 }
-                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                tool.hoverTimeout.broadcastPopup = setTimeout(function () {
                                     hide();
                                 }, 600)
                             });
 
-                            settingsPopup.addEventListener('mouseenter', function (e) {
+                            broadcastPopup.addEventListener('mouseenter', function (e) {
 
-                                if (tool.hoverTimeout.settingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.settingsPopup);
-                                    tool.hoverTimeout.settingsPopup = null;
+                                if (tool.hoverTimeout.broadcastPopup != null) {
+                                    clearTimeout(tool.hoverTimeout.broadcastPopup);
+                                    tool.hoverTimeout.broadcastPopup = null;
                                 }
                             })
-                            settingsPopup.addEventListener('mouseleave', function (e) {
-                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                            broadcastPopup.addEventListener('mouseleave', function (e) {
+                                tool.hoverTimeout.broadcastPopup = setTimeout(function () {
                                     hide();
                                 }, 600)
 
@@ -2966,7 +3609,7 @@
 
                             _popUpResizeobserver = new ResizeObserver(function (entries) {
 
-                                let popupRect = settingsPopup.getBoundingClientRect();
+                                let popupRect = broadcastPopup.getBoundingClientRect();
                                 let windowHeight = window.innerHeight;
 
                                 let maxHeight;
@@ -2979,536 +3622,31 @@
                                 for (let entry of entries) {
                                     let height = entry.contentRect.height;
                                     if (height > maxHeight) {
-                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
-                                        settingsPopupInner.style.overflowY = 'auto';
-                                    } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
-                                        settingsPopupInner.style.maxHeight = '';
-                                        settingsPopupInner.style.overflowY = '';
+                                        broadcastPopupInner.style.maxHeight = maxHeight + 'px';
+                                        broadcastPopupInner.style.overflowY = 'auto';
+                                    } else if (height < maxHeight && broadcastPopupInner.style.maxHeight != '' && broadcastPopupInner.style.maxHeight != null) {
+                                        broadcastPopupInner.style.maxHeight = '';
+                                        broadcastPopupInner.style.overflowY = '';
                                     }
                                 }
                             })
 
-                            _popUpResizeobserver.observe(settingsPopup)
+                            _popUpResizeobserver.observe(broadcastPopup)
                         }
 
                     }
 
                     return {
-                        createSettingsPopUp: createSettingsPopUp,
-                        videoInputListSection: videoInputListSection,
+                        createPopUp: createPopUp,
                         show: show,
                         hide: hide
                     }
                 }());
 
-                tool.settingsPopup.createSettingsPopUp();
+                tool.broadcastPopup.createPopUp();
 
 
             },
-
-
-            /**
-             * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
-             * @method createSettingsPopup
-             */
-            createAudioSettingsPopup: function () {
-                var tool = this;
-
-                tool.audioSettingsPopup = (function () {
-                    var _audioinputListEl;
-                    var _audioOutputListEl;
-                    var _popUpResizeobserver;
-
-                    var audioOutputListSection = (function () {
-                        var _turnOffAudioOutputBtn;
-                        var _audioOutputListButtons = [];
-
-                        var ButtonInstance = function (data) {
-                            this.buttonEl = data.buttonEl;
-                            this.textEl = data.textEl;
-                            this.type = data.type;
-                            this.isActive = false;
-                            this.deviceId = data.deviceId;
-                            this.handler = data.handler.bind(this);
-                            this.makeActive = function () {
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
-                                this.isActive = true;
-                            };
-                            this.switchToRegularState = function () {
-                                if (this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.remove('Streams_webrtc_settings_popup_active');
-                                if (this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.remove('Streams_webrtc_disabled-radio');
-                                this.isActive = false;
-                            };
-                            this.show = function () {
-                                if (this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.remove('Streams_webrtc_hidden');
-                                this.switchToRegularState();
-                            };
-                            this.hide = function () {
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.add('Streams_webrtc_hidden');
-                            };
-                            this.remove = function () {
-                                if (this.buttonEl.parentNode != null) this.buttonEl.parentNode.removeChild(this.buttonEl);
-                            };
-                        }
-
-                        function toggleRadioButton(buttonObj) {
-                            var deselectAudioInButtons = function () {
-                                for (var i in _audioOutputListButtons) {
-                                    if (_audioOutputListButtons[i] == buttonObj) continue;
-                                    _audioOutputListButtons[i].switchToRegularState();
-                                }
-                            }
-
-                            if (buttonObj.type == 'audio') {
-                                deselectAudioInButtons();
-                                if (_turnOffAudioOutputBtn) {
-                                    _turnOffAudioOutputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffAudioInput", tool.textes);
-                                    _turnOffAudioOutputBtn.switchToRegularState();
-                                }
-                            } else if (buttonObj.type == 'off') {
-                                deselectAudioInButtons();
-                                if (_turnOffAudioOutputBtn) {
-                                    _turnOffAudioOutputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.textes);
-                                }
-                            }
-
-                            if (typeof buttonObj == "undefined") return;
-
-                            buttonObj.makeActive();
-                        }
-                        tool.toggleAudioInputButtons = toggleRadioButton;
-
-                        function clearAudioOutputList() {
-                            for (var c in _audioOutputListButtons) {
-                                _audioOutputListButtons[c].remove();
-                            }
-                        }
-
-                        function checkIfSetSinkIdIsSupported() {
-                            var mediaElement = document.createElement('VIDEO');
-                            if ('setSinkId' in mediaElement) {
-                                return true;
-                            }
-                            return false;
-                        }
-
-                        function loadAudioOutputList() {
-                            tool.log('controls: loadAudioOutputList');
-                            _audioOutputListEl.innerHTML = '';
-                            if (!checkIfSetSinkIdIsSupported()) {
-                                var alertNoticeCon = document.createElement('DIV');
-                                alertNoticeCon.className = 'Streams_webrtc_notice_alert';
-                                alertNoticeCon.innerHTML = "Selecting output device is not supported in your browser";
-                                _audioOutputListEl.appendChild(alertNoticeCon);
-                                return;
-                            }
-
-                            var count = 1;
-
-                            clearAudioOutputList();
-
-                            tool.WebRTCLib.localMediaControls.audioOutputDevices().forEach(function (mediaDevice) {
-                                tool.log('controls: loadAudioOutputList', mediaDevice);
-                                var radioBtnItem = document.createElement('DIV');
-                                radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
-                                radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
-
-                                var textLabelCon = document.createElement('SPAN');
-                                textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                                var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count}`);
-                                var checkmark = document.createElement('SPAN');
-                                checkmark.className = 'Streams_webrtc_radio-checkmark';
-                                checkmark.innerHTML = icons.enabledSpeaker;
-                                textLabelCon.appendChild(textLabel);
-                                radioBtnItem.appendChild(textLabelCon);
-                                radioBtnItem.appendChild(checkmark);
-                                _audioOutputListEl.insertBefore(radioBtnItem, _audioOutputListEl.firstChild);
-
-                                var audioOutputItem = new ButtonInstance({
-                                    buttonEl: radioBtnItem,
-                                    textEl: textLabelCon,
-                                    type: 'audio',
-                                    deviceId: mediaDevice.deviceId,
-                                    handler: function (e) {
-                                        toggleRadioButton(audioOutputItem);
-
-                                        Q.Dialogs.pop();
-                                        tool.closeAllDialogues();
-
-                                        tool.WebRTCLib.localMediaControls.toggleAudioOutputs(mediaDevice, function () {
-                                            tool.updateControlBar();
-                                        }, function (e) {
-                                            if (_isiOSCordova) tool.showIosPermissionsInstructions('Audio');
-                                        })
-
-                                    }
-                                });
-
-                                _audioOutputListButtons.push(audioOutputItem);
-
-                                if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == mediaDevice.deviceId) {
-                                    toggleRadioButton(audioOutputItem);
-                                }
-
-                                radioBtnItem.addEventListener('mouseup', audioOutputItem.handler)
-                                count++;
-                            });
-
-                            //if(turnOnCameraItem.parentNode != null) turnOnCameraItem.parentNode.removeChild(turnOnCameraItem);
-                        }
-                        tool.loadAudioOutputList = loadAudioOutputList;
-
-                        function createAudioOutputList() {
-
-                            var audioOutputListCon = document.createElement('DIV');
-                            audioOutputListCon.className = 'Streams_webrtc_choose-output-device-con';
-
-                            let outputListTilte = document.createElement('DIV');
-                            outputListTilte.className = 'Streams_webrtc_choose-device-title';
-                            outputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.speakers", tool.textes);
-
-                            var audioOutputList = document.createElement('DIV');
-                            audioOutputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-output-audio';
-
-                            audioOutputListCon.appendChild(outputListTilte);
-                            audioOutputListCon.appendChild(audioOutputList);
-
-
-                            _audioOutputListEl = audioOutputList;
-                            return audioOutputListCon;
-                        }
-
-                        return {
-                            createAudioOutputList: createAudioOutputList,
-                            loadAudioOutputList: loadAudioOutputList
-                        }
-                    }());
-
-                    var audioInputListSection = (function () {
-                        var _turnOffAudioInputBtn;
-                        var _audioInputListButtons = [];
-
-                        var ButtonInstance = function (data) {
-                            this.buttonEl = data.buttonEl;
-                            this.textEl = data.textEl;
-                            this.type = data.type;
-                            this.isActive = false;
-                            this.deviceId = data.deviceId;
-                            this.handler = data.handler.bind(this);
-                            this.makeActive = function () {
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
-                                this.isActive = true;
-                            };
-                            this.switchToRegularState = function () {
-                                if (this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.remove('Streams_webrtc_settings_popup_active');
-                                if (this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.remove('Streams_webrtc_disabled-radio');
-                                this.isActive = false;
-                            };
-                            this.show = function () {
-                                if (this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.remove('Streams_webrtc_hidden');
-                                this.switchToRegularState();
-                            };
-                            this.hide = function () {
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.add('Streams_webrtc_hidden');
-                            };
-                            this.remove = function () {
-                                if (this.buttonEl.parentNode != null) this.buttonEl.parentNode.removeChild(this.buttonEl);
-                            };
-                        }
-
-                        function toggleRadioButton(buttonObj) {
-                            var deselectAudioInButtons = function () {
-                                for (var i in _audioInputListButtons) {
-                                    if (_audioInputListButtons[i] == buttonObj) continue;
-                                    _audioInputListButtons[i].switchToRegularState();
-                                }
-                            }
-
-                            if (buttonObj.type == 'audio') {
-                                deselectAudioInButtons();
-                                _turnOffAudioInputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffAudioInput", tool.textes);
-                                _turnOffAudioInputBtn.switchToRegularState();
-                            } else if (buttonObj.type == 'off') {
-                                deselectAudioInButtons();
-                                _turnOffAudioInputBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.textes);
-                            }
-
-                            if (typeof buttonObj == "undefined") return;
-
-                            buttonObj.makeActive();
-                        }
-                        tool.toggleAudioInputButtons = toggleRadioButton;
-
-                        function clearAudioInputList() {
-                            for (var c in _audioInputListButtons) {
-                                _audioInputListButtons[c].remove();
-                            }
-                        }
-
-                        function loadAudioInputList() {
-                            var count = 1;
-
-                            clearAudioInputList();
-
-                            tool.WebRTCLib.localMediaControls.audioInputDevices().forEach(function (mediaDevice) {
-                                tool.log('controls: loadAudioInputList', mediaDevice);
-                                var radioBtnItem = document.createElement('DIV');
-                                radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
-                                radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
-
-                                var textLabelCon = document.createElement('SPAN');
-                                textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                                var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count}`);
-                                var checkmark = document.createElement('SPAN');
-                                checkmark.className = 'Streams_webrtc_radio-checkmark';
-                                checkmark.innerHTML = icons.microphoneTransparent;
-                                textLabelCon.appendChild(textLabel);
-                                radioBtnItem.appendChild(textLabelCon);
-                                radioBtnItem.appendChild(checkmark);
-                                _audioinputListEl.insertBefore(radioBtnItem, _audioinputListEl.firstChild);
-
-                                var audioInputItem = new ButtonInstance({
-                                    buttonEl: radioBtnItem,
-                                    textEl: textLabelCon,
-                                    type: 'audio',
-                                    deviceId: mediaDevice.deviceId,
-                                    handler: function (e) {
-                                        if (!radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.add('Q_working');
-
-                                        var toggle = function () {
-                                            toggleRadioButton(audioInputItem);
-
-                                            Q.Dialogs.pop();
-                                            tool.closeAllDialogues();
-
-                                            tool.WebRTCLib.localMediaControls.toggleAudioInputs({ deviceId: mediaDevice.deviceId, groupId: mediaDevice.groupId }, function () {
-                                                if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
-                                                tool.updateControlBar();
-                                            }, function (e) {
-                                                if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
-                                                if (_isiOSCordova) tool.showIosPermissionsInstructions('Audio');
-                                            })
-                                        }
-
-                                        if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
-                                            if (tool.WebRTCLib.localMediaControls.cameraIsEnabled() || tool.giveCameraTimer != null) {
-                                                tool.WebRTCLib.localMediaControls.canITurnMicOn().then(function (result) {
-                                                    toggle();
-                                                });
-                                            } else {
-                                                tool.limits.selectMediaDialog(function (result) {
-                                                    if (result.audio && result.video) {
-                                                        tool.WebRTCLib.localMediaControls.canITurnCameraAndMicOn().then(function (result) {
-                                                            tool.settingsPopup.videoInputListSection.turnOnCamera();
-                                                            toggle();
-                                                        });
-
-                                                        /*tool.WebRTCLib.localMediaControls.canITurnMicOn().then(function(result) {
-                                                            toggle();
-                                                        });*/
-                                                    } else if (result.audio) {
-                                                        tool.WebRTCLib.localMediaControls.canITurnMicOn().then(function (result) {
-                                                            toggle();
-                                                        });
-                                                    }
-                                                }, function () {
-                                                    //if(radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
-                                                });
-                                            }
-
-                                        } else {
-                                            toggle();
-                                        }
-
-                                    }
-                                });
-
-                                _audioInputListButtons.push(audioInputItem);
-
-                                if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == mediaDevice.deviceId) {
-                                    toggleRadioButton(audioInputItem);
-                                }
-
-                                radioBtnItem.addEventListener('mouseup', audioInputItem.handler)
-                                count++;
-                            });
-
-                            //if(turnOnCameraItem.parentNode != null) turnOnCameraItem.parentNode.removeChild(turnOnCameraItem);
-                        }
-                        tool.loadAudioInputList = loadAudioInputList;
-
-                        function updateAudioInputList() {
-                            tool.log('controls: updateAudioInputList START', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
-                            let audioInputIsActive = false;
-                            tool.log('controls: updateAudioInputList: current ai device', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
-
-                            _audioInputListButtons.forEach(function (audioInputItem) {
-                                if (tool.WebRTCLib.localMediaControls.currentAudioInputDevice() != null && tool.WebRTCLib.localMediaControls.currentAudioInputDevice().deviceId == audioInputItem.deviceId) {
-                                    toggleRadioButton(audioInputItem);
-                                    audioInputIsActive = true
-                                }
-
-                            });
-                            if (!audioInputIsActive) {
-                                tool.log('controls: updateAudioInputList: _turnOffAudioInputBtn');
-                                toggleRadioButton(_turnOffAudioInputBtn);
-                            }
-                        }
-                        tool.updateAudioInputList = updateAudioInputList;
-
-
-                        function createAudioInputList() {
-                            let audioinputListCon = document.createElement('DIV');
-                            audioinputListCon.className = 'Streams_webrtc_choose-input-audio-con';
-
-                            let inputListTilte = document.createElement('DIV');
-                            inputListTilte.className = 'Streams_webrtc_choose-device-title';
-                            inputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.microphone", tool.textes);;
-
-                            var audioinputList = document.createElement('DIV');
-                            audioinputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-audio-device';
-
-                            var turnOffradioBtnItem = document.createElement('DIV');
-                            turnOffradioBtnItem.className = 'Streams_webrtc_settings_popup_item Streams_webrtc_turn_video_off';
-                            turnOffradioBtnItem.dataset.deviceId = 'off';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text Streams_webrtc_turn_video_off_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.textes));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.switchOffCameras;
-                            textLabelCon.appendChild(textLabel);
-                            turnOffradioBtnItem.appendChild(textLabelCon);
-                            turnOffradioBtnItem.appendChild(checkmark);
-
-                            _turnOffAudioInputBtn = new ButtonInstance({
-                                buttonEl: turnOffradioBtnItem,
-                                textEl: textLabelCon,
-                                type: 'off',
-                                handler: function (e) {
-                                    toggleRadioButton(_turnOffAudioInputBtn);
-                                    tool.WebRTCLib.localMediaControls.disableAudio();
-                                    Q.Dialogs.pop();
-                                    tool.closeAllDialogues();
-                                    tool.updateControlBar();
-                                }
-                            });
-
-                            var localParticipant = tool.WebRTCLib.localParticipant();
-                            var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
-                                return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
-                            }).length;
-                            if (enabledAudioTracks == 0 && localParticipant.audioStream == null) {
-                                toggleRadioButton(_turnOffAudioInputBtn);
-                            }
-
-                            audioinputList.appendChild(turnOffradioBtnItem);
-                            audioinputListCon.appendChild(inputListTilte);
-                            audioinputListCon.appendChild(audioinputList);
-
-                            turnOffradioBtnItem.addEventListener('mouseup', _turnOffAudioInputBtn.handler)
-
-                            _audioinputListEl = audioinputList;
-                            return audioinputListCon;
-                        }
-
-                        return {
-                            createAudioInputList: createAudioInputList,
-                            loadAudioInputList: loadAudioInputList
-                        }
-                    }());
-
-                    function createSettingsPopUp() {
-                        var settingsPopup = document.createElement('DIV');
-                        settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
-                        var settingsPopupInner = document.createElement('DIV');
-                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
-                        settingsPopupInner.appendChild(audioOutputListSection.createAudioOutputList());
-                        settingsPopupInner.appendChild(audioInputListSection.createAudioInputList());
-
-                        tool.audioSettingsPopupEl = settingsPopup;
-                        settingsPopup.appendChild(settingsPopupInner);
-                        tool.microphoneBtn.parentNode.appendChild(settingsPopup);
-
-                        audioOutputListSection.loadAudioOutputList();
-                        audioInputListSection.loadAudioInputList();
-
-                        tool.hoverTimeout = { settingsPopup: null, audioSettingsPopup: null, participantsPopup: null };
-                        if (!Q.info.isMobile && !Q.info.isTablet) {
-                            tool.microphoneBtn.addEventListener('mouseenter', function (e) {
-                                tool.hideAllPopups();
-                                if (tool.hoverTimeout.audioSettingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.audioSettingsPopup);
-                                    tool.hoverTimeout.audioSettingsPopup = null;
-                                }
-                                tool.microphoneBtn.parentNode.classList.add('Streams_webrtc_hover');
-                            });
-
-                            tool.microphoneBtn.addEventListener('mouseleave', function (e) {
-                                if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                }
-                                tool.hoverTimeout.audioSettingsPopup = setTimeout(function () {
-                                    tool.microphoneBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                }, 600)
-                            });
-
-                            settingsPopup.addEventListener('mouseenter', function (e) {
-
-                                if (tool.hoverTimeout.audioSettingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.audioSettingsPopup);
-                                    tool.hoverTimeout.audioSettingsPopup = null;
-                                }
-                            })
-                            settingsPopup.addEventListener('mouseleave', function (e) {
-                                setTimeout(function () {
-                                    tool.microphoneBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                }, 600)
-
-                            });
-
-
-                            _popUpResizeobserver = new ResizeObserver(function (entries) {
-
-                                let popupRect = settingsPopup.getBoundingClientRect();
-                                let windowHeight = window.innerHeight;
-                                let maxHeight;
-                                if (popupRect.top < 0) {
-                                    maxHeight = popupRect.bottom;
-                                } else if (popupRect.bottom > windowHeight) {
-                                    maxHeight = popupRect.bottom - windowHeight - popupRect.top;
-                                }
-                                for (let entry of entries) {
-                                    let height = entry.contentRect.height;
-                                    if (height > maxHeight) {
-                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
-                                        settingsPopupInner.style.overflowY = 'auto';
-                                    } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
-                                        settingsPopupInner.style.maxHeight = '';
-                                        settingsPopupInner.style.overflowY = '';
-                                    }
-                                }
-                            })
-
-                            _popUpResizeobserver.observe(settingsPopup)
-                        }
-
-                    }
-
-                    return {
-                        createSettingsPopUp: createSettingsPopUp,
-                        audioInputListSection: audioInputListSection
-                    }
-                }());
-
-                tool.audioSettingsPopup.createSettingsPopUp();
-
-
-            },
-
             /**
              * Create participants popup that appears while pointer hovers users button on desktop/in modal box on mobile
              * @method participantsPopup
