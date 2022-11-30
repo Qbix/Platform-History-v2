@@ -892,17 +892,28 @@
 				 * @param {String} chainId
 				 */
 				getTokens: function(chainId) {
-					var tokens = {};
-					Q.each(Assets.currencies.tokens, function () {
+					var temp = {}, results = {};
+					var zero = '0x0000000000000000000000000000000000000000';
+					Q.each(Assets.currencies.tokens, function (address) {
 						var token = this[chainId];
 						if (!token) {
 							return;
 						}
-						tokens[this.symbol] = Q.extend({
+						temp[this.symbol] = Q.extend({
 							token: token
 						}, this);
 					});
-					return tokens;
+					for (var symbol in temp) {
+						if (temp[symbol].token === zero) {
+							results[symbol] = temp[symbol];
+						}
+					}
+					for (var symbol in temp) {
+						if (temp[symbol].token !== zero) {
+							results[symbol] = temp[symbol];
+						}
+					}
+					return results;
 				},
 				/**
 				 * @method getTokens
