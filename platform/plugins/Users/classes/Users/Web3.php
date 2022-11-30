@@ -294,7 +294,10 @@ class Users_Web3 extends Base_Users_Web3 {
 			$default = ($i == $defaultAppId);
 			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
-			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
+			$infuraId = Q::ifset(
+				$chain, "providers", "walletconnect", "infura", "projectId",
+				Q::ifset($chain,"infura", "projectId", null)
+			);
 			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", Q::ifset($usersWeb3Config, "blockExplorerUrl", null));
 			$abiUrl = Q::ifset($chain, "abiUrl", Q::ifset($usersWeb3Config, "abiUrl", null));
 
