@@ -506,12 +506,12 @@
             var state = tool.state;
             var $toolElement = $(this.element);
             var metadata = Q.getObject("metadata", params);
-            var authorAddress = Q.getObject("authorAddress", params);
-            var ownerAddress = Q.getObject("ownerAddress", params) || state.owner;
-            var commissionInfo = Q.getObject("commissionInfo", params);
-            var saleInfo = Q.getObject("saleInfo", params);
-            var authorUserId = Q.getObject("authorUserId", params);
-            var ownerUserId = Q.getObject("ownerUserId", params);
+            var authorAddress = Q.getObject("authorAddress", params) || Q.getObject("authorAddress", state);
+            var ownerAddress = Q.getObject("ownerAddress", params) || Q.getObject("owner", state);
+            var commissionInfo = Q.getObject("commissionInfo", params) || Q.getObject("commissionInfo", state);
+            var saleInfo = Q.getObject("saleInfo", params) || Q.getObject("saleInfo", state);
+            var authorUserId = Q.getObject("authorUserId", params) || Q.getObject("authorUserId", state);
+            var ownerUserId = Q.getObject("ownerUserId", params) || Q.getObject("ownerUserId", state);
 
             tool.minted = true;
             $toolElement.attr("data-minted", tool.minted);
