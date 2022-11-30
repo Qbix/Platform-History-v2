@@ -71,37 +71,36 @@
 Q.Tool.define("Assets/NFT/locked", function (options) {
         var tool = this;
         var state = tool.state;
-        tool.NFTpreview = Q.Tool.from($(this.element).closest(".Assets_NFT_preview_tool")[0], "Assets/NFT/preview");
+        var $toolElement = $(this.element);
+        tool.NFTpreview = Q.Tool.from($toolElement.closest(".Assets_NFT_preview_tool")[0], "Assets/NFT/preview");
 
         if (Q.isEmpty(state.NFTAddress)) {
-            $(tool.element).remove();
+            $toolElement.remove();
             return console.warn("Assets/NFT/locked", "NFTAddress required!");
         }
 	 
-	if (Q.isEmpty(state.seriesIdSource.seriesId) && Q.isEmpty(state.seriesIdSource.salesAddress)) {
-            $(tool.element).remove();
+	    if (Q.isEmpty(state.seriesIdSource.seriesId) && Q.isEmpty(state.seriesIdSource.salesAddress)) {
+            $toolElement.remove();
             return console.warn("Assets/NFT/locked", "at least one of seriesIdSource option required!");
         }
 
-        Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()])
-            .then(function (_ref) {
-                var nftContract = _ref[0];
-                var lockedContract = _ref[1];
+        Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()]).then(function (_ref) {
+            var nftContract = _ref[0];
+            var lockedContract = _ref[1];
 
-                var seriesId;
-                return tool.seriesIdGetPromise().then(function (_seriesId) {
-                    seriesId = _seriesId;
-                    return nftContract.getHookList(seriesId);
-                }).then(function (allHooksArr) {
-                    return [
-                        allHooksArr.indexOf(lockedContract.address) >= 0,
-                        nftContract,
-                        lockedContract,
-                        seriesId
-                    ];
-                });
-
-            }).then(function ([b, nftContract, lockedContract, seriesId]) {
+            var seriesId;
+            return tool.seriesIdGetPromise().then(function (_seriesId) {
+                seriesId = _seriesId;
+                return nftContract.getHookList(seriesId);
+            }).then(function (allHooksArr) {
+                return [
+                    allHooksArr.indexOf(lockedContract.address) >= 0,
+                    nftContract,
+                    lockedContract,
+                    seriesId
+                ];
+            });
+        }).then(function ([b, nftContract, lockedContract, seriesId]) {
             if (!b) {
                 console.group("Assets/NFT/locked Warn");
                 console.log("locked contract does not setup on NFT as a hook on this seriesId");
@@ -109,7 +108,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 console.log("lockedContract=", lockedContract.address);
                 console.log("seriesId=", seriesId);
                 console.groupEnd();
-		$(tool.element).remove();
+                $toolElement.remove();
                 return;
             }
 
@@ -185,12 +184,12 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         }).then(function ([locked, custodian]) {
                             if (locked) {
                                 if (custodian.toLowerCase() == Q.Users.Web3.getSelectedXid().toLowerCase()) {
-                                    $toolElement.attr("data-enabledLock", true);
+                                    $toolElement.attr("data-locked", true);
                                 }
                             } else {
                                 nftContract.ownerOf(state.tokenId).then(function (owner) {
                                     if (owner.toLowerCase() == Q.Users.Web3.getSelectedXid().toLowerCase()) {
-                                        $toolElement.attr("data-enabledUnlock", true);
+                                        $toolElement.attr("data-locked", false);
                                     }
                                 });
                             }
@@ -204,10 +203,12 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                     var state = tool.state;
                     Q.Dialogs.push({
                         title: tool.text.NFT.locked.Lock,
+                        className: "Assets_NFT_locked_lock",
                         template: {
                             name: 'Assets/NFT/lock',
                             fields: {
-                                tokenId: state.tokenId
+                                noTokenId: !state.tokenId,
+                                custodian: Q.Users.Web3.getSelectedXid()
                             }
                         },
                         onActivate: function ($dialog) {
@@ -241,6 +242,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                                 timeout: 5
                                             });
 
+                                            tool.refresh();
                                         }, function (err) {
                                             Q.Dialogs.pop();
                                             Q.handle(null, null, [err.reason]);
@@ -263,8 +265,45 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 });
 
                 $('.Assets_NFT_locked_unlockBtn', tool.element).on(Q.Pointer.fastclick, function () {
+                    var $this = $(this);
+                    var _contractUnlock = function (tokenId) {
+                        Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()]).then(function (_ref) {
+                            var nftContract = _ref[0];
+                            var lockedContract = _ref[1];
+                            return lockedContract.unlock(nftContract.address, tokenId).then(function (txResponce) {
+                                txResponce.wait().then(function () {
+                                    Q.Dialogs.pop();
+                                    $this.removeClass("Q_loading");
+                                    Q.Notices.add({
+                                        content: tool.text.NFT.locked.TokenWasUnlocked.interpolate({"title": $(".Assets_NFT_title", tool.NFTpreview.element).html()}),
+                                        timeout: 5
+                                    });
+                                    tool.refresh();
+                                }, function (err) {
+                                    Q.Dialogs.pop();
+                                    $this.removeClass("Q_loading");
+                                    Q.handle(null, null, [err.reason]);
+                                });
+                            }).catch(function (err) {
+                                Q.Dialogs.pop();
+                                $this.removeClass("Q_loading");
+                                Q.Notices.add({
+                                    content: Q.grabMetamaskError(err, [nftContract, lockedContract]),
+                                    timeout: 5
+                                });
+
+                            });
+                        });
+                    };
+
+                    if (state.tokenId) {
+                        $this.addClass("Q_loading");
+                        return _contractUnlock(state.tokenId);
+                    }
+
                     Q.Dialogs.push({
                         title: tool.text.NFT.locked.Unlock,
+                        className: "Assets_NFT_locked_unlock",
                         template: {
                             name: 'Assets/NFT/unlock'
                         },
@@ -277,32 +316,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                                     return Q.alert(tool.text.NFT.locked.errors.invalidTokenId);
                                 }
 
-                                return Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()]).then(function (_ref) {
-                                    var nftContract = _ref[0];
-                                    var lockedContract = _ref[1];
-                                    return lockedContract.unlock(nftContract.address, tokenId).then(function (txResponce) {
-                                        txResponce.wait().then(function () {
-                                            Q.Dialogs.pop();
-                                            Q.Notices.add({
-                                                content: tool.text.NFT.locked.TokenWasUnlocked.interpolate({"title": $(".Assets_NFT_title", tool.NFTpreview.element).html()}),
-                                                timeout: 5
-                                            });
-
-                                        }, function (err) {
-                                            Q.Dialogs.pop();
-                                            Q.handle(null, null, [err.reason]);
-                                        });
-                                    }).catch(function (err) {
-
-                                        Q.Dialogs.pop();
-                                        Q.Notices.add({
-                                            content: Q.grabMetamaskError(err, [nftContract, lockedContract]),
-                                            timeout: 5
-                                        });
-
-                                    });
-                                });
-
+                                _contractUnlock(tokenId);
                             });
                         }
                     });
@@ -326,7 +340,7 @@ Q.Template.set("Assets/NFT/locked",
 
 Q.Template.set("Assets/NFT/lock",
 `<div class="Assets_NFT_locked_form">
-        {{#if tokenId}} 
+        {{#if noTokenId}} 
             <div class="form-group">
                 <label>{{NFT.locked.form.labels.tokenId}}</label>
                 <input name="tokenId" type="text" class="form-control" placeholder="{{NFT.locked.placeholders.tokenId}}">
@@ -335,7 +349,7 @@ Q.Template.set("Assets/NFT/lock",
         {{/if}} 
         <div class="form-group">
             <label>{{NFT.locked.form.labels.custodian}}</label>
-            <input name="custodian" type="text" class="form-control" placeholder="{{NFT.locked.placeholders.custodian}}">
+            <input name="custodian" type="text" class="form-control" placeholder="{{NFT.locked.placeholders.custodian}}" value="{{custodian}}">
             <small class="form-text text-muted">{{NFT.locked.form.small.custodian}}</small>
         </div>
         <button class="Assets_NFT_locked_dialogLock Q_button">{{NFT.locked.Lock}}</button>
