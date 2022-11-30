@@ -1129,7 +1129,7 @@
 
 	/**
 	 * Users batch getter.
-	 * @method get
+	 * @method getgetc
 	 * @param {String} userId The user's id
 	 * @param {Function} callback
 	 *    if there were errors, first parameter is an array of errors
@@ -3971,6 +3971,7 @@
 	var Web3 = Users.Web3 = {
 		chains: {},
 		provider: null,
+		providerEthers: null,
 		web3Modal: null,
 		onAccountsChanged: new Q.Event(),
 		onChainChanged: new Q.Event(),
@@ -4088,6 +4089,7 @@
 			}
 
 			Users.init.web3(function () {
+				
 				// Try with MetaMask-type connection first
 				if (window.ethereum && ethereum.request) {
 					return ethereum.request({ method: 'eth_requestAccounts' })
@@ -4217,9 +4219,14 @@
 		 * Execute method on contract
 		 * @method execute
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {string|Object} contractAddress Can be a string starts with "0x".
-		 *   Or an object with "chainId" and "address", which makes the wallet switch to this chainId
-		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
+		 * @param {string|Object} contractAddress Can be a string starts with "0x", or an object with the properties below.
+		 * @param {string} [contractAddress.contractAddress] If an object is passed then the contractAddress must go here.
+		 * @param {string} [contractAddress.readOnly] This would use a provider, without having to
+		 *    connect with a signer or to switch networks. Use if you're only going to use it for reading data.
+		 * @param {string} [contractAddress.chainId] This would be the chainId to use for method calls
+		 *    on this contract. If readOnly isn't true, then switchChain is called if necessary, to switch
+		 *    the wallet to the new chainId for posting transactions. In this case, the user canceiling this switch
+		 *    would result in an error in the callback/promise.
 		 * @param {String} methodName
 		 * @param {Array} params
 		 * @param {function} callback receives (err, result) with result from the ethers.js contract method
@@ -4382,19 +4389,25 @@
 		 * @method getContract
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {string|Object} contractAddress Can be a string starts with "0x".
-		 *   Or an object with "chainId" and "contractAddress", which makes the wallet switch to this chainId
-		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
+		 * @param {string|Object} contractAddress Can be a string starts with "0x", or an object with the properties below.
+		 * @param {string} [contractAddress.contractAddress] If an object is passed then the contractAddress must go here.
+		 * @param {string} [contractAddress.readOnly] This would use a provider, without having to
+		 *    connect with a signer or to switch networks. Use if you're only going to use it for reading data.
+		 * @param {string} [contractAddress.chainId] This would be the chainId to use for method calls
+		 *    on this contract. If readOnly isn't true, then switchChain is called if necessary, to switch
+		 *    the wallet to the new chainId for posting transactions. In this case, the user canceiling this switch
+		 *    would result in an error in the callback/promise.
 		 * @param {Function} [callback] receives (err, contract)
 		 * @return {Promise} to be used instead of callback
 		 */
 		getContract: Q.promisify(Q.getter(
 		function(contractABIName, contractAddress, callback) {
 			Users.init.web3(function () {
-				var chainId, address;
+				var chainId, address, readOnly;
 				if (Q.isPlainObject(contractAddress)) {
 					chainId = contractAddress.chainId;
 					address = contractAddress.contractAddress;
+					readOnly = contractAddress.readOnly;
 				} else {
 					address = contractAddress;
 				}
@@ -4405,33 +4418,46 @@
 					} catch (e) {
 						return Q.handle(callback, null, [e]);
 					}
+					if (readOnly) {
+						var url = Q.getObject([chainId, 'rpcUrls', 0], Web3.chains);
+						if (!url) {
+							throw new Q.Exception('Users.Web3.getContract: Web3.chains['+chainId+'].rpcUrls is empty');
+						}
+						var provider = new ethers.providers.JsonRpcBatchProvider(url);
+						return _continue(provider, false);
+					}
 					if (window.ethereum
 					&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
 						'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
 					]))) {
-						_continue(ethereum);
+						_continue(ethereum, true);
 					} else {
 						Web3.connect(function (err, provider) {
 							if (err) {
 								return Q.handle(callback, null, [err]);
 							}
 							if (!chainId || provider.chainId === chainId) {
-								_continue(provider);
+								_continue(provider, true);
 							} else {
 								var chain = Web3.chains[chainId];
 								Web3.switchChain(chain, function (err) {
 									if (Q.firstErrorMessage(err)) {
 										return Q.handle(callback, null, [err]);
 									}
-									_continue(provider);
+									_continue(provider, true);
 								});
 							}
 						});
 					}
-					function _continue(provider) {
+					function _continue(provider, needSigner) {
 						try {
-							var signer = new ethers.providers.Web3Provider(provider).getSigner();
-							var contract = new ethers.Contract(address, ABI, signer);
+							var signer, contract;
+							if (needSigner) {
+								signer = new ethers.providers.Web3Provider(provider).getSigner();
+								contract = new ethers.Contract(address, ABI, signer);
+							} else {
+								contract = new ethers.Contract(address, ABI, provider);
+							}
 							contract.ABI = ABI;
 							Q.handle(callback, contract, [null, contract]);
 						} catch (err) {
@@ -4450,11 +4476,23 @@
 		 * @method getFactory
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {String} [chainId] optional, pass this here to switch to the indicated chain first
+		 * @param {string|Object} [chainId] optional, pass a string here to switch to the indicated chain first,
+		 *   or an object with the following properties:
+		 * @param {string} [chainId.readOnly] This would use a provider, without having to
+		 *    connect with a signer or to switch networks. Use if you're only going to use it for reading data.
+		 * @param {string} [chainId.chainId] This would be the chainId to use for method calls
+		 *    on this factory contract. If readOnly isn't true, then switchChain is called if necessary, to switch
+		 *    the wallet to the new chainId for posting transactions. In this case, the user canceiling this switch
+		 *    would result in an error in the callback/promise.
 		 * @param {Function} [callback] receives (err, contract)
 		 * @return {Promise} to be used instead of callback
 		 */
 		getFactory: Q.promisify(function(contractABIName, chainId, callback) {
+			var readOnly = false;
+			if (Q.isPlainObject(chainId)) {
+				readOnly = chainId.readOnly;
+				chainId = chainId.chainId;
+			}
 			if (typeof chainId !== 'string'
 			|| chainId.substr(0, 2) !== '0x') {
 				if (!callback) {
@@ -4462,26 +4500,20 @@
 				}
 				chainId = null;
 			}
-			if (!chainId) {
-				return _continue();
-			}
-			Web3.connect(function (err, provider) {
-				if (err) {
-					return Q.handle(callback, null, [err]);
+			return chainId
+				? _continue(chainId)
+				: Web3.getChainId().then(_continue);
+			function _continue(chainId) {
+				var contracts = Web3.contracts[contractABIName];
+				if (Q.isEmpty(contracts)) {
+					throw new Q.Exception("Users.Web3.getFactory: missing contract address for " + contractABIName);
 				}
-				if (provider.chainId === chainId) {
-					return _continue();
-				} else {
-					var chain = Web3.chains[chainId];
-					return Web3.switchChain(chain).then(_continue);
-				}
-			});
-			function _continue() {
-				return Web3.getChainId().then(function (chainId) {
-					var contracts = Web3.contracts[contractABIName];
-					var contractAddress = contracts[chainId] || contracts['all'];
-					return Web3.getContract(contractABIName, contractAddress, callback);
-				});
+				var contractAddress = contracts[chainId] || contracts['all'];
+				return Web3.getContract(contractABIName, {
+					chainId: chainId,
+					contractAddress: contractAddress,
+					readOnly: readOnly
+				}, callback);
 			}
 		}),
 		parseMetamaskError: function (err, contracts) {
