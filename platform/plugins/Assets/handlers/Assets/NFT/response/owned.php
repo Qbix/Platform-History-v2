@@ -10,20 +10,20 @@
  * @return {void}
  */
 function Assets_NFT_response_owned ($params) {
-	$loggedInUser = Users::loggedInUser();
 	$request = array_merge($_REQUEST, $params);
 	$sources = array();
-	$userId = Q::ifset($request, "owner", "userId", $loggedInUser->id);
-	$accountAddress = Q::ifset($request, "owner", "accountAddress", Users_Web3::getWalletByUserId($userId));
-	if (!filter_var(Q::ifset($request, "onlyPending", false), FILTER_VALIDATE_BOOLEAN)) {
-		$sources[] = array(
-			"address" => $accountAddress,
-		);
+	$ownerUserId = Q::ifset($request, "owner", "userId", null);
+	$ownerAccountAddress = Q::ifset($request, "owner", "accountAddress", null);
+	if (!$ownerAccountAddress && $ownerUserId) {
+		$ownerAccountAddress = Users_Web3::getWalletByUserId($ownerUserId);
 	}
+	$sources[] = array(
+		"address" => $ownerAccountAddress,
+	);
 	$sources[] = array(
 		"address" => Q::ifset($request,"holder", "contractAddress", null),
 		"pathABI" => Q::ifset($request,"holder", "pathABI", "Assets/templates/R1/NFT/sales/contract"),
-		"recipient" => $accountAddress
+		"recipient" => Q::ifset($request,"holder", "accountAddress", Users_Web3::getWalletByUserId())
 	);
 	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
 	$glob = array();
