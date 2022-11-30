@@ -22,8 +22,7 @@
  *   @param {Function} [options.create] Optional. You can pass a function here, which takes the tool as "this"
  *     and a callback as the first parameter, is supposed to create a stream and
  *     call the callback with (err, stream). If omitted, then the tool doesn't render.
- *   @param {String} [options.fallback] If this string not empty, it means that something went wrong
- *   and inplace element will contacin this string as only value
+ *   @param {String} [options.fallback] Content to put in the inplace element in case of missing streams
  *   @param {Q.Event} [options.onLoad]
  *   @param {Q.Event} [options.onUpdate]
  *   @param {Q.Event} [options.onError]
@@ -43,7 +42,9 @@ Q.Tool.define("Streams/inplace", function (options) {
 	function _construct(err) {
 		var stream = Q.Streams.isStream(this) ? this : null;
 		if (err || !stream) {
-			state.fallback = state.fallback || Q.firstErrorMessage(err);
+			state.fallback = (state.fallback !== null)
+				? state.fallback
+				: Q.firstErrorMessage(err);
 			state.editable = false;
 			//return tool.state.onError.handle(err);
 		} else {
