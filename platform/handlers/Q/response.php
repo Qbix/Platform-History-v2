@@ -107,6 +107,8 @@ function Q_response($params)
 				Q_Response::processSessionExtras('after');
 				$to_encode['slots'] = Q_Response::slots(true);
 				// add stylesheets, stylesinline, scripts, scriptlines, scriptdata, templates
+				$temp = Q_Response::htmlCssClassesArray($slotName, true, " ", false);
+				if ($temp) $to_encode['htmlCssClasses'] = $temp;
 				foreach (Q_Response::allSlotNames() as $slotName) {
 					$temp = Q_Response::stylesheetsArray($slotName);
 					if ($temp) $to_encode['stylesheets'][$slotName] = $temp;

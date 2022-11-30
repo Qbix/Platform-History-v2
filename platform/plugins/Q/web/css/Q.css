@@ -1,5 +1,6 @@
 body { margin: 0; }
 table { border-spacing:0; border-collapse:collapse; }
+html.Q_hideUntilLoaded { opacity: 0; }
 
 /* Animations */
 @keyframes Q_rotateplane {
@@ -188,6 +189,9 @@ html[xmlns] .Q_clearfix { display: block; }
 .Q_document_surface { background: white; padding: 10px; }
 .Q_chrome_surface { background: gray; }
 .Q_tabbed { border: 1px solid #aaa; border-top: 1px solid #eee; background: white; }
+.Q_forceDisplayBlock { display: block !important; }
+.Q_forceDisplayInline { display: inline !important; }
+.Q_forceDisplayNone { display: none !important; }
 
 /* the overlayed element */
 .Q_overlay { background: url(../img/bg/overlay.png); display:none; text-align:left; padding: 0; border: 2px solid #444; z-index: 9000;

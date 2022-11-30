@@ -991,7 +991,7 @@ Elp.removeClass = function (className) {
 };
 
 /**
- * Restore ability to select text in an element 
+ * Add a CSS class to an element
  * @method addClass
  * @chainable
  * @param {String} className
@@ -2290,24 +2290,21 @@ Q.chain = function (callbacks, callback) {
  * @static
  * @param  {Function} getter A function that takes arguments that include a callback and passes err as the first parameter to that callback, and the value as the second argument.
  * @param {Boolean} useThis whether to resolve the promise with the "this" instead of the second argument
+ * @param {Number} callbackIndex Which argument the getter is expecting the callback, if any
  * @return {Function} a wrapper around the function that returns a promise, extended with the original function's return value if it's an object
  */
-Q.promisify = function (getter, useThis) {
+Q.promisify = function (getter, useThis, callbackIndex) {
 	function _promisifier() {
 		if (!Q.Promise) {
 			return getter.apply(this, args);
 		}
 		var args = [], resolve, reject, found = false;
-		for (var i=0, l=arguments.length; i<l; ++i) {
-			var ai = arguments[i];
+		Q.each(arguments, function (i, ai) {
 			if (typeof ai !== 'function') {
 				args.push(ai);
 			} else {
 				found = true;
 				args.push(function _promisified(err, second) {
-					if (err) {
-						return reject(err);
-					}
 					try {
 						ai.apply(this, arguments);
 					} catch (e) {
@@ -2319,14 +2316,15 @@ Q.promisify = function (getter, useThis) {
 					resolve(useThis ? this : second);
 				});
 			}
-		}
+		});
 		if (!found) {
-			args.push(function _defaultCallback(err, second) {
+			var ci = (callbackIndex === undefined) ? args.length : callbackIndex;
+			args[ci] = function _defaultCallback(err, second) {
 				if (err) {
 					return reject(err);
 				}
 				resolve(useThis ? this : second);
-			});
+			};
 		}
 		var promise = new Q.Promise(function (r1, r2) {
 			resolve = r1;
@@ -2478,6 +2476,27 @@ Q.preventRecursion = function (name, original, defaultValue) {
 		delete this[n];
 		return ret;
 	};
+};
+
+/**
+ * @static
+ * @method digest
+ * @param {String} algorithm 
+ * @param {String} payload 
+ * @param {Function} callback receives (err, result)
+ * @return {Q.Promise}
+ */
+Q.digest = function (algorithm, payload, callback) {
+	var encoded = new TextEncoder().encode(payload);
+	return crypto.subtle.digest(algorithm, encoded)
+	.then(function (buffer) {
+		var result = Array.from(new Uint8Array(buffer))
+		.map(function (b) {
+			return b.toString(16).padStart(2, '0');
+		}).join('');
+		callback && callback(null, result);
+		return result;
+	});
 };
 
 /**
@@ -3655,7 +3674,6 @@ Q.batcher.factory = function _Q_batcher_factory(collection, baseUrl, tail, slotN
  * @param {Integer} [options.throttleSize=100] The size of the throttle, if it is enabled
  * @param {Boolean} [options.nonStandardErrorConvention=false] Pass true here if the callback parameters don't work with Q.firstErrorMessage() conventions
  * @param {Q.Cache|Boolean} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
- * @param {Q.Cache} [options.cache] pass false here to prevent caching, or an object which supports the Q.Cache interface
  * @return {Function}
  *  The wrapper function, which returns a Q.Promise with a property called "result"
  *  which could be one of Q.getter.CACHED, Q.getter.WAITING, Q.getter.REQUESTING or Q.getter.THROTTLING .
@@ -3701,9 +3719,10 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onResult.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = cached;
 				var err = null;
+				var resCallback = {};
 				try {
 					// let the callback check params
-					callback.apply(subject, params);
+					resCallback = callback.apply(subject, params);
 				} catch (e) {
 					// it should throw an exception if it encounters any errors
 					err = e;
@@ -3714,7 +3733,9 @@ Q.getter = function _Q_getter(original, options) {
 				gw.onExecuted.handle(subject, params, arguments2, ret, gw);
 				Q.getter.usingCached = false;
 				if (err) {
-					_reject(err);
+					if (!Q.getObject("skipException", resCallback)) {
+						_reject(err);
+					}
 					throw err;
 				}
 				_resolve(subject);
@@ -3758,10 +3779,6 @@ Q.getter = function _Q_getter(original, options) {
 				// callbacks in position pos, and then decrement
 				// the throttle
 				return function _Q_getter_callback() {
-					// save the results in the cache
-					if (gw.cache && !ret.dontCache) {
-						gw.cache.set(arguments2, cbpos, this, arguments);
-					}
 					// process waiting callbacks
 					var wk = _waiting[key];
 					delete _waiting[key];
@@ -3770,10 +3787,13 @@ Q.getter = function _Q_getter(original, options) {
 							try {
 								_prepare(this, arguments, wk[i].callbacks[cbpos], wk[i].ret, true);
 							} catch (e) {
-								debugger;
 								console.warn(e);
 							}
 						}
+					}
+					// save the results in the cache
+					if (gw.cache && !ret.dontCache) {
+						gw.cache.set(arguments2, cbpos, this, arguments);
 					}
 					// tell throttle to execute the next function, if any
 					if (gw.throttle && gw.throttle.throttleNext) {
@@ -5208,7 +5228,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 	Q.each(toolNames, function (i, toolName) {
 		var toolConstructor = _qtc[toolName];
 		var toolPlaceholder = _qtp[toolName];
-		function _loadToolScript_loaded(params, subjects) {
+		function _loadToolScript_loaded(params) {
 			// in this function, toolConstructor starts as a string
 			// and we expect the script to call Q.Tool.define()
 			if (params.html && !params.html[0] && params.html[1]
@@ -5237,7 +5257,7 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 					toolConstructor = function () { console.log("Missing tool constructor for " + toolName); }; 
 				}
 			}
-			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId);
+			p.fill(toolName)(toolElement, toolConstructor, toolName, uniqueToolId, params);
 		}
 		if (toolConstructor === undefined) {
 			Q.Tool.onMissingConstructor.handle(_qtc, toolName);
@@ -5297,37 +5317,36 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				toolConstructor = { html: toolConstructor };
 			}
 		}
-		if (Q.isPlainObject(toolConstructor)) {
-			var toolConstructorSrc = toolConstructor.js || toolConstructor.html;
-			if (!toolConstructorSrc) {
-				throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
-			}
-			if (Q.Tool.latestNames[toolConstructorSrc]) {
-				Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
-				return _loadToolScript_loaded();
-			}
-			Q.Tool.latestName = null;
-			var pipe = Q.pipe(), waitFor = [];
-			if (toolConstructor.js) {
-				waitFor.push('js');
-				Q.addScript(toolConstructor.js, pipe.fill('js'));
-			}
-			if (toolConstructor.css) {
-				waitFor.push('css');
-				Q.addStylesheet(toolConstructor.css, pipe.fill('css'));
-			}
-			if (toolConstructor.html) {
-				waitFor.push('html');
-				Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
-			}
-			if (toolConstructor.text) {
-				waitFor.push('text');
-				Q.request.once(toolConstructor.text, pipe.fill('text'), { extend: false, parse: false });
-			}
-			pipe.add(waitFor, 1, _loadToolScript_loaded).run();
-		} else {
+		if (!Q.isPlainObject(toolConstructor)) {
 			throw new Q.Error("Q.Tool.loadScript: toolConstructor cannot be " + Q.typeOf(toolConstructor));
 		}
+		var toolConstructorSrc = toolConstructor.js || toolConstructor.html;
+		if (!toolConstructorSrc) {
+			throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
+		}
+		if (Q.Tool.latestNames[toolConstructorSrc]) {
+			Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
+			return _loadToolScript_loaded();
+		}
+		Q.Tool.latestName = null;
+		var pipe = Q.pipe(), waitFor = [];
+		if (toolConstructor.js) {
+			waitFor.push('js');
+			Q.addScript(toolConstructor.js, pipe.fill('js'));
+		}
+		if (toolConstructor.css) {
+			waitFor.push('css');
+			Q.addStylesheet(toolConstructor.css, pipe.fill('css'));
+		}
+		if (toolConstructor.html) {
+			waitFor.push('html');
+			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
+		}
+		if (toolConstructor.text) {
+			waitFor.push('text');
+			Q.Text.get(toolConstructor.text, pipe.fill('text'));
+		}
+		pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 	});
 }
 
@@ -8116,13 +8135,13 @@ Q.queryString = function _Q_queryString(fields, keys, returnAsObject, options) {
 
 /**
  * Serialize objects in a canonical way, to match Q_Utils::serialize().
- * Sorts the keys recursively inside the object, and 
+ * Sorts the keys recursively inside the object, then http-encodes it all.
  * @param {Object} data
  * @returns {String}
  */
 Q.serialize = function _Q_serialize(data) {
 	return Q.queryString(data, true, false, {
-		convertBooleanToInteger: true
+		convertBooleanToInteger: false
 	}).replace('+', '%20');
 };
 
@@ -9387,6 +9406,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		Q.Page.beingProcessed = true;
 
+		loadHtmlCssClasses();
 		loadMetas();
 		loadTemplates();
 
@@ -9699,6 +9719,12 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				newStyles[slotName] = [style];
 			});
 			return newStyles;
+		}
+
+		function loadHtmlCssClasses() {
+			Q.each(response.htmlCssClasses, function (i, c) {
+				document.documentElement.addClass(c);
+			});
 		}
 
 		function loadMetas() {
@@ -10094,7 +10120,7 @@ function _activateTools(toolElement, options, shared) {
 	var toolId = Q.Tool.calculateId(toolElement.id);
 	_waitingParentStack.push(toolId); // wait for init of child tools
 	_loadToolScript(toolElement,
-	function _activateTools_doConstruct(toolElement, toolConstructor, toolName, uniqueToolId) {
+	function _activateTools_doConstruct(toolElement, toolConstructor, toolName, uniqueToolId, params) {
 		if (!_constructors[toolName]) {
 			_constructors[toolName] = function Q_Tool(element, options) {
 				// support re-entrancy of Q.activate
@@ -10121,6 +10147,9 @@ function _activateTools(toolElement, options, shared) {
 					this.constructor = toolConstructor;
 					Q.Tool.call(this, element, options);
 					this.state = Q.copy(this.options, toolConstructor.stateKeys);
+					if (params && params.text) {
+						this.text = params.text[1];
+					}
 					var prevTool = Q.Tool.beingActivated;
 					Q.Tool.beingActivated = this;
 					// Trigger events in some global event factories
@@ -10544,15 +10573,13 @@ Q.Template.onError = new Q.Event(function (err) {
  * @param {String} [options.dir] the folder under project web folder where templates are located
  * @param {String} [options.name] option to override the name of the template
  * @param {String} [options.tool] if the rendered HTML will be placed inside a tool, pass it here so that its prefix will be used
+ * @return {Promise} can use this instead of callback
  */
-Q.Template.render = function _Q_Template_render(name, fields, callback, options) {
+Q.Template.render = Q.promisify(function _Q_Template_render(name, fields, callback, options) {
 	if (typeof fields === "function") {
 		options = callback;
 		callback = fields;
 		fields = {};
-	}
-	if (!callback) {
-		throw new Q.Error("Q.Template.render: callback is missing");
 	}
 	var isArray = Q.isArrayLike(name);
 	if (isArray || Q.isPlainObject(name)) {
@@ -10636,7 +10663,7 @@ Q.Template.render = function _Q_Template_render(name, fields, callback, options)
 			}
 		});
 	});
-};
+}, false, 2);
 
 /**
  * Module for loading text from files.
@@ -11611,14 +11638,17 @@ _isCordova = /(.*)QCordova(.*)/.test(navigator.userAgent)
 var detected = Q.Browser.detect();
 var maxTouchPoints = (root.navigator && root.navigator.maxTouchPoints) & 0xFF;
 var isTouchscreen = ('ontouchstart' in root || !!maxTouchPoints);
+var hasNoMouse = root.matchMedia ? !!root.matchMedia('(any-hover: none)') : null;
+var useTouchEvents = isTouchscreen && (hasNoMouse === true);
 var isTablet = navigator.userAgent.match(/tablet|ipad/i)
-	|| (isTouchscreen && !navigator.userAgent.match(/mobi/i));
+	|| (useTouchEvents && !navigator.userAgent.match(/mobi/i));
 /**
  * Useful info about the page and environment
  * @property {Object} info
  */
 Q.info = {
-	isTouchscreen: isTouchscreen, // works on ie10
+	useTouchEvents: useTouchEvents,
+	isTouchscreen: isTouchscreen,
 	isTablet: isTablet,
 	isWebView: detected.isWebView,
 	isStandalone: detected.isStandalone,
@@ -11866,7 +11896,7 @@ Q.Pointer = {
 	 * @method start
 	 */
 	start: function _Q_Pointer_start(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function (e) {
 			Q.Pointer.movedTooMuchForClickLastTime = false;
 			if (Q.Pointer.recentlyScrolled) {
@@ -11886,7 +11916,7 @@ Q.Pointer = {
 	 * @method end
 	 */
 	end: function _Q_Pointer_end(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'mouseup';
+		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'mouseup';
 		return params.original;
 	},
 	/**
@@ -11895,7 +11925,7 @@ Q.Pointer = {
 	 * @method move
 	 */
 	move: function _Q_Pointer_move(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchmove' : 'mousemove';
+		params.eventName = Q.info.useTouchEvents ? 'touchmove' : 'mousemove';
 		return params.original;
 	},
 	/**
@@ -11904,7 +11934,7 @@ Q.Pointer = {
 	 * @method enter
 	 */
 	enter: function _Q_Pointer_enter(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchenter' : 'mouseenter';
+		params.eventName = Q.info.useTouchEvents ? 'touchenter' : 'mouseenter';
 		return params.original;
 	},
 	/**
@@ -11913,7 +11943,7 @@ Q.Pointer = {
 	 * @method leave
 	 */
 	leave: function _Q_Pointer_leave(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchleave' : 'mouseleave';
+		params.eventName = Q.info.useTouchEvents ? 'touchleave' : 'mouseleave';
 		return params.original;
 	},
 	/**
@@ -11922,7 +11952,7 @@ Q.Pointer = {
 	 * @method cancel
 	 */
 	cancel: function _Q_Pointer_cancel(params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
+		params.eventName = Q.info.useTouchEvents ? 'touchcancel' : 'mousecancel'; // mousecancel can be a custom event
 		return params.original;
 	},
 	/**
@@ -11984,7 +12014,7 @@ Q.Pointer = {
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	fastclick: function _Q_fastclick (params) {
-		params.eventName = Q.info.isTouchscreen ? 'touchend' : 'click';
+		params.eventName = Q.info.useTouchEvents ? 'touchend' : 'click';
 		return function _Q_fastclick_on_wrapper (e) {
 			var oe = e.originalEvent || e;
 			if (oe.type === 'touchend') {
@@ -12019,7 +12049,7 @@ Q.Pointer = {
 		if (!Q.info.isTouchscreen) {
 			return Q.Pointer.click(params);
 		}
-		params.eventName = Q.info.isTouchscreen ? 'touchstart' : 'mousedown';
+		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function _Q_touchclick_on_wrapper (e) {
 			var _relevantClick = true;
 			var t = this, a = arguments;
@@ -12937,11 +12967,11 @@ function _stopHint(img, container) {
 	return null;
 }
 
-var _isTouchscreen = Q.info.isTouchscreen;
-Q.Pointer.start.eventName = _isTouchscreen ? 'touchstart' : 'mousedown';
-Q.Pointer.move.eventName = _isTouchscreen ? 'touchmove' : 'mousemove';
-Q.Pointer.end.eventName = _isTouchscreen ? 'touchend' : 'mouseup';
-Q.Pointer.cancel.eventName = _isTouchscreen ? 'touchcancel' : 'mousecancel';
+var _useTouchEvents = Q.info.useTouchEvents;
+Q.Pointer.start.eventName = _useTouchEvents ? 'touchstart' : 'mousedown';
+Q.Pointer.move.eventName = _useTouchEvents ? 'touchmove' : 'mousemove';
+Q.Pointer.end.eventName = _useTouchEvents ? 'touchend' : 'mouseup';
+Q.Pointer.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'mousecancel';
 
 Q.Pointer.which.NONE = 0;
 Q.Pointer.which.LEFT = 1;
@@ -14266,6 +14296,7 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
+	console.log("%c"+Q.info.app+" - powered by Qbix", "color: blue; font-size: 20px");
 	de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
 	de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 	de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
@@ -14301,8 +14332,8 @@ Q.onInit.add(function () {
 	}, 'Q.Socket');
 
 	var QtQw = Q.text.Q.words;
-	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-	Q.Pointer.clickOrTap = QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
+	Q.Pointer.clickOrTap = QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
 	Q.Pointer.CLICKORTAP = QtQw.CLICKORTAP = QtQw.clickOrTap.toUpperCase();
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
@@ -14319,8 +14350,8 @@ Q.onInit.add(function () {
 			Q.extend(Q.prompt.options, 10, Q.text.prompt);
 			Q.extend(Q.alert.options, 10, Q.text.alert);
 			var QtQw = Q.text.Q.words;
-			QtQw.ClickOrTap = isTouchscreen ? QtQw.Tap : QtQw.Click;
-			QtQw.clickOrTap = isTouchscreen ? QtQw.tap : QtQw.click;
+			QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
+			QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
 			Q.layout(null, true);
 		});
 	}
@@ -15266,7 +15297,7 @@ Q.stackTrace = function() {
 	} else {
 		obj = new Error();
 	}
-	return obj.stack;
+	return obj.stack.replace('Error', 'Stack Trace');
 };
 
 /**

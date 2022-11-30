@@ -9,6 +9,7 @@
 		"lordelph/icofileloader": "1.*",
 		"google/apiclient": "^2.8.1",
 		"sc0vu/web3.php": "dev-master",
-		"web3p/ethereum-tx": "dev-master"
+		"web3p/ethereum-tx": "dev-master",
+		"minishlink/web-push": "^6.0.0"
 	}
 }

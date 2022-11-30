@@ -8,11 +8,12 @@ function Websites_before_Streams_Stream_save_Websites_seo($params)
 	$uri = $stream->getAttribute('uri', null);
 	if (!$uri) return;
 	
-	$url = $stream->getAttribute('url', null);
+	$url = $stream->getAttribute('url', '');
 	if (preg_match('/\s/', $url)) {
 		throw new Q_Exception_WrongValue(array(
 			'field' => 'url',
-			'range' => "no spaces"
+			'range' => "no spaces",
+			'value' => $url
 		));
 	}
 	
@@ -20,7 +21,7 @@ function Websites_before_Streams_Stream_save_Websites_seo($params)
 	$wp->uri = $uri;
 	$wp->retrieve(null, array('ignoreCache' => true));
 	
-	if ($url = $stream->getAttribute('url', null)) {
+	if ($url = $stream->getAttribute('url', '')) {
 		$url = Q_Html::themedUrl($url);
 		if (!isset($wp->url) or $wp->url !== $url) {
 			$wp->url = $url;

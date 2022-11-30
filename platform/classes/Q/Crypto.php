@@ -31,6 +31,9 @@ class Q_Crypto {
      */ 
     static function verify($serialized, $signature, $publicKey, $algorithm = 'sha256')
     {
+        if (empty($signature)) {
+            return false;
+        }
         $adapter = EccFactory::getAdapter();
         $generator = EccFactory::getNistCurves()->generator384();
 

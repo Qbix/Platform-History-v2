@@ -1540,6 +1540,29 @@ class Q_Response
 	{
 		self::$htmlCssClasses[$className] = true;
 	}
+
+	/**
+	 * Get all the HTML CSS classes that were added, as an array
+	 * @method htmlCssClassesArray
+	 * @static
+	 * @return {array}
+	 */
+	static function htmlCssClassesArray()
+	{
+		return array_keys(self::$htmlCssClasses);
+	}
+
+	/**
+	 * Get all the HTML CSS classes that were added, as a space-separated string
+	 * @method htmlCssClasses
+	 * @static
+	 * @return {string}
+	 */
+	static function htmlCssClasses()
+	{
+		return implode(' ', self::htmlCssClassesArray());
+	}
+
 	/**
 	 * Call this method to add attribute to the HTML element in the layout
 	 * @method addHtmlAttribute
@@ -1551,6 +1574,18 @@ class Q_Response
 	{
 		self::$htmlAttributes[$name] = $value;
 	}
+
+	/**
+	 * Get all the attributes added to HTML element, as an array
+	 * @method htmlCssClassesArray
+	 * @static
+	 * @return {array}
+	 */
+	static function htmlAttributesArray()
+	{
+		return array_keys(self::$htmlAttributes);
+	}
+
 	/**
 	 * Used to get or set the language (two-letter lowercase ISO code)
 	 * of the output page. Defaults to "en". It is used in htmlAttributes method.
@@ -1798,9 +1833,9 @@ class Q_Response
 	}
 
 	/**
-	 * Get the value for a cookie that will be sent to the client.
-	 * This is different than the value of the cookie that was sent
-	 * from the client, which is stored in $_COOKIE[$name].
+	 * Get the value for a cookie that will be sent to the client,
+	 * and if that's missing, then fall back to $_COOKIE['name']
+	 * that was sent from the client.
 	 * Use this for session IDs and other things.
 	 * @method cookie
 	 * @static
@@ -1817,6 +1852,7 @@ class Q_Response
 	}
 
 	/**
+	 * Set a cookie in a way that works around PHP's quirks
 	 * @method setCookie
 	 * @static
 	 * @param {string} $name The name of the cookie
@@ -1872,8 +1908,16 @@ class Q_Response
 	 */
 	static function clearCookie($name, $path = null)
 	{
-		self::setCookie($name, '', 1, $path);
-		unset($_COOKIE[$name]);
+		if (Q_Dispatcher::$startedResponse) {
+			throw new Q_Exception("Q_Response::setCookie must be called before Q/response event");
+		}
+		$baseUrl = Q_Request::baseUrl();
+		if (!isset($path)) {
+			$path = parse_url($baseUrl, PHP_URL_PATH);
+		}
+		// see https://bugs.php.net/bug.php?id=38104
+		self::$cookiesToRemove[$name] = array($path, array(true, null), false, false);
+		unset(self::$cookies[$name]);
 	}
 	
 	/**
@@ -1889,23 +1933,25 @@ class Q_Response
 		}
 
 		foreach (self::$cookiesToRemove as $name => $args) {
-			list($path, $domain, $secure, $httponly, $samesite) = $args;
-			self::_cookie($name, '', 1, $path, $domain, $secure, $httponly, $samesite);
+			list($path, $domain, $secure, $httponly) = $args;
+			if (!is_array($domain)) {
+				$domain = array($domain);
+			}
+			foreach ($domain as $d) {
+				self::_cookie($name, '', 1, $path, $d, $secure, $httponly);
+			}
 		}
 		foreach (self::$cookies as $name => $args) {
 			list($value, $expires, $path, $domain, $secure, $httponly, $samesite) = $args;
 			self::_cookie($name, $value, $expires, $path, $domain, $secure, $httponly, $samesite);
 		}
-		$header = '';
-		$header = Q::event('Q/Response/sendCookieHeaders',
-			compact('name', 'value', 'expires', 'path', 'domain', 'secure', 'httponly', 'header'),
-			'after', false, $header
-		);
-		if ($header) {
-			header($header);
-		}
+		$cookiesToRemove = self::$cookiesToRemove;
+		$cookies = self::$cookies;
 		$cookieJS = Q_Request::shouldUseCookieJS();
-		if ($cookieJS) {
+		if (false !== Q::event('Q/Response/sendCookieHeaders',
+			compact('cookiesToRemove', 'cookies', 'cookieJS'),
+			'after', false
+		) and $cookieJS) {
 			$headers = headers_list();
 			foreach ($headers as $header) {
 				if (Q::startsWith($header, 'Set-Cookie:')) {
@@ -1942,7 +1988,7 @@ class Q_Response
 		} else {
 			$domain = $domain ? $domain : '';
 		}
-		if ($samesite) {
+		if ($samesite and version_compare(PHP_VERSION, '7.3.0', '>=')) {
 			setcookie($name, $value, compact('expires', 'path', 'domain', 'secure', 'httponly', 'samesite'));
 		} else {
 			setcookie($name, $value, $expires, $path, $domain, $secure, $httponly);

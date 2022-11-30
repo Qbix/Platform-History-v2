@@ -175,7 +175,8 @@ class Users_Contact extends Base_Users_Contact
 	}
 
 	/**
-	 * Retrieve array of contacts belonging to label
+	 * Retrieve array of contacts of userId under a label.
+	 * Now supports externalLabels of the form "<<< {{platform}}_{{appId}}/{{suffix}}"
 	 * @method fetch
 	 * @static
 	 * @param {string} $userId The user whose contacts to fetch
@@ -186,14 +187,14 @@ class Users_Contact extends Base_Users_Contact
 	 * @param {boolean} [$options.skipAccess] whether to skip access checks
 	 * @param {string} [$options.asUserId] the user to do access checks as
 	 * @param {string|array} [$options.contactUserId=null] Optionally filter by contactUserId
-	 * @return {array}
+	 * @return {array} array of Users_Contact rows
 	 */
 	static function fetch($userId, $label = null, $options = array())
 	{
 		if (empty($userId)) {
 			throw new Q_Exception_RequiredField(array('field' => 'userId'));
 		}
-		if (empty($options['skipAccess'])) {
+		if (empty($options['skipAccess']) and $label) {
 			$asUserId = isset($options['asUserId'])
 				? $options['asUserId']
 				: Users::loggedInUser(true)->id;
@@ -202,8 +203,9 @@ class Users_Contact extends Base_Users_Contact
 		$limit = isset($options['limit']) ? $options['limit'] : false;
 		$offset = isset($options['offset']) ? $options['offset'] : 0;
 		
+		$criteria = compact('userId');
 		if (isset($options['contactUserId'])) {
-			$contactUserId = $options['contactUserId'];
+			$criteria['contactUserId'] = $options['contactUserId'];
 		}
 		
 		$criteria = @compact('userId', 'contactUserId');
@@ -212,17 +214,48 @@ class Users_Contact extends Base_Users_Contact
 			if (is_string($label) and substr($label, -1) === '/') {
 				$label = new Db_Range($label, true, false, true);
 			}
-			if (is_string($label)) {
-				$label = explode("\t", $label);
-			}
-			$criteria['label'] = $label;
+			$criteria['label'] = $label; // can be array, string, or range
 		}
 
 		$query = Users_Contact::select()->where($criteria);
 		if ($limit) {
 			$query = $query->limit($limit, $offset);
 		}
-		return $query->fetchDbRows();
+		$nativeContacts = $query->fetchDbRows();
+
+		$results = Users_ExternalTo::fetchXidsByLabels($userId, $label, $options, $userIdsByXids);
+		$externalContacts = array();
+		foreach ($results as $platform => $platformResults) {
+			foreach ($platformResults as $appId => $contactXids) {
+				$contactUserIds = array();
+				$remainingXids = array();
+				foreach ($contactXids as $i => $contactXid) {
+					if (isset($userIdsByXids[$contactXid][$platform][$appId])) {
+						$contactUserIds[] = $userIdsByXids[$contactXid][$platform][$appId];
+					} else {
+						if ($secondAppId = Users_ExternalTo::secondAppId($platform, $appId)
+						and isset($userIdsByXids[$contactXid][$platform][$appId])) {
+							$contactUserIds[] = $userIdsByXids[$contactXid][$platform][$appId];
+						} else {
+							$remainingXids[] = $contactXid;
+						}
+					}
+				}
+				$remainingUserIds = Users_User::idsFromPlatformXids(
+					$platform,
+					$appId,
+					$remainingXids,
+					true
+				);
+				$contactUserIds = array_merge($contactUserIds, $remainingUserIds);
+				foreach ($contactUserIds as $contactUserId) {
+					$externalContacts[] = new Users_Contact(compact(
+						'userId', 'label', 'contactUserId'
+					));
+				}
+			}
+		}
+		return array_merge($nativeContacts, $externalContacts);
 	}
 	
 	/**

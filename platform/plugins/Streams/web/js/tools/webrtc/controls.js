@@ -825,7 +825,7 @@
                 var dialogList = document.createElement('OL');
                 dialogList.className = 'Streams_webrtc_instructions_dialog';
                 dialogList.innerHTML = `<div>Permission for ` + kind + ` denied. To use it please follow these steps:</div><li>Reload this page</li>
-									<li>` + (Q.info.isTouchscreen ? 'Tap' : 'Click') + ` "Allow" when dialogue will appear asking for access to your ` + kind + `</li>`;
+									<li>` + (Q.info.useTouchEvents ? 'Tap' : 'Click') + ` "Allow" when dialogue will appear asking for access to your ` + kind + `</li>`;
                 instructionsPermissionDialog.appendChild(dialogList);
                 Q.Dialogs.push({
                     title: 'Instructions',

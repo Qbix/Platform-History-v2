@@ -12,7 +12,17 @@
 
 interface Users_ExternalTo_Interface
 {
-
+	/**
+	 * Takes an array of roleIds in externalLabels,
+	 * and queries the external platform or cache.
+	 * Returns an array of (externalLabel => xids) pairs.
+	 * @method fetchXids
+	 * @param {array} $roleIds
+	 * @param {array} [$options=array()]
+	 * @param {string} [$options.pathABI] optionally override the default ABI
+	 * @return {array} externalLabel => array(xid, xid, ...)
+	 */
+	function fetchXids(array $roleIds, array $options = array());
 }
 
 /**
@@ -104,6 +114,123 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		$row = new $className();
 		return $row->copyFrom($fields, $stripPrefix, false, false);
 	}
+
+	/**
+	 * Fetch xids from external platforms, 
+	 * @method fetchXidsByLabels
+	 * @static
+	 * @param {string} $userId
+	 * @param {string|array|Db_Range} $labels Optionally filter by external labels
+	 * @param {array} [$options=array()]
+	 * @param {string|array} [$options.contactUserId=null] Optionally filter by contactUserId
+	 * @param {&array} [$userIdsByXids=array()] pass a reference to an array that will be filled with ($contactXid => $userId) pairs
+	 * @return {array} An array of (label => array(xid, xid, ...)) pairs
+	 */
+	static function fetchXidsByLabels($userId, $labels = null, $options = array(), &$userIdsByXids = array())
+	{
+		if (isset($labels)
+		&& !is_string($labels)
+		&& !is_array($labels)
+		&& !($labels instanceof Db_Range)) {
+			throw new Q_Exception_WrongValue(array(
+				'field' => 'label',
+				'range' => 'string, array or Db_Range',
+				'value' => $labels
+			));
+		}
+		// $user = Users_User::fetch($userId, true);
+		// $xid = $user->getXid($platformApp);
+		$queries = array();
+		if ($labels instanceof Db_Range) {
+			list($platform, $appId, $min) = Users_Label::parseExternalLabel($labels->min);
+			list($p2, $a2, $max) = Users_Label::parseExternalLabel($labels->max);
+			if ($platform !== $p2 or $appId !== $a2) {
+				throw new Q_Exception_WrongValue(array(
+					'field' => 'labels',
+					'range' => 'min and max have same prefix',
+					'value' => (string)$labels
+				));
+			}
+			if ($min and $max
+			and is_numeric($min) and is_numeric($max)) {
+				$min = $labels->includeMin ? $min : $min + 1;
+				$max = $labels->includeMax ? $max : $max - 1;;
+				for ($i = $min; $i <= $max; ++$i) {
+					$queries[$platform][$appId][] = $i;
+				}
+			}
+		}
+		if (is_string($labels)) {
+			$labels = array($labels);
+		}
+		$primaryKeyValues = array();
+		$contactUserIds = !empty($options['contactUserId'])
+			? (is_array($options['contactUserId'])
+				? $options['contactUserId']
+				: array($options['contactUserId'])
+			) : null;
+		if (is_array($labels)) {
+			$labels = array_unique($labels);
+			foreach ($labels as $label) {
+				list($platform, $appId, $roleId) = Users_Label::parseExternalLabel($label);
+				if (isset($appId) and isset($roleId)) {
+					foreach ($contactUserIds as $contactUserId) {
+						$primaryKeyValues[] = array($contactUserId, $platform, $appId);
+						if ($secondAppId = Users_ExternalTo::secondAppId($platform, $appId)) {
+							$primaryKeyValues[] = array($contactUserId, $platform, $secondAppId);
+						}
+					}
+					$queries[$platform][$appId][] = $roleId;
+				}
+			}
+		}
+		$primaryKeyValues = Q_Utils::arrayUnique($primaryKeyValues);
+		$xidsByUserIds = array();
+		$userIdsByXids = array();
+		if (!empty($options['contactUserId'])) {
+			$externalTos = Users_ExternalTo::select()
+			->where(array(
+				'userId,platform,appId' => $primaryKeyValues
+			))->fetchDbRows();
+			foreach ($externalTos as $externalTo) {
+				$xidsByUserIds[$externalTo->platform][$externalTo->appId][$externalTo->userId] = $externalTo->xid;
+				$userIdsByXids[$externalTo->platform][$externalTo->appId][$externalTo->xid] = $externalTo->userId;
+			}
+		}
+		$results = array();
+		foreach ($queries as $platform => $platformQueries) {
+			foreach ($platformQueries as $appId => $roleIds) {
+				$secondAppId = Users_ExternalTo::secondAppId($platform, $appId);
+				$externalTos = Users_ExternalTo::select()
+				->where(array(
+					'userId' => $userId,
+					'platform' => $platform,
+					'appId' => array($appId, $secondAppId)
+				))->limit(1)->fetchDbRows();
+				if (!$externalTos) {
+					continue;
+				}
+				$externalTo = reset($externalTos);
+				try {
+					if (empty($xidsByUserIds[$platform][$appId])) {
+						// get xids from labels
+						$results[$platform][$appId] = $externalTo->fetchXids($roleIds);
+					} else {
+						// get labels from xids
+						$r = $externalTo->fetchExternalLabels($userIdsByXids[$platform][$appId]);
+						foreach ($r as $contactXid => $externalLabels) {
+							foreach ($externalLabels as $externalLabel) {
+								$results[$platform][$appId][$externalLabel][] = $contactXid;
+							}
+						}
+					}
+				} catch (Exception $e) {
+					continue; // for the purposes of this method, silently ignore errors on external platforms
+				}
+			}
+		}
+		return $results;
+	}
 	
 	/**
 	 * The setUp() method is called the first time
@@ -162,6 +289,15 @@ class Users_ExternalTo extends Base_Users_ExternalTo
 		$response = Q_Utils::post($tokenUri, $params);
 		$data = Q::json_decode($response, true);
 		$this->processPlatformResponse($data);
+	}
+
+	static function secondAppId($platform, $appId)
+	{
+		$secondAppId = Q_Config::get('Users', 'apps', $platform, '*', 'appIdForAuth', null);
+		if (!$secondAppId) {
+			list($secondAppId) = Users::appInfo($appId);
+		}
+		return $secondAppId;
 	}
 	
 	/**

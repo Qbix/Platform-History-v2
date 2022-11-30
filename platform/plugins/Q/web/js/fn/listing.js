@@ -76,7 +76,7 @@ function (o) {
 		
 		function moveEventHandler(e)
 		{
-			var event = (Q.info.isTouchscreen ? e.originalEvent.touches[0] : e);
+			var event = (Q.info.useTouchEvents ? e.originalEvent.touches[0] : e);
 			var clientX = event.clientX, clientY = event.clientY;
 			var offset = $this.offset();
 			offset.left -= document.body.scrollLeft, offset.top -= document.body.scrollTop;

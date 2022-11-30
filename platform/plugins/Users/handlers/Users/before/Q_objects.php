@@ -72,7 +72,7 @@ function Users_before_Q_objects(&$params)
 				$signature = $signature['signature'];
 			}
 			try {
-				if (Users::verify($payload, $signature) === false) {
+				if (Users::verify($payload, $signature, true) === false) {
 					throw new Users_Exception_NotAuthorized();
 				}
 			} catch (Q_Exception_MissingPHPVersion $e) {

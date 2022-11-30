@@ -17,7 +17,7 @@ function Users_identifier_post()
 	$identifier = Users::requestedIdentifier($type);
 	if (!$type) {
 		throw new Q_Exception(
-			"a valid email address or mobile number is required", 
+			"a valid email address or mobile number or wallet is required",
 			array('identifier', 'mobileNumber', 'emailAddress')
 		);
 	}

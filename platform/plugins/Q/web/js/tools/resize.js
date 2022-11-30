@@ -255,7 +255,7 @@
             
                         posX = _isTouchScreen ? evt.changedTouches[0].clientX : evt.clientX;
                         posY = _isTouchScreen ? evt.changedTouches[0].clientY : evt.clientY;
-            
+
                         var aX, aY;
             
                         if(tool.state.snapToSidesOnly){
@@ -1572,7 +1572,6 @@
                         tool.pointerInfo.mouseIsPressed = false;
                         tool.pointerInfo.endX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
                         tool.pointerInfo.endY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
-            
                         return;
                     }
             

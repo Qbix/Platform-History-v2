@@ -14,7 +14,11 @@ function Websites_before_Q_responseExtras()
 			array('keywords', 'description')
 		);
 		foreach ($fields as $k => $v) {
-			Q_Response::setMeta($k, $v);
+			Q_Response::setMeta(array(
+				'name' => 'name',
+				'value' => $k,
+				'content' => $v
+			));
 		}
 		Q_Response::setSlot('title', $stream->getAttribute('title'));
 	}

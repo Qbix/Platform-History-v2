@@ -60,6 +60,10 @@
     background-repeat: no-repeat;
     background-size: contain;
     background-position: center center;
+    word-wrap: break-word;
+}
+.Assets_NFT_preview_tool .video-container.fallback {
+    line-height: unset;
 }
 .Assets_NFT_preview_tool .video-container .Q_video_tool {
     top: 50%;
@@ -588,6 +592,13 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 .Assets_NFT_update form[name=createToken] > *:not(:last-child) {
     margin-bottom: 10px;
 }
+.Assets_NFT_preview_tool .Assets_NFT_claim_timeout {
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    width: 100%;
+    font-weight: bold;
+}
 /* .Assets_NFT_preview_tool .Assets_NFT_startDate .dateDays, .Assets_NFT_preview_tool .Assets_NFT_endDate .dateDays {
     display: block;
 } */
@@ -604,13 +615,18 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 #page .Assets_NFT_preview_tool button[name=buy],
 #page .Assets_NFT_preview_tool button[name=buyNow],
 #page .Assets_NFT_preview_tool button[name=soldOut],
-#page .Assets_NFT_preview_tool button[name=update] {
+#page .Assets_NFT_preview_tool button[name=update],
+#page .Assets_NFT_preview_tool button[name=claim],
+#page .Assets_NFT_preview_tool[data-claim=false] .bid-info,
+#page .Assets_NFT_preview_tool .Assets_NFT_claim_timeout {
     display: none;
 }
 
 #page .Assets_NFT_preview_tool[data-owned=false][data-onSale=true] button[name=buy],
 #page .Assets_NFT_preview_tool[data-owned=false][data-onSale=true] button[name=buyNow],
 #page .Assets_NFT_preview_tool[data-owned=false][data-onSale=false] button[name=soldOut],
+#page .Assets_NFT_preview_tool[data-claim=true] button[name=claim],
+#page .Assets_NFT_preview_tool[data-claim=false] .Assets_NFT_claim_timeout,
 #page .Assets_NFT_preview_tool[data-owned=true] button[name=update] {
     display: inline-block;
 }
@@ -769,13 +785,11 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 .Assets_NFT_preview_tool .Assets_NFT_owner {
     height: 40px;
     position: relative;
-    top: -50px;
     overflow: unset;
 }
 .Assets_NFT_preview_tool .Assets_NFT_owner .Users_avatar_icon {
     border-radius: 50%;
     background-color: #fff;
-    display: block;
     margin: 0 auto;
 }
 .Assets_NFT_preview_tool .Assets_NFT_role .Users_avatar_icon {

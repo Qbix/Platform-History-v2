@@ -286,7 +286,16 @@ class Q_Session
 			if (false === Q::event('Q/session/generate', @compact('id'), 'before')) {
 				return false;
 			}
-			$id = self::generateId();
+			
+			// Pass true to generateId in order to get the session ID
+			// be based on the public key in Q_Users_sig, if any.
+			// This is in environments where cookies are not being sent, such
+			// as iframes embedded inside webpages on third-party domains.
+			// The user-agent wishing to regenerate a session ID can just
+			// change the public key. In many browsers this happens anyway due to
+			// the 7-day cap on script-writable storage, such as IndexedDB:
+			// https://webkit.org/blog/10218/full-third-party-cookie-blocking-and-more/
+			$id = self::generateId(true);
 			$isNew = true;
 		}
 
@@ -416,6 +425,7 @@ class Q_Session
 		if (ini_get("session.use_cookies")) {
 		    // note - we no use session_get_cookie_params();
 		    Q_Response::clearCookie(self::name());
+			Q_Response::clearCookie('Q_nonce');
 		}
 	}
 
@@ -962,7 +972,6 @@ class Q_Session
 		if (!isset($secret)) {
 			$secret = Q::app();
 		}
-		$a = hash_hmac('sha256', $sessionId, $secret);
 		return hash_hmac('sha256', $sessionId, $secret);
 	}
 
@@ -1111,23 +1120,45 @@ class Q_Session
 	/**
 	 * Generates a session id, signed with "Q"/"external"/"secret"
 	 * so that the web server won't have to deal with session ids we haven't issued.
+	 * @param {string} [$seed] Pass true here to try to obtain the seed from a hash
+	 *   of the publicKey found in the Q_Users_sig, if it is provided.
+	 *   Or pass a string here, to set your own seed.
+	 *   Otherwise, the seed will be a string of 32 random bytes.
 	 * @return {string}
 	 */
-	static function generateId()
+	static function generateId($seed = null)
 	{
-		$id = Q_Utils::randomHexString(32);
+		if ($seed === true) {
+			$seed = null;
+			$payload = $_REQUEST;
+			try {
+				if ($publicKey = Users::verify($payload, false)) {
+					// valid payload and public key provided
+					$seed = $publicKey;
+				}
+			} catch (Q_Exception_MissingPHPVersion $e) {
+				// we can't check the signature because PHP is too old,
+				// so we can silently exit, or write to the log
+				// SECURITY: inform the admins to update their PHP
+			}
+		}
+		$id = $seed
+			? hash('sha256', $seed) // length 64
+			: Q_Utils::randomHexString(64);
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		if (isset($secret)) {
+			$id = substr($id, 0, 32);
 			$sig = Q_Utils::signature($id, "$secret");
 			$id .= substr($sig, 0, 32);
 		}
-		return Q_Utils::toBase64($id);
+		$prefix = Q_Config::get('Q', 'session', 'id', 'prefix', '');
+		return $prefix . Q_Utils::toBase64($id);
 	}
 	
 	/**
 	 * @param string $id
 	 *
-	 * @return array
+	 * @return array of (boolean $validId, string $firstPart, string $secondPart)
 	 * @throws Q_Exception
 	 * @throws TypeError
 	*/
@@ -1137,6 +1168,7 @@ class Q_Session
 		$result = bin2hex($data);
 		$a = substr($result, 0, 32);
 		$b = substr($result, 32, 32);
+		$b = $b ? $b : ''; // for older PHP
 		$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		$c = isset($secret)
 			? Q_Utils::hashEquals($b, substr(Q_Utils::signature($a, $secret), 0, 32))
@@ -1147,6 +1179,9 @@ class Q_Session
 	/**
 	 * Verifies a session id, that it was correctly signed with "Q"/"external"/"secret"
 	 * so that the web server won't have to deal with session ids we haven't issued.
+	 * This verification can also be done at the edge (e.g. CDN) without bothering our network.
+	 * Now this function strips prefixes separated by "_" or specified in Q/session/id/prefix config,
+	 * for example for a session ID like "sessionId_abc123" it can strip "sessionId_"
 	 * @param {string} $id
 	 * @return {boolean}
 	 */
@@ -1154,6 +1189,15 @@ class Q_Session
 	{
 		if (!$id) {
 			return false;
+		}
+		$parts = explode('_', $id);
+		if (count($parts) > 1) {
+			$id = $parts[1];
+		} else {
+			$prefix = Q_Config::get('Q', 'session', 'id', 'prefix', '');
+			if (Q::startsWith($id, $prefix)) {
+				$id = substr($id, strlen($prefix));
+			}
 		}
 		$results = self::decodeId($id);
 		return $results[0];

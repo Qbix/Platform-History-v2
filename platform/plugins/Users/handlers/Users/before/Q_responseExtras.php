@@ -8,6 +8,10 @@ function Users_before_Q_responseExtras()
 	Q_Response::setScriptData("Q.plugins.Users.signatures", 
 		Q_Config::get('Users', 'signatures', array())
 	);
+	Q_Response::setScriptData(
+		'Q.plugins.Users.authenticate.expires',
+		Q_Config::get('Users', 'authenticate', 'expires', null)
+	);
 	$requireLogin = Q_Config::get('Users', 'requireLogin', array());
 	$rl_array = array();
 	foreach ($requireLogin as $rl => $value) {
@@ -68,9 +72,13 @@ function Users_before_Q_responseExtras()
 		Q_Response::setScriptData("Q.plugins.Users.$k", $apps);
 	}
 
-	Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
-
-	Q_Response::setScriptData('Q.plugins.Users.Web3.factories', Users_Web3::getFactories());
+	if (Q::autoloadRequirementsMet('Users_Web3')) {
+		Q_Response::setScriptData('Q.plugins.Users.Web3.chains', Users_Web3::getChains());
+		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', Users_Web3::getContracts());
+	} else {
+		Q_Response::setScriptData('Q.plugins.Users.Web3.chains', array());
+		Q_Response::setScriptData('Q.plugins.Users.Web3.contracts', array());
+	}
 
 	// add apple signIn js lib
 	if (Q_Request::platform() === 'ios') {

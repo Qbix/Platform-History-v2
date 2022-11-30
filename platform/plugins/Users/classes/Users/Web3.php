@@ -4,6 +4,8 @@ use Web3\Web3;
 use Web3\Contract;
 use Crypto\Keccak;
 use Web3p\EthereumTx\Transaction;
+use Web3\Providers\HttpProvider;
+use Web3\RequestManagers\HttpRequestManager;
 
 /**
  * @module Users
@@ -26,7 +28,7 @@ class Users_Web3 extends Base_Users_Web3 {
 	 * @param {string} $contractAddress the contract address to call the method on,
 	 * @param {string} $methodName in the contract
 	 * @param {string|array} [$params=array()] - params sent to contract method
-	 * @param {string} [$appId=Q::app()] Indicate which entery in Users/apps config to use
+	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
 	 * @param {boolean|null|callable} [$caching=true] Set false to ignore cache and request blockchain every time.
 	 *  Set to null to cache any truthy result while not caching falsy results.
 	 *  Or set to a callable function, to be passed the data as JSON, and return boolean indicating whether to cache or not.
@@ -50,50 +52,27 @@ class Users_Web3 extends Base_Users_Web3 {
 		$transaction = array(),
 		$privateKey = null)
 	{
-		if (!isset($appId)) {
-			$appId = Q::app();
-		}
-
-		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
-		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
-		$appInfo = array_merge($usersWeb3Config, $appInfo);
+		list($appInfo, $provider) = self::objects($appId);
 		if ($cacheDuration === null) {
 			$cacheDuration = Q::ifset($appInfo, 'cacheDuration', 3600);
 		}
-
 		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
 		if (!$chainId) {
 			throw new Q_Exception_MissingConfig(array(
 				'fieldpath' => "'Users/apps/$appId/chainId'"
 			));
 		}
-
 		if (!is_array($params)) {
 			$params = array($params);
 		}
-
 		$from = Q::ifset($transaction, 'from', null);
 		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
 		if ($caching !== false && $cacheDuration && $cache->wasRetrieved()) {
 			return Q::json_decode($cache->result);
 		}
-
 		if ($delay) {
 			usleep($delay);
 		}
-
-		if (empty($appInfo['rpcUrl'])) {
-			throw new Q_Exception_MissingConfig(array(
-				'fieldpath' => "Users/apps/$appId/rpcUrl"
-			));
-		}
-		$infuraId = Q::ifset(
-			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId', null
-		);
-		$rpcUrl = Q::interpolate(
-			$appInfo['rpcUrl'],
-			compact('infuraId')
-		);
 
 		$contractABI = self::getABI($contractABI, $chainId);
 		$data = array();
@@ -130,7 +109,7 @@ class Users_Web3 extends Base_Users_Web3 {
 			}
 		};
 
-		$contract = (new Contract($rpcUrl, $contractABI, $defaultBlock))
+		$contract = (new Contract($provider, $contractABI, $defaultBlock))
 			->at($contractAddress);
 		if ($privateKey) {
 			if (empty($transaction['from'])) {
@@ -187,7 +166,9 @@ class Users_Web3 extends Base_Users_Web3 {
 		}
 		$arguments[] = $transaction;
 		$arguments[] = $defaultBlock;
-		$arguments[] = $callback;
+		if (!$provider->isBatch) {
+			$arguments[] = $callback;
+		}
 		// call contract function
 		
 		call_user_func_array([$contract, "call"], $arguments);
@@ -219,6 +200,78 @@ class Users_Web3 extends Base_Users_Web3 {
 	}
 
 	/**
+	 * Start a batch, then call execute() method multiple times with same $appId,
+	 * and finally call batchExecute($callback, $appId)
+	 * @method batchStart
+	 * @static
+	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
+	 */
+	static function batchStart($appId = null)
+	{
+		list($appInfo, $provider) = self::objects($appId);
+		$provider->batch(true);
+	}
+
+	/**
+	 * Start a batch, then call execute() method multiple times with same $appId,
+	 * and finally call batchExecute($appId)
+	 * @method batchExecute
+	 * @static
+	 * @param {callable} $callback
+	 * @param {string} [$appId=Q::app()] Indicate which entry in Users/apps config to use
+	 */
+	static function batchExecute($callback, $appId = null)
+	{
+		list($appInfo, $provider) = self::objects($appId);
+		$provider->execute($callback);
+		$provider->batch(false);
+	}
+
+	/**
+	 * Get existing provider object, or create a new one
+	 * @method objects
+	 * @static
+	 * @param
+	 * @return {array} array($appInfo, $provider)
+	 */
+	static function objects($appId = null)
+	{
+		if (!isset($appId)) {
+			$appId = Q::app();
+		}
+		$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $appId, array());
+		list($appId, $appInfo) = Users::appInfo('web3', $appId, true);
+		$appInfo = array_merge($usersWeb3Config, $appInfo);
+		$chainId = Q::ifset($appInfo, 'chainId', Q::ifset($appInfo, 'appId', null));
+		if (!$chainId) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "'Users/apps/web3/$appId/chainId'"
+			));
+		}
+		if (empty($appInfo['rpcUrl'])) {
+			throw new Q_Exception_MissingConfig(array(
+				'fieldpath' => "Users/apps/web3/$appId/rpcUrl"
+			));
+		}
+		$infuraId = Q::ifset(
+			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId', null
+		);
+		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId'));
+		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
+			if (empty(self::$providers[$rpcUrl])) {
+				$requestManager = new HttpRequestManager($rpcUrl);
+				$provider = new HttpProvider($requestManager);
+				self::$providers[$rpcUrl] = $provider;
+			} else {
+				$provider = self::$providers[$rpcUrl];
+			}
+		} else {
+			$provider = null;
+		}
+		return array($appInfo, $provider);
+	}
+
+	/**
 	 * Get available Web3 chains information (contact address, currency, rpcUrl, blockExplorerUrl)
 	 * for functions like Q.Users.Web3.switchChain().
 	 * @method getChains
@@ -241,7 +294,10 @@ class Users_Web3 extends Base_Users_Web3 {
 			$default = ($i == $defaultAppId);
 			$usersWeb3Config = Q_Config::get("Users", "web3", "chains", $chainId, null);
 			$rpcUrl = Q::ifset($chain, "rpcUrl", Q::ifset($usersWeb3Config, "rpcUrl", null));
-			$infuraId = Q::ifset($chain, "providers", "walletconnect", "infura", "projectId", null);
+			$infuraId = Q::ifset(
+				$chain, "providers", "walletconnect", "infura", "projectId",
+				Q::ifset($chain,"infura", "projectId", null)
+			);
 			$blockExplorerUrl = Q::ifset($chain, "blockExplorerUrl", Q::ifset($usersWeb3Config, "blockExplorerUrl", null));
 			$abiUrl = Q::ifset($chain, "abiUrl", Q::ifset($usersWeb3Config, "abiUrl", null));
 
@@ -262,14 +318,14 @@ class Users_Web3 extends Base_Users_Web3 {
 
 	/**
 	 * Get available Web3 factories information
-	 * @method getChains
+	 * @method getContracts
 	 * @param {string} [$needChainId] if defined return only this chain info
 	 * @static
 	 * @return array
 	 */
-	static function getFactories()
+	static function getContracts()
 	{
-		return Q_Config::get('Users', 'Web3', 'factories', array());
+		return Q_Config::get('Users', 'web3', 'contracts', array());
 	}
 
 	/**
@@ -446,4 +502,51 @@ class Users_Web3 extends Base_Users_Web3 {
 
 		return false;
 	}
+
+	/**
+	 * Check if string is valid Ethereum address
+	 * this method created on the basis https://stackoverflow.com/questions/44990408/how-to-validate-ethereum-addresses-in-php
+	 * @method isValidAddress
+	 * @static
+	 * @param {String} $address
+	 * @param {string} [$normalized=null] Will be filled with the address string if valid.
+	 * This var need for compatibility with Q_Valid methods.
+	 * @return {Boolean}
+	 */
+	static function isValidAddress ($address, &$normalized=null) {
+		// check if matches pattern
+		if (!preg_match('/^(0x)?[0-9a-f]{40}$/i', $address)) {
+			return false;
+		}
+
+		// check if all same caps
+		if (preg_match('/^(0x)?[0-9a-f]{40}$/', $address) || preg_match('/^(0x)?[0-9A-F]{40}$/', $address)) {
+			$normalized = $address;
+			return true;
+		}
+
+		// check valid valid checksum
+		$address = str_replace('0x', '', $address);
+		$addressArray = str_split($address);
+		$hash = Keccak::hash(strtolower($address), 256);
+		$hashArray = str_split($hash);
+
+		// See: https://github.com/web3j/web3j/pull/134/files#diff-db8702981afff54d3de6a913f13b7be4R42
+		for ($i = 0; $i < 40; $i++ ) {
+			if (ctype_alpha($addressArray[$i])) {
+				// Each uppercase letter should correlate with a first bit of 1 in the hash char with the same index,
+				// and each lowercase letter with a 0 bit.
+				$charInt = intval($hashArray[$i], 16);
+
+				if ((ctype_upper($addressArray[$i]) && $charInt <= 7) || (ctype_lower($addressArray[$i]) && $charInt > 7)) {
+					return false;
+				}
+			}
+		}
+
+		$normalized = $address;
+		return true;
+	}
+
+	public static $providers = array();
 };

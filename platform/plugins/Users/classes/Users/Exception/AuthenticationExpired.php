@@ -13,4 +13,4 @@ class Users_Exception_AuthenticationExpired extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Users_Exception_AuthenticationExpired', 'Authentication token has expired');
+Q_Exception::add('Users_Exception_AuthenticationExpired', 'Authentication token has expired', 401);

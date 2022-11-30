@@ -668,7 +668,8 @@
 			"Streams/user/tv": true,
 			"Streams/user/movies": true,
 			"Streams/user/books": true,
-			"Streams/user/urls": true
+			"Streams/user/urls": true,
+			"Streams/user/xid/web3": true
 		},
 		"calls": {
 			"answered": ["Users/owners", "Users/admins"]

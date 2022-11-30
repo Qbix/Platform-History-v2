@@ -22,6 +22,7 @@
  *   @param {Function} [options.create] Optional. You can pass a function here, which takes the tool as "this"
  *     and a callback as the first parameter, is supposed to create a stream and
  *     call the callback with (err, stream). If omitted, then the tool doesn't render.
+ *   @param {String} [options.fallback] Content to put in the inplace element in case of missing streams
  *   @param {Q.Event} [options.onLoad]
  *   @param {Q.Event} [options.onUpdate]
  *   @param {Q.Event} [options.onError]
@@ -39,13 +40,18 @@ Q.Tool.define("Streams/inplace", function (options) {
 	//  - attribute: alternatively, the name of an attribute to bind to
 
 	function _construct(err) {
-		if (err) {
-			return tool.state.onError.handle(err);
+		var stream = Q.Streams.isStream(this) ? this : null;
+		if (err || !stream) {
+			state.fallback = (state.fallback !== null)
+				? state.fallback
+				: Q.firstErrorMessage(err);
+			state.editable = false;
+			//return tool.state.onError.handle(err);
+		} else {
+			state.publisherId = stream.fields.publisherId;
+			state.streamName = stream.fields.name;
 		}
-		var stream = this;
-		state.publisherId = stream.fields.publisherId;
-		state.streamName = stream.fields.name;
-		
+
 		var currentContent = null;
 		var currentHtml = null;
 
@@ -71,7 +77,8 @@ Q.Tool.define("Streams/inplace", function (options) {
 		}
 
 		function _setContent(content) {
-			if (tool.inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace')) {
+			tool.inplace = tool.sibling('Q/inplace') || tool.child('', 'Q/inplace');
+			if (tool.inplace) {
 				tool.$static = tool.inplace.$static;
 				tool.inplace.state.onLoad.add(state.onLoad.handle.bind(tool));
 			} else if (!tool.$static) {
@@ -122,114 +129,129 @@ Q.Tool.define("Streams/inplace", function (options) {
 			}
 		}
 
-		if (state.attribute) {
-			state.field = 'attributes['+encodeURIComponent(state.attribute)+']';
-			stream.onAttribute(state.attribute).set(function (attributes, k) {
-				if (attributes[k] !== null) {
-					_setContent(attributes[k]);
-				} else {
-					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
-						_setContent(this.getAttribute(k));
-					});
-				}
-			}, tool);
-		} else {
-			state.field = state.field || 'content';
-			stream.onFieldChanged(state.field).set(function (fields, k) {
-				if (fields[k] !== null) {
-					_setContent(fields[k]);
-				} else {
-					Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
-						_setContent(this.fields[k]);
-					});
-				}
-			}, tool);
+		if (stream) {
+			if (state.attribute) {
+				state.field = 'attributes['+encodeURIComponent(state.attribute)+']';
+				stream.onAttribute(state.attribute).set(function (attributes, k) {
+					if (attributes[k] !== null) {
+						_setContent(attributes[k]);
+					} else {
+						Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
+							_setContent(this.getAttribute(k));
+						});
+					}
+				}, tool);
+			} else {
+				state.field = state.field || 'content';
+				stream.onFieldChanged(state.field).set(function (fields, k) {
+					if (fields[k] !== null) {
+						_setContent(fields[k]);
+					} else {
+						Q.Streams.Stream.refresh(state.publisherId, state.streamName, function () {
+							_setContent(this.fields[k]);
+						});
+					}
+				}, tool);
+			}
 		}
-		
-		if (!$container.length) {
-			// dynamically construct the tool
-			var ipo = Q.extend(state.inplace, {
-				action: stream.actionUrl(),
-				method: 'put',
-				field: state.field,
-				type: state.inplaceType
-			});
-			var value = (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field]) || "";
-			switch (state.inplaceType) {
-				case 'text':
-					ipo.staticHtml = String(value).encodeHTML();
-					break;
-				case 'textarea':
-					ipo.staticHtml = String(value).encodeHTML().replaceAll({
-						'&lt;br&gt;': "<br>",
-						'&lt;br /&gt;': "<br>",
-						'&nbsp;': ' '
-					});
-					break;
-				case 'select':
+
+		// dynamically construct the tool
+		var ipo = Q.extend(state.inplace, {
+			action: stream && stream.actionUrl(),
+			method: 'put',
+			field: state.field,
+			type: state.inplaceType
+		});
+		var value = (stream && (state.attribute ? stream.getAttribute(state.attribute) : stream.fields[state.field])) || state.fallback || "";
+		switch (state.inplaceType) {
+			case 'text':
+				ipo.staticHtml = String(value).encodeHTML();
+				break;
+			case 'textarea':
+				ipo.staticHtml = String(value).encodeHTML().replaceAll({
+					'&lt;br&gt;': "<br>",
+					'&lt;br /&gt;': "<br>",
+					'&nbsp;': ' '
+				});
+				break;
+			case 'select':
+				if (state.editable && (stream && stream.testWriteLevel('suggest'))) {
 					if (!ipo.options) {
 						throw new Q.Error("Streams/inplace tool: inplace.options must be provided");
 					}
 					if (!(value in ipo.options)) {
 						throw new Q.Error("Streams/inplace tool: inplace.options must contain value: " + value);
 					}
+
 					ipo.staticHtml = String(ipo.options[value]).encodeHTML();
-					break;
-				default:
-					throw new Q.Error("Streams/inplace tool: inplaceType must be 'textarea', 'text' or 'select'");
-			}
-
-			if (state.editable === false || !stream.testWriteLevel('suggest')) {
-				var span = document.createElement('span');
-				span.setAttribute('class', 'Q_inplace_tool_container');
-				var div = document.createElement('div');
-				var staticClass = options.inplaceType === 'textarea'
-					? 'Q_inplace_tool_blockstatic'
-					: 'Q_inplace_tool_static';
-				div.setAttribute('class', staticClass);
-				if (div.innerHTML !== ipo.staticHtml) {
-					// replace URLs with links
-					if (state.URLtoLink) {
-						ipo.staticHtml = _urlToLink(ipo.staticHtml);
-					}
-					div.innerHTML = ipo.staticHtml;
+				} else {
+					ipo.staticHtml = String(value).encodeHTML();
 				}
-				span.appendChild(div);
-				tool.$static = $(div);
-				tool.element.appendChild(span);
-				Q.handle(state.onLoad, tool);
-				return; // leave the html that is currently in the element
-			}
 
+				break;
+			default:
+				throw new Q.Error("Streams/inplace tool: inplaceType must be 'textarea', 'text' or 'select'");
+		}
+
+		if (state.editable === false || !(stream && stream.testWriteLevel('suggest'))) {
+			var span = document.createElement('span');
+			span.setAttribute('class', 'Q_inplace_tool_container');
+			var div = document.createElement('div');
+			var staticClass = options.inplaceType === 'textarea'
+				? 'Q_inplace_tool_blockstatic'
+				: 'Q_inplace_tool_static';
+			div.setAttribute('class', staticClass);
+			if (div.innerHTML !== ipo.staticHtml) {
+				// replace URLs with links
+				if (state.URLtoLink) {
+					ipo.staticHtml = _urlToLink(ipo.staticHtml);
+				}
+				div.innerHTML = ipo.staticHtml;
+			}
+			span.appendChild(div);
+			tool.$static = $(div);
+			tool.element.innerHTML = "";
+			tool.element.appendChild(span);
+			//Q.handle(state.onLoad, tool);
+		} else if ($container.length) {
+			tool.Q.onInit.add(_content, tool);
+		} else {
 			tool.setUpElement(tool.element, 'Q/inplace', ipo);
 			Q.activate(tool.element, _content);
-		} else {
-			tool.Q.onInit.add(_content, tool);
 		}
-		
+
 		function _content() {
-			if (state.attribute) {
+			if (state.fallback) {
+				_setContent(state.fallback);
+			} else if (state.attribute) {
 				_setContent(stream.attributes[state.attribute]);
 			} else {
 				_setContent(stream.fields[state.field]);
 			}
 		}
+
+		return {
+			skipException: true
+		};
 	}
 	
-	if (state.stream) {
+	if (Q.Streams.isStream(state.stream)) {
 		state.publisherId = state.stream.fields.publisherId;
 		state.streamName = state.stream.fields.name;
 		delete state.stream;
 	}
-	if (!state.publisherId || !state.streamName) {
-		throw new Q.Error("Streams/inplace tool: stream is undefined");
+	if (state.fallback) {
+		Q.handle(_construct, null, [state.fallback]);
+	} else if (!state.publisherId || !state.streamName) {
+		Q.handle(_construct, tool, ["Streams/inplace tool: stream is undefined"]);
+	} else {
+		Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, _construct);
 	}
-	Q.Streams.retainWith(tool)
-	.get(state.publisherId, state.streamName, _construct);
 },
 
 {
 	inplaceType: 'textarea',
+	fallback: null,
 	editable: true,
 	create: null,
 	URLtoLink: false,

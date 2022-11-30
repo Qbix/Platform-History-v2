@@ -16,7 +16,8 @@
 		connected: {}, // check this to see if you are connected to a platform
 		icon: {
 			defaultSize: 40 // might be overridden, but is required by some tools
-		}
+		},
+		roles: {}
 	};
 
 	var dc = Q.extend.dontCopy;
@@ -399,7 +400,7 @@
 				// so let's sign another authenticated message
 				Q.cookie('Q_Users_w3sr_' + platformAppId, null, {path: '/'});
 				_doCancel(platform, platformAppId, null, onSuccess, onCancel, options);
-				Users.Web3.authResponse = null;
+				Web3.authResponse = null;
 			}
 		});
 	};
@@ -476,7 +477,10 @@
 				ar.appId = appId;
 				fields['Q.Users.facebook.authResponse'] = ar;
 			} else if (platform === 'web3') {
-				Q.extend(fields, Users.Web3.authResponse);
+				Q.extend(fields, Web3.authResponse);
+				if (Q.getObject(options, "updateXid")) {
+					fields.updateXid = options.updateXid;
+				}
 			}
 			_doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options);
 		}
@@ -543,15 +547,8 @@
 			fields[Users.signatures.nonceField] = nonce;
 			found = true;
 			var fieldNames = Q.isArrayLike(v) ? v : Object.keys(fields);
-			Users.sign(fields,
-			function (err, signature) {
-				if (err) {
-					callback(url, slotNames, options);
-				}
-				fields[Users.signatures.sigField] = {
-					signature: signature,
-					fieldNames: fieldNames
-				}
+			Users.sign(fields, function (err, fields) {
+				options.fields = fields;
 				callback(url, slotNames, options);
 			}, fieldNames);
 		});
@@ -561,28 +558,31 @@
 	});
 
 	/**
-	 * Sign a specific payload with the user's private key, if it has been saved in IndexedDB.
+	 * Generates a signature for a specific payload with the user's private key, if it has been saved in IndexedDB.
 	 * Gets canonical serialization of the payload with Q.serialize(),
 	 * then gets the key from IndexedDB and signs the serialization.
-	 * It can be verified with Users.verify() or Q_Users::verify()
-	 * @method sign
+	 * It can be verified with Users.verify() in JS or Q_Users::verify() in PHP.
+	 * @method signature
 	 * @static
 	 * @param {Object} payload The payload to sign. It will be serialized with Q.serialize()
-	 * @param {Function} callback Receives the signature, if one was computed
-	 * @param {Array} [fieldNames] The names of the fields from the payload to sign, otherwise signs all.
+	 * @param {Function} callback Receives err and then the signature, if one was computed
+	 * @param {Object} options
+	 * @param {Object} [options.key] Set the key to use, to sign the payload with
+	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
 	 * @return {Boolean} Returns true unless crypt.subtle is undefined because the page is in insecure context
 	 */
-	Users.sign = function (payload, callback, fieldNames) {
+	Users.signature = function (payload, callback, options) {
 		if (!crypto || !crypto.subtle) {
 			return false;
 		}
-		if (fieldNames && fieldNames.indexOf(Users.signatures.nonceField) < 0) {
-			fieldNames.push(Users.signatures.nonceField);
-		}
+		var fieldNames = options && options.fieldNames;
+		// if (fieldNames && fieldNames.indexOf(Users.signatures.nonceField) < 0) {
+		// 	fieldNames.push(Users.signatures.nonceField);
+		// }
 		var serialized = Q.serialize(
 			fieldNames ? Q.take(payload, fieldNames) : payload
 		);
-		var key = Users.Session.key.loaded;
+		var key = (options && options.key) || Users.Session.key.loaded;
 		if (key) {
 			_sign(null, key);
 		} else {
@@ -600,10 +600,54 @@
 				var signature = Array.prototype.slice.call(
 					new Uint8Array(arrayBuffer), 0
 				).toHex();
-				Q.handle(callback, null, [signature]);
+				Q.handle(callback, null, [null, signature, key]);
+			}).catch(function (e) {
+				Q.handle(callback, null, [e]);
 			});
 		}
-	}
+	};
+
+	/**
+	 * Copies and signs a given payload using Users.signature (see that function).
+	 * Inserts the signature, publilc key and field under the field whose name is
+	 * stored in Users.signatures.sigField
+	 * @param {Object} payload 
+	 * @param {Function} callback Receives err, fields with the signed payload,
+	 *  expanded with a field named after Users.signature.sigField, containing the keys
+	 *  "signature", "publicKey" and "fieldNames".
+	 * @param {Object} options
+	 * @param {Object} [options.key] Set the key to use, to sign the payload with
+	 * @param {Array} [options.fieldNames] The names of the fields from the payload to sign, otherwise signs all.
+	 */
+	Users.sign = function (payload, callback, options) {
+		var fields = Q.copy(payload);
+		Users.signature(fields, function (err, signature, key) {
+			if (err) {
+				return callback && callback(err);
+			}
+			if (options.key) {
+				crypto.subtle.exportKey('spki', key.publicKey)
+				.then(function (pk) {
+					var key_hex = Array.prototype.slice.call(
+						new Uint8Array(pk), 0
+					).toHex();
+					_proceed(key_hex);
+				});
+			} else if (Users.Session.publicKey) {
+				_proceed(Users.Session.publicKey);
+			} else {
+				return callback("Users.sign: User.Session.publicKey missing");
+			}
+			function _proceed(publicKeyString) {
+				fields[Users.signatures.sigField] = {
+					signature: signature,
+					publicKey: publicKeyString,
+					fieldNames: options.fieldNames || null
+				};
+				return callback && callback(null, fields);
+			}
+		}, options);
+	};
 
 	/**
 	 * Used when platform user is logged in to platform but not to app.
@@ -918,7 +962,7 @@
 					appId: appId
 				});
 			} else if (o.using[0] === 'web3') { // only web3 used. Open web3 login right away
-				Users.Web3.login(function (result) {
+				Web3.login(function (result) {
 					if (!result) {
 						_onCancel();
 					} else {
@@ -1085,7 +1129,7 @@
 
 	/**
 	 * Users batch getter.
-	 * @method get
+	 * @method getgetc
 	 * @param {String} userId The user's id
 	 * @param {Function} callback
 	 *    if there were errors, first parameter is an array of errors
@@ -1241,6 +1285,9 @@
 		options = Q.extend({}, Users.setIdentifier.options, options);
 		var identifierType = Q.getObject("identifierType", options);
 		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
+		if (identifierType.toLowerCase() === "web3") {
+			identifier = Web3.getLoggedInUserXid();
+		}
 
 		function onSuccess(user) {
 			if (false !== Q.handle(options.onResult, this, [user])) {
@@ -1700,7 +1747,7 @@
 		var step2_div = $('<div id="Users_login_step2" class="Q_big_prompt" />');
 		// step1_form request identifier
 		var placeholder = Q.text.Users.login.placeholders.identifier;
-		var type = Q.info.isTouchscreen ? 'email' : 'text';
+		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = options.identifierType ? options.identifierType.split(',') : [];
 		if (parts.length === 1) {
 			if (parts[0] == 'email') {
@@ -1765,7 +1812,7 @@
 			}).trigger('Q_refresh');
 			var url = Q.action(Users.login.options.userQueryUri) + '?' + $(this).serialize();
 			Q.request(url, ['data'], login_callback, {
-				xhr: Q.info.isTouchscreen ? 'sync' : {}
+				xhr: Q.info.useTouchEvents ? 'sync' : {}
 			});
 			event.preventDefault();
 			return;
@@ -1843,7 +1890,7 @@
 						if (login_setupDialog.dialog) {
 							login_setupDialog.dialog.data('Q/dialog').close();
 						}
-						Users.Web3.login(function (result) {
+						Web3.login(function (result) {
 							if (!result) {
 								_onCancel();
 							} else {
@@ -1974,7 +2021,7 @@
 	function setIdentifier_setupDialog(identifierType, options) {
 		options = options || {};
 		var placeholder = Q.text.Users.setIdentifier.placeholders.identifier;
-		var type = Q.info.isTouchscreen ? 'email' : 'text';
+		var type = Q.info.useTouchEvents ? 'email' : 'text';
 		var parts = identifierType ? identifierType.split(',') : [];
 		if (parts.length === 1) {
 			if (parts[0] === 'email') {
@@ -1991,19 +2038,18 @@
 
 		var autocomplete = (type === 'text') ? 'on' : type;
 		step1_form.empty().append(
-			$('<input id="Users_setIdentifier_identifier" />').attr({
+			$('<input id="Users_setIdentifier_identifier" />').prop({
 				name: 'identifier',
 				autocomplete: autocomplete,
-				type: type
-			}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
-				.attr('placeholder', placeholder)
+				type: type,
+				maxlength: Q.text.Users.login.maxlengths.identifier,
+				placeholder: placeholder
+			})
 		).append(
 			$('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />').val(identifierType)
 		).append(
-			$('<div class="Q_buttons"/>').html(
-				$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />').html(
-					Q.text.Users.setIdentifier.sendMessage
-				)
+			$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />').html(
+				Q.text.Users.setIdentifier.sendMessage
 			)
 		).submit(function (event) {
 			var $identifier = $('#Users_setIdentifier_identifier');
@@ -2019,11 +2065,10 @@
 			event.preventDefault();
 		});
 		if (options.userId) {
-			step1_form.append($('<input />').attr({
+			step1_form.append($('<input />').prop({
 				type: "hidden",
-				name: "userId",
-				value: options.userId
-			}));
+				name: "userId"
+			})).val(options.userId);
 		}
 		step1_form.plugin('Q/validator');
 
@@ -2037,6 +2082,7 @@
 		dialog.plugin('Q/dialog', {
 			alignByParent: false,
 			fullscreen: false,
+			className: options.className,
 			beforeLoad: function () {
 				setTimeout(function () {
 					$('input[type!=hidden]', dialog).val('').trigger('change');
@@ -2143,13 +2189,13 @@
 	 */
 	Users.nextHint = function (eventName) {
 		var key, info, index, targets, options;
-		info = Q.Users.nextHint.hints[eventName];
+		info = Users.nextHint.hints[eventName];
 		if (!info || !Q.isArrayLike(info)) {
 			return false;
 		}
 		Q.each(info, function (hintIndex) {
 			var k = [eventName, hintIndex].join('/');
-			if (Q.Users.hinted.indexOf(k) < 0) {
+			if (Users.hinted.indexOf(k) < 0) {
 				index = hintIndex;
 				key = k;
 				return false;
@@ -2164,7 +2210,7 @@
 		return true;
 	};
 	
-	Q.Users.nextHint.hints = {};
+	Users.nextHint.hints = {};
 	
 	/**
 	 * Adds the hint information for use with Q.Users.nextHint() function.
@@ -2178,7 +2224,7 @@
 	 *  otherwise it just adds this hint as the next in the queue.
 	 */
 	Users.addHint = function (eventName, targets, options, hintIndex) {
-		var h = Q.Users.nextHint.hints[eventName] = Q.Users.nextHint.hints[eventName] || [];
+		var h = Users.nextHint.hints[eventName] = Users.nextHint.hints[eventName] || [];
 		if (hintIndex >= 0) {
 			h[hintIndex] = [targets, options];
 		} else {
@@ -2404,27 +2450,30 @@
 					request.onsuccess = function (event) {
 						// if successfully saved on the client,
 						// then tell the server the exported public key
-						Q.handle(callback, null, [null, event, key]);
+						_save(key, function () {
+							Q.handle(callback, null, [null, event, key]);
+						});
 					};
 					request.onerror = function (event) {
 						Q.handle(callback, null, [null, event, key]);
 					}
 				});
-				function _save (key) {
-					crypto.subtle.exportKey('spki', key.publicKey)
-					.then(function (pk) {
-						var key_hex = Array.prototype.slice.call(
-							new Uint8Array(pk), 0
-						).toHex();
-						Q.req('Users/key', ['saved'], function () {
-							// now server will require it
+				function _save (key, callback) {
+					var fields =  {
+						info: info
+					};
+					Q.Users.sign(fields, function (err, fields) {
+						Q.req('Users/key', ['saved'], function (err) {
+							// from now on, the server will use it
+							// for validating requests in this session
+							Q.handle(this, arguments);
 						}, {
 							method: 'post',
-							fields: {
-								publicKey: key_hex,
-								info: info
-							}
+							fields: fields
 						});
+					}, {
+						key: key,
+						fieldNames: ['info']
 					});
 				}
 			});
@@ -2828,13 +2877,9 @@
 			}
 		});
 
-		Users.Web3.getContract = Q.getter(Users.Web3.getContract, {
-			cache: Q.Cache.document("Users.Web3.getContract")
-		});
-
 		Users.lastSeenNonce = Q.cookie('Q_nonce');
 
-		Q.Users.login.options = Q.extend({
+		Users.login.options = Q.extend({
 			onCancel: new Q.Event(),
 			onSuccess: new Q.Event(function Users_login_onSuccess(user, options, priv) {
 				// default implementation
@@ -2869,9 +2914,9 @@
 			setupRegisterForm: null,
 			identifierType: 'email,mobile',
 			activation: 'activation'
-		}, Q.Users.login.options, Q.Users.login.serverOptions);
+		}, Users.login.options, Users.login.serverOptions);
 
-		Q.Users.logout.options = Q.extend({
+		Users.logout.options = Q.extend({
 			url: Q.action('Users/logout'),
 			using: '*',
 			onSuccess: new Q.Event(function (options) {
@@ -2880,18 +2925,18 @@
 					|| urls[Q.info.app + '/welcome']
 					|| Q.url(''));
 			}, 'Users')
-		}, Q.Users.logout.options, Q.Users.logout.serverOptions);
+		}, Users.logout.options, Users.logout.serverOptions);
 
-		Q.Users.setIdentifier.options = Q.extend({
+		Users.setIdentifier.options = Q.extend({
 			onCancel: null,
 			onSuccess: null, // gets passed session
 			identifierType: 'email,mobile',
 			dialogContainer: 'body'
-		}, Q.Users.setIdentifier.options, Q.Users.setIdentifier.serverOptions);
+		}, Users.setIdentifier.options, Users.setIdentifier.serverOptions);
 
-		Q.Users.prompt.options = Q.extend({
+		Users.prompt.options = Q.extend({
 			dialogContainer: 'body'
-		}, Q.Users.prompt.options, Q.Users.prompt.serverOptions);
+		}, Users.prompt.options, Users.prompt.serverOptions);
 
 	}, 'Users');
 
@@ -2902,9 +2947,9 @@
 			}
 			Q.extend(Q.text.Users, 10, text);
 		});
-		if (Q.Users.loggedInUser
-		&& Q.typeOf(Q.Users.loggedInUser) !== 'Q.Users.User') {
-			Q.Users.loggedInUser = new Users.User(Q.Users.loggedInUser);
+		if (Users.loggedInUser
+		&& Q.typeOf(Users.loggedInUser) !== 'Q.Users.User') {
+			Users.loggedInUser = new Users.User(Users.loggedInUser);
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		}
 		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
@@ -3028,22 +3073,25 @@
 			}
 		}
 		if (lost) {
-			Q.Users.onLoginLost.handle();
-			Q.Users.loggedInUser = null;
+			Users.onLoginLost.handle();
+			Users.loggedInUser = null;
 			Users.Session.key.loaded = null;
-			Q.Users.roles = {};
+			Users.roles = {};
 			Q.Session.clear();
-			Q.Users.hinted = [];
+			Users.hinted = [];
 		}
 	}, 'Users');
 
 	Users.init.facebook.onInit = new Q.Event();
 	var ddc = document.documentElement;
 	Users.onLogin = new Q.Event(function () {
+		for (var role in Users.roles) {
+			ddc.addClass('Users_role-' + Q.normalize(role).toCapitalized());
+		}
 		ddc.className = ddc.className.replace(' Users_loggedOut', '') + ' Users_loggedIn';
 
 		// set language
-		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Q.Users);
+		var preferredLanguage = Q.getObject("loggedInUser.preferredLanguage", Users);
 		var info = preferredLanguage ? [preferredLanguage] : Q.first(Q.info.languages);
 		if (info) {
 			Q.Text.setLanguage.apply(Q.Text, info);
@@ -3057,13 +3105,14 @@
 	Users.onLogout = new Q.Event(function () {
 		Users.Session.key.loaded = null;
 		Users.Session.key.publicKey = null;
-		Q.Users.loggedInUser = null;
-		Q.Users.roles = {};
-		Q.Users.hinted = [];
+		Users.loggedInUser = null;
+		Users.roles = {};
+		Users.hinted = [];
 		Q.Session.clear();
-		Users.Web3.authResponse = null;
+		Web3.authResponse = null;
 		ddc.className = ddc.className.replace(' Users_loggedIn', '') + ' Users_loggedOut';
-	});
+		ddc.className = ddc.className.replace(/(Users_role-\w+s)+/g, '');
+	}, 'Users');
 	Users.onLoginLost = new Q.Event(function () {
 		console.warn("Call to server was made which normally requires user login.");
 	});
@@ -3072,7 +3121,7 @@
 	
 	Q.Socket.onConnect('Users').set(function (socket, ns, url) {
 		Q.loadNonce(function () {
-			socket.emit('Users/user', Q.Users.capability, Q.clientId(),
+			socket.emit('Users/user', Users.capability, Q.clientId(),
 			function () {
 				Q.handle(Users.Socket.onSession);
 			});
@@ -3834,7 +3883,7 @@
 							priv.login_onCancel && priv.login_onCancel();
 						}, {"prompt": false});
 
-					}, {xhr: Q.info.isTouchscreen ? 'sync' : {}});
+					}, {xhr: Q.info.useTouchEvents ? 'sync' : {}});
 				}
 			});
 			var paramsPicture = {
@@ -3919,9 +3968,10 @@
 
 	};
 	
-	Users.Web3 = {
+	var Web3 = Users.Web3 = {
 		chains: {},
 		provider: null,
+		providerEthers: null,
 		web3Modal: null,
 		onAccountsChanged: new Q.Event(),
 		onChainChanged: new Q.Event(),
@@ -3935,7 +3985,7 @@
 			localStorage.removeItem('walletconnect');
 			localStorage.removeItem('WALLETCONNECT_DEEPLINK_CHOICE');
 			Users.disconnect.web3.occurring = true;
-			var p = Users.Web3.provider;
+			var p = Web3.provider;
 			if (window.Web3Modal && Web3Modal.default) {
 				var w = new window.Web3Modal.default;
 				if (w.clearCachedProvider) {
@@ -3950,7 +4000,7 @@
 			if (p.close) {
 				p.close().then(function (result) {
 					delete Users.connected.web3;
-					Users.Web3.provider = null;
+					Web3.provider = null;
 					setTimeout(function () {
 						Users.disconnect.web3.occurring = false;
 						Q.handle(callback);
@@ -3968,7 +4018,7 @@
 					p._handleDisconnect();
 				}
 				delete Users.connected.web3;
-				Users.Web3.provider = null;
+				Web3.provider = null;
 				Q.handle(callback);
 				Users.disconnect.web3.occurring = false;
 			}
@@ -4018,14 +4068,14 @@
 			}
 
 			var disableInjectedProvider = Q.getObject(['web3', appId, 'disableInjectedProvider'], Users.apps);
-			Users.Web3.web3Modal = new window.Web3Modal.default({
+			Web3.web3Modal = new window.Web3Modal.default({
 				// chain: options.chain,
 				cacheProvider: false, // optional
 				providerOptions: providerOptions, // required
 				disableInjectedProvider: disableInjectedProvider // optional. For MetaMask / Brave / Opera.
 			});
 
-			return Users.Web3.web3Modal;
+			return Web3.web3Modal;
 		},
 
 		/**
@@ -4034,40 +4084,41 @@
 		 * @param {Function} callback
 		 */
 		connect: function (callback) {
-			if (Users.Web3.provider) {
-				return Q.handle(callback, null, [null, Users.Web3.provider]);
+			if (Web3.provider) {
+				return Q.handle(callback, null, [null, Web3.provider]);
 			}
-
-			// Try with MetaMask-type connection first
-			if (window.ethereum && ethereum.request) {
-				return ethereum.request({ method: 'eth_requestAccounts' })
-				.then(function (accounts) {
-					Users.Web3.provider = ethereum;
-					return Q.handle(callback, null, [null, Users.Web3.provider]);
-				}).catch(function (e) {
-					Q.handle(callback, null, [e]);
-				});
-			}
-
 
 			Users.init.web3(function () {
-				var web3Modal = Users.Web3.web3Modal || Users.Web3.getWeb3Modal();
-				web3Modal.clearCachedProvider();
-				web3Modal.resetState();
-				web3Modal.connect().then(function (provider) {
-					Users.Web3.provider = provider;
-					Q.handle(callback, null, [null, provider]);
-				}).catch(function (ex) {
-					Q.handle(callback, null, [ex]);
-					throw new Error(ex);
-				});
+				
+				// Try with MetaMask-type connection first
+				if (window.ethereum && ethereum.request) {
+					return ethereum.request({ method: 'eth_requestAccounts' })
+					.then(function (accounts) {
+						Web3.provider = ethereum;
+						return Q.handle(callback, null, [null, Web3.provider]);
+					}).catch(function (e) {
+						Q.handle(callback, null, [e]);
+					});
+				} else {
+					// TODO: have direct deeplinks into wallet browsers
+					var web3Modal = Web3.web3Modal || Web3.getWeb3Modal();
+					web3Modal.clearCachedProvider();
+					web3Modal.resetState();
+					web3Modal.connect().then(function (provider) {
+						Web3.provider = provider;
+						Q.handle(callback, null, [null, provider]);
+					}).catch(function (ex) {
+						Q.handle(callback, null, [ex]);
+						throw new Error(ex);
+					});
+				}
 			});
 		},
 
 		login: function (callback) {
 			Users.prevDocumentTitle = document.title;
 			document.title = Users.communityName;
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (Users.prevDocumentTitle) {
 					document.title = Users.prevDocumentTitle;
 					delete Users.prevDocumentTitle;
@@ -4075,7 +4126,7 @@
 				if (err) {
 					return _cancel();
 				}
-				Users.Web3.provider = provider;
+				Web3.provider = provider;
 
 				// Subscribe to accounts change
 				provider.on("accountsChanged", function (accounts) {
@@ -4094,21 +4145,21 @@
 				provider.on("disconnect", function (error) {
 					console.log("provider.disconnect: ", error);
 
-					if (Users.logout.occurring || Users.Web3.switchChainOccuring) {
-						if (Users.Web3.switchChainOccuring === true) {
-							Users.Web3.switchChainOccuring = false;
+					if (Users.logout.occurring || Web3.switchChainOccuring) {
+						if (Web3.switchChainOccuring === true) {
+							Web3.switchChainOccuring = false;
 						}
 
 						return;
 					}
 
-					Q.Users.logout({using: 'web3', url: ''});
+					Users.logout({using: 'web3', url: ''});
 				});
 				var payload = Q.text.Users.login.web3.payload.interpolate({
 					host: location.host,
 					timestamp: Math.floor(Date.now() / 1000)
 				});
-				var w3 = new Web3(provider);
+				var w3 = new window.Web3(provider);
 				w3.eth.getAccounts().then(function (accounts) {
 					var web3Address = Q.cookie('Q_Users_web3_address') || '';
 					if (web3Address && accounts.includes(web3Address)) {
@@ -4121,7 +4172,7 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
-								var web3 = new Web3();
+								var web3 = new window.Web3();
 								var address = accounts[0];
 								const res = provider.request({
 									method: 'personal_sign',
@@ -4140,14 +4191,16 @@
 						.catch(_cancel);
 					}
 					function _proceed(signature) {
-						Users.Web3.authResponse = {
+						Web3.authResponse = {
 							xid: accounts[0],
 							payload: payload,
 							signature: signature,
 							platform: 'web3',
 							chainId: provider.chainId
 						}
-						callback && callback(Users.Web3.authResponse);
+						if (Q.handle(callback, null, [Web3.authResponse]) === false) {
+							return;
+						}
 						Users.authenticate('web3', function (user) {
 							priv.login_connected = true;
 							priv.login_onConnect && priv.login_onConnect(user);
@@ -4166,15 +4219,21 @@
 		 * Execute method on contract
 		 * @method execute
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {string|Object} contractAddress Can be a string starts with "0x".
-		 *   Or an object with "chainId" and "address", which makes the wallet switch to this chainId
-		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
+		 * @param {string|Object} contractAddress Can be a string starts with "0x", or an object with the properties below.
+		 * @param {string} [contractAddress.contractAddress] If an object is passed then the contractAddress must go here.
+		 * @param {string} [contractAddress.readOnly] This would use a provider, without having to
+		 *    connect with a signer or to switch networks. Use if you're only going to use it for reading data.
+		 * @param {string} [contractAddress.chainId] This would be the chainId to use for method calls
+		 *    on this contract. If readOnly isn't true, then switchChain is called if necessary, to switch
+		 *    the wallet to the new chainId for posting transactions. In this case, the user canceiling this switch
+		 *    would result in an error in the callback/promise.
 		 * @param {String} methodName
 		 * @param {Array} params
 		 * @param {function} callback receives (err, result) with result from the ethers.js contract method
+		 * @return {Promise} to be used instead of callback
 		 */
-		execute: function (contractABIName, contractAddress, methodName, params, callback) {
-			Users.Web3.getContract(
+		execute: Q.promisify(function (contractABIName, contractAddress, methodName, params, callback) {
+			Web3.getContract(
 				contractABIName, 
 				contractAddress, 
 				function (err, contract) {
@@ -4188,19 +4247,19 @@
 					});
 				}
 			);
-		},
+		}),
 		/**
 		 * Get currently selected wallet address asynchronously
 		 * @method getWalletAddress
 		 * @param {function} callback receives (err, address)
 		 */
 		getWalletAddress: function (callback) {
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
 
-				(new Web3(provider)).eth.getAccounts().then(function (accounts) {
+				(new window.Web3(provider)).eth.getAccounts().then(function (accounts) {
 					return Q.handle(callback, null, [null, accounts[0]]);
 				});
 			});
@@ -4209,18 +4268,19 @@
 		 * Get currently selected chain id asynchronously
 		 * @method getChainId
 		 * @param {Function} callback receives (err, chainId) where chainId is in hexadecimal
+		 * @return {Promise} to be used instead of callback
 		 */
-		getChainId: function (callback) {
-			Users.Web3.connect(function (err, provider) {
+		getChainId: Q.promisify(function (callback) {
+			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
-
-				(new Web3(provider)).eth.net.getId().then(function (chainId) {
+				(new window.Web3(provider)).eth.net.getId()
+				.then(function (chainId) {
 					return Q.handle(callback, null, [null, '0x' + Number(chainId).toString(16)]);
 				});
 			});
-		},
+		}),
 
 
 		/**
@@ -4231,7 +4291,7 @@
 		 */
 		 getSelectedXid: function () {
 			var result, provider;
-			provider = Q.Users.Web3.provider || window.ethereum;
+			provider = Web3.provider || window.ethereum;
 			result = provider.selectedAddress || provider.accounts[0];
 			if (result) {
 				return result;
@@ -4269,20 +4329,21 @@
 		 * @param {String} [info.blockExplorerUrl] or blockExplorerUrls
 		 * @param {Array} [info.blockExplorerUrls] or blockExplorerUrl
 		 * @param {Function} callback receives (error, chainId)
+		 * @return {Promise} to be used instead of callback
 		 */
-		switchChain: function (info, callback) {
+		switchChain: Q.promisify(function (info, callback) {
 			if (typeof info === 'string') {
-				info = Users.Web3.chains[info];
+				info = Web3.chains[info];
 			}
 			if (!info || !info.chainId) {
 				return Q.handle(callback, null, ["Q.Users.Web3.switchChain: chainId missing"]);
 			}
-			Users.Web3.connect(function (err, provider) {
+			Web3.connect(function (err, provider) {
 				if (err) {
 					return Q.handle(callback, null, [err]);
 				}
 
-				Users.Web3.switchChainOccuring = true;
+				Web3.switchChainOccuring = true;
 				
 				provider.request({
 					method: 'wallet_switchEthereumChain',
@@ -4321,67 +4382,93 @@
 					});
 				}
 			});
-		},
+		}),
 
 		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
 		 * @method getContract
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
-		 * @param {string|Object} contractAddress Can be a string starts with "0x".
-		 *   Or an object with "chainId" and "address", which makes the wallet switch to this chainId
-		 *   before executing the method. Canceling this switch will cause an error in the callback / promise.
+		 * @param {string|Object} contractAddress Can be a string starts with "0x", or an object with the properties below.
+		 * @param {string} [contractAddress.contractAddress] If an object is passed then the contractAddress must go here.
+		 * @param {string} [contractAddress.readOnly] This would use a provider, without having to
+		 *    connect with a signer or to switch networks. Use if you're only going to use it for reading data.
+		 * @param {string} [contractAddress.chainId] This would be the chainId to use for method calls
+		 *    on this contract. If readOnly isn't true, then switchChain is called if necessary, to switch
+		 *    the wallet to the new chainId for posting transactions. In this case, the user canceiling this switch
+		 *    would result in an error in the callback/promise.
 		 * @param {Function} [callback] receives (err, contract)
-		 * @return {Promise} that would resolve with the ethers.Contract
+		 * @return {Promise} to be used instead of callback
 		 */
-		getContract: function(contractABIName, contractAddress, callback) {
-			var chainId, address;
-			if (Q.isPlainObject(contractAddress)) {
-				chainId = contractAddress.chainId;
-				address = contractAddress.contractAddress;
-			}
-			Q.Template.set(contractABIName, undefined, "abi.json");
-			Q.Template.render(contractABIName, function (err, json) {
-				try {
-					var ABI = JSON.parse(json);
-				} catch (e) {
-					return Q.handle(callback, null, [e]);
-				}
-				if (window.ethereum
-				&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
-					'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
-				]))) {
-					_continue(ethereum);
+		getContract: Q.promisify(Q.getter(
+		function(contractABIName, contractAddress, callback) {
+			Users.init.web3(function () {
+				var chainId, address, readOnly;
+				if (Q.isPlainObject(contractAddress)) {
+					chainId = contractAddress.chainId;
+					address = contractAddress.contractAddress;
+					readOnly = contractAddress.readOnly;
 				} else {
-					Q.Users.Web3.connect(function (err, provider) {
-						if (err) {
-							return Q.handle(callback, null, [err]);
-						}
-						if (!chainId || provider.chainId === chainId) {
-							_continue(provider);
-						} else {
-							var chain = Users.Web3.chains[chainId];
-							Q.Users.Web3.switchChain(chain, function (err) {
-								if (Q.firstErrorMessage(err)) {
-									return Q.handle(callback, null, [err]);
-								}
-								_continue(provider);
-							});
-						}
-					});
+					address = contractAddress;
 				}
-				function _continue(provider) {
+				Q.Template.set(contractABIName, undefined, "abi.json");
+				Q.Template.render(contractABIName, function (err, json) {
 					try {
-						var signer = new ethers.providers.Web3Provider(provider).getSigner();
-						var contract = new ethers.Contract(contractAddress, ABI, signer);
-						contract.ABI = ABI;
-						Q.handle(callback, contract, [null, contract]);
-					} catch (err) {
-						Q.handle(callback, null, [err]);
-					};
-				}
+						var ABI = JSON.parse(json);
+					} catch (e) {
+						return Q.handle(callback, null, [e]);
+					}
+					if (readOnly) {
+						var url = Q.getObject([chainId, 'rpcUrls', 0], Web3.chains);
+						if (!url) {
+							throw new Q.Exception('Users.Web3.getContract: Web3.chains['+chainId+'].rpcUrls is empty');
+						}
+						var provider = new ethers.providers.JsonRpcBatchProvider(url);
+						return _continue(provider, false);
+					}
+					if (window.ethereum
+					&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
+						'Q', 'Users', 'apps', 'web3', Q.info.app, 'appId'
+					]))) {
+						_continue(ethereum, true);
+					} else {
+						Web3.connect(function (err, provider) {
+							if (err) {
+								return Q.handle(callback, null, [err]);
+							}
+							if (!chainId || provider.chainId === chainId) {
+								_continue(provider, true);
+							} else {
+								var chain = Web3.chains[chainId];
+								Web3.switchChain(chain, function (err) {
+									if (Q.firstErrorMessage(err)) {
+										return Q.handle(callback, null, [err]);
+									}
+									_continue(provider, true);
+								});
+							}
+						});
+					}
+					function _continue(provider, needSigner) {
+						try {
+							var signer, contract;
+							if (needSigner) {
+								signer = new ethers.providers.Web3Provider(provider).getSigner();
+								contract = new ethers.Contract(address, ABI, signer);
+							} else {
+								contract = new ethers.Contract(address, ABI, provider);
+							}
+							contract.ABI = ABI;
+							Q.handle(callback, contract, [null, contract]);
+						} catch (err) {
+							Q.handle(callback, null, [err]);
+						};
+					}
+				});
 			});
-		},
+		}, {
+			cache: Q.Cache.document("Users.Web3.getContract")
+		})),
 
 		/**
 		 * Used to fetch the ethers.Contract object to use with a smart contract.
@@ -4389,42 +4476,100 @@
 		 * @method getFactory
 		 * @static
 		 * @param {string} contractABIName Name of the view template that contains the ABI JSON
+		 * @param {string|Object} [chainId] optional, pass a string here to switch to the indicated chain first,
+		 *   or an object with the following properties:
+		 * @param {string} [chainId.readOnly] This would use a provider, without having to
+		 *    connect with a signer or to switch networks. Use if you're only going to use it for reading data.
+		 * @param {string} [chainId.chainId] This would be the chainId to use for method calls
+		 *    on this factory contract. If readOnly isn't true, then switchChain is called if necessary, to switch
+		 *    the wallet to the new chainId for posting transactions. In this case, the user canceiling this switch
+		 *    would result in an error in the callback/promise.
 		 * @param {Function} [callback] receives (err, contract)
-		 * @return {Promise} that would resolve with the ethers.Contract
+		 * @return {Promise} to be used instead of callback
 		 */
-		getFactory: function(contractABIName, callback) {
-			Users.Web3.getChainId(function (err, chainId) {
-				var factories = Users.Web3.factories[contractABIName];
-				var contractAddress = factories[chainId] || factories['all'];
-				return Users.Web3.getContract(contractABIName, contractAddress, callback);
+		getFactory: Q.promisify(function(contractABIName, chainId, callback) {
+			var readOnly = false;
+			if (Q.isPlainObject(chainId)) {
+				readOnly = chainId.readOnly;
+				chainId = chainId.chainId;
+			}
+			if (typeof chainId !== 'string'
+			|| chainId.substr(0, 2) !== '0x') {
+				if (!callback) {
+					callback = chainId;
+				}
+				chainId = null;
+			}
+			return chainId
+				? _continue(chainId)
+				: Web3.getChainId().then(_continue);
+			function _continue(chainId) {
+				var contracts = Web3.contracts[contractABIName];
+				if (Q.isEmpty(contracts)) {
+					throw new Q.Exception("Users.Web3.getFactory: missing contract address for " + contractABIName);
+				}
+				var contractAddress = contracts[chainId] || contracts['all'];
+				return Web3.getContract(contractABIName, {
+					chainId: chainId,
+					contractAddress: contractAddress,
+					readOnly: readOnly
+				}, callback);
+			}
+		}),
+		parseMetamaskError: function (err, contracts) {
+            if (err.code != '-32603' || Q.isEmpty(err.data)) {
+				return err.message;
+			}
+			if (err.data.code != 3) {
+				// handle "Internal JSON-RPC error."
+				return (err.data.message);
+			}
+			//'execution reverted'
+			var str = '';
+			Q.each(contracts, function (i, contract) {
+				try {
+					let customErrorDescription = contract.interface.getError(
+						ethers.utils.hexDataSlice(err.data.data, 0, 4)
+					); // parsed
+					if (customErrorDescription) {
+						let decodedStr = ethers.utils.defaultAbiCoder.decode(
+							customErrorDescription.inputs.map(obj => obj.type),
+							ethers.utils.hexDataSlice(err.data.data, 4)
+						);
+						str = customErrorDescription.name +'('
+							+(decodedStr.length > 0 ? '"' + decodedStr.join('","') + '"' : '')
+							+')';
+						return false;
+					}
+				} catch (e) {}
 			});
-		}
+			if (Q.isEmpty(str)) {
+				// handle: revert("here string message")
+				return (err.data.message)
+			}
+			return (str);
+        }
 	};
-
-	Users.Web3.switchChain = Q.promisify(Users.Web3.switchChain);
-	Users.Web3.getContract = Q.promisify(Users.Web3.getContract);
-	Users.Web3.getFactory = Q.promisify(Users.Web3.getFactory);
-	Users.Web3.execute = Q.promisify(Users.Web3.execute);
 
 	/**
 	 * Disconnect external platforms
 	 */
 	Users.disconnect = {};
 	Users.disconnect.facebook = Users.Facebook.disconnect;
-	Users.disconnect.web3 = Users.Web3.disconnect;
+	Users.disconnect.web3 = Web3.disconnect;
 
 	Q.onReady.add(function () {
 		Users.Facebook.construct();
 
 		if (window.ethereum) {
 			window.ethereum.on("accountsChanged", function (accounts) {
-				Q.handle(Users.Web3.onAccountsChanged, this, [accounts]);
+				Q.handle(Web3.onAccountsChanged, this, [accounts]);
 			});
 			window.ethereum.on("chainChanged", function (chainId) {
-				Q.handle(Users.Web3.onChainChanged, this, [chainId]);
+				Q.handle(Web3.onChainChanged, this, [chainId]);
 			});
 			window.ethereum.on("connect", function (info) {
-				Q.handle(Users.Web3.onConnect, this, [info]);
+				Q.handle(Web3.onConnect, this, [info]);
 			});
 		}
 	}, 'Users');
@@ -4437,7 +4582,7 @@
 		});
 	}, 'Users.dialogCloseHint');
 	
-	Q.Users.cache = Q.Users.cache || {};
+	Users.cache = Users.cache || {};
 	
 	Q.ensure.loaders['Q.Users.Faces'] = '{{Users}}/js/Faces.js';
 

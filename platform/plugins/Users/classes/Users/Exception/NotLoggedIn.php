@@ -13,4 +13,4 @@ class Users_Exception_NotLoggedIn extends Q_Exception
 	 */
 };
 
-Q_Exception::add('Users_Exception_NotLoggedIn', 'You are not logged in');
+Q_Exception::add('Users_Exception_NotLoggedIn', 'You are not logged in', 401);

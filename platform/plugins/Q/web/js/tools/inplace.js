@@ -201,7 +201,7 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	Q.onLayout($te[0]).set(_waitUntilVisible, tool);
 	_waitUntilVisible();
 	if (state.type === 'select') {
-		fieldinput.val(staticHtml.decodeHTML());
+		fieldinput.val(staticHtml && staticHtml.decodeHTML());
 	}
 	if (staticHtml && state.editOnClick) {
 		static_span.attr('title', state.placeholder);
@@ -243,6 +243,8 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		}
 	}
 	this.handleClick = function(event) {
+		event.preventDefault();
+		event.stopPropagation();
 		_sizing();
 		var field_width = static_span.outerWidth();
 		var field_height = static_span.outerHeight();

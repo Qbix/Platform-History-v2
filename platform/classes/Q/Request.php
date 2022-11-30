@@ -560,7 +560,8 @@ class Q_Request
 	 *  Set to true, to ignore Q_formFactor cookie
 	 * @return {boolean}
 	 */
-	static function isMobile($ignoreCookie = false)
+	static function isMobile($ignore
+	 = false)
 	{
 		static $result;
 		if (isset($result)) {
@@ -916,6 +917,27 @@ class Q_Request
 				return null;
 				break;
 		}
+	}
+
+	/**
+	 * Parses the cookie headers and returns an array of values.
+	 * @method getCookies
+	 * @static
+	 * @param {string} [$name] The name of the cookie
+	 * @return {array} An array of string values. Note that the same cookie can be named multiple times in the Cookie header!
+	 */
+	static function getCookie($name)
+	{
+		$result = array();
+		$cookie = $_SERVER['HTTP_COOKIE'];
+		foreach (explode(';', $cookie) as $segment) {
+			foreach (explode('=', $segment) as $parts) {
+				$name = trim($parts[0]);
+				$value = trim($parts[1]);
+				$result[$name][] = $value;
+			}
+		}
+		return $result;
 	}
 	
 	/**

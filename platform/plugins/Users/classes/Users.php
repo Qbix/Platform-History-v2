@@ -342,13 +342,15 @@ abstract class Users extends Base_Users
 	 *  "email", "first_name", "last_name", "gender" etc.
 	 *  If the email address is imported, it is set without requiring verification, and
 	 *  any email under Users/transactional/authenticated is sent.
+	 * @param {boolean} [$updateXid=false] If true and xid defined for logged in user, update xid for this user.
 	 * @return {Users_User}
 	 */
 	static function authenticate(
 		$platform,
 		$appId = null,
 		&$authenticated = null,
-		$import = null)
+		$import = null,
+		$updateXid = false)
 	{
 		$platforms = Q_Config::get('Users', 'apps', 'platforms', array());
 		if (!in_array($platform, $platforms)) {
@@ -415,21 +417,52 @@ abstract class Users extends Base_Users
 		$platformApp = $platform . '_' . $appIdForAuth;
 		if ($retrieved) {
 			$user_xid = $user->getXid($platformApp);
-			if (!$user_xid) {
+			if (!$user_xid || $updateXid) {
 				// this is a logged-in user who was never authenticated with this platform.
 				// First, let's find any other user who has authenticated with the
 				// authenticated xid, and set their $field to 0.
 				$authenticated = 'connected';
 				$ui = Users::identify($platformApp, $xid);
 				if ($ui) {
-					$u = new Users_User();
+					$u = $ui->userId == $user->id ? $user : new Users_User();
 					$u->id = $ui->userId;
 					if ($u->retrieve()) {
 						$u->clearXid($platformApp);
 						$u->save();
 					};
+
 					$ui->remove();
 				}
+
+				// clear users_external_from for xid and for userId, because than we will add row for current user with current xid
+				$userExternalFroms = Users_ExternalFrom::select()
+				->where(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"xid" => $xid
+				))->orWhere(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"userId" => $user->id
+				))->fetchDbRows();
+				foreach ($userExternalFroms as $userExternalFrom) {
+					$userExternalFrom->remove();
+					$otherUser = Users_User::fetch($userExternalFrom->userId);
+					$otherUser->clearXid($platformApp);
+					$otherUser->save();
+				}
+
+				// clear users_external_to for xid and for userId, because than we will add row for current user with current xid
+				Users_ExternalTo::delete()
+				->where(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"xid" => $xid
+				))->orWhere(array(
+					"platform" => $platform,
+					"appId" => $appIdForAuth,
+					"userId" => $user->id
+				))->execute();
 
 				// Now, let's associate the current user's account with this platform xid.
 				if (!$user->displayName()) {
@@ -609,13 +642,13 @@ abstract class Users extends Base_Users
 		if (isset($_SESSION['Users']['appUsers'][$platformApp])) {
 			// Platform app user exists. Do we need to update it? (Probably not!)
 			$pk = $_SESSION['Users']['appUsers'][$platformApp];
-			$ef = Users_ExternalFrom::select()->where($pk)->fetchDbRow();
-			if (empty($ef)) {
-				// somehow this externalFrom disappeared from the database
-				throw new Q_Exception_MissingRow(array(
-					'table' => 'ExternalFrom',
-					'criteria' => http_build_query($pk, '', ' & ')
-				));
+			$ef = new Users_ExternalFrom($pk);
+
+			if (!$ef->retrieve()) {
+				Q::event('Users/insertExternalFrom', @compact('user', 'during'), 'before');
+				$ef->userId = $externalFrom->userId;
+				$ef->save();
+				Q::event('Users/authenticate/insertExternalFrom', @compact('user'), 'after');
 			}
 
 			if (!isset($ef->accessToken)
@@ -1637,6 +1670,21 @@ abstract class Users extends Base_Users
 		$obj->icon = '{{baseUrl}}/Q/uploads'.$tail;
 		return $directory;
 	}
+
+	/**
+	 * Tries to parse a platformApp string into an array of (platform, appId)
+	 * @static
+	 * @param {string} $platformApp in the form of {{platform}}_{{appId}}
+	 * @return {array} of platform, appId when possible
+	 */
+	static function platformApp($platformApp)
+	{
+		$parts = explode("\t", $platformApp);
+		if (count($parts) > 1) {
+			return $parts; // for backward compatibility
+		}
+		return explode('_', $platformApp);
+	}
 	
 	/**
 	 * Get the internal app id and info
@@ -1834,10 +1882,12 @@ abstract class Users extends Base_Users
 			if (isset($identifier['app']['platform'])) {
 				$type = $identifier['app']['platform'];
 				$identifier = Q::ifset($identifier, 'identifier', null);
-			} else if (Q_Valid::email($identifier, $normalized)) {
+			} elseif (Q_Valid::email($identifier, $normalized)) {
 				$type = 'email';
-			} else if (Q_Valid::phone($identifier, $normalized)) {
+			} elseif (Q_Valid::phone($identifier, $normalized)) {
 				$type = 'mobile';
+			} elseif (Users_Web3::isValidAddress($identifier)) {
+				$type = 'web3';
 			}
 		}
 		if (!empty($_REQUEST['emailAddress'])) {
@@ -1849,6 +1899,11 @@ abstract class Users extends Base_Users
 			$identifier = $_REQUEST['mobileNumber'];
 			Q_Valid::phone($identifier, $normalized);
 			$type = 'mobile';
+		}
+		if (!empty($_REQUEST['walletAddress'])) {
+			$identifier = $_REQUEST['walletAddress'];
+			Users_Web3::isValidAddress($identifier, $normalized);
+			$type = 'web3';
 		}
 		return isset($normalized) ? $normalized : $identifier;
 	}
@@ -1906,7 +1961,7 @@ abstract class Users extends Base_Users
 	 * @param {string} $userId The user whose contacts they are
 	 * @param {string} $label The label of the contacts that will be managed
 	 * @param {boolean} [$throwIfNotAuthorized=false] Throw an exception if not authorized
-	 * @param {boolean} [$readOnly=false] Whether we just want to know if the user can view the labels
+	 * @param {boolean} [$readOnly=false] Whether we just want to know if the user can view the contacts
 	 * @return {boolean} Whether a contact with this label is allowed to be managed
 	 * @throws {Users_Exception_NotAuthorized}
 	 */
@@ -2059,22 +2114,52 @@ abstract class Users extends Base_Users
 	/**
 	 * Verifies a signed payload
 	 * @param {array} $payload Can be a multidimensional array
-	 * @param {string} [$sigField='Q.sig'] Where to find signature. For now, this is always "r, s" from ECDSA signature
-	 * @param {string} [$algorithm='sha256'] Indicates the hash algorithm. Later may also allow user to change the ECDSA curve, etc.
-	 * @return {boolean|null} Returns null if sigField is null or has no publicKey.
-	 *  Otherwise returns boolean for whether the payload was signed successfully.
+	 * @param {boolean} [$options.lookInSession=false]
+	 * @param {array} [$options]
+	 * @param {string} [$options.sigField] By default, uses config Users/signatures/sigField
+	 * @param {string} [$options.algorithm='sha256'] Indicates the hash algorithm. Later may also allow user to change the ECDSA curve, etc.
+	 * @return {string|false|null} Returns null if sigField is null, or if lookInSession is true and $_SESSION['Users']['publicKey'] is missing.
+	 *  Otherwise returns false if payload was not signed successfully,
+	 *  If signed successfully, returns the public key used.
 	 */
-	static function verify($payload, $signature, $algorithm = 'sha256')
+	static function verify($payload, $lookInSession = false, $options = array())
 	{
-		$sigField = Q_Config::get('Users', 'signatures', 'sigField', null);
-		$sigField = str_replace('.', '_', $sigField);
-		unset($payload[$sigField]);
-		if (!$sigField or empty($_SESSION['Users']['publicKey'])) {
+		$sigField = Q::ifset($options, 'sigField', str_replace('.', '_', 
+			Q_Config::get('Users', 'signatures', 'sigField', null)
+		));
+		if (!$sigField) {
 			return null;
 		}
-		$publicKey = $_SESSION['Users']['publicKey'];
-		$serialized = Q_Utils::serialize($payload);
-		return Q_Crypto::verify($serialized, $signature, $publicKey);
+		$publicKey = null;
+		if ($lookInSession) {
+			if (empty($_SESSION['Users']['publicKey'])) {
+				return null;
+			}
+			$publicKey = $_SESSION['Users']['publicKey'];
+		}
+		if (empty($payload[$sigField])) {
+			return false;
+		}
+		$sig = $payload[$sigField];
+		unset($payload[$sigField]);
+		
+		if (empty($sig['signature'])) {
+			return false;
+		}
+		if (!empty($sig['publicKey'])) {
+			if ($publicKey && $publicKey !== $sig['publicKey']) {
+				return false; // public key doesn't match
+			}
+			$publicKey = $sig['publicKey'];
+		}
+		$fields = empty($sig['fieldNames'])
+			? $payload
+			: Q::take($payload, $sig['fieldNames']);
+		$serialized = Q_Utils::serialize($fields);
+		if (!Q_Crypto::verify($serialized, $sig['signature'], $publicKey)) {
+			return false;
+		}
+		return $publicKey;
 	}
 
 	/**

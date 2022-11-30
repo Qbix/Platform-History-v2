@@ -108,12 +108,16 @@ function Streams_batch_response_batch()
 				Streams::$cache['stream'] = null;
 				if (empty($streams[$publisherId][$name])) {
 					// try to create stream if possible
+                                    try {
 					Q::event('Streams/stream/post', array(
 						"publisherId" => $publisherId,
 						"name" => $name,
 						"dontSubscribe" => true
 					));
-
+                                    }
+                                    catch (Exception $e) {
+                                    }
+                                    
 					if (empty(Streams::$cache['stream'])) {
 						throw new Q_Exception_MissingRow(array(
 							'table' => 'Stream',

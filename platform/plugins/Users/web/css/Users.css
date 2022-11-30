@@ -397,6 +397,15 @@ a.Users_activation_resend:active {
 	margin: 5px 0 5px 0;
 	vertical-align: middle;
 }
+#Users_setIdentifier_dialog.Users_setIdentifier_web3 .Users_identifier_web3 {
+	border: none;
+	font-size: 0.85em;
+	color: #000;
+	font-style: normal;
+}
+#Users_setIdentifier_dialog.Users_setIdentifier_web3 .Users_setIdentifier_go {
+	display: none;
+}
 
 #Users_login_dialog #Users_agree { margin-right: 5px; -webkit-appearance: checkbox; }
 

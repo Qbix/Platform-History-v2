@@ -75,6 +75,7 @@
 			},
 			"Websites/seo": {
 				"create": true,
+                                "canCreate": ["Websites/admins"],
 				"edit": true,
 				"defaults": {
 					"title": "Website SEO"
@@ -183,8 +184,8 @@
 	"Websites": {
 		"seoReload": true,
 		"permalinks": {
-			"routes": {},
-			"actions": {}
+			"routes": {}, /* whitelist of possible destinations */
+			"actions": {} /* whitelist of possible actions */
 		},
 		"videoHosts": ["youtube.com", "youtu.be", "vimeo.com"],
 		"videoExtensions": ["MPG", "MP2", "MPEG", "MP4", "AVI", "WMV", "MOV", "FLV", "SWF"],

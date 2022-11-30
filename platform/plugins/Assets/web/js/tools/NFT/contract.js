@@ -344,7 +344,7 @@
                 });
             };
 
-            var chains = Object.values(Assets.Web3.chains);
+            var chains = Object.values(Users.Web3.chains);
             if (state.onlyDefaultChain) {
                 chains = chains.filter(function(value, index, arr){
                     return value.default;
@@ -476,7 +476,7 @@
                                     return;
                                 }
 
-                                Users.Web3.getContract('Assets/templates/NFT', {
+                                Users.Web3.getContract('Assets/templates/R1/NFT/contract', {
                                     chainId: chainId,
                                     address: contractAddress
                                 }, function (err, contract) {

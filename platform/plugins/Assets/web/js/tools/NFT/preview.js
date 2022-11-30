@@ -16,9 +16,12 @@
      *  @param {boolean} [movie] Movie URL. If no image defined during NFT creation, this movie will be used instead.
      *  On NFT/view the movie will display instead image (event if image defined).
      *  @param {boolean} [src] URL of additional image which will use instead default image.
+     *  @param {string} [options.fallback] Error message need to display in tool as content.
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
+     *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
      *  @param {Q.Event} [options.onCreated] Event occur when NFT created.
+     *  @param {Q.Event} [options.onRefresh] Event occur after tool content rendered.
      */
     Q.Tool.define("Assets/NFT/preview", function(options) {
         var tool = this;
@@ -27,9 +30,9 @@
         tool.preview = Q.Tool.from(this.element, "Streams/preview");
         var previewState = Q.getObject("preview.state", tool) || {};
         var loggedInUserId = Q.Users.loggedInUserId();
-        var tokenId = Q.getObject("token.id", state);
-        var chainId = Q.getObject("token.chainId", state);
-        var contractAddress = Q.getObject("token.contractAddress", state);
+        var tokenId = Q.getObject("tokenId", state);
+        var chainId = Q.getObject("chainId", state);
+        var contractAddress = Q.getObject("contractAddress", state);
 
         // is admin
         var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
@@ -37,6 +40,14 @@
         $toolElement.attr("data-admin", tool.isAdmin);
         tool.isPublisher = (loggedInUserId && loggedInUserId === previewState.publisherId);
         $toolElement.attr("data-publisher", tool.isPublisher);
+
+        // is claim
+        state.secondsLeft = parseInt(state.secondsLeft);
+        if (state.secondsLeft > 0) {
+            $toolElement.attr("data-claim",  false);
+        } else if (state.secondsLeft <= 0) {
+            $toolElement.attr("data-claim",  true);
+        }
 
         if (!Q.isEmpty(previewState)) {
             // <set Streams/preview imagepicker settings>
@@ -56,22 +67,26 @@
             // get all data from blockchain and refresh
             if (state.metadata) {
                 if (typeof state.metadata !== "object") {
-                    throw new Error("metadata is not a valid object");
+                    //throw new Error("metadata is not a valid object");
+                    state.fallback = "metadata is not a valid object";
                 }
 
                 tool.refresh();
             } else if (state.tokenURI) {
                 if (!state.tokenURI.matchTypes('url').length) {
-                    throw new Error("tokenURI is not a valid URL");
+                    //throw new Error("tokenURI is not a valid URL");
+                    state.fallback = "tokenURI is not a valid URL";
                 }
 
                 tool.refresh();
             } else if (tokenId) {
                 if (!chainId) {
-                    throw new Error("chain id required");
+                    //throw new Error("chain id required");
+                    state.fallback = "chain id required";
                 }
                 if (!contractAddress) {
-                    throw new Error("contract address required");
+                    //throw new Error("contract address required");
+                    state.fallback = "contract address required";
                 }
 
                 tool.refresh();
@@ -96,12 +111,12 @@
     { // default options here
         useWeb3: true,
         metadata: null,
+        tokenId: null,
         tokenURI: null,
-        token: {
-            id: null,
-            contractAddress: null,
-            chainId: null
-        },
+        chainId: null,
+        contractAddress: null,
+        owner: null,
+        ownerUserId: null,
         imagepicker: {
             showSize: NFT.icon.defaultSize,
             save: "NFT/icon"
@@ -110,7 +125,8 @@
             avatar: true,
             title: true,
             description: false,
-            participants: false
+            participants: false,
+            bidInfo: true
         },
         templates: {
             view: {
@@ -120,9 +136,13 @@
         },
         movie: null,
         imageSrc: null,
+        secondsLeft: null,
+        fallback: null,
+        onClaim: new Q.Event(),
         onInvoke: new Q.Event(),
         onAvatar: new Q.Event(),
-        onCreated: new Q.Event()
+        onCreated: new Q.Event(),
+        onRefresh: new Q.Event()
     },
 
 {
@@ -139,11 +159,15 @@
             var tool = this;
             var state = this.state;
             var $toolElement = $(this.element);
-            var tokenId = Q.getObject("token.id", state);
-            var chainId = Q.getObject("token.chainId", state);
-            var contractAddress = Q.getObject("token.contractAddress", state);
+            var tokenId = Q.getObject("tokenId", state);
+            var chainId = Q.getObject("chainId", state);
+            var contractAddress = Q.getObject("contractAddress", state);
             var tokenURI = state.tokenURI;
             var metadata = state.metadata;
+
+            if (state.fallback) {
+                return tool.renderFallBack();
+            }
 
             $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
 
@@ -422,6 +446,47 @@
                 stream.onMessage("Streams/changed").set(function (updatedStream, message) {
                     tool.renderFromStream(updatedStream);
                 }, [tool.id, Q.normalize(publisherId), Q.normalize(streamName.split("/").pop())].join("_"));
+
+                Q.handle(state.onRefresh, tool);
+            });
+        },
+        /**
+         * Render preview from metadata object
+         * @method renderFallBack
+         */
+        renderFallBack: function () {
+            var tool = this;
+            var state = tool.state;
+            var $toolElement = $(this.element);
+
+            var templateName = state.templates.view.name;
+            var templateFields = Q.extend({
+                show: {
+                    avatar: true,
+                    title: false,
+                    description: false,
+                    participants: false,
+                    bidInfo: false
+                }
+            }, state.templates.view.fields);
+
+            Q.Template.render(templateName, templateFields, (err, html) => {
+                tool.element.innerHTML = html;
+
+                $(".Assets_NFT_author", tool.element).addClass("Q_error").html(state.fallback);
+                $(".video-container", tool.element).addClass("fallback").html(JSON.stringify({
+                    tokenURI: state.tokenURI,
+                    tokenId: state.tokenId,
+                    metadata: state.metadata,
+                    owner: state.owner,
+                    ownerUserId: state.ownerUserId,
+                    secondsLeft: state.secondsLeft
+                }));
+
+                // set onInvoke event
+                $toolElement.off(Q.Pointer.fastclick);
+
+                Q.handle(state.onRefresh, tool);
             });
         },
         /**
@@ -442,7 +507,7 @@
             var $toolElement = $(this.element);
             var metadata = Q.getObject("metadata", params);
             var authorAddress = Q.getObject("authorAddress", params);
-            var ownerAddress = Q.getObject("ownerAddress", params);
+            var ownerAddress = Q.getObject("ownerAddress", params) || state.owner;
             var commissionInfo = Q.getObject("commissionInfo", params);
             var saleInfo = Q.getObject("saleInfo", params);
             var authorUserId = Q.getObject("authorUserId", params);
@@ -463,45 +528,55 @@
                 $toolElement.activate();
 
                 var $Assets_NFT_author = $(".Assets_NFT_author", tool.element);
-                if ($Assets_NFT_author.length && authorUserId) {
-                    $Assets_NFT_author.tool("Users/avatar", {
-                        userId: authorUserId,
-                        icon: 50,
-                        contents: true,
-                        editable: false
-                    }).activate(function () {
-                        $(this.element).on(Q.Pointer.fastclick, function (e) {
-                            Q.handle(state.onAvatar, this, [e]);
+                if ($Assets_NFT_author.length) {
+                    if (authorUserId) {
+                        $Assets_NFT_author.tool("Users/avatar", {
+                            userId: authorUserId,
+                            icon: 50,
+                            contents: true,
+                            editable: false
+                        }).activate(function () {
+                            $(this.element).on(Q.Pointer.fastclick, function (e) {
+                                Q.handle(state.onAvatar, this, [e]);
+                            });
                         });
-                    });
-                } else if ($Assets_NFT_author.length) {
-                    Q.Template.render("Assets/NFT/avatar", {
-                        size: 50,
-                        address: Web3.minimizeAddress(authorAddress, 20, 3)
-                    }, (err, html) => {
-                        $Assets_NFT_author.html(html);
-                    });
+                    } else if (authorAddress) {
+                        Q.Template.render("Assets/NFT/avatar", {
+                            baseUrl: Q.info.baseUrl,
+                            size: 50,
+                            address: Web3.minimizeAddress(authorAddress, 20, 3)
+                        }, (err, html) => {
+                            $Assets_NFT_author.html(html);
+                        });
+                    } else {
+                        $Assets_NFT_author.remove();
+                    }
                 }
 
                 var $Assets_NFT_owner = $(".Assets_NFT_owner", tool.element);
-                if ($Assets_NFT_owner.length && ownerUserId) {
-                    $Assets_NFT_owner.tool("Users/avatar", {
-                        userId: ownerUserId,
-                        icon: 80,
-                        contents: true,
-                        editable: false
-                    }).activate(function () {
-                        $(this.element).on(Q.Pointer.fastclick, function (e) {
-                            Q.handle(state.onAvatar, this, [e]);
+                if ($Assets_NFT_owner.length) {
+                    if (ownerUserId) {
+                        $Assets_NFT_owner.tool("Users/avatar", {
+                            userId: ownerUserId,
+                            icon: 50,
+                            contents: true,
+                            editable: false
+                        }).activate(function () {
+                            $(this.element).on(Q.Pointer.fastclick, function (e) {
+                                Q.handle(state.onAvatar, this, [e]);
+                            });
                         });
-                    });
-                } else if ($Assets_NFT_owner.length) {
-                    Q.Template.render("Assets/NFT/avatar", {
-                        size: 80,
-                        address: Web3.minimizeAddress(ownerAddress, 20, 3)
-                    }, (err, html) => {
-                        $Assets_NFT_owner.html(html);
-                    });
+                    } else if (ownerAddress) {
+                        Q.Template.render("Assets/NFT/avatar", {
+                            baseUrl: Q.info.baseUrl,
+                            size: 50,
+                            address: Web3.minimizeAddress(ownerAddress, 11, 3)
+                        }, (err, html) => {
+                            $Assets_NFT_owner.html(html);
+                        });
+                    } else {
+                        $Assets_NFT_owner.remove();
+                    }
                 }
 
                 var videoUrl = state.video || metadata.video || metadata.youtube_url;
@@ -532,10 +607,27 @@
                     tool.renderImage($container, imageUrl);
                 }
 
+                if (state.secondsLeft > 0) {
+                    $(".Assets_NFT_timeout_tool", tool.element).tool("Q/timestamp", {
+                        time: Date.now()/1000 + state.secondsLeft,
+                        beforeRefresh: function (result, diff) {
+                            if (diff <= 0) {
+                                $toolElement.attr("data-claim", true);
+                            }
+                        }
+                    }).activate();
+                }
+                $("button[name=claim]", tool.element).on(Q.Pointer.fastclick, function () {
+                    Q.handle(state.onClaim, tool);
+                    return false;
+                });
+
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onInvoke, tool, [metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId]);
                 });
+
+                Q.handle(state.onRefresh, tool);
             });
         },
         /**
@@ -1244,6 +1336,7 @@
         {{#if show.avatar}}
             <div class="title_block_header">
                 <div class="Assets_NFT_author"></div>
+                <div class="Assets_NFT_owner"></div>
             </div>
         {{/if}}
         <div class="video-container"><img class="NFT_preview_icon"></div>
@@ -1256,17 +1349,21 @@
         {{#if show.participants}}
             <div class="Assets_NFT_participants"></div>
         {{/if}}
-        <ul class="bid-info">
-            <li class="Assets_NFT_price">
-                <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
-                <span class="Assets_NFT_comingsoon">Coming Soon</span>
-            </li>
-            <li class="action-block">
-                <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
-                <button name="update" class="Q_button">{{NFT.Actions}}</button>
-            </li>
-        </ul>
+        {{#if show.bidInfo}}
+            <ul class="bid-info">
+                <li class="Assets_NFT_price">
+                    <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
+                    <span class="Assets_NFT_comingsoon">Coming Soon</span>
+                </li>
+                <li class="action-block">
+                    <button name="buy" class="Q_button">{{NFT.Buy}}</button>
+                    <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
+                    <button name="update" class="Q_button">{{NFT.Actions}}</button>
+                    <button name="claim" class="Q_button">{{NFT.ClaimNFT}}</button>
+                </li>
+            </ul>
+            <div class="Assets_NFT_claim_timeout"><span>{{NFT.Unlocking}}</span> <span class="Assets_NFT_timeout_tool"></span></div>
+        {{/if}}
     </div>`,
         {text: ['Assets/content']}
     );
@@ -1286,7 +1383,7 @@
     );
 
     Q.Template.set('Assets/NFT/avatar',
-`<img src="{{baseUrl}}/Q/plugins/Users/img/icons/default/{{size}}.png" class="Users_avatar_icon Users_avatar_icon_{{size}}">
+        `<img src="{{baseUrl}}/Q/plugins/Users/img/icons/default/{{size}}.png" class="Users_avatar_icon Users_avatar_icon_{{size}}">
         <span class="Users_avatar_name">{{address}}</span>`,
         {text: ['Assets/content']}
     );

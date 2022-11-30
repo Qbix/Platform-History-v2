@@ -1155,7 +1155,14 @@ class Users_User extends Base_Users_User
 	function getXid($platformApp, $default = null)
 	{
 		$xids = $this->getAllXids();
-		return isset($xids[$platformApp]) ? $xids[$platformApp] : $default;
+		if (isset($xids[$platformApp])) {
+			return $xids[$platformApp];
+		}
+		$platformApp2 = str_replace("_", "\t", $platformApp); // for backward compatibility
+		if (isset($xids[$platformApp2])) {
+			return $xids[$platformApp2];
+		}
+		return $default;
 	}
 	
 	/**
@@ -1167,6 +1174,7 @@ class Users_User extends Base_Users_User
 	function setXid($platformApp, $xid = null)
 	{
 		$xids = $this->getAllXids();
+		$platformApp = str_replace("\t", "_", $platformApp); // backwards compatibility
 		if (is_array($platformApp)) {
 			foreach ($platformApp as $k => $v) {
 				$xids[$k] = $v;
@@ -1184,6 +1192,8 @@ class Users_User extends Base_Users_User
 	function clearXid($platformApp)
 	{
 		$xids = $this->getAllXids();
+		unset($xids[$platformApp]);
+		$platformApp = str_replace("\t", "_", $platformApp); // backwards compatibility
 		unset($xids[$platformApp]);
 		$this->xids = Q::json_encode($xids);
 	}
@@ -1337,8 +1347,8 @@ class Users_User extends Base_Users_User
 	 * @param {string} $platform The name of the platform
 	 * @param {string} $appId The id of an app on the platform
 	 * @param {array|string} $xids An array of facebook user ids, or a comma-delimited string
-	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @param {boolean} [$dontInsertFutureUsers=false] Pass true to skip inserting future users.
+	 * @param {array} $statuses Optional reference to an array to populate with $status values ('verified' or 'future') in the same order as the $identifiers.
 	 * @return {array} The array of user ids
 	 */
 	static function idsFromPlatformXids (
@@ -1360,7 +1370,8 @@ class Users_User extends Base_Users_User
 			if (!$dontInsertFutureUsers) {
 				$users[] = Users::futureUser($platformApp, $xid, $status);
 			} else {
-				$users[] = Users_User::from($platformApp, $xid);
+				$users[] = $user = Users_User::from($platformApp, $xid);
+				$status = $user ? 'verified' : 'missing';
 			}
 			$statuses[] = $status;
 		}

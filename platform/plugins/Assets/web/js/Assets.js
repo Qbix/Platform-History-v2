@@ -884,6 +884,64 @@
 					}
 					Q.handle(callback, null, [Q.getObject(currency, symbols) || currency]);
 				});
+			},
+			Web3: {
+				/**
+				 * @method getTokens
+				 * @static
+				 * @param {String} chainId
+				 */
+				getTokens: function(chainId) {
+					var temp = {}, results = {};
+					var zero = '0x0000000000000000000000000000000000000000';
+					Q.each(Assets.currencies.tokens, function (address) {
+						var token = this[chainId];
+						if (!token) {
+							return;
+						}
+						temp[this.symbol] = Q.extend({
+							token: token
+						}, this);
+					});
+					for (var symbol in temp) {
+						if (temp[symbol].token === zero) {
+							results[symbol] = temp[symbol];
+						}
+					}
+					for (var symbol in temp) {
+						if (temp[symbol].token !== zero) {
+							results[symbol] = temp[symbol];
+						}
+					}
+					return results;
+				},
+				/**
+				 * @method getTokens
+				 * @static
+				 * @param {String} chainId
+				 * @param {String} tokenSymbolOrAddress
+				 * @return {Object|null}
+				 */
+				getToken: function(chainId, tokenSymbolOrAddress) {
+					if (!tokenSymbolOrAddress
+					|| tokenSymbolOrAddress.substr(0, 2) !== '0x') {
+						throw new Q.Exception("Assets.Currencies.Web3.getToken: token symbol or address required");
+					}
+					var tokens = Assets.Currencies.Web3.getTokens(chainId);
+					for (tokenSymbol in tokens) {
+						var tokenInfo = tokens[tokenSymbol];
+						if (tokenSymbol === tokenSymbolOrAddress
+						|| tokenInfo[chainId] === tokenSymbolOrAddress) {
+							return {
+								symbol: tokenInfo.symbol,
+								name: tokenInfo.name,
+								decimals: tokenInfo.decimals,
+								token: tokenInfo[chainId]
+							};
+						}
+					}
+					return null;
+				}
 			}
 		},
 
@@ -910,12 +968,29 @@
 				onSeriesPutOnSale: new Q.Event(),
 				onSeriesRemovedFromSale: new Q.Event(),
 
-				instance: function (chainId, callback) {
+				Sales: {
+					getFactory: function (chainId) {
+						return Users.Web3.getFactory(
+							'Assets/templates/R1/NFT/sales/factory',
+							chainId
+						);
+					},
 
+					getContract: function (contractAddress) {
+						return Users.Web3.getContract(
+							'Assets/templates/R1/NFT/sales/contract',
+							contractAddress
+						);
+					}
 				},
 
-				factory: function (chainId, callback) {
-
+				Locked: {
+					getContract: function (contractAddress) {
+						return Users.Web3.getContract(
+							'Assets/templates/R1/NFT/locked',
+							contractAddress
+						);
+					}
 				},
 
 				/**
@@ -964,7 +1039,7 @@
 					var baseURI = info.baseURI || ''; // default
 					var suffix = info.suffix || ''; // default
 					return Q.Users.Web3.execute(
-						'Assets/templates/NFT',
+						'Assets/templates/R1/NFT/contract',
 						contractAddress, 
 						"setSeriesInfo", 
 						[
@@ -982,77 +1057,66 @@
 				 * Get NFT contract factory
 				 * @method getFactory
 				 * @param {Object} chainId
-				 * @param {function} callback
-				 * @param {object} [options]
-				 * @param {boolean} [options.checkWeb3=false] If true, check wallet before create factory
-				 * @return {Q.Promise}
+				 * @return {Promise} to be used instead of callback
 				 */
-				getFactory: function (chainId, callback, options) {
-					return Q.Users.Web3.getContract(
-						'Assets/templates/NFTFactory', 
-						{
-							chainId: chainId,
-							address: Assets.NFT.Web3.chains[chainId].factory
-						},
-						function (err, contract) {
-							var events = {
-								InstanceCreated: "onInstanceCreated",
-								OwnershipTransferred: "onInstanceOwnershipTransferred"
-							};
-							Q.each(contract.ABI, function (index, obj) {
-								Q.each(events, function (event1, event2) {
-									if (obj.type === "event" && obj.name === event1) {
-										contract.on(event1, function () {
-											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-										});
-									}
-								});
+				getFactory: function (chainId) {
+					return Users.Web3.getFactory(
+						'Assets/templates/R1/NFT/factory',
+						chainId
+					).then(function () {
+						var events = {
+							InstanceCreated: "onInstanceCreated",
+							OwnershipTransferred: "onInstanceOwnershipTransferred"
+						};
+						Q.each(contract.ABI, function (index, obj) {
+							Q.each(events, function (event1, event2) {
+								if (obj.type === "event" && obj.name === event1) {
+									contract.on(event1, function () {
+										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+									});
+								}
 							});
-							Q.handle(callback, null, [err, contract]);
-						}
-					);
+						});
+						return contract;
+						Q.handle(callback, null, [err, contract]);
+					});
 				},
 				/**
 				 * Get NFT contract instance
 				 * @method getContract
 				 * @param {Object} chainId
-				 * @param {function} callback,
 				 * @param {object} [options]
 				 * @param {string} [options.contractAddress] - if defined override default chain contract address
 				 * @param {string} [options.abiPath] - if defined override default abi path
-				 * @return {Q.Promise}
+				 * @return {Q.Promise} instead of callback
 				 */
-				getContract: function (chainId, callback, options) {
+				getContract: function (chainId, options) {
 					var address = Q.getObject("contractAddress", options) || chain.contract;
-					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/NFT';
-					return Q.Users.Web3.getContract(
-						abiPath, 
-						{
-							chainId: chainId,
-							address: address
-						},
-						function (err, contract) {
-							var events = {
-								TokenRemovedFromSale: "onTokenRemovedFromSale",
-								TokenPutOnSale: "onTokenAddedToSale",
-								Transfer: "onTransfer",
-								OwnershipTransferred: "onTransferOwnership",
-								TokenBought: "onTokenBought",
-								SeriesPutOnSale: "onSeriesPutOnSale",
-								SeriesRemovedFromSale: "onSeriesRemovedFromSale"
-							};
-							Q.each(contract.ABI, function (index, obj) {
-								Q.each(events, function (event1, event2) {
-									if (obj.type === "event" && obj.name === event1) {
-										contract.on(event1, function () {
-											Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
-										});
-									}
-								});
+					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
+					return Q.Users.Web3.getContract(abiPath, {
+						chainId: chainId,
+						address: address
+					}).then(function (err, contract) {
+						var events = {
+							TokenRemovedFromSale: "onTokenRemovedFromSale",
+							TokenPutOnSale: "onTokenAddedToSale",
+							Transfer: "onTransfer",
+							OwnershipTransferred: "onTransferOwnership",
+							TokenBought: "onTokenBought",
+							SeriesPutOnSale: "onSeriesPutOnSale",
+							SeriesRemovedFromSale: "onSeriesRemovedFromSale"
+						};
+						Q.each(contract.ABI, function (index, obj) {
+							Q.each(events, function (event1, event2) {
+								if (obj.type === "event" && obj.name === event1) {
+									contract.on(event1, function () {
+										Q.handle(Assets.NFT.Web3[event2], null, Array.from(arguments))
+									});
+								}
 							});
-							Q.handle(callback, null, [err, contract]);
-						}
-					);
+						});
+						return contract;
+					});
 				},
 				/**
 				 * Get metadata
@@ -1407,16 +1471,26 @@
 		"Assets/NFT/series": "{{Assets}}/js/tools/NFT/series.js",
 		"Assets/NFT/series/preview": "{{Assets}}/js/tools/NFT/seriesPreview.js",
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
-		"Assets/NFT/owned": "{{Assets}}/js/tools/NFT/owned.js",
+		"Assets/NFT/owned": {
+			js: "{{Assets}}/js/tools/NFT/owned.js",
+			css: "{{Assets}}/css/tools/NFT/owned.css",
+			text: "Assets/content"
+		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
 		"Assets/plan": "{{Assets}}/js/tools/plan.js",
-                "Assets/NFT/sales/factory": "{{Assets}}/js/tools/NFT/sales/factory.js",
-                "Assets/sales": "{{Assets}}/js/tools/NFT/sales.js",
-                "Assets/sales/whitelist": "{{Assets}}/js/tools/NFT/whitelist.js",
-		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js"
-	});
+		"Assets/NFT/sales/factory": "{{Assets}}/js/tools/NFT/sales/factory.js",
+		"Assets/NFT/sales": "{{Assets}}/js/tools/NFT/sales.js",
+		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
+		"Assets/NFT/locked": {
+		    js: "{{Assets}}/js/tools/NFT/locked.js",
+		    css: "{{Assets}}/css/tools/NFT/locked.css"
+		},
+		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
+		"Assets/web3/pay": "{{Assets}}/js/tools/web3/pay.js"
 
+	});
+    
 	Q.onInit.add(function () {
 		// preload this, so it's available on gesture handlers
 		Q.Text.get('Assets/content', function (err, text) {

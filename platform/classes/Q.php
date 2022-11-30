@@ -655,6 +655,24 @@ class Q
 	}
 
 	/**
+	 * Returns whether the conditions are met for this class to be loaded
+	 * @method autoloadRequirementsMet
+	 * @static
+	 * @param {string} $className
+	 * @return {boolean}
+	 */
+	static function autoloadRequirementsMet($className)
+	{
+		if (!empty(Q::$autoloadRequires[$className]['PHP'])) {
+			$version = Q::$autoloadRequires[$className]['PHP'];
+			if (version_compare(PHP_VERSION, $version, '<')) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	/**
 	 * Default autoloader for Q
 	 * @method autoload
 	 * @static

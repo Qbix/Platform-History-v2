@@ -78,14 +78,20 @@
 		}
 	},
 	"Users": {
-		"Web3": {
-			"factories": {
+		"web3": {
+			"contracts": {
 				"Assets/templates/R1/NFT/factory": {
 					"all": "0x22222e0849704b754be0a372ffcdb9b22e4d7147"
 				},
 				"Assets/templates/R1/NFT/sales/factory": {
-					"0x89": "0x958A00B7fa173C5803b1cbb7f8662E1EC7862177", /* matic main */
-					"0x13881": "0x3e45e16e403656fb17faa576206db4b8aa249ab1" /* matic test mumbai*/
+					"0x1": "0xa2435909a2aab068ce4bf3b4d6707e29ee9867c2",/* ethereum main */
+					"0x89": "0xb5c7D6712B45FF2d7095059aC3A08E881B221be1", /* matic main */
+					"0x38": "0x90746004d3571F396B477d2fa3C115A5EAF62815", /* binance main */
+					"0x13881": "0x4B1619Ec9DA4191AcD5429A89d6ee991a13079c3" /* matic test mumbai*/
+				},
+				"Assets/templates/R1/NFT/locked": {
+					"0x89": "0x37b5AcF3A60dC507a689F700d89dB669bEe0dec3",
+					"0x13881": "0x6c24d7E534907D53565EE18AFDbb2e001F20e4C2"
 				}
 			}
 		}
@@ -282,8 +288,8 @@
 			"ignoreCache": false,
 			"dontCache": false,
 			"duration": 3600,
-			"tokens": [
-				{
+			"tokens": {
+				"BNB": {
 					"symbol": "BNB",
 					"name": "Binance Coin",
 					"decimals": 18,
@@ -292,25 +298,34 @@
 					"0x61": "0x0000000000000000000000000000000000000000",
 					"0x38": "0x0000000000000000000000000000000000000000"
 				},
-				{
+				"USDT": {
+					"symbol": "USDT",
+					"name": "Tether",
+					"decimals": 6,
+					"0x1": "0xdac17f958d2ee523a2206206994597c13d831ec7",
+					"0x89": "0xc2132d05d31c914a87c6611c10748aeb04b58e8f"
+				},
+				"USDC": {
 					"symbol": "USDC",
 					"name": "USD Coin",
 					"decimals": 18,
 					"0x4": "0xbaAeF3b2756F35F933A55EDcCd27338F74F18f9c",
 					"0x1": "0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
 					"0x38": "0x8ac76a51cc950d9822d68b83fe1ad97b32cd580d",
-					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7"
+					"0x61": "0x1543580c3AE98385E2655894bC89461B7f3E17F7",
+					"0x89": "0x2791bca1f2de4661ed88a30c99a7a9449aa84174"
 				},
-				{
+				"BUSD": {
 					"symbol": "BUSD",
 					"name": "Binance USD",
 					"decimals": 18,
 					"0x4": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x1": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x38": "0xe9e7cea3dedca5984780bafc599bd69add087d56",
-					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49"
+					"0x61": "0x50ad281587A1a85aeF214346436E046a6601fE49",
+					"0x89": "0xdab529f40e671a1d4bf91361c21bf9f0c9712ab7"
 				},
-				{
+				"ETH": {
 					"symbol": "ETH",
 					"name": "Ethereum",
 					"decimals": 18,
@@ -319,7 +334,7 @@
 					"0x38": "0x2170ed0880ac9a755fd29b2688956bd959f933f8",
 					"0x61": "0xBa0fc9605D1c71ABFCEa8b93E4CC5619c4a03606"
 				},
-				{
+				"DAI": {
 					"symbol": "DAI",
 					"name": "DAI",
 					"decimals": 18,
@@ -328,16 +343,16 @@
 					"0x38": "0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3",
 					"0x61": "0x370e042A7C3A5E65032C6A134eb3C333Ff6bd4cA"
 				},
-				{
+				"MATIC": {
 					"symbol": "MATIC",
 					"name": "MATIC",
 					"decimals": 18,
-                                        "0x1": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
-                                        "0x38": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
+					"0x1": "0x7d1afa7b718fb893db30a3abc0cfc608aacfebb0",
+					"0x38": "0xcc42724c6683b7e57334c4e856f4c9965ed682bd",
 					"0x89": "0x0000000000000000000000000000000000000000",
-                                        "0x13881": "0x0000000000000000000000000000000000000000"
+					"0x13881": "0x0000000000000000000000000000000000000000"
 				}
-			]
+			}
 		},
 		"reasons": {
 			"Assets/purchased": {

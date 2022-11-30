@@ -126,6 +126,22 @@ class Q_Utils
 		return $result;
 	 }
 
+	 /**
+	 * Converts hex to ASCII
+	 * @method hex2urlencoded
+	 * @static
+	 * @param {string} $hex
+	 * @return {string}
+	 */
+	 static function hex2urlencoded($hex) {
+		$result = '';
+		$len = strlen($hex);
+		for ($i=0;$i<$len;$i+=2) {
+			$result .= '%'.substr($hex,$i,2);
+		}
+		return $result;
+	 }
+
 	/**
 	 * Converts arbitrary-precision decimal number to hex (without '0x')
 	 * @method dec2hex
@@ -235,6 +251,36 @@ class Q_Utils
 	}
 
 	/**
+	 * Serializes a (potentially multi-dimensional) array into a string.
+	 * @param {array} $data
+	 * @return {string}
+	 */
+	static function serialize(array $data)
+	{
+		self::ksort($data);
+		return str_replace(
+			'+', '%20', 
+			http_build_query($data, '', '&', PHP_QUERY_RFC3986)
+		);
+	}
+
+	/**
+	 * Like regular ksort, but in-place sorts nested arrays recursively too
+	 * @param {&$array} The array to be sorted in-place
+	 * @param {integer} [$flags] like in ksort
+	 * @return {boolean} always returns true
+	 */
+	static function ksort(&$array, $flags = SORT_REGULAR)
+	{
+		foreach ($array as &$value) {
+			if (is_array($value)) {
+				self::ksort($value, $flags);
+			}
+		}
+		return ksort($array, $flags);
+	}
+
+	/**
 	 * Generates signature for the data
 	 * @method signature
 	 * @static
@@ -248,9 +294,7 @@ class Q_Utils
 			$secret = Q_Config::get('Q', 'internal', 'secret', null);
 		}
 		if (is_array($data)) {
-			ksort($data);
-			$data = http_build_query($data, '', '&', PHP_QUERY_RFC3986);
-			$data = str_replace('+', '%20', $data);
+			$data = self::serialize($data);
 		}
 		return self::hmac('sha1', $data, $secret);
 	}
@@ -899,7 +943,7 @@ class Q_Utils
 	 * Issues a GET request, and returns the response
 	 * @method get
 	 * @static
-	 * @param {string|array} $url The URL to post to
+	 * @param {string|array} $url The URL to get
 	 *  This can also be an array of ($url, $ip) to send the request
 	 *  to a particular IP, while retaining the hostname and request URI
 	 * @param {string} [$user_agent=null] The user-agent string to send. Defaults to Mozilla.
@@ -919,6 +963,37 @@ class Q_Utils
 	{
 		return self::request('GET', $url, null, $user_agent, $curl_opts, $header, $timeout);
 	}
+	/**
+	 * Issues multiple GET requests via HTTP/2, and returns the response
+	 * @method getMulti
+	 * @static
+	 * @param {array} $paramsArray An array where each each entry is an array of parameters to ::request
+	 * @return {string|false} The response, or false if not received
+	 * **NOTE:** *The function waits for it, which might take a while!*
+	 */
+	static function requestMulti($paramsArray)
+	{
+		$mh = curl_multi_init();
+		curl_multi_setopt($mh, CURLMOPT_PIPELINING, CURLPIPE_MULTIPLEX);
+		$handles = array();
+		foreach ($paramsArray as $params) {
+			$params[] = $mh;
+			$handles[] = $ch = call_user_func_array(array('Q_Utils', 'request'), $params);
+			curl_multi_add_handle($mh, $ch);
+		}
+		//execute the multi handle
+		do {
+			$status = curl_multi_exec($mh, $active);
+			if ($active) {
+				// Wait a short time for more activity
+				curl_multi_select($mh);
+			}
+		} while ($active && $status == CURLM_OK);
+		foreach ($handles as $ch) {
+			curl_multi_remove_handle($mh, $ch);
+		}
+		curl_multi_close($mh);
+	}
 
 	/**
 	 * Issues an http request, and returns the response
@@ -936,6 +1011,7 @@ class Q_Utils
 	 * @param {integer} [$timeout=30] number of seconds before timeout, defaults to 30 if you pass null
 	 * @param {callable} [&$callback] Optionally pass something callable here, and it will be
 	 *  called with the CURL handle before it's closed, if CURL was used.
+	 * @param {boolean} [$returnHandle=false] Set to true to return the curl handle instead of executing it
 	 * @return {string|false} The response, or false if not received
 	 * 
 	 * **NOTE:** *The function waits for it, which might take a while!*
@@ -948,7 +1024,8 @@ class Q_Utils
 		$curl_opts = array(),
 		$header = null,
 		$timeout = Q_UTILS_CONNECTION_TIMEOUT,
-		$callback = null)
+		$callback = null,
+		$returnHandle = false)
 	{
 		$method = strtoupper($method);
 		if (!isset($user_agent)) {
@@ -1073,6 +1150,9 @@ class Q_Utils
 			}
 			if (!empty($headers)) {
 				curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			}
+			if ($returnHandle) {
+				return $ch;
 			}
 			$result = curl_exec($ch);
 
@@ -1261,6 +1341,17 @@ class Q_Utils
 //		if (!$result) {
 //			throw new Q_Exception_SendingToNode(array('method' => $data['Q/method']));
 //		}
+	}
+
+	/**
+	 * Like array_unique but handles an array of arrays
+	 * @method arrayUnique
+	 * @static
+	 * @param {array} $arr The input array
+	 * @return {array} An array with only unique elements, preserving the order of the input array
+	 */
+	static function arrayUnique($arr) {
+		return array_intersect_key($arr, array_unique(array_map('serialize', $arr)));
 	}
 	
 	/**

@@ -12,44 +12,72 @@
 function Assets_NFT_response_owned ($params) {
 	$loggedInUser = Users::loggedInUser();
 	$request = array_merge($_REQUEST, $params);
-	$userId = Q::ifset($request, 'userId', $loggedInUser->id);
-	$glob["Assets_NFT_response_owned"] = array();
-	$glob["Assets_NFT_response_owned"]["offset"] = (int)Q::ifset($request, 'offset', 0);
-	$glob["Assets_NFT_response_owned"]["limit"] = (int)Q::ifset($request, 'limit', 1000);
+	$sources = array();
+	$userId = Q::ifset($request, "owner", "userId", $loggedInUser->id);
+	$accountAddress = Q::ifset($request, "owner", "accountAddress", Users_Web3::getWalletByUserId($userId));
+	if (!filter_var(Q::ifset($request, "onlyPending", false), FILTER_VALIDATE_BOOLEAN)) {
+		$sources[] = array(
+			"address" => $accountAddress,
+		);
+	}
+	$sources[] = array(
+		"address" => Q::ifset($request,"holder", "contractAddress", null),
+		"pathABI" => Q::ifset($request,"holder", "pathABI", "Assets/templates/R1/NFT/sales/contract"),
+		"recipient" => $accountAddress
+	);
+	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
+	$glob = array();
+	$glob["offset"] = (int)Q::ifset($request, "offset", 0);
+	$glob["limit"] = (int)Q::ifset($request, "limit", 1000);
 	$countNFTs = 0;
-	$glob["Assets_NFT_response_owned"]["secondsInYear"] = 31104000;
+	$glob["secondsInYear"] = 31104000;
 	$tokensByOwnerLimit = Q_Config::get("Assets", "NFT", "methods", "tokensByOwner", "limit", 100);
 
 	$chains = Assets_NFT::getChains();
-	$walletAddress = Q::ifset($request, 'walletAddress', Users_Web3::getWalletByUserId($userId));
-	$chainId = Q::ifset($request, 'chainId', null);
-	$contractAddress = Q::ifset($request, 'contractAddress', null);
-	$pathABI = Q::ifset($request, 'pathABI', "Assets/templates/NFT");
+	$chainId = Q::ifset($request, "chainId", null);
+	$contractAddress = Q::ifset($request, "contractAddress", null);
+	$glob["skipInfo"] = Q::ifset($request, "skipInfo", false);
+	$glob["skipException"] = Q::ifset($request, "skipException", false);
+	$skipCache = filter_var(Q::ifset($request, "skipCache", false), FILTER_VALIDATE_BOOLEAN);
+	$cacheDuration = $skipCache ? false : Q::ifset($request, "cacheDuration", null);
+	if (is_string($cacheDuration)) {
+		$cacheDuration = (int)$cacheDuration;
+	}
 
 	$tokenJSON = array();
 
-	$_Assets_NFT_response_owned_json = function ($tokenId, $chain, $ABI, &$tokenJSON, &$countNFTs) use($glob) {
+	$_Assets_NFT_response_owned_json = function ($params, &$tokenJSON, &$countNFTs) use($glob) {
+		$tokenId = $params["tokenId"];
+		$chain = $params["chain"];
+		$ABI = $params["ABI"];
+		$secondsLeft = Q::ifset($params, "secondsLeft", null);
+		$dataJson = compact("tokenId", "secondsLeft");
+		if ($glob["skipInfo"]) {
+			$tokenJSON[] = $dataJson;
+			return null;
+		}
+
 		try {
-			$dataJson = Q::event('Assets/NFT/response/getInfo', array(
+			$dataJson = array_merge($dataJson, Q::event("Assets/NFT/response/getInfo", array(
 				"tokenId" => $tokenId,
 				"chainId" => $chain["chainId"],
 				"contractAddress" => $chain["contract"],
 				"ABI" => $ABI
-			));
+			)));
 		} catch (Exception $e) {
+			$tokenJSON[] = $dataJson;
 			return null;
 		}
 
 		$countNFTs++;
 
-		if ($countNFTs <= $glob["Assets_NFT_response_owned"]["offset"]) {
+		if ($countNFTs <= $glob["offset"]) {
 			return null;
-		} elseif ($countNFTs > $glob["Assets_NFT_response_owned"]["offset"] + $glob["Assets_NFT_response_owned"]["limit"]) {
+		} elseif ($countNFTs > $glob["offset"] + $glob["limit"]) {
 			return false;
 		}
 
 		$tokenJSON[] = $dataJson;
-
 		return null;
 	};
 
@@ -74,33 +102,61 @@ function Assets_NFT_response_owned ($params) {
 		$balanceOf = Users_Web3::existsInABI("balanceOf", $ABI, "function", false);
 		$getNftsByOwner = Users_Web3::existsInABI("getNftsByOwner", $ABI, "function", false);
 		$tokenOfOwnerByIndex = Users_Web3::existsInABI("tokenOfOwnerByIndex", $ABI, "function", false);
-
-		if ($tokensByOwner || $getNftsByOwner) {
-			$methodName = "tokensByOwner";
-			if ($getNftsByOwner) {
-				$methodName = "getNftsByOwner";
-			}
-
-			$tokens = Users_Web3::execute('Assets/templates/NFT', $chain["contract"], $methodName, [$walletAddress, $tokensByOwnerLimit], $chain["chainId"]);
-			if (empty($tokens)) {
+		foreach ($sources as $source) {
+			if (empty($source["address"])) {
 				continue;
 			}
+			if ($tokensByOwner || $getNftsByOwner) {
+				$methodName = "tokensByOwner";
+				if ($getNftsByOwner) {
+					$methodName = "getNftsByOwner";
+				}
 
-			foreach ($tokens as $tokenId) {
-				if ($_Assets_NFT_response_owned_json($tokenId, $chain, $ABI, $tokenJSON, $countNFTs) === false) {
-					break;
+				$tokens = Users_Web3::execute($pathABI, $chain["contract"], $methodName, [$source["address"], $tokensByOwnerLimit], $chain["chainId"], true, $cacheDuration);
+				if (empty($tokens)) {
+					continue;
 				}
-			}
-		} elseif ($balanceOf && $tokenOfOwnerByIndex) {
-			$tokens = (int)Users_Web3::execute('Assets/templates/NFT', $chain["contract"], "balanceOf", $walletAddress, $chain["chainId"]);
-			for ($i = 0; $i < $tokens; $i++) {
-				$tokenId = (int)Users_Web3::execute('Assets/templates/NFT', $chain["contract"], "tokenOfOwnerByIndex", array($walletAddress, $i), $chain["chainId"], true, $glob["Assets_NFT_response_owned"]["secondsInYear"]);
-				if ($_Assets_NFT_response_owned_json($tokenId, $chain, $ABI, $tokenJSON, $countNFTs) === false) {
-					break;
+				if ($source["recipient"]) {
+					$dirtyTokens = $tokens;
+					$tokens = array();
+					$sourceABI = Users_Web3::getABI($source["pathABI"]);
+					$tokenInfo = Users_Web3::existsInABI("tokenInfo", $sourceABI, "function", false);
+					if ($tokenInfo) {
+						foreach ($dirtyTokens as $tokenId) {
+							$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"], true, $cacheDuration);
+							if (Q::ifset($tokenInfo, "recipient", null) == $source["recipient"]) {
+								$tokens[] = array(
+									"tokenId" => $tokenId,
+									"secondsLeft" => Q::ifset($tokenInfo, "secondsLeft", null)
+								);
+							}
+						}
+					} else {
+						$tokens = array();
+					}
 				}
+
+				foreach ($tokens as $tokenId) {
+					$secondsLeft = null;
+					if (is_array($tokenId)) {
+						$secondsLeft = Q::ifset($tokenId, "secondsLeft", null);
+						$tokenId = Q::ifset($tokenId, "tokenId", null);
+					}
+					if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "secondsLeft"), $tokenJSON, $countNFTs) === false) {
+						break;
+					}
+				}
+			} elseif ($balanceOf && $tokenOfOwnerByIndex) {
+				$tokens = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "balanceOf", $source["address"], $chain["chainId"], true, $cacheDuration);
+				for ($i = 0; $i < $tokens; $i++) {
+					$tokenId = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "tokenOfOwnerByIndex", array($source["address"], $i), $chain["chainId"], true, $glob["secondsInYear"], true, $cacheDuration);
+					if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI"), $tokenJSON, $countNFTs) === false) {
+						break;
+					}
+				}
+			} else {
+				throw new Exception("Contract ".$chain["contract"]." doesn't support methods tokensByOwner and ".($balanceOf ? "tokenOfOwnerByIndex" : "balanceOf"));
 			}
-		} else {
-			throw new Exception("Contract ".$chain["contract"]." doesn't support methods tokensByOwner and ".($balanceOf ? "tokenOfOwnerByIndex" : "balanceOf"));
 		}
 	}
 

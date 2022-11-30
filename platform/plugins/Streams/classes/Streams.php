@@ -794,12 +794,10 @@ abstract class Streams extends Base_Streams
 		}
 		if (!empty($labels)) {
 			$labels = array_unique($labels);
-			$contacts = Users_Contact::select()
-				->where(array(
-					'userId' => $actualPublisherId,
-					'label' => $labels,
-					'contactUserId' => $asUserId
-				))->fetchDbRows();
+			$contacts = Users_Contact::fetch($actualPublisherId, $labels, array(
+				'contactUserId' => $asUserId,
+				'skipAccess' => true
+			));
 			foreach ($contacts as $contact) {
 				foreach ($accesses as $access) {
 					if ($access->ofContactLabel !== $contact->label) {
@@ -5189,10 +5187,15 @@ abstract class Streams extends Base_Streams
 	 *  so publisherId will be recovered in the form "abcdefg/123".
 	 *  Note that it will be missing the last letter of the true publisherId,
 	 *  so you may have to use a Db_Range when using it in database queries.
+	 * @param {boolean} [$urlencoded] Whether to return a urlencoded string,
+	 *  to handle leading zeros in the string
 	 * @return {array} Assign to list($publisherId, $streamIdPrefix)
 	 */
-	static function fromHexString($hexString, $hasSeriesId = false)
-	{
+	static function fromHexString(
+		$hexString, 
+		$hasSeriesId = false, 
+		$urlencoded = false
+	) {
 		if (substr($hexString, 0, 2) === '0x') {
 			$hexString = substr($hexString, 2);
 		}
@@ -5205,7 +5208,9 @@ abstract class Streams extends Base_Streams
 		}
 		$streamHex = substr($hexString, 16);
 		$publisherId = Q_Utils::hex2asc($publisherHex);
-		$streamIdPrefix = Q_Utils::hex2asc($streamHex);
+		$streamIdPrefix = $urlencoded 
+			? Q_Utils::hex2urlencoded($streamHex)
+			: Q_Utils::hex2asc($streamHex);
 		if ($hasSeriesId) {
 			$publisherId = "$publisherId/$seriesId";
 		}
