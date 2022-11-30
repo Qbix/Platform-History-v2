@@ -542,6 +542,7 @@
                         });
                     } else if (authorAddress) {
                         Q.Template.render("Assets/NFT/avatar", {
+                            baseUrl: Q.info.baseUrl,
                             size: 50,
                             address: Web3.minimizeAddress(authorAddress, 20, 3)
                         }, (err, html) => {
@@ -567,6 +568,7 @@
                         });
                     } else if (ownerAddress) {
                         Q.Template.render("Assets/NFT/avatar", {
+                            baseUrl: Q.info.baseUrl,
                             size: 50,
                             address: Web3.minimizeAddress(ownerAddress, 11, 3)
                         }, (err, html) => {
@@ -1381,7 +1383,7 @@
     );
 
     Q.Template.set('Assets/NFT/avatar',
-`<img src="{{baseUrl}}/Q/plugins/Users/img/icons/default/{{size}}.png" class="Users_avatar_icon Users_avatar_icon_{{size}}">
+        `<img src="{{baseUrl}}/Q/plugins/Users/img/icons/default/{{size}}.png" class="Users_avatar_icon Users_avatar_icon_{{size}}">
         <span class="Users_avatar_name">{{address}}</span>`,
         {text: ['Assets/content']}
     );
