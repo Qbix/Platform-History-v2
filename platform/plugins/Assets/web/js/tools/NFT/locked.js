@@ -121,6 +121,9 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
             });
         });
 
+        Q.Users.Web3.onAccountsChanged.set(function () {
+            tool.refresh();
+        }, tool);
     },
 
     { // default options here
