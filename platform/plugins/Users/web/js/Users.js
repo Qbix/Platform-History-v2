@@ -4431,8 +4431,16 @@
 						return Q.handle(callback, null, [e]);
 					}
 					if (readOnly) {
-						var provider = Web3.getBatchProvider(chainId);
-						return _continue(provider, false);
+						if (chainId) {
+							_proceed(chainId);
+						} else {
+							Web3.getChainId().then(_proceed)
+							.catch(console.warn);
+						}
+						return;
+						function _proceed(chainId) {
+							return _continue(Web3.getBatchProvider(chainId), false);
+						}
 					}
 					if (window.ethereum
 					&& parseInt(ethereum.chainId) === parseInt(Q.getObject([

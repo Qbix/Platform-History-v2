@@ -50,6 +50,7 @@ if (Q.isEmpty(Q["validate"])) {
  * @constructor
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.fields] array of defaults for the values
+ *  @param {String} [options.chainId=Q.Assets.NFT.defaultChain.chainId] override the default
  *  @param {String} [options.NFTcontract] pass the address of the NFT contract, to get the list of instances
  *  @param {String} [options.fields.NFTcontract.value] only if options.NFTcontract is not set
  *  @param {String} [options.fields.seriesId.value]
@@ -132,6 +133,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
 
 { // default options here
     NFTContract: "",
+    chainId: Q.Assets.NFT.defaultChain.chainId,
     fields: {
         // key validate is optional
         // value can be :
@@ -302,7 +304,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             "Assets/NFT/sales/factory", 
             {
                 fields: state.fields,
-                chainId: Q.Assets.NFT.defaultChain.chainId
+                chainId: state.chainId
             },
             function(err, html){
 
