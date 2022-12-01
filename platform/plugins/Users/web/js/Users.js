@@ -4431,7 +4431,7 @@
 						return Q.handle(callback, null, [e]);
 					}
 					if (readOnly) {
-						var provider = Web3.getBatchProvider(url);
+						var provider = Web3.getBatchProvider(chainId);
 						return _continue(provider, false);
 					}
 					if (window.ethereum
