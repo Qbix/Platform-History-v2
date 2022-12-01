@@ -74,7 +74,7 @@
 							}
 
 							// check if tool element scrollable
-							if (tool.element.clientHeight >= tool.element.scrollHeight) {
+							if (tool.element.clientHeight > tool.element.scrollHeight) {
 								Q.handle(tool.state.onInvoke, tool, [0]);
 								pipeTimer = null;
 							}

@@ -13,12 +13,11 @@ var Assets = Q.Assets;
  * @param {Object} options Override various options for this tool
  * @param {string} options.accountAddress - either this or userId is required
  * @param {string} options.userId - either this or accountAddress is required
- * @param {boolean} [options.onlyPending=false] - If true show only pending NFTs (skip owned)
  * @param {string} [options.contractAddress] - Can override address of the NFT contract.
  *    By default takes it from Q.Assets.NFT.Web3.chains[currentChainId].contract
  * @param {string} [options.chainId] - by default, it will use the currently selected chain in the client
  * @param {string} [options.pathABI] - override NFT contract ABI template, if necessary
- * @param {boolean} [options.skipCache=false] - whether to use cache for Web3 requests
+ * @param {boolean} [options.updateCache=false] - if true request new data from blockchain and update cache
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
@@ -34,11 +33,10 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 		contractAddress: null,
 		pathABI: "Assets/templates/R1/NFT/sales/contract"
 	},
-	onlyPending: false,
 	chainId: null,
 	contractAddress: null,
 	pathABI: "Assets/templates/R1/NFT/contract",
-	skipCache: false,
+	updateCache: false,
 	limit: 10
 },
 
@@ -141,8 +139,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 				chainId: state.chainId,
 				contractAddress: state.contractAddress,
 				pathABI: state.pathABI,
-				skipCache: state.skipCache,
-				onlyPending: state.onlyPending,
+				updateCache: state.updateCache,
 				offset: offset,
 				limit: state.limit
 			}

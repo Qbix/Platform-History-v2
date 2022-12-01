@@ -2,12 +2,16 @@
     padding:10px 20px 20px 20px;
 }
 .Assets_NFT_locked_tool .Assets_NFT_locked_lockBtn,
-.Assets_NFT_locked_tool .Assets_NFT_locked_unlockBtn {
+.Assets_NFT_locked_tool .Assets_NFT_locked_unlockBtn,
+.Assets_NFT_locked_tool .Assets_NFT_locked_locked {
     display: none;
 }
-
-.Assets_NFT_locked_tool[data-enabledLock=true] .Assets_NFT_locked_lockBtn,
-.Assets_NFT_locked_tool[data-enabledUnlock=true] .Assets_NFT_locked_unlockBtn {
+.Assets_NFT_locked_tool[data-locked=true][data-custodian=false][data-owner=true] .Assets_NFT_locked_locked,
+.Assets_NFT_locked_tool[data-locked=false][data-owner=true] .Assets_NFT_locked_lockBtn,
+.Assets_NFT_locked_tool[data-locked=true][data-custodian=true] .Assets_NFT_locked_unlockBtn {
     display: block;
 }
 
+.Assets_NFT_locked_lock input {
+    width: 100%;
+}
