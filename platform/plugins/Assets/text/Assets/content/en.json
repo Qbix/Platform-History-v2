@@ -535,12 +535,10 @@
 				"tokenId": "id",
 				"custodian": "address"
 			},
-			"btn": {
-				"Lock": "Lock",
-				"Unlock": "Unlock"
-			},
 			"Lock": "Lock",
 			"Unlock": "Unlock",
+			"Locked": "Locked",
+			"CustodianAddress": "Custodian address",
 			"TokenWasClaimed": "Token \"{{title}}\" was claimed",
 			"TokenWasLocked": "Token \"{{title}}\" was locked",
 			"TokenWasUnlocked": "Token \"{{title}}\" was unlocked"
