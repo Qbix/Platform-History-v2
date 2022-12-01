@@ -1182,7 +1182,7 @@
                     }
             
                     function resizeByPinchGesture() {
-                        window.addEventListener(_elementToResize, 'touchstart', startResizingByPinch);
+                        Q.addEventListener(_elementToResize, 'touchstart', startResizingByPinch);
                     }
             
                     function startResizingByPinch(e) {
