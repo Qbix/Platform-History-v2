@@ -3971,7 +3971,6 @@
 	var Web3 = Users.Web3 = {
 		chains: {},
 		provider: null,
-		providerEthers: null,
 		web3Modal: null,
 		onAccountsChanged: new Q.Event(),
 		onChainChanged: new Q.Event(),
@@ -4313,6 +4312,19 @@
 		},
 
 		/**
+		 * Get ethers.providers.JsonRpcBatchProvider(rpcUrl of chain)
+		 * @param {string} chainId
+		 * @return {ethers.providers.JsonRpcBatchProvider}
+		 */
+		getBatchProvider(chainId) {
+			var url = Q.getObject([chainId, 'rpcUrls', 0], Web3.chains);
+			if (!url) {
+				throw new Q.Exception('Users.Web3.getContract: Web3.chains['+chainId+'].rpcUrls is empty');
+			}
+			return new ethers.providers.JsonRpcBatchProvider(url);
+		},
+
+		/**
 		 * Switch provider to a different Web3 chain
 		 * @method switchChain
 		 * @static
@@ -4419,12 +4431,16 @@
 						return Q.handle(callback, null, [e]);
 					}
 					if (readOnly) {
-						var url = Q.getObject([chainId, 'rpcUrls', 0], Web3.chains);
-						if (!url) {
-							throw new Q.Exception('Users.Web3.getContract: Web3.chains['+chainId+'].rpcUrls is empty');
+						if (chainId) {
+							_proceed(chainId);
+						} else {
+							Web3.getChainId().then(_proceed)
+							.catch(console.warn);
 						}
-						var provider = new ethers.providers.JsonRpcBatchProvider(url);
-						return _continue(provider, false);
+						return;
+						function _proceed(chainId) {
+							return _continue(Web3.getBatchProvider(chainId), false);
+						}
 					}
 					if (window.ethereum
 					&& parseInt(ethereum.chainId) === parseInt(Q.getObject([
