@@ -1611,10 +1611,11 @@ window.WebRTCRoomClient = function app(options){
                 this.overlaySources = []; //for watermarks
                 this.backgroundSources = []; //for backgrounds
                 this.audioSources = [];
+                this.eventDispatcher = new EventSystem();
             }
 
             var defaultScene = new Scene();
-            defaultScene.title = 'default';
+            defaultScene.title = 'Scene 1';
             _defaultScene = _activeScene = defaultScene;
             _scenes.push(defaultScene);
 
@@ -1622,6 +1623,7 @@ window.WebRTCRoomClient = function app(options){
             function createScene(name) {
                 console.log('canvasComposer: createScene');
                 var newScene = new Scene();
+                newScene.id = generateId();
                 newScene.title = name;
                 _scenes.push(newScene);
             }
@@ -1694,6 +1696,7 @@ window.WebRTCRoomClient = function app(options){
                 }
                 if(sceneExists) {
                     _activeScene = sceneInstance;
+                    _eventDispatcher.dispatch('sceneSelected');
                     return true;
                 }
                 return false;
@@ -1704,14 +1707,11 @@ window.WebRTCRoomClient = function app(options){
             }
 
             var videoComposer = (function () {
-                var _webrtcGroup = null;
                 var _webrtcAudioGroup = null;
                 var _availableWebRTCSources = [];
                 var _size = {width:1280, height: 720};
-                var _webrtcLayoutRect = {width:1280, height: 720, x: 0, y: 0, updateTimeout: null};
                 var _inputCtx = null;
                 var _isActive = null;
-                var _currentLayout = null;
 
                 function createCanvas() {
                     var videoCanvas = document.createElement("CANVAS");
@@ -1755,7 +1755,7 @@ window.WebRTCRoomClient = function app(options){
                         _webrtcLayoutRect.updateTimeout = null;
                     }
                     _webrtcLayoutRect.updateTimeout = setTimeout(function () {
-                        updateWebRTCCanvasLayout();
+                        updateActiveWebRTCLayouts();
 
                     }, 100)
 
@@ -1766,6 +1766,7 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 var Source = function () {
+                    this._id = null;
                     this.active = true;
                     this._name = null;
                     this.rect = null;
@@ -1783,7 +1784,7 @@ window.WebRTCRoomClient = function app(options){
                             this._name = val;
                             if(this.eventDispatcher != null) this.eventDispatcher.dispatch('nameChanged', val)
                         },
-                        'get': function(val) {
+                        'get': function() {
                             return this._name;
                         }
                     },
@@ -1797,6 +1798,26 @@ window.WebRTCRoomClient = function app(options){
                             }
                             this._color = color;
                             return color;
+                        }
+                    },
+                    'rect': {
+                        'set': function(value) {
+                            this._rect = value;
+                            if(this.eventDispatcher != null) this.eventDispatcher.dispatch('rectChanged')
+                        },
+                        'get': function() {
+                            return this._rect;
+                        }
+                    },
+                    'id': {
+                        'set': function(value) {
+                            this._id = value;
+                        },
+                        'get': function() {
+                            if(this._id == null) {
+                                this._id = generateId();
+                            }
+                            return this._id;
                         }
                     }
                 });
@@ -1973,6 +1994,8 @@ window.WebRTCRoomClient = function app(options){
                     this.text = text.text;
                     this.font = text.font;
                     this.fillStyle = text.fillStyle;
+                    this.textHeight = text.textHeight;
+                    this.latestSize = text.latestSize;
                     this.frame = text.frame;
                     this.frames= text.frames;
                     this.xFrom = text.xFrom;
@@ -1987,21 +2010,91 @@ window.WebRTCRoomClient = function app(options){
                 TextObjectSource.prototype = new Source();
 
                 var GroupSource = function () {
+                    let groupInstance = this;
                     this.groupType = null;
                     this.sourceType = 'group';
+                    this.layoutName = null;
                     this.size = {width:_size.width, height:_size.height};
+                    this.rect = {
+                        _width:1280, 
+                        _height: 720, 
+                        _x: 0, 
+                        _y: 0, 
+                        updateTimeout: null,
+                        updateGroupLayout: function () {
+                            console.log('updateGroupLayout')
+                            if(this.updateTimeout != null) {
+                                clearTimeout(this.updateTimeout);
+                                this.updateTimeout = null;
+                            }
+                            this.updateTimeout = setTimeout(function () {
+                                console.log('updateGroupLayout 2')
+                                updateWebRTCLayout(groupInstance);
+        
+                            }, 100)
+                        },
+                        set x(value) {
+                            this._x = value;
+                            if(groupInstance.eventDispatcher != null) groupInstance.eventDispatcher.dispatch('rectChanged');
+                            this.updateGroupLayout();
+                        },
+                        set y(value) {
+                            this._y = value;
+                            if(groupInstance.eventDispatcher != null) groupInstance.eventDispatcher.dispatch('rectChanged');
+                            this.updateGroupLayout();
+                        },
+                        set width(value) {
+                            this._width = value;
+                            if(groupInstance.eventDispatcher != null) groupInstance.eventDispatcher.dispatch('rectChanged');
+                            this.updateGroupLayout();
+                        },
+                        set height(value) {
+                            this._height = value;
+                            if(groupInstance.eventDispatcher != null) groupInstance.eventDispatcher.dispatch('rectChanged');
+                            this.updateGroupLayout();
+                        },
+                        get x() {return this._x;},
+                        get y() {return this._y;},
+                        get width() {return this._width;},
+                        get height() {return this._height;}
+                    };
+                    this.params = {
+                        showLabelWithNames: options.liveStreaming.showLabelWithNames,
+                        showLayoutBorders: options.liveStreaming.showLayoutBorders,
+                        tiledLayoutMargins: options.liveStreaming.tiledLayoutMargins,
+                        audioLayoutBgColor: options.liveStreaming.audioLayoutBgColor,
+                        defaultLayout: options.liveStreaming.defaultLayout || 'tiledStreamingLayout',
+                    };
+                    this.getChildSources = function(type, active) {
+                        console.log('getChildSources', type)
+    
+                        if(groupInstance.groupType == 'webrtc') {
+                            console.log('getChildSources _activeScene', _activeScene)
+                            console.log('getChildSources _activeScene.sources', _activeScene.sources)
+                            if(active == null) {
+                                return _activeScene.sources.filter(function (source) {
+                                    return source.sourceType == type && source.parentGroup != null && source.parentGroup == groupInstance;
+                                });
+        
+                            }
+                            return _activeScene.sources.filter(function (source) {
+                                return source.sourceType == type && source.parentGroup != null && source.parentGroup == groupInstance && source.active === true;
+                            });
+                        }
+                        }
+                        
+                    this.eventDispatcher = new EventSystem();
                 }
                 GroupSource.prototype = new Source();
                 var webrtcGroup = new GroupSource()
                 webrtcGroup.name = 'Video Chat';
                 webrtcGroup.groupType = 'webrtc';
                 defaultScene.sources.push(webrtcGroup);
-                _webrtcGroup = webrtcGroup;
 
                 var WebRTCStreamSource = function (participant) {
                     this.kind = null;
                     this.participant = participant;
-                    this.name = participant.username;
+                    this.name = participant.username ? participant.username.toUpperCase() : '';
                     this.avatar = participant.avatar ? participant.avatar.image : null;
                     this.track = null;
                     this.mediaStream = null;
@@ -2009,11 +2102,12 @@ window.WebRTCRoomClient = function app(options){
                     this.htmlVideoEl = null;
                     this.screenSharing = false;
                     this.sourceType = 'webrtc';
-                    this.caption = 'participant';
+                    this.caption =  participant.greeting;
                     this.eventDispatcher = new EventSystem();
                     this.params = {
                         captionBgColor: '#26A553',
-                        captionFontColor: '#FFFFFF'
+                        captionFontColor: '#FFFFFF',
+                        displayVideo: 'cover'
                     };
                 }
                 WebRTCStreamSource.prototype = new Source();
@@ -2069,6 +2163,33 @@ window.WebRTCRoomClient = function app(options){
                     }
                 });*/
 
+                function getWebrtcGroupIndex(webrtcGroup) {
+                    for (let j in _activeScene.sources) {
+                        if (_activeScene.sources[j] == webrtcGroup) {
+
+                            var childItems = 0;
+                            for(let i in _activeScene.sources) {
+                                if(_activeScene.sources[i].parentGroup == webrtcGroup) {
+                                    childItems++;
+                                }
+                            }
+
+                            return {index:parseInt(j), childItemsNum: childItems };
+                        }
+                    }
+                    return {index:0, childItemsNum: 0 };
+                }
+
+                function getIndexOfLatestWebRTCSource() {
+                    let indexOfLatestWebRTCSource = 0;
+                    for (let j in _activeScene.sources) {
+                        if (_activeScene.sources[j].sourceType == 'webrtc') {
+                            indexOfLatestWebRTCSource = parseInt(j);
+                        }
+                    }
+                    return indexOfLatestWebRTCSource;
+                }
+
                 function addSource(newSource, successCallback, failureCallback) {
                     console.log('addSource', newSource instanceof RectObjectSource)
                     if( newSource instanceof RectObjectSource || newSource instanceof StrokeRectObjectSource || newSource instanceof TextObjectSource) {
@@ -2076,59 +2197,42 @@ window.WebRTCRoomClient = function app(options){
                         return;
                     }
 
-                    function getWebrtcGroupIndex() {
-                        for (let j in _activeScene.sources) {
-                            if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
-
-                                var childItems = 0;
-                                for(let i in _activeScene.sources) {
-                                    if(_activeScene.sources[i].parentGroup == _activeScene.sources[j]) {
-                                        childItems++;
-                                    }
-                                }
-
-                                return {index:j, childItemsNum: childItems };
-                            }
-                        }
-                        return {index:0, childItemsNum: 0 };
-                    }
-
                     function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
                         var ratio = Math.min(maxWidth / srcWidth, maxHeight / srcHeight);
                         return { width: srcWidth*ratio, height: srcHeight*ratio };
                     }
 
-                    if(newSource.sourceType == 'webrtc') {
+                    if(newSource.sourceType == 'webrtcGroup') {
+                        var webrtcGroup = new GroupSource()
+                        webrtcGroup.name = newSource.title || 'Video Chat';
+                        webrtcGroup.groupType = 'webrtc';
+                        _activeScene.sources.splice(0, 0, webrtcGroup)
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
+                        return webrtcGroup;
+                    } else if(newSource.sourceType == 'webrtc') {
                         console.log('addSource webrtc')
-                        let webrtcGroup = getWebrtcGroupIndex();
+                        let webrtcGroup = getWebrtcGroupIndex(newSource.parentGroup);
+                        let insertAfterIndex = webrtcGroup.index + 1 + webrtcGroup.childItemsNum;
+                       
+                        log('addSource add at the end ' + insertAfterIndex, _activeScene.sources.length)
+
+                        _activeScene.sources.splice(insertAfterIndex, 0, newSource)
 
 
-                        let h = webrtcGroup.index + 1, sourceStream = _activeScene.sources[h];
-                        while (sourceStream != null && sourceStream.sourceType == 'webrtc') {
-                            h++
-                            sourceStream = _activeScene.sources[h];
-                        }
-                        log('addSource add at the end ' + (h), _activeScene.sources.length)
-
-                        _activeScene.sources.splice((h), 0, newSource)
-
-
-                        log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
-                        _eventDispatcher.dispatch('sourceAdded', newSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
                         return;
 
                     } else if(newSource.sourceType == 'image') {
                         console.log('addSource image')
-                        let webrtcGroup = getWebrtcGroupIndex();
+                        let indexOfLatestWebRTCSOurce = getIndexOfLatestWebRTCSource();
 
                         var imageSource = new ImageSource();
                         imageSource.imageInstance = newSource.imageInstance;
                         imageSource.name = newSource.title;
                         //_activeScene.sources.unshift(imageSource);
-                        _activeScene.sources.splice((webrtcGroup.index + webrtcGroup.childItemsNum + 1), 0, imageSource)
+                        _activeScene.sources.splice((indexOfLatestWebRTCSOurce + 1), 0, imageSource)
 
-                        log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
-                        _eventDispatcher.dispatch('sourceAdded', imageSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', imageSource);
 
                         return imageSource;
                     } else if(newSource.sourceType == 'imageBackground') {
@@ -2139,8 +2243,7 @@ window.WebRTCRoomClient = function app(options){
                         imageSource.name = newSource.title;
                         _activeScene.backgroundSources.splice(0, 0, imageSource)
 
-                        log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
-                        _eventDispatcher.dispatch('sourceAdded', imageSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', imageSource);
 
                         return imageSource;
                     } else if(newSource.sourceType == 'imageOverlay') {
@@ -2173,13 +2276,12 @@ window.WebRTCRoomClient = function app(options){
 
                         _activeScene.overlaySources.splice(0, 0, imageSource)
 
-                        //_eventDispatcher.dispatch('sourceAdded', imageSource);
+                        //_activeScene.eventDispatcher.dispatch('sourceAdded', imageSource);
 
                         return imageSource;
                     } else if(newSource.sourceType == 'video') {
                         console.log('addSource video')
-                        let webrtcGroup = getWebrtcGroupIndex();
-
+                        let indexOfLatestWebRTCSOurce = getIndexOfLatestWebRTCSource();
                         var video = document.createElement('VIDEO');
                         video.muted = true;
                         video.loop = options.liveStreaming.loopVideo;
@@ -2191,7 +2293,7 @@ window.WebRTCRoomClient = function app(options){
                         videoSource.videoInstance = video;
                         videoSource.name = newSource.title;
                         //_activeScene.sources.unshift(videoSource);
-                        _activeScene.sources.splice((webrtcGroup.index + webrtcGroup.childItemsNum + 1), 0, videoSource);
+                        _activeScene.sources.splice((indexOfLatestWebRTCSOurce + 1), 0, videoSource);
                         var playPromise = video.play();
                         if (playPromise !== undefined) {
                             playPromise.then(function() {
@@ -2201,8 +2303,7 @@ window.WebRTCRoomClient = function app(options){
                             });
                         }
                         audioComposer.addSource(videoSource);
-                        log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
-                        _eventDispatcher.dispatch('sourceAdded', videoSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', videoSource);
 
                         return videoSource;
                     } else if(newSource.sourceType == 'videoBackground') {
@@ -2234,14 +2335,12 @@ window.WebRTCRoomClient = function app(options){
                             });
                         }*/
 
-
-                        log('updateWebRTCCanvasLayout rendered arr', _activeScene.sources)
-                        _eventDispatcher.dispatch('sourceAdded', videoSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', videoSource);
 
                         return videoSource;
                     } else {
                         _activeScene.sources.unshift(newSource);
-                        //_eventDispatcher.dispatch('sourceAdded', newSource);
+                        //_activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
 
                     }
                 }
@@ -2252,7 +2351,7 @@ window.WebRTCRoomClient = function app(options){
                     } else {
                         _activeScene.additionalSources.unshift(newSource);
                     }
-                    _eventDispatcher.dispatch('sourceAdded', newSource);
+                    _activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
                 }
 
                 function removeSource(source, doNotFireEvent) {
@@ -2269,7 +2368,7 @@ window.WebRTCRoomClient = function app(options){
                     }
                     if(source.videoInstance != null) source.videoInstance.pause();
                     audioComposer.muteSourceLocally(source);
-                    if(!doNotFireEvent) _eventDispatcher.dispatch('sourceRemoved', source);
+                    if(!doNotFireEvent) _activeScene.eventDispatcher.dispatch('sourceRemoved', source);
                 }
 
                 function removeAdditionalSource(source, doNotFireEvent) {
@@ -2279,24 +2378,7 @@ window.WebRTCRoomClient = function app(options){
                             break;
                         }
                     }
-                    if(!doNotFireEvent) _eventDispatcher.dispatch('sourceRemoved', source);
-                }
-
-                function getSources(type, active) {
-                    console.log('getSources', type)
-
-                    if(type == null) return _activeScene.sources;
-                    console.log('getSources _activeScene', _activeScene)
-                    console.log('getSources _activeScene.sources', _activeScene.sources)
-                    if(active == null) {
-                        return _activeScene.sources.filter(function (source) {
-                            return source.sourceType == type && source.parentGroup != null && source.parentGroup.groupType == 'webrtc';
-                        });
-
-                    }
-                    return _activeScene.sources.filter(function (source) {
-                        return source.sourceType == type && source.parentGroup != null && source.parentGroup.groupType == 'webrtc' && source.active === true;
-                    });
+                    if(!doNotFireEvent) _activeScene.eventDispatcher.dispatch('sourceRemoved', source);
                 }
 
                 function moveSource(old_index, new_index) {
@@ -2308,7 +2390,7 @@ window.WebRTCRoomClient = function app(options){
                         new_index = _activeScene.sources.length - 1;
                     }
                     _activeScene.sources.splice(new_index, 0, _activeScene.sources.splice(old_index, 1)[0]);
-                    _eventDispatcher.dispatch('sourceMoved');
+                    _activeScene.eventDispatcher.dispatch('sourceMoved');
 
                     return _activeScene.sources;
                 }
@@ -2329,7 +2411,7 @@ window.WebRTCRoomClient = function app(options){
                                 console.log('moveForward ==', i);
 
                                 _activeScene.sources.splice(i + 1, 0, ...(_activeScene.sources.splice(i, childItems + 1)) );
-                                _eventDispatcher.dispatch('sourceMoved');
+                                _activeScene.eventDispatcher.dispatch('sourceMoved');
 
                                 break;
                             }
@@ -2379,7 +2461,7 @@ window.WebRTCRoomClient = function app(options){
                                 console.log('moveForward ==', i);
 
                                 _activeScene.sources.splice(i - (childItems + 1), 0, ...(_activeScene.sources.splice(i, childItems + 1)) );
-                                _eventDispatcher.dispatch('sourceMoved');
+                                _activeScene.eventDispatcher.dispatch('sourceMoved');
 
                                 break;
                             }
@@ -2433,7 +2515,7 @@ window.WebRTCRoomClient = function app(options){
                     source.active = true;
 
                     if(source.sourceType == 'webrtc' || source.groupType == 'webrtc') {
-                        updateWebRTCCanvasLayout();
+                        updateActiveWebRTCLayouts();
                         audioComposer.updateWebRTCAudioSources();
                     }
 
@@ -2485,7 +2567,7 @@ window.WebRTCRoomClient = function app(options){
                     source.active = false;
 
                     if(source.sourceType == 'webrtc' || source.groupType == 'webrtc') {
-                        updateWebRTCCanvasLayout();
+                        updateActiveWebRTCLayouts();
                         audioComposer.updateWebRTCAudioSources();
                     }
 
@@ -2527,13 +2609,21 @@ window.WebRTCRoomClient = function app(options){
                     hideChildSources([source])
                 }
 
-                function updateWebRTCCanvasLayout(layoutName) {
-                    log('updateWebRTCCanvasLayout start', layoutName, _currentLayout)
+                function updateActiveWebRTCLayouts() {
+                    for(let i in _activeScene.sources) {
+                        if(_activeScene.sources[i].sourceType == 'group' && _activeScene.sources[i].groupType == 'webrtc') {
+                            updateWebRTCLayout(_activeScene.sources[i]);
+                        }
+                    }
+                }
+
+                function updateWebRTCLayout(webrtcGroupSource, layoutName) {
+                    log('updateWebRTCCanvasLayout start', layoutName, webrtcGroupSource.currentLayout)
 
                     var tracksToAdd = [];
                     var tracksToRemove = [];
-
-                    var currentWebRTCSources = getSources('webrtc');
+                    
+                    var currentWebRTCSources = webrtcGroupSource.getChildSources('webrtc');
                     var participants = _roomInstance.roomParticipants(true);
                     log('updateWebRTCCanvasLayout participants',  participants)
                     log('updateWebRTCCanvasLayout currentWebRTCSources',  currentWebRTCSources)
@@ -2590,6 +2680,9 @@ window.WebRTCRoomClient = function app(options){
                                 let currentlyRenderedVideoTracks = renderedTracks.filter(function (t) {
                                     return t.kind == 'video' && t.track != vTracks[s] && t.screenSharing == false ? true : false;
                                 })
+                                let pendingVideoTracks = tracksToAdd.filter(function (t) {
+                                    return t.kind == 'video' && t.screenSharing == false ? true : false;
+                                })
                                 let currentlyRenderedScreensharingTracks = renderedTracks.filter(function (t) {
                                     return t.kind == 'video' && t.track != vTracks[s] && t.screensharing == true ? true : false;
                                 })
@@ -2613,20 +2706,26 @@ window.WebRTCRoomClient = function app(options){
                                         canvasStream.track = vTracks[s];
                                         canvasStream.mediaStream = vTracks[s].stream;
                                         canvasStream.htmlVideoEl = vTracks[s].trackEl;
-                                        canvasStream.parentGroup = _webrtcGroup;
+                                        canvasStream.parentGroup = webrtcGroupSource;
                                         if (vTracks[s].screensharing == true) {
+                                            log('updateWebRTCCanvasLayout addNewVideoCanvasStream: add screensharing track');
+
                                             canvasStream.screenSharing = true;
                                             canvasStream.name = canvasStream.name + ' (screen)';
                                             log('updateWebRTCCanvasLayout currentlyRendered', currentlyRenderedAudioTracks.length, currentlyRenderedVideoTracks.length)
 
-                                            if(currentlyRenderedAudioTracks.length == 0 && currentlyRenderedVideoTracks.length == 0) {
+                                            
+                                            if(currentlyRenderedAudioTracks.length == 0 && currentlyRenderedVideoTracks.length == 0 && pendingVideoTracks.length == 0) {
+                                                log('updateWebRTCCanvasLayout addNewVideoCanvasStream: add screensharing track: create audio track');
+
                                                 let audioCanvasStream = new WebRTCStreamSource(participants[v]);
                                                 audioCanvasStream.kind = 'audio';
-                                                audioCanvasStream.parentGroup = _webrtcGroup;
+                                                audioCanvasStream.parentGroup = webrtcGroupSource;
                                                 tracksToAdd.push(audioCanvasStream);
                                             }
                                         
                                         } else {
+                                            log('updateWebRTCCanvasLayout addNewVideoCanvasStream: add regular track');
                                             canvasStream.screenSharing = false;
                                             canvasStream.name = canvasStream.name.replace(' (screen)', '');
                                         }
@@ -2634,15 +2733,15 @@ window.WebRTCRoomClient = function app(options){
                                     }
 
                                     log('updateWebRTCCanvasLayout !trackCurrentlyRendered')
-                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
-                                    let notScreensharingVideo = !audioOnly && (layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing')) && !vTracks[s].screensharing;
+                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && webrtcGroupSource.currentLayout == 'audioOnly');
+                                    let notScreensharingVideo = !audioOnly && (layoutName == 'audioScreenSharing' || (layoutName == null && webrtcGroupSource.currentLayout == 'audioScreenSharing')) && !vTracks[s].screensharing;
                                     if((audioOnly || notScreensharingVideo) && currentlyRenderedAudioTracks.length == 0 && currentlyRenderedVideoTracks.length == 0) {
                                         //if audioOnly layout is active currently, we should show all videos as avatar+audio visualization. So we should add new canvas stream of audio type
                                         log('updateWebRTCCanvasLayout !trackCurrentlyRendered if1')
 
                                         let canvasStream = new WebRTCStreamSource(participants[v]);
                                         canvasStream.kind = 'audio';
-                                        canvasStream.parentGroup = _webrtcGroup;
+                                        canvasStream.parentGroup = webrtcGroupSource;
                                         canvasStream.track = vTracks[s];
                                         tracksToAdd.push(canvasStream);
                                     } /*else if(vTracks.length > 1) {
@@ -2688,8 +2787,8 @@ window.WebRTCRoomClient = function app(options){
                                 } else {
                                     //if this video track is rendered on canvas
                                     log('updateWebRTCCanvasLayout !trackCurrentlyRendered = false')
-                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && _currentLayout == 'audioOnly');
-                                    let audioScreenSharing =  layoutName == 'audioScreenSharing' || (layoutName == null && _currentLayout == 'audioScreenSharing');
+                                    let audioOnly = layoutName == 'audioOnly' || (layoutName == null && webrtcGroupSource.currentLayout == 'audioOnly');
+                                    let audioScreenSharing =  layoutName == 'audioScreenSharing' || (layoutName == null && webrtcGroupSource.currentLayout == 'audioScreenSharing');
                                     //if previous layout was audio only or audio+screensharing, but current layout is some of regular, we should show those video tracks, which was shown as avatar+audiovisualization previously in audio only layout
                                     //OR if previous layout was audio only, bu currently it's audio+screensharing layout we should show only screensharing track and leave rest as avatar+audio visualization
                                     if((!audioOnly && !audioScreenSharing) || (!audioOnly && audioScreenSharing && trackCurrentlyRendered.screenSharing)) {
@@ -2775,7 +2874,7 @@ window.WebRTCRoomClient = function app(options){
 
                                     let canvasStream = new WebRTCStreamSource(participants[v]);
                                     canvasStream.kind = 'audio';
-                                    canvasStream.parentGroup = _webrtcGroup;
+                                    canvasStream.parentGroup = webrtcGroupSource;
                                     tracksToAdd.push(canvasStream);
                                 }
                             }
@@ -2901,7 +3000,7 @@ window.WebRTCRoomClient = function app(options){
                             let removedSource = _activeScene.sources[d];
                             _activeScene.sources[d] = null;
                             _activeScene.sources.splice(d, 1);
-                            _eventDispatcher.dispatch('sourceRemoved', removedSource);
+                            _activeScene.eventDispatcher.dispatch('sourceRemoved', removedSource);
                         }
 
                         for(let n in tracksToRemove) {
@@ -2917,32 +3016,33 @@ window.WebRTCRoomClient = function app(options){
                     }
 
 
-                    var currentActiveWebRTCSources = getSources('webrtc', true);
+                    //var currentActiveWebRTCSources = getSources('webrtc', true);
+                    var currentActiveWebRTCSources = webrtcGroupSource.getChildSources('webrtc', true);
                     var layoutRects, streamsNum = (currentActiveWebRTCSources.concat(tracksToAdd).length);
                     if(layoutName != null && layoutName != 'audioOnly') {
                         console.log('updateWebRTCCanvasLayout layout', layoutName);
 
-                        layoutRects = layoutGenerator(layoutName, streamsNum);
-                        _currentLayout = layoutName;
+                        layoutRects = layoutGenerator(webrtcGroupSource, layoutName, streamsNum);
+                        webrtcGroupSource.currentLayout = layoutName;
 
                     } else {
-                        if(_currentLayout != null) {
-                            console.log('updateWebRTCCanvasLayout layout _currentLayout', _currentLayout);
+                        if(webrtcGroupSource.currentLayout != null) {
+                            console.log('updateWebRTCCanvasLayout layout currentLayout', webrtcGroupSource.currentLayout);
 
-                            layoutRects = layoutGenerator(_currentLayout, streamsNum);
+                            layoutRects = layoutGenerator(webrtcGroupSource, webrtcGroupSource.currentLayout, streamsNum);
                         } else {
                             if(renderScreenSharingLayout) {
                                 console.log('updateWebRTCCanvasLayout layout renderScreenSharingLayout');
 
-                                layoutRects = layoutGenerator('screenSharing', streamsNum);
-                                _currentLayout = 'screenSharing';
+                                layoutRects = layoutGenerator(webrtcGroupSource, 'screenSharing', streamsNum);
+                                webrtcGroupSource.currentLayout = 'screenSharing';
                             } else {
                                 console.log('updateWebRTCCanvasLayout layout tiledStreamingLayout');
 
-                                layoutRects = layoutGenerator('tiledStreamingLayout', streamsNum);
+                                layoutRects = layoutGenerator(webrtcGroupSource, webrtcGroupSource.params.defaultLayout, streamsNum);
                                 console.log('updateWebRTCCanvasLayout layout tiledStreamingLayout after', layoutRects);
 
-                                _currentLayout = 'tiledStreamingLayout';
+                                webrtcGroupSource.currentLayout = webrtcGroupSource.params.defaultLayout;
                             }
 
                         }
@@ -2957,7 +3057,7 @@ window.WebRTCRoomClient = function app(options){
                     var videoTracksOfUserWhoShares = [];
                     var screenSharingIsNew = false;
 
-                    if(/*renderScreenSharingLayout*/_currentLayout == 'screenSharing' || _currentLayout == 'audioScreenSharing' || _currentLayout == 'sideScreenSharing') {
+                    if(/*renderScreenSharingLayout*/webrtcGroupSource.currentLayout == 'screenSharing' || webrtcGroupSource.currentLayout == 'audioScreenSharing' || webrtcGroupSource.currentLayout == 'sideScreenSharing') {
                         log('updateWebRTCCanvasLayout: renderScreenSharingLayout: sdaraort streams')
 
                         var getUsersTracks = function(participant, screenSharingStream) {
@@ -3055,7 +3155,7 @@ window.WebRTCRoomClient = function app(options){
 
                         requestAnimationFrame(function(timestamp){
                             let starttime = timestamp || new Date().getTime()
-                            moveit(timestamp, tracksToAdd[a].rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add');
+                            moveit(timestamp, tracksToAdd[a].rect, rect, {y:startRect.y, x:startRect.x, width:startRect.width,height:startRect.height}, 300, starttime, 'add', tracksToAdd[a]);
                         })
 
                         addSource(tracksToAdd[a]);
@@ -3073,7 +3173,7 @@ window.WebRTCRoomClient = function app(options){
 
                         requestAnimationFrame(function(timestamp){
                             let starttime = timestamp || new Date().getTime()
-                            moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up');
+                            moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up', streamsToUpdate[r]);
                         })
 
                         c++;
@@ -3098,7 +3198,7 @@ window.WebRTCRoomClient = function app(options){
                                         x: startRect.x,
                                         width: startRect.width,
                                         height: startRect.height
-                                    }, 300, starttime, 'add');
+                                    }, 300, starttime, 'add', videoTracksOfUserWhoShares[a]);
                                 })
 
                                 log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares for screenSharingIsNew', videoTracksOfUserWhoShares[a])
@@ -3111,27 +3211,16 @@ window.WebRTCRoomClient = function app(options){
 
                                 requestAnimationFrame(function(timestamp){
                                     let starttime = timestamp || new Date().getTime()
-                                    moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up');
+                                    moveit(timestamp, rectToUpdate, rect, {y:rectToUpdate.y, x:rectToUpdate.x, width:rectToUpdate.width,height:rectToUpdate.height}, 300, starttime, 'up', videoTracksOfUserWhoShares[a]);
                                 })
 
                                 log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares for !screenSharingIsNew index', index)
 
                                 if(a === 0) {
-                                    for (let j in _activeScene.sources) {
-                                        if (_activeScene.sources[j].sourceType == 'group' && _activeScene.sources[j].groupType == 'webrtc') {
-                                            log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares add after index ' + j, j)
-                                            let h = parseInt(j) + 1, sourceStream = _activeScene.sources[h];
-                                            while (sourceStream != null && sourceStream.sourceType == 'webrtc') {
-                                                h++
-                                                sourceStream = _activeScene.sources[h];
-                                            }
-                                            log('addSource add add after webrtc ' + h)
-                                            log('addSource add at the end ' + (parseInt(h) + 1), _activeScene.sources.length)
+                                    let webrtcGroupIndex = getWebrtcGroupIndex(webrtcGroupSource);
+                                    log('updateWebRTCCanvasLayout videoTracksOfUserWhoShares webrtcGroupIndex', webrtcGroupIndex.index)
 
-                                            moveSource(index,  parseInt(h) + 1)
-                                            break;
-                                        }
-                                    }
+                                    moveSource(index, webrtcGroupIndex.index + webrtcGroupIndex.childItemsNum);
                                 }
 
 
@@ -3147,7 +3236,7 @@ window.WebRTCRoomClient = function app(options){
 
                 }
 
-                function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a){
+                function moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a, streamData){
                     var timestamp = timestamp || new Date().getTime()
                     var runtime = timestamp - starttime
                     var progress = runtime / duration;
@@ -3159,7 +3248,7 @@ window.WebRTCRoomClient = function app(options){
                     rectToUpdate.height = startPositionRect.height + (distRect.height - startPositionRect.height) * progress;
                     if (runtime < duration){
                         requestAnimationFrame(function(timestamp){
-                            moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a)
+                            moveit(timestamp, rectToUpdate, distRect, startPositionRect, duration, starttime, a, streamData)
                         })
                     } else {
                         rectToUpdate.y = distRect.y;
@@ -3167,6 +3256,7 @@ window.WebRTCRoomClient = function app(options){
                         rectToUpdate.width = distRect.width;
                         rectToUpdate.height = distRect.height;
                     }
+                    if(streamData.eventDispatcher != null) streamData.eventDispatcher.dispatch('rectChanged')
                 }
 
                 function getEase(currentProgress, start, distance, steps) {
@@ -3421,7 +3511,8 @@ window.WebRTCRoomClient = function app(options){
                     data.widthLog = currentWidth;
                     data.heightLog = currentHeight;
 
-                    if(!data.screenSharing) {
+                    //if(!data.screenSharing) {
+                    if(data.params.displayVideo == 'cover') {
                         var widthToGet = data.rect.width, heightToGet = data.rect.height, ratio = data.rect.width / data.rect.height;
                         var x, y;
 
@@ -3429,14 +3520,17 @@ window.WebRTCRoomClient = function app(options){
 
                         widthToGet =  data.rect.width / scale;
                         heightToGet = currentHeight;
+                        //console.log('draw', widthToGet / heightToGet, data.rect.width / data.rect.height)
 
-                        if(widthToGet / heightToGet != data.rect.width / data.rect.height) {
+                        if((widthToGet / heightToGet).toFixed(2) != (data.rect.width / data.rect.height).toFixed(2)) {
+                            //console.log('draw if1')
                             widthToGet = currentWidth;
                             heightToGet = data.rect.height / scale;
 
                             x = 0;
                             y = ((currentHeight / 2) - (heightToGet / 2));
                         } else {
+                            //console.log('draw if2')
                             x = ((currentWidth / 2) - (widthToGet / 2));
                             y = 0;
                         }
@@ -3493,7 +3587,7 @@ window.WebRTCRoomClient = function app(options){
                     //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 
                     if(window.debug7) console.log('data.rect.x', data.rect.x)
-                    _inputCtx.fillStyle = options.liveStreaming.audioLayoutBgColor;
+                    _inputCtx.fillStyle = data.parentGroup.params.audioLayoutBgColor;
                     _inputCtx.fillRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
 
                     //drawAudioVisualization(data);
@@ -3537,48 +3631,23 @@ window.WebRTCRoomClient = function app(options){
                     }
                 }
 
-                function displayName(participant) {
-                    if(!participant.online) return;
+                function displayName(webrtcSource) {
                     log('videoComposer: displayName')
-                    var webrtcSource = _activeScene.sources.filter(function (source) {
-                        log('videoComposer: displayName: filter', source)
-
-                        return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
-                    })[0];
                     log('videoComposer: displayName: _activeScene.sources', _activeScene.sources.length)
                     log('videoComposer: displayName: source', webrtcSource)
 
                     if(webrtcSource == null || webrtcSource.displayNameTimeout != null) return;
 
-                    //var text = webrtcSource.participant.username;
-                    //_inputCtx.font = "30px Arial";
-                    //var textWidth = _inputCtx.measureText(text).width;
-                    //var percentWidth = (webrtcSource.rect.width / 100 * 70);
-                    //var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
                     var rectWidth = webrtcSource.rect.width;
                     var xPos = webrtcSource.rect.x + ((webrtcSource.rect.width - rectWidth) / 2);
                     var rectHeight = webrtcSource.rect.height / 100 * 20;
                     if(rectHeight > 100) rectHeight = 100;
-                    var yTo;
-                    yTo = function () {
-                        return webrtcSource.rect.y + webrtcSource.rect.height - rectHeight;
-                    }
-                    height = function () {
-                        return webrtcSource.rect.height / 100 * 20;
-                    }
+                   
                     var nameLabel = new RectObjectSource({
                         baseSource: webrtcSource,
                         frame: 0,
-                        frames: 100,
-                        //widthFrom: rectWidth,
-                        //widthTo: rectWidth,
-                        //heightFrom: rectHeight,
-                        //heightTo: rectHeight,
-                        //xFrom: xPos,
-                        //xTo: xPos,
-                        //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
-                        //yTo: yTo(),
-                        fill: webrtcSource.params.captionBgColor
+                        frames: 100
+                        //fill: webrtcSource.params.captionBgColor
                     });
                     nameLabel.name = 'Rectangle';
 
@@ -3622,32 +3691,80 @@ window.WebRTCRoomClient = function app(options){
                             'get': function() {
                                 return webrtcSource.rect.y + webrtcSource.rect.height - this.heightTo;
                             }
+                        },
+                        'fill': {
+                            'get': function() {
+                                return webrtcSource.params.captionBgColor;
+                            }
                         }
                     });
 
-                    let fontSize = (rectHeight / 100 * 40);
-                    var textName = webrtcSource.participant.username;
-                    _inputCtx.font = fontSize + "px Arial";
-                    var nameTextSize = _inputCtx.measureText(textName);
-                    var nameTextHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
+                    function getFontSizeinfo() {
+
+                        _inputCtx.save();
+                        let fontSize = (nameLabel.heightTo / 100 * 40);
+                        _inputCtx.font =  fontSize + "px Arial, sans-serif";
+    
+                        var nameTextSize = _inputCtx.measureText(webrtcSource.name);
+                        
+                        var fitTextFont = function() {
+                            fontSize = fontSize - 1;
+                            _inputCtx.font =  fontSize + "px Arial, sans-serif";
+                            nameTextSize = _inputCtx.measureText(webrtcSource.name.toUpperCase());
+    
+                            if(nameTextSize.width >= (nameLabel.baseSource.rect.width - 40)) {
+                                fitTextFont();
+                            }
+                        }
+                        
+                        if(nameTextSize.width >= (nameLabel.baseSource.rect.width - 40)) {
+                            fitTextFont();
+                        }
+                        font = _inputCtx.font;
+                        console.log('getFontSizeinfo', font)
+                        _inputCtx.restore();
+
+                        return {
+                            fontSize: fontSize,
+                            font: font,
+                            textSize: nameTextSize
+                        }
+                    }
+                            
+                    var fontSizeInfo = getFontSizeinfo();
+                    var fontSize = fontSizeInfo.fontSize;
+                    var font = fontSizeInfo.font;
+                    var nameTextSize = fontSizeInfo.textSize;
+
+                    console.log('nameTextSize.font', font)
 
                     var nameText = new TextObjectSource({
                         baseSource: nameLabel,
                         frame: 0,
                         frames: 100,
-                        textHeight: nameTextHeight,
-                        //xFrom: nameLabel.xFrom + 20,
-                        //xTo: nameLabel.xTo + 20,
-                        //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 100 * 1),
-                        //yTo: nameLabel.yTo + (nameLabel.heightTo / 100 * 1),
+                        textHeight: nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent,
                         fillStyle: webrtcSource.params.captionFontColor,
-                        //font: fontSize + 'px Arial',
+                        font: font,
                         latestSize: fontSize,
-                        text: textName.toUpperCase()
+                        //text: textName.toUpperCase()
                     });
-                    nameText.name = 'Text: ' + textName;
-
-                    console.log('nameTextHeight', nameTextHeight)
+                    nameText.name = 'Text: ' + webrtcSource.name;
+           
+                    webrtcSource.on('nameChanged', function (newName) {
+                        var fontSizeInfo = getFontSizeinfo();
+                        nameText.font = fontSizeInfo.font;
+                        nameText.latestSize = fontSizeInfo.fontSize;
+                        nameText.textHeight = fontSizeInfo.textSize.fontBoundingBoxAscent + fontSizeInfo.textSize.fontBoundingBoxDescent;
+                    })
+                    webrtcSource.eventDispatcher.on('rectChanged', function() {
+                        console.log('RECT CHANGEEEEEEED')
+                        var fontSizeInfo = getFontSizeinfo();
+                        nameText.font = fontSizeInfo.font;
+                        nameText.latestSize = fontSizeInfo.fontSize;
+                        nameText.textHeight = fontSizeInfo.textSize.fontBoundingBoxAscent + fontSizeInfo.textSize.fontBoundingBoxDescent;
+                    });
+                    
+                    console.log('font', nameText.font)
                     Object.defineProperties(nameText, {
                         'xFrom': {
                             'get': function() {
@@ -3674,7 +3791,7 @@ window.WebRTCRoomClient = function app(options){
                                 return this.baseSource.yTo + this.textHeight + (this.baseSource.heightTo / 100 * 5);
                             }
                         },
-                        'font': {
+                        /*'font': {
                             'get': function() {
                                 let size = (this.baseSource.heightTo / 100 * 40);
                                 if(this.latestSize === size) {
@@ -3685,36 +3802,41 @@ window.WebRTCRoomClient = function app(options){
                                 this.latestSize = size;
                                 _inputCtx.font = size + "px Arial";
                                 console.log('updating.....')
-                                let nameTextSize = _inputCtx.measureText(textName);
+                                let nameTextSize = _inputCtx.measureText(webrtcSource.name);
                                 this.textHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
 
                                 return size + 'px Arial';
                             }
-                        }
+                        },*/
+                        'fillStyle': {
+                            'get': function() {
+                                return webrtcSource.params.captionFontColor;
+                            }
+                        },
+                        'text': {
+                            'get': function() {
+                                return webrtcSource.name;
+                            }
+                        },
                     });
 
 
                     let captionFontSize = (rectHeight / 100 * 20);
-                    var captionText = webrtcSource.caption;
                     _inputCtx.font = captionFontSize + "px Arial";
-                    var captionTextSize = _inputCtx.measureText(captionText);
+                    var captionTextSize = _inputCtx.measureText(webrtcSource.caption);
                     var captionTextWidth = captionTextSize.width;
                     var captionTextHeight =  captionTextSize.fontBoundingBoxAscent + captionTextSize.fontBoundingBoxDescent;
                     console.log('nameTextHeight', captionTextHeight)
-
+                   
                     var captionText = new TextObjectSource({
                         baseSource: nameLabel,
                         frame: 0,
                         frames: 100,
                         textHeight: captionTextHeight,
-                        //xFrom: nameLabel.xFrom + 20,
-                        //xTo: nameLabel.xTo + 20,
-                        //yFrom: nameLabel.yFrom + (nameLabel.heightFrom / 2) + 8,
-                        //yTo: nameLabel.yTo + (nameLabel.heightTo / 2) + 8,
-                        fillStyle: webrtcSource.params.captionFontColor,
+                        //fillStyle: webrtcSource.params.captionFontColor,
                         latestSize: captionFontSize,
-                        font: captionFontSize + 'px Arial',
-                        text: captionText
+                        font: captionFontSize + 'px Arial'
+                        //text: captionText
                     });
                     captionText.name = 'Text: ' + captionText;
 
@@ -3750,12 +3872,22 @@ window.WebRTCRoomClient = function app(options){
                                 this.latestSize = size;
                                 _inputCtx.font = size + "px Arial";
                                 console.log('updating.....')
-                                let nameTextSize = _inputCtx.measureText(textName);
+                                let nameTextSize = _inputCtx.measureText(webrtcSource.caption);
                                 this.textHeight = nameTextSize.fontBoundingBoxAscent + nameTextSize.fontBoundingBoxDescent;
 
                                 return size + 'px Arial';
                             }
-                        }
+                        },
+                        'fillStyle': {
+                            'get': function() {
+                                return webrtcSource.params.captionFontColor;
+                            }
+                        },
+                        'text': {
+                            'get': function() {
+                                return webrtcSource.caption;
+                            }
+                        },
                     });
 
                     addAdditionalSource(nameLabel, true);
@@ -3766,15 +3898,12 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 /*hides name label and all text sources that are related to it */
-                function hideName(participant) {
-                    if(!participant.online) return;
+                function hideName(webrtcSource) {
                     var dependentTextSources = [];
-                    var webrtcSource, nameBgSource;
-                    webrtcSource = _activeScene.sources.filter(function (source) {
-                        return source.sourceType == 'webrtc' && source.participant == participant ? true : false;
-                    })[0];
+                    var nameBgSource;
+                   
                     for(let i in _activeScene.additionalSources) {
-                        if(_activeScene.additionalSources[i].sourceType != 'webrtcrect' || _activeScene.additionalSources[i].baseSource.participant != participant) continue;
+                        if(_activeScene.additionalSources[i].sourceType != 'webrtcrect' || _activeScene.additionalSources[i].baseSource != webrtcSource) continue;
                         nameBgSource = _activeScene.additionalSources[i];
                         break;
                     }
@@ -3832,11 +3961,6 @@ window.WebRTCRoomClient = function app(options){
 
                     if(webrtcSource == null) return;
 
-                    //var text = webrtcSource.participant.username;
-                    //_inputCtx.font = "30px Arial";
-                    //var textWidth = _inputCtx.measureText(text).width;
-                    //var percentWidth = (webrtcSource.rect.width / 100 * 70);
-                    //var rectWidth = percentWidth > (textWidth + 50) ? percentWidth : (textWidth + 50 > webrtcSource.rect.width ? textWidth + 50 : webrtcSource.rect.width);
                     var rectWidth = webrtcSource.rect.width;
                     var xPos = webrtcSource.rect.x + ((webrtcSource.rect.width - rectWidth) / 2);
                     var rectHeight = webrtcSource.rect.height;
@@ -3849,14 +3973,6 @@ window.WebRTCRoomClient = function app(options){
                         baseSource: webrtcSource,
                         frame: 0,
                         frames: 0,
-                        //widthFrom: rectWidth,
-                        //widthTo: rectWidth,
-                        //heightFrom: rectHeight,
-                        //heightTo: rectHeight,
-                        //xFrom: xPos,
-                        //xTo: xPos,
-                        //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
-                        //yTo: yTo(),
                         lineWidth:whiteBorderWidth,
                         strokeStyle: '#FFFFFF'
                     });
@@ -3913,16 +4029,8 @@ window.WebRTCRoomClient = function app(options){
                         baseSource: webrtcSource,
                         frame: 0,
                         frames: 0,
-                        //widthFrom: rectWidth,
-                        //widthTo: rectWidth,
-                        //heightFrom: rectHeight,
-                        //heightTo: rectHeight,
-                        //xFrom: xPos,
-                        //xTo: xPos,
-                        //yFrom: webrtcSource.rect.y + webrtcSource.rect.height,
-                        //yTo: yTo(),
-                        lineWidth:colorBorderLineWidth,
-                        strokeStyle: webrtcSource.params.captionBgColor
+                        lineWidth:colorBorderLineWidth
+                        //strokeStyle: webrtcSource.params.captionBgColor
                     });
                     colorBorder.name = 'colorBorder';
 
@@ -3965,6 +4073,11 @@ window.WebRTCRoomClient = function app(options){
                         'yTo': {
                             'get': function() {
                                 return this.baseSource.rect.y + whiteBorderWidth + halfColorBorderWidth;
+                            }
+                        },
+                        'strokeStyle': {
+                            'get': function() {
+                                return webrtcSource.params.captionBgColor;
                             }
                         }
                     });
@@ -4216,7 +4329,7 @@ window.WebRTCRoomClient = function app(options){
                     log('compositeVideosAndDraw');
                     if (!document.body.contains(_canvas)) document.body.appendChild(_canvas);
 
-                    updateWebRTCCanvasLayout();
+                    updateActiveWebRTCLayouts();
                     audioComposer.updateWebRTCAudioSources();
                     _isActive = true;
                     drawVideosOnCanvas();
@@ -4228,7 +4341,7 @@ window.WebRTCRoomClient = function app(options){
                     var updateCanvas = function() {
                         if(_isActive == true) {
                             audioComposer.updateWebRTCAudioSources();
-                            updateWebRTCCanvasLayout();
+                            updateActiveWebRTCLayouts();
                         }
                     }
                     roomInstance.event.on('videoTrackLoaded', updateCanvas);
@@ -4263,34 +4376,38 @@ window.WebRTCRoomClient = function app(options){
                         currentMappedRects: []
                     }
                 };
-                function layoutGenerator(layoutName, numberOfRects) {
-                    log('layoutGenerator', layoutName, _webrtcLayoutRect)
+                _eventDispatcher.on('sceneSelected', function() {
+                    _layoutTool.currentRects = [];
+                    _layoutTool.basicGridRects = [];
+                });
+                function layoutGenerator(webrtcGroupSource, layoutName, numberOfRects) {
+                    log('layoutGenerator', layoutName, webrtcGroupSource.rect)
 
                     var layouts = {
                         tiledStreamingLayout: function (container, count) {
                             //var size = {parentWidth: _size.width, parentHeight: _size.height};
-                            var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
+                            var size = {parentWidth: webrtcGroupSource.rect.width, parentHeight: webrtcGroupSource.rect.height, x: webrtcGroupSource.rect.x, y: webrtcGroupSource.rect.y};
                             return tiledStreamingLayout(size, count);
                         },
                         screenSharing: function (container, count) {
-                            var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
+                            var size = {parentWidth: webrtcGroupSource.rect.width, parentHeight: webrtcGroupSource.rect.height, x: webrtcGroupSource.rect.x, y: webrtcGroupSource.rect.y};
 
                             return screenSharingLayout(count, size, true);
                         },
                         sideScreenSharing: function (container, count) {
-                            var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
+                            var size = {parentWidth: webrtcGroupSource.rect.width, parentHeight: webrtcGroupSource.rect.height, x: webrtcGroupSource.rect.x, y: webrtcGroupSource.rect.y};
 
                             return sideScreenSharingLayout(count, size);
                         },
                         audioScreenSharing: function (container, count) {
-                            var size = {parentWidth: _webrtcLayoutRect.width, parentHeight: _webrtcLayoutRect.height, x: _webrtcLayoutRect.x, y: _webrtcLayoutRect.y};
+                            var size = {parentWidth: webrtcGroupSource.rect.width, parentHeight: webrtcGroupSource.rect.height, x: webrtcGroupSource.rect.x, y: webrtcGroupSource.rect.y};
 
                             return audioScreenSharingLayout(count, size, true);
                         }
                     }
 
                     function tiledStreamingLayout(container, count) {
-                        console.log('tiledStreamingLayout', container, count)
+                        console.log('tiledStreamingLayout', count,  _layoutTool.currentRects.length)
                         var containerRect = container;
                         _layoutTool.state.currentGenerator = 'tiledStreamingLayout';
 
@@ -4739,7 +4856,7 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 function sideScreenSharingLayout(count, size) { 
-                    console.log('sideScreenSharingLayout START', count)      
+                    console.log('sideScreenSharingLayout START', count, _layoutTool.currentRects.length)      
                     var spaceBetween = 22;
         
                     if(_layoutTool.state.currentGenerator != 'sideScreenSharingLayout') {
@@ -4768,6 +4885,11 @@ window.WebRTCRoomClient = function app(options){
                             console.log('sideScreenSharingLayout if')  
                             _layoutTool.basicGridRects = build();
                             _layoutTool.currentRects = updateRealToBasicGrid();
+                        } else {
+                            console.log('sideScreenSharingLayout 3')
+
+                            _layoutTool.basicGridRects = build();
+                            _layoutTool.currentRects = updateRealToBasicGrid();
                         }
                     }
         
@@ -4780,7 +4902,7 @@ window.WebRTCRoomClient = function app(options){
                         let innerContainerHeight = innerContainerWidth / 16 * 8;
         
                         let sideWidth = size.parentWidth / 100 * (count == 5 ? 45 : 40);
-                        let sideSize = { parentWidth: sideWidth, parentHeight: innerContainerHeight + (spaceBetween * 2)};
+                        let sideSize = { parentWidth: sideWidth, parentHeight: innerContainerHeight + (spaceBetween * 2), x: size.x, y: size.y};
                         let rects = [];
                         if (count - 1 == 1) {
                             rects = simpleGrid(count - 1, sideSize, 1, 1);
@@ -4793,13 +4915,10 @@ window.WebRTCRoomClient = function app(options){
                         } else if (count - 1 == 5) {
                             rects = simpleGrid(count - 1, sideSize, 2, null, true);
                         } else if (count - 1 >= 6 && count - 1 <= 9) {
-                            console.log('build 4')
                             rects = simpleGrid(count - 1, sideSize, 2, null, true);
                         } else if (count - 1 > 9 && count - 1 < 11) {
-                            console.log('build 5')
                             rects = simpleGrid(count - 1, sideSize, 2, null, true);
                         } else {
-                            console.log('build 6')
                             rects = simpleGrid(count - 1, sideSize, 3, null, true);
                         }
         
@@ -4808,16 +4927,17 @@ window.WebRTCRoomClient = function app(options){
                         if (innerContainerHeight > size.parentHeight - (spaceBetween * 2)) innerContainerHeight = size.parentHeight - (spaceBetween * 2);
         
                         if (count == 1) {
-                            var mainScreen = new DOMRect(spaceBetween, spaceBetween, innerContainerWidth, innerContainerHeight);
+                            var mainScreen = new DOMRect(size.x + spaceBetween, size.y + spaceBetween, innerContainerWidth, innerContainerHeight);
                             rects.unshift(mainScreen);
                         } else {
                             var minX = Math.min.apply(Math, rects.map(function (rect) { return rect.x; }));
                             var maxX = Math.max.apply(Math, rects.map(function (rect) { return rect.x + rect.width; }));
                             console.log('maxX', rects, maxX)
-                            var mainScreen = new DOMRect(maxX + spaceBetween, spaceBetween, innerContainerWidth - maxX, innerContainerHeight);
+                            var mainScreen = new DOMRect(maxX + spaceBetween, size.y + spaceBetween, innerContainerWidth - (maxX - size.x), innerContainerHeight);
                             rects.unshift(mainScreen);
                         }
                        
+                        //return rects;
                         return centralizeRectsVertically(rects);
                     }
         
@@ -4922,13 +5042,10 @@ window.WebRTCRoomClient = function app(options){
                             rectHeight = newRectSize.height;
                         }
                     
-        
                         console.log('simpleGrid rect size1', rectWidth, rectHeight);
         
                         if (rowsNum == null) rowsNum = Math.floor(size.parentHeight / (rectHeight + spaceBetween));
                         console.log('simpleGrid 1', size.parentHeight, rectHeight, rectHeight + spaceBetween);
-        
-        
         
                         var isNextNewLast = false;
                         var rowItemCounter = 1;
@@ -4936,14 +5053,14 @@ window.WebRTCRoomClient = function app(options){
                         for (i = 1; i <= count; i++) {
                             console.log('simpleGrid for', currentRow, rowsNum);
         
-                            var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(0, 0, 0, 0);
+                            var prevRect = rects[rects.length - 1] ? rects[rects.length - 1] : new DOMRect(size.x, size.y, 0, 0);
                             var currentRow = isNextNewLast ? rowsNum : Math.ceil(i / perRow);
                             var isNextNewRow = rowItemCounter == perRow;
                             isNextNewLast = isNextNewLast == true ? true : isNextNewRow && currentRow + 1 == rowsNum;
         
                             if (rowItemCounter == 1) {
                                 var y = (prevRect.y + prevRect.height) + spaceBetween;
-                                var x = spaceBetween;
+                                var x = size.x + spaceBetween;
                             } else {
                                 var y = prevRect.y;
                                 var x = prevRect.x + prevRect.width + spaceBetween;
@@ -5031,7 +5148,6 @@ window.WebRTCRoomClient = function app(options){
         
                     function centralizeRectsVertically(rects) {
         
-                        var centerX = size.parentWidth / 2;
                         var centerY = size.parentHeight / 2;
         
                         var minY = Math.min.apply(Math, rects.map(function (r) { return r.y; }));
@@ -5042,7 +5158,7 @@ window.WebRTCRoomClient = function app(options){
         
                         var totalHeight = maxY - minY;
         
-                        var newTopPosition = centerY - (totalHeight / 2);
+                        var newTopPosition = size.y + (centerY - (totalHeight / 2));
                         var moveAllRectsOn = newTopPosition - minY;
                         for (let s = 0; s < rects.length; s++) {
                             rects[s] = new DOMRect(rects[s].left, rects[s].top + moveAllRectsOn, rects[s].width, rects[s].height);
@@ -5078,7 +5194,8 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 return {
-                    updateWebRTCCanvasLayout: updateWebRTCCanvasLayout,
+                    updateActiveWebRTCLayouts: updateActiveWebRTCLayouts,
+                    updateWebRTCLayout: updateWebRTCLayout,
                     compositeVideosAndDraw: compositeVideosAndDraw,
                     refreshEventListeners: refreshEventListeners,
                     stop: stopAndRemove,
@@ -5307,7 +5424,7 @@ window.WebRTCRoomClient = function app(options){
                         let newStream = audioContext.createMediaStreamSource(newSource.mediaStream);
                         newStream.connect(_dest)
                         _activeScene.audioSources.splice((h), 0, newSource)
-                        _eventDispatcher.dispatch('sourceAdded', newSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
                         return;
                     } else if(newSource.sourceType == 'audio') {
                         let webrtcGroup = getWebrtcGroupIndex();
@@ -5330,7 +5447,7 @@ window.WebRTCRoomClient = function app(options){
                         audioSource.audioInstance.play();
 
                         log('addSource sources', _activeScene.audioSources)
-                        _eventDispatcher.dispatch('sourceAdded', audioSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', audioSource);
                         return audioSource;
                     } else if(newSource.sourceType == 'video') {
 
@@ -5340,7 +5457,7 @@ window.WebRTCRoomClient = function app(options){
                         newSource.audioSourceNode = source;
 
                         //log('addSource sources', _activeScene.audioSources)
-                        //_eventDispatcher.dispatch('sourceAdded', newSource);
+                        //_activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
                         return newSource;
                     }
 
@@ -5638,9 +5755,10 @@ window.WebRTCRoomClient = function app(options){
                     captureStream();
                 }
 
-                var isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+                var isChrome = _localInfo.browserName && _localInfo.browserName.toLowerCase() == 'chrome';
 
                 var codecs = 'video/webm;codecs=vp8';
+                log('captureStream isChrome',_localInfo, isChrome, !_isMobile);
 
                 //alert('mp4 ' + (MediaRecorder.isTypeSupported('video/mp4;codecs="vp8"')));
                 if (MediaRecorder.isTypeSupported('video/mp4')) {
@@ -5650,6 +5768,7 @@ window.WebRTCRoomClient = function app(options){
                 } else if (_isMobile && _isAndroid) {
                     codecs = 'video/webm;codecs=vp8';
                 }
+                log('captureStream codecs', codecs);
 
                 if(options.liveStreaming.useRecordRTCLibrary) {
                     log('captureStream if1');
@@ -5784,6 +5903,10 @@ window.WebRTCRoomClient = function app(options){
 
             function stopAudioMixing() {
                 audioComposer.stop();
+            }
+
+            function generateId() {
+                return Date.now().toString(36) + Math.random().toString(36).replace(/\./g, "");
             }
 
             function log(text) {
