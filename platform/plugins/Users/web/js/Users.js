@@ -4322,7 +4322,7 @@
 				throw new Q.Exception('Users.Web3.getContract: Web3.chains['+chainId+'].rpcUrls is empty');
 			}
 			return new ethers.providers.JsonRpcBatchProvider(url);
-		}
+		},
 
 		/**
 		 * Switch provider to a different Web3 chain
