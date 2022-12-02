@@ -1,6 +1,5 @@
 body { margin: 0; }
 table { border-spacing:0; border-collapse:collapse; }
-html.Q_hideUntilLoaded { opacity: 0; }
 
 /* Animations */
 @keyframes Q_rotateplane {
@@ -71,6 +70,8 @@ html.Q_hideUntilLoaded { opacity: 0; }
 }
 
 /* Common Q classes */
+.Q_hide { display: none !important; }
+.Q_hideUntilLoaded { opacity: 0; transition: opacity 300ms; }
 .Q_blink { animation: Q_blink .5s step-end infinite alternate; }
 .Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
@@ -853,6 +854,15 @@ input[type=text],
 input[type=password] {
     -webkit-appearance: none;
     -moz-appearance: none;
+}
+
+@keyframes Q_showAfterLoaded {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
 
 @keyframes Q_placeholder_shimmer {

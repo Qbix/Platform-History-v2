@@ -13243,6 +13243,7 @@ Q.Dialogs = {
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
+	 *  @param {String} [options.elementId] an ID to set for dialog element, just use className if you aren't sure it's unique
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
@@ -13278,7 +13279,9 @@ Q.Dialogs = {
 	push: function(options) {
 		var maskDefault = true;
 		for (var i = 0; i < this.dialogs.length; i++) {
-			if (!this.dialogs[i].isFullscreen) maskDefault = false;
+			if (!this.dialogs[i].isFullscreen) {
+				maskDefault = false;
+			}
 		}
 		var o = Q.extend(
 			{mask: maskDefault}, 
@@ -13350,10 +13353,10 @@ Q.Dialogs = {
 			if (dialogs.length) {
 				topDialog = dialogs[dialogs.length - 1];
 			}
-			if (!topDialog || topDialog[0] !== $dialog[0]) {
+			if (!topDialog || topDialog !== $dialog[0]) {
 				dialogs.push($dialog);
 				if (o.hidePrevious && topDialog) {
-					topDialog.hide();
+					topDialog.addClass('Q_hide');
 				}
 			}
 		}
@@ -13373,7 +13376,7 @@ Q.Dialogs = {
 		
 		var $dialog = this.dialogs.pop();
 		if (this.dialogs.length) {
-			this.dialogs[this.dialogs.length - 1].show();
+			this.dialogs[this.dialogs.length - 1].removeClass('Q_hide');
 		}
 		if (!dontTriggerClose && $dialog) {
 			Q.Dialogs.dontPopOnClose = true;
@@ -13398,8 +13401,7 @@ Q.Dialogs = {
 	 * @return {HTMLElement} The HTML element of the dialog that is on top.
 	 */
 	element: function (index) {
-		var $dialog = this.dialogs[this.dialogs.length-(index||0)-1];
-		return $dialog && $dialog[0];
+		return this.dialogs[this.dialogs.length-(index||0)-1];
 	}
 
 };
