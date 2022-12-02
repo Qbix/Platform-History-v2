@@ -8,7 +8,7 @@
 
 
 html.Q_hideUntilLoaded {
-	opacity: 1;
+	opacity: 1; transition: 300ms;
 }
 
 * { 
