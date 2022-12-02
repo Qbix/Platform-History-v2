@@ -2,6 +2,16 @@
     "avatar": {
         "Someone": "Someone"
     },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Mobile",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copied! Now you can paste it anywhere."
+    },
     "analytics": {
         "Title": "Analytics",
         "Daily": "Daily",
@@ -135,6 +145,7 @@
         "Host": "Host"
     },
     "web3": {
-        "WrongMethod": "Wrong contract method {{methodName}}"
+        "WrongMethod": "Wrong contract method {{methodName}}",
+        "ChangeWallet": "Change Wallet"
     }
 }

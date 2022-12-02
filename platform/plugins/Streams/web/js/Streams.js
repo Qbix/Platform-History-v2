@@ -50,6 +50,9 @@ Q.text.Streams = {
 		email: {
 			title: 'Follow up'
 		}
+	},
+	identifier: {
+		privacySettings: "Privacy Settings"
 	}
 
 };
@@ -963,15 +966,13 @@ Streams.create = function (fields, callback, related, options) {
  */
 Streams.create.onError = new Q.Event();
 
-function _toolInDialog(toolName, toolParams, callback, classContainer) {
-	Q.Dialogs.push({
+function _toolInDialog(toolName, toolParams, options, classContainer) {
+	Q.Dialogs.push(Q.extend(options, {
 		url: Q.action(toolName, toolParams),
 		removeOnClose: true,
-		onActivate: function() {
-			callback && callback.apply(this, arguments);
-		},
+		className: (classContainer || ''),
 		apply: true
-	}).addClass(classContainer || '');
+	}));
 }
 
 /**
@@ -987,13 +988,13 @@ Streams.Dialogs = {
 	 * @method subscription
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
-	 * @param {Function} callback The function to call after dialog is activated
+	 * @param {Object} options Some options to pass to the dialog
 	 */
-	subscription: function(publisherId, streamName, callback) {
+	subscription: function(publisherId, streamName, caoptionsloplback) {
 		_toolInDialog('Streams/subscription', {
 			publisherId: publisherId,
 			streamName : streamName
-		}, callback, 'Streams_subscription_tool_dialog_container');
+		}, options, 'Streams_subscription_tool_dialog_container');
 	},
 
 	/**
@@ -1002,13 +1003,13 @@ Streams.Dialogs = {
 	 * @method access
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
-	 * @param {Function} [callback] The function to call after dialog is activated
+	 * @param {Object} options Some options to pass to the dialog
 	 */
-	access: function(publisherId, streamName, callback) {
+	access: function(publisherId, streamName, options) {
 		_toolInDialog('Streams/access', {
 			publisherId: publisherId,
 			streamName: streamName
-		}, callback, 'Streams_access_tool_dialog_container');
+		}, options, 'Streams_access_tool_dialog_container');
 	},
 
 	/**
@@ -6057,37 +6058,27 @@ Q.onInit.add(function _Streams_onInit() {
 	}
 
 	//add private|public toggle to dialog for changing email/mobile
-	Q.Users.setIdentifier.options.onActivate = function () {
-		var userIdInput = $('input[name=userId]', this);
-		var identifierTypeInput = $('input[name=identifierType]', this);
-		if(!identifierTypeInput) {
-			return;
-		}
-
-		var identifierTypeVal = identifierTypeInput.val();
-
-		var fields = {
-			identifierType: identifierTypeVal
-		};
-		if(userIdInput) {
-			fields.userId = userIdInput.val();
-		}
-
+	Q.Users.setIdentifier.options.onActivate = function (options) {
 		var userId = Q.Users.loggedInUserId();
 		$('<button class="Q_button Users_setIdentifier_privacy_btn"/>')
 			.on(Q.Pointer.fastclick, function () {
-				if(identifierTypeVal === 'email') {
-					Q.Streams.Dialogs.access(userId, 'Streams/user/emailAddress');
-				} else if(identifierTypeVal === 'mobile') {
-					Q.Streams.Dialogs.access(userId, 'Streams/user/mobileNumber');
-				} else if(identifierTypeVal.toLowerCase() === 'web3') {
-					Q.Streams.Dialogs.access(userId, 'Streams/user/xid/web3');
-				} else {
+				var m = {
+					email: 'emailAddress',
+					mobile: 'mobileNumber',
+					web3: 'xid/web3'
+				};
+				var suffix = m[options.identifierType];
+				if (!suffix) {
 					throw new Q.Error("Wrong identifierType");
 				}
-			})
-			.html(identifierTypeVal + ' ' + (Q.text.Streams.identifier.privacySettings != null ? Q.text.Streams.identifier.privacySettings : 'Privacy Settings'))
-			.insertBefore(".Users_setIdentifier_go", this);
+				Q.Dialogs.pop();
+				Q.Streams.Dialogs.access(
+					Q.Users.loggedInUserId(), 
+					'Streams/user/'+suffix
+				);
+			}).html(Q.text.Users.identifier.types[options.identifierType]
+				+ ' ' + Q.text.Streams.identifier.privacySettings
+			).appendTo($('#Users_setIdentifier_step1', this));
 	}
 
 	/**

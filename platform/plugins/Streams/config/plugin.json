@@ -49,6 +49,7 @@
 			"i/:token": {"module": "Streams", "action": "invited"},
 			"Streams/participating": {"module": "Streams", "action": "participating"},
 			"Streams/cloudConvert": {"module": "Streams", "action": "cloudConvertWebhook"},
+			"Streams/discourse-sso": {"module": "Streams", "action": "sso-discourse"},
 			"Q/plugins/Streams/invite/:token": {"module": "Streams", "action": "invite"},
 			"Q/plugins/Streams/:action": {"module": "Streams"},
 			"Users/:userId.vcf": { "module": "Streams", "action": "vcard" }

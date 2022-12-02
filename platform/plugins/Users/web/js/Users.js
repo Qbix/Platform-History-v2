@@ -30,6 +30,18 @@
 	 */
 	Q.text.Users = {
 
+		avatar: {
+			Someone: "Someone"
+		},
+
+		identifier: {
+			types: {
+				Email: "Email",
+				Mobile: "Mobile",
+				Web3: "Web3"
+			}
+		},
+
 		login: {
 			title: 'Welcome',
 			directions: 'Create an account, or log in.',
@@ -97,6 +109,10 @@
 			noLongerUsing: "You are no longer connected to {{platform}} as",
 			doAuth: "Log in with this account",
 			doSwitch: "Switch to this account"
+		},
+
+		clipboard: {
+			Copied: "Copied! Now you can paste it anywhere."
 		},
 
 		authorize: {
@@ -730,7 +746,6 @@
 		}
 		Q.Dialogs.push({
 			dialog: Users.prompt.overlay,
-			alignByParent: false,
 			doNotRemove: true,
 			onActivate: function () {
 				Users.init.facebook(function () {
@@ -843,6 +858,7 @@
 	 *  @param {String} [options.identifierType="email,mobile"] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
 	 *  @param {Object} [options.appIds={}] Can be used to set custom {platform: appId} pairs
 	 *  @param {String} [options.identifier] If passed, automatically enters this identifier and clicks the Go button
+	 *  @return {Boolean} Whether a login flow has started
 	 */
 	Users.login = function (options) {
 
@@ -857,7 +873,7 @@
 					Users.loggedInUser, options, priv.result, pn
 				]);
 			}
-			return;
+			return false;
 		}
 
 		if (typeof options === 'function') {
@@ -873,13 +889,9 @@
 
 		Users.login.occurring = true;
 
-		if (o.using.indexOf('native') < 0) {
-			_doLogin();
-		} else {
-			$.fn.plugin.load('Q/dialog', _doLogin);
-		}
+		_doLogin();
 
-		return false;
+		return true;
 
 		function _doLogin() {
 			// try quietly, possible only with one of "facebook" or "web3"
@@ -921,10 +933,6 @@
 				priv.linkToken = null;
 				priv.scope = o.scope;
 				priv.activation = o.activation;
-				var d = login_setupDialog.dialog;
-				if (d.css('display') == 'none') {
-					d.data('Q/dialog').load();
-				}
 				$('#Users_login_step1').show();
 				$('#Users_login_usingPlatforms').show();
 				$('#Users_login_step1_form *').removeAttr('disabled');
@@ -1274,7 +1282,7 @@
 	 * @method setIdentifier
 	 * @param {Object} [options] You can pass several options here
 	 *  It is passed the user information if the user changed.
-	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile"
+	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile" or "web3"
 	 *  @param {String} [options.userId] You can set this to the id of a user in the database who doesn't have any email or mobile number set yet. This can happen if the user was e.g. invited via a printed invitation and lost it, and allows someone to help set up the first identifier for that user.
 	 *  @param {Q.Event} [options.onActivate] event that occurs right after dialog is shown
 	 *  @param {Q.Event} [options.onSuccess] event that occurs on success
@@ -1283,41 +1291,29 @@
 	 */
 	Users.setIdentifier = function (options) {
 		options = Q.extend({}, Users.setIdentifier.options, options);
-		var identifierType = Q.getObject("identifierType", options);
-		var identifier = Q.getObject("Q.Users.loggedInUser." + identifierType) || null;
-		if (identifierType.toLowerCase() === "web3") {
-			identifier = Web3.getLoggedInUserXid();
-		}
+		var identifierType = Q.getObject("identifierType", options).toLowerCase();
 
-		function onSuccess(user) {
-			if (false !== Q.handle(options.onResult, this, [user])) {
-				Q.handle(options.onSuccess, this, [user]);
+		function onSuccess() {
+			if (false !== Q.handle(options.onResult, this, [])) {
+				Q.handle(options.onSuccess, this, []);
 			}
 		}
 
-		function onCancel(scope) {
-			if (false !== Q.handle(options.onResult, this, [scope])) {
-				Q.handle(options.onCancel, this, [scope]);
+		function onCancel() {
+			if (false !== Q.handle(options.onResult, this, [])) {
+				Q.handle(options.onCancel, this, []);
 			}
 		}
 
 		priv.setIdentifier_onSuccess = onSuccess;
 		priv.setIdentifier_onCancel = onCancel;
 
-		let onDialogActivate = options.onActivate;
-		options.onActivate = function () {
-			var d = this;
-			if (d.css('display') === 'none') {
-				d.data('Q/dialog').load();
-			}
-			$('input[name="identifierType"]', d).val(identifierType);
-			$('input[name="identifier"]', d).val(identifier);
-			Q.handle(onDialogActivate, d);
-		};
-
-		$.fn.plugin.load(['Q/dialog', 'Q/placeholders'], function () {
+		var xid = Web3.getLoggedInUserXid();
+		if (identifierType === 'web3' && !xid) {
+			Web3.login(null, onSuccess);
+		} else {
 			setIdentifier_setupDialog(identifierType, options);
-		});
+		}
 	};
 
 	/*
@@ -1358,23 +1354,18 @@
 
 				if (priv.login_onConnect) {
 					priv.login_connected = true;
-					if (setIdentifier_setupDialog.dialog) {
-						setIdentifier_setupDialog.dialog.data('Q/dialog').close();
-					}
 					if (login_setupDialog.dialog) {
-						login_setupDialog.dialog.data('Q/dialog').close();
+						Q.Dialogs.pop();
 					}
 					priv.login_onConnect(user);
 				}
 			}, function () {
 				alert("Could not authenticate with facebook. Try again.");
-				if (login_setupDialog.dialog) {
-					login_setupDialog.dialog.data('Q/dialog').close();
-				}
+				Q.Dialogs.pop();
 			}, {"prompt": false});
 		} else if (!json.exists) {
 			// this identifier is available. This user has no password set yet and will activate later
-			step2_form = setupRegisterForm(identifier_input.val(), json, priv, login_setupDialog.dialog.data('Q/dialog'));
+			step2_form = setupRegisterForm(identifier_input.val(), json, priv, $(login_setupDialog.dialog).data('Q/dialog'));
 		} else if (json.passphrase_set) {
 			// check password
 			step2_form = setupLoginForm();
@@ -1443,7 +1434,7 @@
 					case 'resend':
 						priv.result = 'resend';
 						$('button', $this).html('Sent').attr('disabled', 'disabled');
-						login_setupDialog.dialog.data('Q/dialog').close();
+						Q.Dialogs.pop();
 						Q.handle(Q.getObject('slots.data.activationLink', response));
 						return;
 					case 'register':
@@ -1461,7 +1452,7 @@
 				if (priv.login_onConnect) {
 					priv.login_connected = true;
 					if (login_setupDialog.dialog) {
-						login_setupDialog.dialog.data('Q/dialog').close();
+						Q.Dialogs.pop();
 					}
 					priv.activationLink = response.slots.data.activationLink;
 					priv.login_onConnect(u);
@@ -1519,7 +1510,7 @@
 															.each(function () {
 																$(this).plugin('Q/validator', 'reset');
 															});
-														login_setupDialog.dialog.data('Q/dialog').close();
+														Q.Dialogs.pop();
 														Q.handle(Q.getObject('slots.data.activationLink', response));
 													})
 											)
@@ -1672,7 +1663,7 @@
 						Q.ajaxExtend(Q.action("Users/resend"), 'data'),
 						'identifier=' + encodeURIComponent(identifier_input.val()),
 						function () {
-							dialog.close();
+							Q.Dialogs.pop();
 						}
 					);
 					return false;
@@ -1692,7 +1683,7 @@
 		if (!autologin) {
 			var step2 = $('#Users_login_step2').html(step2_form);
 			var $dc = step2.closest('.Q_dialog_content');
-			login_setupDialog.dialog.addClass('Users_login_expanded');
+			$(login_setupDialog.dialog).addClass('Users_login_expanded');
 			if (Q.info && Q.info.isTouchscreen) {
 				step2.show();
 				step2_form.plugin('Q/placeholders');
@@ -1888,7 +1879,7 @@
 					).css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (login_setupDialog.dialog) {
-							login_setupDialog.dialog.data('Q/dialog').close();
+							Q.Dialogs.pop();
 						}
 						Web3.login(function (result) {
 							if (!result) {
@@ -1918,59 +1909,51 @@
 			step1_form.plugin('Q/validator', 'reset', this);
 		});
 
-		var dialog = $('<div id="Users_login_dialog" class="Users_login_dialog" />');
-		var titleSlot = $('<div class="Q_title_slot" />');
-		titleSlot.append($('<h2 class="Users_dialog_title Q_dialog_title" />').html(Q.text.Users.login.title));
-		var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">');
-		dialogSlot.addClass('Q_scrollToBottom')
-			.append(step1_div, step2_div);
-		login_setupDialog.dialog = dialog;
-		dialog.append(titleSlot)
-			.append(dialogSlot)
-			.prependTo(options.dialogContainer)
-			.plugin('Q/dialog', {
-				alignByParent: false,
-				fullscreen: !!options.fullscreen,
-				noClose: !!options.noClose,
-				closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
-				beforeLoad: function () {
-					$('#Users_login_step1').css('opacity', 1).nextAll().hide();
-					setTimeout(function () {
-						$('input[type!=hidden]', dialog).val('').trigger('change');
-					}, 0);
-				},
-				onActivate: function () {
-					var $input = $('input[type!=hidden]', dialog)
-					dialog.plugin('Q/placeholders');
-					if (Q.info.platform === 'ios') {
-						$input.eq(0).plugin('Q/clickfocus');	
-					}
-					setTimeout(function () {
-						$input.val('').trigger('change');
-						if (options.identifier) {
-							$input.val(options.identifier).trigger('change');
-							setTimeout(function () {
-								Users.submitClosestForm.apply($a, arguments);
-							}, 300);
-						} else {
-							$input.val('').trigger('change').eq(0).plugin('Q/clickfocus');
-						}
-					}, 0);
-				},
-				onClose: function () {
-					$('#Users_login_step1 .Q_button').removeAttr('disabled');
-					$('form', dialog).each(function () {
-						$(this).plugin('Q/validator', 'reset');
-					});
-					$('#Users_login_step1').nextAll().hide();
-					if (!priv.login_connected && priv.login_onCancel) {
-						priv.login_onCancel();
-					}
-					$(this).remove();
-					login_setupDialog.dialog = null;
+		login_setupDialog.dialog = Q.Dialogs.push({
+			title: Q.text.Users.login.title,
+			content: $('<div />').append(step1_div, step2_div),
+			elementId: 'Users_login_dialog',
+			className: 'Users_login_dialog Q_scrollToBottom ' + options.className,
+			fullscreen: !!options.fullscreen,
+			noClose: !!options.noClose,
+			closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
+			beforeLoad: function () {
+				$('#Users_login_step1').css('opacity', 1).nextAll().hide();
+				setTimeout(function () {
+					$('input[type!=hidden]', this).val('').trigger('change');
+				}, 0);
+			},
+			onActivate: function () {
+				var $input = $('input[type!=hidden]', this)
+				$(this).plugin('Q/placeholders');
+				if (Q.info.platform === 'ios') {
+					$input.eq(0).plugin('Q/clickfocus');	
 				}
-			});
-
+				setTimeout(function () {
+					$input.val('').trigger('change');
+					if (options.identifier) {
+						$input.val(options.identifier).trigger('change');
+						setTimeout(function () {
+							Users.submitClosestForm.apply($a, arguments);
+						}, 300);
+					} else {
+						$input.val('').trigger('change').eq(0).plugin('Q/clickfocus');
+					}
+				}, 0);
+			},
+			onClose: function () {
+				$('#Users_login_step1 .Q_button').removeAttr('disabled');
+				$('form', this).each(function () {
+					$(this).plugin('Q/validator', 'reset');
+				});
+				$('#Users_login_step1').nextAll().hide();
+				if (!priv.login_connected && priv.login_onCancel) {
+					priv.login_onCancel();
+				}
+				$(this).remove();
+				login_setupDialog.dialog = null;
+			}
+		});
 		function hideForm2() {
 			if (_submitting) {
 				return;
@@ -1990,7 +1973,7 @@
 				$('#Users_login_usingPlatforms').css({opacity: 0}).show()
 					.animate({opacity: 1}, 'fast');
 			}
-			login_setupDialog.dialog.removeClass('Users_login_expanded');
+			$(login_setupDialog.dialog).removeClass('Users_login_expanded');
 		}
 	}
 
@@ -2003,19 +1986,28 @@
 		if (msg) {
 			// There were errors
 			Q.handle(priv.setIdentifier_onCancel, this, [err, response]);
-			form.plugin('Q/validator', 'invalidate',
-				Q.ajaxErrors(response.errors, 'identifier')
-			);
-			identifier_input.plugin('Q/clickfocus');
+			if (identifier_input.is(":visible")) {
+				form.plugin('Q/validator', 'invalidate',
+					Q.ajaxErrors(response.errors, 'identifier')
+				);
+				identifier_input.plugin('Q/clickfocus');
+			} else {
+				Q.Notices.add({
+					key: 'Users.setIdentifier',
+					content: msg,
+					type: 'error',
+					timeout: 2
+				});
+			}
 			return;
 		}
 
 		// Remove any errors we may have displayed
 		form.plugin('Q/validator', 'reset');
 
-		Q.handle(priv.setIdentifier_onSuccess);
+		Q.handle(priv.setIdentifier_onSuccess, response);
 
-		setIdentifier_setupDialog.dialog.data('Q/dialog').close();
+		Q.Dialogs.pop();
 	}
 
 	function setIdentifier_setupDialog(identifierType, options) {
@@ -2032,25 +2024,43 @@
 				placeholder = Q.text.Users.setIdentifier.placeholders.mobile;
 			}
 		}
+		if (identifierType === 'web3') {
+			type = 'hidden';
+		}
 
 		var step1_form = $('<form id="Users_setIdentifier_step1_form" />');
 		var step1_div = $('<div id="Users_setIdentifier_step1" class="Q_big_prompt" />').html(step1_form);
 
+		var identifier = (identifierType === "web3")
+			? Web3.getLoggedInUserXid()
+			: Q.getObject("Q.Users.loggedInUser." + identifierType);
+		var $identifierInput = $('<input />', {
+			id: 'Users_setIdentifier_identifier',
+			name: 'identifier',
+			autocomplete: autocomplete,
+			type: type,
+			maxlength: Q.text.Users.login.maxlengths.identifier,
+			placeholder: placeholder,
+			value: identifier
+		});
+		var $identifierTypeInput = $('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />')
+			.val(identifierType);
+
+		var $button = (identifierType === 'web3')
+		? $("<button class='Q_button' />")
+			.text(Q.text.Users.web3.ChangeWallet)
+			.on(Q.Pointer.fastclick, function () {
+				Q.Users.Web3.login(null, function (user) {
+					setIdentifier_callback(null, user);
+				});
+				return false;
+			})
+		: $('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
+			.html(Q.text.Users.setIdentifier.sendMessage) 
+
 		var autocomplete = (type === 'text') ? 'on' : type;
 		step1_form.empty().append(
-			$('<input id="Users_setIdentifier_identifier" />').prop({
-				name: 'identifier',
-				autocomplete: autocomplete,
-				type: type,
-				maxlength: Q.text.Users.login.maxlengths.identifier,
-				placeholder: placeholder
-			})
-		).append(
-			$('<input id="Users_setIdentifier_type" type="hidden" name="identifierType" />').val(identifierType)
-		).append(
-			$('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />').html(
-				Q.text.Users.setIdentifier.sendMessage
-			)
+			$identifierInput, $identifierTypeInput, $button
 		).submit(function (event) {
 			var $identifier = $('#Users_setIdentifier_identifier');
 			var h = $identifier.outerHeight() - 5;
@@ -2065,39 +2075,55 @@
 			event.preventDefault();
 		});
 		if (options.userId) {
-			step1_form.append($('<input />').prop({
+			step1_form.append($('<input />', {
 				type: "hidden",
 				name: "userId"
 			})).val(options.userId);
 		}
 		step1_form.plugin('Q/validator');
 
-		var dialog = $('<div id="Users_setIdentifier_dialog" class="Users_setIdentifier_dialog" />');
-		var titleSlot = $('<div class="Q_title_slot">').append(
-			$('<h2 class="Users_dialog_title Q_dialog_title" />')
-				.html(options.title || Q.text.Users.setIdentifier.title)
-		);
-		var dialogSlot = $('<div class="Q_dialog_slot Q_dialog_content">').append(step1_div);
-		dialog.append(titleSlot).append(dialogSlot).prependTo(options.dialogContainer);
-		dialog.plugin('Q/dialog', {
-			alignByParent: false,
-			fullscreen: false,
-			className: options.className,
+		setIdentifier_setupDialog.dialog = Q.Dialogs.push({
+			title: options.title || Q.text.Users.setIdentifier.title,
+			content: $(step1_div),
+			elementId: 'Users_setIdentifier_dialog',
+			className: 'Users_setIdentifier_dialog ' + options.className
+				+ (identifierType === 'web3' ? 'Users_setIdentifier_web3' : ''),
+			fullscreen: !!options.fullscreen,
+			noClose: !!options.noClose,
+			closeOnEsc: Q.typeOf(options.closeOnEsc) === 'undefined' ? true : !!options.closeOnEsc,
 			beforeLoad: function () {
 				setTimeout(function () {
-					$('input[type!=hidden]', dialog).val('').trigger('change');
+					$('input[type!=hidden]', this).val('').trigger('change');
 				}, 0);
 			},
 			onActivate: function () {
-				dialog.plugin('Q/placeholders');
-				var $input = $('input[type!=hidden]', dialog).eq(0).plugin('Q/clickfocus');
-				setTimeout(function () {
-					$input.val('').trigger('change');
-					Q.handle(options.onActivate, dialog);
-				}, 0);
+				var dialog = this;
+				if (options.identifierType === 'web3') {
+					var xid = Web3.getLoggedInUserXid();
+					$("<div class='Users_identifier_web3 Q_pop'>")
+						.insertBefore($identifierTypeInput)
+						.html(Web3.abbreviateAddress(xid))
+						.on('click', function () {
+							Q.Dialogs.pop();
+							navigator.clipboard.writeText(xid);
+							Q.Notices.add({
+								key: 'Users.setIdentifier.copied',
+								content: Q.text.Users.clipboard.Copied,
+								timeout: 2
+							});
+						});
+				} else {
+					$(dialog).plugin('Q/placeholders');
+					var $firstInput = $('input[type!=hidden]', dialog)
+						.eq(0).plugin('Q/clickfocus');
+					setTimeout(function () {
+						$firstInput[0].select();
+					}, 10);
+				}
+				Q.handle(options.onActivate, dialog, [options]);
 			},
 			onClose: function () {
-				$('form', dialog).each(function () {
+				$('form', this).each(function () {
 					$(this).plugin('Q/validator', 'reset');
 				});
 				if (priv.setIdentifier_onCancel) {
@@ -2107,8 +2133,6 @@
 				setIdentifier_setupDialog.dialog = null;
 			}
 		});
-
-		setIdentifier_setupDialog.dialog = dialog;
 	}
 
 	var _submitting = false;
@@ -3007,7 +3031,6 @@
 	}
 
 	Q.Page.onActivate('').add(function _Users_Q_Page_onActivate_handler() {
-		$.fn.plugin.load('Q/dialog');
 		$.fn.plugin.load('Q/placeholders');
 		$('#notices_set_email, #notices_set_mobile')
 			.on(Q.Pointer.fastclick, function () {
@@ -3977,6 +4000,11 @@
 		onConnect: new Q.Event(),
 		onDisconnect: new Q.Event(),
 
+		abbreviateAddress: function (address, len) {
+			len = len || 5;
+			return address.substr(0, 2+len) + '...' + address.substr(-len);
+		},
+
 		disconnect: function (appId, callback) {
 			if (Users.disconnect.web3.occurring) {
 				return false;
@@ -4114,7 +4142,7 @@
 			});
 		},
 
-		login: function (callback) {
+		login: function (signedCallback, authenticatedCallback) {
 			Users.prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			Web3.connect(function (err, provider) {
@@ -4197,10 +4225,11 @@
 							platform: 'web3',
 							chainId: provider.chainId
 						}
-						if (Q.handle(callback, null, [Web3.authResponse]) === false) {
+						if (Q.handle(signedCallback, null, [Web3.authResponse]) === false) {
 							return;
 						}
 						Users.authenticate('web3', function (user) {
+							Q.handle(authenticatedCallback, null, [user])
 							priv.login_connected = true;
 							priv.login_onConnect && priv.login_onConnect(user);
 						}, function () {
@@ -4210,7 +4239,7 @@
 				}).catch(_cancel);
 			});
 			function _cancel() {
-				Q.handle(callback, Users, [null, options]);
+				Q.handle(callback, Users, [null]);
 			}
 		},
 		
@@ -4306,9 +4335,7 @@
 		getLoggedInUserXid: function () {
 			var xids = Q.getObject('Q.Users.loggedInUser.xids');
 			var key = 'web3_all';
-			if (xids && xids[key]) {
-				return xids[key];
-			}
+			return (xids && xids[key]) || false;
 		},
 
 		/**
@@ -4544,11 +4571,11 @@
 			var str = '';
 			Q.each(contracts, function (i, contract) {
 				try {
-					let customErrorDescription = contract.interface.getError(
+					var customErrorDescription = contract.interface.getError(
 						ethers.utils.hexDataSlice(err.data.data, 0, 4)
 					); // parsed
 					if (customErrorDescription) {
-						let decodedStr = ethers.utils.defaultAbiCoder.decode(
+						var decodedStr = ethers.utils.defaultAbiCoder.decode(
 							customErrorDescription.inputs.map(obj => obj.type),
 							ethers.utils.hexDataSlice(err.data.data, 4)
 						);
