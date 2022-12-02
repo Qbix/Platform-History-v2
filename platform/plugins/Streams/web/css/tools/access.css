@@ -139,9 +139,13 @@ body:has(.Streams_access_tool_dialog_container) .Streams_userChooser_results .Q_
     background: #d6ecff;
 }
 
-.Q_mobile .Streams_access_Q_tabs_tab_1 .basic32 {
+.Q_mobile .Streams_access_Q_tabs .basic32 {
     padding-top: 40px;
     padding-left: 0;
     background-origin: fixed;
     background-position-x: center !important;
+}
+
+.Q_mobile .Streams_access_Q_tabs .Q_button {
+    min-width: 60%;
 }
