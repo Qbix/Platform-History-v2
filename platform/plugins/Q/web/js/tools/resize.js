@@ -444,18 +444,18 @@
                         maxY = moveWithinRect.y + moveWithinRect.height;
                         diffX = posX - divLeft, diffY = posY - divTop;
             
-                        tool.events.dispatch('movingstart');
+                        tool.events.dispatch(Q.Pointer.move);
             
                         if (_isTouchScreen) {
                             window.addEventListener('touchmove', drag, { passive: false });
-                        } else window.addEventListener('mousemove', drag, { passive: false });
+                        } else {
+                            window.addEventListener(Q.Pointer.move, drag, { passive: false });
+                        }
                     }
             
                     function stopMoving(e) {
             
-                        if (_isTouchScreen) {
-                            window.removeEventListener('touchmove', drag, { passive: false });
-                        } else window.removeEventListener('mousemove', drag, { passive: false });
+                        window.removeEventListener(Q.Pointer.move, drag, { passive: false });
             
                         if (_elementToMove != null) _elementToMove.style.cursor = '';
             
@@ -506,17 +506,17 @@
                                 }
                             }
                             var removeCheckIfShouldInitMovingListener = function () {
-                                activateOnElement.removeEventListener('mousemove', checkIfShouldInitMoving, false);
-                                window.removeEventListener('mouseup', removeCheckIfShouldInitMovingListener, true);
+                                activateOnElement.removeEventListener(Q.Pointer.move, checkIfShouldInitMoving, false);
+                                window.removeEventListener(Q.Pointer.end, removeCheckIfShouldInitMovingListener, true);
                             }
 
-                            activateOnElement.addEventListener('mousemove', checkIfShouldInitMoving, false);
-                            window.addEventListener('mouseup', removeCheckIfShouldInitMovingListener, true);
+                            activateOnElement.addEventListener(Q.Pointer.move, checkIfShouldInitMoving, false);
+                            window.addEventListener(Q.Pointer.end, removeCheckIfShouldInitMovingListener, true);
                         }
                         
-                        activateOnElement.addEventListener('mousedown', prepareMoving)
+                        activateOnElement.addEventListener(Q.Pointer.start, prepareMoving)
 
-                        window.addEventListener('mouseup', stopMoving, true);
+                        window.addEventListener(Q.Pointer.end, stopMoving, true);
                     }
             
                     return {
@@ -591,8 +591,8 @@
                         originalMouseY = e.clientY;
             
                         tool.state.isResizing = true;
-                        window.addEventListener('mousemove', startResizing);
-                        window.addEventListener('mouseup', stopResizing);
+                        window.addEventListener(Q.Pointer.move, startResizing);
+                        window.addEventListener(Q.Pointer.end, stopResizing);
                     }
             
                     function keepRatio(width, height, priorityParam) {
@@ -1168,8 +1168,8 @@
                     function stopResizing(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        window.removeEventListener('mousemove', startResizing);
-                        window.removeEventListener('mouseup', stopResizing);
+                        window.removeEventListener(Q.Pointer.move, startResizing);
+                        window.removeEventListener(Q.Pointer.end, stopResizing);
                         _ratio = null;
                         tool.state.isResizing = false;
             
@@ -1555,20 +1555,20 @@
                     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
                 }
                 function capturePointer(e) {
-                    if (e.type == 'touchstart' || e.type == 'mousedown') {
+                    if (e.type == Q.Pointer.start) {
                         tool.pointerInfo.mouseIsPressed = true;
                         tool.pointerInfo.startX = tool.pointerInfo.prevX = _isTouchScreen ? e.touches[0].clientX : e.clientX;
                         tool.pointerInfo.startY = tool.pointerInfo.prevY = _isTouchScreen ? e.touches[0].clientY : e.clientY;
                         return;
                     }
             
-                    if (e.type == 'touchmove' || e.type == 'mousemove') {
+                    if (e.type == Q.Pointer.move) {
                         tool.pointerInfo.prevX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
                         tool.pointerInfo.prevY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
                         return;
                     }
             
-                    if (e.type == 'touchend' || e.type == 'mouseup') {
+                    if (e.type == Q.Pointer.end) {
                         tool.pointerInfo.mouseIsPressed = false;
                         tool.pointerInfo.endX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
                         tool.pointerInfo.endY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
@@ -1577,12 +1577,12 @@
             
                 }
             
-                window.addEventListener('mousedown', function (e) {
+                window.addEventListener(Q.Pointer.start, function (e) {
                     capturePointer(e);
-                    window.addEventListener('mousemove', capturePointer);
-                    window.addEventListener('mouseup', function (e) {
+                    window.addEventListener(Q.Pointer.move, capturePointer);
+                    window.addEventListener(Q.Pointer.end, function (e) {
                         capturePointer(e);
-                        window.removeEventListener('mousemove', capturePointer);
+                        window.removeEventListener(Q.Pointer.move, capturePointer);
                     });
                 });
             
