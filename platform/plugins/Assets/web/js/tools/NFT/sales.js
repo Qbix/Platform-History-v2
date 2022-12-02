@@ -74,8 +74,8 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
         amount,
         callback
     ) {
-        let contract;
-	var state = this.state;
+        var contract;
+	    var state = this.state;
         Q.Users.Web3.getContract(state.abiNFTSales, state.salesAddress)
         .then(function (_contract) {
             contract = _contract;
@@ -83,7 +83,7 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
                 Q.alert("not supported yet");
                 // need approve before.  we can do it here 
             }
-            let calculateTotalAmount = (state.paymentPrice).mul(amount);
+            var calculateTotalAmount = (state.paymentPrice).mul(amount);
             //ethers.utils.parseEther("0.1")
             return contract.specialPurchase(account,amount, {value: calculateTotalAmount});
         }).then(function () {
@@ -133,9 +133,9 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
                     Q.alert("not supported yet");    
                     return;
                 } else {
-                    let calculateTotalAmount = (data.saleInfo.price).mul(amount);
+                    var calculateTotalAmount = (data.saleInfo.price).mul(amount);
                     
-                    let contract;
+                    var contract;
                     return Q.Users.Web3.getContract(state.abiNFTSales, state.salesAddress)
                     .then(function (_contract) {
                         contract = _contract;
@@ -199,7 +199,7 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
                 Q.Users.Web3.getContract(state.abiNFTSales, state.salesAddress)
                 .then(function (contract) {
                     contract.isWhitelisted(Q.Users.Web3.getSelectedXid()).then(function (isInWhitelist) {
-                        let specialPurchaseBtn = $(tool.element).find(".Assets_sales_specialPurchase");
+                        var specialPurchaseBtn = $(tool.element).find(".Assets_sales_specialPurchase");
                         if (isInWhitelist) {
                             specialPurchaseBtn.removeClass("Q_disabled");
                         } else {
@@ -247,10 +247,10 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
                 $('.Assets_sales_purchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
-                    let account = $(tool.element).find("[name='account']").val();
+                    var account = $(tool.element).find("[name='account']").val();
                     account = account || state.fields.account.value || Q.Users.Web3.getLoggedInUserXid();
                     
-                    let amount = $(tool.element).find("[name='amount']").val();
+                    var amount = $(tool.element).find("[name='amount']").val();
                    
                     // call 
                     tool.purchase(account, amount);
@@ -260,10 +260,10 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
                 $('.Assets_sales_specialPurchase', tool.element).on(Q.Pointer.fastclick, function(){
 
                     //collect form
-                    let account = $(tool.element).find("[name='account']").val();
+                    var account = $(tool.element).find("[name='account']").val();
                     account = account || state.fields.account.value || Q.Users.Web3.getLoggedInUserXid();
                     
-                    let amount = $(tool.element).find("[name='amount']").val();
+                    var amount = $(tool.element).find("[name='amount']").val();
                    
                     // call 
                     tool.specialPurchase(account, amount);

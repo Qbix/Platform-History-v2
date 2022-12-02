@@ -15,10 +15,10 @@
                         contracts.every(function (contract) {
                             console.log(contract);
                             try {
-                                let customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
+                                var customErrorDescription = contract.interface.getError(ethers.utils.hexDataSlice(err.data.data, 0, 4)); // parsed
                                 if (customErrorDescription) {
 
-                                    let decodedStr = ethers.utils.defaultAbiCoder.decode(
+                                    var decodedStr = ethers.utils.defaultAbiCoder.decode(
                                         customErrorDescription.inputs.map(obj => obj.type),
                                         ethers.utils.hexDataSlice(err.data.data, 4)
                                     );
@@ -221,8 +221,8 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         onActivate: function ($dialog) {
                             $(".Assets_NFT_locked_dialogLock", $dialog).on(Q.Pointer.fastclick, function () {
                                 $(this).addClass('Q_loading');
-                                let tokenId = $($dialog).find("[name='tokenId']").val() || state.tokenId;
-                                let custodian = $($dialog).find("[name='custodian']").val();
+                                var tokenId = $($dialog).find("[name='tokenId']").val() || state.tokenId;
+                                var custodian = $($dialog).find("[name='custodian']").val();
                                 if (!tokenId) {
                                     Q.Dialogs.pop();
                                     return Q.alert(tool.text.NFT.locked.errors.invalidTokenId);
@@ -314,7 +314,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         onActivate: function ($dialog) {
                             $(".Assets_NFT_locked_dialogUnlock", $dialog).on(Q.Pointer.fastclick, function () {
                                 $(this).addClass('Q_loading');
-                                let tokenId = $($dialog).find("[name='tokenId']").val();
+                                var tokenId = $($dialog).find("[name='tokenId']").val();
                                 if (!tokenId) {
                                     Q.Dialogs.pop();
                                     return Q.alert(tool.text.NFT.locked.errors.invalidTokenId);
