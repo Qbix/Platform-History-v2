@@ -407,7 +407,7 @@ a.Users_activation_resend:active {
 	display: none;
 }
 #Users_setIdentifier_dialog .Q_button {
-    min-width: 60%;
+    min-width: 80%;
 }
 
 #Users_login_dialog #Users_agree { margin-right: 5px; -webkit-appearance: checkbox; }
