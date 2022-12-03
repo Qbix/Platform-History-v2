@@ -1017,37 +1017,37 @@
                 Q.Streams.Message.Total.setUpElement(textChatCounterBadgeSpan, roomStream.fields.publisherId, roomStream.fields.name, 'Streams/chat/message', tool);
 
 
-                cameraBtn.addEventListener('touchend', function () {
+                cameraBtn.addEventListener(Q.Pointer.end, function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
                     tool.cameraButtonHandler()
                 })
 
-                /*cameraSwitcherBtn.addEventListener('mouseup', function () {
+                /*cameraSwitcherBtn.addEventListener(Q.Pointer.end, function () {
                     tool.toggleCameras();
                 })*/
 
-                speakerBtn.addEventListener('mouseup', function () {
+                speakerBtn.addEventListener(Q.Pointer.end, function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
                     tool.toggleAudioOutputSpeaker();
-                })
-                microphoneBtn.addEventListener('mouseup', function () {
+                });
+                microphoneBtn.addEventListener(Q.Pointer.end, function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
                     //tool.toggleAudio();
                     tool.audioButtonHandler()
-                })
+                });
 
-                /*textChatBtnCon.addEventListener('mouseup', function () {
+                /*textChatBtnCon.addEventListener(Q.Pointer.end, function () {
                     tool.textChat.toggle();
                 })*/
 
                 if (disconnectBtn) {
-                    disconnectBtn.addEventListener('mouseup', function () {
+                    disconnectBtn.addEventListener(Q.Pointer.end, function () {
                         Q.Dialogs.pop();
                         tool.state.webrtcClass.stop();
-                    })
+                    });
                 }
 
                 return controlBar;
@@ -1266,7 +1266,7 @@
                         }
 
                         window.addEventListener('click', removeStatic);
-                        tool.chatBox.addEventListener('mouseup', makeStatic);
+                        tool.chatBox.addEventListener(Q.Pointer.end, makeStatic);
 
                         tool.chatBox.addEventListener('mouseenter', function (e) {
 
@@ -1817,7 +1817,7 @@
                                     toggleRadioButton(cameraItem);
                                 }
 
-                                radioBtnItem.addEventListener('mouseup', cameraItem.handler)
+                                radioBtnItem.addEventListener(Q.Pointer.end, cameraItem.handler)
                                 count++;
                             });
 
@@ -2148,12 +2148,12 @@
                             if ((Q.info.isMobile || Q.info.isTablet) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
                             videoinputList.appendChild(turnOffradioBtnItem);
 
-                            screenSharingRadioItem.addEventListener('mouseup', _startScreenSharingBtn.handler);
-                            anotherScreenSharingRadioItem.addEventListener('mouseup', _startAnotherScreenSharingBtn.handler);
-                            mobileScreenSharingRadioItem.addEventListener('mouseup', _startMobileScreenSharingBtn.handler);
-                            turnScreenSharingOff.addEventListener('mouseup', _stopScreenSharingBtn.handler);
+                            screenSharingRadioItem.addEventListener(Q.Pointer.end, _startScreenSharingBtn.handler);
+                            anotherScreenSharingRadioItem.addEventListener(Q.Pointer.end, _startAnotherScreenSharingBtn.handler);
+                            mobileScreenSharingRadioItem.addEventListener(Q.Pointer.end, _startMobileScreenSharingBtn.handler);
+                            turnScreenSharingOff.addEventListener(Q.Pointer.end, _stopScreenSharingBtn.handler);
 
-                            turnOffradioBtnItem.addEventListener('mouseup', _turnOffCameraBtn.handler)
+                            turnOffradioBtnItem.addEventListener(Q.Pointer.end, _turnOffCameraBtn.handler)
 
                             _videoinputListEl = videoinputList;
                             return videoinputList;
@@ -2419,7 +2419,7 @@
                                     toggleRadioButton(audioOutputItem);
                                 }
 
-                                radioBtnItem.addEventListener('mouseup', audioOutputItem.handler)
+                                radioBtnItem.addEventListener(Q.Pointer.end, audioOutputItem.handler)
                                 count++;
                             });
 
@@ -2599,7 +2599,7 @@
                                     toggleRadioButton(audioInputItem);
                                 }
 
-                                radioBtnItem.addEventListener('mouseup', audioInputItem.handler)
+                                radioBtnItem.addEventListener(Q.Pointer.end, audioInputItem.handler)
                                 count++;
                             });
 
@@ -2676,7 +2676,7 @@
                             audioinputListCon.appendChild(inputListTilte);
                             audioinputListCon.appendChild(audioinputList);
 
-                            turnOffradioBtnItem.addEventListener('mouseup', _turnOffAudioInputBtn.handler)
+                            turnOffradioBtnItem.addEventListener(Q.Pointer.end, _turnOffAudioInputBtn.handler)
 
                             _audioinputListEl = audioinputList;
                             return audioinputListCon;
@@ -3011,13 +3011,8 @@
                                 }
                             }
 
-                            if (Q.info.isMobile) {
-                                facebookLiveItem.addEventListener('touchend', loadGroupsList)
-                            } else {
-                                facebookLiveItem.addEventListener('click', loadGroupsList)
-
-                            }
-                            startStreamingBtn.addEventListener('click', function () {
+                            facebookLiveItem.addEventListener(Q.Pointer.end, loadGroupsList)
+                            startStreamingBtn.addEventListener(Q.Pointer.click, function () {
                                 if (!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
 
                                 var data = {};
@@ -4539,7 +4534,7 @@
 
                     if (Q.info.isMobile || Q.info.isTablet) {
 
-                        tool.usersBtn.addEventListener('touchend', function (e) {
+                        tool.usersBtn.addEventListener(Q.Pointer.end, function (e) {
                             //tool.usersBtn.parentNode.classList.toggle('Streams_webrtc_hover');
                             var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                             if (resizeTool && resizeTool.state.appliedRecently) return;
