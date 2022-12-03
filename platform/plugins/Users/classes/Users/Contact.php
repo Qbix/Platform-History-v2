@@ -208,8 +208,6 @@ class Users_Contact extends Base_Users_Contact
 			$criteria['contactUserId'] = $options['contactUserId'];
 		}
 		
-		$criteria = @compact('userId', 'contactUserId');
-		
 		if ($label) {
 			if (is_string($label) and substr($label, -1) === '/') {
 				$label = new Db_Range($label, true, false, true);
