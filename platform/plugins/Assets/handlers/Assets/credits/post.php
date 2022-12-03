@@ -54,7 +54,7 @@ function Assets_credits_post($params = array())
 		));
 	} elseif ($toUserId) {
 		$reason = Q::ifset($req, 'reason', Assets::PAYMENT_TO_USER);
-		Assets_Credits::send($needCredits, $reason, $toUserId, $loggedUserId, @compact(
+		Assets_Credits::transfer($needCredits, $reason, $toUserId, $loggedUserId, @compact(
 			"toPublisherId", "toStreamName", "items"
 		));
 	}
