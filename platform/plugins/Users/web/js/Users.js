@@ -2808,6 +2808,7 @@
 		}), size);
 	};
 
+	Q.Text.forTools('Users', 'Users/content');
 	Q.Tool.define({
 		"Users/avatar": "{{Users}}/js/tools/avatar.js",
 		"Users/list": "{{Users}}/js/tools/list.js",

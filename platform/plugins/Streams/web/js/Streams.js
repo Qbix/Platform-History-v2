@@ -576,6 +576,7 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 	}
 };
 
+Q.Text.forTools('Streams/', ["Streams/content"]);
 Q.Tool.define({
 	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
 	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
@@ -608,10 +609,7 @@ Q.Tool.define({
 	"Streams/webrtc/preview" : "{{Streams}}/js/tools/webrtc/preview.js",
 	"Streams/webrtc/preview/default" : "{{Streams}}/js/tools/webrtc/defaultWebrtcPreview.js",
 	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/callWebrtcPreview.js",
-	"Streams/webrtc/controls"  : {
-		js: "{{Streams}}/js/tools/webrtc/controls.js",
-		text: "Streams/content"
-	},
+	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/webrtc/streamingEditor"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
 	"Streams/webrtc/livestreamInstructions"  : "{{Streams}}/js/tools/webrtc/livestreamInstructions.js",
 	"Streams/fileManager"  : "{{Streams}}/js/tools/fileManager.js",

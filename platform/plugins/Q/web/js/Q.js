@@ -4250,13 +4250,14 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @method define
  * @param {String|Object} name The name of the tool, e.g. "Q/foo".
  *   Also you can pass an object containing {name: filename} pairs instead.
- * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
+ * @param {String|Array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
  * @param {Object|Function} ctor Your tool's constructor information. You can also pass a filename here, in which case the other parameters are ignored.
  *   If you pass a function, then it will be used as a constructor for the tool. You can also pass an object with the following properties
- * @param {string} [ctor.js] filenames containing Javascript to load for the tool
- * @param {string} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
- * @param {string} [ctor.html] filenames containing HTML to load for the tool, including templates
- * @param {string} [ctor.text] list any text files to load (for the current language) before the tool constructor
+ * @param {String} [ctor.js] filenames containing Javascript to load for the tool
+ * @param {String} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
+ * @param {String} [ctor.html] filenames containing HTML to load for the tool, including templates
+ * @param {String|ArrayBufferConstructor} [ctor.text] list any text files to load (for the current language) before the tool constructor.
+ *   Also looks for any text files added with Q.Text.forTools(namePrefix, textFileNames)
  * @param {Object} [ctor.placeholder] what to render before the tool is loaded and rendered instead
  * @param {String} [ctor.placeholder.html] literal HTML to insert
  * @param {String} [ctor.placeholder.template] the name of a template to insert
@@ -5342,9 +5343,22 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			waitFor.push('html');
 			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
 		}
-		if (toolConstructor.text) {
+		var text = toolConstructor.text;
+		var n = Q.normalize(toolName);
+		var d = Q.Text.forTools.defined;
+		for (var namePrefix in d) {
+			if (n.startsWith(namePrefix)) {
+				text = text || [];
+				Q.each(d[namePrefix], function (i, t) {
+					if (text.indexOf(t) < 0) {
+						text.push(t);
+					}
+				});
+			}
+		}
+		if (text) {
 			waitFor.push('text');
-			Q.Text.get(toolConstructor.text, pipe.fill('text'));
+			Q.Text.get(text, pipe.fill('text'));
 		}
 		pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 	});
@@ -10789,9 +10803,26 @@ Q.Text = {
 			});	
 		});
 	},
+
+	/**
+	 * Define text files in bulk for multiple tools
+	 * @param {} namePrefix The prefix for the names of tools to load the text files for
+	 * @param {String|Array} textFileNames any additional files to have for Q.Tool.define
+	 */
+	forTools: function (namePrefix, textFileNames) {
+		if (!Q.isArrayLike(textFileNames)) {
+			textFileNames = [textFileNames];
+		}
+		var n = Q.normalize(namePrefix);
+		var obj = {};
+		obj[n] = textFileNames;
+		Q.extend(Q.Text.forTools.defined, obj);
+	},
 	
 	override: {}
 };
+
+Q.Text.forTools.defined = {};
 
 /**
  * Array of text files to load before calling Q.onInit
