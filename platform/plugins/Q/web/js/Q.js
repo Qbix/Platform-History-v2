@@ -2634,7 +2634,8 @@ Evp.occurring = false;
 Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
 	if (!handler) return undefined;
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
-	if (key === true || (key === undefined && Q.Page.beingActivated)) {
+	if (key === true || (key === undefined
+	&& Q.Page && Q.Page.beingActivated)) {
 		Q.Event.forPage.push(this);
 	}
 	key = Q.calculateKey(key, this.handlers, this.keys.length);
@@ -3197,6 +3198,7 @@ Q.onLayout = function (element) {
 		}
 	}
 	var event = new Q.Event();
+
 	var l = _layoutElements.push(element);
 	_layoutEvents[l-1] = event;
 
@@ -3222,7 +3224,7 @@ Q.onLayout = function (element) {
 			}
 		}
 	}, Q.onLayout.debounce || 0), 'Q');
-	return event.debounce(Q.onLayout.debounce);
+	return event;
 }
 Q.onLayout.debounce = 500;
 Q.onLayout().set(function () {
