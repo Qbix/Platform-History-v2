@@ -209,8 +209,10 @@
 
                         if(_resizingElement) _resizingElement.style.display = 'none';
 
-                        _sourcesColumnEl.innerHTML = '';
-                        _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
+                        if (_sourcesColumnEl) {
+                            _sourcesColumnEl.innerHTML = '';
+                            _sourcesColumnEl.appendChild(_activeScene.sourcesInterface.createSourcesCol());
+                        }
                         _activeScene.sourcesInterface.update();
                         optionsColumn.update();
                     }
