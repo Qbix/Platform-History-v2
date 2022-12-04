@@ -1263,7 +1263,6 @@
                             tool.textChat.static = false;
                             if (tool.textChat.chatTool != null) tool.textChat.chatTool.seen(false);
                             tool.textChat.isHidden = true;
-                            window.removeEventListener('click', removeStatic);
                         }
 
                         window.addEventListener('click', removeStatic);
@@ -3629,10 +3628,13 @@
                             })
 
                             _popUpResizeobserver.observe(broadcastPopup)
+                        } else {
+                            Q.addEventListener(tool.broadcastBtn, Q.Pointer.click, function (e) {
+                                tool.hideAllPopups();
+                                show();
+                            });
                         }
-
                     }
-
                     return {
                         createPopUp: createPopUp,
                         show: show,
