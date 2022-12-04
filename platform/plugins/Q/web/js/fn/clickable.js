@@ -435,7 +435,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		}
 		setTimeout(function () {
 			// Delay this, or it will trigger onLayout recursively
-			Q.onLayout($this.parent()[0]).set(function () {
+			Q.onLayout($this.parent().parent()[0]).set(function () {
 				var state = $this.state('Q/clickable');
 				$this.plugin('Q/clickable', 'remove')
 					.plugin('Q/clickable', state);	
