@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Ta vsebina je skrita pred vami."
+        "HiddenFromYou": "Ta vsebina je skrita pred vami.",
+        "InplaceTypeMustBe": "inplaceType mora biti &#39;textarea&#39; ali &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Nov predmet"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kamera je vklopljena",
             "screenSharingIsOn": "Skupna raba zaslona je vklopljena",
             "screenSharingIsOff": "Delite zaslon",
-            "joinNow": "Pridružite se razpisu"
+            "joinNow": "Pridružite se razpisu",
+            "dialogTitle": "Preden se pridružite, vklopite\/izklopite kamero ali mikrofon"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Navodila",
@@ -556,6 +558,7 @@
         "private": "Zasebno",
         "public": "Javno",
         "configurationSaved": "Konfiguracija shranjena",
-        "error": "Nekaj je šlo narobe"
+        "error": "Nekaj je šlo narobe",
+        "privacySettings": "Nastavitve zasebnosti"
     }
 }

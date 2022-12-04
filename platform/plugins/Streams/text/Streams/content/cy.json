@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Mae&#39;r cynnwys hwn wedi&#39;i guddio oddi wrthych."
+        "HiddenFromYou": "Mae&#39;r cynnwys hwn wedi&#39;i guddio oddi wrthych.",
+        "InplaceTypeMustBe": "inplaceRhaid i&#39;r math fod yn &#39;textarea&#39; neu &#39;testun&#39;"
     },
     "preview": {
         "NewItemTitle": "Eitem Newydd"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Mae&#39;r camera ymlaen",
             "screenSharingIsOn": "Mae rhannu sgrin ymlaen",
             "screenSharingIsOff": "Rhannu sgrin",
-            "joinNow": "Ymunwch â&#39;r Alwad"
+            "joinNow": "Ymunwch â&#39;r Alwad",
+            "dialogTitle": "Trowch y camera neu&#39;r meic ymlaen \/ i ffwrdd cyn i chi ymuno"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Cyfarwyddiadau",
@@ -556,6 +558,7 @@
         "private": "Preifat",
         "public": "Cyhoeddus",
         "configurationSaved": "Cyfluniad wedi&#39;i gadw",
-        "error": "Aeth rhywbeth o&#39;i le"
+        "error": "Aeth rhywbeth o&#39;i le",
+        "privacySettings": "Gosodiadau Preifatrwydd"
     }
 }

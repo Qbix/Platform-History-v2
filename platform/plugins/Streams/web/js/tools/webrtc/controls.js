@@ -827,7 +827,7 @@
 									<li>` + (Q.info.useTouchEvents ? 'Tap' : 'Click') + ` "Allow" when dialogue will appear asking for access to your ` + kind + `</li>`;
                 instructionsPermissionDialog.appendChild(dialogList);
                 Q.Dialogs.push({
-                    title: 'Instructions',
+                    title: Q.text.Streams.webrtc.webInstructionsDialog.dialogTitle,
                     className: 'Streams_webrtc_devices_dialog',
                     content: instructionsPermissionDialog,
                     apply: true

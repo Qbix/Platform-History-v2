@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Šis saturs jums ir paslēpts."
+        "HiddenFromYou": "Šis saturs jums ir paslēpts.",
+        "InplaceTypeMustBe": "inplaceType ir jābūt “textarea” vai “text”"
     },
     "preview": {
         "NewItemTitle": "Jauns vienums"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kamera ir ieslēgta",
             "screenSharingIsOn": "Ekrāna koplietošana ir ieslēgta",
             "screenSharingIsOff": "Kopīgot ekrānu",
-            "joinNow": "Pievienojieties aicinājumam"
+            "joinNow": "Pievienojieties aicinājumam",
+            "dialogTitle": "Pirms pievienošanās ieslēdziet\/izslēdziet kameru vai mikrofonu"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcijas",
@@ -556,6 +558,7 @@
         "private": "Privāts",
         "public": "Publisks",
         "configurationSaved": "Konfigurācija saglabāta",
-        "error": "Kaut kas nogāja greizi"
+        "error": "Kaut kas nogāja greizi",
+        "privacySettings": "Privātuma iestatījumi"
     }
 }

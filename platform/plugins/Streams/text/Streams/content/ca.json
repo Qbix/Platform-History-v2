@@ -274,7 +274,8 @@
             "cameraIsOn": "La càmera està activada",
             "screenSharingIsOn": "La compartició de pantalla està activada",
             "screenSharingIsOff": "Comparteix pantalla",
-            "joinNow": "Uneix-te a la Crida"
+            "joinNow": "Uneix-te a la Crida",
+            "dialogTitle": "Enceneu o apagueu la càmera o el micròfon abans d&#39;unir-vos-hi"
         },
         "audioSettings": {
             "dialogTitle": "Configuració d&#39;àudio",
@@ -447,7 +448,8 @@
         "Submenu": "Submenú"
     },
     "errors": {
-        "HiddenFromYou": "Aquest contingut està ocult per a tu."
+        "HiddenFromYou": "Aquest contingut està ocult per a tu.",
+        "InplaceTypeMustBe": "inplaceType ha de ser &quot;textarea&quot; o &quot;text&quot;"
     },
     "audio": {
         "record": "Registre",
@@ -562,6 +564,7 @@
         "private": "Privat",
         "public": "Públic",
         "configurationSaved": "S&#39;ha desat la configuració",
-        "error": "Alguna cosa ha anat malament"
+        "error": "Alguna cosa ha anat malament",
+        "privacySettings": "Configuració de privacitat"
     }
 }

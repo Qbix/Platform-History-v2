@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Acest conținut vă este ascuns."
+        "HiddenFromYou": "Acest conținut vă este ascuns.",
+        "InplaceTypeMustBe": "inplaceType trebuie să fie „textarea” sau „text”"
     },
     "preview": {
         "NewItemTitle": "Articol nou"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Camera este pornită",
             "screenSharingIsOn": "Partajarea ecranului este activată",
             "screenSharingIsOff": "Distribuie ecran",
-            "joinNow": "Alăturați-vă apelului"
+            "joinNow": "Alăturați-vă apelului",
+            "dialogTitle": "Porniți\/opriți camera sau microfonul înainte de a vă alătura"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrucțiuni",
@@ -556,6 +558,7 @@
         "private": "Privat",
         "public": "Public",
         "configurationSaved": "Configurație salvată",
-        "error": "Ceva n-a mers bine"
+        "error": "Ceva n-a mers bine",
+        "privacySettings": "Setările de confidențialitate"
     }
 }

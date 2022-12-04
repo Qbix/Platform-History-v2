@@ -271,7 +271,8 @@
             "cameraIsOn": "Naka-on ang camera",
             "screenSharingIsOn": "Naka-on ang pagbabahagi ng screen",
             "screenSharingIsOff": "Iskreen na ibinabahagi",
-            "joinNow": "Sumali sa Tawag"
+            "joinNow": "Sumali sa Tawag",
+            "dialogTitle": "I-on\/i-off ang camera o mikropono bago ka sumali"
         },
         "audioSettings": {
             "dialogTitle": "Mga setting ng audio",
@@ -444,7 +445,8 @@
         "Submenu": "Submenu"
     },
     "errors": {
-        "HiddenFromYou": "Ang nilalamang ito ay nakatago mula sa iyo."
+        "HiddenFromYou": "Ang nilalamang ito ay nakatago mula sa iyo.",
+        "InplaceTypeMustBe": "Ang inplaceType ay dapat na &#39;textarea&#39; o &#39;text&#39;"
     },
     "audio": {
         "record": "Itala",
@@ -559,6 +561,7 @@
         "private": "Pribado",
         "public": "Pampubliko",
         "configurationSaved": "Na-save ang configuration",
-        "error": "Nagkaproblema"
+        "error": "Nagkaproblema",
+        "privacySettings": "Settings para sa pagsasa-pribado"
     }
 }

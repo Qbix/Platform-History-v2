@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Tento obsah je pred vami skrytý."
+        "HiddenFromYou": "Tento obsah je pred vami skrytý.",
+        "InplaceTypeMustBe": "inplaceType musí byť „textarea“ alebo „text“"
     },
     "preview": {
         "NewItemTitle": "Nová vec"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kamera je zapnutá",
             "screenSharingIsOn": "Zdieľanie obrazovky je zapnuté",
             "screenSharingIsOff": "Zdieľať obrazovku",
-            "joinNow": "Pripojte sa k výzve"
+            "joinNow": "Pripojte sa k výzve",
+            "dialogTitle": "Pred pripojením zapnite\/vypnite kameru alebo mikrofón"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Inštrukcie",
@@ -556,6 +558,7 @@
         "private": "Súkromné",
         "public": "Verejné",
         "configurationSaved": "Konfigurácia bola uložená",
-        "error": "Niečo sa pokazilo"
+        "error": "Niečo sa pokazilo",
+        "privacySettings": "Nastavenia ochrany osobných údajov"
     }
 }

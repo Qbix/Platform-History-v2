@@ -274,7 +274,8 @@
             "cameraIsOn": "Kamera je zapnutá",
             "screenSharingIsOn": "Sdílení obrazovky je zapnuto",
             "screenSharingIsOff": "Sdílet obrazovku",
-            "joinNow": "Připojte se k výzvě"
+            "joinNow": "Připojte se k výzvě",
+            "dialogTitle": "Než se připojíte, zapněte\/vypněte kameru nebo mikrofon"
         },
         "audioSettings": {
             "dialogTitle": "Nastavení zvuku",
@@ -447,7 +448,8 @@
         "Submenu": "Podnabídka"
     },
     "errors": {
-        "HiddenFromYou": "Tento obsah je před vámi skrytý."
+        "HiddenFromYou": "Tento obsah je před vámi skrytý.",
+        "InplaceTypeMustBe": "inplaceType musí být &#39;textarea&#39; nebo &#39;text&#39;"
     },
     "audio": {
         "record": "Záznam",
@@ -562,6 +564,7 @@
         "private": "Soukromé",
         "public": "Veřejnost",
         "configurationSaved": "Konfigurace uložena",
-        "error": "Něco se pokazilo"
+        "error": "Něco se pokazilo",
+        "privacySettings": "Nastavení ochrany osobních údajů"
     }
 }

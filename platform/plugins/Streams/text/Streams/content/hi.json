@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "यह सामग्री आपसे छिपी हुई है।"
+        "HiddenFromYou": "यह सामग्री आपसे छिपी हुई है।",
+        "InplaceTypeMustBe": "inplaceType &#39;textarea&#39; या &#39;text&#39; होना चाहिए"
     },
     "preview": {
         "NewItemTitle": "नए वस्तु"
@@ -180,7 +181,8 @@
             "cameraIsOn": "कैमरा चालू है",
             "screenSharingIsOn": "स्क्रीन साझाकरण चालू है",
             "screenSharingIsOff": "स्क्रीन साझा करना",
-            "joinNow": "कॉल में शामिल हों"
+            "joinNow": "कॉल में शामिल हों",
+            "dialogTitle": "शामिल होने से पहले कैमरा या माइक चालू\/बंद करें"
         },
         "webInstructionsDialog": {
             "dialogTitle": "निर्देश",
@@ -556,6 +558,7 @@
         "private": "निजी",
         "public": "जनता",
         "configurationSaved": "कॉन्फ़िगरेशन सहेजा गया",
-        "error": "कुछ गलत हो गया"
+        "error": "कुछ गलत हो गया",
+        "privacySettings": "गोपनीय सेटिंग"
     }
 }

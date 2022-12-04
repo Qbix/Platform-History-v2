@@ -178,6 +178,7 @@
             "cameraAndMicrophoneBtn": "Enable Camera and Microphone"
         },
         "preparing": {
+            "dialogTitle": "Turn camera or mic on\/off before you join",
             "micIsOff": "Mic is off",
             "micIsOn": "Mic is on",
             "cameraIsOff": "Camera is off",

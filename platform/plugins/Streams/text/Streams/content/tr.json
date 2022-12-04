@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Bu içerik sizden gizlenmiştir."
+        "HiddenFromYou": "Bu içerik sizden gizlenmiştir.",
+        "InplaceTypeMustBe": "inplaceType, &quot;textarea&quot; veya &quot;text&quot; olmalıdır"
     },
     "preview": {
         "NewItemTitle": "Yeni öğe"
@@ -180,7 +181,8 @@
             "cameraIsOn": "kamera açık",
             "screenSharingIsOn": "Ekran paylaşımı açık",
             "screenSharingIsOff": "Ekran paylaşımı",
-            "joinNow": "Çağrıya Katılın"
+            "joinNow": "Çağrıya Katılın",
+            "dialogTitle": "Katılmadan önce kamerayı veya mikrofonu açın\/kapatın"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Talimatlar",
@@ -556,6 +558,7 @@
         "private": "Özel",
         "public": "Halk",
         "configurationSaved": "Yapılandırma kaydedildi",
-        "error": "Bir şeyler yanlış gitti"
+        "error": "Bir şeyler yanlış gitti",
+        "privacySettings": "Gizlilik ayarları"
     }
 }

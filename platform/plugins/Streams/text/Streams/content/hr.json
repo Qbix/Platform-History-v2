@@ -274,7 +274,8 @@
             "cameraIsOn": "Kamera je uključena",
             "screenSharingIsOn": "Dijeljenje zaslona je uključeno",
             "screenSharingIsOff": "Podijeli zaslon",
-            "joinNow": "Pridružite se pozivu"
+            "joinNow": "Pridružite se pozivu",
+            "dialogTitle": "Uključite\/isključite kameru ili mikrofon prije nego što se pridružite"
         },
         "audioSettings": {
             "dialogTitle": "Audio postavke",
@@ -447,7 +448,8 @@
         "Submenu": "Podizbornik"
     },
     "errors": {
-        "HiddenFromYou": "Ovaj sadržaj je skriven od vas."
+        "HiddenFromYou": "Ovaj sadržaj je skriven od vas.",
+        "InplaceTypeMustBe": "inplaceType mora biti &#39;textarea&#39; ili &#39;text&#39;"
     },
     "audio": {
         "record": "Snimiti",
@@ -562,6 +564,7 @@
         "private": "Privatni",
         "public": "Javnost",
         "configurationSaved": "Konfiguracija je spremljena",
-        "error": "Nešto je pošlo po zlu"
+        "error": "Nešto je pošlo po zlu",
+        "privacySettings": "Postavke privatnosti"
     }
 }

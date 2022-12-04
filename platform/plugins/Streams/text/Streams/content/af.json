@@ -274,7 +274,8 @@
             "cameraIsOn": "Kamera is aan",
             "screenSharingIsOn": "Skermdeling is aan",
             "screenSharingIsOff": "Deel skerm",
-            "joinNow": "Sluit aan by die oproep"
+            "joinNow": "Sluit aan by die oproep",
+            "dialogTitle": "Skakel kamera of mikrofoon aan\/af voor jy aansluit"
         },
         "audioSettings": {
             "dialogTitle": "Oudio-instellings",
@@ -447,7 +448,8 @@
         "Submenu": "Subkieslys"
     },
     "errors": {
-        "HiddenFromYou": "Hierdie inhoud is vir jou versteek."
+        "HiddenFromYou": "Hierdie inhoud is vir jou versteek.",
+        "InplaceTypeMustBe": "inplaceType moet &#39;textarea&#39; of &#39;text&#39; wees"
     },
     "audio": {
         "record": "Rekord",
@@ -562,6 +564,7 @@
         "private": "Privaat",
         "public": "Publiek",
         "configurationSaved": "Opstelling gestoor",
-        "error": "Iets het verkeerd geloop"
+        "error": "Iets het verkeerd geloop",
+        "privacySettings": "Privaatheid instellings"
     }
 }

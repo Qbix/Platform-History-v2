@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Detta innehåll är dolt för dig."
+        "HiddenFromYou": "Detta innehåll är dolt för dig.",
+        "InplaceTypeMustBe": "inplaceType måste vara &#39;textarea&#39; eller &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Nytt föremål"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kameran är på",
             "screenSharingIsOn": "Skärmdelning är på",
             "screenSharingIsOff": "Dela skärm",
-            "joinNow": "Gå med i samtalet"
+            "joinNow": "Gå med i samtalet",
+            "dialogTitle": "Slå på\/av kameran eller mikrofonen innan du går med"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instruktioner",
@@ -556,6 +558,7 @@
         "private": "Privat",
         "public": "offentlig",
         "configurationSaved": "Konfigurationen har sparats",
-        "error": "Något gick fel"
+        "error": "Något gick fel",
+        "privacySettings": "Sekretessinställningar"
     }
 }

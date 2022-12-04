@@ -274,7 +274,8 @@
             "cameraIsOn": "Kamera është e ndezur",
             "screenSharingIsOn": "Ndarja e ekranit është aktive",
             "screenSharingIsOff": "Ndani ekranin",
-            "joinNow": "Bashkohuni me Thirrjen"
+            "joinNow": "Bashkohuni me Thirrjen",
+            "dialogTitle": "Aktivizo\/fike kamerën ose mikrofonin përpara se të bashkohesh"
         },
         "audioSettings": {
             "dialogTitle": "Cilësimet e audios",
@@ -447,7 +448,8 @@
         "Submenu": "Nënmenyja"
     },
     "errors": {
-        "HiddenFromYou": "Kjo përmbajtje është e fshehur nga ju."
+        "HiddenFromYou": "Kjo përmbajtje është e fshehur nga ju.",
+        "InplaceTypeMustBe": "inplaceType duhet të jetë &#39;textarea&#39; ose &#39;text&#39;"
     },
     "audio": {
         "record": "Regjistro",
@@ -562,6 +564,7 @@
         "private": "Privat",
         "public": "Publike",
         "configurationSaved": "Konfigurimi u ruajt",
-        "error": "Dicka shkoi keq"
+        "error": "Dicka shkoi keq",
+        "privacySettings": "Kushtet e Privatësisë"
     }
 }

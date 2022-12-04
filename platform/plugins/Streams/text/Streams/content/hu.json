@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Ez a tartalom el van rejtve előtted."
+        "HiddenFromYou": "Ez a tartalom el van rejtve előtted.",
+        "InplaceTypeMustBe": "Az inplaceType értéke &quot;textarea&quot; vagy &quot;text&quot; lehet"
     },
     "preview": {
         "NewItemTitle": "Új elem"
@@ -180,7 +181,8 @@
             "cameraIsOn": "A kamera be van kapcsolva",
             "screenSharingIsOn": "A képernyőmegosztás be van kapcsolva",
             "screenSharingIsOff": "Képernyő megosztása",
-            "joinNow": "Csatlakozzon a felhíváshoz"
+            "joinNow": "Csatlakozzon a felhíváshoz",
+            "dialogTitle": "Csatlakozás előtt kapcsolja be\/ki a kamerát vagy a mikrofont"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Utasítás",
@@ -556,6 +558,7 @@
         "private": "Magán",
         "public": "Nyilvános",
         "configurationSaved": "A konfiguráció mentve",
-        "error": "Valami elromlott"
+        "error": "Valami elromlott",
+        "privacySettings": "Adatvédelmi beállítások"
     }
 }

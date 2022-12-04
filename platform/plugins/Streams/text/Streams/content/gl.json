@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Este contido está oculto para ti."
+        "HiddenFromYou": "Este contido está oculto para ti.",
+        "InplaceTypeMustBe": "inplaceType debe ser &#39;textarea&#39; ou &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Elemento novo"
@@ -180,7 +181,8 @@
             "cameraIsOn": "A cámara está activada",
             "screenSharingIsOn": "O uso compartido de pantalla está activado",
             "screenSharingIsOff": "Compartir pantalla",
-            "joinNow": "Únete á convocatoria"
+            "joinNow": "Únete á convocatoria",
+            "dialogTitle": "Activa\/desactiva a cámara ou o micrófono antes de unirte"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrucións",
@@ -556,6 +558,7 @@
         "private": "Privado",
         "public": "Público",
         "configurationSaved": "Configuración gardada",
-        "error": "Algo saíu mal"
+        "error": "Algo saíu mal",
+        "privacySettings": "Configuración de privacidade"
     }
 }

@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Αυτό το περιεχόμενο είναι κρυμμένο από εσάς."
+        "HiddenFromYou": "Αυτό το περιεχόμενο είναι κρυμμένο από εσάς.",
+        "InplaceTypeMustBe": "Το inplaceType πρέπει να είναι &quot;textarea&quot; ή &quot;text&quot;"
     },
     "preview": {
         "NewItemTitle": "Νέο αντικείμενο"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Η κάμερα είναι ενεργοποιημένη",
             "screenSharingIsOn": "Η κοινή χρήση οθόνης είναι ενεργοποιημένη",
             "screenSharingIsOff": "Κοινή χρήση οθόνης",
-            "joinNow": "Εγγραφείτε στην κλήση"
+            "joinNow": "Εγγραφείτε στην κλήση",
+            "dialogTitle": "Ενεργοποιήστε\/απενεργοποιήστε την κάμερα ή το μικρόφωνο πριν εγγραφείτε"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Οδηγίες",
@@ -556,6 +558,7 @@
         "private": "Ιδιωτικός",
         "public": "Δημόσιο",
         "configurationSaved": "Η διαμόρφωση αποθηκεύτηκε",
-        "error": "Κάτι πήγε στραβά"
+        "error": "Κάτι πήγε στραβά",
+        "privacySettings": "Ρυθμίσεις απορρήτου"
     }
 }

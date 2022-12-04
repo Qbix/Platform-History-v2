@@ -6684,7 +6684,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                     Q.Dialogs.push({
-                        title: 'Turn camera or mic on/off before you join',
+                        title: Q.text.Streams.webrtc.preparing.dialogTitle,
                         className: 'Streams_webrtc_preparing_dialog',
                         content: mediaDevicesDialog,
                         apply: false,

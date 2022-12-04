@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Questo contenuto ti è nascosto."
+        "HiddenFromYou": "Questo contenuto ti è nascosto.",
+        "InplaceTypeMustBe": "inplaceType deve essere &#39;textarea&#39; o &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Nuovo oggetto"
@@ -180,7 +181,8 @@
             "cameraIsOn": "La fotocamera è accesa",
             "screenSharingIsOn": "La condivisione dello schermo è attiva",
             "screenSharingIsOff": "Condividi schermo",
-            "joinNow": "Partecipa alla chiamata"
+            "joinNow": "Partecipa alla chiamata",
+            "dialogTitle": "Accendi\/spegni la videocamera o il microfono prima di unirti"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Istruzioni",
@@ -556,6 +558,7 @@
         "private": "Privato",
         "public": "Pubblico",
         "configurationSaved": "Configurazione salvata",
-        "error": "Qualcosa è andato storto"
+        "error": "Qualcosa è andato storto",
+        "privacySettings": "Impostazioni della privacy"
     }
 }

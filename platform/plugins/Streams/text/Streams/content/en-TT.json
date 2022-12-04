@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "This content is hidden from you."
+        "HiddenFromYou": "This content is hidden from you.",
+        "InplaceTypeMustBe": "inplaceType must be 'textarea' or 'text'"
     },
     "preview": {
         "NewItemTitle": "New Item"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Camera is on",
             "screenSharingIsOn": "Screensharing is on",
             "screenSharingIsOff": "Share screen",
-            "joinNow": "Join the Call"
+            "joinNow": "Join the Call",
+            "dialogTitle": "Turn camera or mic on/off before you join"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instructions",
@@ -556,6 +558,7 @@
         "private": "Private",
         "public": "Public",
         "configurationSaved": "Configuration saved",
-        "error": "Something went wrong"
+        "error": "Something went wrong",
+        "privacySettings": "Privacy Settings"
     }
 }

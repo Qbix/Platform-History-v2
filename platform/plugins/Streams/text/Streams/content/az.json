@@ -274,7 +274,8 @@
             "cameraIsOn": "Kamera aktivdir",
             "screenSharingIsOn": "Ekran paylaşımı aktivdir",
             "screenSharingIsOff": "Ekranı paylaşın",
-            "joinNow": "Zəngə qoşulun"
+            "joinNow": "Zəngə qoşulun",
+            "dialogTitle": "Qoşulmazdan əvvəl kameranı və ya mikrofonu yandırın\/söndürün"
         },
         "audioSettings": {
             "dialogTitle": "Audio Parametrlər",
@@ -447,7 +448,8 @@
         "Submenu": "Alt menyu"
     },
     "errors": {
-        "HiddenFromYou": "Bu məzmun sizdən gizlidir."
+        "HiddenFromYou": "Bu məzmun sizdən gizlidir.",
+        "InplaceTypeMustBe": "inplaceType &#39;mətn sahəsi&#39; və ya &#39;mətn&#39; olmalıdır"
     },
     "audio": {
         "record": "Qeyd",
@@ -562,6 +564,7 @@
         "private": "Şəxsi",
         "public": "İctimai",
         "configurationSaved": "Konfiqurasiya yadda saxlandı",
-        "error": "Nəsə xəta baş verdi"
+        "error": "Nəsə xəta baş verdi",
+        "privacySettings": "Məxfilik Parametrləri"
     }
 }

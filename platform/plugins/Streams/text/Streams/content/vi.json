@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Nội dung này bị ẩn với bạn."
+        "HiddenFromYou": "Nội dung này bị ẩn với bạn.",
+        "InplaceTypeMustBe": "inplaceType phải là &#39;textarea&#39; hoặc &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Vật phẩm mới"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Máy ảnh đang bật",
             "screenSharingIsOn": "Chia sẻ màn hình đang bật",
             "screenSharingIsOff": "Chia sẻ màn hình",
-            "joinNow": "Tham gia cuộc gọi"
+            "joinNow": "Tham gia cuộc gọi",
+            "dialogTitle": "Bật\/tắt camera hoặc micrô trước khi bạn tham gia"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Hướng dẫn",
@@ -556,6 +558,7 @@
         "private": "Riêng tư",
         "public": "Công cộng",
         "configurationSaved": "Đã lưu cấu hình",
-        "error": "Đã xảy ra sự cố"
+        "error": "Đã xảy ra sự cố",
+        "privacySettings": "Những thiết lập riêng tư"
     }
 }

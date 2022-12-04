@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Šis turinys nuo jūsų paslėptas."
+        "HiddenFromYou": "Šis turinys nuo jūsų paslėptas.",
+        "InplaceTypeMustBe": "inplaceType turi būti „textarea“ arba „text“"
     },
     "preview": {
         "NewItemTitle": "Naujas daiktas"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kamera įjungta",
             "screenSharingIsOn": "Ekrano bendrinimas įjungtas",
             "screenSharingIsOff": "Bendrinti ekraną",
-            "joinNow": "Prisijunkite prie skambučio"
+            "joinNow": "Prisijunkite prie skambučio",
+            "dialogTitle": "Prieš prisijungdami įjunkite \/ išjunkite fotoaparatą arba mikrofoną"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcijos",
@@ -556,6 +558,7 @@
         "private": "Privatus",
         "public": "Viešas",
         "configurationSaved": "Konfigūracija išsaugota",
-        "error": "Kažkas nutiko"
+        "error": "Kažkas nutiko",
+        "privacySettings": "Privatumo nustatymai"
     }
 }
