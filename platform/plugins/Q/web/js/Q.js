@@ -13539,7 +13539,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  *   user to enter something (e.g. 'Enter your name').
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing the entered value as a string, or null if the dialog was dismissed with the close button
- * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
+ * @param {Object} [options] An optional hash of options for Q.Dialogs.push and also:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text

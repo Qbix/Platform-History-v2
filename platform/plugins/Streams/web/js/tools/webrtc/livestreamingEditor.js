@@ -4198,7 +4198,7 @@
                     dialogue.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden';
                     _dialogueEl = dialogue;
                     var dialogTitle=document.createElement('H3');
-                    dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.textes);
+                    dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.text);
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
@@ -4220,7 +4220,7 @@
                     var startRecordingBtn = document.createElement('BUTTON');
                     startRecordingBtn.type = 'button';
                     startRecordingBtn.className = 'Q_button';
-                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", controlsTool.textes);
+                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", controlsTool.text);
 
                     //previewButtons.appendChild(startRecordingBtn);
                     previewBoxBodyInner.appendChild(sourceResizingEl);
@@ -4376,7 +4376,7 @@
                     var startRecordingBtn = document.createElement('BUTTON');
                     startRecordingBtn.type = 'button';
                     startRecordingBtn.className = 'Q_button';
-                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", controlsTool.textes);
+                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", controlsTool.text);
 
                     previewButtons.appendChild(startRecordingBtn);
 
@@ -4429,7 +4429,7 @@
 
                         controlsTool.WebRTCLib.mediaManager.localRecorder.startRecording(function (liveInfo) {
                             if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                            recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", controlsTool.textes);
+                            recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", controlsTool.text);
                             recordingSettings.style.display = 'none';
                             activeRecordingSection.style.display = 'block';
                         });
@@ -4439,7 +4439,7 @@
 
                             controlsTool.WebRTCLib.mediaManager.localRecorder.stopRecording(function () {
                                 if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", controlsTool.textes);
+                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", controlsTool.text);
                                 activeRecordingSection.style.display = 'none';
                                 recordingSettings.style.display = 'block';
                             });

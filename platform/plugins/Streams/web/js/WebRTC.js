@@ -149,7 +149,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var publicAppInterface;
         var WebRTCconference;
 
-        var _textes = null;
+        var text() = null;
         var _roomStartTime = null;
         var _controls = null;
         var _controlsTool = null;
@@ -5746,10 +5746,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(message.userId == userId) {
                     if(message.immediate === true) {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnectingImmediately);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnectingImmediately);
                         stop();
                     } else {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnecting);
 
                         setTimeout(function () {
                             stop();
@@ -5872,7 +5872,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('user joined',  participant);
                 if(participant.sid == 'recording') return;
                 setRealName(participant, function(name){
-                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
+                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
                 setUserAvatar(participant);
                 setUserGreeting(participant);
@@ -5914,7 +5914,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             return;
                         }
                         var firstName = this.fields.content;
-                        notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
+                        notice.show(text().webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
 
                     });
                 }
@@ -5936,7 +5936,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
             WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
                 log('you left the room')
-                notice.show(Q.getObject("webrtc.notices.youLeftRoom", _textes));
+                notice.show(Q.getObject("webrtc.notices.youLeftRoom", text()));
                 screensRendering.updateLayout();
             });
             WebRTCconference.event.on('participantRemoved', function (participant) {
@@ -6162,17 +6162,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             dialogList.className = 'Streams_webrtc_instructions_dialog';
 
             if(Q.info.platform === 'ios') {
-                dialogList.innerHTML = `<div>` + _textes.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
-                //Q.getObject("webrtc.allow." + titleText, _textes)
+                dialogList.innerHTML = `<div>` + text().webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
+                //Q.getObject("webrtc.allow." + titleText, text())
             } else {
-                dialogList.innerHTML = `<div>` + _textes.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _textes) + `</li>
-									<li>` + _textes.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
+                dialogList.innerHTML = `<div>` + text().webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", text()) + `</li>
+									<li>` + text().webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
             }
 
             instructionsPermissionDialog.appendChild(dialogList);
             Q.Dialogs.push({
-                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _textes),
+                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", text()),
                 className: 'Streams_webrtc_devices_dialog',
                 content: instructionsPermissionDialog,
                 apply: true
@@ -6323,7 +6323,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var joinButton = document.createElement('DIV');
                 joinButton.type = 'button';
                 joinButton.className = 'Q_button Streams_webrtc_join-button';
-                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", _textes);
+                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", text());
 
 
                 //meetingStatus.appendChild(participantsIcon);
@@ -6752,14 +6752,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
                             var dialogList = document.createElement('OL');
                             dialogList.className = 'Streams_webrtc_instructions_dialog';
-                            dialogList.innerHTML = `<div>` + _textes.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
+                            dialogList.innerHTML = `<div>` + text().webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", text()) + `</li>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", text()) + `</li>
+									<li>` + text().webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
+									<li>` + text().webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
                             instructionsPermissionDialog.appendChild(dialogList);
                             Q.Dialogs.push({
-                                title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
+                                title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", text()),
                                 className: 'Streams_webrtc_devices_dialog',
                                 content: instructionsPermissionDialog,
                                 apply: true
@@ -7178,10 +7178,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
 
-                    _textes = result;
+                    text() = result;
 
                     if(appDebug.isiOSwebView()) {
-                        return Q.alert(_textes.webrtc.notices.openInBrowserAlert != null ? _textes.webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
+                        return Q.alert(text().webrtc.notices.openInBrowserAlert != null ? text().webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
                     }
 
                     onTextLoad();
@@ -7404,15 +7404,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
                                 var dialogList = document.createElement('OL');
                                 dialogList.className = 'Streams_webrtc_instructions_dialog';
-                                dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
-									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityId: Q.Users.communityId}) + `</li>
-									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
+                                dialogList.innerHTML = `<div>` + text().webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", text()) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", text()) + `</li>
+									<li>` + text().webrtc.androidInstructionsDialog.point3.interpolate({communityId: Q.Users.communityId}) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", text()) + `</li>
+									<li>` + text().webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
                                 instructionsPermissionDialog.appendChild(dialogList);
                                 Q.Dialogs.push({
-                                    title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _textes),
+                                    title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", text()),
                                     className: 'Streams_webrtc_devices_dialog',
                                     content: instructionsPermissionDialog,
                                     apply: true
@@ -7574,7 +7574,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function continueSwitching() {
                 log('switchTo: promise: onResolve')
 
-                if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", _textes));
+                if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", text()));
 
                 if(Q.Socket.getAll()['/webrtc']) {
                     Q.Socket.getAll()['/webrtc'] = null;
@@ -7758,8 +7758,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             return WebRTCconference != null && WebRTCconference.state != 'disconnected' ? true : false;
         }
 
-        function textes() {
-            return _textes;
+        function text() {
+            return Q.text.Streams;
         }
 
         return {
@@ -7772,7 +7772,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             roomStream: roomStream,
             getOptions: getOptions,
             isActive: isActive,
-            textes: textes,
+            text: text,
             screenRendering: screensRendering,
             loader: connectionState,
             notice: notice,
