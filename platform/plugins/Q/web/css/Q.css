@@ -1024,8 +1024,8 @@ html.Q_layout_sidebar {
 	display: block;
 }
 .Q_dialogs_animationFX .Q_overlay {
-	transform: scale(0);
-	opacity: 0;
+	transform: scale(0.5);
+	opacity: 0.5;
 	transition: transform 300ms, opacity 300ms;
 }
 .Q_dialogs_animationFX .Q_overlay_open {
