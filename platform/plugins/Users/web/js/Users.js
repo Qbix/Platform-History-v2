@@ -2382,10 +2382,11 @@
 	 * @method getLabels
 	 * @static
 	 * @param {String} userId
-	 * @param {String} [prefix] Pass any prefix here, to filter labels by this prefix
+	 * @param {String|Array} [filter] Pass a string prefix here, to filter labels by this prefix.
+	 *  Or pass an array of label names, to filter by.
 	 * @param {Function} callback
 	 */
-	Users.getLabels = function (userId, prefix, callback) {
+	Users.getLabels = function (userId, filter, callback) {
 		if (typeof prefix === 'function') {
 			callback = prefix;
 			prefix = undefined;
@@ -2404,7 +2405,7 @@
 		}, {
 			fields: {
 				userId: userId,
-				labels: prefix
+				labels: filter
 			},
 			method: 'post'
 		});

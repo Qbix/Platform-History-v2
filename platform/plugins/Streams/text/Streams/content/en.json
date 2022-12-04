@@ -71,6 +71,13 @@
         "Share": "Share",
         "messageContent": "{{displayName}} invited you to {{inviteUrl}}",
         "youCanNowPaste": "You can now paste this link somewhere to invite people",
+        "roles": {
+            "title": "Grant Roles to Invited Users?",
+            "NotAuthorizedToGrantRole": {
+                "title": "Sorry",
+                "alert": "You're not authorized to grant this role"
+            }
+        },
         "dialog": {
             "chooseFromContacts": "Choose from your Contacts",
             "chooseAgainFromContacts": "Choose Again from Contacts",
