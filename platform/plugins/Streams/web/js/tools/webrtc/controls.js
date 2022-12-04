@@ -3564,8 +3564,8 @@
                     }
 
                     function hide() {
-                        if (Q.info.isMobile) {
-                            tool.selectCameraDialog().hide();
+                        if (Q.info.useTouchEvents) {
+                            Q.Dialogs.pop();
                         } else {
                             tool.broadcastBtn.parentNode.classList.remove('Streams_webrtc_hover');
                         }
