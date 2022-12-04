@@ -433,12 +433,14 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 				setTimeout(_update, timing.renderingInterval);
 			}, timing.renderingInterval);
 		}
-		// Put this at the end, or it will trigger recursively
-		Q.onLayout($this.parent()[0]).set(function () {
-			var state = $this.state('Q/clickable');
-			$this.plugin('Q/clickable', 'remove')
-				.plugin('Q/clickable', state);	
-		}, "Q_clickable_" + $this.attr("id"));
+		setTimeout(function () {
+			// Delay this, or it will trigger onLayout recursively
+			Q.onLayout($this.parent()[0]).set(function () {
+				var state = $this.state('Q/clickable');
+				$this.plugin('Q/clickable', 'remove')
+					.plugin('Q/clickable', state);	
+			}, "Q_clickable_" + $this.attr("id"));
+		}, Q.onLayout.debounce+1);
 	}, timing.renderingDelay);
 	return this;
 },
