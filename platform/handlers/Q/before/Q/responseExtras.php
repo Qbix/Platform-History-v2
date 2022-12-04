@@ -91,7 +91,7 @@ function Q_before_Q_responseExtras()
 		Q_Config::get('Q', 'web', 'statusBarOverlapped')
 		or Q_Request::isCordova()
 	)) {
-		Q_Response::addHtmlCssClass('Q_statusBarOverlapped Q_dialogs_animationFX Q_columns_animationFX');
+		Q_Response::addHtmlCssClass('Q_statusBarOverlapped');
 	}
 	if (!Q_Request::isMobile()
 	and Q_Config::get('Q', 'response', 'layout', 'sidebar', false)) {
