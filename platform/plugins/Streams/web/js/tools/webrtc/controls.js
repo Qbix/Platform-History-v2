@@ -836,7 +836,7 @@
 
             cameraButtonHandler: function () {
                 var tool = this;
-                if (!Q.info.isMobile && !Q.info.isTablet) return;
+                if (!Q.info.useTouchEvents) return;
 
                 if (_isAndroidCordova && !tool.cameraPermissionGranted) {
                     tool.WebRTCLib.localMediaControls.requestAndroidMediaPermissions({ video: true }, function () {
@@ -871,7 +871,7 @@
 
             audioButtonHandler: function () {
                 var tool = this;
-                if (!Q.info.isMobile && !Q.info.isTablet) return;
+                if (!Q.info.useTouchEvents) return;
 
                 if (document.querySelector('.Streams_webrtc_dialog-box.select-audio') == null) {
                     tool.selectAudioDialogue();
@@ -1081,7 +1081,7 @@
                     dialogue.appendChild(dialogInner);
 
 
-                    if (!Q.info.isMobile && !Q.info.isTablet) {
+                    if (!Q.info.useTouchEvents) {
                         tool.textChatBtn.parentNode.appendChild(chatBox);
                     } else {
                         tool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
@@ -1202,7 +1202,7 @@
                         );
                     }
 
-                    if (Q.info.isMobile || Q.info.isTablet) {
+                    if (Q.info.useTouchEvents) {
 
                         Q.addEventListener(tool.textChatBtn, Q.Pointer.click, function (e) {
                             var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
@@ -2141,10 +2141,10 @@
                             }
 
                             videoinputList.appendChild(turnOnCameraItem);
-                            if (!Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(screenSharingRadioItem);
-                            if (!Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(anotherScreenSharingRadioItem);
-                            if (tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen && !Q.info.isMobile && !Q.info.isTablet) videoinputList.appendChild(turnScreenSharingOff);
-                            if ((Q.info.isMobile || Q.info.isTablet) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
+                            if (!Q.info.useTouchEvents) videoinputList.appendChild(screenSharingRadioItem);
+                            if (!Q.info.useTouchEvents) videoinputList.appendChild(anotherScreenSharingRadioItem);
+                            if (tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen && !Q.info.useTouchEvents) videoinputList.appendChild(turnScreenSharingOff);
+                            if ((Q.info.useTouchEvents) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
                             videoinputList.appendChild(turnOffradioBtnItem);
 
                             Q.addEventListener(screenSharingRadioItem, Q.Pointer.end, _startScreenSharingBtn.handler);
@@ -2197,7 +2197,7 @@
 
                         videoInputListSection.loadCamerasList();
 
-                        if (!Q.info.isMobile && !Q.info.isTablet) {
+                        if (!Q.info.useTouchEvents) {
                             Q.addEventListener(tool.cameraBtn, 'mouseenter', function (e) {
                                 tool.hideAllPopups();
                                 if (tool.hoverTimeout.settingsPopup != null) {
@@ -2703,7 +2703,7 @@
                         audioInputListSection.loadAudioInputList();
 
                         tool.hoverTimeout = { settingsPopup: null, audioSettingsPopup: null, participantsPopup: null };
-                        if (!Q.info.isMobile && !Q.info.isTablet) {
+                        if (!Q.info.useTouchEvents) {
                             Q.addEventListener(tool.microphoneBtn, 'mouseenter', function (e) {
                                 tool.hideAllPopups();
                                 if (tool.hoverTimeout.audioSettingsPopup != null) {
@@ -3568,7 +3568,7 @@
                         broadcastPopup.appendChild(broadcastPopupInner);
                         tool.broadcastBtn.parentNode.appendChild(broadcastPopup);
 
-                        if (!Q.info.isMobile && !Q.info.isTablet) {
+                        if (!Q.info.useTouchEvents) {
                             Q.addEventListener(tool.broadcastBtn, 'mouseenter', function (e) {
                                 tool.hideAllPopups();
                                 if (tool.hoverTimeout.broadcastPopup != null) {
@@ -4526,7 +4526,7 @@
                     }
                     participantsListCon.appendChild(tool.participantListEl)
 
-                    if (!Q.info.isMobile && !Q.info.isTablet) {
+                    if (!Q.info.useTouchEvents) {
                         tool.usersBtn.parentNode.appendChild(participantsListCon);
                     } else {
                         /*var container = tool.usersBtn.parentNode
@@ -4535,7 +4535,7 @@
                     //tool.participantsList = tool.participantsList;
 
 
-                    if (Q.info.isMobile || Q.info.isTablet) {
+                    if (Q.info.useTouchEvents) {
 
                         Q.addEventListener(tool.usersBtn, Q.Pointer.end, function (e) {
                             //tool.usersBtn.parentNode.classList.toggle('Streams_webrtc_hover');
