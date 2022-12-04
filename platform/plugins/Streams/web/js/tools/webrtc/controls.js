@@ -1017,7 +1017,7 @@
                 Q.Streams.Message.Total.setUpElement(textChatCounterBadgeSpan, roomStream.fields.publisherId, roomStream.fields.name, 'Streams/chat/message', tool);
 
 
-                cameraBtn.addEventListener(Q.Pointer.end, function () {
+                Q.addEventListener(cameraBtn, Q.Pointer.end, function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
                     tool.cameraButtonHandler()
@@ -1027,24 +1027,24 @@
                     tool.toggleCameras();
                 })*/
 
-                speakerBtn.addEventListener(Q.Pointer.end, function () {
+                Q.addEventListener(speakerBtn, Q.Pointer.end, function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
                     tool.toggleAudioOutputSpeaker();
                 });
-                microphoneBtn.addEventListener(Q.Pointer.end, function () {
+                Q.addEventListener(microphoneBtn, Q.Pointer.end, function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
                     //tool.toggleAudio();
                     tool.audioButtonHandler()
                 });
 
-                /*textChatBtnCon.addEventListener(Q.Pointer.end, function () {
+                /*Q.addEventListener(textChatBtnCon, Q.Pointer.end, function () {
                     tool.textChat.toggle();
                 })*/
 
                 if (disconnectBtn) {
-                    disconnectBtn.addEventListener(Q.Pointer.end, function () {
+                    Q.addEventListener(disconnectBtn, Q.Pointer.end, function () {
                         Q.Dialogs.pop();
                         tool.state.webrtcClass.stop();
                     });
@@ -1115,7 +1115,7 @@
                     }
 
 
-                    close.addEventListener('click', function () {
+                    Q.addEventListener(close, Q.Pointer.click, function () {
                         tool.textChat.hide();
                     });
 
@@ -1205,7 +1205,7 @@
 
                     if (Q.info.isMobile || Q.info.isTablet) {
 
-                        tool.textChatBtn.addEventListener('click', function (e) {
+                        Q.addEventListener(tool.textChatBtn, Q.Pointer.click, function (e) {
                             var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                             if (resizeTool && resizeTool.state.appliedRecently) return;
                             if (tool.textChat.chatTool == null) initChat();
@@ -1213,7 +1213,7 @@
                         });
 
                     } else {
-                        tool.textChatBtn.addEventListener('mouseenter', function (e) {
+                        Q.addEventListener(tool.textChatBtn, 'mouseenter', function (e) {
                             tool.hideAllPopups();
                             if (tool.textChat.chatTool == null) initChat();
                             if (tool.hoverTimeout.textChatPopup != null) {
@@ -1230,7 +1230,7 @@
 
                         });
 
-                        tool.textChatBtn.addEventListener('mouseleave', function (e) {
+                        Q.addEventListener(tool.textChatBtn, 'mouseleave', function (e) {
                             if (tool.textChat.static) {
                                 return;
                             }
@@ -1263,19 +1263,20 @@
                             tool.textChat.static = false;
                             if (tool.textChat.chatTool != null) tool.textChat.chatTool.seen(false);
                             tool.textChat.isHidden = true;
+                            window.removeEventListener('click', removeStatic);
                         }
 
                         window.addEventListener('click', removeStatic);
-                        tool.chatBox.addEventListener(Q.Pointer.end, makeStatic);
+                        Q.addEventListener(tool.chatBox, Q.Pointer.end, makeStatic);
 
-                        tool.chatBox.addEventListener('mouseenter', function (e) {
+                        Q.addEventListener(tool.chatBox, 'mouseenter', function (e) {
 
                             if (tool.hoverTimeout.textChatPopup != null) {
                                 clearTimeout(tool.hoverTimeout.textChatPopup);
                                 tool.hoverTimeout.textChatPopup = null;
                             }
                         })
-                        tool.chatBox.addEventListener('mouseleave', function (e) {
+                        .addEventListener(Q, 'mouseleave', function (e) {
                             if (tool.textChat.static) {
                                 return;
                             }
@@ -1505,7 +1506,7 @@
 
                     var dialogCon = document.createElement('DIV');
                     dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-select-camera';
-                    dialogCon.addEventListener('click', function (e) {
+                    Q.addEventListener(dialogCon, Q.Pointer.click, function (e) {
                         e.stopPropagation();
                         //if(e.currentTarget == e.target) self.closeAllDialogues();
                     });
@@ -1525,7 +1526,7 @@
                     close.className = 'Streams_webrtc_close-dialog-sign';
                     close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
 
-                    close.addEventListener('click', function () {
+                    Q.addEventListener(close, 'click', function () {
                         if (bg.parentNode != null) bg.parentNode.removeChild(bg);
                         if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
                         tool.state.dialogIsOpened = false;
@@ -1601,7 +1602,7 @@
                 var chooseAudioList = document.createElement('DIV');
                 chooseAudioList.className = 'choose-device';
 
-                close.addEventListener('click', function () {
+                Q.addEventListener(close, 'click', function () {
                     if (bg.parentNode != null) bg.parentNode.removeChild(bg);
                     if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
                     tool.state.dialogIsOpened = false;
@@ -1817,7 +1818,7 @@
                                     toggleRadioButton(cameraItem);
                                 }
 
-                                radioBtnItem.addEventListener(Q.Pointer.end, cameraItem.handler)
+                                Q.addEventListener(radioBtnItem, Q.Pointer.end, cameraItem.handler)
                                 count++;
                             });
 
@@ -2148,12 +2149,12 @@
                             if ((Q.info.isMobile || Q.info.isTablet) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
                             videoinputList.appendChild(turnOffradioBtnItem);
 
-                            screenSharingRadioItem.addEventListener(Q.Pointer.end, _startScreenSharingBtn.handler);
-                            anotherScreenSharingRadioItem.addEventListener(Q.Pointer.end, _startAnotherScreenSharingBtn.handler);
-                            mobileScreenSharingRadioItem.addEventListener(Q.Pointer.end, _startMobileScreenSharingBtn.handler);
-                            turnScreenSharingOff.addEventListener(Q.Pointer.end, _stopScreenSharingBtn.handler);
+                            Q.addEventListener(screenSharingRadioItem, Q.Pointer.end, _startScreenSharingBtn.handler);
+                            Q.addEventListener(anotherScreenSharingRadioItem, Q.Pointer.end, _startAnotherScreenSharingBtn.handler);
+                            Q.addEventListener(mobileScreenSharingRadioItem, Q.Pointer.end, _startMobileScreenSharingBtn.handler);
+                            Q.addEventListener(turnScreenSharingOff, Q.Pointer.end, _stopScreenSharingBtn.handler);
 
-                            turnOffradioBtnItem.addEventListener(Q.Pointer.end, _turnOffCameraBtn.handler)
+                            Q.addEventListener(turnOffradioBtnItem, Q.Pointer.end, _turnOffCameraBtn.handler)
 
                             _videoinputListEl = videoinputList;
                             return videoinputList;
@@ -2199,7 +2200,7 @@
                         videoInputListSection.loadCamerasList();
 
                         if (!Q.info.isMobile && !Q.info.isTablet) {
-                            tool.cameraBtn.addEventListener('mouseenter', function (e) {
+                            Q.addEventListener(tool.cameraBtn, 'mouseenter', function (e) {
                                 tool.hideAllPopups();
                                 if (tool.hoverTimeout.settingsPopup != null) {
                                     clearTimeout(tool.hoverTimeout.settingsPopup);
@@ -2208,7 +2209,7 @@
                                 show();
                             });
 
-                            tool.cameraBtn.addEventListener('mouseleave', function (e) {
+                            Q.addEventListener(tool.cameraBtn, 'mouseleave', function (e) {
                                 if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
                                     e.stopPropagation();
                                     e.preventDefault();
@@ -2218,14 +2219,14 @@
                                 }, 600)
                             });
 
-                            settingsPopup.addEventListener('mouseenter', function (e) {
+                            Q.addEventListener(settingsPopup, 'mouseenter', function (e) {
 
                                 if (tool.hoverTimeout.settingsPopup != null) {
                                     clearTimeout(tool.hoverTimeout.settingsPopup);
                                     tool.hoverTimeout.settingsPopup = null;
                                 }
                             })
-                            settingsPopup.addEventListener('mouseleave', function (e) {
+                            Q.addEventListener(settingsPopup, 'mouseleave', function (e) {
                                 tool.hoverTimeout.settingsPopup = setTimeout(function () {
                                     hide();
                                 }, 600)
@@ -2419,7 +2420,7 @@
                                     toggleRadioButton(audioOutputItem);
                                 }
 
-                                radioBtnItem.addEventListener(Q.Pointer.end, audioOutputItem.handler)
+                                Q.addEventListener(radioBtnItem, Q.Pointer.end, audioOutputItem.handler)
                                 count++;
                             });
 
@@ -2599,7 +2600,7 @@
                                     toggleRadioButton(audioInputItem);
                                 }
 
-                                radioBtnItem.addEventListener(Q.Pointer.end, audioInputItem.handler)
+                                Q.addEventListener(radioBtnItem, Q.Pointer.end, audioInputItem.handler)
                                 count++;
                             });
 
@@ -2676,7 +2677,7 @@
                             audioinputListCon.appendChild(inputListTilte);
                             audioinputListCon.appendChild(audioinputList);
 
-                            turnOffradioBtnItem.addEventListener(Q.Pointer.end, _turnOffAudioInputBtn.handler)
+                            Q.addEventListener(turnOffradioBtnItem, Q.Pointer.end, _turnOffAudioInputBtn.handler)
 
                             _audioinputListEl = audioinputList;
                             return audioinputListCon;
@@ -2705,7 +2706,7 @@
 
                         tool.hoverTimeout = { settingsPopup: null, audioSettingsPopup: null, participantsPopup: null };
                         if (!Q.info.isMobile && !Q.info.isTablet) {
-                            tool.microphoneBtn.addEventListener('mouseenter', function (e) {
+                            Q.addEventListener(tool.microphoneBtn, 'mouseenter', function (e) {
                                 tool.hideAllPopups();
                                 if (tool.hoverTimeout.audioSettingsPopup != null) {
                                     clearTimeout(tool.hoverTimeout.audioSettingsPopup);
@@ -2714,7 +2715,7 @@
                                 tool.microphoneBtn.parentNode.classList.add('Streams_webrtc_hover');
                             });
 
-                            tool.microphoneBtn.addEventListener('mouseleave', function (e) {
+                            Q.addEventListener(tool.microphoneBtn, 'mouseleave', function (e) {
                                 if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
                                     e.stopPropagation();
                                     e.preventDefault();
@@ -2724,14 +2725,14 @@
                                 }, 600)
                             });
 
-                            settingsPopup.addEventListener('mouseenter', function (e) {
+                            Q.addEventListener(settingsPopup, 'mouseenter', function (e) {
 
                                 if (tool.hoverTimeout.audioSettingsPopup != null) {
                                     clearTimeout(tool.hoverTimeout.audioSettingsPopup);
                                     tool.hoverTimeout.audioSettingsPopup = null;
                                 }
                             })
-                            settingsPopup.addEventListener('mouseleave', function (e) {
+                            Q.settingsPopup.addEventListener(settingsPopup, 'mouseleave', function (e) {
                                 setTimeout(function () {
                                     tool.microphoneBtn.parentNode.classList.remove('Streams_webrtc_hover');
                                 }, 600)
@@ -3011,8 +3012,8 @@
                                 }
                             }
 
-                            facebookLiveItem.addEventListener(Q.Pointer.end, loadGroupsList)
-                            startStreamingBtn.addEventListener(Q.Pointer.click, function () {
+                            Q.addEventListener(facebookLiveItem, Q.Pointer.end, loadGroupsList)
+                            Q.addEventListener(startStreamingBtn, Q.Pointer.click, function () {
                                 if (!fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.add('Q_working');
 
                                 var data = {};
@@ -3029,7 +3030,7 @@
                                     if (tool.settingsPopup != null) tool.settingsPopup.hide();
                                 });
                             })
-                            stopStreamingBtn.addEventListener('click', function () {
+                            Q.addEventListener(stopStreamingBtn, Q.Pointer.click, function () {
                                 if (!fbStreamingLiveSection.classList.contains('Q_working')) fbStreamingLiveSection.classList.add('Q_working');
 
                                 tool.fbLiveInterface.endLive(function (liveInfo) {
@@ -3037,7 +3038,8 @@
                                     var urlInputCon = facebookLiveEmbed.cloneNode(true);
                                     var urlInput = urlInputCon.querySelector('input');
                                     urlInput.value = facebookLiveUrl.value;
-                                    urlInputCon.querySelector('.Streams_webrtc_streaming_copy_url_btn').addEventListener('click', function () {
+                                    var input = urlInputCon.querySelector('.Streams_webrtc_streaming_copy_url_btn')
+                                    Q.addEventListener(input, Q.Pointer.click, function () {
                                         var link = urlInput.value;
                                         if (link.trim() != '') {
                                             copyToClipboard(urlInput);
@@ -3049,7 +3051,7 @@
                                     embedPopupBtn.className = 'Streams_webrtc_streaming_copy_embed_btn';
                                     var embedPopupBtnText = document.createElement('SPAN');
                                     embedPopupBtnText.innerHTML = Q.getObject("webrtc.settingsPopup.fbEmbedCode", tool.textes);
-                                    embedPopupBtn.addEventListener('click', function () {
+                                    Q.addEventListener(embedPopupBtn, Q.Pointer.click, function () {
                                         tool.fbLiveInterface.getIframe(liveInfo['embed_html']);
                                     })
                                     embedPopupBtn.appendChild(embedPopupBtnText);
@@ -3065,11 +3067,11 @@
                                 });
                             })
 
-                            getIframeBtn.addEventListener('click', function () {
+                            Q.addEventListener(getIframeBtn, Q.Pointer.click, function () {
                                 tool.fbLiveInterface.getIframe();
                             })
 
-                            facebookLiveCopy.addEventListener('click', function () {
+                            Q.addEventListener(facebookLiveCopy, Q.Pointer.click, function () {
                                 var link = facebookLiveUrl.value;
                                 if (link.trim() != '') {
                                     copyToClipboard(facebookLiveUrl);
@@ -3176,7 +3178,7 @@
                             rtmpStreaming.appendChild(rtmpLiveSection);
 
 
-                            addUrlBtn.addEventListener('click', function (e) {
+                            Q.addEventListener(addUrlBtn, Q.Pointer.click, function (e) {
                                 var rtmpLiveItem = document.createElement('DIV');
                                 rtmpLiveItem.className = 'Streams_webrtc_streaming_rtmp_item';
 
@@ -3201,7 +3203,7 @@
                                 rtmpStreamingSettings.insertBefore(rtmpLiveItem, rtmpStreamingSettings.lastChild);
                             })
 
-                            rtmpStreamingItem.addEventListener('click', function (e) {
+                            Q.addEventListener(rtmpStreamingItem, Q.Pointer.click, function (e) {
                                 if (rtmpStreamingSettings.classList.contains('shown')) {
                                     rtmpStreamingSettings.classList.remove('shown');
                                 } else {
@@ -3210,7 +3212,7 @@
                                 }
                             })
 
-                            startStreamingBtn.addEventListener('click', function (e) {
+                            Q.addEventListener(startStreamingBtn, Q.Pointer.click, function (e) {
                                 if (typeof MediaRecorder == 'undefined') {
                                     alert('MediaRecorder is not supported in your browser.')
                                     return;
@@ -3250,7 +3252,7 @@
                                 rtmpStreamingTextLabel.innerHTML = 'Streaming to custom RTMP';
                             }
 
-                            stopStreamingBtn.addEventListener('click', function () {
+                            Q.addEventListener(stopStreamingBtn, Q.Pointer.click, function () {
                                 tool.WebRTCLib.mediaManager.fbLive.endStreaming('custom');
                             })
 
@@ -3326,7 +3328,7 @@
                             recordingCon.appendChild(recordingSettings);
                             recordingCon.appendChild(activeRecordingSection);
 
-                            recordingItem.addEventListener('click', function (e) {
+                            Q.addEventListener(recordingItem, Q.Pointer.click, function (e) {
                                 if (recordingSettings.classList.contains('shown')) {
                                     recordingSettings.classList.remove('shown');
                                 } else {
@@ -3334,7 +3336,7 @@
                                 }
                             })
 
-                            startRecordingBtn.addEventListener('click', function () {
+                            Q.addEventListener(startRecordingBtn, Q.Pointer.click, function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
                                 tool.WebRTCLib.mediaManager.localRecorder.startRecording(function (liveInfo) {
@@ -3344,7 +3346,7 @@
                                     activeRecordingSection.style.display = 'block';
                                 });
                             })
-                            stopRecordingBtn.addEventListener('click', function () {
+                            Q.addEventListener(stopRecordingBtn, Q.Pointer.click, function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
                                 tool.WebRTCLib.mediaManager.localRecorder.stopRecording(function () {
@@ -3419,7 +3421,7 @@
                             linkCon.appendChild(linkInputCon);
                             linkCon.appendChild(linkCopyBtn);
 
-                            linkCopyBtn.addEventListener('click', function () {
+                            Q.addEventListener(linkCopyBtn, Q.Pointer.click, function () {
                                 copyToClipboard(linkInput);
                                 tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.linkCopiedToCb", tool.textes));
                             })
@@ -3432,7 +3434,7 @@
                             recordingCon.appendChild(recordingSettings);
                             recordingCon.appendChild(activeRecordingSection);
 
-                            recordingItem.addEventListener('click', function (e) {
+                            Q.addEventListener(recordingItem, Q.Pointer.click, function (e) {
                                 if (recordingSettings.classList.contains('shown')) {
                                     recordingSettings.classList.remove('shown');
                                 } else {
@@ -3441,7 +3443,7 @@
                             })
 
                             var broadcastClient;
-                            startRecordingBtn.addEventListener('click', function () {
+                            Q.addEventListener(startRecordingBtn, Q.Pointer.click, function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
                                 Q.addScript('{{Streams}}/js/tools/webrtc/broadcast.js', function () {
@@ -3498,7 +3500,7 @@
                                 });
 
                             })
-                            stopRecordingBtn.addEventListener('click', function () {
+                            Q.addEventListener(stopRecordingBtn, Q.Pointer.click, function () {
                                 if (!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
                                 broadcastClient.disconnect();
@@ -3525,7 +3527,7 @@
                             manageStreamBtn.type = 'button';
                             manageStreamBtn.className = 'Q_button Streams_webrtc_streaming_settings-btn';
                             manageStreamBtn.innerHTML = Q.getObject("webrtc.settingsPopup.manageStream", tool.textes);
-                            manageStreamBtn.addEventListener('click', function () {
+                            Q.addEventListener(manageStreamBtn, Q.Pointer.click, function () {
                                 tool.advancedLiveStreaming.show();
                                 if (tool.settingsPopup != null) tool.settingsPopup.hide();
                             })
@@ -3569,7 +3571,7 @@
                         tool.broadcastBtn.parentNode.appendChild(broadcastPopup);
 
                         if (!Q.info.isMobile && !Q.info.isTablet) {
-                            tool.broadcastBtn.addEventListener('mouseenter', function (e) {
+                            Q.addEventListener(tool.broadcastBtn, 'mouseenter', function (e) {
                                 tool.hideAllPopups();
                                 if (tool.hoverTimeout.broadcastPopup != null) {
                                     clearTimeout(tool.hoverTimeout.broadcastPopup);
@@ -3578,7 +3580,7 @@
                                 show();
                             });
 
-                            tool.broadcastBtn.addEventListener('mouseleave', function (e) {
+                            Q.addEventListener(tool.broadcastBtn, 'mouseleave', function (e) {
                                 if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
                                     e.stopPropagation();
                                     e.preventDefault();
@@ -3588,14 +3590,14 @@
                                 }, 600)
                             });
 
-                            broadcastPopup.addEventListener('mouseenter', function (e) {
+                            Q.addEventListener(broadcastPopup, 'mouseenter', function (e) {
 
                                 if (tool.hoverTimeout.broadcastPopup != null) {
                                     clearTimeout(tool.hoverTimeout.broadcastPopup);
                                     tool.hoverTimeout.broadcastPopup = null;
                                 }
                             })
-                            broadcastPopup.addEventListener('mouseleave', function (e) {
+                            Q.addEventListener(broadcastPopup, 'mouseleave', function (e) {
                                 tool.hoverTimeout.broadcastPopup = setTimeout(function () {
                                     hide();
                                 }, 600)
@@ -4193,13 +4195,13 @@
                     listItem.mediaRequestStatusEl = requestStatus;
                     tool.participantsList.push(listItem);
 
-                    muteAudioBtn.addEventListener('click', function (e) {
+                    Q.addEventListener(muteAudioBtn, Q.Pointer.click, function (e) {
                         listItem.toggleAudio(true);
                     });
-                    muteCameraBtn.addEventListener('click', function (e) {
+                    Q.addEventListener(muteCameraBtn, Q.Pointer.click, function (e) {
                         listItem.toggleScreen(true);
                     });
-                    muteScreenSharingBtn.addEventListener('click', function (e) {
+                    Q.addEventListener(muteScreenSharingBtn, Q.Pointer.click, function (e) {
                         listItem.toggleScreenSharingScreen();
                     });
 
@@ -4503,7 +4505,7 @@
                         }
 
                         for (var b in buttonsArr) {
-                            buttonsArr[b].btn.addEventListener('mouseup', function (e) {
+                            Q.addEventListener(buttonsArr[b].btn, Q.Pointer.end, function (e) {
                                 toggleViewMode(e, buttonsArr);
                             });
                         }
@@ -4534,7 +4536,7 @@
 
                     if (Q.info.isMobile || Q.info.isTablet) {
 
-                        tool.usersBtn.addEventListener(Q.Pointer.end, function (e) {
+                        Q.addEventListener(tool.usersBtn, Q.Pointer.end, function (e) {
                             //tool.usersBtn.parentNode.classList.toggle('Streams_webrtc_hover');
                             var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                             if (resizeTool && resizeTool.state.appliedRecently) return;
@@ -4562,7 +4564,7 @@
                         }, true);
 
                     } else {
-                        tool.usersBtn.addEventListener('mouseenter', function (e) {
+                        Q.addEventListener(tool.usersBtn, 'mouseenter', function (e) {
                             tool.hideAllPopups();
                             if (tool.hoverTimeout.participantsPopup != null) {
                                 clearTimeout(tool.hoverTimeout.participantsPopup);
@@ -4576,20 +4578,20 @@
 
                             tool.usersBtn.parentNode.classList.add('Streams_webrtc_hover');
                         });
-                        tool.usersBtn.parentNode.addEventListener('mouseleave', function (e) {
+                        Q.addEventListener(tool.usersBtn.parentNode, 'mouseleave', function (e) {
                             tool.hoverTimeout.participantsPopup = setTimeout(function () {
                                 tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
                             }, 400)
                         });
 
-                        participantsListCon.addEventListener('mouseenter', function (e) {
+                        Q.addEventListener(participantsListCon, 'mouseenter', function (e) {
 
                             if (tool.hoverTimeout.participantsPopup != null) {
                                 clearTimeout(tool.hoverTimeout.participantsPopup);
                                 tool.hoverTimeout.participantsPopup = null;
                             }
                         })
-                        participantsListCon.addEventListener('mouseleave', function (e) {
+                        Q.addEventListener(participantsListCon, 'mouseleave', function (e) {
                             setTimeout(function () {
                                 tool.usersBtn.parentNode.classList.remove('Streams_webrtc_hover');
                             }, 400)
@@ -5044,12 +5046,12 @@
                             audioOnlyBtn.className = 'Q_button Streams_webrtc_request_speak_ao';
                             audioOnlyBtn.innerHTML = 'Audio Only with Avatar';
 
-                            audioAndVideoBtn.addEventListener('click', function () {
+                            Q.addEventListener(audioAndVideoBtn, Q.Pointer.click, function () {
                                 callback({ video: true, audio: true });
                                 Q.Dialogs.pop();
                             })
 
-                            audioOnlyBtn.addEventListener('click', function () {
+                            Q.addEventListener(audioOnlyBtn, Q.Pointer.click, function () {
                                 if (callback) callback({ video: false, audio: true });
                                 Q.Dialogs.pop();
                             })
@@ -5336,7 +5338,7 @@
 
                         var dialogCon = document.createElement('DIV');
                         dialogCon.className = 'Streams_webrtc_dialog-con';
-                        dialogCon.addEventListener('click', function (e) {
+                        Q.addEventListener(dialogCon, Q.Pointer.click, function (e) {
                             e.stopPropagation();
                             //if(e.currentTarget == e.target) self.closeAllDialogues();
                         });
@@ -5391,16 +5393,16 @@
                         tool.state.dialogIsOpened = true;
 
 
-                        iframeCode.addEventListener('click', function () {
+                        Q.addEventListener(iframeCode, Q.Pointer.click, function () {
                             this.setSelectionRange(0, this.value.length);
                         })
 
-                        copyBtn.addEventListener('click', function () {
+                        Q.addEventListener(copyBtn, Q.Pointer.click, function () {
                             copyToClipboard(iframeCode);
                             tool.WebRTCClass.notice.show(Q.getObject("webrtc.notices.codeCopiedToCb", tool.textes));
                         });
 
-                        close.addEventListener('click', function () {
+                        Q.addEventListener(close, Q.Pointer.click, function () {
                             if (bg.parentNode != null) bg.parentNode.removeChild(bg);
                             if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
                             tool.state.dialogIsOpened = false;
@@ -5426,7 +5428,7 @@
                 endStreamingBtn.type = 'button';
                 endStreamingBtn.className = 'Q_button';
                 endStreamingBtn.innerHTML = "Stop streaming";
-                endStreamingBtn.addEventListener('click', function () {
+                Q.addEventListener(Q.Pointer.click, function () {
                     tool.WebRTCLib.mediaManager.fbLive.endStreaming('facebook');
                 })
                 fbLiveDialog.appendChild(endStreamingBtn);
