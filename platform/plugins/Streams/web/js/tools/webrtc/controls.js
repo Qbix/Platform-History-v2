@@ -5058,7 +5058,7 @@
                             })
 
                             Q.Dialogs.push({
-                                title: 'Request to Speak',
+                                title: Q.text.Streams.webrtc.requestSpeakDialog.dialogTitle,
                                 className: 'Streams_webrtc_request_speak',
                                 content: dialogCon,
                                 apply: false,
@@ -5434,7 +5434,7 @@
                 })
                 fbLiveDialog.appendChild(endStreamingBtn);
                 Q.Dialogs.push({
-                    title: 'Faceook live streaming started',
+                    title: Q.text.Streams.webrtc.fbLive.dialogTitle,
                     className: 'Streams_webrtc_fblive_dialog',
                     content: fbLiveDialog,
                     apply: true

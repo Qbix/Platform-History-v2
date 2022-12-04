@@ -214,6 +214,9 @@
             "point3": "Find {{kind}} and open it",
             "point4": "Find \"{{communityName}}\" and enable"
         },
+        "fbLive": {
+            "dialogTitle": "Facebook live streaming started"
+        },
         "notices": {
             "youJoinedRoom": "You joined the room",
             "joining": "Joining: {{userName}}",
@@ -306,6 +309,7 @@
             "MeetingEnded": "Teleconference ended"
         },
         "requestSpeakDialog": {
+            "dialogTitle": "Request to Speak",
             "msg": "There are currently {{count}} people speaking in the meeting. Do you want to replace one of them after allowing them {{seconds}} seconds to finish speaking?"
         }
     },
