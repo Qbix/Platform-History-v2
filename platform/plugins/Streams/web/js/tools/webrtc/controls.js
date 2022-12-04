@@ -3542,7 +3542,7 @@
                             manageStreamBtn.innerHTML = Q.getObject("webrtc.settingsPopup.manageStream", tool.text);
                             Q.addEventListener(manageStreamBtn, Q.Pointer.click, function () {
                                 tool.advancedLiveStreaming.show();
-                                if (tool.settingsPopup != null) tool.settingsPopup.hide();
+                                if (tool.settingsPopup != null) tool.broadcastPopup.hide();
                             })
                             manageStreamBtnCon.appendChild(manageStreamBtn);
                             _streamingAndRecordingEl.appendChild(createStreamingLink());
