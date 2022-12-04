@@ -2387,9 +2387,9 @@
 	 * @param {Function} callback
 	 */
 	Users.getLabels = function (userId, filter, callback) {
-		if (typeof prefix === 'function') {
-			callback = prefix;
-			prefix = undefined;
+		if (typeof filter === 'function') {
+			callback = filter;
+			filter = undefined;
 		}
 		Q.req('Users/label', 'labels', function (err, data) {
 			var msg = Q.firstErrorMessage(err, data);
@@ -3679,7 +3679,7 @@
 	};
 	Users.Dialogs.contacts.options = {
 		templateName: "Users/templates/contacts/dialog",
-		prefix: "Users"
+		filter: "Users/"
 	};
 
 	Users.Dialogs.select.options = {
