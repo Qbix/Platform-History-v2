@@ -15,6 +15,7 @@ var dataKey_opening = 'opening';
  * @class Q columns
  * @constructor
  * @param {Object}   [options] Override various options for this tool
+ *  @param {String}  [options.flat] Whether to render the columns as flat, instead of with 3D effects on mobile
  *  @param {String}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
  *  @param {String}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
  *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
@@ -39,7 +40,7 @@ var dataKey_opening = 'opening';
  *  @param {Object}  [options.classes] Pairs of columnName: cssClass which is added to the column when it's opened
  *  @param {Object}  [options.handlers] Pairs of columnName: handler where the handler can be a function or a string, in which you assign a function to Q.exports .
  *  @param {Boolean} [options.fullscreen] Whether to use fullscreen mode on mobile phones, using document to scroll instead of relying on possibly buggy "overflow" CSS implementation. Defaults to true on Android stock browser, false everywhere else.
- *  @param {Boolean} [options.hideBackgroundColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
+ *  @param {Boolean} [options.hideOverlappedColumns=true] Whether to hide background columns on mobile (perhaps improving browser rendering).
  *  @param {Boolean} [options.stretchFirstColumn=true] If true, stretch first column to whole page width if no other columns appear.
  *  @param {Boolean|String} [options.pagePushUrl] if this is true and the url of the column
  *    is specified, then Q.Page.push() is called with this URL. You can also pass a string here,
@@ -57,6 +58,10 @@ Q.Tool.define("Q/columns", function(options) {
 	var state = tool.state;
 	var $toolElement = $(tool.element);
 	options = options || {};
+
+	if (Q.info.isMobile && !state.flat) {
+		$toolElement.addClass('Q_columns_make3D');
+	}
 
 	//state.triggers = [];
 	prepareColumns(tool);
@@ -130,6 +135,7 @@ Q.Tool.define("Q/columns", function(options) {
 },
 
 {
+	flat: false,
 	animation: { 
 		duration: 300, // milliseconds
 		css: {
@@ -169,7 +175,7 @@ Q.Tool.define("Q/columns", function(options) {
 	},
 	textfill: null,
 	fullscreen: Q.info.useFullscreen,
-	hideBackgroundColumns: true,
+	hideOverlappedColumns: true,
 	beforeOpen: new Q.Event(function (options, index) {
 		setTimeout(_updateAttributes.bind(this), 0);
 	}, 'Q/columns'),
@@ -320,12 +326,6 @@ Q.Tool.define("Q/columns", function(options) {
 			controlsSlot = $('.Q_controls_slot', div)[0];
 			$div.attr('data-title', $(titleSlot).text() || document.title);
 		}
-		if (o.className) {
-			$(div).addClass(o.className);
-		}
-		if (o.name && state.classes && state.classes[o.name]) {
-			$(div).addClass(state.classes[o.name]);
-		}
 		if (state.closeFromSwipeDown && index > 0) {
 			Q.addEventListener($title[0], 'touchstart', function (e1) {
 				var x1 = Q.Pointer.getX(e1);
@@ -348,7 +348,11 @@ Q.Tool.define("Q/columns", function(options) {
 					$div.css('opacity', 1-z);
 					if (Q.info.isMobile && index > 0) {
 						var $prevColumn = $(state.columns[index-1]);
-						(z > 0) ? $prevColumn.show() : $prevColumn.hide();
+						if (z > 0) {
+							$prevColumn.addClass('Q_columns_overlapped');
+						} else {
+							$prevColumn.removeClass('Q_columns_overlapped');
+						}
 					}
 					if (y2 - y1 > threshold
 					&& Math.abs((y2-y1)/(x2-x1)) > 2) { //generally down direction
@@ -372,7 +376,9 @@ Q.Tool.define("Q/columns", function(options) {
 							$(state.columns[index-1]).hide;
 						}
 					}
-					Q.Masks.hide('Q.click.mask');
+					setTimeout(function () {
+						Q.Masks.hide('Q.click.mask');
+					}, state.animation.duration);
 					Q.removeEventListener(document.body, 'touchmove', _onTouchmove);
 					Q.removeEventListener(document.body, 'touchend', _onTouchend);
 					Q.removeEventListener(document.body, 'touchmove', _cancelScroll);
@@ -398,6 +404,9 @@ Q.Tool.define("Q/columns", function(options) {
 		}
 		if (o.className) {
 			$(div).addClass(o.className);
+		}
+		if (o.name && state.classes && state.classes[o.name]) {
+			$(div).addClass(state.classes[o.name]);
 		}
 		var dataMore = div.getAttribute('data-more');
 		tool.state.data[index] = Q.extend(
@@ -688,8 +697,7 @@ Q.Tool.define("Q/columns", function(options) {
 				}
 				$mask = $('<div class="Q_columns_mask" />')
 				.appendTo($div);
-				$div.css('display', 'inline-block')
-				.css('visibility', 'visible')
+				$div.css('visibility', 'visible')
 				.addClass('Q_columns_opening')
 				.css(o.animation.css.hide)
 				.stop()
@@ -703,13 +711,19 @@ Q.Tool.define("Q/columns", function(options) {
 					}, 0);
 				});
 				$div.addClass('Q_columns_loading');
+
+				if (!_suddenlyClosing && o.hideOverlappedColumns) {
+					$div.prev().addClass('Q_columns_overlapped');
+				}
+				$div.addClass('Q_columns_latest');
+				$div.prev().removeClass('Q_columns_latest');
 			}
 
 			function afterAnimation($cs, $sc, $ct){
 				
 				if (Q.info.isMobile) {
-					if (!_suddenlyClosing && o.hideBackgroundColumns) {
-						$div.prev().hide();
+					if (!_suddenlyClosing && o.hideOverlappedColumns) {
+						$div.prev().addClass('Q_columns_overlapped');
 					}
 					$div.css('width', '100%');
 				} else {
@@ -804,8 +818,9 @@ Q.Tool.define("Q/columns", function(options) {
 			return false;
 		}
 		
-		if (Q.info.isMobile && o.hideBackgroundColumns) {
-			$prev.css('display', 'inline-block');
+		if (Q.info.isMobile && o.hideOverlappedColumns) {
+			$prev.removeClass('Q_columns_overlapped');
+			$prev.addClass('Q_columns_latest');
 		}
 		if (state.fullscreen) {
 			$(window).scrollTop($prev.data(dataKey_scrollTop) || 0);
@@ -867,7 +882,9 @@ Q.Tool.define("Q/columns", function(options) {
 				Q.Page.push(url, title);
 			}
 			Q.layout(tool.element);
-			Q.Masks.hide('Q.click.mask');
+			setTimeout(function () {
+				Q.Masks.hide('Q.click.mask');
+			}, state.animation.duration);
 		}
 	},
 
