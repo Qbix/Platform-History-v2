@@ -3198,9 +3198,12 @@ Q.onLayout = function (element) {
 		}
 	}
 	var event = new Q.Event();
+	var debouncedEvent = event.debounce(
+		Q.onLayout.debounce, false, 'Q.onLayout'
+	);
 
 	var l = _layoutElements.push(element);
-	_layoutEvents[l-1] = event;
+	_layoutEvents[l-1] = debouncedEvent;
 
 	// create ResizeObserver
 	var observer = null;
@@ -3224,7 +3227,7 @@ Q.onLayout = function (element) {
 			}
 		}
 	}, Q.onLayout.debounce || 0), 'Q');
-	return event.debounce(Q.onLayout.debounce, false, 'Q.onLayout');
+	return debouncedEvent;
 }
 Q.onLayout.debounce = 500;
 Q.onLayout().set(function () {
