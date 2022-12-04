@@ -792,7 +792,7 @@
 									<li>Find "` + Q.Users.communityId + `" and enable</li>`;
                 instructionsPermissionDialog.appendChild(dialogList);
                 Q.Dialogs.push({
-                    title: 'Instructions',
+                    title: Q.text.Streams.webrtc.webInstructionsDialog.dialogTitle,
                     className: 'Streams_webrtc_devices_dialog',
                     content: instructionsPermissionDialog,
                     apply: true
@@ -811,7 +811,7 @@
 									<li>Enable ` + kind + `</li>`;
                 instructionsPermissionDialog.appendChild(dialogList);
                 Q.Dialogs.push({
-                    title: 'Instructions',
+                    title: Q.text.Streams.webrtc.webInstructionsDialog.dialogTitle,
                     className: 'Streams_webrtc_devices_dialog',
                     content: instructionsPermissionDialog,
                     apply: true
