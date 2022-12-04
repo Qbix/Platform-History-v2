@@ -3243,7 +3243,7 @@ Q.onLayout = function (element) {
 	}, Q.onLayout.debounce || 0), 'Q');
 	return debouncedEvent;
 }
-Q.onLayout.debounce = 500;
+Q.onLayout.debounce = 100;
 Q.onLayout().set(function () {
 	_detectOrientation.apply(this, arguments);
 	Q.Masks.update();

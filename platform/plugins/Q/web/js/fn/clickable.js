@@ -433,14 +433,17 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 				setTimeout(_update, timing.renderingInterval);
 			}, timing.renderingInterval);
 		}
-		setTimeout(function () {
-			// Delay this, or it will trigger onLayout recursively
-			Q.onLayout($this.parent().parent().parent()[0]).set(function () {
-				var state = $this.state('Q/clickable');
-				$this.plugin('Q/clickable', 'remove')
-					.plugin('Q/clickable', state);	
-			}, "Q_clickable_" + $this.attr("id"));
-		}, Q.onLayout.debounce+1);
+		// Q.onLayout($this.parent().parent().parent()[0])
+		// debounce(500).set(function () {
+		// 	var state = $this.state('Q/clickable');
+		// 	$this.plugin('Q/clickable', 'remove');	
+		// }, "Q_clickable_" + $this.attr("id"));
+		// Q.onLayout($this.parent().parent().parent()[0])
+		// debounce(500).set(function () {
+		// 	var state = $this.state('Q/clickable');
+		// 	$this.plugin('Q/clickable', 'remove')
+		// 		.plugin('Q/clickable', state);	
+		// }, "Q_clickable_" + $this.attr("id"));
 	}, timing.renderingDelay);
 	return this;
 },
