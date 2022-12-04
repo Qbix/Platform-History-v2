@@ -3204,7 +3204,7 @@ Q.onLayout = function (element) {
 	var observer = null;
 	if (typeof ResizeObserver === 'function') {
 		observer = new ResizeObserver(function () {
-			event.handle.call(event.debounce(500), element, element);
+			event.handle.call(event, element, element);
 		});
 		observer.observe(element);
 	}
@@ -3222,7 +3222,7 @@ Q.onLayout = function (element) {
 			}
 		}
 	}, Q.onLayout.debounce || 0), 'Q');
-	return event;
+	return event.debounce(Q.onLayout.debounce);
 }
 Q.onLayout.debounce = 500;
 Q.onLayout().set(function () {
