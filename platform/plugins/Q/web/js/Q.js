@@ -1737,12 +1737,12 @@ Q.copy = function _Q_copy(x, fields, levels) {
  * @param target {Object}
  *  This is the first object. It winds up being modified, and also returned
  *  as the return value of the function.
- * @param levels {number}
- *  Optional. Precede any Object with an integer to indicate that we should 
- *  also copy that many additional levels inside the object.
- * @param deep {Boolean|Number}
+  * @param deep {Boolean}
  *  Optional. Precede any Object with a boolean true to indicate that we should
  *  also copy the properties it inherits through its prototype chain.
+ * @param levels {Number}
+ *  Optional. Precede any Object with an integer to indicate that we should 
+ *  also copy that many additional levels inside the object.
  * @param anotherObject {Object}
  *  Put as many objects here as you want, and they will extend the original one.
  * @param namespace {String}
@@ -5343,19 +5343,8 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			waitFor.push('html');
 			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
 		}
-		var text = toolConstructor.text;
 		var n = Q.normalize(toolName);
-		var d = Q.Text.forTools.defined;
-		for (var namePrefix in d) {
-			if (n.startsWith(namePrefix)) {
-				text = text || [];
-				Q.each(d[namePrefix], function (i, t) {
-					if (text.indexOf(t) < 0) {
-						text.push(t);
-					}
-				});
-			}
-		}
+		var text = Q.Text.addedFor('Q.Tool.define', n, toolConstructor);
 		if (text) {
 			waitFor.push('text');
 			Q.Text.get(text, pipe.fill('text'));
@@ -10410,10 +10399,8 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	if (content !== undefined) {
 		T.collection[n] = content;
 	}
-	if (typeof info === 'string') {
-		info = { type: info };
-	}
-	info = info || {};
+	info = (typeof info === 'string') ? { type: info } : (info || {});
+	Q.Text.addedFor('Q.Template.set', n, info);
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
 	Q.loadHandlebars();
@@ -10805,24 +10792,59 @@ Q.Text = {
 	},
 
 	/**
-	 * Define text files in bulk for multiple tools
-	 * @param {} namePrefix The prefix for the names of tools to load the text files for
+	 * Define text files in bulk for certain methods and name prefixes
+	 * @param {String|Array} methods Can be "Q.Tool.define" or "Q.Template.set", or array of them
+	 * @param {String} namePrefix The prefix for the names of tools to load the text files for
 	 * @param {String|Array} textFileNames any additional files to have for Q.Tool.define
 	 */
-	forTools: function (namePrefix, textFileNames) {
+	addFor: function (methods, namePrefix, textFileNames) {
+		if (!Q.isArrayLike(methods)) {
+			methods = [methods]
+		}
 		if (!Q.isArrayLike(textFileNames)) {
 			textFileNames = [textFileNames];
 		}
-		var n = Q.normalize(namePrefix);
-		var obj = {};
-		obj[n] = textFileNames;
-		Q.extend(Q.Text.forTools.defined, obj);
+		Q.each(methods, function (i, m) {
+			Q.Text.addFor.defined = Q.Text.addFor.defined || {};
+			var n = Q.normalize(namePrefix);
+			var obj = {};
+			obj[m] = obj[m] || {};
+			obj[m][n] = textFileNames;
+			Q.extend(Q.Text.addFor.defined, 3, obj);
+		});
+	},
+
+	/**
+	 * Get the array of text files added for this normalized name
+	 * @param {String|Array} methods Can be "Q.Tool.define" or "Q.Template.set", or array of them
+	 * @param {String} normalizedName The prefix for the names of tools to load the text files for
+	 * @param {Object} objectToExtend This object's "text" property is extended
+	 * @return {Array} the array of text files, if any
+	 */
+	addedFor: function (method, normalizedName, objectToExtend) {
+		var d = Q.Text.addFor.defined[method];
+		if (!d) {
+			return [];
+		}
+		for (var namePrefix in d) {
+			if (!normalizedName.startsWith(namePrefix)) {
+				continue;
+			}
+			var text = objectToExtend.text = objectToExtend.text || [];
+			Q.each(d[namePrefix], function (i, t) {
+				if (text.indexOf(t) < 0) {
+					text.push(t);
+				}
+			});
+			break;
+		}
+		return text;
 	},
 	
 	override: {}
 };
 
-Q.Text.forTools.defined = {};
+Q.Text.addFor.defined = {};
 
 /**
  * Array of text files to load before calling Q.onInit

@@ -576,7 +576,10 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 	}
 };
 
-Q.Text.forTools('Streams/', ["Streams/content"]);
+Q.Text.addFor(
+	['Q.Tool.define', 'Q.Template.set'],
+	'Streams/', ["Streams/content"]
+);
 Q.Tool.define({
 	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
 	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
