@@ -3224,7 +3224,7 @@ Q.onLayout = function (element) {
 			}
 		}
 	}, Q.onLayout.debounce || 0), 'Q');
-	return event.debounce(Q.onLayout.debounce);
+	return event.debounce(Q.onLayout.debounce, false, 'Q.onLayout');
 }
 Q.onLayout.debounce = 500;
 Q.onLayout().set(function () {
