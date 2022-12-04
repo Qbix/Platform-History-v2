@@ -15,7 +15,6 @@ var dataKey_opening = 'opening';
  * @class Q columns
  * @constructor
  * @param {Object}   [options] Override various options for this tool
- *  @param {String}  [options.flat] Whether to render the columns as flat, instead of with 3D effects on mobile
  *  @param {String}  [options.title] You can put a default title for all columns here (which is shown as they are loading)
  *  @param {String}  [options.column] You can put a default content for all columns here (which is shown as they are loading)
  *  @param {String}  [options.controls] You can put default controls HTML for all columns here (which is shown as they are loading)
@@ -58,10 +57,6 @@ Q.Tool.define("Q/columns", function(options) {
 	var state = tool.state;
 	var $toolElement = $(tool.element);
 	options = options || {};
-
-	if (Q.info.isMobile && !state.flat) {
-		$toolElement.addClass('Q_columns_make3D');
-	}
 
 	//state.triggers = [];
 	prepareColumns(tool);

@@ -1023,3 +1023,12 @@ html.Q_layout_sidebar {
 .Q_dialog_imagepicker .Q_viewport {
 	display: block;
 }
+.Q_dialogs_animationFX .Q_overlay {
+	transform: scale(0);
+	opacity: 0;
+	transition: transform 300ms, opacity 300ms;
+}
+.Q_dialogs_animationFX .Q_overlay_open {
+	opacity: 1;
+	transform: scale(1);
+}

@@ -235,42 +235,42 @@ html.Q_ios.Q_standalone .Q_columns_title {
 	position: relative;
 }
 
-.Q_mobile  .Q_columns_tool.Q_columns_make3D .Q_column_0.Q_columns_latest {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_0.Q_columns_latest {
 	border-radius: 0;
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_columns_column {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column {
 	transition: transform 300ms, border-radius 300ms, opacity 300ms;
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
 	box-shadow: rgb(0 0 0 / 50%) 0px -20px 500px;
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_columns_latest {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_latest {
 	box-shadow: rgb(0 0 0 / 90%) 0px -20px 500px;
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_column_1 {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_1 {
 	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(10px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_column_2 {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_2 {
 	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(25px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_column_3 {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_3 {
 	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(25px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_columns_column.Q_columns_overlapped {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_columns_overlapped {
 	display: inline-block;
 	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(-15px) translateZ(-15px) skewX(0deg) skewY(0deg);
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_columns_column.Q_column_1.Q_columns_overlapped {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_1.Q_columns_overlapped {
 	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(5px) translateZ(-7px) skewX(0deg) skewY(0deg);
 }
 
-.Q_mobile .Q_columns_tool.Q_columns_make3D .Q_columns_column.Q_column_2.Q_columns_overlapped {
+.Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_2.Q_columns_overlapped {
 	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(25px) translateZ(-5px) skewX(0deg) skewY(0deg);
 }
