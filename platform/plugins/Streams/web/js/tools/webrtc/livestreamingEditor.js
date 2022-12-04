@@ -99,14 +99,14 @@
                 var tool = this;
                 var controlsTool = this.state.controlsTool;
                 var roomStream = controlsTool.WebRTCClass.roomStream();
-                var desktopDialogueEl = null;
-                var mobileHorizontaldialogueEl = null;
-                var mobileVerticaldialogueEl = null;
-                var activeDialogue = null;
+                var desktopDialogEl = null;
+                var mobileHorizontaldialogEl = null;
+                var mobileVerticaldialogEl = null;
+                var activeDialog = null;
                 var isHidden = true;
                 var dialogWidth = 996;
 
-                var _dialogueEl = null;
+                var _dialogEl = null;
                 var _previewEl = null;
                 var _resizingElement = null;
                 var _resizingElementTool = null;
@@ -346,13 +346,13 @@
                     }
 
                     var addNewScenePopup = (function () {
-                        var _dialogueEl = null;
+                        var _dialogEl = null;
                         var _isHidden = true;
 
                         console.log('addNewScenePopup')
-                        var dialogue = document.createElement('DIV');
-                        dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
-                        _dialogueEl = dialogue;
+                        var dialog = document.createElement('DIV');
+                        dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
+                        _dialogEl = dialog;
                         var close = document.createElement('div');
                         close.className = 'Streams_webrtc_close-dialog-sign';
                         close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
@@ -392,16 +392,16 @@
                         boxContent.appendChild(buttonsCon);
                         dialogInner.appendChild(dialogTitle);
 
-                        dialogue.appendChild(close);
+                        dialog.appendChild(close);
                         dialogInner.appendChild(boxContent);
-                        dialogue.appendChild(dialogInner);
+                        dialog.appendChild(dialogInner);
 
-                        controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                        controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
 
                         setTimeout(function () {
                             Q.activate(
                                 Q.Tool.setUpElement(
-                                    dialogue, // or pass an existing element
+                                    dialog, // or pass an existing element
                                     "Q/resize",
                                     {
                                         move: true,
@@ -419,14 +419,14 @@
                         }, 3000)
 
                         var dialogWidth = 400;
-                        dialogue.style.width = dialogWidth + 'px';
+                        dialog.style.width = dialogWidth + 'px';
                         console.log('dialogWidth', dialogWidth);
                         if (_isMobile) {
-                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialogue.style.bottom = '10px';
+                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            dialog.style.bottom = '10px';
                         } else {
-                            dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            dialogue.style.top = (window.innerHeight / 2 - 100) + 'px';
+                            dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            dialog.style.top = (window.innerHeight / 2 - 100) + 'px';
                         }
 
                         close.addEventListener('click', function () {
@@ -447,7 +447,7 @@
                         }
 
                         function closeOnWindowClick(e) {
-                            if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                            if (!(_dialogEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
                                 && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
                                 dropUpMenu.classList.add('Streams_webrtc_hidden');
                                 window.removeEventListener('click', closeOnWindowClick)
@@ -458,19 +458,19 @@
 
                         function showDialog(e) {
                             sceneNameInput.value = '';
-                            if (_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                            if (_dialogEl.classList.contains('Streams_webrtc_hidden')) {
+                                _dialogEl.classList.remove('Streams_webrtc_hidden');
                                 var _clientX = e.clientX;
                                 var _clientY = e.clientY;
 
                                 _isHidden = false;
 
                                 if (_isMobile) {
-                                    dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                    dialogue.style.top = '10px';
+                                    dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                    dialog.style.top = '10px';
                                 } else {
-                                    dialogue.style.left = (_clientX + 50) + 'px';
-                                    dialogue.style.top = (_clientY - 200) + 'px';
+                                    dialog.style.left = (_clientX + 50) + 'px';
+                                    dialog.style.top = (_clientY - 200) + 'px';
                                 }
                                 window.removeEventListener('click', closeOnWindowClick)
                                 setDefaultSceneName();
@@ -479,8 +479,8 @@
                         }
 
                         function hideDialog() {
-                            if (!_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                _dialogueEl.classList.add('Streams_webrtc_hidden');
+                            if (!_dialogEl.classList.contains('Streams_webrtc_hidden')) {
+                                _dialogEl.classList.add('Streams_webrtc_hidden');
                                 _isHidden = true;
                             }
                         }
@@ -587,7 +587,7 @@
                     var _visualList = [];
                     var _audioList = [];
                     var _selectedSource = null;
-                    var _dialogueBody = null;
+                    var _dialogBody = null;
                     var _sceneSourcesColumnEl = null;
                     var _sourcesTabs = null;
                     var _sourcesListEl = null;
@@ -1089,11 +1089,11 @@
                                         var _barheight = 100;
 
                                         console.log('createProgressBar')
-                                        var dialogue=document.createElement('DIV');
-                                        dialogue.className = 'Streams_webrtc_popup-progress-bar-popup';
-                                        dialogue.style.width = _barWidth + 'px';
-                                        dialogue.style.height = _barheight + 'px';
-                                        _progrssBarPopup = dialogue;
+                                        var dialog=document.createElement('DIV');
+                                        dialog.className = 'Streams_webrtc_popup-progress-bar-popup';
+                                        dialog.style.width = _barWidth + 'px';
+                                        dialog.style.height = _barheight + 'px';
+                                        _progrssBarPopup = dialog;
 
                                         var dialogInner=document.createElement('DIV');
                                         dialogInner.className = 'Streams_webrtc_popup-progress-bar-popup-inner';
@@ -1118,23 +1118,23 @@
                                         close.addEventListener('click', function() {
                                             popupinstance.hide();
                                         });
-                                        dialogue.appendChild(close);
+                                        dialog.appendChild(close);
 
                                         dialogInner.appendChild(boxContent);
-                                        dialogue.appendChild(dialogInner);
+                                        dialog.appendChild(dialogInner);
 
                                         this.show = function() {
-                                            var boxRect = activeDialogue.dialogueEl.getBoundingClientRect();
+                                            var boxRect = activeDialog.dialogEl.getBoundingClientRect();
                                             var x = (boxRect.width / 2) - (_barWidth / 2);
                                             var y = (boxRect.height / 2) - (_barheight / 2);
                                             _progrssBarPopup.style.top = y + 'px';
                                             _progrssBarPopup.style.left = x + 'px';
-                                            activeDialogue.dialogueEl.appendChild(_progrssBarPopup);
+                                            activeDialog.dialogEl.appendChild(_progrssBarPopup);
                                         }
 
                                         this.hide = function() {
-                                            if(!activeDialogue.dialogueEl.contains(_progrssBarPopup)) return;
-                                            activeDialogue.dialogueEl.removeChild(_progrssBarPopup);
+                                            if(!activeDialog.dialogEl.contains(_progrssBarPopup)) return;
+                                            activeDialog.dialogEl.removeChild(_progrssBarPopup);
                                         }
 
                                         this.updateProgress = function(percemt) {
@@ -1356,7 +1356,7 @@
                                 console.log('_fileManagerTool', _fileManagerTool)
                                 if(!_fileManagerTool) return;
 
-                                _fileManagerTool.showDialogue();
+                                _fileManagerTool.showDialog();
 
                                 _fileManagerTool.state.onSelect.set(function (stream) {
                                     console.log('Streams/fileManager onSelect', stream)
@@ -1375,7 +1375,7 @@
                                         alert('Wrong type of file')
                                     }
 
-                                    _fileManagerTool.closeDialogue();
+                                    _fileManagerTool.closeDialog();
                                 }, 'importVisual')
                             })
 
@@ -1383,7 +1383,7 @@
                             savedMedia.appendChild(savedMediaIconText);
                             dropUp.appendChild(savedMedia);
 
-                            //_dialogueEl.appendChild(dropUp);
+                            //_dialogEl.appendChild(dropUp);
                             return dropUp;
                         }
 
@@ -1465,13 +1465,13 @@
                         }
 
                         var addVideoPopup = (function () {
-                            var _dialogueEl = null;
+                            var _dialogEl = null;
                             var _isHidden = true;
 
                             console.log('addVideoPopup')
-                            var dialogue=document.createElement('DIV');
-                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-video Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            var dialog=document.createElement('DIV');
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-video Streams_webrtc_hidden';
+                            _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add video';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -1520,15 +1520,15 @@
                             });
                             dialogInner.appendChild(dialogTitle);
 
-                            dialogue.appendChild(close);
+                            dialog.appendChild(close);
                             dialogInner.appendChild(boxContent);
-                            dialogue.appendChild(dialogInner);
+                            dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
-                                        dialogue, // or pass an existing element
+                                        dialog, // or pass an existing element
                                         "Q/resize",
                                         {
                                             move: true,
@@ -1547,14 +1547,14 @@
 
                             var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
-                            dialogue.style.width = dialogWidth + 'px';
+                            dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
                             if(Q.info.isMobile) {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.bottom = (controlsRect.height + 10) + 'px';
                             } else {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.top = (window.innerHeight/ 2 - 100) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
                             }
 
 
@@ -1563,7 +1563,7 @@
                             });
 
                             function closeOnWindowClick(e) {
-                                if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                                if (!(_dialogEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
                                     && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
                                     dropUpMenu.classList.add('Streams_webrtc_hidden');
                                     window.removeEventListener('click', closeOnWindowClick)
@@ -1574,8 +1574,8 @@
 
                             function showDialog(e) {
                                 videoItemInput.value = '';
-                                if(_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
+                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -1583,11 +1583,11 @@
 
                                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
-                                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                        dialogue.style.top = (controlsRect.height + 10) + 'px';
+                                        dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                        dialog.style.top = (controlsRect.height + 10) + 'px';
                                     } else {
-                                        dialogue.style.left = (_clientX + 50) + 'px';
-                                        dialogue.style.top = (_clientY - 200) + 'px';
+                                        dialog.style.left = (_clientX + 50) + 'px';
+                                        dialog.style.top = (_clientY - 200) + 'px';
                                     }
                                     window.removeEventListener('click', closeOnWindowClick)
 
@@ -1595,8 +1595,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogueEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
+                                    _dialogEl.classList.add('Streams_webrtc_hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -1615,13 +1615,13 @@
                         }())
 
                         var addImagePopup = (function () {
-                            var _dialogueEl = null;
+                            var _dialogEl = null;
                             var _isHidden = true;
 
                             console.log('addImagePopup')
-                            var dialogue=document.createElement('DIV');
-                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-image Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            var dialog=document.createElement('DIV');
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-image Streams_webrtc_hidden';
+                            _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add image';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -1670,15 +1670,15 @@
                             });
                             dialogInner.appendChild(dialogTitle);
 
-                            dialogue.appendChild(close);
+                            dialog.appendChild(close);
                             dialogInner.appendChild(boxContent);
-                            dialogue.appendChild(dialogInner);
+                            dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
-                                        dialogue, // or pass an existing element
+                                        dialog, // or pass an existing element
                                         "Q/resize",
                                         {
                                             move: true,
@@ -1697,14 +1697,14 @@
 
                             var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
-                            dialogue.style.width = dialogWidth + 'px';
+                            dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
                             if(Q.info.isMobile) {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.bottom = (controlsRect.height + 10) + 'px';
                             } else {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.top = (window.innerHeight/ 2 - 100) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
                             }
 
 
@@ -1713,7 +1713,7 @@
                             });
 
                             function closeOnWindowClick(e) {
-                                if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                                if (!(_dialogEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
                                     && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
                                     dropUpMenu.classList.add('Streams_webrtc_hidden');
                                     window.removeEventListener('click', closeOnWindowClick)
@@ -1724,8 +1724,8 @@
 
                             function showDialog(e) {
                                 imageItemInput.value = '';
-                                if(_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
+                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -1733,11 +1733,11 @@
 
                                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
-                                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                        dialogue.style.top = (controlsRect.height + 10) + 'px';
+                                        dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                        dialog.style.top = (controlsRect.height + 10) + 'px';
                                     } else {
-                                        dialogue.style.left = (_clientX + 50) + 'px';
-                                        dialogue.style.top = (_clientY - 200) + 'px';
+                                        dialog.style.left = (_clientX + 50) + 'px';
+                                        dialog.style.top = (_clientY - 200) + 'px';
                                     }
                                     window.removeEventListener('click', closeOnWindowClick)
 
@@ -1745,8 +1745,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogueEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
+                                    _dialogEl.classList.add('Streams_webrtc_hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -1765,13 +1765,13 @@
                         }())
 
                         var addTeleconferencePopup = (function () {
-                            var _dialogueEl = null;
+                            var _dialogEl = null;
                             var _isHidden = true;
 
                             console.log('addTeleconferencePopup')
-                            var dialogue=document.createElement('DIV');
-                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            var dialog=document.createElement('DIV');
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
+                            _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add teleconference';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -1804,15 +1804,15 @@
                             });
                             dialogInner.appendChild(dialogTitle);
 
-                            dialogue.appendChild(close);
+                            dialog.appendChild(close);
                             dialogInner.appendChild(boxContent);
-                            dialogue.appendChild(dialogInner);
+                            dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
-                                        dialogue, // or pass an existing element
+                                        dialog, // or pass an existing element
                                         "Q/resize",
                                         {
                                             move: true,
@@ -1831,14 +1831,14 @@
 
                             var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
-                            dialogue.style.width = dialogWidth + 'px';
+                            dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
                             if(Q.info.isMobile) {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.bottom = (controlsRect.height + 10) + 'px';
                             } else {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.top = (window.innerHeight/ 2 - 100) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
                             }
 
 
@@ -1847,7 +1847,7 @@
                             });
 
                             function closeOnWindowClick(e) {
-                                if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                                if (!(_dialogEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
                                     && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
                                     dropUpMenu.classList.add('Streams_webrtc_hidden');
                                     window.removeEventListener('click', closeOnWindowClick)
@@ -1858,8 +1858,8 @@
 
                             function showDialog(e) {
                                 sourceName.value = '';
-                                if(_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
+                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -1867,11 +1867,11 @@
 
                                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
-                                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                        dialogue.style.top = (controlsRect.height + 10) + 'px';
+                                        dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                        dialog.style.top = (controlsRect.height + 10) + 'px';
                                     } else {
-                                        dialogue.style.left = (_clientX + 50) + 'px';
-                                        dialogue.style.top = (_clientY - 200) + 'px';
+                                        dialog.style.left = (_clientX + 50) + 'px';
+                                        dialog.style.top = (_clientY - 200) + 'px';
                                     }
                                     window.removeEventListener('click', closeOnWindowClick)
 
@@ -1879,8 +1879,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogueEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
+                                    _dialogEl.classList.add('Streams_webrtc_hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -2171,7 +2171,7 @@
 
                                 if(!_fileManagerTool) return;
 
-                                _fileManagerTool.showDialogue();
+                                _fileManagerTool.showDialog();
 
                                 _fileManagerTool.state.onSelect.set(function (stream) {
                                     console.log('Streams/fileManager onSelect', stream)
@@ -2188,7 +2188,7 @@
                                         alert('Wrong file type')
                                     }
 
-                                    _fileManagerTool.closeDialogue();
+                                    _fileManagerTool.closeDialog();
                                 }, 'importAudio')
                             })
 
@@ -2197,7 +2197,7 @@
                             dropUp.appendChild(savedMedia);
 
 
-                            //_dialogueEl.appendChild(dropUp);
+                            //_dialogEl.appendChild(dropUp);
                             return dropUp;
                         }
 
@@ -2309,13 +2309,13 @@
                         }
 
                         var addAudioPopup = (function () {
-                            var _dialogueEl = null;
+                            var _dialogEl = null;
                             var _isHidden = true;
 
                             console.log('addVideoPopup')
-                            var dialogue=document.createElement('DIV');
-                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            var dialog=document.createElement('DIV');
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
+                            _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add audio';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -2364,15 +2364,15 @@
                             });
                             dialogInner.appendChild(dialogTitle);
 
-                            dialogue.appendChild(close);
+                            dialog.appendChild(close);
                             dialogInner.appendChild(boxContent);
-                            dialogue.appendChild(dialogInner);
+                            dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
-                                        dialogue, // or pass an existing element
+                                        dialog, // or pass an existing element
                                         "Q/resize",
                                         {
                                             move: true,
@@ -2391,14 +2391,14 @@
 
                             var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
-                            dialogue.style.width = dialogWidth + 'px';
+                            dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
                             if(Q.info.isMobile) {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.bottom = (controlsRect.height + 10) + 'px';
                             } else {
-                                dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                dialogue.style.top = (window.innerHeight/ 2 - 100) + 'px';
+                                dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
                             }
 
 
@@ -2407,7 +2407,7 @@
                             });
 
                             function closeOnWindowClick(e) {
-                                if (!(_dialogueEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
+                                if (!(_dialogEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
                                     && !dropUpMenu.classList.contains('Streams_webrtc_hidden')) {
                                     dropUpMenu.classList.add('Streams_webrtc_hidden');
                                     window.removeEventListener('click', closeOnWindowClick)
@@ -2418,8 +2418,8 @@
 
                             function showDialog(e) {
                                 videoItemInput.value = '';
-                                if(_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
+                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -2427,11 +2427,11 @@
 
                                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
-                                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                                        dialogue.style.top = (controlsRect.height + 10) + 'px';
+                                        dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                                        dialog.style.top = (controlsRect.height + 10) + 'px';
                                     } else {
-                                        dialogue.style.left = (_clientX + 50) + 'px';
-                                        dialogue.style.top = (_clientY - 200) + 'px';
+                                        dialog.style.left = (_clientX + 50) + 'px';
+                                        dialog.style.top = (_clientY - 200) + 'px';
                                     }
                                     window.removeEventListener('click', closeOnWindowClick)
 
@@ -2439,8 +2439,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogueEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
+                                    _dialogEl.classList.add('Streams_webrtc_hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -2900,10 +2900,10 @@
 
                     var canvasLayoutOptions = (function () {
                         let _selectedSource = null;
-                        var _dialogueEl = null;
+                        var _dialogEl = null;
                         var _layoutTabs = null;
                         var _activeTabName = null;
-                        var _dialogueBody = null;
+                        var _dialogBody = null;
                         var _generatedLayoutsListDialogs = {};
                         var _generatedLayoutsParamsDialogs = {};
 
@@ -3161,15 +3161,15 @@
                         }
 
                         function showLayoutList() {
-                            _dialogueBody.innerHTML = '';
-                            _dialogueBody.appendChild(createLayoutList());
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createLayoutList());
                         }
 
                         function showLayoutParams() {
                             console.log('showLayoutParams')
 
-                            _dialogueBody.innerHTML = '';
-                            _dialogueBody.appendChild(createParamsList());
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
                         }
 
                         function showDialog(source) {
@@ -3186,17 +3186,17 @@
                                 selectLayout(_selectedSource.sourceInstance.params.defaultLayout);
                             }
                            
-                            _optionsColumnEl.appendChild(_dialogueEl);
+                            _optionsColumnEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
                         function hideDialog() {
-                            console.log('hideDialog', _dialogueEl, _dialogueEl != null, _dialogueEl.parentElement != null, _dialogueEl.parentElement)
+                            console.log('hideDialog', _dialogEl, _dialogEl != null, _dialogEl.parentElement != null, _dialogEl.parentElement)
 
-                            if(_dialogueEl != null && _dialogueEl.parentElement != null) {
+                            if(_dialogEl != null && _dialogEl.parentElement != null) {
                                 console.log('hideDialog remove')
 
-                                _dialogueEl.parentNode.removeChild(_dialogueEl);
+                                _dialogEl.parentNode.removeChild(_dialogEl);
                             }
                         }
 
@@ -3230,8 +3230,8 @@
                         }
 
                         console.log('addImagePopup')
-                        _dialogueEl = document.createElement('DIV');
-                        _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
                         dialogTitle.className = 'Streams_webrtc_popup-options-title';
                         var dialogTitleInner = _layoutTabs = document.createElement('DIV');
@@ -3254,12 +3254,12 @@
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
-                        _dialogueEl.appendChild(dialogTitle);
-                        var dialogBody = _dialogueBody = document.createElement('DIV');
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'Streams_webrtc_popup-options-body';
 
                         //dialogBody.appendChild(createLayoutList());
-                        _dialogueEl.appendChild(dialogBody);
+                        _dialogEl.appendChild(dialogBody);
 
                         layoutsTab.addEventListener('click', tabHandler);
                         paramsTab.addEventListener('click', tabHandler);
@@ -3273,9 +3273,9 @@
                     }())
 
                     var webrtcParticipantOptions = (function (source) {
-                        var _dialogueEl = null;
+                        var _dialogEl = null;
                         var _optionsTabs = null;
-                        var _dialogueBody = null;
+                        var _dialogBody = null;
                         var _layoutParamsEl = null;
                         var _selectedSource = null;
                         var _generatedDialogs = [];
@@ -3285,7 +3285,7 @@
                             console.log('createParamsList', _selectedSource.sourceInstance)
                             for(let d in _generatedDialogs) {
                                 if(_generatedDialogs[d].source == _selectedSource) {
-                                    return _generatedDialogs[d].dialogue;
+                                    return _generatedDialogs[d].dialog;
                                 }
                             }
 
@@ -3462,14 +3462,14 @@
 
                             _generatedDialogs.push({
                                 source: _selectedSource,
-                                dialogue:  dialogBodyInner
+                                dialog:  dialogBodyInner
                             })
                             return dialogBodyInner;
                         }
 
                         function showParams() {
-                            _dialogueBody.innerHTML = '';
-                            _dialogueBody.appendChild(createParamsList());
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
                         }
 
                         function showDialog(source) {
@@ -3477,15 +3477,15 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogueEl);
+                            _optionsColumnEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
                         function hideDialog() {
-                            console.log('hideDialog', _dialogueEl)
+                            console.log('hideDialog', _dialogEl)
 
-                            if(_dialogueEl && _dialogueEl.parentNode != null) {
-                                _dialogueEl.parentNode.removeChild(_dialogueEl);
+                            if(_dialogEl && _dialogEl.parentNode != null) {
+                                _dialogEl.parentNode.removeChild(_dialogEl);
                             }
                         }
 
@@ -3515,8 +3515,8 @@
                         }
 
                         console.log('addImagePopup')
-                        _dialogueEl = document.createElement('DIV');
-                        _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
                         dialogTitle.className = 'Streams_webrtc_popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
@@ -3531,12 +3531,12 @@
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
-                        _dialogueEl.appendChild(dialogTitle);
-                        var dialogBody = _dialogueBody = document.createElement('DIV');
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'Streams_webrtc_popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
-                        _dialogueEl.appendChild(dialogBody);
+                        _dialogEl.appendChild(dialogBody);
 
                         paramsTab.addEventListener('click', tabHandler);
 
@@ -3548,9 +3548,9 @@
                     }())
 
                     var imageSourceOptions = (function (source) {
-                        var _dialogueEl = null;
+                        var _dialogEl = null;
                         var _optionsTabs = null;
-                        var _dialogueBody = null;
+                        var _dialogBody = null;
                         var _layoutParamsEl = null;
                         var _selectedSource = null;
                         var _generatedDialogs = [];
@@ -3559,7 +3559,7 @@
 
                             for(let d in _generatedDialogs) {
                                 if(_generatedDialogs[d].source == _selectedSource) {
-                                    return _generatedDialogs[d].dialogue;
+                                    return _generatedDialogs[d].dialog;
                                 }
                             }
 
@@ -3704,14 +3704,14 @@
 
                             _generatedDialogs.push({
                                 source: _selectedSource,
-                                dialogue:  dialogBodyInner
+                                dialog:  dialogBodyInner
                             })
                             return dialogBodyInner;
                         }
 
                         function showParams() {
-                            _dialogueBody.innerHTML = '';
-                            _dialogueBody.appendChild(createParamsList());
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
                         }
 
                         function showDialog(source) {
@@ -3719,15 +3719,15 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogueEl);
+                            _optionsColumnEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
                         function hideDialog() {
-                            console.log('hideDialog', _dialogueEl)
+                            console.log('hideDialog', _dialogEl)
 
-                            if(_dialogueEl && _dialogueEl.parentNode != null) {
-                                _dialogueEl.parentNode.removeChild(_dialogueEl);
+                            if(_dialogEl && _dialogEl.parentNode != null) {
+                                _dialogEl.parentNode.removeChild(_dialogEl);
                             }
                         }
 
@@ -3757,8 +3757,8 @@
                         }
 
                         console.log('addImagePopup')
-                        _dialogueEl = document.createElement('DIV');
-                        _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
                         dialogTitle.className = 'Streams_webrtc_popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
@@ -3773,12 +3773,12 @@
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
-                        _dialogueEl.appendChild(dialogTitle);
-                        var dialogBody = _dialogueBody = document.createElement('DIV');
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'Streams_webrtc_popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
-                        _dialogueEl.appendChild(dialogBody);
+                        _dialogEl.appendChild(dialogBody);
 
                         paramsTab.addEventListener('click', tabHandler);
 
@@ -3791,9 +3791,9 @@
 
 
                     var videoSourceOptions = (function (source) {
-                        var _dialogueEl = null;
+                        var _dialogEl = null;
                         var _optionsTabs = null;
-                        var _dialogueBody = null;
+                        var _dialogBody = null;
                         var _layoutParamsEl = null;
                         var _selectedSource = null;
                         var _generatedDialogs = [];
@@ -3802,7 +3802,7 @@
 
                             for(let d in _generatedDialogs) {
                                 if(_generatedDialogs[d].source == _selectedSource) {
-                                    return _generatedDialogs[d].dialogue;
+                                    return _generatedDialogs[d].dialog;
                                 }
                             }
 
@@ -3950,14 +3950,14 @@
 
                             _generatedDialogs.push({
                                 source: _selectedSource,
-                                dialogue:  dialogBodyInner
+                                dialog:  dialogBodyInner
                             })
                             return dialogBodyInner;
                         }
 
                         function showParams() {
-                            _dialogueBody.innerHTML = '';
-                            _dialogueBody.appendChild(createParamsList());
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
                         }
 
                         function showDialog(source) {
@@ -3965,15 +3965,15 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogueEl);
+                            _optionsColumnEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
                         function hideDialog() {
-                            console.log('hideDialog', _dialogueEl)
+                            console.log('hideDialog', _dialogEl)
 
-                            if(_dialogueEl && _dialogueEl.parentNode != null) {
-                                _dialogueEl.parentNode.removeChild(_dialogueEl);
+                            if(_dialogEl && _dialogEl.parentNode != null) {
+                                _dialogEl.parentNode.removeChild(_dialogEl);
                             }
                         }
 
@@ -4003,8 +4003,8 @@
                         }
 
                         console.log('addImagePopup')
-                        _dialogueEl = document.createElement('DIV');
-                        _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
                         dialogTitle.className = 'Streams_webrtc_popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
@@ -4019,12 +4019,12 @@
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
-                        _dialogueEl.appendChild(dialogTitle);
-                        var dialogBody = _dialogueBody = document.createElement('DIV');
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'Streams_webrtc_popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
-                        _dialogueEl.appendChild(dialogBody);
+                        _dialogEl.appendChild(dialogBody);
 
                         paramsTab.addEventListener('click', tabHandler);
 
@@ -4037,9 +4037,9 @@
 
 
                     var audioSourceOptions = (function (source) {
-                        var _dialogueEl = null;
+                        var _dialogEl = null;
                         var _optionsTabs = null;
-                        var _dialogueBody = null;
+                        var _dialogBody = null;
                         var _layoutParamsEl = null;
                         var _selectedSource = null;
                         var _generatedDialogs = [];
@@ -4048,7 +4048,7 @@
                             console.log('createParamsList',  _selectedSource.params);
                             for(let d in _generatedDialogs) {
                                 if(_generatedDialogs[d].source == _selectedSource) {
-                                    return _generatedDialogs[d].dialogue;
+                                    return _generatedDialogs[d].dialog;
                                 }
                             }
 
@@ -4060,7 +4060,7 @@
 
                             _generatedDialogs.push({
                                 source: _selectedSource,
-                                dialogue:  paramsBody,
+                                dialog:  paramsBody,
                             })
                             return paramsBody;
                         }
@@ -4068,8 +4068,8 @@
                         function showParams() {
                             console.log('showParams', this, _activeView)
 
-                            _dialogueBody.innerHTML = '';
-                            _dialogueBody.appendChild(createParamsList());
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
                         }
 
                         function showDialog(source) {
@@ -4077,15 +4077,15 @@
                             console.log('showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
-                            _optionsColumnEl.appendChild(_dialogueEl);
+                            _optionsColumnEl.appendChild(_dialogEl);
                             _activeView = this;
                         }
 
                         function hideDialog() {
-                            console.log('hideDialog', _dialogueEl)
+                            console.log('hideDialog', _dialogEl)
 
-                            if(_dialogueEl && _dialogueEl.parentNode != null) {
-                                _dialogueEl.parentNode.removeChild(_dialogueEl);
+                            if(_dialogEl && _dialogEl.parentNode != null) {
+                                _dialogEl.parentNode.removeChild(_dialogEl);
                             }
                         }
 
@@ -4115,8 +4115,8 @@
                         }
 
                         console.log('addImagePopup')
-                        _dialogueEl = document.createElement('DIV');
-                        _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
                         dialogTitle.className = 'Streams_webrtc_popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
@@ -4131,12 +4131,12 @@
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
-                        _dialogueEl.appendChild(dialogTitle);
-                        var dialogBody = _dialogueBody = document.createElement('DIV');
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
                         dialogBody.className = 'Streams_webrtc_popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
-                        _dialogueEl.appendChild(dialogBody);
+                        _dialogEl.appendChild(dialogBody);
 
                         paramsTab.addEventListener('click', tabHandler);
 
@@ -4194,9 +4194,9 @@
 
                 function createPopup() {
                     console.log('createPopup 00', scenesInterface)
-                    var dialogue=document.createElement('DIV');
-                    dialogue.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden';
-                    _dialogueEl = dialogue;
+                    var dialog=document.createElement('DIV');
+                    dialog.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden';
+                    _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.text);
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -4259,8 +4259,8 @@
                     dialogInner.appendChild(dialogTitle);
                     dialogInner.appendChild(boxContent);
 
-                    dialogue.appendChild(close);
-                    dialogue.appendChild(dialogInner);
+                    dialog.appendChild(close);
+                    dialog.appendChild(dialogInner);
 
                     Q.activate(
                         Q.Tool.setUpElement(
@@ -4286,10 +4286,10 @@
                         }
                     );
 
-                    controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                    controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
                     Q.activate(
                         Q.Tool.setUpElement(
-                            dialogue,
+                            dialog,
                             "Q/resize",
                             {
                                 move: true,
@@ -4309,7 +4309,7 @@
 
                     Q.activate(
                         Q.Tool.setUpElement(
-                            _dialogueEl,
+                            _dialogEl,
                             "Streams/fileManager",
                             {
 
@@ -4317,21 +4317,21 @@
                         ),
                         {},
                         function (toolEl) {
-                            _fileManagerTool = Q.Tool.from(_dialogueEl, "Streams/fileManager");
+                            _fileManagerTool = Q.Tool.from(_dialogEl, "Streams/fileManager");
                         }
                     )
 
                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;
-                    dialogue.style.width = dialogWidth + 'px';
-                    dialogue.style.height = (dialogWidth / 1.4) + 'px';
+                    dialog.style.width = dialogWidth + 'px';
+                    dialog.style.height = (dialogWidth / 1.4) + 'px';
                     console.log('dialogWidth', dialogWidth);
                     if(Q.info.isMobile) {
-                        //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                        //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                        //dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                        //dialog.style.bottom = (controlsRect.height + 10) + 'px';
                     } else {
-                        //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                        //dialogue.style.top = '100px';
+                        //dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                        //dialog.style.top = '100px';
                     }
 
 
@@ -4339,19 +4339,19 @@
                         hide()
                     });
 
-                    tool.advancedStreamingDialogue = boxContent;
+                    tool.advancedStreamingDialog = boxContent;
 
                     return {
-                        dialogueEl: dialogue,
+                        dialogEl: dialog,
                         previewBoxEl: previewBoxBodyInner
                     }
                 }
 
                 function createPopupHorizontalMobile() {
                     console.log('createPopupHorizontalMobile 00', scenesInterface)
-                    var dialogue=document.createElement('DIV');
-                    dialogue.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden Q_orientHorizontally';
-                    _dialogueEl = dialogue;
+                    var dialog=document.createElement('DIV');
+                    dialog.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden Q_orientHorizontally';
+                    _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = 'Streaming settings';
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -4420,8 +4420,8 @@
                     dialogInner.appendChild(dialogTitle);
                     dialogInner.appendChild(boxContent);
 
-                    dialogue.appendChild(close);
-                    dialogue.appendChild(dialogInner);
+                    dialog.appendChild(close);
+                    dialog.appendChild(dialogInner);
 
 
                     startRecordingBtn.addEventListener('click', function () {
@@ -4487,11 +4487,11 @@
                         }
                     );
 
-                    controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                    controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
                     setTimeout(function () {
                         Q.activate(
                             Q.Tool.setUpElement(
-                                dialogue,
+                                dialog,
                                 "Q/resize",
                                 {
                                     move: true,
@@ -4511,14 +4511,14 @@
 
                     var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;
-                    dialogue.style.width = dialogWidth + 'px';
+                    dialog.style.width = dialogWidth + 'px';
                     console.log('dialogWidth', dialogWidth);
                     if(Q.info.isMobile) {
-                        //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                        //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                        //dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                        //dialog.style.bottom = (controlsRect.height + 10) + 'px';
                     } else {
-                        dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                        dialogue.style.top = '100px';
+                        dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                        dialog.style.top = '100px';
                     }
 
 
@@ -4527,18 +4527,18 @@
                         hide()
                     });
 
-                    tool.advancedStreamingDialogue = boxContent;
+                    tool.advancedStreamingDialog = boxContent;
 
                     return {
-                        dialogueEl: dialogue,
+                        dialogEl: dialog,
                         previewBoxEl: previewBoxBodyInner
                     }
                 }
 
                 function hide() {
-                    if(activeDialogue == null) return;
-                    if(!activeDialogue.dialogueEl.classList.contains('Streams_webrtc_hidden')){
-                        activeDialogue.dialogueEl.classList.add('Streams_webrtc_hidden');
+                    if(activeDialog == null) return;
+                    if(!activeDialog.dialogEl.classList.contains('Streams_webrtc_hidden')){
+                        activeDialog.dialogEl.classList.add('Streams_webrtc_hidden');
                         isHidden = true;
                         var streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
                         if(streamingCanvas != null) {
@@ -4568,20 +4568,20 @@
                 }
 
                 function show() {
-                    var dialogue, previewBox;
+                    var dialog, previewBox;
                     if(Q.info.isMobile){
                         if(window.innerWidth > window.innerHeight) {
                             console.log('show horizontal')
-                            if(mobileHorizontaldialogueEl == null) {
-                                mobileHorizontaldialogueEl = createPopupHorizontalMobile();
+                            if(mobileHorizontaldialogEl == null) {
+                                mobileHorizontaldialogEl = createPopupHorizontalMobile();
                             }
 
-                            dialogue = mobileHorizontaldialogueEl.dialogueEl;
-                            previewBox = mobileHorizontaldialogueEl.previewBoxEl;
-                            activeDialogue = mobileHorizontaldialogueEl;
+                            dialog = mobileHorizontaldialogEl.dialogEl;
+                            previewBox = mobileHorizontaldialogEl.previewBoxEl;
+                            activeDialog = mobileHorizontaldialogEl;
                             function resizeHandler() {
                                 setTimeout(function () {
-                                    if(!dialogue.classList.contains('Streams_webrtc_hidden') && window.innerWidth < window.innerHeight) {
+                                    if(!dialog.classList.contains('Streams_webrtc_hidden') && window.innerWidth < window.innerHeight) {
                                         hide();
                                         show();
                                     }
@@ -4608,46 +4608,46 @@
                             }
                         }
 
-                        if(mobileHorizontaldialogueEl == null) return;
+                        if(mobileHorizontaldialogEl == null) return;
                     } else {
-                        if(desktopDialogueEl == null) {
-                            desktopDialogueEl = createPopup();
+                        if(desktopDialogEl == null) {
+                            desktopDialogEl = createPopup();
                         }
 
-                        dialogue = desktopDialogueEl.dialogueEl;
-                        previewBox = desktopDialogueEl.previewBoxEl;
-                        activeDialogue = desktopDialogueEl;
-                        if(desktopDialogueEl == null) return;
+                        dialog = desktopDialogEl.dialogEl;
+                        previewBox = desktopDialogEl.previewBoxEl;
+                        activeDialog = desktopDialogEl;
+                        if(desktopDialogEl == null) return;
                     }
 
 
 
-                    if(dialogue && dialogue.classList.contains('Streams_webrtc_hidden')) {
+                    if(dialog && dialog.classList.contains('Streams_webrtc_hidden')) {
                         controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.compositeVideosAndDraw();
 
-                        dialogue.classList.remove('Streams_webrtc_hidden');
+                        dialog.classList.remove('Streams_webrtc_hidden');
                         isHidden = false;
 
                         var controlsRect = controlsTool.controlBar.getBoundingClientRect();
                         if(Q.info.isMobile) {
 
-                            dialogue.style.position = 'fixed';
-                            dialogue.style.width = '100%';
-                            dialogue.style.height = '100%';
-                            dialogue.style.maxWidth = 'none';
-                            dialogue.style.top = '0';
-                            dialogue.style.left = '0';
-                            //dialogue.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
-                            //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                            dialog.style.position = 'fixed';
+                            dialog.style.width = '100%';
+                            dialog.style.height = '100%';
+                            dialog.style.maxWidth = 'none';
+                            dialog.style.top = '0';
+                            dialog.style.left = '0';
+                            //dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
+                            //dialog.style.bottom = (controlsRect.height + 10) + 'px';
                         } else {
                             var winWidth = window.innerWidth;
                             if(winWidth > dialogWidth) {
-                                dialogue.style.left = (winWidth / 2) - (dialogWidth / 2) + 'px';
+                                dialog.style.left = (winWidth / 2) - (dialogWidth / 2) + 'px';
                             } else {
                                 let left = (winWidth / 100 * 2) / 2;
-                                dialogue.style.left = left + 'px';
+                                dialog.style.left = left + 'px';
                             }
-                            //dialogue.style.bottom = (controlsRect.height + 10) + 'px';
+                            //dialog.style.bottom = (controlsRect.height + 10) + 'px';
 
                         }
 
