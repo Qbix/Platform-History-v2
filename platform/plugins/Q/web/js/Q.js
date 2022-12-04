@@ -3204,7 +3204,7 @@ Q.onLayout = function (element) {
 	var lastRect = {};
 	var event = new Q.Event();
 	var debouncedEvent = event.debounce(
-		Q.onLayout.debounce, false, 'Q.onLayout'
+		Q.onLayout.debounce, true, 'Q.onLayout'
 	).map(function () {
 		var rect = element.getBoundingClientRect();
 		var ret;
