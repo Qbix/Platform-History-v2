@@ -3204,7 +3204,7 @@ Q.onLayout = function (element) {
 	var observer = null;
 	if (typeof ResizeObserver === 'function') {
 		observer = new ResizeObserver(function () {
-			event.handle.call(event, element, element);
+			event.handle.call(event.debounce(100), element, element);
 		});
 		observer.observe(element);
 	}
