@@ -10,7 +10,7 @@ function Users_after_Q_sessionExtras() {
 	$roles = Users::roles();
 	foreach ($roles as $label => $role) {
 		Q_Response::addHtmlCssClass('Users_role-'.ucfirst(Q_Utils::normalize($role->label)));
-		Q_Response::setScriptData('Q.plugins.Users.roles.'.$label, $role);
+		Q_Response::setScriptData('Q.plugins.Users.roles.'.$label, $role->exportArray());
 	}
 	$user = Users::loggedInUser(false, false);
 	Q_Response::setScriptData("Q.plugins.Users.capability", Users::capability()->exportArray());

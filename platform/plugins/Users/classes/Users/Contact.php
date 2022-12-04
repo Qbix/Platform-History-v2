@@ -290,6 +290,26 @@ class Users_Contact extends Base_Users_Contact
 		return $result;
 	}
 
+	/**
+	 * Returns the fields and values we can export.
+	 * Let only the logged-in user see all the fields of their contacts,
+	 * or their role in a community.
+	 * @method exportArray
+	 * @return {array}
+	 */
+	function exportArray($options = null)
+	{
+		$loggedInUser = Users::loggedInUser(false, false);
+		if ($loggedInUser && $loggedInUser->id === $this->userId) {
+			return $this->fields;
+		}
+		if ($loggedInUser && $loggedInUser->id === $this->contactUserId
+		&& Users::isCommunityId($this->userId)) {
+			return $this->fields;
+		}
+		return array();
+	}
+
 	/* * * */
 	/**
 	 * Implements the __set_state method, so it can work with
