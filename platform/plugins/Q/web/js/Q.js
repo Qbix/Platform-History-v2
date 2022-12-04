@@ -2983,7 +2983,8 @@ Evp.filter = function _Q_Event_prototype_filter(test, key) {
  * is called, but with the arguments returned by the transform function
  * @method map
  * @param {Function} transform Function to transform the arguments and return
- *   an array of two items for the new call: [this, arguments]
+ *   an array of two items for the new call: [this, arguments].
+ *   Whenever the transform function returns false, the returned event isn't triggered.
  * @param {String|Boolean|Q.Tool} [key] Optional key to pass to event.add (see docs for that method).
  * @return {Q.Event} A new Q.Event object
  */
@@ -2991,6 +2992,9 @@ Evp.map = function _Q_Event_prototype_map(transform, key) {
 	var newEvent = new Q.Event();
 	this.add(function () {
 		var parts = transform.apply(this, arguments);
+		if (parts === false) {
+			return false;
+		}
 		return newEvent.handle.apply(parts[0], parts[1]);
 	}, key);
 	return newEvent;
@@ -3197,10 +3201,22 @@ Q.onLayout = function (element) {
 			return _layoutEvents[i];
 		}
 	}
+	var lastRect = {};
 	var event = new Q.Event();
 	var debouncedEvent = event.debounce(
 		Q.onLayout.debounce, false, 'Q.onLayout'
-	);
+	).map(function () {
+		var rect = element.getBoundingClientRect();
+		var ret;
+		if (rect.width == lastRect.width
+		&& rect.height == lastRect.height) {
+			ret = false;
+		} else {
+			ret = [this, arguments]; // element got resized
+		}
+		lastRect = rect;
+		return ret;
+	}, 'Q.onLayout');
 
 	var l = _layoutElements.push(element);
 	_layoutEvents[l-1] = debouncedEvent;
