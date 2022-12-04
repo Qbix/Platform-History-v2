@@ -149,7 +149,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var publicAppInterface;
         var WebRTCconference;
 
-        var text() = null;
         var _roomStartTime = null;
         var _controls = null;
         var _controlsTool = null;
@@ -7177,8 +7176,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 //overrideDefaultOptions(options);
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
-
-                    text() = result;
 
                     if(appDebug.isiOSwebView()) {
                         return Q.alert(text().webrtc.notices.openInBrowserAlert != null ? text().webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
