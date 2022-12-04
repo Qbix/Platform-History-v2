@@ -284,6 +284,9 @@
             "speakers": "Speakers",
             "microphone": "Microphone"
         },
+        "broadcastPopup": {
+            "dialogTitle": "Manage Broadcast"
+        },
         "participantsPopup": {
             "dialogTitle": "Participant Settings",
             "disconnect": "Disconnect",

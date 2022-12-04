@@ -878,6 +878,15 @@
                 }
             },
 
+            broadcastButtonHandler: function () {
+                var tool = this;
+                if (!Q.info.useTouchEvents) return;
+
+                if (document.querySelector('.Streams_webrtc_dialog-box.select-audio') == null) {
+                    tool.selectAudioDialog();
+                }
+            },
+
             /**
              * Create control bar element
              * @method bindRTCEvents
@@ -1037,6 +1046,12 @@
                     //tool.toggleAudio();
                     tool.audioButtonHandler()
                 });
+
+                Q.addEventListener(cameraBtn, Q.Pointer.end, function () {
+                    var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                    if (resizeTool && resizeTool.state.appliedRecently) return;
+                    tool.broadcastButtonHandler()
+                })
 
                 /*Q.addEventListener(textChatBtnCon, Q.Pointer.end, function () {
                     tool.textChat.toggle();
@@ -3628,10 +3643,20 @@
 
                             _popUpResizeobserver.observe(broadcastPopup)
                         } else {
-                            Q.addEventListener(tool.broadcastBtn, Q.Pointer.click, function (e) {
-                                tool.hideAllPopups();
-                                show();
-                            });
+                            Q.addEventListener(tool.broadcastBtn, Q.Pointer.end, function (e) {
+                                //tool.usersBtn.parentNode.classList.toggle('Streams_webrtc_hover');
+                                var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                                if (resizeTool && resizeTool.state.appliedRecently) return;
+                                Q.Dialogs.push({
+                                    title: Q.getObject("webrtc.broadcastPopup.dialogTitle", tool.text),
+                                    className: 'Streams_webrtc_broadcast_popup',
+                                    content: broadcastPopupInner,
+                                    apply: true,
+                                    onActivate: function (dialog) {
+
+                                    }
+                                });
+                            }, true);
                         }
                     }
                     return {
