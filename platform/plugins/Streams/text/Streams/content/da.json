@@ -274,7 +274,8 @@
             "cameraIsOn": "Kameraet er tændt",
             "screenSharingIsOn": "Skærmdeling er aktiveret",
             "screenSharingIsOff": "Del skærm",
-            "joinNow": "Deltag i opkaldet"
+            "joinNow": "Deltag i opkaldet",
+            "dialogTitle": "Tænd\/sluk kamera eller mikrofon, før du deltager"
         },
         "audioSettings": {
             "dialogTitle": "Lydindstillinger",
@@ -447,7 +448,8 @@
         "Submenu": "Undermenu"
     },
     "errors": {
-        "HiddenFromYou": "Dette indhold er skjult for dig."
+        "HiddenFromYou": "Dette indhold er skjult for dig.",
+        "InplaceTypeMustBe": "inplaceType skal være &#39;textarea&#39; eller &#39;text&#39;"
     },
     "audio": {
         "record": "Optage",
@@ -562,6 +564,7 @@
         "private": "Privat",
         "public": "Offentlig",
         "configurationSaved": "Konfiguration gemt",
-        "error": "Noget gik galt"
+        "error": "Noget gik galt",
+        "privacySettings": "Privatindstillinger"
     }
 }

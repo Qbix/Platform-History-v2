@@ -79,12 +79,6 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			}
 			return;
 		}
-		
-		Q.onLayout($this.parent()[0]).set(function () {
-			var state = $this.state('Q/clickable');
-			$this.plugin('Q/clickable', 'remove')
-				.plugin('Q/clickable', state);	
-		}, "Q_clickable_" + $this.attr("id"));
 
 		state.oldStyle = $this.attr('style');
 		var display = $this.css('display');
@@ -439,6 +433,17 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 				setTimeout(_update, timing.renderingInterval);
 			}, timing.renderingInterval);
 		}
+		// Q.onLayout($this.parent().parent().parent()[0])
+		// debounce(500).set(function () {
+		// 	var state = $this.state('Q/clickable');
+		// 	$this.plugin('Q/clickable', 'remove');	
+		// }, "Q_clickable_" + $this.attr("id"));
+		// Q.onLayout($this.parent().parent().parent()[0])
+		// debounce(500).set(function () {
+		// 	var state = $this.state('Q/clickable');
+		// 	$this.plugin('Q/clickable', 'remove')
+		// 		.plugin('Q/clickable', state);	
+		// }, "Q_clickable_" + $this.attr("id"));
 	}, timing.renderingDelay);
 	return this;
 },
@@ -475,7 +480,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		renderingInterval: 100,
 		waitingPeriod: 0,
 		waitingInterval: 100,
-		renderingDelay: 0
+		renderingDelay: 500 // wait for animations to complete
 	},
 	selectable: false,
 	allowCallout: false,

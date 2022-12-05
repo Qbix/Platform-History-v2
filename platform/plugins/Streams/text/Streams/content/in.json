@@ -271,7 +271,8 @@
             "cameraIsOn": "Kamera aktif",
             "screenSharingIsOn": "Berbagi layar aktif",
             "screenSharingIsOff": "Bagikan layar",
-            "joinNow": "Bergabunglah dengan Panggilan"
+            "joinNow": "Bergabunglah dengan Panggilan",
+            "dialogTitle": "Aktifkan\/nonaktifkan kamera atau mikrofon sebelum Anda bergabung"
         },
         "audioSettings": {
             "dialogTitle": "Pengaturan Audio",
@@ -444,7 +445,8 @@
         "Submenu": "Submenu"
     },
     "errors": {
-        "HiddenFromYou": "Konten ini disembunyikan dari Anda."
+        "HiddenFromYou": "Konten ini disembunyikan dari Anda.",
+        "InplaceTypeMustBe": "inplaceType harus berupa &#39;textarea&#39; atau &#39;text&#39;"
     },
     "audio": {
         "record": "Merekam",
@@ -559,6 +561,7 @@
         "private": "Pribadi",
         "public": "Publik",
         "configurationSaved": "Konfigurasi disimpan",
-        "error": "Ada yang salah"
+        "error": "Ada yang salah",
+        "privacySettings": "Pengaturan Privasi"
     }
 }

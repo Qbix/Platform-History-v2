@@ -20,7 +20,8 @@ Q.setObject({
  * @constructor
  * @param {Object} [options] options for the tool
  *   @param {String} [options.userId=Q.Users.loggedInUserId()] You can set the user id whose labels are being edited, instead of the logged-in user
- *   @param {String} [options.prefix="Users/"] Pass any prefix here, to filter labels by this prefix
+ *   @param {String|Array} [options.filter="Users/"] Pass any prefix here, to filter labels by this prefix
+ *   	Alternatively pass an array of label names here, to filter by.
  *   @param {String} [options.contactUserId] Pass a user id here to let the tool add/remove contacts with the various labels, between userId and contactUserId
  *   @param {Boolean|String} [options.canAdd=false] Pass true here to allow the user to add a new label, or a string to override the title of the command.
  *   @param {String|Object} [options.all] To show "all labels" option, whose value is "*", pass here its title or object with "title" and "icon" properties.
@@ -69,7 +70,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 
 {
 	userId: null,
-	prefix: 'Users/',
+	filter: 'Users/',
 	contactUserId: null,
 	canAdd: false,
 	addToPhonebook: true,
@@ -93,7 +94,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
 				icon: Q.url("{{Users}}/img/icons/labels/all/40.png")
 			};
 		}
-		Q.Users.getLabels(state.userId, state.prefix, function (err, labels) {
+		Q.Users.getLabels(state.userId, state.filter, function (err, labels) {
 			Q.Template.render("Users/labels", {
 				labels: labels,
 				all: all,

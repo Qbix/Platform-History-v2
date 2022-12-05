@@ -274,7 +274,8 @@
             "cameraIsOn": "Camera is aan",
             "screenSharingIsOn": "Scherm delen is ingeschakeld",
             "screenSharingIsOff": "Scherm delen",
-            "joinNow": "Doe mee aan de oproep"
+            "joinNow": "Doe mee aan de oproep",
+            "dialogTitle": "Zet de camera of microfoon aan\/uit voordat je deelneemt"
         },
         "audioSettings": {
             "dialogTitle": "Geluidsinstellingen",
@@ -447,7 +448,8 @@
         "Submenu": "Submenu"
     },
     "errors": {
-        "HiddenFromYou": "Deze inhoud is voor u verborgen."
+        "HiddenFromYou": "Deze inhoud is voor u verborgen.",
+        "InplaceTypeMustBe": "inplaceType moet &#39;textarea&#39; of &#39;text&#39; zijn"
     },
     "audio": {
         "record": "Dossier",
@@ -562,6 +564,7 @@
         "private": "Privaat",
         "public": "Openbaar",
         "configurationSaved": "Configuratie opgeslagen",
-        "error": "Er is iets fout gegaan"
+        "error": "Er is iets fout gegaan",
+        "privacySettings": "Privacy instellingen"
     }
 }

@@ -1,6 +1,6 @@
 <?php
 	
-function Assets_currency_response_symbol ()
+function Assets_currencies_response_symbol ()
 {
 	Q_Request::requireFields(array('currency'), true);
 	$currencies = explode(',', $_REQUEST['currency']);

@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "이 콘텐츠는 당신에게 숨겨져 있습니다."
+        "HiddenFromYou": "이 콘텐츠는 당신에게 숨겨져 있습니다.",
+        "InplaceTypeMustBe": "inplaceType은 &#39;textarea&#39; 또는 &#39;text&#39;여야 합니다."
     },
     "preview": {
         "NewItemTitle": "새로운 물품"
@@ -180,7 +181,8 @@
             "cameraIsOn": "카메라가 켜져 있습니다.",
             "screenSharingIsOn": "화면 공유 사용 중",
             "screenSharingIsOff": "화면 공유",
-            "joinNow": "통화 참여"
+            "joinNow": "통화 참여",
+            "dialogTitle": "참여하기 전에 카메라 또는 마이크 켜기\/끄기"
         },
         "webInstructionsDialog": {
             "dialogTitle": "지침",
@@ -556,6 +558,7 @@
         "private": "사적인",
         "public": "공공의",
         "configurationSaved": "구성 저장됨",
-        "error": "문제가 발생했습니다."
+        "error": "문제가 발생했습니다.",
+        "privacySettings": "개인 정보 설정"
     }
 }

@@ -4,7 +4,8 @@
 define ('APP_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
 $paths_filename = realpath(APP_DIR . '/local/paths.php');
 if (!file_exists($paths_filename)) {
-	if (!file_exists(APP_DIR . '/local.sample/paths.php')) {
+	if (!file_exists(APP_DIR . '/local.sample/paths.php')
+	and !file_exists(APP_DIR . '/local.sample/paths.json')) {
 		die('[ERROR] Could not locate either local or local.sample folders. Please choose an intact template before running this script.' . PHP_EOL);
 	}
 	Q_configure_copy(APP_DIR.'/local.sample', APP_DIR.'/local');

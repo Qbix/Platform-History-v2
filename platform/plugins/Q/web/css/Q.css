@@ -1,6 +1,5 @@
 body { margin: 0; }
 table { border-spacing:0; border-collapse:collapse; }
-html.Q_hideUntilLoaded { opacity: 0; }
 
 /* Animations */
 @keyframes Q_rotateplane {
@@ -71,6 +70,8 @@ html.Q_hideUntilLoaded { opacity: 0; }
 }
 
 /* Common Q classes */
+.Q_hide { display: none !important; }
+.Q_hideUntilLoaded { opacity: 0; transition: opacity 300ms; }
 .Q_blink { animation: Q_blink .5s step-end infinite alternate; }
 .Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
@@ -855,6 +856,15 @@ input[type=password] {
     -moz-appearance: none;
 }
 
+@keyframes Q_showAfterLoaded {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 @keyframes Q_placeholder_shimmer {
     0%{
         background-position: -468px 0
@@ -1012,4 +1022,14 @@ html.Q_layout_sidebar {
 
 .Q_dialog_imagepicker .Q_viewport {
 	display: block;
+}
+.Q_dialogs_animationFX .Q_overlay {
+	transform: scale(0.5);
+	opacity: 0.5;
+	min-width: 300px;
+	transition: transform 300ms, opacity 300ms;
+}
+.Q_dialogs_animationFX .Q_overlay_open {
+	opacity: 1;
+	transform: scale(1);
 }

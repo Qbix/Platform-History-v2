@@ -274,7 +274,8 @@
             "cameraIsOn": "Kamera piztuta dago",
             "screenSharingIsOn": "Pantaila partekatzea aktibatuta dago",
             "screenSharingIsOff": "Partekatu pantaila",
-            "joinNow": "Bat egin Deialdira"
+            "joinNow": "Bat egin Deialdira",
+            "dialogTitle": "Aktibatu\/itzali kamera edo mikrofonoa sartu aurretik"
         },
         "audioSettings": {
             "dialogTitle": "Audio ezarpenak",
@@ -447,7 +448,8 @@
         "Submenu": "Azpimenua"
     },
     "errors": {
-        "HiddenFromYou": "Eduki hau ezkutatuta dago."
+        "HiddenFromYou": "Eduki hau ezkutatuta dago.",
+        "InplaceTypeMustBe": "inplaceType-k &#39;textarea&#39; edo &#39;text&#39; izan behar du"
     },
     "audio": {
         "record": "Grabatu",
@@ -562,6 +564,7 @@
         "private": "Pribatua",
         "public": "Publiko",
         "configurationSaved": "Konfigurazioa gorde da",
-        "error": "Zerbait gaizki joan da"
+        "error": "Zerbait gaizki joan da",
+        "privacySettings": "Pribatutasun ezarpenak"
     }
 }

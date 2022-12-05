@@ -2,7 +2,7 @@
 
 function MyApp_before_Q_responseExtras()
 {
-	Q_Response::addHtmlCssClass('Q_hideUntilLoaded');
+	Q_Response::addHtmlCssClass('Q_hideUntilLoaded Q_dialogs_animationFX Q_columns_animationFX');
 	Q_Response::addStylesheet('css/MyApp.css', '@end');
 	Q_Response::addScript('js/MyApp.js', 'MyApp');
 	if (Q_Request::isIE()) {

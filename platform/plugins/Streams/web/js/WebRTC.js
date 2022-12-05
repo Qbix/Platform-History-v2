@@ -58,7 +58,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          * @param {Object} [_options.startWith] Start conference with requesting camera and/or mic permissions. This option also is used as accessory variable.
          * @param {Boolean} [_options.startWith.audio] Start conference with requesting the permission to use microphone.
          * @param {Boolean} [_options.startWith.video] Start conference with requesting the permission to use camera.
-         * @param {Boolean} [_options.showPreparingDialogue] Show preparing dialogue before user joins the conference. User can turn camera/mic/screensharing on/off in this dialogue. If false, dialogue will not be shown
+         * @param {Boolean} [_options.showPreparingDialog] Show preparing dialog before user joins the conference. User can turn camera/mic/screensharing on/off in this dialog. If false, dialog will not be shown
          * @param {Boolean} [_options.useCordovaPlugins] Use iosrtc plugin's API to get permissions to camera/mic. Option is used for iOS < v.14
          * @param {Boolean} [_options.showScreenSharingInSeparateScreen] Show screen sharing video in separate screen. If false, screensharing video will be shown instead of camera.
          * @param {Boolean} [_options.minimizeOnPageSwitching] Switch layout to "minimized" when page was switched
@@ -101,7 +101,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             limits: {},
             streams: [],
             audioOnlyMode: false,
-            showPreparingDialogue: false,
+            showPreparingDialog: false,
             useCordovaPlugins: false,
             showScreenSharingInSeparateScreen: true,
             minimizeOnPageSwitching: true,
@@ -149,7 +149,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
         var publicAppInterface;
         var WebRTCconference;
 
-        var _textes = null;
         var _roomStartTime = null;
         var _controls = null;
         var _controlsTool = null;
@@ -5746,10 +5745,10 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 if(message.userId == userId) {
                     if(message.immediate === true) {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnectingImmediately);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnectingImmediately);
                         stop();
                     } else {
-                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.forceDisconnecting);
+                        if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.forceDisconnecting);
 
                         setTimeout(function () {
                             stop();
@@ -5872,7 +5871,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 log('user joined',  participant);
                 if(participant.sid == 'recording') return;
                 setRealName(participant, function(name){
-                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(_textes.webrtc.notices.joining.interpolate({userName: name.firstName}));
+                    if(WebRTCconference.initNegotiationState == 'ended') notice.show(text().webrtc.notices.joining.interpolate({userName: name.firstName}));
                 });
                 setUserAvatar(participant);
                 setUserGreeting(participant);
@@ -5914,7 +5913,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             return;
                         }
                         var firstName = this.fields.content;
-                        notice.show(_textes.webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
+                        notice.show(text().webrtc.notices.sbLeftRoom.interpolate({userName: firstName}));
 
                     });
                 }
@@ -5936,7 +5935,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             });
             WebRTCconference.event.on('localParticipantDisconnected', function (participant) {
                 log('you left the room')
-                notice.show(Q.getObject("webrtc.notices.youLeftRoom", _textes));
+                notice.show(Q.getObject("webrtc.notices.youLeftRoom", text()));
                 screensRendering.updateLayout();
             });
             WebRTCconference.event.on('participantRemoved', function (participant) {
@@ -6105,7 +6104,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          */
         var connectionState = (function () {
 
-            var preparingWindow = (_options.showPreparingDialogue || (!_options.startWith.video && !_options.startWith.audio));
+            var preparingWindow = (_options.showPreparingDialog || (!_options.startWith.video && !_options.startWith.audio));
 
             var _notice = null;
             var _currentState = preparingWindow ? "Checking room's state" : 'Connecting...';
@@ -6162,17 +6161,17 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             dialogList.className = 'Streams_webrtc_instructions_dialog';
 
             if(Q.info.platform === 'ios') {
-                dialogList.innerHTML = `<div>` + _textes.webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
-                //Q.getObject("webrtc.allow." + titleText, _textes)
+                dialogList.innerHTML = `<div>` + text().webrtc.webIosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>`;
+                //Q.getObject("webrtc.allow." + titleText, text())
             } else {
-                dialogList.innerHTML = `<div>` + _textes.webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", _textes) + `</li>
-									<li>` + _textes.webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
+                dialogList.innerHTML = `<div>` + text().webrtc.webInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.webInstructionsDialog.point1", text()) + `</li>
+									<li>` + text().webrtc.webInstructionsDialog.point2.interpolate({hostname: location.hostname}) + `</li>`;
             }
 
             instructionsPermissionDialog.appendChild(dialogList);
             Q.Dialogs.push({
-                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", _textes),
+                title: Q.getObject("webrtc.webInstructionsDialog.dialogTitle", text()),
                 className: 'Streams_webrtc_devices_dialog',
                 content: instructionsPermissionDialog,
                 apply: true
@@ -6181,9 +6180,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
         /**
          * Show dialog with buttons to get permissions for camera and/or mirophone and "Join room" button.
-         * @method showPreparingDialogue
+         * @method showPreparingDialog
          */
-        function showPreparingDialogue(callback, closeCallback, streams) {
+        function showPreparingDialog(callback, closeCallback, streams) {
             var micSVG = '<svg class="microphone-icon" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"    y="0px" viewBox="-0.165 -0.245 99.499 99.498"    enable-background="new -0.165 -0.245 99.499 99.498" xml:space="preserve">  <path fill="#FFFFFF" d="M49.584-0.245c-27.431,0-49.749,22.317-49.749,49.749c0,27.432,22.317,49.749,49.749,49.749   c27.432,0,49.75-22.317,49.75-49.749C99.334,22.073,77.016-0.245,49.584-0.245z M41.061,32.316c0-4.655,3.775-8.43,8.431-8.43   c4.657,0,8.43,3.774,8.43,8.43v19.861c0,4.655-3.773,8.431-8.43,8.431c-4.656,0-8.431-3.775-8.431-8.431V32.316z M63.928,52.576   c0,7.32-5.482,13.482-12.754,14.336v5.408h6.748v3.363h-16.86V72.32h6.749v-5.408c-7.271-0.854-12.753-7.016-12.754-14.336v-10.33   h3.362v10.125c0,6.115,4.958,11.073,11.073,11.073c6.116,0,11.073-4.958,11.073-11.073V42.246h3.363V52.576z"/>  </svg>';
             var disabledMicSVG = '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"    viewBox="0.049 -0.245 99.499 99.498" enable-background="new 0.049 -0.245 99.499 99.498"    xml:space="preserve">  <path fill="#FFFFFF" d="M49.797,99.253c-27.431,0-49.749-22.317-49.749-49.749c0-27.431,22.317-49.749,49.749-49.749   c27.432,0,49.75,22.317,49.75,49.749C99.548,76.936,77.229,99.253,49.797,99.253z M49.797,3.805   c-25.198,0-45.698,20.5-45.698,45.699s20.5,45.699,45.698,45.699c25.2,0,45.7-20.501,45.7-45.699S74.997,3.805,49.797,3.805z"/>  <path fill="#FFFFFF" d="M49.798,60.607c4.657,0,8.43-3.775,8.43-8.431v-8.634L44.893,59.024   C46.276,60.017,47.966,60.607,49.798,60.607z"/>  <path fill="#FFFFFF" d="M58.229,32.316c0-4.656-3.773-8.43-8.43-8.43c-4.656,0-8.43,3.775-8.431,8.43v19.861   c0,0.068,0.009,0.135,0.01,0.202l16.851-19.563V32.316z"/>  <path fill="#FFFFFF" d="M48.117,66.912v5.408h-6.749v3.363h16.86V72.32h-6.748v-5.408c7.271-0.854,12.754-7.016,12.754-14.336   v-10.33H60.87v10.125c0,6.115-4.957,11.073-11.072,11.073c-2.537,0-4.867-0.862-6.733-2.297l-2.305,2.675   C42.813,65.475,45.331,66.585,48.117,66.912z"/>  <path fill="#FFFFFF" d="M38.725,52.371V42.246h-3.362v10.33c0,1.945,0.397,3.803,1.102,5.507l2.603-3.022   C38.852,54.198,38.725,53.301,38.725,52.371z"/>  <rect x="47.798" y="11.385" transform="matrix(0.7578 0.6525 -0.6525 0.7578 43.3634 -20.8757)" fill="#C12337" width="4" height="73.163"/>  </svg>';
             var cameraSVG = '<svg version="1.1"    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"    x="0px" y="0px" width="101px" height="101px" viewBox="-0.335 -0.255 101 101" enable-background="new -0.335 -0.255 101 101"    xml:space="preserve">  <defs>  </defs>  <path opacity="0.2" d="M50,2.5C23.809,2.5,2.5,23.808,2.5,50S23.808,97.499,50,97.499c26.191,0,47.5-21.308,47.5-47.499   C97.5,23.809,76.19,2.5,50,2.5z"/>  <path fill="#FFFFFF" d="M50,0C22.431,0,0,22.43,0,50c0,27.57,22.429,49.999,50,49.999c27.57,0,50-22.429,50-49.999   C100,22.431,77.569,0,50,0z M77.71,61.245l-15.599-9.006v8.553H25.516V37.254h36.595v8.839l15.599-9.006V61.245z"/>  </svg>';
@@ -6323,7 +6322,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 var joinButton = document.createElement('DIV');
                 joinButton.type = 'button';
                 joinButton.className = 'Q_button Streams_webrtc_join-button';
-                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", _textes);
+                joinButton.innerHTML = Q.getObject("webrtc.preparing.joinNow", text());
 
 
                 //meetingStatus.appendChild(participantsIcon);
@@ -6595,7 +6594,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     }
 
                 }
-                //if(_options.showPreparingDialogue.screen === true) switchScreenshare();
+                //if(_options.showPreparingDialog.screen === true) switchScreenshare();
                 switchScreenSharingBtn.addEventListener('mouseup', function () {
                     switchScreenshare();
                 });
@@ -6685,7 +6684,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
                     Q.Dialogs.push({
-                        title: 'Turn camera or mic on/off before you join',
+                        title: Q.text.Streams.webrtc.preparing.dialogTitle,
                         className: 'Streams_webrtc_preparing_dialog',
                         content: mediaDevicesDialog,
                         apply: false,
@@ -6752,14 +6751,14 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
                             var dialogList = document.createElement('OL');
                             dialogList.className = 'Streams_webrtc_instructions_dialog';
-                            dialogList.innerHTML = `<div>` + _textes.webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", _textes) + `</li>
-									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
-									<li>` + _textes.webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
+                            dialogList.innerHTML = `<div>` + text().webrtc.iosInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point1", text()) + `</li>
+									<li>` + Q.getObject("webrtc.iosInstructionsDialog.point2", text()) + `</li>
+									<li>` + text().webrtc.iosInstructionsDialog.point3.interpolate({kind: kind}) + `</li>
+									<li>` + text().webrtc.iosInstructionsDialog.point4.interpolate({communityId: Q.Users.communityId}) + `</li>`;
                             instructionsPermissionDialog.appendChild(dialogList);
                             Q.Dialogs.push({
-                                title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", _textes),
+                                title: Q.getObject("webrtc.iosInstructionsDialog.dialogTitle", text()),
                                 className: 'Streams_webrtc_devices_dialog',
                                 content: instructionsPermissionDialog,
                                 apply: true
@@ -7163,7 +7162,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 log('Start WebRTC conference room', publicAppInterface);
 
-                var preparingWindow = (_options.showPreparingDialogue/* || (!_options.startWith.video && !_options.startWith.audio)*/);
+                var preparingWindow = (_options.showPreparingDialog/* || (!_options.startWith.video && !_options.startWith.audio)*/);
 
                 connectionState.show(preparingWindow ? "Checking room's state" : 'Connecting...');
 
@@ -7178,10 +7177,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 Q.Text.get("Streams/content", function (err, result) {
                     log('start: translation loaded');
 
-                    _textes = result;
-
                     if(appDebug.isiOSwebView()) {
-                        return Q.alert(_textes.webrtc.notices.openInBrowserAlert != null ? _textes.webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
+                        return Q.alert(text().webrtc.notices.openInBrowserAlert != null ? text().webrtc.notices.openInBrowserAlert : 'Open link in Safari browser to join the conference.' );
                     }
 
                     onTextLoad();
@@ -7194,9 +7191,9 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 var ua = navigator.userAgent;
                 var startWith = _options.startWith || {};
-                var preparingWindow = (_options.showPreparingDialogue/* || (!_options.startWith.video && !_options.startWith.audio)*/);
+                var preparingWindow = (_options.showPreparingDialog/* || (!_options.startWith.video && !_options.startWith.audio)*/);
 
-                log('start: onTextLoad', preparingWindow, _options.showPreparingDialogue.video, _options.showPreparingDialogue.audio);
+                log('start: onTextLoad', preparingWindow, _options.showPreparingDialog.video, _options.showPreparingDialog.audio);
 
 
                 if((typeof window.RTCPeerConnection == 'undefined' && typeof window.mozRTCPeerConnection == 'undefined' && typeof  window.webkitRTCPeerConnection == 'undefined')) {
@@ -7379,7 +7376,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     log('start: onTextLoad: connect from mobile/tablet browser');
 
                     if(preparingWindow) {
-                        showPreparingDialogue(function () {
+                        showPreparingDialog(function () {
                             createOrJoinRoomStream(_options.roomId, _options.roomPublisherId);
                         }, function () {
                             connectionState.updateStatus('Disconnected');
@@ -7404,15 +7401,15 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                 instructionsPermissionDialog.className = 'Streams_webrtc_devices_dialog_inner';
                                 var dialogList = document.createElement('OL');
                                 dialogList.className = 'Streams_webrtc_instructions_dialog';
-                                dialogList.innerHTML = `<div>` + _textes.webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
-									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", _textes) + `</li>
-									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point3.interpolate({communityId: Q.Users.communityId}) + `</li>
-									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", _textes) + `</li>
-									<li>` + _textes.webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
+                                dialogList.innerHTML = `<div>` + text().webrtc.androidInstructionsDialog.permissionDenied.interpolate({kind: kind}) + `</div>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point1", text()) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point2", text()) + `</li>
+									<li>` + text().webrtc.androidInstructionsDialog.point3.interpolate({communityId: Q.Users.communityId}) + `</li>
+									<li>` + Q.getObject("webrtc.androidInstructionsDialog.point4", text()) + `</li>
+									<li>` + text().webrtc.androidInstructionsDialog.point5.interpolate({kind: kind}) + `</li>`;
                                 instructionsPermissionDialog.appendChild(dialogList);
                                 Q.Dialogs.push({
-                                    title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", _textes),
+                                    title: Q.getObject("webrtc.androidInstructionsDialog.dialogTitle", text()),
                                     className: 'Streams_webrtc_devices_dialog',
                                     content: instructionsPermissionDialog,
                                     apply: true
@@ -7512,7 +7509,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     if(preparingWindow) {
                         getMediaStream({video: startWith.video, audio: true}).then(function (streams) {
-                            showPreparingDialogue(function () {
+                            showPreparingDialog(function () {
                                 createOrJoinRoomStream(_options.roomId, _options.roomPublisherId);
                             }, function () {
                                 unsetResizeObserver();
@@ -7574,7 +7571,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             function continueSwitching() {
                 log('switchTo: promise: onResolve')
 
-                if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", _textes));
+                if(notice) connectionState.updateStatus(Q.getObject("webrtc.notices.switchingRoom", text()));
 
                 if(Q.Socket.getAll()['/webrtc']) {
                     Q.Socket.getAll()['/webrtc'] = null;
@@ -7758,8 +7755,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             return WebRTCconference != null && WebRTCconference.state != 'disconnected' ? true : false;
         }
 
-        function textes() {
-            return _textes;
+        function text() {
+            return Q.text.Streams;
         }
 
         return {
@@ -7772,7 +7769,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             roomStream: roomStream,
             getOptions: getOptions,
             isActive: isActive,
-            textes: textes,
+            text: text,
             screenRendering: screensRendering,
             loader: connectionState,
             notice: notice,

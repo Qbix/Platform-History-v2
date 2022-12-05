@@ -36,7 +36,7 @@
 
         {
             onSelect: new Q.Event(),
-            openInDialogue: true,
+            openInDialog: true,
             currentDirStreamName: 'Streams/fileManager/main',
             history: {streams:[], currentIndex:0}
         },
@@ -87,9 +87,9 @@
                 fileManagerControlsInner.appendChild(fileManagerControlsAddCon);
 
 
-                var fileManagerControlsCloseDialogue = document.createElement('DIV');
-                fileManagerControlsCloseDialogue.className = 'Streams_fileManager_controls_close';
-                if(tool.state.openInDialogue) fileManagerControlsInner.appendChild(fileManagerControlsCloseDialogue);
+                var fileManagerControlsCloseDialog = document.createElement('DIV');
+                fileManagerControlsCloseDialog.className = 'Streams_fileManager_controls_close';
+                if(tool.state.openInDialog) fileManagerControlsInner.appendChild(fileManagerControlsCloseDialog);
 
                 fileManagerControlsCon.appendChild(fileManagerControlsInner);
                 fileManagerInner.appendChild(fileManagerControlsCon);
@@ -102,11 +102,11 @@
                 fileManagerExplorerCon.appendChild(fileManagerExplorerInner);
                 fileManagerInner.appendChild(fileManagerExplorerCon);
 
-                console.log('tool.state.openInDialogue', tool.state.openInDialogue)
-                if(!tool.state.openInDialogue) tool.element.appendChild(fileManagerCon);
+                console.log('tool.state.openInDialog', tool.state.openInDialog)
+                if(!tool.state.openInDialog) tool.element.appendChild(fileManagerCon);
 
-                fileManagerControlsCloseDialogue.addEventListener('click', function () {
-                    tool.closeDialogue();
+                fileManagerControlsCloseDialog.addEventListener('click', function () {
+                    tool.closeDialog();
                 })
 
                 fileManagerControlsBackCon.addEventListener('click', function () {
@@ -452,23 +452,23 @@
                     })
                 }
             },
-            showDialogue: function () {
+            showDialog: function () {
                 var tool = this;
                 console.log('tool.fileManagerEl', Q.Dialogs)
-                var dialogueCon = tool.fileManagerDialogue = document.createElement('DIV');
-                dialogueCon.className = 'Streams_fileManager_dialogue_con';
-                var dialogueInner = document.createElement('DIV');
-                dialogueInner.className = 'Streams_fileManager_dialogue_inner';
+                var dialogCon = tool.fileManagerDialog = document.createElement('DIV');
+                dialogCon.className = 'Streams_fileManager_dialog_con';
+                var dialogInner = document.createElement('DIV');
+                dialogInner.className = 'Streams_fileManager_dialog_inner';
 
-                dialogueInner.appendChild(tool.fileManagerEl);
-                dialogueCon.appendChild(dialogueInner);
-                tool.element.appendChild(dialogueCon);
+                dialogInner.appendChild(tool.fileManagerEl);
+                dialogCon.appendChild(dialogInner);
+                tool.element.appendChild(dialogCon);
                 tool.refresh();
             },
-            closeDialogue: function () {
+            closeDialog: function () {
                 var tool = this;
-                if(tool.fileManagerDialogue && tool.fileManagerDialogue.parentElement) {
-                    tool.fileManagerDialogue.parentElement.removeChild(tool.fileManagerDialogue);
+                if(tool.fileManagerDialog && tool.fileManagerDialog.parentElement) {
+                    tool.fileManagerDialog.parentElement.removeChild(tool.fileManagerDialog);
                 }
             }
         }

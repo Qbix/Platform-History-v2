@@ -968,8 +968,7 @@ class Q_Utils
 	 * @method getMulti
 	 * @static
 	 * @param {array} $paramsArray An array where each each entry is an array of parameters to ::request
-	 * @return {string|false} The response, or false if not received
-	 * **NOTE:** *The function waits for it, which might take a while!*
+	 * @return {array} The array of results from curl_multi_getcontent
 	 */
 	static function requestMulti($paramsArray)
 	{
@@ -989,10 +988,13 @@ class Q_Utils
 				curl_multi_select($mh);
 			}
 		} while ($active && $status == CURLM_OK);
+		$results = array();
 		foreach ($handles as $ch) {
+			$results[] = curl_multi_getcontent($ch);
 			curl_multi_remove_handle($mh, $ch);
 		}
 		curl_multi_close($mh);
+		return $results;
 	}
 
 	/**

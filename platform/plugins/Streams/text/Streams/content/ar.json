@@ -274,7 +274,8 @@
             "cameraIsOn": "الكاميرا قيد التشغيل",
             "screenSharingIsOn": "مشاركة الشاشة قيد التشغيل",
             "screenSharingIsOff": "شاشة المشاركة",
-            "joinNow": "انضم إلى المكالمة"
+            "joinNow": "انضم إلى المكالمة",
+            "dialogTitle": "قم بتشغيل \/ إيقاف تشغيل الكاميرا أو الميكروفون قبل الانضمام"
         },
         "audioSettings": {
             "dialogTitle": "إعدادات الصوت",
@@ -447,7 +448,8 @@
         "Submenu": "القائمة الفرعية"
     },
     "errors": {
-        "HiddenFromYou": "هذا المحتوى مخفي عنك."
+        "HiddenFromYou": "هذا المحتوى مخفي عنك.",
+        "InplaceTypeMustBe": "يجب أن يكون inplaceType &quot;textarea&quot; أو &quot;text&quot;"
     },
     "audio": {
         "record": "سجل",
@@ -562,6 +564,7 @@
         "private": "خاص",
         "public": "عام",
         "configurationSaved": "تم حفظ التكوين",
-        "error": "هناك خطأ ما"
+        "error": "هناك خطأ ما",
+        "privacySettings": "إعدادات الخصوصية"
     }
 }

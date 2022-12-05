@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Ta treść jest przed Tobą ukryta."
+        "HiddenFromYou": "Ta treść jest przed Tobą ukryta.",
+        "InplaceTypeMustBe": "inplaceType musi mieć wartość „textarea” lub „text”"
     },
     "preview": {
         "NewItemTitle": "Nowy przedmiot"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kamera jest włączona",
             "screenSharingIsOn": "Udostępnianie ekranu jest włączone",
             "screenSharingIsOff": "Udostępnij ekran",
-            "joinNow": "Dołącz do rozmowy"
+            "joinNow": "Dołącz do rozmowy",
+            "dialogTitle": "Włącz\/wyłącz kamerę lub mikrofon, zanim dołączysz"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Instrukcje",
@@ -556,6 +558,7 @@
         "private": "Prywatny",
         "public": "Publiczny",
         "configurationSaved": "Konfiguracja została zapisana",
-        "error": "Coś poszło nie tak"
+        "error": "Coś poszło nie tak",
+        "privacySettings": "Ustawienia prywatności"
     }
 }

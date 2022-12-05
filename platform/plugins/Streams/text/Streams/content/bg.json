@@ -274,7 +274,8 @@
             "cameraIsOn": "Камерата е включена",
             "screenSharingIsOn": "Споделянето на екрана е включено",
             "screenSharingIsOff": "сподели екран",
-            "joinNow": "Присъединете се към разговора"
+            "joinNow": "Присъединете се към разговора",
+            "dialogTitle": "Включете\/изключете камерата или микрофона, преди да се присъедините"
         },
         "audioSettings": {
             "dialogTitle": "Аудио настройки",
@@ -447,7 +448,8 @@
         "Submenu": "Подменю"
     },
     "errors": {
-        "HiddenFromYou": "Това съдържание е скрито от вас."
+        "HiddenFromYou": "Това съдържание е скрито от вас.",
+        "InplaceTypeMustBe": "inplaceType трябва да бъде &#39;textarea&#39; или &#39;text&#39;"
     },
     "audio": {
         "record": "Запис",
@@ -562,6 +564,7 @@
         "private": "Частно",
         "public": "Обществен",
         "configurationSaved": "Конфигурацията е запазена",
-        "error": "Нещо се обърка"
+        "error": "Нещо се обърка",
+        "privacySettings": "Настройките за поверителност"
     }
 }

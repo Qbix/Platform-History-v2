@@ -11,6 +11,7 @@
  * @param {Object} [options] Override various options for this tool
  *  @param {String} [options.publisherId] user id of the publisher of the stream
  *  @param {String} [options.streamName] the stream's name
+ *  @param {String} [options.chainId=Q.Assets.NFT.defaultChain.chainId] override the default
  *  @param {Q.Event} [options.onMove] Event that fires after a move
  */
 
@@ -41,6 +42,7 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
 { // default options here
     abiPath: "Assets/templates/R1/NFT/sales/contract",
     salesAddress: '',
+    chainId: Q.Assets.NFT.defaultChain.chainId,
     onMove: new Q.Event() // an event that the tool might trigger
 },
 
@@ -78,7 +80,11 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                 // check is in whitelist
                 Q.Users.Web3.getContract(
                     state.abiPath, 
-                    state.salesAddress
+                    {
+                        contractAddress: state.salesAddress,
+                        readOnly: true,
+                        chainId: state.chainId
+                    }
                 ).then(function (contract) {
                     return contract.owner();
                 }).then(function (account) {

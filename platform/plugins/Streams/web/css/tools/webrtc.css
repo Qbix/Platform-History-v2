@@ -993,9 +993,6 @@
 }
 .Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name{
     max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 .Streams_webrtc_mobile-screen .Streams_webrtc_chat-participant-name .Streams_webrtc_participant-name-text .Users_avatar_name > *{
     text-overflow: ellipsis;

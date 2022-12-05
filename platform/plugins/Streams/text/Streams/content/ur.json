@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "یہ مواد آپ سے پوشیدہ ہے۔"
+        "HiddenFromYou": "یہ مواد آپ سے پوشیدہ ہے۔",
+        "InplaceTypeMustBe": "inplaceType &#39;textarea&#39; یا &#39;text&#39; ہونا چاہیے"
     },
     "preview": {
         "NewItemTitle": "نئی چیز"
@@ -180,7 +181,8 @@
             "cameraIsOn": "کیمرہ آن ہے۔",
             "screenSharingIsOn": "اسکرین شیئرنگ آن ہے۔",
             "screenSharingIsOff": "اسکرین شیئر کریں۔",
-            "joinNow": "کال میں شامل ہوں۔"
+            "joinNow": "کال میں شامل ہوں۔",
+            "dialogTitle": "شامل ہونے سے پہلے کیمرہ یا مائیک آن\/آف کریں۔"
         },
         "webInstructionsDialog": {
             "dialogTitle": "ہدایات",
@@ -556,6 +558,7 @@
         "private": "نجی",
         "public": "عوام",
         "configurationSaved": "کنفیگریشن محفوظ ہو گئی۔",
-        "error": "کچھ غلط ہو گیا"
+        "error": "کچھ غلط ہو گیا",
+        "privacySettings": "رازداری کی ترتیبات"
     }
 }

@@ -1,5 +1,5 @@
 <?php
-function Assets_currency_response_cryptoBalance($params) {
+function Assets_currencies_response_cryptoBalance($params) {
 	$req = array_merge($_REQUEST, $params);
 	Q_Valid::requireFields(array("userId"), $req, true);
 

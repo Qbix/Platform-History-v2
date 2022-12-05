@@ -25,15 +25,13 @@ if (!defined('Q_DIR')) {
 		APP_DIR, 'local', 'paths.json'
 	)));
 	if (!file_exists($paths_filename)) {
-		die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n$footer");
+		die("$header\nGo to $basename/scripts/Q directory and run php configure.php");
 	}
 	$paths = json_decode(file_get_contents($paths_filename), true);
 	define('Q_DIR', isset($paths['platform']) ? $paths['platform'] : '');
 }
 
-include($paths_filename);
-
-$realpath = realpath(Q_DIR.'/Q.php');
+$realpath = realpath(Q_DIR.DIRECTORY_SEPARATOR.'Q.php');
 if (!$realpath) {
 	die("Please edit $basename/local/paths.json to look like " .
 		'{"platform": "path/to/Q/platform"}' .

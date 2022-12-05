@@ -274,7 +274,8 @@
             "cameraIsOn": "Камера ўключана",
             "screenSharingIsOn": "Абагульванне экрана ўключана",
             "screenSharingIsOff": "Падзяліцца экранам",
-            "joinNow": "Далучайцеся да выкліку"
+            "joinNow": "Далучайцеся да выкліку",
+            "dialogTitle": "Перш чым далучыцца, уключыце і выключыце камеру або мікрафон"
         },
         "audioSettings": {
             "dialogTitle": "Налады гуку",
@@ -447,7 +448,8 @@
         "Submenu": "Падменю"
     },
     "errors": {
-        "HiddenFromYou": "Гэты кантэнт схаваны ад вас."
+        "HiddenFromYou": "Гэты кантэнт схаваны ад вас.",
+        "InplaceTypeMustBe": "inplaceType павінен быць &#39;textarea&#39; або &#39;text&#39;"
     },
     "audio": {
         "record": "Запіс",
@@ -562,6 +564,7 @@
         "private": "Прыватны",
         "public": "Грамадскі",
         "configurationSaved": "Канфігурацыя захавана",
-        "error": "Нешта пайшло не так"
+        "error": "Нешта пайшло не так",
+        "privacySettings": "Налады прыватнасці"
     }
 }

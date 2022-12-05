@@ -274,7 +274,8 @@
             "cameraIsOn": "相机已开启",
             "screenSharingIsOn": "屏幕共享已开启",
             "screenSharingIsOff": "共享屏幕",
-            "joinNow": "加入通话"
+            "joinNow": "加入通话",
+            "dialogTitle": "加入前打开\/关闭摄像头或麦克风"
         },
         "audioSettings": {
             "dialogTitle": "音频设置",
@@ -448,7 +449,8 @@
         "Submenu": "子菜单"
     },
     "errors": {
-        "HiddenFromYou": "此内容对您隐藏。"
+        "HiddenFromYou": "此内容对您隐藏。",
+        "InplaceTypeMustBe": "inplaceType 必须是 &#39;textarea&#39; 或 &#39;text&#39;"
     },
     "audio": {
         "record": "记录",
@@ -563,6 +565,7 @@
         "private": "私人的",
         "public": "上市",
         "configurationSaved": "配置已保存",
-        "error": "出问题了"
+        "error": "出问题了",
+        "privacySettings": "隐私设置"
     }
 }

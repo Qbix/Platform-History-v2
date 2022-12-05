@@ -473,18 +473,18 @@
                         maxY = moveWithinRect.y + moveWithinRect.height;
                         diffX = posX - divLeft, diffY = posY - divTop;
             
-                        tool.events.dispatch('movingstart');
+                        tool.events.dispatch(Q.Pointer.move);
             
                         if (_isTouchScreen) {
                             window.addEventListener('touchmove', drag, { passive: false });
-                        } else window.addEventListener('mousemove', drag, { passive: false });
+                        } else {
+                            window.addEventListener(Q.Pointer.move, drag, { passive: false });
+                        }
                     }
             
                     function stopMoving(e) {
             
-                        if (_isTouchScreen) {
-                            window.removeEventListener('touchmove', drag, { passive: false });
-                        } else window.removeEventListener('mousemove', drag, { passive: false });
+                        window.removeEventListener(Q.Pointer.move, drag, { passive: false });
             
                         if (_elementToMove != null) _elementToMove.style.cursor = '';
             
@@ -620,8 +620,8 @@
                         originalMouseY = e.clientY;
             
                         tool.state.isResizing = true;
-                        window.addEventListener('mousemove', startResizing);
-                        window.addEventListener('mouseup', stopResizing);
+                        window.addEventListener(Q.Pointer.move, startResizing);
+                        window.addEventListener(Q.Pointer.end, stopResizing);
                     }
             
                     function keepRatio(width, height, priorityParam) {
@@ -1197,8 +1197,8 @@
                     function stopResizing(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        window.removeEventListener('mousemove', startResizing);
-                        window.removeEventListener('mouseup', stopResizing);
+                        window.removeEventListener(Q.Pointer.move, startResizing);
+                        window.removeEventListener(Q.Pointer.end, stopResizing);
                         _ratio = null;
                         tool.state.isResizing = false;
             

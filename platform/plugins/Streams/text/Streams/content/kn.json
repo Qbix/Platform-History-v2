@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "ಈ ವಿಷಯವನ್ನು ನಿಮ್ಮಿಂದ ಮರೆಮಾಡಲಾಗಿದೆ."
+        "HiddenFromYou": "ಈ ವಿಷಯವನ್ನು ನಿಮ್ಮಿಂದ ಮರೆಮಾಡಲಾಗಿದೆ.",
+        "InplaceTypeMustBe": "ಇನ್‌ಪ್ಲೇಸ್‌ಟೈಪ್ &#39;ಟೆಕ್ಸ್‌ಟೇರಿಯಾ&#39; ಅಥವಾ &#39;ಪಠ್ಯ&#39; ಆಗಿರಬೇಕು"
     },
     "preview": {
         "NewItemTitle": "ಹೊಸ ಐಟಂ"
@@ -180,7 +181,8 @@
             "cameraIsOn": "ಕ್ಯಾಮರಾ ಆನ್ ಆಗಿದೆ",
             "screenSharingIsOn": "ಸ್ಕ್ರೀನ್‌ಶೇರಿಂಗ್ ಆನ್ ಆಗಿದೆ",
             "screenSharingIsOff": "ಪರದೆಯನ್ನು ಹಂಚಿಕೊಳ್ಳಿ",
-            "joinNow": "ಕರೆಗೆ ಸೇರಿಕೊಳ್ಳಿ"
+            "joinNow": "ಕರೆಗೆ ಸೇರಿಕೊಳ್ಳಿ",
+            "dialogTitle": "ನೀವು ಸೇರುವ ಮೊದಲು ಕ್ಯಾಮರಾ ಅಥವಾ ಮೈಕ್ ಅನ್ನು ಆನ್\/ಆಫ್ ಮಾಡಿ"
         },
         "webInstructionsDialog": {
             "dialogTitle": "ಸೂಚನೆಗಳು",
@@ -556,6 +558,7 @@
         "private": "ಖಾಸಗಿ",
         "public": "ಸಾರ್ವಜನಿಕ",
         "configurationSaved": "ಸಂರಚನೆಯನ್ನು ಉಳಿಸಲಾಗಿದೆ",
-        "error": "ಏನೋ ತಪ್ಪಾಗಿದೆ"
+        "error": "ಏನೋ ತಪ್ಪಾಗಿದೆ",
+        "privacySettings": "ಗೌಪ್ಯತಾ ಸೆಟ್ಟಿಂಗ್ಗಳು"
     }
 }

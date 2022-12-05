@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "ეს კონტენტი იმალება თქვენგან."
+        "HiddenFromYou": "ეს კონტენტი იმალება თქვენგან.",
+        "InplaceTypeMustBe": "inplaceType უნდა იყოს „textarea“ ან „ტექსტი“"
     },
     "preview": {
         "NewItemTitle": "Ახალი ნივთი"
@@ -180,7 +181,8 @@
             "cameraIsOn": "კამერა ჩართულია",
             "screenSharingIsOn": "ეკრანის გაზიარება ჩართულია",
             "screenSharingIsOff": "ეკრანის გაზიარება",
-            "joinNow": "შეუერთდი ზარს"
+            "joinNow": "შეუერთდი ზარს",
+            "dialogTitle": "ჩართეთ\/გამორთეთ კამერა ან მიკროფონი, სანამ შეუერთდებით"
         },
         "webInstructionsDialog": {
             "dialogTitle": "ინსტრუქციები",
@@ -556,6 +558,7 @@
         "private": "პირადი",
         "public": "საჯარო",
         "configurationSaved": "კონფიგურაცია შენახულია",
-        "error": "Რაღაც არასწორად წავიდა"
+        "error": "Რაღაც არასწორად წავიდა",
+        "privacySettings": "Კონფიდენციალურობის პარამეტრები"
     }
 }

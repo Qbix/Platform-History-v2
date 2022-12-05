@@ -1840,12 +1840,12 @@ Q.copy = function _Q_copy(x, fields, levels) {
  * @param {Object} target
  *  This is the first object. It winds up being modified, and also returned
  *  as the return value of the function.
- * @param {number} levels
- *  Optional. Precede any Object with an integer to indicate that we should 
- *  also copy that many additional levels inside the object.
- * @param {Boolean|Number} deep
+ * @param {Boolean} deep
  *  Optional. Precede any Object with a boolean true to indicate that we should
  *  also copy the properties it inherits through its prototype chain.
+ * @param {Number} levels
+ *  Optional. Precede any Object with an integer to indicate that we should 
+ *  also copy that many additional levels inside the object.
  * @param {Object} anotherObject
  *  Put as many objects here as you want, and they will extend the original one.
  * @return {Object} The extended object.

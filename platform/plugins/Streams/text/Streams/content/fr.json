@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Ce contenu vous est caché."
+        "HiddenFromYou": "Ce contenu vous est caché.",
+        "InplaceTypeMustBe": "inplaceType doit être &#39;textarea&#39; ou &#39;text&#39;"
     },
     "preview": {
         "NewItemTitle": "Nouvel article"
@@ -180,7 +181,8 @@
             "cameraIsOn": "La caméra est allumée",
             "screenSharingIsOn": "Le partage d&#39;écran est activé",
             "screenSharingIsOff": "Partager l&#39;écran",
-            "joinNow": "Rejoignez l&#39;appel"
+            "joinNow": "Rejoignez l&#39;appel",
+            "dialogTitle": "Activez\/désactivez la caméra ou le micro avant de vous joindre"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Des instructions",
@@ -556,6 +558,7 @@
         "private": "Privé",
         "public": "Public",
         "configurationSaved": "Configuration enregistrée",
-        "error": "Quelque chose s&#39;est mal passé"
+        "error": "Quelque chose s&#39;est mal passé",
+        "privacySettings": "Paramètres de confidentialité"
     }
 }

@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Оваа содржина е скриена од вас."
+        "HiddenFromYou": "Оваа содржина е скриена од вас.",
+        "InplaceTypeMustBe": "inplaceType мора да биде „textarea“ или „text“"
     },
     "preview": {
         "NewItemTitle": "Нова ставка"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Камерата е вклучена",
             "screenSharingIsOn": "Споделувањето екран е вклучено",
             "screenSharingIsOff": "Споделете го екранот",
-            "joinNow": "Приклучи се на повикот"
+            "joinNow": "Приклучи се на повикот",
+            "dialogTitle": "Вклучете\/исклучете ја камерата или микрофонот пред да се придружите"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Инструкции",
@@ -556,6 +558,7 @@
         "private": "Приватен",
         "public": "Јавно",
         "configurationSaved": "Конфигурацијата е зачувана",
-        "error": "Нешто тргна наопаку"
+        "error": "Нешто тргна наопаку",
+        "privacySettings": "Поставки за приватност"
     }
 }

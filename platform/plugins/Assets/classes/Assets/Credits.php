@@ -173,7 +173,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 		// if user spend credits to stream, make it send credits to stream publisher
 		if ($toPublisherId && $toStreamName) {
-			self::send($amount, $reason, $toPublisherId, $userId, $more);
+			self::transfer($amount, $reason, $toPublisherId, $userId, $more);
 
 			/**
 			 * @event Assets/credits/spend {after}
@@ -310,18 +310,18 @@ class Assets_Credits extends Base_Assets_Credits
 	}
 	
 	/**
-	 * Send credits, as the logged-in user, to another user
-	 * @method send
+	 * Transfer credits, as the logged-in user, to another user
+	 * @method transfer
 	 * @static
-	 * @param {integer} $amount The amount of credits to send.
-	 * @param {string} $toUserId The id of the user to whom you will send the credits
-	 * @param {string} $reason Identifies the reason for send. Can't be null.
+	 * @param {integer} $amount The amount of credits to transfer.
+	 * @param {string} $toUserId The id of the user to whom you will transfer the credits
+	 * @param {string} $reason Identifies the reason for transfer. Can't be null.
 	 * @param {string} [$fromUserId=null] null = logged user
 	 * @param {array} [$more] An array supplying more information
 	 * @param {array} [$more.items] an array of items, each with "publisherId", "streamName" and "amount"
 	 * @param {array} [$more.forcePayment=false] If true and not enough credits, try to charge credits
 	 */
-	static function send($amount, $reason, $toUserId, $fromUserId = null, $more = array())
+	static function transfer($amount, $reason, $toUserId, $fromUserId = null, $more = array())
 	{
 		$amount = (int)$amount;
 		if ($amount <= 0) {
@@ -338,7 +338,7 @@ class Assets_Credits extends Base_Assets_Credits
 		$fromUserId = Q::ifset($fromUserId, Users::loggedInUser(true)->id);
 
 		if ($toUserId == $fromUserId) {
-			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t send to yourself'));
+			throw new Q_Exception_WrongValue(array('field' => 'fromUserId', 'range' => 'you can\'t transfer to yourself'));
 		}
 
 		$more['amount'] = $amount;
@@ -357,7 +357,7 @@ class Assets_Credits extends Base_Assets_Credits
 
 				// if charge success, turn off forcePayment and try again
 				$more["forcePayment"] = false;
-				return self::send($amount, $reason, $toUserId, $fromUserId, $more);
+				return self::transfer($amount, $reason, $toUserId, $fromUserId, $more);
 			}
 
 			throw new Assets_Exception_NotEnoughCredits(array(
@@ -451,9 +451,9 @@ class Assets_Credits extends Base_Assets_Credits
 	 * @method createRow
 	 * @static
 	 * @param {int} $amount Amount of credits. Required,
-	 * @param {string} $reason Identifies the reason for send. Required.
+	 * @param {string} $reason Identifies the reason for the transfer. Required.
 	 * @param {string} $toUserId User id who gets the credits.
-	 * @param {string} $fromUserId User id who sends the credits.
+	 * @param {string} $fromUserId User id who transfer the credits.
 	 * @param {array} [$more] An array supplying more optional info, including things like
 	 * @param {string} [$more.toPublisherId] The publisher of the value-producing stream for which the payment is made
 	 * @param {string} [$more.toStreamName] The name of the stream value-producing for which the payment is made

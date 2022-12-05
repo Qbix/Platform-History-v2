@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "این محتوا از شما پنهان است."
+        "HiddenFromYou": "این محتوا از شما پنهان است.",
+        "InplaceTypeMustBe": "inplaceType باید &quot;textarea&quot; یا &quot;text&quot; باشد"
     },
     "preview": {
         "NewItemTitle": "گزینه جدید"
@@ -180,7 +181,8 @@
             "cameraIsOn": "دوربین روشن است",
             "screenSharingIsOn": "اشتراک‌گذاری صفحه نمایش روشن است",
             "screenSharingIsOff": "اشتراک گذاری صفحه",
-            "joinNow": "به تماس بپیوندید"
+            "joinNow": "به تماس بپیوندید",
+            "dialogTitle": "قبل از پیوستن، دوربین یا میکروفون را روشن\/خاموش کنید"
         },
         "webInstructionsDialog": {
             "dialogTitle": "دستورالعمل ها",
@@ -556,6 +558,7 @@
         "private": "خصوصی",
         "public": "عمومی",
         "configurationSaved": "پیکربندی ذخیره شد",
-        "error": "مشکلی پیش آمد"
+        "error": "مشکلی پیش آمد",
+        "privacySettings": "تنظیمات حریم خصوصی"
     }
 }

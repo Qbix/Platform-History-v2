@@ -7,6 +7,7 @@
  * @method overlay
  * @param {Object} [options]
  * @param {Boolean} [options.apply] Set to true if the dialog should show the "apply" style button to close dialog
+ *  @param {String} [options.elementId] an ID to set for dialog element, just use className if you aren't sure it's unique
  * @param {String} [options.className] Any CSS class to add to the dialog element
  * @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
  * @param {Boolean|String} [options.mask=false] If true, adds a mask to cover the screen behind the overlay. If a string, this is passed as the className of the mask.
@@ -113,6 +114,9 @@ Q.Tool.jQuery('Q/overlay',
 				if (o.className) {
 					$this.addClass(o.className);
 				};
+				if (o.elementId) {
+					$this.attr('id', o.elementId);
+				}
 				var topZ = 0;
 				$body.children().each(function () {
 					var $this = $(this);
@@ -342,7 +346,8 @@ Q.Tool.jQuery('Q/overlay',
  * Opens a dialog
  * @method Q/dialog
  * @param {Object} [options] A hash of options, that can include:
- *   @param {String} [options.url]  If provided, this url will be used to fetch the "title" and "dialog" slots, to display in the dialog.
+ *   @param {String} [options.url]  If provided, this url will be used to fetch the "title" and "dialog" slots, to display in the dialog. 	 *  @param {String} [options.elementId] an ID to set for dialog element, make sure it's actually unique
+ *   @param {String} [options.elementId] an ID to set for dialog element, just use className if you aren't sure it's unique
  *   @param {String} [options.className] Any CSS class to add to the dialog element
  *   @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
  *   @param {Boolean|String} [options.mask=true] If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
@@ -397,6 +402,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			$this.plugin('Q/overlay', {
 				top: topPos,
 				className: o.className,
+				elementId: o.elementId,
 				htmlClass: o.htmlClass,
 				mask: o.mask,
 				closeOnMask: o.closeOnMask,

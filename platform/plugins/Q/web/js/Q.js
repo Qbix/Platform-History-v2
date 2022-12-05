@@ -1737,12 +1737,12 @@ Q.copy = function _Q_copy(x, fields, levels) {
  * @param target {Object}
  *  This is the first object. It winds up being modified, and also returned
  *  as the return value of the function.
- * @param levels {number}
- *  Optional. Precede any Object with an integer to indicate that we should 
- *  also copy that many additional levels inside the object.
- * @param deep {Boolean|Number}
+  * @param deep {Boolean}
  *  Optional. Precede any Object with a boolean true to indicate that we should
  *  also copy the properties it inherits through its prototype chain.
+ * @param levels {Number}
+ *  Optional. Precede any Object with an integer to indicate that we should 
+ *  also copy that many additional levels inside the object.
  * @param anotherObject {Object}
  *  Put as many objects here as you want, and they will extend the original one.
  * @param namespace {String}
@@ -2634,7 +2634,8 @@ Evp.occurring = false;
 Evp.set = function _Q_Event_prototype_set(handler, key, prepend) {
 	if (!handler) return undefined;
 	var isTool = (Q.typeOf(key) === 'Q.Tool');
-	if (key === true || (key === undefined && Q.Page.beingActivated)) {
+	if (key === true || (key === undefined
+	&& Q.Page && Q.Page.beingActivated)) {
 		Q.Event.forPage.push(this);
 	}
 	key = Q.calculateKey(key, this.handlers, this.keys.length);
@@ -2982,7 +2983,8 @@ Evp.filter = function _Q_Event_prototype_filter(test, key) {
  * is called, but with the arguments returned by the transform function
  * @method map
  * @param {Function} transform Function to transform the arguments and return
- *   an array of two items for the new call: [this, arguments]
+ *   an array of two items for the new call: [this, arguments].
+ *   Whenever the transform function returns false, the returned event isn't triggered.
  * @param {String|Boolean|Q.Tool} [key] Optional key to pass to event.add (see docs for that method).
  * @return {Q.Event} A new Q.Event object
  */
@@ -2990,6 +2992,9 @@ Evp.map = function _Q_Event_prototype_map(transform, key) {
 	var newEvent = new Q.Event();
 	this.add(function () {
 		var parts = transform.apply(this, arguments);
+		if (parts === false) {
+			return false;
+		}
 		return newEvent.handle.apply(parts[0], parts[1]);
 	}, key);
 	return newEvent;
@@ -3196,9 +3201,25 @@ Q.onLayout = function (element) {
 			return _layoutEvents[i];
 		}
 	}
+	var lastRect = {};
 	var event = new Q.Event();
+	var debouncedEvent = event.debounce(
+		Q.onLayout.debounce, false, 'Q.onLayout'
+	).map(function () {
+		var rect = element.getBoundingClientRect();
+		var ret;
+		if (rect.width == lastRect.width
+		&& rect.height == lastRect.height) {
+			ret = false;
+		} else {
+			ret = [this, arguments]; // element got resized
+		}
+		lastRect = rect;
+		return ret;
+	}, 'Q.onLayout');
+
 	var l = _layoutElements.push(element);
-	_layoutEvents[l-1] = event;
+	_layoutEvents[l-1] = debouncedEvent;
 
 	// create ResizeObserver
 	var observer = null;
@@ -3222,7 +3243,7 @@ Q.onLayout = function (element) {
 			}
 		}
 	}, Q.onLayout.debounce || 0), 'Q');
-	return event;
+	return debouncedEvent;
 }
 Q.onLayout.debounce = 100;
 Q.onLayout().set(function () {
@@ -4250,13 +4271,14 @@ Q.Tool.clear = function _Q_Tool_clear(elem, removeCached) {
  * @method define
  * @param {String|Object} name The name of the tool, e.g. "Q/foo".
  *   Also you can pass an object containing {name: filename} pairs instead.
- * @param {String|array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
+ * @param {String|Array} [require] Optionally name another tool (or array of tool names) that was supposed to already have been defined. This will cause your tool's constructor to make sure the required tool has been already loaded and activated on the same element.
  * @param {Object|Function} ctor Your tool's constructor information. You can also pass a filename here, in which case the other parameters are ignored.
  *   If you pass a function, then it will be used as a constructor for the tool. You can also pass an object with the following properties
- * @param {string} [ctor.js] filenames containing Javascript to load for the tool
- * @param {string} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
- * @param {string} [ctor.html] filenames containing HTML to load for the tool, including templates
- * @param {string} [ctor.text] list any text files to load (for the current language) before the tool constructor
+ * @param {String} [ctor.js] filenames containing Javascript to load for the tool
+ * @param {String} [ctor.css] filenames containing CSS to load for the tool, which will be namespaced
+ * @param {String} [ctor.html] filenames containing HTML to load for the tool, including templates
+ * @param {String|ArrayBufferConstructor} [ctor.text] list any text files to load (for the current language) before the tool constructor.
+ *   Also looks for any text files added with Q.Text.forTools(namePrefix, textFileNames)
  * @param {Object} [ctor.placeholder] what to render before the tool is loaded and rendered instead
  * @param {String} [ctor.placeholder.html] literal HTML to insert
  * @param {String} [ctor.placeholder.template] the name of a template to insert
@@ -5342,9 +5364,11 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 			waitFor.push('html');
 			Q.request.once(toolConstructor.html, pipe.fill('html'), { extend: false, parse: false });
 		}
-		if (toolConstructor.text) {
+		var n = Q.normalize(toolName);
+		var text = Q.Text.addedFor('Q.Tool.define', n, toolConstructor);
+		if (text) {
 			waitFor.push('text');
-			Q.Text.get(toolConstructor.text, pipe.fill('text'));
+			Q.Text.get(text, pipe.fill('text'));
 		}
 		pipe.add(waitFor, 1, _loadToolScript_loaded).run();
 	});
@@ -10396,10 +10420,8 @@ Q.Template.set = function (name, content, info, overwriteEvenIfAlreadySet) {
 	if (content !== undefined) {
 		T.collection[n] = content;
 	}
-	if (typeof info === 'string') {
-		info = { type: info };
-	}
-	info = info || {};
+	info = (typeof info === 'string') ? { type: info } : (info || {});
+	Q.Text.addedFor('Q.Template.set', n, info);
 	info.type = info.type || 'handlebars';
 	T.info[n] = info;
 	Q.loadHandlebars();
@@ -10789,9 +10811,61 @@ Q.Text = {
 			});	
 		});
 	},
+
+	/**
+	 * Define text files in bulk for certain methods and name prefixes
+	 * @param {String|Array} methods Can be "Q.Tool.define" or "Q.Template.set", or array of them
+	 * @param {String} namePrefix The prefix for the names of tools to load the text files for
+	 * @param {String|Array} textFileNames any additional files to have for Q.Tool.define
+	 */
+	addFor: function (methods, namePrefix, textFileNames) {
+		if (!Q.isArrayLike(methods)) {
+			methods = [methods]
+		}
+		if (!Q.isArrayLike(textFileNames)) {
+			textFileNames = [textFileNames];
+		}
+		Q.each(methods, function (i, m) {
+			Q.Text.addFor.defined = Q.Text.addFor.defined || {};
+			var n = Q.normalize(namePrefix);
+			var obj = {};
+			obj[m] = obj[m] || {};
+			obj[m][n] = textFileNames;
+			Q.extend(Q.Text.addFor.defined, 3, obj);
+		});
+	},
+
+	/**
+	 * Get the array of text files added for this normalized name
+	 * @param {String|Array} methods Can be "Q.Tool.define" or "Q.Template.set", or array of them
+	 * @param {String} normalizedName The prefix for the names of tools to load the text files for
+	 * @param {Object} objectToExtend This object's "text" property is extended
+	 * @return {Array} the array of text files, if any
+	 */
+	addedFor: function (method, normalizedName, objectToExtend) {
+		var d = Q.Text.addFor.defined[method];
+		if (!d) {
+			return [];
+		}
+		for (var namePrefix in d) {
+			if (!normalizedName.startsWith(namePrefix)) {
+				continue;
+			}
+			var text = objectToExtend.text = objectToExtend.text || [];
+			Q.each(d[namePrefix], function (i, t) {
+				if (text.indexOf(t) < 0) {
+					text.push(t);
+				}
+			});
+			break;
+		}
+		return text;
+	},
 	
 	override: {}
 };
+
+Q.Text.addFor.defined = {};
 
 /**
  * Array of text files to load before calling Q.onInit
@@ -13243,6 +13317,7 @@ Q.Dialogs = {
 	 *  @param {Object} [options.template] can be used instead of content option.
 	 *  @param {String} [options.template.name] names a template to render into the initial dialog content.
 	 *  @param {String} [options.template.fields] fields to pass to the template, if any
+	 *  @param {String} [options.elementId] an ID to set for dialog element, just use className if you aren't sure it's unique
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
@@ -13278,7 +13353,9 @@ Q.Dialogs = {
 	push: function(options) {
 		var maskDefault = true;
 		for (var i = 0; i < this.dialogs.length; i++) {
-			if (!this.dialogs[i].isFullscreen) maskDefault = false;
+			if (!this.dialogs[i].isFullscreen) {
+				maskDefault = false;
+			}
 		}
 		var o = Q.extend(
 			{mask: maskDefault}, 
@@ -13350,10 +13427,10 @@ Q.Dialogs = {
 			if (dialogs.length) {
 				topDialog = dialogs[dialogs.length - 1];
 			}
-			if (!topDialog || topDialog[0] !== $dialog[0]) {
+			if (!topDialog || topDialog !== $dialog[0]) {
 				dialogs.push($dialog);
 				if (o.hidePrevious && topDialog) {
-					topDialog.hide();
+					topDialog.addClass('Q_hide');
 				}
 			}
 		}
@@ -13373,7 +13450,7 @@ Q.Dialogs = {
 		
 		var $dialog = this.dialogs.pop();
 		if (this.dialogs.length) {
-			this.dialogs[this.dialogs.length - 1].show();
+			this.dialogs[this.dialogs.length - 1].removeClass('Q_hide');
 		}
 		if (!dontTriggerClose && $dialog) {
 			Q.Dialogs.dontPopOnClose = true;
@@ -13398,8 +13475,7 @@ Q.Dialogs = {
 	 * @return {HTMLElement} The HTML element of the dialog that is on top.
 	 */
 	element: function (index) {
-		var $dialog = this.dialogs[this.dialogs.length-(index||0)-1];
-		return $dialog && $dialog[0];
+		return this.dialogs[this.dialogs.length-(index||0)-1];
 	}
 
 };
@@ -13537,7 +13613,7 @@ Q.extend(Q.confirm.options, Q.text.confirm);
  *   user to enter something (e.g. 'Enter your name').
  * @param {Function} callback: This will be called when dialog is closed,
  *   passing the entered value as a string, or null if the dialog was dismissed with the close button
- * @param {Object} [options] An optional hash of options for Q.Dialog.push and also:
+ * @param {Object} [options] An optional hash of options for Q.Dialogs.push and also:
  * @param {String} [options.title='Prompt'] to override confirm dialog title.
  * @param {String} [options.placeholder=''] to set a placeholder in the textbox
  * @param {String} [options.initialText=null] to set any initial text

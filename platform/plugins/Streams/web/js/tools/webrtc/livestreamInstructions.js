@@ -95,7 +95,7 @@
                     toolIconCon.addEventListener('click', function () {
                         Q.Dialogs.push({
                             title: 'Livestream instructions',
-                            className: 'Streams_livestream_instructions_dialogue',
+                            className: 'Streams_livestream_instructions_dialog',
                             content: tabsCon,
                             apply: false,
                             mask: false,

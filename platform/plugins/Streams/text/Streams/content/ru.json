@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Этот контент скрыт от вас."
+        "HiddenFromYou": "Этот контент скрыт от вас.",
+        "InplaceTypeMustBe": "inplaceType должен быть textarea или text."
     },
     "preview": {
         "NewItemTitle": "Новый предмет"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Камера включена",
             "screenSharingIsOn": "Демонстрация экрана включена",
             "screenSharingIsOff": "Поделиться экраном",
-            "joinNow": "Присоединяйтесь к вызову"
+            "joinNow": "Присоединяйтесь к вызову",
+            "dialogTitle": "Включите\/выключите камеру или микрофон, прежде чем присоединиться"
         },
         "webInstructionsDialog": {
             "dialogTitle": "инструкции",
@@ -556,6 +558,7 @@
         "private": "Частный",
         "public": "Общественный",
         "configurationSaved": "Конфигурация сохранена",
-        "error": "Что-то пошло не так"
+        "error": "Что-то пошло не так",
+        "privacySettings": "Настройки конфиденциальности"
     }
 }

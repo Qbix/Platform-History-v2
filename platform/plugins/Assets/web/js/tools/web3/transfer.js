@@ -5,15 +5,15 @@
      */
 
     /**
-     * Allow to send crypto and credits
-     * @class Assets/web3/pay
+     * Allows a user to transfer crypto and credits to someone else
+     * @class Assets/web3/transfer
      * @constructor
      * @param {Object} options Override various options for this tool
      * @param {String} options.userId - id of user to whom the crypt should be sent
      * @param {String} options.wallet - wallet address of user to whom the crypt should be sent
      */
 
-    Q.Tool.define("Assets/web3/pay", function (options) {
+    Q.Tool.define("Assets/web3/transfer", function (options) {
             var tool = this;
             var state = this.state;
             var $toolElement = $(tool.element);
@@ -75,21 +75,23 @@
                     return number;
                 };
 
-                Q.Template.render("Assets/web3/pay", {}, function (err, html) {
+                Q.Template.render("Assets/web3/transfer/crypto", {}, function (err, html) {
                     if (err) {
                         return;
                     }
 
                     tool.element.innerHTML = html;
-                    $("button[name=sendCrypto]", tool.element).plugin("Q/clickable").on(Q.Pointer.fastclick, function () {
+                    $("button[name=sendCrypto]", tool.element)
+                    .plugin("Q/clickable")
+                    .on(Q.Pointer.fastclick, function () {
                         Q.Dialogs.push({
                             title: tool.texts.payment.PayTo.interpolate({displayName: state.displayName}),
-                            className: "Assets_web3_pay_sendCrypto",
+                            className: "Assets_web3_transfer_sendCrypto",
                             onActivate: function (dialog) {
                                 dialog.attr("data-loaded", false);
                                 var $content = $(".Q_dialog_content", this);
 
-                                Q.req("Assets/currency", "cryptoBalance", function (err, response) {
+                                Q.req("Assets/currencies", "cryptoBalance", function (err, response) {
                                     dialog.attr("data-loaded", true);
                                     var msg = Q.firstErrorMessage(err, response && response.errors);
                                     if (msg) {
@@ -124,7 +126,7 @@
                                         $select.append($("<option value='" + item.symbol + "'>").html(formattedSymbol + "&nbsp;".repeat(spaceAmount) + formattedBalance));
                                     });
                                     $select.on("change", function () {
-                                        Q.Template.render("Assets/web3/pay/send", {
+                                        Q.Template.render("Assets/web3/transfer/send", {
                                             text: tool.texts.payment.YouCanSendUpTo.interpolate({
                                                 amount: _formatBalance(cryptoBalance[$select.val()].balance),
                                                 symbol: $select.val()
@@ -149,12 +151,14 @@
             }
         });
 
-    Q.Template.set("Assets/web3/pay",
+    Q.Template.set("Assets/web3/transfer",
         `<button class="Q_button" name="sendCrypto">{{payment.Pay}}</button>`,
         {text: ['Assets/content']}
     );
-    Q.Template.set("Assets/web3/pay/send",
-        `<div class="Assets_web3_pay_send">{{text}}</div><input name="amount" type="number" placeholder="{{payment.EnterAmount}}" /><button class="Q_button" name="send">{{payment.Send}}</button>`,
+    Q.Template.set("Assets/web3/transfer/send",
+        `<div class="Assets_web3_transfer_send">{{text}}</div>
+        <input name="amount" type="number" placeholder="{{payment.EnterAmount}}" />
+        <button class="Q_button" name="send">{{payment.Send}}</button>`,
         {text: ['Assets/content']}
     );
 })(window, Q, jQuery);

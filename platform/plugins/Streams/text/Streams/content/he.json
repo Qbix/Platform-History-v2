@@ -271,7 +271,8 @@
             "cameraIsOn": "המצלמה מופעלת",
             "screenSharingIsOn": "שיתוף מסך מופעל",
             "screenSharingIsOff": "שתף מסך",
-            "joinNow": "הצטרף לשיחה"
+            "joinNow": "הצטרף לשיחה",
+            "dialogTitle": "הפעל\/כבה את המצלמה או המיקרופון לפני שאתה מצטרף"
         },
         "audioSettings": {
             "dialogTitle": "הגדרות אודיו",
@@ -444,7 +445,8 @@
         "Submenu": "תפריט משנה"
     },
     "errors": {
-        "HiddenFromYou": "תוכן זה מוסתר מכם."
+        "HiddenFromYou": "תוכן זה מוסתר מכם.",
+        "InplaceTypeMustBe": "inplaceType חייב להיות &#39;textarea&#39; או &#39;text&#39;"
     },
     "audio": {
         "record": "תקליט",
@@ -559,6 +561,7 @@
         "private": "פְּרָטִי",
         "public": "פּוּמְבֵּי",
         "configurationSaved": "התצורה נשמרה",
-        "error": "משהו השתבש"
+        "error": "משהו השתבש",
+        "privacySettings": "הגדרות פרטיות"
     }
 }

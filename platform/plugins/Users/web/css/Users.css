@@ -397,20 +397,35 @@ a.Users_activation_resend:active {
 	margin: 5px 0 5px 0;
 	vertical-align: middle;
 }
-#Users_setIdentifier_dialog.Users_setIdentifier_web3 .Users_identifier_web3 {
+#Users_setIdentifier_dialog .Users_identifier_web3 {
 	border: none;
 	font-size: 0.85em;
+	text-align: center;
+	cursor: pointer;
 	color: #000;
 	font-style: normal;
+	padding: 10px;
+	margin: 30px 0;
+	border: 2px dashed rgba(150, 150, 150, 0.5);
+	background: rgba(150, 150, 150, 0.1);
+	font-weight: bold;
+	font-size: 30px;
+	font-family: 'Courier New', Courier, monospace;
+
 }
 #Users_setIdentifier_dialog.Users_setIdentifier_web3 .Users_setIdentifier_go {
 	display: none;
+}
+#Users_setIdentifier_dialog .Q_button {
+    min-width: 80%;
 }
 
 #Users_login_dialog #Users_agree { margin-right: 5px; -webkit-appearance: checkbox; }
 
 .Q_notMobile .Q_overlay.Users_login_dialog,
 .Q_notMobile .Q_overlay.Users_setIdentifier_dialog { width: 350px; }
+
+.Q_notMobile .Users_login_dialog { min-width: 400px }
 
 .Users_login_dialog { display: none; }
 .Users_login_dialog.Q_overlay { display: block; }

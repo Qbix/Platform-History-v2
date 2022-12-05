@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "Tämä sisältö on piilotettu sinulta."
+        "HiddenFromYou": "Tämä sisältö on piilotettu sinulta.",
+        "InplaceTypeMustBe": "inplaceType-arvon on oltava tekstialue tai teksti"
     },
     "preview": {
         "NewItemTitle": "Uusi kohde"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kamera on päällä",
             "screenSharingIsOn": "Näytönjako on päällä",
             "screenSharingIsOff": "Jaa näyttö",
-            "joinNow": "Liity puheluun"
+            "joinNow": "Liity puheluun",
+            "dialogTitle": "Kytke kamera tai mikrofoni päälle\/pois ennen liittymistä"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Ohjeet",
@@ -556,6 +558,7 @@
         "private": "Yksityinen",
         "public": "Julkinen",
         "configurationSaved": "Kokoonpano tallennettu",
-        "error": "Jotain meni pieleen"
+        "error": "Jotain meni pieleen",
+        "privacySettings": "Tietosuoja-asetukset"
     }
 }

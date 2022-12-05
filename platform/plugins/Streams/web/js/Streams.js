@@ -50,6 +50,9 @@ Q.text.Streams = {
 		email: {
 			title: 'Follow up'
 		}
+	},
+	identifier: {
+		privacySettings: "Privacy Settings"
 	}
 
 };
@@ -573,6 +576,10 @@ Streams.actionUrl = function(publisherId, streamName, what) {
 	}
 };
 
+Q.Text.addFor(
+	['Q.Tool.define', 'Q.Template.set'],
+	'Streams/', ["Streams/content"]
+);
 Q.Tool.define({
 	"Users/avatar"		 : "{{Streams}}/js/tools/avatar.js", // override for Users/avatar tool
 	"Streams/chat"		 : "{{Streams}}/js/tools/chat.js",
@@ -963,15 +970,13 @@ Streams.create = function (fields, callback, related, options) {
  */
 Streams.create.onError = new Q.Event();
 
-function _toolInDialog(toolName, toolParams, callback, classContainer) {
-	Q.Dialogs.push({
+function _toolInDialog(toolName, toolParams, options, classContainer) {
+	Q.Dialogs.push(Q.extend(options, {
 		url: Q.action(toolName, toolParams),
 		removeOnClose: true,
-		onActivate: function() {
-			callback && callback.apply(this, arguments);
-		},
+		className: (classContainer || ''),
 		apply: true
-	}).addClass(classContainer || '');
+	}));
 }
 
 /**
@@ -987,13 +992,13 @@ Streams.Dialogs = {
 	 * @method subscription
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
-	 * @param {Function} callback The function to call after dialog is activated
+	 * @param {Object} options Some options to pass to the dialog
 	 */
-	subscription: function(publisherId, streamName, callback) {
+	subscription: function(publisherId, streamName, caoptionsloplback) {
 		_toolInDialog('Streams/subscription', {
 			publisherId: publisherId,
 			streamName : streamName
-		}, callback, 'Streams_subscription_tool_dialog_container');
+		}, options, 'Streams_subscription_tool_dialog_container');
 	},
 
 	/**
@@ -1002,13 +1007,13 @@ Streams.Dialogs = {
 	 * @method access
 	 * @param {String} publisherId id of publisher which is publishing the stream
 	 * @param {String} streamName the stream's name
-	 * @param {Function} [callback] The function to call after dialog is activated
+	 * @param {Object} options Some options to pass to the dialog
 	 */
-	access: function(publisherId, streamName, callback) {
+	access: function(publisherId, streamName, options) {
 		_toolInDialog('Streams/access', {
 			publisherId: publisherId,
 			streamName: streamName
-		}, callback, 'Streams_access_tool_dialog_container');
+		}, options, 'Streams_access_tool_dialog_container');
 	},
 
 	/**
@@ -1220,7 +1225,7 @@ Streams.Dialogs = {
                             $eContacts.empty();
 
                             var params = {
-                                prefix: "Users",
+                                filter: "Users",
                                 data: $eContacts.data("contacts") || null,
                                 identifierTypes: options.identifierTypes
                             };
@@ -1911,51 +1916,59 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			}, options);
 		}
 
-		if(!o.addLabel) {
-			var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
-			var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
-			var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
-
-			Q.Dialogs.push({
-					title: 'Invited user will have next role(s)',
-					content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
-						userId: Q.Users.communityId,
-						prefix: 'Users/'
-					}),
-					apply: true,
-					onActivate: function (dialog) {
-						var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
-
-						if (Q.typeOf(labelsTool) !== 'Q.Tool') {
-							return;
-						}
-
-						labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
-							if ((wasSelected && !canRemoveRoles.includes(label)) || (!wasSelected && !canAddRoles.includes(label))) {
-								Q.alert('You don\'t have permissions to add users with such roles');
-								return false;
-							} 
-
-							if(!wasSelected) {
-								if(o.addLabel == null) o.addLabel = [];
-							
-								o.addLabel.push(label);
-							} else {
-								var index = o.addLabel.indexOf(label);
-								if(index != -1) {
-									o.addLabel.splice(index, 1)
-								}
-							}
-						});
-					},
-					onClose: function () {
-						showInviteDialog();
-					}
-				});
-		} else {
-			showInviteDialog();
+		if(o.addLabel) {
+			return showInviteDialog();
 		}
-        
+
+		var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
+		var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
+		var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+
+		Q.req('Users/roles', ['canAdd'], function (err, response) {
+			var roles = Q.getObject('slots.canAdd', response);
+			if (!roles || !roles.length) {
+				return showInviteDialog();
+			}
+			Q.Dialogs.push({
+				title: text.invite.roles.title,
+				content: Q.Tool.setUpElementHTML('div', 'Users/labels', {
+					userId: Q.Users.communityId,
+					filter: roles
+				}),
+				apply: true,
+				onActivate: function (dialog) {
+					var labelsTool = Q.Tool.from($(".Users_labels_tool", dialog), "Users/labels");
+
+					if (Q.typeOf(labelsTool) !== 'Q.Tool') {
+						return;
+					}
+
+					labelsTool.state.onClick.set(function (tool, label, title, wasSelected) {
+						if ((wasSelected && !canRemoveRoles.includes(label)) || (!wasSelected && !canAddRoles.includes(label))) {
+							Q.alert(text.invite.roles.NotAuthorizedToGrantRole.alert, {
+								title: text.invite.roles.NotAuthorizedToGrantRole.title
+							})
+							return false;
+						} 
+
+						if(!wasSelected) {
+							if(o.addLabel == null) o.addLabel = [];
+						
+							o.addLabel.push(label);
+						} else {
+							var index = o.addLabel.indexOf(label);
+							if(index != -1) {
+								o.addLabel.splice(index, 1)
+							}
+						}
+					});
+				},
+				onClose: function () {
+					showInviteDialog();
+				}
+			});
+		});
+
     });
     return null;
 };
@@ -6057,37 +6070,27 @@ Q.onInit.add(function _Streams_onInit() {
 	}
 
 	//add private|public toggle to dialog for changing email/mobile
-	Q.Users.setIdentifier.options.onActivate = function () {
-		var userIdInput = $('input[name=userId]', this);
-		var identifierTypeInput = $('input[name=identifierType]', this);
-		if(!identifierTypeInput) {
-			return;
-		}
-
-		var identifierTypeVal = identifierTypeInput.val();
-
-		var fields = {
-			identifierType: identifierTypeVal
-		};
-		if(userIdInput) {
-			fields.userId = userIdInput.val();
-		}
-
+	Q.Users.setIdentifier.options.onActivate = function (options) {
 		var userId = Q.Users.loggedInUserId();
 		$('<button class="Q_button Users_setIdentifier_privacy_btn"/>')
 			.on(Q.Pointer.fastclick, function () {
-				if(identifierTypeVal === 'email') {
-					Q.Streams.Dialogs.access(userId, 'Streams/user/emailAddress');
-				} else if(identifierTypeVal === 'mobile') {
-					Q.Streams.Dialogs.access(userId, 'Streams/user/mobileNumber');
-				} else if(identifierTypeVal.toLowerCase() === 'web3') {
-					Q.Streams.Dialogs.access(userId, 'Streams/user/xid/web3');
-				} else {
+				var m = {
+					email: 'emailAddress',
+					mobile: 'mobileNumber',
+					web3: 'xid/web3'
+				};
+				var suffix = m[options.identifierType];
+				if (!suffix) {
 					throw new Q.Error("Wrong identifierType");
 				}
-			})
-			.html(identifierTypeVal + ' ' + (Q.text.Streams.identifier.privacySettings != null ? Q.text.Streams.identifier.privacySettings : 'Privacy Settings'))
-			.insertBefore(".Users_setIdentifier_go", this);
+				Q.Dialogs.pop();
+				Q.Streams.Dialogs.access(
+					Q.Users.loggedInUserId(), 
+					'Streams/user/'+suffix
+				);
+			}).html(Q.text.Users.identifier.types[options.identifierType]
+				+ ' ' + Q.text.Streams.identifier.privacySettings
+			).appendTo($('#Users_setIdentifier_step1', this));
 	}
 
 	/**

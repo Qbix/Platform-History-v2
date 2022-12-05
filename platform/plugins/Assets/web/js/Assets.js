@@ -858,7 +858,7 @@
 			 *   Q.Assets.Currencies.symbols and Q.Assets.Currencies.names is accessible
 			 */
 			load: Q.getter(function (callback) {
-				Q.req('Assets/currency', 'load', function (err, data) {
+				Q.req('Assets/currencies', 'load', function (err, data) {
 					var msg = Q.firstErrorMessage(err, data && data.errors);
 					if (msg) {
 						return alert(msg);
@@ -1484,10 +1484,11 @@
 		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
 		"Assets/NFT/locked": {
 		    js: "{{Assets}}/js/tools/NFT/locked.js",
-		    css: "{{Assets}}/css/tools/NFT/locked.css"
+		    css: "{{Assets}}/css/tools/NFT/locked.css",
+			text: "Assets/content"
 		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
-		"Assets/web3/pay": "{{Assets}}/js/tools/web3/pay.js"
+		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js"
 
 	});
     

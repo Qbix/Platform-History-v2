@@ -90,8 +90,10 @@
 					"0x13881": "0x4B1619Ec9DA4191AcD5429A89d6ee991a13079c3" /* matic test mumbai*/
 				},
 				"Assets/templates/R1/NFT/locked": {
-					"0x89": "0x37b5AcF3A60dC507a689F700d89dB669bEe0dec3",
-					"0x13881": "0x6c24d7E534907D53565EE18AFDbb2e001F20e4C2"
+					"0x1": "0x50c8a01f1ab285d4341ab99d2b1965add4f52d1e",
+		    			"0x38": "0x300d5f5a3227f75551bf050fb2debcf3a8034dd4",
+					"0x89": "0xb9216ebe3a42da670c484a064bb5a93d8122e421",
+					"0x13881": "0x6BbB0ccD3acCFE3CA4CBc799041b4FC9598859c7"
 				}
 			}
 		}

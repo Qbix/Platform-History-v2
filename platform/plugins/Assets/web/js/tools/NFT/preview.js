@@ -17,6 +17,7 @@
      *  On NFT/view the movie will display instead image (event if image defined).
      *  @param {boolean} [src] URL of additional image which will use instead default image.
      *  @param {string} [options.fallback] Error message need to display in tool as content.
+     *  @param {string} [options.linkPattern] If defined than on click tool will redirect to this link interpolated with contractAddress and tokenId
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
@@ -138,8 +139,21 @@
         imageSrc: null,
         secondsLeft: null,
         fallback: null,
+        linkPattern: null,
         onClaim: new Q.Event(),
-        onInvoke: new Q.Event(),
+        onInvoke: new Q.Event(function () {
+            var state = this.state;
+            var linkPattern = state.linkPattern;
+            if (!linkPattern) {
+                return;
+            }
+
+            linkPattern = Q.url(linkPattern.interpolate(state));
+            if (linkPattern.matchTypes('url').length) {
+                location.href = linkPattern;
+                return false;
+            }
+        }),
         onAvatar: new Q.Event(),
         onCreated: new Q.Event(),
         onRefresh: new Q.Event()
@@ -483,7 +497,6 @@
                     secondsLeft: state.secondsLeft
                 }));
 
-                // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick);
 
                 Q.handle(state.onRefresh, tool);
@@ -506,12 +519,12 @@
             var state = tool.state;
             var $toolElement = $(this.element);
             var metadata = Q.getObject("metadata", params);
-            var authorAddress = Q.getObject("authorAddress", params);
-            var ownerAddress = Q.getObject("ownerAddress", params) || state.owner;
-            var commissionInfo = Q.getObject("commissionInfo", params);
-            var saleInfo = Q.getObject("saleInfo", params);
-            var authorUserId = Q.getObject("authorUserId", params);
-            var ownerUserId = Q.getObject("ownerUserId", params);
+            var authorAddress = Q.getObject("authorAddress", params) || Q.getObject("authorAddress", state);
+            var ownerAddress = Q.getObject("ownerAddress", params) || Q.getObject("owner", state);
+            var commissionInfo = Q.getObject("commissionInfo", params) || Q.getObject("commissionInfo", state);
+            var saleInfo = Q.getObject("saleInfo", params) || Q.getObject("saleInfo", state);
+            var authorUserId = Q.getObject("authorUserId", params) || Q.getObject("authorUserId", state);
+            var ownerUserId = Q.getObject("ownerUserId", params) || Q.getObject("ownerUserId", state);
 
             tool.minted = true;
             $toolElement.attr("data-minted", tool.minted);

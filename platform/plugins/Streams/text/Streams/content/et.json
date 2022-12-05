@@ -1,6 +1,7 @@
 {
     "errors": {
-        "HiddenFromYou": "See sisu on teie eest peidetud."
+        "HiddenFromYou": "See sisu on teie eest peidetud.",
+        "InplaceTypeMustBe": "inplaceType peab olema tekstiala või tekst"
     },
     "preview": {
         "NewItemTitle": "Uus üksus"
@@ -180,7 +181,8 @@
             "cameraIsOn": "Kaamera on sisse lülitatud",
             "screenSharingIsOn": "Ekraani jagamine on sisse lülitatud",
             "screenSharingIsOff": "Ekraani jagamine",
-            "joinNow": "Liituge kõnega"
+            "joinNow": "Liituge kõnega",
+            "dialogTitle": "Enne liitumist lülitage kaamera või mikrofon sisse\/välja"
         },
         "webInstructionsDialog": {
             "dialogTitle": "Juhised",
@@ -556,6 +558,7 @@
         "private": "Privaatne",
         "public": "Avalik",
         "configurationSaved": "Konfiguratsioon salvestatud",
-        "error": "Midagi läks valesti"
+        "error": "Midagi läks valesti",
+        "privacySettings": "Privaatsusseaded"
     }
 }
