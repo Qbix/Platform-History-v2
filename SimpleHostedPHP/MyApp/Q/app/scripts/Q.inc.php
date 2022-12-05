@@ -33,7 +33,7 @@ if (!defined('Q_DIR')) {
 
 include($paths_filename);
 
-$realpath = realpath(Q_DIR.'/Q.php');
+$realpath = realpath(Q_DIR.DIRECTORY_SEPARATOR.'Q.php');
 if (!$realpath) {
 	die("Please edit $basename/local/paths.json to look like " .
 		'{"platform": "path/to/Q/platform"}' .
