@@ -31,8 +31,6 @@ if (!defined('Q_DIR')) {
 	define('Q_DIR', isset($paths['platform']) ? $paths['platform'] : '');
 }
 
-include($paths_filename);
-
 $Q_filename = realpath(Q_DIR.DIRECTORY_SEPARATOR.'Q.php');
 if (!$Q_filename) {
 	die("Please edit $basename/local/paths.json to look like " .
