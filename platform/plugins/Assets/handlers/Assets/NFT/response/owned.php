@@ -21,13 +21,13 @@ function Assets_NFT_response_owned ($params) {
 	$defaultSalesContractAbiPath = "Assets/templates/R1/NFT/sales/contract";
 	$sources[] = array(
 		"address" => $ownerAccountAddress,
-		"recipient" => Q::ifset($request,"owner", "recipient", null),
 		"pathABI" => Q::ifset($request,"owner", "pathABI", $defaultSalesContractAbiPath),
+		"recipient" => Q::ifset($request,"owner", "recipient", null),
 	);
 	$sources[] = array(
 		"address" => Q::ifset($request,"holder", "contractAddress", null),
 		"pathABI" => Q::ifset($request,"holder", "pathABI", $defaultSalesContractAbiPath),
-		"recipient" => Q::ifset($request,"holder", "accountAddress", Users_Web3::getWalletByUserId())
+		"recipient" => Q::ifset($request,"holder", "recipient", null)
 	);
 	$glob = array();
 	$glob["offset"] = (int)Q::ifset($request, "offset", 0);
@@ -123,24 +123,22 @@ function Assets_NFT_response_owned ($params) {
 				if (empty($tokens)) {
 					continue;
 				}
-				if ($source["recipient"]) {
-					$dirtyTokens = $tokens;
-					$tokens = array();
-					$sourceABI = Users_Web3::getABI($source["pathABI"]);
-					$tokenInfo = Users_Web3::existsInABI("tokenInfo", $sourceABI, "function", false);
-					if ($tokenInfo) {
-						foreach ($dirtyTokens as $tokenId) {
-							$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"], $caching, $cacheDuration);
-							if (Q::ifset($tokenInfo, "recipient", null) == $source["recipient"]) {
-								$tokens[] = array(
-									"tokenId" => $tokenId,
-									"secondsLeft" => Q::ifset($tokenInfo, "secondsLeft", null)
-								);
-							}
+				$dirtyTokens = $tokens;
+				$tokens = array();
+				$sourceABI = Users_Web3::getABI($source["pathABI"]);
+				$tokenInfo = Users_Web3::existsInABI("tokenInfo", $sourceABI, "function", false);
+				if ($tokenInfo) {
+					foreach ($dirtyTokens as $tokenId) {
+						$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"], $caching, $cacheDuration);
+						if (!$source["recipient"] || $source["recipient"] == Q::ifset($tokenInfo, "recipient", null)) {
+							$tokens[] = array(
+								"tokenId" => $tokenId,
+								"secondsLeft" => Q::ifset($tokenInfo, "secondsLeft", null)
+							);
 						}
-					} else {
-						$tokens = array();
 					}
+				} else {
+					$tokens = array();
 				}
 
 				foreach ($tokens as $tokenId) {

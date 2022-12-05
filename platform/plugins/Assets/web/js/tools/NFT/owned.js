@@ -28,11 +28,13 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	owner: {
 		userId: null,
 		accountAddress: null,
+		pathABI: "Assets/templates/R1/NFT/sales/contract",
 		recipient: null
 	},
 	holder: {
 		contractAddress: null,
-		pathABI: "Assets/templates/R1/NFT/sales/contract"
+		pathABI: "Assets/templates/R1/NFT/sales/contract",
+		recipient: null
 	},
 	chainId: null,
 	contractAddress: null,
