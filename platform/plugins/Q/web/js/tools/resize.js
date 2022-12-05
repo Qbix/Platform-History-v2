@@ -423,11 +423,11 @@
                                 }
                             }
                         }
-            
+
                         if (!tool.state.active || evt.button == 1 || evt.button == 2) return;
-            
+
                         if (tool.state.isResizing || (_isTouchScreen && (tool.state.isResizing || evt.targetTouches.length != 1))) return;
-            
+
                         tool.state.isMoving = true;
             
                         var elRect = _elementToMove.getBoundingClientRect();
@@ -473,18 +473,20 @@
                         maxY = moveWithinRect.y + moveWithinRect.height;
                         diffX = posX - divLeft, diffY = posY - divTop;
             
-                        tool.events.dispatch(Q.Pointer.move);
+                        tool.events.dispatch('movingstart');
             
                         if (_isTouchScreen) {
                             window.addEventListener('touchmove', drag, { passive: false });
                         } else {
-                            window.addEventListener(Q.Pointer.move, drag, { passive: false });
+                            window.addEventListener('mousemove', drag, { passive: false });
                         }
                     }
             
                     function stopMoving(e) {
             
-                        window.removeEventListener(Q.Pointer.move, drag, { passive: false });
+                        if (_isTouchScreen) {
+                            window.removeEventListener('touchmove', drag, { passive: false });
+                        } else window.removeEventListener('mousemove', drag, { passive: false });
             
                         if (_elementToMove != null) _elementToMove.style.cursor = '';
             
@@ -620,8 +622,8 @@
                         originalMouseY = e.clientY;
             
                         tool.state.isResizing = true;
-                        window.addEventListener(Q.Pointer.move, startResizing);
-                        window.addEventListener(Q.Pointer.end, stopResizing);
+                        window.addEventListener('mousemove', startResizing);
+                        window.addEventListener('mouseup', stopResizing);
                     }
             
                     function keepRatio(width, height, priorityParam) {
@@ -1197,8 +1199,8 @@
                     function stopResizing(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        window.removeEventListener(Q.Pointer.move, startResizing);
-                        window.removeEventListener(Q.Pointer.end, stopResizing);
+                        window.removeEventListener('mousemove', startResizing);
+                        window.removeEventListener('mouseup', stopResizing);
                         _ratio = null;
                         tool.state.isResizing = false;
             
