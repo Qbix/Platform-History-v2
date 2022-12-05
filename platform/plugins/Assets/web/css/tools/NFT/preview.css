@@ -619,7 +619,7 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
     display: none;
 }
 
-#page .Assets_NFT_preview_tool[data-claim=true] button[name=claim],
+#page .Assets_NFT_preview_tool[data-claim=true][data-owned=false] button[name=claim],
 #page .Assets_NFT_preview_tool[data-claim=false] .Assets_NFT_claim_timeout,
 #page .Assets_NFT_preview_tool[data-owned=true][data-locked=false] button[name=transfer] {
     display: inline-block;
