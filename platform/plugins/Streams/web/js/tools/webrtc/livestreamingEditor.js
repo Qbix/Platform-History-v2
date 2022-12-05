@@ -355,9 +355,9 @@
                         var _isHidden = true;
 
                         console.log('addNewScenePopup')
-                        var dialogue = document.createElement('DIV');
-                        dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
-                        _dialogueEl = dialogue;
+                        var dialog = document.createElement('DIV');
+                        dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
+                        _dialogEl = dialog;
                         var close = document.createElement('div');
                         close.className = 'Streams_webrtc_close-dialog-sign';
                         close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
@@ -1477,7 +1477,7 @@
                             console.log('addVideoPopup')
                             var dialogue=document.createElement('DIV');
                             dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-video Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            _dialogEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add video';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -1627,7 +1627,7 @@
                             console.log('addImagePopup')
                             var dialogue=document.createElement('DIV');
                             dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-image Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            _dialogEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add image';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -1777,7 +1777,7 @@
                             console.log('addTeleconferencePopup')
                             var dialogue=document.createElement('DIV');
                             dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            _dialogEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add teleconference';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -2373,7 +2373,7 @@
                             console.log('addVideoPopup')
                             var dialogue=document.createElement('DIV');
                             dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
-                            _dialogueEl = dialogue;
+                            _dialogEl = dialogue;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add audio';
                             dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -4138,7 +4138,7 @@
                         }
 
                         function hideDialog() {
-                            console.log('audioSourceOptions: hideDialog', _dialogueEl)
+                            console.log('audioSourceOptions: hideDialog', _dialogEl)
 
                             if(_dialogEl && _dialogEl.parentNode != null) {
                                 _dialogEl.parentNode.removeChild(_dialogEl);
@@ -4171,8 +4171,8 @@
                         }
 
                         console.log('audioSourceOptions pupup')
-                        _dialogueEl = document.createElement('DIV');
-                        _dialogueEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
                         dialogTitle.className = 'Streams_webrtc_popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
@@ -4549,7 +4549,7 @@
                     console.log('createPopup 00', scenesInterface)
                     var dialogue=document.createElement('DIV');
                     dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden';
-                    _dialogueEl = dialogue;
+                    _dialogEl = dialogue;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.text);
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
@@ -4707,7 +4707,7 @@
                     console.log('createPopupHorizontalMobile 00', scenesInterface)
                     var dialogue=document.createElement('DIV');
                     dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden Q_orientHorizontally';
-                    _dialogueEl = dialogue;
+                    _dialogEl = dialogue;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = 'Livestream Manager';
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
