@@ -3,6 +3,7 @@
      * @module Assets
      */
 
+    var Users = Q.Users;
     var Streams = Q.Streams;
     var Assets = Q.Assets;
     var Web3 = Assets.NFT.Web3;
@@ -18,6 +19,7 @@
      *  @param {boolean} [src] URL of additional image which will use instead default image.
      *  @param {string} [options.fallback] Error message need to display in tool as content.
      *  @param {string} [options.linkPattern] If defined than on click tool will redirect to this link interpolated with contractAddress and tokenId
+     *  @param {string} [options.abiPath="Assets/templates/R1/NFT/locked"] Path to ABI file template
      *  @param {Q.Event} [options.onInvoke] Event occur when user click on tool element.
      *  @param {Q.Event} [options.onAvatar] Event occur when click on Users/avatar tool inside tool element.
      *  @param {Q.Event} [options.onClaim] Event occur when user click on "Claim" button
@@ -30,13 +32,13 @@
         var $toolElement = $(this.element);
         tool.preview = Q.Tool.from(this.element, "Streams/preview");
         var previewState = Q.getObject("preview.state", tool) || {};
-        var loggedInUserId = Q.Users.loggedInUserId();
+        var loggedInUserId = Users.loggedInUserId();
         var tokenId = Q.getObject("tokenId", state);
         var chainId = Q.getObject("chainId", state);
         var contractAddress = Q.getObject("contractAddress", state);
 
         // is admin
-        var roles = Object.keys(Q.getObject("roles", Q.Users) || {});
+        var roles = Object.keys(Q.getObject("roles", Users) || {});
         tool.isAdmin = (roles.includes('Users/owners') || roles.includes('Users/admins'));
         $toolElement.attr("data-admin", tool.isAdmin);
         tool.isPublisher = (loggedInUserId && loggedInUserId === previewState.publisherId);
@@ -140,6 +142,7 @@
         secondsLeft: null,
         fallback: null,
         linkPattern: null,
+        abiPath: "Assets/templates/R1/NFT/contract",
         onClaim: new Q.Event(),
         onInvoke: new Q.Event(function () {
             var state = this.state;
@@ -173,11 +176,6 @@
             var tool = this;
             var state = this.state;
             var $toolElement = $(this.element);
-            var tokenId = Q.getObject("tokenId", state);
-            var chainId = Q.getObject("chainId", state);
-            var contractAddress = Q.getObject("contractAddress", state);
-            var tokenURI = state.tokenURI;
-            var metadata = state.metadata;
 
             if (state.fallback) {
                 return tool.renderFallBack();
@@ -185,9 +183,9 @@
 
             $toolElement.append('<img src="' + Q.url("{{Q}}/img/throbbers/loading.gif") + '">');
 
-            if (metadata) {
-                return tool.renderFromMetadata({metadata: metadata});
-            } else if (tokenURI) {
+            if (state.metadata) {
+                return tool.renderFromMetadata({metadata: state.metadata});
+            } else if (state.tokenURI) {
                 Q.req("Assets/NFT", "fetchMetadata", function (err, response) {
                     if (err) {
                         return;
@@ -197,7 +195,7 @@
                     tool.renderFromMetadata({metadata: metadata});
                 }, {
                     fields: {
-                        tokenURI: tokenURI
+                        tokenURI: state.tokenURI
                     }
                 });
 
@@ -231,7 +229,7 @@
             });
 
             if (state.useWeb3) {
-                Q.handle(Assets.batchFunction(), null, ["NFT", "getInfo", tokenId, chainId, contractAddress, state.updateCache, function (err, metadata) {
+                Q.handle(Assets.batchFunction(), null, ["NFT", "getInfo", state.tokenId, state.chainId, state.contractAddress, state.updateCache, function (err, metadata) {
                     state.updateCache = false;
 
                     var msg = Q.firstErrorMessage(err, metadata);
@@ -634,14 +632,90 @@
                     Q.handle(state.onClaim, tool);
                     return false;
                 });
+                $("button[name=transfer]", tool.element).on(Q.Pointer.fastclick, function () {
+                    Q.prompt(null, function (address) {
+                        if (!address) {
+                            return;
+                        }
+                        Users.Web3.execute(state.abiPath, state.contractAddress, "transferFrom", [state.owner, address, state.tokenId], function (e) {
+                            if (e) {
+                                console.error(e);
+                            }
+
+                            $toolElement.removeClass("Q_working");
+                        });
+                        Q.Dialogs.pop();
+                        $toolElement.addClass("Q_working");
+                    },{
+                        title: "Wallet address"
+                    });
+                    return false;
+                });
 
                 // set onInvoke event
                 $toolElement.off(Q.Pointer.fastclick).on(Q.Pointer.fastclick, function () {
                     Q.handle(state.onInvoke, tool, [metadata, authorAddress, ownerAddress, commissionInfo, saleInfo, authorUserId]);
                 });
 
+                tool.getOwner(function (newAddress, oldAddress) {
+                    var loggedXid = Users.Web3.getLoggedInUserXid();
+                    if (!loggedXid) {
+                        return;
+                    }
+
+                    loggedXid = loggedXid && loggedXid.toLowerCase();
+                    newAddress = newAddress && newAddress.toLowerCase();
+                    $toolElement.attr("data-owned", loggedXid === newAddress);
+                });
+
                 Q.handle(state.onRefresh, tool);
             });
+        },
+        /**
+         * Get NFT owner address
+         * @method getOwner
+         * @param {function} [callback]
+         */
+        getOwner: function (callback) {
+            var tool = this;
+            var state = this.state;
+            var currentOwner = state.owner;
+
+            Users.Web3.getContract(state.abiPath, {contractAddress: state.contractAddress, readOnly: true})
+                .then(contract => {
+                    return contract.ownerOf(state.tokenId);
+                })
+                .then(ownerAddress => {
+                    Q.handle(callback, tool, [ownerAddress, currentOwner]);
+
+                    ownerAddress = ownerAddress && ownerAddress.toLowerCase();
+                    currentOwner = currentOwner && currentOwner.toLowerCase();
+                    if (!ownerAddress || currentOwner === ownerAddress) {
+                        return;
+                    }
+
+                    state.owner = ownerAddress;
+
+                    Q.req("Users/web3ClearCache", [], function () {}, {
+                        methtod: "post",
+                        fields: {
+                            rows: [
+                                {
+                                    chainId: state.chainId,
+                                    contract: state.contractAddress,
+                                    methodName: "ownerOf",
+                                    params: state.tokenId
+                                },
+                                {
+                                    chainId: state.chainId,
+                                    contract: state.contractAddress,
+                                    methodName: "tokensByOwner",
+                                    params: state.owner
+                                }
+                            ]
+                        }
+                    });
+                });
         },
         /**
          * Create NFT
@@ -1367,11 +1441,9 @@
                 <li class="Assets_NFT_price">
                     <p><span class="Assets_NFT_price_value">{{price}}</span> {{currency.symbol}}</p>
                     <span class="Assets_NFT_comingsoon">Coming Soon</span>
+                    <button name="transfer" class="Q_button">{{NFT.Transfer}}</button>
                 </li>
                 <li class="action-block">
-                    <button name="buy" class="Q_button">{{NFT.Buy}}</button>
-                    <button name="soldOut" class="Q_button">{{NFT.NotOnSale}}</button>
-                    <button name="update" class="Q_button">{{NFT.Actions}}</button>
                     <button name="claim" class="Q_button">{{NFT.ClaimNFT}}</button>
                 </li>
             </ul>
