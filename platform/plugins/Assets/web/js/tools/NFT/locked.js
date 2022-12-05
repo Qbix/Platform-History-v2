@@ -185,6 +185,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         tool.lockedContractPromise().then(function (lockedContract) {
                             return lockedContract.isLocked(state.NFTAddress, state.tokenId);
                         }).then(function ([locked, custodian]) {
+                            $(tool.NFTpreview.element).attr("data-locked", !!locked);
                             $toolElement.attr("data-locked", !!locked);
                             $toolElement.attr("data-custodian", custodian.toLowerCase() === Q.Users.Web3.getSelectedXid().toLowerCase());
                             nftContract.ownerOf(state.tokenId).then(function (owner) {
