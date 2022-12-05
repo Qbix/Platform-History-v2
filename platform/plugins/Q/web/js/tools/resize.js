@@ -11,14 +11,13 @@
     Q.Tool.define("Q/resize", function(options) {
 
             var tool = this;
-            //tool.state = Q.extend({}, tool.state, options);
-            this.initTool();
 
             tool.pointerInfo = {
                 prevY: 0,
                 prevX: 0,
             };
 
+            this.initTool();
 
             Q.addStylesheet('{{Q}}/css/resize.css');
         },
@@ -212,7 +211,37 @@
                 if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
                 if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
-
+                function capturePointer(e) {
+                    if (e.type == 'touchstart' || e.type == 'mousedown') {
+                        tool.pointerInfo.pointerIsPressed = true;
+                        tool.pointerInfo.startX = tool.pointerInfo.prevX = _isTouchScreen && e.touches ? e.touches[0].clientX : e.clientX;
+                        tool.pointerInfo.startY = tool.pointerInfo.prevY = _isTouchScreen && e.touches ? e.touches[0].clientY : e.clientY;
+                        return;
+                    }
+            
+                    if (e.type == 'touchmove' || e.type == 'mousemove') {
+                        tool.pointerInfo.prevX = _isTouchScreen && e.touches ? e.changedTouches[0].clientX : e.clientX;
+                        tool.pointerInfo.prevY = _isTouchScreen && e.touches ? e.changedTouches[0].clientY : e.clientY;
+                        return;
+                    }
+            
+                    if (e.type == 'touchend' || e.type == 'mouseup') {
+                        tool.pointerInfo.pointerIsPressed = false;
+                        tool.pointerInfo.endX = _isTouchScreen && e.touches ? e.changedTouches[0].clientX : e.clientX;
+                        tool.pointerInfo.endY = _isTouchScreen && e.touches ? e.changedTouches[0].clientY : e.clientY;
+                        return;
+                    }
+            
+                }
+            
+                window.addEventListener(_isTouchScreen ? 'touchstart' : 'mousedown', function (e) {
+                    capturePointer(e);
+                    window.addEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', capturePointer);
+                    window.addEventListener(_isTouchScreen ? 'touchend' : 'mouseup', function (e) {
+                        capturePointer(e);
+                        window.removeEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', capturePointer);
+                    });
+                });
 
                 var _dragElementTool = (function () {
                     var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, maxX, maxY, diffX, diffY, snappedTo;
@@ -501,22 +530,22 @@
                         
                         function prepareMoving() {
                             var checkIfShouldInitMoving = function (e) {
-                                if (!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10) {
+                                if (!tool.state.isMoving && tool.pointerInfo.pointerIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10) {
                                     initMoving(e);
                                 }
                             }
                             var removeCheckIfShouldInitMovingListener = function () {
-                                activateOnElement.removeEventListener('mousemove', checkIfShouldInitMoving, false);
-                                window.removeEventListener('mouseup', removeCheckIfShouldInitMovingListener, true);
+                                activateOnElement.removeEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', checkIfShouldInitMoving, false);
+                                window.removeEventListener(_isTouchScreen ? 'touchend' : 'mouseup', removeCheckIfShouldInitMovingListener, true);
                             }
 
-                            activateOnElement.addEventListener('mousemove', checkIfShouldInitMoving, false);
-                            window.addEventListener('mouseup', removeCheckIfShouldInitMovingListener, true);
+                            activateOnElement.addEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', checkIfShouldInitMoving, false);
+                            window.addEventListener(_isTouchScreen ? 'touchend' : 'mouseup', removeCheckIfShouldInitMovingListener, true);
                         }
                         
-                        activateOnElement.addEventListener('mousedown', prepareMoving)
+                        activateOnElement.addEventListener(_isTouchScreen ? 'touchstart' : 'mousedown', prepareMoving)
 
-                        window.addEventListener('mouseup', stopMoving, true);
+                        window.addEventListener(_isTouchScreen ? 'touchend' : 'mouseup', stopMoving, true);
                     }
             
                     return {
@@ -1182,7 +1211,7 @@
                     }
             
                     function resizeByPinchGesture() {
-                        window.addEventListener(_elementToResize, 'touchstart', startResizingByPinch);
+                        _elementToResize.addEventListener('touchstart', startResizingByPinch);
                     }
             
                     function startResizingByPinch(e) {
@@ -1554,37 +1583,6 @@
                 function distance(x1, y1, x2, y2) {
                     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
                 }
-                function capturePointer(e) {
-                    if (e.type == 'touchstart' || e.type == 'mousedown') {
-                        tool.pointerInfo.mouseIsPressed = true;
-                        tool.pointerInfo.startX = tool.pointerInfo.prevX = _isTouchScreen ? e.touches[0].clientX : e.clientX;
-                        tool.pointerInfo.startY = tool.pointerInfo.prevY = _isTouchScreen ? e.touches[0].clientY : e.clientY;
-                        return;
-                    }
-            
-                    if (e.type == 'touchmove' || e.type == 'mousemove') {
-                        tool.pointerInfo.prevX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
-                        tool.pointerInfo.prevY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
-                        return;
-                    }
-            
-                    if (e.type == 'touchend' || e.type == 'mouseup') {
-                        tool.pointerInfo.mouseIsPressed = false;
-                        tool.pointerInfo.endX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
-                        tool.pointerInfo.endY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
-                        return;
-                    }
-            
-                }
-            
-                window.addEventListener('mousedown', function (e) {
-                    capturePointer(e);
-                    window.addEventListener('mousemove', capturePointer);
-                    window.addEventListener('mouseup', function (e) {
-                        capturePointer(e);
-                        window.removeEventListener('mousemove', capturePointer);
-                    });
-                });
             
                 function EventSystem() {
             

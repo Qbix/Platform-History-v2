@@ -866,7 +866,7 @@
                     return;
                 }
                 if (document.querySelector('.Streams_webrtc_dialog-box.Streams_webrtc_dialog-box-select-camera') == null) {
-                    tool.selectCameraDialogue().show();
+                    tool.showControlsDialog('select-camera').show();
                 }
             },
 
@@ -874,8 +874,17 @@
                 var tool = this;
                 if (!Q.info.isMobile && !Q.info.isTablet) return;
 
-                if (document.querySelector('.Streams_webrtc_dialog-box.select-audio') == null) {
-                    tool.selectAudioDialogue();
+                if (document.querySelector('.Streams_webrtc_dialog-box Streams_webrtc_dialog-box-select-audio') == null) {
+                    tool.showControlsDialog('select-audio').show();
+                }
+            },
+
+            broadcastButtonHandler: function () {
+                var tool = this;
+                if (!Q.info.isMobile && !Q.info.isTablet) return;
+               
+                if (document.querySelector('.Streams_webrtc_dialog-box Streams_webrtc_dialog-box-broadcast') == null) {
+                    tool.showControlsDialog('broadcast').show();
                 }
             },
 
@@ -1035,8 +1044,12 @@
                 microphoneBtn.addEventListener('mouseup', function () {
                     var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
                     if (resizeTool && resizeTool.state.appliedRecently) return;
-                    //tool.toggleAudio();
                     tool.audioButtonHandler()
+                })
+                broadcastBtn.addEventListener('mouseup', function () {
+                    var resizeTool = Q.Tool.from(tool.element.firstChild, "Q/resize");
+                    if (resizeTool && resizeTool.state.appliedRecently) return;
+                    tool.broadcastButtonHandler()
                 })
 
                 /*textChatBtnCon.addEventListener('mouseup', function () {
@@ -1495,23 +1508,30 @@
                     } else buttonsArr[b].icon.innerHTML = buttonsArr[b].offIcon;
                 }
             },
-
-            selectCameraDialogue: function () {
+            showControlsDialog: function (dialogType) {
                 var tool = this;
+                var _dialogContetntEl = null;
+                if(dialogType == 'select-camera') {
+                    _dialogContetntEl = tool.settingsPopupEl;
+                } else if (dialogType == 'select-audio') {
+                    _dialogContetntEl = tool.audioSettingsPopupEl;
+                } else if (dialogType == 'broadcast') {
+                    _dialogContetntEl = tool.broadcastPopupEl;
+                }
 
                 function show() {
                     var bg = document.createElement('DIV');
-                    bg.className = 'Streams_webrtc_dialog-bg Streams_webrtc_select-camera-bg';
+                    bg.className = 'Streams_webrtc_dialog-bg Streams_webrtc_' + dialogType + '-bg';
 
                     var dialogCon = document.createElement('DIV');
-                    dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-select-camera';
+                    dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-' + dialogType;
                     dialogCon.addEventListener('click', function (e) {
                         e.stopPropagation();
                         //if(e.currentTarget == e.target) self.closeAllDialogues();
                     });
 
                     var dialogue = document.createElement('DIV');
-                    dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-select-camera';
+                    dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-' + dialogType;
 
                     var dialogTitle = document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.settingsPopup.dialogTitle", tool.textes);
@@ -1533,7 +1553,7 @@
                     });
 
                     dialogInner.appendChild(dialogTitle);
-                    dialogInner.appendChild(tool.settingsPopupEl);
+                    dialogInner.appendChild(_dialogContetntEl);
 
                     dialogue.appendChild(close);
                     dialogue.appendChild(dialogInner);
@@ -1542,22 +1562,22 @@
                     document.body.appendChild(bg);
 
 
-                    var contentWidth = tool.settingsPopupEl.firstChild.scrollWidth;
-                    var contentHeight = tool.settingsPopupEl.scrollHeight;
+                    var contentWidth = _dialogContetntEl.firstChild.scrollWidth;
+                    var contentHeight = _dialogContetntEl.scrollHeight;
                     var windowWidth = window.innerWidth;
                     var windowHeight = window.innerHeight;
 
                     var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
 
-                    tool.settingsPopupEl.style.maxHeight = maxHeight + 'px';
+                    _dialogContetntEl.style.maxHeight = maxHeight + 'px';
                     dialogue.style.minWidth = contentWidth + 'px';
 
                     tool.state.dialogIsOpened = true;
                 }
 
                 function hide() {
-                    let dialogue = document.querySelector('.Streams_webrtc_dialog-con.Streams_webrtc_dialog-con-select-camera');
-                    let dialogueBg = document.querySelector('.Streams_webrtc_dialog-bg.Streams_webrtc_select-camera-bg');
+                    let dialogue = document.querySelector('.Streams_webrtc_dialog-con.Streams_webrtc_dialog-con-' + dialogType);
+                    let dialogueBg = document.querySelector('.Streams_webrtc_dialog-bg.Streams_webrtc_' + dialogType + '-bg');
                     if (dialogue && dialogue.parentNode != null) dialogue.parentNode.removeChild(dialogue);
                     if (dialogueBg && dialogueBg.parentNode != null) dialogueBg.parentNode.removeChild(dialogueBg);
                     tool.state.dialogIsOpened = false;
@@ -1568,70 +1588,7 @@
                     hide: hide
                 }
             },
-            selectAudioDialogue: function () {
-                var tool = this;
-                //self.closeAllDialogues();
-
-                var bg = document.createElement('DIV');
-                bg.className = 'Streams_webrtc_dialog-bg';
-
-                var dialogCon = document.createElement('DIV');
-                dialogCon.className = 'Streams_webrtc_dialog-con Streams_webrtc_dialog-con-select-audio';
-                dialogCon.addEventListener('click', function (e) {
-                    e.stopPropagation();
-                    //if(e.currentTarget == e.target) self.closeAllDialogues();
-                });
-
-                var dialogue = document.createElement('DIV');
-                dialogue.className = 'Streams_webrtc_dialog-box select-audio';
-
-                var dialogTitle = document.createElement('H3');
-                dialogTitle.innerHTML = Q.getObject("webrtc.audioSettings.dialogTitle", tool.textes);
-                dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
-
-                var dialogInner = document.createElement('DIV');
-                dialogInner.className = 'Streams_webrtc_dialog-inner';
-
-
-                var close = document.createElement('div');
-                close.className = 'Streams_webrtc_close-dialog-sign';
-                close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '")';
-
-
-                var chooseAudioList = document.createElement('DIV');
-                chooseAudioList.className = 'choose-device';
-
-                close.addEventListener('click', function () {
-                    if (bg.parentNode != null) bg.parentNode.removeChild(bg);
-                    if (dialogCon.parentNode != null) dialogCon.parentNode.removeChild(dialogCon);
-                    tool.state.dialogIsOpened = false;
-                });
-
-                dialogInner.appendChild(dialogTitle);
-                dialogInner.appendChild(tool.audioSettingsPopupEl);
-
-                dialogue.appendChild(close);
-                dialogue.appendChild(dialogInner);
-                dialogCon.appendChild(dialogue)
-                document.body.appendChild(dialogCon);
-                document.body.appendChild(bg);
-
-                var contentWidth = tool.audioSettingsPopupEl.firstChild.scrollWidth;
-                var contentHeight = tool.audioSettingsPopupEl.scrollHeight;
-                var windowWidth = window.innerWidth;
-                var windowHeight = window.innerHeight;
-
-                var maxHeight = ((windowHeight - 50 - 41) / 100 * 90);
-
-                if (contentHeight > maxHeight) {
-                    tool.audioSettingsPopupEl.style.maxHeight = maxHeight + 'px';
-                }
-                dialogue.style.minWidth = contentWidth + 'px';
-                dialogue.style.marginTop = '-50px';
-
-                tool.state.dialogIsOpened = true;
-            },
-
+            
             /**
              * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
              * @method createSettingsPopup
@@ -2178,7 +2135,7 @@
 
                     function hide() {
                         if (Q.info.isMobile) {
-                            tool.selectCameraDialogue().hide();
+                            tool.showControlsDialog('select-camera').hide();
                         } else {
                             tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
                         }
@@ -3277,8 +3234,6 @@
                             return rtmpStreaming;
                         }
 
-
-
                         function createRecordingLink() {
                             var recordingCon = document.createElement('DIV');
                             recordingCon.className = 'Streams_webrtc_streaming Streams_webrtc_streaming_recording_item'
@@ -3555,7 +3510,7 @@
 
                     function hide() {
                         if (Q.info.isMobile) {
-                            tool.selectCameraDialogue().hide();
+                            tool.showControlsDialog('select-camera').hide();
                         } else {
                             tool.broadcastBtn.parentNode.classList.remove('Streams_webrtc_hover');
                         }

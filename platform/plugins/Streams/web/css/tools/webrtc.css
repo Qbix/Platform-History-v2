@@ -1978,7 +1978,7 @@
     padding: 0;
     width:400px;
 }
-.Streams_webrtc_dialog-box.advanced-streaming {
+.Streams_webrtc_dialog-box.Streams_webrtc_dialog_advanced_streaming {
     padding: 0;
     margin: 0;
     width:700px;
@@ -1986,12 +1986,12 @@
     left: 0;
     pointer-events: all;
 }
-.Streams_webrtc_dialog-box.advanced-streaming .Streams_webrtc_dialog-inner{
+.Streams_webrtc_dialog-box.Streams_webrtc_dialog_advanced_streaming .Streams_webrtc_dialog-inner{
     height: 100%;
     display: flex;
     flex-direction: column;
 }
-.Streams_webrtc_dialog-box.advanced-streaming h3.Streams_webrtc_dialog-header,
+.Streams_webrtc_dialog-box.Streams_webrtc_dialog_advanced_streaming h3.Streams_webrtc_dialog-header,
 .Streams_webrtc_popup-streaming-box .Streams_webrtc_dialog-header.Q_dialog_title,
 .Streams_webrtc_dialog-box .Streams_webrtc_dialog-header{
     border-bottom: none;
@@ -2000,12 +2000,11 @@
     margin:0;
     color:#ffffff;
 }
-.Streams_webrtc_popup-add-scene, .Streams_webrtc_popup-add-image, .Streams_webrtc_popup-add-video, .Streams_webrtc_popup-add-tc, .Streams_webrtc_popup-add-audio {
+.Streams_webrtc_dialog-box-add-new-s {
     padding: 0;
     margin: 0;
-    padding-bottom:10px;
+    padding-bottom:0;
     position: absolute;
-    background: #424242;
     z-index: 99999999;
     border-radius: 5px;
     pointer-events: all;
@@ -2014,24 +2013,17 @@
     padding:10px;
 }
 
-.Streams_webrtc_popup-add-image .Streams_webrtc_popup-box input[type=file],
-.Streams_webrtc_popup-add-video .Streams_webrtc_popup-box input[type=file],
-.Streams_webrtc_popup-add-audio .Streams_webrtc_popup-box input[type=file] {
+.Streams_webrtc_dialog-box-add-new-s input[type=file] {
     margin-top:15px;
     margin-bottom:15px;
 }
-.Streams_webrtc_popup-add-video .Streams_webrtc_popup-box input[type=text],
-.Streams_webrtc_popup-add-image .Streams_webrtc_popup-box input[type=text],
-.Streams_webrtc_popup-add-tc .Streams_webrtc_popup-box input[type=text],
-.Streams_webrtc_popup-add-audio .Streams_webrtc_popup-box input[type=text] {
+.Streams_webrtc_dialog-box-add-new-s .Streams_webrtc_popup-box input[type=text] {
+    display: block;
+    width: 100%;
     margin-top:15px;
     padding: 10px 5px;
 }
-.Streams_webrtc_popup-add-scene .Streams_webrtc_close-dialog-sign,
-.Streams_webrtc_popup-add-image .Streams_webrtc_close-dialog-sign,
-.Streams_webrtc_popup-add-video .Streams_webrtc_close-dialog-sign,
-.Streams_webrtc_popup-add-tc .Streams_webrtc_close-dialog-sign,
-.Streams_webrtc_popup-add-audio .Streams_webrtc_close-dialog-sign {
+.Streams_webrtc_dialog-box-add-new-s.Streams_webrtc_close-dialog-sign {
     animation: none !important;
 }
 .Streams_webrtc_popup-add-scene input.Streams_webrtc_dialog-name{
@@ -2626,6 +2618,102 @@
 .Streams_webrtc_popup-sources-add-menu-show {display: block;}
 
 
+.Streams_webrtc_popup-audio-mixer {
+    width: 50px;
+}
+.Streams_webrtc_popup-audio-mixer-inner {
+    height: 100%;
+}
+.Streams_webrtc_popup-audio-mixer-global {
+    height: 100%;
+}
+/*volume slider (audio mixer)*/
+.Streams_webrtc_popup-mixer-volume-con {
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+}
+.Streams_webrtc_popup-mixer-item {
+    margin-top: 5px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.Streams_webrtc_popup-mixer-meter-con {
+
+}
+.Streams_webrtc_popup-mixer-meter-con canvas{
+    border-radius: 2px;
+}
+.Streams_webrtc_popup-mixer-item:first-child {
+    margin-top: 0;
+}
+.Streams_webrtc_popup-mixer-controls {
+    display: flex;
+    height: 100%;
+}
+.Streams_webrtc_popup-mixer-volume-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.Streams_webrtc_popup-mixer-volume-icon polygon,
+.Streams_webrtc_popup-mixer-volume-icon path {
+    fill: rgba(255, 255, 255, 1);
+}
+.Streams_webrtc_popup-mixer-volume-icon path,
+.Streams_webrtc_popup-mixer-volume-icon polygon {
+    -webkit-transition: opacity 300ms linear;
+    -ms-transition: opacity 300ms linear;
+    transition: opacity 300ms linear;
+}
+.Streams_webrtc_popup-mixer-volume-slider-con {
+    height: 215px;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-sizing: content-box;
+}
+.Streams_webrtc_popup-mixer-volume-slider-wrap {
+    width: 4px;
+    padding-top:8px;
+    padding-bottom:8px;
+    background-color: #ebebeb;
+    background: linear-gradient(to top, rgba(235,235,235,1) 50%,rgba(151,151,151,1) 50%);
+    border-radius: 2px;
+    cursor: pointer;
+}
+.Streams_webrtc_popup-mixer-volume {
+    width: 4px;
+    background-color: #979797;
+    position: relative;
+    height: 100%;
+}
+.Streams_webrtc_popup-mixer-volume span{
+    background-color: #ebebeb;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 4px;
+    height: 0px;
+}
+.Streams_webrtc_popup-mixer-volume span:after{
+    content: ' ';
+    display: block;
+    position: absolute;
+    background-color: #ffffff;
+    right: -6px;
+    border-radius: 50%;
+    top: -8px;
+    width: 16px;
+    height: 16px;
+}
+/*end: audio mixer column*/
+
+
 /*streaminh canvas editor for mobile */
 .Streams_webrtc_mobile-screen.Streams_webrtc_landscape-screen .Streams_webrtc_dialog-box h3.Streams_webrtc_dialog-header {
     border-radius: 0;
@@ -2688,13 +2776,13 @@
     position: absolute;
     width: 100%;
 }
-.Streams_webrtc_mobile-screen.Streams_webrtc_landscape-screen .Streams_webrtc_dialog-box.advanced-streaming .Streams_webrtc_close-dialog-sign{
+.Streams_webrtc_mobile-screen.Streams_webrtc_landscape-screen .Streams_webrtc_dialog-box.Streams_webrtc_dialog_advanced_streaming .Streams_webrtc_close-dialog-sign{
     top: 5px;
     right: 5px;
     width: 30px;
     height: 30px;
 }
-.Streams_webrtc_mobile-screen.Streams_webrtc_landscape-screen .Streams_webrtc_dialog-box.advanced-streaming .Streams_webrtc_close-dialog-sign:before{
+.Streams_webrtc_mobile-screen.Streams_webrtc_landscape-screen .Streams_webrtc_dialog-box.Streams_webrtc_dialog_advanced_streaming .Streams_webrtc_close-dialog-sign:before{
     content: ' ';
     display: block;
     background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="22px" height="23px" viewBox="-0.017 -0.916 22 23" enable-background="new -0.017 -0.916 22 23" xml:space="preserve"> <defs> </defs> <path d="M21.238,21.737c-0.128,0-0.256-0.049-0.354-0.146L0.146,0.854c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0 l20.738,20.737c0.195,0.195,0.195,0.512,0,0.707C21.494,21.688,21.366,21.737,21.238,21.737z"/> <path d="M0.5,21.737c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707L20.884,0.146 c0.195-0.195,0.512-0.195,0.707,0s0.195,0.512,0,0.707L0.854,21.591C0.756,21.688,0.628,21.737,0.5,21.737z"/> </svg>');
