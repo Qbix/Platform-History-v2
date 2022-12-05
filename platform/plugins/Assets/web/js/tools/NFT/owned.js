@@ -28,6 +28,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 	owner: {
 		userId: null,
 		accountAddress: null,
+		recipient: null
 	},
 	holder: {
 		contractAddress: null,

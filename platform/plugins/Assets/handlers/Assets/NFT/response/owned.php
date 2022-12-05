@@ -17,15 +17,18 @@ function Assets_NFT_response_owned ($params) {
 	if (!$ownerAccountAddress && $ownerUserId) {
 		$ownerAccountAddress = Users_Web3::getWalletByUserId($ownerUserId);
 	}
+	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
+	$defaultSalesContractAbiPath = "Assets/templates/R1/NFT/sales/contract";
 	$sources[] = array(
 		"address" => $ownerAccountAddress,
+		"recipient" => Q::ifset($request,"owner", "recipient", null),
+		"pathABI" => Q::ifset($request,"owner", "pathABI", $defaultSalesContractAbiPath),
 	);
 	$sources[] = array(
 		"address" => Q::ifset($request,"holder", "contractAddress", null),
-		"pathABI" => Q::ifset($request,"holder", "pathABI", "Assets/templates/R1/NFT/sales/contract"),
+		"pathABI" => Q::ifset($request,"holder", "pathABI", $defaultSalesContractAbiPath),
 		"recipient" => Q::ifset($request,"holder", "accountAddress", Users_Web3::getWalletByUserId())
 	);
-	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
 	$glob = array();
 	$glob["offset"] = (int)Q::ifset($request, "offset", 0);
 	$glob["limit"] = (int)Q::ifset($request, "limit", 1000);
