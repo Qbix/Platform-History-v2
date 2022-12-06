@@ -1041,7 +1041,7 @@
 					return Q.Users.Web3.execute(
 						'Assets/templates/R1/NFT/contract',
 						contractAddress, 
-						"setSeriesInfo", 
+						"setSeriesInfo(uint64,(address,uint32,(uint64,address,uint256,uint256),(uint64,address),string,string))", 
 						[
 							authorAddress, 
 							limit, 
