@@ -4282,7 +4282,7 @@
 						}
 						var err = "Q.Users.Web3.execute: missing method " + methodName + "\n"
 							+ "But perhaps you meant these method names: \n" + possibilities.join("\n");
-						console.error(err);;
+						console.error(err);
 						return Q.handle(callback, null, [err]);
 					}
 					contract[methodName].apply(null, params).then(function (result) {
