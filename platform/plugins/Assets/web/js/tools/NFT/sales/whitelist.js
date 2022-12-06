@@ -96,25 +96,15 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                     }
                 });
                 
-                var contentManageWhitelist = function(btnClassname, btnTitle){
-                    return `
-                        <div class="Assets_NFT_sales_whitelist_form">
-                            <div class="form-group">
-                                <label>${tool.text.NFT.sales.whitelist.form.labels.account}</label>
-                                <input name="account" type="text" class="form-control" placeholder="${tool.text.NFT.sales.whitelist.placeholders.account}">
-                                <small class="form-text text-muted">${tool.text.NFT.sales.whitelist.form.small.account}</small>
-                            </div>
-                            <button class="${btnClassname} Q_button">${btnTitle}</button>
-                        </div>
-                    `;
-                }
-                
                 $('.Assets_NFT_sales_whitelist_add', tool.element).on(Q.Pointer.fastclick, function(){
-                    Q.Dialogs.push({    
+                    Q.Dialogs.push({
                             title: tool.text.NFT.sales.whitelist.addToWhitelist,
-                            content: contentManageWhitelist("Assets_NFT_sales_whitelist_dialogAdd", "Add"),
+                            className: "Assets_NFT_sales_whitelist_form",
+                            template: {
+                                name: "Assets/NFT/sales/whitelist/add"
+                            },
                             onActivate: function ($dialog) {
-                                $(".Assets_NFT_sales_whitelist_dialogAdd", $dialog).on(Q.Pointer.fastclick, function(){
+                                $("button[name=add]", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
                                     let account = $($dialog).find("[name='account']").val();
                                     if (!account) {
@@ -148,9 +138,12 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                 $('.Assets_NFT_sales_whitelist_remove', tool.element).on(Q.Pointer.fastclick, function(){
                     Q.Dialogs.push({    
                             title: tool.text.NFT.sales.whitelist.removeFromWhitelist,
-                            content: contentManageWhitelist("Assets_NFT_sales_whitelist_dialogRemove", "Remove"),
+                            className: "Assets_NFT_sales_whitelist_form",
+                            template: {
+                                name: "Assets/NFT/sales/whitelist/remove"
+                            },
                             onActivate: function ($dialog) {
-                                $(".Assets_NFT_sales_whitelist_dialogRemove", $dialog).on(Q.Pointer.fastclick, function(){
+                                $("button[name=remove]", $dialog).on(Q.Pointer.fastclick, function(){
                                     $(this).addClass('Q_loading');
                                     let account = $($dialog).find("[name='account']").val();
                                     if (!account) {
@@ -189,16 +182,16 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
 });
 
 Q.Template.set("Assets/NFT/sales/whitelist", 
-    `<div>
-        <div class="Assets_NFT_sales_whitelist_сontainer">
-            <h3>Manage Whitelist</h3>
+    `<h3>Manage Whitelist</h3>
             <button class="Assets_NFT_sales_whitelist_add Q_button">Add</button>
-            <button class="Assets_NFT_sales_whitelist_remove Q_button">Remove</button>
-        </div>
-    </div>
-    
-    `,
-{ text: ["Assets/content"] }
+            <button class="Assets_NFT_sales_whitelist_remove Q_button">Remove</button>`,{ text: ["Assets/content"] }
 );
-
+Q.Template.set("Assets/NFT/sales/whitelist/add",
+`<input name="account" type="text" class="form-control" placeholder="{{NFT.sales.whitelist.placeholders.account}}">
+        <button name="add" class="Q_button">{{NFT.Add}}</button>`, { text: ["Assets/content"] }
+);
+Q.Template.set("Assets/NFT/sales/whitelist/remove",
+`<input name="account" type="text" class="form-control" placeholder="{{NFT.sales.whitelist.placeholders.account}}">
+        <button name="remove" class="Q_button">{{NFT.Remove}}</button>`, { text: ["Assets/content"] }
+);
 })(window, Q, jQuery);

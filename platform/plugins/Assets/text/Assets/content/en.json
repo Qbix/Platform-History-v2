@@ -251,6 +251,8 @@
 		"OwnerUserNotFound": "Owner of this NFT is not registered in our application.",
 		"BuyNow": "Buy now",
 		"Buy": "Buy",
+		"Add": "Add",
+		"Remove": "Remove",
 		"NoNFTyet": "No NFTs yet",
 		"Conversation": "Conversation",
 		"Create": "Create",
