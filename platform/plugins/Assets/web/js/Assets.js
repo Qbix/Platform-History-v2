@@ -1091,7 +1091,7 @@
 				 * @return {Q.Promise} instead of callback
 				 */
 				getContract: function (chainId, options) {
-					var address = Q.getObject("contractAddress", options) || chain.contract;
+					var address = Q.getObject("contractAddress", options) || chainId.contract;
 					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
 					return Q.Users.Web3.getContract(abiPath, {
 						chainId: chainId,
