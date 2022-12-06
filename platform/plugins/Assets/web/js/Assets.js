@@ -1465,6 +1465,10 @@
 		name: Users.communityName
 	};
 
+	Q.Text.addFor(
+		['Q.Tool.define', 'Q.Template.set'],
+		'Assets/', ["Assets/content"]
+	);
 	Q.Tool.define({
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
 		"Assets/payment": "{{Assets}}/js/tools/payment.js",

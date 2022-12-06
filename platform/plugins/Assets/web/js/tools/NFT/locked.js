@@ -113,13 +113,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 return;
             }
 
-            Q.Text.get('Assets/content', function (err, text) {
-                if (err) {
-                    return;
-                }
-                tool.text = text;
-                tool.refresh();
-            });
+            tool.refresh();
         });
 
         Q.Users.Web3.onAccountsChanged.set(function () {

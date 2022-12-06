@@ -137,11 +137,10 @@ Q.onInit.set(function () {
 	}, "Websites");
 }, "Websites");
 
-/**
- * Interface for editing some common meta fields for search engine optimization
- * @class Websites seo
- * @constructor
- */
+ Q.Text.addFor(
+	['Q.Tool.define', 'Q.Template.set'],
+	'Wesites/', ["Websites/content"]
+);
 Q.Tool.define({
 	"Websites/seo": "{{Websites}}/js/tools/seo.js",
 	"Websites/presentation": "{{Websites}}/js/tools/presentation.js",
