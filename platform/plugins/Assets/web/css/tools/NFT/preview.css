@@ -614,7 +614,7 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
 
 #page .Assets_NFT_preview_tool button[name=claim],
 #page .Assets_NFT_preview_tool button[name=transfer],
-#page .Assets_NFT_preview_tool[data-claim=false] .bid-info,
+#page .Assets_NFT_preview_tool[data-claim=false] .action-block,
 #page .Assets_NFT_preview_tool .Assets_NFT_claim_timeout {
     display: none;
 }
