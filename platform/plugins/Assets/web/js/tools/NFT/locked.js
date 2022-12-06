@@ -94,7 +94,8 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 return nftContract.getHookList(seriesId);
             }).then(function (allHooksArr) {
                 return [
-                    allHooksArr.indexOf(lockedContract.address) >= 0,
+                    allHooksArr.map(c => c.toLowerCase())
+                        .indexOf(lockedContract.address) >= 0,
                     nftContract,
                     lockedContract,
                     seriesId
