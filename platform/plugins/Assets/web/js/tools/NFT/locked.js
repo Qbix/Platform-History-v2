@@ -141,10 +141,12 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
             if (!Q.isEmpty(state.seriesIdSource.seriesId)) {
                 return Promise.resolve(state.seriesIdSource.seriesId);
             } else if (!Q.isEmpty(state.seriesIdSource.salesAddress)) {
-                return Q.Users.Web3.getContract(state.seriesIdSource.abiNFTSales, state.seriesIdSource.salesAddress)
-                    .then(salesContract => {
-                        return salesContract.seriesId();
-                    });
+                return Q.Users.Web3.getContract(state.seriesIdSource.abiNFTSales, {
+                    readOnly: true,
+                    contractAddress: state.seriesIdSource.salesAddress
+                }).then(salesContract => {
+                    return salesContract.seriesId();
+                });
             } else {
                 return console.warn("Assets/NFT/locked", "There are no available data source for getting seriesId")
             }
