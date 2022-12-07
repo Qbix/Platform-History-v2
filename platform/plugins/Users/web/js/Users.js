@@ -4270,8 +4270,20 @@
 				contractABIName, 
 				contractAddress, 
 				function (err, contract) {
-					if (!Q.getObject(methodName, contract)) {
-						return Q.handle(callback, null, ["Q.Users.Web3.execute: missing method " + methodName]);
+					if (!contract[methodName]) {
+						var possibilities = [];
+						var m = methodName.match(/[A-Za-z1-9]+/);
+						if (m) {
+							for (var k in contract) {
+								if (k.startsWith(m[0])) {
+									possibilities.push(k);
+								}
+							}
+						}
+						var err = "Q.Users.Web3.execute: missing method " + methodName + "\n"
+							+ "But perhaps you meant these method names: \n" + possibilities.join("\n");
+						console.error(err);
+						return Q.handle(callback, null, [err]);
 					}
 					contract[methodName].apply(null, params).then(function (result) {
 						Q.handle(callback, null, [null, result]);

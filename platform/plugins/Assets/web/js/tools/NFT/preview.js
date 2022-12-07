@@ -45,11 +45,9 @@
         $toolElement.attr("data-publisher", tool.isPublisher);
 
         // is claim
-        state.secondsLeft = parseInt(state.secondsLeft);
-        if (state.secondsLeft > 0) {
-            $toolElement.attr("data-claim",  false);
-        } else if (state.secondsLeft <= 0) {
-            $toolElement.attr("data-claim",  true);
+        if (state.secondsLeft != null) {
+            state.secondsLeft = parseInt(state.secondsLeft);
+            $toolElement.attr("data-claim", state.secondsLeft <= 0);
         }
 
         if (!Q.isEmpty(previewState)) {

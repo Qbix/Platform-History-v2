@@ -1043,13 +1043,16 @@
 						contractAddress, 
 						"setSeriesInfo", 
 						[
-							authorAddress, 
-							limit, 
-							[onSaleUntil, currency, price], 
-							[commissionFraction, commissionAddress], 
-							baseURI, 
-							suffix
-						], 
+							seriesId,
+							[
+								authorAddress, 
+								limit, 
+								[onSaleUntil, currency, price], 
+								[commissionFraction, commissionAddress], 
+								baseURI, 
+								suffix
+							], 
+						],
 						callback
 					);
 				},

@@ -46,6 +46,7 @@ function Assets_NFT_response_getInfo ($params) {
 	}
 
 	// execute getCommission if exists
+	$commissionInfo = null;
 	if (Users_Web3::existsInABI("getCommission", $ABI, "function", false)) {
 		$commissionInfo = Users_Web3::execute($pathABI, $contractAddress, "getCommission", $tokenId, $chainId, $caching, $longDuration);
 	}

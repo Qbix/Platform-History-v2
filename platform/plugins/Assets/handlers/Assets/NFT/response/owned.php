@@ -12,23 +12,17 @@
 function Assets_NFT_response_owned ($params) {
 	$request = array_merge($_REQUEST, $params);
 	$sources = array();
+	$platform = Q::ifset($request, 'platform', null);
+	$appId = Q::ifset($request, 'appId', Q::app());
+	list($appId, $appInfo) = Users::appInfo($platform, $appId);
+	$chainId = Q::ifset($appInfo, 'appId', Q::ifset($appInfo, 'chainId', null));
 	$ownerUserId = Q::ifset($request, "owner", "userId", null);
-	$ownerAccountAddress = Q::ifset($request, "owner", "accountAddress", null);
-	if (!$ownerAccountAddress && $ownerUserId) {
-		$ownerAccountAddress = Users_Web3::getWalletByUserId($ownerUserId);
+	$ownerXid = Q::ifset($request, "owner", "xid", null);
+	if ($platform === 'web3' and !$ownerXid && $ownerUserId) {
+		$ownerXid = Users_Web3::getWalletByUserId($ownerUserId);
 	}
+	$recipientXid = Q::ifset($request, "recipient", "xid", Users_Web3::getWalletByUserId());
 	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
-	$defaultSalesContractAbiPath = "Assets/templates/R1/NFT/sales/contract";
-	$sources[] = array(
-		"address" => $ownerAccountAddress,
-		"pathABI" => Q::ifset($request,"owner", "pathABI", $defaultSalesContractAbiPath),
-		"recipient" => Q::ifset($request,"owner", "recipient", null),
-	);
-	$sources[] = array(
-		"address" => Q::ifset($request,"holder", "contractAddress", null),
-		"pathABI" => Q::ifset($request,"holder", "pathABI", $defaultSalesContractAbiPath),
-		"recipient" => Q::ifset($request,"holder", "recipient", null)
-	);
 	$glob = array();
 	$glob["offset"] = (int)Q::ifset($request, "offset", 0);
 	$glob["limit"] = (int)Q::ifset($request, "limit", 1000);
@@ -109,59 +103,55 @@ function Assets_NFT_response_owned ($params) {
 		$balanceOf = Users_Web3::existsInABI("balanceOf", $ABI, "function", false);
 		$getNftsByOwner = Users_Web3::existsInABI("getNftsByOwner", $ABI, "function", false);
 		$tokenOfOwnerByIndex = Users_Web3::existsInABI("tokenOfOwnerByIndex", $ABI, "function", false);
-		foreach ($sources as $source) {
-			if (empty($source["address"])) {
+		if ($tokensByOwner || $getNftsByOwner) {
+			$methodName = "tokensByOwner";
+			if ($getNftsByOwner) {
+				$methodName = "getNftsByOwner";
+			}
+
+			$tokens = Users_Web3::execute($pathABI, $chain["contract"], $methodName, [$ownerXid, $tokensByOwnerLimit], $chain["chainId"], $caching, $cacheDuration);
+			if (empty($tokens)) {
 				continue;
 			}
-			if ($tokensByOwner || $getNftsByOwner) {
-				$methodName = "tokensByOwner";
-				if ($getNftsByOwner) {
-					$methodName = "getNftsByOwner";
-				}
-
-				$tokens = Users_Web3::execute($pathABI, $chain["contract"], $methodName, [$source["address"], $tokensByOwnerLimit], $chain["chainId"], $caching, $cacheDuration);
-				if (empty($tokens)) {
-					continue;
-				}
+			if ($recipientXid and $platform === 'web3') {
 				$dirtyTokens = $tokens;
 				$tokens = array();
-				$sourceABI = Users_Web3::getABI($source["pathABI"]);
-				$tokenInfo = Users_Web3::existsInABI("tokenInfo", $sourceABI, "function", false);
-				if ($tokenInfo) {
-					foreach ($dirtyTokens as $tokenId) {
-						$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "tokenInfo", [$tokenId], $chain["chainId"], $caching, $cacheDuration);
-						if (!$source["recipient"] || $source["recipient"] == Q::ifset($tokenInfo, "recipient", null)) {
-							$tokens[] = array(
-								"tokenId" => $tokenId,
-								"secondsLeft" => Q::ifset($tokenInfo, "secondsLeft", null)
-							);
+				$salesABI = 'Assets/templates/R1/NFT/sales/contract';
+				foreach ($dirtyTokens as $tokenId) {
+					$tokenInfo = Users_Web3::execute($salesABI, $ownerXid, "pending", [$tokenId], $chain["chainId"], $caching, $cacheDuration);
+					if ($recipientXid == $tokenInfo['recipient']) {
+						$secondsLeft = Q::ifset($tokenInfo, "secondsLeft", null);
+						if (isset($secondsLeft)) {
+							$secondsLeft = (integer)$secondsLeft;
 						}
-					}
-				} else {
-					$tokens = array();
-				}
-
-				foreach ($tokens as $tokenId) {
-					$secondsLeft = null;
-					if (is_array($tokenId)) {
-						$secondsLeft = Q::ifset($tokenId, "secondsLeft", null);
-						$tokenId = Q::ifset($tokenId, "tokenId", null);
-					}
-					if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "secondsLeft"), $tokenJSON, $countNFTs) === false) {
-						break;
+						$tokens[] = array(
+							"tokenId" => $tokenId,
+							"secondsLeft" => $secondsLeft
+						);
 					}
 				}
-			} elseif ($balanceOf && $tokenOfOwnerByIndex) {
-				$tokens = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "balanceOf", $source["address"], $chain["chainId"], $caching, $cacheDuration);
-				for ($i = 0; $i < $tokens; $i++) {
-					$tokenId = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "tokenOfOwnerByIndex", array($source["address"], $i), $chain["chainId"], $caching, $cacheDuration);
-					if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI"), $tokenJSON, $countNFTs) === false) {
-						break;
-					}
-				}
-			} else {
-				throw new Exception("Contract ".$chain["contract"]." doesn't support methods tokensByOwner and ".($balanceOf ? "tokenOfOwnerByIndex" : "balanceOf"));
 			}
+
+			foreach ($tokens as $tokenId) {
+				$secondsLeft = null;
+				if (is_array($tokenId)) {
+					$secondsLeft = Q::ifset($tokenId, "secondsLeft", null);
+					$tokenId = Q::ifset($tokenId, "tokenId", null);
+				}
+				if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "secondsLeft"), $tokenJSON, $countNFTs) === false) {
+					break;
+				}
+			}
+		} elseif ($balanceOf && $tokenOfOwnerByIndex) {
+			$tokens = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "balanceOf", $source["address"], $chain["chainId"], $caching, $cacheDuration);
+			for ($i = 0; $i < $tokens; $i++) {
+				$tokenId = (int)Users_Web3::execute($source["pathABI"], $chain["contract"], "tokenOfOwnerByIndex", array($source["address"], $i), $chain["chainId"], $caching, $cacheDuration);
+				if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI"), $tokenJSON, $countNFTs) === false) {
+					break;
+				}
+			}
+		} else {
+			throw new Exception("Contract ".$chain["contract"]." doesn't support methods tokensByOwner and ".($balanceOf ? "tokenOfOwnerByIndex" : "balanceOf"));
 		}
 	}
 
