@@ -30,6 +30,7 @@
             snapToSidesOnly: false,
             moveWithinArea: 'parent',
             negativeMoving: false,
+            allowOverresizing: false,
             resizeByWheel: true,
             ignoreOnElements: [],
             snapToRects: [],
@@ -1382,7 +1383,7 @@
                         var elRect = _elementToResize.getBoundingClientRect();
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
             
-                        /*if (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth) {
+                        /*if (!tool.state.allowOverresizing && (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth)) {
             
                             _elementToResize.style.width = oldWidth + 'px';
                             _elementToResize.style.height = oldHeight + 'px';
@@ -1390,9 +1391,10 @@
             
                             return;
                         }*/
-            
+
                         var elRect = _elementToResize.getBoundingClientRect();
                         if (elementPosition == 'fixed' || elementPosition == 'absolute') {
+
                             _elementToResize.style.left = _centerPosition - (elRect.width / 2) + 'px';
                             _elementToResize.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';            
                         }
@@ -1400,8 +1402,9 @@
                         var elementWidth = elRect.width;
                         var elementHeight = elRect.height;
                         if (tool.state.keepRatioBasedOnElement != null) {
-            
+
                             var baseEl = tool.state.keepRatioBasedOnElement;
+
                             var srcWidth, srcHeight, ratio
                             if (typeof baseEl == 'object' && !(baseEl instanceof HTMLVideoElement)) {
                                 srcWidth = baseEl.width;
@@ -1419,11 +1422,12 @@
                                 elementHeight = elementWidth / ratio;
                             }
                         }
-            
+
                         _elementToResize.style.width = elementWidth + 'px';
                         _elementToResize.style.height = elementHeight + 'px';
                         _elementToResize.style.top = elRect.top - containerRect.top + 'px';
                         _elementToResize.style.left = elRect.left - containerRect.left + 'px';
+                        
                         _elementToResize.style.transform = '';
                         //}, 100);
                         tool.events.dispatch('resizing', { width: elementWidth, height: elementHeight, x: elRect.left - containerRect.left, y: elRect.top - containerRect.top });

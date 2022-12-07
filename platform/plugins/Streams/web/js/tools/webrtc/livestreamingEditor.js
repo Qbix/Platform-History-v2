@@ -2104,12 +2104,12 @@
                             console.log('audio: addItem', item)
                             console.log('audio: addItem itemEl', item.itemEl)
                             if(item.sourceInstance.sourceType == 'webrtc' && item.sourceInstance.participant.isLocal) {
-                                controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                                /*controlsTool.WebRTCLib.event.on('micDisabled', function () {
                                     item.mute();
                                 });
                                 controlsTool.WebRTCLib.event.on('micEnabled', function () {
                                     item.unmute();
-                                });
+                                });*/
                             }
                             _audioList.push(item)
                             console.log('audio: addItem element', _audioSourcesListEl)
@@ -2119,7 +2119,13 @@
 
                         function syncList() {
                             var sources = _scene.sceneInstance.audioSources;
-                            console.log('audio: syncList _audioList', _audioList.length);
+                            console.log('audio: syncList START', _audioList.length);
+                            try {
+                                var err = (new Error);
+                                console.log(err.stack);
+                            } catch (e) {
+            
+                            }
                             console.log('audio: syncList sources', sources.length);
 
                             for (let i = _audioList.length - 1; i >= 0; i--) {
@@ -2647,9 +2653,6 @@
                         if(_activeView != null) {
                             _activeView.hide();
                         }
-                        /*if(_activeView && _activeView.parentNode != null) {
-                                _activeView.parentNode.removeChild(_activeView);
-                            }*/
                     }
 
                     function createMediaControls(source) {
@@ -2695,7 +2698,7 @@
                         volume.className = 'Streams_webrtc_popup-options-params-controls-volume'
                         var volumeSlider = document.createElement('SPAN');
                         volumeSlider.className = 'Streams_webrtc_popup-options-params-controls-volume-slider';
-                        volumeSlider.style.width = mediaElement.volume * 100 + '%';
+                        volumeSlider.style.width = source.sourceInstance.gainNode.gain.value * 100 + '%';
                         volume.appendChild(volumeSlider);
                         volumeSliderCon.appendChild(volume);
                         volumeCon.appendChild(volumeIcon);
@@ -2840,9 +2843,11 @@
                             volumeSlider.style.width = '0%';
                         }
 
-                        mediaElement.addEventListener('volumechange', function () {
-                            var percentage = ( mediaElement.volume / 1 ) * 100;
-                            volumeSlider.style.width = percentage+'%';
+                        source.sourceInstance.on('volumeChanged', function () {
+                            console.log('volumeChanged', source.sourceInstance.gainNode.gain.value)
+                            var percentage = source.sourceInstance.gainNode.gain.value * 100;
+                            volumeSlider.style.width = percentage + '%';
+                            updateVolumeIcons(source.sourceInstance.gainNode.gain.value);
                         })
 
                         mediaElement.addEventListener('pause', function (e) {
@@ -2856,23 +2861,20 @@
                         function dragVolumeSlider(e) {
                             var offsetLeft = getOffsetLeft(volume)
                             var left = (e.pageX - offsetLeft);
-                            if(Math.sign(left) == -1) {
+                            if (Math.sign(left) == -1) {
                                 left = 0;
                             }
                             var totalWidth = volume.offsetWidth;
 
-                            if(left > totalWidth) {
+                            if (left > totalWidth) {
                                 left = totalWidth;
                             }
-                            var volumeToSet = ( left / totalWidth );
-                            var prevVolume = mediaElement.volume;
-                            mediaElement.volume = volumeToSet;
-                            if(volumeToSet != 0 && mediaElement.muted) mediaElement.muted = false;
-
-                            updateVolumeIcons(volumeToSet, prevVolume);
+                            var volumeToSet = (left / totalWidth);
+                            source.sourceInstance.setVolume(volumeToSet);
                         }
 
-                        function updateVolumeIcons(volumeToSet, prevVolume) {
+                        function updateVolumeIcons(volumeToSet) {
+                            console.log('updateVolumeIcons', volumeToSet, mediaElement.muted)
                             var waves = volumeIcon.querySelector('#StreamsWebrtcWaves');
                             var disabledWaves = volumeIcon.querySelectorAll('.StreamsWebrtcDisabledparts.StreamsWebrtcWaves1 .StreamsWebrtcDisabledparts.StreamsWebrtcWaves2');
                             var secondWaveParts = volumeIcon.querySelectorAll('.StreamsWebrtcWaves2');
@@ -2893,30 +2895,40 @@
                             }
 
                             if(volumeToSet <= 0.5 && volumeToSet > 0 && !mediaElement.muted) {
+                                console.log('updateVolumeIcons 1');
                                 toggleDisabledIcon(0);
                                 toggleSecondWave(0);
                             } else if (volumeToSet > 0.5 && !mediaElement.muted) {
+                                console.log('updateVolumeIcons 2');
                                 toggleDisabledIcon(0);
                                 toggleSecondWave(1);
                             } else {
+                                console.log('updateVolumeIcons 3');
                                 toggleSecondWave(1);
                                 toggleDisabledIcon(1);
                             }
                         }
-                        updateVolumeIcons(mediaElement.volume)
+                        updateVolumeIcons(mediaElement.muted ? 0 : source.sourceInstance.gainNode.gain.value)
+
+                        source.sourceInstance.on('volumeChanged', function () {
+                            var percentage = source.sourceInstance.gainNode.gain.value * 100;
+                            volumeSlider.style.width = percentage + '%';
+                            updateVolumeIcons(source.sourceInstance.gainNode.gain.value);
+                        })
 
                         volumeIcon.addEventListener("click", function () {
-                            console.log('speaker',mediaElement.volume,  mediaElement.muted)
-                            if(mediaElement.volume == 0 || mediaElement.muted) {
-                                console.log('speaker 1',source.params.lastVolumeValue)
+                            console.log('speaker', mediaElement.volume, mediaElement.muted)
 
-                                mediaElement.volume = source.params.lastVolumeValue != null ? source.params.lastVolumeValue : 1;
-                                if(mediaElement.muted) mediaElement.muted = false;
+                            if (!source.sourceInstance.gainNode) return;
+                            if (source.sourceInstance.gainNode.gain.value == 0 || mediaElement.muted) {
+                                console.log('speaker 1', source.params.lastVolumeValue)
+
+                                if (mediaElement.muted) mediaElement.muted = false;
+                                source.sourceInstance.setVolume(source.params.lastVolumeValue != null ? source.params.lastVolumeValue : 1);
                             } else {
-                                source.params.lastVolumeValue = mediaElement.volume;
-                                mediaElement.volume = 0;
+                                source.params.lastVolumeValue = source.sourceInstance.gainNode.gain.value;
+                                source.sourceInstance.setVolume(0);
                             }
-                            updateVolumeIcons(mediaElement.volume)
                         });
 
 
@@ -4203,6 +4215,116 @@
                         }
                     }())
 
+                    var webrtcAudioSourceOptions = (function (source) {
+                        var _dialogEl = null;
+                        var _optionsTabs = null;
+                        var _dialogBody = null;
+                        var _selectedSource = null;
+                        var _generatedDialogs = [];
+
+                        function createParamsList() {
+                            console.log('audioSourceOptions: createParamsList',  _selectedSource.params);
+                            for(let d in _generatedDialogs) {
+                                if(_generatedDialogs[d].source == _selectedSource) {
+                                    return _generatedDialogs[d].dialog;
+                                }
+                            }
+
+                            var paramsBody = document.createElement('DIV')
+                            paramsBody.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+
+                            var mediaControlsEl = createMediaControls(_selectedSource);
+                            paramsBody.appendChild(mediaControlsEl);
+
+                            _generatedDialogs.push({
+                                source: _selectedSource,
+                                dialog:  paramsBody,
+                            })
+                            return paramsBody;
+                        }
+
+                        function showParams() {
+                            console.log('showParams', this, _activeView)
+
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
+                        }
+
+                        function showDialog(source) {
+                            _selectedSource = source;
+                            console.log('audioSourceOptions: showDialog', this, _activeView)
+                            hideActiveView();
+                            showParams();
+                            _optionsColumnEl.appendChild(_dialogEl);
+                            _activeView = this;
+                        }
+
+                        function hideDialog() {
+                            console.log('audioSourceOptions: hideDialog', _dialogEl)
+
+                            if(_dialogEl && _dialogEl.parentNode != null) {
+                                _dialogEl.parentNode.removeChild(_dialogEl);
+                            }
+                        }
+
+                        function tabHandler(e) {
+                            var tabEl = e.currentTarget;
+                            console.log('tabHandler tabEl', tabEl)
+
+                            var tabName = tabEl.dataset.tab;
+                            if(!tabName) return;
+                            if(tabName == 'params') {
+                                showParams();
+                            }
+
+                            for(let e in _optionsTabs.children) {
+                                if(typeof _optionsTabs.children[e] != 'object') continue;
+                                console.log('tabHandler', _optionsTabs.children[e])
+                                if(_optionsTabs.children[e] == tabEl) {
+                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    }
+                                    continue;
+                                }
+                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                }
+                            }
+                        }
+
+                        console.log('audioSourceOptions pupup')
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        var dialogTitle = document.createElement('DIV');
+                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
+                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+
+                        var paramsTab = document.createElement('DIV');
+                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.dataset.tab = 'params';
+                        var paramsTabInner = document.createElement('DIV');
+                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.innerHTML = 'Params';
+                        paramsTab.appendChild(paramsTabInner);
+                        dialogTitleInner.appendChild(paramsTab);
+                        dialogTitle.appendChild(dialogTitleInner);
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
+                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+
+                        //dialogBody.appendChild(createParamsList());
+                        _dialogEl.appendChild(dialogBody);
+
+                        paramsTab.addEventListener('click', tabHandler);
+
+                        return {
+                            hide: hideDialog,
+                            show: showDialog,
+                            showParams: showParams
+                        }
+                    }())
+
                     function update() {
                         var activeScene = scenesInterface.getActive();
                         var selectedSource = activeScene.sourcesInterface.getSelectedSource();
@@ -4231,8 +4353,10 @@
                             optionsColumn.imageSourceOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'video') {
                             optionsColumn.videoSourceOptions.show(selectedSource);
-                        } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'audio') {
+                        } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'audio' && selectedSource.sourceInstance.sourceType != 'webrtc') {
                             optionsColumn.audioSourceOptions.show(selectedSource);
+                        } else if(selectedSource && selectedSource.listType == 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
+                            //optionsColumn.webrtcAudioSourceOptions.show(selectedSource);
                         } else {
                             optionsColumn.hideActiveView();
                         }
@@ -4244,6 +4368,7 @@
                         imageSourceOptions: imageSourceOptions,
                         videoSourceOptions: videoSourceOptions,
                         audioSourceOptions: audioSourceOptions,
+                        webrtcAudioSourceOptions: webrtcAudioSourceOptions,
                         hideActiveView: hideActiveView,
                         update: update
                     }
@@ -4629,6 +4754,7 @@
                                 //elementPosition: 'fixed',
                                 showResizeHandles: true,
                                 moveWithinArea: 'parent',
+                                allowOverresizing: true,
                                 negativeMoving: true,
                                 onMoving: function () {
 
@@ -4833,6 +4959,7 @@
                                 //elementPosition: 'fixed',
                                 showResizeHandles: true,
                                 moveWithinArea: 'parent',
+                                allowOverresizing: true,
                                 negativeMoving: true,
                                 onMoving: function () {
 

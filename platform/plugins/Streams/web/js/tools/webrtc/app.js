@@ -1618,6 +1618,7 @@ window.WebRTCRoomClient = function app(options){
                 this.overlaySources = []; //for watermarks
                 this.backgroundSources = []; //for backgrounds
                 this.audioSources = [];
+                this.videoAudioSources = [];
                 this.eventDispatcher = new EventSystem();
             }
 
@@ -1697,12 +1698,49 @@ window.WebRTCRoomClient = function app(options){
             }
 
             function selectScene(sceneInstance) {
+                console.log('selectScene', sceneInstance);
+
                 let sceneExists = false;
                 for(let s in _scenes) {
                     if(_scenes[s] == sceneInstance) sceneExists = true;
                 }
                 if(sceneExists) {
+                    //pause all playing video/audio sources of previous scene
+                    for (let i in _activeScene.sources) {
+                        if(_activeScene.sources[i].sourceType != 'video') continue;
+                        if(_activeScene.sources[i].videoInstance) {
+                            _activeScene.sources[i].videoInstance.pause();
+                            _activeScene.sources[i].videoInstance.currentTime = 0;
+                        }
+                    }
+                    for (let i in _activeScene.audioSources) {
+                        if(_activeScene.audioSources[i].sourceType == 'audio' && _activeScene.audioSources[i].audioInstance) {
+                            _activeScene.audioSources[i].audioInstance.pause();
+                            _activeScene.audioSources[i].audioInstance.currentTime = 0;
+                        } else if (_activeScene.audioSources[i].sourceType == 'webrtc' && _activeScene.audioSources[i].mediaStreamTrack) {
+                            _activeScene.audioSources[i].mediaStreamTrack.enabled = false;
+                        }
+                        
+                    }
+
+                    /*for (let i in _activeScene.audioSources) {
+                        audioComposer.muteSource(_activeScene.audioSources[i])
+                    }*/
                     _activeScene = sceneInstance;
+                     //play all playing video/audio sources of new scene
+                    for (let i in _activeScene.sources) {
+                        if(_activeScene.sources[i].sourceType != 'video') continue;
+                        if(_activeScene.sources[i].videoInstance) {
+                            _activeScene.sources[i].videoInstance.play();
+                        }
+                    }
+                    for (let i in _activeScene.audioSources) {
+                        if(_activeScene.audioSources[i].sourceType == 'audio' && _activeScene.audioSources[i].audioInstance) {
+                            _activeScene.audioSources[i].audioInstance.play();
+                        } else if (_activeScene.audioSources[i].sourceType == 'webrtc' && _activeScene.audioSources[i].mediaStreamTrack) {
+                            if(_activeScene.audioSources[i].active)  _activeScene.audioSources[i].mediaStreamTrack.enabled = true;
+                        }
+                    }
                     _eventDispatcher.dispatch('sceneSelected');
                     return true;
                 }
@@ -1924,6 +1962,12 @@ window.WebRTCRoomClient = function app(options){
                         this.rect._height = height;
                         this.rect._x = x;
                         this.rect._y = y;
+                    };
+
+                    this.setVolume = function (value) {
+                        if (!this.gainNode) return;
+                        this.gainNode.gain.value = value;
+                        if (this.eventDispatcher != null) this.eventDispatcher.dispatch('volumeChanged', value);
                     };
 
                     this.eventDispatcher = new EventSystem();
@@ -2296,7 +2340,7 @@ window.WebRTCRoomClient = function app(options){
                         console.log('addSource video')
                         let indexOfLatestWebRTCSOurce = getIndexOfLatestWebRTCSource();
                         var video = document.createElement('VIDEO');
-                        video.muted = true;
+                        video.muted = false;
                         video.loop = options.liveStreaming.loopVideo;
                         video.addEventListener('loadedmetadata', event => {
                             console.log(video.videoWidth, video.videoHeight)
@@ -5233,7 +5277,7 @@ window.WebRTCRoomClient = function app(options){
                 var audioContext = null;
                 var _dest = null;
 
-                var Noise = (function () {
+                /*var Noise = (function () {
                     "use strict";
                     var supportsES6 = function() {
                         try {
@@ -5354,7 +5398,7 @@ window.WebRTCRoomClient = function app(options){
 
                 }());
 
-                window.Noise = Noise;
+                window.Noise = Noise;*/
 
                 var AudioSource = function () {
                     this.active = true;
@@ -5426,6 +5470,7 @@ window.WebRTCRoomClient = function app(options){
                     this.htmlVideoEl = null;
                     this.screenSharing = false;
                     this.sourceType = 'webrtc';
+                    this.gainNode = null;
                     this.eventDispatcher = new EventSystem();
                 }
                 WebRTCAudioSource.prototype = new AudioSource();
@@ -5544,7 +5589,6 @@ window.WebRTCRoomClient = function app(options){
                         let newStream = audioContext.createMediaStreamSource(newSource.mediaStream);
                         newStream.connect(_dest)
                         _activeScene.audioSources.splice(insertAfterIndex, 0, newSource)
-                        //updateWebRTCAudioSources(newSource.parentGroup);
                         _activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
                         return;
                     } else if(newSource.sourceType == 'audio') {
@@ -5554,31 +5598,49 @@ window.WebRTCRoomClient = function app(options){
                         audio.muted = false;
                         audio.loop = options.liveStreaming.loopAudio;
                         audio.src = newSource.url;
-
+        
                         document.body.appendChild(audio);
-
+        
                         var audioSource = new AudioSource();
                         audioSource.audioInstance = audio;
                         audioSource.name = newSource.title;
+                        audioSource.scope = 'scene';
                         _activeScene.audioSources.splice((indexOfLatestWebRTCSOurce + 1), 0, audioSource)
-                        const source = audioContext.createMediaElementSource(audioSource.audioInstance);
-                        source.connect(_dest)
-                        if(options.liveStreaming.localOutput) source.connect(audioContext.destination);
-                        audioSource.sourceNode = source;
+                        let sourceNode = audioContext.createMediaElementSource(audioSource.audioInstance);
+                        var gainNode = audioContext.createGain();
+                        sourceNode.connect(gainNode);
+                        //source.connect(_dest)
+                        var analyserNode = audioContext.createAnalyser();
+                        analyserNode.fftSize = 512;
+                        gainNode.connect(analyserNode);
+                        analyserNode.connect(_dest);
+        
+                        if (options.liveStreaming.localOutput) analyserNode.connect(audioContext.destination);
+                        audioSource.sourceNode = sourceNode;
+                        audioSource.gainNode = gainNode;
+                        audioSource.analyserNode = analyserNode;
                         audioSource.audioInstance.play();
-
+        
                         log('addSource sources', _activeScene.audioSources)
                         _activeScene.eventDispatcher.dispatch('sourceAdded', audioSource);
                         return audioSource;
                     } else if(newSource.sourceType == 'video') {
+                        log('addSource audio type', newSource.sourceType)
 
-                        const source = audioContext.createMediaElementSource(newSource.videoInstance);
-                        source.connect(_dest)
-                        if(options.liveStreaming.localOutput) source.connect(audioContext.destination);
+                        const source = newSource.sourceType == 'video' ? audioContext.createMediaElementSource(newSource.videoInstance) : audioContext.createMediaStreamSource(newSource.mediaStream);
+                        var gainNode = audioContext.createGain();
+                        source.connect(gainNode);
+                        var analyserNode = audioContext.createAnalyser();
+                        analyserNode.fftSize = 512;
+                        gainNode.connect(analyserNode);
+                        analyserNode.connect(_dest);
+                        if (options.liveStreaming.localOutput && newSource.sourceType != 'videoInput') analyserNode.connect(audioContext.destination);
                         newSource.audioSourceNode = source;
-
-                        //log('addSource sources', _activeScene.audioSources)
-                        //_activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
+                        newSource.gainNode = gainNode;
+                        newSource.analyserNode = analyserNode;
+                        _activeScene.videoAudioSources.splice(0, 0, newSource)
+        
+                        //_eventDispatcher.dispatch('sourceAdded', newSource);
                         return newSource;
                     }
 
@@ -5595,13 +5657,16 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 function muteSource(source, localOutput) {
+                    console.log('muteSource', source, localOutput);
                     //source.mediaStreamTrack.enabled = false;
                     if(source.sourceType == 'webrtc') {
                         if(source.mediaStreamTrack.enabled == true) {
                             log('muteSource webrtc', source);
                             source.mediaStreamTrack.enabled = false;
                         }
-                    } else if(source.sourceType == 'audio') {
+                    } else if(source.sourceType == 'audio' || source.sourceType == 'video') {
+                        console.log('muteSource: audio || video', source, localOutput);
+
                         source.sourceNode.disconnect(_dest);
                         if(localOutput) muteSourceLocally(source);
                     }
@@ -5610,10 +5675,10 @@ window.WebRTCRoomClient = function app(options){
                 function muteSourceLocally(source) {
                     if(source.sourceType == 'webrtc') {
 
-                    } else if(source.sourceType == 'audio') {
-                        source.sourceNode.disconnect(audioContext.destination);
-                    } else if(source.sourceType == 'video') {
-                        source.audioSourceNode.disconnect(audioContext.destination);
+                    } else if (source.sourceType == 'audio') {
+                        if (source.sourceNode) source.analyserNode.disconnect(audioContext.destination);
+                    } else if (source.sourceType == 'video') {
+                        if (source.audioSourceNode) source.analyserNode.disconnect(audioContext.destination);
                     }
                 }
 
@@ -5633,10 +5698,10 @@ window.WebRTCRoomClient = function app(options){
                 function unmuteSourceLocally(source) {
                     if(source.sourceType == 'webrtc') {
                         updateWebRTCAudioSources();
-                    } else if(source.sourceType == 'audio') {
-                        source.sourceNode.connect(audioContext.destination);
-                    } else if(source.sourceType == 'video') {
-                        source.audioSourceNode.connect(audioContext.destination);
+                    } if (source.sourceType == 'audio') {
+                        source.analyserNode.connect(audioContext.destination);
+                    } else if (source.sourceType == 'video') {
+                        source.analyserNode.connect(audioContext.destination);
                     }
                 }
 
