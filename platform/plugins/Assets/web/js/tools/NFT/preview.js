@@ -44,6 +44,7 @@
 
         // is claim
         if (state.secondsLeft != null) {
+            state.secondsLeft = parseInt(state.secondsLeft);
             $toolElement.attr("data-claim", state.secondsLeft <= 0);
         }
 
