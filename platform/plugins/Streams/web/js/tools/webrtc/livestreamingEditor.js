@@ -2099,18 +2099,28 @@
 
                         AudioListItem.prototype = new ListItem();
 
+                        //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
+                        if(controlsTool != null && controlsTool.WebRTCLib != null) {
+                            controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                                for (let i in _audioList) {
+                                    if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
+                                        _audioList[i].mute();
+                                    }
+                                }
+                            });
+                            controlsTool.WebRTCLib.event.on('micEnabled', function () {
+                                for (let i in _audioList) {
+                                    if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
+                                        _audioList[i].unmute();
+                                    }
+                                }
+                            });
+                        }
+
                         function addItem(item) {
                             if (item == null || _audioSourcesListEl == null) return;
                             console.log('audio: addItem', item)
                             console.log('audio: addItem itemEl', item.itemEl)
-                            if(item.sourceInstance.sourceType == 'webrtc' && item.sourceInstance.participant.isLocal) {
-                                /*controlsTool.WebRTCLib.event.on('micDisabled', function () {
-                                    item.mute();
-                                });
-                                controlsTool.WebRTCLib.event.on('micEnabled', function () {
-                                    item.unmute();
-                                });*/
-                            }
                             _audioList.push(item)
                             console.log('audio: addItem element', _audioSourcesListEl)
 
