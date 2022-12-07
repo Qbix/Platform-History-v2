@@ -16,8 +16,9 @@ function Assets_batch_response_batch () {
 		throw new Q_Exception_RequiredField(array('field' => 'args'));
 	}
 
-	// Now, build the result
-	$result = array();
+	// Now, build the results array
+	$results = array();
+	$i = 0;
 	foreach ($batch['args'] as $args) {
 		try {
 			$action = $args[0];
@@ -56,12 +57,16 @@ function Assets_batch_response_batch () {
 					);
 				}
 
-				$result[] = Q::event("Assets/$action/response/$slot", $params);
+				$results[] = Q::event("Assets/$action/response/$slot", $params,
+				function ($result) use(&$results, $i) {
+					$results[$i] = $result;
+				});
+				++$i;
 			}
 		} catch (Exception $e) {
-			$result[] = array('errors' => Q_Exception::buildArray(array($e)));
+			$results[] = array('errors' => Q_Exception::buildArray(array($e)));
 		}
 	}
 	
-	return $result;
+	return $results;
 }
