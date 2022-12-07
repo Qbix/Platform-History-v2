@@ -18,7 +18,6 @@ function Assets_batch_response_batch () {
 
 	// Now, build the result
 	$result = array();
-	$actions = array();
 	foreach ($batch['args'] as $args) {
 		try {
 			$action = $args[0];
@@ -56,27 +55,11 @@ function Assets_batch_response_batch () {
 						'contractAddress' => $args[4]
 					);
 				}
-				batchStart();
-				Q::event("Assets/$action/response/$slot", $params);
-				$actions[$action][$slot] = $params;
+
+				$result[] = Q::event("Assets/$action/response/$slot", $params);
 			}
 		} catch (Exception $e) {
 			$result[] = array('errors' => Q_Exception::buildArray(array($e)));
-		}
-	}
-
-	
-	$rsults = aray();
-	batchExecute(function ($err, $data) {
-
-	});
-	foreach ($actions as $action => $slots) {
-		foreach ($slots as $slot => $params) {
-			try {
-				$result[] = Q::event("Assets/$action/response/$slot", $params);
-			} catch (Exception $e) {
-				$result[] = array('errors' => Q_Exception::buildArray(array($e)));
-			}
 		}
 	}
 	
