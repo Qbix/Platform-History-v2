@@ -13,7 +13,7 @@
 		"@tensorflow/tfjs-backend-webgl": "^2.6.0",
 		"@tensorflow/tfjs-core": "^2.6.0",
 		"crypto-js": "3.x.x",
-		"express": "^4.17.1",
+		"express": "^4.17.3",
 		"google-closure-compiler": "20201207.0.0",
 		"handlebars": "^4.7.6",
 		"html-entities": "^1.2.1",
