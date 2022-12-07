@@ -129,11 +129,13 @@ function Assets_NFT_response_owned ($params) {
 						foreach ($dirtyTokens as $tokenId) {
 							$tokenInfo = Users_Web3::execute($source["pathABI"], $source["address"], "pending", [$tokenId], $chain["chainId"], $caching, $cacheDuration);
 							if (Q::ifset($tokenInfo, "recipient", null) == $source["recipient"]) {
+								$secondsLeft = Q::ifset($tokenInfo, "secondsLeft", null);
+								if (isset($secondsLeft)) {
+									$secondsLeft = (integer)$secondsLeft;
+								}
 								$tokens[] = array(
 									"tokenId" => $tokenId,
-									"secondsLeft" => isset($tokenInfo['secondsLeft'])
-										? (int)$tokenInfo['secondsLeft']
-										: null
+									"secondsLeft" => $secondsLeft
 								);
 							}
 						}
