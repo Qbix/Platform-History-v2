@@ -11,23 +11,35 @@ var Assets = Q.Assets;
  * @class Assets NFT/owned
  * @constructor
  * @param {Object} options Override various options for this tool
- * @param {string} options.accountAddress - either this or userId is required
- * @param {string} options.userId - either this or accountAddress is required
- * @param {string} [options.contractAddress] - Can override address of the NFT contract.
- *    By default takes it from Q.Assets.NFT.Web3.chains[currentChainId].contract
- * @param {string} [options.chainId] - by default, it will use the currently selected chain in the client
+ * @param {Object} options.owner - Information about the owner on the external platform
+ * @param {Object} [options.owner.userId] - The userId of the owner, specify this or xid
+ * @param {Object} [options.owner.xid] - The xid of the owner on the external platform, specify this or userId
+ * @param {Object} [options.recipient] - Can be used to specify a recipient for whom owned tokens may be pending
+ * @param {Object} [options.recipient.userId] - The userId of the owner, specify this or xid
+ * @param {Object} [options.recipient.xid] - The xid of the owner on the external platform, specify this or userId
+ * @param {String} [options.platform="web3"] - Name of the external platform
+ * @param {String} [options.appId=Q.info.app] - The appId on the external platform
+* @param {string} [options.chainId] - by default, it will use the currently selected chain in the client
  * @param {string} [options.pathABI] - override NFT contract ABI template, if necessary
  * @param {boolean} [options.updateCache=false] - if true request new data from blockchain and update cache
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
 	this.refresh();
+	if (this.state.platform && !this.state.appId) {
+		this.state.appId = Q.info.app;
+	}
 },
 
 { // default options here
+	platform: 'web3',
+	appId: null,
 	owner: {
 		userId: null,
-		accountAddress: null,
+		xid: null,
+	},
+	recipient: {
+		xid: null
 	},
 	holder: {
 		contractAddress: null,
@@ -134,8 +146,10 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 			Q.handle(callback);
 		}, {
 			fields: {
+				platform: state.platform,
+				appId: state.appId,
 				owner: state.owner,
-				holder: state.holder,
+				recipient: state.recipient,
 				chainId: state.chainId,
 				contractAddress: state.contractAddress,
 				pathABI: state.pathABI,

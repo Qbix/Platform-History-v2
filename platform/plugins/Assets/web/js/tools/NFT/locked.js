@@ -94,7 +94,8 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 return nftContract.getHookList(seriesId);
             }).then(function (allHooksArr) {
                 return [
-                    allHooksArr.indexOf(lockedContract.address) >= 0,
+                    allHooksArr.map(c => c.toLowerCase())
+                        .indexOf(lockedContract.address) >= 0,
                     nftContract,
                     lockedContract,
                     seriesId
@@ -112,13 +113,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                 return;
             }
 
-            Q.Text.get('Assets/content', function (err, text) {
-                if (err) {
-                    return;
-                }
-                tool.text = text;
-                tool.refresh();
-            });
+            tool.refresh();
         });
 
         Q.Users.Web3.onAccountsChanged.set(function () {
@@ -146,10 +141,12 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
             if (!Q.isEmpty(state.seriesIdSource.seriesId)) {
                 return Promise.resolve(state.seriesIdSource.seriesId);
             } else if (!Q.isEmpty(state.seriesIdSource.salesAddress)) {
-                return Q.Users.Web3.getContract(state.seriesIdSource.abiNFTSales, state.seriesIdSource.salesAddress)
-                    .then(salesContract => {
-                        return salesContract.seriesId();
-                    });
+                return Q.Users.Web3.getContract(state.seriesIdSource.abiNFTSales, {
+                    readOnly: true,
+                    contractAddress: state.seriesIdSource.salesAddress
+                }).then(salesContract => {
+                    return salesContract.seriesId();
+                });
             } else {
                 return console.warn("Assets/NFT/locked", "There are no available data source for getting seriesId")
             }

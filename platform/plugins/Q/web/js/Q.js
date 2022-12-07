@@ -1119,8 +1119,13 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 		tool && Q.handle(callback, tool);
 	});
 	Q.Tool.onActivate(name).set(function () {
-		if (element.contains(this.element)) {
-			Q.handle(callback, this);
+		try {
+			if (element.contains(this.element)) {
+				Q.handle(callback, this);
+			}
+		} catch (e) {
+			// continue after a hook, because we need to set Q.Tool.latestName
+			console.warn(e);
 		}
 	}, key);
 };

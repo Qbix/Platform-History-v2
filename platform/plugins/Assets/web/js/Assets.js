@@ -1043,13 +1043,16 @@
 						contractAddress, 
 						"setSeriesInfo", 
 						[
-							authorAddress, 
-							limit, 
-							[onSaleUntil, currency, price], 
-							[commissionFraction, commissionAddress], 
-							baseURI, 
-							suffix
-						], 
+							seriesId,
+							[
+								authorAddress, 
+								limit, 
+								[onSaleUntil, currency, price], 
+								[commissionFraction, commissionAddress], 
+								baseURI, 
+								suffix
+							], 
+						],
 						callback
 					);
 				},
@@ -1091,7 +1094,7 @@
 				 * @return {Q.Promise} instead of callback
 				 */
 				getContract: function (chainId, options) {
-					var address = Q.getObject("contractAddress", options) || chain.contract;
+					var address = Q.getObject("contractAddress", options) || chainId.contract;
 					var abiPath = Q.getObject("abiPath", options) || 'Assets/templates/R1/NFT/contract';
 					return Q.Users.Web3.getContract(abiPath, {
 						chainId: chainId,
@@ -1462,6 +1465,10 @@
 		name: Users.communityName
 	};
 
+	Q.Text.addFor(
+		['Q.Tool.define', 'Q.Template.set'],
+		'Assets/', ["Assets/content"]
+	);
 	Q.Tool.define({
 		"Assets/subscription": "{{Assets}}/js/tools/subscription.js",
 		"Assets/payment": "{{Assets}}/js/tools/payment.js",
