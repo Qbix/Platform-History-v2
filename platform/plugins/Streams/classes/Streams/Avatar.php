@@ -35,7 +35,7 @@ class Streams_Avatar extends Base_Streams_Avatar
 	 */
 	static function fetch($toUserId, $publisherId, $indexField = null) {
 		if (!isset($toUserId)) {
-			$toUserId = Users::loggedInUser();
+			$toUserId = Users::loggedInUser(false, false);
 			if (!$toUserId) $toUserId = "";
 		}
 		if ($toUserId instanceof Users_User) {

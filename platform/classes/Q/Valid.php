@@ -265,9 +265,8 @@ class Q_Valid
 	 $throwIfInvalid = false,
 	 $missingIsValid = false)
 	{
-		$nonce1 = Q::ifset($_SESSION['Q']['nonce']);
 		$nonce2 = Q_Session::calculateNonce();
-		if (!$nonce1 and !$nonce2) {
+		if (!$nonce2) {
 			return true;
 		}
 		$snf = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
@@ -277,7 +276,7 @@ class Q_Valid
 		}
 		$gp = array_merge($_GET, $_POST);
 		$rn = Q_Request::special($snf, null, $gp);
-		if (!isset($sn) || ($rn !== $nonce1 && $rn !== $nonce2)) {
+		if (!isset($sn) || ($rn !== $nonce2)) {
 			if (!$throwIfInvalid) {
 				return false;
 			}

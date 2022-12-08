@@ -13,7 +13,7 @@ var Users = Q.Users;
  * @class Users avatar
  * @constructor
  * @param {Object} [options]
- *   @param {String} options.userId The id of the user object. Defaults to id of the logged-in user, if any. Can be '' for a blank-looking avatar.
+ *   @param {String} options.userId The user's id, e.g. Q.Users.loggedInUserId(). Can be '' for a blank-looking avatar.
  *   @param {Number|String|true} [options.icon=Q.Users.icon.defaultSize] Size of the icon to render before the display name. Or 0 for no icon. You can also pass true here for default size. Or pass a string to specify the url of the icon.
  *   @param {Boolean} [options.contents] Set to false to not show the name
  *   @param {String} [options.className] Any css classes to add to the tool element
@@ -37,9 +37,6 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 	}
 	var tool = this;
 	var state = this.state;
-	if (state.userId == null) {
-		state.userId = Users.loggedInUserId();
-	}
 	if (state.icon === true) {
 		state.icon = Users.icon.defaultSize;
 	}

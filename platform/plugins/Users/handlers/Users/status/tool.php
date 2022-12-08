@@ -15,7 +15,7 @@ function Users_status_tool($options)
 	Q_Response::addStylesheet('{{Q}}/css/Q.css', 'Q');
 	Q_Response::addStylesheet('{{Users}}/css/Users.css', 'Users');
 	Q_Response::setToolOptions($options);
-	if ($user = Users::loggedInUser()) {
+	if ($user = Users::loggedInUser(false, false)) {
 		$avatar = array(
 			'icon' => '80',
 			'contents' => !Q_Request::isMobile(),
