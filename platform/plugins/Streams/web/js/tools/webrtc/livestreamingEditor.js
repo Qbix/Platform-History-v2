@@ -2010,16 +2010,27 @@
                                 console.log('mute')
 
                                 this.sourceInstance.active = true;
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSource(this.sourceInstance, this.params.localOutput);
-                                this.switchVisibilityIcon(true);
-                                syncList();
+                                if(this.sourceInstance.participant.isLocal) {
+                                    console.log('mute turn mic on')
+                                    controlsTool.WebRTCLib.localMediaControls.enableAudio();
+                                } else {
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSource(this.sourceInstance, this.params.localOutput);
+                                    this.switchVisibilityIcon(true);
+                                    syncList();
+                                }
+                                
                             };
                             this.mute = function() {
                                 console.log('mute')
                                 this.sourceInstance.active = false;
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSource(this.sourceInstance, this.params.localOutput);
-                                this.switchVisibilityIcon(false);
-
+                                if(this.sourceInstance.participant.isLocal) {
+                                    console.log('mute turn mic off')
+                                    controlsTool.WebRTCLib.localMediaControls.disableAudio();
+                                } else {
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSource(this.sourceInstance, this.params.localOutput);
+                                    this.switchVisibilityIcon(false);
+                                }
+                                
                                 syncList();
                             };
                             this.switchVisibilityIcon = function (visibility) {
@@ -2104,14 +2115,14 @@
                             controlsTool.WebRTCLib.event.on('micDisabled', function () {
                                 for (let i in _audioList) {
                                     if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
-                                        _audioList[i].mute();
+                                        _audioList[i].switchVisibilityIcon(false);
                                     }
                                 }
                             });
                             controlsTool.WebRTCLib.event.on('micEnabled', function () {
                                 for (let i in _audioList) {
                                     if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
-                                        _audioList[i].unmute();
+                                        _audioList[i].switchVisibilityIcon(true);
                                     }
                                 }
                             });
@@ -4479,16 +4490,11 @@
             
                         volumeIcon.addEventListener("click", function () {
                             if (!audioOrVideoSource.gainNode) return;
-                            if (audioOrVideoSource.gainNode.gain.value == 0 /*|| mediaElement.muted*/) {
-                                console.log('speaker 1', mixerItem.lastVolumeValue)
-            
-                                audioOrVideoSource.setVolume(mixerItem.lastVolumeValue != null ? mixerItem.lastVolumeValue : 1);
-                                //if (mediaElement.muted) mediaElement.muted = false;
+                            if (controlsTool.WebRTCLib.localMediaControls.micIsEnabled()) {
+                                controlsTool.WebRTCLib.localMediaControls.disableAudio();
                             } else {
-                                mixerItem.lastVolumeValue = audioOrVideoSource.gainNode.gain.value;
-                                audioOrVideoSource.setVolume(0);
+                                controlsTool.WebRTCLib.localMediaControls.enableAudio();
                             }
-                            updateVolumeIcons(audioOrVideoSource.gainNode.gain.value)
                         });
             
                         volume.addEventListener("mousedown", function () {
@@ -4501,8 +4507,16 @@
                             window.addEventListener('mouseup', removeListener)
                         });
             
-            
                         volumeWrap.addEventListener("click", dragVolumeSlider);
+
+                        controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                            audioOrVideoSource.disconnect();
+                            audioOrVideoSource.setVolume(0);
+                        });
+                        controlsTool.WebRTCLib.event.on('micEnabled', function () {
+                            audioOrVideoSource.connect();
+                            audioOrVideoSource.setVolume(1);
+                        });
             
                         function dragVolumeSlider(e) {
                            
@@ -4657,8 +4671,18 @@
                         _globalSources.push(newMixerItem);
 
                         let localAudioTracks = controlsTool.WebRTCLib.localParticipant().audioTracks(true);
-            
-                        globalMicSource.mediaStream = localAudioTracks[0].stream;
+        
+                        if(localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
+                            console.log('localAudioTracks[0].stream', localAudioTracks[0].stream)
+                            globalMicSource.addStream(localAudioTracks[0].stream);
+                        }
+
+                        controlsTool.WebRTCLib.event.on('trackAdded', function (e) {
+                            if(!e.participant.isLocal || e.track.kind != 'audio') return;
+                            globalMicSource.addStream(e.track.stream);
+                        });
+
+                        
                     }
             
                     function createAudioMixerInterface() {

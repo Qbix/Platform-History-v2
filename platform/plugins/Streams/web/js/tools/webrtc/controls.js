@@ -366,6 +366,7 @@
                 });
                 tool.WebRTCLib.event.on('micEnabled', function () {
                     tool.updateControlBar();
+                    tool.updateAudioInputList();
                     tool.participantsPopup().update(tool.WebRTCLib.localParticipant());
                     if (tool.microphoneBtn.classList.contains('Q_working')) tool.microphoneBtn.classList.remove('Q_working');
                 });
@@ -384,6 +385,9 @@
                     tool.loadCamerasList();
                     tool.loadAudioOutputList();
                     tool.loadAudioInputList();
+                });
+                tool.WebRTCLib.event.on('currentAudioinputDeviceChanged', function () {
+                    tool.updateAudioInputList();
                 });
                 tool.WebRTCLib.event.on('screensharingStarting', function (e) {
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
@@ -2256,6 +2260,7 @@
                             this.deviceId = data.deviceId;
                             this.handler = data.handler.bind(this);
                             this.makeActive = function () {
+                                console.log('audio: make active', this)
                                 if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
                                 if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
                                 this.isActive = true;
@@ -2476,6 +2481,7 @@
                             var count = 1;
 
                             clearAudioInputList();
+                            tool.log('controls: audio current device', tool.WebRTCLib.localMediaControls.currentAudioInputDevice());
 
                             tool.WebRTCLib.localMediaControls.audioInputDevices().forEach(function (mediaDevice) {
                                 tool.log('controls: loadAudioInputList', mediaDevice);
