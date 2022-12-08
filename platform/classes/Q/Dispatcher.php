@@ -504,11 +504,15 @@ class Q_Dispatcher
 		if (!$startBeforeEventName) {
 			$startBeforeEventName = Q_Config::get('Q', 'session', 'startBefore', false);
 		}
-		// Time to start the session and set a nonce
+		if (self::$startedResponse) {
+			return false; // too late to start a session
+		}
+		// start the session and set a nonce
 		if (!empty($_SERVER['HTTP_HOST'])
 		and $startBeforeEventName === $eventName) {
 			Q_Session::setNonce();
 		}
+		return true;
 	}
 	
 	/**
