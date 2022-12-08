@@ -3043,6 +3043,13 @@
 				return false;
 			});
 		_setSessionFromQueryString(location.hash);
+
+		Q.each(document.querySelectorAll('[data-users-login'), function () {
+			Q.addEventListener(this, 'click', function () {
+				Q.Users.login();
+				return false;
+			});
+		});
 	}, 'Users');
 
 	// handoff action
