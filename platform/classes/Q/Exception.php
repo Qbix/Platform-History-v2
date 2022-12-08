@@ -274,7 +274,8 @@ class Q_Exception extends Exception
 		$show_fal = Q_Config::get('Q', 'exception', 'showFileAndLine', true);
 		$show_trace = Q_Config::get('Q', 'exception', 'showTrace', true);
 		foreach ($exceptions as $e) {
-			if (!($e instanceof Exception)) {
+			if (!($e instanceof Exception)
+			and !($e instanceof Error)) {
 				continue;
 			}
 			$message = $e->getMessage();
