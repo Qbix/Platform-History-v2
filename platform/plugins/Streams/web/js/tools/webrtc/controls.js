@@ -1289,7 +1289,7 @@
                                 tool.hoverTimeout.textChatPopup = null;
                             }
                         })
-                        .addEventListener(Q, 'mouseleave', function (e) {
+                        Q.addEventListener(Q, 'mouseleave', function (e) {
                             if (tool.textChat.static) {
                                 return;
                             }
