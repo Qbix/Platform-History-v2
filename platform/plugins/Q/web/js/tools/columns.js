@@ -1212,7 +1212,7 @@ function _updateThemeColor(fromIndex, toIndex, duration) {
 		return;
 	}
 	var black = '#000000';
-	var shades = [0, 0.3, 0.43, 0.47, 0.5];
+	var shades = [0, 0.36, 0.42, 0.47, 0.5];
 	var fromIndex = Math.min(shades.length-1, fromIndex);
 	var toIndex = Math.max(0, Math.min(shades.length-1, toIndex));
 	var fromColor = Q.Color.between(originalColor, black, shades[fromIndex]);
