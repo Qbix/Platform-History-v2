@@ -156,7 +156,7 @@
 				"create": true,
 				"edit": true,
 				"defaults": {
-					"title": "Assets Service",
+					"title": "Service",
 					"readLevel": 40,
 					"writeLevel": 23,
 					"adminLevel": 0
