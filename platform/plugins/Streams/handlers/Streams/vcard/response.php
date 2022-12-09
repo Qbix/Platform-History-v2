@@ -145,7 +145,7 @@ function Streams_vcard_response ($params) {
         if ($linkedinStream->testReadLevel('content')) {
             $linkedinName = $linkedinStream->fields['content'];
             if(!empty($linkedinName)){
-                $vcr .= "item2.URL:https://www.linkedin.com/in/$linkedinName\n";
+                $vcr .= "item2.URL:$linkedinName\n";
                 $vcr .= "item2.X-ABLABEL:Linkedin\n";
             }
         }
@@ -157,7 +157,7 @@ function Streams_vcard_response ($params) {
         if ($facebookStream->testReadLevel('content')) {
             $fbProfile = $facebookStream->fields['content'];
             if(!empty($fbProfile)){
-                $vcr .= "item3.URL:https://www.facebook.com/profile.php?id=$fbProfile\n";
+                $vcr .= "item3.URL:$fbProfile\n";
                 $vcr .= "item3.X-ABLABEL:Facebook\n";
             }
         }
@@ -169,7 +169,7 @@ function Streams_vcard_response ($params) {
         if ($twitterStream->testReadLevel('content')) {
             $twitterName = $twitterStream->fields['content'];
             if(!empty($twitterName)){
-                $vcr .= "item4.URL:https://twitter.com/$twitterName\n";
+                $vcr .= "item4.URL:$twitterName\n";
                 $vcr .= "item4.X-ABLABEL:Twitter\n";
             }
         }
@@ -181,7 +181,7 @@ function Streams_vcard_response ($params) {
         if ($instagramStream->testReadLevel('content')) {
             $instagramName = $instagramStream->fields['content'];
             if(!empty($instagramName)){
-                $vcr .= "item5.URL:https://instagram.com/$instagramName\n";
+                $vcr .= "item5.URL:$instagramName\n";
                 $vcr .= "item5.X-ABLABEL:Instagram\n";
             }
         }
@@ -192,7 +192,7 @@ function Streams_vcard_response ($params) {
         if ($githubStream->testReadLevel('content')) {
             $githubName = $githubStream->fields['content'];
             if(!empty($githubName)){
-                $vcr .= "item6.URL:https://github.com/$githubName\n";
+                $vcr .= "item6.URL:$githubName\n";
                 $vcr .= "item6.X-ABLABEL:GitHub\n";
             }
         }

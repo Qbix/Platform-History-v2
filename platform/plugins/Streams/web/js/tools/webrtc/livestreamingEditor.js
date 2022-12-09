@@ -11,6 +11,8 @@
         liveOn: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="15px" viewBox="-0.034668 -0.6616211 26 15" enable-background="new -0.034668 -0.6616211 26 15" xml:space="preserve"> <defs> </defs> <path fill="#C12337" d="M23.887207,0.0009766h-2.0361328L3.1806641,0H1.1430664 C0.5151367,0,0.0043945,0.2900391,0.0019531,0.6479492L0.0009766,12.2397461L0,13.4038086 c0.0009766,0.3574219,0.5117188,0.6494141,1.1420898,0.6494141l20.7070313,0.0019531h2.0371094 c0.6298828,0,1.1416016-0.2929688,1.1416016-0.6513672L25.0288086,0.652832 C25.0288086,0.2929688,24.5170898,0.0009766,23.887207,0.0009766z M7.340332,10.9155273H3.0019531V3.1391602h1.0146484v6.9326172 H7.340332V10.9155273z M9.4628906,10.9155273H8.4477539V3.1391602h1.0151367V10.9155273z M14.0317383,10.9155273h-1.1074219 l-2.5498047-7.7763672h1.0961914l1.2109375,3.8300781c0.3237305,1.0507813,0.612793,1.9960938,0.831543,2.9082031h0.0234375 c0.2197266-0.9013672,0.53125-1.8818359,0.8886719-2.8969727l1.3154297-3.8413086h1.0722656L14.0317383,10.9155273z M22.027832,10.9155273h-4.3867188V3.1391602h4.2128906v0.8422852h-3.1962891v2.4575195h3.0117188v0.8305664h-3.0117188v2.8041992 h3.3701172V10.9155273z"/> </svg>',
         liveOff: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="26px" height="24px" viewBox="-0.034668 -0.8662109 26 24" enable-background="new -0.034668 -0.8662109 26 24" xml:space="preserve"> <defs> </defs> <path fill="#C12337" d="M6.9995117,15.390625H3.0019531V7.6142578h1.0146484v6.9326172H7.340332v0.4482422l1.1074219-1.2851563 V7.6142578h1.0151367V12.53125l1.828125-2.1225586l-0.9165039-2.7944336h1.0961914l0.5981445,1.8916016l4.3320313-5.0302734 L3.1806641,4.4750977H1.1430664c-0.6279297,0-1.1386719,0.2900391-1.1411133,0.6479492L0.0009766,16.7148438L0,17.8789063 c0.0009766,0.3574219,0.5117188,0.6494141,1.1420898,0.6494141H4.296875L6.9995117,15.390625z"/> <path fill="#C12337" d="M23.887207,4.4760742h-2.0361328h-3.3583984l-2.703125,3.1381836h1.0234375l-2.78125,7.7763672h-1.1074219 l-1.0566406-3.2226563l-2.4047852,2.7919922v0.4306641H9.0922852l-2.703125,3.1376953l15.4599609,0.0019531h2.0371094 c0.6298828,0,1.1416016-0.2929688,1.1416016-0.6513672l0.0009766-12.7509766 C25.0288086,4.7680664,24.5170898,4.4760742,23.887207,4.4760742z M22.027832,15.390625h-4.3867188V7.6142578h4.2128906V8.456543 h-3.1962891v2.4575195h3.0117188v0.8305664h-3.0117188v2.8041992h3.3701172V15.390625z"/> <path fill="#C12337" d="M13.5131836,14.3525391h0.0234375c0.2197266-0.9013672,0.53125-1.8818359,0.8886719-2.8969727 l1.2832031-3.7460938l-3.078125,3.5732422l0.0512695,0.1616211C13.0053711,12.4951172,13.2944336,13.4404297,13.5131836,14.3525391z "/> <polygon id="StreamsWebrtcCrossline_1_" points="22.6928711,1.0341797 21.4916992,0 2.5673828,21.9707031 3.7685547,23.0058594 "/> </svg>',
         disabledEnabledSpeaker: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="25px" height="24px" viewBox="0 0 25 24" enable-background="new 0 0 25 24" xml:space="preserve"> <path d="M9.302,19.907c0.061,0.034,0.078,0.159,0.147,0.17c0.024,0.004,0.059,0.005,0.084,0.001 c0.025-0.001,0.063-0.006,0.088-0.016c0.048-0.021,0.115-0.049,0.15-0.088c0.018-0.02,0.075-0.043,0.088-0.064 c0.034-0.063,0.122-0.083,0.122-0.151H9.979v-4.622l-2.738,3.178L9.302,19.907z"/> <polygon class="StreamsWebrtcDisabledparts" points="5.986,17.345 7.241,18.314 9.979,15.137 9.979,12.707 "/> <path d="M9.979,3.246c0-0.026-0.087-0.053-0.092-0.079C9.875,3.116,9.765,3.068,9.729,3.029C9.711,3.01,9.69,2.992,9.669,2.977 C9.647,2.962,9.622,2.951,9.599,2.94c-0.025-0.006-0.05-0.016-0.077-0.022c-0.07,0.003-0.091-0.011-0.156,0.017 c-0.023,0.01-0.045,0.011-0.067,0.024L4.591,6.464H0.603c-0.028,0-0.064,0.033-0.09,0.04c-0.054,0.015-0.11,0.073-0.15,0.113 C0.343,6.638,0.312,6.66,0.299,6.683C0.285,6.708,0.248,6.734,0.241,6.761C0.234,6.788,0.179,6.817,0.179,6.845v9.317 c0,0.029,0.055,0.044,0.062,0.07c0.007,0.026,0.069,0.039,0.083,0.063c0.029,0.05,0.068,0.063,0.118,0.09 c0.024,0.015,0.05-0.03,0.077-0.021c0.028,0.004,0.056-0.1,0.084-0.1H4.59l1.396,1.079l3.993-4.638V3.246z"/> <g id="StreamsWebrtcWaves"> <path class="StreamsWebrtcWaves1" d="M14.483,7.478c-0.949-2.085-2.251-3.412-2.282-3.443c-0.184-0.182-0.479-0.181-0.66,0.002 c-0.182,0.183-0.182,0.478,0.004,0.66c0.121,0.121,1.444,1.467,2.297,3.525l0.35-0.406L14.483,7.478z"/> <path class="StreamsWebrtcWaves1" d="M14.394,10.011c0.475,2.369,0.058,5.299-2.856,8.301c-0.178,0.185-0.174,0.48,0.01,0.662 c0.09,0.086,0.207,0.129,0.324,0.129c0.123,0,0.246-0.045,0.336-0.138c3.443-3.549,3.648-7.058,2.899-9.783l-0.063,0.074 L14.394,10.011z"/> <path class="StreamsWebrtcWaves2" d="M16.937,4.629c-0.997-1.646-1.97-2.637-2.001-2.667c-0.182-0.181-0.477-0.181-0.658,0.003 c-0.185,0.183-0.185,0.478,0.004,0.66c0.116,0.117,1.094,1.115,2.045,2.714l0.392-0.455L16.937,4.629z"/> <path class="StreamsWebrtcWaves2" d="M17.113,6.853c1.516,3.375,2.169,8.372-2.842,13.536c-0.178,0.182-0.174,0.479,0.012,0.659 c0.09,0.086,0.207,0.132,0.324,0.132c0.121,0,0.242-0.048,0.336-0.144c5.503-5.673,4.534-11.267,2.8-14.915l-0.028,0.033 L17.113,6.853z"/> <path class="StreamsWebrtcWaves1 StreamsWebrtcDisabledparts" d="M14.191,7.815l-0.35,0.406c0.228,0.55,0.423,1.148,0.552,1.79l0.649-0.754l0.063-0.074 c-0.168-0.612-0.385-1.182-0.623-1.706L14.191,7.815z"/> <path class="StreamsWebrtcDisabledparts StreamsWebrtcWaves2" d="M16.718,4.884l-0.392,0.455c0.272,0.457,0.54,0.964,0.787,1.514l0.602-0.698l0.028-0.033 c-0.258-0.543-0.533-1.042-0.807-1.492L16.718,4.884z"/> </g> <polygon id="StreamsWebrtcCrossline" points="20.305,1.034 19.104,0 0.179,21.971 1.38,23.006 "/> </svg>',
+        enabledMicrophone: '<svg width="5.3250041mm" height="6.8486948mm" viewBox="0 0 5.3250041 6.8486948" version="1.1" id="svg502" xml:space="preserve" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="disabled_mic.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview504" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" inkscape:zoom="24.2312" inkscape:cx="-0.43332563" inkscape:cy="14.031497" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg502" /><defs id="defs499" /><g inkscape:groupmode="layer" id="layer2" inkscape:label="Layer 2" transform="translate(0.02559968)" style="display:inline"><path d="m 84.259657,41.975451 c 0.0015,0.07894 0.06647,0.141484 0.145411,0.139982 0.04048,-7.58e-4 0.07458,-0.01762 0.100396,-0.04443 0.02581,-0.02682 0.04031,-0.06253 0.04058,-0.102012 -0.01952,-1.026205 -0.870338,-1.845253 -1.895513,-1.824736 -0.07894,0.0015 -0.141485,0.06647 -0.139983,0.145411 0.0015,0.07894 0.06647,0.141484 0.145412,0.139984 0.867335,-0.01548 1.587177,0.677474 1.603696,1.545803 z" id="path239-2" style="display:inline;stroke-width:0.14315" class="StreamsWebrtcMicIconWawe2" transform="translate(-79.823299,-40.143779)" /><path d="m 83.832255,42.12633 c 0.04048,-7.58e-4 0.07458,-0.01762 0.100395,-0.04443 0.02581,-0.02682 0.04032,-0.06253 0.04058,-0.102012 -0.01351,-0.710452 -0.602385,-1.277331 -1.312835,-1.263814 -0.07894,0.0015 -0.141483,0.06647 -0.139983,0.145411 0.0015,0.07894 0.06647,0.141484 0.145414,0.139983 0.552571,-0.01051 1.010465,0.430284 1.020978,0.982856 0.0015,0.08097 0.06651,0.143508 0.145449,0.142006 z" id="path241" style="stroke-width:0.14315" class="StreamsWebrtcMicIconWawe1" transform="translate(-79.823299,-40.143779)" /><path d="m 237.541,328.897 c 25.128,0 46.632,-8.946 64.523,-26.83 17.888,-17.884 26.833,-39.399 26.833,-64.525 V 91.365 c 0,-25.126 -8.938,-46.632 -26.833,-64.525 C 284.173,8.951 262.669,0 237.541,0 212.416,0 190.909,8.951 173.017,26.84 155.124,44.73 146.179,66.239 146.179,91.365 v 146.177 c 0,25.125 8.949,46.641 26.838,64.525 17.889,17.884 39.399,26.83 64.524,26.83 z" id="path375" transform="matrix(0.01221113,0,0,0.01221113,-0.29021299,1.047319)" inkscape:label="path375" /><path d="m 396.563,188.15 c -3.606,-3.617 -7.898,-5.426 -12.847,-5.426 -4.944,0 -9.226,1.809 -12.847,5.426 -3.613,3.616 -5.421,7.898 -5.421,12.845 v 36.547 c 0,35.214 -12.518,65.333 -37.548,90.362 -25.022,25.03 -55.145,37.545 -90.36,37.545 -35.214,0 -65.334,-12.515 -90.365,-37.545 -25.028,-25.022 -37.541,-55.147 -37.541,-90.362 v -36.547 c 0,-4.947 -1.809,-9.229 -5.424,-12.845 -3.617,-3.617 -7.895,-5.426 -12.847,-5.426 -4.952,0 -9.235,1.809 -12.85,5.426 -3.618,3.616 -5.426,7.898 -5.426,12.845 v 36.547 c 0,42.065 14.04,78.659 42.112,109.776 28.073,31.118 62.762,48.961 104.068,53.526 v 37.691 h -73.089 c -4.949,0 -9.231,1.811 -12.847,5.428 -3.617,3.614 -5.426,7.898 -5.426,12.847 0,4.941 1.809,9.233 5.426,12.847 3.616,3.614 7.898,5.428 12.847,5.428 h 182.719 c 4.948,0 9.236,-1.813 12.847,-5.428 3.621,-3.613 5.431,-7.905 5.431,-12.847 0,-4.948 -1.81,-9.232 -5.431,-12.847 -3.61,-3.617 -7.898,-5.428 -12.847,-5.428 h -73.08 v -37.691 c 41.299,-4.565 75.985,-22.408 104.061,-53.526 28.076,-31.117 42.12,-67.711 42.12,-109.776 v -36.547 c 0,-4.946 -1.813,-9.225 -5.435,-12.845 z" id="path377" transform="matrix(0.01221113,0,0,0.01221113,-0.29021299,1.047319)" /></g></svg>',
+        disabledMicrophone: '<svg width="5.3250041mm" height="6.8486948mm" viewBox="0 0 5.3250041 6.8486948" version="1.1" id="svg502" xml:space="preserve" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="disabled_mic.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview504" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" inkscape:zoom="24.2312" inkscape:cx="-0.43332563" inkscape:cy="14.031497" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg502" /><defs id="defs499" /><g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-79.802132,-40.143836)" style="display:inline"><path id="path239-2-9" style="display:inline;stroke-width:0.14315" class="StreamsWebrtcMicIconWawe2" d="M 2.9005981,0 C 2.8846674,-8.6953191e-5 2.8690742,1.9618652e-4 2.8530558,5.1676432e-4 2.7741159,0.00201676 2.7115107,0.06678662 2.7130127,0.14572754 c 0.0015,0.0789399 0.066269,0.14154313 0.1452108,0.14004313 0.6791554,-0.0121214 1.2677117,0.41009432 1.4991333,1.01079103 L 4.565096,1.0552327 C 4.2653668,0.43311249 3.630306,0.0039829 2.9005981,0 Z M 4.7175415,1.5208374 4.4612264,1.8184937 c 1.221e-4,0.00446 4.318e-4,0.00897 5.168e-4,0.013436 0.0015,0.07894 0.066787,0.1410284 0.1457275,0.1395264 0.04048,-7.58e-4 0.074436,-0.017632 0.1002523,-0.044442 0.02581,-0.02682 0.040554,-0.062321 0.040824,-0.1018026 C 4.746577,1.7214388 4.735837,1.6197193 4.7175415,1.5208374 Z M 3.751709,2.642216 1.903243,4.7878215 c 0.207074,0.1837261 0.4513688,0.2759521 0.7327718,0.2759521 0.306841,0 0.5695964,-0.1092449 0.7880656,-0.3276286 C 3.6425128,4.5177614 3.751709,4.254896 3.751709,3.9480794 Z M 1.6117879,5.1263021 1.3198161,5.4647827 c 0.30817,0.2717762 0.6725019,0.431023 1.0929565,0.4774902 v 0.4599203 h -0.892452 c -0.060433,0 -0.1124242,0.022495 -0.1565796,0.066663 -0.044168,0.044131 -0.066663,0.096146 -0.066663,0.1565796 0,0.060335 0.022495,0.1129654 0.066663,0.1570963 0.044155,0.044131 0.096146,0.066146 0.1565796,0.066146 H 3.751709 c 0.060421,0 0.1124852,-0.022003 0.1565796,-0.066146 0.044216,-0.044119 0.066663,-0.096749 0.066663,-0.1570963 0,-0.060421 -0.022446,-0.1124364 -0.066663,-0.1565796 C 3.8642066,6.4246878 3.8121413,6.4021932 3.751709,6.4021932 H 2.859257 V 5.9422729 C 3.363564,5.8865292 3.7871411,5.6685517 4.1299805,5.2885661 4.4728198,4.9085928 4.644161,4.4617401 4.644161,3.9480794 V 3.5015951 c 0,-0.060396 -0.021917,-0.1123754 -0.066146,-0.1565796 -0.044033,-0.044168 -0.096663,-0.066663 -0.1570963,-0.066663 -0.060372,0 -0.1123632,0.022495 -0.1565796,0.066663 -0.044119,0.044156 -0.066663,0.096172 -0.066663,0.1565796 v 0.4464843 c 0,0.4300024 -0.1527257,0.7976598 -0.45837,1.1032919 -0.3055462,0.3056443 -0.6732773,0.4583699 -1.1032918,0.4583699 -0.3933915,0 -0.7349131,-0.1276249 -1.0242264,-0.3834391 z M 1.3198161,5.4647827 c -0.8798774,-3.6431885 -0.4399387,-1.8215942 0,0 z M 1.0319784,5.1567912 1.3311849,4.8095256 C 1.1598178,4.5572928 1.074353,4.2700829 1.074353,3.9480794 V 3.5015951 c 0,-0.060408 -0.02252,-0.1124242 -0.066663,-0.1565796 -0.0441675,-0.044168 -0.0961101,-0.066663 -0.15657956,-0.066663 -0.0604694,0 -0.11295317,0.022495 -0.15709635,0.066663 -0.0441799,0.044156 -0.0661458,0.096172 -0.0661458,0.1565796 v 0.4464843 c 0,0.4554054 0.13465463,0.8583833 0.40411011,1.2087118 z M 1.6386597,4.4524414 3.7418905,2.01073 C 3.7111124,1.7684747 3.6054921,1.5565014 3.4240804,1.3751099 3.2056112,1.1566652 2.9428558,1.0474813 2.6360148,1.0474813 c -0.3068043,0 -0.5695843,0.1091839 -0.7880656,0.3276286 -0.2184936,0.2184568 -0.3276286,0.481249 -0.3276286,0.7880656 v 1.7849039 c 0,0.184067 0.039697,0.3520807 0.1183391,0.504362 z M 3.8891683,1.839681 4.1382487,1.5508097 C 3.9969597,0.98002029 3.4750777,0.56041034 2.8628743,0.57205811 c -0.07894,0.0015 -0.1415431,0.0667866 -0.1400431,0.14572753 0.0015,0.0789399 0.066267,0.14154413 0.1452108,0.14004314 C 3.4202676,0.84732534 3.878104,1.2875939 3.8891683,1.839681 Z" transform="translate(79.802132,40.143836)" sodipodi:nodetypes="scccccscccccccsccccssscccccscscsscscscccsscscsssscccccsscscsscccssscscccc" /><polygon class="StreamsWebrtcMicIconCrossline" points="20.305,1.034 19.104,0 0.179,21.971 1.38,23.006 " transform="matrix(0.26458333,0,0,0.26458333,79.754772,40.268055)" style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1" id="polygon2082" /></g></svg>',
         playIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="44px" height="50px" viewBox="-0.53 0 44 50" enable-background="new -0.53 0 44 50" xml:space="preserve"> <defs> </defs> <polygon points="0,0 43.143,24.91 0,49.82 "/> </svg>',
         pauseIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="44px" height="51px" viewBox="-0.53 -0.91 44 51" enable-background="new -0.53 -0.91 44 51" xml:space="preserve"> <defs> </defs> <rect width="16.173" height="50"/> <rect x="26.97" y="0.09" width="16.173" height="50"/> </svg>'
     }
@@ -115,6 +117,7 @@
                 var _scenesEl = null;
                 var _sourcesColumnEl = null;
                 var _optionsColumnEl = null;
+                var _audioMixerColumnEl = null;
 
                 var scenesInterface = (function () {
 
@@ -353,7 +356,7 @@
 
                         console.log('addNewScenePopup')
                         var dialog = document.createElement('DIV');
-                        dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
+                        dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
                         _dialogEl = dialog;
                         var close = document.createElement('div');
                         close.className = 'Streams_webrtc_close-dialog-sign';
@@ -1100,7 +1103,7 @@
                                         var dialogInner=document.createElement('DIV');
                                         dialogInner.className = 'Streams_webrtc_popup-progress-bar-popup-inner';
                                         var boxContent=document.createElement('DIV');
-                                        boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                                        boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
                                         var boxContentText = _progressText = document.createElement('DIV');
                                         boxContentText.innerHTML = 'loading...';
                                         var progressBar = document.createElement('DIV');
@@ -1154,10 +1157,11 @@
                             }
                         }
 
-                        function addTeleconferenceSource(name) {
+                        function addTeleconferenceSource(name, addAudioGroup) {
                             var webrtcGroup = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
                                 sourceType: 'webrtcGroup',
                                 title: name,
+                                addAudioGroup: addAudioGroup,
                             });
 
                             controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup);
@@ -1472,7 +1476,7 @@
 
                             console.log('addVideoPopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-video Streams_webrtc_hidden';
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-video Streams_webrtc_hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add video';
@@ -1481,7 +1485,7 @@
                             var dialogInner=document.createElement('DIV');
                             dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
                             var boxContentText=document.createElement('DIV');
                             boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                             var videoItemInput = document.createElement('INPUT');
@@ -1622,7 +1626,7 @@
 
                             console.log('addImagePopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-image Streams_webrtc_hidden';
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-image Streams_webrtc_hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add image';
@@ -1631,7 +1635,7 @@
                             var dialogInner=document.createElement('DIV');
                             dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
                             var boxContentText=document.createElement('DIV');
                             boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                             var imageItemInput = document.createElement('INPUT');
@@ -1772,7 +1776,7 @@
 
                             console.log('addTeleconferencePopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add teleconference';
@@ -1781,15 +1785,53 @@
                             var dialogInner=document.createElement('DIV');
                             dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
 
+                            var sourceNameCon = document.createElement('DIV');
+                            sourceNameCon.className = 'Streams_webrtc_popup-sources-add-source-name-con';
                             var sourceName = document.createElement('INPUT');
-                            sourceName.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            sourceName.className = 'Streams_webrtc_popup-sources-add-source-name';
                             sourceName.type = 'text';
                             sourceName.placeholder = 'Teleconference Source Name';
                             sourceName.name = 'sourceName';
+                            sourceNameCon.appendChild(sourceName);
 
-                            boxContent.appendChild(sourceName);
+                            boxContent.appendChild(sourceNameCon);
+
+                            var addAudioGroupCon = document.createElement('LABEL');
+                            addAudioGroupCon.className = 'Streams_webrtc_popup-sources-add-audio-con';
+                            var addAudio = document.createElement('INPUT');
+                            addAudio.className = 'Streams_webrtc_popup-sources-add-audio-group';
+                            addAudio.type = 'checkbox';
+                            addAudio.name = 'addAudio';
+                            addAudioGroupCon.appendChild(addAudio);
+                            var addAudioGroupCaption = document.createElement('SPAN');
+                            addAudioGroupCaption.className = 'Streams_webrtc_popup-sources-add-audio-cap';
+                            addAudioGroupCaption.innerHTML = "Add corresponding audio group of participants' audio";
+                            addAudioGroupCon.appendChild(addAudioGroupCaption);
+                            boxContent.appendChild(addAudioGroupCon);
+
+                            
+                            let otherWebrtcAudioGroupExist = checkIfOtherWebrtcAudioGroupExist();
+                           
+                            addAudio.checked = otherWebrtcAudioGroupExist ? false : true;
+
+                            addAudio.addEventListener('change', function(event) {
+                                let otherWebrtcAudioGroupExist = checkIfOtherWebrtcAudioGroupExist();
+
+                                if (event.currentTarget.checked && otherWebrtcAudioGroupExist) {
+                                    Q.confirm('There are other WebRTC audio groups active now. Adding new one may lead to lower audio quality. Are you sure you want to add one more audio group?', function (reply) {
+                                        if (!reply) {
+                                            addAudio.checked = false;
+                                        }
+                                    },{
+                                        title: "Adding group of participants' audio",
+                                        ok:'Yes',
+                                        cancel: 'Dismiss',
+                                        noClose: true
+                                    });
+                                }
+                              })
 
                             var close=document.createElement('div');
                             close.className = 'Streams_webrtc_close-dialog-sign';
@@ -1799,7 +1841,7 @@
                             close.addEventListener('click', function() {
                                 if(sourceName.value != '') {
                                     var val = sourceName.value;
-                                    addTeleconferenceSource(val);
+                                    addTeleconferenceSource(val, addAudio.checked);
                                     hideDialog();
                                     sourceName.value = '';
                                 }
@@ -1847,6 +1889,19 @@
                             close.addEventListener('click', function () {
                                 hideDialog();
                             });
+
+                            function checkIfOtherWebrtcAudioGroupExist() {
+                                let audioSources = _scene.sceneInstance.audioSources;
+                                let otherWebrtcAudioGroupExist = false;
+                                for(let i in audioSources) {
+                                    if(audioSources[i].sourceType == 'group' && audioSources[i].groupType == 'webrtc') {
+                                        otherWebrtcAudioGroupExist = true;
+                                        break;
+                                    }
+                                }
+                                return otherWebrtcAudioGroupExist;
+                            }
+
 
                             function closeOnWindowClick(e) {
                                 if (!(_dialogEl.contains(e.target) || e.target.matches('.Streams_webrtc_popup-add-image'))
@@ -1920,6 +1975,7 @@
                         var AudioListItem = function (name) {
                             var sourceInstance =this;
                             this.listType = 'audio';
+                            this._sourceInstance = null;
                             this.title = name != null ? name : null;
                             this.remove = function () {
                                 var currentitem = this;
@@ -1954,16 +2010,27 @@
                                 console.log('mute')
 
                                 this.sourceInstance.active = true;
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSource(this.sourceInstance, this.params.localOutput);
-                                this.switchVisibilityIcon(true);
-                                syncList();
+                                if(this.sourceInstance.participant.isLocal) {
+                                    console.log('mute turn mic on')
+                                    controlsTool.WebRTCLib.localMediaControls.enableAudio();
+                                } else {
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSource(this.sourceInstance, this.params.localOutput);
+                                    this.switchVisibilityIcon(true);
+                                    syncList();
+                                }
+                                
                             };
                             this.mute = function() {
                                 console.log('mute')
                                 this.sourceInstance.active = false;
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSource(this.sourceInstance, this.params.localOutput);
-                                this.switchVisibilityIcon(false);
-
+                                if(this.sourceInstance.participant.isLocal) {
+                                    console.log('mute turn mic off')
+                                    controlsTool.WebRTCLib.localMediaControls.disableAudio();
+                                } else {
+                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSource(this.sourceInstance, this.params.localOutput);
+                                    this.switchVisibilityIcon(false);
+                                }
+                                
                                 syncList();
                             };
                             this.switchVisibilityIcon = function (visibility) {
@@ -2043,18 +2110,28 @@
 
                         AudioListItem.prototype = new ListItem();
 
+                        //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
+                        if(controlsTool != null && controlsTool.WebRTCLib != null) {
+                            controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                                for (let i in _audioList) {
+                                    if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
+                                        _audioList[i].switchVisibilityIcon(false);
+                                    }
+                                }
+                            });
+                            controlsTool.WebRTCLib.event.on('micEnabled', function () {
+                                for (let i in _audioList) {
+                                    if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
+                                        _audioList[i].switchVisibilityIcon(true);
+                                    }
+                                }
+                            });
+                        }
+
                         function addItem(item) {
                             if (item == null || _audioSourcesListEl == null) return;
                             console.log('audio: addItem', item)
                             console.log('audio: addItem itemEl', item.itemEl)
-                            if(item.sourceInstance.sourceType == 'webrtc' && item.sourceInstance.participant.isLocal) {
-                                controlsTool.WebRTCLib.event.on('micDisabled', function () {
-                                    item.mute();
-                                });
-                                controlsTool.WebRTCLib.event.on('micEnabled', function () {
-                                    item.unmute();
-                                });
-                            }
                             _audioList.push(item)
                             console.log('audio: addItem element', _audioSourcesListEl)
 
@@ -2063,7 +2140,13 @@
 
                         function syncList() {
                             var sources = _scene.sceneInstance.audioSources;
-                            console.log('audio: syncList _audioList', _audioList.length);
+                            console.log('audio: syncList START', _audioList.length);
+                            try {
+                                var err = (new Error);
+                                console.log(err.stack);
+                            } catch (e) {
+            
+                            }
                             console.log('audio: syncList sources', sources.length);
 
                             for (let i = _audioList.length - 1; i >= 0; i--) {
@@ -2098,7 +2181,7 @@
                                         ].title : (sources[s].name != null ? sources[s].name : sources[s].sourceType);
                                     var listItem = new AudioListItem(title);
                                     listItem.sourceInstance = sources[s];
-                                    console.log('audio: syncList add',  listItem);
+                                    console.log('audio: syncList add',  listItem, listItem.sourceInstance);
                                     if(sources[s].active === true) {
                                         listItem.switchVisibilityIcon(true);
                                     } else if(sources[s].active === false) {
@@ -2316,7 +2399,7 @@
 
                             console.log('addVideoPopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-streaming-box Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
+                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add audio';
@@ -2325,7 +2408,7 @@
                             var dialogInner=document.createElement('DIV');
                             dialogInner.className = 'Streams_webrtc_dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
                             var boxContentText=document.createElement('DIV');
                             boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                             var videoItemInput = document.createElement('INPUT');
@@ -2591,9 +2674,6 @@
                         if(_activeView != null) {
                             _activeView.hide();
                         }
-                        /*if(_activeView && _activeView.parentNode != null) {
-                                _activeView.parentNode.removeChild(_activeView);
-                            }*/
                     }
 
                     function createMediaControls(source) {
@@ -2639,7 +2719,7 @@
                         volume.className = 'Streams_webrtc_popup-options-params-controls-volume'
                         var volumeSlider = document.createElement('SPAN');
                         volumeSlider.className = 'Streams_webrtc_popup-options-params-controls-volume-slider';
-                        volumeSlider.style.width = mediaElement.volume * 100 + '%';
+                        volumeSlider.style.width = source.sourceInstance.gainNode.gain.value * 100 + '%';
                         volume.appendChild(volumeSlider);
                         volumeSliderCon.appendChild(volume);
                         volumeCon.appendChild(volumeIcon);
@@ -2784,9 +2864,11 @@
                             volumeSlider.style.width = '0%';
                         }
 
-                        mediaElement.addEventListener('volumechange', function () {
-                            var percentage = ( mediaElement.volume / 1 ) * 100;
-                            volumeSlider.style.width = percentage+'%';
+                        source.sourceInstance.on('volumeChanged', function () {
+                            console.log('volumeChanged', source.sourceInstance.gainNode.gain.value)
+                            var percentage = source.sourceInstance.gainNode.gain.value * 100;
+                            volumeSlider.style.width = percentage + '%';
+                            updateVolumeIcons(source.sourceInstance.gainNode.gain.value);
                         })
 
                         mediaElement.addEventListener('pause', function (e) {
@@ -2800,23 +2882,20 @@
                         function dragVolumeSlider(e) {
                             var offsetLeft = getOffsetLeft(volume)
                             var left = (e.pageX - offsetLeft);
-                            if(Math.sign(left) == -1) {
+                            if (Math.sign(left) == -1) {
                                 left = 0;
                             }
                             var totalWidth = volume.offsetWidth;
 
-                            if(left > totalWidth) {
+                            if (left > totalWidth) {
                                 left = totalWidth;
                             }
-                            var volumeToSet = ( left / totalWidth );
-                            var prevVolume = mediaElement.volume;
-                            mediaElement.volume = volumeToSet;
-                            if(volumeToSet != 0 && mediaElement.muted) mediaElement.muted = false;
-
-                            updateVolumeIcons(volumeToSet, prevVolume);
+                            var volumeToSet = (left / totalWidth);
+                            source.sourceInstance.setVolume(volumeToSet);
                         }
 
-                        function updateVolumeIcons(volumeToSet, prevVolume) {
+                        function updateVolumeIcons(volumeToSet) {
+                            console.log('updateVolumeIcons', volumeToSet, mediaElement.muted)
                             var waves = volumeIcon.querySelector('#StreamsWebrtcWaves');
                             var disabledWaves = volumeIcon.querySelectorAll('.StreamsWebrtcDisabledparts.StreamsWebrtcWaves1 .StreamsWebrtcDisabledparts.StreamsWebrtcWaves2');
                             var secondWaveParts = volumeIcon.querySelectorAll('.StreamsWebrtcWaves2');
@@ -2837,30 +2916,40 @@
                             }
 
                             if(volumeToSet <= 0.5 && volumeToSet > 0 && !mediaElement.muted) {
+                                console.log('updateVolumeIcons 1');
                                 toggleDisabledIcon(0);
                                 toggleSecondWave(0);
                             } else if (volumeToSet > 0.5 && !mediaElement.muted) {
+                                console.log('updateVolumeIcons 2');
                                 toggleDisabledIcon(0);
                                 toggleSecondWave(1);
                             } else {
+                                console.log('updateVolumeIcons 3');
                                 toggleSecondWave(1);
                                 toggleDisabledIcon(1);
                             }
                         }
-                        updateVolumeIcons(mediaElement.volume)
+                        updateVolumeIcons(mediaElement.muted ? 0 : source.sourceInstance.gainNode.gain.value)
+
+                        source.sourceInstance.on('volumeChanged', function () {
+                            var percentage = source.sourceInstance.gainNode.gain.value * 100;
+                            volumeSlider.style.width = percentage + '%';
+                            updateVolumeIcons(source.sourceInstance.gainNode.gain.value);
+                        })
 
                         volumeIcon.addEventListener("click", function () {
-                            console.log('speaker',mediaElement.volume,  mediaElement.muted)
-                            if(mediaElement.volume == 0 || mediaElement.muted) {
-                                console.log('speaker 1',source.params.lastVolumeValue)
+                            console.log('speaker', mediaElement.volume, mediaElement.muted)
 
-                                mediaElement.volume = source.params.lastVolumeValue != null ? source.params.lastVolumeValue : 1;
-                                if(mediaElement.muted) mediaElement.muted = false;
+                            if (!source.sourceInstance.gainNode) return;
+                            if (source.sourceInstance.gainNode.gain.value == 0 || mediaElement.muted) {
+                                console.log('speaker 1', source.params.lastVolumeValue)
+
+                                if (mediaElement.muted) mediaElement.muted = false;
+                                source.sourceInstance.setVolume(source.params.lastVolumeValue != null ? source.params.lastVolumeValue : 1);
                             } else {
-                                source.params.lastVolumeValue = mediaElement.volume;
-                                mediaElement.volume = 0;
+                                source.params.lastVolumeValue = source.sourceInstance.gainNode.gain.value;
+                                source.sourceInstance.setVolume(0);
                             }
-                            updateVolumeIcons(mediaElement.volume)
                         });
 
 
@@ -3791,7 +3880,6 @@
                         }
                     }())
 
-
                     var videoSourceOptions = (function (source) {
                         var _dialogEl = null;
                         var _optionsTabs = null;
@@ -4037,7 +4125,6 @@
                         }
                     }())
 
-
                     var audioSourceOptions = (function (source) {
                         var _dialogEl = null;
                         var _optionsTabs = null;
@@ -4047,7 +4134,7 @@
                         var _generatedDialogs = [];
 
                         function createParamsList() {
-                            console.log('createParamsList',  _selectedSource.params);
+                            console.log('audioSourceOptions: createParamsList',  _selectedSource.params);
                             for(let d in _generatedDialogs) {
                                 if(_generatedDialogs[d].source == _selectedSource) {
                                     return _generatedDialogs[d].dialog;
@@ -4076,7 +4163,7 @@
 
                         function showDialog(source) {
                             _selectedSource = source;
-                            console.log('showDialog', this, _activeView)
+                            console.log('audioSourceOptions: showDialog', this, _activeView)
                             hideActiveView();
                             showParams();
                             _optionsColumnEl.appendChild(_dialogEl);
@@ -4084,7 +4171,7 @@
                         }
 
                         function hideDialog() {
-                            console.log('hideDialog', _dialogEl)
+                            console.log('audioSourceOptions: hideDialog', _dialogEl)
 
                             if(_dialogEl && _dialogEl.parentNode != null) {
                                 _dialogEl.parentNode.removeChild(_dialogEl);
@@ -4116,7 +4203,117 @@
                             }
                         }
 
-                        console.log('addImagePopup')
+                        console.log('audioSourceOptions pupup')
+                        _dialogEl = document.createElement('DIV');
+                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        var dialogTitle = document.createElement('DIV');
+                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        var dialogTitleInner = _optionsTabs = document.createElement('DIV');
+                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+
+                        var paramsTab = document.createElement('DIV');
+                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.dataset.tab = 'params';
+                        var paramsTabInner = document.createElement('DIV');
+                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.innerHTML = 'Params';
+                        paramsTab.appendChild(paramsTabInner);
+                        dialogTitleInner.appendChild(paramsTab);
+                        dialogTitle.appendChild(dialogTitleInner);
+                        _dialogEl.appendChild(dialogTitle);
+                        var dialogBody = _dialogBody = document.createElement('DIV');
+                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+
+                        //dialogBody.appendChild(createParamsList());
+                        _dialogEl.appendChild(dialogBody);
+
+                        paramsTab.addEventListener('click', tabHandler);
+
+                        return {
+                            hide: hideDialog,
+                            show: showDialog,
+                            showParams: showParams
+                        }
+                    }())
+
+                    var webrtcAudioSourceOptions = (function (source) {
+                        var _dialogEl = null;
+                        var _optionsTabs = null;
+                        var _dialogBody = null;
+                        var _selectedSource = null;
+                        var _generatedDialogs = [];
+
+                        function createParamsList() {
+                            console.log('audioSourceOptions: createParamsList',  _selectedSource.params);
+                            for(let d in _generatedDialogs) {
+                                if(_generatedDialogs[d].source == _selectedSource) {
+                                    return _generatedDialogs[d].dialog;
+                                }
+                            }
+
+                            var paramsBody = document.createElement('DIV')
+                            paramsBody.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+
+                            var mediaControlsEl = createMediaControls(_selectedSource);
+                            paramsBody.appendChild(mediaControlsEl);
+
+                            _generatedDialogs.push({
+                                source: _selectedSource,
+                                dialog:  paramsBody,
+                            })
+                            return paramsBody;
+                        }
+
+                        function showParams() {
+                            console.log('showParams', this, _activeView)
+
+                            _dialogBody.innerHTML = '';
+                            _dialogBody.appendChild(createParamsList());
+                        }
+
+                        function showDialog(source) {
+                            _selectedSource = source;
+                            console.log('audioSourceOptions: showDialog', this, _activeView)
+                            hideActiveView();
+                            showParams();
+                            _optionsColumnEl.appendChild(_dialogEl);
+                            _activeView = this;
+                        }
+
+                        function hideDialog() {
+                            console.log('audioSourceOptions: hideDialog', _dialogEl)
+
+                            if(_dialogEl && _dialogEl.parentNode != null) {
+                                _dialogEl.parentNode.removeChild(_dialogEl);
+                            }
+                        }
+
+                        function tabHandler(e) {
+                            var tabEl = e.currentTarget;
+                            console.log('tabHandler tabEl', tabEl)
+
+                            var tabName = tabEl.dataset.tab;
+                            if(!tabName) return;
+                            if(tabName == 'params') {
+                                showParams();
+                            }
+
+                            for(let e in _optionsTabs.children) {
+                                if(typeof _optionsTabs.children[e] != 'object') continue;
+                                console.log('tabHandler', _optionsTabs.children[e])
+                                if(_optionsTabs.children[e] == tabEl) {
+                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    }
+                                    continue;
+                                }
+                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                }
+                            }
+                        }
+
+                        console.log('audioSourceOptions pupup')
                         _dialogEl = document.createElement('DIV');
                         _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
@@ -4150,14 +4347,15 @@
                     }())
 
                     function update() {
-                        console.log('optionsColumn.update');
                         var activeScene = scenesInterface.getActive();
                         var selectedSource = activeScene.sourcesInterface.getSelectedSource();
+                        console.log('optionsColumn.update', selectedSource);
 
                         if (selectedSource != null) {
                             let sceneIsInactive = true;
-                            for (let i in activeScene.sceneInstance.sources) {
-                                if (activeScene.sceneInstance.sources[i] == selectedSource.sourceInstance) {
+                            let activeSceneSources = selectedSource.listType != 'audio' ? activeScene.sceneInstance.sources : activeScene.sceneInstance.audioSources;
+                            for (let i in activeSceneSources) {
+                                if (activeSceneSources[i] == selectedSource.sourceInstance) {
                                     sceneIsInactive = false;
                                     break;
                                 }                                
@@ -4176,8 +4374,10 @@
                             optionsColumn.imageSourceOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'video') {
                             optionsColumn.videoSourceOptions.show(selectedSource);
-                        } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'audio') {
+                        } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'audio' && selectedSource.sourceInstance.sourceType != 'webrtc') {
                             optionsColumn.audioSourceOptions.show(selectedSource);
+                        } else if(selectedSource && selectedSource.listType == 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
+                            //optionsColumn.webrtcAudioSourceOptions.show(selectedSource);
                         } else {
                             optionsColumn.hideActiveView();
                         }
@@ -4189,15 +4389,325 @@
                         imageSourceOptions: imageSourceOptions,
                         videoSourceOptions: videoSourceOptions,
                         audioSourceOptions: audioSourceOptions,
+                        webrtcAudioSourceOptions: webrtcAudioSourceOptions,
                         hideActiveView: hideActiveView,
                         update: update
                     }
                 }())
 
+                var audioMixerInterface = (function () {
+                    var _globalSourcesEl;
+                    var _globalMicSource;
+                    var _globalSources = [];
+
+                    var MixerItem = function (name) {
+                        this.title = name != null ? name : null;
+                        this.type = 'scene';
+                        this.itemEl = null;
+                        this.sourceInstance = null;
+                        this.remove = function () {
+                            var currentitem = this;
+                            console.log('MixerItem: remove', this.itemEl);
+                            if (this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
+                            let list = this.sourceInstance.scope == 'global' ? _globalSources : _scenesSources;
+                            for (var i in list) {
+                                if (list[i] == currentitem) {
+                                    console.log('MixerItem: remove for');
+                                    list.splice(i, 1);
+                                    break;
+                                }
+                            }
+                        };
+                        this.isActive = function () {
+                            var currentitem = this;
+                            var sources = scenesInterface.getActive().sceneInstance.audioSources;
+            
+                            for (let s in sources) {
+                                if (sources[s] == currentitem._sourceInstance) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        };
+                    }
+                    
+                    function addAudioToMixer(mixerItem) {
+                        var audioOrVideoSource = mixerItem.sourceInstance;
+                        console.log('addAudioToMixer', audioOrVideoSource);
+                        var audioMixerItemCon = mixerItem.itemEl = document.createElement('DIV');
+                        audioMixerItemCon.className = 'Streams_webrtc_popup-mixer-item';
+                        var audioMixerItemCaption = document.createElement('DIV');
+                        audioMixerItemCaption.className = 'Streams_webrtc_popup-mixer-caption';
+                        //audioMixerItemCaption.innerHTML = mixerItem.title;
+                        audioMixerItemCon.appendChild(audioMixerItemCaption);
+            
+                        var volumeControls = document.createElement('DIV');
+                        volumeControls.className = 'Streams_webrtc_popup-mixer-controls';
+                        audioMixerItemCon.appendChild(volumeControls);
+            
+                        var volumeCon = document.createElement('DIV');
+                        volumeCon.className = 'Streams_webrtc_popup-mixer-volume-con';
+                        volumeControls.appendChild(volumeCon);
+                        var volumeSliderCon = document.createElement('DIV');
+                        volumeSliderCon.className = 'Streams_webrtc_popup-mixer-volume-slider-con';
+                        volumeCon.appendChild(volumeSliderCon);
+                        var volumeWrap = document.createElement('DIV');
+                        volumeWrap.className = 'Streams_webrtc_popup-mixer-volume-slider-wrap';
+                        volumeSliderCon.appendChild(volumeWrap);
+                        var volume = document.createElement('DIV');
+                        volume.className = 'Streams_webrtc_popup-mixer-volume';
+                        volumeWrap.appendChild(volume);
+                        var volumeSlider = document.createElement('SPAN');
+                        volumeSlider.className = 'Streams_webrtc_popup-mixer-volume-slider';
+                        if (audioOrVideoSource.gainNode) console.log('audioOrVideoSource.gainNode.gain.value', audioOrVideoSource.gainNode.gain.value, audioOrVideoSource.gainNode.gain.value * 100);
+                        volumeSlider.style.height = (audioOrVideoSource.gainNode && !(audioOrVideoSource.videoInstance && audioOrVideoSource.videoInstance.muted) ? audioOrVideoSource.gainNode.gain.value * 100 : 0) + '%';
+                        volume.appendChild(volumeSlider);
+            
+                        var volumeIcons = document.createElement('DIV');
+                        volumeIcons.className = 'Streams_webrtc_popup-mixer-volume-icons';
+                        volumeCon.appendChild(volumeIcons);
+                        var volumeIcon = document.createElement('DIV');
+                        volumeIcon.className = 'Streams_webrtc_popup-mixer-volume-icon';
+                        volumeIcon.innerHTML = _streamingIcons.enabledMicrophone;
+                        volumeIcons.appendChild(volumeIcon);
+
+                        volumeControls.appendChild(createVisualization(mixerItem));
+
+                        if (audioOrVideoSource.scope == 'global') {
+                            _globalSourcesEl.appendChild(audioMixerItemCon);
+                        } else {
+                            _scenesSourcesEl.appendChild(audioMixerItemCon);
+                        }
+                        console.log('addAudioToMixer gainnode', audioOrVideoSource.gainNode);
+            
+                        audioOrVideoSource.on('volumeChanged', function () {
+                            var percentage = audioOrVideoSource.gainNode.gain.value * 100;
+                            volumeSlider.style.height = percentage + '%';
+                            updateVolumeIcons(audioOrVideoSource.gainNode.gain.value);
+                        })
+            
+                        updateVolumeIcons(!(audioOrVideoSource.videoInstance && audioOrVideoSource.videoInstance.muted) && audioOrVideoSource.gainNode ? audioOrVideoSource.gainNode.gain.value : 0)
+            
+                        volumeIcon.addEventListener("click", function () {
+                            if (!audioOrVideoSource.gainNode) return;
+                            if (controlsTool.WebRTCLib.localMediaControls.micIsEnabled()) {
+                                controlsTool.WebRTCLib.localMediaControls.disableAudio();
+                            } else {
+                                controlsTool.WebRTCLib.localMediaControls.enableAudio();
+                            }
+                        });
+            
+                        volume.addEventListener("mousedown", function () {
+                            window.addEventListener('mousemove', dragVolumeSlider)
+            
+                            function removeListener() {
+                                window.removeEventListener('mousemove', dragVolumeSlider)
+                                window.removeEventListener('mouseup', removeListener)
+                            }
+                            window.addEventListener('mouseup', removeListener)
+                        });
+            
+                        volumeWrap.addEventListener("click", dragVolumeSlider);
+
+                        controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                            audioOrVideoSource.disconnect();
+                            audioOrVideoSource.setVolume(0);
+                        });
+                        controlsTool.WebRTCLib.event.on('micEnabled', function () {
+                            audioOrVideoSource.connect();
+                            audioOrVideoSource.setVolume(1);
+                        });
+            
+                        function dragVolumeSlider(e) {
+                           
+                            function getOffsetTop(elem) {
+                                var offsetTop = 0;
+                                do {
+                                    if (!isNaN(elem.offsetTop)) {
+                                        offsetTop += elem.offsetTop;
+                                    }
+                                } while (elem = elem.offsetParent);
+                                return offsetTop;
+                            }
+                            if (!audioOrVideoSource.gainNode) return;
+                            var totalHeight = volume.offsetHeight;
+
+                            var offsetTop = getOffsetTop(volume)
+                            var vol = totalHeight - (e.pageY - offsetTop);
+                            if (Math.sign(vol) == -1) {
+                                vol = 0;
+                            }
+            
+                            console.log('offsetTop', vol, totalHeight)
+                            if (vol > totalHeight) {
+                                vol = totalHeight;
+                            }
+                            var volumeToSet = (vol / totalHeight);
+                            console.log('volumeToSet', volumeToSet)
+
+                            audioOrVideoSource.setVolume(volumeToSet);
+                        }
+            
+                        function updateVolumeIcons(volumeToSet) {
+            
+                            function toggleSecondWave(value) {
+                                var firstWave = volumeIcon.querySelector('.StreamsWebrtcMicIconWawe1');
+                                var secondWave = volumeIcon.querySelector('.StreamsWebrtcMicIconWawe2');
+                                secondWave.style.opacity = value;
+                            }
+                            function toggleDisabledIcon(value) {
+                                if(value == 0) {
+                                    volumeIcon.innerHTML = _streamingIcons.enabledMicrophone;
+                                } else {
+                                    volumeIcon.innerHTML = _streamingIcons.disabledMicrophone;
+                                }
+                            }
+            
+                            if (volumeToSet <= 0.5 && volumeToSet > 0 /*&& !mediaElement.muted*/) {
+                                toggleDisabledIcon(0);
+                                toggleSecondWave(0);
+                            } else if (volumeToSet > 0.5 /*&& !mediaElement.muted*/) {
+                                toggleDisabledIcon(0);
+                                toggleSecondWave(1);
+                            } else {
+                                toggleSecondWave(1);
+                                toggleDisabledIcon(1);
+                            }
+                        }
+            
+                        function createVisualization(mixerItem) {
+                            console.log('createVisualization', mixerItem);
+                            var audioOrVideoSource = mixerItem.sourceInstance;
+                            var visualizationCanvasCon = document.createElement('DIV');
+                            visualizationCanvasCon.className = 'Streams_webrtc_popup-mixer-meter-con';
+                            var visualizationCanvas = document.createElement('CANVAS');
+                            visualizationCanvas.className = 'Streams_webrtc_popup-mixer-meter';
+                            visualizationCanvas.width = 5;
+                            visualizationCanvas.height = 215;
+                            visualizationCanvasCon.appendChild(visualizationCanvas);
+            
+                            function startRender() {
+                                var ctx = visualizationCanvas.getContext("2d", { alpha: false });
+            
+                                var WIDTH = visualizationCanvas.width;
+                                var HEIGHT = visualizationCanvas.height;
+            
+                                function getAverage(freqData) {
+                                    var average = 0;
+                                    for (let i = 0; i < freqData.length; i++) {
+                                        average += freqData[i]
+                                    }
+                                    average = average / freqData.length;
+                                    return average;
+                                }
+            
+                                function renderFrame() {
+                                    mixerItem.VisualizationIsRendering = requestAnimationFrame(renderFrame);
+            
+                                    var freqData = new Uint8Array(audioOrVideoSource.analyserNode.frequencyBinCount);
+                                    audioOrVideoSource.analyserNode.getByteFrequencyData(freqData);
+            
+                                    var len = freqData.length
+                                    var min = 0
+                                    var max = 0
+                                    for (var i = 0; i < len; i++) {
+                                        var sample = freqData[i]
+                                        if (sample < min) min = sample
+                                        else if (sample > max) max = sample
+                                    }
+                                    let result = (max - min) / 255
+                                    //document.querySelector('.Streams_webrtc_popup-mixer-buttons-recording').innerHTML = result;
+                                    var width = WIDTH / 100 * (result * 100);
+                                    var height = HEIGHT / 100 * (result * 100);
+            
+                                    /*let average = getAverage(freqData);
+                                    console.log('width', result);
+                                    var width = WIDTH / 100 * ((average / 255) * 100);*/
+                                    //ctx.clearRect(0, 0, WIDTH, HEIGHT);
+            
+                                    ctx.fillStyle = "rgba(0, 0, 0, 1)";
+                                    ctx.fillRect(0, 0, WIDTH, HEIGHT)
+            
+                                    ctx.save();
+                                    ctx.globalAlpha = 0.5;
+                                    
+                                    ctx.fillStyle = 'lawngreen';
+                                    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+                                    ctx.restore();
+            
+                                    ctx.fillStyle = 'lawngreen';
+                                    ctx.fillRect(0, HEIGHT-height, WIDTH, height);
+                                    //ctx.strokeStyle = "rgb(20, 121, 181)";
+                                    //ctx.strokeRect(0, 0, width, HEIGHT);
+                                }
+            
+                                renderFrame();
+                            }
+                            if (audioOrVideoSource.analyserNode) {
+                                startRender();
+                            } else {
+                                function startRendering() {
+                                    startRender();
+                                    audioOrVideoSource.setVolume(mixerItem.lastVolumeValue ? mixerItem.lastVolumeValue : 1);
+                                    updateVolumeIcons(audioOrVideoSource.gainNode.gain.value)
+                                    audioOrVideoSource.off('streamAdded', startRendering);
+                                }
+                                audioOrVideoSource.on('streamAdded', startRendering);
+                            }
+            
+                            return visualizationCanvasCon;
+                        }
+                    }
+
+                    function loadGlobalAudioSource() {
+
+                        let globalMicSource = controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addGlobalAudioSource({
+                            title: 'Microphone'
+                        });
+            
+                        let newMixerItem = _globalMicSource = new MixerItem('Microphone');
+                        newMixerItem.sourceInstance = globalMicSource;
+                        addAudioToMixer(newMixerItem);
+                        _globalSources.push(newMixerItem);
+
+                        let localAudioTracks = controlsTool.WebRTCLib.localParticipant().audioTracks(true);
+        
+                        if(localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
+                            console.log('localAudioTracks[0].stream', localAudioTracks[0].stream)
+                            globalMicSource.addStream(localAudioTracks[0].stream);
+                        }
+
+                        controlsTool.WebRTCLib.event.on('trackAdded', function (e) {
+                            if(!e.participant.isLocal || e.track.kind != 'audio') return;
+                            globalMicSource.addStream(e.track.stream);
+                        });
+
+                        
+                    }
+            
+                    function createAudioMixerInterface() {
+                        var audioColumn = document.createElement('DIV');
+                        audioColumn.className = 'Streams_webrtc_popup-audio-mixer';
+                        var audioColumnInner = document.createElement('DIV');
+                        audioColumnInner.className = 'Streams_webrtc_popup-audio-mixer-inner';
+                        var globalAudioSources = _globalSourcesEl = document.createElement('DIV');
+                        globalAudioSources.className = 'Streams_webrtc_popup-audio-mixer-global';
+
+                        audioColumnInner.appendChild(globalAudioSources);
+                        audioColumn.appendChild(audioColumnInner);
+                        loadGlobalAudioSource();
+                        return audioColumn;
+                    }
+
+                    return {
+                        createAudioMixerInterface: createAudioMixerInterface
+                    }
+                }());
+
                 function createPopup() {
                     console.log('createPopup 00', scenesInterface)
                     var dialog=document.createElement('DIV');
-                    dialog.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden';
+                    dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden';
                     _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.text);
@@ -4206,7 +4716,7 @@
                     var dialogInner=document.createElement('DIV');
                     dialogInner.className = 'Streams_webrtc_dialog-inner';
                     var boxContent=document.createElement('DIV');
-                    boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                    boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
 
                     var previewBox = document.createElement('DIV');
                     previewBox.className = 'Streams_webrtc_popup-preview';
@@ -4245,9 +4755,12 @@
                     optionsColumn.className = 'Streams_webrtc_popup-options';
                     _optionsColumnEl = optionsColumn;
 
+                    _audioMixerColumnEl = audioMixerInterface.createAudioMixerInterface();
+
                     streamingControls.appendChild(scenesColumn);
                     streamingControls.appendChild(sourcesColumn);
                     streamingControls.appendChild(optionsColumn);
+                    streamingControls.appendChild(_audioMixerColumnEl);
 
                     var close=document.createElement('div');
                     close.className = 'Streams_webrtc_close-dialog-sign';
@@ -4275,6 +4788,7 @@
                                 //elementPosition: 'fixed',
                                 showResizeHandles: true,
                                 moveWithinArea: 'parent',
+                                allowOverresizing: true,
                                 negativeMoving: true,
                                 onMoving: function () {
 
@@ -4352,16 +4866,16 @@
                 function createPopupHorizontalMobile() {
                     console.log('createPopupHorizontalMobile 00', scenesInterface)
                     var dialog=document.createElement('DIV');
-                    dialog.className = 'Streams_webrtc_dialog-box advanced-streaming Streams_webrtc_hidden Q_orientHorizontally';
+                    dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden Q_orientHorizontally';
                     _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
-                    dialogTitle.innerHTML = 'Streaming settings';
+                    dialogTitle.innerHTML = 'Livestream Manager';
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
                     dialogInner.className = 'Streams_webrtc_dialog-inner';
                     var boxContent=document.createElement('DIV');
-                    boxContent.className = 'Streams_webrtc_popup-streaming-box  Streams_webrtc_popup-box';
+                    boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
 
                     var previewBox = document.createElement('DIV');
                     previewBox.className = 'Streams_webrtc_popup-preview';
@@ -4405,16 +4919,18 @@
                     optionsColumn.className = 'Streams_webrtc_popup-options';
                     _optionsColumnEl = optionsColumn;
 
+                    var audioMixerColumn = document.createElement('DIV');
+                    audioMixerColumn.className = 'Streams_webrtc_popup-audio-mixer';
+                    _audioMixerColumnEl = optionsColumn;
+
                     //streamingControls.appendChild(scenesColumn);
                     streamingControls.appendChild(sourcesColumn);
                     streamingControls.appendChild(optionsColumn);
+                    streamingControls.appendChild(audioMixerColumn);
 
                     var close=document.createElement('div');
                     close.className = 'Streams_webrtc_close-dialog-sign';
                     close.innerHTML = '';
-                    /* close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
-                        close.style.backgroundRepeat = 'no-repeat';
-                        close.style.backgroundSize = 'cover';*/
                     close.style.animation = 'none';
 
 
@@ -4477,6 +4993,7 @@
                                 //elementPosition: 'fixed',
                                 showResizeHandles: true,
                                 moveWithinArea: 'parent',
+                                allowOverresizing: true,
                                 negativeMoving: true,
                                 onMoving: function () {
 

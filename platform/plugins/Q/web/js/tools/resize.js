@@ -11,14 +11,13 @@
     Q.Tool.define("Q/resize", function(options) {
 
             var tool = this;
-            //tool.state = Q.extend({}, tool.state, options);
-            this.initTool();
 
             tool.pointerInfo = {
                 prevY: 0,
                 prevX: 0,
             };
 
+            this.initTool();
 
             Q.addStylesheet('{{Q}}/css/resize.css');
         },
@@ -31,6 +30,7 @@
             snapToSidesOnly: false,
             moveWithinArea: 'parent',
             negativeMoving: false,
+            allowOverresizing: false,
             resizeByWheel: true,
             ignoreOnElements: [],
             snapToRects: [],
@@ -212,7 +212,37 @@
                 if (typeof cordova != 'undefined' && _isiOS) _isiOSCordova = true;
                 if (typeof cordova != 'undefined' && _isAndroid) _isAndroidCordova = true;
 
-
+                function capturePointer(e) {
+                    if (e.type == 'touchstart' || e.type == 'mousedown') {
+                        tool.pointerInfo.pointerIsPressed = true;
+                        tool.pointerInfo.startX = tool.pointerInfo.prevX = _isTouchScreen && e.touches ? e.touches[0].clientX : e.clientX;
+                        tool.pointerInfo.startY = tool.pointerInfo.prevY = _isTouchScreen && e.touches ? e.touches[0].clientY : e.clientY;
+                        return;
+                    }
+            
+                    if (e.type == 'touchmove' || e.type == 'mousemove') {
+                        tool.pointerInfo.prevX = _isTouchScreen && e.touches ? e.changedTouches[0].clientX : e.clientX;
+                        tool.pointerInfo.prevY = _isTouchScreen && e.touches ? e.changedTouches[0].clientY : e.clientY;
+                        return;
+                    }
+            
+                    if (e.type == 'touchend' || e.type == 'mouseup') {
+                        tool.pointerInfo.pointerIsPressed = false;
+                        tool.pointerInfo.endX = _isTouchScreen && e.touches ? e.changedTouches[0].clientX : e.clientX;
+                        tool.pointerInfo.endY = _isTouchScreen && e.touches ? e.changedTouches[0].clientY : e.clientY;
+                        return;
+                    }
+            
+                }
+            
+                window.addEventListener(_isTouchScreen ? 'touchstart' : 'mousedown', function (e) {
+                    capturePointer(e);
+                    window.addEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', capturePointer);
+                    window.addEventListener(_isTouchScreen ? 'touchend' : 'mouseup', function (e) {
+                        capturePointer(e);
+                        window.removeEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', capturePointer);
+                    });
+                });
 
                 var _dragElementTool = (function () {
                     var posX, posY, divTop, divLeft, eWi, eHe, cWi, cHe, maxX, maxY, diffX, diffY, snappedTo;
@@ -394,11 +424,11 @@
                                 }
                             }
                         }
-            
+
                         if (!tool.state.active || evt.button == 1 || evt.button == 2) return;
-            
+
                         if (tool.state.isResizing || (_isTouchScreen && (tool.state.isResizing || evt.targetTouches.length != 1))) return;
-            
+
                         tool.state.isMoving = true;
             
                         var elRect = _elementToMove.getBoundingClientRect();
@@ -444,18 +474,20 @@
                         maxY = moveWithinRect.y + moveWithinRect.height;
                         diffX = posX - divLeft, diffY = posY - divTop;
             
-                        tool.events.dispatch(Q.Pointer.move);
+                        tool.events.dispatch('movingstart');
             
                         if (_isTouchScreen) {
                             window.addEventListener('touchmove', drag, { passive: false });
                         } else {
-                            window.addEventListener(Q.Pointer.move, drag, { passive: false });
+                            window.addEventListener('mousemove', drag, { passive: false });
                         }
                     }
             
                     function stopMoving(e) {
             
-                        window.removeEventListener(Q.Pointer.move, drag, { passive: false });
+                        if (_isTouchScreen) {
+                            window.removeEventListener('touchmove', drag, { passive: false });
+                        } else window.removeEventListener('mousemove', drag, { passive: false });
             
                         if (_elementToMove != null) _elementToMove.style.cursor = '';
             
@@ -501,22 +533,22 @@
                         
                         function prepareMoving() {
                             var checkIfShouldInitMoving = function (e) {
-                                if (!tool.state.isMoving && tool.pointerInfo.mouseIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10) {
+                                if (!tool.state.isMoving && tool.pointerInfo.pointerIsPressed && distance(tool.pointerInfo.startX, tool.pointerInfo.startY, tool.pointerInfo.prevX, tool.pointerInfo.prevY) > 10) {
                                     initMoving(e);
                                 }
                             }
                             var removeCheckIfShouldInitMovingListener = function () {
-                                activateOnElement.removeEventListener(Q.Pointer.move, checkIfShouldInitMoving, false);
-                                window.removeEventListener(Q.Pointer.end, removeCheckIfShouldInitMovingListener, true);
+                                activateOnElement.removeEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', checkIfShouldInitMoving, false);
+                                window.removeEventListener(_isTouchScreen ? 'touchend' : 'mouseup', removeCheckIfShouldInitMovingListener, true);
                             }
 
-                            activateOnElement.addEventListener(Q.Pointer.move, checkIfShouldInitMoving, false);
-                            window.addEventListener(Q.Pointer.end, removeCheckIfShouldInitMovingListener, true);
+                            activateOnElement.addEventListener(_isTouchScreen ? 'touchmove' : 'mousemove', checkIfShouldInitMoving, false);
+                            window.addEventListener(_isTouchScreen ? 'touchend' : 'mouseup', removeCheckIfShouldInitMovingListener, true);
                         }
                         
-                        activateOnElement.addEventListener(Q.Pointer.start, prepareMoving)
+                        activateOnElement.addEventListener(_isTouchScreen ? 'touchstart' : 'mousedown', prepareMoving)
 
-                        window.addEventListener(Q.Pointer.end, stopMoving, true);
+                        window.addEventListener(_isTouchScreen ? 'touchend' : 'mouseup', stopMoving, true);
                     }
             
                     return {
@@ -591,8 +623,8 @@
                         originalMouseY = e.clientY;
             
                         tool.state.isResizing = true;
-                        window.addEventListener(Q.Pointer.move, startResizing);
-                        window.addEventListener(Q.Pointer.end, stopResizing);
+                        window.addEventListener('mousemove', startResizing);
+                        window.addEventListener('mouseup', stopResizing);
                     }
             
                     function keepRatio(width, height, priorityParam) {
@@ -1168,8 +1200,8 @@
                     function stopResizing(e) {
                         e.preventDefault();
                         e.stopPropagation();
-                        window.removeEventListener(Q.Pointer.move, startResizing);
-                        window.removeEventListener(Q.Pointer.end, stopResizing);
+                        window.removeEventListener('mousemove', startResizing);
+                        window.removeEventListener('mouseup', stopResizing);
                         _ratio = null;
                         tool.state.isResizing = false;
             
@@ -1182,7 +1214,7 @@
                     }
             
                     function resizeByPinchGesture() {
-                        Q.addEventListener(_elementToResize, 'touchstart', startResizingByPinch);
+                        _elementToResize.addEventListener('touchstart', startResizingByPinch);
                     }
             
                     function startResizingByPinch(e) {
@@ -1351,7 +1383,7 @@
                         var elRect = _elementToResize.getBoundingClientRect();
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
             
-                        /*if (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth) {
+                        /*if (!tool.state.allowOverresizing && (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth)) {
             
                             _elementToResize.style.width = oldWidth + 'px';
                             _elementToResize.style.height = oldHeight + 'px';
@@ -1359,9 +1391,10 @@
             
                             return;
                         }*/
-            
+
                         var elRect = _elementToResize.getBoundingClientRect();
                         if (elementPosition == 'fixed' || elementPosition == 'absolute') {
+
                             _elementToResize.style.left = _centerPosition - (elRect.width / 2) + 'px';
                             _elementToResize.style.top = _centerPositionFromTop - (elRect.height / 2) + 'px';            
                         }
@@ -1369,8 +1402,9 @@
                         var elementWidth = elRect.width;
                         var elementHeight = elRect.height;
                         if (tool.state.keepRatioBasedOnElement != null) {
-            
+
                             var baseEl = tool.state.keepRatioBasedOnElement;
+
                             var srcWidth, srcHeight, ratio
                             if (typeof baseEl == 'object' && !(baseEl instanceof HTMLVideoElement)) {
                                 srcWidth = baseEl.width;
@@ -1388,11 +1422,12 @@
                                 elementHeight = elementWidth / ratio;
                             }
                         }
-            
+
                         _elementToResize.style.width = elementWidth + 'px';
                         _elementToResize.style.height = elementHeight + 'px';
                         _elementToResize.style.top = elRect.top - containerRect.top + 'px';
                         _elementToResize.style.left = elRect.left - containerRect.left + 'px';
+                        
                         _elementToResize.style.transform = '';
                         //}, 100);
                         tool.events.dispatch('resizing', { width: elementWidth, height: elementHeight, x: elRect.left - containerRect.left, y: elRect.top - containerRect.top });
@@ -1554,37 +1589,6 @@
                 function distance(x1, y1, x2, y2) {
                     return Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
                 }
-                function capturePointer(e) {
-                    if (e.type == Q.Pointer.start) {
-                        tool.pointerInfo.mouseIsPressed = true;
-                        tool.pointerInfo.startX = tool.pointerInfo.prevX = _isTouchScreen ? e.touches[0].clientX : e.clientX;
-                        tool.pointerInfo.startY = tool.pointerInfo.prevY = _isTouchScreen ? e.touches[0].clientY : e.clientY;
-                        return;
-                    }
-            
-                    if (e.type == Q.Pointer.move) {
-                        tool.pointerInfo.prevX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
-                        tool.pointerInfo.prevY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
-                        return;
-                    }
-            
-                    if (e.type == Q.Pointer.end) {
-                        tool.pointerInfo.mouseIsPressed = false;
-                        tool.pointerInfo.endX = _isTouchScreen ? e.changedTouches[0].clientX : e.clientX;
-                        tool.pointerInfo.endY = _isTouchScreen ? e.changedTouches[0].clientY : e.clientY;
-                        return;
-                    }
-            
-                }
-            
-                window.addEventListener(Q.Pointer.start, function (e) {
-                    capturePointer(e);
-                    window.addEventListener(Q.Pointer.move, capturePointer);
-                    window.addEventListener(Q.Pointer.end, function (e) {
-                        capturePointer(e);
-                        window.removeEventListener(Q.Pointer.move, capturePointer);
-                    });
-                });
             
                 function EventSystem() {
             
