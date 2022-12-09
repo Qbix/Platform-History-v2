@@ -1,3 +1,14 @@
-.Assets_NFT_sales_whitelist_form {
-    padding:10px 20px 20px 20px;
+.Assets_NFT_sales_whitelist_form .Q_dialog_content {
+    padding: 10px;
+    white-space: nowrap;
+}
+.Assets_NFT_sales_whitelist_form input,
+.Assets_NFT_sales_whitelist_form button {
+    display: inline-block;
+}
+.Assets_NFT_sales_whitelist_form input {
+    width: 200px;
+}
+.Assets_NFT_sales_whitelist_tool h3 {
+    margin:0;
 }
