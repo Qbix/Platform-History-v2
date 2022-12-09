@@ -15044,6 +15044,39 @@ Q.Camera = {
 };
 
 /**
+ * Operates with colors.
+ * @class Q.Colors
+ */
+ Q.Color = {
+	/**
+	 * 
+	 * @param {String|Number} startColor 
+	 * @param {String|Number} endColor 
+	 * @param {String|Number} fraction 
+	 * @returns {String} a color as a hex string without '#' in front
+	 */
+	between: function(startColor, endColor, fraction) {
+
+		if (typeof startColor === 'string') {
+			startColor = parseInt(startColor.replace('#', '0x'), 16);
+		}
+		if (typeof endColor === 'string') {
+			endColor = parseInt(endColor.replace('#', '0x'), 16);
+		}
+		var startRed = (startColor >> 16) & 0xFF;
+		var startGreen = (startColor >> 8) & 0xFF;
+		var startBlue = startColor & 0xFF;
+		var endRed = (endColor >> 16) & 0xFF;
+		var endGreen = (endColor >> 8) & 0xFF;
+		var endBlue = endColor & 0xFF;
+		var newRed = startRed + fraction * (endRed - startRed);
+		var newGreen = startGreen + fraction * (endGreen - startGreen);
+		var newBlue = startBlue + fraction * (endBlue - startBlue);
+		return (newRed << 16 | newGreen << 8 | newBlue).toString(16);
+	}
+}
+
+/**
  * Operates with notices.
  * @class Q.Notices
  */

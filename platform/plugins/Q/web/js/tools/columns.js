@@ -657,6 +657,8 @@ Q.Tool.define("Q/columns", function(options) {
 				var duration = o.animation.duration;
 				var $cs = $('.Q_column_slot', $div);
 				var $ct = $('.Q_columns_title', $div);
+
+				_updateThemeColor(index-1, index, duration);
 				
 				var $prev = $div.prev();
 				$div.css('z-index', parseInt($prev.css('z-index'))+1 || 1);
@@ -854,6 +856,8 @@ Q.Tool.define("Q/columns", function(options) {
 			$parents.siblings().removeClass('Q_columns_siblingContainsExpanded');
 		}
 		
+		_updateThemeColor(index, index-1, duration);
+
 		if (duration) {
 			$div.animate($div.data(dataKey_hide), duration, _close);
 		} else {
@@ -1201,7 +1205,23 @@ Q.invoke.handlers.unshift(function (options, callback) {
 		return false;
 	}
 });
-	
+
+var originalColor = $('meta[name="theme-color"]').attr('content');
+function _updateThemeColor(fromIndex, toIndex, duration) {
+	if (fromIndex < 0 || !$('html').hasClass('Q_columns_animationFX')) {
+		return;
+	}
+	var black = '#000000';
+	var shades = [0, 0.3, 0.43, 0.47, 0.5];
+	var fromIndex = Math.min(shades.length-1, fromIndex);
+	var toIndex = Math.max(0, Math.min(shades.length-1, toIndex));
+	var fromColor = Q.Color.between(originalColor, black, shades[fromIndex]);
+	var toColor = Q.Color.between(originalColor, black, shades[toIndex]);
+	Q.Animation.play(function (x, y) {
+		$('meta[name="theme-color"]')
+		.attr('content', '#' + Q.Color.between(fromColor, toColor, y));
+	}, duration);
+}
 
 })(Q, jQuery);
 
