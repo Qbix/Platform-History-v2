@@ -1124,7 +1124,6 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 				Q.handle(callback, this);
 			}
 		} catch (e) {
-			// continue after a hook, because we need to set Q.Tool.latestName
 			console.warn(e);
 		}
 	}, key);
@@ -4149,8 +4148,6 @@ Q.Tool.options = {
 
 Q.Tool.active = {};
 Q.Tool.names = {};
-Q.Tool.latestName = null;
-Q.Tool.latestNames = {};
 
 var _constructToolHandlers = {};
 var _activateToolHandlers = {};
@@ -4345,7 +4342,6 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		Q.extend(ctor.prototype, 10, methods);
 		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
 		Q.Tool.onLoadedConstructor("").handle(n, ctor);
-		Q.Tool.latestName = n;
 	}
 	return ctor;
 };
@@ -4432,7 +4428,6 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods, overwri
 	if ($) {
 		_onJQuery();
 	}
-	Q.Tool.latestName = n;
 	function _onJQuery() {
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
 			var key = n + ' state', args;
@@ -5272,10 +5267,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				});
 				_processTemplateElements(div);
 			}
-			if (Q.Tool.latestName) { // Q.Tool.define() was called
-				_qtc[toolName] = _qtc[Q.Tool.latestName];
-				Q.Tool.latestNames[toolConstructor] = Q.Tool.latestName;
-			}
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function') {
 				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
@@ -5351,11 +5342,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		if (!toolConstructorSrc) {
 			throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
 		}
-		if (Q.Tool.latestNames[toolConstructorSrc]) {
-			Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
-			return _loadToolScript_loaded();
-		}
-		Q.Tool.latestName = null;
 		var pipe = Q.pipe(), waitFor = [];
 		if (toolConstructor.js) {
 			waitFor.push('js');
