@@ -314,13 +314,12 @@ Q.Tool.jQuery('Q/overlay',
 				if (!($lastDialog instanceof jQuery)) {
 					$lastDialog = $($lastDialog);
 				}
-
 				var zIndex = parseInt($lastDialog.css('z-index'));
 				if (zIndex) {
 					Q.Masks.mask('Q.screen.mask', {'zIndex': zIndex - 1});
 				}
 			}
-		})
+		}, 'Q.Dialogs.updateMask')
 	},
 
 	{

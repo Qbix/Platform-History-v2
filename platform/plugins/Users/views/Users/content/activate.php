@@ -1,4 +1,4 @@
-<div id="content" class="Q_clearfix">
+<div class="Users_activate_container Q_clearfix">
 <?php if ($user) : ?>
 	<?php if (empty($_REQUEST['p']) and !empty($user->passphraseHash)): ?>
 		<div class="Q_admin_pane">
@@ -149,6 +149,8 @@
 	// later we can pay for BOSS to do this. But for now, here is what we do:
 	var url = "https://query.yahooapis.com/v1/public/yql?format=json&diagnostics=false&q=SELECT+Rating.LastReviewIntro+from+local.search+WHERE+zip+%3D+%2210001%22+AND+%28query%3D%22{{verb_ue}}%22+OR+query%3D%22{{noun_ue}}%22%29+AND+Rating.LastReviewIntro+MATCHES+%22%5E.%2B%22+LIMIT+10";
 	
+	$(".Users_activate_container .Q_buttons .Q_button").plugin("Q/clickable");
+
 	Q.request(url, null, function(err, data) {
 		if (data.query && data.query.results && data.query.results.Result) {
 			// var r = data.query.results.result;

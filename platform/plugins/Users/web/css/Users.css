@@ -621,12 +621,17 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	white-space: normal;
 }
 
-.Users_activate #content {
+.Users_activate_container {
 	padding-top: 50px;
 }
 
-.Users_activate .Q_buttons {
+.Users_activate_container .Q_buttons {
 	padding: 10px;
+	margin-top: 10px;
+}
+
+.Q_notMobile .Users_activate_dialog {
+	min-width: 800px;
 }
 
 #WEB3_CONNECT_MODAL_ID {

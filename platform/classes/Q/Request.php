@@ -775,30 +775,6 @@ class Q_Request
 	}
 	
 	/**
-	 * Gets all the names of the fields with no value or equal
-	 * @method special
-	 * @param {String|Array|Object} name The name of the field. If it's an array, returns an object of {name: value} pairs. If it's an object, then they are added onto the querystring and the result is returned. If it's a string, it's the name of the field to get. And if it's an empty string, then we get the array of field names with no value, e.g. ?123&456&a=b returns array(123,456)
-	 * @param {mixed} $default what to return if field is missing
-	 * @param {string} [$source=null] optionally provide an array to use instead of $_REQUEST
-	 * @static
-	 * @return {mixed|null}
-	 */
-	static function queryField($name)
-	{
-		if ($name) {
-			$name = str_replace('.', '_', $name);
-			return isset($_REQUEST[$name]) ? $_REQUEST[$name] : null;
-		}
-		$result = array();
-		foreach ($_REQUEST as $k => $v) {
-			if (empty($v)) {
-				$result[] = $k;
-			}
-		}
-		return $result;
-	}
-	
-	/**
 	 * Gets a field passed in special part of the request
 	 * @method special
 	 * @param {string} $fieldname the name of the field, which can be namespaced as "Module.fieldname"

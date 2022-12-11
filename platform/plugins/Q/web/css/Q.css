@@ -680,7 +680,7 @@ html.Q_scanning body > .Q_scanning_code {
 	height: 100%;
 	box-sizing: border-box;
 	position: relative;
-	min-width: 50px;
+	min-width: 300px;
 	min-height: 50px;
 }
 .Q_scanning.Q_fullscreen_dialog .Q_dialog_content {
