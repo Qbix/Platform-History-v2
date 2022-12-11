@@ -4155,16 +4155,17 @@
 		},
 
 		login: function (signedCallback, authenticatedCallback) {
-			Users.prevDocumentTitle = document.title;
+			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
+			var _prevMetaTitle = $('meta[name="title"]').attr('content');
+			$('meta[name="title"').attr('content', Users.communityName);
+			var _prevOGTitle = $('meta[property="og:title"]').attr('content');
+			$('meta[property="og:title"]').attr('content', Users.communityName);
 			Web3.connect(function (err, provider) {
-				if (Users.prevDocumentTitle) {
-					document.title = Users.prevDocumentTitle;
-					delete Users.prevDocumentTitle;
-				}
 				if (err) {
 					return _cancel();
 				}
+				_restoreTitle();
 				Web3.provider = provider;
 
 				// Subscribe to accounts change
@@ -4251,11 +4252,19 @@
 				}).catch(_cancel);
 			});
 			function _cancel() {
-				if (Users.prevDocumentTitle) {
-					document.title = Users.prevDocumentTitle;
-					delete Users.prevDocumentTitle;
-				}
+				_restoreTitle();
 				Q.handle(callback, Users, [null]);
+			}
+			function _restoreTitle() {
+				if (_prevDocumentTitle) {
+					document.title = Users.prevDocumentTitle;
+				}
+				if (_prevMetaTitle) {
+					$('meta[name="title"').attr('content', _prevMetaTitle)
+				}
+				if (_prevOGTitle) {
+					$('meta[property="og:title"').attr('content', _prevOGTitle)
+				}
 			}
 		},
 		
