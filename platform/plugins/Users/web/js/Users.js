@@ -4251,6 +4251,10 @@
 				}).catch(_cancel);
 			});
 			function _cancel() {
+				if (Users.prevDocumentTitle) {
+					document.title = Users.prevDocumentTitle;
+					delete Users.prevDocumentTitle;
+				}
 				Q.handle(callback, Users, [null]);
 			}
 		},
