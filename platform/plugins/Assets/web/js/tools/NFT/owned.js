@@ -134,7 +134,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", {
 					tokenId: result.tokenId,
 					tokenURI: result.tokenURI,
-					secondsLeft: result.secondsLeft,
+					untilTimestamp: result.untilTimestamp,
 					owner: result.owner,
 					ownerUserId: result.ownerUserId,
 					metadata: result.metadata,
