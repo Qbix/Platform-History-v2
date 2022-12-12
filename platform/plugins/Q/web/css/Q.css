@@ -71,7 +71,7 @@ table { border-spacing:0; border-collapse:collapse; }
 
 /* Common Q classes */
 .Q_hide { display: none !important; }
-.Q_hideUntilLoaded { opacity: 0; transition: opacity 300ms; }
+.Q_hideUntilLoaded body { opacity: 0; }
 .Q_blink { animation: Q_blink .5s step-end infinite alternate; }
 .Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
