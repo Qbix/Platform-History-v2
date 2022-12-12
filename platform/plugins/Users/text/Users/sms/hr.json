@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Jeste li htjeli poništiti svoju zaporku u {{1}}?",
-        "ClickHere": "Zatim kliknite ovdje: {{1}}"
+        "ClickHere": "Zatim kliknite ovdje: {{1}}",
+        "OrEnterCode": "ili unesite kod:"
     }
 }

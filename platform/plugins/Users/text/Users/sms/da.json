@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Ville du nulstille din adgangssætning i {{1}}?",
-        "ClickHere": "Klik derefter her: {{1}}"
+        "ClickHere": "Klik derefter her: {{1}}",
+        "OrEnterCode": "eller indtast kode:"
     }
 }

@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Vai vēlējāties atiestatīt ieejas frāzi šādā valodā: {{1}}?",
-        "ClickHere": "Pēc tam noklikšķiniet šeit: {{1}}"
+        "ClickHere": "Pēc tam noklikšķiniet šeit: {{1}}",
+        "OrEnterCode": "vai ievadiet kodu:"
     }
 }

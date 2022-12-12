@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Vildirðu endurstilla aðgangsorðið þitt í {{1}}?",
-        "ClickHere": "Smelltu síðan hér: {{1}}"
+        "ClickHere": "Smelltu síðan hér: {{1}}",
+        "OrEnterCode": "eða sláðu inn kóða:"
     }
 }

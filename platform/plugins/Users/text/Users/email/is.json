@@ -3,7 +3,8 @@
         "Subject": "Velkominn! Vinsamlegast staðfestu netfangið þitt.",
         "Thanks": "Velkomin(n) til {{1}}",
         "ReallyYourEmail": "Er þetta virkilega netfangið þitt, {{1}}? Ef svo er, smelltu <a href='{{2}}'>hér<\/a> til að stilla lykilorðið þitt og virkja reikninginn þinn.",
-        "SeeYou": "Sjáumst á <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Sjáumst á <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Annars smelltu á <a href='{{1}}'>þennan hlekk<\/a> ."
     },
     "identifier": {
         "Subject": "Velkominn! Staðfestu netfangið þitt."

@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Chceli ste obnoviť svoju prístupovú frázu v {{1}}?",
-        "ClickHere": "Potom kliknite sem: {{1}}"
+        "ClickHere": "Potom kliknite sem: {{1}}",
+        "OrEnterCode": "alebo zadajte kód:"
     }
 }

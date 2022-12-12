@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Czy chcesz zresetować swoje hasło w {{1}}?",
-        "ClickHere": "Następnie kliknij tutaj: {{1}}"
+        "ClickHere": "Następnie kliknij tutaj: {{1}}",
+        "OrEnterCode": "lub wprowadź kod:"
     }
 }

@@ -3,7 +3,8 @@
         "Subject": "Croeso! Gwiriwch eich cyfeiriad e-bost.",
         "Thanks": "Croeso i {{1}}",
         "ReallyYourEmail": "Ai hwn yw eich cyfeiriad e-bost mewn gwirionedd, {{1}}? Os felly, cliciwch <a href='{{2}}'>yma<\/a> i osod eich cyfrinair ac actifadu eich cyfrif.",
-        "SeeYou": "Welwn ni chi ar <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Welwn ni chi ar <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Fel arall, cliciwch ar <a href='{{1}}'>y ddolen hon<\/a> ."
     },
     "identifier": {
         "Subject": "Croeso! Gwiriwch eich cyfeiriad e-bost."

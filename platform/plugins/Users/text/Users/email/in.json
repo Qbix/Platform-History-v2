@@ -3,7 +3,8 @@
         "Subject": "Selamat datang! Harap verifikasi alamat email Anda.",
         "Thanks": "Selamat datang di {{1}}",
         "ReallyYourEmail": "Apakah ini benar-benar alamat email Anda, {{1}}? Jika demikian, klik <a href='{{2}}'>di sini<\/a> untuk mengatur frasa sandi Anda dan mengaktifkan akun Anda.",
-        "SeeYou": "Sampai jumpa di <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Sampai jumpa di <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Jika tidak, klik <a href='{{1}}'>tautan ini<\/a> ."
     },
     "identifier": {
         "Subject": "Selamat datang! Verifikasi alamat email Anda."

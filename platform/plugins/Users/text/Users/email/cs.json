@@ -3,7 +3,8 @@
         "Subject": "Vítejte! Ověřte prosím svou e-mailovou adresu.",
         "Thanks": "Vítejte v {{1}}",
         "ReallyYourEmail": "Je to opravdu vaše e-mailová adresa, {{1}}? Pokud ano, klikněte <a href='{{2}}'>sem<\/a> a nastavte si přístupové heslo a aktivujte svůj účet.",
-        "SeeYou": "Uvidíme se na <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Uvidíme se na <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "V opačném případě klikněte na <a href='{{1}}'>tento odkaz<\/a> ."
     },
     "identifier": {
         "Subject": "Vítejte! Ověřte svou e-mailovou adresu."

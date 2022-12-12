@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Kas tahtsite oma parooli lähtestada keeles {{1}}?",
-        "ClickHere": "Seejärel klõpsake siin: {{1}}"
+        "ClickHere": "Seejärel klõpsake siin: {{1}}",
+        "OrEnterCode": "või sisesta kood:"
     }
 }

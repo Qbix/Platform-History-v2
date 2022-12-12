@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Você deseja redefinir sua senha em {{1}}?",
-        "ClickHere": "Então clique aqui: {{1}}"
+        "ClickHere": "Então clique aqui: {{1}}",
+        "OrEnterCode": "ou digite o código:"
     }
 }

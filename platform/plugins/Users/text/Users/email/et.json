@@ -3,7 +3,8 @@
         "Subject": "Tere tulemast! Palun kinnitage oma e-posti aadress.",
         "Thanks": "Tere tulemast {{1}}",
         "ReallyYourEmail": "Kas see on tõesti teie e-posti aadress, {{1}}? Kui jah, klõpsake parooli määramiseks ja konto aktiveerimiseks <a href='{{2}}'>siin<\/a> .",
-        "SeeYou": "Kohtumiseni <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Kohtumiseni <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Vastasel juhul klõpsake <a href='{{1}}'>sellel lingil<\/a> ."
     },
     "identifier": {
         "Subject": "Tere tulemast! Kinnita oma e-posti aadress."

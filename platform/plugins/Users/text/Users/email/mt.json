@@ -3,7 +3,8 @@
         "Subject": "Merħba! Jekk jogħġbok ivverifika l-indirizz elettroniku tiegħek.",
         "Thanks": "Merħba għal {{1}}",
         "ReallyYourEmail": "Dan huwa verament l-indirizz elettroniku tiegħek, {{1}}? Jekk iva, ikklikkja <a href='{{2}}'>hawn<\/a> biex issettja l-passphrase tiegħek u tattiva l-kont tiegħek.",
-        "SeeYou": "Narawkom fuq <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Narawkom fuq <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Inkella, ikklikkja <a href='{{1}}'>din il-link<\/a> ."
     },
     "identifier": {
         "Subject": "Merħba! Ivverifika l-indirizz elettroniku tiegħek."

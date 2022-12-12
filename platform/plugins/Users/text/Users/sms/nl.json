@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Wil je je wachtwoordzin resetten in {{1}}?",
-        "ClickHere": "Klik dan hier: {{1}}"
+        "ClickHere": "Klik dan hier: {{1}}",
+        "OrEnterCode": "of voer code in:"
     }
 }

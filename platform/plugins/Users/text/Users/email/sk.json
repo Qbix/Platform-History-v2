@@ -3,7 +3,8 @@
         "Subject": "Vitajte! Overte svoju e-mailovú adresu.",
         "Thanks": "Vitajte v {{1}}",
         "ReallyYourEmail": "Je toto naozaj vaša e-mailová adresa, {{1}}? Ak áno, kliknite <a href='{{2}}'>sem<\/a> a nastavte si prístupovú frázu a aktivujte svoj účet.",
-        "SeeYou": "Uvidíme sa na <a href='{{1}}'>{{100}}<\/a> !"
+        "SeeYou": "Uvidíme sa na <a href='{{1}}'>{{100}}<\/a> !",
+        "OtherwiseClickLink": "V opačnom prípade kliknite na <a href='{{1}}'>tento odkaz<\/a> ."
     },
     "identifier": {
         "Subject": "Vitajte! Overte svoju e-mailovú adresu."

@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Ali ste želeli ponastaviti svoje geslo v {{1}}?",
-        "ClickHere": "Nato kliknite tukaj: {{1}}"
+        "ClickHere": "Nato kliknite tukaj: {{1}}",
+        "OrEnterCode": "ali vnesite kodo:"
     }
 }

@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "¿Querías restablecer tu contraseña en {{1}}?",
-        "ClickHere": "Entonces haga clic aquí: {{1}}"
+        "ClickHere": "Entonces haga clic aquí: {{1}}",
+        "OrEnterCode": "o ingrese el código:"
     }
 }

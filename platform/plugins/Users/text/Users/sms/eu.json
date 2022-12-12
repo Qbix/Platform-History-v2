@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Pasaesaldia {{1}}-n berrezarri nahi al duzu?",
-        "ClickHere": "Ondoren, egin klik hemen: {{1}}"
+        "ClickHere": "Ondoren, egin klik hemen: {{1}}",
+        "OrEnterCode": "edo idatzi kodea:"
     }
 }

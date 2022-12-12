@@ -3,7 +3,8 @@
         "Subject": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
         "Thanks": "Tervetuloa {{1}}",
         "ReallyYourEmail": "Onko tämä todella sähköpostiosoitteesi, {{1}}? Jos näin on, napsauta <a href='{{2}}'>tätä<\/a> asettaaksesi tunnuslauseesi ja aktivoidaksesi tilisi.",
-        "SeeYou": "Nähdään <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Nähdään <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Muussa tapauksessa napsauta <a href='{{1}}'>tätä linkkiä<\/a> ."
     },
     "identifier": {
         "Subject": "Tervetuloa! Vahvista sähköpostiosoitteesi."

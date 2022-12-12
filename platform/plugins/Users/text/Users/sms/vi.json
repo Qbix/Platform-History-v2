@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Bạn có muốn đặt lại cụm mật khẩu của mình trong {{1}} không?",
-        "ClickHere": "Sau đó nhấp vào đây: {{1}}"
+        "ClickHere": "Sau đó nhấp vào đây: {{1}}",
+        "OrEnterCode": "hoặc nhập mã:"
     }
 }

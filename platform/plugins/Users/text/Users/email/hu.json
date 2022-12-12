@@ -3,7 +3,8 @@
         "Subject": "Üdvözöljük! Kérem ellenőrizze az email címét.",
         "Thanks": "Üdvözöljük itt: {{1}}",
         "ReallyYourEmail": "Ez valóban az Ön e-mail címe, {{1}}? Ha igen, kattintson <a href='{{2}}'>ide<\/a> a jelszó beállításához és a fiók aktiválásához.",
-        "SeeYou": "Találkozunk itt: <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Találkozunk itt: <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Ellenkező esetben kattintson <a href='{{1}}'>erre a linkre<\/a> ."
     },
     "identifier": {
         "Subject": "Üdvözöljük! Erősítsd meg az e-mail címed."

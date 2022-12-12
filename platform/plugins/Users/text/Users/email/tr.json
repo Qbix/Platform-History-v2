@@ -3,7 +3,8 @@
         "Subject": "Hoş geldin! Lütfen email adresini doğrula.",
         "Thanks": "{{1}}&#39;a hoş geldiniz",
         "ReallyYourEmail": "Bu gerçekten e-posta adresiniz mi {{1}}? Öyleyse, parolanızı belirlemek ve hesabınızı etkinleştirmek için <a href='{{2}}'>burayı tıklayın<\/a> .",
-        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> &#39;da görüşmek üzere!"
+        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> &#39;da görüşmek üzere!",
+        "OtherwiseClickLink": "Aksi takdirde, <a href='{{1}}'>bu bağlantıyı<\/a> tıklayın."
     },
     "identifier": {
         "Subject": "Hoş geldin! Eposta adresinizi doğrulayın."

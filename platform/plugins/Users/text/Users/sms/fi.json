@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Halusitko nollata tunnuslauseesi kohteessa {{1}}?",
-        "ClickHere": "Napsauta sitten tätä: {{1}}"
+        "ClickHere": "Napsauta sitten tätä: {{1}}",
+        "OrEnterCode": "tai syötä koodi:"
     }
 }

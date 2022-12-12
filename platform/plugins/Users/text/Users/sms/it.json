@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Volevi reimpostare la tua passphrase in {{1}}?",
-        "ClickHere": "Quindi fai clic qui: {{1}}"
+        "ClickHere": "Quindi fai clic qui: {{1}}",
+        "OrEnterCode": "oppure inserisci il codice:"
     }
 }

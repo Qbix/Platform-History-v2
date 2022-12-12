@@ -3,7 +3,8 @@
         "Subject": "Välkommen! Vänligen verifiera din email adress.",
         "Thanks": "Välkommen till {{1}}",
         "ReallyYourEmail": "Är det här verkligen din e-postadress, {{1}}? Om så är fallet, klicka <a href='{{2}}'>här<\/a> för att ställa in din lösenfras och aktivera ditt konto.",
-        "SeeYou": "Vi ses på <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Vi ses på <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Annars klickar du på <a href='{{1}}'>den här länken<\/a> ."
     },
     "identifier": {
         "Subject": "Välkommen! Verifiera din e-postadress."

@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Vissza akarta állítani összetett jelszavát itt: {{1}}?",
-        "ClickHere": "Akkor kattintson ide: {{1}}"
+        "ClickHere": "Akkor kattintson ide: {{1}}",
+        "OrEnterCode": "vagy írja be a kódot:"
     }
 }

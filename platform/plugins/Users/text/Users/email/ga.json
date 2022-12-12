@@ -3,7 +3,8 @@
         "Subject": "Fáilte romhat! Fíoraigh do sheoladh ríomhphoist.",
         "Thanks": "Fáilte go {{1}}",
         "ReallyYourEmail": "An é seo do sheoladh ríomhphoist i ndáiríre, {{1}}? Más ea, cliceáil <a href='{{2}}'>anseo<\/a> chun do phasfhrása a shocrú agus do chuntas a ghníomhachtú.",
-        "SeeYou": "Féach leat ar <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Féach leat ar <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Seachas sin, cliceáil ar <a href='{{1}}'>an nasc seo<\/a> ."
     },
     "identifier": {
         "Subject": "Fáilte romhat! Fíoraigh do sheoladh ríomhphoist."

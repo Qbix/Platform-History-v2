@@ -3,7 +3,8 @@
         "Subject": "Herzlich willkommen! Bitte bestätigen sie ihre E-Mail Adresse.",
         "Thanks": "Willkommen bei {{1}}",
         "ReallyYourEmail": "Ist das wirklich Ihre E-Mail-Adresse, {{1}}? Klicken Sie in diesem Fall <a href='{{2}}'>hier<\/a> , um Ihre Passphrase festzulegen und Ihr Konto zu aktivieren.",
-        "SeeYou": "Wir sehen uns auf <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Wir sehen uns auf <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Andernfalls klicken Sie auf <a href='{{1}}'>diesen Link<\/a> ."
     },
     "identifier": {
         "Subject": "Herzlich willkommen! Bestätige deine Email-Adresse."

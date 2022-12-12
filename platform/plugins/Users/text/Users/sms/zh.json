@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "您想在 {{1}} 中重置您的密码吗？",
-        "ClickHere": "然后点击这里：{{1}}"
+        "ClickHere": "然后点击这里：{{1}}",
+        "OrEnterCode": "或输入代码："
     }
 }

@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Ați vrut să vă resetați expresia de acces în {{1}}?",
-        "ClickHere": "Apoi faceți clic aici: {{1}}"
+        "ClickHere": "Apoi faceți clic aici: {{1}}",
+        "OrEnterCode": "sau introduceți codul:"
     }
 }

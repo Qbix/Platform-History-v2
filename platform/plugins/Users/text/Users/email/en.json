@@ -3,6 +3,7 @@
         "Subject": "Welcome! Please verify your email address.",
         "Thanks": "Welcome to {{1}}",
         "ReallyYourEmail": "Is this really your email address, {{1}}? If so, click <a href='{{2}}'>here<\/a> to set your passphrase and activate your account.",
+        "OtherwiseClickLink": "Otherwise, click <a href='{{1}}'>this link<\/a>.",
         "SeeYou": "See you on <a href='{{1}}'>{{2}}<\/a>!"
     },
     "identifier": {

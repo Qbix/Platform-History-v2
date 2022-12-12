@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Apakah Anda ingin menyetel ulang frasa sandi Anda di {{1}}?",
-        "ClickHere": "Kemudian klik di sini: {{1}}"
+        "ClickHere": "Kemudian klik di sini: {{1}}",
+        "OrEnterCode": "atau masukkan kode:"
     }
 }

@@ -3,7 +3,8 @@
         "Subject": "Maligayang pagdating! Mangyaring i-verify ang iyong email address.",
         "Thanks": "Maligayang pagdating sa {{1}}",
         "ReallyYourEmail": "Ito ba talaga ang iyong email address, {{1}}? Kung gayon, mag-click <a href='{{2}}'>dito<\/a> upang itakda ang iyong passphrase at i-activate ang iyong account.",
-        "SeeYou": "Magkita-kita tayo sa <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Magkita-kita tayo sa <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Kung hindi, i-click <a href='{{1}}'>ang link na ito<\/a> ."
     },
     "identifier": {
         "Subject": "Maligayang pagdating! I-verify ang iyong email address."

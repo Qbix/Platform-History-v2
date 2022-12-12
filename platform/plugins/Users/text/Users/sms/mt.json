@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Ridt tirrisettja l-passphrase tiegħek fi {{1}}?",
-        "ClickHere": "Imbagħad ikklikkja hawn: {{1}}"
+        "ClickHere": "Imbagħad ikklikkja hawn: {{1}}",
+        "OrEnterCode": "jew daħħal il-kodiċi:"
     }
 }

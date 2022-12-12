@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Je, ulitaka kuweka upya neno lako la siri katika {{1}}?",
-        "ClickHere": "Kisha bofya hapa: {{1}}"
+        "ClickHere": "Kisha bofya hapa: {{1}}",
+        "OrEnterCode": "au ingiza msimbo:"
     }
 }

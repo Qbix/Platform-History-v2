@@ -3,7 +3,8 @@
         "Subject": "Karibu! Tafadhali thibitisha anwani yako ya barua pepe.",
         "Thanks": "Karibu kwenye {{1}}",
         "ReallyYourEmail": "Je, hii kweli ni anwani yako ya barua pepe, {{1}}? Ikiwa ndivyo, bofya <a href='{{2}}'>hapa<\/a> ili kuweka kaulisiri yako na kuamilisha akaunti yako.",
-        "SeeYou": "Tuonane kwenye <a href='{{1}}'>{{100}}<\/a> !"
+        "SeeYou": "Tuonane kwenye <a href='{{1}}'>{{100}}<\/a> !",
+        "OtherwiseClickLink": "Vinginevyo, bofya <a href='{{1}}'>kiungo hiki<\/a> ."
     },
     "identifier": {
         "Subject": "Karibu! Thibitisha anwani yako ya barua pepe."

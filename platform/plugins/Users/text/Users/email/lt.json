@@ -3,7 +3,8 @@
         "Subject": "Sveiki! Patvirtinkite savo el. pašto adresą.",
         "Thanks": "Sveiki atvykę į {{1}}",
         "ReallyYourEmail": "Ar tai tikrai jūsų el. pašto adresas, {{1}}? Jei taip, spustelėkite <a href='{{2}}'>čia<\/a> , kad nustatytumėte slaptafrazę ir suaktyvintumėte paskyrą.",
-        "SeeYou": "Iki pasimatymo <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Iki pasimatymo <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Kitu atveju spustelėkite <a href='{{1}}'>šią nuorodą<\/a> ."
     },
     "identifier": {
         "Subject": "Sveiki! Patvirtinkite savo elektroninį paštą."

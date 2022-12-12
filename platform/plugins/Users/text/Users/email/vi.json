@@ -3,7 +3,8 @@
         "Subject": "Chào mừng! Vui lòng xác nhận địa chỉ email.",
         "Thanks": "Chào mừng đến với {{1}}",
         "ReallyYourEmail": "Đây có thực sự là địa chỉ email của bạn không, {{1}}? Nếu vậy, hãy nhấp vào <a href='{{2}}'>đây<\/a> để đặt cụm mật khẩu và kích hoạt tài khoản của bạn.",
-        "SeeYou": "Hẹn gặp lại bạn trên <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Hẹn gặp lại bạn trên <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Nếu không, hãy nhấp vào <a href='{{1}}'>liên kết này<\/a> ."
     },
     "identifier": {
         "Subject": "Chào mừng! Xác minh địa chỉ email của bạn."

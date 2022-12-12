@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Vouliez-vous réinitialiser votre phrase secrète dans {{1}} ?",
-        "ClickHere": "Alors cliquez ici : {{1}}"
+        "ClickHere": "Alors cliquez ici : {{1}}",
+        "OrEnterCode": "ou entrez le code :"
     }
 }

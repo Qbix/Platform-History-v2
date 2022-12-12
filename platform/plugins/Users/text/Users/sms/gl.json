@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Querías restablecer o teu contrasinal en {{1}}?",
-        "ClickHere": "Despois fai clic aquí: {{1}}"
+        "ClickHere": "Despois fai clic aquí: {{1}}",
+        "OrEnterCode": "ou introduza o código:"
     }
 }

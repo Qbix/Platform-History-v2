@@ -3,7 +3,8 @@
         "Subject": "Bine ati venit! Vă rog să vă verificați adresa de email.",
         "Thanks": "Bun venit la {{1}}",
         "ReallyYourEmail": "Este chiar aceasta adresa ta de e-mail, {{1}}? Dacă da, faceți clic <a href='{{2}}'>aici<\/a> pentru a vă seta expresia de acces și pentru a vă activa contul.",
-        "SeeYou": "Ne vedem pe <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Ne vedem pe <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "În caz contrar, faceți clic pe <a href='{{1}}'>acest link<\/a> ."
     },
     "identifier": {
         "Subject": "Bine ati venit! Verifică-ți adresa de email."

@@ -3,7 +3,8 @@
         "Subject": "Welkom! Verifieer uw email adres alstublieft.",
         "Thanks": "Welkom bij {{1}}",
         "ReallyYourEmail": "Is dit echt uw e-mailadres, {{1}}? Zo ja, klik <a href='{{2}}'>dan hier<\/a> om uw wachtwoordzin in te stellen en uw account te activeren.",
-        "SeeYou": "Tot ziens op <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Tot ziens op <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Klik anders op <a href='{{1}}'>deze link<\/a> ."
     },
     "identifier": {
         "Subject": "Welkom! Verifieer je e-mailadres."

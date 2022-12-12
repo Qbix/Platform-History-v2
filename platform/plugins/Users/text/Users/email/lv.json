@@ -3,7 +3,8 @@
         "Subject": "Laipni lūdzam! Lūdzu, apstipriniet savu e-pasta adresi.",
         "Thanks": "Laipni lūdzam {{1}}",
         "ReallyYourEmail": "Vai šī tiešām ir jūsu e-pasta adrese, {{1}}? Ja tā, noklikšķiniet <a href='{{2}}'>šeit<\/a> , lai iestatītu ieejas frāzi un aktivizētu savu kontu.",
-        "SeeYou": "Tiekamies <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Tiekamies <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Pretējā gadījumā noklikšķiniet uz <a href='{{1}}'>šīs saites<\/a> ."
     },
     "identifier": {
         "Subject": "Laipni lūdzam! Pārbaudiet savu e-pasta adresi."

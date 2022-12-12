@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Chtěli jste resetovat svou přístupovou frázi v {{1}}?",
-        "ClickHere": "Pak klikněte sem: {{1}}"
+        "ClickHere": "Pak klikněte sem: {{1}}",
+        "OrEnterCode": "nebo zadejte kód:"
     }
 }

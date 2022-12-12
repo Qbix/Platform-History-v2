@@ -3,7 +3,8 @@
         "Subject": "欢迎！请验证您的电子邮件地址。",
         "Thanks": "欢迎来到 {{1}}",
         "ReallyYourEmail": "这真的是您的电子邮件地址吗，{{1}}？如果是这样，请单击<a href='{{2}}'>此处<\/a>设置您的密码并激活您的帐户。",
-        "SeeYou": "<a href='{{1}}'>{{2}}<\/a>见！"
+        "SeeYou": "<a href='{{1}}'>{{2}}<\/a>见！",
+        "OtherwiseClickLink": "否则，请单击<a href='{{1}}'>此链接<\/a>。"
     },
     "identifier": {
         "Subject": "欢迎！确认你的邮件地址。"

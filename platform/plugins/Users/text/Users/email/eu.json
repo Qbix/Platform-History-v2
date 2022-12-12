@@ -3,7 +3,8 @@
         "Subject": "Ongi etorri! Mesedez, egiaztatu zure helbide elektronikoa.",
         "Thanks": "Ongi etorri {{1}}-ra",
         "ReallyYourEmail": "Hau al da benetan zure helbide elektronikoa, {{1}}? Hala bada, egin klik <a href='{{2}}'>hemen<\/a> pasaesaldia ezartzeko eta kontua aktibatzeko.",
-        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> -n ikusiko gara!"
+        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> -n ikusiko gara!",
+        "OtherwiseClickLink": "Bestela, egin klik <a href='{{1}}'>esteka honetan<\/a> ."
     },
     "identifier": {
         "Subject": "Ongi etorri! Egiaztatu zure helbide elektronikoa."

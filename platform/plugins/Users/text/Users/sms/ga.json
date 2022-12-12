@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "An raibh tú ag iarraidh do phasfhrása a athshocrú in {{1}}?",
-        "ClickHere": "Ansin cliceáil anseo: {{1}}"
+        "ClickHere": "Ansin cliceáil anseo: {{1}}",
+        "OrEnterCode": "nó cuir isteach cód:"
     }
 }
