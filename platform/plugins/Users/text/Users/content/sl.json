@@ -142,6 +142,17 @@
         "Someone": "Nekdo"
     },
     "web3": {
-        "WrongMethod": "Napačen način pogodbe {{methodName}}"
+        "WrongMethod": "Napačen način pogodbe {{methodName}}",
+        "ChangeWallet": "Spremeni denarnico"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-naslov",
+            "mobile": "Mobilni",
+            "web3": "Splet3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopirano! Zdaj ga lahko prilepite kamor koli."
     }
 }

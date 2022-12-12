@@ -142,6 +142,17 @@
         "Someone": "누구"
     },
     "web3": {
-        "WrongMethod": "잘못된 계약 방법 {{methodName}}"
+        "WrongMethod": "잘못된 계약 방법 {{methodName}}",
+        "ChangeWallet": "지갑 변경"
+    },
+    "identifier": {
+        "types": {
+            "email": "이메일",
+            "mobile": "이동하는",
+            "web3": "웹3"
+        }
+    },
+    "clipboard": {
+        "Copied": "복사했습니다! 이제 아무 곳에나 붙여넣을 수 있습니다."
     }
 }

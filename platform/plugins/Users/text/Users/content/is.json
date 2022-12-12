@@ -142,6 +142,17 @@
         "Someone": "Einhver"
     },
     "web3": {
-        "WrongMethod": "Röng samningsaðferð {{methodName}}"
+        "WrongMethod": "Röng samningsaðferð {{methodName}}",
+        "ChangeWallet": "Skiptu um veski"
+    },
+    "identifier": {
+        "types": {
+            "email": "Tölvupóstur",
+            "mobile": "Farsími",
+            "web3": "Vef3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Afritað! Nú geturðu límt það hvar sem er."
     }
 }

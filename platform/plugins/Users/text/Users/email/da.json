@@ -13,7 +13,8 @@
         "Thanks": "Tak fordi du besøgte {{1}}",
         "YouAreReceiving": "Du modtager denne e-mail, fordi nogen har indtastet din e-mailadresse og klikket på &quot;glemt adgangskode&quot;. Hvis det ikke var dig, skal du blot ignorere denne besked.",
         "Reset": "Klik på {{1}} for at nulstille din adgangssætning",
-        "SetUpPassphrase": "Indstil adgangssætning"
+        "SetUpPassphrase": "Indstil adgangssætning",
+        "DomainCode": "Hvis websiden allerede er åben i din browser, kan du indtaste koden"
     },
     "SeeYou": "Vi ses på {{1}}!",
     "LinkToUnsubscribe": "Her er et link til at <a href='{{1}}'>afmelde<\/a> , hvis du ikke ønsker at få flere e-mails."

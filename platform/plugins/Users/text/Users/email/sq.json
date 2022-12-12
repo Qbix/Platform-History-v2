@@ -9,11 +9,12 @@
         "Subject": "Mirë se vini! Verifikoni adresën tuaj të emailit."
     },
     "resend": {
-        "Subject": "Hej, e ke harruar frazën e kalimit?",
-        "Thanks": "Faleminderit që vizituat {{1}}",
+        "Subject": "Hej, e harrove frazën e kalimit?",
+        "Thanks": "Faleminderit për vizitën {{1}}",
         "YouAreReceiving": "Ju po e merrni këtë email sepse dikush futi adresën tuaj të emailit dhe kliko &quot;ka harruar frazën e kalimit&quot;. Nëse nuk ishit ju, thjesht injoroni këtë mesazh.",
         "Reset": "Për të rivendosur frazën e kalimit, kliko {{1}}",
-        "SetUpPassphrase": "Vendos frazën e kalimit"
+        "SetUpPassphrase": "Vendos frazën e kalimit",
+        "DomainCode": "Nëse faqja e internetit është tashmë e hapur në shfletuesin tuaj, mund të futni kodin"
     },
     "SeeYou": "Shihemi në {{1}}!",
     "LinkToUnsubscribe": "Këtu është një lidhje për t&#39;u <a href='{{1}}'>çregjistruar<\/a> nëse nuk dëshironi të merrni më emaile."

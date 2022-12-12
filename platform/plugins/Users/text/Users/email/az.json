@@ -10,10 +10,11 @@
     },
     "resend": {
         "Subject": "Hey, parol sözünü unutmusan?",
-        "Thanks": "Ziyarət etdiyiniz üçün təşəkkür edirik {{1}}",
+        "Thanks": "{{1}} ziyarət etdiyiniz üçün təşəkkür edirik",
         "YouAreReceiving": "Kimsə e-poçt ünvanınızı daxil edib &quot;parol sözünü unutdum&quot; kliklədiyi üçün bu e-məktubu alırsınız. Əgər siz deyildinizsə, sadəcə olaraq bu mesaja məhəl qoymayın.",
-        "Reset": "Parol ifadənizi sıfırlamaq üçün {{1}} üzərinə klikləyin",
-        "SetUpPassphrase": "Parol sözünü quraşdırın"
+        "Reset": "Parol ifadənizi sıfırlamaq üçün {{1}} klikləyin",
+        "SetUpPassphrase": "Parol sözünü quraşdırın",
+        "DomainCode": "Veb səhifə brauzerinizdə artıq açıqdırsa, kodu daxil edə bilərsiniz"
     },
     "SeeYou": "{{1}}-da görüşənədək!",
     "LinkToUnsubscribe": "Budur, daha çox e-poçt almaq <a href='{{1}}'>istəmirsinizsə<\/a> , abunəni ləğv etmək üçün bir keçid."

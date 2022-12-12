@@ -10,10 +10,11 @@
     },
     "resend": {
         "Subject": "Hej, zapomniałeś hasła?",
-        "Thanks": "Dziękujemy za odwiedzenie {{1}}",
-        "YouAreReceiving": "Otrzymujesz tę wiadomość, ponieważ ktoś podał Twój adres e-mail i kliknął „zapomniałem hasła”. Jeśli to nie ty, po prostu zignoruj tę wiadomość.",
+        "Thanks": "Dziękujemy za odwiedziny {{1}}",
+        "YouAreReceiving": "Otrzymujesz tę wiadomość, ponieważ ktoś wpisał Twój adres e-mail i kliknął „nie pamiętam hasła”. Jeśli to nie byłeś ty, po prostu zignoruj tę wiadomość.",
         "Reset": "Aby zresetować hasło, kliknij {{1}}",
-        "SetUpPassphrase": "Skonfiguruj hasło"
+        "SetUpPassphrase": "Ustaw hasło",
+        "DomainCode": "Jeśli strona jest już otwarta w Twojej przeglądarce, możesz wpisać kod"
     },
     "SeeYou": "Do zobaczenia {{1}}!",
     "LinkToUnsubscribe": "Oto link do <a href='{{1}}'>anulowania subskrypcji<\/a> , jeśli nie chcesz otrzymywać więcej e-maili."

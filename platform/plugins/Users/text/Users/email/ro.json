@@ -13,7 +13,8 @@
         "Thanks": "Vă mulțumim că ați vizitat {{1}}",
         "YouAreReceiving": "Primești acest e-mail deoarece cineva a introdus adresa ta de e-mail și a făcut clic pe „am uitat fraza de acces”. Dacă nu ai fost tu, pur și simplu ignora acest mesaj.",
         "Reset": "Pentru a vă reseta expresia de acces, faceți clic pe {{1}}",
-        "SetUpPassphrase": "Configurați expresia de acces"
+        "SetUpPassphrase": "Configurați expresia de acces",
+        "DomainCode": "Dacă pagina web este deja deschisă în browser, puteți introduce codul"
     },
     "SeeYou": "Ne vedem pe {{1}}!",
     "LinkToUnsubscribe": "Iată un link pentru a vă <a href='{{1}}'>dezabona<\/a> dacă nu doriți să primiți mai multe e-mailuri."

@@ -142,6 +142,17 @@
         "Someone": "Norbait"
     },
     "web3": {
-        "WrongMethod": "Kontratu-metodo okerra {{methodName}}"
+        "WrongMethod": "Kontratu-metodo okerra {{methodName}}",
+        "ChangeWallet": "Aldatu zorroa"
+    },
+    "identifier": {
+        "types": {
+            "email": "Posta elektronikoa",
+            "mobile": "Mugikorra",
+            "web3": "Web 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopiatu! Orain edonon itsats dezakezu."
     }
 }

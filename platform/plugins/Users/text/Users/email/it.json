@@ -11,9 +11,10 @@
     "resend": {
         "Subject": "Ehi, hai dimenticato la passphrase?",
         "Thanks": "Grazie per aver visitato {{1}}",
-        "YouAreReceiving": "Hai ricevuto questa e-mail perché qualcuno ha inserito il tuo indirizzo e-mail e ha fatto clic su &quot;passphrase dimenticata&quot;. Se non eri tu, ignora semplicemente questo messaggio.",
+        "YouAreReceiving": "Hai ricevuto questa e-mail perché qualcuno ha inserito il tuo indirizzo e-mail e ha fatto clic su &quot;passphrase dimenticata&quot;. Se non sei stato tu, ignora semplicemente questo messaggio.",
         "Reset": "Per reimpostare la passphrase, fai clic su {{1}}",
-        "SetUpPassphrase": "Imposta la passphrase"
+        "SetUpPassphrase": "Imposta passphrase",
+        "DomainCode": "Se la pagina web è già aperta nel tuo browser, puoi inserire il codice"
     },
     "SeeYou": "Ci vediamo il {{1}}!",
     "LinkToUnsubscribe": "Ecco un link per <a href='{{1}}'>annullare<\/a> l&#39;iscrizione se non vuoi ricevere più email."

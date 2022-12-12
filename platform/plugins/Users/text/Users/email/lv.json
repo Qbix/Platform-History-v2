@@ -13,7 +13,8 @@
         "Thanks": "Paldies, ka apmeklējāt {{1}}",
         "YouAreReceiving": "Jūs saņēmāt šo e-pasta ziņojumu, jo kāds ievadīja jūsu e-pasta adresi un noklikšķināja uz &quot;aizmirsu ieejas frāzi&quot;. Ja tas nebijāt jūs, vienkārši ignorējiet šo ziņojumu.",
         "Reset": "Lai atiestatītu ieejas frāzi, noklikšķiniet uz {{1}}",
-        "SetUpPassphrase": "Iestatiet ieejas frāzi"
+        "SetUpPassphrase": "Iestatiet ieejas frāzi",
+        "DomainCode": "Ja tīmekļa lapa jūsu pārlūkprogrammā jau ir atvērta, varat ievadīt kodu"
     },
     "SeeYou": "Tiekamies {{1}}!",
     "LinkToUnsubscribe": "Šeit ir saite, lai <a href='{{1}}'>anulētu abonementu<\/a> , ja vairs nevēlaties saņemt e-pasta ziņojumus."

@@ -142,6 +142,17 @@
         "Someone": "keegi"
     },
     "web3": {
-        "WrongMethod": "Vale lepingumeetod {{methodName}}"
+        "WrongMethod": "Vale lepingumeetod {{methodName}}",
+        "ChangeWallet": "Vahetage rahakotti"
+    },
+    "identifier": {
+        "types": {
+            "email": "Meil",
+            "mobile": "Mobiilne",
+            "web3": "Veeb3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopeeritud! Nüüd saate selle kõikjale kleepida."
     }
 }

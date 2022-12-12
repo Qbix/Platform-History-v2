@@ -13,7 +13,8 @@
         "Thanks": "Grazzi talli żort {{1}}",
         "YouAreReceiving": "Qed tirċievi din l-email għax xi ħadd daħħal l-indirizz tal-email tiegħek u kklikkja &quot;forgot passphrase&quot;. Jekk ma kontx int, sempliċement injora dan il-messaġġ.",
         "Reset": "Biex tirrisettja l-passphrase tiegħek, ikklikkja {{1}}",
-        "SetUpPassphrase": "Stabbilixxi passphrase"
+        "SetUpPassphrase": "Stabbilixxi passphrase",
+        "DomainCode": "Jekk il-paġna web hija diġà miftuħa fil-browser tiegħek, tista&#39; ddaħħal il-kodiċi"
     },
     "SeeYou": "Narawkom fuq {{1}}!",
     "LinkToUnsubscribe": "Hawnhekk hawn link biex tneħħi l- <a href='{{1}}'>abbonament<\/a> jekk ma tridx tirċievi aktar emails."

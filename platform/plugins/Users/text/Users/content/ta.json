@@ -142,6 +142,17 @@
         "Someone": "யாரோ ஒருவர்"
     },
     "web3": {
-        "WrongMethod": "தவறான ஒப்பந்த முறை {{methodName}}"
+        "WrongMethod": "தவறான ஒப்பந்த முறை {{methodName}}",
+        "ChangeWallet": "பணப்பையை மாற்றவும்"
+    },
+    "identifier": {
+        "types": {
+            "email": "மின்னஞ்சல்",
+            "mobile": "கைபேசி",
+            "web3": "வலை3"
+        }
+    },
+    "clipboard": {
+        "Copied": "நகலெடுக்கப்பட்டது! இப்போது நீங்கள் எங்கு வேண்டுமானாலும் ஒட்டலாம்."
     }
 }

@@ -11,9 +11,10 @@
     "resend": {
         "Subject": "Aizu, ahaztu al duzu pasaesaldia?",
         "Thanks": "Eskerrik asko {{1}} bisitatzeagatik",
-        "YouAreReceiving": "Norbaitek zure helbide elektronikoa sartu eta &quot;pasahesaldia ahaztu zait&quot; sakatu duelako jasotzen ari zara mezu elektroniko hau. Zu izan ez bazara, ez ikusi egin mezu honi.",
+        "YouAreReceiving": "Norbaitek zure helbide elektronikoa sartu eta &quot;pasahesaldia ahaztu zait&quot; sakatu duelako jasotzen ari zara mezu elektroniko hau. Zu izan ez bazen, ez ikusi egin mezu honi.",
         "Reset": "Pasaesaldia berrezartzeko, sakatu {{1}}",
-        "SetUpPassphrase": "Konfiguratu pasaesaldia"
+        "SetUpPassphrase": "Konfiguratu pasaesaldia",
+        "DomainCode": "Web-orria zure arakatzailean irekita badago, kodea sar dezakezu"
     },
     "SeeYou": "{{1}}-n ikusiko gara!",
     "LinkToUnsubscribe": "Hona hemen mezu elektroniko gehiago jaso nahi ez baduzu <a href='{{1}}'>harpidetza kentzeko<\/a> esteka."

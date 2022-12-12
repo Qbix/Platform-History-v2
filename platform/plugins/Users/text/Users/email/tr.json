@@ -10,10 +10,11 @@
     },
     "resend": {
         "Subject": "Hey, parolanı mı unuttun?",
-        "Thanks": "{{1}}&#39;u ziyaret ettiğiniz için teşekkürler",
-        "YouAreReceiving": "Bu e-postayı, birisi e-posta adresinizi girip &quot;parolayı unuttum&quot; seçeneğine tıkladığınız için alıyorsunuz. Eğer siz değilseniz, bu mesajı görmezden gelin.",
-        "Reset": "Parolanızı sıfırlamak için {{1}} öğesini tıklayın.",
-        "SetUpPassphrase": "Parola ayarla"
+        "Thanks": "{{1}} ziyaret ettiğiniz için teşekkürler",
+        "YouAreReceiving": "Bu e-postayı birisi e-posta adresinizi girip &quot;parolamı unuttum&quot; seçeneğine tıkladığı için alıyorsunuz. Eğer siz değilseniz, bu mesajı yok sayın.",
+        "Reset": "Parolanızı sıfırlamak için {{1}} tıklayın",
+        "SetUpPassphrase": "Parola oluştur",
+        "DomainCode": "Web sayfası tarayıcınızda zaten açıksa, kodu girebilirsiniz."
     },
     "SeeYou": "{{1}}&#39;da görüşürüz!",
     "LinkToUnsubscribe": "Daha fazla e-posta almak istemiyorsanız, <a href='{{1}}'>abonelikten<\/a> çıkmak için bir bağlantı burada."

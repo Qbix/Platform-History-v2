@@ -142,6 +142,17 @@
         "Someone": "Duine éigin"
     },
     "web3": {
-        "WrongMethod": "Modh conartha mícheart {{methodName}}"
+        "WrongMethod": "Modh conartha mícheart {{methodName}}",
+        "ChangeWallet": "Athraigh Sparán"
+    },
+    "identifier": {
+        "types": {
+            "email": "Ríomhphost",
+            "mobile": "Soghluaiste",
+            "web3": "Gréasán3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Cóipeáladh! Anois is féidir leat é a ghreamú in áit ar bith."
     }
 }

@@ -142,6 +142,17 @@
         "Someone": "Rhywun"
     },
     "web3": {
-        "WrongMethod": "Dull contract anghywir {{methodName}}"
+        "WrongMethod": "Dull contract anghywir {{methodName}}",
+        "ChangeWallet": "Newid Waled"
+    },
+    "identifier": {
+        "types": {
+            "email": "Ebost",
+            "mobile": "Symudol",
+            "web3": "Gwe3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Wedi&#39;i gopïo! Nawr gallwch chi ei gludo yn unrhyw le."
     }
 }

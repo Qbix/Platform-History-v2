@@ -13,7 +13,8 @@
         "Thanks": "Terima kasih kerana melawat {{1}}",
         "YouAreReceiving": "Anda menerima e-mel ini kerana seseorang memasukkan alamat e-mel anda dan mengklik &quot;terlupa frasa laluan&quot;. Jika bukan anda, abaikan sahaja mesej ini.",
         "Reset": "Untuk menetapkan semula frasa laluan anda, klik {{1}}",
-        "SetUpPassphrase": "Sediakan frasa laluan"
+        "SetUpPassphrase": "Sediakan frasa laluan",
+        "DomainCode": "Jika halaman web sudah dibuka dalam penyemak imbas anda, anda boleh memasukkan kod"
     },
     "SeeYou": "Jumpa anda di {{1}}!",
     "LinkToUnsubscribe": "Berikut ialah pautan untuk <a href='{{1}}'>berhenti melanggan<\/a> jika anda tidak mahu mendapatkan e-mel lagi."

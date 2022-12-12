@@ -142,6 +142,17 @@
         "Someone": "Xi ħadd"
     },
     "web3": {
-        "WrongMethod": "Metodu ta&#39; kuntratt ħażin {{methodName}}"
+        "WrongMethod": "Metodu ta&#39; kuntratt ħażin {{methodName}}",
+        "ChangeWallet": "Bidla Kartiera"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Mobbli",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Ikkopjati! Issa inti tista paste kullimkien."
     }
 }

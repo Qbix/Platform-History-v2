@@ -142,6 +142,17 @@
         "Someone": "Iemand"
     },
     "web3": {
-        "WrongMethod": "Verkeerde contractmethode {{methodName}}"
+        "WrongMethod": "Verkeerde contractmethode {{methodName}}",
+        "ChangeWallet": "Portefeuille wijzigen"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobiel",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Gekopieerd! Nu kun je het overal plakken."
     }
 }

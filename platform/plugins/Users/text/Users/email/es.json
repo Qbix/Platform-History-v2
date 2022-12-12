@@ -11,9 +11,10 @@
     "resend": {
         "Subject": "Oye, ¿olvidaste tu contraseña?",
         "Thanks": "Gracias por visitar {{1}}",
-        "YouAreReceiving": "Está recibiendo este correo electrónico porque alguien ingresó su dirección de correo electrónico e hizo clic en &quot;Olvidé mi contraseña&quot;. Si no fuiste tú, simplemente ignora este mensaje.",
+        "YouAreReceiving": "Has recibido este correo electrónico porque alguien ingresó tu dirección de correo electrónico e hizo clic en &quot;Olvidé mi contraseña&quot;. Si no fuiste tú, simplemente ignora este mensaje.",
         "Reset": "Para restablecer su frase de contraseña, haga clic en {{1}}",
-        "SetUpPassphrase": "Configurar frase de contraseña"
+        "SetUpPassphrase": "Configurar frase de contraseña",
+        "DomainCode": "Si la página web ya está abierta en su navegador, puede ingresar el código"
     },
     "SeeYou": "¡Nos vemos el {{1}}!",
     "LinkToUnsubscribe": "Aquí hay un enlace para <a href='{{1}}'>darse<\/a> de baja si no desea recibir más correos electrónicos."

@@ -13,7 +13,8 @@
         "Thanks": "Ďakujeme za návštevu {{1}}",
         "YouAreReceiving": "Tento e-mail ste dostali, pretože niekto zadal vašu e-mailovú adresu a klikol na „zabudol som heslo“. Ak ste to neboli vy, jednoducho túto správu ignorujte.",
         "Reset": "Ak chcete obnoviť prístupovú frázu, kliknite na {{1}}",
-        "SetUpPassphrase": "Nastavte prístupovú frázu"
+        "SetUpPassphrase": "Nastavte prístupovú frázu",
+        "DomainCode": "Ak je webová stránka už otvorená vo vašom prehliadači, môžete zadať kód"
     },
     "SeeYou": "Uvidíme sa na {{1}}!",
     "LinkToUnsubscribe": "Tu je odkaz na <a href='{{1}}'>odhlásenie<\/a> , ak si neželáte dostávať ďalšie e-maily."

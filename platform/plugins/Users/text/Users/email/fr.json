@@ -13,7 +13,8 @@
         "Thanks": "Merci de votre visite {{1}}",
         "YouAreReceiving": "Vous recevez cet e-mail parce que quelqu&#39;un a entré votre adresse e-mail et a cliqué sur &quot;mot de passe oublié&quot;. Si ce n&#39;était pas vous, ignorez simplement ce message.",
         "Reset": "Pour réinitialiser votre phrase secrète, cliquez sur {{1}}",
-        "SetUpPassphrase": "Configurer la phrase secrète"
+        "SetUpPassphrase": "Configurer la phrase secrète",
+        "DomainCode": "Si la page Web est déjà ouverte dans votre navigateur, vous pouvez entrer le code"
     },
     "SeeYou": "Rendez-vous sur {{1}} !",
     "LinkToUnsubscribe": "Voici un lien pour vous <a href='{{1}}'>désabonner<\/a> si vous ne souhaitez plus recevoir d&#39;e-mails."

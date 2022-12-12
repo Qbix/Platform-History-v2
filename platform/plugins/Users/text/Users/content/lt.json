@@ -142,6 +142,17 @@
         "Someone": "kažkas"
     },
     "web3": {
-        "WrongMethod": "Netinkamas sutarties metodas {{methodName}}"
+        "WrongMethod": "Netinkamas sutarties metodas {{methodName}}",
+        "ChangeWallet": "Keisti Piniginę"
+    },
+    "identifier": {
+        "types": {
+            "email": "El. paštas",
+            "mobile": "Mobilusis",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Nukopijuota! Dabar galite jį įklijuoti bet kur."
     }
 }

@@ -142,6 +142,17 @@
         "Someone": "شخصا ما"
     },
     "web3": {
-        "WrongMethod": "طريقة العقد غير صحيحة {{methodName}}"
+        "WrongMethod": "طريقة العقد غير صحيحة {{methodName}}",
+        "ChangeWallet": "تغيير المحفظة"
+    },
+    "identifier": {
+        "types": {
+            "email": "البريد الإلكتروني",
+            "mobile": "التليفون المحمول",
+            "web3": "ويب 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "نسخ! الآن يمكنك لصقه في أي مكان."
     }
 }

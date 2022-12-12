@@ -9,11 +9,12 @@
         "Subject": "Benvido! Verifica o teu enderezo de correo electrónico."
     },
     "resend": {
-        "Subject": "Ola, esqueciches o teu contrasinal?",
+        "Subject": "Ei, esqueciches o teu contrasinal?",
         "Thanks": "Grazas por visitar {{1}}",
         "YouAreReceiving": "Recibiches este correo electrónico porque alguén introduciu o teu enderezo de correo electrónico e fixo clic en &quot;esquecín a frase de acceso&quot;. Se non fuches ti, simplemente ignora esta mensaxe.",
         "Reset": "Para restablecer o teu contrasinal, fai clic en {{1}}",
-        "SetUpPassphrase": "Configurar frase de paso"
+        "SetUpPassphrase": "Configurar frase de paso",
+        "DomainCode": "Se a páxina web xa está aberta no teu navegador, podes introducir o código"
     },
     "SeeYou": "Vémonos en {{1}}!",
     "LinkToUnsubscribe": "Aquí tes unha ligazón para cancelar a <a href='{{1}}'>subscrición<\/a> se non queres recibir máis correos electrónicos."

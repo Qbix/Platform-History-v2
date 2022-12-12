@@ -13,7 +13,8 @@
         "Thanks": "Täname, et külastasite {{1}}",
         "YouAreReceiving": "Saite selle meili, kuna keegi sisestas teie e-posti aadressi ja klõpsas &quot;unustasin parooli&quot;. Kui see ei olnud teie, siis lihtsalt ignoreerige seda sõnumit.",
         "Reset": "Parooli lähtestamiseks klõpsake {{1}}",
-        "SetUpPassphrase": "Seadistage parool"
+        "SetUpPassphrase": "Seadistage parool",
+        "DomainCode": "Kui veebileht on teie brauseris juba avatud, saate koodi sisestada"
     },
     "SeeYou": "Kohtumiseni {{1}}!",
     "LinkToUnsubscribe": "Siin on link <a href='{{1}}'>tellimusest loobumiseks<\/a> , kui te ei soovi enam meile saada."

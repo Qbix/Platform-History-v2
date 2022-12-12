@@ -142,6 +142,17 @@
         "Someone": "कोई"
     },
     "web3": {
-        "WrongMethod": "गलत अनुबंध पद्धति {{methodName}}"
+        "WrongMethod": "गलत अनुबंध पद्धति {{methodName}}",
+        "ChangeWallet": "बटुआ बदलें"
+    },
+    "identifier": {
+        "types": {
+            "email": "ईमेल",
+            "mobile": "गतिमान",
+            "web3": "वेब3"
+        }
+    },
+    "clipboard": {
+        "Copied": "कॉपी किया गया! अब आप इसे कहीं भी पेस्ट कर सकते हैं।"
     }
 }

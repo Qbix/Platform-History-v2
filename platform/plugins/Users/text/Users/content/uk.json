@@ -142,6 +142,17 @@
         "Someone": "Хтось"
     },
     "web3": {
-        "WrongMethod": "Неправильний метод контракту {{methodName}}"
+        "WrongMethod": "Неправильний метод контракту {{methodName}}",
+        "ChangeWallet": "Змінити гаманець"
+    },
+    "identifier": {
+        "types": {
+            "email": "Електронна пошта",
+            "mobile": "Мобільний",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Скопійовано! Тепер ви можете вставити його куди завгодно."
     }
 }

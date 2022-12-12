@@ -142,6 +142,17 @@
         "Someone": "מִישֶׁהוּ"
     },
     "web3": {
-        "WrongMethod": "שיטת חוזה שגויה {{methodName}}"
+        "WrongMethod": "שיטת חוזה שגויה {{methodName}}",
+        "ChangeWallet": "שנה ארנק"
+    },
+    "identifier": {
+        "types": {
+            "email": "אימייל",
+            "mobile": "נייד",
+            "web3": "אינטרנט 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "מוּעֲתָק! עכשיו אתה יכול להדביק אותו בכל מקום."
     }
 }

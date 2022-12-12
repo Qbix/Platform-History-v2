@@ -13,7 +13,8 @@
         "Thanks": "Dankie vir jou besoek {{1}}",
         "YouAreReceiving": "Jy ontvang hierdie e-pos omdat iemand jou e-posadres ingevoer het en &quot;wagfrase vergeet&quot; geklik het. As dit nie jy was nie, ignoreer eenvoudig hierdie boodskap.",
         "Reset": "Om jou wagfrase terug te stel, klik {{1}}",
-        "SetUpPassphrase": "Stel wagfrase op"
+        "SetUpPassphrase": "Stel wagfrase op",
+        "DomainCode": "As die webblad reeds in jou blaaier oop is, kan jy die kode invoer"
     },
     "SeeYou": "Sien jou op {{1}}!",
     "LinkToUnsubscribe": "Hier is &#39;n skakel om uit te <a href='{{1}}'>teken<\/a> as jy nie meer e-posse wil kry nie."

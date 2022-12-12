@@ -13,7 +13,8 @@
         "Thanks": "Asante kwa kutembelea {{1}}",
         "YouAreReceiving": "Unapokea barua pepe hii kwa sababu mtu fulani aliingia barua pepe yako na kubofya &quot;umesahau neno la siri&quot;. Ikiwa si wewe, puuza tu ujumbe huu.",
         "Reset": "Ili kuweka upya kauli yako ya siri, bofya {{1}}",
-        "SetUpPassphrase": "Sanidi kaulisiri"
+        "SetUpPassphrase": "Sanidi kaulisiri",
+        "DomainCode": "Ikiwa ukurasa wa wavuti tayari umefunguliwa kwenye kivinjari chako, unaweza kuingiza msimbo"
     },
     "SeeYou": "Tuonane kwenye {{1}}!",
     "LinkToUnsubscribe": "Hapa kuna kiungo cha <a href='{{1}}'>kujiondoa<\/a> ikiwa hutaki kupata barua pepe nyingine."

@@ -142,6 +142,17 @@
         "Someone": "Seseorang"
     },
     "web3": {
-        "WrongMethod": "Kaedah kontrak yang salah {{methodName}}"
+        "WrongMethod": "Kaedah kontrak yang salah {{methodName}}",
+        "ChangeWallet": "Tukar Wallet"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mel",
+            "mobile": "Mudah alih",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "disalin! Kini anda boleh menampalnya di mana-mana sahaja."
     }
 }

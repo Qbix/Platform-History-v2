@@ -9,11 +9,12 @@
         "Subject": "Chào mừng! Xác minh địa chỉ email của bạn."
     },
     "resend": {
-        "Subject": "Này, bạn quên mật khẩu của mình à?",
+        "Subject": "Này, bạn đã quên cụm mật khẩu của mình?",
         "Thanks": "Cảm ơn bạn đã ghé thăm {{1}}",
         "YouAreReceiving": "Bạn nhận được email này vì ai đó đã nhập địa chỉ email của bạn và nhấp vào &quot;quên cụm mật khẩu&quot;. Nếu đó không phải là bạn, chỉ cần bỏ qua thông báo này.",
         "Reset": "Để đặt lại cụm mật khẩu của bạn, hãy nhấp vào {{1}}",
-        "SetUpPassphrase": "Thiết lập cụm mật khẩu"
+        "SetUpPassphrase": "Thiết lập cụm mật khẩu",
+        "DomainCode": "Nếu trang web đã được mở trong trình duyệt của bạn, bạn có thể nhập mã"
     },
     "SeeYou": "Hẹn gặp lại bạn trên {{1}}!",
     "LinkToUnsubscribe": "Đây là một liên kết để <a href='{{1}}'>hủy đăng ký<\/a> nếu bạn không muốn nhận thêm bất kỳ email nào."

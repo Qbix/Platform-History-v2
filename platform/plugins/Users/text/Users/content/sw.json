@@ -142,6 +142,17 @@
         "Someone": "Mtu fulani"
     },
     "web3": {
-        "WrongMethod": "Mbinu mbaya ya mkataba {{methodName}}"
+        "WrongMethod": "Mbinu mbaya ya mkataba {{methodName}}",
+        "ChangeWallet": "Badilisha Wallet"
+    },
+    "identifier": {
+        "types": {
+            "email": "Barua pepe",
+            "mobile": "Rununu",
+            "web3": "Wavuti3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Imenakiliwa! Sasa unaweza kuibandika popote."
     }
 }

@@ -142,6 +142,17 @@
         "Someone": "Kimsə"
     },
     "web3": {
-        "WrongMethod": "Yanlış müqavilə üsulu {{methodName}}"
+        "WrongMethod": "Yanlış müqavilə üsulu {{methodName}}",
+        "ChangeWallet": "Pul kisəsini dəyişdirin"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-poçt",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopyalandı! İndi onu istənilən yerə yapışdıra bilərsiniz."
     }
 }

@@ -9,11 +9,12 @@
         "Subject": "Selamat datang! Verifikasi alamat email Anda."
     },
     "resend": {
-        "Subject": "Hei, apakah Anda lupa kata sandi Anda?",
+        "Subject": "Hei, apakah Anda lupa frasa sandi Anda?",
         "Thanks": "Terima kasih telah mengunjungi {{1}}",
-        "YouAreReceiving": "Anda menerima email ini karena seseorang memasukkan alamat email Anda dan mengklik &quot;lupa kata sandi&quot;. Jika bukan Anda, abaikan saja pesan ini.",
+        "YouAreReceiving": "Anda menerima email ini karena seseorang memasukkan alamat email Anda dan mengklik &quot;lupa frasa sandi&quot;. Jika itu bukan Anda, abaikan saja pesan ini.",
         "Reset": "Untuk menyetel ulang frasa sandi Anda, klik {{1}}",
-        "SetUpPassphrase": "Siapkan frasa sandi"
+        "SetUpPassphrase": "Siapkan frasa sandi",
+        "DomainCode": "Jika halaman web sudah terbuka di browser Anda, Anda dapat memasukkan kodenya"
     },
     "SeeYou": "Sampai jumpa di {{1}}!",
     "LinkToUnsubscribe": "Berikut ini tautan untuk <a href='{{1}}'>berhenti berlangganan<\/a> jika Anda tidak ingin menerima email lagi."

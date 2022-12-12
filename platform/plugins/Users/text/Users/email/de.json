@@ -13,7 +13,8 @@
         "Thanks": "Vielen Dank für Ihren Besuch auf {{1}}",
         "YouAreReceiving": "Sie erhalten diese E-Mail, weil jemand Ihre E-Mail-Adresse eingegeben und auf „Passphrase vergessen“ geklickt hat. Wenn Sie es nicht waren, ignorieren Sie diese Nachricht einfach.",
         "Reset": "Um Ihre Passphrase zurückzusetzen, klicken Sie auf {{1}}",
-        "SetUpPassphrase": "Passphrase einrichten"
+        "SetUpPassphrase": "Passphrase einrichten",
+        "DomainCode": "Wenn die Webseite bereits in Ihrem Browser geöffnet ist, können Sie den Code eingeben"
     },
     "SeeYou": "Wir sehen uns auf {{1}}!",
     "LinkToUnsubscribe": "Hier ist ein Link zum <a href='{{1}}'>Abbestellen<\/a> , wenn Sie keine E-Mails mehr erhalten möchten."

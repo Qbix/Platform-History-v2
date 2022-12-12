@@ -13,7 +13,8 @@
         "Thanks": "Kiitos vierailustasi {{1}}",
         "YouAreReceiving": "Sait tämän sähköpostin, koska joku on antanut sähköpostiosoitteesi ja napsauttanut &quot;unohdin tunnuslauseen&quot;. Jos et ollut sinä, jätä tämä viesti huomioimatta.",
         "Reset": "Voit nollata salasanasi napsauttamalla {{1}}",
-        "SetUpPassphrase": "Määritä tunnuslause"
+        "SetUpPassphrase": "Määritä tunnuslause",
+        "DomainCode": "Jos verkkosivu on jo auki selaimessasi, voit syöttää koodin"
     },
     "SeeYou": "Nähdään {{1}}!",
     "LinkToUnsubscribe": "Tässä on linkki <a href='{{1}}'>tilauksen peruuttamiseen<\/a> , jos et halua saada enää sähköpostiviestejä."

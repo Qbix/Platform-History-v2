@@ -10,10 +10,11 @@
     },
     "resend": {
         "Subject": "Uy, nakalimutan mo ba ang iyong passphrase?",
-        "Thanks": "Salamat sa pagbisita {{1}}",
+        "Thanks": "Salamat sa pagbisita sa {{1}}",
         "YouAreReceiving": "Natanggap mo ang email na ito dahil may nagpasok ng iyong email address at nag-click sa &quot;nakalimutan ang passphrase&quot;. Kung hindi ikaw, huwag pansinin ang mensaheng ito.",
         "Reset": "Upang i-reset ang iyong passphrase, i-click ang {{1}}",
-        "SetUpPassphrase": "I-set up ang passphrase"
+        "SetUpPassphrase": "I-set up ang passphrase",
+        "DomainCode": "Kung nakabukas na ang webpage sa iyong browser, maaari mong ilagay ang code"
     },
     "SeeYou": "Magkita-kita tayo sa {{1}}!",
     "LinkToUnsubscribe": "Narito ang isang link upang mag- <a href='{{1}}'>unsubscribe<\/a> kung ayaw mong makakuha ng higit pang mga email."

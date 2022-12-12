@@ -13,7 +13,8 @@
         "Thanks": "Diolch am ymweld â {{1}}",
         "YouAreReceiving": "Rydych chi&#39;n derbyn yr e-bost hwn oherwydd bod rhywun wedi rhoi eich cyfeiriad e-bost a chlicio &quot;anghofio cyfrinair&quot;. Os nad chi oedd hi, anwybyddwch y neges hon.",
         "Reset": "I ailosod eich cyfrinair, cliciwch {{1}}",
-        "SetUpPassphrase": "Gosod cyfrinair"
+        "SetUpPassphrase": "Gosod cyfrinair",
+        "DomainCode": "Os yw&#39;r dudalen we eisoes ar agor yn eich porwr, gallwch chi nodi&#39;r cod"
     },
     "SeeYou": "Welwn ni chi ar {{1}}!",
     "LinkToUnsubscribe": "Dyma ddolen i ddad- <a href='{{1}}'>danysgrifio<\/a> os nad ydych am gael rhagor o e-byst."

@@ -142,6 +142,17 @@
         "Someone": "Cineva"
     },
     "web3": {
-        "WrongMethod": "Metodă de contract greșită {{methodName}}"
+        "WrongMethod": "Metodă de contract greșită {{methodName}}",
+        "ChangeWallet": "Schimbați portofelul"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiat! Acum îl puteți lipi oriunde."
     }
 }

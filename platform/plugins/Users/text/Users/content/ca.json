@@ -142,6 +142,17 @@
         "Someone": "Algú"
     },
     "web3": {
-        "WrongMethod": "Mètode de contracte incorrecte {{methodName}}"
+        "WrongMethod": "Mètode de contracte incorrecte {{methodName}}",
+        "ChangeWallet": "Canvia Wallet"
+    },
+    "identifier": {
+        "types": {
+            "email": "Correu electrònic",
+            "mobile": "Mòbil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiat! Ara podeu enganxar-lo a qualsevol lloc."
     }
 }

@@ -142,6 +142,17 @@
         "Someone": "Någon"
     },
     "web3": {
-        "WrongMethod": "Fel kontraktsmetod {{methodName}}"
+        "WrongMethod": "Fel kontraktsmetod {{methodName}}",
+        "ChangeWallet": "Byt plånbok"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-post",
+            "mobile": "Mobil",
+            "web3": "Webb3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopierade! Nu kan du klistra in den var som helst."
     }
 }

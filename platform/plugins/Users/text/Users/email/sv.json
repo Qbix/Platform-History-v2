@@ -13,7 +13,8 @@
         "Thanks": "Tack för ditt besök {{1}}",
         "YouAreReceiving": "Du får det här e-postmeddelandet för att någon skrev in din e-postadress och klickade på &quot;glömt lösenordsfras&quot;. Om det inte var du, ignorera helt enkelt det här meddelandet.",
         "Reset": "Om du vill återställa lösenfrasen klickar du på {{1}}",
-        "SetUpPassphrase": "Ställ in lösenordsfras"
+        "SetUpPassphrase": "Ställ in lösenordsfras",
+        "DomainCode": "Om webbsidan redan är öppen i din webbläsare kan du ange koden"
     },
     "SeeYou": "Vi ses på {{1}}!",
     "LinkToUnsubscribe": "Här är en länk för att <a href='{{1}}'>avsluta prenumerationen<\/a> om du inte vill få fler mejl."

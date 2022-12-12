@@ -142,6 +142,17 @@
         "Someone": "netko"
     },
     "web3": {
-        "WrongMethod": "Pogrešna metoda ugovora {{methodName}}"
+        "WrongMethod": "Pogrešna metoda ugovora {{methodName}}",
+        "ChangeWallet": "Promjena novčanika"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobilni",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopirano! Sada ga možete zalijepiti bilo gdje."
     }
 }
