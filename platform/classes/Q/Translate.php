@@ -49,16 +49,19 @@ class Q_Translate
 		return $arr;
 	}
 
-	function toRemove($out) {
+	function toRemove($flattened) {
 		$paths = array();
 		$rm = Q::ifset($this->options, 'remove', array());
 		$rm = is_array($rm) ? $rm : array($rm);
 		foreach ($rm as $v2) {
 			$parts = Q_Utils::explodeEscaped('/', $v2);
-			foreach ($out as $n => $d) {
-				if ($d['key'] === $parts) {
-					$paths[] = $n;
+			foreach ($flattened as $n => $d) {
+				foreach ($parts as $i => $p) {
+					if ($p !== $d['key'][$i]) {
+						continue 2;
+					}
 				}
+				$paths[$n] = $parts;
 			}
 		}
 		return $paths;

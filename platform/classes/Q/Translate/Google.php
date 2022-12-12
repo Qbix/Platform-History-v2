@@ -25,9 +25,16 @@ class   Q_Translate_Google {
 			if ($toLang !== $fromLang) {
 				$out = $this->parent->getSrc($toLang, $locale, false);
 				$toRemove = $this->parent->toRemove($out);
+				foreach ($toRemove as $n => $parts) {
+					unset($res[$n]);
+				}
 				$res = $this->translate($fromLang, $toLang, $in, $out, $toRemove, 100);
 			} else if ($this->parent->options['out']) {
 				$res = $in;
+				$toRemove = $this->parent->toRemove($in);
+				foreach ($toRemove as $n => $parts) {
+					unset($res[$n]);
+				}
 			}
 			if (isset($res) and is_array($res)) {
 				$this->saveJson($toLang, $res, $jsonFiles);
@@ -40,19 +47,19 @@ class   Q_Translate_Google {
 			&& ($fromLang == $toLang)
 			&& ($this->parent->options['in'] === $this->parent->options['out'])) {
 				foreach ($localeNames as $localeName) {
-					$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+					$this->saveLocale($toLang, $localeName, $res, $jsonFiles, $toRemove);
 				}
 				continue;
 			}
 			if (isset($this->parent->options['locales'])) {
 				foreach ($localeNames as $localeName) {
-					$this->saveLocale($toLang, $localeName, $res, $jsonFiles);
+					$this->saveLocale($toLang, $localeName, $res, $jsonFiles, $toRemove);
 				}
 			}
 		}
 	}
 	
-	private function saveLocale($lang, $locale, $res, $jsonFiles)
+	private function saveLocale($lang, $locale, $res, $jsonFiles, $toRemove)
 	{
 		foreach ($jsonFiles as $dirname => $content) {
 			$directory = $this->parent->createDirectory($dirname);
@@ -63,6 +70,9 @@ class   Q_Translate_Google {
 				$tree = new Q_Tree();
 				$tree->load($localeFile);
 				$tree->merge($arr);
+				foreach ($toRemove as $n => $parts) {
+					call_user_func_array(array($tree, 'clear'), $parts);
+				}
 				$tree->save($localeFile, array(), null, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 			} else {
 				copy($langFile, $localeFile);
@@ -162,9 +172,6 @@ class   Q_Translate_Google {
 			return array();
 		}
 		$res = $out;
-		foreach ($toRemove as $n) {
-			unset($res[$n]);
-		}
 		if (!$in2) {
 			return $res;
 		}

@@ -206,7 +206,7 @@ class Q_Tree
 		foreach ($arr as $k => $a) {
 			if (Q::isAssociative($a)) {
 				$path = array_merge($subpath, array($k));
-				$this->_breadthFirst($path, $a, $callback);
+				$this->_breadthFirst($path, $a, $callback, $context);
 			}
 		}
 	}
@@ -531,7 +531,7 @@ class Q_Tree
 		return $tree->getAll();
 	}
 	
-	/*
+	/**
 	 * We consider array1/array2 to be arrays. no scalars shall be passes
 	 * @method merge_internal
 	 * @static
