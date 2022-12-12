@@ -120,10 +120,6 @@ function Assets_NFT_response_owned ($params) {
 				foreach ($dirtyTokens as $tokenId) {
 					$tokenInfo = Users_Web3::execute($salesABI, $ownerXid, "pending", [$tokenId], $chain["chainId"], $caching, 1000000);
 					if ($recipientXid == $tokenInfo['recipient']) {
-						$untilTimestamp = Q::ifset($tokenInfo, 'untilTimestamp', null);
-						if ($untilTimestamp) {
-							$secondsLeft = $untilTimestamp - time();
-						}
 						$untilTimestamp = Q::ifset($tokenInfo, "untilTimestamp", null);
 						$tokens[] = array(
 							"tokenId" => $tokenId,
