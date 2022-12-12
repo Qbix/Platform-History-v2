@@ -132,7 +132,8 @@
 			"noRegister": false,
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}",
 			"alsoSendUnhashedPassphrase": false,
-			"setLanguage": true
+			"setLanguage": true,
+			"interposeActivateDialog": true
 		},
 		"paths": {
 			"icons": "files/Users/icons",

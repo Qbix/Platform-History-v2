@@ -2168,8 +2168,8 @@ abstract class Users extends Base_Users
 		if (!$user) {
 			return array();
 		}
-		$useActivateDialog = Q_Config::get('Users', 'login', 'useActivateDialog', false);
-		if (!$useActivateDialog) {
+		$interposeActivateDialog = Q_Config::get('Users', 'login', 'interposeActivateDialog', false);
+		if (!$interposeActivateDialog) {
 			return compact('user');
 		}
 		$activationLink = null;
