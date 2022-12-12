@@ -7,7 +7,7 @@
  */
 
 
-html.Q_hideUntilLoaded {
+html.Q_hideUntilLoaded body {
 	opacity: 1; transition: 300ms;
 }
 
