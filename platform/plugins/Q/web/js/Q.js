@@ -12953,13 +12953,13 @@ Q.Pointer = {
 	 */
 	onCancelClick: new Q.Event(),
 	/**
-	 * This event occurs when touching or mouse pressing should have ended
+	 * This event occurs when touching or mouse pressing should have ended anywhere
 	 * @static
 	 * @event onEnded
 	 */
 	onEnded: new Q.Event(),
 	/**
-	 * This event occurs when touching or mouse pressing should have started
+	 * This event occurs when touching or mouse pressing should have started anywhere
 	 * @static
 	 * @event onStarted
 	 */
@@ -13312,7 +13312,7 @@ Q.Dialogs = {
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
-	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
+	 *  @param {String|Boolean} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
      * @param {String|Array} [options.stylesheet] Any stylesheets to load before dialog, to prevent Flash of Unstyled Content.
 	 *  should show the "apply" style button to close dialog
 	 *	@param {boolean} [options.fullscreen] Defaults to true only on Android

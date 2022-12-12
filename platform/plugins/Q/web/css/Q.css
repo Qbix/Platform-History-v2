@@ -484,6 +484,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_clickable_stretcher.Q_clickable_sized>* { width: 100% !important; height: 100% !important; max-width: 100% !important; max-height: 100% !important;  box-sizing: border-box !important; }
 .Q_notTouchscreen .Q_clickable_container.Q_hover .Q_clickable_shadow,
 .Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
+.Q_notTouchscreen .Q_clickable_container:active .Q_clickable_shadow
  { display: block; max-width: none !important; }
 .Q_inplace_tool { display: none; visibility: hidden; }
 .Q_textfill_resizing,
