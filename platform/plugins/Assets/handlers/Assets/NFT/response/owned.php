@@ -50,8 +50,8 @@ function Assets_NFT_response_owned ($params) {
 		$tokenId = $params["tokenId"];
 		$chain = $params["chain"];
 		$ABI = $params["ABI"];
-		$secondsLeft = Q::ifset($params, "secondsLeft", null);
-		$dataJson = compact("tokenId", "secondsLeft");
+		$untilTimestamp = Q::ifset($params, "untilTimestamp", null);
+		$dataJson = compact("tokenId", "untilTimestamp");
 		if ($glob["skipInfo"]) {
 			$tokenJSON[] = $dataJson;
 			return null;
@@ -130,12 +130,12 @@ function Assets_NFT_response_owned ($params) {
 			}
 
 			foreach ($tokens as $tokenId) {
-				$secondsLeft = null;
+				$untilTimestamp = null;
 				if (is_array($tokenId)) {
-					$secondsLeft = Q::ifset($tokenId, "secondsLeft", null);
+					$untilTimestamp = Q::ifset($tokenId, "untilTimestamp", null);
 					$tokenId = Q::ifset($tokenId, "tokenId", null);
 				}
-				if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "secondsLeft"), $tokenJSON, $countNFTs) === false) {
+				if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "untilTimestamp"), $tokenJSON, $countNFTs) === false) {
 					break;
 				}
 			}
