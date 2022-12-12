@@ -83,14 +83,13 @@ Q.Tool.define('Q/form', function(options) {
 		if (!$form.length) return;
 		if ($form.data('Q/form tool')) return;
 		$form.on('submit.Q_form', function(event) {
-			function onResponse(err, data) {
+			function onResponse(err, data, redirected) {
 				$form.removeClass('Q_working').removeAttr('disabled');
 				document.activeElement = tool.activeElement;
 				var msg;
 				if (msg = Q.firstErrorMessage(err)) {
 					return alert(msg);
 				}
-				Q.handle(tool.state.onResponse, tool, arguments);
 				$('div.Q_form_undermessagebubble', $te).empty();
 				$('tr.Q_error', $te).removeClass('Q_error');
 				if ('errors' in data) {
@@ -99,7 +98,15 @@ Q.Tool.define('Q/form', function(options) {
 					if (data.scriptLines && data.scriptLines.form) {
 						eval(data.scriptLines.form);
 					}
-				} else {
+					return;
+				}
+				if (false === Q.handle(tool.state.onResponse, tool, arguments)) {
+					return false; // onResponse took care of it with some other behavior
+				}
+				if (redirected) {
+					return Q.handle(redirected);
+				}
+				if (data.slots) {
 					var slots = Object.keys(data.slots);
 					var pipe = new Q.pipe(slots, function () {
 						Q.handle(tool.state.onSuccess, tool, arguments);
