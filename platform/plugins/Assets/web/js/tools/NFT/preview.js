@@ -45,9 +45,9 @@
         $toolElement.attr("data-publisher", tool.isPublisher);
 
         // is claim
-        if (state.secondsLeft != null) {
-            state.secondsLeft = parseInt(state.secondsLeft);
-            $toolElement.attr("data-claim", state.secondsLeft <= 0);
+        if (state.untilTimestamp != null) {
+            state.untilTimestamp = parseInt(state.untilTimestamp);
+            $toolElement.attr("data-claim", state.untilTimestamp <= new Date().getTime() / 1000);
         }
 
         if (!Q.isEmpty(previewState)) {
@@ -137,7 +137,7 @@
         },
         movie: null,
         imageSrc: null,
-        secondsLeft: null,
+        untilTimestamp: null,
         fallback: null,
         linkPattern: null,
         abiPath: "Assets/templates/R1/NFT/contract",
@@ -490,7 +490,7 @@
                     metadata: state.metadata,
                     owner: state.owner,
                     ownerUserId: state.ownerUserId,
-                    secondsLeft: state.secondsLeft
+                    untilTimestamp: state.untilTimestamp
                 }));
 
                 $toolElement.off(Q.Pointer.fastclick);
@@ -616,9 +616,9 @@
                     tool.renderImage($container, imageUrl);
                 }
 
-                if (state.secondsLeft > 0) {
+                if (state.untilTimestamp > new Date().getTime() / 1000) {
                     $(".Assets_NFT_timeout_tool", tool.element).tool("Q/timestamp", {
-                        time: Date.now()/1000 + state.secondsLeft,
+                        time: state.untilTimestamp,
                         beforeRefresh: function (result, diff) {
                             if (diff <= 0) {
                                 $toolElement.attr("data-claim", true);
