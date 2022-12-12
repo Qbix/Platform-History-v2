@@ -176,9 +176,24 @@ Q.Tool.define('Q/lazyload', function (options) {
 					&& (!element.Q || !element.Q.tool)) {
 						element.addClass('Q_lazy_load');
 						element.setAttribute('data-q-lazyload', 'activating');
+						// restore inline width, height styles or remove them
+						var inlineWidth = element.Q_lazyload_inlineWidth;
+						var inlineHeight = element.Q_lazyload_inlineHeight;
 						Q.activate(element, function () {
 							element.setAttribute('data-q-lazyload', 'activated');
 							element.addClass('Q_lazy_loaded');
+							setTimeout(function () {
+								if (inlineWidth) {
+									element.style.width = inlineWidth;
+								} else {
+									element.style.removeProperty('width');
+								}
+								if (inlineHeight) {
+									element.style.height = inlineHeight;
+								} else {
+									element.style.removeProperty('height');
+								}
+							}, 1000);
 						}, {}, true);
 					}
 					clearTimeout(element.Q_lazyload_timeout);
@@ -189,6 +204,11 @@ Q.Tool.define('Q/lazyload', function (options) {
 			exiting: function (element, entry) {
 				if (element.hasAttribute('data-q-lazyload')
 				&& element.Q.tool) {
+					// backup inline width, height styles and set them to real element size
+					element.Q_lazyload_inlineWidth = element.style.width;
+					element.Q_lazyload_inlineHeight = element.style.height;
+					element.style.width = element.offsetWidth + 'px';
+					element.style.height = element.offsetHeight + 'px';
 					Q.Tool.remove(element);
 					element.removeClass('Q_lazy_loading');
 					element.removeClass('Q_lazy_loaded');
