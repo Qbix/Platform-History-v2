@@ -257,7 +257,6 @@
 .Q_extra_pane
 {
 	float: right;
-	margin-right: 50px;
 	background: rgba(0, 0, 0, 0.1);
 	border-radius: 5px;
 	padding: 20px;
@@ -622,7 +621,7 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 .Users_activate_container {
-	padding-top: 50px;
+	padding-top: 10px;
 }
 
 .Users_activate_container .Q_buttons {
@@ -632,6 +631,11 @@ html.Users_loggedIn .Users_whenLoggedOut {
 
 .Q_notMobile .Users_activate_dialog {
 	min-width: 800px;
+	box-shadow: 0px 10px 50px rgba(255, 255, 255, 0.5)
+}
+
+.Users_activate_mask {
+	background: rgba(0, 0, 0, 0.8);
 }
 
 #WEB3_CONNECT_MODAL_ID {

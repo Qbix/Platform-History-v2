@@ -2172,7 +2172,7 @@ abstract class Users extends Base_Users
 		if (!$interposeActivateDialog) {
 			return compact('user');
 		}
-		$activationLink = null;
+		$activateLink = null;
 		if ($user->signedUpWith === 'mobile') {
 			$fields = array('m' => $user->mobileNumberPending);
 		} else if ($user->signedUpWith === 'email') {
@@ -2184,10 +2184,10 @@ abstract class Users extends Base_Users
 		$user = $user->exportArray();
 		$user['displayName'] = $displayName;
 		if ($fields) {
-			$activationLink = Q_Uri::url("Users/activate?")
+			$activateLink = Q_Uri::url("Users/activate?")
 			. '?' . http_build_query($fields);
 		}
-		return compact('user', 'activationLink');
+		return compact('user', 'activateLink');
 	}
 
 	/**

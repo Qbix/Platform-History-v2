@@ -7,6 +7,7 @@
 				'icon' => true
 			), 'admin') ?>
 			<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
+				<?php echo Q::tool('Q/form') ?>
 				<?php echo Q_Html::formInfo(null) ?>
 				<div class='Q_big_prompt'>
 					<input type="hidden" name="afterActivate" value="<?php echo $afterActivate ?>">
@@ -45,6 +46,7 @@
 					<?php endif; ?>
 					</p>
 					<?php echo Q_Html::form(Q_Dispatcher::uri(), 'post', array('id' => 'Q_activation_form')) ?>
+						<?php echo Q::tool('Q/form') ?>
 						<?php echo Q_Html::formInfo(null) ?>
 						<input type="password" id='new-password' name="passphrase" class='password' autofocus placeholder="Enter a passphrase" autocomplete="new-password" /><br>
 						<input type="hidden" name="afterActivate" value="<?php echo $afterActivate ?>">

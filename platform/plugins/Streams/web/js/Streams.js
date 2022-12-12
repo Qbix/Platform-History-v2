@@ -5501,7 +5501,6 @@ Streams.showNoticeIfSubscribed = function (options) {
 };
 Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json, priv, overlay) {
 	var src = Q.getObject(["entry", 0, "thumbnailUrl"], json);
-	var src40 = src, src50 = src, src80 = src;
 	var firstName = '', lastName = '';
 	if (priv.registerInfo) {
 		if (priv.registerInfo.firstName){
@@ -5525,11 +5524,12 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
 			.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
 			.attr('placeholder', Q.text.Users.login.placeholders.fullName)
+			.attr('tabindex', 1010)
 			.val(firstName+(lastName ? ' ' : '')+lastName)
 	)
 	var register_form = $('<form method="post" class="Users_register_form" />')
 		.attr('action', Q.action("Streams/register"))
-		.data('form-type', 'register')
+		.attr('data-form-type', 'register')
 		.append($('<div class="Streams_login_appear" />'));
 
 	var $b = $('<button />', {
@@ -5643,23 +5643,6 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 			appId: appId
 		});
 		register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
-	}
-	if (json.emailExists || json.mobileExists) {
-		var $p = $('<p id="Streams_login_identifierExists" />')
-			.html(json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists);
-		$('a', $p).click(function () {
-			$(this).addClass('Q_working');
-			Q.request({identifier: identifier}, Q.action("Users/resend"), 'data',
-			function (err, response) {
-				overlay.close();
-				Q.handle(Q.getObject('slots.data.activationLink', response));
-			}, {"method": "post"});
-			return false;
-		});
-		register_form.prepend($p);
-		if (Q.text.Streams.login.newUser) {
-			$p.append($('<div />').html(Q.text.Streams.login.newUser));
-		}
 	}
 	return register_form;
 };
