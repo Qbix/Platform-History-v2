@@ -67,7 +67,7 @@ abstract class Users extends Base_Users
 	 * @method currentCommunityId
 	 * @static
 	 * @param {bool} $defaultMainCommunity If true and communityId from session empty, return the main community id.
-	 * @return {string} The id of the current community, or null if none and defaultMainCommunity = fale
+	 * @return {string} The id of the current community, or null if none and defaultMainCommunity = false
 	 */
 	static function currentCommunityId($defaultMainCommunity = false)
 	{
@@ -2160,6 +2160,34 @@ abstract class Users extends Base_Users
 			return false;
 		}
 		return $publicKey;
+	}
+
+	static function responseData()
+	{
+		$user = Q::ifset(Users::$cache, 'user', null);
+		if (!$user) {
+			return array();
+		}
+		$useActivateDialog = Q_Config::get('Users', 'login', 'useActivateDialog', false);
+		if (!$useActivateDialog) {
+			return compact('user');
+		}
+		$activationLink = null;
+		if ($user->signedUpWith === 'mobile') {
+			$fields = array('m' => $user->mobileNumberPending);
+		} else if ($user->signedUpWith === 'email') {
+			$fields = array('e' => $user->emailAddressPending);
+		} else {
+			$fields = array();
+		}
+		$displayName = Streams::displayName($user);
+		$user = $user->exportArray();
+		$user['displayName'] = $displayName;
+		if ($fields) {
+			$activationLink = Q_Uri::url("Users/activate?")
+			. '?' . http_build_query($fields);
+		}
+		return compact('user', 'activationLink');
 	}
 
 	/**
