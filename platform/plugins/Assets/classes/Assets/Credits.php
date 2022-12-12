@@ -208,8 +208,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$stream->changed();
 
 		$more['amount'] = $amount;
-		$more['toUserName'] = $assets_credits->getAttribute("toUserName");
-		$more['fromUserName'] = $assets_credits->getAttribute("fromUserName");
 		$more['toStreamTitle'] = $assets_credits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assets_credits->getAttribute("fromStreamTitle");
 		$more['toUserId'] = $toPublisherId;
@@ -415,7 +413,6 @@ class Assets_Credits extends Base_Assets_Credits
 		$text = Q_Text::get('Assets/content');
 		$type = 'Assets/credits/received';
 		$content = Q::ifset($text, 'messages', $type, 'content', "Received {{amount}} credits");
-		$more['fromUserName'] = $assets_credits->getAttribute("toUserName");
 		$to_stream->post($toUserId, array(
 			'type' => $type,
 			'byClientId' => $fromUserId,
@@ -433,8 +430,6 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	private static function fillInstructions ($assetsCredits, $more = array()) {
 		$more['messageId'] = $assetsCredits->id;
-		$more['toUserName'] = $assetsCredits->getAttribute("toUserName");
-		$more['fromUserName'] = $assetsCredits->getAttribute("fromUserName");
 		$more['toStreamTitle'] = $assetsCredits->getAttribute("toStreamTitle");
 		$more['fromStreamTitle'] = $assetsCredits->getAttribute("fromStreamTitle");
 		$more['toUserId'] = $assetsCredits->toUserId;
@@ -486,9 +481,6 @@ class Assets_Credits extends Base_Assets_Credits
 
 		if ($toPublisherId && $toStreamName) {
 			$more['toStreamTitle'] = Streams_Stream::fetch($toPublisherId, $toPublisherId, $toStreamName)->title;
-			$more['toUserName'] = Users::fetch($toPublisherId, true)->displayName(array('asUserId' => $fromUserId));
-		} elseif ($toUserId) {
-			$more['toUserName'] = Users::fetch($toUserId, true)->displayName(array('asUserId' => $fromUserId));
 		}
 
 		if ($fromPublisherId && $fromStreamName) {
