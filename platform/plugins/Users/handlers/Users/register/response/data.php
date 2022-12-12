@@ -2,6 +2,5 @@
 
 function Users_register_response_data()
 {
-	$fields = Users::responseData();
-	return $fields;
+	return Users::responseData();
 }
