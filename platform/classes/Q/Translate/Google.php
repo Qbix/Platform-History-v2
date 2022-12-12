@@ -13,11 +13,15 @@ class   Q_Translate_Google {
 		$fromLang = $parts[0];
 		$locale = count($parts) > 1 ? $parts[1] : null;
 		$in = $this->parent->getSrc($fromLang, $locale, true);
+		$useLocale = Q_Config::get('Q', 'text', 'useLocale', false);
 		foreach ($this->parent->locales as $toLang => $localeNames) {
 			$b1 = "\033[1m";
 			$b2 = "\033[0m";
-			echo $b1."Processing $fromLang->$toLang" . $b2
-				. '(' . implode(' ', $localeNames) . ')' . PHP_EOL;
+			echo $b1."Processing $fromLang->$toLang" . $b2;
+			if ($useLocale) {
+				echo '  (' . implode(' ', $localeNames) . ')';
+			}
+			echo PHP_EOL;
 			if ($toLang !== $fromLang) {
 				$out = $this->parent->getSrc($toLang, $locale, false);
 				$toRemove = $this->parent->toRemove($out);
@@ -27,6 +31,9 @@ class   Q_Translate_Google {
 			}
 			if (isset($res) and is_array($res)) {
 				$this->saveJson($toLang, $res, $jsonFiles);
+			}
+			if (!$useLocale) {
+				continue;
 			}
 			if (!empty($this->parent->options['in'])
 			&& !empty($this->parent->options['out'])
