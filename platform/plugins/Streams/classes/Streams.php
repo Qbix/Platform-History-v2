@@ -3866,6 +3866,8 @@ abstract class Streams extends Base_Streams
 			}
 			Users_Label::addLabel($myLabel, $asUserId, null, null, $asUserId2, true);
 		}
+
+		$asUserDisplayName = Streams::displayName($asUser);
 		
 		foreach ($raw_userIds as $userId) {
 			Users_Contact::addContact($asUserId, "Streams/invited", $userId, null, false, true);
@@ -3877,7 +3879,7 @@ abstract class Streams extends Base_Streams
 				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
 			}
 
-			$displayName = Q::ifset($options, 'name', Streams::displayName($asUser));
+			$displayName = Q::ifset($options, 'name', $asUserDisplayName);
 			if ($displayName) {
 				try {
 					Q::event("Streams/basic/post", array(
@@ -3914,7 +3916,7 @@ abstract class Streams extends Base_Streams
 			"writeLevel" => $writeLevel,
 			"adminLevel" => $adminLevel,
 			"permissions" => $permissions,
-			"displayName" => $displayName,
+			"displayName" => $asUserDisplayName,
 			"expireTime" => $expireTime
 		);
 		
