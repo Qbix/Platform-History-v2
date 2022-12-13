@@ -21,7 +21,7 @@ function Assets_NFT_response_owned ($params) {
 	if ($platform === 'web3' and !$ownerXid && $ownerUserId) {
 		$ownerXid = Users_Web3::getWalletByUserId($ownerUserId);
 	}
-	$recipientXid = Q::ifset($request, "recipient", "xid", Users_Web3::getWalletByUserId());
+	$recipientXid = Q::ifset($request, "recipient", "xid", null);
 	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
 	$glob = array();
 	$glob["offset"] = (int)Q::ifset($request, "offset", 0);
@@ -115,20 +115,25 @@ function Assets_NFT_response_owned ($params) {
 			}
 			if ($recipientXid and $platform === 'web3') {
 				$dirtyTokens = $tokens;
-				$tokens = array();
+				$temp = array();
 				$salesABI = 'Assets/templates/R1/NFT/sales/contract';
-				foreach ($dirtyTokens as $tokenId) {
-					$tokenInfo = Users_Web3::execute($salesABI, $ownerXid, "pending", [$tokenId], $chain["chainId"], $caching, 1000000);
-					if ($recipientXid == $tokenInfo['recipient']) {
-						$untilTimestamp = Q::ifset($tokenInfo, "untilTimestamp", null);
-						$tokens[] = array(
-							"tokenId" => $tokenId,
-							"untilTimestamp" => $untilTimestamp
-						);
+				try {
+					foreach ($dirtyTokens as $tokenId) {
+						$tokenInfo = Users_Web3::execute($salesABI, $ownerXid, "pending", [$tokenId], $chain["chainId"], $caching, 1000000);
+						if ($recipientXid == $tokenInfo['recipient']) {
+							$untilTimestamp = Q::ifset($tokenInfo, "untilTimestamp", null);
+							$temp[] = array(
+								"tokenId" => $tokenId,
+								"untilTimestamp" => $untilTimestamp
+							);
+						}
 					}
+					$tokens = $temp;
+				} catch (Exception $e) {
+					// probably this address doesn't support pending() method
 				}
 			}
-
+			
 			foreach ($tokens as $tokenId) {
 				$untilTimestamp = null;
 				if (is_array($tokenId)) {

@@ -1357,6 +1357,15 @@
 
 					return false;
 				}
+			},
+
+			/**
+			 * Calculate seriesId from tokenId
+			 * @param {String} tokenId can be a long decimal representation
+			 * @returns {String} '0x' followed by 16 hexits
+			 */
+			seriesIdFromTokenId(tokenId) {
+				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
 		Web3: {

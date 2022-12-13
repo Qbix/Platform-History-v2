@@ -61,5 +61,5 @@ function Assets_NFT_response_getInfo ($params) {
 		$metadata = Q::event('Assets/NFT/response/fetchMetadata', compact("tokenId","chainId", "contractAddress", "ABI", "tokenURI", "pathABI"));
 	} catch (Exception $e) {}
 
-	return compact("tokenId", "chainId", "author", "owner", "saleInfo", "commissionInfo", "metadata", "authorUserId", "ownerUserId", "tokenURI");
+	return compact("tokenId", "chainId", "author", "owner", "commissionInfo", "metadata", "authorUserId", "ownerUserId", "tokenURI");
 }
