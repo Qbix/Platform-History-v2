@@ -34,7 +34,13 @@ Q.text.Streams = {
 	login: {
 		prompt: "Let friends recognize you:",
 		newUser: "or create a new account below",
-		picTooltip: "You can change this picture later"
+		picTooltip: "You can change this picture later",
+		placeholders: {
+			fullName: 'Enter your full name'
+		},
+		maxlengths: {
+			fullName: 50
+		}
 	},
 	complete: {
 		// this is just a fallback, see Streams/types/*/invite/dialog config
@@ -5522,8 +5528,8 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 	$formContent.append(
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
-			.attr('maxlength', Q.text.Users.login.maxlengths.fullName)
-			.attr('placeholder', Q.text.Users.login.placeholders.fullName)
+			.attr('maxlength', Q.text.Streams.login.maxlengths.fullName)
+			.attr('placeholder', Q.text.Streams.login.placeholders.fullName)
 			.attr('tabindex', 1010)
 			.val(firstName+(lastName ? ' ' : '')+lastName)
 	)
@@ -6020,8 +6026,6 @@ Q.onInit.add(function _Streams_onInit() {
 	if (Streams.options.overrideUserRegistrationForm) {
 		Users.login.options.setupRegisterForm = Streams.setupRegisterForm;	
 	}
-	Q.text.Users.login.placeholders.fullName = 'Enter your full name';
-	Q.text.Users.login.maxlengths.fullName = 50;
 
 	Users.onLogin.set(function (user) {
 		if (user) { // the user changed

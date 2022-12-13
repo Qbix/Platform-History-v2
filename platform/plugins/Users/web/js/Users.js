@@ -992,8 +992,8 @@
 				Users.loggedInUser = new Users.User(user);
 				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			}
-			if (user.activateLink) {
-				Users.Dialogs.activate(user.activateLink, _activationComplete);
+			if (priv.activateLink) {
+				Users.Dialogs.activate(priv.activateLink, _activationComplete);
 			} else {
 				_activationComplete();
 			}
@@ -1362,6 +1362,7 @@
 
 				if (priv.login_onConnect) {
 					priv.login_connected = true;
+					priv.activateLink = data && data.activateLink;
 					if (login_setupDialog.dialog) {
 						Q.Dialogs.pop();
 					}
@@ -1438,7 +1439,9 @@
 					first_input.plugin('Q/clickfocus');
 					return;
 				}
+
 				// success!
+				localStorage.setItem("Q.Users.register.success", identifier_input.val());
 				priv.activateLink = Q.getObject('slots.data.activateLink', response);
 				Users.lastSeenNonce = Q.cookie('Q_nonce');
 				Users.roles = response.slots.data.roles || {};
@@ -1708,6 +1711,9 @@
 				$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
 				_centerIt();
 			} else {
+				if (localStorage.getItem("Q.Users.register.success")) {
+					$('.Streams_login_fullname_block, .Streams_login_get_started', step2).hide();
+				}
 				step2.slideDown('fast', function () {
 					$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
 					_centerIt();
@@ -1774,9 +1780,9 @@
 			autocomplete: autocomplete,
 			type: type
 		}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
-			.attr('placeholder', placeholder)
-			.attr('autocomplete', 'username')
-			.focus(hideForm2);
+		.attr('placeholder', placeholder)
+		.attr('autocomplete', 'username')
+		.focus(hideForm2);
 
 		if (type === 'email') {
 			identifierInput.attr('name', 'email');
@@ -1928,6 +1934,7 @@
 		$('input', step1_form).add('select', step1_form).on('input', function () {
 			step1_form.plugin('Q/validator', 'reset', this);
 		});
+		
 
 		login_setupDialog.dialog = Q.Dialogs.push({
 			title: Q.text.Users.login.title,
@@ -1950,14 +1957,17 @@
 					$input.eq(0).plugin('Q/clickfocus');	
 				}
 				setTimeout(function () {
-					$input.val('').trigger('change');
+					var registeredIdentifier = localStorage.getItem("Q.Users.register.success") || '';
+					$input.val(registeredIdentifier).trigger('change');
 					if (options.identifier) {
 						$input.val(options.identifier).trigger('change');
+					} else {
+						$input.val(registeredIdentifier).trigger('change').eq(0).plugin('Q/clickfocus');
+					}
+					if (options.identifier || registeredIdentifier) {
 						setTimeout(function () {
 							Users.submitClosestForm.apply($a, arguments);
 						}, 300);
-					} else {
-						$input.val('').trigger('change').eq(0).plugin('Q/clickfocus');
 					}
 				}, 0);
 			},
@@ -2000,9 +2010,9 @@
 	}
 
 	function setIdentifier_callback(err, response) {
-		var identifier_input = $('#Users_setIdentifier_identifier');
+		var identifier_input = $('#Users_setIdentifier_identifier')
+			.css('background-image', 'none');
 		var form = $('#Users_setIdentifier_step1_form');
-		identifier_input.css('background-image', 'none');
 
 		var msg = Q.firstErrorMessage(err, response);
 		if (msg) {
@@ -3716,7 +3726,7 @@
 					// priv.login_onConnect && priv.login_onConnect(user);
 				}},
 				onClose: {"Users.Dialogs.activate": function () {
-					priv.login_onCancel && priv.login_onCancel()
+					priv.login_onCancel && priv.login_onCancel();
 				}}
 			}));
 		}

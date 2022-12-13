@@ -25,10 +25,10 @@ function Users_activate_response_content()
 			$appendFields[$k] = $v;
 		}
 	}
-	$qs = '&' . http_build_query($appendFields);
+	// $qs = '&' . http_build_query($appendFields);
 	$afterActivate = Q::ifset($_REQUEST, 'afterActivate',
 		Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl)
-	) .'?Q.fromSuccess=Users/activate'.$qs;
+	) .'?Q.fromSuccess=Users/activate';
 
 	if (!empty(Users::$cache['success'])
 	and Q_Request::method() === 'POST') {

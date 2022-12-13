@@ -133,7 +133,7 @@
 			"notice": "{{#if displayName}}You have been logged in as {{displayName}}{{else}}Logged into another account.{{/if}}",
 			"alsoSendUnhashedPassphrase": false,
 			"setLanguage": true,
-			"interposeActivateDialog": true
+			"useActivateDialog": true
 		},
 		"paths": {
 			"icons": "files/Users/icons",
@@ -221,6 +221,8 @@
 				"search": [], /* can be ["facebook", "google"] */
 				"leaveDefault": false
 			},
+			"interposeActivateDialog": true,
+			"loginEvenBeforeActivate": false,
 			"delaySMS": 30000
 		},
 		"session": {

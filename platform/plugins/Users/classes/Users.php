@@ -2168,11 +2168,6 @@ abstract class Users extends Base_Users
 		if (!$user) {
 			return array();
 		}
-		$interposeActivateDialog = Q_Config::get('Users', 'login', 'interposeActivateDialog', false);
-		if (!$interposeActivateDialog) {
-			return compact('user');
-		}
-		$activateLink = null;
 		if ($user->signedUpWith === 'mobile') {
 			$fields = array('m' => $user->mobileNumberPending);
 		} else if ($user->signedUpWith === 'email') {
@@ -2180,14 +2175,16 @@ abstract class Users extends Base_Users
 		} else {
 			$fields = array();
 		}
-		$displayName = Streams::displayName($user);
-		$user = $user->exportArray();
-		$user['displayName'] = $displayName;
-		if ($fields) {
-			$activateLink = Q_Uri::url("Users/activate?")
+		$results = array();
+		if ($loggedInUser = Users::loggedInUser(false, false)) {
+			$results['user'] = $loggedInUser->exportArray();
+		}
+		$interposeActivateDialog = Q_Config::get('Users', 'register', 'interposeActivateDialog', false);
+		if ($interposeActivateDialog and $fields) {
+			$results['activateLink'] = Q_Uri::url("Users/activate?")
 			. '?' . http_build_query($fields);
 		}
-		return compact('user', 'activateLink');
+		return $results;
 	}
 
 	/**
