@@ -5528,6 +5528,7 @@ Streams.setupRegisterForm = function _Streams_setupRegisterForm(identifier, json
 	}
 	$formContent.append(
 		$('<input id="Streams_login_fullname" name="fullName" type="text" class="text" />')
+			.attr('autocomplete', 'name')
 			.attr('maxlength', Q.text.Streams.login.maxlengths.fullName)
 			.attr('placeholder', Q.text.Streams.login.placeholders.fullName)
 			.attr('tabindex', 1010)
