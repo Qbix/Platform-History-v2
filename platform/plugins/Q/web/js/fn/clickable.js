@@ -448,9 +448,6 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 				var ts = $this.state('Q/clickable');
 				if (ts) { // it may have been removed already
 					Q.handle(ts.onRelease, $this, [evt, overElement, $triggers]);
-					if (overElement && evt.type !== 'release') {
-						Q.handle(ts.onInvoke, this, [evt, $triggers]);
-					}
 				}
 			};
 			function scale(factor) {
