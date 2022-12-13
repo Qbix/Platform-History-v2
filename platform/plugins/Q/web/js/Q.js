@@ -15060,13 +15060,25 @@ Q.Camera = {
 		var newBlue = startBlue + fraction * (endBlue - startBlue);
 		return (newRed << 16 | newGreen << 8 | newBlue).toString(16);
 	},
+	/**
+	 * Sets a new theme-color on the window
+	 * @param {String} color in any CSS format, such as "#aabbcc"
+	 * @return {String} the previous color
+	 */
 	setWindowTheme: function (color) {
 		var meta = document.querySelector('meta[name="theme-color"]');
-		if (!meta) {
-			var meta = document.createElement('meta');
-			meta.setAttribute('name', 'theme-color');
+		var prevColor = null;
+		if (meta) {
+			prevColor = meta.getAttribute('content');
 		}
-		meta.setAttribute('content', color);
+		if (color) {
+			if (!meta) {
+				meta = document.createElement('meta');
+				meta.setAttribute('name', 'theme-color');
+			}
+			meta.setAttribute('content', color);
+		}
+		return prevColor;
 	}
 }
 
