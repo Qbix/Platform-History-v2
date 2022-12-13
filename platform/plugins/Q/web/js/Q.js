@@ -15059,6 +15059,14 @@ Q.Camera = {
 		var newGreen = startGreen + fraction * (endGreen - startGreen);
 		var newBlue = startBlue + fraction * (endBlue - startBlue);
 		return (newRed << 16 | newGreen << 8 | newBlue).toString(16);
+	},
+	setWindowTheme: function (color) {
+		var meta = document.querySelector('meta[name="theme-color"]');
+		if (!meta) {
+			var meta = document.createElement('meta');
+			meta.setAttribute('name', 'theme-color');
+		}
+		meta.setAttribute('content', color);
 	}
 }
 

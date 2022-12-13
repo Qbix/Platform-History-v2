@@ -1218,8 +1218,7 @@ function _updateThemeColor(fromIndex, toIndex, duration) {
 	var fromColor = Q.Color.between(originalColor, black, shades[fromIndex]);
 	var toColor = Q.Color.between(originalColor, black, shades[toIndex]);
 	Q.Animation.play(function (x, y) {
-		$('meta[name="theme-color"]')
-		.attr('content', '#' + Q.Color.between(fromColor, toColor, y));
+		Q.Color.setWindowTheme(Q.Color.between(fromColor, toColor, y));
 	}, duration);
 }
 
