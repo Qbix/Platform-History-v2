@@ -78,6 +78,7 @@ Q.Tool.define("Streams/html", function (options) {
 			});
 			state.froala.key = state.froala.key || Q.Streams.froala.key;
 			state.froala.toolbarStickyOffset = _getTopOffset();
+			state.froala.placeholderText = (state.froala.placeholderText || state.placeholder).replace(/(<br>)/g, "\n");
 		}
 		switch (state.editor && state.editor.toLowerCase()) {
 		case 'basic':
