@@ -28,9 +28,8 @@ var MyApp = (function (Q, $) {
 	// The following code is for all pages.
 	// For specific pages, see web/js/pages directory. 
 	Q.page('', function () {
-		$("html").removeClass("Q_hideUntilLoaded");
-
-		$('.MyApp_login').on(Q.Pointer.start, function () {
+		
+		$('.MyApp_login').on(Q.Pointer.click, function () {
 			Q.Users.login();
 			return false;
 		});
