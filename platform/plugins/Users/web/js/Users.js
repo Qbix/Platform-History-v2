@@ -123,6 +123,8 @@
 
 	var priv = {};
 
+	var _register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
+
 	/**
 	 * This event is fired if an error occurs in any Users function
 	 * @event onError
@@ -1441,7 +1443,7 @@
 				}
 
 				// success!
-				localStorage.setItem("Q.Users.register.success", identifier_input.val());
+				localStorage.setItem(_register_localStorageKey, identifier_input.val());
 				priv.activateLink = Q.getObject('slots.data.activateLink', response);
 				Users.lastSeenNonce = Q.cookie('Q_nonce');
 				Users.roles = response.slots.data.roles || {};
@@ -1711,7 +1713,7 @@
 				$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
 				_centerIt();
 			} else {
-				if (localStorage.getItem("Q.Users.register.success")) {
+				if (localStorage.getItem(_register_localStorageKey)) {
 					$('.Streams_login_fullname_block, .Streams_login_get_started', step2).hide();
 				}
 				step2.slideDown('fast', function () {
@@ -1957,7 +1959,7 @@
 					$input.eq(0).plugin('Q/clickfocus');	
 				}
 				setTimeout(function () {
-					var registeredIdentifier = localStorage.getItem("Q.Users.register.success") || '';
+					var registeredIdentifier = localStorage.getItem(_register_localStorageKey) || '';
 					$input.val(registeredIdentifier).trigger('change');
 					if (options.identifier) {
 						$input.val(options.identifier).trigger('change');
