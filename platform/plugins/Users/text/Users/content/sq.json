@@ -142,6 +142,17 @@
         "Someone": "Dikush"
     },
     "web3": {
-        "WrongMethod": "Metoda e gabuar e kontratës {{methodName}}"
+        "WrongMethod": "Metoda e gabuar e kontratës {{methodName}}",
+        "ChangeWallet": "Ndrysho portofolin"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Celular",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "E kopjuar! Tani mund ta ngjitni kudo."
     }
 }

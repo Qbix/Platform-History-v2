@@ -3,7 +3,8 @@
         "Subject": "Üdvözöljük! Kérem ellenőrizze az email címét.",
         "Thanks": "Üdvözöljük itt: {{1}}",
         "ReallyYourEmail": "Ez valóban az Ön e-mail címe, {{1}}? Ha igen, kattintson <a href='{{2}}'>ide<\/a> a jelszó beállításához és a fiók aktiválásához.",
-        "SeeYou": "Találkozunk itt: <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Találkozunk itt: <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Ellenkező esetben kattintson <a href='{{1}}'>erre a linkre<\/a> ."
     },
     "identifier": {
         "Subject": "Üdvözöljük! Erősítsd meg az e-mail címed."
@@ -11,9 +12,10 @@
     "resend": {
         "Subject": "Hé, elfelejtette a jelszavát?",
         "Thanks": "Köszönjük látogatását {{1}}",
-        "YouAreReceiving": "Azért kapta ezt az e-mailt, mert valaki beírta az e-mail címét, és az &quot;elfelejtett jelszó&quot; gombra kattintott. Ha nem te voltál, egyszerűen hagyd figyelmen kívül ezt az üzenetet.",
+        "YouAreReceiving": "Azért kapta ezt az e-mailt, mert valaki megadta az e-mail címét, és rákattintott az &quot;elfelejtett jelszóra&quot;. Ha nem te voltál, egyszerűen hagyd figyelmen kívül ezt az üzenetet.",
         "Reset": "Az összetett jelszó visszaállításához kattintson a {{1}}",
-        "SetUpPassphrase": "Jelszó beállítása"
+        "SetUpPassphrase": "Jelszó beállítása",
+        "DomainCode": "Ha a weboldal már meg van nyitva a böngészőjében, megadhatja a kódot"
     },
     "SeeYou": "Találkozunk a {{1}}-on!",
     "LinkToUnsubscribe": "Itt található egy link, amellyel <a href='{{1}}'>leiratkozhat<\/a> , ha nem szeretne több e-mailt kapni."

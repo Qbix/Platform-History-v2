@@ -3,7 +3,8 @@
         "Subject": "Tere tulemast! Palun kinnitage oma e-posti aadress.",
         "Thanks": "Tere tulemast {{1}}",
         "ReallyYourEmail": "Kas see on tõesti teie e-posti aadress, {{1}}? Kui jah, klõpsake parooli määramiseks ja konto aktiveerimiseks <a href='{{2}}'>siin<\/a> .",
-        "SeeYou": "Kohtumiseni <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Kohtumiseni <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Vastasel juhul klõpsake <a href='{{1}}'>sellel lingil<\/a> ."
     },
     "identifier": {
         "Subject": "Tere tulemast! Kinnita oma e-posti aadress."
@@ -13,7 +14,8 @@
         "Thanks": "Täname, et külastasite {{1}}",
         "YouAreReceiving": "Saite selle meili, kuna keegi sisestas teie e-posti aadressi ja klõpsas &quot;unustasin parooli&quot;. Kui see ei olnud teie, siis lihtsalt ignoreerige seda sõnumit.",
         "Reset": "Parooli lähtestamiseks klõpsake {{1}}",
-        "SetUpPassphrase": "Seadistage parool"
+        "SetUpPassphrase": "Seadistage parool",
+        "DomainCode": "Kui veebileht on teie brauseris juba avatud, saate koodi sisestada"
     },
     "SeeYou": "Kohtumiseni {{1}}!",
     "LinkToUnsubscribe": "Siin on link <a href='{{1}}'>tellimusest loobumiseks<\/a> , kui te ei soovi enam meile saada."

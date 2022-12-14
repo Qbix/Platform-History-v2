@@ -7,7 +7,8 @@
         "ClickHere": "Klik hier om uw mobiele nummer te verifiëren: {{1}}"
     },
     "resend": {
-        "DidYouWant": "Wilt u uw wachtwoordzin opnieuw instellen in {{1}}?",
-        "ClickHere": "Klik dan hier: {{1}}"
+        "DidYouWant": "Wil je je wachtwoordzin resetten in {{1}}?",
+        "ClickHere": "Klik dan hier: {{1}}",
+        "OrEnterCode": "of voer code in:"
     }
 }

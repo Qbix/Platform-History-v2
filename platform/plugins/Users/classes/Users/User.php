@@ -723,6 +723,7 @@ class Users_User extends Base_Users_User
 		// Everything is okay. Assign it!
 		$email->userId = $this->id;
 		$email->state = 'active';
+		$email->activationCode = ''; // can't use the code again
 		$email->save();
 		
 		$ui = new Users_Identify();
@@ -1030,6 +1031,7 @@ class Users_User extends Base_Users_User
 		// Everything is okay. Assign it!
 		$mobile->userId = $this->id;
 		$mobile->state = 'active';
+		$mobile->activationCode = ''; // can't use the code again
 		$mobile->save();
 		
 		$ui = new Users_Identify();

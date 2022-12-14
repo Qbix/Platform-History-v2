@@ -841,8 +841,12 @@ Q.Tool.define("Streams/related", function _Streams_related_tool (options) {
 		beforeRemove: function () {
 			$(this.element).plugin('Q/sortable', 'remove');
 			this.state.onUpdate.remove("Streams/related");
-			this.mutationObserver.disconnect();
-			this.intersectionObserver.disconnect();
+			if (this.mutationObserver) {
+				this.mutationObserver.disconnect();
+			}
+			if (this.intersetionObserver) {
+				this.intersectionObserver.disconnect();
+			}
 		}
 	}
 });

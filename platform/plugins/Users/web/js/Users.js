@@ -988,37 +988,44 @@
 			if (user) {
 				user.result = priv.result;
 				user.used = priv.used;
-				user.activationLink = priv.activationLink;
+				user.activateLink = priv.activateLink;
 				Users.loggedInUser = new Users.User(user);
 				Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			}
-			if (!o.accountStatusUrl) {
-				_onComplete(user, Q.copy(priv));
-				return;
+			if (priv.activateLink) {
+				Users.Dialogs.activate(priv.activateLink, _activationComplete);
+			} else {
+				_activationComplete();
 			}
-			Q.request(o.accountStatusUrl, 'accountStatus', function (err, response2) {
-				var fem = Q.firstErrorMessage(err, response2);
-				if (fem) {
-					return alert(fem);
-				}
-				// DEBUGGING: For debugging purposes
-				Users.login.occurring = false;
-				if (!o.onRequireComplete
-				|| response2.slots.accountStatus === 'complete') {
+			function _activationComplete() {
+				if (!o.accountStatusUrl) {
 					_onComplete(user, Q.copy(priv));
-				} else if (response2.slots.accountStatus === 'refresh') {
-					// we are logged in, refresh the page
-					Q.handle(window.location.href);
 					return;
-				} else {
-					// take the user to the profile page which will ask
-					// the user to complete their registration process
-					// by entering additional information
-					if (false !== Q.handle(o.onResult, this, [user, response2, o])) {
-						Q.handle(o.onRequireComplete, this, [user, response2, o]);
-					}
 				}
-			});
+				Q.request(o.accountStatusUrl, 'accountStatus', function (err, response2) {
+					var fem = Q.firstErrorMessage(err, response2);
+					if (fem) {
+						return alert(fem);
+					}
+					// DEBUGGING: For debugging purposes
+					Users.login.occurring = false;
+					if (!o.onRequireComplete
+					|| response2.slots.accountStatus === 'complete') {
+						_onComplete(user, Q.copy(priv));
+					} else if (response2.slots.accountStatus === 'refresh') {
+						// we are logged in, refresh the page
+						Q.handle(window.location.href);
+						return;
+					} else {
+						// take the user to the profile page which will ask
+						// the user to complete their registration process
+						// by entering additional information
+						if (false !== Q.handle(o.onResult, this, [user, response2, o])) {
+							Q.handle(o.onRequireComplete, this, [user, response2, o]);
+						}
+					}
+				});
+			}
 		}
 
 		// User clicked "cancel" or closed login dialog
@@ -1285,7 +1292,7 @@
 	 *  @param {String} [options.identifierType] the type of the identifier, which could be "mobile" or "email" or "email,mobile" or "web3"
 	 *  @param {String} [options.userId] You can set this to the id of a user in the database who doesn't have any email or mobile number set yet. This can happen if the user was e.g. invited via a printed invitation and lost it, and allows someone to help set up the first identifier for that user.
 	 *  @param {Q.Event} [options.onActivate] event that occurs right after dialog is shown
-	 *  @param {Q.Event} [options.onSuccess] event that occurs on success
+	 *  @param {Q.Event} [options.onSuccess] event that occurs on success, you can pass a URL to redirect to here
 	 *  @param {Q.Event} [options.onCancel] event that occurs if the dialog is canceled
 	 *  @param {Function} [options.onResult] event that occurs before either onSuccess or onCancel
 	 */
@@ -1322,7 +1329,8 @@
 	function login_callback(err, response) {
 		var identifier_input = $('#Users_login_identifier');
 		var form = $('#Users_login_step1_form');
-		identifier_input.css('background-image', 'none');
+		identifier_input.attr('tabindex', 1000)
+			.css('background-image', 'none');
 
 		if (response.errors) {
 			// There were errors
@@ -1337,7 +1345,7 @@
 		form.plugin('Q/validator', 'reset');
 		identifier_input.blur();
 
-		var json = response.slots.data;
+		var data = response.slots.data;
 		var step2_form;
 		var autologin = false;
 		var setupRegisterForm = Users.login.options.setupRegisterForm || defaultSetupRegisterForm;
@@ -1354,6 +1362,7 @@
 
 				if (priv.login_onConnect) {
 					priv.login_connected = true;
+					priv.activateLink = data && data.activateLink;
 					if (login_setupDialog.dialog) {
 						Q.Dialogs.pop();
 					}
@@ -1363,14 +1372,17 @@
 				alert("Could not authenticate with facebook. Try again.");
 				Q.Dialogs.pop();
 			}, {"prompt": false});
-		} else if (!json.exists) {
+		} else if (!data.exists) {
 			// this identifier is available. This user has no password set yet and will activate later
-			step2_form = setupRegisterForm(identifier_input.val(), json, priv, $(login_setupDialog.dialog).data('Q/dialog'));
-		} else if (json.passphrase_set) {
+			var identifier = identifier_input.val();
+			step2_form = setupResendButton(setupRegisterForm(
+				identifier, data, priv, $(login_setupDialog.dialog).data('Q/dialog')
+			), identifier);
+		} else if (data.passphrase_set) {
 			// check password
 			step2_form = setupLoginForm();
-		} else if (json.verified) {
-			// var the user gain access by resending an activation message
+		} else if (data.verified) {
+			// allow the user to gain access by resending an activation message
 			step2_form = setupResendForm(true);
 		} else {
 			// remind to activate -- this is probably a futureUser created using an invite
@@ -1427,15 +1439,18 @@
 					first_input.plugin('Q/clickfocus');
 					return;
 				}
+
 				// success!
+				localStorage.setItem(_register_localStorageKey, identifier_input.val());
+				priv.activateLink = Q.getObject('slots.data.activateLink', response);
 				Users.lastSeenNonce = Q.cookie('Q_nonce');
 				Users.roles = response.slots.data.roles || {};
-				switch ($this.data('form-type')) {
+				switch ($this.attr('data-form-type')) {
 					case 'resend':
 						priv.result = 'resend';
 						$('button', $this).html('Sent').attr('disabled', 'disabled');
 						Q.Dialogs.pop();
-						Q.handle(Q.getObject('slots.data.activationLink', response));
+						Users.Dialogs.activate(user.activateLink);
 						return;
 					case 'register':
 						priv.result = 'register';
@@ -1454,7 +1469,6 @@
 					if (login_setupDialog.dialog) {
 						Q.Dialogs.pop();
 					}
-					priv.activationLink = response.slots.data.activationLink;
 					priv.login_onConnect(u);
 				}
 			}, {"method": "post"});
@@ -1463,6 +1477,7 @@
 
 		function setupLoginForm() {
 			var passphrase_input = $('<input type="password" name="passphrase" id="current-password" class="Q_password" />')
+				.attr('tabindex', 1010)
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('maxlength', Q.text.Users.login.maxlengths.passphrase)
 				.attr('autocomplete', 'current-password')
@@ -1479,7 +1494,7 @@
 				});
 			var login_form = $('<form method="post" />')
 				.attr('action', Q.action("Users/login"))
-				.data('form-type', 'login')
+				.attr('data-form-type', 'login')
 				.append($("<div id='Users_login_label_div'>").append(
 					$('<label for="Users_login_passphrase" />').html(Q.text.Users.login.passphrase)
 				)).append(
@@ -1511,7 +1526,7 @@
 																$(this).plugin('Q/validator', 'reset');
 															});
 														Q.Dialogs.pop();
-														Q.handle(Q.getObject('slots.data.activationLink', response));
+														Q.handle(Q.getObject('slots.data.activateLink', response));
 													})
 											)
 										);
@@ -1537,7 +1552,7 @@
 				: $('<p id="Users_login_notVerified"></p>').html(Q.text.Users.login.notVerified);
 			var identifier_form = $('<form method="post" />')
 				.attr('action', Q.action("Users/resend"))
-				.data('form-type', 'resend')
+				.attr('data-form-type', 'resend')
 				.append(explanation)
 				.append($('<div class="Q_buttons"></div>').append(
 					$('<button id="Users_login_resend" class="Q_button Users_login_start Q_main_button" />')
@@ -1548,10 +1563,10 @@
 			return identifier_form;
 		}
 
-		function defaultSetupRegisterForm(identifier, json, priv, dialog) {
-			var src = json.entry[0].photos && json.entry[0].photos.length ? json.entry[0].photos[0].value : json.entry[0].thumbnailUrl;
+		function defaultSetupRegisterForm(identifier, data, priv) {
+			var src = data.entry[0].photos && data.entry[0].photos.length ? data.entry[0].photos[0].value : data.entry[0].thumbnailUrl;
 			var src40 = src, src50 = src, src80 = src;
-			var username = json.entry[0].preferredUsername || json.entry[0].displayName;
+			var username = data.entry[0].preferredUsername || data.entry[0].displayName;
 			if (priv.registerInfo) {
 				if (priv.registerInfo.username) {
 					username = priv.registerInfo.username;
@@ -1580,9 +1595,9 @@
 				e.preventDefault(); // prevent automatic submit on click
 			});
 			var _registering = false;
-			var register_form = $('<form method="post" class="Users_register_form" />')
+			var $register_form = $('<form method="post" class="Users_register_form" />')
 				.attr('action', Q.action("Users/register"))
-				.data('form-type', 'register')
+				.attr('data-form-type', 'register')
 				//.append($('<div class="Users_login_appear" />'))
 				.append($formContent)
 				.append($('<input type="hidden" name="identifier" />').val(identifier))
@@ -1615,14 +1630,14 @@
 				}, 1000, false, false));
 
 			if (priv.activation) {
-				register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
+				$register_form.append($('<input type="hidden" name="activation" />').val(priv.activation));
 			}
 
-			if (json.termsLabel) {
+			if (data.termsLabel) {
 				$formContent.append(
 					$('<div />').attr("id", "Users_register_terms")
 						.append($('<input type="checkbox" name="agree" id="Users_agree" value="yes">'))
-						.append($('<label for="Users_agree" />').html(json.termsLabel))
+						.append($('<label for="Users_agree" />').html(data.termsLabel))
 				);
 			}
 
@@ -1641,7 +1656,7 @@
 						authResponse.appId = appId;
 						authResponse.fbAppId = platformAppId;
 						for (k in authResponse) {
-							register_form.append(
+							$register_form.append(
 								$('<input type="hidden" />')
 									.attr('name', 'Q.Users.facebook.authResponse[' + k + ']')
 									.attr('value', authResponse[k])
@@ -1651,29 +1666,35 @@
 				}, {
 					appId: appId
 				});
-				register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
+				$register_form.append($('<input type="hidden" name="app[platform]" value="facebook" />'));
 			}
-			if (json.emailExists || json.mobileExists) {
-				var $p = $('<p id="Users_login_identifierExists" />')
-					.html(
-						json.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
-					);
-				$('a', $p).click(function () {
-					$.post(
-						Q.ajaxExtend(Q.action("Users/resend"), 'data'),
-						'identifier=' + encodeURIComponent(identifier_input.val()),
-						function () {
-							Q.Dialogs.pop();
-						}
-					);
-					return false;
-				});
-				register_form.prepend($p);
-				if (Q.text.Users.login.newUser) {
-					$p.append($('<div />').html(Q.text.Streams.login.newUser));
+			return $register_form[0];
+		}
+
+		function setupResendButton(form, identifier) {
+			if (!data.emailExists && !data.mobileExists) {
+				return form;
+			}
+			var $p = $('<p id="Users_login_identifierExists" />').html(
+				data.emailExists ? Q.text.Users.login.emailExists : Q.text.Users.login.mobileExists
+			);
+			$('a', $p).plugin('Q/clickable', {
+				onInvoke: function () {
+					$(this).addClass('Q_working');
+					Q.request({identifier: identifier}, Q.action("Users/resend"), 'data',
+					function (err, response) {
+						priv.login_resent = true;
+						Q.Dialogs.pop();
+						var activateUrl = Q.getObject('slots.data.activateLink', response);
+						Users.Dialogs.activate(activateUrl);
+					}, {"method": "post"});
 				}
+			}).attr('tabindex', 1002);
+			if (Q.text.Users.login.newUser) {
+				$p.append($('<div />').html(Q.text.Streams.login.newUser));
 			}
-			return register_form;
+			$p.prependTo(form);
+			return form;
 		}
 
 		$('#Users_login_usingPlatforms').hide();
@@ -1681,20 +1702,23 @@
 			$('*', form).attr('disabled', 'disabled');
 		}
 		if (!autologin) {
-			var step2 = $('#Users_login_step2').html(step2_form);
+			var step2 = $('#Users_login_step2').empty().append(step2_form);
 			var $dc = step2.closest('.Q_dialog_content');
 			$(login_setupDialog.dialog).addClass('Users_login_expanded');
 			if (Q.info && Q.info.isTouchscreen) {
 				step2.show();
-				step2_form.plugin('Q/placeholders');
+				$(step2_form).plugin('Q/placeholders');
 				$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
 				_centerIt();
 			} else {
+				if (localStorage.getItem(_register_localStorageKey)) {
+					$('.Streams_login_fullname_block, .Streams_login_get_started', step2).hide();
+				}
 				step2.slideDown('fast', function () {
 					$dc.scrollTop($dc[0].scrollHeight - $dc[0].clientHeight);
 					_centerIt();
-					step2_form.plugin('Q/placeholders');
-					if (step2_form.data('form-type') === 'resend') {
+					$(step2_form).plugin('Q/placeholders');
+					if ($(step2_form).attr('data-form-type') === 'resend') {
 						$('.Q_main_button', step2_form).focus();
 					} else if (!Q.info.isTouchscreen) {
 						$('input', step2_form).eq(0).plugin('Q/clickfocus').select();
@@ -1706,11 +1730,11 @@
 		$('#Users_login_step1').animate({"opacity": 0.5}, 'fast');
 		$('#Users_login_step1 .Q_button').attr('disabled', 'disabled');
 		if (!autologin) {
-			step2_form.plugin('Q/validator').submit(function (e) {
+			$(step2_form).plugin('Q/validator').submit(function (e) {
 				e.preventDefault();
 			}).submit(Q.throttle(onFormSubmit, 1000, false, false));
 			$('input', step2_form).add('select', step2_form).on('input', function () {
-				step2_form.plugin('Q/validator', 'reset', this);
+				$(step2_form).plugin('Q/validator', 'reset', this);
 			});
 		}
 		if (priv.linkToken) {
@@ -1756,9 +1780,9 @@
 			autocomplete: autocomplete,
 			type: type
 		}).attr('maxlength', Q.text.Users.login.maxlengths.identifier)
-			.attr('placeholder', placeholder)
-			.attr('autocomplete', 'username')
-			.focus(hideForm2);
+		.attr('placeholder', placeholder)
+		.attr('autocomplete', 'username')
+		.focus(hideForm2);
 
 		if (type === 'email') {
 			identifierInput.attr('name', 'email');
@@ -1850,7 +1874,8 @@
 							alt: Q.text.Users.login.facebook.alt,
 							src: Q.text.Users.login.facebook.src || Q.url('{{Users}}/img/facebook-login.png')
 						})
-					).css({'display': 'inline-block', 'vertical-align': 'middle'})
+					).attr('tabindex', 1002)
+					.css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (location.search.includes('handoff=yes')) {
 							var scheme = Q.getObject([Q.info.platform, Q.info.app, 'scheme'], Users.apps);
@@ -1876,7 +1901,8 @@
 							alt: Q.text.Users.login.web3.alt,
 							src: Q.text.Users.login.web3Src || Q.url('{{Users}}/img/web3-login.png')
 						})
-					).css({'display': 'inline-block', 'vertical-align': 'middle'})
+					).attr('tabindex', '1001')
+					.css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
 						if (login_setupDialog.dialog) {
 							Q.Dialogs.pop();
@@ -1908,6 +1934,7 @@
 		$('input', step1_form).add('select', step1_form).on('input', function () {
 			step1_form.plugin('Q/validator', 'reset', this);
 		});
+		
 
 		login_setupDialog.dialog = Q.Dialogs.push({
 			title: Q.text.Users.login.title,
@@ -1930,14 +1957,17 @@
 					$input.eq(0).plugin('Q/clickfocus');	
 				}
 				setTimeout(function () {
-					$input.val('').trigger('change');
+					var registeredIdentifier = localStorage.getItem(_register_localStorageKey) || '';
+					$input.val(registeredIdentifier).trigger('change');
 					if (options.identifier) {
 						$input.val(options.identifier).trigger('change');
+					} else {
+						$input.val(registeredIdentifier).trigger('change').eq(0).plugin('Q/clickfocus');
+					}
+					if (options.identifier || registeredIdentifier) {
 						setTimeout(function () {
 							Users.submitClosestForm.apply($a, arguments);
 						}, 300);
-					} else {
-						$input.val('').trigger('change').eq(0).plugin('Q/clickfocus');
 					}
 				}, 0);
 			},
@@ -1947,7 +1977,9 @@
 					$(this).plugin('Q/validator', 'reset');
 				});
 				$('#Users_login_step1').nextAll().hide();
-				if (!priv.login_connected && priv.login_onCancel) {
+				if (!priv.login_connected
+				&& !priv.login_resent
+				&& priv.login_onCancel) {
 					priv.login_onCancel();
 				}
 				$(this).remove();
@@ -1978,9 +2010,9 @@
 	}
 
 	function setIdentifier_callback(err, response) {
-		var identifier_input = $('#Users_setIdentifier_identifier');
+		var identifier_input = $('#Users_setIdentifier_identifier')
+			.css('background-image', 'none');
 		var form = $('#Users_setIdentifier_step1_form');
-		identifier_input.css('background-image', 'none');
 
 		var msg = Q.firstErrorMessage(err, response);
 		if (msg) {
@@ -2922,7 +2954,7 @@
 						}
 						if (Q.info.isTouchscreen && user.signedUpWith === 'mobile') {
 							nextUrl = Q.url(
-								user.activationLink + '?afterActivate=' + encodeURIComponent(nextUrl)
+								user.activateLink + '?afterActivate=' + encodeURIComponent(nextUrl)
 							);
 						}
 					}
@@ -2969,7 +3001,9 @@
 
 	}, 'Users');
 
+	var _register_localStorageKey;
 	Q.onInit.add(function () {
+		_register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
 		Q.Text.get('Users/content', function (err, text) {
 			if (!text) {
 				return;
@@ -2981,7 +3015,6 @@
 			Users.loggedInUser = new Users.User(Users.loggedInUser);
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		}
-		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
 
 		var appId = Q.info.app;
 		for (var platform in Users.apps) {
@@ -3043,6 +3076,16 @@
 				return false;
 			});
 		_setSessionFromQueryString(location.hash);
+
+		Q.each(document.querySelectorAll('[data-users-login'), function () {
+			Q.addEventListener(this, 'click', function () {
+				Q.Users.login();
+				return false;
+			});
+		});
+
+		document.documentElement.removeClass(Users.loggedInUser ? 'Users_loggedOut' : 'Users_loggedIn');
+		document.documentElement.addClass(Users.loggedInUser ? 'Users_loggedIn' : 'Users_loggedOut');
 	}, 'Users');
 
 	// handoff action
@@ -3675,6 +3718,38 @@
 					Q.handle(callback, Users, [selectedContact]);
 				}
 			});
+		},
+		activate: function (activateLink, options) {
+			Q.Dialogs.push(Q.extend(options, {
+				url: activateLink,
+				className: 'Users_activate_dialog',
+				onActivate: {"Users.Dialogs.activate": function () {
+					var dialog = this;
+					Q.Tool.byId('Q_form-Users_activate')
+					.state.onResponse.set(function (err, data, redirected) {
+						var fem = Q.firstErrorMessage(err, data, redirected);
+						if (fem) {
+							alert(fem);
+						} else {
+							priv.login_connected = true;
+							Q.Dialogs.close(dialog);
+						}
+						return false; // we handled it
+					});
+					$('#new-password').plugin('Q/clickfocus');
+					document.documentElement.addClass('Users_activate_dialog_showing');
+					// priv.login_connected = true;
+					// priv.login_onConnect && priv.login_onConnect(user);
+				}},
+				onClose: {"Users.Dialogs.activate": function () {
+					if (!priv.login_connected
+					&& !priv.login_resent
+					&& priv.login_onCancel) {
+						priv.login_onCancel && priv.login_onCancel();	
+					}
+					document.documentElement.removeClass('Users_activate_dialog_showing');
+				}}
+			}));
 		}
 	};
 	Users.Dialogs.contacts.options = {
@@ -4148,16 +4223,17 @@
 		},
 
 		login: function (signedCallback, authenticatedCallback) {
-			Users.prevDocumentTitle = document.title;
+			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
+			var _prevMetaTitle = $('meta[name="title"]').attr('content');
+			$('meta[name="title"').attr('content', Users.communityName);
+			var _prevOGTitle = $('meta[property="og:title"]').attr('content');
+			$('meta[property="og:title"]').attr('content', Users.communityName);
 			Web3.connect(function (err, provider) {
-				if (Users.prevDocumentTitle) {
-					document.title = Users.prevDocumentTitle;
-					delete Users.prevDocumentTitle;
-				}
 				if (err) {
 					return _cancel();
 				}
+				_restoreTitle();
 				Web3.provider = provider;
 
 				// Subscribe to accounts change
@@ -4204,9 +4280,8 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
-								var web3 = new window.Web3();
 								var address = accounts[0];
-								const res = provider.request({
+								provider.request({
 									method: 'personal_sign',
 									params: [ 
 										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 
@@ -4244,7 +4319,19 @@
 				}).catch(_cancel);
 			});
 			function _cancel() {
+				_restoreTitle();
 				Q.handle(callback, Users, [null]);
+			}
+			function _restoreTitle() {
+				if (_prevDocumentTitle) {
+					document.title = Users.prevDocumentTitle;
+				}
+				if (_prevMetaTitle) {
+					$('meta[name="title"').attr('content', _prevMetaTitle)
+				}
+				if (_prevOGTitle) {
+					$('meta[property="og:title"').attr('content', _prevOGTitle)
+				}
 			}
 		},
 		
@@ -4634,7 +4721,10 @@
 		}
 	}, 'Users');
 
-	Q.Dialogs.push.options.onActivate.set(function (dialog) {
+	Q.Dialogs.push.options.onActivate.set(function (dialog, options) {
+		if (!options.apply) {
+			return;
+		}
 		var $dialog = $(dialog);
 		Users.hint("Users/dialogCloseHint", $dialog.find('.Q_close')[0], {
 			show: {delay: 5000},

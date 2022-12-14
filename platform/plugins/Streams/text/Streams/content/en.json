@@ -13,6 +13,14 @@
         "Yes": "Yes",
         "No": "No"
     },
+    "login": {
+		"prompt": "Let friends recognize you:",
+		"newUser": "or create a new account below",
+		"picTooltip": "You can change this picture later",
+		"placeholder": {
+			"fullName": "Enter your full name"
+		}
+	},
     "interests": {
         "Filter": "Search interests",
         "CanAdd": "If you still can't find what you're looking for, you can add a new interest below:",

@@ -103,6 +103,7 @@
 			"id": {
 				"prefix": "sessionId_"
 			},
+			"startBefore": "Q/objects",
 			"appendSuffix": false,
 			"custom": true,
 			"db": null,

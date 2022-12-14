@@ -279,7 +279,8 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
                     tool._whitelistPush(instance);
                     Q.handle(callback, tool, [null, instance]);
                 }, function(err){
-                    console.log("err::txResponce.wait()");
+                    err = Q.Users.Web3.parseMetamaskError(err, [factoryContract])
+                    console.warn(err);
                     Q.handle(callback, tool, [err.reason || err]);
                 });
             });

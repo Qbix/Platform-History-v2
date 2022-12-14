@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Nais mo bang i-reset ang iyong passphrase sa {{1}}?",
-        "ClickHere": "Pagkatapos ay mag-click dito: {{1}}"
+        "ClickHere": "Pagkatapos ay mag-click dito: {{1}}",
+        "OrEnterCode": "o ilagay ang code:"
     }
 }

@@ -142,6 +142,17 @@
         "Someone": "Seseorang"
     },
     "web3": {
-        "WrongMethod": "Metode kontrak salah {{methodName}}"
+        "WrongMethod": "Metode kontrak salah {{methodName}}",
+        "ChangeWallet": "Ubah Dompet"
+    },
+    "identifier": {
+        "types": {
+            "email": "Surel",
+            "mobile": "Seluler",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Disalin! Sekarang Anda dapat menempelkannya di mana saja."
     }
 }

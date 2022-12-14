@@ -38,7 +38,10 @@ function Streams_register_post()
 		true,
 		@compact('activation')
 	);
-	Users::setLoggedInUser($user);
+
+	if (Q_Config::get('Users', 'register', 'loginEvenBeforeActivate', false)) {
+		Users::setLoggedInUser($user);
+	}
 	
 	// this also logs the user in
 	Users::$cache['user'] = $user;

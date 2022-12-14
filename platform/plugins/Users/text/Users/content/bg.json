@@ -142,6 +142,17 @@
         "Someone": "Някой"
     },
     "web3": {
-        "WrongMethod": "Грешен метод на договор {{methodName}}"
+        "WrongMethod": "Грешен метод на договор {{methodName}}",
+        "ChangeWallet": "Промяна на портфейла"
+    },
+    "identifier": {
+        "types": {
+            "email": "електронна поща",
+            "mobile": "Подвижен",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Копирано! Сега можете да го поставите навсякъде."
     }
 }

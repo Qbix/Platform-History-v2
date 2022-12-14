@@ -142,6 +142,17 @@
         "Someone": "บางคน"
     },
     "web3": {
-        "WrongMethod": "ผิดวิธีสัญญา {{methodName}}"
+        "WrongMethod": "ผิดวิธีสัญญา {{methodName}}",
+        "ChangeWallet": "เปลี่ยนกระเป๋าสตางค์"
+    },
+    "identifier": {
+        "types": {
+            "email": "อีเมล",
+            "mobile": "มือถือ",
+            "web3": "เว็บ3"
+        }
+    },
+    "clipboard": {
+        "Copied": "คัดลอก! ตอนนี้คุณสามารถวางได้ทุกที่"
     }
 }

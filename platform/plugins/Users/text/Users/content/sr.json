@@ -142,6 +142,17 @@
         "Someone": "Неко"
     },
     "web3": {
-        "WrongMethod": "Погрешан метод уговора {{methodName}}"
+        "WrongMethod": "Погрешан метод уговора {{methodName}}",
+        "ChangeWallet": "Промените новчаник"
+    },
+    "identifier": {
+        "types": {
+            "email": "Емаил",
+            "mobile": "Мобилни",
+            "web3": "Веб3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Копирано! Сада можете да га залепите било где."
     }
 }

@@ -142,6 +142,17 @@
         "Someone": "Iemand"
     },
     "web3": {
-        "WrongMethod": "Verkeerde kontrakmetode {{methodName}}"
+        "WrongMethod": "Verkeerde kontrakmetode {{methodName}}",
+        "ChangeWallet": "Verander beursie"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-pos",
+            "mobile": "Selfoon",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Gekopieer! Nou kan jy dit enige plek plak."
     }
 }

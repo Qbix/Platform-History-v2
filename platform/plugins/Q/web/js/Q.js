@@ -1124,7 +1124,6 @@ Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
 				Q.handle(callback, this);
 			}
 		} catch (e) {
-			// continue after a hook, because we need to set Q.Tool.latestName
 			console.warn(e);
 		}
 	}, key);
@@ -2546,6 +2545,34 @@ Q.timeRemaining = function (timestamp) {
 	result.minutes = Math.floor(seconds / 60);
 	result.seconds = parseInt(seconds - result.minutes * 60);
 	return result;
+};
+
+/**
+ * Calculate the topmost z-index from children of a container.
+ * Used so you can add 1 to this to move one of the children atop them all.
+ * @method zIndexTopmost
+ * @static
+ * @param {Element} [container=document.body] 
+ * @param {Function} [filter] By default, filters out elements with Q_click_mask
+ * @returns Number
+ */
+Q.zIndexTopmost = function (container, filter) {
+	container = container || document.body;
+	filter = filter || function (element) {
+		return !element.hasClass('Q_click_mask')
+			|| element.getAttribute('id') !== 'notices_slot';
+	}
+	var topZ = -1;
+	Q.each(container.children, function () {
+		if (!filter(this)) {
+			return;
+		}
+		var z = parseInt(this.computedStyle().zIndex);
+		if (!isNaN(z)) {
+			topZ = Math.max(topZ, z)
+		}
+	});
+	return topZ;
 };
 
 /**
@@ -4149,8 +4176,6 @@ Q.Tool.options = {
 
 Q.Tool.active = {};
 Q.Tool.names = {};
-Q.Tool.latestName = null;
-Q.Tool.latestNames = {};
 
 var _constructToolHandlers = {};
 var _activateToolHandlers = {};
@@ -4345,7 +4370,6 @@ Q.Tool.define = function (name, /* require, */ ctor, defaultOptions, stateKeys, 
 		Q.extend(ctor.prototype, 10, methods);
 		Q.Tool.onLoadedConstructor(n).handle(n, ctor);
 		Q.Tool.onLoadedConstructor("").handle(n, ctor);
-		Q.Tool.latestName = n;
 	}
 	return ctor;
 };
@@ -4432,7 +4456,6 @@ Q.Tool.jQuery = function(name, ctor, defaultOptions, stateKeys, methods, overwri
 	if ($) {
 		_onJQuery();
 	}
-	Q.Tool.latestName = n;
 	function _onJQuery() {
 		function jQueryPluginConstructor(options /* or methodName, argument1, argument2, ... */) {
 			var key = n + ' state', args;
@@ -5272,10 +5295,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 				});
 				_processTemplateElements(div);
 			}
-			if (Q.Tool.latestName) { // Q.Tool.define() was called
-				_qtc[toolName] = _qtc[Q.Tool.latestName];
-				Q.Tool.latestNames[toolConstructor] = Q.Tool.latestName;
-			}
 			toolConstructor = _qtc[toolName];
 			if (typeof toolConstructor !== 'function') {
 				Q.Tool.onMissingConstructor.handle(_qtc, toolName);
@@ -5351,11 +5370,6 @@ function _loadToolScript(toolElement, callback, shared, parentId, options) {
 		if (!toolConstructorSrc) {
 			throw new Q.Error("Q.Tool.loadScript: missing tool constructor file");
 		}
-		if (Q.Tool.latestNames[toolConstructorSrc]) {
-			Q.Tool.latestName = Q.Tool.latestNames[toolConstructorSrc];
-			return _loadToolScript_loaded();
-		}
-		Q.Tool.latestName = null;
 		var pipe = Q.pipe(), waitFor = [];
 		if (toolConstructor.js) {
 			waitFor.push('js');
@@ -12967,13 +12981,13 @@ Q.Pointer = {
 	 */
 	onCancelClick: new Q.Event(),
 	/**
-	 * This event occurs when touching or mouse pressing should have ended
+	 * This event occurs when touching or mouse pressing should have ended anywhere
 	 * @static
 	 * @event onEnded
 	 */
 	onEnded: new Q.Event(),
 	/**
-	 * This event occurs when touching or mouse pressing should have started
+	 * This event occurs when touching or mouse pressing should have started anywhere
 	 * @static
 	 * @event onStarted
 	 */
@@ -13326,7 +13340,7 @@ Q.Dialogs = {
 	 *  @param {String} [options.className] a CSS class name or 
 	 *   space-separated list of classes to append to the dialog element.
 	 *  @param {String} [options.htmlClass] Any class to add to the html element while the overlay is open
-	 *  @param {String} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
+	 *  @param {String|Boolean} [options.mask] Default is true unless fullscreen option is true. If true, adds a mask to cover the screen behind the dialog. If a string, this is passed as the className of the mask.
      * @param {String|Array} [options.stylesheet] Any stylesheets to load before dialog, to prevent Flash of Unstyled Content.
 	 *  should show the "apply" style button to close dialog
 	 *	@param {boolean} [options.fullscreen] Defaults to true only on Android
@@ -13346,6 +13360,7 @@ Q.Dialogs = {
 	 *    of containing element instead.
 	 *  @param {boolean} [options.noClose=false] if true, overlay close button will not appear and overlay won't be closed by pressing 'Esc' key.
 	 *  @param {boolean} [options.closeOnEsc=true] indicates whether to close overlay on 'Esc' key press. Has sense only if 'noClose' is false.
+	 *  @param {Number}  [options.closeAfterDelay=false] pass a number of milliseconds here to initiate a close automatically (which will trigger onClose event)
 	 *  @param {boolean} [options.removeOnClose] Defaults to false if "dialog" is provided, and true otherwise. If true, dialog DOM element will be removed from the document on close.
 	 *  @param {Q.Event} [options.beforeLoad]  Q.Event or function which is called before dialog is loaded.
 	 *  @param {Q.Event} [options.onActivate] Q.Event or function which is called when dialog is activated (all inner tools, if any, are activated and dialog is fully loaded and shown).
@@ -13438,6 +13453,11 @@ Q.Dialogs = {
 					topDialog.addClass('Q_hide');
 				}
 			}
+			if (o.closeAfterDelay) {
+				setTimeout(function () {
+					$dialog.close();
+				}, o.closeAfterDelay);
+			}
 		}
 	},
 	
@@ -13465,11 +13485,38 @@ Q.Dialogs = {
 				$dialog.data('Q/dialog').close();
 			}
 		}
-		if (!this.dialogs.length) {
-			Q.Masks.hide('Q.screen.mask');
-		}
 		Q.Pointer.cancelClick();
 		return $dialog && $dialog[0];
+	},
+
+	/**
+	 * Closes a specific dialog and removes it from top of internal dialog stack.
+	 * @static
+     * @method close
+	 * @param {Boolean|Number} dialog You can pass an element here, or index in the dialog stack
+	 * @return {HTMLElement|null} The HTML element of the dialog that was just closed, or null if not found.
+	 */
+	close: function(dialog) {
+		var index = -1;
+		if (Q.isInteger(dialog)) {
+			index = dialog;
+			dialog = this.dialogs[index];
+		} else {
+			if (dialog instanceof Element) {
+				Q.each(dialogs, function (i) {
+					if (this === dialog) {
+						index = i;
+						return false;
+					}
+				});
+			}
+		}
+		if (index >= 0) {
+			this.dialogs.splice(index, 1);
+			$(dialog).plugin('Q/dialog', 'close');
+			return dialog;
+		}
+		return null;
 	},
 	
 	/**
@@ -14162,8 +14209,11 @@ Q.Masks = {
 		key = Q.calculateKey(key);
 		var mask;
 		if (key in Q.Masks.collection) {
-			Q.Masks.collection[key].element.remove();
-			delete Q.Masks.collection[key];
+			mask = Q.Masks.collection[key];
+			if (options && options.zIndex) {
+				mask.element.style.zIndex = options.zIndex;
+			}
+			return mask;
 		}
 		mask = Q.Masks.collection[key] = Q.extend({
 			fadeIn: 0,
@@ -14267,13 +14317,10 @@ Q.Masks = {
 	 */
 	update: function(key)
 	{
-		var collection = {};
-		if (key) {
-			collection[key] = true;
-		} else {
-			collection = Q.Masks.collection;
-		}
-		for (var k in collection) {
+		for (var k in Q.Masks.collection) {
+			if (key && k !== key) {
+				continue;
+			}
 			var mask = Q.Masks.collection[k];
 			if (!mask.counter) continue;
 			var html = document.documentElement;
@@ -14319,6 +14366,7 @@ Q.Masks = {
 Q.Masks.options = {
 	'Q.click.mask': { className: 'Q_click_mask', fadeIn: 0, fadeOut: 0, duration: 500 },
 	'Q.screen.mask': { className: 'Q_screen_mask', fadeIn: 100 },
+	'Q.dialog.mask': { className: 'Q_dialog_mask', fadeIn: 100 },
 	'Q.request.load.mask': { className: 'Q_load_mask', fadeIn: 5000 },
 	'Q.request.cancel.mask': { className: 'Q_cancel_mask', fadeIn: 200 }
 };
@@ -14378,6 +14426,8 @@ processStylesheets(); // NOTE: the above works only for stylesheets included bef
 Q.addEventListener(window, 'load', Q.onLoad.handle);
 Q.onInit.add(function () {
 	console.log("%c"+Q.info.app+" - powered by Qbix", "color: blue; font-size: 20px");
+	console.log("%c"+"Visit https://qbix.com/platform to learn how this open source platform works.", "color: black; font-size: 12px; font-weight: bold;");
+	console.log("%c"+"You too can build apps for communities, and make money from clients worldwide.", "color: black; font-size: 12px; font-weight: bold;");
 	de.addClass(Q.info.isTouchscreen  ? 'Q_touchscreen' : 'Q_notTouchscreen');
 	de.addClass(Q.info.isMobile ? 'Q_mobile' : 'Q_notMobile');
 	de.addClass(Q.info.isAndroid() ? 'Q_android' : 'Q_notAndroid');
@@ -15044,6 +15094,59 @@ Q.Camera = {
 };
 
 /**
+ * Operates with colors.
+ * @class Q.Colors
+ */
+ Q.Color = {
+	/**
+	 * 
+	 * @param {String|Number} startColor 
+	 * @param {String|Number} endColor 
+	 * @param {String|Number} fraction 
+	 * @returns {String} a color as a hex string without '#' in front
+	 */
+	between: function(startColor, endColor, fraction) {
+
+		if (typeof startColor === 'string') {
+			startColor = parseInt(startColor.replace('#', '0x'), 16);
+		}
+		if (typeof endColor === 'string') {
+			endColor = parseInt(endColor.replace('#', '0x'), 16);
+		}
+		var startRed = (startColor >> 16) & 0xFF;
+		var startGreen = (startColor >> 8) & 0xFF;
+		var startBlue = startColor & 0xFF;
+		var endRed = (endColor >> 16) & 0xFF;
+		var endGreen = (endColor >> 8) & 0xFF;
+		var endBlue = endColor & 0xFF;
+		var newRed = startRed + fraction * (endRed - startRed);
+		var newGreen = startGreen + fraction * (endGreen - startGreen);
+		var newBlue = startBlue + fraction * (endBlue - startBlue);
+		return (newRed << 16 | newGreen << 8 | newBlue).toString(16);
+	},
+	/**
+	 * Sets a new theme-color on the window
+	 * @param {String} color in any CSS format, such as "#aabbcc"
+	 * @return {String} the previous color
+	 */
+	setWindowTheme: function (color) {
+		var meta = document.querySelector('meta[name="theme-color"]');
+		var prevColor = null;
+		if (meta) {
+			prevColor = meta.getAttribute('content');
+		}
+		if (color) {
+			if (!meta) {
+				meta = document.createElement('meta');
+				meta.setAttribute('name', 'theme-color');
+			}
+			meta.setAttribute('content', color);
+		}
+		return prevColor;
+	}
+}
+
+/**
  * Operates with notices.
  * @class Q.Notices
  */
@@ -15156,23 +15259,24 @@ Q.Notices = {
 		Q.activate(ul);
 		setTimeout(function () {
 			Q.Notices.show(li);
-
-			if (o.persistent) {
-				if (!key) {
-					throw new Exception("key required for persistent notice");
-				}
-
-				var oj = Q.take(o, ['persistent', 'closeable', 'timeout', 'handler']);
-				Q.req('Q/notice', [], null, {
-					method: 'post',
-					fields: {
-						// we need key for persistent notices
-						key: key,
-						content: content,
-						options: oj
-					}
-				});
+			var element = document.getElementById('notices_slot');
+			element && (element.style.zIndex = Q.zIndexTopmost() + 1);
+			if (!o.persistent) {
+				return;
 			}
+			if (!key) {
+				throw new Exception("key required for persistent notice");
+			}
+			var oj = Q.take(o, ['persistent', 'closeable', 'timeout', 'handler']);
+			Q.req('Q/notice', [], null, {
+				method: 'post',
+				fields: {
+					// we need key for persistent notices
+					key: key,
+					content: content,
+					options: oj
+				}
+			});
 		}, 0);
 	},
 	/**

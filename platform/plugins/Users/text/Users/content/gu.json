@@ -142,6 +142,17 @@
         "Someone": "કોઈને"
     },
     "web3": {
-        "WrongMethod": "ખોટી કરાર પદ્ધતિ {{methodName}}"
+        "WrongMethod": "ખોટી કરાર પદ્ધતિ {{methodName}}",
+        "ChangeWallet": "વૉલેટ બદલો"
+    },
+    "identifier": {
+        "types": {
+            "email": "ઈમેલ",
+            "mobile": "મોબાઈલ",
+            "web3": "વેબ3"
+        }
+    },
+    "clipboard": {
+        "Copied": "નકલ કરી! હવે તમે તેને ગમે ત્યાં પેસ્ટ કરી શકો છો."
     }
 }

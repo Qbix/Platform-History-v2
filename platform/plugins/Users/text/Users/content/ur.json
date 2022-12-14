@@ -142,6 +142,17 @@
         "Someone": "کسی"
     },
     "web3": {
-        "WrongMethod": "معاہدہ کا غلط طریقہ {{methodName}}"
+        "WrongMethod": "معاہدہ کا غلط طریقہ {{methodName}}",
+        "ChangeWallet": "پرس تبدیل کریں۔"
+    },
+    "identifier": {
+        "types": {
+            "email": "ای میل",
+            "mobile": "موبائل",
+            "web3": "ویب 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "کاپی کیا گیا! اب آپ اسے کہیں بھی چسپاں کر سکتے ہیں۔"
     }
 }

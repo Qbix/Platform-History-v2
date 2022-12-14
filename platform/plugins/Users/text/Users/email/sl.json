@@ -3,7 +3,8 @@
         "Subject": "Dobrodošli! Prosimo, preverite svoj e-poštni naslov.",
         "Thanks": "Dobrodošli v {{1}}",
         "ReallyYourEmail": "Je to res tvoj e-poštni naslov, {{1}}? Če je tako, kliknite <a href='{{2}}'>tukaj<\/a> , da nastavite svoje geslo in aktivirate svoj račun.",
-        "SeeYou": "Se vidimo na <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Se vidimo na <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "V nasprotnem primeru kliknite <a href='{{1}}'>to povezavo<\/a> ."
     },
     "identifier": {
         "Subject": "Dobrodošli! Preverite svoj e-poštni naslov."
@@ -13,7 +14,8 @@
         "Thanks": "Hvala za obisk {{1}}",
         "YouAreReceiving": "To e-poštno sporočilo ste prejeli, ker je nekdo vnesel vaš e-poštni naslov in kliknil »pozabil sem geslo«. Če niste bili vi, preprosto prezrite to sporočilo.",
         "Reset": "Za ponastavitev gesla kliknite {{1}}",
-        "SetUpPassphrase": "Nastavite geslo"
+        "SetUpPassphrase": "Nastavite geslo",
+        "DomainCode": "Če je spletna stran že odprta v vašem brskalniku, lahko vnesete kodo"
     },
     "SeeYou": "Se vidimo na {{1}}!",
     "LinkToUnsubscribe": "Tukaj je povezava za <a href='{{1}}'>odjavo<\/a> , če ne želite več prejemati e-poštnih sporočil."

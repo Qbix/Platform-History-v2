@@ -3,7 +3,8 @@
         "Subject": "Tervetuloa! Vahvista sähköpostiosoitteesi.",
         "Thanks": "Tervetuloa {{1}}",
         "ReallyYourEmail": "Onko tämä todella sähköpostiosoitteesi, {{1}}? Jos näin on, napsauta <a href='{{2}}'>tätä<\/a> asettaaksesi tunnuslauseesi ja aktivoidaksesi tilisi.",
-        "SeeYou": "Nähdään <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Nähdään <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Muussa tapauksessa napsauta <a href='{{1}}'>tätä linkkiä<\/a> ."
     },
     "identifier": {
         "Subject": "Tervetuloa! Vahvista sähköpostiosoitteesi."
@@ -13,7 +14,8 @@
         "Thanks": "Kiitos vierailustasi {{1}}",
         "YouAreReceiving": "Sait tämän sähköpostin, koska joku on antanut sähköpostiosoitteesi ja napsauttanut &quot;unohdin tunnuslauseen&quot;. Jos et ollut sinä, jätä tämä viesti huomioimatta.",
         "Reset": "Voit nollata salasanasi napsauttamalla {{1}}",
-        "SetUpPassphrase": "Määritä tunnuslause"
+        "SetUpPassphrase": "Määritä tunnuslause",
+        "DomainCode": "Jos verkkosivu on jo auki selaimessasi, voit syöttää koodin"
     },
     "SeeYou": "Nähdään {{1}}!",
     "LinkToUnsubscribe": "Tässä on linkki <a href='{{1}}'>tilauksen peruuttamiseen<\/a> , jos et halua saada enää sähköpostiviestejä."

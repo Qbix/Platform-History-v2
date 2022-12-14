@@ -142,6 +142,17 @@
         "Someone": "誰か"
     },
     "web3": {
-        "WrongMethod": "間違った契約方法 {{methodName}}"
+        "WrongMethod": "間違った契約方法 {{methodName}}",
+        "ChangeWallet": "ウォレットの変更"
+    },
+    "identifier": {
+        "types": {
+            "email": "Eメール",
+            "mobile": "モバイル",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "コピーしました！これで、どこにでも貼り付けることができます。"
     }
 }

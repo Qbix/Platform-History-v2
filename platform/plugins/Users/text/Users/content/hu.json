@@ -142,6 +142,17 @@
         "Someone": "Valaki"
     },
     "web3": {
-        "WrongMethod": "Rossz szerződésmódszer {{methodName}}"
+        "WrongMethod": "Rossz szerződésmódszer {{methodName}}",
+        "ChangeWallet": "Pénztárca módosítása"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Másolva! Most már bárhová beillesztheti."
     }
 }

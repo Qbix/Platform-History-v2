@@ -5,8 +5,7 @@
  *
  * @param {array} $options An associative array of parameters, containing:
  * @param {string} [$options.userId]
- *   The user's id. Defaults to id of the logged-in user, if any.
- *   Can be '' for a blank-looking avatar.
+ *   The user's id. Can be '' for a blank-looking avatar.
  * @param {boolean} [options.short]
  *   Optional. Renders the short version of the display name.
  * @param {boolean|integer} [options.icon=false]
@@ -34,8 +33,6 @@ function Users_avatar_tool($options)
 		'editable' => false
 	);
 	$options = array_merge($defaults, $options);
-	$loggedInUser = Users::loggedInUser();
-	$loggedInUserId = $loggedInUser ? $loggedInUser->id : "";
 	unset($options['iconAttributes']);
 	if (empty($options['editable'])) {
 		$options['editable'] = array();
@@ -47,14 +44,14 @@ function Users_avatar_tool($options)
 	if (!empty($options['renderOnClient'])) {
 		return '';
 	}
-	if (!isset($options['userId'])) {
-		$options['userId'] = $loggedInUserId;
-	}
 	if ($options['userId'] === '') {
 		return '<div class="Users_avatar_icon Users_avatar_icon_blank"></div>'
 			.'<div class="Users_avatar_name Users_avatar_name_blank">&nbsp;</div>';
 	}
-	$avatar = Streams_Avatar::fetch($loggedInUserId, $options['userId']);
+	$loggedInUser = Users::loggedInUser(false, false);
+	$loggedInUserId = $loggedInUser ? $loggedInUser->id : "";
+	$asUserId = $loggedInUserId ? $loggedInUserId : '';
+	$avatar = Streams_Avatar::fetch($asUserId, $options['userId']);
 	if (!$avatar) {
 		return '';
 	}

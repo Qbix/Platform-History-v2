@@ -142,6 +142,17 @@
         "Someone": "Nogen"
     },
     "web3": {
-        "WrongMethod": "Forkert kontraktmetode {{methodName}}"
+        "WrongMethod": "Forkert kontraktmetode {{methodName}}",
+        "ChangeWallet": "Skift tegnebog"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopieret! Nu kan du indsætte det hvor som helst."
     }
 }

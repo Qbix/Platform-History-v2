@@ -71,7 +71,7 @@ table { border-spacing:0; border-collapse:collapse; }
 
 /* Common Q classes */
 .Q_hide { display: none !important; }
-.Q_hideUntilLoaded { opacity: 0; transition: opacity 300ms; }
+.Q_hideUntilLoaded body { opacity: 0; }
 .Q_blink { animation: Q_blink .5s step-end infinite alternate; }
 .Q_forceRedraw { animation: Q_forceRedraw 4s infinite; }
 .Q_pagebreak { page-break-after: always; }
@@ -484,6 +484,7 @@ div.Q_placeholder { pointer-events: none; }
 .Q_clickable_stretcher.Q_clickable_sized>* { width: 100% !important; height: 100% !important; max-width: 100% !important; max-height: 100% !important;  box-sizing: border-box !important; }
 .Q_notTouchscreen .Q_clickable_container.Q_hover .Q_clickable_shadow,
 .Q_notTouchscreen .Q_clickable_container:hover .Q_clickable_shadow
+.Q_notTouchscreen .Q_clickable_container:active .Q_clickable_shadow
  { display: block; max-width: none !important; }
 .Q_inplace_tool { display: none; visibility: hidden; }
 .Q_textfill_resizing,
@@ -680,7 +681,7 @@ html.Q_scanning body > .Q_scanning_code {
 	height: 100%;
 	box-sizing: border-box;
 	position: relative;
-	min-width: 50px;
+	min-width: 300px;
 	min-height: 50px;
 }
 .Q_scanning.Q_fullscreen_dialog .Q_dialog_content {
@@ -714,6 +715,7 @@ html.Q_scanning body > .Q_scanning_code {
 
 #notices_slot {
 	width: 100%;
+	z-index: 999999999;
 }
 #notices_slot ul:empty {
 	display: none;

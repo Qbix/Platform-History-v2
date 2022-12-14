@@ -21,7 +21,7 @@ function Assets_NFT_response_owned ($params) {
 	if ($platform === 'web3' and !$ownerXid && $ownerUserId) {
 		$ownerXid = Users_Web3::getWalletByUserId($ownerUserId);
 	}
-	$recipientXid = Q::ifset($request, "recipient", "xid", Users_Web3::getWalletByUserId());
+	$recipientXid = Q::ifset($request, "recipient", "xid", null);
 	$pathABI = Q::ifset($request, "pathABI", "Assets/templates/R1/NFT/contract");
 	$glob = array();
 	$glob["offset"] = (int)Q::ifset($request, "offset", 0);
@@ -50,8 +50,8 @@ function Assets_NFT_response_owned ($params) {
 		$tokenId = $params["tokenId"];
 		$chain = $params["chain"];
 		$ABI = $params["ABI"];
-		$secondsLeft = Q::ifset($params, "secondsLeft", null);
-		$dataJson = compact("tokenId", "secondsLeft");
+		$untilTimestamp = Q::ifset($params, "untilTimestamp", null);
+		$dataJson = compact("tokenId", "untilTimestamp");
 		if ($glob["skipInfo"]) {
 			$tokenJSON[] = $dataJson;
 			return null;
@@ -115,30 +115,32 @@ function Assets_NFT_response_owned ($params) {
 			}
 			if ($recipientXid and $platform === 'web3') {
 				$dirtyTokens = $tokens;
-				$tokens = array();
+				$temp = array();
 				$salesABI = 'Assets/templates/R1/NFT/sales/contract';
-				foreach ($dirtyTokens as $tokenId) {
-					$tokenInfo = Users_Web3::execute($salesABI, $ownerXid, "pending", [$tokenId], $chain["chainId"], $caching, $cacheDuration);
-					if ($recipientXid == $tokenInfo['recipient']) {
-						$secondsLeft = Q::ifset($tokenInfo, "secondsLeft", null);
-						if (isset($secondsLeft)) {
-							$secondsLeft = (integer)$secondsLeft;
+				try {
+					foreach ($dirtyTokens as $tokenId) {
+						$tokenInfo = Users_Web3::execute($salesABI, $ownerXid, "pending", [$tokenId], $chain["chainId"], $caching, 1000000);
+						if ($recipientXid == $tokenInfo['recipient']) {
+							$untilTimestamp = Q::ifset($tokenInfo, "untilTimestamp", null);
+							$temp[] = array(
+								"tokenId" => $tokenId,
+								"untilTimestamp" => $untilTimestamp
+							);
 						}
-						$tokens[] = array(
-							"tokenId" => $tokenId,
-							"secondsLeft" => $secondsLeft
-						);
 					}
+					$tokens = $temp;
+				} catch (Exception $e) {
+					// probably this address doesn't support pending() method
 				}
 			}
-
+			
 			foreach ($tokens as $tokenId) {
-				$secondsLeft = null;
+				$untilTimestamp = null;
 				if (is_array($tokenId)) {
-					$secondsLeft = Q::ifset($tokenId, "secondsLeft", null);
+					$untilTimestamp = Q::ifset($tokenId, "untilTimestamp", null);
 					$tokenId = Q::ifset($tokenId, "tokenId", null);
 				}
-				if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "secondsLeft"), $tokenJSON, $countNFTs) === false) {
+				if ($_Assets_NFT_response_owned_json(compact("tokenId", "chain", "ABI", "untilTimestamp"), $tokenJSON, $countNFTs) === false) {
 					break;
 				}
 			}

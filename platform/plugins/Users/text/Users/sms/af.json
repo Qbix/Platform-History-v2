@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Wou jy jou wagfrase in {{1}} terugstel?",
-        "ClickHere": "Klik dan hier: {{1}}"
+        "ClickHere": "Klik dan hier: {{1}}",
+        "OrEnterCode": "of voer kode in:"
     }
 }

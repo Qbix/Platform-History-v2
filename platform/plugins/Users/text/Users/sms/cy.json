@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Oeddech chi am ailosod eich cyfrinair yn {{1}}?",
-        "ClickHere": "Yna cliciwch yma: {{1}}"
+        "ClickHere": "Yna cliciwch yma: {{1}}",
+        "OrEnterCode": "neu rhowch god:"
     }
 }

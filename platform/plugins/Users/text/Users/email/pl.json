@@ -3,17 +3,19 @@
         "Subject": "Witamy! Zweryfikuj swój adres e-mail.",
         "Thanks": "Witamy w {{1}}",
         "ReallyYourEmail": "Czy to naprawdę Twój adres e-mail {{1}}? Jeśli tak, kliknij <a href='{{2}}'>tutaj,<\/a> aby ustawić hasło i aktywować konto.",
-        "SeeYou": "Do zobaczenia <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Do zobaczenia <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "W przeciwnym razie kliknij <a href='{{1}}'>ten link<\/a> ."
     },
     "identifier": {
         "Subject": "Witamy! Zweryfikuj swój adres email."
     },
     "resend": {
         "Subject": "Hej, zapomniałeś hasła?",
-        "Thanks": "Dziękujemy za odwiedzenie {{1}}",
-        "YouAreReceiving": "Otrzymujesz tę wiadomość, ponieważ ktoś podał Twój adres e-mail i kliknął „zapomniałem hasła”. Jeśli to nie ty, po prostu zignoruj tę wiadomość.",
+        "Thanks": "Dziękujemy za odwiedziny {{1}}",
+        "YouAreReceiving": "Otrzymujesz tę wiadomość, ponieważ ktoś wpisał Twój adres e-mail i kliknął „nie pamiętam hasła”. Jeśli to nie byłeś ty, po prostu zignoruj tę wiadomość.",
         "Reset": "Aby zresetować hasło, kliknij {{1}}",
-        "SetUpPassphrase": "Skonfiguruj hasło"
+        "SetUpPassphrase": "Ustaw hasło",
+        "DomainCode": "Jeśli strona jest już otwarta w Twojej przeglądarce, możesz wpisać kod"
     },
     "SeeYou": "Do zobaczenia {{1}}!",
     "LinkToUnsubscribe": "Oto link do <a href='{{1}}'>anulowania subskrypcji<\/a> , jeśli nie chcesz otrzymywać więcej e-maili."

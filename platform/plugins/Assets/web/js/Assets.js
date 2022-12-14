@@ -1357,6 +1357,15 @@
 
 					return false;
 				}
+			},
+
+			/**
+			 * Calculate seriesId from tokenId
+			 * @param {String} tokenId can be a long decimal representation
+			 * @returns {String} '0x' followed by 16 hexits
+			 */
+			seriesIdFromTokenId(tokenId) {
+				return '0x' + tokenId.decimalToHex().substr(0, 16);
 			}
 		},
 		Web3: {
@@ -1480,8 +1489,7 @@
 		"Assets/NFT/contract": "{{Assets}}/js/tools/NFT/contract.js",
 		"Assets/NFT/owned": {
 			js: "{{Assets}}/js/tools/NFT/owned.js",
-			css: "{{Assets}}/css/tools/NFT/owned.css",
-			text: "Assets/content"
+			css: "{{Assets}}/css/tools/NFT/owned.css"
 		},
 		"Assets/NFT/list": "{{Assets}}/js/tools/NFT/list.js",
 		"Assets/plan/preview": "{{Assets}}/js/tools/planPreview.js",
@@ -1491,8 +1499,7 @@
 		"Assets/NFT/sales/whitelist": "{{Assets}}/js/tools/NFT/sales/whitelist.js",
 		"Assets/NFT/locked": {
 		    js: "{{Assets}}/js/tools/NFT/locked.js",
-		    css: "{{Assets}}/css/tools/NFT/locked.css",
-			text: "Assets/content"
+		    css: "{{Assets}}/css/tools/NFT/locked.css"
 		},
 		"Assets/web3/currencies": "{{Assets}}/js/tools/web3/currencies.js",
 		"Assets/web3/transfer": "{{Assets}}/js/tools/web3/transfer.js"

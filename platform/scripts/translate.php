@@ -17,12 +17,12 @@ Options include:
                   --source=ru
            
 --in              Input directory which contains source json files.
-                  Default value APP_DIR/text, where APP_DIR is your application folder.
+-i                Default value APP_DIR/text, where APP_DIR is your application folder.
                   Example:
                   --in=/home/user/input
        
 --out             Output directory.
-                  Default value APP_DIR/text, where APP_DIR is your application folder.
+-o                Default value APP_DIR/text, where APP_DIR is your application folder.
                   Example:
                   --out=/home/user/output
 				  
@@ -31,11 +31,12 @@ Options include:
 --plugins         Translate the text in all the plugins
 
 --plugin          Translate the text in a specific plugin
+-p                This option can be used more than once.
 
 --all             Translate the text in all the plugins and the app
        
 --format          Can be "google" or "human".
-                  "google" automatically translates files using Google Translation API.
+-f                "google" automatically translates files using Google Translation API.
                   Google API key must be provided in your application config (app.json).
                   "human" prepares files for further human translators.
                   Default value is "google".
@@ -44,27 +45,34 @@ Options include:
                   --format=human
                   
 --google-format   Google translation format. This option is used along with --format=google.
-                  The format of the source text, in either HTML (default) or plain-text.
+-g                The format of the source text, in either HTML (default) or plain-text.
                   A value of html indicates HTML and a value of text indicates plain-text.
                   Default value is "html".
                   Examples:
                   --google-format=html
                   --google-format=text
 
+--remove          This option can be used more than once. It should be followed by a
+                  path written as foo/bar/baz (where you can escape literal "/" as "\/")
+				  specifying the object or strings to be removed in the destination.
+
 --retranslate     This option can be used more than once. It should be followed by a
-                  slash-separated ("/") set of strings that together form the key of a string,
-                  or of an object containing strings, to be translated even if already translated
-                  in the destination.
+-r                path written as foo/bar/baz (where you can escape literal "/" as "\/")
+				  specifying the object or strings to be translated even if they were
+				  already translated in the destination.
 
 --retranslate-all Use this option to just retranslate everything, even if it is already translated.
-				  
---locales         Use this to indicate the alternative filename to config/Q/locales.json
+
+--locales         Just list some languages or language-locale pairs, separated by a space
+-l                such as "en-US en-UK fr ak"
+
+--locales-file    Use this to indicate the alternative filename to config/Q/locales.json
 
 EOT;
 
 // get all CLI options
-$opts = array( 'h:', 's:', 'i:', 'o:', 'n:', 'f:', 'g:', 'r:', 'l:', 'p:');
-$longopts = array('help', 'source:', 'in:', 'out:', 'null:', 'format:', 'google-format:', 'retranslate:', 'retranslate-all', 'locales:', 'plugins', 'plugin:', 'all', 'app');
+$opts = array( 'h:', 's:', 'i:', 'o:', 'n:', 'f:', 'g:', 'r:', 'a:', 'l:', 'p:');
+$longopts = array('help', 'source:', 'in:', 'out:', 'null:', 'format:', 'google-format:', 'retranslate:', 'retranslate-all', 'remove:', 'locales:', 'locales-file:', 'plugins', 'plugin:', 'all', 'app');
 $options = getopt(implode('', $opts), $longopts);
 if (isset($options['help'])) {
 	echo $help;
@@ -89,8 +97,11 @@ if (isset($options['plugins']) or isset($options['all'])) {
 	$plugins = Q::plugins();
 } else if (isset($options['plugin'])) {
 	$plugins = is_array($options['plugin']) ? $options['plugin'] : array($options['plugin']);
-} else {
-	$app = true;
+} else if (isset($options['p'])) {
+	$plugins = is_array($options['p']) ? $options['p'] : array($options['p']);
+} else if (!$app) {
+	echo $help;
+	exit;
 }
 $o = $options;
 foreach ($plugins as $plugin) {

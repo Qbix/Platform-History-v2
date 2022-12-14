@@ -142,6 +142,17 @@
         "Someone": "Jemand"
     },
     "web3": {
-        "WrongMethod": "Falsche Vertragsmethode {{methodName}}"
+        "WrongMethod": "Falsche Vertragsmethode {{methodName}}",
+        "ChangeWallet": "Geldbörse wechseln"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Handy, Mobiltelefon",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopiert! Jetzt können Sie es überall einfügen."
     }
 }

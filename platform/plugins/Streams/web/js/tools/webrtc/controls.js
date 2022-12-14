@@ -1296,7 +1296,7 @@
                                 clearTimeout(tool.hoverTimeout.textChatPopup);
                                 tool.hoverTimeout.textChatPopup = null;
                             }
-                        })
+                        });
                         tool.chatBox.addEventListener('mouseleave', function (e) {
                             if (tool.textChat.static) {
                                 return;

@@ -78,21 +78,14 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
             $toolElement.remove();
             return console.warn("Assets/NFT/locked", "NFTAddress required!");
         }
-	 
-	    if (Q.isEmpty(state.seriesIdSource.seriesId) && Q.isEmpty(state.seriesIdSource.salesAddress)) {
-            $toolElement.remove();
-            return console.warn("Assets/NFT/locked", "at least one of seriesIdSource option required!");
-        }
 
-        Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()]).then(function (_ref) {
+        Promise.all([tool.nftContractPromise(), tool.lockedContractPromise()])
+        .then(function (_ref) {
             var nftContract = _ref[0];
             var lockedContract = _ref[1];
 
-            var seriesId;
-            return tool.seriesIdGetPromise().then(function (_seriesId) {
-                seriesId = _seriesId;
-                return nftContract.getHookList(seriesId);
-            }).then(function (allHooksArr) {
+            var seriesId = tool.getSeriesId();
+            return nftContract.getHookList(seriesId).then(function (allHooksArr) {
                 return [
                     allHooksArr.map(c => c.toLowerCase())
                         .indexOf(lockedContract.address) >= 0,
@@ -136,20 +129,8 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
     },
 
     { // methods go here
-        seriesIdGetPromise: function () {
-            var state = this.state;
-            if (!Q.isEmpty(state.seriesIdSource.seriesId)) {
-                return Promise.resolve(state.seriesIdSource.seriesId);
-            } else if (!Q.isEmpty(state.seriesIdSource.salesAddress)) {
-                return Q.Users.Web3.getContract(state.seriesIdSource.abiNFTSales, {
-                    readOnly: true,
-                    contractAddress: state.seriesIdSource.salesAddress
-                }).then(salesContract => {
-                    return salesContract.seriesId();
-                });
-            } else {
-                return console.warn("Assets/NFT/locked", "There are no available data source for getting seriesId")
-            }
+        getSeriesId: function () {
+            return Q.Assets.NFT.seriesIdFromTokenId(this.state.tokenId);
         },
         nftContractPromise: function () {
             var state = this.state;
@@ -182,6 +163,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
                         tool.lockedContractPromise().then(function (lockedContract) {
                             return lockedContract.isLocked(state.NFTAddress, state.tokenId);
                         }).then(function ([locked, custodian]) {
+                            $(tool.NFTpreview.element).attr("data-locked", !!locked);
                             $toolElement.attr("data-locked", !!locked);
                             $toolElement.attr("data-custodian", custodian.toLowerCase() === Q.Users.Web3.getSelectedXid().toLowerCase());
                             nftContract.ownerOf(state.tokenId).then(function (owner) {

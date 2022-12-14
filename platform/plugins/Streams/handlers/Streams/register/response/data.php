@@ -2,22 +2,11 @@
 
 function Streams_register_response_data()
 {
-	$activationLink = null;
-	if ($user = Q::ifset(Users::$cache, 'user', null)) {
-		if ($user->signedUpWith === 'mobile') {
-			$fields = array('m' => $user->mobileNumberPending);
-		} else if ($user->signedUpWith === 'email') {
-			$fields = array('e' => $user->emailAddressPending);
-		} else {
-			$fields = array();
-		}
-		$displayName = Streams::displayName($user);
-		$user = $user->exportArray();
-		$user['displayName'] = $displayName;
-		if ($fields) {
-			$activationLink = Q_Uri::url("Users/activate?")
-			. '?' . http_build_query($fields);
+	$fields = Users::responseData();
+	if (Users::loggedInUser(false, false)) {
+		if (!empty($fields['user'])) {
+			$fields['user']['displayName'] = Streams::displayName($fields['user']->id);
 		}
 	}
-	return compact('user', 'activationLink');
+	return $fields;
 }

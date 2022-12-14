@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "Ville du återställa din lösenfras i {{1}}?",
-        "ClickHere": "Klicka sedan här: {{1}}"
+        "ClickHere": "Klicka sedan här: {{1}}",
+        "OrEnterCode": "eller ange kod:"
     }
 }

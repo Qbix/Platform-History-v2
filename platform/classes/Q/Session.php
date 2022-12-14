@@ -976,18 +976,14 @@ class Q_Session
 	}
 
 	/**
-	 * Sets a nonce in cookie 'Q_nonce'.
+	 * Sets a nonce in cookie 'Q_nonce'. Safe to call this function multiple times if startNewSession = false
 	 * The session data may not actually be saved, if there is nothing besides this nonce.
 	 * That's because the nonce can be verified deterministically from the session id.
 	 * @method setNonce
-	 * @param {boolean} [$startNewSession] If true, will create a new session even if
-	 *  the current session (from the Q_sessionId cookie) is missing or invalid.
+	 * @static
 	 */
-	static function setNonce($startNewSession = null)
+	static function setNonce()
 	{
-		if (!isset($startNewSession)) {
-			$startNewSession = !Q_Request::isAjax() || !empty(Q_Request::special('startNewSession'));
-		}
 		self::start(false);
 		$nonce = self::calculateNonce();
 		if (!empty($_SERVER['HTTP_HOST'])) {
@@ -1001,7 +997,6 @@ class Q_Session
 				null, $domain, $secure, false, 'Lax'
 			);
 		}
-		$_SESSION['Q']['nonce'] = $nonce;
 		Q_Session::$nonceWasSet = true;
 	}
 

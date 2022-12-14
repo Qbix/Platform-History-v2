@@ -142,6 +142,17 @@
         "Someone": "Ktoś"
     },
     "web3": {
-        "WrongMethod": "Niewłaściwa metoda umowy {{methodName}}"
+        "WrongMethod": "Niewłaściwa metoda umowy {{methodName}}",
+        "ChangeWallet": "Zmień portfel"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "mobilny",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Skopiowane! Teraz możesz wkleić go w dowolnym miejscu."
     }
 }

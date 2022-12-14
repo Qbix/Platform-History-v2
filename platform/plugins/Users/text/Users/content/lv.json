@@ -142,6 +142,17 @@
         "Someone": "kāds"
     },
     "web3": {
-        "WrongMethod": "Nepareiza līguma metode {{methodName}}"
+        "WrongMethod": "Nepareiza līguma metode {{methodName}}",
+        "ChangeWallet": "Mainīt maku"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-pasts",
+            "mobile": "Mobilais",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopēts! Tagad varat to ielīmēt jebkurā vietā."
     }
 }

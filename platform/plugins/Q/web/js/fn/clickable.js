@@ -35,11 +35,11 @@
  * @param {Number} [options.center.x=0.5] x
  * @param {Number} [options.center.y=0.5] y
  * @param {Boolean} [options.selectable=false]
- * @param {Boolean} [options.triggers=null] A jquery selector or jquery of additional elements to trigger the clickable
+ * @param {Array|Element|Function} [options.triggers=null] An array or jQuery selector or function returning additional elements to trigger the clickable
+ * @param {Q.Event} [options.onInvoke] onInvoke occurs as soon as the element has been successfully invoked (tap or click or keydown Enter or Space)
  * @param {Q.Event} [options.onPress] onPress occurs after the user begins a click or tap.
  * @param {Q.Event} [options.onRelease] onRelease occurs after the user ends the click or tap. This event receives parameters (event, overElement)
  * @param {Q.Event} [options.afterRelease] afterRelease occurs after the user ends the click or tap and the release animation completed. This event receives parameters (evt, overElement)
- * @param {Q.Event} [options.onClick] This is triggered after the user completes a click or tap over the element.
  * @param {Number} [options.cancelDistance=15] cancelDistance
  *
  */
@@ -52,11 +52,11 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	}
 
 	var state = $this.state('Q/clickable');
-	$this.on('invoke.Q_clickable', function () {
-		$(this).trigger('mousedown');
-		setTimeout(function () {
-			$(this).trigger('release')
-		}, o.press.duration);
+	$this.on('invoke.Q_clickable', function (evt) {
+		_handleActivate({
+			type: 'keydown', 
+			keyCode: 13
+		});
 	});
 	var originalTime = Date.now();
 	var timing = state.timing;
@@ -89,12 +89,6 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		}
 	    if (!o.selectable) {
 			$this[0].preventSelections(true);
-		}
-		var $triggers;
-		if (o.triggers) {
-			$triggers = (typeof o.triggers === 'function')
-				? $(o.triggers.call($this, o))
-				: $(o.triggers);
 		}
 		var rect = $this[0].getBoundingClientRect();
 		var csw = Math.ceil(rect.width);
@@ -190,7 +184,12 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			'margin': '0px'
 		}).addClass('Q_clickable_sized')
 		.appendTo($container);
-		var triggers = $stretcher;
+		var $triggers = $stretcher;
+		if (o.triggers) {
+			$triggers = (typeof o.triggers === 'function')
+				? $(o.triggers.call($this, o))
+				: $(o.triggers);
+		}
 		var width = csw;
 		var height = csh;
 		var left = parseInt($container.css('left'));
@@ -207,7 +206,6 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		var zindex;
 		var anim = null;
 	
-		triggers = $stretcher;
 		if ($triggers && $triggers.length) {
 			if (!Q.info.isTouchscreen) {
 				$triggers.mouseenter(function () {
@@ -216,188 +214,19 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 					$container.removeClass('Q_hover');
 				});
 			}
-			triggers = triggers.add($triggers);
+			$triggers = $triggers.add($stretcher);
 		}
 	
 		var _started = null;
-		triggers.on('dragstart', function () {
+		$triggers.on('dragstart', function () {
 			return false;
-		}).on(Q.Pointer.start, function (evt) {
-			/*if (Q.info.isTouchscreen) {
-				evt.preventDefault();
-				evt.stopPropagation();
-			}*/
-			if ($this.css('pointer-events') === 'none') return;
-			if (_started) return;
-			_started = this;
-			setTimeout(function () {
-				_started = null;
-			}, 0);
-			if (Q.Pointer.canceledClick
-			|| $('.Q_discouragePointerEvents', evt.target).length) {
-				return;
-			}
-			if (!o.selectable) {
-				triggers[0].preventSelections(true);
-			}
-			zindex = $this.css('z-index');
-			$container.css('z-index', 1000000).addClass('Q_pressed');
-			Q.handle(o.onPress, $this, [evt, triggers]);
-			state.animation = Q.Animation.play(function(x, y) {
-				scale(1 + y * (o.press.size-1));
-				$this.css('opacity', 1 + y * (o.press.opacity-1));
-			}, o.press.duration, o.press.ease);
-			//$this.bind('click.Q_clickable', function () {
-			//	return false;
-			//});
-			var pos = null;
-			$container.parents().each(function () {
-				var $t = $(this);
-				$t.data('Q/clickable scrollLeft', $t.scrollLeft());
-				$t.data('Q/clickable scrollTop', $t.scrollTop());
-				$t.data('Q/clickable transform', $t.css('transform'));
-			});
-			Q.Pointer.onCancelClick.set(function (e, extraInfo) {
-				if (!extraInfo || !extraInfo.comingFromPointerMovement) {
-					return;
-				}
-				var jq = $(document.elementFromPoint(
-					extraInfo.toX, 
-					extraInfo.toY
-				));
-				var scrolled = false;
-				$container.removeClass('Q_pressed')
-				.parents().each(function () {
-					var $t = $(this);
-					if ($t.data('Q/clickable scrollLeft') != $t.scrollLeft()
-					|| $t.data('Q/clickable scrollTop') != $t.scrollTop()
-					|| $t.data('Q/clickable transform') != $t.css('transform')) {
-						// there was some scrolling of parent elements
-						scrolled = true;
-						return false;
-					}
-				});
-				if (!scrolled) {
-					var overElement = (jq.closest(triggers).length > 0);
-					if (overElement) {
-						return false; // click doesn't have to be canceled
-					}
-				}
-				state.animation && state.animation.pause();
-				scale(1);
-			}, 'Q/clickable');
-			var _released = false;
-			$(window).add(triggers).on('release.Q_clickable', onRelease);
-			state.onEndedKey = Q.Pointer.onEnded.set(onRelease, state.onEndedKey);
+		}).on(Q.Pointer.start, _handleActivate)
+		.on('keydown', _handleActivate)
+		.on(Q.Pointer.click, function (evt) {
 			if (state.preventDefault) {
 				evt.preventDefault();
 			}
-			if (state.stopPropagation) {
-				evt.stopPropagation();
-			}
-			function onRelease (evt) {
-				if (_released) return;
-				_released = true;
-				setTimeout(function () { 
-					_released = false;
-				}, 0);
-				$container.removeClass('Q_pressed')
-				.parents().each(function () {
-					$(this).removeData(
-						['Q/clickable scrollTop',
-						 'Q/clickable scrollTop', 
-						 'Q/clickable transform']
-					); 
-				});
-				var jq;
-				if (!evt) {
-					jq = null;
-				} else if (evt.type === 'release') {
-					jq = $this;
-				} else {
-					var x = Q.Pointer.getX(evt);
-					var y = Q.Pointer.getY(evt);
-					jq = $(Q.Pointer.elementFromPoint(x, y));
-				}
-				Q.Pointer.onEnded.remove(state.onEndedKey);
-				var overElement = !Q.Pointer.canceledClick 
-					&& jq && jq.closest(triggers).length > 0;
-				var factor = scale.factor || 1;
-				state.animation && state.animation.pause();
-				if (overElement) {
-					state.animation = Q.Animation.play(function(x, y) {
-						scale(factor + y * (o.release.size-factor));
-						$this.css('opacity', o.press.opacity + y * (o.release.opacity-o.press.opacity));
-					}, o.release.duration, o.release.ease);
-					var key = state.animation.onComplete.set(function () {
-						state.animation = Q.Animation.play(function(x, y) {
-							scale(o.release.size + y * (1-o.release.size));
-							$this.css('opacity', 1 + y * (1 - o.release.opacity));
-						}, o.snapback.duration, o.snapback.ease);
-						state.animation.onComplete.set(function () {
-							Q.handle(o.afterRelease, $this, [evt, overElement]);
-							$this.trigger('afterRelease', $this, evt, overElement);
-							$container.css('z-index', zindex);
-							// $this.unbind('click.Q_clickable');
-							// $this.trigger('click');
-							state.animation = null;
-						});
-					});
-				} else {
-					state.animation = Q.Animation.play(function(x, y) {
-						scale(factor + y * (1-factor));
-						$this.css('opacity', o.press.opacity + y * (1-o.press.opacity));
-						// if (x === 1) {
-						// 	$this.off('click.Q_clickable');
-						// }
-					}, o.release.duration, o.release.ease);
-					state.animation.onComplete.set(function () {
-						state.animation = null;
-					});
-					setTimeout(function () {
-						Q.handle(o.afterRelease, $this, [evt, overElement]);
-						$this.trigger('afterRelease', $this, evt, overElement);
-						$container.css('z-index', zindex);
-						state.animation = null;
-					}, o.release.duration);
-				}
-			
-				if (!o.selectable) {
-					triggers[0].restoreSelections(true);
-				}
-			
-				$(window).add(triggers)
-					.off([Q.Pointer.end, '.Q_clickable'])
-					.off('release.Q_clickable');
-				var ts = $this.state('Q/clickable');
-				if (ts) { // it may have been removed already
-					Q.handle(ts.onRelease, $this, [evt, overElement, triggers]);
-				}
-			};
-			function scale(factor) {
-				scale.factor = factor;
-				if (!Q.info.isIE(0, 8)) {
-					$stretcher.css({
-						'-moz-transform': 'scale('+factor+')',
-						'-webkit-transform': 'scale('+factor+')',
-						'-o-transform': 'scale('+factor+')',
-						'-ms-transform': 'scale('+factor+')',
-						'transform': 'scale('+factor+')'
-					});
-				} else if (!scale.started) {
-					scale.started = true;
-					$stretcher.css({
-						left: width * (o.center.x - factor/2) * factor +'px',
-						top: height * (o.center.y - factor/2) * factor +'px',
-						zoom: factor
-					});
-					scale.started = false;
-				}
-			}
-		}).on(Q.Pointer.click, function (evt) {
-			if (state.preventDefault) {
-				evt.preventDefault();
-			}
+			_invoke($this, evt);
 		}).on('focus', function (evt) {
 			if (state.stopPropagation) {
 				evt.stopPropagation();
@@ -444,6 +273,204 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		// 	$this.plugin('Q/clickable', 'remove')
 		// 		.plugin('Q/clickable', state);	
 		// }, "Q_clickable_" + $this.attr("id"));
+
+		function _invoke($this, evt) {
+			var ts = $this.state('Q/clickable');
+			if (ts) { // it may have been removed already
+				Q.handle(ts.onInvoke, $this, [evt, $triggers]);
+			}
+		}
+
+		var _waitingForKeyUp = false;
+
+		function _handleActivate(evt) {
+			/*if (Q.info.isTouchscreen) {
+				evt.preventDefault();
+				evt.stopPropagation();
+			}*/
+			if (_started || $this.css('pointer-events') === 'none') {
+				return;
+			}
+			if (evt.type === 'keydown') {
+				if ([13, 32].indexOf(evt.keyCode) <= 0
+				|| _waitingForKeyUp) {
+					return false;
+				}
+				_waitingForKeyUp = true;
+				setTimeout(function () {
+					$(this).trigger('release');
+				}, o.press.duration);
+				$(this).on('keyup.Q_clickable', function () {
+					$(this).off('keyup.Q_clickable');
+					_waitingForKeyUp = false;
+				});
+				_invoke($this, evt); // button has been invoked
+			}
+			_started = this;
+			setTimeout(function () {
+				_started = null;
+			}, 0);
+			if (Q.Pointer.canceledClick
+			|| $('.Q_discouragePointerEvents', evt.target).length) {
+				return;
+			}
+			if (!o.selectable) {
+				$triggers[0].preventSelections(true);
+			}
+			zindex = $this.css('z-index');
+			$container.css('z-index', 1000000).addClass('Q_pressed');
+			Q.handle(o.onPress, $this, [evt, $triggers]);
+			state.animation = Q.Animation.play(function(x, y) {
+				scale(1 + y * (o.press.size-1));
+				$this.css('opacity', 1 + y * (o.press.opacity-1));
+			}, o.press.duration, o.press.ease);
+			//$this.bind('click.Q_clickable', function () {
+			//	return false;
+			//});
+			$container.parents().each(function () {
+				var $t = $(this);
+				$t.data('Q/clickable scrollLeft', $t.scrollLeft());
+				$t.data('Q/clickable scrollTop', $t.scrollTop());
+				$t.data('Q/clickable transform', $t.css('transform'));
+			});
+			Q.Pointer.onCancelClick.set(function (e, extraInfo) {
+				if (!extraInfo || !extraInfo.comingFromPointerMovement) {
+					return;
+				}
+				var jq = $(document.elementFromPoint(
+					extraInfo.toX, 
+					extraInfo.toY
+				));
+				var scrolled = false;
+				$container.removeClass('Q_pressed')
+				.parents().each(function () {
+					var $t = $(this);
+					if ($t.data('Q/clickable scrollLeft') != $t.scrollLeft()
+					|| $t.data('Q/clickable scrollTop') != $t.scrollTop()
+					|| $t.data('Q/clickable transform') != $t.css('transform')) {
+						// there was some scrolling of parent elements
+						scrolled = true;
+						return false;
+					}
+				});
+				if (!scrolled) {
+					var overElement = (jq.closest($triggers).length > 0);
+					if (overElement) {
+						return false; // click doesn't have to be canceled
+					}
+				}
+				state.animation && state.animation.pause();
+				scale(1);
+			}, 'Q/clickable');
+			var _released = false;
+			$(window).add($triggers).on('release.Q_clickable', onRelease);
+			state.onEndedKey = Q.Pointer.onEnded.set(onRelease, state.onEndedKey);
+			if (state.preventDefault) {
+				evt.preventDefault();
+			}
+			if (state.stopPropagation) {
+				evt.stopPropagation();
+			}
+			function onRelease (evt) {
+				if (_released) return;
+				_released = true;
+				setTimeout(function () { 
+					_released = false;
+				}, 0);
+				$container.removeClass('Q_pressed')
+				.parents().each(function () {
+					$(this).removeData(
+						['Q/clickable scrollTop',
+							'Q/clickable scrollTop', 
+							'Q/clickable transform']
+					); 
+				});
+				var jq;
+				if (!evt) {
+					jq = null;
+				} else if (evt.type === 'release') {
+					jq = $this;
+				} else {
+					var x = Q.Pointer.getX(evt);
+					var y = Q.Pointer.getY(evt);
+					jq = $(Q.Pointer.elementFromPoint(x, y));
+				}
+				Q.Pointer.onEnded.remove(state.onEndedKey);
+				var overElement = !Q.Pointer.canceledClick 
+					&& jq && jq.closest($triggers).length > 0;
+				var factor = scale.factor || 1;
+				state.animation && state.animation.pause();
+				if (overElement) {
+					state.animation = Q.Animation.play(function(x, y) {
+						scale(factor + y * (o.release.size-factor));
+						$this.css('opacity', o.press.opacity + y * (o.release.opacity-o.press.opacity));
+					}, o.release.duration, o.release.ease);
+					var key = state.animation.onComplete.set(function () {
+						state.animation = Q.Animation.play(function(x, y) {
+							scale(o.release.size + y * (1-o.release.size));
+							$this.css('opacity', 1 + y * (1 - o.release.opacity));
+						}, o.snapback.duration, o.snapback.ease);
+						state.animation.onComplete.set(function () {
+							Q.handle(o.afterRelease, $this, [evt, overElement]);
+							$this.trigger('afterRelease', $this, evt, overElement);
+							$container.css('z-index', zindex);
+							// $this.unbind('click.Q_clickable');
+							// $this.trigger('click');
+							state.animation = null;
+						});
+					});
+				} else {
+					state.animation = Q.Animation.play(function(x, y) {
+						scale(factor + y * (1-factor));
+						$this.css('opacity', o.press.opacity + y * (1-o.press.opacity));
+						// if (x === 1) {
+						// 	$this.off('click.Q_clickable');
+						// }
+					}, o.release.duration, o.release.ease);
+					state.animation.onComplete.set(function () {
+						state.animation = null;
+					});
+					setTimeout(function () {
+						Q.handle(o.afterRelease, $this, [evt, overElement]);
+						$this.trigger('afterRelease', $this, evt, overElement);
+						$container.css('z-index', zindex);
+						state.animation = null;
+					}, o.release.duration);
+				}
+			
+				if (!o.selectable) {
+					$triggers[0].restoreSelections(true);
+				}
+			
+				$(window).add($triggers)
+					.off([Q.Pointer.end, '.Q_clickable'])
+					.off('release.Q_clickable');
+				var ts = $this.state('Q/clickable');
+				if (ts) { // it may have been removed already
+					Q.handle(ts.onRelease, $this, [evt, overElement, $triggers]);
+				}
+			};
+			function scale(factor) {
+				scale.factor = factor;
+				if (!Q.info.isIE(0, 8)) {
+					$stretcher.css({
+						'-moz-transform': 'scale('+factor+')',
+						'-webkit-transform': 'scale('+factor+')',
+						'-o-transform': 'scale('+factor+')',
+						'-ms-transform': 'scale('+factor+')',
+						'transform': 'scale('+factor+')'
+					});
+				} else if (!scale.started) {
+					scale.started = true;
+					$stretcher.css({
+						left: width * (o.center.x - factor/2) * factor +'px',
+						top: height * (o.center.y - factor/2) * factor +'px',
+						zoom: factor
+					});
+					scale.started = false;
+				}
+			}
+		}
 	}, timing.renderingDelay);
 	return this;
 },
@@ -488,13 +515,9 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	preventDefault: false,
 	stopPropagation: true,
 	onPress: new Q.Event(),
-	onRelease: new Q.Event(function (event, overElement) {
-		if (overElement) {
-			Q.handle(this.state.onClick, this, [event]);
-		}
-	}),
+	onRelease: new Q.Event(),
 	afterRelease: new Q.Event(),
-	onClick: new Q.Event()
+	onInvoke: new Q.Event()
 },
 
 {

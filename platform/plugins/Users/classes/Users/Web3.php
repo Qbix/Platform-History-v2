@@ -68,7 +68,7 @@ class Users_Web3 extends Base_Users_Web3 {
 		$from = Q::ifset($transaction, 'from', null);
 		$cache = self::getCache($chainId, $contractAddress, $methodName, $params, $cacheDuration, $from);
 		if ($caching !== false && $cacheDuration && $cache->wasRetrieved()) {
-			return Q::json_decode($cache->result);
+			return Q::json_decode($cache->result, true);
 		}
 		if ($delay) {
 			usleep($delay);

@@ -142,6 +142,17 @@
         "Someone": "کسی"
     },
     "web3": {
-        "WrongMethod": "روش قرارداد اشتباه {{methodName}}"
+        "WrongMethod": "روش قرارداد اشتباه {{methodName}}",
+        "ChangeWallet": "کیف پول را تغییر دهید"
+    },
+    "identifier": {
+        "types": {
+            "email": "پست الکترونیک",
+            "mobile": "سیار",
+            "web3": "وب 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "کپی شده! اکنون می توانید آن را در هر جایی بچسبانید."
     }
 }

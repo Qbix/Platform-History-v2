@@ -142,6 +142,17 @@
         "Someone": "কেউ"
     },
     "web3": {
-        "WrongMethod": "ভুল চুক্তি পদ্ধতি {{methodName}}"
+        "WrongMethod": "ভুল চুক্তি পদ্ধতি {{methodName}}",
+        "ChangeWallet": "ওয়ালেট পরিবর্তন করুন"
+    },
+    "identifier": {
+        "types": {
+            "email": "ইমেইল",
+            "mobile": "মুঠোফোন",
+            "web3": "ওয়েব 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "অনুলিপি করা হয়েছে! এখন আপনি এটি যেকোনো জায়গায় পেস্ট করতে পারেন।"
     }
 }

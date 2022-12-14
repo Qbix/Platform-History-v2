@@ -18,12 +18,17 @@ function Users_activate_response_content()
 	$successUrl = Q::ifset($_REQUEST, 'successUrl',
 		Q_Config::get('Users', 'uris', "$app/successUrl", "$app/home")
 	);
-	if ($qs = $_SERVER['QUERY_STRING']) {
-		$qs = "&$qs";
+	$appendFields = array();
+	foreach ($_GET as $k => $v) {
+		$substr = substr($k, 0, 2);
+		if ($substr !== 'Q_' && $substr !== 'Q.') {
+			$appendFields[$k] = $v;
+		}
 	}
+	// $qs = '&' . http_build_query($appendFields);
 	$afterActivate = Q::ifset($_REQUEST, 'afterActivate',
 		Q_Config::get('Users', 'uris', "$app/afterActivate", $successUrl)
-	) .'?Q.fromSuccess=Users/activate'.$qs;
+	) .'?Q.fromSuccess=Users/activate';
 
 	if (!empty(Users::$cache['success'])
 	and Q_Request::method() === 'POST') {

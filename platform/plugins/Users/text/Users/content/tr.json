@@ -142,6 +142,17 @@
         "Someone": "Birisi"
     },
     "web3": {
-        "WrongMethod": "Yanlış sözleşme yöntemi {{methodName}}"
+        "WrongMethod": "Yanlış sözleşme yöntemi {{methodName}}",
+        "ChangeWallet": "Cüzdanı Değiştir"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-posta",
+            "mobile": "Mobil",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopyalandı! Artık herhangi bir yere yapıştırabilirsiniz."
     }
 }

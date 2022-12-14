@@ -8,6 +8,7 @@
     },
     "resend": {
         "DidYouWant": "{{1}} daxilində parol ifadənizi sıfırlamaq istəyirdiniz?",
-        "ClickHere": "Sonra bura klikləyin: {{1}}"
+        "ClickHere": "Sonra bura klikləyin: {{1}}",
+        "OrEnterCode": "və ya kodu daxil edin:"
     }
 }

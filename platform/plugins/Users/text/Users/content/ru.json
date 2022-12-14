@@ -142,6 +142,17 @@
         "Someone": "Кто то"
     },
     "web3": {
-        "WrongMethod": "Неправильный метод контракта {{methodName}}"
+        "WrongMethod": "Неправильный метод контракта {{methodName}}",
+        "ChangeWallet": "Изменить кошелек"
+    },
+    "identifier": {
+        "types": {
+            "email": "Эл. адрес",
+            "mobile": "Мобильный",
+            "web3": "Веб3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Скопировано! Теперь вы можете вставить его куда угодно."
     }
 }

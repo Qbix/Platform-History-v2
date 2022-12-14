@@ -142,6 +142,17 @@
         "Someone": "isang tao"
     },
     "web3": {
-        "WrongMethod": "Maling paraan ng kontrata {{methodName}}"
+        "WrongMethod": "Maling paraan ng kontrata {{methodName}}",
+        "ChangeWallet": "Baguhin ang Wallet"
+    },
+    "identifier": {
+        "types": {
+            "email": "Email",
+            "mobile": "Mobile",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kinopya! Ngayon ay maaari mo na itong i-paste kahit saan."
     }
 }

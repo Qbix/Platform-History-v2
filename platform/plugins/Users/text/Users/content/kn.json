@@ -142,6 +142,17 @@
         "Someone": "ಯಾರೋ"
     },
     "web3": {
-        "WrongMethod": "ತಪ್ಪಾದ ಒಪ್ಪಂದದ ವಿಧಾನ {{methodName}}"
+        "WrongMethod": "ತಪ್ಪಾದ ಒಪ್ಪಂದದ ವಿಧಾನ {{methodName}}",
+        "ChangeWallet": "ವಾಲೆಟ್ ಬದಲಾಯಿಸಿ"
+    },
+    "identifier": {
+        "types": {
+            "email": "ಇಮೇಲ್",
+            "mobile": "ಮೊಬೈಲ್",
+            "web3": "ವೆಬ್3"
+        }
+    },
+    "clipboard": {
+        "Copied": "ನಕಲು ಮಾಡಲಾಗಿದೆ! ಈಗ ನೀವು ಅದನ್ನು ಎಲ್ಲಿ ಬೇಕಾದರೂ ಅಂಟಿಸಬಹುದು."
     }
 }

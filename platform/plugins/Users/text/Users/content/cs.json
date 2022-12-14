@@ -142,6 +142,17 @@
         "Someone": "Někdo"
     },
     "web3": {
-        "WrongMethod": "Nesprávná metoda smlouvy {{methodName}}"
+        "WrongMethod": "Nesprávná metoda smlouvy {{methodName}}",
+        "ChangeWallet": "Změnit peněženku"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mailem",
+            "mobile": "mobilní, pohybliví",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Zkopírováno! Nyní jej můžete vložit kamkoli."
     }
 }

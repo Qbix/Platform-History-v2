@@ -3,7 +3,8 @@
         "Subject": "Sveiki! Patvirtinkite savo el. pašto adresą.",
         "Thanks": "Sveiki atvykę į {{1}}",
         "ReallyYourEmail": "Ar tai tikrai jūsų el. pašto adresas, {{1}}? Jei taip, spustelėkite <a href='{{2}}'>čia<\/a> , kad nustatytumėte slaptafrazę ir suaktyvintumėte paskyrą.",
-        "SeeYou": "Iki pasimatymo <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Iki pasimatymo <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Kitu atveju spustelėkite <a href='{{1}}'>šią nuorodą<\/a> ."
     },
     "identifier": {
         "Subject": "Sveiki! Patvirtinkite savo elektroninį paštą."
@@ -13,7 +14,8 @@
         "Thanks": "Dėkojame, kad apsilankėte {{1}}",
         "YouAreReceiving": "Gavote šį el. laišką, nes kažkas įvedė jūsų el. pašto adresą ir paspaudė „pamiršau slaptafrazę“. Jei tai buvote ne jūs, tiesiog nekreipkite dėmesio į šį pranešimą.",
         "Reset": "Norėdami iš naujo nustatyti slaptafrazę, spustelėkite {{1}}",
-        "SetUpPassphrase": "Nustatyti slaptafrazę"
+        "SetUpPassphrase": "Nustatyti slaptafrazę",
+        "DomainCode": "Jei tinklalapis jau atidarytas jūsų naršyklėje, galite įvesti kodą"
     },
     "SeeYou": "Iki pasimatymo {{1}}!",
     "LinkToUnsubscribe": "Čia yra nuoroda, kaip <a href='{{1}}'>atsisakyti prenumeratos<\/a> , jei nenorite gauti daugiau el. laiškų."

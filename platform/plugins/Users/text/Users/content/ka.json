@@ -142,6 +142,17 @@
         "Someone": "ვიღაცას"
     },
     "web3": {
-        "WrongMethod": "არასწორი კონტრაქტის მეთოდი {{methodName}}"
+        "WrongMethod": "არასწორი კონტრაქტის მეთოდი {{methodName}}",
+        "ChangeWallet": "საფულის შეცვლა"
+    },
+    "identifier": {
+        "types": {
+            "email": "ელფოსტა",
+            "mobile": "მობილური",
+            "web3": "ვებ3"
+        }
+    },
+    "clipboard": {
+        "Copied": "კოპირებულია! ახლა შეგიძლიათ ჩასვათ სადმე."
     }
 }

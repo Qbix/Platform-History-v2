@@ -3,7 +3,8 @@
         "Subject": "Vítejte! Ověřte prosím svou e-mailovou adresu.",
         "Thanks": "Vítejte v {{1}}",
         "ReallyYourEmail": "Je to opravdu vaše e-mailová adresa, {{1}}? Pokud ano, klikněte <a href='{{2}}'>sem<\/a> a nastavte si přístupové heslo a aktivujte svůj účet.",
-        "SeeYou": "Uvidíme se na <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Uvidíme se na <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "V opačném případě klikněte na <a href='{{1}}'>tento odkaz<\/a> ."
     },
     "identifier": {
         "Subject": "Vítejte! Ověřte svou e-mailovou adresu."
@@ -13,7 +14,8 @@
         "Thanks": "Děkujeme za návštěvu {{1}}",
         "YouAreReceiving": "Tento e-mail jste obdrželi, protože někdo zadal vaši e-mailovou adresu a klikl na „zapomněl jsem heslo“. Pokud jste to nebyli vy, jednoduše tuto zprávu ignorujte.",
         "Reset": "Chcete-li resetovat přístupovou frázi, klikněte na {{1}}",
-        "SetUpPassphrase": "Nastavte přístupovou frázi"
+        "SetUpPassphrase": "Nastavte přístupovou frázi",
+        "DomainCode": "Pokud je webová stránka již otevřena ve vašem prohlížeči, můžete zadat kód"
     },
     "SeeYou": "Uvidíme se na {{1}}!",
     "LinkToUnsubscribe": "Zde je odkaz pro <a href='{{1}}'>odhlášení<\/a> , pokud již nechcete dostávat žádné další e-maily."

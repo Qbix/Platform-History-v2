@@ -142,6 +142,17 @@
         "Someone": "Хтосьці"
     },
     "web3": {
-        "WrongMethod": "Няправільны метад кантракту {{methodName}}"
+        "WrongMethod": "Няправільны метад кантракту {{methodName}}",
+        "ChangeWallet": "Змяніць кашалёк"
+    },
+    "identifier": {
+        "types": {
+            "email": "Электронная пошта",
+            "mobile": "Мабільны",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Скапіравана! Цяпер вы можаце ўставіць яго куды заўгодна."
     }
 }

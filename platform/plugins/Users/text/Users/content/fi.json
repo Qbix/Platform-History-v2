@@ -142,6 +142,17 @@
         "Someone": "Joku"
     },
     "web3": {
-        "WrongMethod": "Väärä sopimustapa {{methodName}}"
+        "WrongMethod": "Väärä sopimustapa {{methodName}}",
+        "ChangeWallet": "Vaihda lompakko"
+    },
+    "identifier": {
+        "types": {
+            "email": "Sähköposti",
+            "mobile": "mobiili",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Kopioitu! Nyt voit liittää sen mihin tahansa."
     }
 }

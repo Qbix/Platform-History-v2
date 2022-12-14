@@ -3,7 +3,8 @@
         "Subject": "Croeso! Gwiriwch eich cyfeiriad e-bost.",
         "Thanks": "Croeso i {{1}}",
         "ReallyYourEmail": "Ai hwn yw eich cyfeiriad e-bost mewn gwirionedd, {{1}}? Os felly, cliciwch <a href='{{2}}'>yma<\/a> i osod eich cyfrinair ac actifadu eich cyfrif.",
-        "SeeYou": "Welwn ni chi ar <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Welwn ni chi ar <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Fel arall, cliciwch ar <a href='{{1}}'>y ddolen hon<\/a> ."
     },
     "identifier": {
         "Subject": "Croeso! Gwiriwch eich cyfeiriad e-bost."
@@ -13,7 +14,8 @@
         "Thanks": "Diolch am ymweld â {{1}}",
         "YouAreReceiving": "Rydych chi&#39;n derbyn yr e-bost hwn oherwydd bod rhywun wedi rhoi eich cyfeiriad e-bost a chlicio &quot;anghofio cyfrinair&quot;. Os nad chi oedd hi, anwybyddwch y neges hon.",
         "Reset": "I ailosod eich cyfrinair, cliciwch {{1}}",
-        "SetUpPassphrase": "Gosod cyfrinair"
+        "SetUpPassphrase": "Gosod cyfrinair",
+        "DomainCode": "Os yw&#39;r dudalen we eisoes ar agor yn eich porwr, gallwch chi nodi&#39;r cod"
     },
     "SeeYou": "Welwn ni chi ar {{1}}!",
     "LinkToUnsubscribe": "Dyma ddolen i ddad- <a href='{{1}}'>danysgrifio<\/a> os nad ydych am gael rhagor o e-byst."

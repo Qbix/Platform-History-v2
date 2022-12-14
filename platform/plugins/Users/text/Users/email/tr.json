@@ -3,17 +3,19 @@
         "Subject": "Hoş geldin! Lütfen email adresini doğrula.",
         "Thanks": "{{1}}&#39;a hoş geldiniz",
         "ReallyYourEmail": "Bu gerçekten e-posta adresiniz mi {{1}}? Öyleyse, parolanızı belirlemek ve hesabınızı etkinleştirmek için <a href='{{2}}'>burayı tıklayın<\/a> .",
-        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> &#39;da görüşmek üzere!"
+        "SeeYou": "<a href='{{1}}'>{{2}}<\/a> &#39;da görüşmek üzere!",
+        "OtherwiseClickLink": "Aksi takdirde, <a href='{{1}}'>bu bağlantıyı<\/a> tıklayın."
     },
     "identifier": {
         "Subject": "Hoş geldin! Eposta adresinizi doğrulayın."
     },
     "resend": {
         "Subject": "Hey, parolanı mı unuttun?",
-        "Thanks": "{{1}}&#39;u ziyaret ettiğiniz için teşekkürler",
-        "YouAreReceiving": "Bu e-postayı, birisi e-posta adresinizi girip &quot;parolayı unuttum&quot; seçeneğine tıkladığınız için alıyorsunuz. Eğer siz değilseniz, bu mesajı görmezden gelin.",
-        "Reset": "Parolanızı sıfırlamak için {{1}} öğesini tıklayın.",
-        "SetUpPassphrase": "Parola ayarla"
+        "Thanks": "{{1}} ziyaret ettiğiniz için teşekkürler",
+        "YouAreReceiving": "Bu e-postayı birisi e-posta adresinizi girip &quot;parolamı unuttum&quot; seçeneğine tıkladığı için alıyorsunuz. Eğer siz değilseniz, bu mesajı yok sayın.",
+        "Reset": "Parolanızı sıfırlamak için {{1}} tıklayın",
+        "SetUpPassphrase": "Parola oluştur",
+        "DomainCode": "Web sayfası tarayıcınızda zaten açıksa, kodu girebilirsiniz."
     },
     "SeeYou": "{{1}}&#39;da görüşürüz!",
     "LinkToUnsubscribe": "Daha fazla e-posta almak istemiyorsanız, <a href='{{1}}'>abonelikten<\/a> çıkmak için bir bağlantı burada."

@@ -283,14 +283,16 @@ class Q_Dispatcher
 				}
 
 				// We might want to reroute the request
-				if (!isset(self::$skip['Q/reroute'])) {
+				$eventName = 'Q/reroute';
+				self::startSessionBeforeEvent($eventName);
+				if (!isset(self::$skip[$eventName])) {
 					/**
 					 * Gives the app a chance to reroute the request
 					 * @event Q/reroute
 					 * @param {array} $routed
 					 * @return {boolean} whether to stop the dispatch
 					 */
-					$stop_dispatch = Q::event('Q/reroute', self::$routed, true);
+					$stop_dispatch = Q::event($eventName, self::$routed, true);
 					if ($stop_dispatch) {
 						self::result("Stopped dispatch");
 						return false;
@@ -298,17 +300,21 @@ class Q_Dispatcher
 				}
 				
 				// Time to instantiate some app objects from the request
-				if (!isset(self::$skip['Q/objects'])) {
+				$eventName = 'Q/objects';
+				self::startSessionBeforeEvent($eventName);
+				if (!isset(self::$skip[$eventName])) {
 					/**
 					 * Gives the app a chance to fetch objects needed for handling
 					 * the request.
 					 * @event Q/objects
 					 * @param {array} $routed
 					 */
-					Q::event('Q/objects', self::$routed, true);
+					Q::event($eventName, self::$routed, true);
 				}
 
-				if (!isset(self::$skip['Q/errors'])) {
+				$eventName = 'Q/errors';
+				self::startSessionBeforeEvent($eventName);
+				if (!isset(self::$skip[$eventName])) {
 					// Check if any errors accumulated
 					if (Q_Response::getErrors()) {
 						// There were validation errors -- render a response
@@ -319,6 +325,8 @@ class Q_Dispatcher
 				}
 				
 				// Make some changes to server state, possibly
+				$eventName = 'Q/method';
+				self::startSessionBeforeEvent($eventName);
 				$method = Q_Request::method();
 				if ($method != 'GET') {
 					$methods = Q_Config::get('Q', 'methods', array(
@@ -328,7 +336,7 @@ class Q_Dispatcher
 						throw new Q_Exception_MethodNotSupported(@compact('method'));
 					}
 					$method_event = 'Q/'.strtolower($method);
-					if (!isset(self::$skip['Q/method']) and !isset(self::$skip[$method_event])) {
+					if (!isset(self::$skip[$eventName]) and !isset(self::$skip[$method_event])) {
 						if (!Q::canHandle($method_event)) {
 							throw new Q_Exception_MethodNotSupported(@compact('method'));
 						}
@@ -337,16 +345,20 @@ class Q_Dispatcher
 				}
 
 				// You can calculate some analytics here, and store them somewhere
-				if (!isset(self::$skip['Q/analytics'])) {
+				$eventName = 'Q/analytics';
+				self::startSessionBeforeEvent($eventName);
+				if (!isset(self::$skip[$eventName])) {
 					/**
 					 * Gives the app a chance to gather analytics from the request.
 					 * @event Q/analytics
 					 * @param {array} $routed
 					 */
-					Q::event('Q/analytics', self::$routed, true);
+					Q::event($eventName, self::$routed, true);
 				}
 				
-				if (!isset(self::$skip['Q/errors'])) {
+				$eventName = 'Q/errors';
+				self::startSessionBeforeEvent($eventName);
+				if (!isset(self::$skip[$eventName])) {
 					// Check if any errors accumulated
 					if (Q_Response::getErrors()) {
 						// There were processing errors -- render a response
@@ -460,9 +472,11 @@ class Q_Dispatcher
 		 * @event Q/response
 		 * @param {array} $routed
 		 */
+		$eventName = 'Q/response';
+		self::startSessionBeforeEvent($eventName);
 		self::$startedResponse = true;
-		if (!isset(self::$skip['Q/response'])) {
-			Q::event("Q/response", self::$routed);
+		if (!isset(self::$skip[$eventName])) {
+			Q::event($eventName, self::$routed);
 		}
 		if ($closeConnection) {
 			header("Connection: close");
@@ -481,6 +495,23 @@ class Q_Dispatcher
 		}
 		self::$servedResponse = true;
 		self::result("Served response");
+		return true;
+	}
+
+	private static function startSessionBeforeEvent($eventName)
+	{
+		static $startBeforeEventName = null;
+		if (!$startBeforeEventName) {
+			$startBeforeEventName = Q_Config::get('Q', 'session', 'startBefore', false);
+		}
+		if (self::$startedResponse) {
+			return false; // too late to start a session
+		}
+		// start the session and set a nonce
+		if (!empty($_SERVER['HTTP_HOST'])
+		and $startBeforeEventName === $eventName) {
+			Q_Session::setNonce();
+		}
 		return true;
 	}
 	

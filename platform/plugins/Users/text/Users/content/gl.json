@@ -142,6 +142,17 @@
         "Someone": "Alguén"
     },
     "web3": {
-        "WrongMethod": "Método de contrato incorrecto {{methodName}}"
+        "WrongMethod": "Método de contrato incorrecto {{methodName}}",
+        "ChangeWallet": "Cambiar carteira"
+    },
+    "identifier": {
+        "types": {
+            "email": "Correo electrónico",
+            "mobile": "Móbil",
+            "web3": "Web 3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Copiado! Agora podes pegalo en calquera lugar."
     }
 }

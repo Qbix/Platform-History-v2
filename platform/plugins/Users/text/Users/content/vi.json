@@ -142,6 +142,17 @@
         "Someone": "Người nào"
     },
     "web3": {
-        "WrongMethod": "Phương thức hợp đồng sai {{methodName}}"
+        "WrongMethod": "Phương thức hợp đồng sai {{methodName}}",
+        "ChangeWallet": "Thay đổi ví"
+    },
+    "identifier": {
+        "types": {
+            "email": "E-mail",
+            "mobile": "di động",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Đã sao chép! Bây giờ bạn có thể dán nó ở bất cứ đâu."
     }
 }

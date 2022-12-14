@@ -142,6 +142,17 @@
         "Someone": "ఎవరైనా"
     },
     "web3": {
-        "WrongMethod": "తప్పు ఒప్పంద పద్ధతి {{methodName}}"
+        "WrongMethod": "తప్పు ఒప్పంద పద్ధతి {{methodName}}",
+        "ChangeWallet": "వాలెట్‌ని మార్చండి"
+    },
+    "identifier": {
+        "types": {
+            "email": "ఇమెయిల్",
+            "mobile": "మొబైల్",
+            "web3": "వెబ్3"
+        }
+    },
+    "clipboard": {
+        "Copied": "కాపీ చేయబడింది! ఇప్పుడు మీరు దీన్ని ఎక్కడైనా అతికించవచ్చు."
     }
 }

@@ -125,7 +125,7 @@ if (defined('APP_WEB_DIR')) {
 }
 Q::$bootstrapped = true;
 
-//
-// Give the project a chance to load aggregated files, etc.
-//
-Q::event('Q/init');
+if (empty($Q_installing)) {
+	// Give the project a chance to load aggregated files, etc.
+	Q::event('Q/init');
+}

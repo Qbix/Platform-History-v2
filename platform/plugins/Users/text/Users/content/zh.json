@@ -142,6 +142,17 @@
         "Someone": "某人"
     },
     "web3": {
-        "WrongMethod": "错误的合约方法 {{methodName}}"
+        "WrongMethod": "错误的合约方法 {{methodName}}",
+        "ChangeWallet": "换钱包"
+    },
+    "identifier": {
+        "types": {
+            "email": "电子邮件",
+            "mobile": "移动的",
+            "web3": "Web3"
+        }
+    },
+    "clipboard": {
+        "Copied": "已复制！现在您可以将其粘贴到任何地方。"
     }
 }

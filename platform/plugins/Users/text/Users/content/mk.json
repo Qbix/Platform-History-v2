@@ -142,6 +142,17 @@
         "Someone": "Некој"
     },
     "web3": {
-        "WrongMethod": "Погрешен метод на договор {{methodName}}"
+        "WrongMethod": "Погрешен метод на договор {{methodName}}",
+        "ChangeWallet": "Променете го паричникот"
+    },
+    "identifier": {
+        "types": {
+            "email": "Е-пошта",
+            "mobile": "Мобилен",
+            "web3": "Веб3"
+        }
+    },
+    "clipboard": {
+        "Copied": "Копирано! Сега можете да го залепите каде било."
     }
 }

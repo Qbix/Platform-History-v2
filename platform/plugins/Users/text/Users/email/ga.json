@@ -3,7 +3,8 @@
         "Subject": "Fáilte romhat! Fíoraigh do sheoladh ríomhphoist.",
         "Thanks": "Fáilte go {{1}}",
         "ReallyYourEmail": "An é seo do sheoladh ríomhphoist i ndáiríre, {{1}}? Más ea, cliceáil <a href='{{2}}'>anseo<\/a> chun do phasfhrása a shocrú agus do chuntas a ghníomhachtú.",
-        "SeeYou": "Féach leat ar <a href='{{1}}'>{{2}}<\/a> !"
+        "SeeYou": "Féach leat ar <a href='{{1}}'>{{2}}<\/a> !",
+        "OtherwiseClickLink": "Seachas sin, cliceáil ar <a href='{{1}}'>an nasc seo<\/a> ."
     },
     "identifier": {
         "Subject": "Fáilte romhat! Fíoraigh do sheoladh ríomhphoist."
@@ -13,7 +14,8 @@
         "Thanks": "Go raibh maith agat as cuairt a thabhairt ar {{1}}",
         "YouAreReceiving": "Tá an ríomhphost seo á fháil agat toisc gur chuir duine éigin isteach do sheoladh ríomhphoist agus gur chliceáil &quot;dearmad pasfhrása&quot;. Mura tusa a bhí ann, déan neamhaird den teachtaireacht seo.",
         "Reset": "Chun do phasfhrása a athshocrú, cliceáil {{1}}",
-        "SetUpPassphrase": "Socraigh pasfhrása"
+        "SetUpPassphrase": "Socraigh pasfhrása",
+        "DomainCode": "Má tá an leathanach gréasáin oscailte i do bhrabhsálaí cheana féin, is féidir leat an cód a chur isteach"
     },
     "SeeYou": "Féach leat ar {{1}}!",
     "LinkToUnsubscribe": "Seo nasc chun <a href='{{1}}'>díliostáil<\/a> mura bhfuil tú ag iarraidh a thuilleadh ríomhphoist a fháil."

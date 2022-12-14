@@ -25,6 +25,9 @@ var Assets = Q.Assets;
  */
 
 Q.Tool.define("Assets/NFT/owned", function (options) {
+	if (!this.state.owner.userId && !this.state.owner.xid) {
+		this.state.owner.xid = Q.Users.Web3.getLoggedInUserXid();
+	}
 	this.refresh();
 	if (this.state.platform && !this.state.appId) {
 		this.state.appId = Q.info.app;
@@ -134,7 +137,7 @@ Q.Tool.define("Assets/NFT/owned", function (options) {
 				$("<div>").appendTo(tool.element).tool("Assets/NFT/preview", {
 					tokenId: result.tokenId,
 					tokenURI: result.tokenURI,
-					secondsLeft: result.secondsLeft,
+					untilTimestamp: result.untilTimestamp,
 					owner: result.owner,
 					ownerUserId: result.ownerUserId,
 					metadata: result.metadata,

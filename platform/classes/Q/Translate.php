@@ -49,6 +49,24 @@ class Q_Translate
 		return $arr;
 	}
 
+	function toRemove($flattened) {
+		$paths = array();
+		$rm = Q::ifset($this->options, 'remove', array());
+		$rm = is_array($rm) ? $rm : array($rm);
+		foreach ($rm as $v2) {
+			$parts = Q_Utils::explodeEscaped('/', $v2);
+			foreach ($flattened as $n => $d) {
+				foreach ($parts as $i => $p) {
+					if ($p !== $d['key'][$i]) {
+						continue 2;
+					}
+				}
+				$paths[$n] = $parts;
+			}
+		}
+		return $paths;
+	}
+
 	function createDirectory($dir)
 	{
 		$dir = $this->joinPaths($this->options['out'], $dir);
@@ -69,7 +87,7 @@ class Q_Translate
 		return preg_replace('#/+#', DS, join(DS, $paths));
 	}
 
-	function arrayToBranch($arr)
+	static function arrayToBranch($arr)
 	{
 		$key = array_shift($arr);
 		if (!sizeof($arr)) {
@@ -85,8 +103,8 @@ class Q_Translate
 		$appConfig = APP_CONFIG_DIR . DS . 'locales.json';
 		$platformConfig = Q_CONFIG_DIR . DS . 'Q' . DS . 'locales.json';
 		$config = null;
-		if (!empty($this->options['locales'])) {
-			$tree = Q_Tree::createAndLoad($this->options['locales']);
+		if (!empty($this->options['locales-file'])) {
+			$tree = Q_Tree::createAndLoad($this->options['locales-file']);
 		} else if (file_exists($appLocalConfig)) {
 			$tree = Q_Tree::createAndLoad($appLocalConfig);
 		} elseif (file_exists($appConfig)) {
@@ -97,7 +115,31 @@ class Q_Translate
 		if (!$tree) {
 			throw new Exception('Empty locales.json');
 		}
-		return $tree->getAll();
+		$arr = $tree->getAll();
+		$locales = Q::ifset($this->options, 'locales', 
+			Q::ifset($this->options, 'l', null)
+		);
+		if (!$locales) {
+			return $arr;
+		}
+		$items = array();
+		foreach (explode(' ', $locales) as $ll) {
+			if ($ll = strtolower(trim($ll))) {
+				$items[$ll] = true;
+			}
+		}
+		$result = array();
+		foreach ($arr as $lang => $locales) {
+			$lang = strtolower($lang);
+			foreach ($locales as $i => $l) {
+				$l_lower = strtolower($l);
+				if (isset($items[$lang])
+				or isset($items["$lang-$l_lower"])) {
+					$result[$lang][] = strtoupper($l);
+				}
+			}
+		}
+		return $result;
 	}
 
 	protected function flatten($filename, $arr, & $res = null, & $key = [])
