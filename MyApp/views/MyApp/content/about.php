@@ -9,6 +9,7 @@
 		"publisherId" => $communityId,
 		"streamName" => "Streams/community/about",
 		"field" => "content",
+		"editor" => "ckeditor",
 		"placeholder" => Q::text($about['CanWrite'])."<br>".Q::text($about['OrRemove'])
 	))?>
 </div>
