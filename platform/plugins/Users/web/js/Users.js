@@ -123,8 +123,6 @@
 
 	var priv = {};
 
-	var _register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
-
 	/**
 	 * This event is fired if an error occurs in any Users function
 	 * @event onError
@@ -3003,7 +3001,9 @@
 
 	}, 'Users');
 
+	var _register_localStorageKey;
 	Q.onInit.add(function () {
+		_register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;
 		Q.Text.get('Users/content', function (err, text) {
 			if (!text) {
 				return;
@@ -3015,7 +3015,6 @@
 			Users.loggedInUser = new Users.User(Users.loggedInUser);
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 		}
-		document.documentElement.addClass(Users.loggedInUser ? ' Users_loggedIn' : ' Users_loggedOut');
 
 		var appId = Q.info.app;
 		for (var platform in Users.apps) {
@@ -3084,6 +3083,9 @@
 				return false;
 			});
 		});
+
+		document.documentElement.removeClass(Users.loggedInUser ? 'Users_loggedOut' : 'Users_loggedIn');
+		document.documentElement.addClass(Users.loggedInUser ? 'Users_loggedIn' : 'Users_loggedOut');
 	}, 'Users');
 
 	// handoff action
