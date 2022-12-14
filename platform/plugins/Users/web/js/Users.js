@@ -3721,14 +3721,31 @@
 			Q.Dialogs.push(Q.extend(options, {
 				url: activateLink,
 				className: 'Users_activate_dialog',
-				mask: 'Users_activate_mask',
 				onActivate: {"Users.Dialogs.activate": function () {
+					var dialog = this;
+					Q.Tool.byId('Q_form-Users_activate')
+					.state.onResponse.set(function (err, data, redirected) {
+						var fem = Q.firstErrorMessage(err, data, redirected);
+						if (fem) {
+							alert(fem);
+						} else {
+							priv.login_connected = true;
+							Q.Dialogs.close(dialog);
+						}
+						return false; // we handled it
+					});
 					$('#new-password').plugin('Q/clickfocus');
+					document.documentElement.addClass('Users_activate_dialog_showing');
 					// priv.login_connected = true;
 					// priv.login_onConnect && priv.login_onConnect(user);
 				}},
 				onClose: {"Users.Dialogs.activate": function () {
-					priv.login_onCancel && priv.login_onCancel();
+					if (!priv.login_connected
+					&& !priv.login_resent
+					&& priv.login_onCancel) {
+						priv.login_onCancel && priv.login_onCancel();	
+					}
+					document.documentElement.removeClass('Users_activate_dialog_showing');
 				}}
 			}));
 		}
@@ -4261,9 +4278,8 @@
 						Q.alert(Q.text.Users.login.web3.alert.content, {
 							title: Q.text.Users.login.web3.alert.title,
 							onClose: function () {
-								var web3 = new window.Web3();
 								var address = accounts[0];
-								const res = provider.request({
+								provider.request({
 									method: 'personal_sign',
 									params: [ 
 										ethers.utils.hexlify(ethers.utils.toUtf8Bytes(payload)), 

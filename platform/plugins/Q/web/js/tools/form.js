@@ -10,19 +10,14 @@
  * @constructor
  * @param {Object} [options] This is an object of parameters for this function
  *   @param {Q.Event} [options.onSubmit] This event triggers On form submit
- *   @default Q.Event()
  *   @param {Q.Event} [options.onResponse] This event triggers after getting some response from from url request
- *   @default Q.Event()
  *   @param {Q.Event} [options.onSuccess] This event triggers if response returned with 200 success code , and if there are no HTTP errors in response headers
- *   @default Q.Event()
- *   @param {String} [options.slotsToRequest] Slot names for Q.request
- *   @default 'form'
+ *   @param {Boolean} [options.ignoreRedirects] Pass true to not follow redirects returned from the server, and call onResponse / onSuccess instead
+ *   @param {String} [options.slotsToRequest='form'] Slot names for Q.request
  *   @param {Object} [options.contentElements] An Object of {slotName: Element} pairs to replace their content.
  *     Otherwise, by default, after a response with no errors, we replace the content in the tool's container element,
  *     from the first slot found in slotsToRequest.
- *   @default {}
- *   @param {Function} [options.loader] Main request function which calls on form submit
- *   @default <code>function (url, method, params, slots, callback) {  Q.request(url+"?"+params, slots, callback, {method: method}); }</code>
+ *   @param {Function} [options.loader] Override the default loader, which is Q.request
  *      @param {String} [options.loader.url] Url for request
  *      @param {String} [options.loader.method] Form Method / Request Method
  *      @param {String} [options.loader.params] Url Encoded /Serialised form data as URL parameters
@@ -30,7 +25,6 @@
  *      @param {Function} [options.loader.callback] Callback function after request
  *
 */
-
 Q.Tool.define('Q/form', function(options) {
 
 	Q.addStylesheet('{{Q}}/css/form.css');
@@ -86,6 +80,10 @@ Q.Tool.define('Q/form', function(options) {
 			function onResponse(err, data, redirected) {
 				$form.removeClass('Q_working').removeAttr('disabled');
 				document.activeElement = tool.activeElement;
+				if (false === Q.handle(tool.state.onResponse, tool, arguments)) {
+					return false; // onResponse took care of it with some other behavior
+				}
+				// default behavior
 				var msg;
 				if (msg = Q.firstErrorMessage(err)) {
 					return alert(msg);
@@ -100,10 +98,7 @@ Q.Tool.define('Q/form', function(options) {
 					}
 					return;
 				}
-				if (false === Q.handle(tool.state.onResponse, tool, arguments)) {
-					return false; // onResponse took care of it with some other behavior
-				}
-				if (redirected) {
+				if (!state.ignoreRedirects && redirected) {
 					return Q.handle(redirected);
 				}
 				if (data.slots) {

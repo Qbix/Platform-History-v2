@@ -715,6 +715,7 @@ html.Q_scanning body > .Q_scanning_code {
 
 #notices_slot {
 	width: 100%;
+	z-index: 999999999;
 }
 #notices_slot ul:empty {
 	display: none;

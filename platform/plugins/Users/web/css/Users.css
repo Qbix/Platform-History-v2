@@ -634,7 +634,7 @@ html.Users_loggedIn .Users_whenLoggedOut {
 	box-shadow: 0px 10px 50px rgba(255, 255, 255, 0.5)
 }
 
-.Users_activate_mask {
+.Users_activate_dialog_showing .Q_dialog_mask {
 	background: rgba(0, 0, 0, 0.8);
 }
 

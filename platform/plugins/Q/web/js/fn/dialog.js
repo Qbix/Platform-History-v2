@@ -1,5 +1,7 @@
 (function (Q, $, window, document, undefined) {
 
+var _htmlClassCount = {};
+
 /**
  * This plugin Makes an overlay to show some content above the page.
  * Suitable for showing dialogs, for example.
@@ -117,18 +119,8 @@ Q.Tool.jQuery('Q/overlay',
 				if (o.elementId) {
 					$this.attr('id', o.elementId);
 				}
-				var topZ = 0;
-				$body.children().each(function () {
-					var $this = $(this);
-					if ($this.hasClass('Q_click_mask')) {
-						return;
-					}
-					var z = parseInt($this.css('z-index'));
-					if (!isNaN(z)) {
-						topZ = Math.max(topZ, z)
-					}
-				});
-				$this.css('z-index', topZ);
+				var topZ = Q.zIndexTopmost();
+				$this.css('z-index', topZ + 1);
 				Q.handle(data.options.beforeLoad, $this, [$this]);
 				calculatePosition($this);
 				$this.show();
@@ -166,8 +158,7 @@ Q.Tool.jQuery('Q/overlay',
 				}, 100);
 				var oom = data.options.mask;
 				var mcn = (typeof oom === 'string') ? ' ' + oom : '';
-				if (data.options.fadeInOut)
-				{
+				if (data.options.fadeInOut) {
 					if (typeof data.options.fadeInOut === 'function') {
 						data.options.fadeInOut(_doFade);
 					} else {
@@ -178,52 +169,42 @@ Q.Tool.jQuery('Q/overlay',
 						Q.Animation.play(function (x, y) {
 							$this.css('opacity', y);
 							if (x === 1) {
-								if (!data.options.noClose && data.options.closeOnEsc) {
-									$(document).on('keydown', closeThisOverlayOnEsc);
-								}
-								Q.handle(data.options.onLoad, $this, [$this]);
+								_doShow();
 							}
 						}, o.fadeTime);
-						if (data.options.mask)
-						{
-							var mask = Q.Masks.show('Q.screen.mask', {
-								fadeTime: o.fadeTime,
-								className: 'Q_dialog_mask' + mcn,
-								zIndex: topZ - 1
-							});
-							if (data.options.closeOnMask) {
-								$(mask.element).on(Q.Pointer.click, function () {
-									$this.data('Q/overlay').close();
-								});
-							}
-						}
+					}
+				} else {
+					_doShow();
+				}
+				$this.addClass('Q_overlay_open');
+				var htmlClass = data.options.htmlClass;
+				if (htmlClass) {
+					_htmlClassCount[htmlClass] = (_htmlClassCount[htmlClass] || 0) + 1;
+					$('html').addClass(data.options.htmlClass);
+				}
+				Q.Pointer.clearSelection();
+				Q.Pointer.cancelClick(false, null, null, 300);
+
+				if (data.options.mask) {
+					var mask = Q.Masks.show('Q.dialog.mask', {
+						fadeTime: o.fadeTime,
+						className: 'Q_dialog_mask' + mcn,
+						zIndex: topZ - 1
+					});
+					if (data.options.closeOnMask) {
+						$(mask.element).on(Q.Pointer.click, function () {
+							$this.data('Q/overlay').close();
+						});
 					}
 				}
-				else
-				{
+
+				function _doShow() {
 					$this.show();
-					if (data.options.mask) {
-						var mask = Q.Masks.show('Q.screen.mask', {
-							className: 'Q_screen_mask' + mcn,
-							zIndex: $this.css('z-index') - 1
-						});
-						if (data.options.closeOnMask) {
-							$(mask.element).on(Q.Pointer.click, function () {
-								$this.data('Q/overlay').close();
-							});
-						}
-					}
 					if (!data.options.noClose && data.options.closeOnEsc) {
 						$(document).on('keydown', closeThisOverlayOnEsc);
 					}
 					Q.handle(data.options.onLoad, $this, [$this]);
 				}
-				$this.addClass('Q_overlay_open');
-				if (data.options.htmlClass) {
-					$('html').addClass(data.options.htmlClass);
-				}
-				Q.Pointer.clearSelection();
-				Q.Pointer.cancelClick(false, null, null, 300);
 			},
 			close: function(e)
 			{
@@ -247,35 +228,30 @@ Q.Tool.jQuery('Q/overlay',
 				if (false === Q.handle(data.options.beforeClose, $this, [$this])) {
 					return false;
 				}
-				if (data.options.fadeInOut)
-				{
+				if (data.options.fadeInOut) {
 					Q.Animation.play(function (x, y) {
 						if (x === 1) {
-							$this.hide();
-							if (data.options.htmlClass) {
-								$('html').removeClass(data.options.htmlClass);
-							}
-							Q.handle(data.options.onClose, $this, []);
+							_doClose();
 						} else {
 							$this.css('opacity', 1-y);
 						}
 					}, o.fadeTime);
-					if (data.options.mask)
-					{
-						Q.Masks.hide('Q.screen.mask');
-					}
+				} else {
+					_doClose();
 				}
-				else
-				{
+
+				function _doClose() {
 					$this.hide();
-					if (data.options.htmlClass) {
-						$('html').removeClass(data.options.htmlClass);
+					var htmlClass = data.options.htmlClass;
+					if (htmlClass) {
+						if (--_htmlClassCount[htmlClass] == 0) {
+							$('html').removeClass(htmlClass);
+						}
 					}
-					if (data.options.mask)
-					{
-						Q.Masks.hide('Q.screen.mask');
+					Q.handle(data.options.onClose, $this, []);
+					if (data.options.mask) {
+						Q.Masks.hide('Q.dialog.mask');
 					}
-					Q.handle(data.options.onClose, $this, [$this]);
 				}
 			},
 			calculatePosition: function () {
@@ -309,14 +285,11 @@ Q.Tool.jQuery('Q/overlay',
 		beforeClose: new Q.Event(),
 		onClose: new Q.Event(function () {
 			// set z-index of mask less than visible dialog element
-			var $lastDialog = dialogs[dialogs.length-1];
-			if ($lastDialog) {
-				if (!($lastDialog instanceof jQuery)) {
-					$lastDialog = $($lastDialog);
-				}
+			var $lastDialog = $(dialogs[dialogs.length-1]);
+			if ($lastDialog.length) {
 				var zIndex = parseInt($lastDialog.css('z-index'));
 				if (zIndex) {
-					Q.Masks.mask('Q.screen.mask', {'zIndex': zIndex - 1});
+					Q.Masks.mask('Q.dialog.mask', {'zIndex': zIndex - 1});
 				}
 			}
 		}, 'Q.Dialogs.updateMask')
