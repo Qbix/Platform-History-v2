@@ -57,30 +57,34 @@ class Websites_Webpage extends Base_Websites_Webpage
 		}
 
 		$headers = get_headers($url, 1);
-		for ($i=0; $i<5; ++$i) {
-			if ($header = Q::ifset($headers, 0, '')
-			and preg_match('/HTTP.*\ 301/', $header)) {
-				// Do up to 5 redirects
-				if (empty($headers['Location'])) {
-					throw new Q_Exception("Redirect to empty location");
+		if ($headers) {
+			for ($i=0; $i<5; ++$i) {
+				if ($header = Q::ifset($headers, 0, '')
+					and preg_match('/HTTP.*\ 301/', $header)) {
+					// Do up to 5 redirects
+					if (empty($headers['Location'])) {
+						throw new Q_Exception("Redirect to empty location");
+					}
+					$url = self::normalizeHref(
+						is_array($headers['Location'])
+							? end($headers['Location'])
+							: $headers['Location'],
+						$url
+					);
+					$headers = get_headers($url, 1);
+				} else {
+					break;
 				}
-				$url = self::normalizeHref(
-					is_array($headers['Location'])
-						? end($headers['Location'])
-						: $headers['Location'],
-					$url
-				);
-				$headers = get_headers($url, 1);
-			} else {
-				break;
 			}
+			$headers = array_change_key_case($headers, CASE_LOWER);
+			if (is_array($headers['content-type'])) {
+				$contentType = end($headers['content-type']);
+			} else {
+				$contentType = $headers['content-type'];
+			}
+		} else {
+			$contentType = "text/html";
 		}
-		$headers = array_change_key_case($headers, CASE_LOWER);
-        if (is_array($headers['content-type'])) {
-            $contentType = end($headers['content-type']);
-        } else {
-            $contentType = $headers['content-type'];
-        }
 
         // for non text/html content use another approach
         if (!stristr($contentType, 'text/html')) {
@@ -120,7 +124,10 @@ class Websites_Webpage extends Base_Websites_Webpage
 			}
 		}
 		if (!$gzip) {
-			$document = self::readURL($url);
+			$document = Q_Utils::get($url, null, array(
+				CURLOPT_SSL_VERIFYPEER => false,
+				CURLOPT_SSL_VERIFYHOST => false
+			));
 			if (!$document) {
 				throw new Exception("Unable to access the site");
 			}
