@@ -1383,14 +1383,14 @@
                         var elRect = _elementToResize.getBoundingClientRect();
                         ratio = _elementToResize.offsetWidth / _elementToResize.offsetHeight;
             
-                        /*if (!tool.state.allowOverresizing && (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth)) {
+                        if (!tool.state.allowOverresizing && (elRect.height > document.body.offsetHeight || elRect.width >= document.body.offsetWidth)) {
             
                             _elementToResize.style.width = oldWidth + 'px';
                             _elementToResize.style.height = oldHeight + 'px';
                             _elementToResize.style.transform = '';
             
                             return;
-                        }*/
+                        }
 
                         var elRect = _elementToResize.getBoundingClientRect();
                         if (elementPosition == 'fixed' || elementPosition == 'absolute') {

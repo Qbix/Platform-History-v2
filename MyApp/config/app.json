@@ -35,7 +35,7 @@
 				"desktop": "MyApp/layout/desktop.php",
 				"tablet": "MyApp/layout/tablet.php",
 				"mobile": "MyApp/layout/mobile.php",
-				"sidebar": false
+				"sidebar": true
 			},
 			"cacheBaseUrl": "https://myapp.intercept"
 		},

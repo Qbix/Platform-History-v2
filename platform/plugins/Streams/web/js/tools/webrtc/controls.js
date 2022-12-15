@@ -389,6 +389,9 @@
                 tool.WebRTCLib.event.on('currentAudioinputDeviceChanged', function () {
                     tool.updateAudioInputList();
                 });
+                tool.WebRTCLib.event.on('currentVideoinputDeviceChanged', function () {
+                    tool.updateCamerasList();
+                });
                 tool.WebRTCLib.event.on('screensharingStarting', function (e) {
                     tool.participantsPopup().toggleLoudesScreenMode('disabled');
                 });
@@ -1257,8 +1260,10 @@
                             }
                             tool.hoverTimeout.textChatPopup = setTimeout(function () {
                                 tool.textChatBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                                tool.textChat.chatTool.seen(false);
-                                tool.textChat.isHidden = true;
+                                if(tool.textChat.chatTool) {
+                                    tool.textChat.chatTool.seen(false);
+                                    tool.textChat.isHidden = true;
+                                }
                             }, 400)
                         });
 
@@ -3493,7 +3498,11 @@
                             manageStreamBtn.innerHTML = Q.getObject("webrtc.settingsPopup.manageStream", tool.text);
                             manageStreamBtn.addEventListener('click', function () {
                                 tool.advancedLiveStreaming.show();
-                                if (tool.settingsPopup != null) tool.settingsPopup.hide();
+                                if (Q.info.isMobile) {
+                                    tool.showControlsDialog('broadcast').hide();
+                                } else if (tool.settingsPopup != null)  {
+                                    tool.settingsPopup.hide();
+                                }
                             })
                             manageStreamBtnCon.appendChild(manageStreamBtn);
                             _streamingAndRecordingEl.appendChild(createStreamingLink());

@@ -24,6 +24,7 @@
 Q.Tool.define("Streams/html", function (options) {
 	var tool = this;
 	var state = tool.state;
+	var $toolElement = $(this.element);
 
 	if (!state.publisherId) {
 		throw new Q.Error("Streams/html tool: missing options.publisherId");
@@ -78,6 +79,7 @@ Q.Tool.define("Streams/html", function (options) {
 			});
 			state.froala.key = state.froala.key || Q.Streams.froala.key;
 			state.froala.toolbarStickyOffset = _getTopOffset();
+			state.froala.placeholderText = (state.froala.placeholderText || state.placeholder).replace(/(<br>)/g, "\n");
 		}
 		switch (state.editor && state.editor.toLowerCase()) {
 		case 'basic':
@@ -125,8 +127,7 @@ Q.Tool.define("Streams/html", function (options) {
 				scripts.push("{{Q}}/js/froala/froala_editor_ie8.min.js");
 			}
 			Q.addScript(scripts, function() {
-				var $te = $(tool.element);
-				$te.froalaEditor(state.froala)
+				$toolElement.froalaEditor(state.froala)
 				.on('froalaEditor.image.removed', function (e, editor, $img) {
 					var src = $img.attr('src');
 					if (src.substr(0, 5) === 'data:'
@@ -138,18 +139,18 @@ Q.Tool.define("Streams/html", function (options) {
 					var streamName = parts.slice(-6, -3).join('/');
 					Q.Streams.Stream.close(publisherId, streamName);
 				});
-				state.froalaEditor = $te.data('froala.editor');
+				state.froalaEditor = $toolElement.data('froala.editor');
 				Q.handle(state.onFroalaEditor, tool, state.froalaEditor);
 			});
 		}
 		function _blur() {
 			var content = state.editorObject
 				? state.editorObject.getData()
-				: $(tool.element).froalaEditor('html.get');
+				: $toolElement.froalaEditor('html.get');
 			if (state.editorObject) {
-				editor.focusManager.blur();
+				state.editorObject.focusManager.blur();
 			} else {
-				$('.froala-editor.f-inline').hide();
+				$('.froala-editor.f-inline', tool.element).hide();
 			}
 			_blurred = true;
 			state.editing = false;
@@ -173,12 +174,12 @@ Q.Tool.define("Streams/html", function (options) {
 			_blurred = false;
 			var content = state.editorObject
 				? state.editorObject.getData()
-				: $(tool.element).froalaEditor('html.get');
+				: $toolElement.froalaEditor('html.get');
 			state.editing = true;
 			state.startingContent = content;
 		}
 		var _blurred = true;
-		$(tool.element)
+		$toolElement
 			.off(Q.Pointer.focusin)
 			.on(Q.Pointer.focusin, _focus)
 			.off(Q.Pointer.focusout)
@@ -214,7 +215,7 @@ Q.Tool.define("Streams/html", function (options) {
 			default:
 				state.onFroalaEditor.add(function () {
 					if (html != undefined) {
-						$(tool.element).froalaEditor('html.set', html);
+						$toolElement.froalaEditor('html.set', html);
 					}
 				});
 				break;

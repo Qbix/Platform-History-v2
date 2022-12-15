@@ -1278,6 +1278,7 @@ window.WebRTCRoomClient = function app(options){
                     console.error(e)
                     console.log('attachTrack: video play func error')
                 });
+
                 app.event.dispatch('videoTrackIsBeingAdded', {track: track, participant: participant});
             } else if(track.kind == 'audio') {
 
@@ -1287,8 +1288,6 @@ window.WebRTCRoomClient = function app(options){
 
                 if(!participant.isLocal) {
                     document.body.appendChild(trackEl);
-                } else {
-                    app.localMediaControls.updateCurrentAudioInputDevice();
                 }
 
                 audioVisualization.createAudioAnalyser(track, participant)
@@ -1301,7 +1300,12 @@ window.WebRTCRoomClient = function app(options){
                 return t == track;
             })[0];
             if(trackExist == null) participant.tracks.push(track);
-            if(participant.isLocal) app.localMediaControls.updateCurrentAudioInputDevice();
+            if(participant.isLocal) {
+                log('attachTrack: update current devices ');
+
+                if(track.kind == 'video') app.localMediaControls.updateCurrentVideoInputDevice();
+                if(track.kind == 'audio') app.localMediaControls.updateCurrentAudioInputDevice();
+            }
 
             if(options.useCordovaPlugins && typeof cordova != 'undefined' && _isiOS && participant.isLocal) {
                 log('attachTrack: iosrtc publish track ');
@@ -1597,6 +1601,7 @@ window.WebRTCRoomClient = function app(options){
         var canvasComposer = (function (roomInstance) {
 
             var _roomInstance = roomInstance;
+            var _composerIsActive = false;
             var _canvas = null;
             var _offscreenVideoCanvas = null;
             var _canvasMediStream = null;
@@ -2001,6 +2006,66 @@ window.WebRTCRoomClient = function app(options){
                 }
                 VideoSource.prototype = new Source();
 
+                var VideoInputSource = function () {
+                    var instance = this;
+                    this.mediaStream = null;
+                    this.videoInstance = null;
+                    this.sourceType = 'videoInput';
+                    this.audioSourceNode = null;
+                    this.rect = {
+                        _width: null,
+                        _height: null,
+                        _x: null,
+                        _y: null,
+                        set x(value) {
+                            this._x = value;
+                            if (instance.eventDispatcher != null) instance.eventDispatcher.dispatch('rectChanged');
+                        },
+                        set y(value) {
+                            this._y = value;
+                            if (instance.eventDispatcher != null) instance.eventDispatcher.dispatch('rectChanged');
+                        },
+                        set width(value) {
+                            this._width = value;
+                            if (instance.eventDispatcher != null) instance.eventDispatcher.dispatch('rectChanged');
+                        },
+                        set height(value) {
+                            this._height = value;
+                            if (instance.eventDispatcher != null) instance.eventDispatcher.dispatch('rectChanged');
+                        },
+                        get x() { return this._x; },
+                        get y() { return this._y; }
+                    };
+                    // original size of video
+                    this.originalSize = {};
+                    this.frameRate = null;
+                    this.isScreensharing = false;
+        
+                    this.update = function (e) {
+                        console.log('VideoInputSource update', e);
+                        
+                        if (instance.mediaStream != null && e.stream && e.stream != instance.mediaStream) {
+                            let tracks = instance.mediaStream.getTracks();
+                            for (let t in tracks) {
+                                tracks[t].stop();
+                            }
+        
+                            instance.mediaStream = e.stream;
+                        }
+                        if (e.originalSize != null) {
+                            instance.originalSize = e.originalSize;
+                        }
+                        if (e.frameRate != null) {
+                            instance.frameRate = e.frameRate;
+                        }
+                        instance.name = e.name;
+                    }
+        
+                    this.eventDispatcher = new EventSystem();
+        
+                }
+                VideoInputSource.prototype = new Source();
+
                 var RectObjectSource = function (rect) {
                     this.sourceType = 'webrtcrect';
                     this.widthFrom = rect.widthFrom;
@@ -2292,6 +2357,40 @@ window.WebRTCRoomClient = function app(options){
                         _activeScene.eventDispatcher.dispatch('sourceAdded', imageSource);
 
                         return imageSource;
+                    } else if(newSource.sourceType == 'videoInput') {
+                        console.log('addSource videoInput')
+                        let stream = newSource.mediaStreamInstance;
+
+                        let indexOfLatestWebRTCSOurce = getIndexOfLatestWebRTCSource();
+                        var video = document.createElement('VIDEO');
+                        video.muted = false;
+                        video.loop = options.liveStreaming.loopVideo;
+                        video.addEventListener('loadedmetadata', event => {
+                            console.log(video.videoWidth, video.videoHeight)
+                        })
+                        video.srcObject = stream;
+                        var videoInputSource = new VideoInputSource();
+                        videoInputSource.videoInstance = video;
+                        videoInputSource.mediaStream = stream;
+                        videoInputSource.name = newSource.title;
+                        videoInputSource.id = generateId();
+                        videoInputSource.sceneId = _activeScene.id;
+                        videoInputSource.originalSize = newSource.originalSize;
+                        videoInputSource.frameRate = newSource.frameRate;
+                        videoInputSource.isScreensharing = newSource.screensharing;
+                        _activeScene.sources.splice((indexOfLatestWebRTCSOurce + 1), 0, videoInputSource);
+                        var playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(function() {
+                                if(successCallback != null) successCallback();
+                            }).catch(function(error) {
+                                if(failureCallback != null) failureCallback(error);
+                            });
+                        }
+                        if (videoInputSource.mediaStream.getAudioTracks().length != 0) audioComposer.addSource(videoInputSource);
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', videoInputSource);
+
+                        return videoInputSource;
                     } else if(newSource.sourceType == 'imageBackground') {
                         console.log('addSource image')
 
@@ -3384,9 +3483,9 @@ window.WebRTCRoomClient = function app(options){
 
                         } else if(streamData.sourceType == 'image') {
                             drawImage(streamData);
-                        } else if(streamData.sourceType == 'video') {
+                        } else if(streamData.sourceType == 'video' || streamData.sourceType == 'videoInput') {
                             drawVideo(streamData);
-                        }
+                        } 
                     }
 
 
@@ -5476,14 +5575,15 @@ window.WebRTCRoomClient = function app(options){
                 WebRTCAudioSource.prototype = new AudioSource();
 
                 var AudioInputSource = function () {
-                    this.sourceType = 'audioinput';
+                    this.sourceType = 'audioInput';
                     this.gainNode = null;
                     this.analyserNode = null;
                     this.streams = [];
                     this.addStream = function (mediaStream) {
                         if (audioContext == null) audioComposer.mix();
-                        
+                        console.log('AudioInputSource 1');
                         if(this.gainNode == null && this.analyserNode == null) {
+                            console.log('AudioInputSource 2');
                             this.gainNode = audioContext.createGain();;
                             this.analyserNode = audioContext.createAnalyser();
                             this.analyserNode.fftSize = 512;
@@ -5491,6 +5591,9 @@ window.WebRTCRoomClient = function app(options){
                             this.analyserNode.connect(_dest);
                         }
                         
+                        console.log('AudioInputSource 3', this.gainNode);
+                        console.log('AudioInputSource 3.1', this.analyserNode);
+
                         const source = audioContext.createMediaStreamSource(mediaStream);
                         source.connect(this.gainNode);
 
@@ -5502,9 +5605,13 @@ window.WebRTCRoomClient = function app(options){
                         if (this.eventDispatcher != null) this.eventDispatcher.dispatch('streamAdded', streamInfo);
                     };
                     this.connect = function () {
+                        console.log('AudioInputSource connect');
+
                         this.analyserNode.connect(_dest);
                     };
                     this.disconnect = function () {
+                        console.log('AudioInputSource disconnect');
+
                         this.analyserNode.disconnect(_dest);
                     };
                 }
@@ -5572,7 +5679,9 @@ window.WebRTCRoomClient = function app(options){
                 function getIndexOfLatestWebRTCSource() {
                     let indexOfLatestWebRTCSource = 0;
                     for (let j in _activeScene.audioSources) {
-                        if (_activeScene.audioSources[j].audioSources == 'webrtc') {
+                        if (_activeScene.audioSources[j].sourceType == 'webrtc') {
+                            log('getIndexOfLatestWebRTCSource for', j)
+
                             indexOfLatestWebRTCSource = parseInt(j);
                         }
                     }
@@ -5609,9 +5718,22 @@ window.WebRTCRoomClient = function app(options){
                         _activeScene.audioSources.splice(insertAfterIndex, 0, newSource)
                         _activeScene.eventDispatcher.dispatch('sourceAdded', newSource);
                         return;
-                    } else if(newSource.sourceType == 'audio') {
+                    }  else if(newSource.sourceType == 'audioInput') {
                         let indexOfLatestWebRTCSOurce = getIndexOfLatestWebRTCSource();
 
+                        var audioSource = new AudioInputSource();
+                        if (newSource.mediaStreamInstance) audioSource.addStream(newSource.mediaStreamInstance);
+                        audioSource.name = newSource.title;
+                        audioSource.scope = 'scene';
+
+                        log('addSource audio add at the end ' + indexOfLatestWebRTCSOurce)
+                        
+                        _activeScene.audioSources.splice(indexOfLatestWebRTCSOurce + 1, 0, audioSource)
+                        _activeScene.eventDispatcher.dispatch('sourceAdded', audioSource);
+                        return;
+                    } else if(newSource.sourceType == 'audio') {
+                        let indexOfLatestWebRTCSOurce = getIndexOfLatestWebRTCSource();
+                        console.log('indexOfLatestWebRTCSOurce', indexOfLatestWebRTCSOurce)
                         var audio = document.createElement('audio');
                         audio.muted = false;
                         audio.loop = options.liveStreaming.loopAudio;
@@ -5667,7 +5789,14 @@ window.WebRTCRoomClient = function app(options){
                 function removeSource(source) {
                     for (let j in _activeScene.audioSources) {
                         if (_activeScene.audioSources[j] == source) {
-                            _activeScene.audioSources.splice(j, 1)
+                            _activeScene.audioSources.splice(j, 1);
+                        }
+                    }
+
+                    if(source.mediaStream != null) {
+                        let tracks = source.mediaStream.getTracks();
+                        for(let t in tracks) {
+                            tracks[t].stop();
                         }
                     }
                     if(source.audioInstance != null) source.audioInstance.pause();
@@ -5684,10 +5813,10 @@ window.WebRTCRoomClient = function app(options){
                             log('muteSource webrtc', source);
                             source.mediaStreamTrack.enabled = false;
                         }
-                    } else if(source.sourceType == 'audio' || source.sourceType == 'video') {
+                    } else if(source.sourceType == 'audio' || source.sourceType == 'audioInput' || source.sourceType == 'video') {
                         console.log('muteSource: audio || video', source, localOutput);
 
-                        source.sourceNode.disconnect(_dest);
+                        source.analyserNode.disconnect(_dest);
                         if(localOutput) muteSourceLocally(source);
                     }
                 }
@@ -5695,10 +5824,8 @@ window.WebRTCRoomClient = function app(options){
                 function muteSourceLocally(source) {
                     if(source.sourceType == 'webrtc') {
 
-                    } else if (source.sourceType == 'audio') {
-                        if (source.sourceNode) source.analyserNode.disconnect(audioContext.destination);
-                    } else if (source.sourceType == 'video') {
-                        if (source.audioSourceNode) source.analyserNode.disconnect(audioContext.destination);
+                    } else if (source.sourceType == 'audio' || source.sourceType == 'video') {
+                        if (source.analyserNode) source.analyserNode.disconnect(audioContext.destination);
                     }
                 }
 
@@ -5709,8 +5836,8 @@ window.WebRTCRoomClient = function app(options){
                             log('unmuteSource unmute webrtc', source);
                             source.mediaStreamTrack.enabled = true;
                         }
-                    } else if(source.sourceType == 'audio') {
-                        source.sourceNode.connect(_dest);
+                    } else if(source.sourceType == 'audio' || source.sourceType == 'audioInput' || source.sourceType == 'video') {
+                        source.analyserNode.connect(_dest);
                         if(localOutput) unmuteSourceLocally(source);
                     }
                 }
@@ -5735,8 +5862,12 @@ window.WebRTCRoomClient = function app(options){
 
                 function updateWebRTCAudioSources(webrtcGroupSource) {
                     log('updateWebRTCAudioSources START', webrtcGroupSource)
-                    if(_dest == null) _dest = audioContext.createMediaStreamDestination();
+                    //if(_dest == null) _dest = audioContext.createMediaStreamDestination();
 
+                    if (audioContext == null) {
+                        audioComposer.mix();
+                    }
+                    
                     var participants = _roomInstance.roomParticipants(true);
                     var groupAudioSources = webrtcGroupSource.getChildSources('webrtc');
 
@@ -5941,6 +6072,8 @@ window.WebRTCRoomClient = function app(options){
                 });
                 audioComposer.mix();
 
+                _composerIsActive = true;
+
                 return _canvasMediStream;
             }
 
@@ -5958,6 +6091,9 @@ window.WebRTCRoomClient = function app(options){
                 }
 
                 audioComposer.stop();
+                
+                _composerIsActive = false;
+
             }
 
             function startRecorder(ondataavailable) {
@@ -6020,6 +6156,8 @@ window.WebRTCRoomClient = function app(options){
 
                     _mediaRecorder.start(1000); // Start recording, and dump data every second
                 }
+
+                
             }
 
             function stopRecorder() {
@@ -6154,8 +6292,9 @@ window.WebRTCRoomClient = function app(options){
                 startRecorder: startRecorder,
                 stopRecorder: stopRecorder,
                 isActive: function () {
-                    if(_mediaRecorder != null) return true;
-                    return false;
+                    return _composerIsActive;
+                    //if(_mediaRecorder != null) return true;
+                    //return false;
                 },
                 eventDispatcher: function () {
                     return _eventDispatcher
@@ -6341,14 +6480,14 @@ window.WebRTCRoomClient = function app(options){
                             //console.log('onDataAvailablehandler ', service, _streamingSocket[service].socket.id)
                             //console.log('onDataAvailablehandler ', blob, blob.timestump)
 
-                            if(!canvasComposer.videoTrackIsMuted()) {
+                            //if(!canvasComposer.videoTrackIsMuted()) {
                                 _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blob);
-                            } else {
+                            /*} else {
                                 console.log('onDataAvailablehandler vTrack is MUTED')
 
                                 var blobToSend = new Blob([_veryFirstBlobs[_veryFirstBlobs.length - 1], blob]);
                                 _streamingSocket[service].socket.emit('Streams/webrtc/videoData', blobToSend);
-                            }
+                            }*/
                         }
                     });
 
@@ -6362,7 +6501,7 @@ window.WebRTCRoomClient = function app(options){
                     }
 
                     _videoStream.timer = setTimeout(timer, 5000);*/
-
+                    
                     _roomInstance.event.dispatch('liveStreamingStarted', {participant:localParticipant, platform:service});
                     _roomInstance.signalingDispatcher.sendDataTrackMessage("liveStreamingStarted", service);
                 });
@@ -6578,7 +6717,6 @@ window.WebRTCRoomClient = function app(options){
                 }
                 for(let a in videoTracks) {
                     streamToRectord.addTrack(videoTracks[a].mediaStreamTrack);
-
                 }
 
 
@@ -9272,15 +9410,6 @@ window.WebRTCRoomClient = function app(options){
                     log('loadDevicesList: ', device);
                     if (device.kind.indexOf('video') != -1) {
                         videoInputDevices.push(device);
-                        for (let x in localParticipant.tracks) {
-                            var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
-
-                            if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
-                                if (mediaStreamTrack.enabled == true && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
-                                    frontCameraDevice = currentCameraDevice = device;
-                                }
-                            }
-                        }
                     }
                     if (device.kind == 'audioinput') {
                         audioInputDevices.push(device);
@@ -9293,6 +9422,7 @@ window.WebRTCRoomClient = function app(options){
                         audioInputDevices.push(device);
                     }
                 }
+                updateCurrentVideoInputDevice();
                 updateCurrentAudioInputDevice();
                 app.event.dispatch('deviceListUpdated');
 
@@ -9306,6 +9436,31 @@ window.WebRTCRoomClient = function app(options){
             log('currentCameraDevice', currentCameraDevice);
             log('currentAudioInputDevice', currentAudioInputDevice);
             log('frontCameraDevice', frontCameraDevice);
+        }
+
+        function updateCurrentVideoInputDevice() {
+            log('updateCurrentVideoInputDevice');
+            for (let i in videoInputDevices) {
+                let device = videoInputDevices[i];
+                for (let x in localParticipant.tracks) {
+                    var mediaStreamTrack = localParticipant.tracks[x].mediaStreamTrack;
+
+                    log('updateCurrentVideoInputDevice: video: mediaStreamTrack', mediaStreamTrack);
+                    log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.enabled == true, typeof mediaStreamTrack.getSettings != 'undefined', mediaStreamTrack.getSettings().deviceId == device.deviceId, mediaStreamTrack.getSettings().label == device.label);
+                    log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.getSettings().deviceId, device.deviceId);
+                    if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
+                        if (mediaStreamTrack.enabled == true
+                            && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
+                                log('updateCurrentVideoInputDevice: video:currentCameraDevice', currentCameraDevice, device, currentCameraDevice == device);
+
+                            if(currentCameraDevice != device) {
+                                currentCameraDevice = device;
+                                app.event.dispatch('currentVideoinputDeviceChanged');
+                            }
+                        }
+                    }
+                }
+            }
         }
 
         function updateCurrentAudioInputDevice() {
@@ -10178,6 +10333,8 @@ window.WebRTCRoomClient = function app(options){
                 return track.screensharing === true;
             }).length == 0;
 
+
+            app.localMediaControls.updateCurrentVideoInputDevice();
             socket.emit('Streams/webrtc/cameraEnabled');
             app.event.dispatch('cameraEnabled');
             app.signalingDispatcher.sendDataTrackMessage('online', {cameraIsEnabled: true});
@@ -10527,6 +10684,7 @@ window.WebRTCRoomClient = function app(options){
             screensharingIsEnabled: screensharingIsEnabled,
             speakerIsEnabled: speakerIsEnabled,
             loadDevicesList: loadDevicesList,
+            updateCurrentVideoInputDevice: updateCurrentVideoInputDevice,
             updateCurrentAudioInputDevice: updateCurrentAudioInputDevice,
             videoInputDevices: getVideoDevices,
             audioInputDevices: getAudioInputDevices,
@@ -11402,6 +11560,18 @@ window.WebRTCRoomClient = function app(options){
                 if(_isMobile) app.views.updateOrientation();
             }, 1000);
         });
+
+        
+        
+        window.addEventListener('visibilitychange', onTabSwitchHandler);
+    }
+
+    function onTabSwitchHandler(e) {
+        if (document.visibilityState !== 'visible') {
+            if (app.mediaManager.canvasComposer.isActive()) {
+                //alert('Livestream is active now. Switching current tab will stop livestreaming. Plase keep current tab active or in a separate window.');
+            }
+        } 
     }
 
     app.switchFrom = function(localParticipant, callback){
@@ -11458,6 +11628,8 @@ window.WebRTCRoomClient = function app(options){
 
             app.event.dispatch('switchRoom', {roomName: streamName});
 
+            window.removeEventListener('visibilitychange', onTabSwitchHandler);
+
             resolve(newConferenceInstance);
         });
     }
@@ -11503,7 +11675,7 @@ window.WebRTCRoomClient = function app(options){
             }
         }
 
-
+        window.removeEventListener('visibilitychange', onTabSwitchHandler);
         if(socket != null) socket.disconnect();
         app.event.dispatch('disconnected');
         app.event.destroy();

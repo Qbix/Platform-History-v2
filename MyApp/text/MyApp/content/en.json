@@ -6,6 +6,10 @@
 		"About": "About",
 		"LogIn": "log in",
 		"LogOut": "log out",
+		"People": "People",
+		"Conversations": "Chats",
+		"Events": "Events",
+		"Me": "Me",
 		"SetMobileNumber": "Set Mobile Number",
 		"SetEmailAddress": "Set Email Address"
 	},
