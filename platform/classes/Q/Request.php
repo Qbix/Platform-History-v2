@@ -77,7 +77,7 @@ class Q_Request
 			return self::$app_root_url;
 		}
 		
-		if (isset($_SERVER['SERVER_NAME'])) {
+		if (isset($_SERVER['HTTP_HOST'])) {
 			// This is a web request, so we can automatically determine
 			// the app root URL. If you want the canonical one which the developer
 			// may have specified in the config field "Q"/"web"/"appRootUrl"
