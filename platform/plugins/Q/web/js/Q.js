@@ -15148,6 +15148,9 @@ Q.Camera = {
 	 * @return {String} the previous color
 	 */
 	setWindowTheme: function (color) {
+		if (Q.Color.setWindowTheme.ignore) {
+			return color;
+		}
 		var meta = document.querySelector('meta[name="theme-color"]');
 		var prevColor = null;
 		if (meta) {

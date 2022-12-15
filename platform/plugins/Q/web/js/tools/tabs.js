@@ -381,10 +381,7 @@
 				if (color) {
 					Q.Color.setWindowTheme(color);
 				}
-				if (this.getCurrentTab()) {
-					// if no current tab, let it go, maybe Q/columns is changing it
-					Q.Color.setWindowTheme(tool.originalWindowThemeColor);
-				}
+				Q.Color.setWindowTheme(tool.originalWindowThemeColor);
 			},
 
 			/**

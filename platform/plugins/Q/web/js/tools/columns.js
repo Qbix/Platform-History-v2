@@ -648,6 +648,8 @@ Q.Tool.define("Q/columns", function(options) {
 				$parents.not('body,html').addClass('Q_columns_containsExpanded');
 				$parents.siblings().not('body,html').addClass('Q_columns_siblingContainsExpanded');
 			}
+
+			document.documentElement.setAttribute('data-q-columns-depth', state.$columns.length);
 			
 			state.locked = true;
 			openAnimation();
@@ -878,12 +880,17 @@ Q.Tool.define("Q/columns", function(options) {
 			var url = $prev.attr('data-url') || $div.attr('data-prevUrl');
 			var title = $prev.attr('data-title') || $div.attr('data-prevTitle');
 			if (o.pagePushUrl && url && url !== location.href) {
+				Q.Color.setWindowTheme.ignore = true;
 				Q.Page.push(url, title);
+				setTimeout(function () {
+					Q.Color.setWindowTheme.ignore = false;
+				}, 300);
 			}
 			Q.layout(tool.element);
 			setTimeout(function () {
 				Q.Masks.hide('Q.click.mask');
 			}, state.animation.duration);
+			document.documentElement.setAttribute('data-q-columns-depth', state.$columns.length);
 		}
 	},
 
