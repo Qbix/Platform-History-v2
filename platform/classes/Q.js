@@ -1160,7 +1160,7 @@ function Q_Cache_index_name(parameterCount) {
  */
 Q.Cache.key = function _Cache_key(args, functions) {
 	var i, keys = [];
-	if (Q.isArrayLike(args)) {
+	if (!Q.isArrayLike(args)) {
 		return args;
 	}
 
