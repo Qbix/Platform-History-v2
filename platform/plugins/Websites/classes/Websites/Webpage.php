@@ -60,7 +60,8 @@ class Websites_Webpage extends Base_Websites_Webpage
 		if ($headers) {
 			for ($i=0; $i<5; ++$i) {
 				if ($header = Q::ifset($headers, 0, '')
-					and preg_match('/HTTP.*\ 301/', $header)) {
+				and (preg_match('/HTTP.*\ 301/', $header)
+				     or preg_match('/HTTP.*\ 302/', $header))) {
 					// Do up to 5 redirects
 					if (empty($headers['Location'])) {
 						throw new Q_Exception("Redirect to empty location");
