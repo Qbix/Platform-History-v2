@@ -649,7 +649,7 @@ Q.Tool.define("Q/columns", function(options) {
 				$parents.siblings().not('body,html').addClass('Q_columns_siblingContainsExpanded');
 			}
 
-			document.documentElement.setAttribute('data-q-columns-depth', state.$columns.length);
+			document.documentElement.setAttribute('data-q-columns-depth', state.columns.length);
 			
 			state.locked = true;
 			openAnimation();
@@ -890,7 +890,7 @@ Q.Tool.define("Q/columns", function(options) {
 			setTimeout(function () {
 				Q.Masks.hide('Q.click.mask');
 			}, state.animation.duration);
-			document.documentElement.setAttribute('data-q-columns-depth', state.$columns.length);
+			document.documentElement.setAttribute('data-q-columns-depth', state.columns.length);
 		}
 	},
 
