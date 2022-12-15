@@ -1799,7 +1799,7 @@
 		var $a = $('<a id="Users_login_go" class="Q_button Q_main_button" />')
 			.append(
 				$('<span id="Users_login_go_span">' + Q.text.Users.login.goButton + '</span>')
-			).on(Q.Pointer.fastclick, function (e) {
+			).on(Q.Pointer.click, function (e) {
 				e.preventDefault(); // prevent automatic submit on click
 				submitClosestForm.apply($a, arguments);
 			});
@@ -1974,11 +1974,6 @@
 						$input.val(options.identifier).trigger('change');
 					} else {
 						$input.val(registeredIdentifier).trigger('change').eq(0).plugin('Q/clickfocus');
-					}
-					if (options.identifier || registeredIdentifier) {
-						setTimeout(function () {
-							Users.submitClosestForm.apply($a, arguments);
-						}, 300);
 					}
 				}, 0);
 			},

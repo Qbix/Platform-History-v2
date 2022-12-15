@@ -1206,7 +1206,7 @@ Q.invoke.handlers.unshift(function (options, callback) {
 	}
 });
 
-var originalColor = $('meta[name="theme-color"]').attr('content');
+var originalColor = Q.Color.getWindowTheme();
 function _updateThemeColor(fromIndex, toIndex, duration) {
 	if (fromIndex < 0 || !$('html').hasClass('Q_columns_animationFX')) {
 		return;
@@ -1218,7 +1218,7 @@ function _updateThemeColor(fromIndex, toIndex, duration) {
 	var fromColor = Q.Color.between(originalColor, black, shades[fromIndex]);
 	var toColor = Q.Color.between(originalColor, black, shades[toIndex]);
 	Q.Animation.play(function (x, y) {
-		Q.Color.setWindowTheme(Q.Color.between(fromColor, toColor, y));
+		Q.Color.setWindowTheme('#' + Q.Color.between(fromColor, toColor, y));
 	}, duration);
 }
 

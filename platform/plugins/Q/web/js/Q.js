@@ -15099,14 +15099,30 @@ Q.Camera = {
  */
  Q.Color = {
 	/**
-	 * 
+	 * Get a color somewhere between startColor and endColor
+	 * @method toHex
+	 * @static
+	 * @param {String|Number} startColor 
+	 * @param {String|Number} endColor 
+	 * @param {String|Number} fraction 
+	 * @returns {String} a color as a hex string without '#' in front
+	 */
+	toHex: function (r, g, b) {
+		return [r, g, b].map(x => {
+			const hex = x.toString(16)
+			return hex.length === 1 ? '0' + hex : hex
+		  }).join('');
+	},
+	/**
+	 * Get a color somewhere between startColor and endColor
+	 * @method between
+	 * @static
 	 * @param {String|Number} startColor 
 	 * @param {String|Number} endColor 
 	 * @param {String|Number} fraction 
 	 * @returns {String} a color as a hex string without '#' in front
 	 */
 	between: function(startColor, endColor, fraction) {
-
 		if (typeof startColor === 'string') {
 			startColor = parseInt(startColor.replace('#', '0x'), 16);
 		}
@@ -15122,10 +15138,12 @@ Q.Camera = {
 		var newRed = startRed + fraction * (endRed - startRed);
 		var newGreen = startGreen + fraction * (endGreen - startGreen);
 		var newBlue = startBlue + fraction * (endBlue - startBlue);
-		return (newRed << 16 | newGreen << 8 | newBlue).toString(16);
+		return Q.Color.toHex(newRed, newGreen, newBlue);
 	},
 	/**
 	 * Sets a new theme-color on the window
+	 * @method setWindowTheme
+	 * @static
 	 * @param {String} color in any CSS format, such as "#aabbcc"
 	 * @return {String} the previous color
 	 */
@@ -15143,6 +15161,17 @@ Q.Camera = {
 			meta.setAttribute('content', color);
 		}
 		return prevColor;
+	},
+	/**
+	 * Gets the current window theme color
+	 * @method getWindowTheme
+	 * @static
+	 * @param {String} color in any CSS format, such as "#aabbcc"
+	 * @return {String} the previous color
+	 */
+	getWindowTheme: function () {
+		var meta = document.querySelector('meta[name="theme-color"]');
+		return meta.getAttribute('content');
 	}
 }
 
