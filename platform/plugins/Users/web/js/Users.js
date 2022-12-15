@@ -42,6 +42,11 @@
 			}
 		},
 
+		platforms: {
+			Wallet: "Wallet",
+			Broadcast: "Broadcast"
+		},
+
 		login: {
 			title: 'Welcome',
 			directions: 'Create an account, or log in.',
@@ -61,6 +66,7 @@
 			emailExists: "Did you try to register with this email before? If so, check your inbox to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
 			mobileExists: "Did you try to register with this mobile number before? If so, check your SMS to activate your account. <a href='#resend' class='Q_button Users_activation_resend'>Click to re-send the message</a>",
 			usingOther: "or you can ",
+			connectPlatforms: "or connect using:",
 			facebook: {
 				src: null,
 				noEmail: "Your facebook account is missing a confirmed email address. Simply log in the native way.",
@@ -1872,8 +1878,9 @@
 					$button = $('<a href="#login_facebook" id="Users_login_with_facebook" />').append(
 						$('<img />').attr({
 							alt: Q.text.Users.login.facebook.alt,
-							src: Q.text.Users.login.facebook.src || Q.url('{{Users}}/img/facebook-login.png')
-						})
+							src: Q.text.Users.login.facebook.src || Q.url('{{Users}}/img/platforms/facebook.png')
+						}),
+						$('<div />').text('Facebook')
 					).attr('tabindex', 1002)
 					.css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
@@ -1899,8 +1906,9 @@
 					$button = $('<a href="#login_web3" id="Users_login_with_web3" />').append(
 						$('<img />').attr({
 							alt: Q.text.Users.login.web3.alt,
-							src: Q.text.Users.login.web3Src || Q.url('{{Users}}/img/web3-login.png')
-						})
+							src: Q.text.Users.login.web3Src || Q.url('{{Users}}/img/platforms/web3.png')
+						}),
+						$('<div />').text(Q.text.Users.platforms.Wallet)
 					).attr('tabindex', '1001')
 					.css({'display': 'inline-block', 'vertical-align': 'middle'})
 					.click(function () {
@@ -1921,15 +1929,18 @@
 			$buttons = $buttons.add($button);
 		}
 		if ($buttons.length > 0) {
-			step1_usingPlatforms_div.append(Q.text.Users.login.usingOther);
-			if ($buttons.length > 1) {
-				step1_usingPlatforms_div.append('<br>');
-			}
+			step1_usingPlatforms_div.append(
+				$("<div class='Users_login_connectPlatforms'> />")
+				.text(Q.text.Users.login.connectPlatforms)
+			);
 			$buttons.each(function () {
 				step1_usingPlatforms_div.append(this);
 			});
 			step1_div.append(step1_usingPlatforms_div);
 		}
+		setTimeout(function () {
+			$('img', step1_usingPlatforms_div).plugin('Q/clickable');
+		}, 500);
 
 		$('input', step1_form).add('select', step1_form).on('input', function () {
 			step1_form.plugin('Q/validator', 'reset', this);
