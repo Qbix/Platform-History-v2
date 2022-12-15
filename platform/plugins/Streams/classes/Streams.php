@@ -4975,7 +4975,7 @@ abstract class Streams extends Base_Streams
 			$tree->load("files/Streams/interests/".Users::communityId()."/".Q_Text::basename().".json");
 			$interests = $tree->getAll();
 			$skipAccess = Q::ifset($interests, $parts[0], "", $parts[1], null) === null ? false : true;
-			$stream = Streams::create($publisherId, $publisherId, 'Streams/interest', array(
+			$stream = Streams::create(null, $publisherId, 'Streams/interest', array(
 				'name' => $streamName,
 				'title' => $title,
 				'skipAccess' => $skipAccess
