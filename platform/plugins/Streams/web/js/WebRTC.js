@@ -7000,7 +7000,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                             log('initWithNodeServer: initConference: activate controls: moveWithinArea', moveWithinArea);
 
 
-                            var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox, _controlsTool.participantListEl.parentNode];
+                            var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox];
+                            if( _controlsTool.participantListEl && _controlsTool.participantListEl.parentNode) elementsToIgnore.push(_controlsTool.participantListEl.parentNode)
                             Q.activate(
                                 Q.Tool.setUpElement(
                                     _controls.firstChild, // or pass an existing element
