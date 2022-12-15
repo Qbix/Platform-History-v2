@@ -555,7 +555,11 @@ Q.Tool.define("Q/columns", function(options) {
 					var url = $div.attr('data-url');
 					$div.attr('data-title', document.title);
 					if (o.pagePushUrl && createdNewDiv && url && url !== location.href) {
+						Q.Color.setWindowTheme.ignore = true;
 						Q.Page.push(url);
+						setTimeout(function () {
+							Q.Color.setWindowTheme.ignore = false;
+						}, 300);
 					}
 					Q.Pointer.clearSelection();
 
