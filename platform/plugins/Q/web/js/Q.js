@@ -15173,7 +15173,7 @@ Q.Camera = {
 		var meta = document.querySelector('meta[name="theme-color"]');
 		return meta.getAttribute('content');
 	}
-}
+};
 
 /**
  * Operates with notices.

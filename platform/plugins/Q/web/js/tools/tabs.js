@@ -379,8 +379,10 @@
 				var color = Q.getObject(['windowThemeColors', state.tabName], state);
 				tool.originalWindowThemeColor = tool.originalWindowThemeColor || Q.Color.getWindowTheme();
 				if (color) {
-					var prevColor = Q.Color.setWindowTheme(color);
-				} else {
+					Q.Color.setWindowTheme(color);
+				}
+				if (this.getCurrentTab()) {
+					// if no current tab, let it go, maybe Q/columns is changing it
 					Q.Color.setWindowTheme(tool.originalWindowThemeColor);
 				}
 			},
