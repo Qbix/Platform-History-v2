@@ -1,4 +1,4 @@
-html { min-height: 100vh; }
+html { min-height: -moz-available; min-height: -webkit-fill-available; min-height: fill-available; }
 body { margin: 0; transform: scale(1); }
 table { border-spacing:0; border-collapse:collapse; }
 
