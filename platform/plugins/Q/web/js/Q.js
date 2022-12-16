@@ -15170,11 +15170,11 @@ Q.Camera = {
 	 * @method getWindowTheme
 	 * @static
 	 * @param {String} color in any CSS format, such as "#aabbcc"
-	 * @return {String} the previous color
+	 * @return {String|null} the previous color, or null if it's missing
 	 */
 	getWindowTheme: function () {
 		var meta = document.querySelector('meta[name="theme-color"]');
-		return meta.getAttribute('content');
+		return meta ? meta.getAttribute('content') : null;
 	}
 };
 
