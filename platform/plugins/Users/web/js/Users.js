@@ -2100,7 +2100,8 @@
 		step1_form.empty().append(
 			$identifierInput, $identifierTypeInput, $button
 		).submit(function (event) {
-			var $identifier = $('#Users_setIdentifier_identifier');
+			var $identifier = $('#Users_setIdentifier_identifier')
+			.attr('autocomplete', autocomplete);
 			var h = $identifier.outerHeight() - 5;
 			$identifier.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
