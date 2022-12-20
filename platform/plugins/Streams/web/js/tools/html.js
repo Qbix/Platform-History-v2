@@ -89,8 +89,7 @@ Q.Tool.define("Streams/html", function (options) {
 			tool.element.setAttribute('contenteditable', true);
 			Q.addScript("{{Q}}/js/ckeditor/ckeditor.js", function () {
 				CKEDITOR.disableAutoInline = true;
-				var editor = CKEDITOR.inline(tool.element, state.ckeditor || undefined);
-				state.editorObject = editor;
+				state.editorObject = CKEDITOR.inline(tool.element, state.ckeditor || undefined);
 			});
 			break;
 		case 'froala':
@@ -193,7 +192,13 @@ Q.Tool.define("Streams/html", function (options) {
 		Q.Streams.retainWith(tool)
 		.get(state.publisherId, state.streamName, function (err) {
 			var stream = this;
-			_updateHTML(stream.fields[state.field]);
+			var content = stream.fields[state.field];
+
+			// if content empty, skip update, placeholder will be display
+			if (content) {
+				_updateHTML(content);
+			}
+
 			stream.onFieldChanged(state.field).set(function (fields, field) {
 				if (fields[field] !== null) {
 					_updateHTML(fields[field]);

@@ -3879,7 +3879,7 @@ abstract class Streams extends Base_Streams
 				Users_Contact::addContact($asUserId, $myLabel2, $userId, null, $asUserId2, true);
 			}
 
-			$displayName = Q::ifset($options, 'name', $asUserDisplayName);
+			$displayName = Q::ifset($options, 'name', null);
 			if ($displayName) {
 				try {
 					Q::event("Streams/basic/post", array(
