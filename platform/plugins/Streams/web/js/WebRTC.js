@@ -820,6 +820,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             var activeScreensType;
             var viewMode;
             var prevViewMode;
+            var loudestMode;
+            var loudestModeInterval;
             var roomScreens = [];
             var layoutEvents = new EventSystem();
 
@@ -837,8 +839,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 } else if(e.viewMode == 'minimized') {
                     updateScreensButtons();
                     resetAudioVisualization();
+                    disableLoudesScreenMode();
                     if(_controlsTool != null) {
-                        _controlsTool.participantsPopup().disableLoudesScreenMode();
                         _controlsTool.updateViewModeBtns();
                     }
                     unlockScreenResizingAndDragging();
@@ -2052,8 +2054,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     if(videoResizeTool.state.appliedRecently) return;
                 }
 
-
-                if(_controlsTool != null) _controlsTool.participantsPopup().disableLoudesScreenMode();
+                disableLoudesScreenMode();
 
                 if(activeScreen && !activeScreen.screenEl.contains(e.target) && (viewMode == 'maximized' || viewMode == 'maximizedMobile')) {
                     log('toggleViewModeByScreenClick 1')
@@ -2946,6 +2947,38 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                 viewMode = 'squaresGrid';
                 layoutEvents.dispatch('layoutRendered', {prevViewMode:prevViewMode, viewMode});
+            }
+
+
+            function maximizeLoudestScreen(mode) {
+                WebRTCconference.mediaManager.getLoudestScreen(mode, function (loudestScreen) {
+                    if (Q.info.isMobile)
+                        renderMaximizedScreensGridMobile(loudestScreen, 0);
+                    else renderMaximizedScreensGrid(loudestScreen, 0);
+                });
+            }
+            function toggleLoudestScreenMode(mode) {
+                loudestMode = mode;
+                if (mode != 'disabled') maximizeLoudestScreen(mode);
+                if (loudestModeInterval != null) {
+                    clearInterval(loudestModeInterval);
+                    loudestModeInterval = null;
+                }
+
+                if (mode == 'disabled') {
+                    return;
+                }
+
+                loudestModeInterval = setInterval(function () {
+                    maximizeLoudestScreen(mode);
+                }, 1000);
+
+            }
+            function disableLoudesScreenMode() {
+                if (loudestModeInterval != null) {
+                    clearInterval(loudestModeInterval);
+                    loudestModeInterval = null;
+                }
             }
 
             /**
@@ -5710,6 +5743,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 renderFullScreenLayout:renderFullScreenLayout,
                 renderAudioScreensGrid:renderAudioScreensGrid,
                 renderSquaresGridMobile:renderSquaresGridMobile,
+                toggleLoudestScreenMode:toggleLoudestScreenMode,
+                disableLoudesScreenMode:disableLoudesScreenMode,
                 showLoader:showLoader,
                 hideLoader:hideLoader
             };
@@ -5994,6 +6029,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             WebRTCconference.event.on('screensharingStarting', function (e) {
                 log('screen sharing is being started', e)
 
+                screensRendering.toggleLoudestScreenMode('disabled');
                 screensRendering.onScreensharingStarting(e);
                 screensRendering.showLoader('screensharingStarting', {participant: e.participant});
             });
@@ -7711,8 +7747,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             if(_roomsMedia.parentNode != null) _roomsMedia.parentNode.removeChild(_roomsMedia);
             if(_controls != null) {
                 var controlsTool = Q.Tool.from(_controls, "Streams/webrtc/controls");
-                controlsTool.participantsPopup().disableLoudesScreenMode();
-                controlsTool.participantsPopup().disableCheckActiveMediaTracks();
+                screensRendering.disableLoudesScreenMode();
                 if(_controls.parentNode != null) _controls.parentNode.removeChild(_controls);
                 Q.Tool.remove(controlsTool);
             }
@@ -7774,6 +7809,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             screenRendering: screensRendering,
             loader: connectionState,
             notice: notice,
+            appDebug: appDebug,
+            determineBrowser: determineBrowser,
             events: _events
         }
 
