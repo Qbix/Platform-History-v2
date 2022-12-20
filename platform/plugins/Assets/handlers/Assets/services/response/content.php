@@ -1,8 +1,7 @@
 <?php
 	
-function Assets_services_response_content()
+function Assets_services_response_content($params)
 {
-	$communityId = Users::currentCommunityId(true);
-
-	return Q::view('Assets/content/services.php', @compact("communityId"));
+	Q::event('Assets/services/response/column', $params);
+	return Q::view('Assets/content/columns.php');
 }
