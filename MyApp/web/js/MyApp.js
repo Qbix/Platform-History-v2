@@ -29,7 +29,7 @@ var MyApp = (function (Q, $) {
 	// For specific pages, see web/js/pages directory. 
 	Q.page('', function () {
 		
-		$('.MyApp_login').on(Q.Pointer.click, function () {
+		$('.MyApp_login').on(Q.Pointer.start, function () {
 			Q.Users.login();
 			return false;
 		});

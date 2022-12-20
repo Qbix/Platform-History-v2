@@ -377,12 +377,11 @@
 				Q.handle(state.onCurrent, tool, [tab, state.tabName]);
 
 				var color = Q.getObject(['windowThemeColors', state.tabName], state);
+				tool.originalWindowThemeColor = tool.originalWindowThemeColor || Q.Color.getWindowTheme();
 				if (color) {
-					var prevColor = Q.Color.setWindowTheme(color);
-					tool.originalWindowThemeColor = tool.originalWindowThemeColor || prevColor;
-				} else {
-					Q.Color.setWindowTheme(tool.originalWindowThemeColor);
+					Q.Color.setWindowTheme(color);
 				}
+				Q.Color.setWindowTheme(tool.originalWindowThemeColor);
 			},
 
 			/**

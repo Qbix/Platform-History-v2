@@ -71,7 +71,7 @@ Q.Tool.define('Q/form', function(options) {
 	refresh: function () {
 		// constructor & private declarations
 		var tool = this;
-
+		var state = this.state;
 		var $te = $(tool.element);
 		var $form = $te.closest('form');
 		if (!$form.length) return;
@@ -80,7 +80,7 @@ Q.Tool.define('Q/form', function(options) {
 			function onResponse(err, data, redirected) {
 				$form.removeClass('Q_working').removeAttr('disabled');
 				document.activeElement = tool.activeElement;
-				if (false === Q.handle(tool.state.onResponse, tool, arguments)) {
+				if (false === Q.handle(state.onResponse, tool, arguments)) {
 					return false; // onResponse took care of it with some other behavior
 				}
 				// default behavior
@@ -104,16 +104,16 @@ Q.Tool.define('Q/form', function(options) {
 				if (data.slots) {
 					var slots = Object.keys(data.slots);
 					var pipe = new Q.pipe(slots, function () {
-						Q.handle(tool.state.onSuccess, tool, arguments);
+						Q.handle(state.onSuccess, tool, arguments);
 					});
 					for (var slot in data.slots) {
 						var e;
-						switch (typeof tool.state.contentElements[slot]) {
+						switch (typeof state.contentElements[slot]) {
 						case 'HTMLElement':
 						case 'jQuery':
-							e = $(tool.state.contentElements[slot]); break;
+							e = $(state.contentElements[slot]); break;
 						case 'string':
-							e = $(tool.state.contentElements[slot], form); break;
+							e = $(state.contentElements[slot], form); break;
 						default:
 							e = $(tool.element);
 						}
@@ -135,18 +135,18 @@ Q.Tool.define('Q/form', function(options) {
 			if (!action) {
 				action = window.location.href.split('?')[0];
 			}
-			Q.handle(tool.state.onSubmit, tool, [$form[0], result]);
+			Q.handle(state.onSubmit, tool, [$form[0], result]);
 			if (result.cancel) {
 				return false;
 			}
 			var input = $('input[name="Q.method"]', $form);
-			method = (input.val() || $form.attr('method') || 'post').toUpperCase();
-			if (tool.state.ignoreCache
-			&& typeof tool.state.loader.forget === "function") {
-				tool.state.ignoreCache = false;
-				tool.state.loader.forget(action, method, $form.serialize(), tool.state.slotsToRequest);
+			var method = (input.val() || $form.attr('method') || 'post').toUpperCase();
+			if (state.ignoreCache
+			&& typeof state.loader.forget === "function") {
+				state.ignoreCache = false;
+				state.loader.forget(action, method, $form.serialize(), state.slotsToRequest);
 			}
-			tool.state.loader(action, method, $form[0], tool.state.slotsToRequest, onResponse);
+			state.loader(action, method, $form[0], state.slotsToRequest, onResponse);
 		});
 		$('input', $form).add('select', $form).on('input', function () {
 			if ($form.state('Q/validator')) {

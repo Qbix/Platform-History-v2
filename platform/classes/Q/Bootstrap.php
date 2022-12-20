@@ -481,6 +481,56 @@ class Q_Bootstrap
 	}
 
 	/**
+	 * Loads and executes arbitrary signed PHP code, e.g. from a secure database.
+	 * This function requires at least two signatures corresponding to two publicKeys
+	 * that are found whitelisted on Q/code/publicKeys config.
+	 * SECURITY NOTES:
+	 * To compromise this and execute arbitrary PHP code, 
+	 * two different trusted entities on the whitelist need to have private keys
+	 * compromised, and still remain on the whitelist. They then need to convince
+	 * a Qbix site to install the updated code from a specific whitelisted https URL
+	 * which is also compromised.
+	 * This attack surface is actually not bigger than when the official
+	 * company signs and releases code that people voluntarily install using SSH.
+	 * In fact, if anything, it just a generalization that allows code to be
+	 * downloaded by HTTP, and stored in a database, by users who don't use SSH.
+	 * It requires at least TWO keys to sign the code
+	 * (presumably the keys would be from independent organizations vetting the code).
+	 * The signatures are applied to a SHA-256 hash of the data, so collisions are infeasible.
+	 * @return {mixed} The return value of the code
+	 * @throws Q_Exception_BadValue
+	 */
+	static function executeSignedPHPCode($source, $signatures, $publicKeys)
+	{
+		$pks = Q_Config::expect('Q', 'code', 'publicKeys');
+		if (count($signatures) < 2 or count($publicKeys) != count($signatures)) {
+			throw new Q_Exception_BadValue(array(
+				'internal' => 'signatures and publicKeys',
+				'problem' => 'both arrays have to be same length, greater than 1'
+			));
+		}
+		foreach ($publicKeys as $i => $pk) {
+			if (in_array($pk, $pks)) {
+				throw new Q_Exception_BadValue(array(
+					'internal' => $pk,
+					'problem' => 'not among whitelisted public keys'
+				));
+			}
+			if (!Q_Crypto::verify($source, $signatures[$i], $pk)) {
+				throw new Q_Exception_BadValue(array(
+					'internal' => 'source code',
+					'problem' => 'invalid signature'
+				));
+			}
+		}
+		// SECURITY: In addition to the signature, make sure
+		// you're only providing source code that was stored
+		// by a secure process, such as downloading from a
+		// specific trusted https website.
+		return include($source); // execute this PHP code in this context
+	}
+
+	/**
 	 * @property $prev_exception_handler
 	 * @type callable
 	 * @protected

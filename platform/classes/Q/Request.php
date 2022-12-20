@@ -77,7 +77,7 @@ class Q_Request
 			return self::$app_root_url;
 		}
 		
-		if (isset($_SERVER['SERVER_NAME'])) {
+		if (isset($_SERVER['HTTP_HOST'])) {
 			// This is a web request, so we can automatically determine
 			// the app root URL. If you want the canonical one which the developer
 			// may have specified in the config field "Q"/"web"/"appRootUrl"
@@ -196,7 +196,7 @@ class Q_Request
 		// Extract the URL
 		if (!isset(self::$url)) {
 			$server_name = $_SERVER['SERVER_NAME'];
-			if ($server_name[0] === '*') {
+			if ($server_name[0] === '*' || $server_name[0] === '~') {
 				$server_name = $_SERVER['HTTP_HOST'];
 			}
 			self::$url = sprintf('http%s://%s%s%s%s%s%s', 
@@ -1244,7 +1244,7 @@ class Q_Request
 			$script_name = '/index.php' . $script_name;
 		}
 		$server_name = $_SERVER['SERVER_NAME'];
-		if ($server_name[0] === '*') {
+		if ($server_name[0] === '*' || $server_name[0] === '~') {
 			$server_name = $_SERVER['HTTP_HOST'];
 		}
 		
@@ -1277,7 +1277,7 @@ class Q_Request
 		$app_root = substr($_SERVER['SCRIPT_NAME'], 
 		 0, strrpos($_SERVER['SCRIPT_NAME'], '/'));
 		$server_name = $_SERVER['SERVER_NAME'];
-		if ($server_name[0] === '*') {
+		if ($server_name[0] === '*' || $server_name[0] === '~') {
 			$server_name = $_SERVER['HTTP_HOST'];
 		}
 		$https = empty($_SERVER['HTTPS'])

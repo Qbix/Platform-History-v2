@@ -386,7 +386,8 @@ Q.Tool.define("Q/video", function (options) {
 	},
 	videojsOptions: {
 		controls: true,
-		inactivityTimeout: 0
+		inactivityTimeout: 2000,
+		userActive: true
 	},
 	clips: {
 		handler: null,

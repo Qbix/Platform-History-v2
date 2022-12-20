@@ -75,6 +75,9 @@
 			"umask": "0000",
 			"phpTimeout": 300,
 			"secret": null,
+			"code": {
+				"publicKeys": []
+			},
 			"sharding": {
 				"config": "Db/config/shards.json",
 				"upcoming": "Db/config/upcoming.json",
