@@ -80,14 +80,18 @@
      * @param {Object} options
      *  Hash of possible options
      */
-    Q.Tool.define("Streams/webrtc/streamingEditor", function(options) {
-            this.advancedLiveStreamingBox = null;
+    Q.Tool.define("Streams/webrtc/livestreaming", function(options) {
+            var tool = this;
+            this.livestreamingEditor = null;
 
             /*if (!options.webRTClibraryInstance) {
                 throw "Video room should be created";
             }*/
 
-            this.state = Q.extend({}, this.state, options);
+            //child tools
+            tool.livestreamingEditor = null;
+            tool.livestreamingCanvasComposerTool = null;
+            tool.livestreamingRtmpSenderTool = null;
         },
 
         {
@@ -98,10 +102,11 @@
 
         {
             create: function() {
-                if(this.advancedLiveStreamingBox != null) return this.advancedLiveStreamingBox;
+                if(this.livestreamingEditor != null) return this.livestreamingEditor;
                 var tool = this;
-                var controlsTool = this.state.controlsTool;
-                var roomStream = controlsTool.WebRTCClass.roomStream();
+                var _controlsTool = this.state.controlsTool;
+                var _webrtcSignalingLib = this.state.webrtcSignalingLib;
+                var _webrtcUserInterface = this.state.webrtcUserInterface;
                 var desktopDialogEl = null;
                 var mobileHorizontaldialogEl = null;
                 var mobileVerticaldialogEl = null;
@@ -142,7 +147,7 @@
                             }
                         };
                         this.isActive = function () {
-                            var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
+                            var scenes = tool.livestreamingCanvasComposerTool.canvasComposer.getScenes();
                             for (let i in scenes) {
                                 if (scenes[i] == this.sceneInstance) {
                                     return true;
@@ -187,7 +192,7 @@
 
                     function addNewScene(name) {
                         console.log('addNewScene', name)
-                        controlsTool.WebRTCLib.mediaManager.canvasComposer.createScene(name);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.createScene(name);
                         syncList();
                     }
 
@@ -205,7 +210,7 @@
                                 sources[s].resizingElement.parentElement.removeChild(sources[s].resizingElement);
                             }
                         }
-                        controlsTool.WebRTCLib.mediaManager.canvasComposer.selectScene(_activeScene.sceneInstance);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.selectScene(_activeScene.sceneInstance);
                         for (var i in _scenesList) {
                             if (_scenesList[i] == sceneItem) continue;
                             if (_scenesList[i].itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('Streams_webrtc_popup-scenes-item-active');
@@ -227,14 +232,14 @@
 
                     function moveSceneUp() {
                         console.log('moveUp');
-                        controlsTool.WebRTCLib.mediaManager.canvasComposer.moveSceneUp(_activeScene.sceneInstance);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneUp(_activeScene.sceneInstance);
 
                         sortScenesList();
                     }
 
                     function moveSceneDown() {
                         console.log('moveSceneDown');
-                        controlsTool.WebRTCLib.mediaManager.canvasComposer.moveSceneDown(_activeScene.sceneInstance);
+                        tool.livestreamingCanvasComposerTool.canvasComposer.moveSceneDown(_activeScene.sceneInstance);
 
                         sortScenesList();
                     }
@@ -259,7 +264,7 @@
                                     selectScene(_scenesList[indexOfScreneToRemove - 1]);
                                 }
 
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.removeScene(sceneToRemove.sceneInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.removeScene(sceneToRemove.sceneInstance);
                                 syncList();
                             } else {
                                 //at least once scene should exist
@@ -292,7 +297,7 @@
                     function sortScenesList(type) {
                         var listArr = _scenesList;
                         var listEl = _scenesEl;
-                        var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
+                        var scenes = tool.livestreamingCanvasComposerTool.canvasComposer.getScenes();
 
                         console.log('sortList: scenes', scenes, listArr);
 
@@ -329,7 +334,7 @@
                             }
                         }
 
-                        var scenes = controlsTool.WebRTCLib.mediaManager.canvasComposer.getScenes();
+                        var scenes = tool.livestreamingCanvasComposerTool.canvasComposer.getScenes();
 
                         console.log('scenesInterface: all', scenes);
 
@@ -406,7 +411,7 @@
                         dialogInner.appendChild(boxContent);
                         dialog.appendChild(dialogInner);
 
-                        controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                        _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
 
                         setTimeout(function () {
                             Q.activate(
@@ -682,14 +687,14 @@
                                 return false;
                             };
                             this.show = function() {
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.showSource(this.sourceInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.showSource(this.sourceInstance);
 
                                 //this.sourceInstance.active = true;
                                 this.switchVisibilityIcon(true);
                                 syncList();
                             };
                             this.hide = function() {
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideSource(this.sourceInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.hideSource(this.sourceInstance);
                                 //this.sourceInstance.active = false;
                                 this.switchVisibilityIcon(false);
                                 syncList();
@@ -709,8 +714,8 @@
                                 }
                             };
                             this.params = {
-                                _loop: controlsTool.WebRTCLib.getOptions().liveStreaming.loopVideo,
-                                _localOutput:controlsTool.WebRTCLib.getOptions().liveStreaming.localOutput,
+                                _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopVideo,
+                                _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
 
                                 set loop(value) {this._loop = value;},
                                 set localOutput(value) {this._localOutput = value;},
@@ -867,7 +872,7 @@
                                     var img = new Image();
                                     img.src = e;
                                     img.onload = function () {
-                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                             sourceType: 'imageOverlay',
                                             imageInstance: img,
                                             position: options.position,
@@ -882,7 +887,7 @@
                                         var img = new Image();
                                         img.src = fileReader.result;
                                         img.onload = function () {
-                                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                                 sourceType: 'imageOverlay',
                                                 title: files[0].name,
                                                 imageInstance: img,
@@ -909,7 +914,7 @@
                                     var img = new Image();
                                     img.src = e;
                                     img.onload = function () {
-                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                             sourceType: 'imageBackground',
                                             imageInstance: img
                                         });
@@ -922,7 +927,7 @@
                                         var img = new Image();
                                         img.src = fileReader.result;
                                         img.onload = function () {
-                                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                                 sourceType: 'img',
                                                 title: files[0].name,
                                                 imageInstance: img,
@@ -942,7 +947,7 @@
 
                                     var pathhInfo = e.split('/');
                                     var title = pathhInfo[pathhInfo.length - 1];
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                         sourceType: 'videoBackground',
                                         title: title,
                                         url: e,
@@ -956,7 +961,7 @@
 
                         function addVideoInputSource(e) {
                             console.log('addVideoInputSource', e);
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                 sourceType: 'videoInput',
                                 title: e.name,
                                 mediaStreamInstance: e.stream,
@@ -974,7 +979,7 @@
                                 var img = new Image();
                                 img.src = e;
                                 img.onload = function () {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                         sourceType: 'image',
                                         title: title,
                                         imageInstance: img,
@@ -988,7 +993,7 @@
                                     var img = new Image();
                                     img.src = fileReader.result;
                                     img.onload = function () {
-                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                             sourceType: 'image',
                                             title: files[0].name,
                                             imageInstance: img,
@@ -1010,7 +1015,7 @@
 
                                 var pathhInfo = e.split('/');
                                 var title = pathhInfo[pathhInfo.length - 1];
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                     sourceType: 'video',
                                     title: title,
                                     url: e,
@@ -1043,7 +1048,7 @@
                                         // The blob gives us a URL to the video file:
                                         let url = window.URL.createObjectURL(videoBlob);
 
-                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                             sourceType: 'video',
                                             title: files[0].name,
                                             url: url,
@@ -1172,13 +1177,13 @@
                         }
 
                         function addTeleconferenceSource(name, addAudioGroup) {
-                            var webrtcGroup = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.addSource({
+                            var webrtcGroup = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                 sourceType: 'webrtcGroup',
                                 title: name,
                                 addAudioGroup: addAudioGroup,
                             });
 
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup);
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup);
 
                         }
 
@@ -1217,7 +1222,7 @@
                                 left = _streamingCanvas.offsetLeft;
                                 top = _streamingCanvas.offsetTop;
                             }
-                            var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
+                            var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
                             var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
                             var realcanvasSize = _streamingCanvas.getBoundingClientRect();
                             var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
@@ -1282,7 +1287,7 @@
 
                         function moveForward() {
                             console.log('moveForward');
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.moveSourceForward(_selectedSource.sourceInstance);
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.moveSourceForward(_selectedSource.sourceInstance);
 
                             sortList('visual');
                             return false;
@@ -1290,7 +1295,7 @@
 
                         function moveBackward() {
                             console.log('moveBackward', _selectedSource);
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.moveSourceBackward(_selectedSource.sourceInstance);
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.moveSourceBackward(_selectedSource.sourceInstance);
 
                             sortList('visual');
                             return false;
@@ -1302,7 +1307,7 @@
 
                         function removeSource() {
                             if(_selectedSource != null) {
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
                                 syncList();
                                 _selectedSource = null;
                             };
@@ -1358,7 +1363,7 @@
                                             for (let t in videoTracks) {
                                                 videoTracks[t].stop();
                                             }
-                                            controlsTool.WebRTCLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
+                                            _webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
                                         }
                                         
                                     },
@@ -1583,7 +1588,7 @@
                             dialogInner.appendChild(boxContent);
                             dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
@@ -1604,7 +1609,7 @@
                                 );
                             }, 3000)
 
-                            var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                            var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
                             dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
@@ -1630,7 +1635,7 @@
 
                                     _isHidden = false;
 
-                                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
                                         dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                                         dialog.style.top = (controlsRect.height + 10) + 'px';
@@ -1721,7 +1726,7 @@
                             dialogInner.appendChild(boxContent);
                             dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
@@ -1742,7 +1747,7 @@
                                 );
                             }, 3000)
 
-                            var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                            var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
                             dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
@@ -1768,7 +1773,7 @@
 
                                     _isHidden = false;
 
-                                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
                                         dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                                         dialog.style.top = (controlsRect.height + 10) + 'px';
@@ -2159,7 +2164,7 @@
                             dialogInner.appendChild(boxContent);
                             dialogue.appendChild(dialogInner);
             
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialogue);
             
                             setTimeout(function () {
                                 Q.activate(
@@ -2336,7 +2341,7 @@
                             dialogInner.appendChild(boxContent);
                             dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
@@ -2357,7 +2362,7 @@
                                 );
                             }, 3000)
 
-                            var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                            var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
                             dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
@@ -2394,7 +2399,7 @@
 
                                     _isHidden = false;
 
-                                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
                                         dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                                         dialog.style.top = (controlsRect.height + 10) + 'px';
@@ -2464,7 +2469,7 @@
                                                             videoTracks[t].stop();
                                                         }
                                                         activeScene.sourcesInterface.visualSources.removeSource();
-                                                        controlsTool.WebRTCLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
+                                                        _webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
                                                     }
 
                                                     
@@ -2596,9 +2601,9 @@
                                 this._sourceInstance.active = true;
                                 if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
                                     console.log('mute turn mic on')
-                                    controlsTool.WebRTCLib.localMediaControls.enableAudio();
+                                    _webrtcSignalingLib.localMediaControls.enableAudio();
                                 } else {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
                                     this.switchVisibilityIcon(true);
                                     syncList();
                                 }
@@ -2609,9 +2614,9 @@
                                 this._sourceInstance.active = false;
                                 if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
                                     console.log('mute turn mic off')
-                                    controlsTool.WebRTCLib.localMediaControls.disableAudio();
+                                    _webrtcSignalingLib.localMediaControls.disableAudio();
                                 } else {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
                                     this.switchVisibilityIcon(false);
                                 }
                                 
@@ -2632,8 +2637,8 @@
                                 }
                             };
                             this.params = {
-                                _loop: controlsTool.WebRTCLib.getOptions().liveStreaming.loopAudio,
-                                _localOutput:controlsTool.WebRTCLib.getOptions().liveStreaming.localOutput,
+                                _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopAudio,
+                                _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
 
                                 set loop(value) {this._loop = value;},
                                 set localOutput(value) {this._localOutput = value;},
@@ -2692,15 +2697,15 @@
                         });
 
                         //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
-                        if(controlsTool != null && controlsTool.WebRTCLib != null) {
-                            controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                        if(_controlsTool != null && _webrtcSignalingLib != null) {
+                            _webrtcSignalingLib.event.on('micDisabled', function () {
                                 for (let i in _audioList) {
                                     if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
                                         _audioList[i].switchVisibilityIcon(false);
                                     }
                                 }
                             });
-                            controlsTool.WebRTCLib.event.on('micEnabled', function () {
+                            _webrtcSignalingLib.event.on('micEnabled', function () {
                                 for (let i in _audioList) {
                                     if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
                                         _audioList[i].switchVisibilityIcon(true);
@@ -2796,7 +2801,7 @@
                                 left = _streamingCanvas.offsetLeft;
                                 top = _streamingCanvas.offsetTop;
                             }
-                            var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
+                            var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
                             var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
                             var realcanvasSize = _streamingCanvas.getBoundingClientRect();
                             var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
@@ -2850,7 +2855,7 @@
                                             for (let t in audioTracks) {
                                                 audioTracks[t].stop();
                                             }
-                                            controlsTool.WebRTCLib.localMediaControls.toggleAudioInputs({deviceId:e.deviceId});
+                                            _webrtcSignalingLib.localMediaControls.toggleAudioInputs({deviceId:e.deviceId});
                                         }
                                         
                                     },
@@ -2951,7 +2956,7 @@
                             if(typeof e == 'string') {
                                 var pathhInfo = e.split('/');
                                 var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addSource({
+                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
                                     sourceType: 'audio',
                                     title: title,
                                     url: e,
@@ -2976,7 +2981,7 @@
                                         // The blob gives us a URL to the video file:
                                         let url = window.URL.createObjectURL(audioBlob);
 
-                                        controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addSource({
+                                        tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
                                             sourceType: 'audio',
                                             title: files[0].name,
                                             url: url,
@@ -2990,7 +2995,7 @@
 
                         function addAudioInputSource(e) {
                             console.log('addAudioInputSource', e);
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addSource({
+                            tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
                                 sourceType: 'audioInput',
                                 title: e.name,
                                 mediaStreamInstance: e.stream
@@ -2999,7 +3004,7 @@
 
                         function removeAudioSource() {
                             if(_selectedSource != null) {
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
                                 syncList();
                                 _selectedSource = null;
                             };
@@ -3066,7 +3071,7 @@
                             dialogInner.appendChild(boxContent);
                             dialog.appendChild(dialogInner);
 
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                             setTimeout(function () {
                                 Q.activate(
                                     Q.Tool.setUpElement(
@@ -3087,7 +3092,7 @@
                                 );
                             }, 3000)
 
-                            var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                            var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                             var dialogWidth = 400;
                             dialog.style.width = dialogWidth + 'px';
                             console.log('dialogWidth', dialogWidth);
@@ -3113,7 +3118,7 @@
 
                                     _isHidden = false;
 
-                                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                                     if(Q.info.isMobile) {
                                         dialog.style.left = (window.innerWidth / 2) - (dialogWidth / 2) + 'px';
                                         dialog.style.top = (controlsRect.height + 10) + 'px';
@@ -3467,7 +3472,7 @@
                             dialogInner.appendChild(boxContent);
                             dialogue.appendChild(dialogInner);
             
-                            controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialogue);
+                            _webrtcUserInterface.roomsMediaContainer().appendChild(dialogue);
             
                             setTimeout(function () {
                                 Q.activate(
@@ -3983,9 +3988,9 @@
 
                         playLocallyCheckbox.addEventListener("click", function (e) {
                             if(this.checked) {
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.unmuteSourceLocally(source.sourceInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSourceLocally(source.sourceInstance);
                             } else {
-                                controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.muteSourceLocally(source.sourceInstance);
+                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSourceLocally(source.sourceInstance);
                             }
                         });
 
@@ -4067,7 +4072,7 @@
                                 }
                             }
 
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.updateWebRTCLayout(_selectedSource.sourceInstance, layoutItem.key);
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(_selectedSource.sourceInstance, layoutItem.key);
                         }
 
                         function createLayoutList() {
@@ -4236,7 +4241,7 @@
                                 _selectedSource.sourceInstance.rect.height = height.value;
                                 _selectedSource.sourceInstance.rect.x = leftPos.value;
                                 _selectedSource.sourceInstance.rect.y = topPos.value;
-                                //controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
+                                //tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.setWebrtcLayoutRect(layoutWidth, layoutHeight, x, y);
                             }
                             width.addEventListener('blur', updateWebrtcRect);
                             height.addEventListener('blur', updateWebrtcRect);
@@ -4516,17 +4521,17 @@
 
                             showName.addEventListener('change', function () {
                                 if( showName.checked) {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance);
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.displayName(_selectedSource.sourceInstance);
                                 } else {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance);
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.hideName(_selectedSource.sourceInstance);
 
                                 }
                             })
                             showBorder.addEventListener('change', function () {
                                 if( showBorder.checked) {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.displayBorder(_selectedSource.sourceInstance.participant);
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.displayBorder(_selectedSource.sourceInstance.participant);
                                 } else {
-                                    controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.hideBorder(_selectedSource.sourceInstance.participant);
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.hideBorder(_selectedSource.sourceInstance.participant);
 
                                 }
                             })
@@ -4740,7 +4745,7 @@
                             _layoutParamsEl = dialogBodyInner;
 
                             function updateSourceRect () {
-                                var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
+                                var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
                                 var keepAspectRatio = keepRatio.checked;
                                 var currentWidth = _selectedSource.sourceInstance.rect._width;
                                 var currentHeight = _selectedSource.sourceInstance.rect._height;
@@ -4985,7 +4990,7 @@
                             _layoutParamsEl = dialogBodyInner;
 
                             function updateSourceRect () {
-                                var canvasSize = controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.getCanvasSize();
+                                var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
                                 var keepAspectRatio = keepRatio.checked;
                                 var currentWidth = _selectedSource.sourceInstance.rect._width;
                                 var currentHeight = _selectedSource.sourceInstance.rect._height;
@@ -5498,10 +5503,10 @@
             
                         volumeIcon.addEventListener("click", function () {
                             if (!audioOrVideoSource.gainNode) return;
-                            if (controlsTool.WebRTCLib.localMediaControls.micIsEnabled()) {
-                                controlsTool.WebRTCLib.localMediaControls.disableAudio();
+                            if (_webrtcSignalingLib.localMediaControls.micIsEnabled()) {
+                                _webrtcSignalingLib.localMediaControls.disableAudio();
                             } else {
-                                controlsTool.WebRTCLib.localMediaControls.enableAudio();
+                                _webrtcSignalingLib.localMediaControls.enableAudio();
                             }
                         });
             
@@ -5517,11 +5522,11 @@
             
                         volumeWrap.addEventListener("click", dragVolumeSlider);
 
-                        controlsTool.WebRTCLib.event.on('micDisabled', function () {
+                        _webrtcSignalingLib.event.on('micDisabled', function () {
                             audioOrVideoSource.disconnect();
                             audioOrVideoSource.setVolume(0);
                         });
-                        controlsTool.WebRTCLib.event.on('micEnabled', function () {
+                        _webrtcSignalingLib.event.on('micEnabled', function () {
                             audioOrVideoSource.connect();
                             audioOrVideoSource.setVolume(1);
                         });
@@ -5669,7 +5674,7 @@
 
                     function loadGlobalAudioSource() {
 
-                        let globalMicSource = controlsTool.WebRTCLib.mediaManager.canvasComposer.audioComposer.addGlobalAudioSource({
+                        let globalMicSource = tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addGlobalAudioSource({
                             title: 'Microphone'
                         });
             
@@ -5678,14 +5683,14 @@
                         addAudioToMixer(newMixerItem);
                         _globalSources.push(newMixerItem);
 
-                        let localAudioTracks = controlsTool.WebRTCLib.localParticipant().audioTracks(true);
+                        let localAudioTracks = _webrtcSignalingLib.localParticipant().audioTracks(true);
         
                         if(localAudioTracks[0] != null && localAudioTracks[0].stream != null) {
                             console.log('localAudioTracks[0].stream', localAudioTracks[0].stream)
                             globalMicSource.addStream(localAudioTracks[0].stream);
                         }
 
-                        controlsTool.WebRTCLib.event.on('trackAdded', function (e) {
+                        _webrtcSignalingLib.event.on('trackAdded', function (e) {
                             if(!e.participant.isLocal || e.track.kind != 'audio') return;
                             globalMicSource.addStream(e.track.stream);
                         });
@@ -5756,13 +5761,83 @@
                     }
                 }
 
+                function updateWebrtcSignalingLibInstance(newWebrtcSignalingInstance) {
+                    _webrtcSignalingLib = newWebrtcSignalingInstance;
+                }
+
+                function EventSystem() {
+
+                    var events = {};
+
+                    var CustomEvent = function (eventName) {
+
+                        this.eventName = eventName;
+                        this.callbacks = [];
+
+                        this.registerCallback = function (callback) {
+                            this.callbacks.push(callback);
+                        }
+
+                        this.unregisterCallback = function (callback) {
+                            const index = this.callbacks.indexOf(callback);
+                            if (index > -1) {
+                                this.callbacks.splice(index, 1);
+                            }
+                        }
+
+                        this.fire = function (data) {
+                            const callbacks = this.callbacks.slice(0);
+                            callbacks.forEach((callback) => {
+                                callback(data);
+                            });
+                        }
+                    }
+
+                    var dispatch = function (eventName, data) {
+                        const event = events[eventName];
+                        if (event) {
+                            event.fire(data);
+                        }
+                    }
+
+                    var on = function (eventName, callback) {
+                        let event = events[eventName];
+                        if (!event) {
+                            event = new CustomEvent(eventName);
+                            events[eventName] = event;
+                        }
+                        event.registerCallback(callback);
+                    }
+
+                    var off = function (eventName, callback) {
+                        const event = events[eventName];
+                        if (event && event.callbacks.indexOf(callback) > -1) {
+                            event.unregisterCallback(callback);
+                            if (event.callbacks.length === 0) {
+                                delete events[eventName];
+                            }
+                        }
+                    }
+
+                    var destroy = function () {
+                        events = {};
+                    }
+
+                    return {
+                        dispatch: dispatch,
+                        on: on,
+                        off: off,
+                        destroy: destroy
+                    }
+                }
+
                 function createPopup() {
                     console.log('createPopup 00', scenesInterface)
                     var dialog=document.createElement('DIV');
                     dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden';
                     _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
-                    dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", controlsTool.text);
+                    dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", _controlsTool.text);
                     dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
@@ -5784,7 +5859,7 @@
                     var startRecordingBtn = document.createElement('BUTTON');
                     startRecordingBtn.type = 'button';
                     startRecordingBtn.className = 'Q_button';
-                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", controlsTool.text);
+                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", _controlsTool.text);
 
                     //previewButtons.appendChild(startRecordingBtn);
                     previewBoxBodyInner.appendChild(sourceResizingEl);
@@ -5854,7 +5929,7 @@
                         }
                     );
 
-                    controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                    _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                     Q.activate(
                         Q.Tool.setUpElement(
                             dialog,
@@ -5889,7 +5964,7 @@
                         }
                     )
 
-                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;
                     dialog.style.width = dialogWidth + 'px';
                     dialog.style.height = (dialogWidth / 1.4) + 'px';
@@ -5944,7 +6019,7 @@
                     var startRecordingBtn = document.createElement('BUTTON');
                     startRecordingBtn.type = 'button';
                     startRecordingBtn.className = 'Q_button';
-                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", controlsTool.text);
+                    startRecordingBtn.innerHTML = Q.getObject("webrtc.settingsPopup.start", _controlsTool.text);
 
                     previewButtons.appendChild(startRecordingBtn);
 
@@ -5998,9 +6073,9 @@
                     startRecordingBtn.addEventListener('click', function () {
                         if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
-                        controlsTool.WebRTCLib.mediaManager.localRecorder.startRecording(function (liveInfo) {
+                        _webrtcSignalingLib.mediaManager.localRecorder.startRecording(function (liveInfo) {
                             if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                            recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", controlsTool.text);
+                            recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.recordingInProgress", _controlsTool.text);
                             recordingSettings.style.display = 'none';
                             activeRecordingSection.style.display = 'block';
                         });
@@ -6008,9 +6083,9 @@
                     /*stopRecordingBtn.addEventListener('click', function () {
                             if(!recordingCon.classList.contains('Q_working')) recordingCon.classList.add('Q_working');
 
-                            controlsTool.WebRTCLib.mediaManager.localRecorder.stopRecording(function () {
+                            _webrtcSignalingLib.mediaManager.localRecorder.stopRecording(function () {
                                 if(recordingCon.classList.contains('Q_working')) recordingCon.classList.remove('Q_working');
-                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", controlsTool.text);
+                                recordingTextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.startRecording", _controlsTool.text);
                                 activeRecordingSection.style.display = 'none';
                                 recordingSettings.style.display = 'block';
                             });
@@ -6059,7 +6134,7 @@
                         }
                     );
 
-                    controlsTool.WebRTCClass.roomsMediaContainer().appendChild(dialog);
+                    _webrtcUserInterface.roomsMediaContainer().appendChild(dialog);
                     setTimeout(function () {
                         Q.activate(
                             Q.Tool.setUpElement(
@@ -6081,7 +6156,7 @@
                         );
                     }, 3000)
 
-                    var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                    var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                     var dialogWidth = 996;
                     dialog.style.width = dialogWidth + 'px';
                     console.log('dialogWidth', dialogWidth);
@@ -6120,11 +6195,11 @@
                             document.body.appendChild(streamingCanvas);
                         }
 
-                        if(!controlsTool.WebRTCLib.mediaManager.fbLive.isStreaming()) {
-                            controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.stop();
+                        if(! tool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
+                            tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.stop();
                         }
                     }
-                    controlsTool.show();
+                    _controlsTool.show();
                 }
 
                 function showHorizontalRequired() {
@@ -6195,12 +6270,12 @@
 
 
                     if(dialog && dialog.classList.contains('Streams_webrtc_hidden')) {
-                        controlsTool.WebRTCLib.mediaManager.canvasComposer.videoComposer.compositeVideosAndDraw();
+                        tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.compositeVideosAndDraw();
 
                         dialog.classList.remove('Streams_webrtc_hidden');
                         isHidden = false;
 
-                        var controlsRect = controlsTool.controlBar.getBoundingClientRect();
+                        var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
                         if(Q.info.isMobile) {
 
                             dialog.style.position = 'fixed';
@@ -6234,18 +6309,19 @@
                         scenesInterface.syncList();
                       
                         if(Q.info.isMobile) {
-                            controlsTool.hide();
+                            _controlsTool.hide();
                         } else {
                             var dialogRect = dialog.getBoundingClientRect();
-                            var controlsRect = controlsTool.element.firstChild.getBoundingClientRect();
+                            var controlsRect = _controlsTool.element.firstChild.getBoundingClientRect();
                             if(dialogRect.bottom > controlsRect.top) {
-                                controlsTool.hide();
+                                _controlsTool.hide();
                             }
                         }
                     }
                 }
 
                 return {
+                    updateWebrtcSignalingLibInstance: updateWebrtcSignalingLibInstance,
                     hide: hide,
                     show: show,
                     toggle: function () {
@@ -6258,16 +6334,60 @@
                 }
             },
             get: function () {
-                if(this.advancedLiveStreamingBox != null) {
-                    return this.advancedLiveStreamingBox;
-                } else {
-                    this.advancedLiveStreamingBox = this.create();
-                    return this.advancedLiveStreamingBox;
-                }
+                var tool = this;
+                return new Promise(function(resolve, reject) {
+                    if (tool.livestreamingEditor != null) {
+                        resolve(tool.livestreamingEditor);
+                    } else {
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                "div", // or pass an existing element
+                                "Streams/webrtc/livestreaming/canvasComposer",
+                                {
+                                    webrtcSignalingLib: tool.state.webrtcSignalingLib,
+                                    webrtcUserInterface: tool.state.webrtcUserInterface,
+                                }
+                            ),
+                            {},
+                            function (rtmpSenderTool, rtmpSenderTool2) {
+                                console.log('rtmpSenderTool', rtmpSenderTool, rtmpSenderTool2, this)
+                                
+                                tool.livestreamingCanvasComposerTool = this;
+
+                                Q.activate(
+                                    Q.Tool.setUpElement(
+                                        "div", // or pass an existing element
+                                        "Streams/webrtc/livestreaming/rtmpSender",
+                                        {
+                                            canvasComposerTool: tool.livestreamingCanvasComposerTool,
+                                            webrtcSignalingLib: tool.state.webrtcSignalingLib,
+                                            webrtcUserInterface: tool.state.webrtcUserInterface,
+                                        }
+                                    ),
+                                    {},
+                                    function () {
+                                        tool.livestreamingRtmpSenderTool = this;
+                                        tool.livestreamingEditor = tool.create();
+                                        resolve(tool.livestreamingEditor);
+                                    }
+                                );
+                            }
+                        );
+
+                        
+                    }
+                  });
+                
             },
             refresh: function() {
+                var tool = this;
+                tool.livestreamingEditor.updateWebrtcSignalingLibInstance(tool.state.webrtcSignalingLib);
 
+                tool.livestreamingCanvasComposerTool.state.webrtcSignalingLib = tool.state.webrtcSignalingLib;
+                tool.livestreamingCanvasComposerTool.refresh();
 
+                tool.livestreamingRtmpSenderTool.state.webrtcSignalingLib = tool.state.webrtcSignalingLib;
+                tool.livestreamingRtmpSenderTool.refresh();
             }
         }
 
