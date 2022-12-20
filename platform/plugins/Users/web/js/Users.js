@@ -2069,6 +2069,7 @@
 		var step1_form = $('<form id="Users_setIdentifier_step1_form" />');
 		var step1_div = $('<div id="Users_setIdentifier_step1" class="Q_big_prompt" />').html(step1_form);
 
+		var autocomplete = (type === 'text') ? 'on' : type;
 		var identifier = (identifierType === "web3")
 			? Web3.getLoggedInUserXid()
 			: Q.getObject("Q.Users.loggedInUser." + identifierType);
@@ -2096,12 +2097,10 @@
 		: $('<button type="submit" class="Q_button Users_setIdentifier_go Q_main_button" />')
 			.html(Q.text.Users.setIdentifier.sendMessage) 
 
-		var autocomplete = (type === 'text') ? 'on' : type;
 		step1_form.empty().append(
 			$identifierInput, $identifierTypeInput, $button
 		).submit(function (event) {
 			var $identifier = $('#Users_setIdentifier_identifier')
-			.attr('autocomplete', autocomplete);
 			var h = $identifier.outerHeight() - 5;
 			$identifier.css({
 				'background-image': 'url(' + Q.info.imgLoading + ')',
