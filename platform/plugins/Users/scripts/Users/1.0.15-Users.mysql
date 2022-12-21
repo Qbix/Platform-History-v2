@@ -1,0 +1,7 @@
+UPDATE {{prefix}}external_to
+SET platform = 'web3'
+WHERE platform = 'wallet';
+
+UPDATE {{prefix}}external_from
+SET platform = 'web3'
+WHERE platform = 'wallet';
