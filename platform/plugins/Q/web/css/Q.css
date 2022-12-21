@@ -1,5 +1,4 @@
 html { min-height: -moz-available; min-height: -webkit-fill-available; min-height: fill-available; }
-body { margin: 0; transform: scale(1); }
 table { border-spacing:0; border-collapse:collapse; }
 
 /* Animations */
@@ -1025,6 +1024,10 @@ html.Q_layout_sidebar {
 
 .Q_dialog_imagepicker .Q_viewport {
 	display: block;
+}
+body.Q_columns_animationFX { 
+	margin: 0;
+	transform: scale(1);
 }
 .Q_dialogs_animationFX .Q_overlay {
 	transform: scale(0.5);
