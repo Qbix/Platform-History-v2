@@ -196,6 +196,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			template: {
 				name: "Assets/service/composer",
 				fields: Q.extend({
+					relatedParticipantsExists: !!Object.keys(relatedParticipants).length,
 					relatedParticipants: relatedParticipants,
 					text: tool.text
 				}, fields)
@@ -272,22 +273,23 @@ Q.Template.set('Assets/service/preview',
 );
 
 Q.Template.set("Assets/service/composer",
-	'<form>' +
-	'	<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">' +
-	'	<select name="payment"><option value="free">{{text.services.Free}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>' +
-	'	<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>' +
-	'	{{#if relatedParticipants}}' +
-	'		<label>{{text.services.NewServiceTemplate.SelectRequiredParticipants}}</label>' +
-	'		<div class="Assets_service_requiredParticipants">' +
-	'			{{#each relatedParticipants}}' +
-	'				<div data-streamName="{{this.streamName}}" class="{{#if this.selected}}Q_selected{{/if}}">{{this.streamName}}</div>' +
-	'			{{/each}}' +
-	'		</div>' +
-	'	{{/if}}' +
-	'	<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">' +
-	'	<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>' +
-	'	<button name="save" class="Q_button">{{text.services.NewServiceTemplate.SaveService}}</button>' +
-	'</form>'
+`<form>
+		<input type="text" name="title" required placeholder="{{text.services.NewServiceTemplate.TitlePlaceholder}}" value="{{title}}">
+		<select name="payment"><option value="free">{{text.services.Free}}</option><option value="optional">{{text.services.OptionalContribution}}</option><option value="required">{{text.services.RequiredPayment}}</option></select>
+		<label for="price"><input type="text" name="price" required placeholder="{{text.services.NewServiceTemplate.PricePlaceholder}}" value="{{price}}"></label>
+		{{#if relatedParticipantsExists}}
+			<label>{{text.services.NewServiceTemplate.SelectRequiredParticipants}}</label>
+			<span class="Assets_service_composer_requiredPaymentDesc">{{text.services.NewServiceTemplate.RequiredParticipantsDesc}}</span>	
+			<div class="Assets_service_requiredParticipants">
+				{{#each relatedParticipants}}
+					<div data-streamName="{{this.streamName}}" class="{{#if this.selected}}Q_selected{{/if}}">{{this.streamName}}</div>
+				{{/each}}
+			</div>
+		{{/if}}
+		<input type="text" name="link" placeholder="{{text.services.NewServiceTemplate.LinkPlaceholder}}" value="{{link}}">
+		<textarea name="description" placeholder="{{text.services.NewServiceTemplate.DescriptionPlaceholder}}">{{description}}</textarea>
+		<button name="save" class="Q_button">{{text.services.NewServiceTemplate.SaveService}}</button>
+	</form>`
 );
 
 })(Q, Q.$, window);
