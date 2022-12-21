@@ -42,6 +42,9 @@
 
         {
             onRefresh: new Q.Event(),
+            controlsTool: null,
+            webrtcSignalingLib: null,
+            webrtcUserInterface: null
         },
 
         {
@@ -225,7 +228,7 @@
                                     listItem.cameraBtnEl.innerHTML = _controlsToolIcons.cameraTransparent;
                                     tool.state.webrtcSignalingLib.localMediaControls.enableVideo();
                                 }
-                                tool.updateControlBar();
+                                tool.state.controlsTool.updateControlBar();
                                 break;
                             }
                         }
@@ -245,7 +248,7 @@
                                     listItem.audioBtnEl.innerHTML = _controlsToolIcons.microphoneTransparent;
                                     tool.state.webrtcSignalingLib.localMediaControls.enableAudio();
                                 }
-                                tool.updateControlBar();
+                                tool.state.controlsTool.updateControlBar();
 
                                 break;
                             }
