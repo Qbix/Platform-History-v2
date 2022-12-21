@@ -35,7 +35,7 @@ function Streams_after_Q_Plugin_install($params)
 		return;
 	}
 
-	echo "  " . implode("\n  ", $streamsNeedToInstall) . "\n";
+	echo "\n  " . implode("\n  ", $streamsNeedToInstall) . "\n";
 	
 	echo PHP_EOL;
 
