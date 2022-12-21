@@ -873,7 +873,7 @@ Sp.join = function(options, callback) {
 					save = true;
 				}
 				if (sp.fields.state === 'participating') {
-					type = 'Streams/visit';
+					type = 'Streams/visited';
 				}
 				if (sp.fields.state === 'participating') {
 					sp.fields.state = 'participating';
