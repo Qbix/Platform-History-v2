@@ -4215,6 +4215,7 @@
 				} else {
 					// TODO: have direct deeplinks into wallet browsers
 					var web3Modal = Web3.web3Modal || Web3.getWeb3Modal();
+					document.getElementById('WEB3_CONNECT_MODAL_ID').style.zIndex = Q.zIndexTopmost();
 					web3Modal.clearCachedProvider();
 					web3Modal.resetState();
 					web3Modal.connect().then(function (provider) {
