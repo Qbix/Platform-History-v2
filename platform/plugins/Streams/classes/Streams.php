@@ -3029,7 +3029,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * If the user is participating in (some of) the streams, sets state of participant row
-	 * as "left" and posts a "Streams/leave" type message to the streams.
+	 * as "left" and posts a "Streams/left" type message to the streams.
 	 * Also unrelates every stream left to streams named under the config field
 	 * "Streams"/"types"/$streamType/"participating"
 	 * @method leave
@@ -3140,7 +3140,7 @@ abstract class Streams extends Base_Streams
 			));
 			// Stream messages to post
 			$messages[$publisherId][$sn] = array(
-				'type' => 'Streams/leave',
+				'type' => 'Streams/left',
 				'instructions' => array(
 					'prevState' => $prevState,
 					'extra' => isset($participant->extra) ? $participant->extra : array()

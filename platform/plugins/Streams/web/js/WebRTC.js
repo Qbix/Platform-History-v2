@@ -5730,7 +5730,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             });
 
-            stream.onMessage("Streams/leave").set(function (stream, message) {
+            stream.onMessage("Streams/left").set(function (stream, message) {
 
             });
 
@@ -7949,7 +7949,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                 }, this);
 
                 // this is duplicate to above approach
-                /*Q.Streams.Stream.onMessage(stream.fields.publisherId, stream.fields.name, 'Streams/leave').set(function(stream, message) {
+                /*Q.Streams.Stream.onMessage(stream.fields.publisherId, stream.fields.name, 'Streams/left').set(function(stream, message) {
                     if (message.byUserId !== userId) {
                         return;
                     }

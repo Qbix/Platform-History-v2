@@ -956,7 +956,7 @@ Sp.leave = function(options, callback) {
             userId: userId
         }).retrieve(function(err, sp) {
             if (err) return callback.call(stream, err);
-            var type = 'Streams/leave';
+            var type = 'Streams/left';
             if (sp.length) {
                 sp = sp[0];
                 var save = false, subscribed = options.subscribed;
@@ -977,7 +977,7 @@ Sp.leave = function(options, callback) {
             }
             function _afterSaveParticipant(err) {
                 if (err) return callback.call(stream, err);
-                Users.Socket.emitToUser(userId, 'Streams/leave', sp.fillMagicFields().getFields());
+                Users.Socket.emitToUser(userId, 'Streams/left', sp.fillMagicFields().getFields());
                 stream.updateParticipantCounts(
                     'left', sp.fields.state, _afterUpdateParticipantCounts
                 );

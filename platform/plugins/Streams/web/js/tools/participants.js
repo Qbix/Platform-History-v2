@@ -246,7 +246,7 @@ function _Streams_participants(options) {
 					++tool.state.count;
 					tool.stateChanged('count');
 				}, tool);
-				stream.onMessage("Streams/leave")
+				stream.onMessage("Streams/left")
 				.set(function (stream, message, messages) {
 					if (!tool.avatarExists(message.byUserId)) {
 						return;

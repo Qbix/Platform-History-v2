@@ -387,13 +387,13 @@
                 });
 
                 tool.stream.onMessage("Streams/joined").set(function (stream, message) {
-                    console.log('PREVIEW stream JOIN event:', message)
+                    console.log('PREVIEW stream JOINED event:', message)
                     let byUserId = message.byUserId;
                     updateTitle();
                 });
 
-                tool.stream.onMessage("Streams/leave").set(function (stream, message) {
-                    console.log('PREVIEW stream LEAVE event:', message)
+                tool.stream.onMessage("Streams/left").set(function (stream, message) {
+                    console.log('PREVIEW stream LEFT event:', message)
                     let byUserId = message.byUserId;
                     updateTitle();
                 });

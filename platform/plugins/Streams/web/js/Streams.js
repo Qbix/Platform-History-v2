@@ -6355,9 +6355,9 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 	}, 'Streams');
 
-	Users.Socket.onEvent('Streams/joined').set(function _Streams_join_handler (p) {
+	Users.Socket.onEvent('Streams/join').set(function _Streams_join_handler (p) {
 		// 'join' event contains new participant.
-		console.log('Users.Socket.onEvent("Streams/joined")', p);
+		console.log('Users.Socket.onEvent("Streams/join")', p);
 		Participant.get.cache.set(
 			[p.publisherId, p.streamName, p.userId],
 			0, p, [null, p]
@@ -6473,7 +6473,7 @@ Q.onInit.add(function _Streams_onInit() {
 						prevState = message.getInstruction('prevState');
 						_updateParticipantCache(msg, 'participating', prevState, usingCached);
 						break;
-					case 'Streams/leave':
+					case 'Streams/left':
 						prevState = message.getInstruction('prevState');
 						_updateParticipantCache(msg, 'left', prevState, usingCached);
 						break;

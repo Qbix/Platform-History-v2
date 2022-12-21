@@ -990,9 +990,9 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * If the user is participating in the stream, sets state of participant row
-	 * as "left" and posts a "Streams/leave" type message to the stream.
+	 * as "left" and posts a "Streams/left" type message to the stream.
 	 * Also unrelates every stream left to streams named under the config field
-	 * "Streams"/"types"/$streamType/"participating"
+	 * "Streams"/"types"/streamType/"participating"
 	 * @method leave
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {string} [$options.userId] The user who is leaving the stream. Defaults to the logged-in user.

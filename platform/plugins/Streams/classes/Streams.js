@@ -604,8 +604,8 @@ function Streams_request_handler (req, res, next) {
 			// invalidate cache for this stream
 //				Streams.getParticipants.forget(stream.fields.publisherId, stream.fields.name);
 			// inform user's clients about change
-			Users.Socket.emitToUser(userId, 'Streams/leave', participant);
-			Streams.Stream.emit('leave', stream, userId, clientId);
+			Users.Socket.emitToUser(userId, 'Streams/left', participant);
+			Streams.Stream.emit('left', stream, userId, clientId);
 			break;
 		case 'Streams/Stream/remove':
 			if (Q.Config.get(['Streams', 'logging'], false)) {
