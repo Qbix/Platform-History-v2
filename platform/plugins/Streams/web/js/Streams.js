@@ -3694,7 +3694,7 @@ Stream.join = function _Stream_join (publisherId, streamName, callback) {
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/joined', [slotName], function (err, data) {
+	Q.req('Streams/join', [slotName], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
@@ -3791,7 +3791,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/subscribe', [slotName], function (err, data) {
+	Q.req('Streams/subscribed', [slotName], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];

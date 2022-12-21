@@ -1015,7 +1015,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 	/**
 	 * Subscribe to the stream, to start receiving notifications.
-	 * Posts a "Streams/subscribe" message to the stream.
+	 * Posts a "Streams/subscribed" message to the stream.
 	 * Also posts a "Streams/subscribed" message to user's "Streams/participating" stream.
 	 *	If options are not given check the subscription templates:
 	 *	1. generic publisher id and generic user

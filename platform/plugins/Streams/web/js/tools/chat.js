@@ -879,7 +879,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}, tool);
 
 		// new user left
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribe').set(function(stream, message) {
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribed').set(function(stream, message) {
 			state.stream = stream;
 			$te.find('.Streams_chat_subscription').attr({
 				'data-subscribed': 'true'

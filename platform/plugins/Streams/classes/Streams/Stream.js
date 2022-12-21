@@ -1156,7 +1156,7 @@ Sp.subscribe = function(options, callback) {
 						}
 						function _postSubscribeMessage() {
 							stream.post(userId, {
-								type: 'Streams/subscribe'
+								type: 'Streams/subscribed'
 							}, function(err) {
 								if (err) {
 									return callback.call(stream, err);
