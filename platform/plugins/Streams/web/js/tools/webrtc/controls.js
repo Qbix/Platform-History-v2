@@ -154,7 +154,7 @@
                     if (tool.controlBar.parentNode == null) tool.element.appendChild(controlBar);
     
                     tool.textChat().init();
-                    tool.createSettingsPopup();
+                    tool.createVideoSettingsPopup();
                     tool.createAudioSettingsPopup();
                     tool.createBroadcastPopup();
                     tool.createParticipantsPopup(function () {
@@ -354,7 +354,6 @@
                 });
                 tool.WebRTCLib.event.on('cameraDisabled', function () {
                     tool.updateControlBar();
-                    tool.updateCamerasList();
                 });
                 tool.WebRTCLib.event.on('cameraToggled', function () {
                     tool.updateControlBar();
@@ -381,9 +380,6 @@
                 });
                 tool.WebRTCLib.event.on('currentAudioinputDeviceChanged', function () {
                     tool.updateAudioInputList();
-                });
-                tool.WebRTCLib.event.on('currentVideoinputDeviceChanged', function () {
-                    tool.updateCamerasList();
                 });
                 tool.WebRTCLib.event.on('screensharingStarting', function (e) {
 
@@ -623,7 +619,7 @@
                 tool.WebRTCLib.event.on('forceTurnCameraOff', function (e) {
                     tool.WebRTCLib.localMediaControls.disableVideo();
                     if (tool.WebRTCLib.screenSharing.isActive()) {
-                        tool.settingsPopup.videoInputListSection.stopScreenSharingButton().handler();
+                        tool.videoInputsTool.stopScreenSharingButton().handler();
                     }
                 });
                 tool.WebRTCLib.event.on('cancelForceTurnCameraOffTimer', function (e) {
@@ -874,10 +870,10 @@
 
                     if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
                         tool.WebRTCLib.localMediaControls.canITurnCameraOn().then(function () {
-                            tool.settingsPopup.videoInputListSection.turnOnCamera();
+                            tool.videoInputsTool.turnOnCamera();
                         });
                     } else {
-                        tool.settingsPopup.videoInputListSection.turnOnCamera();
+                        tool.videoInputsTool.turnOnCamera();
                     }
 
                     return;
@@ -1612,650 +1608,136 @@
             
             /**
              * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
-             * @method createSettingsPopup
+             * @method createVideoSettingsPopup
              */
-            createSettingsPopup: function () {
+            createVideoSettingsPopup: function (callback) {
                 var tool = this;
 
-                tool.settingsPopup = (function () {
-                    var _popUpResizeobserver;
-                    var _videoinputListEl;
-
-                    var videoInputListSection = (function () {
-                        var _turnOnCameraBtn;
-                        var _startScreenSharingBtn;
-                        var _startAnotherScreenSharingBtn;
-                        var _startMobileScreenSharingBtn;
-                        var _stopScreenSharingBtn;
-                        var _turnOffCameraBtn;
-                        var _cameraListButtons = [];
-
-                        var ButtonInstance = function (data) {
-                            this.buttonEl = data.buttonEl;
-                            this.textEl = data.textEl;
-                            this.type = data.type;
-                            this.isActive = false;
-                            this.deviceId = data.deviceId;
-                            this.handler = data.handler.bind(this);
-                            this.makeActive = function () {
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
-                                this.isActive = true;
-                            };
-                            this.switchToRegularState = function () {
-                                if (this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.remove('Streams_webrtc_settings_popup_active');
-                                if (this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.remove('Streams_webrtc_disabled-radio');
-                                this.isActive = false;
-                            };
-                            this.show = function () {
-                                if (this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.remove('Streams_webrtc_hidden');
-                                this.switchToRegularState();
-                            };
-                            this.hide = function () {
-                                if (!this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.add('Streams_webrtc_hidden');
-                            };
-                            this.remove = function () {
-                                if (this.buttonEl.parentNode != null) this.buttonEl.parentNode.removeChild(this.buttonEl);
-                            };
+                Q.activate(
+                    Q.Tool.setUpElement(
+                        'DIV',
+                        "Streams/webrtc/videoInputs",
+                        {
+                            controlsTool: tool,
+                            webrtcSignalingLib: tool.WebRTCLib,
+                            webrtcUserInterface: tool.WebRTCClass
                         }
+                    ),
+                    {},
+                    onVideoInputsListCreated
+                );
 
-                        function toggleRadioButton(buttonObj) {
-                            var deselectCameraButtons = function () {
-                                for (var i in _cameraListButtons) {
-                                    if (_cameraListButtons[i] == buttonObj) continue;
-                                    _cameraListButtons[i].switchToRegularState();
-                                }
-                            }
+                function onVideoInputsListCreated() {
+                    tool.videoInputsTool = this;
 
-                            tool.log('controls: toggleRadioButton', buttonObj);
-                           
-                            if (buttonObj.type == 'camera') {
-                                deselectCameraButtons();
-                                if (!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
-                                    _startScreenSharingBtn.switchToRegularState();
-                                    _turnOffCameraBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffVideo", tool.text);
-                                } else {
-                                    _turnOffCameraBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.turnOffCameras", tool.text);
-                                }
-                                _turnOffCameraBtn.switchToRegularState();
-                            } else if (buttonObj.type == 'screen') {
-                                if (!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
-                                    deselectCameraButtons();
-                                    _turnOffCameraBtn.switchToRegularState();
-                                } else {
-                                    _startAnotherScreenSharingBtn.show();
-                                    _stopScreenSharingBtn.show();
-                                }
-
-                            } else if (buttonObj.type == 'mobileScreen') {
-                                if (!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
-                                    deselectCameraButtons();
-                                    _turnOffCameraBtn.switchToRegularState();
-                                } else {
-                                    _stopScreenSharingBtn.show();
-                                }
-
-                            } else if (buttonObj.type == 'turnScreenSharingOff') {
-                                _startScreenSharingBtn.switchToRegularState();
-                                _startAnotherScreenSharingBtn.hide();
-                                _stopScreenSharingBtn.hide();
-                            } else if (buttonObj.type == 'off') {
-                                deselectCameraButtons();
-                                if (!tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen) {
-                                    _startScreenSharingBtn.switchToRegularState();
-                                    _startAnotherScreenSharingBtn.hide();
-                                    _stopScreenSharingBtn.hide();
-                                }
-                                _turnOffCameraBtn.textEl.innerHTML = Q.getObject("webrtc.settingsPopup.cameraIsTurnedOff", tool.text);
-                            }
-
-                            if (typeof buttonObj == "undefined") return;
-
-                            buttonObj.makeActive();
+                    tool.videoSettingsPopup = (function () {
+                        var _popUpResizeobserver;
+    
+                        function show() {
+                            tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
                         }
-                        tool.toggleCameraButtons = toggleRadioButton;
-
-                        function clearCameraList() {
-                            for (var c in _cameraListButtons) {
-                                _cameraListButtons[c].remove();
+    
+                        function hide() {
+                            if (Q.info.isMobile) {
+                                tool.showControlsDialog('select-camera').hide();
+                            } else {
+                                tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
                             }
+    
                         }
-
-                        function loadCamerasList() {
-                            tool.log('contros: loadCamerasList')
-                            if (tool.WebRTCClass.getOptions().audioOnlyMode) return;
-                            //location.reload();
-                            var count = 1;
-
-                            clearCameraList();
-
-                            tool.WebRTCLib.localMediaControls.videoInputDevices().forEach(function (mediaDevice) {
-                                var radioBtnItem = document.createElement('DIV');
-                                radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
-                                radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
-
-                                var textLabelCon = document.createElement('SPAN');
-                                textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                                var textLabel = document.createTextNode(mediaDevice.label || `Camera ${count}`);
-                                var checkmark = document.createElement('SPAN');
-                                checkmark.className = 'Streams_webrtc_radio-checkmark';
-                                checkmark.innerHTML = icons.cameraTransparent;
-                                textLabelCon.appendChild(textLabel);
-                                radioBtnItem.appendChild(textLabelCon);
-                                radioBtnItem.appendChild(checkmark);
-                                _videoinputListEl.insertBefore(radioBtnItem, _videoinputListEl.firstChild);
-
-                                let cameraItem = new ButtonInstance({
-                                    buttonEl: radioBtnItem,
-                                    textEl: textLabelCon,
-                                    type: 'camera',
-                                    deviceId: mediaDevice.deviceId,
-                                    handler: function (e) {
-                                        if (!radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.add('Q_working');
-                                        Q.Dialogs.pop();
-                                        tool.closeAllDialogs();
-
-                                        var toggle = function () {
-                                            tool.WebRTCLib.localMediaControls.toggleCameras({ deviceId: mediaDevice.deviceId, groupId: mediaDevice.groupId }, function () {
-                                                if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
-
-                                                var localScreens = tool.WebRTCLib.localParticipant().screens;
-                                                var i, screen;
-                                                for (i = 0; screen = localScreens[i]; i++) {
-                                                    tool.state.webrtcClass.screenRendering.updateLocalScreenClasses(screen);
-                                                }
-                                                tool.log('controls: toggleRadioButton', cameraItem)
-                                                toggleRadioButton(cameraItem);
-
-                                                tool.updateControlBar();
-                                            }, function (e) {
-                                                if (radioBtnItem.classList.contains('Q_working')) radioBtnItem.classList.remove('Q_working');
-                                                if (_isiOSCordova) tool.showIosPermissionsInstructions('Camera');
-                                                if (e.name == 'NotAllowedDueLimit') {
-                                                    tool.WebRTCClass.notice.show(tool.text.webrtc.notices.allowedVideoLimit.interpolate({ limit: e.limit }));
-                                                }
-                                            })
-                                        }
-
-                                        if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
-                                            tool.WebRTCLib.localMediaControls.canITurnCameraOn().then(function () {
-                                                tool.settingsPopup.videoInputListSection.turnOnCamera();
-                                            });
-                                        } else {
-                                            toggle();
-                                        }
-
-
+    
+                        function createPopup() {
+                            var settingsPopup = document.createElement('DIV');
+                            settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
+                            var settingsPopupInner = document.createElement('DIV');
+                            settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
+                            if (!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopupInner.appendChild(tool.videoInputsTool.videoinputListEl);
+    
+                            tool.settingsPopupEl = settingsPopup;
+                            settingsPopup.appendChild(settingsPopupInner);
+                            tool.cameraBtn.parentNode.appendChild(settingsPopup);
+    
+                            tool.videoInputsTool.loadCamerasList();
+    
+                            if (!Q.info.useTouchEvents) {
+                                tool.cameraBtn.addEventListener('mouseenter', function (e) {
+                                    tool.hideAllPopups();
+                                    if (tool.hoverTimeout.settingsPopup != null) {
+                                        clearTimeout(tool.hoverTimeout.settingsPopup);
+                                        tool.hoverTimeout.settingsPopup = null;
                                     }
+                                    show();
                                 });
-
-                                _cameraListButtons.push(cameraItem);
-
-                                if (tool.WebRTCLib.localMediaControls.currentCameraDevice() != null && tool.WebRTCLib.localMediaControls.currentCameraDevice().deviceId == mediaDevice.deviceId) {
-                                    toggleRadioButton(cameraItem);
-                                }
-
-                                radioBtnItem.addEventListener('mouseup', cameraItem.handler)
-                                count++;
-                            });
-
-                            //if(turnOnCameraItem.parentNode != null) turnOnCameraItem.parentNode.removeChild(turnOnCameraItem);
-                            _turnOnCameraBtn.remove();
-
-                        }
-                        tool.loadCamerasList = loadCamerasList;
-
-                        function updateCamerasList() {
-                            tool.log('controls: updateCamerasList');
-                            let cameraIsActive = false;
-                            _cameraListButtons.forEach(function (cameraItem) {
-
-                                if (tool.WebRTCLib.localMediaControls.currentCameraDevice() != null && tool.WebRTCLib.localMediaControls.currentCameraDevice().deviceId == cameraItem.deviceId) {
-                                    tool.log('controls: updateCamerasList: toggleRadioButton (active)', cameraItem);
-                                    toggleRadioButton(cameraItem);
-                                    cameraIsActive = true
-                                }
-
-                            });
-                            if (!cameraIsActive) {
-                                tool.log('controls: updateCamerasList: make active _turnOffCameraBtn');
-                                toggleRadioButton(_turnOffCameraBtn);
+    
+                                tool.cameraBtn.addEventListener('mouseleave', function (e) {
+                                    if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+                                        e.stopPropagation();
+                                        e.preventDefault();
+                                    }
+                                    tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                        hide();
+                                    }, 600)
+                                });
+    
+                                settingsPopup.addEventListener('mouseenter', function (e) {
+    
+                                    if (tool.hoverTimeout.settingsPopup != null) {
+                                        clearTimeout(tool.hoverTimeout.settingsPopup);
+                                        tool.hoverTimeout.settingsPopup = null;
+                                    }
+                                })
+                                settingsPopup.addEventListener('mouseleave', function (e) {
+                                    tool.hoverTimeout.settingsPopup = setTimeout(function () {
+                                        hide();
+                                    }, 600)
+    
+                                });
+    
+                                _popUpResizeobserver = new ResizeObserver(function (entries) {
+    
+                                    let popupRect = settingsPopup.getBoundingClientRect();
+                                    let windowHeight = window.innerHeight;
+    
+                                    let maxHeight;
+                                    if (popupRect.top < 0) {
+                                        maxHeight = popupRect.bottom;
+                                    } else if (popupRect.bottom > windowHeight) {
+                                        maxHeight = popupRect.bottom - windowHeight - popupRect.top;
+                                    }
+    
+                                    for (let entry of entries) {
+                                        let height = entry.contentRect.height;
+                                        if (height > maxHeight) {
+                                            settingsPopupInner.style.maxHeight = maxHeight + 'px';
+                                            settingsPopupInner.style.overflowY = 'auto';
+                                        } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
+                                            settingsPopupInner.style.maxHeight = '';
+                                            settingsPopupInner.style.overflowY = '';
+                                        }
+                                    }
+                                })
+    
+                                _popUpResizeobserver.observe(settingsPopup)
                             }
+    
                         }
-                        tool.updateCamerasList = updateCamerasList;
-
-                        function turnOnCamera() {
-                            tool.WebRTCLib.localMediaControls.requestCamera(function () {
-                                var currentCamera = tool.WebRTCLib.localMediaControls.frontCameraDevice();
-                                if (currentCamera != null) {
-                                    var btnToSwitchOn = _cameraListButtons.filter(function (cameraBtn) {
-                                        return cameraBtn.deviceId == currentCamera.deviceId;
-                                    })[0];
-
-                                    if (btnToSwitchOn != null) {
-                                        tool.toggleCameraButtons(btnToSwitchOn);
-                                    } else {
-                                        tool.toggleCameraButtons(_turnOffCameraBtn);
-                                    }
-
-                                    loadCamerasList();
-                                }
-                                tool.updateControlBar();
-                            }, function (e) {
-                                var participant = tool.WebRTCLib.localParticipant();
-                                var enabledVideoTracks = participant.tracks.filter(function (t) {
-                                    return t.screensharing;
-                                })[0];
-                                if (enabledVideoTracks != null)
-                                    toggleRadioButton(_startScreenSharingBtn);
-                                else toggleRadioButton(_turnOffCameraBtn);
-
-                                tool.updateControlBar();
-                                if (_isiOSCordova)
-                                    tool.showIosPermissionsInstructions('Camera');
-                                else if (e.name == 'NotAllowedError' || e.name == 'MediaStreamError') tool.showBrowserPermissionsInstructions('camera');
-                            });
-                        }
-
-                        function createVideoInputList() {
-                            var videoinputList = document.createElement('DIV');
-                            videoinputList.className = 'Streams_webrtc_choose-device';
-
-                            var turnOnCameraItem = document.createElement('DIV');
-                            turnOnCameraItem.dataset.deviceId = 'auto';
-                            turnOnCameraItem.className = 'Streams_webrtc_settings_popup_item';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.webCamera", tool.text));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.screen;
-                            textLabelCon.appendChild(textLabel);
-                            turnOnCameraItem.appendChild(textLabelCon);
-                            turnOnCameraItem.appendChild(checkmark);
-
-                            _turnOnCameraBtn = new ButtonInstance({
-                                buttonEl: turnOnCameraItem,
-                                textEl: textLabelCon,
-                                type: 'camera',
-                                handler: function (e) {
-                                    var turnCameraOn = function () {
-                                        toggleRadioButton(_turnOnCameraBtn);
-
-                                        tool.WebRTCLib.localMediaControls.requestCamera(function () {
-                                            var currentCamera = tool.WebRTCLib.localMediaControls.frontCameraDevice();
-                                            if (currentCamera != null) {
-                                                var btnToSwitchOn = _cameraListButtons.filter(function (cameraBtn) {
-                                                    return cameraBtn.deviceId == currentCamera.deviceId;
-                                                })[0];
-
-                                                if (btnToSwitchOn != null) {
-                                                    tool.toggleCameraButtons(btnToSwitchOn);
-                                                } else {
-                                                    tool.toggleCameraButtons(_turnOffCameraBtn);
-                                                }
-
-                                                loadCamerasList();
-                                            }
-                                            tool.updateControlBar();
-                                        }, function () {
-                                            var participant = tool.WebRTCLib.localParticipant();
-                                            var enabledVideoTracks = participant.tracks.filter(function (t) {
-                                                return t.screensharing;
-                                            })[0];
-                                            if (enabledVideoTracks != null)
-                                                toggleRadioButton(_startScreenSharingBtn);
-                                            else toggleRadioButton(_turnOffCameraBtn);
-
-                                            tool.updateControlBar();
-                                        });
-                                    }
-
-                                    if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
-                                        tool.WebRTCLib.localMediaControls.canITurnCameraOn().then(function (result) {
-                                            turnCameraOn();
-                                        });
-                                    } else {
-                                        turnCameraOn();
-                                    }
-                                }
-                            });
-
-                            var screenSharingRadioItem = document.createElement('DIV');
-                            screenSharingRadioItem.dataset.deviceId = 'screen';
-                            screenSharingRadioItem.className = 'Streams_webrtc_settings_popup_item';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.screenSharing", tool.text));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.screen;
-                            textLabelCon.appendChild(textLabel);
-                            screenSharingRadioItem.appendChild(textLabelCon);
-                            screenSharingRadioItem.appendChild(checkmark);
-
-                            _startScreenSharingBtn = new ButtonInstance({
-                                buttonEl: screenSharingRadioItem,
-                                textEl: textLabelCon,
-                                type: 'screen',
-                                handler: function (e) {
-                                    var btnInstance = this;
-                                    if (!screenSharingRadioItem.classList.contains('Q_working')) screenSharingRadioItem.classList.add('Q_working');
-
-                                    var turnScreensharingOn = function () {
-                                        tool.WebRTCLib.screenSharing.startShareScreen(function () {
-                                            if (screenSharingRadioItem.classList.contains('Q_working')) screenSharingRadioItem.classList.remove('Q_working');
-                                            Q.Dialogs.pop();
-                                            toggleRadioButton(btnInstance);
-                                            tool.closeAllDialogs();
-                                            tool.updateControlBar();
-                                        }, function () {
-                                            if (screenSharingRadioItem.classList.contains('Q_working')) screenSharingRadioItem.classList.remove('Q_working');
-
-                                            var currentCameraDevice = tool.WebRTCLib.localMediaControls.currentCameraDevice();
-                                            if (currentCameraDevice != null) {
-                                                var btnToSwitchOn = _cameraListButtons.filter(function (cameraBtn) {
-                                                    return cameraBtn.deviceId == currentCameraDevice.deviceId;
-                                                })[0];
-                                                if (btnToSwitchOn != null) toggleRadioButton(btnToSwitchOn);
-                                            } else toggleRadioButton(_turnOffCameraBtn);
-
-                                            tool.updateControlBar();
-                                        });
-                                    }
-
-                                    if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
-                                        tool.WebRTCLib.localMediaControls.canITurnCameraOn().then(function (result) {
-                                            turnScreensharingOn();
-                                        });
-                                    } else {
-                                        turnScreensharingOn();
-                                    }
-                                }
-                            });
-
-                            var anotherScreenSharingRadioItem = document.createElement('DIV');
-                            anotherScreenSharingRadioItem.className = 'Streams_webrtc_hidden Streams_webrtc_settings_popup_item Streams_webrtc_video_anotherScreen';
-                            anotherScreenSharingRadioItem.dataset.deviceId = 'anotherScreen';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.shareAnotherScreen", tool.text));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.screen;
-                            textLabelCon.appendChild(textLabel);
-                            anotherScreenSharingRadioItem.appendChild(textLabelCon);
-                            anotherScreenSharingRadioItem.appendChild(checkmark);
-                            _startAnotherScreenSharingBtn = new ButtonInstance({
-                                buttonEl: anotherScreenSharingRadioItem,
-                                textEl: textLabelCon,
-                                type: 'shareAnotherScreen',
-                                handler: function () {
-                                    var turnScreensharingOn = function () {
-                                        tool.WebRTCLib.screenSharing.startShareScreen(function () {
-                                            Q.Dialogs.pop();
-                                            toggleRadioButton(_startScreenSharingBtn);
-                                            tool.closeAllDialogs();
-                                            tool.updateControlBar();
-                                        }, function () {
-                                            var currentCameraDevice = tool.WebRTCLib.localMediaControls.currentCameraDevice();
-                                            if (currentCameraDevice != null) {
-                                                var btnToSwitchOn = _cameraListButtons.filter(function (cameraBtn) {
-                                                    return cameraBtn.deviceId == currentCameraDevice.deviceId;
-                                                })[0];
-                                                if (btnToSwitchOn != null) toggleRadioButton(btnToSwitchOn);
-                                            } else toggleRadioButton(_turnOffCameraBtn);
-
-                                            tool.updateControlBar();
-                                        })
-
-                                    }
-
-                                    if (tool.WebRTCClass.getOptions().limits && (tool.WebRTCClass.getOptions().limits.video || tool.WebRTCClass.getOptions().limits.audio)) {
-                                        tool.WebRTCLib.localMediaControls.canITurnCameraOn().then(function (result) {
-                                            turnScreensharingOn();
-                                        });
-                                    } else {
-                                        turnScreensharingOn();
-                                    }
-                                }
-                            });
-
-                            var turnScreenSharingOff = document.createElement('DIV');
-                            turnScreenSharingOff.className = 'Streams_webrtc_hidden Streams_webrtc_settings_popup_item Streams_webrtc_turn_off_screensharing';
-                            turnScreenSharingOff.dataset.deviceId = 'turnScreenSharingOff';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.turnOffScreenSharing", tool.text));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.switchOffCameras;
-                            textLabelCon.appendChild(textLabel);
-                            turnScreenSharingOff.appendChild(textLabelCon);
-                            turnScreenSharingOff.appendChild(checkmark);
-                            _stopScreenSharingBtn = new ButtonInstance({
-                                buttonEl: turnScreenSharingOff,
-                                textEl: textLabelCon,
-                                type: 'turnScreenSharingOff',
-                                handler: function () {
-                                    toggleRadioButton(_stopScreenSharingBtn);
-                                    tool.WebRTCLib.screenSharing.stopShareScreen();
-                                }
-                            });
-
-                            var mobileScreenSharingRadioItem = document.createElement('DIV');
-                            mobileScreenSharingRadioItem.dataset.deviceId = 'screen';
-                            mobileScreenSharingRadioItem.className = 'Streams_webrtc_settings_popup_item';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.screenSharing", tool.text));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.screen;
-                            textLabelCon.appendChild(textLabel);
-                            mobileScreenSharingRadioItem.appendChild(textLabelCon);
-                            mobileScreenSharingRadioItem.appendChild(checkmark);
-
-                            _startMobileScreenSharingBtn = new ButtonInstance({
-                                buttonEl: mobileScreenSharingRadioItem,
-                                textEl: textLabelCon,
-                                type: 'mobileScreen',
-                                handler: function (e) {
-                                    var btnInstance = this;
-                                    tool.WebRTCLib.screenSharing.startShareScreen(function () {
-                                        Q.Dialogs.pop();
-                                        toggleRadioButton(btnInstance);
-                                        tool.closeAllDialogs();
-                                        tool.updateControlBar();
-                                    }, function () {
-                                        var currentCameraDevice = tool.WebRTCLib.localMediaControls.currentCameraDevice();
-                                        if (currentCameraDevice != null) {
-                                            var btnToSwitchOn = _cameraListButtons.filter(function (cameraBtn) {
-                                                return cameraBtn.deviceId == currentCameraDevice.deviceId;
-                                            })[0];
-                                            if (btnToSwitchOn != null) toggleRadioButton(btnToSwitchOn);
-                                        } else toggleRadioButton(_turnOffCameraBtn);
-
-                                        tool.updateControlBar();
-                                    });
-                                }
-                            });
-
-                            if (tool.WebRTCLib.screenSharing.isActive()) {
-                                toggleRadioButton(_startScreenSharingBtn);
-                            }
-
-                            var turnOffradioBtnItem = document.createElement('DIV');
-                            turnOffradioBtnItem.className = 'Streams_webrtc_settings_popup_item Streams_webrtc_turn_video_off';
-                            turnOffradioBtnItem.dataset.deviceId = 'off';
-                            var textLabelCon = document.createElement('SPAN');
-                            textLabelCon.className = 'Streams_webrtc_settings_popup_item_text Streams_webrtc_turn_video_off_text';
-                            var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.cameraIsTurnedOff", tool.text));
-                            var checkmark = document.createElement('SPAN');
-                            checkmark.className = 'Streams_webrtc_radio-checkmark';
-                            checkmark.innerHTML = icons.switchOffCameras;
-                            textLabelCon.appendChild(textLabel);
-                            turnOffradioBtnItem.appendChild(textLabelCon);
-                            turnOffradioBtnItem.appendChild(checkmark);
-
-                            _turnOffCameraBtn = new ButtonInstance({
-                                buttonEl: turnOffradioBtnItem,
-                                textEl: textLabelCon,
-                                type: 'off',
-                                handler: function (e) {
-                                    toggleRadioButton(_turnOffCameraBtn);
-                                    tool.WebRTCLib.localMediaControls.disableVideo();
-                                    Q.Dialogs.pop();
-                                    tool.closeAllDialogs();
-                                    tool.updateControlBar();
-                                }
-                            });
-
-                            var localParticipant = tool.WebRTCLib.localParticipant();
-                            var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
-                                return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
-                            }).length;
-                            if (enabledVideoTracks == 0 && localParticipant.videoStream == null) {
-                                toggleRadioButton(_turnOffCameraBtn);
-                            }
-
-                            videoinputList.appendChild(turnOnCameraItem);
-                            if (!Q.info.useTouchEvents) videoinputList.appendChild(screenSharingRadioItem);
-                            if (!Q.info.useTouchEvents) videoinputList.appendChild(anotherScreenSharingRadioItem);
-                            if (tool.WebRTCClass.getOptions().showScreenSharingInSeparateScreen && !Q.info.useTouchEvents) videoinputList.appendChild(turnScreenSharingOff);
-                            if ((Q.info.useTouchEvents) && typeof cordova != 'undefined') videoinputList.appendChild(mobileScreenSharingRadioItem);
-                            videoinputList.appendChild(turnOffradioBtnItem);
-
-                            screenSharingRadioItem.addEventListener('mouseup', _startScreenSharingBtn.handler);
-                            anotherScreenSharingRadioItem.addEventListener('mouseup', _startAnotherScreenSharingBtn.handler);
-                            mobileScreenSharingRadioItem.addEventListener('mouseup', _startMobileScreenSharingBtn.handler);
-                            turnScreenSharingOff.addEventListener('mouseup', _stopScreenSharingBtn.handler);
-
-                            turnOffradioBtnItem.addEventListener('mouseup', _turnOffCameraBtn.handler)
-
-                            _videoinputListEl = videoinputList;
-                            return videoinputList;
-                        }
-
+    
                         return {
-                            createVideoInputList: createVideoInputList,
-                            loadCamerasList: loadCamerasList,
-                            turnOnCamera: turnOnCamera,
-                            screenSharingButton: function () {
-                                return _startScreenSharingBtn;
-                            },
-                            stopScreenSharingButton: function () {
-                                return _stopScreenSharingBtn;
-                            }
+                            createPopup: createPopup,
+                            show: show,
+                            hide: hide
                         }
                     }());
+    
+                    tool.videoSettingsPopup.createPopup();
 
-                    function show() {
-                        tool.cameraBtn.parentNode.classList.add('Streams_webrtc_hover');
-                    }
-
-                    function hide() {
-                        if (Q.info.isMobile) {
-                            tool.showControlsDialog('select-camera').hide();
-                        } else {
-                            tool.cameraBtn.parentNode.classList.remove('Streams_webrtc_hover');
-                        }
-
-                    }
-
-                    function createSettingsPopUp() {
-                        var settingsPopup = document.createElement('DIV');
-                        settingsPopup.className = 'Streams_webrtc_popup-settings Streams_webrtc_popup-box';
-                        var settingsPopupInner = document.createElement('DIV');
-                        settingsPopupInner.className = 'Streams_webrtc_popup-settings-inner';
-                        if (!tool.WebRTCClass.getOptions().audioOnlyMode) settingsPopupInner.appendChild(videoInputListSection.createVideoInputList());
-
-                        tool.settingsPopupEl = settingsPopup;
-                        settingsPopup.appendChild(settingsPopupInner);
-                        tool.cameraBtn.parentNode.appendChild(settingsPopup);
-
-                        videoInputListSection.loadCamerasList();
-
-                        if (!Q.info.useTouchEvents) {
-                            tool.cameraBtn.addEventListener('mouseenter', function (e) {
-                                tool.hideAllPopups();
-                                if (tool.hoverTimeout.settingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.settingsPopup);
-                                    tool.hoverTimeout.settingsPopup = null;
-                                }
-                                show();
-                            });
-
-                            tool.cameraBtn.addEventListener('mouseleave', function (e) {
-                                if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
-                                    e.stopPropagation();
-                                    e.preventDefault();
-                                }
-                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
-                                    hide();
-                                }, 600)
-                            });
-
-                            settingsPopup.addEventListener('mouseenter', function (e) {
-
-                                if (tool.hoverTimeout.settingsPopup != null) {
-                                    clearTimeout(tool.hoverTimeout.settingsPopup);
-                                    tool.hoverTimeout.settingsPopup = null;
-                                }
-                            })
-                            settingsPopup.addEventListener('mouseleave', function (e) {
-                                tool.hoverTimeout.settingsPopup = setTimeout(function () {
-                                    hide();
-                                }, 600)
-
-                            });
-
-                            _popUpResizeobserver = new ResizeObserver(function (entries) {
-
-                                let popupRect = settingsPopup.getBoundingClientRect();
-                                let windowHeight = window.innerHeight;
-
-                                let maxHeight;
-                                if (popupRect.top < 0) {
-                                    maxHeight = popupRect.bottom;
-                                } else if (popupRect.bottom > windowHeight) {
-                                    maxHeight = popupRect.bottom - windowHeight - popupRect.top;
-                                }
-
-                                for (let entry of entries) {
-                                    let height = entry.contentRect.height;
-                                    if (height > maxHeight) {
-                                        settingsPopupInner.style.maxHeight = maxHeight + 'px';
-                                        settingsPopupInner.style.overflowY = 'auto';
-                                    } else if (height < maxHeight && settingsPopupInner.style.maxHeight != '' && settingsPopupInner.style.maxHeight != null) {
-                                        settingsPopupInner.style.maxHeight = '';
-                                        settingsPopupInner.style.overflowY = '';
-                                    }
-                                }
-                            })
-
-                            _popUpResizeobserver.observe(settingsPopup)
-                        }
-
-                    }
-
-                    return {
-                        createSettingsPopUp: createSettingsPopUp,
-                        videoInputListSection: videoInputListSection,
-                        show: show,
-                        hide: hide
-                    }
-                }());
-
-                tool.settingsPopup.createSettingsPopUp();
-
-
+                    if(callback) callback();
+                }
             },
-
 
             /**
              * Create settings popup that appears while pointer hovers camera button on desktop/in modal box on mobile
-             * @method createSettingsPopup
+             * @method createAudioSettingsPopup
              */
             createAudioSettingsPopup: function () {
                 var tool = this;
@@ -2549,7 +2031,7 @@
                                                 tool.limits.selectMediaDialog(function (result) {
                                                     if (result.audio && result.video) {
                                                         tool.WebRTCLib.localMediaControls.canITurnCameraAndMicOn().then(function (result) {
-                                                            tool.settingsPopup.videoInputListSection.turnOnCamera();
+                                                            tool.videoInputsTool.turnOnCamera();
                                                             toggle();
                                                         });
 
@@ -3011,7 +2493,7 @@
                                     if (fbStreamingStartSettings.classList.contains('Q_working')) fbStreamingStartSettings.classList.remove('Q_working');
                                     fbLivetextLabel.innerHTML = Q.getObject("webrtc.settingsPopup.stopFBLive", tool.text);
                                     tool.livestreamingEditor.show();
-                                    if (tool.settingsPopup != null) tool.settingsPopup.hide();
+                                    if (tool.videoSettingsPopup != null) tool.videoSettingsPopup.hide();
                                 });
                             })
                             stopStreamingBtn.addEventListener('click', function () {
@@ -3219,7 +2701,7 @@
 
                                 tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.startStreaming(rtmpUrlsArr, 'custom');
                                 tool.livestreamingEditor.show();
-                                if (tool.settingsPopup != null) tool.settingsPopup.hide();
+                                if (tool.videoSettingsPopup != null) tool.videoSettingsPopup.hide();
 
                                 rtmpStreamingSettings.style.display = 'none';
                                 rtmpLiveSection.style.display = 'block';
@@ -3512,8 +2994,8 @@
                                 tool.livestreamingEditor.show();
                                 if (Q.info.isMobile) {
                                     tool.showControlsDialog('broadcast').hide();
-                                } else if (tool.settingsPopup != null)  {
-                                    tool.settingsPopup.hide();
+                                } else if (tool.videoSettingsPopup != null)  {
+                                    tool.videoSettingsPopup.hide();
                                 }
                             })
                             manageStreamBtnCon.appendChild(manageStreamBtn);

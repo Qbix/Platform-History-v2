@@ -620,6 +620,7 @@ Q.Tool.define({
 	"Streams/webrtc/preview/call" : "{{Streams}}/js/tools/webrtc/callWebrtcPreview.js",
 	"Streams/webrtc/controls"  : "{{Streams}}/js/tools/webrtc/controls.js",
 	"Streams/webrtc/participants"  : "{{Streams}}/js/tools/webrtc/participants.js",
+	"Streams/webrtc/videoInputs"  : "{{Streams}}/js/tools/webrtc/videoInputs.js",
 	"Streams/webrtc/livestreaming"  : "{{Streams}}/js/tools/webrtc/livestreamingEditor.js",
 	"Streams/webrtc/livestreaming/rtmpSender"  : "{{Streams}}/js/tools/webrtc/livestreamingRtmpSender.js",
 	"Streams/webrtc/livestreaming/canvasComposer"  : "{{Streams}}/js/tools/webrtc/livestreamingCanvasComposer.js",

@@ -1959,7 +1959,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                     Q.Pointer.activateTouchlabels(document.body);
 
-                    _controlsTool.participantsPopup().showScreen(screen);
+                    if(_controlsTool && _controlsTool.participantsListTool) _controlsTool.participantsListTool.showScreen(screen);
 
                     if(Q.info.isMobile){
                         renderMaximizedScreensGridMobile(screen);
@@ -5527,7 +5527,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     screen: screen,
                     participant: screen.participant
                 });*/
-                if(_controlsTool) _controlsTool.participantsPopup().update(screen.participant);
+                if(_controlsTool && _controlsTool.participantsListTool) _controlsTool.participantsListTool.updateItem(screen.participant);
                 updateLayout();
 
             }
@@ -5546,7 +5546,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                     screen: screen,
                     participant: screen.participant
                 });*/
-                if(_controlsTool) _controlsTool.participantsPopup().update(screen.participant);
+                if(_controlsTool && _controlsTool.participantsListTool) _controlsTool.participantsListTool.updateItem(screen.participant);
 
                 updateLayout();
             }
