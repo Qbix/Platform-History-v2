@@ -1926,9 +1926,13 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			return showInviteDialog();
 		}
 
-		var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
-		var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
-		var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// Commented out because now we check the server every time
+		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
+		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
+		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// if (!canHandleRoles.length) {
+		// 	showInviteDialog();
+		// }
 
 		Q.req('Users/roles', ['canAdd'], function (err, response) {
 			var roles = Q.getObject('slots.canAdd', response);
