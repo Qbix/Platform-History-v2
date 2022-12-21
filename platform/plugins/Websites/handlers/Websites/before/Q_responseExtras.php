@@ -26,7 +26,7 @@ function Websites_before_Q_responseExtras()
 	Q_Response::addScript('{{Websites}}/js/Websites.js', 'Websites');
 	Q_Response::setScriptData('Q.plugins.Websites.metadataStreamName', $metadataStreamName);
 	Q_Response::setScriptData('Q.plugins.Websites.userId', Users::communityId());
-	Q_Response::setScriptData('Q.plugins.Websites.metadataReload', Q_Config::expect('Websites', 'seoReload'));
+	Q_Response::setScriptData('Q.plugins.Websites.metadataReload', Q_Config::expect('Websites', 'metadataReload'));
     Q_Response::setScriptData('Q.plugins.Websites.videoHosts', Q_Config::get('Websites', 'videoHosts', array()));
     Q_Response::setScriptData('Q.plugins.Websites.videoExtensions', Q_Config::get('Websites', 'videoExtensions', array()));
     Q_Response::setScriptData('Q.plugins.Websites.audioHosts', Q_Config::get('Websites', 'audioHosts', array()));
