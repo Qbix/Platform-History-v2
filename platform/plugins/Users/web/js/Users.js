@@ -4228,7 +4228,7 @@
 			});
 		},
 
-		login: function (signedCallback, authenticatedCallback) {
+		login: function (signedCallback, authenticatedCallback, cancelCallback) {
 			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			var _prevMetaTitle = $('meta[name="title"]').attr('content');
@@ -4326,7 +4326,7 @@
 			});
 			function _cancel() {
 				_restoreTitle();
-				Q.handle(callback, Users, [null]);
+				Q.handle(cancelCallback, Users, [null]);
 			}
 			function _restoreTitle() {
 				if (_prevDocumentTitle) {
