@@ -5,6 +5,7 @@
  * Note: the root picker element should *NOT* be styled more than what’s here.
  */
 .picker {
+  display: none;
   font-size: 16px;
   text-align: left;
   line-height: 1.2;
@@ -16,6 +17,9 @@
       -ms-user-select: none;
           user-select: none;
   outline: none;
+}
+.picker[aria-hidden=false] {
+  display: block;
 }
 /**
  * The picker input element.
