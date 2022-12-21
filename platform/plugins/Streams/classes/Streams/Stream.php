@@ -963,7 +963,7 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * If the user is not participating in the stream yet, 
-	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
+	 * inserts a participant record and posts a "Streams/joined" or "Streams/visit" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
 	 * Otherwise updates the participant record's timestamp and other things.
 	 * Also relates every stream joined to streams named under the config field

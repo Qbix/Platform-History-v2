@@ -2843,7 +2843,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * If the user is not participating in the stream yet, 
-	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
+	 * inserts a participant record and posts a "Streams/joined" or "Streams/visit" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
 	 * Otherwise updates the participant record's timestamp and other things.
 	 * Also relates every stream joined to streams named under the config field
@@ -2984,7 +2984,7 @@ abstract class Streams extends Base_Streams
 				));
 				// Stream messages to post
 				$messages[$publisherId][$sn] = array(
-					'type' => 'Streams/join',
+					'type' => 'Streams/joined',
 					'instructions' => array(
 						'prevState' => null,
 						'extra' => isset($participant->extra) ? $participant->extra : array()
@@ -4027,7 +4027,7 @@ abstract class Streams extends Base_Streams
 	 *  @param {string|integer} [$options.adminLevel] upgrade to admin level being requested
 	 *  @param {array} [$options.permissions] array of additional permissions to request
 	 *  @param {array} [$options.actions] array of actions to take automatically
-	 *    right after a request is granted, e.g. "Streams/join" or "Streams/subscribe".
+	 *    right after a request is granted, e.g. "Streams/joined" or "Streams/subscribe".
 	 *    These can be interpreted in the "after" hook for "Streams/request" event.
 	 * @return {Streams_Request} The request row that has been inserted into the database
 	 */

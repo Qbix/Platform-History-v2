@@ -863,7 +863,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}, tool);
 
 		// new user joined
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/join')
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/joined')
 		.set(function(stream, message) {
 			state.stream = stream;
 			var messages = tool.prepareMessages(message, 'join');

@@ -428,7 +428,7 @@ Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
  * By the time this event happens, the platform has already taken any default actions
- * for standard events such as "Streams/join", etc. so the stream and all caches
+ * for standard events such as "Streams/joined", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @param {String} streamType type of the stream to which a message is posted, pass "" for all types
@@ -3074,7 +3074,7 @@ Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
  * By the time this event happens, the platform has already taken any default actions
- * for standard events such as "Streams/join", etc. so the stream and all caches
+ * for standard events such as "Streams/joined", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @static
@@ -3255,7 +3255,7 @@ Stream.onRelease = Q.Event.factory(_streamReleaseHandlers, ["", ""]);
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
  * By the time this event happens, the platform has already taken any default actions
- * for standard events such as "Streams/join", etc. so the stream and all caches
+ * for standard events such as "Streams/joined", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @param {String} [messageType] type of the message, or its ordinal, pass "" for all types
@@ -3694,7 +3694,7 @@ Stream.join = function _Stream_join (publisherId, streamName, callback) {
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/join', [slotName], function (err, data) {
+	Q.req('Streams/joined', [slotName], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
@@ -6355,9 +6355,9 @@ Q.onInit.add(function _Streams_onInit() {
 			});
 	}, 'Streams');
 
-	Users.Socket.onEvent('Streams/join').set(function _Streams_join_handler (p) {
+	Users.Socket.onEvent('Streams/joined').set(function _Streams_join_handler (p) {
 		// 'join' event contains new participant.
-		console.log('Users.Socket.onEvent("Streams/join")', p);
+		console.log('Users.Socket.onEvent("Streams/joined")', p);
 		Participant.get.cache.set(
 			[p.publisherId, p.streamName, p.userId],
 			0, p, [null, p]
@@ -6469,7 +6469,7 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				var prevState;
 				switch (msg.type) {
-					case 'Streams/join':
+					case 'Streams/joined':
 						prevState = message.getInstruction('prevState');
 						_updateParticipantCache(msg, 'participating', prevState, usingCached);
 						break;

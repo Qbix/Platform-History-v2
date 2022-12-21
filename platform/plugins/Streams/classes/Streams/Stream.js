@@ -835,7 +835,7 @@ Sp._fetchAsUser = function (options, callback) {
 
 /**
  * If the user is not participating in the stream yet,
- * inserts a participant record and posts a "Streams/join" type message to the stream.
+ * inserts a participant record and posts a "Streams/joined" type message to the stream.
  * Otherwise update timestamp
  * @method join
  * @param options={} {object}
@@ -863,7 +863,7 @@ Sp.join = function(options, callback) {
 			userId: userId
 		}).retrieve(function(err, sp) {
 			if (err) return callback.call(stream, err);
-			var type = 'Streams/join';
+			var type = 'Streams/joined';
 			if (sp.length) {
 				sp = sp[0];
 				var save = false, subscribed = options.subscribed;
@@ -900,7 +900,7 @@ Sp.join = function(options, callback) {
 			}
 			function _afterSaveParticipant(err) {
 				if (err) return callback.call(stream, err);
-				Users.Socket.emitToUser(userId, 'Streams/join', sp.fillMagicFields().getFields());
+				Users.Socket.emitToUser(userId, 'Streams/joined', sp.fillMagicFields().getFields());
 				stream.updateParticipantCounts(
 					'participating', sp.fields.state, _afterUpdateParticipantCounts
 				);

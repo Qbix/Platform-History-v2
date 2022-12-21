@@ -5722,7 +5722,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
          */
         function bindStreamsEvents(stream) {
             log('bindStreamsEvents', stream)
-            stream.onMessage('Streams/join').set(function (stream, message) {
+            stream.onMessage('Streams/joined').set(function (stream, message) {
 
             });
 

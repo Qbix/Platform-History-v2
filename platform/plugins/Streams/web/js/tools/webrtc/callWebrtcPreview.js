@@ -386,7 +386,7 @@
                     }
                 });
 
-                tool.stream.onMessage("Streams/join").set(function (stream, message) {
+                tool.stream.onMessage("Streams/joined").set(function (stream, message) {
                     console.log('PREVIEW stream JOIN event:', message)
                     let byUserId = message.byUserId;
                     updateTitle();
