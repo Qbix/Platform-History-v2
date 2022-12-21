@@ -4330,7 +4330,7 @@
 			}
 			function _restoreTitle() {
 				if (_prevDocumentTitle) {
-					document.title = Users.prevDocumentTitle;
+					document.title = _prevDocumentTitle;
 				}
 				if (_prevMetaTitle) {
 					$('meta[name="title"').attr('content', _prevMetaTitle)
