@@ -5882,7 +5882,12 @@ function _onResultHandler(subject, params, args, shared, original) {
 
 Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	var str = "_preview";
-	if (normalized.substr(normalized.length-str.length) === str) {
+	if (normalized.substr(normalized.length-str.length) !== str) {
+		return;
+	}
+	if (Q.typeOf(constructors["streams_default_preview"]) === "function") {
+		constructors[normalized] = constructors["streams_default_preview"];
+	} else {
 		constructors[normalized] = "{{Streams}}/js/tools/default/preview.js";
 	}
 }, 'Streams');
