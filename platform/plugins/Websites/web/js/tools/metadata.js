@@ -8,10 +8,10 @@ var Websites = Q.plugins.Websites;
 
 /**
  * Tool for admins to edit the meta tags on a page, for SEO purposes.
- * @method Websites seo
+ * @method Websites metadata
  * @param {Object} [options]
  *   @param {Object} [options.template] Optional fields to override info for seo tool template
- *   @param {String} [options.template.name="Websites/seo"] name of template
+ *   @param {String} [options.template.name="Websites/metadata"] name of template
  *   @param {Object} [options.inplace={}] Hash of {attributeName: options} for Streams/inplace tools
  *   <code>
  *        url: { inplace: { placeholder: "Url" } },
@@ -21,7 +21,7 @@ var Websites = Q.plugins.Websites;
  *   </code>
  */
 
-Q.Tool.define("Websites/seo", function () {
+Q.Tool.define("Websites/metadata", function () {
 	var tool = this, state = tool.state;
 	
 	if (state.skip) {
@@ -29,7 +29,7 @@ Q.Tool.define("Websites/seo", function () {
 	}
 	
 	var publisherId = Websites.userId;
-	var streamName = Websites.seoStreamName;
+	var streamName = Websites.metadataStreamName;
 	
 	var templateFields = {};
 	var ipo, i;
@@ -50,11 +50,11 @@ Q.Tool.define("Websites/seo", function () {
 			if (Q.getObject([0, 0, 'classname'], arguments) !== "Q_Exception_MissingRow") {
 				return console.warn(err);
 			}
-			Q.req("Websites/seo", ['stream'], function (err, data) {
+			Q.req("Websites/metadata", ['stream'], function (err, data) {
 				var msg = Q.firstErrorMessage(err) || Q.firstErrorMessage(data && data.errors);
 				if (msg) {
 					var args = [err, data];
-					return console.warn("POST to Websites/seo: "+ msg);
+					return console.warn("POST to Websites/metadata: "+ msg);
 				}
 				Q.Streams.Stream.construct(Q.getObject('slots.stream', data), {}, function (err) {
 					_proceed.call(this, err);
@@ -66,7 +66,7 @@ Q.Tool.define("Websites/seo", function () {
 			return;
 		}
 		Q.Template.render(
-			'Websites/seo',
+			'Websites/metadata',
 			templateFields,
 			function (err, html) {
 				if (err) return;
@@ -80,7 +80,7 @@ Q.Tool.define("Websites/seo", function () {
 
 {
 	template: {
-		name: "Websites/seo"
+		name: "Websites/metadata"
 	},
 	inplace: {
 		url: { inplace: { placeholder: "Url" } },
@@ -92,7 +92,7 @@ Q.Tool.define("Websites/seo", function () {
 
 );
 
-Q.Template.set("Websites/seo",
+Q.Template.set("Websites/metadata",
 	"{{& url}}{{& title}}{{& keywords}}{{& description}}"
 );
 

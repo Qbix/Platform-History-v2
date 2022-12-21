@@ -1,0 +1,16 @@
+UPDATE {{prefix}}stream
+SET name = REPLACE(name, 'Websites/seo/', 'Websites/metadata/');
+
+UPDATE {{prefix}}message
+SET streamName = REPLACE(name, 'Websites/seo/', 'Websites/metadata/');
+
+UPDATE {{prefix}}total
+SET streamName = REPLACE(name, 'Websites/seo/', 'Websites/metadata/');
+
+UPDATE {{prefix}}access
+SET streamName = REPLACE(name, 'Websites/seo/', 'Websites/metadata/');
+
+UPDATE {{prefix}}stream
+SET title = "Website Metadata",
+icon = REPLACE(icon, '/seo', '/metadata')
+WHERE name = 'Websites/metadata/';

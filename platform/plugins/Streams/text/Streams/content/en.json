@@ -55,6 +55,8 @@
         "ManageEmailSubscriptions": "manage your email subscriptions",
         "IfUnsubscribe": "If you want to unsubscribe",
         "*": "Message {{& message.fields.type}} to {{& stream.fields.title}}",
+        "Streams\/joined": "{{&call 'avatar.displayName'}} joined",
+        "Streams\/left": "{{&call 'avatar.displayName'}} left",
         "Streams\/chat\/message": "💬 {{&call 'avatar.displayName'}} said: {{& message.content}}",
         "Streams\/changed": "Changes in {{stream.fields.title}}",
         "Streams\/invite": "You were invited to {{& stream.fields.title}}",

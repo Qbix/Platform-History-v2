@@ -184,6 +184,14 @@
 						"subject": ["Streams/content", ["notifications", "*"]],
 						"log": "messages"
 					},
+					"Streams/joined": {
+						"description": "Someone has joined the stream",
+						"subject": ["Streams/content", ["notifications", "Streams/joined"]]
+					},
+					"Streams/left": {
+						"description": "Someone has left the stream",
+						"subject": ["Streams/content", ["notifications", "Streams/left"]]
+					},
 					"Streams/changed": {
 						"description": "Fields or attributes of the stream have changed",
 						"subject": ["Streams/content", ["notifications", "Streams/changed"]]
