@@ -644,12 +644,16 @@ html.Users_loggedIn .Users_whenLoggedOut {
 }
 
 #Users_login_usingPlatforms img {
-	width: 50px;
-	height: 50px;
+	width: 80px;
+	height: 80px;
 }
 
 #Users_login_usingPlatforms a {
 	display: inline-block;
 	color: #444444;
-	font-size: 13px;
+	font-size: 18px;
+}
+
+.Users_login_connectPlatforms {
+	line-height: 40px;
 }

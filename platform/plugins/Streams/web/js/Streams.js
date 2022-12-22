@@ -428,7 +428,7 @@ Streams.onEphemeral = Q.Event.factory(_ephemeralHandlers, ["", ""]);
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
  * By the time this event happens, the platform has already taken any default actions
- * for standard events such as "Streams/join", etc. so the stream and all caches
+ * for standard events such as "Streams/joined", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @param {String} streamType type of the stream to which a message is posted, pass "" for all types
@@ -1926,9 +1926,13 @@ Streams.invite = function (publisherId, streamName, options, callback) {
 			return showInviteDialog();
 		}
 
-		var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
-		var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
-		var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// Commented out because now we check the server every time
+		// var canAddRoles = Q.getObject('Q.plugins.Users.Label.canAdd') || [];
+		// var canRemoveRoles = Q.getObject('Q.plugins.Users.Label.canRemove') || [];
+		// var canHandleRoles = Array.from(new Set(canAddRoles.concat(canRemoveRoles))); // get unique array from merged arrays
+		// if (!canHandleRoles.length) {
+		// 	showInviteDialog();
+		// }
 
 		Q.req('Users/roles', ['canAdd'], function (err, response) {
 			var roles = Q.getObject('slots.canAdd', response);
@@ -3074,7 +3078,7 @@ Stream.onEphemeral = Q.Event.factory(_streamEphemeralHandlers, ["", "", ""]);
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
  * By the time this event happens, the platform has already taken any default actions
- * for standard events such as "Streams/join", etc. so the stream and all caches
+ * for standard events such as "Streams/joined", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @static
@@ -3255,7 +3259,7 @@ Stream.onRelease = Q.Event.factory(_streamReleaseHandlers, ["", ""]);
  * The platform makes sure the ordinals come in the right order, for each stream.
  * So you just have to handle the messages to update your tools, pages, etc.
  * By the time this event happens, the platform has already taken any default actions
- * for standard events such as "Streams/join", etc. so the stream and all caches
+ * for standard events such as "Streams/joined", etc. so the stream and all caches
  * are up-to-date, e.g. the participants include the newly joined participant, etc.
  * @event onMessage
  * @param {String} [messageType] type of the message, or its ordinal, pass "" for all types
@@ -3791,7 +3795,7 @@ Stream.subscribe = function _Stream_subscribe (publisherId, streamName, callback
 		"streamName": streamName,
 		"Q.clientId": Q.clientId()
 	});
-	Q.req('Streams/subscribe', [slotName], function (err, data) {
+	Q.req('Streams/subscribed', [slotName], function (err, data) {
 		var msg = Q.firstErrorMessage(err, data);
 		if (msg) {
 			var args = [err, data];
@@ -5882,7 +5886,12 @@ function _onResultHandler(subject, params, args, shared, original) {
 
 Q.Tool.onMissingConstructor.set(function (constructors, normalized) {
 	var str = "_preview";
-	if (normalized.substr(normalized.length-str.length) === str) {
+	if (normalized.substr(normalized.length-str.length) !== str) {
+		return;
+	}
+	if (Q.typeOf(constructors["streams_default_preview"]) === "function") {
+		constructors[normalized] = constructors["streams_default_preview"];
+	} else {
 		constructors[normalized] = "{{Streams}}/js/tools/default/preview.js";
 	}
 }, 'Streams');
@@ -6469,11 +6478,11 @@ Q.onInit.add(function _Streams_onInit() {
 				var updatedParticipants = true;
 				var prevState;
 				switch (msg.type) {
-					case 'Streams/join':
+					case 'Streams/joined':
 						prevState = message.getInstruction('prevState');
 						_updateParticipantCache(msg, 'participating', prevState, usingCached);
 						break;
-					case 'Streams/leave':
+					case 'Streams/left':
 						prevState = message.getInstruction('prevState');
 						_updateParticipantCache(msg, 'left', prevState, usingCached);
 						break;

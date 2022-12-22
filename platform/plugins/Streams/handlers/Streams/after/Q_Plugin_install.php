@@ -31,9 +31,11 @@ function Streams_after_Q_Plugin_install($params)
 
 	// if all streams already inserted - exit
 	if (!count($streamsNeedToInstall)) {
-		echo " already inserted".PHP_EOL;
+		echo "  already inserted".PHP_EOL;
 		return;
 	}
+
+	echo "\n  " . implode("\n  ", $streamsNeedToInstall) . "\n";
 	
 	echo PHP_EOL;
 

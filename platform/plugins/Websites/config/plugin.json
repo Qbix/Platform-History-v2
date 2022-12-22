@@ -2,7 +2,7 @@
 	"Q": {
 		"pluginInfo": {
 			"Websites": {
-				"version": "1.0.3",
+				"version": "1.0.4",
 				"compatible": "0.8",
 				"requires": {"Streams": "1.0"},
 				"connections": ["Users", "Streams", "Websites"]
@@ -15,7 +15,7 @@
 			"Q/sessionExtras": ["Websites/before/Q_sessionExtras"],
 			"Db/Row/Streams_Stream/saveExecute": ["Websites/before/Streams_Stream_saveExecute"],
 			"Streams/Stream/save/Websites/article": ["Websites/before/Streams_Stream_save_Websites_article"],
-			"Streams/Stream/save/Websites/seo": ["Websites/before/Streams_Stream_save_Websites_seo"]
+			"Streams/Stream/save/Websites/metadata": ["Websites/before/Streams_Stream_save_Websites_metadata"]
 		},
 		"handlersAfterEvent": {
 			"Streams/fetch/Websites/webpage": ["Websites/after/Streams_fetch_Websites_webpage"],
@@ -182,7 +182,7 @@
 		}
 	},
 	"Websites": {
-		"seoReload": true,
+		"metadataReload": true,
 		"permalinks": {
 			"routes": {}, /* whitelist of possible destinations */
 			"actions": {} /* whitelist of possible actions */

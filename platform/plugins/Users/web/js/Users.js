@@ -4215,6 +4215,7 @@
 				} else {
 					// TODO: have direct deeplinks into wallet browsers
 					var web3Modal = Web3.web3Modal || Web3.getWeb3Modal();
+					document.getElementById('WEB3_CONNECT_MODAL_ID').style.zIndex = Q.zIndexTopmost();
 					web3Modal.clearCachedProvider();
 					web3Modal.resetState();
 					web3Modal.connect().then(function (provider) {
@@ -4228,7 +4229,7 @@
 			});
 		},
 
-		login: function (signedCallback, authenticatedCallback) {
+		login: function (signedCallback, authenticatedCallback, cancelCallback) {
 			var _prevDocumentTitle = document.title;
 			document.title = Users.communityName;
 			var _prevMetaTitle = $('meta[name="title"]').attr('content');
@@ -4326,11 +4327,11 @@
 			});
 			function _cancel() {
 				_restoreTitle();
-				Q.handle(callback, Users, [null]);
+				Q.handle(cancelCallback, Users, [null]);
 			}
 			function _restoreTitle() {
 				if (_prevDocumentTitle) {
-					document.title = Users.prevDocumentTitle;
+					document.title = _prevDocumentTitle;
 				}
 				if (_prevMetaTitle) {
 					$('meta[name="title"').attr('content', _prevMetaTitle)

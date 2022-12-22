@@ -6,8 +6,8 @@ function Websites_before_Q_responseExtras()
 	$userId = $user ? $user->id : "";
 	$websitesUserId = Users::communityId();
 	$sha1 = sha1(Q_Dispatcher::uri());
-	$seoStreamName = "Websites/seo/$sha1";
-	$stream = Streams_Stream::fetch($userId, $websitesUserId, $seoStreamName);
+	$metadataStreamName = "Websites/metadata/$sha1";
+	$stream = Streams_Stream::fetch($userId, $websitesUserId, $metadataStreamName);
 	if ($stream) {
 		$fields = Q::take(
 			$stream->getAllAttributes(),
@@ -24,9 +24,9 @@ function Websites_before_Q_responseExtras()
 	}
 	Q_Response::addStylesheet('{{Websites}}/css/Websites.css', 'Websites');
 	Q_Response::addScript('{{Websites}}/js/Websites.js', 'Websites');
-	Q_Response::setScriptData('Q.plugins.Websites.seoStreamName', $seoStreamName);
+	Q_Response::setScriptData('Q.plugins.Websites.metadataStreamName', $metadataStreamName);
 	Q_Response::setScriptData('Q.plugins.Websites.userId', Users::communityId());
-	Q_Response::setScriptData('Q.plugins.Websites.seoReload', Q_Config::expect('Websites', 'seoReload'));
+	Q_Response::setScriptData('Q.plugins.Websites.metadataReload', Q_Config::expect('Websites', 'metadataReload'));
     Q_Response::setScriptData('Q.plugins.Websites.videoHosts', Q_Config::get('Websites', 'videoHosts', array()));
     Q_Response::setScriptData('Q.plugins.Websites.videoExtensions', Q_Config::get('Websites', 'videoExtensions', array()));
     Q_Response::setScriptData('Q.plugins.Websites.audioHosts', Q_Config::get('Websites', 'audioHosts', array()));
