@@ -1,4 +1,4 @@
-<h2><?php echo $types['Assets/service']['ManageServiceTemplates'] ?></h2>
+<h2><?php echo $text['services']['ManageServices'] ?></h2>
 <?php
 echo Q::tool("Streams/related", array(
 	"publisherId" => $communityId,
@@ -10,7 +10,7 @@ echo Q::tool("Streams/related", array(
 	"relatedOptions" => array("withParticipant" => false),
 	"creatable" => array(
 		'Assets/service' => array(
-			'title' => $types['Assets/service']['newService']
+			'title' => $text['services']['NewServiceTemplate']['Title']
 		)
 	)
 ));

@@ -435,8 +435,10 @@ class Assets_Credits extends Base_Assets_Credits
 		$more['toUserId'] = $assetsCredits->toUserId;
 		$more['fromUserId'] = $assetsCredits->fromUserId;
 		$more['fromPublisherId'] = $assetsCredits->fromPublisherId;
+		$more['fromUserName'] = $assetsCredits->getAttribute("fromUserName");
 		$more['fromStreamName'] = $assetsCredits->fromStreamName;
 		$more['toPublisherId'] = $assetsCredits->toPublisherId;
+		$more['toUserName'] = $assetsCredits->getAttribute("toUserName");
 		$more['toStreamName'] = $assetsCredits->toStreamName;
 
 		return $more;
@@ -481,10 +483,12 @@ class Assets_Credits extends Base_Assets_Credits
 
 		if ($toPublisherId && $toStreamName) {
 			$more['toStreamTitle'] = Streams_Stream::fetch($toPublisherId, $toPublisherId, $toStreamName)->title;
+			$more['toUserName'] = Streams::displayName($toPublisherId);
 		}
 
 		if ($fromPublisherId && $fromStreamName) {
 			$more['fromStreamTitle'] = Streams_Stream::fetch($fromPublisherId, $fromPublisherId, $fromStreamName, true)->title;
+			$more['fromUserName'] = Streams::displayName($fromPublisherId);
 		}
 
 		$assets_credits = new Assets_Credits();
