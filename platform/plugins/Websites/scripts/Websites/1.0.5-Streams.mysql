@@ -1,0 +1,3 @@
+UPDATE {{prefix}}stream
+SET type = REPLACE(type, 'Websites/seo', 'Websites/metadata')
+WHERE name LIKE 'Websites/seo';
