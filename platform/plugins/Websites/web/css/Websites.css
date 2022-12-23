@@ -8,8 +8,8 @@
 .Q_notMobile .Websites_side_column { float: right; width: 30%; }
 .Q_notMobile .Websites_article_tool .Streams_html_tool { width: 60%; font-size: 24px; }
 
-.Websites_seo_tool .Streams_inplace_tool,
-.Websites_seo_tool .Streams_inplace_tool_container { display: block; text-align: left; }
+.Websites_metadata_tool .Streams_inplace_tool,
+.Websites_metadata_tool .Streams_inplace_tool_container { display: block; text-align: left; }
 
 .Websites_presentation_tool .Streams_preview_tool.Streams_related_stream { cursor: pointer; }
 .Websites_presentation_tool .Streams_preview_tool.Streams_related_stream:hover { background: rgba(200, 200, 200, 0.2); }

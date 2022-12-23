@@ -1,6 +1,6 @@
 <?php
 
-function Websites_seo_post()
+function Websites_metadata_post()
 {
 	if (empty($_REQUEST['streamName'])) {
 		throw new Q_Exception_RequiredField(array('field' => 'streamName'));

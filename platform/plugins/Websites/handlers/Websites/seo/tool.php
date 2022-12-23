@@ -8,12 +8,12 @@
 	
 /**
  * Tool for admins to edit the url, title, keywords, description of the current page
- * @class Websites seo
+ * @class Websites metadata
  * @constructor
  * @param {Object} [$options] Options for the tool
  * @param {String} [$options.skipIfNotAuthorized=true] Whether to skip rendering the contents of the tool if the logged-in user is not authorized to edit the metadata for this page.
  */
-function Websites_seo_tool($options)
+function Websites_metadata_tool($options)
 {
 	$skipIfNotAuthorized = Q::ifset($options, 'skipIfNotAuthorized', true);
 	if ($skipIfNotAuthorized) {
