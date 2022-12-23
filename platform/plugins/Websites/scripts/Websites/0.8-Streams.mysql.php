@@ -22,7 +22,7 @@ function Websites_0_8_Streams_mysql()
 		"Streams/image/" => array('type' => "Streams/template", "title" => "Untitled Image", "icon" => "Streams/image", "content" => "", "deletable" => true),
 		"Streams/file/" => array('type' => "Streams/template", "title" => "Untitled File", "icon" => "files/_blank", "content" => "", "deletable" => true),
 		"Websites/article/" => array('type' => "Streams/template", "title" => "Untitled Article", "icon" => "default", "content" => "", "deletable" => true),
-		"Websites/seo/" => array('type' => "Streams/template", "title" => "Website SEO", "icon" => Q_Html::themedUrl("{{Websites}}/img/seo"), "content" => "", "deletable" => true),
+		"Websites/metadata/" => array('type' => "Streams/template", "title" => "Website Metadata", "icon" => Q_Html::themedUrl("{{Websites}}/img/metadata"), "content" => "", "deletable" => true),
 		"Websites/header" => array('type' => "Streams/image/icon", "title" => "Header image", "icon" => Q_Html::themedUrl("{{Websites}}/img/header"), "content" => ""),
 		"Websites/slogan" => array('type' => "Streams/text/small", "title" => "Website slogan", "icon" => "default", "content" => "The coolest website"),
 		"Websites/title" => array('type' => "Streams/text/small", "title" => "Website title", "icon" => "default", "content" => "Website Title"),

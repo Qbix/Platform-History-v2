@@ -63,7 +63,7 @@
 		"CreatePaidStream": "for creating {{toStreamName}}",
 		"JoinedPaidStream": "for reservation in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
 		"CreatedCommunity": "for creating community \"{{communityId}}\"",
-		"LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{toPublisherId}}' data-streamName='{{toStreamName}}'>{{toStreamTitle}}<\/a>\"",
+		"LeftPaidStream": "as reservation refund in \"<a data-publisherId='{{fromPublisherId}}' data-streamName='{{fromStreamName}}'>{{fromStreamTitle}}<\/a>\"",
 		"BoughtCredits": "Bought {{amount}} credits",
 		"BonusCredits": "Bonus {{amount}} credits",
 		"BuyAmountCredits": "Buy {{amount}} credits",
@@ -226,7 +226,8 @@
 			"LinkPlaceholder": "set additional info link",
 			"DescriptionPlaceholder": "Service description",
 			"SaveService": "Save Service",
-			"SelectRequiredParticipants": "Required Participants"
+			"SelectRequiredParticipants": "Required related participants",
+			"RequiredParticipantsDesc": "Please select related participants which is required to use this service (for example pets for \"Dogs show\", or children for \"Children's holiday\" etc). If service is paid, user will need to pay also for each related participants."
 		},
 		"EditServiceTemplate": {
 			"Title": "Edit Service"

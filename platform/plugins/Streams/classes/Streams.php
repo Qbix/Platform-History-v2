@@ -2843,7 +2843,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * If the user is not participating in the stream yet, 
-	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
+	 * inserts a participant record and posts a "Streams/joined" or "Streams/visited" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
 	 * Otherwise updates the participant record's timestamp and other things.
 	 * Also relates every stream joined to streams named under the config field
@@ -2918,6 +2918,7 @@ abstract class Streams extends Base_Streams
 			}
 			$streamNamesUpdate[] = $sn;
 			$type = ($participant->state === 'participating') ? 'visit' : 'join';
+			$messageType = "Streams/$type" . 'ed';
 			$prevState = $participant->state;
 			$participant->state = $state;
 			$updateCounts[$prevState][] = $sn;
@@ -2931,7 +2932,7 @@ abstract class Streams extends Base_Streams
 				));
 				// Stream messages to post
 				$messages[$publisherId][$sn] = array(
-					'type' => "Streams/$type",
+					'type' => $messageType,
 					'instructions' => array(
 						'prevState' => $prevState,
 						'extra' => isset($participant->extra) ? $participant->extra : array()
@@ -2984,7 +2985,7 @@ abstract class Streams extends Base_Streams
 				));
 				// Stream messages to post
 				$messages[$publisherId][$sn] = array(
-					'type' => 'Streams/join',
+					'type' => 'Streams/joined',
 					'instructions' => array(
 						'prevState' => null,
 						'extra' => isset($participant->extra) ? $participant->extra : array()
@@ -3029,7 +3030,7 @@ abstract class Streams extends Base_Streams
 	
 	/**
 	 * If the user is participating in (some of) the streams, sets state of participant row
-	 * as "left" and posts a "Streams/leave" type message to the streams.
+	 * as "left" and posts a "Streams/left" type message to the streams.
 	 * Also unrelates every stream left to streams named under the config field
 	 * "Streams"/"types"/$streamType/"participating"
 	 * @method leave
@@ -3140,7 +3141,7 @@ abstract class Streams extends Base_Streams
 			));
 			// Stream messages to post
 			$messages[$publisherId][$sn] = array(
-				'type' => 'Streams/leave',
+				'type' => 'Streams/left',
 				'instructions' => array(
 					'prevState' => $prevState,
 					'extra' => isset($participant->extra) ? $participant->extra : array()
@@ -3207,7 +3208,7 @@ abstract class Streams extends Base_Streams
 	 * @param {array} [$options.rule.filter] optionally set a filter for the rules to add
 	 * @param {boolean} [$options.skipRules=false] if true, do not attempt to create rules for new subscriptions
 	 * @param {boolean} [$options.skipAccess=false] if true, skip access check for whether user can join and subscribe
-	 * @param {boolean} [$options.skipMessage=false] if true, skip posting the "Streams/subscribe" message to the stream
+	 * @param {boolean} [$options.skipMessage=false] if true, skip posting the "Streams/subscribed" message to the stream
 	 * @return {array} An array of Streams_Participant rows from the database.
 	 */
 	static function subscribe(
@@ -3258,7 +3259,7 @@ abstract class Streams extends Base_Streams
 		$streamNamesMissing = array();
 		$streamNamesUpdate = array();
 		foreach ($streamNames as $sn) {
-			$messages[$publisherId][$sn] = array('type' => 'Streams/subscribe');
+			$messages[$publisherId][$sn] = array('type' => 'Streams/subscribed');
 			if (empty($subscriptions[$sn])) {
 				$streamNamesMissing[] = $sn;
 				continue;
@@ -4027,7 +4028,7 @@ abstract class Streams extends Base_Streams
 	 *  @param {string|integer} [$options.adminLevel] upgrade to admin level being requested
 	 *  @param {array} [$options.permissions] array of additional permissions to request
 	 *  @param {array} [$options.actions] array of actions to take automatically
-	 *    right after a request is granted, e.g. "Streams/join" or "Streams/subscribe".
+	 *    right after a request is granted, e.g. "Streams/joined" or "Streams/subscribed".
 	 *    These can be interpreted in the "after" hook for "Streams/request" event.
 	 * @return {Streams_Request} The request row that has been inserted into the database
 	 */

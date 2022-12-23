@@ -18,7 +18,7 @@
 				'class' => 'Q_button clickable',
 			)
 		)) ?>
-		<?php echo Q::tool("Websites/seo", array(
+		<?php echo Q::tool("Websites/metadata", array(
 			'skipIfNotAuthorized' => true,
 			'publisherId' => $publisherId,
 			'streamName' => $streamName

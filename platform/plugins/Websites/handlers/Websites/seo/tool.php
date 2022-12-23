@@ -11,7 +11,7 @@
  * @class Websites seo
  * @constructor
  * @param {Object} [$options] Options for the tool
- * @param {String} [$options.skipIfNotAuthorized=true] Whether to skip rendering the contents of the tool if the logged-in user is not authorized to edit the SEO information for this page.
+ * @param {String} [$options.skipIfNotAuthorized=true] Whether to skip rendering the contents of the tool if the logged-in user is not authorized to edit the metadata for this page.
  */
 function Websites_seo_tool($options)
 {
@@ -19,14 +19,14 @@ function Websites_seo_tool($options)
 	if ($skipIfNotAuthorized) {
 		$websitesUserId = Users::communityId();
 		$sha1 = sha1(Q_Dispatcher::uri());
-		$seoStreamName = "Websites/seo/$sha1";
-		$stream = Streams_Stream::fetch(null, $websitesUserId, $seoStreamName);
+		$metadataStreamName = "Websites/metadata/$sha1";
+		$stream = Streams_Stream::fetch(null, $websitesUserId, $metadataStreamName);
 		$user = Users::loggedInUser();
 		if (!$user or ($stream and !$stream->testWriteLevel('suggest'))) {
 			$options['skip'] = true;
 		}
 		if (!$stream
-		and !Streams::canCreateStreamType(Q::ifset($user, "id", null), $websitesUserId, 'Websites/seo')) {
+		and !Streams::canCreateStreamType(Q::ifset($user, "id", null), $websitesUserId, 'Websites/metadata')) {
 			$options['skip'] = true;
 		}
 	}
@@ -40,9 +40,9 @@ function Websites_seo_tool($options)
 	$userId = $user ? $user->id : "";
 	$communityId = Users::communityId();
 	$sha1 = sha1(Q_Dispatcher::uri());
-	$seoStreamName = "Websites/seo/$sha1";
+	$metadataStreamName = "Websites/metadata/$sha1";
 	$streams = Streams::fetch($userId, $communityId, array(
-		"Websites/header", "Websites/title", "Websites/slogan", $seoStreamName
+		"Websites/header", "Websites/title", "Websites/slogan", $metadataStreamName
 	));
 	foreach ($streams as $name => $s) {
 		if ($s) {

@@ -5,7 +5,7 @@ function Websites_seo_post()
 	if (empty($_REQUEST['streamName'])) {
 		throw new Q_Exception_RequiredField(array('field' => 'streamName'));
 	}
-	$prefix = "Websites/seo/";
+	$prefix = "Websites/metadata/";
 	if (substr($_REQUEST['streamName'], 0, strlen($prefix)) !== $prefix) {
 		throw new Q_Exception_WrongValue(array(
 			'field' => 'streamName',
@@ -14,7 +14,7 @@ function Websites_seo_post()
 	}
 	$user = Users::loggedInUser(true);
 	$publisherId = Users::communityId();
-	$type = "Websites/seo";
+	$type = "Websites/metadata";
 	if (!Streams::canCreateStreamType($user->id, $publisherId, $type)) {
 		throw new Users_Exception_NotAuthorized();
 	}

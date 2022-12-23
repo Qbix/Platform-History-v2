@@ -187,6 +187,7 @@ abstract class Assets extends Base_Assets
 	}
 
 	static $columns = array();
+	static $options = array();
 	const PAYMENT_TO_USER = 'PaymentToUser';
 	const JOINED_PAID_STREAM = 'JoinedPaidStream';
 	const LEFT_PAID_STREAM = 'LeftPaidStream';

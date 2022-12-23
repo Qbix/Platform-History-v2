@@ -236,7 +236,7 @@ function _Streams_participants(options) {
 			
 			Q.Streams.retainWith(tool).get(state.publisherId, state.streamName, function () {
 				var stream = this;
-				stream.onMessage("Streams/join")
+				stream.onMessage("Streams/joined")
 				.set(function (stream, message, messages) {
 					if (tool.avatarExists(message.byUserId)) {
 						return;
@@ -246,7 +246,7 @@ function _Streams_participants(options) {
 					++tool.state.count;
 					tool.stateChanged('count');
 				}, tool);
-				stream.onMessage("Streams/leave")
+				stream.onMessage("Streams/left")
 				.set(function (stream, message, messages) {
 					if (!tool.avatarExists(message.byUserId)) {
 						return;

@@ -963,7 +963,7 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * If the user is not participating in the stream yet, 
-	 * inserts a participant record and posts a "Streams/join" or "Streams/visit" type message
+	 * inserts a participant record and posts a "Streams/joined" or "Streams/visited" type message
 	 * to the stream, depending on whether the user is already participating in the stream.
 	 * Otherwise updates the participant record's timestamp and other things.
 	 * Also relates every stream joined to streams named under the config field
@@ -990,9 +990,9 @@ class Streams_Stream extends Base_Streams_Stream
 	
 	/**
 	 * If the user is participating in the stream, sets state of participant row
-	 * as "left" and posts a "Streams/leave" type message to the stream.
+	 * as "left" and posts a "Streams/left" type message to the stream.
 	 * Also unrelates every stream left to streams named under the config field
-	 * "Streams"/"types"/$streamType/"participating"
+	 * "Streams"/"types"/streamType/"participating"
 	 * @method leave
 	 * @param $options=array() {array} An associative array of options.
 	 * @param {string} [$options.userId] The user who is leaving the stream. Defaults to the logged-in user.
@@ -1015,7 +1015,7 @@ class Streams_Stream extends Base_Streams_Stream
 
 	/**
 	 * Subscribe to the stream, to start receiving notifications.
-	 * Posts a "Streams/subscribe" message to the stream.
+	 * Posts a "Streams/subscribed" message to the stream.
 	 * Also posts a "Streams/subscribed" message to user's "Streams/participating" stream.
 	 *	If options are not given check the subscription templates:
 	 *	1. generic publisher id and generic user

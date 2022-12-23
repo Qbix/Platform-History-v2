@@ -6207,11 +6207,15 @@ Q.Page = function (uriString) {
  * @param {String} [title=null] The title to go with the url, to override current title
  */
 Q.Page.push = function (url, title) {
+	var currentUrl = location.pathname + location.search + location.hash;
+	if (location.href === url || currentUrl === url || currentUrl === '/' + url) {
+		return null; // already here
+	}
 	var prevUrl = location.href;
 	url = Q.url(url);
 	var baseUrl = Q.baseUrl();
 	if (!url.startsWith(baseUrl)) {
-		return;
+		return false;
 	}
 	var parts = url.split('#');
 	var path = (url.substr(Q.baseUrl().length+1) || '');

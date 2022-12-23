@@ -863,7 +863,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}, tool);
 
 		// new user joined
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/join')
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/joined')
 		.set(function(stream, message) {
 			state.stream = stream;
 			var messages = tool.prepareMessages(message, 'join');
@@ -871,7 +871,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}, tool);
 
 		// new user left
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/leave')
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/left')
 		.set(function(stream, message) {
 			state.stream = stream;
 			var messages = tool.prepareMessages(message, 'leave');
@@ -879,7 +879,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		}, tool);
 
 		// new user left
-		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribe').set(function(stream, message) {
+		Q.Streams.Stream.onMessage(state.publisherId, state.streamName, 'Streams/subscribed').set(function(stream, message) {
 			state.stream = stream;
 			$te.find('.Streams_chat_subscription').attr({
 				'data-subscribed': 'true'

@@ -1,6 +1,6 @@
 <?php
 
-function Websites_before_Streams_Stream_save_Websites_seo($params)
+function Websites_before_Streams_Stream_save_Websites_metadata($params)
 {
 	$stream = $params['stream'];
 	if (!$stream->wasModified('attributes')) return;

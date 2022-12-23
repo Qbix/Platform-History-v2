@@ -72,3 +72,6 @@
 	background-color: blue;
 	color: #fff;
 }
+.Assets_service_composer .Q_dialog_content form .Assets_service_composer_requiredPaymentDesc {
+	font-size: 12px;
+}

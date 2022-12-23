@@ -142,7 +142,7 @@ Q.onInit.set(function () {
 	'Wesites/', ["Websites/content"]
 );
 Q.Tool.define({
-	"Websites/seo": "{{Websites}}/js/tools/seo.js",
+	"Websites/metadata": "{{Websites}}/js/tools/metadata.js",
 	"Websites/presentation": "{{Websites}}/js/tools/presentation.js",
 	"Websites/slide": "{{Websites}}/js/tools/slide.js",
 	"Websites/lookup": "{{Websites}}/js/tools/lookup.js",
@@ -158,13 +158,13 @@ Q.Tool.onActivate("Streams/chat").set(function () {
 }, 'Websites');
 
 Q.page('', function () {
-	var streamName = Websites.seoStreamName;
+	var streamName = Websites.metadataStreamName;
 	var publisherId = Q.plugins.Websites.userId;
 	Q.Streams.Stream.onAttribute(publisherId, streamName, "title")
 	.set(function (attributes, k) {
 		document.title = attributes[k];
 	}, "Websites");
-	if (Websites.seoReload) {
+	if (Websites.metadataReload) {
 		Q.Streams.Stream.onAttribute(publisherId, streamName, "url")
 		.set(function (attributes, k) {
 			var tail = attributes[k];
@@ -177,7 +177,7 @@ Q.page('', function () {
 	}
 	return function () {
 		Q.Streams.Stream.onAttribute(
-			Q.plugins.Websites.userId, Websites.seoStreamName, "title"
+			Q.plugins.Websites.userId, Websites.metadataStreamName, "title"
 		).remove("Websites");
 	}
 }, 'Websites');
