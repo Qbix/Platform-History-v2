@@ -73,12 +73,12 @@
 					}
 				}
 			},
-			"Websites/seo": {
+			"Websites/metadata": {
 				"create": true,
-                                "canCreate": ["Websites/admins"],
+				"canCreate": ["Websites/admins"],
 				"edit": true,
 				"defaults": {
-					"title": "Website SEO"
+					"title": "Website Metadata"
 				}
 			},
 			"Websites/article": {
