@@ -1,3 +1,8 @@
 UPDATE {{prefix}}stream
 SET type = REPLACE(type, 'Websites/seo', 'Websites/metadata')
-WHERE type LIKE 'Websites/seo';
+WHERE type = 'Websites/seo';
+
+UPDATE {{prefix}}stream
+SET title = REPLACE(title, 'Website SEO', 'Website Metadata')
+WHERE title = 'Website SEO'
+AND type = 'Websites/metadata';
