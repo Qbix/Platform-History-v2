@@ -49,7 +49,7 @@
      * @param {Object} options
      *  Hash of possible options
      */
-    Q.Tool.define("Streams/webrtc/videoInputs", function (options) {
+    Q.Tool.define("Streams/webrtc/video", function (options) {
         var tool = this;
         _controlsToolIcons = tool.state.controlsTool.getIcons();
 
@@ -85,6 +85,9 @@
                 webrtcSignalingLib.event.on('currentVideoinputDeviceChanged', function () {
                     console.log('declareEventsHandlers', tool)
                     tool.updateCamerasList();
+                });
+                webrtcSignalingLib.event.on('deviceListUpdated', function () {
+                    tool.loadCamerasList();
                 });
             },
             createList: function () {
@@ -573,7 +576,6 @@
             },
             refresh: function () {
                 var tool = this;
-                tool.refreshList();
             },
             log: function log(text) {
                 var tool = this;
