@@ -562,12 +562,9 @@ class Assets_Credits extends Base_Assets_Credits
 	static function checkJoinPaid($userId, $toStream, $fromStream = null)
 	{
 		$toPublisherId = Q::ifset($toStream, "publisherId", null);
-		$toStreamName = Q::ifset($toStream, "streamName", null);
-
+		$toStreamName = Q::ifset($toStream, "streamName", Q::ifset($toStream, "name", null));
 		if (!$toPublisherId || !$toStreamName) {
-			throw new Q_Exception_WrongValue(array(
-				'field' => 'stream'
-			));
+			throw new Exception('Assets_Credits::checkJoinPaid: toStream invalid');
 		}
 
 		$fromPublisherId = Q::ifset($fromStream, "publisherId", null);
