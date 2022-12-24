@@ -561,28 +561,17 @@ class Assets_Credits extends Base_Assets_Credits
 	 */
 	static function checkJoinPaid($userId, $toStream, $fromStream = null)
 	{
-		if (is_array($toStream)) {
-			$toPublisherId = $toStream['publisherId'];
-			$toStreamName = $toStream['streamName'];
-		} elseif ($toStream instanceof Streams_Stream) {
-			$toPublisherId = $toStream->publisherId;
-			$toStreamName = $toStream->name;
-		} else {
+		$toPublisherId = Q::ifset($toStream, "publisherId", null);
+		$toStreamName = Q::ifset($toStream, "streamName", null);
+
+		if (!$toPublisherId || !$toStreamName) {
 			throw new Q_Exception_WrongValue(array(
-				'field' => 'stream',
-				'range' => 'array or Streams_Stream'
+				'field' => 'stream'
 			));
 		}
 
-		$fromPublisherId = null;
-		$fromStreamName = null;
-		if (is_array($fromStream)) {
-			$fromPublisherId = $fromStream['publisherId'];
-			$fromStreamName = $fromStream['streamName'];
-		} elseif ($fromStream instanceof Streams_Stream) {
-			$fromPublisherId = $fromStream->publisherId;
-			$fromStreamName = $fromStream->name;
-		}
+		$fromPublisherId = Q::ifset($fromStream, "publisherId", null);
+		$fromStreamName = Q::ifset($fromStream, "streamName", null);
 
 		$joined_assets_credits = Assets_Credits::select()
 		->where(array(
@@ -603,10 +592,10 @@ class Assets_Credits extends Base_Assets_Credits
 			$left_assets_credits = Assets_Credits::select()
 			->where(array(
 				'toUserId' => $userId,
-				'toPublisherId' => $toPublisherId,
-				'toStreamName' => $toStreamName,
-				'fromPublisherId' => $fromPublisherId,
-				'fromStreamName' => $fromStreamName,
+				'toPublisherId' => $fromPublisherId,
+				'toStreamName' => $fromStreamName,
+				'fromPublisherId' => $toPublisherId,
+				'fromStreamName' => $toStreamName,
 				'reason' => 'LeftPaidStream'
 			))
 			->ignoreCache()
