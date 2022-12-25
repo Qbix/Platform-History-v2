@@ -1718,7 +1718,9 @@ class Q_Response
 	 */
 	static function processSessionExtras($hookType)
 	{
-		if (self::$skipSessionExtras or !Q_Request::shouldLoadExtras('session')) {
+		if (self::$skipSessionExtras
+		or !Q_Session::id()
+		or !Q_Request::shouldLoadExtras('session')) {
 			return false;
 		}
 		if (Q_Request::isAjax()) {
