@@ -13709,7 +13709,7 @@ Q.prompt = function(message, callback, options) {
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
-		'onActivate': function(dialog) {
+		'onActivate': {'Q.prompt': function(dialog) {
 			var field = $(dialog).find('input');
 			var fieldWidth = field.parent().width()
 				- field.next().outerWidth(true) - 5;
@@ -13724,7 +13724,7 @@ Q.prompt = function(message, callback, options) {
 				}
 			});
 			field[0].select();
-		},
+		}},
 		'onClose': {'Q.prompt': function() {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
 		}},
