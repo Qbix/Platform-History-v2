@@ -553,6 +553,7 @@
 			_doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
 		}, {
 			method: "post",
+			loadExtras: "session",
 			fields: Q.extend({ platform: platform }, fields)
 		});
 	}
@@ -1477,7 +1478,10 @@
 					}
 					priv.login_onConnect(u);
 				}
-			}, {"method": "post"});
+			}, {
+				method: "post",
+				loadExtras: "session"
+			});
 			return false;
 		}
 
@@ -3055,6 +3059,7 @@
 					}
 				}, {
 					method: 'post',
+					loadExtras: 'session',
 					fields: fields
 				});
 			}
@@ -3132,6 +3137,9 @@
 					Users.roles = res.slots.data.roles || {};
 					Users.onLogin.handle(user);
 				}
+			}, {
+				method: "post",
+				loadExtras: "session"
 			});
 		}
 		Users.lastSeenNonce = Q.nonce;
