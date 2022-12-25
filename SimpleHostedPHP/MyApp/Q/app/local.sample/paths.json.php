@@ -1,4 +1,4 @@
-return <<<JSON_CONFIG
+<?php return <<<JSON_CONFIG
 {
 	"platform": "/live/Q/platform"
 }

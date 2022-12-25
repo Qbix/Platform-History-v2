@@ -13723,7 +13723,9 @@ Q.prompt = function(message, callback, options) {
 					_done();
 				}
 			});
-			field[0].select();
+			setTimeout(function () {
+				field[0].select(); // give it a chance to appear
+			}, 0);
 		}},
 		'onClose': {'Q.prompt': function() {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
