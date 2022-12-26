@@ -270,7 +270,7 @@ class Q_Valid
 			return true;
 		}
 		$snf = Q_Config::get('Q', 'session', 'nonceField', 'nonce');
-		$sn = Q_Request::special($snf, null);
+		$sn = Q::ifset($_COOKIE, $snf, null);
 		if ($missingIsValid and !isset($sn)) {
 			return true;
 		}

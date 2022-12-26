@@ -3116,7 +3116,8 @@
 
 	Q.request.options.onProcessed.set(function (err, response) {
 		Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-		if (Users.lastSeenNonce !== Q.nonce
+		if (Users.lastSeenNonce 
+		&& Users.lastSeenNonce !== Q.nonce
 		&& !Users.login.occurring
 		&& !Users.authenticate.occurring
 		&& !Users.logout.occurring) {
@@ -3138,7 +3139,6 @@
 					Users.onLogin.handle(user);
 				}
 			}, {
-				method: "post",
 				loadExtras: "session"
 			});
 		}

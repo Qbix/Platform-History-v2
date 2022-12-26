@@ -10100,7 +10100,8 @@ function Q_hashChangeHandler() {
 	}
 	if (Q_hashChangeHandler.ignore) {
 		Q_hashChangeHandler.ignore = false;
-	} else if (url != Q_hashChangeHandler.currentUrl) {
+	} else if (url != Q_hashChangeHandler.currentUrl
+	&& url !== Q_hashChangeHandler.currentUrlTail) {
 		Q.handle(url.indexOf(baseUrl) == -1 ? baseUrl + '/' + url : url);
 		result = true;
 	}

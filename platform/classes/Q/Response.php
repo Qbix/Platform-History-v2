@@ -2010,6 +2010,27 @@ class Q_Response
 	}
 
 	/**
+	 * Call this to send a header code for the first error added
+	 * @return {integer} The error code sent to http_response_code
+	 */
+	static function errorHeaderCode() {
+		$code = null;
+		if ($errors = Q_Response::getErrors()) {
+			foreach ($errors as $error) {
+				if ($error->httpResponseCode) {
+					$code = $error->httpResponseCode;
+					http_response_code($code);
+					break;
+				}
+			}
+		}
+		if (!$code) {
+			http_response_code(500);
+		}
+		return $code;
+	}
+
+	/**
 	 * @method setIgnoreUserAbort
 	 * @static
 	 * @param {boolean} [$value=null]
