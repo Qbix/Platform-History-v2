@@ -75,6 +75,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			var observer = Q.Pointer.waitUntilVisible($this[0], _clickify);
 			observer.observedElement = $this[0];
 			$this.data('observers').push(observer);
+			return;
 		}
 
 		state.oldStyle = $this.attr('style');
