@@ -9287,10 +9287,11 @@ Q.replace = function _Q_replace(container, source, options) {
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
-		&& !incomingElement.getAttribute('data-Q-replace') !== null) {
+		&& !incomingElement.getAttribute('data-Q-replace') !== null
+		&& replaceElements.indexOf(element) < 0) {
 			// If a tool exists with this exact id and has "data-Q-retain",
 			// then re-use it and all its HTML elements, unless
-			// the new tool HTML has data-Q-replace.
+			// the new tool HTML has data-Q-replace or is in options.replaceElements.
 			// This way tools can avoid doing expensive operations each time
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
@@ -9881,8 +9882,8 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 };
 
 /**
- * Like Q.request but processes extras from the response,
- * such scriptData, scriptLines, css, etc.
+ * Similar to Q.request but processes the response like loadUrl,
+ * handling such scriptData, scriptLines, HTML classes, css, etc.
  * Callback receives (err, data)
  */
 Q.loadUrl.request = function (url, slotNames, callback, options) {
@@ -9891,26 +9892,13 @@ Q.loadUrl.request = function (url, slotNames, callback, options) {
 		ignorePage: true,
 		ignoreLoadingErrors: true,
 		ignoreHash: true,
+		dontReload: true,
 		handler: function doNothing () { return null; },
 		slotNames: slotNames,
 		onRequestProcessed: function (err, response) {
 			Q.handle(callback, this, [null, response]);
 		}
 	}, options));
-};
-
-/**
- * Like Q.req but processes extras from the response,
- * such scriptData, scriptLines, css, etc.
- * Callback receives (err, data)
- */
-Q.loadUrl.req = function (uri, slotNames, callback, options) {
-	if (typeof options === 'string') {
-		options = {'method': options};
-	}
-	var args = arguments, index = (typeof arguments[0] === 'string') ? 0 : 1;
-	args[index] = Q.action(args[index], null, options);
-	return Q.loadUrl.request.apply(this, args);
 };
 
 Q.loadUrl.loading = {};
