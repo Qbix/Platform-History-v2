@@ -45,6 +45,7 @@
  */
 Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	var $this = $(this);
+	$this.data('observers', []);
 
 	// if id empty, set random unique id
 	if (!$this.attr("id")) {
@@ -71,13 +72,9 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			if (!$this.closest('body').length) {
 				return;
 			}
-			if (isNaN(timing.waitingPeriod) || Date.now() - originalTime >= timing.waitingPeriod) {
-				return;
-			}
-			if (timing.waitingInterval) {
-				setTimeout(_clickify, timing.waitingInterval);
-			}
-			return;
+			var o = Q.Pointer.waitUntilVisible($this[0], _clickify);
+			o.observedElement = $this[0];
+			this.data('observers').push(o);
 		}
 
 		state.oldStyle = $this.attr('style');
@@ -528,6 +525,9 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		this[0].restoreSelections();
 		Q.Pointer.onEnded.remove(state.onEndedKey);
 		$container.remove();
+		Q.each(this.observers, function () {
+			this.data('observers').unobserve(this.observedElement);
+		});
 	}
 }
 
