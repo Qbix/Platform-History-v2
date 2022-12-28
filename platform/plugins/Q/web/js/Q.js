@@ -9874,12 +9874,14 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
  * such scriptData, scriptLines, css, etc.
  */
 Q.loadUrl.request = function (url, slotNames, callback, options) {
-	return Q.loadUrl(url, slotNames, callback, Q.extend({
+	return Q.loadUrl(url, Q.extend({
 		ignoreHistory: true,
 		ignorePage: true,
 		ignoreLoadingErrors: true,
 		ignoreHash: true,
-		handler: function noop () { }
+		handler: function noop () { },
+		slotNames: slotNames,
+		onResponse: callback
 	}, options));
 };
 
