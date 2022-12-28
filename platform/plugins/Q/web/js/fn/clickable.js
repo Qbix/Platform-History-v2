@@ -74,7 +74,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			}
 			var o = Q.Pointer.waitUntilVisible($this[0], _clickify);
 			o.observedElement = $this[0];
-			this.data('observers').push(o);
+			$this.data('observers').push(o);
 		}
 
 		state.oldStyle = $this.attr('style');
@@ -525,8 +525,8 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		this[0].restoreSelections();
 		Q.Pointer.onEnded.remove(state.onEndedKey);
 		$container.remove();
-		Q.each(this.observers, function () {
-			this.data('observers').unobserve(this.observedElement);
+		Q.each($this.data('observers'), function () {
+			this.unobserve(this.observedElement);
 		});
 	}
 }
