@@ -1428,7 +1428,7 @@
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, 'data', function (err, response) {
+			Q.request(url, ['data', 'activateLink'], function (err, response) {
 
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
@@ -1536,7 +1536,10 @@
 																$(this).plugin('Q/validator', 'reset');
 															});
 														Q.Dialogs.pop();
-														Q.handle(Q.getObject('slots.data.activateLink', response));
+														Q.handle(
+															Q.getObject('slots.data.activateLink', response)
+															|| Q.getObject('slots.activateLink', response)
+														);
 													})
 											)
 										);
