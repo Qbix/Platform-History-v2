@@ -3987,7 +3987,7 @@
 						identifier: me.email,
 						identifierType: 'email'
 					});
-					Q.request(url, ['data'], function (err, response) {
+					Q.loadUrl.request(url, ['data'], function (err, response) {
 						if (response.errors) {
 							return;
 						}
