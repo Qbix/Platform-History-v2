@@ -5560,6 +5560,27 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 	this.options = options;
 };
 
+Q.Request.processScriptDataAndLines = function (response) {
+	if (response.scriptData) {
+		Q.each(response.scriptData,
+		function _Q_scriptData_each() {
+			Q.each(this, function _Q_loadUrl_scriptData_assign(k, v) {
+				Q.setObject(k, v);
+			});
+		});
+	}
+	if (response.sessionDataPaths) {
+		Q.Session.paths = response.sessionDataPaths;
+	}
+	if (response.scriptLines) {
+		for (i in response.scriptLines) {
+			if (response.scriptLines[i]) {
+				eval(response.scriptLines[i]);
+			}
+		}
+	}
+}
+
 /**
  * A Q.Cache object stores items in a cache and throws out least-recently-used ones.
  * @class Q.Cache
@@ -7786,27 +7807,10 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.handle(o.onRedirect, Q, [response.redirect.url]);
 				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, response, redirected, processScriptDataAndLines);
-			Q.handle(o.onProcessed, this, [err, response, redirected, processScriptDataAndLines]);
-			function processScriptDataAndLines() {
-				if (response.scriptData) {
-					Q.each(response.scriptData,
-					function _Q_scriptData_each() {
-						Q.each(this, function _Q_loadUrl_scriptData_assign(k, v) {
-							Q.setObject(k, v);
-						});
-					});
-				}
-				if (response.sessionDataPaths) {
-					Q.Session.paths = response.sessionDataPaths;
-				}
-				if (response.scriptLines) {
-					for (i in response.scriptLines) {
-						if (response.scriptLines[i]) {
-							eval(response.scriptLines[i]);
-						}
-					}
-				}
+			callback && callback.call(this, err, response, redirected, _processScriptDataAndLines);
+			Q.handle(o.onProcessed, this, [err, response, redirected, _processScriptDataAndLines]);
+			function _processScriptDataAndLines() {
+				Q.Request.processScriptDataAndLines(response);
 			}
 		};
 

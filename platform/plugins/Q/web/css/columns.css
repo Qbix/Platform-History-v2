@@ -251,28 +251,28 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_1 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(10px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(25px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_2 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(25px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(30px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_3 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(45px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(45px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_4 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(65px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(55px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_column_5 {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(1deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(85px) translateZ(2px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(65px) translateZ(2px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_columns_overlapped {
 	display: inline-block;
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(-15px) translateZ(-15px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(-20px) translateZ(-15px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_1.Q_columns_overlapped {
@@ -280,15 +280,15 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_2.Q_columns_overlapped {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(25px) translateZ(-5px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(20px) translateZ(-5px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_3.Q_columns_overlapped {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(45px) translateZ(-5px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(33px) translateZ(-5px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_4.Q_columns_overlapped {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(65px) translateZ(-5px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(45px) translateZ(-5px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_5.Q_columns_overlapped {
