@@ -1742,7 +1742,6 @@ Streams.invite = function (publisherId, streamName, options, callback) {
         }, { method: 'post', fields: o, baseUrl: baseUrl });
     }
     function _sendBy(r, text) {
-		console.log('invite 2', o, r, text)
         // Send a request to create the actual invite
         Q.req(o.uri, ['data', 'stream'], function (err, response) {
             var msg = Q.firstErrorMessage(err, response && response.errors);

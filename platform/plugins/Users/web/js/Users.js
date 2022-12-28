@@ -1457,7 +1457,7 @@
 						priv.result = 'resend';
 						$('button', $this).html('Sent').attr('disabled', 'disabled');
 						Q.Dialogs.pop();
-						Users.Dialogs.activate(user.activateLink);
+						Users.Dialogs.activate(priv.activateLink);
 						return;
 					case 'register':
 						priv.result = 'register';
