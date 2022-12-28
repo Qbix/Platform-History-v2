@@ -18,6 +18,8 @@
         reload: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512"> <g> <g> <path d="m146.2,86.1c68.3-43.8 155.5-41.9 221.2,1.1l-20.3,2.5c-11.2,1.4-19.1,11.6-17.8,22.8 1.3,10.3 10.1,17.9 20.2,17.9 0.8,0 72.4-8.8 72.4-8.8 5.4-0.7 10.3-3.4 13.6-7.7 3.3-4.3 4.8-9.7 4.1-15.1l-8.7-69.9c-1.4-11.2-11.7-19.2-22.8-17.7-11.2,1.4-19.1,11.6-17.7,22.8l2.7,21.3c-79.3-53.9-185.8-57-268.9-3.6-97.1,62.3-137.5,185.5-96.1,293 3.1,8.1 13.2,16.2 26.4,11.7 10.7-3.7 15.8-15.9 11.7-26.4-34.4-89.5-0.8-192 80-243.9z"/> <path d="m484,168.4c-3.1-8.1-13.2-16.2-26.4-11.7-10.7,3.7-15.8,15.9-11.7,26.4 34.5,89.5 0.8,192-80,243.9-68.3,43.8-155.5,41.9-221.2-1.1l20.3-2.5c11.2-1.4 19.1-11.6 17.8-22.8-1.3-10.3-10.1-17.9-20.2-17.9-0.8,0-72.4,8.8-72.4,8.8-5.4,0.7-10.3,3.4-13.6,7.7-3.3,4.3-4.8,9.7-4.1,15.1l8.7,69.9c1.4,11.2 11.7,19.2 22.8,17.7 11.2-1.4 19.1-11.6 17.7-22.8l-2.7-21.3c79.4,53.8 185.9,56.9 269.1,3.5 96.9-62.2 137.3-185.4 95.9-292.9z"/> </g> </g> </svg>'
     }
 
+    var _controlsToolIcons = []; 
+
     var ua = navigator.userAgent;
     var _isMobile = false;
     var _isiOS = false;
@@ -88,6 +90,8 @@
                 throw "Video room should be created";
             }*/
 
+            _controlsToolIcons = tool.state.controlsTool.getIcons();
+
             //child tools
             tool.livestreamingEditor = null;
             tool.livestreamingCanvasComposerTool = null;
@@ -157,7 +161,7 @@
                         };
 
                         var itemEl = document.createElement('DIV');
-                        itemEl.className = 'Streams_webrtc_popup-scenes-item';
+                        itemEl.className = 'live-editor-popup-scenes-item';
                         this.itemEl = itemEl;
                         this.itemEl.innerHTML = sceneInstance.title;
 
@@ -198,9 +202,9 @@
 
                     function selectScene(sceneItem) {
                         console.log('selectScene', sceneItem, sceneItem.itemEl);
-                        if (sceneItem.itemEl && !sceneItem.itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) {
+                        if (sceneItem.itemEl && !sceneItem.itemEl.classList.contains('live-editor-popup-scenes-item-active')) {
                             console.log('selectScene add class');
-                            sceneItem.itemEl.classList.add('Streams_webrtc_popup-scenes-item-active');
+                            sceneItem.itemEl.classList.add('live-editor-popup-scenes-item-active');
                         }
                         var switchScene = _activeScene != sceneItem;
                         _activeScene = sceneItem;
@@ -213,13 +217,13 @@
                         tool.livestreamingCanvasComposerTool.canvasComposer.selectScene(_activeScene.sceneInstance);
                         for (var i in _scenesList) {
                             if (_scenesList[i] == sceneItem) continue;
-                            if (_scenesList[i].itemEl.classList.contains('Streams_webrtc_popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('Streams_webrtc_popup-scenes-item-active');
+                            if (_scenesList[i].itemEl.classList.contains('live-editor-popup-scenes-item-active')) _scenesList[i].itemEl.classList.remove('live-editor-popup-scenes-item-active');
                         }
 
                         if(_resizingElement) _resizingElement.style.display = 'none';
 
                         if (_sourcesColumnEl) {
-                            let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.Streams_webrtc_popup-sources-inner');
+                            let sourceColAlreadyExists = _sourcesColumnEl.querySelector('.live-editor-popup-sources-inner');
                             if(sourceColAlreadyExists != null && sourceColAlreadyExists.parentElement) {
                                 sourceColAlreadyExists.parentElement.removeChild(sourceColAlreadyExists);
                             }
@@ -276,7 +280,7 @@
                     function createSceneItem(item) {
                         if (item == null) return;
                         var itemEl = document.createElement('DIV');
-                        itemEl.className = 'Streams_webrtc_popup-scenes-item';
+                        itemEl.className = 'live-editor-popup-scenes-item';
                         item.itemEl = itemEl;
                         _scenesList.push(item)
                         _scenesEl.appendChild(itemEl);
@@ -366,38 +370,38 @@
 
                         console.log('addNewScenePopup')
                         var dialog = document.createElement('DIV');
-                        dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-scene Streams_webrtc_hidden';
+                        dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-scene live-editor-hidden';
                         _dialogEl = dialog;
                         var close = document.createElement('div');
-                        close.className = 'Streams_webrtc_close-dialog-sign';
+                        close.className = 'live-editor-close-dialog-sign';
                         close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                         close.style.backgroundRepeat = 'no-repeat';
                         close.style.backgroundSize = 'cover';
 
                         var dialogTitle = document.createElement('H3');
                         dialogTitle.innerHTML = 'Add scene';
-                        dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                        dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                         var dialogInner = document.createElement('DIV');
-                        dialogInner.className = 'Streams_webrtc_dialog-inner';
+                        dialogInner.className = 'live-editor-dialog-inner';
                         var boxContent = document.createElement('DIV');
-                        boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
 
                         var sceneNameInputCon = document.createElement('DIV');
-                        sceneNameInputCon.className = 'Streams_webrtc_dialog-name-con';
+                        sceneNameInputCon.className = 'live-editor-dialog-name-con';
                         var sceneNameInputText = document.createElement('SPAN');
-                        sceneNameInputText.className = 'Streams_webrtc_dialog-name-text';
+                        sceneNameInputText.className = 'live-editor-dialog-name-text';
                         sceneNameInputText.innerHTML = 'Please, enter name of scene';
                         var sceneNameInput = document.createElement('INPUT');
-                        sceneNameInput.className = 'Streams_webrtc_dialog-name';
+                        sceneNameInput.className = 'live-editor-dialog-name';
                         sceneNameInput.type = 'text';
                         sceneNameInput.placeholder = 'Enter name of scene';
                         sceneNameInput.name = 'nameOfScene';
 
                         var buttonsCon = document.createElement('DIV');
-                        buttonsCon.className = 'Streams_webrtc_dialog-buttons';
+                        buttonsCon.className = 'live-editor-dialog-buttons';
                         var okButton = document.createElement('BUTTON');
-                        okButton.className = 'Streams_webrtc_dialog-ok-btn';
+                        okButton.className = 'live-editor-dialog-ok-btn';
                         okButton.innerHTML = 'OK';
 
                         sceneNameInputCon.appendChild(sceneNameInputText);
@@ -463,8 +467,8 @@
 
                         function showDialog(e) {
                             sceneNameInput.value = '';
-                            if (_dialogEl.classList.contains('Streams_webrtc_hidden')) {
-                                _dialogEl.classList.remove('Streams_webrtc_hidden');
+                            if (_dialogEl.classList.contains('live-editor-hidden')) {
+                                _dialogEl.classList.remove('live-editor-hidden');
                                 var _clientX = e.clientX;
                                 var _clientY = e.clientY;
 
@@ -482,8 +486,8 @@
                         }
 
                         function hideDialog() {
-                            if (!_dialogEl.classList.contains('Streams_webrtc_hidden')) {
-                                _dialogEl.classList.add('Streams_webrtc_hidden');
+                            if (!_dialogEl.classList.contains('live-editor-hidden')) {
+                                _dialogEl.classList.add('live-editor-hidden');
                                 _isHidden = true;
                             }
                         }
@@ -503,35 +507,22 @@
 
                     function createScenesCol() {
                         var scenesColumn = document.createElement('DIV');
-                        scenesColumn.className = 'Streams_webrtc_popup-scenes';
-                        var scenesColumnTitle = document.createElement('DIV');
-                        scenesColumnTitle.className = 'Streams_webrtc_popup-scenes-title';
-                        var scenesColumnTitleInner = document.createElement('DIV');
-                        scenesColumnTitleInner.className = 'Streams_webrtc_popup-scenes-title-inner';
-                        var scenesColumnTitleTab = document.createElement('DIV');
-                        scenesColumnTitleTab.className = 'Streams_webrtc_popup-scenes-title-tab Streams_webrtc_popup-scenes-title-tab-active';
-                        var scenesColumnTitleTabInner = document.createElement('DIV');
-                        scenesColumnTitleTabInner.className = 'Streams_webrtc_popup-scenes-title-tab-inner';
-                        scenesColumnTitleTabInner.innerHTML = 'Scenes';
-                        scenesColumnTitleTab.appendChild(scenesColumnTitleTabInner);
-                        scenesColumnTitleInner.appendChild(scenesColumnTitleTab);
-                        scenesColumnTitle.appendChild(scenesColumnTitleInner);
-                        scenesColumn.appendChild(scenesColumnTitle);
+                        scenesColumn.className = 'live-editor-popup-scenes';
                         var scenesColumnBody = document.createElement('DIV');
-                        scenesColumnBody.className = 'Streams_webrtc_popup-scenes-body';
+                        scenesColumnBody.className = 'live-editor-popup-scenes-body';
                         var scenesColumnBodyInner = document.createElement('DIV');
-                        scenesColumnBodyInner.className = 'Streams_webrtc_popup-scenes-body-inner';
+                        scenesColumnBodyInner.className = 'live-editor-popup-scenes-body-inner';
                         scenesColumnBody.appendChild(scenesColumnBodyInner);
 
                         //var scenesColumnControl = document.createElement('DIV');
-                        //scenesColumnControl.className = 'Streams_webrtc_popup-scenes-control';
+                        //scenesColumnControl.className = 'live-editor-popup-scenes-control';
                         //scenesColumnBody.appendChild(scenesColumnControl);
                         var scenesColumnControl = document.createElement('DIV');
-                        scenesColumnControl.className = 'Streams_webrtc_popup-scenes-control';
+                        scenesColumnControl.className = 'live-editor-popup-scenes-control';
 
                         var scenesColumnControlAddBtn = document.createElement('DIV');
-                        scenesColumnControlAddBtn.className = 'Streams_webrtc_popup-scenes-control-btn Streams_webrtc_popup-scenes-control-btn-add';
-                        if(!tool.state.managingScenes) scenesColumnControlAddBtn.classList.add('Streams_webrtc_inactive');
+                        scenesColumnControlAddBtn.className = 'live-editor-popup-scenes-control-btn live-editor-popup-scenes-control-btn-add';
+                        if(!tool.state.managingScenes) scenesColumnControlAddBtn.classList.add('live-editor-inactive');
                         scenesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
 
                         scenesColumnControlAddBtn.addEventListener('click', function (event) {
@@ -541,8 +532,8 @@
                         scenesColumnControl.appendChild(scenesColumnControlAddBtn);
 
                         var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn Streams_webrtc_popup-scenes-control-btn-remove';
-                        if(!tool.state.managingScenes) scenesColumnControlBtn.classList.add('Streams_webrtc_inactive');
+                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn live-editor-popup-scenes-control-btn-remove';
+                        if(!tool.state.managingScenes) scenesColumnControlBtn.classList.add('live-editor-inactive');
                         scenesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
                         scenesColumnControlBtn.addEventListener('click', function () {
                             removeScene();
@@ -550,14 +541,14 @@
                         scenesColumnControl.appendChild(scenesColumnControlBtn);
 
                         var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn';
+                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn';
                         scenesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
                         scenesColumnControlBtn.addEventListener('click', function () {
                             moveSceneUp();
                         })
                         scenesColumnControl.appendChild(scenesColumnControlBtn);
                         var scenesColumnControlBtn = document.createElement('DIV');
-                        scenesColumnControlBtn.className = 'Streams_webrtc_popup-scenes-control-btn';
+                        scenesColumnControlBtn.className = 'live-editor-popup-scenes-control-btn';
                         scenesColumnControlBtn.innerHTML = _streamingIcons.moveDown;
                         scenesColumnControlBtn.addEventListener('click', function () {
                             moveSceneDown();
@@ -600,6 +591,31 @@
                     var _audioSourcesListEl = null;
                     var _audioSourcesEl = null;
 
+                    var _videoTool = null;
+                    var _videoPopup = null;
+
+                    function initVideoTool() {        
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                'DIV',
+                                "Streams/webrtc/video",
+                                {
+                                    controlsTool: tool.state.controlsTool,
+                                    webrtcSignalingLib: tool.state.webrtcSignalingLib,
+                                    webrtcUserInterface: tool.state.webrtcUserInterface
+                                }
+                            ),
+                            {},
+                            onVideoInputsListCreated
+                        );
+        
+                        function onVideoInputsListCreated() {
+                            _videoTool = this;
+                            _videoTool.loadCamerasList();
+                        }
+                    }
+                    initVideoTool();
+
                     var ListItem = function (name) {
                         this.active = true;
                         this.title = name != null ? name : null;
@@ -633,7 +649,7 @@
                         console.log('sortList: listArr', listArr.map(el => { return el.itemEl.innerText }));
                         console.log('sortList: NOT sortedElements', Array.from(listEl.childNodes).map(el => { return el.innerText }))
 
-                        listEl.innerHTML == '';
+                        //listEl.innerHTML == '';
                         for (let e = 0; e < listArr.length; e++) {
                             listEl.appendChild(listArr[e].itemEl)
                         }
@@ -655,10 +671,11 @@
                     }
 
                     var visualSources = (function () {
-                        var VisualListItem = function (name) {
-                            var sourceInstance =this;
-                            this.listType = 'video';
-                            this.title = name != null ? name : null;
+                        var VisualListItem = function (source) {
+                            var sourceInstance = this;
+                            this.listType = 'visual';
+                            this._sourceInstance = source;
+                            this._title = source.title ? source.title : (source.name != null ? source.name : source.sourceType);
                             this.remove = function () {
                                 var currentitem = this;
                                 if(this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
@@ -713,6 +730,46 @@
                                     sourceInstance.show();
                                 }
                             };
+
+                            this.unmute = function() {
+                                console.log('mute')
+
+                                sourceInstance.sourceInstance.audioSource.active = true;
+                                if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
+                                    _webrtcSignalingLib.localMediaControls.enableAudio();
+                                } else {
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, false);
+                                    this.switchAudioActivenessIcon(true);
+                                    syncList();
+                                }
+                                
+                            };
+                            this.mute = function() {
+                                console.log('mute')
+                                sourceInstance.sourceInstance.audioSource.active = true;
+                                if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
+                                    _webrtcSignalingLib.localMediaControls.disableAudio();
+                                } else {
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSource(this._sourceInstance, false);
+                                    this.switchAudioActivenessIcon(false);
+                                }
+                                
+                                syncList();
+                            };
+                            this.switchAudioActivenessIcon = function (activeness) {
+                                if(activeness === true) {
+                                    this.audioActivnessEl.innerHTML = _streamingIcons.liveOn;
+                                } else if (activeness === false) {
+                                    this.audioActivnessEl.innerHTML = _streamingIcons.liveOff;
+                                }
+                            };
+                            this.toggleAudio = function() {
+                                if(sourceInstance.sourceInstance.audioSource.active == true) {
+                                    sourceInstance.mute();
+                                } else {
+                                    sourceInstance.unmute();
+                                }
+                            };
                             this.params = {
                                 _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopVideo,
                                 _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
@@ -722,21 +779,78 @@
                                 get localOutput() {return typeof this._localOutput == 'object' ? this._localOutput.checked : this._localOutput;},
                                 get loop() {return typeof this._loop == 'object' ? this._loop.checked : this._loop;}
                             };
+                            this.hoverTimeout = {};
 
                             var itemEl = document.createElement('DIV');
-                            itemEl.className = 'Streams_webrtc_popup-sources-item';
+                            itemEl.className = 'live-editor-popup-sources-item';
                             var itemElText = document.createElement('DIV');
-                            itemElText.innerHTML = name ? name : '';
-                            itemElText.className = 'Streams_webrtc_popup-sources-item-text';
+                            itemElText.innerHTML = this._title ? this._title : '';
+                            itemElText.className = 'live-editor-popup-sources-item-text';
                             var itemElControl = document.createElement('DIV');
-                            itemElControl.className = 'Streams_webrtc_popup-sources-item-control';
+                            itemElControl.className = 'live-editor-popup-sources-item-control';
+
+                            if (source.audioSource != null && !this._sourceInstance.participant.isLocal) {
+                                var itemElControlAudioActivness = document.createElement('DIV');
+                                itemElControlAudioActivness.className = 'live-editor-popup-sources-item-control-item';
+                                itemElControlAudioActivness.innerHTML = _streamingIcons.liveOn;
+                                itemElControl.appendChild(itemElControlAudioActivness);
+                                itemElControlAudioActivness.addEventListener('click', this.toggleAudio)
+                            }
+                            if (source.sourceType == 'webrtc' && source.participant.isLocal) {
+                                var itemElControlLocalControls = document.createElement('DIV');
+                                itemElControlLocalControls.className = 'live-editor-popup-sources-item-local-controls';
+                                itemElControl.appendChild(itemElControlLocalControls);
+
+                                if(!_webrtcUserInterface.getOptions().audioOnlyMode) {
+                                    var cameraBtnCon = document.createElement('DIV');
+                                    cameraBtnCon.className = 'live-editor-popup-sources-item-control-item live-editor-popup-sources-item-lc-camera';
+                                    var cameraBtn = document.createElement('DIV');
+                                    cameraBtn.className = 'live-editor-popup-sources-item-lc-btn';
+                                    var cameraBtnIcon = document.createElement('DIV');
+                                    cameraBtnIcon.className = 'live-editor-popup-sources-item-lc-icon';
+                                    cameraBtnIcon.innerHTML = _controlsToolIcons.camera;
+                                    cameraBtnCon.appendChild(cameraBtn);
+                                    cameraBtnCon.appendChild(cameraBtnIcon);
+                                    itemElControlLocalControls.appendChild(cameraBtnCon);
+
+                                    if (!Q.info.useTouchEvents) {
+                                        var settingsPopup = _popupEl = document.createElement('DIV');
+                                        settingsPopup.className = 'live-editor-control-popup-box';
+                                        var settingsPopupInner = document.createElement('DIV');
+                                        settingsPopupInner.className = 'live-editor-popup-settings-inner';
+                                        settingsPopupInner.appendChild(_videoTool.videoinputListEl);
+                                        
+                                        settingsPopup.appendChild(settingsPopupInner);
+                                        cameraBtnCon.appendChild(settingsPopup);
+                                        
+                                        sourceInstance.videoSettingsPopup = new PopupDialog(cameraBtn, {
+                                            content: _videoTool.videoinputListEl
+                                        })
+                                    }
+                                }
+                                
+                                var microphoneBtnCon = document.createElement('DIV');
+                                microphoneBtnCon.className = 'live-editor-popup-sources-item-control-item live-editor-popup-sources-item-lc-mic';
+                                var microphoneBtn = document.createElement('DIV');
+                                microphoneBtn.className = 'live-editor-popup-sources-item-lc-btn';
+                                var microphoneBtnIcon = document.createElement('DIV');
+                                microphoneBtnIcon.className = 'live-editor-popup-sources-item-lc-icon';
+                                microphoneBtnIcon.innerHTML = _controlsToolIcons.microphone;
+                                microphoneBtnCon.appendChild(microphoneBtn);
+                                microphoneBtnCon.appendChild(microphoneBtnIcon);
+                                itemElControlLocalControls.appendChild(microphoneBtnCon);
+                                                
+                            }
+                        
                             var itemElControlVisibility = document.createElement('DIV');
-                            itemElControlVisibility.className = 'Streams_webrtc_popup-sources-item-visibility';
+                            itemElControlVisibility.className = 'live-editor-popup-sources-item-control-item live-editor-popup-sources-item-visibility';
                             itemElControlVisibility.innerHTML = _streamingIcons.visible;
                             itemElControl.appendChild(itemElControlVisibility);
+
                             itemEl.appendChild(itemElText);
                             itemEl.appendChild(itemElControl);
                             this.visibilityEl = itemElControlVisibility;
+                            this.audioActivnessEl = itemElControlAudioActivness;
                             this.itemEl = itemEl;
                             this.titleEl = itemElText;
                             this.itemEl.addEventListener('click', function () {
@@ -747,10 +861,10 @@
                             })
 
                             this.itemEl.addEventListener('contextmenu', function (e) {
-                                e.preventDefault();
+                                /*e.preventDefault();
                                 selectSource(sourceInstance);
                                 optionsColumn.update();
-                                contextMenu('visualSource').show(e);
+                                contextMenu('visualSource').show(e);*/
                             })
                             
                             itemElControlVisibility.addEventListener('click', this.toggle)
@@ -760,20 +874,7 @@
 
                         Object.defineProperties(VisualListItem.prototype, {
                             'sourceInstance': {
-                                'set': function(instance) {
-                                    console.log('sourceInstance set', instance)
-
-                                    this._sourceInstance = instance;
-                                    //if(instance == null) return;
-                                    var sourceItem = this;
-                                    sourceItem.title = instance.name.toLowerCase();
-                                    instance.on('nameChanged', function (newName) {
-                                        console.log('nameChanged set', instance)
-
-                                        sourceItem.title = newName.toLowerCase();
-                                    })
-                                },
-                                'get': function() {
+                                'get': function() { 
                                     return this._sourceInstance;
                                 }
                             }
@@ -783,6 +884,158 @@
                                 'set': function(val) { if(this.titleEl) this.titleEl.innerHTML = val; }
                             }
                         });
+
+                        var AudioListItem = function (source) {
+                            var sourceInstance = this;
+                            this.listType = 'audio';
+                            this._sourceInstance = source;
+                            this._title = source.title ? source.title : (source.name != null ? source.name : source.sourceType);
+                            this.remove = function () {
+                                var currentitem = this;
+                                if(this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
+                                for(var i in _visualList) {
+                                    if(_visualList[i] == currentitem) {
+                                        _visualList.splice(i, 1);
+                                        break;
+                                    }
+                                }
+                            };
+                            this.isActive = function() {
+                                console.log('isActive', this)
+                                var currentitem = this;
+                                var sources = _scene.sceneInstance.sources;
+                                console.log('isActive active', sources)
+
+                                for(let s in sources) {
+                                    console.log('isActive for', sources[s], currentitem._sourceInstance)
+
+                                    if(sources[s] == currentitem._sourceInstance) {
+                                        console.log('isActive active')
+
+                                        return true;
+                                    }
+                                }
+                                console.log('isActive inactive')
+
+                                return false;
+                            };
+                            this.unmute = function() {
+                                console.log('mute')
+
+                                this._sourceInstance.active = true;
+                                if(this._sourceInstance.sourceType == 'webrtcaudio' && this._sourceInstance.participant.isLocal) {
+                                    console.log('mute turn mic on')
+                                    _webrtcSignalingLib.localMediaControls.enableAudio();
+                                } else {
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
+                                    this.switchAudioActivenessIcon(true);
+                                    syncList();
+                                }
+                                
+                            };
+                            this.mute = function() {
+                                console.log('mute')
+                                this._sourceInstance.active = false;
+                                if(this._sourceInstance.sourceType == 'webrtcaudio' && this._sourceInstance.participant.isLocal) {
+                                    console.log('mute turn mic off')
+                                    _webrtcSignalingLib.localMediaControls.disableAudio();
+                                } else {
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
+                                    this.switchAudioActivenessIcon(false);
+                                }
+                                
+                                syncList();
+                            };
+                            this.switchAudioActivenessIcon = function (activeness) {
+                                if(activeness === true) {
+                                    this.audioActivnessEl.innerHTML = _streamingIcons.liveOn;
+                                } else if (activeness === false) {
+                                    this.audioActivnessEl.innerHTML = _streamingIcons.liveOff;
+                                }
+                            };
+                            this.toggleAudio = function() {
+                                if(sourceInstance._sourceInstance.active == true) {
+                                    sourceInstance.mute();
+                                } else {
+                                    sourceInstance.unmute();
+                                }
+                            };
+                            this.params = {
+                                _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopAudio,
+                                _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
+
+                                set loop(value) {this._loop = value;},
+                                set localOutput(value) {this._localOutput = value;},
+                                get localOutput() {return typeof this._localOutput == 'object' ? this._localOutput.checked : this._localOutput;},
+                                get loop() {return typeof this._loop == 'object' ? this._loop.checked : this._loop;}
+                            };
+                        
+                            var itemEl = document.createElement('DIV');
+                            itemEl.className = 'live-editor-popup-sources-item';
+                            var itemElText = document.createElement('DIV');
+                            itemElText.innerHTML = this._title ? this._title : '';
+                            itemElText.className = 'live-editor-popup-sources-item-text';
+                            var itemElControl = document.createElement('DIV');
+                            itemElControl.className = 'live-editor-popup-sources-item-control';
+                            var itemElAudioActiveness = document.createElement('DIV');
+                            itemElAudioActiveness.className = 'live-editor-popup-sources-item-visibility';
+                            itemElAudioActiveness.innerHTML = _streamingIcons.liveOn;
+                            let sourceType = this._sourceInstance.sourceType;
+                            console.log('AAAAAAAA', sourceType)
+                            itemElControl.appendChild(itemElAudioActiveness);
+                            
+                            itemEl.appendChild(itemElText);
+                            itemEl.appendChild(itemElControl);
+                            this.audioActivnessEl = itemElAudioActiveness;
+                            this.itemEl = itemEl;
+                            this.titleEl = itemElText;
+                            this.itemEl.addEventListener('click', function () {
+                                console.log('sourceInstance.sourceInstance', sourceInstance.sourceInstance.sourceType);
+                                selectSource(sourceInstance);
+
+                                optionsColumn.update();
+                            })
+                            itemElAudioActiveness.addEventListener('click', this.toggleAudio)
+
+                            this._sourceInstance.on('nameChanged', function (newName) {
+                                console.log('nameChanged set', this._sourceInstance)
+    
+                                sourceInstance.title = newName;
+                            })
+                        }
+
+                        AudioListItem.prototype = new ListItem();
+
+                        Object.defineProperties(AudioListItem.prototype, {
+                            'sourceInstance': {
+                                'get': function() { 
+                                    return this._sourceInstance;
+                                }
+                            }
+                        });
+                        Object.defineProperties(AudioListItem.prototype, {
+                            'title': {
+                                'set': function(val) { if(this.titleEl) this.titleEl.innerHTML = val; }
+                            }
+                        });
+
+                        //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
+                        if(_controlsTool != null && _webrtcSignalingLib != null) {
+                            _webrtcSignalingLib.event.on('micDisabled', function () {
+                                for (let i in _audioList) {
+                                    if (_audioList[i].sourceInstance.sourceType == 'webrtcaudio' && _audioList[i].sourceInstance.participant.isLocal) {
+                                        _audioList[i].switchVisibilityIcon(false);
+                                    }
+                                }
+                            });
+                            _webrtcSignalingLib.event.on('micEnabled', function () {
+                                for (let i in _audioList) {
+                                    if (_audioList[i].sourceInstance.sourceType == 'webrtcaudio' && _audioList[i].sourceInstance.participant.isLocal) {
+                                        _audioList[i].switchVisibilityIcon(true);
+                                    }
+                                }
+                            });
+                        }
 
                         function syncList() {
                             var sources = _scene.sceneInstance.sources;
@@ -806,10 +1059,18 @@
                                     _visualList[i].remove();
                                     continue;
                                 }
-                                if(_visualList[i].sourceInstance.active === true) {
-                                    _visualList[i].switchVisibilityIcon(true);
-                                } else if(_visualList[i].sourceInstance.active === false) {
-                                    _visualList[i].switchVisibilityIcon(false);
+                                if(_visualList[i].listType == 'visual') {
+                                    if(_visualList[i].sourceInstance.active === true) {
+                                        _visualList[i].switchVisibilityIcon(true);
+                                    } else if(_visualList[i].sourceInstance.active === false) {
+                                        _visualList[i].switchVisibilityIcon(false);
+                                    }
+                                } else {
+                                    if(_visualList[i].sourceInstance.active === true) {
+                                        _visualList[i].switchAudioActivenessIcon(true);
+                                    } else if(_visualList[i].sourceInstance.active === false) {
+                                        _visualList[i].switchAudioActivenessIcon(false);
+                                    }
                                 }
                             }
 
@@ -824,17 +1085,26 @@
                                 }
 
                                 if(newSource) {
-                                    var title = sources[s].title ? sources[s
-                                        ].title : (sources[s].name != null ? sources[s].name : sources[s].sourceType);
-                                    var listItem = new VisualListItem(title);
-                                    listItem.sourceInstance = sources[s];
-                                    console.log('visual: syncList add',  listItem);
-                                    if(sources[s].active === true) {
-                                        listItem.switchVisibilityIcon(true);
-                                    } else if(sources[s].active === false) {
-                                        listItem.switchVisibilityIcon(false);
+                                    if ((sources[s].sourceType == 'group' && sources[s].groupType == 'webrtc') || sources[s].sourceType == 'webrtc' || sources[s].sourceType == 'video' || sources[s].sourceType == 'videoInput' || sources[s].sourceType == 'image') {
+                                        var listItem = new VisualListItem(sources[s]);
+                                        listItem.sourceInstance = sources[s];
+                                        console.log('visual: syncList add', listItem);
+                                        if (sources[s].active === true) {
+                                            listItem.switchVisibilityIcon(true);
+                                        } else if (sources[s].active === false) {
+                                            listItem.switchVisibilityIcon(false);
+                                        }
+                                        addItem(listItem);
+                                    } else if ((sources[s].sourceType == 'group' && sources[s].groupType == 'webrtcaudio') || sources[s].sourceType == 'webrtcaudio' || sources[s].sourceType == 'audio' || sources[s].sourceType == 'audioInput') {
+                                        var listItem = new AudioListItem(sources[s]);
+                                        console.log('audio: syncList add', listItem, listItem.sourceInstance);
+                                        if (sources[s].active === true) {
+                                            listItem.switchAudioActivenessIcon(true);
+                                        } else if (sources[s].active === false) {
+                                            listItem.switchAudioActivenessIcon(false);
+                                        }
+                                        addItem(listItem);
                                     }
-                                    addItem(listItem);
                                 }
                             }
 
@@ -856,9 +1126,14 @@
                             console.log('loadList', sourcesList)
                             for(let s in sourcesList) {
                                 console.log('loadList for', sourcesList[s])
-                                var listItem = new VisualListItem(sourcesList[s].title);
-                                listItem.sourceInstance = sourcesList[s];
-                                addItem(listItem, _visualSourcesListEl);
+                                if(sourcesList[s].sourceType == 'webrtc' || sourcesList[s].sourceType == 'video' || sourcesList[s].sourceType == 'videoInput' || sourcesList[s].sourceType == 'image') {
+                                    var listItem = new VisualListItem(sourcesList[s].title);
+                                    listItem.sourceInstance = sourcesList[s];
+                                    addItem(listItem, _visualSourcesListEl);
+                                } else if (sourcesList[s].sourceType == 'webrtcaudio' || sourcesList[s].sourceType == 'audio' || sourcesList[s].sourceType == 'audioInput') {
+                                    var listItem = new AudioListItem(sourcesList[s]);
+                                    addItem(listItem, _visualSourcesListEl);
+                                }
                             }
                         }
 
@@ -1114,21 +1389,21 @@
 
                                         console.log('createProgressBar')
                                         var dialog=document.createElement('DIV');
-                                        dialog.className = 'Streams_webrtc_popup-progress-bar-popup';
+                                        dialog.className = 'live-editor-popup-progress-bar-popup';
                                         dialog.style.width = _barWidth + 'px';
                                         dialog.style.height = _barheight + 'px';
                                         _progrssBarPopup = dialog;
 
                                         var dialogInner=document.createElement('DIV');
-                                        dialogInner.className = 'Streams_webrtc_popup-progress-bar-popup-inner';
+                                        dialogInner.className = 'live-editor-popup-progress-bar-popup-inner';
                                         var boxContent=document.createElement('DIV');
-                                        boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                                        boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
                                         var boxContentText = _progressText = document.createElement('DIV');
                                         boxContentText.innerHTML = 'loading...';
                                         var progressBar = document.createElement('DIV');
-                                        progressBar.className = 'Streams_webrtc_popup-progress-bar';
+                                        progressBar.className = 'live-editor-popup-progress-bar';
                                         var progressEl = _barProggressEl = document.createElement('SPAN');
-                                        progressEl.className = 'Streams_webrtc_popup-progress-el';
+                                        progressEl.className = 'live-editor-popup-progress-el';
 
 
                                         progressBar.appendChild(progressEl);
@@ -1136,7 +1411,7 @@
                                         boxContent.appendChild(progressBar);
 
                                         var close=document.createElement('div');
-                                        close.className = 'Streams_webrtc_close-dialog-sign';
+                                        close.className = 'live-editor-close-dialog-sign';
                                         close.innerHTML = '&#10005;';
                                         var popupinstance = this;
                                         close.addEventListener('click', function() {
@@ -1176,15 +1451,66 @@
                             }
                         }
 
-                        function addTeleconferenceSource(name, addAudioGroup) {
+                        function addTeleconferenceSource(name) {
                             var webrtcGroup = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.addSource({
                                 sourceType: 'webrtcGroup',
-                                title: name,
-                                addAudioGroup: addAudioGroup,
+                                title: name
                             });
 
                             tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.updateWebRTCLayout(webrtcGroup);
 
+                        }
+
+
+                        function addAudioSource(e) {
+                            console.log('addAudioSource', e)
+                            if(typeof e == 'string') {
+                                var pathhInfo = e.split('/');
+                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
+                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
+                                    sourceType: 'audio',
+                                    title: title,
+                                    url: e,
+                                });
+                            } else {
+                                var tgt = e.target || window.event.srcElement,
+                                    files = tgt.files;
+                                console.log('addAudioSource 2')
+
+                                if (FileReader && files && files.length) {
+                                    let file = files[0], mime = file.type;
+                                    let reader = new  FileReader();
+                                    reader.readAsArrayBuffer(file);
+                                    reader.onload = function(e) {
+                                        // The file reader gives us an ArrayBuffer:
+                                        let buffer = e.target.result;
+
+                                        // We have to convert the buffer to a blob:
+                                        let audioBlob = new Blob([new Uint8Array(buffer)], { type: mime });
+                                        console.log('addAudioSource onload', audioBlob)
+
+                                        // The blob gives us a URL to the video file:
+                                        let url = window.URL.createObjectURL(audioBlob);
+
+                                        tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
+                                            sourceType: 'audio',
+                                            title: files[0].name,
+                                            url: url,
+                                        });
+                                    }
+
+                                }
+
+                            }
+                        }
+
+                        function addAudioInputSource(e) {
+                            console.log('addAudioInputSource', e);
+                            tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
+                                sourceType: 'audioInput',
+                                title: e.name,
+                                mediaStreamInstance: e.stream
+                            });
                         }
 
                         function hideResizingElement() {
@@ -1196,22 +1522,22 @@
 
                         function selectSource(sourceItem) {
                             console.log('selectSource', _visualList)
-                            console.log('selectSource sourceItem', sourceItem, sourceItem.itemEl, sourceItem.itemEl.classList.contains('Streams_webrtc_popup-sources-item-active'))
-                            if(sourceItem.itemEl && !sourceItem.itemEl.classList.contains('Streams_webrtc_popup-sources-item-active')) {
+                            console.log('selectSource sourceItem', sourceItem, sourceItem.itemEl, sourceItem.itemEl.classList.contains('live-editor-popup-sources-item-active'))
+                            if(sourceItem.itemEl && !sourceItem.itemEl.classList.contains('live-editor-popup-sources-item-active')) {
                                 console.log('selectSource select acitve source');
 
-                                sourceItem.itemEl.classList.add('Streams_webrtc_popup-sources-item-active');
+                                sourceItem.itemEl.classList.add('live-editor-popup-sources-item-active');
                             }
                             _selectedSource = sourceItem;
                             for(var i in _visualList) {
                                 console.log('selectSource for', _visualList[i], _selectedSource)
                                 if(_visualList[i] == _selectedSource) continue;
-                                console.log('selectSource for --', sourceItem.itemEl, (sourceItem.itemEl).classList.contains('Streams_webrtc_popup-sources-item-active'))
+                                console.log('selectSource for --', sourceItem.itemEl, (sourceItem.itemEl).classList.contains('live-editor-popup-sources-item-active'))
 
-                                if((_visualList[i].itemEl).classList.contains('Streams_webrtc_popup-sources-item-active')) {
+                                if((_visualList[i].itemEl).classList.contains('live-editor-popup-sources-item-active')) {
                                     console.log('selectSource remove');
 
-                                    (_visualList[i].itemEl).classList.remove('Streams_webrtc_popup-sources-item-active');
+                                    (_visualList[i].itemEl).classList.remove('live-editor-popup-sources-item-active');
                                 }
                             }
 
@@ -1307,7 +1633,12 @@
 
                         function removeSource() {
                             if(_selectedSource != null) {
-                                tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
+
+                                if(_selectedSource.listType == 'visual') {
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.removeSource(_selectedSource.sourceInstance);
+                                } else {
+                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
+                                }
                                 syncList();
                                 _selectedSource = null;
                             };
@@ -1318,15 +1649,15 @@
 
                         function createAddSourceMenu() {
                             var dropUp = _addVisualSourceDropUpMenuEl = document.createElement('DIV');
-                            dropUp.className = 'Streams_webrtc_popup-sources-add-menu';
+                            dropUp.className = 'live-editor-popup-sources-add-menu';
 
                             var conferenceItem = document.createElement('DIV');
-                            conferenceItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-conference';
+                            conferenceItem.className = 'live-editor-popup-sources-add-menu-item live-editor-popup-sources-add-conference';
                             conferenceItem.dataset.menuName = 'add-conference';
                             var conferenceItemIcon = document.createElement('DIV');
-                            conferenceItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            conferenceItemIcon.className = 'live-editor-popup-sources-add-menu-icon';
                             var conferenceItemIconText = document.createElement('DIV');
-                            conferenceItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            conferenceItemIconText.className = 'live-editor-popup-sources-add-menu-text';
                             conferenceItemIconText.innerHTML = 'Teleconference';
                             conferenceItem.addEventListener('click', function (e) {
                                 addTeleconferencePopup.showDialog(e);
@@ -1336,12 +1667,12 @@
                             dropUp.appendChild(conferenceItem);
 
                             var cameraItem = document.createElement('DIV');
-                            cameraItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-camera';
+                            cameraItem.className = 'live-editor-popup-sources-add-menu-item live-editor-popup-sources-add-camera';
                             cameraItem.dataset.menuName = 'add-camera';
                             var cameraItemIcon = document.createElement('DIV');
-                            cameraItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            cameraItemIcon.className = 'live-editor-popup-sources-add-menu-icon';
                             var cameraItemIconText = document.createElement('DIV');
-                            cameraItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            cameraItemIconText.className = 'live-editor-popup-sources-add-menu-text';
                             cameraItemIconText.innerHTML = 'Camera';
                             cameraItem.addEventListener('click', function (e) {
                                 addCameraPopup.showDialog({
@@ -1377,12 +1708,12 @@
                             dropUp.appendChild(cameraItem);
 
                             var imageItem = document.createElement('DIV');
-                            imageItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-image';
+                            imageItem.className = 'live-editor-popup-sources-add-menu-item live-editor-popup-sources-add-image';
                             imageItem.dataset.menuName = 'add-image';
                             var imageItemIcon = document.createElement('DIV');
-                            imageItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            imageItemIcon.className = 'live-editor-popup-sources-add-menu-icon';
                             var imageItemIconText = document.createElement('DIV');
-                            imageItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            imageItemIconText.className = 'live-editor-popup-sources-add-menu-text';
                             imageItemIconText.innerHTML = 'Image';
                             imageItem.addEventListener('click', function (e) {
                                 addImagePopup.showDialog(e);
@@ -1392,18 +1723,18 @@
                             dropUp.appendChild(imageItem);
 
                             var videoItem = document.createElement('DIV');
-                            videoItem.className = 'Streams_webrtc_popup-sources-add-menu-item';
+                            videoItem.className = 'live-editor-popup-sources-add-menu-item';
                             cameraItem.dataset.menuName = 'add-video';
                             var videoItemIcon = document.createElement('DIV');
-                            videoItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            videoItemIcon.className = 'live-editor-popup-sources-add-menu-icon';
                             var videoItemIconText = document.createElement('DIV');
-                            videoItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            videoItemIconText.className = 'live-editor-popup-sources-add-menu-text';
                             videoItemIconText.innerHTML = 'Video';
                             videoItem.addEventListener('click', function (e) {
                                 addVideoPopup.showDialog(e);
                             })
                             /*var videoItemInput = document.createElement('INPUT');
-                                videoItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                                videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
                                 videoItemInput.type = 'file';
                                 videoItemInput.name = 'fileVideoSource';
                                 videoItemInput.addEventListener('change', function (e) {
@@ -1414,13 +1745,69 @@
                             //videoItem.appendChild(videoItemInput);
                             dropUp.appendChild(videoItem);
 
+                            var audioItem = document.createElement('DIV');
+                            audioItem.className = 'live-editor-popup-sources-add-menu-item';
+                            cameraItem.dataset.menuName = 'add-video';
+                            var audioItemIcon = document.createElement('DIV');
+                            audioItemIcon.className = 'live-editor-popup-sources-add-menu-icon';
+                            var audioItemIconText = document.createElement('DIV');
+                            audioItemIconText.className = 'live-editor-popup-sources-add-menu-text';
+                            audioItemIconText.innerHTML = 'Audio';
+                            audioItem.addEventListener('click', function (e) {
+                                addAudioPopup.showDialog(e);
+                            })
+                            audioItem.appendChild(audioItemIcon);
+                            audioItem.appendChild(audioItemIconText);
+                            dropUp.appendChild(audioItem);
+
+                            var micItem = document.createElement('DIV');
+                            micItem.className = 'live-editor-popup-sources-add-menu-item live-editor-popup-sources-add-mic';
+                            var micItemIcon = document.createElement('DIV');
+                            micItemIcon.className = 'live-editor-popup-sources-add-menu-icon';
+                            var micItemIconText = document.createElement('DIV');
+                            micItemIconText.className = 'live-editor-popup-sources-add-menu-text';
+                            micItemIconText.innerHTML = 'Audio Input';
+                            micItem.addEventListener('click', function (e) {
+                                addMicrophoneAudioPopup.showDialog({
+                                    onOk: function (e) {
+                                        console.log('addMicrophoneAudioPopup: ', e);
+
+                                        if (!e.stream) {
+                                            alert('No media stream added');
+                                            return;
+                                        }
+                                        if(e.sourceType == 'separate') {
+                                            addAudioInputSource({
+                                                name: e.name,
+                                                stream: e.stream
+                                            });
+                                        } else {
+                                            console.log('add camera source: webrtc');
+                                            let audioTracks = e.stream.getAudioTracks();
+                                            for (let t in audioTracks) {
+                                                audioTracks[t].stop();
+                                            }
+                                            _webrtcSignalingLib.localMediaControls.toggleAudioInputs({deviceId:e.deviceId});
+                                        }
+                                        
+                                    },
+                                    onClose: function () {
+            
+                                    }
+                                });
+                            })
+
+                            micItem.appendChild(micItemIcon);
+                            micItem.appendChild(micItemIconText);
+                            dropUp.appendChild(micItem);
+
                             var savedMedia = document.createElement('DIV');
-                            savedMedia.className = 'Streams_webrtc_popup-sources-add-menu-item';
+                            savedMedia.className = 'live-editor-popup-sources-add-menu-item';
                             savedMedia.dataset.menuName = 'add-saved';
                             var savedMediaIcon = document.createElement('DIV');
-                            savedMediaIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
+                            savedMediaIcon.className = 'live-editor-popup-sources-add-menu-icon';
                             var savedMediaIconText = document.createElement('DIV');
-                            savedMediaIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
+                            savedMediaIconText.className = 'live-editor-popup-sources-add-menu-text';
                             savedMediaIconText.innerHTML = 'Saved Media';
                             savedMedia.addEventListener('click', function (e) {
                                 console.log('_fileManagerTool', _fileManagerTool)
@@ -1472,20 +1859,20 @@
                         function createVisualSourcesList() {
                             if(_visualSourcesEl != null) return _visualSourcesEl;
                             var dialogBody = document.createElement('DIV');
-                            dialogBody.className = 'Streams_webrtc_popup-sources-visual-body';
+                            dialogBody.className = 'live-editor-popup-sources-visual-body';
                             var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-sources-body-inner';
+                            dialogBodyInner.className = 'live-editor-popup-sources-body-inner';
                             _visualSourcesEl = dialogBody;
                             _visualSourcesListEl = dialogBodyInner;
 
                             var sourcesColumnControl = document.createElement('DIV');
-                            sourcesColumnControl.className = 'Streams_webrtc_popup-sources-control';
+                            sourcesColumnControl.className = 'live-editor-popup-sources-control';
 
                             var dropUpMenu = createAddSourceMenu();
 
                             var sourcesColumnControlAddBtn = document.createElement('DIV');
-                            sourcesColumnControlAddBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-add';
-                            if(!tool.state.managingVisualSources) sourcesColumnControlAddBtn.classList.add('Streams_webrtc_inactive');
+                            sourcesColumnControlAddBtn.className = 'live-editor-popup-sources-control-btn live-editor-popup-sources-control-btn-add';
+                            if(!tool.state.managingVisualSources) sourcesColumnControlAddBtn.classList.add('live-editor-inactive');
                             sourcesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
                             sourcesColumnControlAddBtn.appendChild(dropUpMenu);
 
@@ -1496,22 +1883,22 @@
                             sourcesColumnControl.appendChild(sourcesColumnControlAddBtn);
 
                             var sourcesColumnControlBtn = document.createElement('DIV');
-                            sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-remove';
-                            if(!tool.state.managingVisualSources) sourcesColumnControlBtn.classList.add('Streams_webrtc_inactive');
+                            sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn live-editor-popup-sources-control-btn-remove';
+                            if(!tool.state.managingVisualSources) sourcesColumnControlBtn.classList.add('live-editor-inactive');
                             sourcesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
                             sourcesColumnControlBtn.addEventListener('click', function () {
                                 removeSource();
                             })
                             sourcesColumnControl.appendChild(sourcesColumnControlBtn);
                             var sourcesColumnControlBtn = document.createElement('DIV');
-                            sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn';
+                            sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn';
                             sourcesColumnControlBtn.innerHTML = _streamingIcons.moveUp;
                             sourcesColumnControlBtn.addEventListener('click', function () {
                                 moveForward();
                             })
                             sourcesColumnControl.appendChild(sourcesColumnControlBtn);
                             var sourcesColumnControlBtn = document.createElement('DIV');
-                            sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn';
+                            sourcesColumnControlBtn.className = 'live-editor-popup-sources-control-btn';
                             sourcesColumnControlBtn.innerHTML = _streamingIcons.moveDown;
                             sourcesColumnControlBtn.addEventListener('click', function () {
                                 moveBackward();
@@ -1534,20 +1921,20 @@
 
                             console.log('addVideoPopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-video Streams_webrtc_hidden';
+                            dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-video live-editor-hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add video';
-                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                            dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            dialogInner.className = 'live-editor-dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                            boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
                             var boxContentText=document.createElement('DIV');
                             boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                             var videoItemInput = document.createElement('INPUT');
-                            videoItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
                             videoItemInput.type = 'file';
                             videoItemInput.name = 'fileVideoSource';
                             videoItemInput.accept = 'video/mp4, video/*'
@@ -1559,7 +1946,7 @@
                             var boxContentText2=document.createElement('DIV');
                             boxContentText2.innerHTML = 'OR';
                             var imageItemLinkInput = document.createElement('INPUT');
-                            imageItemLinkInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
                             imageItemLinkInput.type = 'text';
                             imageItemLinkInput.placeholder = 'Enter the link';
                             imageItemLinkInput.name = 'fileImageLink';
@@ -1570,7 +1957,7 @@
                             boxContent.appendChild(imageItemLinkInput);
 
                             var close=document.createElement('div');
-                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.className = 'live-editor-close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
@@ -1628,8 +2015,8 @@
 
                             function showDialog(e) {
                                 videoItemInput.value = '';
-                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('live-editor-hidden')) {
+                                    _dialogEl.classList.remove('live-editor-hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -1647,8 +2034,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('live-editor-hidden')){
+                                    _dialogEl.classList.add('live-editor-hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -1672,20 +2059,20 @@
 
                             console.log('addImagePopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-image Streams_webrtc_hidden';
+                            dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-image live-editor-hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add image';
-                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                            dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            dialogInner.className = 'live-editor-dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                            boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
                             var boxContentText=document.createElement('DIV');
                             boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                             var imageItemInput = document.createElement('INPUT');
-                            imageItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            imageItemInput.className = 'live-editor-popup-sources-add-menu-file';
                             imageItemInput.type = 'file';
                             imageItemInput.name = 'fileImageSource';
                             imageItemInput.accept = 'image/png, image/jpeg'
@@ -1697,7 +2084,7 @@
                             var boxContentText2=document.createElement('DIV');
                             boxContentText2.innerHTML = 'OR';
                             var imageItemLinkInput = document.createElement('INPUT');
-                            imageItemLinkInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
                             imageItemLinkInput.type = 'text';
                             imageItemLinkInput.placeholder = 'Enter the link';
                             imageItemLinkInput.name = 'fileImageLink';
@@ -1708,7 +2095,7 @@
                             boxContent.appendChild(imageItemLinkInput);
 
                             var close=document.createElement('div');
-                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.className = 'live-editor-close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
@@ -1766,8 +2153,8 @@
 
                             function showDialog(e) {
                                 imageItemInput.value = '';
-                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('live-editor-hidden')) {
+                                    _dialogEl.classList.remove('live-editor-hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -1786,8 +2173,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('live-editor-hidden')){
+                                    _dialogEl.classList.add('live-editor-hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -1817,7 +2204,7 @@
                                     this._mediaStream = value;
             
                                     if (_okButtonEl) {
-                                        _okButtonEl.classList.remove('Streams_webrtc_button-inactive');
+                                        _okButtonEl.classList.remove('live-editor-button-inactive');
                                     }
                                 },
                                 get mediaStream() { return this._mediaStream; },
@@ -1990,8 +2377,8 @@
             
                             function showDialog(optns) {
                                 options = optns;
-                                if (_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                if (_dialogueEl.classList.contains('live-editor-hidden')) {
+                                    _dialogueEl.classList.remove('live-editor-hidden');
             
                                     state.isHidden = false;
             
@@ -2029,8 +2416,8 @@
                                         tracks[t].stop();
                                     }
                                 }
-                                if (!_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                if (!_dialogueEl.classList.contains('live-editor-hidden')) {
+                                    _dialogueEl.classList.add('live-editor-hidden');
                                     state.isHidden = true;
                                 }
             
@@ -2040,33 +2427,33 @@
                             }
             
                             var dialogue = document.createElement('DIV');
-                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-add-media-input Streams_webrtc_popup-add-camera-input Streams_webrtc_hidden';
+                            dialogue.className = 'live-editor-dialog-box live-editor-popup-add-media-input live-editor-popup-add-camera-input live-editor-hidden';
                             _dialogueEl = dialogue;
                             var close = document.createElement('div');
-                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.className = 'live-editor-close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = '40px';
 
                             var dialogTitle = document.createElement('H3');
                             dialogTitle.innerHTML = 'Add camera source';
-                            dialogTitle.className = 'Streams_webrtc_dialog-header';
+                            dialogTitle.className = 'live-editor-dialog-header';
             
                             var dialogInner = document.createElement('DIV');
-                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            dialogInner.className = 'live-editor-dialog-inner';
                             var boxContent = document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_dialog-content';
+                            boxContent.className = 'live-editor-dialog-content';
                             var cameraPreviewBox = document.createElement('DIV');
-                            cameraPreviewBox.className = 'Streams_webrtc_dialog-camera-preview';
+                            cameraPreviewBox.className = 'live-editor-dialog-camera-preview';
                             var cameraPreviewInner = _cameraPreviewParentEl = document.createElement('DIV');
-                            cameraPreviewInner.className = 'Streams_webrtc_dialog-camera-preview-inner';
+                            cameraPreviewInner.className = 'live-editor-dialog-camera-preview-inner';
                             var cameraPreviewNotices = _noticesEl = document.createElement('DIV');
-                            cameraPreviewNotices.className = 'Streams_webrtc_dialog-notices';
+                            cameraPreviewNotices.className = 'live-editor-dialog-notices';
             
                             var addSourceControls = document.createElement('DIV');
-                            addSourceControls.className = 'Streams_webrtc_dialog-add-source-controls';
+                            addSourceControls.className = 'live-editor-dialog-add-source-controls';
                             var addSourceControlsInner = document.createElement('DIV');
-                            addSourceControlsInner.className = 'Streams_webrtc_dialog-add-source-controls-inner';
+                            addSourceControlsInner.className = 'live-editor-dialog-add-source-controls-inner';
                             dialogInner.appendChild(dialogTitle);
                             dialogue.appendChild(close);
             
@@ -2075,20 +2462,20 @@
                             cameraPreviewBox.appendChild(cameraPreviewInner);
             
                             var videoInputDevicesCon = document.createElement('DIV');
-                            videoInputDevicesCon.className = 'Streams_webrtc_dialog-add-source-controls-item Streams_webrtc_dialog-add-source-controls-devices';
+                            videoInputDevicesCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-devices';
                             var addSourceControlsDevicesCaption = document.createElement('DIV');
-                            addSourceControlsDevicesCaption.className = 'Streams_webrtc_dialog-add-source-controls-caption';
+                            addSourceControlsDevicesCaption.className = 'live-editor-dialog-add-source-controls-caption';
                             addSourceControlsDevicesCaption.innerHTML = 'Devices ';
                             var addSourceControlsDevicesReload = document.createElement('DIV');
-                            addSourceControlsDevicesReload.className = 'Streams_webrtc_dialog-add-source-controls-reload';
+                            addSourceControlsDevicesReload.className = 'live-editor-dialog-add-source-controls-reload';
                             addSourceControlsDevicesReload.innerHTML = _streamingIcons.reload;
                             var videoInputDevicesListCon = document.createElement('DIV');
-                            videoInputDevicesListCon.className = 'Streams_webrtc_dialog-add-source-controls-config Streams_webrtc_dialog-add-source-list-con';
+                            videoInputDevicesListCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-list-con';
                             var videoInputDevicesList = _devicesListEl = document.createElement('SELECT');
-                            videoInputDevicesList.className = 'Streams_webrtc_dialog-add-source-devices-list';
+                            videoInputDevicesList.className = 'live-editor-dialog-add-source-devices-list';
                             var loadDevicesListBtn = document.createElement('BUTTON');
                             loadDevicesListBtn.innerHTML = 'Reload devices list';
-                            loadDevicesListBtn.className = 'Streams_webrtc_dialog-add-source-load-list Streams_webrtc_button';
+                            loadDevicesListBtn.className = 'live-editor-dialog-add-source-load-list live-editor-button';
                             
                             addSourceControlsDevicesCaption.appendChild(addSourceControlsDevicesReload);
                             videoInputDevicesCon.appendChild(addSourceControlsDevicesCaption);
@@ -2098,14 +2485,14 @@
                             addSourceControlsInner.appendChild(videoInputDevicesCon);
             
                             var sourceNameCon = document.createElement('DIV');
-                            sourceNameCon.className = 'Streams_webrtc_dialog-add-source-controls-item Streams_webrtc_dialog-add-source-controls-name';
+                            sourceNameCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-name';
                             var sourceNameCaption = document.createElement('DIV');
-                            sourceNameCaption.className = 'Streams_webrtc_dialog-add-source-controls-caption';
+                            sourceNameCaption.className = 'live-editor-dialog-add-source-controls-caption';
                             sourceNameCaption.innerHTML = 'Name';
                             var sourceNameInputCon = document.createElement('DIV');
-                            sourceNameInputCon.className = 'Streams_webrtc_dialog-add-source-controls-config Streams_webrtc_dialog-add-source-name-con';
+                            sourceNameInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-name-con';
                             var sourceNameInput = _nameInputEl = document.createElement('INPUT');
-                            sourceNameInput.className = 'Streams_webrtc_dialog-add-source-name-input';
+                            sourceNameInput.className = 'live-editor-dialog-add-source-name-input';
                             sourceNameInput.type = 'text';
             
                             sourceNameCon.appendChild(sourceNameCaption);
@@ -2114,32 +2501,32 @@
                             addSourceControlsInner.appendChild(sourceNameCon);
             
                             var sourceTypeCon = document.createElement('DIV');
-                            sourceTypeCon.className = 'Streams_webrtc_dialog-add-source-controls-item Streams_webrtc_dialog-add-source-controls-type';
+                            sourceTypeCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-type';
                             var sourceTypeCaption = document.createElement('DIV');
-                            sourceTypeCaption.className = 'Streams_webrtc_dialog-add-source-controls-caption';
+                            sourceTypeCaption.className = 'live-editor-dialog-add-source-controls-caption';
                             sourceTypeCaption.innerHTML = '';
                             var sourceTypeInputCon = document.createElement('DIV');
-                            sourceTypeInputCon.className = 'Streams_webrtc_dialog-add-source-controls-config Streams_webrtc_dialog-add-source-type-con';
+                            sourceTypeInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-type-con';
                             var separateSourceTypeLabel = document.createElement('LABEL');
-                            separateSourceTypeLabel.className = 'Streams_webrtc_dialog-add-source-type-label';
+                            separateSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
                             var separateSourceTypeInput = document.createElement('INPUT');
-                            separateSourceTypeInput.className = 'Streams_webrtc_dialog-add-source-type-input';
-                            separateSourceTypeInput.name = 'streams_webrtc_video_input_type';
+                            separateSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
+                            separateSourceTypeInput.name = 'live-editor-video_input_type';
                             separateSourceTypeInput.type = 'radio';
                             separateSourceTypeInput.value = 'separate';
                             separateSourceTypeInput.checked = 'true';
                             var separateSourceTypeLabelText = document.createElement('SPAN');
-                            separateSourceTypeLabelText.className = 'Streams_webrtc_dialog-add-source-type-label-text';
+                            separateSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                             separateSourceTypeLabelText.innerHTML = 'Visible only in livestream';
                             var webrtcSourceTypeLabel = document.createElement('LABEL');
-                            webrtcSourceTypeLabel.className = 'Streams_webrtc_dialog-add-source-type-label';
+                            webrtcSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
                             var webrtcSourceTypeInput = document.createElement('INPUT');
-                            webrtcSourceTypeInput.className = 'Streams_webrtc_dialog-add-source-type-input';
-                            webrtcSourceTypeInput.name = 'streams_webrtc_video_input_type';
+                            webrtcSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
+                            webrtcSourceTypeInput.name = 'live-editor-video_input_type';
                             webrtcSourceTypeInput.type = 'radio';
                             webrtcSourceTypeInput.value = 'webrtc';
                             var webrtcSourceTypeLabelText = document.createElement('SPAN');
-                            webrtcSourceTypeLabelText.className = 'Streams_webrtc_dialog-add-source-type-label-text';
+                            webrtcSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                             webrtcSourceTypeLabelText.innerHTML = 'Visible to chat and in a livestream';
 
                             sourceTypeCon.appendChild(sourceTypeCaption);
@@ -2153,10 +2540,10 @@
                             addSourceControlsInner.appendChild(sourceTypeCon);
             
                             var dialogButtonsCon = document.createElement('DIV');
-                            dialogButtonsCon.className = 'Streams_webrtc_dialog-add-source-buttons-con';
+                            dialogButtonsCon.className = 'live-editor-dialog-add-source-buttons-con';
                             var okButton = _okButtonEl = document.createElement('BUTTON');
                             okButton.innerHTML = 'OK';
-                            okButton.className = 'Streams_webrtc_dialog-add-source-ok-btn Streams_webrtc_button Streams_webrtc_button-inactive';
+                            okButton.className = 'live-editor-dialog-add-source-ok-btn live-editor-button live-editor-button-inactive';
                             dialogButtonsCon.appendChild(okButton);
                             addSourceControls.appendChild(addSourceControlsInner);
                             addSourceControls.appendChild(dialogButtonsCon);
@@ -2264,21 +2651,21 @@
 
                             console.log('addTeleconferencePopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-tc Streams_webrtc_hidden';
+                            dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-tc live-editor-hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add teleconference';
-                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                            dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            dialogInner.className = 'live-editor-dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                            boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
 
                             var sourceNameCon = document.createElement('DIV');
-                            sourceNameCon.className = 'Streams_webrtc_popup-sources-add-source-name-con';
+                            sourceNameCon.className = 'live-editor-popup-sources-add-source-name-con';
                             var sourceName = document.createElement('INPUT');
-                            sourceName.className = 'Streams_webrtc_popup-sources-add-source-name';
+                            sourceName.className = 'live-editor-popup-sources-add-source-name';
                             sourceName.type = 'text';
                             sourceName.placeholder = 'Teleconference Source Name';
                             sourceName.value = 'Video Chat';
@@ -2287,50 +2674,15 @@
 
                             boxContent.appendChild(sourceNameCon);
 
-                            var addAudioGroupCon = document.createElement('LABEL');
-                            addAudioGroupCon.className = 'Streams_webrtc_popup-sources-add-audio-con';
-                            var addAudio = document.createElement('INPUT');
-                            addAudio.className = 'Streams_webrtc_popup-sources-add-audio-group';
-                            addAudio.type = 'checkbox';
-                            addAudio.name = 'addAudio';
-                            addAudioGroupCon.appendChild(addAudio);
-                            var addAudioGroupCaption = document.createElement('SPAN');
-                            addAudioGroupCaption.className = 'Streams_webrtc_popup-sources-add-audio-cap';
-                            addAudioGroupCaption.innerHTML = "Add corresponding audio group of participants' audio";
-                            addAudioGroupCon.appendChild(addAudioGroupCaption);
-                            boxContent.appendChild(addAudioGroupCon);
-
-                            
-                            let otherWebrtcAudioGroupExist = checkIfOtherWebrtcAudioGroupExist();
-                           
-                            addAudio.checked = otherWebrtcAudioGroupExist ? false : true;
-
-                            addAudio.addEventListener('change', function(event) {
-                                let otherWebrtcAudioGroupExist = checkIfOtherWebrtcAudioGroupExist();
-
-                                if (event.currentTarget.checked && otherWebrtcAudioGroupExist) {
-                                    Q.confirm('There are other WebRTC audio groups active now. Adding new one may lead to lower audio quality. Are you sure you want to add one more audio group?', function (reply) {
-                                        if (!reply) {
-                                            addAudio.checked = false;
-                                        }
-                                    },{
-                                        title: "Adding group of participants' audio",
-                                        ok:'Yes',
-                                        cancel: 'Dismiss',
-                                        noClose: true
-                                    });
-                                }
-                              })
-
                             var close=document.createElement('div');
-                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.className = 'live-editor-close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/apply.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
                             close.addEventListener('click', function() {
                                 if(sourceName.value != '') {
                                     var val = sourceName.value;
-                                    addTeleconferenceSource(val, addAudio.checked);
+                                    addTeleconferenceSource(val);
                                     hideDialog();
                                     sourceName.value = '';
                                 }
@@ -2374,26 +2726,13 @@
                                 dialog.style.top = (window.innerHeight/ 2 - 100) + 'px';
                             }
 
-
                             close.addEventListener('click', function () {
                                 hideDialog();
                             });
 
-                            function checkIfOtherWebrtcAudioGroupExist() {
-                                let audioSources = _scene.sceneInstance.audioSources;
-                                let otherWebrtcAudioGroupExist = false;
-                                for(let i in audioSources) {
-                                    if(audioSources[i].sourceType == 'group' && audioSources[i].groupType == 'webrtc') {
-                                        otherWebrtcAudioGroupExist = true;
-                                        break;
-                                    }
-                                }
-                                return otherWebrtcAudioGroupExist; 
-                            }
-
                             function showDialog(e) {
-                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('live-editor-hidden')) {
+                                    _dialogEl.classList.remove('live-editor-hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -2411,8 +2750,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('live-editor-hidden')){
+                                    _dialogEl.classList.add('live-editor-hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -2430,607 +2769,26 @@
                             }
                         }())
 
-
-                        var contextMenu = function (type) {
-                            let _type = type
-                            let _contextMenu = null
-
-                            _contextMenu = document.createElement('DIV');
-                            _contextMenu.className = 'Streams_webrtc-context-menu';
-
-                            function loadContextItems() {
-                                if (_type == 'visualSource') {
-                                    var activeScene = scenesInterface.getActive();
-                                    let selectedSource = activeScene.sourcesInterface.visualSources.getSelectedSource();
-                                    if (selectedSource.sourceInstance.sourceType == 'videoInput' && !selectedSource.sourceInstance.isScreensharing) {
-                                        let preferencesItem = document.createElement('DIV');
-                                        preferencesItem.className = 'Streams_webrtc-context-item';
-                                        preferencesItem.innerHTML = 'Preferences';
-                                        _contextMenu.appendChild(preferencesItem);
-                                        preferencesItem.addEventListener('click', function () {
-                                            addCameraPopup.showDialog({
-                                                source: selectedSource,
-                                                onOk: function (e) {
-                                                    if (!e.stream) {
-                                                        alert('No media stream added');
-                                                    }
-
-                                                    if(e.sourceType == 'separate') {
-                                                        selectedSource.sourceInstance.update({
-                                                            stream: e.stream,
-                                                            name: e.name,
-                                                            originalSize: e.originalSize,
-                                                            frameRate: e.frameRate
-                                                        });
-                                                    } else {
-                                                        console.log('add camera source: webrtc');
-                                                        let videoTracks = e.stream.getVideoTracks();
-                                                        for (let t in videoTracks) {
-                                                            videoTracks[t].stop();
-                                                        }
-                                                        activeScene.sourcesInterface.visualSources.removeSource();
-                                                        _webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
-                                                    }
-
-                                                    
-                                                },
-                                                onClose: function () {
-
-                                                }
-                                            });
-                                        });
-                                    } else if (selectedSource.sourceInstance.sourceType == 'videoInput' && selectedSource.sourceInstance.isScreensharing) {
-                                        let preferencesItem = document.createElement('DIV');
-                                        preferencesItem.className = 'Streams_webrtc-context-item';
-                                        preferencesItem.innerHTML = 'Preferences';
-                                        _contextMenu.appendChild(preferencesItem);
-                                        preferencesItem.addEventListener('click', function () {
-                                            addScreensharingInputPopup.showDialog({
-                                                source: selectedSource,
-                                                onOk: function (e) {
-                                                    if (!e.stream) {
-                                                        alert('No media stream added');
-                                                    }
-                                                    selectedSource.sourceInstance.update({
-                                                        stream: e.stream,
-                                                        name: e.name
-                                                    });
-                                                },
-                                                onClose: function () {
-
-                                                }
-                                            });
-                                        });
-                                    } else if (selectedSource.sourceInstance.sourceType == 'video') {
-                                        let preferencesItem = document.createElement('DIV');
-                                        preferencesItem.className = 'Streams_webrtc-context-item';
-                                        preferencesItem.innerHTML = 'Preferences';
-                                        _contextMenu.appendChild(preferencesItem);
-                                        preferencesItem.addEventListener('click', function () {
-                                            filtersPopup(selectedSource);
-                                        });
-                                    }
-
-                                }
-                            }
-
-                            function hide(e) {
-                                if (e.target.offsetParent != _contextMenu) {
-                                    if (_contextMenu.parentElement) _contextMenu.parentElement.removeChild(_contextMenu);
-                                    window.removeEventListener('click', hide);
-                                }
-                            }
-
-                            function show(e) {
-                                existingContextMenu = document.querySelector('.Streams_webrtc-context-menu');
-                                if (existingContextMenu && existingContextMenu.parentElement) existingContextMenu.parentElement.removeChild(existingContextMenu);
-                                let clientX = e.clientX;
-                                let clientY = e.clientY;
-                                _contextMenu.style.top = clientY + 'px';
-                                _contextMenu.style.left = clientX + 'px';
-
-                                loadContextItems();
-
-                                document.body.appendChild(_contextMenu);
-
-                                window.addEventListener('click', hide);
-                            }
-
-                            return {
-                                show: show
-                            }
-                        }
-
-                        return {
-                            syncList: syncList,
-                            loadList: loadList,
-                            hideResizingElement: hideResizingElement,
-                            moveForward: moveForward,
-                            moveBackward: moveBackward,
-                            removeSource: removeSource,
-                            addVideoInputSource: addVideoInputSource,
-                            addImageSource: addImageSource,
-                            addWatermark: addWatermark,
-                            addBackground: addBackground,
-                            addVideoSource: addVideoSource,
-                            getSelectedSource: getSelectedSource,
-                            getSourcesList: getSourcesList,
-                            checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist,
-                            createOrGet: createVisualSourcesList
-                        }
-                    }())
-
-                    var audioSources = (function () {
-                        var AudioListItem = function (source) {
-                            var sourceInstance = this;
-                            this.listType = 'audio';
-                            this._sourceInstance = source;
-                            this._title = source.title ? source.title : (source.name != null ? source.name : source.sourceType);
-                            this.remove = function () {
-                                var currentitem = this;
-                                if(this.itemEl != null && this.itemEl.parentNode != null) this.itemEl.parentNode.removeChild(this.itemEl);
-                                for(var i in _audioList) {
-                                    if(_audioList[i] == currentitem) {
-                                        _audioList.splice(i, 1);
-                                        break;
-                                    }
-                                }
-                            };
-                            this.isActive = function() {
-                                console.log('isActive', this)
-                                var currentitem = this;
-                                var sources = _scene.sceneInstance.audioSources;
-                                console.log('isActive active', sources)
-
-                                for(let s in sources) {
-                                    console.log('isActive for', sources[s], currentitem._sourceInstance)
-
-                                    if(sources[s] == currentitem._sourceInstance) {
-                                        console.log('isActive active')
-
-                                        return true;
-                                    }
-                                }
-                                console.log('isActive inactive')
-
-                                return false;
-                            };
-                            this.unmute = function() {
-                                console.log('mute')
-
-                                this._sourceInstance.active = true;
-                                if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
-                                    console.log('mute turn mic on')
-                                    _webrtcSignalingLib.localMediaControls.enableAudio();
-                                } else {
-                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.unmuteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
-                                    this.switchVisibilityIcon(true);
-                                    syncList();
-                                }
-                                
-                            };
-                            this.mute = function() {
-                                console.log('mute')
-                                this._sourceInstance.active = false;
-                                if(this._sourceInstance.sourceType == 'webrtc' && this._sourceInstance.participant.isLocal) {
-                                    console.log('mute turn mic off')
-                                    _webrtcSignalingLib.localMediaControls.disableAudio();
-                                } else {
-                                    tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.muteSource(this._sourceInstance, this._sourceInstance.sourceType == 'audio' ? true : false);
-                                    this.switchVisibilityIcon(false);
-                                }
-                                
-                                syncList();
-                            };
-                            this.switchVisibilityIcon = function (visibility) {
-                                if(visibility === true) {
-                                    this.visibilityEl.innerHTML = _streamingIcons.liveOn;
-                                } else if (visibility === false) {
-                                    this.visibilityEl.innerHTML = _streamingIcons.liveOff;
-                                }
-                            };
-                            this.toggle = function() {
-                                if(sourceInstance._sourceInstance.active == true) {
-                                    sourceInstance.mute();
-                                } else {
-                                    sourceInstance.unmute();
-                                }
-                            };
-                            this.params = {
-                                _loop: _webrtcSignalingLib.getOptions().liveStreaming.loopAudio,
-                                _localOutput:_webrtcSignalingLib.getOptions().liveStreaming.localOutput,
-
-                                set loop(value) {this._loop = value;},
-                                set localOutput(value) {this._localOutput = value;},
-                                get localOutput() {return typeof this._localOutput == 'object' ? this._localOutput.checked : this._localOutput;},
-                                get loop() {return typeof this._loop == 'object' ? this._loop.checked : this._loop;}
-                            };
-                        
-                            var itemEl = document.createElement('DIV');
-                            itemEl.className = 'Streams_webrtc_popup-sources-item';
-                            var itemElText = document.createElement('DIV');
-                            itemElText.innerHTML = this._title ? this._title : '';
-                            itemElText.className = 'Streams_webrtc_popup-sources-item-text';
-                            var itemElControl = document.createElement('DIV');
-                            itemElControl.className = 'Streams_webrtc_popup-sources-item-control';
-                            var itemElControlVisibility = document.createElement('DIV');
-                            itemElControlVisibility.className = 'Streams_webrtc_popup-sources-item-visibility';
-                            itemElControlVisibility.innerHTML = _streamingIcons.liveOn;
-                            let sourceType = this._sourceInstance.sourceType;
-                            console.log('AAAAAAAA', sourceType)
-                            if(sourceType == 'group' || sourceType == 'audio' || sourceType == 'audioInput' || (sourceType == 'webrtc' && !this._sourceInstance.participant.isLocal)){
-                                itemElControl.appendChild(itemElControlVisibility);
-                            } 
-                            itemEl.appendChild(itemElText);
-                            itemEl.appendChild(itemElControl);
-                            this.visibilityEl = itemElControlVisibility;
-                            this.itemEl = itemEl;
-                            this.titleEl = itemElText;
-                            this.itemEl.addEventListener('click', function () {
-                                console.log('sourceInstance.sourceInstance', sourceInstance.sourceInstance.sourceType);
-                                selectSource(sourceInstance);
-
-                                optionsColumn.update();
-                            })
-                            itemElControlVisibility.addEventListener('click', this.toggle)
-
-                            this._sourceInstance.on('nameChanged', function (newName) {
-                                console.log('nameChanged set', this._sourceInstance)
-    
-                                sourceInstance.title = newName;
-                            })
-                        }
-
-                        AudioListItem.prototype = new ListItem();
-
-                        Object.defineProperties(AudioListItem.prototype, {
-                            'sourceInstance': {
-                                'get': function() { 
-                                    return this._sourceInstance;
-                                }
-                            }
-                        });
-                        Object.defineProperties(AudioListItem.prototype, {
-                            'title': {
-                                'set': function(val) { if(this.titleEl) this.titleEl.innerHTML = val; }
-                            }
-                        });
-
-                        //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
-                        if(_controlsTool != null && _webrtcSignalingLib != null) {
-                            _webrtcSignalingLib.event.on('micDisabled', function () {
-                                for (let i in _audioList) {
-                                    if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
-                                        _audioList[i].switchVisibilityIcon(false);
-                                    }
-                                }
-                            });
-                            _webrtcSignalingLib.event.on('micEnabled', function () {
-                                for (let i in _audioList) {
-                                    if (_audioList[i].sourceInstance.sourceType == 'webrtc' && _audioList[i].sourceInstance.participant.isLocal) {
-                                        _audioList[i].switchVisibilityIcon(true);
-                                    }
-                                }
-                            });
-                        }
-
-                        function addItem(item) {
-                            if (item == null || _audioSourcesListEl == null) return;
-                            console.log('audio: addItem', item)
-                            console.log('audio: addItem itemEl', item.itemEl)
-                            _audioList.push(item)
-                            console.log('audio: addItem element', _audioSourcesListEl)
-
-                            _audioSourcesListEl.insertBefore(item.itemEl, _audioSourcesListEl.firstChild);
-                        }
-
-                        function syncList() {
-                            var sources = _scene.sceneInstance.audioSources;
-                            console.log('audio: syncList START', _audioList.length);
-                            try {
-                                var err = (new Error);
-                                console.log(err.stack);
-                            } catch (e) {
-            
-                            }
-                            console.log('audio: syncList sources', sources.length);
-
-                            for (let i = _audioList.length - 1; i >= 0; i--) {
-                                console.log('audio: syncList _audioList', _audioList[i]);
-                                if(_audioList[i] == null) continue;
-
-                                if(_audioList[i].isActive() == false) {
-                                    console.log('audio: syncList remove',  _audioList[i]);
-
-                                    _audioList[i].remove();
-                                    continue;
-                                }
-                                if(_audioList[i].sourceInstance.active === true) {
-                                    _audioList[i].switchVisibilityIcon(true);
-                                } else if(_audioList[i].sourceInstance.active === false) {
-                                    _audioList[i].switchVisibilityIcon(false);
-                                }
-                            }
-
-                            for (let s in sources) {
-                                if(sources[s].sourceType == 'webrtcrect' || sources[s].sourceType == 'webrtctext') continue;
-                                let newSource = true;
-                                for (let i in _audioList) {
-                                    if(sources[s] == _audioList[i].sourceInstance) {
-                                        newSource = false;
-                                        break;
-                                    }
-                                }
-
-                                if(newSource) {
-                                    var listItem = new AudioListItem(sources[s]);
-                                    console.log('audio: syncList add',  listItem, listItem.sourceInstance);
-                                    if(sources[s].active === true) {
-                                        listItem.switchVisibilityIcon(true);
-                                    } else if(sources[s].active === false) {
-                                        listItem.switchVisibilityIcon(false);
-                                    }
-                                    addItem(listItem);
-                                }
-                            }
-
-                            sortList('audio');
-                        }
-
-                        function selectSource(sourceItem) {
-                            console.log('selectSource', sourceItem)
-                            if(sourceItem.itemEl && !sourceItem.itemEl.classList.contains('Streams_webrtc_popup-sources-item-active')) (sourceItem.itemEl).classList.add('Streams_webrtc_popup-sources-item-active');
-
-                            _selectedSource = sourceItem;
-                            for(var i in _audioList) {
-                                console.log('selectSource for', _audioList[i], _selectedSource)
-                                if(_audioList[i] == _selectedSource) continue;
-                                console.log('selectSource for --', sourceItem.itemEl, (sourceItem.itemEl).classList.contains('Streams_webrtc_popup-sources-item-active'))
-
-                                if((_audioList[i].itemEl).classList.contains('Streams_webrtc_popup-sources-item-active')) {
-                                    console.log('selectSource remove');
-
-                                    (_audioList[i].itemEl).classList.remove('Streams_webrtc_popup-sources-item-active');
-                                }
-                            }
-
-                            console.log('selectSource _selectedSource', _selectedSource)
-
-                            var left = 0, top = 0;
-                            if(_streamingCanvas != null) {
-                                left = _streamingCanvas.offsetLeft;
-                                top = _streamingCanvas.offsetTop;
-                            }
-                            var canvasSize = tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.getCanvasSize();
-                            var prmtr1 = canvasSize.width * 2 + canvasSize.height * 2
-                            var realcanvasSize = _streamingCanvas.getBoundingClientRect();
-                            var prmtr2 = realcanvasSize.width * 2 + realcanvasSize.height * 2
-                            var timesBigger = prmtr1 >= prmtr2 ? prmtr1 / prmtr2 : prmtr2 / prmtr1;
-                            console.log('selectSource timesbigger', prmtr1, prmtr2, timesBigger)
-                        }
-
-                        function createAddSourceMenu() {
-                            var dropUp = document.createElement('DIV');
-                            dropUp.className = 'Streams_webrtc_popup-sources-add-menu';
-
-                            var audioItem = document.createElement('DIV');
-                            audioItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-audio';
-                            var audioItemIcon = document.createElement('DIV');
-                            audioItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
-                            var audioItemIconText = document.createElement('DIV');
-                            audioItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
-                            audioItemIconText.innerHTML = 'Browse Audio';
-                            audioItem.addEventListener('click', function (e) {
-                                addAudioPopup.showDialog(e);
-                            })
-
-                            audioItem.appendChild(audioItemIcon);
-                            audioItem.appendChild(audioItemIconText);
-                            dropUp.appendChild(audioItem);
-                            
-                            var micItem = document.createElement('DIV');
-                            micItem.className = 'Streams_webrtc_popup-sources-add-menu-item Streams_webrtc_popup-sources-add-mic';
-                            var micItemIcon = document.createElement('DIV');
-                            micItemIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
-                            var micItemIconText = document.createElement('DIV');
-                            micItemIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
-                            micItemIconText.innerHTML = 'Audio Input';
-                            micItem.addEventListener('click', function (e) {
-                                addMicrophoneAudioPopup.showDialog({
-                                    onOk: function (e) {
-                                        console.log('addMicrophoneAudioPopup: ', e);
-
-                                        if (!e.stream) {
-                                            alert('No media stream added');
-                                            return;
-                                        }
-                                        if(e.sourceType == 'separate') {
-                                            addAudioInputSource({
-                                                name: e.name,
-                                                stream: e.stream
-                                            });
-                                        } else {
-                                            console.log('add camera source: webrtc');
-                                            let audioTracks = e.stream.getAudioTracks();
-                                            for (let t in audioTracks) {
-                                                audioTracks[t].stop();
-                                            }
-                                            _webrtcSignalingLib.localMediaControls.toggleAudioInputs({deviceId:e.deviceId});
-                                        }
-                                        
-                                    },
-                                    onClose: function () {
-            
-                                    }
-                                });
-                            })
-
-                            micItem.appendChild(micItemIcon);
-                            micItem.appendChild(micItemIconText);
-                            dropUp.appendChild(micItem);
-
-                            var savedMedia = document.createElement('DIV');
-                            savedMedia.className = 'Streams_webrtc_popup-sources-add-menu-item';
-                            var savedMediaIcon = document.createElement('DIV');
-                            savedMediaIcon.className = 'Streams_webrtc_popup-sources-add-menu-icon';
-                            var savedMediaIconText = document.createElement('DIV');
-                            savedMediaIconText.className = 'Streams_webrtc_popup-sources-add-menu-text';
-                            savedMediaIconText.innerHTML = 'Saved Media';
-                            savedMedia.addEventListener('click', function (e) {
-                                console.log('_fileManagerTool', _fileManagerTool)
-
-                                if(!_fileManagerTool) return;
-
-                                _fileManagerTool.showDialog();
-
-                                _fileManagerTool.state.onSelect.set(function (stream) {
-                                    console.log('Streams/fileManager onSelect', stream)
-                                    if(stream.fields.attributes == '') {
-                                        console.error('Q.file.url is missing')
-                                        return;
-                                    }
-                                    var attributes = JSON.parse(stream.fields.attributes);
-                                    var link = Q.url(attributes['Q.file.url']);
-                                    console.log('Streams/fileManager attributes', link)
-                                    if(stream.fields.type == 'Streams/audio') {
-                                        addAudioSource(link);
-                                    } else {
-                                        alert('Wrong file type')
-                                    }
-
-                                    _fileManagerTool.closeDialog();
-                                }, 'importAudio')
-                            })
-
-                            savedMedia.appendChild(savedMediaIcon);
-                            savedMedia.appendChild(savedMediaIconText);
-                            dropUp.appendChild(savedMedia);
-
-
-                            //_dialogEl.appendChild(dropUp);
-                            return dropUp;
-                        }
-
-                        function createAudioSourcesList() {
-                            if(_audioSourcesEl != null) return _audioSourcesEl;
-                            var dialogBody = document.createElement('DIV');
-                            dialogBody.className = 'Streams_webrtc_popup-sources-audio-body';
-                            var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-sources-body-inner';
-                            _audioSourcesEl = dialogBody;
-                            _audioSourcesListEl = dialogBodyInner;
-
-                            var sourcesColumnControl = document.createElement('DIV');
-                            sourcesColumnControl.className = 'Streams_webrtc_popup-sources-control';
-
-                            var dropUpMenu = createAddSourceMenu();
-
-                            var sourcesColumnControlAddBtn = document.createElement('DIV');
-                            sourcesColumnControlAddBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-add';
-                            if(!tool.state.managingAudioSources) sourcesColumnControlAddBtn.classList.add('Streams_webrtc_inactive');
-                            sourcesColumnControlAddBtn.innerHTML = _streamingIcons.addItem;
-                            sourcesColumnControlAddBtn.appendChild(dropUpMenu);
-
-                            sourcesColumnControlAddBtn.addEventListener('click', function (event) {
-                                showDropUpMenu(dropUpMenu, sourcesColumnControlAddBtn);
-                            });
-
-                            sourcesColumnControl.appendChild(sourcesColumnControlAddBtn);
-
-                            var sourcesColumnControlBtn = document.createElement('DIV');
-                            sourcesColumnControlBtn.className = 'Streams_webrtc_popup-sources-control-btn Streams_webrtc_popup-sources-control-btn-remove';
-                            if(!tool.state.managingAudioSources) sourcesColumnControlBtn.classList.add('Streams_webrtc_inactive');
-                            sourcesColumnControlBtn.innerHTML = _streamingIcons.removeItem;
-                            sourcesColumnControlBtn.addEventListener('click', function () {
-                                removeAudioSource(_selectedSource);
-                            })
-                            sourcesColumnControl.appendChild(sourcesColumnControlBtn);
-
-                            dialogBody.appendChild(dialogBodyInner);
-                            dialogBody.appendChild(sourcesColumnControl)
-                            return dialogBody;
-                        }
-
-                        function addAudioSource(e) {
-                            console.log('addAudioSource', e)
-                            if(typeof e == 'string') {
-                                var pathhInfo = e.split('/');
-                                var title = pathhInfo[0] + '//.../' + pathhInfo[pathhInfo.length - 1];
-                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
-                                    sourceType: 'audio',
-                                    title: title,
-                                    url: e,
-                                });
-                            } else {
-                                var tgt = e.target || window.event.srcElement,
-                                    files = tgt.files;
-                                console.log('addAudioSource 2')
-
-                                if (FileReader && files && files.length) {
-                                    let file = files[0], mime = file.type;
-                                    let reader = new  FileReader();
-                                    reader.readAsArrayBuffer(file);
-                                    reader.onload = function(e) {
-                                        // The file reader gives us an ArrayBuffer:
-                                        let buffer = e.target.result;
-
-                                        // We have to convert the buffer to a blob:
-                                        let audioBlob = new Blob([new Uint8Array(buffer)], { type: mime });
-                                        console.log('addAudioSource onload', audioBlob)
-
-                                        // The blob gives us a URL to the video file:
-                                        let url = window.URL.createObjectURL(audioBlob);
-
-                                        tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
-                                            sourceType: 'audio',
-                                            title: files[0].name,
-                                            url: url,
-                                        });
-                                    }
-
-                                }
-
-                            }
-                        }
-
-                        function addAudioInputSource(e) {
-                            console.log('addAudioInputSource', e);
-                            tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.addSource({
-                                sourceType: 'audioInput',
-                                title: e.name,
-                                mediaStreamInstance: e.stream
-                            });
-                        }
-
-                        function removeAudioSource() {
-                            if(_selectedSource != null) {
-                                tool.livestreamingCanvasComposerTool.canvasComposer.audioComposer.removeSource(_selectedSource.sourceInstance);
-                                syncList();
-                                _selectedSource = null;
-                            };
-                            optionsColumn.update();
-                        }
-
                         var addAudioPopup = (function () {
                             var _dialogEl = null;
                             var _isHidden = true;
 
                             console.log('addVideoPopup')
                             var dialog=document.createElement('DIV');
-                            dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog-box-add-new-s Streams_webrtc_popup-add-audio Streams_webrtc_hidden';
+                            dialog.className = 'live-editor-dialog-box live-editor-dialog-box-add-new-s live-editor-popup-add-audio live-editor-hidden';
                             _dialogEl = dialog;
                             var dialogTitle=document.createElement('H3');
                             dialogTitle.innerHTML = 'Add audio';
-                            dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                            dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                             var dialogInner=document.createElement('DIV');
-                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            dialogInner.className = 'live-editor-dialog-inner';
                             var boxContent=document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                            boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
                             var boxContentText=document.createElement('DIV');
                             boxContentText.innerHTML = 'Please choose file from your computer or enter the link.';
                             var videoItemInput = document.createElement('INPUT');
-                            videoItemInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            videoItemInput.className = 'live-editor-popup-sources-add-menu-file';
                             videoItemInput.type = 'file';
                             videoItemInput.name = 'fileAudioSource';
                             videoItemInput.accept = 'audio/mp3, audio/*'
@@ -3042,7 +2800,7 @@
                             var boxContentText2=document.createElement('DIV');
                             boxContentText2.innerHTML = 'OR';
                             var imageItemLinkInput = document.createElement('INPUT');
-                            imageItemLinkInput.className = 'Streams_webrtc_popup-sources-add-menu-file';
+                            imageItemLinkInput.className = 'live-editor-popup-sources-add-menu-file';
                             imageItemLinkInput.type = 'text';
                             imageItemLinkInput.placeholder = 'Enter the link';
                             imageItemLinkInput.name = 'fileImageLink';
@@ -3053,7 +2811,7 @@
                             boxContent.appendChild(imageItemLinkInput);
 
                             var close=document.createElement('div');
-                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.className = 'live-editor-close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = 'cover';
@@ -3111,8 +2869,8 @@
 
                             function showDialog(e) {
                                 videoItemInput.value = '';
-                                if(_dialogEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogEl.classList.remove('Streams_webrtc_hidden');
+                                if(_dialogEl.classList.contains('live-editor-hidden')) {
+                                    _dialogEl.classList.remove('live-editor-hidden');
                                     var _clientX = e.clientX;
                                     var _clientY = e.clientY;
 
@@ -3130,8 +2888,8 @@
                             }
 
                             function hideDialog() {
-                                if(!_dialogEl.classList.contains('Streams_webrtc_hidden')){
-                                    _dialogEl.classList.add('Streams_webrtc_hidden');
+                                if(!_dialogEl.classList.contains('live-editor-hidden')){
+                                    _dialogEl.classList.add('live-editor-hidden');
                                     _isHidden = true;
                                 }
                             }
@@ -3161,7 +2919,7 @@
                                     this._mediaStream = value;
             
                                     if (_okButtonEl) {
-                                        _okButtonEl.classList.remove('Streams_webrtc_button-inactive');
+                                        _okButtonEl.classList.remove('live-editor-button-inactive');
                                     }
                                 },
                                 get mediaStream() { return this._mediaStream; },
@@ -3311,8 +3069,8 @@
             
                             function showDialog(optns) {
                                 options = optns;
-                                if (_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.remove('Streams_webrtc_hidden');
+                                if (_dialogueEl.classList.contains('live-editor-hidden')) {
+                                    _dialogueEl.classList.remove('live-editor-hidden');
             
                                     state.isHidden = false;
             
@@ -3347,8 +3105,8 @@
                                         tracks[t].stop();
                                     }
                                 }
-                                if (!_dialogueEl.classList.contains('Streams_webrtc_hidden')) {
-                                    _dialogueEl.classList.add('Streams_webrtc_hidden');
+                                if (!_dialogueEl.classList.contains('live-editor-hidden')) {
+                                    _dialogueEl.classList.add('live-editor-hidden');
                                     state.isHidden = true;
                                 }
             
@@ -3358,45 +3116,45 @@
                             }
             
                             var dialogue = document.createElement('DIV');
-                            dialogue.className = 'Streams_webrtc_dialog-box Streams_webrtc_popup-add-media-input Streams_webrtc_hidden';
+                            dialogue.className = 'live-editor-dialog-box live-editor-popup-add-media-input live-editor-hidden';
                             _dialogueEl = dialogue;
                             var close = document.createElement('div');
-                            close.className = 'Streams_webrtc_close-dialog-sign';
+                            close.className = 'live-editor-close-dialog-sign';
                             close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                             close.style.backgroundRepeat = 'no-repeat';
                             close.style.backgroundSize = '40px';
 
                             var dialogTitle = document.createElement('H3');
                             dialogTitle.innerHTML = 'Add audio input source';
-                            dialogTitle.className = 'Streams_webrtc_dialog-header';
+                            dialogTitle.className = 'live-editor-dialog-header';
             
                             var dialogInner = document.createElement('DIV');
-                            dialogInner.className = 'Streams_webrtc_dialog-inner';
+                            dialogInner.className = 'live-editor-dialog-inner';
                             var boxContent = document.createElement('DIV');
-                            boxContent.className = 'Streams_webrtc_dialog-content';
+                            boxContent.className = 'live-editor-dialog-content';
             
                             var addSourceControls = document.createElement('DIV');
-                            addSourceControls.className = 'Streams_webrtc_dialog-add-source-controls';
+                            addSourceControls.className = 'live-editor-dialog-add-source-controls';
                             var addSourceControlsInner = document.createElement('DIV');
-                            addSourceControlsInner.className = 'Streams_webrtc_dialog-add-source-controls-inner';
+                            addSourceControlsInner.className = 'live-editor-dialog-add-source-controls-inner';
                             dialogInner.appendChild(dialogTitle);
                             dialogue.appendChild(close);
         
                             var audioInputDevicesCon = document.createElement('DIV');
-                            audioInputDevicesCon.className = 'Streams_webrtc_dialog-add-source-controls-item Streams_webrtc_dialog-add-source-controls-devices';
+                            audioInputDevicesCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-devices';
                             var addSourceControlsDevicesCaption = document.createElement('DIV');
-                            addSourceControlsDevicesCaption.className = 'Streams_webrtc_dialog-add-source-controls-caption';
+                            addSourceControlsDevicesCaption.className = 'live-editor-dialog-add-source-controls-caption';
                             addSourceControlsDevicesCaption.innerHTML = 'Devices ';
                             var addSourceControlsDevicesReload = document.createElement('DIV');
-                            addSourceControlsDevicesReload.className = 'Streams_webrtc_dialog-add-source-controls-reload';
+                            addSourceControlsDevicesReload.className = 'live-editor-dialog-add-source-controls-reload';
                             addSourceControlsDevicesReload.innerHTML = _streamingIcons.reload;
                             var audioInputDevicesListCon = document.createElement('DIV');
-                            audioInputDevicesListCon.className = 'Streams_webrtc_dialog-add-source-controls-config Streams_webrtc_dialog-add-source-list-con';
+                            audioInputDevicesListCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-list-con';
                             var audioInputDevicesList = _devicesListEl = document.createElement('SELECT');
-                            audioInputDevicesList.className = 'Streams_webrtc_dialog-add-source-devices-list';
+                            audioInputDevicesList.className = 'live-editor-dialog-add-source-devices-list';
                             var loadDevicesListBtn = document.createElement('BUTTON');
                             loadDevicesListBtn.innerHTML = 'Reload devices list';
-                            loadDevicesListBtn.className = 'Streams_webrtc_dialog-add-source-load-list Streams_webrtc_button';
+                            loadDevicesListBtn.className = 'live-editor-dialog-add-source-load-list live-editor-button';
                             
                             addSourceControlsDevicesCaption.appendChild(addSourceControlsDevicesReload);
                             audioInputDevicesCon.appendChild(addSourceControlsDevicesCaption);
@@ -3406,14 +3164,14 @@
                             addSourceControlsInner.appendChild(audioInputDevicesCon);
             
                             var sourceNameCon = document.createElement('DIV');
-                            sourceNameCon.className = 'Streams_webrtc_dialog-add-source-controls-item Streams_webrtc_dialog-add-source-controls-name';
+                            sourceNameCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-name';
                             var sourceNameCaption = document.createElement('DIV');
-                            sourceNameCaption.className = 'Streams_webrtc_dialog-add-source-controls-caption';
+                            sourceNameCaption.className = 'live-editor-dialog-add-source-controls-caption';
                             sourceNameCaption.innerHTML = 'Name';
                             var sourceNameInputCon = document.createElement('DIV');
-                            sourceNameInputCon.className = 'Streams_webrtc_dialog-add-source-controls-config Streams_webrtc_dialog-add-source-name-con';
+                            sourceNameInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-name-con';
                             var sourceNameInput = _nameInputEl = document.createElement('INPUT');
-                            sourceNameInput.className = 'Streams_webrtc_dialog-add-source-name-input';
+                            sourceNameInput.className = 'live-editor-dialog-add-source-name-input';
                             sourceNameInput.type = 'text';
             
                             sourceNameCon.appendChild(sourceNameCaption);
@@ -3422,32 +3180,32 @@
                             addSourceControlsInner.appendChild(sourceNameCon);
             
                             var sourceTypeCon = document.createElement('DIV');
-                            sourceTypeCon.className = 'Streams_webrtc_dialog-add-source-controls-item Streams_webrtc_dialog-add-source-controls-type';
+                            sourceTypeCon.className = 'live-editor-dialog-add-source-controls-item live-editor-dialog-add-source-controls-type';
                             var sourceTypeCaption = document.createElement('DIV');
-                            sourceTypeCaption.className = 'Streams_webrtc_dialog-add-source-controls-caption';
+                            sourceTypeCaption.className = 'live-editor-dialog-add-source-controls-caption';
                             sourceTypeCaption.innerHTML = '';
                             var sourceTypeInputCon = document.createElement('DIV');
-                            sourceTypeInputCon.className = 'Streams_webrtc_dialog-add-source-controls-config Streams_webrtc_dialog-add-source-type-con';
+                            sourceTypeInputCon.className = 'live-editor-dialog-add-source-controls-config live-editor-dialog-add-source-type-con';
                             var separateSourceTypeLabel = document.createElement('LABEL');
-                            separateSourceTypeLabel.className = 'Streams_webrtc_dialog-add-source-type-label';
+                            separateSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
                             var separateSourceTypeInput = document.createElement('INPUT');
-                            separateSourceTypeInput.className = 'Streams_webrtc_dialog-add-source-type-input';
-                            separateSourceTypeInput.name = 'streams_webrtc_audio_input_type';
+                            separateSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
+                            separateSourceTypeInput.name = 'live-editor-audio_input_type';
                             separateSourceTypeInput.type = 'radio';
                             separateSourceTypeInput.value = 'separate';
                             separateSourceTypeInput.checked = 'true';
                             var separateSourceTypeLabelText = document.createElement('SPAN');
-                            separateSourceTypeLabelText.className = 'Streams_webrtc_dialog-add-source-type-label-text';
+                            separateSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                             separateSourceTypeLabelText.innerHTML = 'Only livestream viewers will hear this source';
                             var webrtcSourceTypeLabel = document.createElement('LABEL');
-                            webrtcSourceTypeLabel.className = 'Streams_webrtc_dialog-add-source-type-label';
+                            webrtcSourceTypeLabel.className = 'live-editor-dialog-add-source-type-label';
                             var webrtcSourceTypeInput = document.createElement('INPUT');
-                            webrtcSourceTypeInput.className = 'Streams_webrtc_dialog-add-source-type-input';
-                            webrtcSourceTypeInput.name = 'streams_webrtc_audio_input_type';
+                            webrtcSourceTypeInput.className = 'live-editor-dialog-add-source-type-input';
+                            webrtcSourceTypeInput.name = 'live-editor-audio_input_type';
                             webrtcSourceTypeInput.type = 'radio';
                             webrtcSourceTypeInput.value = 'webrtc';
                             var webrtcSourceTypeLabelText = document.createElement('SPAN');
-                            webrtcSourceTypeLabelText.className = 'Streams_webrtc_dialog-add-source-type-label-text';
+                            webrtcSourceTypeLabelText.className = 'live-editor-dialog-add-source-type-label-text';
                             webrtcSourceTypeLabelText.innerHTML = 'Evryone will hear this source';
 
                             sourceTypeCon.appendChild(sourceTypeCaption);
@@ -3461,10 +3219,10 @@
                             addSourceControlsInner.appendChild(sourceTypeCon);
             
                             var dialogButtonsCon = document.createElement('DIV');
-                            dialogButtonsCon.className = 'Streams_webrtc_dialog-add-source-buttons-con';
+                            dialogButtonsCon.className = 'live-editor-dialog-add-source-buttons-con';
                             var okButton = _okButtonEl = document.createElement('BUTTON');
                             okButton.innerHTML = 'OK';
-                            okButton.className = 'Streams_webrtc_dialog-add-source-ok-btn Streams_webrtc_button Streams_webrtc_button-inactive';
+                            okButton.className = 'live-editor-dialog-add-source-ok-btn live-editor-button live-editor-button-inactive';
                             dialogButtonsCon.appendChild(okButton);
                             addSourceControls.appendChild(addSourceControlsInner);
                             boxContent.appendChild(addSourceControls);
@@ -3540,10 +3298,182 @@
                             }
                         }())
 
+                        function PopupDialog(element, options) {
+                            var pupupInstance = this;
+                            this.element = element;
+                            this.content = options.content;
+                            this.popupDialogEl = null;
+                            this.hoverTimeout = null;
+                            this.hide = function(e) {
+                                if (e.target.offsetParent != this.popupDialogEl) {
+                                    if (this.popupDialogEl.parentElement) this.popupDialogEl.parentElement.removeChild(this.popupDialogEl);
+                                    window.removeEventListener('click', hide);
+                                }
+                            }
+
+                            this.show = function(e) {
+                                let existingPopupDialog = document.querySelector('.live-editor-popup-dialog');
+                                if (existingPopupDialog && existingPopupDialog.parentElement) existingPopupDialog.parentElement.removeChild(existingPopupDialog);
+                                let clientX = e.clientX;
+                                let clientY = e.clientY;
+
+                                let triggeringElementRect = this.element.getBoundingClientRect();
+
+                                this.popupDialogEl.style.position = 'fixed';
+                                this.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 'px';
+                                this.popupDialogEl.style.left = triggeringElementRect.x + (triggeringElementRect.width / 2) + 'px';
+
+                                this.popupDialogEl.appendChild(this.content)
+
+                                document.body.appendChild(this.popupDialogEl);
+
+                                window.addEventListener('click', hide);
+                            }
+
+                            this.popupDialogEl = document.createElement('DIV');
+                            this.popupDialogEl.className = 'live-editor-popup-dialog';
+
+                            this.element.addEventListener('mouseenter', function (e) {
+                                pupupInstance.show(e);
+                            });
+
+                            this.element.addEventListener('mouseleave', function (e) {
+                                /*if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
+                                    e.stopPropagation();
+                                    e.preventDefault();
+                                }*/
+                                pupupInstance.hoverTimeout = setTimeout(function () {
+                                    pupupInstance.hide(e);
+                                }, 600)
+                            });
+                        }
+
+                        var contextMenu = function (type) {
+                            let _type = type
+                            let _contextMenu = null
+
+                            _contextMenu = document.createElement('DIV');
+                            _contextMenu.className = 'live-editor-context-menu';
+
+                            function loadContextItems() {
+                                if (_type == 'visualSource') {
+                                    var activeScene = scenesInterface.getActive();
+                                    let selectedSource = activeScene.sourcesInterface.visualSources.getSelectedSource();
+                                    if (selectedSource.sourceInstance.sourceType == 'videoInput' && !selectedSource.sourceInstance.isScreensharing) {
+                                        let preferencesItem = document.createElement('DIV');
+                                        preferencesItem.className = 'live-editor-context-item';
+                                        preferencesItem.innerHTML = 'Preferences';
+                                        _contextMenu.appendChild(preferencesItem);
+                                        preferencesItem.addEventListener('click', function () {
+                                            addCameraPopup.showDialog({
+                                                source: selectedSource,
+                                                onOk: function (e) {
+                                                    if (!e.stream) {
+                                                        alert('No media stream added');
+                                                    }
+
+                                                    if(e.sourceType == 'separate') {
+                                                        selectedSource.sourceInstance.update({
+                                                            stream: e.stream,
+                                                            name: e.name,
+                                                            originalSize: e.originalSize,
+                                                            frameRate: e.frameRate
+                                                        });
+                                                    } else {
+                                                        console.log('add camera source: webrtc');
+                                                        let videoTracks = e.stream.getVideoTracks();
+                                                        for (let t in videoTracks) {
+                                                            videoTracks[t].stop();
+                                                        }
+                                                        activeScene.sourcesInterface.visualSources.removeSource();
+                                                        _webrtcSignalingLib.localMediaControls.toggleCameras({deviceId:e.deviceId});
+                                                    }
+
+                                                    
+                                                },
+                                                onClose: function () {
+
+                                                }
+                                            });
+                                        });
+                                    } else if (selectedSource.sourceInstance.sourceType == 'videoInput' && selectedSource.sourceInstance.isScreensharing) {
+                                        let preferencesItem = document.createElement('DIV');
+                                        preferencesItem.className = 'live-editor-context-item';
+                                        preferencesItem.innerHTML = 'Preferences';
+                                        _contextMenu.appendChild(preferencesItem);
+                                        preferencesItem.addEventListener('click', function () {
+                                            addScreensharingInputPopup.showDialog({
+                                                source: selectedSource,
+                                                onOk: function (e) {
+                                                    if (!e.stream) {
+                                                        alert('No media stream added');
+                                                    }
+                                                    selectedSource.sourceInstance.update({
+                                                        stream: e.stream,
+                                                        name: e.name
+                                                    });
+                                                },
+                                                onClose: function () {
+
+                                                }
+                                            });
+                                        });
+                                    } else if (selectedSource.sourceInstance.sourceType == 'video') {
+                                        let preferencesItem = document.createElement('DIV');
+                                        preferencesItem.className = 'live-editor-context-item';
+                                        preferencesItem.innerHTML = 'Preferences';
+                                        _contextMenu.appendChild(preferencesItem);
+                                        preferencesItem.addEventListener('click', function () {
+                                            filtersPopup(selectedSource);
+                                        });
+                                    }
+
+                                }
+                            }
+
+                            function hide(e) {
+                                if (e.target.offsetParent != _contextMenu) {
+                                    if (_contextMenu.parentElement) _contextMenu.parentElement.removeChild(_contextMenu);
+                                    window.removeEventListener('click', hide);
+                                }
+                            }
+
+                            function show(e) {
+                                existingContextMenu = document.querySelector('.live-editor-context-menu');
+                                if (existingContextMenu && existingContextMenu.parentElement) existingContextMenu.parentElement.removeChild(existingContextMenu);
+                                let clientX = e.clientX;
+                                let clientY = e.clientY;
+                                _contextMenu.style.top = clientY + 'px';
+                                _contextMenu.style.left = clientX + 'px';
+
+                                loadContextItems();
+
+                                document.body.appendChild(_contextMenu);
+
+                                window.addEventListener('click', hide);
+                            }
+
+                            return {
+                                show: show
+                            }
+                        }
+
                         return {
                             syncList: syncList,
-                            createOrGet: createAudioSourcesList,
-                            removeSource: removeAudioSource,
+                            loadList: loadList,
+                            hideResizingElement: hideResizingElement,
+                            moveForward: moveForward,
+                            moveBackward: moveBackward,
+                            removeSource: removeSource,
+                            addVideoInputSource: addVideoInputSource,
+                            addImageSource: addImageSource,
+                            addWatermark: addWatermark,
+                            addBackground: addBackground,
+                            addVideoSource: addVideoSource,
+                            getSelectedSource: getSelectedSource,
+                            getSourcesList: getSourcesList,
+                            checkIfOtherWebrtcVideoGroupExist: checkIfOtherWebrtcVideoGroupExist,
+                            createOrGet: createVisualSourcesList
                         }
                     }())
 
@@ -3551,12 +3481,6 @@
                         _sourcesListEl.innerHTML = '';
                         _sourcesListEl.appendChild(visualSources.createOrGet());
                         visualSources.syncList();
-                    }
-
-                    function showAudioSources() {
-                        _sourcesListEl.innerHTML = '';
-                        _sourcesListEl.appendChild(audioSources.createOrGet());
-                        audioSources.syncList();
                     }
 
                     function tabHandler(e) {
@@ -3569,21 +3493,20 @@
                             _activeInterface = visualSources;
                             showVisualSources();
                         } else if(tabName == 'audio') {
-                            _activeInterface = audioSources;
-                            showAudioSources();
+
                         }
 
                         for(let e in _sourcesTabs.children) {
                             if(typeof _sourcesTabs.children[e] != 'object') continue;
                             console.log('tabHandler', _sourcesTabs.children[e])
                             if(_sourcesTabs.children[e] == tabEl) {
-                                if(!_sourcesTabs.children[e].classList.contains('Streams_webrtc_popup-sources-title-tab-active')) {
-                                    _sourcesTabs.children[e].classList.add('Streams_webrtc_popup-sources-title-tab-active');
+                                if(!_sourcesTabs.children[e].classList.contains('live-editor-popup-sources-title-tab-active')) {
+                                    _sourcesTabs.children[e].classList.add('live-editor-popup-sources-title-tab-active');
                                 }
                                 continue;
                             }
-                            if(_sourcesTabs.children[e].classList.contains('Streams_webrtc_popup-sources-title-tab-active')) {
-                                _sourcesTabs.children[e].classList.remove('Streams_webrtc_popup-sources-title-tab-active');
+                            if(_sourcesTabs.children[e].classList.contains('live-editor-popup-sources-title-tab-active')) {
+                                _sourcesTabs.children[e].classList.remove('live-editor-popup-sources-title-tab-active');
                             }
                         }
                     }
@@ -3592,49 +3515,38 @@
                         if(_sceneSourcesColumnEl != null) return _sceneSourcesColumnEl;
                         
                         var sourcesColumnInner = document.createElement('DIV');
-                        sourcesColumnInner.className = 'Streams_webrtc_popup-sources-inner';
+                        sourcesColumnInner.className = 'live-editor-popup-sources-inner';
                         var sourcesColumnTitle = document.createElement('DIV');
-                        sourcesColumnTitle.className = 'Streams_webrtc_popup-sources-title';
+                        sourcesColumnTitle.className = 'live-editor-popup-sources-title';
                         var sourcesColumnTitleInner = _sourcesTabs = document.createElement('DIV');
-                        sourcesColumnTitleInner.className = 'Streams_webrtc_popup-sources-title-inner';
+                        sourcesColumnTitleInner.className = 'live-editor-popup-sources-title-inner';
                         var sourcesColumnTitleTab = document.createElement('DIV');
-                        sourcesColumnTitleTab.className = 'Streams_webrtc_popup-sources-title-tab Streams_webrtc_popup-sources-title-tab-active';
+                        sourcesColumnTitleTab.className = 'live-editor-popup-sources-title-tab live-editor-popup-sources-title-tab-active';
                         sourcesColumnTitleTab.dataset.tab = 'visual';
                         var sourcesColumnTitleTabInner = document.createElement('DIV');
-                        sourcesColumnTitleTabInner.className = 'Streams_webrtc_popup-sources-title-tab-inner';
+                        sourcesColumnTitleTabInner.className = 'live-editor-popup-sources-title-tab-inner';
                         sourcesColumnTitleTabInner.innerHTML = 'Sources';
                         sourcesColumnTitleTab.appendChild(sourcesColumnTitleTabInner);
                         sourcesColumnTitleInner.appendChild(sourcesColumnTitleTab);
-                        var audioColumnTitleTab = document.createElement('DIV');
-                        audioColumnTitleTab.className = 'Streams_webrtc_popup-sources-title-tab';
-                        audioColumnTitleTab.dataset.tab = 'audio';
-                        var audioColumnTitleTabInner = document.createElement('DIV');
-                        audioColumnTitleTabInner.className = 'Streams_webrtc_popup-sources-title-tab-inner';
-                        audioColumnTitleTabInner.innerHTML = 'Audio';
-                        audioColumnTitleTab.appendChild(audioColumnTitleTabInner);
-                        sourcesColumnTitleInner.appendChild(audioColumnTitleTab);
                         sourcesColumnTitle.appendChild(sourcesColumnTitleInner);
 
 
                         var sourcesColumnBody = document.createElement('DIV');
-                        sourcesColumnBody.className = 'Streams_webrtc_popup-sources-body';
+                        sourcesColumnBody.className = 'live-editor-popup-sources-body';
                         sourcesColumnInner.appendChild(sourcesColumnTitle);
                         sourcesColumnInner.appendChild(sourcesColumnBody);
                         _sourcesListEl = sourcesColumnBody;
 
                         _sourcesListEl.appendChild(visualSources.createOrGet());
-                        audioSources.createOrGet();
                         _activeInterface = visualSources;
 
                         sourcesColumnTitleTab.addEventListener('click', tabHandler);
-                        audioColumnTitleTab.addEventListener('click', tabHandler);
                         _sceneSourcesColumnEl = sourcesColumnInner;
                         return sourcesColumnInner;
                     }
 
                     function update() {
                         visualSources.syncList();
-                        audioSources.syncList();
 
                         let videoChatGroupExists = visualSources.checkIfOtherWebrtcVideoGroupExist();
 
@@ -3652,26 +3564,13 @@
                         }
                     }
 
-                    function loadSources(scene) {
-                        if(scene == null) return;
-                        console.log('loadSources', scene)
-                        //visualSources.loadList(scene.sources)
-                        //audioSources.loadList(scene.audioSources)
-                    }
-
                     function getSelectedSource() {
                         return _selectedSource;
-                        if(_activeInterface == visualSources) {
-                            return visualSources.getSelectedSource();
-                        } else {
-                            return audioSources.getSelectedSource();
-                        }
                     }
 
                     return {
                         createSourcesCol: createSourcesCol,
                         update: update,
-                        loadSources: loadSources,
                         getSelectedSource: getSelectedSource,
                         visualSources: visualSources
                     }
@@ -3694,26 +3593,26 @@
                         var mediaElement = source.sourceInstance.audioInstance || source.sourceInstance.videoInstance;
 
                         var dialogControlsBody = document.createElement('DIV');
-                        dialogControlsBody.className = 'Streams_webrtc_popup-options-params-mediacontrols';
+                        dialogControlsBody.className = 'live-editor-popup-options-params-mediacontrols';
 
                         var seektimeCon = document.createElement('DIV');
-                        seektimeCon.className = 'Streams_webrtc_popup-options-params-seekbar-con';
+                        seektimeCon.className = 'live-editor-popup-options-params-seekbar-con';
                         var seektimeEl = document.createElement('DIV');
-                        seektimeEl.className = 'Streams_webrtc_popup-options-params-seekbar';
+                        seektimeEl.className = 'live-editor-popup-options-params-seekbar';
                         var seektimeProgress = document.createElement('span');
-                        seektimeProgress.className = 'Streams_webrtc_popup-options-params-seekbar-btn';
+                        seektimeProgress.className = 'live-editor-popup-options-params-seekbar-btn';
                         seektimeEl.appendChild(seektimeProgress);
                         seektimeCon.appendChild(seektimeEl);
                         dialogControlsBody.appendChild(seektimeCon);
 
                         var audioControlsCon = document.createElement('DIV');
-                        audioControlsCon.className = 'Streams_webrtc_popup-options-params-controls-con';
+                        audioControlsCon.className = 'live-editor-popup-options-params-controls-con';
                         var playPauseCon = document.createElement('DIV');
-                        playPauseCon.className = 'Streams_webrtc_popup-options-params-controls-con';
+                        playPauseCon.className = 'live-editor-popup-options-params-controls-con';
                         var playPauseInner = document.createElement('DIV');
-                        playPauseInner.className = 'Streams_webrtc_popup-options-params-controls-inner';
+                        playPauseInner.className = 'live-editor-popup-options-params-controls-inner';
                         var playPauseBtn = document.createElement('DIV');
-                        playPauseBtn.className = 'Streams_webrtc_popup-options-params-controls-btn';
+                        playPauseBtn.className = 'live-editor-popup-options-params-controls-btn';
                         playPauseBtn.innerHTML = mediaElement.paused ? _streamingIcons.playIcon : _streamingIcons.pauseIcon;
                         playPauseInner.appendChild(playPauseBtn);
                         playPauseCon.appendChild(playPauseInner);
@@ -3721,16 +3620,16 @@
 
 
                         var volumeCon = document.createElement('DIV');
-                        volumeCon.className = 'Streams_webrtc_popup-options-params-controls-volume-con';
+                        volumeCon.className = 'live-editor-popup-options-params-controls-volume-con';
                         var volumeIcon = document.createElement('DIV');
-                        volumeIcon.className = 'Streams_webrtc_popup-options-params-controls-volume-icon'
+                        volumeIcon.className = 'live-editor-popup-options-params-controls-volume-icon'
                         volumeIcon.innerHTML = _streamingIcons.disabledEnabledSpeaker;
                         var volumeSliderCon = document.createElement('DIV');
-                        volumeSliderCon.className = 'Streams_webrtc_popup-options-params-volume-slider-con';
+                        volumeSliderCon.className = 'live-editor-popup-options-params-volume-slider-con';
                         var volume = document.createElement('DIV');
-                        volume.className = 'Streams_webrtc_popup-options-params-controls-volume'
+                        volume.className = 'live-editor-popup-options-params-controls-volume'
                         var volumeSlider = document.createElement('SPAN');
-                        volumeSlider.className = 'Streams_webrtc_popup-options-params-controls-volume-slider';
+                        volumeSlider.className = 'live-editor-popup-options-params-controls-volume-slider';
                         volumeSlider.style.width = source.sourceInstance.gainNode.gain.value * 100 + '%';
                         volume.appendChild(volumeSlider);
                         volumeSliderCon.appendChild(volume);
@@ -3739,16 +3638,16 @@
                         audioControlsCon.appendChild(volumeCon);
 
                         var audioTimeCon = document.createElement('DIV');
-                        audioTimeCon.className = 'Streams_webrtc_popup-options-params-audio-time-con';
+                        audioTimeCon.className = 'live-editor-popup-options-params-audio-time-con';
                         var audioTimeInner = document.createElement('DIV');
-                        audioTimeInner.className = 'Streams_webrtc_popup-options-params-audio-time-inner';
+                        audioTimeInner.className = 'live-editor-popup-options-params-audio-time-inner';
                         var audioTimeCurrent = document.createElement('SPAN');
-                        audioTimeCurrent.className = 'Streams_webrtc_popup-options-params-audio-time-cur';
+                        audioTimeCurrent.className = 'live-editor-popup-options-params-audio-time-cur';
                         var audioTimeSpliter = document.createElement('SPAN');
-                        audioTimeSpliter.className = 'Streams_webrtc_popup-options-params-audio-time-split';
+                        audioTimeSpliter.className = 'live-editor-popup-options-params-audio-time-split';
                         audioTimeSpliter.innerHTML = '/';
                         var audioTimeDuration = document.createElement('SPAN');
-                        audioTimeDuration.className = 'Streams_webrtc_popup-options-params-audio-time-dur';
+                        audioTimeDuration.className = 'live-editor-popup-options-params-audio-time-dur';
                         audioTimeInner.appendChild(audioTimeCurrent);
                         audioTimeInner.appendChild(audioTimeSpliter);
                         audioTimeInner.appendChild(audioTimeDuration);
@@ -3757,11 +3656,11 @@
 
 
                         var loopAndLocalPlayCon = document.createElement('DIV');
-                        loopAndLocalPlayCon.className = 'Streams_webrtc_popup-options-params-loopplay-con';
+                        loopAndLocalPlayCon.className = 'live-editor-popup-options-params-loopplay-con';
                         var loopAudioCon = document.createElement('DIV');
-                        loopAudioCon.className = 'Streams_webrtc_popup-options-params-loopaudio-con';
+                        loopAudioCon.className = 'live-editor-popup-options-params-loopaudio-con';
                         var loopAudioLabel = document.createElement('LABEL');
-                        loopAudioLabel.className = 'Streams_webrtc_popup-options-params-looplabel';
+                        loopAudioLabel.className = 'live-editor-popup-options-params-looplabel';
                         var loopPlayCheckbox = document.createElement('INPUT');
                         loopPlayCheckbox.type = 'checkbox';
                         loopPlayCheckbox.name = 'loopAudio';
@@ -3773,9 +3672,9 @@
                         loopAndLocalPlayCon.appendChild(loopAudioCon);
 
                         var PlayLocallyCon = document.createElement('DIV');
-                        PlayLocallyCon.className = 'Streams_webrtc_popup-options-params-playlocally-con';
+                        PlayLocallyCon.className = 'live-editor-popup-options-params-playlocally-con';
                         var playLocallyLabel = document.createElement('LABEL');
-                        playLocallyLabel.className = 'Streams_webrtc_popup-options-params-playlocally-label';
+                        playLocallyLabel.className = 'live-editor-popup-options-params-playlocally-label';
                         var playLocallyCheckbox = document.createElement('INPUT');
                         playLocallyCheckbox.type = 'checkbox';
                         playLocallyCheckbox.name = 'loopAudio';
@@ -3790,13 +3689,13 @@
                         dialogControlsBody.appendChild(loopAndLocalPlayCon);
 
                         seektimeCon.addEventListener('mouseenter', function(){
-                            if(!seektimeProgress.classList.contains("Streams_webrtc_popup-options-seekbar-hover")) {
-                                seektimeProgress.classList.add("Streams_webrtc_popup-options-seekbar-hover");
+                            if(!seektimeProgress.classList.contains("live-editor-popup-options-seekbar-hover")) {
+                                seektimeProgress.classList.add("live-editor-popup-options-seekbar-hover");
                             }
                         })
                         seektimeCon.addEventListener('mouseleave', function(){
-                            if(seektimeProgress.classList.contains("Streams_webrtc_popup-options-seekbar-hover")) {
-                                seektimeProgress.classList.remove("Streams_webrtc_popup-options-seekbar-hover");
+                            if(seektimeProgress.classList.contains("live-editor-popup-options-seekbar-hover")) {
+                                seektimeProgress.classList.remove("live-editor-popup-options-seekbar-hover");
                             }
                         })
 
@@ -4030,10 +3929,10 @@
                             };
 
                             var itemEl = document.createElement('DIV');
-                            itemEl.className = 'Streams_webrtc_canvas-popup-list-item';
+                            itemEl.className = 'live-editor-canvas-popup-list-item';
                             var itemElText = document.createElement('DIV');
                             itemElText.innerHTML = name ? name : '';
-                            itemElText.className = 'Streams_webrtc_canvas-popup-list-text';
+                            itemElText.className = 'live-editor-canvas-popup-list-text';
                             itemEl.appendChild(itemElText);
                             this.itemEl = itemEl;
                             this.itemEl.addEventListener('click', function () {
@@ -4057,18 +3956,18 @@
                                 }
                             }
 
-                            if(layoutItem.itemEl && !layoutItem.itemEl.classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
-                                (layoutItem.itemEl).classList.add('Streams_webrtc_canvas-popup-list-item-active');
+                            if(layoutItem.itemEl && !layoutItem.itemEl.classList.contains('live-editor-canvas-popup-list-item-active')) {
+                                (layoutItem.itemEl).classList.add('live-editor-canvas-popup-list-item-active');
                             }
 
                             _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].selectedLayout = layoutItem;
                             for(let i in layoutList) {
                                 if(layoutList[i] == layoutItem) continue;
-                                console.log('selectLayout for --', layoutItem.itemEl, (layoutItem.itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active'))
+                                console.log('selectLayout for --', layoutItem.itemEl, (layoutItem.itemEl).classList.contains('live-editor-canvas-popup-list-item-active'))
 
-                                if((layoutList[i].itemEl).classList.contains('Streams_webrtc_canvas-popup-list-item-active')) {
+                                if((layoutList[i].itemEl).classList.contains('live-editor-canvas-popup-list-item-active')) {
                                     console.log('selectLayout remove');
-                                    (layoutList[i].itemEl).classList.remove('Streams_webrtc_canvas-popup-list-item-active');
+                                    (layoutList[i].itemEl).classList.remove('live-editor-canvas-popup-list-item-active');
                                 }
                             }
 
@@ -4080,7 +3979,7 @@
                                 return _generatedLayoutsListDialogs[_selectedSource.sourceInstance.id].dialog;
                             }
                             var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-layouts-body';
+                            dialogBodyInner.className = 'live-editor-popup-options-body-inner live-editor-popup-options-layouts-body';
 
                             let layoutList = [];
                             var tiledLayout = new LayoutListItem('Tiled');
@@ -4127,11 +4026,11 @@
                                 return _generatedLayoutsParamsDialogs[_selectedSource.sourceInstance.id][selectedLayout];
                             }
                             var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+                            dialogBodyInner.className = 'live-editor-popup-options-body-inner live-editor-popup-options-params-body';
 
                             if (selectedLayout == 'tiledStreamingLayout') {
                                 var marginsCon = document.createElement('DIV');
-                                marginsCon.className = 'Streams_webrtc_popup-options-params-margins';
+                                marginsCon.className = 'live-editor-popup-options-params-margins';
                                 var marginsInput = document.createElement('INPUT');
                                 marginsInput.type = 'number';
                                 marginsInput.id = 'layoutMargins';
@@ -4153,14 +4052,14 @@
 
                             //size
                             var sizeAndPositionCon = document.createElement('DIV');
-                            sizeAndPositionCon.className = 'Streams_webrtc_popup-options-params-size-pos';
+                            sizeAndPositionCon.className = 'live-editor-popup-options-params-size-pos';
 
                             var sizeCon = document.createElement('DIV');
-                            sizeCon.className = 'Streams_webrtc_popup-options-params-size';
+                            sizeCon.className = 'live-editor-popup-options-params-size';
                             sizeAndPositionCon.appendChild(sizeCon);
 
                             var sizeWidthCon = document.createElement('DIV');
-                            sizeWidthCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                            sizeWidthCon.className = 'live-editor-popup-options-params-size-width';
                             sizeCon.appendChild(sizeWidthCon);
                             var widthText = document.createElement('SPAN');
                             widthText.innerHTML = 'Width: ';
@@ -4171,7 +4070,7 @@
                             sizeWidthCon.appendChild(width);
 
                             var sizeHeightCon = document.createElement('DIV');
-                            sizeHeightCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                            sizeHeightCon.className = 'live-editor-popup-options-params-size-height';
                             sizeCon.appendChild(sizeHeightCon);
                             var heightText = document.createElement('SPAN');
                             heightText.innerHTML = 'Height: ';
@@ -4184,11 +4083,11 @@
 
                             //position
                             var positionCon = document.createElement('DIV');
-                            positionCon.className = 'Streams_webrtc_popup-options-params-position';
+                            positionCon.className = 'live-editor-popup-options-params-position';
                             sizeAndPositionCon.appendChild(positionCon);
 
                             var topPositionCon = document.createElement('DIV');
-                            topPositionCon.className = 'Streams_webrtc_popup-options-params-position-top';
+                            topPositionCon.className = 'live-editor-popup-options-params-position-top';
                             positionCon.appendChild(topPositionCon);
                             var topText = document.createElement('SPAN');
                             topText.innerHTML = 'Top: ';
@@ -4199,7 +4098,7 @@
                             topPositionCon.appendChild(topPos);
 
                             var leftPositionCon = document.createElement('DIV');
-                            leftPositionCon.className = 'Streams_webrtc_popup-options-params-position-left';
+                            leftPositionCon.className = 'live-editor-popup-options-params-position-left';
                             positionCon.appendChild(leftPositionCon);
                             var leftText = document.createElement('SPAN');
                             leftText.innerHTML = 'Left: ';
@@ -4210,14 +4109,14 @@
                             leftPositionCon.appendChild(leftPos);
 
                             var audioBgCon = document.createElement('DIV');
-                            audioBgCon.className = 'Streams_webrtc_popup-options-params-position-audio-bg'
+                            audioBgCon.className = 'live-editor-popup-options-params-position-audio-bg'
                             var audioBg = document.createElement('INPUT');
                             audioBg.type = 'color';
                             audioBg.id = 'audioBgColor';
                             audioBg.name = 'audioBgColor';
                             audioBg.value = _selectedSource.sourceInstance.params.audioLayoutBgColor;
                             var removeBg = document.createElement('DIV');
-                            removeBg.className = 'Streams_webrtc_popup-options-params-position-audio-res'
+                            removeBg.className = 'live-editor-popup-options-params-position-audio-res'
                             removeBg.innerHTML = '&#10060;'
                             audioBgCon.appendChild(document.createTextNode("Layout background color: "));
                             audioBgCon.appendChild(audioBg);
@@ -4321,45 +4220,45 @@
                                 if(typeof _layoutTabs.children[e] != 'object') continue;
                                 console.log('tabHandler', _layoutTabs.children[e])
                                 if(_layoutTabs.children[e] == tabEl) {
-                                    if(!_layoutTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                        _layoutTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    if(!_layoutTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                        _layoutTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
                                     }
                                     continue;
                                 }
-                                if(_layoutTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                    _layoutTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                if(_layoutTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                    _layoutTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
                                 }
                             }
                         }
 
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
-                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl.className = 'live-editor-popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        dialogTitle.className = 'live-editor-popup-options-title';
                         var dialogTitleInner = _layoutTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
                         var layoutsTab = document.createElement('DIV');
-                        layoutsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        layoutsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
                         layoutsTab.dataset.tab = 'layouts';
                         var layoutsTabInner = document.createElement('DIV');
-                        layoutsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        layoutsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         layoutsTabInner.innerHTML = 'Layouts';
                         layoutsTab.appendChild(layoutsTabInner);
                         dialogTitleInner.appendChild(layoutsTab);
                         var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab';
+                        paramsTab.className = 'live-editor-popup-options-title-tab';
                         paramsTab.dataset.tab = 'params';
                         var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         paramsTabInner.innerHTML = 'Params';
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
                         _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
-                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+                        dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createLayoutList());
                         _dialogEl.appendChild(dialogBody);
@@ -4393,14 +4292,14 @@
                             }
 
                             var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+                            dialogBodyInner.className = 'live-editor-popup-options-body-inner live-editor-popup-options-params-body';
 
                             //size
                             var descriptionCon = document.createElement('DIV');
-                            descriptionCon.className = 'Streams_webrtc_popup-options-params-webrtc-desc';
+                            descriptionCon.className = 'live-editor-popup-options-params-webrtc-desc';
 
                             var descriptionInner = document.createElement('DIV');
-                            descriptionInner.className = 'Streams_webrtc_popup-options-params-webrtc-desc-inner';
+                            descriptionInner.className = 'live-editor-popup-options-params-webrtc-desc-inner';
                             descriptionCon.appendChild(descriptionInner);
 
                             var displayVideoCon = document.createElement('DIV');
@@ -4454,7 +4353,7 @@
                             showBorderCon.appendChild(ShowBorderLabel);
 
                             var descNameCon = document.createElement('DIV');
-                            descNameCon.className = 'Streams_webrtc_popup-options-params-webrtc-desc-name';
+                            descNameCon.className = 'live-editor-popup-options-params-webrtc-desc-name';
                             descriptionInner.appendChild(descNameCon);
                             var nameText = document.createElement('SPAN');
                             nameText.innerHTML = 'Name: ';
@@ -4465,7 +4364,7 @@
                             descNameCon.appendChild(nameInput);
 
                             var descCaptionCon = document.createElement('DIV');
-                            descCaptionCon.className = 'Streams_webrtc_popup-options-params-webrtc-desc-caption';
+                            descCaptionCon.className = 'live-editor-popup-options-params-webrtc-desc-caption';
                             descriptionInner.appendChild(descCaptionCon);
                             var captionText = document.createElement('SPAN');
                             captionText.innerHTML = 'Caption: ';
@@ -4476,28 +4375,28 @@
                             descCaptionCon.appendChild(captionInput);
 
                             var bgColorCon = document.createElement('DIV');
-                            bgColorCon.className = 'Streams_webrtc_popup-options-params-captionbg'
+                            bgColorCon.className = 'live-editor-popup-options-params-captionbg'
                             var bgColorInput = document.createElement('INPUT');
                             bgColorInput.type = 'color';
                             bgColorInput.id = 'captionBgColor';
                             bgColorInput.name = 'captionBgColor';
                             bgColorInput.value = _selectedSource.sourceInstance.params.captionBgColor;
                             var removeBg = document.createElement('DIV');
-                            removeBg.className = 'Streams_webrtc_popup-options-params-captionbg-rem'
+                            removeBg.className = 'live-editor-popup-options-params-captionbg-rem'
                             removeBg.innerHTML = '&#10060;'
                             bgColorCon.appendChild(document.createTextNode("Caption background color: "));
                             bgColorCon.appendChild(bgColorInput);
                             bgColorCon.appendChild(removeBg);
 
                             var fontColorCon = document.createElement('DIV');
-                            fontColorCon.className = 'Streams_webrtc_popup-options-params-font-color'
+                            fontColorCon.className = 'live-editor-popup-options-params-font-color'
                             var fontColorInput = document.createElement('INPUT');
                             fontColorInput.type = 'color';
                             fontColorInput.id = 'captionFontColor';
                             fontColorInput.name = 'captionFontColor';
                             fontColorInput.value = _selectedSource.sourceInstance.params.captionFontColor;
                             var removeColor = document.createElement('DIV');
-                            removeColor.className = 'Streams_webrtc_popup-options-params-font-color-rem'
+                            removeColor.className = 'live-editor-popup-options-params-font-color-rem'
                             removeColor.innerHTML = '&#10060;'
                             fontColorCon.appendChild(document.createTextNode("Caption font color: "));
                             fontColorCon.appendChild(fontColorInput);
@@ -4606,37 +4505,37 @@
                                 if(typeof _optionsTabs.children[e] != 'object') continue;
                                 console.log('tabHandler', _optionsTabs.children[e])
                                 if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
                                     }
                                     continue;
                                 }
-                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
                                 }
                             }
                         }
 
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
-                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl.className = 'live-editor-popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        dialogTitle.className = 'live-editor-popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
                         var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
                         paramsTab.dataset.tab = 'params';
                         var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         paramsTabInner.innerHTML = 'Params';
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
                         _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
-                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+                        dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
@@ -4667,12 +4566,12 @@
                             }
 
                             var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+                            dialogBodyInner.className = 'live-editor-popup-options-body-inner live-editor-popup-options-params-body';
 
                             var keepRatioCon = document.createElement('DIV');
                             var keepRatio = document.createElement('INPUT');
                             keepRatio.type = 'checkbox';
-                            keepRatio.id = 'Streams_webrtc_popup-options-keep-ratio';
+                            keepRatio.id = 'live-editor-popup-options-keep-ratio';
                             keepRatio.name = 'keepRatio';
                             keepRatio.checked = true;
                             var keepRatioLabel = document.createElement('Label');
@@ -4682,14 +4581,14 @@
 
                             //size
                             var sizeAndPositionCon = document.createElement('DIV');
-                            sizeAndPositionCon.className = 'Streams_webrtc_popup-options-params-size-pos';
+                            sizeAndPositionCon.className = 'live-editor-popup-options-params-size-pos';
 
                             var sizeCon = document.createElement('DIV');
-                            sizeCon.className = 'Streams_webrtc_popup-options-params-size';
+                            sizeCon.className = 'live-editor-popup-options-params-size';
                             sizeAndPositionCon.appendChild(sizeCon);
 
                             var sizeWidthCon = document.createElement('DIV');
-                            sizeWidthCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                            sizeWidthCon.className = 'live-editor-popup-options-params-size-width';
                             sizeCon.appendChild(sizeWidthCon);
                             var widthText = document.createElement('SPAN');
                             widthText.innerHTML = 'Width: ';
@@ -4700,7 +4599,7 @@
                             sizeWidthCon.appendChild(width);
 
                             var sizeHeightCon = document.createElement('DIV');
-                            sizeHeightCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                            sizeHeightCon.className = 'live-editor-popup-options-params-size-height';
                             sizeCon.appendChild(sizeHeightCon);
                             var heightText = document.createElement('SPAN');
                             heightText.innerHTML = 'Height: ';
@@ -4713,11 +4612,11 @@
 
                             //position
                             var positionCon = document.createElement('DIV');
-                            positionCon.className = 'Streams_webrtc_popup-options-params-position';
+                            positionCon.className = 'live-editor-popup-options-params-position';
                             sizeAndPositionCon.appendChild(positionCon);
 
                             var topPositionCon = document.createElement('DIV');
-                            topPositionCon.className = 'Streams_webrtc_popup-options-params-position-top';
+                            topPositionCon.className = 'live-editor-popup-options-params-position-top';
                             positionCon.appendChild(topPositionCon);
                             var topText = document.createElement('SPAN');
                             topText.innerHTML = 'Top: ';
@@ -4728,7 +4627,7 @@
                             topPositionCon.appendChild(topPos);
 
                             var leftPositionCon = document.createElement('DIV');
-                            leftPositionCon.className = 'Streams_webrtc_popup-options-params-position-left';
+                            leftPositionCon.className = 'live-editor-popup-options-params-position-left';
                             positionCon.appendChild(leftPositionCon);
                             var leftText = document.createElement('SPAN');
                             leftText.innerHTML = 'Left: ';
@@ -4848,37 +4747,37 @@
                                 if(typeof _optionsTabs.children[e] != 'object') continue;
                                 console.log('tabHandler', _optionsTabs.children[e])
                                 if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
                                     }
                                     continue;
                                 }
-                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
                                 }
                             }
                         }
 
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
-                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl.className = 'live-editor-popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        dialogTitle.className = 'live-editor-popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
                         var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
                         paramsTab.dataset.tab = 'params';
                         var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         paramsTabInner.innerHTML = 'Params';
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
                         _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
-                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+                        dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
@@ -4909,14 +4808,14 @@
                             }
 
                             var dialogBodyInner = document.createElement('DIV');
-                            dialogBodyInner.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+                            dialogBodyInner.className = 'live-editor-popup-options-body-inner live-editor-popup-options-params-body';
 
                             var mediaControlsEl = createMediaControls(_selectedSource);
 
                             var keepRatioCon = document.createElement('DIV');
                             var keepRatio = document.createElement('INPUT');
                             keepRatio.type = 'checkbox';
-                            keepRatio.id = 'Streams_webrtc_popup-options-keep-ratio';
+                            keepRatio.id = 'live-editor-popup-options-keep-ratio';
                             keepRatio.name = 'keepRatio';
                             keepRatio.checked = true;
                             var keepRatioLabel = document.createElement('Label');
@@ -4926,14 +4825,14 @@
 
                             //size
                             var sizeAndPositionCon = document.createElement('DIV');
-                            sizeAndPositionCon.className = 'Streams_webrtc_popup-options-params-size-pos';
+                            sizeAndPositionCon.className = 'live-editor-popup-options-params-size-pos';
 
                             var sizeCon = document.createElement('DIV');
-                            sizeCon.className = 'Streams_webrtc_popup-options-params-size';
+                            sizeCon.className = 'live-editor-popup-options-params-size';
                             sizeAndPositionCon.appendChild(sizeCon);
 
                             var sizeWidthCon = document.createElement('DIV');
-                            sizeWidthCon.className = 'Streams_webrtc_popup-options-params-size-width';
+                            sizeWidthCon.className = 'live-editor-popup-options-params-size-width';
                             sizeCon.appendChild(sizeWidthCon);
                             var widthText = document.createElement('SPAN');
                             widthText.innerHTML = 'Width: ';
@@ -4944,7 +4843,7 @@
                             sizeWidthCon.appendChild(width);
 
                             var sizeHeightCon = document.createElement('DIV');
-                            sizeHeightCon.className = 'Streams_webrtc_popup-options-params-size-height';
+                            sizeHeightCon.className = 'live-editor-popup-options-params-size-height';
                             sizeCon.appendChild(sizeHeightCon);
                             var heightText = document.createElement('SPAN');
                             heightText.innerHTML = 'Height: ';
@@ -4957,11 +4856,11 @@
 
                             //position
                             var positionCon = document.createElement('DIV');
-                            positionCon.className = 'Streams_webrtc_popup-options-params-position';
+                            positionCon.className = 'live-editor-popup-options-params-position';
                             sizeAndPositionCon.appendChild(positionCon);
 
                             var topPositionCon = document.createElement('DIV');
-                            topPositionCon.className = 'Streams_webrtc_popup-options-params-position-top';
+                            topPositionCon.className = 'live-editor-popup-options-params-position-top';
                             positionCon.appendChild(topPositionCon);
                             var topText = document.createElement('SPAN');
                             topText.innerHTML = 'Top: ';
@@ -4972,7 +4871,7 @@
                             topPositionCon.appendChild(topPos);
 
                             var leftPositionCon = document.createElement('DIV');
-                            leftPositionCon.className = 'Streams_webrtc_popup-options-params-position-left';
+                            leftPositionCon.className = 'live-editor-popup-options-params-position-left';
                             positionCon.appendChild(leftPositionCon);
                             var leftText = document.createElement('SPAN');
                             leftText.innerHTML = 'Left: ';
@@ -5093,37 +4992,37 @@
                                 if(typeof _optionsTabs.children[e] != 'object') continue;
                                 console.log('tabHandler', _optionsTabs.children[e])
                                 if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
                                     }
                                     continue;
                                 }
-                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
                                 }
                             }
                         }
 
                         console.log('addImagePopup')
                         _dialogEl = document.createElement('DIV');
-                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl.className = 'live-editor-popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        dialogTitle.className = 'live-editor-popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
                         var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
                         paramsTab.dataset.tab = 'params';
                         var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         paramsTabInner.innerHTML = 'Params';
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
                         _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
-                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+                        dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
@@ -5154,7 +5053,7 @@
                             }
 
                             var paramsBody = document.createElement('DIV')
-                            paramsBody.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+                            paramsBody.className = 'live-editor-popup-options-body-inner live-editor-popup-options-params-body';
 
                             var mediaControlsEl = createMediaControls(_selectedSource);
                             paramsBody.appendChild(mediaControlsEl);
@@ -5204,37 +5103,37 @@
                                 if(typeof _optionsTabs.children[e] != 'object') continue;
                                 console.log('tabHandler', _optionsTabs.children[e])
                                 if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
                                     }
                                     continue;
                                 }
-                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
                                 }
                             }
                         }
 
                         console.log('audioSourceOptions pupup')
                         _dialogEl = document.createElement('DIV');
-                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl.className = 'live-editor-popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        dialogTitle.className = 'live-editor-popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
                         var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
                         paramsTab.dataset.tab = 'params';
                         var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         paramsTabInner.innerHTML = 'Params';
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
                         _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
-                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+                        dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
@@ -5264,7 +5163,7 @@
                             }
 
                             var paramsBody = document.createElement('DIV')
-                            paramsBody.className = 'Streams_webrtc_popup-options-body-inner Streams_webrtc_popup-options-params-body';
+                            paramsBody.className = 'live-editor-popup-options-body-inner live-editor-popup-options-params-body';
 
                             var mediaControlsEl = createMediaControls(_selectedSource);
                             paramsBody.appendChild(mediaControlsEl);
@@ -5314,37 +5213,37 @@
                                 if(typeof _optionsTabs.children[e] != 'object') continue;
                                 console.log('tabHandler', _optionsTabs.children[e])
                                 if(_optionsTabs.children[e] == tabEl) {
-                                    if(!_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                        _optionsTabs.children[e].classList.add('Streams_webrtc_popup-options-title-tab-active');
+                                    if(!_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                        _optionsTabs.children[e].classList.add('live-editor-popup-options-title-tab-active');
                                     }
                                     continue;
                                 }
-                                if(_optionsTabs.children[e].classList.contains('Streams_webrtc_popup-options-title-tab-active')) {
-                                    _optionsTabs.children[e].classList.remove('Streams_webrtc_popup-options-title-tab-active');
+                                if(_optionsTabs.children[e].classList.contains('live-editor-popup-options-title-tab-active')) {
+                                    _optionsTabs.children[e].classList.remove('live-editor-popup-options-title-tab-active');
                                 }
                             }
                         }
 
                         console.log('audioSourceOptions pupup')
                         _dialogEl = document.createElement('DIV');
-                        _dialogEl.className = 'Streams_webrtc_popup-options-dialog';
+                        _dialogEl.className = 'live-editor-popup-options-dialog';
                         var dialogTitle = document.createElement('DIV');
-                        dialogTitle.className = 'Streams_webrtc_popup-options-title';
+                        dialogTitle.className = 'live-editor-popup-options-title';
                         var dialogTitleInner = _optionsTabs = document.createElement('DIV');
-                        dialogTitleInner.className = 'Streams_webrtc_popup-options-title-inner';
+                        dialogTitleInner.className = 'live-editor-popup-options-title-inner';
 
                         var paramsTab = document.createElement('DIV');
-                        paramsTab.className = 'Streams_webrtc_popup-options-title-tab Streams_webrtc_popup-options-title-tab-active';
+                        paramsTab.className = 'live-editor-popup-options-title-tab live-editor-popup-options-title-tab-active';
                         paramsTab.dataset.tab = 'params';
                         var paramsTabInner = document.createElement('DIV');
-                        paramsTabInner.className = 'Streams_webrtc_popup-options-title-tab-inner';
+                        paramsTabInner.className = 'live-editor-popup-options-title-tab-inner';
                         paramsTabInner.innerHTML = 'Params';
                         paramsTab.appendChild(paramsTabInner);
                         dialogTitleInner.appendChild(paramsTab);
                         dialogTitle.appendChild(dialogTitleInner);
                         _dialogEl.appendChild(dialogTitle);
                         var dialogBody = _dialogBody = document.createElement('DIV');
-                        dialogBody.className = 'Streams_webrtc_popup-options-body';
+                        dialogBody.className = 'live-editor-popup-options-body';
 
                         //dialogBody.appendChild(createParamsList());
                         _dialogEl.appendChild(dialogBody);
@@ -5365,7 +5264,7 @@
 
                         if (selectedSource != null) {
                             let sceneIsInactive = true;
-                            let activeSceneSources = selectedSource.listType != 'audio' ? activeScene.sceneInstance.sources : activeScene.sceneInstance.audioSources;
+                            let activeSceneSources = activeScene.sceneInstance.sources;
                             for (let i in activeSceneSources) {
                                 if (activeSceneSources[i] == selectedSource.sourceInstance) {
                                     sceneIsInactive = false;
@@ -5388,7 +5287,7 @@
                             optionsColumn.videoSourceOptions.show(selectedSource);
                         } else if(selectedSource && selectedSource.sourceInstance.sourceType == 'audio' && selectedSource.sourceInstance.sourceType != 'webrtc') {
                             optionsColumn.audioSourceOptions.show(selectedSource);
-                        } else if(selectedSource && selectedSource.listType == 'audio' && selectedSource.sourceInstance.sourceType == 'webrtc') {
+                        } else if(selectedSource && selectedSource.listType == 'audio' && selectedSource.sourceInstance.sourceType == 'webrtcaudio') {
                             //optionsColumn.webrtcAudioSourceOptions.show(selectedSource);
                         } else {
                             optionsColumn.hideActiveView();
@@ -5447,40 +5346,40 @@
                         var audioOrVideoSource = mixerItem.sourceInstance;
                         console.log('addAudioToMixer', audioOrVideoSource);
                         var audioMixerItemCon = mixerItem.itemEl = document.createElement('DIV');
-                        audioMixerItemCon.className = 'Streams_webrtc_popup-mixer-item';
+                        audioMixerItemCon.className = 'live-editor-popup-mixer-item';
                         var audioMixerItemCaption = document.createElement('DIV');
-                        audioMixerItemCaption.className = 'Streams_webrtc_popup-mixer-caption';
+                        audioMixerItemCaption.className = 'live-editor-popup-mixer-caption';
                         //audioMixerItemCaption.innerHTML = mixerItem.title;
                         audioMixerItemCon.appendChild(audioMixerItemCaption);
             
                         var volumeControls = document.createElement('DIV');
-                        volumeControls.className = 'Streams_webrtc_popup-mixer-controls';
+                        volumeControls.className = 'live-editor-popup-mixer-controls';
                         audioMixerItemCon.appendChild(volumeControls);
             
                         var volumeCon = document.createElement('DIV');
-                        volumeCon.className = 'Streams_webrtc_popup-mixer-volume-con';
+                        volumeCon.className = 'live-editor-popup-mixer-volume-con';
                         volumeControls.appendChild(volumeCon);
                         var volumeSliderCon = document.createElement('DIV');
-                        volumeSliderCon.className = 'Streams_webrtc_popup-mixer-volume-slider-con';
+                        volumeSliderCon.className = 'live-editor-popup-mixer-volume-slider-con';
                         volumeCon.appendChild(volumeSliderCon);
                         volumeSliderCon.appendChild(createVisualization(mixerItem));
                         var volumeWrap = document.createElement('DIV');
-                        volumeWrap.className = 'Streams_webrtc_popup-mixer-volume-slider-wrap';
+                        volumeWrap.className = 'live-editor-popup-mixer-volume-slider-wrap';
                         volumeSliderCon.appendChild(volumeWrap);
                         var volume = document.createElement('DIV');
-                        volume.className = 'Streams_webrtc_popup-mixer-volume';
+                        volume.className = 'live-editor-popup-mixer-volume';
                         volumeWrap.appendChild(volume);
                         var volumeSlider = document.createElement('SPAN');
-                        volumeSlider.className = 'Streams_webrtc_popup-mixer-volume-slider';
+                        volumeSlider.className = 'live-editor-popup-mixer-volume-slider';
                         if (audioOrVideoSource.gainNode) console.log('audioOrVideoSource.gainNode.gain.value', audioOrVideoSource.gainNode.gain.value, audioOrVideoSource.gainNode.gain.value * 100);
                         volumeSlider.style.height = (audioOrVideoSource.gainNode && !(audioOrVideoSource.videoInstance && audioOrVideoSource.videoInstance.muted) ? audioOrVideoSource.gainNode.gain.value * 100 : 0) + '%';
                         volume.appendChild(volumeSlider);
             
                         var volumeIcons = document.createElement('DIV');
-                        volumeIcons.className = 'Streams_webrtc_popup-mixer-volume-icons';
+                        volumeIcons.className = 'live-editor-popup-mixer-volume-icons';
                         volumeCon.appendChild(volumeIcons);
                         var volumeIcon = document.createElement('DIV');
-                        volumeIcon.className = 'Streams_webrtc_popup-mixer-volume-icon';
+                        volumeIcon.className = 'live-editor-popup-mixer-volume-icon';
                         volumeIcon.innerHTML = _streamingIcons.enabledMicrophone;
                         volumeIcons.appendChild(volumeIcon);
 
@@ -5592,9 +5491,9 @@
                             console.log('createVisualization', mixerItem);
                             var audioOrVideoSource = mixerItem.sourceInstance;
                             var visualizationCanvasCon = document.createElement('DIV');
-                            visualizationCanvasCon.className = 'Streams_webrtc_popup-mixer-meter-con';
+                            visualizationCanvasCon.className = 'live-editor-popup-mixer-meter-con';
                             var visualizationCanvas = document.createElement('CANVAS');
-                            visualizationCanvas.className = 'Streams_webrtc_popup-mixer-meter';
+                            visualizationCanvas.className = 'live-editor-popup-mixer-meter';
                             visualizationCanvas.width = 4;
                             visualizationCanvas.height = 215;
                             visualizationCanvasCon.appendChild(visualizationCanvas);
@@ -5629,7 +5528,7 @@
                                         else if (sample > max) max = sample
                                     }
                                     let result = (max - min) / 255
-                                    //document.querySelector('.Streams_webrtc_popup-mixer-buttons-recording').innerHTML = result;
+                                    //document.querySelector('.live-editor-popup-mixer-buttons-recording').innerHTML = result;
                                     var width = WIDTH / 100 * (result * 100);
                                     var height = HEIGHT / 100 * (result * 100);
             
@@ -5700,11 +5599,11 @@
             
                     function createAudioMixerInterface() {
                         var audioColumn = document.createElement('DIV');
-                        audioColumn.className = 'Streams_webrtc_popup-audio-mixer';
+                        audioColumn.className = 'live-editor-popup-audio-mixer';
                         var audioColumnInner = document.createElement('DIV');
-                        audioColumnInner.className = 'Streams_webrtc_popup-audio-mixer-inner';
+                        audioColumnInner.className = 'live-editor-popup-audio-mixer-inner';
                         var globalAudioSources = _globalSourcesEl = document.createElement('DIV');
-                        globalAudioSources.className = 'Streams_webrtc_popup-audio-mixer-global';
+                        globalAudioSources.className = 'live-editor-popup-audio-mixer-global';
 
                         audioColumnInner.appendChild(globalAudioSources);
                         audioColumn.appendChild(audioColumnInner);
@@ -5720,22 +5619,22 @@
                 function showDropUpMenu(dropUpMenu, buttonThatOpensDropUpMenu) {
 
                     function hideOnClick(e) {
-                        if (!(buttonThatOpensDropUpMenu.contains(e.target) || e.target.matches('.Streams_webrtc_popup-sources-add-menu'))
-                            && dropUpMenu.classList.contains('Streams_webrtc_popup-sources-add-menu-show')) {
-                            dropUpMenu.classList.remove('Streams_webrtc_popup-sources-add-menu-show');
+                        if (!(buttonThatOpensDropUpMenu.contains(e.target) || e.target.matches('.live-editor-popup-sources-add-menu'))
+                            && dropUpMenu.classList.contains('live-editor-popup-sources-add-menu-show')) {
+                            dropUpMenu.classList.remove('live-editor-popup-sources-add-menu-show');
                             window.removeEventListener('click', hideOnClick)
                             e.preventDefault();
                             e.stopPropagation();
                         }
                     }
                     console.log('background', dropUpMenu)
-                    if (dropUpMenu.classList.contains('Streams_webrtc_popup-sources-add-menu-show')) {
+                    if (dropUpMenu.classList.contains('live-editor-popup-sources-add-menu-show')) {
                         console.log('background 2')
-                        dropUpMenu.classList.remove('Streams_webrtc_popup-sources-add-menu-show');
+                        dropUpMenu.classList.remove('live-editor-popup-sources-add-menu-show');
                     } else {
                         console.log('background 3')
 
-                        dropUpMenu.classList.add('Streams_webrtc_popup-sources-add-menu-show');
+                        dropUpMenu.classList.add('live-editor-popup-sources-add-menu-show');
                         window.addEventListener('mousedown', hideOnClick)
 
                         let openDropUpBtnRect = buttonThatOpensDropUpMenu.getBoundingClientRect();
@@ -5834,28 +5733,28 @@
                 function createPopup() {
                     console.log('createPopup 00', scenesInterface)
                     var dialog=document.createElement('DIV');
-                    dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden';
+                    dialog.className = 'live-editor-dialog-box live-editor-dialog_advanced_streaming live-editor-hidden';
                     _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = Q.getObject("webrtc.streamingSettings.title", _controlsTool.text);
-                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                    dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
-                    dialogInner.className = 'Streams_webrtc_dialog-inner';
+                    dialogInner.className = 'live-editor-dialog-inner';
                     var boxContent=document.createElement('DIV');
-                    boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                    boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
 
                     var previewBox = document.createElement('DIV');
-                    previewBox.className = 'Streams_webrtc_popup-preview';
+                    previewBox.className = 'live-editor-popup-preview';
                     var previewBoxBody = document.createElement('DIV');
-                    previewBoxBody.className = 'Streams_webrtc_popup-preview-body';
+                    previewBoxBody.className = 'live-editor-popup-preview-body';
                     var previewBoxBodyInner = document.createElement('DIV');
-                    previewBoxBodyInner.className = 'Streams_webrtc_popup-preview-body-inner';
+                    previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
                     var sourceResizingEl = _resizingElement = document.createElement('DIV');
-                    sourceResizingEl.className = 'Streams_webrtc_popup-preview-resizing';
+                    sourceResizingEl.className = 'live-editor-popup-preview-resizing';
 
                     var previewButtons = document.createElement('DIV');
-                    previewButtons.className = 'Streams_webrtc_popup-preview-buttons';
+                    previewButtons.className = 'live-editor-popup-preview-buttons';
                     var startRecordingBtn = document.createElement('BUTTON');
                     startRecordingBtn.type = 'button';
                     startRecordingBtn.className = 'Q_button';
@@ -5870,16 +5769,16 @@
 
 
                     var streamingControls=document.createElement('DIV');
-                    streamingControls.className = 'Streams_webrtc_popup-streaming-controls';
+                    streamingControls.className = 'live-editor-popup-streaming-controls';
 
                     var scenesColumn = scenesInterface.createScenesCol();
 
                     var sourcesColumn = document.createElement('DIV');
-                    sourcesColumn.className = 'Streams_webrtc_popup-sources';
+                    sourcesColumn.className = 'live-editor-popup-sources';
                     _sourcesColumnEl = sourcesColumn;
 
                     var optionsColumn = document.createElement('DIV');
-                    optionsColumn.className = 'Streams_webrtc_popup-options';
+                    optionsColumn.className = 'live-editor-popup-options';
                     _optionsColumnEl = optionsColumn;
 
                     _audioMixerColumnEl = audioMixerInterface.createAudioMixerInterface();
@@ -5890,7 +5789,7 @@
                     streamingControls.appendChild(_audioMixerColumnEl);
 
                     var close=document.createElement('div');
-                    close.className = 'Streams_webrtc_close-dialog-sign';
+                    close.className = 'live-editor-close-dialog-sign';
                     close.style.backgroundImage = 'url("' + Q.url("{{Q}}/img/close.png") + '"';
                     close.style.backgroundRepeat = 'no-repeat';
                     close.style.backgroundSize = 'cover';
@@ -5993,29 +5892,29 @@
                 function createPopupHorizontalMobile() {
                     console.log('createPopupHorizontalMobile 00', scenesInterface)
                     var dialog=document.createElement('DIV');
-                    dialog.className = 'Streams_webrtc_dialog-box Streams_webrtc_dialog_advanced_streaming Streams_webrtc_hidden Q_orientHorizontally';
+                    dialog.className = 'live-editor-dialog-box live-editor-dialog_advanced_streaming live-editor-hidden Q_orientHorizontally';
                     _dialogEl = dialog;
                     var dialogTitle=document.createElement('H3');
                     dialogTitle.innerHTML = 'Livestream Manager';
-                    dialogTitle.className = 'Streams_webrtc_dialog-header Q_dialog_title';
+                    dialogTitle.className = 'live-editor-dialog-header Q_dialog_title';
 
                     var dialogInner=document.createElement('DIV');
-                    dialogInner.className = 'Streams_webrtc_dialog-inner';
+                    dialogInner.className = 'live-editor-dialog-inner';
                     var boxContent=document.createElement('DIV');
-                    boxContent.className = 'Streams_webrtc_popup-streaming-box Streams_webrtc_popup-box';
+                    boxContent.className = 'live-editor-popup-streaming-box live-editor-popup-box';
 
                     var previewBox = document.createElement('DIV');
-                    previewBox.className = 'Streams_webrtc_popup-preview';
+                    previewBox.className = 'live-editor-popup-preview';
                     var previewBoxBody = document.createElement('DIV');
-                    previewBoxBody.className = 'Streams_webrtc_popup-preview-body';
+                    previewBoxBody.className = 'live-editor-popup-preview-body';
                     var previewBoxBodyInner = document.createElement('DIV');
-                    previewBoxBodyInner.className = 'Streams_webrtc_popup-preview-body-inner';
+                    previewBoxBodyInner.className = 'live-editor-popup-preview-body-inner';
                     var sourceResizingEl = _resizingElement = document.createElement('DIV');
-                    sourceResizingEl.className = 'Streams_webrtc_popup-preview-resizing';
+                    sourceResizingEl.className = 'live-editor-popup-preview-resizing';
 
 
                     var previewButtons = document.createElement('DIV');
-                    previewButtons.className = 'Streams_webrtc_popup-preview-buttons';
+                    previewButtons.className = 'live-editor-popup-preview-buttons';
                     var startRecordingBtn = document.createElement('BUTTON');
                     startRecordingBtn.type = 'button';
                     startRecordingBtn.className = 'Q_button';
@@ -6031,24 +5930,24 @@
 
 
                     var streamingControls=document.createElement('DIV');
-                    streamingControls.className = 'Streams_webrtc_popup-streaming-controls';
+                    streamingControls.className = 'live-editor-popup-streaming-controls';
 
                     var scenesColumn = scenesInterface.createScenesCol();
 
                     var sourcesColumn = document.createElement('DIV');
-                    sourcesColumn.className = 'Streams_webrtc_popup-sources';
+                    sourcesColumn.className = 'live-editor-popup-sources';
                     _sourcesColumnEl = sourcesColumn;
 
                     var scrollerBtn = document.createElement('DIV')
-                    scrollerBtn.className = 'Streams_webrtc_popup-streaming-controls-scroller';
+                    scrollerBtn.className = 'live-editor-popup-streaming-controls-scroller';
                     sourcesColumn.appendChild(scrollerBtn);
 
                     var optionsColumn = document.createElement('DIV');
-                    optionsColumn.className = 'Streams_webrtc_popup-options';
+                    optionsColumn.className = 'live-editor-popup-options';
                     _optionsColumnEl = optionsColumn;
 
                     var audioMixerColumn = document.createElement('DIV');
-                    audioMixerColumn.className = 'Streams_webrtc_popup-audio-mixer';
+                    audioMixerColumn.className = 'live-editor-popup-audio-mixer';
                     _audioMixerColumnEl = optionsColumn;
 
                     //streamingControls.appendChild(scenesColumn);
@@ -6057,7 +5956,7 @@
                     streamingControls.appendChild(audioMixerColumn);
 
                     var close=document.createElement('div');
-                    close.className = 'Streams_webrtc_close-dialog-sign';
+                    close.className = 'live-editor-close-dialog-sign';
                     close.innerHTML = '';
                     close.style.animation = 'none';
 
@@ -6102,11 +6001,11 @@
 
                     streamingControls.addEventListener('scroll', function () {
                         if(streamingControls.scrollLeft >= optionsColumn.offsetLeft / 2) {
-                            if(!scrollerBtn.classList.contains('Streams_webrtc_popup-streaming-scroller-back')) {
-                                scrollerBtn.classList.add('Streams_webrtc_popup-streaming-scroller-back')
+                            if(!scrollerBtn.classList.contains('live-editor-popup-streaming-scroller-back')) {
+                                scrollerBtn.classList.add('live-editor-popup-streaming-scroller-back')
                             }
                         } else {
-                            scrollerBtn.classList.remove('Streams_webrtc_popup-streaming-scroller-back')
+                            scrollerBtn.classList.remove('live-editor-popup-streaming-scroller-back')
                         }
                     });
 
@@ -6184,10 +6083,10 @@
 
                 function hide() {
                     if(activeDialog == null) return;
-                    if(!activeDialog.dialogEl.classList.contains('Streams_webrtc_hidden')){
-                        activeDialog.dialogEl.classList.add('Streams_webrtc_hidden');
+                    if(!activeDialog.dialogEl.classList.contains('live-editor-hidden')){
+                        activeDialog.dialogEl.classList.add('live-editor-hidden');
                         isHidden = true;
-                        var streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
+                        var streamingCanvas = document.querySelector('.live-editor-video-stream-canvas');
                         if(streamingCanvas != null) {
                             streamingCanvas.style.position = 'absolute';
                             streamingCanvas.style.top = '-999999999px';
@@ -6228,7 +6127,7 @@
                             activeDialog = mobileHorizontaldialogEl;
                             function resizeHandler() {
                                 setTimeout(function () {
-                                    if(!dialog.classList.contains('Streams_webrtc_hidden') && window.innerWidth < window.innerHeight) {
+                                    if(!dialog.classList.contains('live-editor-hidden') && window.innerWidth < window.innerHeight) {
                                         hide();
                                         show();
                                     }
@@ -6269,10 +6168,10 @@
 
 
 
-                    if(dialog && dialog.classList.contains('Streams_webrtc_hidden')) {
+                    if(dialog && dialog.classList.contains('live-editor-hidden')) {
                         tool.livestreamingCanvasComposerTool.canvasComposer.videoComposer.compositeVideosAndDraw();
 
-                        dialog.classList.remove('Streams_webrtc_hidden');
+                        dialog.classList.remove('live-editor-hidden');
                         isHidden = false;
 
                         var controlsRect = _controlsTool.controlBar.getBoundingClientRect();
@@ -6298,7 +6197,7 @@
 
                         }
 
-                        var streamingCanvas = _streamingCanvas = document.querySelector('.Streams_webrtc_video-stream-canvas');
+                        var streamingCanvas = _streamingCanvas = document.querySelector('.live-editor-video-stream-canvas');
                         if(streamingCanvas != null) {
                             streamingCanvas.style.position = '';
                             streamingCanvas.style.top = '';
@@ -6367,8 +6266,10 @@
                                     {},
                                     function () {
                                         tool.livestreamingRtmpSenderTool = this;
-                                        tool.livestreamingEditor = tool.create();
-                                        resolve(tool.livestreamingEditor);
+                                        Q.addStylesheet('{{Streams}}/css/tools/livestreamingEditor.css?ts=' + performance.now(), function () {
+                                            tool.livestreamingEditor = tool.create();
+                                            resolve(tool.livestreamingEditor);
+                                        });
                                     }
                                 );
                             }
