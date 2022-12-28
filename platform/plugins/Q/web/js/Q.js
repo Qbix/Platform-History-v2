@@ -7759,7 +7759,7 @@ Q.request = function (url, slotNames, callback, options) {
 			tout = o.timeout || Q.request.options.timeout;
 		}
 	
-		function _Q_request_callback(err, content, wasJsonP) {
+		function _Q_request_callback(err, content, wasJSONP) {
 			if (err) {
 				Q.handle(callback, this, [err, content, false]);
 				Q.handle(o.onProcessed, this, [err, content, false]);
@@ -7768,7 +7768,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var data = content;
 			if (o.parse !== false) {
 				try {
-					if (wasJsonP) {
+					if (wasJSONP) {
 						data = content;
 					} else {
 						data = JSON.parse(content)
@@ -7805,15 +7805,15 @@ Q.request = function (url, slotNames, callback, options) {
 			}
 		}
 
-		function _onResponse (data, wasJsonP) {
+		function _onResponse (data, wasJSONP) {
 			t.loaded = true;
 			if (t.timeout) {
 				clearTimeout(t.timeout);
 			}
 			Q.handle(o.onLoadEnd, request, [url, slotNames, o]);
 			if (!t.cancelled) {
-				o.onResponse.handle.call(request, data, wasJsonP);
-				_Q_request_callback.call(request, null, data, wasJsonP);
+				o.onResponse.handle.call(request, data, wasJSONP);
+				_Q_request_callback.call(request, null, data, wasJSONP);
 			}
 		}
 		
@@ -9881,7 +9881,12 @@ Q.loadUrl.request = function (url, slotNames, callback, options) {
 		ignoreHash: true,
 		handler: function noop () { },
 		slotNames: slotNames,
-		onResponse: callback
+		onResponse: function (response, wasJSONP) {
+			Q.handle(callback, this, [null, response, wasJSONP]);
+		},
+		onCancel: function (errors) {
+			Q.handle(callback, this, [errors]);
+		}
 	}, options));
 };
 
