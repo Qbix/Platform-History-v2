@@ -280,7 +280,7 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_2.Q_columns_overlapped {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(20px) translateZ(-5px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(22px) translateZ(-5px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_3.Q_columns_overlapped {
@@ -292,5 +292,5 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_5.Q_columns_overlapped {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(85px) translateZ(-5px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(55px) translateZ(-5px) skewX(0deg) skewY(0deg);
 }
