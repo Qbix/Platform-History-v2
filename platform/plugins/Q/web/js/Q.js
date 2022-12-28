@@ -9703,7 +9703,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					root.StyleFix.process();
 				}
 
-				Q.handle(onRequestProcessed, this, [err, response]);
+				Q.handle(o.onRequestProcessed, this, [err, response]);
 				
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
