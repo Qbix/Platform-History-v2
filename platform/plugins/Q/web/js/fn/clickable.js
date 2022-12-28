@@ -72,9 +72,9 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			if (!$this.closest('body').length) {
 				return;
 			}
-			var o = Q.Pointer.waitUntilVisible($this[0], _clickify);
-			o.observedElement = $this[0];
-			$this.data('observers').push(o);
+			var observer = Q.Pointer.waitUntilVisible($this[0], _clickify);
+			observer.observedElement = $this[0];
+			$this.data('observers').push(observer);
 		}
 
 		state.oldStyle = $this.attr('style');
