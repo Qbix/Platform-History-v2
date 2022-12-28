@@ -1428,7 +1428,7 @@
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, 'data', function (err, response) {
+			Q.loadUrl.request(url, 'data', function (err, response) {
 
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
