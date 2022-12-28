@@ -9880,7 +9880,7 @@ Q.loadUrl.request = function (url, slotNames, callback, options) {
 		ignoreLoadingErrors: true,
 		ignoreHash: true,
 		handler: function noop () { }
-	}));
+	}, options));
 };
 
 /**
