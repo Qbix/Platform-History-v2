@@ -7708,6 +7708,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Function} [options.preprocess] an optional function that takes the xhr object before the .send() is invoked on it
  * @param {boolean} [options.parse] set to false to pass the unparsed string to the callback
  * @param {boolean} [options.extend=true] if false, the URL is not extended with Q fields.
+ * @param {String} [options.loadExtras=null] if "all", asks the server to load any extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {boolean} [options.query=false] if true simply returns the query url without issuing the request
  * @param {String} [options.callbackName] if set, the URL is not extended with Q fields and the value is used to name the callback field in the request.
  * @param {boolean} [options.duplicate=true] you can set it to false in order not to fetch the same url again
@@ -7785,8 +7786,28 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.handle(o.onRedirect, Q, [data.redirect.url]);
 				redirected = data.redirect.url;
 			}
-			callback && callback.call(this, err, data, redirected);
-			Q.handle(o.onProcessed, this, [err, data, redirected]);
+			callback && callback.call(this, err, data, redirected, processScriptDataAndLines);
+			Q.handle(o.onProcessed, this, [err, data, redirected, processScriptDataAndLines]);
+			function processScriptDataAndLines() {
+				if (data.scriptData) {
+					Q.each(response.scriptData,
+					function _Q_scriptData_each(slot, data) {
+						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
+							Q.setObject(k, v);
+						});
+					});
+				}
+				if (data.sessionDataPaths) {
+					Q.Session.paths = data.sessionDataPaths;
+				}
+				if (data.scriptLines) {
+					for (i in response.scriptLines) {
+						if (response.scriptLines[i]) {
+							eval(response.scriptLines[i]);
+						}
+					}
+				}
+			}
 		};
 
 		function _onStart () {
@@ -9341,7 +9362,8 @@ Q.replace = function _Q_replace(container, source, options) {
  * @param {Object} [options.dontRestoreScrollPosition] set dontRestoreScroll[url] = true to skip fillSlots restoring scroll position for that url, or just set dontRestoreScroll[''] = true to skip all urls
  * @param {String} [options.key='Q'] If a response to the request initiated by this call to Q.loadUrl is preceded by another call to Q.loadUrl with the same key, then the response handler is not run for that response (since a newer one is pending or arrived).
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. Receives function as argument - the function might be called to cancel loading.
- * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
+ * @param {Q.Event} [options.onCancel] passed to the loader to be called if the loader cancels the response
+ * @param {Q.Event} [options.onResponse] handler to call when the loader gets a response but before it is processed
  * @param {Q.Event} [options.onError] event for when an error occurs, by default shows an alert
  * @param {Q.Event} [options.onLoad] event which occurs when the parsed data comes back from the server
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
@@ -9407,7 +9429,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	};
 	return promise;
 
-	function loadResponse(err, response, redirected) {
+	function loadResponse(err, response, redirected, processScriptDataAndLines) {
 		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
@@ -9583,24 +9605,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 				}
 
-				if (response.scriptData) {
-					Q.each(response.scriptData,
-					function _Q_loadUrl_scriptData_each(slot, data) {
-						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
-							Q.setObject(k, v);
-						});
-					});
-				}
-				if (response.sessionDataPaths) {
-					Q.Session.paths = response.sessionDataPaths;
-				}
-				if (response.scriptLines) {
-					for (i in response.scriptLines) {
-						if (response.scriptLines[i]) {
-							eval(response.scriptLines[i]);
-						}
-					}
-				}
+				processScriptDataAndLines();
 
 				if (!o.ignorePage) {
 					try {
@@ -9697,6 +9702,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				if (root.StyleFix) {
 					root.StyleFix.process();
 				}
+
+				Q.handle(onRequestProcessed, this, [err, response]);
 				
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
@@ -9872,6 +9879,7 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 /**
  * Like Q.request but processes extras from the response,
  * such scriptData, scriptLines, css, etc.
+ * Callback receives (err, data)
  */
 Q.loadUrl.request = function (url, slotNames, callback, options) {
 	return Q.loadUrl(url, Q.extend({
@@ -9879,13 +9887,10 @@ Q.loadUrl.request = function (url, slotNames, callback, options) {
 		ignorePage: true,
 		ignoreLoadingErrors: true,
 		ignoreHash: true,
-		handler: function noop () { },
+		handler: function doNothing () { return null; },
 		slotNames: slotNames,
-		onResponse: function (response, wasJSONP) {
-			Q.handle(callback, this, [null, response, wasJSONP]);
-		},
-		onCancel: function (errors) {
-			Q.handle(callback, this, [errors]);
+		onRequestProcessed: function (err, response) {
+			Q.handle(callback, this, [null, response]);
 		}
 	}, options));
 };
@@ -9893,6 +9898,7 @@ Q.loadUrl.request = function (url, slotNames, callback, options) {
 /**
  * Like Q.req but processes extras from the response,
  * such scriptData, scriptLines, css, etc.
+ * Callback receives (err, data)
  */
 Q.loadUrl.req = function (uri, slotNames, callback, options) {
 	if (typeof options === 'string') {
