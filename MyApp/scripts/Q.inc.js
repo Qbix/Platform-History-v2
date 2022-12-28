@@ -16,9 +16,13 @@
 	var header = "This is a Qbix Node script...\n";
 
 	var paths_filename = app_dir + '/local/paths';
-	var paths;
-	if (fs.existsSync(paths_filename+'.json')) {
-		var json = fs.readFileSync(paths_filename+'.json', 'utf8');
+	var paths, json, php;
+	if (fs.existsSync(paths_filename+'.json.php') {
+		php = fs.readFileSync(paths_filename+'.json.php', 'utf8');
+		json = php.split("\n").slice(1, -1);
+		paths = {Q_DIR: JSON.parse(json).platform};
+	} else if (fs.existsSync(paths_filename+'.json')) {
+		json = fs.readFileSync(paths_filename+'.json', 'utf8');
 		paths = {Q_DIR: JSON.parse(json).platform};
 	} else if (fs.existsSync(paths_filename+'.js')) {
 		// for backward compatibility

@@ -23,7 +23,7 @@ class Q_Capability
 	function addPermission($permission)
 	{
 		if (is_array($permission)) {
-			$this->permissions = $b = array_merge($this->permissions, $permission);
+			$this->permissions = array_merge($this->permissions, $permission);
 		} else {
 			$this->permissions[] = $permission;
 		}

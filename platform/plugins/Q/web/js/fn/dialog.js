@@ -176,7 +176,6 @@ Q.Tool.jQuery('Q/overlay',
 				} else {
 					_doShow();
 				}
-				$this.addClass('Q_overlay_open');
 				var htmlClass = data.options.htmlClass;
 				if (htmlClass) {
 					_htmlClassCount[htmlClass] = (_htmlClassCount[htmlClass] || 0) + 1;
@@ -200,6 +199,9 @@ Q.Tool.jQuery('Q/overlay',
 
 				function _doShow() {
 					$this.show();
+					setTimeout(function () {
+						$this.addClass('Q_overlay_open');
+					}, 0);
 					if (!data.options.noClose && data.options.closeOnEsc) {
 						$(document).on('keydown', closeThisOverlayOnEsc);
 					}
@@ -222,12 +224,12 @@ Q.Tool.jQuery('Q/overlay',
 				if (!data.options.noClose) {
 					$(document).off('keydown', closeThisOverlayOnEsc);
 				}
-				$this.removeClass('Q_overlay_open');
 				$this.find('input, select, textarea').trigger('blur');
 
 				if (false === Q.handle(data.options.beforeClose, $this, [$this])) {
 					return false;
 				}
+				$this.removeClass('Q_overlay_open');
 				if (data.options.fadeInOut) {
 					Q.Animation.play(function (x, y) {
 						if (x === 1) {

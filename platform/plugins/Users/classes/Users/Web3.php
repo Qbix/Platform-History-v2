@@ -251,10 +251,11 @@ class Users_Web3 extends Base_Users_Web3 {
 				'fieldpath' => "Users/apps/web3/$appId/rpcUrl"
 			));
 		}
-		$infuraId = Q::ifset(
-			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId', null
+		$infuraKey = $infuraId = Q::ifset(
+			$appInfo, 'providers', 'walletconnect', 'infura', 'projectId',
+			Q::ifset($appInfo, 'infura', 'key', null)
 		);
-		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId'));
+		$rpcUrl = Q::interpolate($appInfo['rpcUrl'], compact('infuraId', 'infuraKey'));
 		if (preg_match('/^https?:\/\//', $rpcUrl) === 1) {
 			if (empty(self::$providers[$rpcUrl])) {
 				$requestManager = new HttpRequestManager($rpcUrl);

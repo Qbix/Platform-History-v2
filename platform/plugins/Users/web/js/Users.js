@@ -535,12 +535,13 @@
 	}
 	
 	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
-		Q.req('Users/authenticate', 'data', function (err, response) {
+		Q.req('Users/authenticate', 'data', function (err, response, redirected, processScriptDataAndLines) {
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
 				return _doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
 			}
+			processScriptDataAndLines();
 			var user = response.slots.data;
 			if (user.authenticated !== true) {
 				priv.result = user.authenticated;
@@ -553,6 +554,7 @@
 			_doSuccess(user, platform, platformAppId, onSuccess, onCancel, options);
 		}, {
 			method: "post",
+			loadExtras: "session",
 			fields: Q.extend({ platform: platform }, fields)
 		});
 	}
@@ -1427,7 +1429,9 @@
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, 'data', function (err, response) {
+			Q.request(url, 'data', function (err, response, redirected, processScriptDataAndLines) {
+
+				processScriptDataAndLines();
 
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
@@ -1456,7 +1460,7 @@
 						priv.result = 'resend';
 						$('button', $this).html('Sent').attr('disabled', 'disabled');
 						Q.Dialogs.pop();
-						Users.Dialogs.activate(user.activateLink);
+						Users.Dialogs.activate(priv.activateLink);
 						return;
 					case 'register':
 						priv.result = 'register';
@@ -1477,7 +1481,10 @@
 					}
 					priv.login_onConnect(u);
 				}
-			}, {"method": "post"});
+			}, {
+				method: "post",
+				loadExtras: "session"
+			});
 			return false;
 		}
 
@@ -1519,7 +1526,8 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', 'data', function (err, response) {
+									Q.req('Users/resend', 'data', function (err, response, redirected, processScriptDataAndLines) {
+										processScriptDataAndLines();
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
@@ -3046,7 +3054,8 @@
 			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
 			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
 			if (fields['Q.Users.newSessionId']) {
-				Q.req('Users/session', function () {
+				Q.req('Users/session', function (err, response, redirected, processScriptDataAndLines) {
+					processScriptDataAndLines();
 					// Q.request.options.onProcessed would have changed loggedInUser already
 					// but maybe we want to redirect anyway, after a handoff
 					var href = Q.getObject("Q.Cordova.handoff.url");
@@ -3055,6 +3064,7 @@
 					}
 				}, {
 					method: 'post',
+					loadExtras: 'session',
 					fields: fields
 				});
 			}
@@ -3111,12 +3121,14 @@
 
 	Q.request.options.onProcessed.set(function (err, response) {
 		Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-		if (Users.lastSeenNonce !== Q.nonce
+		if (Users.lastSeenNonce 
+		&& Users.lastSeenNonce !== Q.nonce
 		&& !Users.login.occurring
 		&& !Users.authenticate.occurring
 		&& !Users.logout.occurring) {
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-			Q.req("Users/login", 'data', function (err, res) {
+			Q.req("Users/login", 'data', function (err, res, redirected, processScriptDataAndLines) {
+				processScriptDataAndLines();
 				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				var msg = Q.firstErrorMessage(err, res && res.errors);
 				if (msg) {
@@ -3132,6 +3144,8 @@
 					Users.roles = res.slots.data.roles || {};
 					Users.onLogin.handle(user);
 				}
+			}, {
+				loadExtras: "session"
 			});
 		}
 		Users.lastSeenNonce = Q.nonce;
@@ -3979,10 +3993,12 @@
 						identifier: me.email,
 						identifierType: 'email'
 					});
-					Q.request(url, ['data'], function (err, response) {
+					Q.request(url, ['data'], function (err, response, redirected, processScriptDataAndLines) {
 						if (response.errors) {
 							return;
 						}
+
+						processScriptDataAndLines();
 
 						// auto-login by authenticating with facebook
 						Users.authenticate('facebook', function (user) {

@@ -5560,6 +5560,27 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 	this.options = options;
 };
 
+Q.Request.processScriptDataAndLines = function (response) {
+	if (response.scriptData) {
+		Q.each(response.scriptData,
+		function _Q_scriptData_each() {
+			Q.each(this, function _Q_loadUrl_scriptData_assign(k, v) {
+				Q.setObject(k, v);
+			});
+		});
+	}
+	if (response.sessionDataPaths) {
+		Q.Session.paths = response.sessionDataPaths;
+	}
+	if (response.scriptLines) {
+		for (i in response.scriptLines) {
+			if (response.scriptLines[i]) {
+				eval(response.scriptLines[i]);
+			}
+		}
+	}
+}
+
 /**
  * A Q.Cache object stores items in a cache and throws out least-recently-used ones.
  * @class Q.Cache
@@ -7708,6 +7729,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Function} [options.preprocess] an optional function that takes the xhr object before the .send() is invoked on it
  * @param {boolean} [options.parse] set to false to pass the unparsed string to the callback
  * @param {boolean} [options.extend=true] if false, the URL is not extended with Q fields.
+ * @param {String} [options.loadExtras=null] if "all", asks the server to load any extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {boolean} [options.query=false] if true simply returns the query url without issuing the request
  * @param {String} [options.callbackName] if set, the URL is not extended with Q fields and the value is used to name the callback field in the request.
  * @param {boolean} [options.duplicate=true] you can set it to false in order not to fetch the same url again
@@ -7759,19 +7781,19 @@ Q.request = function (url, slotNames, callback, options) {
 			tout = o.timeout || Q.request.options.timeout;
 		}
 	
-		function _Q_request_callback(err, content, wasJsonP) {
+		function _Q_request_callback(err, content, wasJSONP) {
 			if (err) {
-				callback(err, content, false);
+				Q.handle(callback, this, [err, content, false]);
 				Q.handle(o.onProcessed, this, [err, content, false]);
 				return;
 			}
-			var data = content;
+			var response = content;
 			if (o.parse !== false) {
 				try {
-					if (wasJsonP) {
-						data = content;
+					if (wasJSONP) {
+						response = content;
 					} else {
-						data = JSON.parse(content)
+						response = JSON.parse(content)
 					}
 				} catch (e) {
 					console.warn('Q.request(' + url + ',['+slotNames+']):' + e);
@@ -7781,12 +7803,15 @@ Q.request = function (url, slotNames, callback, options) {
 				}
 			}
 			var redirected = false;
-			if (data && data.redirect && data.redirect.url) {
-				Q.handle(o.onRedirect, Q, [data.redirect.url]);
-				redirected = data.redirect.url;
+			if (response && response.redirect && response.redirect.url) {
+				Q.handle(o.onRedirect, Q, [response.redirect.url]);
+				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, data, redirected);
-			Q.handle(o.onProcessed, this, [err, data, redirected]);
+			callback && callback.call(this, err, response, redirected, _processScriptDataAndLines);
+			Q.handle(o.onProcessed, this, [err, response, redirected, _processScriptDataAndLines]);
+			function _processScriptDataAndLines() {
+				Q.Request.processScriptDataAndLines(response);
+			}
 		};
 
 		function _onStart () {
@@ -7805,15 +7830,15 @@ Q.request = function (url, slotNames, callback, options) {
 			}
 		}
 
-		function _onResponse (data, wasJsonP) {
+		function _onResponse (response, wasJSONP) {
 			t.loaded = true;
 			if (t.timeout) {
 				clearTimeout(t.timeout);
 			}
 			Q.handle(o.onLoadEnd, request, [url, slotNames, o]);
 			if (!t.cancelled) {
-				o.onResponse.handle.call(request, data, wasJsonP);
-				_Q_request_callback.call(request, null, data, wasJsonP);
+				o.onResponse.handle.call(request, response, wasJSONP);
+				_Q_request_callback.call(request, null, response, wasJSONP);
 			}
 		}
 		
@@ -9262,10 +9287,11 @@ Q.replace = function _Q_replace(container, source, options) {
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
-		&& !incomingElement.getAttribute('data-Q-replace') !== null) {
+		&& !incomingElement.getAttribute('data-Q-replace') !== null
+		&& replaceElements.indexOf(element) < 0) {
 			// If a tool exists with this exact id and has "data-Q-retain",
 			// then re-use it and all its HTML elements, unless
-			// the new tool HTML has data-Q-replace.
+			// the new tool HTML has data-Q-replace or is in options.replaceElements.
 			// This way tools can avoid doing expensive operations each time
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
@@ -9341,7 +9367,8 @@ Q.replace = function _Q_replace(container, source, options) {
  * @param {Object} [options.dontRestoreScrollPosition] set dontRestoreScroll[url] = true to skip fillSlots restoring scroll position for that url, or just set dontRestoreScroll[''] = true to skip all urls
  * @param {String} [options.key='Q'] If a response to the request initiated by this call to Q.loadUrl is preceded by another call to Q.loadUrl with the same key, then the response handler is not run for that response (since a newer one is pending or arrived).
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. Receives function as argument - the function might be called to cancel loading.
- * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
+ * @param {Q.Event} [options.onCancel] passed to the loader to be called if the loader cancels the response
+ * @param {Q.Event} [options.onResponse] handler to call when the loader gets a response but before it is processed
  * @param {Q.Event} [options.onError] event for when an error occurs, by default shows an alert
  * @param {Q.Event} [options.onLoad] event which occurs when the parsed data comes back from the server
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
@@ -9407,7 +9434,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	};
 	return promise;
 
-	function loadResponse(err, response, redirected) {
+	function loadResponse(err, response, redirected, processScriptDataAndLines) {
 		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
@@ -9583,24 +9610,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 				}
 
-				if (response.scriptData) {
-					Q.each(response.scriptData,
-					function _Q_loadUrl_scriptData_each(slot, data) {
-						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
-							Q.setObject(k, v);
-						});
-					});
-				}
-				if (response.sessionDataPaths) {
-					Q.Session.paths = response.sessionDataPaths;
-				}
-				if (response.scriptLines) {
-					for (i in response.scriptLines) {
-						if (response.scriptLines[i]) {
-							eval(response.scriptLines[i]);
-						}
-					}
-				}
+				processScriptDataAndLines();
 
 				if (!o.ignorePage) {
 					try {
@@ -9697,6 +9707,8 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				if (root.StyleFix) {
 					root.StyleFix.process();
 				}
+
+				Q.handle(o.onRequestProcessed, this, [err, response]);
 				
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
@@ -9867,6 +9879,26 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 			}, elem);
 		}
 	}
+};
+
+/**
+ * Similar to Q.request but processes the response like loadUrl,
+ * handling such scriptData, scriptLines, HTML classes, css, etc.
+ * Callback receives (err, data)
+ */
+Q.loadUrl.request = function (url, slotNames, callback, options) {
+	return Q.loadUrl(url, Q.extend({
+		ignoreHistory: true,
+		ignorePage: true,
+		ignoreLoadingErrors: true,
+		ignoreHash: true,
+		dontReload: true,
+		handler: function doNothing () { return null; },
+		slotNames: slotNames,
+		onRequestProcessed: function (err, response) {
+			Q.handle(callback, this, [null, response]);
+		}
+	}, options));
 };
 
 Q.loadUrl.loading = {};
@@ -10100,7 +10132,8 @@ function Q_hashChangeHandler() {
 	}
 	if (Q_hashChangeHandler.ignore) {
 		Q_hashChangeHandler.ignore = false;
-	} else if (url != Q_hashChangeHandler.currentUrl) {
+	} else if (url != Q_hashChangeHandler.currentUrl
+	&& url !== Q_hashChangeHandler.currentUrlTail) {
 		Q.handle(url.indexOf(baseUrl) == -1 ? baseUrl + '/' + url : url);
 		result = true;
 	}
@@ -13709,7 +13742,7 @@ Q.prompt = function(message, callback, options) {
 				$('<button class="Q_messagebox_done Q_button" />').html(o.ok)
 			)
 		),
-		'onActivate': function(dialog) {
+		'onActivate': {'Q.prompt': function(dialog) {
 			var field = $(dialog).find('input');
 			var fieldWidth = field.parent().width()
 				- field.next().outerWidth(true) - 5;
@@ -13723,8 +13756,10 @@ Q.prompt = function(message, callback, options) {
 					_done();
 				}
 			});
-			field[0].select();
-		},
+			setTimeout(function () {
+				field[0].select(); // give it a chance to appear
+			}, 0);
+		}},
 		'onClose': {'Q.prompt': function() {
 			if (!buttonClicked) Q.handle(callback, this, [null]);
 		}},

@@ -37,13 +37,14 @@ function Users_resend_post()
 	}
 	if ($type === 'email') {
 		$existing = $user->addEmail($identifier);
-		Users::$cache['email'] = $identifier;
+		Users::$cache['emailAddress'] = $identifier;
 	} else {
 		$existing = $user->addMobile($identifier);
-		Users::$cache['mobile'] = $identifier;
+		Users::$cache['mobileNumber'] = $identifier;
 	}
 	if ($existing) {
 		$existing->resendActivationMessage();
 	}
 	Users::$cache['user'] = $user;
+	Q_Response::setSlot('activateLink', Users::$cache['Users/activate link']);
 }

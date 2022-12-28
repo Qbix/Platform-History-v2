@@ -785,6 +785,11 @@ html .Assets_NFT_preview_tool .Users_avatar_tool img {
     font-weight: normal;
     font-size: 1em;
 }
+
+.Assets_NFT_preview_tool .Assets_NFT_claim_timeout {
+    font-size: 13px;
+}
+
 @media (max-width:1200px) {
     .Assets_NFT_preview_tool .video-container img {
         height: auto;
