@@ -1429,7 +1429,9 @@
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, 'data', function (err, response) {
+			Q.request(url, 'data', function (err, response, redirected, processScriptDataAndLines) {
+
+				processScriptDataAndLines();
 
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
