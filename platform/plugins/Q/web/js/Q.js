@@ -7761,7 +7761,7 @@ Q.request = function (url, slotNames, callback, options) {
 	
 		function _Q_request_callback(err, content, wasJsonP) {
 			if (err) {
-				callback(err, content, false);
+				Q.handle(callback, this, [err, content, false]);
 				Q.handle(o.onProcessed, this, [err, content, false]);
 				return;
 			}

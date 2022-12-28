@@ -1428,7 +1428,7 @@
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, ['data', 'activateLink'], function (err, response) {
+			Q.request(url, 'data', function (err, response) {
 
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
@@ -1523,7 +1523,7 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', ['data', 'activateLink'], function (err, response) {
+									Q.req('Users/resend', 'data', function (err, response) {
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
@@ -1536,10 +1536,7 @@
 																$(this).plugin('Q/validator', 'reset');
 															});
 														Q.Dialogs.pop();
-														Q.handle(
-															Q.getObject('slots.data.activateLink', response)
-															|| Q.getObject('slots.activateLink', response)
-														);
+														Q.handle(Q.getObject('slots.data.activateLink', response));
 													})
 											)
 										);
