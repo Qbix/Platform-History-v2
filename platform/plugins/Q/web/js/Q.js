@@ -7766,13 +7766,13 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.handle(o.onProcessed, this, [err, content, false]);
 				return;
 			}
-			var data = content;
+			var response = content;
 			if (o.parse !== false) {
 				try {
 					if (wasJSONP) {
-						data = content;
+						response = content;
 					} else {
-						data = JSON.parse(content)
+						response = JSON.parse(content)
 					}
 				} catch (e) {
 					console.warn('Q.request(' + url + ',['+slotNames+']):' + e);
@@ -7782,25 +7782,25 @@ Q.request = function (url, slotNames, callback, options) {
 				}
 			}
 			var redirected = false;
-			if (data && data.redirect && data.redirect.url) {
-				Q.handle(o.onRedirect, Q, [data.redirect.url]);
-				redirected = data.redirect.url;
+			if (response && response.redirect && response.redirect.url) {
+				Q.handle(o.onRedirect, Q, [response.redirect.url]);
+				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, data, redirected, processScriptDataAndLines);
-			Q.handle(o.onProcessed, this, [err, data, redirected, processScriptDataAndLines]);
+			callback && callback.call(this, err, response, redirected, processScriptDataAndLines);
+			Q.handle(o.onProcessed, this, [err, response, redirected, processScriptDataAndLines]);
 			function processScriptDataAndLines() {
-				if (data.scriptData) {
+				if (response.scriptData) {
 					Q.each(response.scriptData,
-					function _Q_scriptData_each(slot, data) {
-						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
+					function _Q_scriptData_each() {
+						Q.each(this, function _Q_loadUrl_scriptData_assign(k, v) {
 							Q.setObject(k, v);
 						});
 					});
 				}
-				if (data.sessionDataPaths) {
-					Q.Session.paths = data.sessionDataPaths;
+				if (response.sessionDataPaths) {
+					Q.Session.paths = response.sessionDataPaths;
 				}
-				if (data.scriptLines) {
+				if (response.scriptLines) {
 					for (i in response.scriptLines) {
 						if (response.scriptLines[i]) {
 							eval(response.scriptLines[i]);
@@ -7826,15 +7826,15 @@ Q.request = function (url, slotNames, callback, options) {
 			}
 		}
 
-		function _onResponse (data, wasJSONP) {
+		function _onResponse (response, wasJSONP) {
 			t.loaded = true;
 			if (t.timeout) {
 				clearTimeout(t.timeout);
 			}
 			Q.handle(o.onLoadEnd, request, [url, slotNames, o]);
 			if (!t.cancelled) {
-				o.onResponse.handle.call(request, data, wasJSONP);
-				_Q_request_callback.call(request, null, data, wasJSONP);
+				o.onResponse.handle.call(request, response, wasJSONP);
+				_Q_request_callback.call(request, null, response, wasJSONP);
 			}
 		}
 		
