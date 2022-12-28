@@ -9869,6 +9869,33 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 	}
 };
 
+/**
+ * Like Q.request but processes extras from the response,
+ * such scriptData, scriptLines, css, etc.
+ */
+Q.loadUrl.request = function (url, slotNames, callback, options) {
+	return Q.loadUrl(url, slotNames, callback, Q.extend({
+		ignoreHistory: true,
+		ignorePage: true,
+		ignoreLoadingErrors: true,
+		ignoreHash: true,
+		handler: function noop () { }
+	}));
+};
+
+/**
+ * Like Q.req but processes extras from the response,
+ * such scriptData, scriptLines, css, etc.
+ */
+Q.loadUrl.req = function (uri, slotNames, callback, options) {
+	if (typeof options === 'string') {
+		options = {'method': options};
+	}
+	var args = arguments, index = (typeof arguments[0] === 'string') ? 0 : 1;
+	args[index] = Q.action(args[index], null, options);
+	return Q.loadUrl.request.apply(this, args);
+};
+
 Q.loadUrl.loading = {};
 
 /**

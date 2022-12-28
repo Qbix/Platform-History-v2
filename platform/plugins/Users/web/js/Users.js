@@ -535,7 +535,7 @@
 	}
 	
 	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
-		Q.req('Users/authenticate', 'data', function (err, response) {
+		Q.loadUrl.req('Users/authenticate', 'data', function (err, response) {
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
@@ -1523,7 +1523,7 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', 'data', function (err, response) {
+									Q.loadUrl.req('Users/resend', 'data', function (err, response) {
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
@@ -3050,7 +3050,7 @@
 			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
 			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
 			if (fields['Q.Users.newSessionId']) {
-				Q.req('Users/session', function () {
+				Q.loadUrl.req('Users/session', function () {
 					// Q.request.options.onProcessed would have changed loggedInUser already
 					// but maybe we want to redirect anyway, after a handoff
 					var href = Q.getObject("Q.Cordova.handoff.url");
@@ -3122,7 +3122,7 @@
 		&& !Users.authenticate.occurring
 		&& !Users.logout.occurring) {
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-			Q.req("Users/login", 'data', function (err, res) {
+			Q.loadUrl.req("Users/login", 'data', function (err, res) {
 				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				var msg = Q.firstErrorMessage(err, res && res.errors);
 				if (msg) {
