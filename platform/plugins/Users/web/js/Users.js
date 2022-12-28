@@ -1523,7 +1523,7 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', 'data', function (err, response) {
+									Q.req('Users/resend', ['data', 'activateLink'], function (err, response) {
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
