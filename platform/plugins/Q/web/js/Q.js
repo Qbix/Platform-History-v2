@@ -5583,7 +5583,7 @@ Q.Response.processScriptDataAndLines = function (response) {
 		Q.Session.paths = response.sessionDataPaths;
 	}
 	if (response.scriptLines) {
-		for (i in response.scriptLines) {
+		for (var i in response.scriptLines) {
 			if (response.scriptLines[i]) {
 				eval(response.scriptLines[i]);
 			}
