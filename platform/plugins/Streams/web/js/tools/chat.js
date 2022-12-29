@@ -1202,19 +1202,21 @@ Q.Tool.define('Streams/chat', function(options) {
 		if (!$scm.children().not('.Streams_chat_more').length) {
 			return false; // no messages to scroll yet
 		}
+		var $scrolling = null;
 		if (['scroll', 'auto'].indexOf(overflow) >= 0
+		&& $scm[0].clientHeight
 		&& $scm[0].clientHeight < $scm[0].scrollHeight) {
-			state.$scrolling = $scm;
+			$scrolling = $scm;
 		}
-		if (!state.$scrolling) {
-			state.$scrolling = $($scm[0].scrollingParent(true));
+		if (!$scrolling.length) {
+			$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
 		}
-		if (state.$scrolling.length) {
-			var $s = state.$scrolling[0];
+		if ($scrolling.length) {
+			var $s = $scrolling[0];
 			$s.addClass('Q_forceDisplayBlock');
 			var scrollHeight = $s.scrollHeight;
 			$s.removeClass('Q_forceDisplayBlock');
-			state.$scrolling.animate({
+			$scrolling.animate({
 				scrollTop: scrollHeight
 			}, this.state.animations.duration, callback);
 		}
