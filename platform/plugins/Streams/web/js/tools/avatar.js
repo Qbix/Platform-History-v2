@@ -261,7 +261,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 				if (state.editable.indexOf('name') >= 0) {
 					var zIndex = 5;
 					Q.each(['firstName', 'lastName', 'username'], function (k, vName) {
-						var f = tool.getElementsByClassName('Streams_'+vName)[0];
+						var f = tool.element.getElementsByClassName('Streams_'+vName)[0];
 						if (!f || f.getElementsByClassName('Streams_inplace_tool').length) {
 							return;
 						}

@@ -4902,18 +4902,6 @@ Tp.$ = function _Q_Tool_prototype_$(selector) {
 };
 
 /**
- * Returns all subelements with the given class name.
- * @method getElementsByClassName
- * @param {String} className
- *   the class name to look for
- * @return {NodeList}
- *   a list of nodes with the given class name.
- */
-Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(className) {
-	return this.element.getElementsByClassName(className);
-};
-
-/**
  * Do something for every and future child tool that is activated inside this tool
  * @method forEachChild
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
