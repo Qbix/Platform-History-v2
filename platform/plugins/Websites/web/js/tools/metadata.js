@@ -70,7 +70,7 @@ Q.Tool.define("Websites/metadata", function () {
 			templateFields,
 			function (err, html) {
 				if (err) return;
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 				Q.activate(tool);
 			},
 			state.template

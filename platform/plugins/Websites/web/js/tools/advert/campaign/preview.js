@@ -61,7 +61,7 @@ function (options, preview) {
 				notYetEnabled: _notYetEnabled
 			}, text.advert.campaign), function (err, html) {
 				if (err) return;
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 				Q.each(fields, function (i, field) {
 					var $e = tool['$'+field] = tool.$('.Websites_advert_campaign_' + field);	
 					if (placeholders[field]) {

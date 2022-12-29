@@ -115,7 +115,7 @@ Q.Tool.define("Streams/question", function(options) {
 				return;
 			}
 
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 
 			var $title = $("input[name=title]", tool.element);
 			var $content = $("textarea[name=content]", tool.element);
@@ -175,7 +175,7 @@ Q.Tool.define("Streams/question", function(options) {
 				return;
 			}
 
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 
 			var $answers = $(".Streams_question_answers", tool.element);
 

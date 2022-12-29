@@ -130,7 +130,7 @@ Q.Tool.define("Assets/service/preview", ["Streams/preview"], function(options, p
 			price: price ? '(' + (currency ? '' : '$') + parseFloat(price).toFixed(2) + (currency ? ' ' + currency : '') +')' : '',
 		}, function (err, html) {
 			if (err) return;
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);
 
 			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0]);
 		});

@@ -73,7 +73,7 @@ Q.Tool.define("Users/contacts", function Users_labels_tool(options) {
 				canAddIcon: Q.url('{{Q}}/img/actions/add.png')
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 				var labelTitle = null;
 
 				$('.Users_labels_label', tool.element).on(Q.Pointer.fastclick, function () {

@@ -1718,7 +1718,9 @@ class Q_Response
 	 */
 	static function processSessionExtras($hookType)
 	{
-		if (self::$skipSessionExtras or !Q_Request::shouldLoadExtras('session')) {
+		if (self::$skipSessionExtras
+		or !Q_Session::id()
+		or !Q_Request::shouldLoadExtras('session')) {
 			return false;
 		}
 		if (Q_Request::isAjax()) {
@@ -2005,6 +2007,27 @@ class Q_Response
 	{
 		header("Access-Control-Allow-Origin: $from");
 		header("Access-Control-Allow-Credentials: true");
+	}
+
+	/**
+	 * Call this to send a header code for the first error added
+	 * @return {integer} The error code sent to http_response_code
+	 */
+	static function errorHeaderCode() {
+		$code = null;
+		if ($errors = Q_Response::getErrors()) {
+			foreach ($errors as $error) {
+				if ($error->httpResponseCode) {
+					$code = $error->httpResponseCode;
+					http_response_code($code);
+					break;
+				}
+			}
+		}
+		if (!$code) {
+			http_response_code(500);
+		}
+		return $code;
 	}
 
 	/**

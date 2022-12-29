@@ -101,7 +101,7 @@ Q.Tool.define("Assets/plan", function(options) {
 				return;
 			}
 
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);
 			$toolElement.activate();
 
 			$("button[name=subscribe]", tool.element).on(Q.Pointer.fastclick, function () {

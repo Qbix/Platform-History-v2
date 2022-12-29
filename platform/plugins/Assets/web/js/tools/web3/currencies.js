@@ -53,7 +53,7 @@ Q.Tool.define("Assets/web3/currencies", function (options) {
 				tokens: tokens,
 				fieldName: state.fieldName
 			}, function (err, html) {
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 	
 				var $select = $("select[name=currency]", tool.element);
 				if (tool.currency) {

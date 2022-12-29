@@ -190,7 +190,7 @@
 					text: tool.text.webpage
 				}, function (err, html) {
 
-					tool.element.innerHTML = html;
+					Q.replace(tool.element, html);;
 
 					var $a = tool.$('a');
 					if ($a.length) {

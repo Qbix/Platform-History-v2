@@ -88,7 +88,7 @@ function _Communities_announcement_preview(options, preview) {
 			fields,
 			function (err, html) {
 				if (err) return;
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 				Q.activate(tool, function () {
 					// load the icon
 					var jq = tool.$('img.Streams_preview_icon');

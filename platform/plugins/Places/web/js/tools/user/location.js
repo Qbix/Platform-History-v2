@@ -83,7 +83,7 @@ Q.Tool.define("Places/user/location", function (options) {
 			select: select.outerHTML
 		});
 		Q.Template.render('Places/user/location', state, function (err, html) {
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 			tool.$('.Places_user_location_container')
 			.addClass('Places_user_location_checking');
 	

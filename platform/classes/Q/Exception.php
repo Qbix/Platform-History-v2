@@ -48,8 +48,8 @@ class Q_Exception extends Exception
 		}
 		
 		$className = get_class($this);
-		$this->header = isset(self::$headers[$className])
-			? self::$headers[$className]
+		$this->httpResponseCode = isset(self::$httpResponseCodes[$className])
+			? self::$httpResponseCodes[$className]
 			: 412; // our catch-all HTTP error code
 
 		if (is_string($params)) {
@@ -153,7 +153,7 @@ class Q_Exception extends Exception
 			$rethrowDestClasses = array();
 		}
 		if (isset($header)) {
-			self::$headers[$className] = $header;
+			self::$httpResponseCodes[$className] = $header;
 		}
 		$p1 = explode('_', $className);
 		if (count($p1) >= 3 and $className !== 'Q_Exception_PHPError') {
@@ -380,11 +380,11 @@ class Q_Exception extends Exception
 	 */
 	protected static $messages = array();
 	/**
-	 * @property $headers
+	 * @property $httpResponseCodes
 	 * @protected
 	 * @type array
 	 */
-	protected static $headers = array();
+	protected static $httpResponseCodes = array();
 	/**
 	 * @property $rethrowDestClasses
 	 * @protected
@@ -416,9 +416,9 @@ class Q_Exception extends Exception
 	 */
 	protected $code = null;
 	/**
-	 * @property $header
+	 * @property $httpResponseCode
 	 * @public
 	 * @type integer|string
 	 */
-	public $header = null;
+	public $httpResponseCode = null;
 }

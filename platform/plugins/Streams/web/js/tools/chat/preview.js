@@ -56,7 +56,7 @@
 			Q.Template.render('Streams/chat/preview', fields, function (err, html) {
 				if (err) return;
 
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 
 				setTimeout(function () {
 					Q.handle(state.onRender, tool);
