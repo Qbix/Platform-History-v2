@@ -1195,6 +1195,9 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
+		if (!$scm.children().not('.Streams_chat_more').length) {
+			return false; // no messages to scroll yet
+		}
 		if (['scroll', 'auto'].indexOf(overflow) >= 0
 		&& $scm[0].clientHeight < $scm[0].scrollHeight) {
 			state.$scrolling = $scm;
