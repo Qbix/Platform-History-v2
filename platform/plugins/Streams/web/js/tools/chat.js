@@ -1267,24 +1267,23 @@ Q.Tool.define('Streams/chat', function(options) {
 								state.lastScrollTop = $scm.scrollTop();
 							});
 						});
+						Q.handle(callback, tool);
+						tool.processDOM();
+						tool.addEvents();
+		
+						Q.handle(state.onRefresh, tool);
+		
+						tool.scrollToBottom();
+		
+						// if startWebRTC is true, start webrtc
+						if (state.startWebRTC
+						|| (location.href.indexOf(state.stream.url() >= 0)
+							&& location.href.indexOf('startWebRTC') >= 0
+						)) {
+							tool.startWebRTC();
+						}
 					}
 				);
-
-				Q.handle(callback, tool);
-				tool.processDOM();
-				tool.addEvents();
-
-				Q.handle(state.onRefresh, tool);
-
-				tool.scrollToBottom();
-
-				// if startWebRTC is true, start webrtc
-				if (state.startWebRTC
-				|| (location.href.indexOf(state.stream.url() >= 0)
-					&& location.href.indexOf('startWebRTC') >= 0
-				)) {
-					tool.startWebRTC();
-				}
 			});
 
 		}
