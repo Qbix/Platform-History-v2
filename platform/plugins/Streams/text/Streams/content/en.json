@@ -9,7 +9,7 @@
     "avatar": {
         "firstName": "First Name",
         "lastName": "Last Name",
-        "username": "User Name"
+        "username": "username"
     },
     "labels": {
         "Streams\/invited": "People I invited",
