@@ -5560,7 +5560,17 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 	this.options = options;
 };
 
-Q.Request.processScriptDataAndLines = function (response) {
+/**
+ * A Q.Response object represents a network response
+ * @class Q.Response
+ * @constructor
+ */
+
+Q.Response = function _Q_Response(response) {
+	
+};
+
+Q.Response.processScriptDataAndLines = function (response) {
 	if (response.scriptData) {
 		Q.each(response.scriptData,
 		function _Q_scriptData_each() {
@@ -5581,7 +5591,7 @@ Q.Request.processScriptDataAndLines = function (response) {
 	}
 };
 
-Q.Request.processStylesheets = function Q_Request_loadStylesheets(callback) {
+Q.Response.processStylesheets = function Q_Response_loadStylesheets(response, callback) {
 	if (!response.stylesheets) {
 		return callback();
 	}
@@ -5618,7 +5628,7 @@ Q.Request.processStylesheets = function Q_Request_loadStylesheets(callback) {
 	return newStylesheets;
 }
 
-Q.Request.processStyles = function Q_Request_processStyles() {
+Q.Response.processStyles = function Q_Response_processStyles(response) {
 	if (!response.stylesInline) {
 		return null;
 	}
@@ -5646,13 +5656,13 @@ Q.Request.processStyles = function Q_Request_processStyles() {
 	return newStyles;
 }
 
-Q.Request.processHtmlCssClasses = function Q_Request_processHtmlCssClasses() {
+Q.Response.processHtmlCssClasses = function Q_Response_processHtmlCssClasses(response) {
 	Q.each(response.htmlCssClasses, function (i, c) {
 		document.documentElement.addClass(c);
 	});
 }
 
-Q.Request.processMetas = function Q_Request_processMetas() {
+Q.Response.processMetas = function Q_Response_processMetas(response) {
 	if (!response.metas) {
 		return null;
 	}
@@ -5682,7 +5692,7 @@ Q.Request.processMetas = function Q_Request_processMetas() {
 	}
 };
 
-Q.Request.processTemplates = function Q_Request_processTemplates() {
+Q.Response.processTemplates = function Q_Response_processTemplates(response) {
 	if (!response.templates) {
 		return null;
 	}
@@ -5699,7 +5709,7 @@ Q.Request.processTemplates = function Q_Request_processTemplates() {
 	return newTemplates;
 };
 
-Q.Request.processScripts = function Q_Request_processScripts(callback) {
+Q.Response.processScripts = function Q_Response_processScripts(response, callback, options) {
 	if (!response.scripts) {
 		callback();
 		return null;
@@ -5716,7 +5726,7 @@ Q.Request.processScripts = function Q_Request_processScripts(callback) {
 	Q.each(keys, function (i, slotName) {
 		var elem = Q.addScript(
 			response.scripts[slotName], slotPipe.fill(slotName), {
-			ignoreLoadingErrors: o.ignoreLoadingErrors,
+			ignoreLoadingErrors: options.ignoreLoadingErrors,
 			returnAll: false
 		});
 		if (elem) {
@@ -7913,20 +7923,20 @@ Q.request = function (url, slotNames, callback, options) {
 	var o = Q.extend({}, Q.request.options, options);
 	var request = new Q.Request(url, slotNames, callback, o);
 	if (o.skipNonce) {
-		_Q_request_makeRequest.call(this, url, slotNames, callback, o);
+		_Q_Response_makeRequest.call(this, url, slotNames, callback, o);
 	} else {
-		Q.loadNonce(_Q_request_makeRequest, this, [url, slotNames, callback, o]);
+		Q.loadNonce(_Q_Response_makeRequest, this, [url, slotNames, callback, o]);
 	}
 	return request;
 	
-	function _Q_request_makeRequest (url, slotNames, callback, o) {
+	function _Q_Response_makeRequest (url, slotNames, callback, o) {
 
 		var tout = false, t = {};
 		if (o.timeout !== false) {
 			tout = o.timeout || Q.request.options.timeout;
 		}
 	
-		function _Q_request_callback(err, content, wasJSONP) {
+		function _Q_Response_callback(err, content, wasJSONP) {
 			if (err) {
 				Q.handle(callback, this, [err, content, false]);
 				Q.handle(o.onProcessed, this, [err, content, false]);
@@ -7980,7 +7990,7 @@ Q.request = function (url, slotNames, callback, options) {
 			Q.handle(o.onLoadEnd, request, [url, slotNames, o]);
 			if (!t.cancelled) {
 				o.onResponse.handle.call(request, response, wasJSONP);
-				_Q_request_callback.call(request, null, response, wasJSONP);
+				_Q_Response_callback.call(request, null, response, wasJSONP);
 			}
 		}
 		
@@ -8016,7 +8026,7 @@ Q.request = function (url, slotNames, callback, options) {
 				}]
 			};
 			o.onCancel.handle.call(this, errors, o);
-			_Q_request_callback.call(this, errors, errors);
+			_Q_Response_callback.call(this, errors, errors);
 		}
 		
 		function xhr(onSuccess, onCancel) {
@@ -8094,7 +8104,7 @@ Q.request = function (url, slotNames, callback, options) {
 							? Q.getObject(o.resultFunction, iframe.contentWindow)
 							: null;
 						var result = typeof(resultFunction) === 'function' ? resultFunction() : undefined;
-						_Q_request_callback.call(request, null, result, true);
+						_Q_Response_callback.call(request, null, result, true);
 					}
 				});
 				return;
@@ -8109,7 +8119,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var i = Q.request.callbacks.length;
 			var url2 = url;
 			if (callback) {
-				Q.request.callbacks[i] = function _Q_request_JSONP(data) {
+				Q.request.callbacks[i] = function _Q_Response_JSONP(data) {
 					delete Q.request.callbacks[i];
 					Q.removeElement(script);
 					_onResponse(data, true);
@@ -9389,8 +9399,8 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
  * @param {Element|String|DocumentFragment} source
- *  An HTML string or a Element which is not part of the DOM.
- *  It is treated as a document fragment, and its contents are used to replace the container's contents.
+ *  An HTML string or a Element or DocumentFragment which is not part of the DOM.
+ *  If an element, it is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace, even if they have "data-q-retain" attributes.
@@ -9622,9 +9632,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		Q.Page.beingProcessed = true;
 
-		Q.Request.processHtmlCssClasses();
-		Q.Request.processMetas();
-		Q.Request.processTemplates();
+		Q.Response.processHtmlCssClasses(response);
+		Q.Response.processMetas(response);
+		Q.Response.processTemplates(response);
 
 		var newScripts;
 		
@@ -9638,7 +9648,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			newScripts = [];
 			afterScripts();
 		} else {
-			newScripts = Q.Request.processScripts(afterScripts);
+			newScripts = Q.Response.processScripts(response, afterScripts, o);
 		}
 		
 		function afterScripts () {
@@ -9656,11 +9666,11 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				afterStylesheets();
 			} else {
 				_doEvents('on', moduleSlashAction);
-				newStylesheets = Q.Request.processStylesheets(afterStylesheets);
+				newStylesheets = Q.Response.processStylesheets(response, afterStylesheets);
 			}
 			
 			function afterStylesheets() {
-				Q.Request.processStyles();
+				Q.Response.processStyles(response);
 				
 				afterStyles(); // Synchronous to allow additional scripts to change the styles before allowing the browser reflow.
 			
@@ -9752,7 +9762,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 				}
 
-				Q.Request.processScriptDataAndLines(response);
+				Q.Response.processScriptDataAndLines(response);
 
 				if (!o.ignorePage) {
 					try {
