@@ -77,9 +77,13 @@ Q.Tool.define('Streams/chat', function(options) {
 
 	var pipe = new Q.Pipe(["text", "styles"], function () {
 		tool.refresh(function () {
-			if (state.scrollToBottom) {
-				tool.scrollToBottom();
-			}
+			Q.Pointer.waitUntilVisible(tool, function () {
+				Q.activate(tool.element, function () {
+					// all message bubbles should have stabilized
+					// their height at this point
+					tool.scrollToBottom();
+				});
+			});
 		});
 		Q.Streams.refresh.beforeRequest.add(function () {
 			if (state.stream && state.stream.refresh) {
@@ -1271,19 +1275,10 @@ Q.Tool.define('Streams/chat', function(options) {
 						.on('scroll.Streams_chat', function () {
 							state.lastScrollTop = $scm.scrollTop();
 						});
-						Q.handle(callback, tool);
 						tool.processDOM();
 						tool.addEvents();
-		
+						Q.handle(callback, tool);
 						Q.handle(state.onRefresh, tool);
-		
-						Q.Pointer.waitUntilVisible(tool, function () {
-							Q.activate($scm[0], function () {
-								// all message bubbles should have stabilized
-								// their height at this point
-								tool.scrollToBottom();
-							});
-						});
 		
 						// if startWebRTC is true, start webrtc
 						if (state.startWebRTC
