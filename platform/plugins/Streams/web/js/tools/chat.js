@@ -1195,7 +1195,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
-		if (['scroll', 'auto'].indexOf(overflow) >= 0) {
+		if (['scroll', 'auto'].indexOf(overflow) >= 0
+		&& $scm[0].clientHeight < $scm[0].scrollHeight) {
 			state.$scrolling = $scm;
 		}
 		if (!state.$scrolling) {
@@ -1261,7 +1262,7 @@ Q.Tool.define('Streams/chat', function(options) {
 						tool.$('.Streams_chat_noMessages').remove();
 						var $scm = tool.$('.Streams_chat_messages');
 						Q.each(items, function (key, $html) {
-							$html.appendTo($scm).activate();
+							$html.appendTo($scm);
 						});
 						$scm.off('scroll.Streams_chat')
 						.on('scroll.Streams_chat', function () {
@@ -1273,10 +1274,13 @@ Q.Tool.define('Streams/chat', function(options) {
 		
 						Q.handle(state.onRefresh, tool);
 		
-						Q.Pointer.waitUntilVisible(tool.element, function () {
-							tool.scrollToBottom();
+						Q.Pointer.waitUntilVisible(tool, function () {
+							Q.activate($scm[0], function () {
+								// all message bubbles should have stabilized
+								// their height at this point
+								tool.scrollToBottom();
+							});
 						});
-						
 		
 						// if startWebRTC is true, start webrtc
 						if (state.startWebRTC

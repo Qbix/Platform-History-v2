@@ -12375,7 +12375,7 @@ Q.Pointer = {
 	 * Sets an observer to wait for an element become visible
 	 * @static
 	 * @method waitUntilVisible
-	 * @param {Element} element the element to watch
+	 * @param {Element|Q.Tool} element the element to watch
 	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer)
 	 * @param {Object|Number} options The options to pass to the observer
 	 * @return {IntersectionObserver}
@@ -12388,8 +12388,15 @@ Q.Pointer = {
 			}
 			callback && callback.apply(this, arguments);
 		}, o);
-		var target = element;
-		observer.observe(element);
+		if (Q.typeOf(element) === 'Q.Tool') {
+			var tool = element;
+			observer.observe(tool.element);
+			tool.Q.beforeRemove.set(function () {
+				observer.unobserve(tool.element);
+			});
+		} else {
+			observer.observe(element);
+		}
 		return observer;
 	},
 	/**
