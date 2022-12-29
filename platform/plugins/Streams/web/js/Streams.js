@@ -31,6 +31,11 @@ Q.text.Streams = {
 		prompt: null, //"Fill our your basic information to complete your signup.",
 		title: "Basic Information"
 	},
+	avatar: {
+        firstName: "First Name",
+        lastName: "Last Name",
+        username: "User Name"
+    },
 	login: {
 		prompt: "Let friends recognize you:",
 		newUser: "or create a new account below",

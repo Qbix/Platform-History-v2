@@ -270,7 +270,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 						inplaceType: 'text',
 						inplace: {
 							bringToFront: f,
-							placeholder: 'Your '+vName.substr(0, vName.length-4)+' name',
+							placeholder: Q.text.Streams.avatar[vName],
 							staticHtml: f.innerHTML
 						}
 					}, state.inplaces);
