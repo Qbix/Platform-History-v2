@@ -7,8 +7,8 @@
         "NewItemTitle": "New Item"
     },
     "avatar": {
-        "firstName": "First Name",
-        "lastName": "Last Name",
+        "firstName": "first name",
+        "lastName": "last name",
         "username": "username"
     },
     "labels": {

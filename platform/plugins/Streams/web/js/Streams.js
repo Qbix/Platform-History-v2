@@ -34,7 +34,7 @@ Q.text.Streams = {
 	avatar: {
         firstName: "First Name",
         lastName: "Last Name",
-        username: "user name"
+        username: "username"
     },
 	login: {
 		prompt: "Let friends recognize you:",
@@ -6026,8 +6026,6 @@ Q.beforeInit.add(function _Streams_beforeInit() {
 	});
 
 }, 'Streams');
-
-Q.Text.loadBeforeInit.push('Streams/content');
 
 Q.onInit.add(function _Streams_onInit() {
 	var Users = Q.plugins.Users;

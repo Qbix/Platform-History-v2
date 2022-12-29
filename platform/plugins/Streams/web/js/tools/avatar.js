@@ -252,36 +252,39 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 		}
 	
 		function _present() {
-			Q.handle(state.onRefresh, tool, []);
-			if (!state.editable) return;
-			if (state.editable === true) {
-				state.editable = ['icon', 'name'];
-			}
-			if (state.editable.indexOf('name') >= 0) {
-				var zIndex = 5;
-				Q.each(['firstName', 'lastName', 'username'], function (k, vName) {
-					var f = tool.getElementsByClassName('Streams_'+vName)[0];
-					if (!f || f.getElementsByClassName('Streams_inplace_tool').length) {
-						return;
-					}
-					var opt = Q.extend({
-						publisherId: state.userId,
-						streamName: 'Streams/user/'+vName,
-						inplaceType: 'text',
-						inplace: {
-							bringToFront: f,
-							placeholder: Q.text.Streams.avatar[vName],
-							staticHtml: f.innerHTML
+			Q.Text.get('Streams/content', function (err, text) {
+				Q.handle(state.onRefresh, tool, []);
+				if (!state.editable) return;
+				if (state.editable === true) {
+					state.editable = ['icon', 'name'];
+				}
+				if (state.editable.indexOf('name') >= 0) {
+					var zIndex = 5;
+					Q.each(['firstName', 'lastName', 'username'], function (k, vName) {
+						var f = tool.getElementsByClassName('Streams_'+vName)[0];
+						if (!f || f.getElementsByClassName('Streams_inplace_tool').length) {
+							return;
 						}
-					}, state.inplaces);
-					Q.Tool.setUpElement(
-						f, 'Streams/inplace', opt,
-						'Streams_inplace-'+vName, tool.prefix
-					);
-					f.style.zIndex = --zIndex;
-					Q.activate(f);
-				});
-			}
+						var opt = Q.extend({
+							publisherId: state.userId,
+							streamName: 'Streams/user/'+vName,
+							inplaceType: 'text',
+							inplace: {
+								bringToFront: f,
+								placeholder: text.avatar[vName],
+								staticHtml: f.innerHTML,
+								capitalize: (vName === 'firstName' || vName === 'lastName')
+							}
+						}, state.inplaces);
+						Q.Tool.setUpElement(
+							f, 'Streams/inplace', opt,
+							'Streams_inplace-'+vName, tool.prefix
+						);
+						f.style.zIndex = --zIndex;
+						Q.activate(f);
+					});
+				}
+			});
 			if (state.editable.indexOf('icon') >= 0 && Users.loggedInUser) {
 				var $img = tool.$('.Users_avatar_icon').addClass('Streams_editable');
 				var saveSizeName = {};

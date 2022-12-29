@@ -14,6 +14,7 @@
  *  @param {String} options.action Required url of the action to issue the request to on save.
  *  @param {String} [options.method='put'] The HTTP verb to use.
  *  @param {String} [options.type='textarea'] The type of the input field. Can be "textarea", "text", or "select"
+ *  @param {String} [options.capitalize=false] Whether to automatically capitalize the first letter
  *  @param {String} [options.options={}] If the type is "select", then this would be an object of {value: optionTitle} pairs
  *  @param {Boolean=true} [options.editing] Whether to start out in editing mode
  *  @param {Boolean=true} [options.editOnClick] Whether to enter editing mode when clicking on the text.
@@ -95,6 +96,7 @@ Q.Tool.define("Q/inplace", function (options) {
 {
 	method: 'put',
 	type: 'textarea',
+	capitalize: false,
 	editOnClick: true,
 	selectOnEdit: true,
 	showEditButtons: false,
@@ -192,6 +194,9 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 	var cancel_button = tool.$cancel = tool.$('button.Q_inplace_tool_cancel');
 	var fieldinput = tool.$input = tool.$(':input[type!=hidden]').not('button').eq(0)
 		.addClass('Q_inplace_tool_fieldinput');
+	if (state.capitalize) {
+		tool.element.addClass('Q_capitalize');
+	}
 	var undermessage = tool.$('.Q_inplace_tool_undermessage');
 	var throbber_img = $('<img />')
 		.attr('src', Q.url('{{Q}}/img/throbbers/bars16.gif'));
@@ -348,6 +353,10 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 		focusedOn = 'fieldinput';
 		var method = state.method || (form.length && form.attr('method')) || 'post';
 		var url = form.attr('action');
+
+		if (state.capitalize) {
+			fieldinput.val(fieldinput.val().toCapitalized());
+		}
 
 		var used_placeholder = false;
 		if (fieldinput.attr('placeholder')
