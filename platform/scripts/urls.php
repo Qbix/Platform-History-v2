@@ -92,7 +92,7 @@ file_put_contents(
 );
 echo PHP_EOL;
 file_put_contents($urls_dir.DS."$time.json", Q::json_encode($result));
-$result['#timestamp'] = $time;
+$result['@timestamp'] = $time;
 file_put_contents($urls_dir.DS."latest.json", Q::json_encode($result));
 $tree = new Q_Tree($result);
 //file_put_contents($arrays_dir.DS."$time.json", Q::json_encode($array));
@@ -180,7 +180,7 @@ function Q_script_urls_diffs($tree, $urls_dir, $diffs_dir, $time)
 		$t = new Q_Tree();
 		$t->load($g);
 		$diff = $t->diff($tree, true);
-		$diff->set('#timestamp', $time);
+		$diff->set('@timestamp', $time);
 		$diff->save($diffs_dir.DS.$b);
 //		$tree = new Tree();
 //		$tree->load($g);

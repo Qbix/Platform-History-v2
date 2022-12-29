@@ -8522,7 +8522,7 @@ Q.updateUrls = function(callback) {
 				}
 				json = JSON.stringify(Q.updateUrls.urls);
 				localStorage.setItem(Q.updateUrls.lskey, json);
-				if (timestamp = result['#timestamp']) {
+				if (timestamp = result['@timestamp']) {
 					Q.cookie('Q_ut', timestamp);
 				}
 				Q.handle(callback, null, [result, timestamp]);
@@ -8533,7 +8533,7 @@ Q.updateUrls = function(callback) {
 			Q.updateUrls.urls = result;
 			json = JSON.stringify(Q.updateUrls.urls);
 			localStorage.setItem(Q.updateUrls.lskey, json);
-			if (timestamp = result['#timestamp']) {
+			if (timestamp = result['@timestamp']) {
 				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
