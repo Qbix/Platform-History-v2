@@ -56,7 +56,7 @@ Q.Tool.define("Streams/import", function (options) {
 		fields.communityName = Q.Users.communityName;
 		fields.communitySuffix = Q.Users.communitySuffix;
 		Q.Template.render('Streams/import/tool', fields, function (err, html) {
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 			_continue();
 		});
 	} else {

@@ -61,7 +61,7 @@ Q.Tool.define("Streams/lookup", function _Streams_lookup_tool (options) {
 			if (msg = Q.firstErrorMessage(err)) {
 				return alert(msg);
 			}
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 			tool.$select = tool.$('select');
 			Q.activate(tool.element, {
 				'.Q_filter_tool': state.filter

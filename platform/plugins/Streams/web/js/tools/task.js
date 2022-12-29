@@ -27,7 +27,7 @@ Q.Tool.define("Streams/task", function(options) {
 			return tool.refresh();
 		}
 		Q.Template.render('Streams/task', function (err, html) {
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 			tool.refresh();
 		});
 	});

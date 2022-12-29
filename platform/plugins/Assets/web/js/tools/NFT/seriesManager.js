@@ -100,8 +100,8 @@
                 price: stream.getAttribute("price"),
                 currency: stream.getAttribute("currency"),
                 untilTime: untilTime
-            }, (err, html) => {
-                tool.element.innerHTML = html;
+            }, function (err, html) {
+                Q.replace(tool.element, html);
 
                 $toolElement.activate();
 
@@ -239,7 +239,7 @@
             Q.Template.render('Assets/NFT/series/newItem', {
                 iconUrl: Q.url("{{Q}}/img/actions/add.png")
             }, function(err, html) {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
                 $toolElement.off("click.NFTcomposer").on("click.NFTcomposer", function () {
                     $toolElement.addClass("Q_working");
 

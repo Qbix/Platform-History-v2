@@ -279,7 +279,7 @@
                 currency: currency,
                 owner: Web3.minimizeAddress(owner, 20, 3)
             }, (err, html) => {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 $toolElement.activate();
 
@@ -781,7 +781,7 @@
 
                                     Q.Tool.remove(tool.element, true, false);
                                     tool.element.className = "";
-                                    tool.element.innerHTML = "";
+                                    Q.replace(tool.element, "");
 
                                     $toolElement.tool("Assets/NFT/preview", {
                                         tokenId: tokenId,
@@ -825,7 +825,7 @@
             };
 
             Q.Template.render('Assets/NFT/composer', {}, function(err, html) {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 // get or create composer stream
                 Q.req("Assets/NFT", "newItem", function (err, response) {

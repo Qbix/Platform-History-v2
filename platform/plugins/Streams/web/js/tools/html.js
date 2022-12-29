@@ -213,7 +213,7 @@ Q.Tool.define("Streams/html", function (options) {
 			switch (state.editor && state.editor.toLowerCase()) {
 			case 'ckeditor':
 				if (tool.element.innerHTML !== html) {
-					tool.element.innerHTML = html;
+					Q.replace(tool.element, html);;
 				}
 				break;
 			case 'froala':

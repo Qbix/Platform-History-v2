@@ -100,7 +100,7 @@ Q.Tool.define("Users/avatar", function Users_avatar_tool(options) {
 			src: Users.iconUrl('loading', 40)
 		});
 		Q.Template.render('Users/avatar/loading', fields, function (err, html) {
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 		});
 		tool.element.addClass('Q_loading');
 	

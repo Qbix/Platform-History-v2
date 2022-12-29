@@ -91,7 +91,7 @@
             Q.Template.render('Assets/NFT/series/view', {
                 name: tool.stream.fields.title || ""
             }, (err, html) => {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 $(".Assets_NFT_series_icon", $toolElement).css("background-image", "url(" + stream.iconUrl("x") + ")");
 
@@ -141,7 +141,7 @@
             Q.Template.render('Assets/NFT/series/newItem', {
                 iconUrl: Q.url("{{Q}}/img/actions/add.png")
             }, function(err, html) {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
                 $toolElement.off("click.nftSeriesComposer").on("click.nftSeriesComposer", function () {
                     $toolElement.addClass("Q_working");
                     Q.req("Assets/NFTseries", "newItem", function (err, response) {
