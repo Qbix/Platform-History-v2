@@ -1208,18 +1208,19 @@ Q.Tool.define('Streams/chat', function(options) {
 		&& $scm[0].clientHeight < $scm[0].scrollHeight) {
 			$scrolling = $scm;
 		}
-		if (!$scrolling.length) {
+		if (!$scrolling) {
 			$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
 		}
-		if ($scrolling.length) {
-			var $s = $scrolling[0];
-			$s.addClass('Q_forceDisplayBlock');
-			var scrollHeight = $s.scrollHeight;
-			$s.removeClass('Q_forceDisplayBlock');
-			$scrolling.animate({
-				scrollTop: scrollHeight
-			}, this.state.animations.duration, callback);
+		if (!$scrolling || !$scrolling.length) {
+			return;
 		}
+		var $s = $scrolling[0];
+		$s.addClass('Q_forceDisplayBlock');
+		var scrollHeight = $s.scrollHeight;
+		$s.removeClass('Q_forceDisplayBlock');
+		$scrolling.animate({
+			scrollTop: scrollHeight
+		}, this.state.animations.duration, callback);
 	},
 
 	scrollToTop: function() {
