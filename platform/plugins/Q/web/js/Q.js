@@ -5579,7 +5579,152 @@ Q.Request.processScriptDataAndLines = function (response) {
 			}
 		}
 	}
+};
+
+Q.Request.processStylesheets = function Q_Request_loadStylesheets(callback) {
+	if (!response.stylesheets) {
+		return callback();
+	}
+	var newStylesheets = {};
+	var keys = Object.keys(response.stylesheets);
+	if (response.stylesheets[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	var waitFor = [];
+	var slotPipe = Q.pipe();			
+	Q.each(keys, function (i, slotName) {
+		var stylesheets = [];
+		for (var j in response.stylesheets[slotName]) {
+			var stylesheet = response.stylesheets[slotName][j];
+			if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
+				continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
+			}
+			var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
+			var elem = Q.addStylesheet(
+				stylesheet.href, stylesheet.media,
+				slotPipe.fill(key), { slotName: slotName, returnAll: false }
+			);
+			if (elem) {
+				stylesheets.push(elem);
+			}
+			waitFor.push(key);
+		}
+		newStylesheets[slotName] = stylesheets;
+	});
+	slotPipe.add(waitFor, function _Q_loadUrl_pipe_slotNames() {
+		callback();
+	}).run();
+	return newStylesheets;
 }
+
+Q.Request.processStyles = function Q_Request_processStyles() {
+	if (!response.stylesInline) {
+		return null;
+	}
+	var newStyles = {},
+		head = document.head || document.getElementsByTagName('head')[0];
+	var keys = Object.keys(response.stylesInline);
+	if (response.stylesInline[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	Q.each(keys, function (i, slotName) {
+		var styles = response.stylesInline[slotName];
+		if (!styles) return;
+		var style = document.createElement('style');
+		style.setAttribute('type', 'text/css');
+		style.setAttribute('data-slot', slotName);
+		if (style.styleSheet){
+			style.styleSheet.cssText = styles;
+		} else {
+			style.appendChild(document.createTextNode(styles));
+		}
+		head.appendChild(style);
+		newStyles[slotName] = [style];
+	});
+	return newStyles;
+}
+
+Q.Request.processHtmlCssClasses = function Q_Request_processHtmlCssClasses() {
+	Q.each(response.htmlCssClasses, function (i, c) {
+		document.documentElement.addClass(c);
+	});
+}
+
+Q.Request.processMetas = function Q_Request_processMetas() {
+	if (!response.metas) {
+		return null;
+	}
+
+	var elHead = document.getElementsByTagName('head')[0];
+	for (var slotName in response.metas) {
+		Q.each(response.metas[slotName], function (i) {
+			var metaData = this;
+			var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
+			var found = false;
+			Q.each(metas, function (j) {
+				if (this.getAttribute(metaData.name) === metaData.value) {
+					this.setAttribute(metaData.name, metaData.value);
+					this.setAttribute("content", metaData.content);
+					found = true;
+					return false;
+				}
+			});
+			if (!found) {
+				var meta = document.createElement("meta");
+				meta.setAttribute(this.name, metaData.value);
+				meta.setAttribute("content", metaData.content);
+				elHead.appendChild(meta);
+				return;
+			}
+		});
+	}
+};
+
+Q.Request.processTemplates = function Q_Request_processTemplates() {
+	if (!response.templates) {
+		return null;
+	}
+	var slotName, newTemplates = {};
+	for (slotName in response.templates) {
+		newTemplates[slotName] = [];
+		Q.each(response.templates[slotName], function (i) {
+			var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
+			newTemplates[slotName].push(
+				Q.Template.set(this.name, this.content, info)
+			);
+		});
+	}
+	return newTemplates;
+};
+
+Q.Request.processScripts = function Q_Request_processScripts(callback) {
+	if (!response.scripts) {
+		callback();
+		return null;
+	}
+	var slotPipe = Q.pipe(Object.keys(response.scripts), function _Q_loadUrl_pipe_slotNames() {
+		callback();
+	});
+	var newScripts = {};
+	var keys = Object.keys(response.scripts);
+	if (response.scripts[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	Q.each(keys, function (i, slotName) {
+		var elem = Q.addScript(
+			response.scripts[slotName], slotPipe.fill(slotName), {
+			ignoreLoadingErrors: o.ignoreLoadingErrors,
+			returnAll: false
+		});
+		if (elem) {
+			newScripts[slotName] = elem;
+		}
+	});
+	return newScripts;
+};
 
 /**
  * A Q.Cache object stores items in a cache and throws out least-recently-used ones.
@@ -9477,9 +9622,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		Q.Page.beingProcessed = true;
 
-		loadHtmlCssClasses();
-		loadMetas();
-		loadTemplates();
+		Q.Request.processHtmlCssClasses();
+		Q.Request.processMetas();
+		Q.Request.processTemplates();
 
 		var newScripts;
 		
@@ -9493,7 +9638,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			newScripts = [];
 			afterScripts();
 		} else {
-			newScripts = loadScripts(afterScripts);
+			newScripts = Q.Request.processScripts(afterScripts);
 		}
 		
 		function afterScripts () {
@@ -9507,15 +9652,15 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			
 			var domElements = null;
 			if (o.ignorePage) {
-				newStylesheets = [];
+				newStylesheets = {};
 				afterStylesheets();
 			} else {
 				_doEvents('on', moduleSlashAction);
-				newStylesheets = loadStylesheets(afterStylesheets);
+				newStylesheets = Q.Request.processStylesheets(afterStylesheets);
 			}
 			
 			function afterStylesheets() {
-				var newStyles = loadStyles();
+				Q.Request.processStyles();
 				
 				afterStyles(); // Synchronous to allow additional scripts to change the styles before allowing the browser reflow.
 			
@@ -9710,151 +9855,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
 			}
-		}
-		
-		function loadStylesheets(callback) {
-			if (!response.stylesheets) {
-				return callback();
-			}
-			var newStylesheets = {};
-			var keys = Object.keys(response.stylesheets);
-			if (response.stylesheets[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			var waitFor = [];
-			var slotPipe = Q.pipe();			
-			Q.each(keys, function (i, slotName) {
-				var stylesheets = [];
-				for (var j in response.stylesheets[slotName]) {
-					var stylesheet = response.stylesheets[slotName][j];
-					if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
-						continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
-					}
-					var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
-					var elem = Q.addStylesheet(
-						stylesheet.href, stylesheet.media,
-						slotPipe.fill(key), { slotName: slotName, returnAll: false }
-					);
-					if (elem) {
-						stylesheets.push(elem);
-					}
-					waitFor.push(key);
-				}
-				newStylesheets[slotName] = stylesheets;
-			});
-			slotPipe.add(waitFor, function _Q_loadUrl_pipe_slotNames() {
-				callback();
-			}).run();
-			return newStylesheets;
-		}
-		
-		function loadStyles() {
-			if (!response.stylesInline) {
-				return null;
-			}
-			var newStyles = {},
-				head = document.head || document.getElementsByTagName('head')[0];
-			var keys = Object.keys(response.stylesInline);
-			if (response.stylesInline[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			Q.each(keys, function (i, slotName) {
-				var styles = response.stylesInline[slotName];
-				if (!styles) return;
-				var style = document.createElement('style');
-				style.setAttribute('type', 'text/css');
-				style.setAttribute('data-slot', slotName);
-				if (style.styleSheet){
-					style.styleSheet.cssText = styles;
-				} else {
-					style.appendChild(document.createTextNode(styles));
-				}
-				head.appendChild(style);
-				newStyles[slotName] = [style];
-			});
-			return newStyles;
-		}
-
-		function loadHtmlCssClasses() {
-			Q.each(response.htmlCssClasses, function (i, c) {
-				document.documentElement.addClass(c);
-			});
-		}
-
-		function loadMetas() {
-			if (!response.metas) {
-				return null;
-			}
-
-			var elHead = document.getElementsByTagName('head')[0];
-			for (var slotName in response.metas) {
-				Q.each(response.metas[slotName], function (i) {
-					var metaData = this;
-					var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
-					var found = false;
-					Q.each(metas, function (j) {
-						if (this.getAttribute(metaData.name) === metaData.value) {
-							this.setAttribute(metaData.name, metaData.value);
-							this.setAttribute("content", metaData.content);
-							found = true;
-							return false;
-						}
-					});
-					if (!found) {
-						var meta = document.createElement("meta");
-						meta.setAttribute(this.name, metaData.value);
-						meta.setAttribute("content", metaData.content);
-						elHead.appendChild(meta);
-						return;
-					}
-				});
-			}
-		}
-
-		function loadTemplates() {
-			if (!response.templates) {
-				return null;
-			}
-			var slotName, newTemplates = {};
-			for (slotName in response.templates) {
-				newTemplates[slotName] = [];
-				Q.each(response.templates[slotName], function (i) {
-					var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
-					newTemplates[slotName].push(
-						Q.Template.set(this.name, this.content, info)
-					);
-				});
-			}
-			return newTemplates;
-		}
-		
-		function loadScripts(callback) {
-			if (!response.scripts) {
-				callback();
-				return null;
-			}
-			var slotPipe = Q.pipe(Object.keys(response.scripts), function _Q_loadUrl_pipe_slotNames() {
-				callback();
-			});
-			var newScripts = {};
-			var keys = Object.keys(response.scripts);
-			if (response.scripts[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			Q.each(keys, function (i, slotName) {
-				var elem = Q.addScript(
-					response.scripts[slotName], slotPipe.fill(slotName), {
-					ignoreLoadingErrors: o.ignoreLoadingErrors,
-					returnAll: false
-				});
-				if (elem) {
-					newScripts[slotName] = elem;
-				}
-			});
-			return newScripts;
 		}
 	}
 };
