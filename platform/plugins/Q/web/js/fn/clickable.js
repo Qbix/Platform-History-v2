@@ -526,7 +526,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		this[0].restoreSelections();
 		Q.Pointer.onEnded.remove(state.onEndedKey);
 		$container.remove();
-		Q.each($this.data('observers'), function () {
+		Q.each(this.data('observers'), function () {
 			this.unobserve(this.observedElement);
 		});
 	}

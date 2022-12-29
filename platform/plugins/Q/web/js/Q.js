@@ -7807,11 +7807,8 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.handle(o.onRedirect, Q, [response.redirect.url]);
 				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, response, redirected, _processScriptDataAndLines);
-			Q.handle(o.onProcessed, this, [err, response, redirected, _processScriptDataAndLines]);
-			function _processScriptDataAndLines() {
-				Q.Request.processScriptDataAndLines(response);
-			}
+			callback && callback.call(this, err, response);
+			Q.handle(o.onProcessed, this, [err, response]);
 		};
 
 		function _onStart () {
@@ -9434,7 +9431,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	};
 	return promise;
 
-	function loadResponse(err, response, redirected, processScriptDataAndLines) {
+	function loadResponse(err, response, redirected) {
 		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
@@ -9610,7 +9607,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 				}
 
-				processScriptDataAndLines();
+				Q.Request.processScriptDataAndLines(response);
 
 				if (!o.ignorePage) {
 					try {

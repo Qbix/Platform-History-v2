@@ -535,13 +535,13 @@
 	}
 	
 	function _doAuthenticate(fields, platform, platformAppId, onSuccess, onCancel, options) {
-		Q.req('Users/authenticate', 'data', function (err, response, redirected, processScriptDataAndLines) {
+		Q.req('Users/authenticate', 'data', function (err, response) {
 			var fem = Q.firstErrorMessage(err, response);
 			if (fem) {
 				alert(fem);
 				return _doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
 			}
-			processScriptDataAndLines();
+			Q.Request.processScriptDataAndLines(response);
 			var user = response.slots.data;
 			if (user.authenticated !== true) {
 				priv.result = user.authenticated;
@@ -1429,9 +1429,9 @@
 				}
 			}
 			var url = $this.attr('action') + '?' + $this.serialize();
-			Q.request(url, 'data', function (err, response, redirected, processScriptDataAndLines) {
+			Q.request(url, 'data', function (err, response) {
 
-				processScriptDataAndLines();
+				Q.Request.processScriptDataAndLines(response);
 
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
@@ -1526,8 +1526,8 @@
 								}
 
 								function _resend() {
-									Q.req('Users/resend', 'data', function (err, response, redirected, processScriptDataAndLines) {
-										processScriptDataAndLines();
+									Q.req('Users/resend', 'data', function (err, response) {
+										Q.Request.processScriptDataAndLines(response);
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
@@ -3054,8 +3054,8 @@
 			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
 			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
 			if (fields['Q.Users.newSessionId']) {
-				Q.req('Users/session', function (err, response, redirected, processScriptDataAndLines) {
-					processScriptDataAndLines();
+				Q.req('Users/session', function (err, response) {
+					Q.Request.processScriptDataAndLines(response);
 					// Q.request.options.onProcessed would have changed loggedInUser already
 					// but maybe we want to redirect anyway, after a handoff
 					var href = Q.getObject("Q.Cordova.handoff.url");
@@ -3993,12 +3993,12 @@
 						identifier: me.email,
 						identifierType: 'email'
 					});
-					Q.request(url, ['data'], function (err, response, redirected, processScriptDataAndLines) {
+					Q.request(url, ['data'], function (err, response) {
 						if (response.errors) {
 							return;
 						}
 
-						processScriptDataAndLines();
+						Q.Request.processScriptDataAndLines(response);
 
 						// auto-login by authenticating with facebook
 						Users.authenticate('facebook', function (user) {
