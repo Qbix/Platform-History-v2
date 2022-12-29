@@ -5583,7 +5583,7 @@ Q.Response.processScriptDataAndLines = function (response) {
 		Q.Session.paths = response.sessionDataPaths;
 	}
 	if (response.scriptLines) {
-		for (var i in response.scriptLines) {
+		for (i in response.scriptLines) {
 			if (response.scriptLines[i]) {
 				eval(response.scriptLines[i]);
 			}
@@ -6547,7 +6547,7 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
 	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
-	var checks = ["ready"];
+	var checks = ["init", "ready"];
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
@@ -6659,6 +6659,7 @@ Q.init = function _Q_init(options) {
 		if (preferredLanguage) {
 			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
 		}
+		p.fill('init');
 
 		Q.handle(Q.onInit, Q);
 	}).run();
