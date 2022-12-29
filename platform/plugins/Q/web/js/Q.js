@@ -12413,7 +12413,7 @@ Q.Visual = Q.Pointer = {
 	 * @param {Array} params The parameters to send to the callback, if any
 	 */
 	waitUntilAnimationsEnd: function (callback, params) {
-		setTimeout(_executeIfAnimationsEnded);
+		setTimeout(_executeIfAnimationsEnded, 0);
 		function _executeIfAnimationsEnded() {
 			var a = Q.Visual.animationStarted;
 			if (a.animationsEnding < Date.now()) {
@@ -12431,7 +12431,8 @@ Q.Visual = Q.Pointer = {
 	 */
 	animationStarted: function (duration) {
 		var a = Q.Visual.animationStarted;
-		if ((a.animationsEnding || 0) < Date.now()) {
+		a.animationsEnding = animationsEnding || 0;
+		if (a.animationsEnding < Date.now()) {
 			a.animationsStarted = Date.now();
 			a.animationsEnding = a.animationsStarted + duration;
 		} else {
