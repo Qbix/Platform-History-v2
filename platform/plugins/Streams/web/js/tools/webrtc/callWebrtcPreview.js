@@ -105,7 +105,7 @@
                 if (stream.getAttribute("endTime")) {
                     var durationArr = Q.displayDuration(parseInt(stream.getAttribute("endTime")) - parseInt(stream.getAttribute("startTime"))).split(":");
                     for (var i=durationArr.length-1; i>=0; i--) {
-                        duration = durationArr[i] + " " + (["sec", "min", "h"][durationArr.length - (i + 1)]) + " " + duration;
+                        duration = durationArr[i] + " " + (["s", "m", "h"][durationArr.length - (i + 1)]) + " " + duration;
                     }
                     preamble = Q.getObject('webrtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
                 }
