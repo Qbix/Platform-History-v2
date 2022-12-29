@@ -12381,6 +12381,11 @@ Q.Pointer = {
 	 * @return {IntersectionObserver}
 	 */
 	waitUntilVisible: function (element, callback, options) {
+		var tool;
+		if ((Q.typeOf(element) === 'Q.Tool')) {
+			tool = element;
+			element = tool.element;
+		}
 		var o = Q.extend({}, Q.Pointer.waitUntilVisible, options);
 		var observer = new IntersectionObserver(function (entries, observer) {
 			if (entries[0] && entries[0].isIntersecting) {
@@ -12388,14 +12393,11 @@ Q.Pointer = {
 			}
 			callback && callback.apply(this, arguments);
 		}, o);
-		if (Q.typeOf(element) === 'Q.Tool') {
-			var tool = element;
-			observer.observe(tool.element);
+		observer.observe(element);
+		if (tool) {
 			tool.Q.beforeRemove.set(function () {
-				observer.unobserve(tool.element);
+				observer.unobserve(element);
 			});
-		} else {
-			observer.observe(element);
 		}
 		return observer;
 	},
