@@ -12431,7 +12431,7 @@ Q.Visual = Q.Pointer = {
 	 */
 	animationStarted: function (duration) {
 		var a = Q.Visual.animationStarted;
-		a.animationsEnding = animationsEnding || 0;
+		a.animationsEnding = a.animationsEnding || 0;
 		if (a.animationsEnding < Date.now()) {
 			a.animationsStarted = Date.now();
 			a.animationsEnding = a.animationsStarted + duration;
