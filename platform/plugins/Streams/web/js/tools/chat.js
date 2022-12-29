@@ -1258,14 +1258,14 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.renderMessages(
 					tool.prepareMessages(messages),
 					function (items) {
+						tool.$('.Streams_chat_noMessages').remove();
+						var $scm = tool.$('.Streams_chat_messages');
 						Q.each(items, function (key, $html) {
-							tool.$('.Streams_chat_noMessages').remove();
-							var $scm = tool.$('.Streams_chat_messages');
 							$html.appendTo($scm).activate();
-							$scm.off('scroll.Streams_chat')
-							.on('scroll.Streams_chat', function () {
-								state.lastScrollTop = $scm.scrollTop();
-							});
+						});
+						$scm.off('scroll.Streams_chat')
+						.on('scroll.Streams_chat', function () {
+							state.lastScrollTop = $scm.scrollTop();
 						});
 						Q.handle(callback, tool);
 						tool.processDOM();
@@ -1273,7 +1273,10 @@ Q.Tool.define('Streams/chat', function(options) {
 		
 						Q.handle(state.onRefresh, tool);
 		
-						tool.scrollToBottom();
+						Q.Pointer.waitUntilVisible(tool.element, function () {
+							tool.scrollToBottom();
+						});
+						
 		
 						// if startWebRTC is true, start webrtc
 						if (state.startWebRTC
