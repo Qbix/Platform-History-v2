@@ -12372,11 +12372,12 @@ Q.Pointer = {
 		return rect;
 	},
 	/**
-	 * Sets an observer to wait for an element become visible
+	 * Sets an observer to wait for an element become visible.
 	 * @static
 	 * @method waitUntilVisible
 	 * @param {Element|Q.Tool} element the element to watch
-	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer)
+	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer).
+	 *   Only called when entries[0].isIntersecting is true.
 	 * @param {Object|Number} options The options to pass to the observer
 	 * @return {IntersectionObserver}
 	 */
@@ -12389,9 +12390,9 @@ Q.Pointer = {
 		var o = Q.extend({}, Q.Pointer.waitUntilVisible, options);
 		var observer = new IntersectionObserver(function (entries, observer) {
 			if (entries[0] && entries[0].isIntersecting) {
+				callback && callback.apply(this, arguments);
 				observer.unobserve(element);
 			}
-			callback && callback.apply(this, arguments);
 		}, o);
 		observer.observe(element);
 		if (tool) {
