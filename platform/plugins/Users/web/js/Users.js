@@ -3127,8 +3127,8 @@
 		&& !Users.authenticate.occurring
 		&& !Users.logout.occurring) {
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
-			Q.req("Users/login", 'data', function (err, res, redirected, processScriptDataAndLines) {
-				processScriptDataAndLines();
+			Q.req("Users/login", 'data', function (err, res) {
+				Q.Request.processScriptDataAndLines(res);
 				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				var msg = Q.firstErrorMessage(err, res && res.errors);
 				if (msg) {
