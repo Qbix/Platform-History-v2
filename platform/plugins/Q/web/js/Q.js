@@ -5583,7 +5583,7 @@ Q.Response.processScriptDataAndLines = function (response) {
 		Q.Session.paths = response.sessionDataPaths;
 	}
 	if (response.scriptLines) {
-		for (i in response.scriptLines) {
+		for (var i in response.scriptLines) {
 			if (response.scriptLines[i]) {
 				eval(response.scriptLines[i]);
 			}
@@ -6546,7 +6546,7 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
-	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
+	Q.addEventListener(root, Q.Visual.focusout, _onPointerBlurHandler);
 	var checks = ["init", "ready"];
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
@@ -6660,7 +6660,6 @@ Q.init = function _Q_init(options) {
 			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
 		}
 		p.fill('init');
-
 		Q.handle(Q.onInit, Q);
 	}).run();
 };
@@ -7201,7 +7200,7 @@ var _supportsPassive;
  *  A space-delimited string of event names, or an array of event names.
  *  You can also pass an object of { eventName: eventHandler } pairs, in which csae
  *  the next parameter would be useCapture.
- *  You can also pass functions such as Q.Pointer.start here.
+ *  You can also pass functions such as Q.Visual.start here.
  * @param {Function} eventHandler
  *  A function to call when the event fires
  * @param {boolean|Object} useCapture
@@ -10069,7 +10068,7 @@ Q.handle.onUrl = new Q.Event(function () {
 	Q.each(elements, function () {
 		Q.removeElement(this, true);
 	});
-	Q.Pointer.stopHints();
+	Q.Visual.stopHints();
 }, "Q");
 
 /**
@@ -11800,8 +11799,8 @@ Q.info = {
 	},
 	isAndroid: function (maxWidth, maxHeight, minVersion, maxVersion) {
 		return Q.info.platform === 'android'
-			&& (maxWidth == undefined || maxWidth >= Q.Pointer.windowWidth())
-			&& (maxHeight == undefined || maxHeight >= Q.Pointer.windowHeight())	
+			&& (maxWidth == undefined || maxWidth >= Q.Visual.windowWidth())
+			&& (maxHeight == undefined || maxHeight >= Q.Visual.windowHeight())	
 			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
 			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
 	},
@@ -11857,7 +11856,7 @@ Q.Page.beforeUnload('').set(function () {
 }, 'Q');
 
 function _touchScrollingHandler(event) {
-	if (!Q.isEmpty(Q.Pointer.preventRubberBand.suspend)) {
+	if (!Q.isEmpty(Q.Visual.preventRubberBand.suspend)) {
 		return false;
 	}
     var p = event.target;
@@ -11869,22 +11868,22 @@ function _touchScrollingHandler(event) {
 		}
 		var overflow = p.computedStyle().overflow;
 		var hiddenWidth = p.scrollWidth - Math.min(
-			p.offsetWidth, Q.Pointer.windowWidth()
+			p.offsetWidth, Q.Visual.windowWidth()
 		);
 		var q = (p.tagName === 'HTML')
 			? document.body
 			: p;
 		var hiddenHeight = q.scrollHeight - Math.min(
-			p.offsetHeight, Q.Pointer.windowHeight()
+			p.offsetHeight, Q.Visual.windowHeight()
 		);
 		var s = (['hidden', 'visible'].indexOf(overflow) < 0);
 		if ((s || p.tagName === 'HTML')
 		&& hiddenHeight > 0
-		&& Q.Pointer.movement) {
+		&& Q.Visual.movement) {
 			if (_touchScrollingHandler.options.direction != 'horizontal'
-			&& (Q.Pointer.movement.positions.length == 1)
-			&& (pos = Q.Pointer.movement.positions[0])) {
-				var sy = Q.Pointer.getY(event) - Q.Pointer.scrollTop();
+			&& (Q.Visual.movement.positions.length == 1)
+			&& (pos = Q.Visual.movement.positions[0])) {
+				var sy = Q.Visual.getY(event) - Q.Visual.scrollTop();
 				if ((sy > pos.y && q.scrollTop == 0)
 				|| (sy < pos.y && q.scrollTop >= hiddenHeight)) {
 					continue;
@@ -11896,9 +11895,9 @@ function _touchScrollingHandler(event) {
 		if (!scrollable
 		&& (s || p.tagName === 'HTML') && hiddenWidth > 0) {
 			if (_touchScrollingHandler.options.direction != 'vertical'
-			&& (Q.Pointer.movement.positions.length == 1)
-			&& (pos = Q.Pointer.movement.positions[0])) {
-				var sx = Q.Pointer.getX(event) - Q.Pointer.scrollLeft();
+			&& (Q.Visual.movement.positions.length == 1)
+			&& (pos = Q.Visual.movement.positions[0])) {
+				var sx = Q.Visual.getX(event) - Q.Visual.scrollLeft();
 				if ((sx > pos.x && q.scrollLeft == 0)
 				|| (sx < pos.x && q.scrollLeft >= hiddenWidth)) {
 					continue;
@@ -11909,7 +11908,7 @@ function _touchScrollingHandler(event) {
 		}
 	} while (p = p.parentNode);
     if (!scrollable) {
-        Q.Pointer.preventDefault(event);
+        Q.Visual.preventDefault(event);
     }
 }
 
@@ -11920,7 +11919,7 @@ _touchScrollingHandler.options = {
 function _touchBlurHandler(event) {
 	var o = _touchBlurHandler.options.blur;
 	if (!o.blur) return;
-	var target = Q.Pointer.target(event);
+	var target = Q.Visual.target(event);
 	var ae = document.activeElement;
 	if (ae && (typeof ae.blur === 'function')
 	&& (ae !== target)) {
@@ -11966,15 +11965,15 @@ function _setLayoutInterval(e) {
 	|| !_setLayoutInterval.options.milliseconds) {
 		return;
 	}
-	var w = Q.Pointer.windowWidth();
-	var h = Q.Pointer.windowHeight();
+	var w = Q.Visual.windowWidth();
+	var h = Q.Visual.windowHeight();
 	var interval = setInterval(function () {
 		var ae = document.activeElement;
 		if (ae && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(ae.tagName.toUpperCase()) >= 0) {
 			return;
 		}
-		var w2 = Q.Pointer.windowWidth();
-		var h2 = Q.Pointer.windowHeight();
+		var w2 = Q.Visual.windowWidth();
+		var h2 = Q.Visual.windowHeight();
 		if (w !== w2 || h !== h2) {
 			Q.layout();
 		}
@@ -12018,16 +12017,16 @@ Q.Clipboard = {
 };
 
 function _Q_Pointer_start_end_handler (e) {
-	Q.Pointer.startedWhileRecentlyScrolled = false;
-	Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
-	Q.Pointer.stopCancelingClicksOnScroll(e.target);
+	Q.Visual.startedWhileRecentlyScrolled = false;
+	Q.removeEventListener(e.target, Q.Visual.end, _Q_Pointer_start_end_handler);
+	Q.Visual.stopCancelingClicksOnScroll(e.target);
 }
 
 /**
  * Methods for working with pointer and touchscreen events
- * @class Q.Pointer
+ * @class Q.Visual
  */
-Q.Pointer = {
+Q.Visual = Q.Pointer = {
 	/**
 	 * Intelligent pointer start event that also works on touchscreens
 	 * @static
@@ -12036,15 +12035,15 @@ Q.Pointer = {
 	start: function _Q_Pointer_start(params) {
 		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function (e) {
-			Q.Pointer.movedTooMuchForClickLastTime = false;
-			if (Q.Pointer.recentlyScrolled) {
-				Q.Pointer.startedWhileRecentlyScrolled = true;
+			Q.Visual.movedTooMuchForClickLastTime = false;
+			if (Q.Visual.recentlyScrolled) {
+				Q.Visual.startedWhileRecentlyScrolled = true;
 			} else {
-				Q.Pointer.canceledClick = false;
+				Q.Visual.canceledClick = false;
 			}
-			Q.Pointer.startCancelingClicksOnScroll(e.target);
-			Q.removeEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
-			Q.addEventListener(e.target, Q.Pointer.end, _Q_Pointer_start_end_handler);
+			Q.Visual.startCancelingClicksOnScroll(e.target);
+			Q.removeEventListener(e.target, Q.Visual.end, _Q_Pointer_start_end_handler);
+			Q.addEventListener(e.target, Q.Visual.end, _Q_Pointer_start_end_handler);
 			return params.original.apply(this, arguments);
 		};
 	},
@@ -12130,7 +12129,7 @@ Q.Pointer = {
 		};
 	},
 	/**
-	 * Intelligent click event that also works on touchscreens, and respects Q.Pointer.canceledClick
+	 * Intelligent click event that also works on touchscreens, and respects Q.Visual.canceledClick
 	 * @static
 	 * @method click
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
@@ -12138,15 +12137,15 @@ Q.Pointer = {
 	click: function _Q_click(params) {
 		params.eventName = 'click';
 		return function _Q_click_on_wrapper (e) {
-			if (Q.Pointer.canceledClick) {
-				return Q.Pointer.preventDefault(e);
+			if (Q.Visual.canceledClick) {
+				return Q.Visual.preventDefault(e);
 			}
 			return params.original.apply(this, arguments);
 		};
 	},
 	/**
 	 * Like click event but fires much sooner on touchscreens,
-	 * and respects Q.Pointer.canceledClick
+	 * and respects Q.Visual.canceledClick
 	 * @static
 	 * @method fastclick
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
@@ -12159,17 +12158,17 @@ Q.Pointer = {
 				if (oe.touches && oe.touches.length) {
 					return; // still some touches happening
 				}
-				Q.Pointer.touches = oe.touches;
+				Q.Visual.touches = oe.touches;
 			}
-			var x = Q.Pointer.getX(e), y = Q.Pointer.getY(e);
-			var elem = (!isNaN(x) && !isNaN(y)) && Q.Pointer.elementFromPoint(x, y);
+			var x = Q.Visual.getX(e), y = Q.Visual.getY(e);
+			var elem = (!isNaN(x) && !isNaN(y)) && Q.Visual.elementFromPoint(x, y);
 			if (!(elem instanceof Element)){
 				return;
 			}
-			if (Q.Pointer.canceledClick
-			|| !this.contains(Q.Pointer.started || null)
+			if (Q.Visual.canceledClick
+			|| !this.contains(Q.Visual.started || null)
 			|| !this.contains(elem)) {
-				return Q.Pointer.preventDefault(e);
+				return Q.Visual.preventDefault(e);
 			}
 			return params.original.apply(this, arguments);
 		};
@@ -12178,14 +12177,14 @@ Q.Pointer = {
 	 * Like click event but works on touchscreens even if the viewport moves 
 	 * during click, such as when the on-screen keyboard disappears
 	 * or a scrolling parent gets scrollTop = 0 because content changed.
-	 * Respects Q.Pointer.canceledClick
+	 * Respects Q.Visual.canceledClick
 	 * @static
 	 * @method touchclick
 	 * @param {Object} [params={}] if passed, it is filled with "eventName"
 	 */
 	touchclick: function _Q_touchclick (params) {
 		if (!Q.info.isTouchscreen) {
-			return Q.Pointer.click(params);
+			return Q.Visual.click(params);
 		}
 		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function _Q_touchclick_on_wrapper (e) {
@@ -12193,8 +12192,8 @@ Q.Pointer = {
 			var t = this, a = arguments;
 			function _clickHandler(e) {
 				Q.removeEventListener(root, 'click', _clickHandler);
-				if (Q.Pointer.canceledClick) {
-					return Q.Pointer.preventDefault(e);
+				if (Q.Visual.canceledClick) {
+					return Q.Visual.preventDefault(e);
 				}
 				if (_relevantClick) {
 					params.original.apply(t, a);
@@ -12204,7 +12203,7 @@ Q.Pointer = {
 				Q.removeEventListener(this, 'touchend', _touchendHandler);
 				setTimeout(function () {
 					_relevantClick = false;
-				}, Q.Pointer.touchclick.duration);
+				}, Q.Visual.touchclick.duration);
 			}
 			Q.addEventListener(root, 'click', _clickHandler);
 			Q.addEventListener(this, 'touchend', _touchendHandler);
@@ -12247,7 +12246,7 @@ Q.Pointer = {
 		};
 	},
 	/**
-	 * Whether the click was canceled by Q.Pointer.cancelClick()
+	 * Whether the click was canceled by Q.Visual.cancelClick()
 	 * @static
 	 * @property {boolean} canceledClick
 	 */
@@ -12330,11 +12329,11 @@ Q.Pointer = {
 	 */
 	boundingRect: function (container, omitClasses, omitOverflow) {
 		var rect = {left: 0, top: 0};
-		rect.right = Q.Pointer.windowWidth();
-		rect.bottom = Q.Pointer.windowHeight();
+		rect.right = Q.Visual.windowWidth();
+		rect.bottom = Q.Visual.windowHeight();
 		container = container || document.body;
-		var sl = Q.Pointer.scrollLeft();
-		var st = Q.Pointer.scrollTop();
+		var sl = Q.Visual.scrollLeft();
+		var st = Q.Visual.scrollTop();
 		Q.each(container.children || container.childNodes, function () {
 			if (this.hasClass && omitClasses) {
 				for (var i=0, l=omitClasses.length; i<l; ++i) {
@@ -12388,7 +12387,7 @@ Q.Pointer = {
 			tool = element;
 			element = tool.element;
 		}
-		var o = Q.extend({}, Q.Pointer.waitUntilVisible, options);
+		var o = Q.extend({}, Q.Visual.waitUntilVisible, options);
 		var observer = new IntersectionObserver(function (entries, observer) {
 			if (entries[0] && entries[0].isIntersecting) {
 				callback && callback.apply(this, arguments);
@@ -12402,6 +12401,41 @@ Q.Pointer = {
 			});
 		}
 		return observer;
+	},
+	/**
+	 * Works together with Q.Visual.animationStarted
+	 * Calls the callback after all current animations have ended.
+	 * @static
+	 * @method waitUntilAnimationsEnd
+	 * @param {Function} callback The callback may synchronously call 
+	 *   animationStarted(), which will delay any subsequent callbacks,
+	 *   so any such callbacks would start animations sequentially.
+	 * @param {Array} params The parameters to send to the callback, if any
+	 */
+	waitUntilAnimationsEnd: function (callback, params) {
+		setTimeout(_executeIfAnimationsEnded);
+		function _executeIfAnimationsEnded() {
+			if (a.animationsEnding < Date.now()) {
+				Q.handle(callback, Q.Visual, params);
+			} else {
+				setTimeout(_executeIfAnimationsEnded, a.animationsEnding - Date.now);
+			}
+		}
+	},
+	/**
+	 * Just call this to indicate that a transient animation has started,
+	 * in case someone wants to wait for all transient animations to end
+	 * they will call waitUntilAnimationsEnd()
+	 * @param {Number} duration in milliseconds
+	 */
+	animationStarted: function (duration) {
+		var a = Q.Visual.animationStarted;
+		if ((a.animationsEnding || 0) < Date.now()) {
+			a.animationsStarted = Date.now();
+			a.animationsEnding = a.animationsStarted + duration;
+		} else {
+			a.animationsEnding += duration;
+		}
 	},
 	/**
 	 * Returns the x coordinate of an event relative to the document
@@ -12420,7 +12454,7 @@ Q.Pointer = {
 				? oe.changedTouches[touchIndex]
 				: oe
 			);
-		return Math.max(0, ('pageX' in oe) ? oe.pageX : oe.clientX + Q.Pointer.scrollLeft());
+		return Math.max(0, ('pageX' in oe) ? oe.pageX : oe.clientX + Q.Visual.scrollLeft());
 	},
 	/**
 	 * Returns the y coordinate of an event relative to the document
@@ -12439,7 +12473,7 @@ Q.Pointer = {
 				? oe.changedTouches[touchIndex]
 				: oe
 			);
-		return Math.max(0, ('pageY' in oe) ? oe.pageY : oe.clientY + Q.Pointer.scrollTop());
+		return Math.max(0, ('pageY' in oe) ? oe.pageY : oe.clientY + Q.Visual.scrollTop());
 	},
 	/**
 	 * Returns the number of touch points of an event
@@ -12450,10 +12484,10 @@ Q.Pointer = {
 	 */
 	touchCount: function (e) {
 		var oe = e.originalEvent || e;
- 		return oe.touches ? oe.touches.length : (Q.Pointer.which(e) > 0 ? 1 : 0);
+ 		return oe.touches ? oe.touches.length : (Q.Visual.which(e) > 0 ? 1 : 0);
 	},
 	/**
-	 * Returns which button was pressed - Q.Pointer.which.{LEFT|MIDDLE|RIGHT|NONE}
+	 * Returns which button was pressed - Q.Visual.which.{LEFT|MIDDLE|RIGHT|NONE}
 	 * @static
 	 * @method which
 	 * @param {Q.Event} e Some mouse or touch event from the DOM
@@ -12474,7 +12508,7 @@ Q.Pointer = {
 	 * @return {boolean}
 	 */
 	isPressed: function (e) {
-		return !!(Q.Pointer.which(e) || Q.Pointer.touchCount(e));
+		return !!(Q.Visual.which(e) || Q.Visual.touchCount(e));
 	},
 	/**
 	 * Consistently returns the target of an event across browsers
@@ -12532,8 +12566,8 @@ Q.Pointer = {
 	 * @param {String} [options.width="200px"]
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
-	 * @param {Boolean|Object} [options.waitUntilVisible=false] Wait until it's visible, then show hint right away. You can also pass an options here for Q.Pointer.waitUntilVisible(). Typically used together with dontStopBeforeShown.
-	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {Boolean|Object} [options.waitUntilVisible=false] Wait until it's visible, then show hint right away. You can also pass an options here for Q.Visual.waitUntilVisible(). Typically used together with dontStopBeforeShown.
+	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Visual.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
 	 * @param {boolean} [options.tooltip] Can be used to show a tooltip with some html
@@ -12560,9 +12594,9 @@ Q.Pointer = {
 	 */
 	hint: function (targets, options) {
 
-		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
+		options = Q.extend({}, Q.Visual.hint.options, 10, options);
 		if (options.waitUntilVisible) {
-			return Q.Pointer.waitUntilVisible(targets[0], function (entries, observer) {
+			return Q.Visual.waitUntilVisible(targets[0], function (entries, observer) {
 				if (entries[0].isIntersecting) {
 					var sp = entries[0].target.scrollingParent();
 					var st = sp.scrollTop;
@@ -12572,7 +12606,7 @@ Q.Pointer = {
 							clearInterval(ival);
 							options.waitUntilVisible = false;
 							options.dontStopBeforeShown = true;
-							Q.Pointer.hint(targets, options);
+							Q.Visual.hint(targets, options);
 						}
 						st = sp.scrollTop;
 					}, 300);
@@ -12586,8 +12620,8 @@ Q.Pointer = {
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
 		if (!options.dontRemove && !options.waitForEvents) {
-			for (i=0, l=Q.Pointer.hint.imgs.length; i<l; ++i) {
-				img = Q.Pointer.hint.imgs[i];
+			for (i=0, l=Q.Visual.hint.imgs.length; i<l; ++i) {
+				img = Q.Visual.hint.imgs[i];
 				if (img.parentNode) {
 					img.parentNode.removeChild(img);
 				}
@@ -12595,7 +12629,7 @@ Q.Pointer = {
 					img.tooltip.parentNode.removeChild(img.tooltip);
 				}
 			}
-			Q.Pointer.hint.imgs = [];
+			Q.Visual.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
 		img1.setAttribute('src', Q.url(options.src));
@@ -12616,7 +12650,7 @@ Q.Pointer = {
 		img1.hide = options.hide;
 		img1.dontStopBeforeShown = options.dontStopBeforeShown;
         setTimeout(function(){
-            Q.Pointer.hint.imgs.push(img1);
+            Q.Visual.hint.imgs.push(img1);
             img1.style.visibility = 'hidden';
             document.body.appendChild(img1);
             hintEvent.add(Q.once(function _hintReady() {
@@ -12642,7 +12676,7 @@ Q.Pointer = {
                             img2.target = targets[i];
                             img2.timeout = false;
                             imgs.push(img2);
-                            Q.Pointer.hint.imgs.push(img2);
+                            Q.Visual.hint.imgs.push(img2);
                             document.body.appendChild(img2);
                         }
                     } else {
@@ -12669,8 +12703,8 @@ Q.Pointer = {
                             }
                             var offset = target.getBoundingClientRect();
                             point = {
-                                x: Q.Pointer.positionLeft() + offset.left + target.offsetWidth / 2,
-                                y: Q.Pointer.positionTop() + offset.top + target.offsetHeight / 2
+                                x: Q.Visual.positionLeft() + offset.left + target.offsetWidth / 2,
+                                y: Q.Visual.positionTop() + offset.top + target.offsetHeight / 2
                             };
                         } else {
                             point = target;
@@ -12757,14 +12791,14 @@ Q.Pointer = {
                     });
                 }, options.show.delay);
             }));
-            if (!Q.Pointer.hint.addedListeners) {
-                Q.Pointer.stopHintsIgnore = true;
-                Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
-                Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
-                Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
-                Q.Pointer.hint.addedListeners = true;
+            if (!Q.Visual.hint.addedListeners) {
+                Q.Visual.stopHintsIgnore = true;
+                Q.addEventListener(window, Q.Visual.start, Q.Visual.stopHints, false, true);
+                Q.addEventListener(window, 'keydown', Q.Visual.stopHints, false, true);
+                Q.addEventListener(document, 'scroll', Q.Visual.stopHints, false, true);
+                Q.Visual.hint.addedListeners = true;
                 setTimeout(function () {
-                    delete Q.Pointer.stopHintsIgnore;
+                    delete Q.Visual.stopHintsIgnore;
                 }, 0);
             }
             if (options.waitForEvents) {
@@ -12802,17 +12836,17 @@ Q.Pointer = {
 	 * @param {HTMLElement} [container] If provided, only hints for elements in this container are stopped.
 	 */
 	stopHints: function (container) {
-		if (Q.Pointer.stopHintsIgnore) {
+		if (Q.Visual.stopHintsIgnore) {
 			return; // workaround for iOS Safari
 		}
-		var imgs = Q.Pointer.hint.imgs;
+		var imgs = Q.Visual.hint.imgs;
 		var imgs2 = [];
 		Q.each(imgs, function (i, img) {
 			if (_stopHint(img, container)) {
 				imgs2.push(img);
 			}
 		});
-		Q.Pointer.hint.imgs = imgs2;
+		Q.Visual.hint.imgs = imgs2;
 	},
 	/**
 	 * Start showing touchlabels on elements with data-touchlabel="Label text"
@@ -12837,11 +12871,11 @@ Q.Pointer = {
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
 		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
-			if (Q.info.isTouchscreen && !Q.Pointer.isPressed(e)) {
+			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
-			var x = Q.Pointer.getX(e);
-			var y = Q.Pointer.getY(e);
+			var x = Q.Visual.getX(e);
+			var y = Q.Visual.getY(e);
 			var t = document.elementFromPoint(x, y);
 			if (_suppress) {
 				return;
@@ -12900,7 +12934,7 @@ Q.Pointer = {
 	},
 	/**
 	 * Cancels a click that may be in progress,
-	 * setting Q.Pointer.canceledClick to true.
+	 * setting Q.Visual.canceledClick to true.
 	 * This is to tell other handlers in the document, which know about Q,
 	 * not to react to the click in a standard way.
 	 * To really stop propagation of this event, also call stopPropagation.
@@ -12915,15 +12949,15 @@ Q.Pointer = {
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to wait
-	 *   some milliseconds until setting Q.Pointer.canceledClick = false .
+	 *   some milliseconds until setting Q.Visual.canceledClick = false .
 	 * @return {boolean}
 	 */
 	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
-		if (false === Q.Pointer.onCancelClick.handle(event, extraInfo)) {
+		if (false === Q.Visual.onCancelClick.handle(event, extraInfo)) {
 			return false;
 		}
-		Q.Pointer.canceledClick = true;
-		Q.Pointer.canceledEvent = event;
+		Q.Visual.canceledClick = true;
+		Q.Visual.canceledEvent = event;
 		if (!skipMask) {
 			Q.Masks.show('Q.click.mask');
 		}
@@ -12931,7 +12965,7 @@ Q.Pointer = {
 			++_cancelClick_counter;
 			setTimeout(function () {
 				if (--_cancelClick_counter === 0) {
-					Q.Pointer.canceledClick = false;
+					Q.Visual.canceledClick = false;
 				}
 			}, msUntilStopCancelClick);
 		}
@@ -12946,8 +12980,8 @@ Q.Pointer = {
 	 */
 	elementFromPoint: function (pageX, pageY) {
 		return document.elementFromPoint(
-			pageX - Q.Pointer.scrollLeft(),
-			pageY - Q.Pointer.scrollTop()
+			pageX - Q.Visual.scrollLeft(),
+			pageY - Q.Visual.scrollTop()
 		);
 	},
 	/**
@@ -13058,10 +13092,10 @@ Q.Pointer = {
 };
 
 var _cancelClick_counter = 0;
-Q.Pointer.preventRubberBand.suspend = {};
+Q.Visual.preventRubberBand.suspend = {};
 
 var _setRecentlyScrolledFalse = Q.debounce(function () {
-	Q.Pointer.recentlyScrolled = false;
+	Q.Visual.recentlyScrolled = false;
 }, 300);
 
 function _handleScroll(event) {
@@ -13073,15 +13107,15 @@ function _handleScroll(event) {
 	) {
 		return false;
 	}
-	if (Q.Pointer.latest.touches.length) {
+	if (Q.Visual.latest.touches.length) {
 		// no need to cancel click here, user will have to lift their fingers to click
 		return false;
 	}
-	Q.Pointer.recentlyScrolled = true;
+	Q.Visual.recentlyScrolled = true;
 	setTimeout(_setRecentlyScrolledFalse, 100);
-	var shouldStopCancelClick = !Q.Pointer.movedTooMuchForClickLastTime
-		&& !Q.Pointer.startedWhileRecentlyScrolled;
-	Q.Pointer.cancelClick(true, null, null, shouldStopCancelClick ? 300 : 0);
+	var shouldStopCancelClick = !Q.Visual.movedTooMuchForClickLastTime
+		&& !Q.Visual.startedWhileRecentlyScrolled;
+	Q.Visual.cancelClick(true, null, null, shouldStopCancelClick ? 300 : 0);
 }
 
 function _stopHint(img, container) {
@@ -13116,23 +13150,23 @@ function _stopHint(img, container) {
 }
 
 var _useTouchEvents = Q.info.useTouchEvents;
-Q.Pointer.start.eventName = _useTouchEvents ? 'touchstart' : 'mousedown';
-Q.Pointer.move.eventName = _useTouchEvents ? 'touchmove' : 'mousemove';
-Q.Pointer.end.eventName = _useTouchEvents ? 'touchend' : 'mouseup';
-Q.Pointer.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'mousecancel';
+Q.Visual.start.eventName = _useTouchEvents ? 'touchstart' : 'mousedown';
+Q.Visual.move.eventName = _useTouchEvents ? 'touchmove' : 'mousemove';
+Q.Visual.end.eventName = _useTouchEvents ? 'touchend' : 'mouseup';
+Q.Visual.cancel.eventName = _useTouchEvents ? 'touchcancel' : 'mousecancel';
 
-Q.Pointer.which.NONE = 0;
-Q.Pointer.which.LEFT = 1;
-Q.Pointer.which.MIDDLE = 2;
-Q.Pointer.which.RIGHT = 3;
-Q.Pointer.touchclick.duration = 400;
+Q.Visual.which.NONE = 0;
+Q.Visual.which.LEFT = 1;
+Q.Visual.which.MIDDLE = 2;
+Q.Visual.which.RIGHT = 3;
+Q.Visual.touchclick.duration = 400;
 
-Q.Pointer.latest = {
-	which: Q.Pointer.which.NONE,
+Q.Visual.latest = {
+	which: Q.Visual.which.NONE,
 	touches: []
 };
 
-Q.Pointer.waitUntilVisible.options = {
+Q.Visual.waitUntilVisible.options = {
 	root: null,
 	rootMargin: '0px',
 	threshold: 1.0
@@ -13140,21 +13174,21 @@ Q.Pointer.waitUntilVisible.options = {
 
 Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
 	if (e.type === 'mousedown') {
-		Q.Pointer.latest.which = Q.Pointer.which(e);
+		Q.Visual.latest.which = Q.Visual.which(e);
 	} else {
-		Q.Pointer.latest.touches = e.touches;
+		Q.Visual.latest.touches = e.touches;
 	}
 }, false, true);
 
 Q.addEventListener(document.body, 'touchend touchcancel mouseup', function (e) {
 	if (e.type === 'mouseup') {
-		Q.Pointer.latest.which = Q.Pointer.which(e);
+		Q.Visual.latest.which = Q.Visual.which(e);
 	} else {
-		Q.Pointer.latest.touches = e.touches;
+		Q.Visual.latest.touches = e.touches;
 	}
 }, false, true);
 
-Q.Pointer.hint.options = {
+Q.Visual.hint.options = {
 	src: '{{Q}}/img/hints/tap.gif',
 	hotspot:  {x: 0.5, y: 0.3},
 	width: "50px",
@@ -13174,7 +13208,7 @@ Q.Pointer.hint.options = {
 		ease: Q.Animation.ease.linear
 	}
 };
-Q.Pointer.hint.imgs = [];
+Q.Visual.hint.imgs = [];
 
 function _Q_restoreScrolling() {
 	if (!Q.info || !Q.info.isTouchscreen) return false;
@@ -13187,13 +13221,13 @@ function _Q_restoreScrolling() {
 			focused = true;
 		}
 		if (focused) return false;
-		lastScrollTop = Q.Pointer.scrollTop();
-		lastScrollLeft = Q.Pointer.scrollLeft();
+		lastScrollTop = Q.Visual.scrollTop();
+		lastScrollLeft = Q.Visual.scrollLeft();
 	}, 300);
-	Q.addEventListener(document.body, Q.Pointer.focusin, function _Q_body_focusin() {
+	Q.addEventListener(document.body, Q.Visual.focusin, function _Q_body_focusin() {
 		focused = true;
 	});
-	Q.addEventListener(document.body, Q.Pointer.focusout, function _Q_body_focusout() {
+	Q.addEventListener(document.body, Q.Visual.focusout, function _Q_body_focusout() {
 		focused = false;
 		if (lastScrollTop !== undefined) {
 			window.scrollTo(lastScrollLeft, lastScrollTop);
@@ -13208,21 +13242,21 @@ _Q_restoreScrolling.options = {
 
 var _pos, _dist, _last, _lastTimestamp, _lastVelocity;
 function _Q_PointerStartHandler(e) {
-	Q.Pointer.started = Q.Pointer.target(e);
-	Q.Pointer.canceledClick = false;
-	Q.addEventListener(window, Q.Pointer.move, _onPointerMoveHandler, false, true);
-	Q.addEventListener(window, Q.Pointer.end, _onPointerEndHandler, false, true);
-	Q.addEventListener(window, Q.Pointer.cancel, _onPointerEndHandler, false, true);
-	Q.addEventListener(window, Q.Pointer.click, _onPointerClickHandler, false, true);
-	Q.handle(Q.Pointer.onStarted, this, arguments);
-	var screenX = Q.Pointer.getX(e) - Q.Pointer.scrollLeft();
-	var screenY = Q.Pointer.getY(e) - Q.Pointer.scrollTop();
+	Q.Visual.started = Q.Visual.target(e);
+	Q.Visual.canceledClick = false;
+	Q.addEventListener(window, Q.Visual.move, _onPointerMoveHandler, false, true);
+	Q.addEventListener(window, Q.Visual.end, _onPointerEndHandler, false, true);
+	Q.addEventListener(window, Q.Visual.cancel, _onPointerEndHandler, false, true);
+	Q.addEventListener(window, Q.Visual.click, _onPointerClickHandler, false, true);
+	Q.handle(Q.Visual.onStarted, this, arguments);
+	var screenX = Q.Visual.getX(e) - Q.Visual.scrollLeft();
+	var screenY = Q.Visual.getY(e) - Q.Visual.scrollTop();
 	_pos = { // first movement
 		x: screenX,
 		y: screenY
 	};
 	_dist = _last = _lastTimestamp = _lastVelocity = null;
-	Q.Pointer.movement = {
+	Q.Visual.movement = {
 		times: [],
 		positions: [],
 		velocities: [],
@@ -13235,18 +13269,18 @@ function _Q_PointerStartHandler(e) {
 var _pointerMoveTimeout = null;
 function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/467460
 	clearTimeout(_pointerMoveTimeout);
-	var screenX = Q.Pointer.getX(evt) - Q.Pointer.scrollLeft();
-	var screenY = Q.Pointer.getY(evt) - Q.Pointer.scrollTop();
-	if (!screenX || !screenY || Q.Pointer.canceledClick
+	var screenX = Q.Visual.getX(evt) - Q.Visual.scrollLeft();
+	var screenY = Q.Visual.getY(evt) - Q.Visual.scrollTop();
+	if (!screenX || !screenY || Q.Visual.canceledClick
 	|| (!evt.button && (evt.touches && !evt.touches.length))) {
 		return;
 	}
-	var ccd = Q.Pointer.options.cancelClickDistance;
+	var ccd = Q.Visual.options.cancelClickDistance;
 	if (event.button || _pos
 	&& ((_pos.x && Math.abs(_pos.x - screenX) > ccd)
 	 || (_pos.y && Math.abs(_pos.y - screenY) > ccd))) {
 		// finger moved more than the threshhold
-		if (false !== Q.Pointer.cancelClick(true, evt, {
+		if (false !== Q.Visual.cancelClick(true, evt, {
 			fromX: _pos.x,
 			fromY: _pos.y,
 			toX: screenX,
@@ -13254,11 +13288,11 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			comingFromPointerMovement: true
 		})) {
 			_pos = false;
-			Q.Pointer.movedTooMuchForClickLastTime = true;
+			Q.Visual.movedTooMuchForClickLastTime = true;
 		}
 	}
 	var _timestamp = Q.milliseconds();
-	Q.Pointer.movement.times.push(_timestamp);
+	Q.Visual.movement.times.push(_timestamp);
 	if (_last && _lastTimestamp) {
 		_dist = {
 			x: screenX - _last.x,
@@ -13269,16 +13303,16 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			x: _dist.x / _timeDiff,
 			y: _dist.y / _timeDiff
 		};
-		Q.Pointer.movement.velocities.push(velocity);
+		Q.Visual.movement.velocities.push(velocity);
 		if (_lastVelocity != null) {
-			Q.Pointer.movement.accelerations.push({
+			Q.Visual.movement.accelerations.push({
 				x: (velocity.x - _lastVelocity.x) / _timeDiff,
 				y: (velocity.y - _lastVelocity.y) / _timeDiff
 			});
 		}
 		_lastVelocity = velocity;
-		var times = Q.Pointer.movement.times;
-		var velocities = Q.Pointer.movement.velocities;
+		var times = Q.Visual.movement.times;
+		var velocities = Q.Visual.movement.velocities;
 		var totalX = 0, totalY = 0;
 		var t = _timestamp, tNext;
 		for (var i=times.length-1; i>=1; --i) {
@@ -13290,15 +13324,15 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 			t = tNext;
 		}
 		var tDiff = _timestamp - t;
-		Q.Pointer.movement.movingAverageVelocity = tDiff
+		Q.Visual.movement.movingAverageVelocity = tDiff
 			? { x: totalX / tDiff, y: totalY / tDiff }
-			: Q.Pointer.movement.velocities[velocities.length-1];
+			: Q.Visual.movement.velocities[velocities.length-1];
 		_pointerMoveTimeout = setTimeout(function () {
 			// no movement for a while
 			var noMovement = {x: 0, y: 0};
 			var _timestamp = Q.milliseconds();
 			var _timeDiff = _timeDiff - _lastTimestamp;
-			var movement = Q.Pointer.movement;
+			var movement = Q.Visual.movement;
 			movement.times.push(_timestamp);
 			movement.velocities.push(noMovement);
 			movement.movingAverageVelocity = noMovement;
@@ -13306,52 +13340,52 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 				x: -velocity.x / _timeDiff,
 				y: -velocity.y / _timeDiff
 			});
-		}, Q.Pointer.movement.timeout);
+		}, Q.Visual.movement.timeout);
 	}
 	_lastTimestamp = _timestamp;
 	_last = {
 		x: screenX,
 		y: screenY
 	};
-	Q.Pointer.movement.positions.push(_last);
+	Q.Visual.movement.positions.push(_last);
 
 }
 
 /**
  * Removes event listeners that are activated when the pointer has started.
  * This method is called automatically when the mouse or fingers are released
- * on the window. However, in the code that stops propagation of the Q.Pointer.end
+ * on the window. However, in the code that stops propagation of the Q.Visual.end
  * event (mouseup or touchend), you'd have to call this method manually.
  * @method ended
  * @static
  */
-var _onPointerEndHandler = Q.Pointer.ended = function _onPointerEndHandler() {
+var _onPointerEndHandler = Q.Visual.ended = function _onPointerEndHandler() {
 	setTimeout(function () {
-		Q.Pointer.started = null;
+		Q.Visual.started = null;
 	}, 0);
 	clearTimeout(_pointerMoveTimeout);
-	Q.removeEventListener(window, Q.Pointer.move, _onPointerMoveHandler);
-	Q.removeEventListener(window, Q.Pointer.end, _onPointerEndHandler);
-	Q.removeEventListener(window, Q.Pointer.cancel, _onPointerEndHandler);
-	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
-	Q.handle(Q.Pointer.onEnded, this, arguments);
+	Q.removeEventListener(window, Q.Visual.move, _onPointerMoveHandler);
+	Q.removeEventListener(window, Q.Visual.end, _onPointerEndHandler);
+	Q.removeEventListener(window, Q.Visual.cancel, _onPointerEndHandler);
+	Q.removeEventListener(window, Q.Visual.click, _onPointerClickHandler);
+	Q.handle(Q.Visual.onEnded, this, arguments);
 	_pos = false;
 	setTimeout(function () {
-		Q.Pointer.canceledClick = false;
+		Q.Visual.canceledClick = false;
 	}, 100);
 };
 
 function _onPointerClickHandler(e) {
-	if (Q.Pointer.canceledClick) {
+	if (Q.Visual.canceledClick) {
 		e.preventDefault();
 	}
-	Q.removeEventListener(window, Q.Pointer.click, _onPointerClickHandler);
+	Q.removeEventListener(window, Q.Visual.click, _onPointerClickHandler);
 }
 
 function _onPointerBlurHandler() {
-	Q.Pointer.blurring = true;
+	Q.Visual.blurring = true;
 	setTimeout(function () {
-		Q.Pointer.blurring = false;
+		Q.Visual.blurring = false;
 	}, 500); // for touchscreens that retry clicks after keyboard disappears
 };
 
@@ -13540,7 +13574,7 @@ Q.Dialogs = {
 				$dialog.data('Q/dialog').close();
 			}
 		}
-		Q.Pointer.cancelClick();
+		Q.Visual.cancelClick();
 		return $dialog && $dialog[0];
 	},
 
@@ -13682,7 +13716,7 @@ Q.confirm = function(message, callback, options) {
 		'hidePrevious': true
 	}, options));
 	var buttons = dialog.querySelectorAll('.Q_buttons button');
-	Q.addEventListener(buttons[0], Q.Pointer.end, function (e) {
+	Q.addEventListener(buttons[0], Q.Visual.end, function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 		buttonClicked = true;
@@ -13690,7 +13724,7 @@ Q.confirm = function(message, callback, options) {
 		Q.handle(callback, root, [true]);
 		return false;
 	});
-	Q.addEventListener(buttons[1], Q.Pointer.end, function (e) {
+	Q.addEventListener(buttons[1], Q.Visual.end, function (e) {
 		e.preventDefault();
 		e.stopPropagation();
 		buttonClicked = true;
@@ -13785,7 +13819,7 @@ Q.prompt = function(message, callback, options) {
 		'hidePrevious': true
 	}, options));
 	var button = dialog.querySelector('.Q_buttons button');
-	Q.addEventListener(button, Q.Pointer.click, _done);
+	Q.addEventListener(button, Q.Visual.click, _done);
 	return dialog;
 };
 Q.prompt.options = {
@@ -14382,8 +14416,8 @@ Q.Masks = {
 			if (!mask.counter) continue;
 			var html = document.documentElement;
 			var offset = $('body').offset();
-			var scrollLeft = Q.Pointer.scrollLeft() - offset.left;
-			var scrollTop = Q.Pointer.scrollTop() - offset.top;
+			var scrollLeft = Q.Visual.scrollLeft() - offset.left;
+			var scrollTop = Q.Visual.scrollTop() - offset.top;
 			var ms = mask.element.style;
 			var rect = (mask.shouldCover || html).getBoundingClientRect();
 			mask.rect = {
@@ -14393,7 +14427,7 @@ Q.Masks = {
 				'bottom': rect.bottom
 			};
 			if (!mask.shouldCover) {
-				//mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+				//mask.rect = Q.Visual.boundingRect(document.body, ['Q_mask']);
 			}
 			if (mask.rect.top < 0) {
 				mask.rect.top = 0;
@@ -14434,7 +14468,7 @@ Q.Masks.show.options = {
 	}
 };
 
-Q.addEventListener(window, Q.Pointer.start, _Q_PointerStartHandler, false, true);
+Q.addEventListener(window, Q.Visual.start, _Q_PointerStartHandler, false, true);
 
 function noop() {}
 if (!root.console) {
@@ -14520,9 +14554,9 @@ Q.onInit.add(function () {
 	}, 'Q.Socket');
 
 	var QtQw = Q.text.Q.words;
-	Q.Pointer.ClickOrTap = QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
-	Q.Pointer.clickOrTap = QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
-	Q.Pointer.CLICKORTAP = QtQw.CLICKORTAP = QtQw.clickOrTap.toUpperCase();
+	Q.Visual.ClickOrTap = QtQw.ClickOrTap = useTouchEvents ? QtQw.Tap : QtQw.Click;
+	Q.Visual.clickOrTap = QtQw.clickOrTap = useTouchEvents ? QtQw.tap : QtQw.click;
+	Q.Visual.CLICKORTAP = QtQw.CLICKORTAP = QtQw.clickOrTap.toUpperCase();
 	
 	if (root.SpeechSynthesisUtterance && root.speechSynthesis) {
 		Q.addEventListener(document.body, 'click', _enableSpeech, false, true);
@@ -14918,7 +14952,7 @@ Q.onReady.set(function _Q_masks() {
 			mask.appendChild(button);
 			button.style.marginLeft - button.getBoundingClientRect()/2;
 		}
-		$(button).off(Q.Pointer.end).on(Q.Pointer.end, callback);
+		$(button).off(Q.Visual.end).on(Q.Visual.end, callback);
 		Q.Masks.show('Q.request.cancel.mask');
 	}, 'Q.request.load.mask');
 	Q.request.options.onLoadEnd.set(function(url, slotNames, o) {
@@ -15024,7 +15058,7 @@ Q.Camera = {
 					Q.handle(Q.Camera.Scan.onClose);
 				};
 				var $closeIcon = $('<a href="#" class="Q_scanning_close">')
-					.on(Q.Pointer.fastclick, _close)
+					.on(Q.Visual.fastclick, _close)
 					.appendTo("body");
 				Q.addEventListener(document, 'deviceready', function () {
 					QRScanner.prepare(function(err, status){
@@ -15134,7 +15168,7 @@ Q.Camera = {
 
 						// if more than 1 camera - add swap icon
 						if (camerasAmount > 1) {
-							$("<a class='Q_swap'>").on(Q.Pointer.fastclick, function(){
+							$("<a class='Q_swap'>").on(Q.Visual.fastclick, function(){
 								selectedCamera = (selectedCamera+1) % camerasAmount;
 								scanner.start(cameras[selectedCamera]);
 							}).appendTo(dialog);

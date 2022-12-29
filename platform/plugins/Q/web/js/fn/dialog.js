@@ -42,8 +42,8 @@ Q.Tool.jQuery('Q/overlay',
 			}
 			var width = $this.outerWidth(), height = $this.outerHeight();
 			
-			var ww = Q.Pointer.windowWidth();
-			var wh = Q.Pointer.windowHeight();
+			var ww = Q.Visual.windowWidth();
+			var wh = Q.Visual.windowHeight();
 
 			if (!width && $this.css('width'))
 				width = Math.min(parseInt($this.css('width')), ww);
@@ -130,8 +130,8 @@ Q.Tool.jQuery('Q/overlay',
 					top: $body.css('top')
 				};
 				data.windowParams = {
-					scrollLeft: Q.Pointer.scrollLeft(),
-					scrollTop: Q.Pointer.scrollTop()
+					scrollLeft: Q.Visual.scrollLeft(),
+					scrollTop: Q.Visual.scrollTop()
 				};
 				setTimeout(function _fixBody() {
 					if (!$this.closest('html').length) {
@@ -147,10 +147,10 @@ Q.Tool.jQuery('Q/overlay',
 					var hs = document.documentElement.style;
 					var sl = (hs.width === '100%' && hs.overflowX === 'hidden')
 						? 0
-						: Q.Pointer.scrollLeft();
+						: Q.Visual.scrollLeft();
 					var st = (hs.height === '100%' && hs.overflowY === 'hidden')
 						? 0
-						: Q.Pointer.scrollTop();
+						: Q.Visual.scrollTop();
 					$body.addClass('Q_preventScroll').css({
 						left: -sl + 'px',
 						top: -st + 'px'
@@ -182,8 +182,8 @@ Q.Tool.jQuery('Q/overlay',
 					_htmlClassCount[htmlClass] = (_htmlClassCount[htmlClass] || 0) + 1;
 					$('html').addClass(data.options.htmlClass);
 				}
-				Q.Pointer.clearSelection();
-				Q.Pointer.cancelClick(false, null, null, 300);
+				Q.Visual.clearSelection();
+				Q.Visual.cancelClick(false, null, null, 300);
 
 				if (data.options.mask) {
 					var mask = Q.Masks.show('Q.dialog.mask', {
@@ -192,7 +192,7 @@ Q.Tool.jQuery('Q/overlay',
 						zIndex: topZ - 1
 					});
 					if (data.options.closeOnMask) {
-						$(mask.element).on(Q.Pointer.click, function () {
+						$(mask.element).on(Q.Visual.click, function () {
 							$this.data('Q/overlay').close();
 						});
 					}
@@ -214,8 +214,8 @@ Q.Tool.jQuery('Q/overlay',
 				if (e) {
 					$.Event(e).preventDefault();
 				}
-				Q.Pointer.stopHints($this[0]);
-				Q.Pointer.cancelClick();
+				Q.Visual.stopHints($this[0]);
+				Q.Visual.cancelClick();
 				dialogs.pop();
 				var data = $this.data('Q/overlay');
 				setTimeout(function () {
@@ -267,7 +267,7 @@ Q.Tool.jQuery('Q/overlay',
 		{
 			var $close = $('<a class="Q_close" />');
 			$this.append($close);
-			$close.on(Q.Pointer.fastclick, $this.data('Q/overlay').close);
+			$close.on(Q.Visual.fastclick, $this.data('Q/overlay').close);
 		}
 	},
 
@@ -367,7 +367,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			var topPos = o.topMargin;
 			if (Q.info.isMobile) {
 				if (topPos.indexOf('%') !== -1) {
-					topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
+					topPos = parseInt(topPos) / 100 * Q.Visual.windowHeight();
 				}
 				var noticeSlot = $('#notices_slot');
 				if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
@@ -419,8 +419,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			$this.data('Q/dialog', $this.data('Q/overlay'));
 		} else {
 			var windowParams = {
-				scrollLeft: Q.Pointer.scrollLeft(),
-				scrollTop: Q.Pointer.scrollTop()
+				scrollLeft: Q.Visual.scrollLeft(),
+				scrollTop: Q.Visual.scrollTop()
 			};
 			Q.handle(o.beforeLoad, $this, [$this]);
 			var hiddenChildren = [];
@@ -437,8 +437,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			$this.addClass('Q_fullscreen_dialog');
 			o.className && $this.addClass(o.className);
 			$this.css({
-				'width': Q.Pointer.windowWidth() + 'px',
-				'height': Q.Pointer.windowHeight() + 'px'
+				'width': Q.Visual.windowWidth() + 'px',
+				'height': Q.Visual.windowHeight() + 'px'
 			});
 
 			$this.hide();
@@ -449,8 +449,8 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 						return;
 					}
 					$this.css({
-						'width': Q.Pointer.windowWidth() + 'px',
-						'height': Q.Pointer.windowHeight() + 'px'
+						'width': Q.Visual.windowWidth() + 'px',
+						'height': Q.Visual.windowHeight() + 'px'
 					});
 					for (var i = 0; i < hiddenChildren.length; i++) {
 						hiddenChildren[i].hide();
@@ -497,7 +497,7 @@ Q.Tool.jQuery('Q/dialog', function _Q_dialog (o) {
 			if (!o.noClose) {
 				var $close = $('<a class="Q_close" />');
 				$this.append($close);
-				$close.on(Q.Pointer.fastclick, dialogData.close);
+				$close.on(Q.Visual.fastclick, dialogData.close);
 			}
 
 			if (o.closeOnEsc) {
@@ -674,7 +674,7 @@ function _handlePosAndScroll(o)
 					wasVertical = Q.info.isVertical;
 					var topPos = o.topMargin;
 					if (topPos.indexOf('%') !== -1) {
-						topPos = parseInt(topPos) / 100 * Q.Pointer.windowHeight();
+						topPos = parseInt(topPos) / 100 * Q.Visual.windowHeight();
 					}
 					var noticeSlot = $('#notices_slot');
 					if (noticeSlot.length && noticeSlot.outerHeight() >= topPos) {
@@ -682,7 +682,7 @@ function _handlePosAndScroll(o)
 					}
 					var curTop = parseInt($this.css('top'));
 					if (curTop !== 0)
-						$this.css({ 'top': Q.Pointer.scrollTop() + topPos + 'px' });
+						$this.css({ 'top': Q.Visual.scrollTop() + topPos + 'px' });
 				}
 			}
 		}

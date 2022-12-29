@@ -81,7 +81,9 @@ Q.Tool.define('Streams/chat', function(options) {
 				Q.activate(tool.element, function () {
 					// all message bubbles should have stabilized
 					// their height at this point
-					tool.scrollToBottom();
+					Q.Visual.waitUntilAnimationsEnd(function () {
+						tool.scrollToBottom();
+					});
 				});
 			});
 		});
