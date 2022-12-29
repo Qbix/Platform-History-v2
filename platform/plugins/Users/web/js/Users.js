@@ -3015,6 +3015,8 @@
 
 	}, 'Users');
 
+	Q.Text.loadBeforeInit.push('Users/content');
+
 	var _register_localStorageKey;
 	Q.onInit.add(function () {
 		_register_localStorageKey = "Q.Users.register.success " + Q.info.baseUrl;

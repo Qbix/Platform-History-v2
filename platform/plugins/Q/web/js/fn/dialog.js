@@ -166,6 +166,7 @@ Q.Tool.jQuery('Q/overlay',
 					}
 					function _doFade() {
 						$this.css('opacity', 0).show();
+						Q.Visual.animationStarted(o.fadeTime);
 						Q.Animation.play(function (x, y) {
 							$this.css('opacity', y);
 							if (x === 1) {
@@ -231,6 +232,7 @@ Q.Tool.jQuery('Q/overlay',
 				}
 				$this.removeClass('Q_overlay_open');
 				if (data.options.fadeInOut) {
+					Q.Visual.animationStarted(o.fadeTime);
 					Q.Animation.play(function (x, y) {
 						if (x === 1) {
 							_doClose();
