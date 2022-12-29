@@ -309,7 +309,7 @@ Q.Tool.define("Assets/NFT/sales/factory", function (options) {
             },
             function(err, html){
 
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 for (var fieldName in state.fields) {
                     var $input = tool.$('input[name='+fieldName+']');

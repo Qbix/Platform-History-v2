@@ -151,7 +151,7 @@ Q.Tool.define("Assets/NFT/locked", function (options) {
 
             // if user login then
             Q.Template.render("Assets/NFT/locked", {}, function (err, html) {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
                 Q.activate(tool.element);
 
                 if (!Q.isEmpty(state.tokenId)) {

@@ -104,7 +104,7 @@ Q.Tool.define("Users/labels", function Users_labels_tool(options) {
                 addToPhonebook: state.contactUserId && state.addToPhonebook && Q.text.Users.labels.addToPhonebook
 			}, function (err, html) {
 				tool.element.removeClass('Q_loading');
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 				Q.handle(state.onRefresh, tool, []);
 			});
 			if (state.userId && state.contactUserId) {

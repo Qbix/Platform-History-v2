@@ -77,9 +77,13 @@ Q.Tool.define('Streams/chat', function(options) {
 
 	var pipe = new Q.Pipe(["text", "styles"], function () {
 		tool.refresh(function () {
-			if (state.scrollToBottom) {
-				tool.scrollToBottom();
-			}
+			Q.Pointer.waitUntilVisible(tool, function () {
+				Q.activate(tool.element, function () {
+					// all message bubbles should have stabilized
+					// their height at this point
+					tool.scrollToBottom();
+				});
+			});
 		});
 		Q.Streams.refresh.beforeRequest.add(function () {
 			if (state.stream && state.stream.refresh) {
@@ -1195,21 +1199,28 @@ Q.Tool.define('Streams/chat', function(options) {
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
-		if (['scroll', 'auto'].indexOf(overflow) >= 0) {
-			state.$scrolling = $scm;
+		if (!$scm.children().not('.Streams_chat_more').length) {
+			return false; // no messages to scroll yet
 		}
-		if (!state.$scrolling) {
-			state.$scrolling = $($scm[0].scrollingParent());
+		var $scrolling = null;
+		if (['scroll', 'auto'].indexOf(overflow) >= 0
+		&& $scm[0].clientHeight
+		&& $scm[0].clientHeight < $scm[0].scrollHeight) {
+			$scrolling = $scm;
 		}
-		if (state.$scrolling.length) {
-			var $s = state.$scrolling[0];
-			$s.addClass('Q_forceDisplayBlock');
-			var scrollHeight = $s.scrollHeight;
-			$s.removeClass('Q_forceDisplayBlock');
-			state.$scrolling.animate({
-				scrollTop: scrollHeight
-			}, this.state.animations.duration, callback);
+		if (!$scrolling) {
+			$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
 		}
+		if (!$scrolling || !$scrolling.length) {
+			return;
+		}
+		var $s = $scrolling[0];
+		$s.addClass('Q_forceDisplayBlock');
+		var scrollHeight = $s.scrollHeight;
+		$s.removeClass('Q_forceDisplayBlock');
+		$scrolling.animate({
+			scrollTop: scrollHeight
+		}, this.state.animations.duration, callback);
 	},
 
 	scrollToTop: function() {
@@ -1258,33 +1269,29 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.renderMessages(
 					tool.prepareMessages(messages),
 					function (items) {
+						tool.$('.Streams_chat_noMessages').remove();
+						var $scm = tool.$('.Streams_chat_messages');
 						Q.each(items, function (key, $html) {
-							tool.$('.Streams_chat_noMessages').remove();
-							var $scm = tool.$('.Streams_chat_messages');
-							$html.appendTo($scm).activate();
-							$scm.off('scroll.Streams_chat')
-							.on('scroll.Streams_chat', function () {
-								state.lastScrollTop = $scm.scrollTop();
-							});
+							$html.appendTo($scm);
 						});
+						$scm.off('scroll.Streams_chat')
+						.on('scroll.Streams_chat', function () {
+							state.lastScrollTop = $scm.scrollTop();
+						});
+						tool.processDOM();
+						tool.addEvents();
+						Q.handle(callback, tool);
+						Q.handle(state.onRefresh, tool);
+		
+						// if startWebRTC is true, start webrtc
+						if (state.startWebRTC
+						|| (location.href.indexOf(state.stream.url() >= 0)
+							&& location.href.indexOf('startWebRTC') >= 0
+						)) {
+							tool.startWebRTC();
+						}
 					}
 				);
-
-				Q.handle(callback, tool);
-				tool.processDOM();
-				tool.addEvents();
-
-				Q.handle(state.onRefresh, tool);
-
-				tool.scrollToBottom();
-
-				// if startWebRTC is true, start webrtc
-				if (state.startWebRTC
-				|| (location.href.indexOf(state.stream.url() >= 0)
-					&& location.href.indexOf('startWebRTC') >= 0
-				)) {
-					tool.startWebRTC();
-				}
 			});
 
 		}

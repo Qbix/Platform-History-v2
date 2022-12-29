@@ -96,7 +96,7 @@
                     return;
                 }
 
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 var $relatedToolBox = $(".relatedToolBox", $toolElement);
                 var $nftToolBox = $(".nftToolBox", $toolElement);

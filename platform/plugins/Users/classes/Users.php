@@ -2165,12 +2165,19 @@ abstract class Users extends Base_Users
 	static function responseData()
 	{
 		$user = Q::ifset(Users::$cache, 'user', null);
+		$emailAddress = Q::ifset(Users::$cache, 'emailAddress', null);
+		$mobileNumber = Q::ifset(Users::$cache, 'mobileNumber', null);
 		if (!$user) {
 			return array();
 		}
-		if ($user->signedUpWith === 'mobile') {
+		if ($emailAddress) {
+			$fields = array('e' => $emailAddress);
+		} else if ($mobileNumber) {
+			$fields = array('m' => $mobileNumber);
+		} else if ($user->signedUpWith === 'mobile') {
 			$fields = array('m' => $user->mobileNumberPending);
-		} else if ($user->signedUpWith === 'email') {
+		} else if ($user->signedUpWith === 'email'
+		or ($user->get('resend') === 'email')) {
 			$fields = array('e' => $user->emailAddressPending);
 		} else {
 			$fields = array();

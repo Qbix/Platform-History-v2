@@ -5561,6 +5561,182 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 };
 
 /**
+ * A Q.Response object represents a network response
+ * @class Q.Response
+ * @constructor
+ */
+
+Q.Response = function _Q_Response(response) {
+	
+};
+
+Q.Response.processScriptDataAndLines = function (response) {
+	if (response.scriptData) {
+		Q.each(response.scriptData,
+		function _Q_scriptData_each() {
+			Q.each(this, function _Q_loadUrl_scriptData_assign(k, v) {
+				Q.setObject(k, v);
+			});
+		});
+	}
+	if (response.sessionDataPaths) {
+		Q.Session.paths = response.sessionDataPaths;
+	}
+	if (response.scriptLines) {
+		for (var i in response.scriptLines) {
+			if (response.scriptLines[i]) {
+				eval(response.scriptLines[i]);
+			}
+		}
+	}
+};
+
+Q.Response.processStylesheets = function Q_Response_loadStylesheets(response, callback) {
+	if (!response.stylesheets) {
+		return callback();
+	}
+	var newStylesheets = {};
+	var keys = Object.keys(response.stylesheets);
+	if (response.stylesheets[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	var waitFor = [];
+	var slotPipe = Q.pipe();			
+	Q.each(keys, function (i, slotName) {
+		var stylesheets = [];
+		for (var j in response.stylesheets[slotName]) {
+			var stylesheet = response.stylesheets[slotName][j];
+			if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
+				continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
+			}
+			var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
+			var elem = Q.addStylesheet(
+				stylesheet.href, stylesheet.media,
+				slotPipe.fill(key), { slotName: slotName, returnAll: false }
+			);
+			if (elem) {
+				stylesheets.push(elem);
+			}
+			waitFor.push(key);
+		}
+		newStylesheets[slotName] = stylesheets;
+	});
+	slotPipe.add(waitFor, function _Q_loadUrl_pipe_slotNames() {
+		callback();
+	}).run();
+	return newStylesheets;
+}
+
+Q.Response.processStyles = function Q_Response_processStyles(response) {
+	if (!response.stylesInline) {
+		return null;
+	}
+	var newStyles = {},
+		head = document.head || document.getElementsByTagName('head')[0];
+	var keys = Object.keys(response.stylesInline);
+	if (response.stylesInline[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	Q.each(keys, function (i, slotName) {
+		var styles = response.stylesInline[slotName];
+		if (!styles) return;
+		var style = document.createElement('style');
+		style.setAttribute('type', 'text/css');
+		style.setAttribute('data-slot', slotName);
+		if (style.styleSheet){
+			style.styleSheet.cssText = styles;
+		} else {
+			style.appendChild(document.createTextNode(styles));
+		}
+		head.appendChild(style);
+		newStyles[slotName] = [style];
+	});
+	return newStyles;
+}
+
+Q.Response.processHtmlCssClasses = function Q_Response_processHtmlCssClasses(response) {
+	Q.each(response.htmlCssClasses, function (i, c) {
+		document.documentElement.addClass(c);
+	});
+}
+
+Q.Response.processMetas = function Q_Response_processMetas(response) {
+	if (!response.metas) {
+		return null;
+	}
+
+	var elHead = document.getElementsByTagName('head')[0];
+	for (var slotName in response.metas) {
+		Q.each(response.metas[slotName], function (i) {
+			var metaData = this;
+			var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
+			var found = false;
+			Q.each(metas, function (j) {
+				if (this.getAttribute(metaData.name) === metaData.value) {
+					this.setAttribute(metaData.name, metaData.value);
+					this.setAttribute("content", metaData.content);
+					found = true;
+					return false;
+				}
+			});
+			if (!found) {
+				var meta = document.createElement("meta");
+				meta.setAttribute(this.name, metaData.value);
+				meta.setAttribute("content", metaData.content);
+				elHead.appendChild(meta);
+				return;
+			}
+		});
+	}
+};
+
+Q.Response.processTemplates = function Q_Response_processTemplates(response) {
+	if (!response.templates) {
+		return null;
+	}
+	var slotName, newTemplates = {};
+	for (slotName in response.templates) {
+		newTemplates[slotName] = [];
+		Q.each(response.templates[slotName], function (i) {
+			var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
+			newTemplates[slotName].push(
+				Q.Template.set(this.name, this.content, info)
+			);
+		});
+	}
+	return newTemplates;
+};
+
+Q.Response.processScripts = function Q_Response_processScripts(response, callback, options) {
+	if (!response.scripts) {
+		callback();
+		return null;
+	}
+	var slotPipe = Q.pipe(Object.keys(response.scripts), function _Q_loadUrl_pipe_slotNames() {
+		callback();
+	});
+	var newScripts = {};
+	var keys = Object.keys(response.scripts);
+	if (response.scripts[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	Q.each(keys, function (i, slotName) {
+		var elem = Q.addScript(
+			response.scripts[slotName], slotPipe.fill(slotName), {
+			ignoreLoadingErrors: options.ignoreLoadingErrors,
+			returnAll: false
+		});
+		if (elem) {
+			newScripts[slotName] = elem;
+		}
+	});
+	return newScripts;
+};
+
+/**
  * A Q.Cache object stores items in a cache and throws out least-recently-used ones.
  * @class Q.Cache
  * @constructor
@@ -7708,6 +7884,7 @@ Q.req = function _Q_req(uri, slotNames, callback, options) {
  * @param {Function} [options.preprocess] an optional function that takes the xhr object before the .send() is invoked on it
  * @param {boolean} [options.parse] set to false to pass the unparsed string to the callback
  * @param {boolean} [options.extend=true] if false, the URL is not extended with Q fields.
+ * @param {String} [options.loadExtras=null] if "all", asks the server to load any extra scripts, stylesheets, etc. that are loaded on first page load. Can also be "request", "session" or "request,session"
  * @param {boolean} [options.query=false] if true simply returns the query url without issuing the request
  * @param {String} [options.callbackName] if set, the URL is not extended with Q fields and the value is used to name the callback field in the request.
  * @param {boolean} [options.duplicate=true] you can set it to false in order not to fetch the same url again
@@ -7746,32 +7923,32 @@ Q.request = function (url, slotNames, callback, options) {
 	var o = Q.extend({}, Q.request.options, options);
 	var request = new Q.Request(url, slotNames, callback, o);
 	if (o.skipNonce) {
-		_Q_request_makeRequest.call(this, url, slotNames, callback, o);
+		_Q_Response_makeRequest.call(this, url, slotNames, callback, o);
 	} else {
-		Q.loadNonce(_Q_request_makeRequest, this, [url, slotNames, callback, o]);
+		Q.loadNonce(_Q_Response_makeRequest, this, [url, slotNames, callback, o]);
 	}
 	return request;
 	
-	function _Q_request_makeRequest (url, slotNames, callback, o) {
+	function _Q_Response_makeRequest (url, slotNames, callback, o) {
 
 		var tout = false, t = {};
 		if (o.timeout !== false) {
 			tout = o.timeout || Q.request.options.timeout;
 		}
 	
-		function _Q_request_callback(err, content, wasJsonP) {
+		function _Q_Response_callback(err, content, wasJSONP) {
 			if (err) {
-				callback(err, content, false);
+				Q.handle(callback, this, [err, content, false]);
 				Q.handle(o.onProcessed, this, [err, content, false]);
 				return;
 			}
-			var data = content;
+			var response = content;
 			if (o.parse !== false) {
 				try {
-					if (wasJsonP) {
-						data = content;
+					if (wasJSONP) {
+						response = content;
 					} else {
-						data = JSON.parse(content)
+						response = JSON.parse(content)
 					}
 				} catch (e) {
 					console.warn('Q.request(' + url + ',['+slotNames+']):' + e);
@@ -7781,12 +7958,12 @@ Q.request = function (url, slotNames, callback, options) {
 				}
 			}
 			var redirected = false;
-			if (data && data.redirect && data.redirect.url) {
-				Q.handle(o.onRedirect, Q, [data.redirect.url]);
-				redirected = data.redirect.url;
+			if (response && response.redirect && response.redirect.url) {
+				Q.handle(o.onRedirect, Q, [response.redirect.url]);
+				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, data, redirected);
-			Q.handle(o.onProcessed, this, [err, data, redirected]);
+			callback && callback.call(this, err, response);
+			Q.handle(o.onProcessed, this, [err, response]);
 		};
 
 		function _onStart () {
@@ -7805,15 +7982,15 @@ Q.request = function (url, slotNames, callback, options) {
 			}
 		}
 
-		function _onResponse (data, wasJsonP) {
+		function _onResponse (response, wasJSONP) {
 			t.loaded = true;
 			if (t.timeout) {
 				clearTimeout(t.timeout);
 			}
 			Q.handle(o.onLoadEnd, request, [url, slotNames, o]);
 			if (!t.cancelled) {
-				o.onResponse.handle.call(request, data, wasJsonP);
-				_Q_request_callback.call(request, null, data, wasJsonP);
+				o.onResponse.handle.call(request, response, wasJSONP);
+				_Q_Response_callback.call(request, null, response, wasJSONP);
 			}
 		}
 		
@@ -7849,7 +8026,7 @@ Q.request = function (url, slotNames, callback, options) {
 				}]
 			};
 			o.onCancel.handle.call(this, errors, o);
-			_Q_request_callback.call(this, errors, errors);
+			_Q_Response_callback.call(this, errors, errors);
 		}
 		
 		function xhr(onSuccess, onCancel) {
@@ -7927,7 +8104,7 @@ Q.request = function (url, slotNames, callback, options) {
 							? Q.getObject(o.resultFunction, iframe.contentWindow)
 							: null;
 						var result = typeof(resultFunction) === 'function' ? resultFunction() : undefined;
-						_Q_request_callback.call(request, null, result, true);
+						_Q_Response_callback.call(request, null, result, true);
 					}
 				});
 				return;
@@ -7942,7 +8119,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var i = Q.request.callbacks.length;
 			var url2 = url;
 			if (callback) {
-				Q.request.callbacks[i] = function _Q_request_JSONP(data) {
+				Q.request.callbacks[i] = function _Q_Response_JSONP(data) {
 					delete Q.request.callbacks[i];
 					Q.removeElement(script);
 					_onResponse(data, true);
@@ -9222,8 +9399,8 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
  * @param {Element|String|DocumentFragment} source
- *  An HTML string or a Element which is not part of the DOM.
- *  It is treated as a document fragment, and its contents are used to replace the container's contents.
+ *  An HTML string or a Element or DocumentFragment which is not part of the DOM.
+ *  If an element, it is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace, even if they have "data-q-retain" attributes.
@@ -9262,10 +9439,11 @@ Q.replace = function _Q_replace(container, source, options) {
 		var id = incomingElement.id;
 		var element = id && document.getElementById(id);
 		if (element && element.getAttribute('data-Q-retain') !== null
-		&& !incomingElement.getAttribute('data-Q-replace') !== null) {
+		&& !incomingElement.getAttribute('data-Q-replace') !== null
+		&& replaceElements.indexOf(element) < 0) {
 			// If a tool exists with this exact id and has "data-Q-retain",
 			// then re-use it and all its HTML elements, unless
-			// the new tool HTML has data-Q-replace.
+			// the new tool HTML has data-Q-replace or is in options.replaceElements.
 			// This way tools can avoid doing expensive operations each time
 			// they are replaced and reactivated.
 			incomingElements[incomingElement.id] = incomingElement;
@@ -9341,7 +9519,8 @@ Q.replace = function _Q_replace(container, source, options) {
  * @param {Object} [options.dontRestoreScrollPosition] set dontRestoreScroll[url] = true to skip fillSlots restoring scroll position for that url, or just set dontRestoreScroll[''] = true to skip all urls
  * @param {String} [options.key='Q'] If a response to the request initiated by this call to Q.loadUrl is preceded by another call to Q.loadUrl with the same key, then the response handler is not run for that response (since a newer one is pending or arrived).
  * @param {Q.Event} [options.onTimeout] handler to call when timeout is reached. Receives function as argument - the function might be called to cancel loading.
- * @param {Q.Event} [options.onResponse] handler to call when the response comes back but before it is processed
+ * @param {Q.Event} [options.onCancel] passed to the loader to be called if the loader cancels the response
+ * @param {Q.Event} [options.onResponse] handler to call when the loader gets a response but before it is processed
  * @param {Q.Event} [options.onError] event for when an error occurs, by default shows an alert
  * @param {Q.Event} [options.onLoad] event which occurs when the parsed data comes back from the server
  * @param {Q.Event} [options.onActivate] event which occurs when all Q.activate's processed and all script lines executed
@@ -9453,9 +9632,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		Q.Page.beingProcessed = true;
 
-		loadHtmlCssClasses();
-		loadMetas();
-		loadTemplates();
+		Q.Response.processHtmlCssClasses(response);
+		Q.Response.processMetas(response);
+		Q.Response.processTemplates(response);
 
 		var newScripts;
 		
@@ -9469,7 +9648,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			newScripts = [];
 			afterScripts();
 		} else {
-			newScripts = loadScripts(afterScripts);
+			newScripts = Q.Response.processScripts(response, afterScripts, o);
 		}
 		
 		function afterScripts () {
@@ -9483,15 +9662,15 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			
 			var domElements = null;
 			if (o.ignorePage) {
-				newStylesheets = [];
+				newStylesheets = {};
 				afterStylesheets();
 			} else {
 				_doEvents('on', moduleSlashAction);
-				newStylesheets = loadStylesheets(afterStylesheets);
+				newStylesheets = Q.Response.processStylesheets(response, afterStylesheets);
 			}
 			
 			function afterStylesheets() {
-				var newStyles = loadStyles();
+				Q.Response.processStyles(response);
 				
 				afterStyles(); // Synchronous to allow additional scripts to change the styles before allowing the browser reflow.
 			
@@ -9583,24 +9762,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 				}
 
-				if (response.scriptData) {
-					Q.each(response.scriptData,
-					function _Q_loadUrl_scriptData_each(slot, data) {
-						Q.each(data, function _Q_loadUrl_scriptData_assign(k, v) {
-							Q.setObject(k, v);
-						});
-					});
-				}
-				if (response.sessionDataPaths) {
-					Q.Session.paths = response.sessionDataPaths;
-				}
-				if (response.scriptLines) {
-					for (i in response.scriptLines) {
-						if (response.scriptLines[i]) {
-							eval(response.scriptLines[i]);
-						}
-					}
-				}
+				Q.Response.processScriptDataAndLines(response);
 
 				if (!o.ignorePage) {
 					try {
@@ -9697,155 +9859,12 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				if (root.StyleFix) {
 					root.StyleFix.process();
 				}
+
+				Q.handle(o.onRequestProcessed, this, [err, response]);
 				
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
 			}
-		}
-		
-		function loadStylesheets(callback) {
-			if (!response.stylesheets) {
-				return callback();
-			}
-			var newStylesheets = {};
-			var keys = Object.keys(response.stylesheets);
-			if (response.stylesheets[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			var waitFor = [];
-			var slotPipe = Q.pipe();			
-			Q.each(keys, function (i, slotName) {
-				var stylesheets = [];
-				for (var j in response.stylesheets[slotName]) {
-					var stylesheet = response.stylesheets[slotName][j];
-					if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
-						continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
-					}
-					var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
-					var elem = Q.addStylesheet(
-						stylesheet.href, stylesheet.media,
-						slotPipe.fill(key), { slotName: slotName, returnAll: false }
-					);
-					if (elem) {
-						stylesheets.push(elem);
-					}
-					waitFor.push(key);
-				}
-				newStylesheets[slotName] = stylesheets;
-			});
-			slotPipe.add(waitFor, function _Q_loadUrl_pipe_slotNames() {
-				callback();
-			}).run();
-			return newStylesheets;
-		}
-		
-		function loadStyles() {
-			if (!response.stylesInline) {
-				return null;
-			}
-			var newStyles = {},
-				head = document.head || document.getElementsByTagName('head')[0];
-			var keys = Object.keys(response.stylesInline);
-			if (response.stylesInline[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			Q.each(keys, function (i, slotName) {
-				var styles = response.stylesInline[slotName];
-				if (!styles) return;
-				var style = document.createElement('style');
-				style.setAttribute('type', 'text/css');
-				style.setAttribute('data-slot', slotName);
-				if (style.styleSheet){
-					style.styleSheet.cssText = styles;
-				} else {
-					style.appendChild(document.createTextNode(styles));
-				}
-				head.appendChild(style);
-				newStyles[slotName] = [style];
-			});
-			return newStyles;
-		}
-
-		function loadHtmlCssClasses() {
-			Q.each(response.htmlCssClasses, function (i, c) {
-				document.documentElement.addClass(c);
-			});
-		}
-
-		function loadMetas() {
-			if (!response.metas) {
-				return null;
-			}
-
-			var elHead = document.getElementsByTagName('head')[0];
-			for (var slotName in response.metas) {
-				Q.each(response.metas[slotName], function (i) {
-					var metaData = this;
-					var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
-					var found = false;
-					Q.each(metas, function (j) {
-						if (this.getAttribute(metaData.name) === metaData.value) {
-							this.setAttribute(metaData.name, metaData.value);
-							this.setAttribute("content", metaData.content);
-							found = true;
-							return false;
-						}
-					});
-					if (!found) {
-						var meta = document.createElement("meta");
-						meta.setAttribute(this.name, metaData.value);
-						meta.setAttribute("content", metaData.content);
-						elHead.appendChild(meta);
-						return;
-					}
-				});
-			}
-		}
-
-		function loadTemplates() {
-			if (!response.templates) {
-				return null;
-			}
-			var slotName, newTemplates = {};
-			for (slotName in response.templates) {
-				newTemplates[slotName] = [];
-				Q.each(response.templates[slotName], function (i) {
-					var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
-					newTemplates[slotName].push(
-						Q.Template.set(this.name, this.content, info)
-					);
-				});
-			}
-			return newTemplates;
-		}
-		
-		function loadScripts(callback) {
-			if (!response.scripts) {
-				callback();
-				return null;
-			}
-			var slotPipe = Q.pipe(Object.keys(response.scripts), function _Q_loadUrl_pipe_slotNames() {
-				callback();
-			});
-			var newScripts = {};
-			var keys = Object.keys(response.scripts);
-			if (response.scripts[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			Q.each(keys, function (i, slotName) {
-				var elem = Q.addScript(
-					response.scripts[slotName], slotPipe.fill(slotName), {
-					ignoreLoadingErrors: o.ignoreLoadingErrors,
-					returnAll: false
-				});
-				if (elem) {
-					newScripts[slotName] = elem;
-				}
-			});
-			return newScripts;
 		}
 	}
 };
@@ -9867,6 +9886,26 @@ Q.loadUrl.saveScroll = function _Q_loadUrl_saveScroll (fromUrl) {
 			}, elem);
 		}
 	}
+};
+
+/**
+ * Similar to Q.request but processes the response like loadUrl,
+ * handling such scriptData, scriptLines, HTML classes, css, etc.
+ * Callback receives (err, data)
+ */
+Q.loadUrl.request = function (url, slotNames, callback, options) {
+	return Q.loadUrl(url, Q.extend({
+		ignoreHistory: true,
+		ignorePage: true,
+		ignoreLoadingErrors: true,
+		ignoreHash: true,
+		dontReload: true,
+		handler: function doNothing () { return null; },
+		slotNames: slotNames,
+		onRequestProcessed: function (err, response) {
+			Q.handle(callback, this, [null, response]);
+		}
+	}, options));
 };
 
 Q.loadUrl.loading = {};
@@ -12333,24 +12372,34 @@ Q.Pointer = {
 		return rect;
 	},
 	/**
-	 * Sets an observer to wait for an element become visible
+	 * Sets an observer to wait for an element become visible.
 	 * @static
 	 * @method waitUntilVisible
-	 * @param {Element} element the element to watch
-	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer)
+	 * @param {Element|Q.Tool} element the element to watch
+	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer).
+	 *   Only called when entries[0].isIntersecting is true.
 	 * @param {Object|Number} options The options to pass to the observer
 	 * @return {IntersectionObserver}
 	 */
 	waitUntilVisible: function (element, callback, options) {
+		var tool;
+		if ((Q.typeOf(element) === 'Q.Tool')) {
+			tool = element;
+			element = tool.element;
+		}
 		var o = Q.extend({}, Q.Pointer.waitUntilVisible, options);
 		var observer = new IntersectionObserver(function (entries, observer) {
 			if (entries[0] && entries[0].isIntersecting) {
+				callback && callback.apply(this, arguments);
 				observer.unobserve(element);
 			}
-			callback && callback.apply(this, arguments);
 		}, o);
-		var target = element;
 		observer.observe(element);
+		if (tool) {
+			tool.Q.beforeRemove.set(function () {
+				observer.unobserve(element);
+			});
+		}
 		return observer;
 	},
 	/**

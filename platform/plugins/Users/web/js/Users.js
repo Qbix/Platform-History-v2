@@ -541,6 +541,7 @@
 				alert(fem);
 				return _doCancel(platform, platformAppId, fields.xid, onSuccess, onCancel, options);
 			}
+			Q.Response.processScriptDataAndLines(response);
 			var user = response.slots.data;
 			if (user.authenticated !== true) {
 				priv.result = user.authenticated;
@@ -1430,6 +1431,8 @@
 			var url = $this.attr('action') + '?' + $this.serialize();
 			Q.request(url, 'data', function (err, response) {
 
+				Q.Response.processScriptDataAndLines(response);
+
 				$('#current-password').attr('value', '').trigger('change');
 				$('#hashed-password').attr('value', '');
 
@@ -1457,7 +1460,7 @@
 						priv.result = 'resend';
 						$('button', $this).html('Sent').attr('disabled', 'disabled');
 						Q.Dialogs.pop();
-						Users.Dialogs.activate(user.activateLink);
+						Users.Dialogs.activate(priv.activateLink);
 						return;
 					case 'register':
 						priv.result = 'register';
@@ -1524,6 +1527,7 @@
 
 								function _resend() {
 									Q.req('Users/resend', 'data', function (err, response) {
+										Q.Response.processScriptDataAndLines(response);
 										$('#Users_login_step1').hide();
 										$('#Users_login_step2').empty().append(
 											$('<div id="Users_login_resend_success" />').append(
@@ -3050,7 +3054,8 @@
 			var storedDeviceId = localStorage.getItem("Q.Users.Device.deviceId");
 			fields['Q.Users.deviceId'] = fields['Q.Users.deviceId'] || storedDeviceId;
 			if (fields['Q.Users.newSessionId']) {
-				Q.req('Users/session', function () {
+				Q.req('Users/session', function (err, response) {
+					Q.Response.processScriptDataAndLines(response);
 					// Q.request.options.onProcessed would have changed loggedInUser already
 					// but maybe we want to redirect anyway, after a handoff
 					var href = Q.getObject("Q.Cordova.handoff.url");
@@ -3123,6 +3128,7 @@
 		&& !Users.logout.occurring) {
 			Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 			Q.req("Users/login", 'data', function (err, res) {
+				Q.Response.processScriptDataAndLines(res);
 				Users.lastSeenNonce = Q.nonce = Q.cookie('Q_nonce') || Q.nonce;
 				var msg = Q.firstErrorMessage(err, res && res.errors);
 				if (msg) {
@@ -3991,6 +3997,8 @@
 						if (response.errors) {
 							return;
 						}
+
+						Q.Response.processScriptDataAndLines(response);
 
 						// auto-login by authenticating with facebook
 						Users.authenticate('facebook', function (user) {
