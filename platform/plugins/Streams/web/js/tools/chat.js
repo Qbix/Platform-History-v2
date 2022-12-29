@@ -1200,7 +1200,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			state.$scrolling = $scm;
 		}
 		if (!state.$scrolling) {
-			state.$scrolling = $($scm[0].scrollingParent());
+			state.$scrolling = $($scm[0].scrollingParent(true));
 		}
 		if (state.$scrolling.length) {
 			var $s = state.$scrolling[0];
