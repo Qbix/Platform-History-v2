@@ -1198,7 +1198,6 @@ Q.Tool.define('Streams/chat', function(options) {
 
 	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll) {
 		var stopScrollingToBottom = false;
-		var artificialScroll = false;
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
@@ -1225,20 +1224,13 @@ Q.Tool.define('Streams/chat', function(options) {
 			s.addClass('Q_forceDisplayBlock');
 			var scrollHeight = s.scrollHeight;
 			s.removeClass('Q_forceDisplayBlock');
-			artificialScroll = true;
 			if (recursive) {
 				s.scrollTop = scrollHeight;
-				setTimeout(function () {
-					artificialScroll = false;
-				}, 100);
 				_stayAtBottom();
 			} else {
 				$scrolling.animate({
 					scrollTop: scrollHeight
 				}, state.animations.duration, function () {
-					setTimeout(function () {
-						artificialScroll = false;
-					}, 100);
 					_stayAtBottom();
 					Q.handle(callback, null, [s]);
 				});
@@ -1256,12 +1248,12 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			$scrolling.off('scroll.Streams_chat')
 			.on('scroll.Streams_chat', function () {
-				if (artificialScroll) {
-					return;
+				var t = event.target;
+				if (t.scrollTop < t.scrollHeight - t.clientHeight) {
+					// user started scrolling manually
+					stopScrollingToBottom = true;
+					$scrolling.off('scroll.Streams_chat');
 				}
-				// user started scrolling manually
-				stopScrollingToBottom = true;
-				$scrolling.off('scroll.Streams_chat');
 			});
 		}
 	},
