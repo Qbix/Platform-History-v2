@@ -1228,13 +1228,17 @@ Q.Tool.define('Streams/chat', function(options) {
 			artificialScroll = true;
 			if (recursive) {
 				s.scrollTop = scrollHeight;
-				artificialScroll = false;
+				setTimeout(function () {
+					artificialScroll = false;
+				}, 100);
 				_stayAtBottom();
 			} else {
 				$scrolling.animate({
 					scrollTop: scrollHeight
 				}, state.animations.duration, function () {
-					artificialScroll = false;
+					setTimeout(function () {
+						artificialScroll = false;
+					}, 100);
 					_stayAtBottom();
 					Q.handle(callback, null, [s]);
 				});
