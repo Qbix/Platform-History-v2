@@ -6645,7 +6645,7 @@ Q.init = function _Q_init(options) {
 		if (preferredLanguage) {
 			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
 		}
-		p.fill('init');
+		p.fill('init')();
 		Q.handle(Q.onInit, Q);
 	}).run();
 };
