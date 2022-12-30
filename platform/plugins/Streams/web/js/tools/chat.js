@@ -1213,7 +1213,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			&& $scm[0].clientHeight < $scm[0].scrollHeight) {
 				$scrolling = $scm;
 			}
-			if (!$scrolling) {
+			if (!$scrolling || !$scrolling.length) {
 				$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
 			}
 			if (!$scrolling || !$scrolling.length) {
