@@ -1200,37 +1200,43 @@ Q.Tool.define('Streams/chat', function(options) {
 		var stopScrollingToBottom = false;
 		var tool = this;
 		var state = this.state;
-		var $scm = this.$('.Streams_chat_messages');
-		var overflow = $scm.css('overflow-y');
-		if (!$scm.children().not('.Streams_chat_more').length) {
-			return false; // no messages to scroll yet
-		}
 		var $scrolling = null;
-		if (['scroll', 'auto'].indexOf(overflow) >= 0
-		&& $scm[0].clientHeight
-		&& $scm[0].clientHeight < $scm[0].scrollHeight) {
-			$scrolling = $scm;
+		_doScrollToBottom();
+		function _doScrollToBottom () {
+			var $scm = tool.$('.Streams_chat_messages');
+			var overflow = $scm.css('overflow-y');
+			if (!$scm.children().not('.Streams_chat_more').length) {
+				return false; // no messages to scroll yet
+			}
+			if (['scroll', 'auto'].indexOf(overflow) >= 0
+			&& $scm[0].clientHeight
+			&& $scm[0].clientHeight < $scm[0].scrollHeight) {
+				$scrolling = $scm;
+			}
+			if (!$scrolling) {
+				$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
+			}
+			if (!$scrolling || !$scrolling.length) {
+				_stayAtBottom();
+				return null;
+			}
+			var s = $scrolling[0];
+			s.addClass('Q_forceDisplayBlock');
+			var scrollHeight = s.scrollHeight;
+			s.removeClass('Q_forceDisplayBlock');
+			if (recursive) {
+				s.scrollTop = scrollHeight;
+			} else {
+				$scrolling.animate({
+					scrollTop: scrollHeight
+				}, state.animations.duration, function () {
+					stopScrollingToBottom = false;
+					_stayAtBottom();
+					Q.handle(callback, null, [s]);
+				});
+			}
+			return $scrolling;
 		}
-		if (!$scrolling) {
-			$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
-		}
-		if (!$scrolling || !$scrolling.length) {
-			_stayAtBottom();
-			return null;
-		}
-		var s = $scrolling[0];
-		s.addClass('Q_forceDisplayBlock');
-		var scrollHeight = s.scrollHeight;
-		s.removeClass('Q_forceDisplayBlock');
-		var duration = recursive ? 0 : this.state.animations.duration;;
-		$scrolling.animate({
-			scrollTop: scrollHeight
-		}, duration, function () {
-			Q.handle(callback, null, [s]);
-		});
-		_stayAtBottom();
-		return $scrolling;
-
 		function _stayAtBottom() {
 			if (!stayAtBottomUntilUserScroll) {
 				return;
