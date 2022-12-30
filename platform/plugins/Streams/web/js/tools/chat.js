@@ -82,7 +82,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					// all message bubbles should have stabilized
 					// their height at this point
 					Q.Visual.waitUntilAnimationsEnd(function () {
-						tool.scrollToBottom();
+						tool.scrollToBottom(null, true);
 					});
 				});
 			});
@@ -1197,7 +1197,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function(callback) {
+	scrollToBottom: function(callback, stayAtBottomUntilUserScroll) {
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
@@ -1216,13 +1216,39 @@ Q.Tool.define('Streams/chat', function(options) {
 		if (!$scrolling || !$scrolling.length) {
 			return;
 		}
-		var $s = $scrolling[0];
-		$s.addClass('Q_forceDisplayBlock');
-		var scrollHeight = $s.scrollHeight;
-		$s.removeClass('Q_forceDisplayBlock');
+		var s = $scrolling[0];
+		s.addClass('Q_forceDisplayBlock');
+		var scrollHeight = s.scrollHeight;
+		s.removeClass('Q_forceDisplayBlock');
 		$scrolling.animate({
 			scrollTop: scrollHeight
-		}, this.state.animations.duration, callback);
+		}, this.state.animations.duration, function () {
+			Q.handle(callback, null, [s]);
+			if (!stayAtBottomUntilUserScroll) {
+				return;
+			}
+			var stopScrollingToBottom = false;
+			$scrolling.on('scroll.Streams_chat', function () {
+				// user started scrolling manually
+				stopScrollingToBottom = true;
+				$scrolling.off('scroll.Streams_chat');
+			});
+			tool.forEachChild(function () {
+				if (stopScrollingToBottom) {
+					return;
+				}
+				this.onRefresh.set(function () {
+					if (stopScrollingToBottom) {
+						return;
+					}
+					s.addClass('Q_forceDisplayBlock');
+					var scrollHeight = s.scrollHeight;
+					s.removeClass('Q_forceDisplayBlock');
+					s.scrollTop = scrollHeight;
+				});
+			});
+		});
+		return $scrolling;
 	},
 
 	scrollToTop: function() {

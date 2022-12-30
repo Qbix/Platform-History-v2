@@ -1105,7 +1105,7 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
  * @param {Function} callback The callback to execute at the right time
  * @param {String} [key] Optional, to be used for the onActivate handler that gets added
  */
-Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
+Elp.forEachTool = function _Q_Tool_prototype_forEachTool(name, callback, key) {
 	var element = this;
 	if (typeof name !== 'string') {
 		callback = name;
