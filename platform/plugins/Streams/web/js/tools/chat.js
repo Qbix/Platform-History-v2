@@ -1215,7 +1215,8 @@ Q.Tool.define('Streams/chat', function(options) {
 			$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
 		}
 		if (!$scrolling || !$scrolling.length) {
-			return;
+			_stayAtBottom();
+			return null;
 		}
 		var s = $scrolling[0];
 		s.addClass('Q_forceDisplayBlock');
@@ -1225,6 +1226,11 @@ Q.Tool.define('Streams/chat', function(options) {
 			scrollTop: scrollHeight
 		}, this.state.animations.duration, function () {
 			Q.handle(callback, null, [s]);
+		});
+		_stayAtBottom();
+		return $scrolling;
+
+		function _stayAtBottom() {
 			if (!stayAtBottomUntilUserScroll) {
 				return;
 			}
@@ -1248,8 +1254,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					s.scrollTop = scrollHeight;
 				});
 			});
-		});
-		return $scrolling;
+		}
 	},
 
 	scrollToTop: function() {
