@@ -1198,6 +1198,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 
 	scrollToBottom: function(callback, stayAtBottomUntilUserScroll) {
+		var tool = this;
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
 		var overflow = $scm.css('overflow-y');
