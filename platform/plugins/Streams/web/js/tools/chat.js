@@ -1151,7 +1151,6 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.handle(callback, message, [Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields)]);
-			tool.scrollToBottom();
 		});
 	},
 	getOrdinal: function(action, ordinal){
