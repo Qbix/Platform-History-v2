@@ -77,7 +77,7 @@ Q.Tool.define('Streams/chat', function(options) {
 
 	var pipe = new Q.Pipe(["text", "styles"], function () {
 		tool.refresh(function () {
-			Q.Pointer.waitUntilVisible(tool, function () {
+			Q.Visual.waitUntilVisible(tool, function () {
 				Q.activate(tool.element, function () {
 					// all message bubbles should have stabilized
 					// their height at this point

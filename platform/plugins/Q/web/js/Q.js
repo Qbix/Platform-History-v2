@@ -12402,7 +12402,7 @@ Q.Visual = Q.Pointer = {
 		setTimeout(_executeIfAnimationsEnded, 0);
 		function _executeIfAnimationsEnded() {
 			var a = Q.Visual.animationStarted;
-			if (a.animationsEnding < Date.now()) {
+			if ((a.animationsEnding || 0) < Date.now()) {
 				Q.handle(callback, Q.Visual, params);
 			} else {
 				setTimeout(_executeIfAnimationsEnded, a.animationsEnding - Date.now);
