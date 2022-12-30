@@ -1204,7 +1204,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		var $scrolling = null;
 		_doScrollToBottom(false);
 		function _doScrollToBottom (recursive) {
-			if (stopScrollingToBottom) {
+			if (stopScrollingToBottom
+			|| !$(this.element).is(':visible')) {
 				return;
 			}
 			var $scm = tool.$('.Streams_chat_messages');
