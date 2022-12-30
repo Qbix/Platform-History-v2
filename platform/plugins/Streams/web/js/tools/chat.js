@@ -1241,10 +1241,10 @@ Q.Tool.define('Streams/chat', function(options) {
 			});
 			tool.forEachChild(function () {
 				if (stopScrollingToBottom
-				|| !this.onRefresh || !this.onRefresh.addOnce) {
+				|| !Q.getObject('state.onRefresh.addOnce', this)) {
 					return;
 				}
-				this.onRefresh.addOnce(function () {
+				this.state.onRefresh.addOnce(function () {
 					if (stopScrollingToBottom) {
 						return;
 					}
