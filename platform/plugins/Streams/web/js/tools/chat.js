@@ -1251,7 +1251,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					if (stopScrollingToBottom) {
 						return;
 					}
-					_scrollToBottom(null, false, 0);
+					_scrollToBottom.call(tool, null, false, 0);
 				}, tool);
 			});
 		}
