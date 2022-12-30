@@ -1250,7 +1250,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			$scrolling.off('scroll.Streams_chat')
 			.on('scroll.Streams_chat', function () {
 				var t = event.target;
-				if (t.scrollTop < t.scrollHeight - t.clientHeight) {
+				if (t.scrollTop + 1 < t.scrollHeight - t.clientHeight) {
 					// user started scrolling manually
 					stopScrollingToBottom = true;
 					$scrolling.off('scroll.Streams_chat');
