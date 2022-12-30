@@ -1196,7 +1196,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function(callback, stayAtBottomUntilUserScroll, duration) {
+	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll, duration) {
 		var tool = this;
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
@@ -1251,7 +1251,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					if (stopScrollingToBottom) {
 						return;
 					}
-					scrollToBottom(null, false, 0);
+					_scrollToBottom(null, false, 0);
 				}, tool);
 			});
 		}
