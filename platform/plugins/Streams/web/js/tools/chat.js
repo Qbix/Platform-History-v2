@@ -1196,7 +1196,8 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll, duration) {
+	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll, recursive) {
+		var stopScrollingToBottom = false;
 		var tool = this;
 		var state = this.state;
 		var $scm = this.$('.Streams_chat_messages');
@@ -1221,9 +1222,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		s.addClass('Q_forceDisplayBlock');
 		var scrollHeight = s.scrollHeight;
 		s.removeClass('Q_forceDisplayBlock');
-		if (duration === undefined) {
-			duration = this.state.animations.duration;
-		}
+		var duration = recursive ? 0 : this.state.animations.duration;;
 		$scrolling.animate({
 			scrollTop: scrollHeight
 		}, duration, function () {
@@ -1236,18 +1235,17 @@ Q.Tool.define('Streams/chat', function(options) {
 			if (!stayAtBottomUntilUserScroll) {
 				return;
 			}
-			var stopScrollingToBottom = false;
-			$scrolling.on('scroll.Streams_chat', function () {
+			if (!stopScrollingToBottom) {
+				setTimeout(function () {
+					_scrollToBottom.call(tool, null, true, 0);
+				}, 300);
+			}
+			$scrolling.off('scroll.Streams_chat')
+			.on('scroll.Streams_chat', function () {
 				// user started scrolling manually
 				stopScrollingToBottom = true;
 				$scrolling.off('scroll.Streams_chat');
 			});
-			var ival = setInterval(function () {
-				if (stopScrollingToBottom) {
-					return clearInterval(ival);
-				}
-				_scrollToBottom.call(tool, null, false, 0);
-			}, 300);
 		}
 	},
 
