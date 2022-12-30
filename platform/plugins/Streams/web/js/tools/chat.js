@@ -1197,7 +1197,7 @@ Q.Tool.define('Streams/chat', function(options) {
 	},
 
 	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll) {
-		var stopScrollingToBottom = false;
+		var stopScrollingToBottom;
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
@@ -1231,6 +1231,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				$scrolling.animate({
 					scrollTop: scrollHeight
 				}, state.animations.duration, function () {
+					stopScrollingToBottom = false;
 					_stayAtBottom();
 					Q.handle(callback, null, [s]);
 				});
