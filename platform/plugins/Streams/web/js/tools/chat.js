@@ -1243,7 +1243,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				if (stopScrollingToBottom) {
 					return;
 				}
-				this.onRefresh.once(function () {
+				this.onRefresh.addOnce(function () {
 					if (stopScrollingToBottom) {
 						return;
 					}
