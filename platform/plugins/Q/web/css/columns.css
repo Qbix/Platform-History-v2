@@ -276,7 +276,7 @@ html.Q_ios.Q_standalone .Q_columns_title {
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_1.Q_columns_overlapped {
-	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(5px) translateZ(-7px) skewX(0deg) skewY(0deg);
+	transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(8px) translateZ(-7px) skewX(0deg) skewY(0deg);
 }
 
 .Q_mobile.Q_columns_animationFX .Q_columns_tool .Q_columns_column.Q_column_2.Q_columns_overlapped {
