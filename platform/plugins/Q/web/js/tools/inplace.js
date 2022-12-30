@@ -356,6 +356,8 @@ function _Q_inplace_tool_constructor(element, options, staticHtml) {
 
 		if (state.capitalize) {
 			fieldinput.val(fieldinput.val().toCapitalized());
+		} else {
+			fieldinput.attr('autocapitalize', 'off');
 		}
 
 		var used_placeholder = false;
