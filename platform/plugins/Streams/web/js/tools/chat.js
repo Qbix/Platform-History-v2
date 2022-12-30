@@ -1196,13 +1196,13 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll, recursive) {
+	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll) {
 		var stopScrollingToBottom = false;
 		var tool = this;
 		var state = this.state;
 		var $scrolling = null;
-		_doScrollToBottom();
-		function _doScrollToBottom () {
+		_doScrollToBottom(false);
+		function _doScrollToBottom (recursive) {
 			var $scm = tool.$('.Streams_chat_messages');
 			var overflow = $scm.css('overflow-y');
 			if (!$scm.children().not('.Streams_chat_more').length) {
@@ -1243,7 +1243,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			if (!stopScrollingToBottom) {
 				setTimeout(function () {
-					_scrollToBottom.call(tool, null, true, 0);
+					_doScrollToBottom(true);
 				}, 300);
 			}
 			$scrolling.off('scroll.Streams_chat')
