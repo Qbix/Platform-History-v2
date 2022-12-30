@@ -1240,7 +1240,8 @@ Q.Tool.define('Streams/chat', function(options) {
 				$scrolling.off('scroll.Streams_chat');
 			});
 			tool.forEachChild(function () {
-				if (stopScrollingToBottom) {
+				if (stopScrollingToBottom
+				|| !this.onRefresh || !this.onRefresh.addOnce) {
 					return;
 				}
 				this.onRefresh.addOnce(function () {
