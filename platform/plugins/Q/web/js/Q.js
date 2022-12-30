@@ -13167,7 +13167,7 @@ Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
 	if (e.type === 'mousedown') {
 		Q.Pointer.latest.which = Q.Pointer.which(e);
 	} else {
-		Q.VisPointerual.latest.touches = e.touches;
+		Q.Pointer.latest.touches = e.touches;
 	}
 }, false, true);
 
