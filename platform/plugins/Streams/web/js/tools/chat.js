@@ -1218,6 +1218,9 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 			if (!$scrolling || !$scrolling.length) {
 				$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
+				if ($scrolling[0] === document.documentElement) {
+					$scrolling = null;
+				}
 			}
 			if (!$scrolling || !$scrolling.length) {
 				_stayAtBottom();
