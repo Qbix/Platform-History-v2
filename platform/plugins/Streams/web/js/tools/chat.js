@@ -1243,7 +1243,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				if (stopScrollingToBottom) {
 					return;
 				}
-				this.onRefresh.set(function () {
+				this.onRefresh.once(function () {
 					if (stopScrollingToBottom) {
 						return;
 					}
@@ -1251,7 +1251,7 @@ Q.Tool.define('Streams/chat', function(options) {
 					var scrollHeight = s.scrollHeight;
 					s.removeClass('Q_forceDisplayBlock');
 					s.scrollTop = scrollHeight;
-				});
+				}, tool);
 			});
 		}
 	},
