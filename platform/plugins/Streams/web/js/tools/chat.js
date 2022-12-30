@@ -458,6 +458,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				function(error, html){
 					if (error) { return error; }
 					tool.$('.Streams_chat_messages').html(html, true);
+					Q.handle(callback, tool, [[], []]);
 				},
 				state.templates.Streams_chat_noMessages
 			);
