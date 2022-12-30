@@ -1242,18 +1242,12 @@ Q.Tool.define('Streams/chat', function(options) {
 				stopScrollingToBottom = true;
 				$scrolling.off('scroll.Streams_chat');
 			});
-			tool.forEachChild(function () {
-				if (stopScrollingToBottom
-				|| !Q.getObject('state.onRefresh.addOnce', this)) {
-					return;
+			var ival = setInterval(function () {
+				if (stopScrollingToBottom) {
+					return clearInterval(ival);
 				}
-				this.state.onRefresh.addOnce(function () {
-					if (stopScrollingToBottom) {
-						return;
-					}
-					_scrollToBottom.call(tool, null, false, 0);
-				}, tool);
-			});
+				_scrollToBottom.call(tool, null, false, 0);
+			}, 300);
 		}
 	},
 
