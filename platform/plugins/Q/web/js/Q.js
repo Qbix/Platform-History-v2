@@ -11303,7 +11303,7 @@ Q.Animation = function _Q_Animation(callback, duration, ease, until, params) {
 	this.onRewind = new Q.Event();
 	this.onJump = new Q.Event();
 	this.onPause = new Q.Event();
-	this.onRender = new Q.Event();
+	this.onRefresh = new Q.Event();
 	this.onComplete = new Q.Event();
 };
 
@@ -11370,7 +11370,7 @@ Ap.nextFrame = function _Q_Animation_prototype_render(position) {
 			: (anim.elapsed / anim.duration) + anim.jumped;
 		if (x >= anim.until) {
 			Q.handle(anim.callback, anim, [1, anim.ease(1), anim.params]);
-			anim.onRender.stop();
+			anim.onRefresh.stop();
 			anim.onComplete.handle.call(anim);
 			anim.rewind();
 			return;
@@ -11391,7 +11391,7 @@ Ap.render = function _Q_Animation_prototype_render(position) {
 	var x = (position === undefined) ? this.position : position;
 	var y = this.ease(x);
 	Q.handle(this.callback, this, [x, y, this.params]);
-	this.onRender.handle.call(this, x, y, this.params);
+	this.onRefresh.handle.call(this, x, y, this.params);
 };
 
 /**

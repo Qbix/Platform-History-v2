@@ -30,7 +30,7 @@
  *   @param {Q.Event} [options.onInvoke] onInvoke fires during Q.Pointer.fastclick
  *    and your handlers should open the corresponding full stream tool in a dialog or page.
  *    The first parameter is the preview tool.
- *   @param {Q.Event} [options.onRender] fires when tool template rendered
+ *   @param {Q.Event} [options.onRefresh] fires when tool template rendered
  */
 Q.Tool.define("Streams/default/preview", "Streams/preview",
 function _Streams_default_preview(options, preview) {
@@ -55,7 +55,7 @@ function _Streams_default_preview(options, preview) {
 		}
 	},
 	onInvoke: new Q.Event(),
-	onRender: new Q.Event()
+	onRefresh: new Q.Event()
 },
 
 {
@@ -112,7 +112,7 @@ function _Streams_default_preview(options, preview) {
 							$pc.width(0).width($pc[0].remainingWidth());	
 						}
 					}, tool);
-					Q.handle(state.onRender, tool);
+					Q.handle(state.onRefresh, tool);
 					var inplace = tool.child('Streams_inplace');
 					if (!inplace) {
 						stream.onFieldChanged("title").set(function (modFields, field) {

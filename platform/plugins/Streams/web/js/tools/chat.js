@@ -36,7 +36,7 @@
  *   Each function will get callback as argument. Need to call this callback when ready to go further.
  *   @param {Array} [option.allowedRelatedStreams] Array of related streams types allowed to display as chat message.
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
- *   @param {Q.Event} [options.onRender] Event when tool element rendered
+ *   @param {Q.Event} [options.onRefresh] Event when tool element rendered
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
  *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
@@ -173,7 +173,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
-	onRender: new Q.Event(),
+	onRefresh: new Q.Event(),
 	onMessageRender: new Q.Event(),
 	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),
@@ -347,7 +347,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							.val(data.params[0]); // restore any draft
 						}
 					}
-					Q.handle(state.onRender, tool);
+					Q.handle(state.onRefresh, tool);
 				});
 
 				Q.addScript("{{Q}}/js/contextual.js", function () {
