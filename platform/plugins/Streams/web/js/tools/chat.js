@@ -1226,6 +1226,7 @@ Q.Tool.define('Streams/chat', function(options) {
 			s.removeClass('Q_forceDisplayBlock');
 			if (recursive) {
 				s.scrollTop = scrollHeight;
+				stopScrollingToBottom = false;
 				_stayAtBottom();
 			} else {
 				$scrolling.animate({
