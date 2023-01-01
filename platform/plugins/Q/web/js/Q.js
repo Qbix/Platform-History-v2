@@ -6,8 +6,6 @@
  */
 "use strict";
 
-const { Exception } = require("handlebars");
-
 /* jshint -W014 */
 (function _Q_setup(undefined, dontSetGlobals) {
 
