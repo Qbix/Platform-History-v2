@@ -2599,7 +2599,7 @@ Q.Daystamp = {
 		);
 	},
     
-    /**
+	/**
      * Get daystamp from a Javascript Date object
      * @method fromDate
      * @static
@@ -2610,30 +2610,30 @@ Q.Daystamp = {
 		return Q.Daystamp.fromTimestamp(date.getTime());
 	},
 
-    /**
-     * Get daystamp from a string of the form "yyyy-mm-dd"
-     * or "yyyy-mm-dd hh:mm:ss"
-     * @method fromDateTime
-     * @static
-     * @param {String} datetime 
-     * @return {Number}
-     */
+	/**
+	 * Get daystamp from a string of the form "yyyy-mm-dd"
+	 * or "yyyy-mm-dd hh:mm:ss"
+	 * @method fromDateTime
+	 * @static
+	 * @param {String} datetime 
+	 * @return {Number}
+	 */
 	fromDateTime: function (datetime) {
 		return this.fromTimestamp(Date.parse(datetime + ' UTC'));
 	},
 
-    /**
-     * Get daystamp from a string of the form "yyyy-mm-dd"
-     * or "yyyy-mm-dd hh:mm:ss"
-     * @method fromYMD
-     * @static
-     * @param {Number} year 
-     * @param {Number} month January is 1
-     * @param {Number} day
-     * @return {Number}
-     */
+	/**
+	 * Get daystamp from a string of the form "yyyy-mm-dd"
+	 * or "yyyy-mm-dd hh:mm:ss"
+	 * @method fromYMD
+	 * @static
+	 * @param {Number} year 
+	 * @param {Number} month January is 1
+	 * @param {Number} day
+	 * @return {Number}
+	 */
 	fromYMD: function (year, month, day) {
-		var date = new Date();
+		const date = new Date();
 		date.setUTCFullYear(year, month-1, day);
 		date.setUTCHours(0, 0, 0);
 		return Math.round(
@@ -2641,37 +2641,66 @@ Q.Daystamp = {
 		);
 	},
 
-    /**
-     * Get Javascript milliseconds-based timestamp from a daystamp
-     * @method toTimestamp
-     * @static
-     * @param {Number} daystamp 
-     * @return {Number}
-     */
-	toTimestamp: function (daystamp) {
-		returnQ.Daystamp.epoch + Q.Daystamp.msPerDay * daystamp;
+	/**
+	 * Get today's daystamp
+	 * @method today
+	 * @static
+	 * @return {Number}
+	 */
+	today: function()
+	{
+		return Q.Daystamp.fromDate(new Date());
 	},
 
-    /**
-     * Get Javascript Date from a daystamp
-     * @method toDate
-     * @static
-     * @param {Number} daystamp 
-     * @return {Date}
-     */
+	/**
+	 * Get age, in years, of someone born on a daystamp
+	 * @method age
+	 * @static
+	 * @param {Number} daystampBirth
+	 * @param {Number} daystampNow
+	 * @return {Number}
+	 */
+	age: function(daystampBirth, daystampNow)
+	{
+		ymdBirth = Q.Daystamp.toYMD(daystampBirth);
+		ymdNow = Q.Daystamp.toYMD(daystampNow);
+		var years = ymdNow[0] - ymdBirth[0];
+		return (ymdNow[1] < ymdBirth
+			|| (ymdNow[1] === ymdBirth && ymdNow[2] < ymdBirth))
+			? years - 1 : years;
+	},
+
+	/**
+	 * Get Javascript milliseconds-based timestamp from a daystamp
+	 * @method toTimestamp
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {Number}
+	 */
+	toTimestamp: function (daystamp) {
+		return Q.Daystamp.epoch + Q.Daystamp.msPerDay * daystamp;
+	},
+
+	/**
+	 * Get Javascript Date from a daystamp
+	 * @method toDate
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {Date}
+	 */
 	toDate: function (daystamp) {
 		return new Date(Q.Daystamp.toTimestamp(daystamp));
 	},
 
-    /**
-     * Get date-time string from a daystamp
-     * @method toDateTime
-     * @static
-     * @param {Number} daystamp 
-     * @return {String} String of the form "yyyy-mm-dd 00:00:00"
-     */
+	/**
+	 * Get date-time string from a daystamp
+	 * @method toDateTime
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {String} String of the form "yyyy-mm-dd 00:00:00"
+	 */
 	toDateTime(daystamp, separator) {
-		var date = Q.Daystamp.toDate(daystamp);
+		const date = Q.Daystamp.toDate(daystamp);
 		if (separator === undefined) {
 			separator = ' ';
 		}
@@ -2681,15 +2710,15 @@ Q.Daystamp = {
 			+ separator + '00:00:00';
 	},
 
-    /**
-     * Get Javascript milliseconds-based timestamp from a daystamp
-     * @method toYMD
-     * @static
-     * @param {Number} daystamp 
-     * @return {Array} [year, month, date] with month, January is 1
-     */
+	/**
+	 * Get Javascript milliseconds-based timestamp from a daystamp
+	 * @method toYMD
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {Array} [year, month, date] with month, January is 1
+	 */
 	toYMD: function (daystamp) {
-		var date = Q.Daystamp.toDate(daystamp);
+		const date = Q.Daystamp.toDate(daystamp);
 		return [
 			date.getUTCFullYear(),
 			date.getUTCMonth() + 1,
@@ -2703,7 +2732,7 @@ Q.Daystamp = {
  * @property epoch
  * @static
  */
-Object.defineProperty(Daystamp, 'epoch', {
+Object.defineProperty(Q.Daystamp, 'epoch', {
 	value: -62167219200000,
 	configurable: false,
 	writable: false,
@@ -2715,7 +2744,7 @@ Object.defineProperty(Daystamp, 'epoch', {
  * @property msPerDay
  * @static
  */
-Object.defineProperty(Daystamp, 'msPerDay', {
+Object.defineProperty(Q.Daystamp, 'msPerDay', {
 	value: 8.64e7,
 	configurable: false,
 	writable: false,

@@ -65,6 +65,35 @@ Q.Daystamp = {
 	},
 
     /**
+     * Get today's daystamp
+     * @method today
+     * @static
+     * @return {Number}
+     */
+    today: function()
+    {
+        return Q.Daystamp.fromDate(new Date());
+    },
+
+    /**
+     * Get age, in years, of someone born on a daystamp
+     * @method age
+     * @static
+     * @param {Number} daystampBirth
+     * @param {Number} daystampNow
+     * @return {Number}
+     */
+    age: function(daystampBirth, daystampNow)
+    {
+        ymdBirth = Q.Daystamp.toYMD(daystampBirth);
+        ymdNow = Q.Daystamp.toYMD(daystampNow);
+        var years = ymdNow[0] - ymdBirth[0];
+        return (ymdNow[1] < ymdBirth
+            || (ymdNow[1] === ymdBirth && ymdNow[2] < ymdBirth))
+            ? years - 1 : years;
+    }
+    
+    /**
      * Get Javascript milliseconds-based timestamp from a daystamp
      * @method toTimestamp
      * @static
