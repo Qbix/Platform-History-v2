@@ -89,9 +89,9 @@ Q.Daystamp = {
         ymdNow = Q.Daystamp.toYMD(daystampNow);
         var years = ymdNow[0] - ymdBirth[0];
         return (ymdNow[1] < ymdBirth
-            || (ymdNow[1] === ymdBirth && ymdNow[2] < ymdBirth))
+            || (ymdNow[1] === ymdBirth && ymdNow[2] < ymdBirth[2]))
             ? years - 1 : years;
-    }
+    },
     
     /**
      * Get Javascript milliseconds-based timestamp from a daystamp
