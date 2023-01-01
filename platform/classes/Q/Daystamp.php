@@ -11,21 +11,52 @@
  */
 class Q_Daystamp
 {
+    /**
+     * Get daystamp from a PHP timestamp
+     * @method fromTimestamp
+     * @static
+     * @param {integer} $timestamp 
+     * @return {integer}
+     */
     static function fromTimestamp($timestamp)
     {
         return floor(($timestamp - self::epoch) / self::secPerDay);
     }
 
-    static function fromYMD(int $y, int $m, int $d)
-    {
-        return self::fromDateTime(sprintf("%04d-%02d-%02d", $y, $m, $d));
-    }
-
+    /**
+     * Get daystamp from a string of the form "yyyy-mm-dd"
+     * or "yyyy-mm-dd hh:mm:ss"
+     * @method fromDateTime
+     * @static
+     * @param {string} $datetime 
+     * @return {integer}
+     */
     static function fromDateTime(string $datetime)
     {
         return self::fromTimestamp(strtotime($datetime));
     }
 
+    /**
+     * Get daystamp from a year, month and day
+     * @method fromYMD
+     * @static
+     * @param {integer} $year 
+     * @param {integer} $month January is 1
+     * @param {integer} $day
+     * @return {integer}
+     */
+    static function fromYMD(int $y, int $m, int $d)
+    {
+        return self::fromDateTime(sprintf("%04d-%02d-%02d", $y, $m, $d));
+    }
+
+    /**
+     * Get PHP timestamp from a daystamp
+     * @method toTimestamp
+     * @static
+     * @param {integer} $daystamp 
+     * @return {integer}
+     */
     static function toTimestamp(int $daystamp)
     {
         $epoch = new DateTimeImmutable("0000-01-01 00:00:00");
@@ -33,15 +64,13 @@ class Q_Daystamp
         return $dti->getTimestamp();
     }
 
-    static function toYMD(int $daystamp)
-    {
-        $epoch = new DateTimeImmutable("0000-01-01 00:00:00");
-        $dti = $epoch->modify("$daystamp day");
-        return array(
-            $dti->format('Y'), $dti->format('m') , $dti->format('d')
-        );
-    }
-
+    /**
+     * Get date-time string from a daystamp
+     * @method toDateTime
+     * @static
+     * @param {integer} $daystamp 
+     * @return {string} String of the form "yyyy-mm-dd 00:00:00"
+     */
     static function toDateTime($daystamp)
     {
         $epoch = new DateTimeImmutable("0000-01-01 00:00:00");
@@ -49,6 +78,37 @@ class Q_Daystamp
         return $dti->format('Y-m-d H:i:s');
     }
 
-    public const secPerDay = 8.64e4;
+    /**
+     * Get PHP timestamp from a daystamp
+     * @method toYMD
+     * @static
+     * @param {integer} daystamp 
+     * @return {array} [year, month, date] note that January is month 1
+     */
+    static function toYMD(int $daystamp)
+    {
+        $epoch = new DateTimeImmutable("0000-01-01 00:00:00");
+        $dti = $epoch->modify("$daystamp day");
+        return array(
+            (int)$dti->format('Y'),
+            (int)$dti->format('m') ,
+            (int)$dti->format('d')
+        );
+    }
+    
+
+    /**
+     * The daystamp epoch as a timestamp
+     * @property epoch
+     * @static
+     */
     public const epoch = -62167219200;
+
+    /**
+     * Number of seconds in a day
+     * @property msPerDay
+     * @static
+     */
+    public const secPerDay = 8.64e4;
+
 }
