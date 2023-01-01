@@ -51,6 +51,17 @@ class Q_Daystamp
     }
 
     /**
+     * Get today's daystamp
+     * @method today
+     * @static
+     * @return {integer}
+     */
+    static function today()
+    {
+        return self::fromTimestamp(time());
+    }
+
+    /**
      * Get PHP timestamp from a daystamp
      * @method toTimestamp
      * @static
@@ -94,17 +105,6 @@ class Q_Daystamp
             (int)$dti->format('m') ,
             (int)$dti->format('d')
         );
-    }
-
-    /**
-     * Get today's daystamp
-     * @method today
-     * @static
-     * @return {integer}
-     */
-    static function today()
-    {
-        return self::fromTimestamp(time());
     }
 
     /**
