@@ -372,7 +372,7 @@
                     return;
                 }
 
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
                 $toolElement.addClass("Assets_NFT_contract_select");
 
                 var $chains = $("select[name=chains]", tool.element);

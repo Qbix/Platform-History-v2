@@ -280,10 +280,7 @@
 						}
 					}
 					// the retained response will cause the stylesheets to load again
-					Q.handle(callback, request, [null, retained.response, false, _processScriptDataAndLines]);
-					function _processScriptDataAndLines() {
-						Q.Request.processScriptDataAndLines(retained.response);
-					}
+					Q.handle(callback, request, [null, retained.response, false]);
 				}
 				
 				function handler(response, url, options) {

@@ -80,7 +80,7 @@
                         return;
                     }
 
-                    tool.element.innerHTML = html;
+                    Q.replace(tool.element, html);;
                     $("button[name=sendCrypto]", tool.element)
                     .plugin("Q/clickable")
                     .on(Q.Pointer.fastclick, function () {

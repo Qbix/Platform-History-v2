@@ -5,6 +5,7 @@
  * @main Q
  */
 "use strict";
+
 /* jshint -W014 */
 (function _Q_setup(undefined, dontSetGlobals) {
 
@@ -815,14 +816,12 @@ Elp.cssDimensions = function () {
  * @param {Boolean} [skipIfNotOverflowed=false] If element is not overflowed, continue search
  * @param {String} [direction="all"] Can also be "vertical" or "horizontal"
  * @param {Boolean} [includeSelf=false] Whether the element itself can be returned if it matches
+ * @return {Element|null} Returns the first parent encountered that matches, otherwise null
  */
 Elp.scrollingParent = function(skipIfNotOverflowed, direction, includeSelf) {
 	var p = this;
 	while (includeSelf ? 1 : (p = p.parentNode)) {
 		includeSelf = false;
-		if (p === document.documentElement) {
-			break;
-		}
 		if (typeof p.computedStyle !== 'function') {
 			continue;
 		}
@@ -1107,7 +1106,7 @@ Elp.remainingWidth = function (subpixelAccuracy, excludeMargins) {
  * @param {Function} callback The callback to execute at the right time
  * @param {String} [key] Optional, to be used for the onActivate handler that gets added
  */
-Elp.forEachTool = function _Q_Tool_prototype_forEachChild(name, callback, key) {
+Elp.forEachTool = function _Q_Tool_prototype_forEachTool(name, callback, key) {
 	var element = this;
 	if (typeof name !== 'string') {
 		callback = name;
@@ -1271,16 +1270,19 @@ Q.typeOf = function _Q_typeOf(value) {
 		if (value === null) {
 			return 'null';
 		}
+		var t = Object.prototype.toString.apply(value);
 		if (value instanceof root.Element) {
 			return 'Element';
 		} else if (value instanceof Array
 		|| (value.constructor && value.constructor.name === 'Array')
-		|| Object.prototype.toString.apply(value) === '[object Array]') {
+		|| t === '[object Array]') {
 			s = 'array';
+		} else if (t === '[object Window]') {
+			s = 'window';
 		} else if (typeof value.typename != 'undefined' ) {
 			return value.typename;
 		} else if (typeof (l=value.length) == 'number' && (l%1==0)
-		&& (!l || ((l-1) in value))) {
+		&& (l > 0 && ((l-1) in value))) {
 			return 'array';
 		} else if (typeof value.constructor != 'undefined'
 		&& typeof value.constructor.name != 'undefined') {
@@ -2574,6 +2576,178 @@ Q.zIndexTopmost = function (container, filter) {
 	});
 	return topZ;
 };
+
+/**
+ * Like a timestamp, but works with number of Gregorian Calendar 
+ * days since fictional epoch year=0, month=0, day=1.
+ * You can store daystamps and do arithmetic with them.
+ * @class Daystamp
+ */
+Q.Daystamp = {
+    /**
+     * Get daystamp from a Javascript milliseconds-based timestamp
+     * @method fromTimestamp
+     * @static
+     * @param {Number} timestamp 
+     * @return {Number}
+     */
+	fromTimestamp: function (timestamp) {
+		return Math.round(
+			(timestamp - Q.Daystamp.epoch) / Q.Daystamp.msPerDay
+		);
+	},
+    
+	/**
+     * Get daystamp from a Javascript Date object
+     * @method fromDate
+     * @static
+     * @param {Date} date 
+     * @return {Number}
+     */
+	fromDate: function (date) {
+		return Q.Daystamp.fromTimestamp(date.getTime());
+	},
+
+	/**
+	 * Get daystamp from a string of the form "yyyy-mm-dd"
+	 * or "yyyy-mm-dd hh:mm:ss"
+	 * @method fromDateTime
+	 * @static
+	 * @param {String} datetime 
+	 * @return {Number}
+	 */
+	fromDateTime: function (datetime) {
+		return this.fromTimestamp(Date.parse(datetime + ' UTC'));
+	},
+
+	/**
+	 * Get daystamp from a string of the form "yyyy-mm-dd"
+	 * or "yyyy-mm-dd hh:mm:ss"
+	 * @method fromYMD
+	 * @static
+	 * @param {Number} year 
+	 * @param {Number} month January is 1
+	 * @param {Number} day
+	 * @return {Number}
+	 */
+	fromYMD: function (year, month, day) {
+		const date = new Date();
+		date.setUTCFullYear(year, month-1, day);
+		date.setUTCHours(0, 0, 0);
+		return Math.round(
+			(date.getTime() - Q.Daystamp.epoch) / Q.Daystamp.msPerDay
+		);
+	},
+
+	/**
+	 * Get today's daystamp
+	 * @method today
+	 * @static
+	 * @return {Number}
+	 */
+	today: function()
+	{
+		return Q.Daystamp.fromDate(new Date());
+	},
+
+	/**
+	 * Get Javascript milliseconds-based timestamp from a daystamp
+	 * @method toTimestamp
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {Number}
+	 */
+	toTimestamp: function (daystamp) {
+		return Q.Daystamp.epoch + Q.Daystamp.msPerDay * daystamp;
+	},
+
+	/**
+	 * Get Javascript Date from a daystamp
+	 * @method toDate
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {Date}
+	 */
+	toDate: function (daystamp) {
+		return new Date(Q.Daystamp.toTimestamp(daystamp));
+	},
+
+	/**
+	 * Get date-time string from a daystamp
+	 * @method toDateTime
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {String} String of the form "yyyy-mm-dd 00:00:00"
+	 */
+	toDateTime(daystamp, separator) {
+		const date = Q.Daystamp.toDate(daystamp);
+		if (separator === undefined) {
+			separator = ' ';
+		}
+		return String(date.getUTCFullYear()).padStart(4, 0)
+			+ '-' + String(date.getUTCMonth()+1).padStart(2, 0)
+			+ '-' + String(date.getUTCDate()).padStart(2, 0)
+			+ separator + '00:00:00';
+	},
+
+	/**
+	 * Get Javascript milliseconds-based timestamp from a daystamp
+	 * @method toYMD
+	 * @static
+	 * @param {Number} daystamp 
+	 * @return {Array} [year, month, date] with month, January is 1
+	 */
+	toYMD: function (daystamp) {
+		const date = Q.Daystamp.toDate(daystamp);
+		return [
+			date.getUTCFullYear(),
+			date.getUTCMonth() + 1,
+			date.getUTCDate()
+		];
+	},
+
+	/**
+	 * Get age, in years, of someone born on a daystamp
+	 * @method age
+	 * @static
+	 * @param {Number} daystampBirth
+	 * @param {Number} daystampNow
+	 * @return {Number}
+	 */
+	age: function(daystampBirth, daystampNow)
+	{
+		ymdBirth = Q.Daystamp.toYMD(daystampBirth);
+		ymdNow = Q.Daystamp.toYMD(daystampNow);
+		var years = ymdNow[0] - ymdBirth[0];
+		return (ymdNow[1] < ymdBirth[1]
+			|| (ymdNow[1] === ymdBirth[1] && ymdNow[2] < ymdBirth[2]))
+			? years - 1 : years;
+	}
+};
+
+/**
+ * The daystamp epoch as a timestamp
+ * @property epoch
+ * @static
+ */
+Object.defineProperty(Q.Daystamp, 'epoch', {
+	value: -62167219200000,
+	configurable: false,
+	writable: false,
+	enumerable: true
+});
+
+/**
+ * Number of milliseconds in a day
+ * @property msPerDay
+ * @static
+ */
+Object.defineProperty(Q.Daystamp, 'msPerDay', {
+	value: 8.64e7,
+	configurable: false,
+	writable: false,
+	enumerable: true
+});
 
 /**
  * Wraps a callable in a Q.Event object
@@ -4904,18 +5078,6 @@ Tp.$ = function _Q_Tool_prototype_$(selector) {
 };
 
 /**
- * Returns all subelements with the given class name.
- * @method getElementsByClassName
- * @param {String} className
- *   the class name to look for
- * @return {NodeList}
- *   a list of nodes with the given class name.
- */
-Tp.getElementsByClassName = function _Q_Tool_prototype_getElementsByClasName(className) {
-	return this.element.getElementsByClassName(className);
-};
-
-/**
  * Do something for every and future child tool that is activated inside this tool
  * @method forEachChild
  * @param {String} [name=""] Filter by name of the child tools, such as "Q/inplace"
@@ -5560,7 +5722,17 @@ Q.Request = function _Q_Request(url, slotNames, callback, options) {
 	this.options = options;
 };
 
-Q.Request.processScriptDataAndLines = function (response) {
+/**
+ * A Q.Response object represents a network response
+ * @class Q.Response
+ * @constructor
+ */
+
+Q.Response = function _Q_Response(response) {
+	
+};
+
+Q.Response.processScriptDataAndLines = function (response) {
 	if (response.scriptData) {
 		Q.each(response.scriptData,
 		function _Q_scriptData_each() {
@@ -5573,13 +5745,158 @@ Q.Request.processScriptDataAndLines = function (response) {
 		Q.Session.paths = response.sessionDataPaths;
 	}
 	if (response.scriptLines) {
-		for (i in response.scriptLines) {
+		for (var i in response.scriptLines) {
 			if (response.scriptLines[i]) {
 				eval(response.scriptLines[i]);
 			}
 		}
 	}
+};
+
+Q.Response.processStylesheets = function Q_Response_loadStylesheets(response, callback) {
+	if (!response.stylesheets) {
+		return callback();
+	}
+	var newStylesheets = {};
+	var keys = Object.keys(response.stylesheets);
+	if (response.stylesheets[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	var waitFor = [];
+	var slotPipe = Q.pipe();			
+	Q.each(keys, function (i, slotName) {
+		var stylesheets = [];
+		for (var j in response.stylesheets[slotName]) {
+			var stylesheet = response.stylesheets[slotName][j];
+			if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
+				continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
+			}
+			var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
+			var elem = Q.addStylesheet(
+				stylesheet.href, stylesheet.media,
+				slotPipe.fill(key), { slotName: slotName, returnAll: false }
+			);
+			if (elem) {
+				stylesheets.push(elem);
+			}
+			waitFor.push(key);
+		}
+		newStylesheets[slotName] = stylesheets;
+	});
+	slotPipe.add(waitFor, function _Q_loadUrl_pipe_slotNames() {
+		callback();
+	}).run();
+	return newStylesheets;
 }
+
+Q.Response.processStyles = function Q_Response_processStyles(response) {
+	if (!response.stylesInline) {
+		return null;
+	}
+	var newStyles = {},
+		head = document.head || document.getElementsByTagName('head')[0];
+	var keys = Object.keys(response.stylesInline);
+	if (response.stylesInline[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	Q.each(keys, function (i, slotName) {
+		var styles = response.stylesInline[slotName];
+		if (!styles) return;
+		var style = document.createElement('style');
+		style.setAttribute('type', 'text/css');
+		style.setAttribute('data-slot', slotName);
+		if (style.styleSheet){
+			style.styleSheet.cssText = styles;
+		} else {
+			style.appendChild(document.createTextNode(styles));
+		}
+		head.appendChild(style);
+		newStyles[slotName] = [style];
+	});
+	return newStyles;
+}
+
+Q.Response.processHtmlCssClasses = function Q_Response_processHtmlCssClasses(response) {
+	Q.each(response.htmlCssClasses, function (i, c) {
+		document.documentElement.addClass(c);
+	});
+}
+
+Q.Response.processMetas = function Q_Response_processMetas(response) {
+	if (!response.metas) {
+		return null;
+	}
+
+	var elHead = document.getElementsByTagName('head')[0];
+	for (var slotName in response.metas) {
+		Q.each(response.metas[slotName], function (i) {
+			var metaData = this;
+			var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
+			var found = false;
+			Q.each(metas, function (j) {
+				if (this.getAttribute(metaData.name) === metaData.value) {
+					this.setAttribute(metaData.name, metaData.value);
+					this.setAttribute("content", metaData.content);
+					found = true;
+					return false;
+				}
+			});
+			if (!found) {
+				var meta = document.createElement("meta");
+				meta.setAttribute(this.name, metaData.value);
+				meta.setAttribute("content", metaData.content);
+				elHead.appendChild(meta);
+				return;
+			}
+		});
+	}
+};
+
+Q.Response.processTemplates = function Q_Response_processTemplates(response) {
+	if (!response.templates) {
+		return null;
+	}
+	var slotName, newTemplates = {};
+	for (slotName in response.templates) {
+		newTemplates[slotName] = [];
+		Q.each(response.templates[slotName], function (i) {
+			var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
+			newTemplates[slotName].push(
+				Q.Template.set(this.name, this.content, info)
+			);
+		});
+	}
+	return newTemplates;
+};
+
+Q.Response.processScripts = function Q_Response_processScripts(response, callback, options) {
+	if (!response.scripts) {
+		callback();
+		return null;
+	}
+	var slotPipe = Q.pipe(Object.keys(response.scripts), function _Q_loadUrl_pipe_slotNames() {
+		callback();
+	});
+	var newScripts = {};
+	var keys = Object.keys(response.scripts);
+	if (response.scripts[""]) {
+		keys.splice(keys.indexOf(""), 1);
+		keys.unshift("");
+	}
+	Q.each(keys, function (i, slotName) {
+		var elem = Q.addScript(
+			response.scripts[slotName], slotPipe.fill(slotName), {
+			ignoreLoadingErrors: options.ignoreLoadingErrors,
+			returnAll: false
+		});
+		if (elem) {
+			newScripts[slotName] = elem;
+		}
+	});
+	return newScripts;
+};
 
 /**
  * A Q.Cache object stores items in a cache and throws out least-recently-used ones.
@@ -6391,8 +6708,8 @@ Q.init = function _Q_init(options) {
 	Q.addEventListener(root, 'unload', Q.onUnload.handle);
 	Q.addEventListener(root, 'online', Q.onOnline.handle);
 	Q.addEventListener(root, 'offline', Q.onOffline.handle);
-	Q.addEventListener(root, Q.Pointer.focusout, _onPointerBlurHandler);
-	var checks = ["ready"];
+	Q.addEventListener(root, Q.Visual.focusout, _onPointerBlurHandler);
+	var checks = ["init", "ready"];
 	if (Q.ServiceWorker.started) {
 		checks.push("serviceWorker");
 	}
@@ -6504,7 +6821,7 @@ Q.init = function _Q_init(options) {
 		if (preferredLanguage) {
 			Q.Text.setLanguage.apply(Q.Text, [preferredLanguage]);
 		}
-
+		p.fill('init')();
 		Q.handle(Q.onInit, Q);
 	}).run();
 };
@@ -7768,20 +8085,20 @@ Q.request = function (url, slotNames, callback, options) {
 	var o = Q.extend({}, Q.request.options, options);
 	var request = new Q.Request(url, slotNames, callback, o);
 	if (o.skipNonce) {
-		_Q_request_makeRequest.call(this, url, slotNames, callback, o);
+		_Q_Response_makeRequest.call(this, url, slotNames, callback, o);
 	} else {
-		Q.loadNonce(_Q_request_makeRequest, this, [url, slotNames, callback, o]);
+		Q.loadNonce(_Q_Response_makeRequest, this, [url, slotNames, callback, o]);
 	}
 	return request;
 	
-	function _Q_request_makeRequest (url, slotNames, callback, o) {
+	function _Q_Response_makeRequest (url, slotNames, callback, o) {
 
 		var tout = false, t = {};
 		if (o.timeout !== false) {
 			tout = o.timeout || Q.request.options.timeout;
 		}
 	
-		function _Q_request_callback(err, content, wasJSONP) {
+		function _Q_Response_callback(err, content, wasJSONP) {
 			if (err) {
 				Q.handle(callback, this, [err, content, false]);
 				Q.handle(o.onProcessed, this, [err, content, false]);
@@ -7807,11 +8124,8 @@ Q.request = function (url, slotNames, callback, options) {
 				Q.handle(o.onRedirect, Q, [response.redirect.url]);
 				redirected = response.redirect.url;
 			}
-			callback && callback.call(this, err, response, redirected, _processScriptDataAndLines);
-			Q.handle(o.onProcessed, this, [err, response, redirected, _processScriptDataAndLines]);
-			function _processScriptDataAndLines() {
-				Q.Request.processScriptDataAndLines(response);
-			}
+			callback && callback.call(this, err, response);
+			Q.handle(o.onProcessed, this, [err, response]);
 		};
 
 		function _onStart () {
@@ -7838,7 +8152,7 @@ Q.request = function (url, slotNames, callback, options) {
 			Q.handle(o.onLoadEnd, request, [url, slotNames, o]);
 			if (!t.cancelled) {
 				o.onResponse.handle.call(request, response, wasJSONP);
-				_Q_request_callback.call(request, null, response, wasJSONP);
+				_Q_Response_callback.call(request, null, response, wasJSONP);
 			}
 		}
 		
@@ -7874,7 +8188,7 @@ Q.request = function (url, slotNames, callback, options) {
 				}]
 			};
 			o.onCancel.handle.call(this, errors, o);
-			_Q_request_callback.call(this, errors, errors);
+			_Q_Response_callback.call(this, errors, errors);
 		}
 		
 		function xhr(onSuccess, onCancel) {
@@ -7952,7 +8266,7 @@ Q.request = function (url, slotNames, callback, options) {
 							? Q.getObject(o.resultFunction, iframe.contentWindow)
 							: null;
 						var result = typeof(resultFunction) === 'function' ? resultFunction() : undefined;
-						_Q_request_callback.call(request, null, result, true);
+						_Q_Response_callback.call(request, null, result, true);
 					}
 				});
 				return;
@@ -7967,7 +8281,7 @@ Q.request = function (url, slotNames, callback, options) {
 			var i = Q.request.callbacks.length;
 			var url2 = url;
 			if (callback) {
-				Q.request.callbacks[i] = function _Q_request_JSONP(data) {
+				Q.request.callbacks[i] = function _Q_Response_JSONP(data) {
 					delete Q.request.callbacks[i];
 					Q.removeElement(script);
 					_onResponse(data, true);
@@ -8370,7 +8684,7 @@ Q.updateUrls = function(callback) {
 				}
 				json = JSON.stringify(Q.updateUrls.urls);
 				localStorage.setItem(Q.updateUrls.lskey, json);
-				if (timestamp = result['#timestamp']) {
+				if (timestamp = result['@timestamp']) {
 					Q.cookie('Q_ut', timestamp);
 				}
 				Q.handle(callback, null, [result, timestamp]);
@@ -8381,7 +8695,7 @@ Q.updateUrls = function(callback) {
 			Q.updateUrls.urls = result;
 			json = JSON.stringify(Q.updateUrls.urls);
 			localStorage.setItem(Q.updateUrls.lskey, json);
-			if (timestamp = result['#timestamp']) {
+			if (timestamp = result['@timestamp']) {
 				Q.cookie('Q_ut', timestamp);
 			}
 			Q.handle(callback, null, [result, timestamp]);
@@ -9247,8 +9561,8 @@ Q.activate = function _Q_activate(elem, options, callback, activateLazyLoad) {
  *  tool.Q.onRetain, which receives the old Q.Tool object, the new options and incoming element.
  *  After the event is handled, the tool's state will be extended with these new options.
  * @param {Element|String|DocumentFragment} source
- *  An HTML string or a Element which is not part of the DOM.
- *  It is treated as a document fragment, and its contents are used to replace the container's contents.
+ *  An HTML string or a Element or DocumentFragment which is not part of the DOM.
+ *  If an element, it is treated as a document fragment, and its contents are used to replace the container's contents.
  * @param {Object} options
  *  Optional. A hash of options, including:
  * @param {Array} [options.replaceElements] array of elements or ids of elements in the document to replace, even if they have "data-q-retain" attributes.
@@ -9434,7 +9748,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 	};
 	return promise;
 
-	function loadResponse(err, response, redirected, processScriptDataAndLines) {
+	function loadResponse(err, response, redirected) {
 		var e;
 		if (_canceled) {
 			return; // this loadUrl call was canceled
@@ -9480,9 +9794,9 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 		
 		Q.Page.beingProcessed = true;
 
-		loadHtmlCssClasses();
-		loadMetas();
-		loadTemplates();
+		Q.Response.processHtmlCssClasses(response);
+		Q.Response.processMetas(response);
+		Q.Response.processTemplates(response);
 
 		var newScripts;
 		
@@ -9496,7 +9810,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			newScripts = [];
 			afterScripts();
 		} else {
-			newScripts = loadScripts(afterScripts);
+			newScripts = Q.Response.processScripts(response, afterScripts, o);
 		}
 		
 		function afterScripts () {
@@ -9510,15 +9824,15 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 			
 			var domElements = null;
 			if (o.ignorePage) {
-				newStylesheets = [];
+				newStylesheets = {};
 				afterStylesheets();
 			} else {
 				_doEvents('on', moduleSlashAction);
-				newStylesheets = loadStylesheets(afterStylesheets);
+				newStylesheets = Q.Response.processStylesheets(response, afterStylesheets);
 			}
 			
 			function afterStylesheets() {
-				var newStyles = loadStyles();
+				Q.Response.processStyles(response);
 				
 				afterStyles(); // Synchronous to allow additional scripts to change the styles before allowing the browser reflow.
 			
@@ -9610,7 +9924,7 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 					}
 				}
 
-				processScriptDataAndLines();
+				Q.Response.processScriptDataAndLines(response);
 
 				if (!o.ignorePage) {
 					try {
@@ -9713,151 +10027,6 @@ Q.loadUrl = function _Q_loadUrl(url, options) {
 				Q.Page.beingProcessed = false;
 				Q.handle(onActivate, this, [domElements]);
 			}
-		}
-		
-		function loadStylesheets(callback) {
-			if (!response.stylesheets) {
-				return callback();
-			}
-			var newStylesheets = {};
-			var keys = Object.keys(response.stylesheets);
-			if (response.stylesheets[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			var waitFor = [];
-			var slotPipe = Q.pipe();			
-			Q.each(keys, function (i, slotName) {
-				var stylesheets = [];
-				for (var j in response.stylesheets[slotName]) {
-					var stylesheet = response.stylesheets[slotName][j];
-					if (root.StyleFix && (stylesheet.href in processStylesheets.slots)) {
-						continue; // if prefixfree is loaded, we will not even try to load these processed stylesheets
-					}
-					var key = slotName + '\t' + stylesheet.href + '\t' + stylesheet.media;
-					var elem = Q.addStylesheet(
-						stylesheet.href, stylesheet.media,
-						slotPipe.fill(key), { slotName: slotName, returnAll: false }
-					);
-					if (elem) {
-						stylesheets.push(elem);
-					}
-					waitFor.push(key);
-				}
-				newStylesheets[slotName] = stylesheets;
-			});
-			slotPipe.add(waitFor, function _Q_loadUrl_pipe_slotNames() {
-				callback();
-			}).run();
-			return newStylesheets;
-		}
-		
-		function loadStyles() {
-			if (!response.stylesInline) {
-				return null;
-			}
-			var newStyles = {},
-				head = document.head || document.getElementsByTagName('head')[0];
-			var keys = Object.keys(response.stylesInline);
-			if (response.stylesInline[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			Q.each(keys, function (i, slotName) {
-				var styles = response.stylesInline[slotName];
-				if (!styles) return;
-				var style = document.createElement('style');
-				style.setAttribute('type', 'text/css');
-				style.setAttribute('data-slot', slotName);
-				if (style.styleSheet){
-					style.styleSheet.cssText = styles;
-				} else {
-					style.appendChild(document.createTextNode(styles));
-				}
-				head.appendChild(style);
-				newStyles[slotName] = [style];
-			});
-			return newStyles;
-		}
-
-		function loadHtmlCssClasses() {
-			Q.each(response.htmlCssClasses, function (i, c) {
-				document.documentElement.addClass(c);
-			});
-		}
-
-		function loadMetas() {
-			if (!response.metas) {
-				return null;
-			}
-
-			var elHead = document.getElementsByTagName('head')[0];
-			for (var slotName in response.metas) {
-				Q.each(response.metas[slotName], function (i) {
-					var metaData = this;
-					var metas = document.querySelectorAll("meta[" + metaData.name + "='" + metaData.value + "']");
-					var found = false;
-					Q.each(metas, function (j) {
-						if (this.getAttribute(metaData.name) === metaData.value) {
-							this.setAttribute(metaData.name, metaData.value);
-							this.setAttribute("content", metaData.content);
-							found = true;
-							return false;
-						}
-					});
-					if (!found) {
-						var meta = document.createElement("meta");
-						meta.setAttribute(this.name, metaData.value);
-						meta.setAttribute("content", metaData.content);
-						elHead.appendChild(meta);
-						return;
-					}
-				});
-			}
-		}
-
-		function loadTemplates() {
-			if (!response.templates) {
-				return null;
-			}
-			var slotName, newTemplates = {};
-			for (slotName in response.templates) {
-				newTemplates[slotName] = [];
-				Q.each(response.templates[slotName], function (i) {
-					var info = Q.take(this, ['type', 'text', 'partials', 'helpers']);
-					newTemplates[slotName].push(
-						Q.Template.set(this.name, this.content, info)
-					);
-				});
-			}
-			return newTemplates;
-		}
-		
-		function loadScripts(callback) {
-			if (!response.scripts) {
-				callback();
-				return null;
-			}
-			var slotPipe = Q.pipe(Object.keys(response.scripts), function _Q_loadUrl_pipe_slotNames() {
-				callback();
-			});
-			var newScripts = {};
-			var keys = Object.keys(response.scripts);
-			if (response.scripts[""]) {
-				keys.splice(keys.indexOf(""), 1);
-				keys.unshift("");
-			}
-			Q.each(keys, function (i, slotName) {
-				var elem = Q.addScript(
-					response.scripts[slotName], slotPipe.fill(slotName), {
-					ignoreLoadingErrors: o.ignoreLoadingErrors,
-					returnAll: false
-				});
-				if (elem) {
-					newScripts[slotName] = elem;
-				}
-			});
-			return newScripts;
 		}
 	}
 };
@@ -10061,7 +10230,7 @@ Q.handle.onUrl = new Q.Event(function () {
 	Q.each(elements, function () {
 		Q.removeElement(this, true);
 	});
-	Q.Pointer.stopHints();
+	Q.Visual.stopHints();
 }, "Q");
 
 /**
@@ -11310,7 +11479,7 @@ Q.Animation = function _Q_Animation(callback, duration, ease, until, params) {
 	this.onRewind = new Q.Event();
 	this.onJump = new Q.Event();
 	this.onPause = new Q.Event();
-	this.onRender = new Q.Event();
+	this.onRefresh = new Q.Event();
 	this.onComplete = new Q.Event();
 };
 
@@ -11377,7 +11546,7 @@ Ap.nextFrame = function _Q_Animation_prototype_render(position) {
 			: (anim.elapsed / anim.duration) + anim.jumped;
 		if (x >= anim.until) {
 			Q.handle(anim.callback, anim, [1, anim.ease(1), anim.params]);
-			anim.onRender.stop();
+			anim.onRefresh.stop();
 			anim.onComplete.handle.call(anim);
 			anim.rewind();
 			return;
@@ -11398,7 +11567,7 @@ Ap.render = function _Q_Animation_prototype_render(position) {
 	var x = (position === undefined) ? this.position : position;
 	var y = this.ease(x);
 	Q.handle(this.callback, this, [x, y, this.params]);
-	this.onRender.handle.call(this, x, y, this.params);
+	this.onRefresh.handle.call(this, x, y, this.params);
 };
 
 /**
@@ -11792,8 +11961,8 @@ Q.info = {
 	},
 	isAndroid: function (maxWidth, maxHeight, minVersion, maxVersion) {
 		return Q.info.platform === 'android'
-			&& (maxWidth == undefined || maxWidth >= Q.Pointer.windowWidth())
-			&& (maxHeight == undefined || maxHeight >= Q.Pointer.windowHeight())	
+			&& (maxWidth == undefined || maxWidth >= Q.Visual.windowWidth())
+			&& (maxHeight == undefined || maxHeight >= Q.Visual.windowHeight())	
 			&& (minVersion == undefined || minVersion <= Q.info.browser.mainVersion)
 			&& (maxVersion == undefined || maxVersion >= Q.info.browser.mainVersion);
 	},
@@ -11849,7 +12018,7 @@ Q.Page.beforeUnload('').set(function () {
 }, 'Q');
 
 function _touchScrollingHandler(event) {
-	if (!Q.isEmpty(Q.Pointer.preventRubberBand.suspend)) {
+	if (!Q.isEmpty(Q.Visual.preventRubberBand.suspend)) {
 		return false;
 	}
     var p = event.target;
@@ -11861,22 +12030,22 @@ function _touchScrollingHandler(event) {
 		}
 		var overflow = p.computedStyle().overflow;
 		var hiddenWidth = p.scrollWidth - Math.min(
-			p.offsetWidth, Q.Pointer.windowWidth()
+			p.offsetWidth, Q.Visual.windowWidth()
 		);
 		var q = (p.tagName === 'HTML')
 			? document.body
 			: p;
 		var hiddenHeight = q.scrollHeight - Math.min(
-			p.offsetHeight, Q.Pointer.windowHeight()
+			p.offsetHeight, Q.Visual.windowHeight()
 		);
 		var s = (['hidden', 'visible'].indexOf(overflow) < 0);
 		if ((s || p.tagName === 'HTML')
 		&& hiddenHeight > 0
 		&& Q.Pointer.movement) {
 			if (_touchScrollingHandler.options.direction != 'horizontal'
-			&& (Q.Pointer.movement.positions.length == 1)
+			&& (Q.Visual.movement.positions.length == 1)
 			&& (pos = Q.Pointer.movement.positions[0])) {
-				var sy = Q.Pointer.getY(event) - Q.Pointer.scrollTop();
+				var sy = Q.Pointer.getY(event) - Q.Visual.scrollTop();
 				if ((sy > pos.y && q.scrollTop == 0)
 				|| (sy < pos.y && q.scrollTop >= hiddenHeight)) {
 					continue;
@@ -11890,7 +12059,7 @@ function _touchScrollingHandler(event) {
 			if (_touchScrollingHandler.options.direction != 'vertical'
 			&& (Q.Pointer.movement.positions.length == 1)
 			&& (pos = Q.Pointer.movement.positions[0])) {
-				var sx = Q.Pointer.getX(event) - Q.Pointer.scrollLeft();
+				var sx = Q.Pointer.getX(event) - Q.Visual.scrollLeft();
 				if ((sx > pos.x && q.scrollLeft == 0)
 				|| (sx < pos.x && q.scrollLeft >= hiddenWidth)) {
 					continue;
@@ -11958,15 +12127,15 @@ function _setLayoutInterval(e) {
 	|| !_setLayoutInterval.options.milliseconds) {
 		return;
 	}
-	var w = Q.Pointer.windowWidth();
-	var h = Q.Pointer.windowHeight();
+	var w = Q.Visual.windowWidth();
+	var h = Q.Visual.windowHeight();
 	var interval = setInterval(function () {
 		var ae = document.activeElement;
 		if (ae && ['INPUT', 'TEXTAREA', 'SELECT'].indexOf(ae.tagName.toUpperCase()) >= 0) {
 			return;
 		}
-		var w2 = Q.Pointer.windowWidth();
-		var h2 = Q.Pointer.windowHeight();
+		var w2 = Q.Visual.windowWidth();
+		var h2 = Q.Visual.windowHeight();
 		if (w !== w2 || h !== h2) {
 			Q.layout();
 		}
@@ -12017,9 +12186,9 @@ function _Q_Pointer_start_end_handler (e) {
 
 /**
  * Methods for working with pointer and touchscreen events
- * @class Q.Pointer
+ * @class Q.Visual
  */
-Q.Pointer = {
+Q.Visual = Q.Pointer = {
 	/**
 	 * Intelligent pointer start event that also works on touchscreens
 	 * @static
@@ -12029,7 +12198,7 @@ Q.Pointer = {
 		params.eventName = Q.info.useTouchEvents ? 'touchstart' : 'mousedown';
 		return function (e) {
 			Q.Pointer.movedTooMuchForClickLastTime = false;
-			if (Q.Pointer.recentlyScrolled) {
+			if (Q.Visual.recentlyScrolled) {
 				Q.Pointer.startedWhileRecentlyScrolled = true;
 			} else {
 				Q.Pointer.canceledClick = false;
@@ -12322,11 +12491,11 @@ Q.Pointer = {
 	 */
 	boundingRect: function (container, omitClasses, omitOverflow) {
 		var rect = {left: 0, top: 0};
-		rect.right = Q.Pointer.windowWidth();
-		rect.bottom = Q.Pointer.windowHeight();
+		rect.right = Q.Visual.windowWidth();
+		rect.bottom = Q.Visual.windowHeight();
 		container = container || document.body;
-		var sl = Q.Pointer.scrollLeft();
-		var st = Q.Pointer.scrollTop();
+		var sl = Q.Visual.scrollLeft();
+		var st = Q.Visual.scrollTop();
 		Q.each(container.children || container.childNodes, function () {
 			if (this.hasClass && omitClasses) {
 				for (var i=0, l=omitClasses.length; i<l; ++i) {
@@ -12365,25 +12534,72 @@ Q.Pointer = {
 		return rect;
 	},
 	/**
-	 * Sets an observer to wait for an element become visible
+	 * Sets an observer to wait for an element become visible.
 	 * @static
 	 * @method waitUntilVisible
-	 * @param {Element} element the element to watch
-	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer)
+	 * @param {Element|Q.Tool} element the element to watch
+	 * @param {Function} callback The function called by the IntersectionObserver, takes (entries, observer).
+	 *   Only called when entries[0].isIntersecting is true.
 	 * @param {Object|Number} options The options to pass to the observer
 	 * @return {IntersectionObserver}
 	 */
 	waitUntilVisible: function (element, callback, options) {
-		var o = Q.extend({}, Q.Pointer.waitUntilVisible, options);
+		var tool;
+		if ((Q.typeOf(element) === 'Q.Tool')) {
+			tool = element;
+			element = tool.element;
+		}
+		var o = Q.extend({}, Q.Visual.waitUntilVisible, options);
 		var observer = new IntersectionObserver(function (entries, observer) {
 			if (entries[0] && entries[0].isIntersecting) {
+				callback && callback.apply(this, arguments);
 				observer.unobserve(element);
 			}
-			callback && callback.apply(this, arguments);
 		}, o);
-		var target = element;
 		observer.observe(element);
+		if (tool) {
+			tool.Q.beforeRemove.set(function () {
+				observer.unobserve(element);
+			});
+		}
 		return observer;
+	},
+	/**
+	 * Works together with Q.Visual.animationStarted
+	 * Calls the callback after all current animations have ended.
+	 * @static
+	 * @method waitUntilAnimationsEnd
+	 * @param {Function} callback The callback may synchronously call 
+	 *   animationStarted(), which will delay any subsequent callbacks,
+	 *   so any such callbacks would start animations sequentially.
+	 * @param {Array} params The parameters to send to the callback, if any
+	 */
+	waitUntilAnimationsEnd: function (callback, params) {
+		setTimeout(_executeIfAnimationsEnded, 0);
+		function _executeIfAnimationsEnded() {
+			var a = Q.Visual.animationStarted;
+			if ((a.animationsEnding || 0) < Date.now()) {
+				Q.handle(callback, Q.Visual, params);
+			} else {
+				setTimeout(_executeIfAnimationsEnded, a.animationsEnding - Date.now);
+			}
+		}
+	},
+	/**
+	 * Just call this to indicate that a transient animation has started,
+	 * in case someone wants to wait for all transient animations to end
+	 * they will call waitUntilAnimationsEnd()
+	 * @param {Number} duration in milliseconds
+	 */
+	animationStarted: function (duration) {
+		var a = Q.Visual.animationStarted;
+		a.animationsEnding = a.animationsEnding || 0;
+		if (a.animationsEnding < Date.now()) {
+			a.animationsStarted = Date.now();
+			a.animationsEnding = a.animationsStarted + duration;
+		} else {
+			a.animationsEnding += duration;
+		}
 	},
 	/**
 	 * Returns the x coordinate of an event relative to the document
@@ -12402,7 +12618,7 @@ Q.Pointer = {
 				? oe.changedTouches[touchIndex]
 				: oe
 			);
-		return Math.max(0, ('pageX' in oe) ? oe.pageX : oe.clientX + Q.Pointer.scrollLeft());
+		return Math.max(0, ('pageX' in oe) ? oe.pageX : oe.clientX + Q.Visual.scrollLeft());
 	},
 	/**
 	 * Returns the y coordinate of an event relative to the document
@@ -12421,7 +12637,7 @@ Q.Pointer = {
 				? oe.changedTouches[touchIndex]
 				: oe
 			);
-		return Math.max(0, ('pageY' in oe) ? oe.pageY : oe.clientY + Q.Pointer.scrollTop());
+		return Math.max(0, ('pageY' in oe) ? oe.pageY : oe.clientY + Q.Visual.scrollTop());
 	},
 	/**
 	 * Returns the number of touch points of an event
@@ -12432,7 +12648,7 @@ Q.Pointer = {
 	 */
 	touchCount: function (e) {
 		var oe = e.originalEvent || e;
- 		return oe.touches ? oe.touches.length : (Q.Pointer.which(e) > 0 ? 1 : 0);
+ 		return oe.touches ? oe.touches.length : (Q.Visual.which(e) > 0 ? 1 : 0);
 	},
 	/**
 	 * Returns which button was pressed - Q.Pointer.which.{LEFT|MIDDLE|RIGHT|NONE}
@@ -12515,7 +12731,7 @@ Q.Pointer = {
 	 * @param {String} [options.height="200px"]
 	 * @param {Integer} [options.zIndex=99999]
 	 * @param {Boolean|Object} [options.waitUntilVisible=false] Wait until it's visible, then show hint right away. You can also pass an options here for Q.Pointer.waitUntilVisible(). Typically used together with dontStopBeforeShown.
-	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Pointer.stopHints stop this hint before it's shown.
+	 * @param {Boolean} [options.dontStopBeforeShown=false] Don't let Q.Visual.stopHints stop this hint before it's shown.
 	 * @param {boolean} [options.dontRemove=false] Pass true to keep current hints displayed
 	 * @param {boolean} [options.neverRemove=false] Pass true to keep current hints displayed even after user interaction.
 	 * @param {boolean} [options.tooltip] Can be used to show a tooltip with some html
@@ -12542,9 +12758,9 @@ Q.Pointer = {
 	 */
 	hint: function (targets, options) {
 
-		options = Q.extend({}, Q.Pointer.hint.options, 10, options);
+		options = Q.extend({}, Q.Visual.hint.options, 10, options);
 		if (options.waitUntilVisible) {
-			return Q.Pointer.waitUntilVisible(targets[0], function (entries, observer) {
+			return Q.Visual.waitUntilVisible(targets[0], function (entries, observer) {
 				if (entries[0].isIntersecting) {
 					var sp = entries[0].target.scrollingParent();
 					var st = sp.scrollTop;
@@ -12554,7 +12770,7 @@ Q.Pointer = {
 							clearInterval(ival);
 							options.waitUntilVisible = false;
 							options.dontStopBeforeShown = true;
-							Q.Pointer.hint(targets, options);
+							Q.Visual.hint(targets, options);
 						}
 						st = sp.scrollTop;
 					}, 300);
@@ -12568,8 +12784,8 @@ Q.Pointer = {
 		var audioEvent = options.audioEvent || new Q.Event();
 		var hintEvent = imageEvent.and(audioEvent);
 		if (!options.dontRemove && !options.waitForEvents) {
-			for (i=0, l=Q.Pointer.hint.imgs.length; i<l; ++i) {
-				img = Q.Pointer.hint.imgs[i];
+			for (i=0, l=Q.Visual.hint.imgs.length; i<l; ++i) {
+				img = Q.Visual.hint.imgs[i];
 				if (img.parentNode) {
 					img.parentNode.removeChild(img);
 				}
@@ -12577,7 +12793,7 @@ Q.Pointer = {
 					img.tooltip.parentNode.removeChild(img.tooltip);
 				}
 			}
-			Q.Pointer.hint.imgs = [];
+			Q.Visual.hint.imgs = [];
 		}
 		img1 = document.createElement('img');
 		img1.setAttribute('src', Q.url(options.src));
@@ -12598,7 +12814,7 @@ Q.Pointer = {
 		img1.hide = options.hide;
 		img1.dontStopBeforeShown = options.dontStopBeforeShown;
         setTimeout(function(){
-            Q.Pointer.hint.imgs.push(img1);
+            Q.Visual.hint.imgs.push(img1);
             img1.style.visibility = 'hidden';
             document.body.appendChild(img1);
             hintEvent.add(Q.once(function _hintReady() {
@@ -12624,7 +12840,7 @@ Q.Pointer = {
                             img2.target = targets[i];
                             img2.timeout = false;
                             imgs.push(img2);
-                            Q.Pointer.hint.imgs.push(img2);
+                            Q.Visual.hint.imgs.push(img2);
                             document.body.appendChild(img2);
                         }
                     } else {
@@ -12651,8 +12867,8 @@ Q.Pointer = {
                             }
                             var offset = target.getBoundingClientRect();
                             point = {
-                                x: Q.Pointer.positionLeft() + offset.left + target.offsetWidth / 2,
-                                y: Q.Pointer.positionTop() + offset.top + target.offsetHeight / 2
+                                x: Q.Visual.positionLeft() + offset.left + target.offsetWidth / 2,
+                                y: Q.Visual.positionTop() + offset.top + target.offsetHeight / 2
                             };
                         } else {
                             point = target;
@@ -12739,14 +12955,14 @@ Q.Pointer = {
                     });
                 }, options.show.delay);
             }));
-            if (!Q.Pointer.hint.addedListeners) {
-                Q.Pointer.stopHintsIgnore = true;
-                Q.addEventListener(window, Q.Pointer.start, Q.Pointer.stopHints, false, true);
-                Q.addEventListener(window, 'keydown', Q.Pointer.stopHints, false, true);
-                Q.addEventListener(document, 'scroll', Q.Pointer.stopHints, false, true);
-                Q.Pointer.hint.addedListeners = true;
+            if (!Q.Visual.hint.addedListeners) {
+                Q.Visual.stopHintsIgnore = true;
+                Q.addEventListener(window, Q.Pointer.start, Q.Visual.stopHints, false, true);
+                Q.addEventListener(window, 'keydown', Q.Visual.stopHints, false, true);
+                Q.addEventListener(document, 'scroll', Q.Visual.stopHints, false, true);
+                Q.Visual.hint.addedListeners = true;
                 setTimeout(function () {
-                    delete Q.Pointer.stopHintsIgnore;
+                    delete Q.Visual.stopHintsIgnore;
                 }, 0);
             }
             if (options.waitForEvents) {
@@ -12784,17 +13000,17 @@ Q.Pointer = {
 	 * @param {HTMLElement} [container] If provided, only hints for elements in this container are stopped.
 	 */
 	stopHints: function (container) {
-		if (Q.Pointer.stopHintsIgnore) {
+		if (Q.Visual.stopHintsIgnore) {
 			return; // workaround for iOS Safari
 		}
-		var imgs = Q.Pointer.hint.imgs;
+		var imgs = Q.Visual.hint.imgs;
 		var imgs2 = [];
 		Q.each(imgs, function (i, img) {
 			if (_stopHint(img, container)) {
 				imgs2.push(img);
 			}
 		});
-		Q.Pointer.hint.imgs = imgs2;
+		Q.Visual.hint.imgs = imgs2;
 	},
 	/**
 	 * Start showing touchlabels on elements with data-touchlabel="Label text"
@@ -12819,7 +13035,7 @@ Q.Pointer = {
 		div.addClass('Q_touchlabel');
 		document.body.appendChild(div);
 		Q.addEventListener(element, 'touchstart touchmove mousemove', function (e) {
-			if (Q.info.isTouchscreen && !Q.Pointer.isPressed(e)) {
+			if (Q.info.isTouchscreen && !Q.Visual.isPressed(e)) {
 				return;
 			}
 			var x = Q.Pointer.getX(e);
@@ -12897,7 +13113,7 @@ Q.Pointer = {
 	 * @param {Q.Event} [event] Some mouse or touch event from the DOM
 	 * @param {Object} [extraInfo] Extra info to pass to onCancelClick
 	 * @param {Boolean} [msUntilStopCancelClick] Pass a number here to wait
-	 *   some milliseconds until setting Q.Pointer.canceledClick = false .
+	 *   some milliseconds until setting Q.Visual.canceledClick = false .
 	 * @return {boolean}
 	 */
 	cancelClick: function (skipMask, event, extraInfo, msUntilStopCancelClick) {
@@ -12928,8 +13144,8 @@ Q.Pointer = {
 	 */
 	elementFromPoint: function (pageX, pageY) {
 		return document.elementFromPoint(
-			pageX - Q.Pointer.scrollLeft(),
-			pageY - Q.Pointer.scrollTop()
+			pageX - Q.Visual.scrollLeft(),
+			pageY - Q.Visual.scrollTop()
 		);
 	},
 	/**
@@ -13040,10 +13256,10 @@ Q.Pointer = {
 };
 
 var _cancelClick_counter = 0;
-Q.Pointer.preventRubberBand.suspend = {};
+Q.Visual.preventRubberBand.suspend = {};
 
 var _setRecentlyScrolledFalse = Q.debounce(function () {
-	Q.Pointer.recentlyScrolled = false;
+	Q.Visual.recentlyScrolled = false;
 }, 300);
 
 function _handleScroll(event) {
@@ -13059,7 +13275,7 @@ function _handleScroll(event) {
 		// no need to cancel click here, user will have to lift their fingers to click
 		return false;
 	}
-	Q.Pointer.recentlyScrolled = true;
+	Q.Visual.recentlyScrolled = true;
 	setTimeout(_setRecentlyScrolledFalse, 100);
 	var shouldStopCancelClick = !Q.Pointer.movedTooMuchForClickLastTime
 		&& !Q.Pointer.startedWhileRecentlyScrolled;
@@ -13110,11 +13326,11 @@ Q.Pointer.which.RIGHT = 3;
 Q.Pointer.touchclick.duration = 400;
 
 Q.Pointer.latest = {
-	which: Q.Pointer.which.NONE,
+	which: Q.Visual.which.NONE,
 	touches: []
 };
 
-Q.Pointer.waitUntilVisible.options = {
+Q.Visual.waitUntilVisible.options = {
 	root: null,
 	rootMargin: '0px',
 	threshold: 1.0
@@ -13130,7 +13346,7 @@ Q.addEventListener(document.body, 'touchstart mousedown', function (e) {
 
 Q.addEventListener(document.body, 'touchend touchcancel mouseup', function (e) {
 	if (e.type === 'mouseup') {
-		Q.Pointer.latest.which = Q.Pointer.which(e);
+		Q.Pointer.latest.which = Q.Visual.which(e);
 	} else {
 		Q.Pointer.latest.touches = e.touches;
 	}
@@ -13156,7 +13372,7 @@ Q.Pointer.hint.options = {
 		ease: Q.Animation.ease.linear
 	}
 };
-Q.Pointer.hint.imgs = [];
+Q.Visual.hint.imgs = [];
 
 function _Q_restoreScrolling() {
 	if (!Q.info || !Q.info.isTouchscreen) return false;
@@ -13169,8 +13385,8 @@ function _Q_restoreScrolling() {
 			focused = true;
 		}
 		if (focused) return false;
-		lastScrollTop = Q.Pointer.scrollTop();
-		lastScrollLeft = Q.Pointer.scrollLeft();
+		lastScrollTop = Q.Visual.scrollTop();
+		lastScrollLeft = Q.Visual.scrollLeft();
 	}, 300);
 	Q.addEventListener(document.body, Q.Pointer.focusin, function _Q_body_focusin() {
 		focused = true;
@@ -13197,8 +13413,8 @@ function _Q_PointerStartHandler(e) {
 	Q.addEventListener(window, Q.Pointer.cancel, _onPointerEndHandler, false, true);
 	Q.addEventListener(window, Q.Pointer.click, _onPointerClickHandler, false, true);
 	Q.handle(Q.Pointer.onStarted, this, arguments);
-	var screenX = Q.Pointer.getX(e) - Q.Pointer.scrollLeft();
-	var screenY = Q.Pointer.getY(e) - Q.Pointer.scrollTop();
+	var screenX = Q.Pointer.getX(e) - Q.Visual.scrollLeft();
+	var screenY = Q.Pointer.getY(e) - Q.Visual.scrollTop();
 	_pos = { // first movement
 		x: screenX,
 		y: screenY
@@ -13302,7 +13518,7 @@ function _onPointerMoveHandler(evt) { // see http://stackoverflow.com/a/2553717/
 /**
  * Removes event listeners that are activated when the pointer has started.
  * This method is called automatically when the mouse or fingers are released
- * on the window. However, in the code that stops propagation of the Q.Pointer.end
+ * on the window. However, in the code that stops propagation of the Q.Visual.end
  * event (mouseup or touchend), you'd have to call this method manually.
  * @method ended
  * @static
@@ -13331,9 +13547,9 @@ function _onPointerClickHandler(e) {
 }
 
 function _onPointerBlurHandler() {
-	Q.Pointer.blurring = true;
+	Q.Visual.blurring = true;
 	setTimeout(function () {
-		Q.Pointer.blurring = false;
+		Q.Visual.blurring = false;
 	}, 500); // for touchscreens that retry clicks after keyboard disappears
 };
 
@@ -14364,8 +14580,8 @@ Q.Masks = {
 			if (!mask.counter) continue;
 			var html = document.documentElement;
 			var offset = $('body').offset();
-			var scrollLeft = Q.Pointer.scrollLeft() - offset.left;
-			var scrollTop = Q.Pointer.scrollTop() - offset.top;
+			var scrollLeft = Q.Visual.scrollLeft() - offset.left;
+			var scrollTop = Q.Visual.scrollTop() - offset.top;
 			var ms = mask.element.style;
 			var rect = (mask.shouldCover || html).getBoundingClientRect();
 			mask.rect = {
@@ -14375,7 +14591,7 @@ Q.Masks = {
 				'bottom': rect.bottom
 			};
 			if (!mask.shouldCover) {
-				//mask.rect = Q.Pointer.boundingRect(document.body, ['Q_mask']);
+				//mask.rect = Q.Visual.boundingRect(document.body, ['Q_mask']);
 			}
 			if (mask.rect.top < 0) {
 				mask.rect.top = 0;

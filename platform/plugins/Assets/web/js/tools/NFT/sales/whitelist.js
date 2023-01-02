@@ -73,7 +73,7 @@ Q.Tool.define("Assets/NFT/sales/whitelist", function (options) {
                 //TestParam: "Lorem ipsum dolor sit amet",
             },
             function(err, html){
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);;
                 Q.activate(tool.element, function(){});
                 var state = tool.state;
 

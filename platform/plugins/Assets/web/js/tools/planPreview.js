@@ -81,7 +81,7 @@ Q.Tool.define("Assets/plan/preview", ["Streams/preview"], function(options, prev
 			period: stream.getAttribute('period')
 		}, function (err, html) {
 			if (err) return;
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);
 
 			tool.preview.icon($("img.Streams_preview_icon", tool.element)[0], null, {
 				overrideShowSize: {

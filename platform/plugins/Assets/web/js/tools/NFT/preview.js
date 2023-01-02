@@ -381,7 +381,7 @@
             }, state.templates.view.fields);
 
             Q.Template.render(templateName, templateFields, function (err, html) {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 $toolElement.activate();
 
@@ -481,7 +481,7 @@
             }, state.templates.view.fields);
 
             Q.Template.render(templateName, templateFields, (err, html) => {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 $(".Assets_NFT_author", tool.element).addClass("Q_error").html(state.fallback);
                 $(".video-container", tool.element).addClass("fallback").html(JSON.stringify({
@@ -532,7 +532,7 @@
             }, state.templates.view.fields);
 
             Q.Template.render(templateName, templateFields, (err, html) => {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 $toolElement.activate();
 
@@ -726,7 +726,7 @@
             previewState.editable = true; // we need to upload icon
 
             Q.Template.render('Assets/NFT/composer', {}, function(err, html) {
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 // get or create composer stream
                 Q.req("Assets/NFT", "newItem", function (err, response) {
@@ -1085,7 +1085,7 @@
 
                                 Q.Tool.remove(tool.element, true, false);
                                 tool.element.className = "";
-                                tool.element.innerHTML = "";
+                                Q.replace(tool.element, "");
 
                                 $toolElement.tool("Assets/NFT/preview", {
                                     tokenId: tokenId,

@@ -25,7 +25,7 @@ if (!defined('Q_DIR')) {
 		APP_DIR, 'local', 'paths.json'
 	)));
 	if (!file_exists($paths_filename)) {
-		die("$header\nGo to $basename/scripts/Q directory and run php configure.php");
+		die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n");
 	}
 	$paths = json_decode(file_get_contents($paths_filename), true);
 	define('Q_DIR', isset($paths['platform']) ? $paths['platform'] : '');

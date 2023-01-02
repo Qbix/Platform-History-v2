@@ -9,7 +9,7 @@
      * @param {Q.Event} [options.onWebRTCRoomCreated]
      * @param {Q.Event} [options.onWebrtcControlsCreated]
      * @param {Q.Event} [options.onWebRTCRoomEnded]
-     * @param {Q.Event} [options.onRender] called when tool element completely rendered
+     * @param {Q.Event} [options.onRefresh] called when tool element completely rendered
      */
     Q.Tool.define("Streams/webrtc/preview/call", ["Streams/webrtc/preview"], function _Streams_webrtc_preview (options, parentPreviewTool) {
             console.log('WebRTC call preview', parentPreviewTool);
@@ -76,7 +76,7 @@
             onWebRTCRoomCreated: new Q.Event(),
             onWebrtcControlsCreated: new Q.Event(),
             onWebRTCRoomEnded: new Q.Event(),
-            onRender: new Q.Event(),
+            onRefresh: new Q.Event(),
             onRoomSwitch: new Q.Event()
         },
 
@@ -105,7 +105,7 @@
                 if (stream.getAttribute("endTime")) {
                     var durationArr = Q.displayDuration(parseInt(stream.getAttribute("endTime")) - parseInt(stream.getAttribute("startTime"))).split(":");
                     for (var i=durationArr.length-1; i>=0; i--) {
-                        duration = durationArr[i] + " " + (["sec", "min", "h"][durationArr.length - (i + 1)]) + " " + duration;
+                        duration = durationArr[i] + " " + (["s", "m", "h"][durationArr.length - (i + 1)]) + " " + duration;
                     }
                     preamble = Q.getObject('webrtc.preview.MeetingEnded', tool.text) || 'Meeting ended';
                 }
@@ -136,13 +136,13 @@
                             console.error(err);
                             return;
                         }
-                        tool.element.innerHTML = html;
+                        Q.replace(tool.element, html);;
                         Q.activate(tool, function () {
                             // load the icon
                             var jq = tool.$('img.Streams_preview_icon');
                             tool.preview.icon(jq[0], null);
 
-                            Q.handle(state.onRender, tool);
+                            Q.handle(state.onRefresh, tool);
                         });
                     },
                     state.templates.view

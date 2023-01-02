@@ -594,7 +594,7 @@ Q.Tool.define("Q/video", function (options) {
 			poster: state.image ? 'poster="' + Q.url(state.image) + '"' : '',
 			timeOut: state.adsTimeOut
 		}, function (err, html) {
-			tool.element.innerHTML = html;
+			Q.replace(tool.element, html);;
 
 			var onPlay = Q.throttle(function () {
 				var position = state.currentPosition || tool.getCurrentPosition();

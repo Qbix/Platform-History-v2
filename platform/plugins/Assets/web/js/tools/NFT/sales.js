@@ -188,7 +188,7 @@ Q.Tool.define("Assets/NFT/sales", function (options) {
             },
             function(err, html){
                 
-                tool.element.innerHTML = html;
+                Q.replace(tool.element, html);
 
                 var state = tool.state;
                 

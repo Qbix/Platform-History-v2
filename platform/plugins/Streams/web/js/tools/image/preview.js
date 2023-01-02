@@ -130,7 +130,7 @@ Q.Tool.define("Streams/image/preview", "Streams/preview", function(options, prev
 			fields,
 			function (err, html) {
 				if (err) return;
-				tool.element.innerHTML = html;
+				Q.replace(tool.element, html);;
 				var $img = tool.$('.Streams_image_preview_icon');
 				var src = tool.element.getAttribute('data-icon-src');
 				if (src) {

@@ -45,7 +45,7 @@
  */
 Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 	var $this = $(this);
-	$this.data('observers', []);
+	$this.state('Q/clickable').observers = [];
 
 	// if id empty, set random unique id
 	if (!$this.attr("id")) {
@@ -74,7 +74,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 			}
 			var observer = Q.Pointer.waitUntilVisible($this[0], _clickify);
 			observer.observedElement = $this[0];
-			$this.data('observers').push(observer);
+			$this.state('Q/clickable').observers.push(observer);
 			return;
 		}
 
@@ -526,7 +526,7 @@ Q.Tool.jQuery('Q/clickable', function _Q_clickable(o) {
 		this[0].restoreSelections();
 		Q.Pointer.onEnded.remove(state.onEndedKey);
 		$container.remove();
-		Q.each($this.data('observers'), function () {
+		Q.each(this.state('Q/clickable').observers, function () {
 			this.unobserve(this.observedElement);
 		});
 	}

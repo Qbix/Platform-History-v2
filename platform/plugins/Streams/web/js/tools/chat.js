@@ -36,7 +36,7 @@
  *   Each function will get callback as argument. Need to call this callback when ready to go further.
  *   @param {Array} [option.allowedRelatedStreams] Array of related streams types allowed to display as chat message.
  *   @param {Q.Event} [options.onRefresh] Event for when an the chat has been updated
- *   @param {Q.Event} [options.onRender] Event when tool element rendered
+ *   @param {Q.Event} [options.onRefresh] Event when tool element rendered
  *   @param {Q.Event} [options.onError] Event for when an error occurs, and the error is passed
  *   @param {Q.Event} [options.onClose] Event for when chat stream closed
  *   @param {Q.Event} [options.onMessageRender] Event for when message rendered
@@ -77,9 +77,15 @@ Q.Tool.define('Streams/chat', function(options) {
 
 	var pipe = new Q.Pipe(["text", "styles"], function () {
 		tool.refresh(function () {
-			if (state.scrollToBottom) {
-				tool.scrollToBottom();
-			}
+			Q.Visual.waitUntilVisible(tool, function () {
+				Q.activate(tool.element, function () {
+					// all message bubbles should have stabilized
+					// their height at this point
+					Q.Visual.waitUntilAnimationsEnd(function () {
+						tool.scrollToBottom(null, true);
+					});
+				});
+			});
 		});
 		Q.Streams.refresh.beforeRequest.add(function () {
 			if (state.stream && state.stream.refresh) {
@@ -167,7 +173,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		// remove tool when chat stream closed
 		this.remove();
 	}),
-	onRender: new Q.Event(),
+	onRefresh: new Q.Event(),
 	onMessageRender: new Q.Event(),
 	onContextualCreated: new Q.Event(),
 	beforePost: new Q.Event(),
@@ -341,7 +347,7 @@ Q.Tool.define('Streams/chat', function(options) {
 							.val(data.params[0]); // restore any draft
 						}
 					}
-					Q.handle(state.onRender, tool);
+					Q.handle(state.onRefresh, tool);
 				});
 
 				Q.addScript("{{Q}}/js/contextual.js", function () {
@@ -452,6 +458,7 @@ Q.Tool.define('Streams/chat', function(options) {
 				function(error, html){
 					if (error) { return error; }
 					tool.$('.Streams_chat_messages').html(html, true);
+					Q.handle(callback, tool, [[], []]);
 				},
 				state.templates.Streams_chat_noMessages
 			);
@@ -1145,7 +1152,6 @@ Q.Tool.define('Streams/chat', function(options) {
 			}
 
 			Q.handle(callback, message, [Q.Tool.setUpElementHTML($(Q.Tool.setUpElementHTML("div", "Streams/preview", fields))[0], previewToolName, fields)]);
-			tool.scrollToBottom();
 		});
 	},
 	getOrdinal: function(action, ordinal){
@@ -1191,24 +1197,73 @@ Q.Tool.define('Streams/chat', function(options) {
 		return null;
 	},
 
-	scrollToBottom: function(callback) {
+	scrollToBottom: function _scrollToBottom(callback, stayAtBottomUntilUserScroll) {
+		var stopScrollingToBottom;
+		var tool = this;
 		var state = this.state;
-		var $scm = this.$('.Streams_chat_messages');
-		var overflow = $scm.css('overflow-y');
-		if (['scroll', 'auto'].indexOf(overflow) >= 0) {
-			state.$scrolling = $scm;
+		var $scrolling = null;
+		_doScrollToBottom(false);
+		function _doScrollToBottom (recursive) {
+			if (stopScrollingToBottom
+			|| !$(tool.element).is(':visible')) {
+				return;
+			}
+			var $scm = tool.$('.Streams_chat_messages');
+			var overflow = $scm.css('overflow-y');
+			if (!$scm.children().not('.Streams_chat_more').length) {
+				return false; // no messages to scroll yet
+			}
+			if (['scroll', 'auto'].indexOf(overflow) >= 0
+			&& $scm[0].clientHeight
+			&& $scm[0].clientHeight < $scm[0].scrollHeight) {
+				$scrolling = $scm;
+			}
+			if (!$scrolling || !$scrolling.length) {
+				$scrolling = state.$scrolling || $($scm[0].scrollingParent(true));
+				if ($scrolling[0] === document.documentElement) {
+					$scrolling = null;
+				}
+			}
+			if (!$scrolling || !$scrolling.length) {
+				_stayAtBottom();
+				return null;
+			}
+			var s = $scrolling[0];
+			s.addClass('Q_forceDisplayBlock');
+			var scrollHeight = s.scrollHeight;
+			s.removeClass('Q_forceDisplayBlock');
+			if (recursive) {
+				s.scrollTop = scrollHeight;
+				_stayAtBottom();
+			} else {
+				$scrolling.animate({
+					scrollTop: scrollHeight
+				}, state.animations.duration, function () {
+					stopScrollingToBottom = false;
+					_stayAtBottom();
+					Q.handle(callback, null, [s]);
+				});
+			}
+			return $scrolling;
 		}
-		if (!state.$scrolling) {
-			state.$scrolling = $($scm[0].scrollingParent());
-		}
-		if (state.$scrolling.length) {
-			var $s = state.$scrolling[0];
-			$s.addClass('Q_forceDisplayBlock');
-			var scrollHeight = $s.scrollHeight;
-			$s.removeClass('Q_forceDisplayBlock');
-			state.$scrolling.animate({
-				scrollTop: scrollHeight
-			}, this.state.animations.duration, callback);
+		function _stayAtBottom() {
+			if (!stayAtBottomUntilUserScroll) {
+				return;
+			}
+			if (!stopScrollingToBottom) {
+				setTimeout(function () {
+					_doScrollToBottom(true);
+				}, 300);
+			}
+			$scrolling.off('scroll.Streams_chat')
+			.on('scroll.Streams_chat', function () {
+				var t = event.target;
+				if (t.scrollTop + 1 < t.scrollHeight - t.clientHeight) {
+					// user started scrolling manually
+					stopScrollingToBottom = true;
+					$scrolling.off('scroll.Streams_chat');
+				}
+			});
 		}
 	},
 
@@ -1258,33 +1313,29 @@ Q.Tool.define('Streams/chat', function(options) {
 				tool.renderMessages(
 					tool.prepareMessages(messages),
 					function (items) {
+						tool.$('.Streams_chat_noMessages').remove();
+						var $scm = tool.$('.Streams_chat_messages');
 						Q.each(items, function (key, $html) {
-							tool.$('.Streams_chat_noMessages').remove();
-							var $scm = tool.$('.Streams_chat_messages');
-							$html.appendTo($scm).activate();
-							$scm.off('scroll.Streams_chat')
-							.on('scroll.Streams_chat', function () {
-								state.lastScrollTop = $scm.scrollTop();
-							});
+							$html.appendTo($scm);
 						});
+						$scm.off('scroll.Streams_chat')
+						.on('scroll.Streams_chat', function () {
+							state.lastScrollTop = $scm.scrollTop();
+						});
+						tool.processDOM();
+						tool.addEvents();
+						Q.handle(callback, tool);
+						Q.handle(state.onRefresh, tool);
+		
+						// if startWebRTC is true, start webrtc
+						if (state.startWebRTC
+						|| (location.href.indexOf(state.stream.url() >= 0)
+							&& location.href.indexOf('startWebRTC') >= 0
+						)) {
+							tool.startWebRTC();
+						}
 					}
 				);
-
-				Q.handle(callback, tool);
-				tool.processDOM();
-				tool.addEvents();
-
-				Q.handle(state.onRefresh, tool);
-
-				tool.scrollToBottom();
-
-				// if startWebRTC is true, start webrtc
-				if (state.startWebRTC
-				|| (location.href.indexOf(state.stream.url() >= 0)
-					&& location.href.indexOf('startWebRTC') >= 0
-				)) {
-					tool.startWebRTC();
-				}
 			});
 
 		}

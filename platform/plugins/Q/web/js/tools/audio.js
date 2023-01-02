@@ -58,7 +58,7 @@ Q.Tool.define("Q/audio", function (options) {
 					url: url
 				}, function (err, html) {
 					if (showPlayer) {
-						tool.element.innerHTML = html;
+						Q.replace(tool.element, html);;
 
 						var $iframe = tool.$("iframe");
 						$iframe.on("load", function () {
