@@ -575,22 +575,25 @@
                     var roomIsSwitching = e.roomIsSwitching;
                     if(!roomIsSwitching) {
                         console.log('end live streamings')
-                        if(!roomIsSwitching && tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
+                        if(!roomIsSwitching && tool.livestreamingEditorTool && tool.livestreamingEditorTool.livestreamingRtmpSenderTool && tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
                             tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.endStreaming();
                         }
-
-                        tool.livestreamingEditorTool.livestreamingCanvasComposerTool.canvasComposer.stopStreamCapture();                        
+                        if(tool.livestreamingEditorTool && tool.livestreamingEditorTool.livestreamingCanvasComposerTool) {
+                            tool.livestreamingEditorTool.livestreamingCanvasComposerTool.canvasComposer.stopStreamCapture();         
+                        }               
                     }
                 });
 
                 tool.WebRTCLib.event.on('beforeSwitchRoom', function (e) {
-                    tool.livestreamingEditorTool.state.webrtcSignalingLib = e.newWebrtcSignalingLibInstance;
-                    tool.livestreamingEditorTool.refresh();
+                    if(tool.livestreamingEditorTool) {
+                        tool.livestreamingEditorTool.state.webrtcSignalingLib = e.newWebrtcSignalingLibInstance;
+                        tool.livestreamingEditorTool.refresh();
+                    }
                 });
 
                 tool.WebRTCLib.event.on('dataChannelOpened', function (e) {
                     tool.log('dataChannelOpened', e)
-                    if(tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
+                    if(tool.livestreamingEditorTool && tool.livestreamingEditorTool.livestreamingRtmpSenderTool && tool.livestreamingEditorTool.livestreamingRtmpSenderTool.rtmpSender.isStreaming()) {
                         e.participant.dataTrack.send(JSON.stringify({type:"liveStreamingStarted"}));
                     }
                 });

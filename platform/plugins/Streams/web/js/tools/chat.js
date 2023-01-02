@@ -763,6 +763,7 @@ Q.Tool.define('Streams/chat', function(options) {
 		Q.Streams.WebRTC.start({
 			publisherId: state.publisherId,
 			streamName: state.streamName,
+			closeManually: true,
 			tool: tool,
 			onWebrtcControlsCreated: function () {
 				$toolElement.attr('data-webrtc', true);

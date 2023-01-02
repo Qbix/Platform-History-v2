@@ -6975,6 +6975,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     },
                                     onChildToolsLoaded: function () {
                                         var moveWithinArea = 'window';
+                                        let _controlsTool = this;
+                                        let _controls = this.element;
                                         var elementsToIgnore = [
                                             _controlsTool.videoInputsTool.videoinputListEl,
                                             _controlsTool.audioTool.audioOutputListEl,
@@ -7228,7 +7230,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
             function onTextLoad() {
                 log('start: load time ' + (performance.now() - _debugTimer.loadStart));
-                log('start: onTextLoad');
+                log('start: onTextLoad: _options', _options);
 
                 var ua = navigator.userAgent;
                 var startWith = _options.startWith || {};
@@ -7408,8 +7410,8 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
 
 
-                if(_options.roomId == null && _options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) {
-                    console.error('Property is missing: publisherId || roomId || streamName || publisherId || roomPublisherId || useRelatedTo', _options.roomId == null, _options.roomPublisherId == null, _options.useRelatedTo, _options.useRelatedTo.publisherId == null, _options.useRelatedTo.streamName == null);
+                if(_options.roomPublisherId == null && _options.useRelatedTo && _options.useRelatedTo.publisherId == null && _options.useRelatedTo.streamName == null) {
+                    console.error('Property is missing: publisherId || streamName || publisherId || roomPublisherId || useRelatedTo', _options.roomId == null, _options.roomPublisherId == null, _options.useRelatedTo, _options.useRelatedTo.publisherId == null, _options.useRelatedTo.streamName == null);
                     return;
                 }
 
@@ -7938,7 +7940,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
      * @param {String} [options.relationType='Streams/webrtc']
      * @param {HTMLElement} [options.element=document.body] Parent DOM element where video screens will be rendered
      * @param {String} [options.tool=true] Tool to relate Q.events to. By default true used - which means page.
-     * @param {String} [options.useExisting=true] If false, don't request related stream to use, but create new.
      * @param {String} [options.resumeClosed=true]  If false, close stream completely (unrelate) when last participant
      * left, and create new stream next time instead resume.
      * @param {Function} [options.onWebrtcControlsCreated] Callback called when Webrtc Controls Created
@@ -7951,7 +7952,6 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             mode: 'node',
             tool: true,
             relationType: "Streams/webrtc",
-            useExisting: true,
             resumeClosed: true
         }, options);
 
@@ -7961,7 +7961,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             audioOnlyMode: options.audioOnlyMode,
             element: options.element,
             roomId: options.roomId,
-            roomPublisherId: options.roomPublisherId,
+            roomPublisherId: options.roomPublisherId || options.publisherId,
             defaultDesktopViewMode: options.defaultDesktopViewMode,
             defaultMobileViewMode: options.defaultDesktopViewMode,
             writeLevel: options.writeLevel,
@@ -7969,11 +7969,11 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
             closeManually: options.closeManually,
             description: options.description,
             onlyParticipantsAllowed: options.onlyParticipantsAllowed,
-            useRelatedTo: {
+            /*useRelatedTo: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,
                 relationType: 'Streams/webrtc'
-            },
+            },*/
             relate: {
                 publisherId: options.publisherId,
                 streamName: options.streamName,
