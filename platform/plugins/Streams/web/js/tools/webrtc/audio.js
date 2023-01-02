@@ -9,21 +9,21 @@
         this.deviceId = data.deviceId;
         this.handler = data.handler.bind(this);
         this.makeActive = function () {
-            if (!this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.add('Streams_webrtc_settings_popup_active');
-            if (!this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.add('Streams_webrtc_disabled-radio');
+            if (!this.buttonEl.classList.contains('webrtc-audio-settings_popup_active')) this.buttonEl.classList.add('webrtc-audio-settings_popup_active');
+            if (!this.buttonEl.classList.contains('webrtc-audio-disabled-radio')) this.buttonEl.classList.add('webrtc-audio-disabled-radio');
             this.isActive = true;
         };
         this.switchToRegularState = function () {
-            if (this.buttonEl.classList.contains('Streams_webrtc_settings_popup_active')) this.buttonEl.classList.remove('Streams_webrtc_settings_popup_active');
-            if (this.buttonEl.classList.contains('Streams_webrtc_disabled-radio')) this.buttonEl.classList.remove('Streams_webrtc_disabled-radio');
+            if (this.buttonEl.classList.contains('webrtc-audio-settings_popup_active')) this.buttonEl.classList.remove('webrtc-audio-settings_popup_active');
+            if (this.buttonEl.classList.contains('webrtc-audio-disabled-radio')) this.buttonEl.classList.remove('webrtc-audio-disabled-radio');
             this.isActive = false;
         };
         this.show = function () {
-            if (this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.remove('Streams_webrtc_hidden');
+            if (this.buttonEl.classList.contains('webrtc-audio-hidden')) this.buttonEl.classList.remove('webrtc-audio-hidden');
             this.switchToRegularState();
         };
         this.hide = function () {
-            if (!this.buttonEl.classList.contains('Streams_webrtc_hidden')) this.buttonEl.classList.add('Streams_webrtc_hidden');
+            if (!this.buttonEl.classList.contains('webrtc-audio-hidden')) this.buttonEl.classList.add('webrtc-audio-hidden');
         };
         this.remove = function () {
             if (this.buttonEl.parentNode != null) this.buttonEl.parentNode.removeChild(this.buttonEl);
@@ -59,6 +59,10 @@
         tool.audioInputListButtons = [];
         tool.turnOffAudioInputBtn = null;
 
+        Q.addStylesheet('{{Streams}}/css/tools/audio.css?ts=' + performance.now(), function () {
+          
+        });
+
         tool.createAudioInputList();
         tool.createAudioOutputList();
         tool.declareEventsHandlers();
@@ -89,27 +93,30 @@
                 webrtcSignalingLib.event.on('currentAudioinputDeviceChanged', function () {
                     tool.updateAudioInputList();
                 });
+                webrtcSignalingLib.event.on('currentAudiooutputDeviceChanged', function () {
+                    tool.updateAudioInputList();
+                });
             },
             createAudioInputList: function () {
                 var tool = this;
                 let audioinputListCon = document.createElement('DIV');
-                audioinputListCon.className = 'Streams_webrtc_choose-input-audio-con';
+                audioinputListCon.className = 'webrtc-audio-choose-input-audio-con';
 
                 let inputListTilte = document.createElement('DIV');
-                inputListTilte.className = 'Streams_webrtc_choose-device-title';
+                inputListTilte.className = 'webrtc-audio-choose-device-title';
                 inputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.microphone", tool.text);;
 
                 var audioinputList = document.createElement('DIV');
-                audioinputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-audio-device';
+                audioinputList.className = 'webrtc-audio-choose-device webrtc-audio-choose-audio-device';
 
                 var turnOffradioBtnItem = document.createElement('DIV');
-                turnOffradioBtnItem.className = 'Streams_webrtc_settings_popup_item Streams_webrtc_turn_video_off';
+                turnOffradioBtnItem.className = 'webrtc-audio-settings_popup_item webrtc-audio-turn_video_off';
                 turnOffradioBtnItem.dataset.deviceId = 'off';
                 var textLabelCon = document.createElement('SPAN');
-                textLabelCon.className = 'Streams_webrtc_settings_popup_item_text Streams_webrtc_turn_video_off_text';
+                textLabelCon.className = 'webrtc-audio-settings_popup_item_text webrtc-audio-turn_video_off_text';
                 var textLabel = document.createTextNode(Q.getObject("webrtc.settingsPopup.micIsTurnedOff", tool.text));
                 var checkmark = document.createElement('SPAN');
-                checkmark.className = 'Streams_webrtc_radio-checkmark';
+                checkmark.className = 'webrtc-audio-radio-checkmark';
                 checkmark.innerHTML = _controlsToolIcons.switchOffCameras;
                 textLabelCon.appendChild(textLabel);
                 turnOffradioBtnItem.appendChild(textLabelCon);
@@ -183,14 +190,14 @@
                 tool.state.webrtcSignalingLib.localMediaControls.audioInputDevices().forEach(function (mediaDevice) {
                     tool.log('controls: loadAudioInputList', mediaDevice);
                     var radioBtnItem = document.createElement('DIV');
-                    radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
+                    radioBtnItem.className = 'webrtc-audio-settings_popup_item';
                     radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
 
                     var textLabelCon = document.createElement('SPAN');
-                    textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
+                    textLabelCon.className = 'webrtc-audio-settings_popup_item_text';
                     var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count}`);
                     var checkmark = document.createElement('SPAN');
-                    checkmark.className = 'Streams_webrtc_radio-checkmark';
+                    checkmark.className = 'webrtc-audio-radio-checkmark';
                     checkmark.innerHTML = _controlsToolIcons.microphoneTransparent;
                     textLabelCon.appendChild(textLabel);
                     radioBtnItem.appendChild(textLabelCon);
@@ -282,18 +289,24 @@
                     tool.log('controls: updateAudioInputList: tool.turnOffAudioInputBtn');
                     tool.toggleAudioInputRadioButton(tool.turnOffAudioInputBtn);
                 }
+
+                tool.audioOutputListButtons.forEach(function (audioOutputItem) {
+                    if (tool.state.webrtcSignalingLib.localMediaControls.currentAudioOutputDevice() != null && tool.state.webrtcSignalingLib.localMediaControls.currentAudioOutputDevice().deviceId == audioOutputItem.deviceId) {
+                        tool.toggleAudioOutputRadioButton(audioOutputItem);
+                    }
+                });
             },
             createAudioOutputList: function () {
                 var tool = this;
                 var audioOutputListCon = document.createElement('DIV');
-                audioOutputListCon.className = 'Streams_webrtc_choose-output-device-con';
+                audioOutputListCon.className = 'webrtc-audio-choose-output-device-con';
 
                 let outputListTilte = document.createElement('DIV');
-                outputListTilte.className = 'Streams_webrtc_choose-device-title';
+                outputListTilte.className = 'webrtc-audio-choose-device-title';
                 outputListTilte.innerHTML = Q.getObject("webrtc.audioSettings.speakers", tool.text);
 
                 var audioOutputList = document.createElement('DIV');
-                audioOutputList.className = 'Streams_webrtc_choose-device Streams_webrtc_choose-output-audio';
+                audioOutputList.className = 'webrtc-audio-choose-device webrtc-audio-choose-output-audio';
 
                 audioOutputListCon.appendChild(outputListTilte);
                 audioOutputListCon.appendChild(audioOutputList);
@@ -337,7 +350,7 @@
                 tool.audioOutputListEl.innerHTML = '';
                 if (!tool.checkIfSetSinkIdIsSupported()) {
                     var alertNoticeCon = document.createElement('DIV');
-                    alertNoticeCon.className = 'Streams_webrtc_notice_alert';
+                    alertNoticeCon.className = 'webrtc-audio-notice_alert';
                     alertNoticeCon.innerHTML = "Selecting output device is not supported in your browser";
                     tool.audioOutputListEl.appendChild(alertNoticeCon);
                     return;
@@ -350,14 +363,14 @@
                 tool.state.webrtcSignalingLib.localMediaControls.audioOutputDevices().forEach(function (mediaDevice) {
                     tool.log('controls: loadAudioOutputList', mediaDevice);
                     var radioBtnItem = document.createElement('DIV');
-                    radioBtnItem.className = 'Streams_webrtc_settings_popup_item';
+                    radioBtnItem.className = 'webrtc-audio-settings_popup_item';
                     radioBtnItem.dataset.deviceId = mediaDevice.deviceId;
 
                     var textLabelCon = document.createElement('SPAN');
-                    textLabelCon.className = 'Streams_webrtc_settings_popup_item_text';
+                    textLabelCon.className = 'webrtc-audio-settings_popup_item_text';
                     var textLabel = document.createTextNode(mediaDevice.label || `Audio input ${count}`);
                     var checkmark = document.createElement('SPAN');
-                    checkmark.className = 'Streams_webrtc_radio-checkmark';
+                    checkmark.className = 'webrtc-audio-radio-checkmark';
                     checkmark.innerHTML = _controlsToolIcons.enabledSpeaker;
                     textLabelCon.appendChild(textLabel);
                     radioBtnItem.appendChild(textLabelCon);

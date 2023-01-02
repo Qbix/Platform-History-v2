@@ -49,6 +49,20 @@
     max-width: 98%;
     left: 0;
     pointer-events: all;
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+.live-editor-dialog-box.live-editor-dialog_advanced_streaming *{
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 .live-editor-dialog-box.live-editor-dialog_advanced_streaming .live-editor-dialog-inner{
     height: 100%;
@@ -185,6 +199,9 @@
     background: #525252;
     position: relative;
 }
+.live-editor-popup-streaming-box.live-editor-popup-box .live-editor-popup-scenes {
+    
+}
 .live-editor-popup-streaming-box.live-editor-popup-box .live-editor-popup-options {
     width: 30%;
     border: 1px solid #383838;
@@ -198,6 +215,9 @@
     display: flex;
     flex-direction: column;
     height: 100%; 
+}
+.live-editor-popup-streaming-box.live-editor-popup-box .live-editor-popup-sources-inner .live-editor-popup-sources-title{
+   
 }
 .live-editor-popup-streaming-box .live-editor-popup-sources-title-inner,
 .live-editor-popup-streaming-box .live-editor-popup-options-title-inner {
@@ -562,7 +582,7 @@
 .live-editor-popup-sources-item,
 .live-editor-canvas-popup-list-item{
     display: block;
-    padding: 5px 10px;
+    padding: 1px 10px;
     border-top: 1px solid #454545;
 }
 
@@ -615,11 +635,196 @@
     fill: white;
 }
 
-/*start: video settings popup*/
+/*start: popup dialog*/
 .live-editor-popup-dialog {
     background: #ffffff;
     z-index: 999999999999999999999999999999;
+    white-space: nowrap;
 }
+
+.live-editor-close-sign:before{
+    content: ' ';
+    display: block;
+    background-image: url('data:image/svg+xml;utf8,<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/" x="0px" y="0px" width="22px" height="23px" viewBox="-0.017 -0.916 22 23" enable-background="new -0.017 -0.916 22 23" xml:space="preserve"> <defs> </defs> <path d="M21.238,21.737c-0.128,0-0.256-0.049-0.354-0.146L0.146,0.854c-0.195-0.195-0.195-0.512,0-0.707s0.512-0.195,0.707,0 l20.738,20.737c0.195,0.195,0.195,0.512,0,0.707C21.494,21.688,21.366,21.737,21.238,21.737z"/> <path d="M0.5,21.737c-0.128,0-0.256-0.049-0.354-0.146c-0.195-0.195-0.195-0.512,0-0.707L20.884,0.146 c0.195-0.195,0.512-0.195,0.707,0s0.195,0.512,0,0.707L0.854,21.591C0.756,21.688,0.628,21.737,0.5,21.737z"/> </svg>');
+    background-repeat: no-repeat;
+    background-position: center center;
+    width:30px;
+    height: 30px;
+}
+.live-editor-popup-dialog .live-editor-close-sign {
+    display: none;
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-mid-position .live-editor-close-sign,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-belowtop-position .live-editor-close-sign,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-abovebottom-position .live-editor-close-sign,
+.live-editor-popup-dialog.live-editor-popup-dialog-winmid-winmid-position .live-editor-close-sign,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-winmid-position .live-editor-close-sign,
+.live-editor-popup-dialog.live-editor-popup-dialog-winmid-fullheight-position .live-editor-close-sign,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-fullheight-position .live-editor-close-sign {
+    display: block;
+}
+.live-editor-popup-dialog .live-editor-close-sign:before {
+    width:20px;
+    height: 20px;
+}
+.live-editor-popup-dialog-y-scroll {
+    overflow-y: auto;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-below-position,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-above-position,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-mid-position,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-belowtop-position,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-abovebottom-position,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-winmid-position,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-fullheight-position {
+    white-space: normal;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-mid-below-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-winmid-below-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-below-position::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    left: 50%;
+    margin-left: -20px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-right-below-position::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    left: 0;
+    margin-left: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-left-below-position::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    transform: translateY(-100%);
+    right: 0;
+    margin-left: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-mid-above-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-winmid-above-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-fullwidth-above-position::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -20px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-right-above-position::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-left-above-position::after{
+    content: "";
+    position: absolute;
+    top: 100%;
+    right: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-top: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-right-mid-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-right-winmid-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-right-fullheight-position::after {
+    content: "";
+    position: absolute;
+    top: calc(50% - (40px / 2));
+    left: 0;
+    margin-left: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-left-mid-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-left-winmid-position::after,
+.live-editor-popup-dialog.live-editor-popup-dialog-left-fullheight-position {
+    content: "";
+    position: absolute;
+    top: calc(50% - (40px / 2));
+    right: 0;
+    left: auto;
+    margin-right: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-right-belowtop-position::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-left-belowtop-position::after{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: auto;
+    margin-right: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-right-abovebottom-position::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-right: 20px solid white;
+}
+.live-editor-popup-dialog.live-editor-popup-dialog-left-abovebottom-position::after{
+    content: "";
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: auto;
+    margin-right: -20px;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 20px solid white;
+}
+/*popup dialog: end*/
 .live-editor-popup-sources-item-control {
     fill: white;
 }
@@ -662,7 +867,6 @@
     display: flex;
     padding: 10px 0 5px 10px;
     border-top: 1px solid #424242;
-
     position: absolute;
     bottom: 0;
     background: #525252;
@@ -1025,7 +1229,7 @@
      background: linear-gradient(to right, #4e5adc 1%,#146ada 100%);
      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e5adc', endColorstr='#146ada',GradientType=1 );*/
     /*background: #3640c5;*/
-    border-bottom: 1px solid #181d8c;
+    border-bottom: 1px solid #404040;
     border-radius: 10px 10px 0 0;
     white-space: nowrap;
     overflow: hidden;

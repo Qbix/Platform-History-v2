@@ -1256,6 +1256,7 @@
                         }
         
                         function updateActiveWebRTCLayouts() {
+                            log('updateActiveWebRTCLayouts start')
                             for(let i in _activeScene.sources) {
                                 if(_activeScene.sources[i].sourceType == 'group' && _activeScene.sources[i].groupType == 'webrtc') {
                                     updateWebRTCLayout(_activeScene.sources[i]);
@@ -1466,7 +1467,7 @@
         
                                     }
         
-                                } else if (aTracks.length != 0 && audioIsEnabled) {
+                                } else /*if (aTracks.length != 0 && audioIsEnabled)*/ {
                                     //if participant has no video tracks, but has audi tracks
                                     log('updateWebRTCCanvasLayout aTracks != 0')
         
@@ -1553,7 +1554,8 @@
                                             }
                                         }
                                     } else {
-                                        if(audioIsEnabled) trackIsLive = true;
+                                        //if(audioIsEnabled) trackIsLive = true;
+                                        trackIsLive = true;
                                     }
         
         
@@ -2248,6 +2250,7 @@
                         }
         
                         function drawSingleAudioOnCanvas(data) {
+
                             if(data.participant.online == false) return;
         
                             //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
@@ -2778,8 +2781,8 @@
         
                         function drawSimpleCircleAudioVisualization(data, x, y, radius, scale, size) {
                             var analyser = data.participant.soundMeter.analyser;
-                            if(analyser == null) return;
-                            var bufferLength = analyser.frequencyBinCount;
+                            if(analyser == null || data.participant.localMediaControlsState.mic == false) return;
+                            /*var bufferLength = analyser.frequencyBinCount;
                             var dataArray = new Uint8Array(bufferLength);
                             analyser.getByteFrequencyData(dataArray);
                             //just show bins with a value over the treshold
@@ -2787,7 +2790,7 @@
                             // clear the current state
                             //_inputCtx.clearRect(data.rect.x, data.rect.y, data.rect.width, data.rect.height);
                             //the max count of bins for the visualization
-                            var maxBinCount = dataArray.length;
+                            var maxBinCount = dataArray.length;*/
         
                             _inputCtx.save();
                             _inputCtx.beginPath();
@@ -3008,6 +3011,7 @@
                                     updateActiveWebRTCLayouts();
                                 }
                             }
+                            window.updateCanvas = updateCanvas;
                             webrtcRoomSignalingInstance.event.on('initNegotiationEnded', updateCanvas);
                             webrtcRoomSignalingInstance.event.on('videoTrackLoaded', updateCanvas);
                             webrtcRoomSignalingInstance.event.on('audioTrackLoaded', updateCanvas);

@@ -132,6 +132,7 @@
             onCreate: new Q.Event(),
             onUpdate: new Q.Event(),
             onRefresh: new Q.Event(),
+            onChildToolsLoaded: new Q.Event(),
             dialogIsOpened: false,
             loudestMode: false,
             debug: {}
@@ -146,6 +147,11 @@
 
                 tool.text = tool.WebRTCClass.text();
                 tool.hoverTimeout = { settingsPopup: null, audioSettingsPopup: null, participantsPopup: null };
+                tool.childToolsLoadingProgress = {
+                    'Streams/webrtc/video': false,
+                    'Streams/webrtc/audio': false,
+                    'Streams/webrtc/participants': false,
+                };
                 tool.controlBar = null;
 
                 tool.createControlBar(function(controlBar) {
@@ -242,6 +248,23 @@
                     }
                 }
                 tool.bindRTCEvents();
+            },
+            updateChildToolLoadingProgress: function (toolName) {
+                console.log('updateChildToolLoadingProgress', toolName)
+                var tool = this;
+                tool.childToolsLoadingProgress[toolName] = true;
+
+                if(checkIfAllToolsLoaded()) {
+                    this.state.onChildToolsLoaded.handle.call(this);
+                }
+                function checkIfAllToolsLoaded() {
+                    for(let key in tool.childToolsLoadingProgress) {
+                        if (tool.childToolsLoadingProgress.hasOwnProperty(key) && !tool.childToolsLoadingProgress[key]) {
+                           return false; 
+                        }
+                    }
+                    return true;
+                }
             },
             show: function () {
                 if (this.element != null) {
@@ -1625,6 +1648,7 @@
 
                 function onVideoInputsListCreated() {
                     tool.videoInputsTool = this;
+                    tool.updateChildToolLoadingProgress('Streams/webrtc/video');
 
                     tool.videoSettingsPopup = (function () {
                         var _popUpResizeobserver;
@@ -1754,6 +1778,7 @@
 
                 function onAudioToolCreated() {
                     tool.audioTool = this;
+                    tool.updateChildToolLoadingProgress('Streams/webrtc/audio');
 
                     tool.audioSettingsPopup = (function () {
                         var _popUpResizeobserver;
@@ -2741,6 +2766,7 @@
                 function onParticipantsListCreated() {
                     console.log('participantsListTool', this);
                     tool.participantsListTool = this;
+                    tool.updateChildToolLoadingProgress('Streams/webrtc/participants');
 
                     tool.participantsPopup = (function () {
                         var _popUpResizeobserver;

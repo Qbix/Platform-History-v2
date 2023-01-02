@@ -94,6 +94,22 @@
                 webrtcSignalingLib.event.on('deviceListUpdated', function () {
                     tool.loadCamerasList();
                 });
+                webrtcSignalingLib.event.on('screensharingStarting', function (e) {
+
+                });
+                webrtcSignalingLib.event.on('screensharingStarted', function (e) {
+                    if(e.participant && e.participant.isLocal) {
+                        tool.updateCamerasList({eventName: 'screensharingStarted'});
+                    }
+                });
+                webrtcSignalingLib.event.on('screensharingStopped', function (e) {
+                    if(e.participant && e.participant.isLocal) {
+                        tool.updateCamerasList({eventName: 'screensharingStopped'});
+                    }
+                });
+                webrtcSignalingLib.event.on('screensharingFailed', function (e) {
+
+                });
             },
             createList: function () {
                 var tool = this;
@@ -349,13 +365,9 @@
                         tool.state.controlsTool.closeAllDialogs();
                         tool.state.controlsTool.updateControlBar();
                     }
-                });
+                });            
 
-                var localParticipant = tool.state.webrtcSignalingLib.localParticipant();
-                var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
-                    return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
-                }).length;
-                if (enabledVideoTracks == 0 && localParticipant.videoStream == null) {
+                if (!tool.state.webrtcSignalingLib.localMediaControls.currentCameraDevice()) {
                     tool.toggleRadioButton(tool.turnOffCameraBtn);
                 }
 
@@ -459,7 +471,7 @@
                 tool.turnOnCameraBtn.remove();
 
             },
-            updateCamerasList: function () {
+            updateCamerasList: function (e) {
                 var tool = this;
                 tool.log('controls: updateCamerasList');
                 let cameraIsActive = false;
@@ -475,6 +487,14 @@
                 if (!cameraIsActive) {
                     tool.log('controls: updateCamerasList: make active tool.turnOffCameraBtn');
                     tool.toggleRadioButton(tool.turnOffCameraBtn);
+                }
+
+                if(e && (e.eventName == 'screensharingStarted' || e.eventName == 'screensharingStopped')) {
+                    if (tool.state.webrtcSignalingLib.screenSharing.isActive()) {
+                        tool.toggleRadioButton(tool.startScreenSharingBtn);
+                    } else {
+                        tool.toggleRadioButton(tool.stopScreenSharingBtn);
+                    }
                 }
             },
             clearCameraList: function () {

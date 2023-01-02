@@ -2282,6 +2282,7 @@ window.WebRTCRoomClient = function app(options){
 
                     //app.localMediaControls.enableVideo();
                     if(successCallback != null) successCallback();
+                    app.event.dispatch('screensharingStarted', {participant: localParticipant, track: trackToAttach});
                     app.signalingDispatcher.sendDataTrackMessage("screensharingStarted");
 
                 }, function(error){
@@ -2312,6 +2313,7 @@ window.WebRTCRoomClient = function app(options){
 
                     app.localMediaControls.enableVideo();
                     if(successCallback != null) successCallback();
+                    app.event.dispatch('screensharingStarted', {participant: localParticipant, track: trackToAttach});
                     app.signalingDispatcher.sendDataTrackMessage("screensharingStarted");
 
                 }).catch(function(error) {
@@ -2341,7 +2343,7 @@ window.WebRTCRoomClient = function app(options){
                 app.localMediaControls.disableVideo(screenSharingTracks);
                 if(screenSharingTracks.length != 0) {
                     socket.emit('Streams/webrtc/cameraDisabled');
-                    app.event.dispatch('screensharingStopped');
+                    app.event.dispatch('screensharingStopped', {participant: localParticipant});
                 }
             } if(!_isMobile) {
                 var screenSharingTracks = localParticipant.tracks.filter(function (trackObj) {
@@ -2352,7 +2354,7 @@ window.WebRTCRoomClient = function app(options){
                 app.localMediaControls.disableVideo(screenSharingTracks);
                 if(screenSharingTracks.length != 0) {
                     socket.emit('Streams/webrtc/cameraDisabled');
-                    app.event.dispatch('screensharingStopped');
+                    app.event.dispatch('screensharingStopped', {participant: localParticipant});
                 }
             }
 
@@ -2410,7 +2412,8 @@ window.WebRTCRoomClient = function app(options){
 
         function isActive() {
             for(let t in localParticipant.tracks){
-                if(localParticipant.tracks[t].screensharing) return true;
+                let track = localParticipant.tracks[t];
+            if(track.screensharing && track.mediaStreamTrack && track.mediaStreamTrack.enabled == true && track.mediaStreamTrack.readyState != 'ended') return true;
             }
             return false;
         }
@@ -4466,7 +4469,7 @@ window.WebRTCRoomClient = function app(options){
         }
 
         function updateCurrentVideoInputDevice() {
-            log('updateCurrentVideoInputDevice');
+            log('updateCurrentVideoInputDevice START');
             for (let i in videoInputDevices) {
                 let device = videoInputDevices[i];
                 for (let x in localParticipant.tracks) {
@@ -4476,7 +4479,7 @@ window.WebRTCRoomClient = function app(options){
                     log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.enabled == true, typeof mediaStreamTrack.getSettings != 'undefined', mediaStreamTrack.getSettings().deviceId == device.deviceId, mediaStreamTrack.getSettings().label == device.label);
                     log('updateCurrentVideoInputDevice: video: check if current', mediaStreamTrack.getSettings().deviceId, device.deviceId);
                     if (!(typeof cordova != 'undefined' && _isiOS && options.useCordovaPlugins)) {
-                        if (mediaStreamTrack.enabled == true
+                        if (mediaStreamTrack.enabled == true && mediaStreamTrack.readyState != 'ended'
                             && ((typeof mediaStreamTrack.getSettings != 'undefined' && (mediaStreamTrack.getSettings().deviceId == device.deviceId || mediaStreamTrack.getSettings().label == device.label)) || mediaStreamTrack.label == device.label)) {
                                 log('updateCurrentVideoInputDevice: video:currentCameraDevice', currentCameraDevice, device, currentCameraDevice == device);
 
@@ -4989,6 +4992,7 @@ window.WebRTCRoomClient = function app(options){
                 }
             }
             currentAudioOutputDevice = outputDevice;
+            app.event.dispatch('currentAudiooutputDeviceChanged');
         }
 
         function enableCamera(callback, failureCallback) {
@@ -5362,6 +5366,7 @@ window.WebRTCRoomClient = function app(options){
 
 
             app.localMediaControls.updateCurrentVideoInputDevice();
+            localParticipant.localMediaControlsState.camera = true;
             socket.emit('Streams/webrtc/cameraEnabled');
             app.event.dispatch('cameraEnabled');
             app.signalingDispatcher.sendDataTrackMessage('online', {cameraIsEnabled: true});
@@ -5511,6 +5516,7 @@ window.WebRTCRoomClient = function app(options){
             currentCameraDevice = null;
             app.signalingDispatcher.sendDataTrackMessage('online', {cameraIsEnabled: false});
 
+            localParticipant.localMediaControlsState.camera = false;
             socket.emit('Streams/webrtc/cameraDisabled');
             app.event.dispatch('cameraDisabled');
 
@@ -5532,6 +5538,7 @@ window.WebRTCRoomClient = function app(options){
                                 enableAudioTracks();
 
                                 micIsDisabled = false;
+                                localParticipant.localMediaControlsState.mic = true;
                                 app.signalingDispatcher.sendDataTrackMessage('online', {micIsEnabled: true});
                                 app.event.dispatch('micEnabled');
                             }
@@ -5630,6 +5637,7 @@ window.WebRTCRoomClient = function app(options){
             }
             micIsDisabled = false;
             app.localMediaControls.updateCurrentAudioInputDevice();
+            localParticipant.localMediaControlsState.mic = true;
             socket.emit('Streams/webrtc/micEnabled');
             app.signalingDispatcher.sendDataTrackMessage('online', {micIsEnabled: true});
             app.event.dispatch('micEnabled');
@@ -5676,6 +5684,7 @@ window.WebRTCRoomClient = function app(options){
 
             micIsDisabled = true;
             currentAudioInputDevice = null;
+            localParticipant.localMediaControlsState.mic = false;
             socket.emit('Streams/webrtc/micDisabled');
             app.event.dispatch('micDisabled');
             var info = {

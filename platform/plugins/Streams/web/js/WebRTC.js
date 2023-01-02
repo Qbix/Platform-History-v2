@@ -6972,6 +6972,121 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
                                     debug: _debug,
                                     onCreate: function () {
                                         Q.handle(_options.onWebrtcControlsCreated, this);
+                                    },
+                                    onChildToolsLoaded: function () {
+                                        var moveWithinArea = 'window';
+                                        var elementsToIgnore = [
+                                            _controlsTool.videoInputsTool.videoinputListEl,
+                                            _controlsTool.audioTool.audioOutputListEl,
+                                            _controlsTool.audioTool.audioinputListEl,
+                                            _controlsTool.participantsListTool.participantListEl,
+                                            _controlsTool.textChat.chatBox
+                                            ];
+
+                                        Q.activate(
+                                            Q.Tool.setUpElement(
+                                                _controls.firstChild, // or pass an existing element
+                                                "Q/resize",
+                                                {
+                                                    move: true,
+                                                    resize: false,
+                                                    active: true,
+                                                    ignoreOnElements: elementsToIgnore,
+                                                    elementPosition: 'fixed',
+                                                    snapToSidesOnly: true,
+                                                    moveWithinArea: moveWithinArea, //window/parent/DOMRect
+                                                    onMovingStart: function () {
+                                                        _controls.classList.add('isMoving');
+                                                    },
+                                                    onMovingStop: function () {
+                                                        _controls.classList.remove('isMoving');
+                                                    },
+                                                    onMoved: function () {
+                                                        screensRendering.updateLayout();
+                                                    }
+                                                }
+                                            ),
+                                            {},
+                                            function () {
+                                                log('initWithNodeServer: initConference: activated controls', this);
+                                                
+                                                var columnsTools = Q.Tool.byName('Q/columns');
+                                                var dashboard = document.getElementById('dashboard_slot');
+                                                var columnsTool = columnsTools[Object.keys(columnsTools)[0]];
+                                                var updateArearectangle = function () {
+                    
+                                                    var moveWithinArea;
+                                                    if(Object.keys(columnsTools).length == 0 && dashboard) {
+                                                        var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
+                    
+                                                        var windowWidth =  window.innerWidth;
+                                                        var windowHeight =  window.innerHeight;
+                                                        var dashboardHeight =  dashboard.offsetHeight;
+                    
+                                                        if(dashboardPos == 'bottom') {
+                                                            moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
+                                                        } else if(dashboardPos == 'top') {
+                                                            moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
+                                                        }
+                                                    } else {
+                    
+                                                        var currentColumn = columnsTool.state.$currentColumn.get()[0];
+                                                        moveWithinArea = currentColumn.getBoundingClientRect();
+                                                    }
+                    
+                                                    return moveWithinArea;
+                                                }
+                    
+                                                if(Q.info.isMobile) {
+                                                    moveWithinArea = updateArearectangle();
+                                                }
+                    
+                                                var resizeTool = this;
+                                                if (columnsTool && Q.info.isMobile) {
+                                                    columnsTool.state.onActivate.add(function () {
+                                                        var moveWithinArea = updateArearectangle();
+                                                        resizeTool.setContainerRect(moveWithinArea);
+                                                        screensRendering.updateLayout();
+                                                    });
+                                                    columnsTool.state.onClose.add(function () {
+                                                        var moveWithinArea = updateArearectangle();
+                                                        resizeTool.setContainerRect(moveWithinArea);
+                                                        screensRendering.updateLayout();
+                                                    });
+
+                                                }
+
+                                                if (typeof screen != 'undefined' && screen.orientation != null) {
+                                                    screen.orientation.addEventListener("change", function () {
+                                                        setTimeout(function () {
+                                                            var moveWithinArea = updateArearectangle();
+                                                            resizeTool.setContainerRect(moveWithinArea);
+                                                            screensRendering.updateLayout();
+                                                        }, 1000);
+                                                    });
+                                                }
+
+                                                window.addEventListener("resize", function () {
+                                                    setTimeout(function () {
+                                                        var moveWithinArea = updateArearectangle();
+                                                        resizeTool.setContainerRect(moveWithinArea);
+                                                        screensRendering.updateLayout();
+                                                    }, 1000);
+                                                });
+
+                                                if (_options.controlsPosition == 'top') {
+                                                    this.snapTo('top');
+                                                } else if (_options.controlsPosition == 'bottom') {
+                                                    this.snapTo('bottom');
+                                                } else if (_options.controlsPosition == 'left') {
+                                                    this.snapTo('left');
+                                                } else if (_options.controlsPosition == 'right') {
+                                                    this.snapTo('right');
+                                                } else {
+                                                    this.snapTo('bottom');
+                                                }
+                                            }
+                                        );
                                     }
                                 }
 
@@ -7000,118 +7115,7 @@ window.AudioContext = window.AudioContext || window.webkitAudioContext;
 
                             _controlsTool = this;
                             screensRendering.updateLayout();
-
-                            var moveWithinArea = 'window';
-                            var columnsTools = Q.Tool.byName('Q/columns');
-                            var dashboard = document.getElementById('dashboard_slot');
-                            var columnsTool = columnsTools[Object.keys(columnsTools)[0]];
-                            var updateArearectangle = function () {
-
-                                var moveWithinArea;
-                                if(Object.keys(columnsTools).length == 0 && dashboard) {
-                                    var dashboardPos = dashboard.classList.contains('Q_fixed_top') ? 'top' : 'bottom';
-
-                                    var windowWidth =  window.innerWidth;
-                                    var windowHeight =  window.innerHeight;
-                                    var dashboardHeight =  dashboard.offsetHeight;
-
-                                    if(dashboardPos == 'bottom') {
-                                        moveWithinArea = new DOMRect(0, 0, windowWidth, windowHeight - dashboardHeight);
-                                    } else if(dashboardPos == 'top') {
-                                        moveWithinArea = new DOMRect(0, dashboardHeight, windowWidth, windowHeight - dashboardHeight);
-                                    }
-                                } else {
-
-                                    var currentColumn = columnsTool.state.$currentColumn.get()[0];
-                                    moveWithinArea = currentColumn.getBoundingClientRect();
-                                }
-
-                                return moveWithinArea;
                             }
-
-                            if(Q.info.isMobile) {
-                                moveWithinArea = updateArearectangle();
-                            }
-
-                            log('initWithNodeServer: initConference: activate controls: moveWithinArea', moveWithinArea);
-
-
-                            var elementsToIgnore = [_controlsTool.settingsPopupEl, _controlsTool.textChat.chatBox];
-                            if( _controlsTool.participantListEl && _controlsTool.participantListEl.parentNode) elementsToIgnore.push(_controlsTool.participantListEl.parentNode)
-                            Q.activate(
-                                Q.Tool.setUpElement(
-                                    _controls.firstChild, // or pass an existing element
-                                    "Q/resize",
-                                    {
-                                        move: true,
-                                        resize: false,
-                                        active: true,
-                                        ignoreOnElements: elementsToIgnore,
-                                        elementPosition: 'fixed',
-                                        snapToSidesOnly: true,
-                                        moveWithinArea: moveWithinArea, //window/parent/DOMRect
-                                        onMovingStart: function () {
-                                            _controls.classList.add('isMoving');
-                                        },
-                                        onMovingStop: function () {
-                                            _controls.classList.remove('isMoving');
-                                        },
-                                        onMoved: function () {
-                                            screensRendering.updateLayout();
-                                        }
-                                    }
-                                ),
-                                {},
-                                function () {
-                                    log('initWithNodeServer: initConference: activated controls', this);
-
-                                    var resizeTool = this;
-                                    if(columnsTool && Q.info.isMobile) {
-                                        columnsTool.state.onActivate.add(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        });
-                                        columnsTool.state.onClose.add(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        });
-
-                                    }
-
-                                    if(typeof screen != 'undefined' && screen.orientation != null) {
-                                        screen.orientation.addEventListener("change", function () {
-                                            setTimeout(function () {
-                                                var moveWithinArea = updateArearectangle();
-                                                resizeTool.setContainerRect(moveWithinArea);
-                                                screensRendering.updateLayout();
-                                            }, 1000);
-                                        });
-                                    }
-
-                                    window.addEventListener("resize", function() {
-                                        setTimeout(function () {
-                                            var moveWithinArea = updateArearectangle();
-                                            resizeTool.setContainerRect(moveWithinArea);
-                                            screensRendering.updateLayout();
-                                        }, 1000);
-                                    });
-
-                                    if(_options.controlsPosition == 'top') {
-                                        this.snapTo('top');
-                                    } else if(_options.controlsPosition == 'bottom') {
-                                        this.snapTo('bottom');
-                                    } else if(_options.controlsPosition == 'left') {
-                                        this.snapTo('left');
-                                    } else if(_options.controlsPosition == 'right') {
-                                        this.snapTo('right');
-                                    } else {
-                                        this.snapTo('bottom');
-                                    }
-                                }
-                            );
-                        }
                     );
                 });
                 /*WebRTCconference.event.on('joined', function () {

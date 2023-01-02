@@ -15,7 +15,8 @@
         disabledMicrophone: '<svg width="5.3250041mm" height="6.8486948mm" viewBox="0 0 5.3250041 6.8486948" version="1.1" id="svg502" xml:space="preserve" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="disabled_mic.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview504" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" inkscape:zoom="24.2312" inkscape:cx="-0.43332563" inkscape:cy="14.031497" inkscape:window-width="1920" inkscape:window-height="1029" inkscape:window-x="0" inkscape:window-y="27" inkscape:window-maximized="1" inkscape:current-layer="svg502" /><defs id="defs499" /><g inkscape:label="Layer 1" inkscape:groupmode="layer" id="layer1" transform="translate(-79.802132,-40.143836)" style="display:inline"><path id="path239-2-9" style="display:inline;stroke-width:0.14315" class="StreamsWebrtcMicIconWawe2" d="M 2.9005981,0 C 2.8846674,-8.6953191e-5 2.8690742,1.9618652e-4 2.8530558,5.1676432e-4 2.7741159,0.00201676 2.7115107,0.06678662 2.7130127,0.14572754 c 0.0015,0.0789399 0.066269,0.14154313 0.1452108,0.14004313 0.6791554,-0.0121214 1.2677117,0.41009432 1.4991333,1.01079103 L 4.565096,1.0552327 C 4.2653668,0.43311249 3.630306,0.0039829 2.9005981,0 Z M 4.7175415,1.5208374 4.4612264,1.8184937 c 1.221e-4,0.00446 4.318e-4,0.00897 5.168e-4,0.013436 0.0015,0.07894 0.066787,0.1410284 0.1457275,0.1395264 0.04048,-7.58e-4 0.074436,-0.017632 0.1002523,-0.044442 0.02581,-0.02682 0.040554,-0.062321 0.040824,-0.1018026 C 4.746577,1.7214388 4.735837,1.6197193 4.7175415,1.5208374 Z M 3.751709,2.642216 1.903243,4.7878215 c 0.207074,0.1837261 0.4513688,0.2759521 0.7327718,0.2759521 0.306841,0 0.5695964,-0.1092449 0.7880656,-0.3276286 C 3.6425128,4.5177614 3.751709,4.254896 3.751709,3.9480794 Z M 1.6117879,5.1263021 1.3198161,5.4647827 c 0.30817,0.2717762 0.6725019,0.431023 1.0929565,0.4774902 v 0.4599203 h -0.892452 c -0.060433,0 -0.1124242,0.022495 -0.1565796,0.066663 -0.044168,0.044131 -0.066663,0.096146 -0.066663,0.1565796 0,0.060335 0.022495,0.1129654 0.066663,0.1570963 0.044155,0.044131 0.096146,0.066146 0.1565796,0.066146 H 3.751709 c 0.060421,0 0.1124852,-0.022003 0.1565796,-0.066146 0.044216,-0.044119 0.066663,-0.096749 0.066663,-0.1570963 0,-0.060421 -0.022446,-0.1124364 -0.066663,-0.1565796 C 3.8642066,6.4246878 3.8121413,6.4021932 3.751709,6.4021932 H 2.859257 V 5.9422729 C 3.363564,5.8865292 3.7871411,5.6685517 4.1299805,5.2885661 4.4728198,4.9085928 4.644161,4.4617401 4.644161,3.9480794 V 3.5015951 c 0,-0.060396 -0.021917,-0.1123754 -0.066146,-0.1565796 -0.044033,-0.044168 -0.096663,-0.066663 -0.1570963,-0.066663 -0.060372,0 -0.1123632,0.022495 -0.1565796,0.066663 -0.044119,0.044156 -0.066663,0.096172 -0.066663,0.1565796 v 0.4464843 c 0,0.4300024 -0.1527257,0.7976598 -0.45837,1.1032919 -0.3055462,0.3056443 -0.6732773,0.4583699 -1.1032918,0.4583699 -0.3933915,0 -0.7349131,-0.1276249 -1.0242264,-0.3834391 z M 1.3198161,5.4647827 c -0.8798774,-3.6431885 -0.4399387,-1.8215942 0,0 z M 1.0319784,5.1567912 1.3311849,4.8095256 C 1.1598178,4.5572928 1.074353,4.2700829 1.074353,3.9480794 V 3.5015951 c 0,-0.060408 -0.02252,-0.1124242 -0.066663,-0.1565796 -0.0441675,-0.044168 -0.0961101,-0.066663 -0.15657956,-0.066663 -0.0604694,0 -0.11295317,0.022495 -0.15709635,0.066663 -0.0441799,0.044156 -0.0661458,0.096172 -0.0661458,0.1565796 v 0.4464843 c 0,0.4554054 0.13465463,0.8583833 0.40411011,1.2087118 z M 1.6386597,4.4524414 3.7418905,2.01073 C 3.7111124,1.7684747 3.6054921,1.5565014 3.4240804,1.3751099 3.2056112,1.1566652 2.9428558,1.0474813 2.6360148,1.0474813 c -0.3068043,0 -0.5695843,0.1091839 -0.7880656,0.3276286 -0.2184936,0.2184568 -0.3276286,0.481249 -0.3276286,0.7880656 v 1.7849039 c 0,0.184067 0.039697,0.3520807 0.1183391,0.504362 z M 3.8891683,1.839681 4.1382487,1.5508097 C 3.9969597,0.98002029 3.4750777,0.56041034 2.8628743,0.57205811 c -0.07894,0.0015 -0.1415431,0.0667866 -0.1400431,0.14572753 0.0015,0.0789399 0.066267,0.14154413 0.1452108,0.14004314 C 3.4202676,0.84732534 3.878104,1.2875939 3.8891683,1.839681 Z" transform="translate(79.802132,40.143836)" sodipodi:nodetypes="scccccscccccccsccccssscccccscscsscscscccsscscsssscccccsscscsscccssscscccc" /><polygon class="StreamsWebrtcMicIconCrossline" points="20.305,1.034 19.104,0 0.179,21.971 1.38,23.006 " transform="matrix(0.26458333,0,0,0.26458333,79.754772,40.268055)" style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill-opacity:1;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1" id="polygon2082" /></g></svg>',
         playIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="44px" height="50px" viewBox="-0.53 0 44 50" enable-background="new -0.53 0 44 50" xml:space="preserve"> <defs> </defs> <polygon points="0,0 43.143,24.91 0,49.82 "/> </svg>',
         pauseIcon: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="44px" height="51px" viewBox="-0.53 -0.91 44 51" enable-background="new -0.53 -0.91 44 51" xml:space="preserve"> <defs> </defs> <rect width="16.173" height="50"/> <rect x="26.97" y="0.09" width="16.173" height="50"/> </svg>',
-        reload: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512"> <g> <g> <path d="m146.2,86.1c68.3-43.8 155.5-41.9 221.2,1.1l-20.3,2.5c-11.2,1.4-19.1,11.6-17.8,22.8 1.3,10.3 10.1,17.9 20.2,17.9 0.8,0 72.4-8.8 72.4-8.8 5.4-0.7 10.3-3.4 13.6-7.7 3.3-4.3 4.8-9.7 4.1-15.1l-8.7-69.9c-1.4-11.2-11.7-19.2-22.8-17.7-11.2,1.4-19.1,11.6-17.7,22.8l2.7,21.3c-79.3-53.9-185.8-57-268.9-3.6-97.1,62.3-137.5,185.5-96.1,293 3.1,8.1 13.2,16.2 26.4,11.7 10.7-3.7 15.8-15.9 11.7-26.4-34.4-89.5-0.8-192 80-243.9z"/> <path d="m484,168.4c-3.1-8.1-13.2-16.2-26.4-11.7-10.7,3.7-15.8,15.9-11.7,26.4 34.5,89.5 0.8,192-80,243.9-68.3,43.8-155.5,41.9-221.2-1.1l20.3-2.5c11.2-1.4 19.1-11.6 17.8-22.8-1.3-10.3-10.1-17.9-20.2-17.9-0.8,0-72.4,8.8-72.4,8.8-5.4,0.7-10.3,3.4-13.6,7.7-3.3,4.3-4.8,9.7-4.1,15.1l8.7,69.9c1.4,11.2 11.7,19.2 22.8,17.7 11.2-1.4 19.1-11.6 17.7-22.8l-2.7-21.3c79.4,53.8 185.9,56.9 269.1,3.5 96.9-62.2 137.3-185.4 95.9-292.9z"/> </g> </g> </svg>'
+        reload: '<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" xmlns:xlink="http://www.w3.org/1999/xlink" enable-background="new 0 0 512 512"> <g> <g> <path d="m146.2,86.1c68.3-43.8 155.5-41.9 221.2,1.1l-20.3,2.5c-11.2,1.4-19.1,11.6-17.8,22.8 1.3,10.3 10.1,17.9 20.2,17.9 0.8,0 72.4-8.8 72.4-8.8 5.4-0.7 10.3-3.4 13.6-7.7 3.3-4.3 4.8-9.7 4.1-15.1l-8.7-69.9c-1.4-11.2-11.7-19.2-22.8-17.7-11.2,1.4-19.1,11.6-17.7,22.8l2.7,21.3c-79.3-53.9-185.8-57-268.9-3.6-97.1,62.3-137.5,185.5-96.1,293 3.1,8.1 13.2,16.2 26.4,11.7 10.7-3.7 15.8-15.9 11.7-26.4-34.4-89.5-0.8-192 80-243.9z"/> <path d="m484,168.4c-3.1-8.1-13.2-16.2-26.4-11.7-10.7,3.7-15.8,15.9-11.7,26.4 34.5,89.5 0.8,192-80,243.9-68.3,43.8-155.5,41.9-221.2-1.1l20.3-2.5c11.2-1.4 19.1-11.6 17.8-22.8-1.3-10.3-10.1-17.9-20.2-17.9-0.8,0-72.4,8.8-72.4,8.8-5.4,0.7-10.3,3.4-13.6,7.7-3.3,4.3-4.8,9.7-4.1,15.1l8.7,69.9c1.4,11.2 11.7,19.2 22.8,17.7 11.2-1.4 19.1-11.6 17.7-22.8l-2.7-21.3c79.4,53.8 185.9,56.9 269.1,3.5 96.9-62.2 137.3-185.4 95.9-292.9z"/> </g> </g> </svg>',
+        sourcesEnabledMic: '<svg width="5.0271811mm" height="5.8011966mm" viewBox="0 0 5.0271812 5.8011965" version="1.1" id="svg502" xml:space="preserve" inkscape:version="1.2.1 (9c6d41e, 2022-07-14)" sodipodi:docname="enabled_mic.svg" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview id="namedview504" pagecolor="#ffffff" bordercolor="#000000" borderopacity="0.25" inkscape:showpageshadow="2" inkscape:pageopacity="0.0" inkscape:pagecheckerboard="0" inkscape:deskcolor="#d1d1d1" inkscape:document-units="mm" showgrid="false" inkscape:zoom="12.1156" inkscape:cx="21.831358" inkscape:cy="-0.5364984" inkscape:window-width="1920" inkscape:window-height="1056" inkscape:window-x="1920" inkscape:window-y="0" inkscape:window-maximized="1" inkscape:current-layer="layer2" /><defs id="defs499" /><g inkscape:groupmode="layer" id="layer2" inkscape:label="Layer 2" transform="translate(0.2122019,-0.75431366)" style="display:inline"><path id="path375" style="font-variation-settings:normal;display:inline;opacity:1;vector-effect:none;fill:#000000;fill-opacity:1;stroke-width:0.241944;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;-inkscape-stroke:none;stop-color:#000000;stop-opacity:1" inkscape:label="path375" d="m 2.3835485,1.0473294 c -0.3068043,0 -0.5690675,0.1091839 -0.7875488,0.3276285 -0.2184935,0.2184569 -0.3281454,0.481249 -0.3281454,0.7880656 v 1.784904 c 0,0.3068044 0.1097007,0.569682 0.3281454,0.7880656 0.018172,0.018167 0.036509,0.035537 0.055294,0.052193 L 3.4992427,2.6425808 V 2.1630235 c 0,-0.3068166 -0.1091106,-0.569572 -0.3276286,-0.7880656 C 2.953145,1.1565133 2.6903895,1.0473294 2.3835485,1.0473294 Z M 3.4992427,3.2301419 1.9825394,4.9917914 c 0.1241043,0.047719 0.2576105,0.07183 0.4010091,0.07183 0.306841,0 0.5695965,-0.1092449 0.7880656,-0.3276286 C 3.3900466,4.5176095 3.4992427,4.2547441 3.4992427,3.9479275 Z M 1.6776484,5.3452582 1.3805089,5.6904568 C 1.6146071,5.8263862 1.8742235,5.9105041 2.1603063,5.942121 v 0.460437 h -0.892452 c -0.060433,0 -0.1124242,0.021978 -0.1565796,0.066146 -0.044168,0.044131 -0.066146,0.096146 -0.066146,0.1565796 0,0.060335 0.021978,0.1129654 0.066146,0.1570963 0.044155,0.044131 0.096147,0.066146 0.1565796,0.066146 h 2.2313884 c 0.060421,0 0.113002,-0.022003 0.1570963,-0.066146 0.044217,-0.044119 0.066146,-0.096749 0.066146,-0.1570963 0,-0.060421 -0.021929,-0.1124365 -0.066146,-0.1565796 C 3.6122571,6.4245359 3.559676,6.402558 3.4992427,6.402558 H 2.6067907 V 5.942121 C 3.1110976,5.8863773 3.5346748,5.6683998 3.8775141,5.2884142 4.2203534,4.9084408 4.3916946,4.4615882 4.3916946,3.9479275 V 3.5014431 c 0,-0.060396 -0.021917,-0.1123753 -0.066146,-0.1565796 -0.044033,-0.044168 -0.096664,-0.066146 -0.1570963,-0.066146 -0.060372,0 -0.1123632,0.021978 -0.1565796,0.066146 -0.044119,0.044156 -0.066146,0.096172 -0.066146,0.1565796 v 0.4464844 c 0,0.4300024 -0.1532424,0.7976597 -0.4588867,1.1032918 -0.3055471,0.3056443 -0.6732772,0.4588868 -1.1032918,0.4588868 -0.257637,0 -0.49291,-0.055127 -0.7058998,-0.1648479 z M 1.0678665,5.4651476 c -0.31040309,-2.7498752 -0.15520154,-1.3749376 0,0 z m 0,0 0.2919719,-0.3389974 C 1.3328391,5.1022852 1.3063501,5.0773118 1.2802567,5.0512193 0.97463678,4.7456727 0.82188671,4.3779421 0.82188671,3.9479275 V 3.5014431 c 0,-0.060408 -0.0220026,-0.1124241 -0.0661458,-0.1565796 -0.0441677,-0.044168 -0.0966269,-0.066146 -0.15709635,-0.066146 -0.0604694,0 -0.11295317,0.021978 -0.15709635,0.066146 -0.0441799,0.044156 -0.0661458,0.096172 -0.0661458,0.1565796 v 0.4464844 c 0,0.5136607 0.17139001,0.9605133 0.5141805,1.3404867 0.0571302,0.063327 0.11666579,0.1224111 0.17828359,0.1767334 z" sodipodi:nodetypes="sssssccsssccscscccccscscsscscscccsscscsscsccccccsscscsssc" transform="translate(0,-0.29301574)" /><g id="g867" transform="translate(0.81433722,0.29295158)"><path d="m 1.5692479,4.477502 c 0.3068413,0 0.5694294,-0.1092407 0.7878987,-0.3276246 C 2.5755793,3.9314937 2.6848079,3.6687712 2.6848079,3.3619543 V 1.576968 c 0,-0.306817 -0.1091431,-0.5694295 -0.3276613,-0.78792325 -0.2184693,-0.2184449 -0.4810574,-0.3277467 -0.7878987,-0.3277467 -0.3068046,0 -0.56942937,0.1093018 -0.78791097,0.3277467 C 0.56284323,1.0075018 0.45361463,1.270151 0.45361463,1.576968 v 1.7849863 c 0,0.3068047 0.1092774,0.5695394 0.3277223,0.7879231 0.218445,0.2183839 0.48110637,0.3276246 0.78791097,0.3276246 z" id="path375-3" inkscape:label="path375" style="display:inline;stroke-width:0.0122111" /><path d="m 3.5110313,2.7588222 c -0.044033,-0.044168 -0.096444,-0.066258 -0.1568764,-0.066258 -0.060372,0 -0.1126599,0.02209 -0.1568764,0.066258 -0.044119,0.044156 -0.066196,0.096444 -0.066196,0.156852 v 0.4462801 c 0,0.4300028 -0.152859,0.7977898 -0.4585036,1.1034221 C 2.3670315,4.771021 1.9991957,4.9238432 1.5691807,4.9238432 1.139178,4.9238432 0.77137883,4.771021 0.46572203,4.4653764 0.16010184,4.1598296 0.00730397,3.7919693 0.00730397,3.3619543 V 2.9156742 c 0,-0.060408 -0.0220899,-0.1126966 -0.0662332,-0.156852 -0.0441677,-0.044168 -0.0964069,-0.066258 -0.15687639,-0.066258 -0.0604695,0 -0.11276979,0.02209 -0.15691302,0.066258 -0.0441799,0.044156 -0.0662576,0.096444 -0.0662576,0.156852 v 0.4462801 c 0,0.5136611 0.17144426,0.9605152 0.5142351,1.3404889 0.34280297,0.379986 0.76639487,0.5978692 1.27078794,0.653613 V 5.8163059 H 0.45354753 c -0.060433,0 -0.112721,0.022114 -0.1568764,0.066282 -0.044168,0.044131 -0.066258,0.096443 -0.066258,0.1568763 0,0.060335 0.02209,0.1127454 0.066258,0.1568764 0.044155,0.044131 0.096444,0.066282 0.1568764,0.066282 H 2.6847529 c 0.060421,0 0.112782,-0.022139 0.1568764,-0.066282 0.044217,-0.044119 0.066319,-0.096529 0.066319,-0.1568764 0,-0.060421 -0.022102,-0.1127332 -0.066319,-0.1568763 C 2.7975473,5.83842 2.7451863,5.8163059 2.6847529,5.8163059 H 1.7923636 V 5.3560562 C 2.296671,5.3003124 2.7202263,5.0824292 3.063066,4.7024432 3.4059056,4.3224695 3.5773988,3.8756154 3.5773988,3.3619543 V 2.9156742 c 0,-0.060396 -0.022139,-0.1126478 -0.066368,-0.156852 z" id="path377" style="display:inline;stroke-width:0.0122111" /></g></g></svg>'
     }
 
     var _controlsToolIcons = []; 
@@ -364,6 +365,8 @@
                         //sortList('visual');
                     }
 
+                    window.sl = _scenesList;
+
                     var addNewScenePopup = (function () {
                         var _dialogEl = null;
                         var _isHidden = true;
@@ -592,6 +595,7 @@
                     var _audioSourcesEl = null;
 
                     var _videoTool = null;
+                    var _audioTool = null;
                     var _videoPopup = null;
 
                     function initVideoTool() {        
@@ -615,6 +619,29 @@
                         }
                     }
                     initVideoTool();
+
+                    function initAudioTool() {        
+                        Q.activate(
+                            Q.Tool.setUpElement(
+                                'DIV',
+                                "Streams/webrtc/audio",
+                                {
+                                    controlsTool: tool.state.controlsTool,
+                                    webrtcSignalingLib: tool.state.webrtcSignalingLib,
+                                    webrtcUserInterface: tool.state.webrtcUserInterface
+                                }
+                            ),
+                            {},
+                            onAudioListCreated
+                        );
+        
+                        function onAudioListCreated() {
+                            _audioTool = this;
+                            _audioTool.loadAudioOutputList();
+                            _audioTool.loadAudioInputList();
+                        }
+                    }
+                    initAudioTool();
 
                     var ListItem = function (name) {
                         this.active = true;
@@ -688,12 +715,12 @@
                             };
                             this.isActive = function() {
                                 console.log('isActive', this)
-                                var currentitem = this;
                                 var sources = _scene.sceneInstance.sources;
+                                console.log('isActive: sources', sources)
 
                                 for(let s in sources) {
 
-                                    if(sources[s] == currentitem._sourceInstance) {
+                                    if(sources[s] == sourceInstance._sourceInstance) {
                                         console.log('isActive active')
 
                                         return true;
@@ -796,7 +823,7 @@
                                 itemElControl.appendChild(itemElControlAudioActivness);
                                 itemElControlAudioActivness.addEventListener('click', this.toggleAudio)
                             }
-                            if (source.sourceType == 'webrtc' && source.participant.isLocal) {
+                            if (source.sourceType == 'webrtc' && source.participant.isLocal && !source.screenSharing) {
                                 var itemElControlLocalControls = document.createElement('DIV');
                                 itemElControlLocalControls.className = 'live-editor-popup-sources-item-local-controls';
                                 itemElControl.appendChild(itemElControlLocalControls);
@@ -814,19 +841,12 @@
                                     itemElControlLocalControls.appendChild(cameraBtnCon);
 
                                     if (!Q.info.useTouchEvents) {
-                                        var settingsPopup = _popupEl = document.createElement('DIV');
-                                        settingsPopup.className = 'live-editor-control-popup-box';
-                                        var settingsPopupInner = document.createElement('DIV');
-                                        settingsPopupInner.className = 'live-editor-popup-settings-inner';
-                                        settingsPopupInner.appendChild(_videoTool.videoinputListEl);
-                                        
-                                        settingsPopup.appendChild(settingsPopupInner);
-                                        cameraBtnCon.appendChild(settingsPopup);
-                                        
                                         sourceInstance.videoSettingsPopup = new PopupDialog(cameraBtn, {
                                             content: _videoTool.videoinputListEl
                                         })
                                     }
+
+                                    sourceInstance.cameraBtnIcon = cameraBtnIcon;
                                 }
                                 
                                 var microphoneBtnCon = document.createElement('DIV');
@@ -836,9 +856,16 @@
                                 var microphoneBtnIcon = document.createElement('DIV');
                                 microphoneBtnIcon.className = 'live-editor-popup-sources-item-lc-icon';
                                 microphoneBtnIcon.innerHTML = _controlsToolIcons.microphone;
+                                //microphoneBtnIcon.innerHTML = _streamingIcons.sourcesEnabledMic;
                                 microphoneBtnCon.appendChild(microphoneBtn);
                                 microphoneBtnCon.appendChild(microphoneBtnIcon);
                                 itemElControlLocalControls.appendChild(microphoneBtnCon);
+                                if (!Q.info.useTouchEvents) {
+                                    sourceInstance.audioSettingsPopup = new PopupDialog(microphoneBtn, {
+                                        content: [_audioTool.audioOutputListEl, _audioTool.audioinputListEl]
+                                    })
+                                }
+                                sourceInstance.microphoneBtnIcon = microphoneBtnIcon;
                                                 
                             }
                         
@@ -1021,19 +1048,23 @@
 
                         //if user turns his mic off on main controls, all his mic audio in livestream should be also turned off
                         if(_controlsTool != null && _webrtcSignalingLib != null) {
-                            _webrtcSignalingLib.event.on('micDisabled', function () {
-                                for (let i in _audioList) {
-                                    if (_audioList[i].sourceInstance.sourceType == 'webrtcaudio' && _audioList[i].sourceInstance.participant.isLocal) {
-                                        _audioList[i].switchVisibilityIcon(false);
-                                    }
-                                }
+                            _webrtcSignalingLib.event.on('trackAdded', function (e) {
+                                updateLocalControlsButtonsState();
+                            });
+                            _webrtcSignalingLib.event.on('cameraEnabled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                            _webrtcSignalingLib.event.on('cameraDisabled', function () {
+                                updateLocalControlsButtonsState();
+                            });
+                            _webrtcSignalingLib.event.on('cameraToggled', function () {
+                                updateLocalControlsButtonsState();
                             });
                             _webrtcSignalingLib.event.on('micEnabled', function () {
-                                for (let i in _audioList) {
-                                    if (_audioList[i].sourceInstance.sourceType == 'webrtcaudio' && _audioList[i].sourceInstance.participant.isLocal) {
-                                        _audioList[i].switchVisibilityIcon(true);
-                                    }
-                                }
+                                updateLocalControlsButtonsState();
+                            });
+                            _webrtcSignalingLib.event.on('micDisabled', function () {
+                                updateLocalControlsButtonsState();
                             });
                         }
 
@@ -1119,6 +1150,10 @@
                             console.log('visual: addItem element', _visualSourcesListEl)
 
                             _visualSourcesListEl.insertBefore(item.itemEl, _visualSourcesListEl.firstChild);
+                            
+                            if(item.sourceInstance.sourceType == 'webrtc' && item.sourceInstance.participant.isLocal) {
+                                updateLocalControlsButtonsState();
+                            }
                         }
 
                         function loadList(sourcesList) {
@@ -3302,50 +3337,351 @@
                             var pupupInstance = this;
                             this.element = element;
                             this.content = options.content;
+                            this.closeButtonEl = null;
                             this.popupDialogEl = null;
                             this.hoverTimeout = null;
-                            this.hide = function(e) {
-                                if (e.target.offsetParent != this.popupDialogEl) {
-                                    if (this.popupDialogEl.parentElement) this.popupDialogEl.parentElement.removeChild(this.popupDialogEl);
-                                    window.removeEventListener('click', hide);
+                            this.hide = function (e) {
+                                console.log('hide');
+                                if (e.target.offsetParent != pupupInstance.popupDialogEl || e.target == this.closeButtonEl) {
+                                    if (pupupInstance.popupDialogEl.parentElement) pupupInstance.popupDialogEl.parentElement.removeChild(pupupInstance.popupDialogEl);
+                
+                                    togglePopupClassName('', false, false);
+                
+                                    window.removeEventListener('click', pupupInstance.hide);
                                 }
                             }
-
-                            this.show = function(e) {
+                
+                            this.show = function (e) {
+                                //console.log('show');
+                
+                                pupupInstance.popupDialogEl.style.top = '';
+                                pupupInstance.popupDialogEl.style.left = '';
+                                pupupInstance.popupDialogEl.style.maxHeight = '';
+                                pupupInstance.popupDialogEl.style.maxWidth = '';
+                                togglePopupClassName('', false, false);
                                 let existingPopupDialog = document.querySelector('.live-editor-popup-dialog');
                                 if (existingPopupDialog && existingPopupDialog.parentElement) existingPopupDialog.parentElement.removeChild(existingPopupDialog);
-                                let clientX = e.clientX;
-                                let clientY = e.clientY;
-
-                                let triggeringElementRect = this.element.getBoundingClientRect();
-
-                                this.popupDialogEl.style.position = 'fixed';
-                                this.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 'px';
-                                this.popupDialogEl.style.left = triggeringElementRect.x + (triggeringElementRect.width / 2) + 'px';
-
-                                this.popupDialogEl.appendChild(this.content)
-
-                                document.body.appendChild(this.popupDialogEl);
-
-                                window.addEventListener('click', hide);
+                
+                                let triggeringElementRect = pupupInstance.element.getBoundingClientRect();
+                
+                                pupupInstance.popupDialogEl.style.position = 'fixed';
+                                pupupInstance.popupDialogEl.style.visibility = 'hidden';
+                                pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
+                                pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + (triggeringElementRect.width / 2)) + 'px';
+                              
+                                if(pupupInstance.content instanceof Array) {
+                                    for(let i in pupupInstance.content) {
+                                        pupupInstance.popupDialogEl.appendChild(pupupInstance.content[i])
+                                    }
+                                } else {
+                                    pupupInstance.popupDialogEl.appendChild(pupupInstance.content)
+                                }
+                                
+                                document.body.appendChild(pupupInstance.popupDialogEl);
+                
+                                let popupRect = pupupInstance.popupDialogEl.getBoundingClientRect();
+                                pupupInstance.popupDialogEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
+                
+                                //if ther is no room below (bottom) of button, show dialog above if there is enough room
+                
+                                let roomBelowButton = window.innerHeight - (triggeringElementRect.y + triggeringElementRect.height);
+                                let roomBelowStartOfButton = window.innerHeight - triggeringElementRect.y;
+                                let roomBelowMidOfButton = window.innerHeight - (triggeringElementRect.y + (triggeringElementRect.height / 2));
+                                let roomAboveButton = triggeringElementRect.y;
+                                let roomAboveEndOfButton = triggeringElementRect.y + triggeringElementRect.height;
+                                let roomAboveMidOfButton = triggeringElementRect.y + (triggeringElementRect.height / 2);
+                                let roomToLeftOfButton = triggeringElementRect.x;
+                                let roomToRightOfStartOfButton = (window.innerWidth - triggeringElementRect.x);
+                                let roomToLeftOfMidButton = triggeringElementRect.x + (triggeringElementRect.x / 2);
+                                let roomToRightOfButton = (window.innerWidth - (triggeringElementRect.x + triggeringElementRect.width));
+                                let roomToRightOfMidButton = (window.innerWidth - (triggeringElementRect.x + (triggeringElementRect.width / 2)));
+                                let roomToLeftOfEndOfButton = triggeringElementRect.x + triggeringElementRect.width;
+                                let midYOfTriggeringElement = triggeringElementRect.y + triggeringElementRect.height / 2;
+                                let midXOfTriggeringElement = triggeringElementRect.x + triggeringElementRect.width / 2;
+                
+                                if (roomBelowButton >= popupRect.height + 20) {
+                                    //console.log('show 1');
+                                    if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
+                                        //console.log('show 1.1');
+                                        pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
+                                        pupupInstance.popupDialogEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-mid-below-position', false, false);
+                                    } else if (roomToRightOfStartOfButton >= popupRect.width) {
+                                        //console.log('show 1.2');
+                                        pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-right-below-position', false, false);
+                                    } else if (roomToLeftOfEndOfButton >= popupRect.width) {
+                                        //console.log('show 1.3');
+                                        pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width) - popupRect.width + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-left-below-position', false, false);
+                                    } else if (popupRect.width <= window.innerWidth) {
+                                        //console.log('show 1.4');
+                                        pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - roomToLeftOfButton) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-winmid-below-position', false, false);
+                                    } else {
+                                        //console.log('show 1.5');
+                                        pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + triggeringElementRect.height + 20 + 'px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-below-position', true, false);
+                                    }
+                                } else if(roomAboveButton >= popupRect.height + 20) {
+                                    //console.log('show 2');
+                                    if (roomToLeftOfMidButton >= (popupRect.width / 2) && roomToRightOfMidButton >= (popupRect.width / 2)) {
+                                        //console.log('show 2.1');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = ((triggeringElementRect.x + (triggeringElementRect.width / 2)) - (popupRect.width / 2)) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-mid-above-position', false, false);
+                                    } else if (roomToRightOfStartOfButton >= popupRect.width) {
+                                        //console.log('show 2.2');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-right-above-position', false, false);
+                                    } else if (roomToLeftOfEndOfButton >= popupRect.width) {
+                                        //console.log('show 2.3');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width - popupRect.width) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-left-above-position', false, false);
+                                    } else if (window.innerWidth >= popupRect.width) {
+                                        //console.log('show 2.4');;
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - popupRect.width / 2) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-winmid-above-position', false, false);
+                                    } else {
+                                        //console.log('show 2.5');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y - popupRect.height - 20) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-above-position', true, false);
+                                    }
+                                } else if (Math.min(roomBelowMidOfButton, roomAboveMidOfButton) >= popupRect.height / 2) {
+                                    //console.log('show 3');
+                                    if (roomToRightOfButton >= popupRect.width + 20) {
+                                        //console.log('show 3.1');
+                                        pupupInstance.popupDialogEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + 20) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-right-mid-position', false, false);
+                                    } else if (roomToLeftOfButton >= popupRect.width + 20) {
+                                        //console.log('show 3.2');
+                                        pupupInstance.popupDialogEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - popupRect.width - 20) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-left-mid-position', false, false);
+                                    } else {
+                                        //console.log('show 3.3');
+                                        pupupInstance.popupDialogEl.style.top = midYOfTriggeringElement - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-mid-position', true, false);
+                                    }
+                                } else if (roomBelowStartOfButton >= popupRect.height) {
+                                    //console.log('show 4');
+                                    if (roomToRightOfButton >= popupRect.width + 20) {
+                                        //console.log('show 4.1');
+                                        pupupInstance.popupDialogEl.style.top = triggeringElementRect.y + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + 20) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-right-belowtop-position', false, false);
+                                    } else if (roomToLeftOfButton >= popupRect.width + 20) {
+                                        //console.log('show 4.2');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - popupRect.width - 20) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-left-belowtop-position', false, false);
+                                    } else {
+                                        //console.log('show 4.3');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-belowtop-position', true, false);
+                                    }
+                                } else if (roomAboveEndOfButton >= popupRect.height) {
+                                    //console.log('show 5');
+                                    if (roomToRightOfButton >= popupRect.width + 20) {
+                                        //console.log('show 5.1');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + 20) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-right-abovebottom-position', false, false);
+                                    } else if (roomToLeftOfButton >= popupRect.width + 20) {
+                                        //console.log('show 5.2');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - popupRect.width - 20) + 'px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-left-abovebottom-position', false, false);
+                                    } else {
+                                        //console.log('show 5.3');
+                                        pupupInstance.popupDialogEl.style.top = (triggeringElementRect.y + triggeringElementRect.height - popupRect.height) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-abovebottom-position', false, false);
+                                    }
+                                } else if(popupRect.height + 20 < window.innerHeight) {
+                                    //console.log('show 6');
+                                    if (roomToRightOfButton >= popupRect.width + 20) {
+                                        //console.log('show 6.1');
+                                        pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + 20) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-right-winmid-position', false, false);
+                
+                                    } else if (roomToLeftOfButton >= popupRect.width + 20) {
+                                        //console.log('show 6.2');
+                
+                                        pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - 20 - popupRect.width) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-left-winmid-position', false, false);
+                                    } else if(popupRect.width <= window.innerWidth) {
+                                        //console.log('show 6.3');
+                
+                                        pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - roomToLeftOfButton) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-winmid-winmid-position', false, false);
+                                    } else {
+                                        //console.log('show 6.4');
+                
+                                        pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-winmid-position', true, false);
+                                    }
+                                } else {
+                                    //console.log('show 7');
+                                    if (roomToRightOfButton >= popupRect.width + 20) {
+                                        //console.log('show 7.1');
+                                        pupupInstance.popupDialogEl.style.top = '0px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x + triggeringElementRect.width + 20) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-right-fullheight-position', false, false);
+                
+                                    } else if (roomToLeftOfButton >= popupRect.width + 20) {
+                                        //console.log('show 7.2');
+                
+                                        pupupInstance.popupDialogEl.style.top = '0px';
+                                        pupupInstance.popupDialogEl.style.left = (triggeringElementRect.x - 20 - popupRect.width) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-left-fullheight-position', false, false);
+                                    } else if(popupRect.width <= window.innerWidth) {
+                                        //console.log('show 7.3');
+                
+                                        pupupInstance.popupDialogEl.style.top = (window.innerHeight / 2) - (popupRect.height / 2) + 'px';
+                                        pupupInstance.popupDialogEl.style.left = (window.innerWidth / 2) - (popupRect.width / 2) + 'px';
+                                        togglePopupClassName('live-editor-popup-dialog-winmid-fullheight-position', false, true);
+                                    } else {
+                                        //console.log('show 7.4');
+                                        pupupInstance.popupDialogEl.style.top = '0px';
+                                        pupupInstance.popupDialogEl.style.left = '0px';
+                                        togglePopupClassName('live-editor-popup-dialog-fullwidth-fullheight-position', true, true);
+                                    }
+                                }
+                
+                                pupupInstance.popupDialogEl.style.visibility = '';
+                
+                                window.addEventListener('click', pupupInstance.hide);
+                
+                
                             }
-
+                
+                            function togglePopupClassName(classNameToApply, addXScrollClass, addYScrollClass) {
+                                let classes = [
+                                    'live-editor-popup-dialog-mid-below-position',
+                                    'live-editor-popup-dialog-right-below-position',
+                                    'live-editor-popup-dialog-left-below-position',
+                                    'live-editor-popup-dialog-winmid-below-position',
+                                    'live-editor-popup-dialog-fullwidth-below-position',
+                                    'live-editor-popup-dialog-mid-above-position',
+                                    'live-editor-popup-dialog-right-above-position',
+                                    'live-editor-popup-dialog-left-above-position',
+                                    'live-editor-popup-dialog-winmid-above-position',
+                                    'live-editor-popup-dialog-fullwidth-above-position',
+                                    'live-editor-popup-dialog-right-mid-position',
+                                    'live-editor-popup-dialog-left-mid-position',
+                                    'live-editor-popup-dialog-fullwidth-mid-position',
+                                    'live-editor-popup-dialog-right-belowtop-position',
+                                    'live-editor-popup-dialog-left-belowtop-position',
+                                    'live-editor-popup-dialog-mid-belowtop-position',
+                                    'live-editor-popup-dialog-fullwidth-belowtop-position',
+                                    'live-editor-popup-dialog-right-abovebottom-position',
+                                    'live-editor-popup-dialog-left-abovebottom-position',
+                                    'live-editor-popup-dialog-fullwidth-abovebottom-position',
+                                    'live-editor-popup-dialog-right-winmid-position',
+                                    'live-editor-popup-dialog-left-winmid-position',
+                                    'live-editor-popup-dialog-winmid-winmid-position',
+                                    'live-editor-popup-dialog-fullwidth-winmid-position',
+                                    'live-editor-popup-dialog-right-fullheight-position',
+                                    'live-editor-popup-dialog-left-fullheight-position',
+                                    'live-editor-popup-dialog-winmid-fullheight-position',
+                                    'live-editor-popup-dialog-fullwidth-fullheight-position',
+                                    'live-editor-popup-dialog-x-scroll',
+                                    'live-editor-popup-dialog-y-scroll',
+                                ];
+                                for (let i in classes) {
+                                    if (classes[i] == classNameToApply || (classes[i] == 'live-editor-popup-dialog-x-scroll' && addXScrollClass) || (classes[i] == 'live-editor-popup-dialog-y-scroll' && addYScrollClass)) {
+                                        continue;
+                                    }
+                                    pupupInstance.popupDialogEl.classList.remove(classes[i]);
+                                }
+                
+                                if (classNameToApply && classNameToApply != '' && !pupupInstance.popupDialogEl.classList.contains(classNameToApply)) {
+                                    pupupInstance.popupDialogEl.classList.add(classNameToApply);
+                                }
+                
+                                if (addXScrollClass) {
+                                    pupupInstance.popupDialogEl.classList.add('live-editor-popup-dialog-x-scroll');
+                                }
+                                if (addYScrollClass) {
+                                    pupupInstance.popupDialogEl.classList.add('live-editor-popup-dialog-y-scroll');
+                                }
+                            }
+                
                             this.popupDialogEl = document.createElement('DIV');
                             this.popupDialogEl.className = 'live-editor-popup-dialog';
-
+                            this.closeButtonEl = document.createElement('DIV');
+                            this.closeButtonEl.className = 'live-editor-close-sign';
+                            this.popupDialogEl.appendChild(this.closeButtonEl);
+                
+                            this.closeButtonEl.addEventListener('click', function (e) {
+                                pupupInstance.hide(e);
+                            });
                             this.element.addEventListener('mouseenter', function (e) {
+                                removeHoverTimerIfExists();
                                 pupupInstance.show(e);
                             });
-
+                
                             this.element.addEventListener('mouseleave', function (e) {
                                 /*if (e.target == e.currentTarget || e.currentTarget.contains(e.eventTarget)) {
                                     e.stopPropagation();
                                     e.preventDefault();
                                 }*/
+                
                                 pupupInstance.hoverTimeout = setTimeout(function () {
                                     pupupInstance.hide(e);
                                 }, 600)
                             });
+                
+                            this.popupDialogEl.addEventListener('mouseenter', function (e) {
+                                removeHoverTimerIfExists();
+                            })
+                            this.popupDialogEl.addEventListener('mouseleave', function (e) {
+                                pupupInstance.hoverTimeout = setTimeout(function () {
+                                    pupupInstance.hide(e);
+                                }, 600)
+                
+                            });
+                
+                            function removeHoverTimerIfExists() {
+                                if (pupupInstance.hoverTimeout != null) {
+                                    clearTimeout(pupupInstance.hoverTimeout);
+                                    pupupInstance.hoverTimeout = null;
+                                }
+                            }
                         }
 
                         var contextMenu = function (type) {
@@ -3564,6 +3900,51 @@
                         }
                     }
 
+                    function updateLocalControlsButtonsState() {
+                        console.log('updateLocalControlsButtonsState');
+
+                        for(let i in _visualList) {
+                            if (_visualList[i]._sourceInstance.sourceType != 'webrtc' || !_visualList[i]._sourceInstance.participant.isLocal) continue;
+                            if(!_visualList[i].cameraBtnIcon || !_visualList[i].microphoneBtnIcon) continue;
+                            let listItemInstance = _visualList[i];
+                            var localParticipant = _webrtcSignalingLib.localParticipant();
+                            var localMediaControls = _webrtcSignalingLib.localMediaControls;
+
+                            var enabledVideoTracks = localParticipant.tracks.filter(function (t) {
+                                return t.kind == 'video' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+                            }).length;
+
+                            if (_webrtcUserInterface.getOptions().audioOnlyMode) {
+                                console.log('updateLocalControlsButtonsState v1');
+                                listItemInstance.cameraBtnIcon.innerHTML = _controlsToolIcons.moreOptions;
+                            } else if (enabledVideoTracks == 0 && _webrtcSignalingLib.localParticipant().videoStream == null) {
+                                console.log('updateLocalControlsButtonsState v2');
+                                listItemInstance.cameraBtnIcon.innerHTML = _controlsToolIcons.disabledCamera;
+                            } else if (!localMediaControls.cameraIsEnabled()) {
+                                console.log('updateLocalControlsButtonsState v3');
+                                listItemInstance.cameraBtnIcon.innerHTML = _controlsToolIcons.disabledCamera;
+                            } else if (localMediaControls.cameraIsEnabled()) {
+                                console.log('updateLocalControlsButtonsState v4');
+                                listItemInstance.cameraBtnIcon.innerHTML = _controlsToolIcons.camera;
+                            }
+
+                            var enabledAudioTracks = localParticipant.tracks.filter(function (t) {
+                                return t.kind == 'audio' && t.mediaStreamTrack != null && t.mediaStreamTrack.enabled;
+                            }).length;
+
+                            if (enabledAudioTracks == 0 && _webrtcSignalingLib.localParticipant().audioStream == null) {
+                                console.log('updateLocalControlsButtonsState a1');
+                                listItemInstance.microphoneBtnIcon.innerHTML = _controlsToolIcons.disabledMicrophone;
+                            } else if (!localMediaControls.micIsEnabled()) {
+                                console.log('updateLocalControlsButtonsState a2');
+                                listItemInstance.microphoneBtnIcon.innerHTML = _controlsToolIcons.disabledMicrophone;
+                            } else if (localMediaControls.micIsEnabled()) {
+                                console.log('updateLocalControlsButtonsState a3');
+                                listItemInstance.microphoneBtnIcon.innerHTML = _controlsToolIcons.microphone;
+                            }
+                        }
+                    }
+
                     function getSelectedSource() {
                         return _selectedSource;
                     }
@@ -3571,6 +3952,7 @@
                     return {
                         createSourcesCol: createSourcesCol,
                         update: update,
+                        updateLocalControlsButtonsState: updateLocalControlsButtonsState,
                         getSelectedSource: getSelectedSource,
                         visualSources: visualSources
                     }
