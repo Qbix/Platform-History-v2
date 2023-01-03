@@ -75,7 +75,7 @@
                         function updateVisualSourcesOrdering() {
                             console.log('updateVisualSourcesOrdering START');
                             let visualSources = sceneInstance.sources.filter(function (s) {
-                                if(s.sourceType == 'webrtc' || s.sourceType == 'video' || s.sourceType == 'image') {
+                                if(s.sourceType == 'webrtc' || s.sourceType == 'video' || s.sourceType == 'videoInput' || s.sourceType == 'image') {
                                     return true;
                                 } else {
                                     return false;
@@ -860,6 +860,9 @@
                                 video.addEventListener('loadedmetadata', event => {
                                     console.log(video.videoWidth, video.videoHeight)
                                 })
+                                video.style.position = 'absolute';
+                                video.style.top = '-999999999px';
+                                document.body.appendChild(video);
                                 video.srcObject = stream;
                                 var videoInputSource = new VideoInputSource();
                                 videoInputSource.videoInstance = video;

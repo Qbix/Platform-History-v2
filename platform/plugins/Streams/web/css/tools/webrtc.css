@@ -13,8 +13,7 @@
     width:100%;
     pointer-events: none;
     z-index: 99999999 !important;
-    transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0) translateZ(5px) skewX(0deg) skewY(0deg);
-
+    /*transform: perspective(200px) scaleX(1) scaleY(1) scaleZ(1) rotateX(0.3deg) rotateY(0deg) rotateZ(0deg) translateX(0px) translateY(0) translateZ(5px) skewX(0deg) skewY(0deg);*/
     display: flex;
     justify-content: center;
     flex-direction: column;
