@@ -56,10 +56,12 @@ $DESIRED = strtoupper($Desired);
 $desired = strtolower($Desired);
 $is_win = (substr(strtolower(PHP_OS), 0, 3) === 'win');
 
+$appRootDir = Q::startsWith(APP_DIR, APP_WEB_DIR) ? APP_WEB_DIR : APP_DIR;
+
 do {
 	$go_again = false;
 	$iteratorDir = new RecursiveDirectoryIterator(
-		APP_DIR, 
+		$appRootDir, 
 		RecursiveDirectoryIterator::SKIP_DOTS
 	);
 	$iterator = new RecursiveIteratorIterator(
@@ -104,7 +106,7 @@ do {
 
 $maxFileSize = min(pow(2, 20), Q_Utils::memoryLimit()/2);
 if ($Desired !== CONFIGURE_ORIGINAL_APP_NAME) {
-	$it = new RecursiveDirectoryIterator(APP_DIR, RecursiveDirectoryIterator::SKIP_DOTS);
+	$it = new RecursiveDirectoryIterator($appRootDir, RecursiveDirectoryIterator::SKIP_DOTS);
 	foreach(new RecursiveIteratorIterator($it) as $filename => $splFileInfo) {
 		if (is_dir($filename) or is_link($filename)
 		or $filename === APP_SCRIPTS_DIR . DS . 'Q' . DS . 'configure.php') {

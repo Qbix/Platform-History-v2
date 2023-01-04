@@ -318,7 +318,7 @@ class Q_Bootstrap
 		self::setDefaultTimezone();
 
 		Q::$autoloadRequires = Q_Config::get('Q', 'autoload', 'requires', array());
-		
+
 		Q::event('Q/configure', @compact(
 			'app_tree', 'config_files', 'script_files'
 		), 'after');

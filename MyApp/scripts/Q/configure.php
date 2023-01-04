@@ -2,6 +2,7 @@
 <?php
 
 define ('APP_DIR', realpath(dirname(dirname(dirname(__FILE__)))));
+define ('WEB_DIR', realpath(dirname(dirname(APP_DIR))));
 if (!file_exists(APP_DIR . '/local.sample/paths.php')
 and !file_exists(APP_DIR . '/local/paths.json')) {
 	if (!file_exists(APP_DIR . '/local.sample/paths.php')

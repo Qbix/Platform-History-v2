@@ -135,6 +135,121 @@ class Q_Plugin
 		return $extra;
 	}
 	/**
+	 * Run system commands / save files to install or update app or plugin
+	 * @method installLocal
+	 * @static
+	 * @param {string} $base_dir The directory where application or plugin is located
+	 * @param {string} $name The name of application or plugin
+	 * @param {string} $type One of 'app' or 'plugin'
+	 */
+	static function installLocal($base_dir, $name, $type)
+	{
+		$localField =  $type . 'Local';
+		$infoField = $type . 'Info';
+
+		$config = $type === 'app'
+			? Q_Config::get('Q', $infoField, null)
+			: Q_Config::get('Q', $infoField, $name, null);
+
+		$basename = ($type === 'app' ? 'installed' : 'plugins');
+		$local_file = APP_LOCAL_DIR.DS.$basename.'.json';
+		if (file_exists($local_file)) {
+			Q_Config::load($local_file);
+		}
+		$local = $type === 'app'
+			? Q_Config::get('Q', $localField, null)
+			: Q_Config::get('Q', $localField, $name, null);
+
+		// version to install or update
+		$version = $config ? $config['version'] : 0;
+		$current_version = $local ? $local['version'] : 0;
+
+		if (Q::compareVersion($current_version, $version) < 0) {
+			echo "Upgrading '$name' on local system to version $version" . PHP_EOL;
+		}
+
+		// collect script files for upgrade
+		$scriptsdir = $base_dir.DS.'scripts'.DS.$name;
+		$scriptsPHP = array();
+
+		if (!is_dir($scriptsdir)) {
+			return;
+		}
+
+		$dir = opendir($scriptsdir);
+
+		// Find all scripts for the local files
+		while (($entry = readdir($dir)) !== false) {
+			$parts = preg_split('/(-|__)/', $entry, 2);
+			// wrong filename format
+			if (count($parts) < 2) continue;
+			list($ver, $tail) = $parts;
+			if ($tail !== "local.php") {
+				continue;
+			}
+			if (Q::compareVersion($ver, $version) > 0) {
+				continue;
+			}
+
+			// we shall install this script!
+			if ($tail === "local.php"
+			and Q::compareVersion($ver, $current_version) > 0) {
+				$scriptsPHP["$ver"] = $entry;
+			}
+		}
+
+		closedir($dir);
+
+		// Sort scripts according to version
+		uksort($scriptsPHP, array('Q', 'compareVersion'));
+
+		if (!empty($scripts)) {
+			echo "Running PHP scripts for $type $name on local system".PHP_EOL;
+		}
+
+		$original_version = $current_version;
+
+		// Process script files
+		foreach ($scriptsPHP as $script) {
+			list($new_version) = preg_split('/(-|__)/', $script, 2);
+			if (substr($script, -4) !== '.php') {
+				continue;
+			}
+
+
+			/**
+			 * @event Q/Plugin/installLocal {before}
+			 * @param {string} $base_dir The directory where application or plugin is located
+			 * @param {string} $name The name of application or plugin
+			 * @param {string} $type One of 'app' or 'plugin'
+			 * @param {string} $new_version
+			 * @param {string} $current_version
+			 * @param {string} $script The script to execute
+			 */
+			$ret = Q::event("Q/Plugin/installLocal", @compact(
+				'base_dir', 'name', 'type', 'options',
+				'script', 'new_version', 'current_version'
+			), 'before');
+			if ($ret === false) {
+				continue;
+			}
+
+			echo "Processing PHP file: $script " . PHP_EOL;
+			Q::includeFile($scriptsdir.DS.$script);
+			$conf = $config;
+			$conf['version'] = $new_version;
+			// NOTE: the version changed but the other fields, including requirements
+			// are still what they used to be. PHP code has to handle such discrepancies
+			// in case the installer fails midway.
+			Q_Config::set('Q', $localField, $name, $conf);
+			Q_Config::save($local_file, array('Q', $localField));
+			echo PHP_EOL;
+		}
+		if (Q::compareVersion($version, $current_version) > 0) {
+			echo '+ ' . ucfirst($type) . " '$name' (v. $original_version -> $version) locally installed".PHP_EOL;
+		}
+	}
+	/**
 	 * Install or update schema for app or plugin
 	 * @method installSchema
 	 * @static
@@ -159,6 +274,9 @@ class Q_Plugin
 			: Q_Config::get('Q', "{$type}Info", $name, null);
 
 		// version to install or update
+		if (empty($config['version'])) {
+			return false;
+		}
 		$version = $config['version'];
 
 		// Get SQL connection for currently installed schema
@@ -346,7 +464,7 @@ class Q_Plugin
 						'base_dir', 'name', 'type', 'options',
 						'conn_name', 'connection',
 						'shard', 'shard_data',
-						'script', 'newver', 'current_version'
+						'script', 'new_version', 'current_version'
 					), 'before');
 					if ($ret === false) {
 						continue;
@@ -542,13 +660,14 @@ class Q_Plugin
 		set_time_limit(Q_Config::expect('Q', 'install', 'timeLimit'));
 
 		// application data shall be defined in it's config
-		$APP_NAME = Q_Config::get('Q', 'app', null);
-		$APP_CONF = Q_Config::get('Q', 'appInfo', null);
-		$APP_VERSION = $APP_CONF['version'];
+		$app_name = Q_Config::get('Q', 'app', null);
+		$app_conf = Q_Config::get('Q', 'appInfo', null);
+		$app_version = $app_conf['version'];
 
 		$app_dir = APP_DIR;
 
-		echo "Installing app '$APP_NAME' (version: $APP_VERSION) into '$app_dir'" . PHP_EOL;
+		echo "Installing app '$app_name' (version: $app_version) into '$app_dir'" . PHP_EOL;
+		
 
 		// Ensure that the app has config/app.json
 		if (!file_exists($app_conf_file = $app_dir . DS . 'config' . DS . 'app.json'))
@@ -574,6 +693,13 @@ class Q_Plugin
 
 		if (file_exists($app_installed_file)) {
 			Q_Config::load($app_installed_file);
+		}
+
+		if (($version_installed = Q_Config::get('Q', 'appLocal', 'version', null)) != null) {
+			// We have this plugin installed
+			echo "Plugin '$app_name' (version: $version_installed) is already installed" . PHP_EOL;
+		} else {
+			$version_installed = 0;
 		}
 
 		// Check access to $files_dir
@@ -603,12 +729,15 @@ class Q_Plugin
 		// install or update application schema
 		$connections = Q_Config::get('Q', 'appInfo', 'connections', array());
 		foreach ($connections as $connection) {
-			self::installSchema($app_dir, $APP_NAME, 'app', $connection, $options);
+			self::installSchema($app_dir, $app_name, 'app', $connection, $options);
+		}
+		if (Q::compareVersion($version_installed, $app_version) < 0) {
+			self::installLocal($app_dir, $app_name, 'app');
 		}
 
-		$app_text_dir = $app_dir.DS.'text'.DS.$APP_NAME;
-		$app_text_dir = APP_TEXT_DIR.DS.$APP_NAME;
-		$app_web_text_app_dir = APP_WEB_DIR.DS.'Q'.DS.'text'.DS.$APP_NAME;
+		$app_text_dir = $app_dir.DS.'text'.DS.$app_name;
+		$app_text_dir = APP_TEXT_DIR.DS.$app_name;
+		$app_web_text_app_dir = APP_WEB_DIR.DS.'Q'.DS.'text'.DS.$app_name;
 		if (!file_exists($app_web_text_app_dir)
 		and file_exists($app_text_dir)) {
 			echo '  '.$app_web_text_app_dir.PHP_EOL;
@@ -617,7 +746,7 @@ class Q_Plugin
 
 		// Save info about app
 		echo 'Registering app'.PHP_EOL;
-		Q_Config::set('Q', 'appLocal', $APP_CONF);
+		Q_Config::set('Q', 'appLocal', $app_conf);
 		Q_Config::save($app_installed_file, array('Q', 'appLocal'));
 
 		// Create .htaccess file if it doesn't exist
@@ -642,7 +771,7 @@ EOT;
 			file_put_contents(APP_WEB_DIR.DS.'.htaccess', $htaccess);
 		}
 
-		echo Q_Utils::colored("App '$APP_NAME' successfully installed".PHP_EOL, 'green');
+		echo Q_Utils::colored("App '$app_name' successfully installed".PHP_EOL, 'green');
 	}
 
 	/**
@@ -735,9 +864,8 @@ EOT;
 		if (($version_installed = Q_Config::get('Q', 'pluginLocal', $plugin_name, 'version', null)) != null) {
 			// We have this plugin installed
 			echo "Plugin '$plugin_name' (version: $version_installed) is already installed" . PHP_EOL;
-			if (Q::compareVersion($version_installed, $plugin_version) < 0) {
-				echo "Upgrading '$plugin_name' to version: $plugin_version" . PHP_EOL;
-			}
+		} else {
+			$version_installed = 0;
 		}
 
 		// Check and fix permissions
@@ -786,6 +914,11 @@ EOT;
 			Q_Config::set('Q', 'plugins', $current_plugins); //TODO: When do we save Q/plugins to disk?
 		}
 
+		if (Q::compareVersion($version_installed, $plugin_version) < 0) {
+			self::installLocal(Q_PLUGINS_DIR.DS.$plugin_name, $plugin_name, 'plugin');
+			echo "Upgraded '$plugin_name' to version: $plugin_version" . PHP_EOL;
+		}
+
 		// Save info about plugin
 		echo 'Registering plugin'.PHP_EOL;
 		Q_Config::set('Q', 'pluginLocal', $plugin_name, $plugin_conf);
@@ -799,7 +932,7 @@ EOT;
 		 */
 		Q::event("Q/Plugin/install", @compact('app_dir', 'plugin_name', 'options'), 'after');
 
-		echo Q_Utils::colored("Plugin '$plugin_name' successfully installed".PHP_EOL, 'green');
+		echo Q_Utils::colored("Plugin '$plugin_name' $plugin_version successfully installed".PHP_EOL, 'green');
 	}
 
 	static function npmInstall($dir, $doIt = false)
