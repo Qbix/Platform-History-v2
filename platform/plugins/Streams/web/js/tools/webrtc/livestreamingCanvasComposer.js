@@ -59,6 +59,7 @@
         
                     var Scene = function () {
                         var sceneInstance = this;
+                        this.id = generateId();
                         this.title = null;
                         this.sources = []; //usual user's visual and audio sources. This array corresponds to the list of sources in user's interface.
                         this.visualSources = []; //this array contains list onf visual sources from this.sources array. Any changes regarding visual sources in this.sources will cause changes in this.visualSources.

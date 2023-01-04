@@ -175,10 +175,8 @@
     flex-direction: column;
     justify-content: flex-start;
     width: 40%;
-    padding: 15px;
+    padding-right: 10px;
     background: #424242;
-    margin: 1px;
-    border: 1px solid #373737;
     cursor:default;
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -818,6 +816,60 @@
     border-left: 20px solid white;
 }
 /*popup dialog: end*/
+
+/*start: custom select*/
+.live-editor-custom-select {
+    position: relative;
+  }
+  
+  .live-editor-custom-select select {
+    display: none; 
+  }
+  
+  .live-editor-custom-select-selected {
+    background-color: DodgerBlue;
+  }
+  
+  .live-editor-custom-select-selected:after {
+    position: absolute;
+    content: "";
+    top: 14px;
+    right: 10px;
+    width: 0;
+    height: 0;
+    border: 6px solid transparent;
+    border-color: #fff transparent transparent transparent;
+  }
+  
+  .live-editor-custom-select-selected.live-editor-custom-select-arrow-active:after {
+    border-color: transparent transparent #fff transparent;
+    top: 7px;
+  }
+  
+  .live-editor-custom-select-items div,.live-editor-custom-select-selected {
+    color: #ffffff;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+    cursor: pointer;
+    user-select: none;
+  }
+  
+  .live-editor-custom-select-items {
+    background-color: DodgerBlue;
+    z-index: 999999999999;
+  }
+  
+
+  .live-editor-custom-select-hide {
+    display: none;
+  }
+  
+  .live-editor-custom-select-items div:hover, .live-editor-custom-select-same-as-selected {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+/*end: custom select*/
+
 .live-editor-popup-sources-item-control {
     fill: white;
 }
