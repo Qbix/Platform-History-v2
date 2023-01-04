@@ -76,6 +76,12 @@ if (defined('APP_DIR')) {
 		define('APP_WEB_DIR', APP_DIR.DS.'web');
 	if (!defined('APP_TESTS_DIR'))
 		define('APP_TESTS_DIR', APP_DIR.DS.'tests');
+	if (!defined('APP_ROOT_DIR')) {
+		define(
+			'APP_ROOT_DIR',
+			strlen(APP_DIR) < strlen(APP_WEB_DIR) ? APP_DIR : APP_WEB_DIR
+		);
+	}
 }
 
 // For backwards compatibility

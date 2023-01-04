@@ -10,6 +10,9 @@
 if (!defined('APP_DIR')) {
 	define ('APP_DIR', realpath(dirname(__FILE__).DIRECTORY_SEPARATOR.'..'));
 }
+if (!defined('APP_WEB_DIR')) {
+	define ('APP_WEB_DIR', realpath(dirname(dirname(APP_DIR))));
+}
 define("RUNNING_FROM_APP", APP_DIR);
 
 //
@@ -22,12 +25,12 @@ if (!is_dir(APP_DIR)) {
 }
 if (!defined('Q_DIR')) {
 	$paths_filename = realpath(implode(DIRECTORY_SEPARATOR, array(
-		APP_DIR, 'local', 'paths.json'
+		APP_DIR, 'local', 'paths.json.php'
 	)));
 	if (!file_exists($paths_filename)) {
-		die("$header\nGo to $basename/scripts/Q directory and run php configure.php");
+		die("$header\nGo to $basename/scripts/Q directory and run php configure.php\n");
 	}
-	$paths = json_decode(file_get_contents($paths_filename), true);
+	$paths = json_decode(include($paths_filename), true);
 	define('Q_DIR', isset($paths['platform']) ? $paths['platform'] : '');
 }
 

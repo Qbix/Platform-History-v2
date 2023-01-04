@@ -1,4 +1,4 @@
-return <<<JSON_CONFIG
+<?php return <<<JSON_CONFIG
 {
 	"Q": {
 		"localNotYetConfigured": "TODO: REMOVE THIS ENTRY WHEN YOU ARE DONE WITH THE LOCAL CONFIGURATION",
